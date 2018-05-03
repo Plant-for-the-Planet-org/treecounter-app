@@ -16,7 +16,7 @@ class TreecounterGraphicsText extends Component {
     const { treecounterData: { targetYear, target, targetComment, planted, personal, community } } = this.props;
     return <div className="svg-text-container">
       <div className="svg-text-container__row">
-        <img className="svg-text-container__row--col" src="/client108/images/baum_versprochen.png" />
+        <img className="svg-text-container__row--col" src="/web/images/baum_versprochen.png" />
         <div className="svg-text-container__row--col">
           <span>Target by {targetYear} <br />
             <strong>{target}</strong>
@@ -27,7 +27,7 @@ class TreecounterGraphicsText extends Component {
       {this.state.ifTargetComment ? <TargetComment comment={targetComment} /> : null}
       <hr className="svg-text-container__bar" />
       <div className="svg-text-container__row">
-        <img className="svg-text-container__row--col" src="/client108/images/baum.png" />
+        <img className="svg-text-container__row--col" src="/web/images/baum.png" />
         <div className="svg-text-container__row--col">
           <span>Planted
             <ArrowButton onToggle={(e) => this.setState({ ifPlantedDetails: e })} /> <br />

@@ -38,8 +38,8 @@ var config = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./index.html",
-      filename: "./index.html"
+      template: "./web/index.html",
+      filename: "./web/index.html"
     }),
     new ExtractTextPlugin("[name].css")
   ]

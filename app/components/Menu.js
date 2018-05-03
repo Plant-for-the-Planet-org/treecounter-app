@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 // Images
-import SideMenuImage from "../../images/side_menu_image.png";
+import SideMenuImage from "../../web/images/side_menu_image.png";
 
 // Actions
 import * as Sidebar from "../actions/menuAction";

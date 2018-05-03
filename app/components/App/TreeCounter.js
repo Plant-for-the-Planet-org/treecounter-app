@@ -5,27 +5,27 @@ import { connect } from "react-redux";
 import { NotificationContainer } from "react-notifications";
 
 // Components imports
-import TargetPage from "./components/Target";
-import RegisterTree from "./components/RegisterTrees/RegisterTrees";
-import Header from "./components/Header/index";
-import UserContributions from "./components/UserContributions/UserContributions";
-import { Login, SignUp } from "./components/Authentication";
-import ForgotPasswordContainer from "./components/Authentication/ForgotPassword";
-import ResetPasswordContainer from "./components/Authentication/ResetPassword";
-import SignupSuccessPage from "./components/Authentication/SignupSuccessPage";
-import BrowserRouter from "./components/Common/BrowserRouter";
-import Menu from "./components/Menu";
-import DonateTrees from "./components/DonateTrees/index";
-import PaymentDonation from "./components/DonateTrees/PaymentDonation";
+import TargetPage from "../Target";
+import RegisterTree from "../RegisterTrees/RegisterTrees";
+import Header from "../Header/index";
+import UserContributions from "../UserContributions/UserContributions";
+import { Login, SignUp } from "../Authentication";
+import ForgotPasswordContainer from "../Authentication/ForgotPassword";
+import ResetPasswordContainer from "../Authentication/ResetPassword";
+import SignupSuccessPage from "../Authentication/SignupSuccessPage";
+import BrowserRouter from "../Common/BrowserRouter";
+import Menu from "../Menu";
+import DonateTrees from "../DonateTrees/index";
+import PaymentDonation from "../DonateTrees/PaymentDonation";
 
 // Components which use SVG
-import PublicTreecounter from './components/TreecounterGraphics/PublicTreecounter';
-import Trillion from "./components/TreecounterGraphics/Trillion";
-import Home from "./components/TreecounterGraphics/Home";
+import PublicTreecounter from '../TreecounterGraphics/PublicTreecounter';
+import Trillion from "../TreecounterGraphics/Trillion";
+import Home from "../TreecounterGraphics/Home";
 
-import { currentUserProfileSelector } from "./selectors/index";
-import { refreshToken } from "./actions/authActions";
-import { getLocalRoute } from "./actions/apiRouting";
+import { currentUserProfileSelector } from "../../selectors/index";
+import { refreshToken } from "../../actions/authActions";
+import { getLocalRoute } from "../../actions/apiRouting";
 
 // Class implementation
 class TreeCounter extends Component {

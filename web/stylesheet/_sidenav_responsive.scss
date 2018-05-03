@@ -1,0 +1,33 @@
+$breakpointTablet: 768px;
+
+.sidenav-wrapper {
+  margin-left: 250px;
+}
+
+.center-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: $breakpointTablet) {
+    .app-container__sidenav {
+      left: -250px !important;
+
+      &.open {
+        left: 0 !important;
+      }
+    }
+    .app-header {
+
+      &:before {
+        content: initial !important;
+      }
+      & .burger-icon {
+        display: block !important;
+      }
+    }
+    .sidenav-wrapper {
+      margin-left: 0 !important;
+    }
+}

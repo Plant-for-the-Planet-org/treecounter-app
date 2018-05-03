@@ -1,0 +1,35 @@
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .search-container__header {
+    display: flex;
+    padding: 20px 0px;
+    align-items: center;
+
+    i {
+      font-size: 70px;
+    }
+
+    div {
+      span {
+        color: white;
+        background-color: #a0a0a0;
+        padding: 2px 5px;
+        border-radius: 5px;
+      }
+      h4 {
+        margin: 0;
+      }
+    }
+  }
+  .search-container__content {
+    display: flex;
+    width: 85%;
+
+    svg {
+      width: 100% !important;
+    }
+  }
+}

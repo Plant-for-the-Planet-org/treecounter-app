@@ -1,0 +1,10 @@
+.arrow-button-rotatable {
+  width: 28px;
+  background: transparent;
+  border: none;
+
+  img {
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+  }
+}

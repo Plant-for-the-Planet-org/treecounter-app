@@ -1,0 +1,60 @@
+.svg-text-container {
+  position: relative;
+  display: grid;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  padding: 20px;
+  margin-bottom: 20px;
+
+  .svg-text-container__row {
+    display: grid;
+    grid-template-columns: 100px auto;
+    align-items: center;
+    grid-column-gap: 20px;
+    position: relative;
+
+    img {
+      max-width: 110px;
+    }
+    strong {
+      font-size: 24px;
+    }
+  }
+
+  .svg-text-container__bar {
+    border-top: 1px solid black;
+  }
+
+  .fixed-planted-details, .fixed-target-comment {
+    position: relative;
+    padding: 10px 20px 0;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .svg-text-container {
+    // Centering the div
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    // Removing card layout
+    background-color: transparent;
+    box-shadow: none;
+
+    .fixed-planted-details {
+      position: absolute;
+      right: 0;
+      bottom: -32px;
+      padding: 0px;
+    }
+
+    .fixed-target-comment {
+      position: absolute;
+      // Magic Numbers
+      right: 0px;
+      top: 125px;
+    }
+  }
+}

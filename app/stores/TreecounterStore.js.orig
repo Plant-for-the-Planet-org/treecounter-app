@@ -1,0 +1,45 @@
+import {createStore, applyMiddleware, compose} from 'redux';
+import thunkMiddleware from 'redux-thunk';
+
+import reducers from '../reducers';
+import {initialState as entitiesState} from '../reducers/entitiesReducer';
+import {loadState} from './localStorage';
+
+
+/**
+ * @param props initial data from Symfony
+ *    [
+ *      'locale' => $request->getLocale()
+ *    ]
+ * @param context
+ *     base: "/app_dev.php",
+ *     host: "http://treecounter.plant-for-the-planet.org",
+ *     href: "http://http://treecounter.plant-for-the-planet.org/app_dev.php/home",
+ *     location: "/app_dev.php/home",
+ *     pathname: "/home",
+ *     port: 80,
+ *     scheme: "http",
+ *     search: null
+ *     serverSide: false,
+ * @return
+ */
+export default function configureStore(props, context) {
+
+  const {locale, mediaPath} = props;
+  const {scheme, host, base: baseUrl, location} = context;
+
+  const initialState = {
+    entities: entitiesState,
+    mediaPath,
+    serverName: `${scheme}://${host}`,
+    baseUrl,
+    location,
+    ...props
+  };
+
+  // use devtools if we are in a browser and the extension is enabled
+  const composeEnhancers = typeof window !== 'undefined' && (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose);
+  const persistedState = loadState();
+
+  return createStore(reducers, persistedState, composeEnhancers(applyMiddleware(thunkMiddleware)));
+}

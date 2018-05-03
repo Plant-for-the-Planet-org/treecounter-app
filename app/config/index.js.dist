@@ -1,0 +1,33 @@
+// Copy this file and name it index.js, then adapt it to your specific environment
+// index.js will not be under version control and should reflect each developers environment
+
+/**
+ * Parameters that are provided by the server to initialize the App.
+ */
+export const initialProps = {
+  locale: "en",
+  mediaPath: "/media/cache", // relative URI on server, where images are located (further sub-paths must be specified in application)
+};
+
+/**
+ * Parameters that are provided by the server to 'inform' the App in which context it is running.
+ * For this application, the only significant parameters are the ones required to access the server API.
+ *
+ * example data:
+ * {
+ *  scheme: "https",
+ *  host: "www.trilliontreecampaign.org",
+ *  base: "/app_dev.php",
+ *  location: "/app_dev.php/system/context/1",
+ *  href: "https://www.trilliontreecampaign.org/app_dev.php/system/context",
+ *  port: 443,
+ *  pathname: "/system/context",
+ *  search: null
+ * }
+ */
+export const context = {
+  scheme: "https", // API server protocol
+  host: "launch.trilliontreecampaign.org", // API server domain
+  base: "/app_dev.php", // debug mode on/off, set to empty string to switch debug mode off
+  debug: true, // local console debugging switch
+};

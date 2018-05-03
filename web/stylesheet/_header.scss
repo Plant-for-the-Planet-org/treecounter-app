@@ -1,0 +1,61 @@
+.app-header {
+  padding: 6px;
+  background-color: $colorPrimary;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+
+  form {
+    max-width: 600px;
+    display: flex;
+    flex: 2;
+    justify-content: center;
+
+    input {
+      border-radius: 5px !important;
+    }
+  }
+
+  & .app-header__home {
+    flex: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    a {
+      display: flex;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    i {
+      padding: 0 5px;
+      color: white;
+    }
+    .burger-icon {
+      display: none;
+    }
+  }
+
+  .header-icons {
+    color: white;
+    flex: 1;
+    text-align: right;
+
+    .btn:focus {
+      outline: none;
+    }
+    .btn {
+      color: white;
+    }
+  }
+  .no-login {
+    padding: 0 20px;
+
+    a{
+      color: white;
+    }
+  }
+}

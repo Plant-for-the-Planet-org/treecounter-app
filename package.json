@@ -5,8 +5,13 @@
   "scripts": {
     "start": "webpack-dev-server --hot --config ./web/webpack.config.js",
     "build": "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail",
-    "build:server": "webpack --config ./web/config/webpack.server.config.js --progress --profile --bail"
+    "build:server": "webpack --config ./web/config/webpack.server.config.js --progress --profile --bail",
+    "precommit": "lint-staged"
   },
+  "lint-staged": {
+    "*.{js}": ["prettier --write", "git add"]
+  }
+}
   "dependencies": {
     "autosuggest-highlight": "^3.1.1",
     "axios": "^0.17.1",
@@ -46,8 +51,11 @@
     "file-loader": "^1.1.8",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^2.30.1",
+    "husky": "^0.14.3",
     "jest": "22.4.3",
+    "lint-staged": "^7.0.5",
     "node-sass": "^4.7.2",
+    "prettier": "1.12.1",
     "react-test-renderer": "16.3.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",

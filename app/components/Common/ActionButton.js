@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const ActionButton = props => (
   <button className="navigate-button" href="">
@@ -8,7 +8,7 @@ const ActionButton = props => (
 );
 
 ActionButton.propTypes = {
-  caption: PropTypes.string.isRequired,
-}
+  caption: PropTypes.string.isRequired
+};
 
-export default ActionButton
+export default ActionButton;

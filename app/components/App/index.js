@@ -1,16 +1,15 @@
-import React from "react";
-import { Provider } from "react-redux";
+import React from 'react';
+import { Provider } from 'react-redux';
 
-import TreeCounter from "./TreeCounter";
-import configureStore from "../../stores/TreecounterStore";
-import { debug } from "../../debug/index";
-import { initialProps, context } from "../../config/index.js";
+import TreeCounter from './TreeCounter';
+import configureStore from '../../stores/TreecounterStore';
+import { debug } from '../../debug/index';
+import { initialProps, context } from '../../config/index.js';
 
 let store;
 
 const App = () => {
-
-  debug("initiating store");
+  debug('initiating store');
 
   store = configureStore(initialProps, context);
 

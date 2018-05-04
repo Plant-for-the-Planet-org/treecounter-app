@@ -1,9 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const UserDetails = ({userProfile, onLogout}) => {
-  return null === userProfile ?
-    null :
+const UserDetails = ({ userProfile, onLogout }) => {
+  return null === userProfile ? null : (
     <div className="account-popover">
       <i className="material-icons">account_box</i>
       <div className="account-popover__content">
@@ -11,11 +10,14 @@ const UserDetails = ({userProfile, onLogout}) => {
           <span>{userProfile.name}</span>
         </strong>
         <span>{userProfile.email}</span>
-        <span>{userProfile.firstname} {userProfile.lastname}</span>
+        <span>
+          {userProfile.firstname} {userProfile.lastname}
+        </span>
 
         <a onClick={onLogout}>Logout</a>
       </div>
-    </div>;
+    </div>
+  );
 };
 
 UserDetails.propTypes = {

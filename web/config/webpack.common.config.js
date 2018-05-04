@@ -1,5 +1,5 @@
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 var config = {
   module: {
@@ -7,9 +7,9 @@ var config = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         query: {
-          presets: ["es2015", "react", "stage-2"]
+          presets: ['es2015', 'react', 'stage-2']
         }
       },
       {
@@ -21,32 +21,32 @@ var config = {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader"
+            loader: 'html-loader'
           }
         ]
       },
       {
         test: /\.(scss|css)$/,
         use: ExtractTextPlugin.extract({
-          use: ["css-loader", "sass-loader"]
+          use: ['css-loader', 'sass-loader']
         })
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        loader: "url-loader",
+        loader: 'url-loader',
         options: {
           limit: 8192,
-          name: "[hash].[ext]"
+          name: '[hash].[ext]'
         }
       }
     ]
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./web/index.html",
-      filename: "./index.html"
+      template: './web/index.html',
+      filename: './index.html'
     }),
-    new ExtractTextPlugin("[name].css")
+    new ExtractTextPlugin('[name].css')
   ]
 };
 module.exports = config;

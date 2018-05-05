@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 
 // Components
@@ -10,10 +10,10 @@ import BurgerMenu from './BurgerMenu';
 import HomeButton from './HomeButton';
 
 // Actions
-import { logoutUser } from '../../actions/authActions';
-import { currentUserProfileSelector } from '../../selectors/index';
+import {logoutUser} from '../../actions/authActions';
+import {currentUserProfileSelector} from '../../selectors/index';
 
-const Header = ({ isLoggedIn, logoutUser, userProfile }) => {
+const Header = ({isLoggedIn, logoutUser, userProfile}) => {
   return (
     <header className="app-header">
       <div className="app-header__home">
@@ -31,18 +31,18 @@ const Header = ({ isLoggedIn, logoutUser, userProfile }) => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ logoutUser }, dispatch);
+  return bindActionCreators ({logoutUser}, dispatch);
 };
 
 const mapStateToProps = state => ({
-  isLoggedIn: null !== currentUserProfileSelector(state),
-  userProfile: currentUserProfileSelector(state)
+  isLoggedIn: null !== currentUserProfileSelector (state),
+  userProfile: currentUserProfileSelector (state),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect (mapStateToProps, mapDispatchToProps) (Header);
 
 Header.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  logoutUser: PropTypes.object.isRequired,
-  userProfile: PropTypes.func.isRequired
+  logoutUser: PropTypes.func.isRequired,
+  userProfile: PropTypes.object,
 };

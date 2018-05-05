@@ -1,60 +1,55 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import NumberToWords from 'number-to-words';
 
 import {
   trillionTreeMessage1,
-  trillionTreeMessage2
+  trillionTreeMessage2,
 } from '../../constants/strings';
-import { trillionCampaign } from '../../actions/trillionAction';
+import {trillionCampaign} from '../../actions/trillionAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
 
 class Trillion extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super ();
     this.state = {
       svgData: {},
       displayName: '',
-      loading: true
+      loading: true,
     };
   }
 
-  componentWillMount() {
-    trillionCampaign()
-      .then(({ data }) => {
-        this.setState({
+  componentDidMount () {
+    trillionCampaign ()
+      .then (({data}) => {
+        this.setState ({
           svgData: {
             id: 1,
             target: data.count_target,
             planted: data.count_planted,
             community: data.count_community,
-            personal: data.count_personal
+            personal: data.count_personal,
           },
           displayName: data.display_name,
-          loading: false
+          loading: false,
         });
-        console.log('Success: ', data);
+        console.log ('Success: ', data);
       })
-      .catch(error => console.log(error));
+      .catch (error => console.log (error));
   }
-  shouldComponentUpdate() {
-    this.forceUpdate();
+  shouldComponentUpdate () {
+    this.forceUpdate ();
     return true;
   }
 
-  getTwoWordString(sentence) {
-    return sentence
-      .split(' ')
-      .slice(0, 2)
-      .join(' ')
-      .replace(/,/g, '');
+  getTwoWordString (sentence) {
+    return sentence.split (' ').slice (0, 2).join (' ').replace (/,/g, '');
   }
 
-  render() {
-    return this.state.loading ? (
-      <LoadingIndicator />
-    ) : (
-        <div className="trillion-container sidenav-wrapper">
+  render () {
+    return this.state.loading
+      ? <LoadingIndicator />
+      : <div className="trillion-container sidenav-wrapper">
           <h3>{this.state.displayName}</h3>
           <h5>{trillionTreeMessage1}</h5>
           <h5>{trillionTreeMessage2}</h5>
@@ -68,8 +63,8 @@ class Trillion extends Component {
                   <br />
                   <strong>{this.state.svgData.target}</strong>
                   <br />
-                  {this.getTwoWordString(
-                    NumberToWords.toWords(this.state.svgData.target)
+                  {this.getTwoWordString (
+                    NumberToWords.toWords (this.state.svgData.target)
                   )}
                 </span>
               </div>
@@ -80,8 +75,8 @@ class Trillion extends Component {
                   <br />
                   <strong>{this.state.svgData.target}</strong>
                   <br />
-                  {this.getTwoWordString(
-                    NumberToWords.toWords(this.state.svgData.target)
+                  {this.getTwoWordString (
+                    NumberToWords.toWords (this.state.svgData.target)
                   )}
                 </span>
               </div>
@@ -91,15 +86,14 @@ class Trillion extends Component {
                   Planted trees<br />
                   <strong>{this.state.svgData.planted}</strong>
                   <br />
-                  {this.getTwoWordString(
-                    NumberToWords.toWords(this.state.svgData.planted)
+                  {this.getTwoWordString (
+                    NumberToWords.toWords (this.state.svgData.planted)
                   )}
                 </span>
               </div>
             </div>
           </div>
-        </div>
-      );
+        </div>;
   }
 }
 

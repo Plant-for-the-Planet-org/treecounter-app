@@ -1,25 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { history } from '../Common/BrowserRouter';
 import { sortedUserContributionsSelector } from '../../selectors/index';
 import ContributionCardList from './ContributionCardList';
-import ContributionsMap from './ContributionsMap';
 import ContributionsMapLegend from './ContributionsMapLegend';
 import PageHeader from '../Common/PageHeader';
-import InlineLink from '../Common/InlineLink';
-import ActionButton from '../Common/ActionButton';
 import Map from '../RegisterTrees/map';
 import * as constants from '../../SupportedLanguages/en';
 
-const UserContributions = props => {
+const UserContributions = ({ userContributions}) => {
   const updateContribution = contributionId =>
     history.push(`/some/link/${contributionId}`);
 
-  const contributions = props.userContributions;
-
-  let mPins = contributions.map(element => {
+  let mPins = userContributions.map(element => {
     let color = '';
     if (element.contribution_type === 'donated') color = 'green';
     else if (element.tree_count > 1) color = 'blue';
@@ -31,18 +27,18 @@ const UserContributions = props => {
     };
   });
 
-  console.log(contributions);
+  console.log(userContributions);
   return (
     <div className="page-container my-trees">
       <PageHeader caption="My Trees" />
-      {Object.keys(contributions).length > 0 ? (
+      {Object.keys(userContributions).length > 0 ? (
         <div>
           <Map pins={mPins} />
           <ContributionsMapLegend />
           <div className="contribution-container">
             <ContributionCardList
-              contributions={contributions}
-              updateContribution={contributionId => updateContribution}
+              contributions={userContributions}
+              updateContribution={() => updateContribution}
             />
           </div>
           <div className="contribution-buttons">
@@ -70,3 +66,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(UserContributions);
+
+UserContributions.propTypes = {
+  userContributions: PropTypes.array.isRequired
+};

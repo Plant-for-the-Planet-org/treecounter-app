@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ActivePlantProjectData from './ActivePlantProjectData';
 import * as constants from '../../SupportedLanguages/en';
@@ -37,12 +37,14 @@ const ActivePlantProject = props => {
   );
 };
 
-ActivePlantProject.propTypes = {
-  userTpos: PropTypes.any.isRequired,
-  plantProjects: PropTypes.any.isRequired
-};
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ selectPlantProjectIdAction }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(ActivePlantProject);
+
+ActivePlantProject.propTypes = {
+  userTpos: PropTypes.any.isRequired,
+  plantProjects: PropTypes.any.isRequired,
+  id: PropTypes.number.isRequired
+};

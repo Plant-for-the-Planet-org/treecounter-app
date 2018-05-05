@@ -1,9 +1,9 @@
 import createHistory from 'history/createBrowserHistory';
-import { Router } from 'react-router';
+import {Router} from 'react-router';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const history = createHistory();
+export const history = createHistory ();
 
 const BrowserRouter = props => (
   <Router history={history}>
@@ -12,5 +12,7 @@ const BrowserRouter = props => (
 );
 
 BrowserRouter.propTypes = {
-  children: PropTypes.func
+  children: PropTypes.node,
 };
+
+export default BrowserRouter;

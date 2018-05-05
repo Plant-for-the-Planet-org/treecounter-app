@@ -7,7 +7,8 @@
     "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      "modules": true
     }
   },
   "env": {
@@ -16,11 +17,40 @@
     "es6": true,
     "jquery": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
   "rules": {
-    "no-console": 1
+    "eol-last": 2,
+    "jsx-quotes": 2,
+    "no-underscore-dangle": [
+      0
+    ],
+    "no-unused-vars": 2,
+    "no-undef": 2,
+    "no-var": 2,
+    "react/display-name": 0,
+    "react/jsx-boolean-value": 0,
+    "react/jsx-no-undef": 2,
+    "react/jsx-sort-props": 0,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/no-did-mount-set-state": 2,
+    "react/no-did-update-set-state": 2,
+    "react/no-multi-comp": 0,
+    "react/no-unknown-property": 2,
+    "react/prop-types": 2,
+    "react/react-in-jsx-scope": 2,
+    "react/self-closing-comp": 2,
+    "react/jsx-wrap-multilines": 2,
+    "quotes": [
+      2,
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "strict": [
+      2,
+      "global"
+    ]
   }
 }

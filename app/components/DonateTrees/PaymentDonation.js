@@ -1,34 +1,34 @@
-import React, { Component } from "react"
-import LiForm from "liform-react"
-import { connect } from "react-redux"
-import { Link } from "react-router-dom"
+import React, { Component } from 'react';
+import LiForm from 'liform-react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { PaymentSchema } from "../../layouts/donatePayment"
-import CustomForm from "../Common/CustomForm"
-import LoadingIndicator from "../Common/LoadingIndicator"
-import { userTreecounterSelector } from "../../selectors/index"
-import { Payment } from "../../actions/paymentAction"
-import { tpo } from "../../constants/strings"
+import { PaymentSchema } from '../../layouts/donatePayment';
+import CustomForm from '../Common/CustomForm';
+import LoadingIndicator from '../Common/LoadingIndicator';
+import { userTreecounterSelector } from '../../selectors/index';
+import { Payment } from '../../actions/paymentAction';
+import { tpo } from '../../constants/strings';
 import {
   currentUserProfileSelector,
   sortedUserPlantProjectsSelector,
   paymentGatewaysSelector
-} from "../../selectors"
-import { sortedUserContributionsSelector } from "../../selectors/index"
-import * as constants from '../../SupportedLanguages/en'
+} from '../../selectors';
+import { sortedUserContributionsSelector } from '../../selectors/index';
+import * as constants from '../../SupportedLanguages/en';
 
 class PaymentDonation extends Component {
   constructor(props) {
-    console.log("Payment Donation ----- Constructor");
+    console.log('Payment Donation ----- Constructor');
 
     super(props);
     this.state = {
       loading: true,
       schema: {},
-      paymentMethod: "pftp_paypal",
+      paymentMethod: 'pftp_paypal',
       paymentOptions: {
-        iban: "",
-        bic: ""
+        iban: '',
+        bic: ''
       },
       selectedProject: {},
       availablePaymentModes: []
@@ -64,24 +64,30 @@ class PaymentDonation extends Component {
 
   handlePaymentDonate(paymentInfo) {
     paymentInfo.paymentMethod = this.state.paymentMethod;
-    if (this.state.paymentMethod === "pftp_sepa") {
-      paymentInfo.paymentOptions = `iban=${this.state.paymentOptions.iban}&bic=${this.state.paymentOptions.bic}`;
+    if (this.state.paymentMethod === 'pftp_sepa') {
+      paymentInfo.paymentOptions = `iban=${
+        this.state.paymentOptions.iban
+      }&bic=${this.state.paymentOptions.bic}`;
     }
     console.log(paymentInfo);
     Payment(paymentInfo, this.state.selectedProject.id);
   }
 
   componentDidMount() {
-    console.log("Payment Donation ----- Component will mount");
+    console.log('Payment Donation ----- Component will mount');
 
-    const { match: { params }, userPlantProjects } = this.props;
+    const {
+      match: { params },
+      userPlantProjects
+    } = this.props;
 
     // Setting the selected project from the url params
     for (let key in userPlantProjects) {
       if (userPlantProjects[key].id == params.projectId) {
         let selectedProject = userPlantProjects[key];
         // Setting payment mode available
-        let selectedPayments = this.props.tpo[selectedProject.tpo_id].payment_gateways;
+        let selectedPayments = this.props.tpo[selectedProject.tpo_id]
+          .payment_gateways;
         selectedPayments = selectedPayments.map(
           id => this.props.paymentgateway[id]
         );
@@ -98,7 +104,7 @@ class PaymentDonation extends Component {
         delete data.schema.properties.paymentMethod;
         delete data.schema.properties.paymentOptions;
 
-        var index = data.schema.required.indexOf("paymentMethod");
+        var index = data.schema.required.indexOf('paymentMethod');
         if (index !== -1) data.schema.required.splice(index, 1);
 
         this.setState({ schema: data.schema, loading: false });
@@ -109,14 +115,14 @@ class PaymentDonation extends Component {
   getPaymentGateways() {
     return this.state.availablePaymentModes.map(element => {
       switch (element.name) {
-        case "pftp_paypal":
+        case 'pftp_paypal':
           return (
             <div key="pftp_paypal" className="radio payment-method__option">
               <label>
                 <input
                   type="radio"
                   value="pftp_paypal"
-                  checked={this.state.paymentMethod === "pftp_paypal"}
+                  checked={this.state.paymentMethod === 'pftp_paypal'}
                   onChange={this.handleOptionChange}
                 />
                 <div>
@@ -129,14 +135,14 @@ class PaymentDonation extends Component {
             </div>
           );
           break;
-        case "pftp_sepa":
+        case 'pftp_sepa':
           return (
             <div key="pftp_sepa" className="radio payment-method__option">
               <label>
                 <input
                   type="radio"
                   value="pftp_sepa"
-                  checked={this.state.paymentMethod === "pftp_sepa"}
+                  checked={this.state.paymentMethod === 'pftp_sepa'}
                   onChange={this.handleOptionChange}
                 />
                 <div>
@@ -165,21 +171,19 @@ class PaymentDonation extends Component {
             </div>
           );
           break;
-        case "pftp_cc":
+        case 'pftp_cc':
           return (
             <div key="pftp_cc" className="radio payment-method__option">
               <label>
                 <input
                   type="radio"
                   value="pftp_cc"
-                  checked={this.state.paymentMethod === "pftp_cc"}
+                  checked={this.state.paymentMethod === 'pftp_cc'}
                   onChange={this.handleOptionChange}
                 />
                 <div>
                   <span>{constants.formStrings.creditCard}</span>
-                  <span>
-                    {constants.formStrings.creditCardMessage}
-                  </span>
+                  <span>{constants.formStrings.creditCardMessage}</span>
                 </div>
                 <div className="flex__spacer" />
                 <img src="http://www.pngmart.com/files/3/Credit-Card-Visa-And-Master-Card-PNG-HD.png" />
@@ -191,12 +195,11 @@ class PaymentDonation extends Component {
     });
   }
   render() {
-    console.log("Payment Donation ----- Render", this.state.schema);
-    return <div className="payment-page-container">
+    console.log('Payment Donation ----- Render', this.state.schema);
+    return (
+      <div className="payment-page-container">
         <h3>{constants.formStrings.donateTrees}</h3>
-        <h6>
-          {constants.formStrings.donateTreesMessage}
-        </h6>
+        <h6>{constants.formStrings.donateTreesMessage}</h6>
         <div className="horizontal-round-bar">
           <div className="horizontal-round-bar__spacer" />
           <span>1</span>
@@ -218,7 +221,9 @@ class PaymentDonation extends Component {
 
                 <span>{constants.formStrings.costPerTree}:</span>
                 <span>{this.state.selectedProject.tree_cost}</span>
-                {this.state.selectedProject.is_certified ? "Certified" : "Not Certified"}
+                {this.state.selectedProject.is_certified
+                  ? 'Certified'
+                  : 'Not Certified'}
               </div>
             </div>
             <div className="project-details__content--right">
@@ -227,7 +232,9 @@ class PaymentDonation extends Component {
           </div>
           <div className="project-details__footer">
             <a>{constants.formStrings.seeMore}</a>
-            <Link to="/donateTrees">{constants.formStrings.selectDifferentProject}</Link>
+            <Link to="/donateTrees">
+              {constants.formStrings.selectDifferentProject}
+            </Link>
           </div>
         </div>
         <div className="horizontal-round-bar">
@@ -246,13 +253,21 @@ class PaymentDonation extends Component {
         <div className="text-center">
           {this.state.loading ? <LoadingIndicator /> : null}
         </div>
-        <LiForm schema={this.state.schema} onSubmit={this.handlePaymentDonate} baseForm={CustomForm} headline="" buttonText="Donate" buttonWidth="240" />
-      </div>;
+        <LiForm
+          schema={this.state.schema}
+          onSubmit={this.handlePaymentDonate}
+          baseForm={CustomForm}
+          headline=""
+          buttonText="Donate"
+          buttonWidth="240"
+        />
+      </div>
+    );
   }
 }
 
 const mapStateToProps = function(state) {
-  console.log("Payment Donation ------ Store updated", state);
+  console.log('Payment Donation ------ Store updated', state);
   return {
     userPlantProjects: state.entities.plantProject,
     paymentgateway: state.entities.paymentGateway,

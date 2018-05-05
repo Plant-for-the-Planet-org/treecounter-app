@@ -1,16 +1,16 @@
-var webpack = require("webpack");
-var webpackMerge = require("webpack-merge");
-var commonConfig = require("./webpack.common.config.js");
-var path = require("path");
+var webpack = require('webpack');
+var webpackMerge = require('webpack-merge');
+var commonConfig = require('./webpack.common.config.js');
+var path = require('path');
 
 module.exports = webpackMerge(commonConfig, {
-  entry: ["babel-polyfill", path.join(__dirname, "../../index.web.js")],
+  entry: ['babel-polyfill', path.join(__dirname, '../../index.web.js')],
   output: {
-    path: path.join(__dirname, "../dist"),
-    filename: "index.js",
-    publicPath: "/"
+    path: path.join(__dirname, '../dist'),
+    filename: 'index.js',
+    publicPath: '/'
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   devServer: {
     inline: true,
     port: 8080,
@@ -18,8 +18,8 @@ module.exports = webpackMerge(commonConfig, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env": {
-        ENV: JSON.stringify("development")
+      'process.env': {
+        ENV: JSON.stringify('development')
       }
     })
   ]

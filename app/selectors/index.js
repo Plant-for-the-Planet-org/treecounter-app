@@ -1,13 +1,19 @@
-import {createSelector} from 'reselect';
-import {denormalize} from 'normalizr';
+import { createSelector } from 'reselect';
+import { denormalize } from 'normalizr';
 
-import {userProfileSchema} from "../schemas";
-import {getCurrentUserProfileId} from "../reducers/currentUserProfileIdReducer";
-import {getPlantProjects, getPaymentGateways, getTpos} from "../reducers/entitiesReducer";
-import {getSelectedPlantProjectId} from "../reducers/selectedPlantProjectIdReducer";
+import { userProfileSchema } from '../schemas';
+import { getCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
+import {
+  getPlantProjects,
+  getPaymentGateways,
+  getTpos
+} from '../reducers/entitiesReducer';
+import { getSelectedPlantProjectId } from '../reducers/selectedPlantProjectIdReducer';
 
-export const currentUserProfileIdSelector = state => getCurrentUserProfileId(state);
-export const selectedPlantProjectIdSelector = state => getSelectedPlantProjectId(state);
+export const currentUserProfileIdSelector = state =>
+  getCurrentUserProfileId(state);
+export const selectedPlantProjectIdSelector = state =>
+  getSelectedPlantProjectId(state);
 export const paymentGatewaysSelector = state => getPaymentGateways(state);
 export const tposSelector = state => getTpos(state);
 export const plantProjectsSelector = state => getPlantProjects(state);
@@ -15,7 +21,7 @@ export const entitiesSelector = state => state.entities;
 
 function logSelectorUpdate(selectorName, args) {
   const debug = false;
-  debug && console.log("SELECTOR: " + selectorName, args);
+  debug && console.log('SELECTOR: ' + selectorName, args);
 }
 
 /**
@@ -42,7 +48,13 @@ export const currentUserProfileSelector = createSelector(
   entitiesSelector,
   (currentUserProfileId, entities) => {
     logSelectorUpdate('currentUserProfileSelector', arguments);
-    return null === currentUserProfileId ? null : denormalize(entities.userProfile[currentUserProfileId], userProfileSchema, entities);
+    return null === currentUserProfileId
+      ? null
+      : denormalize(
+          entities.userProfile[currentUserProfileId],
+          userProfileSchema,
+          entities
+        );
   }
 );
 
@@ -63,11 +75,9 @@ export const userTreecounterSelector = createSelector(
  */
 export const userContributionsSelector = createSelector(
   userTreecounterSelector,
-  (userTreecounter) => {
+  userTreecounter => {
     logSelectorUpdate('userContributionsSelector', arguments);
-    return null === userTreecounter ?
-      null :
-      userTreecounter.contributions;
+    return null === userTreecounter ? null : userTreecounter.contributions;
   }
 );
 
@@ -78,9 +88,11 @@ export const sortedUserContributionsSelector = createSelector(
   userContributionsSelector,
   contributions => {
     logSelectorUpdate('sortedUserContributionsSelector', arguments);
-    return null === contributions ?
-      [] :
-      contributions.sort((c1, c2) => Date.parse(c2.plant_date) - Date.parse(c1.plant_date));
+    return null === contributions
+      ? []
+      : contributions.sort(
+          (c1, c2) => Date.parse(c2.plant_date) - Date.parse(c1.plant_date)
+        );
   }
 );
 
@@ -92,7 +104,9 @@ export const selectedPlantProjectSelector = createSelector(
   getPlantProjects,
   (selectedPlantProjectId, plantProjects) => {
     logSelectorUpdate('selectedPlantProjectSelector', arguments);
-    return null === selectedPlantProjectId ? null : plantProjects[selectedPlantProjectId];
+    return null === selectedPlantProjectId
+      ? null
+      : plantProjects[selectedPlantProjectId];
   }
 );
 
@@ -108,11 +122,11 @@ export const availablePaymentGatewaysSelector = createSelector(
   paymentGatewaysSelector,
   (selectedPlantProject, paymentGateways) => {
     logSelectorUpdate('availablePaymentGatewaysSelector', arguments);
-    return null === selectedPlantProject ?
-      null :
-      paymentGateways.filter(function (paymentGateway) {
-        return paymentGateway.tpo_id === selectedPlantProject.tpo_id;
-      });
+    return null === selectedPlantProject
+      ? null
+      : paymentGateways.filter(function(paymentGateway) {
+          return paymentGateway.tpo_id === selectedPlantProject.tpo_id;
+        });
   }
 );
 
@@ -123,16 +137,18 @@ export const userTreecounterDataSelector = createSelector(
   userTreecounterSelector,
   treecounter => {
     logSelectorUpdate('userTreecounterDataSelector', arguments);
-    return null === treecounter ? null : {
-      id: treecounter.id,
-      target: treecounter.count_target,
-      implicitTarget: treecounter.implicit_target,
-      planted: treecounter.count_planted,
-      personal: treecounter.count_personal,
-      community: treecounter.count_community,
-      targetComment: treecounter.target_comment,
-      targetYear: treecounter.target_year
-    }
+    return null === treecounter
+      ? null
+      : {
+          id: treecounter.id,
+          target: treecounter.count_target,
+          implicitTarget: treecounter.implicit_target,
+          planted: treecounter.count_planted,
+          personal: treecounter.count_personal,
+          community: treecounter.count_community,
+          targetComment: treecounter.target_comment,
+          targetYear: treecounter.target_year
+        };
   }
 );
 
@@ -152,12 +168,14 @@ export const userPlantProjectsSelector = createSelector(
     const userPlantProjectIds = [
       ...new Set(
         sortedUserContributions
-          .filter(contribution => ('donation' === contribution.contribution_type))
+          .filter(contribution => 'donation' === contribution.contribution_type)
           .map(contribution => contribution.plant_project_id)
       )
     ];
 
-    return Object.values(plantProjects).filter(plantProject => userPlantProjectIds.includes(plantProject.id));
+    return Object.values(plantProjects).filter(plantProject =>
+      userPlantProjectIds.includes(plantProject.id)
+    );
   }
 );
 
@@ -168,9 +186,11 @@ export const sortedUserPlantProjectsSelector = createSelector(
   userPlantProjectsSelector,
   plantProjects => {
     logSelectorUpdate('sortedUserPlantProjectsSelector', arguments);
-    return null === plantProjects ?
-      null :
-      Object.values(plantProjects).sort((p1, p2) => Date.parse(p2.created) - Date.parse(p1.created))
+    return null === plantProjects
+      ? null
+      : Object.values(plantProjects).sort(
+          (p1, p2) => Date.parse(p2.created) - Date.parse(p1.created)
+        );
   }
 );
 
@@ -185,7 +205,12 @@ export const activePlantProjectsSelector = createSelector(
     logSelectorUpdate('activePlantProjectsSelector', arguments);
     return Object.values(plantProjects).filter(plantProject => {
       let tpo = tpos[plantProject.tpo_id];
-      return plantProject.is_verified && plantProject.is_active && tpo.is_verified && tpo.is_active;
+      return (
+        plantProject.is_verified &&
+        plantProject.is_active &&
+        tpo.is_verified &&
+        tpo.is_active
+      );
     });
   }
 );
@@ -201,7 +226,11 @@ export const unusedPlantProjectsSelector = createSelector(
     if (null === userProjects || 0 === userProjects.length) {
       return allActiveProjects;
     }
-    const userProjectIds = Object.values(userProjects).map(project => project.id);
-    return Object.values(allActiveProjects).filter(project => false === userProjectIds.includes(project.id));
+    const userProjectIds = Object.values(userProjects).map(
+      project => project.id
+    );
+    return Object.values(allActiveProjects).filter(
+      project => false === userProjectIds.includes(project.id)
+    );
   }
 );

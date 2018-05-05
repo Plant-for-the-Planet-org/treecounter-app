@@ -1,1 +1,1 @@
-export const plantingTreeImage = require("../web/images/plantingTree.jpg");
+export const plantingTreeImage = require('../web/images/plantingTree.jpg');

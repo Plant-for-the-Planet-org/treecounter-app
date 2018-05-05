@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import SearchAutosuggest from "./SearchAutosuggest";
-import * as constants from '../../SupportedLanguages/en'
+import SearchAutosuggest from './SearchAutosuggest';
+import * as constants from '../../SupportedLanguages/en';
 
 const SearchBar = () => {
   return (
@@ -9,7 +9,9 @@ const SearchBar = () => {
       <div className="input-group">
         <SearchAutosuggest />
         <span className="input-group-addon search">
-          <i className="material-icons header-icons">{constants.formStrings.search}</i>
+          <i className="material-icons header-icons">
+            {constants.formStrings.search}
+          </i>
         </span>
       </div>
     </form>

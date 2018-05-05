@@ -1,8 +1,8 @@
-import {createStore, applyMiddleware, compose} from "redux";
-import thunkMiddleware from "redux-thunk";
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 
-import reducers from "../reducers";
-import {initialState as entitiesState} from "../reducers/entitiesReducer";
+import reducers from '../reducers';
+import { initialState as entitiesState } from '../reducers/entitiesReducer';
 
 /**
  * This function will be called in App.js by either:
@@ -18,9 +18,8 @@ import {initialState as entitiesState} from "../reducers/entitiesReducer";
  * @returns {Store}
  */
 export default function configureStore(props, context) {
-
-  const {locale, mediaPath} = props;
-  const {scheme, host, base: baseUrl, location} = context;
+  const { locale, mediaPath } = props;
+  const { scheme, host, base: baseUrl, location } = context;
 
   const initialState = {
     serverName: `${scheme}://${host}`,
@@ -34,7 +33,13 @@ export default function configureStore(props, context) {
   };
 
   // use devtools if we are in a browser and the extension is enabled
-  const composeEnhancers = typeof window !== 'undefined' && (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose);
+  const composeEnhancers =
+    typeof window !== 'undefined' &&
+    (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose);
 
-  return createStore(reducers, initialState, composeEnhancers(applyMiddleware(thunkMiddleware)));
+  return createStore(
+    reducers,
+    initialState,
+    composeEnhancers(applyMiddleware(thunkMiddleware))
+  );
 }

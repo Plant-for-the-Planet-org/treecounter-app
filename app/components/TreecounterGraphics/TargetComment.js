@@ -1,5 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const TargetComment = ({comment}) => <div className="fixed-target-comment">{comment}</div>
+const TargetComment = ({ comment }) => (
+  <div className="fixed-target-comment">{comment}</div>
+);
 
 export default TargetComment;

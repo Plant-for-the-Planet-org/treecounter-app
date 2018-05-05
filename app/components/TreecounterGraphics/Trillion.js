@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import NumberToWords from 'number-to-words';
 
 import {
@@ -11,8 +10,8 @@ import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
 
 class Trillion extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       svgData: {},
       displayName: '',
@@ -48,82 +47,59 @@ class Trillion extends Component {
       .split(' ')
       .slice(0, 2)
       .join(' ')
-      .replace(/\,/g, '');
+      .replace(/,/g, '');
   }
 
   render() {
     return this.state.loading ? (
       <LoadingIndicator />
     ) : (
-      <div className="trillion-container sidenav-wrapper">
-        <h3>{this.state.displayName}</h3>
-        <h5>{trillionTreeMessage1}</h5>
-        <h5>{trillionTreeMessage2}</h5>
-        <div className="canvasContainer flex-column">
-          <SvgContainer {...this.state.svgData} />
-          <div className="trillion-svg-text">
-            <div className="trillion-svg-text__row">
-              <img src="/web/images/baum_versprochen.png" alt="Smiley face" />
-              <span>
-                Target {this.propsctargetYear}
-                <br />
-                <strong>{this.state.svgData.target}</strong>
-                <br />
-                {this.getTwoWordString(
-                  NumberToWords.toWords(this.state.svgData.target)
-                )}
-              </span>
-            </div>
-            <div className="trillion-svg-text__row">
-              <img src="/web/images/baum.png" alt="Smiley face" />
-              <span>
-                Existing trees {this.propsctargetYear}
-                <br />
-                <strong>{this.state.svgData.target}</strong>
-                <br />
-                {this.getTwoWordString(
-                  NumberToWords.toWords(this.state.svgData.target)
-                )}
-              </span>
-            </div>
-            <div className="trillion-svg-text__row">
-              <img src="/web/images/baum.png" alt="Smiley face" />
-              <span>
-                Planted trees<br />
-                <strong>{this.state.svgData.planted}</strong>
-                <br />
-                {this.getTwoWordString(
-                  NumberToWords.toWords(this.state.svgData.planted)
-                )}
-              </span>
-            </div>
-          </div>
-          {/* <div className="circle-inside">
-          <div className="circle-headline">
-		        <div className="media">
-			        <img className="media-object" src="/client108/images/baum_versprochen.png" alt="Smiley face" />
-                <div className="media-body">
-                  <p className="media-title">Target {this.propsctargetYear}</p>
-                  <p className="media-value">{this.state.svgData.target}</p>
-                </div>
-            </div>
-            <div className="media">
-              <img className="media-object" src="/client108/images/baum.png" alt="Smiley face" />
-                  <div className="media-body">
-                    <p className="media-title">Existing trees  0</p>
-                  </div>
-            </div>
-            <div className="media">
-              <img className="media-object" src="/client108/images/baum.png" alt="Smiley face" />
-                <div className="media-body">
-                  <p className="media-title">Planted trees {this.state.svgData.planted}</p>
-                </div>
+        <div className="trillion-container sidenav-wrapper">
+          <h3>{this.state.displayName}</h3>
+          <h5>{trillionTreeMessage1}</h5>
+          <h5>{trillionTreeMessage2}</h5>
+          <div className="canvasContainer flex-column">
+            <SvgContainer {...this.state.svgData} />
+            <div className="trillion-svg-text">
+              <div className="trillion-svg-text__row">
+                <img src="/web/images/baum_versprochen.png" alt="Smiley face" />
+                <span>
+                  Target {this.propsctargetYear}
+                  <br />
+                  <strong>{this.state.svgData.target}</strong>
+                  <br />
+                  {this.getTwoWordString(
+                    NumberToWords.toWords(this.state.svgData.target)
+                  )}
+                </span>
+              </div>
+              <div className="trillion-svg-text__row">
+                <img src="/web/images/baum.png" alt="Smiley face" />
+                <span>
+                  Existing trees {this.propsctargetYear}
+                  <br />
+                  <strong>{this.state.svgData.target}</strong>
+                  <br />
+                  {this.getTwoWordString(
+                    NumberToWords.toWords(this.state.svgData.target)
+                  )}
+                </span>
+              </div>
+              <div className="trillion-svg-text__row">
+                <img src="/web/images/baum.png" alt="Smiley face" />
+                <span>
+                  Planted trees<br />
+                  <strong>{this.state.svgData.planted}</strong>
+                  <br />
+                  {this.getTwoWordString(
+                    NumberToWords.toWords(this.state.svgData.planted)
+                  )}
+                </span>
+              </div>
             </div>
           </div>
-        </div>  */}
         </div>
-      </div>
-    );
+      );
   }
 }
 

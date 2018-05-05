@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import PlantedDetails from './PlantedDetails';
 import TargetComment from './TargetComment';
 import ArrowButton from '../Common/ArrowButton';
 
 class TreecounterGraphicsText extends Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       ifPlantedDetails: false,
@@ -71,3 +72,7 @@ class TreecounterGraphicsText extends Component {
 }
 
 export default TreecounterGraphicsText;
+
+TreecounterGraphicsText.propTypes = {
+  treecounterData: PropTypes.object.isRequired
+};

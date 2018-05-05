@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import TreecounterGraphicsText from './TreecounterGraphicsText';
 import { userTreecounterDataSelector } from '../../selectors/index';
@@ -20,18 +21,18 @@ class Home extends Component {
       <div className="canvasContainer flex-column">
         <SvgContainer {...svgData} />
         {treecounterData === null ? (
-          <div className="circle-inside" className="circle-headline">
+          <div className="circle-inside circle-headline">
             <LoadingIndicator />
           </div>
         ) : (
-          <TreecounterGraphicsText treecounterData={treecounterData} />
-        )}
+            <TreecounterGraphicsText treecounterData={treecounterData} />
+          )}
       </div>
     );
   }
 }
 
-const mapStateToProps = function(state) {
+const mapStateToProps = function (state) {
   console.log('Store updated - Home', state);
   return {
     treecounterData: userTreecounterDataSelector(state)
@@ -39,3 +40,7 @@ const mapStateToProps = function(state) {
 };
 
 export default connect(mapStateToProps)(Home);
+
+Home.propTypes = {
+  treecounterData: PropTypes.object.isRequired
+};

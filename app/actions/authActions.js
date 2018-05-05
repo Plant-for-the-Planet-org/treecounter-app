@@ -85,7 +85,7 @@ export function refreshToken() {
       .then(token => {
         dispatch(loadLoginData(token));
       })
-      .catch(() => {});
+      .catch(() => { });
   };
 }
 

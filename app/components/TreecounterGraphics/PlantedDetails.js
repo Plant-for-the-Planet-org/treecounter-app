@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const PlantedDetails = ({ personal, community }) => (
   <div className="fixed-planted-details">
@@ -9,3 +10,8 @@ const PlantedDetails = ({ personal, community }) => (
 );
 
 export default PlantedDetails;
+
+PlantedDetails.propTypes = {
+  personal: PropTypes.string.isRequired,
+  community: PropTypes.string.isRequired
+};

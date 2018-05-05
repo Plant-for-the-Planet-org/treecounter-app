@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import LiForm from 'liform-react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { PaymentSchema } from '../../layouts/donatePayment';
 import CustomForm from '../Common/CustomForm';
 import LoadingIndicator from '../Common/LoadingIndicator';
-import { userTreecounterSelector } from '../../selectors/index';
 import { Payment } from '../../actions/paymentAction';
-import { tpo } from '../../constants/strings';
-import {
-  currentUserProfileSelector,
-  sortedUserPlantProjectsSelector,
-  paymentGatewaysSelector
-} from '../../selectors';
-import { sortedUserContributionsSelector } from '../../selectors/index';
 import * as constants from '../../SupportedLanguages/en';
 
 class PaymentDonation extends Component {
@@ -67,7 +60,7 @@ class PaymentDonation extends Component {
     if (this.state.paymentMethod === 'pftp_sepa') {
       paymentInfo.paymentOptions = `iban=${
         this.state.paymentOptions.iban
-      }&bic=${this.state.paymentOptions.bic}`;
+        }&bic=${this.state.paymentOptions.bic}`;
     }
     console.log(paymentInfo);
     Payment(paymentInfo, this.state.selectedProject.id);
@@ -104,7 +97,7 @@ class PaymentDonation extends Component {
         delete data.schema.properties.paymentMethod;
         delete data.schema.properties.paymentOptions;
 
-        var index = data.schema.required.indexOf('paymentMethod');
+        let index = data.schema.required.indexOf('paymentMethod');
         if (index !== -1) data.schema.required.splice(index, 1);
 
         this.setState({ schema: data.schema, loading: false });
@@ -134,7 +127,6 @@ class PaymentDonation extends Component {
               </label>
             </div>
           );
-          break;
         case 'pftp_sepa':
           return (
             <div key="pftp_sepa" className="radio payment-method__option">
@@ -170,7 +162,6 @@ class PaymentDonation extends Component {
               </div>
             </div>
           );
-          break;
         case 'pftp_cc':
           return (
             <div key="pftp_cc" className="radio payment-method__option">
@@ -190,7 +181,6 @@ class PaymentDonation extends Component {
               </label>
             </div>
           );
-          break;
       }
     });
   }
@@ -266,7 +256,7 @@ class PaymentDonation extends Component {
   }
 }
 
-const mapStateToProps = function(state) {
+const mapStateToProps = function (state) {
   console.log('Payment Donation ------ Store updated', state);
   return {
     userPlantProjects: state.entities.plantProject,
@@ -276,3 +266,14 @@ const mapStateToProps = function(state) {
 };
 
 export default connect(mapStateToProps)(PaymentDonation);
+
+PaymentDonation.propTypes = {
+  userPlantProjects: PropTypes.object.isRequired,
+  paymentgateway: PropTypes.object.isRequired,
+  tpo: PropTypes.object.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      projectId: PropTypes.number,
+    }),
+  }).isRequired,
+};

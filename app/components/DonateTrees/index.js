@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import {
-  currentUserProfileSelector,
-  sortedUserPlantProjectsSelector,
   plantProjectsSelector
 } from '../../selectors';
 import {
   sortedUserContributionsSelector,
-  userTreecounterDataSelector,
   userPlantProjectsActualSelector
 } from '../../selectors/index';
 import PageHeader from '../Common/PageHeader';
@@ -19,20 +17,16 @@ import SearchProjects from './SearchProjects';
 import * as constants from '../../SupportedLanguages/en';
 
 class DonateTrees extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     $('#carousel-example-generic').carousel({
       interval: 5000
     });
 
     $('.Previously_carousel .item:first').addClass('active');
-    $('.Previously_carousel .item').each(function() {
-      var itemToClone = $(this);
+    $('.Previously_carousel .item').each(function () {
+      let itemToClone = $(this);
 
-      for (var i = 1; i < 4; i++) {
+      for (let i = 1; i < 4; i++) {
         itemToClone = itemToClone.next();
 
         // wrap around if at end of item collection
@@ -50,9 +44,9 @@ class DonateTrees extends Component {
     });
 
     $('#featured_carousel .featured:first').addClass('active');
-    $('#featured_carousel .featured').each(function() {
-      var itemToClone1 = $(this);
-      for (var i = 1; i < 4; i++) {
+    $('#featured_carousel .featured').each(function () {
+      let itemToClone1 = $(this);
+      for (let i = 1; i < 4; i++) {
         itemToClone1 = itemToClone1.next();
 
         // wrap around if at end of item collection
@@ -74,8 +68,6 @@ class DonateTrees extends Component {
     const {
       userPlantProjectSelect,
       userTpos,
-      userPlantProjects,
-      userContributions,
       plantProjects
     } = this.props;
     return (
@@ -125,10 +117,16 @@ class DonateTrees extends Component {
 
 const mapStateToProps = state => ({
   userTpos: state.entities.tpo,
-  userPlantProjects: sortedUserPlantProjectsSelector(state),
   userContributions: sortedUserContributionsSelector(state),
   userPlantProjectSelect: userPlantProjectsActualSelector(state),
   plantProjects: plantProjectsSelector(state)
 });
 
 export default connect(mapStateToProps)(DonateTrees);
+
+DonateTrees.propTypes = {
+  userPlantProjectSelect: PropTypes.object.isRequired,
+  userTpos: PropTypes.object.isRequired,
+  userPlantProjects: PropTypes.object.isRequired,
+  plantProjects: PropTypes.object.isRequired,
+};

@@ -1,5 +1,6 @@
 import React from 'react';
 import { renderField, DefaultTheme } from 'liform-react';
+import PropTypes from 'prop-types';
 
 const CustomForm = props => {
   const {
@@ -38,3 +39,14 @@ const CustomForm = props => {
 };
 
 export default CustomForm;
+
+CustomForm.propTypes = {
+  schema: PropTypes.any,
+  handleSubmit: PropTypes.func,
+  theme: PropTypes.any,
+  error: PropTypes.string,
+  submitting: PropTypes.bool,
+  buttonText: PropTypes.string,
+  buttonWidth: PropTypes.number,
+  headline: PropTypes.string
+};

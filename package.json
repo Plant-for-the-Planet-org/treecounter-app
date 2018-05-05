@@ -9,7 +9,10 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js}": ["prettier --write", "git add"]
+    "*.{js}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "autosuggest-highlight": "^3.1.1",
@@ -55,6 +58,7 @@
     "lint-staged": "^7.0.5",
     "node-sass": "^4.7.2",
     "prettier": "1.12.1",
+    "prettier-eslint": "^8.8.1",
     "react-test-renderer": "16.3.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",

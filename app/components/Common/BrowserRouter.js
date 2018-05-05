@@ -1,11 +1,16 @@
 import createHistory from 'history/createBrowserHistory';
 import { Router } from 'react-router';
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export const history = createHistory();
 
-export default class BrowserRouter extends Component {
-  render() {
-    return <Router history={history} children={this.props.children} />;
-  }
-}
+const BrowserRouter = props => (
+  <Router history={history}>
+    {props.children}
+  </Router>
+);
+
+BrowserRouter.propTypes = {
+  children: PropTypes.func
+};

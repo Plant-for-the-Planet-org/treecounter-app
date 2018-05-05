@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import LoadingIndicator from '../Common/LoadingIndicator';
 import ForgotPasswordSchema from '../../layouts/forgotpassword';
 import { forgot_password } from '../../actions/authActions';
 import Form from '../Common/Form';

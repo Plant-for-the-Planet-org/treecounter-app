@@ -1,6 +1,4 @@
 import React from 'react';
-import DonateTreesCardText from './DonateTreesCardText';
-import DonateTreesCardFooter from './DonateTreesCardFooter';
 import PropTypes from 'prop-types';
 import DonateTreesCardLayout from './DonateTreesCardLayout';
 

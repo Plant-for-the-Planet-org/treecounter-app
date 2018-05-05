@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 // Components
 import SearchBar from './Search';
@@ -39,3 +40,9 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
+
+Header.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  logoutUser: PropTypes.object.isRequired,
+  userProfile: PropTypes.func.isRequired
+};

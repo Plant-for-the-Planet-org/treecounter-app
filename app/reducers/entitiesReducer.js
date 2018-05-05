@@ -5,6 +5,7 @@ export const initialState = {
   userProfile: null,
   contribution: {},
   tpo: {},
+  follow: {},
   plantProject: {},
   paymentGateway: {},
   treecounter: {},

@@ -25,6 +25,7 @@ import Home from '../TreecounterGraphics/Home';
 import {currentUserProfileSelector} from '../../selectors/index';
 import {refreshToken} from '../../actions/authActions';
 import {getLocalRoute} from '../../actions/apiRouting';
+import Test from '../Test'
 
 // Class implementation
 class TreeCounter extends Component {
@@ -50,6 +51,7 @@ class TreeCounter extends Component {
             <Header />
             <Menu loggedIn={isLoggedIn} />
             <div className="app-container__content">
+              <Route exact path="/test" component={Test} />
               <Route exact path="/" component={Trillion} />
               <Route
                 exact

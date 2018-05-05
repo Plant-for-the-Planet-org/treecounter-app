@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ActionButton = props => (
-  <button className="navigate-button" href="">
+  <button className="navigate-button" href="" {...props}>
     {props.caption}
   </button>
 );

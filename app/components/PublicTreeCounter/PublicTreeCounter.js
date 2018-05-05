@@ -1,0 +1,120 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+
+import SupportButton from './SupportButton'
+import TreecounterHeader from './TreecounterHeader'
+import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantProjectSelector'
+import UserFootprint from './UserFootprint'
+//import {getLocalRoute} from '../../actions/apiRouting'
+import {currentUserProfileSelector} from '../../selectors/index'
+import {selectPlantProjectIdAction} from '../../actions/selectPlantProjectIdAction'
+import {followUnSubscribeAction} from '../../actions/followUnSubscribeAction'
+import {followSubscribeAction} from '../../actions/followSubscribeAction'
+import {registerSupporterAction} from '../../actions/registerSupporterAction'
+
+/**
+ * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Public-TreeCounter
+ */
+class PublicTreeCounter extends React.Component {
+
+  constructor(props) {
+    super(props)
+
+    this.onFollowChanged = this.onFollowChanged.bind(this)
+    this.onPlantProjectSelected = this.onPlantProjectSelected.bind(this)
+    this.onRegisterSupporter = this.onRegisterSupporter.bind(this)
+  }
+
+  //------------------------------------------------------------------------------------------------------------
+  // HELPER METHODS
+  //------------------------------------------------------------------------------------------------------------
+  isMyself() {
+    const {treecounter, currentUserProfile} = this.props
+    return (null !== currentUserProfile && currentUserProfile.treecounter.id === treecounter.id)
+  }
+
+  isUserFollower() {
+    const {treecounter, currentUserProfile} = this.props
+    const followeeIds = currentUserProfile.treecounter.followee_ids.split(',').map(s => parseInt(s))
+    return followeeIds.includes(treecounter.id)
+  }
+
+  amISupporting() {
+    const {treecounter, currentUserProfile} = this.props
+    return (null !== currentUserProfile.supported_treecounter && currentUserProfile.supported_treecounter.id === treecounter.id)
+  }
+
+  //------------------------------------------------------------------------------------------------------------
+  // ACTION METHODS
+  //------------------------------------------------------------------------------------------------------------
+  onRegisterSupporter() {
+    this.props.registerSupporter(this.props.treecounter.id)
+  }
+
+  onFollowChanged() {
+    this.isUserFollower() ?
+      this.props.followUnSubscribeAction(this.props.treecounter.id) :
+      this.props.followSubscribeAction(this.props.treecounter.id)
+  }
+
+  onPlantProjectSelected(selectedPlantProjectId) {
+    console.log('onPlantProjectSelected', selectedPlantProjectId)
+    this.props.selectPlantProjectIdAction(selectedPlantProjectId)
+    //history.push({pathname: getLocalRoute('app_donateTrees')})
+  }
+
+
+  render() {
+    const {treecounter, currentUserProfile} = this.props
+    if ((null === currentUserProfile) || (null === treecounter)) {
+      return null
+    }
+
+    const {user_profile: userProfile, display_name: caption} = treecounter
+    const {type: profileType, logo} = userProfile
+    const isUserFollower = this.isUserFollower()
+    const isUserLoggedIn = null !== currentUserProfile
+    const showFollow = !this.isMyself()
+
+    const supportProps = {active: !this.amISupporting(), isUserLoggedIn}
+    const headerProps = {caption, profileType, logo, isUserFollower, isUserLoggedIn, showFollow}
+    const tpoProps = {plantProjects: userProfile.plant_projects, defaultPlantProjectId: null}
+
+    return (<div>
+      {'tpo' !== userProfile.type && !this.isMyself() &&
+      <SupportButton {...supportProps} onRegisterSupporter={this.onRegisterSupporter}/>
+      }
+      <TreecounterHeader {...headerProps} followChanged={this.onFollowChanged}/>
+      {/*<TreecounterGraphic treecounter={treecounter}/>*/}
+      {'tpo' === userProfile.type ?
+        <TpoDonationPlantProjectSelector {...tpoProps} onSelect={this.onPlantProjectSelected}/> :
+        <UserFootprint userProfile={userProfile}/>
+      }
+    </div>)
+  }
+}
+
+PublicTreeCounter.propTypes = {
+  treecounter: PropTypes.object.isRequired,
+  currentUserProfile: PropTypes.object,
+  registerSupporter: PropTypes.func.isRequired,
+  selectPlantProjectIdAction: PropTypes.func.isRequired,
+  followSubscribeAction: PropTypes.func.isRequired,
+  followUnSubscribeAction: PropTypes.func.isRequired
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    registerSupporter: treecounterId => dispatch(registerSupporterAction(treecounterId)),
+    followSubscribeAction: treecounterId => dispatch(followSubscribeAction(treecounterId)),
+    selectPlantProjectIdAction: selectedPlantProjectId => dispatch(selectPlantProjectIdAction(selectedPlantProjectId)),
+    followUnSubscribeAction: treecounterId => dispatch(followUnSubscribeAction(treecounterId))
+  }
+}
+
+const mapStateToProps = state => ({
+  currentUserProfile: currentUserProfileSelector(state)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PublicTreeCounter)

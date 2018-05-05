@@ -10,7 +10,7 @@ import LoginFooter from './LoginFooter';
 class Login extends Component {
   constructor() {
     super();
-    localStorage.clear();
+    window.localStorage.clear();
     this.state = {
       schema: {},
       loading: true

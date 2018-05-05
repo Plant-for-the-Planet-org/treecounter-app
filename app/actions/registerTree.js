@@ -14,7 +14,7 @@ export function registerTree(plantContribution, treecounterId) {
       .post(
         getApiRoute('plantContribution_post', { treecounter: treecounterId }),
         plantContribution,
-        { headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` } }
+        { headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` } }
       )
       .then(res => {
         debug(res, res.response);

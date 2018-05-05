@@ -7,7 +7,7 @@ const TargetSchema = treecounterId =>
   new Observable(observe => {
     axios
       .get(getApiRoute('target_update_form', { treecounter: treecounterId }), {
-        headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` }
+        headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` }
       })
       .then(({ data }) => {
         observe.next(data);

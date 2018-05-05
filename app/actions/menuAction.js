@@ -11,7 +11,7 @@ export function MenuAction(isAuthenticated = false) {
       ? {
           method: ROUTES.getAuthenticatedMenu.method,
           url: getApiRoute(ROUTES.getAuthenticatedMenu.name),
-          headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` }
+          headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` }
         }
       : {
           method: ROUTES.getUnAuthenticatedMenu.method,

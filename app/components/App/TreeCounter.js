@@ -33,7 +33,7 @@ class TreeCounter extends Component {
     console.log('componentDidMount TreeCounter');
 
     // TODO: move token existence check to a better place
-    if (localStorage.getItem('jwt')) {
+    if (window.localStorage.getItem('jwt')) {
       const { dispatch } = this.props;
       dispatch(refreshToken());
     }

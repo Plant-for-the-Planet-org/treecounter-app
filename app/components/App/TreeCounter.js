@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { NotificationContainer } from 'react-notifications';
+import PropTypes from 'prop-types';
 
 // Components imports
 import TargetPage from '../Target';
@@ -15,8 +16,6 @@ import ResetPasswordContainer from '../Authentication/ResetPassword';
 import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
 import Menu from '../Menu';
-import DonateTrees from '../DonateTrees/index';
-import PaymentDonation from '../DonateTrees/PaymentDonation';
 
 // Components which use SVG
 import PublicTreecounter from '../TreecounterGraphics/PublicTreecounter';
@@ -40,7 +39,6 @@ class TreeCounter extends Component {
   }
 
   render() {
-    console.log('currentUserProfile:', this.props.currentUserProfile);
     console.log('user is logged in:', this.props.isLoggedIn);
 
     const { isLoggedIn } = this.props;
@@ -140,8 +138,12 @@ class TreeCounter extends Component {
 }
 
 const mapStateToProps = state => ({
-  currentUserProfile: currentUserProfileSelector(state),
   isLoggedIn: null !== currentUserProfileSelector(state)
 });
 
 export default connect(mapStateToProps)(TreeCounter);
+
+TreeCounter.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func
+};

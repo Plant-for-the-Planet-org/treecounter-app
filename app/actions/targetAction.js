@@ -18,7 +18,7 @@ export function SubmitTarget(treecounter, treecounterId) {
     };
     axios
       .put(getApiRoute('target_put', { treecounter: treecounterId }), data, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` }
+        headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` }
       })
       .then(res => {
         const treecounterData = res.data;

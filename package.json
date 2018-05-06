@@ -26,6 +26,8 @@
     "react-autosuggest": "^9.3.4",
     "react-bootstrap": "^0.32.1",
     "react-native": "0.55.3",
+    "react-navigation": "^1.1.2",
+    "react-navigation-redux-helpers": "^1.0.5",
     "react-notifications": "^1.4.3",
     "react-redux": "^5.0.6",
     "react-render-html": "^0.6.0",

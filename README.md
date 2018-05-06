@@ -16,7 +16,7 @@ npm start
 
 - Install xcode greater then 9.0.
 - Run following commands
-+ ```bash
+  ```bash
   brew install node
   brew install watchman
   npm install -g react-native-cli

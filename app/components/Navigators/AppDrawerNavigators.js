@@ -4,32 +4,31 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import React, { Component } from 'react';
 import { addNavigationHelpers } from 'react-navigation';
 import { AppDrawerNavigator } from './DrawerConfig';
-import { drawerRootListener } from '../../helpers/reduxHelpers.native';
+import { drawerRootListener as addListener } from '../../helpers/reduxHelpers.native';
 
 class AppDrawerNavigatorContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    drawerNav: PropTypes.object.isRequired
+    appDrawer: PropTypes.object.isRequired
   };
 
   render() {
-    const { dispatch, drawerNav } = this.props;
+    const { dispatch, appDrawer } = this.props;
     return (
-      <View style={{ flex: 1 }}>
-        <AppDrawerNavigator
-          navigation={addNavigationHelpers({
-            dispatch,
-            state: drawerNav,
-            drawerRootListener
-          })}
-        />
-      </View>
+      <AppDrawerNavigator
+        navigation={addNavigationHelpers({
+          dispatch,
+          state: appDrawer,
+          addListener
+        })}
+      />
+      //SAVE AN RUN
     );
   }
 }
 
 const mapStateToProps = state => ({
-  drawerNav: state.drawerNav
+  appDrawer: state.appDrawer
 });
 
 export default connect(mapStateToProps)(AppDrawerNavigatorContainer);

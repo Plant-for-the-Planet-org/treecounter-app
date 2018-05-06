@@ -5,7 +5,7 @@ import {
 
 const drawerNavMiddleware = createReactNavigationReduxMiddleware(
   'drawerRoot',
-  state => state.drawerNav
+  state => state.appDrawer
 );
 
 const drawerRootListener = createReduxBoundAddListener('drawerRoot');

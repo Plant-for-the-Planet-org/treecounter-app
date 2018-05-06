@@ -12,8 +12,8 @@ const instructions = Platform.select({
 class SideNavigationMenu extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Home</Text>
+      <View style={{ height: 500 }}>
+        <Text>Home</Text>
       </View>
     );
   }
@@ -22,7 +22,9 @@ class Test extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
+        <Text style={styles.welcome}>
+          Welcome to React Native with react navigation navigation{' '}
+        </Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
       </View>

@@ -1,8 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import reducers from '../reducers';
-import { initialState as entitiesState } from '../reducers/entitiesReducer';
+import reducers from "../reducers";
+import {initialState as entitiesState} from "../reducers/entitiesReducer";
+import logger from 'redux-logger';
 
 /**
  * This function will be called in App.js by either:
@@ -37,9 +38,9 @@ export default function configureStore(props, context) {
     typeof window !== 'undefined' &&
     (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose);
 
-  return createStore(
-    reducers,
-    initialState,
-    composeEnhancers(applyMiddleware(thunkMiddleware))
-  );
+  const middlewares = [thunkMiddleware];
+  if ((process.env.ENV || process.env.NODE_ENV) === 'development') {
+    middlewares.push(logger);
+  }
+  return createStore(reducers, initialState, composeEnhancers(applyMiddleware(...middlewares)));
 }

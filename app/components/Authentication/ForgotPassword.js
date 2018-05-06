@@ -1,30 +1,34 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import LiForm from 'liform-react';
+
+import CustomForm from '../Common/CustomForm';
+import LoadingIndicator from '../Common/LoadingIndicator';
 import ForgotPasswordSchema from '../../layouts/forgotpassword';
-import { forgot_password } from '../../actions/authActions';
-import Form from '../Common/Form';
+import {forgot_password} from '../../actions/authActions';
 
 class ForgotPasswordContainer extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super ();
     this.state = {
-      schema: {}
+      schema: {},
     };
   }
-  componentDidMount() {
-    ForgotPasswordSchema.subscribe(
-      success => this.setState({ schema: success }),
-      error => console.log(error)
+  componentDidMount () {
+    ForgotPasswordSchema.subscribe (
+      success => this.setState ({schema: success}),
+      error => console.log (error)
     );
   }
-  render() {
+  render () {
     return (
       <div>
         <div className="text-center">
           {this.state.loading ? <LoadingIndicator /> : null}
         </div>
-        <Form
+        <LiForm
           schema={this.state.schema}
           onSubmit={forgot_password}
+          baseForm={CustomForm}
           headline="Forgot Password?"
           buttonText="Send"
           buttonWidth="240"

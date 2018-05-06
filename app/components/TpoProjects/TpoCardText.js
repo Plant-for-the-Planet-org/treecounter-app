@@ -1,5 +1,6 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+
 import * as constants from '../../SupportedLanguages/en';
 
 const TpoCardText = props => {
@@ -51,7 +52,8 @@ const TpoCardText = props => {
 
 TpoCardText.propTypes = {
   name: PropTypes.any.isRequired,
-  cardtext: PropTypes.any.isRequired
+  cardtext: PropTypes.any.isRequired,
+  tponame: PropTypes.string.isRequired
 };
 
 export default TpoCardText;

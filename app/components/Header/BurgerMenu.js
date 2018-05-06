@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+
 import {
   openSideNavAction,
   closeSideNavAction,
@@ -33,3 +35,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(null, mapDispatchToProps)(BurgerMenu);
+
+BurgerMenu.propTypes = {
+  toggleSideNavAction: PropTypes.func.isRequired
+};

@@ -1,47 +1,48 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import PropTypes from 'prop-types';
 
 // Images
 import SideMenuImage from '../../web/images/side_menu_image.png';
 
 // Actions
 import * as Sidebar from '../actions/menuAction';
-import { logoutUser } from '../actions/authActions';
+import {logoutUser} from '../actions/authActions';
 
 class Menu extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super ();
     this.state = {
-      data: []
+      data: [],
     };
   }
 
-  componentDidMount() {
-    this.fetchAndSetMenuState();
+  componentDidMount () {
+    this.fetchAndSetMenuState ();
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate (prevProps) {
     if (prevProps.loggedIn !== this.props.loggedIn && this.props.loggedIn)
-      this.fetchAndSetMenuState();
+      this.fetchAndSetMenuState ();
   }
 
-  fetchAndSetMenuState() {
-    Sidebar.MenuAction(this.props.loggedIn)
-      .then(({ data }) => {
-        this.setState({ data: data });
-        console.log('Recieved data for menu- ', data);
+  fetchAndSetMenuState () {
+    Sidebar.MenuAction (this.props.loggedIn)
+      .then (({data}) => {
+        this.setState ({data: data});
+        console.log ('Recieved data for menu- ', data);
       })
-      .catch(error => {
+      .catch (error => {
         if (error.response.status === 401) {
-          console.log('OOPS! JWT Token Expired');
-          this.props.logoutUser();
+          console.log ('OOPS! JWT Token Expired');
+          this.props.logoutUser ();
         }
       });
   }
 
-  sideNavImage() {
+  sideNavImage () {
     return (
       <div className="app-container__sidenav--image">
         <img src={SideMenuImage} />
@@ -49,34 +50,32 @@ class Menu extends Component {
     );
   }
 
-  render() {
-    console.log('Menu object', this.state.data);
+  render () {
+    console.log ('Menu object', this.state.data);
     return (
       <div
         className={
           'app-container__sidenav ' + (this.props.isOpen ? 'open' : '')
         }
       >
-        {this.sideNavImage()}
-        {this.state.data.map(element => (
+        {this.sideNavImage ()}
+        {this.state.data.map (element => (
           <div key={'div' + element.sequence}>
             <span className="app-container__sidenav--heading">
               {element.caption}
             </span>
             <ul className="app-container__sidenav--list" key={element.sequence}>
-              {element.menu_items.map(
+              {element.menu_items.map (
                 menuItem =>
-                  menuItem.enabled ? (
-                    <li key={'' + element.sequence + menuItem.sequence}>
-                      <i className="material-icons">folder_open</i>
-                      <Link to={menuItem.uri}>{menuItem.caption}</Link>
-                    </li>
-                  ) : (
-                    <li key={'' + element.sequence + menuItem.sequence}>
-                      <i className="material-icons">folder_open</i>
-                      <a>{menuItem.caption}</a>
-                    </li>
-                  )
+                  menuItem.enabled
+                    ? <li key={'' + element.sequence + menuItem.sequence}>
+                        <i className="material-icons">folder_open</i>
+                        <Link to={menuItem.uri}>{menuItem.caption}</Link>
+                      </li>
+                    : <li key={'' + element.sequence + menuItem.sequence}>
+                        <i className="material-icons">folder_open</i>
+                        <a>{menuItem.caption}</a>
+                      </li>
               )}
             </ul>
           </div>
@@ -87,11 +86,17 @@ class Menu extends Component {
 }
 
 const mapStateToProps = state => ({
-  isOpen: state.sideNav.open
+  isOpen: state.sideNav.open,
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ logoutUser }, dispatch);
+  return bindActionCreators ({logoutUser}, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default connect (mapStateToProps, mapDispatchToProps) (Menu);
+
+Menu.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+};

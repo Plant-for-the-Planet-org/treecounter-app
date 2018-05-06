@@ -37,7 +37,8 @@ const DonateTreesCarousel = props => {
 
 DonateTreesCarousel.propTypes = {
   carouselClass: PropTypes.string.isRequired,
-  id: PropTypes.any
+  id: PropTypes.any,
+  children: PropTypes.node.isRequired
 };
 
 export default DonateTreesCarousel;

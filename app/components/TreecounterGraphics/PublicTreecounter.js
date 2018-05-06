@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+import LoadingIndicator from '../Common/LoadingIndicator';
 import TPOComponent from '../TpoProjects/TPOComponent';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from './TreecounterGraphicsText';
 
 class SearchUser extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       id: '',
       svgData: {},
@@ -21,14 +23,6 @@ class SearchUser extends Component {
       dispatch,
       match: { params }
     } = props;
-    let tpoState = false;
-    // Check if its a TPO
-    for (let key in this.props.userTpos) {
-      if (key === params.userId) {
-        tpoState = true;
-        break;
-      }
-    }
     // Call Search API
 
     dispatch(treecounterLookupAction(params.treecounterId))
@@ -43,7 +37,7 @@ class SearchUser extends Component {
             community: treecounter.count_community,
             personal: treecounter.count_personal
           },
-          displayName: treecounterId.display_name,
+          displayName: treecounter.display_name,
           isTpo: 'tpo' === userProfile.type,
           id: treecounter.id
         });
@@ -76,22 +70,22 @@ class SearchUser extends Component {
             </div>
           </div>
         ) : (
-          <div className="search-container__header sidenav-wrapper">
-            <i className="material-icons">account_circle</i>
-            <div>
-              <span>Individual</span>
-              <h4>{this.state.displayName}</h4>
+            <div className="search-container__header sidenav-wrapper">
+              <i className="material-icons">account_circle</i>
+              <div>
+                <span>Individual</span>
+                <h4>{this.state.displayName}</h4>
+              </div>
             </div>
-          </div>
-        )}
+          )}
         <div className="search-container__content sidenav-wrapper">
           <div className="canvasContainer flex-column">
             <SvgContainer {...this.state.svgData} />
             {this.props.treecounterData === null ? (
               <LoadingIndicator />
             ) : (
-              <TreecounterGraphicsText treecounterData={this.state.svgData} />
-            )}
+                <TreecounterGraphicsText treecounterData={this.state.svgData} />
+              )}
           </div>
           {this.state.ifTpo ? <TPOComponent id={this.state.id} /> : null}
         </div>
@@ -100,7 +94,7 @@ class SearchUser extends Component {
   }
 }
 
-const mapStateToProps = function(state) {
+const mapStateToProps = function (state) {
   console.log('Store updated - Search', state);
   return {
     userTpos: state.entities.tpo
@@ -108,3 +102,14 @@ const mapStateToProps = function(state) {
 };
 
 export default connect(mapStateToProps)(SearchUser);
+
+import PropTypes from 'prop-types';
+SearchUser.propTypes = {
+  userTpos: PropTypes.object.isRequired,
+  treecounterData: PropTypes.object.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      userId: PropTypes.number,
+    }),
+  }).isRequired,
+};

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { selectPlantProjectIdAction } from '../../actions/selectPlantProjectIdAction';
 import { Link } from 'react-router-dom';
 import * as constants from '../../SupportedLanguages/en';
+import PropTypes from 'prop-types';
 
 const DonateTreesCardFooter = props => {
   const { selectPlantProjectIdAction, value } = props;
@@ -33,3 +34,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(null, mapDispatchToProps)(DonateTreesCardFooter);
+
+DonateTreesCardFooter.propTypes = {
+  selectPlantProjectIdAction: PropTypes.func,
+  value: PropTypes.object
+};

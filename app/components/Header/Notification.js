@@ -3,8 +3,8 @@ import { NotificationAction } from '../../actions/notificationAction';
 import renderHTML from 'react-render-html';
 
 class Notification extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       loading: true,
       schema: {}
@@ -37,10 +37,10 @@ class Notification extends Component {
     return this.state.loading ? (
       <ul style={{ width: '244px' }} />
     ) : (
-      <ul className="notification-popover">
-        {this.NotificationDisplay(this.state.schema)}
-      </ul>
-    );
+        <ul className="notification-popover">
+          {this.NotificationDisplay(this.state.schema)}
+        </ul>
+      );
   }
 }
 

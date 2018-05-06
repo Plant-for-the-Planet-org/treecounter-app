@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { activePlantProjectPerTPO } from './activePlantProjectPerTPO';
 
 const ActivePlantProjectData = props => {
@@ -38,7 +38,8 @@ const ActivePlantProjectData = props => {
 
 ActivePlantProjectData.propTypes = {
   userTpos: PropTypes.any.isRequired,
-  plantProjects: PropTypes.any.isRequired
+  plantProjects: PropTypes.any.isRequired,
+  id: PropTypes.number.isRequired
 };
 
 export default ActivePlantProjectData;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import NumberToWords from 'number-to-words';
 
 import {
@@ -11,8 +10,8 @@ import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
 
 class Trillion extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       svgData: {},
       displayName: '',
@@ -20,7 +19,7 @@ class Trillion extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     trillionCampaign()
       .then(({ data }) => {
         this.setState({
@@ -48,7 +47,7 @@ class Trillion extends Component {
       .split(' ')
       .slice(0, 2)
       .join(' ')
-      .replace(/\,/g, '');
+      .replace(/,/g, '');
   }
 
   render() {
@@ -98,29 +97,6 @@ class Trillion extends Component {
               </span>
             </div>
           </div>
-          {/* <div className="circle-inside">
-          <div className="circle-headline">
-		        <div className="media">
-			        <img className="media-object" src="/client108/images/baum_versprochen.png" alt="Smiley face" />
-                <div className="media-body">
-                  <p className="media-title">Target {this.propsctargetYear}</p>
-                  <p className="media-value">{this.state.svgData.target}</p>
-                </div>
-            </div>
-            <div className="media">
-              <img className="media-object" src="/client108/images/baum.png" alt="Smiley face" />
-                  <div className="media-body">
-                    <p className="media-title">Existing trees  0</p>
-                  </div>
-            </div>
-            <div className="media">
-              <img className="media-object" src="/client108/images/baum.png" alt="Smiley face" />
-                <div className="media-body">
-                  <p className="media-title">Planted trees {this.state.svgData.planted}</p>
-                </div>
-            </div>
-          </div>
-        </div>  */}
         </div>
       </div>
     );

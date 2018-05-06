@@ -5,18 +5,20 @@ import PropTypes from 'prop-types';
 import { plantProjectsSelector } from '../../selectors/index';
 import ActivePlantProject from './ActivePlantProject';
 
-const TPOComponent = ({ userTpos, plantProjects, id }) => (<div>
-  <div className="tpo_box">
-    <p className="firstHeadline">WWF</p>
-    <p>Plant for you</p>
-    <hr />
-    <ActivePlantProject
-      userTpos={userTpos}
-      plantProjects={plantProjects}
-      id={id}
-    />
+const TPOComponent = ({ userTpos, plantProjects, id }) => (
+  <div>
+    <div className="tpo_box">
+      <p className="firstHeadline">WWF</p>
+      <p>Plant for you</p>
+      <hr />
+      <ActivePlantProject
+        userTpos={userTpos}
+        plantProjects={plantProjects}
+        id={id}
+      />
+    </div>
   </div>
-</div>);
+);
 
 const mapStateToProps = state => {
   return {

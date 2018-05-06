@@ -63,7 +63,9 @@ export function refreshToken() {
   const request = axios.post(
     getApiRoute('api_token_refresh'),
     {},
-    { headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` } }
+    {
+      headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` }
+    }
   );
 
   return dispatch => {
@@ -85,7 +87,7 @@ export function refreshToken() {
       .then(token => {
         dispatch(loadLoginData(token));
       })
-      .catch(() => { });
+      .catch(() => {});
   };
 }
 

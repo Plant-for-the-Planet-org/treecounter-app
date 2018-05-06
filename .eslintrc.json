@@ -1,8 +1,6 @@
 {
   "parser": "babel-eslint",
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -15,14 +13,13 @@
     "browser": true,
     "commonjs": true,
     "es6": true,
-    "jquery": true
+    "jquery": true,
+    "node": true
   },
   "rules": {
     "eol-last": 2,
     "jsx-quotes": 2,
-    "no-underscore-dangle": [
-      0
-    ],
+    "no-underscore-dangle": [0],
     "no-unused-vars": 2,
     "no-undef": 2,
     "no-var": 2,
@@ -48,9 +45,6 @@
         "allowTemplateLiterals": true
       }
     ],
-    "strict": [
-      2,
-      "global"
-    ]
+    "strict": [2, "global"]
   }
 }

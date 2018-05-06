@@ -1,5 +1,5 @@
 export const formStrings = {
-  forgotPassword: 'Forgot Password?',  
+  forgotPassword: 'Forgot Password?',
   createAccount: 'New User? ',
   register: 'Register',
   seeMore: 'see more',
@@ -18,7 +18,8 @@ export const formStrings = {
   BIC: 'BIC',
   creditCard: 'Credit Card',
   creditCardMessage: '(We accept Visa and MasterCard for 15,00 € and above.)',
-  donateTreesMessage: 'Any trees donated will count towards your personal tree counter.',
+  donateTreesMessage:
+    'Any trees donated will count towards your personal tree counter.',
   selectDifferentProject: 'Select Different Project',
   costPerTree: 'CostPerTree',
   project: 'Project',
@@ -35,7 +36,7 @@ export const formStrings = {
   survival_rate: 'Survival Rate',
   singleTree: 'Single Tree',
   severalTrees: 'Several Trees',
-  registerFurther: "REGISTER FURTHER TREES",
+  registerFurther: 'REGISTER FURTHER TREES',
   DONATETREES: 'DONATE TREES',
   noContributions: 'No Contributions'
-}
+};

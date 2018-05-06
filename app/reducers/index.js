@@ -1,5 +1,5 @@
-import {combineReducers} from 'redux';
-import {reducer as formReducer} from 'redux-form';
+import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
 import authenticationReducer from './authenticationReducer';
 import currentUserProfileIdReducer from './currentUserProfileIdReducer';
@@ -19,5 +19,5 @@ export default combineReducers({
   baseUrl: (state = {}) => state,
   serverName: (state = {}) => state,
   location: (state = {}) => state,
-  serverRendered: (state = {}) => state,
+  serverRendered: (state = {}) => state
 });

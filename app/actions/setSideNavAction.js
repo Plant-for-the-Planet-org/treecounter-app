@@ -2,7 +2,7 @@ import {
   openSideNav,
   closeSideNav,
   toggleSideNav
-} from "../reducers/sideNavReducer";
+} from '../reducers/sideNavReducer';
 
 function openSideNavAction() {
   return dispatch => {

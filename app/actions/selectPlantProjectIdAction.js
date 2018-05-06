@@ -1,4 +1,4 @@
-import { setSelectedPlantProjectId } from "../reducers/selectedPlantProjectIdReducer";
+import { setSelectedPlantProjectId } from '../reducers/selectedPlantProjectIdReducer';
 
 export function selectPlantProjectIdAction(id) {
   return dispatch => {

@@ -1,19 +1,19 @@
 export const postDonationContributionForm = {
-  name: "donationContribution_post",
-  method: "POST"
+  name: 'donationContribution_post',
+  method: 'POST'
 };
 
 export const getDonationContributionForm = {
-  name: "donationContribution_get",
-  method: "GET"
+  name: 'donationContribution_get',
+  method: 'GET'
 };
 
 export const getAuthenticatedMenu = {
-  name: "data_menu_get",
-  method: "GET"
+  name: 'data_menu_get',
+  method: 'GET'
 };
 
 export const getUnAuthenticatedMenu = {
-  name: "public_menu_get",
-  method: "GET"
-}
+  name: 'public_menu_get',
+  method: 'GET'
+};

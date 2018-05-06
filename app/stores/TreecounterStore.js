@@ -1,5 +1,5 @@
-import {createStore, applyMiddleware, compose} from "redux";
-import thunkMiddleware from "redux-thunk";
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 
 import reducers from "../reducers";
 import {initialState as entitiesState} from "../reducers/entitiesReducer";
@@ -19,9 +19,8 @@ import logger from 'redux-logger';
  * @returns {Store}
  */
 export default function configureStore(props, context) {
-
-  const {locale, mediaPath} = props;
-  const {scheme, host, base: baseUrl, location} = context;
+  const { locale, mediaPath } = props;
+  const { scheme, host, base: baseUrl, location } = context;
 
   const initialState = {
     serverName: `${scheme}://${host}`,
@@ -35,7 +34,9 @@ export default function configureStore(props, context) {
   };
 
   // use devtools if we are in a browser and the extension is enabled
-  const composeEnhancers = typeof window !== 'undefined' && (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose);
+  const composeEnhancers =
+    typeof window !== 'undefined' &&
+    (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose);
 
   const middlewares = [thunkMiddleware];
   if ((process.env.ENV || process.env.NODE_ENV) === 'development') {

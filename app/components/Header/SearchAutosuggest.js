@@ -1,46 +1,44 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Autosuggest from 'react-autosuggest';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import match from 'autosuggest-highlight/match';
-import parse from 'autosuggest-highlight/parse';
-import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {Link} from 'react-router-dom';
 
-import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
+import {treecounterLookupAction} from '../../actions/treecounterLookupAction';
 
-function escapeRegexCharacters(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function escapeRegexCharacters (str) {
+  return str.replace (/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 const getSuggestions = value => {
-  var bodyFormData = new FormData();
-  var jdata = {};
-  bodyFormData.set('q', value.trim());
+  let bodyFormData = new FormData ();
+  let jdata = {};
+  bodyFormData.set ('q', value.trim ());
 
-  var xhttp = new XMLHttpRequest();
-  xhttp.open(
+  let xhttp = new XMLHttpRequest ();
+  xhttp.open (
     'POST',
     'https://launch.trilliontreecampaign.org/app_dev.php/search2',
     false
   ); // had to make a sync request until we find a proper async solution
-  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  xhttp.onreadystatechange = function() {
+  xhttp.setRequestHeader ('Content-type', 'application/x-www-form-urlencoded');
+  xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       jdata = this.responseText;
     }
   };
 
-  xhttp.send('q=' + value.trim());
+  xhttp.send ('q=' + value.trim ());
 
-  const escapedValue = escapeRegexCharacters(value.trim());
+  const escapedValue = escapeRegexCharacters (value.trim ());
   if (escapedValue === '') {
     return [];
   }
 
-  const regex = new RegExp('\\b' + escapedValue, 'i');
-  var jdata = JSON.parse(jdata);
+  const regex = new RegExp ('\\b' + escapedValue, 'i');
+  jdata = JSON.parse (jdata);
 
-  return jdata.filter(person => regex.test(getSuggestionValue(person)));
+  return jdata.filter (person => regex.test (getSuggestionValue (person)));
 };
 
 const renderSuggestion = suggestion => {
@@ -54,7 +52,7 @@ const renderSuggestion = suggestion => {
         fontWeight: '300',
         fontSize: '16px',
         display: 'flex',
-        padding: '10px'
+        padding: '10px',
       }}
     >
       <span>{suggestion.name}</span>
@@ -65,44 +63,44 @@ const renderSuggestion = suggestion => {
 const getSuggestionValue = suggestion => `${suggestion.name}`;
 
 class SearchAutosuggest extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super ();
 
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
     };
   }
 
-  onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue
+  onChange = (event, {newValue}) => {
+    this.setState ({
+      value: newValue,
     });
   };
 
-  onSuggestionsFetchRequested = ({ value }) => {
-    setTimeout(() => {
+  onSuggestionsFetchRequested = ({value}) => {
+    setTimeout (() => {
       if (value === this.state.value) {
-        this.setState({
-          suggestions: getSuggestions(value)
+        this.setState ({
+          suggestions: getSuggestions (value),
         });
       }
     }, 500);
   };
 
   onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
+    this.setState ({
+      suggestions: [],
     });
   };
 
-  render() {
-    const { value, suggestions } = this.state;
+  render () {
+    const {value, suggestions} = this.state;
     const inputProps = {
       placeholder: 'Type a name',
       value,
       onChange: this.onChange,
-      className: 'form-control search_text'
+      className: 'form-control search_text',
     };
 
     return (
@@ -120,7 +118,7 @@ class SearchAutosuggest extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ treecounterLookupAction }, dispatch);
+  return bindActionCreators ({treecounterLookupAction}, dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(SearchAutosuggest);
+export default connect (null, mapDispatchToProps) (SearchAutosuggest);

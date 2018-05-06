@@ -17,8 +17,8 @@ export function login(data) {
     request
       .then(res => {
         const token = res.data.token;
-        if (localStorage.getItem('jwt') !== token) {
-          localStorage.setItem('jwt', token);
+        if (window.localStorage.getItem('jwt') !== token) {
+          window.localStorage.setItem('jwt', token);
         }
         // merge token data and custom data
         const payload = {
@@ -63,15 +63,17 @@ export function refreshToken() {
   const request = axios.post(
     getApiRoute('api_token_refresh'),
     {},
-    { headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` } }
+    {
+      headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` }
+    }
   );
 
   return dispatch => {
     request
       .then(res => {
         const token = res.data.token;
-        if (localStorage.getItem('jwt') !== token) {
-          localStorage.setItem('jwt', token);
+        if (window.localStorage.getItem('jwt') !== token) {
+          window.localStorage.setItem('jwt', token);
         }
         // merge token data and custom data
         const payload = {
@@ -92,7 +94,7 @@ export function refreshToken() {
 export function logoutUser() {
   return dispatch => {
     debug('Logging out');
-    localStorage.clear();
+    window.localStorage.clear();
     dispatch(setUserLogOut());
     dispatch(setCurrentUserProfileId(null));
     history.push(getLocalRoute('app_homepage'));
@@ -113,7 +115,7 @@ export function forgot_password(data) {
 }
 
 export function reset_password(data) {
-  data.token = localStorage.getItem('jwt');
+  data.token = window.localStorage.getItem('jwt');
   axios
     .post(getApiRoute('auth_resetPassword_post'), data)
     .then(res => {

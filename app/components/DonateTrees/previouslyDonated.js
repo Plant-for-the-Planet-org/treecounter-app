@@ -11,7 +11,7 @@ const PreviouslyDonated = props => {
     if (NoProjects == -1) {
       show.push(donated);
     } else {
-      for (var key in donated) {
+      for (let key in donated) {
         if (key > NoProjects - 1) {
           break;
         } else {

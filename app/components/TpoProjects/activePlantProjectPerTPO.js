@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TpoCardText from './TpoCardText';
 
 const activePlantProjectPerTPO = (userTpos, plantProjects, treeCountid) => {

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import * as constants from '../../SupportedLanguages/en';
 
 class SearchProjects extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       ProjectName: '',
       Price: '',
@@ -176,3 +177,9 @@ class SearchProjects extends Component {
 }
 
 export default SearchProjects;
+
+SearchProjects.propTypes = {
+  plantProjects: PropTypes.array.isRequired,
+  userTpos: PropTypes.object.isRequired,
+  style: PropTypes.object.isRequired
+};

@@ -12,7 +12,7 @@ export function Payment(paymentInfo, plantProjectId) {
     }),
     data: paymentInfo,
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      Authorization: `Bearer ${window.localStorage.getItem('jwt')}`
     }
   })
     .then(({ data }) => {

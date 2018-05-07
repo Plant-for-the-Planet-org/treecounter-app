@@ -2,8 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
 import reducers from '../reducers/reducer';
-import { initialState as entitiesState } from '../reducers/entitiesReducer';
 import { drawerNavMiddleware } from '../helpers/reduxHelpers.native';
+import logger from 'redux-logger';
 /**
  * This function will be called in App.js by either:
  *   1. ReactOnRails.registerStore({ TreecounterStore: configureStore }) and receive props and context created by Symfony
@@ -25,9 +25,15 @@ export default function configureStore(props, context) {
     typeof window !== 'undefined' &&
     (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose);
 
+  const middlewares = [thunkMiddleware];
+  if (process.env.NODE_ENV === 'development') {
+    middlewares.push(logger);
+  }
+  middlewares.push(drawerNavMiddleware);
+
   return createStore(
     reducers,
     initialState,
-    composeEnhancers(applyMiddleware(thunkMiddleware, drawerNavMiddleware))
+    composeEnhancers(applyMiddleware(...middlewares))
   );
 }

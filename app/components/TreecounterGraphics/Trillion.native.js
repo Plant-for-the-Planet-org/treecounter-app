@@ -1,6 +1,12 @@
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  SafeAreaView
+} from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -9,16 +15,7 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu'
 });
 
-class SideNavigationMenu extends Component {
-  render() {
-    return (
-      <View style={{ height: 500 }}>
-        <Text>Home</Text>
-      </View>
-    );
-  }
-}
-class Test extends Component {
+export default class Trillion extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,15 +47,3 @@ const styles = StyleSheet.create({
     marginBottom: 5
   }
 });
-
-export const AppDrawerNavigator = DrawerNavigator(
-  {
-    Home: {
-      screen: Test
-    }
-  },
-  {
-    gesturesEnabled: false,
-    contentComponent: SideNavigationMenu
-  }
-);

@@ -1,4 +1,4 @@
-import { AppDrawerNavigator } from '../components/Navigators/DrawerConfig';
+import { AppDrawerNavigator } from '../components/Navigators/AppDrawerNavigator';
 import { NavigationActions } from 'react-navigation';
 
 const initialDrawerState = AppDrawerNavigator.router.getStateForAction(

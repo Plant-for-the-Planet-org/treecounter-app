@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Platform, StyleSheet, Text, View } from 'react-native';
 import React, { Component } from 'react';
 import { addNavigationHelpers } from 'react-navigation';
-import { AppDrawerNavigator } from './DrawerConfig';
+import { AppDrawerNavigator } from '../../components/Navigators/AppDrawerNavigator';
 import { drawerRootListener as addListener } from '../../helpers/reduxHelpers.native';
 
 class AppDrawerNavigatorContainer extends Component {
@@ -22,7 +21,6 @@ class AppDrawerNavigatorContainer extends Component {
           addListener
         })}
       />
-      //SAVE AN RUN
     );
   }
 }

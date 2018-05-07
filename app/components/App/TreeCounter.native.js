@@ -1,19 +1,10 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * Root Component of both Android/iOS app
+ * This component is just rendering App Drawer component which provides thr side navigation menu screen stack
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import AppDrawerNavigatorContainer from '../Navigators/AppDrawerNavigators';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu'
-});
+import AppDrawerNavigatorContainer from '../../containers/Navigators/AppDrawerNavigatorContainer';
 
 export default class App extends Component {
   render() {

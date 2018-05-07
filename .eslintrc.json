@@ -14,7 +14,8 @@
     "commonjs": true,
     "es6": true,
     "jquery": true,
-    "react-native/react-native": true
+    "react-native/react-native": true,
+    "node": true
   },
   "rules": {
     "eol-last": 2,

@@ -1,7 +1,7 @@
 import { setSupportedTreecounterId } from '../reducers/supportedTreecounterIdReducer';
 
-export function supportTreecounterAction(id) {
+export function supportTreecounterAction(treecounter) {
   return dispatch => {
-    dispatch(setSupportedTreecounterId(id));
+    dispatch(setSupportedTreecounterId(treecounter));
   };
 }

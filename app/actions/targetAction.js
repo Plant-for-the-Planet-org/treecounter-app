@@ -21,13 +21,7 @@ export function SubmitTarget(treecounter, treecounterId) {
         headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` }
       })
       .then(res => {
-        const treecounterData = res.data;
-        // make sure key 'targetComment' is present in merge data even it has not been returned in response
-        treecounterData.target_comment =
-          'target_comment' in treecounterData
-            ? treecounterData.target_comment
-            : null;
-        dispatch(mergeEntities(normalize(treecounterData, treecounterSchema)));
+        dispatch(mergeEntities(normalize(res.data, treecounterSchema)));
         history.push(getLocalRoute('app_userHome'));
       })
       .catch(error => {

@@ -4,6 +4,7 @@ import { reducer as formReducer } from 'redux-form';
 import authenticationReducer from './authenticationReducer';
 import currentUserProfileIdReducer from './currentUserProfileIdReducer';
 import selectedPlantProjectIdReducer from './selectedPlantProjectIdReducer';
+import supportedTreecounterIdReducer from './supportedTreecounterIdReducer';
 import entitiesReducer from './entitiesReducer';
 import sideNavReducer from './sideNavReducer';
 
@@ -13,6 +14,7 @@ export default combineReducers({
   authentication: authenticationReducer,
   currentUserProfileId: currentUserProfileIdReducer,
   selectedPlantProjectId: selectedPlantProjectIdReducer,
+  supportedTreecounterId: supportedTreecounterIdReducer,
   sideNav: sideNavReducer,
   mediaPath: (state = {}) => state,
   locale: (state = {}) => state,

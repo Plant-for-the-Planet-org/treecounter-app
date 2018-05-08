@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --hot --config ./web/webpack.config.js",
-    "build":
-      "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail",
-    "build:server":
-      "webpack --config ./web/config/webpack.server.config.js --progress --profile --bail",
+    "build": "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail",
+    "build:server": "webpack --config ./web/config/webpack.server.config.js --progress --profile --bail",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js}": ["prettier --write", "git add"]
+    "*.{js}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "autosuggest-highlight": "^3.1.1",
@@ -26,11 +27,14 @@
     "react-autosuggest": "^9.3.4",
     "react-bootstrap": "^0.32.1",
     "react-native": "0.55.3",
+    "react-navigation": "^1.1.2",
+    "react-navigation-redux-helpers": "^1.0.5",
     "react-notifications": "^1.4.3",
     "react-redux": "^5.0.6",
     "react-render-html": "^0.6.0",
     "react-router-dom": "^4.2.2",
     "redux-actions": "^2.3.2",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "rxjs": "^5.5.6"
@@ -48,6 +52,7 @@
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-react-native": "^3.2.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.8",
     "html-loader": "^0.5.5",

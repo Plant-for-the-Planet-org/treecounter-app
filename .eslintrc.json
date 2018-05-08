@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "plugins": ["react"],
+  "plugins": ["react", "react-native"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -14,6 +14,7 @@
     "commonjs": true,
     "es6": true,
     "jquery": true,
+    "react-native/react-native": true,
     "node": true
   },
   "rules": {
@@ -23,6 +24,10 @@
     "no-unused-vars": 2,
     "no-undef": 2,
     "no-var": 2,
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 2,
+    "react-native/no-color-literals": 2,
     "react/display-name": 0,
     "react/jsx-boolean-value": 0,
     "react/jsx-no-undef": 2,

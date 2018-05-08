@@ -1,18 +1,18 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import '../../sass/treecounter.scss';
 import PropTypes from 'prop-types';
-import {debug} from '../../debug/index';
+import { debug } from '../../debug/index';
 // import TargetComment from '../TreecounterGraphics/TargetComment';
 // import PlantDetails from '../TreecounterGraphics/PlantDetails';
 
 export default class SvgContainer extends Component {
-  constructor (props) {
-    debug ('constructing SvgContainer with props: ', props);
-    console.log ('########## constructor');
-    super (props);
-    const {exposeMissing} = this.props;
+  constructor(props) {
+    debug('constructing SvgContainer with props: ', props);
+    console.log('########## constructor');
+    super(props);
+    const { exposeMissing } = this.props;
 
     //------------------------------------------------------------------------------------------------------------------
     // define circle sections
@@ -22,8 +22,8 @@ export default class SvgContainer extends Component {
     this.sections = {
       planted: {
         type: 'tree',
-        group: 'g1',
-      },
+        group: 'g1'
+      }
       // community: {
       //   type: "tree",
       //   group: "g2"
@@ -33,46 +33,46 @@ export default class SvgContainer extends Component {
     if (exposeMissing) {
       this.sections['target'] = {
         type: 'pot',
-        group: 'default',
+        group: 'default'
       };
     }
 
     this.renderedTreeIds = [];
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
-    console.log ('########## shouldComponentUpdate');
-    console.log (nextProps, nextState);
-    console.log (this.props, this.state);
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('########## shouldComponentUpdate');
+    console.log(nextProps, nextState);
+    console.log(this.props, this.state);
 
     return true;
   }
 
-  componentWillReceiveProps (nextProps) {
-    console.log ('########## componentWillReceiveProps');
+  componentWillReceiveProps(nextProps) {
+    console.log('########## componentWillReceiveProps');
 
     if (!nextProps.id) {
       return;
     }
 
-    const total = Math.max (nextProps.target, nextProps.planted);
-    const values = {planted: nextProps.planted, target: total};
+    const total = Math.max(nextProps.target, nextProps.planted);
+    const values = { planted: nextProps.planted, target: total };
 
-    this.renderReset ();
+    this.renderReset();
 
     //------------------------------------------------------------------------------------------------------------------
     // build a map with all SVG d-attributes indexed by treeId
     const prefix = 't-stem-';
     let svgMap = {};
-    this.getAllTreeIds ().map (function (treeId) {
-      svgMap[treeId] = ReactDOM.findDOMNode (
+    this.getAllTreeIds().map(function(treeId) {
+      svgMap[treeId] = ReactDOM.findDOMNode(
         this.refs[prefix + treeId]
-      ).getAttribute ('d');
+      ).getAttribute('d');
     }, this);
 
     //------------------------------------------------------------------------------------------------------------------
     // determine for each section's tree value the range of angles in degrees of a 360° circle
-    const sectionAngleDegreeRanges = this.getSectionAngleRanges (
+    const sectionAngleDegreeRanges = this.getSectionAngleRanges(
       this.sections,
       values,
       total,
@@ -81,58 +81,58 @@ export default class SvgContainer extends Component {
 
     //------------------------------------------------------------------------------------------------------------------
     // get section name for each treeId
-    const treeSectionNames = Object.values (svgMap) // treeId => SVG::d
-      .map (this.determineAngle ({x: 425, y: 0}, {x: 425, y: 425})) // SVG::d => angle
-      .map (this.getSectionNameForAngle (sectionAngleDegreeRanges)); // angle => sectionName
+    const treeSectionNames = Object.values(svgMap) // treeId => SVG::d
+      .map(this.determineAngle({ x: 425, y: 0 }, { x: 425, y: 425 })) // SVG::d => angle
+      .map(this.getSectionNameForAngle(sectionAngleDegreeRanges)); // angle => sectionName
 
-    const treeIds = Object.keys (svgMap);
+    const treeIds = Object.keys(svgMap);
 
     //------------------------------------------------------------------------------------------------------------------
     // group all treeIds by sectionName
     const sectionTrees = {};
-    treeSectionNames.map (function (sectionName, idx) {
+    treeSectionNames.map(function(sectionName, idx) {
       if (!sectionTrees[sectionName]) {
         sectionTrees[sectionName] = [];
       }
-      sectionTrees[sectionName].push (treeIds[idx]);
+      sectionTrees[sectionName].push(treeIds[idx]);
     });
 
-    this.renderSections (sectionTrees, values, total); // sectionTrees = { planted: ['23', '24', ... ], community: ['12','13,'18',...]}
+    this.renderSections(sectionTrees, values, total); // sectionTrees = { planted: ['23', '24', ... ], community: ['12','13,'18',...]}
   }
 
   //********************************************************************************************************************
   // RESET
   //********************************************************************************************************************
-  renderReset () {
-    console.log ('##### renderSections');
+  renderReset() {
+    console.log('##### renderSections');
     //------------------------------------------------------------------------------------------------------------------
     // define class names for all trees and pots, set all trees visible, pots hidden
-    this.getAllTreeIds ().map (function (treeId) {
-      this.resetType (treeId, 'p', 'hide', [
+    this.getAllTreeIds().map(function(treeId) {
+      this.resetType(treeId, 'p', 'hide', [
         'stem',
         'shadow',
         'pot',
         'leaf1',
         'leaf2',
-        'leaf3',
+        'leaf3'
       ]);
-      this.resetType (treeId, 't', 'default', ['stem', 'shadow', 'crown']);
+      this.resetType(treeId, 't', 'default', ['stem', 'shadow', 'crown']);
     }, this);
   }
 
-  resetType (treeId, type, className, names) {
-    names.map (function (part) {
+  resetType(treeId, type, className, names) {
+    names.map(function(part) {
       let ref = type + '-' + part + '-' + treeId;
       let classes = type + ' ' + part + ' ' + className;
-      ReactDOM.findDOMNode (this.refs[ref]).setAttribute ('class', classes);
+      ReactDOM.findDOMNode(this.refs[ref]).setAttribute('class', classes);
     }, this);
   }
 
   //********************************************************************************************************************
   // RENDER Tees/Pots
   //********************************************************************************************************************
-  renderSections (sectionTrees, values, total) {
-    console.log ('##### renderSections');
+  renderSections(sectionTrees, values, total) {
+    console.log('##### renderSections');
     const maxTicks = 125;
     const maxAngleLength = 1477;
     const interval = 30;
@@ -144,16 +144,16 @@ export default class SvgContainer extends Component {
     //------------------------------------------------------------------------------------------------------------------
     // determine for each section's tree value the range of angles in degrees of a 1477 pixel circle
     const sectionConfigs = this.sections;
-    const sectionAngleLengthRanges = this.getSectionAngleRanges (
+    const sectionAngleLengthRanges = this.getSectionAngleRanges(
       sectionConfigs,
       values,
       total,
       maxAngleLength
     );
 
-    const timer = window.setInterval (() => {
+    const timer = window.setInterval(() => {
       currentAngleLength = currentTick / maxTicks * maxAngleLength;
-      let sectionName = this.getSectionNameForAngle (sectionAngleLengthRanges) (
+      let sectionName = this.getSectionNameForAngle(sectionAngleLengthRanges)(
         currentAngleLength
       );
 
@@ -162,7 +162,7 @@ export default class SvgContainer extends Component {
         // render last tree when section changes (might be missing due to rounding inaccuracies)
         if (lastSectionName && lastSectionName !== sectionName) {
           const sectionConfig = sectionConfigs[lastSectionName];
-          this.renderTreesById (
+          this.renderTreesById(
             sectionTrees[lastSectionName],
             sectionConfig.type,
             sectionConfig.group
@@ -171,32 +171,29 @@ export default class SvgContainer extends Component {
 
         //--------------------------------------------------------------------------------------------------------------
         // render new trees after angle increment
-        let angleLengthRange = sectionAngleLengthRanges.get (sectionName);
-        let sectionPercentageComplete = this.getSectionPercentageComplete (
+        let angleLengthRange = sectionAngleLengthRanges.get(sectionName);
+        let sectionPercentageComplete = this.getSectionPercentageComplete(
           currentAngleLength,
           angleLengthRange
         );
-        let treeIds = this.getTreeIdsFromPercentage (
+        let treeIds = this.getTreeIdsFromPercentage(
           sectionTrees[sectionName],
           sectionPercentageComplete
         );
 
-        let {type, group} = sectionConfigs[sectionName];
-        this.renderTreesById (treeIds, type, group);
+        let { type, group } = sectionConfigs[sectionName];
+        this.renderTreesById(treeIds, type, group);
 
         //--------------------------------------------------------------------------------------------------------------
         // update circle that corresponds to the section type
         const classNames = type + ' ' + group + ' circle';
-        const circleEle = document.getElementsByClassName (classNames);
+        const circleEle = document.getElementsByClassName(classNames);
         if (!circleEle.length) {
-          window.clearInterval (timer);
+          window.clearInterval(timer);
           return;
         }
-        const circle = circleEle.item (0);
-        circle.setAttribute (
-          'stroke-dasharray',
-          currentAngleLength + ', 20000'
-        );
+        const circle = circleEle.item(0);
+        circle.setAttribute('stroke-dasharray', currentAngleLength + ', 20000');
 
         lastSectionName = sectionName;
       }
@@ -205,69 +202,69 @@ export default class SvgContainer extends Component {
 
       if (currentTick > maxTicks) {
         if (null !== lastSectionName) {
-          this.renderTreesById (
+          this.renderTreesById(
             sectionTrees[lastSectionName],
             sectionConfigs[lastSectionName].type,
             sectionConfigs[lastSectionName].group
           );
         }
-        window.clearInterval (timer);
+        window.clearInterval(timer);
       }
     }, interval);
   }
 
-  getSectionAngleRanges (sectionConfig, values, total, maxAngle) {
-    console.log (
+  getSectionAngleRanges(sectionConfig, values, total, maxAngle) {
+    console.log(
       'sectionConfig, values, total, maxAngle',
       sectionConfig,
       values,
       total,
       maxAngle
     );
-    const sectionAngleRanges = new Map ();
+    const sectionAngleRanges = new Map();
     let currentMax = 0;
-    Object.keys (sectionConfig).map (
-      function (sectionName) {
-        let value = Math.round (
-          this.convertTreesToAngle (values[sectionName], total, maxAngle)
+    Object.keys(sectionConfig).map(
+      function(sectionName) {
+        let value = Math.round(
+          this.convertTreesToAngle(values[sectionName], total, maxAngle)
         );
-        sectionAngleRanges.set (sectionName, {min: currentMax, max: value});
+        sectionAngleRanges.set(sectionName, { min: currentMax, max: value });
         currentMax = value;
-      }.bind (this)
+      }.bind(this)
     );
 
     return sectionAngleRanges;
   }
 
-  getSectionPercentageComplete (currentAngleLength, angleLengthRange) {
+  getSectionPercentageComplete(currentAngleLength, angleLengthRange) {
     return (
       (currentAngleLength - angleLengthRange.min) /
       (angleLengthRange.max - angleLengthRange.min)
     );
   }
 
-  getTreeIdsFromPercentage (treeIds, percentage) {
+  getTreeIdsFromPercentage(treeIds, percentage) {
     const countIndexes = treeIds.length - 1;
-    const index = Math.round (percentage * countIndexes);
+    const index = Math.round(percentage * countIndexes);
 
-    return treeIds.slice (0, index);
+    return treeIds.slice(0, index);
   }
 
-  renderTreesById (treeIds, type, group) {
+  renderTreesById(treeIds, type, group) {
     // filter out already rendered trees
-    let newTreeIds = treeIds.filter (
-      treeId => !this.renderedTreeIds.includes (treeId)
+    let newTreeIds = treeIds.filter(
+      treeId => !this.renderedTreeIds.includes(treeId)
     );
 
-    newTreeIds.map (function (treeId) {
-      this.renderedTreeIds.push (treeId); // mark tree as rendered
-      this.setTreeStatus (treeId, type, group); // update tree state
+    newTreeIds.map(function(treeId) {
+      this.renderedTreeIds.push(treeId); // mark tree as rendered
+      this.setTreeStatus(treeId, type, group); // update tree state
     }, this);
 
-    this.forceUpdate ();
+    this.forceUpdate();
   }
 
-  convertTreesToAngle (trees, total, maxAngle) {
+  convertTreesToAngle(trees, total, maxAngle) {
     return trees / total * maxAngle;
   }
 
@@ -276,9 +273,9 @@ export default class SvgContainer extends Component {
    * @param origin point
    * @param center point
    */
-  determineAngle (origin, center) {
+  determineAngle(origin, center) {
     return svgInstruction =>
-      this.getAngle (origin, this.getCoordinate (svgInstruction), center);
+      this.getAngle(origin, this.getCoordinate(svgInstruction), center);
   }
 
   /**
@@ -286,7 +283,7 @@ export default class SvgContainer extends Component {
    *
    * @param sectionAnglesMap a Map, keys being angle values in increasing order, values being arbitrary classification strings
    */
-  getSectionNameForAngle (sectionAnglesMap) {
+  getSectionNameForAngle(sectionAnglesMap) {
     return angle => {
       for (let [key, range] of sectionAnglesMap) {
         if (range.min < angle && angle <= range.max) {
@@ -306,14 +303,12 @@ export default class SvgContainer extends Component {
    * @param c the center point
    * @returns {number}
    */
-  getAngle (p1, p2, c) {
-    const p1c = Math.sqrt (Math.pow (c.x - p1.x, 2) + Math.pow (c.y - p1.y, 2)); // p1->c (b)
-    const p2c = Math.sqrt (Math.pow (c.x - p2.x, 2) + Math.pow (c.y - p2.y, 2)); // p2->c (a)
-    const p1p2 = Math.sqrt (
-      Math.pow (p2.x - p1.x, 2) + Math.pow (p2.y - p1.y, 2)
-    ); // p1->p2 (c)
+  getAngle(p1, p2, c) {
+    const p1c = Math.sqrt(Math.pow(c.x - p1.x, 2) + Math.pow(c.y - p1.y, 2)); // p1->c (b)
+    const p2c = Math.sqrt(Math.pow(c.x - p2.x, 2) + Math.pow(c.y - p2.y, 2)); // p2->c (a)
+    const p1p2 = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2)); // p1->p2 (c)
     const angle =
-      Math.acos ((p2c * p2c + p1c * p1c - p1p2 * p1p2) / (2 * p2c * p1c)) *
+      Math.acos((p2c * p2c + p1c * p1c - p1p2 * p1p2) / (2 * p2c * p1c)) *
       (180 / Math.PI);
 
     return p2.x < c.x ? 360 - angle : angle;
@@ -324,34 +319,34 @@ export default class SvgContainer extends Component {
    * @param svgD string
    * @returns {{x: string, y: string}}
    */
-  getCoordinate (svgD) {
-    svgD = svgD.toLowerCase ();
+  getCoordinate(svgD) {
+    svgD = svgD.toLowerCase();
 
-    const minPosition = Math.min (
-      this.getCharacterPosition (svgD, 'c', 100),
-      this.getCharacterPosition (svgD, 'a', 101),
-      this.getCharacterPosition (svgD, 'v', 103),
-      this.getCharacterPosition (svgD, 'l', 102)
+    const minPosition = Math.min(
+      this.getCharacterPosition(svgD, 'c', 100),
+      this.getCharacterPosition(svgD, 'a', 101),
+      this.getCharacterPosition(svgD, 'v', 103),
+      this.getCharacterPosition(svgD, 'l', 102)
     );
-    const initialPoint = svgD.substr (1, minPosition - 1);
-    const divider = svgD.indexOf (',');
+    const initialPoint = svgD.substr(1, minPosition - 1);
+    const divider = svgD.indexOf(',');
 
-    const xAxis = initialPoint.substr (0, divider - 1);
-    const yAxis = initialPoint.substr (divider);
+    const xAxis = initialPoint.substr(0, divider - 1);
+    const yAxis = initialPoint.substr(divider);
 
-    return {x: xAxis, y: yAxis};
+    return { x: xAxis, y: yAxis };
   }
 
-  getCharacterPosition (text, character, defaultValue) {
-    const pos = Number (text.indexOf (character));
+  getCharacterPosition(text, character, defaultValue) {
+    const pos = Number(text.indexOf(character));
 
-    return pos <= 0 || isNaN (pos) ? defaultValue : pos;
+    return pos <= 0 || isNaN(pos) ? defaultValue : pos;
   }
 
-  getAllTreeIds () {
-    return new Array (72)
-      .fill (0)
-      .map ((v, i) => ('00' + (i + 1).toString (10)).slice (-2));
+  getAllTreeIds() {
+    return new Array(72)
+      .fill(0)
+      .map((v, i) => ('00' + (i + 1).toString(10)).slice(-2));
   }
 
   //********************************************************************************************************************
@@ -363,55 +358,55 @@ export default class SvgContainer extends Component {
    * @param type string either tree|pot
    * @param group string one of default|g1|g2|...
    */
-  setTreeStatus (treeNumber, type, group) {
+  setTreeStatus(treeNumber, type, group) {
     switch (type) {
       case 'tree':
-        this.hidePot (treeNumber);
-        this.showTree (treeNumber, group);
+        this.hidePot(treeNumber);
+        this.showTree(treeNumber, group);
         break;
 
       case 'pot':
-        this.showPot (treeNumber, group);
-        this.hideTree (treeNumber);
+        this.showPot(treeNumber, group);
+        this.hideTree(treeNumber);
         break;
     }
   }
 
-  showTree (treeNumber, group) {
-    this.updateElements (treeNumber, group, 't');
+  showTree(treeNumber, group) {
+    this.updateElements(treeNumber, group, 't');
   }
 
-  hideTree (treeNumber) {
-    this.updateElements (treeNumber, 'hide', 't');
+  hideTree(treeNumber) {
+    this.updateElements(treeNumber, 'hide', 't');
   }
 
-  showPot (treeNumber, group) {
-    this.updateElements (treeNumber, group, 'p');
+  showPot(treeNumber, group) {
+    this.updateElements(treeNumber, group, 'p');
   }
 
-  hidePot (treeNumber) {
-    this.updateElements (treeNumber, 'hide', 'p');
+  hidePot(treeNumber) {
+    this.updateElements(treeNumber, 'hide', 'p');
   }
 
-  updateElements (treeNumber, group, type) {
+  updateElements(treeNumber, group, type) {
     const typeParts = {
       t: ['stem', 'shadow', 'crown'],
-      p: ['stem', 'shadow', 'pot', 'leaf1', 'leaf2', 'leaf3'],
+      p: ['stem', 'shadow', 'pot', 'leaf1', 'leaf2', 'leaf3']
     };
 
-    typeParts[type].map (function (part) {
+    typeParts[type].map(function(part) {
       let ref = type + '-' + part + '-' + treeNumber;
-      let el = ReactDOM.findDOMNode (this.refs[ref]);
+      let el = ReactDOM.findDOMNode(this.refs[ref]);
 
       if (!el) return;
-      el.setAttribute (
+      el.setAttribute(
         'class',
-        el.getAttribute ('class').replace (/default|hide|g[0-9]+/g, group)
+        el.getAttribute('class').replace(/default|hide|g[0-9]+/g, group)
       );
     }, this);
   }
 
-  render () {
+  render() {
     return (
       <svg
         ref="canvas"
@@ -420,7 +415,7 @@ export default class SvgContainer extends Component {
         viewBox="0 0 850 850"
       >
         <image
-          style={{overflow: 'visible'}}
+          style={visibleOverflowStyle}
           width="1100"
           height="1100"
           xlinkHref="https://www.plant-for-the-planet.org/bundles/pftpbilliontree/images/zaehler-bg-himmel.png"
@@ -4083,7 +4078,7 @@ SvgContainer.propTypes = {
   community: PropTypes.number.isRequired,
   personal: PropTypes.number.isRequired,
   targetYear: PropTypes.number,
-  exposeMissing: PropTypes.bool,
+  exposeMissing: PropTypes.bool
 };
 
 SvgContainer.defaultProps = {
@@ -4093,5 +4088,7 @@ SvgContainer.defaultProps = {
   community: 0,
   personal: 0,
   exposeMissing: true,
-  targetYear: 2020,
+  targetYear: 2020
 };
+
+const visibleOverflowStyle = { overflow: 'visible' };

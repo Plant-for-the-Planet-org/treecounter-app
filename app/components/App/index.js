@@ -4,14 +4,13 @@ import { Provider } from 'react-redux';
 import TreeCounter from './TreeCounter';
 import configureStore from '../../stores/TreecounterStore';
 import { debug } from '../../debug/index';
-import { initialProps, context } from '../../config/index.js';
 
 let store;
 
 const App = () => {
   debug('initiating store');
 
-  store = configureStore(initialProps, context);
+  store = configureStore();
 
   return (
     <Provider store={store}>

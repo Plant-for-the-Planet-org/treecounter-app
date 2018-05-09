@@ -3,6 +3,7 @@ import axios from 'axios';
 import { getApiRoute } from '../actions/apiRouting';
 import * as ROUTES from '../constants/routes';
 import { debug } from '../debug/index';
+import { fetchItem } from '../stores/localStorage';
 
 export function MenuAction(isAuthenticated = false) {
   debug('Getting Menu: isAuthenticated =', isAuthenticated);
@@ -11,7 +12,7 @@ export function MenuAction(isAuthenticated = false) {
       ? {
           method: ROUTES.getAuthenticatedMenu.method,
           url: getApiRoute(ROUTES.getAuthenticatedMenu.name),
-          headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` }
+          headers: { Authorization: `Bearer ${fetchItem('jwt')}` }
         }
       : {
           method: ROUTES.getUnAuthenticatedMenu.method,

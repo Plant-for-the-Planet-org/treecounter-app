@@ -16,3 +16,15 @@ export const saveState = state => {
     window.localStorage.setItem('state', serializedState);
   } catch (err) {}
 };
+
+export const saveItem = (key, value) => {
+  window.localStorage.setItem(key, value);
+};
+
+export const fetchItem = key => {
+  window.localStorage.getItem(key);
+};
+
+export const clearStorage = () => {
+  window.localStorage.clear();
+};

@@ -1,13 +1,11 @@
-import axios from 'axios';
-
+import { getAuthenticatedrequest } from '../utils/api';
 import { getApiRoute } from '../actions/apiRouting';
-import { fetchItem } from '../stores/localStorage';
 
 export function RegisterTreeSchema() {
   console.log('Getting Register Tree Form');
-  const request = axios.get(getApiRoute('plantContribution_form'), {
-    headers: { Authorization: `Bearer ${fetchItem('jwt')}` }
-  });
+  const request = getAuthenticatedrequest(
+    getApiRoute('plantContribution_form')
+  );
 
   return request;
 }

@@ -33,11 +33,9 @@ export function login(data) {
           pathname: getLocalRoute('app_userHome'),
           state: { id: res.data.data.id }
         }); // TODO: understand what this is doing
-
-        return token;
       })
-      .then(token => {
-        dispatch(loadLoginData(token));
+      .then(() => {
+        dispatch(loadLoginData());
       })
       .catch(error => {
         if (
@@ -82,11 +80,9 @@ export function refreshToken() {
           user: { ...jwtDecode(token), ...res.data.data }
         };
         dispatch(setUserLogIn(payload));
-
-        return token;
       })
-      .then(token => {
-        dispatch(loadLoginData(token));
+      .then(() => {
+        dispatch(loadLoginData());
       })
       .catch(() => {});
   };

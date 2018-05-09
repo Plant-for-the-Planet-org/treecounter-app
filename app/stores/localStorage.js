@@ -22,7 +22,7 @@ export const saveItem = (key, value) => {
 };
 
 export const fetchItem = key => {
-  window.localStorage.getItem(key);
+  return window.localStorage.getItem(key);
 };
 
 export const clearStorage = () => {

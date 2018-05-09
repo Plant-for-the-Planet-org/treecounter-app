@@ -3,6 +3,7 @@ import axios from 'axios';
 import { getApiRoute } from '../actions/apiRouting';
 import * as ROUTES from '../constants/routes';
 import { debug } from '../debug/index';
+import { fetchItem } from '../stores/localStorage';
 
 export function Payment(paymentInfo, plantProjectId) {
   axios({
@@ -12,7 +13,7 @@ export function Payment(paymentInfo, plantProjectId) {
     }),
     data: paymentInfo,
     headers: {
-      Authorization: `Bearer ${window.localStorage.getItem('jwt')}`
+      Authorization: `Bearer ${fetchItem('jwt')}`
     }
   })
     .then(({ data }) => {

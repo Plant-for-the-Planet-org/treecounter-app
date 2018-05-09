@@ -7,6 +7,7 @@ import { mergeEntities } from '../reducers/entitiesReducer';
 import { contributionSchema } from '../schemas/index';
 import { getLocalRoute, getApiRoute } from './apiRouting';
 import { debug } from '../debug/index';
+import { fetchItem } from '../stores/localStorage';
 
 export function registerTree(plantContribution, treecounterId) {
   return dispatch => {
@@ -14,7 +15,11 @@ export function registerTree(plantContribution, treecounterId) {
       .post(
         getApiRoute('plantContribution_post', { treecounter: treecounterId }),
         plantContribution,
-        { headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` } }
+        {
+          headers: {
+            Authorization: `Bearer ${fetchItem('jwt')}`
+          }
+        }
       )
       .then(res => {
         debug(res, res.response);

@@ -8,6 +8,7 @@ import { history } from '../components/Common/BrowserRouter';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { treecounterSchema } from '../schemas/index';
 import { getLocalRoute } from './apiRouting';
+import { fetchItem } from '../stores/localStorage';
 
 export function SubmitTarget(treecounter, treecounterId) {
   return dispatch => {
@@ -18,7 +19,9 @@ export function SubmitTarget(treecounter, treecounterId) {
     };
     axios
       .put(getApiRoute('target_put', { treecounter: treecounterId }), data, {
-        headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` }
+        headers: {
+          Authorization: `Bearer ${fetchItem('jwt')}`
+        }
       })
       .then(res => {
         dispatch(mergeEntities(normalize(res.data, treecounterSchema)));

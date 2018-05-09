@@ -1,18 +1,17 @@
-import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { NotificationManager } from 'react-notifications';
 
 import { history } from '../components/Common/BrowserRouter';
 import { setUserLogIn, setUserLogOut } from '../reducers/authenticationReducer';
 import { loadLoginData } from './loadLoginData';
-import { getApiRoute } from '../actions/apiRouting';
 import { debug } from '../debug/index';
 import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
 import { getLocalRoute } from './apiRouting';
 import { saveItem, fetchItem, clearStorage } from '../stores/localStorage';
+import { postRequest, postAuthenticatedRequest } from '../utils/api';
 
 export function login(data) {
-  const request = axios.post(getApiRoute('api_login_check'), data);
+  const request = postRequest('api_login_check', data);
 
   return dispatch => {
     request
@@ -59,13 +58,7 @@ export function login(data) {
 }
 
 export function refreshToken() {
-  const request = axios.post(
-    getApiRoute('api_token_refresh'),
-    {},
-    {
-      headers: { Authorization: `Bearer ${fetchItem('jwt')}` }
-    }
-  );
+  const request = postAuthenticatedRequest('api_token_refresh', {});
 
   return dispatch => {
     request
@@ -99,8 +92,7 @@ export function logoutUser() {
 }
 
 export function forgot_password(data) {
-  axios
-    .post(getApiRoute('auth_forgotPassword_post'), data)
+  postRequest('auth_forgotPassword_post', data)
     .then(res => {
       debug(res.status);
       NotificationManager.success(
@@ -113,8 +105,7 @@ export function forgot_password(data) {
 
 export function reset_password(data) {
   data.token = fetchItem('jwt');
-  axios
-    .post(getApiRoute('auth_resetPassword_post'), data)
+  postRequest('auth_resetPassword_post', data)
     .then(res => {
       debug(res.status);
     })

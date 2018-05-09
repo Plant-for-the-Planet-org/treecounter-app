@@ -1,14 +1,12 @@
-import axios from 'axios';
 import { normalize } from 'normalizr';
 import { NotificationManager } from 'react-notifications';
 
-import { getApiRoute } from '../actions/apiRouting';
 import { debug } from '../debug/index';
 import { history } from '../components/Common/BrowserRouter';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { treecounterSchema } from '../schemas/index';
 import { getLocalRoute } from './apiRouting';
-import { fetchItem } from '../stores/localStorage';
+import { putAuthenticatedRequest } from '../utils/api';
 
 export function SubmitTarget(treecounter, treecounterId) {
   return dispatch => {
@@ -17,12 +15,7 @@ export function SubmitTarget(treecounter, treecounterId) {
       targetYear: treecounter.targetYear,
       targetComment: treecounter.targetComment
     };
-    axios
-      .put(getApiRoute('target_put', { treecounter: treecounterId }), data, {
-        headers: {
-          Authorization: `Bearer ${fetchItem('jwt')}`
-        }
-      })
+    putAuthenticatedRequest('target_put', data, { treecounter: treecounterId })
       .then(res => {
         dispatch(mergeEntities(normalize(res.data, treecounterSchema)));
         history.push(getLocalRoute('app_userHome'));

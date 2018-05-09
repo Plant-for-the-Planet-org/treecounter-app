@@ -42,13 +42,13 @@ class PlantProjectFull extends React.Component {
     } = this.props.plantProject
     const projectImage = project_images.find(() => true)
 
-    const teaserProps = {showTpoName: this.props.showTpoName, tpoName: '', projectName, isCertified, projectImage}
+    const teaserProps = {tpoName: this.props.tpoName, projectName, isCertified, projectImage}
     const specsProps = {location, countPlanted, countTarget, treeCost, currency, survivalRate}
     const detailsProps = {images, synopsis1, synopsis2, homepageUrl, homepageCaption, videoUrl, mapData}
 
     return (<div>
       <PlantProjectTeaser {...teaserProps} />
-      <PlantProjectSpecs {...specsProps}  />
+      <PlantProjectSpecs {...specsProps} />
       <SeeMoreToggle seeMore={false === this.state.expanded} onToggle={this.toggleExpanded}/>
       {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
     </div>)
@@ -58,7 +58,7 @@ class PlantProjectFull extends React.Component {
 PlantProjectFull.propTypes = {
   plantProject: PropTypes.object.isRequired,
   expanded: PropTypes.bool.isRequired,
-  showTpoName: PropTypes.bool.isRequired,
+  tpoName: PropTypes.string
 }
 
 export default PlantProjectFull

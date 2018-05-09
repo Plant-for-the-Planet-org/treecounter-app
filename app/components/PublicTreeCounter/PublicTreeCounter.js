@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+//import { history } from '../../components/Common/BrowserRouter';
 
 import SupportButton from './SupportButton'
 import TreecounterHeader from './TreecounterHeader'
@@ -11,7 +12,7 @@ import {currentUserProfileSelector} from '../../selectors/index'
 import {selectPlantProjectIdAction} from '../../actions/selectPlantProjectIdAction'
 import {followUnSubscribeAction} from '../../actions/followUnSubscribeAction'
 import {followSubscribeAction} from '../../actions/followSubscribeAction'
-import {registerSupporterAction} from '../../actions/registerSupporterAction'
+import {supportTreecounterAction} from '../../actions/supportTreecounterAction'
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Public-TreeCounter
@@ -48,10 +49,6 @@ class PublicTreeCounter extends React.Component {
   //------------------------------------------------------------------------------------------------------------
   // ACTION METHODS
   //------------------------------------------------------------------------------------------------------------
-  onRegisterSupporter() {
-    this.props.registerSupporter(this.props.treecounter.id)
-  }
-
   onFollowChanged() {
     this.isUserFollower() ?
       this.props.followUnSubscribeAction(this.props.treecounter.id) :
@@ -61,9 +58,13 @@ class PublicTreeCounter extends React.Component {
   onPlantProjectSelected(selectedPlantProjectId) {
     console.log('onPlantProjectSelected', selectedPlantProjectId)
     this.props.selectPlantProjectIdAction(selectedPlantProjectId)
-    //history.push({pathname: getLocalRoute('app_donateTrees')})
+    //history.push(getLocalRoute('app_donateTrees'))
   }
 
+  onRegisterSupporter() {
+    this.props.supportTreecounter(this.props.treecounter)
+    //history.push(getLocalRoute('app_donateTrees'))
+  }
 
   render() {
     const {treecounter, currentUserProfile} = this.props
@@ -98,7 +99,7 @@ class PublicTreeCounter extends React.Component {
 PublicTreeCounter.propTypes = {
   treecounter: PropTypes.object.isRequired,
   currentUserProfile: PropTypes.object,
-  registerSupporter: PropTypes.func.isRequired,
+  supportTreecounter: PropTypes.func.isRequired,
   selectPlantProjectIdAction: PropTypes.func.isRequired,
   followSubscribeAction: PropTypes.func.isRequired,
   followUnSubscribeAction: PropTypes.func.isRequired
@@ -106,9 +107,9 @@ PublicTreeCounter.propTypes = {
 
 const mapDispatchToProps = dispatch => {
   return {
-    registerSupporter: treecounterId => dispatch(registerSupporterAction(treecounterId)),
-    followSubscribeAction: treecounterId => dispatch(followSubscribeAction(treecounterId)),
+    supportTreecounter: treecounter => dispatch(supportTreecounterAction(treecounter)),
     selectPlantProjectIdAction: selectedPlantProjectId => dispatch(selectPlantProjectIdAction(selectedPlantProjectId)),
+    followSubscribeAction: treecounterId => dispatch(followSubscribeAction(treecounterId)),
     followUnSubscribeAction: treecounterId => dispatch(followUnSubscribeAction(treecounterId))
   }
 }

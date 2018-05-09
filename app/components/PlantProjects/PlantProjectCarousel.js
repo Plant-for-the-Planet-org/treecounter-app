@@ -5,7 +5,7 @@ import PlantProjectFull from './PlantProjectFull'
 
 const PlantProjectCarousel = (props) => {
 
-  const {plantProjects, onChange, contentTag} = props
+  const {plantProjects, onChange, contentTag, tpoName} = props
 
   // see: https://medium.com/@Carmichaelize/dynamic-tag-names-in-react-and-jsx-17e366a684e9
   const TagName = contentTag
@@ -19,7 +19,7 @@ const PlantProjectCarousel = (props) => {
     }
     {plantProjects.map(plantProject => (<div>
         <hr/>
-        <PlantProjectFull key={`plantProject-${plantProject.id}`} expanded={false} showTpoName={false}
+        <PlantProjectFull key={`plantProject-${plantProject.id}`} expanded={false} tpoName={tpoName}
                           plantProject={plantProject}/>
       </div>)
     )}
@@ -28,7 +28,7 @@ const PlantProjectCarousel = (props) => {
 
 PlantProjectCarousel.propTypes = {
   contentTag: PropTypes.string.isRequired,
-  showTpoName: PropTypes.bool.isRequired,
+  tpoName: PropTypes.string,
   plantProjects: PropTypes.array.isRequired,
   currentPlantProjectId: PropTypes.number,
   onChange: PropTypes.func.isRequired

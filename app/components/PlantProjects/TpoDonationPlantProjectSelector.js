@@ -44,8 +44,8 @@ class TpoDonationPlantProjectSelector extends React.Component {
     return (<ContentBox>
       <ContentHeader caption={caption}/>
       {1 === plantProjects.length ?
-        <TagName plantProject={plantProjects.find(() => true)} showTpoName={false} expanded={false}/> :
-        <PlantProjectCarousel contentTag={TagName} showTpoName={false} plantProjects={plantProjects}
+        <TagName plantProject={plantProjects.find(() => true)} expanded={false}/> :
+        <PlantProjectCarousel contentTag={TagName} plantProjects={plantProjects}
                               currentPlantProjectId={this.state.currentPlantProjectId}
                               onChange={this.onCarouselChange}/>
       }

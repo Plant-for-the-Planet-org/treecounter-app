@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import PlantProjectTeaser from "./PlantProjectTeaser"
 import PlantProjectSpecs from "./PlantProjectSpecs"
 
-const PlantProjectCompact = ({plantProject, showTpoName}) => {
+const PlantProjectCompact = ({plantProject, tpoName}) => {
 
-  const {tpoName, projectName, isCertified, projectImage, location, countPlanted, countTarget, treeCost, currency, survivalRate} = plantProject
-  const teaserProps = {tpoName, projectName, isCertified, projectImage, showTpoName}
+  const {projectName, isCertified, projectImage, location, countPlanted, countTarget, treeCost, currency, survivalRate} = plantProject
+  const teaserProps = {tpoName: this.props.tpoName, projectName, isCertified, projectImage}
   const specsProps = {location, countPlanted, countTarget, treeCost, currency, survivalRate}
 
   return <div>
@@ -18,7 +18,7 @@ const PlantProjectCompact = ({plantProject, showTpoName}) => {
 
 PlantProjectCompact.propTypes = {
   plantProject: PropTypes.object.isRequired,
-  showTpoName: PropTypes.bool.isRequired
+  tpoName: PropTypes.string
 }
 
 export default PlantProjectCompact

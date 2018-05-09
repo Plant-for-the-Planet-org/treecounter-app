@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 import PlantProjectTeaser from './PlantProjectTeaser'
 
-const PlantProjectSmall = ({plantProject}) => {
-  const {tpoName, showTpoName, projectName, isCertified, projectImage} = plantProject
-  const teaserProps = {tpoName, showTpoName, projectName, isCertified, projectImage}
+const PlantProjectSmall = ({plantProject, tpoName}) => {
+  const {projectName, isCertified, projectImage} = plantProject
+  const teaserProps = {tpoName: this.props.tpoName, showTpoName, projectName, isCertified, projectImage}
 
   return (<div>
     <PlantProjectTeaser {...teaserProps}/>
@@ -16,7 +16,8 @@ const PlantProjectSmall = ({plantProject}) => {
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectSmall
  */
 PlantProjectSmall.propTypes = {
-  plantProject: PropTypes.object.isRequired
+  plantProject: PropTypes.object.isRequired,
+  tpoName: PropTypes.string
 }
 
 export default PlantProjectSmall

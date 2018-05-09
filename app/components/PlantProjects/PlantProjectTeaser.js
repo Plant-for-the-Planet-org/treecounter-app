@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectTeaser
  */
-const PlantProjectTeaser = ({showTpoName, tpoName, projectName, isCertified, projectImage}) => {
+const PlantProjectTeaser = ({tpoName, projectName, isCertified, projectImage}) => {
 
   return (<div>
-    {showTpoName && <div>tpoName: {tpoName}</div>}
+    {tpoName && <div>tpoName: {tpoName}</div>}
     <div> projectName: {projectName}</div>
     <div> isCertified: {isCertified ? 'yes' : 'no'}</div>
     <div> projectImage: {projectImage}</div>
@@ -16,7 +16,6 @@ const PlantProjectTeaser = ({showTpoName, tpoName, projectName, isCertified, pro
 
 PlantProjectTeaser.propTypes = {
   tpoName: PropTypes.string,
-  showTpoName: PropTypes.bool.isRequired,
   projectName: PropTypes.string.isRequired,
   isCertified: PropTypes.bool.isRequired,
   projectImage: PropTypes.string

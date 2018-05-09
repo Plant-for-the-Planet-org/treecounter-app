@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import { getApiRoute } from '../actions/apiRouting';
-import * as ROUTES from '../constants/routes';
 import { debug } from '../debug/index';
 import { fetchItem } from '../stores/localStorage';
 
@@ -10,13 +9,13 @@ export function MenuAction(isAuthenticated = false) {
   return axios({
     ...(isAuthenticated
       ? {
-          method: ROUTES.getAuthenticatedMenu.method,
-          url: getApiRoute(ROUTES.getAuthenticatedMenu.name),
+          method: 'GET',
+          url: getApiRoute('data_menu_get'),
           headers: { Authorization: `Bearer ${fetchItem('jwt')}` }
         }
       : {
-          method: ROUTES.getUnAuthenticatedMenu.method,
-          url: getApiRoute(ROUTES.getUnAuthenticatedMenu.name)
+          method: 'GET',
+          url: getApiRoute('public_menu_get')
         })
   });
 }

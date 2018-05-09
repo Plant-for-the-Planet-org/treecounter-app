@@ -7,8 +7,8 @@ import { fetchItem } from '../stores/localStorage';
 
 export function Payment(paymentInfo, plantProjectId) {
   axios({
-    method: ROUTES.postDonationContributionForm.method,
-    url: getApiRoute(ROUTES.postDonationContributionForm.name, {
+    method: 'POST',
+    url: getApiRoute('donationContribution_post', {
       plantProject: plantProjectId
     }),
     data: paymentInfo,

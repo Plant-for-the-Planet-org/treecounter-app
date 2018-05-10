@@ -1,8 +1,8 @@
-import { getAuthenticatedrequest } from '../utils/api';
+import { getAuthenticatedRequest } from '../utils/api';
 
 export function PaymentSchema() {
   console.log('Getting Donation Contribution Form');
-  const request = getAuthenticatedrequest('donationContribution_form');
+  const request = getAuthenticatedRequest('donationContribution_form');
 
   return request;
 }

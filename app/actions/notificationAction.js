@@ -1,8 +1,8 @@
-import { getAuthenticatedrequest } from '../utils/api';
+import { getAuthenticatedRequest } from '../utils/api';
 
 import { debug } from '../debug/index';
 
 export function NotificationAction() {
   debug('Getting Notifications');
-  return getAuthenticatedrequest('notifications_get');
+  return getAuthenticatedRequest('notifications_get');
 }

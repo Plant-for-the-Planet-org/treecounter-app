@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Login from '../../../components/Authentication/Login';
 import { clearStorage } from '../../../stores/localStorage';

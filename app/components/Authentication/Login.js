@@ -9,7 +9,7 @@ import LoginFooter from './LoginFooter';
 
 export default class Login extends Component {
   render() {
-    return this.state.loading ? (
+    return this.props.loading ? (
       <div className="center-wrapper">
         <LoadingIndicator />
       </div>
@@ -29,3 +29,9 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  schema: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired
+};

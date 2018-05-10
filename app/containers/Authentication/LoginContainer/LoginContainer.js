@@ -1,10 +1,10 @@
 import AbstractLoginContainer from './AbstractLoginContainer';
 import LoginSchema from '../../../layouts/loginSchema';
+import PropTypes from 'prop-types';
 
-//TODO @hkurra implement this for web and import it at required location
 export default class LoginContainer extends AbstractLoginContainer {
   onClick(value) {
-    login();
+    this.props.login(value);
   }
 
   componentDidMount() {

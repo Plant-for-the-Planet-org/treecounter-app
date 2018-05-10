@@ -8,7 +8,7 @@ import { loadLoginData } from './loadLoginData';
 import { getApiRoute } from '../actions/apiRouting';
 import { debug } from '../debug/index';
 import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
-import { getLocalRoute } from './apiRouting';
+//import { getLocalRoute } from './apiRouting';
 import { saveItem, fetchItem, clearStorage } from '../stores/localStorage';
 
 export function login(data) {

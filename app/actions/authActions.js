@@ -1,14 +1,12 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
-
-//import { history } from '../components/Common/BrowserRouter';
+import { updateRoute } from '../helpers/routerHelper';
 import { setUserLogIn, setUserLogOut } from '../reducers/authenticationReducer';
 import { loadLoginData } from './loadLoginData';
 import { getApiRoute } from '../actions/apiRouting';
 import { debug } from '../debug/index';
 import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
-//import { getLocalRoute } from './apiRouting';
 import { saveItem, fetchItem, clearStorage } from '../stores/localStorage';
 
 export function login(data) {
@@ -29,11 +27,7 @@ export function login(data) {
         dispatch(setUserLogIn(payload));
 
         NotificationManager.success('Login Successful', 'Welcome', 5000);
-        // history.push({
-        //   pathname: getLocalRoute('app_userHome'),
-        //   state: { id: res.data.data.id }
-        // }); // TODO: understand what this is doing
-
+        updateRoute('app_userHome', dispatch, res.data.data.id);
         return token;
       })
       .then(token => {
@@ -98,7 +92,7 @@ export function logoutUser() {
     clearStorage();
     dispatch(setUserLogOut());
     dispatch(setCurrentUserProfileId(null));
-    //history.push(getLocalRoute('app_homepage'));
+    updateRoute('app_homepage');
   };
 }
 
@@ -110,7 +104,7 @@ export function forgot_password(data) {
       NotificationManager.success(
         'Further details have been sent to your mail address'
       );
-      // history.push(getLocalRoute('app_login'));
+      updateRoute('app_login');
     })
     .catch(err => debug(err));
 }

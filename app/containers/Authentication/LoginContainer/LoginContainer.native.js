@@ -2,17 +2,19 @@ import AbstractLoginContainer from './AbstractLoginContainer';
 import t from 'tcomb-form-native';
 
 let loginFormSchema = t.struct({
-  username: t.String, // a required string
-  password: t.String
+  _username: t.String, // a required string
+  _password: t.String
 });
 
 let schemaOptions = {
   fields: {
-    password: {
+    _password: {
+      label: 'Password',
       secureTextEntry: true,
       error: 'required'
     },
-    username: {
+    _username: {
+      label: 'Username',
       error: 'required'
     }
   }
@@ -25,7 +27,7 @@ export default class LoginContainer extends AbstractLoginContainer {
   onClick(value) {
     if (value) {
       console.log(value);
-      this.props.login();
+      this.props.login(value);
     }
   }
 

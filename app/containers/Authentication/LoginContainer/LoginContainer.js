@@ -3,9 +3,9 @@ import LoginSchema from '../../../layouts/loginSchema';
 
 //TODO @hkurra implement this for web and import it at required location
 export default class LoginContainer extends AbstractLoginContainer {
-  onClick = value => {
+  onClick(value) {
     login();
-  };
+  }
 
   componentDidMount() {
     LoginSchema.subscribe(

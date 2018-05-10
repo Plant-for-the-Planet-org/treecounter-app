@@ -14,7 +14,7 @@ export default class Login extends Component {
   onPress = () => {
     let value = this.refs.loginForm.getValue();
     if (value) {
-      this.props.onCLick();
+      this.props.onClick(value);
     }
   };
 

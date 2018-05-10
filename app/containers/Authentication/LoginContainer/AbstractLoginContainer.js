@@ -12,6 +12,7 @@ export default class exportAbstractLoginContainer extends React.Component {
       loading: true,
       schemaOptions: {}
     };
+    this.onClick = this.onClick.bind(this);
   }
 
   componentDidMount() {
@@ -20,7 +21,11 @@ export default class exportAbstractLoginContainer extends React.Component {
     );
   }
 
-  onClick() {}
+  onClick() {
+    throw new TypeError(
+      'Abstract method LoginContainer.onClick() is not implemented'
+    );
+  }
 
   render() {
     return (

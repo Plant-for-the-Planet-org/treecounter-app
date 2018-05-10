@@ -22,11 +22,12 @@ export default class LoginContainer extends AbstractLoginContainer {
   constructor(props) {
     super(props);
   }
-  onClick = value => {
+  onClick(value) {
     if (value) {
       console.log(value);
+      this.props.login();
     }
-  };
+  }
 
   componentDidMount() {
     this.setState({ schema: loginFormSchema, loading: false, schemaOptions });

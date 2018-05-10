@@ -4,15 +4,14 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --hot --config ./web/webpack.config.js",
-    "build": "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail",
-    "build:server": "webpack --config ./web/config/webpack.server.config.js --progress --profile --bail",
+    "build":
+      "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail",
+    "build:server":
+      "webpack --config ./web/config/webpack.server.config.js --progress --profile --bail",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js}": [
-      "prettier --write",
-      "git add"
-    ]
+    "**/*.{js}": ["prettier --write", "git add"]
   },
   "dependencies": {
     "autosuggest-highlight": "^3.1.1",

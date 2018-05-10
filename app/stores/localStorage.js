@@ -1,13 +1,15 @@
 export const loadState = () => {
-  try {
-    const serializedState = window.localStorage.getItem('state');
-    if (serializedState === null) {
-      return undefined;
+  return new Promise(function(resolve, reject) {
+    try {
+      const serializedState = window.localStorage.getItem('state');
+      if (serializedState === null) {
+        return undefined;
+      }
+      resolve(JSON.parse(serializedState));
+    } catch (err) {
+      reject(null);
     }
-    return JSON.parse(serializedState);
-  } catch (err) {
-    return undefined;
-  }
+  });
 };
 
 export const saveState = state => {
@@ -22,7 +24,13 @@ export const saveItem = (key, value) => {
 };
 
 export const fetchItem = key => {
-  return window.localStorage.getItem(key);
+  return new Promise(function(resolve, reject) {
+    if (window.localStorage.getItem(key)) {
+      resolve(window.localStorage.getItem(key));
+    } else {
+      reject(Error('Key not found'));
+    }
+  });
 };
 
 export const clearStorage = () => {

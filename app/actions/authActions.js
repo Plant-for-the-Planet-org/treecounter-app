@@ -7,7 +7,8 @@ import { loadLoginData } from './loadLoginData';
 import { debug } from '../debug/index';
 import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
 import { getLocalRoute } from './apiRouting';
-import { saveItem, fetchItem, clearStorage } from '../stores/localStorage';
+import { saveItem, clearStorage } from '../stores/localStorage';
+import { getAccessToken } from '../utils/user';
 import { postRequest, postAuthenticatedRequest } from '../utils/api';
 
 export function login(data) {
@@ -17,9 +18,7 @@ export function login(data) {
     request
       .then(res => {
         const token = res.data.token;
-        if (fetchItem('jwt') !== token) {
-          saveItem('jwt', token);
-        }
+        saveItem('jwt', token);
         // merge token data and custom data
         const payload = {
           token,
@@ -64,9 +63,8 @@ export function refreshToken() {
     request
       .then(res => {
         const token = res.data.token;
-        if (fetchItem('jwt') !== token) {
-          saveItem('jwt', token);
-        }
+
+        saveItem('jwt', token);
         // merge token data and custom data
         const payload = {
           token,
@@ -104,10 +102,12 @@ export function forgot_password(data) {
 }
 
 export function reset_password(data) {
-  data.token = fetchItem('jwt');
-  postRequest('auth_resetPassword_post', data)
-    .then(res => {
-      debug(res.status);
-    })
-    .catch(err => debug(err));
+  getAccessToken().then(token => {
+    data.token = token;
+    postRequest('auth_resetPassword_post', data)
+      .then(res => {
+        debug(res.status);
+      })
+      .catch(err => debug(err));
+  });
 }

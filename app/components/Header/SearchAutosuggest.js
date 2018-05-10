@@ -18,7 +18,7 @@ const getSuggestions = value => {
   let xhttp = new XMLHttpRequest();
   xhttp.open(
     'POST',
-    'https://launch.trilliontreecampaign.org/app_dev.php/search2',
+    'https://staging.trilliontreecampaign.org/app_dev.php/search2',
     false
   ); // had to make a sync request until we find a proper async solution
   xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

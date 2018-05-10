@@ -1,8 +1,12 @@
 import AbstractLoginContainer from './AbstractLoginContainer';
-import LoginSchema from '../../layouts/loginSchema';
+import LoginSchema from '../../../layouts/loginSchema';
 
 //TODO @hkurra implement this for web and import it at required location
 export default class LoginContainer extends AbstractLoginContainer {
+  onClick = value => {
+    login();
+  };
+
   componentDidMount() {
     LoginSchema.subscribe(
       success => this.setState({ schema: success, loading: false }),
@@ -10,3 +14,7 @@ export default class LoginContainer extends AbstractLoginContainer {
     );
   }
 }
+
+LoginContainer.propTypes = {
+  login: PropTypes.func.isRequired
+};

@@ -19,6 +19,9 @@ let schemaOptions = {
 };
 
 export default class LoginContainer extends AbstractLoginContainer {
+  constructor(props) {
+    super(props);
+  }
   onClick = value => {
     if (value) {
       console.log(value);

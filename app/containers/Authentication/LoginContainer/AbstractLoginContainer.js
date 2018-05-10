@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import Login from '../../components/Authentication/Login';
-import { clearStorage } from '../../stores/localStorage';
+import Login from '../../../components/Authentication/Login';
+import { clearStorage } from '../../../stores/localStorage';
 
-export default class AbstractLoginContainer extends React.Component {
+export default class exportAbstractLoginContainer extends React.Component {
   constructor(props) {
     super(props);
     clearStorage();

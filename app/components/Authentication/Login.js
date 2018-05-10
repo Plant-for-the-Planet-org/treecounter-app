@@ -1,31 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+
 import LiForm from 'liform-react';
 
 import CustomForm from '../Common/CustomForm';
-import LoginSchema from '../../layouts/loginSchema';
-import { login } from '../../actions/authActions';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import LoginFooter from './LoginFooter';
-import { clearStorage } from '../../stores/localStorage';
 
-class Login extends Component {
-  constructor() {
-    super();
-    clearStorage();
-    this.state = {
-      schema: {},
-      loading: true
-    };
-  }
-  componentDidMount() {
-    LoginSchema.subscribe(
-      success => this.setState({ schema: success, loading: false }),
-      error => console.log(error)
-    );
-  }
+export default class Login extends Component {
   render() {
     return this.state.loading ? (
       <div className="center-wrapper">
@@ -35,8 +17,8 @@ class Login extends Component {
       <div>
         <h2 className="cs-heading">Log In</h2>
         <LiForm
-          schema={this.state.schema}
-          onSubmit={this.props.login}
+          schema={this.props.schema}
+          onSubmit={this.props.onClick}
           baseForm={CustomForm}
           buttonText="Log In"
           buttonWidth="240"
@@ -47,13 +29,3 @@ class Login extends Component {
     );
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ login }, dispatch);
-};
-
-export default connect(null, mapDispatchToProps)(Login);
-
-Login.propTypes = {
-  login: PropTypes.func.isRequired
-};

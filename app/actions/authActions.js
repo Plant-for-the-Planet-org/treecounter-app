@@ -1,8 +1,8 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import { NotificationManager } from 'react-notifications';
+//import { NotificationManager } from 'react-notifications';
 
-import { history } from '../components/Common/BrowserRouter';
+//import { history } from '../components/Common/BrowserRouter';
 import { setUserLogIn, setUserLogOut } from '../reducers/authenticationReducer';
 import { loadLoginData } from './loadLoginData';
 import { getApiRoute } from '../actions/apiRouting';
@@ -28,11 +28,11 @@ export function login(data) {
         };
         dispatch(setUserLogIn(payload));
 
-        NotificationManager.success('Login Successful', 'Welcome', 5000);
-        history.push({
-          pathname: getLocalRoute('app_userHome'),
-          state: { id: res.data.data.id }
-        }); // TODO: understand what this is doing
+        // NotificationManager.success('Login Successful', 'Welcome', 5000);
+        // history.push({
+        //   pathname: getLocalRoute('app_userHome'),
+        //   state: { id: res.data.data.id }
+        // }); // TODO: understand what this is doing
 
         return token;
       })
@@ -48,13 +48,13 @@ export function login(data) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
           debug(error.response.data);
-          NotificationManager.error(
-            error.response.data.message,
-            error.response.data.code,
-            5000
-          );
+          // NotificationManager.error(
+          //   error.response.data.message,
+          //   error.response.data.code,
+          //   5000
+          // );
         } else {
-          NotificationManager.error(error.message, 'Login Error', 5000);
+          //NotificationManager.error(error.message, 'Login Error', 5000);
         }
       });
   };
@@ -98,7 +98,7 @@ export function logoutUser() {
     clearStorage();
     dispatch(setUserLogOut());
     dispatch(setCurrentUserProfileId(null));
-    history.push(getLocalRoute('app_homepage'));
+    //history.push(getLocalRoute('app_homepage'));
   };
 }
 
@@ -107,10 +107,10 @@ export function forgot_password(data) {
     .post(getApiRoute('auth_forgotPassword_post'), data)
     .then(res => {
       debug(res.status);
-      NotificationManager.success(
-        'Further details have been sent to your mail address'
-      );
-      history.push(getLocalRoute('app_login'));
+      // NotificationManager.success(
+      //   'Further details have been sent to your mail address'
+      // );
+      // history.push(getLocalRoute('app_login'));
     })
     .catch(err => debug(err));
 }

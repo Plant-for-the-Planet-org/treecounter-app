@@ -1,22 +1,10 @@
-import axios from 'axios';
+import { getRequest, getAuthenticatedRequest } from '../utils/api';
 
-import { getApiRoute } from '../actions/apiRouting';
-import * as ROUTES from '../constants/routes';
 import { debug } from '../debug/index';
-import { fetchItem } from '../stores/localStorage';
 
 export function MenuAction(isAuthenticated = false) {
   debug('Getting Menu: isAuthenticated =', isAuthenticated);
-  return axios({
-    ...(isAuthenticated
-      ? {
-          method: ROUTES.getAuthenticatedMenu.method,
-          url: getApiRoute(ROUTES.getAuthenticatedMenu.name),
-          headers: { Authorization: `Bearer ${fetchItem('jwt')}` }
-        }
-      : {
-          method: ROUTES.getUnAuthenticatedMenu.method,
-          url: getApiRoute(ROUTES.getUnAuthenticatedMenu.name)
-        })
-  });
+  return isAuthenticated
+    ? getAuthenticatedRequest('data_menu_get')
+    : getRequest('public_menu_get');
 }

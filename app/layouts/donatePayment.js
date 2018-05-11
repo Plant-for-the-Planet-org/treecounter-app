@@ -1,13 +1,8 @@
-import axios from 'axios';
-
-import { getApiRoute } from '../actions/apiRouting';
-import { fetchItem } from '../stores/localStorage';
+import { getAuthenticatedRequest } from '../utils/api';
 
 export function PaymentSchema() {
   console.log('Getting Donation Contribution Form');
-  const request = axios.get(getApiRoute('donationContribution_form'), {
-    headers: { Authorization: `Bearer ${fetchItem('jwt')}` }
-  });
+  const request = getAuthenticatedRequest('donationContribution_form');
 
   return request;
 }

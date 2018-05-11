@@ -1,18 +1,15 @@
-import axios from 'axios';
 import { normalize } from 'normalizr';
 
+import { getAuthenticatedRequest } from '../utils/api';
 import { tpoSchema } from '../schemas/index';
 import { userProfileSchema } from '../schemas/index';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
-import { getApiRoute } from '../actions/apiRouting';
 import { debug } from '../debug/index';
 
-export function loadLoginData(token) {
+export function loadLoginData() {
   debug('dispatching: loadLoginData');
-  const request = axios.get(getApiRoute('data_loginLoad_get'), {
-    headers: { Authorization: `Bearer ${token}` }
-  });
+  const request = getAuthenticatedRequest('data_loginLoad_get');
   return dispatch => {
     request.then(res => {
       dispatch(mergeEntities(normalize(res.data.tpos, [tpoSchema])));

@@ -1,9 +1,5 @@
-import axios from 'axios';
-import { getApiRoute } from './apiRouting';
-import { fetchItem } from '../stores/localStorage';
+import { getAuthenticatedRequest } from '../utils/api';
 
 export function trillionCampaign() {
-  return axios.get(getApiRoute('treecounter_get'), {
-    headers: { Authorization: `Bearer ${fetchItem('jwt')}` }
-  });
+  return getAuthenticatedRequest('treecounter_get');
 }

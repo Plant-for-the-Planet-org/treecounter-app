@@ -28,5 +28,5 @@ export const fetchItem = async key => {
 };
 
 export const clearStorage = async () => {
-  await AsyncStorage.clear();
+  await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
 };

@@ -31,7 +31,7 @@ export async function getRequest(route, params) {
 
 export async function getAuthenticatedRequest(route, params) {
   let url = getApiRoute(route, params);
-  let token = getAccessToken();
+  let token = await getAccessToken();
   let json = await axios
     .get(url, {
       headers: { Authorization: `Bearer ${token}` }
@@ -54,7 +54,7 @@ export async function postRequest(route, data, params) {
 
 export async function postAuthenticatedRequest(route, data, params) {
   let url = getApiRoute(route, params);
-  let token = getAccessToken();
+  let token = await getAccessToken();
   let json = await axios
     .post(url, data, {
       headers: { Authorization: `Bearer ${token}` }
@@ -77,7 +77,7 @@ export async function putRequest(route, data, params) {
 
 export async function putAuthenticatedRequest(route, data, params) {
   let url = getApiRoute(route, params);
-  let token = getAccessToken();
+  let token = await getAccessToken();
   let json = await axios
     .put(url, data, {
       headers: { Authorization: `Bearer ${token}` }

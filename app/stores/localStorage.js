@@ -28,7 +28,7 @@ export const fetchItem = key => {
     if (window.localStorage.getItem(key)) {
       resolve(window.localStorage.getItem(key));
     } else {
-      reject(Error('Key not found'));
+      reject('Key not found');
     }
   });
 };

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { commonReducers } from './commonReducers';
+import commonReducers from './commonReducers';
 import { reducer as formReducer } from 'redux-form';
 
 import authenticationReducer from './authenticationReducer';
@@ -16,10 +16,5 @@ export default combineReducers({
   currentUserProfileId: currentUserProfileIdReducer,
   selectedPlantProjectId: selectedPlantProjectIdReducer,
   sideNav: sideNavReducer,
-  locale: (state = {}) => state,
-  mediaPath: (state = {}) => state,
-  baseUrl: (state = {}) => state,
-  serverName: (state = {}) => state,
-  location: (state = {}) => state,
-  serverRendered: (state = {}) => state
+  mediaPath: (state = {}) => state
 });

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { commonReducers } from './commonReducers';
+import commonReducers from './commonReducers';
 import { appDrawerReducer } from './appDrawerReducer';
 
 export default combineReducers({

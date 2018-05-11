@@ -5,7 +5,6 @@ import { setUserLogIn, setUserLogOut } from '../reducers/authenticationReducer';
 import { loadLoginData } from './loadLoginData';
 import { debug } from '../debug/index';
 import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
-import { getLocalRoute } from './apiRouting';
 import { saveItem, clearStorage } from '../stores/localStorage';
 import { getAccessToken } from '../utils/user';
 

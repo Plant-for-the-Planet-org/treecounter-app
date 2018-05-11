@@ -1,5 +1,6 @@
 import AbstractLoginContainer from './AbstractLoginContainer';
 import t from 'tcomb-form-native';
+import { TextInputTemplate } from '../../../components/Authentication/Login.native';
 
 let loginFormSchema = t.struct({
   _username: t.String, // a required string
@@ -11,11 +12,18 @@ let schemaOptions = {
     _password: {
       label: 'Password',
       secureTextEntry: true,
-      error: 'required'
+      placeholder: 'Password',
+      error: 'required',
+      maxLength: 20,
+      template: TextInputTemplate,
+      config: { iconUrl: require('../../../images/baum.png') }
     },
     _username: {
+      placeholder: 'Username',
       label: 'Username',
-      error: 'required'
+      error: 'required',
+      template: TextInputTemplate,
+      config: { iconUrl: require('../../../images/icon1.jpg') }
     }
   }
 };

@@ -26,15 +26,16 @@ import Home from '../TreecounterGraphics/Home';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { refreshToken } from '../../actions/authActions';
 import { getLocalRoute } from '../../actions/apiRouting';
-import { fetchItem } from '../../stores/localStorage';
+import { getAccessToken } from '../../utils/user';
 
 // Class implementation
 class TreeCounter extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     console.log('componentDidMount TreeCounter');
 
     // TODO: move token existence check to a better place
-    if (fetchItem('jwt')) {
+    let token = await getAccessToken();
+    if (token) {
       const { dispatch } = this.props;
       dispatch(refreshToken());
     }

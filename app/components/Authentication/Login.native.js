@@ -6,10 +6,43 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableHighlight
+  TouchableHighlight,
+  Image,
+  TextInput
 } from 'react-native';
 
 let Form = t.form.Form;
+export function TextInputTemplate(locals) {
+  let containerStyle = {
+    backgroundColor: '#F5FCFF',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 20,
+    paddingBottom: 20
+  };
+  let labelStyle = {};
+  let textboxStyle = {
+    flex: 1,
+    paddingLeft: 20,
+    fontSize: 11,
+    color: '#696261'
+  };
+
+  return (
+    <View style={containerStyle}>
+      <Image style={{ width: 15, height: 15 }} source={locals.config.iconUrl} />
+      <TextInput
+        style={textboxStyle}
+        secureTextEntry={locals.secureTextEntry}
+        placeholder={locals.placeholder}
+        keyboardType={locals.keyboardType}
+        maxLength={locals.maxLength}
+        multiline={locals.multiline}
+      />
+    </View>
+  );
+}
+
 export default class Login extends Component {
   onPress = () => {
     let value = this.refs.loginForm.getValue();
@@ -43,10 +76,10 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 36,
-    backgroundColor: '#e86f56',
-    borderColor: '#e86f56',
+    backgroundColor: '#b8d385',
+    borderColor: '#b8d385',
     borderWidth: 1,
-    borderRadius: 50,
+    borderRadius: 5,
     marginBottom: 10,
     alignSelf: 'stretch',
     justifyContent: 'center'

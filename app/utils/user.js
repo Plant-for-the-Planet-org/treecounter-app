@@ -1,10 +1,7 @@
 import { fetchItem } from '../stores/localStorage';
 
-export function getAccessToken() {
-  let token = fetchItem('jwt');
-
-  if (!token) {
-    return null;
-  }
-  return token;
-}
+export const getAccessToken = () => {
+  return fetchItem('jwt')
+    .then(token => token)
+    .catch(err => console.log(err));
+};

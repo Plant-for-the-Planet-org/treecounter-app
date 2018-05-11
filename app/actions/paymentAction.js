@@ -1,20 +1,9 @@
-import axios from 'axios';
-
-import { getApiRoute } from '../actions/apiRouting';
-import * as ROUTES from '../constants/routes';
 import { debug } from '../debug/index';
-import { fetchItem } from '../stores/localStorage';
+import { postAuthenticatedRequest } from '../utils/api';
 
 export function Payment(paymentInfo, plantProjectId) {
-  axios({
-    method: ROUTES.postDonationContributionForm.method,
-    url: getApiRoute(ROUTES.postDonationContributionForm.name, {
-      plantProject: plantProjectId
-    }),
-    data: paymentInfo,
-    headers: {
-      Authorization: `Bearer ${fetchItem('jwt')}`
-    }
+  postAuthenticatedRequest('donationContribution_post', paymentInfo, {
+    plantProject: plantProjectId
   })
     .then(({ data }) => {
       debug(`Not the case ${data}`);

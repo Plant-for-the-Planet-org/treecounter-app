@@ -16,6 +16,7 @@ let schemaOptions = {
       error: 'required',
       maxLength: 20,
       template: TextInputTemplate,
+      autoCapitalize: 'none',
       config: { iconUrl: require('../../../images/baum.png') }
     },
     _username: {
@@ -23,6 +24,7 @@ let schemaOptions = {
       label: 'Username',
       error: 'required',
       template: TextInputTemplate,
+      autoCapitalize: 'none',
       config: { iconUrl: require('../../../images/icon1.jpg') }
     }
   }

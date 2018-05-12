@@ -1,12 +1,12 @@
 import { DrawerNavigator } from 'react-navigation';
 import Trillion from '../TreecounterGraphics/Trillion';
-import Login from '../../containers/Authentication/LoginContainer';
+import LoginContainer from '../../containers/Authentication/LoginContainer';
 
 export const AppDrawerNavigator = DrawerNavigator(
   {
     //TODO hkurra import routing config from config file or rest API
     Login: {
-      screen: Login
+      screen: LoginContainer
     },
     Home: {
       screen: Trillion

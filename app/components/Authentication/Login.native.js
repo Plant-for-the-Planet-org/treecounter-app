@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
+import loginFormSchema from '../../server/formSchemas/login';
+
 import {
-  Platform,
   StyleSheet,
   Text,
   View,
-  ScrollView,
   TouchableHighlight,
   Image,
   TextInput
 } from 'react-native';
 
 let Form = t.form.Form;
-export function TextInputTemplate(locals) {
+
+function TextInputTemplate(locals) {
   let containerStyle = {
     backgroundColor: '#F5FCFF',
     flexDirection: 'row',
@@ -20,7 +21,7 @@ export function TextInputTemplate(locals) {
     paddingTop: 20,
     paddingBottom: 20
   };
-  let labelStyle = {};
+  let imageStyle = { width: 15, height: 15 };
   let textboxStyle = {
     flex: 1,
     paddingLeft: 20,
@@ -30,7 +31,7 @@ export function TextInputTemplate(locals) {
 
   return (
     <View style={containerStyle}>
-      <Image style={{ width: 15, height: 15 }} source={locals.config.iconUrl} />
+      <Image style={imageStyle} source={locals.config.iconUrl} />
       <TextInput
         style={textboxStyle}
         secureTextEntry={locals.secureTextEntry}
@@ -49,6 +50,29 @@ export function TextInputTemplate(locals) {
   );
 }
 
+let schemaOptions = {
+  fields: {
+    _password: {
+      label: 'Password',
+      secureTextEntry: true,
+      placeholder: 'Password',
+      error: 'required',
+      maxLength: 20,
+      template: TextInputTemplate,
+      autoCapitalize: 'none',
+      config: { iconUrl: require('../../images/baum.png') }
+    },
+    _username: {
+      placeholder: 'Username',
+      label: 'Username',
+      error: 'required',
+      template: TextInputTemplate,
+      autoCapitalize: 'none',
+      config: { iconUrl: require('../../images/icon1.jpg') }
+    }
+  }
+};
+
 export default class Login extends Component {
   onPress = () => {
     let value = this.refs.loginForm.getValue();
@@ -58,12 +82,12 @@ export default class Login extends Component {
   };
 
   render() {
-    return this.props.loading ? null : (
+    return (
       <View style={styles.container}>
         <Form
           ref={'loginForm'}
-          type={this.props.schema}
-          options={this.props.schemaOptions}
+          type={loginFormSchema}
+          options={schemaOptions}
         />
         <TouchableHighlight onPress={this.onPress} style={styles.button}>
           <Text style={styles.buttonText}>Log in</Text>

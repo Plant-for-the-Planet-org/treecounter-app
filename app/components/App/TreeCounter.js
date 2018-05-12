@@ -11,7 +11,7 @@ import RegisterTree from '../RegisterTrees/RegisterTrees';
 import Header from '../Header/index';
 import UserContributions from '../UserContributions/UserContributions';
 import { SignUp } from '../Authentication';
-import Login from '../../containers/Authentication/LoginContainer';
+import LoginContainer from '../../containers/Authentication/LoginContainer';
 import ForgotPasswordContainer from '../Authentication/ForgotPassword';
 import ResetPasswordContainer from '../Authentication/ResetPassword';
 import SignupSuccessPage from '../Authentication/SignupSuccessPage';
@@ -92,7 +92,10 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_signupSuccess')}
                 component={SignupSuccessPage}
               />
-              <Route path={getLocalRoute('app_login')} component={Login} />
+              <Route
+                path={getLocalRoute('app_login')}
+                component={LoginContainer}
+              />
               <Route
                 path={getLocalRoute('app_forgotPassword')}
                 component={ForgotPasswordContainer}

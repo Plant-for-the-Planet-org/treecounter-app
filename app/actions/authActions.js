@@ -1,25 +1,24 @@
-import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { NotificationManager } from 'react-notifications';
 
 import { history } from '../components/Common/BrowserRouter';
 import { setUserLogIn, setUserLogOut } from '../reducers/authenticationReducer';
 import { loadLoginData } from './loadLoginData';
-import { getApiRoute } from '../actions/apiRouting';
 import { debug } from '../debug/index';
 import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
 import { getLocalRoute } from './apiRouting';
+import { saveItem, clearStorage } from '../stores/localStorage';
+import { getAccessToken } from '../utils/user';
+import { postRequest, postAuthenticatedRequest } from '../utils/api';
 
 export function login(data) {
-  const request = axios.post(getApiRoute('api_login_check'), data);
+  const request = postRequest('api_login_check', data);
 
   return dispatch => {
     request
       .then(res => {
         const token = res.data.token;
-        if (window.localStorage.getItem('jwt') !== token) {
-          window.localStorage.setItem('jwt', token);
-        }
+        saveItem('jwt', token);
         // merge token data and custom data
         const payload = {
           token,
@@ -32,11 +31,9 @@ export function login(data) {
           pathname: getLocalRoute('app_userHome'),
           state: { id: res.data.data.id }
         }); // TODO: understand what this is doing
-
-        return token;
       })
-      .then(token => {
-        dispatch(loadLoginData(token));
+      .then(() => {
+        dispatch(loadLoginData());
       })
       .catch(error => {
         if (
@@ -60,32 +57,23 @@ export function login(data) {
 }
 
 export function refreshToken() {
-  const request = axios.post(
-    getApiRoute('api_token_refresh'),
-    {},
-    {
-      headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` }
-    }
-  );
+  const request = postAuthenticatedRequest('api_token_refresh', {});
 
   return dispatch => {
     request
       .then(res => {
         const token = res.data.token;
-        if (window.localStorage.getItem('jwt') !== token) {
-          window.localStorage.setItem('jwt', token);
-        }
+
+        saveItem('jwt', token);
         // merge token data and custom data
         const payload = {
           token,
           user: { ...jwtDecode(token), ...res.data.data }
         };
         dispatch(setUserLogIn(payload));
-
-        return token;
       })
-      .then(token => {
-        dispatch(loadLoginData(token));
+      .then(() => {
+        dispatch(loadLoginData());
       })
       .catch(() => {});
   };
@@ -94,7 +82,7 @@ export function refreshToken() {
 export function logoutUser() {
   return dispatch => {
     debug('Logging out');
-    window.localStorage.clear();
+    clearStorage();
     dispatch(setUserLogOut());
     dispatch(setCurrentUserProfileId(null));
     history.push(getLocalRoute('app_homepage'));
@@ -102,8 +90,7 @@ export function logoutUser() {
 }
 
 export function forgot_password(data) {
-  axios
-    .post(getApiRoute('auth_forgotPassword_post'), data)
+  postRequest('auth_forgotPassword_post', data)
     .then(res => {
       debug(res.status);
       NotificationManager.success(
@@ -115,11 +102,12 @@ export function forgot_password(data) {
 }
 
 export function reset_password(data) {
-  data.token = window.localStorage.getItem('jwt');
-  axios
-    .post(getApiRoute('auth_resetPassword_post'), data)
-    .then(res => {
-      debug(res.status);
-    })
-    .catch(err => debug(err));
+  getAccessToken().then(token => {
+    data.token = token;
+    postRequest('auth_resetPassword_post', data)
+      .then(res => {
+        debug(res.status);
+      })
+      .catch(err => debug(err));
+  });
 }

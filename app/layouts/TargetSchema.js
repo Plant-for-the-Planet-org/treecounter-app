@@ -1,14 +1,12 @@
-import axios from 'axios';
 import { Observable } from 'rxjs/Observable';
 
-import { getApiRoute } from '../actions/apiRouting';
+import { getAuthenticatedRequest } from '../utils/api';
 
 const TargetSchema = treecounterId =>
   new Observable(observe => {
-    axios
-      .get(getApiRoute('target_update_form', { treecounter: treecounterId }), {
-        headers: { Authorization: `Bearer ${window.localStorage.getItem('jwt')}` }
-      })
+    getAuthenticatedRequest('target_update_form', {
+      treecounter: treecounterId
+    })
       .then(({ data }) => {
         observe.next(data);
         observe.complete();

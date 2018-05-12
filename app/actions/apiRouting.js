@@ -7,13 +7,13 @@ import { debug } from '../debug';
 Routing.setRoutingData(routes);
 
 export const getApiRoute = (routeName, params) => {
-  const { serverName, baseUrl, locale, serverRendered } = getStore().getState();
+  const { serverName, baseUrl, locale } = getStore().getState();
   debug(
     'route context:',
-    `serverName: ${serverName}, baseUrl: ${baseUrl}, locale: ${locale}, serverRendered: ${serverRendered}`
+    `serverName: ${serverName}, baseUrl: ${baseUrl}, locale: ${locale}`
   );
 
-  const host = serverRendered ? '' : serverName;
+  const host = serverName;
 
   const url = `${host}${baseUrl}${Routing.generate(routeName, {
     _locale: locale,
@@ -24,13 +24,8 @@ export const getApiRoute = (routeName, params) => {
 };
 
 export const getLocalRoute = (routeName, params) => {
-  const { baseUrl, locale, serverRendered } = getStore().getState();
-  debug(
-    'route context:',
-    `baseUrl: ${baseUrl}, locale: ${locale}, serverRendered: ${serverRendered}`
-  );
-
-  //const base = serverRendered ? baseUrl : '';
+  const { baseUrl, locale } = getStore().getState();
+  debug('route context:', `baseUrl: ${baseUrl}, locale: ${locale}`);
 
   const url = `${baseUrl}${Routing.generate(routeName, {
     _locale: locale,

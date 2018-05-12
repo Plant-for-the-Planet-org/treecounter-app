@@ -27,8 +27,7 @@ export default function configureStore() {
     ...initialState,
     serverName: `${scheme}://${host}`,
     baseUrl,
-    locale,
-    serverRendered: context.hasOwnProperty('serverSide')
+    locale
   };
 
   // use devtools if we are in a browser and the extension is enabled

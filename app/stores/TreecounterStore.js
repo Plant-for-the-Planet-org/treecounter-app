@@ -5,6 +5,8 @@ import { context, initialProps } from '../config/index';
 import middlewares from './middlewares';
 import initialState from './storeInitialState';
 
+import { initialState as entitiesState } from '../reducers/entitiesReducer';
+
 import reducers from '../reducers/reducer';
 /**
  * This function will be called in App.js by either:
@@ -26,6 +28,7 @@ export default function configureStore() {
   const commonInitialState = {
     ...initialState,
     serverName: `${scheme}://${host}`,
+    entities: entitiesState,
     baseUrl,
     locale
   };

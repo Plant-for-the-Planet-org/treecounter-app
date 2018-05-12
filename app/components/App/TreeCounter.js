@@ -24,21 +24,12 @@ import Trillion from '../TreecounterGraphics/Trillion';
 import Home from '../TreecounterGraphics/Home';
 
 import { currentUserProfileSelector } from '../../selectors/index';
-import { refreshToken } from '../../actions/authActions';
 import { getLocalRoute } from '../../actions/apiRouting';
-import { getAccessToken } from '../../utils/user';
 
 // Class implementation
 class TreeCounter extends Component {
   async componentDidMount() {
     console.log('componentDidMount TreeCounter');
-
-    // TODO: move token existence check to a better place
-    let token = await getAccessToken();
-    if (token) {
-      const { dispatch } = this.props;
-      dispatch(refreshToken());
-    }
   }
 
   render() {

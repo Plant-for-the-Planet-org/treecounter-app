@@ -1,4 +1,4 @@
-export default class NotificationManager {
+class _NotificationManager {
   success(message, title, timeOut) {
     console.log(message, title);
     //TODO hkurra implement this using native snack bar on platform
@@ -9,3 +9,5 @@ export default class NotificationManager {
     //TODO hkurra implement this using native snack bar on platform
   }
 }
+
+export const NotificationManager = new _NotificationManager();

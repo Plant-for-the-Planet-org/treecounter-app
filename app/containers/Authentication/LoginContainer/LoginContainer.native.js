@@ -1,11 +1,6 @@
 import AbstractLoginContainer from './AbstractLoginContainer';
-import t from 'tcomb-form-native';
 import { TextInputTemplate } from '../../../components/Authentication/Login.native';
-
-let loginFormSchema = t.struct({
-  _username: t.String, // a required string
-  _password: t.String
-});
+import loginFormSchema from '../../../server/formSchemas/login';
 
 let schemaOptions = {
   fields: {
@@ -33,12 +28,6 @@ let schemaOptions = {
 export default class LoginContainer extends AbstractLoginContainer {
   constructor(props) {
     super(props);
-  }
-  onClick(value) {
-    if (value) {
-      console.log(value);
-      this.props.login(value);
-    }
   }
 
   componentDidMount() {

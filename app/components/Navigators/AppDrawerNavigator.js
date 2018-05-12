@@ -1,5 +1,4 @@
 import { DrawerNavigator } from 'react-navigation';
-import React, { Component } from 'react';
 import Trillion from '../TreecounterGraphics/Trillion';
 import Login from '../../containers/Authentication/LoginContainer';
 

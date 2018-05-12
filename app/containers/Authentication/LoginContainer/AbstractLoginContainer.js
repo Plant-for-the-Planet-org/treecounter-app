@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Login from '../../../components/Authentication/Login';
 import { clearStorage } from '../../../stores/localStorage';
 
-export default class exportAbstractLoginContainer extends React.Component {
+export default class AbstractLoginContainer extends React.Component {
   constructor(props) {
     super(props);
     clearStorage();
@@ -21,10 +22,8 @@ export default class exportAbstractLoginContainer extends React.Component {
     );
   }
 
-  onClick() {
-    throw new TypeError(
-      'Abstract method LoginContainer.onClick() is not implemented'
-    );
+  onClick(value) {
+    this.props.login(value);
   }
 
   render() {
@@ -38,3 +37,7 @@ export default class exportAbstractLoginContainer extends React.Component {
     );
   }
 }
+
+AbstractLoginContainer.propTypes = {
+  login: PropTypes.func
+};

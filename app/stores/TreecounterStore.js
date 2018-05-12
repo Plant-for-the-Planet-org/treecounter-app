@@ -1,10 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
+
 import middlewares from './middlewares';
-
 import initialState from './storeInitialState';
-
 import reducers from '../reducers/reducer';
 /**
  * This function will be called in App.js by either:

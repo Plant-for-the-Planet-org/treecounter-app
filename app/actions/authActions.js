@@ -1,4 +1,3 @@
-import jwtDecode from 'jwt-decode';
 import { NotificationManager } from 'react-notifications';
 
 import { history } from '../components/Common/BrowserRouter';
@@ -7,9 +6,10 @@ import { loadLoginData } from './loadLoginData';
 import { debug } from '../debug/index';
 import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
 import { getLocalRoute } from './apiRouting';
-import { saveItem, clearStorage } from '../stores/localStorage';
+import { clearStorage } from '../stores/localStorage';
 import { getAccessToken } from '../utils/user';
-import { postRequest, postAuthenticatedRequest } from '../utils/api';
+import { postRequest } from '../utils/api';
+import { updateJWT } from '../utils/jwtStorage';
 
 export function login(data) {
   const request = postRequest('api_login_check', data);
@@ -17,14 +17,10 @@ export function login(data) {
   return dispatch => {
     request
       .then(res => {
-        const token = res.data.token;
-        saveItem('jwt', token);
-        // merge token data and custom data
-        const payload = {
-          token,
-          user: { ...jwtDecode(token), ...res.data.data }
-        };
-        dispatch(setUserLogIn(payload));
+        const { token, refresh_token, data } = res.data;
+        updateJWT(token, refresh_token);
+
+        dispatch(setUserLogIn({ user: { ...data } }));
 
         NotificationManager.success('Login Successful', 'Welcome', 5000);
         history.push({
@@ -53,29 +49,6 @@ export function login(data) {
           NotificationManager.error(error.message, 'Login Error', 5000);
         }
       });
-  };
-}
-
-export function refreshToken() {
-  const request = postAuthenticatedRequest('api_token_refresh', {});
-
-  return dispatch => {
-    request
-      .then(res => {
-        const token = res.data.token;
-
-        saveItem('jwt', token);
-        // merge token data and custom data
-        const payload = {
-          token,
-          user: { ...jwtDecode(token), ...res.data.data }
-        };
-        dispatch(setUserLogIn(payload));
-      })
-      .then(() => {
-        dispatch(loadLoginData());
-      })
-      .catch(() => {});
   };
 }
 

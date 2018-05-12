@@ -9,7 +9,7 @@ import { getLocalRoute } from './apiRouting';
 import { clearStorage } from '../stores/localStorage';
 import { getAccessToken } from '../utils/user';
 import { postRequest } from '../utils/api';
-import { updateJWT } from '../utils/jwtStorage';
+import { updateJWT } from '../utils/user';
 
 export function login(data) {
   const request = postRequest('api_login_check', data);

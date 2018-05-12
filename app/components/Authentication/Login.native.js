@@ -38,6 +38,11 @@ export function TextInputTemplate(locals) {
         keyboardType={locals.keyboardType}
         maxLength={locals.maxLength}
         multiline={locals.multiline}
+        value={locals.value}
+        onChangeText={value => locals.onChange(value)}
+        onChange={locals.onChangeNative}
+        onKeyPress={locals.onKeyPress}
+        returnKeyType={locals.returnKeyType}
       />
     </View>
   );

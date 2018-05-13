@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import merge from 'lodash/merge';
+import { debug } from '../debug/index';
 
 export const initialState = {
   userProfile: null,
@@ -24,6 +25,7 @@ export const mergeEntities = createAction('ENTITIES_MERGE');
 export default handleActions(
   {
     ENTITIES_MERGE: (state, action) => {
+      debug('Merging entities');
       if (action.payload && action.payload.entities) {
         return merge({}, state, action.payload.entities);
       }

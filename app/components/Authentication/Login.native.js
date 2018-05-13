@@ -56,7 +56,6 @@ let allSchemaOptions = {
   fields: {
     _password: {
       ...schemaOptions.fields._password,
-      maxLength: 20,
       template: TextInputTemplate,
       config: { iconUrl: require('../../images/baum.png') }
     },

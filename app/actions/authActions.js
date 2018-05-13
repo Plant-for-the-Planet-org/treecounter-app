@@ -1,11 +1,10 @@
-import { NotificationManager } from 'react-notifications';
-
-import { history } from '../components/Common/BrowserRouter';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
+import { updateRoute } from '../helpers/routerHelper';
 import { setUserLogIn, setUserLogOut } from '../reducers/authenticationReducer';
 import { loadLoginData } from './loadLoginData';
 import { debug } from '../debug/index';
 import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
-import { getLocalRoute } from './apiRouting';
+
 import { clearStorage } from '../stores/localStorage';
 import { getAccessToken } from '../utils/user';
 import { postRequest } from '../utils/api';
@@ -23,10 +22,8 @@ export function login(data) {
         dispatch(setUserLogIn({ user: { ...data } }));
 
         NotificationManager.success('Login Successful', 'Welcome', 5000);
-        history.push({
-          pathname: getLocalRoute('app_userHome'),
-          state: { id: res.data.data.id }
-        }); // TODO: understand what this is doing
+        updateRoute('app_userHome', dispatch, res.data.data.id);
+        return token;
       })
       .then(() => {
         dispatch(loadLoginData());
@@ -58,7 +55,7 @@ export function logoutUser() {
     clearStorage();
     dispatch(setUserLogOut());
     dispatch(setCurrentUserProfileId(null));
-    history.push(getLocalRoute('app_homepage'));
+    updateRoute('app_homepage');
   };
 }
 
@@ -69,7 +66,7 @@ export function forgot_password(data) {
       NotificationManager.success(
         'Further details have been sent to your mail address'
       );
-      history.push(getLocalRoute('app_login'));
+      updateRoute('app_login');
     })
     .catch(err => debug(err));
 }

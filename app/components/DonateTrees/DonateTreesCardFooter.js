@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectPlantProjectIdAction } from '../../actions/selectPlantProjectIdAction';
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { Link } from 'react-router-dom';
 import * as constants from '../../SupportedLanguages/en';
 import PropTypes from 'prop-types';
 
 const DonateTreesCardFooter = props => {
-  const { selectPlantProjectIdAction, value } = props;
+  const { selectPlantProjectAction, value } = props;
   let route = `/payment/project/${value.id}`;
 
   const handleDonateTreesButton = (event, id) => {
-    selectPlantProjectIdAction(id);
+    selectPlantProjectAction(id);
   };
   return (
     <div className="card-footer">
@@ -30,7 +30,7 @@ const DonateTreesCardFooter = props => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ selectPlantProjectIdAction }, dispatch);
+  return bindActionCreators({ selectPlantProjectAction }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(DonateTreesCardFooter);

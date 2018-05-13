@@ -4,6 +4,7 @@ import { reducer as formReducer } from 'redux-form';
 
 import authenticationReducer from './authenticationReducer';
 import currentUserProfileIdReducer from './currentUserProfileIdReducer';
+
 import selectedPlantProjectIdReducer from './selectedPlantProjectIdReducer';
 import supportedTreecounterReducer from './supportedTreecounterReducer';
 import sideNavReducer from './sideNavReducer';

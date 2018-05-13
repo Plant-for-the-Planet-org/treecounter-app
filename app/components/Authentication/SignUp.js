@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import LiForm from 'liform-react';
 
+import signupFormSchema from '../../server/formSchemas/signup';
 import CustomForm from '../Common/CustomForm';
-import * as signupschema from '../../layouts/registerSchema';
 import { userSignupRequest } from '../../actions/signupActions';
 import SignUpLayout from './SignUpLayout';
 import LoadingIndicator from '../Common/LoadingIndicator';
@@ -11,29 +11,16 @@ export default class SignUp extends Component {
   constructor() {
     super();
     this.state = {
-      schema: {},
-      value: 'individual',
-      Profiletype: 'individual',
-      loading: true
+      schema: signupFormSchema.individual,
+      Profiletype: 'individual'
     };
     this.profile = this.profile.bind(this);
   }
   profile(type) {
-    this.setState({ Profiletype: type });
-    signupschema
-      .SignUpSchema(type)
-      .subscribe(
-        success => this.setState({ schema: success, loading: false }),
-        error => console.log(error)
-      );
-  }
-  componentDidMount() {
-    signupschema
-      .SignUpSchema(this.state.value)
-      .subscribe(
-        success => this.setState({ schema: success, loading: false }),
-        error => console.log(error)
-      );
+    this.setState({
+      schema: signupFormSchema[type],
+      Profiletype: type
+    });
   }
 
   render() {

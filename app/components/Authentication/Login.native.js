@@ -8,25 +8,25 @@ import {
   View,
   TouchableHighlight,
   Image,
-  TextInput
+  TextInput,
+  ImageBackground
 } from 'react-native';
 
 let Form = t.form.Form;
 
 function TextInputTemplate(locals) {
   let containerStyle = {
-    backgroundColor: '#F5FCFF',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingTop: 20,
     paddingBottom: 20
   };
-  let imageStyle = { width: 15, height: 15 };
+  let imageStyle = { width: 26, height: 26 };
   let textboxStyle = {
     flex: 1,
-    paddingLeft: 20,
-    fontSize: 11,
-    color: '#696261'
+    marginLeft: 10,
+    fontSize: 16,
+    color: '#9c9b9b'
   };
 
   return (
@@ -83,16 +83,20 @@ export default class Login extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Form
-          ref={'loginForm'}
-          type={loginFormSchema}
-          options={schemaOptions}
-        />
-        <TouchableHighlight onPress={this.onPress} style={styles.button}>
-          <Text style={styles.buttonText}>Log in</Text>
-        </TouchableHighlight>
-      </View>
+      <ImageBackground style={styles.container}>
+        <Text style={styles.titleText}>Log In</Text>
+        <View style={styles.titleTextLine} />
+        <View style={styles.inputContainer}>
+          <Form
+            ref={'loginForm'}
+            type={loginFormSchema}
+            options={schemaOptions}
+          />
+          <TouchableHighlight onPress={this.onPress} style={styles.button}>
+            <Text style={styles.buttonText}>Log in</Text>
+          </TouchableHighlight>
+        </View>
+      </ImageBackground>
     );
   }
 }
@@ -101,16 +105,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
-    padding: 20
+    padding: 20,
+    alignItems: 'center',
+    backgroundColor: '#f0f0f0'
+  },
+  inputContainer: {
+    width: '100%',
+    justifyContent: 'center',
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    padding: 10,
+    shadowOffset: { width: 0, height: 4 },
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowRadius: 12
   },
   button: {
-    height: 36,
+    height: 50,
     backgroundColor: '#b8d385',
     borderColor: '#b8d385',
     borderWidth: 1,
     borderRadius: 5,
     marginBottom: 10,
+    marginTop: 30,
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
@@ -118,5 +134,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'white',
     alignSelf: 'center'
+  },
+  titleText: {
+    fontSize: 41,
+    color: '#575756',
+    width: 117,
+    fontWeight: 'bold',
+    justifyContent: 'flex-start',
+    bottom: '20%'
+  },
+  titleTextLine: {
+    height: 3,
+    width: 117,
+    bottom: '18%',
+    backgroundColor: '#b8d385'
   }
 });

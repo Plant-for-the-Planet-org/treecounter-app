@@ -26,9 +26,9 @@ function TextInputTemplate(locals) {
     flex: 1,
     marginLeft: 10,
     fontSize: 16,
-    color: '#9c9b9b',
+    color: '#000',
     borderBottomWidth: 1,
-    borderBottomColor: '#9c9b9b'
+    borderColor: '#cecece'
   };
 
   return (

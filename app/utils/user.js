@@ -24,7 +24,7 @@ export const getAccessToken = () => {
 export const updateJWT = (token, refresh_token) => {
   saveItem('token', token);
   saveItem('refresh_token', refresh_token);
-  saveItem('token_expires', getExpirationTimeStamp(token));
+  saveItem('token_expires', `${getExpirationTimeStamp(token)}`);
 };
 
 const getExpirationTimeStamp = token => {
@@ -34,6 +34,6 @@ const getExpirationTimeStamp = token => {
 
 const tokenIsExpired = () => getCurrentUnixTimestamp() > getTokenExpires();
 
-const getTokenExpires = () => fetchItem('token_expires');
+const getTokenExpires = () => parseInt(fetchItem('token_expires'));
 
 const getCurrentUnixTimestamp = () => Math.floor(Date.now() / 1000);

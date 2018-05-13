@@ -5,7 +5,9 @@ i18next.init({
     // React already does escaping
     escapeValue: false
   },
+  // Add language detector later
   lng: 'en', // 'en' | 'es'
+
   // Using simple hardcoded resources for simple example
   resources: {
     en: {
@@ -15,7 +17,7 @@ i18next.init({
         name: { label: 'Name' }
       }
     },
-    es: {
+    de: {
       translation: {
         age: { label: 'Años' },
         home: { label: 'Casa' },

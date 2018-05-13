@@ -1,8 +1,6 @@
 {
   "parser": "babel-eslint",
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react", "react-native"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -15,17 +13,21 @@
     "browser": true,
     "commonjs": true,
     "es6": true,
-    "jquery": true
+    "jquery": true,
+    "react-native/react-native": true,
+    "node": true
   },
   "rules": {
     "eol-last": 2,
     "jsx-quotes": 2,
-    "no-underscore-dangle": [
-      0
-    ],
+    "no-underscore-dangle": [0],
     "no-unused-vars": 2,
     "no-undef": 2,
     "no-var": 2,
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 2,
+    "react-native/no-color-literals": 2,
     "react/display-name": 0,
     "react/jsx-boolean-value": 0,
     "react/jsx-no-undef": 2,
@@ -48,9 +50,6 @@
         "allowTemplateLiterals": true
       }
     ],
-    "strict": [
-      2,
-      "global"
-    ]
+    "strict": [2, "global"]
   }
 }

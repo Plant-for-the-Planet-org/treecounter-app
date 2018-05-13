@@ -1,11 +1,9 @@
-import axios from 'axios';
 import { Observable } from 'rxjs/Observable';
 
-import { getApiRoute } from '../actions/apiRouting';
+import { getRequest } from '../utils/api';
 
 const ResetPasswordSchema = new Observable(observe => {
-  axios
-    .get(getApiRoute('auth_resetPassword_form'))
+  getRequest('auth_resetPassword_form')
     .then(({ data }) => {
       observe.next(data.schema);
       observe.complete();

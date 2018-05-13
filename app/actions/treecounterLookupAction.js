@@ -1,7 +1,6 @@
-import axios from 'axios';
+import { getRequest } from '../utils/api';
 import { normalize, denormalize } from 'normalizr';
 
-import { getApiRoute } from '../actions/apiRouting';
 import { treecounterSchema } from '../schemas/index';
 import { mergeEntities } from '../reducers/entitiesReducer';
 
@@ -20,12 +19,12 @@ export function treecounterLookupAction(treecounterId) {
 
     // the treecounter has not been fetched yet
     // so we store it in normalized form in the redux-store but return the original data
-    axios
-      .get(getApiRoute('treecounter_get', { treecounter: treecounterId }))
-      .then(result => {
+    getRequest('treecounter_get', { treecounter: treecounterId }).then(
+      result => {
         const treecounter = result.data;
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         return treecounter;
-      });
+      }
+    );
   };
 }

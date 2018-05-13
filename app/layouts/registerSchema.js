@@ -1,12 +1,10 @@
-import axios from 'axios';
 import { Observable } from 'rxjs/Observable';
 
-import { getApiRoute } from '../actions/apiRouting';
+import { getRequest } from '../utils/api';
 
 const SignUpSchema = profileType =>
   new Observable(observe => {
-    axios
-      .get(getApiRoute('registration_forms'))
+    getRequest('registration_forms')
       .then(({ data }) => {
         if (profileType === 'tpo') {
           observe.next(data.tpo.schema);

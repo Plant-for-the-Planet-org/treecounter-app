@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NotificationAction } from '../../actions/notificationAction';
 import renderHTML from 'react-render-html';
 
-class Notification extends Component {
+export default class Notification extends Component {
   constructor() {
     super();
     this.state = {
@@ -35,13 +35,13 @@ class Notification extends Component {
 
   render() {
     return this.state.loading ? (
-      <ul style={{ width: '244px' }} />
+      <ul style={widthStyle} />
     ) : (
-        <ul className="notification-popover">
-          {this.NotificationDisplay(this.state.schema)}
-        </ul>
-      );
+      <ul className="notification-popover">
+        {this.NotificationDisplay(this.state.schema)}
+      </ul>
+    );
   }
 }
 
-export default Notification;
+const widthStyle = { width: '244px' };

@@ -21,12 +21,14 @@ function TextInputTemplate(locals) {
     paddingTop: 20,
     paddingBottom: 20
   };
-  let imageStyle = { width: 26, height: 26 };
+  let imageStyle = { width: 26, height: 26, resizeMode: 'center' };
   let textboxStyle = {
     flex: 1,
     marginLeft: 10,
     fontSize: 16,
-    color: '#9c9b9b'
+    color: '#9c9b9b',
+    borderBottomWidth: 1,
+    borderBottomColor: '#9c9b9b'
   };
 
   return (
@@ -85,7 +87,7 @@ export default class Login extends Component {
     return (
       <ImageBackground style={styles.container}>
         <Text style={styles.titleText}>Log In</Text>
-        <View style={styles.titleTextLine} />
+        <View style={styles.titleTextUnderline} />
         <View style={styles.inputContainer}>
           <Form
             ref={'loginForm'}
@@ -95,6 +97,14 @@ export default class Login extends Component {
           <TouchableHighlight onPress={this.onPress} style={styles.button}>
             <Text style={styles.buttonText}>Log in</Text>
           </TouchableHighlight>
+          <View style={styles.bottomRow}>
+            <Text style={styles.bottomText}>Forgot your password? </Text>
+            <Text style={styles.bottomTextHighlight}>Reset.</Text>
+          </View>
+          <View style={styles.bottomRow}>
+            <Text style={styles.bottomText}>Don't have an account? </Text>
+            <Text style={styles.bottomTextHighlight}>Sign up.</Text>
+          </View>
         </View>
       </ImageBackground>
     );
@@ -121,17 +131,17 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 50,
-    backgroundColor: '#b8d385',
-    borderColor: '#b8d385',
+    backgroundColor: '#b9d384',
+    borderColor: '#b9d384',
     borderWidth: 1,
     borderRadius: 5,
-    marginBottom: 10,
+    marginBottom: 21,
     marginTop: 30,
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 29,
     color: 'white',
     alignSelf: 'center'
   },
@@ -143,10 +153,23 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     bottom: '20%'
   },
-  titleTextLine: {
+  titleTextUnderline: {
     height: 3,
     width: 117,
     bottom: '18%',
-    backgroundColor: '#b8d385'
+    backgroundColor: '#b9d384'
+  },
+  bottomRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  bottomText: {
+    fontSize: 11,
+    color: '#696261'
+  },
+  bottomTextHighlight: {
+    fontSize: 11,
+    color: '#ec6453'
   }
 });

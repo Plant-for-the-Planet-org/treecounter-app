@@ -65,8 +65,8 @@ let schemaOptions = {
       config: { iconUrl: require('../../images/baum.png') }
     },
     _username: {
-      placeholder: 'Username',
-      label: 'Username',
+      placeholder: 'Email',
+      label: 'Email',
       error: 'required',
       template: TextInputTemplate,
       autoCapitalize: 'none',
@@ -86,8 +86,10 @@ export default class Login extends Component {
   render() {
     return (
       <ImageBackground style={styles.container}>
-        <Text style={styles.titleText}>Log In</Text>
-        <View style={styles.titleTextUnderline} />
+        <View style={styles.loginHeader}>
+          <Text style={styles.titleText}>Log In</Text>
+          <View style={styles.titleTextUnderline} />
+        </View>
         <View style={styles.inputContainer}>
           <Form
             ref={'loginForm'}
@@ -150,13 +152,11 @@ const styles = StyleSheet.create({
     color: '#575756',
     width: 117,
     fontWeight: 'bold',
-    justifyContent: 'flex-start',
-    bottom: '20%'
+    justifyContent: 'flex-start'
   },
   titleTextUnderline: {
     height: 3,
     width: 117,
-    bottom: '18%',
     backgroundColor: '#b9d384'
   },
   bottomRow: {
@@ -171,5 +171,8 @@ const styles = StyleSheet.create({
   bottomTextHighlight: {
     fontSize: 11,
     color: '#ec6453'
+  },
+  loginHeader: {
+    marginBottom: 60
   }
 });

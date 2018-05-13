@@ -7,11 +7,11 @@ export const getSelectedPlantProjectId = state => state.selectedPlantProjectId;
 
 export const initialState = null;
 
-const selectPlantProjectReducer = handleActions(
+const selectedPlantProjectIdReducer = handleActions(
   {
     [setSelectedPlantProjectId]: (state, action) => action.payload
   },
   initialState
 );
 
-export default selectPlantProjectReducer;
+export default selectedPlantProjectIdReducer;

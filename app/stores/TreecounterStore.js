@@ -6,7 +6,6 @@ import middlewares from './middlewares';
 import initialState from './storeInitialState';
 
 import { initialState as entitiesState } from '../reducers/entitiesReducer';
-
 import reducers from '../reducers/reducer';
 /**
  * This function will be called in App.js by either:

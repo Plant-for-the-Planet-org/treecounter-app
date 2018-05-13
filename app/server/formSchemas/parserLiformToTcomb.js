@@ -28,20 +28,29 @@ let liformSchema = {
   submit_method: 'POST'
 };
 
+let schemaOptions = {
+  fields: {}
+};
+
 let properties = liformSchema.properties;
+let fields = schemaOptions.fields;
+// let requiredArray = liformSchema.required.map(value => {
+//   console.log(properties[value].title);
+//   return properties[value].title;
+// });
 
-let requiredArray = liformSchema.required.map(value => {
-  console.log(properties[value].title);
-  return properties[value].title;
-});
+// liformSchema.required = requiredArray;
 
-liformSchema.required = requiredArray;
-let keyArray = Object.keys(properties);
-
-for (let propertyKey in keyArray) {
-  properties[properties[keyArray[propertyKey]].title] =
-    properties[keyArray[propertyKey]];
-  delete properties[keyArray[propertyKey]];
+for (let propertyKey in properties) {
+  if (properties.hasOwnProperty(propertyKey)) {
+    let options = {};
+    options.placeholder = properties[propertyKey].title;
+    options.autoCapitalize = 'none';
+    if (properties[propertyKey].widget === 'password') {
+      options.secureTextEntry = true;
+    }
+    fields.propertyKey = options;
+  }
 }
 
 console.log(liformSchema);

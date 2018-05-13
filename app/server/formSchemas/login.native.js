@@ -1,6 +1,26 @@
-import t from 'tcomb-form-native';
+let transform = require('tcomb-json-schema');
+import schemaLiform from './login.js';
 
-export default t.struct({
-  _username: t.String, // a required string
-  _password: t.String
-});
+const loginFormSchema = transform(schemaLiform);
+
+let schemaOptions = {
+  fields: {}
+};
+
+let properties = schemaLiform.properties;
+let fields = schemaOptions.fields;
+
+for (let propertyKey in properties) {
+  if (properties.hasOwnProperty(propertyKey)) {
+    let options = {};
+    options.placeholder = properties[propertyKey].title;
+    options.autoCapitalize = 'none';
+    if (properties[propertyKey].widget === 'password') {
+      options.secureTextEntry = true;
+    }
+    fields[propertyKey] = options;
+  }
+}
+
+console.log(schemaOptions);
+export { schemaOptions, loginFormSchema };

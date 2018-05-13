@@ -4,7 +4,7 @@ import { getRequest } from '../utils/api';
 
 const SignUpSchema = profileType =>
   new Observable(observe => {
-    getRequest('registration_forms')
+    getRequest('signup_forms')
       .then(({ data }) => {
         if (profileType === 'tpo') {
           observe.next(data.tpo.schema);

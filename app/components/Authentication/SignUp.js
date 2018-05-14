@@ -43,8 +43,7 @@ export default class SignUp extends Component {
         <LiForm
           schema={this.state.schema}
           baseForm={CustomForm}
-          onSubmit={userSignupRequest}
-          passparam={this.state.Profiletype}
+          onSubmit={userSignupRequest.bind(this, this.state.Profiletype)}
           buttonText="Register"
           buttonWidth="240"
         />

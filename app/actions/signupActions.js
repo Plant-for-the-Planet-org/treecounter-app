@@ -3,7 +3,7 @@ import { NotificationManager } from 'react-notifications';
 import { debug } from '../debug/index';
 import { postRequest } from '../utils/api';
 
-export function userSignupRequest(userData, profileType) {
+export function userSignupRequest(profileType, userData) {
   debug(userData, profileType);
   if (userData.password.first === userData.password.second) {
     return postRequest('register_post', userData, { profileType: profileType })

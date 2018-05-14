@@ -17,6 +17,7 @@ import ResetPasswordContainer from '../Authentication/ResetPassword';
 import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
 import Menu from '../Menu';
+import Footer from '../Footer';
 
 // Components which use SVG
 import PublicTreecounter from '../TreecounterGraphics/PublicTreecounter';
@@ -126,6 +127,7 @@ class TreeCounter extends Component {
                 component={PublicTreecounter}
               />
             </div>
+            <Footer />
           </div>
         </BrowserRouter>
         <NotificationContainer />

@@ -1,6 +1,7 @@
-import t from 'tcomb-form-native';
+import schemaLiform from './login.js';
+import parseJsonToTcomb from './parserLiformToTcomb';
 
-export default t.struct({
-  _username: t.String, // a required string
-  _password: t.String
-});
+const { transformedSchema: loginFormSchema, schemaOptions } = parseJsonToTcomb(
+  schemaLiform
+);
+export { schemaOptions, loginFormSchema };

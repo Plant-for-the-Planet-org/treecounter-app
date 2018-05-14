@@ -7,7 +7,6 @@ import currentUserProfileIdReducer from './currentUserProfileIdReducer';
 
 import selectedPlantProjectIdReducer from './selectedPlantProjectIdReducer';
 import supportedTreecounterReducer from './supportedTreecounterReducer';
-
 import sideNavReducer from './sideNavReducer';
 
 export default combineReducers({

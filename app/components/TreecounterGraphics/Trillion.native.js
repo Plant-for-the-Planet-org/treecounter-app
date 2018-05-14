@@ -14,12 +14,15 @@ export default class Trillion extends Component {
   }
 }
 
+const skyBlue = '#F5FCFF';
+const red = '#333333';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: skyBlue
   },
   welcome: {
     fontSize: 20,
@@ -28,7 +31,7 @@ const styles = StyleSheet.create({
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
+    color: red,
     marginBottom: 5
   }
 });

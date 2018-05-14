@@ -1,59 +1,40 @@
 let transform = require('tcomb-json-schema');
 
-let TcombType = transform({
-  type: 'string',
-  enum: ['Street', 'Avenue', 'Boulevard']
-});
+export default function parseJsonToTcomb(liformSchemaJson) {
+  let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));
+  let schemaOptions = {
+    fields: {}
+  };
 
-console.log(TcombType);
+  let properties = liformSchema.properties;
+  let fields = schemaOptions.fields;
 
-let liformSchema = {
-  title: 'login',
-  type: 'object',
-  properties: {
-    _username: {
-      type: 'string',
-      title: 'Username',
-      propertyOrder: 1
-    },
-    _password: {
-      type: 'string',
-      title: 'Password',
-      widget: 'password',
-      propertyOrder: 2
+  let newEnum = {};
+  for (let propertyKey in properties) {
+    if (properties.hasOwnProperty(propertyKey)) {
+      if (properties[propertyKey].hasOwnProperty('enum')) {
+        for (let enumKeys in properties[propertyKey].enum) {
+          newEnum[properties[propertyKey].enum[enumKeys]] =
+            properties[propertyKey].enum_titles[enumKeys];
+        }
+        properties[propertyKey].enum = newEnum;
+        delete properties[propertyKey].enum_titles;
+      }
     }
-  },
-  required: ['_username', '_password'],
-  submit_url: '/api/login_check',
-  submit_method: 'POST'
-};
-
-let schemaOptions = {
-  fields: {}
-};
-
-let properties = liformSchema.properties;
-let fields = schemaOptions.fields;
-// let requiredArray = liformSchema.required.map(value => {
-//   console.log(properties[value].title);
-//   return properties[value].title;
-// });
-
-// liformSchema.required = requiredArray;
-
-for (let propertyKey in properties) {
-  if (properties.hasOwnProperty(propertyKey)) {
-    let options = {};
-    options.placeholder = properties[propertyKey].title;
-    options.autoCapitalize = 'none';
-    if (properties[propertyKey].widget === 'password') {
-      options.secureTextEntry = true;
-    }
-    fields.propertyKey = options;
   }
-}
 
-console.log(liformSchema);
-let transformedSchema = transform(liformSchema);
-console.log(transformedSchema);
-export default transformedSchema;
+  for (let propertyKey in properties) {
+    if (properties.hasOwnProperty(propertyKey)) {
+      let options = {};
+      options.placeholder = properties[propertyKey].title;
+      options.autoCapitalize = 'none';
+      if (properties[propertyKey].widget === 'password') {
+        options.secureTextEntry = true;
+      }
+      fields[propertyKey] = options;
+    }
+  }
+
+  let transformedSchema = transform(liformSchema);
+  return { schemaOptions: schemaOptions, transformedSchema: transformedSchema };
+}

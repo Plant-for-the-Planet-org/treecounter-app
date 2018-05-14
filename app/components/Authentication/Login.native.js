@@ -8,25 +8,27 @@ import {
   View,
   TouchableHighlight,
   Image,
-  TextInput
+  TextInput,
+  ImageBackground
 } from 'react-native';
 
 let Form = t.form.Form;
 
 function TextInputTemplate(locals) {
   let containerStyle = {
-    backgroundColor: '#F5FCFF',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingTop: 20,
     paddingBottom: 20
   };
-  let imageStyle = { width: 15, height: 15 };
+  let imageStyle = { width: 26, height: 26, resizeMode: 'center' };
   let textboxStyle = {
     flex: 1,
-    paddingLeft: 20,
-    fontSize: 11,
-    color: '#696261'
+    marginLeft: 10,
+    fontSize: 16,
+    color: '#000',
+    borderBottomWidth: 1,
+    borderColor: '#cecece'
   };
 
   return (
@@ -63,8 +65,8 @@ let schemaOptions = {
       config: { iconUrl: require('../../images/baum.png') }
     },
     _username: {
-      placeholder: 'Username',
-      label: 'Username',
+      placeholder: 'Email',
+      label: 'Email',
       error: 'required',
       template: TextInputTemplate,
       autoCapitalize: 'none',
@@ -83,16 +85,30 @@ export default class Login extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Form
-          ref={'loginForm'}
-          type={loginFormSchema}
-          options={schemaOptions}
-        />
-        <TouchableHighlight onPress={this.onPress} style={styles.button}>
-          <Text style={styles.buttonText}>Log in</Text>
-        </TouchableHighlight>
-      </View>
+      <ImageBackground style={styles.container}>
+        <View style={styles.loginHeader}>
+          <Text style={styles.titleText}>Log In</Text>
+          <View style={styles.titleTextUnderline} />
+        </View>
+        <View style={styles.inputContainer}>
+          <Form
+            ref={'loginForm'}
+            type={loginFormSchema}
+            options={schemaOptions}
+          />
+          <TouchableHighlight onPress={this.onPress} style={styles.button}>
+            <Text style={styles.buttonText}>Log in</Text>
+          </TouchableHighlight>
+          <View style={styles.bottomRow}>
+            <Text style={styles.bottomText}>Forgot your password? </Text>
+            <Text style={styles.bottomTextHighlight}>Reset.</Text>
+          </View>
+          <View style={styles.bottomRow}>
+            <Text style={styles.bottomText}>Don't have an account? </Text>
+            <Text style={styles.bottomTextHighlight}>Sign up.</Text>
+          </View>
+        </View>
+      </ImageBackground>
     );
   }
 }
@@ -101,22 +117,62 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
-    padding: 20
+    padding: 20,
+    alignItems: 'center',
+    backgroundColor: '#f0f0f0'
+  },
+  inputContainer: {
+    width: '100%',
+    justifyContent: 'center',
+    borderRadius: 10,
+    backgroundColor: 'white',
+    padding: 10,
+    shadowOffset: { width: 0, height: 4 },
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowRadius: 12
   },
   button: {
-    height: 36,
-    backgroundColor: '#b8d385',
-    borderColor: '#b8d385',
+    height: 50,
+    backgroundColor: '#b9d384',
+    borderColor: '#b9d384',
     borderWidth: 1,
     borderRadius: 5,
-    marginBottom: 10,
+    marginBottom: 21,
+    marginTop: 30,
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 29,
     color: 'white',
     alignSelf: 'center'
+  },
+  titleText: {
+    fontSize: 41,
+    color: '#575756',
+    width: 117,
+    fontWeight: 'bold',
+    justifyContent: 'flex-start'
+  },
+  titleTextUnderline: {
+    height: 3,
+    width: 117,
+    backgroundColor: '#b9d384'
+  },
+  bottomRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  bottomText: {
+    fontSize: 11,
+    color: '#696261'
+  },
+  bottomTextHighlight: {
+    fontSize: 11,
+    color: '#ec6453'
+  },
+  loginHeader: {
+    marginBottom: 60
   }
 });

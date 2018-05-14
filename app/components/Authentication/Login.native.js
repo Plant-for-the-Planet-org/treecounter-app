@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
-import loginFormSchema from '../../server/formSchemas/login';
+import { loginFormSchema, schemaOptions } from '../../server/formSchemas/login';
 
 import {
   StyleSheet,
@@ -52,24 +52,16 @@ function TextInputTemplate(locals) {
   );
 }
 
-let schemaOptions = {
+let allSchemaOptions = {
   fields: {
     _password: {
-      label: 'Password',
-      secureTextEntry: true,
-      placeholder: 'Password',
-      error: 'required',
-      maxLength: 20,
+      ...schemaOptions.fields._password,
       template: TextInputTemplate,
-      autoCapitalize: 'none',
       config: { iconUrl: require('../../images/baum.png') }
     },
     _username: {
-      placeholder: 'Email',
-      label: 'Email',
-      error: 'required',
+      ...schemaOptions.fields._username,
       template: TextInputTemplate,
-      autoCapitalize: 'none',
       config: { iconUrl: require('../../images/icon1.jpg') }
     }
   }
@@ -94,7 +86,7 @@ export default class Login extends Component {
           <Form
             ref={'loginForm'}
             type={loginFormSchema}
-            options={schemaOptions}
+            options={allSchemaOptions}
           />
           <TouchableHighlight onPress={this.onPress} style={styles.button}>
             <Text style={styles.buttonText}>Log in</Text>

@@ -1,5 +1,6 @@
 import { NotificationManager } from 'react-notifications';
 
+import { updateRoute } from '../helpers/routerHelper';
 import { debug } from '../debug/index';
 import { postRequest } from '../utils/api';
 
@@ -16,7 +17,7 @@ export function userSignupRequest(profileType, userData) {
             5000
           );
           debug(res);
-          history.push('/verify');
+          updateRoute('/verify');
         }
       })
       .catch(err => console.log(err));

@@ -11,15 +11,17 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <h2 className="cs-heading">Log In</h2>
-        <LiForm
-          schema={loginFormSchema}
-          onSubmit={this.props.onClick}
-          baseForm={CustomForm}
-          buttonText="Log In"
-          buttonWidth="240"
-        />
-        <LoginFooter />
+        <h2 className="pftp-heading">Log In</h2>
+        <div className="card-layout login-card">
+          <LiForm
+            schema={loginFormSchema}
+            onSubmit={this.props.onClick}
+            baseForm={CustomForm}
+            buttonText="Log In"
+            buttonWidth="240"
+          />
+          <LoginFooter />
+        </div>
       </div>
     );
   }

@@ -2,12 +2,12 @@
 @import "_variables";
 
 // Import components css
-@import "./tree.css";
+// @import "./tree.css";
 @import "./treecounter.css";
-@import "./notification.css";
+// @import "./notification.css";
 @import "./layer.css";
-@import "./menu.css";
-@import "./search.css";
+// @import "./menu.css";
+// @import "./search.css";
 @import "./carousel.css";
 
 // Import components SCSS
@@ -31,6 +31,9 @@
 @import "./_home_svg.scss";
 @import "./_arrow_button_rotatable.scss";
 @import "./_footer.scss";
+@import "./_card_layout.scss";
+@import "./_login.scss";
+@import "./_heading.scss";
 
 // ESRI Maps CSS
-@import url('https://js.arcgis.com/3.23/esri/css/esri.css');
+@import url("https://js.arcgis.com/3.23/esri/css/esri.css");

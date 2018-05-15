@@ -10,7 +10,7 @@ import TargetPage from '../Target';
 import RegisterTree from '../RegisterTrees/RegisterTrees';
 import Header from '../Header/index';
 import UserContributions from '../UserContributions/UserContributions';
-import SignUp from '../Authentication/SignUp';
+import SignUp from '../../containers/Authentication/SignUpContainer';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import ForgotPasswordContainer from '../Authentication/ForgotPassword';
 import ResetPasswordContainer from '../Authentication/ResetPassword';

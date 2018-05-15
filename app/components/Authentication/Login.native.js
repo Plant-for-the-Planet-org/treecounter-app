@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
+import PropTypes from 'prop-types';
+
 import { loginFormSchema, schemaOptions } from '../../server/formSchemas/login';
 
 import {
@@ -104,6 +106,10 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  onClick: PropTypes.func.isRequired
+};
 
 const styles = StyleSheet.create({
   container: {

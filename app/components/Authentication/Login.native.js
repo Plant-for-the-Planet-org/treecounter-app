@@ -32,24 +32,33 @@ function TextInputTemplate(locals) {
     borderBottomWidth: 1,
     borderColor: '#cecece'
   };
-
+  let errorBlockStyle = locals.stylesheet.errorBlock;
+  let error =
+    locals.hasError && locals.error ? (
+      <Text accessibilityLiveRegion="polite" style={errorBlockStyle}>
+        {locals.error}
+      </Text>
+    ) : null;
   return (
-    <View style={containerStyle}>
-      <Image style={imageStyle} source={locals.config.iconUrl} />
-      <TextInput
-        style={textboxStyle}
-        secureTextEntry={locals.secureTextEntry}
-        placeholder={locals.placeholder}
-        keyboardType={locals.keyboardType}
-        maxLength={locals.maxLength}
-        multiline={locals.multiline}
-        value={locals.value}
-        onChangeText={value => locals.onChange(value)}
-        onChange={locals.onChangeNative}
-        onKeyPress={locals.onKeyPress}
-        returnKeyType={locals.returnKeyType}
-        autoCapitalize={locals.autoCapitalize}
-      />
+    <View>
+      <View style={containerStyle}>
+        <Image style={imageStyle} source={locals.config.iconUrl} />
+        <TextInput
+          style={textboxStyle}
+          secureTextEntry={locals.secureTextEntry}
+          placeholder={locals.placeholder}
+          keyboardType={locals.keyboardType}
+          maxLength={locals.maxLength}
+          multiline={locals.multiline}
+          value={locals.value}
+          onChangeText={value => locals.onChange(value)}
+          onChange={locals.onChangeNative}
+          onKeyPress={locals.onKeyPress}
+          returnKeyType={locals.returnKeyType}
+          autoCapitalize={locals.autoCapitalize}
+        />
+      </View>
+      {error}
     </View>
   );
 }
@@ -59,21 +68,28 @@ let allSchemaOptions = {
     _password: {
       ...schemaOptions.fields._password,
       template: TextInputTemplate,
-      config: { iconUrl: require('../../images/baum.png') }
+      config: { iconUrl: require('../../images/login/key.png') },
+      error: 'required'
     },
     _username: {
       ...schemaOptions.fields._username,
       template: TextInputTemplate,
-      config: { iconUrl: require('../../images/icon1.jpg') }
+      config: { iconUrl: require('../../images/login/mail.png') },
+      error: 'required'
     }
   }
 };
 
 export default class Login extends Component {
   onPress = () => {
-    let value = this.refs.loginForm.getValue();
-    if (value) {
-      this.props.onClick(value);
+    let result = this.refs.loginForm.validate();
+    if (result.isValid()) {
+      let value = this.refs.loginForm.getValue();
+      if (value) {
+        this.props.onClick(value);
+      }
+    } else if (this.props.onError) {
+      this.props.onError(result.errors);
     }
   };
 
@@ -108,7 +124,8 @@ export default class Login extends Component {
 }
 
 Login.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  onError: PropTypes.func
 };
 
 const styles = StyleSheet.create({

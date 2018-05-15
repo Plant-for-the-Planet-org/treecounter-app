@@ -1,6 +1,7 @@
 import { DrawerNavigator } from 'react-navigation';
 import Trillion from '../TreecounterGraphics/Trillion';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
+import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 
 export const AppDrawerNavigator = DrawerNavigator(
   {
@@ -10,6 +11,9 @@ export const AppDrawerNavigator = DrawerNavigator(
     },
     Home: {
       screen: Trillion
+    },
+    ForgotPassword: {
+      screen: ForgotPasswordContainer
     }
   },
   {

@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 
-import { loginFormSchema, schemaOptions } from '../../server/formSchemas/login';
+import {
+  forgotPasswordFormSchema,
+  schemaOptions
+} from '../../server/formSchemas/forgotpassword';
 
 import {
   StyleSheet,
@@ -13,7 +16,6 @@ import {
   TextInput,
   ImageBackground
 } from 'react-native';
-import { updateRoute } from '../../helpers/routerHelper';
 
 let Form = t.form.Form;
 
@@ -57,59 +59,40 @@ function TextInputTemplate(locals) {
 
 let allSchemaOptions = {
   fields: {
-    _password: {
-      ...schemaOptions.fields._password,
+    email: {
+      ...schemaOptions.fields.email,
       template: TextInputTemplate,
       config: { iconUrl: require('../../images/baum.png') }
-    },
-    _username: {
-      ...schemaOptions.fields._username,
-      template: TextInputTemplate,
-      config: { iconUrl: require('../../images/icon1.jpg') }
     }
   }
 };
 
-export default class Login extends Component {
+export default class ForgotPassword extends Component {
   onPress = () => {
-    let value = this.refs.loginForm.getValue();
+    let value = this.refs.forgotPasswordForm.getValue();
     if (value) {
       this.props.onClick(value);
     }
   };
 
-  onForgotPasswordClicked() {
-    dispatch => updateRoute('app_forgotPassword', dispatch);
-  }
-
   render() {
     return (
       <ImageBackground style={styles.container}>
-        <View style={styles.loginHeader}>
-          <Text style={styles.titleText}>Log In</Text>
+        <View style={styles.header}>
+          <Text style={styles.titleText}>Forgot your password?</Text>
           <View style={styles.titleTextUnderline} />
         </View>
         <View style={styles.inputContainer}>
           <Form
-            ref={'loginForm'}
-            type={loginFormSchema}
+            ref={'forgotPasswordForm'}
+            type={forgotPasswordFormSchema}
             options={allSchemaOptions}
           />
           <TouchableHighlight onPress={this.onPress} style={styles.button}>
-            <Text style={styles.buttonText}>Log in</Text>
+            <Text style={styles.buttonText}>Reset Password</Text>
           </TouchableHighlight>
           <View style={styles.bottomRow}>
-            <Text style={styles.bottomText}>Forgot your password?</Text>
-            <Text
-              onPress={this.onForgotPasswordClicked}
-              style={styles.bottomTextHighlight}
-            >
-              Reset.
-            </Text>
-          </View>
-          <View style={styles.bottomRow}>
-            <Text style={styles.bottomText}>Don't have an account? </Text>
-            <Text style={styles.bottomTextHighlight}>Sign up.</Text>
+            <Text style={styles.bottomTextHighlight}>Try to login again.</Text>
           </View>
         </View>
       </ImageBackground>
@@ -117,7 +100,7 @@ export default class Login extends Component {
   }
 }
 
-Login.propTypes = {
+ForgotPassword.propTypes = {
   onClick: PropTypes.func.isRequired
 };
 
@@ -156,9 +139,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   titleText: {
-    fontSize: 41,
+    fontSize: 30,
     color: '#575756',
-    width: 117,
     fontWeight: 'bold',
     justifyContent: 'flex-start',
     marginBottom: 20
@@ -166,22 +148,21 @@ const styles = StyleSheet.create({
   titleTextUnderline: {
     height: 3,
     width: 117,
-    backgroundColor: '#b9d384'
+    backgroundColor: '#b9d384',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    justifyContent: 'center'
   },
   bottomRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
-  bottomText: {
-    fontSize: 11,
-    color: '#696261'
-  },
   bottomTextHighlight: {
     fontSize: 11,
     color: '#ec6453'
   },
-  loginHeader: {
+  header: {
     marginBottom: 60
   }
 });

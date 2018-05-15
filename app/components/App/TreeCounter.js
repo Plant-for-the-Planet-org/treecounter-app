@@ -12,7 +12,7 @@ import Header from '../Header/index';
 import UserContributions from '../UserContributions/UserContributions';
 import SignUp from '../../containers/Authentication/SignUpContainer';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
-import ForgotPasswordContainer from '../Authentication/ForgotPassword';
+import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 import ResetPasswordContainer from '../Authentication/ResetPassword';
 import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';

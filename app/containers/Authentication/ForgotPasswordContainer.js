@@ -6,9 +6,8 @@ import PropTypes from 'prop-types';
 import ForgotPassword from '../../components/Authentication/ForgotPassword';
 import { clearStorage } from '../../stores/localStorage';
 import { forgot_password } from '../../actions/authActions';
-import ForgotPasswordContainer from '../../components/Authentication/ForgotPassword';
 
-class LoginContainer extends React.Component {
+class ForgotPasswordContainer extends React.Component {
   constructor(props) {
     super(props);
     clearStorage();
@@ -30,6 +29,6 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(null, mapDispatchToProps)(ForgotPasswordContainer);
 
-LoginContainer.propTypes = {
+ForgotPasswordContainer.propTypes = {
   forgot_password: PropTypes.func
 };

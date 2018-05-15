@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import loginFormSchema from '../../server/formSchemas/login';
-
 import LiForm from 'liform-react';
 
+import loginFormSchema from '../../server/formSchemas/login';
 import CustomForm from '../Common/CustomForm';
 import LoginFooter from './LoginFooter';
 

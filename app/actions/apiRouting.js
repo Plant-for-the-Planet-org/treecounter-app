@@ -24,6 +24,7 @@ export const getApiRoute = (routeName, params) => {
 };
 
 export const getLocalRoute = (routeName, params) => {
+  debug('enter local route');
   const { baseUrl, locale } = getStore().getState();
   debug('route context:', `baseUrl: ${baseUrl}, locale: ${locale}`);
 

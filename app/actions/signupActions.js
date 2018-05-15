@@ -1,4 +1,4 @@
-import { NotificationManager } from 'react-notifications';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 
 import { updateRoute } from '../helpers/routerHelper';
 import { debug } from '../debug/index';

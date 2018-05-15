@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import LiForm from 'liform-react';
 import PropTypes from 'prop-types';
 
-import signupFormSchema from '../../server/formSchemas/signup';
-import CustomForm from '../Common/CustomForm';
-import SignUpLayout from './SignUpLayout';
+import signupFormSchema from '../../../server/formSchemas/signup';
+import CustomForm from '../../Common/CustomForm';
+import SignUpLayout from '../SignUpLayout';
 
 export default class SignUp extends Component {
   constructor(props) {

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { signUp } from '../../actions/signupActions';
 import React from 'react';
-import SignUp from '../../components/Authentication/SignUp';
+import { SignUp } from '../../components/Authentication';
 import PropTypes from 'prop-types';
 
 class SignUpContainer extends React.Component {

@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
-import { context, initialProps } from '../config/index';
 import middlewares from './middlewares';
 import initialState from './storeInitialState';
 
@@ -21,15 +20,9 @@ import reducers from '../reducers/reducer';
  * @returns {Store}
  */
 export default function configureStore() {
-  const { scheme, host, base: baseUrl } = context;
-  const { locale } = initialProps;
-
   const commonInitialState = {
     ...initialState,
-    serverName: `${scheme}://${host}`,
-    entities: entitiesState,
-    baseUrl,
-    locale
+    entities: entitiesState
   };
 
   // use devtools if we are in a browser and the extension is enabled

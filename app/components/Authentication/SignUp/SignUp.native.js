@@ -2,20 +2,19 @@ import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import {
-  schemaOptions,
-  signupFormSchema
-} from '../../../server/formSchemas/signup';
-import { loginStyles } from '../Login.native';
-import {
   StyleSheet,
   Text,
   View,
   TouchableHighlight,
-  Image,
-  TextInput,
   ImageBackground,
   ScrollView
 } from 'react-native';
+
+import {
+  schemaOptions,
+  signupFormSchema
+} from '../../../server/formSchemas/signup';
+import { loginStyles } from '../Login.native';
 import SignupTypes from './SignupType.native';
 
 let Form = t.form.Form;
@@ -28,6 +27,10 @@ export default class SignUp extends Component {
     };
     this.changeProfile = this.changeProfile.bind(this);
   }
+
+  onLoginClicked = () => {
+    this.props.updateRoute('app_login');
+  };
 
   changeProfile(type) {
     this.setState({
@@ -54,7 +57,12 @@ export default class SignUp extends Component {
             </TouchableHighlight>
             <View style={styles.bottomRow}>
               <Text style={styles.bottomText}>Already have an account? </Text>
-              <Text style={styles.bottomTextHighlight}>Log in.</Text>
+              <Text
+                onPress={this.onLoginClicked}
+                style={styles.bottomTextHighlight}
+              >
+                Log in.
+              </Text>
             </View>
           </View>
         </ImageBackground>
@@ -62,6 +70,10 @@ export default class SignUp extends Component {
     );
   }
 }
+
+SignUp.propTypes = {
+  updateRoute: PropTypes.func
+};
 
 export const styles = StyleSheet.create({
   ...loginStyles,

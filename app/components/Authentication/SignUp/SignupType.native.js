@@ -17,7 +17,6 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
-let Form = t.form.Form;
 
 class SingupType extends Component {
   constructor(props) {

@@ -79,7 +79,7 @@ export default class Login extends Component {
   };
 
   onForgotPasswordClicked() {
-    dispatch => updateRoute('app_forgotPassword', dispatch);
+    return dispatch => updateRoute('app_forgotPassword', dispatch);
   }
 
   render() {
@@ -101,7 +101,7 @@ export default class Login extends Component {
           <View style={styles.bottomRow}>
             <Text style={styles.bottomText}>Forgot your password?</Text>
             <Text
-              onPress={this.onForgotPasswordClicked}
+              onPress={this.onForgotPasswordClicked()}
               style={styles.bottomTextHighlight}
             >
               Reset.

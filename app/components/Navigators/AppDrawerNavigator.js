@@ -4,15 +4,16 @@ import LoginContainer from '../../containers/Authentication/LoginContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 import { getLocalRoute } from '../../actions/apiRouting';
 
+const login = getLocalRoute('app_login');
 export const AppDrawerNavigator = DrawerNavigator(
   {
-    [getLocalRoute('app_login')]: {
+    [login]: {
       screen: LoginContainer
     },
-    [getLocalRoute('app_homepage')]: {
+    Home: {
       screen: Trillion
     },
-    [getLocalRoute('app_forgotPassword')]: {
+    forgotPassword: {
       screen: ForgotPasswordContainer
     }
   },

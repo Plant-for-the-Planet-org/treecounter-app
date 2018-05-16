@@ -1,21 +1,21 @@
 const routes = require('../server/routes/fos_js_routes.json');
 
 import Routing from './router.min.js';
-import { getStore } from '../components/App';
+import { context, initialProps } from '../config/index';
 import { debug } from '../debug';
 
 Routing.setRoutingData(routes);
 
 export const getApiRoute = (routeName, params) => {
-  const { serverName, baseUrl, locale } = getStore().getState();
+  const { scheme, host, base: baseUrl } = context;
+  const { locale } = initialProps;
+  const serverName = `${scheme}://${host}`;
   debug(
     'route context:',
     `serverName: ${serverName}, baseUrl: ${baseUrl}, locale: ${locale}`
   );
 
-  const host = serverName;
-
-  const url = `${host}${baseUrl}${Routing.generate(routeName, {
+  const url = `${serverName}${baseUrl}${Routing.generate(routeName, {
     _locale: locale,
     ...params
   })}`;
@@ -25,7 +25,8 @@ export const getApiRoute = (routeName, params) => {
 
 export const getLocalRoute = (routeName, params) => {
   debug('enter local route');
-  const { baseUrl, locale } = getStore().getState();
+  const { base: baseUrl } = context;
+  const { locale } = initialProps;
   debug('route context:', `baseUrl: ${baseUrl}, locale: ${locale}`);
 
   const url = `${baseUrl}${Routing.generate(routeName, {

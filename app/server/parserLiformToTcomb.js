@@ -48,6 +48,7 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           );
         } else {
           schemaOptions['fields'][propertyKey] = options;
+          schemaOptions.auto = 'none';
         }
       }
     }

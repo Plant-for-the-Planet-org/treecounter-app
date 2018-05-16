@@ -54,7 +54,7 @@ export default class SignUp extends Component {
               options={schemaOptions[this.state.Profiletype]}
             />
             <TouchableHighlight onPress={this.onPress} style={styles.button}>
-              <Text style={styles.buttonText}>Set target</Text>
+              <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableHighlight>
             <View style={styles.bottomRow}>
               <Text style={styles.bottomText}>Already have an account? </Text>

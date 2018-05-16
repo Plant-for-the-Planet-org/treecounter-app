@@ -4,7 +4,7 @@ export default {
   properties: {
     _username: {
       type: 'string',
-      title: 'label.username',
+      title: 'Email',
       propertyOrder: 1
     },
     _password: {

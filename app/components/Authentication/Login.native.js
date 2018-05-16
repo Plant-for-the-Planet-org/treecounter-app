@@ -18,13 +18,11 @@ let allSchemaOptions = {
   fields: {
     _password: {
       ...schemaOptions.fields._password,
-      template: TextInputTemplate,
       config: { iconUrl: require('../../images/login/key.png') },
       error: 'required'
     },
     _username: {
       ...schemaOptions.fields._username,
-      template: TextInputTemplate,
       config: { iconUrl: require('../../images/login/mail.png') },
       error: 'required'
     }

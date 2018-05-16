@@ -25,7 +25,10 @@ class LoginContainer extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { login, route: (routeName, id) => updateRoute(routeName, dispatch, id) },
+    {
+      login,
+      route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
+    },
     dispatch
   );
 };

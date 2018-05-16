@@ -14,6 +14,7 @@ import {
   schemaOptions,
   signupFormSchema
 } from '../../../server/formSchemas/signup';
+
 import { loginStyles } from '../Login.native';
 import SignupTypes from './SignupType.native';
 

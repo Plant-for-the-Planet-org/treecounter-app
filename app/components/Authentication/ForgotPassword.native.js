@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
+
+import {
+  forgotPasswordFormSchema,
+  schemaOptions
+} from '../../server/formSchemas/forgotpassword';
 import { TextInputTemplate } from '../Common/Templates/TextInputTemplate';
-import { loginFormSchema, schemaOptions } from '../../server/formSchemas/login';
 
 import {
   StyleSheet,
   Text,
   View,
   TouchableHighlight,
-  ScrollView
+  ImageBackground
 } from 'react-native';
 
 let Form = t.form.Form;
 
 let allSchemaOptions = {
   fields: {
-    _password: {
-      ...schemaOptions.fields._password,
-      template: TextInputTemplate,
-      config: { iconUrl: require('../../images/login/key.png') },
-      error: 'required'
-    },
-    _username: {
-      ...schemaOptions.fields._username,
+    email: {
+      ...schemaOptions.fields.email,
       template: TextInputTemplate,
       config: { iconUrl: require('../../images/login/mail.png') },
       error: 'required'
@@ -31,11 +29,15 @@ let allSchemaOptions = {
   }
 };
 
-export default class Login extends Component {
+export default class ForgotPassword extends Component {
+  onLoginClicked = () => {
+    this.props.updateRoute('app_login');
+  };
+
   onPress = () => {
-    let result = this.refs.loginForm.validate();
+    let result = this.refs.forgotPasswordForm.validate();
     if (result.isValid()) {
-      let value = this.refs.loginForm.getValue();
+      let value = this.refs.forgotPasswordForm.getValue();
       if (value) {
         this.props.onClick(value);
       }
@@ -44,61 +46,43 @@ export default class Login extends Component {
     }
   };
 
-  onForgotPasswordClicked = () => {
-    this.props.updateRoute('app_forgotPassword');
-  };
-
-  onSignupClicked = () => {
-    this.props.updateRoute('app_signup');
-  };
-
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.loginHeader}>
-          <Text style={styles.titleText}>Log In</Text>
+      <ImageBackground style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.titleText}>Forgot your password?</Text>
           <View style={styles.titleTextUnderline} />
         </View>
         <View style={styles.inputContainer}>
           <Form
-            ref={'loginForm'}
-            type={loginFormSchema}
+            ref={'forgotPasswordForm'}
+            type={forgotPasswordFormSchema}
             options={allSchemaOptions}
           />
           <TouchableHighlight onPress={this.onPress} style={styles.button}>
-            <Text style={styles.buttonText}>Log in</Text>
+            <Text style={styles.buttonText}>Reset Password</Text>
           </TouchableHighlight>
           <View style={styles.bottomRow}>
-            <Text style={styles.bottomText}>Forgot your password?</Text>
             <Text
-              onPress={this.onForgotPasswordClicked}
+              onPress={this.onLoginClicked}
               style={styles.bottomTextHighlight}
             >
-              Reset.
-            </Text>
-          </View>
-          <View style={styles.bottomRow}>
-            <Text style={styles.bottomText}>Don't have an account? </Text>
-            <Text
-              onPress={this.onSignupClicked}
-              style={styles.bottomTextHighlight}
-            >
-              Sign up.
+              Try to login again.
             </Text>
           </View>
         </View>
-      </ScrollView>
+      </ImageBackground>
     );
   }
 }
 
-Login.propTypes = {
+ForgotPassword.propTypes = {
   onClick: PropTypes.func.isRequired,
   onError: PropTypes.func,
   updateRoute: PropTypes.func
 };
 
-export const loginStyles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -133,9 +117,8 @@ export const loginStyles = {
     alignSelf: 'center'
   },
   titleText: {
-    fontSize: 41,
+    fontSize: 30,
     color: '#575756',
-    width: 117,
     fontWeight: 'bold',
     justifyContent: 'flex-start',
     marginBottom: 20
@@ -143,23 +126,21 @@ export const loginStyles = {
   titleTextUnderline: {
     height: 3,
     width: 117,
-    backgroundColor: '#b9d384'
+    backgroundColor: '#b9d384',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    justifyContent: 'center'
   },
   bottomRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
-  bottomText: {
-    fontSize: 11,
-    color: '#696261'
-  },
   bottomTextHighlight: {
     fontSize: 11,
     color: '#ec6453'
   },
-  loginHeader: {
+  header: {
     marginBottom: 60
   }
-};
-const styles = StyleSheet.create(loginStyles);
+});

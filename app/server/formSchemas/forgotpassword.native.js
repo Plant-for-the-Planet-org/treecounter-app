@@ -5,4 +5,5 @@ const {
   transformedSchema: forgotPasswordFormSchema,
   schemaOptions
 } = parseJsonToTcomb(schemaLiform);
+
 export { schemaOptions, forgotPasswordFormSchema };

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-
-import { loginFormSchema, schemaOptions } from '../../server/formSchemas/login';
-
 import {
   StyleSheet,
   Text,
@@ -13,7 +10,8 @@ import {
   TextInput,
   ImageBackground
 } from 'react-native';
-import { updateRoute } from '../../helpers/routerHelper';
+
+import { loginFormSchema, schemaOptions } from '../../server/formSchemas/login';
 
 let Form = t.form.Form;
 
@@ -78,9 +76,9 @@ export default class Login extends Component {
     }
   };
 
-  onForgotPasswordClicked() {
-    return dispatch => updateRoute('app_forgotPassword', dispatch);
-  }
+  onForgotPasswordClicked = () => {
+    this.props.updateRoute('app_forgotPassword');
+  };
 
   render() {
     return (
@@ -101,7 +99,7 @@ export default class Login extends Component {
           <View style={styles.bottomRow}>
             <Text style={styles.bottomText}>Forgot your password?</Text>
             <Text
-              onPress={this.onForgotPasswordClicked()}
+              onPress={this.onForgotPasswordClicked}
               style={styles.bottomTextHighlight}
             >
               Reset.
@@ -118,7 +116,8 @@ export default class Login extends Component {
 }
 
 Login.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  updateRoute: PropTypes.func
 };
 
 const styles = StyleSheet.create({

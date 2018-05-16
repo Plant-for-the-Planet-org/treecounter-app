@@ -5,6 +5,7 @@ import React from 'react';
 import { clearStorage } from '../../stores/localStorage';
 import Login from '../../components/Authentication/Login';
 import PropTypes from 'prop-types';
+import { updateRoute } from '../../helpers/routerHelper';
 
 class LoginContainer extends React.Component {
   constructor(props) {
@@ -18,16 +19,23 @@ class LoginContainer extends React.Component {
   }
 
   render() {
-    return <Login onClick={this.onClick} />;
+    return <Login onClick={this.onClick} updateRoute={this.props.route} />;
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ login }, dispatch);
+  return bindActionCreators(
+    {
+      login,
+      route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
+    },
+    dispatch
+  );
 };
 
 export default connect(null, mapDispatchToProps)(LoginContainer);
 
 LoginContainer.propTypes = {
-  login: PropTypes.func
+  login: PropTypes.func,
+  route: PropTypes.func
 };

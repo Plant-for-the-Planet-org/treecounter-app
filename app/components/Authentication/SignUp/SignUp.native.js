@@ -16,6 +16,8 @@ import {
   ImageBackground,
   ScrollView
 } from 'react-native';
+import SignupTypes from './SignupType.native';
+
 let Form = t.form.Form;
 
 export default class SignUp extends Component {
@@ -24,12 +26,13 @@ export default class SignUp extends Component {
     this.state = {
       Profiletype: 'individual'
     };
+    this.changeProfile = this.changeProfile.bind(this);
   }
 
   changeProfile(type) {
-    this.state = {
+    this.setState({
       Profiletype: type
-    };
+    });
   }
   render() {
     return (
@@ -39,6 +42,7 @@ export default class SignUp extends Component {
             <Text style={styles.titleText}>Join In</Text>
             <View style={styles.titleTextUnderline} />
           </View>
+          <SignupTypes changeProfile={this.changeProfile} />
           <View style={styles.inputContainer}>
             <Form
               ref={'loginForm'}

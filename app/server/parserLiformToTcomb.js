@@ -1,5 +1,6 @@
 let transform = require('tcomb-json-schema');
 
+import { TextInputTemplate } from '../components/Common/Templates/TextInputTemplate';
 export default function parseJsonToTcomb(liformSchemaJson) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));
   let schemaOptions = {
@@ -28,6 +29,16 @@ export default function parseJsonToTcomb(liformSchemaJson) {
       let options = {};
       options.placeholder = properties[propertyKey].title;
       options.autoCapitalize = 'none';
+      if (
+        properties[propertyKey].type &&
+        properties[propertyKey].type === 'string'
+      ) {
+        if (!properties[propertyKey].hasOwnProperty('enum')) {
+          options.template = TextInputTemplate;
+        } else {
+          options.label = '';
+        }
+      }
       if (properties[propertyKey].widget === 'password') {
         options.secureTextEntry = true;
       }

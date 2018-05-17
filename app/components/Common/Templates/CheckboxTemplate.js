@@ -7,10 +7,18 @@ export function CheckboxTemplate(locals) {
   let containerStyle = {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 20,
-    paddingBottom: 20
+    paddingTop: 20
   };
-  let imageStyle = { width: 20, height: 20, resizeMode: 'center' };
+  let imageStyle = {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+    resizeMode: 'center'
+  };
+
+  let textboxStyle = {
+    flex: 1
+  };
 
   function checkboxClicked() {
     locals.onChange(!locals.value);
@@ -24,7 +32,7 @@ export function CheckboxTemplate(locals) {
           <Image style={imageStyle} source={uncheckedIcon} />
         )}
       </TouchableOpacity>
-      <Text>{locals.label}</Text>
+      <Text style={textboxStyle}>{locals.label}</Text>
     </View>
   );
 }

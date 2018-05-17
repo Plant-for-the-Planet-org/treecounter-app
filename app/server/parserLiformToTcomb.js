@@ -36,10 +36,12 @@ export default function parseJsonToTcomb(liformSchemaJson) {
         ) {
           if (!properties[propertyKey].hasOwnProperty('enum')) {
             options.placeholder = properties[propertyKey].title;
+            options.auto = 'none';
             options.autoCapitalize = 'none';
             options.template = TextInputTemplate;
           } else {
             options.label = '';
+            options.auto = 'none';
             options.nullOption = {
               value: '',
               text: properties[propertyKey].title
@@ -56,6 +58,7 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           options.secureTextEntry = true;
         }
         if (properties[propertyKey].type === 'object') {
+          options.auto = 'none';
           schemaOptions['fields'][propertyKey] = getSchemaOptions(
             properties[propertyKey]
           );

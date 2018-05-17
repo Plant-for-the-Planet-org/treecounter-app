@@ -564,6 +564,7 @@ export default {
       email: {
         type: 'string',
         title: 'Email',
+        icon: 'mail',
         attr: {
           maxlength: 100
         },
@@ -578,6 +579,7 @@ export default {
           first: {
             type: 'string',
             title: 'Password',
+            icon: 'key',
             attr: {
               class: 'password-field'
             },
@@ -1169,6 +1171,7 @@ export default {
       email: {
         type: 'string',
         title: 'Email',
+        icon: 'mail',
         attr: {
           maxlength: 100
         },
@@ -1183,6 +1186,7 @@ export default {
           first: {
             type: 'string',
             title: 'Password',
+            icon: 'key',
             attr: {
               class: 'password-field'
             },
@@ -1766,6 +1770,7 @@ export default {
       email: {
         type: 'string',
         title: 'Email',
+        icon: 'mail',
         attr: {
           maxlength: 100
         },
@@ -1780,6 +1785,7 @@ export default {
           first: {
             type: 'string',
             title: 'Password',
+            icon: 'key',
             attr: {
               class: 'password-field'
             },
@@ -2363,6 +2369,7 @@ export default {
       email: {
         type: 'string',
         title: 'Email',
+        icon: 'mail',
         attr: {
           maxlength: 100
         },
@@ -2377,6 +2384,7 @@ export default {
           first: {
             type: 'string',
             title: 'Password',
+            icon: 'key',
             attr: {
               class: 'password-field'
             },
@@ -2960,6 +2968,7 @@ export default {
       email: {
         type: 'string',
         title: 'Email',
+        icon: 'mail',
         attr: {
           maxlength: 100
         },
@@ -2974,6 +2983,7 @@ export default {
           first: {
             type: 'string',
             title: 'Password',
+            icon: 'key',
             attr: {
               class: 'password-field'
             },
@@ -3564,6 +3574,7 @@ export default {
         email: {
           type: 'string',
           title: 'Email',
+          icon: 'mail',
           attr: {
             maxlength: 100
           },
@@ -3578,6 +3589,7 @@ export default {
             first: {
               type: 'string',
               title: 'Password',
+              icon: 'key',
               attr: {
                 class: 'password-field'
               },

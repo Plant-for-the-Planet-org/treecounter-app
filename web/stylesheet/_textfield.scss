@@ -1,0 +1,69 @@
+// VARIABLES // ============================== //
+$bg-color: #424242;
+$muted-color: mix(white, $bg-color, 70%);
+$trans-time: 300ms;
+
+.pftp-textfield {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+
+  .pftp-textfield__icon {
+    width: 20px;
+    padding-right: 8px;
+  }
+  .pftp-textfield__inputgroup {
+    position: relative;
+
+    input {
+      background: none;
+      color: mix(white, $bg-color, 70%);
+      font-size: 18px;
+      padding: 10px 10px 10px 5px;
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 0;
+      border-bottom: 1px solid mix(white, $bg-color, 70%);
+      &:focus {
+        outline: none;
+      }
+      &:focus ~ label,
+      &:valid ~ label {
+        top: -14px;
+        font-size: 12px;
+        color: $colorPrimary;
+      }
+      &:focus ~ .pftp-textfield__inputgroup--bar:before {
+        width: 100%;
+      }
+    }
+    label {
+      color: $muted-color;
+      font-size: 16px;
+      font-weight: normal;
+      position: absolute;
+      pointer-events: none;
+      left: 5px;
+      top: 10px;
+      transition: $trans-time ease all;
+    }
+
+    .pftp-textfield__inputgroup--bar {
+      position: relative;
+      display: block;
+      width: 100%;
+      &:before {
+        content: '';
+        height: 2px;
+        width: 0;
+        bottom: 0px;
+        position: absolute;
+        background: $colorPrimary;
+        transition: $trans-time ease all;
+        left: 0%;
+      }
+    }
+  }
+}

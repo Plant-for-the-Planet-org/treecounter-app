@@ -19,7 +19,7 @@ export function signUp(profileType, userData) {
             );
             debug(res);
             debug(dispatch);
-            updateRoute('/verify');
+            updateRoute('app_login', dispatch);
           }
         })
         .catch(err => console.log(err));

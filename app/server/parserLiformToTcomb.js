@@ -1,7 +1,7 @@
 let transform = require('tcomb-json-schema');
 
-import { TextInputTemplate } from '../formTemplates/TextInputTemplate';
-import { CheckboxTemplate } from '../formTemplates/CheckboxTemplate';
+import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
+import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
 import * as images from '../images';
 
 export default function parseJsonToTcomb(liformSchemaJson) {

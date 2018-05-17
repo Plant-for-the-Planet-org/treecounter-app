@@ -1,5 +1,6 @@
 import { TouchableOpacity, Text, View, Image } from 'react-native';
 import React from 'react';
+
 import checkedIcon from '../../../images/checkbox_checked.png';
 import uncheckedIcon from '../../../images/checkbox_unchecked.png';
 

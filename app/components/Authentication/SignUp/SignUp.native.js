@@ -38,6 +38,14 @@ export default class SignUp extends Component {
       Profiletype: type
     });
   }
+
+  onPress = () => {
+    let value = this.refs.signupForm.getValue();
+    if (value) {
+      this.props.onClick(this.state.Profiletype, value);
+    }
+  };
+
   render() {
     return (
       <ScrollView>
@@ -49,7 +57,7 @@ export default class SignUp extends Component {
           <SignupTypes changeProfile={this.changeProfile} />
           <View style={styles.inputContainer}>
             <Form
-              ref={'loginForm'}
+              ref={'signupForm'}
               type={signupFormSchema[this.state.Profiletype]}
               options={schemaOptions[this.state.Profiletype]}
             />
@@ -73,7 +81,8 @@ export default class SignUp extends Component {
 }
 
 SignUp.propTypes = {
-  updateRoute: PropTypes.func
+  updateRoute: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 export const styles = StyleSheet.create({

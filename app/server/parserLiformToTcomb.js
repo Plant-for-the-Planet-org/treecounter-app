@@ -37,6 +37,10 @@ export default function parseJsonToTcomb(liformSchemaJson) {
             options.template = TextInputTemplate;
           } else {
             options.label = '';
+            options.nullOption = {
+              value: '',
+              text: properties[propertyKey].title
+            };
           }
         }
         if (properties[propertyKey].widget === 'password') {

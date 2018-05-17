@@ -23,7 +23,7 @@ export default class Login extends Component {
             type={loginFormSchema}
             options={schemaOptions}
           />
-          <PrimaryButton onClick={this.props.onClick}>Log In</PrimaryButton>
+          <PrimaryButton onClick={this.props.onPress}>Log In</PrimaryButton>
           <LoginFooter />
         </CardLayout>
       </div>
@@ -32,5 +32,5 @@ export default class Login extends Component {
 }
 
 Login.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired
 };

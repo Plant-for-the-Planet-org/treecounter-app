@@ -1,10 +1,11 @@
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login } from '../../actions/authActions';
-import React from 'react';
-import { clearStorage } from '../../stores/localStorage';
-import Login from '../../components/Authentication/Login';
 import PropTypes from 'prop-types';
+
+import { login } from '../../actions/authActions';
+import { clearStorage } from '../../stores/localStorage';
+import Login from '../../components/Authentication/Login/index';
 
 class LoginContainer extends React.Component {
   constructor(props) {

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
-import { loginFormSchema, schemaOptions } from '../../server/formSchemas/login';
+
+import {
+  loginFormSchema,
+  schemaOptions
+} from '../../../server/formSchemas/login';
 
 import {
   StyleSheet,

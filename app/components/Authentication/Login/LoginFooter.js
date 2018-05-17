@@ -1,8 +1,8 @@
 import React from 'react';
 
-import InlineLink from '../Common/InlineLink';
-import * as constants from '../../config/formStrings';
-import { getLocalRoute } from '../../actions/apiRouting';
+import InlineLink from '../../Common/InlineLink';
+import * as constants from '../../../config/formStrings';
+import { getLocalRoute } from '../../../actions/apiRouting';
 
 const ForgetPassword = () => (
   <InlineLink

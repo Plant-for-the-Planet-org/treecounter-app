@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { loginFormSchema } from '../../server/formSchemas/login.native';
 import t from 'tcomb-form';
+
+import { loginFormSchema } from '../../../server/formSchemas/login.native';
 
 // import LiForm from 'liform-react';
 

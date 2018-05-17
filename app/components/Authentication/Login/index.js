@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 
-import { loginFormSchema } from '../../../server/formSchemas/login.native';
+import {
+  loginFormSchema,
+  schemaOptions
+} from '../../../server/formSchemas/login.native';
 
 // import LiForm from 'liform-react';
 
@@ -17,7 +20,11 @@ export default class Login extends Component {
       <div className="app-login">
         <h2 className="pftp-heading">Log In</h2>
         <div className="card-layout">
-          <TCombForm ref="loginForm" type={loginFormSchema} />
+          <TCombForm
+            ref="loginForm"
+            type={loginFormSchema}
+            options={schemaOptions}
+          />
           {/* <LiForm
             schema={loginFormSchema}
             onSubmit={this.props.onClick}

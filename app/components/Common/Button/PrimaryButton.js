@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PrimaryButton = props => (
-  <button className="pftp-button-primary">{props.children}</button>
+const PrimaryButton = ({ onClick, children }) => (
+  <button className="pftp-button-primary" onClick={() => onClick()}>
+    {children}
+  </button>
 );
 
 PrimaryButton.propTypes = {
-  children: PropTypes.string
+  children: PropTypes.string,
+  onClick: PropTypes.func
 };
 
 export default PrimaryButton;

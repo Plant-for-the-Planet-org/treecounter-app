@@ -8,9 +8,6 @@ import {
 } from '../../../server/formSchemas/login.native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 
-// import LiForm from 'liform-react';
-
-// import CustomForm from '../Common/CustomForm';
 import LoginFooter from './LoginFooter';
 
 let TCombForm = t.form.Form;
@@ -26,14 +23,7 @@ export default class Login extends Component {
             type={loginFormSchema}
             options={schemaOptions}
           />
-          <PrimaryButton>Log In</PrimaryButton>
-          {/* <LiForm
-            schema={loginFormSchema}
-            onSubmit={this.props.onClick}
-            baseForm={CustomForm}
-            buttonText="Log In"
-            buttonWidth="240"
-          /> */}
+          <PrimaryButton onClick={this.props.onClick}>Log In</PrimaryButton>
           <LoginFooter />
         </div>
       </div>

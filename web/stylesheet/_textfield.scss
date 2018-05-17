@@ -6,7 +6,7 @@ $trans-time: 300ms;
 .pftp-textfield {
   display: flex;
   align-items: center;
-  margin: 10px 0;
+  margin: 20px 0;
 
   .pftp-textfield__icon {
     width: 20px;
@@ -19,7 +19,7 @@ $trans-time: 300ms;
       background: none;
       color: mix(white, $bg-color, 70%);
       font-size: 18px;
-      padding: 10px 10px 10px 5px;
+      padding: 5px 10px 10px 5px;
       display: block;
       width: 100%;
       box-sizing: border-box;

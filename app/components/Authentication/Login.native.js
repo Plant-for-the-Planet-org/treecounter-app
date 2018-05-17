@@ -17,13 +17,11 @@ let allSchemaOptions = {
   fields: {
     _password: {
       ...schemaOptions.fields._password,
-      config: { iconUrl: require('../../images/login/key.png') },
-      error: 'required'
+      config: { iconUrl: require('../../images/login/key.png') }
     },
     _username: {
       ...schemaOptions.fields._username,
-      config: { iconUrl: require('../../images/login/mail.png') },
-      error: 'required'
+      config: { iconUrl: require('../../images/login/mail.png') }
     }
   }
 };

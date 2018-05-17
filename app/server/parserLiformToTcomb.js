@@ -20,7 +20,8 @@ export default function parseJsonToTcomb(liformSchemaJson) {
     }
   }
 
-  function getSchemaOptions(properties) {
+  function getSchemaOptions(liformSchema) {
+    let properties = liformSchema.properties;
     let schemaOptions = {
       fields: {}
     };
@@ -48,18 +49,21 @@ export default function parseJsonToTcomb(liformSchemaJson) {
         }
         if (properties[propertyKey].type === 'object') {
           schemaOptions['fields'][propertyKey] = getSchemaOptions(
-            properties[propertyKey].properties
+            properties[propertyKey]
           );
         } else {
           schemaOptions['fields'][propertyKey] = options;
           schemaOptions.auto = 'none';
+        }
+        if (liformSchema.required.indexOf(propertyKey)) {
+          options['error'] = 'required';
         }
       }
     }
     return schemaOptions;
   }
 
-  let schemaOptions = getSchemaOptions(properties);
+  let schemaOptions = getSchemaOptions(liformSchema);
 
   let transformedSchema = transform(liformSchema);
   return { schemaOptions: schemaOptions, transformedSchema: transformedSchema };

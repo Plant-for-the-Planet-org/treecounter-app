@@ -13,7 +13,7 @@ export const AppDrawerNavigator = DrawerNavigator(
     [getLocalRoute('app_signup')]: {
       screen: SignUpContainer
     },
-    [getLocalRoute('app_homepage')]: {
+    [getLocalRoute('app_userHome')]: {
       screen: Trillion
     },
     [getLocalRoute('app_forgotPassword')]: {

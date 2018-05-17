@@ -30,16 +30,55 @@ class SingupType extends Component {
   }
   render() {
     return (
-      <TouchableOpacity onPress={this.handleClick}>
-        <ImageBackground style={styles.imageStyle} source={this.props.iconUrl}>
+      <View style={{ margin: 5 }}>
+        <View>
+          <TouchableOpacity onPress={this.handleClick}>
+            <ImageBackground
+              style={
+                this.props.selected
+                  ? styles.selectedImageStyle
+                  : styles.imageStyle
+              }
+              source={this.props.iconUrl}
+            >
+              <View
+                style={
+                  this.props.selected ? styles.selectedCircle : styles.circle
+                }
+              />
+            </ImageBackground>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <Text
+            style={
+              this.props.selected
+                ? styles.selectedBottomTypeLabel
+                : styles.bottomTypeLabel
+            }
+          >
+            {join.iamlabel}
+          </Text>
           <View
-            style={this.props.selected ? styles.selectedCircle : styles.circle}
+            style={
+              this.props.selected ? styles.selectedSeprater : styles.seprater
+            }
           />
-        </ImageBackground>
-      </TouchableOpacity>
+          <Text
+            style={
+              this.props.selected
+                ? styles.selectedBottomTypeLabel
+                : styles.bottomTypeLabel
+            }
+          >
+            {join[this.props.profileType]}
+          </Text>
+        </View>
+      </View>
     );
   }
 }
+
 export default class SignupTypes extends Component {
   constructor(props) {
     super(props);
@@ -102,13 +141,6 @@ export default class SignupTypes extends Component {
             />
           </View>
         </ScrollView>
-        <View style={styles.outerContainer}>
-          <Text style={styles.bottomTypeLabel}>{join.iamlabel}</Text>
-          <View style={styles.seprater} />
-          <Text style={styles.bottomTypeLabel}>
-            {join[this.state.Profiletype]}
-          </Text>
-        </View>
       </View>
     );
   }
@@ -128,32 +160,48 @@ export const styles = StyleSheet.create({
     marginBottom: 20
   },
   imageStyle: {
-    // width: 50,
-    // height: 50
+    width: 70,
+    height: 70
+  },
+  selectedImageStyle: {
+    width: 99,
+    height: 99
   },
   circle: {
     borderRadius: 35,
     borderWidth: 10,
     borderColor: '#9c9b9b',
-    height: 70,
-    width: 70
+    height: 70
   },
   selectedCircle: {
     borderRadius: 50,
     borderWidth: 10,
     borderColor: '#96c04c',
-    height: 99,
-    width: 99
+    height: 99
+  },
+  selectedBottomTypeLabel: {
+    color: '#95c243',
+    fontSize: 13,
+    maxWidth: 99
   },
   bottomTypeLabel: {
-    color: '#95c243',
-    fontSize: 13
+    color: '#9c9b9b',
+    fontSize: 13,
+    maxWidth: 90
+  },
+  selectedSeprater: {
+    backgroundColor: '#95c243',
+    width: '100%',
+    height: 2,
+    marginTop: 3,
+    marginBottom: 3
   },
   seprater: {
-    backgroundColor: '#95c243',
-    width: 110,
+    backgroundColor: '#9c9b9b',
+    width: '100%',
     height: 2,
-    margin: 3
+    marginTop: 3,
+    marginBottom: 3
   },
   bottomContainer: {
     justifyContent: 'center',

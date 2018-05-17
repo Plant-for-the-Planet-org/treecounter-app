@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import ActivePlantProjectData from './ActivePlantProjectData';
 import * as constants from '../../SupportedLanguages/en';
 import { Link } from 'react-router-dom';
-import { selectPlantProjectIdAction } from '../../actions/selectPlantProjectIdAction';
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const ActivePlantProject = props => {
   const handleDonateTreesButton = (event, id) => {
-    selectPlantProjectIdAction(id);
+    selectPlantProjectAction(id);
   };
   let route = `/payment/project/${props.id}`;
   return (
@@ -38,7 +38,7 @@ const ActivePlantProject = props => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ selectPlantProjectIdAction }, dispatch);
+  return bindActionCreators({ selectPlantProjectAction }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(ActivePlantProject);

@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
 import TreeCounter from './TreeCounter';
 import configureStore from '../../stores/TreecounterStore';
-import { debug } from '../../debug/index';
+// import { debug } from '../../debug/index';
 
 let store;
 
-const App = () => {
-  debug('initiating store');
-
-  store = configureStore();
-
-  return (
-    <Provider store={store}>
-      <TreeCounter />
-    </Provider>
-  );
-};
+export default class App extends Component {
+  constructor() {
+    super();
+    store = configureStore();
+  }
+  render() {
+    return (
+      <Provider store={store}>
+        <TreeCounter />
+      </Provider>
+    );
+  }
+}
 
 export const getStore = () => store;
-
-export default App;

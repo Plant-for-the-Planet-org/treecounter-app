@@ -10,12 +10,14 @@ import TargetPage from '../Target';
 import RegisterTree from '../RegisterTrees/RegisterTrees';
 import Header from '../Header/index';
 import UserContributions from '../UserContributions/UserContributions';
-import { Login, SignUp } from '../Authentication';
-import ForgotPasswordContainer from '../Authentication/ForgotPassword';
+import SignUpContainer from '../../containers/Authentication/SignUpContainer';
+import LoginContainer from '../../containers/Authentication/LoginContainer';
+import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 import ResetPasswordContainer from '../Authentication/ResetPassword';
 import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
 import Menu from '../Menu';
+import Footer from '../Footer';
 
 // Components which use SVG
 import PublicTreecounter from '../TreecounterGraphics/PublicTreecounter';
@@ -49,7 +51,10 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_homepage')}
                 component={Trillion}
               />
-              <Route path={getLocalRoute('app_signup')} component={SignUp} />
+              <Route
+                path={getLocalRoute('app_signup')}
+                component={SignUpContainer}
+              />
               <Route
                 exact
                 path={getLocalRoute('app_signupSuccess')}
@@ -91,7 +96,10 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_signupSuccess')}
                 component={SignupSuccessPage}
               />
-              <Route path={getLocalRoute('app_login')} component={Login} />
+              <Route
+                path={getLocalRoute('app_login')}
+                component={LoginContainer}
+              />
               <Route
                 path={getLocalRoute('app_forgotPassword')}
                 component={ForgotPasswordContainer}
@@ -122,6 +130,7 @@ class TreeCounter extends Component {
                 component={PublicTreecounter}
               />
             </div>
+            <Footer />
           </div>
         </BrowserRouter>
         <NotificationContainer />

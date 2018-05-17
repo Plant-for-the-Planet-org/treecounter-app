@@ -2,9 +2,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
 import middlewares from './middlewares';
-
 import initialState from './storeInitialState';
 
+import { initialState as entitiesState } from '../reducers/entitiesReducer';
 import reducers from '../reducers/reducer';
 /**
  * This function will be called in App.js by either:
@@ -21,7 +21,8 @@ import reducers from '../reducers/reducer';
  */
 export default function configureStore() {
   const commonInitialState = {
-    ...initialState
+    ...initialState,
+    entities: entitiesState
   };
 
   // use devtools if we are in a browser and the extension is enabled

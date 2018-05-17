@@ -1,5 +1,5 @@
 import React from 'react';
-import {renderField, DefaultTheme} from 'liform-react';
+import { renderField, DefaultTheme } from 'liform-react';
 import PropTypes from 'prop-types';
 
 const CustomForm = props => {
@@ -11,7 +11,7 @@ const CustomForm = props => {
     submitting,
     buttonText,
     buttonWidth,
-    headline,
+    headline
   } = props;
   return (
     <div className="liform">
@@ -19,11 +19,11 @@ const CustomForm = props => {
         <h1>{headline}</h1>
       </div>
       <form onSubmit={handleSubmit}>
-        {renderField (schema, null, theme || DefaultTheme)}
+        {renderField(schema, null, theme || DefaultTheme)}
         <div>{error && <strong>{error}</strong>}</div>
         <div
           className="row center-block margin-1"
-          style={{width: buttonWidth + 'px'}}
+          style={{ width: buttonWidth + 'px' }}
         >
           <button
             className="button button-pill"
@@ -48,5 +48,5 @@ CustomForm.propTypes = {
   submitting: PropTypes.bool,
   buttonText: PropTypes.string,
   buttonWidth: PropTypes.string,
-  headline: PropTypes.string,
+  headline: PropTypes.string
 };

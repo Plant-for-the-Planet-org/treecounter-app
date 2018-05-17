@@ -1,6 +1,8 @@
 let transform = require('tcomb-json-schema');
 
 import { TextInputTemplate } from '../components/Common/Templates/TextInputTemplate';
+import { CheckboxTemplate } from '../components/Common/Templates/CheckboxTemplate';
+
 export default function parseJsonToTcomb(liformSchemaJson) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));
 
@@ -43,6 +45,12 @@ export default function parseJsonToTcomb(liformSchemaJson) {
               text: properties[propertyKey].title
             };
           }
+        } else if (
+          properties[propertyKey].type &&
+          properties[propertyKey].type === 'boolean'
+        ) {
+          options.template = CheckboxTemplate;
+          options.label = properties[propertyKey].title;
         }
         if (properties[propertyKey].widget === 'password') {
           options.secureTextEntry = true;

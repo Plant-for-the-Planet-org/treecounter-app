@@ -1,4 +1,3 @@
-import t from 'tcomb-form-native';
 import { Text, View, Image, TextInput } from 'react-native';
 import React from 'react';
 

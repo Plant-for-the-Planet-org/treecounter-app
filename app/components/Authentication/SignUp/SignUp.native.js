@@ -40,9 +40,14 @@ export default class SignUp extends Component {
   }
 
   onPress = () => {
-    let value = this.refs.signupForm.getValue();
-    if (value) {
-      this.props.onClick(this.state.Profiletype, value);
+    let result = this.refs.signupForm.validate();
+    if (result.isValid()) {
+      let value = this.refs.signupForm.getValue();
+      if (value) {
+        this.props.onClick(this.state.Profiletype, value);
+      }
+    } else if (this.props.onError) {
+      this.props.onError(result.errors);
     }
   };
 
@@ -82,7 +87,8 @@ export default class SignUp extends Component {
 
 SignUp.propTypes = {
   updateRoute: PropTypes.func,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  onError: PropTypes.func
 };
 
 export const styles = StyleSheet.create({

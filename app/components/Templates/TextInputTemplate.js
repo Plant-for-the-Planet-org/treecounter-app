@@ -10,7 +10,7 @@ export function TextInputTemplate(locals) {
         <input type="text" required="required" />
         <span className="pftp-textfield__inputgroup--highlight" />
         <span className="pftp-textfield__inputgroup--bar" />
-        <label>{locals.placeholder}</label>
+        <label>{locals.label}</label>
       </div>
     </div>
   );

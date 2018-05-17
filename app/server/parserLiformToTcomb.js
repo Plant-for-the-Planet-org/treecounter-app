@@ -42,6 +42,7 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           }
           if (!properties[propertyKey].hasOwnProperty('enum')) {
             options.placeholder = properties[propertyKey].title;
+            options.label = properties[propertyKey].title;
             options.auto = 'none';
             options.autoCapitalize = 'none';
             options.template = TextInputTemplate;

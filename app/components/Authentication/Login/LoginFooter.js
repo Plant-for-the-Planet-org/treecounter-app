@@ -1,27 +1,26 @@
 import React from 'react';
 
 import InlineLink from '../../Common/InlineLink';
-import * as constants from '../../../config/formStrings';
+import TextBlock from '../../Common/Text/TextBlock';
 import { getLocalRoute } from '../../../actions/apiRouting';
 
-const ForgetPassword = () => (
-  <InlineLink
-    uri={getLocalRoute('app_forgotPassword')}
-    caption={constants.formStrings.forgotPassword}
-  />
+const ForgotPassword = () => (
+  <TextBlock>
+    Forgot your password?&nbsp;
+    <InlineLink uri={getLocalRoute('app_forgotPassword')} caption="Reset." />
+  </TextBlock>
 );
+
 const Register = () => (
-  <InlineLink
-    uri={getLocalRoute('app_signup')}
-    caption={constants.formStrings.register}
-  />
+  <TextBlock>
+    Don't have an account?&nbsp;
+    <InlineLink uri={getLocalRoute('app_signup')} caption="Sign up." />
+  </TextBlock>
 );
 
 const LoginFooter = () => (
   <div className="text-center">
-    <ForgetPassword />
-    <br />
-    {constants.formStrings.createAccount}
+    <ForgotPassword />
     <Register />
   </div>
 );

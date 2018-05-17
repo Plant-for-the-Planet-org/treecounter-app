@@ -1,13 +1,13 @@
 let transform = require('tcomb-json-schema');
 
+import { TextInputTemplate } from '../components/Common/Templates/TextInputTemplate';
+import { CheckboxTemplate } from '../components/Common/Templates/CheckboxTemplate';
+import * as images from '../images';
+
 export default function parseJsonToTcomb(liformSchemaJson) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));
-  let schemaOptions = {
-    fields: {}
-  };
 
   let properties = liformSchema.properties;
-  let fields = schemaOptions.fields;
 
   let newEnum = {};
   for (let propertyKey in properties) {
@@ -23,17 +23,63 @@ export default function parseJsonToTcomb(liformSchemaJson) {
     }
   }
 
-  for (let propertyKey in properties) {
-    if (properties.hasOwnProperty(propertyKey)) {
-      let options = {};
-      options.placeholder = properties[propertyKey].title;
-      options.autoCapitalize = 'none';
-      if (properties[propertyKey].widget === 'password') {
-        options.secureTextEntry = true;
+  function getSchemaOptions(liformSchema) {
+    let properties = liformSchema.properties;
+    let schemaOptions = {
+      fields: {}
+    };
+    for (let propertyKey in properties) {
+      if (properties.hasOwnProperty(propertyKey)) {
+        let options = {};
+        if (
+          properties[propertyKey].type &&
+          properties[propertyKey].type === 'string'
+        ) {
+          if (properties[propertyKey].hasOwnProperty('icon')) {
+            options.config = {
+              iconUrl: images[properties[propertyKey].icon]
+            };
+          }
+          if (!properties[propertyKey].hasOwnProperty('enum')) {
+            options.placeholder = properties[propertyKey].title;
+            options.auto = 'none';
+            options.autoCapitalize = 'none';
+            options.template = TextInputTemplate;
+          } else {
+            options.label = '';
+            options.auto = 'none';
+            options.nullOption = {
+              value: '',
+              text: properties[propertyKey].title
+            };
+          }
+        } else if (
+          properties[propertyKey].type &&
+          properties[propertyKey].type === 'boolean'
+        ) {
+          options.label = properties[propertyKey].title;
+          options.template = CheckboxTemplate;
+        }
+        if (properties[propertyKey].widget === 'password') {
+          options.secureTextEntry = true;
+        }
+        if (properties[propertyKey].type === 'object') {
+          options.auto = 'none';
+          schemaOptions['fields'][propertyKey] = getSchemaOptions(
+            properties[propertyKey]
+          );
+        } else {
+          schemaOptions['fields'][propertyKey] = options;
+        }
+        if (liformSchema.required.indexOf(propertyKey)) {
+          options['error'] = 'required';
+        }
       }
-      fields[propertyKey] = options;
     }
+    return schemaOptions;
   }
+
+  let schemaOptions = getSchemaOptions(liformSchema);
 
   let transformedSchema = transform(liformSchema);
   return { schemaOptions: schemaOptions, transformedSchema: transformedSchema };

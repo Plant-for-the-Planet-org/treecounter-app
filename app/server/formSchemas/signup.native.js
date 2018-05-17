@@ -48,4 +48,6 @@ const schemaOptions = {
   government: schemaOptionsGovernment,
   education: schemaOptionsEducation
 };
+
+console.log(schemaOptions);
 export { schemaOptions, signupFormSchema };

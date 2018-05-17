@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { signUp } from '../../actions/signupActions';
 import React from 'react';
-import SignUp from '../../components/Authentication/SignUp';
 import PropTypes from 'prop-types';
+
+import { updateRoute } from '../../helpers/routerHelper';
+import { SignUp } from '../../components/Authentication';
+import { signUp } from '../../actions/signupActions';
 
 class SignUpContainer extends React.Component {
   constructor(props) {
@@ -16,16 +18,23 @@ class SignUpContainer extends React.Component {
   }
 
   render() {
-    return <SignUp onClick={this.onClick} />;
+    return <SignUp onClick={this.onClick} updateRoute={this.props.route} />;
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ signUp }, dispatch);
+  return bindActionCreators(
+    {
+      signUp,
+      route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
+    },
+    dispatch
+  );
 };
 
 export default connect(null, mapDispatchToProps)(SignUpContainer);
 
 SignUpContainer.propTypes = {
-  signUp: PropTypes.func
+  signUp: PropTypes.func,
+  route: PropTypes.func
 };

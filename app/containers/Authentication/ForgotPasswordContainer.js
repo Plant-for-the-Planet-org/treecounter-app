@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login } from '../../actions/authActions';
 import React from 'react';
-import { clearStorage } from '../../stores/localStorage';
-import Login from '../../components/Authentication/Login';
 import PropTypes from 'prop-types';
+
+import ForgotPassword from '../../components/Authentication/ForgotPassword';
+import { clearStorage } from '../../stores/localStorage';
+import { forgot_password } from '../../actions/authActions';
 import { updateRoute } from '../../helpers/routerHelper';
 
-class LoginContainer extends React.Component {
+class ForgotPasswordContainer extends React.Component {
   constructor(props) {
     super(props);
     clearStorage();
@@ -15,27 +16,29 @@ class LoginContainer extends React.Component {
   }
 
   onClick(value) {
-    this.props.login(value);
+    this.props.forgot_password(value);
   }
 
   render() {
-    return <Login onClick={this.onClick} updateRoute={this.props.route} />;
+    return (
+      <ForgotPassword onClick={this.onClick} updateRoute={this.props.route} />
+    );
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      login,
+      forgot_password,
       route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
     },
     dispatch
   );
 };
 
-export default connect(null, mapDispatchToProps)(LoginContainer);
+export default connect(null, mapDispatchToProps)(ForgotPasswordContainer);
 
-LoginContainer.propTypes = {
-  login: PropTypes.func,
+ForgotPasswordContainer.propTypes = {
+  forgot_password: PropTypes.func,
   route: PropTypes.func
 };

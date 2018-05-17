@@ -1,4 +1,4 @@
-import { NotificationManager } from 'react-notifications';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 
 import { updateRoute } from '../helpers/routerHelper';
 import { debug } from '../debug/index';
@@ -19,7 +19,7 @@ export function signUp(profileType, userData) {
             );
             debug(res);
             debug(dispatch);
-            updateRoute('/verify');
+            updateRoute('app_login', dispatch);
           }
         })
         .catch(err => console.log(err));

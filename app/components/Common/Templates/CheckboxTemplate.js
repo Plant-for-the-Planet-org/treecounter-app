@@ -24,6 +24,7 @@ export function CheckboxTemplate(locals) {
           <Image style={imageStyle} source={uncheckedIcon} />
         )}
       </TouchableOpacity>
+      <Text>{locals.label}</Text>
     </View>
   );
 }

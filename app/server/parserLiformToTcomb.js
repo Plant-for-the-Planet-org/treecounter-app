@@ -30,13 +30,13 @@ export default function parseJsonToTcomb(liformSchemaJson) {
     for (let propertyKey in properties) {
       if (properties.hasOwnProperty(propertyKey)) {
         let options = {};
-        options.placeholder = properties[propertyKey].title;
-        options.autoCapitalize = 'none';
         if (
           properties[propertyKey].type &&
           properties[propertyKey].type === 'string'
         ) {
           if (!properties[propertyKey].hasOwnProperty('enum')) {
+            options.placeholder = properties[propertyKey].title;
+            options.autoCapitalize = 'none';
             options.template = TextInputTemplate;
           } else {
             options.label = '';
@@ -49,8 +49,8 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           properties[propertyKey].type &&
           properties[propertyKey].type === 'boolean'
         ) {
-          options.template = CheckboxTemplate;
           options.label = properties[propertyKey].title;
+          options.template = CheckboxTemplate;
         }
         if (properties[propertyKey].widget === 'password') {
           options.secureTextEntry = true;
@@ -61,7 +61,6 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           );
         } else {
           schemaOptions['fields'][propertyKey] = options;
-          schemaOptions.auto = 'none';
         }
         if (liformSchema.required.indexOf(propertyKey)) {
           options['error'] = 'required';

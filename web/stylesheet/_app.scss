@@ -37,7 +37,7 @@
           font-weight: bold;
           display: inline-block;
           margin: 10px 20px;
-          border-bottom: 3px solid #BAD788
+          border-bottom: 3px solid #bad788;
         }
         .app-container__sidenav--list {
           list-style-type: none;
@@ -54,7 +54,7 @@
 
             a {
               padding-left: 3px;
-              color: rgba(0,0,0,0.54);
+              color: rgba(0, 0, 0, 0.54);
               font-size: 17px;
               text-decoration: none;
 
@@ -68,6 +68,9 @@
       }
       .app-container__content {
         flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }

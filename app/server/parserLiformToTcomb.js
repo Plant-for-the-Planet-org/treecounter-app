@@ -1,7 +1,7 @@
 let transform = require('tcomb-json-schema');
 
-import { TextInputTemplate } from '../components/Common/Templates/TextInputTemplate';
-import { CheckboxTemplate } from '../components/Common/Templates/CheckboxTemplate';
+import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
+import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
 import * as images from '../images';
 
 export default function parseJsonToTcomb(liformSchemaJson) {
@@ -42,6 +42,7 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           }
           if (!properties[propertyKey].hasOwnProperty('enum')) {
             options.placeholder = properties[propertyKey].title;
+            options.label = properties[propertyKey].title;
             options.auto = 'none';
             options.autoCapitalize = 'none';
             options.template = TextInputTemplate;

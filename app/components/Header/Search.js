@@ -6,9 +6,9 @@ import * as constants from '../../SupportedLanguages/en';
 const SearchBar = () => {
   return (
     <form>
-      <div className="input-group">
+      <div className="search-bar">
         <SearchAutosuggest />
-        <span className="input-group-addon search">
+        <span className="search-bar__button">
           <i className="material-icons header-icons">
             {constants.formStrings.search}
           </i>

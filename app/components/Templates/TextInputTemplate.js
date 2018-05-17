@@ -11,7 +11,7 @@ export function TextInputTemplate(locals) {
       ) : null}
       <div className="pftp-textfield__inputgroup">
         <input
-          type="text"
+          type={locals.type}
           required="required"
           value={locals.value}
           onChange={onChange}

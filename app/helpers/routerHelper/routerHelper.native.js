@@ -1,5 +1,7 @@
 import { NavigationActions } from 'react-navigation';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 export function updateRoute(routeName, dispatch, id) {
-  dispatch(NavigationActions.navigate({ routeName: 'Home' }));
+  const route = getLocalRoute(routeName);
+  dispatch(NavigationActions.navigate({ routeName: route }));
 }

@@ -1,15 +1,23 @@
 import { DrawerNavigator } from 'react-navigation';
 import Trillion from '../TreecounterGraphics/Trillion';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
+import SignUpContainer from '../../containers/Authentication/SignUpContainer';
+import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 export const AppDrawerNavigator = DrawerNavigator(
   {
-    //TODO hkurra import routing config from config file or rest API
-    Login: {
+    [getLocalRoute('app_login')]: {
       screen: LoginContainer
     },
-    Home: {
+    [getLocalRoute('app_signup')]: {
+      screen: SignUpContainer
+    },
+    [getLocalRoute('app_homepage')]: {
       screen: Trillion
+    },
+    [getLocalRoute('app_forgotPassword')]: {
+      screen: ForgotPasswordContainer
     }
   },
   {

@@ -7,17 +7,17 @@ import {
   schemaOptions
 } from '../../../server/formSchemas/login.native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-
+import TextHeading from '../../Common/Text/TextHeading';
+import CardLayout from '../../Common/Card/CardLayout';
 import LoginFooter from './LoginFooter';
-
 let TCombForm = t.form.Form;
 
 export default class Login extends Component {
   render() {
     return (
       <div className="app-login">
-        <h2 className="pftp-heading">Log In</h2>
-        <div className="card-layout">
+        <TextHeading>Log In</TextHeading>
+        <CardLayout>
           <TCombForm
             ref="loginForm"
             type={loginFormSchema}
@@ -25,7 +25,7 @@ export default class Login extends Component {
           />
           <PrimaryButton onClick={this.props.onClick}>Log In</PrimaryButton>
           <LoginFooter />
-        </div>
+        </CardLayout>
       </div>
     );
   }

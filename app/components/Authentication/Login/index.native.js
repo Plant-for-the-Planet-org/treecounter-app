@@ -17,18 +17,6 @@ import {
 let Form = t.form.Form;
 
 export default class Login extends Component {
-  onPress = () => {
-    let result = this.refs.loginForm.validate();
-    if (result.isValid()) {
-      let value = this.refs.loginForm.getValue();
-      if (value) {
-        this.props.onClick(value);
-      }
-    } else if (this.props.onError) {
-      this.props.onError(result.errors);
-    }
-  };
-
   onForgotPasswordClicked = () => {
     this.props.updateRoute('app_forgotPassword');
   };
@@ -50,7 +38,10 @@ export default class Login extends Component {
             type={loginFormSchema}
             options={schemaOptions}
           />
-          <TouchableHighlight onPress={this.onPress} style={styles.button}>
+          <TouchableHighlight
+            onPress={this.props.onPress}
+            style={styles.button}
+          >
             <Text style={styles.buttonText}>Log in</Text>
           </TouchableHighlight>
           <View style={styles.bottomRow}>
@@ -78,7 +69,7 @@ export default class Login extends Component {
 }
 
 Login.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onPress: PropTypes.func.isRequired,
   onError: PropTypes.func,
   updateRoute: PropTypes.func
 };

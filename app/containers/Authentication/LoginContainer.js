@@ -15,12 +15,30 @@ class LoginContainer extends React.Component {
     this.onClick = this.onClick.bind(this);
   }
 
+  onPress = () => {
+    // let result = this.refs.loginForm.validate();
+    // if (result.isValid()) {
+    let value = this.refs.loginContainer.refs.loginForm.getValue();
+    if (value) {
+      this.onClick(value);
+    }
+    // } else if (this.props.onError) {
+    //   this.props.onError(result.errors);
+    // }
+  };
+
   onClick(value) {
     this.props.login(value);
   }
 
   render() {
-    return <Login onClick={this.onClick} updateRoute={this.props.route} />;
+    return (
+      <Login
+        ref={'loginContainer'}
+        onPress={this.onPress}
+        updateRoute={this.props.route}
+      />
+    );
   }
 }
 

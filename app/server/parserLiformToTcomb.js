@@ -63,6 +63,7 @@ export default function parseJsonToTcomb(liformSchemaJson) {
         }
         if (properties[propertyKey].widget === 'password') {
           options.secureTextEntry = true;
+          options.type = 'password';
         }
         if (properties[propertyKey].type === 'object') {
           options.auto = 'none';

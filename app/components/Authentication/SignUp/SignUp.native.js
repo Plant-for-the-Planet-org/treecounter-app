@@ -15,8 +15,8 @@ import {
   signupFormSchema
 } from '../../../server/formSchemas/signup';
 
-import { loginStyles } from '../Login.native';
-import SignupTypes from './SignupType.native';
+import { loginStyles } from '../Login';
+import SignupTypes from './SignupType';
 
 let Form = t.form.Form;
 

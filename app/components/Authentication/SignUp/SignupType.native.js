@@ -2,17 +2,9 @@ import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import {
-  schemaOptions,
-  signupFormSchema
-} from '../../../server/formSchemas/signup';
-import { loginStyles } from '../Login.native';
-import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight,
-  Image,
-  TextInput,
   ImageBackground,
   ScrollView,
   TouchableOpacity

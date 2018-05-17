@@ -6,6 +6,7 @@ import {
   loginFormSchema,
   schemaOptions
 } from '../../../server/formSchemas/login.native';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 
 // import LiForm from 'liform-react';
 
@@ -25,6 +26,7 @@ export default class Login extends Component {
             type={loginFormSchema}
             options={schemaOptions}
           />
+          <PrimaryButton>Log In</PrimaryButton>
           {/* <LiForm
             schema={loginFormSchema}
             onSubmit={this.props.onClick}

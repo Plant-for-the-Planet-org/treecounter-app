@@ -13,19 +13,6 @@ import {
 
 let Form = t.form.Form;
 
-let allSchemaOptions = {
-  fields: {
-    _password: {
-      ...schemaOptions.fields._password,
-      config: { iconUrl: require('../../images/login/key.png') }
-    },
-    _username: {
-      ...schemaOptions.fields._username,
-      config: { iconUrl: require('../../images/login/mail.png') }
-    }
-  }
-};
-
 export default class Login extends Component {
   onPress = () => {
     let result = this.refs.loginForm.validate();
@@ -58,7 +45,7 @@ export default class Login extends Component {
           <Form
             ref={'loginForm'}
             type={loginFormSchema}
-            options={allSchemaOptions}
+            options={schemaOptions}
           />
           <TouchableHighlight onPress={this.onPress} style={styles.button}>
             <Text style={styles.buttonText}>Log in</Text>

@@ -18,17 +18,6 @@ import {
 
 let Form = t.form.Form;
 
-let allSchemaOptions = {
-  fields: {
-    email: {
-      ...schemaOptions.fields.email,
-      template: TextInputTemplate,
-      config: { iconUrl: require('../../images/login/mail.png') },
-      error: 'required'
-    }
-  }
-};
-
 export default class ForgotPassword extends Component {
   onLoginClicked = () => {
     this.props.updateRoute('app_login');
@@ -57,7 +46,7 @@ export default class ForgotPassword extends Component {
           <Form
             ref={'forgotPasswordForm'}
             type={forgotPasswordFormSchema}
-            options={allSchemaOptions}
+            options={schemaOptions}
           />
           <TouchableHighlight onPress={this.onPress} style={styles.button}>
             <Text style={styles.buttonText}>Reset Password</Text>

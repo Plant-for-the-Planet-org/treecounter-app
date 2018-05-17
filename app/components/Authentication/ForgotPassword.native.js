@@ -6,7 +6,6 @@ import {
   forgotPasswordFormSchema,
   schemaOptions
 } from '../../server/formSchemas/forgotpassword';
-import { TextInputTemplate } from '../Common/Templates/TextInputTemplate';
 
 import {
   StyleSheet,

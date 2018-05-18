@@ -7,14 +7,14 @@ import { getLocalRoute } from '../../actions/apiRouting';
 
 export const AppDrawerNavigator = DrawerNavigator(
   {
+    [getLocalRoute('app_userHome')]: {
+      screen: Trillion
+    },
     [getLocalRoute('app_login')]: {
       screen: LoginContainer
     },
     [getLocalRoute('app_signup')]: {
       screen: SignUpContainer
-    },
-    [getLocalRoute('app_userHome')]: {
-      screen: Trillion
     },
     [getLocalRoute('app_forgotPassword')]: {
       screen: ForgotPasswordContainer

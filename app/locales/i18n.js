@@ -1,4 +1,5 @@
 import i18next from 'i18next';
+import labels from './en/labels';
 
 i18next.init({
   interpolation: {
@@ -12,16 +13,7 @@ i18next.init({
   resources: {
     en: {
       translation: {
-        age: { label: 'Age' },
-        home: { label: 'Home' },
-        name: { label: 'Name' }
-      }
-    },
-    de: {
-      translation: {
-        age: { label: 'Años' },
-        home: { label: 'Casa' },
-        name: { label: 'Nombre' }
+        label: labels
       }
     }
   }

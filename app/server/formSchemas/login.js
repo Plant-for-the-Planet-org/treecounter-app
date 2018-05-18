@@ -4,14 +4,12 @@ export default {
   properties: {
     _username: {
       type: 'string',
-      title: 'Email',
-      icon: 'mail',
+      title: 'label.email',
       propertyOrder: 1
     },
     _password: {
       type: 'string',
-      title: 'Password',
-      icon: 'key',
+      title: 'label.password',
       widget: 'password',
       propertyOrder: 2
     }

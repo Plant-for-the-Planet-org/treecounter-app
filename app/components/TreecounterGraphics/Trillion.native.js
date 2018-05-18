@@ -7,30 +7,25 @@ export default class Trillion extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native with react navigation navigation{' ' +
-            i18n.t('name.label')}
+          Logged In{' ' + i18n.t('name.label')}
         </Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
       </View>
     );
   }
 }
+
+const skyBlue = '#F5FCFF';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: skyBlue
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
   }
 });

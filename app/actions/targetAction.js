@@ -8,14 +8,11 @@ import { treecounterSchema } from '../schemas/index';
 import { getLocalRoute } from './apiRouting';
 import { putAuthenticatedRequest } from '../utils/api';
 
-export function SubmitTarget(treecounter, treecounterId) {
+export function SubmitTarget(treecounterData, treecounterId) {
   return dispatch => {
-    const data = {
-      countTarget: treecounter.countTarget,
-      targetYear: treecounter.targetYear,
-      targetComment: treecounter.targetComment
-    };
-    putAuthenticatedRequest('target_put', data, { treecounter: treecounterId })
+    putAuthenticatedRequest('target_put', treecounterData, {
+      treecounter: treecounterId
+    })
       .then(res => {
         dispatch(mergeEntities(normalize(res.data, treecounterSchema)));
         history.push(getLocalRoute('app_userHome'));

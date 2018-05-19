@@ -12,7 +12,6 @@ class LoginContainer extends React.Component {
   constructor(props) {
     super(props);
     clearStorage();
-    this.onClick = this.onClick.bind(this);
   }
 
   onPress = () => {

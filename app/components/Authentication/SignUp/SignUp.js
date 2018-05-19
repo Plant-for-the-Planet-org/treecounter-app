@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import LiForm from 'liform-react';
+// import LiForm from 'liform-react';
 import PropTypes from 'prop-types';
 
-import signupFormSchema from '../../../server/formSchemas/signup';
-import CustomForm from '../../Common/CustomForm';
-import SignUpLayout from '../SignUpLayout';
+// import signupFormSchema from '../../../server/formSchemas/signup';
+import TextHeading from '../../Common/Text/TextHeading';
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -24,17 +23,16 @@ export default class SignUp extends Component {
   render() {
     return (
       <div className="sidenav-wrapper">
-        <SignUpLayout
-          profile={this.profile}
-          profiletype={this.state.Profiletype}
-        />
-        <LiForm
-          schema={signupFormSchema[this.state.Profiletype]}
-          baseForm={CustomForm}
-          onSubmit={this.onClick}
-          buttonText="Sign Up"
-          buttonWidth="240"
-        />
+        <div className="app-container__content--center">
+          <TextHeading>Join In</TextHeading>
+          {/* <LiForm
+            schema={signupFormSchema[this.state.Profiletype]}
+            baseForm={CustomForm}
+            onSubmit={this.onClick}
+            buttonText="Sign Up"
+            buttonWidth="240"
+          /> */}
+        </div>
       </div>
     );
   }

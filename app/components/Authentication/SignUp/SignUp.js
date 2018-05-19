@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import LiForm from 'liform-react';
 import PropTypes from 'prop-types';
+import t from 'tcomb-form';
 
-import signupFormSchema from '../../../server/formSchemas/signup';
-import CustomForm from '../../Common/CustomForm';
-import SignUpLayout from '../SignUpLayout';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
+import TextHeading from '../../Common/Text/TextHeading';
+import CardLayout from '../../Common/Card/CardLayout';
+import SignUpType from './SignUpType';
+import { SignupJustMe, SignupOrganization } from '../../../assets';
+import {
+  schemaOptions,
+  signupFormSchema
+} from '../../../server/parsedSchemas/signup';
+
+let TCombForm = t.form.Form;
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -12,34 +20,71 @@ export default class SignUp extends Component {
     this.state = {
       Profiletype: 'individual'
     };
-    this.profile = this.profile.bind(this);
-    this.onClick = props.onClick.bind(this, this.state.Profiletype);
+    this.ProfileChange = this.ProfileChange.bind(this);
   }
-  profile(type) {
+
+  ProfileChange(type) {
     this.setState({
       Profiletype: type
     });
   }
 
   render() {
+    let { Profiletype } = this.state;
     return (
-      <div className="sidenav-wrapper">
-        <SignUpLayout
-          profile={this.profile}
-          profiletype={this.state.Profiletype}
-        />
-        <LiForm
-          schema={signupFormSchema[this.state.Profiletype]}
-          baseForm={CustomForm}
-          onSubmit={this.onClick}
-          buttonText="Sign Up"
-          buttonWidth="240"
-        />
+      <div className="app-container__content--center">
+        <TextHeading>Join In</TextHeading>
+        <div className="signup-types">
+          <SignUpType
+            active={Profiletype === 'tpo'}
+            imgSrc={SignupOrganization}
+            salutation="I am a"
+            title="Tree-Planting Organisation"
+            type="tpo"
+            onProfileClick={this.ProfileChange}
+          />
+          <SignUpType
+            active={Profiletype === 'individual'}
+            imgSrc={SignupJustMe}
+            salutation="I am"
+            title="Just me"
+            type="individual"
+            onProfileClick={this.ProfileChange}
+          />
+          <SignUpType
+            active={Profiletype === 'company'}
+            imgSrc={SignupOrganization}
+            salutation="I am a"
+            title="Company"
+            type="company"
+            onProfileClick={this.ProfileChange}
+          />
+          <SignUpType
+            active={Profiletype === 'education'}
+            imgSrc={SignupOrganization}
+            salutation="I am a"
+            title="School"
+            type="education"
+            onProfileClick={this.ProfileChange}
+          />
+        </div>
+        <CardLayout>
+          <TCombForm
+            ref={'signupForm'}
+            type={signupFormSchema[Profiletype]}
+            options={schemaOptions[Profiletype]}
+          />
+          <PrimaryButton
+            onClick={this.props.onSignUpClicked.bind(this, Profiletype)}
+          >
+            Sign Up
+          </PrimaryButton>
+        </CardLayout>
       </div>
     );
   }
 }
 
 SignUp.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onSignUpClicked: PropTypes.func.isRequired
 };

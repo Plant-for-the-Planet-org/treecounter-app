@@ -17,8 +17,26 @@ class SignUpContainer extends React.Component {
     this.props.signUp(profileType, value);
   }
 
+  onSignUpClicked = profileType => {
+    // let result = this.refs.loginForm.validate();
+    // if (result.isValid()) {
+    let value = this.refs.signupContainer.refs.signupForm.getValue();
+    if (value) {
+      this.onClick(profileType, value);
+    }
+    // } else if (this.props.onError) {
+    //   this.props.onError(result.errors);
+    // }
+  };
+
   render() {
-    return <SignUp onClick={this.onClick} updateRoute={this.props.route} />;
+    return (
+      <SignUp
+        ref="signupContainer"
+        onSignUpClicked={this.onSignUpClicked}
+        updateRoute={this.props.route}
+      />
+    );
   }
 }
 

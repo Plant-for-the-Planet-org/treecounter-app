@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import i18n from '../../locales/i18n';
 
 export default class Trillion extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Logged In </Text>
+        <Text style={styles.welcome}>
+          Logged In{' ' + i18n.t('name.label')}
+        </Text>
       </View>
     );
   }

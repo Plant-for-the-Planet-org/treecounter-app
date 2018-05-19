@@ -10,7 +10,7 @@ import { SignupJustMe, SignupOrganization } from '../../../assets';
 import {
   schemaOptions,
   signupFormSchema
-} from '../../../server/formSchemas/signup.native';
+} from '../../../server/parsedSchemas/signup';
 
 let TCombForm = t.form.Form;
 
@@ -21,7 +21,6 @@ export default class SignUp extends Component {
       Profiletype: 'individual'
     };
     this.ProfileChange = this.ProfileChange.bind(this);
-    this.onClick = props.onClick.bind(this, this.state.Profiletype);
   }
 
   ProfileChange(type) {
@@ -31,12 +30,13 @@ export default class SignUp extends Component {
   }
 
   render() {
+    let { Profiletype } = this.state;
     return (
       <div className="app-container__content--center">
         <TextHeading>Join In</TextHeading>
         <div className="signup-types">
           <SignUpType
-            active={this.state.Profiletype === 'tpo'}
+            active={Profiletype === 'tpo'}
             imgSrc={SignupOrganization}
             salutation="I am a"
             title="Tree-Planting Organisation"
@@ -44,7 +44,7 @@ export default class SignUp extends Component {
             onProfileClick={this.ProfileChange}
           />
           <SignUpType
-            active={this.state.Profiletype === 'individual'}
+            active={Profiletype === 'individual'}
             imgSrc={SignupJustMe}
             salutation="I am"
             title="Just me"
@@ -52,7 +52,7 @@ export default class SignUp extends Component {
             onProfileClick={this.ProfileChange}
           />
           <SignUpType
-            active={this.state.Profiletype === 'company'}
+            active={Profiletype === 'company'}
             imgSrc={SignupOrganization}
             salutation="I am a"
             title="Company"
@@ -60,7 +60,7 @@ export default class SignUp extends Component {
             onProfileClick={this.ProfileChange}
           />
           <SignUpType
-            active={this.state.Profiletype === 'education'}
+            active={Profiletype === 'education'}
             imgSrc={SignupOrganization}
             salutation="I am a"
             title="School"
@@ -71,10 +71,14 @@ export default class SignUp extends Component {
         <CardLayout>
           <TCombForm
             ref={'signupForm'}
-            type={signupFormSchema[this.state.Profiletype]}
-            options={schemaOptions[this.state.Profiletype]}
+            type={signupFormSchema[Profiletype]}
+            options={schemaOptions[Profiletype]}
           />
-          <PrimaryButton>Sign Up</PrimaryButton>
+          <PrimaryButton
+            onClick={this.props.onSignUpClicked.bind(this, Profiletype)}
+          >
+            Sign Up
+          </PrimaryButton>
         </CardLayout>
       </div>
     );
@@ -82,5 +86,5 @@ export default class SignUp extends Component {
 }
 
 SignUp.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onSignUpClicked: PropTypes.func.isRequired
 };

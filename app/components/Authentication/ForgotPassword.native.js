@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {
   forgotPasswordFormSchema,
   schemaOptions
-} from '../../server/formSchemas/forgotpassword';
+} from '../../server/parsedSchemas/forgotpassword';
 
 import {
   StyleSheet,

@@ -13,7 +13,7 @@ import {
 import {
   schemaOptions,
   signupFormSchema
-} from '../../../server/formSchemas/signup';
+} from '../../../server/parsedSchemas/signup';
 
 import { loginStyles } from '../Login';
 import SignupTypes from './SignupType';
@@ -39,19 +39,8 @@ export default class SignUp extends Component {
     });
   }
 
-  onPress = () => {
-    let result = this.refs.signupForm.validate();
-    if (result.isValid()) {
-      let value = this.refs.signupForm.getValue();
-      if (value) {
-        this.props.onClick(this.state.Profiletype, value);
-      }
-    } else if (this.props.onError) {
-      this.props.onError(result.errors);
-    }
-  };
-
   render() {
+    let { Profiletype } = this.state;
     return (
       <ScrollView>
         <ImageBackground style={styles.container}>
@@ -63,10 +52,13 @@ export default class SignUp extends Component {
           <View style={styles.inputContainer}>
             <Form
               ref={'signupForm'}
-              type={signupFormSchema[this.state.Profiletype]}
-              options={schemaOptions[this.state.Profiletype]}
+              type={signupFormSchema[Profiletype]}
+              options={schemaOptions[Profiletype]}
             />
-            <TouchableHighlight onPress={this.onPress} style={styles.button}>
+            <TouchableHighlight
+              onPress={this.props.onSignUpClicked.bind(this, Profiletype)}
+              style={styles.button}
+            >
               <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableHighlight>
             <View style={styles.bottomRow}>
@@ -87,7 +79,7 @@ export default class SignUp extends Component {
 
 SignUp.propTypes = {
   updateRoute: PropTypes.func,
-  onClick: PropTypes.func,
+  onSignUpClicked: PropTypes.func,
   onError: PropTypes.func
 };
 

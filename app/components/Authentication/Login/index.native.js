@@ -12,7 +12,7 @@ import {
 import {
   loginFormSchema,
   schemaOptions
-} from '../../../server/formSchemas/login';
+} from '../../../server/parsedSchemas/login';
 
 let Form = t.form.Form;
 

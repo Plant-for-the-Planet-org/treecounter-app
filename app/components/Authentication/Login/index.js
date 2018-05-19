@@ -5,7 +5,7 @@ import t from 'tcomb-form';
 import {
   loginFormSchema,
   schemaOptions
-} from '../../../server/formSchemas/login.native';
+} from '../../../server/parsedSchemas/login';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import TextHeading from '../../Common/Text/TextHeading';
 import CardLayout from '../../Common/Card/CardLayout';

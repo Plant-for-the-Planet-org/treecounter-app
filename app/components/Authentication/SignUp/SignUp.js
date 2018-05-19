@@ -20,10 +20,11 @@ export default class SignUp extends Component {
     this.state = {
       Profiletype: 'individual'
     };
-    this.profile = this.profile.bind(this);
+    this.ProfileChange = this.ProfileChange.bind(this);
     this.onClick = props.onClick.bind(this, this.state.Profiletype);
   }
-  profile(type) {
+
+  ProfileChange(type) {
     this.setState({
       Profiletype: type
     });
@@ -35,28 +36,36 @@ export default class SignUp extends Component {
         <TextHeading>Join In</TextHeading>
         <div className="signup-types">
           <SignUpType
-            active="true"
+            active={this.state.Profiletype === 'tpo'}
             imgSrc={SignupOrganization}
             salutation="I am a"
             title="Tree-Planting Organisation"
+            type="tpo"
+            onProfileClick={this.ProfileChange}
           />
           <SignUpType
-            active="false"
+            active={this.state.Profiletype === 'individual'}
             imgSrc={SignupJustMe}
             salutation="I am"
             title="Just me"
+            type="individual"
+            onProfileClick={this.ProfileChange}
           />
           <SignUpType
-            active="false"
+            active={this.state.Profiletype === 'company'}
             imgSrc={SignupOrganization}
             salutation="I am a"
             title="Company"
+            type="company"
+            onProfileClick={this.ProfileChange}
           />
           <SignUpType
-            active="false"
+            active={this.state.Profiletype === 'education'}
             imgSrc={SignupOrganization}
             salutation="I am a"
             title="School"
+            type="education"
+            onProfileClick={this.ProfileChange}
           />
         </div>
         <CardLayout>
@@ -67,13 +76,6 @@ export default class SignUp extends Component {
           />
           <PrimaryButton>Sign Up</PrimaryButton>
         </CardLayout>
-        {/* <LiForm
-          schema={signupFormSchema[this.state.Profiletype]}
-          baseForm={CustomForm}
-          onSubmit={this.onClick}
-          buttonText="Sign Up"
-          buttonWidth="240"
-        /> */}
       </div>
     );
   }

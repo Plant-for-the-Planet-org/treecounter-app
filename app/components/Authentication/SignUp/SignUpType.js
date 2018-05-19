@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import TextSpan from '../../Common/Text/TextSpan';
 
 export default class SignUpType extends Component {
   render() {
     const { active, imgSrc, salutation, title } = this.props;
     return (
       <div className={'signup-type ' + (active ? 'active' : '')}>
-        <img src={imgSrc} />>
+        <img src={imgSrc} />
         <div className="signup-type__text">
-          <span className="signup-type__text--salutation">{salutation}</span>
+          <TextSpan>{salutation}</TextSpan>
           <hr />
-          <span className="signup-type__text--title">{title}</span>
+          <TextSpan strong={true}>{title}</TextSpan>
         </div>
       </div>
     );

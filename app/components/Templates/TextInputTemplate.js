@@ -1,4 +1,5 @@
 import React from 'react';
+import i18n from '../../locales/i18n';
 
 export function TextInputTemplate(locals) {
   function onChange($event) {
@@ -18,7 +19,7 @@ export function TextInputTemplate(locals) {
         />
         <span className="pftp-textfield__inputgroup--highlight" />
         <span className="pftp-textfield__inputgroup--bar" />
-        <label>{locals.label}</label>
+        <label>{i18n.t(locals.label)}</label>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { TouchableOpacity, Text, View, Image } from 'react-native';
 import React from 'react';
 
+import i18n from '../../locales/i18n';
 import checkedIcon from '../../images/checkbox_checked.png';
 import uncheckedIcon from '../../images/checkbox_unchecked.png';
 
@@ -33,7 +34,7 @@ export function CheckboxTemplate(locals) {
           <Image style={imageStyle} source={uncheckedIcon} />
         )}
       </TouchableOpacity>
-      <Text style={textboxStyle}>{locals.label}</Text>
+      <Text style={textboxStyle}>{i18n.t(locals.label)}</Text>
     </View>
   );
 }

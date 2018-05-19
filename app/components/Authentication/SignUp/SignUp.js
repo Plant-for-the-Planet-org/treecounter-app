@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-// import LiForm from 'liform-react';
 import PropTypes from 'prop-types';
+import t from 'tcomb-form';
 
-// import signupFormSchema from '../../../server/formSchemas/signup';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 import TextHeading from '../../Common/Text/TextHeading';
+import CardLayout from '../../Common/Card/CardLayout';
 import SignUpType from './SignUpType';
 import { SignupJustMe, SignupOrganization } from '../../../assets';
+import {
+  schemaOptions,
+  signupFormSchema
+} from '../../../server/formSchemas/signup.native';
+
+let TCombForm = t.form.Form;
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -24,43 +31,49 @@ export default class SignUp extends Component {
 
   render() {
     return (
-      <div className="sidenav-wrapper">
-        <div className="app-container__content--center">
-          <TextHeading>Join In</TextHeading>
-          <div className="signup-types">
-            <SignUpType
-              active="true"
-              imgSrc={SignupOrganization}
-              salutation="I am a"
-              title="Tree-Planting Organisation"
-            />
-            <SignUpType
-              active="false"
-              imgSrc={SignupJustMe}
-              salutation="I am"
-              title="Just me"
-            />
-            <SignUpType
-              active="false"
-              imgSrc={SignupOrganization}
-              salutation="I am a"
-              title="Company"
-            />
-            <SignUpType
-              active="false"
-              imgSrc={SignupOrganization}
-              salutation="I am a"
-              title="School"
-            />
-          </div>
-          {/* <LiForm
-            schema={signupFormSchema[this.state.Profiletype]}
-            baseForm={CustomForm}
-            onSubmit={this.onClick}
-            buttonText="Sign Up"
-            buttonWidth="240"
-          /> */}
+      <div className="app-container__content--center">
+        <TextHeading>Join In</TextHeading>
+        <div className="signup-types">
+          <SignUpType
+            active="true"
+            imgSrc={SignupOrganization}
+            salutation="I am a"
+            title="Tree-Planting Organisation"
+          />
+          <SignUpType
+            active="false"
+            imgSrc={SignupJustMe}
+            salutation="I am"
+            title="Just me"
+          />
+          <SignUpType
+            active="false"
+            imgSrc={SignupOrganization}
+            salutation="I am a"
+            title="Company"
+          />
+          <SignUpType
+            active="false"
+            imgSrc={SignupOrganization}
+            salutation="I am a"
+            title="School"
+          />
         </div>
+        <CardLayout>
+          <TCombForm
+            ref={'signupForm'}
+            type={signupFormSchema[this.state.Profiletype]}
+            options={schemaOptions[this.state.Profiletype]}
+          />
+          <PrimaryButton>Sign Up</PrimaryButton>
+        </CardLayout>
+        {/* <LiForm
+          schema={signupFormSchema[this.state.Profiletype]}
+          baseForm={CustomForm}
+          onSubmit={this.onClick}
+          buttonText="Sign Up"
+          buttonWidth="240"
+        /> */}
       </div>
     );
   }

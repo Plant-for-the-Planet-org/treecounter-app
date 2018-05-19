@@ -11,9 +11,11 @@ $trans-time: 300ms;
   .pftp-textfield__icon {
     width: 20px;
     padding-right: 8px;
+    margin-left: -30px;
   }
   .pftp-textfield__inputgroup {
     position: relative;
+    width: 100%;
 
     input {
       background: none;

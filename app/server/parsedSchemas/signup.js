@@ -1,4 +1,4 @@
-import schemaLiform from './signup.js';
+import schemaLiform from '../formSchemas/signup';
 import parseJsonToTcomb from '../parserLiformToTcomb';
 
 const {

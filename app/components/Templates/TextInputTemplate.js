@@ -13,6 +13,7 @@ export function TextInputTemplate(locals) {
       <div className="pftp-textfield__inputgroup">
         <input
           type={locals.type}
+          autoComplete="new-password"
           required="required"
           value={locals.value}
           onChange={onChange}

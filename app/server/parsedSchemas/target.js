@@ -1,4 +1,4 @@
-import schemaLiform from './target.js';
+import schemaLiform from '../formSchemas/target';
 import parseJsonToTcomb from '../parserLiformToTcomb';
 
 const { transformedSchema: targetFormSchema, schemaOptions } = parseJsonToTcomb(

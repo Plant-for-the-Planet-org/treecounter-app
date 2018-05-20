@@ -5,10 +5,10 @@ const activePlantProjectPerTPO = (userTpos, plantProjects, treeCountid) => {
   //    treeCountid=31;
   // console.log(treeCountid)
   let prev = plantProjects.map(arr => arr);
-  let Featured = 'is_certified';
-  const tpo_id = prev.find(value => value.tpo_id === treeCountid).tpo_id;
+  let Featured = 'isCertified';
+  const tpoId = prev.find(value => value.tpoId === treeCountid).tpoId;
   let result = prev.filter(
-    value => value && value.tpo_id && value.tpo_id === tpo_id
+    value => value && value.tpoId && value.tpoId === tpoId
   );
   let projects = [];
   let cnt = 0;
@@ -24,7 +24,7 @@ const activePlantProjectPerTPO = (userTpos, plantProjects, treeCountid) => {
         <TpoCardText
           name={name}
           key={index}
-          tponame={userTpos[value.tpo_id].name}
+          tponame={userTpos[value.tpoId].name}
           cardtext={value}
         />
       );

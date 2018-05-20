@@ -65,7 +65,7 @@ class Menu extends Component {
               {element.caption}
             </span>
             <ul className="app-container__sidenav--list" key={element.sequence}>
-              {element.menu_items.map(
+              {element.menuItems.map(
                 menuItem =>
                   menuItem.enabled ? (
                     <li key={'' + element.sequence + menuItem.sequence}>

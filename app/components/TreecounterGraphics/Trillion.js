@@ -25,12 +25,12 @@ class Trillion extends Component {
         this.setState({
           svgData: {
             id: 1,
-            target: data.count_target,
-            planted: data.count_planted,
-            community: data.count_community,
-            personal: data.count_personal
+            target: data.countTarget,
+            planted: data.countPlanted,
+            community: data.countCommunity,
+            personal: data.countPersonal
           },
-          displayName: data.display_name,
+          displayName: data.displayName,
           loading: false
         });
         console.log('Success: ', data);

@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
-import LiForm from 'liform-react';
 import PropTypes from 'prop-types';
+import t from 'tcomb-form';
 
-import targetFormSchema from '../../server/formSchemas/target';
-import CustomForm from '../Common/CustomForm';
+import {
+  targetFormSchema,
+  schemaOptions
+} from '../../server/parsedSchemas/target';
+
+import PrimaryButton from '../Common/Button/PrimaryButton';
+import TextHeading from '../Common/Text/TextHeading';
+import CardLayout from '../Common/Card/CardLayout';
+
+let TCombForm = t.form.Form;
 
 export default class Target extends Component {
   constructor(props) {
@@ -23,19 +31,22 @@ export default class Target extends Component {
 
   render() {
     const { treecounter } = this.props;
+
     return (
-      <div>
-        <LiForm
-          schema={targetFormSchema}
-          initialValues={this.state.initialValues}
-          onSubmit={treecounterData =>
-            this.props.onSubmitTarget(treecounterData, treecounter.id)
-          }
-          baseForm={CustomForm}
-          headline=""
-          buttonText={this.state.label}
-          buttonWidth="240"
-        />
+      <div className="app-container__content--center">
+        <TextHeading>Set Target</TextHeading>
+        <CardLayout>
+          <TCombForm
+            ref="setTargetForm"
+            type={targetFormSchema}
+            options={schemaOptions}
+          />
+          <PrimaryButton
+            onClick={this.props.onSubmitTarget.bind(this, treecounter.id)}
+          >
+            {this.state.label}
+          </PrimaryButton>
+        </CardLayout>
       </div>
     );
   }

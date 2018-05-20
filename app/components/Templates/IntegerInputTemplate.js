@@ -12,7 +12,7 @@ export function IntegerInputTemplate(locals) {
       ) : null}
       <div className="pftp-textfield__inputgroup">
         <input
-          type="integer"
+          type="number"
           autoComplete="new-password"
           required="required"
           value={locals.value}

@@ -8,13 +8,22 @@ import { SubmitTarget } from '../../actions/targetAction';
 import { userTreecounterSelector } from '../../selectors/index';
 
 class TargetContainer extends React.Component {
-  onSubmitTarget(value) {
-    this.props.SubmitTarget(value);
-  }
+  onSubmitTarget = id => {
+    // let result = this.refs.loginForm.validate();
+    // if (result.isValid()) {
+    let value = this.refs.targetContainer.refs.setTargetForm.getValue();
+    if (value) {
+      this.props.SubmitTarget(value, id);
+    }
+    // } else if (this.props.onError) {
+    //   this.props.onError(result.errors);
+    // }
+  };
 
   render() {
     return (
       <Target
+        ref={'targetContainer'}
         treecounter={this.props.treecounter}
         onSubmitTarget={this.onSubmitTarget}
       />

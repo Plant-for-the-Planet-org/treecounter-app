@@ -20,18 +20,6 @@ export function IntegerInputTemplate(locals) {
   };
   let errorBlockStyle = locals.stylesheet.errorBlock;
 
-  function onChanged(text) {
-    let newText = '';
-    let numbers = '0123456789';
-
-    for (let i = 0; i < text.length; i++) {
-      if (numbers.indexOf(text[i]) > -1) {
-        newText = newText + text[i];
-      }
-    }
-    locals.onChange(newText);
-  }
-
   let error =
     locals.hasError && locals.error ? (
       <Text accessibilityLiveRegion="polite" style={errorBlockStyle}>
@@ -53,11 +41,12 @@ export function IntegerInputTemplate(locals) {
           maxLength={locals.maxLength}
           multiline={locals.multiline}
           value={locals.value}
-          onChangeText={value => onChanged(value)}
+          onChangeText={value => locals.onChange(value)}
           onChange={locals.onChangeNative}
           onKeyPress={locals.onKeyPress}
           returnKeyType={locals.returnKeyType}
           autoCapitalize={locals.autoCapitalize}
+          keyboardType="numeric"
         />
       </View>
       {error}

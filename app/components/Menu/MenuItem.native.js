@@ -10,6 +10,11 @@ import {
 import PropTypes, { func } from 'prop-types';
 
 export default class MenuGroup extends Component {
+  static propTypes = {
+    title: PropTypes.string,
+    menuItems: PropTypes.array.isRequired,
+    onPress: PropTypes.func.isRequired
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -21,7 +26,7 @@ export default class MenuGroup extends Component {
         </View>
         {this.props.menuItems.map(menuItem => (
           <MenuItem
-            onPress={() => console.log('test1')}
+            onPress={() => this.props.onPress(menuItem)}
             title={menuItem.caption}
             key={'' + this.props.title + menuItem.sequence}
           />

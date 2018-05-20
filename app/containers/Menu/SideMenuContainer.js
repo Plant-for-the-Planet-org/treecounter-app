@@ -40,7 +40,13 @@ class SideMenuContainer extends Component {
   }
   render() {
     console.log('Menu object', this.state.data);
-    return <Menu isOpen={this.props.isOpen} menuData={this.state.data} />;
+    return (
+      <Menu
+        isOpen={this.props.isOpen}
+        menuData={this.state.data}
+        navigation={this.props.navigation}
+      />
+    );
   }
 }
 
@@ -57,5 +63,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(SideMenuContainer);
 SideMenuContainer.propTypes = {
   isOpen: PropTypes.bool,
   loggedIn: PropTypes.bool,
-  logoutUser: PropTypes.func.isRequired
+  logoutUser: PropTypes.func.isRequired,
+  navigation: PropTypes.any
 };

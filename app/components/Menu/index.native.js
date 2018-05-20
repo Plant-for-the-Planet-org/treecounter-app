@@ -9,11 +9,22 @@ import {
   StyleSheet
 } from 'react-native';
 import MenuGroup from './MenuItem.native';
+import PropTypes, { func } from 'prop-types';
+import { updateRoute } from '../../helpers/routerHelper';
 
 export default class Menu extends Component {
-  onPressMenu(item) {
-    console.log('cliecked me');
-  }
+  static propTypes = {
+    menuData: PropTypes.array.isRequired,
+    onPress: PropTypes.func
+  };
+
+  //TODO hkurra
+  //Ideally this should be in the container but for now to keep the same container for both web and app it's better to keep it here
+  onPressMenu = item => {
+    const { dispatch } = this.props.navigation;
+    console.log('clicked ', item, dispatch);
+    updateRoute(item.uri, dispatch, 0);
+  };
 
   render() {
     return (
@@ -29,6 +40,7 @@ export default class Menu extends Component {
               title={element.caption}
               key={element.sequence}
               menuItems={element.menu_items}
+              onPress={this.onPressMenu}
             />
           ))}
         </ScrollView>

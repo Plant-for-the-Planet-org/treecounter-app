@@ -2,6 +2,7 @@ let transform = require('tcomb-json-schema');
 
 import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
 import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
+import { IntegerInputTemplate } from '../components/Templates/IntegerInputTemplate';
 import * as images from '../images';
 
 export default function parseJsonToTcomb(liformSchemaJson) {
@@ -33,7 +34,8 @@ export default function parseJsonToTcomb(liformSchemaJson) {
         let options = {};
         if (
           properties[propertyKey].type &&
-          properties[propertyKey].type === 'string'
+          (properties[propertyKey].type === 'string' ||
+            properties[propertyKey].type === 'integer')
         ) {
           if (properties[propertyKey].hasOwnProperty('icon')) {
             options.config = {
@@ -45,7 +47,11 @@ export default function parseJsonToTcomb(liformSchemaJson) {
             options.label = properties[propertyKey].title;
             options.auto = 'none';
             options.autoCapitalize = 'none';
-            options.template = TextInputTemplate;
+            if (properties[propertyKey].type === 'string') {
+              options.template = TextInputTemplate;
+            } else if (properties[propertyKey].type === 'integer') {
+              options.template = IntegerInputTemplate;
+            }
           } else {
             options.label = '';
             options.auto = 'none';

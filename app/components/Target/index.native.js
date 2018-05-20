@@ -34,7 +34,7 @@ export default class Target extends Component {
             options={schemaOptions}
           />
           <TouchableHighlight
-            onPress={this.props.onSubmitTarget.bind(this, treecounter.id)}
+            onPress={this.props.onSubmitTarget}
             style={styles.button}
           >
             <Text style={styles.buttonText}>Set Target</Text>

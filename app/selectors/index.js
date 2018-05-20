@@ -91,7 +91,7 @@ export const sortedUserContributionsSelector = createSelector(
     return null === contributions
       ? []
       : contributions.sort(
-          (c1, c2) => Date.parse(c2.plant_date) - Date.parse(c1.plant_date)
+          (c1, c2) => Date.parse(c2.plantDate) - Date.parse(c1.plantDate)
         );
   }
 );
@@ -125,7 +125,7 @@ export const availablePaymentGatewaysSelector = createSelector(
     return null === selectedPlantProject
       ? null
       : paymentGateways.filter(function(paymentGateway) {
-          return paymentGateway.tpo_id === selectedPlantProject.tpo_id;
+          return paymentGateway.tpoId === selectedPlantProject.tpoId;
         });
   }
 );
@@ -141,13 +141,13 @@ export const userTreecounterDataSelector = createSelector(
       ? null
       : {
           id: treecounter.id,
-          target: treecounter.count_target,
-          implicitTarget: treecounter.implicit_target,
-          planted: treecounter.count_planted,
-          personal: treecounter.count_personal,
-          community: treecounter.count_community,
-          targetComment: treecounter.target_comment,
-          targetYear: treecounter.target_year
+          target: treecounter.countTarget,
+          implicitTarget: treecounter.implicitTarget,
+          planted: treecounter.countPlanted,
+          personal: treecounter.countPersonal,
+          community: treecounter.countCommunity,
+          targetComment: treecounter.targetComment,
+          targetYear: treecounter.targetYear
         };
   }
 );
@@ -168,8 +168,8 @@ export const userPlantProjectsSelector = createSelector(
     const userPlantProjectIds = [
       ...new Set(
         sortedUserContributions
-          .filter(contribution => 'donation' === contribution.contribution_type)
-          .map(contribution => contribution.plant_project_id)
+          .filter(contribution => 'donation' === contribution.contributionType)
+          .map(contribution => contribution.plantProjectId)
       )
     ];
 
@@ -204,12 +204,12 @@ export const activePlantProjectsSelector = createSelector(
   (plantProjects, tpos) => {
     logSelectorUpdate('activePlantProjectsSelector');
     return Object.values(plantProjects).filter(plantProject => {
-      let tpo = tpos[plantProject.tpo_id];
+      let tpo = tpos[plantProject.tpoId];
       return (
-        plantProject.is_verified &&
-        plantProject.is_active &&
-        tpo.is_verified &&
-        tpo.is_active
+        plantProject.isVerified &&
+        plantProject.isActive &&
+        tpo.isVerified &&
+        tpo.isActive
       );
     });
   }

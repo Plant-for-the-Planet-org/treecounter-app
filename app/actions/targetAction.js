@@ -7,11 +7,9 @@ import { mergeEntities } from '../reducers/entitiesReducer';
 import { treecounterSchema } from '../schemas/index';
 import { putAuthenticatedRequest } from '../utils/api';
 
-export function SubmitTarget(treecounterData, treecounterId) {
+export function SubmitTarget(treecounterData) {
   return dispatch => {
-    putAuthenticatedRequest('target_put', treecounterData, {
-      treecounter: treecounterId
-    })
+    putAuthenticatedRequest('target_put', treecounterData)
       .then(res => {
         dispatch(mergeEntities(normalize(res.data, treecounterSchema)));
         updateRoute('app_userHome', dispatch);

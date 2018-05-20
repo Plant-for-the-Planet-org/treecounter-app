@@ -17,11 +17,7 @@ export default class Target extends Component {
   constructor(props) {
     super(props);
 
-    let {
-      count_target: countTarget,
-      target_year: targetYear,
-      target_comment: targetComment
-    } = this.props.treecounter;
+    let { countTarget, targetYear, targetComment } = this.props.treecounter;
 
     this.state = {
       label: countTarget !== 0 ? 'Update' : 'Set',
@@ -30,8 +26,6 @@ export default class Target extends Component {
   }
 
   render() {
-    const { treecounter } = this.props;
-
     return (
       <div className="app-container__content--center">
         <TextHeading>Set Target</TextHeading>
@@ -41,9 +35,7 @@ export default class Target extends Component {
             type={targetFormSchema}
             options={schemaOptions}
           />
-          <PrimaryButton
-            onClick={this.props.onSubmitTarget.bind(this, treecounter.id)}
-          >
+          <PrimaryButton onClick={this.props.onSubmitTarget}>
             {this.state.label}
           </PrimaryButton>
         </CardLayout>

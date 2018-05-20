@@ -32,12 +32,12 @@ class SearchUser extends Component {
         this.setState({
           svgData: {
             id: treecounter.id,
-            target: treecounter.count_target,
-            planted: treecounter.count_planted,
-            community: treecounter.count_community,
-            personal: treecounter.count_personal
+            target: treecounter.countTarget,
+            planted: treecounter.countPlanted,
+            community: treecounter.countCommunity,
+            personal: treecounter.countPersonal
           },
-          displayName: treecounter.display_name,
+          displayName: treecounter.displayName,
           isTpo: 'tpo' === userProfile.type,
           id: treecounter.id
         });
@@ -70,22 +70,22 @@ class SearchUser extends Component {
             </div>
           </div>
         ) : (
-            <div className="search-container__header sidenav-wrapper">
-              <i className="material-icons">account_circle</i>
-              <div>
-                <span>Individual</span>
-                <h4>{this.state.displayName}</h4>
-              </div>
+          <div className="search-container__header sidenav-wrapper">
+            <i className="material-icons">account_circle</i>
+            <div>
+              <span>Individual</span>
+              <h4>{this.state.displayName}</h4>
             </div>
-          )}
+          </div>
+        )}
         <div className="search-container__content sidenav-wrapper">
           <div className="canvasContainer flex-column">
             <SvgContainer {...this.state.svgData} />
             {this.props.treecounterData === null ? (
               <LoadingIndicator />
             ) : (
-                <TreecounterGraphicsText treecounterData={this.state.svgData} />
-              )}
+              <TreecounterGraphicsText treecounterData={this.state.svgData} />
+            )}
           </div>
           {this.state.ifTpo ? <TPOComponent id={this.state.id} /> : null}
         </div>
@@ -94,7 +94,7 @@ class SearchUser extends Component {
   }
 }
 
-const mapStateToProps = function (state) {
+const mapStateToProps = function(state) {
   console.log('Store updated - Search', state);
   return {
     userTpos: state.entities.tpo
@@ -109,7 +109,7 @@ SearchUser.propTypes = {
   treecounterData: PropTypes.object.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      userId: PropTypes.number,
-    }),
-  }).isRequired,
+      userId: PropTypes.number
+    })
+  }).isRequired
 };

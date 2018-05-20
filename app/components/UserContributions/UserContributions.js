@@ -17,11 +17,11 @@ const UserContributions = ({ userContributions }) => {
 
   let mPins = userContributions.map(element => {
     let color = '';
-    if (element.contribution_type === 'donated') color = 'green';
-    else if (element.tree_count > 1) color = 'blue';
+    if (element.contributionType === 'donated') color = 'green';
+    else if (element.treeCount > 1) color = 'blue';
     else color = 'orange';
     return {
-      lat: element.geo_latitude,
+      lat: element.geoLatitude,
       long: element.geo_longitude,
       color: color
     };

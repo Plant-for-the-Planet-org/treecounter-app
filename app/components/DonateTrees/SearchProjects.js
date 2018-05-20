@@ -91,9 +91,9 @@ class SearchProjects extends Component {
         Searchedproject.push(
           <tr key={index}>
             <td>{value.name}</td>
-            <td>{this.props.userTpos[value.tpo_id].name}</td>
-            <td>{value.count_planted}</td>
-            <td>{value.tree_cost}</td>
+            <td>{this.props.userTpos[value.tpoId].name}</td>
+            <td>{value.countPlanted}</td>
+            <td>{value.treeCost}</td>
           </tr>
         );
       }
@@ -107,15 +107,15 @@ class SearchProjects extends Component {
   PriceSearch() {
     let projects = this.props.plantProjects.map(arr => arr);
     let Searchedproject = [];
-    projects.sort((a, b) => a.tree_cost - b.tree_cost);
+    projects.sort((a, b) => a.treeCost - b.treeCost);
     projects.map((value, index) => {
       if (value != undefined) {
         Searchedproject.push(
           <tr key={index}>
             <td>{value.name}</td>
-            <td>{this.props.userTpos[value.tpo_id].name}</td>
-            <td>{value.count_planted}</td>
-            <td>{value.tree_cost}</td>
+            <td>{this.props.userTpos[value.tpoId].name}</td>
+            <td>{value.countPlanted}</td>
+            <td>{value.treeCost}</td>
           </tr>
         );
       }

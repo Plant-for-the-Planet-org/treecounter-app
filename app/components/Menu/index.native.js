@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   StyleSheet
 } from 'react-native';
-import MenuItem from './MenuItem.native';
+import MenuGroup from './MenuItem.native';
 
 export default class Menu extends Component {
   onPressMenu(item) {
@@ -19,8 +19,18 @@ export default class Menu extends Component {
     return (
       <SafeAreaView style={styles.outerContainer}>
         <ScrollView>
-          <MenuItem onPress={() => this.onPressMenu('test1')} titleId={23} />
-          <MenuItem onPress={() => this.onPressMenu('test2')} titleId={23} />
+          <View style={styles.imageStyle}>
+            <Image
+              source={require('../../../web/images/side_menu_image.png')}
+            />
+          </View>
+          {this.props.menuData.map(element => (
+            <MenuGroup
+              title={element.caption}
+              key={element.sequence}
+              menuItems={element.menu_items}
+            />
+          ))}
         </ScrollView>
       </SafeAreaView>
     );
@@ -33,12 +43,7 @@ export const styles = StyleSheet.create({
     flex: 1
   },
   imageStyle: {
-    width: 17,
-    height: 18,
-    resizeMode: 'center'
-  },
-  textStyle: {
-    fontSize: 11,
-    color: '#6a6161'
+    paddingLeft: 43,
+    paddingBottom: 20
   }
 });

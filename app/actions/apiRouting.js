@@ -10,13 +10,17 @@ export const getApiRoute = (routeName, params) => {
   const { scheme, host, base: baseUrl } = context;
   const { locale } = initialProps;
   const serverName = `${scheme}://${host}`;
+  params =
+    'api_login_check' === routeName
+      ? params
+      : { version: 'v1.0', _locale: locale, ...params };
+
   debug(
     'route context:',
-    `serverName: ${serverName}, baseUrl: ${baseUrl}, locale: ${locale}`
+    `serverName: ${serverName}, baseUrl: ${baseUrl}, version: v1.0, locale: ${locale}`
   );
 
   const url = `${serverName}${baseUrl}${Routing.generate(routeName, {
-    _locale: locale,
     ...params
   })}`;
   debug(`generated route from '${routeName}': ${url}`);

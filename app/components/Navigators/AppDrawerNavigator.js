@@ -4,7 +4,7 @@ import LoginContainer from '../../containers/Authentication/LoginContainer';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 import { getLocalRoute } from '../../actions/apiRouting';
-import SideNavigationMenu from './SideNavigationMenu';
+import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 
 export const AppDrawerNavigator = DrawerNavigator(
   {
@@ -24,6 +24,6 @@ export const AppDrawerNavigator = DrawerNavigator(
   {
     gesturesEnabled: false,
     //TODO @hkurra Create custom side menu compnent like web
-    contentComponent: SideNavigationMenu
+    contentComponent: SideMenuContainer
   }
 );

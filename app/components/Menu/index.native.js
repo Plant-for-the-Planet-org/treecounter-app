@@ -5,18 +5,19 @@ import {
   Image,
   TouchableNativeFeedback,
   ScrollView,
-  SafeAreaView
+  SafeAreaView,
+  StyleSheet
 } from 'react-native';
-import MenuItem from '../Common/Menu/MenuItem';
+import MenuItem from './MenuItem.native';
 
-export default class SideNavigationMenu extends Component {
+export default class Menu extends Component {
   onPressMenu(item) {
     console.log('cliecked me');
   }
 
   render() {
     return (
-      <SafeAreaView>
+      <SafeAreaView style={styles.outerContainer}>
         <ScrollView>
           <MenuItem onPress={() => this.onPressMenu('test1')} titleId={23} />
           <MenuItem onPress={() => this.onPressMenu('test2')} titleId={23} />
@@ -25,3 +26,19 @@ export default class SideNavigationMenu extends Component {
     );
   }
 }
+export const styles = StyleSheet.create({
+  outerContainer: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    flex: 1
+  },
+  imageStyle: {
+    width: 17,
+    height: 18,
+    resizeMode: 'center'
+  },
+  textStyle: {
+    fontSize: 11,
+    color: '#6a6161'
+  }
+});

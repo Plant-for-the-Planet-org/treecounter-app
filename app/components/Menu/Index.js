@@ -1,47 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 // Images
-import SideMenuImage from '../../web/images/side_menu_image.png';
+import SideMenuImage from '../../../web/images/side_menu_image.png';
 
-// Actions
-import * as Sidebar from '../actions/menuAction';
-import { logoutUser } from '../actions/authActions';
-
-class Menu extends Component {
-  constructor() {
-    super();
-    this.state = {
-      data: []
-    };
-  }
-
-  componentDidMount() {
-    this.fetchAndSetMenuState();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.loggedIn !== this.props.loggedIn && this.props.loggedIn)
-      this.fetchAndSetMenuState();
-  }
-
-  fetchAndSetMenuState() {
-    Sidebar.MenuAction(this.props.loggedIn)
-      .then(({ data }) => {
-        this.setState({ data: data });
-        console.log('Recieved data for menu- ', data);
-      })
-      .catch(error => {
-        if (error.response.status === 401) {
-          console.log('OOPS! JWT Token Expired');
-          this.props.logoutUser();
-        }
-      });
-  }
-
+export default class Menu extends Component {
   sideNavImage() {
     return (
       <div className="app-container__sidenav--image">
@@ -51,7 +15,6 @@ class Menu extends Component {
   }
 
   render() {
-    console.log('Menu object', this.state.data);
     return (
       <div
         className={
@@ -59,7 +22,7 @@ class Menu extends Component {
         }
       >
         {this.sideNavImage()}
-        {this.state.data.map(element => (
+        {this.props.menuData.map(element => (
           <div key={'div' + element.sequence}>
             <span className="app-container__sidenav--heading">
               {element.caption}
@@ -87,18 +50,7 @@ class Menu extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isOpen: state.sideNav.open
-});
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ logoutUser }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
-
 Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
-  logoutUser: PropTypes.func.isRequired
+  menuData: PropTypes.array.isRequired
 };

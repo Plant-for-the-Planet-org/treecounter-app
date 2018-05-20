@@ -8,10 +8,10 @@ import { sortedUserContributionsSelector } from '../../selectors/index';
 import ContributionCardList from './ContributionCardList';
 import ContributionsMapLegend from './ContributionsMapLegend';
 import PageHeader from '../Common/PageHeader';
-import Map from '../RegisterTrees/map';
+import Map from '../Common/EsriMap/Map';
 import * as constants from '../../SupportedLanguages/en';
 
-const UserContributions = ({ userContributions}) => {
+const UserContributions = ({ userContributions }) => {
   const updateContribution = contributionId =>
     history.push(`/some/link/${contributionId}`);
 

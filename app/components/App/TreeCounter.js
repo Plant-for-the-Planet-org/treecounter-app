@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 // Components imports
 import TargetPage from '../Target';
-import RegisterTree from '../RegisterTrees/RegisterTrees';
+import RegisterTreesContainer from '../../containers/RegisterTrees/RegisterTreesContainer';
 import Header from '../Header/index';
 import UserContributions from '../UserContributions/UserContributions';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
@@ -114,7 +114,7 @@ class TreeCounter extends Component {
               />
               <Route
                 path={getLocalRoute('app_registerTrees')}
-                component={RegisterTree}
+                component={RegisterTreesContainer}
               />
               <Route
                 path={getLocalRoute('app_myTrees')}

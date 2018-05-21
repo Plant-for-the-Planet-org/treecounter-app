@@ -12,6 +12,7 @@ export function loadLoginData() {
   const request = getAuthenticatedRequest('data_loginLoad_get');
   return dispatch => {
     request.then(res => {
+      debug(res);
       dispatch(mergeEntities(normalize(res.data.tpos, [tpoSchema])));
       dispatch(
         mergeEntities(normalize(res.data.userProfile, userProfileSchema))

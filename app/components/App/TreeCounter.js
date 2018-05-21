@@ -24,99 +24,116 @@ import PublicTreecounter from '../TreecounterGraphics/PublicTreecounter';
 import Trillion from '../TreecounterGraphics/Trillion';
 import Home from '../TreecounterGraphics/Home';
 
+import { loadLoginData } from '../../actions/loadLoginData';
+import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { getLocalRoute } from '../../actions/apiRouting';
 
 // Class implementation
 class TreeCounter extends Component {
-  async componentDidMount() {
-    console.log('componentDidMount TreeCounter');
+  constructor(props) {
+    super(props);
+    const { userProfile } = this.props;
+    const isLoggedIn = null !== userProfile;
+    this.state = {
+      loading: true,
+      isLoggedIn: isLoggedIn
+    };
+  }
+
+  async componentWillMount() {
+    const { userProfile } = this.props;
+    const isLoggedIn = null !== userProfile;
+    if (isLoggedIn) {
+      this.setState({ loading: false, isLoggedIn: true });
+    } else {
+      let token = await getAccessToken();
+      if (token) {
+        this.props.dispatch(loadLoginData());
+      } else {
+        this.setState({ loading: false, isLoggedIn: false });
+      }
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.userProfile) {
+      this.setState({ loading: false, isLoggedIn: true });
+    }
   }
 
   render() {
-    console.log('user is logged in:', this.props.isLoggedIn);
+    let isLoggedIn = this.state.isLoggedIn;
 
-    const { isLoggedIn } = this.props;
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+      <Route
+        {...rest}
+        render={props =>
+          isLoggedIn ? (
+            <Component {...props} />
+          ) : (
+            <Redirect to={getLocalRoute('app_login')} />
+          )
+        }
+      />
+    );
 
-    return (
+    const PublicRoute = ({ component: Component, ...rest }) => (
+      <Route
+        {...rest}
+        render={props =>
+          !isLoggedIn ? (
+            <Component {...props} />
+          ) : (
+            <Redirect to={getLocalRoute('app_userHome')} />
+          )
+        }
+      />
+    );
+
+    return !this.state.loading ? (
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
             <Header />
             <SideMenuContainer loggedIn={isLoggedIn} />
             <div className="app-container__content">
-              <Route exact path="/" component={Trillion} />
-              <Route
+              <PublicRoute exact path="/" component={Trillion} />
+              <PublicRoute
                 exact
                 path={getLocalRoute('app_homepage')}
                 component={Trillion}
               />
-              <Route
+              <PublicRoute
                 path={getLocalRoute('app_signup')}
                 component={SignUpContainer}
               />
-              <Route
-                exact
-                path={getLocalRoute('app_signupSuccess')}
-                render={() =>
-                  isLoggedIn ? null : (
-                    <Redirect to={getLocalRoute('app_login')} />
-                  )
-                }
-              />
-              <Route
-                exact
-                path={getLocalRoute('app_registerTrees')}
-                render={() =>
-                  isLoggedIn ? null : (
-                    <Redirect to={getLocalRoute('app_login')} />
-                  )
-                }
-              />
-              <Route
-                exact
-                path={getLocalRoute('app_myTrees')}
-                render={() =>
-                  isLoggedIn ? null : (
-                    <Redirect to={getLocalRoute('app_login')} />
-                  )
-                }
-              />
-              <Route
-                exact
-                path={getLocalRoute('app_target')}
-                render={() =>
-                  isLoggedIn ? null : (
-                    <Redirect to={getLocalRoute('app_login')} />
-                  )
-                }
-              />
               {/*<Route exact path={getLocalRoute("app_donateTrees")} render={() => (isLoggedIn ? null : <Redirect to={getLocalRoute("app_login")}/>)}/>*/}
-              <Route
+              <PrivateRoute
                 path={getLocalRoute('app_signupSuccess')}
                 component={SignupSuccessPage}
               />
-              <Route
+              <PublicRoute
                 path={getLocalRoute('app_login')}
                 component={LoginContainer}
               />
-              <Route
+              <PublicRoute
                 path={getLocalRoute('app_forgotPassword')}
                 component={ForgotPasswordContainer}
               />
-              <Route
+              <PublicRoute
                 path={getLocalRoute('app_resetPassword')}
                 component={ResetPasswordContainer}
               />
-              <Route
+              <PrivateRoute
                 path={getLocalRoute('app_target')}
                 component={TargetPage}
               />
-              <Route
+              <PrivateRoute
                 path={getLocalRoute('app_registerTrees')}
                 component={RegisterTree}
               />
-              <Route
+              <PrivateRoute
                 path={getLocalRoute('app_myTrees')}
                 component={UserContributions}
               />
@@ -124,8 +141,11 @@ class TreeCounter extends Component {
               {/*<Route path={getLocalRoute("app_donateTrees")} component={DonateTrees}/>*/}
 
               {/* Routes which essentially show svg */}
-              <Route path={getLocalRoute('app_userHome')} component={Home} />
-              <Route
+              <PrivateRoute
+                path={getLocalRoute('app_userHome')}
+                component={Home}
+              />
+              <PublicRoute
                 path="/treecounterLookup/:treecounterId"
                 component={PublicTreecounter}
               />
@@ -135,17 +155,17 @@ class TreeCounter extends Component {
         </BrowserRouter>
         <NotificationContainer />
       </div>
-    );
+    ) : null;
   }
 }
 
 const mapStateToProps = state => ({
-  isLoggedIn: null !== currentUserProfileSelector(state)
+  userProfile: currentUserProfileSelector(state)
 });
 
 export default connect(mapStateToProps)(TreeCounter);
 
 TreeCounter.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
+  userProfile: PropTypes.object,
   dispatch: PropTypes.func
 };

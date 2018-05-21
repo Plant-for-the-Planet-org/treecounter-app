@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Images
 import SideMenuImage from '../../../web/images/side_menu_image.png';
+import * as images from '../../images';
 
 export default class Menu extends Component {
   sideNavImage() {
@@ -32,7 +33,14 @@ export default class Menu extends Component {
                 menuItem =>
                   menuItem.enabled ? (
                     <li key={'' + element.sequence + menuItem.sequence}>
-                      <i className="material-icons">folder_open</i>
+                      <img
+                        src={
+                          menuItem.icon && menuItem.icon !== 'none'
+                            ? images[menuItem.icon]
+                            : null
+                        }
+                        className="menu-icon"
+                      />
                       <Link to={menuItem.uri}>{menuItem.caption}</Link>
                     </li>
                   ) : (

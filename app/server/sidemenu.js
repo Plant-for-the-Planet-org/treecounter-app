@@ -12,7 +12,7 @@ export default {
           sequence: 1,
           caption: 'Trillion Tree Campaign',
           help: 'menu_item.trillion_tree_campaign.help',
-          icon: 'some_icon_name',
+          icon: 'tree_outline',
           uri: '/app_dev.php/en'
         },
         {
@@ -20,7 +20,7 @@ export default {
           sequence: 2,
           caption: 'Explore',
           help: 'menu_item.explore.help',
-          icon: 'some_icon_name',
+          icon: 'rocket_outline',
           uri: '#'
         }
       ]
@@ -37,7 +37,7 @@ export default {
           sequence: 1,
           caption: 'Register planted trees',
           help: 'menu_item.register_trees.help',
-          icon: 'some_icon_name',
+          icon: 'shovel_outline',
           uri: '/app_dev.php/en/registerTrees'
         },
         {
@@ -45,7 +45,7 @@ export default {
           sequence: 2,
           caption: 'Donate Trees',
           help: 'menu_item.donate_trees.help',
-          icon: 'some_icon_name',
+          icon: 'heart_outline',
           uri: '#'
         },
         {
@@ -53,7 +53,7 @@ export default {
           sequence: 3,
           caption: 'My Trees',
           help: 'menu_item.my_trees.help',
-          icon: 'some_icon_name',
+          icon: 'tree_outline',
           uri: '/app_dev.php/en/myTrees'
         },
         {
@@ -61,7 +61,7 @@ export default {
           sequence: 4,
           caption: 'Set Target',
           help: 'Set your personal target',
-          icon: 'some_icon_name',
+          icon: 'target_outline',
           uri: '/app_dev.php/en/target'
         }
       ]
@@ -78,7 +78,7 @@ export default {
           sequence: 1,
           caption: 'Challenge',
           help: 'menu_item.challenge.help',
-          icon: 'some_icon_name',
+          icon: 'challenge_outline',
           uri: '#'
         },
         {
@@ -86,7 +86,7 @@ export default {
           sequence: 2,
           caption: 'Tree gift',
           help: 'menu_item.tree_gift.help',
-          icon: 'some_icon_name',
+          icon: 'gift_outline',
           uri: '#'
         }
       ]
@@ -105,7 +105,7 @@ export default {
           sequence: 1,
           caption: 'Trillion Tree Campaign',
           help: 'menu_item.trillion_tree_campaign.help',
-          icon: 'some_icon_name',
+          icon: 'tree_outline',
           uri: '/app_dev.php/en'
         },
         {
@@ -113,7 +113,7 @@ export default {
           sequence: 2,
           caption: 'Explore',
           help: 'menu_item.explore.help',
-          icon: 'some_icon_name',
+          icon: 'rocket_outline',
           uri: '#'
         }
       ]
@@ -130,7 +130,7 @@ export default {
           sequence: 1,
           caption: 'Register planted trees',
           help: 'menu_item.register_trees.help',
-          icon: 'some_icon_name',
+          icon: 'shovel_outline',
           uri: '/app_dev.php/en/registerTrees'
         },
         {
@@ -138,7 +138,7 @@ export default {
           sequence: 2,
           caption: 'Donate Trees',
           help: 'menu_item.donate_trees.help',
-          icon: 'some_icon_name',
+          icon: 'heart_outline',
           uri: '#'
         },
         {
@@ -146,7 +146,7 @@ export default {
           sequence: 3,
           caption: 'My Trees',
           help: 'menu_item.my_trees.help',
-          icon: 'some_icon_name',
+          icon: 'tree_outline',
           uri: '/app_dev.php/en/myTrees'
         },
         {
@@ -154,7 +154,7 @@ export default {
           sequence: 4,
           caption: 'Set Target',
           help: 'Set your personal target',
-          icon: 'some_icon_name',
+          icon: 'target_outline',
           uri: '/app_dev.php/en/target'
         }
       ]
@@ -171,7 +171,7 @@ export default {
           sequence: 1,
           caption: 'Challenge',
           help: 'menu_item.challenge.help',
-          icon: 'some_icon_name',
+          icon: 'challenge_outline',
           uri: '#'
         },
         {
@@ -179,7 +179,7 @@ export default {
           sequence: 2,
           caption: 'Tree gift',
           help: 'menu_item.tree_gift.help',
-          icon: 'some_icon_name',
+          icon: 'gift_outline',
           uri: '#'
         }
       ]

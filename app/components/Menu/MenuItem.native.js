@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  StyleSheet
-} from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import PropTypes, { func } from 'prop-types';
+
+import * as images from '../../images';
 
 export default class MenuGroup extends Component {
   static propTypes = {
@@ -29,6 +24,11 @@ export default class MenuGroup extends Component {
             onPress={() => this.props.onPress(menuItem)}
             title={menuItem.caption}
             key={'' + this.props.title + menuItem.sequence}
+            iconUrl={
+              menuItem.icon && menuItem.icon !== 'none'
+                ? images[menuItem.icon]
+                : null
+            }
           />
         ))}
       </View>
@@ -48,14 +48,7 @@ class MenuItem extends Component {
     return (
       <TouchableOpacity onPress={this.props.onPress}>
         <View style={styles.menuItemContainer}>
-          <Image
-            style={styles.imageStyle}
-            source={
-              this.props.iconUrl
-                ? this.props.iconUrl
-                : require('../../images/key.png')
-            }
-          />
+          <Image style={styles.imageStyle} source={this.props.iconUrl} />
           <Text style={styles.textStyle}>
             {this.props.titleId ? 'Load from T()' : this.props.title}
           </Text>

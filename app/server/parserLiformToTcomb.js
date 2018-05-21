@@ -47,7 +47,10 @@ export default function parseJsonToTcomb(liformSchemaJson) {
             options.label = properties[propertyKey].title;
             options.auto = 'none';
             options.autoCapitalize = 'none';
-            if (properties[propertyKey].type === 'string') {
+            if (
+              properties[propertyKey].type === 'string' &&
+              properties[propertyKey].widget !== 'textarea'
+            ) {
               options.template = TextInputTemplate;
             } else if (properties[propertyKey].type === 'integer') {
               options.template = IntegerInputTemplate;

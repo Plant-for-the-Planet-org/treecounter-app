@@ -5,11 +5,13 @@ export default {
     _username: {
       type: 'string',
       title: 'label.email',
+      icon: 'mail',
       propertyOrder: 1
     },
     _password: {
       type: 'string',
       title: 'label.password',
+      icon: 'key',
       widget: 'password',
       propertyOrder: 2
     }

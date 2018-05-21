@@ -1,0 +1,13 @@
+.target-form {
+  display: flex;
+  flex-direction: column;
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .half {
+    width: 48%;
+  }
+}

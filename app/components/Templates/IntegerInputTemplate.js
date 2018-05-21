@@ -6,21 +6,19 @@ export function IntegerInputTemplate(locals) {
     locals.onChange($event.target.value);
   }
   return (
-    <div className="pftp-textfield">
+    <div className="pftp-intfield">
       {locals.config.iconUrl ? (
-        <img className="pftp-textfield__icon" src={locals.config.iconUrl} />
+        <img className="pftp-intfield__icon" src={locals.config.iconUrl} />
       ) : null}
-      <div className="pftp-textfield__inputgroup">
+      <div className="pftp-intfield__inputgroup">
         <input
           type="number"
           autoComplete="new-password"
           required="required"
           value={locals.value}
           onChange={onChange}
+          placeholder={i18n.t(locals.label)}
         />
-        <span className="pftp-textfield__inputgroup--highlight" />
-        <span className="pftp-textfield__inputgroup--bar" />
-        <label>{i18n.t(locals.label)}</label>
       </div>
     </div>
   );

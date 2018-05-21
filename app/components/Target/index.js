@@ -13,6 +13,23 @@ import CardLayout from '../Common/Card/CardLayout';
 
 let TCombForm = t.form.Form;
 
+const formLayout = locals => {
+  return (
+    <div className="target-form">
+      <div className="row">
+        <div className="half">{locals.inputs.countTarget}</div>
+        <div className="half">{locals.inputs.targetYear}</div>
+      </div>
+      <div className="textarea">{locals.inputs.targetComment}</div>
+    </div>
+  );
+};
+
+const allSchemaOptions = {
+  template: formLayout,
+  ...schemaOptions
+};
+
 export default class Target extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +50,7 @@ export default class Target extends Component {
           <TCombForm
             ref="setTargetForm"
             type={targetFormSchema}
-            options={schemaOptions}
+            options={allSchemaOptions}
           />
           <PrimaryButton onClick={this.props.onSubmitTarget}>
             {this.state.label}

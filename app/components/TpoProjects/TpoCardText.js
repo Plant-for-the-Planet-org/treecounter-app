@@ -18,33 +18,33 @@ const TpoCardText = props => {
         <span className="col-md-8 text-left">
           {constants.formStrings.planted}:{' '}
         </span>{' '}
-        <span className="col-md-4 text-right">{cardtext.count_planted}</span>
+        <span className="col-md-4 text-right">{cardtext.countPlanted}</span>
       </div>
       <div className="middle_tag">
         <span className="col-md-8 text-left">
           {constants.formStrings.target}:
         </span>{' '}
-        <span className="text-right col-md-4">{cardtext.count_target}</span>
+        <span className="text-right col-md-4">{cardtext.countTarget}</span>
       </div>
       <div className="middle_tag">
         <span className="col-md-8 text-left">
           {constants.formStrings.survival_rate}:
         </span>{' '}
-        <span className="text-right col-md-4">{cardtext.survival_rate}</span>
+        <span className="text-right col-md-4">{cardtext.survivalRate}</span>
       </div>
       <div className="middle_tag">
         <span className="col-md-8 text-left">
           {constants.formStrings.certified}:
         </span>{' '}
         <span className="text-right col-md-4">
-          {cardtext.is_certified ? 'Certified' : 'Not-Certified'}
+          {cardtext.isCertified ? 'Certified' : 'Not-Certified'}
         </span>
       </div>
       <div className="middle_tag1">
         <span className="col-md-8 text-left">
           {constants.formStrings.Cost}:
         </span>{' '}
-        <span className="text-right col-md-4">{cardtext.tree_cost}</span>
+        <span className="text-right col-md-4">{cardtext.treeCost}</span>
       </div>
     </div>
   );

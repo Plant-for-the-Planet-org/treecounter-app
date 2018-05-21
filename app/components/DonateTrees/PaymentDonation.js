@@ -60,7 +60,7 @@ class PaymentDonation extends Component {
     if (this.state.paymentMethod === 'pftp_sepa') {
       paymentInfo.paymentOptions = `iban=${
         this.state.paymentOptions.iban
-        }&bic=${this.state.paymentOptions.bic}`;
+      }&bic=${this.state.paymentOptions.bic}`;
     }
     console.log(paymentInfo);
     Payment(paymentInfo, this.state.selectedProject.id);
@@ -79,8 +79,8 @@ class PaymentDonation extends Component {
       if (userPlantProjects[key].id == params.projectId) {
         let selectedProject = userPlantProjects[key];
         // Setting payment mode available
-        let selectedPayments = this.props.tpo[selectedProject.tpo_id]
-          .payment_gateways;
+        let selectedPayments = this.props.tpo[selectedProject.tpoId]
+          .paymentGateways;
         selectedPayments = selectedPayments.map(
           id => this.props.paymentgateway[id]
         );
@@ -204,14 +204,14 @@ class PaymentDonation extends Component {
               </span>
               <div className="project-details__table">
                 <span>{constants.formStrings.planted}:</span>
-                <span>{this.state.selectedProject.count_planted}</span>
+                <span>{this.state.selectedProject.countPlanted}</span>
 
                 <span>{constants.formStrings.target}:</span>
-                <span>{this.state.selectedProject.count_target}</span>
+                <span>{this.state.selectedProject.countTarget}</span>
 
                 <span>{constants.formStrings.costPerTree}:</span>
-                <span>{this.state.selectedProject.tree_cost}</span>
-                {this.state.selectedProject.is_certified
+                <span>{this.state.selectedProject.treeCost}</span>
+                {this.state.selectedProject.isCertified
                   ? 'Certified'
                   : 'Not Certified'}
               </div>
@@ -256,7 +256,7 @@ class PaymentDonation extends Component {
   }
 }
 
-const mapStateToProps = function (state) {
+const mapStateToProps = function(state) {
   console.log('Payment Donation ------ Store updated', state);
   return {
     userPlantProjects: state.entities.plantProject,
@@ -273,7 +273,7 @@ PaymentDonation.propTypes = {
   tpo: PropTypes.object.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      projectId: PropTypes.number,
-    }),
-  }).isRequired,
+      projectId: PropTypes.number
+    })
+  }).isRequired
 };

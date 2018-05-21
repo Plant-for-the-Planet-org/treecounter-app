@@ -11,17 +11,17 @@ import PageHeader from '../Common/PageHeader';
 import Map from '../RegisterTrees/map';
 import * as constants from '../../SupportedLanguages/en';
 
-const UserContributions = ({ userContributions}) => {
+const UserContributions = ({ userContributions }) => {
   const updateContribution = contributionId =>
     history.push(`/some/link/${contributionId}`);
 
   let mPins = userContributions.map(element => {
     let color = '';
-    if (element.contribution_type === 'donated') color = 'green';
-    else if (element.tree_count > 1) color = 'blue';
+    if (element.contributionType === 'donated') color = 'green';
+    else if (element.treeCount > 1) color = 'blue';
     else color = 'orange';
     return {
-      lat: element.geo_latitude,
+      lat: element.geoLatitude,
       long: element.geo_longitude,
       color: color
     };

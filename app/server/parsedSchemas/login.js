@@ -1,4 +1,4 @@
-import schemaLiform from './login.js';
+import schemaLiform from '../formSchemas/login';
 import parseJsonToTcomb from '../parserLiformToTcomb';
 
 const { transformedSchema: loginFormSchema, schemaOptions } = parseJsonToTcomb(

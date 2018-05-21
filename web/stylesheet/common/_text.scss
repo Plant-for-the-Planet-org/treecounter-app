@@ -1,4 +1,4 @@
-.pftp-text-block {
+.pftp-text-basic {
   font-family: OpenSans;
   font-size: 14px;
   font-weight: normal;
@@ -6,6 +6,19 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
+  color: #9c9b9b;
+}
+
+.pftp-text-span {
+  @extend .pftp-text-basic;
+  text-align: left;
+  &.bold {
+    font-weight: 600;
+  }
+}
+
+.pftp-text-block {
+  @extend .pftp-text-basic;
   text-align: center;
   color: #696261;
 }

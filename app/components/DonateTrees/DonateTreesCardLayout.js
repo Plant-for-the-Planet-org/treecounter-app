@@ -14,10 +14,10 @@ const DonateTreesCardLayout = props => {
         />
         <div className="card-block">
           <h4
-            title={value.name + ' by ' + userTpos[value.tpo_id].name}
+            title={value.name + ' by ' + userTpos[value.tpoId].name}
             className="card-title"
           >
-            {value.name} by {userTpos[value.tpo_id].name}
+            {value.name} by {userTpos[value.tpoId].name}
           </h4>
           <DonateTreesCardText value={value} />
         </div>

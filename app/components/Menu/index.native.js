@@ -39,7 +39,7 @@ export default class Menu extends Component {
             <MenuGroup
               title={element.caption}
               key={element.sequence}
-              menuItems={element.menu_items}
+              menuItems={element.menuItems}
               onPress={this.onPressMenu}
             />
           ))}

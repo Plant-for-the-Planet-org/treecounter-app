@@ -16,7 +16,7 @@ import ForgotPasswordContainer from '../../containers/Authentication/ForgotPassw
 import ResetPasswordContainer from '../Authentication/ResetPassword';
 import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
-import Menu from '../Menu';
+import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import Footer from '../Footer';
 
 // Components which use SVG
@@ -43,7 +43,7 @@ class TreeCounter extends Component {
         <BrowserRouter history={history}>
           <div className="app-container">
             <Header />
-            <Menu loggedIn={isLoggedIn} />
+            <SideMenuContainer loggedIn={isLoggedIn} />
             <div className="app-container__content">
               <Route exact path="/" component={Trillion} />
               <Route

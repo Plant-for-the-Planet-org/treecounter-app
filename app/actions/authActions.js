@@ -57,15 +57,17 @@ export function logoutUser() {
 }
 
 export function forgot_password(data) {
-  postRequest('auth_forgotPassword_post', data)
-    .then(res => {
-      debug(res.status);
-      NotificationManager.success(
-        'Further details have been sent to your mail address'
-      );
-      updateRoute('app_login');
-    })
-    .catch(err => debug(err));
+  return dispatch => {
+    postRequest('auth_forgotPassword_post', data)
+      .then(res => {
+        debug(res.status);
+        NotificationManager.success(
+          'Further details have been sent to your mail address'
+        );
+        updateRoute('app_login', dispatch);
+      })
+      .catch(err => debug(err));
+  };
 }
 
 export function reset_password(data) {

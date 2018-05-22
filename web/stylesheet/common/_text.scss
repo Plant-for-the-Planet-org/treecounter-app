@@ -33,8 +33,14 @@
   letter-spacing: normal;
   text-align: center;
   color: #575756;
-  border-bottom: 3px solid #BAD788;
+  border-bottom: 3px solid #bad788;
   padding-bottom: 20px;
   margin: 40px 0;
   display: inline-block;
+}
+
+.link {
+  color: #ec6453;
+  display: inline;
+  cursor: pointer;
 }

@@ -13,13 +13,29 @@ class ForgotPasswordContainer extends React.Component {
     this.onClick = this.onClick.bind(this);
   }
 
+  onPress = () => {
+    // let result = this.refs.forgotPasswordForm.validate();
+    // if (result.isValid()) {
+    let value = this.refs.forgotPasswordContainer.refs.forgotPasswordForm.getValue();
+    if (value) {
+      this.onClick(value);
+    }
+    // } else if (this.props.onError) {
+    //   this.props.onError(result.errors);
+    // }
+  };
+
   onClick(value) {
     this.props.forgot_password(value);
   }
 
   render() {
     return (
-      <ForgotPassword onClick={this.onClick} updateRoute={this.props.route} />
+      <ForgotPassword
+        ref="forgotPasswordContainer"
+        onResetPassword={this.onPress}
+        updateRoute={this.props.route}
+      />
     );
   }
 }

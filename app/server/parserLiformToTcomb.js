@@ -1,6 +1,7 @@
 let transform = require('tcomb-json-schema');
 
 import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
+import { TextAreaTemplate } from '../components/Templates/TextAreaTemplate';
 import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
 import { IntegerInputTemplate } from '../components/Templates/IntegerInputTemplate';
 import * as images from '../images';
@@ -70,10 +71,16 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           options.label = properties[propertyKey].title;
           options.template = CheckboxTemplate;
         }
-        if (properties[propertyKey].widget === 'password') {
-          options.secureTextEntry = true;
-          options.type = 'password';
+        // Check what kind of widget it has
+        switch (properties[propertyKey].widget) {
+          case 'password':
+            options.secureTextEntry = true;
+            options.type = 'password';
+            break;
+          case 'textarea':
+            options.template = TextAreaTemplate;
         }
+        // Widgets SwitchCase ENDS
         if (properties[propertyKey].type === 'object') {
           options.auto = 'none';
           schemaOptions['fields'][propertyKey] = getSchemaOptions(

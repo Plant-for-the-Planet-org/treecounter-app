@@ -3,7 +3,6 @@ let transform = require('tcomb-json-schema');
 import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
 import { TextAreaTemplate } from '../components/Templates/TextAreaTemplate';
 import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
-import { IntegerInputTemplate } from '../components/Templates/IntegerInputTemplate';
 import * as images from '../assets';
 
 export default function parseJsonToTcomb(liformSchemaJson) {
@@ -48,13 +47,14 @@ export default function parseJsonToTcomb(liformSchemaJson) {
             options.label = properties[propertyKey].title;
             options.auto = 'none';
             options.autoCapitalize = 'none';
+            options.template = TextInputTemplate;
             if (
               properties[propertyKey].type === 'string' &&
               properties[propertyKey].widget !== 'textarea'
             ) {
-              options.template = TextInputTemplate;
+              options.type = 'text';
             } else if (properties[propertyKey].type === 'integer') {
-              options.template = IntegerInputTemplate;
+              options.type = 'number';
             }
           } else {
             options.label = '';

@@ -17,7 +17,8 @@ $trans-time: 300ms;
     position: relative;
     width: 100%;
 
-    input {
+    input,
+    textarea {
       background: none;
       color: mix(white, $bg-color, 70%);
       font-size: 18px;
@@ -57,7 +58,7 @@ $trans-time: 300ms;
       display: block;
       width: 100%;
       &:before {
-        content: '';
+        content: "";
         height: 2px;
         width: 0;
         bottom: 0px;

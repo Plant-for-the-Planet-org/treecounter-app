@@ -6,8 +6,8 @@ export function TextAreaTemplate(locals) {
     locals.onChange($event.target.value);
   }
   return (
-    <div className="pftp-textarea">
-      <div className="pftp-textarea__inputgroup">
+    <div className="pftp-textfield">
+      <div className="pftp-textfield__inputgroup">
         <textarea
           rows="6"
           cols="50"
@@ -15,8 +15,8 @@ export function TextAreaTemplate(locals) {
           required="required"
           onChange={onChange}
         />
-        <span className="pftp-textarea__inputgroup--highlight" />
-        <span className="pftp-textarea__inputgroup--bar" />
+        <span className="pftp-textfield__inputgroup--highlight" />
+        <span className="pftp-textfield__inputgroup--bar" />
         <label>{i18n.t(locals.label)}</label>
       </div>
     </div>

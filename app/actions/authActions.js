@@ -1,9 +1,8 @@
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { updateRoute } from '../helpers/routerHelper';
-// import { setUserLogIn, setUserLogOut } from '../reducers/authenticationReducer';
 import { loadLoginData } from './loadLoginData';
 import { debug } from '../debug/index';
-import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
+import { userLogout } from '../reducers/reducer';
 
 import { clearStorage } from '../stores/localStorage';
 import { getAccessToken } from '../utils/user';
@@ -53,9 +52,7 @@ export function logoutUser() {
   return dispatch => {
     debug('Logging out');
     clearStorage();
-    // dispatch(setUserLogOut());
-    dispatch(setCurrentUserProfileId(null));
-    updateRoute('app_homepage');
+    dispatch(userLogout());
   };
 }
 

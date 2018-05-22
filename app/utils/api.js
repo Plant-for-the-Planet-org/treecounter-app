@@ -2,7 +2,8 @@ import axios from 'axios';
 
 import { getAccessToken } from './user';
 import { getApiRoute } from '../actions/apiRouting';
-import { clearStorage } from '../stores/localStorage';
+import { getStore } from '../components/App/index';
+import { logoutUser } from '../actions/authActions';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -16,7 +17,7 @@ function checkStatus(response) {
 function onAPIError(error) {
   if (error.response.status === 401) {
     console.log('clear storage');
-    clearStorage();
+    getStore().dispatch(logoutUser());
   } else {
     throw error;
   }

@@ -57,8 +57,9 @@ class TreeCounter extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.userProfile) {
-      this.setState({ loading: false, isLoggedIn: true });
+    if (nextProps.userProfile !== this.props.userProfile) {
+      let isLoggedIn = null !== nextProps.userProfile;
+      this.setState({ loading: false, isLoggedIn: isLoggedIn });
     }
   }
 

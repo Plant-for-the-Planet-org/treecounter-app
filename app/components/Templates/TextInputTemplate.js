@@ -3,7 +3,11 @@ import i18n from '../../locales/i18n';
 
 export function TextInputTemplate(locals) {
   function onChange($event) {
-    locals.onChange($event.target.value);
+    let value =
+      locals.type === 'number'
+        ? parseInt($event.target.value)
+        : $event.target.value;
+    locals.onChange(value);
   }
   return (
     <div className="pftp-textfield">
@@ -12,7 +16,7 @@ export function TextInputTemplate(locals) {
       ) : null}
       <div className="pftp-textfield__inputgroup">
         <input
-          type={locals.type}
+          type={'number'}
           autoComplete="new-password"
           required="required"
           value={locals.value}

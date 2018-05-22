@@ -51,6 +51,7 @@ export default class Target extends Component {
             ref="setTargetForm"
             type={targetFormSchema}
             options={allSchemaOptions}
+            value={this.state.initialValues}
           />
           <PrimaryButton onClick={this.props.onSubmitTarget}>
             {this.state.label}

@@ -1,27 +1,27 @@
-import {createAction, handleActions} from 'redux-actions';
+import { createAction, handleActions } from 'redux-actions';
 
-export const openSideNav = createAction ('OPEN_SIDE_NAV');
-export const closeSideNav = createAction ('CLOSE_SIDE_NAV');
-export const toggleSideNav = createAction ('TOGGLE_SIDE_NAV');
+export const openSideNav = createAction('OPEN_SIDE_NAV');
+export const closeSideNav = createAction('CLOSE_SIDE_NAV');
+export const toggleSideNav = createAction('TOGGLE_SIDE_NAV');
 
 export const initialState = {
-  open: false,
+  open: false
 };
 
-const sideNavReducer = handleActions (
+const sideNavReducer = handleActions(
   {
     [openSideNav]: state => ({
       ...state,
-      open: true,
+      open: true
     }),
     [closeSideNav]: state => ({
       ...state,
-      open: false,
+      open: false
     }),
     [toggleSideNav]: state => ({
       ...state,
-      open: !state.open,
-    }),
+      open: !state.open
+    })
   },
   initialState
 );

@@ -7,7 +7,6 @@ export const getAccessToken = () => {
     .then(async token => {
       let expired = await tokenIsExpired();
       if (expired) {
-        console.log(expired);
         const prev_refresh_token = await fetchItem('refresh_token');
         const response = await postRequest('gesdinet_jwt_refresh_token', {
           refresh_token: prev_refresh_token
@@ -37,8 +36,6 @@ const getExpirationTimeStamp = token => {
 const tokenIsExpired = async () => {
   let tokenExpiry = await getTokenExpires();
   let expired = getCurrentUnixTimestamp() > tokenExpiry;
-  console.log(tokenExpiry);
-  console.log(getCurrentUnixTimestamp());
   return expired;
 };
 

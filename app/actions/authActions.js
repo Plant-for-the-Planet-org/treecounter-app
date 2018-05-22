@@ -18,9 +18,11 @@ export function login(data) {
         const { token, refresh_token } = res.data;
         updateJWT(token, refresh_token);
         dispatch(loadLoginData());
-        updateRoute('app_userHome', dispatch, res.data.data.id);
-        NotificationManager.success('Login Successful', 'Welcome', 5000);
         return token;
+      })
+      .then(() => {
+        NotificationManager.success('Login Successful', 'Congrats', 5000);
+        updateRoute('app_userHome', dispatch);
       })
       .catch(error => {
         if (

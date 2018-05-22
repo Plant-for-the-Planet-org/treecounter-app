@@ -20,7 +20,7 @@ export default class Login extends Component {
       <div className="app-container__content--center">
         <TextHeading>Forgot Your Password?</TextHeading>
         <CardLayout>
-          <div>
+          <div className="pftp-text-left-aligned">
             Enter your email address and we‘ll send you a link to reset your
             password.
           </div>

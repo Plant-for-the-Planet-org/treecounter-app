@@ -4,14 +4,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ForgotPassword from '../../components/Authentication/ForgotPassword';
-import { clearStorage } from '../../stores/localStorage';
 import { forgot_password } from '../../actions/authActions';
 import { updateRoute } from '../../helpers/routerHelper';
 
 class ForgotPasswordContainer extends React.Component {
   constructor(props) {
     super(props);
-    clearStorage();
     this.onClick = this.onClick.bind(this);
   }
 

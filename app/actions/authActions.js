@@ -1,9 +1,8 @@
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { updateRoute } from '../helpers/routerHelper';
-import { setUserLogIn, setUserLogOut } from '../reducers/authenticationReducer';
 import { loadLoginData } from './loadLoginData';
 import { debug } from '../debug/index';
-import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
+import { userLogout } from '../reducers/reducer';
 
 import { clearStorage } from '../stores/localStorage';
 import { getAccessToken } from '../utils/user';
@@ -16,10 +15,10 @@ export function login(data) {
   return dispatch => {
     request
       .then(res => {
-        const { token, refresh_token, data } = res.data;
+        const { token, refresh_token } = res.data;
         updateJWT(token, refresh_token);
 
-        dispatch(setUserLogIn({ user: { ...data } }));
+        // dispatch(setUserLogIn({ user: { ...data } }));
 
         NotificationManager.success('Login Successful', 'Welcome', 5000);
         updateRoute('app_userHome', dispatch, res.data.data.id);
@@ -53,9 +52,7 @@ export function logoutUser() {
   return dispatch => {
     debug('Logging out');
     clearStorage();
-    dispatch(setUserLogOut());
-    dispatch(setCurrentUserProfileId(null));
-    updateRoute('app_homepage');
+    dispatch(userLogout());
   };
 }
 

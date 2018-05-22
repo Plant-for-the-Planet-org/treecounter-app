@@ -7,10 +7,9 @@ const FeaturedProjects = props => {
 
   let prev = plantProjects.map(arr => arr);
   let donated = [];
-  let Featured = 'is_certified';
   prev.map((value, index) => {
     if (value != undefined) {
-      if (value[Featured]) {
+      if (value['isCertified']) {
         donated.push(
           <div className="item featured" key={index}>
             <DonateTreesCardLayout value={value} userTpos={userTpos} />

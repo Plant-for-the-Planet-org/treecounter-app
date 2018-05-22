@@ -36,12 +36,12 @@
         .app-container__sidenav--heading {
           font-weight: bold;
           display: inline-block;
-          margin: 10px 20px;
+          margin: 10px 15px;
           border-bottom: 3px solid #bad788;
         }
         .app-container__sidenav--list {
           list-style-type: none;
-          padding: 0 20px;
+          padding: 0 15px;
 
           li {
             display: flex;
@@ -71,6 +71,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        .app-container__content--center {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
       }
     }
   }

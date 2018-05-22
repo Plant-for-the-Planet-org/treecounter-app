@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {
   forgotPasswordFormSchema,
   schemaOptions
-} from '../../server/formSchemas/forgotpassword';
+} from '../../../server/parsedSchemas/forgotpassword';
 
 import {
   StyleSheet,
@@ -22,18 +22,6 @@ export default class ForgotPassword extends Component {
     this.props.updateRoute('app_login');
   };
 
-  onPress = () => {
-    let result = this.refs.forgotPasswordForm.validate();
-    if (result.isValid()) {
-      let value = this.refs.forgotPasswordForm.getValue();
-      if (value) {
-        this.props.onClick(value);
-      }
-    } else if (this.props.onError) {
-      this.props.onError(result.errors);
-    }
-  };
-
   render() {
     return (
       <ImageBackground style={styles.container}>
@@ -47,7 +35,10 @@ export default class ForgotPassword extends Component {
             type={forgotPasswordFormSchema}
             options={schemaOptions}
           />
-          <TouchableHighlight onPress={this.onPress} style={styles.button}>
+          <TouchableHighlight
+            onPress={this.onResetPassword}
+            style={styles.button}
+          >
             <Text style={styles.buttonText}>Reset Password</Text>
           </TouchableHighlight>
           <View style={styles.bottomRow}>
@@ -65,7 +56,7 @@ export default class ForgotPassword extends Component {
 }
 
 ForgotPassword.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onResetPassword: PropTypes.func.isRequired,
   onError: PropTypes.func,
   updateRoute: PropTypes.func
 };

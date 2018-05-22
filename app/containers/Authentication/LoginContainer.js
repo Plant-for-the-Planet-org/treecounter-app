@@ -4,14 +4,12 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { login } from '../../actions/authActions';
-import { clearStorage } from '../../stores/localStorage';
 import { updateRoute } from '../../helpers/routerHelper';
 import Login from '../../components/Authentication/Login/index';
 
 class LoginContainer extends React.Component {
   constructor(props) {
     super(props);
-    clearStorage();
     this.onClick = this.onClick.bind(this);
   }
 

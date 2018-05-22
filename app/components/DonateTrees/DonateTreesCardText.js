@@ -9,18 +9,18 @@ const DonateTreesCardText = props => {
     <div className="card-text">
       <DonateTreesCardTextLabel
         label={constants.formStrings.planted}
-        counter={value.count_planted}
+        counter={value.countPlanted}
       />
       <DonateTreesCardTextLabel
         label={constants.formStrings.target}
-        counter={value.count_target}
+        counter={value.countTarget}
       />
       <DonateTreesCardTextLabel
         label={constants.formStrings.treeCost}
-        counter={value.tree_cost}
+        counter={value.treeCost}
       />
       <p>
-        {value.is_certified
+        {value.isCertified
           ? `${constants.formStrings.certified}`
           : `${constants.formStrings.nonCertified}`}
       </p>

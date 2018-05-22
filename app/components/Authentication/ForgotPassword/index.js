@@ -11,6 +11,7 @@ import TextHeading from '../../Common/Text/TextHeading';
 import CardLayout from '../../Common/Card/CardLayout';
 import InlineLink from '../../Common/InlineLink';
 import TextBlock from '../../Common/Text/TextBlock';
+import TextSpan from '../../Common/Text/TextSpan';
 
 let TCombForm = t.form.Form;
 
@@ -20,10 +21,10 @@ export default class Login extends Component {
       <div className="app-container__content--center">
         <TextHeading>Forgot Your Password?</TextHeading>
         <CardLayout>
-          <div className="pftp-text-left-aligned">
+          <TextSpan>
             Enter your email address and we‘ll send you a link to reset your
             password.
-          </div>
+          </TextSpan>
           <TCombForm
             ref="forgotPasswordForm"
             type={forgotPasswordFormSchema}

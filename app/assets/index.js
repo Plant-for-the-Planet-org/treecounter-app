@@ -14,8 +14,10 @@ import target_outline from './images/icons/target_outline.png';
 import pot from './images/pot.svg';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/tree.svg';
+import SideMenuImage from './images/side_menu.png';
 
 export {
+  SideMenuImage,
   FooterLogos,
   SignupOrganization,
   SignupJustMe,

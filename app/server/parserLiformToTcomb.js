@@ -4,7 +4,7 @@ import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
 import { TextAreaTemplate } from '../components/Templates/TextAreaTemplate';
 import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
 import { IntegerInputTemplate } from '../components/Templates/IntegerInputTemplate';
-import * as images from '../images';
+import * as images from '../assets';
 
 export default function parseJsonToTcomb(liformSchemaJson) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));

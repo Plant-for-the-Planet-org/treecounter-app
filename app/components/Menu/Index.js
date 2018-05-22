@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 // Images
 import SideMenuImage from '../../../web/images/side_menu_image.png';
-import * as images from '../../images';
+import * as images from '../../assets';
 
 export default class Menu extends Component {
   sideNavImage() {

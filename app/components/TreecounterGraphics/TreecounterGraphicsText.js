@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import PlantedDetails from './PlantedDetails';
 import TargetComment from './TargetComment';
 import ArrowButton from '../Common/ArrowButton';
+import { pot, tree } from '../../assets';
 
 class TreecounterGraphicsText extends Component {
   constructor() {
@@ -27,10 +28,7 @@ class TreecounterGraphicsText extends Component {
     return (
       <div className="svg-text-container">
         <div className="svg-text-container__row">
-          <img
-            className="svg-text-container__row--col"
-            src="/web/images/baum_versprochen.png"
-          />
+          <img className="svg-text-container__row--col" src={pot} />
           <div className="svg-text-container__row--col">
             <span>
               Target by {targetYear} <br />
@@ -48,10 +46,7 @@ class TreecounterGraphicsText extends Component {
         ) : null}
         <hr className="svg-text-container__bar" />
         <div className="svg-text-container__row">
-          <img
-            className="svg-text-container__row--col"
-            src="/web/images/baum.png"
-          />
+          <img className="svg-text-container__row--col" src={tree} />
           <div className="svg-text-container__row--col">
             <span>
               Planted

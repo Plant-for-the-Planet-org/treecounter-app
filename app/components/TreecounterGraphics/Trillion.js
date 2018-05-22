@@ -8,6 +8,7 @@ import {
 import { trillionCampaign } from '../../actions/trillionAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
+import { pot, tree } from '../../assets';
 
 class Trillion extends Component {
   constructor() {
@@ -62,7 +63,7 @@ class Trillion extends Component {
           <SvgContainer {...this.state.svgData} />
           <div className="trillion-svg-text">
             <div className="trillion-svg-text__row">
-              <img src="/web/images/baum_versprochen.png" alt="Smiley face" />
+              <img src={pot} alt="Smiley face" />
               <span>
                 Target {this.propsctargetYear}
                 <br />
@@ -74,7 +75,7 @@ class Trillion extends Component {
               </span>
             </div>
             <div className="trillion-svg-text__row">
-              <img src="/web/images/baum.png" alt="Smiley face" />
+              <img src={tree} alt="Smiley face" />
               <span>
                 Existing trees {this.propsctargetYear}
                 <br />
@@ -86,7 +87,7 @@ class Trillion extends Component {
               </span>
             </div>
             <div className="trillion-svg-text__row">
-              <img src="/web/images/baum.png" alt="Smiley face" />
+              <img src={tree} alt="Smiley face" />
               <span>
                 Planted trees<br />
                 <strong>{this.state.svgData.planted}</strong>

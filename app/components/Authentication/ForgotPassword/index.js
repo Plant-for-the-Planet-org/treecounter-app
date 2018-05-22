@@ -11,7 +11,6 @@ import TextHeading from '../../Common/Text/TextHeading';
 import CardLayout from '../../Common/Card/CardLayout';
 import InlineLink from '../../Common/InlineLink';
 import TextBlock from '../../Common/Text/TextBlock';
-import { getLocalRoute } from '../../../actions/apiRouting';
 
 let TCombForm = t.form.Form;
 
@@ -21,6 +20,10 @@ export default class Login extends Component {
       <div className="app-container__content--center">
         <TextHeading>Forgot Your Password?</TextHeading>
         <CardLayout>
+          <div>
+            Enter your email address and we‘ll send you a link to reset your
+            password.
+          </div>
           <TCombForm
             ref="forgotPasswordForm"
             type={forgotPasswordFormSchema}
@@ -29,14 +32,9 @@ export default class Login extends Component {
           <PrimaryButton onClick={this.props.onResetPassword}>
             Reset Password
           </PrimaryButton>
-          <div className="text-center">
-            <TextBlock>
-              <InlineLink
-                uri={getLocalRoute('app_login')}
-                caption="Try to login again."
-              />
-            </TextBlock>
-          </div>
+          <TextBlock>
+            <InlineLink uri={'app_login'} caption="Try to login again." />
+          </TextBlock>
         </CardLayout>
       </div>
     );

@@ -12,6 +12,7 @@ class ForgotPasswordContainer extends React.Component {
     super(props);
     this.onClick = this.onClick.bind(this);
   }
+
   onPress = () => {
     // let result = this.refs.forgotPasswordForm.validate();
     // if (result.isValid()) {

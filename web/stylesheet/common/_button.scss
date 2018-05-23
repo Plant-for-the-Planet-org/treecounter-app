@@ -1,6 +1,5 @@
 .pftp-button-primary {
   background-color: $colorPrimary;
-  box-shadow: $boxShadow;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -11,4 +10,9 @@
   margin: 10px 0;
   display: flex;
   justify-content: center;
+}
+
+.pftp-button-secondary {
+  @extend .pftp-button-primary;
+  background-color: $colorPrimaryAccent;
 }

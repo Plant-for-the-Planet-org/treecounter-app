@@ -16,8 +16,10 @@ import loadingBar from './images/loading-bar.gif';
 import tree from './images/tree.svg';
 import SideMenuImage from './images/side_menu.png';
 import GreenEmail from './images/email-green.png';
+import RedEmail from './images/email-red.png';
 
 export {
+  RedEmail,
   GreenEmail,
   SideMenuImage,
   FooterLogos,

@@ -25,6 +25,7 @@ export default class ForgotPassword extends Component {
             Enter your email address and we‘ll send you a link to reset your
             password.
           </TextSpan>
+          <br />
           <TCombForm
             ref="forgotPasswordForm"
             type={forgotPasswordFormSchema}

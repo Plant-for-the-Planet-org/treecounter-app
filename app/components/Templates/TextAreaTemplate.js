@@ -1,25 +1,18 @@
 import React from 'react';
 import i18n from '../../locales/i18n';
 
-export function TextInputTemplate(locals) {
+export function TextAreaTemplate(locals) {
   function onChange($event) {
-    let value =
-      locals.type === 'number'
-        ? parseInt($event.target.value)
-        : $event.target.value;
-    locals.onChange(value);
+    locals.onChange($event.target.value);
   }
   return (
     <div className="pftp-textfield">
-      {locals.config.iconUrl ? (
-        <img className="pftp-textfield__icon" src={locals.config.iconUrl} />
-      ) : null}
       <div className="pftp-textfield__inputgroup">
-        <input
-          type={locals.type}
-          autoComplete="new-password"
-          required="required"
+        <textarea
+          rows="6"
+          cols="50"
           value={locals.value}
+          required="required"
           onChange={onChange}
         />
         <span className="pftp-textfield__inputgroup--highlight" />

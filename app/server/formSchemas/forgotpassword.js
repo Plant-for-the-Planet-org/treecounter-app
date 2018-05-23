@@ -5,7 +5,7 @@ export default {
     email: {
       type: 'string',
       title: 'Email',
-      icon: 'mail',
+      icon: 'email',
       propertyOrder: 1
     }
   },

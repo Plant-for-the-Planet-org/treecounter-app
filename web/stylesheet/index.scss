@@ -16,6 +16,9 @@
 @import "./common/_textfield.scss";
 @import "./common/_text.scss";
 @import "./common/_card_layout.scss";
+@import "./common/_space.scss";
+@import "./common/_checkbox.scss";
+@import "./common/_selectfield.scss";
 
 // Import components SCSS
 @import "./_normalize.scss";
@@ -42,6 +45,9 @@
 
 // Import Signup SCSS
 @import "./signup/signup_type.scss";
+
+// Import target SCSS
+@import "./target/target.scss";
 
 // ESRI Maps CSS
 @import url("https://js.arcgis.com/3.23/esri/css/esri.css");

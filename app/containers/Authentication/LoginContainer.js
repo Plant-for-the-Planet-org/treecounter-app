@@ -8,11 +8,6 @@ import { updateRoute } from '../../helpers/routerHelper';
 import Login from '../../components/Authentication/Login/index';
 
 class LoginContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
-  }
-
   onPress = () => {
     // let result = this.refs.loginForm.validate();
     // if (result.isValid()) {

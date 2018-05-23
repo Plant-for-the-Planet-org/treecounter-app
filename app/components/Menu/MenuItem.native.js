@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import PropTypes, { func } from 'prop-types';
 
-import * as images from '../../images';
+import * as images from '../../assets';
 
 export default class MenuGroup extends Component {
   static propTypes = {

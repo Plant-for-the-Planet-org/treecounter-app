@@ -1,8 +1,11 @@
 let transform = require('tcomb-json-schema');
 
 import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
+import { TextAreaTemplate } from '../components/Templates/TextAreaTemplate';
 import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
-import * as images from '../images';
+import { SelectTemplate } from '../components/Templates/SelectTemplate';
+
+import * as images from '../assets';
 
 export default function parseJsonToTcomb(liformSchemaJson) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));
@@ -33,7 +36,8 @@ export default function parseJsonToTcomb(liformSchemaJson) {
         let options = {};
         if (
           properties[propertyKey].type &&
-          properties[propertyKey].type === 'string'
+          (properties[propertyKey].type === 'string' ||
+            properties[propertyKey].type === 'integer')
         ) {
           if (properties[propertyKey].hasOwnProperty('icon')) {
             options.config = {
@@ -46,9 +50,18 @@ export default function parseJsonToTcomb(liformSchemaJson) {
             options.auto = 'none';
             options.autoCapitalize = 'none';
             options.template = TextInputTemplate;
+            if (
+              properties[propertyKey].type === 'string' &&
+              properties[propertyKey].widget !== 'textarea'
+            ) {
+              options.type = 'text';
+            } else if (properties[propertyKey].type === 'integer') {
+              options.type = 'number';
+            }
           } else {
             options.label = '';
             options.auto = 'none';
+            options.template = SelectTemplate;
             options.nullOption = {
               value: '',
               text: properties[propertyKey].title
@@ -61,15 +74,21 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           options.label = properties[propertyKey].title;
           options.template = CheckboxTemplate;
         }
-        if (properties[propertyKey].widget === 'password') {
-          options.secureTextEntry = true;
-          options.type = 'password';
+        // Check what kind of widget it has
+        switch (properties[propertyKey].widget) {
+          case 'password':
+            options.secureTextEntry = true;
+            options.type = 'password';
+            break;
+          case 'textarea':
+            options.template = TextAreaTemplate;
         }
+        // Widgets SwitchCase ENDS
         if (properties[propertyKey].type === 'object') {
-          options.auto = 'none';
-          schemaOptions['fields'][propertyKey] = getSchemaOptions(
-            properties[propertyKey]
-          );
+          schemaOptions['fields'][propertyKey] = {
+            auto: 'none',
+            ...getSchemaOptions(properties[propertyKey])
+          };
         } else {
           schemaOptions['fields'][propertyKey] = options;
         }

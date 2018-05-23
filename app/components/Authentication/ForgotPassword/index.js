@@ -15,7 +15,7 @@ import TextSpan from '../../Common/Text/TextSpan';
 
 let TCombForm = t.form.Form;
 
-export default class Login extends Component {
+export default class ForgotPassword extends Component {
   render() {
     return (
       <div className="app-container__content--center">
@@ -25,6 +25,7 @@ export default class Login extends Component {
             Enter your email address and we‘ll send you a link to reset your
             password.
           </TextSpan>
+          <br />
           <TCombForm
             ref="forgotPasswordForm"
             type={forgotPasswordFormSchema}
@@ -42,6 +43,6 @@ export default class Login extends Component {
   }
 }
 
-Login.propTypes = {
+ForgotPassword.propTypes = {
   onResetPassword: PropTypes.func.isRequired
 };

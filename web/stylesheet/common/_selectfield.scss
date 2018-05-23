@@ -1,0 +1,23 @@
+$bg-color: #424242;
+$muted-color: mix(white, $bg-color, 70%);
+
+.pftp-selectfield {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .pftp-selectfield__select {
+    background: none;
+    font-size: 18px;
+    box-sizing: border-box;
+    padding: 5px 10px 10px 5px;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid mix(white, $bg-color, 70%);
+    color: mix(white, $bg-color, 70%);
+  }
+
+  .pftp-selectfield__option {
+    @extend .pftp-selectfield__select;
+  }
+}

@@ -3,7 +3,7 @@ import SignupOrganization from './images/organisation.png';
 import SignupJustMe from './images/just-me.png';
 import plantingTreeImage from './images/plantingTree.jpg';
 import key from './images/icons/key.png';
-import mail from './images/icons/mail.png';
+import email from './images/icons/mail.png';
 import tree_outline from './images/icons/tree_outline.png';
 import gift_outline from './images/icons/gift_outline.png';
 import challenge_outline from './images/icons/challenge_outline.png';
@@ -27,7 +27,7 @@ export {
   SignupJustMe,
   plantingTreeImage,
   key,
-  mail,
+  email,
   tree_outline,
   gift_outline,
   challenge_outline,

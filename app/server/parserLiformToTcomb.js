@@ -3,6 +3,8 @@ let transform = require('tcomb-json-schema');
 import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
 import { TextAreaTemplate } from '../components/Templates/TextAreaTemplate';
 import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
+import { SelectTemplate } from '../components/Templates/SelectTemplate';
+
 import * as images from '../assets';
 
 export default function parseJsonToTcomb(liformSchemaJson) {
@@ -59,6 +61,7 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           } else {
             options.label = '';
             options.auto = 'none';
+            options.template = SelectTemplate;
             options.nullOption = {
               value: '',
               text: properties[propertyKey].title

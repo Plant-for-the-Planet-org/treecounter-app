@@ -5,9 +5,9 @@ import LoadingIndicator from '../Common/LoadingIndicator';
 import TPOComponent from '../TpoProjects/TPOComponent';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 import SvgContainer from '../Common/SvgContainer';
-import TreecounterGraphicsText from './TreecounterGraphicsText';
+import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 
-class SearchUser extends Component {
+class PublicTreecounter extends Component {
   constructor() {
     super();
     this.state = {
@@ -28,7 +28,6 @@ class SearchUser extends Component {
     dispatch(treecounterLookupAction(params.treecounterId))
       .then(treecounter => {
         console.log(treecounter);
-        const { userProfile } = treecounter.userProfile;
         this.setState({
           svgData: {
             id: treecounter.id,
@@ -38,7 +37,7 @@ class SearchUser extends Component {
             personal: treecounter.countPersonal
           },
           displayName: treecounter.displayName,
-          isTpo: 'tpo' === userProfile.type,
+          isTpo: treecounter.userProfile && treecounter.userProfile === 'tpo',
           id: treecounter.id
         });
       })
@@ -54,7 +53,10 @@ class SearchUser extends Component {
       nextProps,
       this.props
     );
-    if (this.props.match.params.userId === nextProps.match.params.userId)
+    if (
+      this.props.match.params.treecounterId ===
+      nextProps.match.params.treecounterId
+    )
       return;
     this.fetchAndSetSearchResult(nextProps);
   }
@@ -101,15 +103,15 @@ const mapStateToProps = function(state) {
   };
 };
 
-export default connect(mapStateToProps)(SearchUser);
+export default connect(mapStateToProps)(PublicTreecounter);
 
 import PropTypes from 'prop-types';
-SearchUser.propTypes = {
+PublicTreecounter.propTypes = {
   userTpos: PropTypes.object.isRequired,
-  treecounterData: PropTypes.object.isRequired,
+  treecounterData: PropTypes.object,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      userId: PropTypes.number
+      treecounterId: PropTypes.number
     })
   }).isRequired
 };

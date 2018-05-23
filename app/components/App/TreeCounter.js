@@ -21,7 +21,7 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import Footer from '../Footer';
 
 // Components which use SVG
-import PublicTreecounter from '../TreecounterGraphics/PublicTreecounter';
+import PublicTreecounter from '../PublicTreeCounter/PublicTreecounter';
 import Trillion from '../TreecounterGraphics/Trillion';
 import Home from '../TreecounterGraphics/Home';
 

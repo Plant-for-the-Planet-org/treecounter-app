@@ -7,8 +7,10 @@ import TextHeading from '../Common/Text/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import Map from '../Common/EsriMap/Map';
 import {
-  schemaOptions,
-  registerTreesFormSchema
+  singleTreeRegisterFormSchema,
+  schemaOptionsSingleTree,
+  multipleTreesRegisterFormSchema,
+  schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
 
 let TCombForm = t.form.Form;
@@ -73,11 +75,19 @@ export default class RegisterTrees extends Component {
               (this.state.treeCount === 'individual' ? 'hide-treecount' : '')
             }
           >
-            <TCombForm
-              ref={'registerTreeForm'}
-              type={registerTreesFormSchema}
-              options={schemaOptions}
-            />
+            {this.state.treeCount === 'individual' ? (
+              <TCombForm
+                ref={'registerTreeForm'}
+                type={singleTreeRegisterFormSchema}
+                options={schemaOptionsSingleTree}
+              />
+            ) : (
+              <TCombForm
+                ref={'registerTreeForm'}
+                type={multipleTreesRegisterFormSchema}
+                options={schemaOptionsMultipleTrees}
+              />
+            )}
           </div>
           <PrimaryButton>Register</PrimaryButton>
         </CardLayout>

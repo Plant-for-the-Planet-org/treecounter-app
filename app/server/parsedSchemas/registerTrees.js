@@ -1,9 +1,22 @@
-import schemaLiform from '../formSchemas/registerTrees';
+import {
+  singleTreeForm,
+  multipleTreesForm
+} from '../formSchemas/registerTrees';
 import parseJsonToTcomb from '../parserLiformToTcomb';
 
 const {
-  transformedSchema: registerTreesFormSchema,
-  schemaOptions
-} = parseJsonToTcomb(schemaLiform);
+  transformedSchema: singleTreeRegisterFormSchema,
+  schemaOptionsSingleTree
+} = parseJsonToTcomb(singleTreeForm);
 
-export { schemaOptions, registerTreesFormSchema };
+const {
+  transformedSchema: multipleTreesRegisterFormSchema,
+  schemaOptionsMultipleTrees
+} = parseJsonToTcomb(multipleTreesForm);
+
+export {
+  singleTreeRegisterFormSchema,
+  multipleTreesRegisterFormSchema,
+  schemaOptionsSingleTree,
+  schemaOptionsMultipleTrees
+};

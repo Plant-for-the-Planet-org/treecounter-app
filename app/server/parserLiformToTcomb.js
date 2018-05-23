@@ -1,4 +1,4 @@
-let transform = require('tcomb-json-schema');
+import transform from 'tcomb-json-schema';
 
 import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
 import { TextAreaTemplate } from '../components/Templates/TextAreaTemplate';

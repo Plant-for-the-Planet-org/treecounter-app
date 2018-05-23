@@ -14,6 +14,7 @@ import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 import ResetPasswordContainer from '../Authentication/ResetPassword';
+import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
@@ -125,6 +126,10 @@ class TreeCounter extends Component {
               <PublicRoute
                 path={getLocalRoute('app_resetPassword')}
                 component={ResetPasswordContainer}
+              />
+              <PublicRoute
+                path={getLocalRoute('app_passwordSent')}
+                component={EmailSentContainer}
               />
               <PrivateRoute
                 path={getLocalRoute('app_target')}

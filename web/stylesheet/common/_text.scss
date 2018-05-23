@@ -12,9 +12,10 @@
 .pftp-text-span {
   @extend .pftp-text-basic;
   text-align: left;
-  &.bold {
-    font-weight: 600;
-  }
+}
+
+.bold {
+  font-weight: 600;
 }
 
 .pftp-text-block {

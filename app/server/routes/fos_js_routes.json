@@ -236,24 +236,9 @@
       "methods": ["POST"],
       "schemes": []
     },
-    "target_update_form": {
-      "tokens": [
-        ["text", "/targets/updateForm"],
-        ["variable", "/", "[^/]++", "_locale"],
-        ["variable", "/", "[^/]++", "version"],
-        ["text", "/api"]
-      ],
-      "defaults": {
-        "_locale": null
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": ["GET"],
-      "schemes": []
-    },
     "targetUpdate_form": {
       "tokens": [
-        ["text", "/targets/updateForm}"],
+        ["text", "/targets/updateForm"],
         ["variable", "/", "[^/]++", "_locale"],
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
@@ -426,7 +411,23 @@
     },
     "plantContribution_form": {
       "tokens": [
+        ["variable", "/", "[^/]++", "mode"],
         ["text", "/plantContributionForm"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "plantContribution_forms": {
+      "tokens": [
+        ["text", "/plantContributionForms"],
         ["variable", "/", "[^/]++", "_locale"],
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
@@ -457,6 +458,7 @@
     },
     "plantContribution_post": {
       "tokens": [
+        ["variable", "/", "[^/]++", "mode"],
         ["text", "/plantContributions"],
         ["variable", "/", "[^/]++", "treecounter"],
         ["text", "/treecounters"],
@@ -676,22 +678,6 @@
       "methods": ["POST"],
       "schemes": []
     },
-    "register_post": {
-      "tokens": [
-        ["variable", "/", "[^/]++", "profileType"],
-        ["text", "/register"],
-        ["variable", "/", "[^/]++", "_locale"],
-        ["variable", "/", "[^/]++", "version"],
-        ["text", "/auth"]
-      ],
-      "defaults": {
-        "_locale": null
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": ["POST"],
-      "schemes": []
-    },
     "profile_put": {
       "tokens": [
         ["text", "/profileUpdate"],
@@ -831,7 +817,23 @@
     },
     "app_resetPassword": {
       "tokens": [
+        ["variable", "/", "[^/]++", "token"],
         ["text", "/resetPassword"],
+        ["variable", "/", "(\\w{2})?", "_locale"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "app_passwordSent": {
+      "tokens": [
+        ["text", "/passwordSent"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
       "defaults": {

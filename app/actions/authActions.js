@@ -58,10 +58,7 @@ export function forgot_password(data) {
     postRequest('auth_forgotPassword_post', data)
       .then(res => {
         debug(res.status);
-        NotificationManager.success(
-          'Further details have been sent to your mail address'
-        );
-        updateRoute('app_login', dispatch);
+        updateRoute('app_passwordSent', dispatch);
       })
       .catch(err => debug(err));
   };

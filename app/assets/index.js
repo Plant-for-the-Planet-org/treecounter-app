@@ -15,8 +15,10 @@ import pot from './images/pot.svg';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/tree.svg';
 import SideMenuImage from './images/side_menu.png';
+import GreenEmail from './images/email-green.png';
 
 export {
+  GreenEmail,
   SideMenuImage,
   FooterLogos,
   SignupOrganization,

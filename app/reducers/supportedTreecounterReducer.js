@@ -1,7 +1,11 @@
 import { createAction, handleActions } from 'redux-actions';
 
-export const setSupportedTreecounter = createAction('SUPPORTED_TREECOUNTER_SET');
-export const clearSupportedTreecounter = createAction('SUPPORTED_TREECOUNTER_CLEAR');
+export const setSupportedTreecounter = createAction(
+  'SUPPORTED_TREECOUNTER_SET'
+);
+export const clearSupportedTreecounter = createAction(
+  'SUPPORTED_TREECOUNTER_CLEAR'
+);
 export const getSupportedTreecounter = state => state.supportedTreecounter;
 
 export const initialState = {

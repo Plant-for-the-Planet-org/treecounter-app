@@ -1,7 +1,7 @@
-var webpack = require('webpack');
-var webpackMerge = require('webpack-merge');
-var commonConfig = require('./webpack.common.config.js');
-var path = require('path');
+const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
+const commonConfig = require('./webpack.common.config.js');
+const path = require('path');
 
 module.exports = webpackMerge(commonConfig, {
   entry: ['babel-polyfill', path.join(__dirname, '../../index.web.js')],

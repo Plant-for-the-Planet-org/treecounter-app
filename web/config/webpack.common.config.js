@@ -1,7 +1,7 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
-var config = {
+let config = {
   module: {
     loaders: [
       {

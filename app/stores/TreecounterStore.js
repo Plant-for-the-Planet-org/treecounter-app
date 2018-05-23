@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import logger from 'redux-logger';
+import middlewares from './middlewares';
+import initialState from './storeInitialState';
 
-import reducers from '../reducers';
 import { initialState as entitiesState } from '../reducers/entitiesReducer';
-
+import reducers from '../reducers/reducer';
 /**
  * This function will be called in App.js by either:
  *   1. ReactOnRails.registerStore({ TreecounterStore: configureStore }) and receive props and context created by Symfony
@@ -17,19 +19,10 @@ import { initialState as entitiesState } from '../reducers/entitiesReducer';
  * @param context server environment provided by either Symfony or config
  * @returns {Store}
  */
-export default function configureStore(props, context) {
-  const { locale, mediaPath } = props;
-  const { scheme, host, base: baseUrl, location } = context;
-
-  const initialState = {
-    serverName: `${scheme}://${host}`,
-    baseUrl,
-    location, // TODO: probably obsolete
-    serverRendered: context.hasOwnProperty('serverSide'),
-    mediaPath,
-    locale,
-    entities: entitiesState,
-    ...props
+export default function configureStore() {
+  const commonInitialState = {
+    ...initialState,
+    entities: entitiesState
   };
 
   // use devtools if we are in a browser and the extension is enabled
@@ -37,9 +30,15 @@ export default function configureStore(props, context) {
     typeof window !== 'undefined' &&
     (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose);
 
+  let middleware = [...middlewares, thunkMiddleware];
+
+  if (process.env.NODE_ENV === 'development') {
+    middleware.push(logger);
+  }
+
   return createStore(
     reducers,
-    initialState,
-    composeEnhancers(applyMiddleware(thunkMiddleware))
+    commonInitialState,
+    composeEnhancers(applyMiddleware(...middleware))
   );
 }

@@ -82,10 +82,10 @@ export default function parseJsonToTcomb(liformSchemaJson) {
         }
         // Widgets SwitchCase ENDS
         if (properties[propertyKey].type === 'object') {
-          options.auto = 'none';
-          schemaOptions['fields'][propertyKey] = getSchemaOptions(
-            properties[propertyKey]
-          );
+          schemaOptions['fields'][propertyKey] = {
+            auto: 'none',
+            ...getSchemaOptions(properties[propertyKey])
+          };
         } else {
           schemaOptions['fields'][propertyKey] = options;
         }

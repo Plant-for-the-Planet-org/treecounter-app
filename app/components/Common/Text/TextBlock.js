@@ -6,7 +6,7 @@ const TextBlock = ({ children }) => (
 );
 
 TextBlock.propTypes = {
-  children: PropTypes.string
+  children: PropTypes.array
 };
 
 export default TextBlock;

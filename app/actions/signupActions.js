@@ -10,20 +10,20 @@ export function signUp(profileType, userData) {
   debug(userData, profileType);
   if (userData.password.first === userData.password.second) {
     return dispatch => {
-      postRequest('register_post', userData, { profileType: profileType })
+      postRequest('signup_post', userData, { profileType: profileType })
         .then(res => {
           const { token, refresh_token } = res.data;
           updateJWT(token, refresh_token);
+          dispatch(loadLoginData());
           debug('registration successful');
+        })
+        .then(() => {
           NotificationManager.success(
             'Registration Successful',
             'Congrats',
             5000
           );
           updateRoute('app_userHome', dispatch);
-        })
-        .then(() => {
-          dispatch(loadLoginData());
         })
         .catch(err => console.log(err));
     };

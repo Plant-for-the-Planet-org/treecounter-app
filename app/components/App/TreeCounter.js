@@ -6,7 +6,7 @@ import { NotificationContainer } from 'react-notifications';
 import PropTypes from 'prop-types';
 
 // Components imports
-import TargetPage from '../Target';
+import TargetContainer from '../../containers/TargetContainer';
 import RegisterTree from '../RegisterTrees/RegisterTrees';
 import Header from '../Header/index';
 import UserContributions from '../UserContributions/UserContributions';
@@ -128,7 +128,7 @@ class TreeCounter extends Component {
               />
               <PrivateRoute
                 path={getLocalRoute('app_target')}
-                component={TargetPage}
+                component={TargetContainer}
               />
               <PrivateRoute
                 path={getLocalRoute('app_registerTrees')}

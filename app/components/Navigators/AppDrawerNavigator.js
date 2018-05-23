@@ -1,8 +1,11 @@
 import { DrawerNavigator } from 'react-navigation';
+
 import Trillion from '../TreecounterGraphics/Trillion';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
+import TargetContainer from '../../containers/TargetContainer';
+
 import { getLocalRoute } from '../../actions/apiRouting';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 
@@ -10,6 +13,9 @@ export const AppDrawerNavigator = DrawerNavigator(
   {
     [getLocalRoute('app_login')]: {
       screen: LoginContainer
+    },
+    [getLocalRoute('app_target')]: {
+      screen: TargetContainer
     },
     [getLocalRoute('app_signup')]: {
       screen: SignUpContainer

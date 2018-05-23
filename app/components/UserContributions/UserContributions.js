@@ -22,7 +22,7 @@ const UserContributions = ({ userContributions }) => {
     else color = 'orange';
     return {
       lat: element.geoLatitude,
-      long: element.geo_longitude,
+      long: element.geoLongitude,
       color: color
     };
   });

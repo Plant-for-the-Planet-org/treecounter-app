@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import {
   StyleSheet,
@@ -9,7 +8,8 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
-let Form = t.form.Form;
+
+import { SignupOrganization, SignupJustMe } from '../../../assets';
 import * as join from '../../../constants/strings';
 
 class SingupType extends Component {
@@ -108,25 +108,25 @@ export default class SignupTypes extends Component {
         >
           <View style={styles.innerContainer}>
             <SingupType
-              iconUrl={require('../../../images/organisation.png')}
+              iconUrl={SignupOrganization}
               profileType={'tpo'}
               selected={this.state.Profiletype == 'tpo'}
               onClick={this.changeProfile}
             />
             <SingupType
               profileType={'individual'}
-              iconUrl={require('../../../images/just-me.png')}
+              iconUrl={SignupJustMe}
               selected={this.state.Profiletype == 'individual'}
               onClick={this.changeProfile}
             />
             <SingupType
-              iconUrl={require('../../../images/organisation.png')}
+              iconUrl={SignupOrganization}
               selected={this.state.Profiletype == 'company'}
               profileType={'company'}
               onClick={this.changeProfile}
             />
             <SingupType
-              iconUrl={require('../../../images/organisation.png')}
+              iconUrl={SignupOrganization}
               selected={this.state.Profiletype == 'education'}
               profileType={'education'}
               onClick={this.changeProfile}

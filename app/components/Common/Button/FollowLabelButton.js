@@ -11,7 +11,9 @@ const PrimaryButton = ({ isLoggedIn, isSubscribed, onClick }) => {
       {label}
     </button>
   ) : (
-    <span>label.follow.must_login</span>
+    <button className="pftp-button-follow" onClick={() => onClick()}>
+      {label}
+    </button>
   );
 };
 

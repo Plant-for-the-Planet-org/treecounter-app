@@ -22,9 +22,9 @@ const TreecounterHeader = ({
           <i className="material-icons">account_circle</i>
         )}
       </div>
-      <div>{caption}</div>
-      <div>
-        <UserProfileTypeLabel profileType={profileType} /> |
+      <div className="tree-counter-name">{caption}</div>
+      <div className="profile-follow-row">
+        <UserProfileTypeLabel profileType={profileType} />
         {showFollow && (
           <FollowLabelButton
             isSubscribed={isUserFollower}

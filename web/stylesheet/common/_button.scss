@@ -19,6 +19,11 @@
 
 .pftp-button-follow {
   @extend .pftp-button-primary;
+  margin: 0 10px;
+  border-radius: 0;
+  padding: 0;
+  height: 30px;
+  width: inherit;
   background-color: white;
   color: $colorPrimaryAccentLight;
   font-size: 17px;

@@ -5,3 +5,44 @@
     font-size: 112px;
   }
 }
+.tree-counter-name {
+  @extend .pftp-text-normal;
+  max-width: 292px;
+  height: 32px;
+  font-size: 30.5px;
+  text-align: center;
+  text-overflow: ellipsis;
+  color: $headerTextColor;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.tree-counter-row {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  position: relative;
+}
+.profile-follow-row {
+  @extend .tree-counter-row;
+  align-items: baseline;
+}
+.profile-type-container {
+  width: 97px;
+  height: 30px;
+  background-color: #c7c7c7;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  .profile-type-label {
+    @extend .pftp-text-normal;
+    width: 77px;
+    font-size: 17px;
+    text-align: center;
+    color: #ffffff;
+  }
+}

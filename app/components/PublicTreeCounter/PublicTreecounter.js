@@ -106,17 +106,19 @@ class PublicTreeCounter extends React.Component {
 
     return (
       <div>
-        {'tpo' !== userProfile.type &&
-          !this.isMyself() && (
-            <SupportButton
-              {...supportProps}
-              onRegisterSupporter={this.onRegisterSupporter}
-            />
-          )}
-        <TreecounterHeader
-          {...headerProps}
-          followChanged={this.onFollowChanged}
-        />
+        <div className>
+          {'tpo' !== userProfile.type &&
+            !this.isMyself() && (
+              <SupportButton
+                {...supportProps}
+                onRegisterSupporter={this.onRegisterSupporter}
+              />
+            )}
+          <TreecounterHeader
+            {...headerProps}
+            followChanged={this.onFollowChanged}
+          />
+        </div>
         {/*<TreecounterGraphic treecounter={treecounter}/>*/}
         {/* {'tpo' === userProfile.type ?
         <TpoDonationPlantProjectSelector {...tpoProps} onSelect={this.onPlantProjectSelected}/> :

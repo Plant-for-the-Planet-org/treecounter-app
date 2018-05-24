@@ -2,6 +2,10 @@
   .pftp-popover__button {
     cursor: pointer;
     user-select: none;
+
+    &.focus {
+      pointer-events: none;
+    }
   }
 
   .pftp-popover__container {

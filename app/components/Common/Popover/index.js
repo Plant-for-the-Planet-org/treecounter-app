@@ -13,11 +13,11 @@ class Popover extends Component {
   }
 
   PopoverClicked() {
-    if (!this.state.focused) this.refs.popover.focus();
-    else this.setState({ focused: false });
+    this.refs.popover.focus();
   }
 
   PopoverBlurred() {
+    this.refs.popover.blur();
     this.setState({ focused: false });
   }
 
@@ -29,7 +29,12 @@ class Popover extends Component {
     const { button, children } = this.props;
     return (
       <div className="pftp-popover">
-        <div className="pftp-popover__button" onClick={this.PopoverClicked}>
+        <div
+          className={
+            'pftp-popover__button ' + (this.state.focused ? 'focus' : '')
+          }
+          onClick={this.PopoverClicked}
+        >
           {button}
         </div>
         <div

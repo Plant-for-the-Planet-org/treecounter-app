@@ -4,6 +4,7 @@ import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
 import { TextAreaTemplate } from '../components/Templates/TextAreaTemplate';
 import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
 import { SelectTemplate } from '../components/Templates/SelectTemplate';
+import { MapTemplate } from '../components/Templates/MapTemplate';
 
 import * as images from '../assets';
 
@@ -82,6 +83,11 @@ export default function parseJsonToTcomb(liformSchemaJson) {
             break;
           case 'textarea':
             options.template = TextAreaTemplate;
+            break;
+          case 'map':
+            console.log(properties, options);
+            options.template = MapTemplate;
+            break;
         }
         // Widgets SwitchCase ENDS
         if (properties[propertyKey].type === 'object') {

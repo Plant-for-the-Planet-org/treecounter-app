@@ -562,12 +562,12 @@ export const singleTreeForm = {
       },
       propertyOrder: 6
     },
-    treeCount: {
-      type: 'hidden',
-      title: 'label.tree_count',
-      widget: 'hidden',
-      propertyOrder: 7
-    },
+    // treeCount: {
+    //   type: 'number',
+    //   title: 'label.tree_count',
+    //   widget: 'hidden',
+    //   propertyOrder: 7
+    // },
     treeClassification: {
       type: 'string',
       title: 'label.tree_classification',

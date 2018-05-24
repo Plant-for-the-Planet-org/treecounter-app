@@ -16,7 +16,7 @@
     box-shadow: $boxShadow;
     outline: none;
 
-    &.focus {
+    &:focus {
       right: 10px;
     }
   }

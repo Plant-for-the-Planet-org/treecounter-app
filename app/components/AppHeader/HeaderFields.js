@@ -20,13 +20,14 @@ import Popover from '../Common/Popover';
 // );
 
 const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
+  console.log(userProfile, onLogout);
   return isLoggedIn ? (
     <div className="header-icons">
       <Popover button={<i className="material-icons">notifications_none</i>}>
         <Notification />
       </Popover>
       <Popover button={<i className="material-icons">account_circle</i>}>
-        {userProfile + onLogout}
+        <div>Dummy</div>
       </Popover>
       {/* <OverlayTrigger
         trigger="focus"

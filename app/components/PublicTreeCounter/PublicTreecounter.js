@@ -1,119 +1,153 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+//import { history } from '../../components/Common/BrowserRouter';
 
-import LoadingIndicator from '../Common/LoadingIndicator';
-import TPOComponent from '../TpoProjects/TPOComponent';
-import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
-import SvgContainer from '../Common/SvgContainer';
-import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import SupportButton from './SupportButton';
+import TreecounterHeader from './TreecounterHeader';
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
+// import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantProjectSelector'
+// import UserFootprint from './UserFootprint'
+//import {getLocalRoute} from '../../actions/apiRouting'
+import { currentUserProfileSelector } from '../../selectors/index';
+// import {selectPlantProjectIdAction} from '../../actions/selectPlantProjectIdAction'
+// import {followUnSubscribeAction} from '../../actions/followUnSubscribeAction'
+// import {followSubscribeAction} from '../../actions/followSubscribeAction'
+// import {supportTreecounterAction} from '../../actions/supportTreecounterAction'
 
-class PublicTreecounter extends Component {
-  constructor() {
-    super();
-    this.state = {
-      id: '',
-      svgData: {},
-      displayName: '',
-      isTpo: false
-    };
+/**
+ * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Public-TreeCounter
+ */
+class PublicTreeCounter extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onFollowChanged = this.onFollowChanged.bind(this);
+    this.onPlantProjectSelected = this.onPlantProjectSelected.bind(this);
+    this.onRegisterSupporter = this.onRegisterSupporter.bind(this);
   }
 
-  fetchAndSetSearchResult(props) {
-    const {
-      dispatch,
-      match: { params }
-    } = props;
-    // Call Search API
-
-    dispatch(treecounterLookupAction(params.treecounterId))
-      .then(treecounter => {
-        console.log(treecounter);
-        this.setState({
-          svgData: {
-            id: treecounter.id,
-            target: treecounter.countTarget,
-            planted: treecounter.countPlanted,
-            community: treecounter.countCommunity,
-            personal: treecounter.countPersonal
-          },
-          displayName: treecounter.displayName,
-          isTpo: treecounter.userProfile && treecounter.userProfile === 'tpo',
-          id: treecounter.id
-        });
-      })
-      .catch(error => console.log(error));
-  }
-  componentWillMount() {
-    console.log('Search ----- Component will mount', this.props);
-    this.fetchAndSetSearchResult(this.props);
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log(
-      'Search ----- Component will recieve props',
-      nextProps,
-      this.props
-    );
-    if (
-      this.props.match.params.treecounterId ===
-      nextProps.match.params.treecounterId
-    )
-      return;
-    this.fetchAndSetSearchResult(nextProps);
-  }
-  render() {
+  //------------------------------------------------------------------------------------------------------------
+  // HELPER METHODS
+  //------------------------------------------------------------------------------------------------------------
+  isMyself() {
+    const { treecounter, currentUserProfile } = this.props;
     return (
-      <div className="canvasContainer flex-column search-container">
-        {this.state.ifTpo ? (
-          <div className="search-container__header">
-            <i className="material-icons">language</i>
-            <div>
-              <span>Tree-Planting Organization</span>
-              <h4>{this.state.displayName}</h4>
-            </div>
-          </div>
-        ) : (
-          <div className="search-container__header sidenav-wrapper">
-            <i className="material-icons">account_circle</i>
-            <div>
-              <span>Individual</span>
-              <h4>{this.state.displayName}</h4>
-            </div>
-          </div>
-        )}
-        <div className="search-container__content sidenav-wrapper">
-          <div className="canvasContainer flex-column">
-            <SupportButton active={true} isUserLoggedIn={true} />
-            <SvgContainer {...this.state.svgData} />
-            {this.props.treecounterData === null ? (
-              <LoadingIndicator />
-            ) : (
-              <TreecounterGraphicsText treecounterData={this.state.svgData} />
-            )}
-          </div>
-          {this.state.ifTpo ? <TPOComponent id={this.state.id} /> : null}
-        </div>
+      null !== currentUserProfile &&
+      currentUserProfile.treecounter.id === treecounter.id
+    );
+  }
+
+  isUserFollower() {
+    const { treecounter, currentUserProfile } = this.props;
+    const followeeIds = currentUserProfile
+      ? currentUserProfile.treecounter.followee_ids
+          .split(',')
+          .map(s => parseInt(s))
+      : [];
+    return followeeIds.includes(treecounter.id);
+  }
+
+  amISupporting() {
+    const { treecounter, currentUserProfile } = this.props;
+    return currentUserProfile
+      ? null !== currentUserProfile.supported_treecounter &&
+          currentUserProfile.supported_treecounter.id === treecounter.id
+      : false;
+  }
+
+  //------------------------------------------------------------------------------------------------------------
+  // ACTION METHODS
+  //------------------------------------------------------------------------------------------------------------
+  onFollowChanged() {
+    // this.isUserFollower() ?
+    //   this.props.followUnSubscribeAction(this.props.treecounter.id) :
+    //   this.props.followSubscribeAction(this.props.treecounter.id)
+  }
+
+  onPlantProjectSelected(selectedPlantProjectId) {
+    console.log(selectedPlantProjectId);
+    // console.log('onPlantProjectSelected', selectedPlantProjectId)
+    // this.props.selectPlantProjectIdAction(selectedPlantProjectId)
+    //history.push(getLocalRoute('app_donateTrees'))
+  }
+
+  onRegisterSupporter() {
+    // this.props.supportTreecounter(this.props.treecounter)
+    //history.push(getLocalRoute('app_donateTrees'))
+  }
+
+  render() {
+    const { treecounter, currentUserProfile } = this.props;
+    if (null === treecounter) {
+      return <LoadingIndicator />;
+    }
+
+    const { userProfile, displayName: caption } = treecounter;
+    const { type: profileType, logo } = userProfile;
+    const isUserFollower = this.isUserFollower();
+    const isUserLoggedIn = null !== currentUserProfile;
+    const showFollow = !this.isMyself();
+
+    const supportProps = {
+      active: !this.amISupporting(),
+      isUserLoggedIn,
+      caption
+    };
+    const headerProps = {
+      caption,
+      profileType,
+      logo,
+      isUserFollower,
+      isUserLoggedIn,
+      showFollow
+    };
+    // const tpoProps = {plantProjects: userProfile.plant_projects, defaultPlantProjectId: null}
+
+    return (
+      <div>
+        {'tpo' !== userProfile.type &&
+          !this.isMyself() && (
+            <SupportButton
+              {...supportProps}
+              onRegisterSupporter={this.onRegisterSupporter}
+            />
+          )}
+        <TreecounterHeader
+          {...headerProps}
+          followChanged={this.onFollowChanged}
+        />
+        {/*<TreecounterGraphic treecounter={treecounter}/>*/}
+        {/* {'tpo' === userProfile.type ?
+        <TpoDonationPlantProjectSelector {...tpoProps} onSelect={this.onPlantProjectSelected}/> :
+        <UserFootprint userProfile={userProfile}/>
+      } */}
       </div>
     );
   }
 }
 
-const mapStateToProps = function(state) {
-  console.log('Store updated - Search', state);
+PublicTreeCounter.propTypes = {
+  treecounter: PropTypes.object.isRequired,
+  currentUserProfile: PropTypes.object
+  // supportTreecounter: PropTypes.func.isRequired,
+  // selectPlantProjectIdAction: PropTypes.func.isRequired,
+  // followSubscribeAction: PropTypes.func.isRequired,
+  // followUnSubscribeAction: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = dispatch => {
+  console.log(dispatch);
   return {
-    userTpos: state.entities.tpo
+    // supportTreecounter: treecounter => dispatch(supportTreecounterAction(treecounter)),
+    // selectPlantProjectIdAction: selectedPlantProjectId => dispatch(selectPlantProjectIdAction(selectedPlantProjectId)),
+    // followSubscribeAction: treecounterId => dispatch(followSubscribeAction(treecounterId)),
+    // followUnSubscribeAction: treecounterId => dispatch(followUnSubscribeAction(treecounterId))
   };
 };
 
-export default connect(mapStateToProps)(PublicTreecounter);
+const mapStateToProps = state => ({
+  currentUserProfile: currentUserProfileSelector(state)
+});
 
-import PropTypes from 'prop-types';
-PublicTreecounter.propTypes = {
-  userTpos: PropTypes.object.isRequired,
-  treecounterData: PropTypes.object,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      treecounterId: PropTypes.number
-    })
-  }).isRequired
-};
+export default connect(mapStateToProps, mapDispatchToProps)(PublicTreeCounter);

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
+import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
 
 const TreecounterHeader = ({
@@ -14,8 +14,14 @@ const TreecounterHeader = ({
   followChanged
 }) => {
   return (
-    <div>
-      <div>Logo: {logo}</div>
+    <div className="canvasContainer flex-column">
+      <div className="header-logo">
+        {logo ? (
+          <img src={logo} />
+        ) : (
+          <i className="material-icons">account_circle</i>
+        )}
+      </div>
       <div>{caption}</div>
       <div>
         <UserProfileTypeLabel profileType={profileType} /> |

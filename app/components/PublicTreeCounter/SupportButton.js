@@ -3,14 +3,22 @@ import PropTypes from 'prop-types';
 
 import SecondaryButton from '../Common/Button/SecondaryButton';
 
-const SupportButton = ({ active, isUserLoggedIn, onRegisterSupporter }) => {
+const SupportButton = ({
+  active,
+  isUserLoggedIn,
+  caption,
+  onRegisterSupporter
+}) => {
   return isUserLoggedIn ? (
-    <SecondaryButton onClick={() => onRegisterSupporter()}>
-      supoort user name {active ? 'active' : 'inactive'}
+    <SecondaryButton
+      onClick={() => onRegisterSupporter()}
+      disable={active ? 'active' : 'inactive'}
+    >
+      Support {caption}
     </SecondaryButton>
   ) : (
-    <SecondaryButton onClick={() => onRegisterSupporter()}>
-      Log In
+    <SecondaryButton onClick={() => onRegisterSupporter()} disable={true}>
+      Log In to Support {caption}
     </SecondaryButton>
   );
 };
@@ -18,6 +26,7 @@ const SupportButton = ({ active, isUserLoggedIn, onRegisterSupporter }) => {
 SupportButton.propTypes = {
   active: PropTypes.bool.isRequired,
   isUserLoggedIn: PropTypes.bool.isRequired,
+  caption: PropTypes.string.isRequired,
   onRegisterSupporter: PropTypes.func
 };
 export default SupportButton;

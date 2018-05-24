@@ -6,6 +6,7 @@ import TPOComponent from '../TpoProjects/TPOComponent';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
+import SupportButton from './SupportButton';
 
 class PublicTreecounter extends Component {
   constructor() {
@@ -82,6 +83,7 @@ class PublicTreecounter extends Component {
         )}
         <div className="search-container__content sidenav-wrapper">
           <div className="canvasContainer flex-column">
+            <SupportButton active={true} isUserLoggedIn={true} />
             <SvgContainer {...this.state.svgData} />
             {this.props.treecounterData === null ? (
               <LoadingIndicator />

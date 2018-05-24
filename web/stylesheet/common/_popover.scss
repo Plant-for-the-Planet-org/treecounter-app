@@ -6,7 +6,7 @@
 
   .pftp-popover__container {
     display: block;
-    position: absolute;
+    position: fixed;
     background-color: #fff;
     color: black;
     padding: 15px;
@@ -16,7 +16,7 @@
     box-shadow: $boxShadow;
     outline: none;
 
-    &:focus {
+    &.focus {
       right: 10px;
     }
   }

@@ -19,9 +19,5 @@
     z-index: 999;
     box-shadow: $boxShadow;
     outline: none;
-
-    &:focus {
-      right: 10px;
-    }
   }
 }

@@ -14,7 +14,10 @@ class Popover extends Component {
 
   CalculatePopoverPosition() {
     let popoverButtonRect = this.refs.popover_button.getBoundingClientRect();
-    this.popoverPosition = window.innerWidth - popoverButtonRect.right;
+    this.popoverPosition = {
+      right: window.innerWidth - popoverButtonRect.right,
+      top: popoverButtonRect.bottom
+    };
   }
 
   PopoverClicked() {
@@ -45,12 +48,30 @@ class Popover extends Component {
           {button}
         </div>
         <div
+          className="pftp-popover__arrow"
+          style={
+            this.state.focused
+              ? {
+                  right: this.popoverPosition.right,
+                  top: this.popoverPosition.top
+                }
+              : null
+          }
+        />
+        <div
           className="pftp-popover__container"
           ref="popover"
           tabIndex="0"
           onBlur={this.PopoverBlurred}
           onFocus={this.PopoverFocused}
-          style={this.state.focused ? { right: this.popoverPosition } : null}
+          style={
+            this.state.focused
+              ? {
+                  right: this.popoverPosition.right - 10,
+                  top: this.popoverPosition.top + 15
+                }
+              : null
+          }
         >
           {children}
         </div>

@@ -20,4 +20,16 @@
     box-shadow: $boxShadow;
     outline: none;
   }
+  .pftp-popover__arrow {
+    position: fixed;
+    right: -10000px;
+    z-index: 999;
+    outline: none;
+    // Arrow
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 15px solid white;
+  }
 }

@@ -1,0 +1,23 @@
+.pftp-popover {
+  .pftp-popover__button {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .pftp-popover__container {
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    color: black;
+    padding: 15px;
+    overflow: auto;
+    right: -10000px;
+    z-index: 999;
+    box-shadow: $boxShadow;
+    outline: none;
+
+    &:focus {
+      right: 10px;
+    }
+  }
+}

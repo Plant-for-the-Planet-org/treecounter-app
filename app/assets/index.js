@@ -17,8 +17,12 @@ import tree from './images/tree.svg';
 import SideMenuImage from './images/side_menu.png';
 import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
+import checkedIcon from './images/icons/checkbox_checked.png';
+import uncheckedIcon from './images/icons/checkbox_unchecked.png';
 
 export {
+  checkedIcon,
+  uncheckedIcon,
   RedEmail,
   GreenEmail,
   SideMenuImage,

@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import UserDetails from './UserDetails';
 import { Popover, OverlayTrigger, Button } from 'react-bootstrap';
 import Notification from './Notification';
-import * as constants from '../../SupportedLanguages/en';
-import { getLocalRoute } from '../../actions/apiRouting';
+import { updateRoute } from '../../helpers/routerHelper';
 
 const popoverNotification = (
   <Popover id="popover-trigger-focus">
@@ -20,12 +19,6 @@ const popoverAccount = (userProfile, onLogout) => (
 );
 
 const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
-  console.log(
-    'HeaderFields',
-    window.location.pathname,
-    getLocalRoute('app_login')
-  );
-
   return isLoggedIn ? (
     <div className="header-icons">
       <OverlayTrigger
@@ -48,8 +41,19 @@ const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
       </OverlayTrigger>
     </div>
   ) : (
-    <div className="header-icons no-login">
-      <a href={getLocalRoute('app_login')}>{constants.formStrings.logIn}</a>
+    <div className="header-icons">
+      <div
+        onClick={updateRoute.bind(this, 'app_login')}
+        className="rounded-buttons"
+      >
+        Log In
+      </div>
+      <div
+        onClick={updateRoute.bind(this, 'app_signup')}
+        className="rounded-buttons"
+      >
+        Sign Up
+      </div>
     </div>
   );
 };

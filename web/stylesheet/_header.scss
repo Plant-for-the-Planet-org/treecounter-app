@@ -40,8 +40,9 @@
   }
 
   .header-icons {
+    display: flex;
     color: white;
-    flex: 1;
+    margin-right: 20px;
     text-align: right;
 
     .btn:focus {
@@ -50,11 +51,20 @@
     .btn {
       color: white;
     }
+
+    .rounded-buttons {
+      margin-right: 10px;
+      padding: 5px 10px;
+      font-size: 12px;
+      border: 1px solid;
+      line-height: 1.5;
+      border-radius: 20px;
+    }
   }
   .no-login {
     padding: 0 20px;
 
-    a{
+    a {
       color: white;
     }
   }

@@ -6,10 +6,9 @@
   z-index: 1000;
 
   form {
-    max-width: 600px;
     display: flex;
     flex: 2;
-    justify-content: center;
+    justify-content: flex-end;
 
     input {
       border-radius: 5px !important;

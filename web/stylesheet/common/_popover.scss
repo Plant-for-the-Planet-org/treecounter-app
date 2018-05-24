@@ -1,7 +1,11 @@
 .pftp-popover {
+  display: flex;
+  padding: 0 10px;
+
   .pftp-popover__button {
     cursor: pointer;
     user-select: none;
+    display: flex;
 
     &.focus {
       pointer-events: none;

@@ -14,7 +14,7 @@ import { currentUserProfileSelector } from '../../selectors/index';
 // import {followUnSubscribeAction} from '../../actions/followUnSubscribeAction'
 // import {followSubscribeAction} from '../../actions/followSubscribeAction'
 // import {supportTreecounterAction} from '../../actions/supportTreecounterAction'
-
+import SvgContainer from '../Common/SvgContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Public-TreeCounter
  */
@@ -97,7 +97,9 @@ class PublicTreeCounter extends React.Component {
     const headerProps = {
       caption,
       profileType,
-      logo,
+      logo: logo
+        ? logo
+        : 'https://www.qualitylogoproducts.com/images/_icons/icon_blue_world.svg',
       isUserFollower,
       isUserLoggedIn,
       showFollow
@@ -105,21 +107,24 @@ class PublicTreeCounter extends React.Component {
     // const tpoProps = {plantProjects: userProfile.plant_projects, defaultPlantProjectId: null}
 
     return (
-      <div>
-        <div className>
-          {'tpo' !== userProfile.type &&
-            !this.isMyself() && (
-              <SupportButton
-                {...supportProps}
-                onRegisterSupporter={this.onRegisterSupporter}
-              />
-            )}
+      <div className="tree-counter-container">
+        <div className="tree-counter-header">
           <TreecounterHeader
             {...headerProps}
             followChanged={this.onFollowChanged}
           />
+          {'tpo' !== userProfile.type &&
+            !this.isMyself() && (
+              <div className="support-button-container ">
+                <SupportButton
+                  {...supportProps}
+                  onRegisterSupporter={this.onRegisterSupporter}
+                />
+              </div>
+            )}
         </div>
-        {/*<TreecounterGraphic treecounter={treecounter}/>*/}
+        <SvgContainer {...treecounter} />
+        {/* <TreecounterGraphic treecounter={treecounter} /> */}
         {/* {'tpo' === userProfile.type ?
         <TpoDonationPlantProjectSelector {...tpoProps} onSelect={this.onPlantProjectSelected}/> :
         <UserFootprint userProfile={userProfile}/>

@@ -12,23 +12,6 @@
     }
   }
 
-  .list-item__wrapper {
-    display: flex;
-  }
-
-  .profile-image {
-    height: 30px;
-    width: 30px;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 15px;
-  }
-
-  .image-rounded-border {
-    border: 1px solid;
-    border-radius: 100%;
-  }
-
   .pftp-popover__container {
     display: flex;
     flex-direction: column;
@@ -38,23 +21,10 @@
     overflow: auto;
     right: -10000px;
     border-radius: 20px;
+    min-width: 250px;
     z-index: 999;
     box-shadow: $boxShadow;
     outline: none;
-
-    .popover__list-item {
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-    }
-
-    .popover__list-item:after {
-      content: "";
-      height: 1px;
-      border-bottom: 2px solid #cccccc;
-      width: 100%;
-      margin: 10px 0px;
-    }
   }
   .pftp-popover__arrow {
     position: fixed;

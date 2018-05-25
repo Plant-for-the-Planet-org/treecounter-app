@@ -6,20 +6,8 @@ import PropTypes from 'prop-types';
 import Notification from './Notification';
 import { updateRoute } from '../../helpers/routerHelper';
 import Popover from '../Common/Popover';
-import { ProfilePic } from '../../assets';
+import { ProfilePic, EditGreen, QuestionMarkGreen } from '../../assets';
 import TextSpan from '../Common/Text/TextSpan';
-
-// const popoverNotification = (
-//   <Popover id="popover-trigger-focus">
-//     <Notification />
-//   </Popover>
-// );
-
-// const popoverAccount = (userProfile, onLogout) => (
-//   <Popover id="popover-trigger-focus">
-//     <UserDetails userProfile={userProfile} onLogout={onLogout} />
-//   </Popover>
-// );
 
 const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
   console.log(userProfile, onLogout);
@@ -47,16 +35,22 @@ const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
             </div>
           </div>
         </div>
+        <hr className="popover__divider" />
+        <div className="popover__list-item">
+          <a className="list-item__wrapper gap-14">
+            <img src={EditGreen} className="help-icons" />
+            <span className="popover__green-text">Edit Profile</span>
+          </a>
+          <a className="list-item__wrapper">
+            <img src={QuestionMarkGreen} className="help-icons" />
+            <span className="popover__green-text">Help</span>
+          </a>
+        </div>
+        <hr className="popover__divider" />
+        <div className="popover__action-link">
+          <a onClick={onLogout}>Logout</a>
+        </div>
       </Popover>
-      {/* <OverlayTrigger
-        trigger="focus"
-        placement="bottom"
-        overlay={popoverAccount(userProfile, onLogout)}
-      >
-        <Button>
-          <i className="material-icons">account_circle</i>
-        </Button>
-      </OverlayTrigger> */}
     </div>
   ) : (
     <div className="header-icons">

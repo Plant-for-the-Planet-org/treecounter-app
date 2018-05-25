@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Notification from './Notification';
 import { updateRoute } from '../../helpers/routerHelper';
 import Popover from '../Common/Popover';
+import { ProfilePic } from '../../assets';
 
 // const popoverNotification = (
 //   <Popover id="popover-trigger-focus">
@@ -26,8 +27,8 @@ const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
       <Popover button={<i className="material-icons">notifications_none</i>}>
         <Notification />
       </Popover>
-      <Popover button={<i className="material-icons">account_circle</i>}>
-        <div>Dummy</div>
+      <Popover button={<img src={ProfilePic} className="profile-image" />}>
+        <div className="popover__list-item">Dummy</div>
       </Popover>
       {/* <OverlayTrigger
         trigger="focus"

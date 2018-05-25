@@ -12,28 +12,51 @@
     }
   }
 
+  .profile-image {
+    height: 30px;
+    border: 1px solid;
+    border-radius: 100%;
+    width: 30px;
+  }
+
   .pftp-popover__container {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: fixed;
     background-color: #fff;
     color: black;
-    padding: 15px;
     overflow: auto;
     right: -10000px;
+    border-radius: 10%;
     z-index: 999;
     box-shadow: $boxShadow;
     outline: none;
+
+    .popover__list-item {
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+    }
+
+    .popover__list-item:after {
+      content: "";
+      height: 1px;
+      border-bottom: 2px solid #cccccc;
+      width: 100%;
+      margin: 10px 0px;
+    }
   }
   .pftp-popover__arrow {
     position: fixed;
     right: -10000px;
-    z-index: 999;
+    z-index: 1000;
     outline: none;
+    margin-top: 5px;
     // Arrow
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
     border-bottom: 15px solid white;
   }
 }

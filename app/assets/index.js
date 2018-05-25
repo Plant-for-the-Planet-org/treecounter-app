@@ -19,8 +19,10 @@ import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
 import checkedIcon from './images/icons/checkbox_checked.png';
 import uncheckedIcon from './images/icons/checkbox_unchecked.png';
+import ProfilePic from './images/profile_pics.png';
 
 export {
+  ProfilePic,
   checkedIcon,
   uncheckedIcon,
   RedEmail,

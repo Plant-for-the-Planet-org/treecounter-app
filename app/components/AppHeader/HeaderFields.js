@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import UserDetails from './UserDetails';
-// import { Popover, OverlayTrigger, Button } from 'react-bootstrap';
+import { ProfilePic } from '../../assets';
 import Notification from './Notification';
 import { updateRoute } from '../../helpers/routerHelper';
 import Popover from '../Common/Popover';
-import { ProfilePic, EditGreen, QuestionMarkGreen } from '../../assets';
-import TextSpan from '../Common/Text/TextSpan';
+import UserDetails from './UserDetails';
 
 const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
   console.log(userProfile, onLogout);
@@ -24,32 +22,7 @@ const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
           />
         }
       >
-        <div className="popover__list-item">
-          <div className="list-item__wrapper">
-            <img src={ProfilePic} className="profile-image" />
-            <div>
-              <TextSpan strong={true}>
-                {'Hi ' + userProfile.name + '!'}
-              </TextSpan>
-              <TextSpan>{userProfile.email}</TextSpan>
-            </div>
-          </div>
-        </div>
-        <hr className="popover__divider" />
-        <div className="popover__list-item">
-          <a className="list-item__wrapper gap-14">
-            <img src={EditGreen} className="help-icons" />
-            <span className="popover__green-text">Edit Profile</span>
-          </a>
-          <a className="list-item__wrapper">
-            <img src={QuestionMarkGreen} className="help-icons" />
-            <span className="popover__green-text">Help</span>
-          </a>
-        </div>
-        <hr className="popover__divider" />
-        <div className="popover__action-link">
-          <a onClick={onLogout}>Logout</a>
-        </div>
+        <UserDetails userProfile={userProfile} onLogout={onLogout} />
       </Popover>
     </div>
   ) : (

@@ -17,8 +17,14 @@ import tree from './images/tree.svg';
 import SideMenuImage from './images/side_menu.png';
 import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
+import MapPinRed from './images/map_pin_red.png';
+import MapPinGreen from './images/map_pin_green.png';
+import MapPinBlue from './images/map_pin_blue.png';
 
 export {
+  MapPinBlue,
+  MapPinGreen,
+  MapPinRed,
   RedEmail,
   GreenEmail,
   SideMenuImage,

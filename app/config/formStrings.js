@@ -37,6 +37,6 @@ export const formStrings = {
   singleTree: 'Single Tree',
   severalTrees: 'Several Trees',
   registerFurther: 'Register Further Trees',
-  DONATETREES: 'Donate Trees',
+  DONATETREES: 'Donated Trees',
   noContributions: 'No Contributions'
 };

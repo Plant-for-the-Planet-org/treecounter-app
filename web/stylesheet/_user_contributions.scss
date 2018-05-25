@@ -40,16 +40,12 @@
 .user-contributions__location--icons {
   display: flex;
   max-width: 600px;
-  margin: auto;
-  justify-content: space-between;
+  margin-top: 10px;
+  justify-content: flex-end;
 
-  .user-contributions__location--icons--container {
-    display: flex;
-    align-items: center;
-
-    .user-contributions__location--icons--img {
-      height: 32px;
-    }
+  .user-contributions__location--icons--img {
+    height: 32px;
+    margin-left: 10px;
   }
 }
 

@@ -12,6 +12,8 @@
 .pftp-text-span {
   @extend .pftp-text-basic;
   text-align: left;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .bold {

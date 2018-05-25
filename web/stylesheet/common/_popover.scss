@@ -12,11 +12,21 @@
     }
   }
 
+  .list-item__wrapper {
+    display: flex;
+  }
+
   .profile-image {
     height: 30px;
+    width: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 15px;
+  }
+
+  .image-rounded-border {
     border: 1px solid;
     border-radius: 100%;
-    width: 30px;
   }
 
   .pftp-popover__container {
@@ -27,7 +37,7 @@
     color: black;
     overflow: auto;
     right: -10000px;
-    border-radius: 10%;
+    border-radius: 20px;
     z-index: 999;
     box-shadow: $boxShadow;
     outline: none;
@@ -35,7 +45,7 @@
     .popover__list-item {
       display: flex;
       flex-direction: column;
-      padding: 15px;
+      padding: 20px;
     }
 
     .popover__list-item:after {

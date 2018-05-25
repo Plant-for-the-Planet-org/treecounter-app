@@ -7,6 +7,7 @@ import Notification from './Notification';
 import { updateRoute } from '../../helpers/routerHelper';
 import Popover from '../Common/Popover';
 import { ProfilePic } from '../../assets';
+import TextSpan from '../Common/Text/TextSpan';
 
 // const popoverNotification = (
 //   <Popover id="popover-trigger-focus">
@@ -27,8 +28,25 @@ const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
       <Popover button={<i className="material-icons">notifications_none</i>}>
         <Notification />
       </Popover>
-      <Popover button={<img src={ProfilePic} className="profile-image" />}>
-        <div className="popover__list-item">Dummy</div>
+      <Popover
+        button={
+          <img
+            src={ProfilePic}
+            className="profile-image image-rounded-border"
+          />
+        }
+      >
+        <div className="popover__list-item">
+          <div className="list-item__wrapper">
+            <img src={ProfilePic} className="profile-image" />
+            <div>
+              <TextSpan strong={true}>
+                {'Hi ' + userProfile.name + '!'}
+              </TextSpan>
+              <TextSpan>{userProfile.email}</TextSpan>
+            </div>
+          </div>
+        </div>
       </Popover>
       {/* <OverlayTrigger
         trigger="focus"

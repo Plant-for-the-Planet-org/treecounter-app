@@ -15,6 +15,7 @@ import { currentUserProfileSelector } from '../../selectors/index';
 // import {followSubscribeAction} from '../../actions/followSubscribeAction'
 // import {supportTreecounterAction} from '../../actions/supportTreecounterAction'
 import SvgContainer from '../Common/SvgContainer';
+import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Public-TreeCounter
  */
@@ -25,6 +26,9 @@ class PublicTreeCounter extends React.Component {
     this.onFollowChanged = this.onFollowChanged.bind(this);
     this.onPlantProjectSelected = this.onPlantProjectSelected.bind(this);
     this.onRegisterSupporter = this.onRegisterSupporter.bind(this);
+    this.state = {
+      svgData: {}
+    };
   }
 
   //------------------------------------------------------------------------------------------------------------
@@ -73,10 +77,28 @@ class PublicTreeCounter extends React.Component {
   }
 
   onRegisterSupporter() {
+    console.log('**onRegisterSupporter**');
     // this.props.supportTreecounter(this.props.treecounter)
     //history.push(getLocalRoute('app_donateTrees'))
   }
 
+  componentWillReceiveProps(nextProps) {
+    setTimeout(() => {
+      const treecounter = nextProps.treecounter;
+      if (treecounter) {
+        let svgData = {
+          id: treecounter.id,
+          target: treecounter.countTarget,
+          planted: treecounter.countPlanted,
+          community: treecounter.countCommunity,
+          personal: treecounter.countPersonal,
+          targetComment: treecounter.targetComment,
+          targetYear: treecounter.targetYear
+        };
+        this.setState({ svgData });
+      }
+    }, 1);
+  }
   render() {
     const { treecounter, currentUserProfile } = this.props;
     if (null === treecounter) {
@@ -97,9 +119,7 @@ class PublicTreeCounter extends React.Component {
     const headerProps = {
       caption,
       profileType,
-      logo: logo
-        ? logo
-        : 'https://www.qualitylogoproducts.com/images/_icons/icon_blue_world.svg',
+      logo,
       isUserFollower,
       isUserLoggedIn,
       showFollow
@@ -123,8 +143,10 @@ class PublicTreeCounter extends React.Component {
               </div>
             )}
         </div>
-        <SvgContainer {...treecounter} />
-        {/* <TreecounterGraphic treecounter={treecounter} /> */}
+        <div className="canvasContainer flex-column">
+          <SvgContainer {...this.state.svgData} />
+          <TreecounterGraphicsText treecounterData={this.state.svgData} />
+        </div>
         {/* {'tpo' === userProfile.type ?
         <TpoDonationPlantProjectSelector {...tpoProps} onSelect={this.onPlantProjectSelected}/> :
         <UserFootprint userProfile={userProfile}/>

@@ -14,11 +14,13 @@ const SupportButton = ({
       onClick={() => onRegisterSupporter()}
       disable={active ? 'active' : 'inactive'}
     >
-      Support {caption}
+      Support
+      <span className="support-button-caption">{caption}</span>
     </SecondaryButton>
   ) : (
     <SecondaryButton onClick={() => onRegisterSupporter()} disable={true}>
-      Log In to Support {caption}
+      Support
+      <span className="support-button-caption">{caption}</span>
     </SecondaryButton>
   );
 };

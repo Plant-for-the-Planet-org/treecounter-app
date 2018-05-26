@@ -11,13 +11,49 @@
     width: 112px;
   }
   .material-icons {
+    @extend img;
     font-size: 112px;
   }
 }
+
 .tree-counter-container {
   align-self: normal;
   margin-top: 55px;
   flex: 1;
+  margin-left: 250px;
+}
+
+.tree-counter-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.support-button-container {
+  align-self: normal;
+  position: absolute;
+  right: 25px;
+}
+
+@media only screen and (max-width: $breakpointTablet) {
+  .tree-counter-container {
+    margin-left: inherit;
+  }
+  .tree-counter-header {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .support-button-container {
+    position: relative;
+    align-self: center;
+  }
+}
+.tree-counter-profile {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  position: relative;
+  margin: auto;
 }
 .tree-counter-name {
   @extend .pftp-text-normal;
@@ -31,15 +67,6 @@
   white-space: nowrap;
 }
 
-.tree-counter-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.support-button-container {
-  align-self: normal;
-}
 .tree-counter-row {
   margin-top: 10px;
   width: 100%;

@@ -34,3 +34,9 @@
   letter-spacing: normal;
   text-align: center;
 }
+.support-button-caption {
+  max-width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

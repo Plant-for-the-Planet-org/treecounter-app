@@ -14,7 +14,7 @@ const TreecounterHeader = ({
   followChanged
 }) => {
   return (
-    <div className="canvasContainer flex-column">
+    <div className="tree-counter-profile flex-column">
       <div className="header-logo">
         {logo ? (
           <img src={logo} />

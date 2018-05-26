@@ -17,10 +17,12 @@
 }
 
 .tree-counter-container {
-  align-self: normal;
+  align-self: center;
   margin-top: 55px;
   flex: 1;
   margin-left: 250px;
+  justify-content: center;
+  align-items: center;
 }
 
 .tree-counter-header {
@@ -91,4 +93,31 @@
     text-align: center;
     color: #ffffff;
   }
+}
+
+.tree-counter-user-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tree-counter-user-synopsis {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  font-size: 15.5px;
+  line-height: 1.52;
+  color: $headerTextColor;
+}
+.tree-counter-home-page-link {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .material-icons {
+    color: $colorPrimaryAccent;
+  }
+}
+
+.Icon-Link {
+  width: 12px;
+  height: 13px;
 }

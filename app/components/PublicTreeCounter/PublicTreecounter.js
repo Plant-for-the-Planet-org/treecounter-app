@@ -7,7 +7,7 @@ import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 // import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantProjectSelector'
-// import UserFootprint from './UserFootprint'
+import UserFootprint from './UserFootprint';
 //import {getLocalRoute} from '../../actions/apiRouting'
 import { currentUserProfileSelector } from '../../selectors/index';
 // import {selectPlantProjectIdAction} from '../../actions/selectPlantProjectIdAction'
@@ -16,6 +16,7 @@ import { currentUserProfileSelector } from '../../selectors/index';
 // import {supportTreecounterAction} from '../../actions/supportTreecounterAction'
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
+import CardLayout from '../../components/Common/Card/CardLayout';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Public-TreeCounter
  */
@@ -147,10 +148,19 @@ class PublicTreeCounter extends React.Component {
           <SvgContainer {...this.state.svgData} />
           <TreecounterGraphicsText treecounterData={this.state.svgData} />
         </div>
-        {/* {'tpo' === userProfile.type ?
-        <TpoDonationPlantProjectSelector {...tpoProps} onSelect={this.onPlantProjectSelected}/> :
-        <UserFootprint userProfile={userProfile}/>
-      } */}
+        {'tpo' === userProfile.type ? (
+          <LoadingIndicator />
+        ) : (
+          // <TpoDonationPlantProjectSelector
+          //   {...tpoProps}
+          //   onSelect={this.onPlantProjectSelected}
+          // />
+          <div className="tree-counter-user-footer">
+            <CardLayout>
+              <UserFootprint userProfile={userProfile} />
+            </CardLayout>
+          </div>
+        )}
       </div>
     );
   }

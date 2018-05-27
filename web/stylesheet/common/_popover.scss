@@ -3,14 +3,14 @@
   padding: 0 10px;
   align-items: center;
 
+  img {
+    height: 30px;
+  }
+
   .pftp-popover__button {
     cursor: pointer;
     user-select: none;
     display: flex;
-
-    img {
-      height: 30px;
-    }
 
     &.focus {
       pointer-events: none;
@@ -30,6 +30,7 @@
     z-index: 999;
     box-shadow: $boxShadow;
     outline: none;
+    padding: 20px;
   }
   .pftp-popover__arrow {
     position: fixed;

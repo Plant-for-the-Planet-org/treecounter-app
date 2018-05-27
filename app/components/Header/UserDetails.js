@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { ProfilePic, EditGreen, QuestionMarkGreen } from '../../assets';
 import TextSpan from '../Common/Text/TextSpan';
+import TransparentButton from '../Common/Button/TransparentButton';
 
 const UserDetails = ({ userProfile, onLogout }) => {
   return (
@@ -18,14 +19,14 @@ const UserDetails = ({ userProfile, onLogout }) => {
       </div>
       <hr className="divider__light" />
       <div className="popover__list-item">
-        <a className="list-item__wrapper gap-14">
-          <img src={EditGreen} className="help-icons" />
-          <span className="popover__green-text">Edit Profile</span>
-        </a>
-        <a className="list-item__wrapper">
-          <img src={QuestionMarkGreen} className="help-icons" />
-          <span className="popover__green-text">Help</span>
-        </a>
+        <TransparentButton>
+          <img src={EditGreen} />
+          <span>Edit Profile</span>
+        </TransparentButton>
+        <TransparentButton>
+          <img src={QuestionMarkGreen} />
+          <span>Help</span>
+        </TransparentButton>
       </div>
       <hr className="divider__light" />
       <div className="popover__action-link">

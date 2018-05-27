@@ -28,3 +28,22 @@
   white-space: nowrap;
   border-radius: 10px;
 }
+
+.pftp-button-transparent {
+  color: $colorPrimary;
+  text-align: left;
+  cursor: pointer;
+  padding: 5px 0;
+
+  &:hover {
+    color: $colorPrimary;
+  }
+
+  img {
+    height: 18px !important;
+  }
+
+  span {
+    padding: 0 10px;
+  }
+}

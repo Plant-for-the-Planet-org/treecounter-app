@@ -16,7 +16,7 @@ const UserDetails = ({ userProfile, onLogout }) => {
           </div>
         </div>
       </div>
-      <hr className="popover__divider" />
+      <hr className="divider__light" />
       <div className="popover__list-item">
         <a className="list-item__wrapper gap-14">
           <img src={EditGreen} className="help-icons" />
@@ -27,7 +27,7 @@ const UserDetails = ({ userProfile, onLogout }) => {
           <span className="popover__green-text">Help</span>
         </a>
       </div>
-      <hr className="popover__divider" />
+      <hr className="divider__light" />
       <div className="popover__action-link">
         <a onClick={onLogout}>Logout</a>
       </div>

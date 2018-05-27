@@ -48,6 +48,7 @@
   .support-button-container {
     position: relative;
     align-self: center;
+    right: 0;
   }
 }
 .tree-counter-profile {
@@ -112,12 +113,9 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  .material-icons {
-    color: $colorPrimaryAccent;
+  img {
+    width: 12px;
+    height: 13px;
+    margin-right: 7px;
   }
-}
-
-.Icon-Link {
-  width: 12px;
-  height: 13px;
 }

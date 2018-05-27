@@ -74,7 +74,7 @@ PublicTreecounterContainer.propTypes = {
   treecounterData: PropTypes.object,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      treecounterId: PropTypes.number
+      treecounterId: PropTypes.string
     })
   }).isRequired
 };

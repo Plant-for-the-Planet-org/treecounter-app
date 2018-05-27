@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
+import { profile } from '../../assets';
 
 const TreecounterHeader = ({
   caption,
@@ -15,13 +16,7 @@ const TreecounterHeader = ({
 }) => {
   return (
     <div className="tree-counter-profile flex-column">
-      <div className="header-logo">
-        {logo ? (
-          <img src={logo} />
-        ) : (
-          <i className="material-icons">account_circle</i>
-        )}
-      </div>
+      <div className="header-logo">{<img src={logo ? logo : profile} />}</div>
       <div className="tree-counter-name">{caption}</div>
       <div className="tree-counter-row">
         <UserProfileTypeLabel profileType={profileType} />

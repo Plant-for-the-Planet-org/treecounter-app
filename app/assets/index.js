@@ -17,6 +17,9 @@ import tree from './images/tree.svg';
 import SideMenuImage from './images/side_menu.png';
 import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
+import chevron_right from './images/icons/chevron_right.png';
+import profile from './images/icons/profile.png';
+import link from './images/icons/link.png';
 
 export {
   RedEmail,
@@ -37,5 +40,8 @@ export {
   target_outline,
   pot,
   loadingBar,
-  tree
+  tree,
+  chevron_right,
+  profile,
+  link
 };

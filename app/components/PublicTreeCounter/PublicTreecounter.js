@@ -103,7 +103,11 @@ class PublicTreeCounter extends React.Component {
   render() {
     const { treecounter, currentUserProfile } = this.props;
     if (null === treecounter) {
-      return <LoadingIndicator />;
+      return (
+        <div className="trillion-container sidenav-wrapper">
+          <LoadingIndicator />;
+        </div>
+      );
     }
 
     const { userProfile, displayName: caption } = treecounter;
@@ -128,7 +132,7 @@ class PublicTreeCounter extends React.Component {
     // const tpoProps = {plantProjects: userProfile.plant_projects, defaultPlantProjectId: null}
 
     return (
-      <div className="tree-counter-container">
+      <div className="tree-counter-container trillion-container sidenav-wrapper">
         <div className="tree-counter-header">
           <TreecounterHeader
             {...headerProps}
@@ -167,7 +171,7 @@ class PublicTreeCounter extends React.Component {
 }
 
 PublicTreeCounter.propTypes = {
-  treecounter: PropTypes.object.isRequired,
+  treecounter: PropTypes.object,
   currentUserProfile: PropTypes.object
   // supportTreecounter: PropTypes.func.isRequired,
   // selectPlantProjectIdAction: PropTypes.func.isRequired,

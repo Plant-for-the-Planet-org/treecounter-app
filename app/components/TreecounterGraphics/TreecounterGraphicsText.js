@@ -29,7 +29,7 @@ class TreecounterGraphicsText extends Component {
       <div className="svg-text-container">
         <div className="svg-text-container__row">
           <img className="svg-text-container__row--col" src={pot} />
-          <div className="svg-text-container__row--col">
+          <div className="svg-text-container__row--col2">
             <span>
               Target by {targetYear} <br />
               <strong>{target}</strong>
@@ -47,15 +47,17 @@ class TreecounterGraphicsText extends Component {
         <hr className="svg-text-container__bar" />
         <div className="svg-text-container__row">
           <img className="svg-text-container__row--col" src={tree} />
-          <div className="svg-text-container__row--col">
+          <div className="svg-text-container__row--col2">
             <span>
               Planted
-              <ArrowButton
-                onToggle={e => this.setState({ ifPlantedDetails: e })}
-              />{' '}
               <br />
               <strong>{planted}</strong>
             </span>
+          </div>
+          <div className="svg-text-container__row--col2">
+            <ArrowButton
+              onToggle={e => this.setState({ ifPlantedDetails: e })}
+            />{' '}
           </div>
         </div>
         {this.state.ifPlantedDetails ? (

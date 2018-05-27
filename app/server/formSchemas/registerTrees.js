@@ -13,17 +13,11 @@ export const singleTreeForm = {
       widget: 'date',
       propertyOrder: 2
     },
-    geoLongitude: {
-      type: 'number',
-      title: 'label.geo_longitude',
+    geoLocation: {
+      type: 'string',
+      title: 'label.geo_location',
       widget: 'map',
       propertyOrder: 3
-    },
-    geoLatitude: {
-      type: 'number',
-      title: 'label.geo_latitude',
-      widget: 'map',
-      propertyOrder: 4
     },
     country: {
       enum: [
@@ -542,7 +536,7 @@ export const singleTreeForm = {
       ],
       type: 'string',
       title: 'label.country',
-      propertyOrder: 5
+      propertyOrder: 4
     },
     contributionImages: {
       type: 'array',
@@ -560,27 +554,34 @@ export const singleTreeForm = {
         },
         required: ['imageFile']
       },
+      propertyOrder: 5
+    },
+    treeCount: {
+      type: 'integer',
+      title: 'label.tree_count',
+      attr: {
+        pattern: '.{1,}'
+      },
+      pattern: '.{1,}',
       propertyOrder: 6
     },
-    // treeCount: {
-    //   type: 'number',
-    //   title: 'label.tree_count',
-    //   widget: 'hidden',
-    //   propertyOrder: 7
-    // },
     treeClassification: {
       type: 'string',
       title: 'label.tree_classification',
-      attr: { maxlength: 255 },
+      attr: {
+        maxlength: 255
+      },
       maxLength: 255,
-      propertyOrder: 8
+      propertyOrder: 7
     },
     treeScientificName: {
       type: 'string',
       title: 'label.tree_scientific_name',
-      attr: { maxlength: 255 },
+      attr: {
+        maxlength: 255
+      },
       maxLength: 255,
-      propertyOrder: 9
+      propertyOrder: 8
     },
     contributionMeasurements: {
       type: 'array',
@@ -608,10 +609,10 @@ export const singleTreeForm = {
         },
         required: ['diameter', 'height', 'measurementDate']
       },
-      propertyOrder: 10
+      propertyOrder: 9
     }
   },
-  required: ['treeSpecies', 'plantDate', 'country'],
+  required: ['treeSpecies', 'plantDate', 'country', 'treeCount'],
   submit_url: '',
   submit_method: 'POST'
 };
@@ -620,26 +621,29 @@ export const multipleTreesForm = {
   title: 'plant_contribution',
   type: 'object',
   properties: {
+    treeCount: {
+      type: 'integer',
+      title: 'label.tree_count',
+      attr: {
+        pattern: '.{1,}'
+      },
+      pattern: '.{1,}',
+      propertyOrder: 1
+    },
     treeSpecies: {
       type: 'string',
       title: 'label.tree_species',
-      propertyOrder: 1
+      propertyOrder: 2
     },
     plantDate: {
       type: 'string',
       title: 'label.plant_date',
       widget: 'date',
-      propertyOrder: 2
-    },
-    geoLongitude: {
-      type: 'number',
-      title: 'label.geo_longitude',
-      widget: 'map',
       propertyOrder: 3
     },
-    geoLatitude: {
-      type: 'number',
-      title: 'label.geo_latitude',
+    geoLocation: {
+      type: 'string',
+      title: 'label.geo_location',
       widget: 'map',
       propertyOrder: 4
     },
@@ -1179,16 +1183,9 @@ export const multipleTreesForm = {
         required: ['imageFile']
       },
       propertyOrder: 6
-    },
-    treeCount: {
-      type: 'integer',
-      title: 'label.tree_count',
-      attr: { pattern: '.{1,}' },
-      pattern: '.{1,}',
-      propertyOrder: 7
     }
   },
-  required: ['treeSpecies', 'plantDate', 'country', 'treeCount'],
+  required: ['treeCount', 'treeSpecies', 'plantDate', 'country'],
   submit_url: '',
   submit_method: 'POST'
 };

@@ -5,7 +5,6 @@ import t from 'tcomb-form';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextHeading from '../Common/Text/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
-import Map from '../Common/EsriMap/Map';
 import {
   singleTreeRegisterFormSchema,
   schemaOptionsSingleTree,
@@ -68,7 +67,6 @@ export default class RegisterTrees extends Component {
               </label>
             </form>
           </div>
-          <Map onMapsClick={e => this.onMapSelect(e)} />
           <div
             className={
               'register-tree__form ' +

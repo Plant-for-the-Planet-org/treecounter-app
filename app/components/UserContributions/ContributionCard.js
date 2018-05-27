@@ -28,6 +28,16 @@ const ContributionCard = ({ contribution }) => (
         </TextSpan>
         <TextSpan>{contribution.plantDate}</TextSpan>
       </div>
+      <div className="contribution-container__right-column">
+        {contribution.contributionMeasurements.map(value => console.log(value))}
+        <TextSpan strong={true}>
+          {contribution.treeCount + ' ' + contribution.treeType + ' tree'}
+        </TextSpan>
+        <TextSpan>
+          {contribution.geoLatitude + ', ' + contribution.geoLongitude}
+        </TextSpan>
+        <TextSpan>{contribution.plantDate}</TextSpan>
+      </div>
     </div>
     <hr className="contribution-container__partition" />
   </div>

@@ -13,9 +13,9 @@
     padding: 10px 10px 30px 10px;
     position: relative;
     display: flex;
+    justify-content: space-between;
     height: 80px;
     margin-bottom: 10px;
-    flex-direction: column;
 
     .contribution-container__left-column {
       text-transform: capitalize;

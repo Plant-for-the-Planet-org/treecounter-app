@@ -6,14 +6,15 @@ import parseJsonToTcomb from '../parserLiformToTcomb';
 
 const {
   transformedSchema: singleTreeRegisterFormSchema,
-  schemaOptionsSingleTree
+  schemaOptions: schemaOptionsSingleTree
 } = parseJsonToTcomb(singleTreeForm);
 
 const {
   transformedSchema: multipleTreesRegisterFormSchema,
-  schemaOptionsMultipleTrees
+  schemaOptions: schemaOptionsMultipleTrees
 } = parseJsonToTcomb(multipleTreesForm);
 
+console.log(schemaOptionsSingleTree);
 export {
   singleTreeRegisterFormSchema,
   multipleTreesRegisterFormSchema,

@@ -41,7 +41,7 @@ export const getLocalRoute = (routeName, params) => {
   return url;
 };
 
-export const getImageUrl = (category, format, imageName) => {
+export const getImageUrl = (category, variant, imageName) => {
   const { scheme, host, base: baseUrl } = context;
-  return `${scheme}://${host}${baseUrl}/media/cache/${category}/${format}/${imageName}`;
+  return `${scheme}://${host}${baseUrl}/media/cache/${category}/${variant}/${imageName}`;
 };

@@ -20,8 +20,18 @@ import RedEmail from './images/email-red.png';
 import chevron_right from './images/icons/chevron_right.png';
 import profile from './images/icons/profile.png';
 import link from './images/icons/link.png';
+import checkedIcon from './images/icons/checkbox_checked.png';
+import uncheckedIcon from './images/icons/checkbox_unchecked.png';
+import ProfilePic from './images/profile_pics.png';
+import EditGreen from './images/icons/edit_green.png';
+import QuestionMarkGreen from './images/icons/questionmark_green.png';
 
 export {
+  EditGreen,
+  QuestionMarkGreen,
+  ProfilePic,
+  checkedIcon,
+  uncheckedIcon,
   RedEmail,
   GreenEmail,
   SideMenuImage,

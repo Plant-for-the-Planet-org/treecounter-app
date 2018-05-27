@@ -11,20 +11,23 @@ import * as images from '../assets';
 export default function parseJsonToTcomb(liformSchemaJson) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));
 
-  let properties = liformSchema.properties;
+  function getParsedSchema(liformSchema) {
+    let properties = liformSchema.properties;
+    let newEnum = {};
 
-  let newEnum = {};
-  for (let propertyKey in properties) {
-    if (properties.hasOwnProperty(propertyKey)) {
-      if (properties[propertyKey].hasOwnProperty('enum')) {
-        for (let enumKeys in properties[propertyKey].enum) {
-          newEnum[properties[propertyKey].enum[enumKeys]] =
-            properties[propertyKey].enum_titles[enumKeys];
+    for (let propertyKey in properties) {
+      if (properties.hasOwnProperty(propertyKey)) {
+        if (properties[propertyKey].hasOwnProperty('enum')) {
+          for (let enumKeys in properties[propertyKey].enum) {
+            newEnum[properties[propertyKey].enum[enumKeys]] =
+              properties[propertyKey].enum_titles[enumKeys];
+          }
+          properties[propertyKey].enum = newEnum;
+          delete properties[propertyKey].enum_titles;
         }
-        properties[propertyKey].enum = newEnum;
-        delete properties[propertyKey].enum_titles;
       }
     }
+    return liformSchema;
   }
 
   function getSchemaOptions(liformSchema) {
@@ -108,6 +111,6 @@ export default function parseJsonToTcomb(liformSchemaJson) {
 
   let schemaOptions = getSchemaOptions(liformSchema);
 
-  let transformedSchema = transform(liformSchema);
+  let transformedSchema = transform(getParsedSchema(liformSchema));
   return { schemaOptions: schemaOptions, transformedSchema: transformedSchema };
 }

@@ -16,12 +16,7 @@ const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
         <Notification />
       </Popover>
       <Popover
-        button={
-          <img
-            src={ProfilePic}
-            className="profile-image image-rounded-border"
-          />
-        }
+        button={<img src={ProfilePic} className="image-rounded-border" />}
       >
         <UserDetails userProfile={userProfile} onLogout={onLogout} />
       </Popover>

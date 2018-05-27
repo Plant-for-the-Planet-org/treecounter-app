@@ -1,11 +1,16 @@
 .pftp-popover {
   display: flex;
   padding: 0 10px;
+  align-items: center;
 
   .pftp-popover__button {
     cursor: pointer;
     user-select: none;
     display: flex;
+
+    img {
+      height: 30px;
+    }
 
     &.focus {
       pointer-events: none;

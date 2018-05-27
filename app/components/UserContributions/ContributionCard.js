@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
+
 import TextSpan from '../Common/Text/TextSpan';
 
 const ContributionCard = ({ contribution }) => (
@@ -26,17 +28,20 @@ const ContributionCard = ({ contribution }) => (
         <TextSpan>
           {contribution.geoLatitude + ', ' + contribution.geoLongitude}
         </TextSpan>
-        <TextSpan>{contribution.plantDate}</TextSpan>
+        <TextSpan>
+          {moment(new Date(contribution.plantDate)).format('DD MMM YYYY')}
+        </TextSpan>
       </div>
       <div className="contribution-container__right-column">
-        {contribution.contributionMeasurements.map(value => console.log(value))}
-        <TextSpan strong={true}>
-          {contribution.treeCount + ' ' + contribution.treeType + ' tree'}
-        </TextSpan>
-        <TextSpan>
-          {contribution.geoLatitude + ', ' + contribution.geoLongitude}
-        </TextSpan>
-        <TextSpan>{contribution.plantDate}</TextSpan>
+        {contribution.contributionMeasurements.map(measurement => (
+          <TextSpan>
+            {contribution.plantDate === measurement.measurementDate
+              ? 'Planting Day'
+              : new Date(measurement.measurementDate).toLocaleDateString() +
+                (measurement.diameter + 'cm').padStart(10) +
+                ((measurement.height / 100).toFixed(1) + 'm').padStart(10)}
+          </TextSpan>
+        ))}
       </div>
     </div>
     <hr className="contribution-container__partition" />

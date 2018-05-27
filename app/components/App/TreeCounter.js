@@ -21,7 +21,7 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import Footer from '../Footer';
 
 // Components which use SVG
-import PublicTreecounter from '../TreecounterGraphics/PublicTreecounter';
+import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
 import Trillion from '../TreecounterGraphics/Trillion';
 import Home from '../TreecounterGraphics/Home';
 
@@ -156,9 +156,9 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_userHome')}
                 component={Home}
               />
-              <PublicRoute
+              <Route
                 path="/treecounterLookup/:treecounterId"
-                component={PublicTreecounter}
+                component={PublicTreecounterContainer}
               />
             </div>
             <Footer />

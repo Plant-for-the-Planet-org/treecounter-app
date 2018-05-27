@@ -18,6 +18,29 @@
   background-color: $colorPrimaryAccent;
 }
 
+.pftp-button-follow {
+  @extend .pftp-button-primary;
+  margin: 0 10px;
+  border-radius: 0;
+  padding: 0;
+  height: 30px;
+  width: inherit;
+  background-color: white;
+  color: $colorPrimaryAccentLight;
+  font-size: 17px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  padding: 0 24px;
+}
+.support-button-caption {
+  max-width: 115px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 .pftp-button-rounded {
   @extend .pftp-button-primary;
   background-color: transparent;

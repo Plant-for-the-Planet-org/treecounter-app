@@ -17,6 +17,9 @@ import tree from './images/tree.svg';
 import SideMenuImage from './images/side_menu.png';
 import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
+import chevron_right from './images/icons/chevron_right.png';
+import profile from './images/icons/profile.png';
+import link from './images/icons/link.png';
 import checkedIcon from './images/icons/checkbox_checked.png';
 import uncheckedIcon from './images/icons/checkbox_unchecked.png';
 import ProfilePic from './images/profile_pics.png';
@@ -47,5 +50,8 @@ export {
   target_outline,
   pot,
   loadingBar,
-  tree
+  tree,
+  chevron_right,
+  profile,
+  link
 };

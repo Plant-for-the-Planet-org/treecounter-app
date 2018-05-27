@@ -3,7 +3,7 @@ import Autosuggest from 'react-autosuggest';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-
+import { postRequest } from '../../utils/api';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 
 function escapeRegexCharacters(str) {
@@ -11,39 +11,26 @@ function escapeRegexCharacters(str) {
 }
 
 const getSuggestions = value => {
-  let bodyFormData = new FormData();
-  let jdata = {};
-  bodyFormData.set('q', value.trim());
+  return new Promise(resolve => {
+    postRequest('search2', 'q=' + value.trim()).then(result => {
+      let jdata = result.data;
+      const escapedValue = escapeRegexCharacters(value.trim());
+      if (escapedValue === '') {
+        resolve([]);
+      }
+      const regex = new RegExp('\\b' + escapedValue, 'i');
 
-  let xhttp = new XMLHttpRequest();
-  xhttp.open(
-    'POST',
-    'https://staging.trilliontreecampaign.org/app_dev.php/search2',
-    false
-  ); // had to make a sync request until we find a proper async solution
-  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      jdata = this.responseText;
-    }
-  };
-
-  xhttp.send('q=' + value.trim());
-
-  const escapedValue = escapeRegexCharacters(value.trim());
-  if (escapedValue === '') {
-    return [];
-  }
-
-  const regex = new RegExp('\\b' + escapedValue, 'i');
-  jdata = JSON.parse(jdata);
-
-  return jdata.filter(person => regex.test(getSuggestionValue(person)));
+      resolve(jdata.filter(person => regex.test(getSuggestionValue(person))));
+    });
+  });
 };
 
 const renderSuggestion = suggestion => {
   return (
-    <Link to={`/search/user/${suggestion.id}`} style={suggestionListItemStyle}>
+    <Link
+      to={`/treecounterLookup/${suggestion.id}`}
+      style={suggestionListItemStyle}
+    >
       <span>{suggestion.name}</span>
     </Link>
   );
@@ -70,8 +57,10 @@ class SearchAutosuggest extends Component {
   onSuggestionsFetchRequested = ({ value }) => {
     setTimeout(() => {
       if (value === this.state.value) {
-        this.setState({
-          suggestions: getSuggestions(value)
+        getSuggestions(value).then(_suggestions => {
+          this.setState({
+            suggestions: _suggestions
+          });
         });
       }
     }, 500);

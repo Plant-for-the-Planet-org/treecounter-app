@@ -1,0 +1,122 @@
+.header-logo {
+  width: 113px;
+  height: 113px;
+
+  img {
+    box-shadow: 0px 4px 12px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border: solid 6.4px #ffffff;
+    border-radius: 50%;
+    height: 112px;
+    width: 112px;
+  }
+  .material-icons {
+    @extend img;
+    font-size: 112px;
+  }
+}
+
+.tree-counter-container {
+  align-self: center;
+  margin-top: 55px;
+  flex: 1;
+  margin-left: 250px;
+  justify-content: center;
+  align-items: center;
+}
+
+.tree-counter-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.support-button-container {
+  align-self: normal;
+  position: absolute;
+  right: 25px;
+}
+
+@media only screen and (max-width: $breakpointTablet) {
+  .tree-counter-container {
+    margin-left: inherit;
+  }
+  .tree-counter-header {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .support-button-container {
+    position: relative;
+    align-self: center;
+    right: 0;
+  }
+}
+.tree-counter-profile {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  position: relative;
+  margin: auto;
+}
+.tree-counter-name {
+  @extend .pftp-text-normal;
+  max-width: 292px;
+  font-size: 30.5px;
+  text-align: center;
+  text-overflow: ellipsis;
+  color: $headerTextColor;
+  margin-top: 27px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.tree-counter-row {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  position: relative;
+}
+.profile-type-container {
+  width: 97px;
+  height: 30px;
+  background-color: #c7c7c7;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  .profile-type-label {
+    @extend .pftp-text-normal;
+    width: 77px;
+    font-size: 17px;
+    text-align: center;
+    color: #ffffff;
+    padding: 0 9px;
+  }
+}
+
+.tree-counter-user-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tree-counter-user-synopsis {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  font-size: 15.5px;
+  line-height: 1.52;
+  color: $headerTextColor;
+}
+.tree-counter-home-page-link {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  img {
+    width: 12px;
+    height: 13px;
+    margin-right: 7px;
+  }
+}

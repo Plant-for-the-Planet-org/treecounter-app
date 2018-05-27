@@ -30,11 +30,7 @@ export default class Menu extends Component {
     return (
       <SafeAreaView style={styles.outerContainer}>
         <ScrollView>
-          <View style={styles.imageStyle}>
-            <Image
-              source={require('../../../web/images/side_menu_image.png')}
-            />
-          </View>
+          <View style={styles.imageStyle} />
           {this.props.menuData.map(element => (
             <MenuGroup
               title={element.caption}

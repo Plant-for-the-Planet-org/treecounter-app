@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 // Components imports
 import TargetContainer from '../../containers/TargetContainer';
 import RegisterTree from '../RegisterTrees/RegisterTrees';
-import AppHeaderContainer from '../../containers/AppHeaderContainer';
+import HeaderContainer from '../../containers/HeaderContainer';
 import UserContributions from '../UserContributions/UserContributions';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
@@ -98,7 +98,7 @@ class TreeCounter extends Component {
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
-            <AppHeaderContainer />
+            <HeaderContainer />
             <SideMenuContainer loggedIn={isLoggedIn} />
             <div className="app-container__content">
               <PublicRoute exact path="/" component={Trillion} />

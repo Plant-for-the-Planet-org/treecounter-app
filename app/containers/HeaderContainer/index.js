@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import AppHeader from '../../components/AppHeader';
+import Header from '../../components/Header';
 
 // Actions
 import { logoutUser } from '../../actions/authActions';
 import { currentUserProfileSelector } from '../../selectors/index';
 
-class AppHeaderContainer extends React.Component {
+class HeaderContainer extends React.Component {
   render() {
     return (
-      <AppHeader
+      <Header
         userProfile={this.props.userProfile}
         logoutUser={this.props.logoutUser}
       />
@@ -33,9 +33,9 @@ const mapStateToProps = state => ({
   userProfile: currentUserProfileSelector(state)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppHeaderContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
 
-AppHeaderContainer.propTypes = {
+HeaderContainer.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   userProfile: PropTypes.object
 };

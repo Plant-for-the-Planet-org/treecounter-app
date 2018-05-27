@@ -7,7 +7,7 @@ import HeaderFields from './HeaderFields';
 import BurgerMenu from './BurgerMenu';
 import HomeButton from './HomeButton';
 
-const AppHeader = ({ logoutUser, userProfile }) => {
+const Header = ({ logoutUser, userProfile }) => {
   let isLoggedIn = null != userProfile;
   return (
     <header className="app-header">
@@ -25,9 +25,9 @@ const AppHeader = ({ logoutUser, userProfile }) => {
   );
 };
 
-export default AppHeader;
+export default Header;
 
-AppHeader.propTypes = {
+Header.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   userProfile: PropTypes.object
 };

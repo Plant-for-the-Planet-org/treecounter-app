@@ -26,8 +26,11 @@
   }
 
   .popover__action-link {
-    padding: 10px;
-    margin: auto;
+    padding-top: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
   }
 
   .help-icons {
@@ -44,6 +47,10 @@
 
   .list-item__wrapper {
     display: flex;
+
+    img {
+      padding-right: 10px;
+    }
   }
 
   .image-rounded-border {

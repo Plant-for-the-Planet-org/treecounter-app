@@ -10,7 +10,7 @@ const UserDetails = ({ userProfile, onLogout }) => {
     <div>
       <div className="popover__list-item">
         <div className="list-item__wrapper">
-          <img src={ProfilePic} className="profile-image" />
+          <img src={ProfilePic} />
           <div>
             <TextSpan strong={true}>{'Hi ' + userProfile.name + '!'}</TextSpan>
             <TextSpan>{userProfile.email}</TextSpan>

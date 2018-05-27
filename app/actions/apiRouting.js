@@ -40,3 +40,8 @@ export const getLocalRoute = (routeName, params) => {
   debug(`generated route from '${routeName}': ${url}`);
   return url;
 };
+
+export const getImageUrl = (category, format, imageName) => {
+  const { scheme, host, base: baseUrl } = context;
+  return `${scheme}://${host}${baseUrl}/media/cache/${category}/${format}/${imageName}`;
+};

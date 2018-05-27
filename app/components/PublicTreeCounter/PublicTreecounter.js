@@ -45,18 +45,19 @@ class PublicTreeCounter extends React.Component {
 
   isUserFollower() {
     const { treecounter, currentUserProfile } = this.props;
-    const followeeIds = currentUserProfile
-      ? currentUserProfile.treecounter.followee_ids
-          .split(',')
-          .map(s => parseInt(s))
-      : [];
+    const followeeIds =
+      currentUserProfile && currentUserProfile.treecounter.followee_ids
+        ? currentUserProfile.treecounter.followee_ids
+            .split(',')
+            .map(s => parseInt(s))
+        : [];
     return followeeIds.includes(treecounter.id);
   }
 
   amISupporting() {
     const { treecounter, currentUserProfile } = this.props;
     return currentUserProfile
-      ? null !== currentUserProfile.supported_treecounter &&
+      ? currentUserProfile.supported_treecounter &&
           currentUserProfile.supported_treecounter.id === treecounter.id
       : false;
   }

@@ -156,7 +156,7 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_userHome')}
                 component={Home}
               />
-              <PublicRoute
+              <Route
                 path="/treecounterLookup/:treecounterId"
                 component={PublicTreecounterContainer}
               />

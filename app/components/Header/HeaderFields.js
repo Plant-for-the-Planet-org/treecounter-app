@@ -6,6 +6,7 @@ import Notification from './Notification';
 import { updateRoute } from '../../helpers/routerHelper';
 import Popover from '../Common/Popover';
 import UserDetails from './UserDetails';
+import RoundedButton from '../Common/Button/RoundedButton';
 
 const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
   console.log(userProfile, onLogout);
@@ -27,18 +28,12 @@ const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
     </div>
   ) : (
     <div className="header-icons">
-      <div
-        onClick={updateRoute.bind(this, 'app_login')}
-        className="rounded-buttons"
-      >
+      <RoundedButton onClick={updateRoute.bind(this, 'app_login')}>
         Log In
-      </div>
-      <div
-        onClick={updateRoute.bind(this, 'app_signup')}
-        className="rounded-buttons"
-      >
+      </RoundedButton>
+      <RoundedButton onClick={updateRoute.bind(this, 'app_signup')}>
         Sign Up
-      </div>
+      </RoundedButton>
     </div>
   );
 };

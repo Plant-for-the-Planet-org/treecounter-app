@@ -10,9 +10,21 @@
   margin: 10px 0;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .pftp-button-secondary {
   @extend .pftp-button-primary;
   background-color: $colorPrimaryAccent;
+}
+
+.pftp-button-rounded {
+  @extend .pftp-button-primary;
+  background-color: transparent;
+  margin: 0 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  border: 2px solid;
+  white-space: nowrap;
+  border-radius: 10px;
 }

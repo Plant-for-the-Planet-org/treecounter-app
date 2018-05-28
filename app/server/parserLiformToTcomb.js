@@ -7,6 +7,7 @@ import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
 import { SelectTemplate } from '../components/Templates/SelectTemplate';
 import { MapTemplate } from '../components/Templates/MapTemplate';
 import { ListTemplate } from '../components/Templates/ListTemplate';
+import { FilePickerTemplate } from '../components/Templates/FilePickerTemplate';
 
 // Import assets
 import * as images from '../assets';
@@ -94,7 +95,10 @@ export default function parseJsonToTcomb(liformSchemaJson) {
             options.template = MapTemplate;
             break;
           case 'date':
-            options.type = 'date';
+            options.type = properties[propertyKey].widget;
+            break;
+          case 'file':
+            options.template = FilePickerTemplate;
             break;
         }
         // Widgets SwitchCase ENDS

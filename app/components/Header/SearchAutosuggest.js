@@ -5,10 +5,28 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { postRequest } from '../../utils/api';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
+import {
+  profile,
+  country,
+  organization,
+  company,
+  education,
+  competition
+} from '../../assets';
 
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+
+const profileType = {
+  individual: profile,
+  country,
+  tpo: organization,
+  organization,
+  company,
+  education,
+  competition
+};
 
 const getSuggestions = value => {
   return new Promise(resolve => {
@@ -27,12 +45,15 @@ const getSuggestions = value => {
 
 const renderSuggestion = suggestion => {
   return (
-    <Link
-      to={`/treecounterLookup/${suggestion.id}`}
-      style={suggestionListItemStyle}
-    >
-      <span>{suggestion.name}</span>
-    </Link>
+    <div>
+      <Link
+        to={`/treecounterLookup/${suggestion.id}`}
+        className="search-autusuggest__listitem "
+      >
+        <img src={profileType[suggestion.type]} />
+        <span>{suggestion.name}</span>
+      </Link>
+    </div>
   );
 };
 
@@ -100,13 +121,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(null, mapDispatchToProps)(SearchAutosuggest);
-
-const suggestionListItemStyle = {
-  color: '#68605F',
-  textDecoration: 'none',
-  fontFamily: 'Helvetica, sans-serif',
-  fontWeight: '300',
-  fontSize: '16px',
-  display: 'flex',
-  padding: '10px'
-};

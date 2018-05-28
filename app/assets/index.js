@@ -25,6 +25,11 @@ import uncheckedIcon from './images/icons/checkbox_unchecked.png';
 import ProfilePic from './images/profile_pics.png';
 import EditGreen from './images/icons/edit_green.png';
 import QuestionMarkGreen from './images/icons/questionmark_green.png';
+import country from './images/icons/country.png';
+import organization from './images/icons/organization.png';
+import competition from './images/icons/competition.png';
+import education from './images/icons/education.png';
+import company from './images/icons/company.png';
 
 export {
   EditGreen,
@@ -53,5 +58,10 @@ export {
   tree,
   chevron_right,
   profile,
-  link
+  link,
+  country,
+  organization,
+  competition,
+  education,
+  company
 };

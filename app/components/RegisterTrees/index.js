@@ -31,6 +31,12 @@ export default class RegisterTrees extends Component {
   }
 
   render() {
+    console.log(
+      singleTreeRegisterFormSchema,
+      schemaOptionsSingleTree,
+      multipleTreesRegisterFormSchema,
+      schemaOptionsMultipleTrees
+    );
     return (
       <div className="app-container__content--center">
         <TextHeading>Register planted trees</TextHeading>

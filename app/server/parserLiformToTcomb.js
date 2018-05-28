@@ -25,6 +25,11 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           properties[propertyKey].enum = newEnum;
           delete properties[propertyKey].enum_titles;
         }
+        if (properties[propertyKey].hasOwnProperty('items')) {
+          properties[propertyKey].items = getParsedSchema(
+            properties[propertyKey].items
+          );
+        }
       }
     }
     return liformSchema;
@@ -101,6 +106,11 @@ export default function parseJsonToTcomb(liformSchemaJson) {
         } else {
           schemaOptions['fields'][propertyKey] = options;
         }
+        if (properties[propertyKey].type === 'array') {
+          schemaOptions['fields'][propertyKey] = {
+            ...getSchemaOptions(properties[propertyKey].items)
+          };
+        }
         if (liformSchema.required.indexOf(propertyKey)) {
           options['error'] = 'required';
         }
@@ -112,5 +122,6 @@ export default function parseJsonToTcomb(liformSchemaJson) {
   let schemaOptions = getSchemaOptions(liformSchema);
 
   let transformedSchema = transform(getParsedSchema(liformSchema));
+  console.log(transformedSchema);
   return { schemaOptions: schemaOptions, transformedSchema: transformedSchema };
 }

@@ -10,13 +10,23 @@ export default class ContributionCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lightboxIsOpen: false
+      lightboxIsOpen: false,
+      currentImage: 0
     };
   }
 
   closeLightbox = () => this.setState({ lightboxIsOpen: false });
 
   openLightbox = () => this.setState({ lightboxIsOpen: true });
+
+  gotoPrevious = () =>
+    this.setState({
+      currentImage: this.state.currentImage - 1
+    });
+  gotoNext = () =>
+    this.setState({
+      currentImage: this.state.currentImage + 1
+    });
 
   render() {
     let { contribution } = this.props;
@@ -50,16 +60,21 @@ export default class ContributionCard extends React.Component {
             <TextSpan>
               {moment(new Date(contribution.plantDate)).format('DD MMM YYYY')}
             </TextSpan>
-            <div onClick={this.openLightbox}>Test</div>
+            {imagesArray.length ? (
+              <a onClick={this.openLightbox}>Pictures</a>
+            ) : null}
             <Lightbox
+              currentImage={this.state.currentImage}
               images={imagesArray}
               isOpen={this.state.lightboxIsOpen}
               onClose={this.closeLightbox}
+              onClickNext={this.gotoNext}
+              onClickPrev={this.gotoPrevious}
             />
           </div>
           <div className="contribution-container__right-column">
             {contribution.contributionMeasurements.map(measurement => (
-              <TextSpan>
+              <TextSpan key={measurement.id}>
                 {contribution.plantDate === measurement.measurementDate
                   ? 'Planting Day'
                   : new Date(measurement.measurementDate).toLocaleDateString() +

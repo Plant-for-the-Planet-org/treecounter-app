@@ -1,0 +1,26 @@
+.search-autusuggest__listitem {
+  height: 36px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+
+  img {
+    width: 25px;
+    max-height: 25px;
+    margin: 5px 9px;
+  }
+  span {
+    @extend .pftp-text-basic;
+    @extend .support-button-caption;
+    max-width: 300px;
+    font-size: 14px;
+    text-align: center;
+    color: $colorPrimary;
+  }
+}
+.react-autosuggest__suggestion {
+  :hover {
+    background-color: #f4f4f4;
+  }
+}

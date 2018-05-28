@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 // Components imports
 import TargetContainer from '../../containers/TargetContainer';
 import RegisterTreesContainer from '../../containers/RegisterTrees/RegisterTreesContainer';
-import Header from '../Header/index';
+import HeaderContainer from '../../containers/HeaderContainer';
 import UserContributions from '../UserContributions/UserContributions';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
@@ -21,7 +21,7 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import Footer from '../Footer';
 
 // Components which use SVG
-import PublicTreecounter from '../TreecounterGraphics/PublicTreecounter';
+import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
 import Trillion from '../TreecounterGraphics/Trillion';
 import Home from '../TreecounterGraphics/Home';
 
@@ -98,7 +98,7 @@ class TreeCounter extends Component {
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
-            <Header />
+            <HeaderContainer />
             <SideMenuContainer loggedIn={isLoggedIn} />
             <div className="app-container__content">
               <PublicRoute exact path="/" component={Trillion} />
@@ -156,9 +156,9 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_userHome')}
                 component={Home}
               />
-              <PublicRoute
+              <Route
                 path="/treecounterLookup/:treecounterId"
-                component={PublicTreecounter}
+                component={PublicTreecounterContainer}
               />
             </div>
             <Footer />

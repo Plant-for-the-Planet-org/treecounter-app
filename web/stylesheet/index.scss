@@ -19,6 +19,7 @@
 @import "./common/_space.scss";
 @import "./common/_checkbox.scss";
 @import "./common/_selectfield.scss";
+@import "./common/_popover.scss";
 
 // Import components SCSS
 @import "./_normalize.scss";
@@ -49,5 +50,7 @@
 // Import target SCSS
 @import "./target/target.scss";
 
+//Import tree counter SCSS
+@import "./treeCounter/tree_counter.scss";
 // ESRI Maps CSS
 @import url("https://js.arcgis.com/3.23/esri/css/esri.css");

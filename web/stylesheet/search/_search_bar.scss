@@ -1,0 +1,25 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+
+  .react-autosuggest__container {
+    position: relative;
+    margin: 0 10px;
+
+    .react-autosuggest__suggestions-container {
+      position: absolute;
+      margin-top: 1px;
+      left: 0px;
+      right: 0px;
+      background-color: white;
+    }
+  }
+
+  input {
+    border: none;
+    margin: 0;
+  }
+
+  .search-bar__button {
+  }
+}

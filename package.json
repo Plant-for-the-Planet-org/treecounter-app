@@ -29,6 +29,7 @@
     "react-autosuggest": "^9.3.4",
     "react-bootstrap": "^0.32.1",
     "react-i18next": "^7.6.1",
+    "react-images": "^0.5.17",
     "react-native": "0.55.3",
     "react-navigation": "^1.1.2",
     "react-navigation-redux-helpers": "^1.0.5",

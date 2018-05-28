@@ -93,6 +93,9 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           case 'map':
             options.template = MapTemplate;
             break;
+          case 'date':
+            options.type = 'date';
+            break;
         }
         // Widgets SwitchCase ENDS
         if (properties[propertyKey].type === 'object') {

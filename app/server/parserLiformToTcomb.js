@@ -1,11 +1,14 @@
 import transform from 'tcomb-json-schema';
 
+// Import templates
 import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
 import { TextAreaTemplate } from '../components/Templates/TextAreaTemplate';
 import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
 import { SelectTemplate } from '../components/Templates/SelectTemplate';
 import { MapTemplate } from '../components/Templates/MapTemplate';
+import { ListTemplate } from '../components/Templates/ListTemplate';
 
+// Import assets
 import * as images from '../assets';
 
 export default function parseJsonToTcomb(liformSchemaJson) {
@@ -113,10 +116,19 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           }
         } ******/
         if (properties[propertyKey].type === 'array') {
-          schemaOptions['fields'][propertyKey] = {
+          let arrayOptions = {
+            placeholder: properties[propertyKey].title,
             auto: 'none',
+            autoCapitalize: 'none',
+            disableOrder: true,
+            disableRemove: true,
+            template: ListTemplate(properties[propertyKey].title)
+          };
+          schemaOptions['fields'][propertyKey] = {
+            ...arrayOptions,
             ...{ item: getSchemaOptions(properties[propertyKey].items) }
           };
+          schemaOptions['fields'][propertyKey].item['disableOrder'] = true;
         }
         // ************************************************
         if (liformSchema.required.indexOf(propertyKey)) {

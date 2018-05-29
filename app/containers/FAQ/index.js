@@ -26,10 +26,14 @@ class FAQContainer extends React.Component {
   }
 
   render() {
-    return this.state.loading ? (
-      <LoadingIndicator />
-    ) : (
-      <FAQ faqs={this.state.faqs} />
+    return (
+      <div className="app-container__content--center sidenav-wrapper">
+        {this.state.loading ? (
+          <LoadingIndicator />
+        ) : (
+          <FAQ faqs={this.state.faqs} />
+        )}
+      </div>
     );
   }
 }

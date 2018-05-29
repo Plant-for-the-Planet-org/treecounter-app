@@ -23,11 +23,7 @@ export default class FAQ extends Component {
     ));
   }
   render() {
-    return (
-      <div className="app-container__content--center sidenav-wrapper">
-        <Accordion>{this.GetFAQList()}</Accordion>
-      </div>
-    );
+    return <Accordion>{this.GetFAQList()}</Accordion>;
   }
 }
 

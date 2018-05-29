@@ -6,7 +6,8 @@ import { history } from '../Common/BrowserRouter';
 import { sortedUserContributionsSelector } from '../../selectors/index';
 import ContributionCardList from './ContributionCardList';
 import ContributionsMapLegend from './ContributionsMapLegend';
-import Map from '../RegisterTrees/map';
+import PageHeader from '../Common/PageHeader';
+import Map from '../Common/EsriMap/Map';
 import * as constants from '../../SupportedLanguages/en';
 import TextHeading from '../Common/Text/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
@@ -28,7 +29,6 @@ const UserContributions = ({ userContributions }) => {
     };
   });
 
-  console.log(userContributions);
   return (
     <div className="app-container__content--center">
       <TextHeading>My Trees</TextHeading>

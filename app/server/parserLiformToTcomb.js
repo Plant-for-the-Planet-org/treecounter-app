@@ -1,29 +1,37 @@
-let transform = require('tcomb-json-schema');
+import transform from 'tcomb-json-schema';
 
+// Import templates
 import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
 import { TextAreaTemplate } from '../components/Templates/TextAreaTemplate';
 import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
 import { SelectTemplate } from '../components/Templates/SelectTemplate';
+import { MapTemplate } from '../components/Templates/MapTemplate';
+import { ListTemplate } from '../components/Templates/ListTemplate';
+import { FilePickerTemplate } from '../components/Templates/FilePickerTemplate';
 
+// Import assets
 import * as images from '../assets';
 
 export default function parseJsonToTcomb(liformSchemaJson) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));
 
-  let properties = liformSchema.properties;
+  function getParsedSchema(liformSchema) {
+    let properties = liformSchema.properties;
+    let newEnum = {};
 
-  let newEnum = {};
-  for (let propertyKey in properties) {
-    if (properties.hasOwnProperty(propertyKey)) {
-      if (properties[propertyKey].hasOwnProperty('enum')) {
-        for (let enumKeys in properties[propertyKey].enum) {
-          newEnum[properties[propertyKey].enum[enumKeys]] =
-            properties[propertyKey].enum_titles[enumKeys];
+    for (let propertyKey in properties) {
+      if (properties.hasOwnProperty(propertyKey)) {
+        if (properties[propertyKey].hasOwnProperty('enum')) {
+          for (let enumKeys in properties[propertyKey].enum) {
+            newEnum[properties[propertyKey].enum[enumKeys]] =
+              properties[propertyKey].enum_titles[enumKeys];
+          }
+          properties[propertyKey].enum = newEnum;
+          delete properties[propertyKey].enum_titles;
         }
-        properties[propertyKey].enum = newEnum;
-        delete properties[propertyKey].enum_titles;
       }
     }
+    return liformSchema;
   }
 
   function getSchemaOptions(liformSchema) {
@@ -82,6 +90,16 @@ export default function parseJsonToTcomb(liformSchemaJson) {
             break;
           case 'textarea':
             options.template = TextAreaTemplate;
+            break;
+          case 'map':
+            options.template = MapTemplate;
+            break;
+          case 'date':
+            options.type = properties[propertyKey].widget;
+            break;
+          case 'file':
+            options.template = FilePickerTemplate;
+            break;
         }
         // Widgets SwitchCase ENDS
         if (properties[propertyKey].type === 'object') {
@@ -92,6 +110,34 @@ export default function parseJsonToTcomb(liformSchemaJson) {
         } else {
           schemaOptions['fields'][propertyKey] = options;
         }
+
+        // Check if form has sub form then call recursively
+        /******* fields: {
+          contribution: {
+            item: {
+              fields: {
+                diameter: {},
+                etc: {}
+              }
+            }
+          }
+        } ******/
+        if (properties[propertyKey].type === 'array') {
+          let arrayOptions = {
+            placeholder: properties[propertyKey].title,
+            auto: 'none',
+            autoCapitalize: 'none',
+            disableOrder: true,
+            disableRemove: true,
+            template: ListTemplate(properties[propertyKey].title)
+          };
+          schemaOptions['fields'][propertyKey] = {
+            ...arrayOptions,
+            ...{ item: getSchemaOptions(properties[propertyKey].items) }
+          };
+          schemaOptions['fields'][propertyKey].item['disableOrder'] = true;
+        }
+        // ************************************************
         if (liformSchema.required.indexOf(propertyKey)) {
           options['error'] = 'required';
         }
@@ -102,6 +148,6 @@ export default function parseJsonToTcomb(liformSchemaJson) {
 
   let schemaOptions = getSchemaOptions(liformSchema);
 
-  let transformedSchema = transform(liformSchema);
+  let transformedSchema = transform(getParsedSchema(liformSchema));
   return { schemaOptions: schemaOptions, transformedSchema: transformedSchema };
 }

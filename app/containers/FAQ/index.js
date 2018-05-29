@@ -3,6 +3,7 @@ import React from 'react';
 import FAQ from '../../components/FAQ';
 import { FAQAction } from '../../actions/faqAction';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import TextHeading from '../../components/Common/Heading/TextHeading';
 
 class FAQContainer extends React.Component {
   constructor() {
@@ -26,13 +27,14 @@ class FAQContainer extends React.Component {
   }
 
   render() {
-    return (
+    return this.state.loading ? (
       <div className="app-container__content--center sidenav-wrapper">
-        {this.state.loading ? (
-          <LoadingIndicator />
-        ) : (
-          <FAQ faqs={this.state.faqs} />
-        )}
+        <LoadingIndicator />
+      </div>
+    ) : (
+      <div className="app-container__content--center sidenav-wrapper">
+        <TextHeading>FAQs</TextHeading>
+        <FAQ faqs={this.state.faqs} />
       </div>
     );
   }

@@ -14,7 +14,7 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    height: 80px;
+    min-height: 80px;
     margin-bottom: 10px;
 
     .contribution-container__left-column {
@@ -25,6 +25,20 @@
 
     .contribution-container__right-column {
       white-space: pre;
+      font-size: 14px;
+
+      .see-more-label-style {
+        border-left: 1px solid #9c9b9b;
+        padding: 3px 5px;
+        cursor: pointer;
+        text-align: left;
+        color: #9c9b9b;
+      }
+
+      .see-more__active {
+        color: #b7d37f;
+        border-color: #b7d37f;
+      }
     }
   }
 }

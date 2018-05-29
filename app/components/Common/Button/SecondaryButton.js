@@ -8,7 +8,7 @@ const SecondaryButton = ({ onClick, children }) => (
 );
 
 SecondaryButton.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.array,
   onClick: PropTypes.func
 };
 

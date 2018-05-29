@@ -45,7 +45,7 @@ export default class RegisterTrees extends Component {
                   checked={this.state.treeCount === 'individual'}
                   onChange={e => this.handleTreeCountOptionChange(e)}
                 />
-                <span>Individual Tree</span>
+                <span>Individual&nbsp;Tree</span>
               </label>
               <label
                 className={

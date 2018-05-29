@@ -9,6 +9,7 @@ export const singleTreeForm = {
         pattern: '.{1,}'
       },
       pattern: '.{1,}',
+      widget: 'hidden',
       propertyOrder: 1
     },
     treeSpecies: {

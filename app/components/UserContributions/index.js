@@ -1,12 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { history } from '../Common/BrowserRouter';
-import { sortedUserContributionsSelector } from '../../selectors/index';
 import ContributionCardList from './ContributionCardList';
 import ContributionsMapLegend from './ContributionsMapLegend';
-import PageHeader from '../Common/PageHeader';
 import Map from '../Common/EsriMap/Map';
 import * as constants from '../../SupportedLanguages/en';
 import TextHeading from '../Common/Text/TextHeading';
@@ -14,9 +10,6 @@ import CardLayout from '../Common/Card/CardLayout';
 import InlineLink from '../Common/InlineLink';
 
 const UserContributions = ({ userContributions }) => {
-  const updateContribution = contributionId =>
-    history.push(`/some/link/${contributionId}`);
-
   let mPins = userContributions.map(element => {
     let color = '';
     if (element.contributionType === 'donated') color = 'green';
@@ -38,10 +31,7 @@ const UserContributions = ({ userContributions }) => {
             <Map pins={mPins} />
             <ContributionsMapLegend />
             <div className="contribution-container">
-              <ContributionCardList
-                contributions={userContributions}
-                updateContribution={() => updateContribution}
-              />
+              <ContributionCardList contributions={userContributions} />
             </div>
             <div className="contribution-buttons">
               <InlineLink
@@ -66,12 +56,8 @@ const UserContributions = ({ userContributions }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  userContributions: sortedUserContributionsSelector(state)
-});
-
-export default connect(mapStateToProps)(UserContributions);
-
 UserContributions.propTypes = {
   userContributions: PropTypes.array.isRequired
 };
+
+export default UserContributions;

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import PlantProjectFull from './PlantProjectFull';
+import Carousel from 'nuka-carousel';
+import PlantProjectFull from './PlantProjectFull';
 
 const PlantProjectCarousel = props => {
   const { plantProjects, onChange, contentTag, tpoName } = props;
@@ -20,17 +21,24 @@ const PlantProjectCarousel = props => {
           {plantProject.id} |{' '}
         </Link>
       ))}
-      {/* {plantProjects.map(plantProject => (
-        <div>
-          <hr />
-          <PlantProjectFull
-            key={`plantProject-${plantProject.id}`}
-            expanded={false}
-            tpoName={tpoName}
-            plantProject={plantProject}
-          />
-        </div>
-      ))} */}
+
+      <Carousel
+        renderCenterLeftControls={({ previousSlide }) => (
+          <button onClick={previousSlide}>Previous</button>
+        )}
+      >
+        {plantProjects.map(plantProject => (
+          <div>
+            <hr />
+            <PlantProjectFull
+              key={`plantProject-${plantProject.id}`}
+              expanded={false}
+              tpoName={tpoName}
+              plantProject={plantProject}
+            />
+          </div>
+        ))}
+      </Carousel>
     </div>
   );
 };

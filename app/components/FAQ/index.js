@@ -13,10 +13,10 @@ export default class FAQ extends Component {
     return this.props.faqs.map(faq => (
       <AccordionItem>
         <AccordionItemTitle>
-          <h3 className="u-position-relative">
+          <div className="u-position-relative">
             {faq.question}
             <div className="accordion__arrow" role="presentation" />
-          </h3>
+          </div>
         </AccordionItemTitle>
         <AccordionItemBody>{renderHTML(faq.answer)}</AccordionItemBody>
       </AccordionItem>
@@ -24,7 +24,7 @@ export default class FAQ extends Component {
   }
   render() {
     return (
-      <div className="app-container__content--center">
+      <div className="app-container__content--center sidenav-wrapper">
         <Accordion>{this.GetFAQList()}</Accordion>
       </div>
     );

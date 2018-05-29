@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -18,7 +18,10 @@ export default class RegisterTrees extends Component {
   constructor() {
     super();
     this.state = {
-      treeCount: 'individual'
+      treeCount: 'individual',
+      individual: {
+        treeCount: 1
+      }
     };
   }
 
@@ -63,31 +66,29 @@ export default class RegisterTrees extends Component {
               </label>
             </form>
           </div>
-          <div
-            className={
-              'register-tree__form ' +
-              (this.state.treeCount === 'individual' ? 'hide-treecount' : '')
-            }
-          >
+          <div className="register-tree__form">
             {this.state.treeCount === 'individual' ? (
               <TCombForm
-                ref={'registerTreeForm'}
+                ref="registerTreeForm"
                 type={singleTreeRegisterFormSchema}
                 options={schemaOptionsSingleTree}
+                value={this.state.individual}
               />
             ) : (
               <TCombForm
-                ref={'registerTreeForm'}
+                ref="registerTreeForm"
                 type={multipleTreesRegisterFormSchema}
                 options={schemaOptionsMultipleTrees}
               />
             )}
           </div>
-          <PrimaryButton>Register</PrimaryButton>
+          <PrimaryButton onClick={this.props.onSubmit}>Register</PrimaryButton>
         </CardLayout>
       </div>
     );
   }
 }
 
-RegisterTrees.propTypes = {};
+RegisterTrees.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};

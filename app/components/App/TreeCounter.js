@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 // Components imports
 import TargetContainer from '../../containers/TargetContainer';
-import RegisterTreesContainer from '../../containers/RegisterTrees/RegisterTreesContainer';
+import RegisterTreesContainer from '../../containers/RegisterTrees';
 import HeaderContainer from '../../containers/HeaderContainer';
 import UserContributions from '../UserContributions/UserContributions';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';

@@ -63,9 +63,7 @@ class Trillion extends Component {
         <h5>{trillionTreeMessage1}</h5>
         <h5>{trillionTreeMessage2}</h5>
         <ButtonHeading>
-          <SecondaryAccentButton
-            onClick={updateRoute.bind(this, 'public_faqs_get')}
-          >
+          <SecondaryAccentButton onClick={updateRoute.bind(this, 'app_faq')}>
             FAQs
           </SecondaryAccentButton>
         </ButtonHeading>

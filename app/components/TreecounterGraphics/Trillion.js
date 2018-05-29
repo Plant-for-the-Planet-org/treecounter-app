@@ -11,6 +11,7 @@ import SvgContainer from '../Common/SvgContainer';
 import SecondaryAccentButton from '../Common/Button/SecondaryAccentButton';
 import ButtonHeading from '../Common/Heading/ButtonHeading';
 import { pot, tree } from '../../assets';
+import { updateRoute } from '../../helpers/routerHelper';
 
 class Trillion extends Component {
   constructor() {
@@ -62,7 +63,11 @@ class Trillion extends Component {
         <h5>{trillionTreeMessage1}</h5>
         <h5>{trillionTreeMessage2}</h5>
         <ButtonHeading>
-          <SecondaryAccentButton>FAQs</SecondaryAccentButton>
+          <SecondaryAccentButton
+            onClick={updateRoute.bind(this, 'public_faqs_get')}
+          >
+            FAQs
+          </SecondaryAccentButton>
         </ButtonHeading>
 
         <div className="canvasContainer flex-column">

@@ -1,0 +1,20 @@
+.tpo-footer-card-layout {
+  @extend .pftp-card-layout;
+  padding: 0;
+  margin: 0;
+  max-width: 718px;
+}
+
+.tpo-footer-nav-img {
+  position: absolute;
+  max-height: 40px;
+  max-width: 40px;
+}
+.tpo-footer-nav-img__left {
+  @extend .tpo-footer-nav-img;
+  left: -20px;
+}
+.tpo-footer-nav-img__right {
+  @extend .tpo-footer-nav-img;
+  right: -20px;
+}

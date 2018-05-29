@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Carousel from 'nuka-carousel';
 import PlantProjectFull from './PlantProjectFull';
+import { arrow_left_orange, arrow_right_orange } from '../../assets';
 
 const PlantProjectCarousel = props => {
   const { plantProjects, onChange, contentTag, tpoName } = props;
@@ -16,15 +17,27 @@ const PlantProjectCarousel = props => {
   // add navigation buttons that will trigger calls to 'onChange' callback
   return (
     <div>
-      {plantProjects.map(plantProject => (
+      {/* {plantProjects.map(plantProject => (
         <Link to="#" onClick={() => onChange(plantProject.id)}>
           {plantProject.id} |{' '}
         </Link>
-      ))}
+      ))} */}
 
       <Carousel
+        renderBottomCenterControls={false}
         renderCenterLeftControls={({ previousSlide }) => (
-          <button onClick={previousSlide}>Previous</button>
+          <img
+            className="tpo-footer-nav-img__left"
+            src={arrow_left_orange}
+            onClick={previousSlide}
+          />
+        )}
+        renderCenterRightControls={({ nextSlide }) => (
+          <img
+            className="tpo-footer-nav-img__right"
+            src={arrow_right_orange}
+            onClick={nextSlide}
+          />
         )}
       >
         {plantProjects.map(plantProject => (

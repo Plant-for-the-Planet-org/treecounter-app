@@ -30,6 +30,8 @@ import organization from './images/icons/organization.png';
 import competition from './images/icons/competition.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
+import arrow_right_orange from './images/icons/arrow_right_orange.png';
+import arrow_left_orange from './images/icons/arrow_left_orange.png';
 
 export {
   EditGreen,
@@ -63,5 +65,7 @@ export {
   organization,
   competition,
   education,
-  company
+  company,
+  arrow_left_orange,
+  arrow_right_orange
 };

@@ -44,7 +44,7 @@ class TpoDonationPlantProjectSelector extends React.Component {
     const TagName = 'PlantProjectFull';
 
     return (
-      <CardLayout>
+      <CardLayout className="tpo-footer-card-layout">
         <ContentHeader caption={caption} />
         {1 === plantProjects.length ? (
           <TagName

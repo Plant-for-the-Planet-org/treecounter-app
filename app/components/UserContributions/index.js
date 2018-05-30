@@ -5,7 +5,7 @@ import ContributionCardList from './ContributionCardList';
 import ContributionsMapLegend from './ContributionsMapLegend';
 import Map from '../Common/EsriMap/Map';
 import * as constants from '../../SupportedLanguages/en';
-import TextHeading from '../Common/Text/TextHeading';
+import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import InlineLink from '../Common/InlineLink';
 

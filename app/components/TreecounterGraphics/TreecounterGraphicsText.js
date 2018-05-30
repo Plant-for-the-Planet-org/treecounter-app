@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import NumberToWords from 'number-to-words';
 
 import PlantedDetails from './PlantedDetails';
 import TargetComment from './TargetComment';
@@ -14,6 +15,15 @@ class TreecounterGraphicsText extends Component {
       ifTargetComment: false
     };
   }
+
+  getTwoWordString(sentence) {
+    return sentence
+      .split(' ')
+      .slice(0, 2)
+      .join(' ')
+      .replace(/,/g, '');
+  }
+
   render() {
     const {
       treecounterData: {
@@ -25,14 +35,22 @@ class TreecounterGraphicsText extends Component {
         community
       }
     } = this.props;
+
     return (
       <div className="svg-text-container">
         <div className="svg-text-container__row">
           <img className="svg-text-container__row--col" src={pot} />
           <div className="svg-text-container__row--col2">
             <span>
-              Target by {targetYear} <br />
+              Target{' '}
+              {this.props.trillion ? '' : 'by' + targetYear ? targetYear : ''}{' '}
+              <br />
               <strong>{target}</strong>
+              {this.props.trillion ? (
+                <div>
+                  {this.getTwoWordString(NumberToWords.toWords(target))}
+                </div>
+              ) : null}
               {!targetComment || targetComment === '' ? null : (
                 <ArrowButton
                   onToggle={e => this.setState({ ifTargetComment: e })}
@@ -52,6 +70,11 @@ class TreecounterGraphicsText extends Component {
               Planted
               <br />
               <strong>{planted}</strong>
+              {this.props.trillion ? (
+                <div>
+                  {this.getTwoWordString(NumberToWords.toWords(planted))}
+                </div>
+              ) : null}
             </span>
           </div>
           <div className="svg-text-container__row--col2">
@@ -68,8 +91,9 @@ class TreecounterGraphicsText extends Component {
   }
 }
 
-export default TreecounterGraphicsText;
-
 TreecounterGraphicsText.propTypes = {
-  treecounterData: PropTypes.object.isRequired
+  treecounterData: PropTypes.object.isRequired,
+  trillion: PropTypes.bool
 };
+
+export default TreecounterGraphicsText;

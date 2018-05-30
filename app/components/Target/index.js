@@ -8,7 +8,7 @@ import {
 } from '../../server/parsedSchemas/target';
 
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import TextHeading from '../Common/Text/TextHeading';
+import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 
 let TCombForm = t.form.Form;

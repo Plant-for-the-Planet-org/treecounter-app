@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import NumberToWords from 'number-to-words';
 
 import {
   trillionTreeMessage1,
@@ -8,7 +7,12 @@ import {
 import { trillionCampaign } from '../../actions/trillionAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
-import { pot, tree } from '../../assets';
+import TreecounterGraphicsText from './TreecounterGraphicsText';
+import SecondaryAccentButton from '../Common/Button/SecondaryAccentButton';
+import ButtonHeading from '../Common/Heading/ButtonHeading';
+import { updateRoute } from '../../helpers/routerHelper';
+import TextHeading from '../Common/Heading/TextHeading';
+import TextBlock from '../Common/Text/TextBlock';
 
 class Trillion extends Component {
   constructor() {
@@ -43,61 +47,36 @@ class Trillion extends Component {
     return true;
   }
 
-  getTwoWordString(sentence) {
-    return sentence
-      .split(' ')
-      .slice(0, 2)
-      .join(' ')
-      .replace(/,/g, '');
-  }
-
   render() {
     return this.state.loading ? (
-      <LoadingIndicator />
+      <div className="sidenav-wrapper">
+        <LoadingIndicator />
+      </div>
     ) : (
-      <div className="trillion-container sidenav-wrapper">
-        <h3>{this.state.displayName}</h3>
-        <h5>{trillionTreeMessage1}</h5>
-        <h5>{trillionTreeMessage2}</h5>
+      <div className="sidenav-wrapper">
+        <TextHeading>
+          {this.state.displayName}
+          <TextBlock>{trillionTreeMessage1}</TextBlock>
+          <TextBlock>{trillionTreeMessage2}</TextBlock>
+          <ButtonHeading>
+            <SecondaryAccentButton onClick={updateRoute.bind(this, 'app_faq')}>
+              FAQs
+            </SecondaryAccentButton>
+          </ButtonHeading>
+        </TextHeading>
+
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />
-          <div className="trillion-svg-text">
-            <div className="trillion-svg-text__row">
-              <img src={pot} alt="Smiley face" />
-              <span>
-                Target {this.propsctargetYear}
-                <br />
-                <strong>{this.state.svgData.target}</strong>
-                <br />
-                {this.getTwoWordString(
-                  NumberToWords.toWords(this.state.svgData.target)
-                )}
-              </span>
+          {this.state.svgData === null ? (
+            <div className="circle-inside circle-headline">
+              <LoadingIndicator />
             </div>
-            <div className="trillion-svg-text__row">
-              <img src={tree} alt="Smiley face" />
-              <span>
-                Existing trees {this.propsctargetYear}
-                <br />
-                <strong>{this.state.svgData.target}</strong>
-                <br />
-                {this.getTwoWordString(
-                  NumberToWords.toWords(this.state.svgData.target)
-                )}
-              </span>
-            </div>
-            <div className="trillion-svg-text__row">
-              <img src={tree} alt="Smiley face" />
-              <span>
-                Planted trees<br />
-                <strong>{this.state.svgData.planted}</strong>
-                <br />
-                {this.getTwoWordString(
-                  NumberToWords.toWords(this.state.svgData.planted)
-                )}
-              </span>
-            </div>
-          </div>
+          ) : (
+            <TreecounterGraphicsText
+              trillion={true}
+              treecounterData={this.state.svgData}
+            />
+          )}
         </div>
       </div>
     );

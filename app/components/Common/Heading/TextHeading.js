@@ -6,7 +6,7 @@ const TextHeading = ({ children }) => (
 );
 
 TextHeading.propTypes = {
-  children: PropTypes.string
+  children: PropTypes.node
 };
 
 export default TextHeading;

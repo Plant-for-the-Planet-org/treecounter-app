@@ -49,9 +49,11 @@ class Trillion extends Component {
 
   render() {
     return this.state.loading ? (
-      <LoadingIndicator />
+      <div className="sidenav-wrapper">
+        <LoadingIndicator />
+      </div>
     ) : (
-      <div>
+      <div className="sidenav-wrapper">
         <TextHeading>
           {this.state.displayName}
           <TextBlock>{trillionTreeMessage1}</TextBlock>

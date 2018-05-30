@@ -35,3 +35,16 @@
     @extend .pftp-basic-heading;
   }
 }
+
+.pftp-description-heading {
+  padding: 20px;
+  font-family: OpenSans;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.44;
+  letter-spacing: normal;
+  text-align: center;
+  color: #575756;
+}

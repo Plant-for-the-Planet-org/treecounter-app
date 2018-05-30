@@ -8,9 +8,6 @@
 }
 
 .register-tree {
-  max-width: 500px;
-  margin: 20px auto;
-
   .register-tree__type {
     display: flex;
     justify-content: center;
@@ -33,5 +30,22 @@
       }
     }
   }
+}
 
+.register-tree__form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+
+  .register-tree__form--row {
+    display: flex;
+
+    .register-tree__form--row__spacer {
+      width: 20px;
+    }
+
+    fieldset {
+      flex: 1;
+    }
+  }
 }

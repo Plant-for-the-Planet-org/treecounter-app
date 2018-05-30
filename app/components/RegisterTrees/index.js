@@ -14,6 +14,56 @@ import {
 
 let TCombForm = t.form.Form;
 
+const formLayoutSingleTree = locals => {
+  return (
+    <div className="register-tree__form">
+      <div className="register-tree__form--row">
+        {locals.inputs.treeSpecies}
+      </div>
+      <div className="register-tree__form--row">{locals.inputs.plantDate}</div>
+      {locals.inputs.geoLocation}
+      <div className="register-tree__form--row">
+        {locals.inputs.contributionImages}
+      </div>
+      <div className="register-tree__form--row">
+        {locals.inputs.treeClassification}
+        <div className="register-tree__form--row__spacer" />
+        {locals.inputs.treeScientificName}
+      </div>
+      <div className="register-tree__form--row">
+        {locals.inputs.contributionMeasurements}
+      </div>
+    </div>
+  );
+};
+
+const formLayoutMultipleTrees = locals => {
+  return (
+    <div className="register-tree__form">
+      <div className="register-tree__form--row">
+        {locals.inputs.treeCount}
+        <div className="register-tree__form--row__spacer" />
+        {locals.inputs.treeSpecies}
+      </div>
+      <div className="register-tree__form--row">{locals.inputs.plantDate}</div>
+      {locals.inputs.geoLocation}
+      <div className="register-tree__form--row">
+        {locals.inputs.contributionImages}
+      </div>
+    </div>
+  );
+};
+
+const schemaOptionsSingle = {
+  template: formLayoutSingleTree,
+  ...schemaOptionsSingleTree
+};
+
+const schemaOptionsMultiple = {
+  template: formLayoutMultipleTrees,
+  ...schemaOptionsMultipleTrees
+};
+
 export default class RegisterTrees extends Component {
   static mode = {
     singleTree: 'single-tree',
@@ -88,14 +138,14 @@ export default class RegisterTrees extends Component {
               <TCombForm
                 ref="registerTreeForm"
                 type={singleTreeRegisterFormSchema}
-                options={schemaOptionsSingleTree}
+                options={schemaOptionsSingle}
                 value={this.state.individual}
               />
             ) : (
               <TCombForm
                 ref="registerTreeForm"
                 type={multipleTreesRegisterFormSchema}
-                options={schemaOptionsMultipleTrees}
+                options={schemaOptionsMultiple}
               />
             )}
           </div>

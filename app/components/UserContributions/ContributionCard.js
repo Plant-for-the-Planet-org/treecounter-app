@@ -62,7 +62,10 @@ export default class ContributionCard extends React.Component {
         >
           <div className="contribution-container__left-column">
             <TextSpan strong={true}>
-              {contribution.treeCount + ' ' + contribution.treeType + ' tree'}
+              {contribution.treeCount +
+                ' ' +
+                contribution.treeSpecies +
+                ' tree'}
             </TextSpan>
             <TextSpan>
               {contribution.geoLatitude + ', ' + contribution.geoLongitude}

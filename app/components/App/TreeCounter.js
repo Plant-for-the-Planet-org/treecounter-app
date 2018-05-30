@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import TargetContainer from '../../containers/TargetContainer';
 import RegisterTreesContainer from '../../containers/RegisterTrees/RegisterTreesContainer';
 import HeaderContainer from '../../containers/HeaderContainer';
-import UserContributions from '../UserContributions/UserContributions';
+import UserContributionsContainer from '../../containers/UserContributions';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
@@ -148,7 +148,7 @@ class TreeCounter extends Component {
               />
               <PrivateRoute
                 path={getLocalRoute('app_myTrees')}
-                component={UserContributions}
+                component={UserContributionsContainer}
               />
               <PublicRoute
                 path={getLocalRoute('app_faq')}

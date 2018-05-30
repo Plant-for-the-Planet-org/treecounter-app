@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import NumberToWords from 'number-to-words';
 
 import {
   trillionTreeMessage1,
@@ -8,7 +7,7 @@ import {
 import { trillionCampaign } from '../../actions/trillionAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
-import { pot, tree } from '../../assets';
+import TreecounterGraphicsText from './TreecounterGraphicsText';
 
 class Trillion extends Component {
   constructor() {
@@ -61,43 +60,13 @@ class Trillion extends Component {
         <h5>{trillionTreeMessage2}</h5>
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />
-          <div className="trillion-svg-text">
-            <div className="trillion-svg-text__row">
-              <img src={pot} alt="Smiley face" />
-              <span>
-                Target {this.propsctargetYear}
-                <br />
-                <strong>{this.state.svgData.target}</strong>
-                <br />
-                {this.getTwoWordString(
-                  NumberToWords.toWords(this.state.svgData.target)
-                )}
-              </span>
+          {this.state.svgData === null ? (
+            <div className="circle-inside circle-headline">
+              <LoadingIndicator />
             </div>
-            <div className="trillion-svg-text__row">
-              <img src={tree} alt="Smiley face" />
-              <span>
-                Existing trees {this.propsctargetYear}
-                <br />
-                <strong>{this.state.svgData.target}</strong>
-                <br />
-                {this.getTwoWordString(
-                  NumberToWords.toWords(this.state.svgData.target)
-                )}
-              </span>
-            </div>
-            <div className="trillion-svg-text__row">
-              <img src={tree} alt="Smiley face" />
-              <span>
-                Planted trees<br />
-                <strong>{this.state.svgData.planted}</strong>
-                <br />
-                {this.getTwoWordString(
-                  NumberToWords.toWords(this.state.svgData.planted)
-                )}
-              </span>
-            </div>
-          </div>
+          ) : (
+            <TreecounterGraphicsText treecounterData={this.state.svgData} />
+          )}
         </div>
       </div>
     );

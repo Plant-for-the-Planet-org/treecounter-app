@@ -25,7 +25,10 @@ class Home extends Component {
             <LoadingIndicator />
           </div>
         ) : (
-          <TreecounterGraphicsText treecounterData={treecounterData} />
+          <TreecounterGraphicsText
+            trillion={false}
+            treecounterData={treecounterData}
+          />
         )}
       </div>
     );

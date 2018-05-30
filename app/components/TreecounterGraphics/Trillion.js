@@ -70,7 +70,10 @@ class Trillion extends Component {
               <LoadingIndicator />
             </div>
           ) : (
-            <TreecounterGraphicsText treecounterData={this.state.svgData} />
+            <TreecounterGraphicsText
+              trillion={true}
+              treecounterData={this.state.svgData}
+            />
           )}
         </div>
       </div>

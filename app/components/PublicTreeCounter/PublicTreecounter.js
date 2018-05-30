@@ -151,7 +151,10 @@ class PublicTreeCounter extends React.Component {
         </div>
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />
-          <TreecounterGraphicsText treecounterData={this.state.svgData} />
+          <TreecounterGraphicsText
+            trillion={false}
+            treecounterData={this.state.svgData}
+          />
         </div>
         {'tpo' === userProfile.type ? (
           <LoadingIndicator />

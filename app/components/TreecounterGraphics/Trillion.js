@@ -8,6 +8,9 @@ import { trillionCampaign } from '../../actions/trillionAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from './TreecounterGraphicsText';
+import SecondaryAccentButton from '../Common/Button/SecondaryAccentButton';
+import ButtonHeading from '../Common/Heading/ButtonHeading';
+import { updateRoute } from '../../helpers/routerHelper';
 
 class Trillion extends Component {
   constructor() {
@@ -42,14 +45,6 @@ class Trillion extends Component {
     return true;
   }
 
-  getTwoWordString(sentence) {
-    return sentence
-      .split(' ')
-      .slice(0, 2)
-      .join(' ')
-      .replace(/,/g, '');
-  }
-
   render() {
     return this.state.loading ? (
       <LoadingIndicator />
@@ -58,6 +53,12 @@ class Trillion extends Component {
         <h3>{this.state.displayName}</h3>
         <h5>{trillionTreeMessage1}</h5>
         <h5>{trillionTreeMessage2}</h5>
+        <ButtonHeading>
+          <SecondaryAccentButton onClick={updateRoute.bind(this, 'app_faq')}>
+            FAQs
+          </SecondaryAccentButton>
+        </ButtonHeading>
+
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />
           {this.state.svgData === null ? (

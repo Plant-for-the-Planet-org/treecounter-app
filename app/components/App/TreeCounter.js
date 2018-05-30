@@ -18,6 +18,8 @@ import EmailSentContainer from '../../containers/Authentication/EmailSentContain
 import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
+import FAQContainer from '../../containers/FAQ';
+
 import Footer from '../Footer';
 
 // Components which use SVG
@@ -147,6 +149,10 @@ class TreeCounter extends Component {
               <PrivateRoute
                 path={getLocalRoute('app_myTrees')}
                 component={UserContributions}
+              />
+              <PublicRoute
+                path={getLocalRoute('app_faq')}
+                component={FAQContainer}
               />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
               {/*<Route path={getLocalRoute("app_donateTrees")} component={DonateTrees}/>*/}

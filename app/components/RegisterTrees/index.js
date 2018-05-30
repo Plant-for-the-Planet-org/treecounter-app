@@ -18,6 +18,7 @@ const formLayoutSingleTree = locals => {
   return (
     <div className="register-tree__form">
       <div className="register-tree__form--row">
+        {locals.inputs.treeCount}
         {locals.inputs.treeSpecies}
       </div>
       <div className="register-tree__form--row">{locals.inputs.plantDate}</div>

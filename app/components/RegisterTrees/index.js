@@ -15,18 +15,31 @@ import {
 let TCombForm = t.form.Form;
 
 export default class RegisterTrees extends Component {
+  static mode = {
+    singleTree: 'single-tree',
+    multipleTrees: 'multiple-trees'
+  };
+
   constructor() {
     super();
+
     this.state = {
-      treeCount: 'individual',
+      mode: RegisterTrees.mode.singleTree,
       individual: {
         treeCount: 1
       }
     };
+
+    // Bind Local method
+    this.onSubmitClick = this.onSubmitClick.bind(this);
   }
 
-  handleTreeCountOptionChange(changeEvent) {
-    this.setState({ treeCount: changeEvent.target.value });
+  onSubmitClick() {
+    this.props.onSubmit(this.state.mode);
+  }
+
+  handleModeOptionChange(changeEvent) {
+    this.setState({ mode: changeEvent.target.value });
   }
 
   render() {
@@ -39,35 +52,39 @@ export default class RegisterTrees extends Component {
               <label
                 className={
                   'radio register-tree__type--option ' +
-                  (this.state.treeCount === 'individual' ? 'active' : '')
+                  (this.state.mode === RegisterTrees.mode.singleTree
+                    ? 'active'
+                    : '')
                 }
               >
                 <input
                   type="radio"
-                  value="individual"
-                  checked={this.state.treeCount === 'individual'}
-                  onChange={e => this.handleTreeCountOptionChange(e)}
+                  value={RegisterTrees.mode.singleTree}
+                  checked={this.state.mode === RegisterTrees.mode.singleTree}
+                  onChange={e => this.handleModeOptionChange(e)}
                 />
                 <span>Individual&nbsp;Tree</span>
               </label>
               <label
                 className={
                   'radio register-tree__type--option ' +
-                  (this.state.treeCount === 'many' ? 'active' : '')
+                  (this.state.mode === RegisterTrees.mode.multipleTrees
+                    ? 'active'
+                    : '')
                 }
               >
                 <input
                   type="radio"
-                  value="many"
-                  checked={this.state.treeCount === 'many'}
-                  onChange={e => this.handleTreeCountOptionChange(e)}
+                  value={RegisterTrees.mode.multipleTrees}
+                  checked={this.state.mode === RegisterTrees.mode.multipleTrees}
+                  onChange={e => this.handleModeOptionChange(e)}
                 />
-                <span>Many Trees</span>
+                <span>Many&nbsp;Trees</span>
               </label>
             </form>
           </div>
           <div className="register-tree__form">
-            {this.state.treeCount === 'individual' ? (
+            {this.state.mode === RegisterTrees.mode.singleTree ? (
               <TCombForm
                 ref="registerTreeForm"
                 type={singleTreeRegisterFormSchema}
@@ -82,7 +99,7 @@ export default class RegisterTrees extends Component {
               />
             )}
           </div>
-          <PrimaryButton onClick={this.props.onSubmit}>Register</PrimaryButton>
+          <PrimaryButton onClick={this.onSubmitClick}>Register</PrimaryButton>
         </CardLayout>
       </div>
     );

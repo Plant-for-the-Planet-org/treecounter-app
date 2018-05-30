@@ -8,10 +8,11 @@ import { contributionSchema } from '../schemas/index';
 import { getLocalRoute } from './apiRouting';
 import { debug } from '../debug/index';
 
-export function registerTree(plantContribution, treecounterId) {
+export function registerTree(plantContribution, treecounterId, mode) {
   return dispatch => {
     postAuthenticatedRequest('plantContribution_post', plantContribution, {
-      treecounter: treecounterId
+      treecounter: treecounterId,
+      mode: mode
     })
       .then(res => {
         debug(res, res.response);

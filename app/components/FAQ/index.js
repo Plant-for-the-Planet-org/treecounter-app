@@ -8,6 +8,8 @@ import {
 } from 'react-accessible-accordion';
 import renderHTML from 'react-render-html';
 
+import CardLayout from '../Common/Card/CardLayout';
+
 export default class FAQ extends Component {
   GetFAQList() {
     return this.props.faqs.map(faq => (
@@ -23,7 +25,11 @@ export default class FAQ extends Component {
     ));
   }
   render() {
-    return <Accordion>{this.GetFAQList()}</Accordion>;
+    return (
+      <CardLayout>
+        <Accordion>{this.GetFAQList()}</Accordion>
+      </CardLayout>
+    );
   }
 }
 

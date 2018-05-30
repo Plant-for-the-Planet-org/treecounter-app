@@ -9,6 +9,7 @@
 
 .u-position-relative {
     position: relative;
+    padding-right: 23px;
 }
 
 .accordion {
@@ -34,6 +35,8 @@
     width: 100%;
     text-align: left;
     border: none;
+    box-sizing: border-box;
+    outline: none;
 }
 
 .accordion__title:hover {

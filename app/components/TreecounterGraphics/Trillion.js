@@ -11,6 +11,8 @@ import TreecounterGraphicsText from './TreecounterGraphicsText';
 import SecondaryAccentButton from '../Common/Button/SecondaryAccentButton';
 import ButtonHeading from '../Common/Heading/ButtonHeading';
 import { updateRoute } from '../../helpers/routerHelper';
+import TextHeading from '../Common/Heading/TextHeading';
+import TextBlock from '../Common/Text/TextBlock';
 
 class Trillion extends Component {
   constructor() {
@@ -49,15 +51,17 @@ class Trillion extends Component {
     return this.state.loading ? (
       <LoadingIndicator />
     ) : (
-      <div className="trillion-container sidenav-wrapper">
-        <h3>{this.state.displayName}</h3>
-        <h5>{trillionTreeMessage1}</h5>
-        <h5>{trillionTreeMessage2}</h5>
-        <ButtonHeading>
-          <SecondaryAccentButton onClick={updateRoute.bind(this, 'app_faq')}>
-            FAQs
-          </SecondaryAccentButton>
-        </ButtonHeading>
+      <div>
+        <TextHeading>
+          {this.state.displayName}
+          <TextBlock>{trillionTreeMessage1}</TextBlock>
+          <TextBlock>{trillionTreeMessage2}</TextBlock>
+          <ButtonHeading>
+            <SecondaryAccentButton onClick={updateRoute.bind(this, 'app_faq')}>
+              FAQs
+            </SecondaryAccentButton>
+          </ButtonHeading>
+        </TextHeading>
 
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />

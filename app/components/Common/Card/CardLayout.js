@@ -6,7 +6,7 @@ const CardLayout = ({ children }) => (
 );
 
 CardLayout.propTypes = {
-  children: PropTypes.array
+  children: PropTypes.node
 };
 
 export default CardLayout;

@@ -6,7 +6,7 @@ const TextBlock = ({ children, strong }) => (
 );
 
 TextBlock.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.node,
   strong: PropTypes.bool
 };
 

@@ -17,6 +17,9 @@ import tree from './images/tree.svg';
 import SideMenuImage from './images/side_menu.png';
 import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
+import MapPinRed from './images/map_pin_red.png';
+import MapPinGreen from './images/map_pin_green.png';
+import MapPinBlue from './images/map_pin_blue.png';
 import chevron_right from './images/icons/chevron_right.png';
 import profile from './images/icons/profile.png';
 import link from './images/icons/link.png';
@@ -25,8 +28,16 @@ import uncheckedIcon from './images/icons/checkbox_unchecked.png';
 import ProfilePic from './images/profile_pics.png';
 import EditGreen from './images/icons/edit_green.png';
 import QuestionMarkGreen from './images/icons/questionmark_green.png';
+import country from './images/icons/country.png';
+import organization from './images/icons/organization.png';
+import competition from './images/icons/competition.png';
+import education from './images/icons/education.png';
+import company from './images/icons/company.png';
 
 export {
+  MapPinBlue,
+  MapPinGreen,
+  MapPinRed,
   EditGreen,
   QuestionMarkGreen,
   ProfilePic,
@@ -53,5 +64,10 @@ export {
   tree,
   chevron_right,
   profile,
-  link
+  link,
+  country,
+  organization,
+  competition,
+  education,
+  company
 };

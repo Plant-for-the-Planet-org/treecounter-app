@@ -1135,6 +1135,7 @@ a {
   -o-transition: all 0.25s;
   transition: all 0.25s;
   color: #e86f56;
+  cursor: pointer;
 }
 a:hover {
   color: #e24929;

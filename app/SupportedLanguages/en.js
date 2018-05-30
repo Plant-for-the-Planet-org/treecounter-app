@@ -3,7 +3,7 @@ export const formStrings = {
   createAccount: 'New User? ',
   register: 'Register',
   seeMore: 'see more',
-  donateTrees: 'donate trees',
+  donateTrees: 'Donated Trees',
   planted: 'Planted',
   treeCost: 'Tree Cost',
   certified: 'Certified',
@@ -36,8 +36,8 @@ export const formStrings = {
   survival_rate: 'Survival Rate',
   singleTree: 'Single Tree',
   severalTrees: 'Several Trees',
-  registerFurther: 'REGISTER FURTHER TREES',
-  DONATETREES: 'DONATE TREES',
+  registerFurther: 'Register further trees',
+  DONATETREES: 'Donate trees',
   noContributions: 'No Contributions',
   plantedTrees: 'Planted Trees'
 };

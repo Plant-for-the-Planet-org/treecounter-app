@@ -8,7 +8,7 @@ const TransparentButton = ({ onClick, children }) => (
 );
 
 TransparentButton.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.array,
   onClick: PropTypes.func
 };
 

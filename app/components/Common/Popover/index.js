@@ -81,8 +81,8 @@ class Popover extends Component {
 }
 
 Popover.propTypes = {
-  children: PropTypes.array,
-  button: PropTypes.array
+  children: PropTypes.element,
+  button: PropTypes.element
 };
 
 export default Popover;

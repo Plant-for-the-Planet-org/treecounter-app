@@ -36,7 +36,7 @@ export const formStrings = {
   survival_rate: 'Survival Rate',
   singleTree: 'Single Tree',
   severalTrees: 'Several Trees',
-  registerFurther: 'REGISTER FURTHER TREES',
-  DONATETREES: 'DONATE TREES',
+  registerFurther: 'Register Further Trees',
+  DONATETREES: 'Donated Trees',
   noContributions: 'No Contributions'
 };

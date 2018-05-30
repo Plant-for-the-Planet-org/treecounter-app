@@ -1,65 +1,80 @@
 .contribution-container {
   background: white;
   margin: 20px auto;
+  padding: 20px;
+  padding-bottom: 0;
   max-width: 600px;
-  border-bottom: 1px solid rgba(0,0,0,0.14);
+  width: 500px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  overflow: scroll;
+  height: 542px;
 
   .contribution-container__card {
-    box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.14);
     padding: 10px 10px 30px 10px;
     position: relative;
     display: flex;
-    flex-direction: column;
-  }
-  .contribution-container__card--tag {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 5px;
-    background: #bb0a1e;
-    color: white;
-  }
-  
-  .contribution-container__card--footer {
-    display: flex;
-    justify-content: flex-end;
-  }
+    justify-content: space-between;
+    min-height: 80px;
+    margin-bottom: 10px;
 
-  .cx-card-head{
- 	text-transform: capitalize;
-	color: #000;
-	font-size: 17px;
-   }
-   
-   .contribution-container__card--info{
-    font-size: 14px;
-    font-family: sans-serif;
-    color: #272121;
-    padding: 5px;
-   }
+    .contribution-container__left-column {
+      text-transform: capitalize;
+      text-align: left;
+      font-size: 14px;
+    }
 
+    .contribution-container__right-column {
+      white-space: pre;
+      font-size: 14px;
+
+      .see-more-label-style {
+        border-left: 1px solid #9c9b9b;
+        padding: 3px 5px;
+        cursor: pointer;
+        text-align: left;
+        color: #9c9b9b;
+      }
+
+      .see-more__active {
+        color: #b7d37f;
+        border-color: #b7d37f;
+      }
+    }
+  }
+}
+
+.contribution-container::-webkit-scrollbar {
+  width: 6px;
+  height: 2px;
+}
+
+.contribution-container::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 20px;
+}
+
+.contribution-container__partition {
+  margin-bottom: 10px;
 }
 
 .user-contributions__location--icons {
   display: flex;
   max-width: 600px;
-  margin: auto;
-  justify-content: space-between;
+  margin-top: 10px;
+  justify-content: flex-end;
 
-  .user-contributions__location--icons--container {
-    display: flex;
-    align-items: center;
-
-    .user-contributions__location--icons--img {
-      height: 32px;
-    }
+  .user-contributions__location--icons--img {
+    height: 32px;
+    margin-left: 10px;
   }
-
 }
+
 .my-trees #mapNode {
   width: 600px !important;
   padding-bottom: 20px;
 }
+
 .contribution-buttons {
   max-width: 600px;
   margin: auto;
@@ -67,210 +82,10 @@
   justify-content: space-between;
 }
 .navigate-button {
-  background: #E86F56;
+  background: #e86f56;
   color: white;
   padding: 5px 40px;
   border-radius: 32px;
   margin: 10px 0px;
   border: none;
 }
-
-
-
-/* <= IE 7 */
-@media screen\9 {
-
-.cx-card-head{
- 	text-transform: capitalize;
-	color: #000;
-	font-size: 17px;
-   }
-   
-.contribution-container__card--info{
-	font-size: 14px;
-	font-family: sans-serif;
-	color: #272121;
-	padding: 5px;
-    }
-}
-
-/* IE 8 */
-@media \0screen {
-
-.cx-card-head{
- 	text-transform: capitalize;
-	color: #000;
-	font-size: 17px;
-   }
-   
-.contribution-container__card--info{
-	font-size: 14px;
-	font-family: sans-serif;
-	color: #272121;
-	padding: 5px;
-    }
-
-}
-
-/* >= IE10 */
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-
-.cx-card-head{
- 	text-transform: capitalize;
-	color: #000;
-	font-size: 17px;
-   }
-   
-.contribution-container__card--info{
-	font-size: 14px;
-	font-family: sans-serif;
-	color: #272121;
-	padding: 5px;
-    }
-
-
-}
-
-
-@supports (-ms-ime-align: auto) {
-  /* Microsoft EdgeV13&14 CSS styles go here */
-
-.cx-card-head{
- 	text-transform: capitalize;
-	color: #000;
-	font-size: 17px;
-   }
-   
-.contribution-container__card--info{
-	font-size: 14px;
-	font-family: sans-serif;
-	color: #272121;
-	padding: 5px;
-    }
-
-
-  
-}
-@supports (-ms-accelerator: true) {
-  /* Microsoft EdgeV13 CSS styles go here */
-  
-.cx-card-head{
- 	text-transform: capitalize;
-	color: #000;
-	font-size: 17px;
-   }
-   
-.contribution-container__card--info{
-	font-size: 14px;
-	font-family: sans-serif;
-	color: #272121;
-	padding: 5px;
-    }
-
-
-}
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  /* IE10 & IE11 CSS styles go here */
-
-.cx-card-head{
- 	text-transform: capitalize;
-	color: #000;
-	font-size: 17px;
-   }
-   
-.contribution-container__card--info{
-	font-size: 14px;
-	font-family: sans-serif;
-	color: #272121;
-	padding: 5px;
-    }
-
-
-
-}
-
-
-
-@-moz-document url-prefix() { 
-   /* firefox CSS styles go here */
-.cx-card-head{
- 	text-transform: capitalize;
-	color: #000;
-	font-size: 17px;
-   }
-   
-.contribution-container__card--info{
-	font-size: 14px;
-	font-family: sans-serif;
-	color: #272121;
-	padding: 5px;
-    }
-
-
-
-}
-
-@supports (-moz-appearance:none) and (-webkit-appearance:none)
-{
-
-.cx-card-head{
- 	text-transform: capitalize;
-	color: #000;
-	font-size: 17px;
-   }
-   
-.contribution-container__card--info{
-	font-size: 14px;
-	font-family: sans-serif;
-	color: #272121;
-	padding: 5px;
-    }
-
-
-}
-
-
-
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-
-.cx-card-head{
- 	text-transform: capitalize;
-	color: #000;
-	font-size: 17px;
-   }
-   
-.contribution-container__card--info{
-	font-size: 14px;
-	font-family: sans-serif;
-	color: #272121;
-	padding: 5px;
-    }
-
-
-}
-
-
-/* Chrome 48+ (and Opera 35+) */
-
-@supports (-webkit-appearance:none)
-   and (font-feature-settings:normal)
-     and (not (-ms-accelerator:true)) {
-       
-.cx-card-head{
- 	text-transform: capitalize;
-	color: #000;
-	font-size: 17px;
-   }
-   
-.contribution-container__card--info{
-	font-size: 14px;
-	font-family: sans-serif;
-	color: #272121;
-	padding: 5px;
-    }
-
-
-
-}
-

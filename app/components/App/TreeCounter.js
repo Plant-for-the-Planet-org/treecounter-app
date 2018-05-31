@@ -139,6 +139,10 @@ class TreeCounter extends Component {
                 component={EmailSentContainer}
               />
               <PrivateRoute
+                path={'/app_dev.php/en/trillion'}
+                component={Trillion}
+              />
+              <PrivateRoute
                 path={getLocalRoute('app_target')}
                 component={TargetContainer}
               />

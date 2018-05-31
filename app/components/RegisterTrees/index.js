@@ -95,7 +95,7 @@ export default class RegisterTrees extends Component {
 
   render() {
     return (
-      <div className="app-container__content--center">
+      <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>Register planted trees</TextHeading>
         <CardLayout>
           <div className="register-tree">

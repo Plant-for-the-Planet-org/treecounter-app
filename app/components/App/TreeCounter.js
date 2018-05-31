@@ -150,10 +150,7 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_myTrees')}
                 component={UserContributionsContainer}
               />
-              <PublicRoute
-                path={getLocalRoute('app_faq')}
-                component={FAQContainer}
-              />
+              <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
               {/*<Route path={getLocalRoute("app_donateTrees")} component={DonateTrees}/>*/}
 

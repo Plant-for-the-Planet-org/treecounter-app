@@ -4,6 +4,7 @@ import FAQ from '../../components/FAQ';
 import { FAQAction } from '../../actions/faqAction';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import TextHeading from '../../components/Common/Heading/TextHeading';
+import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 
 class FAQContainer extends React.Component {
   constructor() {
@@ -33,7 +34,15 @@ class FAQContainer extends React.Component {
       </div>
     ) : (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>FAQs</TextHeading>
+        <TextHeading>
+          FAQs
+          <DescriptionHeading>
+            Lorem ipsum dolor sit amet, <a>www.trilliontreecampaign.org</a>{' '}
+            sadipscing elitr, sed diam eirmod tempor invidunt ut labore et
+            dolore magna aliquyam erat, sed diam voluptua. At vero eos eet justo
+            duo dolores et ea rebum.
+          </DescriptionHeading>
+        </TextHeading>
         <FAQ faqs={this.state.faqs} />
       </div>
     );

@@ -9,7 +9,7 @@ export function TextInputTemplate(locals) {
         : $event.target.value;
     locals.onChange(value);
   }
-  return (
+  return locals.type !== 'hidden' ? (
     <div className="pftp-textfield">
       {locals.config.iconUrl ? (
         <img className="pftp-textfield__icon" src={locals.config.iconUrl} />
@@ -27,5 +27,5 @@ export function TextInputTemplate(locals) {
         <label>{i18n.t(locals.label)}</label>
       </div>
     </div>
-  );
+  ) : null;
 }

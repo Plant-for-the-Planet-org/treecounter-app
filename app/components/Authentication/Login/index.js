@@ -15,7 +15,7 @@ let TCombForm = t.form.Form;
 export default class Login extends Component {
   render() {
     return (
-      <div className="app-container__content--center">
+      <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>Log In</TextHeading>
         <CardLayout>
           <TCombForm

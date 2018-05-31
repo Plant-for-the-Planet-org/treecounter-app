@@ -9,7 +9,7 @@ import { GreenEmail } from '../../../assets';
 export default class EmailSent extends Component {
   render() {
     return (
-      <div className="app-container__content--center">
+      <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>Forgot Your Password?</TextHeading>
         <CardLayout>
           <img src={GreenEmail} />

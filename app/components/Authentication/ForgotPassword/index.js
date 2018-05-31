@@ -18,7 +18,7 @@ let TCombForm = t.form.Form;
 export default class ForgotPassword extends Component {
   render() {
     return (
-      <div className="app-container__content--center">
+      <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>Forgot Your Password?</TextHeading>
         <CardLayout>
           <TextSpan>

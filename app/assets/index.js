@@ -32,6 +32,12 @@ import education from './images/icons/education.png';
 import company from './images/icons/company.png';
 import arrow_right_orange from './images/icons/arrow_right_orange.png';
 import arrow_left_orange from './images/icons/arrow_left_orange.png';
+import tick from './images/icons/tick.png';
+import locationIcon from './images/icons/location.png';
+import plantedTarget from './images/icons/planted_target.png';
+import target from './images/icons/target.png';
+import tree_survival from './images/icons/tree_survival.png';
+import dollar from './images/icons/dollar.png';
 
 export {
   EditGreen,
@@ -67,5 +73,11 @@ export {
   education,
   company,
   arrow_left_orange,
-  arrow_right_orange
+  arrow_right_orange,
+  tick,
+  locationIcon,
+  plantedTarget,
+  target,
+  tree_survival,
+  dollar
 };

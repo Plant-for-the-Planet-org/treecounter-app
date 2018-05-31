@@ -132,7 +132,8 @@ class PublicTreeCounter extends React.Component {
     };
     const tpoProps = {
       plantProjects: userProfile.plantProjects,
-      defaultPlantProjectId: null
+      defaultPlantProjectId: null,
+      tpoName: caption
     };
 
     return (

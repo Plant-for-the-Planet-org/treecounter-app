@@ -24,7 +24,9 @@ const PlantProjectCarousel = props => {
       ))} */}
 
       <Carousel
-        renderBottomCenterControls={false}
+        renderBottomCenterControls={() => {
+          return false;
+        }}
         renderCenterLeftControls={({ previousSlide }) => (
           <img
             className="tpo-footer-nav-img__left"
@@ -41,8 +43,10 @@ const PlantProjectCarousel = props => {
         )}
       >
         {plantProjects.map(plantProject => (
-          <div>
-            <hr />
+          <div
+            className="tpo-footer-carousel__container"
+            key={`plantProject-${plantProject.id}`}
+          >
             <PlantProjectFull
               key={`plantProject-${plantProject.id}`}
               expanded={false}

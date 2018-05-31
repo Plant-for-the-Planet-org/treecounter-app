@@ -23,23 +23,22 @@ class PlantProjectFull extends React.Component {
   render() {
     const {
       name: projectName,
-      is_certified: isCertified,
-      project_images,
+      isCertified: isCertified,
+      projectImages,
       location,
-      count_planted: countPlanted,
+      countPlanted: countPlanted,
       count_target: countTarget,
-      tree_cost: treeCost,
-      currency,
-      survival_rate: survivalRate,
+      paymentCurrencies,
+      survivalRate: survivalRate,
       images,
       synopsis1,
       synopsis2,
-      homepage_url: homepageUrl,
-      homepage_caption: homepageCaption,
+      homepageUrl: homepageUrl,
+      homepageCaption: homepageCaption,
       video_url: videoUrl,
       map_data: mapData
     } = this.props.plantProject;
-    const projectImage = project_images && project_images.find(() => true);
+    const projectImage = projectImages && projectImages.find(() => true);
 
     const teaserProps = {
       tpoName: this.props.tpoName,
@@ -51,8 +50,7 @@ class PlantProjectFull extends React.Component {
       location,
       countPlanted,
       countTarget,
-      treeCost,
-      currency,
+      paymentCurrencies,
       survivalRate
     };
     const detailsProps = {

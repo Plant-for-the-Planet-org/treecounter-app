@@ -36,7 +36,7 @@ class TpoDonationPlantProjectSelector extends React.Component {
   }
 
   render() {
-    const { plantProjects, onSelect } = this.props;
+    const { plantProjects, onSelect, tpoName } = this.props;
     const caption =
       plantProjects.length === 1
         ? 'caption.plant_project'
@@ -55,6 +55,7 @@ class TpoDonationPlantProjectSelector extends React.Component {
           <PlantProjectCarousel
             contentTag={TagName}
             plantProjects={plantProjects}
+            tpoName={tpoName}
             currentPlantProjectId={this.state.currentPlantProjectId}
             onChange={this.onCarouselChange}
           />
@@ -71,7 +72,8 @@ class TpoDonationPlantProjectSelector extends React.Component {
 TpoDonationPlantProjectSelector.propTypes = {
   plantProjects: PropTypes.array.isRequired,
   defaultPlantProjectId: PropTypes.number,
-  onSelect: PropTypes.func.isRequired
+  onSelect: PropTypes.func.isRequired,
+  tpoName: PropTypes.string.isRequired
 };
 
 export default TpoDonationPlantProjectSelector;

@@ -106,7 +106,7 @@ export default {
           caption: 'Trillion Tree Campaign',
           help: 'menu_item.trillion_tree_campaign.help',
           icon: 'tree_outline',
-          uri: '/app_dev.php/en/trillion'
+          uri: '/app_dev.php/en'
         },
         {
           enabled: 1,

@@ -9,6 +9,7 @@
     align-items: flex-start;
     justify-content: center;
     padding: 0 20px;
+    cursor: pointer;
 
     &.active {
       img {
@@ -38,9 +39,4 @@
       }
     }
   }
-}
-
-.singup-card-width {
-  max-width: 500px;
-  display: flex;
 }

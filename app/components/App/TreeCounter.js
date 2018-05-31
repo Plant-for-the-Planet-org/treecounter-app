@@ -104,7 +104,7 @@ class TreeCounter extends Component {
             <SideMenuContainer loggedIn={isLoggedIn} />
             <div className="app-container__content">
               <PublicRoute exact path="/" component={Trillion} />
-              <PublicRoute
+              <Route
                 exact
                 path={getLocalRoute('app_homepage')}
                 component={Trillion}

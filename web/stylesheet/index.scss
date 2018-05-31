@@ -37,8 +37,6 @@
 @import "./_custom_scrollbar.scss";
 @import "./_auto_suggest.scss";
 @import "./_search_page.scss";
-@import "./_signup_success_page.scss";
-@import "./_signup_page.scss";
 @import "./_register_trees.scss";
 @import "./_trillion_tree.scss";
 @import "./_home_svg.scss";
@@ -47,7 +45,8 @@
 @import "./_header.scss";
 
 // Import Signup SCSS
-@import "./signup/signup_type.scss";
+@import "./signup/_signup_type.scss";
+@import "./signup/_signup_page.scss";
 
 // Import target SCSS
 @import "./target/target.scss";

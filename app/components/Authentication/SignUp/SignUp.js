@@ -32,7 +32,7 @@ export default class SignUp extends Component {
   render() {
     let { Profiletype } = this.state;
     return (
-      <div className="app-container__content--center">
+      <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>Join In</TextHeading>
         <div className="signup-types">
           <SignUpType
@@ -68,18 +68,20 @@ export default class SignUp extends Component {
             onProfileClick={this.ProfileChange}
           />
         </div>
-        <CardLayout>
-          <TCombForm
-            ref={'signupForm'}
-            type={signupFormSchema[Profiletype]}
-            options={schemaOptions[Profiletype]}
-          />
-          <PrimaryButton
-            onClick={this.props.onSignUpClicked.bind(this, Profiletype)}
-          >
-            Sign Up
-          </PrimaryButton>
-        </CardLayout>
+        <div className={'singup-card-width'}>
+          <CardLayout>
+            <TCombForm
+              ref={'signupForm'}
+              type={signupFormSchema[Profiletype]}
+              options={schemaOptions[Profiletype]}
+            />
+            <PrimaryButton
+              onClick={this.props.onSignUpClicked.bind(this, Profiletype)}
+            >
+              Sign Up
+            </PrimaryButton>
+          </CardLayout>
+        </div>
       </div>
     );
   }

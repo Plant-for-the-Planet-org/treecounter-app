@@ -1,5 +1,11 @@
 .app-container__footer {
   display: flex;
-  height: 176px;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
   background-color: white;
+
+  img {
+    height: 69px;
+  }
 }

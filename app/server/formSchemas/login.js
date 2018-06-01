@@ -5,7 +5,7 @@ export default {
     _username: {
       type: 'string',
       title: 'label.email',
-      icon: 'mail',
+      icon: 'email',
       propertyOrder: 1
     },
     _password: {

@@ -1,19 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const UserDetails = ({ userProfile, onLogout }) => {
-  return null === userProfile ? null : (
-    <div className="account-popover">
-      <i className="material-icons">account_box</i>
-      <div className="account-popover__content">
-        <strong>
-          <span>{userProfile.name}</span>
-        </strong>
-        <span>{userProfile.email}</span>
-        <span>
-          {userProfile.firstname} {userProfile.lastname}
-        </span>
+import { ProfilePic, EditGreen, QuestionMarkGreen } from '../../assets';
+import TextSpan from '../Common/Text/TextSpan';
+import TransparentButton from '../Common/Button/TransparentButton';
 
+const UserDetails = ({ userProfile, onLogout }) => {
+  return (
+    <div>
+      <div className="popover__list-item">
+        <div className="list-item__wrapper">
+          <img src={ProfilePic} />
+          <div>
+            <TextSpan strong={true}>{'Hi ' + userProfile.name + '!'}</TextSpan>
+            <TextSpan>{userProfile.email}</TextSpan>
+          </div>
+        </div>
+      </div>
+      <hr className="divider__light" />
+      <div className="popover__list-item">
+        <TransparentButton>
+          <img src={EditGreen} />
+          <span>Edit Profile</span>
+        </TransparentButton>
+        <TransparentButton>
+          <img src={QuestionMarkGreen} />
+          <span>Help</span>
+        </TransparentButton>
+      </div>
+      <hr className="divider__light" />
+      <div className="popover__action-link">
         <a onClick={onLogout}>Logout</a>
       </div>
     </div>

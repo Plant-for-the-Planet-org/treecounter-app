@@ -4,5 +4,5 @@ import { debug } from '../debug/index';
 
 export function NotificationAction() {
   debug('Getting Notifications');
-  return getAuthenticatedRequest('notifications_get');
+  return getAuthenticatedRequest('userfeeds_get');
 }

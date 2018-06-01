@@ -6,21 +6,24 @@ import { NotificationContainer } from 'react-notifications';
 import PropTypes from 'prop-types';
 
 // Components imports
-import TargetPage from '../Target';
-import RegisterTree from '../RegisterTrees/RegisterTrees';
-import Header from '../Header/index';
-import UserContributions from '../UserContributions/UserContributions';
+import TargetContainer from '../../containers/TargetContainer';
+import RegisterTreesContainer from '../../containers/RegisterTrees';
+import HeaderContainer from '../../containers/HeaderContainer';
+import UserContributionsContainer from '../../containers/UserContributions';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 import ResetPasswordContainer from '../Authentication/ResetPassword';
+import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
+import FAQContainer from '../../containers/FAQ';
+
 import Footer from '../Footer';
 
 // Components which use SVG
-import PublicTreecounter from '../TreecounterGraphics/PublicTreecounter';
+import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
 import Trillion from '../TreecounterGraphics/Trillion';
 import Home from '../TreecounterGraphics/Home';
 
@@ -28,6 +31,7 @@ import { loadLoginData } from '../../actions/loadLoginData';
 import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { getLocalRoute } from '../../actions/apiRouting';
+import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -96,11 +100,11 @@ class TreeCounter extends Component {
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
-            <Header />
+            <HeaderContainer />
             <SideMenuContainer loggedIn={isLoggedIn} />
             <div className="app-container__content">
               <PublicRoute exact path="/" component={Trillion} />
-              <PublicRoute
+              <Route
                 exact
                 path={getLocalRoute('app_homepage')}
                 component={Trillion}
@@ -108,6 +112,10 @@ class TreeCounter extends Component {
               <PublicRoute
                 path={getLocalRoute('app_signup')}
                 component={SignUpContainer}
+              />
+              <PublicRoute
+                path={getLocalRoute('app_accountActivation')}
+                component={ActivateAccountContainer}
               />
               {/*<Route exact path={getLocalRoute("app_donateTrees")} render={() => (isLoggedIn ? null : <Redirect to={getLocalRoute("app_login")}/>)}/>*/}
               <PrivateRoute
@@ -126,17 +134,25 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_resetPassword')}
                 component={ResetPasswordContainer}
               />
+              <PublicRoute
+                path={getLocalRoute('app_passwordSent')}
+                component={EmailSentContainer}
+              />
               <PrivateRoute
                 path={getLocalRoute('app_target')}
-                component={TargetPage}
+                component={TargetContainer}
               />
               <PrivateRoute
                 path={getLocalRoute('app_registerTrees')}
-                component={RegisterTree}
+                component={RegisterTreesContainer}
               />
               <PrivateRoute
                 path={getLocalRoute('app_myTrees')}
-                component={UserContributions}
+                component={UserContributionsContainer}
+              />
+              <PublicRoute
+                path={getLocalRoute('app_faq')}
+                component={FAQContainer}
               />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
               {/*<Route path={getLocalRoute("app_donateTrees")} component={DonateTrees}/>*/}
@@ -146,9 +162,9 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_userHome')}
                 component={Home}
               />
-              <PublicRoute
+              <Route
                 path="/treecounterLookup/:treecounterId"
-                component={PublicTreecounter}
+                component={PublicTreecounterContainer}
               />
             </div>
             <Footer />

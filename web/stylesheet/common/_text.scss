@@ -1,5 +1,5 @@
 .pftp-text-basic {
-  font-family: OpenSans;
+  font-family: Open Sans;
   font-size: 14px;
   font-weight: normal;
   font-style: normal;
@@ -12,9 +12,12 @@
 .pftp-text-span {
   @extend .pftp-text-basic;
   text-align: left;
-  &.bold {
-    font-weight: 600;
-  }
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.bold {
+  font-weight: 600;
 }
 
 .pftp-text-block {
@@ -23,24 +26,16 @@
   color: #696261;
 }
 
-.pftp-text-heading {
-  font-family: OpenSans;
-  font-size: 41px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: #575756;
-  border-bottom: 3px solid #bad788;
-  padding-bottom: 20px;
-  margin: 40px 0;
-  display: inline-block;
-}
-
 .link {
   color: #ec6453;
   display: inline;
   cursor: pointer;
+}
+
+.pftp-text-normal {
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
 }

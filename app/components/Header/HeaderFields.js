@@ -1,55 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import UserDetails from './UserDetails';
-import { Popover, OverlayTrigger, Button } from 'react-bootstrap';
+import { ProfilePic } from '../../assets';
 import Notification from './Notification';
-import * as constants from '../../SupportedLanguages/en';
-import { getLocalRoute } from '../../actions/apiRouting';
-
-const popoverNotification = (
-  <Popover id="popover-trigger-focus">
-    <Notification />
-  </Popover>
-);
-
-const popoverAccount = (userProfile, onLogout) => (
-  <Popover id="popover-trigger-focus">
-    <UserDetails userProfile={userProfile} onLogout={onLogout} />
-  </Popover>
-);
+import { updateRoute } from '../../helpers/routerHelper';
+import Popover from '../Common/Popover';
+import UserDetails from './UserDetails';
+import RoundedButton from '../Common/Button/RoundedButton';
 
 const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
-  console.log(
-    'HeaderFields',
-    window.location.pathname,
-    getLocalRoute('app_login')
-  );
-
+  console.log(userProfile, onLogout);
   return isLoggedIn ? (
     <div className="header-icons">
-      <OverlayTrigger
-        trigger="focus"
-        placement="bottom"
-        overlay={popoverNotification}
+      <Popover button={<i className="material-icons">notifications_none</i>}>
+        <Notification />
+      </Popover>
+      <Popover
+        button={<img src={ProfilePic} className="image-rounded-border" />}
       >
-        <Button>
-          <i className="material-icons">notifications_none</i>
-        </Button>
-      </OverlayTrigger>
-      <OverlayTrigger
-        trigger="focus"
-        placement="bottom"
-        overlay={popoverAccount(userProfile, onLogout)}
-      >
-        <Button>
-          <i className="material-icons">account_circle</i>
-        </Button>
-      </OverlayTrigger>
+        <UserDetails userProfile={userProfile} onLogout={onLogout} />
+      </Popover>
     </div>
   ) : (
-    <div className="header-icons no-login">
-      <a href={getLocalRoute('app_login')}>{constants.formStrings.logIn}</a>
+    <div className="header-icons">
+      <RoundedButton onClick={updateRoute.bind(this, 'app_login')}>
+        Log In
+      </RoundedButton>
+      <RoundedButton onClick={updateRoute.bind(this, 'app_signup')}>
+        Sign Up
+      </RoundedButton>
     </div>
   );
 };

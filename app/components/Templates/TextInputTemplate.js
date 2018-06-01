@@ -3,9 +3,13 @@ import i18n from '../../locales/i18n';
 
 export function TextInputTemplate(locals) {
   function onChange($event) {
-    locals.onChange($event.target.value);
+    let value =
+      locals.type === 'number'
+        ? parseInt($event.target.value)
+        : $event.target.value;
+    locals.onChange(value);
   }
-  return (
+  return locals.type !== 'hidden' ? (
     <div className="pftp-textfield">
       {locals.config.iconUrl ? (
         <img className="pftp-textfield__icon" src={locals.config.iconUrl} />
@@ -23,5 +27,5 @@ export function TextInputTemplate(locals) {
         <label>{i18n.t(locals.label)}</label>
       </div>
     </div>
-  );
+  ) : null;
 }

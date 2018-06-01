@@ -6,14 +6,56 @@
   z-index: 1000;
 
   form {
-    max-width: 600px;
     display: flex;
     flex: 2;
-    justify-content: center;
+    justify-content: flex-end;
 
     input {
       border-radius: 5px !important;
     }
+  }
+
+  .popover__list-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+
+    .gap-14 {
+      margin-bottom: 15px;
+    }
+  }
+
+  .popover__action-link {
+    padding-top: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .help-icons {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+  }
+
+  .popover__green-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #b7d37f;
+  }
+
+  .list-item__wrapper {
+    display: flex;
+
+    img {
+      padding-right: 10px;
+    }
+  }
+
+  .image-rounded-border {
+    border: 1px solid;
+    border-radius: 100%;
   }
 
   & .app-header__home {
@@ -40,8 +82,8 @@
   }
 
   .header-icons {
+    display: flex;
     color: white;
-    flex: 1;
     text-align: right;
 
     .btn:focus {
@@ -54,7 +96,7 @@
   .no-login {
     padding: 0 20px;
 
-    a{
+    a {
       color: white;
     }
   }

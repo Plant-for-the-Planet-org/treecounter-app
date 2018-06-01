@@ -17,15 +17,12 @@ export function login(data) {
       .then(res => {
         const { token, refresh_token } = res.data;
         updateJWT(token, refresh_token);
-
-        // dispatch(setUserLogIn({ user: { ...data } }));
-
-        NotificationManager.success('Login Successful', 'Welcome', 5000);
-        updateRoute('app_userHome', dispatch, res.data.data.id);
+        dispatch(loadLoginData());
         return token;
       })
       .then(() => {
-        dispatch(loadLoginData());
+        NotificationManager.success('Login Successful', 'Congrats', 5000);
+        updateRoute('app_userHome', dispatch);
       })
       .catch(error => {
         if (
@@ -61,10 +58,7 @@ export function forgot_password(data) {
     postRequest('auth_forgotPassword_post', data)
       .then(res => {
         debug(res.status);
-        NotificationManager.success(
-          'Further details have been sent to your mail address'
-        );
-        updateRoute('app_login', dispatch);
+        updateRoute('app_passwordSent', dispatch);
       })
       .catch(err => debug(err));
   };

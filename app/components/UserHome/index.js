@@ -9,25 +9,21 @@ export default class UserHome extends Component {
   constructor(props) {
     super(props);
     let svgData = {};
-    setTimeout(() => {
-      const { treecounterData } = props;
-      if (treecounterData) {
-        svgData = treecounterData;
-      }
-      this.state = {
-        svgData: svgData
-      };
-    }, 1);
+    const { treecounterData } = props;
+    if (treecounterData) {
+      svgData = treecounterData;
+    }
+    this.state = {
+      svgData: svgData
+    };
   }
 
   componentWillReceiveProps(nextProps) {
-    setTimeout(() => {
-      const { treecounterData } = nextProps;
-      if (treecounterData) {
-        let svgData = treecounterData;
-        this.setState({ svgData });
-      }
-    }, 1);
+    const { treecounterData } = nextProps;
+    if (treecounterData) {
+      let svgData = treecounterData;
+      this.setState({ svgData });
+    }
   }
 
   render() {

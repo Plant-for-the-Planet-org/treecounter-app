@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import PlantProjectTeaser from './PlantProjectTeaser';
 import PlantProjectSpecs from './PlantProjectSpecs';
-// import SeeMoreToggle from '../Common/SeeMoreToggle';
+import SeeMoreToggle from '../Common/SeeMoreToggle';
 import PlantProjectDetails from './PlantProjectDetails';
 
 /**
@@ -69,10 +69,10 @@ class PlantProjectFull extends React.Component {
       <div>
         <PlantProjectTeaser {...teaserProps} />
         <PlantProjectSpecs {...specsProps} />
-        {/* <SeeMoreToggle
+        <SeeMoreToggle
           seeMore={false === this.state.expanded}
           onToggle={this.toggleExpanded}
-        /> */}
+        />
         {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
       </div>
     );

@@ -19,9 +19,7 @@ const PlantProjectDetails = ({
 }) => {
   return (
     <div>
-      {(synopsis1 || synopsis2) && (
-        <UserSynopsis synopsis1={synopsis1} synopsis2={synopsis2} />
-      )}
+      <UserSynopsis synopsis1={synopsis1} synopsis2={synopsis2} />
       {homepageUrl && (
         <UserHomepageLink homepageUrl={homepageUrl} caption={homepageCaption} />
       )}

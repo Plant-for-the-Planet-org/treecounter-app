@@ -103,12 +103,16 @@
   align-items: center;
 }
 .tree-counter-user-synopsis {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   text-align: left;
   font-size: 15.5px;
   line-height: 1.52;
   color: $headerTextColor;
+}
+.tree-counter-user-single-synopsis {
+  @extend .tree-counter-user-synopsis;
+  grid-template-columns: 1fr;
 }
 .tree-counter-home-page-link {
   display: flex;

@@ -17,6 +17,8 @@ const PlantProjectSpecs = ({
   paymentCurrencies,
   survivalRate
 }) => {
+  let allCurrencyKey = Object.keys(paymentCurrencies);
+
   return (
     <div className="tpo-fotter-teaser__container">
       <div className="teaser__column">
@@ -45,8 +47,38 @@ const PlantProjectSpecs = ({
         <div className="tpo-footer-projectspecs__item">
           <img src={dollar} />
           <span>Cost per Tree</span>
+          {paymentCurrencies && allCurrencyKey.length ? (
+            <div className="tree-cost-subitem">
+              <span className="currency-symbol">
+                {paymentCurrencies[allCurrencyKey[0]].currencySymbol}
+              </span>
+              <span>{paymentCurrencies[allCurrencyKey[0]].treeValue}</span>{' '}
+              {paymentCurrencies[allCurrencyKey[0]].taxDeductable ? (
+                <span className="tax-span">TAX</span>
+              ) : null}
+            </div>
+          ) : null}
         </div>
-        <div>{paymentCurrencies[0]}</div>
+        {allCurrencyKey.map((value, index) => {
+          if (index == 0) return null;
+          return (
+            <div className="tpo-footer-projectspecs__item">
+              <span />
+              <span />
+              {paymentCurrencies && allCurrencyKey.length ? (
+                <div className="tree-cost-subitem">
+                  <span className="currency-symbol">
+                    {paymentCurrencies[value].currencySymbol}
+                  </span>
+                  <span className="">{paymentCurrencies[value].treeValue}</span>
+                  {paymentCurrencies[value].taxDeductable ? (
+                    <span className="tax-span">TAX</span>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

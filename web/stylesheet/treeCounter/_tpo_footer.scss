@@ -49,6 +49,26 @@
     height: 20px;
     width: 20px;
   }
+  .currency-symbol {
+    margin-right: 2px;
+  }
+  .tax-span {
+    background-color: $hoverColor;
+    color: #fff;
+    border-radius: 12.5px;
+    background-color: #b4b4b4;
+    height: 10px;
+    width: 23px;
+    display: inline-block;
+    font-size: 8px;
+    margin-left: 4px;
+    text-align: center;
+  }
+  .tree-cost-subitem {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
 }
 
 .tpo-footer-carousel__container {
@@ -58,7 +78,6 @@
 }
 
 .teaser__projectImage {
-  width: 280px;
   height: 165px;
-  background-color: #e9e9e9;
+  background-color: $placeholderColor;
 }

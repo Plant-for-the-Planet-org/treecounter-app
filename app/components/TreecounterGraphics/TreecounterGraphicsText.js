@@ -42,8 +42,13 @@ class TreecounterGraphicsText extends Component {
           <img className="svg-text-container__row--col" src={pot} />
           <div className="svg-text-container__row--col2">
             <span>
-              Target{' '}
-              {this.props.trillion ? '' : 'by' + targetYear ? targetYear : ''}{' '}
+              {'Target ' +
+                (this.props.trillion
+                  ? ''
+                  : targetYear
+                    ? 'by ' + targetYear
+                    : '') +
+                ' '}
               <br />
               <strong>{target}</strong>
               {this.props.trillion ? (
@@ -51,13 +56,15 @@ class TreecounterGraphicsText extends Component {
                   {this.getTwoWordString(NumberToWords.toWords(target))}
                 </div>
               ) : null}
-              {!targetComment || targetComment === '' ? null : (
-                <ArrowButton
-                  onToggle={e => this.setState({ ifTargetComment: e })}
-                />
-              )}
             </span>
           </div>
+          {!targetComment || targetComment === '' ? null : (
+            <div className="svg-text-container__row--col2">
+              <ArrowButton
+                onToggle={e => this.setState({ ifTargetComment: e })}
+              />{' '}
+            </div>
+          )}
         </div>
         {this.state.ifTargetComment ? (
           <TargetComment comment={targetComment} />

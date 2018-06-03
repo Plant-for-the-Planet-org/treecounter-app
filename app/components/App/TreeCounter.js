@@ -148,7 +148,7 @@ class TreeCounter extends Component {
                 component={RegisterTreesContainer}
               />
               <PrivateRoute
-                path={'app_dev.php/en/myTrees/:id'}
+                path={'/editTrees/:id'}
                 component={EditUserContributionContainer}
               />
               <PrivateRoute
@@ -165,7 +165,7 @@ class TreeCounter extends Component {
                 component={Home}
               />
               <Route
-                path="/treecounterLookup/:treecounterId"
+                path={getLocalRoute('app_treecounter') + '/:id'}
                 component={PublicTreecounterContainer}
               />
             </div>

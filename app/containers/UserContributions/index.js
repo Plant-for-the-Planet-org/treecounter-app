@@ -10,7 +10,7 @@ import { sortedUserContributionsSelector } from '../../selectors/index';
 class UserContributionsContainer extends React.Component {
   render() {
     return (
-      <UserContributions userContributions={this.props.userContributions} />
+      <UserContributions userContribution={this.props.userContributions} />
     );
   }
 }

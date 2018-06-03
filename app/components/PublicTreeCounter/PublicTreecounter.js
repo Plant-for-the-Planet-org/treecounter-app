@@ -133,7 +133,7 @@ class PublicTreeCounter extends React.Component {
     // const tpoProps = {plantProjects: userProfile.plant_projects, defaultPlantProjectId: null}
 
     return (
-      <div className="tree-counter-container">
+      <div className="tree-counter-container sidenav-wrapper">
         <div className="tree-counter-header">
           <TreecounterHeader
             {...headerProps}

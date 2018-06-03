@@ -3,24 +3,24 @@ import PropTypes from 'prop-types';
 
 import ContributionCardList from './ContributionCardList';
 import ContributionsMapLegend from './ContributionsMapLegend';
-// import Map from '../Common/EsriMap/Map';
+import Map from '../Common/EsriMap/Map';
 import * as constants from '../../SupportedLanguages/en';
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import InlineLink from '../Common/InlineLink';
 
 const UserContributions = ({ userContributions }) => {
-  // let mPins = userContributions.map(element => {
-  //   let color = '';
-  //   if (element.contributionType === 'donated') color = 'green';
-  //   else if (element.treeCount > 1) color = 'blue';
-  //   else color = 'orange';
-  //   return {
-  //     lat: element.geoLatitude,
-  //     long: element.geoLongitude,
-  //     color: color
-  //   };
-  // });
+  let mPins = userContributions.map(element => {
+    let color = '';
+    if (element.contributionType === 'donated') color = 'green';
+    else if (element.treeCount > 1) color = 'blue';
+    else color = 'orange';
+    return {
+      lat: element.geoLatitude,
+      long: element.geoLongitude,
+      color: color
+    };
+  });
 
   return (
     <div className="app-container__content--center sidenav-wrapper">
@@ -28,7 +28,7 @@ const UserContributions = ({ userContributions }) => {
       <CardLayout>
         {Object.keys(userContributions).length > 0 ? (
           <div>
-            {/* <Map pins={mPins} /> */}
+            <Map pins={mPins} />
             <ContributionsMapLegend />
             <div className="contribution-container">
               <ContributionCardList contributions={userContributions} />

@@ -51,8 +51,8 @@ export default class Map extends Component {
           PictureMarkerSymbol
         ]) => {
           console.log('Promise this- ', this);
-          var lastClick;
-          var mapThis = this;
+          let lastClick;
+          let mapThis = this;
           // Initialize map, search icon and geolocalizazion-button
           let map = new Map('mapNode', {
             basemap: 'topo',
@@ -105,28 +105,28 @@ export default class Map extends Component {
           on(search, 'search-results', geocodeSearch);
           on(geoLocate, 'locate', geocodeLocate);
           function geocodeSearch(candidate) {
-            var resultCoordinates = candidate.results['0'][0].feature.geometry;
-            var lat = resultCoordinates.getLatitude();
-            var long = resultCoordinates.getLongitude();
+            let resultCoordinates = candidate.results['0'][0].feature.geometry;
+            let lat = resultCoordinates.getLatitude();
+            let long = resultCoordinates.getLongitude();
 
             setLocation(long, lat);
           }
           function geocodeLocate(candidate) {
             map.setLevel(16);
-            var lat = candidate.position.coords.latitude;
-            var long = candidate.position.coords.longitude;
+            let lat = candidate.position.coords.latitude;
+            let long = candidate.position.coords.longitude;
             setLocation(long, lat);
           }
           function geocodeClick(candidate) {
-            var addressAsText = candidate.address.Match_addr;
-            var lat = lastClick.getLatitude();
-            var long = lastClick.getLongitude();
+            let addressAsText = candidate.address.Match_addr;
+            let lat = lastClick.getLatitude();
+            let long = lastClick.getLongitude();
             setLocation(long, lat);
           }
           function geocodeClickError(error) {
-            var lat = lastClick.getLatitude();
-            var long = lastClick.getLongitude();
-            var locationAsText =
+            let lat = lastClick.getLatitude();
+            let long = lastClick.getLongitude();
+            let locationAsText =
               lat.toPrecision(6) + ', ' + long.toPrecision(6);
             setLocation(long, lat);
           }
@@ -139,8 +139,8 @@ export default class Map extends Component {
           }
           function drawMarker(long, lat, symbol) {
             map.graphics.clear();
-            var inPoint = new Point(long, lat);
-            var location = new Graphic(inPoint, symbol);
+            let inPoint = new Point(long, lat);
+            let location = new Graphic(inPoint, symbol);
             map.graphics.add(location);
 
             fetch(
@@ -181,6 +181,11 @@ export default class Map extends Component {
       });
   }
   render() {
-    return <div id="mapNode" style={{ width: '100%', margin: 'auto' }} />;
+    return (
+      <div
+        id="mapNode"
+        style={{ width: '100%', height: '500px', margin: 'auto' }}
+      />
+    );
   }
 }

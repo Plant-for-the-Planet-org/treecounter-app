@@ -11,7 +11,8 @@ class EditUserContributionsContainer extends React.Component {
   render() {
     let { props } = this;
     let userContribution = props.userContributions.filter(
-      contribution => contribution.id == parseInt(props.match.params.id)
+      contribution =>
+        contribution.id == parseInt(props.match.params.selectedTreeId)
     )[0];
     return <EditUserContribution userContribution={userContribution} />;
   }
@@ -27,7 +28,7 @@ EditUserContributionsContainer.propTypes = {
   userContributions: PropTypes.array.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string
+      selectedTreeId: PropTypes.string
     })
   }).isRequired
 };

@@ -152,7 +152,7 @@ class TreeCounter extends Component {
                 component={RegisterTreesContainer}
               />
               <PrivateRoute
-                path={getLocalRoute('app_editTrees') + '/:id'}
+                path={getLocalRoute('app_editTrees') + '/:selectedTreeId'}
                 component={EditUserContributionContainer}
               />
               <PrivateRoute

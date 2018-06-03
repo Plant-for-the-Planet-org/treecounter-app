@@ -82,6 +82,14 @@ const PlantProjectSpecs = ({
             />
           );
         })}
+        <PlantProjectSpecsItem
+          value={
+            <div className="project-specs__taxdeductible">
+              <span className="tax-span">TAX</span>
+              <span> Tax Deductible</span>
+            </div>
+          }
+        />
       </div>
     </div>
   );

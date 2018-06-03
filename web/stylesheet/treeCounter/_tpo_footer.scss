@@ -79,6 +79,7 @@
           font-size: 8px;
           margin-left: 4px;
           text-align: center;
+          vertical-align: middle;
         }
         .tree-cost-subitem {
           display: flex;
@@ -86,14 +87,50 @@
           justify-content: flex-end;
         }
       }
+      .project-specs__taxdeductible {
+        text-align: center;
+        width: 170px;
+        height: 25px;
+        border-radius: 12.5px;
+        background-color: #fff;
+        color: #b4b4b4;
+        border: solid 0.6px #b4b4b4;
+      }
     }
 
     .plant-project-details__container {
       margin-top: 28px;
 
-      .image-carousal {
-        width: 100%;
-        height: 300px;
+      .tpo-footer-nav-img__left {
+        max-height: 30px;
+        max-width: 30px;
+      }
+      .tpo-footer-nav-img__right {
+        max-height: 30px;
+        max-width: 30px;
+      }
+      .project-images-carousal__container {
+        background-color: $placeholderColor;
+        margin-bottom: 39px;
+        .image-carousal {
+          width: 100%;
+          height: 319px;
+          border: 0;
+        }
+        .project-image__description {
+          @extend .pftp-text-basic;
+          height: 50px;
+          opacity: 0.2;
+          background-color: #000000;
+          color: #fff;
+          font-size: 16px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          text-align: left;
+          vertical-align: middle;
+          padding: 6px 21px 8px 30px;
+        }
       }
 
       iframe {

@@ -1,6 +1,21 @@
-.verticalLine {
-  border-left: 2px solid $placeholderColor;
-  height: 40px;
-  text-align: left;
-  padding-left: 10px;
+.see-more-toggle__container {
+  .collapsed {
+    border-left: 2px solid $placeholderColor;
+    height: 40px;
+    text-align: left;
+    padding-left: 10px;
+    a {
+      color: $placeholderColor;
+    }
+  }
+
+  .expanded {
+    border-left: 2px solid $colorPrimary;
+    height: 40px;
+    text-align: left;
+    padding-left: 10px;
+    a {
+      color: $colorPrimary;
+    }
+  }
 }

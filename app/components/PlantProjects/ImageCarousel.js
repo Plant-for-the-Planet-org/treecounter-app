@@ -2,7 +2,7 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Carousel from 'nuka-carousel';
-import { arrow_left_orange, arrow_right_orange } from '../../assets';
+import { arrow_left_green, arrow_right_green } from '../../assets';
 
 const ImageCarousel = props => {
   const { projectImages } = props;
@@ -18,21 +18,27 @@ const ImageCarousel = props => {
         renderCenterLeftControls={({ previousSlide }) => (
           <img
             className="tpo-footer-nav-img__left"
-            src={arrow_left_orange}
+            src={arrow_left_green}
             onClick={previousSlide}
           />
         )}
         renderCenterRightControls={({ nextSlide }) => (
           <img
             className="tpo-footer-nav-img__right"
-            src={arrow_right_orange}
+            src={arrow_right_green}
             onClick={nextSlide}
           />
         )}
       >
         {projectImages.map(projectImage => (
-          <div key={`plantProject-${projectImage.img}`}>
+          <div
+            className="project-images-carousal__container"
+            key={`plantProject-${projectImage.img}`}
+          >
             <img className="image-carousal" src={projectImage.img} />
+            <div className="project-image__description">
+              {projectImage.description}
+            </div>
           </div>
         ))}
       </Carousel>

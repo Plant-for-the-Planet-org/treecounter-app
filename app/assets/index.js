@@ -38,6 +38,8 @@ import plantedTarget from './images/icons/planted_target.png';
 import target from './images/icons/target.png';
 import tree_survival from './images/icons/tree_survival.png';
 import dollar from './images/icons/dollar.png';
+import arrow_right_green from './images/icons/arrow_right_green.png';
+import arrow_left_green from './images/icons/arrow_left_green.png';
 
 export {
   EditGreen,
@@ -79,5 +81,7 @@ export {
   plantedTarget,
   target,
   tree_survival,
-  dollar
+  dollar,
+  arrow_right_green,
+  arrow_left_green
 };

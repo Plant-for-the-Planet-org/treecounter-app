@@ -106,7 +106,7 @@ class PublicTreeCounter extends React.Component {
     if (null === treecounter) {
       return (
         <div className="trillion-container sidenav-wrapper">
-          <LoadingIndicator />;
+          <LoadingIndicator />
         </div>
       );
     }

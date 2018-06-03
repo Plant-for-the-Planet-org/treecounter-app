@@ -10,6 +10,7 @@ import TargetContainer from '../../containers/TargetContainer';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
 import HeaderContainer from '../../containers/HeaderContainer';
 import UserContributionsContainer from '../../containers/UserContributions';
+import EditUserContributionContainer from '../../containers/EditUserContribution';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
@@ -145,6 +146,10 @@ class TreeCounter extends Component {
               <PrivateRoute
                 path={getLocalRoute('app_registerTrees')}
                 component={RegisterTreesContainer}
+              />
+              <PrivateRoute
+                path={'app_dev.php/en/myTrees/:id'}
+                component={EditUserContributionContainer}
               />
               <PrivateRoute
                 path={getLocalRoute('app_myTrees')}

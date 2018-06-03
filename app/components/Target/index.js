@@ -8,7 +8,7 @@ import {
 } from '../../server/parsedSchemas/target';
 
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import TextHeading from '../Common/Text/TextHeading';
+import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 
 let TCombForm = t.form.Form;
@@ -44,7 +44,7 @@ export default class Target extends Component {
 
   render() {
     return (
-      <div className="app-container__content--center">
+      <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>Set Target</TextHeading>
         <CardLayout>
           <TCombForm

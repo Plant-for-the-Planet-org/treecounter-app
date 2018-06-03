@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 
 // Components imports
 import TargetContainer from '../../containers/TargetContainer';
-import RegisterTree from '../RegisterTrees/RegisterTrees';
+import RegisterTreesContainer from '../../containers/RegisterTrees';
 import HeaderContainer from '../../containers/HeaderContainer';
-import UserContributions from '../UserContributions/UserContributions';
+import UserContributionsContainer from '../../containers/UserContributions';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
@@ -18,6 +18,8 @@ import EmailSentContainer from '../../containers/Authentication/EmailSentContain
 import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
+import FAQContainer from '../../containers/FAQ';
+
 import Footer from '../Footer';
 
 // Components which use SVG
@@ -102,7 +104,7 @@ class TreeCounter extends Component {
             <SideMenuContainer loggedIn={isLoggedIn} />
             <div className="app-container__content">
               <PublicRoute exact path="/" component={Trillion} />
-              <PublicRoute
+              <Route
                 exact
                 path={getLocalRoute('app_homepage')}
                 component={Trillion}
@@ -142,12 +144,13 @@ class TreeCounter extends Component {
               />
               <PrivateRoute
                 path={getLocalRoute('app_registerTrees')}
-                component={RegisterTree}
+                component={RegisterTreesContainer}
               />
               <PrivateRoute
                 path={getLocalRoute('app_myTrees')}
-                component={UserContributions}
+                component={UserContributionsContainer}
               />
+              <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
               {/*<Route path={getLocalRoute("app_donateTrees")} component={DonateTrees}/>*/}
 

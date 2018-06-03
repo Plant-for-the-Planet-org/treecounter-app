@@ -4,20 +4,21 @@ import { postAuthenticatedRequest } from '../utils/api';
 
 import { history } from '../components/Common/BrowserRouter';
 import { mergeEntities } from '../reducers/entitiesReducer';
-import { contributionSchema } from '../schemas/index';
+import { treecounterSchema } from '../schemas/index';
 import { getLocalRoute } from './apiRouting';
 import { debug } from '../debug/index';
 
-export function registerTree(plantContribution, treecounterId) {
+export function registerTree(plantContribution, treecounterId, mode) {
   return dispatch => {
     postAuthenticatedRequest('plantContribution_post', plantContribution, {
-      treecounter: treecounterId
+      treecounter: treecounterId,
+      mode: mode
     })
       .then(res => {
         debug(res, res.response);
-        const { data: contribution, statusText, status } = res;
+        const { data: treecounter, statusText, status } = res;
         NotificationManager.success(statusText, status, 5000);
-        dispatch(mergeEntities(normalize(contribution, contributionSchema)));
+        dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         history.push(getLocalRoute('app_userHome'));
       })
       .catch(error => {

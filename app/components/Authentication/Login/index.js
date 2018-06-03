@@ -7,7 +7,7 @@ import {
   schemaOptions
 } from '../../../server/parsedSchemas/login';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import TextHeading from '../../Common/Text/TextHeading';
+import TextHeading from '../../Common/Heading/TextHeading';
 import CardLayout from '../../Common/Card/CardLayout';
 import LoginFooter from './LoginFooter';
 let TCombForm = t.form.Form;
@@ -15,7 +15,7 @@ let TCombForm = t.form.Form;
 export default class Login extends Component {
   render() {
     return (
-      <div className="app-container__content--center">
+      <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>Log In</TextHeading>
         <CardLayout>
           <TCombForm

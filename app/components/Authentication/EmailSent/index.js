@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import TextHeading from '../../Common/Text/TextHeading';
+import TextHeading from '../../Common/Heading/TextHeading';
 import CardLayout from '../../Common/Card/CardLayout';
 import InlineLink from '../../Common/InlineLink';
 import TextBlock from '../../Common/Text/TextBlock';
@@ -9,7 +9,7 @@ import { GreenEmail } from '../../../assets';
 export default class EmailSent extends Component {
   render() {
     return (
-      <div className="app-container__content--center">
+      <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>Forgot Your Password?</TextHeading>
         <CardLayout>
           <img src={GreenEmail} />

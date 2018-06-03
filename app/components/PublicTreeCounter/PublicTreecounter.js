@@ -137,7 +137,7 @@ class PublicTreeCounter extends React.Component {
     };
 
     return (
-      <div className="tree-counter-container trillion-container sidenav-wrapper">
+      <div className="tree-counter-container sidenav-wrapper">
         <div className="tree-counter-header">
           <TreecounterHeader
             {...headerProps}
@@ -155,7 +155,10 @@ class PublicTreeCounter extends React.Component {
         </div>
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />
-          <TreecounterGraphicsText treecounterData={this.state.svgData} />
+          <TreecounterGraphicsText
+            trillion={false}
+            treecounterData={this.state.svgData}
+          />
         </div>
         <div className="tree-counter-footer__container">
           {'tpo' === userProfile.type ? (

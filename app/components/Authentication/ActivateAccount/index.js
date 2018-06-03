@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import TextHeading from '../../Common/Text/TextHeading';
+import TextHeading from '../../Common/Heading/TextHeading';
 import CardLayout from '../../Common/Card/CardLayout';
 import TextBlock from '../../Common/Text/TextBlock';
 import { RedEmail } from '../../../assets';
@@ -9,7 +9,7 @@ import SecondaryButton from '../../Common/Button/SecondaryButton';
 export default class ActivateAccount extends Component {
   render() {
     return (
-      <div className="app-container__content--center">
+      <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>Activate Your Account</TextHeading>
         <CardLayout>
           <img src={RedEmail} />

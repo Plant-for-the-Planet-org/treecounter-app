@@ -7,6 +7,7 @@ $trans-time: 300ms;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  flex: 1;
 
   .pftp-textfield__icon {
     width: 20px;
@@ -69,4 +70,12 @@ $trans-time: 300ms;
       }
     }
   }
+}
+
+// Override date type input
+input[type=date]:required:invalid::-webkit-datetime-edit {
+    color: transparent;
+}
+input[type=date]:focus::-webkit-datetime-edit {
+    color: black !important;
 }

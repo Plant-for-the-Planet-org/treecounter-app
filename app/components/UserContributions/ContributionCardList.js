@@ -4,20 +4,15 @@ import PropTypes from 'prop-types';
 import ContributionCard from './ContributionCard';
 
 const ContributionCardList = props => {
-  const { contributions, updateContribution } = props;
+  const { contributions } = props;
 
   return contributions.map(contribution => (
-    <ContributionCard
-      contribution={contribution}
-      key={contribution.id}
-      updateContribution={updateContribution}
-    />
+    <ContributionCard contribution={contribution} key={contribution.id} />
   ));
 };
 
 ContributionCardList.propTypes = {
-  contributions: PropTypes.array.isRequired,
-  updateContribution: PropTypes.func.isRequired
+  contributions: PropTypes.array.isRequired
 };
 
 export default ContributionCardList;

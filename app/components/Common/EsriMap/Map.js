@@ -181,6 +181,6 @@ export default class Map extends Component {
       });
   }
   render() {
-    return <div id="mapNode" style={{ width: '500px', margin: 'auto' }} />;
+    return <div id="mapNode" style={{ width: '100%', margin: 'auto' }} />;
   }
 }

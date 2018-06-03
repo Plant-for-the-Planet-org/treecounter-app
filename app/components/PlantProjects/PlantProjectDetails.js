@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import UserSynopsis from '../Common/UserSynopsis';
 import UserHomepageLink from '../Common/UserHomepageLink';
-import ImageCarousel from './ImageCarousel';
+import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 
 import VideoContainer from '../Common/VideoContainer';
 // import ArcGISPlantProjectsMap from '../ArcGISMaps/ArcGISPlantProjectsMap';
@@ -25,7 +25,7 @@ const PlantProjectDetails = ({
   }
   return (
     <div className="plant-project-details__container">
-      <ImageCarousel projectImages={projectImages} />
+      <PlantProjectImageCarousel projectImages={projectImages} />
       <UserSynopsis synopsis1={synopsis1} synopsis2={synopsis2} />
       {homepageUrl && (
         <UserHomepageLink homepageUrl={homepageUrl} caption={homepageCaption} />

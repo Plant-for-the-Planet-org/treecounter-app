@@ -67,6 +67,9 @@
         }
         .currency-symbol {
           margin-right: 2px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
         .tax-span {
           background-color: $hoverColor;

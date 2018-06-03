@@ -5,60 +5,71 @@ import Carousel from 'nuka-carousel';
 import PlantProjectFull from './PlantProjectFull';
 import { arrow_left_orange, arrow_right_orange } from '../../assets';
 
-const PlantProjectCarousel = props => {
-  const { plantProjects, onChange, contentTag, tpoName } = props;
+class PlantProjectCarousel extends React.Component {
+  _handleLoadImage = () => {
+    this.carousel.setDimensions();
+  };
+  render() {
+    const { plantProjects, onChange, contentTag, tpoName } = this.props;
 
-  // see: https://medium.com/@Carmichaelize/dynamic-tag-names-in-react-and-jsx-17e366a684e9
-  const TagName = contentTag;
-  console.log(onChange);
-  console.log('TagName', TagName);
-  console.log(tpoName);
+    // see: https://medium.com/@Carmichaelize/dynamic-tag-names-in-react-and-jsx-17e366a684e9
+    const TagName = contentTag;
+    console.log(onChange);
+    console.log('TagName', TagName);
+    console.log(tpoName);
 
-  // add navigation buttons that will trigger calls to 'onChange' callback
-  return (
-    <div>
-      {/* {plantProjects.map(plantProject => (
+    // add navigation buttons that will trigger calls to 'onChange' callback
+    return (
+      <div>
+        {/* {plantProjects.map(plantProject => (
         <Link to="#" onClick={() => onChange(plantProject.id)}>
           {plantProject.id} |{' '}
         </Link>
       ))} */}
 
-      <Carousel
-        renderBottomCenterControls={() => {
-          return false;
-        }}
-        renderCenterLeftControls={({ previousSlide }) => (
-          <img
-            className="tpo-footer-nav-img__left"
-            src={arrow_left_orange}
-            onClick={previousSlide}
-          />
-        )}
-        renderCenterRightControls={({ nextSlide }) => (
-          <img
-            className="tpo-footer-nav-img__right"
-            src={arrow_right_orange}
-            onClick={nextSlide}
-          />
-        )}
-      >
-        {plantProjects.map(plantProject => (
-          <div
-            className="tpo-footer-carousel__container"
-            key={`plantProject-${plantProject.id}`}
-          >
-            <PlantProjectFull
-              key={`plantProject-${plantProject.id}`}
-              expanded={false}
-              tpoName={tpoName}
-              plantProject={plantProject}
+        <Carousel
+          oneOf="current"
+          ref={c => {
+            this.carousel = c;
+          }}
+          // wrapAround={true}
+          renderBottomCenterControls={() => {
+            return false;
+          }}
+          renderCenterLeftControls={({ previousSlide }) => (
+            <img
+              className="tpo-footer-nav-img__left"
+              src={arrow_left_orange}
+              onClick={previousSlide}
             />
-          </div>
-        ))}
-      </Carousel>
-    </div>
-  );
-};
+          )}
+          renderCenterRightControls={({ nextSlide }) => (
+            <img
+              className="tpo-footer-nav-img__right"
+              src={arrow_right_orange}
+              onClick={nextSlide}
+            />
+          )}
+        >
+          {plantProjects.map(plantProject => (
+            <div
+              className="tpo-footer-carousel__container"
+              key={`plantProject-${plantProject.id}`}
+            >
+              <PlantProjectFull
+                key={`plantProject-${plantProject.id}`}
+                expanded={false}
+                tpoName={tpoName}
+                plantProject={plantProject}
+                onToggle={this._handleLoadImage}
+              />
+            </div>
+          ))}
+        </Carousel>
+      </div>
+    );
+  }
+}
 
 PlantProjectCarousel.propTypes = {
   contentTag: PropTypes.string.isRequired,

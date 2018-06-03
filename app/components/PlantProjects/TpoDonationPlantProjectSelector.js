@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ActionButton from '../Common/ActionButton';
+import PrimaryButton from '../Common/Button/PrimaryButton';
 import CardLayout from '../Common/Card/CardLayout';
 import ContentHeader from '../Common/ContentHeader';
 import PlantProjectCarousel from './PlantProjectCarousel';
@@ -60,10 +60,11 @@ class TpoDonationPlantProjectSelector extends React.Component {
             onChange={this.onCarouselChange}
           />
         )}
-        <ActionButton
-          caption={'button.label.donate'}
+        <PrimaryButton
           onClick={() => onSelect(this.state.currentPlantProjectId)}
-        />
+        >
+          button.label.donate
+        </PrimaryButton>
       </CardLayout>
     );
   }

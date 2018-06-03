@@ -62,7 +62,7 @@ const PlantProjectSpecs = ({
         {allCurrencyKey.map((value, index) => {
           if (index == 0) return null;
           return (
-            <div className="tpo-footer-projectspecs__item">
+            <div className="tpo-footer-projectspecs__item" key={index}>
               <span />
               <span />
               {paymentCurrencies && allCurrencyKey.length ? (

@@ -18,6 +18,7 @@ class PlantProjectFull extends React.Component {
 
   toggleExpanded() {
     this.setState({ expanded: !this.state.expanded });
+    this.props.onToggle();
   }
 
   render() {
@@ -60,7 +61,8 @@ class PlantProjectFull extends React.Component {
       homepageUrl,
       homepageCaption,
       videoUrl,
-      mapData
+      mapData,
+      projectImages
     };
     console.log(teaserProps);
     console.log(specsProps);
@@ -82,7 +84,8 @@ class PlantProjectFull extends React.Component {
 PlantProjectFull.propTypes = {
   plantProject: PropTypes.object.isRequired,
   expanded: PropTypes.bool.isRequired,
-  tpoName: PropTypes.string
+  tpoName: PropTypes.string,
+  onToggle: PropTypes.func
 };
 
 export default PlantProjectFull;

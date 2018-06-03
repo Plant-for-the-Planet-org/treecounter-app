@@ -72,7 +72,7 @@ class PlantProjectFull extends React.Component {
         <PlantProjectTeaser {...teaserProps} />
         <PlantProjectSpecs {...specsProps} />
         <SeeMoreToggle
-          seeMore={false === this.state.expanded}
+          seeMore={!this.state.expanded}
           onToggle={this.toggleExpanded}
         />
         {this.state.expanded && <PlantProjectDetails {...detailsProps} />}

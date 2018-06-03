@@ -20,15 +20,17 @@ const PlantProjectDetails = ({
   videoUrl
   // mapData
 }) => {
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
+  }
   return (
-    <div className="plantproject-details__container">
+    <div className="plant-project-details__container">
       <ImageCarousel projectImages={projectImages} />
       <UserSynopsis synopsis1={synopsis1} synopsis2={synopsis2} />
       {homepageUrl && (
         <UserHomepageLink homepageUrl={homepageUrl} caption={homepageCaption} />
       )}
-
-      {videoUrl && <VideoContainer videoUrl={videoUrl} />}
+      {videoUrl && <VideoContainer url={videoUrl} />}
       {/* <ArcGISPlantProjectsMap mapData={mapData} /> */}
     </div>
   );

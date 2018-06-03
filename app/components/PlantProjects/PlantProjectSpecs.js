@@ -20,31 +20,31 @@ const PlantProjectSpecs = ({
   let allCurrencyKey = Object.keys(paymentCurrencies);
 
   return (
-    <div className="tpo-fotter-teaser__container">
-      <div className="teaser__column">
-        <div className="tpo-footer-projectspecs__item">
+    <div className="project-specs__container">
+      <div className="column">
+        <div className="project-specs__item">
           <img src={locationIcon} />
           <span>location</span>
           <span>{location}</span>
         </div>
-        <div className="tpo-footer-projectspecs__item">
+        <div className="project-specs__item">
           <img src={plantedTarget} />
           <span>Planted</span>
           <span>{countPlanted}</span>
         </div>
-        <div className="tpo-footer-projectspecs__item">
+        <div className="project-specs__item">
           <img src={target} />
           <span>Target</span>
           <span>{countTarget}</span>
         </div>
-        <div className="tpo-footer-projectspecs__item">
+        <div className="project-specs__item">
           <img src={tree_survival} />
           <span>Survival Rate</span>
           <span>{survivalRate}</span>
         </div>
       </div>
-      <div className="teaser__column">
-        <div className="tpo-footer-projectspecs__item">
+      <div className="column">
+        <div className="project-specs__item">
           <img src={dollar} />
           <span>Cost per Tree</span>
           {paymentCurrencies && allCurrencyKey.length ? (
@@ -62,7 +62,7 @@ const PlantProjectSpecs = ({
         {allCurrencyKey.map((value, index) => {
           if (index == 0) return null;
           return (
-            <div className="tpo-footer-projectspecs__item" key={index}>
+            <div className="project-specs__item" key={index}>
               <span />
               <span />
               {paymentCurrencies && allCurrencyKey.length ? (

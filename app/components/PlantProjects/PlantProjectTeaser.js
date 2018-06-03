@@ -12,8 +12,8 @@ const PlantProjectTeaser = ({
   projectImage
 }) => {
   return (
-    <div className="tpo-fotter-teaser__container">
-      <div className="teaser__column">
+    <div className="project-teaser__container">
+      <div className="column">
         <span>
           {projectName}{' '}
           <span>

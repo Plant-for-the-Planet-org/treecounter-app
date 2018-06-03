@@ -42,8 +42,8 @@ class Trillion extends Component {
       })
       .catch(error => console.log(error));
   }
+
   shouldComponentUpdate() {
-    this.forceUpdate();
     return true;
   }
 

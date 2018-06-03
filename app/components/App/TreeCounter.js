@@ -25,8 +25,8 @@ import Footer from '../Footer';
 
 // Components which use SVG
 import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
+import UserHome from '../../containers/UserHome';
 import Trillion from '../TreecounterGraphics/Trillion';
-import Home from '../TreecounterGraphics/Home';
 
 import { loadLoginData } from '../../actions/loadLoginData';
 import { getAccessToken } from '../../utils/user';
@@ -162,10 +162,10 @@ class TreeCounter extends Component {
               {/* Routes which essentially show svg */}
               <PrivateRoute
                 path={getLocalRoute('app_userHome')}
-                component={Home}
+                component={UserHome}
               />
               <Route
-                path={getLocalRoute('app_treecounter') + '/:id'}
+                path={getLocalRoute('app_treecounter') + '/:treecounterId'}
                 component={PublicTreecounterContainer}
               />
             </div>

@@ -13,11 +13,11 @@ export function loadLoginData() {
   return dispatch => {
     request.then(res => {
       debug(res);
-      dispatch(mergeEntities(normalize(res.data.tpos, [tpoSchema])));
       dispatch(
         mergeEntities(normalize(res.data.userProfile, userProfileSchema))
       );
       dispatch(setCurrentUserProfileId(res.data.userProfile.id));
+      dispatch(mergeEntities(normalize(res.data.tpos, [tpoSchema])));
     });
   };
 }

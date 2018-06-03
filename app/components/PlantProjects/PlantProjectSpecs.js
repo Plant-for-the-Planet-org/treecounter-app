@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PlantProjectSpecsItem from './PlantProjectSpecsItem';
+
 import {
   locationIcon,
   plantedTarget,
@@ -22,50 +24,51 @@ const PlantProjectSpecs = ({
   return (
     <div className="project-specs__container">
       <div className="column">
-        <div className="project-specs__item">
-          <img src={locationIcon} />
-          <span>location</span>
-          <span>{location}</span>
-        </div>
-        <div className="project-specs__item">
-          <img src={plantedTarget} />
-          <span>Planted</span>
-          <span>{countPlanted}</span>
-        </div>
-        <div className="project-specs__item">
-          <img src={target} />
-          <span>Target</span>
-          <span>{countTarget}</span>
-        </div>
-        <div className="project-specs__item">
-          <img src={tree_survival} />
-          <span>Survival Rate</span>
-          <span>{survivalRate}</span>
-        </div>
+        <PlantProjectSpecsItem
+          icon={locationIcon}
+          value={location}
+          label="location"
+        />
+        <PlantProjectSpecsItem
+          icon={plantedTarget}
+          value={countPlanted}
+          label="Planted"
+        />
+        <PlantProjectSpecsItem
+          icon={target}
+          value={countTarget}
+          label="Target"
+        />
+        <PlantProjectSpecsItem
+          icon={tree_survival}
+          value={survivalRate}
+          label="Survival Rate"
+        />
       </div>
       <div className="column">
-        <div className="project-specs__item">
-          <img src={dollar} />
-          <span>Cost per Tree</span>
-          {paymentCurrencies && allCurrencyKey.length ? (
-            <div className="tree-cost-subitem">
-              <span className="currency-symbol">
-                {paymentCurrencies[allCurrencyKey[0]].currencySymbol}
-              </span>
-              <span>{paymentCurrencies[allCurrencyKey[0]].treeValue}</span>{' '}
-              {paymentCurrencies[allCurrencyKey[0]].taxDeductable ? (
-                <span className="tax-span">TAX</span>
-              ) : null}
-            </div>
-          ) : null}
-        </div>
+        <PlantProjectSpecsItem
+          icon={dollar}
+          value={
+            paymentCurrencies && allCurrencyKey.length ? (
+              <div className="tree-cost-subitem">
+                <span className="currency-symbol">
+                  {paymentCurrencies[allCurrencyKey[0]].currencySymbol}
+                </span>
+                <span>{paymentCurrencies[allCurrencyKey[0]].treeValue}</span>{' '}
+                {paymentCurrencies[allCurrencyKey[0]].taxDeductable ? (
+                  <span className="tax-span">TAX</span>
+                ) : null}
+              </div>
+            ) : null
+          }
+          label="Cost per Tree"
+        />
         {allCurrencyKey.map((value, index) => {
           if (index == 0) return null;
           return (
-            <div className="project-specs__item" key={index}>
-              <span />
-              <span />
-              {paymentCurrencies && allCurrencyKey.length ? (
+            <PlantProjectSpecsItem
+              key={index}
+              value={
                 <div className="tree-cost-subitem">
                   <span className="currency-symbol">
                     {paymentCurrencies[value].currencySymbol}
@@ -75,8 +78,8 @@ const PlantProjectSpecs = ({
                     <span className="tax-span">TAX</span>
                   ) : null}
                 </div>
-              ) : null}
-            </div>
+              }
+            />
           );
         })}
       </div>

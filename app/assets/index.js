@@ -33,6 +33,16 @@ import organization from './images/icons/organization.png';
 import competition from './images/icons/competition.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
+import arrow_right_orange from './images/icons/arrow_right_orange.png';
+import arrow_left_orange from './images/icons/arrow_left_orange.png';
+import tick from './images/icons/tick.png';
+import locationIcon from './images/icons/location.png';
+import plantedTarget from './images/icons/planted_target.png';
+import target from './images/icons/target.png';
+import tree_survival from './images/icons/tree_survival.png';
+import dollar from './images/icons/dollar.png';
+import arrow_right_green from './images/icons/arrow_right_green.png';
+import arrow_left_green from './images/icons/arrow_left_green.png';
 
 export {
   MapPinBlue,
@@ -69,5 +79,15 @@ export {
   organization,
   competition,
   education,
-  company
+  company,
+  arrow_left_orange,
+  arrow_right_orange,
+  tick,
+  locationIcon,
+  plantedTarget,
+  target,
+  tree_survival,
+  dollar,
+  arrow_right_green,
+  arrow_left_green
 };

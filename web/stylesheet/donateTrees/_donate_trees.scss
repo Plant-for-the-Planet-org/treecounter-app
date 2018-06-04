@@ -1,0 +1,25 @@
+.donate-tress__container {
+  position: relative;
+  .donate-tree-nav-img__right {
+    position: absolute;
+    max-height: 40px;
+    max-width: 40px;
+    cursor: pointer;
+    color: transparent;
+    display: block;
+    padding: 0;
+    top: -95px;
+    right: -5%;
+  }
+  .donate-tree-nav-img__left {
+    position: absolute;
+    max-height: 40px;
+    max-width: 40px;
+    cursor: pointer;
+    color: transparent;
+    display: block;
+    padding: 0;
+    top: -95px;
+    left: -5%;
+  }
+}

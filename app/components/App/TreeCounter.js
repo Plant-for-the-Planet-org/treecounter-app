@@ -33,6 +33,7 @@ import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { getLocalRoute } from '../../actions/apiRouting';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
+import DonationTreesContainer from '../../containers/DonateTrees/index';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -161,7 +162,10 @@ class TreeCounter extends Component {
               />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
-              {/*<Route path={getLocalRoute("app_donateTrees")} component={DonateTrees}/>*/}
+              <Route
+                path={getLocalRoute('app_donateTrees')}
+                component={DonationTreesContainer}
+              />
 
               {/* Routes which essentially show svg */}
               <Route

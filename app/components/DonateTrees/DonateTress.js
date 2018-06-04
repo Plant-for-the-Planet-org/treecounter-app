@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
+
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import Slider from 'react-slick';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_green, arrow_left_green } from '../../assets';
+import {
+  selectedPlantProjectSelector,
+  selectedTpoSelector
+} from '../../selectors/index';
 
 const headings = ['Project', 'Donation Details', 'Donor Details', 'Payment'];
 
-export default class DonateTrees extends Component {
+class DonateTrees extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       pageIndex: 0
     };
   }
+
   indexChange(index) {
     console.log(index);
     this.setState({
@@ -23,6 +32,12 @@ export default class DonateTrees extends Component {
   }
 
   render() {
+    console.log(
+      '**************** selectedPlantProject: ',
+      this.props.selectedPlantProject
+    );
+    console.log('**************** selectedTpo: ', this.props.selectedTpo);
+
     const settings = {
       dots: true,
       nextArrow: (
@@ -75,3 +90,17 @@ export default class DonateTrees extends Component {
     );
   }
 }
+
+DonateTrees.propTypes = {
+  selectedPlantProject: PropTypes.object,
+  selectedTpo: PropTypes.object
+};
+
+const mapStateToProps = state => {
+  return {
+    selectedPlantProject: selectedPlantProjectSelector(state),
+    selectedTpo: selectedTpoSelector(state)
+  };
+};
+
+export default connect(mapStateToProps)(DonateTrees);

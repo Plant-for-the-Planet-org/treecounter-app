@@ -109,6 +109,19 @@ export const selectedPlantProjectSelector = createSelector(
       : plantProjects[selectedPlantProjectId];
   }
 );
+/**
+ * Returns the TPO that corresponds to the currently selected plant project
+ */
+export const selectedTpoSelector = createSelector(
+  selectedPlantProjectSelector,
+  getTpos,
+  (selectedPlantProject, tpos) => {
+    logSelectorUpdate('selectedTpoSelector');
+    return null === selectedPlantProject
+      ? null
+      : tpos[selectedPlantProject.tpoId];
+  }
+);
 
 /**
  * Returns an array of normalized payment gateway entities related to the currently selected plant project or null.

@@ -3,19 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import { arrow_left_green, arrow_right_green } from '../../assets';
-
-class CarouselNavigation extends React.Component {
-  render() {
-    const { onClick, src, styleName } = this.props;
-    return <img className={styleName} src={src} onClick={onClick} />;
-  }
-}
-
-CarouselNavigation.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  styleName: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired
-};
+import CarouselNavigation from '../Common/CarouselNavigation';
 
 const PlantProjectImageCarousel = props => {
   const { projectImages } = props;

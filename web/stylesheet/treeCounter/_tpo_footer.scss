@@ -35,6 +35,11 @@
     margin-top: 50px;
     margin-left: 43px;
     margin-right: 51px;
+
+    .slick-slide,
+    .slick-slide * {
+      outline: none !important;
+    }
     .tpo-footer-carousel__container {
       .project-teaser__container {
         display: grid;
@@ -116,10 +121,14 @@
         .tpo-footer-nav-img__left {
           max-height: 30px;
           max-width: 30px;
+          left: 4px;
+          z-index: 10;
         }
         .tpo-footer-nav-img__right {
           max-height: 30px;
           max-width: 30px;
+          right: 4px;
+          z-index: 10;
         }
         .slick-initialized {
           margin-top: 0;

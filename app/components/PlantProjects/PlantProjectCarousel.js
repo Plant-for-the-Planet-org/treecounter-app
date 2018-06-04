@@ -1,15 +1,41 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Carousel from 'nuka-carousel';
 import PlantProjectFull from './PlantProjectFull';
-import { arrow_left_orange, arrow_right_orange } from '../../assets';
+import { arrow_right_orange, arrow_left_orange } from '../../assets';
+import Slider from 'react-slick';
+
+class CarouselNavigation extends React.Component {
+  render() {
+    const { onClick, src, styleName } = this.props;
+    return <img className={styleName} src={src} onClick={onClick} />;
+  }
+}
+
+CarouselNavigation.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  styleName: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired
+};
 
 class PlantProjectCarousel extends React.Component {
   _handleLoadImage = () => {
     this.carousel.setDimensions();
   };
   render() {
+    const settings = {
+      nextArrow: (
+        <CarouselNavigation
+          styleName="tpo-footer-nav-img__right"
+          src={arrow_right_orange}
+        />
+      ),
+      prevArrow: (
+        <CarouselNavigation
+          styleName="tpo-footer-nav-img__left"
+          src={arrow_left_orange}
+        />
+      )
+    };
     const { plantProjects, onChange, contentTag, tpoName } = this.props;
 
     // see: https://medium.com/@Carmichaelize/dynamic-tag-names-in-react-and-jsx-17e366a684e9
@@ -27,30 +53,7 @@ class PlantProjectCarousel extends React.Component {
         </Link>
       ))} */}
 
-        <Carousel
-          oneOf="current"
-          ref={c => {
-            this.carousel = c;
-          }}
-          // wrapAround={true}
-          renderBottomCenterControls={() => {
-            return false;
-          }}
-          renderCenterLeftControls={({ previousSlide }) => (
-            <img
-              className="tpo-footer-nav-img__left"
-              src={arrow_left_orange}
-              onClick={previousSlide}
-            />
-          )}
-          renderCenterRightControls={({ nextSlide }) => (
-            <img
-              className="tpo-footer-nav-img__right"
-              src={arrow_right_orange}
-              onClick={nextSlide}
-            />
-          )}
-        >
+        <Slider {...settings}>
           {plantProjects.map(plantProject => (
             <div
               className="tpo-footer-carousel__container"
@@ -65,7 +68,7 @@ class PlantProjectCarousel extends React.Component {
               />
             </div>
           ))}
-        </Carousel>
+        </Slider>
       </div>
     );
   }

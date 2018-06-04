@@ -6,7 +6,7 @@
     align-items: center;
     display: flex;
     padding-left: 10px;
-    a {
+    span {
       color: $placeholderColor;
     }
   }
@@ -18,7 +18,7 @@
     align-items: center;
     text-align: left;
     padding-left: 10px;
-    a {
+    span {
       color: $colorPrimary;
     }
   }

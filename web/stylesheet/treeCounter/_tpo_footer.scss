@@ -13,138 +13,153 @@
     position: absolute;
     max-height: 40px;
     max-width: 40px;
+    cursor: pointer;
+    color: transparent;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    display: block;
+    padding: 0;
+    top: 50%;
   }
   .tpo-footer-nav-img__left {
     @extend .tpo-footer-nav-img;
-    left: -20px;
+    left: -63px;
   }
   .tpo-footer-nav-img__right {
     @extend .tpo-footer-nav-img;
-    right: -20px;
+    right: -70px;
   }
 
-  .tpo-footer-carousel__container {
+  .slick-initialized {
     margin-top: 50px;
     margin-left: 43px;
     margin-right: 51px;
-
-    .project-teaser__container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      margin-bottom: 20px;
-      .column {
-        @extend .pftp-text-basic;
-        font-size: 15.5px;
-        font-weight: 600;
-        line-height: 1.52;
-        text-align: left;
-        color: $headerTextColor;
-        .teaser__tpoName {
-          font-weight: normal;
-        }
-        .teaser__certified {
-          width: 14px;
-          height: 14px;
-          vertical-align: middle;
-        }
-      }
-
-      .teaser__projectImage {
-        height: 165px;
-        background-color: $placeholderColor;
-      }
-    }
-
-    .project-specs__container {
-      @extend .project-teaser__container;
-      .project-specs__item {
+    .tpo-footer-carousel__container {
+      .project-teaser__container {
         display: grid;
-        grid-template-columns: 26px 1fr 1fr;
-        margin-bottom: 3px;
-        img {
-          height: 20px;
-          width: 20px;
-        }
-        .currency-symbol {
-          margin-right: 2px;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
-        .tax-span {
-          background-color: $hoverColor;
-          color: #fff;
-          border-radius: 12.5px;
-          background-color: #b4b4b4;
-          height: 10px;
-          width: 23px;
-          display: inline-block;
-          font-size: 8px;
-          margin-left: 4px;
-          text-align: center;
-          vertical-align: middle;
-        }
-        .tree-cost-subitem {
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-        }
-      }
-      .project-specs__taxdeductible {
-        text-align: center;
-        width: 170px;
-        height: 25px;
-        border-radius: 12.5px;
-        background-color: #fff;
-        color: #b4b4b4;
-        border: solid 0.6px #b4b4b4;
-      }
-    }
-
-    .plant-project-details__container {
-      margin-top: 28px;
-
-      .tpo-footer-nav-img__left {
-        max-height: 30px;
-        max-width: 30px;
-      }
-      .tpo-footer-nav-img__right {
-        max-height: 30px;
-        max-width: 30px;
-      }
-      .project-images-carousal__container {
-        background-color: $placeholderColor;
-        margin-bottom: 39px;
-        .image-carousal {
-          width: 100%;
-          height: 319px;
-          border: 0;
-        }
-        .project-image__description {
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 20px;
+        .column {
           @extend .pftp-text-basic;
-          height: 50px;
-          opacity: 0.2;
-          background-color: #000000;
-          color: #fff;
-          font-size: 16px;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
+          font-size: 15.5px;
+          font-weight: 600;
+          line-height: 1.52;
           text-align: left;
-          vertical-align: middle;
-          padding: 6px 21px 8px 30px;
+          color: $headerTextColor;
+          .teaser__tpoName {
+            font-weight: normal;
+          }
+          .teaser__certified {
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
+            display: inline-block;
+          }
+        }
+
+        .teaser__projectImage {
+          height: 165px;
+          background-color: $placeholderColor;
         }
       }
 
-      iframe {
-        border: none;
-        width: 100%;
-        height: 100%;
-        min-height: 353px;
+      .project-specs__container {
+        @extend .project-teaser__container;
+        .project-specs__item {
+          display: grid;
+          grid-template-columns: 26px 1fr 1fr;
+          margin-bottom: 3px;
+          img {
+            height: 20px;
+            width: 20px;
+          }
+          .currency-symbol {
+            margin-right: 2px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+          .tax-span {
+            background-color: $hoverColor;
+            color: #fff;
+            border-radius: 12.5px;
+            background-color: #b4b4b4;
+            height: 10px;
+            width: 23px;
+            display: inline-block;
+            font-size: 8px;
+            margin-left: 4px;
+            text-align: center;
+            vertical-align: middle;
+          }
+          .tree-cost-subitem {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+          }
+        }
+        .project-specs__taxdeductible {
+          text-align: center;
+          width: 170px;
+          height: 25px;
+          border-radius: 12.5px;
+          background-color: #fff;
+          color: #b4b4b4;
+          border: solid 0.6px #b4b4b4;
+        }
       }
-      .youtube-video__container {
-        margin-top: 76px;
-        margin-bottom: 43px;
+
+      .plant-project-details__container {
+        margin-top: 28px;
+
+        .tpo-footer-nav-img__left {
+          max-height: 30px;
+          max-width: 30px;
+        }
+        .tpo-footer-nav-img__right {
+          max-height: 30px;
+          max-width: 30px;
+        }
+        .slick-initialized {
+          margin-top: 0;
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .project-images-carousal__container {
+          background-color: $placeholderColor;
+          margin-bottom: 39px;
+          .image-carousal {
+            width: 100%;
+            height: 319px;
+            border: 0;
+          }
+          .project-image__description {
+            @extend .pftp-text-basic;
+            height: 50px;
+            opacity: 0.2;
+            background-color: #000000;
+            color: #fff;
+            font-size: 16px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            text-align: left;
+            vertical-align: middle;
+            padding: 6px 21px 8px 30px;
+          }
+        }
+
+        iframe {
+          border: none;
+          width: 100%;
+          height: 100%;
+          min-height: 353px;
+        }
+        .youtube-video__container {
+          margin-top: 76px;
+          margin-bottom: 43px;
+        }
       }
     }
   }

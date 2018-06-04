@@ -1,35 +1,44 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Carousel from 'nuka-carousel';
+import Slider from 'react-slick';
 import { arrow_left_green, arrow_right_green } from '../../assets';
 
-const ImageCarousel = props => {
+class CarouselNavigation extends React.Component {
+  render() {
+    const { onClick, src, styleName } = this.props;
+    return <img className={styleName} src={src} onClick={onClick} />;
+  }
+}
+
+CarouselNavigation.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  styleName: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired
+};
+
+const PlantProjectImageCarousel = props => {
   const { projectImages } = props;
   if (!projectImages || projectImages.length == 0) {
     return null;
   }
+  const settings = {
+    nextArrow: (
+      <CarouselNavigation
+        styleName="tpo-footer-nav-img__right"
+        src={arrow_right_green}
+      />
+    ),
+    prevArrow: (
+      <CarouselNavigation
+        styleName="tpo-footer-nav-img__left"
+        src={arrow_left_green}
+      />
+    )
+  };
   return (
     <div>
-      <Carousel
-        renderBottomCenterControls={() => {
-          return false;
-        }}
-        renderCenterLeftControls={({ previousSlide }) => (
-          <img
-            className="tpo-footer-nav-img__left"
-            src={arrow_left_green}
-            onClick={previousSlide}
-          />
-        )}
-        renderCenterRightControls={({ nextSlide }) => (
-          <img
-            className="tpo-footer-nav-img__right"
-            src={arrow_right_green}
-            onClick={nextSlide}
-          />
-        )}
-      >
+      <Slider {...settings}>
         {projectImages.map(projectImage => (
           <div
             className="project-images-carousal__container"
@@ -41,13 +50,13 @@ const ImageCarousel = props => {
             </div>
           </div>
         ))}
-      </Carousel>
+      </Slider>
     </div>
   );
 };
 
-ImageCarousel.propTypes = {
+PlantProjectImageCarousel.propTypes = {
   projectImages: PropTypes.array.isRequired
 };
 
-export default ImageCarousel;
+export default PlantProjectImageCarousel;

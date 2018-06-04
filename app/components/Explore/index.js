@@ -20,6 +20,7 @@ export default class Explore extends Component {
   };
 
   constructor() {
+    super();
     this.onTabChange = this.onTabChange.bind(this);
   }
 

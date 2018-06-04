@@ -27,7 +27,7 @@ class VideoContainer extends React.Component {
     if (this.state.videoId) {
       return (
         <div className="youtube-video__container">
-          <YouTube videoId={this.state.videoId} onReady={this._onReady} />;
+          <YouTube videoId={this.state.videoId} onReady={this._onReady} />
         </div>
       );
     }

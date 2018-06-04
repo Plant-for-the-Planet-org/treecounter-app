@@ -131,7 +131,7 @@ class TreeCounter extends Component {
                 component={ForgotPasswordContainer}
               />
               <PublicRoute
-                path={getLocalRoute('app_resetPassword')}
+                path={getLocalRoute('app_resetPassword') + '/:token'}
                 component={ResetPasswordContainer}
               />
               <PublicRoute

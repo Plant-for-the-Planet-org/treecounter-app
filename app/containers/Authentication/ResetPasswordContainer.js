@@ -24,11 +24,13 @@ class ResetPassswordContainer extends React.Component {
   }
 
   render() {
+    let value = { token: this.props.match.params.token };
     return (
       <ResetPassword
         ref="resetPasswordContainer"
         onSetPassword={this.onPress}
         updateRoute={this.props.route}
+        value={value}
       />
     );
   }
@@ -46,7 +48,12 @@ const mapDispatchToProps = dispatch => {
 
 ResetPassswordContainer.propTypes = {
   reset_password: PropTypes.func,
-  route: PropTypes.func
+  route: PropTypes.func,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      token: PropTypes.string
+    })
+  }).isRequired
 };
 
 export default connect(null, mapDispatchToProps)(ResetPassswordContainer);

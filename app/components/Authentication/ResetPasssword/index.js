@@ -23,6 +23,7 @@ class ResetPassword extends Component {
             ref="resetPasswordForm"
             type={resetPasswordFormSchema}
             options={schemaOptions}
+            value={this.props.value}
           />
           <PrimaryButton onClick={this.props.onSetPassword}>
             Set Password
@@ -34,7 +35,8 @@ class ResetPassword extends Component {
 }
 
 ResetPassword.propTypes = {
-  onSetPassword: PropTypes.func
+  onSetPassword: PropTypes.func,
+  value: PropTypes.object
 };
 
 export default ResetPassword;

@@ -5,6 +5,7 @@ export default {
     token: {
       type: 'string',
       title: 'token',
+      widget: 'hidden',
       propertyOrder: 1
     },
     password: {

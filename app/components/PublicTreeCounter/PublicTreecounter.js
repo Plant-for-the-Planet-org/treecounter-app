@@ -85,21 +85,19 @@ class PublicTreeCounter extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    setTimeout(() => {
-      const treecounter = nextProps.treecounter;
-      if (treecounter) {
-        let svgData = {
-          id: treecounter.id,
-          target: treecounter.countTarget,
-          planted: treecounter.countPlanted,
-          community: treecounter.countCommunity,
-          personal: treecounter.countPersonal,
-          targetComment: treecounter.targetComment,
-          targetYear: treecounter.targetYear
-        };
-        this.setState({ svgData });
-      }
-    }, 1);
+    const treecounter = nextProps.treecounter;
+    if (treecounter) {
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countTarget,
+        planted: treecounter.countPlanted,
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear
+      };
+      this.setState({ svgData });
+    }
   }
   render() {
     const { treecounter, currentUserProfile } = this.props;
@@ -137,7 +135,7 @@ class PublicTreeCounter extends React.Component {
     };
 
     return (
-      <div className="tree-counter-container sidenav-wrapper">
+      <div className="app-container__content--center sidenav-wrapper">
         <div className="tree-counter-header">
           <TreecounterHeader
             {...headerProps}

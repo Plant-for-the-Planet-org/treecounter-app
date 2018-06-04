@@ -1,27 +1,19 @@
 .header-logo {
-  width: 113px;
-  height: 113px;
+  width: 112px;
+  height: 112px;
 
   img {
     box-shadow: 0px 4px 12px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    border: solid 6.4px #ffffff;
-    border-radius: 50%;
-    height: 112px;
-    width: 112px;
+    border: solid 6px #ffffff;
+    border-radius: 100%;
+    height: 100px;
+    width: 100px;
   }
   .material-icons {
     @extend img;
     font-size: 112px;
   }
-}
-
-.tree-counter-container {
-  align-self: center;
-  margin-top: 55px;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
 }
 
 .tree-counter-header {
@@ -37,9 +29,6 @@
 }
 
 @media only screen and (max-width: $breakpointTablet) {
-  .tree-counter-container {
-    margin-left: inherit;
-  }
   .tree-counter-header {
     flex-direction: column;
     justify-content: center;
@@ -56,6 +45,7 @@
   align-items: center;
   position: relative;
   margin: auto;
+  margin-top: 55px;
 }
 .tree-counter-name {
   @extend .pftp-text-normal;
@@ -71,7 +61,6 @@
 
 .tree-counter-row {
   margin-top: 10px;
-  width: 100%;
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-start;

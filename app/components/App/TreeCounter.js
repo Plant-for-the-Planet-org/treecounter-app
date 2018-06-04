@@ -10,6 +10,7 @@ import TargetContainer from '../../containers/TargetContainer';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
 import HeaderContainer from '../../containers/HeaderContainer';
 import UserContributionsContainer from '../../containers/UserContributions';
+import EditUserContributionContainer from '../../containers/EditUserContribution';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
@@ -24,8 +25,8 @@ import Footer from '../Footer';
 
 // Components which use SVG
 import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
+import UserHomeContainer from '../../containers/UserHome';
 import Trillion from '../TreecounterGraphics/Trillion';
-import Home from '../TreecounterGraphics/Home';
 
 import { loadLoginData } from '../../actions/loadLoginData';
 import { getAccessToken } from '../../utils/user';
@@ -122,6 +123,10 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_signupSuccess')}
                 component={SignupSuccessPage}
               />
+              <PrivateRoute
+                path={getLocalRoute('app_userHome')}
+                component={UserHomeContainer}
+              />
               <PublicRoute
                 path={getLocalRoute('app_login')}
                 component={LoginContainer}
@@ -147,6 +152,10 @@ class TreeCounter extends Component {
                 component={RegisterTreesContainer}
               />
               <PrivateRoute
+                path={getLocalRoute('app_editTrees') + '/:selectedTreeId'}
+                component={EditUserContributionContainer}
+              />
+              <PrivateRoute
                 path={getLocalRoute('app_myTrees')}
                 component={UserContributionsContainer}
               />
@@ -155,12 +164,8 @@ class TreeCounter extends Component {
               {/*<Route path={getLocalRoute("app_donateTrees")} component={DonateTrees}/>*/}
 
               {/* Routes which essentially show svg */}
-              <PrivateRoute
-                path={getLocalRoute('app_userHome')}
-                component={Home}
-              />
               <Route
-                path="/treecounterLookup/:treecounterId"
+                path={getLocalRoute('app_treecounter') + '/:treecounterId'}
                 component={PublicTreecounterContainer}
               />
             </div>

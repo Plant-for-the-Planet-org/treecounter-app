@@ -18,11 +18,8 @@ export function login(data) {
         const { token, refresh_token } = res.data;
         updateJWT(token, refresh_token);
         dispatch(loadLoginData());
-        return token;
-      })
-      .then(() => {
-        NotificationManager.success('Login Successful', 'Congrats', 5000);
         updateRoute('app_userHome', dispatch);
+        return token;
       })
       .catch(error => {
         if (

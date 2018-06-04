@@ -13,6 +13,7 @@ import {
   education,
   competition
 } from '../../assets';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -47,7 +48,9 @@ const renderSuggestion = suggestion => {
   return (
     <div>
       <Link
-        to={`/treecounterLookup/${suggestion.id}`}
+        to={getLocalRoute('app_treecounter', {
+          treecounter: suggestion.id
+        })}
         className="search-autusuggest__listitem "
       >
         <img src={profileType[suggestion.type]} />

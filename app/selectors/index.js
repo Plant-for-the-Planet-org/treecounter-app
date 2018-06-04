@@ -101,12 +101,16 @@ export const sortedUserContributionsSelector = createSelector(
  */
 export const selectedPlantProjectSelector = createSelector(
   selectedPlantProjectIdSelector,
-  getPlantProjects,
-  (selectedPlantProjectId, plantProjects) => {
+  entitiesSelector,
+  (selectedPlantProjectId, entities) => {
     logSelectorUpdate('selectedPlantProjectSelector');
     return null === selectedPlantProjectId
       ? null
-      : plantProjects[selectedPlantProjectId];
+      : denormalize(
+          entities.plantProjects[selectedPlantProjectId],
+          userProfileSchema,
+          entities
+        );
   }
 );
 

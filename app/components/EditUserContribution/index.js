@@ -84,12 +84,12 @@ export default class EditUserContribution extends Component {
     };
 
     // Bind Local method
-    // this.onSubmitClick = this.onSubmitClick.bind(this);
+    this.onSubmitClick = this.onSubmitClick.bind(this);
   }
 
-  // onSubmitClick() {
-  //   this.props.onSubmit(this.state.mode);
-  // }
+  onSubmitClick() {
+    this.props.onSubmit();
+  }
 
   render() {
     return (
@@ -99,21 +99,21 @@ export default class EditUserContribution extends Component {
           <div className="register-tree__form">
             {this.state.mode === EditUserContribution.mode.singleTree ? (
               <TCombForm
-                ref="registerTreeForm"
+                ref="editTreeForm"
                 type={singleTreeRegisterFormSchema}
                 options={schemaOptionsSingle}
                 value={this.props.userContribution}
               />
             ) : (
               <TCombForm
-                ref="registerTreeForm"
+                ref="editTreeForm"
                 type={multipleTreesRegisterFormSchema}
                 options={schemaOptionsMultiple}
                 value={this.props.userContribution}
               />
             )}
           </div>
-          <PrimaryButton>Update</PrimaryButton>
+          <PrimaryButton onClick={this.onSubmitClick}>Update</PrimaryButton>
         </CardLayout>
       </div>
     );
@@ -121,5 +121,6 @@ export default class EditUserContribution extends Component {
 }
 
 EditUserContribution.propTypes = {
-  userContribution: PropTypes.object
+  userContribution: PropTypes.object,
+  onSubmit: PropTypes.func
 };

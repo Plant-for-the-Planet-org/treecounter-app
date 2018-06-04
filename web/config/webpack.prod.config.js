@@ -5,7 +5,7 @@ const commonConfig = require('./webpack.common.config.js');
 const path = require('path');
 
 module.exports = webpackMerge(commonConfig, {
-  entry: ['babel-polyfill', './client108/main.js'],
+  entry: ['babel-polyfill', path.join(__dirname, '../../index.web.js')],
   output: {
     path: path.join(__dirname, '../prod'),
     filename: 'bundle.js'

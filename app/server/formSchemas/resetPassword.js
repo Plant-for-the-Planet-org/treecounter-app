@@ -38,6 +38,6 @@ export default {
     }
   },
   required: ['token', 'password'],
-  submit_url: '/app_dev.php/auth/madhav/en/resetPassword',
+  submit_url: '/app_dev.php/auth/en/resetPassword',
   submit_method: 'POST'
 };

@@ -13,7 +13,7 @@ class EditUserContributionsContainer extends React.Component {
   onSubmit = () => {
     let value = this.refs.editTrees.refs.editTreeForm.getValue();
     if (value) {
-      let plantContribution = { plantContribution: value };
+      let plantContribution = { plant_contribution: value };
       this.props.editTree(
         plantContribution,
         this.props.match.params.selectedTreeId

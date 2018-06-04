@@ -12,7 +12,6 @@ import CardLayout from '../../Common/Card/CardLayout';
 
 let TCombForm = t.form.Form;
 
-//onSetPassword yet to be coded
 class ResetPassword extends Component {
   render() {
     return (

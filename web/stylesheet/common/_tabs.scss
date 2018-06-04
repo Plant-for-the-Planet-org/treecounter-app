@@ -1,12 +1,16 @@
 .pftp-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   .pftp-tabs__type {
     display: flex;
     justify-content: center;
     border: 2px solid #ff644e;
-    border-radius: 6px;
+    border-radius: 4px;
 
     .pftp-tabs__type--option {
-      padding: 10px;
+      padding: 20px 10px;
       margin: 0;
       flex: 1;
       text-align: center;
@@ -26,6 +30,7 @@
         line-height: normal;
         letter-spacing: normal;
         text-align: center;
+        white-space: nowrap;
       }
 
       &.active {

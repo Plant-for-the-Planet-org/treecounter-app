@@ -13,7 +13,7 @@ import UserContributionsContainer from '../../containers/UserContributions';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
-import ResetPasswordContainer from '../Authentication/ResetPassword';
+import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';

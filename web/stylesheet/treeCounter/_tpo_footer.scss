@@ -1,3 +1,9 @@
+.right-aligned {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .tpo-footer-card-layout {
   @extend .pftp-card-layout;
   padding: 0;
@@ -62,10 +68,12 @@
             display: inline-block;
           }
         }
-
-        .teaser__projectImage {
-          height: 165px;
-          background-color: $placeholderColor;
+        .teaser-image__container {
+          @extend .right-aligned;
+          .teaser__projectImage {
+            height: 165px;
+            background-color: $placeholderColor;
+          }
         }
       }
 
@@ -100,9 +108,7 @@
             vertical-align: middle;
           }
           .tree-cost-subitem {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
+            @extend .right-aligned;
           }
         }
         .project-specs__taxdeductible {

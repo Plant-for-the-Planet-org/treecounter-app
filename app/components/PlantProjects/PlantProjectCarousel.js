@@ -6,9 +6,6 @@ import Slider from 'react-slick';
 import CarouselNavigation from '../Common/CarouselNavigation';
 
 class PlantProjectCarousel extends React.Component {
-  _handleLoadImage = () => {
-    this.carousel.setDimensions();
-  };
   render() {
     const settings = {
       nextArrow: (
@@ -52,7 +49,6 @@ class PlantProjectCarousel extends React.Component {
                 expanded={false}
                 tpoName={tpoName}
                 plantProject={plantProject}
-                onToggle={this._handleLoadImage}
               />
             </div>
           ))}

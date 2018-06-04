@@ -26,11 +26,13 @@ const PlantProjectTeaser = ({
         <div className="teaser__tpoName">by {tpoName}</div>
       </div>
       {projectImage ? (
-        <img
-          className="teaser__projectImage"
-          src={getImageUrl('project', 'large', projectImage.image)}
-          alt={projectImage.description}
-        />
+        <div className="teaser-image__container">
+          <img
+            className="teaser__projectImage"
+            src={getImageUrl('project', 'large', projectImage.image)}
+            alt={projectImage.description}
+          />
+        </div>
       ) : null}
     </div>
   );

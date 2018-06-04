@@ -1,61 +1,76 @@
 import React, { Component } from 'react';
-import PageHeader from '../Common/PageHeader';
+import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import Slider from 'react-slick';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
-import { arrow_right_orange, arrow_left_orange } from '../../assets';
+import { arrow_right_green, arrow_left_green } from '../../assets';
+
+const headings = ['Project', 'Donation Details', 'Donor Details', 'Payment'];
+
 export default class DonateTrees extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pageIndex: 0
+    };
+  }
+  indexChange(index) {
+    console.log(index);
+    this.setState({
+      pageIndex: index
+    });
+  }
+
   render() {
     const settings = {
+      dots: true,
       nextArrow: (
         <CarouselNavigation
           styleName="donate-tree-nav-img__right"
-          src={arrow_right_orange}
+          src={arrow_right_green}
         />
       ),
       prevArrow: (
         <CarouselNavigation
           styleName="donate-tree-nav-img__left"
-          src={arrow_left_orange}
+          src={arrow_left_green}
         />
-      )
+      ),
+      afterChange: index => this.indexChange(index)
     };
+
     return (
-      <div className="sidenav-wrapper donate-tress__container">
-        <PageHeader caption="Donate Trees" />
-        <CardLayout className="tpo-footer-card-layout">
-          <ContentHeader caption="Project" />
-          <Slider {...settings}>
-            <div>
-              <h3>1</h3>
-              <h3>1</h3>
-              <h3>1</h3>
-              <h3>1</h3>
-              <h3>1</h3>
-              <h3>1</h3>
-              <h3>1</h3>
-              <h3>1</h3>
-              <h3>1</h3>
-              <h3>1</h3>
-            </div>
-            <div>
-              <h3>2</h3>
-            </div>
-            <div>
-              <h3>3</h3>
-            </div>
-            <div>
-              <h3>4</h3>
-            </div>
-            <div>
-              <h3>5</h3>
-            </div>
-            <div>
-              <h3>6</h3>
-            </div>
-          </Slider>
-        </CardLayout>
+      <div className="sidenav-wrapper app-container__content--center">
+        <TextHeading>Donate trees</TextHeading>
+        <div className="donate-tress__container">
+          <CardLayout className="tpo-footer-card-layout">
+            <ContentHeader caption={headings[this.state.pageIndex]} />
+            <Slider {...settings}>
+              <div>
+                <h3>1</h3>
+                <h3>1</h3>
+                <h3>1</h3>
+                <h3>1</h3>
+                <h3>1</h3>
+                <h3>1</h3>
+                <h3>1</h3>
+                <h3>1</h3>
+                <h3>1</h3>
+                <h3>1</h3>
+              </div>
+              <div>
+                <h3>2</h3>
+              </div>
+              <div>
+                <h3>3</h3>
+              </div>
+              <div>
+                <h3>4</h3>
+              </div>
+            </Slider>
+          </CardLayout>
+        </div>
       </div>
     );
   }

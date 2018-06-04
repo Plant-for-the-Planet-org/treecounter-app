@@ -1,5 +1,7 @@
 .donate-tress__container {
   position: relative;
+  margin-bottom: 50px;
+  width: 416px;
   .donate-tree-nav-img__right {
     position: absolute;
     max-height: 40px;
@@ -8,7 +10,7 @@
     color: transparent;
     display: block;
     padding: 0;
-    top: -95px;
+    top: -110px;
     right: -5%;
   }
   .donate-tree-nav-img__left {
@@ -19,7 +21,43 @@
     color: transparent;
     display: block;
     padding: 0;
-    top: -95px;
+    top: -110px;
     left: -5%;
+  }
+
+  .content-header_container {
+    height: 80px;
+    line-height: 2.5;
+    font-size: 24px;
+    align-items: unset;
+  }
+
+  .slick-dots {
+    top: -90px;
+    left: 7px;
+
+    li {
+      margin: 0 1px;
+    }
+
+    button {
+      width: 10px;
+      height: 10px;
+    }
+
+    button:before {
+      color: transparent;
+      border: 3px solid #ffffff;
+      border-radius: 100%;
+      line-height: 10px;
+      opacity: 1;
+      width: 10px;
+      height: 10px;
+    }
+
+    .slick-active button:before {
+      color: #ffffff;
+      opacity: 1;
+    }
   }
 }

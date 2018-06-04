@@ -12,5 +12,20 @@ export default {
     'I agree that I may be contacted by the children and youth organisation Plant-for-the-Planet as part of tree planting challenges.',
   firstname: 'First name',
   lastname: 'Last name',
-  company_or_orga_name: 'Name'
+  company_or_orga_name: 'Name',
+  tree_count: 'tree_count',
+  tree_species: 'tree_species',
+  plant_date: 'plant_date',
+  geo_location: 'geo_location',
+  add_images: 'add_images',
+  tree_classification: 'tree_classification',
+  tree_scientific_name: 'tree_scientific_name',
+  add_measurements: 'add_measurements',
+  tree_diameter: 'tree_diameter',
+  tree_height: 'tree_height',
+  measurement_date: 'measurement_date',
+  target_count: 'target_count',
+  target_year: 'target_year',
+  target_comment: 'target_comment',
+  
 };

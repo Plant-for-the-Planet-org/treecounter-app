@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import { arrow_left_green, arrow_right_green } from '../../assets';
 import CarouselNavigation from '../Common/CarouselNavigation';
+import { getImageUrl } from '../../actions/apiRouting';
 
 const PlantProjectImageCarousel = props => {
   const { projectImages } = props;
@@ -30,9 +31,12 @@ const PlantProjectImageCarousel = props => {
         {projectImages.map(projectImage => (
           <div
             className="project-images-carousal__container"
-            key={`plantProject-${projectImage.img}`}
+            key={`plantProject-${projectImage.image}`}
           >
-            <img className="image-carousal" src={projectImage.img} />
+            <img
+              className="image-carousal"
+              src={getImageUrl('project', 'large', projectImage.image)}
+            />
             <div className="project-image__description">
               {projectImage.description}
             </div>

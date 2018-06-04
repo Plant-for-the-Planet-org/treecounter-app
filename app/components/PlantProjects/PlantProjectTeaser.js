@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { tick } from '../../assets';
+import { getImageUrl } from '../../actions/apiRouting';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectTeaser
@@ -27,7 +28,7 @@ const PlantProjectTeaser = ({
       {projectImage ? (
         <img
           className="teaser__projectImage"
-          src={projectImage.img}
+          src={getImageUrl('project', 'large', projectImage.image)}
           alt={projectImage.description}
         />
       ) : null}

@@ -46,34 +46,32 @@
     .slick-slide * {
       outline: none !important;
     }
-    .tpo-footer-carousel__container {
-      .project-teaser__container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        margin-bottom: 20px;
-        .column {
-          @extend .pftp-text-basic;
-          font-size: 15.5px;
-          font-weight: 600;
-          line-height: 1.52;
-          text-align: left;
-          color: $headerTextColor;
-          .teaser__tpoName {
-            font-weight: normal;
-          }
-          .teaser__certified {
-            width: 14px;
-            height: 14px;
-            vertical-align: middle;
-            display: inline-block;
-          }
+    .project-teaser__container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 20px;
+      .column {
+        @extend .pftp-text-basic;
+        font-size: 15.5px;
+        font-weight: 600;
+        line-height: 1.52;
+        text-align: left;
+        color: $headerTextColor;
+        .teaser__tpoName {
+          font-weight: normal;
         }
-        .teaser-image__container {
-          @extend .right-aligned;
-          .teaser__projectImage {
-            height: 165px;
-            background-color: $placeholderColor;
-          }
+        .teaser__certified {
+          width: 14px;
+          height: 14px;
+          vertical-align: middle;
+          display: inline-block;
+        }
+      }
+      .teaser-image__container {
+        @extend .right-aligned;
+        .teaser__projectImage {
+          height: 165px;
+          background-color: $placeholderColor;
         }
       }
 

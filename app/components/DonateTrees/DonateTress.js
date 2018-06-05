@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import t from 'tcomb-form';
 import PropTypes from 'prop-types';
 
 import TextHeading from '../Common/Heading/TextHeading';
@@ -8,22 +7,19 @@ import Slider from 'react-slick';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_green, arrow_left_green } from '../../assets';
-import {
-  targetFormSchema,
-  schemaOptions
-} from '../../server/parsedSchemas/target';
-
-let TCombForm = t.form.Form;
+import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 const headings = ['Project', 'Donation Details', 'Donor Details', 'Payment'];
 
 export default class DonateTrees extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       pageIndex: 0
     };
   }
+
   indexChange(index) {
     console.log(index);
     this.setState({
@@ -56,11 +52,13 @@ export default class DonateTrees extends Component {
           <CardLayout className="tpo-footer-card-layout">
             <ContentHeader caption={headings[this.state.pageIndex]} />
             <Slider {...settings}>
-              <TCombForm
-                ref="setTargetForm"
-                type={targetFormSchema}
-                options={schemaOptions}
-              />
+              {this.props.selectedTpo ? (
+                <PlantProjectFull
+                  expanded={false}
+                  plantProject={this.props.selectedProject}
+                  tpoName={this.props.selectedTpo.name}
+                />
+              ) : null}
             </Slider>
           </CardLayout>
         </div>
@@ -70,5 +68,6 @@ export default class DonateTrees extends Component {
 }
 
 DonateTrees.propTypes = {
-  selectedProject: PropTypes.object
+  selectedProject: PropTypes.object,
+  selectedTpo: PropTypes.object
 };

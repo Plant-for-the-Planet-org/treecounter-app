@@ -19,6 +19,7 @@ export const getTpos = state => state.entities.tpo;
 export const getPlantProjects = state => state.entities.plantProject;
 export const getPaymentGateways = state => state.entities.paymentGateway;
 export const getTreecounters = state => state.entities.treecounter;
+export const getPlantProjectImages = state => state.entities.plantProjectImage;
 
 export const mergeEntities = createAction('ENTITIES_MERGE');
 

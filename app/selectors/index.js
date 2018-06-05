@@ -6,7 +6,8 @@ import { getCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer
 import {
   getPlantProjects,
   getPaymentGateways,
-  getTpos
+  getTpos,
+  getPlantProjectImages
 } from '../reducers/entitiesReducer';
 import { getSelectedPlantProjectId } from '../reducers/selectedPlantProjectIdReducer';
 
@@ -102,11 +103,30 @@ export const sortedUserContributionsSelector = createSelector(
 export const selectedPlantProjectSelector = createSelector(
   selectedPlantProjectIdSelector,
   getPlantProjects,
-  (selectedPlantProjectId, plantProjects) => {
+  getPlantProjectImages,
+  (selectedPlantProjectId, plantProjects, plantProjectImages) => {
     logSelectorUpdate('selectedPlantProjectSelector');
+    if (selectedPlantProjectId) {
+      plantProjects[selectedPlantProjectId]['projectImages'] = plantProjects[
+        selectedPlantProjectId
+      ]['projectImages'].map(value => plantProjectImages[value]);
+    }
     return null === selectedPlantProjectId
       ? null
       : plantProjects[selectedPlantProjectId];
+  }
+);
+/**
+ * Returns the TPO that corresponds to the currently selected plant project
+ */
+export const selectedTpoSelector = createSelector(
+  selectedPlantProjectSelector,
+  getTpos,
+  (selectedPlantProject, tpos) => {
+    logSelectorUpdate('selectedTpoSelector');
+    return null === selectedPlantProject
+      ? null
+      : tpos[selectedPlantProject.tpoId];
   }
 );
 

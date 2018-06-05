@@ -98,6 +98,7 @@
   font-size: 15.5px;
   line-height: 1.52;
   color: $headerTextColor;
+  column-gap: 67px;
 }
 .tree-counter-user-single-synopsis {
   @extend .tree-counter-user-synopsis;

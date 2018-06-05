@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
+import t from 'tcomb-form';
+import PropTypes from 'prop-types';
+
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import Slider from 'react-slick';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_green, arrow_left_green } from '../../assets';
+import {
+  targetFormSchema,
+  schemaOptions
+} from '../../server/parsedSchemas/target';
+
+let TCombForm = t.form.Form;
 
 const headings = ['Project', 'Donation Details', 'Donor Details', 'Payment'];
 
@@ -47,27 +56,11 @@ export default class DonateTrees extends Component {
           <CardLayout className="tpo-footer-card-layout">
             <ContentHeader caption={headings[this.state.pageIndex]} />
             <Slider {...settings}>
-              <div>
-                <h3>1</h3>
-                <h3>1</h3>
-                <h3>1</h3>
-                <h3>1</h3>
-                <h3>1</h3>
-                <h3>1</h3>
-                <h3>1</h3>
-                <h3>1</h3>
-                <h3>1</h3>
-                <h3>1</h3>
-              </div>
-              <div>
-                <h3>2</h3>
-              </div>
-              <div>
-                <h3>3</h3>
-              </div>
-              <div>
-                <h3>4</h3>
-              </div>
+              <TCombForm
+                ref="setTargetForm"
+                type={targetFormSchema}
+                options={schemaOptions}
+              />
             </Slider>
           </CardLayout>
         </div>
@@ -75,3 +68,7 @@ export default class DonateTrees extends Component {
     );
   }
 }
+
+DonateTrees.propTypes = {
+  selectedProject: PropTypes.object
+};

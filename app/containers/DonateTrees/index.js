@@ -11,6 +11,10 @@ import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction
 import DonateTrees from '../../components/DonateTrees/DonateTress';
 
 class DonationTreesContainer extends Component {
+  componentDidMount() {
+    this.props.selectPlantProjectAction(1);
+  }
+
   render() {
     return (
       <DonateTrees

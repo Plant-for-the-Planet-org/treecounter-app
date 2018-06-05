@@ -1,6 +1,12 @@
 .donate-tress__container {
   position: relative;
   width: 416px;
+
+  .pftp-tabs__type {
+    width: 300px;
+    margin-bottom: 15px;
+  }
+
   .donate-tree-nav-img__right {
     position: absolute;
     max-height: 40px;
@@ -9,7 +15,7 @@
     color: transparent;
     display: block;
     padding: 0;
-    top: -110px;
+    top: -90px;
     right: -5%;
   }
   .donate-tree-nav-img__left {
@@ -20,7 +26,7 @@
     color: transparent;
     display: block;
     padding: 0;
-    top: -110px;
+    top: -90px;
     left: -5%;
   }
 
@@ -61,34 +67,51 @@
         }
       }
     }
-  }
-}
 
-.slick-dots {
-  top: -90px;
-  left: 7px;
+    .collapsed {
+      border: none;
+      cursor: pointer;
+      span {
+        color: #ec6453;
+      }
+    }
 
-  li {
-    margin: 0 1px;
-  }
+    .expanded {
+      border: none;
+      cursor: pointer;
+      span {
+        color: #ec6453;
+      }
+    }
 
-  button {
-    width: 10px;
-    height: 10px;
-  }
+    .slick-dots {
+      top: -70px;
+      height: 20px;
+      left: 6px;
 
-  button:before {
-    color: transparent;
-    border: 3px solid #ffffff;
-    border-radius: 100%;
-    line-height: 10px;
-    opacity: 1;
-    width: 10px;
-    height: 10px;
-  }
+      li {
+        margin: 0 1px;
+      }
 
-  .slick-active button:before {
-    color: #ffffff;
-    opacity: 1;
+      button {
+        width: 10px;
+        height: 10px;
+      }
+
+      button:before {
+        color: transparent;
+        border: 3px solid #ffffff;
+        border-radius: 100%;
+        line-height: 10px;
+        opacity: 1;
+        width: 10px;
+        height: 10px;
+      }
+
+      .slick-active button:before {
+        color: #ffffff;
+        opacity: 1;
+      }
+    }
   }
 }

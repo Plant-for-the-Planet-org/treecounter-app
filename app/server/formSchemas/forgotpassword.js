@@ -1,10 +1,10 @@
 export default {
-  title: 'forgot_password',
+  title: 'label.forgotPasswordlabels.forgot_password',
   type: 'object',
   properties: {
     email: {
       type: 'string',
-      title: 'Email',
+      title: 'label.forgotPasswordlabels.email',
       icon: 'email',
       propertyOrder: 1
     }

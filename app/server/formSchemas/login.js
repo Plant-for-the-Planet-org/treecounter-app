@@ -4,13 +4,13 @@ export default {
   properties: {
     _username: {
       type: 'string',
-      title: 'label.email',
+      title: 'label.loginlabels.email',
       icon: 'email',
       propertyOrder: 1
     },
     _password: {
       type: 'string',
-      title: 'label.password',
+      title: 'label.loginlabels.password',
       icon: 'key',
       widget: 'password',
       propertyOrder: 2

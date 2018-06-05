@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import labels from './en/labels';
+import labels from './en/index';
 
 i18next.init({
   interpolation: {

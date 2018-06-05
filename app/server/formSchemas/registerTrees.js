@@ -4,7 +4,7 @@ export const singleTreeForm = {
   properties: {
     treeCount: {
       type: 'integer',
-      title: 'label.tree_count',
+      title: 'label.registerTreeslabels.tree_count',
       attr: {
         pattern: '.{1,}'
       },
@@ -14,24 +14,24 @@ export const singleTreeForm = {
     },
     treeSpecies: {
       type: 'string',
-      title: 'label.tree_species',
+      title: 'label.registerTreeslabels.tree_species',
       propertyOrder: 2
     },
     plantDate: {
       type: 'string',
-      title: 'label.plant_date',
+      title: 'label.registerTreeslabels.plant_date',
       widget: 'date',
       propertyOrder: 3
     },
     geoLocation: {
       type: 'string',
-      title: 'label.geo_location',
+      title: 'label.registerTreeslabels.geo_location',
       widget: 'map',
       propertyOrder: 4
     },
     contributionImages: {
       type: 'array',
-      title: 'label.add_images',
+      title: 'label.registerTreeslabels.add_images',
       items: {
         title: 'prototype',
         type: 'object',
@@ -49,7 +49,7 @@ export const singleTreeForm = {
     },
     treeClassification: {
       type: 'string',
-      title: 'label.tree_classification',
+      title: 'label.registerTreeslabels.tree_classification',
       attr: {
         maxlength: 255
       },
@@ -58,7 +58,7 @@ export const singleTreeForm = {
     },
     treeScientificName: {
       type: 'string',
-      title: 'label.tree_scientific_name',
+      title: 'label.registerTreeslabels.tree_scientific_name',
       attr: {
         maxlength: 255
       },
@@ -67,24 +67,24 @@ export const singleTreeForm = {
     },
     contributionMeasurements: {
       type: 'array',
-      title: 'label.add_measurements',
+      title: 'label.registerTreeslabels.add_measurements',
       items: {
         title: 'prototype',
         type: 'object',
         properties: {
           diameter: {
             type: 'integer',
-            title: 'label.tree_diameter',
+            title: 'label.registerTreeslabels.tree_diameter',
             propertyOrder: 1
           },
           height: {
             type: 'integer',
-            title: 'label.tree_height',
+            title: 'label.registerTreeslabels.tree_height',
             propertyOrder: 2
           },
           measurementDate: {
             type: 'string',
-            title: 'label.measurement_date',
+            title: 'label.registerTreeslabels.measurement_date',
             widget: 'date',
             propertyOrder: 3
           }
@@ -105,7 +105,7 @@ export const multipleTreesForm = {
   properties: {
     treeCount: {
       type: 'integer',
-      title: 'label.tree_count',
+      title: 'label.registerTreeslabels.tree_count',
       attr: {
         pattern: '.{1,}'
       },
@@ -114,24 +114,24 @@ export const multipleTreesForm = {
     },
     treeSpecies: {
       type: 'string',
-      title: 'label.tree_species',
+      title: 'label.registerTreeslabels.tree_species',
       propertyOrder: 2
     },
     plantDate: {
       type: 'string',
-      title: 'label.plant_date',
+      title: 'label.registerTreeslabels.plant_date',
       widget: 'date',
       propertyOrder: 3
     },
     geoLocation: {
       type: 'string',
-      title: 'label.geo_location',
+      title: 'label.registerTreeslabels.geo_location',
       widget: 'map',
       propertyOrder: 4
     },
     contributionImages: {
       type: 'array',
-      title: 'label.add_images',
+      title: 'label.registerTreeslabels.add_images',
       items: {
         title: 'prototype',
         type: 'object',

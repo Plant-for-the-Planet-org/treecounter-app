@@ -5,7 +5,7 @@ export default {
     properties: {
       name: {
         type: 'string',
-        title: 'label.company_or_orga_name',
+        title: 'label.signUplabels.company_or_orga_name',
         attr: {
           maxlength: 255
         },
@@ -14,7 +14,7 @@ export default {
       },
       address: {
         type: 'string',
-        title: 'label.address',
+        title: 'label.signUplabels.address',
         attr: {
           maxlength: 255
         },
@@ -23,7 +23,7 @@ export default {
       },
       zipCode: {
         type: 'string',
-        title: 'label.zipCode',
+        title: 'label.signUplabels.zipCode',
         attr: {
           maxlength: 50
         },
@@ -32,7 +32,7 @@ export default {
       },
       city: {
         type: 'string',
-        title: 'label.city',
+        title: 'label.signUplabels.city',
         attr: {
           maxlength: 150
         },
@@ -555,7 +555,7 @@ export default {
           'Zimbabwe'
         ],
         type: 'string',
-        title: 'label.country',
+        title: 'label.signUplabels.country',
         attr: {
           maxlength: 2
         },
@@ -563,7 +563,7 @@ export default {
       },
       email: {
         type: 'string',
-        title: 'label.email',
+        title: 'label.signUplabels.email',
         attr: {
           maxlength: 100
         },
@@ -578,7 +578,7 @@ export default {
         properties: {
           first: {
             type: 'string',
-            title: 'label.password',
+            title: 'label.signUplabels.password',
             attr: {
               class: 'password-field'
             },
@@ -588,7 +588,7 @@ export default {
           },
           second: {
             type: 'string',
-            title: 'label.password_repeat',
+            title: 'label.signUplabels.password_repeat',
             attr: {
               class: 'password-field'
             },
@@ -601,12 +601,12 @@ export default {
       },
       mayPublish: {
         type: 'boolean',
-        title: 'label.mayPublish',
+        title: 'label.signUplabels.mayPublish',
         propertyOrder: 8
       },
       mayContact: {
         type: 'boolean',
-        title: 'label.mayContact',
+        title: 'label.signUplabels.mayContact',
         propertyOrder: 9
       }
     },
@@ -628,7 +628,7 @@ export default {
     properties: {
       firstname: {
         type: 'string',
-        title: 'label.firstname',
+        title: 'label.signUplabels.firstname',
         attr: {
           maxlength: 255
         },
@@ -637,7 +637,7 @@ export default {
       },
       lastname: {
         type: 'string',
-        title: 'label.lastname',
+        title: 'label.signUplabels.lastname',
         attr: {
           maxlength: 255
         },
@@ -1160,7 +1160,7 @@ export default {
           'Zimbabwe'
         ],
         type: 'string',
-        title: 'label.country',
+        title: 'label.signUplabels.country',
         attr: {
           maxlength: 2
         },
@@ -1168,7 +1168,7 @@ export default {
       },
       email: {
         type: 'string',
-        title: 'label.email',
+        title: 'label.signUplabels.email',
         attr: {
           maxlength: 100
         },
@@ -1183,7 +1183,7 @@ export default {
         properties: {
           first: {
             type: 'string',
-            title: 'label.password',
+            title: 'label.signUplabels.password',
             attr: {
               class: 'password-field'
             },
@@ -1193,7 +1193,7 @@ export default {
           },
           second: {
             type: 'string',
-            title: 'label.password_repeat',
+            title: 'label.signUplabels.password_repeat',
             attr: {
               class: 'password-field'
             },
@@ -1206,12 +1206,12 @@ export default {
       },
       mayPublish: {
         type: 'boolean',
-        title: 'label.mayPublish',
+        title: 'label.signUplabels.mayPublish',
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
-        title: 'label.mayContact',
+        title: 'label.signUplabels.mayContact',
         propertyOrder: 7
       }
     },
@@ -1225,7 +1225,7 @@ export default {
     properties: {
       name: {
         type: 'string',
-        title: 'label.company_or_orga_name',
+        title: 'label.signUplabels.company_or_orga_name',
         attr: {
           maxlength: 255
         },
@@ -1236,7 +1236,7 @@ export default {
         enum: ['Other'],
         enum_titles: ['0'],
         type: 'string',
-        title: 'subType',
+        title: 'label.signUplabels.subtype',
         propertyOrder: 2
       },
       country: {
@@ -1755,7 +1755,7 @@ export default {
           'Zimbabwe'
         ],
         type: 'string',
-        title: 'label.country',
+        title: 'label.signUplabels.country',
         attr: {
           maxlength: 2
         },
@@ -1763,7 +1763,7 @@ export default {
       },
       email: {
         type: 'string',
-        title: 'label.email',
+        title: 'label.signUplabels.email',
         attr: {
           maxlength: 100
         },
@@ -1778,7 +1778,7 @@ export default {
         properties: {
           first: {
             type: 'string',
-            title: 'label.password',
+            title: 'label.signUplabels.password',
             attr: {
               class: 'password-field'
             },
@@ -1788,7 +1788,7 @@ export default {
           },
           second: {
             type: 'string',
-            title: 'label.password_repeat',
+            title: 'label.signUplabels.password_repeat',
             attr: {
               class: 'password-field'
             },
@@ -1801,12 +1801,12 @@ export default {
       },
       mayPublish: {
         type: 'boolean',
-        title: 'label.mayPublish',
+        title: 'label.signUplabels.mayPublish',
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
-        title: 'label.mayContact',
+        title: 'label.signUplabels.mayContact',
         propertyOrder: 7
       }
     },
@@ -1820,7 +1820,7 @@ export default {
     properties: {
       name: {
         type: 'string',
-        title: 'label.company_or_orga_name',
+        title: 'label.signUplabels.company_or_orga_name',
         attr: {
           maxlength: 255
         },
@@ -1831,7 +1831,7 @@ export default {
         enum: ['primary', 'secondary', 'higher', 'other'],
         enum_titles: ['0', '1', '2', '3'],
         type: 'string',
-        title: 'subType',
+        title: 'label.signUplabels.subtype',
         propertyOrder: 2
       },
       country: {
@@ -2350,7 +2350,7 @@ export default {
           'Zimbabwe'
         ],
         type: 'string',
-        title: 'label.country',
+        title: 'label.signUplabels.country',
         attr: {
           maxlength: 2
         },
@@ -2358,7 +2358,7 @@ export default {
       },
       email: {
         type: 'string',
-        title: 'label.email',
+        title: 'label.signUplabels.email',
         attr: {
           maxlength: 100
         },
@@ -2373,7 +2373,7 @@ export default {
         properties: {
           first: {
             type: 'string',
-            title: 'label.password',
+            title: 'label.signUplabels.password',
             attr: {
               class: 'password-field'
             },
@@ -2383,7 +2383,7 @@ export default {
           },
           second: {
             type: 'string',
-            title: 'label.password_repeat',
+            title: 'label.signUplabels.password_repeat',
             attr: {
               class: 'password-field'
             },
@@ -2396,12 +2396,12 @@ export default {
       },
       mayPublish: {
         type: 'boolean',
-        title: 'label.mayPublish',
+        title: 'label.signUplabels.mayPublish',
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
-        title: 'label.mayContact',
+        title: 'label.signUplabels.mayContact',
         propertyOrder: 7
       }
     },
@@ -2415,7 +2415,7 @@ export default {
     properties: {
       name: {
         type: 'string',
-        title: 'label.company_or_orga_name',
+        title: 'label.signUplabels.company_or_orga_name',
         attr: {
           maxlength: 255
         },
@@ -2945,7 +2945,7 @@ export default {
           'Zimbabwe'
         ],
         type: 'string',
-        title: 'label.country',
+        title: 'label.signUplabels.country',
         attr: {
           maxlength: 2
         },
@@ -2953,7 +2953,7 @@ export default {
       },
       email: {
         type: 'string',
-        title: 'label.email',
+        title: 'label.signUplabels.email',
         attr: {
           maxlength: 100
         },
@@ -2968,7 +2968,7 @@ export default {
         properties: {
           first: {
             type: 'string',
-            title: 'label.password',
+            title: 'label.signUplabels.password',
             attr: {
               class: 'password-field'
             },
@@ -2978,7 +2978,7 @@ export default {
           },
           second: {
             type: 'string',
-            title: 'label.password_repeat',
+            title: 'label.signUplabels.password_repeat',
             attr: {
               class: 'password-field'
             },
@@ -2991,12 +2991,12 @@ export default {
       },
       mayPublish: {
         type: 'boolean',
-        title: 'label.mayPublish',
+        title: 'label.signUplabels.mayPublish',
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
-        title: 'label.mayContact',
+        title: 'label.signUplabels.mayContact',
         propertyOrder: 7
       }
     },
@@ -3010,7 +3010,7 @@ export default {
     properties: {
       name: {
         type: 'string',
-        title: 'label.company_or_orga_name',
+        title: 'label.signUplabels.company_or_orga_name',
         attr: {
           maxlength: 255
         },
@@ -3540,7 +3540,7 @@ export default {
           'Zimbabwe'
         ],
         type: 'string',
-        title: 'label.country',
+        title: 'label.signUplabels.country',
         attr: {
           maxlength: 2
         },
@@ -3548,7 +3548,7 @@ export default {
       },
       email: {
         type: 'string',
-        title: 'label.email',
+        title: 'label.signUplabels.email',
         attr: {
           maxlength: 100
         },
@@ -3563,7 +3563,7 @@ export default {
         properties: {
           first: {
             type: 'string',
-            title: 'label.password',
+            title: 'label.signUplabels.password',
             attr: {
               class: 'password-field'
             },
@@ -3573,7 +3573,7 @@ export default {
           },
           second: {
             type: 'string',
-            title: 'label.password_repeat',
+            title: 'label.signUplabels.password_repeat',
             attr: {
               class: 'password-field'
             },
@@ -3586,12 +3586,12 @@ export default {
       },
       mayPublish: {
         type: 'boolean',
-        title: 'label.mayPublish',
+        title: 'label.signUplabels.mayPublish',
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
-        title: 'label.mayContact',
+        title: 'label.signUplabels.mayContact',
         propertyOrder: 7
       }
     },

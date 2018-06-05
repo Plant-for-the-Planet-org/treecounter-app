@@ -1,3 +1,25 @@
 export default {
-  load: 'Load from T()'
+  load: 'Load from T()',
+  logged_out_caption1: 'World',
+  logged_out_caption1seq1: 'Trillion Tree Campaign',
+  logged_out_caption1seq2: 'Explore',
+  logged_out_caption2: 'My Items',
+  logged_out_caption2seq1: 'Register planted trees',
+  logged_out_caption2seq2: 'Donate Trees',
+  logged_out_caption2seq3: 'My Trees',
+  logged_out_caption2seq4: 'Set Target',
+  logged_out_caption3: 'Community',
+  logged_out_caption3seq1: 'Challenge',
+  logged_out_caption3seq2: 'Tree gift',
+  logged_in_caption1: 'World',
+  logged_in_caption1seq1: 'Trillion Tree Campaign',
+  logged_in_caption1seq2: 'Explore',
+  logged_in_caption2: 'My Items',
+  logged_in_caption2seq1: 'Register planted trees',
+  logged_in_caption2seq2: 'Donate Trees',
+  logged_in_caption2seq3: 'My Trees',
+  logged_in_caption2seq4: 'Set Target',
+  logged_in_caption3: 'Community',
+  logged_in_caption3seq1: 'Challenge',
+  logged_in_caption3seq2: 'Tree gift'
 };

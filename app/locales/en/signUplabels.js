@@ -5,6 +5,7 @@ export default {
   address: 'Address',
   zipCode: 'Zip code',
   city: 'City',
+  subtype: 'SubType',
   country: 'Country',
   password_repeat: 'Repeat Password',
   mayPublish:

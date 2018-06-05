@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { NotificationContainer } from 'react-notifications';
 import PropTypes from 'prop-types';
 
@@ -28,11 +29,13 @@ import PublicTreecounterContainer from '../../containers/PublicTreeCounterContai
 import UserHomeContainer from '../../containers/UserHome';
 import Trillion from '../TreecounterGraphics/Trillion';
 
+import { loadTpos } from '../../actions/loadTposAction';
 import { loadLoginData } from '../../actions/loadLoginData';
 import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { getLocalRoute } from '../../actions/apiRouting';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
+import DonationTreesContainer from '../../containers/DonateTrees/index';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -54,11 +57,15 @@ class TreeCounter extends Component {
     } else {
       let token = await getAccessToken();
       if (token) {
-        this.props.dispatch(loadLoginData());
+        this.props.loadLoginData();
       } else {
         this.setState({ loading: false, isLoggedIn: false });
       }
     }
+  }
+
+  componentDidMount() {
+    this.props.loadTpos();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -161,7 +168,10 @@ class TreeCounter extends Component {
               />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
-              {/*<Route path={getLocalRoute("app_donateTrees")} component={DonateTrees}/>*/}
+              <Route
+                path={getLocalRoute('app_donateTrees')}
+                component={DonationTreesContainer}
+              />
 
               {/* Routes which essentially show svg */}
               <Route
@@ -182,9 +192,21 @@ const mapStateToProps = state => ({
   userProfile: currentUserProfileSelector(state)
 });
 
-export default connect(mapStateToProps)(TreeCounter);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      loadLoginData,
+      loadTpos
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TreeCounter);
 
 TreeCounter.propTypes = {
   userProfile: PropTypes.object,
+  loadLoginData: PropTypes.func,
+  loadTpos: PropTypes.func,
   dispatch: PropTypes.func
 };

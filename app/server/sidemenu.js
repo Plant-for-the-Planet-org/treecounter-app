@@ -46,7 +46,7 @@ export default {
           caption: 'Donate Trees',
           help: 'menu_item.donate_trees.help',
           icon: 'heart_outline',
-          uri: '#'
+          uri: '/app_dev.php/en/donateTrees'
         },
         {
           enabled: 1,
@@ -139,7 +139,7 @@ export default {
           caption: 'Donate Trees',
           help: 'menu_item.donate_trees.help',
           icon: 'heart_outline',
-          uri: '#'
+          uri: '/app_dev.php/en/donateTrees'
         },
         {
           enabled: 1,

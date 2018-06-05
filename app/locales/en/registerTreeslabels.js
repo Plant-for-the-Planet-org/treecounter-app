@@ -1,0 +1,22 @@
+export default {
+  edit_trees: 'Edit trees',
+  title: 'plant_contribution',
+  tree_count: 'tree_count',
+  tree_species: 'tree_species',
+  plant_date: 'plant_date',
+  geo_location: 'geo_location',
+  add_images: 'add_images',
+  tree_classification: 'tree_classification',
+  tree_scientific_name: 'tree_scientific_name',
+  add_measurements: 'add_measurements',
+  tree_diameter: 'tree_diameter',
+  tree_height: 'tree_height',
+  measurement_date: 'measurement_date',
+  update: 'Update',
+  heading_register_trees: 'Register planted trees',
+  register: 'Register',
+  individual_tree: 'Individual Tree',
+  single_tree: 'single-tree',
+  many_trees: 'Many Trees',
+  multiple_trees: 'multiple-trees'
+};

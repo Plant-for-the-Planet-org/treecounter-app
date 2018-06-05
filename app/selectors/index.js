@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { denormalize } from 'normalizr';
 
-import { userProfileSchema } from '../schemas';
+import { userProfileSchema, plantProjectSchema } from '../schemas';
 import { getCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
 import {
   getPlantProjects,
@@ -101,12 +101,16 @@ export const sortedUserContributionsSelector = createSelector(
  */
 export const selectedPlantProjectSelector = createSelector(
   selectedPlantProjectIdSelector,
-  getPlantProjects,
-  (selectedPlantProjectId, plantProjects) => {
+  entitiesSelector,
+  (selectedPlantProjectId, entities) => {
     logSelectorUpdate('selectedPlantProjectSelector');
     return null === selectedPlantProjectId
       ? null
-      : plantProjects[selectedPlantProjectId];
+      : denormalize(
+          entities.plantProject[selectedPlantProjectId],
+          plantProjectSchema,
+          entities
+        );
   }
 );
 /**

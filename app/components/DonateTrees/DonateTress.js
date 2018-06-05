@@ -48,8 +48,8 @@ export default class DonateTrees extends Component {
     return (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>Donate trees</TextHeading>
-        <div className="donate-tress__container">
-          <CardLayout className="tpo-footer-card-layout">
+        <CardLayout className="tpo-footer-card-layout">
+          <div className="donate-tress__container">
             <ContentHeader caption={headings[this.state.pageIndex]} />
             <Slider {...settings}>
               {this.props.selectedTpo ? (
@@ -60,8 +60,8 @@ export default class DonateTrees extends Component {
                 />
               ) : null}
             </Slider>
-          </CardLayout>
-        </div>
+          </div>
+        </CardLayout>
       </div>
     );
   }

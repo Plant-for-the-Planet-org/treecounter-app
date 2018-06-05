@@ -25,6 +25,7 @@ export default class EditUserProfile extends React.Component {
             ref={type}
             type={parsedSchema[type].profile.transformedSchema}
             options={parsedSchema[type].profile.schemaOptions}
+            value={this.props.currentUserProfile}
           />
           <PrimaryButton
             onClick={() => {
@@ -40,6 +41,7 @@ export default class EditUserProfile extends React.Component {
             ref={type}
             type={parsedSchema[type].about_me.transformedSchema}
             options={parsedSchema[type].about_me.schemaOptions}
+            value={this.props.currentUserProfile}
           />
           <PrimaryButton
             onClick={() => {

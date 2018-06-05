@@ -88,12 +88,12 @@
 .tree-counter-footer__container {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
   align-items: center;
 }
 .tree-counter-user-synopsis {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
   text-align: left;
   font-size: 15.5px;
   line-height: 1.52;

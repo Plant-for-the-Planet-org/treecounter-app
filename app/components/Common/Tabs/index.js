@@ -30,6 +30,7 @@ class Tabs extends React.Component {
           {data.map(ele => {
             return (
               <label
+                key={ele.id}
                 className={
                   'radio pftp-tabs__type--option ' +
                   (this.state.activeTab === ele.id ? 'active' : '')

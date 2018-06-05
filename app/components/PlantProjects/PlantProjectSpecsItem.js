@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 const PlantProjectSpecsItem = ({ label, value, icon }) => {
   return (
     <div className="project-specs__item">
-      {icon ? <img src={icon} /> : <span>{label}</span>}
-      <span>{label}</span>
+      <span className="align-center">
+        {icon ? <img src={icon} /> : <span>{label}</span>}
+        <span>{label}</span>
+      </span>
       <span>{value}</span>
     </div>
   );

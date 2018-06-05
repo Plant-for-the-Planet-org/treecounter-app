@@ -191,21 +191,6 @@
       "methods": ["GET"],
       "schemes": []
     },
-    "data_tpos_get": {
-      "tokens": [
-        ["text", "/loadTpos"],
-        ["variable", "/", "[^/]++", "_locale"],
-        ["variable", "/", "[^/]++", "version"],
-        ["text", "/api"]
-      ],
-      "defaults": {
-        "_locale": null
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": ["GET"],
-      "schemes": []
-    },
     "followSubscribe_post": {
       "tokens": [
         ["text", "/followSubscribe"],
@@ -598,6 +583,21 @@
       "methods": ["GET"],
       "schemes": []
     },
+    "data_tpos_get": {
+      "tokens": [
+        ["text", "/loadTpos"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
     "targetLog_get": {
       "tokens": [
         ["text", "/target"],
@@ -723,6 +723,51 @@
       "methods": ["PUT"],
       "schemes": []
     },
+    "profileImage_put": {
+      "tokens": [
+        ["text", "/profileImageUpdate"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["PUT"],
+      "schemes": []
+    },
+    "profilePassword_put": {
+      "tokens": [
+        ["text", "/profilePasswordUpdate"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["PUT"],
+      "schemes": []
+    },
+    "profileAboutMe_put": {
+      "tokens": [
+        ["text", "/profileAboutMe"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["PUT"],
+      "schemes": []
+    },
     "userfeeds_get": {
       "tokens": [
         ["text", "/userfeeds"],
@@ -835,6 +880,21 @@
     },
     "app_homepage": {
       "tokens": [["variable", "/", "(\\w{2})?", "_locale"]],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "app_explore": {
+      "tokens": [
+        ["text", "/explore"],
+        ["variable", "/", "(\\w{2})?", "_locale"]
+      ],
       "defaults": {
         "_locale": null
       },
@@ -1054,6 +1114,21 @@
     "app_signup": {
       "tokens": [
         ["text", "/signup"],
+        ["variable", "/", "(\\w{2})?", "_locale"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "app_editProfile": {
+      "tokens": [
+        ["text", "/editProfile"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
       "defaults": {

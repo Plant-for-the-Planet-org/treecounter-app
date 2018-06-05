@@ -1,0 +1,9 @@
+export default {
+  forgot_ur_password: 'Forgot Your Password?',
+  mail_sent: 'We have just sent you an email.',
+  secure_link:
+    'Click the secure link we sent you to reset your password. If you didn‘t receive an email, please check your spam folder.',
+  try_again_login: 'Try to login again.'
+};
+
+//emailSentlabels

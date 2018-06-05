@@ -60,7 +60,6 @@ export default class DonateTrees extends Component {
   render() {
     const settings = {
       dots: true,
-      adaptiveHeight: true,
       nextArrow: (
         <CarouselNavigation
           styleName="donate-tree-nav-img__right"

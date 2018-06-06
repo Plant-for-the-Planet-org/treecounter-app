@@ -586,36 +586,6 @@ export default {
             },
             maxLength: 50,
             propertyOrder: 8
-          },
-          imageFile: {
-            type: 'string',
-            title: 'label.avatar',
-            widget: 'file',
-            propertyOrder: 9
-          },
-          url: {
-            type: 'string',
-            title: 'label.url',
-            widget: 'textarea',
-            propertyOrder: 10
-          },
-          linkText: {
-            type: 'string',
-            title: 'label.linkText',
-            widget: 'textarea',
-            propertyOrder: 11
-          },
-          synopsis1: {
-            type: 'string',
-            title: 'label.synopsis1',
-            widget: 'textarea',
-            propertyOrder: 12
-          },
-          synopsis2: {
-            type: 'string',
-            title: 'label.synopsis2',
-            widget: 'textarea',
-            propertyOrder: 13
           }
         },
         required: ['name', 'address', 'zipCode', 'city', 'country'],

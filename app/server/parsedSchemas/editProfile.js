@@ -5,8 +5,8 @@ const parsedSchema = {};
 Object.keys(schemaLiform).map(userType => {
   parsedSchema[userType] = Object.assign(
     {},
-    ...Object.keys(schemaLiform.tpo).map(k => ({
-      [k]: parseJsonToTcomb(schemaLiform.tpo[k].schema)
+    ...Object.keys(schemaLiform[userType]).map(k => ({
+      [k]: parseJsonToTcomb(schemaLiform[userType][k].schema)
     }))
   );
 });

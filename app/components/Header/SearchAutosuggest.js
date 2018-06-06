@@ -13,7 +13,7 @@ import {
   education,
   competition
 } from '../../assets';
-import { getLocalRoute } from '../../actions/apiRouting';
+import { getLocalRoute, getImageUrl } from '../../actions/apiRouting';
 
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -53,7 +53,13 @@ const renderSuggestion = suggestion => {
         })}
         className="search-autusuggest__listitem "
       >
-        <img src={profileType[suggestion.type]} />
+        <img
+          src={
+            suggestion.image
+              ? getImageUrl('profile', 'avatar', suggestion.image)
+              : profileType[suggestion.type]
+          }
+        />
         <span>{suggestion.name}</span>
       </Link>
     </div>

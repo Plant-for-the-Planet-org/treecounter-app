@@ -24,6 +24,12 @@ export default class EditUserProfile extends React.Component {
         <CardLayout>
           <UserProfileImage profileImage={image} />
           <TCombForm
+            ref={'image'}
+            type={parsedSchema[type].image.transformedSchema}
+            options={parsedSchema[type].image.schemaOptions}
+            value={this.props.currentUserProfile}
+          />
+          <TCombForm
             ref={'profile'}
             type={parsedSchema[type].profile.transformedSchema}
             options={parsedSchema[type].profile.schemaOptions}

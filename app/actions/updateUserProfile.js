@@ -5,7 +5,8 @@ import { NotificationManager } from '../notification/PopupNotificaiton/notificat
 const profileTypeToReq = {
   profile: 'profile_put',
   about_me: 'profileAboutMe_put',
-  password: 'profilePassword_put'
+  password: 'profilePassword_put',
+  image: 'profileImage_put'
 };
 export function updateUserProfile(data, profileType) {
   return () => {

@@ -9,10 +9,20 @@ import { bindActionCreators } from 'redux';
 class EditUserProfileContainer extends React.Component {
   onSave = (usertype, profileType) => {
     console.log(usertype, this.refs);
+    console.log(
+      this.refs.EditUserProfileContainer.refs[profileType].validate()
+    );
     let value = this.refs.EditUserProfileContainer.refs[profileType].getValue();
+    let imageValue = this.refs.EditUserProfileContainer.refs[
+      'image'
+    ].getValue();
     if (value) {
       this.props.updateUserProfile(value, profileType);
       console.log(profileType);
+    }
+    if (imageValue) {
+      console.log(imageValue);
+      this.props.updateUserProfile(imageValue, 'image');
     }
   };
   render() {

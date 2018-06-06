@@ -1,10 +1,12 @@
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 export const singleTreeForm = {
   title: 'plant_contribution',
   type: 'object',
   properties: {
     treeCount: {
       type: 'integer',
-      title: 'label.registerTreeslabels.tree_count',
+      title: i18n.t('label.registerTreeslabels.tree_count', { lng }),
       attr: {
         pattern: '.{1,}'
       },
@@ -14,24 +16,24 @@ export const singleTreeForm = {
     },
     treeSpecies: {
       type: 'string',
-      title: 'label.registerTreeslabels.tree_species',
+      title: i18n.t('label.registerTreeslabels.tree_species', { lng }),
       propertyOrder: 2
     },
     plantDate: {
       type: 'string',
-      title: 'label.registerTreeslabels.plant_date',
+      title: i18n.t('label.registerTreeslabels.plant_date', { lng }),
       widget: 'date',
       propertyOrder: 3
     },
     geoLocation: {
       type: 'string',
-      title: 'label.registerTreeslabels.geo_location',
+      title: i18n.t('label.registerTreeslabels.geo_location', { lng }),
       widget: 'map',
       propertyOrder: 4
     },
     contributionImages: {
       type: 'array',
-      title: 'label.registerTreeslabels.add_images',
+      title: i18n.t('label.registerTreeslabels.add_images', { lng }),
       items: {
         title: 'prototype',
         type: 'object',
@@ -49,7 +51,7 @@ export const singleTreeForm = {
     },
     treeClassification: {
       type: 'string',
-      title: 'label.registerTreeslabels.tree_classification',
+      title: i18n.t('label.registerTreeslabels.tree_classification', { lng }),
       attr: {
         maxlength: 255
       },
@@ -58,7 +60,7 @@ export const singleTreeForm = {
     },
     treeScientificName: {
       type: 'string',
-      title: 'label.registerTreeslabels.tree_scientific_name',
+      title: i18n.t('label.registerTreeslabels.tree_scientific_name', { lng }),
       attr: {
         maxlength: 255
       },
@@ -67,24 +69,26 @@ export const singleTreeForm = {
     },
     contributionMeasurements: {
       type: 'array',
-      title: 'label.registerTreeslabels.add_measurements',
+      title: i18n.t('label.registerTreeslabels.add_measurements', { lng }),
       items: {
         title: 'prototype',
         type: 'object',
         properties: {
           diameter: {
             type: 'integer',
-            title: 'label.registerTreeslabels.tree_diameter',
+            title: i18n.t('label.registerTreeslabels.tree_diameter', { lng }),
             propertyOrder: 1
           },
           height: {
             type: 'integer',
-            title: 'label.registerTreeslabels.tree_height',
+            title: i18n.t('label.registerTreeslabels.tree_height', { lng }),
             propertyOrder: 2
           },
           measurementDate: {
             type: 'string',
-            title: 'label.registerTreeslabels.measurement_date',
+            title: i18n.t('label.registerTreeslabels.measurement_date', {
+              lng
+            }),
             widget: 'date',
             propertyOrder: 3
           }
@@ -105,7 +109,7 @@ export const multipleTreesForm = {
   properties: {
     treeCount: {
       type: 'integer',
-      title: 'label.registerTreeslabels.tree_count',
+      title: i18n.t('label.registerTreeslabels.tree_count', { lng }),
       attr: {
         pattern: '.{1,}'
       },
@@ -114,24 +118,24 @@ export const multipleTreesForm = {
     },
     treeSpecies: {
       type: 'string',
-      title: 'label.registerTreeslabels.tree_species',
+      title: i18n.t('label.registerTreeslabels.tree_species', { lng }),
       propertyOrder: 2
     },
     plantDate: {
       type: 'string',
-      title: 'label.registerTreeslabels.plant_date',
+      title: i18n.t('label.registerTreeslabels.plant_date', { lng }),
       widget: 'date',
       propertyOrder: 3
     },
     geoLocation: {
       type: 'string',
-      title: 'label.registerTreeslabels.geo_location',
+      title: i18n.t('label.registerTreeslabels.geo_location', { lng }),
       widget: 'map',
       propertyOrder: 4
     },
     contributionImages: {
       type: 'array',
-      title: 'label.registerTreeslabels.add_images',
+      title: i18n.t('label.registerTreeslabels.add_images', { lng }),
       items: {
         title: 'prototype',
         type: 'object',

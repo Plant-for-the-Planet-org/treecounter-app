@@ -1,3 +1,6 @@
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
+
 export default {
   tpo: {
     title: 'tpo',
@@ -5,7 +8,7 @@ export default {
     properties: {
       name: {
         type: 'string',
-        title: 'label.signUplabels.company_or_orga_name',
+        title: i18n.t('label.signUplabels.company_or_orga_name', { lng }),
         attr: {
           maxlength: 255
         },
@@ -14,7 +17,7 @@ export default {
       },
       address: {
         type: 'string',
-        title: 'label.signUplabels.address',
+        title: i18n.t('label.signUplabels.address', { lng }),
         attr: {
           maxlength: 255
         },
@@ -23,7 +26,7 @@ export default {
       },
       zipCode: {
         type: 'string',
-        title: 'label.signUplabels.zipCode',
+        title: i18n.t('label.signUplabels.zipCode', { lng }),
         attr: {
           maxlength: 50
         },
@@ -32,7 +35,7 @@ export default {
       },
       city: {
         type: 'string',
-        title: 'label.signUplabels.city',
+        title: i18n.t('label.signUplabels.city', { lng }),
         attr: {
           maxlength: 150
         },
@@ -555,7 +558,7 @@ export default {
           'Zimbabwe'
         ],
         type: 'string',
-        title: 'label.signUplabels.country',
+        title: i18n.t('label.signUplabels.country', { lng }),
         attr: {
           maxlength: 2
         },
@@ -563,7 +566,7 @@ export default {
       },
       email: {
         type: 'string',
-        title: 'label.signUplabels.email',
+        title: i18n.t('label.signUplabels.email', { lng }),
         attr: {
           maxlength: 100
         },
@@ -578,7 +581,7 @@ export default {
         properties: {
           first: {
             type: 'string',
-            title: 'label.signUplabels.password',
+            title: i18n.t('label.signUplabels.password', { lng }),
             attr: {
               class: 'password-field'
             },
@@ -588,7 +591,7 @@ export default {
           },
           second: {
             type: 'string',
-            title: 'label.signUplabels.password_repeat',
+            title: i18n.t('label.signUplabels.password_repeat', { lng }),
             attr: {
               class: 'password-field'
             },
@@ -601,12 +604,12 @@ export default {
       },
       mayPublish: {
         type: 'boolean',
-        title: 'label.signUplabels.mayPublish',
+        title: i18n.t('label.signUplabels.mayPublish', { lng }),
         propertyOrder: 8
       },
       mayContact: {
         type: 'boolean',
-        title: 'label.signUplabels.mayContact',
+        title: i18n.t('label.signUplabels.mayContact', { lng }),
         propertyOrder: 9
       }
     },
@@ -628,7 +631,7 @@ export default {
     properties: {
       firstname: {
         type: 'string',
-        title: 'label.signUplabels.firstname',
+        title: i18n.t('label.signUplabels.firstname', { lng }),
         attr: {
           maxlength: 255
         },
@@ -637,7 +640,7 @@ export default {
       },
       lastname: {
         type: 'string',
-        title: 'label.signUplabels.lastname',
+        title: i18n.t('label.signUplabels.lastname', { lng }),
         attr: {
           maxlength: 255
         },
@@ -1160,7 +1163,7 @@ export default {
           'Zimbabwe'
         ],
         type: 'string',
-        title: 'label.signUplabels.country',
+        title: i18n.t('label.signUplabels.country', { lng }),
         attr: {
           maxlength: 2
         },
@@ -1168,7 +1171,7 @@ export default {
       },
       email: {
         type: 'string',
-        title: 'label.signUplabels.email',
+        title: i18n.t('label.signUplabels.email', { lng }),
         attr: {
           maxlength: 100
         },
@@ -1183,7 +1186,7 @@ export default {
         properties: {
           first: {
             type: 'string',
-            title: 'label.signUplabels.password',
+            title: i18n.t('label.signUplabels.password', { lng }),
             attr: {
               class: 'password-field'
             },
@@ -1193,7 +1196,7 @@ export default {
           },
           second: {
             type: 'string',
-            title: 'label.signUplabels.password_repeat',
+            title: i18n.t('label.signUplabels.password_repeat', { lng }),
             attr: {
               class: 'password-field'
             },
@@ -1206,12 +1209,12 @@ export default {
       },
       mayPublish: {
         type: 'boolean',
-        title: 'label.signUplabels.mayPublish',
+        title: i18n.t('label.signUplabels.mayPublish', { lng }),
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
-        title: 'label.signUplabels.mayContact',
+        title: i18n.t('label.signUplabels.mayContact', { lng }),
         propertyOrder: 7
       }
     },
@@ -1225,7 +1228,7 @@ export default {
     properties: {
       name: {
         type: 'string',
-        title: 'label.signUplabels.company_or_orga_name',
+        title: i18n.t('label.signUplabels.company_or_orga_name', { lng }),
         attr: {
           maxlength: 255
         },
@@ -1236,7 +1239,7 @@ export default {
         enum: ['Other'],
         enum_titles: ['0'],
         type: 'string',
-        title: 'label.signUplabels.subtype',
+        title: i18n.t('label.signUplabels.subtype', { lng }),
         propertyOrder: 2
       },
       country: {
@@ -1755,7 +1758,7 @@ export default {
           'Zimbabwe'
         ],
         type: 'string',
-        title: 'label.signUplabels.country',
+        title: i18n.t('label.signUplabels.country', { lng }),
         attr: {
           maxlength: 2
         },
@@ -1763,7 +1766,7 @@ export default {
       },
       email: {
         type: 'string',
-        title: 'label.signUplabels.email',
+        title: i18n.t('label.signUplabels.email', { lng }),
         attr: {
           maxlength: 100
         },
@@ -1778,7 +1781,7 @@ export default {
         properties: {
           first: {
             type: 'string',
-            title: 'label.signUplabels.password',
+            title: i18n.t('label.signUplabels.password', { lng }),
             attr: {
               class: 'password-field'
             },
@@ -1788,7 +1791,7 @@ export default {
           },
           second: {
             type: 'string',
-            title: 'label.signUplabels.password_repeat',
+            title: i18n.t('label.signUplabels.password_repeat', { lng }),
             attr: {
               class: 'password-field'
             },
@@ -1801,12 +1804,12 @@ export default {
       },
       mayPublish: {
         type: 'boolean',
-        title: 'label.signUplabels.mayPublish',
+        title: i18n.t('label.signUplabels.mayPublish', { lng }),
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
-        title: 'label.signUplabels.mayContact',
+        title: i18n.t('label.signUplabels.mayContact', { lng }),
         propertyOrder: 7
       }
     },
@@ -1820,7 +1823,7 @@ export default {
     properties: {
       name: {
         type: 'string',
-        title: 'label.signUplabels.company_or_orga_name',
+        title: i18n.t('label.signUplabels.company_or_orga_name', { lng }),
         attr: {
           maxlength: 255
         },
@@ -1831,7 +1834,7 @@ export default {
         enum: ['primary', 'secondary', 'higher', 'other'],
         enum_titles: ['0', '1', '2', '3'],
         type: 'string',
-        title: 'label.signUplabels.subtype',
+        title: i18n.t('label.signUplabels.subtype', { lng }),
         propertyOrder: 2
       },
       country: {
@@ -2350,7 +2353,7 @@ export default {
           'Zimbabwe'
         ],
         type: 'string',
-        title: 'label.signUplabels.country',
+        title: i18n.t('label.signUplabels.country', { lng }),
         attr: {
           maxlength: 2
         },
@@ -2358,7 +2361,7 @@ export default {
       },
       email: {
         type: 'string',
-        title: 'label.signUplabels.email',
+        title: i18n.t('label.signUplabels.email', { lng }),
         attr: {
           maxlength: 100
         },
@@ -2373,7 +2376,7 @@ export default {
         properties: {
           first: {
             type: 'string',
-            title: 'label.signUplabels.password',
+            title: i18n.t('label.signUplabels.password', { lng }),
             attr: {
               class: 'password-field'
             },
@@ -2383,7 +2386,7 @@ export default {
           },
           second: {
             type: 'string',
-            title: 'label.signUplabels.password_repeat',
+            title: i18n.t('label.signUplabels.password_repeat', { lng }),
             attr: {
               class: 'password-field'
             },
@@ -2396,12 +2399,12 @@ export default {
       },
       mayPublish: {
         type: 'boolean',
-        title: 'label.signUplabels.mayPublish',
+        title: i18n.t('label.signUplabels.mayPublish', { lng }),
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
-        title: 'label.signUplabels.mayContact',
+        title: i18n.t('label.signUplabels.mayContact', { lng }),
         propertyOrder: 7
       }
     },
@@ -2415,7 +2418,7 @@ export default {
     properties: {
       name: {
         type: 'string',
-        title: 'label.signUplabels.company_or_orga_name',
+        title: i18n.t('label.signUplabels.company_or_orga_name', { lng }),
         attr: {
           maxlength: 255
         },
@@ -2945,7 +2948,7 @@ export default {
           'Zimbabwe'
         ],
         type: 'string',
-        title: 'label.signUplabels.country',
+        title: i18n.t('label.signUplabels.country', { lng }),
         attr: {
           maxlength: 2
         },
@@ -2953,7 +2956,7 @@ export default {
       },
       email: {
         type: 'string',
-        title: 'label.signUplabels.email',
+        title: i18n.t('label.signUplabels.email', { lng }),
         attr: {
           maxlength: 100
         },
@@ -2968,7 +2971,7 @@ export default {
         properties: {
           first: {
             type: 'string',
-            title: 'label.signUplabels.password',
+            title: i18n.t('label.signUplabels.password', { lng }),
             attr: {
               class: 'password-field'
             },
@@ -2978,7 +2981,7 @@ export default {
           },
           second: {
             type: 'string',
-            title: 'label.signUplabels.password_repeat',
+            title: i18n.t('label.signUplabels.password_repeat', { lng }),
             attr: {
               class: 'password-field'
             },
@@ -2991,12 +2994,12 @@ export default {
       },
       mayPublish: {
         type: 'boolean',
-        title: 'label.signUplabels.mayPublish',
+        title: i18n.t('label.signUplabels.mayPublish', { lng }),
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
-        title: 'label.signUplabels.mayContact',
+        title: i18n.t('label.signUplabels.mayContact', { lng }),
         propertyOrder: 7
       }
     },
@@ -3010,7 +3013,7 @@ export default {
     properties: {
       name: {
         type: 'string',
-        title: 'label.signUplabels.company_or_orga_name',
+        title: i18n.t('label.signUplabels.company_or_orga_name', { lng }),
         attr: {
           maxlength: 255
         },
@@ -3540,7 +3543,7 @@ export default {
           'Zimbabwe'
         ],
         type: 'string',
-        title: 'label.signUplabels.country',
+        title: i18n.t('label.signUplabels.country', { lng }),
         attr: {
           maxlength: 2
         },
@@ -3548,7 +3551,7 @@ export default {
       },
       email: {
         type: 'string',
-        title: 'label.signUplabels.email',
+        title: i18n.t('label.signUplabels.email', { lng }),
         attr: {
           maxlength: 100
         },
@@ -3563,7 +3566,7 @@ export default {
         properties: {
           first: {
             type: 'string',
-            title: 'label.signUplabels.password',
+            title: i18n.t('label.signUplabels.password', { lng }),
             attr: {
               class: 'password-field'
             },
@@ -3573,7 +3576,7 @@ export default {
           },
           second: {
             type: 'string',
-            title: 'label.signUplabels.password_repeat',
+            title: i18n.t('label.signUplabels.password_repeat', { lng }),
             attr: {
               class: 'password-field'
             },
@@ -3586,12 +3589,12 @@ export default {
       },
       mayPublish: {
         type: 'boolean',
-        title: 'label.signUplabels.mayPublish',
+        title: i18n.t('label.signUplabels.mayPublish', { lng }),
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
-        title: 'label.signUplabels.mayContact',
+        title: i18n.t('label.signUplabels.mayContact', { lng }),
         propertyOrder: 7
       }
     },

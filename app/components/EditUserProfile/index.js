@@ -4,6 +4,7 @@ import CardLayout from '../Common/Card/CardLayout';
 import t from 'tcomb-form';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import PropTypes from 'prop-types';
+import UserProfileImage from '../Common/UserProfileImage';
 
 import { parsedSchema } from '../../server/parsedSchemas/editProfile';
 
@@ -16,11 +17,12 @@ export default class EditUserProfile extends React.Component {
   }
   render() {
     console.log('___render___Edit_userprofile');
-    const { type } = this.props.currentUserProfile;
+    const { type, image } = this.props.currentUserProfile;
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>Edit Profile</TextHeading>
         <CardLayout>
+          <UserProfileImage profileImage={image} />
           <TCombForm
             ref={'profile'}
             type={parsedSchema[type].profile.transformedSchema}

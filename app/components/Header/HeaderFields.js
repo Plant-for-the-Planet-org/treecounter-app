@@ -7,12 +7,21 @@ import { updateRoute } from '../../helpers/routerHelper';
 import Popover from '../Common/Popover';
 import UserDetails from './UserDetails';
 import RoundedButton from '../Common/Button/RoundedButton';
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 
 const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
   console.log(userProfile, onLogout);
   return isLoggedIn ? (
     <div className="header-icons">
-      <Popover button={<i className="material-icons">notifications_none</i>}>
+      <Popover
+        button={
+          <i className="material-icons">
+            {' '}
+            {i18n.t('label.headerlabels.no_notification', { lng })}
+          </i>
+        }
+      >
         <Notification />
       </Popover>
       <Popover
@@ -24,10 +33,10 @@ const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
   ) : (
     <div className="header-icons">
       <RoundedButton onClick={updateRoute.bind(this, 'app_login')}>
-        Log In
+        {i18n.t('label.headerlabels.logIn', { lng })}
       </RoundedButton>
       <RoundedButton onClick={updateRoute.bind(this, 'app_signup')}>
-        Sign Up
+        {i18n.t('label.headerlabels.signUp', { lng })}
       </RoundedButton>
     </div>
   );

@@ -39,5 +39,7 @@ export default {
   registerFurther: 'Register further trees',
   DONATETREES: 'Donate trees',
   noContributions: 'No Contributions',
-  plantedTrees: 'Planted Trees'
+  plantedTrees: 'Planted Trees',
+  by: 'by',
+  is_certified: 'isCertified'
 };

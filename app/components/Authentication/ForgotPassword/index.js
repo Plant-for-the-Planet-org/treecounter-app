@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
-
+import i18n from '../../../locales/i18n.js';
+let lng = 'en';
 import {
   forgotPasswordFormSchema,
   schemaOptions
@@ -19,12 +20,13 @@ export default class ForgotPassword extends Component {
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>Forgot your password?</TextHeading>
+        <TextHeading>
+          {i18n.t('label.forgotPasswordlabels.forgot_ur_password', { lng })}
+        </TextHeading>
         <div className="card-width">
           <CardLayout>
             <TextSpan>
-              Enter your email address and we‘ll send you a link to reset your
-              password.
+              {i18n.t('label.forgotPasswordlabels.enter_mail', { lng })}
             </TextSpan>
             <br />
             <TCombForm
@@ -33,10 +35,15 @@ export default class ForgotPassword extends Component {
               options={schemaOptions}
             />
             <PrimaryButton onClick={this.props.onResetPassword}>
-              Reset Password
+              {i18n.t('label.forgotPasswordlabels.reset_password', { lng })}
             </PrimaryButton>
             <TextBlock>
-              <InlineLink uri={'app_login'} caption="Try to login again" />
+              <InlineLink
+                uri={'app_login'}
+                caption={i18n.t('label.forgotPasswordlabels.again_login', {
+                  lng
+                })}
+              />
             </TextBlock>
           </CardLayout>
         </div>

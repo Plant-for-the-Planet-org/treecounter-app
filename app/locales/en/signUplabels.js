@@ -19,12 +19,14 @@ export default {
   tpo: 'tpo',
   company: 'company',
   education: 'education',
-  for_single_person: 'I am a', // keys can be modified
-  for_many: 'I am', // keys can be modified
+  i_am_a: 'I am a', // keys can be modified
+  i_am: 'I am', // keys can be modified
   tpo_title: 'Tree-Planting Organisation',
   individual_title: 'Just me',
   company_title: 'Company',
   education_title: 'School',
-  signup_button: 'Sign Up'
+  signup_button: 'Sign Up',
+  already_have_account: 'Already have an account?',
+  login: 'Log in'
 };
 //signUplabels

@@ -1,7 +1,7 @@
 export default {
   forgot_password: 'Forgot your password?',
   reset: 'Reset.',
-  dont_have_account: "Don't have an account?&nbsp;",
+  dont_have_account: "Don't have an account?",
   signup: 'Sign up.',
   login: 'Log In',
   email: 'Email',

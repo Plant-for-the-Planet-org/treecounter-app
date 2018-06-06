@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 //import { history } from '../../components/Common/BrowserRouter';
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
@@ -141,7 +143,8 @@ class PublicTreeCounter extends React.Component {
             {...headerProps}
             followChanged={this.onFollowChanged}
           />
-          {'tpo' !== userProfile.type &&
+          {i18n.t('label.publicTreecounterlabels.tpo', { lng }) !==
+            userProfile.type &&
             !this.isMyself() && (
               <div className="support-button-container ">
                 <SupportButton
@@ -159,7 +162,8 @@ class PublicTreeCounter extends React.Component {
           />
         </div>
         <div className="tree-counter-footer__container">
-          {'tpo' === userProfile.type ? (
+          {i18n.t('label.publicTreecounterlabels.tpo', { lng }) ===
+          userProfile.type ? (
             <TpoDonationPlantProjectSelector
               {...tpoProps}
               onSelect={this.onPlantProjectSelected}

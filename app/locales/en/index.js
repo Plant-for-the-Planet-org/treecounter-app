@@ -13,7 +13,7 @@ import signUplabels from './signUplabels';
 import signUpSuccessfullabels from './signUpSuccessfullabels';
 import targetlabels from './targetlabels';
 import tpoProjectlabels from './tpoProjectlabels';
-import treecounterGraphics from './treecounterGraphics';
+import treecounterGraphicslabels from './treecounterGraphicslabels';
 import userContributionslabels from './userContributionslabels';
 
 export default {
@@ -32,6 +32,6 @@ export default {
   signUpSuccessfullabels: signUpSuccessfullabels,
   targetlabels: targetlabels,
   tpoProjectlabels: tpoProjectlabels,
-  treecounterGraphics: treecounterGraphics,
+  treecounterGraphicslabels: treecounterGraphicslabels,
   userContributionslabels: userContributionslabels
 };

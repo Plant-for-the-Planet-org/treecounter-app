@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 
-import {
-  trillionTreeMessage1,
-  trillionTreeMessage2
-} from '../../constants/strings';
 import { trillionCampaign } from '../../actions/trillionAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
@@ -13,6 +9,8 @@ import ButtonHeading from '../Common/Heading/ButtonHeading';
 import { updateRoute } from '../../helpers/routerHelper';
 import TextHeading from '../Common/Heading/TextHeading';
 import TextBlock from '../Common/Text/TextBlock';
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 
 class Trillion extends Component {
   constructor() {
@@ -56,11 +54,19 @@ class Trillion extends Component {
       <div className="sidenav-wrapper">
         <TextHeading>
           {this.state.displayName}
-          <TextBlock>{trillionTreeMessage1}</TextBlock>
-          <TextBlock>{trillionTreeMessage2}</TextBlock>
+          <TextBlock>
+            {i18n.t('label.treecounterGraphicslabels.trillionTreeMessage1', {
+              lng
+            })}
+          </TextBlock>
+          <TextBlock>
+            {i18n.t('label.treecounterGraphicslabels.trillionTreeMessage2', {
+              lng
+            })}
+          </TextBlock>
           <ButtonHeading>
             <SecondaryAccentButton onClick={updateRoute.bind(this, 'app_faq')}>
-              FAQs
+              {i18n.t('label.treecounterGraphicslabels.faqs', { lng })}
             </SecondaryAccentButton>
           </ButtonHeading>
         </TextHeading>

@@ -4,17 +4,23 @@ import PropTypes from 'prop-types';
 import ContributionCardList from './ContributionCardList';
 import ContributionsMapLegend from './ContributionsMapLegend';
 import Map from '../Common/EsriMap/Map';
-import * as constants from '../../SupportedLanguages/en';
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import InlineLink from '../Common/InlineLink';
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 
 const UserContributions = ({ userContributions }) => {
   let mPins = userContributions.map(element => {
     let color = '';
-    if (element.contributionType === 'donated') color = 'green';
-    else if (element.treeCount > 1) color = 'blue';
-    else color = 'orange';
+    if (
+      element.contributionType ===
+      i18n.t('label.userContributionslabels.donated', { lng })
+    )
+      color = i18n.t('label.userContributionslabels.green', { lng });
+    else if (element.treeCount > 1)
+      color = i18n.t('label.userContributionslabels.blue', { lng });
+    else color = i18n.t('label.userContributionslabels.orange', { lng });
     return {
       lat: element.geoLatitude,
       long: element.geoLongitude,
@@ -24,7 +30,9 @@ const UserContributions = ({ userContributions }) => {
 
   return (
     <div className="app-container__content--center sidenav-wrapper">
-      <TextHeading>My Trees</TextHeading>
+      <TextHeading>
+        {i18n.t('label.userContributionslabels.my_trees', { lng })}
+      </TextHeading>
       <CardLayout>
         {Object.keys(userContributions).length > 0 ? (
           <div>
@@ -35,11 +43,16 @@ const UserContributions = ({ userContributions }) => {
             </div>
             <div className="contribution-buttons">
               <InlineLink
-                caption={constants.formStrings.registerFurther}
+                caption={i18n.t(
+                  'label.userContributionslabels.register_further',
+                  { lng }
+                )}
                 uri={'app_registerTrees'}
               />
               <InlineLink
-                caption={constants.formStrings.DONATETREES}
+                caption={i18n.t('label.userContributionslabels.donate_trees', {
+                  lng
+                })}
                 uri={'app_donateTrees'}
               />
             </div>
@@ -47,7 +60,9 @@ const UserContributions = ({ userContributions }) => {
         ) : (
           <div className="sidenav-wrapper">
             <div className="registeration-successfull">
-              {constants.formStrings.noContributions}
+              {i18n.t('label.userContributionslabels.no_contributions', {
+                lng
+              })}
             </div>
           </div>
         )}

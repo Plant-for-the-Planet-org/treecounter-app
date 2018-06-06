@@ -1,7 +1,8 @@
 import React from 'react';
 
 import SearchAutosuggest from './SearchAutosuggest';
-import * as constants from '../../SupportedLanguages/en';
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 
 const SearchBar = () => {
   return (
@@ -10,7 +11,7 @@ const SearchBar = () => {
         <SearchAutosuggest />
         <span className="search-bar__button">
           <i className="material-icons header-icons">
-            {constants.formStrings.search}
+            {i18n.t('label.headerlabels.search', { lng })}
           </i>
         </span>
       </div>

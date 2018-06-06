@@ -14,6 +14,8 @@ import {
   competition
 } from '../../assets';
 import { getLocalRoute } from '../../actions/apiRouting';
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -99,7 +101,7 @@ class SearchAutosuggest extends Component {
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
-      placeholder: 'Type a name',
+      placeholder: i18n.t('label.headerlabels.placeholder_value', { lng }),
       value,
       onChange: this.onChange,
       className: 'form-control search_text'

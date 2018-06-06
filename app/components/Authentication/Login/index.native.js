@@ -14,6 +14,8 @@ import {
   schemaOptions
 } from '../../../server/parsedSchemas/login';
 
+import i18n from '../../../locales/i18n.js';
+let lng = 'en';
 let Form = t.form.Form;
 
 export default class Login extends Component {
@@ -29,7 +31,9 @@ export default class Login extends Component {
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.loginHeader}>
-          <Text style={styles.titleText}>Log In</Text>
+          <Text style={styles.titleText}>
+            {i18n.t('label.loginlabels.login', { lng })}
+          </Text>
           <View style={styles.titleTextUnderline} />
         </View>
         <View style={styles.inputContainer}>
@@ -42,24 +46,30 @@ export default class Login extends Component {
             onPress={this.props.onPress}
             style={styles.button}
           >
-            <Text style={styles.buttonText}>Log in</Text>
+            <Text style={styles.buttonText}>
+              {i18n.t('label.loginlabels.login', { lng })}
+            </Text>
           </TouchableHighlight>
           <View style={styles.bottomRow}>
-            <Text style={styles.bottomText}>Forgot your password?</Text>
+            <Text style={styles.bottomText}>
+              {i18n.t('label.loginlabels.forgot_password', { lng })}
+            </Text>
             <Text
               onPress={this.onForgotPasswordClicked}
               style={styles.bottomTextHighlight}
             >
-              Reset.
+              {i18n.t('label.loginlabels.reset', { lng })}
             </Text>
           </View>
           <View style={styles.bottomRow}>
-            <Text style={styles.bottomText}>Don't have an account? </Text>
+            <Text style={styles.bottomText}>
+              {i18n.t('label.loginlabels.dont_have_account', { lng })}
+            </Text>
             <Text
               onPress={this.onSignupClicked}
               style={styles.bottomTextHighlight}
             >
-              Sign up.
+              {i18n.t('label.loginlabels.signup', { lng })}
             </Text>
           </View>
         </View>

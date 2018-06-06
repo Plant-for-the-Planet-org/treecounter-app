@@ -11,6 +11,8 @@ import {
   multipleTreesRegisterFormSchema,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 
 let TCombForm = t.form.Form;
 
@@ -67,8 +69,8 @@ const schemaOptionsMultiple = {
 
 export default class EditUserContribution extends Component {
   static mode = {
-    singleTree: 'single-tree',
-    multipleTrees: 'multiple-trees'
+    singleTree: i18n.t('label.registerTreeslabels.single_tree', { lng }),
+    multipleTrees: i18n.t('label.registerTreeslabels.many_trees', { lng })
   };
 
   constructor(props) {
@@ -94,7 +96,9 @@ export default class EditUserContribution extends Component {
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>Edit trees</TextHeading>
+        <TextHeading>
+          {i18n.t('label.registerTreeslabels.edit_trees', { lng })}
+        </TextHeading>
         <CardLayout>
           <div className="register-tree__form">
             {this.state.mode === EditUserContribution.mode.singleTree ? (
@@ -113,7 +117,9 @@ export default class EditUserContribution extends Component {
               />
             )}
           </div>
-          <PrimaryButton onClick={this.onSubmitClick}>Update</PrimaryButton>
+          <PrimaryButton onClick={this.onSubmitClick}>
+            {i18n.t('label.registerTreeslabels.update', { lng })}
+          </PrimaryButton>
         </CardLayout>
       </div>
     );

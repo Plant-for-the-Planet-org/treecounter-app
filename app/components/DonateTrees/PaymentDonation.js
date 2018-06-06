@@ -8,7 +8,8 @@ import { PaymentSchema } from '../../layouts/donatePayment';
 import CustomForm from '../Common/CustomForm';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import { Payment } from '../../actions/paymentAction';
-import * as constants from '../../SupportedLanguages/en';
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 
 class PaymentDonation extends Component {
   constructor(props) {
@@ -119,8 +120,14 @@ class PaymentDonation extends Component {
                   onChange={this.handleOptionChange}
                 />
                 <div>
-                  <span>{constants.formStrings.paypal}</span>
-                  <span>{constants.formStrings.redirectionMessage}</span>
+                  <span>
+                    {i18n.t('label.donateTreeslabels.paypal', { lng })}
+                  </span>
+                  <span>
+                    {i18n.t('label.donateTreeslabels.redirectionMessage', {
+                      lng
+                    })}
+                  </span>
                 </div>
                 <div className="flex__spacer" />
                 <img src="http://pngimg.com/uploads/paypal/paypal_PNG4.png" />
@@ -138,14 +145,18 @@ class PaymentDonation extends Component {
                   onChange={this.handleOptionChange}
                 />
                 <div>
-                  <span>{constants.formStrings.directDebit}</span>
-                  <span>{constants.formStrings.accountInfo}</span>
+                  <span>
+                    {i18n.t('label.donateTreeslabels.directDebit', { lng })}
+                  </span>
+                  <span>
+                    {i18n.t('label.donateTreeslabels.accountInfo', { lng })}
+                  </span>
                 </div>
                 <div className="flex__spacer" />
                 <img src="https://www.cardgate.com/wp-content/themes/cardgate/download.php?file=SEPA-direct-debit-logo.png" />
               </label>
               <div className="payment-method__option--input">
-                <span>{constants.formStrings.IBAN}</span>
+                <span>{i18n.t('label.donateTreeslabels.IBAN', { lng })}</span>
                 <input
                   type="text"
                   value={this.state.paymentOptions.iban}
@@ -153,7 +164,7 @@ class PaymentDonation extends Component {
                 />
               </div>
               <div className="payment-method__option--input">
-                <span>{constants.formStrings.BIC}</span>
+                <span>{i18n.t('label.donateTreeslabels.BIC', { lng })}</span>
                 <input
                   type="text"
                   value={this.state.paymentOptions.bic}
@@ -173,8 +184,14 @@ class PaymentDonation extends Component {
                   onChange={this.handleOptionChange}
                 />
                 <div>
-                  <span>{constants.formStrings.creditCard}</span>
-                  <span>{constants.formStrings.creditCardMessage}</span>
+                  <span>
+                    {i18n.t('label.donateTreeslabels.creditCard', { lng })}
+                  </span>
+                  <span>
+                    {i18n.t('label.donateTreeslabels.creditCardMessage', {
+                      lng
+                    })}
+                  </span>
                 </div>
                 <div className="flex__spacer" />
                 <img src="http://www.pngmart.com/files/3/Credit-Card-Visa-And-Master-Card-PNG-HD.png" />
@@ -188,8 +205,8 @@ class PaymentDonation extends Component {
     console.log('Payment Donation ----- Render', this.state.schema);
     return (
       <div className="payment-page-container">
-        <h3>{constants.formStrings.donateTrees}</h3>
-        <h6>{constants.formStrings.donateTreesMessage}</h6>
+        <h3>{i18n.t('label.donateTreeslabels.donateTrees', { lng })}</h3>
+        <h6>{i18n.t('label.donateTreeslabels.donateTreesMessage', { lng })}</h6>
         <div className="horizontal-round-bar">
           <div className="horizontal-round-bar__spacer" />
           <span>1</span>
@@ -203,13 +220,19 @@ class PaymentDonation extends Component {
                 {this.state.selectedProject.name}
               </span>
               <div className="project-details__table">
-                <span>{constants.formStrings.planted}:</span>
+                <span>
+                  {i18n.t('label.donateTreeslabels.planted', { lng })}:
+                </span>
                 <span>{this.state.selectedProject.countPlanted}</span>
 
-                <span>{constants.formStrings.target}:</span>
+                <span>
+                  {i18n.t('label.donateTreeslabels.target', { lng })}:
+                </span>
                 <span>{this.state.selectedProject.countTarget}</span>
 
-                <span>{constants.formStrings.costPerTree}:</span>
+                <span>
+                  {i18n.t('label.donateTreeslabels.costPerTree', { lng })}:
+                </span>
                 <span>{this.state.selectedProject.treeCost}</span>
                 {this.state.selectedProject.isCertified
                   ? 'Certified'
@@ -221,9 +244,11 @@ class PaymentDonation extends Component {
             </div>
           </div>
           <div className="project-details__footer">
-            <a>{constants.formStrings.seeMore}</a>
+            <a>{i18n.t('label.donateTreeslabels.seeMore', { lng })}</a>
             <Link to="/donateTrees">
-              {constants.formStrings.selectDifferentProject}
+              {i18n.t('label.donateTreeslabels.selectDifferentProject', {
+                lng
+              })}
             </Link>
           </div>
         </div>

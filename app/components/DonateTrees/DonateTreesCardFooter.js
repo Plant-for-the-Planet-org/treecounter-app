@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { Link } from 'react-router-dom';
-import * as constants from '../../SupportedLanguages/en';
 import PropTypes from 'prop-types';
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 
 const DonateTreesCardFooter = props => {
   const { selectPlantProjectAction, value } = props;
@@ -16,14 +17,14 @@ const DonateTreesCardFooter = props => {
   return (
     <div className="card-footer">
       <a className="leftBtn" href="#">
-        {constants.formStrings.seeMore}
+        {i18n.t('label.donateTreeslabels.seeMore', { lng })}
       </a>
       <Link
         className="rightBtn"
         to={route}
         onClick={e => handleDonateTreesButton(e, value.id)}
       >
-        {constants.formStrings.donateTrees}
+        {i18n.t('label.donateTreeslabels.donateTrees', { lng })}
       </Link>
     </div>
   );

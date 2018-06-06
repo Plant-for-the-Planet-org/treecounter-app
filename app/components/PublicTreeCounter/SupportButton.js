@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SecondaryButton from '../Common/Button/SecondaryButton';
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 
 const SupportButton = ({
   active,
@@ -14,12 +16,12 @@ const SupportButton = ({
       onClick={() => onRegisterSupporter()}
       disable={active ? 'active' : 'inactive'}
     >
-      Support
+      {i18n.t('label.publicTreecounterlabels.support', { lng })}
       <span className="support-button-caption">{caption}</span>
     </SecondaryButton>
   ) : (
     <SecondaryButton onClick={() => onRegisterSupporter()} disable={true}>
-      Support
+      {i18n.t('label.publicTreecounterlabels.support', { lng })}
       <span className="support-button-caption">{caption}</span>
     </SecondaryButton>
   );

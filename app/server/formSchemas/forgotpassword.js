@@ -1,5 +1,5 @@
 export default {
-  title: 'label.forgotPasswordlabels.forgot_password',
+  title: 'forgot_password',
   type: 'object',
   properties: {
     email: {

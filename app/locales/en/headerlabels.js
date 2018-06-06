@@ -8,5 +8,8 @@ export default {
   welcome_hi: 'Hi ',
   welcome_symbol: '!', //Key may be changed
   edit_profile: 'Edit Profile',
-  help: 'Help'
+  help: 'Help',
+  logout: 'Logout',
+  no_notification: 'notifications_none',
+  menu: 'menu'
 };

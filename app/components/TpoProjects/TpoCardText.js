@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import * as constants from '../../SupportedLanguages/en';
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 
 const TpoCardText = props => {
   const { name, tponame, cardtext } = props;
@@ -16,33 +16,35 @@ const TpoCardText = props => {
       <p className="name_tag">{cardtext.region}</p>
       <div className="middle_tag">
         <span className="col-md-8 text-left">
-          {constants.formStrings.planted}:{' '}
+          {i18n.t('label.tpoProjectlabels.planted', { lng })}:{' '}
         </span>{' '}
         <span className="col-md-4 text-right">{cardtext.countPlanted}</span>
       </div>
       <div className="middle_tag">
         <span className="col-md-8 text-left">
-          {constants.formStrings.target}:
+          {i18n.t('label.tpoProjectlabels.target', { lng })}:
         </span>{' '}
         <span className="text-right col-md-4">{cardtext.countTarget}</span>
       </div>
       <div className="middle_tag">
         <span className="col-md-8 text-left">
-          {constants.formStrings.survival_rate}:
+          {i18n.t('label.tpoProjectlabels.survival_rate', { lng })}:
         </span>{' '}
         <span className="text-right col-md-4">{cardtext.survivalRate}</span>
       </div>
       <div className="middle_tag">
         <span className="col-md-8 text-left">
-          {constants.formStrings.certified}:
+          {i18n.t('label.tpoProjectlabels.certified', { lng })}:
         </span>{' '}
         <span className="text-right col-md-4">
-          {cardtext.isCertified ? 'Certified' : 'Not-Certified'}
+          {cardtext.isCertified
+            ? i18n.t('label.tpoProjectlabels.certified', { lng })
+            : i18n.t('label.tpoProjectlabels.nonCertified', { lng })}
         </span>
       </div>
       <div className="middle_tag1">
         <span className="col-md-8 text-left">
-          {constants.formStrings.Cost}:
+          {i18n.t('label.tpoProjectlabels.Cost', { lng })}:
         </span>{' '}
         <span className="text-right col-md-4">{cardtext.treeCost}</span>
       </div>

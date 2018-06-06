@@ -8,7 +8,8 @@ import {
   TouchableHighlight,
   ScrollView
 } from 'react-native';
-
+import i18n from '../../locales/i18n.js';
+let lng = 'en';
 import {
   schemaOptions,
   targetFormSchema
@@ -24,7 +25,9 @@ export default class Target extends Component {
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.loginHeader}>
-          <Text style={styles.titleText}>Set Target</Text>
+          <Text style={styles.titleText}>
+            {i18n.t('label.targetlabels.set_target', { lng })}
+          </Text>
           <View style={styles.titleTextUnderline} />
         </View>
         <View style={styles.inputContainer}>
@@ -37,7 +40,9 @@ export default class Target extends Component {
             onPress={this.props.onSubmitTarget}
             style={styles.button}
           >
-            <Text style={styles.buttonText}>Set Target</Text>
+            <Text style={styles.buttonText}>
+              {i18n.t('label.targetlabels.set_target', { lng })}
+            </Text>
           </TouchableHighlight>
         </View>
       </ScrollView>

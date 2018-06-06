@@ -5,7 +5,7 @@ import t from 'tcomb-form';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import PropTypes from 'prop-types';
 import UserProfileImage from '../Common/UserProfileImage';
-
+import ActionButton from '../Common/ActionButton';
 import { parsedSchema } from '../../server/parsedSchemas/editProfile';
 
 let TCombForm = t.form.Form;
@@ -70,9 +70,11 @@ export default class EditUserProfile extends React.Component {
               this.props.onSave(type, 'password');
             }}
           >
-            Save Changes
+            Change Passwords
           </PrimaryButton>
         </CardLayout>
+        <CardLayout>Following</CardLayout>
+        <ActionButton caption="Delete Profile" />
       </div>
     );
   }

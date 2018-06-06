@@ -7,6 +7,7 @@ import { NotificationContainer } from 'react-notifications';
 import PropTypes from 'prop-types';
 
 // Components imports
+import GiftTreesContainer from '../../containers/GiftTrees';
 import TargetContainer from '../../containers/TargetContainer';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
 import HeaderContainer from '../../containers/HeaderContainer';
@@ -35,7 +36,7 @@ import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { getLocalRoute } from '../../actions/apiRouting';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
-import DonationTreesContainer from '../../containers/DonateTrees/index';
+// import DonationTreesContainer from '../../containers/DonateTrees/index';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -168,11 +169,14 @@ class TreeCounter extends Component {
               />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
-              <Route
+              {/* <Route
                 path={getLocalRoute('app_donateTrees')}
                 component={DonationTreesContainer}
+              /> */}
+              <Route
+                path={getLocalRoute('app_donateTrees')}
+                component={GiftTreesContainer}
               />
-
               {/* Routes which essentially show svg */}
               <Route
                 path={getLocalRoute('app_treecounter') + '/:treecounterId'}

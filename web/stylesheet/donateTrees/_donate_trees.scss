@@ -114,4 +114,23 @@
       }
     }
   }
+
+  .pftp-tabs {
+    font-size: 15px;
+    .react-autosuggest__container {
+      width: 100%;
+      input {
+        background: none;
+        color: #000000;
+        font-size: 18px;
+        padding: 5px 10px 10px 5px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid mix(white, #424242, 70%);
+      }
+    }
+  }
 }

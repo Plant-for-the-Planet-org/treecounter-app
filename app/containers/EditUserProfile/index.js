@@ -4,13 +4,15 @@ import { currentUserProfileSelector } from '../../selectors/index';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { updateUserProfile } from '../../actions/updateUserProfile';
+import { bindActionCreators } from 'redux';
 
 class EditUserProfileContainer extends React.Component {
-  onSave = type => {
-    console.log(type, this.refs);
-    let value = this.refs.EditUserProfileContainer.refs[type].getValue();
+  onSave = (usertype, profileType) => {
+    console.log(usertype, this.refs);
+    let value = this.refs.EditUserProfileContainer.refs[profileType].getValue();
     if (value) {
-      updateUserProfile(type, value);
+      this.props.updateUserProfile(value, profileType);
+      console.log(profileType);
     }
   };
   render() {
@@ -33,4 +35,19 @@ const mapStateToProps = state => ({
   currentUserProfile: currentUserProfileSelector(state)
 });
 
-export default connect(mapStateToProps)(EditUserProfileContainer);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      updateUserProfile
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  EditUserProfileContainer
+);
+
+EditUserProfileContainer.propTypes = {
+  updateUserProfile: PropTypes.func
+};

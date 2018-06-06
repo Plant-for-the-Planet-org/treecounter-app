@@ -22,14 +22,14 @@ export default class EditUserProfile extends React.Component {
         <TextHeading>Edit Profile</TextHeading>
         <CardLayout>
           <TCombForm
-            ref={type}
+            ref={'profile'}
             type={parsedSchema[type].profile.transformedSchema}
             options={parsedSchema[type].profile.schemaOptions}
             value={this.props.currentUserProfile}
           />
           <PrimaryButton
             onClick={() => {
-              this.props.onSave(type);
+              this.props.onSave(type, 'profile');
             }}
           >
             Save Changes
@@ -38,14 +38,14 @@ export default class EditUserProfile extends React.Component {
         {/* //about_me section */}
         <CardLayout>
           <TCombForm
-            ref={type}
+            ref={'about_me'}
             type={parsedSchema[type].about_me.transformedSchema}
             options={parsedSchema[type].about_me.schemaOptions}
             value={this.props.currentUserProfile}
           />
           <PrimaryButton
             onClick={() => {
-              this.props.onSave(type);
+              this.props.onSave(type, 'about_me');
             }}
           >
             Save Changes
@@ -53,13 +53,13 @@ export default class EditUserProfile extends React.Component {
         </CardLayout>
         <CardLayout>
           <TCombForm
-            ref={type}
+            ref={'password'}
             type={parsedSchema[type].password.transformedSchema}
             options={parsedSchema[type].password.schemaOptions}
           />
           <PrimaryButton
             onClick={() => {
-              this.props.onSave(type);
+              this.props.onSave(type, 'password');
             }}
           >
             Save Changes

@@ -1,15 +1,20 @@
-import { postRequest } from '../utils/api';
+import { putAuthenticatedRequest } from '../utils/api';
 import { debug } from '../debug/index';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 
-export function updateUserProfile(data) {
+const profileTypeToReq = {
+  profile: 'profile_put',
+  about_me: 'profileAboutMe_put',
+  password: 'profilePassword_put'
+};
+export function updateUserProfile(data, profileType) {
   return () => {
-    postRequest('auth_forgotPassword_post', data)
+    putAuthenticatedRequest(profileTypeToReq[profileType], data)
       .then(res => {
         debug(res.status);
         NotificationManager.success(
-          'Profile Updated Successful',
-          'Congrats',
+          `${profileType} Updated Successful`,
+          `Congrats`,
           5000
         );
       })

@@ -1,6 +1,10 @@
 import { putAuthenticatedRequest } from '../utils/api';
 import { debug } from '../debug/index';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
+import { userProfileSchema } from '../schemas/index';
+
+import { normalize } from 'normalizr';
+import { mergeEntities } from '../reducers/entitiesReducer';
 
 const profileTypeToReq = {
   profile: 'profile_put',
@@ -9,10 +13,12 @@ const profileTypeToReq = {
   image: 'profileImage_put'
 };
 export function updateUserProfile(data, profileType) {
-  return () => {
+  return dispatch => {
     putAuthenticatedRequest(profileTypeToReq[profileType], data)
       .then(res => {
         debug(res.status);
+        debug(res);
+        dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
         NotificationManager.success(
           `${profileType} Updated Successful`,
           `Congrats`,

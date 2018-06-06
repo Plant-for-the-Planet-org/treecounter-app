@@ -19,6 +19,11 @@ import {
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
 
+import {
+  giftInvitationFormSchema,
+  giftInvitationSchemaOptions
+} from '../../server/parsedSchemas/giftTrees';
+
 let TCombForm = t.form.Form;
 
 const headings = ['Give to...', 'Donation Details', 'Donor Details', 'Payment'];
@@ -73,6 +78,10 @@ export default class GiftTrees extends Component {
     this.setState({ modeReciept: tab });
   }
 
+  suggestionCLicked = (context, event) => {
+    console.log(event.suggestion.id);
+  };
+
   render() {
     const settings = {
       dots: true,
@@ -103,8 +112,16 @@ export default class GiftTrees extends Component {
                 onTabChange={this.handleModeUserChange}
               >
                 {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
-                  <SearchAutosuggest />
-                ) : null}
+                  <SearchAutosuggest
+                    onSuggestionClicked={this.suggestionCLicked}
+                  />
+                ) : (
+                  <TCombForm
+                    ref="giftInvitation"
+                    type={giftInvitationFormSchema}
+                    options={giftInvitationSchemaOptions}
+                  />
+                )}
               </Tabs>
               {this.props.selectedTpo ? (
                 <PlantProjectFull

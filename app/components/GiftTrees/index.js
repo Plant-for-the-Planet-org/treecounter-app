@@ -24,6 +24,7 @@ import {
   giftInvitationFormSchema,
   giftInvitationSchemaOptions
 } from '../../server/parsedSchemas/giftTrees';
+import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 let TCombForm = t.form.Form;
 
@@ -141,6 +142,13 @@ export default class GiftTrees extends Component {
                   />
                 )}
               </Tabs>
+              {this.props.selectedTpo ? (
+                <PlantProjectFull
+                  expanded={false}
+                  plantProject={this.props.selectedProject}
+                  tpoName={this.props.selectedTpo.name}
+                />
+              ) : null}
               {this.props.selectedTpo ? (
                 <TreeCountCurrencySelector
                   baseCurrency={plantProject.currency}

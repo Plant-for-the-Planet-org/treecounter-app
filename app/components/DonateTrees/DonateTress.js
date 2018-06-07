@@ -13,8 +13,8 @@ import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 import {
   individualSchemaOptions,
-  recieptIndividualFormSchema,
-  recieptCompanyFormSchema,
+  receiptIndividualFormSchema,
+  receiptCompanyFormSchema,
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -102,20 +102,20 @@ export default class DonateTrees extends Component {
                 data={DonateTrees.data.tabs}
                 onTabChange={this.handleModeOptionChange}
                 activeTab={
-                  this.state.modeReciept !== '' ? this.state.modeReciept : null
+                  this.state.modeReceipt !== '' ? this.state.modeReceipt : null
                 }
               >
                 {this.state.mode === DonateTrees.data.tabs[0].id ? (
                   <TCombForm
-                    ref="donateReciept"
-                    type={recieptIndividualFormSchema}
+                    ref="donateReceipt"
+                    type={receiptIndividualFormSchema}
                     options={individualSchemaOptions}
                     value={this.props.currentUserProfile}
                   />
                 ) : (
                   <TCombForm
-                    ref="donateReciept"
-                    type={recieptCompanyFormSchema}
+                    ref="donateReceipt"
+                    type={receiptCompanyFormSchema}
                     options={companySchemaOptions}
                     value={this.props.currentUserProfile}
                   />

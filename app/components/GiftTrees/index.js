@@ -16,8 +16,8 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 
 import {
   individualSchemaOptions,
-  recieptIndividualFormSchema,
-  recieptCompanyFormSchema,
+  receiptIndividualFormSchema,
+  receiptCompanyFormSchema,
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
 
@@ -33,7 +33,7 @@ const headings = ['Give to...', 'Donation Details', 'Donor Details', 'Payment'];
 
 export default class GiftTrees extends Component {
   static data = {
-    tabsReciept: [
+    tabsReceipt: [
       {
         name: 'Individual',
         id: 'individual'
@@ -46,11 +46,11 @@ export default class GiftTrees extends Component {
     tabsUser: [
       {
         name: 'TreeCounter User',
-        id: 'treecounter-user'
+        id: 'direct'
       },
       {
         name: 'Other',
-        id: 'other'
+        id: 'invitation'
       }
     ]
   };
@@ -58,25 +58,27 @@ export default class GiftTrees extends Component {
   constructor(props) {
     super(props);
 
-    let modeReciept;
+    let modeReceipt;
     if (props.currentUserProfile) {
-      modeReciept = props.currentUserProfile.type;
+      modeReceipt = props.currentUserProfile.type;
     } else {
-      modeReciept = '';
+      modeReceipt = '';
     }
 
     this.state = {
       pageIndex: 0,
-      modeReciept: modeReciept,
+      modeReceipt: modeReceipt,
       modeUser: '',
       selectedCurrency: null,
-      selectedTreeCount: 0
+      selectedTreeCount: 0,
+      form: {}
     };
 
-    this.handleModeRecieptChange = this.handleModeRecieptChange.bind(this);
+    this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
     this.handleModeUserChange = this.handleModeUserChange.bind(this);
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.handleTreeCountChange = this.handleTreeCountChange.bind(this);
+    // this.checkValidation = this.checkValidation[0].bind(this);
   }
 
   handleCurrencyChange(selectedCurrency) {
@@ -95,26 +97,86 @@ export default class GiftTrees extends Component {
     });
   }
 
+  checkValidation = [
+    () => {
+      if (this.state.modeUser === 'direct') {
+        let returnValue;
+        returnValue = this.state.form.giftTreecounter ? true : false;
+        return returnValue;
+      } else {
+        let value = this.refs.giftInvitation.getValue();
+        if (value) {
+          this.setState({
+            form: {
+              ...this.state.form,
+              giftInvitation: value
+            }
+          });
+          return true;
+        }
+        return false;
+      }
+    },
+    () => {
+      return true;
+    },
+    () => {
+      return true;
+    },
+    () => {
+      console.log(this.refs.donateReceipt.validate());
+      let value = this.refs.donateReceipt.getValue();
+      if (value) {
+        this.setState({
+          form: {
+            ...this.state.form,
+            donationReceipt: value
+          }
+        });
+        return true;
+      }
+      return false;
+    }
+  ];
+
   handleModeUserChange(tab) {
-    this.setState({ modeUser: tab });
+    this.setState({
+      modeUser: tab,
+      form: { ...this.state.form, giftMethod: tab }
+    });
   }
 
-  handleModeRecieptChange(tab) {
-    this.setState({ modeReciept: tab });
+  handleModeReceiptChange(tab) {
+    this.setState({ modeReceipt: tab });
   }
 
   suggestionClicked = (context, event) => {
-    console.log(event.suggestion.id);
+    this.setState({
+      form: {
+        ...this.state.form,
+        giftTreecounter: event.suggestion.id
+      }
+    });
   };
 
   render() {
     const NextArrow = function(props) {
-      console.log(props);
-      return <PrimaryButton onClick={props.onClick}>Next</PrimaryButton>;
+      function validated() {
+        if (props.checkValidation()) {
+          props.onClick();
+        }
+      }
+      return <PrimaryButton onClick={validated}>Next</PrimaryButton>;
     };
     const settings = {
       dots: true,
-      nextArrow: <NextArrow />,
+      nextArrow: (
+        <NextArrow
+          checkValidation={this.checkValidation[this.state.pageIndex].bind(
+            this
+          )}
+        />
+      ),
       infinite: false,
       prevArrow: (
         <CarouselNavigation
@@ -170,23 +232,23 @@ export default class GiftTrees extends Component {
                 />
               ) : null}
               <Tabs
-                data={GiftTrees.data.tabsReciept}
-                onTabChange={this.handleModeRecieptChange}
+                data={GiftTrees.data.tabsReceipt}
+                onTabChange={this.handleModeReceiptChange}
                 activeTab={
-                  this.state.modeReciept !== '' ? this.state.modeReciept : null
+                  this.state.modeReceipt !== '' ? this.state.modeReceipt : null
                 }
               >
-                {this.state.modeReciept === GiftTrees.data.tabsReciept[0].id ? (
+                {this.state.modeReceipt === GiftTrees.data.tabsReceipt[0].id ? (
                   <TCombForm
-                    ref="donateReciept"
-                    type={recieptIndividualFormSchema}
+                    ref="donateReceipt"
+                    type={receiptIndividualFormSchema}
                     options={individualSchemaOptions}
                     value={this.props.currentUserProfile}
                   />
                 ) : (
                   <TCombForm
-                    ref="donateReciept"
-                    type={recieptCompanyFormSchema}
+                    ref="donateReceipt"
+                    type={receiptCompanyFormSchema}
                     options={companySchemaOptions}
                     value={this.props.currentUserProfile}
                   />

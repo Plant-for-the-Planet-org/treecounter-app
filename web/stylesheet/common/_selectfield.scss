@@ -4,10 +4,12 @@ $muted-color: mix(white, $bg-color, 70%);
 .pftp-selectfield {
   display: flex;
   align-items: center;
+  flex-direction: column;
   margin-bottom: 20px;
 
   .pftp-selectfield__select {
     background: none;
+    width: 100%;
     font-size: 18px;
     box-sizing: border-box;
     padding: 5px 10px 10px 5px;
@@ -19,5 +21,6 @@ $muted-color: mix(white, $bg-color, 70%);
 
   .pftp-selectfield__option {
     @extend .pftp-selectfield__select;
+    text-transform: capitalize;
   }
 }

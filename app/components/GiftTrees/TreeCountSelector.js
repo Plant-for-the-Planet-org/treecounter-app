@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TextBlock from '../Common/Text/TextBlock';
 
 class TreeCountSelector extends React.Component {
   constructor(props) {
@@ -75,11 +76,11 @@ class TreeCountSelector extends React.Component {
     const { treeCountOptions, currency, treeCountToAmount } = this.props;
 
     return (
-      <div>
-        <div>currency: {currency}</div>
+      <div className={'treecount-container'}>
+        <TextBlock strong={true}>Number of Trees</TextBlock>
         {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
           return (
-            <div key={treeCount}>
+            <div className="treecount-price-conversion" key={treeCount}>
               <label key={treeCount}>
                 <input
                   type="radio"
@@ -94,15 +95,15 @@ class TreeCountSelector extends React.Component {
                 />
                 {treeCount} Trees
               </label>
+              <span>=</span>
               <span>
-                {' '}
-                = {treeCountToAmount(treeCount)} {currency}
+                {treeCountToAmount(treeCount)} {currency}
               </span>
             </div>
           );
         })}
 
-        <div>
+        <div className="treecount-price-conversion">
           <label key="variable">
             <input
               type="radio"
@@ -122,9 +123,8 @@ class TreeCountSelector extends React.Component {
             />{' '}
             Trees
           </label>
+          <span>=</span>
           <span>
-            {' '}
-            ={' '}
             <input
               type="text"
               disabled={this.state.isFixed}

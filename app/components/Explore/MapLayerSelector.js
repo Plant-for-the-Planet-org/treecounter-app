@@ -8,8 +8,14 @@ export default class MapLayerSelector extends Component {
 
   GetCheckbox(objKey) {
     return (
-      <div>
-        <input type="checkbox" name="checkbox" id={objKey} value={objKey} />
+      <div className="explore-checkbox--option">
+        <input
+          defaultChecked={this.props.activeMapLayers.includes(objKey)}
+          type="checkbox"
+          name="checkbox"
+          id={objKey}
+          value={objKey}
+        />
         <label htmlFor={objKey}>{this.props.mapLayers[objKey]}</label>
       </div>
     );

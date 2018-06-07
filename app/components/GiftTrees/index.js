@@ -10,8 +10,8 @@ import SearchAutosuggest from '../Header/SearchAutosuggest';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_left_green } from '../../assets';
-import TreeCountCurrencySelector from './TreeCountCurrencySelector';
-import currenciesJson from './currencies';
+import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
+import currenciesJson from '../Currency/currencies';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 
 import {
@@ -29,7 +29,13 @@ import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 let TCombForm = t.form.Form;
 
-const headings = ['Give to...', 'Donation Details', 'Donor Details', 'Payment'];
+const headings = [
+  'Give to...',
+  'Project',
+  'Donation Details',
+  'Donor Details',
+  'Payment'
+];
 
 export default class GiftTrees extends Component {
   static data = {

@@ -40,6 +40,6 @@ export default {
   DONATETREES: 'Donate trees',
   noContributions: 'No Contributions',
   plantedTrees: 'Planted Trees',
-  by: 'by',
+  by: 'by ',
   is_certified: 'isCertified'
 };

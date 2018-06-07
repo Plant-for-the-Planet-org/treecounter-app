@@ -1,23 +1,20 @@
-import i18n from '../../locales/i18n.js';
-let lng = 'en';
-
 export default {
   title: 'treecounter_target',
   type: 'object',
   properties: {
     countTarget: {
       type: 'integer',
-      title: i18n.t('label.targetlabels.target_count', { lng }),
+      title: 'label.target_count',
       propertyOrder: 1
     },
     targetYear: {
       type: 'integer',
-      title: i18n.t('label.targetlabels.target_year', { lng }),
+      title: 'label.target_year',
       propertyOrder: 2
     },
     targetComment: {
       type: 'string',
-      title: i18n.t('label.targetlabels.target_comment', { lng }),
+      title: 'label.target_comment',
       widget: 'textarea',
       propertyOrder: 3
     }

@@ -15,7 +15,7 @@ import {
 } from '../../../server/parsedSchemas/login';
 
 import i18n from '../../../locales/i18n.js';
-let lng = 'en';
+
 let Form = t.form.Form;
 
 export default class Login extends Component {
@@ -31,9 +31,7 @@ export default class Login extends Component {
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.loginHeader}>
-          <Text style={styles.titleText}>
-            {i18n.t('label.loginlabels.login', { lng })}
-          </Text>
+          <Text style={styles.titleText}>{i18n.t('label.login')}</Text>
           <View style={styles.titleTextUnderline} />
         </View>
         <View style={styles.inputContainer}>
@@ -46,30 +44,28 @@ export default class Login extends Component {
             onPress={this.props.onPress}
             style={styles.button}
           >
-            <Text style={styles.buttonText}>
-              {i18n.t('label.loginlabels.login', { lng })}
-            </Text>
+            <Text style={styles.buttonText}>{i18n.t('label.login')}</Text>
           </TouchableHighlight>
           <View style={styles.bottomRow}>
             <Text style={styles.bottomText}>
-              {i18n.t('label.loginlabels.forgot_password', { lng })}
+              {i18n.t('label.forgot_password')}
             </Text>
             <Text
               onPress={this.onForgotPasswordClicked}
               style={styles.bottomTextHighlight}
             >
-              {i18n.t('label.loginlabels.reset', { lng })}
+              {i18n.t('label.reset')}
             </Text>
           </View>
           <View style={styles.bottomRow}>
             <Text style={styles.bottomText}>
-              {i18n.t('label.loginlabels.dont_have_account', { lng })}
+              {i18n.t('label.dont_have_account')}
             </Text>
             <Text
               onPress={this.onSignupClicked}
               style={styles.bottomTextHighlight}
             >
-              {i18n.t('label.loginlabels.signup', { lng })}
+              {i18n.t('label.signup')}
             </Text>
           </View>
         </View>

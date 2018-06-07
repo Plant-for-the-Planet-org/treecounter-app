@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
-let lng = 'en';
 
 const PlantedDetails = ({ personal, community }) => (
   <div className="fixed-planted-details">
-    <strong>{personal}</strong>{' '}
-    {i18n.t('label.treecounterGraphicslabels.personal', { lng })}
+    <strong>{personal}</strong> {i18n.t('label.personal')}
     <br />
-    <strong>{community}</strong>{' '}
-    {i18n.t('label.treecounterGraphicslabels.community', { lng })}
+    <strong>{community}</strong> {i18n.t('label.community')}
   </div>
 );
 

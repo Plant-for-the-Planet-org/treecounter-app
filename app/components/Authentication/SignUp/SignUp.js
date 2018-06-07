@@ -12,7 +12,6 @@ import {
   signupFormSchema
 } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
-let lng = 'en';
 
 let TCombForm = t.form.Form;
 
@@ -20,7 +19,7 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Profiletype: i18n.t('label.signUplabels.individual', { lng })
+      Profiletype: i18n.t('label.individual')
     };
     this.ProfileChange = this.ProfileChange.bind(this);
   }
@@ -35,46 +34,38 @@ export default class SignUp extends Component {
     let { Profiletype } = this.state;
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>
-          {i18n.t('label.signUplabels.signup', { lng })}
-        </TextHeading>
+        <TextHeading>{i18n.t('label.signup')}</TextHeading>
         <div className="signup-types">
           <SignUpType
-            active={Profiletype === i18n.t('label.signUplabels.tpo', { lng })}
+            active={Profiletype === i18n.t('label.tpo')}
             imgSrc={SignupOrganization}
-            salutation={i18n.t('label.signUplabels.i_am_a', { lng })}
-            title={i18n.t('label.signUplabels.tpo_title', { lng })}
-            type={i18n.t('label.signUplabels.tpo', { lng })}
+            salutation={i18n.t('label.i_am_a')}
+            title={i18n.t('label.tpo_title')}
+            type={i18n.t('label.tpo')}
             onProfileClick={this.ProfileChange}
           />
           <SignUpType
-            active={
-              Profiletype === i18n.t('label.signUplabels.individual', { lng })
-            }
+            active={Profiletype === i18n.t('label.individual')}
             imgSrc={SignupJustMe}
-            salutation={i18n.t('label.signUplabels.i_am', { lng })}
-            title={i18n.t('label.signUplabels.individual_title', { lng })}
-            type={i18n.t('label.signUplabels.individual', { lng })}
+            salutation={i18n.t('label.i_am')}
+            title={i18n.t('label.individual_title')}
+            type={i18n.t('label.individual')}
             onProfileClick={this.ProfileChange}
           />
           <SignUpType
-            active={
-              Profiletype === i18n.t('label.signUplabels.company', { lng })
-            }
+            active={Profiletype === i18n.t('label.company')}
             imgSrc={SignupOrganization}
-            salutation={i18n.t('label.signUplabels.i_am_a', { lng })}
-            title={i18n.t('label.signUplabels.company_title', { lng })}
-            type={i18n.t('label.signUplabels.company', { lng })}
+            salutation={i18n.t('label.i_am_a')}
+            title={i18n.t('label.company_title')}
+            type={i18n.t('label.company')}
             onProfileClick={this.ProfileChange}
           />
           <SignUpType
-            active={
-              Profiletype === i18n.t('label.signUplabels.education', { lng })
-            }
+            active={Profiletype === i18n.t('label.education')}
             imgSrc={SignupOrganization}
-            salutation={i18n.t('label.signUplabels.i_am_a', { lng })}
-            title={i18n.t('label.signUplabels.education_title', { lng })}
-            type={i18n.t('label.signUplabels.education', { lng })}
+            salutation={i18n.t('label.i_am_a')}
+            title={i18n.t('label.education_title')}
+            type={i18n.t('label.education')}
             onProfileClick={this.ProfileChange}
           />
         </div>
@@ -88,7 +79,7 @@ export default class SignUp extends Component {
             <PrimaryButton
               onClick={this.props.onSignUpClicked.bind(this, Profiletype)}
             >
-              {i18n.t('label.signUplabels.signup_button', { lng })}
+              {i18n.t('label.signup_button')}
             </PrimaryButton>
           </CardLayout>
         </div>

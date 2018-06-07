@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { tick } from '../../assets';
 import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
-let lng = 'en';
+
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectTeaser
  */
@@ -25,7 +25,7 @@ const PlantProjectTeaser = ({
           </span>
         </span>
         <div className="teaser__tpoName">
-          {i18n.t('label.plantProjectlabels.by', { lng })} {tpoName}
+          {i18n.t('label.by')} {tpoName}
         </div>
       </div>
       {projectImage ? (

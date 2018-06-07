@@ -9,7 +9,6 @@ import CustomForm from '../Common/CustomForm';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import { Payment } from '../../actions/paymentAction';
 import i18n from '../../locales/i18n.js';
-let lng = 'en';
 
 class PaymentDonation extends Component {
   constructor(props) {
@@ -120,14 +119,8 @@ class PaymentDonation extends Component {
                   onChange={this.handleOptionChange}
                 />
                 <div>
-                  <span>
-                    {i18n.t('label.donateTreeslabels.paypal', { lng })}
-                  </span>
-                  <span>
-                    {i18n.t('label.donateTreeslabels.redirectionMessage', {
-                      lng
-                    })}
-                  </span>
+                  <span>{i18n.t('label.paypal')}</span>
+                  <span>{i18n.t('label.redirectionMessage')}</span>
                 </div>
                 <div className="flex__spacer" />
                 <img src="http://pngimg.com/uploads/paypal/paypal_PNG4.png" />
@@ -145,18 +138,14 @@ class PaymentDonation extends Component {
                   onChange={this.handleOptionChange}
                 />
                 <div>
-                  <span>
-                    {i18n.t('label.donateTreeslabels.directDebit', { lng })}
-                  </span>
-                  <span>
-                    {i18n.t('label.donateTreeslabels.accountInfo', { lng })}
-                  </span>
+                  <span>{i18n.t('label.directDebit')}</span>
+                  <span>{i18n.t('label.accountInfo')}</span>
                 </div>
                 <div className="flex__spacer" />
                 <img src="https://www.cardgate.com/wp-content/themes/cardgate/download.php?file=SEPA-direct-debit-logo.png" />
               </label>
               <div className="payment-method__option--input">
-                <span>{i18n.t('label.donateTreeslabels.IBAN', { lng })}</span>
+                <span>{i18n.t('label.IBAN')}</span>
                 <input
                   type="text"
                   value={this.state.paymentOptions.iban}
@@ -164,7 +153,7 @@ class PaymentDonation extends Component {
                 />
               </div>
               <div className="payment-method__option--input">
-                <span>{i18n.t('label.donateTreeslabels.BIC', { lng })}</span>
+                <span>{i18n.t('label.BIC')}</span>
                 <input
                   type="text"
                   value={this.state.paymentOptions.bic}
@@ -184,14 +173,8 @@ class PaymentDonation extends Component {
                   onChange={this.handleOptionChange}
                 />
                 <div>
-                  <span>
-                    {i18n.t('label.donateTreeslabels.creditCard', { lng })}
-                  </span>
-                  <span>
-                    {i18n.t('label.donateTreeslabels.creditCardMessage', {
-                      lng
-                    })}
-                  </span>
+                  <span>{i18n.t('label.creditCard')}</span>
+                  <span>{i18n.t('label.creditCardMessage')}</span>
                 </div>
                 <div className="flex__spacer" />
                 <img src="http://www.pngmart.com/files/3/Credit-Card-Visa-And-Master-Card-PNG-HD.png" />
@@ -205,8 +188,8 @@ class PaymentDonation extends Component {
     console.log('Payment Donation ----- Render', this.state.schema);
     return (
       <div className="payment-page-container">
-        <h3>{i18n.t('label.donateTreeslabels.donateTrees', { lng })}</h3>
-        <h6>{i18n.t('label.donateTreeslabels.donateTreesMessage', { lng })}</h6>
+        <h3>{i18n.t('label.donateTrees')}</h3>
+        <h6>{i18n.t('label.donateTreesMessage')}</h6>
         <div className="horizontal-round-bar">
           <div className="horizontal-round-bar__spacer" />
           <span>1</span>
@@ -220,19 +203,13 @@ class PaymentDonation extends Component {
                 {this.state.selectedProject.name}
               </span>
               <div className="project-details__table">
-                <span>
-                  {i18n.t('label.donateTreeslabels.planted', { lng })}:
-                </span>
+                <span>{i18n.t('label.planted')}:</span>
                 <span>{this.state.selectedProject.countPlanted}</span>
 
-                <span>
-                  {i18n.t('label.donateTreeslabels.target', { lng })}:
-                </span>
+                <span>{i18n.t('label.target')}:</span>
                 <span>{this.state.selectedProject.countTarget}</span>
 
-                <span>
-                  {i18n.t('label.donateTreeslabels.costPerTree', { lng })}:
-                </span>
+                <span>{i18n.t('label.costPerTree')}:</span>
                 <span>{this.state.selectedProject.treeCost}</span>
                 {this.state.selectedProject.isCertified
                   ? 'Certified'
@@ -244,11 +221,9 @@ class PaymentDonation extends Component {
             </div>
           </div>
           <div className="project-details__footer">
-            <a>{i18n.t('label.donateTreeslabels.seeMore', { lng })}</a>
+            <a>{i18n.t('label.seeMore')}</a>
             <Link to="/donateTrees">
-              {i18n.t('label.donateTreeslabels.selectDifferentProject', {
-                lng
-              })}
+              {i18n.t('label.selectDifferentProject')}
             </Link>
           </div>
         </div>

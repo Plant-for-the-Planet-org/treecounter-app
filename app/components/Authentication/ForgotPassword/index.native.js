@@ -28,7 +28,7 @@ export default class ForgotPassword extends Component {
       <ImageBackground style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.titleText}>
-            {i18n.t('label.forgotPasswordlabels.forgot_ur_password', { lng })}
+            {i18n.t('label.forgot_ur_password')}
           </Text>
           <View style={styles.titleTextUnderline} />
         </View>
@@ -43,7 +43,7 @@ export default class ForgotPassword extends Component {
             style={styles.button}
           >
             <Text style={styles.buttonText}>
-              {i18n.t('label.forgotPasswordlabels.reset_password', { lng })}
+              {i18n.t('label.reset_password')}
             </Text>
           </TouchableHighlight>
           <View style={styles.bottomRow}>
@@ -51,7 +51,7 @@ export default class ForgotPassword extends Component {
               onPress={this.onLoginClicked}
               style={styles.bottomTextHighlight}
             >
-              {i18n.t('label.forgotPasswordlabels.again_login', { lng })}
+              {i18n.t('label.again_login')}
             </Text>
           </View>
         </View>

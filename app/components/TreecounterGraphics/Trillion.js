@@ -10,7 +10,6 @@ import { updateRoute } from '../../helpers/routerHelper';
 import TextHeading from '../Common/Heading/TextHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n.js';
-let lng = 'en';
 
 class Trillion extends Component {
   constructor() {
@@ -54,19 +53,11 @@ class Trillion extends Component {
       <div className="sidenav-wrapper">
         <TextHeading>
           {this.state.displayName}
-          <TextBlock>
-            {i18n.t('label.treecounterGraphicslabels.trillionTreeMessage1', {
-              lng
-            })}
-          </TextBlock>
-          <TextBlock>
-            {i18n.t('label.treecounterGraphicslabels.trillionTreeMessage2', {
-              lng
-            })}
-          </TextBlock>
+          <TextBlock>{i18n.t('label.trillionTreeMessage1')}</TextBlock>
+          <TextBlock>{i18n.t('label.trillionTreeMessage2')}</TextBlock>
           <ButtonHeading>
             <SecondaryAccentButton onClick={updateRoute.bind(this, 'app_faq')}>
-              {i18n.t('label.treecounterGraphicslabels.faqs', { lng })}
+              {i18n.t('label.faqs')}
             </SecondaryAccentButton>
           </ButtonHeading>
         </TextHeading>

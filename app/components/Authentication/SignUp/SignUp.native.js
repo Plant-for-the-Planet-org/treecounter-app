@@ -15,7 +15,6 @@ import {
   signupFormSchema
 } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
-let lng = 'en';
 
 import { loginStyles } from '../Login';
 import SignupTypes from './SignupType';
@@ -26,7 +25,7 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Profiletype: i18n.t('label.signUplabels.individual', { lng })
+      Profiletype: i18n.t('label.individual')
     };
     this.changeProfile = this.changeProfile.bind(this);
   }
@@ -47,9 +46,7 @@ export default class SignUp extends Component {
       <ScrollView>
         <ImageBackground style={styles.container}>
           <View style={styles.loginHeader}>
-            <Text style={styles.titleText}>
-              {i18n.t('label.signUplabels.signup', { lng })}
-            </Text>
+            <Text style={styles.titleText}>{i18n.t('label.signup')}</Text>
             <View style={styles.titleTextUnderline} />
           </View>
           <SignupTypes changeProfile={this.changeProfile} />
@@ -64,18 +61,18 @@ export default class SignUp extends Component {
               style={styles.button}
             >
               <Text style={styles.buttonText}>
-                {i18n.t('label.signUplabels.signup_button', { lng })}
+                {i18n.t('label.signup_button')}
               </Text>
             </TouchableHighlight>
             <View style={styles.bottomRow}>
               <Text style={styles.bottomText}>
-                {i18n.t('label.signUplabels.already_have_account', { lng })}
+                {i18n.t('label.already_have_account')}
               </Text>
               <Text
                 onPress={this.onLoginClicked}
                 style={styles.bottomTextHighlight}
               >
-                {i18n.t('label.signUplabels.logint', { lng })}
+                {i18n.t('label.logint')}
               </Text>
             </View>
           </View>

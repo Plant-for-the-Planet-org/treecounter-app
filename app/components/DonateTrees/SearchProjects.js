@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
-let lng = 'en';
 
 class SearchProjects extends Component {
   constructor() {
@@ -159,20 +158,10 @@ class SearchProjects extends Component {
                 <table className="table table-hover">
                   <thead>
                     <tr>
-                      <th>
-                        {i18n.t('label.donateTreeslabels.project', { lng })}
-                      </th>
-                      <th>
-                        {i18n.t('label.donateTreeslabels.organisation', {
-                          lng
-                        })}
-                      </th>
-                      <th>
-                        {i18n.t('label.donateTreeslabels.plantedTrees', {
-                          lng
-                        })}
-                      </th>
-                      <th>{i18n.t('label.donateTreeslabels.Cost', { lng })}</th>
+                      <th>{i18n.t('label.project')}</th>
+                      <th>{i18n.t('label.organisation')}</th>
+                      <th>{i18n.t('label.plantedTrees')}</th>
+                      <th>{i18n.t('label.Cost')}</th>
                     </tr>
                   </thead>
                   <tbody>{this.ShowData()}</tbody>

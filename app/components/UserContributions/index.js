@@ -8,19 +8,14 @@ import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n.js';
-let lng = 'en';
 
 const UserContributions = ({ userContributions }) => {
   let mPins = userContributions.map(element => {
     let color = '';
-    if (
-      element.contributionType ===
-      i18n.t('label.userContributionslabels.donated', { lng })
-    )
-      color = i18n.t('label.userContributionslabels.green', { lng });
-    else if (element.treeCount > 1)
-      color = i18n.t('label.userContributionslabels.blue', { lng });
-    else color = i18n.t('label.userContributionslabels.orange', { lng });
+    if (element.contributionType === i18n.t('label.donated'))
+      color = i18n.t('label.green');
+    else if (element.treeCount > 1) color = i18n.t('label.blue');
+    else color = i18n.t('label.orange');
     return {
       lat: element.geoLatitude,
       long: element.geoLongitude,
@@ -30,9 +25,7 @@ const UserContributions = ({ userContributions }) => {
 
   return (
     <div className="app-container__content--center sidenav-wrapper">
-      <TextHeading>
-        {i18n.t('label.userContributionslabels.my_trees', { lng })}
-      </TextHeading>
+      <TextHeading>{i18n.t('label.my_trees')}</TextHeading>
       <CardLayout>
         {Object.keys(userContributions).length > 0 ? (
           <div>
@@ -43,16 +36,11 @@ const UserContributions = ({ userContributions }) => {
             </div>
             <div className="contribution-buttons">
               <InlineLink
-                caption={i18n.t(
-                  'label.userContributionslabels.register_further',
-                  { lng }
-                )}
+                caption={i18n.t('label.register_further')}
                 uri={'app_registerTrees'}
               />
               <InlineLink
-                caption={i18n.t('label.userContributionslabels.donate_trees', {
-                  lng
-                })}
+                caption={i18n.t('label.donate_trees')}
                 uri={'app_donateTrees'}
               />
             </div>
@@ -60,9 +48,7 @@ const UserContributions = ({ userContributions }) => {
         ) : (
           <div className="sidenav-wrapper">
             <div className="registeration-successfull">
-              {i18n.t('label.userContributionslabels.no_contributions', {
-                lng
-              })}
+              {i18n.t('label.no_contributions')}
             </div>
           </div>
         )}

@@ -7,7 +7,6 @@ import TargetComment from './TargetComment';
 import ArrowButton from '../Common/ArrowButton';
 import { pot, tree } from '../../assets';
 import i18n from '../../locales/i18n.js';
-let lng = 'en';
 
 class TreecounterGraphicsText extends Component {
   constructor() {
@@ -44,12 +43,11 @@ class TreecounterGraphicsText extends Component {
           <img className="svg-text-container__row--col" src={pot} />
           <div className="svg-text-container__row--col2">
             <span>
-              {i18n.t('label.treecounterGraphicslabels.target', { lng }) +
+              {i18n.t('label.target') +
                 (this.props.trillion
                   ? ''
                   : targetYear
-                    ? i18n.t('label.treecounterGraphicslabels.by', { lng }) +
-                      targetYear
+                    ? i18n.t('label.by') + targetYear
                     : '') +
                 ' '}
               <br />
@@ -77,7 +75,7 @@ class TreecounterGraphicsText extends Component {
           <img className="svg-text-container__row--col" src={tree} />
           <div className="svg-text-container__row--col2">
             <span>
-              {i18n.t('label.treecounterGraphicslabels.planted', { lng })}
+              {i18n.t('label.planted')}
               <br />
               <strong>{planted}</strong>
               {this.props.trillion ? (

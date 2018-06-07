@@ -11,14 +11,14 @@ import TextHeading from '../../Common/Heading/TextHeading';
 import CardLayout from '../../Common/Card/CardLayout';
 import LoginFooter from './LoginFooter';
 import i18n from '../../../locales/i18n.js';
-let lng = 'en';
+
 let TCombForm = t.form.Form;
 
 export default class Login extends Component {
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>{i18n.t('label.loginlabels.login', { lng })}</TextHeading>
+        <TextHeading>{i18n.t('label.login')}</TextHeading>
         <CardLayout>
           <TCombForm
             ref="loginForm"
@@ -26,7 +26,7 @@ export default class Login extends Component {
             options={schemaOptions}
           />
           <PrimaryButton onClick={this.props.onPress}>
-            {i18n.t('label.loginlabels.login', { lng })}
+            {i18n.t('label.login')}
           </PrimaryButton>
           <LoginFooter />
         </CardLayout>

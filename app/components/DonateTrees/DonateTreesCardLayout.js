@@ -3,7 +3,6 @@ import DonateTreesCardText from './DonateTreesCardText';
 import DonateTreesCardFooter from './DonateTreesCardFooter';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
-let lng = 'en';
 
 const DonateTreesCardLayout = props => {
   const { value, userTpos } = props;
@@ -19,7 +18,7 @@ const DonateTreesCardLayout = props => {
             title={
               value.name +
               ' ' +
-              i18n.t('label.donateTreeslabels.by', { lng }) +
+              i18n.t('label.by') +
               ' ' +
               userTpos[value.tpoId].name
             }

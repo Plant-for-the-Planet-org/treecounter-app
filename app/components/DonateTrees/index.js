@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
-let lng = 'en';
 
 import { plantProjectsSelector } from '../../selectors';
 import {
@@ -72,7 +71,7 @@ class DonateTrees extends Component {
           <div>
             <div className="text-center">
               <h3 className="cs-subHeading">
-                {i18n.t('label.donateTreeslabels.previouslyDonated', { lng })}
+                {i18n.t('label.previouslyDonated')}
               </h3>
             </div>
             <DonateTreesCarousel
@@ -88,9 +87,7 @@ class DonateTrees extends Component {
         ) : null}
         <div className="clearfix" />
         <div>
-          <h3 className="cs-subHeading">
-            {i18n.t('label.donateTreeslabels.featuredProjects', { lng })}
-          </h3>
+          <h3 className="cs-subHeading">{i18n.t('label.featuredProjects')}</h3>
           <div>
             <DonateTreesCarousel
               carouselClass="carousel carousel-showmanymoveone slide featured_carousel"

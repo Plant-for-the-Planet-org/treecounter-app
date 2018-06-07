@@ -6,7 +6,6 @@ import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import TextHeading from '../../components/Common/Heading/TextHeading';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 import i18n from '../../locales/i18n.js';
-let lng = 'en';
 
 class FAQContainer extends React.Component {
   constructor() {
@@ -37,11 +36,10 @@ class FAQContainer extends React.Component {
     ) : (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>
-          {i18n.t('label.faqlabels.faqs', { lng })}
+          {i18n.t('label.faqs')}
           <DescriptionHeading>
-            {i18n.t('label.faqlabels.description1', { lng })}
-            <a>{i18n.t('label.faqlabels.description2', { lng })}</a>{' '}
-            {i18n.t('label.faqlabels.description3', { lng })}
+            {i18n.t('label.description1')}
+            <a>{i18n.t('label.description2')}</a> {i18n.t('label.description3')}
           </DescriptionHeading>
         </TextHeading>
         <FAQ faqs={this.state.faqs} />

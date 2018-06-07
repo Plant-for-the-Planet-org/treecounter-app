@@ -5,7 +5,6 @@ import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
-let lng = 'en';
 
 const DonateTreesCardFooter = props => {
   const { selectPlantProjectAction, value } = props;
@@ -17,14 +16,14 @@ const DonateTreesCardFooter = props => {
   return (
     <div className="card-footer">
       <a className="leftBtn" href="#">
-        {i18n.t('label.donateTreeslabels.seeMore', { lng })}
+        {i18n.t('label.seeMore')}
       </a>
       <Link
         className="rightBtn"
         to={route}
         onClick={e => handleDonateTreesButton(e, value.id)}
       >
-        {i18n.t('label.donateTreeslabels.donateTrees', { lng })}
+        {i18n.t('label.donateTrees')}
       </Link>
     </div>
   );

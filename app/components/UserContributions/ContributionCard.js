@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import TextSpan from '../Common/Text/TextSpan';
 import i18n from '../../locales/i18n.js';
-let lng = 'en';
 
 export default class ContributionCard extends React.Component {
   constructor(props) {
@@ -68,7 +67,7 @@ export default class ContributionCard extends React.Component {
               {contribution.treeCount +
                 ' ' +
                 contribution.treeSpecies +
-                i18n.t('label.userContributionslabels.tree', { lng })}
+                i18n.t('label.tree')}
             </TextSpan>
             <TextSpan>
               {contribution.geoLatitude + ', ' + contribution.geoLongitude}
@@ -77,9 +76,7 @@ export default class ContributionCard extends React.Component {
               {moment(new Date(contribution.plantDate)).format('DD MMM YYYY')}
             </TextSpan>
             {imagesArray.length ? (
-              <a onClick={this.openLightbox}>
-                {i18n.t('label.userContributionslabels.pictures', { lng })}
-              </a>
+              <a onClick={this.openLightbox}>{i18n.t('label.pictures')}</a>
             ) : null}
             <Lightbox
               currentImage={this.state.currentImage}
@@ -96,9 +93,7 @@ export default class ContributionCard extends React.Component {
               .map(measurement => (
                 <TextSpan key={measurement.id}>
                   {contribution.plantDate === measurement.measurementDate
-                    ? i18n.t('label.userContributionslabels.planting_day', {
-                        lng
-                      })
+                    ? i18n.t('label.planting_day')
                     : new Date(
                         measurement.measurementDate
                       ).toLocaleDateString() +
@@ -111,8 +106,8 @@ export default class ContributionCard extends React.Component {
             {contribution.contributionMeasurements.length > 3 ? (
               <div className={seeLabel} onClick={this.onViewExpanded}>
                 {this.state.viewExpanded
-                  ? i18n.t('label.userContributionslabels.see_less', { lng })
-                  : i18n.t('label.userContributionlabels.see_more', { lng })}
+                  ? i18n.t('label.see_less')
+                  : i18n.t('label.userContributionlabels.see_more')}
               </div>
             ) : null}
             {this.state.viewExpanded
@@ -135,7 +130,7 @@ export default class ContributionCard extends React.Component {
                 contribution: contribution.id
               })}
             >
-              {i18n.t('label.userContributionslabels.update', { lng })}
+              {i18n.t('label.update')}
             </Link>
           </div>
         </div>

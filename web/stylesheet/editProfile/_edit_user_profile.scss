@@ -1,0 +1,21 @@
+.edit-user-profile__container {
+  .form-group {
+    @extend .pftp-card-layout;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .user-profile__form-group {
+    @extend .form-group;
+    .profile-image__container {
+      margin-bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .user-about-me__form-group {
+  }
+}

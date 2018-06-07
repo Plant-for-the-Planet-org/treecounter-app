@@ -19,16 +19,19 @@ export default class EditUserProfile extends React.Component {
     console.log('___render___Edit_userprofile');
     const { type, image } = this.props.currentUserProfile;
     return (
-      <div className="app-container__content--center sidenav-wrapper">
+      <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
         <TextHeading>Edit Profile</TextHeading>
-        <CardLayout>
-          <UserProfileImage profileImage={image} />
-          <TCombForm
-            ref={'image'}
-            type={parsedSchema[type].image.transformedSchema}
-            options={parsedSchema[type].image.schemaOptions}
-            value={this.props.currentUserProfile}
-          />
+        <CardLayout className="user-profile__form-group">
+          <div className="profile-image__container">
+            <UserProfileImage profileImage={image} />
+            <TCombForm
+              ref={'image'}
+              type={parsedSchema[type].image.transformedSchema}
+              options={parsedSchema[type].image.schemaOptions}
+              value={this.props.currentUserProfile}
+            />
+          </div>
+
           <TCombForm
             ref={'profile'}
             type={parsedSchema[type].profile.transformedSchema}

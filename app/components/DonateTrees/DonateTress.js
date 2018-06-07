@@ -39,9 +39,16 @@ export default class DonateTrees extends Component {
   constructor(props) {
     super(props);
 
+    let mode;
+    if (props.currentUserProfile) {
+      mode = props.currentUserProfile.type;
+    } else {
+      mode = '';
+    }
+
     this.state = {
       pageIndex: 0,
-      mode: ''
+      mode: mode
     };
 
     this.handleModeOptionChange = this.handleModeOptionChange.bind(this);
@@ -94,18 +101,23 @@ export default class DonateTrees extends Component {
               <Tabs
                 data={DonateTrees.data.tabs}
                 onTabChange={this.handleModeOptionChange}
+                activeTab={
+                  this.state.modeReciept !== '' ? this.state.modeReciept : null
+                }
               >
                 {this.state.mode === DonateTrees.data.tabs[0].id ? (
                   <TCombForm
                     ref="donateReciept"
                     type={recieptIndividualFormSchema}
                     options={individualSchemaOptions}
+                    value={this.props.currentUserProfile}
                   />
                 ) : (
                   <TCombForm
                     ref="donateReciept"
                     type={recieptCompanyFormSchema}
                     options={companySchemaOptions}
+                    value={this.props.currentUserProfile}
                   />
                 )}
               </Tabs>
@@ -120,5 +132,6 @@ export default class DonateTrees extends Component {
 DonateTrees.propTypes = {
   selectedProject: PropTypes.object,
   selectedTpo: PropTypes.object,
+  currentUserProfile: PropTypes.object,
   onClick: PropTypes.func
 };

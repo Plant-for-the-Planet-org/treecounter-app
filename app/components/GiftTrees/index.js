@@ -172,6 +172,9 @@ export default class GiftTrees extends Component {
               <Tabs
                 data={GiftTrees.data.tabsReciept}
                 onTabChange={this.handleModeRecieptChange}
+                activeTab={
+                  this.state.modeReciept !== '' ? this.state.modeReciept : null
+                }
               >
                 {this.state.modeReciept === GiftTrees.data.tabsReciept[0].id ? (
                   <TCombForm

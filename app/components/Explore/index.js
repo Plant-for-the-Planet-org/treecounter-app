@@ -38,7 +38,7 @@ export default class Explore extends Component {
 
   render() {
     return (
-      <div className={'card-width'}>
+      <div className={'explore-page'}>
         <CardLayout>
           <Tabs data={Explore.data.tabs} onTabChange={this.onTabChange}>
             {this.state.activeTab === Explore.data.tabs[0].id ? (

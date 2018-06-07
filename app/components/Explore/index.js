@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import CardLayout from '../Common/Card/CardLayout';
 import Tabs from '../Common/Tabs';
 import Map from '../Common/EsriMap/Map';
+import MapLayerSelector from './MapLayerSelector';
+import ExploreForm from '../../server/formSchemas/explore';
 
 export default class Explore extends Component {
   static data = {
@@ -21,20 +23,33 @@ export default class Explore extends Component {
 
   constructor() {
     super();
+    this.state = {
+      activeTab: ''
+    };
     this.onTabChange = this.onTabChange.bind(this);
   }
 
   onTabChange(tab) {
     console.log(tab);
+    this.setState({
+      activeTab: tab
+    });
   }
 
   render() {
     return (
-      <CardLayout>
-        <Tabs data={Explore.data.tabs} onTabChange={this.onTabChange}>
-          <Map />
-        </Tabs>
-      </CardLayout>
+      <div className={'card-width'}>
+        <CardLayout>
+          <Tabs data={Explore.data.tabs} onTabChange={this.onTabChange}>
+            {this.state.activeTab === Explore.data.tabs[0].id ? (
+              <div>
+                <MapLayerSelector mapLayers={ExploreForm.mapLayers} />
+                <Map />
+              </div>
+            ) : null}
+          </Tabs>
+        </CardLayout>
+      </div>
     );
   }
 }

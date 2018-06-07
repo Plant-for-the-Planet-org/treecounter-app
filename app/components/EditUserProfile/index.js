@@ -23,7 +23,7 @@ export default class EditUserProfile extends React.Component {
         return locals => {
           console.log(locals);
           return (
-            <div className="tComb-template__form-group">
+            <div className="tComb-template__profile-form">
               <div>
                 {locals.inputs.title}
                 {locals.inputs.firstname}
@@ -49,7 +49,7 @@ export default class EditUserProfile extends React.Component {
         return locals => {
           console.log(locals);
           return (
-            <div className="tComb-template__form-group">
+            <div className="tComb-template__about-me-form">
               <div>
                 {locals.inputs.synopsis1}
                 {locals.inputs.synopsis2}
@@ -67,7 +67,7 @@ export default class EditUserProfile extends React.Component {
         return locals => {
           console.log(locals);
           return (
-            <div className="tComb-template__form-group">
+            <div className="tComb-template__password-form">
               <div>{locals.inputs.currentPassword}</div>
 
               <div>{locals.inputs.password}</div>
@@ -126,6 +126,7 @@ export default class EditUserProfile extends React.Component {
         </CardLayout>
         {/* //about_me section */}
         <CardLayout className="user-profile__form-group">
+          <div className="form-group__heading">About me</div>
           <TCombForm
             ref={'about_me'}
             type={parsedSchema[type].about_me.transformedSchema}
@@ -141,6 +142,7 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
         <CardLayout className="user-profile__form-group">
+          <div className="form-group__heading">Change password</div>
           <TCombForm
             ref={'password'}
             type={parsedSchema[type].password.transformedSchema}

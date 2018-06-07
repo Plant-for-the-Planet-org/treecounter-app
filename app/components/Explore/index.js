@@ -43,7 +43,12 @@ export default class Explore extends Component {
           <Tabs data={Explore.data.tabs} onTabChange={this.onTabChange}>
             {this.state.activeTab === Explore.data.tabs[0].id ? (
               <div>
-                <MapLayerSelector mapLayers={ExploreForm.mapLayers} />
+                <div className="explore-checkbox">
+                  <MapLayerSelector
+                    mapLayers={ExploreForm.mapLayers}
+                    activeMapLayers={ExploreForm.activeMapLayers}
+                  />
+                </div>
                 <Map />
               </div>
             ) : null}

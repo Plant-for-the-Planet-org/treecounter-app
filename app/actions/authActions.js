@@ -1,6 +1,6 @@
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { updateRoute } from '../helpers/routerHelper';
-import { loadLoginData } from './loadLoginData';
+import { loadUserProfile } from './loadUserProfileAction';
 import { debug } from '../debug/index';
 import { userLogout } from '../reducers/reducer';
 
@@ -17,7 +17,7 @@ export function login(data) {
       .then(res => {
         const { token, refresh_token } = res.data;
         updateJWT(token, refresh_token);
-        dispatch(loadLoginData());
+        dispatch(loadUserProfile());
         updateRoute('app_userHome', dispatch);
         return token;
       })

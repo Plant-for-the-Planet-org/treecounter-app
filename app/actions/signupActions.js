@@ -4,7 +4,7 @@ import { updateRoute } from '../helpers/routerHelper';
 import { debug } from '../debug/index';
 import { postRequest } from '../utils/api';
 import { updateJWT } from '../utils/user';
-import { loadLoginData } from './loadLoginData';
+import { loadUserProfile } from './loadUserProfileAction';
 
 export function signUp(profileType, userData) {
   debug(userData, profileType);
@@ -14,7 +14,7 @@ export function signUp(profileType, userData) {
         .then(res => {
           const { token, refresh_token } = res.data;
           updateJWT(token, refresh_token);
-          dispatch(loadLoginData());
+          dispatch(loadUserProfile());
           debug('registration successful');
         })
         .then(() => {

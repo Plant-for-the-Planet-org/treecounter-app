@@ -8,7 +8,7 @@ import CardLayout from '../Common/Card/CardLayout';
 import Slider from 'react-slick';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
-import { arrow_right_green, arrow_left_green } from '../../assets';
+import { arrow_left_green } from '../../assets';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 import {
@@ -17,6 +17,7 @@ import {
   recieptCompanyFormSchema,
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
+import PrimaryButton from '../Common/Button/PrimaryButton';
 
 let TCombForm = t.form.Form;
 
@@ -58,20 +59,21 @@ export default class DonateTrees extends Component {
   }
 
   render() {
+    const NextArrow = function(props) {
+      return <PrimaryButton onClick={props.onClick}>Next</PrimaryButton>;
+    };
+
     const settings = {
       dots: true,
-      nextArrow: (
-        <CarouselNavigation
-          styleName="donate-tree-nav-img__right"
-          src={arrow_right_green}
-        />
-      ),
+      nextArrow: <NextArrow />,
+      infinite: false,
       prevArrow: (
         <CarouselNavigation
           styleName="donate-tree-nav-img__left"
           src={arrow_left_green}
         />
       ),
+
       afterChange: index => this.indexChange(index)
     };
 
@@ -117,5 +119,6 @@ export default class DonateTrees extends Component {
 
 DonateTrees.propTypes = {
   selectedProject: PropTypes.object,
-  selectedTpo: PropTypes.object
+  selectedTpo: PropTypes.object,
+  onClick: PropTypes.func
 };

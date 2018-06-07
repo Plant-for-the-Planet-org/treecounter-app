@@ -9,9 +9,10 @@ import CardLayout from '../Common/Card/CardLayout';
 import SearchAutosuggest from '../Header/SearchAutosuggest';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
-import { arrow_right_green, arrow_left_green } from '../../assets';
+import { arrow_left_green } from '../../assets';
 import TreeCountCurrencySelector from './TreeCountCurrencySelector';
 import currenciesJson from './currencies';
+import PrimaryButton from '../Common/Button/PrimaryButton';
 
 import {
   individualSchemaOptions,
@@ -95,19 +96,19 @@ export default class GiftTrees extends Component {
     this.setState({ modeReciept: tab });
   }
 
-  suggestionCLicked = (context, event) => {
+  suggestionClicked = (context, event) => {
     console.log(event.suggestion.id);
   };
 
   render() {
+    const NextArrow = function(props) {
+      console.log(props);
+      return <PrimaryButton onClick={props.onClick}>Next</PrimaryButton>;
+    };
     const settings = {
       dots: true,
-      nextArrow: (
-        <CarouselNavigation
-          styleName="donate-tree-nav-img__right"
-          src={arrow_right_green}
-        />
-      ),
+      nextArrow: <NextArrow />,
+      infinite: false,
       prevArrow: (
         <CarouselNavigation
           styleName="donate-tree-nav-img__left"
@@ -132,7 +133,7 @@ export default class GiftTrees extends Component {
               >
                 {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
                   <SearchAutosuggest
-                    onSuggestionClicked={this.suggestionCLicked}
+                    onSuggestionClicked={this.suggestionClicked}
                   />
                 ) : (
                   <TCombForm

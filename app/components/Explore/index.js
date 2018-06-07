@@ -24,9 +24,11 @@ export default class Explore extends Component {
   constructor() {
     super();
     this.state = {
-      activeTab: ''
+      activeTab: '',
+      activeMapLayers: ExploreForm.activeMapLayers
     };
     this.onTabChange = this.onTabChange.bind(this);
+    this.onMapLayerSelectUpdate = this.onMapLayerSelectUpdate.bind(this);
   }
 
   onTabChange(tab) {
@@ -34,6 +36,10 @@ export default class Explore extends Component {
     this.setState({
       activeTab: tab
     });
+  }
+
+  onMapLayerSelectUpdate(newObj) {
+    this.setState({ activeMapLayers: newObj });
   }
 
   render() {
@@ -47,6 +53,7 @@ export default class Explore extends Component {
                   <MapLayerSelector
                     mapLayers={ExploreForm.mapLayers}
                     activeMapLayers={ExploreForm.activeMapLayers}
+                    onStateUpdate={this.onMapLayerSelectUpdate}
                   />
                 </div>
                 <Map />

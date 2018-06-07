@@ -4,6 +4,17 @@ import PropTypes from 'prop-types';
 export default class MapLayerSelector extends Component {
   constructor() {
     super();
+    this.HandleInputChange = this.HandleInputChange.bind(this);
+  }
+
+  HandleInputChange(event) {
+    if (this.props.activeMapLayers.includes(event.target.value)) {
+      this.props.activeMapLayers.splice(
+        this.props.activeMapLayers.indexOf(event.target.value),
+        1
+      );
+    } else this.props.activeMapLayers.push(event.target.value);
+    this.props.onStateUpdate(this.props.activeMapLayers);
   }
 
   GetCheckbox(objKey) {
@@ -15,6 +26,7 @@ export default class MapLayerSelector extends Component {
           name="checkbox"
           id={objKey}
           value={objKey}
+          onChange={this.HandleInputChange}
         />
         <label htmlFor={objKey}>{this.props.mapLayers[objKey]}</label>
       </div>
@@ -33,5 +45,6 @@ export default class MapLayerSelector extends Component {
 
 MapLayerSelector.propTypes = {
   mapLayers: PropTypes.object.isRequired,
-  activeMapLayers: PropTypes.object
+  activeMapLayers: PropTypes.object,
+  onStateUpdate: PropTypes.func
 };

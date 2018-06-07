@@ -24,12 +24,18 @@ export default class EditUserProfile extends React.Component {
           console.log(locals);
           return (
             <div className="tComb-template__profile-form">
-              <div>
-                {locals.inputs.title}
-                {locals.inputs.firstname}
-                {locals.inputs.lastname}
-                {locals.inputs.gender}
-              </div>
+              {userType === 'individual' ? (
+                <div>
+                  {locals.inputs.title}
+                  {locals.inputs.firstname}
+                  {locals.inputs.lastname}
+                  {locals.inputs.gender}
+                </div>
+              ) : (
+                <div>
+                  {locals.inputs.name} {locals.inputs.subType}
+                </div>
+              )}
 
               <div>
                 {locals.inputs.address}
@@ -80,17 +86,10 @@ export default class EditUserProfile extends React.Component {
 
   getFormSchemaOption = (userType, profileType) => {
     let schemaOptions = parsedSchema[userType][profileType].schemaOptions;
-    switch (userType) {
-      case 'individual': {
-        return {
-          template: this.getFormTemplate(userType, profileType),
-          ...schemaOptions
-        };
-      }
-      default: {
-        return schemaOptions;
-      }
-    }
+    return {
+      template: this.getFormTemplate(userType, profileType),
+      ...schemaOptions
+    };
   };
 
   render() {

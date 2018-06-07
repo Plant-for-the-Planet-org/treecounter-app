@@ -506,9 +506,54 @@
       "methods": ["POST"],
       "schemes": []
     },
+    "public_currencies_get": {
+      "tokens": [
+        ["text", "/currencies"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
     "public_menu_get": {
       "tokens": [
         ["text", "/menu"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "public_exploreData_get": {
+      "tokens": [
+        ["text", "/exploreData"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "public_exploreQuery_get": {
+      "tokens": [
+        ["text", "/exploreQuery"],
         ["variable", "/", "[^/]++", "_locale"],
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
@@ -907,6 +952,21 @@
     },
     "app_faq": {
       "tokens": [["text", "/faq"], ["variable", "/", "(\\w{2})?", "_locale"]],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "app_giftTrees": {
+      "tokens": [
+        ["text", "/giftTrees"],
+        ["variable", "/", "(\\w{2})?", "_locale"]
+      ],
       "defaults": {
         "_locale": null
       },

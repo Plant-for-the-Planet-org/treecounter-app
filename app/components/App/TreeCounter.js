@@ -7,6 +7,7 @@ import { NotificationContainer } from 'react-notifications';
 import PropTypes from 'prop-types';
 
 // Components imports
+import GiftTreesContainer from '../../containers/GiftTrees';
 import TargetContainer from '../../containers/TargetContainer';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
 import HeaderContainer from '../../containers/HeaderContainer';
@@ -30,7 +31,7 @@ import UserHomeContainer from '../../containers/UserHome';
 import Trillion from '../TreecounterGraphics/Trillion';
 
 import { loadTpos } from '../../actions/loadTposAction';
-import { loadLoginData } from '../../actions/loadLoginData';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -58,7 +59,7 @@ class TreeCounter extends Component {
     } else {
       let token = await getAccessToken();
       if (token) {
-        this.props.loadLoginData();
+        this.props.loadUserProfile();
       } else {
         this.setState({ loading: false, isLoggedIn: false });
       }
@@ -177,7 +178,10 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_donateTrees')}
                 component={DonationTreesContainer}
               />
-
+              <Route
+                path={getLocalRoute('app_giftTrees')}
+                component={GiftTreesContainer}
+              />
               {/* Routes which essentially show svg */}
               <Route
                 path={getLocalRoute('app_treecounter') + '/:treecounterId'}
@@ -200,7 +204,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      loadLoginData,
+      loadUserProfile,
       loadTpos
     },
     dispatch
@@ -211,7 +215,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(TreeCounter);
 
 TreeCounter.propTypes = {
   userProfile: PropTypes.object,
-  loadLoginData: PropTypes.func,
+  loadUserProfile: PropTypes.func,
   loadTpos: PropTypes.func,
   dispatch: PropTypes.func
 };

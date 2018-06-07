@@ -50,21 +50,8 @@
     }
 
     .project-specs__container {
-      display: flex;
-      flex-direction: column;
-
       .column {
         font-weight: normal;
-      }
-      .project-specs__item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 3px;
-        img {
-          height: 20px;
-          width: 20px;
-          display: inline-block;
-        }
       }
     }
 
@@ -111,6 +98,56 @@
       .slick-active button:before {
         color: #ffffff;
         opacity: 1;
+      }
+    }
+  }
+
+  .pftp-tabs {
+    font-size: 15px;
+    .react-autosuggest__container {
+      width: 100%;
+      input {
+        background: none;
+        color: #000000;
+        font-size: 18px;
+        padding: 5px 10px 10px 5px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid mix(white, #424242, 70%);
+      }
+    }
+
+    .fieldset {
+      width: 100%;
+    }
+  }
+
+  .treecount-container {
+    margin-top: 30px;
+    .treecount-price-conversion {
+      display: flex;
+      justify-content: space-between;
+      padding: 25px 40px 0 40px;
+      box-sizing: border-box;
+      width: 100%;
+
+      label {
+        display: flex;
+        align-items: center;
+        input {
+          margin: 0 10px;
+        }
+      }
+
+      input[type="text"] {
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        width: 40px;
+        border-bottom: 1px solid mix(white, #424242, 70%);
       }
     }
   }

@@ -12,6 +12,7 @@ export function CheckboxTemplate(locals) {
         type={'checkbox'}
         required="required"
         onChange={onChange}
+        checked={locals.value}
       />
       <label className={'pftp-text-span'}>{i18n.t(locals.label)}</label>
     </div>

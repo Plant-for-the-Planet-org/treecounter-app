@@ -38,6 +38,7 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import DonationTreesContainer from '../../containers/DonateTrees/index';
 
+import EditUserProfileContainer from '../../containers/EditUserProfile/index';
 // Class implementation
 class TreeCounter extends Component {
   constructor(props) {
@@ -166,6 +167,10 @@ class TreeCounter extends Component {
               <PrivateRoute
                 path={getLocalRoute('app_myTrees')}
                 component={UserContributionsContainer}
+              />
+              <PrivateRoute
+                path="/app_dev.php/en/edit_profile"
+                component={EditUserProfileContainer}
               />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}

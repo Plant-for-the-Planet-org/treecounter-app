@@ -139,7 +139,10 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           schemaOptions['fields'][propertyKey].item['disableOrder'] = true;
         }
         // ************************************************
-        if (liformSchema.required.indexOf(propertyKey)) {
+        if (
+          liformSchema.required &&
+          liformSchema.required.indexOf(propertyKey)
+        ) {
           options['error'] = 'required';
         }
       }

@@ -28,7 +28,9 @@ class PlantProjectFull extends React.Component {
       location,
       countPlanted: countPlanted,
       count_target: countTarget,
-      paymentCurrencies,
+      currency,
+      treeCost,
+      paymentSetup,
       survivalRate: survivalRate,
       images,
       synopsis1,
@@ -50,8 +52,10 @@ class PlantProjectFull extends React.Component {
       location,
       countPlanted,
       countTarget,
-      paymentCurrencies,
-      survivalRate
+      survivalRate,
+      currency,
+      treeCost,
+      taxDeduction: paymentSetup.taxDeduction
     };
     const detailsProps = {
       images,

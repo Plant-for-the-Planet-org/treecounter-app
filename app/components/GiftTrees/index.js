@@ -10,7 +10,8 @@ import SearchAutosuggest from '../Header/SearchAutosuggest';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_green, arrow_left_green } from '../../assets';
-import PlantProjectFull from '../PlantProjects/PlantProjectFull';
+import TreeCountCurrencySelector from './TreeCountCurrencySelector';
+import currenciesJson from './currencies';
 
 import {
   individualSchemaOptions,
@@ -51,17 +52,32 @@ export default class GiftTrees extends Component {
       }
     ]
   };
+
   constructor(props) {
     super(props);
 
     this.state = {
       pageIndex: 0,
       modeReciept: '',
-      modeUser: ''
+      modeUser: '',
+      selectedCurrency: null,
+      selectedTreeCount: 0
     };
 
     this.handleModeRecieptChange = this.handleModeRecieptChange.bind(this);
     this.handleModeUserChange = this.handleModeUserChange.bind(this);
+    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
+    this.handleTreeCountChange = this.handleTreeCountChange.bind(this);
+  }
+
+  handleCurrencyChange(selectedCurrency) {
+    console.log('handleCurrencyChange', selectedCurrency);
+    this.setState({ selectedCurrency });
+  }
+
+  handleTreeCountChange(selectedTreeCount) {
+    console.log('========= handleTreecountChange', selectedTreeCount);
+    this.setState({ selectedTreeCount });
   }
 
   indexChange(index) {
@@ -100,8 +116,11 @@ export default class GiftTrees extends Component {
       afterChange: index => this.indexChange(index)
     };
 
-    return (
+    const plantProject = this.props.selectedProject;
+
+    return null === plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
+        <div>currency: {this.state.selectedCurrency}</div>
         <TextHeading>Gift trees</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
           <div className="donate-tress__container">
@@ -124,10 +143,15 @@ export default class GiftTrees extends Component {
                 )}
               </Tabs>
               {this.props.selectedTpo ? (
-                <PlantProjectFull
-                  expanded={false}
-                  plantProject={this.props.selectedProject}
-                  tpoName={this.props.selectedTpo.name}
+                <TreeCountCurrencySelector
+                  baseCurrency={plantProject.currency}
+                  onCurrencyChange={this.handleCurrencyChange}
+                  onTreeCountChange={this.handleTreeCountChange}
+                  selectedCurrency={plantProject.currency}
+                  selectedTreeCount={this.state.selectedTreeCount}
+                  treeCost={plantProject.treeCost}
+                  treeCountOptions={plantProject.paymentSetup.treeCountOptions}
+                  currencies={currenciesJson}
                 />
               ) : null}
               <Tabs
@@ -151,6 +175,11 @@ export default class GiftTrees extends Component {
             </Slider>
           </div>
         </CardLayout>
+
+        {/*<TreecountCurrencySelector*/}
+        {/*currencies={this.props.selectedProject}*/}
+        {/*tpoName={this.props.selectedTpo.name}*/}
+        {/*/>*/}
       </div>
     );
   }

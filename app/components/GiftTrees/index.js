@@ -71,7 +71,8 @@ export default class GiftTrees extends Component {
       modeUser: '',
       selectedCurrency: null,
       selectedTreeCount: 0,
-      form: {}
+      form: {},
+      expanded: false
     };
 
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
@@ -159,6 +160,12 @@ export default class GiftTrees extends Component {
     });
   };
 
+  callExpanded = bool => {
+    this.setState({
+      expanded: bool
+    });
+  };
+
   render() {
     const NextArrow = function(props) {
       function validated() {
@@ -178,6 +185,7 @@ export default class GiftTrees extends Component {
         />
       ),
       infinite: false,
+      adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation
           styleName="donate-tree-nav-img__left"
@@ -196,24 +204,27 @@ export default class GiftTrees extends Component {
           <div className="donate-tress__container">
             <ContentHeader caption={headings[this.state.pageIndex]} />
             <Slider {...settings}>
-              <Tabs
-                data={GiftTrees.data.tabsUser}
-                onTabChange={this.handleModeUserChange}
-              >
-                {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
-                  <SearchAutosuggest
-                    onSuggestionClicked={this.suggestionClicked}
-                  />
-                ) : (
-                  <TCombForm
-                    ref="giftInvitation"
-                    type={giftInvitationFormSchema}
-                    options={giftInvitationSchemaOptions}
-                  />
-                )}
-              </Tabs>
+              <div className="treecount-selector-wrapper">
+                <Tabs
+                  data={GiftTrees.data.tabsUser}
+                  onTabChange={this.handleModeUserChange}
+                >
+                  {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
+                    <SearchAutosuggest
+                      onSuggestionClicked={this.suggestionClicked}
+                    />
+                  ) : (
+                    <TCombForm
+                      ref="giftInvitation"
+                      type={giftInvitationFormSchema}
+                      options={giftInvitationSchemaOptions}
+                    />
+                  )}
+                </Tabs>
+              </div>
               {this.props.selectedTpo ? (
                 <PlantProjectFull
+                  callExpanded={this.callExpanded}
                   expanded={false}
                   plantProject={this.props.selectedProject}
                   tpoName={this.props.selectedTpo.name}

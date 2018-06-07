@@ -7,7 +7,6 @@ class Tabs extends React.Component {
     this.state = {
       activeTab: props.data[0].id
     };
-
     this.emitTabChange(props.data[0].id);
     this.handleTabChange = this.handleTabChange.bind(this);
   }

@@ -38,8 +38,9 @@ export default class Explore extends Component {
     });
   }
 
-  onMapLayerSelectUpdate(newObj) {
-    this.setState({ activeMapLayers: newObj });
+  onMapLayerSelectUpdate(activeMapLayers) {
+    console.log(activeMapLayers);
+    this.setState({ activeMapLayers });
   }
 
   render() {

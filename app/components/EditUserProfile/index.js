@@ -15,6 +15,84 @@ export default class EditUserProfile extends React.Component {
     console.log(props);
     console.log(parsedSchema);
   }
+
+  getFormTemplate = (userType, profileType) => {
+    console.log(profileType);
+    switch (profileType) {
+      case 'profile': {
+        return locals => {
+          console.log(locals);
+          return (
+            <div className="tComb-template__form-group">
+              <div>
+                {locals.inputs.title}
+                {locals.inputs.firstname}
+                {locals.inputs.lastname}
+                {locals.inputs.gender}
+              </div>
+
+              <div>
+                {locals.inputs.address}
+                {locals.inputs.zipCode}
+                {locals.inputs.city}
+                {locals.inputs.country}
+                <div>
+                  {locals.inputs.mayContact}
+                  {locals.inputs.mayPublish}
+                </div>
+              </div>
+            </div>
+          );
+        };
+      }
+      case 'about_me': {
+        return locals => {
+          console.log(locals);
+          return (
+            <div className="tComb-template__form-group">
+              <div>
+                {locals.inputs.synopsis1}
+                {locals.inputs.synopsis2}
+              </div>
+
+              <div>
+                {locals.inputs.url}
+                {locals.inputs.linkText}
+              </div>
+            </div>
+          );
+        };
+      }
+      case 'password': {
+        return locals => {
+          console.log(locals);
+          return (
+            <div className="tComb-template__form-group">
+              <div>{locals.inputs.currentPassword}</div>
+
+              <div>{locals.inputs.password}</div>
+            </div>
+          );
+        };
+      }
+    }
+  };
+
+  getFormSchemaOption = (userType, profileType) => {
+    let schemaOptions = parsedSchema[userType][profileType].schemaOptions;
+    switch (userType) {
+      case 'individual': {
+        return {
+          template: this.getFormTemplate(userType, profileType),
+          ...schemaOptions
+        };
+      }
+      default: {
+        return schemaOptions;
+      }
+    }
+  };
+
   render() {
     console.log('___render___Edit_userprofile');
     const { type, image } = this.props.currentUserProfile;
@@ -35,7 +113,7 @@ export default class EditUserProfile extends React.Component {
           <TCombForm
             ref={'profile'}
             type={parsedSchema[type].profile.transformedSchema}
-            options={parsedSchema[type].profile.schemaOptions}
+            options={this.getFormSchemaOption(type, 'profile')}
             value={this.props.currentUserProfile}
           />
           <PrimaryButton
@@ -47,11 +125,11 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
         {/* //about_me section */}
-        <CardLayout>
+        <CardLayout className="user-profile__form-group">
           <TCombForm
             ref={'about_me'}
             type={parsedSchema[type].about_me.transformedSchema}
-            options={parsedSchema[type].about_me.schemaOptions}
+            options={this.getFormSchemaOption(type, 'about_me')}
             value={this.props.currentUserProfile}
           />
           <PrimaryButton
@@ -62,11 +140,11 @@ export default class EditUserProfile extends React.Component {
             Save Changes
           </PrimaryButton>
         </CardLayout>
-        <CardLayout>
+        <CardLayout className="user-profile__form-group">
           <TCombForm
             ref={'password'}
             type={parsedSchema[type].password.transformedSchema}
-            options={parsedSchema[type].password.schemaOptions}
+            options={this.getFormSchemaOption(type, 'password')}
           />
           <PrimaryButton
             onClick={() => {

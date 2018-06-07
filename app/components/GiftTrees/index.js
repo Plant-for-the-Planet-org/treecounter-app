@@ -11,6 +11,7 @@ import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_green, arrow_left_green } from '../../assets';
 import TreeCountCurrencySelector from './TreeCountCurrencySelector';
+import PaymentSelector from './PaymentSelector';
 import currenciesJson from './currencies';
 
 import {
@@ -99,6 +100,8 @@ export default class GiftTrees extends Component {
   };
 
   render() {
+    console.log('%%%%%%%%%%%%%%%%% ', this.props);
+
     const settings = {
       dots: true,
       nextArrow: (
@@ -117,8 +120,9 @@ export default class GiftTrees extends Component {
     };
 
     const plantProject = this.props.selectedProject;
+    const userProfile = this.props.currentUserProfile;
 
-    return null === plantProject ? null : (
+    return plantProject === undefined ? null : (
       <div className="sidenav-wrapper app-container__content--center">
         <div>currency: {this.state.selectedCurrency}</div>
         <TextHeading>Gift trees</TextHeading>
@@ -144,14 +148,30 @@ export default class GiftTrees extends Component {
               </Tabs>
               {this.props.selectedTpo ? (
                 <TreeCountCurrencySelector
-                  baseCurrency={plantProject.currency}
                   onCurrencyChange={this.handleCurrencyChange}
                   onTreeCountChange={this.handleTreeCountChange}
+                  userCountry={
+                    userProfile === undefined ? null : userProfile.country
+                  }
+                  currencies={currenciesJson}
+                  baseCurrency={plantProject.currency}
                   selectedCurrency={plantProject.currency}
-                  selectedTreeCount={this.state.selectedTreeCount}
                   treeCost={plantProject.treeCost}
                   treeCountOptions={plantProject.paymentSetup.treeCountOptions}
-                  currencies={currenciesJson}
+                  countryCurrencies={Object.keys(
+                    plantProject.paymentSetup.countries
+                  )}
+                  selectedTreeCount={this.state.selectedTreeCount}
+                />
+              ) : null}
+              {this.props.selectedTpo ? (
+                <PaymentSelector
+                  countryCurrencies={plantProject.paymentSetup.countries}
+                  accounts={plantProject.paymentSetup.accounts}
+                  selectedCurrency={plantProject.currency}
+                  userCountry={
+                    userProfile === undefined ? null : userProfile.country
+                  }
                 />
               ) : null}
               <Tabs
@@ -187,5 +207,6 @@ export default class GiftTrees extends Component {
 
 GiftTrees.propTypes = {
   selectedProject: PropTypes.object,
-  selectedTpo: PropTypes.object
+  selectedTpo: PropTypes.object,
+  currentUserProfile: PropTypes.object
 };

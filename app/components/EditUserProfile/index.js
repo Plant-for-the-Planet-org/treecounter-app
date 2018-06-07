@@ -23,13 +23,19 @@ export default class EditUserProfile extends React.Component {
         return locals => {
           console.log(locals);
           return (
-            <div className="tComb-template__form-group">
-              <div>
-                {locals.inputs.title}
-                {locals.inputs.firstname}
-                {locals.inputs.lastname}
-                {locals.inputs.gender}
-              </div>
+            <div className="tComb-template__profile-form">
+              {userType === 'individual' ? (
+                <div>
+                  {locals.inputs.title}
+                  {locals.inputs.firstname}
+                  {locals.inputs.lastname}
+                  {locals.inputs.gender}
+                </div>
+              ) : (
+                <div>
+                  {locals.inputs.name} {locals.inputs.subType}
+                </div>
+              )}
 
               <div>
                 {locals.inputs.address}
@@ -49,7 +55,7 @@ export default class EditUserProfile extends React.Component {
         return locals => {
           console.log(locals);
           return (
-            <div className="tComb-template__form-group">
+            <div className="tComb-template__about-me-form">
               <div>
                 {locals.inputs.synopsis1}
                 {locals.inputs.synopsis2}
@@ -67,7 +73,7 @@ export default class EditUserProfile extends React.Component {
         return locals => {
           console.log(locals);
           return (
-            <div className="tComb-template__form-group">
+            <div className="tComb-template__password-form">
               <div>{locals.inputs.currentPassword}</div>
 
               <div>{locals.inputs.password}</div>
@@ -80,17 +86,10 @@ export default class EditUserProfile extends React.Component {
 
   getFormSchemaOption = (userType, profileType) => {
     let schemaOptions = parsedSchema[userType][profileType].schemaOptions;
-    switch (userType) {
-      case 'individual': {
-        return {
-          template: this.getFormTemplate(userType, profileType),
-          ...schemaOptions
-        };
-      }
-      default: {
-        return schemaOptions;
-      }
-    }
+    return {
+      template: this.getFormTemplate(userType, profileType),
+      ...schemaOptions
+    };
   };
 
   render() {
@@ -126,6 +125,7 @@ export default class EditUserProfile extends React.Component {
         </CardLayout>
         {/* //about_me section */}
         <CardLayout className="user-profile__form-group">
+          <div className="form-group__heading">About me</div>
           <TCombForm
             ref={'about_me'}
             type={parsedSchema[type].about_me.transformedSchema}
@@ -141,6 +141,7 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
         <CardLayout className="user-profile__form-group">
+          <div className="form-group__heading">Change password</div>
           <TCombForm
             ref={'password'}
             type={parsedSchema[type].password.transformedSchema}
@@ -154,7 +155,7 @@ export default class EditUserProfile extends React.Component {
             Change Passwords
           </PrimaryButton>
         </CardLayout>
-        <CardLayout>Following</CardLayout>
+        {/* <CardLayout>Following</CardLayout> */}
         <ActionButton caption="Delete Profile" />
       </div>
     );

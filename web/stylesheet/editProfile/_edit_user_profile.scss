@@ -1,0 +1,28 @@
+.edit-user-profile__container {
+  .form-group {
+    @extend .pftp-card-layout;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 718px;
+  }
+  .user-profile__form-group {
+    @extend .form-group;
+    .profile-image__container {
+      margin-bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .tComb-template__form-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 20px;
+      column-gap: 54px;
+    }
+  }
+  .user-about-me__form-group {
+  }
+}

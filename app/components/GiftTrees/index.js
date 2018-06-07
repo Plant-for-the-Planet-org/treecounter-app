@@ -120,7 +120,6 @@ export default class GiftTrees extends Component {
 
     return null === plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
-        <div>currency: {this.state.selectedCurrency}</div>
         <TextHeading>Gift trees</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
           <div className="donate-tress__container">

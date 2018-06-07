@@ -4,7 +4,13 @@
     margin: auto;
     min-width: 266px;
   }
-
+  .navigate-button {
+    width: fit-content;
+    font-size: 24px;
+    min-width: 266px;
+    border: none;
+    border-radius: 7px;
+  }
   .tComb-template-form-group {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -22,7 +28,7 @@
     max-width: 718px;
     box-sizing: border-box;
     width: 100%;
-    padding: 28px 23px 23px 40px;
+    padding: 28px 45px 41px;
   }
   .user-profile__form-group {
     @extend .form-group;
@@ -44,10 +50,19 @@
     }
     .tComb-template__profile-form {
       @extend .tComb-template-form-group;
+      select {
+        font-size: 14px !important;
+      }
+      textarea input {
+        font-size: 16px !important;
+      }
     }
     .tComb-template__about-me-form {
       @extend .tComb-template-form-group;
       column-gap: 82px;
+      textarea {
+        height: 75px !important;
+      }
     }
     .tComb-template__password-form {
       @extend .tComb-template-form-group;

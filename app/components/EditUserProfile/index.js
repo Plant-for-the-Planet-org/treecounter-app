@@ -156,7 +156,7 @@ export default class EditUserProfile extends React.Component {
             Change Passwords
           </PrimaryButton>
         </CardLayout>
-        <CardLayout>Following</CardLayout>
+        {/* <CardLayout>Following</CardLayout> */}
         <ActionButton caption="Delete Profile" />
       </div>
     );

@@ -50,21 +50,8 @@
     }
 
     .project-specs__container {
-      display: flex;
-      flex-direction: column;
-
       .column {
         font-weight: normal;
-      }
-      .project-specs__item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 3px;
-        img {
-          height: 20px;
-          width: 20px;
-          display: inline-block;
-        }
       }
     }
 

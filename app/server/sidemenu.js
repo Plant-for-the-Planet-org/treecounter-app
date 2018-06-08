@@ -3,14 +3,14 @@ export default {
     {
       enabled: 1,
       sequence: 1,
-      caption: 'label.logged_out_caption1',
+      caption: 'World',
       help: 'menu_group.world.help',
       icon: 'none',
       menuItems: [
         {
           enabled: 1,
           sequence: 1,
-          caption: 'label.logged_out_caption1seq1',
+          caption: 'Trillion Tree Campaign',
           help: 'menu_item.trillion_tree_campaign.help',
           icon: 'tree_outline',
           uri: '/app_dev.php/en'
@@ -18,7 +18,7 @@ export default {
         {
           enabled: 1,
           sequence: 2,
-          caption: 'label.logged_out_caption1seq2',
+          caption: 'Explore',
           help: 'menu_item.explore.help',
           icon: 'rocket_outline',
           uri: '#'
@@ -28,14 +28,14 @@ export default {
     {
       enabled: 1,
       sequence: 2,
-      caption: 'label.logged_out_caption2',
+      caption: 'My Items',
       help: 'menu_group.user.help',
       icon: 'none',
       menuItems: [
         {
           enabled: 1,
           sequence: 1,
-          caption: 'label.logged_out_caption2seq1',
+          caption: 'Register planted trees',
           help: 'menu_item.register_trees.help',
           icon: 'shovel_outline',
           uri: '/app_dev.php/en/registerTrees'
@@ -43,15 +43,15 @@ export default {
         {
           enabled: 1,
           sequence: 2,
-          caption: 'label.logged_out_caption2seq2',
+          caption: 'Donate Trees',
           help: 'menu_item.donate_trees.help',
           icon: 'heart_outline',
-          uri: '/app_dev.php/en/donateTrees'
+          uri: '#'
         },
         {
           enabled: 1,
           sequence: 3,
-          caption: 'label.logged_out_caption2seq3',
+          caption: 'My Trees',
           help: 'menu_item.my_trees.help',
           icon: 'tree_outline',
           uri: '/app_dev.php/en/myTrees'
@@ -59,7 +59,7 @@ export default {
         {
           enabled: 1,
           sequence: 4,
-          caption: 'label.logged_out_caption2seq4',
+          caption: 'Set Target',
           help: 'Set your personal target',
           icon: 'target_outline',
           uri: '/app_dev.php/en/target'
@@ -69,14 +69,14 @@ export default {
     {
       enabled: 1,
       sequence: 3,
-      caption: 'label.logged_out_caption3',
+      caption: 'Community',
       help: 'menu_group.community.help',
       icon: 'none',
       menuItems: [
         {
           enabled: 1,
           sequence: 1,
-          caption: 'label.logged_out_caption3seq1',
+          caption: 'Challenge',
           help: 'menu_item.challenge.help',
           icon: 'challenge_outline',
           uri: '#'
@@ -84,10 +84,10 @@ export default {
         {
           enabled: 1,
           sequence: 2,
-          caption: 'label.logged_out_caption3seq2',
+          caption: 'Tree gift',
           help: 'menu_item.tree_gift.help',
           icon: 'gift_outline',
-          uri: '/app_dev.php/en/giftTrees'
+          uri: '#'
         }
       ]
     }
@@ -96,14 +96,14 @@ export default {
     {
       enabled: 1,
       sequence: 1,
-      caption: 'label.logged_in_caption1',
+      caption: 'World',
       help: 'menu_group.world.help',
       icon: 'none',
       menuItems: [
         {
           enabled: 1,
           sequence: 1,
-          caption: 'label.logged_in_caption1seq1',
+          caption: 'Trillion Tree Campaign',
           help: 'menu_item.trillion_tree_campaign.help',
           icon: 'tree_outline',
           uri: '/app_dev.php/en'
@@ -111,7 +111,7 @@ export default {
         {
           enabled: 1,
           sequence: 2,
-          caption: 'label.logged_in_caption1seq2',
+          caption: 'Explore',
           help: 'menu_item.explore.help',
           icon: 'rocket_outline',
           uri: '#'
@@ -121,14 +121,14 @@ export default {
     {
       enabled: 1,
       sequence: 2,
-      caption: 'label.logged_in_caption2',
+      caption: 'My Items',
       help: 'menu_group.user.help',
       icon: 'none',
       menuItems: [
         {
           enabled: 1,
           sequence: 1,
-          caption: 'label.logged_in_caption2seq1',
+          caption: 'Register planted trees',
           help: 'menu_item.register_trees.help',
           icon: 'shovel_outline',
           uri: '/app_dev.php/en/registerTrees'
@@ -136,15 +136,15 @@ export default {
         {
           enabled: 1,
           sequence: 2,
-          caption: 'label.logged_in_caption2seq2',
+          caption: 'Donate Trees',
           help: 'menu_item.donate_trees.help',
           icon: 'heart_outline',
-          uri: '/app_dev.php/en/donateTrees'
+          uri: '#'
         },
         {
           enabled: 1,
           sequence: 3,
-          caption: 'label.logged_in_caption2seq3',
+          caption: 'My Trees',
           help: 'menu_item.my_trees.help',
           icon: 'tree_outline',
           uri: '/app_dev.php/en/myTrees'
@@ -152,7 +152,7 @@ export default {
         {
           enabled: 1,
           sequence: 4,
-          caption: 'label.logged_in_caption2seq4',
+          caption: 'Set Target',
           help: 'Set your personal target',
           icon: 'target_outline',
           uri: '/app_dev.php/en/target'
@@ -162,14 +162,14 @@ export default {
     {
       enabled: 1,
       sequence: 3,
-      caption: 'label.logged_in_caption3',
+      caption: 'Community',
       help: 'menu_group.community.help',
       icon: 'none',
       menuItems: [
         {
           enabled: 1,
           sequence: 1,
-          caption: 'label.logged_in_caption3seq1',
+          caption: 'Challenge',
           help: 'menu_item.challenge.help',
           icon: 'challenge_outline',
           uri: '#'
@@ -177,10 +177,10 @@ export default {
         {
           enabled: 1,
           sequence: 2,
-          caption: 'label.logged_in_caption3seq2',
+          caption: 'Tree gift',
           help: 'menu_item.tree_gift.help',
           icon: 'gift_outline',
-          uri: '/app_dev.php/en/giftTrees'
+          uri: '#'
         }
       ]
     }

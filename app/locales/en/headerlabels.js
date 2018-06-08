@@ -15,5 +15,10 @@ export default {
   no_notification: 'notifications_none',
   menu: 'menu',
   change_password: 'Change password',
-  delete_profile: 'Delete Profile'
+  delete_profile: 'Delete Profile',
+  un_subscribe: 'Unsubscribe',
+  subscribe: 'Subscribe',
+  profile: 'profile',
+  aboutMe: 'about_me',
+  pas: 'password'
 };

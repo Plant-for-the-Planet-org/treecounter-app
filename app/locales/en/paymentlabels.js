@@ -14,5 +14,22 @@ export default {
   offline: 'offline',
   tax_deductablein: 'tax deductable in: taxDeductableIn.join()',
   stripeCC: 'StripeCC: ',
-  stripeSepa: 'StripeSepa: '
+  stripeSepa: 'StripeSepa: ',
+  pftp_paypal: 'pftp_paypal',
+  pftp_sepa: 'pftp_sepa',
+  directDebit: 'Direct Debit',
+  IBAN: 'IBAN',
+  BIC: 'BIC',
+  donateTreesMessage:
+    'Any trees donated will count towards your personal tree counter.',
+  selectDifferentProject: 'Select Different Project',
+  creditCard: 'Credit Card',
+  creditCardMessage: '(We accept Visa and MasterCard for 15,00 € and above.)',
+  paymentMethod: 'paymentMethod',
+  redirectionMessage: '(You will be redirected to Paypal.)',
+  pftp_cc: 'pftp_cc',
+  project_details: 'Project Details',
+  project_search: 'Project Search',
+  price_search: 'Price Search',
+  date_format: 'yyyy-mm-dd'
 };

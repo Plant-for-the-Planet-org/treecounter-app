@@ -18,5 +18,7 @@ export default {
   individual_tree: 'Individual Tree',
   single_tree: 'single-tree',
   many_trees: 'Many Trees',
-  multiple_trees: 'multiple-trees'
+  multiple_trees: 'multiple-trees',
+  plant_project: 'Plant Project',
+  plant_projects: 'Plant Projects'
 };

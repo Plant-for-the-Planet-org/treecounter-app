@@ -107,7 +107,7 @@ export default class ContributionCard extends React.Component {
               <div className={seeLabel} onClick={this.onViewExpanded}>
                 {this.state.viewExpanded
                   ? i18n.t('label.see_less')
-                  : i18n.t('label.userContributionlabels.see_more')}
+                  : i18n.t('label.see_more')}
               </div>
             ) : null}
             {this.state.viewExpanded

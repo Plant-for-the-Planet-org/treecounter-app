@@ -7,5 +7,7 @@ export default {
   survival_rate: 'Survival Rate',
   cost_per_tree: 'Cost per Tree',
   by: 'by',
-  in: 'in'
+  in: 'in',
+  donate: 'Donate',
+  plant_project_full: 'PlantProjectFull'
 };

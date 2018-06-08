@@ -134,14 +134,14 @@ class SearchProjects extends Component {
         <div className="row flex-row f-center">
           <input
             type="button"
-            value="Project Search"
+            value={i18n.t('label.project_search')}
             className="indiviual"
             onClick={() => this.handleFunction(1)}
             id="ProjectSearch"
           />
           <input
             type="button"
-            value="Price Search"
+            value={i18n.t('label.price_search')}
             className="many"
             onClick={() => this.handleFunction(2)}
             id="PriceSearch"

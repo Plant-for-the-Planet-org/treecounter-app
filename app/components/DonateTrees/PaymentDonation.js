@@ -18,7 +18,7 @@ class PaymentDonation extends Component {
     this.state = {
       loading: true,
       schema: {},
-      paymentMethod: 'pftp_paypal',
+      paymentMethod: i18n.t('label.pftp_paypal'),
       paymentOptions: {
         iban: '',
         bic: ''
@@ -57,7 +57,7 @@ class PaymentDonation extends Component {
 
   handlePaymentDonate(paymentInfo) {
     paymentInfo.paymentMethod = this.state.paymentMethod;
-    if (this.state.paymentMethod === 'pftp_sepa') {
+    if (this.state.paymentMethod === i18n.t('label.pftp_sepa')) {
       paymentInfo.paymentOptions = `iban=${
         this.state.paymentOptions.iban
       }&bic=${this.state.paymentOptions.bic}`;
@@ -97,7 +97,7 @@ class PaymentDonation extends Component {
         delete data.schema.properties.paymentMethod;
         delete data.schema.properties.paymentOptions;
 
-        let index = data.schema.required.indexOf('paymentMethod');
+        let index = data.schema.required.indexOf(i18n.t('label.paymentMethod'));
         if (index !== -1) data.schema.required.splice(index, 1);
 
         this.setState({ schema: data.schema, loading: false });
@@ -108,14 +108,19 @@ class PaymentDonation extends Component {
   getPaymentGateways() {
     return this.state.availablePaymentModes.map(element => {
       switch (element.name) {
-        case 'pftp_paypal':
+        case i18n.t('label.pftp_paypal'):
           return (
-            <div key="pftp_paypal" className="radio payment-method__option">
+            <div
+              key={i18n.t('label.pftp_paypal')}
+              className="radio payment-method__option"
+            >
               <label>
                 <input
                   type="radio"
-                  value="pftp_paypal"
-                  checked={this.state.paymentMethod === 'pftp_paypal'}
+                  value={i18n.t('label.pftp_paypal')}
+                  checked={
+                    this.state.paymentMethod === i18n.t('label.pftp_paypal')
+                  }
                   onChange={this.handleOptionChange}
                 />
                 <div>
@@ -127,14 +132,19 @@ class PaymentDonation extends Component {
               </label>
             </div>
           );
-        case 'pftp_sepa':
+        case i18n.t('label.pftp_sepa'):
           return (
-            <div key="pftp_sepa" className="radio payment-method__option">
+            <div
+              key={i18n.t('label.pftp_sepa')}
+              className="radio payment-method__option"
+            >
               <label>
                 <input
                   type="radio"
-                  value="pftp_sepa"
-                  checked={this.state.paymentMethod === 'pftp_sepa'}
+                  value={i18n.t('label.pftp_sepa')}
+                  checked={
+                    this.state.paymentMethod === i18n.t('label.pftp_sepa')
+                  }
                   onChange={this.handleOptionChange}
                 />
                 <div>
@@ -162,14 +172,17 @@ class PaymentDonation extends Component {
               </div>
             </div>
           );
-        case 'pftp_cc':
+        case i18n.t('label.pftp_cc'):
           return (
-            <div key="pftp_cc" className="radio payment-method__option">
+            <div
+              key={i18n.t('label.pftp_cc')}
+              className="radio payment-method__option"
+            >
               <label>
                 <input
                   type="radio"
-                  value="pftp_cc"
-                  checked={this.state.paymentMethod === 'pftp_cc'}
+                  value={i18n.t('label.pftp_cc')}
+                  checked={this.state.paymentMethod === i18n.t('label.pftp_cc')}
                   onChange={this.handleOptionChange}
                 />
                 <div>
@@ -196,7 +209,9 @@ class PaymentDonation extends Component {
           <div className="horizontal-round-bar__spacer" />
         </div>
         <div className="project-details">
-          <h4 className="project-details__heading">Project Details</h4>
+          <h4 className="project-details__heading">
+            {i18n.t('label.project_details')}
+          </h4>
           <div className="project-details__content">
             <div className="project-details__content--left">
               <span className="project-details__content--left__name">
@@ -212,8 +227,8 @@ class PaymentDonation extends Component {
                 <span>{i18n.t('label.costPerTree')}:</span>
                 <span>{this.state.selectedProject.treeCost}</span>
                 {this.state.selectedProject.isCertified
-                  ? 'Certified'
-                  : 'Not Certified'}
+                  ? i18n.t('label.certified')
+                  : i18n.t('label.nonCertified')}
               </div>
             </div>
             <div className="project-details__content--right">
@@ -248,7 +263,7 @@ class PaymentDonation extends Component {
           onSubmit={this.handlePaymentDonate}
           baseForm={CustomForm}
           headline=""
-          buttonText="Donate"
+          buttonText={i18n.t('label.donate')}
           buttonWidth="240"
         />
       </div>

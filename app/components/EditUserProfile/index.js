@@ -20,7 +20,7 @@ export default class EditUserProfile extends React.Component {
   getFormTemplate = (userType, profileType) => {
     console.log(profileType);
     switch (profileType) {
-      case 'profile': {
+      case i18n.t('label.profile'): {
         return locals => {
           console.log(locals);
           return (
@@ -52,7 +52,7 @@ export default class EditUserProfile extends React.Component {
           );
         };
       }
-      case 'about_me': {
+      case i18n.t('label.about_me'): {
         return locals => {
           console.log(locals);
           return (
@@ -70,7 +70,7 @@ export default class EditUserProfile extends React.Component {
           );
         };
       }
-      case 'password': {
+      case i18n.t('label.password'): {
         return locals => {
           console.log(locals);
           return (

@@ -13,7 +13,7 @@ const SupportButton = ({
   return isUserLoggedIn ? (
     <SecondaryButton
       onClick={() => onRegisterSupporter()}
-      disable={active ? 'active' : 'inactive'}
+      disable={active ? i18n.t('label.active') : i18n.t('label.inactive')}
     >
       {i18n.t('label.support')}
       <span className="support-button-caption">{caption}</span>

@@ -47,7 +47,7 @@ const PaymentSelector = ({
   return (
     <div>
       {options.map(option => (
-        <div>
+        <div key={option.gateway}>
           <PaymentOption key={option.gateway} {...option} />
           <hr />
         </div>
@@ -57,11 +57,11 @@ const PaymentSelector = ({
 };
 
 PaymentSelector.propTypes = {
+  accounts: PropTypes.object,
   paymentMethods: PropTypes.object.isRequired,
   amount: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
   context: PropTypes.object.isRequired,
-  accounts: PropTypes.object,
   onSuccess: PropTypes.func.isRequired,
   onFailure: PropTypes.func.isRequired,
   onError: PropTypes.func.isRequired

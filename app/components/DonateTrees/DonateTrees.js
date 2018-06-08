@@ -243,9 +243,6 @@ export default class DonateTrees extends Component {
         </CardLayout>
       </div>
     );
-    if (null !== plantProject && undefined !== plantProject) {
-      console.log('************ paymentSetup ', plantProject.paymentSetup);
-    }
   }
 }
 

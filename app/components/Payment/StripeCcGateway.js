@@ -9,7 +9,7 @@ class StripeCcGateway extends React.Component {
 
   render() {
     const { amount, currency, account, target, context } = this.props;
-    console.log(amount, currency, account, target, context);
+    console.log('StripeCcGateway ', amount, currency, account, target, context);
     return (
       <div>
         <StripeCheckout
@@ -21,7 +21,7 @@ class StripeCcGateway extends React.Component {
           ComponentClass="div"
           panelLabel="Donate" // prepended to the amount in the bottom pay button
           amount={amount * 100} // cents
-          currency={currency}
+          currency={'eur'}
           reconfigureOnUpdate={true}
           allowRememberMe={false}
           email={context.email}
@@ -45,7 +45,7 @@ class StripeCcGateway extends React.Component {
 
 StripeCcGateway.propTypes = {
   amount: PropTypes.number.isRequired,
-  context: PropTypes.string.isRequired,
+  context: PropTypes.object.isRequired,
   currency: PropTypes.string.isRequired,
   account: PropTypes.object.isRequired,
   target: PropTypes.string

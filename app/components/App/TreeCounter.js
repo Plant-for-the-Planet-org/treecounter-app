@@ -24,6 +24,7 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import FAQContainer from '../../containers/FAQ';
 
 import Footer from '../Footer';
+import StripeSepaTest from '../Payment/StripeSepaTest';
 
 // Components which use SVG
 import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
@@ -189,6 +190,7 @@ class TreeCounter extends Component {
               />
             </div>
             <Footer />
+            <StripeSepaTest />
           </div>
         </BrowserRouter>
         <NotificationContainer />

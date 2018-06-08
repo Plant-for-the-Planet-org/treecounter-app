@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+// import { Link } from 'react-router-dom';
 import { ProfilePic, EditGreen, QuestionMarkGreen } from '../../assets';
 import TextSpan from '../Common/Text/TextSpan';
 import TransparentButton from '../Common/Button/TransparentButton';
 import i18n from '../../locales/i18n.js';
+// import { getLocalRoute } from '../../actions/apiRouting';
+import { history } from '../../components/Common/BrowserRouter';
 
 const UserDetails = ({ userProfile, onLogout }) => {
   return (
@@ -24,7 +26,12 @@ const UserDetails = ({ userProfile, onLogout }) => {
       </div>
       <hr className="divider__light" />
       <div className="popover__list-item">
-        <TransparentButton>
+        <TransparentButton
+          onClick={() => {
+            console.log('edit profile');
+            history.push('edit_profile');
+          }}
+        >
           <img src={EditGreen} />
           <span>{i18n.t('label.edit_profile')}</span>
         </TransparentButton>

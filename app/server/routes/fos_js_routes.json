@@ -191,21 +191,6 @@
       "methods": ["GET"],
       "schemes": []
     },
-    "data_tpos_get": {
-      "tokens": [
-        ["text", "/loadTpos"],
-        ["variable", "/", "[^/]++", "_locale"],
-        ["variable", "/", "[^/]++", "version"],
-        ["text", "/api"]
-      ],
-      "defaults": {
-        "_locale": null
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": ["GET"],
-      "schemes": []
-    },
     "followSubscribe_post": {
       "tokens": [
         ["text", "/followSubscribe"],
@@ -521,9 +506,54 @@
       "methods": ["POST"],
       "schemes": []
     },
+    "public_currencies_get": {
+      "tokens": [
+        ["text", "/currencies"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
     "public_menu_get": {
       "tokens": [
         ["text", "/menu"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "public_exploreData_get": {
+      "tokens": [
+        ["text", "/exploreData"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "public_exploreQuery_get": {
+      "tokens": [
+        ["text", "/exploreQuery"],
         ["variable", "/", "[^/]++", "_locale"],
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
@@ -591,6 +621,21 @@
       ],
       "defaults": {
         "treecounter": null,
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "data_tpos_get": {
+      "tokens": [
+        ["text", "/loadTpos"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": {
         "_locale": null
       },
       "requirements": [],
@@ -711,6 +756,51 @@
     "profile_put": {
       "tokens": [
         ["text", "/profileUpdate"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["PUT"],
+      "schemes": []
+    },
+    "profileImage_put": {
+      "tokens": [
+        ["text", "/profileImageUpdate"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["PUT"],
+      "schemes": []
+    },
+    "profilePassword_put": {
+      "tokens": [
+        ["text", "/profilePasswordUpdate"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["PUT"],
+      "schemes": []
+    },
+    "profileAboutMe_put": {
+      "tokens": [
+        ["text", "/profileAboutMe"],
         ["variable", "/", "[^/]++", "_locale"],
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
@@ -845,8 +935,38 @@
       "methods": ["GET"],
       "schemes": []
     },
+    "app_explore": {
+      "tokens": [
+        ["text", "/explore"],
+        ["variable", "/", "(\\w{2})?", "_locale"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
     "app_faq": {
       "tokens": [["text", "/faq"], ["variable", "/", "(\\w{2})?", "_locale"]],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "app_giftTrees": {
+      "tokens": [
+        ["text", "/giftTrees"],
+        ["variable", "/", "(\\w{2})?", "_locale"]
+      ],
       "defaults": {
         "_locale": null
       },
@@ -1054,6 +1174,21 @@
     "app_signup": {
       "tokens": [
         ["text", "/signup"],
+        ["variable", "/", "(\\w{2})?", "_locale"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "app_editProfile": {
+      "tokens": [
+        ["text", "/editProfile"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
       "defaults": {

@@ -15,7 +15,6 @@ export default {
   firstname: 'First name',
   lastname: 'Last name',
   company_or_orga_name: 'Name',
-  individual: 'individual',
   tpo: 'tpo',
   company: 'company',
   education: 'education',

@@ -2,10 +2,9 @@ import { normalize } from 'normalizr';
 import { NotificationManager } from 'react-notifications';
 import { putAuthenticatedRequest } from '../utils/api';
 
-import { history } from '../components/Common/BrowserRouter';
+import { updateRoute } from '../helpers/routerHelper';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { treecounterSchema } from '../schemas/index';
-import { getLocalRoute } from './apiRouting';
 import { debug } from '../debug/index';
 
 export function editTree(plantContribution, plantId) {
@@ -18,7 +17,7 @@ export function editTree(plantContribution, plantId) {
         const { data: treecounter, statusText, status } = res;
         NotificationManager.success(statusText, status, 5000);
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
-        history.push(getLocalRoute('app_userHome'));
+        updateRoute('app_myTrees', dispatch);
       })
       .catch(error => {
         debug(error.response);

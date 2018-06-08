@@ -6,5 +6,6 @@ export default {
   target: 'Target',
   survival_rate: 'Survival Rate',
   cost_per_tree: 'Cost per Tree',
-  by: 'by'
+  by: 'by',
+  in: 'in'
 };

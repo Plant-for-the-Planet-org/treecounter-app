@@ -37,9 +37,10 @@ export default {
   singleTree: 'Single Tree',
   severalTrees: 'Several Trees',
   registerFurther: 'Register further trees',
-  DONATETREES: 'Donate trees',
   noContributions: 'No Contributions',
   plantedTrees: 'Planted Trees',
   by: 'by ',
-  is_certified: 'isCertified'
+  is_certified: 'isCertified',
+  individual_id: 'individual',
+  individual_name: 'Individual'
 };

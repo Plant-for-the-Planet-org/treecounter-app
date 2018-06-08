@@ -2,10 +2,12 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { NotificationContainer } from 'react-notifications';
 import PropTypes from 'prop-types';
 
 // Components imports
+import GiftTreesContainer from '../../containers/GiftTrees';
 import TargetContainer from '../../containers/TargetContainer';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
 import HeaderContainer from '../../containers/HeaderContainer';
@@ -28,12 +30,15 @@ import PublicTreecounterContainer from '../../containers/PublicTreeCounterContai
 import UserHomeContainer from '../../containers/UserHome';
 import Trillion from '../TreecounterGraphics/Trillion';
 
-import { loadLoginData } from '../../actions/loadLoginData';
+import { loadTpos } from '../../actions/loadTposAction';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { getLocalRoute } from '../../actions/apiRouting';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
+import DonationTreesContainer from '../../containers/DonateTrees/index';
 
+import EditUserProfileContainer from '../../containers/EditUserProfile/index';
 // Class implementation
 class TreeCounter extends Component {
   constructor(props) {
@@ -54,11 +59,15 @@ class TreeCounter extends Component {
     } else {
       let token = await getAccessToken();
       if (token) {
-        this.props.dispatch(loadLoginData());
+        this.props.loadUserProfile();
       } else {
         this.setState({ loading: false, isLoggedIn: false });
       }
     }
+  }
+
+  componentDidMount() {
+    this.props.loadTpos();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -159,10 +168,20 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_myTrees')}
                 component={UserContributionsContainer}
               />
+              <PrivateRoute
+                path="/app_dev.php/en/edit_profile"
+                component={EditUserProfileContainer}
+              />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
-              {/*<Route path={getLocalRoute("app_donateTrees")} component={DonateTrees}/>*/}
-
+              <Route
+                path={getLocalRoute('app_donateTrees')}
+                component={DonationTreesContainer}
+              />
+              <Route
+                path={getLocalRoute('app_giftTrees')}
+                component={GiftTreesContainer}
+              />
               {/* Routes which essentially show svg */}
               <Route
                 path={getLocalRoute('app_treecounter') + '/:treecounterId'}
@@ -182,9 +201,21 @@ const mapStateToProps = state => ({
   userProfile: currentUserProfileSelector(state)
 });
 
-export default connect(mapStateToProps)(TreeCounter);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      loadUserProfile,
+      loadTpos
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TreeCounter);
 
 TreeCounter.propTypes = {
   userProfile: PropTypes.object,
+  loadUserProfile: PropTypes.func,
+  loadTpos: PropTypes.func,
   dispatch: PropTypes.func
 };

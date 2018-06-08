@@ -10,6 +10,10 @@ export default {
   edit_profile: 'Edit Profile',
   help: 'Help',
   logout: 'Logout',
+  save_changes: 'Save Changes',
+  about_me: 'About me',
   no_notification: 'notifications_none',
-  menu: 'menu'
+  menu: 'menu',
+  change_password: 'Change password',
+  delete_profile: 'Delete Profile'
 };

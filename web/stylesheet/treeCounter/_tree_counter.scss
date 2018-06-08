@@ -1,21 +1,3 @@
-.header-logo {
-  width: 112px;
-  height: 112px;
-
-  img {
-    box-shadow: 0px 4px 12px 0 rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    border: solid 6px #ffffff;
-    border-radius: 100%;
-    height: 100px;
-    width: 100px;
-  }
-  .material-icons {
-    @extend img;
-    font-size: 112px;
-  }
-}
-
 .tree-counter-header {
   display: flex;
   flex-direction: row;
@@ -88,16 +70,17 @@
 .tree-counter-footer__container {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
   align-items: center;
 }
 .tree-counter-user-synopsis {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
   text-align: left;
   font-size: 15.5px;
   line-height: 1.52;
   color: $headerTextColor;
+  column-gap: 67px;
 }
 .tree-counter-user-single-synopsis {
   @extend .tree-counter-user-synopsis;

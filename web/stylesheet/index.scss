@@ -26,6 +26,7 @@
 @import "./common/_heading.scss";
 @import "./common/_accordian.scss";
 @import "./common/_tabs.scss";
+@import "./common/_user_profile_image.scss";
 
 // Import components SCSS
 @import "./_normalize.scss";
@@ -63,5 +64,11 @@
 @import "./search/_search_bar.scss";
 @import "./search/search_auto_suggest.scss";
 
-// ESRI Maps CSS
+//Import edit profile
+@import "./editProfile/_edit_user_profile.scss";
+
+//import donate trees
+@import "./donateTrees/_donate_trees.scss";
+
+/* ESRI Maps CSS*/
 @import url("https://js.arcgis.com/3.23/esri/css/esri.css");

@@ -3,7 +3,7 @@ import i18n from '../../locales/i18n';
 
 export function CheckboxTemplate(locals) {
   function onChange($event) {
-    locals.onChange($event.target.value);
+    locals.onChange($event.target.checked);
   }
   return (
     <div className="pftp-checkbox">
@@ -11,8 +11,8 @@ export function CheckboxTemplate(locals) {
         className="pftp-checkbox__input"
         type={'checkbox'}
         required="required"
-        value={locals.value}
         onChange={onChange}
+        checked={locals.value}
       />
       <label className={'pftp-text-span'}>{i18n.t(locals.label)}</label>
     </div>

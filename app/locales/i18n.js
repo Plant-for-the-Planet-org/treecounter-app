@@ -16,6 +16,8 @@ import donateTreeslabels from './en/donateTreeslabels';
 import emailSentlabels from './en/emailSentlabels';
 import faqlabels from './en/faqlabels';
 import forgotPasswordlabels from './en/forgotPasswordlabels';
+import giftTreeslabels from './en/giftTreeslabels';
+import paymentlabels from './en/paymentlabels';
 
 i18next.init({
   interpolation: {
@@ -46,7 +48,9 @@ i18next.init({
           ...donateTreeslabels,
           ...emailSentlabels,
           ...faqlabels,
-          ...forgotPasswordlabels
+          ...forgotPasswordlabels,
+          ...giftTreeslabels,
+          ...paymentlabels
         }
       }
     }

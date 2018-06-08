@@ -37,5 +37,6 @@ export default connect(null, mapDispatchToProps)(DonateTreesCardFooter);
 
 DonateTreesCardFooter.propTypes = {
   selectPlantProjectIdAction: PropTypes.func,
-  value: PropTypes.object
+  value: PropTypes.object,
+  selectPlantProjectAction: PropTypes.func
 };

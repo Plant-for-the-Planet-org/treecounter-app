@@ -15,7 +15,7 @@ class ResetPassswordContainer extends React.Component {
   onPress = () => {
     let value = this.refs.resetPasswordContainer.refs.resetPasswordForm.getValue();
     if (value) {
-      let forgotPassword = { forgot_password: value };
+      let forgotPassword = value;
       this.onClick(forgotPassword);
     }
   };

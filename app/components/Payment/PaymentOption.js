@@ -15,6 +15,7 @@ const PaymentOption = ({
   gateway,
   account,
   accountName,
+  context,
   target,
   onSuccess,
   onFailure,
@@ -29,7 +30,8 @@ const PaymentOption = ({
     gateway,
     account,
     accountName,
-    target
+    target,
+    context
   );
 
   // sepa_cc => SepaCcGateway
@@ -41,6 +43,7 @@ const PaymentOption = ({
     amount,
     currency,
     account,
+    context,
     gateway,
     target,
     onSuccess,
@@ -87,6 +90,7 @@ PaymentOption.propTypes = {
   isSelected: PropTypes.bool,
   onSelect: PropTypes.func,
   amount: PropTypes.number.isRequired,
+  context: PropTypes.object.isRequired,
   currency: PropTypes.string.isRequired,
   gateway: PropTypes.string.isRequired,
   accountName: PropTypes.string.isRequired,

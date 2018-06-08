@@ -77,7 +77,7 @@ class PaypalGateway extends React.Component {
       color: 'blue', // gold | blue | silver | black
       shape: 'pill', // pill | rect
       label: 'pay', // checkout | credit | pay | buynow | paypal | installment
-      size: 'medium' // small | medium | large | responsive
+      size: 'large' // small | medium | large | responsive
     };
     const onAuthorize = (data, actions) =>
       actions.payment

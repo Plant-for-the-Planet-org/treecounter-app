@@ -21,6 +21,7 @@ import {
 } from '../../server/parsedSchemas/donateTrees';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import PaymentSelector from '../Payment/PaymentSelector';
+import { getImageUrl } from '../../actions/apiRouting';
 
 let TCombForm = t.form.Form;
 
@@ -214,6 +215,18 @@ export default class DonateTrees extends Component {
                   accounts={plantProject.paymentSetup.accounts}
                   amount={this.state.selectedAmount}
                   currency={this.state.selectedCurrency}
+                  context={{
+                    tpoName: this.props.selectedTpo.name,
+                    treeCount: this.state.selectedTreeCount,
+                    image: getImageUrl(
+                      'profile',
+                      'avatar',
+                      this.props.selectedTpo.image
+                    ),
+                    email: this.props.currentUserProfile
+                      ? this.props.currentUserProfile.email
+                      : 'jorgo@miridis.com'
+                  }}
                   onSuccess={data =>
                     console.log('/////////////////// payment success ', data)
                   }

@@ -8,6 +8,7 @@ const PaymentSelector = ({
   accounts,
   currency,
   amount,
+  context,
   onSuccess,
   onFailure,
   onError
@@ -16,6 +17,7 @@ const PaymentSelector = ({
   console.log('accounts', accounts);
   console.log('currency', currency);
   console.log('amount', amount);
+  console.log('email', context);
 
   console.log(
     'PaymentSelector ==============================================================='
@@ -31,6 +33,7 @@ const PaymentSelector = ({
       accountName: accountName,
       currency,
       amount,
+      context,
       target: target,
       account: accounts[accountName],
       selectable: true,
@@ -57,6 +60,7 @@ PaymentSelector.propTypes = {
   paymentMethods: PropTypes.object.isRequired,
   amount: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
+  context: PropTypes.object.isRequired,
   accounts: PropTypes.object,
   onSuccess: PropTypes.func.isRequired,
   onFailure: PropTypes.func.isRequired,

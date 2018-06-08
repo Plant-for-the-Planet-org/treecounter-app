@@ -5,7 +5,6 @@ import { userProfileSchema } from '../schemas/index';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
 
-// TODO: unsused. consider eliminating
 export function loadUserProfile() {
   const request = getAuthenticatedRequest('data_userProfile_get');
   return dispatch => {

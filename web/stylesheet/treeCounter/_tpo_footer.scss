@@ -78,9 +78,12 @@
 
     .project-specs__container {
       @extend .project-teaser__container;
+      display: flex;
+      flex-direction: column;
       .project-specs__item {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        @extend .column;
+        display: flex;
+        justify-content: space-between;
         margin-bottom: 3px;
 
         .align-center {
@@ -98,32 +101,12 @@
           white-space: nowrap;
           text-overflow: ellipsis;
         }
-        .tax-span {
-          background-color: $hoverColor;
-          color: #fff;
-          border-radius: 12.5px;
-          line-height: 1.2;
-          background-color: #b4b4b4;
-          height: 10px;
-          width: 23px;
-          display: inline-block;
-          font-size: 8px;
-          margin-left: 4px;
-          text-align: center;
-          vertical-align: middle;
-        }
-        .tree-cost-subitem {
-          @extend .right-aligned;
-        }
       }
       .project-specs__taxdeductible {
         text-align: center;
-        width: 170px;
-        height: 25px;
-        border-radius: 12.5px;
+        width: 100%;
         background-color: #fff;
         color: #b4b4b4;
-        border: solid 0.6px #b4b4b4;
       }
     }
 

@@ -2,6 +2,10 @@
   position: relative;
   width: 416px;
 
+  .treecount-selector-wrapper {
+    height: 250px;
+  }
+
   .pftp-tabs__type {
     width: 300px;
     margin-bottom: 15px;
@@ -41,6 +45,10 @@
     margin: 25px;
     margin-top: 30px;
 
+    .slick-list {
+      height: auto;
+    }
+
     .project-teaser__container {
       .teaser-image__container {
         .teaser__projectImage {
@@ -50,21 +58,8 @@
     }
 
     .project-specs__container {
-      display: flex;
-      flex-direction: column;
-
       .column {
         font-weight: normal;
-      }
-      .project-specs__item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 3px;
-        img {
-          height: 20px;
-          width: 20px;
-          display: inline-block;
-        }
       }
     }
 
@@ -135,6 +130,34 @@
 
     .fieldset {
       width: 100%;
+    }
+  }
+
+  .treecount-container {
+    margin-top: 30px;
+    height: 200px;
+    .treecount-price-conversion {
+      display: flex;
+      justify-content: space-between;
+      padding: 25px 40px 0 40px;
+      box-sizing: border-box;
+      width: 100%;
+
+      label {
+        display: flex;
+        align-items: center;
+        input {
+          margin: 0 10px;
+        }
+      }
+
+      input[type="text"] {
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        width: 40px;
+        border-bottom: 1px solid mix(white, #424242, 70%);
+      }
     }
   }
 }

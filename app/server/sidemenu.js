@@ -87,7 +87,7 @@ export default {
           caption: 'Tree gift',
           help: 'menu_item.tree_gift.help',
           icon: 'gift_outline',
-          uri: '#'
+          uri: '/app_dev.php/en/giftTrees'
         }
       ]
     }
@@ -180,7 +180,7 @@ export default {
           caption: 'Tree gift',
           help: 'menu_item.tree_gift.help',
           icon: 'gift_outline',
-          uri: '#'
+          uri: '/app_dev.php/en/giftTrees'
         }
       ]
     }

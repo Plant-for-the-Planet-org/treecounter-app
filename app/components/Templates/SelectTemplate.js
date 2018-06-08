@@ -16,6 +16,7 @@ export function SelectTemplate(locals) {
         {locals.options.map(option => (
           <option
             key={option.value}
+            selected={locals.value === option.value}
             className="pftp-selectfield__option"
             value={option.value}
           >

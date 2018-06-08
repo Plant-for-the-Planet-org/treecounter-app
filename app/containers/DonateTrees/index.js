@@ -9,7 +9,7 @@ import {
   currentUserProfileSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import DonateTrees from '../../components/DonateTrees/DonateTress';
+import DonateTrees from '../../components/DonateTrees/DonateTrees';
 
 class DonationTreesContainer extends Component {
   componentDidMount() {

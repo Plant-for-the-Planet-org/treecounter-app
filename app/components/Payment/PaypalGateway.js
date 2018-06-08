@@ -19,7 +19,7 @@ class PaypalGateway extends React.Component {
     const { isScriptLoaded, isScriptLoadSucceed } = this.props;
 
     if (isScriptLoaded && isScriptLoadSucceed) {
-      this.setState({ showButton: true });
+      //this.setState({ showButton: true });
     }
   }
 
@@ -44,11 +44,19 @@ class PaypalGateway extends React.Component {
       onCancel
     } = this.props;
 
+    console.log(
+      '%%%%%%%%%%%% PaypalGateway ',
+      'amount: ' + amount,
+      'currency: ' + currency,
+      account,
+      onSuccess,
+      onError,
+      onCancel
+    );
     const { showButton } = this.state;
 
     const CLIENT = {
-      sandbox: account.authorization.client_id,
-      production: account.authorization.client_id
+      sandbox: account.authorization.client_id
     };
 
     const payment = () =>
@@ -57,13 +65,20 @@ class PaypalGateway extends React.Component {
         transactions: [
           {
             amount: {
-              total: amount,
+              total: Math.round(amount * 100) / 100,
               currency
             }
           }
         ]
       });
 
+    // see https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4/customize-button/
+    const buttonStyle = {
+      color: 'blue', // gold | blue | silver | black
+      shape: 'pill', // pill | rect
+      label: 'pay', // checkout | credit | pay | buynow | paypal | installment
+      size: 'medium' // small | medium | large | responsive
+    };
     const onAuthorize = (data, actions) =>
       actions.payment
         .execute()
@@ -77,7 +92,6 @@ class PaypalGateway extends React.Component {
             returnUrl: data.returnUrl
           };
 
-          console.log('----------- payment success:', payment);
           onSuccess(payment);
         })
         .catch(response => {
@@ -90,6 +104,7 @@ class PaypalGateway extends React.Component {
         {showButton && (
           <paypal.Button.react
             env="sandbox"
+            style={buttonStyle}
             client={CLIENT}
             commit={false}
             payment={payment}

@@ -20,6 +20,7 @@ import {
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
+import PaymentSelector from '../Payment/PaymentSelector';
 
 let TCombForm = t.form.Form;
 
@@ -52,26 +53,29 @@ export default class DonateTrees extends Component {
     this.state = {
       pageIndex: 0,
       modeReceipt: modeReceipt,
-      selectedCurrency: null,
+      selectedCurrency: '',
       selectedTreeCount: 0,
+      selectedAmount: 0,
       form: {},
       expanded: false
     };
 
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
-    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
-    this.handleTreeCountChange = this.handleTreeCountChange.bind(this);
+    this.handleTreeCountCurrencyChange = this.handleTreeCountCurrencyChange.bind(
+      this
+    );
     // this.checkValidation = this.checkValidation[0].bind(this);
   }
 
-  handleCurrencyChange(selectedCurrency) {
-    console.log('handleCurrencyChange', selectedCurrency);
-    this.setState({ selectedCurrency });
-  }
+  handleTreeCountCurrencyChange(treeCountCurrencyData) {
+    console.log('handleTreeCountCurrencyChange', treeCountCurrencyData);
+    this.setState({
+      selectedCurrency: treeCountCurrencyData.currency,
+      selectedTreeCount: treeCountCurrencyData.treeCount,
+      selectedAmount: treeCountCurrencyData.amount
+    });
 
-  handleTreeCountChange(selectedTreeCount) {
-    console.log('========= handleTreecountChange', selectedTreeCount);
-    this.setState({ selectedTreeCount });
+    // TODO: insert these 3 values into the corresponding form fields
   }
 
   indexChange(index) {
@@ -120,6 +124,7 @@ export default class DonateTrees extends Component {
           props.onClick();
         }
       }
+
       return <PrimaryButton onClick={validated}>Next</PrimaryButton>;
     };
     const settings = {
@@ -143,8 +148,8 @@ export default class DonateTrees extends Component {
     };
 
     const plantProject = this.props.selectedProject;
-
-    return null === plantProject ? null : (
+    console.log('************ plantProject ', plantProject);
+    return undefined === plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>Gift trees</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
@@ -159,18 +164,23 @@ export default class DonateTrees extends Component {
                   tpoName={this.props.selectedTpo.name}
                 />
               ) : null}
+
               {this.props.selectedTpo ? (
                 <TreeCountCurrencySelector
+                  currencies={currenciesJson}
+                  countryCurrencies={Object.keys(
+                    plantProject.paymentSetup.countries
+                  )}
+                  treeCountOptions={plantProject.paymentSetup.treeCountOptions}
+                  userCountry="DE"
+                  treeCost={plantProject.treeCost}
                   baseCurrency={plantProject.currency}
-                  onCurrencyChange={this.handleCurrencyChange}
-                  onTreeCountChange={this.handleTreeCountChange}
                   selectedCurrency={plantProject.currency}
                   selectedTreeCount={this.state.selectedTreeCount}
-                  treeCost={plantProject.treeCost}
-                  treeCountOptions={plantProject.paymentSetup.treeCountOptions}
-                  currencies={currenciesJson}
+                  onChange={this.handleTreeCountCurrencyChange}
                 />
               ) : null}
+
               <Tabs
                 data={DonateTrees.data.tabsReceipt}
                 onTabChange={this.handleModeReceiptChange}
@@ -195,11 +205,34 @@ export default class DonateTrees extends Component {
                   />
                 )}
               </Tabs>
+
+              {this.props.selectedProject ? (
+                <PaymentSelector
+                  paymentMethods={
+                    plantProject.paymentSetup.countries['DE/EUR'].paymentMethods
+                  }
+                  accounts={plantProject.paymentSetup.accounts}
+                  amount={this.state.selectedAmount}
+                  currency={this.state.selectedCurrency}
+                  onSuccess={data =>
+                    console.log('/////////////////// payment success ', data)
+                  }
+                  onFailure={data =>
+                    console.log('/////////////////// payment failure ', data)
+                  }
+                  onError={data =>
+                    console.log('/////////////////// payment error ', data)
+                  }
+                />
+              ) : null}
             </Slider>
           </div>
         </CardLayout>
       </div>
     );
+    if (null !== plantProject && undefined !== plantProject) {
+      console.log('************ paymentSetup ', plantProject.paymentSetup);
+    }
   }
 }
 

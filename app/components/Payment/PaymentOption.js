@@ -61,18 +61,11 @@ const PaymentOption = ({
 
   return (
     <div>
-      <label key={gateway}>
-        <input
-          type="radio"
-          value={gateway}
-          checked={isSelected}
-          onChange={evt => onSelect(evt)}
-        />
-        {gatewayComponent}
-      </label>
       <div>
-        Radio {gateway} {accountName}
+        currency: {currency}, amount: {amount}{' '}
       </div>
+      {gatewayComponent}
+      Radio {gateway} {accountName}
     </div>
   );
 };

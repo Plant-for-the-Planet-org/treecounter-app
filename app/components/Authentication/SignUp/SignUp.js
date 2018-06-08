@@ -68,7 +68,7 @@ export default class SignUp extends Component {
             onProfileClick={this.ProfileChange}
           />
         </div>
-        <div className={'singup-card-width'}>
+        <div className={'card-width'}>
           <CardLayout>
             <TCombForm
               ref={'signupForm'}

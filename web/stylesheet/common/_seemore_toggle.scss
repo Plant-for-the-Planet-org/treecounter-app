@@ -1,0 +1,26 @@
+.see-more-toggle__container {
+  margin-bottom: 20px;
+  .collapsed {
+    border-left: 2px solid $placeholderColor;
+    height: 40px;
+    text-align: left;
+    align-items: center;
+    display: flex;
+    padding-left: 10px;
+    span {
+      color: $placeholderColor;
+    }
+  }
+
+  .expanded {
+    border-left: 2px solid $colorPrimary;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding-left: 10px;
+    span {
+      color: $colorPrimary;
+    }
+  }
+}

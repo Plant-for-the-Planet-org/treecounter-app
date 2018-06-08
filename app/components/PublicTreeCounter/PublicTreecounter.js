@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
-// import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantProjectSelector'
+import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantProjectSelector';
 import UserFootprint from './UserFootprint';
 //import {getLocalRoute} from '../../actions/apiRouting'
 import { currentUserProfileSelector } from '../../selectors/index';
@@ -85,28 +85,26 @@ class PublicTreeCounter extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    setTimeout(() => {
-      const treecounter = nextProps.treecounter;
-      if (treecounter) {
-        let svgData = {
-          id: treecounter.id,
-          target: treecounter.countTarget,
-          planted: treecounter.countPlanted,
-          community: treecounter.countCommunity,
-          personal: treecounter.countPersonal,
-          targetComment: treecounter.targetComment,
-          targetYear: treecounter.targetYear
-        };
-        this.setState({ svgData });
-      }
-    }, 1);
+    const treecounter = nextProps.treecounter;
+    if (treecounter) {
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countTarget,
+        planted: treecounter.countPlanted,
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear
+      };
+      this.setState({ svgData });
+    }
   }
   render() {
     const { treecounter, currentUserProfile } = this.props;
     if (null === treecounter) {
       return (
-        <div className="sidenav-wrapper">
-          <LoadingIndicator />;
+        <div className="trillion-container sidenav-wrapper">
+          <LoadingIndicator />
         </div>
       );
     }
@@ -130,10 +128,14 @@ class PublicTreeCounter extends React.Component {
       isUserLoggedIn,
       showFollow
     };
-    // const tpoProps = {plantProjects: userProfile.plant_projects, defaultPlantProjectId: null}
+    const tpoProps = {
+      plantProjects: userProfile.plantProjects,
+      defaultPlantProjectId: null,
+      tpoName: caption
+    };
 
     return (
-      <div className="tree-counter-container">
+      <div className="app-container__content--center sidenav-wrapper">
         <div className="tree-counter-header">
           <TreecounterHeader
             {...headerProps}
@@ -156,19 +158,18 @@ class PublicTreeCounter extends React.Component {
             treecounterData={this.state.svgData}
           />
         </div>
-        {'tpo' === userProfile.type ? (
-          <LoadingIndicator />
-        ) : (
-          // <TpoDonationPlantProjectSelector
-          //   {...tpoProps}
-          //   onSelect={this.onPlantProjectSelected}
-          // />
-          <div className="tree-counter-user-footer">
+        <div className="tree-counter-footer__container">
+          {'tpo' === userProfile.type ? (
+            <TpoDonationPlantProjectSelector
+              {...tpoProps}
+              onSelect={this.onPlantProjectSelected}
+            />
+          ) : (
             <CardLayout>
               <UserFootprint userProfile={userProfile} />
             </CardLayout>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     );
   }

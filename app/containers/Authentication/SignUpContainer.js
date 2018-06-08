@@ -20,6 +20,8 @@ class SignUpContainer extends React.Component {
   onSignUpClicked = profileType => {
     // let result = this.refs.loginForm.validate();
     // if (result.isValid()) {
+
+    console.log(this.refs.signupContainer.refs.signupForm.validate());
     let value = this.refs.signupContainer.refs.signupForm.getValue();
     if (value) {
       this.onClick(profileType, value);

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
 import Lightbox from 'react-images';
+import { Link } from 'react-router-dom';
 
-import { getImageUrl } from '../../actions/apiRouting';
+import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import TextSpan from '../Common/Text/TextSpan';
 
 export default class ContributionCard extends React.Component {
@@ -121,6 +122,13 @@ export default class ContributionCard extends React.Component {
                     </TextSpan>
                   ))
               : null}
+            <Link
+              to={getLocalRoute('app_editTrees', {
+                contribution: contribution.id
+              })}
+            >
+              Update
+            </Link>
           </div>
         </div>
         <hr className="contribution-container__partition" />

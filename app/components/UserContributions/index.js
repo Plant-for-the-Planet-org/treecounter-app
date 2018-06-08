@@ -23,7 +23,7 @@ const UserContributions = ({ userContributions }) => {
   });
 
   return (
-    <div className="app-container__content--center">
+    <div className="app-container__content--center sidenav-wrapper">
       <TextHeading>My Trees</TextHeading>
       <CardLayout>
         {Object.keys(userContributions).length > 0 ? (

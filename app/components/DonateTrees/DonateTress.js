@@ -158,7 +158,7 @@ export default class DonateTrees extends Component {
 
     return null === plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
-        <TextHeading>Gift trees</TextHeading>
+        <TextHeading>Donate trees</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
           <div className="donate-tress__container">
             <ContentHeader caption={headings[this.state.pageIndex]} />

@@ -125,10 +125,22 @@ export default class GiftTrees extends Component {
       }
     },
     () => {
-      return true;
+      if (this.props.selectedProject) {
+        return true;
+      }
+      return false;
     },
     () => {
-      return true;
+      if (this.state.selectedTreeCount) {
+        this.setState({
+          form: {
+            ...this.state.form,
+            treeCount: this.state.selectedTreeCount
+          }
+        });
+        return true;
+      }
+      return false;
     },
     () => {
       console.log(this.refs.donateReceipt.validate());
@@ -137,6 +149,7 @@ export default class GiftTrees extends Component {
         this.setState({
           form: {
             ...this.state.form,
+            recieptType: this.state.modeReceipt,
             donationReceipt: value
           }
         });

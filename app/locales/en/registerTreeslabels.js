@@ -1,6 +1,5 @@
 export default {
   edit_trees: 'Edit trees',
-  title_plant: 'Plant Contribution',
   tree_count: 'Tree Count',
   tree_species: 'Tree Species',
   plant_date: 'Plant Date',

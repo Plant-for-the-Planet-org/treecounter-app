@@ -1,11 +1,3 @@
-import activateAccountlabels from './activateAccountlabels';
-import commonlabels from './commonlabels';
-import donateTreeslabels from './donateTreeslabels';
-import emailSentlabels from './emailSentlabels';
-import faqlabels from './faqlabels';
-import forgotPasswordlabels from './forgotPasswordlabels';
-import headerlabels from './headerlabels';
-import loginlabels from './loginlabels';
 import menulabels from './menulabels';
 import plantProjectlabels from './plantProjectlabels';
 import registerTreeslabels from './registerTreeslabels';
@@ -15,23 +7,35 @@ import targetlabels from './targetlabels';
 import tpoProjectlabels from './tpoProjectlabels';
 import treecounterGraphicslabels from './treecounterGraphicslabels';
 import userContributionslabels from './userContributionslabels';
+import headerlabels from './headerlabels';
+import loginlabels from './loginlabels';
+import activateAccountlabels from './activateAccountlabels';
+import commonlabels from './commonlabels';
+import donateTreeslabels from './donateTreeslabels';
+import emailSentlabels from './emailSentlabels';
+import faqlabels from './faqlabels';
+import forgotPasswordlabels from './forgotPasswordlabels';
+import giftTreeslabels from './giftTreeslabels';
+import paymentlabels from './paymentlabels';
 
 export default {
-  activateAccountlabels: activateAccountlabels,
-  commonlabels: commonlabels,
-  donateTreeslabels: donateTreeslabels,
-  emailSentlabels: emailSentlabels,
-  faqlabels: faqlabels,
-  forgotPasswordlabels: forgotPasswordlabels,
-  headerlabels: headerlabels,
-  loginlabels: loginlabels,
-  menulabels: menulabels,
-  plantProjectlabels: plantProjectlabels,
-  registerTreeslabels: registerTreeslabels,
-  signUplabels: signUplabels,
-  signUpSuccessfullabels: signUpSuccessfullabels,
-  targetlabels: targetlabels,
-  tpoProjectlabels: tpoProjectlabels,
-  treecounterGraphicslabels: treecounterGraphicslabels,
-  userContributionslabels: userContributionslabels
+  ...loginlabels,
+  ...headerlabels,
+  ...menulabels,
+  ...plantProjectlabels,
+  ...registerTreeslabels,
+  ...signUplabels,
+  ...signUpSuccessfullabels,
+  ...targetlabels,
+  ...tpoProjectlabels,
+  ...treecounterGraphicslabels,
+  ...userContributionslabels,
+  ...activateAccountlabels,
+  ...commonlabels,
+  ...donateTreeslabels,
+  ...emailSentlabels,
+  ...faqlabels,
+  ...forgotPasswordlabels,
+  ...giftTreeslabels,
+  ...paymentlabels
 };

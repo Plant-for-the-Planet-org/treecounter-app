@@ -714,7 +714,7 @@ export default {
           },
           title: {
             type: 'string',
-            title: 'label.title_plant',
+            title: 'label.title',
             attr: {
               maxlength: 50
             },

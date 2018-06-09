@@ -1313,6 +1313,46 @@ export default {
         submit_method: 'POST'
       }
     },
+    project: {
+      values: [],
+      schema: {
+        title: 'profile_image',
+        type: 'object',
+        properties: {
+          contributionMeasurements: {
+            type: 'array',
+            title: 'label.add_measurements',
+            items: {
+              title: 'prototype',
+              type: 'object',
+              properties: {
+                diameter: {
+                  type: 'integer',
+                  title: 'label.tree_diameter',
+                  propertyOrder: 1
+                },
+                height: {
+                  type: 'integer',
+                  title: 'label.tree_height',
+                  propertyOrder: 2
+                },
+                measurementDate: {
+                  type: 'string',
+                  title: 'label.measurement_date',
+                  widget: 'date',
+                  propertyOrder: 3
+                }
+              },
+              required: ['diameter', 'height', 'measurementDate']
+            },
+            propertyOrder: 8
+          }
+        }
+      },
+      required: ['imageFile'],
+      submit_url: '',
+      submit_method: 'POST'
+    },
     image: {
       values: [],
       schema: {

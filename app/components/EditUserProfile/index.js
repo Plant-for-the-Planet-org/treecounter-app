@@ -14,6 +14,24 @@ export default class EditUserProfile extends React.Component {
     super(props);
     console.log(props);
     console.log(parsedSchema);
+    this.state = {
+      contributionMeasurements: [
+        {
+          id: 301,
+          contribution: null,
+          diameter: 37,
+          height: 36,
+          measurementDate: '2018-06-06'
+        },
+        {
+          id: 302,
+          contribution: null,
+          diameter: 47,
+          height: 35,
+          measurementDate: '2018-06-06'
+        }
+      ]
+    };
   }
 
   getFormTemplate = (userType, profileType) => {
@@ -24,18 +42,14 @@ export default class EditUserProfile extends React.Component {
           console.log(locals);
           return (
             <div className="tComb-template__profile-form">
-              {userType === 'individual' ? (
-                <div>
-                  {locals.inputs.title}
-                  {locals.inputs.firstname}
-                  {locals.inputs.lastname}
-                  {locals.inputs.gender}
-                </div>
-              ) : (
-                <div>
-                  {locals.inputs.name} {locals.inputs.subType}
-                </div>
-              )}
+              <div>
+                {locals.inputs.title}
+                {locals.inputs.name}
+                {locals.inputs.firstname}
+                {locals.inputs.lastname}
+                {locals.inputs.gender}
+                {locals.inputs.subType}
+              </div>
 
               <div>
                 {locals.inputs.address}
@@ -123,6 +137,15 @@ export default class EditUserProfile extends React.Component {
             Save Changes
           </PrimaryButton>
         </CardLayout>
+        <div className="user-profile__project-form-group">
+          {/* <div className="form-group__heading">Project One</div> */}
+          <TCombForm
+            ref={'project'}
+            type={parsedSchema[type].project.transformedSchema}
+            options={this.getFormSchemaOption(type, 'project')}
+            value={this.state}
+          />
+        </div>
         {/* //about_me section */}
         <CardLayout className="user-profile__form-group">
           <div className="form-group__heading">About me</div>

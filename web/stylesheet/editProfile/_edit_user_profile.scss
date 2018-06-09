@@ -69,6 +69,26 @@
       column-gap: 211px;
     }
   }
+  .user-profile__project-form-group {
+    margin: 30px;
+    max-width: 718px;
+    box-sizing: border-box;
+    width: 100%;
+    .row {
+      @extend .user-profile__form-group;
+      margin: 0 0 30px 0;
+    }
+    .row::before {
+      @extend .form-group__heading;
+      content: "hi" counter(div);
+      font-size: 16px;
+      text-align: left;
+      color: #b7d37f;
+      align-self: flex-start;
+      padding-left: 6px;
+      margin-bottom: 20px;
+    }
+  }
 }
 
 @media only screen and (max-width: $breakpointTablet) {
@@ -77,6 +97,9 @@
       grid-template-columns: 1fr;
     }
     .form-group {
+      max-width: 650px;
+    }
+    .user-profile__project-form-group {
       max-width: 650px;
     }
   }

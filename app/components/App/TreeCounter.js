@@ -16,7 +16,7 @@ import EditUserContributionContainer from '../../containers/EditUserContribution
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
-import ResetPasswordContainer from '../Authentication/ResetPassword';
+import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
@@ -145,7 +145,7 @@ class TreeCounter extends Component {
                 component={ForgotPasswordContainer}
               />
               <PublicRoute
-                path={getLocalRoute('app_resetPassword')}
+                path={getLocalRoute('app_resetPassword') + '/:token'}
                 component={ResetPasswordContainer}
               />
               <PublicRoute
@@ -169,7 +169,7 @@ class TreeCounter extends Component {
                 component={UserContributionsContainer}
               />
               <PrivateRoute
-                path="/app_dev.php/en/edit_profile"
+                path={getLocalRoute('app_editProfile')}
                 component={EditUserProfileContainer}
               />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />

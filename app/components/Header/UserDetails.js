@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
 import { ProfilePic, EditGreen, QuestionMarkGreen } from '../../assets';
 import TextSpan from '../Common/Text/TextSpan';
 import TransparentButton from '../Common/Button/TransparentButton';
-// import { getLocalRoute } from '../../actions/apiRouting';
-import { history } from '../../components/Common/BrowserRouter';
+import { getImageUrl } from '../../actions/apiRouting';
 
-const UserDetails = ({ userProfile, onLogout }) => {
+const UserDetails = ({ updateRoute, userProfile, onLogout }) => {
   return (
     <div>
       <div className="popover__list-item">
         <div className="list-item__wrapper">
-          <img src={ProfilePic} />
+          <img
+            src={
+              userProfile.image
+                ? getImageUrl('profile', 'thumb', userProfile.image)
+                : ProfilePic
+            }
+          />
           <div>
             <TextSpan strong={true}>{'Hi ' + userProfile.name + '!'}</TextSpan>
             <TextSpan>{userProfile.email}</TextSpan>
@@ -21,15 +25,9 @@ const UserDetails = ({ userProfile, onLogout }) => {
       </div>
       <hr className="divider__light" />
       <div className="popover__list-item">
-        <TransparentButton
-          onClick={() => {
-            console.log('edit profile');
-            history.push('edit_profile');
-          }}
-        >
+        <TransparentButton onClick={() => updateRoute('app_editProfile')}>
           <img src={EditGreen} />
           <span>Edit Profile</span>
-          {/* <Link to="edit_profile" className="search-autusuggest__listitem" /> */}
         </TransparentButton>
         <TransparentButton>
           <img src={QuestionMarkGreen} />
@@ -46,7 +44,8 @@ const UserDetails = ({ userProfile, onLogout }) => {
 
 UserDetails.propTypes = {
   userProfile: PropTypes.object,
-  onLogout: PropTypes.func.isRequired
+  onLogout: PropTypes.func.isRequired,
+  updateRoute: PropTypes.func
 };
 
 export default UserDetails;

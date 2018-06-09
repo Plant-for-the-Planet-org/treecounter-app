@@ -5,7 +5,6 @@ import { debug } from '../debug/index';
 import { userLogout } from '../reducers/reducer';
 
 import { clearStorage } from '../stores/localStorage';
-import { getAccessToken } from '../utils/user';
 import { postRequest } from '../utils/api';
 import { updateJWT } from '../utils/user';
 
@@ -62,12 +61,12 @@ export function forgot_password(data) {
 }
 
 export function reset_password(data) {
-  getAccessToken().then(token => {
-    data.token = token;
+  return dispatch => {
     postRequest('auth_resetPassword_post', data)
       .then(res => {
         debug(res.status);
+        updateRoute('app_login', dispatch);
       })
       .catch(err => debug(err));
-  });
+  };
 }

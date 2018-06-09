@@ -17,6 +17,9 @@ class PlantProjectFull extends React.Component {
   }
 
   toggleExpanded() {
+    if (this.props.callExpanded) {
+      this.props.callExpanded(!this.state.expanded);
+    }
     this.setState({ expanded: !this.state.expanded });
   }
 
@@ -87,6 +90,7 @@ class PlantProjectFull extends React.Component {
 PlantProjectFull.propTypes = {
   plantProject: PropTypes.object.isRequired,
   expanded: PropTypes.bool.isRequired,
+  callExpanded: PropTypes.func,
   tpoName: PropTypes.string
 };
 

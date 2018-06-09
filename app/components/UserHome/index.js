@@ -6,6 +6,7 @@ import SvgContainer from '../Common/SvgContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import { profile } from '../../assets';
+import { getImageUrl } from '../../actions/apiRouting';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -37,7 +38,15 @@ export default class UserHome extends Component {
       <div className="app-container__content--center sidenav-wrapper">
         <div className="tree-counter-profile flex-column">
           <div className="header-logo">
-            {<img src={userProfile.logo ? userProfile.logo : profile} />}
+            {
+              <img
+                src={
+                  userProfile.image
+                    ? getImageUrl('profile', 'thumb', userProfile.image)
+                    : profile
+                }
+              />
+            }
           </div>
           <div className="tree-counter-name">{userProfile.name}</div>
           <div className="tree-counter-row">

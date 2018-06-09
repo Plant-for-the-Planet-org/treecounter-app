@@ -121,9 +121,12 @@ export const selectedTpoSelector = createSelector(
   getTpos,
   (selectedPlantProject, tpos) => {
     logSelectorUpdate('selectedTpoSelector');
-    return null === selectedPlantProject
-      ? null
-      : tpos[selectedPlantProject.tpoId];
+    if (selectedPlantProject) {
+      if (Object.keys(tpos).length) {
+        return tpos[selectedPlantProject.tpoId];
+      }
+    }
+    return null;
   }
 );
 

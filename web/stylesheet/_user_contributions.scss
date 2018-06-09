@@ -28,7 +28,12 @@
       white-space: pre;
       display: flex;
       align-items: flex-end;
+      flex-direction: column;
       font-size: 14px;
+
+      a {
+        margin-top: auto;
+      }
 
       .see-more-label-style {
         border-left: 1px solid #9c9b9b;

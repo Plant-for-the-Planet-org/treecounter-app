@@ -1,10 +1,10 @@
 export default {
   mapLayers: {
-    ttc_trees: 'Planted Trees',
+    'Tree Inventory': 'Planted Trees',
     existing_forest: 'Existing forest',
     restoration_opportunities: 'Restoration Opportunities'
   },
-  activeMapLayers: ['ttc_trees', 'restoration_opportunities'],
+  activeMapLayers: ['Tree Inventory'],
   categories: {
     country: 'Countries',
     tpo: 'Tree-Planting Organizations',

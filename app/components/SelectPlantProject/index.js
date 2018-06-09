@@ -84,6 +84,44 @@ export default class SelectPlantProject extends Component {
             </div>
           </div>
         </CardLayout>
+        <CardLayout>
+          <table className="projects-list">
+            <thead>
+              <tr>
+                <th>Project</th>
+                <th>Organisation</th>
+                <th>
+                  <span>Planted Trees</span>
+                </th>
+                <th>Cost Per Tree</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {Object.keys(plantProjects).length !== 0
+                ? Object.keys(plantProjects).map(key => (
+                    <tr key={'tr' + key}>
+                      <td className="align-left">{plantProjects[key].name}</td>
+                      <td className="align-left">
+                        {plantProjects[key].tpo_name}
+                      </td>
+                      <td className="align-right">
+                        {plantProjects[key].countPlanted}
+                      </td>
+                      <td className="align-right">
+                        {plantProjects[key].currency +
+                          ' ' +
+                          plantProjects[key].treeCost}
+                      </td>
+                      <td>
+                        <PrimaryButton>See more</PrimaryButton>
+                      </td>
+                    </tr>
+                  ))
+                : null}
+            </tbody>
+          </table>
+        </CardLayout>
       </div>
     );
   }

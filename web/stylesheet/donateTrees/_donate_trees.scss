@@ -197,3 +197,40 @@
     }
   }
 }
+
+.projects-list {
+  border-radius: 6px;
+  border-spacing: 0;
+  border: solid 2px #efefef;
+  padding: 10px;
+  color: #686060;
+  width: 665px;
+  margin: 0 -30px;
+
+  .pftp-button-primary {
+    font-size: 13px;
+    padding: 5px;
+    width: 70px;
+    height: 30px;
+    border-radius: 3px;
+  }
+
+  .align-left {
+    text-align: left;
+  }
+
+  .align-right {
+    text-align: right;
+  }
+
+  th {
+    font-weight: normal;
+    padding: 5px;
+    border-bottom: solid 2px #efefef;
+    width: 25%;
+  }
+
+  td {
+    padding: 5px;
+  }
+}

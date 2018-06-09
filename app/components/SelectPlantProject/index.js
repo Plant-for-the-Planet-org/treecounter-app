@@ -14,7 +14,8 @@ export default class SelectPlantProject extends Component {
     super(props);
 
     this.state = {
-      expanded: false
+      expanded: false,
+      pageIndex: 0
     };
   }
 
@@ -23,6 +24,18 @@ export default class SelectPlantProject extends Component {
       expanded: bool
     });
   };
+
+  onSelectClicked = () => {
+    this.props.selectProject(
+      Object.keys(this.props.plantProjects)[this.state.pageIndex]
+    );
+  };
+
+  plantProjectChanged(index) {
+    this.setState({
+      pageIndex: index
+    });
+  }
 
   render() {
     let { plantProjects } = this.props;
@@ -42,7 +55,8 @@ export default class SelectPlantProject extends Component {
           styleName="tpo-footer-nav-img__right"
           src={arrow_right_orange}
         />
-      )
+      ),
+      afterChange: index => this.plantProjectChanged(index)
     };
 
     return (
@@ -64,7 +78,9 @@ export default class SelectPlantProject extends Component {
                 : null}
             </Slider>
             <div>
-              <PrimaryButton>Select Project</PrimaryButton>
+              <PrimaryButton onClick={this.onSelectClicked}>
+                Select Project
+              </PrimaryButton>
             </div>
           </div>
         </CardLayout>
@@ -74,5 +90,6 @@ export default class SelectPlantProject extends Component {
 }
 
 SelectPlantProject.propTypes = {
-  plantProjects: PropTypes
+  plantProjects: PropTypes.object,
+  selectProject: PropTypes.func
 };

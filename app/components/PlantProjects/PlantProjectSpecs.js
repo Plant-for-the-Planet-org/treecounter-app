@@ -65,7 +65,7 @@ PlantProjectSpecs.propTypes = {
   countTarget: PropTypes.number,
   treeCost: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
-  taxDeduction: PropTypes.array.isRequired,
+  taxDeduction: PropTypes.array,
   survivalRate: PropTypes.number.isRequired
 };
 

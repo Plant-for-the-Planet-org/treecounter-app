@@ -31,6 +31,9 @@
   }
   .modal-container {
     margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 .Overlay {

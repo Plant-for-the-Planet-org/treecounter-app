@@ -7,6 +7,16 @@ import { updateUserProfile } from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 
 class EditUserProfileContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showPasswordDialog: false
+    };
+  }
+  deleteProfile = () => {
+    console.log('call Prfoile Deletion API here');
+  };
+
   onSave = (usertype, profileType) => {
     console.log(usertype, this.refs);
     console.log(
@@ -17,7 +27,15 @@ class EditUserProfileContainer extends React.Component {
       'image'
     ].getValue();
     if (value) {
-      this.props.updateUserProfile(value, profileType);
+      this.props
+        .updateUserProfile(value, profileType)
+        .then(data => {
+          console.log('promise resolved', data);
+          if (profileType == 'password') {
+            this.setState({ showPasswordDialog: true });
+          }
+        })
+        .catch(error => console.log(error));
       console.log(profileType);
     }
     if (imageValue) {
@@ -25,6 +43,11 @@ class EditUserProfileContainer extends React.Component {
       this.props.updateUserProfile(imageValue, 'image');
     }
   };
+
+  handleCloseModal = () => {
+    this.setState({ showPasswordDialog: false });
+  };
+
   render() {
     console.log('___render___Edit_userprofile_container');
     return (
@@ -32,6 +55,9 @@ class EditUserProfileContainer extends React.Component {
         ref={'EditUserProfileContainer'}
         currentUserProfile={this.props.currentUserProfile}
         onSave={this.onSave}
+        openPasswordUpdatedDialog={this.state.showPasswordDialog}
+        handlePaswordUpdatedClose={this.handleCloseModal}
+        deleteProfile={this.deleteProfile}
       />
     );
   }

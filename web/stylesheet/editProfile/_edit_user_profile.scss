@@ -18,7 +18,10 @@
     column-gap: 54px;
     align-self: normal;
   }
-
+  .delete-profile__button {
+    margin-bottom: 117px;
+    margin-top: 70px;
+  }
   .form-group {
     @extend .pftp-card-layout;
     display: flex;
@@ -80,7 +83,7 @@
     }
     .row::before {
       @extend .form-group__heading;
-      content: "hi" counter(div);
+      content: "Project" counter(div);
       font-size: 16px;
       text-align: left;
       color: #b7d37f;
@@ -102,5 +105,39 @@
     .user-profile__project-form-group {
       max-width: 650px;
     }
+  }
+}
+
+.modal-container {
+  img {
+    height: 48px;
+    width: 48px;
+  }
+
+  .pftp-button-primary {
+    width: fit-content;
+    margin: auto;
+    min-width: 266px;
+    margin-top: 59px;
+  }
+  .message {
+    @extend .pftp-text-basic;
+    font-size: 16px;
+    line-height: 1.44;
+    letter-spacing: -0.2px;
+    text-align: center;
+    color: $headerTextColor;
+    max-width: 310px;
+  }
+  .confirm-message {
+    @extend .message;
+    font-weight: bold;
+  }
+  .navigate-button {
+    width: fit-content;
+    font-size: 24px;
+    min-width: 266px;
+    border: none;
+    border-radius: 7px;
   }
 }

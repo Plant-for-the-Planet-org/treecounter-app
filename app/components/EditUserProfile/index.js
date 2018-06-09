@@ -3,10 +3,12 @@ import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import t from 'tcomb-form';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import SecondaryButton from '../Common/Button/SecondaryButton';
 import PropTypes from 'prop-types';
 import UserProfileImage from '../Common/UserProfileImage';
-import ActionButton from '../Common/ActionButton';
 import { parsedSchema } from '../../server/parsedSchemas/editProfile';
+import PaswordUpdatedDialog from './PaswordUpdateModal';
+import ConfirmProfileDeletion from './ConfirmProfileDeletionModal';
 
 let TCombForm = t.form.Form;
 export default class EditUserProfile extends React.Component {
@@ -15,6 +17,7 @@ export default class EditUserProfile extends React.Component {
     console.log(props);
     console.log(parsedSchema);
     this.state = {
+      showConfirmProfileDeletion: false,
       contributionMeasurements: [
         {
           id: 301,
@@ -33,6 +36,11 @@ export default class EditUserProfile extends React.Component {
       ]
     };
   }
+  toggleConfirmProfileDeletion = () => {
+    this.setState({
+      showConfirmProfileDeletion: !this.state.showConfirmProfileDeletion
+    });
+  };
 
   getFormTemplate = (userType, profileType) => {
     console.log(profileType);
@@ -111,6 +119,18 @@ export default class EditUserProfile extends React.Component {
     const { type, image } = this.props.currentUserProfile;
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
+        <ConfirmProfileDeletion
+          isOpen={this.state.showConfirmProfileDeletion}
+          onRequestClose={this.toggleConfirmProfileDeletion}
+          handleProfileDeletion={() => {
+            this.props.deleteProfile();
+            this.toggleConfirmProfileDeletion();
+          }}
+        />
+        <PaswordUpdatedDialog
+          isOpen={this.props.openPasswordUpdatedDialog}
+          onRequestClose={this.props.handlePaswordUpdatedClose}
+        />
         <TextHeading>Edit Profile</TextHeading>
         <CardLayout className="user-profile__form-group">
           <div className="profile-image__container">
@@ -178,8 +198,16 @@ export default class EditUserProfile extends React.Component {
             Change Passwords
           </PrimaryButton>
         </CardLayout>
-        {/* <CardLayout>Following</CardLayout> */}
-        <ActionButton caption="Delete Profile" />
+        <div className="delete-profile__button">
+          <SecondaryButton
+            onClick={() => {
+              this.toggleConfirmProfileDeletion();
+              // this.props.deleteProfile();
+            }}
+          >
+            Delete Profile
+          </SecondaryButton>
+        </div>
       </div>
     );
   }
@@ -187,5 +215,10 @@ export default class EditUserProfile extends React.Component {
 
 EditUserProfile.propTypes = {
   onSave: PropTypes.func.isRequired,
-  currentUserProfile: PropTypes.object
+  currentUserProfile: PropTypes.object,
+  openPasswordUpdatedDialog: PropTypes.bool,
+  handlePaswordUpdatedClose: PropTypes.func,
+  deleteProfile: PropTypes.func.isRequired
 };
+
+export { PaswordUpdatedDialog, ConfirmProfileDeletion };

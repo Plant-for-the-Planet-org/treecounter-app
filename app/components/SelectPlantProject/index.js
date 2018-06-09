@@ -6,10 +6,26 @@ import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
 import CardLayout from '../Common/Card/CardLayout';
 import ContentHeader from '../Common/ContentHeader';
-// import PlantProjectFull from '../PlantProjects/PlantProjectFull';
+import PlantProjectFull from '../PlantProjects/PlantProjectFull';
+import PrimaryButton from '../Common/Button/PrimaryButton';
 
 export default class SelectPlantProject extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      expanded: false
+    };
+  }
+
+  callExpanded = bool => {
+    this.setState({
+      expanded: bool
+    });
+  };
+
   render() {
+    let { plantProjects } = this.props;
     const settings = {
       dots: true,
 
@@ -17,13 +33,13 @@ export default class SelectPlantProject extends Component {
       adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation
-          styleName="donate-tree-nav-img__left"
+          styleName="tpo-footer-nav-img__left"
           src={arrow_left_orange}
         />
       ),
       nextArrow: (
         <CarouselNavigation
-          styleName="donate-tree-nav-img__right"
+          styleName="tpo-footer-nav-img__right"
           src={arrow_right_orange}
         />
       )
@@ -32,16 +48,24 @@ export default class SelectPlantProject extends Component {
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <CardLayout className="tpo-footer-card-layout">
-          <div className="donate-tress__container">
+          <div className="select-project__container">
             <ContentHeader caption={'Featured Projects'} />
             <Slider {...settings}>
-              {/* <PlantProjectFull
-                callExpanded={this.callExpanded}
-                expanded={false}
-                plantProject={this.props.plantProjects[0]}
-                tpoName={this.props.plantProjects[0].name}
-              /> */}
+              {Object.keys(plantProjects).length !== 0
+                ? Object.keys(plantProjects).map(key => (
+                    <PlantProjectFull
+                      key={key}
+                      callExpanded={this.callExpanded}
+                      expanded={false}
+                      plantProject={plantProjects[key]}
+                      tpoName={plantProjects[key].tpo_name}
+                    />
+                  ))
+                : null}
             </Slider>
+            <div>
+              <PrimaryButton>Select Project</PrimaryButton>
+            </div>
           </div>
         </CardLayout>
       </div>
@@ -50,5 +74,5 @@ export default class SelectPlantProject extends Component {
 }
 
 SelectPlantProject.propTypes = {
-  plantProjects: PropTypes.object
+  plantProjects: PropTypes
 };

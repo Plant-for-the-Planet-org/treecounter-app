@@ -70,9 +70,6 @@ class PlantProjectFull extends React.Component {
       mapData,
       projectImages
     };
-    console.log(teaserProps);
-    console.log(specsProps);
-    console.log(detailsProps);
     return (
       <div>
         <PlantProjectTeaser {...teaserProps} />

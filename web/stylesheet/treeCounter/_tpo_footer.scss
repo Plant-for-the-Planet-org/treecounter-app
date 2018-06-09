@@ -30,17 +30,16 @@
   }
   .tpo-footer-nav-img__left {
     @extend .tpo-footer-nav-img;
-    left: -63px;
+    left: -55px;
   }
   .tpo-footer-nav-img__right {
     @extend .tpo-footer-nav-img;
-    right: -70px;
+    right: -55px;
   }
 
   .slick-initialized {
-    margin-top: 50px;
-    margin-left: 43px;
-    margin-right: 51px;
+    margin: 35px;
+    margin-top: 30px;
 
     .slick-slide,
     .slick-slide * {
@@ -79,9 +78,24 @@
     .project-specs__container {
       @extend .project-teaser__container;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      .project-info {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 0;
+        margin-right: 15px;
+        flex-grow: 1;
+      }
+      .plants-info {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        margin-left: 15px;
+        flex-basis: 0;
+      }
       .project-specs__item {
         @extend .column;
+        font-weight: normal;
         display: flex;
         justify-content: space-between;
         margin-bottom: 3px;
@@ -93,6 +107,8 @@
             height: 20px;
             width: 20px;
             display: inline-block;
+            margin: 2px;
+            margin-right: 5px;
           }
         }
         .currency-symbol {

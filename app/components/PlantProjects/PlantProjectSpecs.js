@@ -23,29 +23,37 @@ const PlantProjectSpecs = ({
 }) => {
   return (
     <div className="project-specs__container">
-      <PlantProjectSpecsItem
-        icon={locationIcon}
-        value={location}
-        label="location"
-      />
-      <PlantProjectSpecsItem
-        icon={plantedTarget}
-        value={countPlanted}
-        label="Planted"
-      />
-      <PlantProjectSpecsItem icon={target} value={countTarget} label="Target" />
-      <PlantProjectSpecsItem
-        icon={tree_survival}
-        value={survivalRate}
-        label="Survival Rate"
-      />
-      <PlantProjectSpecsItem
-        icon={dollar}
-        value={`${currency} ${treeCost}`}
-        label="Cost per Tree"
-      />
-      <div className="project-specs__taxdeductible">
-        Tax Deductible in {taxDeduction.join(', ')}
+      <div className="project-info">
+        <PlantProjectSpecsItem
+          icon={locationIcon}
+          value={location}
+          label="location"
+        />
+        <PlantProjectSpecsItem
+          icon={plantedTarget}
+          value={countPlanted}
+          label="Planted"
+        />
+        <PlantProjectSpecsItem
+          icon={target}
+          value={countTarget}
+          label="Target"
+        />
+      </div>
+      <div className="plants-info">
+        <PlantProjectSpecsItem
+          icon={tree_survival}
+          value={survivalRate}
+          label="Survival Rate"
+        />
+        <PlantProjectSpecsItem
+          icon={dollar}
+          value={`${currency} ${treeCost}`}
+          label="Cost per Tree"
+        />
+        <div className="project-specs__taxdeductible">
+          {taxDeduction ? 'Tax Deductible in ' + taxDeduction.join(', ') : ''}
+        </div>
       </div>
     </div>
   );

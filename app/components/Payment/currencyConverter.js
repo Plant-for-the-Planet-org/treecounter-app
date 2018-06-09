@@ -128,7 +128,7 @@ class Main extends React.Component {
       outputCurrency: '?',
       rate: 0,
       value: '',
-      date: 'yyyy-mm-dd'
+      date: i18n.t('label.date_format')
     };
     this.updateConversion = this.updateConversion.bind(this);
     this.updateCurrency = this.updateCurrency.bind(this);

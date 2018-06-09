@@ -1,9 +1,7 @@
 export default {
   plant_personal: 'Planted by the personal',
   plant_community: 'Planted by community',
-  target: 'Target ',
   by: 'by ',
-  planted: 'Planted',
   faqs: 'FAQs',
   logged_in: 'Logged In',
   trillionTreeMessage1:

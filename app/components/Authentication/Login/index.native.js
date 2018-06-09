@@ -48,7 +48,7 @@ export default class Login extends Component {
           </TouchableHighlight>
           <View style={styles.bottomRow}>
             <Text style={styles.bottomText}>
-              {i18n.t('label.forgot_password')}
+              {i18n.t('label.forgot_ur_password')}
             </Text>
             <Text
               onPress={this.onForgotPasswordClicked}
@@ -65,7 +65,7 @@ export default class Login extends Component {
               onPress={this.onSignupClicked}
               style={styles.bottomTextHighlight}
             >
-              {i18n.t('label.signup')}
+              {i18n.t('label.signUp')}.
             </Text>
           </View>
         </View>

@@ -1,4 +1,3 @@
 export default {
-  support: 'Support',
-  tpo: 'tpo'
+  support: 'Support'
 };

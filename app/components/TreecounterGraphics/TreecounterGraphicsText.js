@@ -47,7 +47,7 @@ class TreecounterGraphicsText extends Component {
                 (this.props.trillion
                   ? ''
                   : targetYear
-                    ? i18n.t('label.by') + targetYear
+                    ? ' ' + i18n.t('label.by') + ' ' + targetYear
                     : '') +
                 ' '}
               <br />

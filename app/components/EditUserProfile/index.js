@@ -20,12 +20,12 @@ export default class EditUserProfile extends React.Component {
   getFormTemplate = (userType, profileType) => {
     console.log(profileType);
     switch (profileType) {
-      case i18n.t('label.profile'): {
+      case 'profile': {
         return locals => {
           console.log(locals);
           return (
             <div className="tComb-template__profile-form">
-              {userType === i18n.t('label.individual') ? (
+              {userType === 'individual' ? (
                 <div>
                   {locals.inputs.title}
                   {locals.inputs.firstname}
@@ -52,7 +52,7 @@ export default class EditUserProfile extends React.Component {
           );
         };
       }
-      case i18n.t('label.about_me'): {
+      case 'about_me': {
         return locals => {
           console.log(locals);
           return (
@@ -70,7 +70,7 @@ export default class EditUserProfile extends React.Component {
           );
         };
       }
-      case i18n.t('label.password'): {
+      case 'password': {
         return locals => {
           console.log(locals);
           return (

@@ -29,11 +29,11 @@ export default class DonateTrees extends Component {
     tabs: [
       {
         name: i18n.t('label.individual_name'),
-        id: i18n.t('label.individual_id')
+        id: 'individual'
       },
       {
         name: i18n.t('label.company_title'),
-        id: i18n.t('label.company')
+        id: 'company'
       }
     ]
   };

@@ -5,15 +5,14 @@ export default {
   see_less: '- See less',
   see_more: '+ See more',
   update: ' Update',
-  denoted: 'donated',
-  green: 'green',
-  blue: 'blue',
-  orange: 'orange',
   my_trees: 'My Trees',
-  register_further: 'Register further trees',
   donate_trees: 'Donate trees',
   no_contributions: 'No Contributions',
   singleTree: 'Single Tree',
   severalTrees: 'Several Trees',
-  donateTrees: 'Donated Trees'
+  donateTrees: 'Donated Trees',
+  synopsis1: 'Synopsis1',
+  synopsis2: 'Synopsis2',
+  url: 'URL',
+  linkText: 'Link'
 };

@@ -51,7 +51,7 @@ export default class ForgotPassword extends Component {
               onPress={this.onLoginClicked}
               style={styles.bottomTextHighlight}
             >
-              {i18n.t('label.again_login')}
+              {i18n.t('label.try_again_login')}
             </Text>
           </View>
         </View>

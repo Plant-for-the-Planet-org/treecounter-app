@@ -36,7 +36,7 @@ export default class ForgotPassword extends Component {
             <TextBlock>
               <InlineLink
                 uri={'app_login'}
-                caption={i18n.t('label.again_login')}
+                caption={i18n.t('label.try_again_login')}
               />
             </TextBlock>
           </CardLayout>

@@ -1,5 +1,4 @@
 export default {
-  faqs: 'FAQs',
   description1: 'Lorem ipsum dolor sit amet, ',
   description2: 'www.trilliontreecampaign.org',
   description3:

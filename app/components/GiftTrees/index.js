@@ -41,21 +41,21 @@ export default class GiftTrees extends Component {
     tabsReciept: [
       {
         name: i18n.t('label.individual_name'),
-        id: i18n.t('label.individual')
+        id: 'individual'
       },
       {
         name: i18n.t('label.company_title'),
-        id: i18n.t('label.company')
+        id: 'company'
       }
     ],
     tabsUser: [
       {
-        name: i18n.t('label.treecointer_user_name'),
-        id: i18n.t('label.treecointer_user')
+        name: i18n.t('label.treecounter_user_name'),
+        id: 'treecounter_user'
       },
       {
         name: i18n.t('label.other_name'),
-        id: i18n.t('label.other')
+        id: 'other'
       }
     ]
   };

@@ -12,10 +12,9 @@ import i18n from '../../locales/i18n.js';
 const UserContributions = ({ userContributions }) => {
   let mPins = userContributions.map(element => {
     let color = '';
-    if (element.contributionType === i18n.t('label.donated'))
-      color = i18n.t('label.green');
-    else if (element.treeCount > 1) color = i18n.t('label.blue');
-    else color = i18n.t('label.orange');
+    if (element.contributionType === 'donated') color = 'green';
+    else if (element.treeCount > 1) color = 'blue';
+    else color = 'orange';
     return {
       lat: element.geoLatitude,
       long: element.geoLongitude,
@@ -36,7 +35,7 @@ const UserContributions = ({ userContributions }) => {
             </div>
             <div className="contribution-buttons">
               <InlineLink
-                caption={i18n.t('label.register_further')}
+                caption={i18n.t('label.registerFurther')}
                 uri={'app_registerTrees'}
               />
               <InlineLink

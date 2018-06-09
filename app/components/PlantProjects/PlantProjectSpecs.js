@@ -47,7 +47,7 @@ const PlantProjectSpecs = ({
       <PlantProjectSpecsItem
         icon={dollar}
         value={`${currency} ${treeCost}`}
-        label={i18n.t('label.cost_per_tree')}
+        label={i18n.t('label.Cost')}
       />
       <div className="project-specs__taxdeductible">
         {i18n.t('label.tax_deductible')} {i18n.t('label.in')}{' '}

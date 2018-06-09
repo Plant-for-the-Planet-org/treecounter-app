@@ -224,7 +224,7 @@ class PaymentDonation extends Component {
                 <span>{i18n.t('label.target')}:</span>
                 <span>{this.state.selectedProject.countTarget}</span>
 
-                <span>{i18n.t('label.costPerTree')}:</span>
+                <span>{i18n.t('label.Cost')}:</span>
                 <span>{this.state.selectedProject.treeCost}</span>
                 {this.state.selectedProject.isCertified
                   ? i18n.t('label.certified')

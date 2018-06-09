@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import i18n from '../../locales/i18n.js';
 
 import PublicTreecounter from '../../components/PublicTreeCounter/PublicTreecounter';
 // import TPOComponent from '../TpoProjects/TPOComponent';
@@ -31,9 +30,7 @@ class PublicTreecounterContainer extends Component {
         console.log(treecounter);
         this.setState({
           treecounter,
-          isTpo:
-            treecounter.userProfile &&
-            treecounter.userProfile === i18n.t('label.tpo'),
+          isTpo: treecounter.userProfile && treecounter.userProfile === 'tpo',
           id: treecounter.id
         });
       })

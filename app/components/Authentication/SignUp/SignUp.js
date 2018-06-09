@@ -19,7 +19,7 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Profiletype: i18n.t('label.individual')
+      Profiletype: 'individual'
     };
     this.ProfileChange = this.ProfileChange.bind(this);
   }
@@ -34,38 +34,38 @@ export default class SignUp extends Component {
     let { Profiletype } = this.state;
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>{i18n.t('label.signup')}</TextHeading>
+        <TextHeading>{i18n.t('label.signUp')}</TextHeading>
         <div className="signup-types">
           <SignUpType
-            active={Profiletype === i18n.t('label.tpo')}
+            active={Profiletype === 'tpo'}
             imgSrc={SignupOrganization}
             salutation={i18n.t('label.i_am_a')}
             title={i18n.t('label.tpo_title')}
-            type={i18n.t('label.tpo')}
+            type="tpo"
             onProfileClick={this.ProfileChange}
           />
           <SignUpType
-            active={Profiletype === i18n.t('label.individual')}
+            active={Profiletype === 'individual'}
             imgSrc={SignupJustMe}
             salutation={i18n.t('label.i_am')}
             title={i18n.t('label.individual_title')}
-            type={i18n.t('label.individual')}
+            type="individual"
             onProfileClick={this.ProfileChange}
           />
           <SignUpType
-            active={Profiletype === i18n.t('label.company')}
+            active={Profiletype === 'company'}
             imgSrc={SignupOrganization}
             salutation={i18n.t('label.i_am_a')}
             title={i18n.t('label.company_title')}
-            type={i18n.t('label.company')}
+            type="company"
             onProfileClick={this.ProfileChange}
           />
           <SignUpType
-            active={Profiletype === i18n.t('label.education')}
+            active={Profiletype === 'education'}
             imgSrc={SignupOrganization}
             salutation={i18n.t('label.i_am_a')}
             title={i18n.t('label.education_title')}
-            type={i18n.t('label.education')}
+            type="education"
             onProfileClick={this.ProfileChange}
           />
         </div>
@@ -79,7 +79,7 @@ export default class SignUp extends Component {
             <PrimaryButton
               onClick={this.props.onSignUpClicked.bind(this, Profiletype)}
             >
-              {i18n.t('label.signup_button')}
+              {i18n.t('label.signUp')}
             </PrimaryButton>
           </CardLayout>
         </div>

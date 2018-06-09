@@ -71,12 +71,12 @@ export default class RegisterTrees extends Component {
   static data = {
     tabs: [
       {
-        name: i18n.t('label.individual_tree'),
-        id: i18n.t('label.single_tree')
+        name: i18n.t('label.individual'),
+        id: 'single-tree'
       },
       {
         name: i18n.t('label.many_trees'),
-        id: i18n.t('label.multiple_tree')
+        id: 'multiple-trees'
       }
     ]
   };

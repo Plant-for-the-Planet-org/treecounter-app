@@ -68,8 +68,8 @@ const schemaOptionsMultiple = {
 
 export default class EditUserContribution extends Component {
   static mode = {
-    singleTree: i18n.t('label.single_tree'),
-    multipleTrees: i18n.t('label.many_trees')
+    singleTree: 'single-tree',
+    multipleTrees: 'Many Trees'
   };
 
   constructor(props) {

@@ -1,7 +1,6 @@
 export default {
   menu: 'menu',
   signUp: 'Sign Up',
-  logIn: 'Log In',
   home: 'home',
   search: 'search',
   placeholder_value: 'Type a name',
@@ -13,12 +12,10 @@ export default {
   save_changes: 'Save Changes',
   about_me: 'About me',
   no_notification: 'notifications_none',
-  menu: 'menu',
   change_password: 'Change password',
   delete_profile: 'Delete Profile',
   un_subscribe: 'Unsubscribe',
   subscribe: 'Subscribe',
   profile: 'profile',
-  aboutMe: 'about_me',
-  pas: 'password'
+  gender: 'Gender'
 };

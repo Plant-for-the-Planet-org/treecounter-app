@@ -77,7 +77,7 @@ export default class SignupTypes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Profiletype: i18n.t('label.individual')
+      Profiletype: 'individual'
     };
     this.changeProfile = this.changeProfile.bind(this);
   }
@@ -93,9 +93,9 @@ export default class SignupTypes extends Component {
       Profiletype: type
     });
     this.props.changeProfile(type);
-    if (type === i18n.t('label.education')) {
+    if (type === 'education') {
       this.scrollView.scrollToEnd({ animated: true });
-    } else if (type === i18n.t('label.tpo')) {
+    } else if (type === 'tpo') {
       this.scrollView.scrollTo({ x: 0, y: 0, animated: true });
     }
   }
@@ -111,26 +111,26 @@ export default class SignupTypes extends Component {
           <View style={styles.innerContainer}>
             <SingupType
               iconUrl={SignupOrganization}
-              profileType={i18n.t('label.tpo')}
-              selected={this.state.Profiletype == i18n.t('label.tpo')}
+              profileType="tpo"
+              selected={this.state.Profiletype == 'tpo'}
               onClick={this.changeProfile}
             />
             <SingupType
-              profileType={i18n.t('label.individual')}
+              profileType="individual"
               iconUrl={SignupJustMe}
-              selected={this.state.Profiletype == i18n.t('label.individual')}
+              selected={this.state.Profiletype == 'individual'}
               onClick={this.changeProfile}
             />
             <SingupType
               iconUrl={SignupOrganization}
-              selected={this.state.Profiletype == i18n.t('label.company')}
-              profileType={i18n.t('label.company')}
+              selected={this.state.Profiletype == 'company'}
+              profileType="company"
               onClick={this.changeProfile}
             />
             <SingupType
               iconUrl={SignupOrganization}
-              selected={this.state.Profiletype == i18n.t('label.education')}
-              profileType={i18n.t('label.education')}
+              selected={this.state.Profiletype == 'education'}
+              profileType="education"
               onClick={this.changeProfile}
             />
           </View>

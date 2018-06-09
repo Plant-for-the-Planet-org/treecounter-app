@@ -25,7 +25,7 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Profiletype: i18n.t('label.individual')
+      Profiletype: 'individual'
     };
     this.changeProfile = this.changeProfile.bind(this);
   }
@@ -46,7 +46,7 @@ export default class SignUp extends Component {
       <ScrollView>
         <ImageBackground style={styles.container}>
           <View style={styles.loginHeader}>
-            <Text style={styles.titleText}>{i18n.t('label.signup')}</Text>
+            <Text style={styles.titleText}>{i18n.t('label.signUp')}.</Text>
             <View style={styles.titleTextUnderline} />
           </View>
           <SignupTypes changeProfile={this.changeProfile} />
@@ -60,9 +60,7 @@ export default class SignUp extends Component {
               onPress={this.props.onSignUpClicked.bind(this, Profiletype)}
               style={styles.button}
             >
-              <Text style={styles.buttonText}>
-                {i18n.t('label.signup_button')}
-              </Text>
+              <Text style={styles.buttonText}>{i18n.t('label.signUp')}</Text>
             </TouchableHighlight>
             <View style={styles.bottomRow}>
               <Text style={styles.bottomText}>

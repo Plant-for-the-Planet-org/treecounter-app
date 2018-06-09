@@ -29,7 +29,7 @@ const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
   ) : (
     <div className="header-icons">
       <RoundedButton onClick={updateRoute.bind(this, 'app_login')}>
-        {i18n.t('label.logIn')}
+        {i18n.t('label.login')}
       </RoundedButton>
       <RoundedButton onClick={updateRoute.bind(this, 'app_signup')}>
         {i18n.t('label.signUp')}

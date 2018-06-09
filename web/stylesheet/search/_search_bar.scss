@@ -1,14 +1,20 @@
 .search-bar {
   display: flex;
   align-items: center;
+  background-color: white;
+
+  .header-icons {
+    color: #cecece;
+    margin-right: 10px;
+  }
 
   .react-autosuggest__container {
     position: relative;
-    margin: 0 10px;
 
     .react-autosuggest__suggestions-container {
       position: absolute;
       margin-top: 1px;
+      width: calc(100% + 34px);
       left: 0px;
       right: 0px;
       background-color: white;

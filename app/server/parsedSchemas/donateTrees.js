@@ -2,18 +2,18 @@ import schemaLiform from '../formSchemas/donateTrees';
 import parseJsonToTcomb from '../parserLiformToTcomb';
 
 const {
-  transformedSchema: recieptIndividualFormSchema,
+  transformedSchema: receiptIndividualFormSchema,
   schemaOptions: individualSchemaOptions
 } = parseJsonToTcomb(schemaLiform.properties.receiptIndividual);
 
 const {
-  transformedSchema: recieptCompanyFormSchema,
+  transformedSchema: receiptCompanyFormSchema,
   schemaOptions: companySchemaOptions
 } = parseJsonToTcomb(schemaLiform.properties.receiptCompany);
 
 export {
   individualSchemaOptions,
-  recieptIndividualFormSchema,
-  recieptCompanyFormSchema,
+  receiptIndividualFormSchema,
+  receiptCompanyFormSchema,
   companySchemaOptions
 };

@@ -2,6 +2,10 @@
   position: relative;
   width: 416px;
 
+  .treecount-selector-wrapper {
+    height: 250px;
+  }
+
   .pftp-tabs__type {
     margin-bottom: 15px;
   }
@@ -39,6 +43,10 @@
   .slick-initialized {
     margin: 25px;
     margin-top: 30px;
+
+    .slick-list {
+      height: auto;
+    }
 
     .project-teaser__container {
       .teaser-image__container {
@@ -126,6 +134,7 @@
 
   .treecount-container {
     margin-top: 30px;
+    height: 200px;
     .treecount-price-conversion {
       display: flex;
       justify-content: space-between;

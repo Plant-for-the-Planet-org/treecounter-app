@@ -5,10 +5,13 @@ class Tabs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: props.data[0].id
+      activeTab: props.activeTab ? props.activeTab : props.data[0].id
     };
-
-    this.emitTabChange(props.data[0].id);
+    if (!props.activeTab) {
+      this.emitTabChange(props.data[0].id);
+    } else {
+      this.emitTabChange(props.activeTab);
+    }
     this.handleTabChange = this.handleTabChange.bind(this);
   }
 
@@ -56,6 +59,7 @@ class Tabs extends React.Component {
 Tabs.propTypes = {
   data: PropTypes.array.isRequired,
   children: PropTypes.node,
+  activeTab: PropTypes.string,
   onTabChange: PropTypes.func
 };
 

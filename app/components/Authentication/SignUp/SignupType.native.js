@@ -12,7 +12,6 @@ import {
 import { SignupOrganization, SignupJustMe } from '../../../assets';
 import * as join from '../../../constants/strings';
 import i18n from '../../../locales/i18n.js';
-let lng = 'en';
 
 class SingupType extends Component {
   constructor(props) {

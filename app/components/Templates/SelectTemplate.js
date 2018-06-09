@@ -12,11 +12,11 @@ export function SelectTemplate(locals) {
         className="pftp-selectfield__select"
         required="required"
         onChange={onChange}
+        value={locals.value}
       >
         {locals.options.map(option => (
           <option
             key={option.value}
-            selected={locals.value === option.value}
             className="pftp-selectfield__option"
             value={option.value}
           >

@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 
 import {
   selectedPlantProjectSelector,
-  selectedTpoSelector
+  selectedTpoSelector,
+  currentUserProfileSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import DonateTrees from '../../components/DonateTrees/DonateTress';
@@ -20,6 +21,7 @@ class DonationTreesContainer extends Component {
       <DonateTrees
         selectedProject={this.props.selectedProject}
         selectedTpo={this.props.selectedTpo}
+        currentUserProfile={this.props.currentUserProfile}
       />
     );
   }
@@ -27,7 +29,8 @@ class DonationTreesContainer extends Component {
 
 const mapStateToProps = state => ({
   selectedProject: selectedPlantProjectSelector(state),
-  selectedTpo: selectedTpoSelector(state)
+  selectedTpo: selectedTpoSelector(state),
+  currentUserProfile: currentUserProfileSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
@@ -41,5 +44,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 DonationTreesContainer.propTypes = {
   selectedProject: PropTypes.object,
   selectedTpo: PropTypes.object,
+  currentUserProfile: PropTypes.object,
   selectPlantProjectAction: PropTypes.func
 };

@@ -16,6 +16,8 @@ class TreeCountCurrencySelector extends React.Component {
       rates: props.currencies.currency_rates[props.baseCurrency].rates
     };
 
+    this.props.onCurrencyChange(props.selectedCurrency);
+
     this.calculateAmount = this.calculateAmount.bind(this);
     this.calculateTreeCount = this.calculateTreeCount.bind(this);
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this);

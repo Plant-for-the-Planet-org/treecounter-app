@@ -9,14 +9,15 @@ import CardLayout from '../Common/Card/CardLayout';
 import SearchAutosuggest from '../Header/SearchAutosuggest';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
-import { arrow_right_green, arrow_left_green } from '../../assets';
-import TreeCountCurrencySelector from './TreeCountCurrencySelector';
-import currenciesJson from './currencies';
+import { arrow_left_green } from '../../assets';
+import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
+import currenciesJson from '../Currency/currencies';
+import PrimaryButton from '../Common/Button/PrimaryButton';
 
 import {
   individualSchemaOptions,
-  recieptIndividualFormSchema,
-  recieptCompanyFormSchema,
+  receiptIndividualFormSchema,
+  receiptCompanyFormSchema,
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
 
@@ -30,15 +31,16 @@ import i18n from '../../locales/i18n';
 let TCombForm = t.form.Form;
 
 const headings = [
-  i18n.t('label.heading1'),
-  i18n.t('label.heading2'),
-  i18n.t('label.heading3'),
-  i18n.t('label.heading4')
+  i18n.t('label.heading_give'),
+  i18n.t('label.heading_project'),
+  i18n.t('label.heading_donate_details'),
+  i18n.t('label.heading_donor_details'),
+  i18n.t('label.heading_payment')
 ];
 
 export default class GiftTrees extends Component {
   static data = {
-    tabsReciept: [
+    tabsReceipt: [
       {
         name: i18n.t('label.individual_name'),
         id: 'individual'
@@ -51,11 +53,11 @@ export default class GiftTrees extends Component {
     tabsUser: [
       {
         name: i18n.t('label.treecounter_user_name'),
-        id: 'treecounter_user'
+        id: 'direct'
       },
       {
         name: i18n.t('label.other_name'),
-        id: 'other'
+        id: 'invitation'
       }
     ]
   };
@@ -63,18 +65,28 @@ export default class GiftTrees extends Component {
   constructor(props) {
     super(props);
 
+    let modeReceipt;
+    if (props.currentUserProfile) {
+      modeReceipt = props.currentUserProfile.type;
+    } else {
+      modeReceipt = '';
+    }
+
     this.state = {
       pageIndex: 0,
-      modeReciept: '',
+      modeReceipt: modeReceipt,
       modeUser: '',
       selectedCurrency: null,
-      selectedTreeCount: 0
+      selectedTreeCount: 0,
+      form: {},
+      expanded: false
     };
 
-    this.handleModeRecieptChange = this.handleModeRecieptChange.bind(this);
+    this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
     this.handleModeUserChange = this.handleModeUserChange.bind(this);
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.handleTreeCountChange = this.handleTreeCountChange.bind(this);
+    // this.checkValidation = this.checkValidation[0].bind(this);
   }
 
   handleCurrencyChange(selectedCurrency) {
@@ -93,27 +105,107 @@ export default class GiftTrees extends Component {
     });
   }
 
+  checkValidation = [
+    () => {
+      if (this.state.modeUser === 'direct') {
+        let returnValue;
+        returnValue = this.state.form.giftTreecounter ? true : false;
+        return returnValue;
+      } else {
+        let value = this.refs.giftInvitation.getValue();
+        if (value) {
+          this.setState({
+            form: {
+              ...this.state.form,
+              giftInvitation: value
+            }
+          });
+          return true;
+        }
+        return false;
+      }
+    },
+    () => {
+      if (this.props.selectedProject) {
+        return true;
+      }
+      return false;
+    },
+    () => {
+      if (this.state.selectedTreeCount) {
+        this.setState({
+          form: {
+            ...this.state.form,
+            treeCount: this.state.selectedTreeCount
+          }
+        });
+        return true;
+      }
+      return false;
+    },
+    () => {
+      console.log(this.refs.donateReceipt.validate());
+      let value = this.refs.donateReceipt.getValue();
+      if (value) {
+        this.setState({
+          form: {
+            ...this.state.form,
+            recieptType: this.state.modeReceipt,
+            donationReceipt: value
+          }
+        });
+        return true;
+      }
+      return false;
+    }
+  ];
+
   handleModeUserChange(tab) {
-    this.setState({ modeUser: tab });
+    this.setState({
+      modeUser: tab,
+      form: { ...this.state.form, giftMethod: tab }
+    });
   }
 
-  handleModeRecieptChange(tab) {
-    this.setState({ modeReciept: tab });
+  handleModeReceiptChange(tab) {
+    this.setState({ modeReceipt: tab });
   }
 
-  suggestionCLicked = (context, event) => {
-    console.log(event.suggestion.id);
+  suggestionClicked = (context, event) => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        giftTreecounter: event.suggestion.id
+      }
+    });
+  };
+
+  callExpanded = bool => {
+    this.setState({
+      expanded: bool
+    });
   };
 
   render() {
+    const NextArrow = function(props) {
+      function validated() {
+        if (props.checkValidation()) {
+          props.onClick();
+        }
+      }
+      return <PrimaryButton onClick={validated}>Next</PrimaryButton>;
+    };
     const settings = {
       dots: true,
       nextArrow: (
-        <CarouselNavigation
-          styleName="donate-tree-nav-img__right"
-          src={arrow_right_green}
+        <NextArrow
+          checkValidation={this.checkValidation[this.state.pageIndex].bind(
+            this
+          )}
         />
       ),
+      infinite: false,
+      adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation
           styleName="donate-tree-nav-img__left"
@@ -132,24 +224,27 @@ export default class GiftTrees extends Component {
           <div className="donate-tress__container">
             <ContentHeader caption={headings[this.state.pageIndex]} />
             <Slider {...settings}>
-              <Tabs
-                data={GiftTrees.data.tabsUser}
-                onTabChange={this.handleModeUserChange}
-              >
-                {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
-                  <SearchAutosuggest
-                    onSuggestionClicked={this.suggestionCLicked}
-                  />
-                ) : (
-                  <TCombForm
-                    ref="giftInvitation"
-                    type={giftInvitationFormSchema}
-                    options={giftInvitationSchemaOptions}
-                  />
-                )}
-              </Tabs>
+              <div className="treecount-selector-wrapper">
+                <Tabs
+                  data={GiftTrees.data.tabsUser}
+                  onTabChange={this.handleModeUserChange}
+                >
+                  {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
+                    <SearchAutosuggest
+                      onSuggestionClicked={this.suggestionClicked}
+                    />
+                  ) : (
+                    <TCombForm
+                      ref="giftInvitation"
+                      type={giftInvitationFormSchema}
+                      options={giftInvitationSchemaOptions}
+                    />
+                  )}
+                </Tabs>
+              </div>
               {this.props.selectedTpo ? (
                 <PlantProjectFull
+                  callExpanded={this.callExpanded}
                   expanded={false}
                   plantProject={this.props.selectedProject}
                   tpoName={this.props.selectedTpo.name}
@@ -168,20 +263,25 @@ export default class GiftTrees extends Component {
                 />
               ) : null}
               <Tabs
-                data={GiftTrees.data.tabsReciept}
-                onTabChange={this.handleModeRecieptChange}
+                data={GiftTrees.data.tabsReceipt}
+                onTabChange={this.handleModeReceiptChange}
+                activeTab={
+                  this.state.modeReceipt !== '' ? this.state.modeReceipt : null
+                }
               >
-                {this.state.modeReciept === GiftTrees.data.tabsReciept[0].id ? (
+                {this.state.modeReceipt === GiftTrees.data.tabsReceipt[0].id ? (
                   <TCombForm
-                    ref="donateReciept"
-                    type={recieptIndividualFormSchema}
+                    ref="donateReceipt"
+                    type={receiptIndividualFormSchema}
                     options={individualSchemaOptions}
+                    value={this.props.currentUserProfile}
                   />
                 ) : (
                   <TCombForm
-                    ref="donateReciept"
-                    type={recieptCompanyFormSchema}
+                    ref="donateReceipt"
+                    type={receiptCompanyFormSchema}
                     options={companySchemaOptions}
+                    value={this.props.currentUserProfile}
                   />
                 )}
               </Tabs>
@@ -200,5 +300,6 @@ export default class GiftTrees extends Component {
 
 GiftTrees.propTypes = {
   selectedProject: PropTypes.object,
-  selectedTpo: PropTypes.object
+  selectedTpo: PropTypes.object,
+  currentUserProfile: PropTypes.object
 };

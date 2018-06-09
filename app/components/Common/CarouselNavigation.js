@@ -9,7 +9,7 @@ export default class CarouselNavigation extends React.Component {
 }
 
 CarouselNavigation.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   styleName: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired
 };

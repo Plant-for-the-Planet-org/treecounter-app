@@ -7,7 +7,7 @@ import HeaderFields from './HeaderFields';
 import BurgerMenu from './BurgerMenu';
 import HomeButton from './HomeButton';
 
-const Header = ({ logoutUser, userProfile }) => {
+const Header = ({ updateRoute, logoutUser, userProfile }) => {
   let isLoggedIn = null != userProfile;
   return (
     <header className="app-header">
@@ -20,6 +20,7 @@ const Header = ({ logoutUser, userProfile }) => {
         isLoggedIn={isLoggedIn}
         userProfile={userProfile}
         onLogout={logoutUser}
+        updateRoute={updateRoute}
       />
     </header>
   );
@@ -29,5 +30,6 @@ export default Header;
 
 Header.propTypes = {
   logoutUser: PropTypes.func.isRequired,
-  userProfile: PropTypes.object
+  userProfile: PropTypes.object,
+  updateRoute: PropTypes.func
 };

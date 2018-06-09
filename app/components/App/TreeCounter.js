@@ -169,7 +169,7 @@ class TreeCounter extends Component {
                 component={UserContributionsContainer}
               />
               <PrivateRoute
-                path="/app_dev.php/en/edit_profile"
+                path={getLocalRoute('app_editProfile')}
                 component={EditUserProfileContainer}
               />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />

@@ -43,6 +43,28 @@ function logSelectorUpdate(selectorName, args = 'None') {
  * dependent on only the 3 relevant entity types above. This has the effect that the selector will produce
  * a new result whenever state.entities is modified (ANY entity is added/updated/deleted).
  */
+
+export const getAllPlantProjectsSelector = createSelector(
+  plantProjectsSelector,
+  entitiesSelector,
+  tposSelector,
+  (plantProjects, entities, tpos) => {
+    let normalisedProjects = Object.keys(plantProjects).reduce(
+      (projects, id) => {
+        projects[id] = denormalize(
+          plantProjects[id],
+          plantProjectSchema,
+          entities
+        );
+        projects[id].tpo_name = tpos[projects[id].tpoId].name;
+        return projects;
+      },
+      {}
+    );
+    return normalisedProjects;
+  }
+);
+
 export const currentUserProfileSelector = createSelector(
   currentUserProfileIdSelector,
   entitiesSelector,

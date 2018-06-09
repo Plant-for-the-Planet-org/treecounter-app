@@ -9,18 +9,19 @@ const SupportButton = ({
   caption,
   onRegisterSupporter
 }) => {
+  console.log(caption);
   return isUserLoggedIn ? (
     <SecondaryButton
       onClick={() => onRegisterSupporter()}
       disable={active ? 'active' : 'inactive'}
     >
       Support
-      <span className="support-button-caption">{caption}</span>
+      {/* <span className="support-button-caption">{caption}</span> */}
     </SecondaryButton>
   ) : (
     <SecondaryButton onClick={() => onRegisterSupporter()} disable={true}>
       Support
-      <span className="support-button-caption">{caption}</span>
+      {/* <span className="support-button-caption">{caption}</span> */}
     </SecondaryButton>
   );
 };

@@ -6,12 +6,17 @@ import Notification from './Notification';
 import Popover from '../Common/Popover';
 import UserDetails from './UserDetails';
 import RoundedButton from '../Common/Button/RoundedButton';
+import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
 
 const HeaderFields = ({ updateRoute, isLoggedIn, userProfile, onLogout }) => {
   return isLoggedIn ? (
     <div className="header-icons">
-      <Popover button={<i className="material-icons">notifications_none</i>}>
+      <Popover
+        button={
+          <i className="material-icons"> {i18n.t('label.no_notification')}</i>
+        }
+      >
         <Notification />
       </Popover>
       <Popover
@@ -36,10 +41,10 @@ const HeaderFields = ({ updateRoute, isLoggedIn, userProfile, onLogout }) => {
   ) : (
     <div className="header-icons">
       <RoundedButton onClick={updateRoute.bind(this, 'app_login')}>
-        Log In
+        {i18n.t('label.login')}
       </RoundedButton>
       <RoundedButton onClick={updateRoute.bind(this, 'app_signup')}>
-        Sign Up
+        {i18n.t('label.signUp')}
       </RoundedButton>
     </div>
   );

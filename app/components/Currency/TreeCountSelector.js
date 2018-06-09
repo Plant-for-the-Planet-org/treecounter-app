@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
+import i18n from '../../locales/i18n';
 
 class TreeCountSelector extends React.Component {
   constructor(props) {
@@ -79,7 +80,7 @@ class TreeCountSelector extends React.Component {
 
     return (
       <div className={'treecount-container'}>
-        <TextBlock strong={true}>Number of Trees</TextBlock>
+        <TextBlock strong={true}>{i18n.t('label.no_of_trees')}</TextBlock>
         {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
           return (
             <div className="treecount-price-conversion" key={treeCount}>
@@ -95,7 +96,7 @@ class TreeCountSelector extends React.Component {
                     this.handleFixedTreeCountChange(evt.target.value)
                   }
                 />
-                {treeCount} Trees
+                {treeCount} {i18n.t('label.trees')}
               </label>
               <span>=</span>
               <span>
@@ -123,7 +124,7 @@ class TreeCountSelector extends React.Component {
                 this.handleVariableTreeCountChange(evt.target.value)
               }
             />{' '}
-            Trees
+            {i18n.t('label.trees')}
           </label>
           <span>=</span>
           <span>

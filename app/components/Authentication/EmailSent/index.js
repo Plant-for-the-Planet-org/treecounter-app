@@ -5,24 +5,25 @@ import CardLayout from '../../Common/Card/CardLayout';
 import InlineLink from '../../Common/InlineLink';
 import TextBlock from '../../Common/Text/TextBlock';
 import { GreenEmail } from '../../../assets';
+import i18n from '../../../locales/i18n.js';
 
 export default class EmailSent extends Component {
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>Forgot Your Password?</TextHeading>
+        <TextHeading>{i18n.t('label.forgot_ur_password')}</TextHeading>
         <CardLayout>
           <img src={GreenEmail} />
           <div className={'gap'} />
-          <TextBlock strong={true}>We have just sent you an email.</TextBlock>
+          <TextBlock strong={true}>{i18n.t('label.mail_sent')}</TextBlock>
+          <div className={'gap'} />
+          <TextBlock>{i18n.t('label.secure_link')}</TextBlock>
           <div className={'gap'} />
           <TextBlock>
-            Click the secure link we sent you to reset your password. If you
-            didn‘t receive an email, please check your spam folder.
-          </TextBlock>
-          <div className={'gap'} />
-          <TextBlock>
-            <InlineLink uri={'app_login'} caption="Try to login again." />
+            <InlineLink
+              uri={'app_login'}
+              caption={i18n.t('label.try_again_login') + '.'}
+            />
           </TextBlock>
         </CardLayout>
       </div>

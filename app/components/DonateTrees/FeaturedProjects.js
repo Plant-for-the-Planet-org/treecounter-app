@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DonateTreesCardLayout from './DonateTreesCardLayout';
+import i18n from '../../locales/i18n.js';
 
 const FeaturedProjects = props => {
   const { plantProjects, userTpos } = props;
@@ -9,7 +10,7 @@ const FeaturedProjects = props => {
   let donated = [];
   prev.map((value, index) => {
     if (value != undefined) {
-      if (value['isCertified']) {
+      if (value[i18n.t('label.isCertified')]) {
         donated.push(
           <div className="item featured" key={index}>
             <DonateTreesCardLayout value={value} userTpos={userTpos} />

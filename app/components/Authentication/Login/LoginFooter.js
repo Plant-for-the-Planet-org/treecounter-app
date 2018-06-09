@@ -2,18 +2,19 @@ import React from 'react';
 
 import InlineLink from '../../Common/InlineLink';
 import TextBlock from '../../Common/Text/TextBlock';
+import i18n from '../../../locales/i18n.js';
 
 const ForgotPassword = () => (
   <TextBlock>
-    Forgot your password?&nbsp;
-    <InlineLink uri={'app_forgotPassword'} caption="Reset." />
+    {i18n.t('label.forgot_ur_password')}&nbsp;
+    <InlineLink uri={'app_forgotPassword'} caption={i18n.t('label.reset')} />
   </TextBlock>
 );
 
 const Register = () => (
   <TextBlock>
-    Don't have an account?&nbsp;
-    <InlineLink uri={'app_signup'} caption="Sign up." />
+    {i18n.t('label.dont_have_account')}&nbsp;
+    <InlineLink uri={'app_signup'} caption={i18n.t('label.signUp') + '.'} />
   </TextBlock>
 );
 

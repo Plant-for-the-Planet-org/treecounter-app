@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import labels from './en/labels';
+import enlabels from './en/index';
 
 i18next.init({
   interpolation: {
@@ -13,7 +13,7 @@ i18next.init({
   resources: {
     en: {
       translation: {
-        label: labels
+        label: enlabels
       }
     }
   }

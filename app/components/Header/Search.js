@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { updateRoute } from '../../helpers/routerHelper';
 import SearchAutosuggest from './SearchAutosuggest';
-import * as constants from '../../SupportedLanguages/en';
+import i18n from '../../locales/i18n.js';
 
 class SearchBar extends React.Component {
   suggestionClicked = (context, event) => {
@@ -21,7 +21,7 @@ class SearchBar extends React.Component {
           <SearchAutosuggest onSuggestionClicked={this.suggestionClicked} />
           <span className="search-bar__button">
             <i className="material-icons header-icons">
-              {constants.formStrings.search}
+              {i18n.t('label.search')}
             </i>
           </span>
         </div>

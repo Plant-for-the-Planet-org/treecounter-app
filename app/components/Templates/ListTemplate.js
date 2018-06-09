@@ -1,5 +1,6 @@
 import t from 'tcomb-form';
 import React from 'react';
+import i18n from '../../locales/i18n';
 
 // Create CUSTOM list with custom add and remove buttons
 export function ListTemplate(title) {
@@ -7,7 +8,7 @@ export function ListTemplate(title) {
     renderAddButton: locals => {
       return (
         <div className="pftp-addbutton">
-          <button onClick={locals.add.click}>+&nbsp;{title}</button>
+          <button onClick={locals.add.click}>+&nbsp;{i18n.t(title)}</button>
         </div>
       );
     }

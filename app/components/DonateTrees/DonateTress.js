@@ -21,6 +21,8 @@ import {
 } from '../../server/parsedSchemas/donateTrees';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
+import i18n from '../../locales/i18n.js';
+
 let TCombForm = t.form.Form;
 
 const headings = ['Project', 'Donation Details', 'Donor Details', 'Payment'];
@@ -29,11 +31,11 @@ export default class DonateTrees extends Component {
   static data = {
     tabsReceipt: [
       {
-        name: 'Individual',
+        name: i18n.t('label.individual_name'),
         id: 'individual'
       },
       {
-        name: 'Company',
+        name: i18n.t('label.company_title'),
         id: 'company'
       }
     ]
@@ -158,7 +160,7 @@ export default class DonateTrees extends Component {
 
     return null === plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
-        <TextHeading>Donate trees</TextHeading>
+        <TextHeading>{i18n.t('label.donateTrees')}</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
           <div className="donate-tress__container">
             <ContentHeader caption={headings[this.state.pageIndex]} />

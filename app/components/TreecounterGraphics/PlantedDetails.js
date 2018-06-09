@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from '../../locales/i18n.js';
 
 const PlantedDetails = ({ personal, community }) => (
   <div className="fixed-planted-details">
-    <strong>{personal}</strong> Planted by the personal
+    <strong>{personal}</strong> {i18n.t('label.plant_personal')}
     <br />
-    <strong>{community}</strong> Planted by community
+    <strong>{community}</strong> {i18n.t('label.plant_community')}
   </div>
 );
 

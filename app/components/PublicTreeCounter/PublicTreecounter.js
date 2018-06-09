@@ -110,7 +110,7 @@ class PublicTreeCounter extends React.Component {
     }
 
     const { userProfile, displayName: caption } = treecounter;
-    const { type: profileType, logo } = userProfile;
+    const { type: profileType, image: logo } = userProfile;
     const isUserFollower = this.isUserFollower();
     const isUserLoggedIn = null !== currentUserProfile;
     const showFollow = !this.isMyself();

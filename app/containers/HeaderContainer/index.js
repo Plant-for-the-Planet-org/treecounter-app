@@ -8,6 +8,7 @@ import Header from '../../components/Header';
 // Actions
 import { logoutUser } from '../../actions/authActions';
 import { currentUserProfileSelector } from '../../selectors/index';
+import { updateRoute } from '../../helpers/routerHelper';
 
 class HeaderContainer extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class HeaderContainer extends React.Component {
       <Header
         userProfile={this.props.userProfile}
         logoutUser={this.props.logoutUser}
+        updateRoute={this.props.route}
       />
     );
   }
@@ -23,7 +25,8 @@ class HeaderContainer extends React.Component {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      logoutUser
+      logoutUser,
+      route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
     },
     dispatch
   );
@@ -37,5 +40,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
 
 HeaderContainer.propTypes = {
   logoutUser: PropTypes.func.isRequired,
+  route: PropTypes.func,
   userProfile: PropTypes.object
 };

@@ -89,11 +89,12 @@
 
     .slick-dots {
       top: -70px;
-      height: 20px;
-      left: 6px;
+      height: 10px;
 
       li {
-        margin: 0 1px;
+        margin: 0 3px;
+        width: 15px;
+        height: 15px;
       }
 
       button {
@@ -111,9 +112,13 @@
         height: 10px;
       }
 
-      .slick-active button:before {
-        color: #ffffff;
-        opacity: 1;
+      .slick-active {
+        background-color: #ffffff;
+        border-radius: 100%;
+        button:before {
+          color: #ffffff;
+          opacity: 1;
+        }
       }
     }
   }
@@ -232,5 +237,27 @@
 
   td {
     padding: 5px;
+  }
+}
+
+.all-projects-card {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  margin-top: 20px;
+
+  .pftp-textfield {
+    width: 60%;
+    margin-bottom: 30px;
+    .search-bar__button {
+      height: 35px;
+      width: 35px;
+      border-bottom: 1px solid #c6c6c6;
+
+      .material-icons {
+        font-size: 20px;
+        line-height: 2;
+      }
+    }
   }
 }

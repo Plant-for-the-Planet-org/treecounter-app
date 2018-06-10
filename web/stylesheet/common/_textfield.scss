@@ -73,9 +73,9 @@ $trans-time: 300ms;
 }
 
 // Override date type input
-input[type=date]:required:invalid::-webkit-datetime-edit {
-    color: transparent;
+input[type="date"]:required:invalid::-webkit-datetime-edit {
+  color: transparent;
 }
-input[type=date]:focus::-webkit-datetime-edit {
-    color: black !important;
+input[type="date"]:focus::-webkit-datetime-edit {
+  color: black !important;
 }

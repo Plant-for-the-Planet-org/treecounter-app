@@ -8,16 +8,73 @@ import CardLayout from '../Common/Card/CardLayout';
 import ContentHeader from '../Common/ContentHeader';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import Tabs from '../Common/Tabs';
 
 export default class SelectPlantProject extends Component {
+  static data = {
+    tabs: [
+      {
+        name: 'Map',
+        id: 'map'
+      },
+      {
+        name: 'Name',
+        id: 'name'
+      },
+      {
+        name: 'Price',
+        id: 'price'
+      }
+    ]
+  };
   constructor(props) {
     super(props);
 
     this.state = {
       expanded: false,
-      pageIndex: 0
+      pageIndex: 0,
+      filteredProjects: props.plantProjects,
+      featuredProjects: props.plantProjects,
+      searchFieldValue: '',
+      mode: 'name'
     };
   }
+
+  componentWillReceiveProps(nextProps) {
+    let { plantProjects } = nextProps;
+    let featuredProjects = Object.keys(plantProjects).reduce((projects, id) => {
+      if (plantProjects[id].isFeatured) {
+        projects[id] = plantProjects[id];
+      }
+      return projects;
+    }, {});
+    this.setState({
+      filteredProjects: plantProjects,
+      featuredProjects: featuredProjects
+    });
+  }
+
+  onInputChange = event => {
+    let value = event.target.value.toLowerCase();
+    let { plantProjects } = this.props;
+    let filteredProjects = Object.keys(plantProjects).reduce((projects, id) => {
+      if (
+        plantProjects[id].name.toLowerCase().includes(value) ||
+        plantProjects[id].tpo_name.toLowerCase().includes(value)
+      ) {
+        projects[id] = plantProjects[id];
+      }
+      return projects;
+    }, {});
+    this.setState({
+      filteredProjects: filteredProjects,
+      searchFieldValue: value
+    });
+  };
+
+  handleModeChange = tab => {
+    this.setState({ mode: tab });
+  };
 
   callExpanded = bool => {
     this.setState({
@@ -27,7 +84,7 @@ export default class SelectPlantProject extends Component {
 
   onSelectClicked = () => {
     this.props.selectProject(
-      Object.keys(this.props.plantProjects)[this.state.pageIndex]
+      Object.keys(this.state.featuredProjects)[this.state.pageIndex]
     );
   };
 
@@ -38,7 +95,7 @@ export default class SelectPlantProject extends Component {
   }
 
   render() {
-    let { plantProjects } = this.props;
+    let { filteredProjects, featuredProjects } = this.state;
     const settings = {
       dots: true,
 
@@ -65,14 +122,14 @@ export default class SelectPlantProject extends Component {
           <div className="select-project__container">
             <ContentHeader caption={'Featured Projects'} />
             <Slider {...settings}>
-              {Object.keys(plantProjects).length !== 0
-                ? Object.keys(plantProjects).map(key => (
+              {Object.keys(featuredProjects).length !== 0
+                ? Object.keys(featuredProjects).map(key => (
                     <PlantProjectFull
                       key={key}
                       callExpanded={this.callExpanded}
                       expanded={false}
-                      plantProject={plantProjects[key]}
-                      tpoName={plantProjects[key].tpo_name}
+                      plantProject={featuredProjects[key]}
+                      tpoName={featuredProjects[key].tpo_name}
                     />
                   ))
                 : null}
@@ -85,42 +142,70 @@ export default class SelectPlantProject extends Component {
           </div>
         </CardLayout>
         <CardLayout>
-          <table className="projects-list">
-            <thead>
-              <tr>
-                <th>Project</th>
-                <th>Organisation</th>
-                <th>
-                  <span>Planted Trees</span>
-                </th>
-                <th>Cost Per Tree</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {Object.keys(plantProjects).length !== 0
-                ? Object.keys(plantProjects).map(key => (
-                    <tr key={'tr' + key}>
-                      <td className="align-left">{plantProjects[key].name}</td>
-                      <td className="align-left">
-                        {plantProjects[key].tpo_name}
-                      </td>
-                      <td className="align-right">
-                        {plantProjects[key].countPlanted}
-                      </td>
-                      <td className="align-right">
-                        {plantProjects[key].currency +
-                          ' ' +
-                          plantProjects[key].treeCost}
-                      </td>
-                      <td>
-                        <PrimaryButton>See more</PrimaryButton>
-                      </td>
+          <Tabs
+            data={SelectPlantProject.data.tabs}
+            onTabChange={this.handleModeChange}
+            activeTab={this.state.mode !== '' ? this.state.mode : null}
+          >
+            {this.state.mode === SelectPlantProject.data.tabs[1].id ? (
+              <div className="all-projects-card">
+                <div className="pftp-textfield">
+                  <div className="pftp-textfield__inputgroup">
+                    <input
+                      autoComplete="new-password"
+                      required="required"
+                      value={this.state.searchFieldValue}
+                      onChange={this.onInputChange.bind(this)}
+                    />
+                    <span className="pftp-textfield__inputgroup--highlight" />
+                    <span className="pftp-textfield__inputgroup--bar" />
+                    <label>Search</label>
+                  </div>
+                  <span className="search-bar__button">
+                    <i className="material-icons header-icons">search</i>
+                  </span>
+                </div>
+                <table className="projects-list">
+                  <thead>
+                    <tr>
+                      <th>Project</th>
+                      <th>Organisation</th>
+                      <th>
+                        <span>Planted Trees</span>
+                      </th>
+                      <th>Cost Per Tree</th>
+                      <th />
                     </tr>
-                  ))
-                : null}
-            </tbody>
-          </table>
+                  </thead>
+                  <tbody>
+                    {Object.keys(filteredProjects).length !== 0
+                      ? Object.keys(filteredProjects).map(key => (
+                          <tr key={'tr' + key}>
+                            <td className="align-left">
+                              {filteredProjects[key].name}
+                            </td>
+                            <td className="align-left">
+                              {filteredProjects[key].tpo_name}
+                            </td>
+                            <td className="align-right">
+                              {filteredProjects[key].countPlanted}
+                            </td>
+                            <td className="align-right">
+                              {filteredProjects[key].currency +
+                                ' ' +
+                                filteredProjects[key].treeCost}
+                            </td>
+                            <td>
+                              <PrimaryButton>See more</PrimaryButton>
+                            </td>
+                          </tr>
+                        ))
+                      : null}
+                  </tbody>
+                </table>
+              </div>
+            ) : null}
+          </Tabs>
         </CardLayout>
       </div>
     );

@@ -22,10 +22,25 @@ export default class Notification extends Component {
   }
 
   render() {
-    return this.props.userFeeds ? (
-      <ul className="notification-popover">
-        {this.NotificationDisplay(this.props.userFeeds)}
-      </ul>
+    let { userFeeds } = this.props;
+    return userFeeds ? (
+      <div>
+        <ul className="notification-popover">
+          {this.NotificationDisplay(userFeeds)}
+        </ul>
+        {userFeeds.more > 0 ? (
+          <div
+            onClick={() =>
+              this.props.fetchMoreNotifications(
+                userFeeds.userFeeds[userFeeds.userFeeds.length - 1].id
+              )
+            }
+            className="list-item__wrapper"
+          >
+            <span>See all notifications</span>
+          </div>
+        ) : null}
+      </div>
     ) : (
       <ul style={widthStyle} />
     );
@@ -33,7 +48,8 @@ export default class Notification extends Component {
 }
 
 Notification.propTypes = {
-  userFeeds: PropTypes.object
+  userFeeds: PropTypes.object,
+  fetchMoreNotifications: PropTypes.func
 };
 
 const widthStyle = { width: '244px' };

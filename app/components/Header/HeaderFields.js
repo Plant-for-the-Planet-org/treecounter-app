@@ -14,19 +14,27 @@ const HeaderFields = ({
   updateRoute,
   isLoggedIn,
   userProfile,
-  onLogout
+  onLogout,
+  fetchMoreNotifications
 }) => {
   return isLoggedIn ? (
     <div className="header-icons">
       <Popover
         button={
           <div className="notification-bell">
-            <div className="unread-circle">{userFeeds.unRead}</div>
+            {userFeeds.unRead > 0 ? (
+              <div className="unread-circle">
+                <span className="unread-number-align">{userFeeds.unRead}</span>
+              </div>
+            ) : null}
             <i className="material-icons">notifications_none</i>
           </div>
         }
       >
-        <Notification userFeeds={userFeeds} />
+        <Notification
+          fetchMoreNotifications={fetchMoreNotifications}
+          userFeeds={userFeeds}
+        />
       </Popover>
       <Popover
         button={
@@ -61,6 +69,7 @@ const HeaderFields = ({
 
 HeaderFields.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
+  fetchMoreNotifications: PropTypes.func,
   userProfile: PropTypes.object,
   onLogout: PropTypes.func.isRequired,
   updateRoute: PropTypes.func,

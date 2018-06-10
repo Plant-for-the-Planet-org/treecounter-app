@@ -22,6 +22,11 @@
     width: 12px;
     border-radius: 100%;
     font-size: 11px;
+    .unread-number-align {
+      display: block;
+      margin: auto;
+      line-height: 1.2;
+    }
   }
   form {
     display: flex;
@@ -67,15 +72,21 @@
     display: flex;
     align-items: center;
     max-width: 300px;
+    color: #9c9b9b;
 
     img {
       padding-right: 10px;
     }
 
+    span {
+      display: flex;
+      margin: auto;
+      padding: 10px;
+    }
+
     .item-html__wrapper {
       display: inline-block;
       text-align: left;
-      color: #9c9b9b;
       margin-left: 10px;
       font-family: Open Sans;
       a {

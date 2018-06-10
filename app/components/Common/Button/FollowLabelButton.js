@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n';
 
-const PrimaryButton = ({ isLoggedIn, isSubscribed, onClick }) => {
+const FollowLabelButton = ({ isLoggedIn, isSubscribed, onClick }) => {
   const label = isSubscribed
     ? i18n.t('label.un_subscribe')
     : i18n.t('label.subscribe');
@@ -18,11 +18,11 @@ const PrimaryButton = ({ isLoggedIn, isSubscribed, onClick }) => {
   );
 };
 
-PrimaryButton.propTypes = {
+FollowLabelButton.propTypes = {
   children: PropTypes.string,
   onClick: PropTypes.func,
   isSubscribed: PropTypes.bool,
   isLoggedIn: PropTypes.bool
 };
 
-export default PrimaryButton;
+export default FollowLabelButton;

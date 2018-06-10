@@ -1,0 +1,162 @@
+.donate-tress__container {
+  position: relative;
+  width: 416px;
+
+  .treecount-selector-wrapper {
+    height: 250px;
+  }
+
+  .pftp-tabs__type {
+    margin-bottom: 15px;
+  }
+
+  .donate-tree-nav-img__right {
+    position: absolute;
+    max-height: 40px;
+    max-width: 40px;
+    cursor: pointer;
+    color: transparent;
+    display: block;
+    padding: 0;
+    top: -90px;
+    right: -5%;
+  }
+  .donate-tree-nav-img__left {
+    position: absolute;
+    max-height: 40px;
+    max-width: 40px;
+    cursor: pointer;
+    color: transparent;
+    display: block;
+    padding: 0;
+    top: -90px;
+    left: -5%;
+  }
+
+  .content-header_container {
+    height: 80px;
+    line-height: 2.5;
+    font-size: 24px;
+    align-items: unset;
+  }
+
+  .slick-initialized {
+    margin: 25px;
+    margin-top: 30px;
+
+    .slick-list {
+      height: auto;
+    }
+
+    .project-teaser__container {
+      .teaser-image__container {
+        .teaser__projectImage {
+          height: 100px;
+        }
+      }
+    }
+
+    .project-specs__container {
+      .column {
+        font-weight: normal;
+      }
+    }
+
+    .collapsed {
+      border: none;
+      cursor: pointer;
+      span {
+        color: #ec6453;
+      }
+    }
+
+    .expanded {
+      border: none;
+      cursor: pointer;
+      span {
+        color: #ec6453;
+      }
+    }
+
+    .slick-dots {
+      top: -70px;
+      height: 20px;
+      left: 6px;
+
+      li {
+        margin: 0 1px;
+      }
+
+      button {
+        width: 10px;
+        height: 10px;
+      }
+
+      button:before {
+        color: transparent;
+        border: 3px solid #ffffff;
+        border-radius: 100%;
+        line-height: 10px;
+        opacity: 1;
+        width: 10px;
+        height: 10px;
+      }
+
+      .slick-active button:before {
+        color: #ffffff;
+        opacity: 1;
+      }
+    }
+  }
+
+  .pftp-tabs {
+    font-size: 15px;
+    .react-autosuggest__container {
+      width: 100%;
+      input {
+        background: none;
+        color: #000000;
+        font-size: 18px;
+        padding: 5px 10px 10px 5px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid mix(white, #424242, 70%);
+      }
+    }
+
+    .fieldset {
+      width: 100%;
+    }
+  }
+
+  .treecount-container {
+    margin-top: 30px;
+    height: 200px;
+    .treecount-price-conversion {
+      display: flex;
+      justify-content: space-between;
+      padding: 25px 40px 0 40px;
+      box-sizing: border-box;
+      width: 100%;
+
+      label {
+        display: flex;
+        align-items: center;
+        input {
+          margin: 0 10px;
+        }
+      }
+
+      input[type="text"] {
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        width: 40px;
+        border-bottom: 1px solid mix(white, #424242, 70%);
+      }
+    }
+  }
+}

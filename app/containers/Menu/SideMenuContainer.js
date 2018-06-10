@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import Menu from '../../components/Menu/index';
+import Menu from '../../components/Menu';
 import sideMenuData from '../../server/sidemenu';
 
 // Actions

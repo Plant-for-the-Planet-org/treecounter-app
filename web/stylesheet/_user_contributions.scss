@@ -11,11 +11,11 @@
   height: 542px;
 
   .contribution-container__card {
-    padding: 10px 10px 30px 10px;
+    padding: 10px;
     position: relative;
     display: flex;
     justify-content: space-between;
-    min-height: 80px;
+    min-height: 100px;
     margin-bottom: 10px;
 
     .contribution-container__left-column {
@@ -26,7 +26,14 @@
 
     .contribution-container__right-column {
       white-space: pre;
+      display: flex;
+      align-items: flex-end;
+      flex-direction: column;
       font-size: 14px;
+
+      a {
+        margin-top: auto;
+      }
 
       .see-more-label-style {
         border-left: 1px solid #9c9b9b;

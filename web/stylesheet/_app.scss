@@ -69,12 +69,15 @@
       .app-container__content {
         flex: 1;
         display: flex;
+        margin-top: 49px;
         background-color: #eae8e8;
         justify-content: center;
         align-items: center;
 
         .app-container__content--center {
           display: flex;
+          width: 100%;
+          height: 100%;
           flex-direction: column;
           align-items: center;
         }

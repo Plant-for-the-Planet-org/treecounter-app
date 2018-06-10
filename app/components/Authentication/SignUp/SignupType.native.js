@@ -11,6 +11,7 @@ import {
 
 import { SignupOrganization, SignupJustMe } from '../../../assets';
 import * as join from '../../../constants/strings';
+import i18n from '../../../locales/i18n.js';
 
 class SingupType extends Component {
   constructor(props) {
@@ -109,12 +110,12 @@ export default class SignupTypes extends Component {
           <View style={styles.innerContainer}>
             <SingupType
               iconUrl={SignupOrganization}
-              profileType={'tpo'}
+              profileType="tpo"
               selected={this.state.Profiletype == 'tpo'}
               onClick={this.changeProfile}
             />
             <SingupType
-              profileType={'individual'}
+              profileType="individual"
               iconUrl={SignupJustMe}
               selected={this.state.Profiletype == 'individual'}
               onClick={this.changeProfile}
@@ -122,13 +123,13 @@ export default class SignupTypes extends Component {
             <SingupType
               iconUrl={SignupOrganization}
               selected={this.state.Profiletype == 'company'}
-              profileType={'company'}
+              profileType="company"
               onClick={this.changeProfile}
             />
             <SingupType
               iconUrl={SignupOrganization}
               selected={this.state.Profiletype == 'education'}
-              profileType={'education'}
+              profileType="education"
               onClick={this.changeProfile}
             />
           </View>

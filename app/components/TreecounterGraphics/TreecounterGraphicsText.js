@@ -6,6 +6,7 @@ import PlantedDetails from './PlantedDetails';
 import TargetComment from './TargetComment';
 import ArrowButton from '../Common/ArrowButton';
 import { pot, tree } from '../../assets';
+import i18n from '../../locales/i18n.js';
 
 class TreecounterGraphicsText extends Component {
   constructor() {
@@ -42,8 +43,13 @@ class TreecounterGraphicsText extends Component {
           <img className="svg-text-container__row--col" src={pot} />
           <div className="svg-text-container__row--col2">
             <span>
-              Target{' '}
-              {this.props.trillion ? '' : 'by' + targetYear ? targetYear : ''}{' '}
+              {i18n.t('label.target') +
+                (this.props.trillion
+                  ? ''
+                  : targetYear
+                    ? ' ' + i18n.t('label.by') + ' ' + targetYear
+                    : '') +
+                ' '}
               <br />
               <strong>{target}</strong>
               {this.props.trillion ? (
@@ -51,13 +57,15 @@ class TreecounterGraphicsText extends Component {
                   {this.getTwoWordString(NumberToWords.toWords(target))}
                 </div>
               ) : null}
-              {!targetComment || targetComment === '' ? null : (
-                <ArrowButton
-                  onToggle={e => this.setState({ ifTargetComment: e })}
-                />
-              )}
             </span>
           </div>
+          {!targetComment || targetComment === '' ? null : (
+            <div className="svg-text-container__row--col2">
+              <ArrowButton
+                onToggle={e => this.setState({ ifTargetComment: e })}
+              />{' '}
+            </div>
+          )}
         </div>
         {this.state.ifTargetComment ? (
           <TargetComment comment={targetComment} />
@@ -67,7 +75,7 @@ class TreecounterGraphicsText extends Component {
           <img className="svg-text-container__row--col" src={tree} />
           <div className="svg-text-container__row--col2">
             <span>
-              Planted
+              {i18n.t('label.planted')}
               <br />
               <strong>{planted}</strong>
               {this.props.trillion ? (

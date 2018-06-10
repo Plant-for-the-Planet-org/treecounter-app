@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 
+import Tabs from '../Common/Tabs';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
@@ -11,6 +12,7 @@ import {
   multipleTreesRegisterFormSchema,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
+import i18n from '../../locales/i18n.js';
 
 let TCombForm = t.form.Form;
 
@@ -66,16 +68,24 @@ const schemaOptionsMultiple = {
 };
 
 export default class RegisterTrees extends Component {
-  static mode = {
-    singleTree: 'single-tree',
-    multipleTrees: 'multiple-trees'
+  static data = {
+    tabs: [
+      {
+        name: i18n.t('label.individual'),
+        id: 'single-tree'
+      },
+      {
+        name: i18n.t('label.many_trees'),
+        id: 'multiple-trees'
+      }
+    ]
   };
 
   constructor() {
     super();
 
     this.state = {
-      mode: RegisterTrees.mode.singleTree,
+      mode: '',
       individual: {
         treeCount: 1
       }
@@ -83,59 +93,27 @@ export default class RegisterTrees extends Component {
 
     // Bind Local method
     this.onSubmitClick = this.onSubmitClick.bind(this);
+    this.handleModeOptionChange = this.handleModeOptionChange.bind(this);
   }
 
   onSubmitClick() {
     this.props.onSubmit(this.state.mode);
   }
 
-  handleModeOptionChange(changeEvent) {
-    this.setState({ mode: changeEvent.target.value });
+  handleModeOptionChange(tab) {
+    this.setState({ mode: tab });
   }
 
   render() {
     return (
-      <div className="app-container__content--center">
-        <TextHeading>Register planted trees</TextHeading>
+      <div className="app-container__content--center sidenav-wrapper">
+        <TextHeading>{i18n.t('label.heading_register_trees')}</TextHeading>
         <CardLayout>
-          <div className="register-tree">
-            <form className="register-tree__type">
-              <label
-                className={
-                  'radio register-tree__type--option ' +
-                  (this.state.mode === RegisterTrees.mode.singleTree
-                    ? 'active'
-                    : '')
-                }
-              >
-                <input
-                  type="radio"
-                  value={RegisterTrees.mode.singleTree}
-                  checked={this.state.mode === RegisterTrees.mode.singleTree}
-                  onChange={e => this.handleModeOptionChange(e)}
-                />
-                <span>Individual&nbsp;Tree</span>
-              </label>
-              <label
-                className={
-                  'radio register-tree__type--option ' +
-                  (this.state.mode === RegisterTrees.mode.multipleTrees
-                    ? 'active'
-                    : '')
-                }
-              >
-                <input
-                  type="radio"
-                  value={RegisterTrees.mode.multipleTrees}
-                  checked={this.state.mode === RegisterTrees.mode.multipleTrees}
-                  onChange={e => this.handleModeOptionChange(e)}
-                />
-                <span>Many&nbsp;Trees</span>
-              </label>
-            </form>
-          </div>
-          <div className="register-tree__form">
-            {this.state.mode === RegisterTrees.mode.singleTree ? (
+          <Tabs
+            data={RegisterTrees.data.tabs}
+            onTabChange={this.handleModeOptionChange}
+          >
+            {this.state.mode === RegisterTrees.data.tabs[0].id ? (
               <TCombForm
                 ref="registerTreeForm"
                 type={singleTreeRegisterFormSchema}
@@ -149,8 +127,10 @@ export default class RegisterTrees extends Component {
                 options={schemaOptionsMultiple}
               />
             )}
-          </div>
-          <PrimaryButton onClick={this.onSubmitClick}>Register</PrimaryButton>
+          </Tabs>
+          <PrimaryButton onClick={this.onSubmitClick}>
+            {i18n.t('label.register')}
+          </PrimaryButton>
         </CardLayout>
       </div>
     );

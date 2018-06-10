@@ -1236,7 +1236,7 @@ export default {
         enum: ['Other'],
         enum_titles: ['0'],
         type: 'string',
-        title: 'subType',
+        title: 'label.subtype',
         propertyOrder: 2
       },
       country: {
@@ -1831,7 +1831,7 @@ export default {
         enum: ['primary', 'secondary', 'higher', 'other'],
         enum_titles: ['0', '1', '2', '3'],
         type: 'string',
-        title: 'subType',
+        title: 'label.subtype',
         propertyOrder: 2
       },
       country: {

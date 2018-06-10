@@ -1,13 +1,13 @@
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { updateRoute } from '../helpers/routerHelper';
-import { loadLoginData } from './loadLoginData';
+import { loadUserProfile } from './loadUserProfileAction';
 import { debug } from '../debug/index';
 import { userLogout } from '../reducers/reducer';
 
 import { clearStorage } from '../stores/localStorage';
-import { getAccessToken } from '../utils/user';
 import { postRequest } from '../utils/api';
 import { updateJWT } from '../utils/user';
+import { NotificationAction } from './notificationAction';
 
 export function login(data) {
   const request = postRequest('api_login_check', data);
@@ -17,12 +17,10 @@ export function login(data) {
       .then(res => {
         const { token, refresh_token } = res.data;
         updateJWT(token, refresh_token);
-        dispatch(loadLoginData());
-        return token;
-      })
-      .then(() => {
-        NotificationManager.success('Login Successful', 'Congrats', 5000);
+        dispatch(loadUserProfile());
+        dispatch(NotificationAction());
         updateRoute('app_userHome', dispatch);
+        return token;
       })
       .catch(error => {
         if (
@@ -65,12 +63,12 @@ export function forgot_password(data) {
 }
 
 export function reset_password(data) {
-  getAccessToken().then(token => {
-    data.token = token;
+  return dispatch => {
     postRequest('auth_resetPassword_post', data)
       .then(res => {
         debug(res.status);
+        updateRoute('app_login', dispatch);
       })
       .catch(err => debug(err));
-  });
+  };
 }

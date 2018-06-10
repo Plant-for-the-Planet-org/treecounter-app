@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import { postRequest } from '../../utils/api';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 import {
@@ -13,7 +14,8 @@ import {
   education,
   competition
 } from '../../assets';
-
+import { getImageUrl } from '../../actions/apiRouting';
+import i18n from '../../locales/i18n.js';
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -46,13 +48,16 @@ const getSuggestions = value => {
 const renderSuggestion = suggestion => {
   return (
     <div>
-      <Link
-        to={`/treecounterLookup/${suggestion.id}`}
-        className="search-autusuggest__listitem "
-      >
-        <img src={profileType[suggestion.type]} />
+      <div className="search-autusuggest__listitem ">
+        <img
+          src={
+            suggestion.image
+              ? getImageUrl('profile', 'avatar', suggestion.image)
+              : profileType[suggestion.type]
+          }
+        />
         <span>{suggestion.name}</span>
-      </Link>
+      </div>
     </div>
   );
 };
@@ -96,7 +101,7 @@ class SearchAutosuggest extends Component {
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
-      placeholder: 'Type a name',
+      placeholder: i18n.t('label.placeholder_value'),
       value,
       onChange: this.onChange,
       className: 'form-control search_text'
@@ -110,6 +115,7 @@ class SearchAutosuggest extends Component {
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
+        onSuggestionSelected={this.props.onSuggestionClicked}
         id="custom-render-example"
       />
     );
@@ -118,6 +124,10 @@ class SearchAutosuggest extends Component {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ treecounterLookupAction }, dispatch);
+};
+
+SearchAutosuggest.propTypes = {
+  onSuggestionClicked: PropTypes.func
 };
 
 export default connect(null, mapDispatchToProps)(SearchAutosuggest);

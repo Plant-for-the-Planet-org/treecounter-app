@@ -1,8 +1,9 @@
 import { createSelector } from 'reselect';
 import { denormalize } from 'normalizr';
 
-import { userProfileSchema } from '../schemas';
+import { userProfileSchema, plantProjectSchema } from '../schemas';
 import { getCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
+import { getUserFeeds } from '../reducers/userFeedReducer';
 import {
   getPlantProjects,
   getPaymentGateways,
@@ -18,6 +19,7 @@ export const paymentGatewaysSelector = state => getPaymentGateways(state);
 export const tposSelector = state => getTpos(state);
 export const plantProjectsSelector = state => getPlantProjects(state);
 export const entitiesSelector = state => state.entities;
+export const userFeedsSelector = state => getUserFeeds(state);
 
 function logSelectorUpdate(selectorName, args = 'None') {
   const debug = false;
@@ -101,12 +103,32 @@ export const sortedUserContributionsSelector = createSelector(
  */
 export const selectedPlantProjectSelector = createSelector(
   selectedPlantProjectIdSelector,
-  getPlantProjects,
-  (selectedPlantProjectId, plantProjects) => {
+  entitiesSelector,
+  (selectedPlantProjectId, entities) => {
     logSelectorUpdate('selectedPlantProjectSelector');
     return null === selectedPlantProjectId
       ? null
-      : plantProjects[selectedPlantProjectId];
+      : denormalize(
+          entities.plantProject[selectedPlantProjectId],
+          plantProjectSchema,
+          entities
+        );
+  }
+);
+/**
+ * Returns the TPO that corresponds to the currently selected plant project
+ */
+export const selectedTpoSelector = createSelector(
+  selectedPlantProjectSelector,
+  getTpos,
+  (selectedPlantProject, tpos) => {
+    logSelectorUpdate('selectedTpoSelector');
+    if (selectedPlantProject) {
+      if (Object.keys(tpos).length) {
+        return tpos[selectedPlantProject.tpoId];
+      }
+    }
+    return null;
   }
 );
 

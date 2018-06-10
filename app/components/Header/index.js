@@ -7,7 +7,14 @@ import HeaderFields from './HeaderFields';
 import BurgerMenu from './BurgerMenu';
 import HomeButton from './HomeButton';
 
-const Header = ({ logoutUser, userProfile }) => {
+const Header = ({
+  userFeeds,
+  updateRoute,
+  logoutUser,
+  userProfile,
+  fetchMoreNotifications,
+  markSeenNotificationAction
+}) => {
   let isLoggedIn = null != userProfile;
   return (
     <header className="app-header">
@@ -20,6 +27,10 @@ const Header = ({ logoutUser, userProfile }) => {
         isLoggedIn={isLoggedIn}
         userProfile={userProfile}
         onLogout={logoutUser}
+        updateRoute={updateRoute}
+        userFeeds={userFeeds}
+        fetchMoreNotifications={fetchMoreNotifications}
+        markSeenNotificationAction={markSeenNotificationAction}
       />
     </header>
   );
@@ -29,5 +40,9 @@ export default Header;
 
 Header.propTypes = {
   logoutUser: PropTypes.func.isRequired,
-  userProfile: PropTypes.object
+  userProfile: PropTypes.object,
+  fetchMoreNotifications: PropTypes.func,
+  markSeenNotificationAction: PropTypes.func,
+  updateRoute: PropTypes.func,
+  userFeeds: PropTypes.object
 };

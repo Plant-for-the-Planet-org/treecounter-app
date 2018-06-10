@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import ContributionCardList from './ContributionCardList';
 import ContributionsMapLegend from './ContributionsMapLegend';
 import Map from '../Common/EsriMap/Map';
-import * as constants from '../../SupportedLanguages/en';
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import InlineLink from '../Common/InlineLink';
+import i18n from '../../locales/i18n.js';
 
 const UserContributions = ({ userContributions }) => {
   let mPins = userContributions.map(element => {
@@ -23,8 +23,8 @@ const UserContributions = ({ userContributions }) => {
   });
 
   return (
-    <div className="app-container__content--center">
-      <TextHeading>My Trees</TextHeading>
+    <div className="app-container__content--center sidenav-wrapper">
+      <TextHeading>{i18n.t('label.my_trees')}</TextHeading>
       <CardLayout>
         {Object.keys(userContributions).length > 0 ? (
           <div>
@@ -35,11 +35,11 @@ const UserContributions = ({ userContributions }) => {
             </div>
             <div className="contribution-buttons">
               <InlineLink
-                caption={constants.formStrings.registerFurther}
+                caption={i18n.t('label.registerFurther')}
                 uri={'app_registerTrees'}
               />
               <InlineLink
-                caption={constants.formStrings.DONATETREES}
+                caption={i18n.t('label.donate_trees')}
                 uri={'app_donateTrees'}
               />
             </div>
@@ -47,7 +47,7 @@ const UserContributions = ({ userContributions }) => {
         ) : (
           <div className="sidenav-wrapper">
             <div className="registeration-successfull">
-              {constants.formStrings.noContributions}
+              {i18n.t('label.no_contributions')}
             </div>
           </div>
         )}

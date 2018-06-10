@@ -2,9 +2,34 @@
   padding: 6px;
   background-color: $colorPrimary;
   display: flex;
+  width: 100%;
+  position: fixed;
   align-items: center;
   z-index: 1000;
 
+  .notification-bell {
+    margin-top: 7px;
+  }
+
+  .unread-circle {
+    background-color: #ec6453;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    display: flex;
+    right: 62px;
+    top: 10px;
+    padding: 3px;
+    width: 12px;
+    border-radius: 100%;
+    font-size: 11px;
+    .unread-number-align {
+      display: block;
+      margin: auto;
+      line-height: 0.95;
+    }
+  }
   form {
     display: flex;
     flex: 2;
@@ -47,9 +72,29 @@
 
   .list-item__wrapper {
     display: flex;
+    align-items: center;
+    max-width: 300px;
+    color: #9c9b9b;
 
     img {
       padding-right: 10px;
+    }
+
+    span {
+      display: flex;
+      margin: auto;
+      padding: 10px;
+    }
+
+    .item-html__wrapper {
+      display: inline-block;
+      text-align: left;
+      margin-left: 10px;
+      font-family: Open Sans;
+      a {
+        color: #686060;
+        font-weight: bold;
+      }
     }
   }
 

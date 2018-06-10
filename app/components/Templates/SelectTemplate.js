@@ -8,12 +8,18 @@ export function SelectTemplate(locals) {
   return (
     <div className="pftp-selectfield">
       <select
+        key={locals.attrs.id}
         className="pftp-selectfield__select"
         required="required"
         onChange={onChange}
+        value={locals.value}
       >
         {locals.options.map(option => (
-          <option className="pftp-selectfield__option" value={option.value}>
+          <option
+            key={option.value}
+            className="pftp-selectfield__option"
+            value={option.value}
+          >
             {i18n.t(option.text)}
           </option>
         ))}

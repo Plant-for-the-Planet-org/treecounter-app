@@ -9,15 +9,24 @@ import RoundedButton from '../Common/Button/RoundedButton';
 import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
 
-const HeaderFields = ({ updateRoute, isLoggedIn, userProfile, onLogout }) => {
+const HeaderFields = ({
+  userFeeds,
+  updateRoute,
+  isLoggedIn,
+  userProfile,
+  onLogout
+}) => {
   return isLoggedIn ? (
     <div className="header-icons">
       <Popover
         button={
-          <i className="material-icons"> {i18n.t('label.no_notification')}</i>
+          <div className="notification-bell">
+            <div className="unread-circle">{userFeeds.unRead}</div>
+            <i className="material-icons">notifications_none</i>
+          </div>
         }
       >
-        <Notification />
+        <Notification userFeeds={userFeeds} />
       </Popover>
       <Popover
         button={
@@ -54,7 +63,8 @@ HeaderFields.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   userProfile: PropTypes.object,
   onLogout: PropTypes.func.isRequired,
-  updateRoute: PropTypes.func
+  updateRoute: PropTypes.func,
+  userFeeds: PropTypes.object
 };
 
 export default HeaderFields;

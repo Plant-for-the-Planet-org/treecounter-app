@@ -1,8 +1,11 @@
 import { getAuthenticatedRequest } from '../utils/api';
-
-import { debug } from '../debug/index';
+import { userFeedsSynced } from '../reducers/userFeedReducer';
 
 export function NotificationAction() {
-  debug('Getting Notifications');
-  return getAuthenticatedRequest('userfeeds_get');
+  const request = getAuthenticatedRequest('userfeeds_get');
+  return dispatch => {
+    request.then(res => {
+      dispatch(userFeedsSynced(res.data));
+    });
+  };
 }

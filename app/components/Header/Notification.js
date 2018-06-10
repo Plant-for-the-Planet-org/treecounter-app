@@ -23,9 +23,16 @@ export default class Notification extends Component {
 
   render() {
     return this.props.userFeeds ? (
-      <ul className="notification-popover">
-        {this.NotificationDisplay(this.props.userFeeds)}
-      </ul>
+      <div>
+        <ul className="notification-popover">
+          {this.NotificationDisplay(this.props.userFeeds)}
+        </ul>
+        {this.props.userFeeds.more === 0 ? (
+          <div className="list-item__wrapper">
+            <span>See all notifications</span>
+          </div>
+        ) : null}
+      </div>
     ) : (
       <ul style={widthStyle} />
     );

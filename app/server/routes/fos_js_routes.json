@@ -813,6 +813,68 @@
       "methods": ["PUT"],
       "schemes": []
     },
+    "profile_delete": {
+      "tokens": [
+        ["variable", "/", "[^/]++", "userProfile"],
+        ["text", "/profileDelete"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["DELETE"],
+      "schemes": []
+    },
+    "plantProject_form": {
+      "tokens": [
+        ["text", "/plantProjectForm"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "plantProject_post": {
+      "tokens": [
+        ["text", "/plantProjects"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["POST"],
+      "schemes": []
+    },
+    "plantProject_delete": {
+      "tokens": [
+        ["variable", "/", "[^/]++", "plantProject"],
+        ["text", "/plantProjects"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["DELETE"],
+      "schemes": []
+    },
     "userfeeds_get": {
       "tokens": [
         ["text", "/userfeeds"],
@@ -828,9 +890,11 @@
       "methods": ["GET"],
       "schemes": []
     },
-    "userfeedsUnread_get": {
+    "userfeedsMore_get": {
       "tokens": [
-        ["text", "/userfeeds/unread"],
+        ["text", "/more"],
+        ["variable", "/", "[^/]++", "lastId"],
+        ["text", "/userfeeds"],
         ["variable", "/", "[^/]++", "_locale"],
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
@@ -846,6 +910,21 @@
     "mark_readuserFeedsMarkRead_post": {
       "tokens": [
         ["text", "/userfeeds/markRead"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["POST"],
+      "schemes": []
+    },
+    "mark_un_readuserFeedsMarkUnRead_post": {
+      "tokens": [
+        ["text", "/userfeeds/markUnRead"],
         ["variable", "/", "[^/]++", "_locale"],
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]

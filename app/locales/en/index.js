@@ -17,6 +17,7 @@ import faqlabels from './faqlabels';
 import forgotPasswordlabels from './forgotPasswordlabels';
 import giftTreeslabels from './giftTreeslabels';
 import paymentlabels from './paymentlabels';
+import publicTreecounterlabels from './publicTreecounterlabels';
 
 export default {
   ...loginlabels,
@@ -37,5 +38,6 @@ export default {
   ...faqlabels,
   ...forgotPasswordlabels,
   ...giftTreeslabels,
-  ...paymentlabels
+  ...paymentlabels,
+  ...publicTreecounterlabels
 };

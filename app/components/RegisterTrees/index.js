@@ -12,6 +12,7 @@ import {
   multipleTreesRegisterFormSchema,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
+import RegistrationMap from './RegistrationMap';
 
 let TCombForm = t.form.Form;
 
@@ -93,6 +94,7 @@ export default class RegisterTrees extends Component {
     // Bind Local method
     this.onSubmitClick = this.onSubmitClick.bind(this);
     this.handleModeOptionChange = this.handleModeOptionChange.bind(this);
+    this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
   }
 
   onSubmitClick() {
@@ -101,6 +103,10 @@ export default class RegisterTrees extends Component {
 
   handleModeOptionChange(tab) {
     this.setState({ mode: tab });
+  }
+
+  handleGeoLocationChange(geoLocation) {
+    console.log(geoLocation);
   }
 
   render() {
@@ -129,6 +135,9 @@ export default class RegisterTrees extends Component {
           </Tabs>
           <PrimaryButton onClick={this.onSubmitClick}>Register</PrimaryButton>
         </CardLayout>
+        <RegistrationMap
+          onGeoLocationSelected={this.handleGeoLocationChange()}
+        />
       </div>
     );
   }

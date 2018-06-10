@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-import { NotificationAction } from '../../actions/notificationAction';
+import PropTypes from 'prop-types';
+
 import renderHTML from 'react-render-html';
 
 export default class Notification extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loading: true,
-      schema: {}
-    };
-  }
-
   NotificationDisplay(notifications) {
     return notifications.userFeeds.map(notification => (
       <li className="notification-group" key={notification.id}>
@@ -22,22 +15,19 @@ export default class Notification extends Component {
     ));
   }
 
-  componentWillMount() {
-    NotificationAction().then(
-      success => this.setState({ loading: false, schema: success.data }),
-      error => console.log(error)
-    );
-  }
-
   render() {
-    return this.state.loading ? (
-      <ul style={widthStyle} />
-    ) : (
+    return this.props.userFeeds ? (
       <ul className="notification-popover">
-        {this.NotificationDisplay(this.state.schema)}
+        {this.NotificationDisplay(this.props.userFeeds)}
       </ul>
+    ) : (
+      <ul style={widthStyle} />
     );
   }
 }
+
+Notification.propTypes = {
+  userFeeds: PropTypes.object
+};
 
 const widthStyle = { width: '244px' };

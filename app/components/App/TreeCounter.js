@@ -32,6 +32,7 @@ import Trillion from '../TreecounterGraphics/Trillion';
 
 import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
+import { NotificationAction } from '../../actions/notificationAction';
 import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -60,6 +61,7 @@ class TreeCounter extends Component {
       let token = await getAccessToken();
       if (token) {
         this.props.loadUserProfile();
+        this.props.NotificationAction();
       } else {
         this.setState({ loading: false, isLoggedIn: false });
       }
@@ -205,6 +207,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       loadUserProfile,
+      NotificationAction,
       loadTpos
     },
     dispatch
@@ -216,6 +219,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(TreeCounter);
 TreeCounter.propTypes = {
   userProfile: PropTypes.object,
   loadUserProfile: PropTypes.func,
+  NotificationAction: PropTypes.func,
   loadTpos: PropTypes.func,
   dispatch: PropTypes.func
 };

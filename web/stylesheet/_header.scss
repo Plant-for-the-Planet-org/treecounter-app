@@ -5,11 +5,19 @@
   align-items: center;
   z-index: 1000;
 
+  .notification-bell {
+    margin-top: 7px;
+  }
+
   .unread-circle {
     background-color: #ec6453;
     height: 12px;
     display: flex;
     align-items: center;
+    position: absolute;
+    display: flex;
+    right: 62px;
+    top: 10px;
     padding: 3px;
     width: 12px;
     border-radius: 100%;

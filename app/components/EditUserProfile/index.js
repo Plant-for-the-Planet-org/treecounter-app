@@ -21,23 +21,7 @@ export default class EditUserProfile extends React.Component {
     console.log(props);
     console.log(parsedSchema);
     this.state = {
-      showConfirmProfileDeletion: false,
-      contributionMeasurements: [
-        {
-          id: 301,
-          contribution: null,
-          diameter: 37,
-          height: 36,
-          measurementDate: '2018-06-06'
-        },
-        {
-          id: 302,
-          contribution: null,
-          diameter: 47,
-          height: 35,
-          measurementDate: '2018-06-06'
-        }
-      ]
+      showConfirmProfileDeletion: false
     };
   }
   toggleConfirmProfileDeletion = () => {
@@ -162,7 +146,6 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
         <div className="user-profile__project-form-group">
-          {/* <div className="form-group__heading">Project One</div> */}
           <TCombForm
             ref={'project'}
             type={plantProjectSchema.transformedSchema}
@@ -170,7 +153,6 @@ export default class EditUserProfile extends React.Component {
             value={this.props.currentUserProfile}
           />
         </div>
-        {/* //about_me section */}
         <CardLayout className="user-profile__form-group">
           <div className="form-group__heading">{i18n.t('label.about_me')}</div>
           <TCombForm

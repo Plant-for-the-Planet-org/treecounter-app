@@ -1,7 +1,4 @@
-import {
-  getAuthenticatedRequest,
-  postAuthenticatedRequest
-} from '../utils/api';
+import { getAuthenticatedRequest } from '../utils/api';
 import { userFeedsSynced } from '../reducers/userFeedReducer';
 
 export function NotificationAction() {
@@ -14,7 +11,7 @@ export function NotificationAction() {
 }
 
 export function moreNotificationAction(id) {
-  const request = postAuthenticatedRequest('userfeeds_post', { lastId: id });
+  const request = getAuthenticatedRequest('userfeedsMore_get', { lastId: id });
   return dispatch => {
     request.then(res => {
       dispatch(userFeedsSynced(res.data));

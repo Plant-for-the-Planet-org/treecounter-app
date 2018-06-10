@@ -14,8 +14,12 @@ class Popover extends Component {
 
   CalculatePopoverPosition() {
     let popoverButtonRect = this.refs.popover_button.getBoundingClientRect();
+    let right =
+      (2 * window.innerWidth -
+        (popoverButtonRect.left + popoverButtonRect.right)) /
+      2;
     this.popoverPosition = {
-      right: window.innerWidth - popoverButtonRect.right,
+      right: right,
       top: popoverButtonRect.bottom
     };
   }
@@ -52,7 +56,7 @@ class Popover extends Component {
           style={
             this.state.focused
               ? {
-                  right: this.popoverPosition.right,
+                  right: this.popoverPosition.right - 20,
                   top: this.popoverPosition.top
                 }
               : null
@@ -67,7 +71,7 @@ class Popover extends Component {
           style={
             this.state.focused
               ? {
-                  right: this.popoverPosition.right - 10,
+                  right: this.popoverPosition.right - 35,
                   top: this.popoverPosition.top + 15
                 }
               : null

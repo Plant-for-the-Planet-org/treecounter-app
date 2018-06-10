@@ -11,7 +11,6 @@ export default {
   logout: 'Logout',
   save_changes: 'Save Changes',
   about_me: 'About me',
-  no_notification: 'notifications_none',
   change_password: 'Change password',
   delete_profile: 'Delete Profile',
   un_subscribe: 'Unsubscribe',

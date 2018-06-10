@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import * as constants from '../../SupportedLanguages/en';
+import i18n from '../../locales/i18n.js';
 
 class SearchProjects extends Component {
   constructor() {
@@ -135,14 +134,14 @@ class SearchProjects extends Component {
         <div className="row flex-row f-center">
           <input
             type="button"
-            value="Project Search"
+            value={i18n.t('label.project_search')}
             className="indiviual"
             onClick={() => this.handleFunction(1)}
             id="ProjectSearch"
           />
           <input
             type="button"
-            value="Price Search"
+            value={i18n.t('label.price_search')}
             className="many"
             onClick={() => this.handleFunction(2)}
             id="PriceSearch"
@@ -159,10 +158,10 @@ class SearchProjects extends Component {
                 <table className="table table-hover">
                   <thead>
                     <tr>
-                      <th>{constants.formStrings.project}</th>
-                      <th>{constants.formStrings.organisation}</th>
-                      <th>{constants.formStrings.plantedTrees}</th>
-                      <th>{constants.formStrings.Cost}</th>
+                      <th>{i18n.t('label.project')}</th>
+                      <th>{i18n.t('label.organisation')}</th>
+                      <th>{i18n.t('label.plantedTrees')}</th>
+                      <th>{i18n.t('label.Cost')}</th>
                     </tr>
                   </thead>
                   <tbody>{this.ShowData()}</tbody>

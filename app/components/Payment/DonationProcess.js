@@ -12,6 +12,7 @@ import CurrencySelector from '../GiftTrees/CurrencySelector';
 import TreeCountSelector from '../GiftTrees/TreeCountSelector';
 import PaymentSelector from './PaymentSelector';
 import PlantProject from './PlantProject';
+import i18n from '../../locales/i18n.js';
 
 class DonationProcess extends React.Component {
   constructor(props) {
@@ -252,8 +253,10 @@ class DonationProcess extends React.Component {
           plantProject={plantProject}
           taxDeductableIn={this.state.paymentConfig.taxDeduction}
         />
-        treeCount: {this.state.treeCount} | currency: {this.state.currency} |
-        amount: {this.state.amount}
+        {i18n.t('label.treecount')}
+        {this.state.treeCount} | currency: {this.state.currency} |
+        {i18n.t('label.ammount')}
+        {this.state.amount}
         <CurrencySelector
           {...currencySelectorProps}
           onChange={evt => this.updateCountryCurrency(evt.target.value)}
@@ -263,7 +266,7 @@ class DonationProcess extends React.Component {
           onChange={evt => this.updateTreeCount(evt.target.value)}
         />
         <PrimaryButton onClick={() => this.updateTreeCount(23)}>
-          Set TreeCount
+          {i18n.t('label.set_treecounter')}
         </PrimaryButton>
         <PaymentSelector
           onSuccess={response => this.paymentSuccessCallback(response)}

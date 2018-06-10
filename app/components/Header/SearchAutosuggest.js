@@ -15,7 +15,7 @@ import {
   competition
 } from '../../assets';
 import { getImageUrl } from '../../actions/apiRouting';
-
+import i18n from '../../locales/i18n.js';
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -49,7 +49,6 @@ const renderSuggestion = suggestion => {
   return (
     <div>
       <div className="search-autusuggest__listitem ">
-  
         <img
           src={
             suggestion.image
@@ -102,7 +101,7 @@ class SearchAutosuggest extends Component {
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
-      placeholder: 'Type a name',
+      placeholder: i18n.t('label.placeholder_value'),
       value,
       onChange: this.onChange,
       className: 'form-control search_text'

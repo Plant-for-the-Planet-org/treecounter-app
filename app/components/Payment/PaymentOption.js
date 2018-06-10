@@ -5,6 +5,7 @@ import PaypalGateway from './PaypalGateway';
 import StripeCcGateway from './StripeCcGateway';
 import StripeSepaGateway from './StripeSepaGateway';
 import OfflineGateway from './OfflineGateway';
+import i18n from '../../locales/i18n.js';
 
 const PaymentOption = ({
   selectable,
@@ -49,13 +50,13 @@ const PaymentOption = ({
   };
 
   console.log('---------------- ', gateway);
-  if ('paypal' === gateway) {
+  if (i18n.t('label.paypal') === gateway) {
     gatewayComponent = <PaypalGateway {...gateWayProps} />;
-  } else if ('stripe_cc' === gateway) {
+  } else if (i18n.t('label.stripe_cc') === gateway) {
     gatewayComponent = <StripeCcGateway {...gateWayProps} />;
-  } else if ('stripe_sepa' === gateway) {
+  } else if (i18n.t('label.stripe_sepa') === gateway) {
     gatewayComponent = <StripeSepaGateway {...gateWayProps} />;
-  } else if ('offline' === gateway) {
+  } else if (i18n.t('label.offline') === gateway) {
     gatewayComponent = <OfflineGateway {...gateWayProps} />;
   }
 
@@ -71,7 +72,8 @@ const PaymentOption = ({
         {gatewayComponent}
       </label>
       <div>
-        Radio {gateway} {accountName}
+        {i18n.t('label.radio')}
+        {gateway} {accountName}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PlantProjectSpecsItem from './PlantProjectSpecsItem';
+import i18n from '../../locales/i18n.js';
 
 import {
   locationIcon,
@@ -26,26 +27,31 @@ const PlantProjectSpecs = ({
       <PlantProjectSpecsItem
         icon={locationIcon}
         value={location}
-        label="location"
+        label={i18n.t('label.location')}
       />
       <PlantProjectSpecsItem
         icon={plantedTarget}
         value={countPlanted}
-        label="Planted"
+        label={i18n.t('label.planted')}
       />
-      <PlantProjectSpecsItem icon={target} value={countTarget} label="Target" />
+      <PlantProjectSpecsItem
+        icon={target}
+        value={countTarget}
+        label={i18n.t('label.target')}
+      />
       <PlantProjectSpecsItem
         icon={tree_survival}
         value={survivalRate}
-        label="Survival Rate"
+        label={i18n.t('label.survival_rate')}
       />
       <PlantProjectSpecsItem
         icon={dollar}
         value={`${currency} ${treeCost}`}
-        label="Cost per Tree"
+        label={i18n.t('label.Cost')}
       />
       <div className="project-specs__taxdeductible">
-        Tax Deductible in {taxDeduction.join(', ')}
+        {i18n.t('label.tax_deductible')} {i18n.t('label.in')}{' '}
+        {taxDeduction.join(', ')}
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import {
   multipleTreesRegisterFormSchema,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
+import i18n from '../../locales/i18n.js';
 
 let TCombForm = t.form.Form;
 
@@ -70,11 +71,11 @@ export default class RegisterTrees extends Component {
   static data = {
     tabs: [
       {
-        name: 'Individual Tree',
+        name: i18n.t('label.individual'),
         id: 'single-tree'
       },
       {
-        name: 'Many Trees',
+        name: i18n.t('label.many_trees'),
         id: 'multiple-trees'
       }
     ]
@@ -106,7 +107,7 @@ export default class RegisterTrees extends Component {
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>Register planted trees</TextHeading>
+        <TextHeading>{i18n.t('label.heading_register_trees')}</TextHeading>
         <CardLayout>
           <Tabs
             data={RegisterTrees.data.tabs}
@@ -127,7 +128,9 @@ export default class RegisterTrees extends Component {
               />
             )}
           </Tabs>
-          <PrimaryButton onClick={this.onSubmitClick}>Register</PrimaryButton>
+          <PrimaryButton onClick={this.onSubmitClick}>
+            {i18n.t('label.register')}
+          </PrimaryButton>
         </CardLayout>
       </div>
     );

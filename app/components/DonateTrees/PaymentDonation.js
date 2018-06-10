@@ -8,7 +8,7 @@ import { PaymentSchema } from '../../layouts/donatePayment';
 import CustomForm from '../Common/CustomForm';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import { Payment } from '../../actions/paymentAction';
-import * as constants from '../../SupportedLanguages/en';
+import i18n from '../../locales/i18n.js';
 
 class PaymentDonation extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class PaymentDonation extends Component {
     this.state = {
       loading: true,
       schema: {},
-      paymentMethod: 'pftp_paypal',
+      paymentMethod: i18n.t('label.pftp_paypal'),
       paymentOptions: {
         iban: '',
         bic: ''
@@ -57,7 +57,7 @@ class PaymentDonation extends Component {
 
   handlePaymentDonate(paymentInfo) {
     paymentInfo.paymentMethod = this.state.paymentMethod;
-    if (this.state.paymentMethod === 'pftp_sepa') {
+    if (this.state.paymentMethod === i18n.t('label.pftp_sepa')) {
       paymentInfo.paymentOptions = `iban=${
         this.state.paymentOptions.iban
       }&bic=${this.state.paymentOptions.bic}`;
@@ -97,7 +97,7 @@ class PaymentDonation extends Component {
         delete data.schema.properties.paymentMethod;
         delete data.schema.properties.paymentOptions;
 
-        let index = data.schema.required.indexOf('paymentMethod');
+        let index = data.schema.required.indexOf(i18n.t('label.paymentMethod'));
         if (index !== -1) data.schema.required.splice(index, 1);
 
         this.setState({ schema: data.schema, loading: false });
@@ -108,44 +108,54 @@ class PaymentDonation extends Component {
   getPaymentGateways() {
     return this.state.availablePaymentModes.map(element => {
       switch (element.name) {
-        case 'pftp_paypal':
+        case i18n.t('label.pftp_paypal'):
           return (
-            <div key="pftp_paypal" className="radio payment-method__option">
+            <div
+              key={i18n.t('label.pftp_paypal')}
+              className="radio payment-method__option"
+            >
               <label>
                 <input
                   type="radio"
-                  value="pftp_paypal"
-                  checked={this.state.paymentMethod === 'pftp_paypal'}
+                  value={i18n.t('label.pftp_paypal')}
+                  checked={
+                    this.state.paymentMethod === i18n.t('label.pftp_paypal')
+                  }
                   onChange={this.handleOptionChange}
                 />
                 <div>
-                  <span>{constants.formStrings.paypal}</span>
-                  <span>{constants.formStrings.redirectionMessage}</span>
+                  <span>{i18n.t('label.paypal')}</span>
+                  <span>{i18n.t('label.redirectionMessage')}</span>
                 </div>
                 <div className="flex__spacer" />
                 <img src="http://pngimg.com/uploads/paypal/paypal_PNG4.png" />
               </label>
             </div>
           );
-        case 'pftp_sepa':
+        case i18n.t('label.pftp_sepa'):
           return (
-            <div key="pftp_sepa" className="radio payment-method__option">
+            <div
+              key={i18n.t('label.pftp_sepa')}
+              className="radio payment-method__option"
+            >
               <label>
                 <input
                   type="radio"
-                  value="pftp_sepa"
-                  checked={this.state.paymentMethod === 'pftp_sepa'}
+                  value={i18n.t('label.pftp_sepa')}
+                  checked={
+                    this.state.paymentMethod === i18n.t('label.pftp_sepa')
+                  }
                   onChange={this.handleOptionChange}
                 />
                 <div>
-                  <span>{constants.formStrings.directDebit}</span>
-                  <span>{constants.formStrings.accountInfo}</span>
+                  <span>{i18n.t('label.directDebit')}</span>
+                  <span>{i18n.t('label.accountInfo')}</span>
                 </div>
                 <div className="flex__spacer" />
                 <img src="https://www.cardgate.com/wp-content/themes/cardgate/download.php?file=SEPA-direct-debit-logo.png" />
               </label>
               <div className="payment-method__option--input">
-                <span>{constants.formStrings.IBAN}</span>
+                <span>{i18n.t('label.IBAN')}</span>
                 <input
                   type="text"
                   value={this.state.paymentOptions.iban}
@@ -153,7 +163,7 @@ class PaymentDonation extends Component {
                 />
               </div>
               <div className="payment-method__option--input">
-                <span>{constants.formStrings.BIC}</span>
+                <span>{i18n.t('label.BIC')}</span>
                 <input
                   type="text"
                   value={this.state.paymentOptions.bic}
@@ -162,19 +172,22 @@ class PaymentDonation extends Component {
               </div>
             </div>
           );
-        case 'pftp_cc':
+        case i18n.t('label.pftp_cc'):
           return (
-            <div key="pftp_cc" className="radio payment-method__option">
+            <div
+              key={i18n.t('label.pftp_cc')}
+              className="radio payment-method__option"
+            >
               <label>
                 <input
                   type="radio"
-                  value="pftp_cc"
-                  checked={this.state.paymentMethod === 'pftp_cc'}
+                  value={i18n.t('label.pftp_cc')}
+                  checked={this.state.paymentMethod === i18n.t('label.pftp_cc')}
                   onChange={this.handleOptionChange}
                 />
                 <div>
-                  <span>{constants.formStrings.creditCard}</span>
-                  <span>{constants.formStrings.creditCardMessage}</span>
+                  <span>{i18n.t('label.creditCard')}</span>
+                  <span>{i18n.t('label.creditCardMessage')}</span>
                 </div>
                 <div className="flex__spacer" />
                 <img src="http://www.pngmart.com/files/3/Credit-Card-Visa-And-Master-Card-PNG-HD.png" />
@@ -188,32 +201,34 @@ class PaymentDonation extends Component {
     console.log('Payment Donation ----- Render', this.state.schema);
     return (
       <div className="payment-page-container">
-        <h3>{constants.formStrings.donateTrees}</h3>
-        <h6>{constants.formStrings.donateTreesMessage}</h6>
+        <h3>{i18n.t('label.donateTrees')}</h3>
+        <h6>{i18n.t('label.donateTreesMessage')}</h6>
         <div className="horizontal-round-bar">
           <div className="horizontal-round-bar__spacer" />
           <span>1</span>
           <div className="horizontal-round-bar__spacer" />
         </div>
         <div className="project-details">
-          <h4 className="project-details__heading">Project Details</h4>
+          <h4 className="project-details__heading">
+            {i18n.t('label.project_details')}
+          </h4>
           <div className="project-details__content">
             <div className="project-details__content--left">
               <span className="project-details__content--left__name">
                 {this.state.selectedProject.name}
               </span>
               <div className="project-details__table">
-                <span>{constants.formStrings.planted}:</span>
+                <span>{i18n.t('label.planted')}:</span>
                 <span>{this.state.selectedProject.countPlanted}</span>
 
-                <span>{constants.formStrings.target}:</span>
+                <span>{i18n.t('label.target')}:</span>
                 <span>{this.state.selectedProject.countTarget}</span>
 
-                <span>{constants.formStrings.costPerTree}:</span>
+                <span>{i18n.t('label.Cost')}:</span>
                 <span>{this.state.selectedProject.treeCost}</span>
                 {this.state.selectedProject.isCertified
-                  ? 'Certified'
-                  : 'Not Certified'}
+                  ? i18n.t('label.certified')
+                  : i18n.t('label.nonCertified')}
               </div>
             </div>
             <div className="project-details__content--right">
@@ -221,9 +236,9 @@ class PaymentDonation extends Component {
             </div>
           </div>
           <div className="project-details__footer">
-            <a>{constants.formStrings.seeMore}</a>
+            <a>{i18n.t('label.seeMore')}</a>
             <Link to="/donateTrees">
-              {constants.formStrings.selectDifferentProject}
+              {i18n.t('label.selectDifferentProject')}
             </Link>
           </div>
         </div>
@@ -248,7 +263,7 @@ class PaymentDonation extends Component {
           onSubmit={this.handlePaymentDonate}
           baseForm={CustomForm}
           headline=""
-          buttonText="Donate"
+          buttonText={i18n.t('label.donate')}
           buttonWidth="240"
         />
       </div>

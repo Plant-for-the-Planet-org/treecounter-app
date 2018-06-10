@@ -12,6 +12,7 @@ import {
 } from '../../server/parsedSchemas/editProfile';
 import PaswordUpdatedDialog from './PaswordUpdateModal';
 import ConfirmProfileDeletion from './ConfirmProfileDeletionModal';
+import i18n from '../../locales/i18n.js';
 
 let TCombForm = t.form.Form;
 export default class EditUserProfile extends React.Component {
@@ -134,7 +135,7 @@ export default class EditUserProfile extends React.Component {
           isOpen={this.props.openPasswordUpdatedDialog}
           onRequestClose={this.props.handlePaswordUpdatedClose}
         />
-        <TextHeading>Edit Profile</TextHeading>
+        <TextHeading>{i18n.t('label.edit_profile')}</TextHeading>
         <CardLayout className="user-profile__form-group">
           <div className="profile-image__container">
             <UserProfileImage profileImage={image} />
@@ -157,7 +158,7 @@ export default class EditUserProfile extends React.Component {
               this.props.onSave(type, 'profile');
             }}
           >
-            Save Changes
+            {i18n.t('label.save_changes')}
           </PrimaryButton>
         </CardLayout>
         <div className="user-profile__project-form-group">
@@ -171,7 +172,7 @@ export default class EditUserProfile extends React.Component {
         </div>
         {/* //about_me section */}
         <CardLayout className="user-profile__form-group">
-          <div className="form-group__heading">About me</div>
+          <div className="form-group__heading">{i18n.t('label.about_me')}</div>
           <TCombForm
             ref={'about_me'}
             type={parsedSchema[type].about_me.transformedSchema}
@@ -183,11 +184,13 @@ export default class EditUserProfile extends React.Component {
               this.props.onSave(type, 'about_me');
             }}
           >
-            Save Changes
+            {i18n.t('label.save_changes')}
           </PrimaryButton>
         </CardLayout>
         <CardLayout className="user-profile__form-group">
-          <div className="form-group__heading">Change password</div>
+          <div className="form-group__heading">
+            {i18n.t('label.change_password')}
+          </div>
           <TCombForm
             ref={'password'}
             type={parsedSchema[type].password.transformedSchema}
@@ -198,7 +201,7 @@ export default class EditUserProfile extends React.Component {
               this.props.onSave(type, 'password');
             }}
           >
-            Change Passwords
+            {i18n.t('label.change_password')}
           </PrimaryButton>
         </CardLayout>
         <div className="delete-profile__button">
@@ -208,7 +211,7 @@ export default class EditUserProfile extends React.Component {
               // this.props.deleteProfile();
             }}
           >
-            Delete Profile
+            {i18n.t('label.delete_profile')}
           </SecondaryButton>
         </div>
       </div>

@@ -9,7 +9,7 @@ import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantProjectSelector';
 import UserFootprint from './UserFootprint';
 import { currentUserProfileSelector } from '../../selectors/index';
-// import {selectPlantProjectIdAction} from '../../actions/selectPlantProjectIdAction'
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import CardLayout from '../../components/Common/Card/CardLayout';
@@ -67,9 +67,7 @@ class PublicTreeCounter extends React.Component {
   }
 
   onPlantProjectSelected(selectedPlantProjectId) {
-    console.log(selectedPlantProjectId);
-    // console.log('onPlantProjectSelected', selectedPlantProjectId)
-    // this.props.selectPlantProjectIdAction(selectedPlantProjectId)
+    this.props.selectPlantProjectIdAction(selectedPlantProjectId);
     //history.push(getLocalRoute('app_donateTrees'))
   }
 
@@ -174,14 +172,15 @@ PublicTreeCounter.propTypes = {
   treecounter: PropTypes.object,
   currentUserProfile: PropTypes.object,
   followSubscribeAction: PropTypes.func,
-  unfollowSubscribeAction: PropTypes.func
+  unfollowSubscribeAction: PropTypes.func,
+  selectPlantProjectIdAction: PropTypes.func
 };
 
 const mapDispatchToProps = dispatch => {
   console.log(dispatch);
   return bindActionCreators(
     {
-      // selectPlantProjectIdAction: selectedPlantProjectId => dispatch(selectPlantProjectIdAction(selectedPlantProjectId)),
+      selectPlantProjectIdAction: selectPlantProjectAction,
       followSubscribeAction: followUser,
       unfollowSubscribeAction: unfollowUser
     },

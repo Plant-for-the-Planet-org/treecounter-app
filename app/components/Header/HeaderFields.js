@@ -26,7 +26,7 @@ const HeaderFields = ({
         }
         button={
           <div className="notification-bell">
-            {userFeeds.unRead > 0 ? (
+            {userFeeds.unRead && userFeeds.unRead > 0 ? (
               <div className="unread-circle">
                 <span className="unread-number-align">{userFeeds.unRead}</span>
               </div>

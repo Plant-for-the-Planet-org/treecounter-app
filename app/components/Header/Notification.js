@@ -7,8 +7,8 @@ import { getImageUrl } from '../../actions/apiRouting';
 export default class Notification extends Component {
   NotificationDisplay(notifications) {
     return notifications.userFeeds.map(notification => (
-      <div>
-        <li className="popover__list-item" key={notification.id}>
+      <div key={notification.id}>
+        <li className="popover__list-item">
           <div className="list-item__wrapper">
             <img src={getImageUrl('profile', 'thumb', notification.image)} />
             <div className="item-html__wrapper">

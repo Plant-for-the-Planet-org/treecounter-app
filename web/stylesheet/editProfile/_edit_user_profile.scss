@@ -73,15 +73,16 @@
     }
   }
   .user-profile__project-form-group {
+    // .fieldset-depth-1 {
     margin: 30px;
     max-width: 718px;
     box-sizing: border-box;
     width: 100%;
-    .row {
+    .row1 {
       @extend .user-profile__form-group;
       margin: 0 0 30px 0;
     }
-    .row::before {
+    .row1::before {
       @extend .form-group__heading;
       content: "Project" counter(div);
       font-size: 16px;
@@ -91,6 +92,7 @@
       padding-left: 6px;
       margin-bottom: 20px;
     }
+    // }
   }
 }
 

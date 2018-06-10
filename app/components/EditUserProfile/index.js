@@ -6,7 +6,10 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
 import PropTypes from 'prop-types';
 import UserProfileImage from '../Common/UserProfileImage';
-import { parsedSchema } from '../../server/parsedSchemas/editProfile';
+import {
+  parsedSchema,
+  plantProjectSchema
+} from '../../server/parsedSchemas/editProfile';
 import PaswordUpdatedDialog from './PaswordUpdateModal';
 import ConfirmProfileDeletion from './ConfirmProfileDeletionModal';
 
@@ -161,9 +164,9 @@ export default class EditUserProfile extends React.Component {
           {/* <div className="form-group__heading">Project One</div> */}
           <TCombForm
             ref={'project'}
-            type={parsedSchema[type].project.transformedSchema}
-            options={this.getFormSchemaOption(type, 'project')}
-            value={this.state}
+            type={plantProjectSchema.transformedSchema}
+            options={plantProjectSchema.schemaOptions}
+            value={this.props.currentUserProfile}
           />
         </div>
         {/* //about_me section */}

@@ -907,7 +907,7 @@
       "methods": ["GET"],
       "schemes": []
     },
-    "mark_readuserFeedsMarkRead_post": {
+    "userFeedsMarkRead_post": {
       "tokens": [
         ["text", "/userfeeds/markRead"],
         ["variable", "/", "[^/]++", "_locale"],

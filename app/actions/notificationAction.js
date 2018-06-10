@@ -1,7 +1,11 @@
-import { getAuthenticatedRequest } from '../utils/api';
+import {
+  getAuthenticatedRequest,
+  postAuthenticatedRequest
+} from '../utils/api';
 import {
   userFeedsSynced,
-  userFeedsSyncedMore
+  userFeedsSyncedMore,
+  userFeedsSyncedMarkRead
 } from '../reducers/userFeedReducer';
 
 export function NotificationAction() {
@@ -18,6 +22,17 @@ export function moreNotificationAction(id) {
   return dispatch => {
     request.then(res => {
       dispatch(userFeedsSyncedMore(res.data));
+    });
+  };
+}
+
+export function markSeenNotificationAction(id) {
+  const request = postAuthenticatedRequest('userFeedsMarkRead_post', {
+    lastId: id
+  });
+  return dispatch => {
+    request.then(res => {
+      dispatch(userFeedsSyncedMarkRead(res.data));
     });
   };
 }

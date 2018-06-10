@@ -12,7 +12,8 @@ const Header = ({
   updateRoute,
   logoutUser,
   userProfile,
-  fetchMoreNotifications
+  fetchMoreNotifications,
+  markSeenNotificationAction
 }) => {
   let isLoggedIn = null != userProfile;
   return (
@@ -29,6 +30,7 @@ const Header = ({
         updateRoute={updateRoute}
         userFeeds={userFeeds}
         fetchMoreNotifications={fetchMoreNotifications}
+        markSeenNotificationAction={markSeenNotificationAction}
       />
     </header>
   );
@@ -40,6 +42,7 @@ Header.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   userProfile: PropTypes.object,
   fetchMoreNotifications: PropTypes.func,
+  markSeenNotificationAction: PropTypes.func,
   updateRoute: PropTypes.func,
   userFeeds: PropTypes.object
 };

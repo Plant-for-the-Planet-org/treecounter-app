@@ -7,7 +7,10 @@ import Header from '../../components/Header';
 
 // Actions
 import { logoutUser } from '../../actions/authActions';
-import { moreNotificationAction } from '../../actions/notificationAction';
+import {
+  moreNotificationAction,
+  markSeenNotificationAction
+} from '../../actions/notificationAction';
 import {
   currentUserProfileSelector,
   userFeedsSelector
@@ -23,6 +26,7 @@ class HeaderContainer extends React.Component {
         updateRoute={this.props.route}
         userFeeds={this.props.userFeeds}
         fetchMoreNotifications={this.props.moreNotificationAction}
+        markSeenNotificationAction={this.props.markSeenNotificationAction}
       />
     );
   }
@@ -33,6 +37,7 @@ const mapDispatchToProps = dispatch => {
     {
       logoutUser,
       moreNotificationAction,
+      markSeenNotificationAction,
       route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
     },
     dispatch
@@ -50,6 +55,7 @@ HeaderContainer.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   route: PropTypes.func,
   moreNotificationAction: PropTypes.func,
+  markSeenNotificationAction: PropTypes.func,
   userProfile: PropTypes.object,
   userFeeds: PropTypes.object
 };

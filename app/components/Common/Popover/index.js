@@ -31,6 +31,9 @@ class Popover extends Component {
 
   PopoverBlurred() {
     this.refs.popover.blur();
+    if (this.props.onPopoverClosed) {
+      this.props.onPopoverClosed();
+    }
     this.setState({ focused: false });
   }
 
@@ -86,6 +89,7 @@ class Popover extends Component {
 
 Popover.propTypes = {
   children: PropTypes.element,
+  onPopoverClosed: PropTypes.func,
   button: PropTypes.element
 };
 

@@ -2,6 +2,9 @@ import { createAction, handleActions } from 'redux-actions';
 
 export const userFeedsSynced = createAction('USER_FEED_SYNCED');
 export const userFeedsSyncedMore = createAction('USER_FEED_SYNCED_MORE');
+export const userFeedsSyncedMarkRead = createAction(
+  'USER_FEED_SYNCED_MARK_READ'
+);
 
 export const getUserFeeds = state => state.userFeeds;
 
@@ -16,6 +19,9 @@ const userFeedReducer = handleActions(
       temp.more = action.payload.more;
       temp.unRead = action.payload.unRead;
       return temp;
+    },
+    [userFeedsSyncedMarkRead]: (state, action) => {
+      return { ...state, unRead: action.payload.unRead };
     }
   },
   initialState

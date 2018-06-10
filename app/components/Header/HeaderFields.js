@@ -15,11 +15,15 @@ const HeaderFields = ({
   isLoggedIn,
   userProfile,
   onLogout,
-  fetchMoreNotifications
+  fetchMoreNotifications,
+  markSeenNotificationAction
 }) => {
   return isLoggedIn ? (
     <div className="header-icons">
       <Popover
+        onPopoverClosed={() =>
+          markSeenNotificationAction(userFeeds.userFeeds[0].id)
+        }
         button={
           <div className="notification-bell">
             {userFeeds.unRead > 0 ? (
@@ -70,6 +74,7 @@ const HeaderFields = ({
 HeaderFields.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   fetchMoreNotifications: PropTypes.func,
+  markSeenNotificationAction: PropTypes.func,
   userProfile: PropTypes.object,
   onLogout: PropTypes.func.isRequired,
   updateRoute: PropTypes.func,

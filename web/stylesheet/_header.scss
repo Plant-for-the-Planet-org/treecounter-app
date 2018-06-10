@@ -5,6 +5,16 @@
   align-items: center;
   z-index: 1000;
 
+  .unread-circle {
+    background-color: #ec6453;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    width: 12px;
+    border-radius: 100%;
+    font-size: 11px;
+  }
   form {
     display: flex;
     flex: 2;
@@ -47,9 +57,23 @@
 
   .list-item__wrapper {
     display: flex;
+    align-items: center;
+    max-width: 300px;
 
     img {
       padding-right: 10px;
+    }
+
+    .item-html__wrapper {
+      display: inline-block;
+      text-align: left;
+      color: #9c9b9b;
+      margin-left: 10px;
+      font-family: Open Sans;
+      a {
+        color: #686060;
+        font-weight: bold;
+      }
     }
   }
 

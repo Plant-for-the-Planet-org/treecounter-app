@@ -2,16 +2,22 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import renderHTML from 'react-render-html';
+import { getImageUrl } from '../../actions/apiRouting';
 
 export default class Notification extends Component {
   NotificationDisplay(notifications) {
     return notifications.userFeeds.map(notification => (
-      <li className="notification-group" key={notification.id}>
-        <div className="notification-tab">
-          <i className="fas fa-user" />
-          {renderHTML(notification.message)}
-        </div>
-      </li>
+      <div>
+        <li className="popover__list-item" key={notification.id}>
+          <div className="list-item__wrapper">
+            <img src={getImageUrl('profile', 'thumb', notification.image)} />
+            <div className="item-html__wrapper">
+              {renderHTML(notification.message)}
+            </div>
+          </div>
+        </li>
+        <hr className="divider__light" />
+      </div>
     ));
   }
 

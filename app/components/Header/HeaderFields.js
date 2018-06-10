@@ -20,7 +20,10 @@ const HeaderFields = ({
     <div className="header-icons">
       <Popover
         button={
-          <i className="material-icons"> {i18n.t('label.no_notification')}</i>
+          <div>
+            <div className="unread-circle">{userFeeds.unRead}</div>
+            <i className="material-icons">notifications_none</i>
+          </div>
         }
       >
         <Notification userFeeds={userFeeds} />

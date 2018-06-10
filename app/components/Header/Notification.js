@@ -28,7 +28,7 @@ export default class Notification extends Component {
         <ul className="notification-popover">
           {this.NotificationDisplay(userFeeds)}
         </ul>
-        {userFeeds.more === 0 ? (
+        {userFeeds.more > 0 ? (
           <div
             onClick={() =>
               this.props.fetchMoreNotifications(

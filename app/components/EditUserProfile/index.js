@@ -95,6 +95,14 @@ export default class EditUserProfile extends React.Component {
   };
 
   getFormSchemaOption = (userType, profileType) => {
+    if (profileType == 'project') {
+      return {
+        template: locals => {
+          return <div>{locals.inputs.plantProjects}</div>;
+        },
+        ...plantProjectSchema.schemaOptions
+      };
+    }
     let schemaOptions = parsedSchema[userType][profileType].schemaOptions;
     return {
       template: this.getFormTemplate(userType, profileType),
@@ -149,7 +157,7 @@ export default class EditUserProfile extends React.Component {
           <TCombForm
             ref={'project'}
             type={plantProjectSchema.transformedSchema}
-            options={plantProjectSchema.schemaOptions}
+            options={this.getFormSchemaOption('tpo', 'project')}
             value={this.props.currentUserProfile}
           />
         </div>
@@ -190,7 +198,6 @@ export default class EditUserProfile extends React.Component {
           <SecondaryButton
             onClick={() => {
               this.toggleConfirmProfileDeletion();
-              // this.props.deleteProfile();
             }}
           >
             {i18n.t('label.delete_profile')}

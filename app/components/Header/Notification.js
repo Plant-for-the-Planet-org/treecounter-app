@@ -11,19 +11,15 @@ export default class Notification extends Component {
     };
   }
 
-  NotificationDisplay(myObject) {
-    let msg = [];
-    for (let [key, value] of Object.entries(myObject)) {
-      msg.push(
-        <li className="notification-group" key={key}>
-          <div className="notification-tab">
-            <i className="fas fa-user" />
-            {renderHTML(value.message)}
-          </div>
-        </li>
-      );
-    }
-    return msg;
+  NotificationDisplay(notifications) {
+    return notifications.userFeeds.map(notification => (
+      <li className="notification-group" key={notification.id}>
+        <div className="notification-tab">
+          <i className="fas fa-user" />
+          {renderHTML(notification.message)}
+        </div>
+      </li>
+    ));
   }
 
   componentWillMount() {

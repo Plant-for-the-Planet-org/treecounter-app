@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import i18n from '../../locales/i18n';
 const StripeCcGateway = ({ amount, currency, account, target }) => {
   //  const props = {account, target};
 
@@ -8,7 +8,10 @@ const StripeCcGateway = ({ amount, currency, account, target }) => {
 
   return (
     <div>
-      <div>StripeCC: {target}</div>
+      <div>
+        {i18n.t('label.stripeCC')}
+        {target}
+      </div>
       <div>
         {account.authorization.publishable_key} {target}
       </div>

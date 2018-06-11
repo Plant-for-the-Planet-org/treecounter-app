@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import UserProfileImage from '../Common/UserProfileImage';
 import ActionButton from '../Common/ActionButton';
 import { parsedSchema } from '../../server/parsedSchemas/editProfile';
+import i18n from '../../locales/i18n.js';
 
 let TCombForm = t.form.Form;
 export default class EditUserProfile extends React.Component {
@@ -97,7 +98,7 @@ export default class EditUserProfile extends React.Component {
     const { type, image } = this.props.currentUserProfile;
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
-        <TextHeading>Edit Profile</TextHeading>
+        <TextHeading>{i18n.t('label.edit_profile')}</TextHeading>
         <CardLayout className="user-profile__form-group">
           <div className="profile-image__container">
             <UserProfileImage profileImage={image} />
@@ -120,12 +121,12 @@ export default class EditUserProfile extends React.Component {
               this.props.onSave(type, 'profile');
             }}
           >
-            Save Changes
+            {i18n.t('label.save_changes')}
           </PrimaryButton>
         </CardLayout>
         {/* //about_me section */}
         <CardLayout className="user-profile__form-group">
-          <div className="form-group__heading">About me</div>
+          <div className="form-group__heading">{i18n.t('label.about_me')}</div>
           <TCombForm
             ref={'about_me'}
             type={parsedSchema[type].about_me.transformedSchema}
@@ -137,11 +138,13 @@ export default class EditUserProfile extends React.Component {
               this.props.onSave(type, 'about_me');
             }}
           >
-            Save Changes
+            {i18n.t('label.save_changes')}
           </PrimaryButton>
         </CardLayout>
         <CardLayout className="user-profile__form-group">
-          <div className="form-group__heading">Change password</div>
+          <div className="form-group__heading">
+            {i18n.t('label.change_password')}
+          </div>
           <TCombForm
             ref={'password'}
             type={parsedSchema[type].password.transformedSchema}
@@ -152,11 +155,11 @@ export default class EditUserProfile extends React.Component {
               this.props.onSave(type, 'password');
             }}
           >
-            Change Passwords
+            {i18n.t('label.change_password')}
           </PrimaryButton>
         </CardLayout>
         {/* <CardLayout>Following</CardLayout> */}
-        <ActionButton caption="Delete Profile" />
+        <ActionButton caption={i18n.t('label.delete_profile')} />
       </div>
     );
   }

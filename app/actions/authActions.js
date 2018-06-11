@@ -7,6 +7,7 @@ import { userLogout } from '../reducers/reducer';
 import { clearStorage } from '../stores/localStorage';
 import { postRequest } from '../utils/api';
 import { updateJWT } from '../utils/user';
+import { NotificationAction } from './notificationAction';
 
 export function login(data) {
   const request = postRequest('api_login_check', data);
@@ -17,6 +18,7 @@ export function login(data) {
         const { token, refresh_token } = res.data;
         updateJWT(token, refresh_token);
         dispatch(loadUserProfile());
+        dispatch(NotificationAction());
         updateRoute('app_userHome', dispatch);
         return token;
       })

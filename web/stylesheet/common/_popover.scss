@@ -23,6 +23,7 @@
     flex-direction: column;
     position: fixed;
     background-color: #fff;
+    max-height: 400px;
     color: black;
     overflow: auto;
     right: -10000px;
@@ -46,4 +47,15 @@
     border-right: 15px solid transparent;
     border-bottom: 15px solid white;
   }
+}
+
+.pftp-popover__container::-webkit-scrollbar {
+  width: 6px;
+  height: 2px;
+  display: none;
+}
+
+.pftp-popover__container::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 20px;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import DonateTreesCardText from './DonateTreesCardText';
 import DonateTreesCardFooter from './DonateTreesCardFooter';
 import PropTypes from 'prop-types';
+import i18n from '../../locales/i18n.js';
 
 const DonateTreesCardLayout = props => {
   const { value, userTpos } = props;
@@ -14,7 +15,13 @@ const DonateTreesCardLayout = props => {
         />
         <div className="card-block">
           <h4
-            title={value.name + ' by ' + userTpos[value.tpoId].name}
+            title={
+              value.name +
+              ' ' +
+              i18n.t('label.by') +
+              ' ' +
+              userTpos[value.tpoId].name
+            }
             className="card-title"
           >
             {value.name} by {userTpos[value.tpoId].name}

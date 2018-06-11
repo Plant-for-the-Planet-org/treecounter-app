@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 
 import { plantProjectsSelector } from '../../selectors/index';
 import ActivePlantProject from './ActivePlantProject';
+import i18n from '../../locales/i18n.js';
 
 const TPOComponent = ({ userTpos, plantProjects, id }) => (
   <div>
     <div className="tpo_box">
-      <p className="firstHeadline">WWF</p>
-      <p>Plant for you</p>
+      <p className="firstHeadline">{i18n.t('label.org')}</p>
+      <p>{i18n.t('label.plant_for_u')}</p>
       <hr />
       <ActivePlantProject
         userTpos={userTpos}

@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import PropTypes, { func } from 'prop-types';
 
 import * as images from '../../assets';
+import i18n from '../../locales/i18n.js';
 
 export default class MenuGroup extends Component {
   static propTypes = {
@@ -15,7 +16,7 @@ export default class MenuGroup extends Component {
       <View style={styles.container}>
         <View style={styles.groupMenuContainer}>
           <Text style={styles.gropuTextStyle}>
-            {this.props.titleId ? 'Load from T()' : this.props.title}
+            {this.props.titleId ? i18n.t('label.load') : this.props.title}
           </Text>
           <View style={styles.titleTextUnderline} />
         </View>
@@ -50,7 +51,7 @@ class MenuItem extends Component {
         <View style={styles.menuItemContainer}>
           <Image style={styles.imageStyle} source={this.props.iconUrl} />
           <Text style={styles.textStyle}>
-            {this.props.titleId ? 'Load from T()' : this.props.title}
+            {this.props.titleId ? i18n.t('label.load') : this.props.title}
           </Text>
         </View>
       </TouchableOpacity>

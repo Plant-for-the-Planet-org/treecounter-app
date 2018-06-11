@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import i18n from '../../locales/i18n.js';
 
-import {
-  plantProjectsSelector
-} from '../../selectors';
+import { plantProjectsSelector } from '../../selectors';
 import {
   sortedUserContributionsSelector,
   userPlantProjectsActualSelector
@@ -14,7 +13,6 @@ import PreviouslyDonated from './previouslyDonated';
 import FeaturedProjects from './FeaturedProjects';
 import DonateTreesCarousel from './DonateTreesCarousel';
 import SearchProjects from './SearchProjects';
-import * as constants from '../../SupportedLanguages/en';
 
 class DonateTrees extends Component {
   componentDidMount() {
@@ -23,7 +21,7 @@ class DonateTrees extends Component {
     });
 
     $('.Previously_carousel .item:first').addClass('active');
-    $('.Previously_carousel .item').each(function () {
+    $('.Previously_carousel .item').each(function() {
       let itemToClone = $(this);
 
       for (let i = 1; i < 4; i++) {
@@ -44,7 +42,7 @@ class DonateTrees extends Component {
     });
 
     $('#featured_carousel .featured:first').addClass('active');
-    $('#featured_carousel .featured').each(function () {
+    $('#featured_carousel .featured').each(function() {
       let itemToClone1 = $(this);
       for (let i = 1; i < 4; i++) {
         itemToClone1 = itemToClone1.next();
@@ -65,11 +63,7 @@ class DonateTrees extends Component {
   }
 
   render() {
-    const {
-      userPlantProjectSelect,
-      userTpos,
-      plantProjects
-    } = this.props;
+    const { userPlantProjectSelect, userTpos, plantProjects } = this.props;
     return (
       <div className="sidenav-wrapper">
         <PageHeader caption="Donate Trees" />
@@ -77,7 +71,7 @@ class DonateTrees extends Component {
           <div>
             <div className="text-center">
               <h3 className="cs-subHeading">
-                {constants.formStrings.previouslyDonated}
+                {i18n.t('label.previouslyDonated')}
               </h3>
             </div>
             <DonateTreesCarousel
@@ -93,9 +87,7 @@ class DonateTrees extends Component {
         ) : null}
         <div className="clearfix" />
         <div>
-          <h3 className="cs-subHeading">
-            {constants.formStrings.featuredProjects}
-          </h3>
+          <h3 className="cs-subHeading">{i18n.t('label.featuredProjects')}</h3>
           <div>
             <DonateTreesCarousel
               carouselClass="carousel carousel-showmanymoveone slide featured_carousel"
@@ -128,5 +120,5 @@ DonateTrees.propTypes = {
   userPlantProjectSelect: PropTypes.object.isRequired,
   userTpos: PropTypes.object.isRequired,
   userPlantProjects: PropTypes.object.isRequired,
-  plantProjects: PropTypes.object.isRequired,
+  plantProjects: PropTypes.object.isRequired
 };

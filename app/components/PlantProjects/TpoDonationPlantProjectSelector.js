@@ -5,6 +5,7 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import CardLayout from '../Common/Card/CardLayout';
 import ContentHeader from '../Common/ContentHeader';
 import PlantProjectCarousel from './PlantProjectCarousel';
+import i18n from '../../locales/i18n';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component---TpoDonationPlantProjectSelector
@@ -39,9 +40,9 @@ class TpoDonationPlantProjectSelector extends React.Component {
     const { plantProjects, onSelect, tpoName } = this.props;
     const caption =
       plantProjects.length === 1
-        ? 'caption.plant_project'
-        : 'caption.plant_projects';
-    const TagName = 'PlantProjectFull';
+        ? i18n.t('label.plant_project')
+        : i18n.t('label.plant_projects');
+    const TagName = i18n.t('label.plant_project_full');
 
     return (
       <CardLayout className="tpo-footer-card-layout">
@@ -63,7 +64,7 @@ class TpoDonationPlantProjectSelector extends React.Component {
         <PrimaryButton
           onClick={() => onSelect(this.state.currentPlantProjectId)}
         >
-          button.label.donate
+          {i18n.t('label.donate')}
         </PrimaryButton>
       </CardLayout>
     );

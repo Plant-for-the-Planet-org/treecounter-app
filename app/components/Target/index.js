@@ -10,6 +10,7 @@ import {
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
+import i18n from '../../locales/i18n.js';
 
 let TCombForm = t.form.Form;
 
@@ -37,7 +38,7 @@ export default class Target extends Component {
     let { countTarget, targetYear, targetComment } = this.props.treecounter;
 
     this.state = {
-      label: countTarget !== 0 ? 'Update' : 'Set',
+      label: countTarget !== 0 ? i18n.t('label.update') : i18n.t('label.set'),
       initialValues: { countTarget, targetYear, targetComment }
     };
   }
@@ -45,7 +46,7 @@ export default class Target extends Component {
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>Set Target</TextHeading>
+        <TextHeading>{i18n.t('label.set_target')}</TextHeading>
         <CardLayout>
           <TCombForm
             ref="setTargetForm"

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ActivePlantProjectData from './ActivePlantProjectData';
-import * as constants from '../../SupportedLanguages/en';
+import i18n from '../../locales/i18n.js';
+
 import { Link } from 'react-router-dom';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { connect } from 'react-redux';
@@ -23,14 +24,14 @@ const ActivePlantProject = props => {
       </div>
       <div className="bottomBtn col-md-12">
         <a className="col-md-6 leftBtn" href="#">
-          {constants.formStrings.seeMore}
+          {i18n.t('label.seeMore')}
         </a>{' '}
         <Link
           className="col-md-6 rightBtn"
           to={route}
           onClick={e => handleDonateTreesButton(e, props.id)}
         >
-          {constants.formStrings.donateTrees}
+          {i18n.t('label.donateTrees')}
         </Link>
       </div>
     </div>

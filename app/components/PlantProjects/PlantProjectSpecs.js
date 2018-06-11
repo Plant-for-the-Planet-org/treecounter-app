@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PlantProjectSpecsItem from './PlantProjectSpecsItem';
+import i18n from '../../locales/i18n.js';
 
 import {
   locationIcon,
@@ -23,37 +24,39 @@ const PlantProjectSpecs = ({
 }) => {
   return (
     <div className="project-specs__container">
-      <div className="project-info">
-        <PlantProjectSpecsItem
-          icon={locationIcon}
-          value={location}
-          label="location"
-        />
-        <PlantProjectSpecsItem
-          icon={plantedTarget}
-          value={countPlanted}
-          label="Planted"
-        />
-        <PlantProjectSpecsItem
-          icon={target}
-          value={countTarget}
-          label="Target"
-        />
-      </div>
-      <div className="plants-info">
-        <PlantProjectSpecsItem
-          icon={tree_survival}
-          value={survivalRate}
-          label="Survival Rate"
-        />
-        <PlantProjectSpecsItem
-          icon={dollar}
-          value={`${currency} ${treeCost}`}
-          label="Cost per Tree"
-        />
-        <div className="project-specs__taxdeductible">
-          {taxDeduction ? 'Tax Deductible in ' + taxDeduction.join(', ') : ''}
-        </div>
+      <PlantProjectSpecsItem
+        icon={locationIcon}
+        value={location}
+        label={i18n.t('label.location')}
+      />
+      <PlantProjectSpecsItem
+        icon={plantedTarget}
+        value={countPlanted}
+        label={i18n.t('label.planted')}
+      />
+      <PlantProjectSpecsItem
+        icon={target}
+        value={countTarget}
+        label={i18n.t('label.target')}
+      />
+      <PlantProjectSpecsItem
+        icon={tree_survival}
+        value={survivalRate}
+        label={i18n.t('label.survival_rate')}
+      />
+      <PlantProjectSpecsItem
+        icon={dollar}
+        value={`${currency} ${treeCost}`}
+        label={i18n.t('label.Cost')}
+      />
+      <div className="project-specs__taxdeductible">
+        {taxDeduction
+          ? i18n.t('label.tax_deductible') +
+            ' ' +
+            i18n.t('label.in') +
+            ' ' +
+            taxDeduction.join(', ')
+          : null}
       </div>
     </div>
   );

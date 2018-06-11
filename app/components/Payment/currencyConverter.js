@@ -22,6 +22,7 @@
  */
 
 // ------------------------------
+import i18n from '../../locales/i18n.js';
 function multiplay(variable, coefficient) {
   return (Math.round(variable * coefficient * 1000000) / 1000000).toString();
 }
@@ -47,9 +48,9 @@ class Footer extends React.Component {
     return (
       <footer>
         <p>
-          data provided by{' '}
+          {i18n.t('label.data_provided')}{' '}
           <a href={fixerUrl} target="_blank">
-            Fixer.io
+            {i18n.t('label.fixer')}
           </a>
         </p>
       </footer>
@@ -127,7 +128,7 @@ class Main extends React.Component {
       outputCurrency: '?',
       rate: 0,
       value: '',
-      date: 'yyyy-mm-dd'
+      date: i18n.t('label.date_format')
     };
     this.updateConversion = this.updateConversion.bind(this);
     this.updateCurrency = this.updateCurrency.bind(this);
@@ -223,8 +224,14 @@ class Main extends React.Component {
           onCurrencyChange={this.updateCurrency}
         />
         <section className="conversion-info">
-          <p>Rate: {rate}</p>
-          <p>Latest update: {date}</p>
+          <p>
+            {i18n.t('label.rate')}
+            {rate}
+          </p>
+          <p>
+            {i18n.t('label.latest_updates')}
+            {date}
+          </p>
         </section>
       </main>
     );
@@ -242,7 +249,8 @@ class Header extends React.Component {
     return (
       <header>
         <h1>
-          Currency Converter <span className="symbol">&#x21C5;</span>
+          {i18n.t('label.currency_converter')}
+          <span className="symbol">&#x21C5;</span>
         </h1>
       </header>
     );

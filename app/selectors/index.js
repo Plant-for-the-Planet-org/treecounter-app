@@ -3,6 +3,7 @@ import { denormalize } from 'normalizr';
 
 import { userProfileSchema, plantProjectSchema } from '../schemas';
 import { getCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
+import { getUserFeeds } from '../reducers/userFeedReducer';
 import {
   getPlantProjects,
   getPaymentGateways,
@@ -18,6 +19,7 @@ export const paymentGatewaysSelector = state => getPaymentGateways(state);
 export const tposSelector = state => getTpos(state);
 export const plantProjectsSelector = state => getPlantProjects(state);
 export const entitiesSelector = state => state.entities;
+export const userFeedsSelector = state => getUserFeeds(state);
 
 function logSelectorUpdate(selectorName, args = 'None') {
   const debug = false;

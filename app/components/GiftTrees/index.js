@@ -26,36 +26,37 @@ import {
   giftInvitationSchemaOptions
 } from '../../server/parsedSchemas/giftTrees';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
+import i18n from '../../locales/i18n';
 
 let TCombForm = t.form.Form;
 
 const headings = [
-  'Give to...',
-  'Project',
-  'Donation Details',
-  'Donor Details',
-  'Payment'
+  i18n.t('label.heading_give'),
+  i18n.t('label.heading_project'),
+  i18n.t('label.heading_donate_details'),
+  i18n.t('label.heading_donor_details'),
+  i18n.t('label.heading_payment')
 ];
 
 export default class GiftTrees extends Component {
   static data = {
     tabsReceipt: [
       {
-        name: 'Individual',
+        name: i18n.t('label.individual_name'),
         id: 'individual'
       },
       {
-        name: 'Company',
+        name: i18n.t('label.company_title'),
         id: 'company'
       }
     ],
     tabsUser: [
       {
-        name: 'TreeCounter User',
+        name: i18n.t('label.treecounter_user_name'),
         id: 'direct'
       },
       {
-        name: 'Other',
+        name: i18n.t('label.other_name'),
         id: 'invitation'
       }
     ]
@@ -218,7 +219,7 @@ export default class GiftTrees extends Component {
 
     return null === plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
-        <TextHeading>Gift trees</TextHeading>
+        <TextHeading>{i18n.t('label.gift_trees')}</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
           <div className="donate-tress__container">
             <ContentHeader caption={headings[this.state.pageIndex]} />

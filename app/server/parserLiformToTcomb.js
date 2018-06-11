@@ -6,13 +6,13 @@ import { TextAreaTemplate } from '../components/Templates/TextAreaTemplate';
 import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
 import { SelectTemplate } from '../components/Templates/SelectTemplate';
 import { MapTemplate } from '../components/Templates/MapTemplate';
-import { ListTemplate } from '../components/Templates/ListTemplate';
+import { ListTemplateGenerator } from '../components/Templates/ListTemplate';
 import { FilePickerTemplate } from '../components/Templates/FilePickerTemplate';
 
 // Import assets
 import * as images from '../assets';
 
-export default function parseJsonToTcomb(liformSchemaJson) {
+export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));
 
   function getParsedSchema(liformSchema) {
@@ -34,7 +34,7 @@ export default function parseJsonToTcomb(liformSchemaJson) {
     return liformSchema;
   }
 
-  function getSchemaOptions(liformSchema) {
+  function getSchemaOptions(liformSchema, innerConfig = {}) {
     let properties = liformSchema.properties;
     let schemaOptions = {
       fields: {}
@@ -124,13 +124,18 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           }
         } ******/
         if (properties[propertyKey].type === 'array') {
+          let arrayTemplate = innerConfig[properties[propertyKey].type];
+          console.log('array', arrayTemplate);
+          let title = properties[propertyKey].title;
           let arrayOptions = {
-            placeholder: properties[propertyKey].title,
+            placeholder: title,
             auto: 'none',
             autoCapitalize: 'none',
             disableOrder: true,
             disableRemove: true,
-            template: ListTemplate(properties[propertyKey].title)
+            template: !arrayTemplate
+              ? ListTemplateGenerator({})(title)
+              : arrayTemplate(title)
           };
           schemaOptions['fields'][propertyKey] = {
             ...arrayOptions,
@@ -150,7 +155,7 @@ export default function parseJsonToTcomb(liformSchemaJson) {
     return schemaOptions;
   }
 
-  let schemaOptions = getSchemaOptions(liformSchema);
+  let schemaOptions = getSchemaOptions(liformSchema, config);
 
   let transformedSchema = transform(getParsedSchema(liformSchema));
   return { schemaOptions: schemaOptions, transformedSchema: transformedSchema };

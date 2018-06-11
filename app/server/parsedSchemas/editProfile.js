@@ -1,5 +1,6 @@
-import schemaLiform from '../formSchemas/editProfile';
+import schemaLiform, { plantProject } from '../formSchemas/editProfile';
 import parseJsonToTcomb from '../parserLiformToTcomb';
+import PlantProjectListTemplate from '../../components/EditUserProfile/PlantProjectListTemplate';
 
 const parsedSchema = {};
 Object.keys(schemaLiform).map(userType => {
@@ -10,6 +11,9 @@ Object.keys(schemaLiform).map(userType => {
     }))
   );
 });
-console.log(parsedSchema);
 
-export { parsedSchema };
+const plantProjectSchema = parseJsonToTcomb(plantProject.schema, {
+  array: PlantProjectListTemplate
+});
+
+export { parsedSchema, plantProjectSchema };

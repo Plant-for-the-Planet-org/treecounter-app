@@ -14,20 +14,25 @@ const profileTypeToReq = {
 };
 export function updateUserProfile(data, profileType) {
   return dispatch => {
-    putAuthenticatedRequest(profileTypeToReq[profileType], data)
-      .then(res => {
-        debug(res.status);
-        debug(res);
-        dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
-        NotificationManager.success(
-          `${profileType} Updated Successful`,
-          `Congrats`,
-          5000
-        );
-      })
-      .catch(err => {
-        debug(err);
-        NotificationManager.error(err.message, 'Profile update Error', 5000);
-      });
+    return new Promise(function(resolve) {
+      putAuthenticatedRequest(profileTypeToReq[profileType], data)
+        .then(res => {
+          debug(res.status);
+          debug(res);
+          if (res.data && res.data instanceof Object) {
+            dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
+          }
+          NotificationManager.success(
+            `${profileType} Updated Successful`,
+            `Congrats`,
+            5000
+          );
+          resolve(res.data);
+        })
+        .catch(err => {
+          debug(err);
+          NotificationManager.error(err.message, 'Profile update Error', 5000);
+        });
+    });
   };
 }

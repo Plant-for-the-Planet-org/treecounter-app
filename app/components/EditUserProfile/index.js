@@ -3,10 +3,15 @@ import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import t from 'tcomb-form';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import SecondaryButton from '../Common/Button/SecondaryButton';
 import PropTypes from 'prop-types';
 import UserProfileImage from '../Common/UserProfileImage';
-import ActionButton from '../Common/ActionButton';
-import { parsedSchema } from '../../server/parsedSchemas/editProfile';
+import {
+  parsedSchema,
+  plantProjectSchema
+} from '../../server/parsedSchemas/editProfile';
+import PaswordUpdatedDialog from './PaswordUpdateModal';
+import ConfirmProfileDeletion from './ConfirmProfileDeletionModal';
 import i18n from '../../locales/i18n.js';
 
 let TCombForm = t.form.Form;
@@ -15,7 +20,15 @@ export default class EditUserProfile extends React.Component {
     super(props);
     console.log(props);
     console.log(parsedSchema);
+    this.state = {
+      showConfirmProfileDeletion: false
+    };
   }
+  toggleConfirmProfileDeletion = () => {
+    this.setState({
+      showConfirmProfileDeletion: !this.state.showConfirmProfileDeletion
+    });
+  };
 
   getFormTemplate = (userType, profileType) => {
     console.log(profileType);
@@ -25,18 +38,14 @@ export default class EditUserProfile extends React.Component {
           console.log(locals);
           return (
             <div className="tComb-template__profile-form">
-              {userType === 'individual' ? (
-                <div>
-                  {locals.inputs.title}
-                  {locals.inputs.firstname}
-                  {locals.inputs.lastname}
-                  {locals.inputs.gender}
-                </div>
-              ) : (
-                <div>
-                  {locals.inputs.name} {locals.inputs.subType}
-                </div>
-              )}
+              <div>
+                {locals.inputs.title}
+                {locals.inputs.name}
+                {locals.inputs.firstname}
+                {locals.inputs.lastname}
+                {locals.inputs.gender}
+                {locals.inputs.subType}
+              </div>
 
               <div>
                 {locals.inputs.address}
@@ -86,6 +95,14 @@ export default class EditUserProfile extends React.Component {
   };
 
   getFormSchemaOption = (userType, profileType) => {
+    if (profileType == 'project') {
+      return {
+        template: locals => {
+          return <div>{locals.inputs.plantProjects}</div>;
+        },
+        ...plantProjectSchema.schemaOptions
+      };
+    }
     let schemaOptions = parsedSchema[userType][profileType].schemaOptions;
     return {
       template: this.getFormTemplate(userType, profileType),
@@ -98,6 +115,18 @@ export default class EditUserProfile extends React.Component {
     const { type, image } = this.props.currentUserProfile;
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
+        <ConfirmProfileDeletion
+          isOpen={this.state.showConfirmProfileDeletion}
+          onRequestClose={this.toggleConfirmProfileDeletion}
+          handleProfileDeletion={() => {
+            this.props.deleteProfile();
+            this.toggleConfirmProfileDeletion();
+          }}
+        />
+        <PaswordUpdatedDialog
+          isOpen={this.props.openPasswordUpdatedDialog}
+          onRequestClose={this.props.handlePaswordUpdatedClose}
+        />
         <TextHeading>{i18n.t('label.edit_profile')}</TextHeading>
         <CardLayout className="user-profile__form-group">
           <div className="profile-image__container">
@@ -124,7 +153,14 @@ export default class EditUserProfile extends React.Component {
             {i18n.t('label.save_changes')}
           </PrimaryButton>
         </CardLayout>
-        {/* //about_me section */}
+        <div className="user-profile__project-form-group">
+          <TCombForm
+            ref={'project'}
+            type={plantProjectSchema.transformedSchema}
+            options={this.getFormSchemaOption('tpo', 'project')}
+            value={this.props.currentUserProfile}
+          />
+        </div>
         <CardLayout className="user-profile__form-group">
           <div className="form-group__heading">{i18n.t('label.about_me')}</div>
           <TCombForm
@@ -158,8 +194,15 @@ export default class EditUserProfile extends React.Component {
             {i18n.t('label.change_password')}
           </PrimaryButton>
         </CardLayout>
-        {/* <CardLayout>Following</CardLayout> */}
-        <ActionButton caption={i18n.t('label.delete_profile')} />
+        <div className="delete-profile__button">
+          <SecondaryButton
+            onClick={() => {
+              this.toggleConfirmProfileDeletion();
+            }}
+          >
+            {i18n.t('label.delete_profile')}
+          </SecondaryButton>
+        </div>
       </div>
     );
   }
@@ -167,5 +210,10 @@ export default class EditUserProfile extends React.Component {
 
 EditUserProfile.propTypes = {
   onSave: PropTypes.func.isRequired,
-  currentUserProfile: PropTypes.object
+  currentUserProfile: PropTypes.object,
+  openPasswordUpdatedDialog: PropTypes.bool,
+  handlePaswordUpdatedClose: PropTypes.func,
+  deleteProfile: PropTypes.func.isRequired
 };
+
+export { PaswordUpdatedDialog, ConfirmProfileDeletion };

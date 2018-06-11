@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
+import { history } from '../Common/BrowserRouter';
 
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
@@ -9,6 +10,7 @@ import ContentHeader from '../Common/ContentHeader';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import Tabs from '../Common/Tabs';
+import TextHeading from '../Common/Heading/TextHeading';
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -86,6 +88,7 @@ export default class SelectPlantProject extends Component {
     this.props.selectProject(
       Object.keys(this.state.featuredProjects)[this.state.pageIndex]
     );
+    history.goBack();
   };
 
   plantProjectChanged(index) {
@@ -118,6 +121,7 @@ export default class SelectPlantProject extends Component {
 
     return (
       <div className="app-container__content--center sidenav-wrapper">
+        <TextHeading>Select a project</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
           <div className="select-project__container">
             <ContentHeader caption={'Featured Projects'} />

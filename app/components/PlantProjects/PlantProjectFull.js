@@ -5,6 +5,7 @@ import PlantProjectTeaser from './PlantProjectTeaser';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import SeeMoreToggle from '../Common/SeeMoreToggle';
 import PlantProjectDetails from './PlantProjectDetails';
+import InlineLink from '../Common/InlineLink';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -74,10 +75,18 @@ class PlantProjectFull extends React.Component {
       <div>
         <PlantProjectTeaser {...teaserProps} />
         <PlantProjectSpecs {...specsProps} />
-        <SeeMoreToggle
-          seeMore={!this.state.expanded}
-          onToggle={this.toggleExpanded}
-        />
+        <div className="project-action-links">
+          <SeeMoreToggle
+            seeMore={!this.state.expanded}
+            onToggle={this.toggleExpanded}
+          />
+          {this.props.selectAnotherProject ? (
+            <InlineLink
+              caption={'Select Different Project'}
+              uri={'app_selectProject'}
+            />
+          ) : null}
+        </div>
         {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
       </div>
     );
@@ -88,7 +97,8 @@ PlantProjectFull.propTypes = {
   plantProject: PropTypes.object.isRequired,
   expanded: PropTypes.bool.isRequired,
   callExpanded: PropTypes.func,
-  tpoName: PropTypes.string
+  tpoName: PropTypes.string,
+  selectAnotherProject: PropTypes.bool
 };
 
 export default PlantProjectFull;

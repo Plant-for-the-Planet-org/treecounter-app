@@ -10,6 +10,7 @@ export default {
   project: 'Project',
   organisation: 'Organisation',
   Cost: 'Cost Per Tree',
+  donateTrees: 'Donate Trees',
   registerPlantedTrees: 'Register Planted Trees',
   individual: 'Individual Tree',
   survival_rate: 'Survival Rate',

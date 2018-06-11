@@ -16,7 +16,7 @@ const ContributionsMapLegend = () => (
       className="user-contributions__location--icons--img"
       src={MapPinGreen}
     />
-    <TextSpan>{i18n.t('label.donateTrees')}</TextSpan>
+    <TextSpan>{i18n.t('label.donatedTrees')}</TextSpan>
   </div>
 );
 

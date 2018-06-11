@@ -70,19 +70,28 @@
       }
     }
 
-    .collapsed {
-      border: none;
-      cursor: pointer;
-      span {
-        color: #ec6453;
-      }
-    }
+    .project-action-links {
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
 
-    .expanded {
-      border: none;
-      cursor: pointer;
-      span {
-        color: #ec6453;
+      .link {
+        padding: 10px 0;
+      }
+      .collapsed {
+        border: none;
+        cursor: pointer;
+        span {
+          color: #ec6453;
+        }
+      }
+
+      .expanded {
+        border: none;
+        cursor: pointer;
+        span {
+          color: #ec6453;
+        }
       }
     }
 
@@ -91,24 +100,24 @@
       height: 10px;
 
       li {
-        margin: 0 3px;
-        width: 15px;
-        height: 15px;
+        margin: 0 5px;
+        width: 8px;
+        height: 8px;
       }
 
       button {
-        width: 10px;
-        height: 10px;
+        width: 5px;
+        height: 5px;
       }
 
       button:before {
         color: transparent;
-        border: 3px solid #ffffff;
+        border: 2px solid #ffffff;
         border-radius: 100%;
         line-height: 10px;
         opacity: 1;
-        width: 10px;
-        height: 10px;
+        width: 5px;
+        height: 5px;
       }
 
       .slick-active {

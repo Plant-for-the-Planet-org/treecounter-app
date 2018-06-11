@@ -269,3 +269,26 @@
     }
   }
 }
+
+.project-modal-card-layout {
+  @extend .tpo-footer-card-layout;
+  margin: 0 -20px;
+  box-shadow: none;
+  min-width: 500px;
+
+  .collapsed {
+    border: none;
+    cursor: pointer;
+    span {
+      color: #ec6453;
+    }
+  }
+
+  .expanded {
+    border: none;
+    cursor: pointer;
+    span {
+      color: #ec6453;
+    }
+  }
+}

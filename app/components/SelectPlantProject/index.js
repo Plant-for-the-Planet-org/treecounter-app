@@ -11,6 +11,7 @@ import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
+import ModalDialog from '../Common/ModalDialog';
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -38,7 +39,9 @@ export default class SelectPlantProject extends Component {
       filteredProjects: props.plantProjects,
       featuredProjects: props.plantProjects,
       searchFieldValue: '',
-      mode: 'name'
+      mode: 'name',
+      isOpen: false,
+      modalProject: null
     };
   }
 
@@ -84,16 +87,35 @@ export default class SelectPlantProject extends Component {
     });
   };
 
-  onSelectClicked = () => {
+  onSelectClickedFeaturedProjects = () => {
     this.props.selectProject(
       Object.keys(this.state.featuredProjects)[this.state.pageIndex]
     );
     history.goBack();
   };
 
+  onSelectClicked = () => {
+    this.props.selectProject(this.state.modalProject.id);
+    this.onRequestClose();
+    history.goBack();
+  };
+
   plantProjectChanged(index) {
     this.setState({
       pageIndex: index
+    });
+  }
+
+  onRequestClose() {
+    this.setState({
+      isOpen: false
+    });
+  }
+
+  openModal(key) {
+    this.setState({
+      isOpen: true,
+      modalProject: this.props.plantProjects[key]
     });
   }
 
@@ -122,6 +144,23 @@ export default class SelectPlantProject extends Component {
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>Select a project</TextHeading>
+        <ModalDialog
+          isOpen={this.state.isOpen}
+          onRequestClose={() => this.onRequestClose()}
+        >
+          <div className="project-modal-card-layout">
+            {this.state.modalProject ? (
+              <PlantProjectFull
+                expanded={false}
+                plantProject={this.state.modalProject}
+                tpoName={this.state.modalProject.tpo_name}
+              />
+            ) : null}
+            <PrimaryButton onClick={this.onSelectClicked}>
+              Select Project
+            </PrimaryButton>
+          </div>
+        </ModalDialog>
         <CardLayout className="tpo-footer-card-layout">
           <div className="select-project__container">
             <ContentHeader caption={'Featured Projects'} />
@@ -139,7 +178,7 @@ export default class SelectPlantProject extends Component {
                 : null}
             </Slider>
             <div>
-              <PrimaryButton onClick={this.onSelectClicked}>
+              <PrimaryButton onClick={this.onSelectClickedFeaturedProjects}>
                 Select Project
               </PrimaryButton>
             </div>
@@ -200,7 +239,11 @@ export default class SelectPlantProject extends Component {
                                 filteredProjects[key].treeCost}
                             </td>
                             <td>
-                              <PrimaryButton>See more</PrimaryButton>
+                              <PrimaryButton
+                                onClick={() => this.openModal(key)}
+                              >
+                                See more
+                              </PrimaryButton>
                             </td>
                           </tr>
                         ))

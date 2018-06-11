@@ -21,7 +21,7 @@ export default {
           caption: 'Explore',
           help: 'menu_item.explore.help',
           icon: 'rocket_outline',
-          uri: '#'
+          uri: '/app_dev.php/en/explore'
         }
       ]
     },

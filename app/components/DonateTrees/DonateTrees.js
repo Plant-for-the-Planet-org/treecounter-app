@@ -22,12 +22,13 @@ import {
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 import i18n from '../../locales/i18n.js';
+import PaymentSelector from '../Payment/PaymentSelector';
 
 let TCombForm = t.form.Form;
 
 const headings = ['Project', 'Donation Details', 'Donor Details', 'Payment'];
 
-export default class DonateTrees extends Component {
+class DonateTrees extends Component {
   static data = {
     tabsReceipt: [
       {
@@ -54,26 +55,38 @@ export default class DonateTrees extends Component {
     this.state = {
       pageIndex: 0,
       modeReceipt: modeReceipt,
-      selectedCurrency: null,
+      selectedCurrency: 'USD',
       selectedTreeCount: 0,
+      selectedAmount: 0,
       form: {},
       expanded: false
     };
 
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
-    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
-    this.handleTreeCountChange = this.handleTreeCountChange.bind(this);
+    this.handleTreeCountCurrencyChange = this.handleTreeCountCurrencyChange.bind(
+      this
+    );
+    this.determineDefaultCurrency = this.determineDefaultCurrency.bind(this);
     // this.checkValidation = this.checkValidation[0].bind(this);
   }
 
-  handleCurrencyChange(selectedCurrency) {
-    console.log('handleCurrencyChange', selectedCurrency);
-    this.setState({ selectedCurrency });
+  handleTreeCountCurrencyChange(treeCountCurrencyData) {
+    console.log('handleTreeCountCurrencyChange', treeCountCurrencyData);
+    this.setState({
+      selectedCurrency: treeCountCurrencyData.currency,
+      selectedTreeCount: treeCountCurrencyData.treeCount,
+      selectedAmount: treeCountCurrencyData.amount
+    });
+
+    // TODO: insert these 3 values into the corresponding form fields
   }
 
-  handleTreeCountChange(selectedTreeCount) {
-    console.log('========= handleTreecountChange', selectedTreeCount);
-    this.setState({ selectedTreeCount });
+  determineDefaultCurrency() {
+    const { currentUserProfile, selectedProject } = this.props;
+    const userCurrency =
+      null === currentUserProfile ? null : currentUserProfile.currency;
+
+    return null === userCurrency ? selectedProject.currency : userCurrency;
   }
 
   indexChange(index) {
@@ -134,6 +147,7 @@ export default class DonateTrees extends Component {
           props.onClick();
         }
       }
+
       return <PrimaryButton onClick={validated}>Next</PrimaryButton>;
     };
     const settings = {
@@ -176,14 +190,17 @@ export default class DonateTrees extends Component {
               ) : null}
               {this.props.selectedTpo ? (
                 <TreeCountCurrencySelector
-                  baseCurrency={plantProject.currency}
-                  onCurrencyChange={this.handleCurrencyChange}
-                  onTreeCountChange={this.handleTreeCountChange}
-                  selectedCurrency={plantProject.currency}
-                  selectedTreeCount={this.state.selectedTreeCount}
-                  treeCost={plantProject.treeCost}
+                  currencies={currenciesJson} // TODO: connect to data from API
+                  countryCurrencies={Object.keys(
+                    plantProject.paymentSetup.countries
+                  )}
                   treeCountOptions={plantProject.paymentSetup.treeCountOptions}
-                  currencies={currenciesJson}
+                  userCountry="DE" // TODO: connect to user profile
+                  treeCost={plantProject.treeCost}
+                  baseCurrency={plantProject.currency}
+                  selectedCurrency={this.determineDefaultCurrency()}
+                  selectedTreeCount={this.state.selectedTreeCount}
+                  onChange={this.handleTreeCountCurrencyChange}
                 />
               ) : null}
               <Tabs
@@ -210,6 +227,36 @@ export default class DonateTrees extends Component {
                   />
                 )}
               </Tabs>
+              {this.props.selectedProject ? (
+                <PaymentSelector
+                  paymentMethods={
+                    plantProject.paymentSetup.countries['DE/EUR'].paymentMethods
+                  }
+                  accounts={plantProject.paymentSetup.accounts}
+                  amount={this.state.selectedAmount}
+                  currency={this.state.selectedCurrency}
+                  context={{
+                    tpoName: this.props.selectedTpo.name,
+                    donorEmail:
+                      this.props.currentUserProfile.email ||
+                      'default@email.com', // TODO: fix this
+                    donorName:
+                      this.props.currentUserProfile.fullname || 'My Name', // TODO: fix this
+                    treeCount: this.state.selectedTreeCount
+                  }}
+                  onSuccess={
+                    data =>
+                      console.log('/////////////////// payment success ', data)
+                    // TODO: connect to form: paymentOptions and paymentMethod
+                  }
+                  onFailure={data =>
+                    console.log('/////////////////// payment failure ', data)
+                  }
+                  onError={data =>
+                    console.log('/////////////////// payment error ', data)
+                  }
+                />
+              ) : null}
             </Slider>
           </div>
         </CardLayout>
@@ -223,3 +270,5 @@ DonateTrees.propTypes = {
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object
 };
+
+export default DonateTrees;

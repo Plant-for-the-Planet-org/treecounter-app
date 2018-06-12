@@ -31,8 +31,8 @@ import i18n from '../../locales/i18n';
 let TCombForm = t.form.Form;
 
 const headings = [
-  i18n.t('label.heading_give'),
   i18n.t('label.heading_project'),
+  i18n.t('label.heading_give'),
   i18n.t('label.heading_donate_details'),
   i18n.t('label.heading_donor_details'),
   i18n.t('label.heading_payment')
@@ -224,6 +224,15 @@ export default class GiftTrees extends Component {
           <div className="donate-tress__container">
             <ContentHeader caption={headings[this.state.pageIndex]} />
             <Slider {...settings}>
+              {this.props.selectedTpo ? (
+                <PlantProjectFull
+                  callExpanded={this.callExpanded}
+                  expanded={false}
+                  plantProject={this.props.selectedProject}
+                  tpoName={this.props.selectedTpo.name}
+                  selectAnotherProject={true}
+                />
+              ) : null}
               <div className="treecount-selector-wrapper">
                 <Tabs
                   data={GiftTrees.data.tabsUser}
@@ -242,14 +251,6 @@ export default class GiftTrees extends Component {
                   )}
                 </Tabs>
               </div>
-              {this.props.selectedTpo ? (
-                <PlantProjectFull
-                  callExpanded={this.callExpanded}
-                  expanded={false}
-                  plantProject={this.props.selectedProject}
-                  tpoName={this.props.selectedTpo.name}
-                />
-              ) : null}
               {this.props.selectedTpo ? (
                 <TreeCountCurrencySelector
                   baseCurrency={plantProject.currency}

@@ -31,29 +31,16 @@ class PlantProjectCarousel extends React.Component {
 
     // add navigation buttons that will trigger calls to 'onChange' callback
     return (
-      <div>
-        {/* {plantProjects.map(plantProject => (
-        <Link to="#" onClick={() => onChange(plantProject.id)}>
-          {plantProject.id} |{' '}
-        </Link>
-      ))} */}
-
-        <Slider {...settings}>
-          {plantProjects.map(plantProject => (
-            <div
-              className="tpo-footer-carousel__container"
-              key={`plantProject-${plantProject.id}`}
-            >
-              <PlantProjectFull
-                key={`plantProject-${plantProject.id}`}
-                expanded={false}
-                tpoName={tpoName}
-                plantProject={plantProject}
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
+      <Slider {...settings}>
+        {plantProjects.map(plantProject => (
+          <PlantProjectFull
+            key={`plantProject-${plantProject.id}`}
+            expanded={false}
+            tpoName={tpoName}
+            plantProject={plantProject}
+          />
+        ))}
+      </Slider>
     );
   }
 }

@@ -24,39 +24,43 @@ const PlantProjectSpecs = ({
 }) => {
   return (
     <div className="project-specs__container">
-      <PlantProjectSpecsItem
-        icon={locationIcon}
-        value={location}
-        label={i18n.t('label.location')}
-      />
-      <PlantProjectSpecsItem
-        icon={plantedTarget}
-        value={countPlanted}
-        label={i18n.t('label.planted')}
-      />
-      <PlantProjectSpecsItem
-        icon={target}
-        value={countTarget}
-        label={i18n.t('label.target')}
-      />
-      <PlantProjectSpecsItem
-        icon={tree_survival}
-        value={survivalRate}
-        label={i18n.t('label.survival_rate')}
-      />
-      <PlantProjectSpecsItem
-        icon={dollar}
-        value={`${currency} ${treeCost}`}
-        label={i18n.t('label.Cost')}
-      />
-      <div className="project-specs__taxdeductible">
-        {taxDeduction
-          ? i18n.t('label.tax_deductible') +
-            ' ' +
-            i18n.t('label.in') +
-            ' ' +
-            taxDeduction.join(', ')
-          : null}
+      <div className="project-info">
+        <PlantProjectSpecsItem
+          icon={locationIcon}
+          value={location}
+          label={i18n.t('label.location')}
+        />
+        <PlantProjectSpecsItem
+          icon={plantedTarget}
+          value={countPlanted}
+          label={i18n.t('label.planted')}
+        />
+        <PlantProjectSpecsItem
+          icon={target}
+          value={countTarget}
+          label={i18n.t('label.target')}
+        />
+      </div>
+      <div className="plants-info">
+        <PlantProjectSpecsItem
+          icon={tree_survival}
+          value={survivalRate}
+          label={i18n.t('label.survival_rate')}
+        />
+        <PlantProjectSpecsItem
+          icon={dollar}
+          value={`${currency} ${treeCost}`}
+          label={i18n.t('label.Cost')}
+        />
+        <div className="project-specs__taxdeductible">
+          {taxDeduction
+            ? i18n.t('label.tax_deductible') +
+              ' ' +
+              i18n.t('label.in') +
+              ' ' +
+              taxDeduction.join(', ')
+            : null}
+        </div>
       </div>
     </div>
   );
@@ -68,7 +72,7 @@ PlantProjectSpecs.propTypes = {
   countTarget: PropTypes.number,
   treeCost: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
-  taxDeduction: PropTypes.array.isRequired,
+  taxDeduction: PropTypes.array,
   survivalRate: PropTypes.number.isRequired
 };
 

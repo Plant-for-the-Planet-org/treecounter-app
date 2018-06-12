@@ -171,6 +171,7 @@ export default class DonateTrees extends Component {
                   expanded={false}
                   plantProject={this.props.selectedProject}
                   tpoName={this.props.selectedTpo.name}
+                  selectAnotherProject={true}
                 />
               ) : null}
               {this.props.selectedTpo ? (

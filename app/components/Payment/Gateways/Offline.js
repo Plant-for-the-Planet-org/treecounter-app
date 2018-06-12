@@ -7,7 +7,11 @@ const Offline = ({ account }) => {
       <label>Money Transfer</label>
       <form>
         <div>{account.full_text}</div>
-        <div>Confirmation checkbox and submit button go here</div>
+        <div>
+          Confirmation checkbox and submit button go here. If user clicks the
+          submit button and has not confirmed the via checkbox, the onError
+          callback should be used.
+        </div>
       </form>
     </div>
   );
@@ -15,10 +19,8 @@ const Offline = ({ account }) => {
 
 Offline.propTypes = {
   account: PropTypes.object.isRequired,
-  target: PropTypes.string,
   onSuccess: PropTypes.func,
-  onError: PropTypes.func,
-  onFailure: PropTypes.func
+  onError: PropTypes.func
 };
 
 export default Offline;

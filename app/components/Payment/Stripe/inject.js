@@ -6,7 +6,7 @@ import {
   type SyncStripeContext,
   type AsyncStripeContext,
   providerContextTypes
-} from '../Provider';
+} from './Provider';
 
 type Context =
   | (InjectContext & SyncStripeContext)

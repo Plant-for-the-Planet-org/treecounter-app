@@ -1,5 +1,5 @@
 // @flow
-import StripeProvider from '../Provider';
+import StripeProvider from './Provider';
 import injectStripe from './inject';
 import Elements from './Elements';
 import Element from './Element';

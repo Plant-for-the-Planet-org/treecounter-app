@@ -22,9 +22,12 @@ const createOptions = (fontSize: string, padding: ?string) => {
     style: {
       base: {
         fontSize,
-        color: '#424770',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: '#FFCC00',
+        color: '#FFCC00',
         letterSpacing: '0.025em',
-        fontFamily: 'Source Code Pro, monospace',
+        fontFamily: 'Verdana',
         '::placeholder': {
           color: '#aab7c4'
         },

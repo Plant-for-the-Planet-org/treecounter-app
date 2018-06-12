@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
-import { type ProviderContext, providerContextTypes } from '../Provider';
+import { type ProviderContext, providerContextTypes } from './Provider';
 
 export type ElementsList = Array<{
   element: ElementShape,

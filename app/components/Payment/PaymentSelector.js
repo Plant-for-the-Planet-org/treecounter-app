@@ -3,12 +3,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import StripeCC from './StripeCC';
-import StripeSepa from './StripeSepa';
-import Paypal from './Paypal';
-import Offline from './Offline';
+import StripeCC from './Gateways/StripeCC';
+import StripeSepa from './Gateways/StripeSepa';
+import Paypal from './Gateways/Paypal';
+import Offline from './Gateways/Offline';
 
-import { StripeProvider, Elements } from './stripeDefs';
+import { StripeProvider, Elements } from './Stripe/stripeDefs';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
@@ -17,6 +17,14 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     this.state = {
       stripe: null
     };
+
+    this.decorateSuccessWithGateway = this.decorateSuccessWithGateway.bind(
+      this
+    );
+  }
+
+  decorateSuccessWithGateway(gateway) {
+    return response => this.props.onSuccess({ gateway, ...response });
   }
 
   componentDidMount() {
@@ -47,26 +55,28 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
 
   render() {
-    const { accounts, paymentMethods, amount, currency } = this.props;
+    const { accounts, paymentMethods, amount, currency, context } = this.props;
     const gatewayProps = {
-      onSuccess: this.props.onSuccess,
+      context: context,
+      currency: currency,
       onFailure: this.props.onFailure,
       onError: this.props.onError
     };
 
     return (
       <StripeProvider stripe={this.state.stripe}>
-        <div className="Checkout">
-          <h1>Select Payment Method</h1>
-          <h3>
+        <div>
+          <div>
             Amount: {amount} {currency}
-          </h3>
+          </div>
+          <div>TreeCount: {context.treeCount}</div>
           {Object.keys(paymentMethods).map(gateway => {
             const [accountName, target] = paymentMethods[gateway].split(':');
             if ('stripe_cc' === gateway) {
               return (
-                <Elements>
+                <Elements key={gateway}>
                   <StripeCC
+                    onSuccess={this.decorateSuccessWithGateway(gateway)}
                     account={accounts[accountName]}
                     target={target}
                     {...gatewayProps}
@@ -76,8 +86,9 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             }
             if ('stripe_sepa' === gateway) {
               return (
-                <Elements>
+                <Elements key={gateway}>
                   <StripeSepa
+                    onSuccess={this.decorateSuccessWithGateway(gateway)}
                     account={accounts[accountName]}
                     target={target}
                     {...gatewayProps}
@@ -88,6 +99,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             if ('paypal' === gateway) {
               return (
                 <Paypal
+                  key={gateway}
+                  onSuccess={this.decorateSuccessWithGateway(gateway)}
                   amount={amount}
                   currency={currency}
                   account={accounts[accountName]}
@@ -98,7 +111,12 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             }
             if ('offline' === gateway) {
               return (
-                <Offline account={accounts[accountName]} {...gatewayProps} />
+                <Offline
+                  key={gateway}
+                  onSuccess={this.decorateSuccessWithGateway(gateway)}
+                  account={accounts[accountName]}
+                  {...gatewayProps}
+                />
               );
             }
           })}
@@ -113,6 +131,7 @@ PaymentSelector.propTypes = {
   paymentMethods: PropTypes.object.isRequired,
   amount: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
+  context: PropTypes.object.isRequired,
   onSuccess: PropTypes.func.isRequired,
   onFailure: PropTypes.func.isRequired,
   onError: PropTypes.func.isRequired

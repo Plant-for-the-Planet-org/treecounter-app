@@ -37,7 +37,7 @@ import { NotificationAction } from '../../actions/notificationAction';
 import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { getLocalRoute } from '../../actions/apiRouting';
-import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
+import SuccessfullyActivatedAccount from '../../containers/Authentication/SuccessfullActivatedContainer';
 import DonationTreesContainer from '../../containers/DonateTrees/index';
 
 import EditUserProfileContainer from '../../containers/EditUserProfile/index';
@@ -127,8 +127,8 @@ class TreeCounter extends Component {
                 component={SignUpContainer}
               />
               <PublicRoute
-                path={getLocalRoute('app_accountActivation')}
-                component={ActivateAccountContainer}
+                path={getLocalRoute('app_accountActivation') + '/:token'}
+                component={SuccessfullyActivatedAccount}
               />
               {/*<Route exact path={getLocalRoute("app_donateTrees")} render={() => (isLoggedIn ? null : <Redirect to={getLocalRoute("app_login")}/>)}/>*/}
               <PrivateRoute

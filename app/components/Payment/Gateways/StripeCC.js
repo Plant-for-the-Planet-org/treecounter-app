@@ -51,7 +51,7 @@ class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
       this.props.stripe
         .createToken()
         .then(payload => {
-          console.log('SUCESS', payload);
+          console.log('SUCCESS', payload);
           this.props.onSuccess(payload);
         })
         .catch(error => this.props.onError(error));

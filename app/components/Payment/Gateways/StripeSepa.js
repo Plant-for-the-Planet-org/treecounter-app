@@ -61,7 +61,13 @@ class _StripeSepa extends React.Component<
             notification_method: 'email'
           }
         })
-        .then(payload => this.props.onSuccess(payload));
+        .then(payload => {
+          if (payload.error) {
+            this.props.onError(payload);
+          } else {
+            this.props.onSuccess(payload);
+          }
+        });
     } else {
       console.log("Stripe.js hasn't loaded yet.");
     }

@@ -28,30 +28,47 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
 
   componentDidMount() {
-    // do not load Stripe if not required
-    const gateways = Object.keys(this.props.paymentMethods);
-    if (!(gateways.includes('stripe_cc') || gateways.includes('stripe_sepa'))) {
-      return;
+    // lookup stripe related payment methods for the current country/currency combination
+    let stripeGateways = Object.keys(this.props.paymentMethods).filter(
+      gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)
+    );
+
+    // get unique values
+    stripeGateways = [...new Set(stripeGateways)].length;
+
+    // there should only be maximum 1
+    if (stripeGateways.length > 1) {
+      console.log(
+        'different stripe accounts for same country/currency are not allowed'
+      );
+      // throw some error here
     }
 
-    // componentDidMount only runs in a browser environment.
-    // In addition to loading asynchronously, this code is safe to server-side render.
+    // do not load Stripe if not required
+    if (stripeGateways.length > 0) {
+      const stripeAccountName = this.props.paymentMethods[stripeGateways[0]];
+      const stripeAccount = this.props.accounts[stripeAccountName];
 
-    // You can inject a script tag manually like this,
-    // or you can use the 'async' attribute on the Stripe.js v3 <script> tag.
-    const stripeJs = document.createElement('script');
-    stripeJs.src = 'https://js.stripe.com/v3/';
-    stripeJs.async = true;
-    stripeJs.onload = () => {
-      // The setTimeout lets us pretend that Stripe.js took a long time to load
-      // Take it out of your production code!
-      setTimeout(() => {
-        this.setState({
-          stripe: window.Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh')
-        });
-      }, 500);
-    };
-    document.body && document.body.appendChild(stripeJs);
+      // componentDidMount only runs in a browser environment.
+      // In addition to loading asynchronously, this code is safe to server-side render.
+
+      // You can inject  script tag manually like this,
+      // or you can use the 'async' attribute on the Stripe.js v3 <script> tag.
+      const publishableKey = stripeAccount['authorization']['publishable_key'];
+      const stripeJs = document.createElement('script');
+      stripeJs.src = 'https://js.stripe.com/v3/';
+      stripeJs.async = true;
+      stripeJs.onload = () => {
+        // The setTimeout lets us pretend that Stripe.js took a long time to load
+        // Take it out of your production code!
+        setTimeout(() => {
+          this.setState({
+            stripe: window.Stripe(publishableKey)
+          });
+        }, 500);
+      };
+      document.body && document.body.appendChild(stripeJs);
+    }
   }
 
   render() {

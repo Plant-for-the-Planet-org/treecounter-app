@@ -74,29 +74,14 @@ class Paypal extends React.Component {
 
     // see https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4/customize-button/
     const buttonStyle = {
-      color: 'blue', // gold | blue | silver | black
+      color: 'silver', // gold | blue | silver | black
       shape: 'pill', // pill | rect
       label: 'pay', // checkout | credit | pay | buynow | paypal | installment
       size: 'large' // small | medium | large | responsive
     };
-    const onAuthorize = (data, actions) =>
-      actions.payment
-        .execute()
-        .then(() => {
-          const payment = {
-            paid: true,
-            cancelled: false,
-            payerID: data.payerID,
-            paymentID: data.paymentID,
-            paymentToken: data.paymentToken,
-            returnUrl: data.returnUrl
-          };
-
-          onSuccess(payment);
-        })
-        .catch(response => {
-          console.log('----------- payment error:', response);
-        });
+    const onAuthorize = data => {
+      onSuccess(data);
+    };
 
     console.log('CLIENT', CLIENT);
     return (

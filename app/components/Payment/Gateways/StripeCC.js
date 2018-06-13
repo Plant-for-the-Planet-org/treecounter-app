@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { payment_credit } from '../../../assets';
+
 import type { InjectedProps } from '../Stripe/inject';
 
 import { CardElement, injectStripe } from '../Stripe/stripeDefs';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -24,6 +27,7 @@ const createOptions = (fontSize: string, padding: ?string) => {
         fontSize,
         borderWidth: '1px',
         borderStyle: 'solid',
+        height: '100px',
         borderColor: '#FFCC00',
         color: '#FFCC00',
         letterSpacing: '0.025em',
@@ -62,19 +66,19 @@ class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Credit Card
-          <CardElement
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
-            hidePostalCode={true}
-            {...createOptions(this.props.fontSize)}
-          />
-        </label>
-        <button>Pay</button>
+      <form className="stripe-credit-card" onSubmit={this.handleSubmit}>
+        <div className="payment-option-header">
+          <img src={payment_credit} />Credit Card
+        </div>
+        <CardElement
+          onBlur={handleBlur}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onReady={handleReady}
+          hidePostalCode={true}
+          {...createOptions(this.props.fontSize)}
+        />
+        <PrimaryButton>Pay</PrimaryButton>
       </form>
     );
   }

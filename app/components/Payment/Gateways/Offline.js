@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { payment_bank } from '../../../assets';
+
 const Offline = ({ account }) => {
   return (
-    <div>
-      <label>Money Transfer</label>
+    <div className="stripe-credit-card">
+      <div className="payment-option-header">
+        <img src={payment_bank} /> Bank Transfer
+      </div>
       <form>
         <div>{account.full_text}</div>
         <div>

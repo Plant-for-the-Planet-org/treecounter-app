@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { payment_sepa } from '../../../assets';
+
 import type { InjectedProps } from '../Stripe/inject';
 
 import { IbanElement, injectStripe } from '../Stripe/stripeDefs';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -21,7 +24,7 @@ const createOptions = (fontSize: string, padding: ?string) => {
   return {
     style: {
       base: {
-        fontSize: '8pt',
+        fontSize: '15px',
         color: '#424770',
         letterSpacing: '0.025em',
         fontFamily: 'Source Code Pro, monospace',
@@ -68,24 +71,20 @@ class _StripeSepa extends React.Component<
   };
 
   render() {
-    const style = { color: '#666666', fontWeight: 'normal', fontSize: '.8em' };
-
-    console.log('CONTEXT: ', this.props);
-
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          IBAN
-          <IbanElement
-            supportedCountries={['SEPA']}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
-            {...createOptions(this.props.fontSize)}
-          />
-        </label>
-        <div id="mandate-acceptance" style={style}>
+      <form className="stripe-credit-card" onSubmit={this.handleSubmit}>
+        <div className="payment-option-header">
+          <img src={payment_sepa} />SEPA Direct Debit
+        </div>
+        <IbanElement
+          supportedCountries={['SEPA']}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onReady={handleReady}
+          {...createOptions(this.props.fontSize)}
+        />
+        <div className="mandate-acceptance">
           By providing your IBAN and confirming this payment, you are
           authorizing {this.props.context.tpoName} and Stripe, our payment
           service provider, to send instructions to your bank to debit your
@@ -95,7 +94,7 @@ class _StripeSepa extends React.Component<
           be claimed within 8 weeks starting from the date on which your account
           was debited.
         </div>
-        <button>Pay</button>
+        <PrimaryButton>Pay with SEPA</PrimaryButton>
       </form>
     );
   }

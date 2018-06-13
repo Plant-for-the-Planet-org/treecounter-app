@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import scriptLoader from 'react-async-script-loader';
 
+import { payment_paypal } from '../../../assets';
+
 class Paypal extends React.Component {
   constructor(props) {
     super(props);
@@ -74,7 +76,7 @@ class Paypal extends React.Component {
 
     // see https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4/customize-button/
     const buttonStyle = {
-      color: 'blue', // gold | blue | silver | black
+      color: 'silver', // gold | blue | silver | black
       shape: 'pill', // pill | rect
       label: 'pay', // checkout | credit | pay | buynow | paypal | installment
       size: 'large' // small | medium | large | responsive
@@ -100,8 +102,11 @@ class Paypal extends React.Component {
 
     console.log('CLIENT', CLIENT);
     return (
-      <div>
-        <form>
+      <form className="stripe-credit-card">
+        <div className="payment-option-header">
+          <img src={payment_paypal} />
+        </div>
+        <div className="centerize-paypal">
           {showButton && (
             <paypal.Button.react
               env="sandbox"
@@ -114,8 +119,8 @@ class Paypal extends React.Component {
               onError={onError}
             />
           )}
-        </form>
-      </div>
+        </div>
+      </form>
     );
   }
 }

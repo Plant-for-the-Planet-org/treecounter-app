@@ -10,7 +10,7 @@ const PlantProjectListTemplate = function(title) {
           {locals.items.map(function(item) {
             return (
               <div key={item.key} className="plant-project__item">
-                <div className="item-header">Project </div>
+                <div className="item-header">{i18n.t('label.project')} </div>
                 {item.input}
                 <PrimaryButton
                   onClick={() => {
@@ -19,7 +19,9 @@ const PlantProjectListTemplate = function(title) {
                 >
                   {i18n.t('label.save_changes')}
                 </PrimaryButton>
-                <div className="delete-project">delete project</div>
+                <div className="delete-project">
+                  {i18n.t('label.delete_project')}
+                </div>
               </div>
             );
           })}

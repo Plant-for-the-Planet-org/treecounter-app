@@ -193,7 +193,11 @@ export default class GiftTrees extends Component {
           props.onClick();
         }
       }
-      return <PrimaryButton onClick={validated}>Next</PrimaryButton>;
+      return (
+        <PrimaryButton onClick={validated}>
+          {i18n.t('label.next')}
+        </PrimaryButton>
+      );
     };
     const settings = {
       dots: true,

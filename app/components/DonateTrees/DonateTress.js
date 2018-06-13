@@ -25,7 +25,12 @@ import i18n from '../../locales/i18n.js';
 
 let TCombForm = t.form.Form;
 
-const headings = ['Project', 'Donation Details', 'Donor Details', 'Payment'];
+const headings = [
+  i18n.t('label.heading_project'),
+  i18n.t('label.heading_donate_details'),
+  i18n.t('label.heading_donor_details'),
+  i18n.t('label.heading_payment')
+];
 
 export default class DonateTrees extends Component {
   static data = {
@@ -134,7 +139,11 @@ export default class DonateTrees extends Component {
           props.onClick();
         }
       }
-      return <PrimaryButton onClick={validated}>Next</PrimaryButton>;
+      return (
+        <PrimaryButton onClick={validated}>
+          {i18n.t('label.next')}
+        </PrimaryButton>
+      );
     };
     const settings = {
       dots: true,

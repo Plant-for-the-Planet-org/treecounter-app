@@ -110,6 +110,44 @@ export default class EditUserProfile extends React.Component {
     };
   };
 
+  handlePlantProjectChange = (value, path) => {
+    // check if the currency field is changed
+    if (path && path[path.length - 2] === 'plantProjects') {
+      console.log('onchange Plant project list', value, path);
+      let index = path[path.length - 1];
+      console.log('currency changed on item %s', index);
+      let oldValue = this.props.currentUserProfile.plantProjects;
+      if (value && value.plantProjects.length < oldValue.length) {
+        console.log('project deleted');
+        this.props.deletePlantProject(oldValue[index].id);
+      } else if (value && value.plantProjects.length > oldValue.length) {
+        console.log('Saved Initiated');
+        let validatedValue = this.refs.project.validate();
+        if (validatedValue) {
+          console.log(validatedValue);
+        }
+      } else {
+        console.log('Saved Initiated');
+        let validatedValue = this.refs.project.validate();
+        if (validatedValue) {
+          console.log(validatedValue);
+          if (validatedValue.errors && validatedValue.errors.length) {
+            for (let errIndex in Object.keys(validatedValue.errors)) {
+              let err = validatedValue.errors[errIndex];
+              if (err.path[err.path.length - 2] == index) {
+                //do nothing
+                return;
+              }
+            }
+          }
+          let valueToUpdate = validatedValue.value.plantProjects[index];
+          console.log(valueToUpdate);
+          this.props.updatePlantProject(valueToUpdate);
+        }
+      }
+    }
+  };
+
   render() {
     console.log('___render___Edit_userprofile');
     const { type, image } = this.props.currentUserProfile;
@@ -153,14 +191,17 @@ export default class EditUserProfile extends React.Component {
             {i18n.t('label.save_changes')}
           </PrimaryButton>
         </CardLayout>
-        <div className="user-profile__project-form-group">
-          <TCombForm
-            ref={'project'}
-            type={plantProjectSchema.transformedSchema}
-            options={this.getFormSchemaOption('tpo', 'project')}
-            value={this.props.currentUserProfile}
-          />
-        </div>
+        {type == 'tpo' ? (
+          <div className="user-profile__project-form-group">
+            <TCombForm
+              ref={'project'}
+              type={plantProjectSchema.transformedSchema}
+              onChange={this.handlePlantProjectChange}
+              options={this.getFormSchemaOption('tpo', 'project')}
+              value={this.props.currentUserProfile}
+            />
+          </div>
+        ) : null}
         <CardLayout className="user-profile__form-group">
           <div className="form-group__heading">{i18n.t('label.about_me')}</div>
           <TCombForm
@@ -213,7 +254,9 @@ EditUserProfile.propTypes = {
   currentUserProfile: PropTypes.object,
   openPasswordUpdatedDialog: PropTypes.bool,
   handlePaswordUpdatedClose: PropTypes.func,
-  deleteProfile: PropTypes.func.isRequired
+  deleteProfile: PropTypes.func.isRequired,
+  updatePlantProject: PropTypes.func.isRequired,
+  deletePlantProject: PropTypes.func.isRequired
 };
 
 export { PaswordUpdatedDialog, ConfirmProfileDeletion };

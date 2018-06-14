@@ -124,18 +124,24 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
           }
         } ******/
         if (properties[propertyKey].type === 'array') {
-          let arrayTemplate = innerConfig[properties[propertyKey].type];
-          console.log('array', arrayTemplate);
           let title = properties[propertyKey].title;
+          let arrayConfig = innerConfig[properties[propertyKey].type];
+          let arrayTemplate = ListTemplateGenerator({})(title);
+          let disableRemove = true;
+          if (arrayConfig && arrayConfig.template) {
+            arrayTemplate = arrayConfig.template(title);
+            disableRemove = arrayConfig.disableRemove;
+          }
+
+          console.log('array', arrayConfig);
+
           let arrayOptions = {
             placeholder: title,
             auto: 'none',
             autoCapitalize: 'none',
             disableOrder: true,
-            disableRemove: true,
-            template: !arrayTemplate
-              ? ListTemplateGenerator({})(title)
-              : arrayTemplate(title)
+            disableRemove: disableRemove,
+            template: arrayTemplate
           };
           schemaOptions['fields'][propertyKey] = {
             ...arrayOptions,

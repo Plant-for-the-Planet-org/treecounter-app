@@ -12,14 +12,33 @@ const PlantProjectListTemplate = function(title) {
               <div key={item.key} className="plant-project__item">
                 <div className="item-header">Project </div>
                 {item.input}
+                {item.buttons.map(function(button, i) {
+                  switch (button.type) {
+                    case 'remove': {
+                      return (
+                        <div
+                          key={i}
+                          onClick={button.click}
+                          className="delete-project"
+                        >
+                          delete project
+                        </div>
+                      );
+                    }
+                  }
+                })}
                 <PrimaryButton
                   onClick={() => {
-                    this.toggleConfirmProfileDeletion();
+                    console.log('new value', locals.items);
+                    console.log('Item new value', item.input.props.value);
+                    item.input.props.onChange(
+                      item.input.props.value,
+                      item.input.props.ctx.path
+                    );
                   }}
                 >
                   {i18n.t('label.save_changes')}
                 </PrimaryButton>
-                <div className="delete-project">delete project</div>
               </div>
             );
           })}

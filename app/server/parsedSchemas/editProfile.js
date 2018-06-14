@@ -13,7 +13,7 @@ Object.keys(schemaLiform).map(userType => {
 });
 
 const plantProjectSchema = parseJsonToTcomb(plantProject.schema, {
-  array: PlantProjectListTemplate
+  array: { template: PlantProjectListTemplate, disableRemove: false }
 });
 
 export { parsedSchema, plantProjectSchema };

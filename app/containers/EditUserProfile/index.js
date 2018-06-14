@@ -3,7 +3,11 @@ import EditUserProfile from '../../components/EditUserProfile';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { updateUserProfile } from '../../actions/updateUserProfile';
+import {
+  updateUserProfile,
+  updateTpoProject,
+  deleteTpoProject
+} from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 
 class EditUserProfileContainer extends React.Component {
@@ -15,6 +19,13 @@ class EditUserProfileContainer extends React.Component {
   }
   deleteProfile = () => {
     console.log('call Prfoile Deletion API here');
+  };
+
+  updatePlantProject = data => {
+    this.props.updateTpoProject(data);
+  };
+  deletePlantProject = plantId => {
+    this.props.deleteTpoProject(plantId);
   };
 
   onSave = (usertype, profileType) => {
@@ -58,6 +69,8 @@ class EditUserProfileContainer extends React.Component {
         openPasswordUpdatedDialog={this.state.showPasswordDialog}
         handlePaswordUpdatedClose={this.handleCloseModal}
         deleteProfile={this.deleteProfile}
+        updatePlantProject={this.updatePlantProject}
+        deletePlantProject={this.deletePlantProject}
       />
     );
   }
@@ -74,7 +87,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      updateUserProfile
+      updateUserProfile,
+      updateTpoProject,
+      deleteTpoProject
     },
     dispatch
   );
@@ -85,5 +100,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 );
 
 EditUserProfileContainer.propTypes = {
-  updateUserProfile: PropTypes.func
+  updateUserProfile: PropTypes.func,
+  updateTpoProject: PropTypes.func,
+  deleteTpoProject: PropTypes.func
 };

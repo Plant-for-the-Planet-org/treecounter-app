@@ -142,7 +142,10 @@ export default class EditUserProfile extends React.Component {
           }
           let valueToUpdate = validatedValue.value.plantProjects[index];
           console.log(valueToUpdate);
-          this.props.updatePlantProject(valueToUpdate, value.id);
+          this.props.updatePlantProject(
+            valueToUpdate,
+            value.plantProjects[index].id
+          );
         }
       }
     }

@@ -62,7 +62,11 @@ export function updateTpoProject(plantProject, projectId) {
         })
         .catch(err => {
           debug(err);
-          NotificationManager.error(err.message, 'Profile update Error', 5000);
+          NotificationManager.error(
+            err.message,
+            'plant Project update Error',
+            5000
+          );
         });
     });
   };

@@ -25,6 +25,7 @@ export default class Leaderboard extends Component {
       }
     ]
   };
+  handleCategoryChange = () => {};
   constructor() {
     super();
     this.handleTabChange = this.handleTabChange.bind(this);
@@ -60,36 +61,58 @@ export default class Leaderboard extends Component {
           </React.Fragment>
         );
       });
+    let categoryUI = this.props.exploreData.categories.map(
+      (category, index) => {
+        return (
+          <React.Fragment key={index}>
+            <div
+              className="leaderboard_image__container"
+              onCLick={this.handleCategoryChange}
+            >
+              <UserProfileImage iconUrl={country} />
+              <div>Countries</div>
+            </div>
+          </React.Fragment>
+        );
+      }
+    );
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>{'Explore'}</TextHeading>
-        <CardLayout className="leader-board--container">
+        <CardLayout className="leader-board__container">
           <Tabs data={Leaderboard.data.tabs} onTabChange={this.handleTabChange}>
             {this.state.modeMap === Leaderboard.data.tabs[0].id ? (
               <div>
                 <div className="leaderboard_images__container">
-                  <div className="leaderboard_image__container">
+                  <div
+                    className="leaderboard_image__container"
+                    onCLick={this.handleCategoryChange}
+                  >
                     <UserProfileImage iconUrl={country} />
-                    Countries
+                    <div>Countries</div>
                   </div>
                   <div className="leaderboard_image__container">
                     <UserProfileImage iconUrl={organization} />
-                    Demo Text
+                    <div>Demo Text</div>
                   </div>
                   <div className="leaderboard_image__container">
                     <UserProfileImage iconUrl={company} />
-                    Companies
+                    <div>Companies</div>
                   </div>
                   <div className="leaderboard_image__container">
                     <UserProfileImage iconUrl={tree_outline} />
-                    Tree-Planting
+                    <div>Tree-Planting</div>
                   </div>
                   <div className="leaderboard_image__container">
                     <UserProfileImage iconUrl={education} />
-                    Education
+                    <div>Education</div>
+                  </div>
+                  <div className="leaderboard_image__container">
+                    <UserProfileImage iconUrl={education} />
+                    <div>Education</div>
                   </div>
                 </div>
-                <div className="leaderboard-list--sort">
+                <div className="leaderboard-list__sort">
                   <div className="sort-container">
                     <span>Sort By: </span>
                     <span>
@@ -99,7 +122,7 @@ export default class Leaderboard extends Component {
                       </select>
                     </span>
                   </div>
-                  <div className="time-container">
+                  <div className="sort-container">
                     <span>Time Period: </span>
                     <span>
                       <select value={this.state.sortValue}>
@@ -110,7 +133,7 @@ export default class Leaderboard extends Component {
                   </div>
                 </div>
 
-                <div className="leaderboard-list--table">
+                <div className="leaderboard-list__table">
                   <div className="row-header-container">
                     <div className="col-header">Country</div>
                     <div className="col-header">Planted</div>

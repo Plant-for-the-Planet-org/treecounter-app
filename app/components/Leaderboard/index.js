@@ -61,21 +61,21 @@ export default class Leaderboard extends Component {
           </React.Fragment>
         );
       });
-    let categoryUI = this.props.exploreData.categories.map(
-      (category, index) => {
-        return (
-          <React.Fragment key={index}>
-            <div
-              className="leaderboard_image__container"
-              onCLick={this.handleCategoryChange}
-            >
-              <UserProfileImage iconUrl={country} />
-              <div>Countries</div>
-            </div>
-          </React.Fragment>
-        );
-      }
-    );
+    // let categoryUI = this.props.exploreData.categories.map(
+    //   (category, index) => {
+    //     return (
+    //       <React.Fragment key={index}>
+    //         <div
+    //           className="leaderboard_image__container"
+    //           onCLick={this.handleCategoryChange}
+    //         >
+    //           <UserProfileImage iconUrl={country} />
+    //           <div>Countries</div>
+    //         </div>
+    //       </React.Fragment>
+    //     );
+    //   }
+    // );
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>{'Explore'}</TextHeading>

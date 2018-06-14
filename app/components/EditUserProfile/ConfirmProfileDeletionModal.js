@@ -31,7 +31,7 @@ const ConfirmProfileDeletion = ({
 ConfirmProfileDeletion.propTypes = {
   isOpen: PropTypes.bool,
   onRequestClose: PropTypes.func,
-  handleProfileDeletion: PropTypes.fun
+  handleProfileDeletion: PropTypes.func
 };
 
 export default ConfirmProfileDeletion;

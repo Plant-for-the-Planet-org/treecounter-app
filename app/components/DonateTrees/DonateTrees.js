@@ -71,6 +71,32 @@ class DonateTrees extends Component {
     // this.checkValidation = this.checkValidation[0].bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (nextProps.selectedProject) {
+      if (this.props.selectedProject) {
+        if (
+          nextProps.selectedProject.paymentSetup.treeCountOptions
+            .fixedDefaultTreeCount !==
+          this.props.selectedProject.paymentSetup.treeCountOptions
+            .fixedDefaultTreeCount
+        ) {
+          this.setState({
+            selectedTreeCount:
+              nextProps.selectedProject.paymentSetup.treeCountOptions
+                .fixedDefaultTreeCount
+          });
+        }
+      } else {
+        this.setState({
+          selectedTreeCount:
+            nextProps.selectedProject.paymentSetup.treeCountOptions
+              .fixedDefaultTreeCount
+        });
+      }
+    }
+  }
+
   handleTreeCountCurrencyChange(treeCountCurrencyData) {
     console.log('handleTreeCountCurrencyChange', treeCountCurrencyData);
     this.setState({
@@ -103,12 +129,14 @@ class DonateTrees extends Component {
 
   checkValidation = [
     () => {
+      console.log('Selected Project' + this.props.selectedProject);
       if (this.props.selectedProject) {
         return true;
       }
       return false;
     },
     () => {
+      console.log('select treecount' + this.state.selectedTreeCount);
       if (this.state.selectedTreeCount) {
         this.setState({
           form: {
@@ -149,7 +177,7 @@ class DonateTrees extends Component {
   render() {
     const NextArrow = function(props) {
       function validated() {
-        if (props.checkValidation()) {
+        if (props.checkValidation[props.currentSlide].call(props.context)) {
           props.onClick();
         }
       }
@@ -159,11 +187,7 @@ class DonateTrees extends Component {
     const settings = {
       dots: true,
       nextArrow: (
-        <NextArrow
-          checkValidation={this.checkValidation[this.state.pageIndex].bind(
-            this
-          )}
-        />
+        <NextArrow checkValidation={this.checkValidation} context={this} />
       ),
       infinite: false,
       adaptiveHeight: true,
@@ -233,7 +257,7 @@ class DonateTrees extends Component {
                   />
                 )}
               </Tabs>
-              {this.props.selectedProject ? (
+              {this.state.form.donationReceipt ? (
                 <PaymentSelector
                   paymentMethods={
                     plantProject.paymentSetup.countries['DE/EUR'].paymentMethods
@@ -245,11 +269,10 @@ class DonateTrees extends Component {
                   handleExpandedClicked={this.handleExpandedClicked}
                   context={{
                     tpoName: this.props.selectedTpo.name,
-                    donorEmail:
-                      this.props.currentUserProfile.email ||
-                      'default@email.com', // TODO: fix this
+                    donorEmail: this.state.form.donationReceipt.email, // TODO: fix this
                     donorName:
-                      this.props.currentUserProfile.fullname || 'My Name', // TODO: fix this
+                      this.state.form.donationReceipt.firstname +
+                      this.state.form.donationReceipt.lastname, // TODO: fix this
                     treeCount: this.state.selectedTreeCount
                   }}
                   onSuccess={

@@ -54,3 +54,6 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+
+# should be copied from app/config/index.js.dist
+app/config/index.js

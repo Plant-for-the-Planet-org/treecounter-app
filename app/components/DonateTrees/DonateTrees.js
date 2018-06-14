@@ -59,7 +59,8 @@ class DonateTrees extends Component {
       selectedTreeCount: 0,
       selectedAmount: 0,
       form: {},
-      expanded: false
+      expanded: false,
+      expandedOption: ''
     };
 
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
@@ -94,6 +95,11 @@ class DonateTrees extends Component {
       pageIndex: index
     });
   }
+  handleExpandedClicked = optionNumber => {
+    this.setState({
+      expandedOption: optionNumber
+    });
+  };
 
   checkValidation = [
     () => {
@@ -235,6 +241,8 @@ class DonateTrees extends Component {
                   accounts={plantProject.paymentSetup.accounts}
                   amount={this.state.selectedAmount}
                   currency={this.state.selectedCurrency}
+                  expandedOption={this.state.expandedOption}
+                  handleExpandedClicked={this.handleExpandedClicked}
                   context={{
                     tpoName: this.props.selectedTpo.name,
                     donorEmail:

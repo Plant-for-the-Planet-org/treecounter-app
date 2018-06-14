@@ -10,7 +10,7 @@ export default {
   no_contributions: 'No Contributions',
   singleTree: 'Single Tree',
   severalTrees: 'Several Trees',
-  donateTrees: 'Donated Trees',
+  donatedTrees: 'Donated Trees',
   synopsis1: 'Synopsis1',
   synopsis2: 'Synopsis2',
   url: 'URL',

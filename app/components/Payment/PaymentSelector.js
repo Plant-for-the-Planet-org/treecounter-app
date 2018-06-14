@@ -29,13 +29,19 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
 
   componentDidMount() {
+    console.log(
+      '%%%%%%%%%%%%%%% this.props.paymentMethods',
+      this.props.paymentMethods
+    );
     // lookup stripe related payment methods for the current country/currency combination
     let stripeGateways = Object.keys(this.props.paymentMethods).filter(
       gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)
     );
+    console.log('%%%%%%%%%%%%%%% stripeGateways', stripeGateways);
 
     // get unique values
-    stripeGateways = [...new Set(stripeGateways)].length;
+    stripeGateways = [...new Set(stripeGateways)];
+    console.log('%%%%%%%%%%%%%%% stripeGateways', stripeGateways);
 
     // there should only be maximum 1
     if (stripeGateways.length > 1) {
@@ -49,6 +55,11 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     if (stripeGateways.length > 0) {
       const stripeAccountName = this.props.paymentMethods[stripeGateways[0]];
       const stripeAccount = this.props.accounts[stripeAccountName];
+      console.log(
+        '%%%%%%%%%%%%%%% stripeAccountName stripeAccount',
+        stripeAccountName,
+        stripeAccount
+      );
 
       // componentDidMount only runs in a browser environment.
       // In addition to loading asynchronously, this code is safe to server-side render.

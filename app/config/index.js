@@ -28,7 +28,7 @@ export const context = {
   // NEVER USE THE KEY 'serverSide' INSIDE THIS OBJECT
   scheme: 'https', // API server protocol
   // host: "launch.trilliontreecampaign.org", // API server domain
-  host: 'staging.trilliontreecampaign.org', // API server domain
+  host: 'treecounter.plant-for-the-planet.org', // API server domain
   base: '/app_dev.php', // debug mode on/off, set to empty string to switch debug mode off
   //  base: "", // debug mode on/off, set to empty string to switch debug mode off
   debug: true // local console debugging switch

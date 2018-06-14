@@ -23,6 +23,7 @@ import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 import i18n from '../../locales/i18n.js';
 import PaymentSelector from '../Payment/PaymentSelector';
+import { donate } from '../../actions/donateAction';
 
 let TCombForm = t.form.Form;
 
@@ -63,6 +64,7 @@ class DonateTrees extends Component {
       expandedOption: ''
     };
 
+    this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
     this.handleTreeCountCurrencyChange = this.handleTreeCountCurrencyChange.bind(
       this
@@ -121,6 +123,7 @@ class DonateTrees extends Component {
       pageIndex: index
     });
   }
+
   handleExpandedClicked = optionNumber => {
     this.setState({
       expandedOption: optionNumber
@@ -166,6 +169,19 @@ class DonateTrees extends Component {
 
   handleModeReceiptChange(tab) {
     this.setState({ modeReceipt: tab });
+  }
+
+  handlePaymentApproved(paymentResponse) {
+    console.log('/////////////////// payment success ', paymentResponse);
+    donate(
+      {
+        ...this.state.form,
+        paymentResponse,
+        amount: this.state.selectedAmount,
+        currency: this.state.selectedCurrency
+      },
+      this.props.selectedProject.id
+    );
   }
 
   callExpanded = bool => {
@@ -275,10 +291,8 @@ class DonateTrees extends Component {
                       this.state.form.donationReceipt.lastname, // TODO: fix this
                     treeCount: this.state.selectedTreeCount
                   }}
-                  onSuccess={
-                    data =>
-                      console.log('/////////////////// payment success ', data)
-                    // TODO: connect to form: paymentOptions and paymentMethod
+                  onSuccess={paymentResponse =>
+                    this.handlePaymentApproved(paymentResponse)
                   }
                   onFailure={data =>
                     console.log('/////////////////// payment failure ', data)

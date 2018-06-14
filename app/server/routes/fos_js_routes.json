@@ -749,7 +749,8 @@
     },
     "plantProject_put": {
       "tokens": [
-        ["text", "/plantProjects/(plantProject)"],
+        ["variable", "/", "[^/]++", "plantProject"],
+        ["text", "/plantProjects"],
         ["variable", "/", "[^/]++", "_locale"],
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]

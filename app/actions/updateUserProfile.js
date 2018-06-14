@@ -41,11 +41,11 @@ export function deleteTpoProject(plantId) {
     });
   };
 }
-export function updateTpoProject(project) {
+export function updateTpoProject(plantProject, projectId) {
   return dispatch => {
     return new Promise(function(resolve) {
-      putAuthenticatedRequest('plantProject_put', project, {
-        project: project.id
+      putAuthenticatedRequest('plantProject_put', plantProject, {
+        plantProject: projectId
       })
         .then(res => {
           debug(res.status);

@@ -293,10 +293,9 @@
   }
 }
 
-.stripe-credit-card {
+.payment-option {
   display: flex;
   flex-direction: column;
-  min-height: 200px;
   border: solid 0.7px #0e7baa;
   border-radius: 6px;
   margin-bottom: 20px;
@@ -312,7 +311,7 @@
 
   .pftp-button-primary {
     margin: 10px;
-    width: auto;
+    width: calc(100% - 20px);
     display: flex;
     border-radius: 22px;
   }
@@ -322,10 +321,22 @@
     background-color: #0e7baa;
     color: #ffffff;
     display: flex;
+    justify-content: space-between;
 
     img {
       height: 25px;
-      margin-right: 20px;
+      transition: 1s;
+    }
+
+    span {
+      display: flex;
+      img {
+        margin-right: 20px;
+      }
+    }
+
+    .arrow {
+      transform: rotate(180deg);
     }
   }
 
@@ -338,6 +349,27 @@
   }
 
   .centerize-paypal {
-    margin: auto;
+    margin: 40px 0;
   }
+
+  .confirm-checkbox {
+    text-align: left;
+    padding: 20px;
+    color: #686060;
+    font-size: 14px;
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  }
+
+  .account-details {
+    @extend .confirm-checkbox;
+    color: #89a550;
+    width: 240px;
+  }
+}
+
+.display-none {
+  display: none;
 }

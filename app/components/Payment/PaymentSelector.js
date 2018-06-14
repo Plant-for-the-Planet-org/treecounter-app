@@ -54,6 +54,10 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     document.body && document.body.appendChild(stripeJs);
   }
 
+  handleExpandedClicked = optionNumber => {
+    this.props.handleExpandedClicked(optionNumber);
+  };
+
   render() {
     const { accounts, paymentMethods, amount, currency, context } = this.props;
     const gatewayProps = {
@@ -79,6 +83,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                     onSuccess={this.decorateSuccessWithGateway(gateway)}
                     account={accounts[accountName]}
                     target={target}
+                    expanded={this.props.expandedOption === '1'}
+                    handleExpandedClicked={this.handleExpandedClicked}
                     {...gatewayProps}
                   />
                 </Elements>
@@ -91,6 +97,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                     onSuccess={this.decorateSuccessWithGateway(gateway)}
                     account={accounts[accountName]}
                     target={target}
+                    expanded={this.props.expandedOption === '2'}
+                    handleExpandedClicked={this.handleExpandedClicked}
                     {...gatewayProps}
                   />
                 </Elements>
@@ -105,6 +113,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                   currency={currency}
                   account={accounts[accountName]}
                   target={target}
+                  expanded={this.props.expandedOption === '3'}
+                  handleExpandedClicked={this.handleExpandedClicked}
                   {...gatewayProps}
                 />
               );
@@ -115,6 +125,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                   key={gateway}
                   onSuccess={this.decorateSuccessWithGateway(gateway)}
                   account={accounts[accountName]}
+                  expanded={this.props.expandedOption === '4'}
+                  handleExpandedClicked={this.handleExpandedClicked}
                   {...gatewayProps}
                 />
               );
@@ -129,6 +141,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
 PaymentSelector.propTypes = {
   accounts: PropTypes.object,
   paymentMethods: PropTypes.object.isRequired,
+  expandedOption: PropTypes.string,
+  handleExpandedClicked: PropTypes.func,
   amount: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
   context: PropTypes.object.isRequired,

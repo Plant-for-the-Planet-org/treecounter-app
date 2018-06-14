@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
-import { payment_credit } from '../../../assets';
+import { payment_credit, payment_arrow } from '../../../assets';
 
 import type { InjectedProps } from '../Stripe/inject';
 
@@ -45,10 +46,6 @@ const createOptions = (fontSize: string, padding: ?string) => {
 };
 
 class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
-  constructor(props) {
-    super(props);
-  }
-
   handleSubmit = ev => {
     ev.preventDefault();
     if (this.props.stripe) {
@@ -64,21 +61,44 @@ class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
     }
   };
 
+  handleArrowClick = () => {
+    if (this.props.expanded !== true) {
+      this.props.handleExpandedClicked('1');
+    } else {
+      this.props.handleExpandedClicked('');
+    }
+  };
+
   render() {
+    let arrow = classnames({
+      arrow: !this.props.expanded
+    });
+    let displayNone = classnames({
+      'display-none': !this.props.expanded
+    });
     return (
-      <form className="stripe-credit-card" onSubmit={this.handleSubmit}>
+      <form className="payment-option" onSubmit={this.handleSubmit}>
         <div className="payment-option-header">
-          <img src={payment_credit} />Credit Card
+          <span>
+            <img className="logo" src={payment_credit} />Credit Card
+          </span>
+          <img
+            className={arrow}
+            onClick={this.handleArrowClick}
+            src={payment_arrow}
+          />
         </div>
-        <CardElement
-          onBlur={handleBlur}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onReady={handleReady}
-          hidePostalCode={true}
-          {...createOptions(this.props.fontSize)}
-        />
-        <PrimaryButton>Pay</PrimaryButton>
+        <div className={displayNone}>
+          <CardElement
+            onBlur={handleBlur}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onReady={handleReady}
+            hidePostalCode={true}
+            {...createOptions(this.props.fontSize)}
+          />
+          <PrimaryButton>Pay</PrimaryButton>
+        </div>
       </form>
     );
   }
@@ -91,6 +111,8 @@ _StripeCC.propTypes = {
   currency: PropTypes.string.isRequired,
   account: PropTypes.object.isRequired,
   target: PropTypes.string,
+  expanded: PropTypes.bool,
+  handleExpandedClicked: PropTypes.func,
   onSuccess: PropTypes.func,
   onError: PropTypes.func,
   onFailure: PropTypes.func

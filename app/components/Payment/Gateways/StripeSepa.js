@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
-import { payment_sepa } from '../../../assets';
+import { payment_sepa, payment_arrow } from '../../../assets';
 
 import type { InjectedProps } from '../Stripe/inject';
 
@@ -45,6 +46,7 @@ class _StripeSepa extends React.Component<
 > {
   constructor(props) {
     super(props);
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -70,31 +72,54 @@ class _StripeSepa extends React.Component<
     }
   };
 
+  handleArrowClick = () => {
+    if (this.props.expanded !== true) {
+      this.props.handleExpandedClicked('2');
+    } else {
+      this.props.handleExpandedClicked('');
+    }
+  };
+
   render() {
+    let arrow = classnames({
+      arrow: !this.props.expanded
+    });
+    let displayNone = classnames({
+      'display-none': !this.props.expanded
+    });
     return (
-      <form className="stripe-credit-card" onSubmit={this.handleSubmit}>
+      <form className="payment-option" onSubmit={this.handleSubmit}>
         <div className="payment-option-header">
-          <img src={payment_sepa} />SEPA Direct Debit
+          <span>
+            <img className="logo" src={payment_sepa} />SEPA Direct Debit
+          </span>
+          <img
+            className={arrow}
+            onClick={this.handleArrowClick}
+            src={payment_arrow}
+          />
         </div>
-        <IbanElement
-          supportedCountries={['SEPA']}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onReady={handleReady}
-          {...createOptions(this.props.fontSize)}
-        />
-        <div className="mandate-acceptance">
-          By providing your IBAN and confirming this payment, you are
-          authorizing {this.props.context.tpoName} and Stripe, our payment
-          service provider, to send instructions to your bank to debit your
-          account and your bank to debit your account in accordance with those
-          instructions. You are entitled to a refund from your bank under the
-          terms and conditions of your agreement with your bank. A refund must
-          be claimed within 8 weeks starting from the date on which your account
-          was debited.
+        <div className={displayNone}>
+          <IbanElement
+            supportedCountries={['SEPA']}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onReady={handleReady}
+            {...createOptions(this.props.fontSize)}
+          />
+          <div className="mandate-acceptance">
+            By providing your IBAN and confirming this payment, you are
+            authorizing {this.props.context.tpoName} and Stripe, our payment
+            service provider, to send instructions to your bank to debit your
+            account and your bank to debit your account in accordance with those
+            instructions. You are entitled to a refund from your bank under the
+            terms and conditions of your agreement with your bank. A refund must
+            be claimed within 8 weeks starting from the date on which your
+            account was debited.
+          </div>
+          <PrimaryButton>Pay with SEPA</PrimaryButton>
         </div>
-        <PrimaryButton>Pay with SEPA</PrimaryButton>
       </form>
     );
   }
@@ -111,6 +136,8 @@ _StripeSepa.propTypes = {
   account: PropTypes.object.isRequired,
   target: PropTypes.string,
   onSuccess: PropTypes.func,
+  expanded: PropTypes.bool,
+  handleExpandedClicked: PropTypes.func,
   onError: PropTypes.func,
   onFailure: PropTypes.func
 };

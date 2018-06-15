@@ -1,8 +1,13 @@
 import React from 'react';
-import Map from '../Common/EsriMap/Map';
+import MapContributionCapture from '../Map/MapContributionCapture';
 
 export function MapTemplate(locals) {
   console.log(locals);
-  locals.onChange('geoLongitude=1&geoLatitude=1&country=DE'); //Temporary fix
-  return <Map />;
+  //  locals.onChange(); //Temporary fix
+  return (
+    <MapContributionCapture
+      geoLocation={'geoLongitude=1&geoLatitude=1&country=DE'}
+      onLocationSelected={locals.onChange}
+    />
+  );
 }

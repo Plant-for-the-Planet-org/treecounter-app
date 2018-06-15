@@ -8,8 +8,9 @@ import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n.js';
+import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 
-const UserContributions = ({ userContributions }) => {
+const UserContributions = ({ userProfileId, userContributions }) => {
   let mPins = userContributions.map(element => {
     let color = '';
     if (element.contributionType === 'donated') color = 'green';
@@ -28,6 +29,10 @@ const UserContributions = ({ userContributions }) => {
       <CardLayout>
         {Object.keys(userContributions).length > 0 ? (
           <div>
+            <ArcGISContributionsMap
+              webMapId={'d601683709dc415b99ddc1bc66a6d8eb'}
+              userId={userProfileId}
+            />
             <Map pins={mPins} />
             <ContributionsMapLegend />
             <div className="contribution-container">
@@ -57,6 +62,7 @@ const UserContributions = ({ userContributions }) => {
 };
 
 UserContributions.propTypes = {
+  userProfileId: PropTypes.number.isRequired,
   userContributions: PropTypes.array.isRequired
 };
 

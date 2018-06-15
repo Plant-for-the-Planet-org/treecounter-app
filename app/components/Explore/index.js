@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 
 import CardLayout from '../Common/Card/CardLayout';
 import Tabs from '../Common/Tabs';
-import Map from '../Common/EsriMap/Map';
 import MapLayerSelector from './MapLayerSelector';
-import ExploreForm from '../../server/formSchemas/explore';
+import ArcGISExploreMap from '../Map/ArcGISExploreMap';
 
 export default class Explore extends Component {
   static data = {
@@ -25,7 +23,7 @@ export default class Explore extends Component {
     super();
     this.state = {
       activeTab: '',
-      activeMapLayers: ExploreForm.activeMapLayers
+      activeMapLayers: ['Tree Inventory']
     };
     this.onTabChange = this.onTabChange.bind(this);
     this.onMapLayerSelectUpdate = this.onMapLayerSelectUpdate.bind(this);
@@ -38,8 +36,9 @@ export default class Explore extends Component {
     });
   }
 
-  onMapLayerSelectUpdate(newObj) {
-    this.setState({ activeMapLayers: newObj });
+  onMapLayerSelectUpdate(activeMapLayers) {
+    console.log('%%%%%%%%%% onMapLayerSelectUpdate ', activeMapLayers);
+    this.setState({ activeMapLayers });
   }
 
   render() {
@@ -51,12 +50,15 @@ export default class Explore extends Component {
               <div>
                 <div className="explore-checkbox">
                   <MapLayerSelector
-                    mapLayers={ExploreForm.mapLayers}
-                    activeMapLayers={ExploreForm.activeMapLayers}
+                    mapLayers={{ 'Tree Inventory': 'Planted trees' }}
+                    activeMapLayers={this.state.activeMapLayers}
                     onStateUpdate={this.onMapLayerSelectUpdate}
                   />
                 </div>
-                <Map />
+                <ArcGISExploreMap
+                  webMapId={'d601683709dc415b99ddc1bc66a6d8eb'}
+                  layers={this.state.activeMapLayers}
+                />
               </div>
             ) : null}
           </Tabs>

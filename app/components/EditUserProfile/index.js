@@ -13,7 +13,12 @@ import {
 import PaswordUpdatedDialog from './PaswordUpdateModal';
 import ConfirmProfileDeletion from './ConfirmProfileDeletionModal';
 import i18n from '../../locales/i18n.js';
+import PlantProjectTemplate from './PlantProjectTemplate';
 
+const plantProjectFormOptions = {
+  template: PlantProjectTemplate(),
+  ...plantProjectSchema.schemaOptions
+};
 let TCombForm = t.form.Form;
 export default class EditUserProfile extends React.Component {
   constructor(props) {
@@ -21,8 +26,22 @@ export default class EditUserProfile extends React.Component {
     console.log(props);
     console.log(parsedSchema);
     this.state = {
-      showConfirmProfileDeletion: false
+      showConfirmProfileDeletion: false,
+      plantProjects:
+        (props &&
+          props.currentUserProfile &&
+          props.currentUserProfile.plantProjects) ||
+        []
     };
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      plantProjects:
+        (nextProps &&
+          nextProps.currentUserProfile &&
+          nextProps.currentUserProfile.plantProjects) ||
+        []
+    });
   }
   toggleConfirmProfileDeletion = () => {
     this.setState({
@@ -95,14 +114,6 @@ export default class EditUserProfile extends React.Component {
   };
 
   getFormSchemaOption = (userType, profileType) => {
-    if (profileType == 'project') {
-      return {
-        template: locals => {
-          return <div>{locals.inputs.plantProjects}</div>;
-        },
-        ...plantProjectSchema.schemaOptions
-      };
-    }
     let schemaOptions = parsedSchema[userType][profileType].schemaOptions;
     return {
       template: this.getFormTemplate(userType, profileType),
@@ -111,41 +122,37 @@ export default class EditUserProfile extends React.Component {
   };
 
   handlePlantProjectChange = (value, path) => {
-    // check if the currency field is changed
     if (path && path[path.length - 2] === 'plantProjects') {
-      console.log('onchange Plant project list', value, path);
-      let index = path[path.length - 1];
-      console.log('currency changed on item %s', index);
+      let projectIndex = path[path.length - 1];
       let oldValue = this.props.currentUserProfile.plantProjects;
+
       if (value && value.plantProjects.length < oldValue.length) {
-        console.log('project deleted');
-        this.props.deletePlantProject(oldValue[index].id);
+        this.props.deletePlantProject(oldValue[projectIndex].id);
       } else if (value && value.plantProjects.length > oldValue.length) {
         console.log('Saved Initiated');
         let validatedValue = this.refs.project.validate();
         if (validatedValue) {
           console.log(validatedValue);
         }
-      } else {
-        console.log('Saved Initiated');
+      } else if (projectIndex < value.plantProjects.length) {
         let validatedValue = this.refs.project.validate();
         if (validatedValue) {
           console.log(validatedValue);
           if (validatedValue.errors && validatedValue.errors.length) {
             for (let errIndex in Object.keys(validatedValue.errors)) {
               let err = validatedValue.errors[errIndex];
-              if (err.path[err.path.length - 2] == index) {
+              if (err.path[err.path.length - 2] == projectIndex) {
                 //do nothing
                 return;
               }
             }
           }
-          let valueToUpdate = validatedValue.value.plantProjects[index];
+          let valueToUpdate = validatedValue.value.plantProjects[projectIndex];
           console.log(valueToUpdate);
-          this.props.updatePlantProject(
-            valueToUpdate,
-            value.plantProjects[index].id
-          );
+          this.props.updatePlantProject({
+            ...valueToUpdate,
+            id: value.plantProjects[projectIndex].id
+          });
         }
       }
     }
@@ -154,6 +161,71 @@ export default class EditUserProfile extends React.Component {
   render() {
     console.log('___render___Edit_userprofile');
     const { type, image } = this.props.currentUserProfile;
+
+    let plantProjectList = null;
+    if (type == 'tpo') {
+      plantProjectList = this.state.plantProjects.map((plantProject, index) => {
+        return (
+          <React.Fragment key={index}>
+            <div className="user-profile__project-form-group">
+              <div className="plant-project__item">
+                <TCombForm
+                  ref={'plantProject' + plantProject.id}
+                  type={plantProjectSchema.transformedSchema}
+                  options={{
+                    template: PlantProjectTemplate(index),
+                    ...plantProjectSchema.schemaOptions
+                  }}
+                  value={plantProject}
+                />
+                <PrimaryButton
+                  onClick={() => {
+                    if (plantProject.id) {
+                      //update the old project info
+                      let formRef = 'plantProject' + plantProject.id;
+                      console.log(this.refs[formRef].validate());
+
+                      let value = this.refs[formRef].getValue();
+                      if (value) {
+                        //if image file is same dont update it
+                        //same thing will need to handle for 'plantProjectImages array
+                        if (value.imageFile == plantProject.imageFile) {
+                          value = Object.assign({}, value);
+                          delete value.imageFile;
+                        }
+                        this.props.updatePlantProject({
+                          ...value,
+                          id: plantProject.id
+                        });
+                      }
+                    } else {
+                      console.log('post new project here');
+                    }
+                  }}
+                >
+                  {i18n.t('label.save_changes')}
+                </PrimaryButton>
+                <div
+                  key={index}
+                  onClick={() => {
+                    console.log('click delete');
+                    if (plantProject.id) {
+                      this.props.deletePlantProject(plantProject.id);
+                    } else {
+                      //update local state
+                    }
+                  }}
+                  className="delete-project"
+                >
+                  delete project
+                </div>
+              </div>
+            </div>
+          </React.Fragment>
+        );
+      });
+    }
+
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
         <ConfirmProfileDeletion
@@ -164,11 +236,14 @@ export default class EditUserProfile extends React.Component {
             this.toggleConfirmProfileDeletion();
           }}
         />
+
         <PaswordUpdatedDialog
           isOpen={this.props.openPasswordUpdatedDialog}
           onRequestClose={this.props.handlePaswordUpdatedClose}
         />
+
         <TextHeading>{i18n.t('label.edit_profile')}</TextHeading>
+
         <CardLayout className="user-profile__form-group">
           <div className="profile-image__container">
             <UserProfileImage profileImage={image} />
@@ -194,17 +269,23 @@ export default class EditUserProfile extends React.Component {
             {i18n.t('label.save_changes')}
           </PrimaryButton>
         </CardLayout>
+
+        {plantProjectList}
         {type == 'tpo' ? (
-          <div className="user-profile__project-form-group">
-            <TCombForm
-              ref={'project'}
-              type={plantProjectSchema.transformedSchema}
-              onChange={this.handlePlantProjectChange}
-              options={this.getFormSchemaOption('tpo', 'project')}
-              value={this.props.currentUserProfile}
-            />
+          <div className="pftp-addbutton">
+            <button
+              onClick={() => {
+                console.log(plantProjectFormOptions);
+                const newPlantProjects = [...this.state.plantProjects]; // clone the array
+                newPlantProjects.push({ name: '' });
+                this.setState({ plantProjects: newPlantProjects });
+              }}
+            >
+              +&nbsp;Add new project
+            </button>
           </div>
         ) : null}
+
         <CardLayout className="user-profile__form-group">
           <div className="form-group__heading">{i18n.t('label.about_me')}</div>
           <TCombForm
@@ -221,6 +302,7 @@ export default class EditUserProfile extends React.Component {
             {i18n.t('label.save_changes')}
           </PrimaryButton>
         </CardLayout>
+
         <CardLayout className="user-profile__form-group">
           <div className="form-group__heading">
             {i18n.t('label.change_password')}
@@ -238,6 +320,7 @@ export default class EditUserProfile extends React.Component {
             {i18n.t('label.change_password')}
           </PrimaryButton>
         </CardLayout>
+
         <div className="delete-profile__button">
           <SecondaryButton
             onClick={() => {

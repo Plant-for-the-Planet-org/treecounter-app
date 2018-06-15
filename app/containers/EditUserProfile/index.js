@@ -21,8 +21,8 @@ class EditUserProfileContainer extends React.Component {
     console.log('call Prfoile Deletion API here');
   };
 
-  updatePlantProject = (plantProject, id) => {
-    this.props.updateTpoProject(plantProject, id);
+  updatePlantProject = plantProject => {
+    this.props.updateTpoProject(plantProject);
   };
   deletePlantProject = plantId => {
     this.props.deleteTpoProject(plantId);

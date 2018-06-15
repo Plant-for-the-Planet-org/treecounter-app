@@ -80,6 +80,7 @@
     width: 100%;
     .plant-project__item {
       @extend .user-profile__form-group;
+      padding: 27px 25px 21px;
       select {
         font-size: 14px !important;
       }
@@ -101,13 +102,37 @@
         padding-left: 6px;
         margin-bottom: 20px;
       }
+      .separator {
+        width: 100%;
+        height: 6px;
+        background-color: #f6f6f6;
+        margin-top: 21px;
+        margin-bottom: 20px;
+      }
+
+      .project-sub-item {
+        align-self: flex-start;
+        width: 100%;
+        .sub-item-header {
+          @extend .form-group__heading;
+          color: #696261;
+          margin-bottom: 21px;
+        }
+      }
+      .project-teaser {
+        .project-teaser-item {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr;
+          column-gap: 20px;
+        }
+      }
       .delete-project {
         @extend .pftp-text-basic;
         margin-top: 32px;
-        margin-bottom: 21px;
         font-size: 16px;
         text-align: center;
         color: $colorPrimaryAccentLight;
+        cursor: pointer;
       }
     }
   }

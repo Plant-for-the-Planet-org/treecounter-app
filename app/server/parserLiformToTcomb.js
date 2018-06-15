@@ -8,6 +8,7 @@ import { SelectTemplate } from '../components/Templates/SelectTemplate';
 import { MapTemplate } from '../components/Templates/MapTemplate';
 import { ListTemplateGenerator } from '../components/Templates/ListTemplate';
 import { FilePickerTemplate } from '../components/Templates/FilePickerTemplate';
+import { FloatInputTemplate } from '../components/Templates/FloatInputTemplate';
 
 // Import assets
 import * as images from '../assets';
@@ -45,7 +46,8 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
         if (
           properties[propertyKey].type &&
           (properties[propertyKey].type === 'string' ||
-            properties[propertyKey].type === 'integer')
+            properties[propertyKey].type === 'integer' ||
+            properties[propertyKey].type === 'number')
         ) {
           if (properties[propertyKey].hasOwnProperty('icon')) {
             options.config = {
@@ -65,6 +67,9 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
               options.type = 'text';
             } else if (properties[propertyKey].type === 'integer') {
               options.type = 'number';
+            } else if (properties[propertyKey].type === 'number') {
+              options.type = 'number';
+              options.template = FloatInputTemplate;
             }
           } else {
             options.label = '';
@@ -99,7 +104,11 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
             options.type = properties[propertyKey].widget;
             break;
           case 'file':
-            options.template = FilePickerTemplate;
+            options.template =
+              (innerConfig[propertyKey] &&
+                innerConfig[propertyKey].file &&
+                innerConfig[propertyKey].file.template) ||
+              FilePickerTemplate;
             break;
         }
         // Widgets SwitchCase ENDS
@@ -125,7 +134,9 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
         } ******/
         if (properties[propertyKey].type === 'array') {
           let title = properties[propertyKey].title;
-          let arrayConfig = innerConfig[properties[propertyKey].type];
+          let arrayConfig =
+            innerConfig[propertyKey] &&
+            innerConfig[propertyKey][properties[propertyKey].type];
           let arrayTemplate = ListTemplateGenerator({})(title);
           let disableRemove = true;
           if (arrayConfig && arrayConfig.template) {
@@ -145,7 +156,9 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
           };
           schemaOptions['fields'][propertyKey] = {
             ...arrayOptions,
-            ...{ item: getSchemaOptions(properties[propertyKey].items) }
+            ...{
+              item: getSchemaOptions(properties[propertyKey].items, innerConfig)
+            }
           };
           schemaOptions['fields'][propertyKey].item['disableOrder'] = true;
         }

@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+
+import { payment_sepa, payment_arrow } from '../../../assets';
 
 import type { InjectedProps } from '../Stripe/inject';
 
 import { IbanElement, injectStripe } from '../Stripe/stripeDefs';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -21,7 +25,7 @@ const createOptions = (fontSize: string, padding: ?string) => {
   return {
     style: {
       base: {
-        fontSize: '8pt',
+        fontSize: '15px',
         color: '#424770',
         letterSpacing: '0.025em',
         fontFamily: 'Source Code Pro, monospace',
@@ -42,6 +46,7 @@ class _StripeSepa extends React.Component<
 > {
   constructor(props) {
     super(props);
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -73,15 +78,26 @@ class _StripeSepa extends React.Component<
     }
   };
 
+  handleArrowClick = () => {
+    this.props.handleExpandedClicked('2');
+  };
+
   render() {
-    const style = { color: '#666666', fontWeight: 'normal', fontSize: '.8em' };
-
-    console.log('CONTEXT: ', this.props);
-
+    let arrow = classnames({
+      arrow: !this.props.expanded
+    });
+    let displayNone = classnames({
+      'display-none': !this.props.expanded
+    });
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          IBAN
+      <form className="payment-option" onSubmit={this.handleSubmit}>
+        <div onClick={this.handleArrowClick} className="payment-option-header">
+          <span>
+            <img className="logo" src={payment_sepa} />SEPA Direct Debit
+          </span>
+          <img className={arrow} src={payment_arrow} />
+        </div>
+        <div className={displayNone}>
           <IbanElement
             supportedCountries={['SEPA']}
             onBlur={handleBlur}
@@ -90,18 +106,18 @@ class _StripeSepa extends React.Component<
             onReady={handleReady}
             {...createOptions(this.props.fontSize)}
           />
-        </label>
-        <div id="mandate-acceptance" style={style}>
-          By providing your IBAN and confirming this payment, you are
-          authorizing {this.props.context.tpoName} and Stripe, our payment
-          service provider, to send instructions to your bank to debit your
-          account and your bank to debit your account in accordance with those
-          instructions. You are entitled to a refund from your bank under the
-          terms and conditions of your agreement with your bank. A refund must
-          be claimed within 8 weeks starting from the date on which your account
-          was debited.
+          <div className="mandate-acceptance">
+            By providing your IBAN and confirming this payment, you are
+            authorizing {this.props.context.tpoName} and Stripe, our payment
+            service provider, to send instructions to your bank to debit your
+            account and your bank to debit your account in accordance with those
+            instructions. You are entitled to a refund from your bank under the
+            terms and conditions of your agreement with your bank. A refund must
+            be claimed within 8 weeks starting from the date on which your
+            account was debited.
+          </div>
+          <PrimaryButton>Pay with SEPA</PrimaryButton>
         </div>
-        <button>Pay</button>
       </form>
     );
   }
@@ -118,6 +134,8 @@ _StripeSepa.propTypes = {
   account: PropTypes.object.isRequired,
   target: PropTypes.string,
   onSuccess: PropTypes.func,
+  expanded: PropTypes.bool,
+  handleExpandedClicked: PropTypes.func,
   onError: PropTypes.func,
   onFailure: PropTypes.func
 };

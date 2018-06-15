@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+
+import { payment_credit, payment_arrow } from '../../../assets';
 
 import type { InjectedProps } from '../Stripe/inject';
 
 import { CardElement, injectStripe } from '../Stripe/stripeDefs';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -24,6 +28,7 @@ const createOptions = (fontSize: string, padding: ?string) => {
         fontSize,
         borderWidth: '1px',
         borderStyle: 'solid',
+        height: '100px',
         borderColor: '#FFCC00',
         color: '#FFCC00',
         letterSpacing: '0.025em',
@@ -41,10 +46,6 @@ const createOptions = (fontSize: string, padding: ?string) => {
 };
 
 class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
-  constructor(props) {
-    super(props);
-  }
-
   handleSubmit = ev => {
     ev.preventDefault();
     if (this.props.stripe) {
@@ -60,11 +61,26 @@ class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
     }
   };
 
+  handleArrowClick = () => {
+    this.props.handleExpandedClicked('1');
+  };
+
   render() {
+    let arrow = classnames({
+      arrow: !this.props.expanded
+    });
+    let displayNone = classnames({
+      'display-none': !this.props.expanded
+    });
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Credit Card
+      <form className="payment-option" onSubmit={this.handleSubmit}>
+        <div onClick={this.handleArrowClick} className="payment-option-header">
+          <span>
+            <img className="logo" src={payment_credit} />Credit Card
+          </span>
+          <img className={arrow} src={payment_arrow} />
+        </div>
+        <div className={displayNone}>
           <CardElement
             onBlur={handleBlur}
             onChange={handleChange}
@@ -73,8 +89,8 @@ class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
             hidePostalCode={true}
             {...createOptions(this.props.fontSize)}
           />
-        </label>
-        <button>Pay</button>
+          <PrimaryButton>Pay</PrimaryButton>
+        </div>
       </form>
     );
   }
@@ -87,6 +103,8 @@ _StripeCC.propTypes = {
   currency: PropTypes.string.isRequired,
   account: PropTypes.object.isRequired,
   target: PropTypes.string,
+  expanded: PropTypes.bool,
+  handleExpandedClicked: PropTypes.func,
   onSuccess: PropTypes.func,
   onError: PropTypes.func,
   onFailure: PropTypes.func

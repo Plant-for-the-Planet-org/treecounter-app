@@ -44,8 +44,18 @@ import dollar from './images/icons/dollar.png';
 import arrow_right_green from './images/icons/arrow_right_green.png';
 import arrow_left_green from './images/icons/arrow_left_green.png';
 import check_green from './images/icons/check_green.png';
+import payment_arrow from './images/icons/payment_arrow_white.png';
+import payment_bank from './images/icons/payment_banktransfer_white.png';
+import payment_credit from './images/icons/payment_creditcard_white.png';
+import payment_paypal from './images/icons/payment_paypal_white.png';
+import payment_sepa from './images/icons/payment_sepa_white.png';
 
 export {
+  payment_arrow,
+  payment_bank,
+  payment_credit,
+  payment_paypal,
+  payment_sepa,
   MapPinBlue,
   MapPinGreen,
   MapPinRed,

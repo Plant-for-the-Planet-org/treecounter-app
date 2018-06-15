@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import scriptLoader from 'react-async-script-loader';
+import classnames from 'classnames';
+
+import { payment_paypal, payment_arrow } from '../../../assets';
 
 class Paypal extends React.Component {
   constructor(props) {
@@ -33,6 +36,10 @@ class Paypal extends React.Component {
       }
     }
   }
+
+  handleArrowClick = () => {
+    this.props.handleExpandedClicked('3');
+  };
 
   render() {
     const {
@@ -83,10 +90,21 @@ class Paypal extends React.Component {
       onSuccess(data);
     };
 
+    let arrow = classnames({
+      arrow: !this.props.expanded
+    });
+    let displayNone = classnames('centerize-paypal', {
+      'display-none': !this.props.expanded
+    });
+
     console.log('CLIENT', CLIENT);
     return (
-      <div>
-        <form>
+      <form className="payment-option">
+        <div onClick={this.handleArrowClick} className="payment-option-header">
+          <img className="logo" src={payment_paypal} />
+          <img className={arrow} src={payment_arrow} />
+        </div>
+        <div className={displayNone}>
           {showButton && (
             <paypal.Button.react
               env="sandbox"
@@ -99,8 +117,8 @@ class Paypal extends React.Component {
               onError={onError}
             />
           )}
-        </form>
-      </div>
+        </div>
+      </form>
     );
   }
 }
@@ -110,6 +128,8 @@ Paypal.propTypes = {
   currency: PropTypes.string.isRequired,
   account: PropTypes.object.isRequired,
   target: PropTypes.string,
+  expanded: PropTypes.bool,
+  handleExpandedClicked: PropTypes.func,
   isScriptLoaded: PropTypes.bool,
   isScriptLoadSucceed: PropTypes.bool,
   onSuccess: PropTypes.func,

@@ -12,6 +12,7 @@ import { arrow_left_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import currenciesJson from '../Currency/currencies';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import classNames from 'classnames';
 
 import {
   individualSchemaOptions,
@@ -59,7 +60,9 @@ class DonateTrees extends Component {
       selectedTreeCount: 0,
       selectedAmount: 0,
       form: {},
-      expanded: false
+      expanded: false,
+      expandedOption: '1',
+      showNextButton: true
     };
 
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
@@ -68,6 +71,32 @@ class DonateTrees extends Component {
     );
     this.determineDefaultCurrency = this.determineDefaultCurrency.bind(this);
     // this.checkValidation = this.checkValidation[0].bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (nextProps.selectedProject) {
+      if (this.props.selectedProject) {
+        if (
+          nextProps.selectedProject.paymentSetup.treeCountOptions
+            .fixedDefaultTreeCount !==
+          this.props.selectedProject.paymentSetup.treeCountOptions
+            .fixedDefaultTreeCount
+        ) {
+          this.setState({
+            selectedTreeCount:
+              nextProps.selectedProject.paymentSetup.treeCountOptions
+                .fixedDefaultTreeCount
+          });
+        }
+      } else {
+        this.setState({
+          selectedTreeCount:
+            nextProps.selectedProject.paymentSetup.treeCountOptions
+              .fixedDefaultTreeCount
+        });
+      }
+    }
   }
 
   handleTreeCountCurrencyChange(treeCountCurrencyData) {
@@ -91,18 +120,26 @@ class DonateTrees extends Component {
 
   indexChange(index) {
     this.setState({
-      pageIndex: index
+      pageIndex: index,
+      showNextButton: index !== 3
     });
   }
+  handleExpandedClicked = optionNumber => {
+    this.setState({
+      expandedOption: optionNumber
+    });
+  };
 
   checkValidation = [
     () => {
+      console.log('Selected Project' + this.props.selectedProject);
       if (this.props.selectedProject) {
         return true;
       }
       return false;
     },
     () => {
+      console.log('select treecount' + this.state.selectedTreeCount);
       if (this.state.selectedTreeCount) {
         this.setState({
           form: {
@@ -141,23 +178,26 @@ class DonateTrees extends Component {
   };
 
   render() {
+    let displayNone = classNames({
+      'display-none': !this.state.showNextButton
+    });
     const NextArrow = function(props) {
       function validated() {
-        if (props.checkValidation()) {
+        if (props.checkValidation[props.currentSlide].call(props.context)) {
           props.onClick();
         }
       }
 
-      return <PrimaryButton onClick={validated}>Next</PrimaryButton>;
+      return (
+        <div className={displayNone}>
+          <PrimaryButton onClick={validated}>Next</PrimaryButton>
+        </div>
+      );
     };
     const settings = {
       dots: true,
       nextArrow: (
-        <NextArrow
-          checkValidation={this.checkValidation[this.state.pageIndex].bind(
-            this
-          )}
-        />
+        <NextArrow checkValidation={this.checkValidation} context={this} />
       ),
       infinite: false,
       adaptiveHeight: true,
@@ -167,12 +207,19 @@ class DonateTrees extends Component {
           src={arrow_left_green}
         />
       ),
-      afterChange: index => this.indexChange(index)
+      beforeChange: (oldIndex, index) => this.indexChange(index)
     };
 
-    const plantProject = this.props.selectedProject;
+    let plantProject = this.props.selectedProject;
+    let name = this.state.form.donationReceipt
+      ? this.state.form.donationReceipt.firstname +
+        this.state.form.donationReceipt.lastname
+      : '';
+    let email = this.state.form.donationReceipt
+      ? this.state.form.donationReceipt.email
+      : '';
 
-    return null === plantProject ? null : (
+    return !plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>{i18n.t('label.donateTrees')}</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
@@ -227,7 +274,7 @@ class DonateTrees extends Component {
                   />
                 )}
               </Tabs>
-              {this.props.selectedProject ? (
+              {this.props.selectedTpo ? (
                 <PaymentSelector
                   paymentMethods={
                     plantProject.paymentSetup.countries['DE/EUR'].paymentMethods
@@ -235,13 +282,12 @@ class DonateTrees extends Component {
                   accounts={plantProject.paymentSetup.accounts}
                   amount={this.state.selectedAmount}
                   currency={this.state.selectedCurrency}
+                  expandedOption={this.state.expandedOption}
+                  handleExpandedClicked={this.handleExpandedClicked}
                   context={{
                     tpoName: this.props.selectedTpo.name,
-                    donorEmail:
-                      this.props.currentUserProfile.email ||
-                      'default@email.com', // TODO: fix this
-                    donorName:
-                      this.props.currentUserProfile.fullname || 'My Name', // TODO: fix this
+                    donorEmail: email,
+                    donorName: name,
                     treeCount: this.state.selectedTreeCount
                   }}
                   onSuccess={

@@ -15,7 +15,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     super(props);
 
     this.state = {
-      stripe: null
+      stripe: null,
+      errorMessage: null
     };
 
     this.decorateSuccessWithGateway = this.decorateSuccessWithGateway.bind(
@@ -71,6 +72,16 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     }
   }
 
+  handleExpandedClicked = optionNumber => {
+    this.props.handleExpandedClicked(optionNumber);
+  };
+
+  onError = err => {
+    this.props.onError(err);
+    this.setState({
+      errorMessage: err
+    });
+  };
   render() {
     const { accounts, paymentMethods, amount, currency, context } = this.props;
     const gatewayProps = {
@@ -80,7 +91,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       onError: this.props.onError
     };
 
-    return (
+    return context.donorName !== '' ? (
       <StripeProvider stripe={this.state.stripe}>
         <div>
           <div>
@@ -91,61 +102,91 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             const [accountName, target] = paymentMethods[gateway].split(':');
             if ('stripe_cc' === gateway) {
               return (
-                <Elements key={gateway}>
-                  <StripeCC
-                    onSuccess={this.decorateSuccessWithGateway(gateway)}
-                    account={accounts[accountName]}
-                    target={target}
-                    {...gatewayProps}
-                  />
-                </Elements>
+                <div>
+                  {this.state.errorMessage ? (
+                    <div>this.state.errorMessage</div>
+                  ) : null}
+                  <Elements key={gateway}>
+                    <StripeCC
+                      onSuccess={this.decorateSuccessWithGateway(gateway)}
+                      account={accounts[accountName]}
+                      target={target}
+                      expanded={this.props.expandedOption === '1'}
+                      handleExpandedClicked={this.handleExpandedClicked}
+                      {...gatewayProps}
+                    />
+                  </Elements>
+                </div>
               );
             }
             if ('stripe_sepa' === gateway) {
               return (
-                <Elements key={gateway}>
-                  <StripeSepa
-                    onSuccess={this.decorateSuccessWithGateway(gateway)}
-                    account={accounts[accountName]}
-                    target={target}
-                    {...gatewayProps}
-                  />
-                </Elements>
+                <div>
+                  {this.state.errorMessage ? (
+                    <div>this.state.errorMessage</div>
+                  ) : null}
+                  <Elements key={gateway}>
+                    <StripeSepa
+                      onSuccess={this.decorateSuccessWithGateway(gateway)}
+                      account={accounts[accountName]}
+                      target={target}
+                      expanded={this.props.expandedOption === '2'}
+                      handleExpandedClicked={this.handleExpandedClicked}
+                      {...gatewayProps}
+                    />
+                  </Elements>
+                </div>
               );
             }
             if ('paypal' === gateway) {
               return (
-                <Paypal
-                  key={gateway}
-                  onSuccess={this.decorateSuccessWithGateway(gateway)}
-                  amount={amount}
-                  currency={currency}
-                  account={accounts[accountName]}
-                  target={target}
-                  {...gatewayProps}
-                />
+                <div>
+                  {this.state.errorMessage ? (
+                    <div>this.state.errorMessage</div>
+                  ) : null}
+                  <Paypal
+                    key={gateway}
+                    onSuccess={this.decorateSuccessWithGateway(gateway)}
+                    amount={amount}
+                    currency={currency}
+                    account={accounts[accountName]}
+                    target={target}
+                    expanded={this.props.expandedOption === '3'}
+                    handleExpandedClicked={this.handleExpandedClicked}
+                    {...gatewayProps}
+                  />
+                </div>
               );
             }
             if ('offline' === gateway) {
               return (
-                <Offline
-                  key={gateway}
-                  onSuccess={this.decorateSuccessWithGateway(gateway)}
-                  account={accounts[accountName]}
-                  {...gatewayProps}
-                />
+                <div>
+                  {this.state.errorMessage ? (
+                    <div>this.state.errorMessage</div>
+                  ) : null}
+                  <Offline
+                    key={gateway}
+                    onSuccess={this.decorateSuccessWithGateway(gateway)}
+                    account={accounts[accountName]}
+                    expanded={this.props.expandedOption === '4'}
+                    handleExpandedClicked={this.handleExpandedClicked}
+                    {...gatewayProps}
+                  />
+                </div>
               );
             }
           })}
         </div>
       </StripeProvider>
-    );
+    ) : null;
   }
 }
 
 PaymentSelector.propTypes = {
   accounts: PropTypes.object,
   paymentMethods: PropTypes.object.isRequired,
+  expandedOption: PropTypes.string,
+  handleExpandedClicked: PropTypes.func,
   amount: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
   context: PropTypes.object.isRequired,

@@ -12,6 +12,7 @@ import { arrow_left_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import currenciesJson from '../Currency/currencies';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import classNames from 'classnames';
 
 import {
   individualSchemaOptions,
@@ -61,7 +62,8 @@ class DonateTrees extends Component {
       selectedAmount: 0,
       form: {},
       expanded: false,
-      expandedOption: ''
+      expandedOption: '1',
+      showNextButton: true
     };
 
     this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
@@ -120,7 +122,8 @@ class DonateTrees extends Component {
 
   indexChange(index) {
     this.setState({
-      pageIndex: index
+      pageIndex: index,
+      showNextButton: index !== 3
     });
   }
 
@@ -191,6 +194,9 @@ class DonateTrees extends Component {
   };
 
   render() {
+    let displayNone = classNames({
+      'display-none': !this.state.showNextButton
+    });
     const NextArrow = function(props) {
       function validated() {
         if (props.checkValidation[props.currentSlide].call(props.context)) {
@@ -198,7 +204,11 @@ class DonateTrees extends Component {
         }
       }
 
-      return <PrimaryButton onClick={validated}>Next</PrimaryButton>;
+      return (
+        <div className={displayNone}>
+          <PrimaryButton onClick={validated}>Next</PrimaryButton>
+        </div>
+      );
     };
     const settings = {
       dots: true,
@@ -213,12 +223,19 @@ class DonateTrees extends Component {
           src={arrow_left_green}
         />
       ),
-      afterChange: index => this.indexChange(index)
+      beforeChange: (oldIndex, index) => this.indexChange(index)
     };
 
-    const plantProject = this.props.selectedProject;
+    let plantProject = this.props.selectedProject;
+    let name = this.state.form.donationReceipt
+      ? this.state.form.donationReceipt.firstname +
+        this.state.form.donationReceipt.lastname
+      : '';
+    let email = this.state.form.donationReceipt
+      ? this.state.form.donationReceipt.email
+      : '';
 
-    return null === plantProject ? null : (
+    return !plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>{i18n.t('label.donateTrees')}</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
@@ -273,7 +290,7 @@ class DonateTrees extends Component {
                   />
                 )}
               </Tabs>
-              {this.state.form.donationReceipt ? (
+              {this.props.selectedTpo ? (
                 <PaymentSelector
                   paymentMethods={
                     plantProject.paymentSetup.countries['DE/EUR'].paymentMethods
@@ -285,10 +302,8 @@ class DonateTrees extends Component {
                   handleExpandedClicked={this.handleExpandedClicked}
                   context={{
                     tpoName: this.props.selectedTpo.name,
-                    donorEmail: this.state.form.donationReceipt.email, // TODO: fix this
-                    donorName:
-                      this.state.form.donationReceipt.firstname +
-                      this.state.form.donationReceipt.lastname, // TODO: fix this
+                    donorEmail: email,
+                    donorName: name,
                     treeCount: this.state.selectedTreeCount
                   }}
                   onSuccess={paymentResponse =>

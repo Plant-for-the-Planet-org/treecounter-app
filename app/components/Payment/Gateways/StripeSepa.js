@@ -79,11 +79,7 @@ class _StripeSepa extends React.Component<
   };
 
   handleArrowClick = () => {
-    if (this.props.expanded !== true) {
-      this.props.handleExpandedClicked('2');
-    } else {
-      this.props.handleExpandedClicked('');
-    }
+    this.props.handleExpandedClicked('2');
   };
 
   render() {
@@ -95,15 +91,11 @@ class _StripeSepa extends React.Component<
     });
     return (
       <form className="payment-option" onSubmit={this.handleSubmit}>
-        <div className="payment-option-header">
+        <div onClick={this.handleArrowClick} className="payment-option-header">
           <span>
             <img className="logo" src={payment_sepa} />SEPA Direct Debit
           </span>
-          <img
-            className={arrow}
-            onClick={this.handleArrowClick}
-            src={payment_arrow}
-          />
+          <img className={arrow} src={payment_arrow} />
         </div>
         <div className={displayNone}>
           <IbanElement

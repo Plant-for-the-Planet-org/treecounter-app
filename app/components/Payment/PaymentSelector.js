@@ -93,7 +93,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       errorMessage: err
     });
   };
-
   render() {
     const { accounts, paymentMethods, amount, currency, context } = this.props;
     const gatewayProps = {
@@ -103,7 +102,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       onError: this.props.onError
     };
 
-    return (
+    return context.donorName !== '' ? (
       <StripeProvider stripe={this.state.stripe}>
         <div>
           <div>
@@ -190,7 +189,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           })}
         </div>
       </StripeProvider>
-    );
+    ) : null;
   }
 }
 

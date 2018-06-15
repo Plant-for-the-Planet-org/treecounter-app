@@ -121,43 +121,6 @@ export default class EditUserProfile extends React.Component {
     };
   };
 
-  handlePlantProjectChange = (value, path) => {
-    if (path && path[path.length - 2] === 'plantProjects') {
-      let projectIndex = path[path.length - 1];
-      let oldValue = this.props.currentUserProfile.plantProjects;
-
-      if (value && value.plantProjects.length < oldValue.length) {
-        this.props.deletePlantProject(oldValue[projectIndex].id);
-      } else if (value && value.plantProjects.length > oldValue.length) {
-        console.log('Saved Initiated');
-        let validatedValue = this.refs.project.validate();
-        if (validatedValue) {
-          console.log(validatedValue);
-        }
-      } else if (projectIndex < value.plantProjects.length) {
-        let validatedValue = this.refs.project.validate();
-        if (validatedValue) {
-          console.log(validatedValue);
-          if (validatedValue.errors && validatedValue.errors.length) {
-            for (let errIndex in Object.keys(validatedValue.errors)) {
-              let err = validatedValue.errors[errIndex];
-              if (err.path[err.path.length - 2] == projectIndex) {
-                //do nothing
-                return;
-              }
-            }
-          }
-          let valueToUpdate = validatedValue.value.plantProjects[projectIndex];
-          console.log(valueToUpdate);
-          this.props.updatePlantProject({
-            ...valueToUpdate,
-            id: value.plantProjects[projectIndex].id
-          });
-        }
-      }
-    }
-  };
-
   render() {
     console.log('___render___Edit_userprofile');
     const { type, image } = this.props.currentUserProfile;

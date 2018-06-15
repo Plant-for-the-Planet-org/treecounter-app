@@ -7,11 +7,7 @@ import PrimaryButton from '../../Common/Button/PrimaryButton';
 
 class Offline extends React.Component {
   handleArrowClick = () => {
-    if (this.props.expanded !== true) {
-      this.props.handleExpandedClicked('4');
-    } else {
-      this.props.handleExpandedClicked('');
-    }
+    this.props.handleExpandedClicked('4');
   };
 
   render() {
@@ -24,15 +20,11 @@ class Offline extends React.Component {
     let { account } = this.props;
     return (
       <div className="payment-option">
-        <div className="payment-option-header">
+        <div onClick={this.handleArrowClick} className="payment-option-header">
           <span>
             <img className="logo" src={payment_bank} /> Bank Transfer
           </span>
-          <img
-            className={arrow}
-            onClick={this.handleArrowClick}
-            src={payment_arrow}
-          />
+          <img className={arrow} src={payment_arrow} />
         </div>
         <form className={displayNone}>
           <div className="confirm-checkbox">

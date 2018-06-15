@@ -12,6 +12,7 @@ import { arrow_left_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import currenciesJson from '../Currency/currencies';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import classNames from 'classnames';
 
 import {
   individualSchemaOptions,
@@ -60,7 +61,8 @@ class DonateTrees extends Component {
       selectedAmount: 0,
       form: {},
       expanded: false,
-      expandedOption: ''
+      expandedOption: '1',
+      showNextButton: true
     };
 
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
@@ -118,7 +120,8 @@ class DonateTrees extends Component {
 
   indexChange(index) {
     this.setState({
-      pageIndex: index
+      pageIndex: index,
+      showNextButton: index !== 3
     });
   }
   handleExpandedClicked = optionNumber => {
@@ -175,6 +178,9 @@ class DonateTrees extends Component {
   };
 
   render() {
+    let displayNone = classNames({
+      'display-none': !this.state.showNextButton
+    });
     const NextArrow = function(props) {
       function validated() {
         if (props.checkValidation[props.currentSlide].call(props.context)) {
@@ -182,7 +188,11 @@ class DonateTrees extends Component {
         }
       }
 
-      return <PrimaryButton onClick={validated}>Next</PrimaryButton>;
+      return (
+        <div className={displayNone}>
+          <PrimaryButton onClick={validated}>Next</PrimaryButton>
+        </div>
+      );
     };
     const settings = {
       dots: true,
@@ -197,7 +207,7 @@ class DonateTrees extends Component {
           src={arrow_left_green}
         />
       ),
-      afterChange: index => this.indexChange(index)
+      beforeChange: (oldIndex, index) => this.indexChange(index)
     };
 
     let plantProject = this.props.selectedProject;

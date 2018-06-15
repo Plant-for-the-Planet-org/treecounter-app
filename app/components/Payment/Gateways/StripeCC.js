@@ -62,11 +62,7 @@ class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
   };
 
   handleArrowClick = () => {
-    if (this.props.expanded !== true) {
-      this.props.handleExpandedClicked('1');
-    } else {
-      this.props.handleExpandedClicked('');
-    }
+    this.props.handleExpandedClicked('1');
   };
 
   render() {
@@ -78,15 +74,11 @@ class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
     });
     return (
       <form className="payment-option" onSubmit={this.handleSubmit}>
-        <div className="payment-option-header">
+        <div onClick={this.handleArrowClick} className="payment-option-header">
           <span>
             <img className="logo" src={payment_credit} />Credit Card
           </span>
-          <img
-            className={arrow}
-            onClick={this.handleArrowClick}
-            src={payment_arrow}
-          />
+          <img className={arrow} src={payment_arrow} />
         </div>
         <div className={displayNone}>
           <CardElement

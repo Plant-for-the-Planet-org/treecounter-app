@@ -38,11 +38,7 @@ class Paypal extends React.Component {
   }
 
   handleArrowClick = () => {
-    if (this.props.expanded !== true) {
-      this.props.handleExpandedClicked('3');
-    } else {
-      this.props.handleExpandedClicked('');
-    }
+    this.props.handleExpandedClicked('3');
   };
 
   render() {
@@ -119,13 +115,9 @@ class Paypal extends React.Component {
     console.log('CLIENT', CLIENT);
     return (
       <form className="payment-option">
-        <div className="payment-option-header">
+        <div onClick={this.handleArrowClick} className="payment-option-header">
           <img className="logo" src={payment_paypal} />
-          <img
-            className={arrow}
-            onClick={this.handleArrowClick}
-            src={payment_arrow}
-          />
+          <img className={arrow} src={payment_arrow} />
         </div>
         <div className={displayNone}>
           {showButton && (

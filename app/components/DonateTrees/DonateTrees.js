@@ -60,7 +60,9 @@ class DonateTrees extends Component {
       selectedCurrency: 'USD',
       selectedTreeCount: 0,
       selectedAmount: 0,
-      form: {},
+      form: {
+        recipientType: modeReceipt
+      },
       expanded: false,
       expandedOption: '1',
       showNextButton: true
@@ -157,11 +159,17 @@ class DonateTrees extends Component {
     () => {
       console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt.getValue();
+      let receipt = {};
       if (value) {
+        if (this.state.modeReceipt === 'individual') {
+          receipt['receiptIndividual'] = value;
+        } else {
+          receipt['receiptCompany'] = value;
+        }
         this.setState({
           form: {
             ...this.state.form,
-            donationReceipt: value
+            ...receipt
           }
         });
         return true;
@@ -171,7 +179,13 @@ class DonateTrees extends Component {
   ];
 
   handleModeReceiptChange(tab) {
-    this.setState({ modeReceipt: tab });
+    this.setState({
+      modeReceipt: tab,
+      form: {
+        ...this.state.form,
+        recipientType: tab
+      }
+    });
   }
 
   handlePaymentApproved(paymentResponse) {

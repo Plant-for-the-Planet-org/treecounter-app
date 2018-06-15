@@ -35,7 +35,6 @@ class Trillion extends Component {
           displayName: data.displayName,
           loading: false
         });
-        console.log('Success: ', data);
       })
       .catch(error => console.log(error));
   }

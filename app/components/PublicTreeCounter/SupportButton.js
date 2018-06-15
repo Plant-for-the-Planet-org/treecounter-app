@@ -10,7 +10,6 @@ const SupportButton = ({
   caption,
   onRegisterSupporter
 }) => {
-  console.log(caption);
   return isUserLoggedIn ? (
     <SecondaryButton
       onClick={() => onRegisterSupporter()}

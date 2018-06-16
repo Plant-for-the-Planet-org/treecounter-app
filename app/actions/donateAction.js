@@ -4,20 +4,17 @@ import { postAuthenticatedRequest } from '../utils/api';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { treecounterSchema } from '../schemas/index';
 
-export function donate(donationContribution, plantProjectId) {
+export function donate(donationContribution, plantProjectId, loggedIn) {
   console.log(
     '+++++++++++++ Donation Processing ',
     donationContribution,
     plantProjectId
   );
+  let url = loggedIn ? 'donationContribution_post' : 'donate_post';
   return dispatch => {
-    postAuthenticatedRequest(
-      'donationContribution_post',
-      donationContribution,
-      {
-        plantProject: plantProjectId
-      }
-    )
+    postAuthenticatedRequest(url, donationContribution, {
+      plantProject: plantProjectId
+    })
       .then(response => {
         const treecounter = response.data;
         debug('success: ', treecounter);

@@ -22,13 +22,14 @@ class DonationTreesContainer extends Component {
   }
 
   render() {
+    let flag = this.props.currentUserProfile ? true : false;
     return (
       <DonateTrees
         selectedProject={this.props.selectedProject}
         selectedTpo={this.props.selectedTpo}
         currentUserProfile={this.props.currentUserProfile}
         currencies={this.props.currencies}
-        donate={this.props.donate}
+        donate={this.props.donate.bind(this, flag)}
       />
     );
   }

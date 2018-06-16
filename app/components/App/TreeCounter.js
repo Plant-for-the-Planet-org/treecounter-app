@@ -7,6 +7,7 @@ import { NotificationContainer } from 'react-notifications';
 import PropTypes from 'prop-types';
 
 // Components imports
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import GiftTreesContainer from '../../containers/GiftTrees';
 import TargetContainer from '../../containers/TargetContainer';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
@@ -189,7 +190,10 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_giftTrees')}
                 component={GiftTreesContainer}
               />
-              {/* Routes which essentially show svg */}
+              <Route
+                path={getLocalRoute('app_selectProject')}
+                component={SelectPlantProjectContainer}
+              />
               <Route
                 path={getLocalRoute('app_treecounter') + '/:treecounterId'}
                 component={PublicTreecounterContainer}

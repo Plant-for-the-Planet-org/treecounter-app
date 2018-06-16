@@ -23,7 +23,7 @@ const DonateTreesCardFooter = props => {
         to={route}
         onClick={e => handleDonateTreesButton(e, value.id)}
       >
-        {i18n.t('label.donateTrees')}
+        {i18n.t('label.donatedTrees')}
       </Link>
     </div>
   );

@@ -177,7 +177,6 @@ PublicTreeCounter.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => {
-  console.log(dispatch);
   return bindActionCreators(
     {
       selectPlantProjectIdAction: selectPlantProjectAction,

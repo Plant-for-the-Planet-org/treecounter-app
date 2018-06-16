@@ -4,13 +4,7 @@ import PropTypes from 'prop-types';
 import SecondaryButton from '../Common/Button/SecondaryButton';
 import i18n from '../../locales/i18n.js';
 
-const SupportButton = ({
-  active,
-  isUserLoggedIn,
-  caption,
-  onRegisterSupporter
-}) => {
-  console.log(caption);
+const SupportButton = ({ active, isUserLoggedIn, onRegisterSupporter }) => {
   return isUserLoggedIn ? (
     <SecondaryButton
       onClick={() => onRegisterSupporter()}
@@ -30,7 +24,6 @@ const SupportButton = ({
 SupportButton.propTypes = {
   active: PropTypes.bool.isRequired,
   isUserLoggedIn: PropTypes.bool.isRequired,
-  caption: PropTypes.string.isRequired,
   onRegisterSupporter: PropTypes.func
 };
 export default SupportButton;

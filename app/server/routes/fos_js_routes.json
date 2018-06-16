@@ -2347,6 +2347,21 @@
       ],
       "schemes": []
     },
+    "app_selectProject": {
+      "tokens": [
+        ["text", "/selectProject"],
+        ["variable", "/", "(\\w{2})?", "_locale"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
     "app_giftTrees": {
       "tokens": [
         [

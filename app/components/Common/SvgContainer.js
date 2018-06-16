@@ -3,14 +3,11 @@ import ReactDOM from 'react-dom';
 
 import '../../sass/treecounter.scss';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug/index';
 // import TargetComment from '../TreecounterGraphics/TargetComment';
 // import PlantDetails from '../TreecounterGraphics/PlantDetails';
 
 export default class SvgContainer extends Component {
   constructor(props) {
-    debug('constructing SvgContainer with props: ', props);
-    console.log('########## constructor');
     super(props);
     const { exposeMissing } = this.props;
 
@@ -41,8 +38,6 @@ export default class SvgContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('########## componentWillReceiveProps');
-
     if (!nextProps.id) {
       return;
     }
@@ -148,7 +143,6 @@ export default class SvgContainer extends Component {
   // RESET
   //********************************************************************************************************************
   renderReset() {
-    console.log('##### renderSections');
     //------------------------------------------------------------------------------------------------------------------
     // define class names for all trees and pots, set all trees visible, pots hidden
     this.getAllTreeIds().map(function(treeId) {
@@ -176,7 +170,6 @@ export default class SvgContainer extends Component {
   // RENDER Tees/Pots
   //********************************************************************************************************************
   renderSections(sectionTrees, values, total) {
-    console.log('##### renderSections');
     const maxTicks = 125;
     const maxAngleLength = 1477;
     const interval = 30;
@@ -258,13 +251,6 @@ export default class SvgContainer extends Component {
   }
 
   getSectionAngleRanges(sectionConfig, values, total, maxAngle) {
-    console.log(
-      'sectionConfig, values, total, maxAngle',
-      sectionConfig,
-      values,
-      total,
-      maxAngle
-    );
     const sectionAngleRanges = new Map();
     let currentMax = 0;
     Object.keys(sectionConfig).map(

@@ -152,12 +152,12 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_resetPassword') + '/:token'}
                 component={ResetPasswordContainer}
               />
-              <PublicRoute
+              <Route
                 path={getLocalRoute('app_passwordSent')}
                 component={EmailSentContainer}
               />
               <PublicRoute
-                path="/app_dev.php/en/explore"
+                path={getLocalRoute('app_explore')}
                 component={LeaderboardContainer}
               />
               <PrivateRoute

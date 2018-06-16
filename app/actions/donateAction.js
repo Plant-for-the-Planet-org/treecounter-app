@@ -10,12 +10,14 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
     donationContribution,
     plantProjectId
   );
-  let url = loggedIn ? 'donationContribution_post' : 'donate_post';
+  let route = loggedIn ? 'donationContribution_post' : 'donate_post';
   let request = loggedIn
-    ? postAuthenticatedRequest(url, donationContribution, {
+    ? postAuthenticatedRequest(route, donationContribution, {
         plantProject: plantProjectId
       })
-    : postRequest(url, donationContribution, { plantProject: plantProjectId });
+    : postRequest(route, donationContribution, {
+        plantProject: plantProjectId
+      });
   return dispatch => {
     request
       .then(response => {
@@ -45,12 +47,14 @@ export function gift(donationContribution, plantProjectId, loggedIn) {
     donationContribution,
     plantProjectId
   );
-  let url = loggedIn ? 'giftDonationContribution_post' : 'giftDonate_post';
+  let route = loggedIn ? 'giftDonationContribution_post' : 'giftDonate_post';
   let request = loggedIn
-    ? postAuthenticatedRequest(url, donationContribution, {
+    ? postAuthenticatedRequest(route, donationContribution, {
         plantProject: plantProjectId
       })
-    : postRequest(url, donationContribution, { plantProject: plantProjectId });
+    : postRequest(route, donationContribution, {
+        plantProject: plantProjectId
+      });
   return dispatch => {
     request
       .then(response => {

@@ -12,8 +12,6 @@ import i18n from '../../locales/i18n.js';
 
 class PaymentDonation extends Component {
   constructor(props) {
-    console.log('Payment Donation ----- Constructor');
-
     super(props);
     this.state = {
       loading: true,
@@ -62,13 +60,10 @@ class PaymentDonation extends Component {
         this.state.paymentOptions.iban
       }&bic=${this.state.paymentOptions.bic}`;
     }
-    console.log(paymentInfo);
     Payment(paymentInfo, this.state.selectedProject.id);
   }
 
   componentDidMount() {
-    console.log('Payment Donation ----- Component will mount');
-
     const {
       match: { params },
       userPlantProjects
@@ -198,7 +193,6 @@ class PaymentDonation extends Component {
     });
   }
   render() {
-    console.log('Payment Donation ----- Render', this.state.schema);
     return (
       <div className="payment-page-container">
         <h3>{i18n.t('label.donateTrees')}</h3>
@@ -272,7 +266,6 @@ class PaymentDonation extends Component {
 }
 
 const mapStateToProps = function(state) {
-  console.log('Payment Donation ------ Store updated', state);
   return {
     userPlantProjects: state.entities.plantProject,
     paymentgateway: state.entities.paymentGateway,

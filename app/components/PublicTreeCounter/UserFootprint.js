@@ -6,7 +6,6 @@ import UserHomepageLink from '../Common/UserHomepageLink';
 // import ArcGISContributionsMap from '../ArcGISMaps/ArcGISContributionsMap';
 
 const UserFootprint = ({ userProfile }) => {
-  console.log('UserFootprint userProfile: ', userProfile);
   return (
     <div>
       <UserSynopsis

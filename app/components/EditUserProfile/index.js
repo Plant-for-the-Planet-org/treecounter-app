@@ -30,8 +30,6 @@ const emptyProjectInfo = { name: '' };
 export default class EditUserProfile extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
-    console.log(parsedSchema);
     this.state = {
       showConfirmProfileDeletion: false,
       plantProjects: (props &&
@@ -157,7 +155,6 @@ export default class EditUserProfile extends React.Component {
   };
 
   render() {
-    console.log('___render___Edit_userprofile');
     const { type, image } = this.props.currentUserProfile;
 
     return (

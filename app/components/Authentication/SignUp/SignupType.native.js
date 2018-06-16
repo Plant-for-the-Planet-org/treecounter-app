@@ -87,7 +87,6 @@ export default class SignupTypes extends Component {
   }
 
   changeProfile(type) {
-    console.log(type);
     this.setState({
       Profiletype: type
     });

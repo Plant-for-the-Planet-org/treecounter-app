@@ -1,7 +1,7 @@
 const routes = require('../server/routes/fos_js_routes.json');
 
 import Routing from './router.min.js';
-import { context, initialProps } from '../config/index';
+import { context, initialProps } from '../config/index.js.dist';
 import { debug } from '../debug';
 
 Routing.setRoutingData(routes);

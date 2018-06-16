@@ -272,17 +272,22 @@ class DonateTrees extends Component {
     };
 
     let plantProject = this.props.selectedProject;
-    let name = this.state.form.donationReceipt
-      ? this.state.form.donationReceipt.firstname +
-        this.state.form.donationReceipt.lastname
-      : '';
-    let email = this.state.form.donationReceipt
-      ? this.state.form.donationReceipt.email
-      : '';
+    let receipt;
+    if (this.state.modeReceipt === 'individual') {
+      receipt = this.state.form['receiptIndividual']
+        ? this.state.form['receiptIndividual']
+        : '';
+    } else {
+      receipt = this.state.form['receiptCompany']
+        ? this.state.form['receiptCompany']
+        : '';
+    }
+    let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
+    let email = receipt !== '' ? receipt.email : '';
 
     let paymentMethods;
-    if (plantProject) {
-      let countryCurrency = `${this.state.selectedCountry}/${
+    if (this.state.form.donationReceipt) {
+      let countryCurrency = `${this.state.form.donationReceipt.country}/${
         this.state.selectedCurrency
       }`;
       console.log('=========== paymentMethods', countryCurrency);

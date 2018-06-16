@@ -59,7 +59,6 @@ class DonateTrees extends Component {
     this.state = {
       pageIndex: 0,
       modeReceipt: modeReceipt,
-      selectedCountry: null,
       selectedCurrency: 'USD', // TODO: should be initialized via this.determineDefaultCurrency()
       selectedTreeCount: 0,
       selectedAmount: 0,
@@ -77,12 +76,9 @@ class DonateTrees extends Component {
       this
     );
     this.determineDefaultCurrency = this.determineDefaultCurrency.bind(this);
-    // this.checkValidation = this.checkValidation[0].bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    // set state.selectedTreeCount from selected project
     if (nextProps.selectedProject) {
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
@@ -94,24 +90,6 @@ class DonateTrees extends Component {
 
       if (nextTreeCount !== currentTreeCount) {
         this.setState({ selectedTreeCount: nextTreeCount });
-      }
-    }
-
-    // set state.selectedCountry from current user profile
-    const nextCountry = nextProps.currentUserProfile
-      ? nextProps.currentUserProfile.country
-      : null;
-    if (nextProps.currentUserProfile) {
-      const currentCountry = this.props.currentUserProfile
-        ? this.props.currentUserProfile.country
-        : null;
-
-      // TODO: had to add null === this.state.selectedCountry, don't see why
-      if (
-        null === this.state.selectedCountry ||
-        nextCountry !== currentCountry
-      ) {
-        this.setState({ selectedCountry: nextCountry });
       }
     }
   }
@@ -288,19 +266,12 @@ class DonateTrees extends Component {
     let paymentMethods;
     if (receipt) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
-      console.log('=========== paymentMethods', countryCurrency);
       const countryCurrencies = plantProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
-        countryCurrency = 'default';
+        countryCurrency = plantProject.paymentSetup.defaultCountryKey;
       }
       paymentMethods =
         plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
-      console.log(
-        '=========== paymentMethods',
-        countryCurrency,
-        paymentMethods
-      );
-      console.log('state', this.state);
     }
 
     return !plantProject ? null : (

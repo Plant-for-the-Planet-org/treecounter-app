@@ -28,15 +28,19 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.paymentMethods !== this.props.paymentMethods) {
+    if (
+      nextProps.paymentMethods &&
+      JSON.stringify(nextProps.paymentMethods) !==
+        JSON.stringify(this.props.paymentMethods)
+    ) {
       // lookup stripe related payment methods for the current country/currency combination
-      const stripeGateways = Object.keys(this.props.paymentMethods).filter(
+      const stripeGateways = Object.keys(nextProps.paymentMethods).filter(
         gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)
       );
 
       console.log('%%%%%%%%%%%%%%% stripeGateways', stripeGateways);
       let stripeAccounts = stripeGateways.map(
-        gateway => this.props.paymentMethods[gateway]
+        gateway => nextProps.paymentMethods[gateway]
       );
       // get unique values
       stripeAccounts = [...new Set(stripeAccounts)];
@@ -53,7 +57,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       // do not load Stripe if not required
       if (stripeAccounts.length > 0) {
         const stripeAccountName = stripeAccounts[0];
-        const stripeAccount = this.props.accounts[stripeAccountName];
+        const stripeAccount = nextProps.accounts[stripeAccountName];
         console.log(
           '%%%%%%%%%%%%%%% stripeAccountName stripeAccount',
           stripeAccountName,

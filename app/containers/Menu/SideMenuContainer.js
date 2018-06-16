@@ -4,20 +4,53 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import Menu from '../../components/Menu';
-import sideMenuData from '../../server/sidemenu';
 
 // Actions
 import { logoutUser } from '../../actions/authActions';
+import {
+  PublicSideMenuSchema,
+  AuthenticatedSideMenuSchema
+} from '../../layouts/sideMenu';
 
 class SideMenuContainer extends Component {
+  constructor() {
+    super();
+    this.state = {
+      schema: {},
+      loading: true
+    };
+  }
+  componentDidMount() {
+    this.props.loggedIn
+      ? AuthenticatedSideMenuSchema.subscribe(
+          success => this.setState({ schema: success, loading: false }),
+          error => console.log(error)
+        )
+      : PublicSideMenuSchema.subscribe(
+          success => this.setState({ schema: success, loading: false }),
+          error => console.log(error)
+        );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.loggedIn !== this.props.loggedIn) {
+      nextProps.loggedIn
+        ? AuthenticatedSideMenuSchema.subscribe(
+            success => this.setState({ schema: success, loading: false }),
+            error => console.log(error)
+          )
+        : PublicSideMenuSchema.subscribe(
+            success => this.setState({ schema: success, loading: false }),
+            error => console.log(error)
+          );
+    }
+  }
+
   render() {
-    let menuData = this.props.loggedIn
-      ? sideMenuData.loggedIn
-      : sideMenuData.loggedOut;
-    return (
+    return this.state.loading ? null : (
       <Menu
         isOpen={this.props.isOpen}
-        menuData={menuData}
+        menuData={this.state.schema}
         navigation={this.props.navigation}
       />
     );

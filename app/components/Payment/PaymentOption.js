@@ -21,17 +21,7 @@ const PaymentOption = ({
   onFailure,
   onError
 }) => {
-  console.log(
-    selectable,
-    isSelected,
-    onSelect,
-    amount,
-    currency,
-    gateway,
-    account,
-    accountName,
-    target
-  );
+  console.log(selectable);
 
   // sepa_cc => SepaCcGateway
   //const GatewayComponent = snakeToPascal(gateway);
@@ -48,8 +38,6 @@ const PaymentOption = ({
     onFailure,
     onError
   };
-
-  console.log('---------------- ', gateway);
   if (i18n.t('label.paypal') === gateway) {
     gatewayComponent = <PaypalGateway {...gateWayProps} />;
   } else if (i18n.t('label.stripe_cc') === gateway) {

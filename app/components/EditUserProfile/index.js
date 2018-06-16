@@ -18,8 +18,6 @@ let TCombForm = t.form.Form;
 export default class EditUserProfile extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
-    console.log(parsedSchema);
     this.state = {
       showConfirmProfileDeletion: false
     };
@@ -31,11 +29,9 @@ export default class EditUserProfile extends React.Component {
   };
 
   getFormTemplate = (userType, profileType) => {
-    console.log(profileType);
     switch (profileType) {
       case 'profile': {
         return locals => {
-          console.log(locals);
           return (
             <div className="tComb-template__profile-form">
               <div>
@@ -63,7 +59,6 @@ export default class EditUserProfile extends React.Component {
       }
       case 'about_me': {
         return locals => {
-          console.log(locals);
           return (
             <div className="tComb-template__about-me-form">
               <div>
@@ -81,7 +76,6 @@ export default class EditUserProfile extends React.Component {
       }
       case 'password': {
         return locals => {
-          console.log(locals);
           return (
             <div className="tComb-template__password-form">
               <div>{locals.inputs.currentPassword}</div>
@@ -111,7 +105,6 @@ export default class EditUserProfile extends React.Component {
   };
 
   render() {
-    console.log('___render___Edit_userprofile');
     const { type, image } = this.props.currentUserProfile;
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">

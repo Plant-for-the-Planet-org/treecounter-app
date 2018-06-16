@@ -57,3 +57,6 @@ buck-out/
 
 # should be copied from app/config/index.js.dist
 app/config/index.js
+
+#app build
+web/prod

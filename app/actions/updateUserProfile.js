@@ -1,6 +1,7 @@
 import {
   putAuthenticatedRequest,
-  deleteAuthenticatedRequest
+  deleteAuthenticatedRequest,
+  postAuthenticatedRequest
 } from '../utils/api';
 import { debug } from '../debug/index';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
@@ -15,6 +16,32 @@ const profileTypeToReq = {
   password: 'profilePassword_put',
   image: 'profileImage_put'
 };
+
+export function addPlantProject(plantProject) {
+  return dispatch => {
+    return new Promise(function(resolve) {
+      postAuthenticatedRequest('plantProject_post', plantProject)
+        .then(res => {
+          debug(res.status);
+          debug(res);
+          if (res.data && res.data instanceof Object) {
+            dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
+          }
+          NotificationManager.success(
+            `New Project Added Successfully`,
+            `Congrats`,
+            5000
+          );
+          resolve(res.data);
+        })
+        .catch(err => {
+          debug(err);
+          NotificationManager.error(err.message, 'Profile update Error', 5000);
+        });
+    });
+  };
+}
+
 export function deleteTpoProject(plantId) {
   return () => {
     return new Promise(function(resolve) {

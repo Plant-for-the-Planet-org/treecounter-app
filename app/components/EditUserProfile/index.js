@@ -143,26 +143,27 @@ export default class EditUserProfile extends React.Component {
                 />
                 <PrimaryButton
                   onClick={() => {
-                    if (plantProject.id) {
-                      //update the old project info
-                      let formRef = 'plantProject' + plantProject.id;
-                      console.log(this.refs[formRef].validate());
+                    //update the old project info
+                    let formRef = 'plantProject' + plantProject.id;
+                    console.log(this.refs[formRef].validate());
 
-                      let value = this.refs[formRef].getValue();
-                      if (value) {
-                        //if image file is same dont update it
-                        //same thing will need to handle for 'plantProjectImages array
-                        if (value.imageFile == plantProject.imageFile) {
-                          value = Object.assign({}, value);
-                          delete value.imageFile;
-                        }
+                    let value = this.refs[formRef].getValue();
+                    if (value) {
+                      //if image file is same dont update it
+                      //same thing will need to handle for 'plantProjectImages array
+                      if (value.imageFile == plantProject.imageFile) {
+                        value = Object.assign({}, value);
+                        delete value.imageFile;
+                      }
+                      if (plantProject.id) {
                         this.props.updatePlantProject({
                           ...value,
                           id: plantProject.id
                         });
+                      } else {
+                        console.log('post new project here');
+                        this.props.addPlantProject(value);
                       }
-                    } else {
-                      console.log('post new project here');
                     }
                   }}
                 >
@@ -305,7 +306,8 @@ EditUserProfile.propTypes = {
   handlePaswordUpdatedClose: PropTypes.func,
   deleteProfile: PropTypes.func.isRequired,
   updatePlantProject: PropTypes.func.isRequired,
-  deletePlantProject: PropTypes.func.isRequired
+  deletePlantProject: PropTypes.func.isRequired,
+  addPlantProject: PropTypes.func.isRequired
 };
 
 export { PaswordUpdatedDialog, ConfirmProfileDeletion };

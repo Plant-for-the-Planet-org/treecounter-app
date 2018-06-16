@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import {
   updateUserProfile,
   updateTpoProject,
-  deleteTpoProject
+  deleteTpoProject,
+  addPlantProject
 } from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 
@@ -24,8 +25,13 @@ class EditUserProfileContainer extends React.Component {
   updatePlantProject = plantProject => {
     this.props.updateTpoProject(plantProject);
   };
-  deletePlantProject = plantId => {
-    this.props.deleteTpoProject(plantId);
+
+  deletePlantProject = projectId => {
+    this.props.deleteTpoProject(projectId);
+  };
+
+  addPlantProject = newProject => {
+    this.props.addPlantProject(newProject);
   };
 
   onSave = (usertype, profileType) => {
@@ -71,6 +77,7 @@ class EditUserProfileContainer extends React.Component {
         deleteProfile={this.deleteProfile}
         updatePlantProject={this.updatePlantProject}
         deletePlantProject={this.deletePlantProject}
+        addPlantProject={this.addPlantProject}
       />
     );
   }
@@ -89,7 +96,8 @@ const mapDispatchToProps = dispatch => {
     {
       updateUserProfile,
       updateTpoProject,
-      deleteTpoProject
+      deleteTpoProject,
+      addPlantProject
     },
     dispatch
   );
@@ -102,5 +110,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 EditUserProfileContainer.propTypes = {
   updateUserProfile: PropTypes.func,
   updateTpoProject: PropTypes.func,
-  deleteTpoProject: PropTypes.func
+  deleteTpoProject: PropTypes.func,
+  addPlantProject: PropTypes.func
 };

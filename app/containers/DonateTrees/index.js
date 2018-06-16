@@ -29,7 +29,9 @@ class DonationTreesContainer extends Component {
         selectedTpo={this.props.selectedTpo}
         currentUserProfile={this.props.currentUserProfile}
         currencies={this.props.currencies}
-        donate={this.props.donate.bind(this, flag)}
+        donate={(donationContribution, plantProjectId) =>
+          this.props.donate(donationContribution, plantProjectId, flag)
+        }
       />
     );
   }

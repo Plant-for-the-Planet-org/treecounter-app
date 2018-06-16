@@ -3,7 +3,12 @@ import EditUserProfile from '../../components/EditUserProfile';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { updateUserProfile } from '../../actions/updateUserProfile';
+import {
+  updateUserProfile,
+  updateTpoProject,
+  deleteTpoProject,
+  addPlantProject
+} from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 
 class EditUserProfileContainer extends React.Component {
@@ -15,6 +20,18 @@ class EditUserProfileContainer extends React.Component {
   }
   deleteProfile = () => {
     console.log('call Prfoile Deletion API here');
+  };
+
+  updatePlantProject = plantProject => {
+    this.props.updateTpoProject(plantProject);
+  };
+
+  deletePlantProject = projectId => {
+    this.props.deleteTpoProject(projectId);
+  };
+
+  addPlantProject = newProject => {
+    this.props.addPlantProject(newProject);
   };
 
   onSave = (usertype, profileType) => {
@@ -58,6 +75,9 @@ class EditUserProfileContainer extends React.Component {
         openPasswordUpdatedDialog={this.state.showPasswordDialog}
         handlePaswordUpdatedClose={this.handleCloseModal}
         deleteProfile={this.deleteProfile}
+        updatePlantProject={this.updatePlantProject}
+        deletePlantProject={this.deletePlantProject}
+        addPlantProject={this.addPlantProject}
       />
     );
   }
@@ -74,7 +94,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      updateUserProfile
+      updateUserProfile,
+      updateTpoProject,
+      deleteTpoProject,
+      addPlantProject
     },
     dispatch
   );
@@ -85,5 +108,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 );
 
 EditUserProfileContainer.propTypes = {
-  updateUserProfile: PropTypes.func
+  updateUserProfile: PropTypes.func,
+  updateTpoProject: PropTypes.func,
+  deleteTpoProject: PropTypes.func,
+  addPlantProject: PropTypes.func
 };

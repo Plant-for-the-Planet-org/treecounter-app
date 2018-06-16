@@ -88,3 +88,16 @@ export async function putRequest(route, data, params, authenticated = false) {
 export async function putAuthenticatedRequest(route, data, params) {
   return putRequest(route, data, params, true);
 }
+
+export async function deleteRequest(route, params, authenticated = false) {
+  let url = getApiRoute(route, params);
+  return await axios
+    .delete(url, await getHeaders(authenticated))
+    .then(checkStatus)
+    .then(onAPIResponse)
+    .catch(onAPIError);
+}
+
+export async function deleteAuthenticatedRequest(route, params) {
+  return deleteRequest(route, params, true);
+}

@@ -34,7 +34,8 @@ contributionImageSchema.define({
 });
 
 userProfileSchema.define({
-  treecounter: treecounterSchema
+  treecounter: treecounterSchema,
+  plantProjects: [plantProjectSchema]
 });
 
 treecounterSchema.define({

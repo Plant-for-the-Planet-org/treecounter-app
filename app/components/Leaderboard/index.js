@@ -12,20 +12,24 @@ import {
   tree_outline,
   organization
 } from '../../assets';
+
+const data = {
+  tabs: [
+    {
+      name: i18n.t('label.treecount_map'),
+      id: 'direct'
+    },
+    {
+      name: i18n.t('label.treecount_leaderboard'),
+      id: 'invitation'
+    }
+  ]
+};
+
 export default class Leaderboard extends Component {
-  static data = {
-    tabs: [
-      {
-        name: i18n.t('label.treecount_map'),
-        id: 'direct'
-      },
-      {
-        name: i18n.t('label.treecount_leaderboard'),
-        id: 'invitation'
-      }
-    ]
+  handleCategoryChange = category => {
+    console.log('clicked' + category);
   };
-  handleCategoryChange = () => {};
   constructor() {
     super();
     this.handleTabChange = this.handleTabChange.bind(this);
@@ -41,6 +45,31 @@ export default class Leaderboard extends Component {
       modeMap: tab
     });
   }
+
+  getCategoryView = () => {
+    let categoryUI = null;
+    if (this.props.exploreData) {
+      let categories = this.props.exploreData.categories;
+      let categoryArray = Object.keys(categories);
+      categoryUI = categoryArray.map((category, index) => {
+        return (
+          <React.Fragment key={index}>
+            <div
+              className="leaderboard_image__container"
+              onCLick={() => {
+                this.handleCategoryChange(category);
+              }}
+            >
+              <UserProfileImage iconUrl={country} />
+              <div>{categories[category]}</div>
+            </div>
+          </React.Fragment>
+        );
+      });
+    }
+    return categoryUI;
+  };
+
   render() {
     let listItemsUI;
     if (this.props.mapData)
@@ -61,27 +90,13 @@ export default class Leaderboard extends Component {
           </React.Fragment>
         );
       });
-    // let categoryUI = this.props.exploreData.categories.map(
-    //   (category, index) => {
-    //     return (
-    //       <React.Fragment key={index}>
-    //         <div
-    //           className="leaderboard_image__container"
-    //           onCLick={this.handleCategoryChange}
-    //         >
-    //           <UserProfileImage iconUrl={country} />
-    //           <div>Countries</div>
-    //         </div>
-    //       </React.Fragment>
-    //     );
-    //   }
-    // );
+
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>{'Explore'}</TextHeading>
         <CardLayout className="leader-board__container">
-          <Tabs data={Leaderboard.data.tabs} onTabChange={this.handleTabChange}>
-            {this.state.modeMap === Leaderboard.data.tabs[0].id ? (
+          <Tabs data={data.tabs} onTabChange={this.handleTabChange}>
+            {this.state.modeMap === data.tabs[0].id ? (
               <div>
                 <div className="leaderboard_images__container">
                   <div

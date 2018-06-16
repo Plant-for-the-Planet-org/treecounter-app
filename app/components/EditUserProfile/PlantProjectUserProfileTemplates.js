@@ -10,6 +10,7 @@ export function UserPasswordUpdateTemplate(locals) {
     </div>
   );
 }
+
 export function UserAboutmeTemplate(locals) {
   return (
     <div className="tComb-template__about-me-form">
@@ -30,6 +31,7 @@ export function UserProfileTemplate(locals) {
   return (
     <div className="tComb-template__profile-form">
       <div>
+        <div className="separator" />
         {locals.inputs.title}
         {locals.inputs.name}
         {locals.inputs.firstname}
@@ -39,6 +41,7 @@ export function UserProfileTemplate(locals) {
       </div>
 
       <div>
+        <div className="separator" />
         {locals.inputs.address}
         {locals.inputs.zipCode}
         {locals.inputs.city}

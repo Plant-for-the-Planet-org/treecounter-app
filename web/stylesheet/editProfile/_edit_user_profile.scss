@@ -1,4 +1,11 @@
 .edit-user-profile__container {
+  .separator {
+    width: 100%;
+    height: 6px;
+    background-color: #f6f6f6;
+    margin-top: 21px;
+    margin-bottom: 25px;
+  }
   .pftp-button-primary {
     width: fit-content;
     margin: auto;
@@ -102,14 +109,6 @@
         padding-left: 6px;
         margin-bottom: 20px;
       }
-      .separator {
-        width: 100%;
-        height: 6px;
-        background-color: #f6f6f6;
-        margin-top: 21px;
-        margin-bottom: 20px;
-      }
-
       .project-sub-item {
         align-self: flex-start;
         width: 100%;

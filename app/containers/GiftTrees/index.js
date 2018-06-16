@@ -29,7 +29,9 @@ class GiftTreesContainer extends Component {
         selectedTpo={this.props.selectedTpo}
         currentUserProfile={this.props.currentUserProfile}
         currencies={this.props.currencies}
-        gift={this.props.gift.bind(this, flag)}
+        gift={(donationContribution, plantProjectId) =>
+          this.props.gift(donationContribution, plantProjectId, flag)
+        }
       />
     );
   }

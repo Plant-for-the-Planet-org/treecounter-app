@@ -22,13 +22,14 @@ class GiftTreesContainer extends Component {
   }
 
   render() {
+    let flag = this.props.currentUserProfile ? true : false;
     return (
       <GiftTrees
         selectedProject={this.props.selectedProject}
         selectedTpo={this.props.selectedTpo}
         currentUserProfile={this.props.currentUserProfile}
         currencies={this.props.currencies}
-        gift={this.props.gift}
+        gift={this.props.gift.bind(this, flag)}
       />
     );
   }

@@ -1,6 +1,6 @@
 import { normalize } from 'normalizr';
 import { debug } from '../debug/index';
-import { postAuthenticatedRequest } from '../utils/api';
+import { postAuthenticatedRequest, postRequest } from '../utils/api';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { treecounterSchema } from '../schemas/index';
 
@@ -11,10 +11,13 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
     plantProjectId
   );
   let url = loggedIn ? 'donationContribution_post' : 'donate_post';
+  let request = loggedIn
+    ? postAuthenticatedRequest(url, donationContribution, {
+        plantProject: plantProjectId
+      })
+    : postRequest(url, donationContribution, { plantProject: plantProjectId });
   return dispatch => {
-    postAuthenticatedRequest(url, donationContribution, {
-      plantProject: plantProjectId
-    })
+    request
       .then(response => {
         const treecounter = response.data;
         debug('success: ', treecounter);
@@ -36,20 +39,20 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
   };
 }
 
-export function gift(donationContribution, plantProjectId) {
+export function gift(donationContribution, plantProjectId, loggedIn) {
   console.log(
     '+++++++++++++ Donation Processing ',
     donationContribution,
     plantProjectId
   );
-  return dispatch => {
-    postAuthenticatedRequest(
-      'giftDonationContribution_post',
-      donationContribution,
-      {
+  let url = loggedIn ? 'giftDonationContribution_post' : 'giftDonate_post';
+  let request = loggedIn
+    ? postAuthenticatedRequest(url, donationContribution, {
         plantProject: plantProjectId
-      }
-    )
+      })
+    : postRequest(url, donationContribution, { plantProject: plantProjectId });
+  return dispatch => {
+    request
       .then(response => {
         const treecounter = response.data;
         debug('success: ', treecounter);

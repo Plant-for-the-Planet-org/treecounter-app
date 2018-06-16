@@ -115,10 +115,7 @@ export default class EditUserProfile extends React.Component {
     };
   };
 
-  getPlantProjectList = type => {
-    if (type != 'tpo') {
-      return null;
-    }
+  getPlantProjectList = () => {
     let plantProjectList = this.state.plantProjects.map(
       (plantProject, index) => {
         return (
@@ -207,16 +204,18 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
 
-        {this.getPlantProjectList(type)}
         {type == 'tpo' ? (
-          <div className="pftp-addbutton">
-            <button
-              onClick={() => {
-                this.handleAddNewProject();
-              }}
-            >
-              +&nbsp;Add new project
-            </button>
+          <div className="plant-project__container">
+            {this.getPlantProjectList()}
+            <div className="pftp-addbutton">
+              <button
+                onClick={() => {
+                  this.handleAddNewProject();
+                }}
+              >
+                +&nbsp;Add new project
+              </button>
+            </div>
           </div>
         ) : null}
 

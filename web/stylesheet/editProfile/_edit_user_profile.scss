@@ -79,62 +79,76 @@
       column-gap: 211px;
     }
   }
-  .user-profile__project-form-group {
-    // .fieldset-depth-1 {
-    margin: 30px;
+  .plant-project__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     max-width: 718px;
     box-sizing: border-box;
-    width: 100%;
-    .plant-project__item {
-      @extend .user-profile__form-group;
-      padding: 27px 25px 21px;
-      select {
-        font-size: 14px !important;
-      }
-      input {
-        font-size: 16px !important;
-      }
-      textarea {
-        height: 75px !important;
-        font-size: 16px !important;
-      }
-      margin: 0 0 30px 0;
-      .item-header {
-        @extend .form-group__heading;
-        content: "Project" counter(div);
+    .pftp-addbutton {
+      align-self: flex-start;
+      button {
         font-size: 16px;
-        text-align: left;
-        color: #b7d37f;
-        align-self: flex-start;
-        padding-left: 6px;
-        margin-bottom: 20px;
       }
-      .project-sub-item {
-        align-self: flex-start;
-        width: 100%;
-        .sub-item-header {
+    }
+    .user-profile__project-form-group {
+      // .fieldset-depth-1 {
+      margin: 30px;
+      width: 100%;
+
+      .plant-project__item {
+        @extend .user-profile__form-group;
+        padding: 27px 25px 21px;
+        select {
+          font-size: 14px !important;
+        }
+        input {
+          font-size: 16px !important;
+        }
+        textarea {
+          height: 75px !important;
+          font-size: 16px !important;
+        }
+        margin: 0 0 30px 0;
+        .item-header {
           @extend .form-group__heading;
-          color: #696261;
-          margin-bottom: 21px;
+          content: "Project" counter(div);
+          font-size: 16px;
+          text-align: left;
+          color: #b7d37f;
+          align-self: flex-start;
+          padding-left: 6px;
+          margin-bottom: 20px;
         }
-      }
-      .project-teaser {
-        .project-teaser-item {
-          display: grid;
-          grid-template-columns: 2fr 1fr 1fr;
-          column-gap: 20px;
+        .project-sub-item {
+          align-self: flex-start;
+          width: 100%;
+          .sub-item-header {
+            @extend .form-group__heading;
+            color: #696261;
+            margin-bottom: 21px;
+          }
         }
-      }
-      .delete-project {
-        @extend .pftp-text-basic;
-        margin-top: 32px;
-        font-size: 16px;
-        text-align: center;
-        color: $colorPrimaryAccentLight;
-        cursor: pointer;
+        .project-teaser {
+          .project-teaser-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            column-gap: 20px;
+          }
+        }
+        .delete-project {
+          @extend .pftp-text-basic;
+          margin-top: 32px;
+          font-size: 16px;
+          text-align: center;
+          color: $colorPrimaryAccentLight;
+          cursor: pointer;
+        }
       }
     }
   }
+
   // }
 }
 

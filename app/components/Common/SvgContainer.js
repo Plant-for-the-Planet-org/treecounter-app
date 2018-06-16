@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import '../../sass/treecounter.scss';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug/index';
 // import TargetComment from '../TreecounterGraphics/TargetComment';
 // import PlantDetails from '../TreecounterGraphics/PlantDetails';
 

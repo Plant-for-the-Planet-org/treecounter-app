@@ -21,9 +21,11 @@ const HeaderFields = ({
   return isLoggedIn ? (
     <div className="header-icons">
       <Popover
-        onPopoverClosed={() =>
-          markSeenNotificationAction(userFeeds.userFeeds[0].id)
-        }
+        onPopoverClosed={() => {
+          userFeeds
+            ? markSeenNotificationAction(userFeeds.userFeeds[0].id)
+            : null;
+        }}
         button={
           <div className="notification-bell">
             {userFeeds && userFeeds.unRead > 0 ? (

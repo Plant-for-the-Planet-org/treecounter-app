@@ -22,7 +22,6 @@ export default class Menu extends Component {
   //Ideally this should be in the container but for now to keep the same container for both web and app it's better to keep it here
   onPressMenu = item => {
     const { dispatch } = this.props.navigation;
-    console.log('clicked ', item, dispatch);
     updateRoute(item.uri, dispatch, 0);
   };
 

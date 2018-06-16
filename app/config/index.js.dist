@@ -1,3 +1,6 @@
+/**
+ * CREATE A COPY OF THIS FILE AND NAME IT: index.js
+ */
 let userLang = navigator.language || navigator.userLanguage;
 
 /**

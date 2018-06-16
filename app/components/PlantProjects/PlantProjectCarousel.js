@@ -21,39 +21,24 @@ class PlantProjectCarousel extends React.Component {
         />
       )
     };
-    const { plantProjects, onChange, contentTag, tpoName } = this.props;
+    const { plantProjects, contentTag, tpoName } = this.props;
 
     // see: https://medium.com/@Carmichaelize/dynamic-tag-names-in-react-and-jsx-17e366a684e9
     const TagName = contentTag;
-    console.log(onChange);
-    console.log('TagName', TagName);
-    console.log(tpoName);
+    console.log(TagName);
 
     // add navigation buttons that will trigger calls to 'onChange' callback
     return (
-      <div>
-        {/* {plantProjects.map(plantProject => (
-        <Link to="#" onClick={() => onChange(plantProject.id)}>
-          {plantProject.id} |{' '}
-        </Link>
-      ))} */}
-
-        <Slider {...settings}>
-          {plantProjects.map(plantProject => (
-            <div
-              className="tpo-footer-carousel__container"
-              key={`plantProject-${plantProject.id}`}
-            >
-              <PlantProjectFull
-                key={`plantProject-${plantProject.id}`}
-                expanded={false}
-                tpoName={tpoName}
-                plantProject={plantProject}
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
+      <Slider {...settings}>
+        {plantProjects.map(plantProject => (
+          <PlantProjectFull
+            key={`plantProject-${plantProject.id}`}
+            expanded={false}
+            tpoName={tpoName}
+            plantProject={plantProject}
+          />
+        ))}
+      </Slider>
     );
   }
 }

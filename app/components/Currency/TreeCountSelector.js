@@ -38,11 +38,6 @@ class TreeCountSelector extends React.Component {
   componentWillReceiveProps(nextProps) {
     // TODO: seems to be a deprecated life cycle method
     if (this.props.currency !== nextProps.currency) {
-      console.log(
-        '########### currency has changed',
-        this.props.currency,
-        nextProps.currency
-      );
       this.handleVariableTreeCountChange(this.state.variableTreeCount);
     }
   }

@@ -32,7 +32,6 @@ class TpoDonationPlantProjectSelector extends React.Component {
   }
 
   onCarouselChange(newPlantProjectId) {
-    console.log('onCarouselChange:: currentPlantProjectId', newPlantProjectId);
     this.setState({ currentPlantProjectId: newPlantProjectId });
   }
 

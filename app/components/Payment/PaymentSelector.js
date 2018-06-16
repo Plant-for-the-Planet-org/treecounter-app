@@ -12,17 +12,6 @@ const PaymentSelector = ({
   onFailure,
   onError
 }) => {
-  console.log(
-    'paymentMethods, accounts, currency, amount',
-    paymentMethods,
-    accounts,
-    currency,
-    amount
-  );
-  console.log(
-    'PaymentSelector ==============================================================='
-  );
-
   const options = [];
   Object.keys(paymentMethods).map(gateway => {
     const accountKey = paymentMethods[gateway];
@@ -41,7 +30,6 @@ const PaymentSelector = ({
       onError
     });
   });
-  console.log(options);
 
   return (
     <div>

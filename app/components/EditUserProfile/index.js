@@ -53,17 +53,26 @@ export default class EditUserProfile extends React.Component {
     });
   };
 
-  handleDeleteProjectCLick = plantProject => {
+  handleAddNewProject = () => {
+    console.log(plantProjectFormOptions);
+    const newPlantProjects = [...this.state.plantProjects]; // clone the array
+    newPlantProjects.push(emptyProjectInfo);
+    this.setState({ plantProjects: newPlantProjects });
+  };
+
+  handleDeleteProjectCLick = (plantProject, index) => {
     console.log('click delete');
     if (plantProject.id) {
       this.props.deletePlantProject(plantProject.id);
     } else {
-      //update local state
+      const newPlantProjects = [...this.state.plantProjects]; // clone the array
+      newPlantProjects.splice(index, 1);
+      this.setState({ plantProjects: newPlantProjects });
     }
   };
 
-  handleSaveProjectClick = plantProject => {
-    let formRef = 'plantProject' + plantProject.id;
+  handleSaveProjectClick = (plantProject, index) => {
+    let formRef = 'plantProject' + index;
     console.log(this.refs[formRef].validate());
 
     let value = this.refs[formRef].getValue();
@@ -117,7 +126,7 @@ export default class EditUserProfile extends React.Component {
             <div className="user-profile__project-form-group">
               <div className="plant-project__item">
                 <TCombForm
-                  ref={'plantProject' + plantProject.id}
+                  ref={'plantProject' + index}
                   type={plantProjectSchema.transformedSchema}
                   options={{
                     template: PlantProjectTemplate(index),
@@ -127,7 +136,7 @@ export default class EditUserProfile extends React.Component {
                 />
                 <PrimaryButton
                   onClick={() => {
-                    this.handleSaveProjectClick(plantProject);
+                    this.handleSaveProjectClick(plantProject, index);
                   }}
                 >
                   {i18n.t('label.save_changes')}
@@ -135,7 +144,7 @@ export default class EditUserProfile extends React.Component {
                 <div
                   key={index}
                   onClick={() => {
-                    this.handleDeleteProjectCLick(plantProject);
+                    this.handleDeleteProjectCLick(plantProject, index);
                   }}
                   className="delete-project"
                 >
@@ -203,10 +212,7 @@ export default class EditUserProfile extends React.Component {
           <div className="pftp-addbutton">
             <button
               onClick={() => {
-                console.log(plantProjectFormOptions);
-                const newPlantProjects = [...this.state.plantProjects]; // clone the array
-                newPlantProjects.push(emptyProjectInfo);
-                this.setState({ plantProjects: newPlantProjects });
+                this.handleAddNewProject();
               }}
             >
               +&nbsp;Add new project

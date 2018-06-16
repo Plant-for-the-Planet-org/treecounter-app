@@ -128,7 +128,6 @@ const StripeSepa = injectStripe(_StripeSepa);
 _StripeSepa.propTypes = {
   stripe: PropTypes.object,
   fontSize: PropTypes.string,
-  amount: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
   context: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,

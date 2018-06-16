@@ -11,12 +11,7 @@ class TreeCountCurrencySelector extends React.Component {
     this.state = {
       selectedCurrency: props.selectedCurrency,
       selectedTreeCount: props.selectedTreeCount,
-      selectedAmount: 0,
-      baseCurrency: props.baseCurrency,
-      countryCurrencies: props.countryCurrencies,
-      userCountry: props.userCountry,
-      currencies: props.currencies,
-      rates: props.currencies.currency_rates[props.baseCurrency].rates
+      selectedAmount: 0
     };
 
     this.calculateAmount = this.calculateAmount.bind(this);
@@ -45,44 +40,23 @@ class TreeCountCurrencySelector extends React.Component {
   }
 
   calculateAmount(treeCount) {
-    // TODO: should we use some money library here?
     return (
       Math.round(treeCount * this.props.treeCost * this.getRate() * 100) / 100 +
-      this.getFees()
+      this.props.fees
     );
   }
 
   calculateTreeCount(amount) {
-    // TODO: should we use some money library here?
     return Math.floor(
-      (amount - this.getFees()) / (this.props.treeCost * this.getRate())
+      (amount - this.props.fees) / (this.props.treeCost * this.getRate())
     );
   }
 
   getRate() {
-    return parseFloat(this.state.rates[this.state.selectedCurrency]);
-  }
-
-  getFees() {
-    const directCurrencies = this.state.countryCurrencies.map(
-      countryCurrency => {
-        const [, currency] = countryCurrency.split('/');
-        return currency;
-      }
-    );
-    const directPaymentAvailable = directCurrencies.includes(
-      this.state.selectedCurrency
-    );
-    console.log(
-      '########### directPaymentAvailable: ',
-      directPaymentAvailable,
-      directCurrencies
-    );
-    return directPaymentAvailable ? 0 : 777; // some amount TBD
+    return parseFloat(this.props.rates[this.state.selectedCurrency]);
   }
 
   updateStateAndParent(updates) {
-    console.log('######## updateStateAndParent: ', updates);
     const newState = { ...this.state, ...updates };
     this.setState(newState);
 
@@ -95,11 +69,10 @@ class TreeCountCurrencySelector extends React.Component {
 
   render() {
     const { currencies, treeCountOptions } = this.props;
-
     return (
       <div>
         <CurrencySelector
-          currencies={currencies.currency_names}
+          currencies={currencies}
           onChange={this.handleCurrencyChange}
           selectedCurrency={this.state.selectedCurrency}
         />
@@ -117,15 +90,14 @@ class TreeCountCurrencySelector extends React.Component {
 }
 
 TreeCountCurrencySelector.propTypes = {
-  baseCurrency: PropTypes.string.isRequired,
   currencies: PropTypes.object.isRequired,
   selectedCurrency: PropTypes.string.isRequired,
+  treeCountOptions: PropTypes.object.isRequired,
   selectedTreeCount: PropTypes.number.isRequired,
   treeCost: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
-  treeCountOptions: PropTypes.object.isRequired,
-  countryCurrencies: PropTypes.array.isRequired,
-  userCountry: PropTypes.string
+  rates: PropTypes.object.isRequired,
+  fees: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default TreeCountCurrencySelector;

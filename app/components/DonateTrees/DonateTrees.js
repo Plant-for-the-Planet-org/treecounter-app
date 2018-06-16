@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import Slider from 'react-slick';
@@ -57,7 +59,8 @@ class DonateTrees extends Component {
     this.state = {
       pageIndex: 0,
       modeReceipt: modeReceipt,
-      selectedCurrency: 'USD',
+      selectedCountry: null,
+      selectedCurrency: 'USD', // TODO: should be initialized via this.determineDefaultCurrency()
       selectedTreeCount: 0,
       selectedAmount: 0,
       form: {
@@ -79,28 +82,56 @@ class DonateTrees extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
+    // set state.selectedTreeCount from selected project
     if (nextProps.selectedProject) {
-      if (this.props.selectedProject) {
-        if (
-          nextProps.selectedProject.paymentSetup.treeCountOptions
-            .fixedDefaultTreeCount !==
-          this.props.selectedProject.paymentSetup.treeCountOptions
+      const nextTreeCount =
+        nextProps.selectedProject.paymentSetup.treeCountOptions
+          .fixedDefaultTreeCount;
+      const currentTreeCount = this.props.selectedProject
+        ? this.props.selectedProject.paymentSetup.treeCountOptions
             .fixedDefaultTreeCount
-        ) {
-          this.setState({
-            selectedTreeCount:
-              nextProps.selectedProject.paymentSetup.treeCountOptions
-                .fixedDefaultTreeCount
-          });
-        }
-      } else {
-        this.setState({
-          selectedTreeCount:
-            nextProps.selectedProject.paymentSetup.treeCountOptions
-              .fixedDefaultTreeCount
-        });
+        : null;
+
+      if (nextTreeCount !== currentTreeCount) {
+        this.setState({ selectedTreeCount: nextTreeCount });
       }
     }
+
+    // set state.selectedCountry from current user profile
+    const nextCountry = nextProps.currentUserProfile
+      ? nextProps.currentUserProfile.country
+      : null;
+    if (nextProps.currentUserProfile) {
+      const currentCountry = this.props.currentUserProfile
+        ? this.props.currentUserProfile.country
+        : null;
+
+      // TODO: had to add null === this.state.selectedCountry, don't see why
+      if (
+        null === this.state.selectedCountry ||
+        nextCountry !== currentCountry
+      ) {
+        this.setState({ selectedCountry: nextCountry });
+      }
+    }
+  }
+
+  getFees() {
+    const directCurrencies = this.state.countryCurrencies.map(
+      countryCurrency => {
+        const [, currency] = countryCurrency.split('/');
+        return currency;
+      }
+    );
+    const directPaymentAvailable = directCurrencies.includes(
+      this.state.selectedCurrency
+    );
+    console.log(
+      '########### directPaymentAvailable: ',
+      directPaymentAvailable,
+      directCurrencies
+    );
+    return directPaymentAvailable ? 0 : 777; // some amount TBD
   }
 
   handleTreeCountCurrencyChange(treeCountCurrencyData) {
@@ -190,7 +221,7 @@ class DonateTrees extends Component {
 
   handlePaymentApproved(paymentResponse) {
     console.log('/////////////////// payment success ', paymentResponse);
-    donate(
+    this.props.donate(
       {
         ...this.state.form,
         paymentResponse,
@@ -249,6 +280,26 @@ class DonateTrees extends Component {
       ? this.state.form.donationReceipt.email
       : '';
 
+    let paymentMethods;
+    if (plantProject) {
+      let countryCurrency = `${this.state.selectedCountry}/${
+        this.state.selectedCurrency
+      }`;
+      console.log('=========== paymentMethods', countryCurrency);
+      const countryCurrencies = plantProject.paymentSetup.countries;
+      if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
+        countryCurrency = 'default';
+      }
+      paymentMethods =
+        plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
+      console.log(
+        '=========== paymentMethods',
+        countryCurrency,
+        paymentMethods
+      );
+      console.log('state', this.state);
+    }
+
     return !plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>{i18n.t('label.donateTrees')}</TextHeading>
@@ -267,15 +318,14 @@ class DonateTrees extends Component {
               ) : null}
               {this.props.selectedTpo ? (
                 <TreeCountCurrencySelector
-                  currencies={currenciesJson} // TODO: connect to data from API
-                  countryCurrencies={Object.keys(
-                    plantProject.paymentSetup.countries
-                  )}
-                  treeCountOptions={plantProject.paymentSetup.treeCountOptions}
-                  userCountry="DE" // TODO: connect to user profile
                   treeCost={plantProject.treeCost}
-                  baseCurrency={plantProject.currency}
+                  rates={
+                    currenciesJson.currency_rates[plantProject.currency].rates
+                  }
+                  fees={1}
+                  currencies={currenciesJson.currency_names} // TODO: connect to data from API
                   selectedCurrency={this.determineDefaultCurrency()}
+                  treeCountOptions={plantProject.paymentSetup.treeCountOptions}
                   selectedTreeCount={this.state.selectedTreeCount}
                   onChange={this.handleTreeCountCurrencyChange}
                 />
@@ -306,9 +356,7 @@ class DonateTrees extends Component {
               </Tabs>
               {this.props.selectedTpo ? (
                 <PaymentSelector
-                  paymentMethods={
-                    plantProject.paymentSetup.countries['DE/EUR'].paymentMethods
-                  }
+                  paymentMethods={paymentMethods}
                   accounts={plantProject.paymentSetup.accounts}
                   amount={this.state.selectedAmount}
                   currency={this.state.selectedCurrency}
@@ -342,7 +390,12 @@ class DonateTrees extends Component {
 DonateTrees.propTypes = {
   selectedProject: PropTypes.object,
   selectedTpo: PropTypes.object,
-  currentUserProfile: PropTypes.object
+  currentUserProfile: PropTypes.object,
+  donate: PropTypes.func
 };
 
-export default DonateTrees;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ donate }, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(DonateTrees);

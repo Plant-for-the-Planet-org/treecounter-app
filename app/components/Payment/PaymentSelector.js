@@ -19,13 +19,12 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       errorMessage: null
     };
 
-    this.decorateSuccessWithGateway = this.decorateSuccessWithGateway.bind(
-      this
-    );
+    this.decorateSuccess = this.decorateSuccess.bind(this);
   }
 
-  decorateSuccessWithGateway(gateway) {
-    return response => this.props.onSuccess({ gateway, ...response });
+  decorateSuccess(gateway, accountName) {
+    return response =>
+      this.props.onSuccess({ gateway, accountName, ...response });
   }
 
   componentDidMount() {
@@ -34,17 +33,20 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       this.props.paymentMethods
     );
     // lookup stripe related payment methods for the current country/currency combination
-    let stripeGateways = Object.keys(this.props.paymentMethods).filter(
+    const stripeGateways = Object.keys(this.props.paymentMethods).filter(
       gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)
     );
-    console.log('%%%%%%%%%%%%%%% stripeGateways', stripeGateways);
 
-    // get unique values
-    stripeGateways = [...new Set(stripeGateways)];
     console.log('%%%%%%%%%%%%%%% stripeGateways', stripeGateways);
+    let stripeAccounts = stripeGateways.map(
+      gateway => this.props.paymentMethods[gateway]
+    );
+    // get unique values
+    stripeAccounts = [...new Set(stripeAccounts)];
+    console.log('%%%%%%%%%%%%%%% stripeAccounts', stripeAccounts);
 
     // there should only be maximum 1
-    if (stripeGateways.length > 1) {
+    if (stripeAccounts.length > 1) {
       console.log(
         'different stripe accounts for same country/currency are not allowed'
       );
@@ -52,8 +54,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     }
 
     // do not load Stripe if not required
-    if (stripeGateways.length > 0) {
-      const stripeAccountName = this.props.paymentMethods[stripeGateways[0]];
+    if (stripeAccounts.length > 0) {
+      const stripeAccountName = stripeAccounts[0];
       const stripeAccount = this.props.accounts[stripeAccountName];
       console.log(
         '%%%%%%%%%%%%%%% stripeAccountName stripeAccount',
@@ -93,6 +95,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       errorMessage: err
     });
   };
+
   render() {
     const { accounts, paymentMethods, amount, currency, context } = this.props;
     const gatewayProps = {
@@ -102,7 +105,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       onError: this.props.onError
     };
 
-    return context.donorName !== '' ? (
+    console.log('============== rendering PaymentSelector');
+    return true ? (
       <StripeProvider stripe={this.state.stripe}>
         <div>
           <div>
@@ -113,13 +117,13 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             const [accountName, target] = paymentMethods[gateway].split(':');
             if ('stripe_cc' === gateway) {
               return (
-                <div>
+                <div key={gateway}>
                   {this.state.errorMessage ? (
                     <div>this.state.errorMessage</div>
                   ) : null}
                   <Elements key={gateway}>
                     <StripeCC
-                      onSuccess={this.decorateSuccessWithGateway(gateway)}
+                      onSuccess={this.decorateSuccess(gateway, accountName)}
                       account={accounts[accountName]}
                       target={target}
                       expanded={this.props.expandedOption === '1'}
@@ -132,13 +136,13 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             }
             if ('stripe_sepa' === gateway) {
               return (
-                <div>
+                <div key={gateway}>
                   {this.state.errorMessage ? (
                     <div>this.state.errorMessage</div>
                   ) : null}
                   <Elements key={gateway}>
                     <StripeSepa
-                      onSuccess={this.decorateSuccessWithGateway(gateway)}
+                      onSuccess={this.decorateSuccess(gateway, accountName)}
                       account={accounts[accountName]}
                       target={target}
                       expanded={this.props.expandedOption === '2'}
@@ -151,13 +155,13 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             }
             if ('paypal' === gateway) {
               return (
-                <div>
+                <div key={gateway}>
                   {this.state.errorMessage ? (
                     <div>this.state.errorMessage</div>
                   ) : null}
                   <Paypal
                     key={gateway}
-                    onSuccess={this.decorateSuccessWithGateway(gateway)}
+                    onSuccess={this.decorateSuccess(gateway, accountName)}
                     amount={amount}
                     currency={currency}
                     account={accounts[accountName]}
@@ -171,13 +175,13 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             }
             if ('offline' === gateway) {
               return (
-                <div>
+                <div key={gateway}>
                   {this.state.errorMessage ? (
                     <div>this.state.errorMessage</div>
                   ) : null}
                   <Offline
                     key={gateway}
-                    onSuccess={this.decorateSuccessWithGateway(gateway)}
+                    onSuccess={this.decorateSuccess(gateway, accountName)}
                     account={accounts[accountName]}
                     expanded={this.props.expandedOption === '4'}
                     handleExpandedClicked={this.handleExpandedClicked}

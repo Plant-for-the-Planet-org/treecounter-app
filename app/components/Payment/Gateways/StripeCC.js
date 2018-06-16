@@ -99,7 +99,6 @@ class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
 _StripeCC.propTypes = {
   stripe: PropTypes.object,
   fontSize: PropTypes.string,
-  amount: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
   account: PropTypes.object.isRequired,
   target: PropTypes.string,

@@ -27,61 +27,60 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       this.props.onSuccess({ gateway, accountName, ...response });
   }
 
-  componentDidMount() {
-    console.log(
-      '%%%%%%%%%%%%%%% this.props.paymentMethods',
-      this.props.paymentMethods
-    );
-    // lookup stripe related payment methods for the current country/currency combination
-    const stripeGateways = Object.keys(this.props.paymentMethods).filter(
-      gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)
-    );
-
-    console.log('%%%%%%%%%%%%%%% stripeGateways', stripeGateways);
-    let stripeAccounts = stripeGateways.map(
-      gateway => this.props.paymentMethods[gateway]
-    );
-    // get unique values
-    stripeAccounts = [...new Set(stripeAccounts)];
-    console.log('%%%%%%%%%%%%%%% stripeAccounts', stripeAccounts);
-
-    // there should only be maximum 1
-    if (stripeAccounts.length > 1) {
-      console.log(
-        'different stripe accounts for same country/currency are not allowed'
-      );
-      // throw some error here
-    }
-
-    // do not load Stripe if not required
-    if (stripeAccounts.length > 0) {
-      const stripeAccountName = stripeAccounts[0];
-      const stripeAccount = this.props.accounts[stripeAccountName];
-      console.log(
-        '%%%%%%%%%%%%%%% stripeAccountName stripeAccount',
-        stripeAccountName,
-        stripeAccount
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.paymentMethods !== this.props.paymentMethods) {
+      // lookup stripe related payment methods for the current country/currency combination
+      const stripeGateways = Object.keys(this.props.paymentMethods).filter(
+        gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)
       );
 
-      // componentDidMount only runs in a browser environment.
-      // In addition to loading asynchronously, this code is safe to server-side render.
+      console.log('%%%%%%%%%%%%%%% stripeGateways', stripeGateways);
+      let stripeAccounts = stripeGateways.map(
+        gateway => this.props.paymentMethods[gateway]
+      );
+      // get unique values
+      stripeAccounts = [...new Set(stripeAccounts)];
+      console.log('%%%%%%%%%%%%%%% stripeAccounts', stripeAccounts);
 
-      // You can inject  script tag manually like this,
-      // or you can use the 'async' attribute on the Stripe.js v3 <script> tag.
-      const publishableKey = stripeAccount['authorization']['publishable_key'];
-      const stripeJs = document.createElement('script');
-      stripeJs.src = 'https://js.stripe.com/v3/';
-      stripeJs.async = true;
-      stripeJs.onload = () => {
-        // The setTimeout lets us pretend that Stripe.js took a long time to load
-        // Take it out of your production code!
-        setTimeout(() => {
-          this.setState({
-            stripe: window.Stripe(publishableKey)
-          });
-        }, 500);
-      };
-      document.body && document.body.appendChild(stripeJs);
+      // there should only be maximum 1
+      if (stripeAccounts.length > 1) {
+        console.log(
+          'different stripe accounts for same country/currency are not allowed'
+        );
+        // throw some error here
+      }
+
+      // do not load Stripe if not required
+      if (stripeAccounts.length > 0) {
+        const stripeAccountName = stripeAccounts[0];
+        const stripeAccount = this.props.accounts[stripeAccountName];
+        console.log(
+          '%%%%%%%%%%%%%%% stripeAccountName stripeAccount',
+          stripeAccountName,
+          stripeAccount
+        );
+
+        // componentDidMount only runs in a browser environment.
+        // In addition to loading asynchronously, this code is safe to server-side render.
+
+        // You can inject  script tag manually like this,
+        // or you can use the 'async' attribute on the Stripe.js v3 <script> tag.
+        const publishableKey =
+          stripeAccount['authorization']['publishable_key'];
+        const stripeJs = document.createElement('script');
+        stripeJs.src = 'https://js.stripe.com/v3/';
+        stripeJs.async = true;
+        stripeJs.onload = () => {
+          // The setTimeout lets us pretend that Stripe.js took a long time to load
+          // Take it out of your production code!
+          setTimeout(() => {
+            this.setState({
+              stripe: window.Stripe(publishableKey)
+            });
+          }, 500);
+        };
+        document.body && document.body.appendChild(stripeJs);
+      }
     }
   }
 
@@ -105,8 +104,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       onError: this.props.onError
     };
 
-    console.log('============== rendering PaymentSelector');
-    return true ? (
+    return paymentMethods ? (
       <StripeProvider stripe={this.state.stripe}>
         <div>
           <div>
@@ -199,7 +197,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
 
 PaymentSelector.propTypes = {
   accounts: PropTypes.object,
-  paymentMethods: PropTypes.object.isRequired,
+  paymentMethods: PropTypes.object,
   expandedOption: PropTypes.string,
   handleExpandedClicked: PropTypes.func,
   amount: PropTypes.number.isRequired,

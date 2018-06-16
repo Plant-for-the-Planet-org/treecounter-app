@@ -286,10 +286,8 @@ class DonateTrees extends Component {
     let email = receipt !== '' ? receipt.email : '';
 
     let paymentMethods;
-    if (this.state.form.donationReceipt) {
-      let countryCurrency = `${this.state.form.donationReceipt.country}/${
-        this.state.selectedCurrency
-      }`;
+    if (receipt) {
+      let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
       console.log('=========== paymentMethods', countryCurrency);
       const countryCurrencies = plantProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {

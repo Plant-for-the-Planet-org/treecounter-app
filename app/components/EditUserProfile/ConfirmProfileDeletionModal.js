@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { check_green } from '../../assets';
 import SecondaryButton from '../Common/Button/SecondaryButton';
+import i18n from '../../locales/i18n';
 
 const ConfirmProfileDeletion = ({
   isOpen,
@@ -12,17 +13,14 @@ const ConfirmProfileDeletion = ({
   <ModalDialog isOpen={isOpen} onRequestClose={onRequestClose}>
     <div>
       <img className="success-image" src={check_green} />
-      <div className="confirm-message">Are you sure ? </div>
-      <div className="message">
-        Once you confirm, all of your account data will be deleted. this can not
-        be undone
-      </div>
+      <div className="confirm-message">{i18n.t('label.sure')}</div>
+      <div className="message">{i18n.t('label.delete_confirmation')}</div>
       <SecondaryButton
         onClick={() => {
           handleProfileDeletion && handleProfileDeletion();
         }}
       >
-        Delete Profile
+        {i18n.t('label.delete_profile')}
       </SecondaryButton>
     </div>
   </ModalDialog>

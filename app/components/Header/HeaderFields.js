@@ -31,7 +31,7 @@ const HeaderFields = ({
                 <span className="unread-number-align">{userFeeds.unRead}</span>
               </div>
             ) : null}
-            <i className="material-icons">notifications_none</i>
+            <i className="material-icons">{i18n.t('label.no_notifications')}</i>
           </div>
         }
       >

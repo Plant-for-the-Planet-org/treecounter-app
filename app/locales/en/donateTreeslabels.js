@@ -16,5 +16,7 @@ export default {
   survival_rate: 'Survival Rate',
   registerFurther: 'Register further trees',
   plantedTrees: 'Planted Trees',
-  individual_name: 'Individual'
+  individual_name: 'Individual',
+  next: 'Next',
+  delete_project: 'delete project'
 };

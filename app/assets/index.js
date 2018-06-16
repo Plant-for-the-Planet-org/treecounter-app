@@ -49,6 +49,7 @@ import payment_bank from './images/icons/payment_banktransfer_white.png';
 import payment_credit from './images/icons/payment_creditcard_white.png';
 import payment_paypal from './images/icons/payment_paypal_white.png';
 import payment_sepa from './images/icons/payment_sepa_white.png';
+import attention from './images/icons/attention.png';
 
 export {
   payment_arrow,
@@ -101,5 +102,6 @@ export {
   dollar,
   arrow_right_green,
   arrow_left_green,
-  check_green
+  check_green,
+  attention
 };

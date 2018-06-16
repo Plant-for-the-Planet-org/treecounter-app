@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import Slider from 'react-slick';
+import classNames from 'classnames';
 
 import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
@@ -26,6 +27,7 @@ import {
 } from '../../server/parsedSchemas/giftTrees';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import i18n from '../../locales/i18n';
+import PaymentSelector from '../Payment/PaymentSelector';
 
 let TCombForm = t.form.Form;
 
@@ -191,6 +193,14 @@ export default class GiftTrees extends Component {
     }
   ];
 
+  determineDefaultCurrency() {
+    const { currentUserProfile, selectedProject } = this.props;
+    const userCurrency =
+      null === currentUserProfile ? null : currentUserProfile.currency;
+
+    return null === userCurrency ? selectedProject.currency : userCurrency;
+  }
+
   handleModeUserChange(tab) {
     this.setState({
       modeUser: tab,
@@ -347,8 +357,7 @@ export default class GiftTrees extends Component {
                   this.state.modeReceipt !== '' ? this.state.modeReceipt : null
                 }
               >
-                {this.state.modeReceipt ===
-                DonateTrees.data.tabsReceipt[0].id ? (
+                {this.state.modeReceipt === GiftTrees.data.tabsReceipt[0].id ? (
                   <TCombForm
                     ref="donateReceipt"
                     type={receiptIndividualFormSchema}

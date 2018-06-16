@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import {
   selectedPlantProjectSelector,
   selectedTpoSelector,
-  currentUserProfileSelector
+  currentUserProfileSelector,
+  currenciesSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { fetchCurrencies } from '../../actions/currencies';

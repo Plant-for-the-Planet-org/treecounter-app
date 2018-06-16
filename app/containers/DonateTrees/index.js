@@ -9,11 +9,13 @@ import {
   currentUserProfileSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import { fetchCurrencies } from '../../actions/currencies';
 import DonateTrees from '../../components/DonateTrees/DonateTrees';
 
 class DonationTreesContainer extends Component {
   componentDidMount() {
     this.props.selectPlantProjectAction(1);
+    this.props.fetchCurrencies();
   }
 
   render() {
@@ -34,7 +36,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ selectPlantProjectAction }, dispatch);
+  return bindActionCreators(
+    { selectPlantProjectAction, fetchCurrencies },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -45,5 +50,6 @@ DonationTreesContainer.propTypes = {
   selectedProject: PropTypes.object,
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
-  selectPlantProjectAction: PropTypes.func
+  selectPlantProjectAction: PropTypes.func,
+  fetchCurrencies: PropTypes.func
 };

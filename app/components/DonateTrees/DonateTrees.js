@@ -27,6 +27,7 @@ import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import i18n from '../../locales/i18n.js';
 import PaymentSelector from '../Payment/PaymentSelector';
 import { donate } from '../../actions/donateAction';
+import { fetchCurrencies } from '../../actions/currencies';
 
 let TCombForm = t.form.Form;
 

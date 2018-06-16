@@ -44,7 +44,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       );
       // get unique values
       stripeAccounts = [...new Set(stripeAccounts)];
-      console.log('%%%%%%%%%%%%%%% stripeAccounts', stripeAccounts);
 
       // there should only be maximum 1
       if (stripeAccounts.length > 1) {
@@ -58,12 +57,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       if (stripeAccounts.length > 0) {
         const stripeAccountName = stripeAccounts[0];
         const stripeAccount = nextProps.accounts[stripeAccountName];
-        console.log(
-          '%%%%%%%%%%%%%%% stripeAccountName stripeAccount',
-          stripeAccountName,
-          stripeAccount
-        );
-
         // componentDidMount only runs in a browser environment.
         // In addition to loading asynchronously, this code is safe to server-side render.
 

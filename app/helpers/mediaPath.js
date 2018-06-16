@@ -1,4 +1,4 @@
-import { context } from '../config/index.js.dist';
+import { context } from '../config';
 
 /**
  * Possible entityKeys are:

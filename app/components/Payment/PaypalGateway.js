@@ -76,15 +76,11 @@ class PaypalGateway extends React.Component {
             paymentToken: data.paymentToken,
             returnUrl: data.returnUrl
           };
-
-          console.log('----------- payment success:', payment);
           onSuccess(payment);
         })
         .catch(response => {
           console.log('----------- payment error:', response);
         });
-
-    console.log('CLIENT', CLIENT);
     return (
       <div>
         {showButton && (

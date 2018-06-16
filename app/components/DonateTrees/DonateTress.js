@@ -72,12 +72,10 @@ export default class DonateTrees extends Component {
   }
 
   handleCurrencyChange(selectedCurrency) {
-    console.log('handleCurrencyChange', selectedCurrency);
     this.setState({ selectedCurrency });
   }
 
   handleTreeCountChange(selectedTreeCount) {
-    console.log('========= handleTreecountChange', selectedTreeCount);
     this.setState({ selectedTreeCount });
   }
 
@@ -107,7 +105,6 @@ export default class DonateTrees extends Component {
       return false;
     },
     () => {
-      console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt.getValue();
       if (value) {
         this.setState({

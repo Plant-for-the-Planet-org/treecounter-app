@@ -90,12 +90,10 @@ export default class GiftTrees extends Component {
   }
 
   handleCurrencyChange(selectedCurrency) {
-    console.log('handleCurrencyChange', selectedCurrency);
     this.setState({ selectedCurrency });
   }
 
   handleTreeCountChange(selectedTreeCount) {
-    console.log('========= handleTreecountChange', selectedTreeCount);
     this.setState({ selectedTreeCount });
   }
 

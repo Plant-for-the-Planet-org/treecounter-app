@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 
 export const setCurrenciesConversions = createAction('CURRENCY_CONVERSION_SET');
-export const getSupportedTreecounter = state => state.currencies;
+export const getCurrencies = state => state.currencies;
 
 export const initialState = {
   currencies: null

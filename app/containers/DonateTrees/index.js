@@ -6,10 +6,13 @@ import PropTypes from 'prop-types';
 import {
   selectedPlantProjectSelector,
   selectedTpoSelector,
-  currentUserProfileSelector
+  currentUserProfileSelector,
+  currenciesSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { fetchCurrencies } from '../../actions/currencies';
+import { donate } from '../../actions/donateAction';
+
 import DonateTrees from '../../components/DonateTrees/DonateTrees';
 
 class DonationTreesContainer extends Component {
@@ -24,6 +27,8 @@ class DonationTreesContainer extends Component {
         selectedProject={this.props.selectedProject}
         selectedTpo={this.props.selectedTpo}
         currentUserProfile={this.props.currentUserProfile}
+        currencies={this.props.currencies}
+        donate={this.props.donate}
       />
     );
   }
@@ -32,12 +37,13 @@ class DonationTreesContainer extends Component {
 const mapStateToProps = state => ({
   selectedProject: selectedPlantProjectSelector(state),
   selectedTpo: selectedTpoSelector(state),
-  currentUserProfile: currentUserProfileSelector(state)
+  currentUserProfile: currentUserProfileSelector(state),
+  currencies: currenciesSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { selectPlantProjectAction, fetchCurrencies },
+    { selectPlantProjectAction, fetchCurrencies, donate },
     dispatch
   );
 };
@@ -50,6 +56,8 @@ DonationTreesContainer.propTypes = {
   selectedProject: PropTypes.object,
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
+  currencies: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
+  donate: PropTypes.func,
   fetchCurrencies: PropTypes.func
 };

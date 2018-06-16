@@ -12,7 +12,6 @@ import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_left_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
-import currenciesJson from '../Currency/currencies';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import classNames from 'classnames';
 
@@ -33,7 +32,7 @@ let TCombForm = t.form.Form;
 
 const headings = ['Project', 'Donation Details', 'Donor Details', 'Payment'];
 
-class DonateTrees extends Component {
+export default class DonateTrees extends Component {
   static data = {
     tabsReceipt: [
       {
@@ -114,14 +113,11 @@ class DonateTrees extends Component {
   }
 
   handleTreeCountCurrencyChange(treeCountCurrencyData) {
-    console.log('handleTreeCountCurrencyChange', treeCountCurrencyData);
     this.setState({
       selectedCurrency: treeCountCurrencyData.currency,
       selectedTreeCount: treeCountCurrencyData.treeCount,
       selectedAmount: treeCountCurrencyData.amount
     });
-
-    // TODO: insert these 3 values into the corresponding form fields
   }
 
   determineDefaultCurrency() {
@@ -147,14 +143,12 @@ class DonateTrees extends Component {
 
   checkValidation = [
     () => {
-      console.log('Selected Project' + this.props.selectedProject);
       if (this.props.selectedProject) {
         return true;
       }
       return false;
     },
     () => {
-      console.log('select treecount' + this.state.selectedTreeCount);
       if (this.state.selectedTreeCount) {
         this.setState({
           form: {
@@ -199,7 +193,6 @@ class DonateTrees extends Component {
   }
 
   handlePaymentApproved(paymentResponse) {
-    console.log('/////////////////// payment success ', paymentResponse);
     this.props.donate(
       {
         ...this.state.form,
@@ -251,6 +244,7 @@ class DonateTrees extends Component {
     };
 
     let plantProject = this.props.selectedProject;
+    let currencies = this.props.currencies.currencies;
     let receipt;
     if (this.state.modeReceipt === 'individual') {
       receipt = this.state.form['receiptIndividual']
@@ -291,14 +285,12 @@ class DonateTrees extends Component {
                   selectAnotherProject={true}
                 />
               ) : null}
-              {this.props.selectedTpo ? (
+              {this.props.selectedTpo && currencies ? (
                 <TreeCountCurrencySelector
                   treeCost={plantProject.treeCost}
-                  rates={
-                    currenciesJson.currency_rates[plantProject.currency].rates
-                  }
+                  rates={currencies.currency_rates[plantProject.currency].rates}
                   fees={1}
-                  currencies={currenciesJson.currency_names} // TODO: connect to data from API
+                  currencies={currencies.currency_names} // TODO: connect to data from API
                   selectedCurrency={this.determineDefaultCurrency()}
                   treeCountOptions={plantProject.paymentSetup.treeCountOptions}
                   selectedTreeCount={this.state.selectedTreeCount}
@@ -366,11 +358,6 @@ DonateTrees.propTypes = {
   selectedProject: PropTypes.object,
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
+  currencies: PropTypes.object,
   donate: PropTypes.func
 };
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ donate }, dispatch);
-};
-
-export default connect(null, mapDispatchToProps)(DonateTrees);

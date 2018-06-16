@@ -9,11 +9,15 @@ import {
   currentUserProfileSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import { fetchCurrencies } from '../../actions/currencies';
+import { gift } from '../../actions/donateAction';
+
 import GiftTrees from '../../components/GiftTrees';
 
 class GiftTreesContainer extends Component {
   componentDidMount() {
     this.props.selectPlantProjectAction(1);
+    this.props.fetchCurrencies();
   }
 
   render() {
@@ -22,6 +26,8 @@ class GiftTreesContainer extends Component {
         selectedProject={this.props.selectedProject}
         selectedTpo={this.props.selectedTpo}
         currentUserProfile={this.props.currentUserProfile}
+        currencies={this.props.currencies}
+        gift={this.props.gift}
       />
     );
   }
@@ -30,11 +36,15 @@ class GiftTreesContainer extends Component {
 const mapStateToProps = state => ({
   selectedProject: selectedPlantProjectSelector(state),
   selectedTpo: selectedTpoSelector(state),
-  currentUserProfile: currentUserProfileSelector(state)
+  currentUserProfile: currentUserProfileSelector(state),
+  currencies: currenciesSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ selectPlantProjectAction }, dispatch);
+  return bindActionCreators(
+    { selectPlantProjectAction, fetchCurrencies, gift },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GiftTreesContainer);
@@ -43,5 +53,8 @@ GiftTreesContainer.propTypes = {
   selectedProject: PropTypes.object,
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
-  selectPlantProjectAction: PropTypes.func
+  currencies: PropTypes.object,
+  selectPlantProjectAction: PropTypes.func,
+  gift: PropTypes.func,
+  fetchCurrencies: PropTypes.func
 };

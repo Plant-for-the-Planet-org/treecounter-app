@@ -10,6 +10,7 @@ import {
   getTpos
 } from '../reducers/entitiesReducer';
 import { getSelectedPlantProjectId } from '../reducers/selectedPlantProjectIdReducer';
+import { getCurrencies } from '../reducers/currenciesReducer';
 
 export const currentUserProfileIdSelector = state =>
   getCurrentUserProfileId(state);
@@ -20,6 +21,7 @@ export const tposSelector = state => getTpos(state);
 export const plantProjectsSelector = state => getPlantProjects(state);
 export const entitiesSelector = state => state.entities;
 export const userFeedsSelector = state => getUserFeeds(state);
+export const currenciesSelector = state => getCurrencies(state);
 
 function logSelectorUpdate(selectorName, args = 'None') {
   const debug = false;

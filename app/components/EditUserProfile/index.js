@@ -14,12 +14,19 @@ import PaswordUpdatedDialog from './PaswordUpdateModal';
 import ConfirmProfileDeletion from './ConfirmProfileDeletionModal';
 import i18n from '../../locales/i18n.js';
 import PlantProjectTemplate from './PlantProjectTemplate';
+import {
+  UserProfileTemplate,
+  UserAboutmeTemplate,
+  UserPasswordUpdateTemplate
+} from './PlantProjectUserProfileTemplates';
 
 const plantProjectFormOptions = {
   template: PlantProjectTemplate(),
   ...plantProjectSchema.schemaOptions
 };
 let TCombForm = t.form.Form;
+const emptyProjectInfo = { name: '' };
+
 export default class EditUserProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -27,89 +34,67 @@ export default class EditUserProfile extends React.Component {
     console.log(parsedSchema);
     this.state = {
       showConfirmProfileDeletion: false,
-      plantProjects:
-        (props &&
-          props.currentUserProfile &&
-          props.currentUserProfile.plantProjects) ||
-        []
+      plantProjects: (props &&
+        props.currentUserProfile &&
+        props.currentUserProfile.plantProjects) || [emptyProjectInfo]
     };
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
-      plantProjects:
-        (nextProps &&
-          nextProps.currentUserProfile &&
-          nextProps.currentUserProfile.plantProjects) ||
-        []
+      plantProjects: (nextProps &&
+        nextProps.currentUserProfile &&
+        nextProps.currentUserProfile.plantProjects) || [emptyProjectInfo]
     });
   }
+
   toggleConfirmProfileDeletion = () => {
     this.setState({
       showConfirmProfileDeletion: !this.state.showConfirmProfileDeletion
     });
   };
 
+  handleDeleteProjectCLick = plantProject => {
+    console.log('click delete');
+    if (plantProject.id) {
+      this.props.deletePlantProject(plantProject.id);
+    } else {
+      //update local state
+    }
+  };
+
+  handleSaveProjectClick = plantProject => {
+    let formRef = 'plantProject' + plantProject.id;
+    console.log(this.refs[formRef].validate());
+
+    let value = this.refs[formRef].getValue();
+    if (value) {
+      //if image file is same dont update it
+      //similarly need to handle for 'plantProjectImages array
+      if (value.imageFile == plantProject.imageFile) {
+        value = Object.assign({}, value);
+        delete value.imageFile;
+      }
+      if (plantProject.id) {
+        this.props.updatePlantProject({
+          ...value,
+          id: plantProject.id
+        });
+      } else {
+        console.log('post new project here');
+        this.props.addPlantProject(value);
+      }
+    }
+  };
+
   getFormTemplate = (userType, profileType) => {
     console.log(profileType);
     switch (profileType) {
-      case 'profile': {
-        return locals => {
-          console.log(locals);
-          return (
-            <div className="tComb-template__profile-form">
-              <div>
-                {locals.inputs.title}
-                {locals.inputs.name}
-                {locals.inputs.firstname}
-                {locals.inputs.lastname}
-                {locals.inputs.gender}
-                {locals.inputs.subType}
-              </div>
-
-              <div>
-                {locals.inputs.address}
-                {locals.inputs.zipCode}
-                {locals.inputs.city}
-                {locals.inputs.country}
-                <div>
-                  {locals.inputs.mayContact}
-                  {locals.inputs.mayPublish}
-                </div>
-              </div>
-            </div>
-          );
-        };
-      }
-      case 'about_me': {
-        return locals => {
-          console.log(locals);
-          return (
-            <div className="tComb-template__about-me-form">
-              <div>
-                {locals.inputs.synopsis1}
-                {locals.inputs.synopsis2}
-              </div>
-
-              <div>
-                {locals.inputs.url}
-                {locals.inputs.linkText}
-              </div>
-            </div>
-          );
-        };
-      }
-      case 'password': {
-        return locals => {
-          console.log(locals);
-          return (
-            <div className="tComb-template__password-form">
-              <div>{locals.inputs.currentPassword}</div>
-
-              <div>{locals.inputs.password}</div>
-            </div>
-          );
-        };
-      }
+      case 'profile':
+        return UserProfileTemplate;
+      case 'about_me':
+        return UserAboutmeTemplate;
+      case 'password':
+        return UserPasswordUpdateTemplate;
     }
   };
 
@@ -121,13 +106,12 @@ export default class EditUserProfile extends React.Component {
     };
   };
 
-  render() {
-    console.log('___render___Edit_userprofile');
-    const { type, image } = this.props.currentUserProfile;
-
-    let plantProjectList = null;
-    if (type == 'tpo') {
-      plantProjectList = this.state.plantProjects.map((plantProject, index) => {
+  getPlantProjectList = type => {
+    if (type != 'tpo') {
+      return null;
+    }
+    let plantProjectList = this.state.plantProjects.map(
+      (plantProject, index) => {
         return (
           <React.Fragment key={index}>
             <div className="user-profile__project-form-group">
@@ -143,28 +127,7 @@ export default class EditUserProfile extends React.Component {
                 />
                 <PrimaryButton
                   onClick={() => {
-                    //update the old project info
-                    let formRef = 'plantProject' + plantProject.id;
-                    console.log(this.refs[formRef].validate());
-
-                    let value = this.refs[formRef].getValue();
-                    if (value) {
-                      //if image file is same dont update it
-                      //same thing will need to handle for 'plantProjectImages array
-                      if (value.imageFile == plantProject.imageFile) {
-                        value = Object.assign({}, value);
-                        delete value.imageFile;
-                      }
-                      if (plantProject.id) {
-                        this.props.updatePlantProject({
-                          ...value,
-                          id: plantProject.id
-                        });
-                      } else {
-                        console.log('post new project here');
-                        this.props.addPlantProject(value);
-                      }
-                    }
+                    this.handleSaveProjectClick(plantProject);
                   }}
                 >
                   {i18n.t('label.save_changes')}
@@ -172,12 +135,7 @@ export default class EditUserProfile extends React.Component {
                 <div
                   key={index}
                   onClick={() => {
-                    console.log('click delete');
-                    if (plantProject.id) {
-                      this.props.deletePlantProject(plantProject.id);
-                    } else {
-                      //update local state
-                    }
+                    this.handleDeleteProjectCLick(plantProject);
                   }}
                   className="delete-project"
                 >
@@ -187,8 +145,14 @@ export default class EditUserProfile extends React.Component {
             </div>
           </React.Fragment>
         );
-      });
-    }
+      }
+    );
+    return plantProjectList;
+  };
+
+  render() {
+    console.log('___render___Edit_userprofile');
+    const { type, image } = this.props.currentUserProfile;
 
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
@@ -234,14 +198,14 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
 
-        {plantProjectList}
+        {this.getPlantProjectList(type)}
         {type == 'tpo' ? (
           <div className="pftp-addbutton">
             <button
               onClick={() => {
                 console.log(plantProjectFormOptions);
                 const newPlantProjects = [...this.state.plantProjects]; // clone the array
-                newPlantProjects.push({ name: '' });
+                newPlantProjects.push(emptyProjectInfo);
                 this.setState({ plantProjects: newPlantProjects });
               }}
             >

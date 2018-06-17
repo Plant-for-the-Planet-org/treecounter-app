@@ -2,20 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shallowEqual from './utils/shallowEqual';
-import { type ElementContext, elementContextTypes } from './Elements';
-
-type Props = {
-  id?: string,
-  className?: string,
-  onChange: Function,
-  onBlur: Function,
-  onFocus: Function,
-  onReady: Function
-};
+import { elementContextTypes } from './Elements';
 
 const noop = () => {};
 
-const _extractOptions = (props: Props): Object => {
+const _extractOptions = props => {
   const {
     id,
     className,
@@ -29,10 +20,10 @@ const _extractOptions = (props: Props): Object => {
 };
 
 const Element = (
-  type: string,
+  type,
   hocOptions: { impliedTokenType?: string, impliedSourceType?: string } = {}
 ) =>
-  class extends React.Component<Props> {
+  class Element extends React.Component {
     static propTypes = {
       id: PropTypes.string,
       className: PropTypes.string,
@@ -52,7 +43,7 @@ const Element = (
 
     static contextTypes = elementContextTypes;
 
-    constructor(props: Props, context: ElementContext) {
+    constructor(props, context) {
       super(props, context);
 
       this._element = null;
@@ -64,7 +55,7 @@ const Element = (
     }
 
     componentDidMount() {
-      this.context.addElementsLoadListener((elements: ElementsShape) => {
+      this.context.addElementsLoadListener(elements => {
         const element = elements.create(type, this._options);
         this._element = element;
 
@@ -83,7 +74,7 @@ const Element = (
       });
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps) {
       const options = _extractOptions(nextProps);
       if (
         Object.keys(options).length !== 0 &&
@@ -104,12 +95,7 @@ const Element = (
       }
     }
 
-    context: ElementContext;
-    _element: ElementShape | null;
-    _ref: ?HTMLElement;
-    _options: Object;
-
-    _setupEventListeners(element: ElementShape) {
+    _setupEventListeners(element) {
       element.on('ready', () => {
         this.props.onReady(this._element);
       });
@@ -122,7 +108,7 @@ const Element = (
       element.on('focus', (...args) => this.props.onFocus(...args));
     }
 
-    handleRef = (ref: ?HTMLElement) => {
+    handleRef = ref => {
       this._ref = ref;
     };
 

@@ -2,7 +2,11 @@ import { normalize } from 'normalizr';
 import { debug } from '../debug/index';
 import { postAuthenticatedRequest, postRequest } from '../utils/api';
 import { mergeEntities } from '../reducers/entitiesReducer';
-import { treecounterSchema } from '../schemas/index';
+import {
+  contributionSchema,
+  treecounterSchema,
+  plantProjectSchema
+} from '../schemas/index';
 
 export function donate(donationContribution, plantProjectId, loggedIn) {
   console.log(
@@ -21,12 +25,14 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
   return dispatch => {
     request
       .then(response => {
-        const treecounter = response.data;
-        debug('success: ', treecounter);
-        // a SchemaResponse with a contribution and a treecounter entity should be merged
-        // the response will also include the donationUid, required to redirect to the success page
-        const [contribution] = treecounter.contributions.splice(-1);
-        dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
+        const { contribution, treecounter, plantProject } = response.data;
+
+        dispatch(mergeEntities(normalize(contribution, contributionSchema)));
+        dispatch(mergeEntities(normalize(plantProject, plantProjectSchema)));
+        if (treecounter) {
+          dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
+        }
+        console.log(contribution.uid);
 
         console.log(`Thank you for planting ${
           contribution.treeCount

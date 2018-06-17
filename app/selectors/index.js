@@ -55,17 +55,20 @@ export const getAllPlantProjectsSelector = createSelector(
   (plantProjects, entities, tpos) => {
     let normalisedProjects = Object.keys(plantProjects).reduce(
       (projects, id) => {
-        projects[id] = denormalize(
-          plantProjects[id],
-          plantProjectSchema,
-          entities
+        let projectsArray = [];
+        projects.push(
+          denormalize(plantProjects[id], plantProjectSchema, entities)
         );
-        projects[id].tpo_name = tpos[projects[id].tpoId].name;
         return projects;
       },
-      {}
+      []
     );
-    return normalisedProjects;
+    let tpoNameExpandedProjects = normalisedProjects.map(project => {
+      project.tpo_name = tpos[project.tpoId].name;
+      return project;
+    });
+
+    return tpoNameExpandedProjects;
   }
 );
 

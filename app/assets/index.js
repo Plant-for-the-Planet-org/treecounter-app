@@ -44,6 +44,7 @@ import dollar from './images/icons/dollar.png';
 import arrow_right_green from './images/icons/arrow_right_green.png';
 import arrow_left_green from './images/icons/arrow_left_green.png';
 import check_green from './images/icons/check_green.png';
+import attention from './images/icons/attention.png';
 
 export {
   MapPinBlue,
@@ -91,5 +92,6 @@ export {
   dollar,
   arrow_right_green,
   arrow_left_green,
-  check_green
+  check_green,
+  attention
 };

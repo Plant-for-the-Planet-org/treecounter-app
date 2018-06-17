@@ -10,37 +10,76 @@ class LeaderBoardContainer extends React.Component {
     super();
     this.state = {
       exploreData: {},
-      mapData: []
+      queryResults: undefined
     };
   }
+
+  sendSearchQuery(params) {
+    if (!params) {
+      params = {
+        category: this.state.categoryInfo.categoryKeys[0],
+        orderBy: this.state.orderByOptionsInfo.orderByOptionsKeys[0],
+        period: this.state.timePeriodsInfo.timePeriodsKeys[0]
+      };
+    }
+
+    LeaderBoardDataAction(params).then(
+      success => {
+        console.log('Response Success categories');
+        console.log(success.data);
+        if (success.data && success.data instanceof Object) {
+          let listItems = [];
+          for (let key in success.data) {
+            if (success.data.hasOwnProperty(key)) {
+              listItems.push(success.data[key]);
+            }
+          }
+          this.setState({
+            queryResults: listItems
+          });
+        }
+      },
+      error => console.log(error)
+    );
+  }
+
+  searchQuery = params => {
+    this.sendSearchQuery(params);
+  };
+
   componentWillMount() {
     ExploreDataAction().then(
       success => {
         console.log('Response Success');
         console.log(success.data);
-        this.setState({
-          exploreData: success.data
-        });
-      },
-      error => console.log(error)
-    );
-    let paramObj = {};
-    paramObj.category = 'country';
-    paramObj.orderBy = 'planted';
-    paramObj.period = 'all';
-    LeaderBoardDataAction(paramObj).then(
-      success => {
-        console.log('Response Success categories');
-        console.log(success.data);
-        let listItems = [];
-        for (let key in success.data) {
-          if (success.data.hasOwnProperty(key)) {
-            listItems.push(success.data[key]);
-          }
+        let categoryInfo = {};
+        let orderByOptionsInfo = {};
+        let timePeriodsInfo = {};
+        let exploreData = success.data;
+
+        if (exploreData && exploreData.categories) {
+          categoryInfo.categories = exploreData.categories;
+          categoryInfo.categoryKeys = Object.keys(categoryInfo.categories);
+        }
+        if (exploreData && exploreData.orderByOptions) {
+          orderByOptionsInfo.orderByOptions = exploreData.orderByOptions;
+          orderByOptionsInfo.orderByOptionsKeys = Object.keys(
+            orderByOptionsInfo.orderByOptions
+          );
+        }
+        if (exploreData && exploreData.timePeriods) {
+          timePeriodsInfo.timePeriods = exploreData.timePeriods;
+          timePeriodsInfo.timePeriodsKeys = Object.keys(
+            timePeriodsInfo.timePeriods
+          );
         }
         this.setState({
-          mapData: listItems
+          exploreData,
+          categoryInfo,
+          orderByOptionsInfo,
+          timePeriodsInfo
         });
+        this.sendSearchQuery();
       },
       error => console.log(error)
     );
@@ -50,8 +89,11 @@ class LeaderBoardContainer extends React.Component {
     return (
       <Leaderboard
         ref={'leaderBoard'}
-        exploreData={this.state.exploreData}
-        mapData={this.state.mapData}
+        categoryInfo={this.state.categoryInfo}
+        orderByOptionsInfo={this.state.orderByOptionsInfo}
+        timePeriodsInfo={this.state.timePeriodsInfo}
+        queryResult={this.state.queryResults}
+        sendSearchQuery={this.searchQuery}
       />
     );
   }

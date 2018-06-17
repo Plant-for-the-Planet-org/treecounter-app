@@ -14,6 +14,10 @@
     .sort-container {
       font-size: 15px;
       margin-left: 25px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
       span {
         @extend .pftp-text-basic;
         font-family: Myriad Pro;
@@ -21,65 +25,55 @@
         text-align: left;
         color: #b7d37f;
       }
-      select {
-        border: none;
-        background-color: #f6f6f6;
-        height: 43px;
+
+      .pftp-selectfield {
+        margin: 0;
+        .pftp-selectfield__select {
+          border: none;
+          background-color: #f6f6f6;
+          height: 43px;
+        }
       }
     }
   }
+
+  .pftp-tabs {
+    width: 100%;
+    .leader-board__sub-container {
+      width: 100%;
+    }
+  }
   .leaderboard-list__table {
-    width: 624px;
+    width: 100%;
     height: 405px;
-    overflow: scroll;
+    overflow-y: scroll;
     border-radius: 6px;
     border: solid 2px #efefef;
     margin-top: 8px;
-    .row-header-container {
-      border-bottom: solid 2px #b6abab;
-      margin: 0 21px;
-      font-size: 15px;
-      padding: 6px 0;
-      display: flex;
-      justify-content: space-around;
-      color: $headerTextColor;
-    }
-    .row-container {
-      display: flex;
-      justify-content: space-between;
-      .col-container {
-        padding-left: 10px;
-        font-family: OpenSans;
-        font-size: 15px;
-      }
-      .country {
-        width: 250px;
-      }
-      .target,
-      .planted {
-        width: 187px;
-      }
+    .projects-list {
+      margin: 0;
+      border: 0;
+      width: 100%;
     }
   }
   .leaderboard_images__container {
     margin-top: 28px;
     display: flex;
     justify-content: space-between;
+    // overflow-x: auto;
     .leaderboard_image__container {
       display: flex;
       flex-direction: column;
       font-size: 16px;
-      color: #b7d37f;
+      color: #e6e6e6;
       padding-top: 5px;
-      .header-logo {
+      max-width: 76px;
+      align-items: center;
+
+      .imageContainer {
         width: 76px;
         height: 76px;
-        img {
-          border: solid 26px #b7d37f;
-          border-radius: 100%;
-          height: 27px;
-          width: 27px;
-        }
+        margin-bottom: 4px;
       }
     }
   }

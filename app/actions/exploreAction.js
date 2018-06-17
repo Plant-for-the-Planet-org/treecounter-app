@@ -3,10 +3,10 @@ import { debug } from '../debug/index';
 
 export function ExploreDataAction() {
   debug('Getting Explore Data');
-  return getAuthenticatedRequest('public_explore_get');
+  return getAuthenticatedRequest('public_exploreData_get');
 }
 
 export function LeaderBoardDataAction(params) {
   debug('Getting Explore Data');
-  return getAuthenticatedRequest('public_explore_query', params);
+  return getAuthenticatedRequest('public_exploreQuery_get', params);
 }

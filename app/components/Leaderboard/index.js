@@ -4,14 +4,16 @@ import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
 import Tabs from '../Common/Tabs';
 import i18n from '../../locales/i18n';
-import UserProfileImage from '../Common/UserProfileImage';
 import {
-  country,
+  leaderboards_countries_grey,
+  leaderboards_countries_green,
   education,
   company,
   tree_outline,
   organization
 } from '../../assets';
+
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
 
 const data = {
   tabs: [
@@ -25,18 +27,46 @@ const data = {
     }
   ]
 };
+const categoryIcons = {
+  country: {
+    normal: leaderboards_countries_grey,
+    selected: leaderboards_countries_green
+  },
+  tpo: { normal: tree_outline, selected: tree_outline },
+  organization: { normal: organization, selected: organization },
+  education: { normal: education, selected: education },
+  company: { normal: company, selected: company },
+  individual: { normal: company, selected: company }
+};
 
 export default class Leaderboard extends Component {
-  handleCategoryChange = category => {
-    console.log('clicked' + category);
-  };
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleTabChange = this.handleTabChange.bind(this);
     this.state = {
       modeMap: '',
-      sortValue: ''
+      selectedCategory: '',
+      tableDataLoading: true
     };
+    console.log('constructor leaderBoard');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('props_recievd', nextProps);
+    let updatedState = {};
+
+    if (!this.state.selectedCategory) {
+      let categoryInfo = nextProps.categoryInfo;
+      let selectedCategory =
+        categoryInfo &&
+        categoryInfo.categoryKeys &&
+        categoryInfo.categoryKeys[0];
+      updatedState.selectedCategory = selectedCategory;
+    }
+    if (nextProps.queryResult) {
+      updatedState.tableDataLoading = false;
+    }
+    this.setState(updatedState);
   }
 
   handleTabChange(tab) {
@@ -46,115 +76,156 @@ export default class Leaderboard extends Component {
     });
   }
 
+  handleSlectionChange = () => {
+    this.handleCategoryChange(this.state.selectedCategory);
+  };
+
+  handleCategoryChange = category => {
+    console.log('clicked' + category);
+    this.setState({
+      selectedCategory: category
+    });
+    let orderByRef = this.refs.orderBy;
+    let orderBy = orderByRef.options[orderByRef.selectedIndex].value;
+
+    let timePeriodRef = this.refs.timePeriod;
+    let period = timePeriodRef.options[timePeriodRef.selectedIndex].value;
+    let params = { category, orderBy, period };
+    this.props.sendSearchQuery(params);
+    this.setState({ tableDataLoading: true });
+  };
+
   getCategoryView = () => {
     let categoryUI = null;
-    if (this.props.exploreData) {
-      let categories = this.props.exploreData.categories;
-      let categoryArray = Object.keys(categories);
-      categoryUI = categoryArray.map((category, index) => {
-        return (
-          <React.Fragment key={index}>
-            <div
-              className="leaderboard_image__container"
-              onCLick={() => {
-                this.handleCategoryChange(category);
-              }}
-            >
-              <UserProfileImage iconUrl={country} />
-              <div>{categories[category]}</div>
-            </div>
-          </React.Fragment>
-        );
-      });
+    if (this.props.categoryInfo && this.props.categoryInfo.categoryKeys) {
+      categoryUI = this.props.categoryInfo.categoryKeys.map(
+        (category, index) => {
+          let isSelected = this.state.selectedCategory == category;
+          return (
+            <React.Fragment key={index}>
+              <div
+                select={isSelected ? 'true' : 'false'}
+                className="leaderboard_image__container"
+                onClick={() => {
+                  this.handleCategoryChange(category);
+                }}
+              >
+                <div className="imageContainer">
+                  <img
+                    src={
+                      categoryIcons[category][
+                        isSelected ? 'selected' : 'normal'
+                      ]
+                    }
+                  />
+                </div>
+                <div>{this.props.categoryInfo.categories[category]}</div>
+              </div>
+            </React.Fragment>
+          );
+        }
+      );
     }
     return categoryUI;
   };
 
+  getTableView = () => {
+    let listItemsUI = <LoadingIndicator />;
+    if (!this.state.tableDataLoading)
+      listItemsUI = (
+        <table className="projects-list">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Planted</th>
+              <th>Target</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.queryResult.map((d, index) => (
+              <tr key={'tr' + index}>
+                <td className="align-left">{index + 1 + ' ' + d.country}</td>
+                <td className="align-left">{d.planted}</td>
+                <td className="align-right">{d.target}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+
+    return listItemsUI;
+  };
+
   render() {
-    let listItemsUI;
-    if (this.props.mapData)
-      listItemsUI = this.props.mapData.map((d, index) => {
-        return (
-          <React.Fragment key={index}>
-            <div className="row-container">
-              <div key={d.countryCode} className="col-container country">
-                {d.country}
-              </div>
-              <div key={d.planted} className="col-container target">
-                {d.planted}
-              </div>
-              <div key={d.target} className="col-container planted">
-                {d.target}
-              </div>
-            </div>
-          </React.Fragment>
-        );
-      });
+    if (!this.props.categoryInfo) {
+      return <LoadingIndicator />;
+    }
 
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>{'Explore'}</TextHeading>
         <CardLayout className="leader-board__container">
           <Tabs data={data.tabs} onTabChange={this.handleTabChange}>
-            {this.state.modeMap === data.tabs[0].id ? (
-              <div>
+            {this.state.modeMap === data.tabs[1].id ? (
+              <div className="leader-board__sub-container">
                 <div className="leaderboard_images__container">
-                  <div
-                    className="leaderboard_image__container"
-                    onCLick={this.handleCategoryChange}
-                  >
-                    <UserProfileImage iconUrl={country} />
-                    <div>Countries</div>
-                  </div>
-                  <div className="leaderboard_image__container">
-                    <UserProfileImage iconUrl={organization} />
-                    <div>Demo Text</div>
-                  </div>
-                  <div className="leaderboard_image__container">
-                    <UserProfileImage iconUrl={company} />
-                    <div>Companies</div>
-                  </div>
-                  <div className="leaderboard_image__container">
-                    <UserProfileImage iconUrl={tree_outline} />
-                    <div>Tree-Planting</div>
-                  </div>
-                  <div className="leaderboard_image__container">
-                    <UserProfileImage iconUrl={education} />
-                    <div>Education</div>
-                  </div>
-                  <div className="leaderboard_image__container">
-                    <UserProfileImage iconUrl={education} />
-                    <div>Education</div>
-                  </div>
+                  {this.getCategoryView()}
                 </div>
                 <div className="leaderboard-list__sort">
                   <div className="sort-container">
                     <span>Sort By: </span>
-                    <span>
-                      <select value={this.state.sortValue}>
-                        <option value="1">planted</option>
-                        <option value="0">Desc</option>
+                    <div className="pftp-selectfield">
+                      <select
+                        ref="orderBy"
+                        className="pftp-selectfield__select"
+                        onChange={this.handleSlectionChange}
+                      >
+                        {this.props.orderByOptionsInfo.orderByOptionsKeys.map(
+                          option => (
+                            <option
+                              key={option}
+                              className="pftp-selectfield__option"
+                              value={option}
+                            >
+                              {i18n.t(
+                                this.props.orderByOptionsInfo.orderByOptions[
+                                  option
+                                ]
+                              )}
+                            </option>
+                          )
+                        )}
                       </select>
-                    </span>
+                    </div>
                   </div>
                   <div className="sort-container">
                     <span>Time Period: </span>
-                    <span>
-                      <select value={this.state.sortValue}>
-                        <option value="1">all time</option>
-                        <option value="0">Desc</option>
+                    <div className="pftp-selectfield">
+                      <select
+                        ref="timePeriod"
+                        className="pftp-selectfield__select"
+                        onChange={this.handleSlectionChange}
+                      >
+                        {this.props.timePeriodsInfo.timePeriodsKeys.map(
+                          option => (
+                            <option
+                              key={option}
+                              className="pftp-selectfield__option"
+                              value={option}
+                            >
+                              {i18n.t(
+                                this.props.timePeriodsInfo.timePeriods[option]
+                              )}
+                            </option>
+                          )
+                        )}
                       </select>
-                    </span>
+                    </div>
                   </div>
                 </div>
 
                 <div className="leaderboard-list__table">
-                  <div className="row-header-container">
-                    <div className="col-header">Country</div>
-                    <div className="col-header">Planted</div>
-                    <div className="col-header">Target</div>
-                  </div>
-                  {listItemsUI}
+                  {this.getTableView()}
                 </div>
               </div>
             ) : (
@@ -168,6 +239,9 @@ export default class Leaderboard extends Component {
 }
 
 Leaderboard.propTypes = {
-  exploreData: PropTypes.object.isRequired,
-  mapData: PropTypes.array
+  categoryInfo: PropTypes.object,
+  orderByOptionsInfo: PropTypes.object,
+  timePeriodsInfo: PropTypes.object,
+  queryResult: PropTypes.array,
+  sendSearchQuery: PropTypes.func.isRequired
 };

@@ -45,6 +45,8 @@ import arrow_right_green from './images/icons/arrow_right_green.png';
 import arrow_left_green from './images/icons/arrow_left_green.png';
 import check_green from './images/icons/check_green.png';
 import attention from './images/icons/attention.png';
+import leaderboards_countries_green from './images/icons/leaderboards_countries_green.png';
+import leaderboards_countries_grey from './images/icons/leaderboards_countries_grey.png';
 
 export {
   MapPinBlue,
@@ -93,5 +95,7 @@ export {
   arrow_right_green,
   arrow_left_green,
   check_green,
-  attention
+  attention,
+  leaderboards_countries_grey,
+  leaderboards_countries_green
 };

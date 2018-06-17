@@ -152,11 +152,11 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_resetPassword') + '/:token'}
                 component={ResetPasswordContainer}
               />
-              <Route
+              <PublicRoute
                 path={getLocalRoute('app_passwordSent')}
                 component={EmailSentContainer}
               />
-              <PublicRoute
+              <Route
                 path={getLocalRoute('app_explore')}
                 component={LeaderboardContainer}
               />

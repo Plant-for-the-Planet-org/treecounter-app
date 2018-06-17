@@ -4866,14 +4866,20 @@ export const plantProject = {
           title: 'prototype',
           type: 'object',
           properties: {
-            imageFile: {
+            image: {
               type: 'string',
               title: 'imageFile',
               widget: 'file',
               propertyOrder: 1
+            },
+            description: {
+              type: 'string',
+              title: 'description',
+              widget: 'textarea',
+              propertyOrder: 1
             }
           },
-          required: ['imageFile']
+          required: ['image']
         },
         propertyOrder: 13
       },

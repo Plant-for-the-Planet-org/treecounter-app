@@ -24,15 +24,18 @@ export function addPlantProject(plantProject) {
         .then(res => {
           debug(res.status);
           debug(res);
-          if (res.data && res.data instanceof Object) {
-            dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
+          const plantProject = res.data;
+          if (plantProject && plantProject instanceof Object) {
+            dispatch(
+              mergeEntities(normalize(plantProject, plantProjectSchema))
+            );
           }
           NotificationManager.success(
             `New Project Added Successfully`,
             `Congrats`,
             5000
           );
-          resolve(res.data);
+          resolve(plantProject);
         })
         .catch(err => {
           debug(err);
@@ -49,14 +52,15 @@ export function deletePlantProject(plantProjectId) {
         plantProject: plantProjectId
       })
         .then(res => {
+          const userProfile = res.data;
           dispatch(deleteEntity({ plantProject: [plantProjectId] }));
-          dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
+          dispatch(mergeEntities(normalize(userProfile, userProfileSchema)));
           NotificationManager.success(
             `plant Project Updated Successful`,
             `Congrats`,
             5000
           );
-          resolve(res.data);
+          resolve(userProfile);
         })
         .catch(err => {
           debug(err);
@@ -77,11 +81,12 @@ export function updatePlantProject(plantProject) {
         .then(res => {
           debug(res.status);
           debug(res);
-          let updatedProject = res.data;
-          if (updatedProject && updatedProject instanceof Object) {
+          const { plantProject, imageDeleteIds } = res.data;
+          if (plantProject && plantProject instanceof Object) {
             dispatch(
-              mergeEntities(normalize(updatedProject, plantProjectSchema))
+              mergeEntities(normalize(plantProject, plantProjectSchema))
             );
+            dispatch(deleteEntity({ plantProjectImage: imageDeleteIds }));
           }
           NotificationManager.success(
             `plant Project Updated Successful`,

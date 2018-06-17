@@ -114,7 +114,7 @@ class TreeCounter extends Component {
         <BrowserRouter history={history}>
           <div className="app-container">
             <HeaderContainer />
-            <SideMenuContainer loggedIn={isLoggedIn} />
+            <Route component={SideMenuContainer} />
             <div className="app-container__content">
               <PublicRoute exact path="/" component={Trillion} />
               <Route

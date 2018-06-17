@@ -16,5 +16,7 @@ export default {
   un_subscribe: 'UnFollow',
   subscribe: 'Follow',
   profile: 'profile',
-  gender: 'Gender'
+  gender: 'Gender',
+  no_notifications: 'notifications_none',
+  all_notifications: 'See all notifications'
 };

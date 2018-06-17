@@ -8,7 +8,7 @@ import { NotificationManager } from '../notification/PopupNotificaiton/notificat
 import { userProfileSchema, plantProjectSchema } from '../schemas/index';
 
 import { normalize } from 'normalizr';
-import { mergeEntities } from '../reducers/entitiesReducer';
+import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
 
 const profileTypeToReq = {
   profile: 'profile_put',
@@ -42,18 +42,15 @@ export function addPlantProject(plantProject) {
   };
 }
 
-export function deleteTpoProject(plantId) {
-  return () => {
+export function deletePlantProject(plantProjectId) {
+  return dispatch => {
     return new Promise(function(resolve) {
       deleteAuthenticatedRequest('plantProject_delete', {
-        plantProject: plantId
+        plantProject: plantProjectId
       })
         .then(res => {
-          debug(res.status);
-          debug(res);
-          // if (res.data && res.data instanceof Object) {
-          //   dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
-          // }
+          dispatch(deleteEntity({ plantProject: [plantProjectId] }));
+          dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
           NotificationManager.success(
             `plant Project Updated Successful`,
             `Congrats`,
@@ -68,7 +65,8 @@ export function deleteTpoProject(plantId) {
     });
   };
 }
-export function updateTpoProject(plantProject) {
+
+export function updatePlantProject(plantProject) {
   return dispatch => {
     return new Promise(function(resolve) {
       let projectId = plantProject.id;
@@ -103,6 +101,7 @@ export function updateTpoProject(plantProject) {
     });
   };
 }
+
 export function updateUserProfile(data, profileType) {
   return dispatch => {
     return new Promise(function(resolve) {

@@ -81,12 +81,12 @@ export function updatePlantProject(plantProject) {
         .then(res => {
           debug(res.status);
           debug(res);
-          const { plantProject, imageDeleteIds } = res.data;
+          const { plantProject, plantProjectImage: deleteIds } = res.data;
           if (plantProject && plantProject instanceof Object) {
             dispatch(
               mergeEntities(normalize(plantProject, plantProjectSchema))
             );
-            dispatch(deleteEntity({ plantProjectImage: imageDeleteIds }));
+            dispatch(deleteEntity({ plantProjectImage: deleteIds }));
           }
           NotificationManager.success(
             `plant Project Updated Successful`,

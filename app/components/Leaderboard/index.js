@@ -108,7 +108,7 @@ export default class Leaderboard extends Component {
     let period = timePeriodRef.options[timePeriodRef.selectedIndex].value;
     let params = { category, orderBy, period };
     this.props.sendSearchQuery(params);
-    this.setState({ tableDataLoading: false });
+    this.setState({ tableDataLoading: true });
   };
 
   getCategoryView = () => {

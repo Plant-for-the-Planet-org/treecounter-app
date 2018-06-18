@@ -55,6 +55,8 @@ import leaderboards_organisations_green from './images/icons/leaderboards_organi
 import leaderboards_organisations_grey from './images/icons/leaderboards_organisations_grey.png';
 import leaderboards_tpo_green from './images/icons/leaderboards_tpo_green.png';
 import leaderboards_tpo_grey from './images/icons/leaderboards_tpo_grey.png';
+import leaderboards_company_grey from './images/icons/leaderboards_company_grey.png';
+import leaderboards_company_green from './images/icons/leaderboards_company_green.png';
 
 export {
   MapPinBlue,
@@ -113,5 +115,7 @@ export {
   leaderboards_organisations_green,
   leaderboards_organisations_grey,
   leaderboards_tpo_green,
-  leaderboards_tpo_grey
+  leaderboards_tpo_grey,
+  leaderboards_company_grey,
+  leaderboards_company_green
 };

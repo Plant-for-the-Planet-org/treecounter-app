@@ -5,48 +5,80 @@ import {
   LeaderBoardDataAction
 } from '../../actions/exploreAction';
 import PropTypes from 'prop-types';
+import { updateRoute } from '../../helpers/routerHelper';
+import i18n from '../../locales/i18n';
+
+const tabs = [
+  {
+    name: i18n.t('label.treecount_map'),
+    id: 'app_explore'
+  },
+  {
+    name: i18n.t('label.treecount_leaderboard'),
+    id: 'app_leaderboard'
+  }
+];
 
 class LeaderBoardContainer extends React.Component {
   constructor(props) {
     super(props);
     const { match } = props;
-    // if (this.matchpar.path.con)
     console.log('route_match', match);
     this.state = {
+      queryResult: null,
       exploreData: {},
-      match
+      sectionInfo: {
+        section: match.params.section,
+        subSection: match.params.subSection
+      },
+      tabInfo: {
+        tabs: tabs,
+        activeTab: match.path.includes('explore')
+          ? 'app_explore'
+          : 'app_leaderboard'
+      }
     };
   }
 
-  sendSearchQuery({
-    section = this.state.categoryInfo.categoryKeys[0],
-    subSection,
+  sendSearchQuery(
+    section = this.state.sectionInfo.section,
+    subSection = this.state.sectionInfo.subSection,
     orderBy = this.state.orderByOptionsInfo.orderByOptionsKeys[0],
     period = this.state.timePeriodsInfo.timePeriodsKeys[0]
-  }) {
-    return new Promise(function(resolve, reject) {
-      LeaderBoardDataAction({ section, orderBy, period, subSection }).then(
-        success => {
-          console.log('Response Success categories');
-          console.log(success.data);
-          if (
-            success.data &&
-            success.data instanceof Object &&
-            success.data.data
-          ) {
-            resolve(success.data.data);
-          }
-        },
-        error => {
-          console.log(error);
-          reject(error);
+  ) {
+    LeaderBoardDataAction({ section, orderBy, period, subSection }).then(
+      success => {
+        console.log('Response Success categories');
+        console.log(success.data);
+        if (
+          success.data &&
+          success.data instanceof Object &&
+          success.data.data
+        ) {
+          this.setState({ queryResult: success.data.data });
         }
-      );
-    });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
-  searchQuery = params => {
-    return this.sendSearchQuery(params);
+  handleSectionChange = section => {
+    updateRoute(this.state.tabInfo.activeTab, null, null, { section });
+    this.setState({ sectionInfo: { section }, queryResult: null });
+    this.sendSearchQuery(section, this.state.sectionInfo.subSection);
+  };
+
+  handleTabChange = tab => {
+    console.log('Tab change' + tab);
+    if (tab != this.state.tabInfo.activeTab) {
+      tab == 'app_leaderboard'
+        ? updateRoute(tab, null, null, {
+            section: this.state.categoryInfo.categoryKeys[0]
+          })
+        : updateRoute(tab);
+    }
   };
 
   componentWillMount() {
@@ -81,7 +113,7 @@ class LeaderBoardContainer extends React.Component {
           orderByOptionsInfo,
           timePeriodsInfo
         });
-        // this.sendSearchQuery();
+        this.sendSearchQuery();
       },
       error => console.log(error)
     );
@@ -91,11 +123,14 @@ class LeaderBoardContainer extends React.Component {
     return (
       <Leaderboard
         ref={'leaderBoard'}
-        match={this.props.match}
         categoryInfo={this.state.categoryInfo}
         orderByOptionsInfo={this.state.orderByOptionsInfo}
         timePeriodsInfo={this.state.timePeriodsInfo}
-        sendSearchQuery={this.searchQuery}
+        sectionInfo={this.state.sectionInfo}
+        tabInfo={this.state.tabInfo}
+        handleSectionChange={this.handleSectionChange}
+        handleTabChange={this.handleTabChange}
+        queryResult={this.state.queryResult}
       />
     );
   }

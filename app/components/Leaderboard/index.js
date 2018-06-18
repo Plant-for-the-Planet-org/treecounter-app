@@ -7,10 +7,14 @@ import i18n from '../../locales/i18n';
 import {
   leaderboards_countries_grey,
   leaderboards_countries_green,
-  education,
-  company,
-  tree_outline,
-  organization
+  leaderboards_education_green,
+  leaderboards_education_grey,
+  leaderboards_indiv_green,
+  leaderboards_indiv_grey,
+  leaderboards_organisations_green,
+  leaderboards_organisations_grey,
+  leaderboards_tpo_green,
+  leaderboards_tpo_grey
 } from '../../assets';
 
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
@@ -32,11 +36,23 @@ const categoryIcons = {
     normal: leaderboards_countries_grey,
     selected: leaderboards_countries_green
   },
-  tpo: { normal: tree_outline, selected: tree_outline },
-  organization: { normal: organization, selected: organization },
-  education: { normal: education, selected: education },
-  company: { normal: company, selected: company },
-  individual: { normal: company, selected: company }
+  tpo: { normal: leaderboards_tpo_grey, selected: leaderboards_tpo_green },
+  organization: {
+    normal: leaderboards_organisations_grey,
+    selected: leaderboards_organisations_green
+  },
+  education: {
+    normal: leaderboards_education_grey,
+    selected: leaderboards_education_green
+  },
+  company: {
+    normal: leaderboards_indiv_grey,
+    selected: leaderboards_indiv_green
+  },
+  individual: {
+    normal: leaderboards_indiv_grey,
+    selected: leaderboards_indiv_green
+  }
 };
 
 export default class Leaderboard extends Component {
@@ -92,7 +108,7 @@ export default class Leaderboard extends Component {
     let period = timePeriodRef.options[timePeriodRef.selectedIndex].value;
     let params = { category, orderBy, period };
     this.props.sendSearchQuery(params);
-    this.setState({ tableDataLoading: true });
+    this.setState({ tableDataLoading: false });
   };
 
   getCategoryView = () => {

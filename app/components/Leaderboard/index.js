@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
+import MapTab from './MapTab';
 import Tabs from '../Common/Tabs';
 import {
   leaderboards_countries_grey,
@@ -207,7 +208,7 @@ export default class Leaderboard extends Component {
                 </div>
               </div>
             ) : (
-              <CardLayout>Leaderboard Selected</CardLayout>
+              <MapTab mapInfo={this.props.mapInfo} />
             )}
           </Tabs>
         </CardLayout>
@@ -224,5 +225,6 @@ Leaderboard.propTypes = {
   tabInfo: PropTypes.object,
   handleSectionChange: propTypes.func,
   handleTabChange: PropTypes.func,
-  queryResult: PropTypes.array
+  queryResult: PropTypes.array,
+  mapInfo: PropTypes.object
 };

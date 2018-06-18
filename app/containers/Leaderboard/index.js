@@ -36,7 +36,8 @@ class LeaderBoardContainer extends React.Component {
         activeTab: match.path.includes('explore')
           ? 'app_explore'
           : 'app_leaderboard'
-      }
+      },
+      mapInfo: {}
     };
   }
 
@@ -84,34 +85,40 @@ class LeaderBoardContainer extends React.Component {
   componentWillMount() {
     ExploreDataAction().then(
       success => {
-        console.log('Response Success');
-        console.log(success.data);
-        let categoryInfo = {};
-        let orderByOptionsInfo = {};
-        let timePeriodsInfo = {};
-        let exploreData = success.data;
+        const categoryInfo = {};
+        const orderByOptionsInfo = {};
+        const timePeriodsInfo = {};
+        const exploreData = success.data;
+        const mapInfo = {};
+        if (exploreData) {
+          if (exploreData.sections) {
+            categoryInfo.categories = exploreData.sections;
+            categoryInfo.categoryKeys = Object.keys(categoryInfo.categories);
+          }
+          if (exploreData.orderByOptions) {
+            orderByOptionsInfo.orderByOptions = exploreData.orderByOptions;
+            orderByOptionsInfo.orderByOptionsKeys = Object.keys(
+              orderByOptionsInfo.orderByOptions
+            );
+          }
+          if (exploreData.timePeriods) {
+            timePeriodsInfo.timePeriods = exploreData.timePeriods;
+            timePeriodsInfo.timePeriodsKeys = Object.keys(
+              timePeriodsInfo.timePeriods
+            );
+          }
+          if (exploreData.mapLayers) {
+            mapInfo.mapLayers = exploreData.mapLayers;
+            mapInfo.mapLayersKeys = Object.keys(mapInfo.mapLayers);
+          }
+        }
 
-        if (exploreData && exploreData.sections) {
-          categoryInfo.categories = exploreData.sections;
-          categoryInfo.categoryKeys = Object.keys(categoryInfo.categories);
-        }
-        if (exploreData && exploreData.orderByOptions) {
-          orderByOptionsInfo.orderByOptions = exploreData.orderByOptions;
-          orderByOptionsInfo.orderByOptionsKeys = Object.keys(
-            orderByOptionsInfo.orderByOptions
-          );
-        }
-        if (exploreData && exploreData.timePeriods) {
-          timePeriodsInfo.timePeriods = exploreData.timePeriods;
-          timePeriodsInfo.timePeriodsKeys = Object.keys(
-            timePeriodsInfo.timePeriods
-          );
-        }
         this.setState({
           exploreData,
           categoryInfo,
           orderByOptionsInfo,
-          timePeriodsInfo
+          timePeriodsInfo,
+          mapInfo
         });
         this.sendSearchQuery();
       },
@@ -131,6 +138,7 @@ class LeaderBoardContainer extends React.Component {
         handleSectionChange={this.handleSectionChange}
         handleTabChange={this.handleTabChange}
         queryResult={this.state.queryResult}
+        mapInfo={this.state.mapInfo}
       />
     );
   }

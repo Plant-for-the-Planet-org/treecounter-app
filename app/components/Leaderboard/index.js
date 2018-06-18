@@ -105,12 +105,13 @@ export default class Leaderboard extends Component {
 
   getTableView = () => {
     let listItemsUI = <LoadingIndicator />;
+    const { categoryInfo, sectionInfo } = this.props;
     if (this.props.queryResult)
       listItemsUI = (
         <table className="projects-list">
           <thead>
             <tr>
-              <th>Country</th>
+              <th>{categoryInfo.categoryHeader[sectionInfo.section]}</th>
               <th>Planted</th>
               <th>Target</th>
             </tr>

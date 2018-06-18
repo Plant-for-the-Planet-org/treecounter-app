@@ -94,6 +94,7 @@ class LeaderBoardContainer extends React.Component {
           if (exploreData.sections) {
             categoryInfo.categories = exploreData.sections;
             categoryInfo.categoryKeys = Object.keys(categoryInfo.categories);
+            categoryInfo.categoryHeader = exploreData.sectionHeaders;
           }
           if (exploreData.orderByOptions) {
             orderByOptionsInfo.orderByOptions = exploreData.orderByOptions;

@@ -258,7 +258,9 @@ export default class GiftTrees extends Component {
 
       return (
         <div className={displayNone}>
-          <PrimaryButton onClick={validated}>Next</PrimaryButton>
+          <PrimaryButton onClick={validated}>
+            {i18n.t('label.next')}
+          </PrimaryButton>
         </div>
       );
     };

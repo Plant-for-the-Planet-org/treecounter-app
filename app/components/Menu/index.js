@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Images
 import * as images from '../../assets';
+import i18n from '../../locales/i18n';
 
 export default class Menu extends Component {
   sideNavImage() {
@@ -44,7 +45,9 @@ export default class Menu extends Component {
                     </li>
                   ) : (
                     <li key={'' + element.sequence + menuItem.sequence}>
-                      <i className="material-icons">folder_open</i>
+                      <i className="material-icons">
+                        {i18n.t('label.open_folder')}
+                      </i>
                       <a>{menuItem.caption}</a>
                     </li>
                   )

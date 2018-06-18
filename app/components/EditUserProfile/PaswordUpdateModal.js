@@ -3,21 +3,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { check_green } from '../../assets';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import i18n from '../../locales/i18n';
 
 const PaswordUpdatedDialog = ({ isOpen, onRequestClose }) => (
   <ModalDialog isOpen={isOpen} onRequestClose={onRequestClose}>
     <div>
       <img className="success-image" src={check_green} />
-      <div className="message">
-        {' '}
-        Your password has been successfully changed
-      </div>
+      <div className="message"> {i18n.t('label.password_changed')}</div>
       <PrimaryButton
         onClick={() => {
           onRequestClose && onRequestClose();
         }}
       >
-        Return to My profile
+        {i18n.t('label.return_to_profile')}
       </PrimaryButton>
     </div>
   </ModalDialog>

@@ -553,14 +553,14 @@
     },
     "public_exploreQuery_get": {
       "tokens": [
+        ["variable", "/", "[^/]++", "subSection"],
+        ["variable", "/", "[^/]++", "section"],
         ["text", "/exploreQuery"],
         ["variable", "/", "[^/]++", "_locale"],
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": {
-        "_locale": null
-      },
+      "defaults": { "subSection": null, "_locale": null },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -682,9 +682,13 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
+<<<<<<< HEAD
       "defaults": {
         "_locale": null
       },
+=======
+      "defaults": { "_locale": null },
+>>>>>>> dev
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -698,9 +702,13 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
+<<<<<<< HEAD
       "defaults": {
         "_locale": null
       },
+=======
+      "defaults": { "_locale": null },
+>>>>>>> dev
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -1155,6 +1163,19 @@
       "methods": ["GET"],
       "schemes": []
     },
+    "app_leaderboard": {
+      "tokens": [
+        ["variable", "/", "[^/]++", "subSection"],
+        ["variable", "/", "[^/]++", "section"],
+        ["text", "/leaderboard"],
+        ["variable", "/", "(\\w{2})?", "_locale"]
+      ],
+      "defaults": { "subSection": null, "_locale": null },
+      "requirements": { "_locale": "(\\w{2})?" },
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
     "app_faq": {
       "tokens": [["text", "/faq"], ["variable", "/", "(\\w{2})?", "_locale"]],
       "defaults": {
@@ -1463,6 +1484,17 @@
       "requirements": {
         "_locale": "(\\w{2})?"
       },
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "app_stripeConnect": {
+      "tokens": [
+        ["text", "/stripeConnect"],
+        ["variable", "/", "(\\w{2})?", "_locale"]
+      ],
+      "defaults": { "_locale": null },
+      "requirements": { "_locale": "(\\w{2})?" },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []

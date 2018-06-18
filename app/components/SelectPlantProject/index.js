@@ -12,20 +12,21 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
 import ModalDialog from '../Common/ModalDialog';
+import i18n from '../../locales/i18n';
 
 export default class SelectPlantProject extends Component {
   static data = {
     tabs: [
       {
-        name: 'Map',
+        name: i18n.t('label.map'),
         id: 'map'
       },
       {
-        name: 'Name',
+        name: i18n.t('label.name'),
         id: 'name'
       },
       {
-        name: 'Price',
+        name: i18n.t('label.price'),
         id: 'price'
       }
     ]
@@ -187,7 +188,7 @@ export default class SelectPlantProject extends Component {
 
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>Select a project</TextHeading>
+        <TextHeading>{i18n.t('label.select_project')}</TextHeading>
         <ModalDialog
           isOpen={this.state.isOpen}
           onRequestClose={() => this.onRequestClose()}
@@ -203,13 +204,13 @@ export default class SelectPlantProject extends Component {
             <PrimaryButton
               onClick={() => this.onSelectClicked(this.state.modalProject.id)}
             >
-              Select Project
+              {i18n.t('label.select_project')}
             </PrimaryButton>
           </div>
         </ModalDialog>
         <CardLayout className="tpo-footer-card-layout">
           <div className="select-project__container">
-            <ContentHeader caption={'Featured Projects'} />
+            <ContentHeader caption={i18n.t('label.featuredProjects')} />
             <Slider {...settings}>
               {featuredProjects.length !== 0
                 ? featuredProjects.map(project => (
@@ -225,7 +226,7 @@ export default class SelectPlantProject extends Component {
                           this.onSelectClickedFeaturedProjects(project.id)
                         }
                       >
-                        Select Project
+                        {i18n.t('label.select_project')}
                       </PrimaryButton>
                     </div>
                   ))
@@ -251,21 +252,23 @@ export default class SelectPlantProject extends Component {
                     />
                     <span className="pftp-textfield__inputgroup--highlight" />
                     <span className="pftp-textfield__inputgroup--bar" />
-                    <label>Search</label>
+                    <label>{i18n.t('label.search')}</label>
                   </div>
                   <span className="search-bar__button">
-                    <i className="material-icons header-icons">search</i>
+                    <i className="material-icons header-icons">
+                      {i18n.t('label.search')}
+                    </i>
                   </span>
                 </div>
                 <table className="projects-list">
                   <thead>
                     <tr>
-                      <th>Project</th>
-                      <th>Organisation</th>
+                      <th>{i18n.t('label.project')}</th>
+                      <th>{i18n.t('label.organisation')}</th>
                       <th>
-                        <span>Planted Trees</span>
+                        <span>{i18n.t('label.plantedTrees')}</span>
                       </th>
-                      <th>Cost Per Tree</th>
+                      <th>{i18n.t('label.Cost')}</th>
                       <th />
                     </tr>
                   </thead>
@@ -325,7 +328,7 @@ export default class SelectPlantProject extends Component {
                               <PrimaryButton
                                 onClick={() => this.openModal(project.id)}
                               >
-                                See more
+                                {i18n.t('label.see_more')}
                               </PrimaryButton>
                             </td>
                           </tr>

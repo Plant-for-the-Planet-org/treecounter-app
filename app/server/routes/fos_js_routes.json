@@ -560,7 +560,10 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "subSection": null, "_locale": null },
+      "defaults": {
+        "subSection": null,
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -682,13 +685,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-<<<<<<< HEAD
       "defaults": {
         "_locale": null
       },
-=======
-      "defaults": { "_locale": null },
->>>>>>> dev
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -702,13 +701,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-<<<<<<< HEAD
       "defaults": {
         "_locale": null
       },
-=======
-      "defaults": { "_locale": null },
->>>>>>> dev
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -1170,8 +1165,13 @@
         ["text", "/leaderboard"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "subSection": null, "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "subSection": null,
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1484,17 +1484,6 @@
       "requirements": {
         "_locale": "(\\w{2})?"
       },
-      "hosttokens": [],
-      "methods": ["GET"],
-      "schemes": []
-    },
-    "app_stripeConnect": {
-      "tokens": [
-        ["text", "/stripeConnect"],
-        ["variable", "/", "(\\w{2})?", "_locale"]
-      ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []

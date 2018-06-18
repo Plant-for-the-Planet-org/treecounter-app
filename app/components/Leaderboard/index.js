@@ -16,6 +16,8 @@ import {
   leaderboards_tpo_green,
   leaderboards_tpo_grey
 } from '../../assets';
+import { Link } from 'react-router-dom';
+import { updateRoute } from '../../helpers/routerHelper';
 
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 
@@ -23,11 +25,11 @@ const data = {
   tabs: [
     {
       name: i18n.t('label.treecount_map'),
-      id: 'direct'
+      id: 'app_explore'
     },
     {
       name: i18n.t('label.treecount_leaderboard'),
-      id: 'invitation'
+      id: 'app_leaderboard'
     }
   ]
 };
@@ -59,56 +61,73 @@ export default class Leaderboard extends Component {
   constructor(props) {
     super(props);
     this.handleTabChange = this.handleTabChange.bind(this);
+    const activeTab = props.match.path.includes('explore')
+      ? 'app_explore'
+      : 'app_leaderboard';
     this.state = {
-      modeMap: '',
-      selectedCategory: '',
-      tableDataLoading: true
+      selectedSection: props.match.params.section,
+      selectedSubSection: props.match.params.subSection,
+      queryResult: null,
+      activeTab
     };
     console.log('constructor leaderBoard');
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('props_recievd', nextProps);
-    let updatedState = {};
+  queryTableData(section, subSection) {
+    if (this.state.activeTab == 'app_leaderboard') {
+      this.props.sendSearchQuery({ section, subSection }).then(queryResult => {
+        if (queryResult instanceof Array) {
+          this.setState({ queryResult });
+        }
+      });
+    }
+  }
 
-    if (!this.state.selectedCategory) {
-      let categoryInfo = nextProps.categoryInfo;
-      let selectedCategory =
-        categoryInfo &&
-        categoryInfo.categoryKeys &&
-        categoryInfo.categoryKeys[0];
-      updatedState.selectedCategory = selectedCategory;
+  componentWillReceiveProps(nextProps) {
+    const activeTab = nextProps.match.path.includes('explore')
+      ? 'app_explore'
+      : 'app_leaderboard';
+    this.setState({
+      selectedSection: nextProps.match.params.section,
+      selectedSubSection: nextProps.match.params.subSection,
+      tableDataLoading: true,
+      activeTab,
+      queryResult: null
+    });
+    console.log('props_recievd', nextProps);
+    if (nextProps.categoryInfo) {
+      this.queryTableData(
+        nextProps.match.params.section,
+        nextProps.match.params.subSection
+      );
     }
-    if (nextProps.queryResult) {
-      updatedState.tableDataLoading = false;
-    }
-    this.setState(updatedState);
   }
 
   handleTabChange(tab) {
     console.log('Tab change' + tab);
-    this.setState({
-      modeMap: tab
-    });
+    if (tab != this.state.activeTab) {
+      tab == 'app_leaderboard'
+        ? updateRoute(tab, null, null, {
+            section: this.props.categoryInfo.categoryKeys[0]
+          })
+        : updateRoute(tab);
+    }
   }
 
   handleSlectionChange = () => {
-    this.handleCategoryChange(this.state.selectedCategory);
+    this.handleCategoryChange(this.state.selectedSection);
   };
 
-  handleCategoryChange = category => {
-    console.log('clicked' + category);
-    this.setState({
-      selectedCategory: category
-    });
-    let orderByRef = this.refs.orderBy;
-    let orderBy = orderByRef.options[orderByRef.selectedIndex].value;
+  handleCategoryChange = section => {
+    console.log('clicked' + section);
+    // let orderByRef = this.refs.orderBy;
+    // let orderBy = orderByRef.options[orderByRef.selectedIndex].value;
 
-    let timePeriodRef = this.refs.timePeriod;
-    let period = timePeriodRef.options[timePeriodRef.selectedIndex].value;
-    let params = { category, orderBy, period };
-    this.props.sendSearchQuery(params);
-    this.setState({ tableDataLoading: false });
+    // let timePeriodRef = this.refs.timePeriod;
+    // let period = timePeriodRef.options[timePeriodRef.selectedIndex].value;
+    // let params = { category, orderBy, period };
+    // this.props.sendSearchQuery(params);
+    updateRoute(this.state.activeTab, null, null, { section });
   };
 
   getCategoryView = () => {
@@ -116,7 +135,7 @@ export default class Leaderboard extends Component {
     if (this.props.categoryInfo && this.props.categoryInfo.categoryKeys) {
       categoryUI = this.props.categoryInfo.categoryKeys.map(
         (category, index) => {
-          let isSelected = this.state.selectedCategory == category;
+          let isSelected = this.state.selectedSection == category;
           return (
             <React.Fragment key={index}>
               <div
@@ -147,7 +166,7 @@ export default class Leaderboard extends Component {
 
   getTableView = () => {
     let listItemsUI = <LoadingIndicator />;
-    if (!this.state.tableDataLoading)
+    if (this.state.queryResult)
       listItemsUI = (
         <table className="projects-list">
           <thead>
@@ -158,9 +177,14 @@ export default class Leaderboard extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.queryResult.map((d, index) => (
+            {this.state.queryResult.map((d, index) => (
               <tr key={'tr' + index}>
-                <td className="align-left">{index + 1 + ' ' + d.country}</td>
+                <td className="align-left">
+                  {index + 1 + ' '}
+                  <Link className="rightBtn" to={d.uri}>
+                    {d.caption}
+                  </Link>
+                </td>
                 <td className="align-left">{d.planted}</td>
                 <td className="align-right">{d.target}</td>
               </tr>
@@ -181,8 +205,12 @@ export default class Leaderboard extends Component {
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>{'Explore'}</TextHeading>
         <CardLayout className="leader-board__container">
-          <Tabs data={data.tabs} onTabChange={this.handleTabChange}>
-            {this.state.modeMap === data.tabs[1].id ? (
+          <Tabs
+            data={data.tabs}
+            activeTab={this.state.activeTab}
+            onTabChange={this.handleTabChange}
+          >
+            {this.state.activeTab === data.tabs[1].id ? (
               <div className="leader-board__sub-container">
                 <div className="leaderboard_images__container">
                   {this.getCategoryView()}
@@ -258,6 +286,6 @@ Leaderboard.propTypes = {
   categoryInfo: PropTypes.object,
   orderByOptionsInfo: PropTypes.object,
   timePeriodsInfo: PropTypes.object,
-  queryResult: PropTypes.array,
-  sendSearchQuery: PropTypes.func.isRequired
+  sendSearchQuery: PropTypes.func.isRequired,
+  match: PropTypes.object
 };

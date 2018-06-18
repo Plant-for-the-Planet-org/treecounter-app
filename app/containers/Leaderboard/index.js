@@ -4,47 +4,49 @@ import {
   ExploreDataAction,
   LeaderBoardDataAction
 } from '../../actions/exploreAction';
+import PropTypes from 'prop-types';
 
 class LeaderBoardContainer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const { match } = props;
+    // if (this.matchpar.path.con)
+    console.log('route_match', match);
     this.state = {
       exploreData: {},
-      queryResults: undefined
+      match
     };
   }
 
-  sendSearchQuery(params) {
-    if (!params) {
-      params = {
-        category: this.state.categoryInfo.categoryKeys[0],
-        orderBy: this.state.orderByOptionsInfo.orderByOptionsKeys[0],
-        period: this.state.timePeriodsInfo.timePeriodsKeys[0]
-      };
-    }
-
-    LeaderBoardDataAction(params).then(
-      success => {
-        console.log('Response Success categories');
-        console.log(success.data);
-        if (success.data && success.data instanceof Object) {
-          let listItems = [];
-          for (let key in success.data) {
-            if (success.data.hasOwnProperty(key)) {
-              listItems.push(success.data[key]);
-            }
+  sendSearchQuery({
+    section = this.state.categoryInfo.categoryKeys[0],
+    subSection,
+    orderBy = this.state.orderByOptionsInfo.orderByOptionsKeys[0],
+    period = this.state.timePeriodsInfo.timePeriodsKeys[0]
+  }) {
+    return new Promise(function(resolve, reject) {
+      LeaderBoardDataAction({ section, orderBy, period, subSection }).then(
+        success => {
+          console.log('Response Success categories');
+          console.log(success.data);
+          if (
+            success.data &&
+            success.data instanceof Object &&
+            success.data.data
+          ) {
+            resolve(success.data.data);
           }
-          this.setState({
-            queryResults: listItems
-          });
+        },
+        error => {
+          console.log(error);
+          reject(error);
         }
-      },
-      error => console.log(error)
-    );
+      );
+    });
   }
 
   searchQuery = params => {
-    this.sendSearchQuery(params);
+    return this.sendSearchQuery(params);
   };
 
   componentWillMount() {
@@ -57,8 +59,8 @@ class LeaderBoardContainer extends React.Component {
         let timePeriodsInfo = {};
         let exploreData = success.data;
 
-        if (exploreData && exploreData.categories) {
-          categoryInfo.categories = exploreData.categories;
+        if (exploreData && exploreData.sections) {
+          categoryInfo.categories = exploreData.sections;
           categoryInfo.categoryKeys = Object.keys(categoryInfo.categories);
         }
         if (exploreData && exploreData.orderByOptions) {
@@ -79,7 +81,7 @@ class LeaderBoardContainer extends React.Component {
           orderByOptionsInfo,
           timePeriodsInfo
         });
-        this.sendSearchQuery();
+        // this.sendSearchQuery();
       },
       error => console.log(error)
     );
@@ -89,13 +91,17 @@ class LeaderBoardContainer extends React.Component {
     return (
       <Leaderboard
         ref={'leaderBoard'}
+        match={this.props.match}
         categoryInfo={this.state.categoryInfo}
         orderByOptionsInfo={this.state.orderByOptionsInfo}
         timePeriodsInfo={this.state.timePeriodsInfo}
-        queryResult={this.state.queryResults}
         sendSearchQuery={this.searchQuery}
       />
     );
   }
 }
 export default LeaderBoardContainer;
+
+LeaderBoardContainer.propTypes = {
+  match: PropTypes.object
+};

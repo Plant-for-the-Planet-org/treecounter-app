@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import Menu from '../../components/Menu';
+import { currentUserProfileSelector } from '../../selectors/index';
 
 // Actions
 import { logoutUser } from '../../actions/authActions';
@@ -47,18 +48,22 @@ class SideMenuContainer extends Component {
   }
 
   render() {
+    let { pathname } = this.props.location;
+    let path = pathname.substr(pathname.lastIndexOf('/') + 1);
     return this.state.loading ? null : (
       <Menu
         isOpen={this.props.isOpen}
         menuData={this.state.schema}
         navigation={this.props.navigation}
+        path={path}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  isOpen: state.sideNav && state.sideNav.open
+  isOpen: state.sideNav && state.sideNav.open,
+  loggedIn: currentUserProfileSelector(state) !== null
 });
 
 const mapDispatchToProps = dispatch => {
@@ -71,5 +76,6 @@ SideMenuContainer.propTypes = {
   isOpen: PropTypes.bool,
   loggedIn: PropTypes.bool,
   logoutUser: PropTypes.func.isRequired,
-  navigation: PropTypes.any
+  navigation: PropTypes.any,
+  location: PropTypes.object
 };

@@ -42,6 +42,16 @@
     .leader-board__sub-container {
       width: 100%;
     }
+    .map-tab__container {
+      height: 602px;
+      width: 100%;
+      .map-tab-checkboxes-row {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 37px;
+      }
+    }
   }
   .leaderboard-list__table {
     width: 100%;

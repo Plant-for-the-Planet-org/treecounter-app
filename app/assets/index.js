@@ -47,6 +47,16 @@ import check_green from './images/icons/check_green.png';
 import attention from './images/icons/attention.png';
 import leaderboards_countries_green from './images/icons/leaderboards_countries_green.png';
 import leaderboards_countries_grey from './images/icons/leaderboards_countries_grey.png';
+import leaderboards_education_green from './images/icons/leaderboards_education_green.png';
+import leaderboards_education_grey from './images/icons/leaderboards_education_grey.png';
+import leaderboards_indiv_green from './images/icons/leaderboards_indiv_green.png';
+import leaderboards_indiv_grey from './images/icons/leaderboards_indiv_grey.png';
+import leaderboards_organisations_green from './images/icons/leaderboards_organisations_green.png';
+import leaderboards_organisations_grey from './images/icons/leaderboards_organisations_grey.png';
+import leaderboards_tpo_green from './images/icons/leaderboards_tpo_green.png';
+import leaderboards_tpo_grey from './images/icons/leaderboards_tpo_grey.png';
+import leaderboards_company_grey from './images/icons/leaderboards_company_grey.png';
+import leaderboards_company_green from './images/icons/leaderboards_company_green.png';
 
 export {
   MapPinBlue,
@@ -97,5 +107,15 @@ export {
   check_green,
   attention,
   leaderboards_countries_grey,
-  leaderboards_countries_green
+  leaderboards_countries_green,
+  leaderboards_education_green,
+  leaderboards_education_grey,
+  leaderboards_indiv_green,
+  leaderboards_indiv_grey,
+  leaderboards_organisations_green,
+  leaderboards_organisations_grey,
+  leaderboards_tpo_green,
+  leaderboards_tpo_grey,
+  leaderboards_company_grey,
+  leaderboards_company_green
 };

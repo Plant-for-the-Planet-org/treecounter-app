@@ -160,6 +160,20 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_explore')}
                 component={LeaderboardContainer}
               />
+              <Route
+                exact
+                path={getLocalRoute('app_leaderboard') + '/:section'}
+                component={LeaderboardContainer}
+              />
+              <Route
+                exact
+                path={
+                  getLocalRoute('app_leaderboard') +
+                  '/:section' +
+                  '/:subSection'
+                }
+                component={LeaderboardContainer}
+              />
               <PrivateRoute
                 path={getLocalRoute('app_target')}
                 component={TargetContainer}

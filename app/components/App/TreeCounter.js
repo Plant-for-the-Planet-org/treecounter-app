@@ -41,6 +41,7 @@ import ActivateAccountContainer from '../../containers/Authentication/ActivateAc
 import DonationTreesContainer from '../../containers/DonateTrees/index';
 
 import EditUserProfileContainer from '../../containers/EditUserProfile/index';
+import LeaderboardContainer from '../../containers/Leaderboard/index';
 // Class implementation
 class TreeCounter extends Component {
   constructor(props) {
@@ -114,7 +115,7 @@ class TreeCounter extends Component {
         <BrowserRouter history={history}>
           <div className="app-container">
             <HeaderContainer />
-            <SideMenuContainer loggedIn={isLoggedIn} />
+            <Route component={SideMenuContainer} />
             <div className="app-container__content">
               <PublicRoute exact path="/" component={Trillion} />
               <Route
@@ -154,6 +155,24 @@ class TreeCounter extends Component {
               <PublicRoute
                 path={getLocalRoute('app_passwordSent')}
                 component={EmailSentContainer}
+              />
+              <Route
+                path={getLocalRoute('app_explore')}
+                component={LeaderboardContainer}
+              />
+              <Route
+                exact
+                path={getLocalRoute('app_leaderboard') + '/:section'}
+                component={LeaderboardContainer}
+              />
+              <Route
+                exact
+                path={
+                  getLocalRoute('app_leaderboard') +
+                  '/:section' +
+                  '/:subSection'
+                }
+                component={LeaderboardContainer}
               />
               <PrivateRoute
                 path={getLocalRoute('app_target')}

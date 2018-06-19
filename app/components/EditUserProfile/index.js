@@ -79,7 +79,8 @@ export default class EditUserProfile extends React.Component {
       if (newPlantProjectImages && newPlantProjectImages.length) {
         uploadPlantProjectImages = newPlantProjectImages.map(
           newProjectImage => {
-            let returnImage = newProjectImage;
+            let { image: imageFile, description } = newProjectImage;
+            let returnImage = { imageFile, description };
             for (let i = 0; i < oldPlantProjectImages.length; i++) {
               let oldProjectImage = oldPlantProjectImages[i];
               if (oldProjectImage.image == newProjectImage.image) {

@@ -16,6 +16,30 @@
   margin-bottom: auto;
 }
 
+.pftp-text-danger {
+  @extend .pftp-text-basic;
+  margin-left: 8px;
+  color: #c50202;
+}
+
+.pftp-text-target {
+  @extend .pftp-text-basic;
+  margin-right: 70px;
+  color: #696868;
+}
+
+.pftp-text-planted {
+  @extend .pftp-text-basic;
+  margin-left: 65px;
+  color: #696868;
+}
+
+.pftp-text-index {
+  @extend .pftp-text-basic;
+  margin-left: 20px;
+  color: #696868;
+}
+
 .bold {
   font-weight: 600;
 }

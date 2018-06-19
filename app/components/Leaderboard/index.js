@@ -120,13 +120,17 @@ export default class Leaderboard extends Component {
             {this.props.queryResult.map((d, index) => (
               <tr key={'tr' + index}>
                 <td className="align-left">
-                  {index + 1 + ' '}
+                  <text className="pftp-text-index">{index + 1 + ' '}</text>
                   <Link className="rightBtn" to={d.uri}>
                     {d.caption}
                   </Link>
                 </td>
-                <td className="align-left">{d.planted}</td>
-                <td className="align-right">{d.target}</td>
+                <td className="align-left">
+                  <text className="pftp-text-planted">{d.planted}</text>
+                </td>
+                <td className="align-right">
+                  <text className="pftp-text-target">{d.target}</text>
+                </td>
               </tr>
             ))}
           </tbody>

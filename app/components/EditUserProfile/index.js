@@ -69,33 +69,27 @@ export default class EditUserProfile extends React.Component {
     }
   };
 
-  mergeProjectImages(newPlantProjectImages, oldPlantProjectImages) {
+  mergeProjectImages(newPlantProjectImages, oldPlantProjectImages = []) {
     if (!newPlantProjectImages) {
       return oldPlantProjectImages;
     }
     let uploadPlantProjectImages = [];
 
-    if (oldPlantProjectImages && oldPlantProjectImages.length) {
-      if (newPlantProjectImages && newPlantProjectImages.length) {
-        uploadPlantProjectImages = newPlantProjectImages.map(
-          newProjectImage => {
-            let { image: imageFile, description } = newProjectImage;
-            let returnImage = { imageFile, description };
-            for (let i = 0; i < oldPlantProjectImages.length; i++) {
-              let oldProjectImage = oldPlantProjectImages[i];
-              if (oldProjectImage.image == newProjectImage.image) {
-                returnImage = { ...newProjectImage, id: oldProjectImage.id };
-                break;
-              }
-            }
-            return returnImage;
+    if (newPlantProjectImages && newPlantProjectImages.length) {
+      uploadPlantProjectImages = newPlantProjectImages.map(newProjectImage => {
+        let { image: imageFile, description } = newProjectImage;
+        let returnImage = { imageFile, description };
+
+        for (let i = 0; i < oldPlantProjectImages.length; i++) {
+          let oldProjectImage = oldPlantProjectImages[i];
+          if (oldProjectImage.image == newProjectImage.image) {
+            returnImage = { ...newProjectImage, id: oldProjectImage.id };
+            break;
           }
-        );
-      }
-    }
-    //if we dont have any previous values just upload latest one
-    else {
-      uploadPlantProjectImages = newPlantProjectImages;
+        }
+
+        return returnImage;
+      });
     }
 
     return uploadPlantProjectImages;

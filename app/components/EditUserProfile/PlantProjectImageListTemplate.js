@@ -1,6 +1,6 @@
 import React from 'react';
 import i18n from '../../locales/i18n.js';
-import { attention } from '../../assets';
+import { close_green } from '../../assets';
 
 const PlantProjectImageListTemplate = function(title) {
   return function(locals) {
@@ -21,7 +21,7 @@ const PlantProjectImageListTemplate = function(title) {
                           onClick={button.click}
                           className="delete-image"
                         >
-                          <img src={attention} />
+                          <img src={close_green} />
                         </div>
                       );
                     }

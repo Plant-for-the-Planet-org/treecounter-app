@@ -13,7 +13,7 @@ class PledgeContainer extends Component {
     this.props.fetchPledgesAction();
   }
   render() {
-    return <Pledge />;
+    return <Pledge pledges={this.props.pledges} />;
   }
 }
 

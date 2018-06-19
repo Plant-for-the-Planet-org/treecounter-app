@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form';
+import PropTypes from 'prop-types';
+
 import CardLayout from '../Common/Card/CardLayout';
 import ContentHeader from '../Common/ContentHeader';
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -32,9 +34,16 @@ const allSchemaOptions = {
 
 export default class Pledge extends Component {
   render() {
-    return (
+    return this.props.pledges && this.props.pledges.total ? (
       <div className="sidenav-wrapper app-container__content--center">
-        <CardLayout>Hello</CardLayout>
+        <CardLayout className="total_trees">
+          <span className="total_number">
+            {parseInt(this.props.pledges.total).toLocaleString('en', {
+              useGrouping: true
+            })}
+          </span>
+          <span className="total_text">Total Trees</span>
+        </CardLayout>
         <CardLayout className="pledge-form">
           <ContentHeader caption={'Pledge Trees'} />
           <TCombForm
@@ -49,6 +58,10 @@ export default class Pledge extends Component {
           </TextSpan>
         </CardLayout>
       </div>
-    );
+    ) : null;
   }
 }
+
+Pledge.propTypes = {
+  pledges: PropTypes.object
+};

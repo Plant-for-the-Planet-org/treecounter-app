@@ -32,3 +32,18 @@
     text-align: left;
   }
 }
+
+.total_trees {
+  @extend .pftp-card-layout;
+  padding: 15px 30px;
+  color: #799a4c;
+
+  .total_number {
+    font-weight: 800;
+    letter-spacing: 2px;
+  }
+
+  .total_text {
+    color: #b7d37f;
+  }
+}

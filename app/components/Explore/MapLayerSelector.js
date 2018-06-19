@@ -15,17 +15,28 @@ const MapLayerSelector = ({ mapLayers, activeMapLayers, onStateUpdate }) => {
     <div>
       {Object.keys(mapLayers).map(layer => {
         return (
-          <div key={layer} className="explore-checkbox--option">
+          <div className="pftp-checkbox">
             <input
-              defaultChecked={activeMapLayers.includes(layer)}
+              className="pftp-checkbox__input"
               type="checkbox"
-              name="checkbox"
-              id={layer}
               value={layer}
+              defaultChecked={activeMapLayers.includes(layer)}
               onChange={evt => HandleInputChange(evt.target.value)}
             />
-            <label htmlFor={layer}>{mapLayers[layer]}</label>
+            <label className={'pftp-text-span'}>{mapLayers[layer]}</label>
           </div>
+
+          // <div key={layer} className="explore-checkbox--option">
+          //   <input
+          //     defaultChecked={activeMapLayers.includes(layer)}
+          //     type="checkbox"
+          //     name="checkbox"
+          //     id={layer}
+          //     value={layer}
+          //     onChange={evt => HandleInputChange(evt.target.value)}
+          //   />
+          //   <label htmlFor={layer}>{mapLayers[layer]}</label>
+          // </div>
         );
       })}
     </div>

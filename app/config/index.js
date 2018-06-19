@@ -10,8 +10,8 @@ export const initialProps = {
 
 export const context = {
   scheme: 'https', // API server protocol
-  host: 'treecounter.plant-for-the-planet.org', // API server domain
-  base: '/prod', // debug mode on/off, set to empty string to switch debug mode off
+  host: 'staging.trilliontreeecampaign.org', // API server domain
+  base: '/app_dev.php', // debug mode on/off, set to empty string to switch debug mode off
   debug: true, // local console debugging switch
   currency: 'USD'
 };

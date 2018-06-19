@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MapLayerSelector from '../Explore/MapLayerSelector';
+import ArcGISExploreMap from '../Map/ArcGISExploreMap';
 
 export default class MapTab extends React.Component {
   constructor(props) {
@@ -26,13 +27,15 @@ export default class MapTab extends React.Component {
     console.log('mapInfo ', mapInfo);
     return (
       <div className="map-tab__container">
-        <div className="map-tab-checkboxes-row">
-          <MapLayerSelector
-            mapLayers={this.state.mapLayers}
-            activeMapLayers={this.state.activeMapLayers}
-            onStateUpdate={this.onMapLayerSelectUpdate}
-          />
-        </div>
+        <MapLayerSelector
+          mapLayers={this.state.mapLayers}
+          activeMapLayers={this.state.activeMapLayers}
+          onStateUpdate={this.onMapLayerSelectUpdate}
+        />
+        <ArcGISExploreMap
+          webMapId={'d601683709dc415b99ddc1bc66a6d8eb'}
+          layers={this.state.activeMapLayers}
+        />
       </div>
     );
   }

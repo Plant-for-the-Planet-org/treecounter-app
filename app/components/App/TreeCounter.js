@@ -23,7 +23,7 @@ import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import FAQContainer from '../../containers/FAQ';
-import ExploreContainer from '../../containers/Explore';
+// import ExploreContainer from '../../containers/Explore';
 
 import Footer from '../Footer';
 
@@ -196,10 +196,10 @@ class TreeCounter extends Component {
                 component={EditUserProfileContainer}
               />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
-              <Route
+              {/* <Route
                 path={getLocalRoute('app_explore')}
                 component={ExploreContainer}
-              />
+              /> */}
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
               <Route
                 path={getLocalRoute('app_donateTrees')}

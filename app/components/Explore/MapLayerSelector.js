@@ -12,7 +12,7 @@ const MapLayerSelector = ({ mapLayers, activeMapLayers, onStateUpdate }) => {
   };
 
   return (
-    <div>
+    <div className="map-tab-checkboxes-row">
       {Object.keys(mapLayers).map(layer => {
         return (
           <div className="pftp-checkbox">

@@ -74,23 +74,16 @@ export default class EditUserProfile extends React.Component {
       return oldPlantProjectImages;
     }
     let uploadPlantProjectImages = [];
-
-    if (newPlantProjectImages && newPlantProjectImages.length) {
-      uploadPlantProjectImages = newPlantProjectImages.map(newProjectImage => {
+    uploadPlantProjectImages = newPlantProjectImages.map(newProjectImage => {
+      if (newProjectImage.image.includes('base64')) {
         let { image: imageFile, description } = newProjectImage;
-        let returnImage = { imageFile, description };
 
-        for (let i = 0; i < oldPlantProjectImages.length; i++) {
-          let oldProjectImage = oldPlantProjectImages[i];
-          if (oldProjectImage.image == newProjectImage.image) {
-            returnImage = { ...newProjectImage, id: oldProjectImage.id };
-            break;
-          }
-        }
-
-        return returnImage;
-      });
-    }
+        return newProjectImage.id
+          ? { imageFile, description, id: newProjectImage.id }
+          : { imageFile, description };
+      }
+      return newProjectImage;
+    });
 
     return uploadPlantProjectImages;
   }

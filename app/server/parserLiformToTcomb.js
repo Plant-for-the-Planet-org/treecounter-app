@@ -54,6 +54,9 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
               iconUrl: images[properties[propertyKey].icon]
             };
           }
+          if (properties[propertyKey].hasOwnProperty('hidden')) {
+            options.hidden = true;
+          }
           if (!properties[propertyKey].hasOwnProperty('enum')) {
             options.placeholder = properties[propertyKey].title;
             options.label = properties[propertyKey].title;

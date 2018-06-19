@@ -4877,6 +4877,13 @@ export const plantProject = {
               title: 'description',
               widget: 'textarea',
               propertyOrder: 1
+            },
+            id: {
+              type: 'integer',
+              title: 'id',
+              widget: 'textarea',
+              propertyOrder: 4,
+              hidden: true
             }
           },
           required: ['image']

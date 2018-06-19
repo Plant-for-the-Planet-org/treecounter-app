@@ -23,7 +23,7 @@ class RegistrationMap extends React.Component {
       .then(([FeatureLayer]) => {
         const layer = new FeatureLayer({
           portalItem: {
-            id: '926746d3169240528ad12e9590c5a0e4'
+            id: 'd601683709dc415b99ddc1bc66a6d8eb'
           }
         });
         return layer.load();

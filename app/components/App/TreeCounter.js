@@ -23,6 +23,7 @@ import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import FAQContainer from '../../containers/FAQ';
+import PledgeContainer from '../../containers/Pledge';
 
 import Footer from '../Footer';
 
@@ -197,10 +198,6 @@ class TreeCounter extends Component {
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
               <Route
-                path={getLocalRoute('app_donateTrees')}
-                component={DonationTreesContainer}
-              />
-              <Route
                 path={getLocalRoute('app_giftTrees')}
                 component={GiftTreesContainer}
               />
@@ -208,6 +205,11 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_selectProject')}
                 component={SelectPlantProjectContainer}
               />
+              <Route
+                path={getLocalRoute('app_donateTrees')}
+                component={DonationTreesContainer}
+              />
+              <Route path={'/pledge'} component={PledgeContainer} />
               <Route
                 path={getLocalRoute('app_treecounter') + '/:treecounterId'}
                 component={PublicTreecounterContainer}

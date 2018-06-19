@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import NumberToWords from 'number-to-words';
+// import NumberToWords from 'number-to-words';
 
 import PlantedDetails from './PlantedDetails';
 import TargetComment from './TargetComment';
@@ -17,13 +17,13 @@ class TreecounterGraphicsText extends Component {
     };
   }
 
-  getTwoWordString(sentence) {
-    return sentence
-      .split(' ')
-      .slice(0, 2)
-      .join(' ')
-      .replace(/,/g, '');
-  }
+  // getTwoWordString(sentence) {
+  //   return sentence
+  //     .split(' ')
+  //     .slice(0, 2)
+  //     .join(' ')
+  //     .replace(/,/g, '');
+  // }
 
   convertNumber(n, d) {
     let x = ('' + n).length;

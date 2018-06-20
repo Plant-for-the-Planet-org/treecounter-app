@@ -1,12 +1,10 @@
 import React from 'react';
+import { getImageUrl } from '../../actions/apiRouting';
 
 export function FilePickerTemplate(locals) {
-  let fileName;
   console.log('FilePickerTemplate', locals);
   function onChange($event) {
     let value;
-    fileName = $event.target.files[0].name;
-    locals.attrs.placeholder = fileName;
     let fileReader = new FileReader();
     fileReader.addEventListener('load', event => {
       value = event.target.result;
@@ -32,9 +30,17 @@ export function FilePickerTemplate(locals) {
       >
         Browse
       </button>
-      <span className="value-label">
-        {locals.value ? locals.value : 'Select a file from computer'}
-      </span>
+      {!locals.value ? (
+        <span className="value-label">{'Select a file from computer'}</span>
+      ) : (
+        <img
+          src={
+            !locals.value.includes('base64')
+              ? getImageUrl('project', 'small', locals.value)
+              : locals.value
+          }
+        />
+      )}
     </div>
   );
 }

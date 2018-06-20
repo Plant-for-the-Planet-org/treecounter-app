@@ -4881,7 +4881,7 @@ export const plantProject = {
             id: {
               type: 'integer',
               title: 'id',
-              widget: 'textarea',
+              widget: 'hidden',
               propertyOrder: 4,
               hidden: true
             }

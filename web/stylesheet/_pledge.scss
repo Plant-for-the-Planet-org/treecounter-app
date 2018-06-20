@@ -47,3 +47,39 @@
     color: #b7d37f;
   }
 }
+
+.recent-pledges {
+  @extend .pftp-card-layout;
+  .recent-pledges-table {
+    border-radius: 6px;
+    border-spacing: 0;
+    border: solid 2px #efefef;
+    padding: 10px;
+    color: #686060;
+    margin: 0 -30px;
+    width: 350px;
+
+    .row-list-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px;
+    }
+  }
+  .pledges-header {
+    border-bottom: solid 2px #efefef;
+  }
+
+  .pledges-list {
+    overflow: auto;
+    height: 200px;
+    flex-direction: column;
+  }
+
+  .pledges-list::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.row {
+  display: flex;
+}

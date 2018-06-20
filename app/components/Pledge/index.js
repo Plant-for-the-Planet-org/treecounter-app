@@ -44,6 +44,40 @@ export default class Pledge extends Component {
           </span>
           <span className="total_text">Total Trees</span>
         </CardLayout>
+        <div className="row">
+          <CardLayout className="recent-pledges">
+            <div className="recent-pledges-table">
+              <div className="pledges-header row-list-item">
+                <span>Name</span>
+                <span>Trees</span>
+              </div>
+              <div className="pledges-list">
+                {this.props.pledges.latest.map(pledge => (
+                  <div className="row-list-item" key={pledge.id}>
+                    <span>{pledge.firstname + ' ' + pledge.lastname}</span>
+                    <span>{pledge.treeCount}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </CardLayout>
+          <CardLayout className="recent-pledges">
+            <div className="recent-pledges-table">
+              <div className="pledges-header row-list-item">
+                <span>Name</span>
+                <span>Trees</span>
+              </div>
+              <div className="pledges-list">
+                {this.props.pledges.highest.map(pledge => (
+                  <div className="row-list-item" key={pledge.id}>
+                    <span>{pledge.firstname + ' ' + pledge.lastname}</span>
+                    <span>{pledge.treeCount}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </CardLayout>
+        </div>
         <CardLayout className="pledge-form">
           <ContentHeader caption={'Pledge Trees'} />
           <TCombForm

@@ -6,6 +6,7 @@ import PlantProjectSpecs from './PlantProjectSpecs';
 import SeeMoreToggle from '../Common/SeeMoreToggle';
 import PlantProjectDetails from './PlantProjectDetails';
 import InlineLink from '../Common/InlineLink';
+import i18n from '../../locales/i18n';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -41,7 +42,7 @@ class PlantProjectFull extends React.Component {
       synopsis2,
       homepageUrl: homepageUrl,
       homepageCaption: homepageCaption,
-      video_url: videoUrl,
+      videoUrl: videoUrl,
       map_data: mapData
     } = this.props.plantProject;
     const projectImage = projectImages && projectImages.find(() => true);
@@ -82,7 +83,7 @@ class PlantProjectFull extends React.Component {
           />
           {this.props.selectAnotherProject ? (
             <InlineLink
-              caption={'Select Different Project'}
+              caption={i18n.t('label.different_project')}
               uri={'app_selectProject'}
             />
           ) : null}

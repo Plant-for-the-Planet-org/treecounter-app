@@ -8,7 +8,7 @@ import { NotificationManager } from '../notification/PopupNotificaiton/notificat
 import { userProfileSchema, plantProjectSchema } from '../schemas/index';
 
 import { normalize } from 'normalizr';
-import { mergeEntities } from '../reducers/entitiesReducer';
+import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
 
 const profileTypeToReq = {
   profile: 'profile_put',
@@ -24,15 +24,18 @@ export function addPlantProject(plantProject) {
         .then(res => {
           debug(res.status);
           debug(res);
-          if (res.data && res.data instanceof Object) {
-            dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
+          const plantProject = res.data;
+          if (plantProject && plantProject instanceof Object) {
+            dispatch(
+              mergeEntities(normalize(plantProject, plantProjectSchema))
+            );
           }
           NotificationManager.success(
             `New Project Added Successfully`,
             `Congrats`,
             5000
           );
-          resolve(res.data);
+          resolve(plantProject);
         })
         .catch(err => {
           debug(err);
@@ -42,24 +45,22 @@ export function addPlantProject(plantProject) {
   };
 }
 
-export function deleteTpoProject(plantId) {
-  return () => {
+export function deletePlantProject(plantProjectId) {
+  return dispatch => {
     return new Promise(function(resolve) {
       deleteAuthenticatedRequest('plantProject_delete', {
-        plantProject: plantId
+        plantProject: plantProjectId
       })
         .then(res => {
-          debug(res.status);
-          debug(res);
-          // if (res.data && res.data instanceof Object) {
-          //   dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
-          // }
+          const userProfile = res.data;
+          dispatch(deleteEntity({ plantProject: [plantProjectId] }));
+          dispatch(mergeEntities(normalize(userProfile, userProfileSchema)));
           NotificationManager.success(
             `plant Project Updated Successful`,
             `Congrats`,
             5000
           );
-          resolve(res.data);
+          resolve(userProfile);
         })
         .catch(err => {
           debug(err);
@@ -68,7 +69,8 @@ export function deleteTpoProject(plantId) {
     });
   };
 }
-export function updateTpoProject(plantProject) {
+
+export function updatePlantProject(plantProject) {
   return dispatch => {
     return new Promise(function(resolve) {
       let projectId = plantProject.id;
@@ -79,11 +81,12 @@ export function updateTpoProject(plantProject) {
         .then(res => {
           debug(res.status);
           debug(res);
-          let updatedProject = res.data;
-          if (updatedProject && updatedProject instanceof Object) {
+          const { plantProject, plantProjectImage: deleteIds } = res.data;
+          if (plantProject && plantProject instanceof Object) {
             dispatch(
-              mergeEntities(normalize(updatedProject, plantProjectSchema))
+              mergeEntities(normalize(plantProject, plantProjectSchema))
             );
+            dispatch(deleteEntity({ plantProjectImage: deleteIds }));
           }
           NotificationManager.success(
             `plant Project Updated Successful`,
@@ -103,6 +106,7 @@ export function updateTpoProject(plantProject) {
     });
   };
 }
+
 export function updateUserProfile(data, profileType) {
   return dispatch => {
     return new Promise(function(resolve) {

@@ -54,7 +54,6 @@
 
             a {
               padding-left: 3px;
-              color: rgba(0, 0, 0, 0.54);
               font-size: 17px;
               text-decoration: none;
 
@@ -64,6 +63,18 @@
               }
             }
           }
+        }
+      }
+
+      .menu_item_selected {
+        a {
+          color: red;
+        }
+      }
+
+      .menu_item_unselected {
+        a {
+          color: rgba(0, 0, 0, 0.54);
         }
       }
       .app-container__content {

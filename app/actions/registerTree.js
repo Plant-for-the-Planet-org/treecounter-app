@@ -4,7 +4,7 @@ import { postAuthenticatedRequest } from '../utils/api';
 
 import { history } from '../components/Common/BrowserRouter';
 import { mergeEntities } from '../reducers/entitiesReducer';
-import { treecounterSchema } from '../schemas/index';
+import { contributionSchema, treecounterSchema } from '../schemas/index';
 import { getLocalRoute } from './apiRouting';
 import { debug } from '../debug/index';
 
@@ -15,10 +15,12 @@ export function registerTree(plantContribution, treecounterId, mode) {
       mode: mode
     })
       .then(res => {
-        debug(res, res.response);
-        const { data: treecounter, statusText, status } = res;
+        const { statusText, status } = res;
+        const { contribution, treecounter } = res.data;
+
         NotificationManager.success(statusText, status, 5000);
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
+        dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         history.push(getLocalRoute('app_userHome'));
       })
       .catch(error => {

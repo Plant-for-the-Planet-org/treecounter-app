@@ -21,6 +21,7 @@ export const getPaymentGateways = state => state.entities.paymentGateway;
 export const getTreecounters = state => state.entities.treecounter;
 
 export const mergeEntities = createAction('ENTITIES_MERGE');
+export const deleteEntity = createAction('ENTITY_DELETE');
 
 export default handleActions(
   {
@@ -29,6 +30,19 @@ export default handleActions(
       if (action.payload && action.payload.entities) {
         return merge({}, state, action.payload.entities);
       }
+
+      return state;
+    },
+    ENTITY_DELETE: (state, action) => {
+      debug('Deleting entity');
+      state = { ...state };
+
+      Object.keys(action.payload).forEach(entity => {
+        let entityIds = action.payload[entity].map(String);
+        state[entity] = Object.keys(state[entity])
+          .filter(key => !entityIds.includes(key))
+          .reduce((p, id) => ({ ...p, [id]: state[entity][id] }), {});
+      });
 
       return state;
     }

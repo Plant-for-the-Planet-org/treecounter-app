@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Images
 import * as images from '../../assets';
+import i18n from '../../locales/i18n';
 
 export default class Menu extends Component {
   sideNavImage() {
@@ -15,6 +16,7 @@ export default class Menu extends Component {
   }
 
   render() {
+    let { path } = this.props;
     return (
       <div
         className={
@@ -31,7 +33,16 @@ export default class Menu extends Component {
               {element.menuItems.map(
                 menuItem =>
                   menuItem.enabled ? (
-                    <li key={'' + element.sequence + menuItem.sequence}>
+                    <li
+                      className={
+                        menuItem.uri.substr(
+                          menuItem.uri.lastIndexOf('/') + 1
+                        ) === path
+                          ? 'menu_item_selected'
+                          : 'menu_item_unselected'
+                      }
+                      key={'' + element.sequence + menuItem.sequence}
+                    >
                       <img
                         src={
                           menuItem.icon && menuItem.icon !== 'none'
@@ -44,7 +55,9 @@ export default class Menu extends Component {
                     </li>
                   ) : (
                     <li key={'' + element.sequence + menuItem.sequence}>
-                      <i className="material-icons">folder_open</i>
+                      <i className="material-icons">
+                        {i18n.t('label.open_folder')}
+                      </i>
                       <a>{menuItem.caption}</a>
                     </li>
                   )
@@ -59,5 +72,6 @@ export default class Menu extends Component {
 
 Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  menuData: PropTypes.array.isRequired
+  menuData: PropTypes.array.isRequired,
+  path: PropTypes.string
 };

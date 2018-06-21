@@ -129,7 +129,7 @@ class SearchProjects extends Component {
     return (
       <div className="xs-project-search">
         <div className="text-center">
-          <h3 className="cs-subHeading">Project Search</h3>
+          <h3 className="cs-subHeading">{i18n.t('label.project_search')}</h3>
         </div>
         <div className="row flex-row f-center">
           <input

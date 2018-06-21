@@ -4876,14 +4876,13 @@ export const plantProject = {
               type: 'string',
               title: 'description',
               widget: 'textarea',
-              propertyOrder: 1
+              propertyOrder: 2
             },
             id: {
-              type: 'integer',
+              type: 'number',
               title: 'id',
               widget: 'hidden',
-              propertyOrder: 4,
-              hidden: true
+              propertyOrder: 3
             }
           },
           required: ['image']
@@ -4897,7 +4896,7 @@ export const plantProject = {
         propertyOrder: 14
       }
     },
-    required: ['name', 'imageFile', 'treeCost', 'currency', 'country'],
+    required: ['name', 'treeCost', 'currency', 'country'],
     submit_url: '',
     submit_method: 'POST'
   }

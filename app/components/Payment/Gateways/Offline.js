@@ -10,14 +10,22 @@ class Offline extends React.Component {
     this.props.handleExpandedClicked('4');
   };
 
+  /**
+   * TODO: it must be validated that the user ticks the checkbox confirming the donation
+   *       the onSuccess callback must be called with the following object:
+   *       {userMessage, isConfirmed: <statusOfTheCheckbox>}
+   */
   render() {
-    let arrow = classnames({
+    const arrow = classnames({
       arrow: !this.props.expanded
     });
-    let displayNone = classnames({
+    const displayNone = classnames({
       'display-none': !this.props.expanded
     });
-    let { account } = this.props;
+
+    const { account, amount, currency } = this.props;
+    const userMessage = `I confirm that I will pay the amount of ${amount} ${currency} to the following account.`;
+
     return (
       <div className="payment-option">
         <div onClick={this.handleArrowClick} className="payment-option-header">
@@ -29,8 +37,7 @@ class Offline extends React.Component {
         <form className={displayNone}>
           <div className="confirm-checkbox">
             <input type="checkbox" />
-            I confirm that I will pay the amount of 20 Euro to the following
-            account.
+            {userMessage}
           </div>
           <div className="account-details">{account.full_text}</div>
           <PrimaryButton>Pay via Bank Transfer</PrimaryButton>
@@ -42,6 +49,8 @@ class Offline extends React.Component {
 
 Offline.propTypes = {
   account: PropTypes.object.isRequired,
+  amount: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
   handleExpandedClicked: PropTypes.func,
   onSuccess: PropTypes.func,

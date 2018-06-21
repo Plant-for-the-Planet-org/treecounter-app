@@ -38,32 +38,13 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)
       );
 
-      console.log('%%%%%%%%%%%%%%% stripeGateways', stripeGateways);
-      let stripeAccounts = stripeGateways.map(
-        gateway => nextProps.paymentMethods[gateway]
-      );
-      // get unique values
-      stripeAccounts = [...new Set(stripeAccounts)];
-
-      // there should only be maximum 1
-      if (stripeAccounts.length > 1) {
-        console.log(
-          'different stripe accounts for same country/currency are not allowed'
-        );
-        // throw some error here
-      }
-
       // do not load Stripe if not required
-      if (stripeAccounts.length > 0) {
-        const stripeAccountName = stripeAccounts[0];
-        const stripeAccount = nextProps.accounts[stripeAccountName];
+      if (stripeGateways.length > 0) {
         // componentDidMount only runs in a browser environment.
         // In addition to loading asynchronously, this code is safe to server-side render.
 
         // You can inject  script tag manually like this,
         // or you can use the 'async' attribute on the Stripe.js v3 <script> tag.
-        const publishableKey =
-          stripeAccount['authorization']['publishable_key'];
         const stripeJs = document.createElement('script');
         stripeJs.src = 'https://js.stripe.com/v3/';
         stripeJs.async = true;
@@ -72,7 +53,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           // Take it out of your production code!
           setTimeout(() => {
             this.setState({
-              stripe: window.Stripe(publishableKey)
+              stripe: window.Stripe(nextProps.stripePublishableKey)
             });
           }, 500);
         };
@@ -109,7 +90,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           </div>
           <div>TreeCount: {context.treeCount}</div>
           {Object.keys(paymentMethods).map(gateway => {
-            const [accountName, target] = paymentMethods[gateway].split(':');
+            const accountName = paymentMethods[gateway];
             if ('stripe_cc' === gateway) {
               return (
                 <div key={gateway}>
@@ -120,7 +101,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                     <StripeCC
                       onSuccess={this.decorateSuccess(gateway, accountName)}
                       account={accounts[accountName]}
-                      target={target}
                       expanded={this.props.expandedOption === '1'}
                       handleExpandedClicked={this.handleExpandedClicked}
                       {...gatewayProps}
@@ -139,7 +119,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                     <StripeSepa
                       onSuccess={this.decorateSuccess(gateway, accountName)}
                       account={accounts[accountName]}
-                      target={target}
                       expanded={this.props.expandedOption === '2'}
                       handleExpandedClicked={this.handleExpandedClicked}
                       {...gatewayProps}
@@ -160,7 +139,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                     amount={amount}
                     currency={currency}
                     account={accounts[accountName]}
-                    target={target}
                     expanded={this.props.expandedOption === '3'}
                     handleExpandedClicked={this.handleExpandedClicked}
                     {...gatewayProps}
@@ -177,6 +155,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                   <Offline
                     key={gateway}
                     onSuccess={this.decorateSuccess(gateway, accountName)}
+                    amount={amount}
+                    currency={currency}
                     account={accounts[accountName]}
                     expanded={this.props.expandedOption === '4'}
                     handleExpandedClicked={this.handleExpandedClicked}
@@ -195,6 +175,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
 PaymentSelector.propTypes = {
   accounts: PropTypes.object,
   paymentMethods: PropTypes.object,
+  stripePublishableKey: PropTypes.string,
   expandedOption: PropTypes.string,
   handleExpandedClicked: PropTypes.func,
   amount: PropTypes.number.isRequired,

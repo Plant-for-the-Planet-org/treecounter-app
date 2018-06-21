@@ -131,7 +131,6 @@ _StripeSepa.propTypes = {
   currency: PropTypes.string.isRequired,
   context: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,
-  target: PropTypes.string,
   onSuccess: PropTypes.func,
   expanded: PropTypes.bool,
   handleExpandedClicked: PropTypes.func,

@@ -127,7 +127,6 @@ Paypal.propTypes = {
   amount: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
   account: PropTypes.object.isRequired,
-  target: PropTypes.string,
   expanded: PropTypes.bool,
   handleExpandedClicked: PropTypes.func,
   isScriptLoaded: PropTypes.bool,

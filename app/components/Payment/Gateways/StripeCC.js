@@ -101,7 +101,6 @@ _StripeCC.propTypes = {
   fontSize: PropTypes.string,
   currency: PropTypes.string.isRequired,
   account: PropTypes.object.isRequired,
-  target: PropTypes.string,
   expanded: PropTypes.bool,
   handleExpandedClicked: PropTypes.func,
   onSuccess: PropTypes.func,

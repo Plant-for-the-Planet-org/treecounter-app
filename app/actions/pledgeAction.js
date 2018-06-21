@@ -1,4 +1,4 @@
-import { getRequest } from '../utils/api';
+import { getRequest, postRequest } from '../utils/api';
 import { fetchPledges, saveTimeoutID } from '../reducers/pledgeReducer';
 
 export function fetchPledgesAction() {
@@ -18,5 +18,13 @@ export function fetchPledgesAction() {
       10000
     );
     dispatch(saveTimeoutID(timeoutID));
+  };
+}
+
+export function postPledge(data, params) {
+  return dispatch => {
+    postRequest('eventPledge_post', data, params).then(res => {
+      console.log(dispatch, res);
+    });
   };
 }

@@ -35,6 +35,22 @@ const allSchemaOptions = {
 };
 
 export default class Pledge extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: {}
+    };
+  }
+
+  onFormSubmit() {
+    let value = this.refs.pledgeForm.getValue();
+    if (value) {
+      this.props.postPledge(value);
+    }
+  }
+  onFormChange(value) {
+    this.setState({ value }); // <- keep track of value changes
+  }
   render() {
     return this.props.pledges && this.props.pledges.total ? (
       <div className="sidenav-wrapper app-container__content--center">
@@ -94,8 +110,12 @@ export default class Pledge extends Component {
             ref="pledgeForm"
             type={pledgeFormSchema}
             options={allSchemaOptions}
+            value={this.state.value}
+            onChange={value => this.onFormChange(value)}
           />
-          <PrimaryButton>Pledge</PrimaryButton>
+          <PrimaryButton onClick={() => this.onFormSubmit()}>
+            Pledge
+          </PrimaryButton>
           <TextSpan>
             After pledging, you will receive an email that tells you how to
             donate the trees pledged. One tree costs € 1.
@@ -107,5 +127,6 @@ export default class Pledge extends Component {
 }
 
 Pledge.propTypes = {
-  pledges: PropTypes.object
+  pledges: PropTypes.object,
+  postPledge: PropTypes.func
 };

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { fetchPledgesAction } from '../../actions/pledgeAction';
+import { fetchPledgesAction, postPledge } from '../../actions/pledgeAction';
 import { pledgesSelector } from '../../selectors';
 
 import Pledge from '../../components/Pledge';
@@ -12,8 +12,17 @@ class PledgeContainer extends Component {
   componentDidMount() {
     this.props.fetchPledgesAction();
   }
+
+  postPledgeRequest(data) {
+    this.props.postPledge(data, { pledgeEventSlug: 'esri-user-conference' });
+  }
   render() {
-    return <Pledge pledges={this.props.pledges} />;
+    return (
+      <Pledge
+        pledges={this.props.pledges}
+        postPledge={data => this.postPledgeRequest(data)}
+      />
+    );
   }
 }
 
@@ -22,12 +31,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchPledgesAction }, dispatch);
+  return bindActionCreators({ fetchPledgesAction, postPledge }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PledgeContainer);
 
 PledgeContainer.propTypes = {
   pledges: PropTypes.object,
-  fetchPledgesAction: PropTypes.func
+  fetchPledgesAction: PropTypes.func,
+  postPledge: PropTypes.func
 };

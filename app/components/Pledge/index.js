@@ -7,6 +7,8 @@ import ContentHeader from '../Common/ContentHeader';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextSpan from '../Common/Text/TextBlock';
 
+import { pledge_highest, pledge_latest } from '../../assets';
+
 import {
   pledgeFormSchema,
   pledgeSchemaOptions
@@ -46,6 +48,10 @@ export default class Pledge extends Component {
         </CardLayout>
         <div className="row">
           <CardLayout className="recent-pledges">
+            <div className="before_table_header">
+              <img src={pledge_latest} />
+              <span>Most Recent Pledges</span>
+            </div>
             <div className="recent-pledges-table">
               <div className="pledges-header row-list-item">
                 <span>Name</span>
@@ -62,6 +68,10 @@ export default class Pledge extends Component {
             </div>
           </CardLayout>
           <CardLayout className="recent-pledges">
+            <div className="before_table_header">
+              <img src={pledge_highest} />
+              <span>Biggest Pledges</span>
+            </div>
             <div className="recent-pledges-table">
               <div className="pledges-header row-list-item">
                 <span>Name</span>

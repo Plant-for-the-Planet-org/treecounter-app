@@ -50,13 +50,13 @@
 
 .recent-pledges {
   @extend .pftp-card-layout;
+  padding: 20px;
   .recent-pledges-table {
     border-radius: 6px;
     border-spacing: 0;
     border: solid 2px #efefef;
     padding: 10px;
     color: #686060;
-    margin: 0 -30px;
     width: 350px;
 
     .row-list-item {
@@ -77,6 +77,18 @@
 
   .pledges-list::-webkit-scrollbar {
     display: none;
+  }
+
+  .before_table_header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    color: #b7d37f;
+    img {
+      height: 35px;
+      margin-right: 10px;
+    }
   }
 }
 

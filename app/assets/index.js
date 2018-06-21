@@ -18,6 +18,8 @@ import heart_outline_red from './images/icons/heart_outline_red.png';
 import rocket_outline_red from './images/icons/rocket_outline_red.png';
 import shovel_outline_red from './images/icons/shovel_outline_red.png';
 import target_outline_red from './images/icons/target_outline_red.png';
+import pledge_highest from './images/pledge_biggest.png';
+import pledge_latest from './images/pledge_recent.png';
 import pot from './images/pot.svg';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/tree.svg';
@@ -66,6 +68,8 @@ import leaderboards_company_grey from './images/icons/leaderboards_company_grey.
 import leaderboards_company_green from './images/icons/leaderboards_company_green.png';
 
 export {
+  pledge_highest,
+  pledge_latest,
   MapPinBlue,
   MapPinGreen,
   MapPinRed,

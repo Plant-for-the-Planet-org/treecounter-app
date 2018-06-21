@@ -1,11 +1,35 @@
 .search-bar {
   display: flex;
   align-items: center;
-  background-color: white;
+  position: relative;
 
-  .header-icons {
-    color: #cecece;
+  
+  .header-icons{
+    color:black;
     margin-right: 10px;
+    z-index: 1;
+    position: absolute;
+    
+  }
+
+  .header-icons:hover{
+    color: black;
+  }
+
+  input{
+    border: none;
+    margin: 0;
+    width: 0;
+    z-index: -1;
+   
+  }
+  input:focus,
+  input:active{
+    outline:none;
+    width: 300px;
+  }
+  input:hover{
+    width: 300px;
   }
 
   .react-autosuggest__container {
@@ -21,11 +45,70 @@
     }
   }
 
-  input {
-    border: none;
-    margin: 0;
-  }
-
   .search-bar__button {
   }
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .search-bar{
+    .header-icons{
+      color:black;
+      margin-right: 6px;
+      z-index: 1;
+      position: absolute;
+      
+    }
+    input:focus,
+    input:active{
+      outline:none;
+      width: 100px;
+    }
+    input:hover{
+      width: 100px;
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .search-bar{
+    .header-icons{
+      color:black;
+      margin-right: 10px;
+      z-index: 1;
+      position: absolute;
+      
+    }
+    input:focus,
+    input:active{
+      outline:none;
+      width: 200px;
+    }
+    input:hover{
+      width: 200px;
+    }
+  }
+}
+
+
+
+@media only screen and (min-width: 992px) {
+  .search-bar{
+    .header-icons{
+      color:black;
+      margin-right: 12px;
+      z-index: 1;
+      position: absolute;
+      
+    }
+    input:focus,
+    input:active{
+      outline:none;
+      width: 360px;
+    }
+    input:hover{
+      width: 360px;
+    }
+  }
+} 
+

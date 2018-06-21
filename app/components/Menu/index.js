@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-import { toggleSideNavAction } from '../../actions/setSideNavAction';
 import * as images from '../../assets';
 import i18n from '../../locales/i18n';
 
-class Menu extends Component {
+export default class Menu extends Component {
   sideNavImage() {
     return (
       <div className="app-container__sidenav--image">
@@ -77,12 +73,6 @@ class Menu extends Component {
     );
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ toggleSideNavAction }, dispatch);
-};
-
-export default connect(null, mapDispatchToProps)(Menu);
 
 Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,

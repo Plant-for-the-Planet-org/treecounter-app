@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-// import Popover from '../Common/Popover';
 import { updateRoute } from '../../helpers/routerHelper';
 import SearchAutosuggest from './SearchAutosuggest';
 import i18n from '../../locales/i18n.js';

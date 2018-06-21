@@ -22,11 +22,14 @@
   }
 
   input {
+    @extend .pftp-text-basic;
     border: none;
     margin: 0;
     width: 0;
     z-index: -1;
     opacity: 0;
+    color: $colorPrimaryDark;
+    padding-right: 35px;
   }
   input:focus {
     width: 300px;
@@ -41,8 +44,7 @@
 
     .react-autosuggest__suggestions-container {
       position: absolute;
-      margin-top: 1px;
-      width: calc(100% + 8px);
+      width: 100%;
       left: 0px;
       right: 0px;
       background-color: white;

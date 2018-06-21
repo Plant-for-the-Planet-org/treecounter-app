@@ -18,12 +18,10 @@ class SearchBar extends React.Component {
     return (
       <form>
         <div className="search-bar">
+          <SearchAutosuggest onSuggestionClicked={this.suggestionClicked} />
           <i className="material-icons header-icons">
             {i18n.t('label.search')}
           </i>
-          <span>
-            <SearchAutosuggest onSuggestionClicked={this.suggestionClicked} />
-          </span>
         </div>
       </form>
     );

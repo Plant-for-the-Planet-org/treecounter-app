@@ -1,35 +1,39 @@
+.search-bar:focus-within,
+.search-bar:active,
+.search-bar:hover {
+  input {
+    width: 300px;
+    opacity: 1;
+  }
+  .header-icons {
+    color: $colorPrimary;
+  }
+}
+
 .search-bar {
   display: flex;
   align-items: center;
   position: relative;
 
-  
-  .header-icons{
-    color:black;
-    margin-right: 10px;
+  .header-icons {
+    right: 10px;
     z-index: 1;
     position: absolute;
-    
   }
 
-  .header-icons:hover{
-    color: black;
-  }
-
-  input{
+  input {
     border: none;
     margin: 0;
     width: 0;
     z-index: -1;
-   
+    opacity: 0;
   }
-  input:focus,
-  input:active{
-    outline:none;
+  input:focus {
     width: 300px;
-  }
-  input:hover{
-    width: 300px;
+    opacity: 1;
+    .header-icons {
+      color: $colorPrimary;
+    }
   }
 
   .react-autosuggest__container {
@@ -38,7 +42,7 @@
     .react-autosuggest__suggestions-container {
       position: absolute;
       margin-top: 1px;
-      width: calc(100% + 34px);
+      width: calc(100% + 8px);
       left: 0px;
       right: 0px;
       background-color: white;
@@ -51,64 +55,34 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .search-bar{
-    .header-icons{
-      color:black;
-      margin-right: 6px;
-      z-index: 1;
-      position: absolute;
-      
-    }
-    input:focus,
-    input:active{
-      outline:none;
+  .search-bar:focus-within,
+  .search-bar:active,
+  .search-bar:hover {
+    input {
       width: 100px;
-    }
-    input:hover{
-      width: 100px;
+      opacity: 1;
     }
   }
 }
 
 @media only screen and (min-width: 600px) {
-  .search-bar{
-    .header-icons{
-      color:black;
-      margin-right: 10px;
-      z-index: 1;
-      position: absolute;
-      
-    }
-    input:focus,
-    input:active{
-      outline:none;
+  .search-bar:focus-within,
+  .search-bar:active,
+  .search-bar:hover {
+    input {
       width: 200px;
-    }
-    input:hover{
-      width: 200px;
+      opacity: 1;
     }
   }
 }
 
-
-
 @media only screen and (min-width: 992px) {
-  .search-bar{
-    .header-icons{
-      color:black;
-      margin-right: 12px;
-      z-index: 1;
-      position: absolute;
-      
-    }
-    input:focus,
-    input:active{
-      outline:none;
+  .search-bar:focus-within,
+  .search-bar:active,
+  .search-bar:hover {
+    input {
       width: 360px;
-    }
-    input:hover{
-      width: 360px;
+      opacity: 1;
     }
   }
-} 
-
+}

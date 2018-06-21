@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-// Images
 import * as images from '../../assets';
 import i18n from '../../locales/i18n';
 
@@ -17,6 +15,7 @@ export default class Menu extends Component {
 
   render() {
     let { path } = this.props;
+    console.log(this.props.isOpen);
     return (
       <div
         className={
@@ -51,7 +50,12 @@ export default class Menu extends Component {
                         }
                         className="menu-icon"
                       />
-                      <Link to={menuItem.uri}>{menuItem.caption}</Link>
+                      <Link
+                        to={menuItem.uri}
+                        onClick={this.props.toggleSideNavAction}
+                      >
+                        {menuItem.caption}
+                      </Link>
                     </li>
                   ) : (
                     <li key={'' + element.sequence + menuItem.sequence}>
@@ -73,5 +77,6 @@ export default class Menu extends Component {
 Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   menuData: PropTypes.array.isRequired,
-  path: PropTypes.string
+  path: PropTypes.string,
+  toggleSideNavAction: PropTypes.func.isRequired
 };

@@ -19,18 +19,18 @@ class Offline extends React.Component {
       checkboxState: event.target.checked
     });
   }
-  handleArrowClick = () => {
-    this.props.handleExpandedClicked('4');
-  };
-
-  handleClick() {
+  handleSubmit = ev => {
+    ev.preventDefault();
     if (this.state.checkboxState) {
       this.props.onSuccess({
         userMessage: 'Success',
         isConfirmed: this.state.checkboxState
       });
     }
-  }
+  };
+  handleArrowClick = () => {
+    this.props.handleExpandedClicked('4');
+  };
   render() {
     const arrow = classnames({
       arrow: !this.props.expanded
@@ -50,7 +50,7 @@ class Offline extends React.Component {
           </span>
           <img className={arrow} src={payment_arrow} />
         </div>
-        <form className={displayNone}>
+        <form onSubmit={ev => this.handleSubmit(ev)} className={displayNone}>
           <div className="confirm-checkbox">
             <input
               onChange={event => this.handleCheckbox(event)}
@@ -59,9 +59,7 @@ class Offline extends React.Component {
             {userMessage}
           </div>
           <div className="account-details">{account.full_text}</div>
-          <PrimaryButton onClick={() => this.handleClick()}>
-            Pay via Bank Transfer
-          </PrimaryButton>
+          <PrimaryButton>Pay via Bank Transfer</PrimaryButton>
         </form>
       </div>
     );

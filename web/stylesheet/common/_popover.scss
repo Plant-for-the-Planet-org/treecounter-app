@@ -33,6 +33,10 @@
     box-shadow: $boxShadow;
     outline: none;
     padding: 10px 20px;
+    @include for-phone-only {
+      max-height: 50%;
+      max-width: 70%;
+    }
   }
   .pftp-popover__arrow {
     position: fixed;
@@ -60,11 +64,3 @@
   border-radius: 20px;
 }
 
-@media only screen and (max-width: 600px) {
-  .pftp-popover {
-    .pftp-popover__container {
-      max-height: 50%;
-      max-width: 70%;
-    }
-  }
-}

@@ -6,15 +6,31 @@ import { payment_bank, payment_arrow } from '../../../assets';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 
 class Offline extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      checkboxState: false
+    };
+  }
+
+  handleCheckbox(event) {
+    this.setState({
+      checkboxState: event.target.checked
+    });
+  }
   handleArrowClick = () => {
     this.props.handleExpandedClicked('4');
   };
 
-  /**
-   * TODO: it must be validated that the user ticks the checkbox confirming the donation
-   *       the onSuccess callback must be called with the following object:
-   *       {userMessage, isConfirmed: <statusOfTheCheckbox>}
-   */
+  handleClick() {
+    if (this.state.checkboxState) {
+      this.props.onSuccess({
+        userMessage: 'Success',
+        isConfirmed: this.state.checkboxState
+      });
+    }
+  }
   render() {
     const arrow = classnames({
       arrow: !this.props.expanded
@@ -36,11 +52,16 @@ class Offline extends React.Component {
         </div>
         <form className={displayNone}>
           <div className="confirm-checkbox">
-            <input type="checkbox" />
+            <input
+              onChange={event => this.handleCheckbox(event)}
+              type="checkbox"
+            />
             {userMessage}
           </div>
           <div className="account-details">{account.full_text}</div>
-          <PrimaryButton>Pay via Bank Transfer</PrimaryButton>
+          <PrimaryButton onClick={() => this.handleClick()}>
+            Pay via Bank Transfer
+          </PrimaryButton>
         </form>
       </div>
     );

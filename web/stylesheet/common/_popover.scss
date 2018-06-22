@@ -59,3 +59,24 @@
   background-color: #cccccc;
   border-radius: 20px;
 }
+
+@media only screen and (max-width:600px){
+  .pftp-popover{
+    .pftp-popover__container {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      background-color: #fff;
+      max-height: 50%;
+      color: black;
+      overflow: auto;
+      right: -10000px;
+      border-radius: 10px;
+      max-width: 70%;
+      z-index: 999;
+      box-shadow: $boxShadow;
+      outline: none;
+      padding: 10px 20px;
+    }
+  }
+}

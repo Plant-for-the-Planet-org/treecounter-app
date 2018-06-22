@@ -28,6 +28,11 @@
   position: relative;
   margin: auto;
   margin-top: 55px;
+
+  @include for-phone-only {
+    flex-flow: row nowrap;
+    margin-left: 29px;
+  }
 }
 .tree-counter-name {
   @extend .pftp-text-normal;
@@ -39,8 +44,23 @@
   margin-top: 27px;
   overflow: hidden;
   white-space: nowrap;
+  @include for-phone-only {
+    white-space: initial;
+    text-align: left;
+    margin-top: 0;
+  }
 }
 
+.user-info {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  @include for-phone-only {
+    margin-left: 20px;
+    align-items: flex-start;
+    margin-right: 20px;
+  }
+}
 .tree-counter-row {
   margin-top: 10px;
   display: flex;

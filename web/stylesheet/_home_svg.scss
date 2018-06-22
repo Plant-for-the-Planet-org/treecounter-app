@@ -52,6 +52,9 @@
     @include for-phone-only {
       margin: 13px auto;
     }
+    @include for-xs-phone-only {
+      margin: 7px auto;
+    }
   }
 
   .fixed-planted-details {

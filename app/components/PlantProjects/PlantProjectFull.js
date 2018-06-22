@@ -42,7 +42,7 @@ class PlantProjectFull extends React.Component {
       synopsis2,
       homepageUrl: homepageUrl,
       homepageCaption: homepageCaption,
-      video_url: videoUrl,
+      videoUrl: videoUrl,
       map_data: mapData
     } = this.props.plantProject;
     const projectImage = projectImages && projectImages.find(() => true);

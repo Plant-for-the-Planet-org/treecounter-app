@@ -57,6 +57,7 @@ class SideMenuContainer extends Component {
         menuData={this.state.schema}
         navigation={this.props.navigation}
         path={path}
+        toggleSideNavAction={this.props.toggleSideNavAction}
       />
     );
   }

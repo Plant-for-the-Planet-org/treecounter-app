@@ -43,7 +43,9 @@ export default class Notification extends Component {
         ) : null}
       </div>
     ) : (
-      <ul style={widthStyle} />
+      <div className="popover__no_notification">
+        {i18n.t('label.no_notifications')}
+      </div>
     );
   }
 }
@@ -52,5 +54,3 @@ Notification.propTypes = {
   userFeeds: PropTypes.object,
   fetchMoreNotifications: PropTypes.func
 };
-
-const widthStyle = { width: '244px' };

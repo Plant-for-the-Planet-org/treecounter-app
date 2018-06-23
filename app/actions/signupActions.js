@@ -28,6 +28,6 @@ export function signUp(profileType, userData) {
         .catch(err => console.log(err));
     };
   } else {
-    window.alert('Password Invalid');
+    window.alert('Password do not match');
   }
 }

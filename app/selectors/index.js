@@ -9,9 +9,12 @@ import {
   getPaymentGateways,
   getTpos
 } from '../reducers/entitiesReducer';
+import { getSupportedTreecounter } from '../reducers/supportedTreecounterReducer';
 import { getSelectedPlantProjectId } from '../reducers/selectedPlantProjectIdReducer';
 import { getCurrencies } from '../reducers/currenciesReducer';
 
+export const supportedTreecounterSelector = state =>
+  getSupportedTreecounter(state);
 export const currentUserProfileIdSelector = state =>
   getCurrentUserProfileId(state);
 export const selectedPlantProjectIdSelector = state =>

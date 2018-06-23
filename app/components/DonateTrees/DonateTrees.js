@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import Slider from 'react-slick';
-import classNames from 'classnames';
 
 import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
-import SearchAutosuggest from '../Header/SearchAutosuggest';
 import ContentHeader from '../Common/ContentHeader';
+import TextBlock from '../Common/Text/TextBlock';
+import InlineLink from '../Common/InlineLink';
 import CarouselNavigation from '../Common/CarouselNavigation';
-import { arrow_left_green } from '../../assets';
+import { arrow_left_green, check_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import classNames from 'classnames';
 
 import {
   individualSchemaOptions,
@@ -20,26 +21,16 @@ import {
   receiptCompanyFormSchema,
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
-
-import {
-  giftInvitationFormSchema,
-  giftInvitationSchemaOptions
-} from '../../server/parsedSchemas/giftTrees';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
-import i18n from '../../locales/i18n';
+
+import i18n from '../../locales/i18n.js';
 import PaymentSelector from '../Payment/PaymentSelector';
 
 let TCombForm = t.form.Form;
 
-const headings = [
-  i18n.t('label.heading_project'),
-  i18n.t('label.heading_give'),
-  i18n.t('label.heading_donate_details'),
-  i18n.t('label.heading_donor_details'),
-  i18n.t('label.heading_payment')
-];
+const headings = ['Project', 'Donation Details', 'Donor Details', 'Payment'];
 
-export default class GiftTrees extends Component {
+export default class DonateTrees extends Component {
   static data = {
     tabsReceipt: [
       {
@@ -49,16 +40,6 @@ export default class GiftTrees extends Component {
       {
         name: i18n.t('label.company_title'),
         id: 'company'
-      }
-    ],
-    tabsUser: [
-      {
-        name: i18n.t('label.treecounter_user_name'),
-        id: 'direct'
-      },
-      {
-        name: i18n.t('label.other_name'),
-        id: 'invitation'
       }
     ]
   };
@@ -84,7 +65,8 @@ export default class GiftTrees extends Component {
       },
       expanded: false,
       expandedOption: '1',
-      showNextButton: true
+      showNextButton: true,
+      paymentSuccess: false
     };
 
     this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
@@ -93,7 +75,6 @@ export default class GiftTrees extends Component {
       this
     );
     this.determineDefaultCurrency = this.determineDefaultCurrency.bind(this);
-    this.handleModeUserChange = this.handleModeUserChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -112,6 +93,19 @@ export default class GiftTrees extends Component {
     }
   }
 
+  getFees() {
+    const directCurrencies = this.state.countryCurrencies.map(
+      countryCurrency => {
+        const [, currency] = countryCurrency.split('/');
+        return currency;
+      }
+    );
+    const directPaymentAvailable = directCurrencies.includes(
+      this.state.selectedCurrency
+    );
+    return directPaymentAvailable ? 0 : 777; // some amount TBD
+  }
+
   handleTreeCountCurrencyChange(treeCountCurrencyData) {
     this.setState({
       selectedCurrency: treeCountCurrencyData.currency,
@@ -120,10 +114,18 @@ export default class GiftTrees extends Component {
     });
   }
 
+  determineDefaultCurrency() {
+    const { currentUserProfile, selectedProject } = this.props;
+    const userCurrency =
+      null === currentUserProfile ? null : currentUserProfile.currency;
+
+    return null === userCurrency ? selectedProject.currency : userCurrency;
+  }
+
   indexChange(index) {
     this.setState({
       pageIndex: index,
-      showNextButton: index !== 5
+      showNextButton: index !== 3
     });
   }
 
@@ -139,25 +141,6 @@ export default class GiftTrees extends Component {
         return true;
       }
       return false;
-    },
-    () => {
-      if (this.state.modeUser === 'direct') {
-        let returnValue;
-        returnValue = this.state.form.giftTreecounter ? true : false;
-        return returnValue;
-      } else {
-        let value = this.refs.giftInvitation.getValue();
-        if (value) {
-          this.setState({
-            form: {
-              ...this.state.form,
-              giftInvitation: value
-            }
-          });
-          return true;
-        }
-        return false;
-      }
     },
     () => {
       if (this.state.selectedTreeCount) {
@@ -193,21 +176,6 @@ export default class GiftTrees extends Component {
     }
   ];
 
-  determineDefaultCurrency() {
-    const { currentUserProfile, selectedProject } = this.props;
-    const userCurrency =
-      null === currentUserProfile ? null : currentUserProfile.currency;
-
-    return null === userCurrency ? selectedProject.currency : userCurrency;
-  }
-
-  handleModeUserChange(tab) {
-    this.setState({
-      modeUser: tab,
-      form: { ...this.state.form, giftMethod: tab }
-    });
-  }
-
   handleModeReceiptChange(tab) {
     this.setState({
       modeReceipt: tab,
@@ -218,17 +186,8 @@ export default class GiftTrees extends Component {
     });
   }
 
-  suggestionClicked = (context, event) => {
-    this.setState({
-      form: {
-        ...this.state.form,
-        giftTreecounter: event.suggestion.id
-      }
-    });
-  };
-
   handlePaymentApproved(paymentResponse) {
-    this.props.gift(
+    this.props.donate(
       {
         ...this.state.form,
         paymentResponse,
@@ -237,6 +196,9 @@ export default class GiftTrees extends Component {
       },
       this.props.selectedProject.id
     );
+    this.setState({
+      paymentSuccess: true
+    });
   }
 
   callExpanded = bool => {
@@ -258,9 +220,7 @@ export default class GiftTrees extends Component {
 
       return (
         <div className={displayNone}>
-          <PrimaryButton onClick={validated}>
-            {i18n.t('label.next')}
-          </PrimaryButton>
+          <PrimaryButton onClick={validated}>Next</PrimaryButton>
         </div>
       );
     };
@@ -306,112 +266,119 @@ export default class GiftTrees extends Component {
         plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
 
-    return null === plantProject ? null : (
+    return !plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
-        <TextHeading>{i18n.t('label.gift_trees')}</TextHeading>
+        <TextHeading>{i18n.t('label.donateTrees')}</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
-          <div className="donate-tress__container">
-            <ContentHeader caption={headings[this.state.pageIndex]} />
-            <Slider {...settings}>
-              {this.props.selectedTpo ? (
-                <PlantProjectFull
-                  callExpanded={this.callExpanded}
-                  expanded={false}
-                  plantProject={this.props.selectedProject}
-                  tpoName={this.props.selectedTpo.name}
-                  selectAnotherProject={true}
-                />
-              ) : null}
-              <div className="treecount-selector-wrapper">
+          {this.state.paymentSuccess ? (
+            <div className="payment-success">
+              <img src={check_green} />
+              <div className={'gap'} />
+              <TextBlock strong={true}>
+                Thank you for planting {this.state.treeCount} trees with us! You
+                will receive an email with a donation receipt in time.
+              </TextBlock>
+              <div className={'gap'} />
+              <TextBlock>
+                <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+              </TextBlock>
+            </div>
+          ) : (
+            <div className="donate-tress__container">
+              <ContentHeader caption={headings[this.state.pageIndex]} />
+              <Slider {...settings}>
+                {this.props.selectedTpo ? (
+                  <PlantProjectFull
+                    callExpanded={this.callExpanded}
+                    expanded={false}
+                    plantProject={this.props.selectedProject}
+                    tpoName={this.props.selectedTpo.name}
+                    selectAnotherProject={true}
+                  />
+                ) : null}
+                {this.props.selectedTpo && currencies ? (
+                  <TreeCountCurrencySelector
+                    treeCost={plantProject.treeCost}
+                    rates={
+                      currencies.currency_rates[plantProject.currency].rates
+                    }
+                    fees={1}
+                    currencies={currencies.currency_names} // TODO: connect to data from API
+                    selectedCurrency={this.determineDefaultCurrency()}
+                    treeCountOptions={
+                      plantProject.paymentSetup.treeCountOptions
+                    }
+                    selectedTreeCount={this.state.selectedTreeCount}
+                    onChange={this.handleTreeCountCurrencyChange}
+                  />
+                ) : null}
                 <Tabs
-                  data={GiftTrees.data.tabsUser}
-                  onTabChange={this.handleModeUserChange}
+                  data={DonateTrees.data.tabsReceipt}
+                  onTabChange={this.handleModeReceiptChange}
+                  activeTab={
+                    this.state.modeReceipt !== ''
+                      ? this.state.modeReceipt
+                      : null
+                  }
                 >
-                  {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
-                    <SearchAutosuggest
-                      onSuggestionClicked={this.suggestionClicked}
+                  {this.state.modeReceipt ===
+                  DonateTrees.data.tabsReceipt[0].id ? (
+                    <TCombForm
+                      ref="donateReceipt"
+                      type={receiptIndividualFormSchema}
+                      options={individualSchemaOptions}
+                      value={this.props.currentUserProfile}
                     />
                   ) : (
                     <TCombForm
-                      ref="giftInvitation"
-                      type={giftInvitationFormSchema}
-                      options={giftInvitationSchemaOptions}
+                      ref="donateReceipt"
+                      type={receiptCompanyFormSchema}
+                      options={companySchemaOptions}
+                      value={this.props.currentUserProfile}
                     />
                   )}
                 </Tabs>
-              </div>
-              {this.props.selectedTpo && currencies ? (
-                <TreeCountCurrencySelector
-                  treeCost={plantProject.treeCost}
-                  rates={currencies.currency_rates[plantProject.currency].rates}
-                  fees={1}
-                  currencies={currencies.currency_names}
-                  selectedCurrency={this.determineDefaultCurrency()}
-                  treeCountOptions={plantProject.paymentSetup.treeCountOptions}
-                  selectedTreeCount={this.state.selectedTreeCount}
-                  onChange={this.handleTreeCountCurrencyChange}
-                />
-              ) : null}
-              <Tabs
-                data={GiftTrees.data.tabsReceipt}
-                onTabChange={this.handleModeReceiptChange}
-                activeTab={
-                  this.state.modeReceipt !== '' ? this.state.modeReceipt : null
-                }
-              >
-                {this.state.modeReceipt === GiftTrees.data.tabsReceipt[0].id ? (
-                  <TCombForm
-                    ref="donateReceipt"
-                    type={receiptIndividualFormSchema}
-                    options={individualSchemaOptions}
-                    value={this.props.currentUserProfile}
+                {this.props.selectedTpo ? (
+                  <PaymentSelector
+                    paymentMethods={paymentMethods}
+                    accounts={plantProject.paymentSetup.accounts}
+                    stripePublishableKey={
+                      plantProject.paymentSetup.stripePublishableKey
+                    }
+                    amount={this.state.selectedAmount}
+                    currency={this.state.selectedCurrency}
+                    expandedOption={this.state.expandedOption}
+                    handleExpandedClicked={this.handleExpandedClicked}
+                    context={{
+                      tpoName: this.props.selectedTpo.name,
+                      donorEmail: email,
+                      donorName: name,
+                      treeCount: this.state.selectedTreeCount
+                    }}
+                    onSuccess={paymentResponse =>
+                      this.handlePaymentApproved(paymentResponse)
+                    }
+                    onFailure={data =>
+                      console.log('/////////////////// payment failure ', data)
+                    }
+                    onError={data =>
+                      console.log('/////////////////// payment error ', data)
+                    }
                   />
-                ) : (
-                  <TCombForm
-                    ref="donateReceipt"
-                    type={receiptCompanyFormSchema}
-                    options={companySchemaOptions}
-                    value={this.props.currentUserProfile}
-                  />
-                )}
-              </Tabs>
-              {this.props.selectedTpo ? (
-                <PaymentSelector
-                  paymentMethods={paymentMethods}
-                  accounts={plantProject.paymentSetup.accounts}
-                  amount={this.state.selectedAmount}
-                  currency={this.state.selectedCurrency}
-                  expandedOption={this.state.expandedOption}
-                  handleExpandedClicked={this.handleExpandedClicked}
-                  context={{
-                    tpoName: this.props.selectedTpo.name,
-                    donorEmail: email,
-                    donorName: name,
-                    treeCount: this.state.selectedTreeCount
-                  }}
-                  onSuccess={paymentResponse =>
-                    this.handlePaymentApproved(paymentResponse)
-                  }
-                  onFailure={data =>
-                    console.log('/////////////////// payment failure ', data)
-                  }
-                  onError={data =>
-                    console.log('/////////////////// payment error ', data)
-                  }
-                />
-              ) : null}
-            </Slider>
-          </div>
+                ) : null}
+              </Slider>
+            </div>
+          )}
         </CardLayout>
       </div>
     );
   }
 }
 
-GiftTrees.propTypes = {
+DonateTrees.propTypes = {
   selectedProject: PropTypes.object,
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
-  gift: PropTypes.func
+  donate: PropTypes.func
 };

@@ -195,6 +195,10 @@
       display: inline-block;
     }
 
+    .pftp-button-primary {
+      width: 50%;
+    }
+
     .project-specs__container {
       flex-direction: row;
       .plants-info {
@@ -291,4 +295,90 @@
       color: #ec6453;
     }
   }
+}
+
+.payment-option {
+  display: flex;
+  flex-direction: column;
+  border: solid 0.7px #0e7baa;
+  border-radius: 6px;
+  margin-bottom: 20px;
+
+  .__PrivateStripeElement {
+    height: 60px;
+  }
+
+  .StripeElement {
+    padding: 20px;
+    width: auto;
+  }
+
+  .pftp-button-primary {
+    margin: 10px;
+    width: calc(100% - 20px);
+    display: flex;
+    border-radius: 22px;
+  }
+
+  .payment-option-header {
+    padding: 10px;
+    background-color: #0e7baa;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      height: 25px;
+      transition: 1s;
+    }
+
+    span {
+      display: flex;
+      img {
+        margin-right: 20px;
+      }
+    }
+
+    .arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  .mandate-acceptance {
+    text-align: left;
+    color: #686060;
+    font-size: 14px;
+    padding: 20px;
+    padding-top: 0px;
+  }
+
+  .centerize-paypal {
+    margin: 40px 0;
+  }
+
+  .confirm-checkbox {
+    text-align: left;
+    padding: 20px;
+    color: #686060;
+    font-size: 14px;
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  }
+
+  .account-details {
+    @extend .confirm-checkbox;
+    color: #89a550;
+    width: 240px;
+  }
+}
+
+.display-none {
+  display: none;
+}
+
+.payment-success {
+  padding: 30px;
+  width: 300px;
 }

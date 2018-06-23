@@ -16,7 +16,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/auth"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -29,7 +31,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/auth"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -42,7 +46,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/auth"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -56,7 +62,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/auth"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -69,7 +77,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/auth"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -82,7 +92,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -95,7 +107,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/auth"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -109,7 +123,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/auth"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -122,7 +138,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -135,7 +153,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -148,7 +168,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -161,7 +183,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -174,7 +198,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -187,7 +213,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -200,7 +228,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -213,7 +243,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["PUT"],
@@ -226,7 +258,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -239,7 +273,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -254,7 +290,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -268,7 +306,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -282,7 +322,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -296,7 +338,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -310,7 +354,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["PUT"],
@@ -324,7 +370,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["DELETE"],
@@ -338,7 +386,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -352,7 +402,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -365,7 +417,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -379,7 +433,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -395,7 +451,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -409,7 +467,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["PUT"],
@@ -423,7 +483,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["DELETE"],
@@ -436,7 +498,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -449,7 +513,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -462,7 +528,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -475,7 +543,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -490,7 +560,10 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "subSection": null, "_locale": null },
+      "defaults": {
+        "subSection": null,
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -503,7 +576,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -516,7 +591,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -529,7 +606,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -543,7 +622,10 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "uid": null, "_locale": null },
+      "defaults": {
+        "uid": null,
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -556,7 +638,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -570,7 +654,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -584,7 +670,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -597,7 +685,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -611,7 +701,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -626,7 +718,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -639,7 +733,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -653,7 +749,10 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "sort": null, "_locale": null },
+      "defaults": {
+        "sort": null,
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -667,7 +766,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/auth"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -681,7 +782,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/auth"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -694,7 +797,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/auth"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -707,7 +812,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/auth"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -721,7 +828,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/auth"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -734,7 +843,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["PUT"],
@@ -747,7 +858,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["PUT"],
@@ -760,7 +873,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["PUT"],
@@ -773,7 +888,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["PUT"],
@@ -787,7 +904,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["DELETE"],
@@ -800,7 +919,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -813,7 +934,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -827,7 +950,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["PUT"],
@@ -841,7 +966,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["DELETE"],
@@ -854,7 +981,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -867,7 +996,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -882,7 +1013,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -895,7 +1028,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -908,7 +1043,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["POST"],
@@ -922,7 +1059,9 @@
         ["variable", "/", "[^/]++", "version"],
         ["text", "/api"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": {
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": ["DELETE"],
@@ -934,8 +1073,14 @@
         ["variable", "/", "[\\w]+", "domain"],
         ["text", "/translations"]
       ],
-      "defaults": { "domain": "messages", "_format": "js" },
-      "requirements": { "_format": "js|json", "domain": "[\\w]+" },
+      "defaults": {
+        "domain": "messages",
+        "_format": "js"
+      },
+      "requirements": {
+        "_format": "js|json",
+        "domain": "[\\w]+"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -955,7 +1100,10 @@
         ["text", "/media/cache/resolve"]
       ],
       "defaults": [],
-      "requirements": { "filter": "[A-z0-9_-]*", "path": ".+" },
+      "requirements": {
+        "filter": "[A-z0-9_-]*",
+        "path": ".+"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -973,16 +1121,24 @@
         ["text", "/selectProject"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
     },
     "app_homepage": {
       "tokens": [["variable", "/", "(\\w{2})?", "_locale"]],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -992,8 +1148,12 @@
         ["text", "/explore"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1005,16 +1165,25 @@
         ["text", "/leaderboard"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "subSection": null, "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "subSection": null,
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
     },
     "app_faq": {
       "tokens": [["text", "/faq"], ["variable", "/", "(\\w{2})?", "_locale"]],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1024,8 +1193,12 @@
         ["text", "/giftTrees"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1036,8 +1209,12 @@
         ["text", "/giftRedemption"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1048,8 +1225,12 @@
         ["text", "/accountActivation"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1059,8 +1240,12 @@
         ["text", "/accountActivation"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1070,8 +1255,12 @@
         ["text", "/forgotPassword"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1082,8 +1271,12 @@
         ["text", "/resetPassword"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1093,24 +1286,36 @@
         ["text", "/passwordSent"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
     },
     "app_userHome": {
       "tokens": [["text", "/home"], ["variable", "/", "(\\w{2})?", "_locale"]],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
     },
     "app_login": {
       "tokens": [["text", "/login"], ["variable", "/", "(\\w{2})?", "_locale"]],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1120,8 +1325,12 @@
         ["text", "/donateTrees"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1132,8 +1341,12 @@
         ["text", "/donateTrees"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1143,8 +1356,12 @@
         ["text", "/myTrees"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1155,8 +1372,12 @@
         ["text", "/editTrees"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1166,8 +1387,12 @@
         ["text", "/registerTrees"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1177,8 +1402,12 @@
         ["text", "/signup"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1188,8 +1417,12 @@
         ["text", "/editProfile"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1199,8 +1432,12 @@
         ["text", "/signupSuccess"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1210,8 +1447,12 @@
         ["text", "/target"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1222,8 +1463,12 @@
         ["text", "/treecounter"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []
@@ -1233,8 +1478,12 @@
         ["text", "/stripeConnect"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
-      "defaults": { "_locale": null },
-      "requirements": { "_locale": "(\\w{2})?" },
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
       "hosttokens": [],
       "methods": ["GET"],
       "schemes": []

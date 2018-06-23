@@ -39,6 +39,7 @@ export default class SelectPlantProject extends Component {
       pageIndex: 0,
       filteredProjects: props.plantProjects,
       featuredProjects: props.plantProjects,
+      priceSortedProjects: props.plantProjects,
       searchFieldValue: '',
       mode: 'name',
       isOpen: false,
@@ -46,32 +47,72 @@ export default class SelectPlantProject extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    let { plantProjects } = nextProps;
-    let featuredProjects = Object.keys(plantProjects).reduce((projects, id) => {
-      if (plantProjects[id].isFeatured) {
-        projects[id] = plantProjects[id];
+  componentWillMount() {
+    let { plantProjects, currencies } = this.props;
+    currencies = currencies.currencies;
+    let featuredProjects = plantProjects.reduce((projects, project) => {
+      if (project.isFeatured) {
+        projects.push(project);
       }
       return projects;
-    }, {});
+    }, []);
+    let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
+    if (currencies) {
+      priceSortedProjects = priceSortedProjects.sort(function(a, b) {
+        return (
+          a.treeCost *
+            parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
+          b.treeCost *
+            parseFloat(currencies.currency_rates['EUR'].rates[b.currency])
+        );
+      });
+    }
     this.setState({
       filteredProjects: plantProjects,
-      featuredProjects: featuredProjects
+      featuredProjects: featuredProjects,
+      priceSortedProjects: priceSortedProjects
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let { plantProjects, currencies } = nextProps;
+    currencies = currencies.currencies;
+    let featuredProjects = plantProjects.reduce((projects, project) => {
+      if (project.isFeatured) {
+        projects.push(project);
+      }
+      return projects;
+    }, []);
+    let priceSortedProjects = plantProjects;
+    if (currencies) {
+      priceSortedProjects = plantProjects.sort(function(a, b) {
+        return (
+          a.treeCost *
+            parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
+          b.treeCost *
+            parseFloat(currencies.currency_rates['EUR'].rates[b.currency])
+        );
+      });
+    }
+    this.setState({
+      filteredProjects: plantProjects,
+      featuredProjects: featuredProjects,
+      priceSortedProjects: priceSortedProjects
     });
   }
 
   onInputChange = event => {
     let value = event.target.value.toLowerCase();
     let { plantProjects } = this.props;
-    let filteredProjects = Object.keys(plantProjects).reduce((projects, id) => {
+    let filteredProjects = plantProjects.reduce((projects, project) => {
       if (
-        plantProjects[id].name.toLowerCase().includes(value) ||
-        plantProjects[id].tpo_name.toLowerCase().includes(value)
+        project.name.toLowerCase().includes(value) ||
+        project.tpo_name.toLowerCase().includes(value)
       ) {
-        projects[id] = plantProjects[id];
+        projects.push(project);
       }
       return projects;
-    }, {});
+    }, []);
     this.setState({
       filteredProjects: filteredProjects,
       searchFieldValue: value
@@ -88,15 +129,13 @@ export default class SelectPlantProject extends Component {
     });
   };
 
-  onSelectClickedFeaturedProjects = () => {
-    this.props.selectProject(
-      Object.keys(this.state.featuredProjects)[this.state.pageIndex]
-    );
+  onSelectClickedFeaturedProjects = id => {
+    this.props.selectProject(id);
     history.goBack();
   };
 
-  onSelectClicked = () => {
-    this.props.selectProject(this.state.modalProject.id);
+  onSelectClicked = id => {
+    this.props.selectProject(id);
     this.onRequestClose();
     history.goBack();
   };
@@ -116,15 +155,20 @@ export default class SelectPlantProject extends Component {
   openModal(key) {
     this.setState({
       isOpen: true,
-      modalProject: this.props.plantProjects[key]
+      modalProject: this.props.plantProjects.find(
+        project => project['id'] === key
+      )
     });
   }
 
   render() {
-    let { filteredProjects, featuredProjects } = this.state;
+    let {
+      filteredProjects,
+      featuredProjects,
+      priceSortedProjects
+    } = this.state;
     const settings = {
       dots: true,
-
       infinite: false,
       adaptiveHeight: true,
       prevArrow: (
@@ -157,7 +201,9 @@ export default class SelectPlantProject extends Component {
                 tpoName={this.state.modalProject.tpo_name}
               />
             ) : null}
-            <PrimaryButton onClick={this.onSelectClicked}>
+            <PrimaryButton
+              onClick={() => this.onSelectClicked(this.state.modalProject.id)}
+            >
               {i18n.t('label.select_project')}
             </PrimaryButton>
           </div>
@@ -166,23 +212,26 @@ export default class SelectPlantProject extends Component {
           <div className="select-project__container">
             <ContentHeader caption={i18n.t('label.featuredProjects')} />
             <Slider {...settings}>
-              {Object.keys(featuredProjects).length !== 0
-                ? Object.keys(featuredProjects).map(key => (
-                    <PlantProjectFull
-                      key={key}
-                      callExpanded={this.callExpanded}
-                      expanded={false}
-                      plantProject={featuredProjects[key]}
-                      tpoName={featuredProjects[key].tpo_name}
-                    />
+              {featuredProjects.length !== 0
+                ? featuredProjects.map(project => (
+                    <div key={project.id}>
+                      <PlantProjectFull
+                        callExpanded={this.callExpanded}
+                        expanded={false}
+                        plantProject={project}
+                        tpoName={project.tpo_name}
+                      />
+                      <PrimaryButton
+                        onClick={() =>
+                          this.onSelectClickedFeaturedProjects(project.id)
+                        }
+                      >
+                        {i18n.t('label.select_project')}
+                      </PrimaryButton>
+                    </div>
                   ))
                 : null}
             </Slider>
-            <div>
-              <PrimaryButton onClick={this.onSelectClickedFeaturedProjects}>
-                {i18n.t('label.select_project')}
-              </PrimaryButton>
-            </div>
           </div>
         </CardLayout>
         <CardLayout>
@@ -224,26 +273,60 @@ export default class SelectPlantProject extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {Object.keys(filteredProjects).length !== 0
-                      ? Object.keys(filteredProjects).map(key => (
-                          <tr key={'tr' + key}>
-                            <td className="align-left">
-                              {filteredProjects[key].name}
-                            </td>
-                            <td className="align-left">
-                              {filteredProjects[key].tpo_name}
+                    {filteredProjects.length !== 0
+                      ? filteredProjects.map(project => (
+                          <tr key={'tr' + project.id}>
+                            <td className="align-left">{project.name}</td>
+                            <td className="align-left">{project.tpo_name}</td>
+                            <td className="align-right">
+                              {project.countPlanted}
                             </td>
                             <td className="align-right">
-                              {filteredProjects[key].countPlanted}
-                            </td>
-                            <td className="align-right">
-                              {filteredProjects[key].currency +
-                                ' ' +
-                                filteredProjects[key].treeCost}
+                              {project.currency + ' ' + project.treeCost}
                             </td>
                             <td>
                               <PrimaryButton
-                                onClick={() => this.openModal(key)}
+                                onClick={() => this.openModal(project.id)}
+                              >
+                                See more
+                              </PrimaryButton>
+                            </td>
+                          </tr>
+                        ))
+                      : null}
+                  </tbody>
+                </table>
+              </div>
+            ) : null}
+            {this.state.mode === SelectPlantProject.data.tabs[2].id ? (
+              <div className="all-projects-card">
+                <table className="projects-list">
+                  <thead>
+                    <tr>
+                      <th>Project</th>
+                      <th>Organisation</th>
+                      <th>
+                        <span>Planted Trees</span>
+                      </th>
+                      <th>Cost Per Tree</th>
+                      <th />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {priceSortedProjects.length !== 0
+                      ? priceSortedProjects.map(project => (
+                          <tr key={'tr' + project.id}>
+                            <td className="align-left">{project.name}</td>
+                            <td className="align-left">{project.tpo_name}</td>
+                            <td className="align-right">
+                              {project.countPlanted}
+                            </td>
+                            <td className="align-right">
+                              {project.currency + ' ' + project.treeCost}
+                            </td>
+                            <td>
+                              <PrimaryButton
+                                onClick={() => this.openModal(project.id)}
                               >
                                 {i18n.t('label.see_more')}
                               </PrimaryButton>
@@ -263,6 +346,7 @@ export default class SelectPlantProject extends Component {
 }
 
 SelectPlantProject.propTypes = {
-  plantProjects: PropTypes.object,
+  plantProjects: PropTypes.array,
+  currencies: PropTypes.object,
   selectProject: PropTypes.func
 };

@@ -483,12 +483,14 @@
     },
     "public_exploreQuery_get": {
       "tokens": [
+        ["variable", "/", "[^/]++", "subSection"],
+        ["variable", "/", "[^/]++", "section"],
         ["text", "/exploreQuery"],
         ["variable", "/", "[^/]++", "_locale"],
         ["variable", "/", "[^/]++", "version"],
         ["text", "/public"]
       ],
-      "defaults": { "_locale": null },
+      "defaults": { "subSection": null, "_locale": null },
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
@@ -558,6 +560,76 @@
       "requirements": [],
       "hosttokens": [],
       "methods": ["GET"],
+      "schemes": []
+    },
+    "donate_post": {
+      "tokens": [
+        ["variable", "/", "[^/]++", "plantProject"],
+        ["text", "/donationContributions"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": { "_locale": null },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["POST"],
+      "schemes": []
+    },
+    "giftDonate_post": {
+      "tokens": [
+        ["variable", "/", "[^/]++", "plantProject"],
+        ["text", "/giftDonationContributions"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": { "_locale": null },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["POST"],
+      "schemes": []
+    },
+    "eventPledge_form": {
+      "tokens": [
+        ["text", "/eventPledgeForm"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": { "_locale": null },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "pledgeEvent_get": {
+      "tokens": [
+        ["variable", "/", "[^/]++", "eventSlug"],
+        ["text", "/pledgeEvent"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": { "_locale": null },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "eventPledge_post": {
+      "tokens": [
+        ["text", "/eventPledge"],
+        ["variable", "/", "[^/]++", "pledgeEventSlug"],
+        ["text", "/pledgeEvent"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": { "_locale": null },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["POST"],
       "schemes": []
     },
     "targetLog_get": {
@@ -926,6 +998,19 @@
       "methods": ["GET"],
       "schemes": []
     },
+    "app_leaderboard": {
+      "tokens": [
+        ["variable", "/", "[^/]++", "subSection"],
+        ["variable", "/", "[^/]++", "section"],
+        ["text", "/leaderboard"],
+        ["variable", "/", "(\\w{2})?", "_locale"]
+      ],
+      "defaults": { "subSection": null, "_locale": null },
+      "requirements": { "_locale": "(\\w{2})?" },
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
     "app_faq": {
       "tokens": [["text", "/faq"], ["variable", "/", "(\\w{2})?", "_locale"]],
       "defaults": { "_locale": null },
@@ -1135,6 +1220,17 @@
       "tokens": [
         ["variable", "/", "[^/]++", "treecounter"],
         ["text", "/treecounter"],
+        ["variable", "/", "(\\w{2})?", "_locale"]
+      ],
+      "defaults": { "_locale": null },
+      "requirements": { "_locale": "(\\w{2})?" },
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "app_stripeConnect": {
+      "tokens": [
+        ["text", "/stripeConnect"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
       "defaults": { "_locale": null },

@@ -21,5 +21,6 @@ export default {
   logged_in_caption2seq4: 'Set Target',
   logged_in_caption3: 'Community',
   logged_in_caption3seq1: 'Challenge',
-  logged_in_caption3seq2: 'Tree gift'
+  logged_in_caption3seq2: 'Tree gift',
+  open_folder: 'folder_open'
 };

@@ -17,7 +17,7 @@ tpoSchema.define({
 
 plantProjectSchema.define({
   tpo: tpoSchema,
-  projectImages: [plantProjectImageSchema]
+  plantProjectImages: [plantProjectImageSchema]
 });
 
 plantProjectImageSchema.define({

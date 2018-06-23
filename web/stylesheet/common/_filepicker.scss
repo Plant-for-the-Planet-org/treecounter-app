@@ -1,8 +1,37 @@
 .pftp-filepicker {
+  position: relative;
+  overflow: hidden;
+  margin: 20px 0;
   display: flex;
-
-  input {
-    flex: 1;
-    padding: 10px 0;
+  justify-content: flex-start;
+  align-items: center;
+  .browse-button {
+    @extend .pftp-button-primary;
+    min-width: 58px !important;
+    height: 25px;
+    font-size: 12px;
+    margin: 0 !important;
+    padding: 0;
+    border-radius: 0;
+    width: inherit;
+  }
+  .file-input {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    height: 100%;
+    width: 58px;
+    top: 0;
+  }
+  .value-label {
+    position: absolute;
+    left: 69px;
+    top: 0;
+    padding: 0;
+  }
+  img {
+    width: 50px;
+    margin-left: 20px;
   }
 }

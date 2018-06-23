@@ -22,13 +22,11 @@ export function treecounterLookupAction(treecounterId) {
 
       // the treecounter has not been fetched yet
       // so we store it in normalized form in the redux-store but return the original data
-      getRequest('treecounter_get', { treecounter: treecounterId }).then(
-        result => {
-          const treecounter = result.data;
-          dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
-          resolve(treecounter);
-        }
-      );
+      getRequest('treecounter_get', { uid: treecounterId }).then(result => {
+        const treecounter = result.data;
+        dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
+        resolve(treecounter);
+      });
     });
   };
 }

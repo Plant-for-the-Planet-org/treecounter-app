@@ -8,17 +8,19 @@
   align-self: normal;
   position: absolute;
   right: 25px;
+  top: 95px;
+  @include for-phone-only {
+    top: 10px;
+    position: relative;
+    align-self: center;
+    left: 20px;
+  }
 }
 
 @media only screen and (max-width: $breakpointTablet) {
   .tree-counter-header {
     flex-direction: column;
     justify-content: center;
-  }
-  .support-button-container {
-    position: relative;
-    align-self: center;
-    right: 0;
   }
 }
 .tree-counter-profile {
@@ -28,6 +30,11 @@
   position: relative;
   margin: auto;
   margin-top: 55px;
+
+  @include for-phone-only {
+    flex-flow: row nowrap;
+    margin-left: 29px;
+  }
 }
 .tree-counter-name {
   @extend .pftp-text-normal;
@@ -39,8 +46,23 @@
   margin-top: 27px;
   overflow: hidden;
   white-space: nowrap;
+  @include for-phone-only {
+    white-space: initial;
+    text-align: left;
+    margin-top: 0;
+  }
 }
 
+.user-info {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  @include for-phone-only {
+    margin-left: 20px;
+    align-items: flex-start;
+    margin-right: 20px;
+  }
+}
 .tree-counter-row {
   margin-top: 10px;
   display: flex;
@@ -71,6 +93,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  .pftp-card-layout {
+    max-width: 718px;
+  }
 }
 .tree-counter-user-synopsis {
   display: grid;

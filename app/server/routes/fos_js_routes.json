@@ -2105,6 +2105,84 @@
       ],
       "schemes": []
     },
+    "claim_post": {
+      "tokens": [
+        [
+          "variable",
+          "\/",
+          "[^\/]++",
+          "token"
+        ],
+        [
+          "text",
+          "\/claim"
+        ],
+        [
+          "variable",
+          "\/",
+          "[^\/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "\/",
+          "[^\/]++",
+          "version"
+        ],
+        [
+          "text",
+          "\/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "claimInformation_post": {
+      "tokens": [
+        [
+          "variable",
+          "\/",
+          "[^\/]++",
+          "token"
+        ],
+        [
+          "text",
+          "\/claimInformation"
+        ],
+        [
+          "variable",
+          "\/",
+          "[^\/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "\/",
+          "[^\/]++",
+          "version"
+        ],
+        [
+          "text",
+          "\/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
     "plantProject_form": {
       "tokens": [
         [
@@ -2602,6 +2680,12 @@
     },
     "app_pledge": {
       "tokens": [
+        [
+          "variable",
+          "\/",
+          "[^\/]++",
+          "eventSlug"
+        ],
         [
           "text",
           "\/pledge"
@@ -3229,6 +3313,37 @@
         [
           "text",
           "\/stripeConnect"
+        ],
+        [
+          "variable",
+          "\/",
+          "(\\w{2})?",
+          "_locale"
+        ]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": {
+        "_locale": "(\\w{2})?"
+      },
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "app_claim": {
+      "tokens": [
+        [
+          "variable",
+          "\/",
+          "[^\/]++",
+          "token"
+        ],
+        [
+          "text",
+          "\/claim"
         ],
         [
           "variable",

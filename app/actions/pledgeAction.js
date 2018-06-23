@@ -1,17 +1,17 @@
 import { getRequest, postRequest } from '../utils/api';
 import { fetchPledges, saveTimeoutID } from '../reducers/pledgeReducer';
 
-export function fetchPledgesAction() {
+export function fetchPledgesAction(eventSlug) {
   return dispatch => {
     getRequest('pledgeEvent_get', {
-      eventSlug: 'esri-user-conference'
+      eventSlug: eventSlug
     }).then(res => {
       dispatch(fetchPledges(res.data));
     });
     let timeoutID = setInterval(
       () =>
         getRequest('pledgeEvent_get', {
-          eventSlug: 'esri-user-conference'
+          eventSlug: eventSlug
         }).then(res => {
           dispatch(fetchPledges(res.data));
         }),

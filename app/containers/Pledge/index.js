@@ -10,11 +10,13 @@ import Pledge from '../../components/Pledge';
 
 class PledgeContainer extends Component {
   componentDidMount() {
-    this.props.fetchPledgesAction();
+    this.props.fetchPledgesAction(this.props.match.params.eventSlug);
   }
 
   postPledgeRequest(data) {
-    this.props.postPledge(data, { pledgeEventSlug: 'esri-user-conference' });
+    this.props.postPledge(data, {
+      pledgeEventSlug: this.props.match.params.eventSlug
+    });
   }
   render() {
     return (
@@ -39,5 +41,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(PledgeContainer);
 PledgeContainer.propTypes = {
   pledges: PropTypes.object,
   fetchPledgesAction: PropTypes.func,
-  postPledge: PropTypes.func
+  postPledge: PropTypes.func,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      eventSlug: PropTypes.string
+    })
+  }).isRequired
 };

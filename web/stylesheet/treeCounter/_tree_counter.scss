@@ -34,6 +34,7 @@
   @include for-phone-only {
     flex-flow: row nowrap;
     margin-left: 29px;
+    margin-top: 30px;
   }
 }
 .tree-counter-name {
@@ -50,6 +51,9 @@
     white-space: initial;
     text-align: left;
     margin-top: 0;
+  }
+  @include for-xs-phone-only {
+    font-size: 20.5px;
   }
 }
 

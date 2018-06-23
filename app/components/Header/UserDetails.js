@@ -35,7 +35,7 @@ const UserDetails = ({ updateRoute, userProfile, onLogout }) => {
           <img src={EditGreen} />
           <span>{i18n.t('label.edit_profile')}</span>
         </TransparentButton>
-        <TransparentButton>
+        <TransparentButton onClick={() => updateRoute('app_faq')}>
           <img src={QuestionMarkGreen} />
           <span>{i18n.t('label.help')}</span>
         </TransparentButton>

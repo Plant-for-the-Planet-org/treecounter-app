@@ -157,11 +157,11 @@ class PublicTreeCounter extends React.Component {
               {...tpoProps}
               onSelect={this.onPlantProjectSelected}
             />
-          ) : (
+          ) : userProfile.synopsis1 || userProfile.synopsis2 ? (
             <CardLayout>
               <UserFootprint userProfile={userProfile} />
             </CardLayout>
-          )}
+          ) : null}
         </div>
       </div>
     );

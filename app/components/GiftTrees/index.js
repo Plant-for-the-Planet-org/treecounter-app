@@ -13,6 +13,8 @@ import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_left_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import { history } from '../../components/Common/BrowserRouter';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 import {
   individualSchemaOptions,
@@ -84,7 +86,8 @@ export default class GiftTrees extends Component {
       },
       expanded: false,
       expandedOption: '1',
-      showNextButton: true
+      showNextButton: true,
+      paymentSuccess: false
     };
 
     this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
@@ -109,6 +112,8 @@ export default class GiftTrees extends Component {
       if (nextTreeCount !== currentTreeCount) {
         this.setState({ selectedTreeCount: nextTreeCount });
       }
+    } else {
+      history.push(getLocalRoute('app_selectProject'));
     }
   }
 
@@ -237,6 +242,9 @@ export default class GiftTrees extends Component {
       },
       this.props.selectedProject.id
     );
+    this.setState({
+      paymentSuccess: true
+    });
   }
 
   callExpanded = bool => {
@@ -310,98 +318,120 @@ export default class GiftTrees extends Component {
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>{i18n.t('label.gift_trees')}</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
-          <div className="donate-tress__container">
-            <ContentHeader caption={headings[this.state.pageIndex]} />
-            <Slider {...settings}>
-              {this.props.selectedTpo ? (
-                <PlantProjectFull
-                  callExpanded={this.callExpanded}
-                  expanded={false}
-                  plantProject={this.props.selectedProject}
-                  tpoName={this.props.selectedTpo.name}
-                  selectAnotherProject={true}
-                />
-              ) : null}
-              <div className="treecount-selector-wrapper">
+          {this.state.paymentSuccess ? (
+            <div className="payment-success">
+              <img src={check_green} />
+              <div className={'gap'} />
+              <TextBlock strong={true}>
+                Thank you for planting {this.state.treeCount} trees with us! You
+                will receive an email with a donation receipt in time.
+              </TextBlock>
+              <div className={'gap'} />
+              <TextBlock>
+                <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+              </TextBlock>
+            </div>
+          ) : (
+            <div className="donate-tress__container">
+              <ContentHeader caption={headings[this.state.pageIndex]} />
+              <Slider {...settings}>
+                {this.props.selectedTpo ? (
+                  <PlantProjectFull
+                    callExpanded={this.callExpanded}
+                    expanded={false}
+                    plantProject={this.props.selectedProject}
+                    tpoName={this.props.selectedTpo.name}
+                    selectAnotherProject={true}
+                  />
+                ) : null}
+                <div className="treecount-selector-wrapper">
+                  <Tabs
+                    data={GiftTrees.data.tabsUser}
+                    onTabChange={this.handleModeUserChange}
+                  >
+                    {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
+                      <SearchAutosuggest
+                        onSuggestionClicked={this.suggestionClicked}
+                      />
+                    ) : (
+                      <TCombForm
+                        ref="giftInvitation"
+                        type={giftInvitationFormSchema}
+                        options={giftInvitationSchemaOptions}
+                      />
+                    )}
+                  </Tabs>
+                </div>
+                {this.props.selectedTpo && currencies ? (
+                  <TreeCountCurrencySelector
+                    treeCost={plantProject.treeCost}
+                    rates={
+                      currencies.currency_rates[plantProject.currency].rates
+                    }
+                    fees={1}
+                    currencies={currencies.currency_names}
+                    selectedCurrency={this.determineDefaultCurrency()}
+                    treeCountOptions={
+                      plantProject.paymentSetup.treeCountOptions
+                    }
+                    selectedTreeCount={this.state.selectedTreeCount}
+                    onChange={this.handleTreeCountCurrencyChange}
+                  />
+                ) : null}
                 <Tabs
-                  data={GiftTrees.data.tabsUser}
-                  onTabChange={this.handleModeUserChange}
+                  data={GiftTrees.data.tabsReceipt}
+                  onTabChange={this.handleModeReceiptChange}
+                  activeTab={
+                    this.state.modeReceipt !== ''
+                      ? this.state.modeReceipt
+                      : null
+                  }
                 >
-                  {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
-                    <SearchAutosuggest
-                      onSuggestionClicked={this.suggestionClicked}
+                  {this.state.modeReceipt ===
+                  GiftTrees.data.tabsReceipt[0].id ? (
+                    <TCombForm
+                      ref="donateReceipt"
+                      type={receiptIndividualFormSchema}
+                      options={individualSchemaOptions}
+                      value={this.props.currentUserProfile}
                     />
                   ) : (
                     <TCombForm
-                      ref="giftInvitation"
-                      type={giftInvitationFormSchema}
-                      options={giftInvitationSchemaOptions}
+                      ref="donateReceipt"
+                      type={receiptCompanyFormSchema}
+                      options={companySchemaOptions}
+                      value={this.props.currentUserProfile}
                     />
                   )}
                 </Tabs>
-              </div>
-              {this.props.selectedTpo && currencies ? (
-                <TreeCountCurrencySelector
-                  treeCost={plantProject.treeCost}
-                  rates={currencies.currency_rates[plantProject.currency].rates}
-                  fees={1}
-                  currencies={currencies.currency_names}
-                  selectedCurrency={this.determineDefaultCurrency()}
-                  treeCountOptions={plantProject.paymentSetup.treeCountOptions}
-                  selectedTreeCount={this.state.selectedTreeCount}
-                  onChange={this.handleTreeCountCurrencyChange}
-                />
-              ) : null}
-              <Tabs
-                data={GiftTrees.data.tabsReceipt}
-                onTabChange={this.handleModeReceiptChange}
-                activeTab={
-                  this.state.modeReceipt !== '' ? this.state.modeReceipt : null
-                }
-              >
-                {this.state.modeReceipt === GiftTrees.data.tabsReceipt[0].id ? (
-                  <TCombForm
-                    ref="donateReceipt"
-                    type={receiptIndividualFormSchema}
-                    options={individualSchemaOptions}
-                    value={this.props.currentUserProfile}
+                {this.props.selectedTpo ? (
+                  <PaymentSelector
+                    paymentMethods={paymentMethods}
+                    accounts={plantProject.paymentSetup.accounts}
+                    amount={this.state.selectedAmount}
+                    currency={this.state.selectedCurrency}
+                    expandedOption={this.state.expandedOption}
+                    handleExpandedClicked={this.handleExpandedClicked}
+                    context={{
+                      tpoName: this.props.selectedTpo.name,
+                      donorEmail: email,
+                      donorName: name,
+                      treeCount: this.state.selectedTreeCount
+                    }}
+                    onSuccess={paymentResponse =>
+                      this.handlePaymentApproved(paymentResponse)
+                    }
+                    onFailure={data =>
+                      console.log('/////////////////// payment failure ', data)
+                    }
+                    onError={data =>
+                      console.log('/////////////////// payment error ', data)
+                    }
                   />
-                ) : (
-                  <TCombForm
-                    ref="donateReceipt"
-                    type={receiptCompanyFormSchema}
-                    options={companySchemaOptions}
-                    value={this.props.currentUserProfile}
-                  />
-                )}
-              </Tabs>
-              {this.props.selectedTpo ? (
-                <PaymentSelector
-                  paymentMethods={paymentMethods}
-                  accounts={plantProject.paymentSetup.accounts}
-                  amount={this.state.selectedAmount}
-                  currency={this.state.selectedCurrency}
-                  expandedOption={this.state.expandedOption}
-                  handleExpandedClicked={this.handleExpandedClicked}
-                  context={{
-                    tpoName: this.props.selectedTpo.name,
-                    donorEmail: email,
-                    donorName: name,
-                    treeCount: this.state.selectedTreeCount
-                  }}
-                  onSuccess={paymentResponse =>
-                    this.handlePaymentApproved(paymentResponse)
-                  }
-                  onFailure={data =>
-                    console.log('/////////////////// payment failure ', data)
-                  }
-                  onError={data =>
-                    console.log('/////////////////// payment error ', data)
-                  }
-                />
-              ) : null}
-            </Slider>
-          </div>
+                ) : null}
+              </Slider>
+            </div>
+          )}
         </CardLayout>
       </div>
     );

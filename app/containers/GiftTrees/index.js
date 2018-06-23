@@ -17,7 +17,7 @@ import GiftTrees from '../../components/GiftTrees';
 
 class GiftTreesContainer extends Component {
   componentDidMount() {
-    this.props.selectPlantProjectAction(1);
+    // this.props.selectPlantProjectAction(1);
     this.props.fetchCurrencies();
   }
 

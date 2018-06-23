@@ -17,7 +17,7 @@ import DonateTrees from '../../components/DonateTrees/DonateTrees';
 
 class DonationTreesContainer extends Component {
   componentDidMount() {
-    this.props.selectPlantProjectAction(1);
+    // this.props.selectPlantProjectAction(1);
     this.props.fetchCurrencies();
   }
 

@@ -14,7 +14,8 @@ import { arrow_left_green, check_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import classNames from 'classnames';
-
+import { history } from '../../components/Common/BrowserRouter';
+import { getLocalRoute } from '../../actions/apiRouting';
 import {
   individualSchemaOptions,
   receiptIndividualFormSchema,
@@ -90,6 +91,8 @@ export default class DonateTrees extends Component {
       if (nextTreeCount !== currentTreeCount) {
         this.setState({ selectedTreeCount: nextTreeCount });
       }
+    } else {
+      history.push(getLocalRoute('app_selectProject'));
     }
   }
 

@@ -13,6 +13,11 @@ export default class Menu extends Component {
     );
   }
 
+  linkClicked() {
+    this.props.toggleSideNavAction();
+    this.props.clearSupport();
+  }
+
   render() {
     let { path } = this.props;
     console.log(this.props.isOpen);
@@ -52,7 +57,7 @@ export default class Menu extends Component {
                       />
                       <Link
                         to={menuItem.uri}
-                        onClick={this.props.toggleSideNavAction}
+                        onClick={() => this.linkClicked()}
                       >
                         {menuItem.caption}
                       </Link>
@@ -78,5 +83,6 @@ Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   menuData: PropTypes.array.isRequired,
   path: PropTypes.string,
-  toggleSideNavAction: PropTypes.func.isRequired
+  toggleSideNavAction: PropTypes.func.isRequired,
+  clearSupport: PropTypes.func
 };

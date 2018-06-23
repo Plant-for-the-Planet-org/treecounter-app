@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Menu from '../../components/Menu';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { toggleSideNavAction } from '../../actions/setSideNavAction';
+import { clearSupport } from '../../actions/supportTreecounterAction';
 
 // Actions
 import { logoutUser } from '../../actions/authActions';
@@ -58,6 +59,7 @@ class SideMenuContainer extends Component {
         navigation={this.props.navigation}
         path={path}
         toggleSideNavAction={this.props.toggleSideNavAction}
+        clearSupport={this.props.clearSupport}
       />
     );
   }
@@ -69,7 +71,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ logoutUser, toggleSideNavAction }, dispatch);
+  return bindActionCreators(
+    { logoutUser, toggleSideNavAction, clearSupport },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideMenuContainer);
@@ -80,5 +85,6 @@ SideMenuContainer.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   navigation: PropTypes.any,
   location: PropTypes.object,
-  toggleSideNavAction: PropTypes.func.isRequired
+  toggleSideNavAction: PropTypes.func.isRequired,
+  clearSupport: PropTypes.func
 };

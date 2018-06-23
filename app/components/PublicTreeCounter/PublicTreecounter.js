@@ -10,10 +10,13 @@ import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantPr
 import UserFootprint from './UserFootprint';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import CardLayout from '../../components/Common/Card/CardLayout';
 import { followUser, unfollowUser } from '../../actions/followActions';
+import { getLocalRoute } from '../../actions/apiRouting';
+import { history } from '../Common/BrowserRouter';
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {
@@ -61,20 +64,24 @@ class PublicTreeCounter extends React.Component {
   // ACTION METHODS
   //------------------------------------------------------------------------------------------------------------
   onFollowChanged() {
-    this.isUserFollower()
-      ? this.props.unfollowSubscribeAction(this.props.treecounter.id)
-      : this.props.followSubscribeAction(this.props.treecounter.id);
+    if (null !== this.props.currentUserProfile) {
+      this.isUserFollower()
+        ? this.props.unfollowSubscribeAction(this.props.treecounter.id)
+        : this.props.followSubscribeAction(this.props.treecounter.id);
+    } else {
+      history.push(getLocalRoute('app_login'));
+    }
   }
 
   onPlantProjectSelected(selectedPlantProjectId) {
     this.props.selectPlantProjectIdAction(selectedPlantProjectId);
-    //history.push(getLocalRoute('app_donateTrees'))
+    history.push(getLocalRoute('app_donateTrees'));
   }
 
   onRegisterSupporter() {
     console.log('**onRegisterSupporter**');
-    // this.props.supportTreecounter(this.props.treecounter)
-    //history.push(getLocalRoute('app_donateTrees'))
+    this.props.supportTreecounterAction(this.props.treecounter);
+    history.push(getLocalRoute('app_donateTrees'));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -173,13 +180,15 @@ PublicTreeCounter.propTypes = {
   currentUserProfile: PropTypes.object,
   followSubscribeAction: PropTypes.func,
   unfollowSubscribeAction: PropTypes.func,
-  selectPlantProjectIdAction: PropTypes.func
+  selectPlantProjectIdAction: PropTypes.func,
+  supportTreecounterAction: PropTypes.func
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       selectPlantProjectIdAction: selectPlantProjectAction,
+      supportTreecounterAction: supportTreecounterAction,
       followSubscribeAction: followUser,
       unfollowSubscribeAction: unfollowUser
     },

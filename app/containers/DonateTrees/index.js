@@ -7,7 +7,8 @@ import {
   selectedPlantProjectSelector,
   selectedTpoSelector,
   currentUserProfileSelector,
-  currenciesSelector
+  currenciesSelector,
+  supportedTreecounterSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { fetchCurrencies } from '../../actions/currencies';
@@ -32,6 +33,7 @@ class DonationTreesContainer extends Component {
         donate={(donationContribution, plantProjectId) =>
           this.props.donate(donationContribution, plantProjectId, flag)
         }
+        supportTreecounter={this.props.supportTreecounter}
       />
     );
   }
@@ -41,6 +43,7 @@ const mapStateToProps = state => ({
   selectedProject: selectedPlantProjectSelector(state),
   selectedTpo: selectedTpoSelector(state),
   currentUserProfile: currentUserProfileSelector(state),
+  supportTreecounter: supportedTreecounterSelector(state),
   currencies: currenciesSelector(state)
 });
 
@@ -62,5 +65,6 @@ DonationTreesContainer.propTypes = {
   currencies: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
   donate: PropTypes.func,
-  fetchCurrencies: PropTypes.func
+  fetchCurrencies: PropTypes.func,
+  supportTreecounter: PropTypes.object
 };

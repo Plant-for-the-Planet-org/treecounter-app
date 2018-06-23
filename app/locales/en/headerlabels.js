@@ -17,6 +17,6 @@ export default {
   subscribe: 'Follow',
   profile: 'profile',
   gender: 'Gender',
-  no_notifications: 'notifications_none',
+  no_notifications: 'You have no notifications',
   all_notifications: 'See all notifications'
 };

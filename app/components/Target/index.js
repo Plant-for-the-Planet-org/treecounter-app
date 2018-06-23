@@ -45,7 +45,7 @@ export default class Target extends Component {
 
   render() {
     return (
-      <div className="app-container__content--center sidenav-wrapper">
+      <div className="app-container__content--center sidenav-wrapper target_container">
         <TextHeading>{i18n.t('label.set_target')}</TextHeading>
         <CardLayout>
           <TCombForm

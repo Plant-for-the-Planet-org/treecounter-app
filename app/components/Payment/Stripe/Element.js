@@ -7,15 +7,7 @@ import { elementContextTypes } from './Elements';
 const noop = () => {};
 
 const _extractOptions = props => {
-  const {
-    id,
-    className,
-    onChange,
-    onFocus,
-    onBlur,
-    onReady,
-    ...options
-  } = props;
+  const { ...options } = props;
   return options;
 };
 

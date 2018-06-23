@@ -2,38 +2,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-type Props = {
-  apiKey?: string,
-  stripe?: mixed,
-  children?: any
-};
-
-type Meta =
-  | { tag: 'sync', stripe: StripeShape }
-  | { tag: 'async', stripe: StripeShape | null };
-
-type StripeLoadListener = StripeShape => void;
-
-// TODO(jez) 'sync' and 'async' are bad tag names.
-// TODO(jez) What if redux also uses this.context.tag?
-export type SyncStripeContext = {
-  tag: 'sync',
-  stripe: StripeShape
-};
-export type AsyncStripeContext = {
-  tag: 'async',
-  addStripeLoadListener: StripeLoadListener => void
-};
-
-export type ProviderContext = SyncStripeContext | AsyncStripeContext;
-
 export const providerContextTypes = {
   tag: PropTypes.string.isRequired,
   stripe: PropTypes.object,
   addStripeLoadListener: PropTypes.func
 };
 
-const getOrCreateStripe = (apiKey: string, options: mixed): StripeShape => {
+const getOrCreateStripe = (apiKey: string, options: mixed) => {
   /**
    * Note that this is not meant to be a generic memoization solution.
    * This is specifically a solution for `StripeProvider`s being initialized
@@ -50,9 +25,9 @@ const getOrCreateStripe = (apiKey: string, options: mixed): StripeShape => {
   return stripe;
 };
 
-const ensureStripeShape = (stripe: mixed): StripeShape => {
+const ensureStripeShape = (stripe: mixed) => {
   if (stripe && stripe.elements && stripe.createSource && stripe.createToken) {
-    return ((stripe: any): StripeShape);
+    return (stripe: any);
   } else {
     throw new Error(
       "Please pass a valid Stripe object to StripeProvider. You can obtain a Stripe object by calling 'Stripe(...)' with your publishable key."
@@ -60,7 +35,7 @@ const ensureStripeShape = (stripe: mixed): StripeShape => {
   }
 };
 
-export default class Provider extends React.Component<Props> {
+export default class Provider extends React.Component {
   // Even though we're using flow, also use PropTypes so we can take advantage of developer warnings.
   static propTypes = {
     apiKey: PropTypes.string,
@@ -77,7 +52,7 @@ export default class Provider extends React.Component<Props> {
     children: null
   };
 
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
 
     if (this.props.apiKey && this.props.stripe) {
@@ -90,7 +65,7 @@ export default class Provider extends React.Component<Props> {
           "Please load Stripe.js (https://js.stripe.com/v3/) on this page to use react-stripe-elements. If Stripe.js isn't available yet (it's loading asynchronously, or you're using server-side rendering), see https://github.com/stripe/react-stripe-elements#advanced-integrations"
         );
       } else {
-        const { apiKey, children, stripe, ...options } = this.props;
+        const { apiKey, ...options } = this.props;
         this._meta = {
           tag: 'sync',
           stripe: getOrCreateStripe(apiKey, options)
@@ -118,7 +93,7 @@ export default class Provider extends React.Component<Props> {
     this._listeners = [];
   }
 
-  getChildContext(): ProviderContext {
+  getChildContext() {
     // getChildContext is run after the constructor, so we WILL have access to
     // the initial state.
     //
@@ -132,7 +107,7 @@ export default class Provider extends React.Component<Props> {
     } else {
       return {
         tag: 'async',
-        addStripeLoadListener: (fn: StripeLoadListener) => {
+        addStripeLoadListener: fn => {
           if (this._meta.stripe) {
             fn(this._meta.stripe);
           } else {
@@ -143,7 +118,7 @@ export default class Provider extends React.Component<Props> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps) {
     const apiKeyChanged =
       this.props.apiKey &&
       nextProps.apiKey &&
@@ -177,12 +152,6 @@ export default class Provider extends React.Component<Props> {
       });
     }
   }
-
-  props: Props;
-  _didWarn: boolean;
-  _didWakeUpListeners: boolean;
-  _listeners: Array<StripeLoadListener>;
-  _meta: Meta;
 
   render() {
     return React.Children.only(this.props.children);

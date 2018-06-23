@@ -65,7 +65,7 @@ Please be sure the component that calls createSource or createToken is within an
 
     componentDidMount() {
       if (this.context.tag === 'async') {
-        this.context.addStripeLoadListener((stripe: StripeShape) => {
+        this.context.addStripeLoadListener(stripe => {
           this.setState({
             stripe: this.stripeProps(stripe)
           });
@@ -87,7 +87,7 @@ Please be sure the component that calls createSource or createToken is within an
     context: Context;
     wrappedInstance: ?React.Component<InjectedProps & Props, any>;
 
-    stripeProps(stripe: StripeShape): WrappedStripeShape {
+    stripeProps(stripe): WrappedStripeShape {
       return {
         ...stripe,
         // These are the only functions that take elements.
@@ -101,7 +101,7 @@ Please be sure the component that calls createSource or createToken is within an
     findElement = (
       filterBy: 'impliedTokenType' | 'impliedSourceType',
       specifiedType: string
-    ): ?ElementShape => {
+    ) => {
       const allElements = this.context.getRegisteredElements();
       const filteredElements = allElements.filter(e => e[filterBy]);
       const matchingElements =
@@ -126,7 +126,7 @@ Please be sure the component that calls createSource or createToken is within an
     requireElement = (
       filterBy: 'impliedTokenType' | 'impliedSourceType',
       specifiedType: string
-    ): ElementShape => {
+    ) => {
       const element = this.findElement(filterBy, specifiedType);
       if (element) {
         return element;
@@ -139,7 +139,7 @@ Please be sure the component that calls createSource or createToken is within an
     };
 
     // Wraps createToken in order to infer the Element that is being tokenized.
-    wrappedCreateToken = (stripe: StripeShape) => (
+    wrappedCreateToken = stripe => (
       tokenTypeOrOptions: mixed = {},
       options: mixed = {}
     ) => {
@@ -167,7 +167,7 @@ Please be sure the component that calls createSource or createToken is within an
 
     // Wraps createSource in order to infer the Element that is being used for
     // source creation.
-    wrappedCreateSource = (stripe: StripeShape) => (options: mixed = {}) => {
+    wrappedCreateSource = stripe => (options: mixed = {}) => {
       if (options && typeof options === 'object') {
         if (typeof options.type !== 'string') {
           throw new Error(

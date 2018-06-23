@@ -1,60 +1,13 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
-import { type ProviderContext, providerContextTypes } from './Provider';
 
-export type ElementsList = Array<{
-  element: ElementShape,
-  impliedTokenType?: string,
-  impliedSourceType?: string
-}>;
-export type ElementsLoadListener = ElementsShape => void;
-
-type Props = {
-  children?: any
-};
-
-type State = {
-  registeredElements: ElementsList
-};
-
-export type InjectContext = {
-  getRegisteredElements: () => ElementsList
-};
-
-export const injectContextTypes = {
-  getRegisteredElements: PropTypes.func.isRequired
-};
-
-export type ElementContext = {
-  addElementsLoadListener: ElementsLoadListener => void,
-  registerElement: (
-    element: ElementShape,
-    impliedTokenType: ?string,
-    impliedSourceType: ?string
-  ) => void,
-  unregisterElement: (element: ElementShape) => void
-};
-
-export const elementContextTypes = {
-  addElementsLoadListener: PropTypes.func.isRequired,
-  registerElement: PropTypes.func.isRequired,
-  unregisterElement: PropTypes.func.isRequired
-};
-
-type ChildContext = InjectContext & ElementContext;
-
-export default class Elements extends React.Component<Props, State> {
-  static childContextTypes = {
-    ...injectContextTypes,
-    ...elementContextTypes
-  };
-  static contextTypes = providerContextTypes;
+export default class Elements extends React.Component {
   static defaultProps = {
     children: null
   };
 
-  constructor(props: Props, context: ProviderContext) {
+  constructor(props, context) {
     super(props, context);
 
     this.state = {
@@ -62,20 +15,20 @@ export default class Elements extends React.Component<Props, State> {
     };
   }
 
-  getChildContext(): ChildContext {
+  getChildContext() {
     return {
-      addElementsLoadListener: (fn: ElementsLoadListener) => {
+      addElementsLoadListener: fn => {
         // Return the existing elements instance if we already have one.
         if (this._elements) {
           fn(this._elements);
           return;
         }
-        const { children, ...options } = this.props;
+        const { ...options } = this.props;
         if (this.context.tag === 'sync') {
           this._elements = this.context.stripe.elements(options);
           fn(this._elements);
         } else {
-          this.context.addStripeLoadListener((stripe: StripeShape) => {
+          this.context.addStripeLoadListener(stripe => {
             if (this._elements) {
               fn(this._elements);
             } else {
@@ -90,10 +43,6 @@ export default class Elements extends React.Component<Props, State> {
       getRegisteredElements: () => this.state.registeredElements
     };
   }
-
-  props: Props;
-  context: ProviderContext;
-  _elements: ElementsShape;
 
   handleRegisterElement = (
     element: Object,
@@ -124,3 +73,7 @@ export default class Elements extends React.Component<Props, State> {
     return React.Children.only(this.props.children);
   }
 }
+
+Elements.propTypes = {
+  children: PropTypes.Object
+};

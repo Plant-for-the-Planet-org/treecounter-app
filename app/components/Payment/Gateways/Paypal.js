@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import scriptLoader from 'react-async-script-loader';
 import classnames from 'classnames';
-
 import { payment_paypal, payment_arrow } from '../../../assets';
+
+/* global paypal */
 
 class Paypal extends React.Component {
   constructor(props) {

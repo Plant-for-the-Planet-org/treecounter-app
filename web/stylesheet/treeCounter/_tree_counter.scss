@@ -93,6 +93,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  .pftp-card-layout {
+    max-width: 718px;
+  }
 }
 .tree-counter-user-synopsis {
   display: grid;

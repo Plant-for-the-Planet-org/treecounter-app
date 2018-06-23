@@ -1,6 +1,6 @@
 // Import Variables
 @import "_variables";
-
+@import "_mixin";
 // Import components css
 // @import "./tree.css";
 @import "./treecounter.css";
@@ -67,6 +67,9 @@
 
 //Import edit profile
 @import "./editProfile/_edit_user_profile.scss";
+
+//Import Explore Leader board
+@import "./leaderboard/_explore_leaderboard.scss";
 
 //import donate trees
 @import "./donateTrees/_donate_trees.scss";

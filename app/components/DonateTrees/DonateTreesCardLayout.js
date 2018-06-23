@@ -24,7 +24,7 @@ const DonateTreesCardLayout = props => {
             }
             className="card-title"
           >
-            {value.name} by {userTpos[value.tpoId].name}
+            {value.name} {i18n.t('label.by')} {userTpos[value.tpoId].name}
           </h4>
           <DonateTreesCardText value={value} />
         </div>

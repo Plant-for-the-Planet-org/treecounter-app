@@ -1,6 +1,6 @@
 import schemaLiform, { plantProject } from '../formSchemas/editProfile';
 import parseJsonToTcomb from '../parserLiformToTcomb';
-// import PlantProjectListTemplate from '../../components/EditUserProfile/PlantProjectTemplate';
+import PlantProjectImageListTemplate from '../../components/EditUserProfile/PlantProjectImageListTemplate.js';
 // import FilePickerTemplate from '../../components/EditUserProfile/PlantProjectFilePickerTemplate';
 
 const parsedSchema = {};
@@ -13,7 +13,15 @@ Object.keys(schemaLiform).map(userType => {
   );
 });
 
-const plantProjectSchema = parseJsonToTcomb(plantProject.schema);
+const config = {
+  plantProjectImages: {
+    array: {
+      template: PlantProjectImageListTemplate,
+      disableRemove: false
+    }
+  }
+};
+const plantProjectSchema = parseJsonToTcomb(plantProject.schema, config);
 
 // {
 //   plantProjects: {

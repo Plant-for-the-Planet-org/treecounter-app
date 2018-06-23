@@ -6,5 +6,6 @@ export default {
   target: 'Target',
   in: 'in',
   donate: 'Donate',
-  plant_project_full: 'PlantProjectFull'
+  plant_project_full: 'PlantProjectFull',
+  different_project: 'Select Different Project'
 };

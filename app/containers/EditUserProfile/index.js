@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   updateUserProfile,
-  updateTpoProject,
-  deleteTpoProject,
+  updatePlantProject,
+  deletePlantProject,
   addPlantProject
 } from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
@@ -19,15 +19,15 @@ class EditUserProfileContainer extends React.Component {
     };
   }
   deleteProfile = () => {
-    console.log('call Prfoile Deletion API here');
+    console.log('call Profile Deletion API here');
   };
 
   updatePlantProject = plantProject => {
-    this.props.updateTpoProject(plantProject);
+    this.props.updatePlantProject(plantProject);
   };
 
-  deletePlantProject = projectId => {
-    this.props.deleteTpoProject(projectId);
+  deletePlantProject = plantProjectId => {
+    this.props.deletePlantProject(plantProjectId);
   };
 
   addPlantProject = newProject => {
@@ -95,8 +95,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       updateUserProfile,
-      updateTpoProject,
-      deleteTpoProject,
+      updatePlantProject,
+      deletePlantProject,
       addPlantProject
     },
     dispatch
@@ -109,7 +109,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 EditUserProfileContainer.propTypes = {
   updateUserProfile: PropTypes.func,
-  updateTpoProject: PropTypes.func,
-  deleteTpoProject: PropTypes.func,
+  updatePlantProject: PropTypes.func,
+  deletePlantProject: PropTypes.func,
   addPlantProject: PropTypes.func
 };

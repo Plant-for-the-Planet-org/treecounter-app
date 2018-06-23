@@ -8,17 +8,19 @@
   align-self: normal;
   position: absolute;
   right: 25px;
+  top: 95px;
+  @include for-phone-only {
+    top: 10px;
+    position: relative;
+    align-self: center;
+    left: 20px;
+  }
 }
 
 @media only screen and (max-width: $breakpointTablet) {
   .tree-counter-header {
     flex-direction: column;
     justify-content: center;
-  }
-  .support-button-container {
-    position: relative;
-    align-self: center;
-    right: 0;
   }
 }
 .tree-counter-profile {

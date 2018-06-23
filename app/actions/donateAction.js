@@ -9,11 +9,6 @@ import {
 } from '../schemas/index';
 
 export function donate(donationContribution, plantProjectId, loggedIn) {
-  console.log(
-    '+++++++++++++ Donation Processing ',
-    donationContribution,
-    plantProjectId
-  );
   let route = loggedIn ? 'donationContribution_post' : 'donate_post';
   let request = loggedIn
     ? postAuthenticatedRequest(route, donationContribution, {
@@ -32,7 +27,6 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
         if (treecounter) {
           dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         }
-        console.log(contribution.uid);
 
         console.log(`Thank you for planting ${
           contribution.treeCount

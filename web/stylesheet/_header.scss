@@ -58,6 +58,20 @@
     cursor: pointer;
   }
 
+  .pftp-popover-notification {
+    .pftp-popover__container {
+    @include for-phone-only {
+      min-width: initial;      
+    }
+  }
+  }
+  .popover__no_notification {
+    @extend .popover__action-link;
+    font-weight: normal;
+    cursor: initial;
+    padding: 2%;
+    color: $spanTextColor;
+  }
   .help-icons {
     height: 20px;
     width: 20px;

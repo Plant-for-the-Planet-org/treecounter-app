@@ -20,7 +20,10 @@ const PlantProjectDetails = ({
   videoUrl
   // mapData
 }) => {
-  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  if (
+    (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') &&
+    !videoUrl
+  ) {
     videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
   }
   return (

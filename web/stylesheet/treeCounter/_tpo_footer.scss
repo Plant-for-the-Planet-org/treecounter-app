@@ -10,6 +10,12 @@
   display: block;
   margin-bottom: 40px;
   max-width: 718px;
+  @include for-phone-only {
+    max-width: 350px !important;
+  }
+  @include for-xs-phone-only {
+    max-width: 290px !important;
+  }
 
   .pftp-button-primary {
     width: inherit;
@@ -28,14 +34,24 @@
     display: block;
     padding: 0;
     top: 50%;
+    @include for-phone-only {
+      max-height: 30px;
+      max-width: 30px;
+    }
   }
   .tpo-footer-nav-img__left {
     @extend .tpo-footer-nav-img;
     left: -55px;
+    @include for-phone-only {
+      left: -50px;
+    }
   }
   .tpo-footer-nav-img__right {
     @extend .tpo-footer-nav-img;
     right: -55px;
+    @include for-phone-only {
+      right: -50px;
+    }
   }
 
   .slick-initialized {
@@ -81,12 +97,19 @@
     @extend .project-teaser__container;
     display: flex;
     flex-direction: row;
+    @include for-phone-only {
+      flex-direction: column;
+    }
     .project-info {
       display: flex;
       flex-direction: column;
       flex-basis: 0;
       margin-right: 15px;
       flex-grow: 1;
+      @include for-phone-only {
+        margin-right: 0;
+        flex-basis: auto;
+      }
     }
     .plants-info {
       display: flex;
@@ -94,6 +117,10 @@
       flex-grow: 1;
       margin-left: 15px;
       flex-basis: 0;
+      @include for-phone-only {
+        margin-left: 0;
+        flex-basis: auto;
+      }
     }
     .project-specs__item {
       @extend .column;
@@ -105,6 +132,7 @@
       .align-center {
         display: flex;
         align-items: center;
+        margin-right: 5px;
         img {
           height: 20px;
           width: 20px;

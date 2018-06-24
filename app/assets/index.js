@@ -53,6 +53,11 @@ import dollar from './images/icons/dollar.png';
 import arrow_right_green from './images/icons/arrow_right_green.png';
 import arrow_left_green from './images/icons/arrow_left_green.png';
 import check_green from './images/icons/check_green.png';
+import payment_arrow from './images/icons/payment_arrow_white.png';
+import payment_bank from './images/icons/payment_banktransfer_white.png';
+import payment_credit from './images/icons/payment_creditcard_white.png';
+import payment_paypal from './images/icons/payment_paypal_white.png';
+import payment_sepa from './images/icons/payment_sepa_white.png';
 import attention from './images/icons/attention.png';
 import leaderboards_countries_green from './images/icons/leaderboards_countries_green.png';
 import leaderboards_countries_grey from './images/icons/leaderboards_countries_grey.png';
@@ -66,10 +71,17 @@ import leaderboards_tpo_green from './images/icons/leaderboards_tpo_green.png';
 import leaderboards_tpo_grey from './images/icons/leaderboards_tpo_grey.png';
 import leaderboards_company_grey from './images/icons/leaderboards_company_grey.png';
 import leaderboards_company_green from './images/icons/leaderboards_company_green.png';
+import close_green from './images/icons/close_green.png';
+import FooterMobileLogos from './images/TTC_footer_mobile_logos.png';
 
 export {
   pledge_highest,
   pledge_latest,
+  payment_arrow,
+  payment_bank,
+  payment_credit,
+  payment_paypal,
+  payment_sepa,
   MapPinBlue,
   MapPinGreen,
   MapPinRed,
@@ -135,5 +147,7 @@ export {
   leaderboards_tpo_green,
   leaderboards_tpo_grey,
   leaderboards_company_grey,
-  leaderboards_company_green
+  leaderboards_company_green,
+  close_green,
+  FooterMobileLogos
 };

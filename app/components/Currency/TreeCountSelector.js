@@ -19,7 +19,10 @@ class TreeCountSelector extends React.Component {
       variableAmount: props.treeCountToAmount(variableDefaultTreeCount)
     };
 
-    props.onChange(fixedDefaultTreeCount);
+    props.onChange({
+      treeCount: fixedDefaultTreeCount,
+      amount: this.props.treeCountToAmount(fixedDefaultTreeCount)
+    });
 
     this.handleFixedTreeCountChange = this.handleFixedTreeCountChange.bind(
       this
@@ -41,33 +44,45 @@ class TreeCountSelector extends React.Component {
       this.handleVariableTreeCountChange(this.state.variableTreeCount);
     }
   }
-
   handleFixedTreeCountChange(treeCount) {
-    this.setState({ fixedTreeCount: parseInt(treeCount), isFixed: true });
-    this.props.onChange(treeCount);
+    this.updateStateAndParent({
+      fixedTreeCount: parseInt(treeCount),
+      isFixed: true
+    });
   }
 
   handleVariableTreeCountChange(treeCount) {
-    this.setState({
+    this.updateStateAndParent({
       variableTreeCount: parseInt(treeCount),
       variableAmount: this.props.treeCountToAmount(treeCount)
     });
-    this.props.onChange(treeCount);
   }
 
   handleVariableAmountChange(amount) {
     const treeCount = this.props.amountToTreeCount(amount);
-    this.setState({
+    this.updateStateAndParent({
       variableAmount: parseInt(amount),
       variableTreeCount: treeCount
     });
-
-    this.props.onChange(treeCount);
   }
 
   handleVariableTreeCountSelected() {
-    this.setState({ isFixed: false });
-    this.props.onChange(this.state.variableTreeCount);
+    this.updateStateAndParent({ isFixed: false });
+  }
+
+  updateStateAndParent(updates) {
+    const newState = { ...this.state, ...updates };
+    this.setState(newState);
+    console.log('newState ', newState);
+
+    this.props.onChange({
+      treeCount: newState.isFixed
+        ? newState.fixedTreeCount
+        : newState.variableTreeCount,
+      amount: newState.isFixed
+        ? this.props.treeCountToAmount(newState.fixedTreeCount)
+        : newState.variableAmount
+    });
   }
 
   render() {

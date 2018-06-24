@@ -5,8 +5,7 @@ import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsT
 import SvgContainer from '../Common/SvgContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
-import { profile } from '../../assets';
-import { getImageUrl } from '../../actions/apiRouting';
+import UserProfileImage from '../Common/UserProfileImage';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -37,20 +36,14 @@ export default class UserHome extends Component {
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <div className="tree-counter-profile flex-column">
-          <div className="header-logo">
-            {
-              <img
-                src={
-                  userProfile.image
-                    ? getImageUrl('profile', 'thumb', userProfile.image)
-                    : profile
-                }
-              />
-            }
-          </div>
-          <div className="tree-counter-name">{userProfile.name}</div>
-          <div className="tree-counter-row">
-            <UserProfileTypeLabel profileType={userProfile.type} />
+          <UserProfileImage profileImage={userProfile.image} />
+          <div className="user-info">
+            <div className="tree-counter-name">
+              {userProfile.treecounter.displayName}
+            </div>
+            <div className="tree-counter-row">
+              <UserProfileTypeLabel profileType={userProfile.type} />
+            </div>
           </div>
         </div>
         <div className="canvasContainer flex-column">

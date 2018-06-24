@@ -4,6 +4,7 @@ import selectedPlantProjectIdReducer from './selectedPlantProjectIdReducer';
 import supportedTreecounterReducer from './supportedTreecounterReducer';
 import userFeedReducer from './userFeedReducer';
 import fetchPledgesReducer from './pledgeReducer';
+import currenciesReducer from './currenciesReducer';
 
 const commonReducers = {
   entities: entitiesReducer,
@@ -12,6 +13,7 @@ const commonReducers = {
   selectedPlantProjectId: selectedPlantProjectIdReducer,
   userFeeds: userFeedReducer,
   pledges: fetchPledgesReducer
+  currencies: currenciesReducer
 };
 
 export default commonReducers;

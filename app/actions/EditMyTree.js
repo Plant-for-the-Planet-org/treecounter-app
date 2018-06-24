@@ -4,7 +4,7 @@ import { putAuthenticatedRequest } from '../utils/api';
 
 import { updateRoute } from '../helpers/routerHelper';
 import { mergeEntities } from '../reducers/entitiesReducer';
-import { treecounterSchema } from '../schemas/index';
+import { contributionSchema, treecounterSchema } from '../schemas/index';
 import { debug } from '../debug/index';
 
 export function editTree(plantContribution, plantId) {
@@ -13,10 +13,12 @@ export function editTree(plantContribution, plantId) {
       plantContribution: plantId
     })
       .then(res => {
-        debug(res, res.response);
-        const { data: treecounter, statusText, status } = res;
+        const { statusText, status } = res;
+        const { contribution, treecounter } = res.data;
+
         NotificationManager.success(statusText, status, 5000);
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
+        dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         updateRoute('app_myTrees', dispatch);
       })
       .catch(error => {

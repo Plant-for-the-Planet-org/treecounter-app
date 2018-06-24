@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import renderHTML from 'react-render-html';
 import { getImageUrl } from '../../actions/apiRouting';
+import i18n from '../../locales/i18n';
 
 export default class Notification extends Component {
   NotificationDisplay(notifications) {
@@ -37,12 +38,14 @@ export default class Notification extends Component {
             }
             className="list-item__wrapper"
           >
-            <span>See all notifications</span>
+            <span>{i18n.t('label.all_notifications')}</span>
           </div>
         ) : null}
       </div>
     ) : (
-      <ul style={widthStyle} />
+      <div className="popover__no_notification">
+        {i18n.t('label.no_notifications')}
+      </div>
     );
   }
 }
@@ -51,5 +54,3 @@ Notification.propTypes = {
   userFeeds: PropTypes.object,
   fetchMoreNotifications: PropTypes.func
 };
-
-const widthStyle = { width: '244px' };

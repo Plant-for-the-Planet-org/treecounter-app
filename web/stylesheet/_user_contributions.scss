@@ -3,12 +3,15 @@
   margin: 20px auto;
   padding: 20px;
   padding-bottom: 0;
-  max-width: 600px;
+  max-width: 400px;
   width: 500px;
   border-radius: 10px;
   border: 1px solid #cccccc;
   overflow: scroll;
   height: 542px;
+  @include for-phone-only {
+    width: 300px;
+  }
 
   .contribution-container__card {
     padding: 10px;

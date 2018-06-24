@@ -129,6 +129,18 @@
             color: #696261;
             margin-bottom: 21px;
           }
+          .image-gallery-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            .fieldset {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: center;
+            }
+          }
         }
         .project-teaser {
           .project-teaser-item {

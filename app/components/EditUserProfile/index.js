@@ -69,6 +69,25 @@ export default class EditUserProfile extends React.Component {
     }
   };
 
+  mergeProjectImages(newPlantProjectImages, oldPlantProjectImages = []) {
+    if (!newPlantProjectImages) {
+      return oldPlantProjectImages;
+    }
+    let uploadPlantProjectImages = [];
+    uploadPlantProjectImages = newPlantProjectImages.map(newProjectImage => {
+      if (newProjectImage.image.includes('base64')) {
+        let { image: imageFile, description } = newProjectImage;
+
+        return newProjectImage.id
+          ? { imageFile, description, id: newProjectImage.id }
+          : { imageFile, description };
+      }
+      return newProjectImage;
+    });
+
+    return uploadPlantProjectImages;
+  }
+
   handleSaveProjectClick = (plantProject, index) => {
     let formRef = 'plantProject' + index;
     console.log(this.refs[formRef].validate());
@@ -81,10 +100,16 @@ export default class EditUserProfile extends React.Component {
         value = Object.assign({}, value);
         delete value.imageFile;
       }
+      let plantProjectImages = this.mergeProjectImages(
+        value.plantProjectImages,
+        plantProject.plantProjectImages
+      );
       if (plantProject.id) {
+        console.log(value, plantProject);
         this.props.updatePlantProject({
           ...value,
-          id: plantProject.id
+          id: plantProject.id,
+          plantProjectImages
         });
       } else {
         console.log('post new project here');

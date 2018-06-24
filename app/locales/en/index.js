@@ -16,8 +16,11 @@ import emailSentlabels from './emailSentlabels';
 import faqlabels from './faqlabels';
 import forgotPasswordlabels from './forgotPasswordlabels';
 import giftTreeslabels from './giftTreeslabels';
+import leaderboradlabels from './leaderboradlabels';
 import paymentlabels from './paymentlabels';
 import publicTreecounterlabels from './publicTreecounterlabels';
+import editUserProfilelabels from './editUserProfilelabels';
+import selectPlantProjectlabels from './selectPlantProjectlabels';
 
 export default {
   ...loginlabels,
@@ -38,6 +41,9 @@ export default {
   ...faqlabels,
   ...forgotPasswordlabels,
   ...giftTreeslabels,
+  ...leaderboradlabels,
   ...paymentlabels,
-  ...publicTreecounterlabels
+  ...publicTreecounterlabels,
+  ...editUserProfilelabels,
+  ...selectPlantProjectlabels
 };

@@ -4866,14 +4866,26 @@ export const plantProject = {
           title: 'prototype',
           type: 'object',
           properties: {
-            imageFile: {
+            image: {
               type: 'string',
               title: 'imageFile',
               widget: 'file',
               propertyOrder: 1
+            },
+            description: {
+              type: 'string',
+              title: 'description',
+              widget: 'textarea',
+              propertyOrder: 2
+            },
+            id: {
+              type: 'number',
+              title: 'id',
+              widget: 'hidden',
+              propertyOrder: 3
             }
           },
-          required: ['imageFile']
+          required: ['image']
         },
         propertyOrder: 13
       },
@@ -4884,7 +4896,7 @@ export const plantProject = {
         propertyOrder: 14
       }
     },
-    required: ['name', 'imageFile', 'treeCost', 'currency', 'country'],
+    required: ['name', 'treeCost', 'currency', 'country'],
     submit_url: '',
     submit_method: 'POST'
   }

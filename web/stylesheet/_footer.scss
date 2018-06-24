@@ -5,7 +5,17 @@
   height: 100px;
   background-color: white;
 
-  img {
+  .footer-logo {
     height: 69px;
+    @include for-phone-only {
+      display: none;
+    }
+  }
+  .footer-logo-mobile {
+    display: none;
+    @include for-phone-only {
+      display: block;
+      height: 69px;
+    }
   }
 }

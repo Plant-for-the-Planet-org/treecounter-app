@@ -12,7 +12,7 @@ const commonReducers = {
   supportedTreecounter: supportedTreecounterReducer,
   selectedPlantProjectId: selectedPlantProjectIdReducer,
   userFeeds: userFeedReducer,
-  pledges: fetchPledgesReducer
+  pledges: fetchPledgesReducer,
   currencies: currenciesReducer
 };
 

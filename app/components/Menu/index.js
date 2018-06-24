@@ -50,7 +50,11 @@ export default class Menu extends Component {
                       <img
                         src={
                           menuItem.icon && menuItem.icon !== 'none'
-                            ? images[menuItem.icon]
+                            ? menuItem.uri.substr(
+                                menuItem.uri.lastIndexOf('/') + 1
+                              ) === path
+                              ? images[menuItem.icon + '_red']
+                              : images[menuItem.icon]
                             : null
                         }
                         className="menu-icon"

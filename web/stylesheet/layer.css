@@ -150,7 +150,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  margin-top: 0;
+  margin-top: -90px;
 }
 .canvasContainer svg {
   width: auto;

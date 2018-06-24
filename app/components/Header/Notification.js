@@ -24,7 +24,7 @@ export default class Notification extends Component {
 
   render() {
     let { userFeeds } = this.props;
-    return userFeeds ? (
+    return userFeeds && userFeeds.userFeeds.length ? (
       <div>
         <ul className="notification-popover">
           {this.NotificationDisplay(userFeeds)}

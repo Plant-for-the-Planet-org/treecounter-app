@@ -11,6 +11,15 @@ import heart_outline from './images/icons/heart_outline.png';
 import rocket_outline from './images/icons/rocket_outline.png';
 import shovel_outline from './images/icons/shovel_outline.png';
 import target_outline from './images/icons/target_outline.png';
+import tree_outline_red from './images/icons/tree_outline_red.png';
+import gift_outline_red from './images/icons/gift_outline_red.png';
+import challenge_outline_red from './images/icons/challenge_outline_red.png';
+import heart_outline_red from './images/icons/heart_outline_red.png';
+import rocket_outline_red from './images/icons/rocket_outline_red.png';
+import shovel_outline_red from './images/icons/shovel_outline_red.png';
+import target_outline_red from './images/icons/target_outline_red.png';
+import pledge_highest from './images/pledge_biggest.png';
+import pledge_latest from './images/pledge_recent.png';
 import pot from './images/pot.svg';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/tree.svg';
@@ -66,6 +75,8 @@ import close_green from './images/icons/close_green.png';
 import FooterMobileLogos from './images/TTC_footer_mobile_logos.png';
 
 export {
+  pledge_highest,
+  pledge_latest,
   payment_arrow,
   payment_bank,
   payment_credit,
@@ -88,6 +99,13 @@ export {
   plantingTreeImage,
   key,
   email,
+  tree_outline_red,
+  gift_outline_red,
+  challenge_outline_red,
+  heart_outline_red,
+  rocket_outline_red,
+  shovel_outline_red,
+  target_outline_red,
   tree_outline,
   gift_outline,
   challenge_outline,

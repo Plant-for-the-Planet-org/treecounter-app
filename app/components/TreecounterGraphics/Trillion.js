@@ -59,6 +59,24 @@ class Trillion extends Component {
               {i18n.t('label.faqs')}
             </SecondaryAccentButton>
           </ButtonHeading>
+          <div
+            onClick={() =>
+              updateRoute('app_pledge', null, null, {
+                eventSlug: 'esri-user-conference'
+              })
+            }
+          >
+            Esri
+          </div>
+          <div
+            onClick={() =>
+              updateRoute('app_pledge', null, null, {
+                eventSlug: 'bmz-zukunftskongress'
+              })
+            }
+          >
+            BMZ
+          </div>
         </TextHeading>
 
         <div className="canvasContainer flex-column">

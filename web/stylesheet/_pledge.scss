@@ -1,0 +1,97 @@
+.pledge-form {
+  @extend .pftp-card-layout;
+  width: 40%;
+  .content-header_container {
+    height: 80px;
+    width: calc(100% + 120px);
+    margin-bottom: 30px;
+    margin-top: -60px;
+    font-size: 24px;
+  }
+
+  .pftp-button-primary {
+    width: 70%;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+
+    .half {
+      width: 45%;
+    }
+  }
+
+  .tree-count {
+    width: 45%;
+    margin: 40px auto;
+  }
+
+  .pftp-text-block {
+    margin: 0 -20px;
+    text-align: left;
+  }
+}
+
+.total_trees {
+  @extend .pftp-card-layout;
+  padding: 15px 30px;
+  color: #799a4c;
+
+  .total_number {
+    font-weight: 800;
+    letter-spacing: 2px;
+  }
+
+  .total_text {
+    color: #b7d37f;
+  }
+}
+
+.recent-pledges {
+  @extend .pftp-card-layout;
+  padding: 20px;
+  .recent-pledges-table {
+    border-radius: 6px;
+    border-spacing: 0;
+    border: solid 2px #efefef;
+    padding: 10px;
+    color: #686060;
+    width: 350px;
+
+    .row-list-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px;
+    }
+  }
+  .pledges-header {
+    border-bottom: solid 2px #efefef;
+  }
+
+  .pledges-list {
+    overflow: auto;
+    height: 200px;
+    flex-direction: column;
+  }
+
+  .pledges-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .before_table_header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    color: #b7d37f;
+    img {
+      height: 35px;
+      margin-right: 10px;
+    }
+  }
+}
+
+.row {
+  display: flex;
+}

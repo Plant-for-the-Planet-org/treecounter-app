@@ -21,7 +21,6 @@ class RegisterTreesContainer extends Component {
   };
 
   render() {
-    console.log('Register trees render');
     return <RegisterTrees ref="registerTrees" onSubmit={this.onSubmit} />;
   }
 }

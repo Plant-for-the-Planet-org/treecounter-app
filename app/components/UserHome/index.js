@@ -29,8 +29,6 @@ export default class UserHome extends Component {
   }
 
   render() {
-    console.log('Home Component Render with props- ', this.props);
-
     const { treecounterData, userProfile } = this.props;
     let { svgData } = this.state;
     return (

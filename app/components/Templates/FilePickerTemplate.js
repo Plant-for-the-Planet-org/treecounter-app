@@ -2,7 +2,6 @@ import React from 'react';
 import { getImageUrl } from '../../actions/apiRouting';
 
 export function FilePickerTemplate(locals) {
-  console.log('FilePickerTemplate', locals);
   function onChange($event) {
     let value;
     let fileReader = new FileReader();

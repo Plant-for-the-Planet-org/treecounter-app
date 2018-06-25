@@ -4,7 +4,6 @@ import { close_green } from '../../assets';
 
 const PlantProjectImageListTemplate = function(title) {
   return function(locals) {
-    console.log('PlantProjectImageListTemplate', locals);
     return (
       <div>
         <div>

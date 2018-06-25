@@ -35,7 +35,6 @@ class EditUserProfileContainer extends React.Component {
   };
 
   onSave = (usertype, profileType) => {
-    console.log(usertype, this.refs);
     console.log(
       this.refs.EditUserProfileContainer.refs[profileType].validate()
     );
@@ -47,16 +46,13 @@ class EditUserProfileContainer extends React.Component {
       this.props
         .updateUserProfile(value, profileType)
         .then(data => {
-          console.log('promise resolved', data);
           if (profileType == 'password') {
             this.setState({ showPasswordDialog: true });
           }
         })
         .catch(error => console.log(error));
-      console.log(profileType);
     }
     if (imageValue) {
-      console.log(imageValue);
       this.props.updateUserProfile(imageValue, 'image');
     }
   };
@@ -66,7 +62,6 @@ class EditUserProfileContainer extends React.Component {
   };
 
   render() {
-    console.log('___render___Edit_userprofile_container');
     return (
       <EditUserProfile
         ref={'EditUserProfileContainer'}

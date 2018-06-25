@@ -20,7 +20,6 @@ export default class Menu extends Component {
 
   render() {
     let { path } = this.props;
-    console.log(this.props.isOpen);
     return (
       <div
         className={

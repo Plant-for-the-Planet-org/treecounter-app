@@ -42,11 +42,6 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
 }
 
 export function gift(donationContribution, plantProjectId, loggedIn) {
-  console.log(
-    '+++++++++++++ Donation Processing ',
-    donationContribution,
-    plantProjectId
-  );
   let route = loggedIn ? 'giftDonationContribution_post' : 'giftDonate_post';
   let request = loggedIn
     ? postAuthenticatedRequest(route, donationContribution, {

@@ -23,7 +23,6 @@ class LeaderBoardContainer extends React.Component {
   constructor(props) {
     super(props);
     const { match } = props;
-    console.log('route_match', match);
     this.state = {
       queryResult: null,
       exploreData: {},
@@ -49,8 +48,6 @@ class LeaderBoardContainer extends React.Component {
   ) {
     LeaderBoardDataAction({ section, orderBy, period, subSection }).then(
       success => {
-        console.log('Response Success categories');
-        console.log(success.data);
         if (
           success.data &&
           success.data instanceof Object &&
@@ -72,7 +69,6 @@ class LeaderBoardContainer extends React.Component {
   };
 
   handleTabChange = tab => {
-    console.log('Tab change' + tab);
     if (tab != this.state.tabInfo.activeTab) {
       tab == 'app_leaderboard'
         ? updateRoute(tab, null, null, {

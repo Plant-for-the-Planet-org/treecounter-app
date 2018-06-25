@@ -94,4 +94,7 @@
 
 .row {
   display: flex;
+  @include for-phone-only {
+    flex-direction: column;
+  }
 }

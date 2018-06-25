@@ -27,21 +27,25 @@ class TreecounterGraphicsText extends Component {
 
   convertNumber(n, d) {
     let x = ('' + n).length;
-    let p = Math.pow;
-    d = p(10, d);
-    x -= x % 3;
-    return (
-      Math.round(n * d / p(10, x)) / d +
-      [
-        '',
-        ' Thousand',
-        ' Million',
-        ' Billion',
-        ' Trillion',
-        ' Quadrillion',
-        ' Quintillion'
-      ][x / 3]
-    );
+    if (x > 5) {
+      let p = Math.pow;
+      d = p(10, d);
+      x -= x % 3;
+      return (
+        Math.round(n * d / p(10, x)) / d +
+        [
+          '',
+          ' Thousand',
+          ' Million',
+          ' Billion',
+          ' Trillion',
+          ' Quadrillion',
+          ' Quintillion'
+        ][x / 3]
+      );
+    } else {
+      return n;
+    }
   }
 
   render() {

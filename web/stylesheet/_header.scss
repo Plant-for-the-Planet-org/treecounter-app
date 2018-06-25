@@ -60,10 +60,10 @@
 
   .pftp-popover-notification {
     .pftp-popover__container {
-    @include for-phone-only {
-      min-width: initial;      
+      @include for-phone-only {
+        min-width: initial;
+      }
     }
-  }
   }
   .popover__no_notification {
     @extend .popover__action-link;
@@ -144,6 +144,7 @@
     display: flex;
     color: white;
     text-align: right;
+    margin-right: 30px;
 
     .btn:focus {
       outline: none;

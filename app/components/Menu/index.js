@@ -30,7 +30,13 @@ export default class Menu extends Component {
         {this.props.menuData.map(element => (
           <div key={'div' + element.sequence}>
             <span className="app-container__sidenav--heading">
-              {element.caption}
+              {element.uri ? (
+                <Link to={element.uri} onClick={() => this.linkClicked()}>
+                  {element.caption}
+                </Link>
+              ) : (
+                element.caption
+              )}
             </span>
             <ul className="app-container__sidenav--list" key={element.sequence}>
               {element.menuItems.map(

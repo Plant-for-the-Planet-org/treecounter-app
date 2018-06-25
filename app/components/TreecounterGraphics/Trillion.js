@@ -10,6 +10,7 @@ import { updateRoute } from '../../helpers/routerHelper';
 import TextHeading from '../Common/Heading/TextHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n.js';
+import { esriLogo } from '../../assets';
 
 class Trillion extends Component {
   constructor() {
@@ -59,14 +60,19 @@ class Trillion extends Component {
               {i18n.t('label.faqs')}
             </SecondaryAccentButton>
           </ButtonHeading>
+        </TextHeading>
+        <TextBlock>Plant trees at</TextBlock>
+        <div className="events_row">
           <div
+            className="event_item"
             onClick={() =>
               updateRoute('app_pledge', null, null, {
                 eventSlug: 'esri-user-conference'
               })
             }
           >
-            Esri
+            <img src={esriLogo} />
+            <TextBlock>User Conference</TextBlock>
           </div>
           <div
             onClick={() =>
@@ -77,7 +83,7 @@ class Trillion extends Component {
           >
             BMZ
           </div>
-        </TextHeading>
+        </div>
 
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />

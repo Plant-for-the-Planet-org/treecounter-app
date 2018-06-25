@@ -7,7 +7,7 @@ import ContentHeader from '../Common/ContentHeader';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextSpan from '../Common/Text/TextBlock';
 
-import { pledge_highest, pledge_latest } from '../../assets';
+import { pledge_highest, pledge_latest, esriLogo } from '../../assets';
 
 import {
   pledgeFormSchema,
@@ -54,6 +54,12 @@ export default class Pledge extends Component {
   render() {
     return this.props.pledges && this.props.pledges.total ? (
       <div className="sidenav-wrapper app-container__content--center">
+        <div className="conference_heading">
+          <div className="esri_logo_background">
+            <img src={esriLogo} />
+          </div>
+          ESRI User Conference
+        </div>
         <CardLayout className="total_trees">
           <span className="total_number">
             {parseInt(this.props.pledges.total).toLocaleString('en', {

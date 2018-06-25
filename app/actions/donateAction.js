@@ -54,7 +54,6 @@ export function gift(donationContribution, plantProjectId, loggedIn) {
     request
       .then(response => {
         const treecounter = response.data;
-        debug('success: ', treecounter);
         // a SchemaResponse with a contribution and a treecounter entity should be merged
         // the response will also include the donationUid, required to redirect to the success page
         const [contribution] = treecounter.contributions.splice(-1);

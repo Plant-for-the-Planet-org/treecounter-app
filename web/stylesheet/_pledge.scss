@@ -1,6 +1,10 @@
 .pledge-form {
   @extend .pftp-card-layout;
   width: 40%;
+
+  @include for-phone-only {
+    width: 65%;
+  }
   .content-header_container {
     height: 80px;
     width: calc(100% + 120px);
@@ -19,6 +23,9 @@
 
     .half {
       width: 45%;
+      @include for-phone-only {
+        width: 100%;
+      }
     }
   }
 
@@ -73,13 +80,14 @@
 .recent-pledges {
   @extend .pftp-card-layout;
   padding: 20px;
+  width: 320px;
   .recent-pledges-table {
     border-radius: 6px;
     border-spacing: 0;
     border: solid 2px #efefef;
     padding: 10px;
     color: #686060;
-    width: 350px;
+    width: 100%;
 
     .row-list-item {
       display: flex;
@@ -116,4 +124,7 @@
 
 .row {
   display: flex;
+  @include for-phone-only {
+    flex-direction: column;
+  }
 }

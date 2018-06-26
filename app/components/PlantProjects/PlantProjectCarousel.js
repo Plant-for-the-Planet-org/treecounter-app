@@ -8,6 +8,7 @@ import CarouselNavigation from '../Common/CarouselNavigation';
 class PlantProjectCarousel extends React.Component {
   render() {
     const settings = {
+      dots: true,
       nextArrow: (
         <CarouselNavigation
           styleName="tpo-footer-nav-img__right"

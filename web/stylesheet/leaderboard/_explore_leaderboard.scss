@@ -1,89 +1,115 @@
-.leader-board__container {
-  @extend .pftp-card-layout;
-  max-width: 718px;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 28px 45px 41px;
-  .leaderboard-list__sort {
-    width: 624px;
-    height: 43px;
-    border-radius: 5px;
-    background-color: #f6f6f6;
-    display: flex;
-    margin-top: 23px;
-    .sort-container {
-      font-size: 15px;
-      margin-left: 25px;
+.app-container__content--center {
+  .leader-board__container {
+    @extend .pftp-card-layout;
+    max-width: 718px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 28px 45px 41px;
+    @include for-phone-only {
+      max-width: 350px !important;
+    }
+    @include for-xs-phone-only {
+      max-width: 290px !important;
+    }
+    .leaderboard-list__sort {
+      border-radius: 5px;
+      background-color: #f6f6f6;
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      span {
-        @extend .pftp-text-basic;
-        font-family: Myriad Pro;
-        font-size: 15px;
-        text-align: left;
-        color: #b7d37f;
+      margin-top: 23px;
+      @include for-phone-only {
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
       }
+      .sort-container {
+        font-size: 15px;
+        margin-left: 25px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        span {
+          @extend .pftp-text-basic;
+          font-family: Myriad Pro;
+          font-size: 15px;
+          text-align: left;
+          color: #b7d37f;
+        }
 
-      .pftp-selectfield {
-        margin: 0;
-        .pftp-selectfield__select {
-          border: none;
-          background-color: #f6f6f6;
-          height: 43px;
+        .pftp-selectfield {
+          margin: 0;
+          .pftp-selectfield__select {
+            border: none;
+            background-color: #f6f6f6;
+            height: 43px;
+          }
         }
       }
     }
-  }
 
-  .pftp-tabs {
-    width: 100%;
-    .leader-board__sub-container {
+    .pftp-tabs {
       width: 100%;
-    }
-    .map-tab__container {
-      height: 602px;
-      width: 100%;
-      .map-tab-checkboxes-row {
-        display: flex;
+      .leader-board__sub-container {
         width: 100%;
-        justify-content: space-between;
-        margin-top: 37px;
+      }
+      .map-tab__container {
+        height: 602px;
+        width: 100%;
+        .map-tab-checkboxes-row {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          margin-top: 37px;
+        }
       }
     }
-  }
-  .leaderboard-list__table {
-    width: 100%;
-    height: 405px;
-    overflow-y: scroll;
-    border-radius: 6px;
-    border: solid 2px #efefef;
-    margin-top: 8px;
-    .projects-list {
-      margin: 0;
-      border: 0;
+    .leaderboard-list__table {
       width: 100%;
+      height: 405px;
+      overflow-y: scroll;
+      border-radius: 6px;
+      border: solid 2px #efefef;
+      margin-top: 8px;
+      .projects-list {
+        margin: 0;
+        border: 0;
+        width: 100%;
+      }
     }
-  }
-  .leaderboard_images__container {
-    margin-top: 28px;
-    display: flex;
-    justify-content: space-between;
-    // overflow-x: auto;
-    .leaderboard_image__container {
+    .leaderboard_images__container {
+      margin-top: 28px;
       display: flex;
-      flex-direction: column;
-      font-size: 16px;
-      color: #e6e6e6;
-      padding-top: 5px;
-      max-width: 76px;
-      align-items: center;
+      justify-content: space-between;
+      @include for-phone-only {
+        overflow: auto;
+      }
+      // overflow-x: auto;
+      .leaderboard_image__container {
+        @include for-phone-only {
+          margin-right: 10px;
+          font-size: 12px;
+        }
+        display: flex;
+        flex-direction: column;
+        font-size: 16px;
+        color: #e6e6e6;
+        padding-top: 5px;
+        max-width: 76px;
+        align-items: center;
 
-      .imageContainer {
-        width: 76px;
-        height: 76px;
-        margin-bottom: 4px;
+        .imageContainer {
+          width: 76px;
+          height: 76px;
+          margin-bottom: 4px;
+          @include for-phone-only {
+            width: 66px;
+            height: 66px;
+            img {
+              width: 66px;
+              height: 66px;
+            }
+          }
+        }
       }
     }
   }

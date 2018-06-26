@@ -18,7 +18,7 @@ let TCombForm = t.form.Form;
 
 const formLayout = locals => {
   return (
-    <div className="pledge-form">
+    <div className="pledge-form-layout">
       <div className="row">
         <div className="half">{locals.inputs.firstname}</div>
         <div className="half">{locals.inputs.lastname}</div>

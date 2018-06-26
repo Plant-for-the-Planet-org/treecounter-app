@@ -5,7 +5,7 @@
     width: 300px;
     opacity: 1;
   }
-  .header-icons {
+  .search-icon {
     color: $colorPrimary;
   }
 }
@@ -15,10 +15,11 @@
   align-items: center;
   position: relative;
 
-  .header-icons {
+  .search-icon {
     right: 10px;
     z-index: 1;
     position: absolute;
+    color: white;
   }
 
   input {
@@ -34,7 +35,7 @@
   input:focus {
     width: 300px;
     opacity: 1;
-    .header-icons {
+    .search-icon {
       color: $colorPrimary;
     }
   }

@@ -54,20 +54,6 @@
       }
     }
 
-    .project-specs__container {
-      flex-direction: column;
-      .plants-info {
-        flex-basis: auto;
-        flex-grow: auto;
-        margin: 0;
-      }
-      .project-info {
-        flex-basis: auto;
-        flex-grow: auto;
-        margin: 0;
-      }
-    }
-
     .project-action-links {
       display: flex;
       justify-content: space-between;
@@ -148,7 +134,7 @@
 
 .select-project__container {
   @extend .donate-tress__container;
-  width: 718px;
+  width: 100%px;
   .slick-initialized {
     margin: 35px;
     margin-top: 30px;
@@ -160,20 +146,6 @@
 
     .pftp-button-primary {
       width: 50%;
-    }
-
-    .project-specs__container {
-      flex-direction: row;
-      .plants-info {
-        flex-basis: 0;
-        flex-grow: 1;
-        margin-left: 15px;
-      }
-      .project-info {
-        flex-basis: 0;
-        flex-grow: 1;
-        margin-right: 15px;
-      }
     }
   }
 }

@@ -66,7 +66,7 @@ class Trillion extends Component {
               })
             }
           >
-            Esri
+            {i18n.t('label.esri')}
           </div>
           <div
             onClick={() =>
@@ -75,7 +75,7 @@ class Trillion extends Component {
               })
             }
           >
-            BMZ
+            {i18n.t('label.bmz')}
           </div>
         </TextHeading>
 

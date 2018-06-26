@@ -163,7 +163,7 @@ export default class EditUserProfile extends React.Component {
                   }}
                   className="delete-project"
                 >
-                  delete project
+                  {i18n.t('label.delete_project')}
                 </div>
               </div>
             </div>
@@ -230,7 +230,7 @@ export default class EditUserProfile extends React.Component {
                   this.handleAddNewProject();
                 }}
               >
-                +&nbsp;Add new project
+                +&nbsp;{i18n.t('label.new_project')}
               </button>
             </div>
           </div>

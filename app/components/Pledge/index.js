@@ -13,6 +13,7 @@ import {
   pledgeFormSchema,
   pledgeSchemaOptions
 } from '../../server/parsedSchemas/pledge';
+import i18n from '../../locales/i18n';
 
 let TCombForm = t.form.Form;
 
@@ -60,18 +61,18 @@ export default class Pledge extends Component {
               useGrouping: true
             })}
           </span>
-          <span className="total_text">Total Trees</span>
+          <span className="total_text">{i18n.t('label.total_trees')}</span>
         </CardLayout>
         <div className="row">
           <CardLayout className="recent-pledges">
             <div className="before_table_header">
               <img src={pledge_latest} />
-              <span>Most Recent Pledges</span>
+              <span>{i18n.t('label.most_recent')}</span>
             </div>
             <div className="recent-pledges-table">
               <div className="pledges-header row-list-item">
-                <span>Name</span>
-                <span>Trees</span>
+                <span>{i18n.t('label.name')}</span>
+                <span>{i18n.t('label.trees')}</span>
               </div>
               <div className="pledges-list">
                 {this.props.pledges.latest.map(pledge => (
@@ -86,12 +87,12 @@ export default class Pledge extends Component {
           <CardLayout className="recent-pledges">
             <div className="before_table_header">
               <img src={pledge_highest} />
-              <span>Biggest Pledges</span>
+              <span>{i18n.t('label.biggest_pledges')}</span>
             </div>
             <div className="recent-pledges-table">
               <div className="pledges-header row-list-item">
-                <span>Name</span>
-                <span>Trees</span>
+                <span>{i18n.t('label.name')}</span>
+                <span>{i18n.t('label.trees')}</span>
               </div>
               <div className="pledges-list">
                 {this.props.pledges.highest.map(pledge => (
@@ -114,12 +115,9 @@ export default class Pledge extends Component {
             onChange={value => this.onFormChange(value)}
           />
           <PrimaryButton onClick={() => this.onFormSubmit()}>
-            Pledge
+            {i18n.t('label.pledge')}
           </PrimaryButton>
-          <TextSpan>
-            After pledging, you will receive an email that tells you how to
-            donate the trees pledged. One tree costs € 1.
-          </TextSpan>
+          <TextSpan>{i18n.t('label.pledge_des')}</TextSpan>
         </CardLayout>
       </div>
     ) : null;

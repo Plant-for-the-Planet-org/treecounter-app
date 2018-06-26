@@ -161,7 +161,7 @@ export default class Leaderboard extends Component {
                 </div>
                 <div className="leaderboard-list__sort">
                   <div className="sort-container">
-                    <span>Sort By: </span>
+                    <span>{i18n.t('label.sortBy')} </span>
                     <div className="pftp-selectfield">
                       <select
                         ref="orderBy"
@@ -181,7 +181,7 @@ export default class Leaderboard extends Component {
                     </div>
                   </div>
                   <div className="sort-container">
-                    <span>Time Period: </span>
+                    <span>{i18n.t('label.timePeriod')} </span>
                     <div className="pftp-selectfield">
                       <select
                         ref="timePeriod"

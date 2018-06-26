@@ -20,7 +20,7 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
               value={value}
               key={value}
             >
-              {currencies[value]}
+              {currencies[value]} [{value}]
             </option>
           );
         })}

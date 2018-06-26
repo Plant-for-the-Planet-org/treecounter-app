@@ -92,7 +92,7 @@ class RegistrationMap extends React.Component {
 }
 
 RegistrationMap.propTypes = {
-  handleGeoLocationChange: PropTypes.func.isRequired
+  onGeoLocationSelected: PropTypes.func.isRequired
 };
 
 export default RegistrationMap;

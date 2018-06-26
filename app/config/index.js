@@ -1,3 +1,6 @@
+/**
+ * CREATE A COPY OF THIS FILE AND NAME IT: index.js
+ */
 let userLang = navigator.language || navigator.userLanguage;
 
 /**
@@ -10,7 +13,7 @@ export const initialProps = {
 
 export const context = {
   scheme: 'https', // API server protocol
-  host: 'staging.trilliontreecampaign.org', // API server domain
+  host: 'test.trilliontreecampaign.org', // API server domain
   base: '/app_dev.php', // debug mode on/off, set to empty string to switch debug mode off
   debug: true, // local console debugging switch
   currency: 'USD'

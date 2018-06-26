@@ -2,7 +2,7 @@ import React from 'react';
 import MapContributionCapture from '../Map/MapContributionCapture';
 
 export function MapTemplate(locals) {
-  console.log(locals);
+  console.log('%%%%%%%%%%%%%%%%%%%% '.locals);
   //  locals.onChange(); //Temporary fix
   return (
     <MapContributionCapture

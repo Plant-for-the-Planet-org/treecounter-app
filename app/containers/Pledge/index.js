@@ -23,6 +23,7 @@ class PledgeContainer extends Component {
       <Pledge
         pledges={this.props.pledges}
         postPledge={data => this.postPledgeRequest(data)}
+        eventSlug={this.props.match.params.eventSlug}
       />
     );
   }

@@ -4,9 +4,11 @@ import i18n from '../../locales/i18n.js';
 
 const PlantedDetails = ({ personal, community }) => (
   <div className="fixed-planted-details">
-    <strong>{personal}</strong> {i18n.t('label.plant_personal')}
+    <strong>{personal.toFixed(2).toLocaleString('en')}</strong>{' '}
+    {i18n.t('label.plant_personal')}
     <br />
-    <strong>{community}</strong> {i18n.t('label.plant_community')}
+    <strong>{community.toFixed(2).toLocaleString('en')}</strong>{' '}
+    {i18n.t('label.plant_community')}
   </div>
 );
 

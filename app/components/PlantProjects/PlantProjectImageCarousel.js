@@ -48,7 +48,7 @@ const PlantProjectImageCarousel = props => {
 };
 
 PlantProjectImageCarousel.propTypes = {
-  projectImages: PropTypes.array.isRequired
+  projectImages: PropTypes.array
 };
 
 export default PlantProjectImageCarousel;

@@ -10,7 +10,7 @@ import { updateRoute } from '../../helpers/routerHelper';
 import TextHeading from '../Common/Heading/TextHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n.js';
-import { esriLogo } from '../../assets';
+import { esriLogo, bmzLogo } from '../../assets';
 
 class Trillion extends Component {
   constructor() {
@@ -75,13 +75,15 @@ class Trillion extends Component {
             <TextBlock>User Conference</TextBlock>
           </div>
           <div
+            className="event_item"
             onClick={() =>
               updateRoute('app_pledge', null, null, {
                 eventSlug: 'bmz-zukunftskongress'
               })
             }
           >
-            BMZ
+            <img src={bmzLogo} />
+            <TextBlock>User Conference</TextBlock>
           </div>
         </div>
 

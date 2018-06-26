@@ -73,8 +73,12 @@ import leaderboards_company_grey from './images/icons/leaderboards_company_grey.
 import leaderboards_company_green from './images/icons/leaderboards_company_green.png';
 import close_green from './images/icons/close_green.png';
 import FooterMobileLogos from './images/TTC_footer_mobile_logos.png';
+import esriLogo from './images/logo_esri.png';
+import bmzLogo from './images/logo_bmz.jpg';
 
 export {
+  bmzLogo,
+  esriLogo,
   pledge_highest,
   pledge_latest,
   payment_arrow,

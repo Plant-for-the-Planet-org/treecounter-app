@@ -84,6 +84,14 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+        .table-body {
+          .table-row:nth-child(even) {
+            @include for-phone-only {
+              background-color: #f6f6f6;
+            }
+          }
+        }
+
         .table-header {
           @include for-phone-only {
             display: none;
@@ -104,9 +112,16 @@
         }
         .table-row {
           display: flex;
+          padding: 7px 0;
+          @include for-phone-only {
+            padding: 10px 0;
+          }
 
           .table-col {
             display: flex;
+            @include for-phone-only {
+              padding: 10px 0;
+            }
             padding-left: 15px;
             justify-content: flex-start;
             .table-col-phone-header {

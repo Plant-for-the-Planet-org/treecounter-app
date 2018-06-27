@@ -120,7 +120,7 @@ export default class Leaderboard extends Component {
               <div className="table-row" key={'tr' + index}>
                 <div className="table-col country">
                   <span className="countryIndex">{index + 1 + '.  '}</span>
-                  <Link to={d.uri}>China</Link>
+                  <Link to={d.uri}>{d.caption}</Link>
                 </div>
                 <div className="table-col other">
                   <div className="table-col-phone-header">Planted</div>

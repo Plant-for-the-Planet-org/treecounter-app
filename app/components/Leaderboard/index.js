@@ -110,7 +110,7 @@ export default class Leaderboard extends Component {
         <div className="leaderboard-table">
           <div className="table-header">
             <div className="table-header-item country">
-              {categoryInfo.categoryHeader[sectionInfo.section]}
+              {'   ' + categoryInfo.categoryHeader[sectionInfo.section]}
             </div>
             <div className="table-header-item other">Planted</div>
             <div className="table-header-item other">Target</div>

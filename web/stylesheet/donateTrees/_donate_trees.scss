@@ -67,7 +67,15 @@
         margin: 0;
       }
     }
-
+    @include for-phone-only{
+      .project-specs__container {
+        flex-direction: column;
+        .plants-info {
+          flex-basis: auto;
+          flex-grow: auto;
+        }
+      }
+    }
     .project-action-links {
       display: flex;
       justify-content: space-between;
@@ -148,7 +156,7 @@
 
 .select-project__container {
   @extend .donate-tress__container;
-  width: 718px;
+  width: 100%;
   .slick-initialized {
     margin: 35px;
     margin-top: 30px;
@@ -173,6 +181,16 @@
         flex-basis: 0;
         flex-grow: 1;
         margin-right: 15px;
+      }
+    }
+    @include for-phone-only{
+      .project-specs__container {
+        flex-direction: column;
+        .plants-info {
+          flex-basis: 0;
+          flex-grow: 1;
+          margin: 0%;
+        }
       }
     }
   }

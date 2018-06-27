@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import PublicTreecounter from '../../components/PublicTreeCounter/PublicTreecounter';
-// import TPOComponent from '../TpoProjects/TPOComponent';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
-// import SvgContainer from '../Common/SvgContainer';
-// import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
-// import SupportButton from './SupportButton';
 
 class PublicTreecounterContainer extends Component {
   constructor() {

@@ -74,6 +74,7 @@ import leaderboards_company_green from './images/icons/leaderboards_company_gree
 import close_green from './images/icons/close_green.png';
 import esriLogo from './images/logo_esri.png';
 import bmzLogo from './images/logo_bmz.jpg';
+import questionmark_orange from './images/icons/questionmark.png';
 
 export {
   bmzLogo,
@@ -151,5 +152,6 @@ export {
   leaderboards_tpo_grey,
   leaderboards_company_grey,
   leaderboards_company_green,
-  close_green
+  close_green,
+  questionmark_orange
 };

@@ -46,6 +46,7 @@ export default class Pledge extends Component {
     let value = this.refs.pledgeForm.getValue();
     if (value) {
       this.props.postPledge(value);
+      this.setState({ value: {} });
     }
   }
   onFormChange(value) {

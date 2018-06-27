@@ -138,9 +138,6 @@ export default class RegisterTrees extends Component {
             {i18n.t('label.register')}
           </PrimaryButton>
         </CardLayout>
-        <RegistrationMap
-          onGeoLocationSelected={this.handleGeoLocationChange()}
-        />
       </div>
     );
   }

@@ -70,10 +70,74 @@
       border-radius: 6px;
       border: solid 2px #efefef;
       margin-top: 8px;
-      .projects-list {
-        margin: 0;
-        border: 0;
+      .leaderboard-table {
+        display: flex;
+        flex-direction: column;
         width: 100%;
+        .table-header {
+          @include for-phone-only {
+            display: none;
+          }
+          display: flex;
+          border-bottom: 2px solid #e6e6e6;
+          .table-header-item {
+            display: flex;
+            padding-left: 15px;
+            justify-content: flex-start;
+          }
+          .other {
+            flex: 0 0 22%;
+          }
+          .country {
+            flex: 0 0 50%;
+          }
+        }
+        .table-row {
+          display: flex;
+
+          .table-col {
+            display: flex;
+            padding-left: 15px;
+            justify-content: flex-start;
+            .table-col-phone-header {
+              display: none;
+            }
+          }
+          .other {
+            flex: 0 0 22%;
+          }
+          .country {
+            flex: 0 0 50%;
+            .countryIndex {
+              padding-right: 10px;
+            }
+          }
+        }
+
+        @include for-phone-only {
+          .table-row {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 11px;
+            .table-col {
+              display: flex;
+              padding-left: 15px;
+              .table-col-phone-header {
+                display: block;
+              }
+            }
+            .other {
+              justify-content: space-between;
+              flex: 0 0 100%;
+            }
+            .country {
+              flex: 0 0 100%;
+              .countryIndex {
+                padding-right: 10px;
+              }
+            }
+          }
+        }
       }
     }
     .leaderboard_images__container {

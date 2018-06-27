@@ -52,14 +52,12 @@ export default class EditUserProfile extends React.Component {
   };
 
   handleAddNewProject = () => {
-    console.log(plantProjectFormOptions);
     const newPlantProjects = [...this.state.plantProjects]; // clone the array
     newPlantProjects.push(emptyProjectInfo);
     this.setState({ plantProjects: newPlantProjects });
   };
 
   handleDeleteProjectCLick = (plantProject, index) => {
-    console.log('click delete');
     if (plantProject.id) {
       this.props.deletePlantProject(plantProject.id);
     } else {
@@ -105,21 +103,18 @@ export default class EditUserProfile extends React.Component {
         plantProject.plantProjectImages
       );
       if (plantProject.id) {
-        console.log(value, plantProject);
         this.props.updatePlantProject({
           ...value,
           id: plantProject.id,
           plantProjectImages
         });
       } else {
-        console.log('post new project here');
         this.props.addPlantProject(value);
       }
     }
   };
 
   getFormTemplate = (userType, profileType) => {
-    console.log(profileType);
     switch (profileType) {
       case 'profile':
         return UserProfileTemplate;

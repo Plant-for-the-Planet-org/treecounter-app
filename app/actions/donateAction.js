@@ -42,11 +42,6 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
 }
 
 export function gift(donationContribution, plantProjectId, loggedIn) {
-  console.log(
-    '+++++++++++++ Donation Processing ',
-    donationContribution,
-    plantProjectId
-  );
   let route = loggedIn ? 'giftDonationContribution_post' : 'giftDonate_post';
   let request = loggedIn
     ? postAuthenticatedRequest(route, donationContribution, {
@@ -59,7 +54,6 @@ export function gift(donationContribution, plantProjectId, loggedIn) {
     request
       .then(response => {
         const treecounter = response.data;
-        debug('success: ', treecounter);
         // a SchemaResponse with a contribution and a treecounter entity should be merged
         // the response will also include the donationUid, required to redirect to the success page
         const [contribution] = treecounter.contributions.splice(-1);

@@ -50,7 +50,6 @@ export default class Map extends Component {
           SimpleFillSymbol,
           PictureMarkerSymbol
         ]) => {
-          console.log('Promise this- ', this);
           let lastClick;
           let mapThis = this;
           // Initialize map, search icon and geolocalizazion-button

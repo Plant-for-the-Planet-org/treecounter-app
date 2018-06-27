@@ -45,7 +45,6 @@ export function login(data) {
 
 export function logoutUser() {
   return dispatch => {
-    debug('Logging out');
     clearStorage();
     dispatch(userLogout());
   };
@@ -55,7 +54,6 @@ export function forgot_password(data) {
   return dispatch => {
     postRequest('auth_forgotPassword_post', data)
       .then(res => {
-        debug(res.status);
         updateRoute('app_passwordSent', dispatch);
       })
       .catch(err => debug(err));
@@ -66,7 +64,6 @@ export function reset_password(data) {
   return dispatch => {
     postRequest('auth_resetPassword_post', data)
       .then(res => {
-        debug(res.status);
         updateRoute('app_login', dispatch);
       })
       .catch(err => debug(err));

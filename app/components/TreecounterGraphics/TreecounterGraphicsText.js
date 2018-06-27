@@ -27,21 +27,25 @@ class TreecounterGraphicsText extends Component {
 
   convertNumber(n, d) {
     let x = ('' + n).length;
-    let p = Math.pow;
-    d = p(10, d);
-    x -= x % 3;
-    return (
-      Math.round(n * d / p(10, x)) / d +
-      [
-        '',
-        ' Thousand',
-        ' Million',
-        ' Billion',
-        ' Trillion',
-        ' Quadrillion',
-        ' Quintillion'
-      ][x / 3]
-    );
+    if (x > 5) {
+      let p = Math.pow;
+      d = p(10, d);
+      x -= x % 3;
+      return (
+        Math.round(n * d / p(10, x)) / d +
+        [
+          '',
+          ' Thousand',
+          ' Million',
+          ' Billion',
+          ' Trillion',
+          ' Quadrillion',
+          ' Quintillion'
+        ][x / 3]
+      );
+    } else {
+      return n;
+    }
   }
 
   render() {
@@ -74,7 +78,7 @@ class TreecounterGraphicsText extends Component {
               {this.props.trillion ? (
                 <div>
                   {/* {this.getTwoWordString(NumberToWords.toWords(target))} */}
-                  {target}
+                  {target.toLocaleString('en')}
                 </div>
               ) : null}
             </span>
@@ -101,7 +105,7 @@ class TreecounterGraphicsText extends Component {
               {this.props.trillion ? (
                 <div>
                   {/* {this.getTwoWordString(NumberToWords.toWords(planted))} */}
-                  {planted.toFixed(2)}
+                  {planted.toFixed(2).toLocaleString('en')}
                 </div>
               ) : null}
             </span>

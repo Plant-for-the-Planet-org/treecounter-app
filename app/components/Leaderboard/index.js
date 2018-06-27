@@ -54,7 +54,6 @@ export default class Leaderboard extends Component {
     this.state = {
       queryResult: null
     };
-    console.log('constructor leaderBoard');
   }
 
   handleSlectionChange = () => {
@@ -62,7 +61,6 @@ export default class Leaderboard extends Component {
   };
 
   handleCategoryChange = section => {
-    console.log('clicked' + section);
     let orderByRef = this.refs.orderBy;
     let orderBy = orderByRef.options[orderByRef.selectedIndex].value;
 

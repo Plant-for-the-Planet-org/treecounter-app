@@ -1,7 +1,6 @@
 import React from 'react';
 
 export function UserPasswordUpdateTemplate(locals) {
-  console.log(locals);
   return (
     <div className="tComb-template__password-form">
       <div>{locals.inputs.currentPassword}</div>

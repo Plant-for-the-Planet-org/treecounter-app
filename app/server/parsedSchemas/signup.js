@@ -49,5 +49,4 @@ const schemaOptions = {
   education: schemaOptionsEducation
 };
 
-console.log(schemaOptions);
 export { schemaOptions, signupFormSchema };

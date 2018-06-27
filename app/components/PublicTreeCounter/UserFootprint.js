@@ -14,7 +14,7 @@ const UserFootprint = ({ userProfile }) => {
       />
       <UserHomepageLink
         homepageUrl={userProfile.url}
-        caption={userProfile.homepageCaption}
+        caption={userProfile.linkText}
       />
       {/* <ArcGISContributionsMap contributions={userProfile.contributions} /> */}
       {/*<UserBarChart contributions={userProfile.contributions} />*/}

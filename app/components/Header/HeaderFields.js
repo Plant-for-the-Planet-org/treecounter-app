@@ -23,7 +23,7 @@ const HeaderFields = ({
       <div className="pftp-popover-notification">
         <Popover
           onPopoverClosed={() => {
-            userFeeds
+            userFeeds && userFeeds.userFeeds.length
               ? markSeenNotificationAction(userFeeds.userFeeds[0].id)
               : null;
           }}

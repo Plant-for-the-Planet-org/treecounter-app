@@ -8,6 +8,7 @@ import CarouselNavigation from '../Common/CarouselNavigation';
 class PlantProjectCarousel extends React.Component {
   render() {
     const settings = {
+      dots: true,
       nextArrow: (
         <CarouselNavigation
           styleName="tpo-footer-nav-img__right"
@@ -25,7 +26,6 @@ class PlantProjectCarousel extends React.Component {
 
     // see: https://medium.com/@Carmichaelize/dynamic-tag-names-in-react-and-jsx-17e366a684e9
     const TagName = contentTag;
-    console.log(TagName);
 
     // add navigation buttons that will trigger calls to 'onChange' callback
     return (

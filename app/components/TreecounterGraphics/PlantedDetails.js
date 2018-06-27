@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
+import { questionmark_orange } from '../../assets';
 
 const PlantedDetails = ({ personal, community, type }) => (
   <div className="fixed-planted-details">
@@ -16,7 +17,8 @@ const PlantedDetails = ({ personal, community, type }) => (
       'individual' === type
         ? 'label.individual_plant_community'
         : 'label.tpo_individual_plant_community'
-    )}
+    )}{' '}
+    <img src={questionmark_orange} />
   </div>
 );
 

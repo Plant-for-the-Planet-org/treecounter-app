@@ -657,6 +657,7 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            widget: 'password',
             propertyOrder: 1
           },
           password: {

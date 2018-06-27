@@ -12,7 +12,9 @@ class MapContributionCapture extends React.Component {
       map: null,
       view: null,
       graphic: null,
-      search: null
+      search: null,
+      webMercatorUtils: null,
+      geLocation: null
     };
 
     this.handleFail = this.handleFail.bind(this);
@@ -36,8 +38,11 @@ class MapContributionCapture extends React.Component {
   }
 
   handleLoad(map, view) {
-    loadModules(['esri/widgets/Search'])
-      .then(([Search]) => {
+    loadModules([
+      'esri/widgets/Search',
+      'esri/geometry/support/webMercatorUtils'
+    ])
+      .then(([Search, webMercatorUtils]) => {
         const search = new Search({ view });
         const source = search.sources.getItemAt(0);
         source.outFields.push('CountryCode');
@@ -71,6 +76,7 @@ class MapContributionCapture extends React.Component {
               geoLatitude: result.feature.geometry.latitude,
               countryCode: result.feature.attributes.CountryCode
             };
+            this.setState({ geoLocation });
             this.props.onLocationSelected(geoLocation);
           }
         });
@@ -88,9 +94,60 @@ class MapContributionCapture extends React.Component {
           // .catch(error => console.log(error))
         });
 
-        this.setState({ map, view, search, status: 'loaded' });
+        this.setState({
+          map,
+          view,
+          search,
+          webMercatorUtils,
+          status: 'loaded'
+        });
       })
       .catch(err => console.error(err));
+  }
+
+  onSubmit() {
+    // GEO LOCATION //
+    const geo_location = new Point({
+      spatialReference: { wkid: 4326 },
+      x: this.state.geLocation.geoLongitude,
+      y: this.state.geLocation.geoLatitude
+    });
+
+    const attributes = {
+      type: 'planting',
+      user_id: 1, // we have to get userProfile.id here
+      user_name: 'Marco Polo', // we have to get userProfile.fullname here
+      tree_count: 1, // we have to get userProfile.id here
+      plant_date: new Date(), // have to figure out what format the date should be in
+      tree_type: 'maple', // we have to get the user input here
+      geo_longitude: this.state.geLocation.geoLongitude,
+      geo_latitude: this.state.geLocation.geoLatitude,
+      country: this.state.geLocation.countryCode
+    };
+
+    // NEW LOCATION //
+    const new_location = this.state.webMercatorUtils.geographicToWebMercator(
+      geo_location
+    );
+
+    // NEW FEATURE //
+    const new_feature = new Graphic({
+      geometry: new_location,
+      attributes: attributes
+    });
+
+    // CALL FEATURE LAYER APPLYEDITS //
+    // https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#applyEdits
+    tree_inventory_layer
+      .applyEdits({ addFeatures: [new_feature] })
+      .then(applyEditsResults => {
+        // MAKE SURE THE FEATURE WAS CREATED //
+        // https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#FeatureEditResult
+        const addFeatureResult = applyEditsResults.addFeatureResults[0];
+        console.log(
+          `Registered Successfully: ${addFeatureResult.error === null}`
+        );
+      });
   }
 
   handleFail(e) {

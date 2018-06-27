@@ -11,9 +11,9 @@ export default class UserHome extends Component {
   constructor(props) {
     super(props);
     let svgData = {};
-    const { treecounterData } = props;
+    const { treecounterData, userProfile } = props;
     if (treecounterData) {
-      svgData = treecounterData;
+      svgData = { ...treecounterData, type: userProfile.type };
     }
     this.state = {
       svgData: svgData
@@ -21,9 +21,9 @@ export default class UserHome extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { treecounterData } = nextProps;
+    const { treecounterData, userProfile } = nextProps;
     if (treecounterData) {
-      let svgData = treecounterData;
+      let svgData = { ...treecounterData, type: userProfile.type };
       this.setState({ svgData });
     }
   }

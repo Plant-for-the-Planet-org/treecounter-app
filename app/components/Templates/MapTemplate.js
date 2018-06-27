@@ -22,9 +22,15 @@ export function MapTemplate(locals) {
     <RegistrationMap
       geoLocation={geolocation}
       onGeoLocationSelected={newValue => {
-        console.log('handle map change', value);
+        console.log('handle map change', newValue);
+        newValue['country'] = newValue.countryCode;
+        delete newValue.countryCode;
+        let valueString = Object.keys(newValue)
+          .map(key => key + '=' + newValue[key])
+          .join('&');
         //change value object into queryParams
-        //call locals.onChange(value);
+
+        locals.onChange(valueString);
       }}
     />
   );

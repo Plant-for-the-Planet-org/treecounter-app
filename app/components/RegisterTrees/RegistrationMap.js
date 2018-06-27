@@ -12,7 +12,7 @@ class RegistrationMap extends React.Component {
     this.state = {
       layer: null,
       userId,
-      geoLocation: {}
+      geoLocation: this.props.geoLocation || {}
     };
 
     this.onLocationSelected = this.onLocationSelected.bind(this);
@@ -71,6 +71,7 @@ class RegistrationMap extends React.Component {
   onLocationSelected(geoLocation) {
     console.log(geoLocation);
     this.setState({ geoLocation });
+    this.props.onGeoLocationSelected(geoLocation);
   }
 
   render() {
@@ -92,7 +93,8 @@ class RegistrationMap extends React.Component {
 }
 
 RegistrationMap.propTypes = {
-  onGeoLocationSelected: PropTypes.func.isRequired
+  onGeoLocationSelected: PropTypes.func.isRequired,
+  geoLocation: PropTypes.object
 };
 
 export default RegistrationMap;

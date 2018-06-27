@@ -3,13 +3,29 @@ import MapContributionCapture from '../Map/MapContributionCapture';
 import RegistrationMap from '../../components/RegisterTrees/RegistrationMap';
 
 export function MapTemplate(locals) {
-  console.log('%%%%%%%%%%%%%%%%%%%% ', locals);
+  console.log('%%%%%%%%%%%%%%%%%%%%', locals);
   //  locals.onChange(); //Temporary fix
+  let geolocation = {};
+  try {
+    geolocation = JSON.parse(
+      '{"' +
+        decodeURI(locals.value)
+          .replace(/"/g, '\\"')
+          .replace(/&/g, '","')
+          .replace(/=/g, '":"') +
+        '"}'
+    );
+  } catch (err) {
+    console.error(err);
+  }
   return (
-    <RegistrationMap onGeoLocationSelected={locals.onChange} />
-    // <MapContributionCapture
-    //   geoLocation={{ geoLongitude: 1, geoLatitude: 1, country: 'DE' }}
-    //   onLocationSelected={locals.onChange}
-    // />
+    <RegistrationMap
+      geoLocation={geolocation}
+      onGeoLocationSelected={newValue => {
+        console.log('handle map change', value);
+        //change value object into queryParams
+        //call locals.onChange(value);
+      }}
+    />
   );
 }

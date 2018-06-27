@@ -28,7 +28,7 @@ const ArcGISContributionCaptureMap = ({ geoLocation, onLocationSelected }) => {
       />
       <br />
       <br />
-      <div>countryCode: {geoLocation.countryCode}</div>
+      <div>countryCode: {geoLocation.country}</div>
       <div>geoLongitude: {geoLocation.geoLongitude}</div>
       <div>geoLatitude: {geoLocation.geoLatitude}</div>
     </div>

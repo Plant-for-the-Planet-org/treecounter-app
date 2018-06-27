@@ -1,6 +1,8 @@
 export default {
-  plant_personal: 'Planted by the personal',
-  plant_community: 'Planted by community',
+  individual_plant_personal: 'Planted by me',
+  individual_plant_community: 'Planted by my community',
+  tpo_plant_personal: 'Planted by us',
+  tpo_individual_plant_community: 'Planted by our community',
   by: 'by ',
   faqs: 'FAQs',
   logged_in: 'Logged In',

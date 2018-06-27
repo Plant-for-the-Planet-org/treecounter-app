@@ -123,9 +123,9 @@ export default class SelectPlantProject extends Component {
     this.setState({ mode: tab });
   };
 
-  callExpanded = bool => {
+  callExpanded = () => {
     this.setState({
-      expanded: bool
+      expanded: !this.state.expanded
     });
   };
 
@@ -216,8 +216,8 @@ export default class SelectPlantProject extends Component {
                 ? featuredProjects.map(project => (
                     <div key={project.id}>
                       <PlantProjectFull
-                        callExpanded={this.callExpanded}
-                        expanded={false}
+                        callExpanded={() => this.callExpanded()}
+                        expanded={this.state.expanded}
                         plantProject={project}
                         tpoName={project.tpo_name}
                       />

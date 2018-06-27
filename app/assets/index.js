@@ -72,9 +72,13 @@ import leaderboards_tpo_grey from './images/icons/leaderboards_tpo_grey.png';
 import leaderboards_company_grey from './images/icons/leaderboards_company_grey.png';
 import leaderboards_company_green from './images/icons/leaderboards_company_green.png';
 import close_green from './images/icons/close_green.png';
-import FooterMobileLogos from './images/TTC_footer_mobile_logos.png';
+import esriLogo from './images/logo_esri.png';
+import bmzLogo from './images/logo_bmz.jpg';
+import questionmark_orange from './images/icons/questionmark.png';
 
 export {
+  bmzLogo,
+  esriLogo,
   pledge_highest,
   pledge_latest,
   payment_arrow,
@@ -149,5 +153,5 @@ export {
   leaderboards_company_grey,
   leaderboards_company_green,
   close_green,
-  FooterMobileLogos
+  questionmark_orange
 };

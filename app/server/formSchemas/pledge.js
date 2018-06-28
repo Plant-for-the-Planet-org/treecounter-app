@@ -31,7 +31,7 @@ export default {
     },
     treeCount: {
       type: 'integer',
-      title: 'label.treecount',
+      title: 'label.tree_count',
       propertyOrder: 4
     }
   },

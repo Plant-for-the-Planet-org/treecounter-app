@@ -8,6 +8,7 @@ import type { InjectedProps } from '../Stripe/inject';
 
 import { CardElement, injectStripe } from '../Stripe/stripeDefs';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
+import i18n from '../../../locales/i18n';
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -76,7 +77,8 @@ class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
       <form className="payment-option" onSubmit={this.handleSubmit}>
         <div onClick={this.handleArrowClick} className="payment-option-header">
           <span>
-            <img className="logo" src={payment_credit} />Credit Card
+            <img className="logo" src={payment_credit} />
+            {i18n.t('label.creditCard')}
           </span>
           <img className={arrow} src={payment_arrow} />
         </div>
@@ -89,7 +91,7 @@ class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
             hidePostalCode={true}
             {...createOptions(this.props.fontSize)}
           />
-          <PrimaryButton>Pay</PrimaryButton>
+          <PrimaryButton>{i18n.t('label.pay')}</PrimaryButton>
         </div>
       </form>
     );

@@ -54,7 +54,6 @@ export default class Leaderboard extends Component {
     this.state = {
       queryResult: null
     };
-    console.log('constructor leaderBoard');
   }
 
   handleSlectionChange = () => {
@@ -62,7 +61,6 @@ export default class Leaderboard extends Component {
   };
 
   handleCategoryChange = section => {
-    console.log('clicked' + section);
     let orderByRef = this.refs.orderBy;
     let orderBy = orderByRef.options[orderByRef.selectedIndex].value;
 
@@ -163,7 +161,7 @@ export default class Leaderboard extends Component {
                 </div>
                 <div className="leaderboard-list__sort">
                   <div className="sort-container">
-                    <span>Sort By: </span>
+                    <span>{i18n.t('label.sortBy')} </span>
                     <div className="pftp-selectfield">
                       <select
                         ref="orderBy"
@@ -183,7 +181,7 @@ export default class Leaderboard extends Component {
                     </div>
                   </div>
                   <div className="sort-container">
-                    <span>Time Period: </span>
+                    <span>{i18n.t('label.timePeriod')} </span>
                     <div className="pftp-selectfield">
                       <select
                         ref="timePeriod"

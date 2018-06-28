@@ -282,8 +282,8 @@ export default class DonateTrees extends Component {
               <img src={check_green} />
               <div className={'gap'} />
               <TextBlock strong={true}>
-                Thank you for planting {this.state.treeCount} trees with us! You
-                will receive an email with a donation receipt in time.
+                {i18n.t('label.thankyou')} {this.state.treeCount}{' '}
+                {i18n.t('label.receive_mail')}
               </TextBlock>
               <div className={'gap'} />
               <TextBlock>

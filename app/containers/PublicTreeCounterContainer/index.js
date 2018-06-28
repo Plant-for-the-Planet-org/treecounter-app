@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import PublicTreecounter from '../../components/PublicTreeCounter/PublicTreecounter';
-// import TPOComponent from '../TpoProjects/TPOComponent';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
-// import SvgContainer from '../Common/SvgContainer';
-// import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
-// import SupportButton from './SupportButton';
 
 class PublicTreecounterContainer extends Component {
   constructor() {
@@ -27,7 +23,6 @@ class PublicTreecounterContainer extends Component {
 
     dispatch(treecounterLookupAction(params.treecounterId))
       .then(treecounter => {
-        console.log(treecounter);
         this.setState({
           treecounter,
           isTpo: treecounter.userProfile && treecounter.userProfile === 'tpo',
@@ -37,15 +32,9 @@ class PublicTreecounterContainer extends Component {
       .catch(error => console.log(error));
   }
   componentWillMount() {
-    console.log('Search ----- Component will mount', this.props);
     this.fetchAndSetSearchResult(this.props);
   }
   componentWillReceiveProps(nextProps) {
-    console.log(
-      'Search ----- Component will recieve props',
-      nextProps,
-      this.props
-    );
     if (
       this.props.match.params.treecounterId ===
       nextProps.match.params.treecounterId
@@ -60,7 +49,6 @@ class PublicTreecounterContainer extends Component {
 }
 
 const mapStateToProps = function(state) {
-  console.log('Store updated - Search', state);
   return {
     userTpos: state.entities.tpo
   };

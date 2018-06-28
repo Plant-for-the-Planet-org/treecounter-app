@@ -38,6 +38,9 @@
           display: inline-block;
           margin: 10px 15px;
           border-bottom: 3px solid #bad788;
+          a {
+            color: #68605f;
+          }
         }
         .app-container__sidenav--list {
           list-style-type: none;
@@ -68,7 +71,7 @@
 
       .menu_item_selected {
         a {
-          color: red;
+          color: #ec6453;
         }
       }
 

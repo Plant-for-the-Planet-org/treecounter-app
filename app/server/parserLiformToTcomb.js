@@ -144,8 +144,6 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
             disableRemove = arrayConfig.disableRemove;
           }
 
-          console.log('array', arrayConfig);
-
           let arrayOptions = {
             placeholder: title,
             auto: 'none',

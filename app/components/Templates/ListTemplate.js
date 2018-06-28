@@ -6,7 +6,6 @@ export const renderAddButtonConfig = {};
 // Create CUSTOM list with custom add and remove buttons
 export function ListTemplateGenerator(config) {
   return function ListTemplate(title) {
-    console.log('ListTemplate');
     const template = t.form.Form.templates.list.clone({
       renderAddButton: locals => {
         return (

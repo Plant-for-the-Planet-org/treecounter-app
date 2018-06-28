@@ -8,7 +8,7 @@ const SecondaryAccentButton = ({ onClick, children }) => (
 );
 
 SecondaryAccentButton.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.node,
   onClick: PropTypes.func
 };
 

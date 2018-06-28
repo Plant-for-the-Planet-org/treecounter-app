@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-
+import i18n from '../../../locales/i18n';
 import { payment_bank, payment_arrow } from '../../../assets';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 
@@ -40,13 +40,16 @@ class Offline extends React.Component {
     });
 
     const { account, amount, currency } = this.props;
-    const userMessage = `I confirm that I will pay the amount of ${amount} ${currency} to the following account.`;
+    const userMessage = `${i18n.t(
+      'label.confirm'
+    )} ${amount} ${currency} ${i18n.t('label.following_account')}`;
 
     return (
       <div className="payment-option">
         <div onClick={this.handleArrowClick} className="payment-option-header">
           <span>
-            <img className="logo" src={payment_bank} /> Bank Transfer
+            <img className="logo" src={payment_bank} />{' '}
+            {i18n.t('label.bank_transfer')}
           </span>
           <img className={arrow} src={payment_arrow} />
         </div>
@@ -59,7 +62,7 @@ class Offline extends React.Component {
             {userMessage}
           </div>
           <div className="account-details">{account.full_text}</div>
-          <PrimaryButton>Pay via Bank Transfer</PrimaryButton>
+          <PrimaryButton>{i18n.t('label.pay_via')}</PrimaryButton>
         </form>
       </div>
     );

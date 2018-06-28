@@ -123,9 +123,9 @@ export default class SelectPlantProject extends Component {
     this.setState({ mode: tab });
   };
 
-  callExpanded = bool => {
+  callExpanded = () => {
     this.setState({
-      expanded: bool
+      expanded: !this.state.expanded
     });
   };
 
@@ -216,8 +216,8 @@ export default class SelectPlantProject extends Component {
                 ? featuredProjects.map(project => (
                     <div key={project.id}>
                       <PlantProjectFull
-                        callExpanded={this.callExpanded}
-                        expanded={false}
+                        callExpanded={() => this.callExpanded()}
+                        expanded={this.state.expanded}
                         plantProject={project}
                         tpoName={project.tpo_name}
                       />
@@ -288,7 +288,7 @@ export default class SelectPlantProject extends Component {
                               <PrimaryButton
                                 onClick={() => this.openModal(project.id)}
                               >
-                                See more
+                                {i18n.t('label.see_more')}
                               </PrimaryButton>
                             </td>
                           </tr>
@@ -303,12 +303,12 @@ export default class SelectPlantProject extends Component {
                 <table className="projects-list">
                   <thead>
                     <tr>
-                      <th>Project</th>
-                      <th>Organisation</th>
+                      <th>{i18n.t('label.project')}</th>
+                      <th>{i18n.t('label.organisation')}</th>
                       <th>
-                        <span>Planted Trees</span>
+                        <span>{i18n.t('label.plantedTrees')}s</span>
                       </th>
-                      <th>Cost Per Tree</th>
+                      <th>{i18n.t('label.Cost')}</th>
                       <th />
                     </tr>
                   </thead>

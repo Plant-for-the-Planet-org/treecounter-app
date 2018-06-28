@@ -8,11 +8,9 @@
 	.then( data => data.json() )
 	.then( data => {
 		const currencies = [];
-		//console.log(data.base);
 		currencies.push(data.base);
 		currencies.push(...Object.entries(data.rates).map(currency => currency[0]));
 		currencies.sort();
-		//console.log(currencies);
 	})
 	.catch( err => console.log(err) );*/
 

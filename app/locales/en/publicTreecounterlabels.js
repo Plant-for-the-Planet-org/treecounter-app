@@ -1,3 +1,4 @@
 export default {
-  support: 'Support'
+  support: 'Support',
+  read_more: 'Read More'
 };

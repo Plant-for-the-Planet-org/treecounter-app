@@ -3,6 +3,7 @@ import currentUserProfileIdReducer from './currentUserProfileIdReducer';
 import selectedPlantProjectIdReducer from './selectedPlantProjectIdReducer';
 import supportedTreecounterReducer from './supportedTreecounterReducer';
 import userFeedReducer from './userFeedReducer';
+import fetchPledgesReducer from './pledgeReducer';
 import currenciesReducer from './currenciesReducer';
 
 const commonReducers = {
@@ -11,6 +12,7 @@ const commonReducers = {
   supportedTreecounter: supportedTreecounterReducer,
   selectedPlantProjectId: selectedPlantProjectIdReducer,
   userFeeds: userFeedReducer,
+  pledges: fetchPledgesReducer,
   currencies: currenciesReducer
 };
 

@@ -14,7 +14,6 @@ const {
   schemaOptions: schemaOptionsMultipleTrees
 } = parseJsonToTcomb(multipleTreesForm);
 
-console.log(schemaOptionsSingleTree);
 export {
   singleTreeRegisterFormSchema,
   multipleTreesRegisterFormSchema,

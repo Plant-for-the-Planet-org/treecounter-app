@@ -51,15 +51,6 @@ class Paypal extends React.Component {
       onCancel
     } = this.props;
 
-    console.log(
-      '%%%%%%%%%%%% PaypalGateway ',
-      'amount: ' + amount,
-      'currency: ' + currency,
-      account,
-      onSuccess,
-      onError,
-      onCancel
-    );
     const { showButton } = this.state;
 
     const CLIENT = {
@@ -97,7 +88,6 @@ class Paypal extends React.Component {
       'display-none': !this.props.expanded
     });
 
-    console.log('CLIENT', CLIENT);
     return (
       <form className="payment-option">
         <div onClick={this.handleArrowClick} className="payment-option-header">

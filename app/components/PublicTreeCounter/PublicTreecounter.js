@@ -79,7 +79,6 @@ class PublicTreeCounter extends React.Component {
   }
 
   onRegisterSupporter() {
-    console.log('**onRegisterSupporter**');
     this.props.supportTreecounterAction(this.props.treecounter);
     history.push(getLocalRoute('app_donateTrees'));
   }
@@ -94,7 +93,8 @@ class PublicTreeCounter extends React.Component {
         community: treecounter.countCommunity,
         personal: treecounter.countPersonal,
         targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
       };
       this.setState({ svgData });
     }

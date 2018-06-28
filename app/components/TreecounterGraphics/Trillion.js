@@ -10,6 +10,7 @@ import { updateRoute } from '../../helpers/routerHelper';
 import TextHeading from '../Common/Heading/TextHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n.js';
+import { esriLogo, bmzLogo } from '../../assets';
 
 class Trillion extends Component {
   constructor() {
@@ -60,6 +61,31 @@ class Trillion extends Component {
             </SecondaryAccentButton>
           </ButtonHeading>
         </TextHeading>
+        <TextBlock>Plant trees at</TextBlock>
+        <div className="events_row">
+          <div
+            className="event_item"
+            onClick={() =>
+              updateRoute('app_pledge', null, null, {
+                eventSlug: 'esri-user-conference'
+              })
+            }
+          >
+            <img src={esriLogo} />
+            <TextBlock>User Conference</TextBlock>
+          </div>
+          <div
+            className="event_item"
+            onClick={() =>
+              updateRoute('app_pledge', null, null, {
+                eventSlug: 'bmz-zukunftskongress'
+              })
+            }
+          >
+            <img src={bmzLogo} />
+            <TextBlock>User Conference</TextBlock>
+          </div>
+        </div>
 
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />

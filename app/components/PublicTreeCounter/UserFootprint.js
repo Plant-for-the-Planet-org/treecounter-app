@@ -5,6 +5,11 @@ import UserSynopsis from '../Common/UserSynopsis';
 import UserHomepageLink from '../Common/UserHomepageLink';
 import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 
+/**
+ * MapIds:
+ *   - d601683709dc415b99ddc1bc66a6d8eb
+ *   - 534da741b327459eb117f4cc93acd98e
+ */
 const UserFootprint = ({ userProfile }) => {
   return (
     <div>

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 class MapContributions extends React.Component {
   constructor(props) {
     super(props);
+    console.log('%%%%%%%%%%%%%%% MapContributions props: ', props);
     this.state = {
       status: 'loading',
       map: null,

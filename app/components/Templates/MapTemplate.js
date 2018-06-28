@@ -7,6 +7,7 @@ export function MapTemplate(locals) {
   //  locals.onChange(); //Temporary fix
   let geolocation = {};
   try {
+    console.log('', locals.value);
     geolocation = JSON.parse(
       '{"' +
         decodeURI(locals.value)

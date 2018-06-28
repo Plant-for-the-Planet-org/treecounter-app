@@ -170,7 +170,6 @@ export default class SelectPlantProject extends Component {
     const settings = {
       dots: true,
       infinite: false,
-      adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation
           styleName="tpo-footer-nav-img__left"

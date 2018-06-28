@@ -4,7 +4,7 @@ export default {
   properties: {
     firstname: {
       type: 'string',
-      title: 'firstname',
+      title: 'label.firstname',
       attr: {
         maxlength: 255
       },
@@ -13,7 +13,7 @@ export default {
     },
     lastname: {
       type: 'string',
-      title: 'lastname',
+      title: 'label.lastname',
       attr: {
         maxlength: 255
       },
@@ -22,7 +22,7 @@ export default {
     },
     email: {
       type: 'string',
-      title: 'email',
+      title: 'label.email',
       attr: {
         maxlength: 255
       },
@@ -31,7 +31,7 @@ export default {
     },
     treeCount: {
       type: 'integer',
-      title: 'treeCount',
+      title: 'label.treecount',
       propertyOrder: 4
     }
   },

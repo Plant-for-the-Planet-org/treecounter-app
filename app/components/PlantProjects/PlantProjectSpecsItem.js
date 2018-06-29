@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PlantProjectSpecsItem = ({ label, value, icon }) => {
+const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
   return (
     <div className="project-specs__item">
       <span className="align-center">
-        {icon ? <img src={icon} /> : <span>{label}</span>}
+        {icon ? <img src={icon} /> : null}
         <span>{label}</span>
+        {rightIcon ? <img src={rightIcon} /> : null}
       </span>
       <span>{value}</span>
     </div>
@@ -15,6 +16,7 @@ const PlantProjectSpecsItem = ({ label, value, icon }) => {
 
 PlantProjectSpecsItem.propTypes = {
   icon: PropTypes.string,
+  rightIcon: PropTypes.string,
   value: PropTypes.any,
   label: PropTypes.string
 };

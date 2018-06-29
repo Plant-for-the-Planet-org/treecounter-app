@@ -8,7 +8,7 @@
 
   .pftp-tabs__type {
     margin-top: 5%;
-    @include for-phone-only{
+    @include for-phone-only {
       margin-top: 10%;
     }
   }
@@ -159,7 +159,7 @@
   border: solid 2px #efefef;
   padding: 10px;
   color: #686060;
-  width: 100%;
+  width: 99%;
   max-width: 100%;
   margin: 0 4px;
 
@@ -167,10 +167,10 @@
     font-size: 13px;
     padding: 5px;
     width: 70px;
+    margin: 0;
     height: 30px;
     border-radius: 3px;
   }
-
 
   .align-left {
     text-align: left;
@@ -203,7 +203,7 @@
   .table-responsive {
     width: calc(100% - 60px);
     overflow-y: scroll;
-    min-height: .01%;
+    min-height: 0.01%;
     overflow-x: auto;
   }
 
@@ -211,7 +211,7 @@
     width: 60%;
     margin-bottom: 30px;
     .search-bar__button {
-      height: 35px;
+      height: 36px;
       width: 35px;
       border-bottom: 1px solid #c6c6c6;
 

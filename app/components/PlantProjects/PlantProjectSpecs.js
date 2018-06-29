@@ -8,7 +8,8 @@ import {
   plantedTarget,
   target,
   tree_survival,
-  dollar
+  dollar,
+  questionmark_orange
 } from '../../assets';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectSpecs
@@ -45,6 +46,7 @@ const PlantProjectSpecs = ({
         <PlantProjectSpecsItem
           icon={tree_survival}
           value={survivalRate}
+          rightIcon={questionmark_orange}
           label={i18n.t('label.survival_rate')}
         />
         <PlantProjectSpecsItem

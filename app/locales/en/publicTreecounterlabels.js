@@ -1,4 +1,4 @@
 export default {
-  support: 'Support',
+  support: 'Gift Trees',
   read_more: 'Read More'
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { getImageUrl } from '../../actions/apiRouting';
+import i18n from '../../locales/i18n';
 
 export function FilePickerTemplate(locals) {
   function onChange($event) {
@@ -27,10 +28,10 @@ export function FilePickerTemplate(locals) {
         className="browse-button"
         onClick={() => console.log('clicked Browse', this.refs)}
       >
-        Browse
+        {i18n.t('label.browse')}
       </button>
       {!locals.value ? (
-        <span className="value-label">{'Select a file from computer'}</span>
+        <span className="value-label">{i18n.t('label.select_file')}</span>
       ) : (
         <img
           src={

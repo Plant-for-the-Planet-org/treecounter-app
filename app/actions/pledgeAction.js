@@ -1,5 +1,9 @@
 import { getRequest, postRequest } from '../utils/api';
-import { fetchPledges, saveTimeoutID } from '../reducers/pledgeReducer';
+import {
+  fetchPledges,
+  saveTimeoutID,
+  clearTimeoutID
+} from '../reducers/pledgeReducer';
 
 export function fetchPledgesAction(eventSlug) {
   return dispatch => {
@@ -26,5 +30,12 @@ export function postPledge(data, params) {
     postRequest('eventPledge_post', data, params).then(res => {
       console.log(dispatch, res);
     });
+  };
+}
+
+export function clearTimeoutAction(id) {
+  return dispatch => {
+    clearInterval(id);
+    dispatch(clearTimeoutID());
   };
 }

@@ -170,7 +170,6 @@ export default class SelectPlantProject extends Component {
     const settings = {
       dots: true,
       infinite: false,
-      adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation
           styleName="tpo-footer-nav-img__left"
@@ -294,7 +293,7 @@ export default class SelectPlantProject extends Component {
                                   <PrimaryButton
                                     onClick={() => this.openModal(project.id)}
                                   >
-                                    See more
+                                    {i18n.t('label.see_more')}
                                   </PrimaryButton>
                                 </td>
                               </tr>
@@ -311,13 +310,13 @@ export default class SelectPlantProject extends Component {
                     <table className="projects-list">
                       <thead>
                         <tr>
-                          <th>Project</th>
-                          <th>Organisation</th>
+                          <th>{i18n.t('label.project')}</th>
+                          <th>{i18n.t('label.organisation')}</th>
                           <th>
-                            <span>Planted Trees</span>
+                            <span>{i18n.t('label.plantedTrees')}s</span>
                           </th>
                           <th>
-                            <span>Cost Per Tree</span>
+                            <span>{i18n.t('label.Cost')}</span>
                           </th>
                           <th />
                         </tr>

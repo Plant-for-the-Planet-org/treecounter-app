@@ -75,18 +75,18 @@ $trans-time: 300ms;
     .pftp-textfield__inputgroup--error-bar {
       @extend .pftp-textfield__inputgroup--bar;
       &:before {
-        background: red;
+        background: $colorError;
       }
     }
     .pftp-textfield__inputgroup--highlightr-error {
-      background: red;
+      background: $colorError;
     }
   }
   .pftp-textfield__error-inputgroup {
     @extend .pftp-textfield__inputgroup;
     input,
     textarea {
-      border-bottom: 1px solid red;
+      border-bottom: 1px solid $colorError;
       &:focus {
         border: none;
         border-bottom: 1px solid mix(white, $bg-color, 70%);

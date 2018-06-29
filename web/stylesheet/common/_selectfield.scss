@@ -21,8 +21,8 @@ $muted-color: mix(white, $bg-color, 70%);
 
   .pftp-selectfield__select-error {
     @extend .pftp-selectfield__select;
-    border-bottom: 1px solid red;
-    color: red;
+    border-bottom: 1px solid $colorError;
+    color: $colorError;
   }
 
   .pftp-selectfield__option {

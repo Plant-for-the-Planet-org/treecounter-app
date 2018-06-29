@@ -7,7 +7,10 @@
   }
 
   .pftp-tabs__type {
-    margin-bottom: 15px;
+    margin-top: 5%;
+    @include for-phone-only{
+      margin-top: 10%;
+    }
   }
 
   .donate-tree-nav-img__right {
@@ -51,20 +54,6 @@
         .teaser__projectImage {
           height: 100px;
         }
-      }
-    }
-
-    .project-specs__container {
-      flex-direction: column;
-      .plants-info {
-        flex-basis: auto;
-        flex-grow: auto;
-        margin: 0;
-      }
-      .project-info {
-        flex-basis: auto;
-        flex-grow: auto;
-        margin: 0;
       }
     }
 
@@ -148,7 +137,7 @@
 
 .select-project__container {
   @extend .donate-tress__container;
-  width: 718px;
+  width: 100%px;
   .slick-initialized {
     margin: 35px;
     margin-top: 30px;
@@ -161,20 +150,6 @@
     .pftp-button-primary {
       width: 50%;
     }
-
-    .project-specs__container {
-      flex-direction: row;
-      .plants-info {
-        flex-basis: 0;
-        flex-grow: 1;
-        margin-left: 15px;
-      }
-      .project-info {
-        flex-basis: 0;
-        flex-grow: 1;
-        margin-right: 15px;
-      }
-    }
   }
 }
 
@@ -184,8 +159,9 @@
   border: solid 2px #efefef;
   padding: 10px;
   color: #686060;
-  width: 665px;
-  margin: 0 -30px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 4px;
 
   .pftp-button-primary {
     font-size: 13px;
@@ -194,6 +170,7 @@
     height: 30px;
     border-radius: 3px;
   }
+
 
   .align-left {
     text-align: left;
@@ -220,6 +197,15 @@
   align-items: center;
   display: flex;
   margin-top: 20px;
+  width: 100%;
+  margin: 20px;
+
+  .table-responsive {
+    width: calc(100% - 60px);
+    overflow-y: scroll;
+    min-height: .01%;
+    overflow-x: auto;
+  }
 
   .pftp-textfield {
     width: 60%;

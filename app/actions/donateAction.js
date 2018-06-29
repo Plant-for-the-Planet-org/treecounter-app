@@ -44,7 +44,9 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
       })
       .catch(response => {
         debug('error: ', response);
-        dispatch(paymentFailed({ status: false, message: response.message }));
+        dispatch(
+          paymentFailed({ status: false, message: response.response.data })
+        );
       });
   };
 }

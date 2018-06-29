@@ -7,6 +7,11 @@ import {
   treecounterSchema,
   plantProjectSchema
 } from '../schemas/index';
+import {
+  paymentSuccess,
+  paymentFailed,
+  paymentCleared
+} from '../reducers/paymentStatus';
 
 export function donate(donationContribution, plantProjectId, loggedIn) {
   let route = loggedIn ? 'donationContribution_post' : 'donate_post';
@@ -28,6 +33,8 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
           dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         }
 
+        dispatch(paymentSuccess({ status: true, message: 'success' }));
+
         console.log(`Thank you for planting ${
           contribution.treeCount
         } trees with us!
@@ -37,6 +44,7 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
       })
       .catch(response => {
         debug('error: ', response);
+        dispatch(paymentFailed({ status: false, message: response.message }));
       });
   };
 }
@@ -69,5 +77,11 @@ export function gift(donationContribution, plantProjectId, loggedIn) {
       .catch(response => {
         debug('error: ', response);
       });
+  };
+}
+
+export function paymentClear() {
+  return dispatch => {
+    dispatch(paymentCleared());
   };
 }

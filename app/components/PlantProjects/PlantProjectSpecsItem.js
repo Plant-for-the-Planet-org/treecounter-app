@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 
 const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
   return (
@@ -7,7 +8,17 @@ const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
       <span className="align-center">
         {icon ? <img src={icon} /> : null}
         <span>{label}</span>
-        {rightIcon ? <img src={rightIcon} /> : null}
+        {rightIcon ? (
+          <div className="tooltip">
+            <a data-tip data-for="survival-rate">
+              <img src={rightIcon} />
+            </a>
+
+            <ReactTooltip id="survival-rate" effect="solid" type="dark">
+              <span>Show happy face</span>
+            </ReactTooltip>
+          </div>
+        ) : null}
       </span>
       <span>{value}</span>
     </div>

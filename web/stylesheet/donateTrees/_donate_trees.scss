@@ -171,7 +171,7 @@
     border-radius: 3px;
   }
 
- 
+
   .align-left {
     text-align: left;
   }
@@ -201,7 +201,7 @@
   margin: 20px;
 
   .table-responsive {
-    width: 100%;
+    width: calc(100% - 60px);
     overflow-y: scroll;
     min-height: .01%;
     overflow-x: auto;

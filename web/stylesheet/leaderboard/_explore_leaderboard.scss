@@ -154,7 +154,7 @@
             }
             .other {
               justify-content: space-between;
-              flex: 0 0 100%;
+              flex: 0 0 95%;
             }
             .country {
               flex: 0 0 100%;
@@ -167,6 +167,10 @@
           }
         }
       }
+    }
+
+    .leaderboard-list__table::-webkit-scrollbar {
+      display: none;
     }
     .leaderboard_images__container {
       margin-top: 28px;

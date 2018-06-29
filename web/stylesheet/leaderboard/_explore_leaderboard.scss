@@ -80,6 +80,7 @@
       border-radius: 6px;
       border: solid 2px #efefef;
       margin-top: 8px;
+      box-sizing: border-box;
       overflow-x: hidden;
       .leaderboard-table {
         display: flex;
@@ -97,15 +98,21 @@
           @include for-phone-only {
             display: none;
           }
+          margin: 0 12px;
+          padding: 8px;
           display: flex;
           border-bottom: 2px solid #e6e6e6;
           .table-header-item {
             display: flex;
-            padding-left: 15px;
+            padding-left: 17px;
             justify-content: flex-start;
           }
           .other {
             flex: 0 0 22%;
+          }
+          .planted {
+            @extend .other;
+            padding-left: 15px;
           }
           .country {
             flex: 0 0 50%;

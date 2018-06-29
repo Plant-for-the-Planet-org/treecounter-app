@@ -53,6 +53,9 @@ $trans-time: 300ms;
       top: 10px;
       transition: $trans-time ease all;
     }
+    .error-label {
+      color: red !important;
+    }
 
     .pftp-textfield__inputgroup--bar {
       position: relative;
@@ -67,6 +70,26 @@ $trans-time: 300ms;
         background: $colorPrimary;
         transition: $trans-time ease all;
         left: 0%;
+      }
+    }
+    .pftp-textfield__inputgroup--error-bar {
+      @extend .pftp-textfield__inputgroup--bar;
+      &:before {
+        background: $colorError;
+      }
+    }
+    .pftp-textfield__inputgroup--highlightr-error {
+      background: $colorError;
+    }
+  }
+  .pftp-textfield__error-inputgroup {
+    @extend .pftp-textfield__inputgroup;
+    input,
+    textarea {
+      border-bottom: 1px solid $colorError;
+      &:focus {
+        border: none;
+        border-bottom: 1px solid mix(white, $bg-color, 70%);
       }
     }
   }

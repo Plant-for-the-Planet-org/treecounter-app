@@ -7,7 +7,10 @@
   }
 
   .pftp-tabs__type {
-    margin-bottom: 15px;
+    margin-top: 5%;
+    @include for-phone-only{
+      margin-top: 10%;
+    }
   }
 
   .donate-tree-nav-img__right {
@@ -156,8 +159,9 @@
   border: solid 2px #efefef;
   padding: 10px;
   color: #686060;
-  width: 665px;
-  margin: 0 -30px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 4px;
 
   .pftp-button-primary {
     font-size: 13px;
@@ -167,6 +171,7 @@
     border-radius: 3px;
   }
 
+ 
   .align-left {
     text-align: left;
   }
@@ -192,6 +197,15 @@
   align-items: center;
   display: flex;
   margin-top: 20px;
+  width: 100%;
+  margin: 20px;
+
+  .table-responsive {
+    width: 100%;
+    overflow-y: scroll;
+    min-height: .01%;
+    overflow-x: auto;
+  }
 
   .pftp-textfield {
     width: 60%;

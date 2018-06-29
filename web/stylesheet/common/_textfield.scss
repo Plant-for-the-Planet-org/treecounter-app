@@ -70,6 +70,17 @@ $trans-time: 300ms;
       }
     }
   }
+  .pftp-textfield__error-inputgroup {
+    @extend .pftp-textfield__inputgroup;
+    input,
+    textarea {
+      border: 1px solid red;
+      &:focus {
+        border: none;
+        border-bottom: 1px solid mix(white, $bg-color, 70%);
+      }
+    }
+  }
 }
 
 // Override date type input

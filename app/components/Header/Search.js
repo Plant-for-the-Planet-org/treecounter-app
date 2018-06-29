@@ -9,7 +9,7 @@ import i18n from '../../locales/i18n.js';
 class SearchBar extends React.Component {
   suggestionClicked = (context, event) => {
     this.props.route('app_treecounter', null, {
-      treecounter: event.suggestion.id
+      treecounter: event.suggestion.slug
     });
   };
 

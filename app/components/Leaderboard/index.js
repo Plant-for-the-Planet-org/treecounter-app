@@ -102,33 +102,38 @@ export default class Leaderboard extends Component {
   };
 
   getTableView = () => {
+    console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
     const { categoryInfo, sectionInfo } = this.props;
     if (this.props.queryResult)
       listItemsUI = (
-        <table className="projects-list">
-          <thead>
-            <tr>
-              <th>{categoryInfo.categoryHeader[sectionInfo.section]}</th>
-              <th>Planted</th>
-              <th>Target</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div className="leaderboard-table">
+          <div className="table-header">
+            <div className="table-header-item country">
+              {'   ' + categoryInfo.categoryHeader[sectionInfo.section]}
+            </div>
+            <div className="table-header-item other">Planted</div>
+            <div className="table-header-item other">Target</div>
+          </div>
+          <div className="table-body">
             {this.props.queryResult.map((d, index) => (
-              <tr key={'tr' + index}>
-                <td className="align-left">
-                  {index + 1 + ' '}
-                  <Link className="rightBtn" to={d.uri}>
-                    {d.caption}
-                  </Link>
-                </td>
-                <td className="align-left">{d.planted}</td>
-                <td className="align-right">{d.target}</td>
-              </tr>
+              <div className="table-row" key={'tr' + index}>
+                <div className="table-col country">
+                  <span className="countryIndex">{index + 1 + '.  '}</span>
+                  <Link to={d.uri}>{d.caption}</Link>
+                </div>
+                <div className="table-col other">
+                  <div className="table-col-phone-header">Planted</div>
+                  {d.planted}
+                </div>
+                <div className="table-col other">
+                  <div className="table-col-phone-header">Target</div>
+                  {d.target}
+                </div>
+              </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+        </div>
       );
 
     return listItemsUI;

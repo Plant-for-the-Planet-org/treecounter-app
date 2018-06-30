@@ -18,7 +18,7 @@ export const commonValidator = function(value, path, context) {
       if (value.length > hasConfig.attr.maxlength) {
         return (
           <div className="error-msg">
-            {i18n.t('invalidLength') + '<' + hasConfig.attr.maxlength}
+            {i18n.t('label.invalidLength') + hasConfig.attr.maxlength}
           </div>
         );
       }

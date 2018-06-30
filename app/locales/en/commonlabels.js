@@ -3,5 +3,5 @@ export default {
   notification_error: 'Login Error',
   isRequired: ' is Required',
   enterValidEmail: 'Enter valid Email',
-  invalidLength: 'Invalid Length: should be'
+  invalidLength: 'Invalid Length: should be less than '
 };

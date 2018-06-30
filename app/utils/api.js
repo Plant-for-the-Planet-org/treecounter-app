@@ -18,7 +18,6 @@ function checkStatus(response) {
 
 function onAPIError(error) {
   if (error.response.status === 401) {
-    console.log('clear storage');
     getStore().dispatch(logoutUser());
   } else {
     throw error;

@@ -23,7 +23,7 @@ import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import FAQContainer from '../../containers/FAQ';
-// import ExploreContainer from '../../containers/Explore';
+import PledgeContainer from '../../containers/Pledge';
 
 import Footer from '../Footer';
 
@@ -196,15 +196,7 @@ class TreeCounter extends Component {
                 component={EditUserProfileContainer}
               />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
-              {/* <Route
-                path={getLocalRoute('app_explore')}
-                component={ExploreContainer}
-              /> */}
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
-              <Route
-                path={getLocalRoute('app_donateTrees')}
-                component={DonationTreesContainer}
-              />
               <Route
                 path={getLocalRoute('app_giftTrees')}
                 component={GiftTreesContainer}
@@ -212,6 +204,14 @@ class TreeCounter extends Component {
               <Route
                 path={getLocalRoute('app_selectProject')}
                 component={SelectPlantProjectContainer}
+              />
+              <Route
+                path={getLocalRoute('app_donateTrees')}
+                component={DonationTreesContainer}
+              />
+              <Route
+                path={getLocalRoute('app_pledge') + '/:eventSlug'}
+                component={PledgeContainer}
               />
               <Route
                 path={getLocalRoute('app_treecounter') + '/:treecounterId'}

@@ -7,7 +7,10 @@
   }
 
   .pftp-tabs__type {
-    margin-bottom: 15px;
+    margin-top: 5%;
+    @include for-phone-only {
+      margin-top: 10%;
+    }
   }
 
   .donate-tree-nav-img__right {
@@ -34,9 +37,7 @@
   }
 
   .content-header_container {
-    height: 80px;
     line-height: 2.5;
-    font-size: 24px;
     align-items: unset;
   }
 
@@ -53,20 +54,6 @@
         .teaser__projectImage {
           height: 100px;
         }
-      }
-    }
-
-    .project-specs__container {
-      flex-direction: column;
-      .plants-info {
-        flex-basis: auto;
-        flex-grow: auto;
-        margin: 0;
-      }
-      .project-info {
-        flex-basis: auto;
-        flex-grow: auto;
-        margin: 0;
       }
     }
 
@@ -91,41 +78,6 @@
         cursor: pointer;
         span {
           color: #ec6453;
-        }
-      }
-    }
-
-    .slick-dots {
-      top: -70px;
-      height: 10px;
-
-      li {
-        margin: 0 5px;
-        width: 8px;
-        height: 8px;
-      }
-
-      button {
-        width: 5px;
-        height: 5px;
-      }
-
-      button:before {
-        color: transparent;
-        border: 2px solid #ffffff;
-        border-radius: 100%;
-        line-height: 10px;
-        opacity: 1;
-        width: 5px;
-        height: 5px;
-      }
-
-      .slick-active {
-        background-color: #ffffff;
-        border-radius: 100%;
-        button:before {
-          color: #ffffff;
-          opacity: 1;
         }
       }
     }
@@ -185,7 +137,7 @@
 
 .select-project__container {
   @extend .donate-tress__container;
-  width: 718px;
+  width: 100%px;
   .slick-initialized {
     margin: 35px;
     margin-top: 30px;
@@ -198,20 +150,6 @@
     .pftp-button-primary {
       width: 50%;
     }
-
-    .project-specs__container {
-      flex-direction: row;
-      .plants-info {
-        flex-basis: 0;
-        flex-grow: 1;
-        margin-left: 15px;
-      }
-      .project-info {
-        flex-basis: 0;
-        flex-grow: 1;
-        margin-right: 15px;
-      }
-    }
   }
 }
 
@@ -221,13 +159,15 @@
   border: solid 2px #efefef;
   padding: 10px;
   color: #686060;
-  width: 665px;
-  margin: 0 -30px;
+  width: 99%;
+  max-width: 100%;
+  margin: 0 4px;
 
   .pftp-button-primary {
     font-size: 13px;
     padding: 5px;
     width: 70px;
+    margin: 0;
     height: 30px;
     border-radius: 3px;
   }
@@ -257,12 +197,21 @@
   align-items: center;
   display: flex;
   margin-top: 20px;
+  width: 100%;
+  margin: 20px;
+
+  .table-responsive {
+    width: calc(100% - 60px);
+    overflow-y: scroll;
+    min-height: 0.01%;
+    overflow-x: auto;
+  }
 
   .pftp-textfield {
     width: 60%;
     margin-bottom: 30px;
     .search-bar__button {
-      height: 35px;
+      height: 36px;
       width: 35px;
       border-bottom: 1px solid #c6c6c6;
 

@@ -12,6 +12,13 @@ import { FloatInputTemplate } from '../components/Templates/FloatInputTemplate';
 
 // Import assets
 import * as images from '../assets';
+import t from 'tComb-form';
+
+function isEmail(x) {
+  return /(.)+@(.)+/.test(x);
+}
+
+transform.registerFormat('email', isEmail);
 
 export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));
@@ -53,6 +60,9 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
             options.config = {
               iconUrl: images[properties[propertyKey].icon]
             };
+            if (properties[propertyKey].icon === 'email') {
+              properties[propertyKey].format = 'email';
+            }
           }
           if (!properties[propertyKey].hasOwnProperty('enum')) {
             options.placeholder = properties[propertyKey].title;
@@ -143,8 +153,6 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
             arrayTemplate = arrayConfig.template(title);
             disableRemove = arrayConfig.disableRemove;
           }
-
-          console.log('array', arrayConfig);
 
           let arrayOptions = {
             placeholder: title,

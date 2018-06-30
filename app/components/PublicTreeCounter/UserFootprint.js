@@ -19,7 +19,7 @@ const UserFootprint = ({ userProfile }) => {
       />
       <UserHomepageLink
         homepageUrl={userProfile.url}
-        caption={userProfile.homepageCaption}
+        caption={userProfile.linkText}
       />
       <ArcGISContributionsMap
         webMapId={'d601683709dc415b99ddc1bc66a6d8eb'}

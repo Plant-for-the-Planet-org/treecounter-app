@@ -123,9 +123,9 @@ export default class SelectPlantProject extends Component {
     this.setState({ mode: tab });
   };
 
-  callExpanded = bool => {
+  callExpanded = () => {
     this.setState({
-      expanded: bool
+      expanded: !this.state.expanded
     });
   };
 
@@ -170,7 +170,6 @@ export default class SelectPlantProject extends Component {
     const settings = {
       dots: true,
       infinite: false,
-      adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation
           styleName="tpo-footer-nav-img__left"
@@ -216,8 +215,8 @@ export default class SelectPlantProject extends Component {
                 ? featuredProjects.map(project => (
                     <div key={project.id}>
                       <PlantProjectFull
-                        callExpanded={this.callExpanded}
-                        expanded={false}
+                        callExpanded={() => this.callExpanded()}
+                        expanded={this.state.expanded}
                         plantProject={project}
                         tpoName={project.tpo_name}
                       />
@@ -234,111 +233,125 @@ export default class SelectPlantProject extends Component {
             </Slider>
           </div>
         </CardLayout>
-        <CardLayout>
-          <Tabs
-            data={SelectPlantProject.data.tabs}
-            onTabChange={this.handleModeChange}
-            activeTab={this.state.mode !== '' ? this.state.mode : null}
-          >
-            {this.state.mode === SelectPlantProject.data.tabs[1].id ? (
-              <div className="all-projects-card">
-                <div className="pftp-textfield">
-                  <div className="pftp-textfield__inputgroup">
-                    <input
-                      autoComplete="new-password"
-                      required="required"
-                      value={this.state.searchFieldValue}
-                      onChange={this.onInputChange.bind(this)}
-                    />
-                    <span className="pftp-textfield__inputgroup--highlight" />
-                    <span className="pftp-textfield__inputgroup--bar" />
-                    <label>{i18n.t('label.search')}</label>
+        <CardLayout className="tpo-footer-card-layout">
+          <div className="select-project__container">
+            <Tabs
+              data={SelectPlantProject.data.tabs}
+              onTabChange={this.handleModeChange}
+              activeTab={this.state.mode !== '' ? this.state.mode : null}
+            >
+              {this.state.mode === SelectPlantProject.data.tabs[1].id ? (
+                <div className="all-projects-card">
+                  <div className="pftp-textfield">
+                    <div className="pftp-textfield__inputgroup">
+                      <input
+                        autoComplete="new-password"
+                        required="required"
+                        value={this.state.searchFieldValue}
+                        onChange={this.onInputChange.bind(this)}
+                      />
+                      <span className="pftp-textfield__inputgroup--highlight" />
+                      <span className="pftp-textfield__inputgroup--bar" />
+                      <label>{i18n.t('label.search')}</label>
+                    </div>
+                    <span className="search-bar__button">
+                      <i className="material-icons header-icons">
+                        {i18n.t('label.search')}
+                      </i>
+                    </span>
                   </div>
-                  <span className="search-bar__button">
-                    <i className="material-icons header-icons">
-                      {i18n.t('label.search')}
-                    </i>
-                  </span>
+                  <div className="table-responsive">
+                    <table className="projects-list">
+                      <thead>
+                        <tr>
+                          <th>{i18n.t('label.project')}</th>
+                          <th>{i18n.t('label.organisation')}</th>
+                          <th>
+                            <span>{i18n.t('label.plantedTrees')}</span>
+                          </th>
+                          <th>
+                            <span>{i18n.t('label.Cost')}</span>
+                          </th>
+                          <th />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {filteredProjects.length !== 0
+                          ? filteredProjects.map(project => (
+                              <tr key={'tr' + project.id}>
+                                <td className="align-left">{project.name}</td>
+                                <td className="align-left">
+                                  {project.tpo_name}
+                                </td>
+                                <td className="align-right">
+                                  {project.countPlanted}
+                                </td>
+                                <td className="align-right">
+                                  {project.currency + ' ' + project.treeCost}
+                                </td>
+                                <td>
+                                  <PrimaryButton
+                                    onClick={() => this.openModal(project.id)}
+                                  >
+                                    {i18n.t('label.see_more')}
+                                  </PrimaryButton>
+                                </td>
+                              </tr>
+                            ))
+                          : null}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <table className="projects-list">
-                  <thead>
-                    <tr>
-                      <th>{i18n.t('label.project')}</th>
-                      <th>{i18n.t('label.organisation')}</th>
-                      <th>
-                        <span>{i18n.t('label.plantedTrees')}</span>
-                      </th>
-                      <th>{i18n.t('label.Cost')}</th>
-                      <th />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredProjects.length !== 0
-                      ? filteredProjects.map(project => (
-                          <tr key={'tr' + project.id}>
-                            <td className="align-left">{project.name}</td>
-                            <td className="align-left">{project.tpo_name}</td>
-                            <td className="align-right">
-                              {project.countPlanted}
-                            </td>
-                            <td className="align-right">
-                              {project.currency + ' ' + project.treeCost}
-                            </td>
-                            <td>
-                              <PrimaryButton
-                                onClick={() => this.openModal(project.id)}
-                              >
-                                See more
-                              </PrimaryButton>
-                            </td>
-                          </tr>
-                        ))
-                      : null}
-                  </tbody>
-                </table>
-              </div>
-            ) : null}
-            {this.state.mode === SelectPlantProject.data.tabs[2].id ? (
-              <div className="all-projects-card">
-                <table className="projects-list">
-                  <thead>
-                    <tr>
-                      <th>Project</th>
-                      <th>Organisation</th>
-                      <th>
-                        <span>Planted Trees</span>
-                      </th>
-                      <th>Cost Per Tree</th>
-                      <th />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {priceSortedProjects.length !== 0
-                      ? priceSortedProjects.map(project => (
-                          <tr key={'tr' + project.id}>
-                            <td className="align-left">{project.name}</td>
-                            <td className="align-left">{project.tpo_name}</td>
-                            <td className="align-right">
-                              {project.countPlanted}
-                            </td>
-                            <td className="align-right">
-                              {project.currency + ' ' + project.treeCost}
-                            </td>
-                            <td>
-                              <PrimaryButton
-                                onClick={() => this.openModal(project.id)}
-                              >
-                                {i18n.t('label.see_more')}
-                              </PrimaryButton>
-                            </td>
-                          </tr>
-                        ))
-                      : null}
-                  </tbody>
-                </table>
-              </div>
-            ) : null}
-          </Tabs>
+              ) : null}
+              {this.state.mode === SelectPlantProject.data.tabs[2].id ? (
+                <div className="all-projects-card">
+                  <div className="table-responsive">
+                    <table className="projects-list">
+                      <thead>
+                        <tr>
+                          <th>{i18n.t('label.project')}</th>
+                          <th>{i18n.t('label.organisation')}</th>
+                          <th>
+                            <span>{i18n.t('label.plantedTrees')}s</span>
+                          </th>
+                          <th>
+                            <span>{i18n.t('label.Cost')}</span>
+                          </th>
+                          <th />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {priceSortedProjects.length !== 0
+                          ? priceSortedProjects.map(project => (
+                              <tr key={'tr' + project.id}>
+                                <td className="align-left">{project.name}</td>
+                                <td className="align-left">
+                                  {project.tpo_name}
+                                </td>
+                                <td className="align-right">
+                                  {project.countPlanted}
+                                </td>
+                                <td className="align-right">
+                                  {project.currency + ' ' + project.treeCost}
+                                </td>
+                                <td>
+                                  <PrimaryButton
+                                    onClick={() => this.openModal(project.id)}
+                                  >
+                                    {i18n.t('label.see_more')}
+                                  </PrimaryButton>
+                                </td>
+                              </tr>
+                            ))
+                          : null}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ) : null}
+            </Tabs>
+          </div>
         </CardLayout>
       </div>
     );

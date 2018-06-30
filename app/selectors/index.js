@@ -11,6 +11,7 @@ import {
 } from '../reducers/entitiesReducer';
 import { getSupportedTreecounter } from '../reducers/supportedTreecounterReducer';
 import { getSelectedPlantProjectId } from '../reducers/selectedPlantProjectIdReducer';
+import { getPledges } from '../reducers/pledgeReducer';
 import { getCurrencies } from '../reducers/currenciesReducer';
 
 export const supportedTreecounterSelector = state =>
@@ -24,6 +25,7 @@ export const tposSelector = state => getTpos(state);
 export const plantProjectsSelector = state => getPlantProjects(state);
 export const entitiesSelector = state => state.entities;
 export const userFeedsSelector = state => getUserFeeds(state);
+export const pledgesSelector = state => getPledges(state);
 export const currenciesSelector = state => getCurrencies(state);
 
 function logSelectorUpdate(selectorName, args = 'None') {

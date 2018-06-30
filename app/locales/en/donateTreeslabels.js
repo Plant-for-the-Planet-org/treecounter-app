@@ -18,5 +18,8 @@ export default {
   plantedTrees: 'Planted Trees',
   individual_name: 'Individual',
   next: 'Next',
-  delete_project: 'delete project'
+  delete_project: 'Delete project',
+  thankyou: 'Thank you for planting',
+  receive_mail:
+    'trees with us! You will receive an email with a donation receipt in time.'
 };

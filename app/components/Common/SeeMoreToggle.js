@@ -7,7 +7,7 @@ const SeeMoreToggle = ({ seeMore, onToggle }) => {
     <div className="see-more-toggle__container">
       <div className={seeMore ? 'collapsed' : 'expanded'}>
         <span onClick={() => onToggle()}>
-          {seeMore ? i18n.t('label.see_more') : i18n.t('label.see_less')}
+          {seeMore ? '+ ' + i18n.t('label.see_more') : i18n.t('label.see_less')}
         </span>
       </div>
     </div>

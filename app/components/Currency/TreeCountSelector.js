@@ -39,7 +39,6 @@ class TreeCountSelector extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // TODO: seems to be a deprecated life cycle method
     if (this.props.currency !== nextProps.currency) {
       this.handleVariableTreeCountChange(this.state.variableTreeCount);
     }
@@ -73,7 +72,6 @@ class TreeCountSelector extends React.Component {
   updateStateAndParent(updates) {
     const newState = { ...this.state, ...updates };
     this.setState(newState);
-    console.log('newState ', newState);
 
     this.props.onChange({
       treeCount: newState.isFixed

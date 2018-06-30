@@ -8,6 +8,7 @@ import type { InjectedProps } from '../Stripe/inject';
 
 import { IbanElement, injectStripe } from '../Stripe/stripeDefs';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
+import i18n from '../../../locales/i18n';
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -93,7 +94,8 @@ class _StripeSepa extends React.Component<
       <form className="payment-option" onSubmit={this.handleSubmit}>
         <div onClick={this.handleArrowClick} className="payment-option-header">
           <span>
-            <img className="logo" src={payment_sepa} />SEPA Direct Debit
+            <img className="logo" src={payment_sepa} />
+            {i18n.t('label.sepa_debit')}
           </span>
           <img className={arrow} src={payment_arrow} />
         </div>
@@ -107,16 +109,10 @@ class _StripeSepa extends React.Component<
             {...createOptions(this.props.fontSize)}
           />
           <div className="mandate-acceptance">
-            By providing your IBAN and confirming this payment, you are
-            authorizing {this.props.context.tpoName} and Stripe, our payment
-            service provider, to send instructions to your bank to debit your
-            account and your bank to debit your account in accordance with those
-            instructions. You are entitled to a refund from your bank under the
-            terms and conditions of your agreement with your bank. A refund must
-            be claimed within 8 weeks starting from the date on which your
-            account was debited.
+            {i18n.t('label.stripe_sepa_des1')} {this.props.context.tpoName}{' '}
+            {i18n.t('label.stripe_sepa_des2')}
           </div>
-          <PrimaryButton>Pay with SEPA</PrimaryButton>
+          <PrimaryButton>{i18n.t('label.pay_via_sepa')}</PrimaryButton>
         </div>
       </form>
     );

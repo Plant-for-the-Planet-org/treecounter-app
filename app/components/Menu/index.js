@@ -3,12 +3,19 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as images from '../../assets';
 import i18n from '../../locales/i18n';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 export default class Menu extends Component {
   sideNavImage() {
     return (
       <div className="app-container__sidenav--image">
-        <img src={images['SideMenuImage']} />
+        <Link
+          to={getLocalRoute('app_userHome')}
+          onClick={() => this.onLinkClicked()}
+        >
+          {' '}
+          <img src={images['SideMenuImage']} />
+        </Link>
       </div>
     );
   }
@@ -20,7 +27,6 @@ export default class Menu extends Component {
 
   render() {
     let { path } = this.props;
-    console.log(this.props.isOpen);
     return (
       <div
         className={
@@ -31,7 +37,13 @@ export default class Menu extends Component {
         {this.props.menuData.map(element => (
           <div key={'div' + element.sequence}>
             <span className="app-container__sidenav--heading">
-              {element.caption}
+              {element.uri ? (
+                <Link to={element.uri} onClick={() => this.linkClicked()}>
+                  {element.caption}
+                </Link>
+              ) : (
+                element.caption
+              )}
             </span>
             <ul className="app-container__sidenav--list" key={element.sequence}>
               {element.menuItems.map(
@@ -50,7 +62,11 @@ export default class Menu extends Component {
                       <img
                         src={
                           menuItem.icon && menuItem.icon !== 'none'
-                            ? images[menuItem.icon]
+                            ? menuItem.uri.substr(
+                                menuItem.uri.lastIndexOf('/') + 1
+                              ) === path
+                              ? images[menuItem.icon + '_red']
+                              : images[menuItem.icon]
                             : null
                         }
                         className="menu-icon"

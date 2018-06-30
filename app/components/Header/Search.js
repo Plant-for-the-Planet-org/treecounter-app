@@ -9,7 +9,7 @@ import i18n from '../../locales/i18n.js';
 class SearchBar extends React.Component {
   suggestionClicked = (context, event) => {
     this.props.route('app_treecounter', null, {
-      treecounter: event.suggestion.id
+      treecounter: event.suggestion.slug
     });
   };
 
@@ -18,9 +18,7 @@ class SearchBar extends React.Component {
       <form>
         <div className="search-bar">
           <SearchAutosuggest onSuggestionClicked={this.suggestionClicked} />
-          <i className="material-icons header-icons">
-            {i18n.t('label.search')}
-          </i>
+          <i className="material-icons search-icon">{i18n.t('label.search')}</i>
         </div>
       </form>
     );

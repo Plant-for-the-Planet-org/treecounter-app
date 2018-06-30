@@ -10,7 +10,7 @@ export function FloatInputTemplate(locals) {
     locals.onChange(value);
   }
   return locals.type !== 'hidden' ? (
-    <div>
+    <div className="pftp-textfield-container">
       <div className="pftp-textfield">
         {locals.config.iconUrl ? (
           <img className="pftp-textfield__icon" src={locals.config.iconUrl} />

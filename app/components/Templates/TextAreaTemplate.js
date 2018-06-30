@@ -6,7 +6,7 @@ export function TextAreaTemplate(locals) {
     locals.onChange($event.target.value);
   }
   return (
-    <div>
+    <div className="pftp-textfield-container">
       <div className="pftp-textfield">
         <div
           className={

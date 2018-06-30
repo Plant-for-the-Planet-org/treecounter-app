@@ -33,7 +33,7 @@ export default class UserHome extends Component {
     let { svgData } = this.state;
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <div className="tree-counter-profile flex-column user-hone-profile">
+        <div className="tree-counter-profile flex-column user-home-profile">
           <UserProfileImage profileImage={userProfile.image} />
           <div className="user-info">
             <div className="tree-counter-name">

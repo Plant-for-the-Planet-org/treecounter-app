@@ -68,7 +68,9 @@ export function TextInputTemplate(locals) {
               : 'pftp-textfield__inputgroup--error-bar'
           }
         />
-        <label>{i18n.t(locals.label)}</label>
+        <label className={locals.hasError ? 'error-label' : ''}>
+          {i18n.t(locals.label)}
+        </label>
       </div>
     </div>
   ) : null;

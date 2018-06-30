@@ -5,7 +5,6 @@ export function SelectTemplate(locals) {
   function onChange($event) {
     locals.onChange($event.target.value);
   }
-  console.log('test', locals);
   return (
     <div className="pftp-selectfield">
       <select

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import MapContributionCapture from './MapContributionCapture';
-
+import { context } from '../../../app/config/index';
 const ArcGISContributionCaptureMap = ({ geoLocation, onLocationSelected }) => {
   return (
     <div className="map-container">
@@ -19,11 +19,15 @@ const ArcGISContributionCaptureMap = ({ geoLocation, onLocationSelected }) => {
         geoLocation={geoLocation}
         onLocationSelected={onLocationSelected}
       />
-      <br />
-      <br />
-      <div>countryCode: {geoLocation.country}</div>
-      <div>geoLongitude: {geoLocation.geoLongitude}</div>
-      <div>geoLatitude: {geoLocation.geoLatitude}</div>
+      {context.debug ? (
+        <div>
+          <br />
+          <br />
+          <div>countryCode: {geoLocation.country}</div>
+          <div>geoLongitude: {geoLocation.geoLongitude}</div>
+          <div>geoLatitude: {geoLocation.geoLatitude}</div>
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -3,6 +3,13 @@ $bg-color: #424242;
 $muted-color: mix(white, $bg-color, 70%);
 $trans-time: 300ms;
 
+.error-msg {
+  text-align: start;
+  color: $colorError;
+  margin-bottom: 8px;
+  font-size: 12px;
+  margin-top: -9px;
+}
 .pftp-textfield {
   display: flex;
   align-items: center;
@@ -54,7 +61,7 @@ $trans-time: 300ms;
       transition: $trans-time ease all;
     }
     .error-label {
-      color: red !important;
+      color: $colorError !important;
     }
 
     .pftp-textfield__inputgroup--bar {

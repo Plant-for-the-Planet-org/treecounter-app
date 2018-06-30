@@ -8,10 +8,11 @@ const ArcGISExploreMap = ({ webMapId, layers }) => {
   console.log('ArcGISExploreMap: layers', layers);
   const style = {
     backgroundColor: '#EEEEEE',
-    width: '500px',
+    width: '100%',
     height: '300px',
     padding: '25px',
-    marginTop: '20px'
+    marginTop: '20px',
+    boxSizing: 'border-box'
   };
   return (
     <div style={style}>

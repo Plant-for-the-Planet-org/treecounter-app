@@ -64,12 +64,21 @@
       }
       .map-tab__container {
         height: 602px;
+        flex-direction: column;
+        align-items: center;
+        display: flex;
+        margin-top: 20px;
         width: 100%;
+        margin-top: 37px;
         .map-tab-checkboxes-row {
           display: flex;
           width: 100%;
           justify-content: space-between;
-          margin-top: 37px;
+          flex-wrap: wrap;
+          .pftp-checkbox__input {
+            margin-top: 4px;
+            margin-left: unset;
+          }
         }
       }
     }

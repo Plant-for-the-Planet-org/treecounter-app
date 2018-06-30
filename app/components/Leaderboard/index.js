@@ -19,6 +19,7 @@ import {
   leaderboards_company_green
 } from '../../assets';
 import { Link } from 'react-router-dom';
+import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import propTypes from 'redux-form/lib/propTypes';
@@ -152,7 +153,13 @@ export default class Leaderboard extends Component {
 
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>{'Explore'}</TextHeading>
+        <TextHeading>
+          {i18n.t('label.explore')}
+          <DescriptionHeading>
+            {i18n.t('label.description1')}
+            <a>{i18n.t('label.description2')}</a> {i18n.t('label.description3')}
+          </DescriptionHeading>
+        </TextHeading>
         <CardLayout className="leader-board__container">
           <Tabs
             data={tabInfo.tabs}

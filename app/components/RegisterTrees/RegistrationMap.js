@@ -75,14 +75,8 @@ class RegistrationMap extends React.Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: '#CCCCCC',
-      marginTop: '20px',
-      padding: '8px',
-      width: '550px'
-    };
     return (
-      <div style={style}>
+      <div>
         <ArcGISContributionCaptureMap
           geoLocation={this.state.geoLocation}
           onLocationSelected={this.onLocationSelected}

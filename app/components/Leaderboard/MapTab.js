@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MapLayerSelector from '../Explore/MapLayerSelector';
+import MapLayerSelector from './MapLayerSelector';
 import ArcGISExploreMap from '../Map/ArcGISExploreMap';
 
 export default class MapTab extends React.Component {

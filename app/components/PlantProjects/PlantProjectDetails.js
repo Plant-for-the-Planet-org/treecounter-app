@@ -5,6 +5,7 @@ import UserSynopsis from '../Common/UserSynopsis';
 import UserHomepageLink from '../Common/UserHomepageLink';
 import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 
+import { context } from '../../../app/config/index';
 import VideoContainer from '../Common/VideoContainer';
 // import ArcGISPlantProjectsMap from '../ArcGISMaps/ArcGISPlantProjectsMap';
 
@@ -20,10 +21,7 @@ const PlantProjectDetails = ({
   videoUrl
   // mapData
 }) => {
-  if (
-    (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') &&
-    !videoUrl
-  ) {
+  if (context.debug && !videoUrl) {
     videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
   }
   return (

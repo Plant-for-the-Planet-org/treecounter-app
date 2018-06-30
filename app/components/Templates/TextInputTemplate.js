@@ -29,11 +29,13 @@ export function TextInputTemplate(locals) {
       {locals.config.iconUrl ? (
         <img className="pftp-textfield__icon" src={locals.config.iconUrl} />
       ) : null}
-      <div className={
-            !locals.hasError
-              ? 'pftp-textfield__inputgroup'
-              : 'pftp-textfield__error-inputgroup'
-          }>
+      <div
+        className={
+          !locals.hasError
+            ? 'pftp-textfield__inputgroup'
+            : 'pftp-textfield__error-inputgroup'
+        }
+      >
         {locals.type === 'date' ? (
           <input
             type={locals.type}
@@ -52,17 +54,23 @@ export function TextInputTemplate(locals) {
             onChange={onChange}
           />
         )}
-        <span className={
-              !locals.hasError
-                ? 'pftp-textfield__inputgroup--highlight'
-                : 'pftp-textfield__inputgroup--highlightr-error'
-            } />
-        <span className={
-              !locals.hasError
-                ? 'pftp-textfield__inputgroup--bar'
-                : 'pftp-textfield__inputgroup--error-bar'
-            } />
-        <label>{i18n.t(locals.label)}</label>
+        <span
+          className={
+            !locals.hasError
+              ? 'pftp-textfield__inputgroup--highlight'
+              : 'pftp-textfield__inputgroup--highlightr-error'
+          }
+        />
+        <span
+          className={
+            !locals.hasError
+              ? 'pftp-textfield__inputgroup--bar'
+              : 'pftp-textfield__inputgroup--error-bar'
+          }
+        />
+        <label className={locals.hasError ? 'error-label' : ''}>
+          {i18n.t(locals.label)}
+        </label>
       </div>
     </div>
   ) : null;

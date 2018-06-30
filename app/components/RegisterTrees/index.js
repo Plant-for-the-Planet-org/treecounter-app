@@ -13,6 +13,7 @@ import {
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
+import RegistrationMap from './RegistrationMap';
 
 let TCombForm = t.form.Form;
 
@@ -94,6 +95,7 @@ export default class RegisterTrees extends Component {
     // Bind Local method
     this.onSubmitClick = this.onSubmitClick.bind(this);
     this.handleModeOptionChange = this.handleModeOptionChange.bind(this);
+    this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
   }
 
   onSubmitClick() {
@@ -102,6 +104,10 @@ export default class RegisterTrees extends Component {
 
   handleModeOptionChange(tab) {
     this.setState({ mode: tab });
+  }
+
+  handleGeoLocationChange(geoLocation) {
+    console.log(geoLocation);
   }
 
   render() {

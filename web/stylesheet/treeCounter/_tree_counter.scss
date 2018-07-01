@@ -9,30 +9,32 @@
   position: absolute;
   right: 25px;
   top: 95px;
-  .gift-icon{
-    .display-text{
+  .gift-icon {
+    .display-text {
       display: block;
     }
-    .display-icon{
-      display:none;
+    .display-icon {
+      display: none;
     }
   }
-  
+
   @include for-phone-only {
-    top: 10px;
+    top: 30px;
     position: relative;
     align-self: right;
     left: 20px;
     width: 25%;
-    .gift-icon{
-      .display-text{
-      display:none;
+    .gift-icon {
+      .display-text {
+        display: none;
+      }
+      .display-icon {
+        display: block;
+      }
     }
-    .display-icon{
-      display: block;
-    }
-    }
-    
+  }
+  @include for-xs-phone-only {
+    top: 15px;
   }
 }
 
@@ -63,7 +65,7 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-  } 
+  }
 }
 .tree-counter-name {
   @extend .pftp-text-normal;

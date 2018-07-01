@@ -1,3 +1,3 @@
 export default {
-  confirmation: ' A confirmation mail has been sent to your mail address'
+  confirmation: ' A confirmation e-mail has been sent to your e-mail address'
 };

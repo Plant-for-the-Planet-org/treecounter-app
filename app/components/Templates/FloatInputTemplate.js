@@ -4,7 +4,7 @@ import i18n from '../../locales/i18n';
 export function FloatInputTemplate(locals) {
   function onChange($event) {
     let value =
-      locals.type === 'number'
+      locals.type === 'number' && $event.target.value
         ? parseFloat($event.target.value)
         : $event.target.value;
     locals.onChange(value);

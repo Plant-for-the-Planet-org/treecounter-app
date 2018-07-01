@@ -21,6 +21,9 @@ function isEmail(x) {
 
 transform.registerFormat('email', isEmail);
 t.String.getValidationErrorMessage = commonValidator;
+t.enums.getValidationErrorMessage = commonValidator;
+t.Integer.getValidationErrorMessage = commonValidator;
+t.Number.getValidationErrorMessage = commonValidator;
 
 export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));

@@ -12,6 +12,7 @@ export default {
   tree_height: 'Tree Height',
   measurement_date: 'Measurement Date',
   heading_register_trees: 'Register Planted Trees',
+  description1: 'Report trees you planted. These trees will show up in your tree-counter. You can later update, edit or delete entries in "My Trees".',
   register: 'Register',
   many_trees: 'Many Trees',
   plant_project: 'Plant Project',

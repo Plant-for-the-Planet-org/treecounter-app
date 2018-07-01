@@ -1,11 +1,18 @@
 export default {
-  treecount_leaderboard: 'LeaderBoard',
+  treecount_leaderboard: 'Leaderboard',
   treecount_map: 'Map',
   sortBy: 'Sort By',
   timePeriod: 'Time Period',
-  description1:
-    'Take a look at the trees planted as part of the Trillion Tree Campaign, where forests currently exist and where we could restore forests.',
+  description1:'Take a look at the trees planted as part of the Trillion Tree Campaign, where forests currently exist and where we could restore forests.',
   description2: '',
   explore: 'Explore',
-  description3: ''
+  description3: '',
+  plantedTrees: 'Planted Trees',
+  plantedTrees_description: 'All trees registered on this site since 2006.',
+  existingForest: 'Existing Forest',
+  existingForest_description:'3.04 trillion trees currently exist globally. Down from six trillion trees which existed before humans started cutting down forests, about 11,000 years ago.',
+  existingForest_source: 'Source: Crowther, T. W. et al. (2015) Mapping tree density at a global scale. Nature 525, 201–205.',
+  restorationOpportunities: 'Restoration Opportunities',
+  restorationOpportunities_description: 'Half a billion hectares are suitable for wide-scale restoration of closed forests. Further one and a half billion hectares are best sited for mosaic restoration, which combines forests with other land uses like agroforestry, smallholder agriculture, and settlements.',
+  restorationOpportunities_source: 'Source: Add Source'
 };

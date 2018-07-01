@@ -11,5 +11,6 @@ export default {
   trillionTreeMessage2:
     ' Global reforestation could capture 25% of global annual carbon emissions and create wealth in the global south.',
   esri: 'Esri',
-  bmz: 'BMZ'
+  bmz: 'BMZ',
+  trillionTree_events: 'Trillion Tree Events today' 
 };

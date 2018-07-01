@@ -15,7 +15,7 @@ export default {
   delete_profile: 'Delete Profile',
   un_subscribe: 'UnFollow',
   subscribe: 'Follow',
-  profile: 'profile',
+  profile: 'Profile',
   gender: 'Gender',
   no_notifications: 'You have no notifications',
   all_notifications: 'See all notifications'

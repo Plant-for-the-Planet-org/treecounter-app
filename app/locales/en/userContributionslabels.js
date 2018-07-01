@@ -11,10 +11,10 @@ export default {
   singleTree: 'Single Tree',
   severalTrees: 'Several Trees',
   donatedTrees: 'Donated Trees',
-  synopsis1: 'Synopsis1',
-  synopsis2: 'Synopsis2',
-  url: 'URL',
-  linkText: 'Link',
+  synopsis1: 'Introduction',
+  synopsis2: 'Additional Information',
+  url: 'Link of your Profile / Website',
+  linkText: 'Text for your Link',
   select_file: 'Select a file from computer',
   browse: 'Browse'
 };

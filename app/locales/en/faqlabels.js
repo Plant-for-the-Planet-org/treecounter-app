@@ -1,6 +1,6 @@
 export default {
-  description1: 'Lorem ipsum dolor sit amet, ',
-  description2: 'www.trilliontreecampaign.org',
+  description1: 'Here are some common questions when using, ',
+  description2: 'www.trilliontreecampaign.org .',
   description3:
-    'sadipscing elitr, sed diam eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos eet justo duo dolores et ea rebum.'
+    'If you are not able to find the answer you are looking for, please write us at support@trilliontreecampaign.org'
 };

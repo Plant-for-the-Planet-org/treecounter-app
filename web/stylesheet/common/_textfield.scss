@@ -4,11 +4,11 @@ $muted-color: mix(white, $bg-color, 70%);
 $trans-time: 300ms;
 
 .error-msg {
-  text-align: start;
   color: $colorError;
-  margin-bottom: 8px;
+  text-align: start;
+  margin-bottom: 15px;
   font-size: 12px;
-  margin-top: -9px;
+  margin-top: -15px;
 }
 .pftp-textfield-container {
   width: 100%;

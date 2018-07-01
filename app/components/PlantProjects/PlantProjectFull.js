@@ -29,7 +29,7 @@ class PlantProjectFull extends React.Component {
     const {
       name: projectName,
       isCertified: isCertified,
-      projectImages,
+      plantProjectImages,
       location,
       countPlanted: countPlanted,
       count_target: countTarget,
@@ -45,7 +45,8 @@ class PlantProjectFull extends React.Component {
       videoUrl: videoUrl,
       map_data: mapData
     } = this.props.plantProject;
-    const projectImage = projectImages && projectImages.find(() => true);
+    const projectImage =
+      plantProjectImages && plantProjectImages.find(() => true);
 
     const teaserProps = {
       tpoName: this.props.tpoName,
@@ -70,7 +71,7 @@ class PlantProjectFull extends React.Component {
       homepageCaption,
       videoUrl,
       mapData,
-      projectImages
+      plantProjectImages
     };
     return (
       <div>

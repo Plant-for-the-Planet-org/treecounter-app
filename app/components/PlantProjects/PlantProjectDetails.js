@@ -17,7 +17,7 @@ const PlantProjectDetails = ({
   synopsis2,
   homepageUrl,
   homepageCaption,
-  projectImages,
+  plantProjectImages,
   videoUrl
   // mapData
 }) => {
@@ -26,7 +26,7 @@ const PlantProjectDetails = ({
   }
   return (
     <div className="plant-project-details__container">
-      <PlantProjectImageCarousel projectImages={projectImages} />
+      <PlantProjectImageCarousel projectImages={plantProjectImages} />
       <UserSynopsis synopsis1={synopsis1} synopsis2={synopsis2} />
       {homepageUrl && (
         <UserHomepageLink homepageUrl={homepageUrl} caption={homepageCaption} />
@@ -44,7 +44,7 @@ PlantProjectDetails.propTypes = {
   homepageCaption: PropTypes.string,
   videoUrl: PropTypes.string,
   mapData: PropTypes.object,
-  projectImages: PropTypes.array
+  plantProjectImages: PropTypes.array
 };
 
 export default PlantProjectDetails;

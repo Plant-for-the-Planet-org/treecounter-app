@@ -1,5 +1,5 @@
 export default {
-  edit_trees: 'Edit trees',
+  edit_trees: 'Edit Trees',
   tree_count: 'Tree Count',
   tree_species: 'Tree Species',
   plant_date: 'Plant Date',
@@ -11,7 +11,7 @@ export default {
   tree_diameter: 'Tree Diameter',
   tree_height: 'Tree Height',
   measurement_date: 'Measurement Date',
-  heading_register_trees: 'Register planted trees',
+  heading_register_trees: 'Register Planted Trees',
   register: 'Register',
   many_trees: 'Many Trees',
   plant_project: 'Plant Project',

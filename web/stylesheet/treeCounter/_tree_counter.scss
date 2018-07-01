@@ -9,18 +9,40 @@
   position: absolute;
   right: 25px;
   top: 95px;
+  .gift-icon {
+    .display-text {
+      display: block;
+    }
+    .display-icon {
+      display: none;
+    }
+  }
+
   @include for-phone-only {
-    top: 10px;
+    top: 30px;
     position: relative;
-    align-self: center;
+    align-self: right;
     left: 20px;
+    width: 25%;
+    .gift-icon {
+      .display-text {
+        display: none;
+      }
+      .display-icon {
+        display: block;
+      }
+    }
+  }
+  @include for-xs-phone-only {
+    top: 15px;
   }
 }
 
 @media only screen and (max-width: $breakpointTablet) {
   .tree-counter-header {
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    width: 100%;
   }
 }
 .tree-counter-profile {
@@ -33,8 +55,16 @@
 
   @include for-phone-only {
     flex-flow: row nowrap;
-    margin-left: 29px;
+    margin-left: 0px;
     margin-top: 30px;
+    width: 50%;
+  }
+}
+.user-home-profile {
+  @include for-phone-only {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
   }
 }
 .tree-counter-name {

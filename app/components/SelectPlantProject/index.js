@@ -18,10 +18,6 @@ export default class SelectPlantProject extends Component {
   static data = {
     tabs: [
       {
-        name: i18n.t('label.map'),
-        id: 'map'
-      },
-      {
         name: i18n.t('label.name'),
         id: 'name'
       },
@@ -240,7 +236,7 @@ export default class SelectPlantProject extends Component {
               onTabChange={this.handleModeChange}
               activeTab={this.state.mode !== '' ? this.state.mode : null}
             >
-              {this.state.mode === SelectPlantProject.data.tabs[1].id ? (
+              {this.state.mode === SelectPlantProject.data.tabs[0].id ? (
                 <div className="all-projects-card">
                   <div className="pftp-textfield">
                     <div className="pftp-textfield__inputgroup">
@@ -304,7 +300,7 @@ export default class SelectPlantProject extends Component {
                   </div>
                 </div>
               ) : null}
-              {this.state.mode === SelectPlantProject.data.tabs[2].id ? (
+              {this.state.mode === SelectPlantProject.data.tabs[1].id ? (
                 <div className="all-projects-card">
                   <div className="table-responsive">
                     <table className="projects-list">

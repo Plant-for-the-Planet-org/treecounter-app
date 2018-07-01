@@ -12,7 +12,7 @@ import { FloatInputTemplate } from '../components/Templates/FloatInputTemplate';
 
 // Import assets
 import * as images from '../assets';
-import t from 'tComb-form';
+import t from 'tcomb-form';
 import { commonValidator } from './validator';
 
 function isEmail(x) {

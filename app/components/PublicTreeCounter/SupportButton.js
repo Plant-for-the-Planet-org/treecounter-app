@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { gift_outline_red } from '../../assets';
+import { gift_icon } from '../../assets';
 import SecondaryButton from '../Common/Button/SecondaryButton';
 import i18n from '../../locales/i18n.js';
 
@@ -18,7 +18,7 @@ const SupportButton = ({ active, isUserLoggedIn, onRegisterSupporter }) => {
       </div>
       <div className="display-icon">
         <img
-          src={gift_outline_red}
+          src={gift_icon}
           onClick={() => onRegisterSupporter()}
           disable={active ? 'active' : 'inactive'}
         />
@@ -34,7 +34,7 @@ const SupportButton = ({ active, isUserLoggedIn, onRegisterSupporter }) => {
       </div>
       <div className="display-icon">
         <img
-          src={gift_outline_red}
+          src={gift_icon}
           onClick={() => onRegisterSupporter()}
           disable={true}
         />

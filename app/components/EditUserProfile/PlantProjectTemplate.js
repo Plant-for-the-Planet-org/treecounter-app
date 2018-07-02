@@ -92,13 +92,13 @@ const PlantProjectTemplate = function(itemIndex) {
             <div className="separator" />
           </div>
 
-          <div className="project-sub-item">
+          {/* <div className="project-sub-item">
             <div className="sub-item-header">{i18n.t('label.Location')}</div>
-            {locals.inputs.country}
+             {locals.inputs.country} 
             {locals.inputs.location}
             {locals.inputs.geoLocation}
             <div className="separator" />
-          </div>
+    </div> */}
 
           <div className="project-sub-item">
             <div className="sub-item-header">{i18n.t('label.description')}</div>

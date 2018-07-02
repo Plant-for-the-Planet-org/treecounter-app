@@ -86,14 +86,19 @@ class PublicTreeCounter extends React.Component {
   }
 
   profileTypeName(profileType) {
-    if (profileType == 'tpo') {
-      return i18n.t('label.tpo_title');
-    } else if (profileType == 'company') {
-      return i18n.t('label.company_title');
-    } else if (profileType == 'individual') {
-      return i18n.t('label.individual_name');
-    } else if (profileType == 'education') {
-      return i18n.t('label.education');
+    switch (profileType) {
+      case 'tpo': {
+        return i18n.t('label.tpo_title');
+      }
+      case 'company': {
+        return i18n.t('label.company_title');
+      }
+      case 'individual': {
+        return i18n.t('label.individual_name');
+      }
+      case 'education': {
+        return i18n.t('label.education');
+      }
     }
   }
 

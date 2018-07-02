@@ -260,12 +260,16 @@ export default class SelectPlantProject extends Component {
                     <table className="projects-list">
                       <thead>
                         <tr>
-                          <th>{i18n.t('label.project')}</th>
-                          <th>{i18n.t('label.organisation')}</th>
-                          <th>
+                          <th className="align-left">
+                            {i18n.t('label.project')}
+                          </th>
+                          <th className="align-left">
+                            {i18n.t('label.organisation')}
+                          </th>
+                          <th className="align-right">
                             <span>{i18n.t('label.plantedTrees')}</span>
                           </th>
-                          <th>
+                          <th className="align-right">
                             <span>{i18n.t('label.Cost')}</span>
                           </th>
                           <th />
@@ -306,12 +310,16 @@ export default class SelectPlantProject extends Component {
                     <table className="projects-list">
                       <thead>
                         <tr>
-                          <th>{i18n.t('label.project')}</th>
-                          <th>{i18n.t('label.organisation')}</th>
-                          <th>
+                          <th className="align-left">
+                            {i18n.t('label.project')}
+                          </th>
+                          <th className="align-left">
+                            {i18n.t('label.organisation')}
+                          </th>
+                          <th className="align-right">
                             <span>{i18n.t('label.plantedTrees')}s</span>
                           </th>
-                          <th>
+                          <th className="align-right">
                             <span>{i18n.t('label.Cost')}</span>
                           </th>
                           <th />

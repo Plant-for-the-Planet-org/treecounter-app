@@ -7,7 +7,7 @@ export default {
   update: ' Update',
   my_trees: 'My Trees',
   donate_trees: 'Donate trees',
-  no_contributions: 'No Contributions',
+  no_contributions: 'Trees you register or donate will appear here.',
   singleTree: 'Single Tree',
   severalTrees: 'Several Trees',
   donatedTrees: 'Donated Trees',

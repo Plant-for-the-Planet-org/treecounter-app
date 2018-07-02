@@ -61,7 +61,7 @@ class Trillion extends Component {
             </SecondaryAccentButton>
           </ButtonHeading>
         </TextHeading>
-        <TextBlock>Plant trees at</TextBlock>
+        <TextBlock>Trillion Tree Events today</TextBlock>
         <div className="events_row">
           <div
             className="event_item"

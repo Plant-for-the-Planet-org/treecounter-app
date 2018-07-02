@@ -15,7 +15,7 @@ const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
             </a>
 
             <ReactTooltip id="survival-rate" effect="solid" type="dark">
-              <span>Show happy face</span>
+              <span>Percentage of planted trees that survive the first year after planting.</span>
             </ReactTooltip>
           </div>
         ) : null}

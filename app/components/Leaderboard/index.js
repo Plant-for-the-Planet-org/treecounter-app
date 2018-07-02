@@ -150,15 +150,16 @@ export default class Leaderboard extends Component {
     if (!categoryInfo) {
       return <LoadingIndicator />;
     }
-
+    let isMapTab = tabInfo.activeTab === tabInfo.tabs[0].id;
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>
           {i18n.t('label.explore')}
-          <DescriptionHeading>
-            {i18n.t('label.description1')}
-            <a>{i18n.t('label.description2')}</a> {i18n.t('label.description3')}
-          </DescriptionHeading>
+          {isMapTab ? (
+            <DescriptionHeading>
+              {i18n.t('label.map_description')}
+            </DescriptionHeading>
+          ) : null}
         </TextHeading>
         <CardLayout className="leader-board__container">
           <Tabs
@@ -166,7 +167,7 @@ export default class Leaderboard extends Component {
             activeTab={tabInfo.activeTab}
             onTabChange={this.props.handleTabChange}
           >
-            {tabInfo.activeTab === tabInfo.tabs[1].id ? (
+            {!isMapTab ? (
               <div className="leader-board__sub-container">
                 <div className="leaderboard_images__container">
                   {this.getCategoryView()}

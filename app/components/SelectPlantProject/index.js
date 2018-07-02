@@ -13,6 +13,7 @@ import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
 import ModalDialog from '../Common/ModalDialog';
 import i18n from '../../locales/i18n';
+import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -183,7 +184,12 @@ export default class SelectPlantProject extends Component {
 
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>{i18n.t('label.select_project')}</TextHeading>
+        <TextHeading>
+          {i18n.t('label.select_project')}{' '}
+          <DescriptionHeading>
+            {i18n.t('label.select_project_description')}
+          </DescriptionHeading>
+        </TextHeading>
         <ModalDialog
           isOpen={this.state.isOpen}
           onRequestClose={() => this.onRequestClose()}

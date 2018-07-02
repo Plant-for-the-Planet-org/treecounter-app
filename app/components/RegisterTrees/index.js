@@ -14,6 +14,7 @@ import {
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
 import RegistrationMap from './RegistrationMap';
+import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 
 let TCombForm = t.form.Form;
 
@@ -113,7 +114,12 @@ export default class RegisterTrees extends Component {
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>{i18n.t('label.heading_register_trees')}</TextHeading>
+        <TextHeading>
+          {i18n.t('label.heading_register_trees')}
+          <DescriptionHeading>
+            {i18n.t('label.register_description')}
+          </DescriptionHeading>
+        </TextHeading>
         <CardLayout>
           <Tabs
             data={RegisterTrees.data.tabs}

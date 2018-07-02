@@ -17,6 +17,7 @@ import CardLayout from '../../components/Common/Card/CardLayout';
 import { followUser, unfollowUser } from '../../actions/followActions';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { history } from '../Common/BrowserRouter';
+import i18n from '../../locales/i18n';
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class PublicTreeCounter extends React.Component {
     this.onFollowChanged = this.onFollowChanged.bind(this);
     this.onPlantProjectSelected = this.onPlantProjectSelected.bind(this);
     this.onRegisterSupporter = this.onRegisterSupporter.bind(this);
+    this.profileTypeName = this.profileTypeName.bind(this);
     this.state = {
       svgData: {}
     };
@@ -83,6 +85,18 @@ class PublicTreeCounter extends React.Component {
     history.push(getLocalRoute('app_donateTrees'));
   }
 
+  profileTypeName(profileType) {
+    if (profileType == 'tpo') {
+      return i18n.t('label.tpo_title');
+    } else if (profileType == 'company') {
+      return i18n.t('label.company_title');
+    } else if (profileType == 'individual') {
+      return i18n.t('label.individual_name');
+    } else if (profileType == 'education') {
+      return i18n.t('label.education');
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     const treecounter = nextProps.treecounter;
     if (treecounter) {
@@ -122,7 +136,7 @@ class PublicTreeCounter extends React.Component {
     };
     const headerProps = {
       caption,
-      profileType,
+      profileType: this.profileTypeName(profileType),
       logo,
       isUserFollower,
       isUserLoggedIn,

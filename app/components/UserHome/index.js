@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import i18n from '../../locales/i18n';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import SvgContainer from '../Common/SvgContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
@@ -10,6 +10,8 @@ import UserProfileImage from '../Common/UserProfileImage';
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
+    this.profileTypeName = this.profileTypeName.bind(this);
+
     let svgData = {};
     const { treecounterData, userProfile } = props;
     if (treecounterData) {
@@ -18,6 +20,18 @@ export default class UserHome extends Component {
     this.state = {
       svgData: svgData
     };
+  }
+
+  profileTypeName(profileType) {
+    if (profileType == 'tpo') {
+      return i18n.t('label.tpo_title');
+    } else if (profileType == 'company') {
+      return i18n.t('label.company_title');
+    } else if (profileType == 'individual') {
+      return i18n.t('label.individual_name');
+    } else if (profileType == 'education') {
+      return i18n.t('label.education');
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -30,6 +44,7 @@ export default class UserHome extends Component {
 
   render() {
     const { treecounterData, userProfile } = this.props;
+    const profileType = this.profileTypeName(userProfile.type);
     let { svgData } = this.state;
     return (
       <div className="app-container__content--center sidenav-wrapper">
@@ -40,7 +55,7 @@ export default class UserHome extends Component {
               {userProfile.treecounter.displayName}
             </div>
             <div className="tree-counter-row">
-              <UserProfileTypeLabel profileType={userProfile.type} />
+              <UserProfileTypeLabel profileType={profileType} />
             </div>
           </div>
         </div>

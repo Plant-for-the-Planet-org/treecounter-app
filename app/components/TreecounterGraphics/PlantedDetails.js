@@ -5,14 +5,14 @@ import { questionmark_orange } from '../../assets';
 
 const PlantedDetails = ({ personal, community, type }) => (
   <div className="fixed-planted-details">
-    <strong>{personal.toFixed(2).toLocaleString('en')}</strong>{' '}
+    <strong>{personal.toLocaleString('en')}</strong>{' '}
     {i18n.t(
       'individual' === type
         ? 'label.individual_plant_personal'
         : 'label.tpo_plant_personal'
     )}
     <br />
-    <strong>{community.toFixed(2).toLocaleString('en')}</strong>{' '}
+    <strong>{community.toLocaleString('en')}</strong>{' '}
     {i18n.t(
       'individual' === type
         ? 'label.individual_plant_community'

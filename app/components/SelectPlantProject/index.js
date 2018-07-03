@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import { history } from '../Common/BrowserRouter';
+// import { history } from '../Common/BrowserRouter';
 
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
@@ -127,13 +127,11 @@ export default class SelectPlantProject extends Component {
 
   onSelectClickedFeaturedProjects = id => {
     this.props.selectProject(id);
-    history.goBack();
   };
 
   onSelectClicked = id => {
     this.props.selectProject(id);
     this.onRequestClose();
-    history.goBack();
   };
 
   plantProjectChanged(index) {

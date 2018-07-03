@@ -13,8 +13,7 @@ import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_left_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import { history } from '../../components/Common/BrowserRouter';
-import { getLocalRoute } from '../../actions/apiRouting';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 
 import {
   individualSchemaOptions,
@@ -34,8 +33,8 @@ import PaymentSelector from '../Payment/PaymentSelector';
 let TCombForm = t.form.Form;
 
 const headings = [
-  i18n.t('label.heading_project'),
   i18n.t('label.heading_give'),
+  i18n.t('label.heading_project'),
   i18n.t('label.heading_donate_details'),
   i18n.t('label.heading_donor_details'),
   i18n.t('label.heading_payment')
@@ -87,7 +86,7 @@ export default class GiftTrees extends Component {
       expanded: false,
       expandedOption: '1',
       showNextButton: true,
-      paymentSuccess: false
+      showSelectProject: false
     };
 
     this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
@@ -101,6 +100,9 @@ export default class GiftTrees extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedProject) {
+      this.setState({
+        showSelectProject: false
+      });
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
           .fixedDefaultTreeCount;
@@ -113,7 +115,9 @@ export default class GiftTrees extends Component {
         this.setState({ selectedTreeCount: nextTreeCount });
       }
     } else {
-      history.push(getLocalRoute('app_selectProject'));
+      this.setState({
+        showSelectProject: true
+      });
     }
   }
 
@@ -140,12 +144,6 @@ export default class GiftTrees extends Component {
 
   checkValidation = [
     () => {
-      if (this.props.selectedProject) {
-        return true;
-      }
-      return false;
-    },
-    () => {
       if (this.state.modeUser === 'direct') {
         let returnValue;
         returnValue = this.state.form.giftTreecounter ? true : false;
@@ -163,6 +161,12 @@ export default class GiftTrees extends Component {
         }
         return false;
       }
+    },
+    () => {
+      if (this.props.selectedProject) {
+        return true;
+      }
+      return false;
     },
     () => {
       if (this.state.selectedTreeCount) {
@@ -242,9 +246,6 @@ export default class GiftTrees extends Component {
       },
       this.props.selectedProject.id
     );
-    this.setState({
-      paymentSuccess: true
-    });
   }
 
   callExpanded = bool => {
@@ -274,6 +275,7 @@ export default class GiftTrees extends Component {
     };
     const settings = {
       dots: true,
+      initialSlide: this.state.pageIndex,
       nextArrow: (
         <NextArrow checkValidation={this.checkValidation} context={this} />
       ),
@@ -314,11 +316,13 @@ export default class GiftTrees extends Component {
         plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
 
-    return null === plantProject ? null : (
+    return this.state.showSelectProject && this.state.pageIndex === 1 ? (
+      <SelectPlantProjectContainer />
+    ) : (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>{i18n.t('label.gift_trees')}</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
-          {this.state.paymentSuccess ? (
+          {this.props.paymentStatus && this.props.paymentStatus.status ? (
             <div className="payment-success">
               <img src={check_green} />
               <div className={'gap'} />
@@ -331,19 +335,24 @@ export default class GiftTrees extends Component {
                 <InlineLink uri={'app_userHome'} caption={'Return Home'} />
               </TextBlock>
             </div>
+          ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
+            <div className="payment-success">
+              <img src={check_green} />
+              <div className={'gap'} />
+              <TextBlock strong={true}>
+                {'Error ' + this.props.paymentStatus.message}
+              </TextBlock>
+              <div className={'gap'} />
+              <TextBlock>
+                <PrimaryButton onClick={this.props.paymentClear}>
+                  Try again
+                </PrimaryButton>
+              </TextBlock>
+            </div>
           ) : (
             <div className="donate-tress__container">
               <ContentHeader caption={headings[this.state.pageIndex]} />
               <Slider {...settings}>
-                {this.props.selectedTpo ? (
-                  <PlantProjectFull
-                    callExpanded={this.callExpanded}
-                    expanded={false}
-                    plantProject={this.props.selectedProject}
-                    tpoName={this.props.selectedTpo.name}
-                    selectAnotherProject={true}
-                  />
-                ) : null}
                 <div className="treecount-selector-wrapper">
                   <Tabs
                     data={GiftTrees.data.tabsUser}
@@ -362,6 +371,17 @@ export default class GiftTrees extends Component {
                     )}
                   </Tabs>
                 </div>
+                {this.props.selectedTpo ? (
+                  !plantProject ? null : (
+                    <PlantProjectFull
+                      callExpanded={this.callExpanded}
+                      expanded={false}
+                      plantProject={this.props.selectedProject}
+                      tpoName={this.props.selectedTpo.name}
+                      selectAnotherProject={true}
+                    />
+                  )
+                ) : null}
                 {this.props.selectedTpo && currencies ? (
                   <TreeCountCurrencySelector
                     treeCost={plantProject.treeCost}
@@ -443,5 +463,7 @@ GiftTrees.propTypes = {
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
-  gift: PropTypes.func
+  gift: PropTypes.func,
+  paymentStatus: PropTypes.object,
+  paymentClear: PropTypes.func
 };

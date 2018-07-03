@@ -14,8 +14,6 @@ import { arrow_left_green, check_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import classNames from 'classnames';
-import { history } from '../../components/Common/BrowserRouter';
-import { getLocalRoute } from '../../actions/apiRouting';
 import {
   individualSchemaOptions,
   receiptIndividualFormSchema,
@@ -23,6 +21,7 @@ import {
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 
 import i18n from '../../locales/i18n.js';
 import PaymentSelector from '../Payment/PaymentSelector';
@@ -65,7 +64,8 @@ export default class DonateTrees extends Component {
         recipientType: modeReceipt
       },
       expanded: false,
-      expandedOption: '1'
+      expandedOption: '1',
+      showSelectProject: false
     };
 
     this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
@@ -78,6 +78,9 @@ export default class DonateTrees extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedProject) {
+      this.setState({
+        showSelectProject: false
+      });
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
           .fixedDefaultTreeCount;
@@ -90,7 +93,9 @@ export default class DonateTrees extends Component {
         this.setState({ selectedTreeCount: nextTreeCount });
       }
     } else {
-      history.push(getLocalRoute('app_selectProject'));
+      this.setState({
+        showSelectProject: true
+      });
     }
   }
 
@@ -268,7 +273,9 @@ export default class DonateTrees extends Component {
         plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
 
-    return !plantProject ? null : (
+    return this.state.showSelectProject ? (
+      <SelectPlantProjectContainer />
+    ) : !plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>{i18n.t('label.donateTrees')}</TextHeading>
         <CardLayout className="tpo-footer-card-layout">

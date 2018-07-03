@@ -104,7 +104,13 @@ class SearchAutosuggest extends Component {
       placeholder: i18n.t('label.placeholder_value'),
       value,
       onChange: this.onChange,
-      className: 'form-control search_text'
+      className: 'form-control search_text',
+      onKeyDown: event => {
+        console.log(event);
+        if (event.key === 'Enter') {
+          event.preventDefault();
+        }
+      }
     };
 
     return (

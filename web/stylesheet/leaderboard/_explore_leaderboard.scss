@@ -63,13 +63,41 @@
         width: 100%;
       }
       .map-tab__container {
-        height: 602px;
+        min-height: 602px;
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+        display: flex;
+        margin-top: 20px;
         width: 100%;
+        margin-top: 37px;
         .map-tab-checkboxes-row {
           display: flex;
           width: 100%;
           justify-content: space-between;
-          margin-top: 37px;
+          flex-wrap: wrap;
+          .pftp-checkbox__input {
+            margin-top: 4px;
+            margin-left: unset;
+          }
+        }
+        .map-layer-descriptions {
+          align-self: start;
+          margin-top: 28px;
+          text-align: left;
+          .description {
+            @extend .pftp-text-basic;
+            font-size: 16px;
+            line-height: 1.44;
+            color: #575756;
+          }
+          .source {
+            @extend .pftp-text-basic;
+            margin-top: 10px;
+            font-size: 14px;
+            line-height: 1.64;
+            color: #8b8383;
+          }
         }
       }
     }
@@ -80,6 +108,7 @@
       border-radius: 6px;
       border: solid 2px #efefef;
       margin-top: 8px;
+      box-sizing: border-box;
       overflow-x: hidden;
       .leaderboard-table {
         display: flex;
@@ -97,15 +126,21 @@
           @include for-phone-only {
             display: none;
           }
+          margin: 0 12px;
+          padding: 8px;
           display: flex;
           border-bottom: 2px solid #e6e6e6;
           .table-header-item {
             display: flex;
-            padding-left: 15px;
+            padding-left: 17px;
             justify-content: flex-start;
           }
           .other {
             flex: 0 0 22%;
+          }
+          .planted {
+            @extend .other;
+            padding-left: 15px;
           }
           .country {
             flex: 0 0 50%;

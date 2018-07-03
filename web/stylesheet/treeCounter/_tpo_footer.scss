@@ -133,6 +133,11 @@
       justify-content: space-between;
       margin-bottom: 3px;
 
+      .tooltip {
+        height: 25px;
+        margin-left: 5px;
+      }
+
       .align-center {
         display: flex;
         align-items: center;

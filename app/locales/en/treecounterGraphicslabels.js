@@ -1,15 +1,16 @@
 export default {
-  individual_plant_personal: 'Planted by me',
-  individual_plant_community: 'Planted by my community',
-  tpo_plant_personal: 'Planted by us',
-  tpo_individual_plant_community: 'Planted by our community',
+  individual_plant_personal: 'by me',
+  individual_plant_community: 'by my community',
+  tpo_plant_personal: 'by us',
+  tpo_individual_plant_community: 'by our community',
   by: 'by ',
   faqs: 'FAQs',
   logged_in: 'Logged In',
   trillionTreeMessage1:
-    'The Trillion Tree Campaign aims to increase global tree cover from the currently 3.04 trillion to 4 trillion trees.',
+    'The Trillion Tree Campaign app aims to bring transparency to tree-planting projects around the world and make it as easy as possible for anyone to support them.',
   trillionTreeMessage2:
-    'These trillion additional trees could help fight the Climate Crisis by capturing between 25% and 50% of global annual carbon emissions and create tens of million of jobs.',
+    ' Global reforestation could capture 25% of global annual carbon emissions and create wealth in the global south.',
   esri: 'Esri',
-  bmz: 'BMZ'
+  bmz: 'BMZ',
+  trillionTree_events: 'Trillion Tree Events today' 
 };

@@ -147,6 +147,9 @@
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             column-gap: 20px;
+            @include for-phone-only {
+              grid-template-columns: auto;
+            }
           }
         }
         .delete-project {

@@ -7,7 +7,7 @@ import SeeMoreToggle from '../Common/SeeMoreToggle';
 import PlantProjectDetails from './PlantProjectDetails';
 import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n';
-
+import { parseGeolocation } from '../Templates/MapTemplate';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -29,23 +29,23 @@ class PlantProjectFull extends React.Component {
     const {
       name: projectName,
       isCertified: isCertified,
-      projectImages,
+      plantProjectImages,
       location,
       countPlanted: countPlanted,
-      count_target: countTarget,
+      countTarget,
       currency,
       treeCost,
       paymentSetup,
       survivalRate: survivalRate,
       images,
-      synopsis1,
-      synopsis2,
+      description,
       homepageUrl: homepageUrl,
       homepageCaption: homepageCaption,
       videoUrl: videoUrl,
-      map_data: mapData
+      geoLocation
     } = this.props.plantProject;
-    const projectImage = projectImages && projectImages.find(() => true);
+    const projectImage =
+      plantProjectImages && plantProjectImages.find(() => true);
 
     const teaserProps = {
       tpoName: this.props.tpoName,
@@ -63,14 +63,13 @@ class PlantProjectFull extends React.Component {
       taxDeduction: paymentSetup.taxDeduction
     };
     const detailsProps = {
+      description,
       images,
-      synopsis1,
-      synopsis2,
       homepageUrl,
       homepageCaption,
       videoUrl,
-      mapData,
-      projectImages
+      mapData: parseGeolocation(geoLocation),
+      plantProjectImages
     };
     return (
       <div>

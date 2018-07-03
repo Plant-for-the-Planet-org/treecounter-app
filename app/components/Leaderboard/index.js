@@ -19,6 +19,7 @@ import {
   leaderboards_company_green
 } from '../../assets';
 import { Link } from 'react-router-dom';
+import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import propTypes from 'redux-form/lib/propTypes';
@@ -112,7 +113,7 @@ export default class Leaderboard extends Component {
             <div className="table-header-item country">
               {'   ' + categoryInfo.categoryHeader[sectionInfo.section]}
             </div>
-            <div className="table-header-item other">Planted</div>
+            <div className="table-header-item planted">Planted</div>
             <div className="table-header-item other">Target</div>
           </div>
           <div className="table-body">
@@ -147,19 +148,30 @@ export default class Leaderboard extends Component {
       timePeriodsInfo
     } = this.props;
     if (!categoryInfo) {
-      return <LoadingIndicator />;
+      return (
+        <div className="app-container__content--center sidenav-wrapper">
+          <LoadingIndicator />;
+        </div>
+      );
     }
-
+    let isMapTab = tabInfo.activeTab === tabInfo.tabs[0].id;
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>{'Explore'}</TextHeading>
+        <TextHeading>
+          {i18n.t('label.explore')}
+          {isMapTab ? (
+            <DescriptionHeading>
+              {i18n.t('label.map_description')}
+            </DescriptionHeading>
+          ) : null}
+        </TextHeading>
         <CardLayout className="leader-board__container">
           <Tabs
             data={tabInfo.tabs}
             activeTab={tabInfo.activeTab}
             onTabChange={this.props.handleTabChange}
           >
-            {tabInfo.activeTab === tabInfo.tabs[1].id ? (
+            {!isMapTab ? (
               <div className="leader-board__sub-container">
                 <div className="leaderboard_images__container">
                   {this.getCategoryView()}
@@ -227,7 +239,7 @@ Leaderboard.propTypes = {
   timePeriodsInfo: PropTypes.object,
   sectionInfo: PropTypes.object,
   tabInfo: PropTypes.object,
-  handleSectionChange: propTypes.func,
+  handleSectionChange: PropTypes.func,
   handleTabChange: PropTypes.func,
   queryResult: PropTypes.array,
   mapInfo: PropTypes.object

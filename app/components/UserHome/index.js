@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import i18n from '../../locales/i18n';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import SvgContainer from '../Common/SvgContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import UserProfileImage from '../Common/UserProfileImage';
+import { getProfileTypeName } from '../PublicTreeCounter/PublicTreecounter';
 
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
+
     let svgData = {};
     const { treecounterData, userProfile } = props;
     if (treecounterData) {
@@ -30,17 +32,18 @@ export default class UserHome extends Component {
 
   render() {
     const { treecounterData, userProfile } = this.props;
+    const profileType = getProfileTypeName(userProfile.type);
     let { svgData } = this.state;
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <div className="tree-counter-profile flex-column">
+        <div className="tree-counter-profile flex-column user-home-profile">
           <UserProfileImage profileImage={userProfile.image} />
           <div className="user-info">
             <div className="tree-counter-name">
               {userProfile.treecounter.displayName}
             </div>
             <div className="tree-counter-row">
-              <UserProfileTypeLabel profileType={userProfile.type} />
+              <UserProfileTypeLabel profileType={profileType} />
             </div>
           </div>
         </div>

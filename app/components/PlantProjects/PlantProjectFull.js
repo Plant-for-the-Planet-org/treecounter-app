@@ -81,10 +81,12 @@ class PlantProjectFull extends React.Component {
             onToggle={this.toggleExpanded}
           />
           {this.props.selectAnotherProject ? (
-            <InlineLink
-              caption={i18n.t('label.different_project')}
-              uri={'app_selectProject'}
-            />
+            <div
+              className={'select_different_project_style'}
+              onClick={this.props.projectClear}
+            >
+              {i18n.t('label.different_project')}
+            </div>
           ) : null}
         </div>
         {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
@@ -98,7 +100,8 @@ PlantProjectFull.propTypes = {
   expanded: PropTypes.bool.isRequired,
   callExpanded: PropTypes.func,
   tpoName: PropTypes.string,
-  selectAnotherProject: PropTypes.bool
+  selectAnotherProject: PropTypes.bool,
+  projectClear: PropTypes.func
 };
 
 export default PlantProjectFull;

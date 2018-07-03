@@ -238,6 +238,10 @@ export default class DonateTrees extends Component {
     });
   };
 
+  componentWillUnmount() {
+    this.props.paymentClear();
+  }
+
   render() {
     let displayNone = classNames({
       'display-none': this.state.pageIndex === 3
@@ -345,6 +349,7 @@ export default class DonateTrees extends Component {
                     plantProject={this.props.selectedProject}
                     tpoName={this.props.selectedTpo.name}
                     selectAnotherProject={true}
+                    projectClear={this.props.plantProjectClear}
                   />
                 ) : null}
                 {this.props.selectedTpo && currencies ? (
@@ -434,5 +439,6 @@ DonateTrees.propTypes = {
   donate: PropTypes.func,
   paymentClear: PropTypes.func,
   supportTreecounter: PropTypes.object,
-  paymentStatus: PropTypes.object
+  paymentStatus: PropTypes.object,
+  plantProjectClear: PropTypes.func
 };

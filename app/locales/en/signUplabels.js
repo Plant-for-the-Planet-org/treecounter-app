@@ -20,6 +20,7 @@ export default {
   individual_title: 'Just me',
   company_title: 'Company',
   education_title: 'School',
-  already_have_account: 'Already have an account?'
+  already_have_account: 'Already have an account?',
+  education: 'Education'
 };
 //signUplabels

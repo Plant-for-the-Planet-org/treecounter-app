@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import { history } from '../Common/BrowserRouter';
+// import { history } from '../Common/BrowserRouter';
 
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
@@ -13,14 +13,11 @@ import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
 import ModalDialog from '../Common/ModalDialog';
 import i18n from '../../locales/i18n';
+import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 
 export default class SelectPlantProject extends Component {
   static data = {
     tabs: [
-      {
-        name: i18n.t('label.map'),
-        id: 'map'
-      },
       {
         name: i18n.t('label.name'),
         id: 'name'
@@ -131,13 +128,11 @@ export default class SelectPlantProject extends Component {
 
   onSelectClickedFeaturedProjects = id => {
     this.props.selectProject(id);
-    history.goBack();
   };
 
   onSelectClicked = id => {
     this.props.selectProject(id);
     this.onRequestClose();
-    history.goBack();
   };
 
   plantProjectChanged(index) {
@@ -188,6 +183,9 @@ export default class SelectPlantProject extends Component {
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>{i18n.t('label.select_project')}</TextHeading>
+        <DescriptionHeading>
+          {i18n.t('label.donate_trees_description')}
+        </DescriptionHeading>
         <ModalDialog
           isOpen={this.state.isOpen}
           onRequestClose={() => this.onRequestClose()}
@@ -240,7 +238,7 @@ export default class SelectPlantProject extends Component {
               onTabChange={this.handleModeChange}
               activeTab={this.state.mode !== '' ? this.state.mode : null}
             >
-              {this.state.mode === SelectPlantProject.data.tabs[1].id ? (
+              {this.state.mode === SelectPlantProject.data.tabs[0].id ? (
                 <div className="all-projects-card">
                   <div className="pftp-textfield">
                     <div className="pftp-textfield__inputgroup">
@@ -264,12 +262,16 @@ export default class SelectPlantProject extends Component {
                     <table className="projects-list">
                       <thead>
                         <tr>
-                          <th>{i18n.t('label.project')}</th>
-                          <th>{i18n.t('label.organisation')}</th>
-                          <th>
+                          <th className="align-left">
+                            {i18n.t('label.project')}
+                          </th>
+                          <th className="align-left">
+                            {i18n.t('label.organisation')}
+                          </th>
+                          <th className="align-right">
                             <span>{i18n.t('label.plantedTrees')}</span>
                           </th>
-                          <th>
+                          <th className="align-right">
                             <span>{i18n.t('label.Cost')}</span>
                           </th>
                           <th />
@@ -304,18 +306,22 @@ export default class SelectPlantProject extends Component {
                   </div>
                 </div>
               ) : null}
-              {this.state.mode === SelectPlantProject.data.tabs[2].id ? (
+              {this.state.mode === SelectPlantProject.data.tabs[1].id ? (
                 <div className="all-projects-card">
                   <div className="table-responsive">
                     <table className="projects-list">
                       <thead>
                         <tr>
-                          <th>{i18n.t('label.project')}</th>
-                          <th>{i18n.t('label.organisation')}</th>
-                          <th>
+                          <th className="align-left">
+                            {i18n.t('label.project')}
+                          </th>
+                          <th className="align-left">
+                            {i18n.t('label.organisation')}
+                          </th>
+                          <th className="align-right">
                             <span>{i18n.t('label.plantedTrees')}s</span>
                           </th>
-                          <th>
+                          <th className="align-right">
                             <span>{i18n.t('label.Cost')}</span>
                           </th>
                           <th />

@@ -7,44 +7,42 @@ import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 
 import { context } from '../../../app/config/index';
 import VideoContainer from '../Common/VideoContainer';
-// import ArcGISPlantProjectsMap from '../ArcGISMaps/ArcGISPlantProjectsMap';
+// import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectDetails
  */
 const PlantProjectDetails = ({
-  synopsis1,
-  synopsis2,
+  description,
   homepageUrl,
   homepageCaption,
-  projectImages,
-  videoUrl
-  // mapData
+  plantProjectImages,
+  videoUrl,
+  mapData
 }) => {
   if (context.debug && !videoUrl) {
     videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
   }
   return (
     <div className="plant-project-details__container">
-      <PlantProjectImageCarousel projectImages={projectImages} />
-      <UserSynopsis synopsis1={synopsis1} synopsis2={synopsis2} />
+      <PlantProjectImageCarousel projectImages={plantProjectImages} />
+      <UserSynopsis synopsis1={description} />
       {homepageUrl && (
         <UserHomepageLink homepageUrl={homepageUrl} caption={homepageCaption} />
       )}
       {videoUrl && <VideoContainer url={videoUrl} />}
-      {/* <ArcGISPlantProjectsMap mapData={mapData} /> */}
+      {/* {mapData && <ArcGISContributionsMap mapData={mapData} />} */}
     </div>
   );
 };
 
 PlantProjectDetails.propTypes = {
-  synopsis1: PropTypes.string,
-  synopsis2: PropTypes.string,
+  description: PropTypes.string,
   homepageUrl: PropTypes.string,
   homepageCaption: PropTypes.string,
   videoUrl: PropTypes.string,
   mapData: PropTypes.object,
-  projectImages: PropTypes.array
+  plantProjectImages: PropTypes.array
 };
 
 export default PlantProjectDetails;

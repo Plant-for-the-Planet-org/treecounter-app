@@ -2,23 +2,28 @@ import React from 'react';
 import MapContributionCapture from '../Map/MapContributionCapture';
 import RegistrationMap from '../../components/RegisterTrees/RegistrationMap';
 
-export function MapTemplate(locals) {
-  console.log('%%%%%%%%%%%%%%%%%%%%', locals);
-  //  locals.onChange(); //Temporary fix
-  let geolocation = {};
+export function parseGeolocation(geoLocation) {
+  let geolocationObj = {};
   try {
-    console.log('', locals.value);
-    geolocation = JSON.parse(
+    geolocationObj = JSON.parse(
       '{"' +
-        decodeURI(locals.value)
+        decodeURI(geoLocation)
           .replace(/"/g, '\\"')
           .replace(/&/g, '","')
           .replace(/=/g, '":"') +
         '"}'
     );
   } catch (err) {
-    console.error(err);
+    console.log(err);
   }
+  return geolocationObj;
+}
+
+export function MapTemplate(locals) {
+  console.log('%%%%%%%%%%%%%%%%%%%%', locals);
+  //  locals.onChange(); //Temporary fix
+  let geolocation = parseGeolocation(locals.value);
+
   return (
     <RegistrationMap
       geoLocation={geolocation}

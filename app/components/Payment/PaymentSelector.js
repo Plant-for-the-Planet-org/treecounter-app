@@ -88,7 +88,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           <div>
             Amount: {amount} {currency}
           </div>
-          <div>TreeCount: {context.treeCount}</div>
+          <div>Trees: {context.treeCount}</div>
           {Object.keys(paymentMethods).map(gateway => {
             const accountName = paymentMethods[gateway];
             if ('stripe_cc' === gateway) {

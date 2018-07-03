@@ -283,6 +283,7 @@ export default class GiftTrees extends Component {
     let displayNone = classNames({
       'display-none': !this.state.showNextButton
     });
+    let { pageIndex } = this.state;
     const NextArrow = function(props) {
       function validated() {
         if (props.checkValidation[props.currentSlide].call(props.context)) {
@@ -292,9 +293,11 @@ export default class GiftTrees extends Component {
 
       return (
         <div className={displayNone}>
-          <PrimaryButton onClick={validated}>
-            {i18n.t('label.next')}
-          </PrimaryButton>
+          {pageIndex === 4 ? null : (
+            <PrimaryButton onClick={validated}>
+              {i18n.t('label.next')}
+            </PrimaryButton>
+          )}
         </div>
       );
     };

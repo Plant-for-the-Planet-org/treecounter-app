@@ -235,7 +235,7 @@ Leaderboard.propTypes = {
   timePeriodsInfo: PropTypes.object,
   sectionInfo: PropTypes.object,
   tabInfo: PropTypes.object,
-  handleSectionChange: propTypes.func,
+  handleSectionChange: PropTypes.func,
   handleTabChange: PropTypes.func,
   queryResult: PropTypes.array,
   mapInfo: PropTypes.object

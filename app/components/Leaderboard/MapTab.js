@@ -52,20 +52,19 @@ export default class MapTab extends React.Component {
           webMapId={'d601683709dc415b99ddc1bc66a6d8eb'}
           layers={this.state.activeMapLayers}
         />
-        <div className="map-layer-description">
-          <div>
-            {
-              this.state.mapDescriptionInfoMap[this.state.activeMapLayers]
-                .description
-            }
-          </div>
-          <div>
-            {
-              this.state.mapDescriptionInfoMap[this.state.activeMapLayers]
-                .source
-            }
-          </div>
-        </div>
+
+        {this.state.activeMapLayers.map((layer, index) => {
+          return (
+            <div className="map-layer-descriptions" key={index}>
+              <div className="description">
+                {this.state.mapDescriptionInfoMap[layer].description}
+              </div>
+              <div className="source">
+                {this.state.mapDescriptionInfoMap[layer].source}
+              </div>
+            </div>
+          );
+        })}
       </div>
     );
   }

@@ -63,7 +63,8 @@
         width: 100%;
       }
       .map-tab__container {
-        height: 602px;
+        min-height: 602px;
+        height: 100%;
         flex-direction: column;
         align-items: center;
         display: flex;
@@ -78,6 +79,24 @@
           .pftp-checkbox__input {
             margin-top: 4px;
             margin-left: unset;
+          }
+        }
+        .map-layer-descriptions {
+          align-self: start;
+          margin-top: 28px;
+          text-align: left;
+          .description {
+            @extend .pftp-text-basic;
+            font-size: 16px;
+            line-height: 1.44;
+            color: #575756;
+          }
+          .source {
+            @extend .pftp-text-basic;
+            margin-top: 10px;
+            font-size: 14px;
+            line-height: 1.64;
+            color: #8b8383;
           }
         }
       }

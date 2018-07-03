@@ -44,12 +44,12 @@ const headings = [
 const pageHeadings = [
   {
     heading: i18n.t('label.gift_trees'),
-    description:
-      'Select a person for whom you want to donate trees. Trees you then donate will appear in the recipients tree-counter as well as your own. If the recipient does not yet have a tree-counter, (s)he will receive an email-invitation to join in.'
+    description: i18n.t('label.gift_trees_description')
   },
+
   {
     heading: i18n.t('label.gift_trees'),
-    description: 'Pick a project which will plant the trees for you.'
+    description: i18n.t('label.donate_trees_description')
   },
   {
     heading: i18n.t('label.gift_trees'),

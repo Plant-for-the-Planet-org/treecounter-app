@@ -25,13 +25,14 @@ import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 
 import i18n from '../../locales/i18n.js';
 import PaymentSelector from '../Payment/PaymentSelector';
+import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 
 let TCombForm = t.form.Form;
 
 const pageHeadings = [
   {
     heading: i18n.t('label.donateTrees'),
-    description: 'Pick a project which will plant the trees for you.'
+    description: i18n.t('label.donate_trees_description')
   },
   {
     heading: i18n.t('label.donateTrees'),

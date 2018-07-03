@@ -184,7 +184,7 @@ export default class SelectPlantProject extends Component {
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>{i18n.t('label.select_project')}</TextHeading>
         <DescriptionHeading>
-          {'Pick a project which will plant the trees for you.'}
+          {i18n.t('label.donate_trees_description')}
         </DescriptionHeading>
         <ModalDialog
           isOpen={this.state.isOpen}

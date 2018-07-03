@@ -21,5 +21,6 @@ export default {
   delete_project: 'Delete Project',
   thankyou: 'Thank you for planting',
   receive_mail:
-    'trees with us! You will receive an email with a donation receipt in time.'
+    'trees with us! You will receive an email with a donation receipt in time.',
+  donate_trees_description: 'Pick a project which will plant the trees for you.'
 };

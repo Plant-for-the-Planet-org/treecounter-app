@@ -6,11 +6,11 @@ import SvgContainer from '../Common/SvgContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import UserProfileImage from '../Common/UserProfileImage';
+import { getProfileTypeName } from '../PublicTreeCounter/PublicTreecounter';
 
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
-    this.profileTypeName = this.profileTypeName.bind(this);
 
     let svgData = {};
     const { treecounterData, userProfile } = props;
@@ -20,23 +20,6 @@ export default class UserHome extends Component {
     this.state = {
       svgData: svgData
     };
-  }
-
-  profileTypeName(profileType) {
-    switch (profileType) {
-      case 'tpo': {
-        return i18n.t('label.tpo_title');
-      }
-      case 'company': {
-        return i18n.t('label.company_title');
-      }
-      case 'individual': {
-        return i18n.t('label.individual_name');
-      }
-      case 'education': {
-        return i18n.t('label.education');
-      }
-    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -49,7 +32,7 @@ export default class UserHome extends Component {
 
   render() {
     const { treecounterData, userProfile } = this.props;
-    const profileType = this.profileTypeName(userProfile.type);
+    const profileType = getProfileTypeName(userProfile.type);
     let { svgData } = this.state;
     return (
       <div className="app-container__content--center sidenav-wrapper">

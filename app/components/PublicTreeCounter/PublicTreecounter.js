@@ -19,6 +19,22 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import { history } from '../Common/BrowserRouter';
 import i18n from '../../locales/i18n';
 
+export const getProfileTypeName = function(profileType) {
+  switch (profileType) {
+    case 'tpo': {
+      return i18n.t('label.tpo_title');
+    }
+    case 'company': {
+      return i18n.t('label.company_title');
+    }
+    case 'individual': {
+      return i18n.t('label.individual_name');
+    }
+    case 'education': {
+      return i18n.t('label.education');
+    }
+  }
+};
 class PublicTreeCounter extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +42,6 @@ class PublicTreeCounter extends React.Component {
     this.onFollowChanged = this.onFollowChanged.bind(this);
     this.onPlantProjectSelected = this.onPlantProjectSelected.bind(this);
     this.onRegisterSupporter = this.onRegisterSupporter.bind(this);
-    this.profileTypeName = this.profileTypeName.bind(this);
     this.state = {
       svgData: {}
     };
@@ -85,23 +100,6 @@ class PublicTreeCounter extends React.Component {
     history.push(getLocalRoute('app_donateTrees'));
   }
 
-  profileTypeName(profileType) {
-    switch (profileType) {
-      case 'tpo': {
-        return i18n.t('label.tpo_title');
-      }
-      case 'company': {
-        return i18n.t('label.company_title');
-      }
-      case 'individual': {
-        return i18n.t('label.individual_name');
-      }
-      case 'education': {
-        return i18n.t('label.education');
-      }
-    }
-  }
-
   componentWillReceiveProps(nextProps) {
     const treecounter = nextProps.treecounter;
     if (treecounter) {
@@ -141,7 +139,7 @@ class PublicTreeCounter extends React.Component {
     };
     const headerProps = {
       caption,
-      profileType: this.profileTypeName(profileType),
+      profileType: getProfileTypeName(profileType),
       logo,
       isUserFollower,
       isUserLoggedIn,

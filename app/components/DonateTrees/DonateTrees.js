@@ -14,8 +14,6 @@ import { arrow_left_green, check_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import classNames from 'classnames';
-import { history } from '../../components/Common/BrowserRouter';
-import { getLocalRoute } from '../../actions/apiRouting';
 import {
   individualSchemaOptions,
   receiptIndividualFormSchema,
@@ -23,13 +21,39 @@ import {
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 
 import i18n from '../../locales/i18n.js';
 import PaymentSelector from '../Payment/PaymentSelector';
+import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 
 let TCombForm = t.form.Form;
 
-const headings = ['Project', 'Donation Details', 'Donor Details', 'Payment'];
+const pageHeadings = [
+  {
+    heading: i18n.t('label.donateTrees'),
+    description: i18n.t('label.donate_trees_description')
+  },
+  {
+    heading: i18n.t('label.donateTrees'),
+    description: ''
+  },
+  {
+    heading: i18n.t('label.donateTrees'),
+    description: ''
+  },
+  {
+    heading: i18n.t('label.donateTrees'),
+    description: ''
+  }
+];
+
+const headings = [
+  i18n.t('label.heading_project'),
+  i18n.t('label.heading_donate_details'),
+  i18n.t('label.heading_donor_details'),
+  i18n.t('label.heading_payment')
+];
 
 export default class DonateTrees extends Component {
   static data = {
@@ -66,8 +90,7 @@ export default class DonateTrees extends Component {
       },
       expanded: false,
       expandedOption: '1',
-      showNextButton: true,
-      paymentSuccess: false
+      showSelectProject: false
     };
 
     this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
@@ -80,6 +103,9 @@ export default class DonateTrees extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedProject) {
+      this.setState({
+        showSelectProject: false
+      });
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
           .fixedDefaultTreeCount;
@@ -92,7 +118,9 @@ export default class DonateTrees extends Component {
         this.setState({ selectedTreeCount: nextTreeCount });
       }
     } else {
-      history.push(getLocalRoute('app_selectProject'));
+      this.setState({
+        showSelectProject: true
+      });
     }
   }
 
@@ -127,8 +155,7 @@ export default class DonateTrees extends Component {
 
   indexChange(index) {
     this.setState({
-      pageIndex: index,
-      showNextButton: index !== 3
+      pageIndex: index
     });
   }
 
@@ -203,9 +230,6 @@ export default class DonateTrees extends Component {
       },
       this.props.selectedProject.id
     );
-    this.setState({
-      paymentSuccess: true
-    });
   }
 
   callExpanded = bool => {
@@ -216,7 +240,7 @@ export default class DonateTrees extends Component {
 
   render() {
     let displayNone = classNames({
-      'display-none': !this.state.showNextButton
+      'display-none': this.state.pageIndex === 3
     });
     const NextArrow = function(props) {
       function validated() {
@@ -238,6 +262,7 @@ export default class DonateTrees extends Component {
       ),
       infinite: false,
       adaptiveHeight: true,
+      initialSlide: this.state.pageIndex,
       prevArrow: (
         <CarouselNavigation
           styleName="donate-tree-nav-img__left"
@@ -273,11 +298,16 @@ export default class DonateTrees extends Component {
         plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
 
-    return !plantProject ? null : (
+    return this.state.showSelectProject ? (
+      <SelectPlantProjectContainer />
+    ) : !plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
-        <TextHeading>{i18n.t('label.donateTrees')}</TextHeading>
+        <TextHeading>{pageHeadings[this.state.pageIndex].heading}</TextHeading>
+        <DescriptionHeading>
+          {pageHeadings[this.state.pageIndex].description}
+        </DescriptionHeading>
         <CardLayout className="tpo-footer-card-layout">
-          {this.state.paymentSuccess ? (
+          {this.props.paymentStatus && this.props.paymentStatus.status ? (
             <div className="payment-success">
               <img src={check_green} />
               <div className={'gap'} />
@@ -288,6 +318,20 @@ export default class DonateTrees extends Component {
               <div className={'gap'} />
               <TextBlock>
                 <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+              </TextBlock>
+            </div>
+          ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
+            <div className="payment-success">
+              <img src={check_green} />
+              <div className={'gap'} />
+              <TextBlock strong={true}>
+                {'Error ' + this.props.paymentStatus.message}
+              </TextBlock>
+              <div className={'gap'} />
+              <TextBlock>
+                <PrimaryButton onClick={this.props.paymentClear}>
+                  Try again
+                </PrimaryButton>
               </TextBlock>
             </div>
           ) : (
@@ -388,5 +432,7 @@ DonateTrees.propTypes = {
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
   donate: PropTypes.func,
-  supportTreecounter: PropTypes.object
+  paymentClear: PropTypes.func,
+  supportTreecounter: PropTypes.object,
+  paymentStatus: PropTypes.object
 };

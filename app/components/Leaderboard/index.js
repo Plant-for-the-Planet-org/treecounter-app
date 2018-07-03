@@ -148,17 +148,22 @@ export default class Leaderboard extends Component {
       timePeriodsInfo
     } = this.props;
     if (!categoryInfo) {
-      return <LoadingIndicator />;
+      return (
+        <div className="app-container__content--center sidenav-wrapper">
+          <LoadingIndicator />;
+        </div>
+      );
     }
-
+    let isMapTab = tabInfo.activeTab === tabInfo.tabs[0].id;
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>
           {i18n.t('label.explore')}
-          <DescriptionHeading>
-            {i18n.t('label.description1')}
-            <a>{i18n.t('label.description2')}</a> {i18n.t('label.description3')}
-          </DescriptionHeading>
+          {isMapTab ? (
+            <DescriptionHeading>
+              {i18n.t('label.map_description')}
+            </DescriptionHeading>
+          ) : null}
         </TextHeading>
         <CardLayout className="leader-board__container">
           <Tabs
@@ -166,7 +171,7 @@ export default class Leaderboard extends Component {
             activeTab={tabInfo.activeTab}
             onTabChange={this.props.handleTabChange}
           >
-            {tabInfo.activeTab === tabInfo.tabs[1].id ? (
+            {!isMapTab ? (
               <div className="leader-board__sub-container">
                 <div className="leaderboard_images__container">
                   {this.getCategoryView()}
@@ -234,7 +239,7 @@ Leaderboard.propTypes = {
   timePeriodsInfo: PropTypes.object,
   sectionInfo: PropTypes.object,
   tabInfo: PropTypes.object,
-  handleSectionChange: propTypes.func,
+  handleSectionChange: PropTypes.func,
   handleTabChange: PropTypes.func,
   queryResult: PropTypes.array,
   mapInfo: PropTypes.object

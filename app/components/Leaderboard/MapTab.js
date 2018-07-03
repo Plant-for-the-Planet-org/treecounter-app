@@ -2,14 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MapLayerSelector from './MapLayerSelector';
 import ArcGISExploreMap from '../Map/ArcGISExploreMap';
+import i18n from '../../locales/i18n';
 
 export default class MapTab extends React.Component {
   constructor(props) {
     super(props);
 
+    const mapDescriptionInfoMap = {
+      [props.mapInfo.mapLayersKeys[0]]: {
+        description: i18n.t('label.plantedTrees_description'),
+        source: ''
+      },
+      [props.mapInfo.mapLayersKeys[1]]: {
+        description: i18n.t('label.existingForest_description'),
+        source: i18n.t('label.existingForest_source')
+      },
+      [props.mapInfo.mapLayersKeys[2]]: {
+        description: i18n.t('label.restorationOpportunities_description'),
+        source: i18n.t('label.restorationOpportunities_source')
+      }
+    };
     this.state = {
       mapLayers: props.mapInfo.mapLayers,
-      activeMapLayers: Object.keys(props.mapInfo.mapLayers).splice(0, 1)
+      activeMapLayers: props.mapInfo.mapLayersKeys.splice(0, 1),
+      mapDescriptionInfoMap
     };
 
     console.log('%%%%%%%%%% state ', this.state);
@@ -36,6 +52,19 @@ export default class MapTab extends React.Component {
           webMapId={'d601683709dc415b99ddc1bc66a6d8eb'}
           layers={this.state.activeMapLayers}
         />
+
+        {this.state.activeMapLayers.map((layer, index) => {
+          return (
+            <div className="map-layer-descriptions" key={index}>
+              <div className="description">
+                {this.state.mapDescriptionInfoMap[layer].description}
+              </div>
+              <div className="source">
+                {this.state.mapDescriptionInfoMap[layer].source}
+              </div>
+            </div>
+          );
+        })}
       </div>
     );
   }

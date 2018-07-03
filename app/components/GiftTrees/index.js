@@ -345,10 +345,12 @@ export default class GiftTrees extends Component {
       <SelectPlantProjectContainer />
     ) : (
       <div className="sidenav-wrapper app-container__content--center">
-        <TextHeading>{pageHeadings[this.state.pageIndex].heading}</TextHeading>
-        <DescriptionHeading>
-          {pageHeadings[this.state.pageIndex].description}
-        </DescriptionHeading>
+        <TextHeading>
+          {pageHeadings[this.state.pageIndex].heading}
+          <DescriptionHeading>
+            {pageHeadings[this.state.pageIndex].description}
+          </DescriptionHeading>
+        </TextHeading>
         <CardLayout className="tpo-footer-card-layout">
           {this.props.paymentStatus && this.props.paymentStatus.status ? (
             <div className="payment-success">

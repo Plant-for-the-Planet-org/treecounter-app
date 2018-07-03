@@ -51,13 +51,15 @@ class MapContributions extends React.Component {
       //
       tree_inventory_layer.definitionExpression = `user_id = ${user_id}`;
       const query = tree_inventory_layer.createQuery();
+      // query.outFields = ["*"];
       query.where = `user_id = ${user_id}`;
       tree_inventory_layer
         .queryFeatures(query)
-        .then(({ features }) => {
-          if (features.length) {
-            view.goTo({ target: features, scale: 10000 });
-          }
+        .then(featureSet => {
+          // featureSet.features.forEach(feature => {
+          //   const {attributes, geometry} =  feature;
+          // });
+          view.goTo(featureSet.features);
         })
         .catch(error => console.log(error.message));
     }

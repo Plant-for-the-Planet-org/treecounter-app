@@ -37,10 +37,8 @@ const UserContributions = ({ userProfileId, userContributions }) => {
             </div>
           </div>
         ) : (
-          <div className="sidenav-wrapper">
-            <div className="registeration-successfull">
-              {i18n.t('label.no_contributions')}
-            </div>
+          <div className="no-contribution-wrapper">
+            {i18n.t('label.no_contributions')}
           </div>
         )}
       </CardLayout>

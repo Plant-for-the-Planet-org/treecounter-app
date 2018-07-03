@@ -1,6 +1,9 @@
 .signup-types {
   display: flex;
-
+  @include for-phone-only {
+    overflow-x: auto;
+    width: 100%;
+  }
   .signup-type {
     max-width: 120px;
     min-height: 200px;

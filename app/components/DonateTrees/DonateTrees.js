@@ -65,9 +65,7 @@ export default class DonateTrees extends Component {
         recipientType: modeReceipt
       },
       expanded: false,
-      expandedOption: '1',
-      showNextButton: true,
-      paymentSuccess: false
+      expandedOption: '1'
     };
 
     this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
@@ -127,8 +125,7 @@ export default class DonateTrees extends Component {
 
   indexChange(index) {
     this.setState({
-      pageIndex: index,
-      showNextButton: index !== 3
+      pageIndex: index
     });
   }
 
@@ -203,9 +200,6 @@ export default class DonateTrees extends Component {
       },
       this.props.selectedProject.id
     );
-    this.setState({
-      paymentSuccess: true
-    });
   }
 
   callExpanded = bool => {
@@ -216,7 +210,7 @@ export default class DonateTrees extends Component {
 
   render() {
     let displayNone = classNames({
-      'display-none': !this.state.showNextButton
+      'display-none': this.state.pageIndex === 3
     });
     const NextArrow = function(props) {
       function validated() {
@@ -238,6 +232,7 @@ export default class DonateTrees extends Component {
       ),
       infinite: false,
       adaptiveHeight: true,
+      initialSlide: this.state.pageIndex,
       prevArrow: (
         <CarouselNavigation
           styleName="donate-tree-nav-img__left"
@@ -277,7 +272,7 @@ export default class DonateTrees extends Component {
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>{i18n.t('label.donateTrees')}</TextHeading>
         <CardLayout className="tpo-footer-card-layout">
-          {this.state.paymentSuccess ? (
+          {this.props.paymentStatus && this.props.paymentStatus.status ? (
             <div className="payment-success">
               <img src={check_green} />
               <div className={'gap'} />
@@ -288,6 +283,20 @@ export default class DonateTrees extends Component {
               <div className={'gap'} />
               <TextBlock>
                 <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+              </TextBlock>
+            </div>
+          ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
+            <div className="payment-success">
+              <img src={check_green} />
+              <div className={'gap'} />
+              <TextBlock strong={true}>
+                {'Error ' + this.props.paymentStatus.message}
+              </TextBlock>
+              <div className={'gap'} />
+              <TextBlock>
+                <PrimaryButton onClick={this.props.paymentClear}>
+                  Try again
+                </PrimaryButton>
               </TextBlock>
             </div>
           ) : (
@@ -388,5 +397,7 @@ DonateTrees.propTypes = {
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
   donate: PropTypes.func,
-  supportTreecounter: PropTypes.object
+  paymentClear: PropTypes.func,
+  supportTreecounter: PropTypes.object,
+  paymentStatus: PropTypes.object
 };

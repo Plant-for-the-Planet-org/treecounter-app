@@ -13,6 +13,7 @@ import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
 import ModalDialog from '../Common/ModalDialog';
 import i18n from '../../locales/i18n';
+import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -182,6 +183,9 @@ export default class SelectPlantProject extends Component {
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>{i18n.t('label.select_project')}</TextHeading>
+        <DescriptionHeading>
+          {'Pick a project which will plant the trees for you.'}
+        </DescriptionHeading>
         <ModalDialog
           isOpen={this.state.isOpen}
           onRequestClose={() => this.onRequestClose()}

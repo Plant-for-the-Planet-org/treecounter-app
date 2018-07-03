@@ -29,6 +29,7 @@ import {
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import i18n from '../../locales/i18n';
 import PaymentSelector from '../Payment/PaymentSelector';
+import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 
 let TCombForm = t.form.Form;
 
@@ -38,6 +39,30 @@ const headings = [
   i18n.t('label.heading_donate_details'),
   i18n.t('label.heading_donor_details'),
   i18n.t('label.heading_payment')
+];
+
+const pageHeadings = [
+  {
+    heading: i18n.t('label.gift_trees'),
+    description:
+      'Select a person for whom you want to donate trees. Trees you then donate will appear in the recipients tree-counter as well as your own. If the recipient does not yet have a tree-counter, (s)he will receive an email-invitation to join in.'
+  },
+  {
+    heading: i18n.t('label.gift_trees'),
+    description: 'Pick a project which will plant the trees for you.'
+  },
+  {
+    heading: i18n.t('label.gift_trees'),
+    description: ''
+  },
+  {
+    heading: i18n.t('label.gift_trees'),
+    description: ''
+  },
+  {
+    heading: i18n.t('label.gift_trees'),
+    description: ''
+  }
 ];
 
 export default class GiftTrees extends Component {
@@ -320,7 +345,10 @@ export default class GiftTrees extends Component {
       <SelectPlantProjectContainer />
     ) : (
       <div className="sidenav-wrapper app-container__content--center">
-        <TextHeading>{i18n.t('label.gift_trees')}</TextHeading>
+        <TextHeading>{pageHeadings[this.state.pageIndex].heading}</TextHeading>
+        <DescriptionHeading>
+          {pageHeadings[this.state.pageIndex].description}
+        </DescriptionHeading>
         <CardLayout className="tpo-footer-card-layout">
           {this.props.paymentStatus && this.props.paymentStatus.status ? (
             <div className="payment-success">

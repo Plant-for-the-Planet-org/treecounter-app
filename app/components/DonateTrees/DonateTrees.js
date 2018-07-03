@@ -28,7 +28,31 @@ import PaymentSelector from '../Payment/PaymentSelector';
 
 let TCombForm = t.form.Form;
 
-const headings = ['Project', 'Donation Details', 'Donor Details', 'Payment'];
+const pageHeadings = [
+  {
+    heading: i18n.t('label.donateTrees'),
+    description: 'Pick a project which will plant the trees for you.'
+  },
+  {
+    heading: i18n.t('label.donateTrees'),
+    description: ''
+  },
+  {
+    heading: i18n.t('label.donateTrees'),
+    description: ''
+  },
+  {
+    heading: i18n.t('label.donateTrees'),
+    description: ''
+  }
+];
+
+const headings = [
+  i18n.t('label.heading_project'),
+  i18n.t('label.heading_donate_details'),
+  i18n.t('label.heading_donor_details'),
+  i18n.t('label.heading_payment')
+];
 
 export default class DonateTrees extends Component {
   static data = {
@@ -277,7 +301,10 @@ export default class DonateTrees extends Component {
       <SelectPlantProjectContainer />
     ) : !plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
-        <TextHeading>{i18n.t('label.donateTrees')}</TextHeading>
+        <TextHeading>{pageHeadings[this.state.pageIndex].heading}</TextHeading>
+        <DescriptionHeading>
+          {pageHeadings[this.state.pageIndex].description}
+        </DescriptionHeading>
         <CardLayout className="tpo-footer-card-layout">
           {this.props.paymentStatus && this.props.paymentStatus.status ? (
             <div className="payment-success">

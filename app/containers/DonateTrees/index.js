@@ -10,7 +10,10 @@ import {
   currenciesSelector,
   supportedTreecounterSelector
 } from '../../selectors';
-import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import {
+  selectPlantProjectAction,
+  clearPlantProject
+} from '../../actions/selectPlantProjectAction';
 import { fetchCurrencies } from '../../actions/currencies';
 import { donate, paymentClear } from '../../actions/donateAction';
 
@@ -37,6 +40,7 @@ class DonationTreesContainer extends Component {
         supportTreecounter={this.props.supportTreecounter}
         paymentStatus={this.props.paymentStatus}
         paymentClear={this.props.paymentClear}
+        plantProjectClear={this.props.clearPlantProject}
       />
     );
   }
@@ -53,7 +57,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { selectPlantProjectAction, fetchCurrencies, donate, paymentClear },
+    {
+      selectPlantProjectAction,
+      fetchCurrencies,
+      donate,
+      paymentClear,
+      clearPlantProject
+    },
     dispatch
   );
 };
@@ -72,5 +82,6 @@ DonationTreesContainer.propTypes = {
   paymentClear: PropTypes.func,
   donate: PropTypes.func,
   fetchCurrencies: PropTypes.func,
+  clearPlantProject: PropTypes.func,
   supportTreecounter: PropTypes.object
 };

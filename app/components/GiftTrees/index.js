@@ -413,6 +413,7 @@ export default class GiftTrees extends Component {
                       plantProject={this.props.selectedProject}
                       tpoName={this.props.selectedTpo.name}
                       selectAnotherProject={true}
+                      projectClear={this.props.plantProjectClear}
                     />
                   )
                 ) : null}
@@ -499,5 +500,6 @@ GiftTrees.propTypes = {
   currencies: PropTypes.object,
   gift: PropTypes.func,
   paymentStatus: PropTypes.object,
-  paymentClear: PropTypes.func
+  paymentClear: PropTypes.func,
+  plantProjectClear: PropTypes.func
 };

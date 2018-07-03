@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import { history } from '../Common/BrowserRouter';
+// import { history } from '../Common/BrowserRouter';
 
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
@@ -13,7 +13,7 @@ import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
 import ModalDialog from '../Common/ModalDialog';
 import i18n from '../../locales/i18n';
-import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
+import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -128,13 +128,11 @@ export default class SelectPlantProject extends Component {
 
   onSelectClickedFeaturedProjects = id => {
     this.props.selectProject(id);
-    history.goBack();
   };
 
   onSelectClicked = id => {
     this.props.selectProject(id);
     this.onRequestClose();
-    history.goBack();
   };
 
   plantProjectChanged(index) {
@@ -184,12 +182,10 @@ export default class SelectPlantProject extends Component {
 
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>
-          {i18n.t('label.select_project')}{' '}
-          <DescriptionHeading>
-            {i18n.t('label.select_project_description')}
-          </DescriptionHeading>
-        </TextHeading>
+        <TextHeading>{i18n.t('label.select_project')}</TextHeading>
+        <DescriptionHeading>
+          {i18n.t('label.donate_trees_description')}
+        </DescriptionHeading>
         <ModalDialog
           isOpen={this.state.isOpen}
           onRequestClose={() => this.onRequestClose()}

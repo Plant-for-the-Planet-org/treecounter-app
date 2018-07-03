@@ -83,7 +83,7 @@ export default class GiftTrees extends Component {
         id: 'direct'
       },
       {
-        name: i18n.t('label.other_name'),
+        name: i18n.t('label.other_email'),
         id: 'invitation'
       }
     ]

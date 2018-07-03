@@ -1,7 +1,6 @@
 .signup-types {
   display: flex;
   @include for-phone-only {
-    overflow-y: scroll;
     overflow-x: auto;
     width: 100%;
   }

@@ -24,7 +24,7 @@ export default class MapTab extends React.Component {
     };
     this.state = {
       mapLayers: props.mapInfo.mapLayers,
-      activeMapLayers: Object.keys(props.mapInfo.mapLayers).splice(0, 1),
+      activeMapLayers: props.mapInfo.mapLayersKeys.splice(0, 1),
       mapDescriptionInfoMap
     };
 

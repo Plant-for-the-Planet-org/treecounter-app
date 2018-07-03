@@ -148,7 +148,11 @@ export default class Leaderboard extends Component {
       timePeriodsInfo
     } = this.props;
     if (!categoryInfo) {
-      return <LoadingIndicator />;
+      return (
+        <div className="app-container__content--center sidenav-wrapper">
+          <LoadingIndicator />;
+        </div>
+      );
     }
     let isMapTab = tabInfo.activeTab === tabInfo.tabs[0].id;
     return (

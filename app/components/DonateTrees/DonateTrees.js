@@ -238,6 +238,10 @@ export default class DonateTrees extends Component {
     });
   };
 
+  componentWillUnmount() {
+    this.props.paymentClear();
+  }
+
   render() {
     let displayNone = classNames({
       'display-none': this.state.pageIndex === 3

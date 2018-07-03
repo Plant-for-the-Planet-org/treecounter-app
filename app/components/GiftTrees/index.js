@@ -167,6 +167,10 @@ export default class GiftTrees extends Component {
     });
   };
 
+  componentWillUnmount() {
+    this.props.paymentClear();
+  }
+
   checkValidation = [
     () => {
       if (this.state.modeUser === 'direct') {

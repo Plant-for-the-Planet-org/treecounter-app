@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Map } from 'react-arcgis';
+import { WebMap } from 'react-arcgis';
 import PropTypes from 'prop-types';
 import { loadModules } from 'react-arcgis';
 
@@ -23,7 +23,8 @@ class MapContributionCapture extends React.Component {
 
   render() {
     return (
-      <Map
+      <WebMap
+        id="534da741b327459eb117f4cc93acd98e"
         loaderOptions={{
           dojoConfig: {
             has: {

@@ -32,7 +32,7 @@ const profileType = {
 
 const getSuggestions = value => {
   return new Promise(resolve => {
-    postDirectRequest('/suggest', 'q=' + value.trim()).then(result => {
+    postDirectRequest('suggest', 'q=' + value.trim()).then(result => {
       let jdata = result.data;
       const escapedValue = escapeRegexCharacters(value.trim());
       if (escapedValue === '') {

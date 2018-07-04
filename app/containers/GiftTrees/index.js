@@ -9,7 +9,10 @@ import {
   currentUserProfileSelector,
   currenciesSelector
 } from '../../selectors';
-import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import {
+  selectPlantProjectAction,
+  clearPlantProject
+} from '../../actions/selectPlantProjectAction';
 import { fetchCurrencies } from '../../actions/currencies';
 import { gift, paymentClear } from '../../actions/donateAction';
 
@@ -35,6 +38,7 @@ class GiftTreesContainer extends Component {
         }
         paymentStatus={this.props.paymentStatus}
         paymentClear={this.props.paymentClear}
+        plantProjectClear={this.props.clearPlantProject}
       />
     );
   }
@@ -50,7 +54,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { selectPlantProjectAction, fetchCurrencies, gift, paymentClear },
+    {
+      selectPlantProjectAction,
+      fetchCurrencies,
+      gift,
+      paymentClear,
+      clearPlantProject
+    },
     dispatch
   );
 };
@@ -66,5 +76,6 @@ GiftTreesContainer.propTypes = {
   selectPlantProjectAction: PropTypes.func,
   gift: PropTypes.func,
   fetchCurrencies: PropTypes.func,
-  paymentClear: PropTypes.func
+  paymentClear: PropTypes.func,
+  clearPlantProject: PropTypes.func
 };

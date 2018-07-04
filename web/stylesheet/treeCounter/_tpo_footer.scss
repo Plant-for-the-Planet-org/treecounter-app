@@ -73,6 +73,7 @@
     margin-bottom: 20px;
     .column {
       @extend .pftp-text-basic;
+      width: 40%;
       font-size: 15.5px;
       font-weight: 600;
       line-height: 1.52;
@@ -90,6 +91,7 @@
     }
     .teaser-image__container {
       @extend .right-aligned;
+      width: 40%;
       .teaser__projectImage {
         height: 165px;
         background-color: $placeholderColor;
@@ -132,6 +134,7 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 3px;
+      width: 100%;
 
       .tooltip {
         height: 25px;

@@ -1,8 +1,8 @@
 export default {
   currency: 'Currency',
   gift_trees: 'Gift Trees',
-  treecounter_user_name: 'Tree Counter User',
-  other_name: 'Other',
+  treecounter_user_name: 'User',
+  other_email: 'Email',
   heading_give: 'Give to...',
   heading_donate_details: 'Donation Details',
   heading_donor_details: 'Donor Details',

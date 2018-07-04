@@ -52,7 +52,8 @@
     .project-teaser__container {
       .teaser-image__container {
         .teaser__projectImage {
-          height: 100px;
+          height: auto;
+          width: 100%;
         }
       }
     }
@@ -61,6 +62,13 @@
       display: flex;
       justify-content: space-between;
       font-size: 15px;
+
+      .select_different_project_style {
+        display: flex;
+        color: #ec6453;
+        margin-top: 10px;
+        cursor: pointer;
+      }
 
       .link {
         padding: 10px 0;

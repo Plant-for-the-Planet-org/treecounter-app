@@ -150,7 +150,7 @@ export default class Leaderboard extends Component {
     if (!categoryInfo) {
       return (
         <div className="app-container__content--center sidenav-wrapper">
-          <LoadingIndicator />;
+          <LoadingIndicator />
         </div>
       );
     }

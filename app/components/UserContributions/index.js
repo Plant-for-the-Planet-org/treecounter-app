@@ -16,11 +16,7 @@ const UserContributions = ({ userProfileId, userContributions }) => {
       <CardLayout>
         {Object.keys(userContributions).length > 0 ? (
           <div>
-            <ArcGISContributionsMap
-              webMapId={'d601683709dc415b99ddc1bc66a6d8eb'}
-              //webMapId={'534da741b327459eb117f4cc93acd98e'} asks for credentials
-              userId={userProfileId}
-            />
+            <ArcGISContributionsMap userId={userProfileId} />
             <ContributionsMapLegend />
             <div className="contribution-container">
               <ContributionCardList contributions={userContributions} />

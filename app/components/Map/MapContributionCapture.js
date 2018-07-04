@@ -15,7 +15,7 @@ class MapContributionCapture extends React.Component {
       graphic: null,
       search: null,
       webMercatorUtils: null,
-      geLocation: null
+      geoLocation: null
     };
 
     this.handleFail = this.handleFail.bind(this);
@@ -24,7 +24,7 @@ class MapContributionCapture extends React.Component {
   render() {
     return (
       <WebMap
-        id="534da741b327459eb117f4cc93acd98e"
+        id={this.props.webMapId}
         loaderOptions={{
           dojoConfig: {
             has: {
@@ -42,56 +42,106 @@ class MapContributionCapture extends React.Component {
   handleLoad(map, view) {
     loadModules([
       'esri/widgets/Search',
-      'esri/geometry/support/webMercatorUtils'
+      'esri/geometry/support/webMercatorUtils',
+      'esri/Graphic',
+      'esri/geometry/Point'
     ])
-      .then(([Search, webMercatorUtils]) => {
-        const search = new Search({ view });
-        const source = search.sources.getItemAt(0);
-        source.outFields.push('CountryCode');
-        source.resultSymbol = {
-          type: 'picture-marker',
-          url:
-            'https://s3-us-west-1.amazonaws.com/patterns.esri.com/icons/Web/Point%20Symbols/SVG/Street%20trees_d.svg',
-          width: '24px',
-          height: '24px',
-          yoffset: '10px'
+      .then(([Search, webMercatorUtils, Graphic, Point]) => {
+        // GET THE FIRST LAYER
+        const tree_inventory_layer = map.layers.getItemAt(0);
+        //        tree_inventory_layer.definitionExpression = `user_id = ${user_id}`;
+        tree_inventory_layer.definitionExpression = `0=1`;
+
+        // CENTER GRAPHIC //
+        let center_graphic = new Graphic({
+          geometry: null,
+          symbol: {
+            type: 'picture-marker',
+            url:
+              'https://s3-us-west-1.amazonaws.com/patterns.esri.com/icons/Web/Point%20Symbols/SVG/Street%20trees_d.svg',
+            size: 24,
+            width: 24,
+            height: 24,
+            xoffset: 0,
+            yoffset: 0
+          }
+        });
+        view.graphics.add(center_graphic);
+
+        // UPDATE CENTER GRAPHIC //
+        const update_center_graphic = location => {
+          view.graphics.remove(center_graphic);
+          center_graphic = center_graphic.clone();
+          center_graphic.geometry = location;
+          view.graphics.add(center_graphic);
         };
-        search.sources = [source];
-        view.ui.add(search, 'top-right');
 
-        // zoom to geoLocation
-        if (this.props.geoLocation) {
-          view.goTo({
-            target: {
-              latitude: this.props.geoLocation.geoLatitude,
-              longitude: this.props.geoLocation.geoLongitude,
-              scale: 10000
-            }
-          });
-        }
+        // LOCATION SEARCH //
+        const location_search = new Search({ view: view }, 'location-search');
+        location_search.popupEnabled = false;
+        location_search.autoNavigate = false;
+        location_search.resultGraphicEnabled = false;
 
-        // User selects a a search result
-        search.on('select-result', ({ errors, result }) => {
-          if (!errors) {
-            const geoLocation = {
-              geoLongitude: result.feature.geometry.longitude,
-              geoLatitude: result.feature.geometry.latitude,
-              countryCode: result.feature.attributes.CountryCode
-            };
-            this.setState({ geoLocation });
-            this.props.onLocationSelected(geoLocation);
+        // UPDATE DEFAULT LOCATOR (Esri World Geocoding Service) TO INCLUDE COUNTRY IN THE RESULTS //
+        const locator_source = location_search.sources.getItemAt(0);
+
+        // RETURN COUNTRY CODE //
+        locator_source.outFields.push('CountryCode');
+
+        // RESET DEFAULT LOCATOR //
+        location_search.sources = [locator_source];
+        view.ui.add(location_search, 'top-right');
+
+        // USER SELECTS SEARCH RESULT //
+        location_search.on('select-result', evt => {
+          if (!evt.errors) {
+            const result = evt.result;
+            view.goTo(result.extent).then(() => {
+              const geoLocation = {
+                geoLongitude: result.extent.center.longitude,
+                geoLatitude: result.extent.center.longitude,
+                countryCode: result.feature.attributes.CountryCode
+              };
+              this.setState({ geoLocation });
+              this.props.onLocationSelected(geoLocation);
+              update_center_graphic(result.extent.center);
+            });
           }
         });
 
-        // User clicks on map
-        view.on('click', ({ mapPoint }) => {
-          search.search(mapPoint);
+        // REVERSE GEOCODE USER CLICKED LOCATION //
+        view.on('click', evt => {
+          location_search.searchTerm = '';
+          view.goTo(evt.mapPoint).then(() => {
+            locator_source.locator
+              .locationToAddress(evt.mapPoint)
+              .then(address_candidate => {
+                location_search.searchTerm = address_candidate.address;
+                const geoLocation = {
+                  geoLongitude: evt.mapPoint.longitude,
+                  geoLatitude: evt.mapPoint.latitude,
+                  countryCode: address_candidate.attributes.CountryCode
+                };
+                this.setState({ geoLocation });
+                this.props.onLocationSelected(geoLocation);
+                update_center_graphic(evt.mapPoint);
+              });
+          });
         });
+
+        if (this.props.geoLocation.geoLongitude) {
+          const oldLocation = new Point(
+            this.props.geoLocation.geoLongitude,
+            this.props.geoLocation.geoLatitude
+          );
+          view.goTo({ target: oldLocation, scale: 10000 });
+          update_center_graphic(oldLocation);
+        }
 
         this.setState({
           map,
           view,
-          search,
+          location_search,
           webMercatorUtils,
           status: 'loaded'
         });
@@ -107,6 +157,7 @@ class MapContributionCapture extends React.Component {
 
 MapContributionCapture.propTypes = {
   geoLocation: PropTypes.object,
-  onLocationSelected: PropTypes.func
+  onLocationSelected: PropTypes.func,
+  webMapId: PropTypes.string
 };
 export default MapContributionCapture;

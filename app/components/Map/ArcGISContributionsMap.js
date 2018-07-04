@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 
 import MapContributions from './MapContributions';
 
-const ArcGISContributionsMap = ({ webMapId, userId }) => {
+import { context } from '../../config';
+
+const ArcGISContributionsMap = ({ userId }) => {
+  const webMapId = context.mapIds.inventory;
+  console.log('ArcGISContributionsMap: webMapId', webMapId);
+  console.log('ArcGISContributionsMap: userId', userId);
   return (
     <div className="map-container">
       <MapContributions webMapId={webMapId} userId={userId} />
@@ -12,7 +17,6 @@ const ArcGISContributionsMap = ({ webMapId, userId }) => {
 };
 
 ArcGISContributionsMap.propTypes = {
-  webMapId: PropTypes.string.isRequired,
   userId: PropTypes.number
 };
 

@@ -9,7 +9,7 @@ import i18n from '../../locales/i18n.js';
 class SearchBar extends React.Component {
   suggestionClicked = (event, data) => {
     this.props.route('app_treecounter', null, {
-      treecounter: data.suggestion.slug && data.suggestion.id
+      treecounter: data.suggestion.slug || data.suggestion.id
     });
     if (data.method === 'enter') {
       event.preventDefault();

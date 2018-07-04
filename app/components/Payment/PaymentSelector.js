@@ -28,11 +28,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.paymentMethods &&
-      JSON.stringify(nextProps.paymentMethods) !==
-        JSON.stringify(this.props.paymentMethods)
-    ) {
+    if (nextProps.paymentMethods) {
       // lookup stripe related payment methods for the current country/currency combination
       const stripeGateways = Object.keys(nextProps.paymentMethods).filter(
         gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)

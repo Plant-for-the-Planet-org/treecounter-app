@@ -20,7 +20,7 @@ import shovel_outline_red from './images/icons/shovel_outline_red.png';
 import target_outline_red from './images/icons/target_outline_red.png';
 import pledge_highest from './images/pledge_biggest.png';
 import pledge_latest from './images/pledge_recent.png';
-import pot from './images/pot.svg';
+import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/tree.svg';
 import SideMenuImage from './images/side_menu.png';

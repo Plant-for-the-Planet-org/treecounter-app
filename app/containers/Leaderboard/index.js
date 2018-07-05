@@ -108,6 +108,9 @@ class LeaderBoardContainer extends React.Component {
             mapInfo.mapLayers = exploreData.mapLayers;
             mapInfo.mapLayersKeys = Object.keys(mapInfo.mapLayers);
           }
+          if (exploreData.webMapIds) {
+            mapInfo.webMapIds = exploreData.webMapIds;
+          }
         }
 
         this.setState({

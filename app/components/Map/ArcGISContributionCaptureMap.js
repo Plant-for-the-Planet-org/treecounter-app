@@ -2,32 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import MapContributionCapture from './MapContributionCapture';
-import { context } from '../../../app/config/index';
+
+import { context } from '../../config';
+
 const ArcGISContributionCaptureMap = ({ geoLocation, onLocationSelected }) => {
+  const webMapId = context.mapIds.inventory;
+  console.log('ArcGISContributionCaptureMap: webMapId', webMapId);
+  console.log('ArcGISContributionCaptureMap: geoLocation', geoLocation);
   return (
     <div className="map-container">
-      {
-        // <div>Display a Map and put a marker at the location specified by props.geoLocation</div>
-        // <div>When the user clicks on the map or enters an address, call the function provided by props.onLocationSelected and pass a location object .
-        // </div>
-        // <br/>
-        // <div>countryCode: {geoLocation.countryCode}</div>
-        // <div>geoLongitude: {geoLocation.geoLongitude}</div>
-        // <div>geoLatitude: {geoLocation.geoLatitude}</div>
-      }
       <MapContributionCapture
         geoLocation={geoLocation}
         onLocationSelected={onLocationSelected}
+        webMapId={webMapId}
       />
-      {context.debug ? (
-        <div>
-          <br />
-          <br />
-          <div>countryCode: {geoLocation.country}</div>
-          <div>geoLongitude: {geoLocation.geoLongitude}</div>
-          <div>geoLatitude: {geoLocation.geoLatitude}</div>
-        </div>
-      ) : null}
     </div>
   );
 };

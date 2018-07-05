@@ -174,8 +174,14 @@
           }
           .country {
             flex: 0 0 50%;
+            text-align: left;
+
+            a {
+              width: 80%;
+            }
             .countryIndex {
               width: 20%;
+              text-align: center;
             }
           }
         }

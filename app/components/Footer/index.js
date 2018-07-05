@@ -15,6 +15,7 @@ const Footer = () => {
         <TransparentButton onClick={() => console.log('imprint')}>
           <span>{i18n.t('label.imprint')}</span>
         </TransparentButton>
+        <span className="seprator">|</span>
         <TransparentButton onClick={() => console.log('privacy')}>
           <span>{i18n.t('label.privacy')}</span>
         </TransparentButton>

@@ -49,17 +49,17 @@
 }
 .tree-counter-profile {
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row nowrap;
   align-items: center;
   position: relative;
   margin: auto;
   margin-top: 55px;
 
   @include for-phone-only {
-    flex-flow: row nowrap;
     margin-left: 0px;
     margin-top: 30px;
     width: 50%;
+    margin-left: 10px;
   }
 }
 .user-home-profile {
@@ -76,13 +76,13 @@
   text-align: center;
   text-overflow: ellipsis;
   color: $headerTextColor;
-  margin-top: 27px;
   overflow: hidden;
   white-space: nowrap;
   @include for-phone-only {
     white-space: initial;
     text-align: left;
     margin-top: 0;
+    font-size: 25.5px;
   }
   @include for-xs-phone-only {
     font-size: 20.5px;
@@ -90,13 +90,14 @@
 }
 
 .user-info {
-  align-items: center;
+  margin-left: 20px;
+  align-items: flex-start;
+  margin-right: 20px;
   display: flex;
   flex-direction: column;
-  @include for-phone-only {
-    margin-left: 20px;
-    align-items: flex-start;
-    margin-right: 20px;
+  align-self: center;
+  @include for-xs-phone-only {
+    margin-left: 10px;
   }
 }
 .tree-counter-row {
@@ -105,24 +106,33 @@
   flex-flow: row nowrap;
   align-items: flex-start;
   position: relative;
-}
-.profile-type-container {
-  width: 100%;
-  height: 100%;
-  min-height: 30px;
-  background-color: #c7c7c7;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  position: relative;
-  justify-content: center;
-  .profile-type-label {
-    @extend .pftp-text-normal;
+
+  .pftp-button-follow {
+    @include for-phone-only {
+      padding: 0 12px;
+    }
+    @include for-xs-phone-only {
+      padding: 0 6px;
+    }
+  }
+  .profile-type-container {
     width: 100%;
-    font-size: 17px;
-    text-align: center;
-    color: #ffffff;
-    padding: 0 9px;
+    height: 100%;
+    min-height: 30px;
+    background-color: #c7c7c7;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    .profile-type-label {
+      @extend .pftp-text-normal;
+      width: 100%;
+      font-size: 17px;
+      text-align: center;
+      color: #ffffff;
+      padding: 0 9px;
+    }
   }
 }
 

@@ -141,6 +141,18 @@
         margin-left: 5px;
       }
 
+      .tooltip-text {
+        display: flex;
+      }
+
+      .__react_component_tooltip {
+        width: calc(25% - 60px);
+
+        @include for-phone-only {
+          width: calc(50% - 60px);
+        }
+      }
+
       .align-center {
         display: flex;
         align-items: center;

@@ -25,7 +25,7 @@
   padding: 0;
   height: 30px;
   width: inherit;
-  background-color: #b7d37f;
+  background-color: $colorPrimaryDark;
   color: white;
   font-size: 17px;
   font-weight: normal;
@@ -35,6 +35,10 @@
   letter-spacing: normal;
   text-align: center;
   padding: 0 24px;
+}
+.pftp-button-following {
+  @extend .pftp-button-follow;
+  background-color: $colorPrimaryAccent;
 }
 .support-button-caption {
   max-width: 115px;

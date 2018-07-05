@@ -19,7 +19,7 @@ const ArcGISContributionCaptureMap = ({ geoLocation, onLocationSelected }) => {
         geoLocation={geoLocation}
         onLocationSelected={onLocationSelected}
       />
-      {context.debug ? (
+      {/* {context.debug ? (
         <div>
           <br />
           <br />
@@ -27,7 +27,7 @@ const ArcGISContributionCaptureMap = ({ geoLocation, onLocationSelected }) => {
           <div>geoLongitude: {geoLocation.geoLongitude}</div>
           <div>geoLatitude: {geoLocation.geoLatitude}</div>
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };

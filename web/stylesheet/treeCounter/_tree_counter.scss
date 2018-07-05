@@ -96,6 +96,9 @@
   display: flex;
   flex-direction: column;
   align-self: center;
+  @include for-xs-phone-only {
+    margin-left: 10px;
+  }
 }
 .tree-counter-row {
   margin-top: 10px;
@@ -107,6 +110,9 @@
   .pftp-button-follow {
     @include for-phone-only {
       padding: 0 12px;
+    }
+    @include for-xs-phone-only {
+      padding: 0 6px;
     }
   }
   .profile-type-container {

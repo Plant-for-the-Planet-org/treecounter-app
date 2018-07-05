@@ -4,6 +4,11 @@
   justify-content: flex-end;
 }
 
+.tpo-footer__container {
+  position: relative;
+  width: 100%;
+}
+
 .tpo-footer-card-layout {
   @extend .pftp-card-layout;
   padding: 0;
@@ -146,10 +151,10 @@
       }
 
       .__react_component_tooltip {
-        width: calc(25% - 60px);
+        width: 200px;
 
         @include for-phone-only {
-          width: calc(50% - 60px);
+          width: 100px;
         }
       }
 

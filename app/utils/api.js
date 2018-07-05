@@ -6,6 +6,7 @@ import { getAccessToken } from './user';
 import { getApiRoute } from '../actions/apiRouting';
 import { getStore } from '../components/App/index';
 import { logoutUser } from '../actions/authActions';
+import { context } from '../config';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -64,6 +65,17 @@ export async function getAuthenticatedRequest(route, params) {
 
 export async function postRequest(route, data, params, authenticated = false) {
   let url = getApiRoute(route, params);
+  return await axios
+    .post(url, data, await getHeaders(authenticated))
+    .then(checkStatus)
+    .then(onAPIResponse)
+    .catch(onAPIError);
+}
+
+export async function postDirectRequest(path, data, authenticated = false) {
+  const { scheme, host } = context;
+  const serverName = `${scheme}:/${host}`;
+  const url = `${serverName}/${path}`;
   return await axios
     .post(url, data, await getHeaders(authenticated))
     .then(checkStatus)

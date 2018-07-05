@@ -13,7 +13,7 @@ export default {
   about_me: 'About me',
   change_password: 'Change password',
   delete_profile: 'Delete Profile',
-  un_subscribe: 'UnFollow',
+  un_subscribe: 'Following',
   subscribe: 'Follow',
   profile: 'Profile',
   gender: 'Gender',

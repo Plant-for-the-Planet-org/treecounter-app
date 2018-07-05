@@ -74,7 +74,7 @@ class Trillion extends Component {
             <img src={esriLogo} />
             <TextBlock>User Conference</TextBlock>
           </div>
-          <div
+          {/* <div
             className="event_item"
             onClick={() =>
               updateRoute('app_pledge', null, null, {
@@ -84,7 +84,7 @@ class Trillion extends Component {
           >
             <img src={bmzLogo} />
             <TextBlock>User Conference</TextBlock>
-          </div>
+          </div> */}
         </div>
 
         <div className="canvasContainer flex-column">

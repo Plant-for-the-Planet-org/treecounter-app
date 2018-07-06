@@ -12,11 +12,13 @@ export default {
   save_changes: 'Save Changes',
   about_me: 'About me',
   change_password: 'Change password',
+  password: 'Password',
   delete_profile: 'Delete Profile',
   un_subscribe: 'Following',
   subscribe: 'Follow',
   profile: 'Profile',
   gender: 'Gender',
   no_notifications: 'You have no notifications',
-  all_notifications: 'See all notifications'
+  all_notifications: 'See all notifications',
+  success_title: 'Success'
 };

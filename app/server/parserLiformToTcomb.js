@@ -19,7 +19,12 @@ function isEmail(x) {
   return /(.)+@(.)+/.test(x);
 }
 
+function isYear(x) {
+  return /^\d{4}$/.test(x);
+}
+
 transform.registerFormat('email', isEmail);
+transform.registerFormat('year', isYear);
 t.String.getValidationErrorMessage = commonValidator;
 t.enums.getValidationErrorMessage = commonValidator;
 t.Integer.getValidationErrorMessage = commonValidator;
@@ -120,8 +125,13 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
             options.template = MapTemplate;
             break;
           case 'date':
+            break;
           case 'hidden':
             options.type = properties[propertyKey].widget;
+            break;
+          case 'year':
+            options.config = { ...options.config, year: true };
+            properties[propertyKey].format = 'year';
             break;
           case 'file':
             options.template =

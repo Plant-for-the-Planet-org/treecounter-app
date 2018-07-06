@@ -10,7 +10,7 @@ export default {
     targetYear: {
       type: 'integer',
       title: 'label.target_year',
-      pattern: '[0-9]{4}',
+      widget: 'year',
       propertyOrder: 2
     },
     targetComment: {

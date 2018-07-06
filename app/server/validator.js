@@ -14,6 +14,8 @@ export const commonValidator = function(value, path, context) {
   } else if (value && hasConfig) {
     if (hasConfig.email && !/(.)+@(.)+/.test(value)) {
       return <div className="error-msg">{i18n.t('label.enterValidEmail')}</div>;
+    } else if (hasConfig.year && !/^\d{4}$/.test(value)) {
+      return <div className="error-msg">{i18n.t('label.enterValidYear')}</div>;
     } else if (hasConfig.attr && hasConfig.attr.maxlength) {
       if (value.length > hasConfig.attr.maxlength) {
         return (

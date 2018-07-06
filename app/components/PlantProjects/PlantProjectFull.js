@@ -89,7 +89,7 @@ class PlantProjectFull extends React.Component {
             </div>
           ) : null}
         </div>
-        {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
+        {this.props.expanded && <PlantProjectDetails {...detailsProps} />}
       </div>
     );
   }

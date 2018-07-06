@@ -8,6 +8,7 @@ import { clearStorage } from '../stores/localStorage';
 import { postRequest } from '../utils/api';
 import { updateJWT } from '../utils/user';
 import { NotificationAction } from './notificationAction';
+import { loadTpos } from './loadTposAction';
 
 export function login(data) {
   const request = postRequest('api_login_check', data);
@@ -47,6 +48,7 @@ export function logoutUser() {
   return dispatch => {
     clearStorage();
     dispatch(userLogout());
+    dispatch(loadTpos());
   };
 }
 

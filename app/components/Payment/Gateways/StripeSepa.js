@@ -68,11 +68,7 @@ class _StripeSepa extends React.Component<
           }
         })
         .then(payload => {
-          if (payload.error) {
-            this.props.onError(payload);
-          } else {
-            this.props.onSuccess(payload);
-          }
+          this.props.onSuccess(payload);
         });
     } else {
       console.log("Stripe.js hasn't loaded yet.");

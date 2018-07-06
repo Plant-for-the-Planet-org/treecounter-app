@@ -19,6 +19,7 @@ class MapContributions extends React.Component {
   render() {
     return (
       <WebMap
+        id={this.props.webMapId}
         loaderOptions={{
           dojoConfig: {
             has: {
@@ -27,7 +28,6 @@ class MapContributions extends React.Component {
             }
           }
         }}
-        id={this.props.webMapId}
         onLoad={this.handleLoad.bind(this)}
         onFail={this.handleFail.bind(this)}
       />
@@ -36,11 +36,13 @@ class MapContributions extends React.Component {
 
   handleLoad(map, view) {
     const user_id = this.props.userId;
-    // FIND TREE LAYER //
-    const tree_inventory_layer = map.layers.find(layer => {
-      return layer.title === 'Tree Inventory';
-    });
+    // // FIND TREE LAYER //
+    // const tree_inventory_layer = map.layers.find(layer => {
+    //   return layer.title === 'Tree Inventory';
+    // });
 
+    // GET THE FIRST LAYER
+    const tree_inventory_layer = map.layers.getItemAt(0);
     //
     // https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html
     //
@@ -56,6 +58,10 @@ class MapContributions extends React.Component {
       tree_inventory_layer
         .queryFeatures(query)
         .then(featureSet => {
+          console.log(
+            '############ MapContributions featureSet: ',
+            featureSet.features
+          );
           // featureSet.features.forEach(feature => {
           //   const {attributes, geometry} =  feature;
           // });

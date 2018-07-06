@@ -79,6 +79,21 @@ class SearchAutosuggest extends Component {
       value: newValue
     });
   };
+  onSuggestionClicked = (
+    event,
+    { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
+  ) => {
+    this.props.onSuggestionClicked(event, {
+      suggestion,
+      suggestionValue,
+      suggestionIndex,
+      sectionIndex,
+      method
+    });
+    this.setState({
+      value: ''
+    });
+  };
 
   onSuggestionsFetchRequested = ({ value }) => {
     setTimeout(() => {
@@ -121,7 +136,7 @@ class SearchAutosuggest extends Component {
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
-        onSuggestionSelected={this.props.onSuggestionClicked}
+        onSuggestionSelected={this.onSuggestionClicked}
         id="custom-render-example"
       />
     );

@@ -1,6 +1,6 @@
 export default {
   description1: 'Here are some common questions when using ',
-  description2: 'www.trilliontreecampaign.org ',
+  description2: 'www.trilliontreecampaign.org',
   description3:
-    'If you are not able to find the answer you are looking for, please write us at support@trilliontreecampaign.org'
+    ' If you are not able to find the answer you are looking for, please write us at support@trilliontreecampaign.org'
 };

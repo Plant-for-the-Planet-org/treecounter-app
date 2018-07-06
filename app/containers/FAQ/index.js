@@ -39,7 +39,10 @@ class FAQContainer extends React.Component {
           {i18n.t('label.faqs')}
           <DescriptionHeading>
             {i18n.t('label.description1')}
-            <a>{i18n.t('label.description2')}</a> {i18n.t('label.description3')}
+            <a href={'https://' + i18n.t('label.description2')} target="_blank">
+              {i18n.t('label.description2')}
+            </a>{' '}
+            {i18n.t('label.description3')}
           </DescriptionHeading>
         </TextHeading>
         <FAQ faqs={this.state.faqs} />

@@ -23,5 +23,8 @@ export const commonValidator = function(value, path, context) {
         );
       }
     }
+  } else if (context.options.pattern) {
+    const test = !'/' + context.options.pattern + '/'.test(value);
+    console.log('pattern', test);
   }
 };

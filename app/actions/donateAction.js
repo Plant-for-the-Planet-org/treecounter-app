@@ -15,13 +15,7 @@ import {
 
 export function donate(donationContribution, plantProjectId, loggedIn) {
   let route = loggedIn ? 'donationContribution_post' : 'donate_post';
-  let request = loggedIn
-    ? postAuthenticatedRequest(route, donationContribution, {
-        plantProject: plantProjectId
-      })
-    : postRequest(route, donationContribution, {
-        plantProject: plantProjectId
-      });
+
   return dispatch => {
     if (
       donationContribution.paymentResponse.type &&
@@ -34,6 +28,13 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
         })
       );
     } else {
+      let request = loggedIn
+        ? postAuthenticatedRequest(route, donationContribution, {
+            plantProject: plantProjectId
+          })
+        : postRequest(route, donationContribution, {
+            plantProject: plantProjectId
+          });
       request
         .then(response => {
           const { contribution, treecounter, plantProject } = response.data;
@@ -65,13 +66,7 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
 
 export function gift(donationContribution, plantProjectId, loggedIn) {
   let route = loggedIn ? 'giftDonationContribution_post' : 'giftDonate_post';
-  let request = loggedIn
-    ? postAuthenticatedRequest(route, donationContribution, {
-        plantProject: plantProjectId
-      })
-    : postRequest(route, donationContribution, {
-        plantProject: plantProjectId
-      });
+
   return dispatch => {
     if (
       donationContribution.paymentResponse.type &&
@@ -84,6 +79,13 @@ export function gift(donationContribution, plantProjectId, loggedIn) {
         })
       );
     } else {
+      let request = loggedIn
+        ? postAuthenticatedRequest(route, donationContribution, {
+            plantProject: plantProjectId
+          })
+        : postRequest(route, donationContribution, {
+            plantProject: plantProjectId
+          });
       request
         .then(response => {
           const treecounter = response.data;

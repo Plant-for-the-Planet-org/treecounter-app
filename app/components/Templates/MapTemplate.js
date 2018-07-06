@@ -1,6 +1,4 @@
 import React from 'react';
-// import MapContributionCapture from '../Map/MapContributionCapture';
-// import RegistrationMap from '../RegisterTrees/RegistrationMap';
 import ArcGISContributionCaptureMap from '../Map/ArcGISContributionCaptureMap';
 
 export function parseGeolocation(geoLocation) {
@@ -27,7 +25,6 @@ export function parseGeolocation(geoLocation) {
 
 export function MapTemplate(locals) {
   console.log('%%%%%%%%%%%%%%%%%%%%', locals);
-  //  locals.onChange(); //Temporary fix
   let geolocation = parseGeolocation(locals.value);
 
   return (

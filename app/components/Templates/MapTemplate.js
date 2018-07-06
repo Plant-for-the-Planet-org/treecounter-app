@@ -1,6 +1,5 @@
 import React from 'react';
-import MapContributionCapture from '../Map/MapContributionCapture';
-import RegistrationMap from '../../components/RegisterTrees/RegistrationMap';
+import ArcGISContributionCaptureMap from '../Map/ArcGISContributionCaptureMap';
 
 export function parseGeolocation(geoLocation) {
   let geolocationObj = {};
@@ -13,6 +12,11 @@ export function parseGeolocation(geoLocation) {
           .replace(/=/g, '":"') +
         '"}'
     );
+    console.log(
+      '%%%%%%%%%%%%%%%%%%%% parseGeolocation: ',
+      geoLocation,
+      geolocationObj
+    );
   } catch (err) {
     console.log(err);
   }
@@ -21,13 +25,12 @@ export function parseGeolocation(geoLocation) {
 
 export function MapTemplate(locals) {
   console.log('%%%%%%%%%%%%%%%%%%%%', locals);
-  //  locals.onChange(); //Temporary fix
   let geolocation = parseGeolocation(locals.value);
 
   return (
-    <RegistrationMap
+    <ArcGISContributionCaptureMap
       geoLocation={geolocation}
-      onGeoLocationSelected={newValue => {
+      onLocationSelected={newValue => {
         console.log('handle map change', newValue);
         newValue['country'] = newValue.countryCode;
         delete newValue.countryCode;

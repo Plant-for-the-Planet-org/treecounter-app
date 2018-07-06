@@ -29,6 +29,7 @@ export default class MapTab extends React.Component {
       }
     };
     this.state = {
+      webMapId: props.mapInfo.webMapIds.explore,
       mapLayers: props.mapInfo.mapLayers,
       activeMapLayers: props.mapInfo.mapLayersKeys.splice(0, 1),
       mapDescriptionInfoMap
@@ -55,7 +56,7 @@ export default class MapTab extends React.Component {
           onStateUpdate={this.onMapLayerSelectUpdate}
         />
         <ArcGISExploreMap
-          webMapId={'d601683709dc415b99ddc1bc66a6d8eb'}
+          webMapId={this.state.webMapId}
           layers={this.state.activeMapLayers}
         />
 

@@ -16,5 +16,6 @@ export const context = {
   host: 'test.trilliontreecampaign.org', // API server domain
   base: '/app_dev.php', // debug mode on/off, set to empty string to switch debug mode off
   debug: true, // local console debugging switch
-  currency: 'USD'
+  currency: 'USD',
+  mapIds: { inventory: 'dee6acf9de774fe6878813f707b4ab88' }
 };

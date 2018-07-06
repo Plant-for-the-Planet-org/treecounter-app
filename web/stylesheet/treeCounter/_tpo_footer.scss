@@ -27,7 +27,7 @@
     align-items: unset;
   }
   .pftp-button-primary {
-    width: inherit;
+    width: auto;
     margin: auto;
     margin-bottom: 40px;
   }
@@ -98,7 +98,8 @@
       @extend .right-aligned;
       width: 40%;
       .teaser__projectImage {
-        height: 165px;
+        width: 100%;
+        height: auto;
         background-color: $placeholderColor;
       }
     }

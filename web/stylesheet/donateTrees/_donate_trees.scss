@@ -52,8 +52,8 @@
     .project-teaser__container {
       .teaser-image__container {
         .teaser__projectImage {
-          height: auto;
           width: 100%;
+          height: auto;
         }
       }
     }
@@ -145,7 +145,7 @@
 
 .select-project__container {
   @extend .donate-tress__container;
-  width: 100%px;
+  width: 100%;
   .slick-initialized {
     margin: 35px;
     margin-top: 30px;
@@ -153,10 +153,6 @@
 
     .see-more-toggle__container {
       display: inline-block;
-    }
-
-    .pftp-button-primary {
-      width: 50%;
     }
   }
 }
@@ -235,6 +231,8 @@
   @extend .tpo-footer-card-layout;
   margin: 0 -20px;
   box-shadow: none;
+  overflow: scroll;
+  max-height: 80vh;
   min-width: 500px;
 
   .collapsed {

@@ -142,23 +142,6 @@
       margin-bottom: 3px;
       width: 100%;
 
-      .tooltip {
-        height: 25px;
-        margin-left: 5px;
-      }
-
-      .tooltip-text {
-        display: flex;
-      }
-
-      .__react_component_tooltip {
-        width: 200px;
-
-        @include for-phone-only {
-          width: 100px;
-        }
-      }
-
       .align-center {
         display: flex;
         align-items: center;
@@ -239,5 +222,25 @@
       margin-bottom: 43px;
       min-height: 350px;
     }
+  }
+}
+
+.tooltip {
+  height: 25px;
+  width: 25px;
+  display: inline;
+  margin: 0;
+  margin-left: 5px;
+}
+
+.tooltip-text {
+  display: flex;
+}
+
+.__react_component_tooltip {
+  width: 200px;
+
+  @include for-phone-only {
+    width: 100px;
   }
 }

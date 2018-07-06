@@ -16,7 +16,9 @@ class PlantProjectFull extends React.Component {
     super(props);
     this.toggleExpanded = this.toggleExpanded.bind(this);
     this.state = { expanded: props.expanded };
-    props.callExpanded(!this.state.expanded);
+    if (props.callExpanded) {
+      props.callExpanded(!this.state.expanded);
+    }
   }
 
   toggleExpanded() {

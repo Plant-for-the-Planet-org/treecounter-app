@@ -125,11 +125,11 @@ export default class Leaderboard extends Component {
                 </div>
                 <div className="table-col other">
                   <div className="table-col-phone-header">Planted</div>
-                  {d.planted}
+                  <span>{d.planted}</span>
                 </div>
                 <div className="table-col other">
                   <div className="table-col-phone-header">Target</div>
-                  {d.target}
+                  <span>{d.target}</span>
                 </div>
               </div>
             ))}

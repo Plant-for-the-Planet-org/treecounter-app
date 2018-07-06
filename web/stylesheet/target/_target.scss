@@ -3,7 +3,7 @@
     .target-form {
       display: flex;
       flex-direction: column;
-    
+
       .row {
         display: flex;
         justify-content: space-between;
@@ -11,23 +11,22 @@
           display: block;
         }
       }
-    
+
       .half {
         width: 48%;
         @include for-phone-only {
           width: 100%;
-         
         }
       }
     }
-    
+
     @include for-phone-only {
-      padding: 10% 10%
+      padding: 10% 10%;
     }
   }
   .pftp-button-primary {
-    width: 50%;
+    width: auto;
     margin: auto;
     align-items: center;
-}
+  }
 }

@@ -90,6 +90,7 @@
             font-size: 16px;
             line-height: 1.44;
             color: #575756;
+            margin-bottom: 10px;
           }
           .source {
             @extend .pftp-text-basic;
@@ -97,6 +98,10 @@
             font-size: 14px;
             line-height: 1.64;
             color: #8b8383;
+          }
+          img {
+            width: 100%;
+            height: auto;
           }
         }
       }
@@ -169,8 +174,14 @@
           }
           .country {
             flex: 0 0 50%;
+            text-align: left;
+
+            a {
+              width: 80%;
+            }
             .countryIndex {
               width: 20%;
+              text-align: center;
             }
           }
         }

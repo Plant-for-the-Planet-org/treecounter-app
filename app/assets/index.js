@@ -77,6 +77,10 @@ import bmzLogo from './images/logo_bmz.jpg';
 import questionmark_orange from './images/icons/questionmark.png';
 import gift_icon from './images/icons/gift_icon.png';
 
+import map_legend_Restoration from './images/Legend_Restoration.png';
+import map_legend_Trees from './images/Legend_Trees.png';
+import map_legend_TreeDensity from './images/Legend_TreeDensity.png';
+
 export {
   bmzLogo,
   esriLogo,
@@ -155,5 +159,8 @@ export {
   leaderboards_company_green,
   close_green,
   questionmark_orange,
-  gift_icon
+  gift_icon,
+  map_legend_Restoration,
+  map_legend_Trees,
+  map_legend_TreeDensity
 };

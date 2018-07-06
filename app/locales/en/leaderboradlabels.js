@@ -12,7 +12,7 @@ export default {
   existingForest_description:
     '3.04 trillion trees currently exist globally. Down from six trillion trees before humans started cutting down forests, about 11,000 years ago. The map shows the number of trees per km2.',
   existingForest_source:
-    'Source: Crowther, T. W. et al. (2015) Mapping tree density at a global scale. Nature 525, 201–205.',
+    'Crowther, T. W. et al. (2015) Mapping tree density at a global scale. Nature 525, 201–205.',
   restorationOpportunities: 'Restoration Opportunities',
   restorationOpportunities_description:
     'Half a billion hectares are suitable for wide-scale restoration of closed forests. Further one and a half billion hectares are best sited for mosaic restoration, which combines forests with other land uses like agroforestry, smallholder agriculture, and settlements.',

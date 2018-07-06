@@ -235,6 +235,8 @@
   @extend .tpo-footer-card-layout;
   margin: 0 -20px;
   box-shadow: none;
+  overflow: scroll;
+  max-height: 80vh;
   min-width: 500px;
 
   .collapsed {

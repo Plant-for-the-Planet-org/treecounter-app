@@ -74,7 +74,10 @@ export default class DonateTrees extends Component {
 
     let modeReceipt;
     if (props.currentUserProfile) {
-      modeReceipt = props.currentUserProfile.type;
+      modeReceipt =
+        props.currentUserProfile.type === 'individual'
+          ? 'individual'
+          : 'company';
     } else {
       modeReceipt = '';
     }

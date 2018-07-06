@@ -15,7 +15,6 @@
   display: block;
   margin-bottom: 40px;
   max-width: 718px;
-  width: 80vh;
   @include for-phone-only {
     max-width: 350px !important;
   }
@@ -99,8 +98,8 @@
       @extend .right-aligned;
       width: 40%;
       .teaser__projectImage {
-        height: 165px;
-        width: auto;
+        width: 100%;
+        height: auto;
         background-color: $placeholderColor;
       }
     }

@@ -142,10 +142,12 @@
           }
           .other {
             flex: 0 0 22%;
+            justify-content: center;
           }
           .planted {
             @extend .other;
             padding-left: 15px;
+            justify-content: center;
           }
           .country {
             flex: 0 0 50%;
@@ -171,6 +173,7 @@
           }
           .other {
             flex: 0 0 22%;
+            justify-content: center;
           }
           .country {
             flex: 0 0 50%;

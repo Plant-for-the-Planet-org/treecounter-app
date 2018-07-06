@@ -16,6 +16,7 @@ class PlantProjectFull extends React.Component {
     super(props);
     this.toggleExpanded = this.toggleExpanded.bind(this);
     this.state = { expanded: props.expanded };
+    props.callExpanded(!this.state.expanded);
   }
 
   toggleExpanded() {
@@ -89,7 +90,7 @@ class PlantProjectFull extends React.Component {
             </div>
           ) : null}
         </div>
-        {this.props.expanded && <PlantProjectDetails {...detailsProps} />}
+        {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
       </div>
     );
   }

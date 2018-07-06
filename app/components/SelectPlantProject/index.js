@@ -215,7 +215,7 @@ export default class SelectPlantProject extends Component {
                     <div key={project.id}>
                       <PlantProjectFull
                         callExpanded={() => this.callExpanded()}
-                        expanded={this.state.expanded}
+                        expanded={false}
                         plantProject={project}
                         tpoName={project.tpo_name}
                       />

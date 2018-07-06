@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n';
+import { tree } from '../../assets';
 
 class TreeCountSelector extends React.Component {
   constructor(props) {
@@ -51,6 +52,9 @@ class TreeCountSelector extends React.Component {
   }
 
   handleVariableTreeCountChange(treeCount) {
+    if (treeCount === '') {
+      treeCount = 0;
+    }
     this.updateStateAndParent({
       variableTreeCount: parseInt(treeCount),
       variableAmount: this.props.treeCountToAmount(treeCount)
@@ -58,6 +62,9 @@ class TreeCountSelector extends React.Component {
   }
 
   handleVariableAmountChange(amount) {
+    if (amount === '') {
+      amount = 0;
+    }
     const treeCount = this.props.amountToTreeCount(amount);
     this.updateStateAndParent({
       variableAmount: parseInt(amount),

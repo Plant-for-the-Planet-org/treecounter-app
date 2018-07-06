@@ -2,6 +2,9 @@ $breakpointTablet: 768px;
 
 .sidenav-wrapper {
   margin-left: 250px;
+  @include for-phone-only {
+    margin-left: 0 !important;
+  }
 }
 
 .center-wrapper {
@@ -11,23 +14,22 @@ $breakpointTablet: 768px;
 }
 
 @media only screen and (max-width: $breakpointTablet) {
-    .app-container__sidenav {
-      left: -250px !important;
+  .app-container__sidenav {
+    left: -250px !important;
 
-      &.open {
-        left: 0 !important;
-      }
+    &.open {
+      left: 0 !important;
     }
-    .app-header {
-
-      &:before {
-        content: initial !important;
-      }
-      & .burger-icon {
-        display: block !important;
-      }
+  }
+  .app-header {
+    &:before {
+      content: initial !important;
     }
-    .sidenav-wrapper {
-      margin-left: 0 !important;
+    & .burger-icon {
+      display: block !important;
     }
+  }
+  .sidenav-wrapper {
+    margin-left: 0 !important;
+  }
 }

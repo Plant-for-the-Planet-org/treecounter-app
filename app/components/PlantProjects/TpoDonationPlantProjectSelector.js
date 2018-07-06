@@ -45,26 +45,28 @@ class TpoDonationPlantProjectSelector extends React.Component {
 
     return (
       <CardLayout className="tpo-footer-card-layout">
-        <ContentHeader caption={caption} />
-        {1 === plantProjects.length ? (
-          <TagName
-            plantProject={plantProjects.find(() => true)}
-            expanded={false}
-          />
-        ) : (
-          <PlantProjectCarousel
-            contentTag={TagName}
-            plantProjects={plantProjects}
-            tpoName={tpoName}
-            currentPlantProjectId={this.state.currentPlantProjectId}
-            onChange={this.onCarouselChange}
-          />
-        )}
-        <PrimaryButton
-          onClick={() => onSelect(this.state.currentPlantProjectId)}
-        >
-          {i18n.t('label.donate')}
-        </PrimaryButton>
+        <div className="tpo-footer__container">
+          <ContentHeader caption={caption} />
+          {1 === plantProjects.length ? (
+            <TagName
+              plantProject={plantProjects.find(() => true)}
+              expanded={false}
+            />
+          ) : (
+            <PlantProjectCarousel
+              contentTag={TagName}
+              plantProjects={plantProjects}
+              tpoName={tpoName}
+              currentPlantProjectId={this.state.currentPlantProjectId}
+              onChange={this.onCarouselChange}
+            />
+          )}
+          <PrimaryButton
+            onClick={() => onSelect(this.state.currentPlantProjectId)}
+          >
+            {i18n.t('label.donate')}
+          </PrimaryButton>
+        </div>
       </CardLayout>
     );
   }

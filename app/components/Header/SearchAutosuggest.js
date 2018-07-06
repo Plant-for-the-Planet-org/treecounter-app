@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import { postRequest } from '../../utils/api';
+import { postDirectRequest } from '../../utils/api';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 import {
   profile,
@@ -32,7 +32,7 @@ const profileType = {
 
 const getSuggestions = value => {
   return new Promise(resolve => {
-    postRequest('search2', 'q=' + value.trim()).then(result => {
+    postDirectRequest('suggest', 'q=' + value.trim()).then(result => {
       let jdata = result.data;
       const escapedValue = escapeRegexCharacters(value.trim());
       if (escapedValue === '') {

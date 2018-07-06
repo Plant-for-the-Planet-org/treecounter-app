@@ -398,6 +398,7 @@ export default class GiftTrees extends Component {
                     {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
                       <SearchAutosuggest
                         onSuggestionClicked={this.suggestionClicked}
+                        clearSuggestions={false}
                       />
                     ) : (
                       <TCombForm

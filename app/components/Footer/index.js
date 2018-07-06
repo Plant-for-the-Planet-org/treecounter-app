@@ -6,7 +6,7 @@ import i18n from '../../locales/i18n.js';
 
 const Footer = () => {
   return (
-    <div className="app-container__footer">
+    <div className="sidenav-wrapper app-container__footer">
       <div className="app-container__footerimage">
         <img className="footer-logo" src={FooterLogos} />
       </div>

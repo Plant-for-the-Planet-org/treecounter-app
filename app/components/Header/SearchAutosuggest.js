@@ -90,9 +90,11 @@ class SearchAutosuggest extends Component {
       sectionIndex,
       method
     });
-    this.setState({
-      value: ''
-    });
+    if (this.props.clearSuggestions) {
+      this.setState({
+        value: ''
+      });
+    }
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
@@ -148,7 +150,12 @@ const mapDispatchToProps = dispatch => {
 };
 
 SearchAutosuggest.propTypes = {
-  onSuggestionClicked: PropTypes.func
+  onSuggestionClicked: PropTypes.func,
+  clearSuggestions: PropTypes.bool
+};
+
+SearchAutosuggest.defaultProps = {
+  clearSuggestions: true
 };
 
 export default connect(null, mapDispatchToProps)(SearchAutosuggest);

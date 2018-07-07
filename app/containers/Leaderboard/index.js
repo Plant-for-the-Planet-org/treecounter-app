@@ -22,13 +22,14 @@ const tabs = [
 class LeaderBoardContainer extends React.Component {
   constructor(props) {
     super(props);
-    const { match } = props;
+    const { match, location } = props;
     this.state = {
       queryResult: null,
       exploreData: {},
       sectionInfo: {
         section: match.params.section,
-        subSection: match.params.subSection
+        subSection: match.params.subSection,
+        query: location && location.search
       },
       tabInfo: {
         tabs: tabs,
@@ -155,5 +156,6 @@ class LeaderBoardContainer extends React.Component {
 export default LeaderBoardContainer;
 
 LeaderBoardContainer.propTypes = {
-  match: PropTypes.object
+  match: PropTypes.object,
+  location: PropTypes.object
 };

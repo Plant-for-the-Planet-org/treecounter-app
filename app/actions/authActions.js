@@ -1,4 +1,3 @@
-import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { updateRoute } from '../helpers/routerHelper';
 import { loadUserProfile } from './loadUserProfileAction';
 import { debug } from '../debug/index';

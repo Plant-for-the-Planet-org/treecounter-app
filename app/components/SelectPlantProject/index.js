@@ -165,7 +165,6 @@ export default class SelectPlantProject extends Component {
     const settings = {
       dots: true,
       infinite: false,
-      adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation
           styleName="tpo-footer-nav-img__left"
@@ -212,7 +211,7 @@ export default class SelectPlantProject extends Component {
             <Slider {...settings}>
               {featuredProjects.length !== 0
                 ? featuredProjects.map(project => (
-                    <div key={project.id}>
+                    <div key={project.id} className="plant_project_content">
                       <PlantProjectFull
                         callExpanded={() => this.callExpanded()}
                         expanded={false}

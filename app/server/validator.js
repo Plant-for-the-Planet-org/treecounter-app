@@ -3,7 +3,6 @@ import i18n from '../locales/i18n.js';
 
 export const commonValidator = function(value, path, context) {
   let hasConfig = context && context.options.config;
-
   if (!value && hasConfig && hasConfig.required) {
     console.log('TEST_ERROR', value, path, context);
     return (
@@ -23,5 +22,11 @@ export const commonValidator = function(value, path, context) {
         );
       }
     }
+  } else {
+    return (
+      <div className="error-msg">
+        {i18n.t('label.invalidValueMsg') + i18n.t(context.options.label)}
+      </div>
+    );
   }
 };

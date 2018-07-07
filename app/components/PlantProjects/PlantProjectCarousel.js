@@ -31,12 +31,14 @@ class PlantProjectCarousel extends React.Component {
     return (
       <Slider {...settings}>
         {plantProjects.map(plantProject => (
-          <PlantProjectFull
-            key={`plantProject-${plantProject.id}`}
-            expanded={false}
-            tpoName={tpoName}
-            plantProject={plantProject}
-          />
+          <div className="plant_project_carousal__content">
+            <PlantProjectFull
+              key={`plantProject-${plantProject.id}`}
+              expanded={false}
+              tpoName={tpoName}
+              plantProject={plantProject}
+            />
+          </div>
         ))}
       </Slider>
     );

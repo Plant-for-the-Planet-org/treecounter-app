@@ -121,22 +121,9 @@ export default class SelectPlantProject extends Component {
   };
 
   callExpanded = () => {
-    this.setState(
-      {
-        expanded: !this.state.expanded
-      },
-      () => {
-        this.resetHeight();
-      }
-    );
-
-    console.log(this._slider_container);
-  };
-
-  resetHeight = () => {
-    setTimeout(() => {
-      this._slider_container.innerSlider.adaptHeight();
-    }, 1000);
+    this.setState({
+      expanded: !this.state.expanded
+    });
   };
 
   onSelectClickedFeaturedProjects = id => {
@@ -152,7 +139,6 @@ export default class SelectPlantProject extends Component {
     this.setState({
       pageIndex: index
     });
-    this.resetHeight();
   }
 
   onRequestClose() {
@@ -179,7 +165,6 @@ export default class SelectPlantProject extends Component {
     const settings = {
       dots: true,
       infinite: false,
-      adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation
           styleName="tpo-footer-nav-img__left"
@@ -192,12 +177,7 @@ export default class SelectPlantProject extends Component {
           src={arrow_right_orange}
         />
       ),
-      afterChange: index => this.plantProjectChanged(index),
-
-      slickNext: () => {
-        console.log('called reset height');
-        this.resetHeight();
-      }
+      afterChange: index => this.plantProjectChanged(index)
     };
 
     return (
@@ -213,7 +193,7 @@ export default class SelectPlantProject extends Component {
           <div className="project-modal-card-layout">
             {this.state.modalProject ? (
               <PlantProjectFull
-                expanded={this.state.expanded}
+                expanded={false}
                 plantProject={this.state.modalProject}
                 tpoName={this.state.modalProject.tpo_name}
               />
@@ -228,10 +208,10 @@ export default class SelectPlantProject extends Component {
         <CardLayout className="tpo-footer-card-layout">
           <div className="select-project__container">
             <ContentHeader caption={i18n.t('label.featuredProjects')} />
-            <Slider {...settings} ref={c => (this._slider_container = c)}>
+            <Slider {...settings}>
               {featuredProjects.length !== 0
                 ? featuredProjects.map(project => (
-                    <div key={project.id}>
+                    <div key={project.id} className="plant_project_content">
                       <PlantProjectFull
                         callExpanded={() => this.callExpanded()}
                         expanded={false}

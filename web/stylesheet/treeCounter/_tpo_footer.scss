@@ -7,6 +7,10 @@
 .tpo-footer__container {
   position: relative;
   width: 100%;
+  .plant_project_carousal__content {
+    height:500px;
+    overflow:auto;
+  }
 }
 
 .tpo-footer-card-layout {

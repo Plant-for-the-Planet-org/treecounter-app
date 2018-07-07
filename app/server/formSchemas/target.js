@@ -11,7 +11,8 @@ export default {
       type: 'integer',
       title: 'label.target_year',
       pattern: '[0-9]{4}',
-      propertyOrder: 2
+      propertyOrder: 2,
+      minimum: 1000
     },
     targetComment: {
       type: 'string',

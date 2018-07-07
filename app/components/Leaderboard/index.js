@@ -57,8 +57,8 @@ export default class Leaderboard extends Component {
     };
   }
 
-  handleSlectionChange = () => {
-    // this.handleCategoryChange(this.state.selectedSection);
+  handleSelectionChange = () => {
+    this.handleCategoryChange();
   };
 
   handleCategoryChange = section => {
@@ -183,7 +183,7 @@ export default class Leaderboard extends Component {
                       <select
                         ref="orderBy"
                         className="pftp-selectfield__select"
-                        onChange={this.handleSlectionChange}
+                        onChange={this.handleSelectionChange}
                       >
                         {orderByOptionsInfo.orderByOptionsKeys.map(option => (
                           <option
@@ -203,7 +203,7 @@ export default class Leaderboard extends Component {
                       <select
                         ref="timePeriod"
                         className="pftp-selectfield__select"
-                        onChange={this.handleSlectionChange}
+                        onChange={this.handleSelectionChange}
                       >
                         {timePeriodsInfo.timePeriodsKeys.map(option => (
                           <option

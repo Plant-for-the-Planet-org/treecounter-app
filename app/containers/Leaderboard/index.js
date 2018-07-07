@@ -62,10 +62,19 @@ class LeaderBoardContainer extends React.Component {
     );
   }
 
-  handleSectionChange = section => {
+  handleSectionChange = (
+    section = this.state.sectionInfo.section,
+    orderBy,
+    period
+  ) => {
     updateRoute(this.state.tabInfo.activeTab, null, null, { section });
     this.setState({ sectionInfo: { section }, queryResult: null });
-    this.sendSearchQuery(section, this.state.sectionInfo.subSection);
+    this.sendSearchQuery(
+      section,
+      this.state.sectionInfo.subSection,
+      orderBy,
+      period
+    );
   };
 
   handleTabChange = tab => {

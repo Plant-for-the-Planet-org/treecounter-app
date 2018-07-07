@@ -7,6 +7,10 @@
 .tpo-footer__container {
   position: relative;
   width: 100%;
+  .plant_project_carousal__content {
+    height: 380px;
+    overflow: auto;
+  }
 }
 
 .tpo-footer-card-layout {
@@ -190,7 +194,6 @@
     .project-images-carousal__container {
       background-color: $placeholderColor;
       margin-bottom: 39px;
-      min-height: 300px;
       .image-carousal {
         width: 100%;
         border: 0;
@@ -220,7 +223,6 @@
     .youtube-video__container {
       margin-top: 76px;
       margin-bottom: 43px;
-      min-height: 350px;
     }
   }
 }

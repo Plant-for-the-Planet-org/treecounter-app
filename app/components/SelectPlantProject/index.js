@@ -121,9 +121,22 @@ export default class SelectPlantProject extends Component {
   };
 
   callExpanded = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    });
+    this.setState(
+      {
+        expanded: !this.state.expanded
+      },
+      () => {
+        this.resetHeight();
+      }
+    );
+
+    console.log(this._slider_container);
+  };
+
+  resetHeight = () => {
+    setTimeout(() => {
+      this._slider_container.innerSlider.adaptHeight();
+    }, 1000);
   };
 
   onSelectClickedFeaturedProjects = id => {
@@ -139,6 +152,7 @@ export default class SelectPlantProject extends Component {
     this.setState({
       pageIndex: index
     });
+    this.resetHeight();
   }
 
   onRequestClose() {
@@ -178,7 +192,12 @@ export default class SelectPlantProject extends Component {
           src={arrow_right_orange}
         />
       ),
-      afterChange: index => this.plantProjectChanged(index)
+      afterChange: index => this.plantProjectChanged(index),
+
+      slickNext: () => {
+        console.log('called reset height');
+        this.resetHeight();
+      }
     };
 
     return (
@@ -194,7 +213,7 @@ export default class SelectPlantProject extends Component {
           <div className="project-modal-card-layout">
             {this.state.modalProject ? (
               <PlantProjectFull
-                expanded={false}
+                expanded={this.state.expanded}
                 plantProject={this.state.modalProject}
                 tpoName={this.state.modalProject.tpo_name}
               />
@@ -209,7 +228,7 @@ export default class SelectPlantProject extends Component {
         <CardLayout className="tpo-footer-card-layout">
           <div className="select-project__container">
             <ContentHeader caption={i18n.t('label.featuredProjects')} />
-            <Slider {...settings}>
+            <Slider {...settings} ref={c => (this._slider_container = c)}>
               {featuredProjects.length !== 0
                 ? featuredProjects.map(project => (
                     <div key={project.id}>

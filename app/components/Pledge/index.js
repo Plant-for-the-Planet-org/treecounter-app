@@ -55,7 +55,7 @@ export default class Pledge extends Component {
   }
   render() {
     let { eventSlug } = this.props;
-    return this.props.pledges && this.props.pledges.total ? (
+    return this.props.pledges && this.props.pledges.total !== undefined ? (
       <div className="sidenav-wrapper app-container__content--center">
         <div className="conference_heading">
           <div className="esri_logo_background">

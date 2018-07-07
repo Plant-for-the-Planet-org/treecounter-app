@@ -15,11 +15,24 @@ import * as images from '../assets';
 import t from 'tcomb-form';
 import { commonValidator } from './validator';
 
+let registeredFormat = {};
+const registerFormat = (formatName, formatHandler) => {
+  if (!registeredFormat[formatName]) {
+    if (!formatHandler) {
+      formatHandler = x => {
+        return /pattern+/.test(x);
+      };
+    }
+    transform.registerFormat(formatName, formatHandler);
+    registeredFormat[formatName] = formatHandler;
+  }
+};
+
 function isEmail(x) {
   return /(.)+@(.)+/.test(x);
 }
+registerFormat('email', isEmail);
 
-transform.registerFormat('email', isEmail);
 t.String.getValidationErrorMessage = commonValidator;
 t.enums.getValidationErrorMessage = commonValidator;
 t.Integer.getValidationErrorMessage = commonValidator;
@@ -181,22 +194,17 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
           schemaOptions['fields'][propertyKey].item['disableOrder'] = true;
         }
         // ************************************************
+        if (
+          liformSchema.required &&
+          liformSchema.required.indexOf(propertyKey) != -1
+        ) {
+          options.config = { ...options.config, required: true };
+        }
+        if (liformSchema.properties[propertyKey].pattern) {
+          let pattern = liformSchema.properties[propertyKey].pattern;
+          registerFormat(pattern);
 
-        options.config = {
-          ...options.config,
-          required:
-            liformSchema.required &&
-            liformSchema.required.indexOf(propertyKey) != -1,
-          pattern: liformSchema.pattern
-        };
-        if (liformSchema.pattern) {
-          let pattern = liformSchema.pattern;
-          const myFormat = x => {
-            return /pattern+/.test(x);
-          };
-
-          transform.registerFormat(pattern, myFormat);
-          properties[propertyKey].format = pattern;
+          properties[propertyKey].format = email;
         }
         if (liformSchema.properties[propertyKey].attr) {
           options.config = {

@@ -467,6 +467,9 @@ export default class GiftTrees extends Component {
                   <PaymentSelector
                     paymentMethods={paymentMethods}
                     accounts={plantProject.paymentSetup.accounts}
+                    stripePublishableKey={
+                      plantProject.paymentSetup.stripePublishableKey
+                    }
                     amount={this.state.selectedAmount}
                     currency={this.state.selectedCurrency}
                     expandedOption={this.state.expandedOption}

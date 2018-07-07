@@ -4,6 +4,7 @@ export function queryParamsToObject(queryParams) {
     returnObject = JSON.parse(
       '{"' +
         decodeURI(queryParams)
+          .replace('?', '')
           .replace(/"/g, '\\"')
           .replace(/&/g, '","')
           .replace(/=/g, '":"') +
@@ -21,6 +22,6 @@ export function objectToQueryParams(objectValue) {
     .map(key => key + '=' + objectValue[key])
     .join('&');
 
-  console.log('object to return ', returnObject);
+  console.log('object to return ', valueString);
   return valueString;
 }

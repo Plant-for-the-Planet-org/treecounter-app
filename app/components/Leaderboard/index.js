@@ -145,7 +145,8 @@ export default class Leaderboard extends Component {
       tabInfo,
       categoryInfo,
       orderByOptionsInfo,
-      timePeriodsInfo
+      timePeriodsInfo,
+      sortingQuery
     } = this.props;
     if (!categoryInfo) {
       return (
@@ -181,6 +182,7 @@ export default class Leaderboard extends Component {
                     <span>{i18n.t('label.sortBy')} </span>
                     <div className="pftp-selectfield">
                       <select
+                        defaultValue={sortingQuery && sortingQuery.orderBy}
                         ref="orderBy"
                         className="pftp-selectfield__select"
                         onChange={this.handleSelectionChange}
@@ -201,6 +203,7 @@ export default class Leaderboard extends Component {
                     <span>{i18n.t('label.timePeriod')} </span>
                     <div className="pftp-selectfield">
                       <select
+                        defaultValue={sortingQuery && sortingQuery.period}
                         ref="timePeriod"
                         className="pftp-selectfield__select"
                         onChange={this.handleSelectionChange}
@@ -242,5 +245,6 @@ Leaderboard.propTypes = {
   handleSectionChange: PropTypes.func,
   handleTabChange: PropTypes.func,
   queryResult: PropTypes.array,
-  mapInfo: PropTypes.object
+  mapInfo: PropTypes.object,
+  sortingQuery: PropTypes.object
 };

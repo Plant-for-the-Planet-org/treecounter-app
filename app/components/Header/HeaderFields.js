@@ -29,14 +29,20 @@ const HeaderFields = ({
           }}
           button={
             <div className="notification-bell">
-              {userFeeds && userFeeds.unRead > 0 ? (
-                <div className="unread-circle">
-                  <span className="unread-number-align">
-                    {userFeeds.unRead}
-                  </span>
-                </div>
-              ) : null}
-              <i className="material-icons">notifications_none</i>
+              <div
+                className={
+                  userFeeds && userFeeds.unRead > 0
+                    ? 'unread-circle'
+                    : 'unread-circle adjust-zindex'
+                }
+              >
+                <span className="unread-number-align">
+                  {userFeeds && userFeeds.unRead > 0 ? userFeeds.unRead : 0}
+                </span>
+              </div>
+              <div className="bell-icon">
+                <i className="material-icons">notifications_none</i>
+              </div>
             </div>
           }
         >

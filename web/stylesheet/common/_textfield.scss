@@ -54,6 +54,14 @@ $trans-time: 300ms;
         width: 100%;
       }
     }
+    input[type="date"] {
+      color: transparent;
+      text-shadow: none;
+      &:focus,
+      &:valid {
+        color: mix(white, $bg-color, 70%);
+      }
+    }
     label {
       color: $muted-color;
       font-size: 16px;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { v1 as uuidv1 } from 'uuid';
 
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { fetchItem, saveItem } from '../stores/localStorage';
 import { getAccessToken } from './user';
 import { getApiRoute } from '../actions/apiRouting';
@@ -18,6 +19,13 @@ function checkStatus(response) {
 }
 
 function onAPIError(error) {
+  if (error.response) {
+    NotificationManager.error(
+      error.response.data.message,
+      error.response.data.code,
+      5000
+    );
+  }
   if (error.response && error.response.status === 401) {
     getStore().dispatch(logoutUser());
   } else {
@@ -74,8 +82,8 @@ export async function postRequest(route, data, params, authenticated = false) {
 
 export async function postDirectRequest(path, data, authenticated = false) {
   const { scheme, host } = context;
-  const serverName = `${scheme}:/${host}`;
-  const url = `${serverName}/${path}`;
+  const serverName = `${scheme}://${host}`;
+  const url = `${serverName}${path}`;
   return await axios
     .post(url, data, await getHeaders(authenticated))
     .then(checkStatus)

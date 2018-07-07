@@ -20,11 +20,7 @@ function checkStatus(response) {
 
 function onAPIError(error) {
   if (error.response) {
-    NotificationManager.error(
-      error.response.data.message,
-      error.response.data.code,
-      5000
-    );
+    NotificationManager.error(error.response.data.message, 5000);
   }
   if (error.response && error.response.status === 401) {
     getStore().dispatch(logoutUser());

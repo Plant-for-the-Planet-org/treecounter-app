@@ -33,10 +33,10 @@ export function postPledge(data, params) {
         console.log(dispatch, res);
         const { statusText } = res;
 
-        NotificationManager.success('Success', 5000);
+        NotificationManager.success(statusText, 'Success', 5000);
       })
       .catch(error => {
-        NotificationManager.error(error.response.data.message, 5000);
+        NotificationManager.error(error.response.data.message, 'Error', 5000);
       });
   };
 }

@@ -18,14 +18,14 @@ export function registerTree(plantContribution, treecounterId, mode) {
         const { statusText } = res;
         const { contribution, treecounter } = res.data;
 
-        NotificationManager.success(statusText, 5000);
+        NotificationManager.success(statusText, 'Success', 5000);
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         history.push(getLocalRoute('app_userHome'));
       })
       .catch(error => {
         debug(error.response);
-        NotificationManager.error(error.response.data.message, 5000);
+        NotificationManager.error(error.response.data.message, 'Error', 5000);
       });
   };
 }

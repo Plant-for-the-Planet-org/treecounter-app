@@ -16,7 +16,7 @@ export function SubmitTarget(treecounterData) {
       })
       .catch(error => {
         debug(error);
-        NotificationManager.error(error.response.data.message, 5000);
+        NotificationManager.error(error.response.data.message, 'Error', 5000);
       });
   };
 }

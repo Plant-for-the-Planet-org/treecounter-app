@@ -12,7 +12,8 @@ export default {
       title: 'label.target_year',
       pattern: '[0-9]{4}',
       propertyOrder: 2,
-      minimum: 1000
+      minimum: 1000,
+      maximum: 9999
     },
     targetComment: {
       type: 'string',

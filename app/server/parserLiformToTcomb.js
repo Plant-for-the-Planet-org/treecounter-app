@@ -193,6 +193,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
             attr: liformSchema.properties[propertyKey].attr
           };
         }
+        options.error = commonValidator;
       }
     }
     return schemaOptions;

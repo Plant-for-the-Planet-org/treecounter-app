@@ -249,6 +249,13 @@ export default class DonateTrees extends Component {
     let displayNone = classNames({
       'display-none': this.state.pageIndex === 3
     });
+    if (this.slider) {
+      setTimeout(() => {
+        if (this.state.pageIndex === 3) {
+          this.slider.slickGoTo(this.state.pageIndex);
+        }
+      }, 1000);
+    }
     const NextArrow = function(props) {
       function validated() {
         if (props.checkValidation[props.currentSlide].call(props.context)) {
@@ -269,7 +276,7 @@ export default class DonateTrees extends Component {
       ),
       infinite: false,
       adaptiveHeight: true,
-      initialSlide: this.state.pageIndex,
+      currentSlide: this.state.pageIndex,
       prevArrow: (
         <CarouselNavigation
           styleName="donate-tree-nav-img__left"
@@ -344,7 +351,7 @@ export default class DonateTrees extends Component {
           ) : (
             <div className="donate-tress__container">
               <ContentHeader caption={headings[this.state.pageIndex]} />
-              <Slider {...settings}>
+              <Slider {...settings} ref={slider => (this.slider = slider)}>
                 {this.props.selectedTpo ? (
                   <PlantProjectFull
                     callExpanded={this.callExpanded}
@@ -371,6 +378,7 @@ export default class DonateTrees extends Component {
                     onChange={this.handleTreeCountCurrencyChange}
                   />
                 ) : null}
+
                 <Tabs
                   data={DonateTrees.data.tabsReceipt}
                   onTabChange={this.handleModeReceiptChange}

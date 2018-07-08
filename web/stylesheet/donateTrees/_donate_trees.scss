@@ -116,7 +116,8 @@
 
   .treecount-container {
     margin-top: 30px;
-    height: 200px;
+    height: auto;
+
     .treecount-price-conversion {
       display: flex;
       justify-content: space-between;
@@ -156,7 +157,7 @@
     }
   }
   .plant_project_content {
-    max-height:500px;
+    max-height: 500px;
     overflow: auto;
   }
 }

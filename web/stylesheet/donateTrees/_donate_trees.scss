@@ -241,6 +241,12 @@
   max-height: 80vh;
   min-width: 500px;
 
+  @include for-phone-only {
+    max-height: 500px;
+    min-width: 300px;
+    margin: 0;
+  }
+
   .collapsed {
     border: none;
     cursor: pointer;

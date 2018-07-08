@@ -11,6 +11,12 @@
   -ms-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   display: inline-block;
+  @include for-phone-only {
+    max-width: 300px;
+    max-height: 500px;
+    top:25%;
+    bottom: 10%;
+  }
   min-width: 476px;
   min-height: 366px;
   background-color: #fff;
@@ -28,12 +34,25 @@
     top: 15px;
     right: 15px;
     padding: 0;
+    @include for-phone-only {
+      height: 14px;
+      width: 14px;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      padding: 0;
+     }
   }
   .modal-container {
     margin-top: 25px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+   
+   @include for-phone-only {
+    overflow: auto;
+    justify-content: flex-start;
+    align-items: flex-start;
+   }
+
   }
 }
 .Overlay {

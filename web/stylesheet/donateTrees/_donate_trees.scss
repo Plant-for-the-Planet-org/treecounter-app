@@ -257,7 +257,9 @@
     }
   }
 }
-
+.payment_options__wrapper {
+  min-height: 470px;
+}
 .payment-option {
   display: flex;
   flex-direction: column;
@@ -279,10 +281,6 @@
     width: calc(100% - 20px);
     display: flex;
     border-radius: 22px;
-  }
-
-  .payment_options__wrapper {
-    min-height: 470px;
   }
 
   .payment-option-header {

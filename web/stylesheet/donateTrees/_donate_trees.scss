@@ -1,6 +1,7 @@
 .donate-tress__container {
   position: relative;
   width: 100%;
+  height: auto;
 
   .treecount-selector-wrapper {
     height: 280px;
@@ -256,7 +257,9 @@
     }
   }
 }
-
+.payment_options__wrapper {
+  min-height: 470px;
+}
 .payment-option {
   display: flex;
   flex-direction: column;

@@ -351,88 +351,98 @@ export default class DonateTrees extends Component {
           ) : (
             <div className="donate-tress__container">
               <ContentHeader caption={headings[this.state.pageIndex]} />
-              <Slider {...settings} ref={slider => (this.slider = slider)}>
-                {this.props.selectedTpo ? (
-                  <PlantProjectFull
-                    callExpanded={this.callExpanded}
-                    expanded={false}
-                    plantProject={this.props.selectedProject}
-                    tpoName={this.props.selectedTpo.name}
-                    selectAnotherProject={true}
-                    projectClear={this.props.plantProjectClear}
-                  />
-                ) : null}
-                {this.props.selectedTpo && currencies ? (
-                  <TreeCountCurrencySelector
-                    treeCost={plantProject.treeCost}
-                    rates={
-                      currencies.currency_rates[plantProject.currency].rates
-                    }
-                    fees={1}
-                    currencies={currencies.currency_names} // TODO: connect to data from API
-                    selectedCurrency={this.determineDefaultCurrency()}
-                    treeCountOptions={
-                      plantProject.paymentSetup.treeCountOptions
-                    }
-                    selectedTreeCount={this.state.selectedTreeCount}
-                    onChange={this.handleTreeCountCurrencyChange}
-                  />
-                ) : null}
-
-                <Tabs
-                  data={DonateTrees.data.tabsReceipt}
-                  onTabChange={this.handleModeReceiptChange}
-                  activeTab={
-                    this.state.modeReceipt !== ''
-                      ? this.state.modeReceipt
-                      : null
-                  }
-                >
-                  {this.state.modeReceipt ===
-                  DonateTrees.data.tabsReceipt[0].id ? (
-                    <TCombForm
-                      ref="donateReceipt"
-                      type={receiptIndividualFormSchema}
-                      options={individualSchemaOptions}
-                      value={this.props.currentUserProfile}
+              <Slider {...settings}  ref={slider => (this.slider = slider)}>
+                <div>
+                  {this.props.selectedTpo ? (
+                    <PlantProjectFull
+                      callExpanded={this.callExpanded}
+                      expanded={false}
+                      plantProject={this.props.selectedProject}
+                      tpoName={this.props.selectedTpo.name}
+                      selectAnotherProject={true}
+                      projectClear={this.props.plantProjectClear}
                     />
-                  ) : (
-                    <TCombForm
-                      ref="donateReceipt"
-                      type={receiptCompanyFormSchema}
-                      options={companySchemaOptions}
-                      value={this.props.currentUserProfile}
+                  ) : null}
+                </div>
+                <div>
+                  {this.props.selectedTpo && currencies ? (
+                    <TreeCountCurrencySelector
+                      treeCost={plantProject.treeCost}
+                      rates={
+                        currencies.currency_rates[plantProject.currency].rates
+                      }
+                      fees={1}
+                      currencies={currencies.currency_names} // TODO: connect to data from API
+                      selectedCurrency={this.determineDefaultCurrency()}
+                      treeCountOptions={
+                        plantProject.paymentSetup.treeCountOptions
+                      }
+                      selectedTreeCount={this.state.selectedTreeCount}
+                      onChange={this.handleTreeCountCurrencyChange}
                     />
-                  )}
-                </Tabs>
-                {this.props.selectedTpo ? (
-                  <PaymentSelector
-                    paymentMethods={paymentMethods}
-                    accounts={plantProject.paymentSetup.accounts}
-                    stripePublishableKey={
-                      plantProject.paymentSetup.stripePublishableKey
+                  ) : null}
+                </div>
+                <div>
+                  <Tabs
+                    data={DonateTrees.data.tabsReceipt}
+                    onTabChange={this.handleModeReceiptChange}
+                    activeTab={
+                      this.state.modeReceipt !== ''
+                        ? this.state.modeReceipt
+                        : null
                     }
-                    amount={this.state.selectedAmount}
-                    currency={this.state.selectedCurrency}
-                    expandedOption={this.state.expandedOption}
-                    handleExpandedClicked={this.handleExpandedClicked}
-                    context={{
-                      tpoName: this.props.selectedTpo.name,
-                      donorEmail: email,
-                      donorName: name,
-                      treeCount: this.state.selectedTreeCount
-                    }}
-                    onSuccess={paymentResponse =>
-                      this.handlePaymentApproved(paymentResponse)
-                    }
-                    onFailure={data =>
-                      console.log('/////////////////// payment failure ', data)
-                    }
-                    onError={data =>
-                      console.log('/////////////////// payment error ', data)
-                    }
-                  />
-                ) : null}
+                  >
+                    {this.state.modeReceipt ===
+                    DonateTrees.data.tabsReceipt[0].id ? (
+                      <TCombForm
+                        ref="donateReceipt"
+                        type={receiptIndividualFormSchema}
+                        options={individualSchemaOptions}
+                        value={this.props.currentUserProfile}
+                      />
+                    ) : (
+                      <TCombForm
+                        ref="donateReceipt"
+                        type={receiptCompanyFormSchema}
+                        options={companySchemaOptions}
+                        value={this.props.currentUserProfile}
+                      />
+                    )}
+                  </Tabs>
+                </div>
+                <div>
+                  {this.props.selectedTpo ? (
+                    <PaymentSelector
+                      paymentMethods={paymentMethods}
+                      accounts={plantProject.paymentSetup.accounts}
+                      stripePublishableKey={
+                        plantProject.paymentSetup.stripePublishableKey
+                      }
+                      amount={this.state.selectedAmount}
+                      currency={this.state.selectedCurrency}
+                      expandedOption={this.state.expandedOption}
+                      handleExpandedClicked={this.handleExpandedClicked}
+                      context={{
+                        tpoName: this.props.selectedTpo.name,
+                        donorEmail: email,
+                        donorName: name,
+                        treeCount: this.state.selectedTreeCount
+                      }}
+                      onSuccess={paymentResponse =>
+                        this.handlePaymentApproved(paymentResponse)
+                      }
+                      onFailure={data =>
+                        console.log(
+                          '/////////////////// payment failure ',
+                          data
+                        )
+                      }
+                      onError={data =>
+                        console.log('/////////////////// payment error ', data)
+                      }
+                    />
+                  ) : null}
+                </div>
               </Slider>
             </div>
           )}

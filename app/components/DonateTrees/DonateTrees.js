@@ -249,10 +249,10 @@ export default class DonateTrees extends Component {
     let displayNone = classNames({
       'display-none': this.state.pageIndex === 3
     });
-    if (this.slider) {
+    if (this.refs.slider) {
       setTimeout(() => {
         if (this.state.pageIndex === 3) {
-          this.slider.slickGoTo(this.state.pageIndex);
+          this.refs.slider.slickGoTo(this.state.pageIndex);
         }
       }, 1000);
     }
@@ -351,7 +351,7 @@ export default class DonateTrees extends Component {
           ) : (
             <div className="donate-tress__container">
               <ContentHeader caption={headings[this.state.pageIndex]} />
-              <Slider {...settings}  ref={slider => (this.slider = slider)}>
+              <Slider {...settings} ref="slider">
                 <div>
                   {this.props.selectedTpo ? (
                     <PlantProjectFull

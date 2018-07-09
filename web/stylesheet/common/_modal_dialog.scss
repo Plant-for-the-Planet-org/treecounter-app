@@ -1,65 +1,69 @@
 .ModalPortal {
-  z-index: 10000;
+    z-index: 10000;
 }
-.Modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  display: inline-block;
-  @include for-phone-only {
-    max-width: 300px;
-    max-height: 500px;
-    top:25%;
-    bottom: 10%;
-  }
-  min-width: 476px;
-  min-height: 366px;
-  background-color: #fff;
-  outline: none;
-  padding: 40px 60px;
-  background-color: white;
-  margin: 30px;
-  text-align: center;
-  border-radius: 15px;
-  box-sizing: border-box;
-  .closeIcon {
-    height: 28px;
-    width: 28px;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    padding: 0;
-    @include for-phone-only {
-      height: 14px;
-      width: 14px;
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      padding: 0;
-     }
-  }
-  .modal-container {
-    margin-top: 25px;
-    display: flex;
-   
-   @include for-phone-only {
-    overflow: auto;
-    justify-content: flex-start;
-    align-items: flex-start;
-   }
 
-  }
+.Modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    display: inline-block;
+    min-width: 476px;
+    min-height: 366px;
+    background-color: #fff;
+    outline: none;
+    padding: 40px 60px;
+    background-color: white;
+    margin: 30px;
+    text-align: center;
+    border-radius: 15px;
+    box-sizing: border-box;
+    @include for-phone-only {
+        min-width: 300px;
+        min-height: 500px;
+        width: 350px;
+        height: 500px;
+        overflow: auto;
+        left: 40%;
+        bottom: 10%;
+        padding: 10px 10px;
+    }
+    .closeIcon {
+        height: 28px;
+        width: 28px;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        padding: 0;
+        @include for-phone-only {
+            height: 14px;
+            width: 14px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 0;
+        }
+    }
+    .modal-container {
+        margin-top: 25px;
+        display: flex;
+        @include for-phone-only {
+            overflow: auto;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+    }
 }
+
 .Overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
 }

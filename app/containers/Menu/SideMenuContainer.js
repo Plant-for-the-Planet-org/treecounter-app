@@ -30,7 +30,13 @@ class SideMenuContainer extends Component {
           error => console.log(error)
         )
       : PublicSideMenuSchema.subscribe(
-          success => this.setState({ schema: success, loading: false }),
+          success => {
+            if (success && success instanceof Array) {
+              this.setState({ schema: success, loading: false });
+            } else {
+              console.log('error in fetching side menu');
+            }
+          },
           error => console.log(error)
         );
   }

@@ -18,7 +18,7 @@ export function TextInputTemplate(locals) {
     borderBottomWidth: 1,
     borderColor: '#cecece'
   };
-  let errorBlockStyle = locals.stylesheet.errorBlock;
+  let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
   let error =
     locals.hasError && locals.error ? (
       <Text accessibilityLiveRegion="polite" style={errorBlockStyle}>

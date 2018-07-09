@@ -50,8 +50,12 @@ class SideMenuContainer extends Component {
   }
 
   render() {
-    let { pathname } = this.props.location;
-    let path = pathname.substr(pathname.lastIndexOf('/') + 1);
+    let path = undefined;
+    if (this.props.location) {
+      const { pathname } = this.props.location;
+      path = pathname.substr(pathname.lastIndexOf('/') + 1);
+    }
+
     return this.state.loading ? null : (
       <Menu
         isOpen={this.props.isOpen}

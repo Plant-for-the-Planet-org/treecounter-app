@@ -2,13 +2,13 @@ import { NotificationManager } from '../notification/PopupNotificaiton/notificat
 import { updateRoute } from '../helpers/routerHelper';
 import { loadUserProfile } from './loadUserProfileAction';
 import { debug } from '../debug/index';
-import { userLogout } from '../reducers/reducer';
-
+import { createAction } from 'redux-actions';
 import { clearStorage } from '../stores/localStorage';
 import { postRequest } from '../utils/api';
 import { updateJWT } from '../utils/user';
 import { NotificationAction } from './notificationAction';
 
+export const userLogout = createAction('USER_LOGOUT');
 export function login(data) {
   const request = postRequest('api_login_check', data);
 

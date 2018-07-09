@@ -1,13 +1,17 @@
 .donate-tress__container {
   position: relative;
   width: 100%;
+  height: auto;
 
   .treecount-selector-wrapper {
-    height: 250px;
+    height: 280px;
   }
 
   .pftp-tabs__type {
-    margin-bottom: 15px;
+    margin-top: 5%;
+    @include for-phone-only {
+      margin-top: 10%;
+    }
   }
 
   .donate-tree-nav-img__right {
@@ -30,7 +34,7 @@
     display: block;
     padding: 0;
     top: -90px;
-    left: -3%;
+    left: -20px;
   }
 
   .content-header_container {
@@ -49,22 +53,9 @@
     .project-teaser__container {
       .teaser-image__container {
         .teaser__projectImage {
-          height: 100px;
+          width: 100%;
+          height: auto;
         }
-      }
-    }
-
-    .project-specs__container {
-      flex-direction: column;
-      .plants-info {
-        flex-basis: auto;
-        flex-grow: auto;
-        margin: 0;
-      }
-      .project-info {
-        flex-basis: auto;
-        flex-grow: auto;
-        margin: 0;
       }
     }
 
@@ -72,6 +63,13 @@
       display: flex;
       justify-content: space-between;
       font-size: 15px;
+
+      .select_different_project_style {
+        display: flex;
+        color: #ec6453;
+        margin-top: 10px;
+        cursor: pointer;
+      }
 
       .link {
         padding: 10px 0;
@@ -119,7 +117,8 @@
 
   .treecount-container {
     margin-top: 30px;
-    height: 200px;
+    height: auto;
+
     .treecount-price-conversion {
       display: flex;
       justify-content: space-between;
@@ -148,7 +147,7 @@
 
 .select-project__container {
   @extend .donate-tress__container;
-  width: 718px;
+  width: 100%;
   .slick-initialized {
     margin: 35px;
     margin-top: 30px;
@@ -157,24 +156,10 @@
     .see-more-toggle__container {
       display: inline-block;
     }
-
-    .pftp-button-primary {
-      width: 50%;
-    }
-
-    .project-specs__container {
-      flex-direction: row;
-      .plants-info {
-        flex-basis: 0;
-        flex-grow: 1;
-        margin-left: 15px;
-      }
-      .project-info {
-        flex-basis: 0;
-        flex-grow: 1;
-        margin-right: 15px;
-      }
-    }
+  }
+  .plant_project_content {
+    max-height: 500px;
+    overflow: auto;
   }
 }
 
@@ -184,13 +169,15 @@
   border: solid 2px #efefef;
   padding: 10px;
   color: #686060;
-  width: 665px;
-  margin: 0 -30px;
+  width: 99%;
+  max-width: 100%;
+  margin: 0 4px;
 
   .pftp-button-primary {
     font-size: 13px;
     padding: 5px;
     width: 70px;
+    margin: 0;
     height: 30px;
     border-radius: 3px;
   }
@@ -220,12 +207,21 @@
   align-items: center;
   display: flex;
   margin-top: 20px;
+  width: 100%;
+  margin: 20px;
+
+  .table-responsive {
+    width: calc(100% - 60px);
+    overflow-y: scroll;
+    min-height: 0.01%;
+    overflow-x: auto;
+  }
 
   .pftp-textfield {
     width: 60%;
     margin-bottom: 30px;
     .search-bar__button {
-      height: 35px;
+      height: 36px;
       width: 35px;
       border-bottom: 1px solid #c6c6c6;
 
@@ -241,6 +237,8 @@
   @extend .tpo-footer-card-layout;
   margin: 0 -20px;
   box-shadow: none;
+  overflow: scroll;
+  max-height: 80vh;
   min-width: 500px;
 
   .collapsed {
@@ -259,7 +257,9 @@
     }
   }
 }
-
+.payment_options__wrapper {
+  min-height: 470px;
+}
 .payment-option {
   display: flex;
   flex-direction: column;

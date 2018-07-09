@@ -7,20 +7,23 @@ import SearchAutosuggest from './SearchAutosuggest';
 import i18n from '../../locales/i18n.js';
 
 class SearchBar extends React.Component {
-  suggestionClicked = (context, event) => {
+  suggestionClicked = (event, data) => {
     this.props.route('app_treecounter', null, {
-      treecounter: event.suggestion.id
+      treecounter: data.suggestion.slug || data.suggestion.id
     });
+    if (data.method === 'enter') {
+      event.preventDefault();
+    }
   };
 
   render() {
     return (
-      <form>
+      <div>
         <div className="search-bar">
           <SearchAutosuggest onSuggestionClicked={this.suggestionClicked} />
           <i className="material-icons search-icon">{i18n.t('label.search')}</i>
         </div>
-      </form>
+      </div>
     );
   }
 }

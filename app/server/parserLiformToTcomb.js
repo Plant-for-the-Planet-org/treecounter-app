@@ -12,6 +12,18 @@ import { FloatInputTemplate } from '../components/Templates/FloatInputTemplate';
 
 // Import assets
 import * as images from '../assets';
+import t from 'tcomb-form';
+import { commonValidator } from './validator';
+
+function isEmail(x) {
+  return /(.)+@(.)+/.test(x);
+}
+
+transform.registerFormat('email', isEmail);
+t.String.getValidationErrorMessage = commonValidator;
+t.enums.getValidationErrorMessage = commonValidator;
+t.Integer.getValidationErrorMessage = commonValidator;
+t.Number.getValidationErrorMessage = commonValidator;
 
 export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));
@@ -53,6 +65,14 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
             options.config = {
               iconUrl: images[properties[propertyKey].icon]
             };
+            if (properties[propertyKey].icon === 'email') {
+              options.config = { ...options.config, email: true };
+              properties[propertyKey].format = 'email';
+            }
+          }
+          if (propertyKey === 'email') {
+            options.config = { ...options.config, email: true };
+            properties[propertyKey].format = 'email';
           }
           if (!properties[propertyKey].hasOwnProperty('enum')) {
             options.placeholder = properties[propertyKey].title;
@@ -163,10 +183,17 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
         // ************************************************
         if (
           liformSchema.required &&
-          liformSchema.required.indexOf(propertyKey)
+          liformSchema.required.indexOf(propertyKey) != -1
         ) {
-          options['error'] = 'required';
+          options.config = { ...options.config, required: true };
         }
+        if (liformSchema.properties[propertyKey].attr) {
+          options.config = {
+            ...options.config,
+            attr: liformSchema.properties[propertyKey].attr
+          };
+        }
+        options.error = commonValidator;
       }
     }
     return schemaOptions;

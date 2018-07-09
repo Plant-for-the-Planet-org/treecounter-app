@@ -15,21 +15,17 @@ export function registerTree(plantContribution, treecounterId, mode) {
       mode: mode
     })
       .then(res => {
-        const { statusText, status } = res;
+        const { statusText } = res;
         const { contribution, treecounter } = res.data;
 
-        NotificationManager.success(statusText, status, 5000);
+        NotificationManager.success(statusText, 'Success', 5000);
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         history.push(getLocalRoute('app_userHome'));
       })
       .catch(error => {
         debug(error.response);
-        NotificationManager.error(
-          error.response.data.message,
-          error.response.data.code,
-          5000
-        );
+        NotificationManager.error(error.response.data.message, 'Error', 5000);
       });
   };
 }

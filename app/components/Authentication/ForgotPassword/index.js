@@ -23,7 +23,9 @@ export default class ForgotPassword extends Component {
         <TextHeading>{i18n.t('label.forgot_ur_password')}</TextHeading>
         <div className="card-width">
           <CardLayout>
-            <TextSpan>{i18n.t('label.enter_mail')}</TextSpan>
+            <div className="reset_password_text">
+              <TextSpan>{i18n.t('label.enter_mail')}</TextSpan>
+            </div>
             <br />
             <TCombForm
               ref="forgotPasswordForm"

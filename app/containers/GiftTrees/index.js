@@ -9,11 +9,15 @@ import {
   currentUserProfileSelector,
   currenciesSelector
 } from '../../selectors';
-import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import {
+  selectPlantProjectAction,
+  clearPlantProject
+} from '../../actions/selectPlantProjectAction';
 import { fetchCurrencies } from '../../actions/currencies';
-import { gift } from '../../actions/donateAction';
+import { gift, paymentClear } from '../../actions/donateAction';
 
 import GiftTrees from '../../components/GiftTrees';
+import { getPaymentStatus } from '../../reducers/paymentStatus';
 
 class GiftTreesContainer extends Component {
   componentDidMount() {
@@ -32,6 +36,9 @@ class GiftTreesContainer extends Component {
         gift={(donationContribution, plantProjectId) =>
           this.props.gift(donationContribution, plantProjectId, flag)
         }
+        paymentStatus={this.props.paymentStatus}
+        paymentClear={this.props.paymentClear}
+        plantProjectClear={this.props.clearPlantProject}
       />
     );
   }
@@ -41,12 +48,19 @@ const mapStateToProps = state => ({
   selectedProject: selectedPlantProjectSelector(state),
   selectedTpo: selectedTpoSelector(state),
   currentUserProfile: currentUserProfileSelector(state),
-  currencies: currenciesSelector(state)
+  currencies: currenciesSelector(state),
+  paymentStatus: getPaymentStatus(state)
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { selectPlantProjectAction, fetchCurrencies, gift },
+    {
+      selectPlantProjectAction,
+      fetchCurrencies,
+      gift,
+      paymentClear,
+      clearPlantProject
+    },
     dispatch
   );
 };
@@ -58,7 +72,10 @@ GiftTreesContainer.propTypes = {
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
+  paymentStatus: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
   gift: PropTypes.func,
-  fetchCurrencies: PropTypes.func
+  fetchCurrencies: PropTypes.func,
+  paymentClear: PropTypes.func,
+  clearPlantProject: PropTypes.func
 };

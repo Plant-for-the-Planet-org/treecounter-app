@@ -20,7 +20,7 @@ import shovel_outline_red from './images/icons/shovel_outline_red.png';
 import target_outline_red from './images/icons/target_outline_red.png';
 import pledge_highest from './images/pledge_biggest.png';
 import pledge_latest from './images/pledge_recent.png';
-import pot from './images/pot.svg';
+import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/tree.svg';
 import SideMenuImage from './images/side_menu.png';
@@ -74,6 +74,12 @@ import leaderboards_company_green from './images/icons/leaderboards_company_gree
 import close_green from './images/icons/close_green.png';
 import esriLogo from './images/logo_esri.png';
 import bmzLogo from './images/logo_bmz.jpg';
+import questionmark_orange from './images/icons/questionmark.png';
+import gift_icon from './images/icons/gift_icon.png';
+
+import map_legend_Restoration from './images/Legend_Restoration.png';
+import map_legend_Trees from './images/Legend_Trees.png';
+import map_legend_TreeDensity from './images/Legend_TreeDensity.png';
 
 export {
   bmzLogo,
@@ -151,5 +157,10 @@ export {
   leaderboards_tpo_grey,
   leaderboards_company_grey,
   leaderboards_company_green,
-  close_green
+  close_green,
+  questionmark_orange,
+  gift_icon,
+  map_legend_Restoration,
+  map_legend_Trees,
+  map_legend_TreeDensity
 };

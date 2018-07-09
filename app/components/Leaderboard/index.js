@@ -19,6 +19,7 @@ import {
   leaderboards_company_green
 } from '../../assets';
 import { Link } from 'react-router-dom';
+import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import propTypes from 'redux-form/lib/propTypes';
@@ -56,8 +57,8 @@ export default class Leaderboard extends Component {
     };
   }
 
-  handleSlectionChange = () => {
-    // this.handleCategoryChange(this.state.selectedSection);
+  handleSelectionChange = () => {
+    this.handleCategoryChange();
   };
 
   handleCategoryChange = section => {
@@ -102,33 +103,38 @@ export default class Leaderboard extends Component {
   };
 
   getTableView = () => {
+    console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
     const { categoryInfo, sectionInfo } = this.props;
     if (this.props.queryResult)
       listItemsUI = (
-        <table className="projects-list">
-          <thead>
-            <tr>
-              <th>{categoryInfo.categoryHeader[sectionInfo.section]}</th>
-              <th>Planted</th>
-              <th>Target</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div className="leaderboard-table">
+          <div className="table-header">
+            <div className="table-header-item country">
+              {'   ' + categoryInfo.categoryHeader[sectionInfo.section]}
+            </div>
+            <div className="table-header-item planted">Planted</div>
+            <div className="table-header-item other">Target</div>
+          </div>
+          <div className="table-body">
             {this.props.queryResult.map((d, index) => (
-              <tr key={'tr' + index}>
-                <td className="align-left">
-                  {index + 1 + ' '}
-                  <Link className="rightBtn" to={d.uri}>
-                    {d.caption}
-                  </Link>
-                </td>
-                <td className="align-left">{d.planted}</td>
-                <td className="align-right">{d.target}</td>
-              </tr>
+              <div className="table-row" key={'tr' + index}>
+                <div className="table-col country">
+                  <span className="countryIndex">{index + 1 + '.  '}</span>
+                  <Link to={d.uri}>{d.caption}</Link>
+                </div>
+                <div className="table-col other">
+                  <div className="table-col-phone-header">Planted</div>
+                  <span>{d.planted}</span>
+                </div>
+                <div className="table-col other">
+                  <div className="table-col-phone-header">Target</div>
+                  <span>{d.target}</span>
+                </div>
+              </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+        </div>
       );
 
     return listItemsUI;
@@ -139,34 +145,47 @@ export default class Leaderboard extends Component {
       tabInfo,
       categoryInfo,
       orderByOptionsInfo,
-      timePeriodsInfo
+      timePeriodsInfo,
+      sortingQuery
     } = this.props;
     if (!categoryInfo) {
-      return <LoadingIndicator />;
+      return (
+        <div className="app-container__content--center sidenav-wrapper">
+          <LoadingIndicator />
+        </div>
+      );
     }
-
+    let isMapTab = tabInfo.activeTab === tabInfo.tabs[0].id;
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>{'Explore'}</TextHeading>
+        <TextHeading>
+          {i18n.t('label.explore')}
+          {isMapTab ? (
+            <DescriptionHeading>
+              {i18n.t('label.map_description')}
+            </DescriptionHeading>
+          ) : null}
+        </TextHeading>
         <CardLayout className="leader-board__container">
           <Tabs
             data={tabInfo.tabs}
             activeTab={tabInfo.activeTab}
             onTabChange={this.props.handleTabChange}
           >
-            {tabInfo.activeTab === tabInfo.tabs[1].id ? (
+            {!isMapTab ? (
               <div className="leader-board__sub-container">
                 <div className="leaderboard_images__container">
                   {this.getCategoryView()}
                 </div>
                 <div className="leaderboard-list__sort">
                   <div className="sort-container">
-                    <span>Sort By: </span>
+                    <span>{i18n.t('label.sortBy')} </span>
                     <div className="pftp-selectfield">
                       <select
+                        defaultValue={sortingQuery && sortingQuery.orderBy}
                         ref="orderBy"
                         className="pftp-selectfield__select"
-                        onChange={this.handleSlectionChange}
+                        onChange={this.handleSelectionChange}
                       >
                         {orderByOptionsInfo.orderByOptionsKeys.map(option => (
                           <option
@@ -181,12 +200,13 @@ export default class Leaderboard extends Component {
                     </div>
                   </div>
                   <div className="sort-container">
-                    <span>Time Period: </span>
+                    <span>{i18n.t('label.timePeriod')} </span>
                     <div className="pftp-selectfield">
                       <select
+                        defaultValue={sortingQuery && sortingQuery.period}
                         ref="timePeriod"
                         className="pftp-selectfield__select"
-                        onChange={this.handleSlectionChange}
+                        onChange={this.handleSelectionChange}
                       >
                         {timePeriodsInfo.timePeriodsKeys.map(option => (
                           <option
@@ -222,8 +242,9 @@ Leaderboard.propTypes = {
   timePeriodsInfo: PropTypes.object,
   sectionInfo: PropTypes.object,
   tabInfo: PropTypes.object,
-  handleSectionChange: propTypes.func,
+  handleSectionChange: PropTypes.func,
   handleTabChange: PropTypes.func,
   queryResult: PropTypes.array,
-  mapInfo: PropTypes.object
+  mapInfo: PropTypes.object,
+  sortingQuery: PropTypes.object
 };

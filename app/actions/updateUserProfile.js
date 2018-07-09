@@ -47,7 +47,7 @@ export function addPlantProject(plantProject) {
 
 export function deletePlantProject(plantProjectId) {
   return dispatch => {
-    return new Promise(function(resolve) {
+    return new Promise(function(resolve, reject) {
       deleteAuthenticatedRequest('plantProject_delete', {
         plantProject: plantProjectId
       })
@@ -55,16 +55,11 @@ export function deletePlantProject(plantProjectId) {
           const userProfile = res.data;
           dispatch(deleteEntity({ plantProject: [plantProjectId] }));
           dispatch(mergeEntities(normalize(userProfile, userProfileSchema)));
-          NotificationManager.success(
-            `plant Project Updated Successful`,
-            `Congrats`,
-            5000
-          );
           resolve(userProfile);
         })
         .catch(err => {
           debug(err);
-          NotificationManager.error(err.message, 'Profile update Error', 5000);
+          reject(err);
         });
     });
   };
@@ -72,7 +67,7 @@ export function deletePlantProject(plantProjectId) {
 
 export function updatePlantProject(plantProject) {
   return dispatch => {
-    return new Promise(function(resolve) {
+    return new Promise(function(resolve, reject) {
       let projectId = plantProject.id;
       delete plantProject.id;
       putAuthenticatedRequest('plantProject_put', plantProject, {
@@ -88,20 +83,11 @@ export function updatePlantProject(plantProject) {
             );
             dispatch(deleteEntity({ plantProjectImage: deleteIds }));
           }
-          NotificationManager.success(
-            `plant Project Updated Successful`,
-            `Congrats`,
-            5000
-          );
           resolve(res.data);
         })
         .catch(err => {
           debug(err);
-          NotificationManager.error(
-            err.message,
-            'plant Project update Error',
-            5000
-          );
+          reject(err);
         });
     });
   };
@@ -109,7 +95,7 @@ export function updatePlantProject(plantProject) {
 
 export function updateUserProfile(data, profileType) {
   return dispatch => {
-    return new Promise(function(resolve) {
+    return new Promise(function(resolve, reject) {
       putAuthenticatedRequest(profileTypeToReq[profileType], data)
         .then(res => {
           debug(res.status);
@@ -117,16 +103,11 @@ export function updateUserProfile(data, profileType) {
           if (res.data && res.data instanceof Object) {
             dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
           }
-          NotificationManager.success(
-            `${profileType} Updated Successful`,
-            `Congrats`,
-            5000
-          );
           resolve(res.data);
         })
         .catch(err => {
           debug(err);
-          NotificationManager.error(err.message, 'Profile update Error', 5000);
+          reject(err);
         });
     });
   };

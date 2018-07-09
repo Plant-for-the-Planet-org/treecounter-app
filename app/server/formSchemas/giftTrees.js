@@ -50,6 +50,7 @@ export default {
         email: {
           type: 'string',
           title: 'label.email',
+          widget: 'email',
           attr: {
             maxlength: 50
           },

@@ -1,7 +1,22 @@
 import React from 'react';
-import Map from '../Common/EsriMap/Map';
+import ArcGISContributionCaptureMap from '../Map/ArcGISContributionCaptureMap';
+import { objectToQueryParams, queryParamsToObject } from '../../helpers/utils';
 
 export function MapTemplate(locals) {
-  locals.onChange('geoLongitude=1&geoLatitude=1&country=DE'); //Temporary fix
-  return <Map />;
+  console.log('%%%%%%%%%%%%%%%%%%%%', locals);
+  let geolocation = queryParamsToObject(locals.value);
+
+  return (
+    <ArcGISContributionCaptureMap
+      geoLocation={geolocation}
+      onLocationSelected={newValue => {
+        console.log('handle map change', newValue);
+        newValue['country'] = newValue.countryCode;
+        delete newValue.countryCode;
+        let valueString = objectToQueryParams(newValue);
+
+        locals.onChange(valueString);
+      }}
+    />
+  );
 }

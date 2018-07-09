@@ -60,8 +60,24 @@
   .fixed-planted-details {
     position: absolute;
     right: 0;
-    bottom: -70px;
+    bottom: -120px;
     padding: 0px;
+   
+    img {
+      height: 15px;
+      vertical-align: middle;
+    }
+    @include for-phone-only {
+      font-size: 8px;
+      right: 0;
+      left: 30px;
+      bottom: -5px;
+      padding: 0px;
+      img {
+        height: 11px;
+        vertical-align: middle;
+      }
+    }
   }
 
   .fixed-target-comment {
@@ -87,7 +103,7 @@
     .fixed-planted-details {
       position: absolute;
       right: 0;
-      bottom: -70px;
+      bottom: -50px;
       padding: 0px;
     }
 

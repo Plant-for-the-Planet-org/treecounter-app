@@ -1,4 +1,5 @@
 import React from 'react';
+import i18n from '../../locales/i18n';
 
 const a = [
   '',
@@ -71,7 +72,9 @@ const PlantProjectTemplate = function(itemIndex) {
     return (
       <div>
         <div key={'project_item' + itemIndex}>
-          <div className="item-header">Project {inWords(itemIndex + 1)}</div>
+          <div className="item-header">
+            {i18n.t('label.project')} {inWords(itemIndex + 1)}
+          </div>
           <div
             className={'project-teaser'}
             key={'project_item_teaser' + itemIndex}
@@ -90,15 +93,15 @@ const PlantProjectTemplate = function(itemIndex) {
           </div>
 
           <div className="project-sub-item">
-            <div className="sub-item-header">Location</div>
-            {locals.inputs.country}
+            <div className="sub-item-header">{i18n.t('label.Location')}</div>
+            {/* {locals.inputs.country}  */}
             {locals.inputs.location}
             {locals.inputs.geoLocation}
             <div className="separator" />
           </div>
 
           <div className="project-sub-item">
-            <div className="sub-item-header">Description</div>
+            <div className="sub-item-header">{i18n.t('label.description')}</div>
             <div className="tComb-template__about-me-form">
               <div>{locals.inputs.description}</div>
               <div>
@@ -110,13 +113,13 @@ const PlantProjectTemplate = function(itemIndex) {
           </div>
 
           <div className="project-sub-item">
-            <div className="sub-item-header">Image Gallery</div>
+            <div className="sub-item-header">{i18n.t('label.gallery')}</div>
             {locals.inputs.plantProjectImages}
             <div className="separator" />
           </div>
 
           <div className="project-sub-item">
-            <div className="sub-item-header">Video</div>
+            <div className="sub-item-header">{i18n.t('label.video')}</div>
             {locals.inputs.videoUrl}
           </div>
         </div>

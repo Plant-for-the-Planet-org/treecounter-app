@@ -23,7 +23,11 @@
     @content;
   }
 }
-
+@mixin for-ios-only {
+  @supports (-webkit-overflow-scrolling: touch) {
+    @content;
+  }
+}
 @mixin pftp-text-basic($size: 14, $color: #9c9b9b) {
   font-family: Open Sans;
   font-size: $size + px;

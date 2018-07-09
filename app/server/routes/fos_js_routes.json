@@ -1259,7 +1259,7 @@
     "app_treecounter": {
       "tokens": [
         ["variable", "/", "[^/]++", "treecounter"],
-        ["text", "/treecounter"],
+        ["text", "/t"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
       "defaults": { "_locale": null },

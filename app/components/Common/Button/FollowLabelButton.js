@@ -8,7 +8,10 @@ const FollowLabelButton = ({ isLoggedIn, isSubscribed, onClick }) => {
     : i18n.t('label.subscribe');
 
   return isLoggedIn ? (
-    <button className="pftp-button-follow" onClick={() => onClick()}>
+    <button
+      className={isSubscribed ? 'pftp-button-following' : 'pftp-button-follow'}
+      onClick={() => onClick()}
+    >
       {label}
     </button>
   ) : (

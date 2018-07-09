@@ -3,7 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { fetchPledgesAction, postPledge } from '../../actions/pledgeAction';
+import {
+  fetchPledgesAction,
+  postPledge,
+  clearTimeoutAction
+} from '../../actions/pledgeAction';
 import { pledgesSelector } from '../../selectors';
 
 import Pledge from '../../components/Pledge';
@@ -11,6 +15,10 @@ import Pledge from '../../components/Pledge';
 class PledgeContainer extends Component {
   componentDidMount() {
     this.props.fetchPledgesAction(this.props.match.params.eventSlug);
+  }
+
+  componentWillUnmount() {
+    this.props.clearTimeoutAction(this.props.pledges.timeoutID);
   }
 
   postPledgeRequest(data) {
@@ -34,7 +42,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchPledgesAction, postPledge }, dispatch);
+  return bindActionCreators(
+    { fetchPledgesAction, postPledge, clearTimeoutAction },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PledgeContainer);
@@ -43,6 +54,7 @@ PledgeContainer.propTypes = {
   pledges: PropTypes.object,
   fetchPledgesAction: PropTypes.func,
   postPledge: PropTypes.func,
+  clearTimeoutAction: PropTypes.func,
   match: PropTypes.shape({
     params: PropTypes.shape({
       eventSlug: PropTypes.string

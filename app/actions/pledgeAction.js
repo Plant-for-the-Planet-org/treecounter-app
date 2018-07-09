@@ -1,5 +1,10 @@
 import { getRequest, postRequest } from '../utils/api';
-import { fetchPledges, saveTimeoutID } from '../reducers/pledgeReducer';
+import {
+  fetchPledges,
+  saveTimeoutID,
+  clearTimeoutID
+} from '../reducers/pledgeReducer';
+import { NotificationManager } from 'react-notifications';
 
 export function fetchPledgesAction(eventSlug) {
   return dispatch => {
@@ -23,8 +28,22 @@ export function fetchPledgesAction(eventSlug) {
 
 export function postPledge(data, params) {
   return dispatch => {
-    postRequest('eventPledge_post', data, params).then(res => {
-      console.log(dispatch, res);
-    });
+    postRequest('eventPledge_post', data, params)
+      .then(res => {
+        console.log(dispatch, res);
+        const { statusText } = res;
+
+        NotificationManager.success(statusText, 'Success', 5000);
+      })
+      .catch(error => {
+        NotificationManager.error(error.response.data.message, 'Error', 5000);
+      });
+  };
+}
+
+export function clearTimeoutAction(id) {
+  return dispatch => {
+    clearInterval(id);
+    dispatch(clearTimeoutID());
   };
 }

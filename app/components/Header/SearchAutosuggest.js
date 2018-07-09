@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import { postRequest } from '../../utils/api';
+import { postDirectRequest } from '../../utils/api';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 import {
   profile,
@@ -32,7 +32,7 @@ const profileType = {
 
 const getSuggestions = value => {
   return new Promise(resolve => {
-    postRequest('search2', 'q=' + value.trim()).then(result => {
+    postDirectRequest('/suggest', 'q=' + value.trim()).then(result => {
       let jdata = result.data;
       const escapedValue = escapeRegexCharacters(value.trim());
       if (escapedValue === '') {
@@ -79,6 +79,23 @@ class SearchAutosuggest extends Component {
       value: newValue
     });
   };
+  onSuggestionClicked = (
+    event,
+    { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
+  ) => {
+    this.props.onSuggestionClicked(event, {
+      suggestion,
+      suggestionValue,
+      suggestionIndex,
+      sectionIndex,
+      method
+    });
+    if (this.props.clearSuggestions) {
+      this.setState({
+        value: ''
+      });
+    }
+  };
 
   onSuggestionsFetchRequested = ({ value }) => {
     setTimeout(() => {
@@ -104,7 +121,13 @@ class SearchAutosuggest extends Component {
       placeholder: i18n.t('label.placeholder_value'),
       value,
       onChange: this.onChange,
-      className: 'form-control search_text'
+      className: 'form-control search_text',
+      onKeyDown: event => {
+        console.log(event);
+        if (event.key === 'Enter') {
+          event.preventDefault();
+        }
+      }
     };
 
     return (
@@ -115,7 +138,7 @@ class SearchAutosuggest extends Component {
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
-        onSuggestionSelected={this.props.onSuggestionClicked}
+        onSuggestionSelected={this.onSuggestionClicked}
         id="custom-render-example"
       />
     );
@@ -127,7 +150,12 @@ const mapDispatchToProps = dispatch => {
 };
 
 SearchAutosuggest.propTypes = {
-  onSuggestionClicked: PropTypes.func
+  onSuggestionClicked: PropTypes.func,
+  clearSuggestions: PropTypes.bool
+};
+
+SearchAutosuggest.defaultProps = {
+  clearSuggestions: true
 };
 
 export default connect(null, mapDispatchToProps)(SearchAutosuggest);

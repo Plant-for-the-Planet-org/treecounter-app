@@ -30,7 +30,9 @@
         .app-container__sidenav--image {
           img {
             height: 130px;
-            margin: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
           }
         }
         .app-container__sidenav--heading {
@@ -95,7 +97,14 @@
           flex-direction: column;
           align-items: center;
         }
+        @include for-ios-only {
+          overflow-x: hidden;
+        }
       }
     }
   }
+}
+
+input:required {
+  box-shadow: none;
 }

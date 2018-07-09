@@ -10,11 +10,15 @@ import {
   currenciesSelector,
   supportedTreecounterSelector
 } from '../../selectors';
-import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import {
+  selectPlantProjectAction,
+  clearPlantProject
+} from '../../actions/selectPlantProjectAction';
 import { fetchCurrencies } from '../../actions/currencies';
-import { donate } from '../../actions/donateAction';
+import { donate, paymentClear } from '../../actions/donateAction';
 
 import DonateTrees from '../../components/DonateTrees/DonateTrees';
+import { getPaymentStatus } from '../../reducers/paymentStatus';
 
 class DonationTreesContainer extends Component {
   componentDidMount() {
@@ -34,6 +38,9 @@ class DonationTreesContainer extends Component {
           this.props.donate(donationContribution, plantProjectId, flag)
         }
         supportTreecounter={this.props.supportTreecounter}
+        paymentStatus={this.props.paymentStatus}
+        paymentClear={this.props.paymentClear}
+        plantProjectClear={this.props.clearPlantProject}
       />
     );
   }
@@ -44,12 +51,19 @@ const mapStateToProps = state => ({
   selectedTpo: selectedTpoSelector(state),
   currentUserProfile: currentUserProfileSelector(state),
   supportTreecounter: supportedTreecounterSelector(state),
-  currencies: currenciesSelector(state)
+  currencies: currenciesSelector(state),
+  paymentStatus: getPaymentStatus(state)
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { selectPlantProjectAction, fetchCurrencies, donate },
+    {
+      selectPlantProjectAction,
+      fetchCurrencies,
+      donate,
+      paymentClear,
+      clearPlantProject
+    },
     dispatch
   );
 };
@@ -63,8 +77,11 @@ DonationTreesContainer.propTypes = {
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
+  paymentStatus: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
+  paymentClear: PropTypes.func,
   donate: PropTypes.func,
   fetchCurrencies: PropTypes.func,
+  clearPlantProject: PropTypes.func,
   supportTreecounter: PropTypes.object
 };

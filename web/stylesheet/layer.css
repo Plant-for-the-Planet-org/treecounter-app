@@ -150,7 +150,6 @@
   position: relative;
   width: 100%;
   height: 100%;
-  margin-top: -50px;
 }
 .canvasContainer svg {
   width: auto;
@@ -317,11 +316,11 @@
 }
 
 .pledgedBottle {
-  fill: #7f6c5e;
+  fill: #85aa4f;
 }
 
 .pledgedShadow {
-  fill: #5e4c43;
+  fill: #729235;
 }
 
 .pledgedLeaf01 {
@@ -363,7 +362,7 @@
 
 .pledgedCircle {
   fill: none;
-  stroke: #5d4b43;
+  stroke: #c3d194;
   stroke-miterlimit: 10;
   stroke-width: 45px;
 }

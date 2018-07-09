@@ -42,14 +42,7 @@ class Paypal extends React.Component {
   };
 
   render() {
-    const {
-      amount,
-      currency,
-      account,
-      onSuccess,
-      onError,
-      onCancel
-    } = this.props;
+    const { amount, currency, account, onSuccess } = this.props;
 
     const { showButton } = this.state;
 
@@ -79,6 +72,19 @@ class Paypal extends React.Component {
     };
     const onAuthorize = data => {
       onSuccess(data);
+    };
+
+    const onError = data => {
+      onSuccess(data);
+    };
+
+    const onCancel = data => {
+      let error = {
+        ...data,
+        type: 'error',
+        error: { message: 'Transaction cancelled' }
+      };
+      onSuccess(error);
     };
 
     let arrow = classnames({
@@ -121,9 +127,7 @@ Paypal.propTypes = {
   handleExpandedClicked: PropTypes.func,
   isScriptLoaded: PropTypes.bool,
   isScriptLoadSucceed: PropTypes.bool,
-  onSuccess: PropTypes.func,
-  onError: PropTypes.func,
-  onCancel: PropTypes.func
+  onSuccess: PropTypes.func
 };
 
 export default scriptLoader('https://www.paypalobjects.com/api/checkout.js')(

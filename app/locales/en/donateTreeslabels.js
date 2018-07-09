@@ -9,14 +9,18 @@ export default {
   redirectionMessage: '(You will be redirected to Paypal.)',
   project: 'Project',
   organisation: 'Organisation',
-  Cost: 'Cost Per Tree',
+  Cost: 'Cost per Tree',
   donateTrees: 'Donate Trees',
   registerPlantedTrees: 'Register Planted Trees',
   individual: 'Individual Tree',
   survival_rate: 'Survival Rate',
-  registerFurther: 'Register further trees',
+  registerFurther: 'Register More Trees',
   plantedTrees: 'Planted Trees',
   individual_name: 'Individual',
   next: 'Next',
-  delete_project: 'delete project'
+  delete_project: 'Delete Project',
+  thankyou: 'Thank you for planting',
+  receive_mail:
+    'trees with us! You will receive an email with a donation receipt in time.',
+  donate_trees_description: 'Pick a project which will plant the trees for you.'
 };

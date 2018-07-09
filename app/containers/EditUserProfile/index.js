@@ -10,6 +10,14 @@ import {
   addPlantProject
 } from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
+import i18n from '../../locales/i18n.js';
+import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
+
+const profileTypeLabel = {
+  about_me: i18n.t('label.about_me'),
+  profile: i18n.t('label.profile'),
+  password: i18n.t('label.password')
+};
 
 class EditUserProfileContainer extends React.Component {
   constructor(props) {
@@ -23,15 +31,60 @@ class EditUserProfileContainer extends React.Component {
   };
 
   updatePlantProject = plantProject => {
-    this.props.updatePlantProject(plantProject);
+    this.props
+      .updatePlantProject(plantProject)
+      .then(data => {
+        NotificationManager.success(
+          `${i18n.t('label.plant_project_update_success')}`,
+          i18n.t('label.success_title'),
+          5000
+        );
+      })
+      .catch(error => {
+        NotificationManager.error(
+          error.message,
+          i18n.t('label.plant_project_error_title'),
+          5000
+        );
+      });
   };
 
   deletePlantProject = plantProjectId => {
-    this.props.deletePlantProject(plantProjectId);
+    this.props
+      .deletePlantProject(plantProjectId)
+      .then(data => {
+        NotificationManager.success(
+          `${i18n.t('label.plant_project_delete_success')}`,
+          i18n.t('label.success_title'),
+          5000
+        );
+      })
+      .catch(error => {
+        NotificationManager.error(
+          error.message,
+          i18n.t('label.plant_project_error_title'),
+          5000
+        );
+      });
   };
 
   addPlantProject = newProject => {
-    this.props.addPlantProject(newProject);
+    this.props
+      .addPlantProject(newProject)
+      .then(data => {
+        NotificationManager.success(
+          `${i18n.t('label.plant_project_added_success')}`,
+          i18n.t('label.success_title'),
+          5000
+        );
+      })
+      .catch(error => {
+        NotificationManager.error(
+          error.message,
+          i18n.t('label.plant_project_error_title'),
+          5000
+        );
+      });
   };
 
   onSave = (usertype, profileType) => {
@@ -42,6 +95,9 @@ class EditUserProfileContainer extends React.Component {
     let imageValue = this.refs.EditUserProfileContainer.refs[
       'image'
     ].getValue();
+    if (imageValue) {
+      this.props.updateUserProfile(imageValue, 'image');
+    }
     if (value) {
       this.props
         .updateUserProfile(value, profileType)
@@ -49,11 +105,21 @@ class EditUserProfileContainer extends React.Component {
           if (profileType == 'password') {
             this.setState({ showPasswordDialog: true });
           }
+          NotificationManager.success(
+            `${profileTypeLabel[profileType] || profileType} ${i18n.t(
+              'label.updated_successful'
+            )}`,
+            i18n.t('label.success_title'),
+            5000
+          );
         })
-        .catch(error => console.log(error));
-    }
-    if (imageValue) {
-      this.props.updateUserProfile(imageValue, 'image');
+        .catch(error => {
+          NotificationManager.error(
+            error.message,
+            i18n.t('label.error_title'),
+            5000
+          );
+        });
     }
   };
 

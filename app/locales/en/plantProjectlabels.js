@@ -1,7 +1,7 @@
 export default {
   tax: 'TAX',
   tax_deductible: 'Tax Deductible',
-  location: 'location',
+  location: 'Location',
   planted: 'Planted',
   target: 'Target',
   in: 'in',

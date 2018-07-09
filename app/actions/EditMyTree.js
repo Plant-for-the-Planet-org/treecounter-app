@@ -13,21 +13,17 @@ export function editTree(plantContribution, plantId) {
       plantContribution: plantId
     })
       .then(res => {
-        const { statusText, status } = res;
+        const { statusText } = res;
         const { contribution, treecounter } = res.data;
 
-        NotificationManager.success(statusText, status, 5000);
+        NotificationManager.success(statusText, 'Success', 5000);
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         updateRoute('app_myTrees', dispatch);
       })
       .catch(error => {
         debug(error.response);
-        NotificationManager.error(
-          error.response.data.message,
-          error.response.data.code,
-          5000
-        );
+        NotificationManager.error(error.response.data.message, 'Error', 5000);
       });
   };
 }

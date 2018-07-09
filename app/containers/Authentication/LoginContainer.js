@@ -9,7 +9,8 @@ import Login from '../../components/Authentication/Login/index';
 
 class LoginContainer extends React.Component {
   onPress = () => {
-    // let result = this.refs.loginForm.validate();
+    let result = this.refs.loginContainer.refs.loginForm.validate();
+    console.log(result);
     // if (result.isValid()) {
     let value = this.refs.loginContainer.refs.loginForm.getValue();
     if (value) {

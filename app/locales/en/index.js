@@ -21,7 +21,8 @@ import paymentlabels from './paymentlabels';
 import publicTreecounterlabels from './publicTreecounterlabels';
 import editUserProfilelabels from './editUserProfilelabels';
 import selectPlantProjectlabels from './selectPlantProjectlabels';
-
+import pledgelabels from './pledgelabels';
+import footerlabels from './footerlabels';
 export default {
   ...loginlabels,
   ...headerlabels,
@@ -45,5 +46,7 @@ export default {
   ...paymentlabels,
   ...publicTreecounterlabels,
   ...editUserProfilelabels,
-  ...selectPlantProjectlabels
+  ...selectPlantProjectlabels,
+  ...pledgelabels,
+  ...footerlabels
 };

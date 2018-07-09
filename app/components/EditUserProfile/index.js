@@ -32,6 +32,7 @@ export default class EditUserProfile extends React.Component {
     super(props);
     this.state = {
       showConfirmProfileDeletion: false,
+      passwordNotSameError: false,
       plantProjects: (props &&
         props.currentUserProfile &&
         props.currentUserProfile.plantProjects) || [emptyProjectInfo]
@@ -127,6 +128,17 @@ export default class EditUserProfile extends React.Component {
 
   getFormSchemaOption = (userType, profileType) => {
     let schemaOptions = parsedSchema[userType][profileType].schemaOptions;
+    if (profileType == 'password') {
+      try {
+        schemaOptions.fields.password.fields.first.hasError = schemaOptions.fields.password.fields.second.hasError = this.state.passwordNotSameError;
+        schemaOptions.fields.password.fields.first.error = schemaOptions.fields.password.fields.second.error = (
+          <div className="error-msg">{i18n.t('label.same_password_error')}</div>
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     return {
       template: this.getFormTemplate(userType, profileType),
       ...schemaOptions
@@ -163,7 +175,7 @@ export default class EditUserProfile extends React.Component {
                   }}
                   className="delete-project"
                 >
-                  delete project
+                  {i18n.t('label.delete_project')}
                 </div>
               </div>
             </div>
@@ -230,7 +242,7 @@ export default class EditUserProfile extends React.Component {
                   this.handleAddNewProject();
                 }}
               >
-                +&nbsp;Add new project
+                +&nbsp;{i18n.t('label.new_project')}
               </button>
             </div>
           </div>
@@ -264,6 +276,14 @@ export default class EditUserProfile extends React.Component {
           />
           <PrimaryButton
             onClick={() => {
+              let value = this.refs.password.getValue();
+              if (value && value.password.first !== value.password.second) {
+                //same password
+                this.setState({ passwordNotSameError: true });
+                return;
+              }
+              this.setState({ passwordNotSameError: false });
+              console.log('password', value);
               this.props.onSave(type, 'password');
             }}
           >

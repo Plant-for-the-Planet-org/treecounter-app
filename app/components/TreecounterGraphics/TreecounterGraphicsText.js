@@ -56,7 +56,8 @@ class TreecounterGraphicsText extends Component {
         targetComment,
         planted,
         personal,
-        community
+        community,
+        type
       }
     } = this.props;
 
@@ -83,13 +84,6 @@ class TreecounterGraphicsText extends Component {
               ) : null}
             </span>
           </div>
-          {!targetComment || targetComment === '' ? null : (
-            <div className="svg-text-container__row--col2">
-              <ArrowButton
-                onToggle={e => this.setState({ ifTargetComment: e })}
-              />{' '}
-            </div>
-          )}
         </div>
         {this.state.ifTargetComment ? (
           <TargetComment comment={targetComment} />
@@ -105,19 +99,25 @@ class TreecounterGraphicsText extends Component {
               {this.props.trillion ? (
                 <div>
                   {/* {this.getTwoWordString(NumberToWords.toWords(planted))} */}
-                  {planted.toFixed(2).toLocaleString('en')}
+                  {parseInt(planted).toLocaleString('en')}
                 </div>
               ) : null}
             </span>
           </div>
-          <div className="svg-text-container__row--col2">
-            <ArrowButton
-              onToggle={e => this.setState({ ifPlantedDetails: e })}
-            />{' '}
-          </div>
+          {this.props.trillion ? null : (
+            <div className="svg-text-container__row--col2">
+              <ArrowButton
+                onToggle={e => this.setState({ ifPlantedDetails: e })}
+              />
+            </div>
+          )}
         </div>
         {this.state.ifPlantedDetails ? (
-          <PlantedDetails personal={personal} community={community} />
+          <PlantedDetails
+            personal={personal}
+            community={community}
+            type={type}
+          />
         ) : null}
       </div>
     );

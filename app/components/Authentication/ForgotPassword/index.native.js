@@ -7,13 +7,9 @@ import {
   schemaOptions
 } from '../../../server/parsedSchemas/forgotpassword';
 
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  ImageBackground
-} from 'react-native';
+import styles from './forgetpassword.styles.native';
+
+import { Text, View, TouchableHighlight, ImageBackground } from 'react-native';
 
 let Form = t.form.Form;
 
@@ -64,66 +60,3 @@ ForgotPassword.propTypes = {
   onError: PropTypes.func,
   updateRoute: PropTypes.func
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0'
-  },
-  inputContainer: {
-    width: '100%',
-    justifyContent: 'center',
-    borderRadius: 10,
-    backgroundColor: 'white',
-    padding: 10,
-    shadowOffset: { width: 0, height: 4 },
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-    shadowRadius: 12
-  },
-  button: {
-    height: 50,
-    backgroundColor: '#b9d384',
-    borderColor: '#b9d384',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 21,
-    marginTop: 30,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
-  buttonText: {
-    fontSize: 29,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  titleText: {
-    fontSize: 30,
-    color: '#575756',
-    fontWeight: 'bold',
-    justifyContent: 'flex-start',
-    marginBottom: 20
-  },
-  titleTextUnderline: {
-    height: 3,
-    width: 117,
-    backgroundColor: '#b9d384',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    justifyContent: 'center'
-  },
-  bottomRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  bottomTextHighlight: {
-    fontSize: 11,
-    color: '#ec6453'
-  },
-  header: {
-    marginBottom: 60
-  }
-});

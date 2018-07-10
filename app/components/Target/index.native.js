@@ -15,7 +15,7 @@ import {
   targetFormSchema
 } from '../../server/parsedSchemas/target';
 
-import { loginStyles } from '../Authentication/Login';
+import styles from '../Authentication/Login/login.styles.native';
 
 let Form = t.form.Form;
 
@@ -51,8 +51,8 @@ Target.propTypes = {
   onSubmitTarget: PropTypes.func.isRequired
 };
 
-export const styles = StyleSheet.create({
-  ...loginStyles,
-  titleText: { ...loginStyles.titleText, width: 129 },
-  titleTextUnderline: { ...loginStyles.titleTextUnderline, width: 119 }
-});
+// export const styles = StyleSheet.create({
+//   ...loginStyles,
+//   titleText: { ...loginStyles.titleText, width: 129 },
+//   titleTextUnderline: { ...loginStyles.titleTextUnderline, width: 119 }
+// });

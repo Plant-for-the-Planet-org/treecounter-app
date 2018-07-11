@@ -1,18 +1,3 @@
-/*@import "https://designmodo.github.io/Flat-UI/dist/css/flat-ui.min.css";*/
-/*@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css";*/
-/*@import "https://daneden.github.io/animate.css/animate.min.css";*/
-/*-------------------------------*/
-/*           VARIABLES           */
-/*-------------------------------*/
-/*body {
-  position: relative;
-  overflow-x: hidden;
-}
-body,
-html {
-  height: 100%;
-  background-color: #583e7e;
-}*/
 .nav .open > a {
   background-color: transparent;
 }
@@ -209,7 +194,7 @@ html {
     height: 2.1em;
     margin: -3px 8px 0px 0px;
     padding: 6px;
-    float: left;	
+    float: left;
 }
 /*
 .sidebar-nav li a:hover,
@@ -353,7 +338,7 @@ html {
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
-/* SOME DEMO STYLES - NOT REQUIRED 
+/* SOME DEMO STYLES - NOT REQUIRED
 body,
 html {
   background-color: #583e7e;

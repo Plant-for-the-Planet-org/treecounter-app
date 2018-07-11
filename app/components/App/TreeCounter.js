@@ -36,13 +36,13 @@ import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { NotificationAction } from '../../actions/notificationAction';
 import { getAccessToken } from '../../utils/user';
-import { currentUserProfileSelector } from '../../selectors/index';
+import { currentUserProfileSelector } from '../../selectors';
 import { getLocalRoute } from '../../actions/apiRouting';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
-import DonationTreesContainer from '../../containers/DonateTrees/index';
+import DonationTreesContainer from '../../containers/DonateTrees';
 
-import EditUserProfileContainer from '../../containers/EditUserProfile/index';
-import LeaderboardContainer from '../../containers/Leaderboard/index';
+import EditUserProfileContainer from '../../containers/EditUserProfile';
+import LeaderboardContainer from '../../containers/Leaderboard';
 // Class implementation
 class TreeCounter extends Component {
   constructor(props) {

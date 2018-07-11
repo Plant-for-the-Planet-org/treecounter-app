@@ -17,7 +17,7 @@ import {
 import { fetchCurrencies } from '../../actions/currencies';
 import { donate, paymentClear } from '../../actions/donateAction';
 
-import DonateTrees from '../../components/DonateTrees/DonateTrees';
+import DonateTrees from '../../components/DonateTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 
 class DonationTreesContainer extends Component {

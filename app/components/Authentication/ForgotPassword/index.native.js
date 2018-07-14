@@ -7,7 +7,7 @@ import {
   schemaOptions
 } from '../../../server/parsedSchemas/forgotpassword';
 
-import styles from './forgetpassword.styles.native';
+import styles from './styles/forgetpassword';
 
 import { Text, View, TouchableHighlight, ImageBackground } from 'react-native';
 

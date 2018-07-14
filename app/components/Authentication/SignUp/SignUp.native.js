@@ -16,7 +16,7 @@ import {
 } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
 
-import styles from '../Login/login.styles.native';
+import styles from '../Login/styles/login';
 import SignupTypes from './SignupType';
 
 let Form = t.form.Form;

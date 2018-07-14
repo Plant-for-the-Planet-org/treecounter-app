@@ -15,7 +15,7 @@ import {
   targetFormSchema
 } from '../../server/parsedSchemas/target';
 
-import styles from '../Authentication/Login/login.styles.native';
+import styles from '../Authentication/Login/styles/login';
 
 let Form = t.form.Form;
 

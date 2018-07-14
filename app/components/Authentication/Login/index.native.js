@@ -16,7 +16,7 @@ import {
 
 import i18n from '../../../locales/i18n.js';
 
-import styles from './styles/login';
+import styles from '../../../styles/login';
 
 let Form = t.form.Form;
 

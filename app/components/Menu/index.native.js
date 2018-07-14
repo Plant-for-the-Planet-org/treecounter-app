@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import MenuGroup from './MenuItem.native';
 import PropTypes, { func } from 'prop-types';
-import styles from './styles/menu';
+import styles from '../../styles/menu';
 import { updateRoute } from '../../helpers/routerHelper';
 
 export default class Menu extends Component {

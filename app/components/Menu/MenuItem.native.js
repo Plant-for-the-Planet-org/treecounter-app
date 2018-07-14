@@ -4,7 +4,7 @@ import PropTypes, { func } from 'prop-types';
 
 import * as images from '../../assets';
 import i18n from '../../locales/i18n.js';
-import styles from './styles/manu.item';
+import styles from '../../styles/menu_item';
 export default class MenuGroup extends Component {
   static propTypes = {
     title: PropTypes.string,

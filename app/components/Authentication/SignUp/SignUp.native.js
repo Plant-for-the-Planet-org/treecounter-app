@@ -16,7 +16,7 @@ import {
 } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
 
-import { loginStyles } from '../Login';
+import styles from '../../../styles/login';
 import SignupTypes from './SignupType';
 
 let Form = t.form.Form;
@@ -86,8 +86,8 @@ SignUp.propTypes = {
   onError: PropTypes.func
 };
 
-export const styles = StyleSheet.create({
-  ...loginStyles,
-  titleText: { ...loginStyles.titleText, width: 129 },
-  titleTextUnderline: { ...loginStyles.titleTextUnderline, width: 119 }
-});
+// export const styles = StyleSheet.create({
+//   ...loginStyles,
+//   titleText: { ...loginStyles.titleText, width: 129 },
+//   titleTextUnderline: { ...loginStyles.titleTextUnderline, width: 119 }
+// });

@@ -5,11 +5,11 @@ import {
   Image,
   TouchableNativeFeedback,
   ScrollView,
-  SafeAreaView,
-  StyleSheet
+  SafeAreaView
 } from 'react-native';
 import MenuGroup from './MenuItem.native';
 import PropTypes, { func } from 'prop-types';
+import styles from '../../styles/menu';
 import { updateRoute } from '../../helpers/routerHelper';
 
 export default class Menu extends Component {
@@ -43,14 +43,3 @@ export default class Menu extends Component {
     );
   }
 }
-export const styles = StyleSheet.create({
-  outerContainer: {
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    flex: 1
-  },
-  imageStyle: {
-    paddingLeft: 43,
-    paddingBottom: 20
-  }
-});

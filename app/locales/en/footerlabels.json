@@ -1,4 +1,4 @@
-export default {
-  imprint: 'Imprint',
-  privacy: 'Privacy'
-};
+{
+  "imprint": "Imprint",
+  "privacy": "Privacy"
+}

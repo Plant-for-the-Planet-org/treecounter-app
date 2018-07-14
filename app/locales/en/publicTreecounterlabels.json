@@ -1,4 +1,4 @@
-export default {
-  support: 'Gift Trees',
-  read_more: 'Read More'
-};
+{
+  "support": "Gift Trees",
+  "read_more": "Read More"
+}

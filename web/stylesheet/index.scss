@@ -1,14 +1,8 @@
 // Import Variables
 @import "_variables";
 @import "_mixin";
-// Import components css
-// @import "./tree.css";
 @import "./treecounter.css";
-// @import "./notification.css";
 @import "./layer.css";
-// @import "./menu.css";
-// @import "./search.css";
-@import "./carousel.css";
 
 // Import standard components
 @import "./common/_button.scss";
@@ -32,19 +26,13 @@
 
 // Import components SCSS
 @import "./_normalize.scss";
-@import "./_horizontal_round_bar.scss";
-@import "./_project_details.scss";
-@import "./_payment_page_container.scss";
-@import "./_payment_method.scss";
 @import "./_custom_popover.scss";
 @import "./_sidenav_responsive";
 @import "./_app.scss";
 @import "./_user_contributions.scss";
 @import "./_custom_scrollbar.scss";
 @import "./_auto_suggest.scss";
-@import "./_search_page.scss";
 @import "./_register_trees.scss";
-@import "./_trillion_tree.scss";
 @import "./_home_svg.scss";
 @import "./_arrow_button_rotatable.scss";
 @import "./_footer.scss";

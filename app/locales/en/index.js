@@ -1,4 +1,4 @@
-import menulabels from './menulabels';
+import menulabels from './menulabels.json';
 import plantProjectlabels from './plantProjectlabels';
 import registerTreeslabels from './registerTreeslabels';
 import signUplabels from './signUplabels';
@@ -8,7 +8,7 @@ import tpoProjectlabels from './tpoProjectlabels';
 import treecounterGraphicslabels from './treecounterGraphicslabels';
 import userContributionslabels from './userContributionslabels';
 import headerlabels from './headerlabels';
-import loginlabels from './loginlabels';
+import loginlabels from './loginlabels.json';
 import activateAccountlabels from './activateAccountlabels';
 import commonlabels from './commonlabels';
 import donateTreeslabels from './donateTreeslabels';

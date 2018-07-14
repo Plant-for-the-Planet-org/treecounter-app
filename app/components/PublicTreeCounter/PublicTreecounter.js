@@ -176,7 +176,7 @@ class PublicTreeCounter extends React.Component {
           />
         </div>
         <div className="tree-counter-footer__container">
-          {'tpo' === userProfile.type ? (
+          {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
             <TpoDonationPlantProjectSelector
               {...tpoProps}
               onSelect={this.onPlantProjectSelected}

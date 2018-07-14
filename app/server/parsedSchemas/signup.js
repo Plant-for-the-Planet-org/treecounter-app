@@ -1,35 +1,35 @@
 import schemaLiform from '../formSchemas/signup';
-import parseJsonToTcomb from '../parserLiformToTcomb';
+import callParser from '../callParser';
 
 const {
   transformedSchema: signupSchemaTpo,
   schemaOptions: schemaOptionsTpo
-} = parseJsonToTcomb(schemaLiform.tpo);
+} = callParser(schemaLiform.tpo);
 
 const {
   transformedSchema: signupSchemaCompany,
   schemaOptions: schemaOptionsCompany
-} = parseJsonToTcomb(schemaLiform.company);
+} = callParser(schemaLiform.company);
 
 const {
   transformedSchema: signupSchemaEducation,
   schemaOptions: schemaOptionsEducation
-} = parseJsonToTcomb(schemaLiform.education);
+} = callParser(schemaLiform.education);
 
 const {
   transformedSchema: signupSchemaGovernment,
   schemaOptions: schemaOptionsGovernment
-} = parseJsonToTcomb(schemaLiform.government);
+} = callParser(schemaLiform.government);
 
 const {
   transformedSchema: signupSchemaIndividual,
   schemaOptions: schemaOptionsIndividual
-} = parseJsonToTcomb(schemaLiform.individual);
+} = callParser(schemaLiform.individual);
 
 const {
   transformedSchema: signupSchemaOrganization,
   schemaOptions: schemaOptionsOrganization
-} = parseJsonToTcomb(schemaLiform.organization);
+} = callParser(schemaLiform.organization);
 
 const signupFormSchema = {
   tpo: signupSchemaTpo,

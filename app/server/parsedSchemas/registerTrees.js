@@ -2,17 +2,17 @@ import {
   singleTreeForm,
   multipleTreesForm
 } from '../formSchemas/registerTrees';
-import parseJsonToTcomb from '../parserLiformToTcomb';
+import callParser from '../callParser';
 
 const {
   transformedSchema: singleTreeRegisterFormSchema,
   schemaOptions: schemaOptionsSingleTree
-} = parseJsonToTcomb(singleTreeForm);
+} = callParser(singleTreeForm);
 
 const {
   transformedSchema: multipleTreesRegisterFormSchema,
   schemaOptions: schemaOptionsMultipleTrees
-} = parseJsonToTcomb(multipleTreesForm);
+} = callParser(multipleTreesForm);
 
 export {
   singleTreeRegisterFormSchema,

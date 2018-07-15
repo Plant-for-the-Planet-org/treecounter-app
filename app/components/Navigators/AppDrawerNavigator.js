@@ -1,5 +1,5 @@
-import { DrawerNavigator } from 'react-navigation';
-
+import { DrawerNavigator, StackNavigator } from 'react-navigation';
+import React from 'react';
 import Trillion from '../TreecounterGraphics/Trillion';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
@@ -8,8 +8,16 @@ import TargetContainer from '../../containers/TargetContainer';
 
 import { getLocalRoute } from '../../actions/apiRouting';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
+import { View } from 'react-native';
+import styles from '../../styles/header.native';
 
-export const AppDrawerNavigator = DrawerNavigator(
+class Header extends React.Component {
+  render() {
+    return <View style={{ width: 300, height: 30 }} />;
+  }
+}
+
+const baseNavigator = StackNavigator(
   {
     [getLocalRoute('app_login')]: {
       screen: LoginContainer
@@ -28,8 +36,17 @@ export const AppDrawerNavigator = DrawerNavigator(
     }
   },
   {
+    navigationOptions: () => ({
+      headerStyle: styles.container
+    })
+  }
+);
+export const AppDrawerNavigator = DrawerNavigator(
+  {
+    Category: baseNavigator
+  },
+  {
     gesturesEnabled: false,
-    //TODO @hkurra Create custom side menu compnent like web
     contentComponent: SideMenuContainer
   }
 );

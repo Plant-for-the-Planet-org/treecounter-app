@@ -80,6 +80,7 @@ import gift_icon from './images/icons/gift_icon.png';
 import map_legend_Restoration from './images/Legend_Restoration.png';
 import map_legend_Trees from './images/Legend_Trees.png';
 import map_legend_TreeDensity from './images/Legend_TreeDensity.png';
+import burgur_menu_icon from './images/icons/menu-icon.jpg';
 
 export {
   bmzLogo,
@@ -162,5 +163,6 @@ export {
   gift_icon,
   map_legend_Restoration,
   map_legend_Trees,
-  map_legend_TreeDensity
+  map_legend_TreeDensity,
+  burgur_menu_icon
 };

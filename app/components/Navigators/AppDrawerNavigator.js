@@ -8,36 +8,42 @@ import TargetContainer from '../../containers/TargetContainer';
 
 import { getLocalRoute } from '../../actions/apiRouting';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
-import { View } from 'react-native';
 import styles from '../../styles/header.native';
-
-class Header extends React.Component {
-  render() {
-    return <View style={{ width: 300, height: 30 }} />;
-  }
-}
+import BurgerMenu from '../../components/Header/BurgerMenu';
+import i18n from '../../locales/i18n.js';
 
 const baseNavigator = StackNavigator(
   {
     [getLocalRoute('app_login')]: {
-      screen: LoginContainer
+      screen: LoginContainer,
+      navigationOptions: ({ navigation }) => ({
+        headerLeft: BurgerMenu(navigation),
+        title: i18n.t('label.login')
+      })
     },
     [getLocalRoute('app_target')]: {
       screen: TargetContainer
     },
     [getLocalRoute('app_signup')]: {
-      screen: SignUpContainer
+      screen: SignUpContainer,
+      navigationOptions: () => ({
+        title: i18n.t('label.signUp')
+      })
     },
     [getLocalRoute('app_userHome')]: {
       screen: Trillion
     },
     [getLocalRoute('app_forgotPassword')]: {
-      screen: ForgotPasswordContainer
+      screen: ForgotPasswordContainer,
+      navigationOptions: () => ({
+        title: i18n.t('label.forgot_ur_password')
+      })
     }
   },
   {
-    navigationOptions: () => ({
-      headerStyle: styles.container
+    navigationOptions: ({ navigation }) => ({
+      headerStyle: styles.container,
+      headerTintColor: '#fff'
     })
   }
 );

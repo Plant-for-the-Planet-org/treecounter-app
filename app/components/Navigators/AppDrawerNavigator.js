@@ -11,6 +11,7 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import styles from '../../styles/header.native';
 import BurgerMenu from '../../components/Header/BurgerMenu';
 import i18n from '../../locales/i18n.js';
+import DonateTrees from '../../containers/DonateTrees';
 
 const baseNavigator = StackNavigator(
   {
@@ -32,6 +33,9 @@ const baseNavigator = StackNavigator(
     },
     [getLocalRoute('app_userHome')]: {
       screen: Trillion
+    },
+    [getLocalRoute('app_donateTrees')]: {
+      screen: DonateTrees
     },
     [getLocalRoute('app_forgotPassword')]: {
       screen: ForgotPasswordContainer,

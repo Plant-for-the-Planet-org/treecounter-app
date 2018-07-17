@@ -36,6 +36,7 @@
     "react-modal": "^3.4.5",
     "react-native": "0.55.3",
     "react-native-extended-stylesheet": "^0.8.1",
+    "react-native-tab-view": "^1.0.2",
     "react-navigation": "^1.1.2",
     "react-navigation-redux-helpers": "^1.0.5",
     "react-notifications": "^1.4.3",

@@ -5,6 +5,7 @@ import LoginContainer from '../../containers/Authentication/LoginContainer';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 import TargetContainer from '../../containers/TargetContainer';
+import DonationTreesContainer from '../../containers/DonateTrees';
 
 import { getLocalRoute } from '../../actions/apiRouting';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
@@ -25,6 +26,9 @@ export const AppDrawerNavigator = DrawerNavigator(
     },
     [getLocalRoute('app_forgotPassword')]: {
       screen: ForgotPasswordContainer
+    },
+    [getLocalRoute('app_donateTrees')]: {
+      screen: DonationTreesContainer
     }
   },
   {

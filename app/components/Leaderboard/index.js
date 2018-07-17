@@ -57,8 +57,8 @@ export default class Leaderboard extends Component {
     };
   }
 
-  handleSlectionChange = () => {
-    // this.handleCategoryChange(this.state.selectedSection);
+  handleSelectionChange = () => {
+    this.handleCategoryChange();
   };
 
   handleCategoryChange = section => {
@@ -145,7 +145,8 @@ export default class Leaderboard extends Component {
       tabInfo,
       categoryInfo,
       orderByOptionsInfo,
-      timePeriodsInfo
+      timePeriodsInfo,
+      sortingQuery
     } = this.props;
     if (!categoryInfo) {
       return (
@@ -181,9 +182,10 @@ export default class Leaderboard extends Component {
                     <span>{i18n.t('label.sortBy')} </span>
                     <div className="pftp-selectfield">
                       <select
+                        defaultValue={sortingQuery && sortingQuery.orderBy}
                         ref="orderBy"
                         className="pftp-selectfield__select"
-                        onChange={this.handleSlectionChange}
+                        onChange={this.handleSelectionChange}
                       >
                         {orderByOptionsInfo.orderByOptionsKeys.map(option => (
                           <option
@@ -201,9 +203,10 @@ export default class Leaderboard extends Component {
                     <span>{i18n.t('label.timePeriod')} </span>
                     <div className="pftp-selectfield">
                       <select
+                        defaultValue={sortingQuery && sortingQuery.period}
                         ref="timePeriod"
                         className="pftp-selectfield__select"
-                        onChange={this.handleSlectionChange}
+                        onChange={this.handleSelectionChange}
                       >
                         {timePeriodsInfo.timePeriodsKeys.map(option => (
                           <option
@@ -242,5 +245,6 @@ Leaderboard.propTypes = {
   handleSectionChange: PropTypes.func,
   handleTabChange: PropTypes.func,
   queryResult: PropTypes.array,
-  mapInfo: PropTypes.object
+  mapInfo: PropTypes.object,
+  sortingQuery: PropTypes.object
 };

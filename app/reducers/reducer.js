@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux';
 import commonReducers from './commonReducers';
-import { createAction } from 'redux-actions';
 import { reducer as formReducer } from 'redux-form';
 
-export const userLogout = createAction('USER_LOGOUT');
 import sideNavReducer from './sideNavReducer';
 
 const appReducer = combineReducers({

@@ -7,7 +7,7 @@ import SeeMoreToggle from '../Common/SeeMoreToggle';
 import PlantProjectDetails from './PlantProjectDetails';
 import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n';
-import { parseGeolocation } from '../Templates/MapTemplate';
+import { queryParamsToObject } from '../../helpers/utils';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -71,7 +71,7 @@ class PlantProjectFull extends React.Component {
       homepageUrl,
       homepageCaption,
       videoUrl,
-      mapData: parseGeolocation(geoLocation),
+      mapData: queryParamsToObject(geoLocation),
       plantProjectImages
     };
     return (

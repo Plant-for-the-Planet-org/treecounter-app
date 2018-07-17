@@ -47,20 +47,13 @@ class TpoDonationPlantProjectSelector extends React.Component {
       <CardLayout className="tpo-footer-card-layout">
         <div className="tpo-footer__container">
           <ContentHeader caption={caption} />
-          {1 === plantProjects.length ? (
-            <TagName
-              plantProject={plantProjects.find(() => true)}
-              expanded={false}
-            />
-          ) : (
-            <PlantProjectCarousel
-              contentTag={TagName}
-              plantProjects={plantProjects}
-              tpoName={tpoName}
-              currentPlantProjectId={this.state.currentPlantProjectId}
-              onChange={this.onCarouselChange}
-            />
-          )}
+          <PlantProjectCarousel
+            contentTag={TagName}
+            plantProjects={plantProjects}
+            tpoName={tpoName}
+            currentPlantProjectId={this.state.currentPlantProjectId}
+            onChange={this.onCarouselChange}
+          />
           <PrimaryButton
             onClick={() => onSelect(this.state.currentPlantProjectId)}
           >

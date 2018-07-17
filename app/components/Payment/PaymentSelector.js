@@ -80,7 +80,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
 
     return paymentMethods ? (
       <StripeProvider stripe={this.state.stripe}>
-        <div>
+        <div className="payment_options__wrapper">
           <div>
             Amount: {amount} {currency}
           </div>

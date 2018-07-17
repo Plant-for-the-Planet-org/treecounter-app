@@ -4,7 +4,7 @@ import PropTypes, { func } from 'prop-types';
 
 import * as images from '../../assets';
 import i18n from '../../locales/i18n.js';
-
+import styles from '../../styles/menu_item';
 export default class MenuGroup extends Component {
   static propTypes = {
     title: PropTypes.string,
@@ -39,7 +39,7 @@ export default class MenuGroup extends Component {
 
 class MenuItem extends Component {
   static propTypes = {
-    iconUrl: PropTypes.string,
+    iconUrl: PropTypes.any,
     titleId: PropTypes.any, //key it will use for localization
     title: PropTypes.string,
     onPress: PropTypes.func.isRequired
@@ -58,47 +58,3 @@ class MenuItem extends Component {
     );
   }
 }
-
-export const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    paddingLeft: 40,
-    paddingBottom: 10
-  },
-  menuItemContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingLeft: 3,
-    paddingBottom: 10
-  },
-  groupMenuContainer: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    paddingBottom: 10
-  },
-  imageStyle: {
-    width: 17,
-    height: 18,
-    resizeMode: 'center'
-  },
-  textStyle: {
-    paddingLeft: 5,
-    fontSize: 11,
-    color: '#6a6161'
-  },
-  gropuTextStyle: {
-    fontWeight: '600',
-    fontSize: 11,
-    color: '#6a6161',
-    marginBottom: 8
-  },
-  titleTextUnderline: {
-    height: 2,
-    width: 25,
-    backgroundColor: '#b9d384',
-    marginLeft: 2
-  }
-});

@@ -17,7 +17,7 @@ import {
 import { fetchCurrencies } from '../../actions/currencies';
 import { donate, paymentClear } from '../../actions/donateAction';
 
-import DonateTrees from '../../components/DonateTrees/DonateTrees';
+import DonateTrees from '../../components/DonateTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 
 class DonationTreesContainer extends Component {
@@ -30,6 +30,7 @@ class DonationTreesContainer extends Component {
     let flag = this.props.currentUserProfile ? true : false;
     return (
       <DonateTrees
+        ref={'donateTreesContainer'}
         selectedProject={this.props.selectedProject}
         selectedTpo={this.props.selectedTpo}
         currentUserProfile={this.props.currentUserProfile}

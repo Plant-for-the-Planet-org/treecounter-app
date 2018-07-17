@@ -1,6 +1,7 @@
 .donate-tress__container {
   position: relative;
   width: 100%;
+  height: auto;
 
   .treecount-selector-wrapper {
     height: 280px;
@@ -116,7 +117,8 @@
 
   .treecount-container {
     margin-top: 30px;
-    height: 200px;
+    height: auto;
+
     .treecount-price-conversion {
       display: flex;
       justify-content: space-between;
@@ -156,7 +158,7 @@
     }
   }
   .plant_project_content {
-    max-height:500px;
+    max-height: 500px;
     overflow: auto;
   }
 }
@@ -255,7 +257,9 @@
     }
   }
 }
-
+.payment_options__wrapper {
+  min-height: 470px;
+}
 .payment-option {
   display: flex;
   flex-direction: column;

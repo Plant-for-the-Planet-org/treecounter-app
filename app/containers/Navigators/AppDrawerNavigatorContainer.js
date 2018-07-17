@@ -6,6 +6,7 @@ import { getDrawerNavigator } from '../../components/Navigators/AppDrawerNavigat
 import { getAccessToken } from '../../utils/user';
 import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
 
 class AppDrawerNavigatorContainer extends Component {
   constructor(props) {
@@ -44,9 +45,7 @@ class AppDrawerNavigatorContainer extends Component {
       const AppDrawerNavigator = getDrawerNavigator(this.state.isLoggedIn);
       return <AppDrawerNavigator />;
     }
-
-    //TODO hkurra we can show loading screen like splash screen here
-    return null;
+    return <LoadingIndicator />;
   }
 
   static propTypes = {

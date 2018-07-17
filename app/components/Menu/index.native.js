@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableNativeFeedback,
-  ScrollView,
-  SafeAreaView
-} from 'react-native';
-import MenuGroup from './MenuItem.native';
+import { View, Image, ScrollView, SafeAreaView } from 'react-native';
+import MenuGroup, { MenuItem } from './MenuItem.native';
 import PropTypes, { func } from 'prop-types';
 import styles from '../../styles/menu';
 import { updateRoute } from '../../helpers/routerHelper';
+import { SideMenuImage, close_green } from '../../assets';
+import i18n from '../../locales/i18n.js';
 
 export default class Menu extends Component {
   static propTypes = {
@@ -38,6 +33,13 @@ export default class Menu extends Component {
               onPress={this.onPressMenu}
             />
           ))}
+          <MenuItem
+            onPress={() => {
+              this.props.logoutUser();
+            }}
+            title={i18n.t('label.logout')}
+            iconUrl={close_green}
+          />
         </ScrollView>
       </SafeAreaView>
     );

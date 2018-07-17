@@ -1,20 +1,19 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { addNavigationHelpers } from 'react-navigation';
-import { AppDrawerNavigator } from '../../components/Navigators/AppDrawerNavigator';
-import { drawerRootListener as addListener } from '../../helpers/reduxHelpers.native';
+import { getDrawerNavigator } from '../../components/Navigators/AppDrawerNavigator';
+import { getAccessToken } from '../../utils/user';
+import { loadTpos } from '../../actions/loadTposAction';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
 
 class AppDrawerNavigatorContainer extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired
-  };
-
   constructor(props) {
     super(props);
     const { userProfile } = this.props;
     const isLoggedIn = null !== userProfile;
     this.state = {
+      loading: true,
       isLoggedIn: isLoggedIn
     };
   }
@@ -23,26 +22,57 @@ class AppDrawerNavigatorContainer extends Component {
     const { userProfile } = this.props;
     const isLoggedIn = null !== userProfile;
     if (isLoggedIn) {
-      this.setState({ isLoggedIn: true });
+      this.setState({ loading: false, isLoggedIn: true });
     } else {
+      let token = await getAccessToken();
+      if (token) {
+        this.props.loadUserProfile();
+      } else {
+        this.setState({ loading: false, isLoggedIn: false });
+      }
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.userProfile !== this.props.userProfile) {
       let isLoggedIn = null !== nextProps.userProfile;
-      this.setState({ isLoggedIn: isLoggedIn });
+      this.setState({ loading: false, isLoggedIn: isLoggedIn });
     }
   }
   render() {
-    // getDrawerNavigator;
-    return <AppDrawerNavigator />;
+    if (!this.state.loading) {
+      const AppDrawerNavigator = getDrawerNavigator(this.state.isLoggedIn);
+      return <AppDrawerNavigator />;
+    }
+
+    //TODO hkurra we can show loading screen like splash screen here
+    return null;
   }
+
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    loadUserProfile: PropTypes.func
+  };
 }
 
-const mapStateToProps = state => ({
-  appDrawer: state.appDrawer,
-  userProfile: PropTypes.object
-});
+const mapStateToProps = state => {
+  console.log('state', state);
+  return {
+    appDrawer: state.appDrawer,
+    userProfile: state.entities.userProfile
+  };
+};
 
-export default connect(mapStateToProps)(AppDrawerNavigatorContainer);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      loadUserProfile,
+      loadTpos
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  AppDrawerNavigatorContainer
+);

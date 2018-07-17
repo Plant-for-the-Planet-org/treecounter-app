@@ -12,47 +12,64 @@ import styles from '../../styles/header.native';
 import BurgerMenu from '../../components/Header/BurgerMenu';
 import i18n from '../../locales/i18n.js';
 
-const baseNavigator = StackNavigator(
-  {
-    [getLocalRoute('app_login')]: {
-      screen: LoginContainer,
-      navigationOptions: ({ navigation }) => ({
-        headerLeft: BurgerMenu(navigation),
-        title: i18n.t('label.login')
-      })
+const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
+const headerLabels = {
+  [getLocalRoute('app_login')]: 'label.login',
+  [getLocalRoute('app_signup')]: 'label.signUp',
+  [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
+  [getLocalRoute('app_userHome')]: 'label.home',
+  [getLocalRoute('app_target')]: 'label.set_target'
+};
+
+export const getDrawerNavigator = function(isLoggedIn) {
+  const baseNavigator = StackNavigator(
+    {
+      [getLocalRoute('app_login')]: {
+        screen: LoginContainer
+      },
+      [getLocalRoute('app_target')]: {
+        screen: isLoggedIn ? TargetContainer : LoginContainer
+      },
+      [getLocalRoute('app_signup')]: {
+        screen: SignUpContainer
+      },
+      [getLocalRoute('app_userHome')]: {
+        screen: Trillion
+      },
+      [getLocalRoute('app_forgotPassword')]: {
+        screen: ForgotPasswordContainer
+      }
     },
-    [getLocalRoute('app_target')]: {
-      screen: TargetContainer
-    },
-    [getLocalRoute('app_signup')]: {
-      screen: SignUpContainer,
-      navigationOptions: () => ({
-        title: i18n.t('label.signUp')
-      })
-    },
-    [getLocalRoute('app_userHome')]: {
-      screen: Trillion
-    },
-    [getLocalRoute('app_forgotPassword')]: {
-      screen: ForgotPasswordContainer,
-      navigationOptions: () => ({
-        title: i18n.t('label.forgot_ur_password')
-      })
+    {
+      initialRouteName: isLoggedIn
+        ? getLocalRoute('app_userHome')
+        : getLocalRoute('app_login'),
+
+      navigationOptions: ({ navigation }) => {
+        console.log('navigation options', navigation);
+
+        let navigationConfig = {
+          headerStyle: styles.container,
+          headerTintColor: '#fff',
+          title: i18n.t(headerLabels[navigation.state.routeName])
+        };
+        if (homeRoutes.includes(navigation.state.routeName)) {
+          navigationConfig.headerLeft = BurgerMenu(navigation);
+        }
+
+        return navigationConfig;
+      }
     }
-  },
-  {
-    navigationOptions: ({ navigation }) => ({
-      headerStyle: styles.container,
-      headerTintColor: '#fff'
-    })
-  }
-);
-export const AppDrawerNavigator = DrawerNavigator(
-  {
-    Category: baseNavigator
-  },
-  {
-    gesturesEnabled: false,
-    contentComponent: SideMenuContainer
-  }
-);
+  );
+  const AppDrawerNavigator = DrawerNavigator(
+    {
+      Category: baseNavigator
+    },
+    {
+      gesturesEnabled: false,
+      contentComponent: SideMenuContainer
+    }
+  );
+
+  return AppDrawerNavigator;
+};

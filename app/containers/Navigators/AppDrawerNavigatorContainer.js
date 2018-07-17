@@ -7,26 +7,42 @@ import { drawerRootListener as addListener } from '../../helpers/reduxHelpers.na
 
 class AppDrawerNavigatorContainer extends Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    appDrawer: PropTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    const { userProfile } = this.props;
+    const isLoggedIn = null !== userProfile;
+    this.state = {
+      isLoggedIn: isLoggedIn
+    };
+  }
+
+  async componentWillMount() {
+    const { userProfile } = this.props;
+    const isLoggedIn = null !== userProfile;
+    if (isLoggedIn) {
+      this.setState({ isLoggedIn: true });
+    } else {
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.userProfile !== this.props.userProfile) {
+      let isLoggedIn = null !== nextProps.userProfile;
+      this.setState({ isLoggedIn: isLoggedIn });
+    }
+  }
   render() {
-    const { dispatch, appDrawer } = this.props;
-    return (
-      <AppDrawerNavigator
-        navigation={addNavigationHelpers({
-          dispatch,
-          state: appDrawer,
-          addListener
-        })}
-      />
-    );
+    // getDrawerNavigator;
+    return <AppDrawerNavigator />;
   }
 }
 
 const mapStateToProps = state => ({
-  appDrawer: state.appDrawer
+  appDrawer: state.appDrawer,
+  userProfile: PropTypes.object
 });
 
 export default connect(mapStateToProps)(AppDrawerNavigatorContainer);

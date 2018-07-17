@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
 
 import commonReducers from './commonReducers';
-import { appDrawerReducer } from './appDrawerReducer';
 
 const appReducer = combineReducers({
-  ...commonReducers,
-  appDrawer: appDrawerReducer
+  ...commonReducers
 });
 
 export default (state, action) => {

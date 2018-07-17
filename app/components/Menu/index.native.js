@@ -21,8 +21,8 @@ export default class Menu extends Component {
   //TODO hkurra
   //Ideally this should be in the container but for now to keep the same container for both web and app it's better to keep it here
   onPressMenu = item => {
-    const { dispatch } = this.props.navigation;
-    updateRoute(item.uri, dispatch, 0);
+    const { navigation } = this.props;
+    updateRoute(item.uri, navigation, 0);
   };
 
   render() {

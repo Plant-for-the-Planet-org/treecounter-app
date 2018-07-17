@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableHighlight } from 'react-native';
-import styles from '../../styles/donatetrees.native';
+import styles from '../../styles/selectplantproject';
 import i18n from '../../locales/i18n.js';
 
 import Slick from 'react-native-slick';
@@ -102,80 +102,45 @@ export default class SelectPlantProject extends Component {
   render() {
     let { featuredProjects } = this.state;
     return (
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.titleText}>{i18n.t('label.donateTrees')}</Text>
-          <View style={styles.titleTextUnderline} />
-        </View>
-        <View style={styles.cardContainer}>
-          <View style={styles.cardHeader}>
-            <Text style={styles.cardHeaderText}>
-              {i18n.t('label.featuredProjects')}
-            </Text>
+      <ScrollView>
+        <View style={styles.selectPlantProjectContainer}>
+          <View style={styles.header}>
+            <Text style={styles.titleText}>{i18n.t('label.donateTrees')}</Text>
+            <View style={styles.titleTextUnderline} />
           </View>
-          <View style={styles.cardContent}>
-            <Slick
-              style={styles.wrapper}
-              showsButtons={true}
-              dots={
-                <View
-                  style={{
-                    backgroundColor: 'rgba(0,0,0,.2)',
-                    width: 8,
-                    height: 8,
-                    top: 0,
-                    borderRadius: 4,
-                    marginLeft: 3,
-                    marginRight: 3,
-                    marginTop: 3,
-                    marginBottom: 3
-                  }}
-                  nextButton={
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        backgroundColor: '#ec6453',
-                        color: '#ec6453'
-                      }}
-                    >
-                      ›
-                    </Text>
-                  }
-                  prevButton={
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        backgroundColor: '#ec6453',
-                        color: '#ec6453'
-                      }}
-                    >
-                      ›
-                    </Text>
-                  }
-                />
-              }
-            >
-              {featuredProjects.length !== 0
-                ? featuredProjects.map(project => (
-                    <View key={project.id} style={styles.plantProjectContent}>
-                      <PlantProjectFull
-                        callExpanded={() => this.callExpanded()}
-                        expanded={false}
-                        plantProject={project}
-                        tpoName={project.tpo_name}
-                      />
-
-                      <PrimaryButton
-                        onClick={() =>
-                          this.onSelectClickedFeaturedProjects(project.id)
-                        }
-                      >
-                        {i18n.t('label.select_project')}
-                      </PrimaryButton>
-                    </View>
-                  ))
-                : null}
-            </Slick>
+          <View style={styles.cardContainer}>
+            <View style={styles.cardHeader}>
+              <Text style={styles.cardHeaderText}>
+                {i18n.t('label.featuredProjects')}
+              </Text>
+            </View>
+            <View style={styles.cardContent}>
+              <Slick style={styles.slickWrapper} height="100%">
+                {featuredProjects.length !== 0
+                  ? featuredProjects.map(project => (
+                      <View key={project.id} style={styles.plantProjectContent}>
+                        <View style={styles.plantProjectContentFull}>
+                          <PlantProjectFull
+                            callExpanded={() => this.callExpanded()}
+                            expanded={false}
+                            plantProject={project}
+                            tpoName={project.tpo_name}
+                          />
+                        </View>
+                        <View style={styles.plantProjectSelectButton}>
+                          <PrimaryButton
+                            onClick={() =>
+                              this.onSelectClickedFeaturedProjects(project.id)
+                            }
+                          >
+                            {i18n.t('label.select_project')}
+                          </PrimaryButton>
+                        </View>
+                      </View>
+                    ))
+                  : null}
+              </Slick>
+            </View>
           </View>
         </View>
       </ScrollView>

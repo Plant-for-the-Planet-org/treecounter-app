@@ -126,6 +126,8 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
   },
   project_specs__item: {
     paddingTop: 5,
+    paddingRight: 15,
+    paddingLeft: 5,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },

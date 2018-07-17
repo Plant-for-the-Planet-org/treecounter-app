@@ -14,15 +14,10 @@ class ForgotPasswordContainer extends React.Component {
   }
 
   onPress = () => {
-    // let result = this.refs.forgotPasswordForm.validate();
-    // if (result.isValid()) {
     let value = this.refs.forgotPasswordContainer.refs.forgotPasswordForm.getValue();
     if (value) {
       this.onClick(value);
     }
-    // } else if (this.props.onError) {
-    //   this.props.onError(result.errors);
-    // }
   };
 
   onClick(value) {
@@ -34,7 +29,9 @@ class ForgotPasswordContainer extends React.Component {
       <ForgotPassword
         ref="forgotPasswordContainer"
         onResetPassword={this.onPress}
-        updateRoute={this.props.route}
+        updateRoute={(routeName, id) =>
+          this.props.route(routeName, id, this.props.navigation)
+        }
       />
     );
   }
@@ -44,7 +41,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       forgot_password,
-      route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
+      route: (routeName, id, navigation) => dispatch =>
+        updateRoute(routeName, navigation || dispatch, id)
     },
     dispatch
   );

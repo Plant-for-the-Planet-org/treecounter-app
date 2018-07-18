@@ -5,7 +5,7 @@ import { View, Text, Image } from 'react-native';
 const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
   return (
     <View style={styles.project_specs__item}>
-      <Text>{label}</Text>
+      <Text style={styles.project_specs__itemText}>{label}</Text>
       <Text>{value}</Text>
     </View>
   );

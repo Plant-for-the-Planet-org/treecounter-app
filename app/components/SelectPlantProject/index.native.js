@@ -115,7 +115,34 @@ export default class SelectPlantProject extends Component {
               </Text>
             </View>
             <View style={styles.cardContent}>
-              <Slick style={styles.slickWrapper} height="100%">
+              <Slick
+                style={styles.slickWrapper}
+                //  buttonWrapperStyle={styles.tpoFooterNavImage}
+                nextButton={<Text style={styles.tpoFooterNavImageLeft}>›</Text>}
+                prevButton={
+                  <Text style={styles.tpoFooterNavImageRight}>‹</Text>
+                }
+                dot={
+                  <View
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 50,
+                      elevation: 5,
+                      backgroundColor: 'black',
+                      width: 8,
+                      height: 8,
+                      borderRadius: 4,
+                      marginLeft: 3,
+                      marginRight: 3,
+                      marginTop: 3,
+                      marginBottom: 3
+                    }}
+                  />
+                }
+                showButtons={true}
+                height="100%"
+              >
                 {featuredProjects.length !== 0
                   ? featuredProjects.map(project => (
                       <View key={project.id} style={styles.plantProjectContent}>

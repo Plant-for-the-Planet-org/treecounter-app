@@ -16,7 +16,7 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
     fontSize: 29.5,
     color: '#575756',
     fontWeight: 'bold',
-    paddingBottom: 10,
+    paddingBottom: 5,
     textAlign: 'center'
   },
   plantProjectContent: {
@@ -44,13 +44,9 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
     justifyContent: 'center'
   },
   cardContainer: {
-    borderWidth: 6,
-    borderRadius: 3,
-    borderColor: '#f0f0f0',
-    paddingTop: 10,
-    paddingBottom: 10,
     height: '90%',
-    width: '100%'
+    width: '100%',
+    marginLeft: 12
   },
 
   cardHeader: {
@@ -61,7 +57,13 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
   cardContent: {
     height: '90%',
     width: '100%',
-    paddingRight: 10
+    justifyContent: 'center',
+    borderRadius: 10,
+    backgroundColor: 'white',
+    padding: 10,
+    shadowOffset: { width: 0, height: 4 },
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowRadius: 12
   },
 
   cardHeaderText: {
@@ -76,21 +78,42 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
     height: '100%'
     // width: '100%'
   },
-  nextButtonText: {
-    fontSize: 12,
-    backgroundColor: '#ec6453',
-    color: '#ec6453'
+  tpoFooterNavImage: {
+    position: 'absolute',
+    height: 30,
+    width: 30,
+    color: 'transparent',
+    padding: 0,
+    top: '50%'
+  },
+  tpoFooterNavImageLeft: {
+    // left: '-55',
+    // position: 'absolute',
+    // height: 30,
+    // width: 30,
+    color: 'black'
+    // padding: 0,
+    // top: '50%'
+  },
+  tpoFooterNavImageRight: {
+    // left: '-55',
+    // position: 'absolute',
+    // height: 30,
+    // width: 30,
+    color: 'black'
+    // padding: 0,
+    // top: '50%'
   },
   projectFullContainer: {
-    width: '100%',
+    // width: '100%',
     height: '100%'
   },
   project_teaser__container: {
-    height: '50%',
-    width: '100%'
+    height: '50%'
+    //width: '100%'
   },
   project_teaser__content: {
-    width: '100%',
+    //width: '100%',
     height: '30%'
   },
   column: {
@@ -113,18 +136,25 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
   },
 
   project_specs__container: {
-    width: '100%',
+    // width: '100%',
     height: '100%'
   },
   project_info: {
-    width: '100%',
+    // width: '100%',
+    width: 350,
     height: '50%'
   },
   project_specs__taxdeductible: {
-    width: '100%',
+    //width: '100%',
+    width: 300,
     height: '50%'
   },
+  project_specs__taxdeductibleText: {
+    width: 300,
+    paddingRight: 10
+  },
   project_specs__item: {
+    width: 350,
     paddingTop: 5,
     paddingRight: 15,
     paddingLeft: 5,

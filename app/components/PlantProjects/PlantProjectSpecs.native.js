@@ -56,7 +56,7 @@ const PlantProjectSpecs = ({
           label={i18n.t('label.Cost')}
         /> */}
         <View style={styles.project_specs__taxdeductible}>
-          <Text>
+          <Text style={styles.project_specs__taxdeductibleText}>
             {taxDeduction && taxDeduction.length
               ? i18n.t('label.tax_deductible') +
                 ' ' +

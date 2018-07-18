@@ -1,7 +1,7 @@
 import schemaLiform from '../formSchemas/login';
-import parseJsonToTcomb from '../parserLiformToTcomb';
+import callParser from '../callParser';
 
-const { transformedSchema: loginFormSchema, schemaOptions } = parseJsonToTcomb(
+const { transformedSchema: loginFormSchema, schemaOptions } = callParser(
   schemaLiform
 );
 export { schemaOptions, loginFormSchema };

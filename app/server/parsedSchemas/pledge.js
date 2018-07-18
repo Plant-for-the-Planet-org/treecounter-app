@@ -1,9 +1,9 @@
 import schemaLiform from '../formSchemas/pledge';
-import parseJsonToTcomb from '../parserLiformToTcomb';
+import callParser from '../callParser';
 
 const {
   transformedSchema: pledgeFormSchema,
   schemaOptions: pledgeSchemaOptions
-} = parseJsonToTcomb(schemaLiform);
+} = callParser(schemaLiform);
 
 export { pledgeFormSchema, pledgeSchemaOptions };

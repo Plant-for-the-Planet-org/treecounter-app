@@ -52,5 +52,6 @@ export default connect(null, mapDispatchToProps)(ForgotPasswordContainer);
 
 ForgotPasswordContainer.propTypes = {
   forgot_password: PropTypes.func,
-  route: PropTypes.func
+  route: PropTypes.func,
+  navigation: PropTypes.object.isRequired
 };

@@ -4,8 +4,9 @@ import MenuGroup, { MenuItem } from './MenuItem.native';
 import PropTypes, { func } from 'prop-types';
 import styles from '../../styles/menu';
 import { updateRoute } from '../../helpers/routerHelper';
-import { SideMenuImage, close_green } from '../../assets';
+import { close_green } from '../../assets';
 import i18n from '../../locales/i18n.js';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 export default class Menu extends Component {
   static propTypes = {
@@ -38,6 +39,13 @@ export default class Menu extends Component {
               this.props.logoutUser();
             }}
             title={i18n.t('label.logout')}
+            iconUrl={close_green}
+          />
+          <MenuItem
+            onPress={() => {
+              this.onPressMenu({ uri: getLocalRoute('app_faq') });
+            }}
+            title={i18n.t('label.faqs')}
             iconUrl={close_green}
           />
         </ScrollView>

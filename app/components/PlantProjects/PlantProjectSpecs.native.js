@@ -28,23 +28,23 @@ const PlantProjectSpecs = ({
     <View style={styles.project_specs__container}>
       <View style={styles.project_info}>
         <PlantProjectSpecsItem
-          icon="../../assets/images/icons/location.png"
+          icon={locationIcon}
           value={location}
           label={i18n.t('label.location')}
         />
         <PlantProjectSpecsItem
-          icon="../../assets/images/icons/planted_target.png"
+          icon={plantedTarget}
           value={countPlanted}
           label={i18n.t('label.planted')}
         />
-        {/* <PlantProjectSpecsItem
+        <PlantProjectSpecsItem
           icon={target}
           value={countTarget}
           label={i18n.t('label.target')}
-        /> */}
+        />
       </View>
-      <View style={styles.plants_info}>
-        {/* <PlantProjectSpecsItem
+      <View style={styles.project_info}>
+        <PlantProjectSpecsItem
           icon={tree_survival}
           value={survivalRate}
           rightIcon={questionmark_orange}
@@ -54,15 +54,16 @@ const PlantProjectSpecs = ({
           icon={dollar}
           value={`${currency} ${treeCost}`}
           label={i18n.t('label.Cost')}
-        /> */}
+        />
         <View style={styles.project_specs__taxdeductible}>
           <Text style={styles.project_specs__taxdeductibleText}>
             {taxDeduction && taxDeduction.length
-              ? i18n.t('label.tax_deductible') +
-                ' ' +
-                i18n.t('label.in') +
-                ' ' +
-                taxDeduction.join(', ')
+              ? i18n.t('label.tax_deductible') + ' ' + i18n.t('label.in') + ' '
+              : null}
+          </Text>
+          <Text style={styles.project_specs__taxdeductibleText}>
+            {taxDeduction && taxDeduction.length
+              ? taxDeduction.join(', ')
               : null}
           </Text>
         </View>

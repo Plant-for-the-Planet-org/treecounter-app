@@ -19,7 +19,8 @@ const headerLabels = {
   [getLocalRoute('app_signup')]: 'label.signUp',
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_userHome')]: 'label.home',
-  [getLocalRoute('app_target')]: 'label.set_target'
+  [getLocalRoute('app_target')]: 'label.set_target',
+  [getLocalRoute('app_donateTrees')]: 'label.donateTrees'
 };
 
 export const getDrawerNavigator = function(isLoggedIn) {
@@ -33,6 +34,9 @@ export const getDrawerNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
+      },
+      [getLocalRoute('app_donateTrees')]: {
+        screen: DonateTrees
       },
       [getLocalRoute('app_userHome')]: {
         screen: Trillion

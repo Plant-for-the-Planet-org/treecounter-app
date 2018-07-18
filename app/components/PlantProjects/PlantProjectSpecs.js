@@ -31,8 +31,7 @@ const PlantProjectSpecs = ({
           value={location}
           label={i18n.t('label.location')}
         />
-        <PlantP
-          rojectSpecsItem
+        <PlantProjectSpecsItem
           icon={plantedTarget}
           value={countPlanted}
           label={i18n.t('label.planted')}

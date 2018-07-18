@@ -118,29 +118,49 @@ export default class SelectPlantProject extends Component {
               <Slick
                 style={styles.slickWrapper}
                 //  buttonWrapperStyle={styles.tpoFooterNavImage}
-                nextButton={<Text style={styles.tpoFooterNavImageLeft}>›</Text>}
-                prevButton={
-                  <Text style={styles.tpoFooterNavImageRight}>‹</Text>
-                }
-                dot={
-                  <View
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 50,
-                      elevation: 5,
-                      backgroundColor: 'black',
-                      width: 8,
-                      height: 8,
-                      borderRadius: 4,
-                      marginLeft: 3,
-                      marginRight: 3,
-                      marginTop: 3,
-                      marginBottom: 3
-                    }}
-                  />
-                }
                 showButtons={true}
+                nextButton={
+                  <View style={styles.tpoFooterNavImageLeft}>
+                    <Text>›</Text>
+                  </View>
+                }
+                prevButton={
+                  <View style={styles.tpoFooterNavImageRight}>
+                    <Text>‹</Text>
+                  </View>
+                }
+                dotStyle={{
+                  position: 'absolute',
+                  top: -463,
+                  left: 180,
+                  right: 150,
+
+                  elevation: 5,
+
+                  width: 8,
+                  height: 8,
+                  borderRadius: 4,
+                  marginLeft: 3,
+                  marginRight: 3,
+                  marginTop: 3,
+                  marginBottom: 3
+                }}
+                activeDotStyle={{
+                  position: 'absolute',
+                  top: -463,
+                  left: 150,
+                  right: 150,
+
+                  elevation: 5,
+
+                  width: 8,
+                  height: 8,
+                  borderRadius: 4,
+                  marginLeft: 3,
+                  marginRight: 3,
+                  marginTop: 3,
+                  marginBottom: 3
+                }}
                 height="100%"
               >
                 {featuredProjects.length !== 0

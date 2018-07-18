@@ -9,6 +9,9 @@ export default (donateTreesStyles = EStyleSheet.create({
     color: '$primary',
     textAlign: 'left'
   },
+  collapsedText: {
+    color: '#ec6453'
+  },
 
   expanded: {
     borderLeftWidth: 2,

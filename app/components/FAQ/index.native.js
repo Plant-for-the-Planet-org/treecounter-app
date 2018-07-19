@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Accordion from 'react-native-collapsible/Accordion';
 import HTMLView from 'react-native-htmlview';
+import { foldin, foldout } from '../../assets';
 import {
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Linking
+  Image
 } from 'react-native';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 
@@ -19,20 +20,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF'
   },
   header: {
+    flexDirection: 'row',
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
     backgroundColor: '#fff',
-    padding: 10,
+    alignItems: 'center',
+    padding: 12,
     marginTop: 8,
     marginLeft: 8,
-    marginRight: 8
+    marginRight: 8,
+    justifyContent: 'space-between'
   },
   headerText: {
     textAlign: 'center',
     fontSize: 16,
     fontWeight: '500',
     textAlign: 'left',
-    color: '#686060'
+    color: '#686060',
+    flex: 1
   },
   content: {
     borderBottomLeftRadius: 5,
@@ -43,6 +48,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff'
   },
+  imageStyle: {
+    width: 17,
+    height: 18,
+    resizeMode: 'center'
+  },
 
   a: {
     fontWeight: '300',
@@ -51,10 +61,12 @@ const styles = StyleSheet.create({
   p: { color: '#938989' }
 });
 export default class FAQ extends Component {
-  _renderHeader(section) {
+  _renderHeader(section, index, isActive) {
+    console.log('_renderHeader', index, isActive);
     return (
       <View style={styles.header}>
         <Text style={styles.headerText}>{section.question}</Text>
+        <Image style={styles.imageStyle} source={isActive ? foldin : foldout} />
       </View>
     );
   }

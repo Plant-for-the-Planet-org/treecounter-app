@@ -9,10 +9,10 @@ const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
         {icon ? <Image style={styles.spec_icon} source={icon} /> : null}
       </Text>
       <View style={styles.project_specs__itemText}>
-        <Text>{label}</Text>
+        <Text style={{ textAlign: 'left' }}>{label}</Text>
       </View>
       <View style={styles.project_specs__itemText}>
-        <Text>{value}</Text>
+        <Text style={{ textAlign: 'right' }}>{value}</Text>
       </View>
     </View>
   );

@@ -3,6 +3,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default (donateTreesStyles = EStyleSheet.create({
   see_more_toggle__container: {
     marginBottom: 20,
+    marginTop: 10,
     height: 20
   },
   expandedText: {

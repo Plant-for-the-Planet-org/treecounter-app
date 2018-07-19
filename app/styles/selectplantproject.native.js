@@ -91,7 +91,6 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
     position: 'absolute',
     height: 30,
     width: 30,
-    color: 'black',
     padding: 0,
     top: -500,
     elevation: 1
@@ -101,21 +100,23 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
     position: 'absolute',
     height: 30,
     width: 30,
-    color: 'black',
     padding: 0,
     top: -500,
     elevation: 1
   },
   projectFullContainer: {
-    // width: '100%',
+    width: '100%',
     height: '100%'
   },
+  seeMoreContainer: {
+    alignSelf: 'center'
+  },
   project_teaser__container: {
-    height: '50%'
-    //width: '100%'
+    height: '50%',
+    width: '100%'
   },
   project_teaser__content: {
-    //width: '100%',
+    width: '100%',
     height: '30%'
   },
   column: {
@@ -126,9 +127,13 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
   teaser__tpoName: {
     height: '50%'
   },
+  teaser__projectImageContainer: {
+    width: 350,
+    height: '70%'
+  },
   teaser__projectImage: {
     width: '100%',
-    height: '70%',
+    height: '100%',
     resizeMode: 'contain'
   },
 
@@ -148,12 +153,14 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
     height: '50%'
   },
   project_specs__taxdeductible: {
-    //width: '100%',
+    width: '100%',
     width: 300,
-    flex: 1
+    flex: 1,
+    marginTop: 10
   },
   project_specs__taxdeductibleText: {
     width: 280,
+    marginTop: 10,
     marginRight: 10,
     fontSize: 5
   },
@@ -170,16 +177,15 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
   },
   project_specs__itemText: {
     flex: 5,
-    alignSelf: 'flex-end',
-    alignContent: 'flex-end'
+    justifyContent: 'flex-end'
   },
   spec_icon__container: {
-    height: 20,
-    width: 20,
+    height: 15,
+    width: 15,
     flex: 1
   },
   spec_icon: {
-    height: 20,
-    width: 20
+    height: 15,
+    width: 15
   }
 }));

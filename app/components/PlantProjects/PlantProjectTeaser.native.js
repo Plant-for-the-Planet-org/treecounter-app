@@ -34,12 +34,14 @@ const PlantProjectTeaser = ({
         </Text>
       </View>
       {projectImage ? (
-        <Image
-          style={styles.teaser__projectImage}
-          source={{
-            uri: getImageUrl('project', 'large', projectImage.image)
-          }}
-        />
+        <View style={styles.teaser__projectImageContainer}>
+          <Image
+            style={styles.teaser__projectImage}
+            source={{
+              uri: getImageUrl('project', 'large', projectImage.image)
+            }}
+          />
+        </View>
       ) : null}
     </View>
   );

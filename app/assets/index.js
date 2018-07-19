@@ -81,6 +81,8 @@ import map_legend_Restoration from './images/Legend_Restoration.png';
 import map_legend_Trees from './images/Legend_Trees.png';
 import map_legend_TreeDensity from './images/Legend_TreeDensity.png';
 import burgur_menu_icon from './images/icons/menu-icon.jpg';
+import foldin from './images/icons/foldin.png';
+import foldout from './images/icons/foldout.png';
 
 export {
   bmzLogo,
@@ -164,5 +166,7 @@ export {
   map_legend_Restoration,
   map_legend_Trees,
   map_legend_TreeDensity,
-  burgur_menu_icon
+  burgur_menu_icon,
+  foldin,
+  foldout
 };

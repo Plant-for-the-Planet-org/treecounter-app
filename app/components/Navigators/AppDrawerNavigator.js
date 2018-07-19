@@ -11,6 +11,7 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import styles from '../../styles/header.native';
 import BurgerMenu from '../../components/Header/BurgerMenu';
 import i18n from '../../locales/i18n.js';
+import FAQContainer from '../../containers/FAQ';
 
 const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
 const headerLabels = {
@@ -18,7 +19,8 @@ const headerLabels = {
   [getLocalRoute('app_signup')]: 'label.signUp',
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_userHome')]: 'label.home',
-  [getLocalRoute('app_target')]: 'label.set_target'
+  [getLocalRoute('app_target')]: 'label.set_target',
+  [getLocalRoute('app_faq')]: 'label.faqs'
 };
 
 export const getDrawerNavigator = function(isLoggedIn) {
@@ -38,7 +40,8 @@ export const getDrawerNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
-      }
+      },
+      [getLocalRoute('app_faq')]: FAQContainer
     },
     {
       initialRouteName: isLoggedIn

@@ -52,7 +52,10 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
   cardHeader: {
     height: '10%',
     width: '100%',
-    backgroundColor: '$primary'
+    backgroundColor: '$primary',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   cardContent: {
     height: '90%',

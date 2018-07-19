@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 import { StyleSheet, View, Animated, TouchableOpacity } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
+import {
+  receiptIndividualFormSchema,
+  receiptCompanyFormSchema,
+  companySchemaOptions,
+  individualSchemaOptions
+} from '../../server/parsedSchemas/donateTrees';
+
 import i18n from '../../locales/i18n.js';
 
 let Form = t.form.Form;
-
-const FirstRoute = () => (
-  <View style={[styles.container, { backgroundColor: '#ffffff' }]} />
-);
-const SecondRoute = () => (
-  <View style={[styles.container, { backgroundColor: '#ffffff' }]} />
-);
 
 export default class DonateTrees extends Component {
   state = {
@@ -52,8 +52,8 @@ export default class DonateTrees extends Component {
   };
 
   _renderScene = SceneMap({
-    individual: FirstRoute,
-    company: SecondRoute
+    individual: individualForm,
+    company: companyForm
   });
 
   render() {
@@ -64,6 +64,34 @@ export default class DonateTrees extends Component {
         renderTabBar={this._renderTabBar}
         onIndexChange={this._handleIndexChange}
       />
+    );
+  }
+}
+
+class individualForm extends Component {
+  render() {
+    return (
+      <View style={{ backgroundColor: '#ffffff' }}>
+        <Form
+          ref={'donorDetailsForm'}
+          type={receiptIndividualFormSchema}
+          options={individualSchemaOptions}
+        />
+      </View>
+    );
+  }
+}
+
+class companyForm extends Component {
+  render() {
+    return (
+      <View style={{ backgroundColor: '#ffffff' }}>
+        <Form
+          ref={'donorDetailsForm'}
+          type={receiptCompanyFormSchema}
+          options={companySchemaOptions}
+        />
+      </View>
     );
   }
 }

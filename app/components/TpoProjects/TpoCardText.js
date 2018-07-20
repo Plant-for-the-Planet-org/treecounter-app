@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import * as constants from '../../SupportedLanguages/en';
+import i18n from '../../locales/i18n.js';
 
 const TpoCardText = props => {
   const { name, tponame, cardtext } = props;
@@ -15,36 +14,30 @@ const TpoCardText = props => {
       />
       <p className="name_tag">{cardtext.region}</p>
       <div className="middle_tag">
-        <span className="col-md-8 text-left">
-          {constants.formStrings.planted}:{' '}
-        </span>{' '}
-        <span className="col-md-4 text-right">{cardtext.count_planted}</span>
+        <span className="col-md-8 text-left">{i18n.t('label.planted')}: </span>{' '}
+        <span className="col-md-4 text-right">{cardtext.countPlanted}</span>
+      </div>
+      <div className="middle_tag">
+        <span className="col-md-8 text-left">{i18n.t('label.target')}:</span>{' '}
+        <span className="text-right col-md-4">{cardtext.countTarget}</span>
       </div>
       <div className="middle_tag">
         <span className="col-md-8 text-left">
-          {constants.formStrings.target}:
+          {i18n.t('label.survival_rate')}:
         </span>{' '}
-        <span className="text-right col-md-4">{cardtext.count_target}</span>
+        <span className="text-right col-md-4">{cardtext.survivalRate}</span>
       </div>
       <div className="middle_tag">
-        <span className="col-md-8 text-left">
-          {constants.formStrings.survival_rate}:
-        </span>{' '}
-        <span className="text-right col-md-4">{cardtext.survival_rate}</span>
-      </div>
-      <div className="middle_tag">
-        <span className="col-md-8 text-left">
-          {constants.formStrings.certified}:
-        </span>{' '}
+        <span className="col-md-8 text-left">{i18n.t('label.certified')}:</span>{' '}
         <span className="text-right col-md-4">
-          {cardtext.is_certified ? 'Certified' : 'Not-Certified'}
+          {cardtext.isCertified
+            ? i18n.t('label.certified')
+            : i18n.t('label.nonCertified')}
         </span>
       </div>
       <div className="middle_tag1">
-        <span className="col-md-8 text-left">
-          {constants.formStrings.Cost}:
-        </span>{' '}
-        <span className="text-right col-md-4">{cardtext.tree_cost}</span>
+        <span className="col-md-8 text-left">{i18n.t('label.Cost')}:</span>{' '}
+        <span className="text-right col-md-4">{cardtext.treeCost}</span>
       </div>
     </div>
   );

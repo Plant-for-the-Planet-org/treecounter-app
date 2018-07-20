@@ -1,9 +1,15 @@
 import { combineReducers } from 'redux';
 
 import commonReducers from './commonReducers';
-import { appDrawerReducer } from './appDrawerReducer';
 
-export default combineReducers({
-  ...commonReducers,
-  appDrawer: appDrawerReducer
+const appReducer = combineReducers({
+  ...commonReducers
 });
+
+export default (state, action) => {
+  if (action.type === 'USER_LOGOUT') {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};

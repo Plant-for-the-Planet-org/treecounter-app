@@ -14,7 +14,9 @@ module.exports = webpackMerge(commonConfig, {
   devServer: {
     inline: true,
     port: 8080,
-    historyApiFallback: true
+    historyApiFallback: true,
+    disableHostCheck: true,
+    host: '0.0.0.0'
   },
   plugins: [
     new webpack.DefinePlugin({

@@ -3,14 +3,11 @@ import ReactDOM from 'react-dom';
 
 import '../../sass/treecounter.scss';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug/index';
 // import TargetComment from '../TreecounterGraphics/TargetComment';
 // import PlantDetails from '../TreecounterGraphics/PlantDetails';
 
 export default class SvgContainer extends Component {
   constructor(props) {
-    debug('constructing SvgContainer with props: ', props);
-    console.log('########## constructor');
     super(props);
     const { exposeMissing } = this.props;
 
@@ -40,17 +37,7 @@ export default class SvgContainer extends Component {
     this.renderedTreeIds = [];
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('########## shouldComponentUpdate');
-    console.log(nextProps, nextState);
-    console.log(this.props, this.state);
-
-    return true;
-  }
-
   componentWillReceiveProps(nextProps) {
-    console.log('########## componentWillReceiveProps');
-
     if (!nextProps.id) {
       return;
     }
@@ -100,11 +87,62 @@ export default class SvgContainer extends Component {
     this.renderSections(sectionTrees, values, total); // sectionTrees = { planted: ['23', '24', ... ], community: ['12','13,'18',...]}
   }
 
+  componentDidMount() {
+    let props = this.props;
+
+    if (!props.id) {
+      return;
+    }
+
+    const total = Math.max(props.target, props.planted);
+    const values = { planted: props.planted, target: total };
+
+    this.renderReset();
+
+    //------------------------------------------------------------------------------------------------------------------
+    // build a map with all SVG d-attributes indexed by treeId
+    const prefix = 't-stem-';
+    let svgMap = {};
+    this.getAllTreeIds().map(function(treeId) {
+      svgMap[treeId] = ReactDOM.findDOMNode(
+        this.refs[prefix + treeId]
+      ).getAttribute('d');
+    }, this);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // determine for each section's tree value the range of angles in degrees of a 360° circle
+    const sectionAngleDegreeRanges = this.getSectionAngleRanges(
+      this.sections,
+      values,
+      total,
+      360
+    );
+
+    //------------------------------------------------------------------------------------------------------------------
+    // get section name for each treeId
+    const treeSectionNames = Object.values(svgMap) // treeId => SVG::d
+      .map(this.determineAngle({ x: 425, y: 0 }, { x: 425, y: 425 })) // SVG::d => angle
+      .map(this.getSectionNameForAngle(sectionAngleDegreeRanges)); // angle => sectionName
+
+    const treeIds = Object.keys(svgMap);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // group all treeIds by sectionName
+    const sectionTrees = {};
+    treeSectionNames.map(function(sectionName, idx) {
+      if (!sectionTrees[sectionName]) {
+        sectionTrees[sectionName] = [];
+      }
+      sectionTrees[sectionName].push(treeIds[idx]);
+    });
+
+    this.renderSections(sectionTrees, values, total);
+  }
+
   //********************************************************************************************************************
   // RESET
   //********************************************************************************************************************
   renderReset() {
-    console.log('##### renderSections');
     //------------------------------------------------------------------------------------------------------------------
     // define class names for all trees and pots, set all trees visible, pots hidden
     this.getAllTreeIds().map(function(treeId) {
@@ -132,7 +170,6 @@ export default class SvgContainer extends Component {
   // RENDER Tees/Pots
   //********************************************************************************************************************
   renderSections(sectionTrees, values, total) {
-    console.log('##### renderSections');
     const maxTicks = 125;
     const maxAngleLength = 1477;
     const interval = 30;
@@ -214,13 +251,6 @@ export default class SvgContainer extends Component {
   }
 
   getSectionAngleRanges(sectionConfig, values, total, maxAngle) {
-    console.log(
-      'sectionConfig, values, total, maxAngle',
-      sectionConfig,
-      values,
-      total,
-      maxAngle
-    );
     const sectionAngleRanges = new Map();
     let currentMax = 0;
     Object.keys(sectionConfig).map(

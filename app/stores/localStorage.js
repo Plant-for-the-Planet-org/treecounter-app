@@ -34,5 +34,7 @@ export const fetchItem = key => {
 };
 
 export const clearStorage = () => {
+  const sessionId = window.localStorage.getItem('session_id');
   window.localStorage.clear();
+  window.localStorage.setItem('session_id', sessionId);
 };

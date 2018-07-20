@@ -1,0 +1,216 @@
+.edit-user-profile__container {
+  .separator {
+    width: 100%;
+    height: 6px;
+    background-color: #f6f6f6;
+    margin-top: 21px;
+    margin-bottom: 25px;
+  }
+  .pftp-button-primary {
+    width: auto;
+    margin: auto;
+    min-width: 266px;
+  }
+  .navigate-button {
+    width: auto;
+    font-size: 24px;
+    min-width: 266px;
+    border: none;
+    border-radius: 7px;
+  }
+  .tComb-template-form-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 20px;
+    column-gap: 54px;
+    align-self: normal;
+  }
+  .delete-profile__button {
+    margin-bottom: 117px;
+    margin-top: 70px;
+  }
+  .edit-profile__form-group {
+    @extend .pftp-card-layout;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 718px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 28px 45px 41px;
+  }
+  .user-profile__form-group {
+    @extend .edit-profile__form-group;
+    .profile-image__container {
+      margin-bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .form-group__heading {
+      @extend .pftp-text-basic;
+      font-size: 16px;
+      text-align: left;
+      color: #b7d37f;
+      align-self: flex-start;
+      padding-left: 6px;
+      margin-bottom: 20px;
+    }
+    .tComb-template__profile-form {
+      @extend .tComb-template-form-group;
+      select {
+        font-size: 14px !important;
+      }
+      textarea input {
+        font-size: 16px !important;
+      }
+    }
+    .tComb-template__about-me-form {
+      @extend .tComb-template-form-group;
+      column-gap: 82px;
+      textarea {
+        height: 75px !important;
+      }
+    }
+    .tComb-template__password-form {
+      @extend .tComb-template-form-group;
+      column-gap: 211px;
+    }
+  }
+  .plant-project__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 718px;
+    box-sizing: border-box;
+    .pftp-addbutton {
+      align-self: flex-start;
+      button {
+        font-size: 16px;
+      }
+    }
+    .user-profile__project-form-group {
+      // .fieldset-depth-1 {
+      margin: 30px;
+      width: 100%;
+
+      .plant-project__item {
+        @extend .user-profile__form-group;
+        padding: 27px 25px 21px;
+        select {
+          font-size: 14px !important;
+        }
+        input {
+          font-size: 16px !important;
+        }
+        textarea {
+          height: 75px !important;
+          font-size: 16px !important;
+        }
+        margin: 0 0 30px 0;
+        .item-header {
+          @extend .form-group__heading;
+          content: "Project" counter(div);
+          font-size: 16px;
+          text-align: left;
+          color: #b7d37f;
+          align-self: flex-start;
+          padding-left: 6px;
+          margin-bottom: 20px;
+        }
+        .project-sub-item {
+          align-self: flex-start;
+          width: 100%;
+          .sub-item-header {
+            @extend .form-group__heading;
+            color: #696261;
+            margin-bottom: 21px;
+          }
+          .image-gallery-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            .fieldset {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: center;
+            }
+          }
+        }
+        .project-teaser {
+          .project-teaser-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            column-gap: 20px;
+            @include for-phone-only {
+              grid-template-columns: auto;
+            }
+          }
+        }
+        .delete-project {
+          @extend .pftp-text-basic;
+          margin-top: 32px;
+          font-size: 16px;
+          text-align: center;
+          color: $colorPrimaryAccentLight;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  // }
+}
+
+@media only screen and (max-width: $breakpointTablet) {
+  .edit-user-profile__container {
+    .tComb-template-form-group {
+      grid-template-columns: 1fr;
+    }
+    .edit-profile__form-group {
+      max-width: 650px;
+    }
+    .user-profile__project-form-group {
+      max-width: 650px;
+    }
+  }
+}
+
+.modal-container {
+  img {
+    height: 48px;
+    width: 48px;
+  }
+
+  .pftp-button-primary {
+    width: auto;
+    margin: auto;
+    min-width: 266px;
+    margin-top: 59px;
+  }
+  .message {
+    @extend .pftp-text-basic;
+    font-size: 16px;
+    line-height: 1.44;
+    letter-spacing: -0.2px;
+    text-align: center;
+    color: $headerTextColor;
+    max-width: 310px;
+  }
+  .confirm-message {
+    @extend .message;
+    font-weight: bold;
+  }
+  .navigate-button {
+    width: auto;
+    font-size: 24px;
+    min-width: 266px;
+    border: none;
+    border-radius: 7px;
+  }
+}

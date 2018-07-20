@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import NumberToWords from 'number-to-words';
 
-import {
-  trillionTreeMessage1,
-  trillionTreeMessage2
-} from '../../constants/strings';
 import { trillionCampaign } from '../../actions/trillionAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
+import TreecounterGraphicsText from './TreecounterGraphicsText';
+import SecondaryAccentButton from '../Common/Button/SecondaryAccentButton';
+import ButtonHeading from '../Common/Heading/ButtonHeading';
+import { updateRoute } from '../../helpers/routerHelper';
+import TextHeading from '../Common/Heading/TextHeading';
+import TextBlock from '../Common/Text/TextBlock';
+import i18n from '../../locales/i18n.js';
+import { esriLogo, bmzLogo } from '../../assets';
 
 class Trillion extends Component {
   constructor() {
@@ -25,78 +28,77 @@ class Trillion extends Component {
         this.setState({
           svgData: {
             id: 1,
-            target: data.count_target,
-            planted: data.count_planted,
-            community: data.count_community,
-            personal: data.count_personal
+            target: data.countTarget,
+            planted: data.countPlanted,
+            community: data.countCommunity,
+            personal: data.countPersonal
           },
-          displayName: data.display_name,
+          displayName: data.displayName,
           loading: false
         });
-        console.log('Success: ', data);
       })
       .catch(error => console.log(error));
   }
-  shouldComponentUpdate() {
-    this.forceUpdate();
-    return true;
-  }
 
-  getTwoWordString(sentence) {
-    return sentence
-      .split(' ')
-      .slice(0, 2)
-      .join(' ')
-      .replace(/,/g, '');
+  shouldComponentUpdate() {
+    return true;
   }
 
   render() {
     return this.state.loading ? (
-      <LoadingIndicator />
+      <div className="sidenav-wrapper">
+        <LoadingIndicator />
+      </div>
     ) : (
-      <div className="trillion-container sidenav-wrapper">
-        <h3>{this.state.displayName}</h3>
-        <h5>{trillionTreeMessage1}</h5>
-        <h5>{trillionTreeMessage2}</h5>
+      <div className="sidenav-wrapper">
+        <TextHeading>
+          {this.state.displayName}
+          <TextBlock>{i18n.t('label.trillionTreeMessage1')}</TextBlock>
+          <TextBlock>{i18n.t('label.trillionTreeMessage2')}</TextBlock>
+          <ButtonHeading>
+            <SecondaryAccentButton onClick={updateRoute.bind(this, 'app_faq')}>
+              {i18n.t('label.faqs')}
+            </SecondaryAccentButton>
+          </ButtonHeading>
+        </TextHeading>
+        <TextBlock>Trillion Tree Events today</TextBlock>
+        <div className="events_row">
+          <div
+            className="event_item"
+            onClick={() =>
+              updateRoute('app_pledge', null, null, {
+                eventSlug: 'esri-user-conference'
+              })
+            }
+          >
+            <img src={esriLogo} />
+            <TextBlock>User Conference</TextBlock>
+          </div>
+          {/* <div
+            className="event_item"
+            onClick={() =>
+              updateRoute('app_pledge', null, null, {
+                eventSlug: 'bmz-zukunftskongress'
+              })
+            }
+          >
+            <img src={bmzLogo} />
+            <TextBlock>User Conference</TextBlock>
+          </div> */}
+        </div>
+
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />
-          <div className="trillion-svg-text">
-            <div className="trillion-svg-text__row">
-              <img src="/web/images/baum_versprochen.png" alt="Smiley face" />
-              <span>
-                Target {this.propsctargetYear}
-                <br />
-                <strong>{this.state.svgData.target}</strong>
-                <br />
-                {this.getTwoWordString(
-                  NumberToWords.toWords(this.state.svgData.target)
-                )}
-              </span>
+          {this.state.svgData === null ? (
+            <div className="circle-inside circle-headline">
+              <LoadingIndicator />
             </div>
-            <div className="trillion-svg-text__row">
-              <img src="/web/images/baum.png" alt="Smiley face" />
-              <span>
-                Existing trees {this.propsctargetYear}
-                <br />
-                <strong>{this.state.svgData.target}</strong>
-                <br />
-                {this.getTwoWordString(
-                  NumberToWords.toWords(this.state.svgData.target)
-                )}
-              </span>
-            </div>
-            <div className="trillion-svg-text__row">
-              <img src="/web/images/baum.png" alt="Smiley face" />
-              <span>
-                Planted trees<br />
-                <strong>{this.state.svgData.planted}</strong>
-                <br />
-                {this.getTwoWordString(
-                  NumberToWords.toWords(this.state.svgData.planted)
-                )}
-              </span>
-            </div>
-          </div>
+          ) : (
+            <TreecounterGraphicsText
+              trillion={true}
+              treecounterData={this.state.svgData}
+            />
+          )}
         </div>
       </div>
     );

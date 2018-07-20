@@ -1,4 +1,4 @@
-import { initialProps } from '../config/index';
+import { initialProps } from '../config';
 
 const { mediaPath } = initialProps;
 

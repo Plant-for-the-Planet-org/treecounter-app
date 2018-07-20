@@ -1,5 +1,33 @@
 .app-container__footer {
   display: flex;
-  height: 176px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
   background-color: white;
+
+  .app-container__footerimage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .footer-logo {
+      height: 69px;
+    }
+  }
+  .app-container__buttons {
+    display: flex;
+    align-items: center;
+    width: 178px;
+    .seprator {
+      color: $spanTextColor;
+    }
+    justify-content: center;
+    .pftp-button-transparent {
+      color: $spanTextColor;
+      span {
+        padding: 0 5px;
+        font-size: 14px;
+      }
+    }
+  }
 }

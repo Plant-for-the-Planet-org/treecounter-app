@@ -11,22 +11,22 @@ export const contributionImageSchema = new schema.Entity('contributionImage');
 
 tpoSchema.define({
   treecounter: treecounterSchema,
-  plant_projects: [plantProjectSchema],
-  payment_gateways: [paymentGatewaySchema]
+  plantProjects: [plantProjectSchema],
+  paymentGateways: [paymentGatewaySchema]
 });
 
 plantProjectSchema.define({
   tpo: tpoSchema,
-  project_images: [plantProjectImageSchema]
+  plantProjectImages: [plantProjectImageSchema]
 });
 
 plantProjectImageSchema.define({
-  plant_project: plantProjectSchema
+  plantProject: plantProjectSchema
 });
 
 contributionSchema.define({
   treecounter: treecounterSchema,
-  contribution_images: [contributionImageSchema]
+  contributionImages: [contributionImageSchema]
 });
 
 contributionImageSchema.define({
@@ -34,7 +34,8 @@ contributionImageSchema.define({
 });
 
 userProfileSchema.define({
-  treecounter: treecounterSchema
+  treecounter: treecounterSchema,
+  plantProjects: [plantProjectSchema]
 });
 
 treecounterSchema.define({

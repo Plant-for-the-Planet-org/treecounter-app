@@ -1,47 +1,63 @@
 import React, { Component } from 'react';
-import { NotificationAction } from '../../actions/notificationAction';
+import PropTypes from 'prop-types';
+
 import renderHTML from 'react-render-html';
+import { getImageUrl } from '../../actions/apiRouting';
+import { SignupJustMe } from '../../assets';
+import i18n from '../../locales/i18n';
 
 export default class Notification extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loading: true,
-      schema: {}
-    };
-  }
-
-  NotificationDisplay(myObject) {
-    let msg = [];
-    for (let [key, value] of Object.entries(myObject)) {
-      msg.push(
-        <li className="notification-group" key={key}>
-          <div className="notification-tab">
-            <i className="fas fa-user" />
-            {renderHTML(value.message)}
+  NotificationDisplay(notifications) {
+    return notifications.userFeeds.map(notification => (
+      <div key={notification.id}>
+        <li className="popover__list-item">
+          <div className="list-item__wrapper">
+            <img
+              src={
+                notification.image
+                  ? getImageUrl('profile', 'thumb', notification.image)
+                  : SignupJustMe
+              }
+            />
+            <div className="item-html__wrapper">
+              {renderHTML(notification.message)}
+            </div>
           </div>
         </li>
-      );
-    }
-    return msg;
-  }
-
-  componentWillMount() {
-    NotificationAction().then(
-      success => this.setState({ loading: false, schema: success.data }),
-      error => console.log(error)
-    );
+        <hr className="divider__light" />
+      </div>
+    ));
   }
 
   render() {
-    return this.state.loading ? (
-      <ul style={widthStyle} />
+    let { userFeeds } = this.props;
+    return userFeeds && userFeeds.userFeeds.length ? (
+      <div>
+        <ul className="notification-popover">
+          {this.NotificationDisplay(userFeeds)}
+        </ul>
+        {userFeeds.more > 0 ? (
+          <div
+            onClick={() =>
+              this.props.fetchMoreNotifications(
+                userFeeds.userFeeds[userFeeds.userFeeds.length - 1].id
+              )
+            }
+            className="list-item__wrapper"
+          >
+            <span>{i18n.t('label.all_notifications')}</span>
+          </div>
+        ) : null}
+      </div>
     ) : (
-      <ul className="notification-popover">
-        {this.NotificationDisplay(this.state.schema)}
-      </ul>
+      <div className="popover__no_notification">
+        {i18n.t('label.no_notifications')}
+      </div>
     );
   }
 }
 
-const widthStyle = { width: '244px' };
+Notification.propTypes = {
+  userFeeds: PropTypes.object,
+  fetchMoreNotifications: PropTypes.func
+};

@@ -17,8 +17,24 @@ class SignUpContainer extends React.Component {
     this.props.signUp(profileType, value);
   }
 
+  onSignUpClicked = profileType => {
+    console.log(this.refs.signupContainer.refs.signupForm.validate());
+    let value = this.refs.signupContainer.refs.signupForm.getValue();
+    if (value) {
+      this.onClick(profileType, value);
+    }
+  };
+
   render() {
-    return <SignUp onClick={this.onClick} updateRoute={this.props.route} />;
+    return (
+      <SignUp
+        ref="signupContainer"
+        onSignUpClicked={this.onSignUpClicked}
+        updateRoute={(routeName, id) =>
+          this.props.route(routeName, id, this.props.navigation)
+        }
+      />
+    );
   }
 }
 
@@ -26,7 +42,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       signUp,
-      route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
+      route: (routeName, id, navigation) => dispatch =>
+        updateRoute(routeName, navigation || dispatch, id)
     },
     dispatch
   );
@@ -36,5 +53,6 @@ export default connect(null, mapDispatchToProps)(SignUpContainer);
 
 SignUpContainer.propTypes = {
   signUp: PropTypes.func,
-  route: PropTypes.func
+  route: PropTypes.func,
+  navigation: PropTypes.object.isRequired
 };

@@ -1,5 +1,6 @@
 import { Text, View, Image, TextInput } from 'react-native';
 import React from 'react';
+import i18n from '../../locales/i18n';
 
 export function TextInputTemplate(locals) {
   let containerStyle = {
@@ -17,7 +18,7 @@ export function TextInputTemplate(locals) {
     borderBottomWidth: 1,
     borderColor: '#cecece'
   };
-  let errorBlockStyle = locals.stylesheet.errorBlock;
+  let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
   let error =
     locals.hasError && locals.error ? (
       <Text accessibilityLiveRegion="polite" style={errorBlockStyle}>
@@ -33,7 +34,7 @@ export function TextInputTemplate(locals) {
         <TextInput
           style={textboxStyle}
           secureTextEntry={locals.secureTextEntry}
-          placeholder={locals.placeholder}
+          placeholder={i18n.t(locals.placeholder)}
           keyboardType={locals.keyboardType}
           maxLength={locals.maxLength}
           multiline={locals.multiline}

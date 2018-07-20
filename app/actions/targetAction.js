@@ -1,32 +1,22 @@
 import { normalize } from 'normalizr';
-import { NotificationManager } from 'react-notifications';
 
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { debug } from '../debug/index';
-import { history } from '../components/Common/BrowserRouter';
+import { updateRoute } from '../helpers/routerHelper';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { treecounterSchema } from '../schemas/index';
-import { getLocalRoute } from './apiRouting';
 import { putAuthenticatedRequest } from '../utils/api';
 
-export function SubmitTarget(treecounter, treecounterId) {
+export function SubmitTarget(treecounterData) {
   return dispatch => {
-    const data = {
-      countTarget: treecounter.countTarget,
-      targetYear: treecounter.targetYear,
-      targetComment: treecounter.targetComment
-    };
-    putAuthenticatedRequest('target_put', data, { treecounter: treecounterId })
+    putAuthenticatedRequest('target_put', treecounterData)
       .then(res => {
         dispatch(mergeEntities(normalize(res.data, treecounterSchema)));
-        history.push(getLocalRoute('app_userHome'));
+        updateRoute('app_userHome', dispatch);
       })
       .catch(error => {
         debug(error);
-        NotificationManager.error(
-          error.response.data.message,
-          error.response.data.code,
-          5000
-        );
+        NotificationManager.error(error.response.data.message, 'Error', 5000);
       });
   };
 }

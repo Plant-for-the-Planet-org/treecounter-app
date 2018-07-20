@@ -1,63 +1,96 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import UserDetails from './UserDetails';
-import { Popover, OverlayTrigger, Button } from 'react-bootstrap';
+import { ProfilePic } from '../../assets';
 import Notification from './Notification';
-import * as constants from '../../SupportedLanguages/en';
-import { getLocalRoute } from '../../actions/apiRouting';
+import Popover from '../Common/Popover';
+import UserDetails from './UserDetails';
+import RoundedButton from '../Common/Button/RoundedButton';
+import i18n from '../../locales/i18n.js';
+import { getImageUrl } from '../../actions/apiRouting';
 
-const popoverNotification = (
-  <Popover id="popover-trigger-focus">
-    <Notification />
-  </Popover>
-);
-
-const popoverAccount = (userProfile, onLogout) => (
-  <Popover id="popover-trigger-focus">
-    <UserDetails userProfile={userProfile} onLogout={onLogout} />
-  </Popover>
-);
-
-const HeaderFields = ({ isLoggedIn, userProfile, onLogout }) => {
-  console.log(
-    'HeaderFields',
-    window.location.pathname,
-    getLocalRoute('app_login')
-  );
-
+const HeaderFields = ({
+  userFeeds,
+  updateRoute,
+  isLoggedIn,
+  userProfile,
+  onLogout,
+  fetchMoreNotifications,
+  markSeenNotificationAction
+}) => {
   return isLoggedIn ? (
     <div className="header-icons">
-      <OverlayTrigger
-        trigger="focus"
-        placement="bottom"
-        overlay={popoverNotification}
+      <div className="pftp-popover-notification">
+        <Popover
+          onPopoverClosed={() => {
+            userFeeds && userFeeds.userFeeds.length
+              ? markSeenNotificationAction(userFeeds.userFeeds[0].id)
+              : null;
+          }}
+          button={
+            <div className="notification-bell">
+              <div
+                className={
+                  userFeeds && userFeeds.unRead > 0
+                    ? 'unread-circle'
+                    : 'unread-circle adjust-zindex'
+                }
+              >
+                <span className="unread-number-align">
+                  {userFeeds && userFeeds.unRead > 0 ? userFeeds.unRead : 0}
+                </span>
+              </div>
+              <div className="bell-icon">
+                <i className="material-icons">notifications_none</i>
+              </div>
+            </div>
+          }
+        >
+          <Notification
+            fetchMoreNotifications={fetchMoreNotifications}
+            userFeeds={userFeeds}
+          />
+        </Popover>
+      </div>
+      <Popover
+        button={
+          <img
+            src={
+              userProfile.image
+                ? getImageUrl('profile', 'thumb', userProfile.image)
+                : ProfilePic
+            }
+            className="image-rounded-border"
+          />
+        }
       >
-        <Button>
-          <i className="material-icons">notifications_none</i>
-        </Button>
-      </OverlayTrigger>
-      <OverlayTrigger
-        trigger="focus"
-        placement="bottom"
-        overlay={popoverAccount(userProfile, onLogout)}
-      >
-        <Button>
-          <i className="material-icons">account_circle</i>
-        </Button>
-      </OverlayTrigger>
+        <UserDetails
+          updateRoute={updateRoute}
+          userProfile={userProfile}
+          onLogout={onLogout}
+        />
+      </Popover>
     </div>
   ) : (
-    <div className="header-icons no-login">
-      <a href={getLocalRoute('app_login')}>{constants.formStrings.logIn}</a>
+    <div className="header-icons">
+      <RoundedButton onClick={updateRoute.bind(this, 'app_login')}>
+        {i18n.t('label.login')}
+      </RoundedButton>
+      <RoundedButton onClick={updateRoute.bind(this, 'app_signup')}>
+        {i18n.t('label.signUp')}
+      </RoundedButton>
     </div>
   );
 };
 
 HeaderFields.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
+  fetchMoreNotifications: PropTypes.func,
+  markSeenNotificationAction: PropTypes.func,
   userProfile: PropTypes.object,
-  onLogout: PropTypes.func.isRequired
+  onLogout: PropTypes.func.isRequired,
+  updateRoute: PropTypes.func,
+  userFeeds: PropTypes.object
 };
 
 export default HeaderFields;

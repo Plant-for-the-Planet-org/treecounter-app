@@ -4,8 +4,8 @@ export default {
   properties: {
     email: {
       type: 'string',
-      title: 'Email',
-      icon: 'mail',
+      title: 'label.email',
+      icon: 'email',
       propertyOrder: 1
     }
   },

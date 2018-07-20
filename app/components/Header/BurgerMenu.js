@@ -8,7 +8,7 @@ import {
   closeSideNavAction,
   toggleSideNavAction
 } from '../../actions/setSideNavAction';
-import * as constants from '../../SupportedLanguages/en';
+import i18n from '../../locales/i18n.js';
 
 class BurgerMenu extends Component {
   constructor() {
@@ -21,7 +21,7 @@ class BurgerMenu extends Component {
         onClick={this.props.toggleSideNavAction}
         className="material-icons burger-icon"
       >
-        {constants.formStrings.menu}
+        {i18n.t('label.menu')}
       </i>
     );
   }

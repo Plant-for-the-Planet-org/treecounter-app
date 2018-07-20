@@ -13,9 +13,10 @@ import {
 import {
   schemaOptions,
   signupFormSchema
-} from '../../../server/formSchemas/signup';
+} from '../../../server/parsedSchemas/signup';
+import i18n from '../../../locales/i18n.js';
 
-import { loginStyles } from '../Login';
+import styles from '../../../styles/login';
 import SignupTypes from './SignupType';
 
 let Form = t.form.Form;
@@ -39,43 +40,37 @@ export default class SignUp extends Component {
     });
   }
 
-  onPress = () => {
-    let result = this.refs.signupForm.validate();
-    if (result.isValid()) {
-      let value = this.refs.signupForm.getValue();
-      if (value) {
-        this.props.onClick(this.state.Profiletype, value);
-      }
-    } else if (this.props.onError) {
-      this.props.onError(result.errors);
-    }
-  };
-
   render() {
+    let { Profiletype } = this.state;
     return (
       <ScrollView>
         <ImageBackground style={styles.container}>
           <View style={styles.loginHeader}>
-            <Text style={styles.titleText}>Join In</Text>
+            <Text style={styles.titleText}>{i18n.t('label.signUp')}.</Text>
             <View style={styles.titleTextUnderline} />
           </View>
           <SignupTypes changeProfile={this.changeProfile} />
           <View style={styles.inputContainer}>
             <Form
               ref={'signupForm'}
-              type={signupFormSchema[this.state.Profiletype]}
-              options={schemaOptions[this.state.Profiletype]}
+              type={signupFormSchema[Profiletype]}
+              options={schemaOptions[Profiletype]}
             />
-            <TouchableHighlight onPress={this.onPress} style={styles.button}>
-              <Text style={styles.buttonText}>Sign Up</Text>
+            <TouchableHighlight
+              onPress={this.props.onSignUpClicked.bind(this, Profiletype)}
+              style={styles.button}
+            >
+              <Text style={styles.buttonText}>{i18n.t('label.signUp')}</Text>
             </TouchableHighlight>
             <View style={styles.bottomRow}>
-              <Text style={styles.bottomText}>Already have an account? </Text>
+              <Text style={styles.bottomText}>
+                {i18n.t('label.already_have_account')}
+              </Text>
               <Text
                 onPress={this.onLoginClicked}
                 style={styles.bottomTextHighlight}
               >
-                Log in.
+                {i18n.t('label.logint')}
               </Text>
             </View>
           </View>
@@ -87,12 +82,12 @@ export default class SignUp extends Component {
 
 SignUp.propTypes = {
   updateRoute: PropTypes.func,
-  onClick: PropTypes.func,
+  onSignUpClicked: PropTypes.func,
   onError: PropTypes.func
 };
 
-export const styles = StyleSheet.create({
-  ...loginStyles,
-  titleText: { ...loginStyles.titleText, width: 129 },
-  titleTextUnderline: { ...loginStyles.titleTextUnderline, width: 119 }
-});
+// export const styles = StyleSheet.create({
+//   ...loginStyles,
+//   titleText: { ...loginStyles.titleText, width: 129 },
+//   titleTextUnderline: { ...loginStyles.titleTextUnderline, width: 119 }
+// });

@@ -1,7 +1,17 @@
 .pftp-card-layout {
   box-shadow: 0px 4px 12px 0 rgba(0, 0, 0, 0.1);
-  padding: 20px 60px;
+  padding: 40px 60px;
   background-color: white;
   margin: 30px;
+  text-align: center;
   border-radius: 15px;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.card-width {
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
 }

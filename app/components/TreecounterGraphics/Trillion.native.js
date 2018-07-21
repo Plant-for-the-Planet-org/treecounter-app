@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Animated, Easing } from 'react-native';
+import { StyleSheet, Text, View, Animated, Easing, Image } from 'react-native';
 import i18n from '../../locales/i18n';
-import testSvg from '../../assets/images/ballons.svg';
+import ballonsSvg from '../../assets/images/ballons.svg';
+import { svgBackground } from '../../assets';
 import SvgUri from 'react-native-svg-uri';
 
 export default class Trillion extends Component {
@@ -18,7 +19,7 @@ export default class Trillion extends Component {
 
     Animated.timing(this.RotateValueHolder, {
       toValue: 1,
-      duration: 100000,
+      duration: 150000,
       easing: Easing.linear,
       useNativeDriver: true
     }).start(() => this.StartImageRotateFunction());
@@ -34,9 +35,12 @@ export default class Trillion extends Component {
           {i18n.t('label.logged_in')}
           {' ' + i18n.t('name.label')}
         </Text>
-        <Animated.View style={{ transform: [{ rotate: RotateData }] }}>
-          <SvgUri width="400" height="400" source={testSvg} />
-        </Animated.View>
+        <View style={styles.svgStyle}>
+          <Image style={styles.imageStyle} source={svgBackground} />
+          <Animated.View style={{ transform: [{ rotate: RotateData }] }}>
+            <SvgUri width="400" height="400" source={ballonsSvg} />
+          </Animated.View>
+        </View>
       </View>
     );
   }
@@ -51,9 +55,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: skyBlue
   },
+  svgStyle: {
+    width: 400,
+    height: 400
+  },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10
+  },
+  imageStyle: {
+    overflow: 'visible',
+    width: 350,
+    height: 350,
+    flex: 1,
+    top: 190,
+    left: 30
   }
 });

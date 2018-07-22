@@ -17,6 +17,7 @@ import {
 import i18n from '../../../locales/i18n.js';
 
 import styles from '../../../styles/login';
+import CardLayout from '../../Common/Card/CardLayout';
 
 let Form = t.form.Form;
 
@@ -36,7 +37,7 @@ export default class Login extends Component {
           <Text style={styles.titleText}>{i18n.t('label.login')}</Text>
           <View style={styles.titleTextUnderline} />
         </View>
-        <View style={styles.inputContainer}>
+        <CardLayout style={styles.inputContainer}>
           <Form
             ref={'loginForm'}
             type={loginFormSchema}
@@ -70,7 +71,7 @@ export default class Login extends Component {
               {i18n.t('label.signUp')}.
             </Text>
           </View>
-        </View>
+        </CardLayout>
       </ScrollView>
     );
   }

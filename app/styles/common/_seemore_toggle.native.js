@@ -8,23 +8,19 @@ export default (donateTreesStyles = EStyleSheet.create({
   },
   expandedText: {
     color: '$primary',
-    textAlign: 'left'
+    textAlign: 'center'
   },
   collapsedText: {
     color: '#ec6453'
   },
 
   expanded: {
-    borderLeftWidth: 2,
-    borderColor: '$primary',
     height: 40,
     flex: 1,
     alignItems: 'center',
     paddingLeft: 10
   },
   collapsed: {
-    borderLeftWidth: 2,
-    borderColor: '$placeholderColor',
     height: 40,
     alignItems: 'center',
     flex: 1,

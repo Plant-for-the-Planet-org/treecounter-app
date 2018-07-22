@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from '../../../styles/common/button.native';
+import styles from '../../../styles/common/button';
 import { TouchableHighlight, Text } from 'react-native';
-const PrimaryButton = ({ onClick, children }) => (
-  <TouchableHighlight onPress={() => onClick()} style={styles.button}>
-    <Text style={styles.buttonText}>{children}</Text>
+const PrimaryButton = ({ onClick, children, buttonStyle, textStyle }) => (
+  <TouchableHighlight
+    onPress={() => onClick()}
+    style={[styles.primaryButton, buttonStyle]}
+  >
+    <Text style={[styles.primaryButtonText, textStyle]}>{children}</Text>
   </TouchableHighlight>
 );
 

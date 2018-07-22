@@ -7,9 +7,10 @@ import SeeMoreToggle from '../Common/SeeMoreToggle';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
 import { View, Text } from 'react-native';
-import styles from '../../styles/selectplantproject';
+import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectTeaser from './PlantProjectTeaser';
 import PlantProjectSpecs from './PlantProjectSpecs';
+import PlantProjectDetails from './PlantProjectDetails';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -96,7 +97,7 @@ class PlantProjectFull extends React.Component {
             {i18n.t('label.different_project')}
           </View>
         ) : null}
-        {/* {this.state.expanded && <PlantProjectDetails {...detailsProps} /> */}
+        {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
       </View>
     );
   }

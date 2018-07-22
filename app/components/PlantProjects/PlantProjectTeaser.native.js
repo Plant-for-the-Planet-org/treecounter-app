@@ -5,7 +5,7 @@ import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
 import { View, Image, Text } from 'react-native';
 
-import styles from '../../styles/selectplantproject';
+import styles from '../../styles/selectplantproject/selectplantproject-teaser';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectTeaser
  */
@@ -19,7 +19,7 @@ const PlantProjectTeaser = ({
     <View style={styles.project_teaser__container}>
       <View style={styles.project_teaser__content}>
         <View style={styles.column}>
-          <Text>{projectName} </Text>
+          <Text style={styles.project_teaser__contentText}>{projectName} </Text>
           <View>
             {isCertified ? (
               <Image
@@ -29,7 +29,7 @@ const PlantProjectTeaser = ({
             ) : null}
           </View>
         </View>
-        <Text style={styles.teaser__tpoName}>
+        <Text style={styles.project_teaser__contentText}>
           {i18n.t('label.by')} {tpoName}
         </Text>
       </View>

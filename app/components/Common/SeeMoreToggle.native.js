@@ -10,7 +10,7 @@ const SeeMoreToggle = ({ seeMore, onToggle }) => {
       <View style={seeMore ? styles.collapsed : styles.expanded}>
         <Text
           style={seeMore ? styles.collapsedText : styles.expandedText}
-          onClick={() => onToggle()}
+          onPress={() => onToggle()}
         >
           {seeMore ? '+ ' + i18n.t('label.see_more') : i18n.t('label.see_less')}
         </Text>

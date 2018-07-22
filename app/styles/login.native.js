@@ -10,13 +10,7 @@ export default (loginStyles = EStyleSheet.create({
   },
   inputContainer: {
     width: '100%',
-    justifyContent: 'center',
-    borderRadius: 10,
-    backgroundColor: 'white',
-    padding: 10,
-    shadowOffset: { width: 0, height: 4 },
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-    shadowRadius: 12
+    justifyContent: 'center'
   },
   button: {
     height: 50,

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableHighlight } from 'react-native';
-import styles from '../../styles/selectplantproject';
+import { View, ScrollView, Dimensions } from 'react-native';
+import styles from '../../styles/selectplantproject/selectplantproject';
 import i18n from '../../locales/i18n.js';
 
 import Slick from 'react-native-slick';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import PrimaryButton from '../Common/Button/PrimaryButton.native';
+import CardLayout from '../Common/Card/CardLayout';
+const { width, height } = Dimensions.get('window');
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -103,93 +105,36 @@ export default class SelectPlantProject extends Component {
     let { featuredProjects } = this.state;
     return (
       <ScrollView>
-        <View style={styles.selectPlantProjectContainer}>
-          <View style={styles.header}>
-            <Text style={styles.titleText}>{i18n.t('label.donateTrees')}</Text>
-            <View style={styles.titleTextUnderline} />
-          </View>
-          <View style={styles.cardContainer}>
-            <View style={styles.cardHeader}>
-              <Text style={styles.cardHeaderText}>
-                {i18n.t('label.featuredProjects')}
-              </Text>
-            </View>
-            <View style={styles.cardContent}>
-              <Slick
-                style={styles.slickWrapper}
-                //  buttonWrapperStyle={styles.tpoFooterNavImage}
-                showButtons={true}
-                nextButton={
-                  <View style={styles.tpoFooterNavImageLeft}>
-                    <Text>›</Text>
-                  </View>
-                }
-                prevButton={
-                  <View style={styles.tpoFooterNavImageRight}>
-                    <Text>‹</Text>
-                  </View>
-                }
-                dotStyle={{
-                  position: 'absolute',
-                  top: -463,
-                  left: 180,
-                  right: 150,
-
-                  elevation: 5,
-
-                  width: 8,
-                  height: 8,
-                  borderRadius: 4,
-                  marginLeft: 3,
-                  marginRight: 3,
-                  marginTop: 3,
-                  marginBottom: 3
-                }}
-                activeDotStyle={{
-                  position: 'absolute',
-                  top: -463,
-                  left: 150,
-                  right: 150,
-
-                  elevation: 5,
-
-                  width: 8,
-                  height: 8,
-                  borderRadius: 4,
-                  marginLeft: 3,
-                  marginRight: 3,
-                  marginTop: 3,
-                  marginBottom: 3
-                }}
-                height="100%"
-              >
-                {featuredProjects.length !== 0
-                  ? featuredProjects.map(project => (
-                      <View key={project.id} style={styles.plantProjectContent}>
-                        <View style={styles.plantProjectContentFull}>
-                          <PlantProjectFull
-                            callExpanded={() => this.callExpanded()}
-                            expanded={false}
-                            plantProject={project}
-                            tpoName={project.tpo_name}
-                          />
-                        </View>
-                        <View style={styles.plantProjectSelectButton}>
-                          <PrimaryButton
-                            onClick={() =>
-                              this.onSelectClickedFeaturedProjects(project.id)
-                            }
-                          >
-                            {i18n.t('label.select_project')}
-                          </PrimaryButton>
-                        </View>
+        <CardLayout style={{ width: 350, height: '100%' }}>
+          <View style={styles.cardContent}>
+            <Slick style={styles.slickWrapper} showsPagination={false}>
+              {featuredProjects.length !== 0
+                ? featuredProjects.map(project => (
+                    <View key={project.id} style={styles.plantProjectContent}>
+                      <View style={styles.plantProjectContentFull}>
+                        <PlantProjectFull
+                          callExpanded={() => this.callExpanded()}
+                          expanded={false}
+                          plantProject={project}
+                          tpoName={project.tpo_name}
+                        />
                       </View>
-                    ))
-                  : null}
-              </Slick>
-            </View>
+
+                      <PrimaryButton
+                        onClick={() =>
+                          this.onSelectClickedFeaturedProjects(project.id)
+                        }
+                        buttonStyle={styles.plantProjectSelectButtonStyle}
+                        textStyle={styles.plantProjectSelectTextStyle}
+                      >
+                        {i18n.t('label.select_project')}
+                      </PrimaryButton>
+                    </View>
+                  ))
+                : null}
+            </Slick>
           </View>
-        </View>
+        </CardLayout>
       </ScrollView>
     );
   }

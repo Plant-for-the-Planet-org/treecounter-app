@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from '../../styles/selectplantproject';
+import styles from '../../styles/selectplantproject/selectplantproject-spec';
 import { View, Text, Image } from 'react-native';
 const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
   return (

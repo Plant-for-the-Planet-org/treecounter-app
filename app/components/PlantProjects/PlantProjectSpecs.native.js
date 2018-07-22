@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import PlantProjectSpecsItem from './PlantProjectSpecsItem';
 import i18n from '../../locales/i18n.js';
 import { View, Text } from 'react-native';
-import styles from '../../styles/login';
+import styles from '../../styles/selectplantproject/selectplantproject-spec';
 import {
   locationIcon,
   plantedTarget,
@@ -42,8 +42,6 @@ const PlantProjectSpecs = ({
           value={countTarget}
           label={i18n.t('label.target')}
         />
-      </View>
-      <View style={styles.project_info}>
         <PlantProjectSpecsItem
           icon={tree_survival}
           value={survivalRate}
@@ -55,18 +53,16 @@ const PlantProjectSpecs = ({
           value={`${currency} ${treeCost}`}
           label={i18n.t('label.Cost')}
         />
-        <View style={styles.project_specs__taxdeductible}>
-          <Text style={styles.project_specs__taxdeductibleText}>
-            {taxDeduction && taxDeduction.length
-              ? i18n.t('label.tax_deductible') + ' ' + i18n.t('label.in') + ' '
-              : null}
-          </Text>
-          <Text style={styles.project_specs__taxdeductibleText}>
-            {taxDeduction && taxDeduction.length
-              ? taxDeduction.join(', ')
-              : null}
-          </Text>
-        </View>
+      </View>
+      <View style={styles.project_specs__taxdeductible}>
+        <Text style={styles.project_specs__taxdeductibleText}>
+          {taxDeduction && taxDeduction.length
+            ? i18n.t('label.tax_deductible') + ' ' + i18n.t('label.in') + ' '
+            : null}
+        </Text>
+        <Text style={styles.project_specs__taxdeductibleText}>
+          {taxDeduction && taxDeduction.length ? taxDeduction.join(', ') : null}
+        </Text>
       </View>
     </View>
   );

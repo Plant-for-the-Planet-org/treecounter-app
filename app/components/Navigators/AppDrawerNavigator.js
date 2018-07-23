@@ -12,6 +12,7 @@ import styles from '../../styles/header.native';
 import BurgerMenu from '../../components/Header/BurgerMenu';
 import i18n from '../../locales/i18n.js';
 import FAQContainer from '../../containers/FAQ';
+import RegisterTrees from '../RegisterTrees';
 
 const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
 const headerLabels = {
@@ -37,6 +38,9 @@ export const getDrawerNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_userHome')]: {
         screen: Trillion
+      },
+      [getLocalRoute('app_registerTrees')]: {
+        screen: isLoggedIn ? RegisterTrees : LoginContainer
       },
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer

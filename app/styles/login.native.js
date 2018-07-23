@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
 
 export default (loginStyles = EStyleSheet.create({
   container: {
@@ -37,7 +38,7 @@ export default (loginStyles = EStyleSheet.create({
   titleText: {
     fontSize: 41,
     color: '#575756',
-    width: 117,
+    width: Dimensions.get('window').width * 0.5,
     fontWeight: 'bold',
     justifyContent: 'flex-start',
     marginBottom: 20
@@ -62,5 +63,11 @@ export default (loginStyles = EStyleSheet.create({
   },
   loginHeader: {
     marginBottom: 60
+  },
+  descriptionText: {
+    fontSize: 20,
+    color: '#575756',
+    width: Dimensions.get('window').width * 0.8,
+    justifyContent: 'flex-start'
   }
 }));

@@ -11,12 +11,12 @@ let Form = t.form.Form;
 // import PrimaryButton from '../Common/Button/PrimaryButton';
 // import TextHeading from '../Common/Heading/TextHeading';
 // import CardLayout from '../Common/Card/CardLayout';
-// import {
-// singleTreeRegisterFormSchema,
-// schemaOptionsSingleTree,
-// multipleTreesRegisterFormSchema,
-// schemaOptionsMultipleTrees
-// } from '../../server/parsedSchemas/registerTrees';
+import {
+  singleTreeRegisterFormSchema,
+  schemaOptionsSingleTree,
+  multipleTreesRegisterFormSchema,
+  schemaOptionsMultipleTrees
+} from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
 // import RegistrationMap from './RegistrationMap';
 // import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
@@ -149,7 +149,7 @@ export default class RegisterTrees extends Component {
               />
             )} */}
         </View>
-        {/* 
+        {/*
         <CardLayout>
           <Tabs
             data={RegisterTrees.data.tabs}

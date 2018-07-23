@@ -105,7 +105,7 @@ export default class SelectPlantProject extends Component {
     let { featuredProjects } = this.state;
     return (
       <ScrollView>
-        <CardLayout style={{ width: 350, height: '100%' }}>
+        <CardLayout style={{ width: 350, flex: 1 }}>
           <View style={styles.cardContent}>
             <Slick style={styles.slickWrapper} showsPagination={false}>
               {featuredProjects.length !== 0

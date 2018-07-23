@@ -79,8 +79,12 @@ class PlantProjectFull extends React.Component {
     };
     return (
       <View style={styles.projectFullContainer}>
-        <PlantProjectTeaser {...teaserProps} />
-        <PlantProjectSpecs {...specsProps} />
+        <View style={styles.projectTeaserContainer}>
+          <PlantProjectTeaser {...teaserProps} />
+        </View>
+        <View style={styles.projectSpecsContainer}>
+          <PlantProjectSpecs {...specsProps} />
+        </View>
 
         <View style={styles.seeMoreContainer}>
           <SeeMoreToggle

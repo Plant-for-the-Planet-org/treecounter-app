@@ -29,14 +29,14 @@ export default (selectplantprojectSpecs = EStyleSheet.create({
     alignItems: 'center'
   },
   project_specs__itemText: {
-    flex: 5,
+    flex: 0.8,
     justifyContent: 'flex-end',
     alignContent: 'center'
   },
   spec_icon__container: {
     height: 15,
     width: 15,
-    flex: 1,
+    flex: 0.2,
     justifyContent: 'center',
     alignContent: 'center'
   },

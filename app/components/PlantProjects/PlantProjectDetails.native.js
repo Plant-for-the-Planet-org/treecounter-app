@@ -20,7 +20,7 @@ const PlantProjectDetails = ({
     videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
   }
   return (
-    <View style={{ width: '100%', height: 20, color: 'black' }}>
+    <View style={{ width: '100%', height: 200, color: 'black' }}>
       <Text>Dummy content</Text>
     </View>
   );

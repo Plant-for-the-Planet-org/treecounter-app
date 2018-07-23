@@ -15,6 +15,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   seeMoreContainer: {
     flex: 0.1,
+    flexBasis: 2,
     alignSelf: 'center'
   }
 }));

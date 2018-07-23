@@ -32,7 +32,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.container}>
         <View style={styles.loginHeader}>
           <Text style={styles.titleText}>{i18n.t('label.login')}</Text>
           <View style={styles.titleTextUnderline} />
@@ -72,7 +72,7 @@ export default class Login extends Component {
             </Text>
           </View>
         </CardLayout>
-      </ScrollView>
+      </View>
     );
   }
 }

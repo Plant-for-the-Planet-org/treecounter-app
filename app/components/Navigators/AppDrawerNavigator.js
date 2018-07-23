@@ -48,7 +48,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
         screen: ForgotPasswordContainer
       },
       [getLocalRoute('app_donateTrees')]: {
-        screen: isLoggedIn ? DonationTreesContainer : LoginContainer
+        screen: DonationTreesContainer
       },
       [getLocalRoute('app_faq')]: FAQContainer
     },

@@ -5,7 +5,6 @@ export default (buttonStyles = EStyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
     borderRadius: 10,
     backgroundColor: 'white',
     shadowOffset: { width: 0, height: 4 },

@@ -16,14 +16,16 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
   },
   plantProjectContentFull: {
     flex: 0.9,
-    width: '100%',
-    alignSelf: 'center'
+    width: '100%'
   },
-  plantProjectSelectButton: {
-    width: '80%',
+  footer: {
+    width: '90%',
     flex: 0.1,
-    height: '20%'
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
+  plantProjectSelectButton: {},
   plantProjectSelectButtonStyle: {
     height: 40,
     width: '70%'

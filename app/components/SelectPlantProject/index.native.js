@@ -119,16 +119,17 @@ export default class SelectPlantProject extends Component {
                           tpoName={project.tpo_name}
                         />
                       </View>
-
-                      <PrimaryButton
-                        onClick={() =>
-                          this.onSelectClickedFeaturedProjects(project.id)
-                        }
-                        buttonStyle={styles.plantProjectSelectButtonStyle}
-                        textStyle={styles.plantProjectSelectTextStyle}
-                      >
-                        {i18n.t('label.select_project')}
-                      </PrimaryButton>
+                      <View style={styles.footer}>
+                        <PrimaryButton
+                          onClick={() =>
+                            this.onSelectClickedFeaturedProjects(project.id)
+                          }
+                          buttonStyle={styles.plantProjectSelectButtonStyle}
+                          textStyle={styles.plantProjectSelectTextStyle}
+                        >
+                          {i18n.t('label.select_project')}
+                        </PrimaryButton>
+                      </View>
                     </View>
                   ))
                 : null}

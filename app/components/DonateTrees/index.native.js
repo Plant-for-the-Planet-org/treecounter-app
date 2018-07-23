@@ -1,40 +1,134 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import i18n from '../../locales/i18n.js';
-import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
+import { StyleSheet, View, Animated, TouchableOpacity } from 'react-native';
+import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
-const pageHeadings = [
-  {
-    heading: i18n.t('label.donateTrees'),
-    description: i18n.t('label.donate_trees_description')
-  },
-  {
-    heading: i18n.t('label.donateTrees'),
-    description: ''
-  },
-  {
-    heading: i18n.t('label.donateTrees'),
-    description: ''
-  },
-  {
-    heading: i18n.t('label.donateTrees'),
-    description: ''
-  }
-];
+import {
+  receiptIndividualFormSchema,
+  receiptCompanyFormSchema,
+  companySchemaOptions,
+  individualSchemaOptions
+} from '../../server/parsedSchemas/donateTrees';
 
-const headings = [
-  i18n.t('label.heading_project'),
-  i18n.t('label.heading_donate_details'),
-  i18n.t('label.heading_donor_details'),
-  i18n.t('label.heading_payment')
-];
+let Form = t.form.Form;
 
 export default class DonateTrees extends Component {
+  state = {
+    index: 0,
+    routes: [
+      { key: 'individual', title: 'Individual' },
+      { key: 'company', title: 'Company' }
+    ]
+  };
+
+  _handleIndexChange = index => this.setState({ index });
+
+  _renderTabBar = props => {
+    const inputRange = props.navigationState.routes.map((x, i) => i);
+
+    return (
+      <View style={styles.tabBar}>
+        {props.navigationState.routes.map((route, i) => {
+          return (
+            <TouchableOpacity
+              style={
+                this.state.index === i ? styles.tabItemActive : styles.tabItem
+              }
+              onPress={() => this.setState({ index: i })}
+            >
+              <Animated.Text
+                style={this.state.index === i ? styles.textActive : styles.text}
+              >
+                {route.title}
+              </Animated.Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    );
+  };
+
+  _renderScene = SceneMap({
+    individual: individualForm,
+    company: companyForm
+  });
+
   render() {
-    return <SelectPlantProjectContainer />;
+    return (
+      <TabView
+        navigationState={this.state}
+        renderScene={this._renderScene}
+        renderTabBar={this._renderTabBar}
+        onIndexChange={this._handleIndexChange}
+      />
+    );
   }
 }
+
+class individualForm extends Component {
+  render() {
+    return (
+      <View style={{ backgroundColor: '#ffffff' }}>
+        <Form
+          ref={'donorDetailsForm'}
+          type={receiptIndividualFormSchema}
+          options={individualSchemaOptions}
+        />
+      </View>
+    );
+  }
+}
+
+class companyForm extends Component {
+  render() {
+    return (
+      <View style={{ backgroundColor: '#ffffff' }}>
+        <Form
+          ref={'donorDetailsForm'}
+          type={receiptCompanyFormSchema}
+          options={companySchemaOptions}
+        />
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  tabBar: {
+    flexDirection: 'row',
+    paddingTop: 20,
+    backgroundColor: '#ffffff',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 2,
+    elevation: 1
+  },
+  tabItemActive: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 10,
+    borderBottomColor: '#ec6453',
+    borderBottomWidth: 2
+  },
+  tabItem: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 10
+  },
+  textActive: {
+    color: '#ec6453',
+    fontSize: 18
+  },
+  text: {
+    color: '#aba2a2',
+    fontSize: 18
+  }
+});
 
 DonateTrees.propTypes = {
   selectedProject: PropTypes.object,

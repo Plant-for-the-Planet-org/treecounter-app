@@ -3,6 +3,9 @@ import React from 'react';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/forms/textinput';
 export function TextInputTemplate(locals) {
+  if (locals.hidden) {
+    return null;
+  }
   function onChange(value) {
     value =
       locals.keyboardType === 'numeric' && value ? parseInt(value) : value;

@@ -115,8 +115,11 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
             options.template = MapTemplate;
             break;
           case 'date':
+            options.type = properties[propertyKey].widget;
+            break;
           case 'hidden':
             options.type = properties[propertyKey].widget;
+            options.hidden = true;
             break;
           case 'file':
             options.template =

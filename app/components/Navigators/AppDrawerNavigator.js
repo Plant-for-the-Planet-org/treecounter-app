@@ -12,6 +12,7 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import styles from '../../styles/header.native';
 import BurgerMenu from '../../components/Header/BurgerMenu';
 import i18n from '../../locales/i18n.js';
+import DonateTrees from '../../containers/DonateTrees';
 import FAQContainer from '../../containers/FAQ';
 
 const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
@@ -37,6 +38,9 @@ export const getDrawerNavigator = function(isLoggedIn) {
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
       },
+      [getLocalRoute('app_donateTrees')]: {
+        screen: DonateTrees
+      },
       [getLocalRoute('app_userHome')]: {
         screen: Trillion
       },
@@ -44,7 +48,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
         screen: ForgotPasswordContainer
       },
       [getLocalRoute('app_donateTrees')]: {
-        screen: isLoggedIn ? DonationTreesContainer : LoginContainer
+        screen: DonationTreesContainer
       },
       [getLocalRoute('app_faq')]: FAQContainer
     },

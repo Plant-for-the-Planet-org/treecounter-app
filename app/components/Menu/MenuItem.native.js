@@ -39,7 +39,7 @@ export default class MenuGroup extends Component {
 
 export class MenuItem extends Component {
   static propTypes = {
-    iconUrl: PropTypes.string,
+    iconUrl: PropTypes.any,
     titleId: PropTypes.any, //key it will use for localization
     title: PropTypes.string,
     onPress: PropTypes.func.isRequired

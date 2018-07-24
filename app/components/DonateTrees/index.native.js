@@ -3,6 +3,7 @@ import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Animated, TouchableOpacity } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 
 import {
   receiptIndividualFormSchema,
@@ -11,14 +12,13 @@ import {
   individualSchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
 
-import i18n from '../../locales/i18n.js';
-
 let Form = t.form.Form;
 
 export default class DonateTrees extends Component {
   state = {
     index: 0,
     routes: [
+      { key: 'featured', title: 'Featured' },
       { key: 'individual', title: 'Individual' },
       { key: 'company', title: 'Company' }
     ]
@@ -37,6 +37,7 @@ export default class DonateTrees extends Component {
               style={
                 this.state.index === i ? styles.tabItemActive : styles.tabItem
               }
+              key={'route' + i}
               onPress={() => this.setState({ index: i })}
             >
               <Animated.Text
@@ -53,7 +54,8 @@ export default class DonateTrees extends Component {
 
   _renderScene = SceneMap({
     individual: individualForm,
-    company: companyForm
+    company: companyForm,
+    featured: Featured
   });
 
   render() {
@@ -93,6 +95,12 @@ class companyForm extends Component {
         />
       </View>
     );
+  }
+}
+
+class Featured extends Component {
+  render() {
+    return <SelectPlantProjectContainer />;
   }
 }
 

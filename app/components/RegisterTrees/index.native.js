@@ -8,7 +8,6 @@ import {
   StyleSheet
 } from 'react-native';
 import PropTypes from 'prop-types';
-import styles from '../../styles/login';
 import t from 'tcomb-form-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -23,33 +22,26 @@ import i18n from '../../locales/i18n.js';
 
 const Form = t.form.Form;
 export default class RegisterTrees extends Component {
-  // state = {
-
-  // };
-
   constructor() {
     super();
 
     this.state = {
-      mode: '',
       individual: {
         treeCount: 1
       },
       index: 0,
       routes: [
-        { key: 'singleTree', title: i18n.t('label.individual') },
-        { key: 'multipleTrees', title: i18n.t('label.many_trees') }
+        {
+          key: 'single-tree',
+          title: i18n.t('label.individual')
+        },
+        { key: 'multiple-trees', title: i18n.t('label.many_trees') }
       ]
     };
 
     // Bind Local method
-    this.onSubmitClick = this.onSubmitClick.bind(this);
     this._handleIndexChange = this._handleIndexChange.bind(this);
     this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
-  }
-
-  onSubmitClick() {
-    this.props.onSubmit(this.state.mode);
   }
 
   _handleIndexChange = index => this.setState({ index });
@@ -86,16 +78,30 @@ export default class RegisterTrees extends Component {
     );
   };
 
-  _renderScene = SceneMap({
-    singleTree: singleTreeForm,
-    multipleTrees: multipleTreesForm
-  });
+  _renderScene = ({ route }) => {
+    switch (route.key) {
+      case 'single-tree':
+        return (
+          <SingleTreeForm onRegister={this.props.onSubmit} mode={route.key} />
+        );
+      case 'multiple-trees':
+        return (
+          <MultipleTreesForm
+            onRegister={this.props.onSubmit}
+            mode={route.key}
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView>
         <CardLayout>
           <TabView
+            ref="registerTreeForm"
             navigationState={this.state}
             renderScene={this._renderScene}
             renderTabBar={this._renderTabBar}
@@ -107,30 +113,44 @@ export default class RegisterTrees extends Component {
   }
 }
 
-class singleTreeForm extends Component {
+class SingleTreeForm extends Component {
   render() {
     return (
       <View style={{ backgroundColor: '#ffffff' }}>
         <Form
-          ref="registerTreeForm"
+          ref="singleTreeForm"
           type={singleTreeRegisterFormSchema}
           options={schemaOptionsSingleTree}
           // value={this.state.individual}
         />
+        <PrimaryButton
+          onClick={() => {
+            this.props.onRegister(this.props.mode, this.refs.singleTreeForm);
+          }}
+        >
+          {i18n.t('label.register')}
+        </PrimaryButton>
       </View>
     );
   }
 }
 
-class multipleTreesForm extends Component {
+class MultipleTreesForm extends Component {
   render() {
     return (
       <View style={{ backgroundColor: '#ffffff' }}>
         <Form
-          ref="registerTreeForm"
+          ref="multipleTreesForm"
           type={multipleTreesRegisterFormSchema}
           options={schemaOptionsMultipleTrees}
         />
+        <PrimaryButton
+          onClick={() => {
+            this.props.onRegister(mode, this.refs.multipleTreesForm);
+          }}
+        >
+          {i18n.t('label.register')}
+        </PrimaryButton>
       </View>
     );
   }

@@ -12,9 +12,11 @@ class RegisterTreesContainer extends Component {
     super();
   }
 
-  onSubmit = mode => {
-    console.log(this.refs.registerTrees.refs.registerTreeForm.validate());
-    let value = this.refs.registerTrees.refs.registerTreeForm.getValue();
+  onSubmit = (mode, registerTreeForm) => {
+    registerTreeForm =
+      registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
+    console.log(registerTreeForm.validate());
+    let value = registerTreeForm.getValue();
     if (value) {
       this.props.registerTree(
         value,

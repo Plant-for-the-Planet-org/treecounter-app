@@ -24,7 +24,8 @@ const headerLabels = {
   [getLocalRoute('app_userHome')]: 'label.home',
   [getLocalRoute('app_target')]: 'label.set_target',
   [getLocalRoute('app_donateTrees')]: 'label.donate_trees',
-  [getLocalRoute('app_faq')]: 'label.faqs'
+  [getLocalRoute('app_faq')]: 'label.faqs',
+  [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees'
 };
 
 export const getDrawerNavigator = function(isLoggedIn) {

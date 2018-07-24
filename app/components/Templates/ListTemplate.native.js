@@ -1,5 +1,20 @@
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import React from 'react';
+import i18n from '../../locales/i18n';
+
+const styles = {
+  addButtonStyle: {
+    backgroundColor: '#fff',
+    height: 36,
+    marginBottom: 10,
+    borderWidth: 0
+  },
+  addButtonText: {
+    color: '#ff644e',
+    fontSize: 18,
+    alignSelf: 'flex-start'
+  }
+};
 
 export function ListTemplateGenerator(config) {
   return function listTemplateNative(title) {
@@ -35,7 +50,7 @@ export function ListTemplateGenerator(config) {
         });
 
       let addButton = locals.add
-        ? renderRowButton(locals.add, stylesheet)
+        ? renderRowButton(locals.add, stylesheet, styles, title)
         : null;
 
       return (
@@ -54,14 +69,17 @@ function renderRowWithoutButtons(item) {
   return <View key={item.key}>{item.input}</View>;
 }
 
-function renderRowButton(button, stylesheet, style) {
+function renderRowButton(button, stylesheet, style, title) {
   return (
     <TouchableHighlight
       key={button.type}
-      style={[stylesheet.button, style]}
+      style={[stylesheet.button, style.addButtonStyle]}
       onPress={button.click}
+      underlayColor={'#f2f2f2'}
     >
-      <Text style={stylesheet.buttonText}>{button.label}</Text>
+      <Text style={[stylesheet.buttonText, style.addButtonText]}>
+        +&nbsp;{i18n.t(title)}
+      </Text>
     </TouchableHighlight>
   );
 }

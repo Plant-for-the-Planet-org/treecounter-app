@@ -11,6 +11,7 @@ import {
   companySchemaOptions,
   individualSchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
+import CardLayout from '../Common/Card/CardLayout';
 
 let Form = t.form.Form;
 
@@ -73,13 +74,15 @@ export default class DonateTrees extends Component {
 class individualForm extends Component {
   render() {
     return (
-      <View style={{ backgroundColor: '#ffffff' }}>
+      <CardLayout
+        style={{ flex: 1, justifyContent: 'flex-start', paddingTop: 10 }}
+      >
         <Form
           ref={'donorDetailsForm'}
           type={receiptIndividualFormSchema}
           options={individualSchemaOptions}
         />
-      </View>
+      </CardLayout>
     );
   }
 }
@@ -87,13 +90,15 @@ class individualForm extends Component {
 class companyForm extends Component {
   render() {
     return (
-      <View style={{ backgroundColor: '#ffffff' }}>
+      <CardLayout
+        style={{ flex: 1, justifyContent: 'flex-start', paddingTop: 10 }}
+      >
         <Form
           ref={'donorDetailsForm'}
           type={receiptCompanyFormSchema}
           options={companySchemaOptions}
         />
-      </View>
+      </CardLayout>
     );
   }
 }

@@ -15,20 +15,19 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
     alignItems: 'center'
   },
   plantProjectContentFull: {
-    flex: 0.9,
+    flex: 0.8,
     width: '100%'
   },
   footer: {
-    width: '90%',
-    flex: 0.1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
+    width: '100%',
+    flex: 0.2,
+    flexDirection: 'row'
   },
-  plantProjectSelectButton: {},
   plantProjectSelectButtonStyle: {
-    height: 40,
-    width: '70%'
+    height: 43,
+    width: '80%',
+    marginLeft: 25,
+    marginRight: 40
   },
   plantProjectSelectTextStyle: {
     fontSize: 15

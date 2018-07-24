@@ -2,7 +2,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (buttonStyles = EStyleSheet.create({
   cardContainer: {
-    alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,

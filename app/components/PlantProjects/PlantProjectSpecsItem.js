@@ -29,8 +29,8 @@ const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
 };
 
 PlantProjectSpecsItem.propTypes = {
-  icon: PropTypes.string,
-  rightIcon: PropTypes.string,
+  icon: PropTypes.any,
+  rightIcon: PropTypes.any,
   value: PropTypes.any,
   label: PropTypes.string
 };

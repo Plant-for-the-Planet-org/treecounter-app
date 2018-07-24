@@ -5,12 +5,14 @@ import LoginContainer from '../../containers/Authentication/LoginContainer';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 import TargetContainer from '../../containers/TargetContainer';
+import DonationTreesContainer from '../../containers/DonateTrees';
 
 import { getLocalRoute } from '../../actions/apiRouting';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import styles from '../../styles/header.native';
 import BurgerMenu from '../../components/Header/BurgerMenu';
 import i18n from '../../locales/i18n.js';
+import DonateTrees from '../../containers/DonateTrees';
 import FAQContainer from '../../containers/FAQ';
 import RegisterTrees from '../RegisterTrees';
 
@@ -21,6 +23,7 @@ const headerLabels = {
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_userHome')]: 'label.home',
   [getLocalRoute('app_target')]: 'label.set_target',
+  [getLocalRoute('app_donateTrees')]: 'label.donate_trees',
   [getLocalRoute('app_faq')]: 'label.faqs'
 };
 
@@ -36,6 +39,9 @@ export const getDrawerNavigator = function(isLoggedIn) {
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
       },
+      [getLocalRoute('app_donateTrees')]: {
+        screen: DonateTrees
+      },
       [getLocalRoute('app_userHome')]: {
         screen: Trillion
       },
@@ -44,6 +50,9 @@ export const getDrawerNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
+      },
+      [getLocalRoute('app_donateTrees')]: {
+        screen: DonationTreesContainer
       },
       [getLocalRoute('app_faq')]: FAQContainer
     },

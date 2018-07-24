@@ -30,6 +30,7 @@ class DonationTreesContainer extends Component {
     let flag = this.props.currentUserProfile ? true : false;
     return (
       <DonateTrees
+        ref={'donateTreesContainer'}
         selectedProject={this.props.selectedProject}
         selectedTpo={this.props.selectedTpo}
         currentUserProfile={this.props.currentUserProfile}

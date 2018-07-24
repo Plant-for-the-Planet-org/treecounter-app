@@ -4,7 +4,8 @@ import i18n from '../../locales/i18n';
 import styles from '../../styles/forms/textinput';
 export function TextInputTemplate(locals) {
   function onChange(value) {
-    value = locals.type === 'number' && value ? parseInt(value) : value;
+    value =
+      locals.keyboardType === 'numeric' && value ? parseInt(value) : value;
     locals.onChange(value);
   }
 
@@ -29,7 +30,7 @@ export function TextInputTemplate(locals) {
           maxLength={locals.maxLength}
           multiline={locals.multiline}
           value={locals.value}
-          onChangeText={value => locals.onChange(value)}
+          onChangeText={value => onChange(value)}
           onChange={locals.onChangeNative}
           onKeyPress={locals.onKeyPress}
           returnKeyType={locals.returnKeyType}

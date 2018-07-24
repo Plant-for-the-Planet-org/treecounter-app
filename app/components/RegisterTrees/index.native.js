@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import {
   ScrollView,
   View,
@@ -113,7 +113,7 @@ export default class RegisterTrees extends Component {
   }
 }
 
-class SingleTreeForm extends Component {
+class SingleTreeForm extends PureComponent {
   render() {
     return (
       <View style={{ backgroundColor: '#ffffff' }}>
@@ -135,7 +135,7 @@ class SingleTreeForm extends Component {
   }
 }
 
-class MultipleTreesForm extends Component {
+class MultipleTreesForm extends PureComponent {
   render() {
     return (
       <View style={{ backgroundColor: '#ffffff' }}>
@@ -146,7 +146,7 @@ class MultipleTreesForm extends Component {
         />
         <PrimaryButton
           onClick={() => {
-            this.props.onRegister(mode, this.refs.multipleTreesForm);
+            this.props.onRegister(this.props.mode, this.refs.multipleTreesForm);
           }}
         >
           {i18n.t('label.register')}

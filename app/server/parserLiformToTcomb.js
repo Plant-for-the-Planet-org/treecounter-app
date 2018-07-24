@@ -81,6 +81,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
               options.type = 'text';
             } else if (properties[propertyKey].type === 'integer') {
               options.type = 'number';
+              options.keyboardType = 'numeric';
             } else if (properties[propertyKey].type === 'number') {
               options.type = 'number';
               options.template = FloatInputTemplate;

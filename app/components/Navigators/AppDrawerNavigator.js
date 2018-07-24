@@ -14,7 +14,7 @@ import BurgerMenu from '../../components/Header/BurgerMenu';
 import i18n from '../../locales/i18n.js';
 import DonateTrees from '../../containers/DonateTrees';
 import FAQContainer from '../../containers/FAQ';
-import RegisterTrees from '../RegisterTrees';
+import RegisterTrees from '../../containers/RegisterTrees';
 
 const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
 const headerLabels = {

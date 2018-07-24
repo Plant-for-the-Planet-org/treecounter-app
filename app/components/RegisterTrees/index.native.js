@@ -142,32 +142,29 @@ const styles1 = StyleSheet.create({
   },
   tabBar: {
     flexDirection: 'row',
-    paddingTop: 20,
     backgroundColor: '#ffffff',
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.4,
-    shadowRadius: 2,
-    elevation: 1
+    borderWidth: 4,
+    borderColor: '#ff644e',
+    borderRadius: 5,
+    margin: 15
   },
   tabItemActive: {
     flex: 1,
     alignItems: 'center',
-    padding: 10,
-    borderBottomColor: '#ec6453',
-    borderBottomWidth: 2
+    backgroundColor: '#ff644e'
   },
   tabItem: {
     flex: 1,
-    alignItems: 'center',
-    padding: 10
+    alignItems: 'center'
   },
   textActive: {
-    color: '#ec6453',
-    fontSize: 18
+    color: '#fff',
+    fontSize: 18,
+    padding: 10
   },
   text: {
-    color: '#aba2a2',
+    color: '#ff644e',
+    padding: 10,
     fontSize: 18
   }
 });

@@ -3,6 +3,11 @@ import React from 'react';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/forms/textinput';
 export function TextInputTemplate(locals) {
+  function onChange(value) {
+    value = locals.type === 'number' && value ? parseInt(value) : value;
+    locals.onChange(value);
+  }
+
   let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
   let error =
     locals.hasError && locals.error ? (

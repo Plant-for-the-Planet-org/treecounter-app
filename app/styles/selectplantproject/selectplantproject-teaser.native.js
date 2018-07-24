@@ -7,7 +7,7 @@ export default (selectplantTeaserStyles = EStyleSheet.create({
   },
   project_teaser__content: {
     width: '100%',
-    flex: 0.2
+    flex: 0.3
   },
   column: {
     marginTop: 5,
@@ -15,11 +15,13 @@ export default (selectplantTeaserStyles = EStyleSheet.create({
     flexDirection: 'row'
   },
   project_teaser__contentText: {
-    fontSize: 15
+    fontSize: 15,
+    color: '$textColor',
+    marginBottom: 10
   },
   teaser__projectImageContainer: {
     width: 350,
-    flex: 0.8
+    flex: 0.7
   },
   teaser__projectImage: {
     width: '95%',

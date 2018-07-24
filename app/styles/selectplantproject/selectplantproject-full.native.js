@@ -10,12 +10,10 @@ export default (selectplantprojectFull = EStyleSheet.create({
     flexBasis: 50
   },
   projectSpecsContainer: {
-    flex: 0.4,
+    flex: 0.3,
     flexBasis: 40
   },
   seeMoreContainer: {
-    flex: 0.1,
-    flexBasis: 2,
     alignSelf: 'center'
   }
 }));

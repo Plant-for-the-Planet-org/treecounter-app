@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  Animated,
+  TouchableOpacity,
+  StyleSheet
+} from 'react-native';
 import PropTypes from 'prop-types';
 import styles from '../../styles/login';
-// import t from 'tcomb-form';
 import t from 'tcomb-form-native';
-
-let Form = t.form.Form;
-
-// import Tabs from '../Common/Tabs';
-// import PrimaryButton from '../Common/Button/PrimaryButton';
-// import TextHeading from '../Common/Heading/TextHeading';
-// import CardLayout from '../Common/Card/CardLayout';
+import { TabView, SceneMap } from 'react-native-tab-view';
+import PrimaryButton from '../Common/Button/PrimaryButton';
+import CardLayout from '../Common/Card/CardLayout';
 import {
   singleTreeRegisterFormSchema,
   schemaOptionsSingleTree,
@@ -18,77 +20,12 @@ import {
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
-// import RegistrationMap from './RegistrationMap';
-// import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 
-// let TCombForm = t.form.Form;
-
-// const formLayoutSingleTree = locals => {
-//   return (
-//     <View >
-//       <Text className="register-tree__form--row">
-//         {locals.inputs.treeCount}
-//         {locals.inputs.treeSpecies}
-//       </Text>
-//       <Text className="register-tree__form--row">
-//       {locals.inputs.plantDate}
-//       {locals.inputs.geoLocation}
-//       </Text>
-//       <Text className="register-tree__form--row">
-//         {locals.inputs.contributionImages}
-//       </Text>
-//       <View className="register-tree__form--row">
-//         <Text>{locals.inputs.treeClassification}</Text>
-//         <View className="register-tree__form--row__spacer" />
-//         <Text>{locals.inputs.treeScientificName}</Text>
-//       </View>
-//       <Text className="register-tree__form--row">
-//         {locals.inputs.contributionMeasurements}
-//       </Text>
-//     </View>
-//   );
-// };
-
-// const formLayoutMultipleTrees = locals => {
-//   return (
-//     <View className="register-tree__form">
-//       <View className="register-tree__form--row">
-//         <Text>{locals.inputs.treeCount}</Text>
-//         <View className="register-tree__form--row__spacer" />
-//         <Text>{locals.inputs.treeSpecies}</Text>
-//       </View>
-//       <View className="register-tree__form--row">{locals.inputs.plantDate}</View>
-//       <Text>{locals.inputs.geoLocation}</Text>
-//       <Text className="register-tree__form--row">
-//         {locals.inputs.contributionImages}
-//       </Text>
-//     </View>
-//   );
-// };
-
-// const schemaOptionsSingle = {
-//   template: formLayoutSingleTree,
-//   ...schemaOptionsSingleTree
-// };
-
-// const schemaOptionsMultiple = {
-//   template: formLayoutMultipleTrees,
-//   ...schemaOptionsMultipleTrees
-// };
-
+const Form = t.form.Form;
 export default class RegisterTrees extends Component {
-  static data = {
-    tabs: [
-      {
-        name: i18n.t('label.individual'),
-        id: 'single-tree'
-      },
-      {
-        name: i18n.t('label.many_trees'),
-        id: 'multiple-trees'
-      }
-    ]
-  };
+  // state = {
+
+  // };
 
   constructor() {
     super();
@@ -97,12 +34,17 @@ export default class RegisterTrees extends Component {
       mode: '',
       individual: {
         treeCount: 1
-      }
+      },
+      index: 0,
+      routes: [
+        { key: 'singleTree', title: i18n.t('label.individual') },
+        { key: 'multipleTrees', title: i18n.t('label.many_trees') }
+      ]
     };
 
     // Bind Local method
     this.onSubmitClick = this.onSubmitClick.bind(this);
-    this.handleModeOptionChange = this.handleModeOptionChange.bind(this);
+    this._handleIndexChange = this._handleIndexChange.bind(this);
     this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
   }
 
@@ -110,74 +52,125 @@ export default class RegisterTrees extends Component {
     this.props.onSubmit(this.state.mode);
   }
 
-  handleModeOptionChange(tab) {
-    this.setState({ mode: tab });
-  }
+  _handleIndexChange = index => this.setState({ index });
 
   handleGeoLocationChange(geoLocation) {
     console.log(geoLocation);
   }
 
+  _renderTabBar = props => {
+    const inputRange = props.navigationState.routes.map((x, i) => i);
+
+    return (
+      <View style={styles1.tabBar}>
+        {props.navigationState.routes.map((route, i) => {
+          return (
+            <TouchableOpacity
+              style={
+                this.state.index === i ? styles1.tabItemActive : styles1.tabItem
+              }
+              key={'route' + i}
+              onPress={() => this.setState({ index: i })}
+            >
+              <Animated.Text
+                style={
+                  this.state.index === i ? styles1.textActive : styles1.text
+                }
+              >
+                {route.title}
+              </Animated.Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    );
+  };
+
+  _renderScene = SceneMap({
+    singleTree: singleTreeForm,
+    multipleTrees: multipleTreesForm
+  });
+
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.loginHeader}>
-          <Text style={styles.titleText}>
-            {i18n.t('label.heading_register_trees')}
-          </Text>
-          <View style={styles.titleTextUnderline} />
-          <Text style={styles.descriptionText}>
-            {i18n.t('label.register_description')}
-          </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          {/* <TouchableNativeFeedback onPress={this.handleModeOptionChange}>
-        <Text>{RegisterTrees.data.tabs}</Text>
-        </TouchableNativeFeedback> */}
-          {/* {this.state.mode === RegisterTrees.data.tabs[0].id ? ( */}
-          {/* <Form
-                ref="registerTreeForm"
-                type={singleTreeRegisterFormSchema}
-                options={schemaOptionsSingle}
-                // value={this.state.individual}
-              /> */}
-          {/* ) : (
-              <Form
-                ref="registerTreeForm"
-                type={multipleTreesRegisterFormSchema}
-                options={schemaOptionsMultiple}
-              />
-            )} */}
-        </View>
-        {/*
         <CardLayout>
-          <Tabs
-            data={RegisterTrees.data.tabs}
-            onTabChange={this.handleModeOptionChange}
-          >
-            {this.state.mode === RegisterTrees.data.tabs[0].id ? (
-              <TCombForm
-                ref="registerTreeForm"
-                type={singleTreeRegisterFormSchema}
-                options={schemaOptionsSingle}
-                value={this.state.individual}
-              />
-            ) : (
-              <TCombForm
-                ref="registerTreeForm"
-                type={multipleTreesRegisterFormSchema}
-                options={schemaOptionsMultiple}
-              />
-            )}
-          </Tabs>
-          <PrimaryButton onClick={this.onSubmitClick}>
-            {i18n.t('label.register')}
-          </PrimaryButton>
-        </CardLayout> */}
+          <TabView
+            navigationState={this.state}
+            renderScene={this._renderScene}
+            renderTabBar={this._renderTabBar}
+            onIndexChange={this._handleIndexChange}
+          />
+        </CardLayout>
       </ScrollView>
     );
   }
 }
+
+class singleTreeForm extends Component {
+  render() {
+    return (
+      <View style={{ backgroundColor: '#ffffff' }}>
+        <Form
+          ref="registerTreeForm"
+          type={singleTreeRegisterFormSchema}
+          options={schemaOptionsSingleTree}
+          // value={this.state.individual}
+        />
+      </View>
+    );
+  }
+}
+
+class multipleTreesForm extends Component {
+  render() {
+    return (
+      <View style={{ backgroundColor: '#ffffff' }}>
+        <Form
+          ref="registerTreeForm"
+          type={multipleTreesRegisterFormSchema}
+          options={schemaOptionsMultipleTrees}
+        />
+      </View>
+    );
+  }
+}
+
+const styles1 = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  tabBar: {
+    flexDirection: 'row',
+    paddingTop: 20,
+    backgroundColor: '#ffffff',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 2,
+    elevation: 1
+  },
+  tabItemActive: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 10,
+    borderBottomColor: '#ec6453',
+    borderBottomWidth: 2
+  },
+  tabItem: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 10
+  },
+  textActive: {
+    color: '#ec6453',
+    fontSize: 18
+  },
+  text: {
+    color: '#aba2a2',
+    fontSize: 18
+  }
+});
 
 RegisterTrees.propTypes = {
   onSubmit: PropTypes.func.isRequired

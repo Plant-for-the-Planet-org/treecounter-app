@@ -125,11 +125,11 @@ export default class Leaderboard extends Component {
                 </div>
                 <div className="table-col other">
                   <div className="table-col-phone-header">Planted</div>
-                  <span>{d.planted}</span>
+                  <span>{parseInt(d.planted).toLocaleString('en')}</span>
                 </div>
                 <div className="table-col other">
                   <div className="table-col-phone-header">Target</div>
-                  <span>{d.target}</span>
+                  <span>{parseInt(d.target).toLocaleString('en')}</span>
                 </div>
               </div>
             ))}

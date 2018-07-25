@@ -286,7 +286,9 @@ export default class SelectPlantProject extends Component {
                                   {project.tpo_name}
                                 </td>
                                 <td className="align-right">
-                                  {project.countPlanted}
+                                  {parseInt(
+                                    project.countPlanted
+                                  ).toLocaleString('en')}
                                 </td>
                                 <td className="align-right">
                                   {project.currency +
@@ -338,7 +340,9 @@ export default class SelectPlantProject extends Component {
                                   {project.tpo_name}
                                 </td>
                                 <td className="align-right">
-                                  {project.countPlanted}
+                                  {parseInt(
+                                    project.countPlanted
+                                  ).toLocaleString('en')}
                                 </td>
                                 <td className="align-right">
                                   {project.currency +

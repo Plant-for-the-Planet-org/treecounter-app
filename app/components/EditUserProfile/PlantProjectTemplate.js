@@ -81,7 +81,7 @@ const PlantProjectTemplate = function(itemIndex) {
           >
             <div className="project-teaser-item">
               {locals.inputs.name}
-              {locals.inputs.countTarget}
+              {parseInt(locals.inputs.countTarget).toLocaleString('en')}
               {locals.inputs.survivalRate}
             </div>
             <div className="project-teaser-item">

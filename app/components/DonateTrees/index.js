@@ -367,7 +367,7 @@ export default class DonateTrees extends Component {
                 <div>
                   {this.props.selectedTpo && currencies ? (
                     <TreeCountCurrencySelector
-                      treeCost={plantProject.treeCost}
+                      treeCost={plantProject.treeCost.toFixed(2)}
                       rates={
                         currencies.currency_rates[plantProject.currency].rates
                       }

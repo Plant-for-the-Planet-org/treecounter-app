@@ -51,7 +51,7 @@ const PlantProjectSpecs = ({
         />
         <PlantProjectSpecsItem
           icon={dollar}
-          value={`${currency} ${treeCost}`}
+          value={`${currency} ${treeCost.toFixed(2)}`}
           label={i18n.t('label.Cost')}
         />
         <div className="project-specs__taxdeductible">

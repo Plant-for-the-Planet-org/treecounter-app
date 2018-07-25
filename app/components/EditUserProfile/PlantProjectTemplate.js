@@ -86,7 +86,7 @@ const PlantProjectTemplate = function(itemIndex) {
             </div>
             <div className="project-teaser-item">
               {locals.inputs.imageFile}
-              {locals.inputs.treeCost}
+              {locals.inputs.treeCost.toFixed(2)}
               {locals.inputs.currency}
             </div>
             <div className="separator" />

@@ -289,7 +289,9 @@ export default class SelectPlantProject extends Component {
                                   {project.countPlanted}
                                 </td>
                                 <td className="align-right">
-                                  {project.currency + ' ' + project.treeCost}
+                                  {project.currency +
+                                    ' ' +
+                                    project.treeCost.toFixed(2)}
                                 </td>
                                 <td>
                                   <PrimaryButton
@@ -339,7 +341,9 @@ export default class SelectPlantProject extends Component {
                                   {project.countPlanted}
                                 </td>
                                 <td className="align-right">
-                                  {project.currency + ' ' + project.treeCost}
+                                  {project.currency +
+                                    ' ' +
+                                    project.treeCost.toFixed(2)}
                                 </td>
                                 <td>
                                   <PrimaryButton

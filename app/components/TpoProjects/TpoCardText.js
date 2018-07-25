@@ -37,7 +37,9 @@ const TpoCardText = props => {
       </div>
       <div className="middle_tag1">
         <span className="col-md-8 text-left">{i18n.t('label.Cost')}:</span>{' '}
-        <span className="text-right col-md-4">{cardtext.treeCost}</span>
+        <span className="text-right col-md-4">
+          {cardtext.treeCost.toFixed(2)}
+        </span>
       </div>
     </div>
   );

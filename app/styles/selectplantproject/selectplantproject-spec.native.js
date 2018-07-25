@@ -57,6 +57,7 @@ export default (selectplantprojectSpecs = EStyleSheet.create({
     height: 15,
     width: 15,
     flex: 0.2,
+    marginVertical: 2,
     justifyContent: 'center',
     alignItems: 'center'
   },

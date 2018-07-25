@@ -287,6 +287,13 @@ export default class GiftTrees extends Component {
     let displayNone = classNames({
       'display-none': !this.state.showNextButton
     });
+    if (this.refs.slider) {
+      setTimeout(() => {
+        if (this.state.pageIndex === 4) {
+          this.refs.slider.slickGoTo(this.state.pageIndex);
+        }
+      }, 1000);
+    }
     let { pageIndex } = this.state;
     const NextArrow = function(props) {
       function validated() {
@@ -389,7 +396,7 @@ export default class GiftTrees extends Component {
           ) : (
             <div className="donate-tress__container">
               <ContentHeader caption={headings[this.state.pageIndex]} />
-              <Slider {...settings}>
+              <Slider {...settings} ref="slider">
                 <div className="treecount-selector-wrapper">
                   <Tabs
                     data={GiftTrees.data.tabsUser}

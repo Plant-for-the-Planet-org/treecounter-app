@@ -1,9 +1,9 @@
 import schemaLiform from '../formSchemas/giftTrees';
-import parseJsonToTcomb from '../parserLiformToTcomb';
+import callParser from '../callParser';
 
 const {
   transformedSchema: giftInvitationFormSchema,
   schemaOptions: giftInvitationSchemaOptions
-} = parseJsonToTcomb(schemaLiform.properties.giftInvitation);
+} = callParser(schemaLiform.properties.giftInvitation);
 
 export { giftInvitationFormSchema, giftInvitationSchemaOptions };

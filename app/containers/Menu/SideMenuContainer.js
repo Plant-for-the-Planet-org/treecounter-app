@@ -30,7 +30,13 @@ class SideMenuContainer extends Component {
           error => console.log(error)
         )
       : PublicSideMenuSchema.subscribe(
-          success => this.setState({ schema: success, loading: false }),
+          success => {
+            if (success && success instanceof Array) {
+              this.setState({ schema: success, loading: false });
+            } else {
+              console.log('error in fetching side menu');
+            }
+          },
           error => console.log(error)
         );
   }
@@ -50,8 +56,12 @@ class SideMenuContainer extends Component {
   }
 
   render() {
-    let { pathname } = this.props.location;
-    let path = pathname.substr(pathname.lastIndexOf('/') + 1);
+    let path = undefined;
+    if (this.props.location) {
+      const { pathname } = this.props.location;
+      path = pathname.substr(pathname.lastIndexOf('/') + 1);
+    }
+
     return this.state.loading ? null : (
       <Menu
         isOpen={this.props.isOpen}
@@ -60,6 +70,7 @@ class SideMenuContainer extends Component {
         path={path}
         toggleSideNavAction={this.props.toggleSideNavAction}
         clearSupport={this.props.clearSupport}
+        logoutUser={this.props.logoutUser}
       />
     );
   }

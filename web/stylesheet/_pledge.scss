@@ -126,3 +126,24 @@
     flex-direction: column;
   }
 }
+
+.events_row {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+
+  .event_item {
+    border-radius: 6px;
+    box-shadow: 0px 1px 5px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border: solid 1.4px #e6e6e6;
+    padding: 20px;
+    // margin-right: 30px;
+    cursor: pointer;
+    text-align: center;
+
+    img {
+      width: 60px;
+    }
+  }
+}

@@ -12,13 +12,19 @@ export default (selectplantprojectSpecs = EStyleSheet.create({
   },
   project_specs__taxdeductible: {
     width: '100%',
-    paddingTop: 10
+    paddingTop: 10,
+    flexDirection: 'row',
+    paddingLeft: 38
   },
   project_specs__taxdeductibleText: {
-    width: '100%',
     fontSize: 13,
     color: '$textColor'
   },
+  project_specs__taxdeductibleIcon: {
+    width: 14,
+    height: 14
+  },
+
   project_specs__item: {
     width: 350,
     paddingTop: 5,
@@ -31,6 +37,11 @@ export default (selectplantprojectSpecs = EStyleSheet.create({
   project_specs__itemText: {
     flex: 0.8,
     justifyContent: 'flex-end',
+    alignContent: 'center'
+  },
+  project_specs__itemTextsurvival: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
     alignContent: 'center'
   },
   project_specs__itemText_left: {

@@ -12,10 +12,12 @@ import {
   Text,
   View,
   TouchableHighlight,
+  Image,
   ScrollView
 } from 'react-native';
 import styles from '../../styles/login';
-
+import PrimaryButton from '../Common/Button/PrimaryButton';
+import { plantedTarget } from '../../assets';
 import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 import { getLocalRoute } from '../../actions/apiRouting';
 
@@ -23,15 +25,18 @@ export default class UserContributions extends React.Component {
   render() {
     const { userProfileId, userContributions } = this.props;
     return (
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.loginHeader}>
-          <Text style={styles.titleText}>{i18n.t('label.my_trees')}</Text>
-          <View style={styles.titleTextUnderline} />
-        </View>
-        <View style={styles.inputContainer}>
+      <ScrollView contentContaierStyle={styles.container}>
+        <PrimaryButton
+          onClick={event => {
+            console.log('clicked Register trees');
+          }}
+        >
+          <Image src={plantedTarget} />Register new trees
+        </PrimaryButton>
+        {/* <View style={styles.inputContainer}>
           {Object.keys(userContributions).length > 0 ? (
             <View>
-              {/* <ArcGISContributionsMap userId={userProfileId} /> */}
+              <ArcGISContributionsMap userId={userProfileId} />
               <ContributionsMapLegend />
               <View className="contribution-container">
                 <ContributionCardList contributions={userContributions} />
@@ -41,12 +46,12 @@ export default class UserContributions extends React.Component {
                   onPress={() => getLocalRoute('app_registerTrees')}
                 >
                   <Text>{i18n.t('label.registerFurther')}</Text>
-                  {/* uri={'app_registerTrees'} */}
+                  uri={'app_registerTrees'}
                 </TouchableHighlight>
                 <TouchableHighlight
                   onPress={() => getLocalRoute('app_donateTrees')}
                 >
-                  {/* uri={'app_donateTrees'}  */}
+                  uri={'app_donateTrees'}
                   <Text>{i18n.t('label.donate_trees')}</Text>
                 </TouchableHighlight>
               </View>
@@ -56,7 +61,7 @@ export default class UserContributions extends React.Component {
               <Text>{i18n.t('label.no_contributions')}</Text>
             </View>
           )}
-        </View>
+        </View> */}
       </ScrollView>
     );
   }

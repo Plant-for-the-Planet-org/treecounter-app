@@ -14,6 +14,7 @@ export default class RegisterTreeTab extends PureComponent {
           ref="multipleTreesForm"
           type={this.props.schemaType}
           options={this.props.schemaOptions}
+          value={this.props.value}
         />
         <PrimaryButton
           onClick={() => {
@@ -35,5 +36,6 @@ RegisterTreeTab.propTypes = {
   mode: PropTypes.string.isRequired,
   onRegister: PropTypes.func,
   schemaType: PropTypes.any.isRequired,
-  schemaOptions: PropTypes.any.isRequired
+  schemaOptions: PropTypes.any.isRequired,
+  value: PropTypes.any
 };

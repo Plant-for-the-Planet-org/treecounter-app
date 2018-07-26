@@ -7,7 +7,6 @@ export default (buttonStyles = EStyleSheet.create({
     borderColor: '$primary',
     borderWidth: 1,
     borderRadius: 6,
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
   },

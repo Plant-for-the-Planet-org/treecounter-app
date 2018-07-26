@@ -4,15 +4,14 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
   slickWrapper: {},
 
   cardContent: {
-    width: '100%',
-    flex: 1
+    width: '100%'
   },
 
   plantProjectContent: {
     flex: 1,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center'
+    width: '100%'
+    // justifyContent: 'center',
+    // alignItems: 'center'
   },
   plantProjectContentFull: {
     flex: 0.8,

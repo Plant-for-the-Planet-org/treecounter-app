@@ -11,7 +11,8 @@ export default (loginStyles = EStyleSheet.create({
   },
   inputContainer: {
     width: '100%',
-    height: 400
+    height: 400,
+    justifyContent: 'center'
   },
   button: {
     height: 50,

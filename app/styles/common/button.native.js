@@ -2,19 +2,19 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (buttonStyles = EStyleSheet.create({
   primaryButton: {
-    height: 25,
-    width: 100,
+    height: 50,
     backgroundColor: '$primary',
     borderColor: '$primary',
     borderWidth: 1,
-    borderRadius: 5
+    borderRadius: 6,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   primaryButtonText: {
-    fontSize: 12,
+    fontSize: 25,
     color: 'white',
     width: '100%',
-    height: '100%',
-    textAlign: 'center',
-    lineHeight: 30
+    textAlign: 'center'
   }
 }));

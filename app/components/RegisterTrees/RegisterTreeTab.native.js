@@ -33,7 +33,7 @@ export default class RegisterTreeTab extends PureComponent {
 
 RegisterTreeTab.propTypes = {
   mode: PropTypes.string.isRequired,
-  onRegister: PropTypes,
+  onRegister: PropTypes.func,
   schemaType: PropTypes.any.isRequired,
   schemaOptions: PropTypes.any.isRequired
 };

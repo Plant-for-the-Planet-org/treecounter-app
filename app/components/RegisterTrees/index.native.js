@@ -2,7 +2,6 @@ import React, { Component, PureComponent } from 'react';
 import {
   ScrollView,
   View,
-  Text,
   Animated,
   TouchableOpacity,
   StyleSheet
@@ -19,6 +18,7 @@ import {
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
+import { renderFilledTabBar } from '../Common/Tabs';
 
 const Form = t.form.Form;
 export default class RegisterTrees extends Component {
@@ -51,30 +51,10 @@ export default class RegisterTrees extends Component {
   }
 
   _renderTabBar = props => {
-    const inputRange = props.navigationState.routes.map((x, i) => i);
-
-    return (
-      <View style={styles1.tabBar}>
-        {props.navigationState.routes.map((route, i) => {
-          return (
-            <TouchableOpacity
-              style={
-                this.state.index === i ? styles1.tabItemActive : styles1.tabItem
-              }
-              key={'route' + i}
-              onPress={() => this.setState({ index: i })}
-            >
-              <Animated.Text
-                style={
-                  this.state.index === i ? styles1.textActive : styles1.text
-                }
-              >
-                {route.title}
-              </Animated.Text>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+    return renderFilledTabBar(
+      props.navigationState.routes,
+      this.state.index,
+      index => this.setState({ index })
     );
   };
 
@@ -155,39 +135,6 @@ class MultipleTreesForm extends PureComponent {
     );
   }
 }
-
-const styles1 = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  tabBar: {
-    flexDirection: 'row',
-    backgroundColor: '#ffffff',
-    borderWidth: 4,
-    borderColor: '#ff644e',
-    borderRadius: 5,
-    margin: 15
-  },
-  tabItemActive: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#ff644e'
-  },
-  tabItem: {
-    flex: 1,
-    alignItems: 'center'
-  },
-  textActive: {
-    color: '#fff',
-    fontSize: 18,
-    padding: 10
-  },
-  text: {
-    color: '#ff644e',
-    padding: 10,
-    fontSize: 18
-  }
-});
 
 RegisterTrees.propTypes = {
   onSubmit: PropTypes.func.isRequired

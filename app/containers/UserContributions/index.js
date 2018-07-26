@@ -16,6 +16,7 @@ class UserContributionsContainer extends React.Component {
       <UserContributions
         userProfileId={this.props.userProfileId}
         userContributions={this.props.userContributions}
+        navigation={this.props.navigation}
       />
     );
   }

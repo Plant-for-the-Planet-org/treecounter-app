@@ -3,9 +3,10 @@ import { MapPinRed, MapPinBlue, MapPinGreen } from '../../assets';
 import TextSpan from '../Common/Text/TextSpan';
 import i18n from '../../locales/i18n.js';
 import { Text, View, Image } from 'react-native';
+import styles from '../../styles/my_trees.native';
 
 const ContributionsMapLegend = () => (
-  <View className="user-contributions__location--icons">
+  <View style={styles.contributionMapLegend}>
     <Image
       className="user-contributions__location--icons--img"
       source={MapPinRed}

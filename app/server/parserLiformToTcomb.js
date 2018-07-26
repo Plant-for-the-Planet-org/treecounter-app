@@ -9,6 +9,7 @@ import { MapTemplate } from '../components/Templates/MapTemplate';
 import { ListTemplateGenerator } from '../components/Templates/ListTemplate';
 import { FilePickerTemplate } from '../components/Templates/FilePickerTemplate';
 import { FloatInputTemplate } from '../components/Templates/FloatInputTemplate';
+import { DatePickerTemplate } from '../components/Templates/DatePickerTemplate';
 
 // Import assets
 import * as images from '../assets';
@@ -115,6 +116,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
             options.template = MapTemplate;
             break;
           case 'date':
+            options.template = DatePickerTemplate;
             options.type = properties[propertyKey].widget;
             break;
           case 'hidden':

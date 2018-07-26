@@ -14,7 +14,7 @@ export default class RegisterTreeTab extends PureComponent {
           ref="multipleTreesForm"
           type={this.props.schemaType}
           options={this.props.schemaOptions}
-          value={this.props.value}
+          value={{ treeCount: 1 }}
         />
         <PrimaryButton
           onClick={() => {

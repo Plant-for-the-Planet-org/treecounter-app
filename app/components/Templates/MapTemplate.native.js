@@ -1,18 +1,11 @@
 import { Text, View, Image, TextInput } from 'react-native';
 import React from 'react';
 import PrimaryButton from '../../components/Common/Button/PrimaryButton';
+import mapTemplateStyle from '../../styles/mapTemplate.native';
 
 export function MapTemplate(locals) {
   return (
-    <View
-      style={{
-        backgroundColor: 'grey',
-        height: 200,
-        flex: 1,
-        justifyContent: 'center',
-        padding: 50
-      }}
-    >
+    <View style={mapTemplateStyle.mapContainer}>
       <PrimaryButton
         onClick={() => {
           locals.onChange(
@@ -20,8 +13,9 @@ export function MapTemplate(locals) {
           );
         }}
       >
-        "default location"
+        Default Location
       </PrimaryButton>
+      <Text>Maps under construction</Text>
     </View>
   );
 }

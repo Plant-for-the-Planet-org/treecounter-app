@@ -32,7 +32,7 @@ export function TextInputTemplate(locals) {
           keyboardType={locals.keyboardType}
           maxLength={locals.maxLength}
           multiline={locals.multiline}
-          value={locals.value}
+          value={String(locals.value)}
           onChangeText={value => onChange(value)}
           onChange={locals.onChangeNative}
           onKeyPress={locals.onKeyPress}

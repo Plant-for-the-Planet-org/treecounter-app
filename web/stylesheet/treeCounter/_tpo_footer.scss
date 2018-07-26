@@ -170,6 +170,28 @@
       width: 100%;
       background-color: #fff;
       color: #b4b4b4;
+      .tax_deduction{
+        width: 70%;
+        height: 25px;
+        border-radius: 12.5px;
+        border-color: #b4b4b4;
+        border: solid 0.6px #b4b4b4;
+        margin-left: 15%;
+        @include for-phone-only{
+          width: 90%;
+          margin-left: 0%;
+        }
+        .tax_label{
+          width: 20%;
+          height: 50%;
+          border-radius: 12.5px;
+          background-color: #b4b4b4;
+          color: #fff;
+          float: left;
+          font-size: 46%;
+          margin: 6px;
+        }
+      }
     }
   }
 

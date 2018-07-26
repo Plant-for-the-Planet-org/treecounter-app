@@ -27,7 +27,7 @@ const headerLabels = {
   [getLocalRoute('app_donateTrees')]: 'label.donate_trees',
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_faq')]: 'label.faqs',
-  [getLocalRoute('app_myTrees')]: 'label.my_trees'
+  [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees'
 };
 

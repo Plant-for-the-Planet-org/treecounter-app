@@ -19,7 +19,11 @@ const PlantProjectTeaser = ({
     <View style={styles.project_teaser__container}>
       <View style={styles.project_teaser__content}>
         <View style={styles.column}>
-          <Text style={styles.project_teaser__contentText}>{projectName} </Text>
+          <Text
+            style={[styles.project_teaser__contentText, { fontWeight: 'bold' }]}
+          >
+            {projectName}{' '}
+          </Text>
           <View>
             {isCertified ? (
               <Image

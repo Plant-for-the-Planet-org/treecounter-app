@@ -31,5 +31,6 @@ export default connect(mapStateToProps)(UserContributionsContainer);
 
 UserContributionsContainer.propTypes = {
   userProfileId: PropTypes.number.isRequired,
-  userContributions: PropTypes.array.isRequired
+  userContributions: PropTypes.array.isRequired,
+  navigation: PropTypes.any
 };

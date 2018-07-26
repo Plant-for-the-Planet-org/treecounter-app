@@ -8,7 +8,7 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
   return (
     <View style={styles.currency_selector}>
       <Text>{i18n.t('label.currency')}</Text>
-      {/* <View style={styles.containerStyle}>
+      <View style={styles.containerStyle}>
         <Picker
           mode="dropdown"
           selectedValue={selectedCurrency}
@@ -16,19 +16,20 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
           style={styles.pickerStyle}
           itemStyle={styles.itemStyle}
         >
-          {currencies.map(option => (
-            <Picker.Item
-              key={option.value}
-              label={i18n.t(option.text)}
-              value={option.value}
-            />
-          ))}
+          {Object.keys(currencies).map(value => {
+            return (
+              <Picker.Item
+                key={value}
+                label={i18n.t(currencies[value])}
+                value={currencies[value]}
+              />
+            );
+          })}
         </Picker>
-      </View> */}
+      </View>
     </View>
   );
 };
-//TODO Add select field
 
 CurrencySelector.propTypes = {
   selectedCurrency: PropTypes.string,

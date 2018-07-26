@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import CurrencySelector from './CurrencySelector';
 import TreeCountSelector from './TreeCountSelector';
 import { View } from 'react-native';
+import CardLayout from '../Common/Card/CardLayout';
 
 class TreeCountCurrencySelector extends React.Component {
   constructor(props) {
@@ -70,8 +71,10 @@ class TreeCountCurrencySelector extends React.Component {
 
   render() {
     const { currencies, treeCountOptions } = this.props;
+    console.log('Shubhi currencies');
+    console.log(currencies);
     return (
-      <View>
+      <CardLayout>
         <CurrencySelector
           currencies={currencies}
           onChange={this.handleCurrencyChange}
@@ -85,7 +88,7 @@ class TreeCountCurrencySelector extends React.Component {
           treeCountOptions={treeCountOptions}
           defaultTreeCount={this.state.selectedTreeCount}
         />
-      </View>
+      </CardLayout>
     );
   }
 }

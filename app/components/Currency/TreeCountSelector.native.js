@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
 import i18n from '../../locales/i18n';
 import { tree } from '../../assets';
+import { Text, TextInput, View } from 'react-native';
+import styles from '../../styles/currencies/treeCounterSelector';
 
 class TreeCountSelector extends React.Component {
   constructor(props) {
@@ -92,13 +93,66 @@ class TreeCountSelector extends React.Component {
 
   render() {
     const { treeCountOptions, currency, treeCountToAmount } = this.props;
-
+    console.log('treeCountOptions.fixedTreeCountOptions)');
+    console.log(treeCountOptions.fixedTreeCountOptions);
     return (
-      <View>
-        <Text>{i18n.t('label.no_of_trees')}</Text>
+      <View style={styles.treecount_container}>
+        <Text strong={true}>{i18n.t('label.no_of_trees')}</Text>
         {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
-          return <Text>{treeCount}</Text>;
+          return (
+            <View style={styles.treecount_price_conversion} key={treeCount}>
+              <Text style={styles.counter_label}>
+                {/* <input
+                type="radio"
+                value={treeCount}
+                checked={
+                  treeCount === this.state.fixedTreeCount &&
+                  true === this.state.isFixed
+                }
+                onChange={evt =>
+                  this.handleFixedTreeCountChange(evt.target.value)
+                }
+              /> */}
+                {treeCount} {i18n.t('label.trees')}
+              </Text>
+              <Text>=</Text>
+              <Text key={treeCount} style={styles.counter_label}>
+                {treeCountToAmount(treeCount)} {currency}
+              </Text>
+            </View>
+          );
         })}
+
+        <View style={styles.treecount_price_conversion}>
+          {/* <input
+            type="radio"
+            value={this.state.variableTreeCount}
+            checked={!this.state.isFixed}
+            onChange={evt =>
+              this.handleVariableTreeCountSelected(evt.target.value)
+            }
+          /> */}
+          <TextInput
+            editable={!this.state.isFixed}
+            keyboardType="numeric"
+            onChangeText={evt =>
+              this.handleVariableTreeCountChange(evt.target.value)
+            }
+            value={String(this.state.variableTreeCount)}
+          />
+          <Text key="variable"> {i18n.t('label.trees')}</Text>
+          <Text>=</Text>
+
+          <TextInput
+            editable={!this.state.isFixed}
+            keyboardType="numeric"
+            onChangeText={evt =>
+              this.handleVariableAmountChange(evt.target.value)
+            }
+            value={String(this.state.variableAmount)}
+          />
+          <Text> {currency}</Text>
+        </View>
       </View>
     );
   }

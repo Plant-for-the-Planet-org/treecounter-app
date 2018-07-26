@@ -20,7 +20,7 @@ import {
 class PlantProjectSpecs extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tootltipText: ' ', deducibleText: ' ' };
+    this.state = { tootltipText: 'dummy', deducibleText: ' ' };
   }
   componentDidMount() {
     if (this.props.taxDeduction && this.props.taxDeduction.length > 2) {

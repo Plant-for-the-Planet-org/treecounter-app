@@ -25,7 +25,7 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
   plantProjectSelectButtonStyle: {
     height: 43,
     width: '80%',
-    marginLeft: 25,
+    marginLeft: 18,
     marginRight: 40
   },
   plantProjectSelectTextStyle: {

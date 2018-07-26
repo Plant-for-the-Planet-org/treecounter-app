@@ -55,13 +55,15 @@ const PlantProjectSpecs = ({
           label={i18n.t('label.Cost')}
         />
         <div className="project-specs__taxdeductible">
-          {taxDeduction && taxDeduction.length
-            ? i18n.t('label.tax_deductible') +
-              ' ' +
-              i18n.t('label.in') +
-              ' ' +
-              taxDeduction.join(', ')
-            : null}
+          {taxDeduction && taxDeduction.length ? (
+            <div>
+              <div className="tax_deduction">
+                <div className="tax_label">tax</div>
+                {i18n.t('label.tax_deductible')}
+              </div>
+              {' ' + i18n.t('label.in') + ' ' + taxDeduction.join(', ')}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

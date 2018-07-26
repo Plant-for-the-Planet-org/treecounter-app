@@ -8,14 +8,14 @@ export default (filledTabBar = EStyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#ffffff',
     borderWidth: 4,
-    borderColor: '#ff644e',
+    borderColor: '$colorPrimaryAccentLight',
     borderRadius: 5,
     margin: 15
   },
   tabItemActive: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#ff644e'
+    backgroundColor: '$colorPrimaryAccentLight'
   },
   tabItem: {
     flex: 1,
@@ -27,7 +27,7 @@ export default (filledTabBar = EStyleSheet.create({
     padding: 10
   },
   text: {
-    color: '#ff644e',
+    color: '$colorPrimaryAccentLight',
     padding: 10,
     fontSize: 18
   }

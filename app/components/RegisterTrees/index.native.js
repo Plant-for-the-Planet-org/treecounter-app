@@ -1,15 +1,7 @@
-import React, { Component, PureComponent } from 'react';
-import {
-  ScrollView,
-  View,
-  Animated,
-  TouchableOpacity,
-  StyleSheet
-} from 'react-native';
+import React, { Component } from 'react';
+import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
-import t from 'tcomb-form-native';
-import { TabView, SceneMap } from 'react-native-tab-view';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+import { TabView } from 'react-native-tab-view';
 import CardLayout from '../Common/Card/CardLayout';
 import {
   singleTreeRegisterFormSchema,
@@ -19,8 +11,8 @@ import {
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
 import { renderFilledTabBar } from '../Common/Tabs';
+import RegisterTreeTab from './RegisterTreeTab.native';
 
-const Form = t.form.Form;
 export default class RegisterTrees extends Component {
   constructor() {
     super();
@@ -59,21 +51,22 @@ export default class RegisterTrees extends Component {
   };
 
   _renderScene = ({ route }) => {
-    switch (route.key) {
-      case 'single-tree':
-        return (
-          <SingleTreeForm onRegister={this.props.onSubmit} mode={route.key} />
-        );
-      case 'multiple-trees':
-        return (
-          <MultipleTreesForm
-            onRegister={this.props.onSubmit}
-            mode={route.key}
-          />
-        );
-      default:
-        return null;
-    }
+    return (
+      <RegisterTreeTab
+        onRegister={this.props.onSubmit}
+        mode={route.key}
+        schemaType={
+          route.key == 'single-tree'
+            ? singleTreeRegisterFormSchema
+            : multipleTreesRegisterFormSchema
+        }
+        schemaOptions={
+          route.key == 'single-tree'
+            ? schemaOptionsSingleTree
+            : schemaOptionsMultipleTrees
+        }
+      />
+    );
   };
 
   render() {
@@ -89,49 +82,6 @@ export default class RegisterTrees extends Component {
           />
         </CardLayout>
       </ScrollView>
-    );
-  }
-}
-
-class SingleTreeForm extends PureComponent {
-  render() {
-    return (
-      <View style={{ backgroundColor: '#ffffff' }}>
-        <Form
-          ref="singleTreeForm"
-          type={singleTreeRegisterFormSchema}
-          options={schemaOptionsSingleTree}
-          // value={this.state.individual}
-        />
-        <PrimaryButton
-          onClick={() => {
-            this.props.onRegister(this.props.mode, this.refs.singleTreeForm);
-          }}
-        >
-          {i18n.t('label.register')}
-        </PrimaryButton>
-      </View>
-    );
-  }
-}
-
-class MultipleTreesForm extends PureComponent {
-  render() {
-    return (
-      <View style={{ backgroundColor: '#ffffff' }}>
-        <Form
-          ref="multipleTreesForm"
-          type={multipleTreesRegisterFormSchema}
-          options={schemaOptionsMultipleTrees}
-        />
-        <PrimaryButton
-          onClick={() => {
-            this.props.onRegister(this.props.mode, this.refs.multipleTreesForm);
-          }}
-        >
-          {i18n.t('label.register')}
-        </PrimaryButton>
-      </View>
     );
   }
 }

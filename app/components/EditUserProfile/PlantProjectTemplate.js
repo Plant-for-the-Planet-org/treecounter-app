@@ -82,7 +82,7 @@ const PlantProjectTemplate = function(itemIndex) {
             <div className="project-teaser-item">
               {locals.inputs.name}
               {locals.inputs.countTarget}
-              {locals.inputs.survivalRate}
+              {locals.inputs.survivalRate}%
             </div>
             <div className="project-teaser-item">
               {locals.inputs.imageFile}

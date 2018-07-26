@@ -46,6 +46,7 @@ const PlantProjectSpecs = ({
         <PlantProjectSpecsItem
           icon={tree_survival}
           value={survivalRate}
+          isSurvivalRate={true}
           rightIcon={questionmark_orange}
           label={i18n.t('label.survival_rate')}
         />

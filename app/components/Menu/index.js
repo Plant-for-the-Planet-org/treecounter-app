@@ -9,10 +9,7 @@ export default class Menu extends Component {
   sideNavImage() {
     return (
       <div className="app-container__sidenav--image">
-        <Link
-          to={getLocalRoute('app_userHome')}
-          onClick={() => this.onLinkClicked()}
-        >
+        <Link to={getLocalRoute('app_userHome')}>
           {' '}
           <img src={images['SideMenuImage']} />
         </Link>

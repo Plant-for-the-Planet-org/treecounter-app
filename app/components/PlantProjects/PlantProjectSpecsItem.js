@@ -2,13 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 
-const PlantProjectSpecsItem = ({
-  label,
-  value,
-  icon,
-  rightIcon,
-  isSurvivalRate
-}) => {
+const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
   return (
     <div className="project-specs__item">
       <span className="align-center">
@@ -29,7 +23,7 @@ const PlantProjectSpecsItem = ({
           </div>
         ) : null}
       </span>
-      {isSurvivalRate ? <span>{value}%</span> : <span>{value}</span>}
+      <span>{value}</span>
     </div>
   );
 };
@@ -38,8 +32,7 @@ PlantProjectSpecsItem.propTypes = {
   icon: PropTypes.any,
   rightIcon: PropTypes.any,
   value: PropTypes.any,
-  label: PropTypes.string,
-  isSurvivalRate: PropTypes.bool
+  label: PropTypes.string
 };
 
 export default PlantProjectSpecsItem;

@@ -6,7 +6,7 @@ export default (tabbarStyles = EStyleSheet.create({
   },
   tabBar: {
     flexDirection: 'row',
-    paddingTop: 20,
+    paddingTop: 10,
     backgroundColor: '#ffffff',
     shadowColor: '#000000',
     shadowOffset: { width: 0, height: 2 },

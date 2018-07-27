@@ -4,6 +4,8 @@ import App from './app/components/App';
 /* app.js */
 import EStyleSheet from 'react-native-extended-stylesheet';
 
+console.disableYellowBox = true;
+
 // import {
 //   setCustomView,
 //   setCustomTextInput,

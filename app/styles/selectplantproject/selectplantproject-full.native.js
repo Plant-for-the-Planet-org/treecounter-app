@@ -6,14 +6,15 @@ export default (selectplantprojectFull = EStyleSheet.create({
     flex: 1
   },
   projectTeaserContainer: {
-    flex: 0.5,
-    flexBasis: 50
+    flex: 0.6
   },
   projectSpecsContainer: {
-    flex: 0.3,
-    flexBasis: 40
+    flex: 0.3
   },
   seeMoreContainer: {
-    alignSelf: 'center'
+    flex: 0.1,
+    paddingTop: 20,
+    alignSelf: 'center',
+    justifyContent: 'center'
   }
 }));

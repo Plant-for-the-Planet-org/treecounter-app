@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 
-import { StyleSheet, View, Animated, TouchableOpacity } from 'react-native';
-import { TabView } from 'react-native-tab-view';
-
-import styles from '../../styles/common/tabbar';
+import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector.native';
 import i18n from '../../locales/i18n.js';
-import Featured from './featured.native';
-import IndividualForm from './IndividualForm.native';
-import CompanyForm from './companyForm.native';
 
-export default class DonateTrees extends Component {
+import { PropTypes } from 'prop-types';
+export default class Featured extends Component {
   static data = {
     tabsReceipt: [
       {
@@ -47,14 +43,11 @@ export default class DonateTrees extends Component {
       },
       expanded: false,
       expandedOption: '1',
-      showSelectProject: false,
-      index: 0,
-      routes: [
-        { key: 'featured', title: 'Featured' },
-        { key: 'individual', title: 'Individual' },
-        { key: 'company', title: 'Company' }
-      ]
+      showSelectProject: false
     };
+
+    this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
+    this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
     this.handleTreeCountCurrencyChange = this.handleTreeCountCurrencyChange.bind(
       this
     );
@@ -166,6 +159,32 @@ export default class DonateTrees extends Component {
     }
   ];
 
+  handleModeReceiptChange(tab) {
+    this.setState({
+      modeReceipt: tab,
+      form: {
+        ...this.state.form,
+        recipientType: tab
+      }
+    });
+  }
+
+  handlePaymentApproved(paymentResponse) {
+    let sendState = { ...this.state.form };
+    if (this.props.supportTreecounter.treecounterId) {
+      sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
+    }
+    this.props.donate(
+      {
+        ...this.state.form,
+        paymentResponse,
+        amount: this.state.selectedAmount,
+        currency: this.state.selectedCurrency
+      },
+      this.props.selectedProject.id
+    );
+  }
+
   callExpanded = bool => {
     this.setState({
       expanded: bool
@@ -176,55 +195,58 @@ export default class DonateTrees extends Component {
     this.props.paymentClear();
   }
 
-  _handleIndexChange = index => this.setState({ index });
-
-  _renderTabBar = props => {
-    const inputRange = props.navigationState.routes.map((x, i) => i);
-
-    return (
-      <View style={styles.tabBar}>
-        {props.navigationState.routes.map((route, i) => {
-          return (
-            <TouchableOpacity
-              style={
-                this.state.index === i ? styles.tabItemActive : styles.tabItem
-              }
-              key={'route' + i}
-              onPress={() => this.setState({ index: i })}
-            >
-              <Animated.Text
-                style={this.state.index === i ? styles.textActive : styles.text}
-              >
-                {route.title}
-              </Animated.Text>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-    );
-  };
-
-  _renderScene = ({ route }) => {
-    switch (route.key) {
-      case 'featured':
-        return <Featured {...this.props} />;
-      case 'individual':
-        return <IndividualForm />;
-      case 'company':
-        return <CompanyForm />;
-      default:
-        return null;
-    }
-  };
-
   render() {
-    return (
-      <TabView
-        navigationState={this.state}
-        renderScene={this._renderScene}
-        renderTabBar={this._renderTabBar}
-        onIndexChange={this._handleIndexChange}
+    let plantProject = this.props.selectedProject;
+    let currencies = this.props.currencies.currencies;
+    let receipt;
+    if (this.state.modeReceipt === 'individual') {
+      receipt = this.state.form['receiptIndividual']
+        ? this.state.form['receiptIndividual']
+        : '';
+    } else {
+      receipt = this.state.form['receiptCompany']
+        ? this.state.form['receiptCompany']
+        : '';
+    }
+    let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
+    let email = receipt !== '' ? receipt.email : '';
+
+    let paymentMethods;
+    if (receipt) {
+      let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
+      const countryCurrencies = plantProject.paymentSetup.countries;
+      if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
+        countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+      }
+      paymentMethods =
+        plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
+    }
+
+    return this.state.showSelectProject ? (
+      <SelectPlantProjectContainer />
+    ) : !plantProject ? null : (
+      <TreeCountCurrencySelector
+        treeCost={plantProject.treeCost}
+        rates={currencies.currency_rates[plantProject.currency].rates}
+        fees={1}
+        currencies={currencies.currency_names} // TODO: connect to data from API
+        selectedCurrency={this.determineDefaultCurrency()}
+        treeCountOptions={plantProject.paymentSetup.treeCountOptions}
+        selectedTreeCount={this.state.selectedTreeCount}
+        onChange={this.handleTreeCountCurrencyChange}
       />
     );
   }
 }
+
+Featured.propTypes = {
+  selectedProject: PropTypes.object,
+  selectedTpo: PropTypes.object,
+  currentUserProfile: PropTypes.object,
+  currencies: PropTypes.object,
+  donate: PropTypes.func,
+  paymentClear: PropTypes.func,
+  supportTreecounter: PropTypes.object,
+  paymentStatus: PropTypes.object,
+  plantProjectClear: PropTypes.func
+};

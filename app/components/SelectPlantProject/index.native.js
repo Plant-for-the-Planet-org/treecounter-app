@@ -105,37 +105,33 @@ export default class SelectPlantProject extends Component {
     let { featuredProjects } = this.state;
     return (
       <ScrollView>
-        <CardLayout style={{ width: 350, flex: 1 }}>
-          <View style={styles.cardContent}>
-            <Slick style={styles.slickWrapper} showsPagination={false}>
-              {featuredProjects.length !== 0
-                ? featuredProjects.map(project => (
-                    <View key={project.id} style={styles.plantProjectContent}>
-                      <View style={styles.plantProjectContentFull}>
-                        <PlantProjectFull
-                          callExpanded={() => this.callExpanded()}
-                          expanded={false}
-                          plantProject={project}
-                          tpoName={project.tpo_name}
-                        />
-                      </View>
-                      <View style={styles.footer}>
-                        <PrimaryButton
-                          onClick={() =>
-                            this.onSelectClickedFeaturedProjects(project.id)
-                          }
-                          buttonStyle={styles.plantProjectSelectButtonStyle}
-                          textStyle={styles.plantProjectSelectTextStyle}
-                        >
-                          {i18n.t('label.select_project')}
-                        </PrimaryButton>
-                      </View>
-                    </View>
-                  ))
-                : null}
-            </Slick>
-          </View>
-        </CardLayout>
+        <Slick style={styles.slickWrapper} showsPagination={false}>
+          {featuredProjects.length !== 0
+            ? featuredProjects.map(project => (
+                <CardLayout style={{ width: 350, height: 620 }}>
+                  <View style={styles.plantProjectContentFull}>
+                    <PlantProjectFull
+                      callExpanded={() => this.callExpanded()}
+                      expanded={false}
+                      plantProject={project}
+                      tpoName={project.tpo_name}
+                    />
+                  </View>
+                  <View style={styles.footer}>
+                    <PrimaryButton
+                      onClick={() =>
+                        this.onSelectClickedFeaturedProjects(project.id)
+                      }
+                      buttonStyle={styles.plantProjectSelectButtonStyle}
+                      textStyle={styles.plantProjectSelectTextStyle}
+                    >
+                      {i18n.t('label.select_project')}
+                    </PrimaryButton>
+                  </View>
+                </CardLayout>
+              ))
+            : null}
+        </Slick>
       </ScrollView>
     );
   }

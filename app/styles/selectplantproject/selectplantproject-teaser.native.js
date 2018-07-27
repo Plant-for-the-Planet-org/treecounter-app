@@ -20,11 +20,12 @@ export default (selectplantTeaserStyles = EStyleSheet.create({
     marginBottom: 10
   },
   teaser__projectImageContainer: {
-    width: 350,
-    flex: 0.7
+    width: '100%',
+    flex: 0.7,
+    padding: 5
   },
   teaser__projectImage: {
-    width: '95%',
+    width: '100%',
     height: '100%',
     resizeMode: 'stretch'
   },

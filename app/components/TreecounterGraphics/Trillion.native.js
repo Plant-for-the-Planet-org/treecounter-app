@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Animated, Easing, Image } from 'react-native';
 import i18n from '../../locales/i18n';
-import ballonsSvg from '../../assets/images/ballons.svg';
-import cloud1Svg from '../../assets/images/cloud1.svg';
-import cloud2Svg from '../../assets/images/cloud2.svg';
-import pot01 from '../../assets/images/pot01.svg';
-import darkCrownTree01 from '../../assets/images/darkCrownTree01.svg';
+import ballonsSvg from '../../assets/svgAssets/ballons.svg';
+import cloud1Svg from '../../assets/svgAssets/cloud1.svg';
+import cloud2Svg from '../../assets/svgAssets/cloud2.svg';
+import pot01 from '../../assets/svgAssets/pot01.svg';
+import darkCrownTree01 from '../../assets/svgAssets/darkCrownTree01.svg';
 
 import { svgBackground } from '../../assets';
 import { trillionCampaign } from '../../actions/trillionAction';

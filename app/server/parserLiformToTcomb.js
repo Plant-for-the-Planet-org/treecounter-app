@@ -9,6 +9,7 @@ import { MapTemplate } from '../components/Templates/MapTemplate';
 import { ListTemplateGenerator } from '../components/Templates/ListTemplate';
 import { FilePickerTemplate } from '../components/Templates/FilePickerTemplate';
 import { FloatInputTemplate } from '../components/Templates/FloatInputTemplate';
+import { DatePickerTemplate } from '../components/Templates/DatePickerTemplate';
 
 // Import assets
 import * as images from '../assets';
@@ -81,6 +82,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
               options.type = 'text';
             } else if (properties[propertyKey].type === 'integer') {
               options.type = 'number';
+              options.keyboardType = 'numeric';
             } else if (properties[propertyKey].type === 'number') {
               options.type = 'number';
               options.template = FloatInputTemplate;
@@ -114,8 +116,12 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
             options.template = MapTemplate;
             break;
           case 'date':
+            options.template = DatePickerTemplate;
+            options.type = properties[propertyKey].widget;
+            break;
           case 'hidden':
             options.type = properties[propertyKey].widget;
+            options.hidden = true;
             break;
           case 'file':
             options.template =

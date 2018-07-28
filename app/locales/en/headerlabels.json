@@ -17,6 +17,7 @@
   "subscribe": "Follow",
   "profile": "Profile",
   "gender": "Gender",
+  "password": "Password",
   "no_notifications": "You have no notifications",
   "all_notifications": "See all notifications",
   "success_title": "Success"

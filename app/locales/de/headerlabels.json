@@ -1,1 +1,23 @@
-{ }
+{
+  "menu": "Speisekarte",
+  "signUp": "Einloggen",
+  "home": "Zuhause",
+  "search": "Suche",
+  "placeholder_value": "Geben Sie einen Namen ein ...",
+  "welcome_hi": "Hallo",
+  "edit_profile": "Profil Bearbeiten",
+  "help": "Hilfe",
+  "logout": "Abmelden",
+  "save_changes": "Änderungen speichern",
+  "about_me": "Über mich",
+  "change_password": "Kennwort ändern",
+  "delete_profile": "Profil löschen",
+  "un_subscribe": "Folgende",
+  "subscribe": "Folgen",
+  "profile": "Profil",
+  "gender": "Geschlecht",
+  "password": "Passwort",
+  "no_notifications": "Sie haben keine Benachrichtigungen",
+  "all_notifications": "Sehen Sie alle Benachrichtigungen",
+  "success_title": "Erfolg"
+}

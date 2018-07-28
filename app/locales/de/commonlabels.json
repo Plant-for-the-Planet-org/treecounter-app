@@ -1,5 +1,7 @@
 {
   "loading": "Laden ...",
   "isRequired": " wird benötigt",
-  "enterValidEmail": "Gib eine gültige Email ein"
+  "enterValidEmail": "Gib eine gültige Email ein",
+  "invalidLength": "Ungültige Länge: sollte kleiner als sein",
+  "invalidValueMsg": "Bitte geben Sie eine gültige ein"
 }

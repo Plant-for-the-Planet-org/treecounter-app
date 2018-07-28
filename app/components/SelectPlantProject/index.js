@@ -164,7 +164,7 @@ export default class SelectPlantProject extends Component {
     } = this.state;
     const settings = {
       dots: true,
-      infinite: false,
+      infinite: true,
       prevArrow: (
         <CarouselNavigation
           styleName="tpo-footer-nav-img__left"
@@ -182,10 +182,12 @@ export default class SelectPlantProject extends Component {
 
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>{i18n.t('label.select_project')}</TextHeading>
-        <DescriptionHeading>
-          {i18n.t('label.donate_trees_description')}
-        </DescriptionHeading>
+        <TextHeading>
+          {i18n.t('label.select_project')}
+          <DescriptionHeading>
+            {i18n.t('label.donate_trees_description')}
+          </DescriptionHeading>
+        </TextHeading>
         <ModalDialog
           isOpen={this.state.isOpen}
           onRequestClose={() => this.onRequestClose()}
@@ -199,7 +201,7 @@ export default class SelectPlantProject extends Component {
               />
             ) : null}
             <PrimaryButton
-              onClick={() => this.onSelectClicked(this.state.modalProject.id)}
+              onPress={() => this.onSelectClicked(this.state.modalProject.id)}
             >
               {i18n.t('label.select_project')}
             </PrimaryButton>
@@ -286,10 +288,14 @@ export default class SelectPlantProject extends Component {
                                   {project.tpo_name}
                                 </td>
                                 <td className="align-right">
-                                  {project.countPlanted}
+                                  {parseInt(
+                                    project.countPlanted
+                                  ).toLocaleString('en')}
                                 </td>
                                 <td className="align-right">
-                                  {project.currency + ' ' + project.treeCost}
+                                  {project.currency +
+                                    ' ' +
+                                    project.treeCost.toFixed(2)}
                                 </td>
                                 <td>
                                   <PrimaryButton
@@ -336,10 +342,14 @@ export default class SelectPlantProject extends Component {
                                   {project.tpo_name}
                                 </td>
                                 <td className="align-right">
-                                  {project.countPlanted}
+                                  {parseInt(
+                                    project.countPlanted
+                                  ).toLocaleString('en')}
                                 </td>
                                 <td className="align-right">
-                                  {project.currency + ' ' + project.treeCost}
+                                  {project.currency +
+                                    ' ' +
+                                    project.treeCost.toFixed(2)}
                                 </td>
                                 <td>
                                   <PrimaryButton

@@ -23,14 +23,18 @@ const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
           </div>
         ) : null}
       </span>
-      <span>{value}</span>
+      <span>
+        {typeof value == 'number'
+          ? parseFloat(value).toLocaleString('en')
+          : value}
+      </span>
     </div>
   );
 };
 
 PlantProjectSpecsItem.propTypes = {
-  icon: PropTypes.string,
-  rightIcon: PropTypes.string,
+  icon: PropTypes.any,
+  rightIcon: PropTypes.any,
   value: PropTypes.any,
   label: PropTypes.string
 };

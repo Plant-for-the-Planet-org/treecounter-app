@@ -49,7 +49,7 @@ class AppDrawerNavigatorContainer extends Component {
   }
 
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func,
     loadUserProfile: PropTypes.func
   };
 }

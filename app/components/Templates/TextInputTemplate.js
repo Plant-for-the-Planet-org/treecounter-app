@@ -1,5 +1,6 @@
 import React from 'react';
 import i18n from '../../locales/i18n';
+import { formatDate } from '../../helpers/utils';
 
 export function TextInputTemplate(locals) {
   function onChange($event) {
@@ -11,17 +12,7 @@ export function TextInputTemplate(locals) {
   }
   function todayDate() {
     let today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth() + 1; //January is 0!
-    let yyyy = today.getFullYear();
-    if (dd < 10) {
-      dd = '0' + dd;
-    }
-    if (mm < 10) {
-      mm = '0' + mm;
-    }
-
-    today = yyyy + '-' + mm + '-' + dd;
+    today = formatDate(today);
     return today;
   }
   let error = locals.hasError;

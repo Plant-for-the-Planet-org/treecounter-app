@@ -45,13 +45,13 @@ const PlantProjectSpecs = ({
       <div className="plants-info">
         <PlantProjectSpecsItem
           icon={tree_survival}
-          value={survivalRate}
+          value={survivalRate + '%'}
           rightIcon={questionmark_orange}
           label={i18n.t('label.survival_rate')}
         />
         <PlantProjectSpecsItem
           icon={dollar}
-          value={`${currency} ${treeCost}`}
+          value={`${currency} ${parseFloat(treeCost).toLocaleString('en')}`}
           label={i18n.t('label.Cost')}
         />
         <div className="project-specs__taxdeductible">

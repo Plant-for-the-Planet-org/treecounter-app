@@ -11,7 +11,7 @@ export default class Menu extends Component {
       <div className="app-container__sidenav--image">
         <Link
           to={getLocalRoute('app_userHome')}
-          onClick={() => this.onLinkClicked()}
+          onClick={() => this.linkClicked()}
         >
           {' '}
           <img src={images['SideMenuImage']} />
@@ -26,7 +26,7 @@ export default class Menu extends Component {
   }
 
   render() {
-    let { path } = this.props;
+    let { path, pathname } = this.props;
     return (
       <div
         className={
@@ -53,7 +53,11 @@ export default class Menu extends Component {
                       className={
                         menuItem.uri.substr(
                           menuItem.uri.lastIndexOf('/') + 1
-                        ) === path
+                        ) === path ||
+                        (pathname.indexOf('leaderboard') + 1 &&
+                          menuItem.uri.substr(
+                            menuItem.uri.lastIndexOf('/') + 1
+                          ) === 'explore')
                           ? 'menu_item_selected'
                           : 'menu_item_unselected'
                       }
@@ -64,7 +68,11 @@ export default class Menu extends Component {
                           menuItem.icon && menuItem.icon !== 'none'
                             ? menuItem.uri.substr(
                                 menuItem.uri.lastIndexOf('/') + 1
-                              ) === path
+                              ) === path ||
+                              (pathname.indexOf('leaderboard') + 1 &&
+                                menuItem.uri.substr(
+                                  menuItem.uri.lastIndexOf('/') + 1
+                                ) === 'explore')
                               ? images[menuItem.icon + '_red']
                               : images[menuItem.icon]
                             : null
@@ -100,5 +108,6 @@ Menu.propTypes = {
   menuData: PropTypes.array.isRequired,
   path: PropTypes.string,
   toggleSideNavAction: PropTypes.func.isRequired,
-  clearSupport: PropTypes.func
+  clearSupport: PropTypes.func,
+  pathname: PropTypes.string
 };

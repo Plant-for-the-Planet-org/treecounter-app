@@ -1,0 +1,23 @@
+{
+  "menu": "menú",
+  "signUp": "Contratar",
+  "home": "casa",
+  "search": "buscar",
+  "placeholder_value": "Escriba un nombre ...",
+  "welcome_hi": "Hola",
+  "edit_profile": "Editar Perfil",
+  "help": "Ayuda",
+  "logout": "Cerrar Sesión",
+  "save_changes": "Guardar Cambios",
+  "about_me": "Acerca de mí",
+  "change_password": "Cambiar la contraseña",
+  "delete_profile": "Borrar perfil",
+  "un_subscribe": "Siguiendo",
+  "subscribe": "Seguir",
+  "profile": "Perfil",
+  "gender": "Género",
+  "password": "Contraseña",
+  "no_notifications": "no tienes notificaciones",
+  "all_notifications": "Ver todas las notificaciones",
+  "success_title": "Éxito"
+}

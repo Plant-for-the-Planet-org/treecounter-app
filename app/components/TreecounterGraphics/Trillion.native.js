@@ -4,6 +4,7 @@ import i18n from '../../locales/i18n';
 import ballonsSvg from '../../assets/images/ballons.svg';
 import cloud1Svg from '../../assets/images/cloud1.svg';
 import cloud2Svg from '../../assets/images/cloud2.svg';
+import pot01 from '../../assets/images/pot01.svg';
 import { svgBackground } from '../../assets';
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgUri from 'react-native-svg-uri';
@@ -147,6 +148,9 @@ export default class Trillion extends Component {
               />
             </Svg>
           </View>
+          <View style={styles.potStyle}>
+            <SvgUri width="400" height="350" source={pot01} />
+          </View>
         </View>
       </View>
     );
@@ -176,6 +180,14 @@ const styles = StyleSheet.create({
     width: 400,
     height: 400,
     elevation: 2,
+    position: 'absolute',
+    top: 0
+  },
+  potStyle: {
+    flex: 1,
+    width: 400,
+    height: 400,
+    elevation: 4,
     position: 'absolute',
     top: 0
   },

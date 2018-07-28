@@ -17,6 +17,7 @@ import {
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectSpecs
  */
+
 class PlantProjectSpecs extends React.Component {
   constructor(props) {
     super(props);
@@ -81,7 +82,7 @@ class PlantProjectSpecs extends React.Component {
           />
           <PlantProjectSpecsItem
             icon={dollar}
-            value={`${currency} ${treeCost}`}
+            value={`${currency} ${treeCost.toFixed(2)}`}
             label={i18n.t('label.Cost')}
           />
         </View>

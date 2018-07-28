@@ -1,0 +1,12 @@
+{
+  "sure": "Bist du sicher ?",
+  "password_changed": "Dein Passwort wurde erfolgreich geändert",
+  "return_to_profile": "Kehre zu Mein Profil zurück",
+  "new_project": "Neues Projekt hinzufügen",
+  "Location": "Lage",
+  "description": "Beschreibung",
+  "gallery": "Bildergalerie",
+  "video": "Video",
+  "updated_successful": "Erfolgreich aktualisiert",
+  "error_title": "Profilaktualisierung Fehler"
+}

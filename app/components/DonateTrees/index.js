@@ -274,7 +274,7 @@ export default class DonateTrees extends Component {
       nextArrow: (
         <NextArrow checkValidation={this.checkValidation} context={this} />
       ),
-      infinite: false,
+      infinite: true,
       adaptiveHeight: true,
       currentSlide: this.state.pageIndex,
       prevArrow: (
@@ -367,7 +367,7 @@ export default class DonateTrees extends Component {
                 <div>
                   {this.props.selectedTpo && currencies ? (
                     <TreeCountCurrencySelector
-                      treeCost={plantProject.treeCost}
+                      treeCost={plantProject.treeCost.toFixed(2)}
                       rates={
                         currencies.currency_rates[plantProject.currency].rates
                       }

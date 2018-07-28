@@ -164,7 +164,7 @@ export default class SelectPlantProject extends Component {
     } = this.state;
     const settings = {
       dots: true,
-      infinite: false,
+      infinite: true,
       prevArrow: (
         <CarouselNavigation
           styleName="tpo-footer-nav-img__left"
@@ -199,7 +199,7 @@ export default class SelectPlantProject extends Component {
               />
             ) : null}
             <PrimaryButton
-              onClick={() => this.onSelectClicked(this.state.modalProject.id)}
+              onPress={() => this.onSelectClicked(this.state.modalProject.id)}
             >
               {i18n.t('label.select_project')}
             </PrimaryButton>

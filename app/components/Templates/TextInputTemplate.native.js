@@ -3,6 +3,15 @@ import React from 'react';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/forms/textinput';
 export function TextInputTemplate(locals) {
+  if (locals.hidden) {
+    return null;
+  }
+  function onChange(value) {
+    value =
+      locals.keyboardType === 'numeric' && value ? parseInt(value) : value;
+    locals.onChange(value);
+  }
+
   let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
   let error =
     locals.hasError && locals.error ? (
@@ -23,8 +32,8 @@ export function TextInputTemplate(locals) {
           keyboardType={locals.keyboardType}
           maxLength={locals.maxLength}
           multiline={locals.multiline}
-          value={locals.value}
-          onChangeText={value => locals.onChange(value)}
+          value={String(locals.value)}
+          onChangeText={value => onChange(value)}
           onChange={locals.onChangeNative}
           onKeyPress={locals.onKeyPress}
           returnKeyType={locals.returnKeyType}

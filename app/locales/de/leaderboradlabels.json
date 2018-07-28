@@ -1,0 +1,16 @@
+{
+  "treecount_leaderboard": "Bestenliste",
+  "treecount_map": "Karte",
+  "sortBy": "Sortiere nach",
+  "timePeriod": "Zeitperiode",
+  "map_description": "Werfen Sie einen Blick auf die Bäume, die im Rahmen der Billionenbaum-Kampagne gepflanzt wurden, wo es derzeit Wälder gibt und wo wir Wälder wiederherstellen könnten.",
+  "explore": "Erforschen",
+  "plantedTrees": "Gepflanzte Bäume",
+  "plantedTrees_description": "Alle Bäume sind seit 2006 auf dieser Website registriert.",
+  "existingForest": "Bestehender Wald",
+  "existingForest_description": "3,04 Billionen Bäume existieren derzeit weltweit. Von sechs Billionen Bäumen, bevor Menschen vor etwa 11.000 Jahren mit dem Fällen von Wäldern begannen. Die Karte zeigt die Anzahl der Bäume pro km2.",
+  "existingForest_source": "Crowther, T. W. et al. (2015) Kartierung der Baumdichte im globalen Maßstab. Natur 525, 201-205.",
+  "restorationOpportunities": "Wiederherstellungsmöglichkeiten",
+  "restorationOpportunities_description": "Eine halbe Milliarde Hektar eignet sich für die großflächige Wiederherstellung geschlossener Wälder. Weitere anderthalb Milliarden Hektar sind am besten für die Mosaiksanierung geeignet, die Wälder mit anderen Landnutzungsformen wie Agroforstwirtschaft, kleinbäuerliche Landwirtschaft und Siedlungen kombiniert.",
+  "restorationOpportunities_source": "Crowther, T. W. et al. (2017) Vorhersage des globalen Waldaufforstungspotenzials. bioRxiv 210062."
+}

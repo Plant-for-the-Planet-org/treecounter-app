@@ -1,6 +1,7 @@
 .donate-tress__container {
   position: relative;
   width: 100%;
+  max-width: 400px;
   height: auto;
 
   .treecount-selector-wrapper {
@@ -55,6 +56,7 @@
         .teaser__projectImage {
           width: 100%;
           height: auto;
+          margin: 10px;
         }
       }
     }
@@ -148,6 +150,7 @@
 .select-project__container {
   @extend .donate-tress__container;
   width: 100%;
+  max-width: 850px;
   .slick-initialized {
     margin: 35px;
     margin-top: 30px;

@@ -1,0 +1,18 @@
+{
+  "sure": "Bist du sicher ?",
+  "delete_confirmation": "Sobald Sie bestätigen, werden alle Ihre Kontodaten gelöscht. Das kann nicht rückgängig gemacht werden",
+  "password_changed": "Dein Passwort wurde erfolgreich geändert",
+  "return_to_profile": "Kehre zu Mein Profil zurück",
+  "new_project": "Neues Projekt hinzufügen",
+  "Location": "Lage",
+  "description": "Beschreibung",
+  "gallery": "Bildergalerie",
+  "video": "Video",
+  "updated_successful": "Erfolgreich aktualisiert",
+  "error_title": "Profilaktualisierung Fehler",
+  "plant_project_update_success": "Anlagenprojekt wurde erfolgreich aktualisiert",
+  "plant_project_delete_success": "Plant Project wurde erfolgreich gelöscht",
+  "plant_project_added_success": "Plant Project wurde erfolgreich erstellt",
+  "plant_project_error_title": "Anlagenprojekt-Update Fehler",
+  "same_password_error": "Bitte geben Sie das gleiche Passwort ein"
+}

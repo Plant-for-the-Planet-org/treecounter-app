@@ -81,12 +81,12 @@ const PlantProjectTemplate = function(itemIndex) {
           >
             <div className="project-teaser-item">
               {locals.inputs.name}
-              {locals.inputs.countTarget}
-              {locals.inputs.survivalRate}
+              {parseInt(locals.inputs.countTarget).toLocaleString('en')}
+              {locals.inputs.survivalRate}%
             </div>
             <div className="project-teaser-item">
               {locals.inputs.imageFile}
-              {locals.inputs.treeCost}
+              {locals.inputs.treeCost.toFixed(2)}
               {locals.inputs.currency}
             </div>
             <div className="separator" />
@@ -103,7 +103,7 @@ const PlantProjectTemplate = function(itemIndex) {
           <div className="project-sub-item">
             <div className="sub-item-header">{i18n.t('label.description')}</div>
             <div className="tComb-template__about-me-form">
-              <div>{locals.inputs.description}</div>
+              <i>{locals.inputs.description}</i>
               <div>
                 {locals.inputs.url}
                 {locals.inputs.linkText}

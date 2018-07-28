@@ -45,23 +45,25 @@ const PlantProjectSpecs = ({
       <div className="plants-info">
         <PlantProjectSpecsItem
           icon={tree_survival}
-          value={survivalRate}
+          value={survivalRate + '%'}
           rightIcon={questionmark_orange}
           label={i18n.t('label.survival_rate')}
         />
         <PlantProjectSpecsItem
           icon={dollar}
-          value={`${currency} ${treeCost}`}
+          value={`${currency} ${parseFloat(treeCost).toLocaleString('en')}`}
           label={i18n.t('label.Cost')}
         />
         <div className="project-specs__taxdeductible">
-          {taxDeduction && taxDeduction.length
-            ? i18n.t('label.tax_deductible') +
-              ' ' +
-              i18n.t('label.in') +
-              ' ' +
-              taxDeduction.join(', ')
-            : null}
+          {taxDeduction && taxDeduction.length ? (
+            <div className="tax-deductible">
+              {i18n.t('label.tax_deductible') +
+                ' ' +
+                i18n.t('label.in') +
+                ' ' +
+                taxDeduction.join(', ')}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

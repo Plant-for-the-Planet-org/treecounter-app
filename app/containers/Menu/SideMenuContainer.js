@@ -71,6 +71,7 @@ class SideMenuContainer extends Component {
         toggleSideNavAction={this.props.toggleSideNavAction}
         clearSupport={this.props.clearSupport}
         logoutUser={this.props.logoutUser}
+        pathname={this.props.location.pathname}
       />
     );
   }

@@ -5,6 +5,8 @@ import ballonsSvg from '../../assets/images/ballons.svg';
 import cloud1Svg from '../../assets/images/cloud1.svg';
 import cloud2Svg from '../../assets/images/cloud2.svg';
 import pot01 from '../../assets/images/pot01.svg';
+import darkCrownTree01 from '../../assets/images/darkCrownTree01.svg';
+
 import { svgBackground } from '../../assets';
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgUri from 'react-native-svg-uri';
@@ -149,7 +151,7 @@ export default class Trillion extends Component {
             </Svg>
           </View>
           <View style={styles.potStyle}>
-            <SvgUri width="400" height="350" source={pot01} />
+            <SvgUri width="400" height="350" source={darkCrownTree01} />
           </View>
         </View>
       </View>

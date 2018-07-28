@@ -57,8 +57,10 @@ class SideMenuContainer extends Component {
 
   render() {
     let path = undefined;
+    let pathname = undefined;
+
     if (this.props.location) {
-      const { pathname } = this.props.location;
+      pathname = this.props.location.pathname;
       path = pathname.substr(pathname.lastIndexOf('/') + 1);
     }
 
@@ -71,7 +73,7 @@ class SideMenuContainer extends Component {
         toggleSideNavAction={this.props.toggleSideNavAction}
         clearSupport={this.props.clearSupport}
         logoutUser={this.props.logoutUser}
-        pathname={this.props.location.pathname}
+        pathname={pathname}
       />
     );
   }

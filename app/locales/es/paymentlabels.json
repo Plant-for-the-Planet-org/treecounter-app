@@ -1,0 +1,15 @@
+{
+  "amount": "cantidad:",
+  "creditCard": "Tarjeta de crédito",
+  "confirm": "Confirmo que pagaré la cantidad de",
+  "following_account": "a la siguiente cuenta.",
+  "bank_transfer": "Transferencia bancaria",
+  "pay_via": "Pagar mediante transferencia bancaria",
+  "pay": "Paga",
+  "sepa_debit": "SEPA de débito directo",
+  "stripe_sepa_des1": "Al proporcionar su IBAN y confirmar este pago, usted está autorizando",
+  "stripe_sepa_des2": "y Stripe, nuestro proveedor de servicios de pago, para enviar instrucciones a su banco para debitar su cuenta y su banco para debitar su cuenta de acuerdo con esas instrucciones. Tiene derecho a un reembolso de su banco en los términos y condiciones de su acuerdo con su banco. Se debe reclamar un reembolso dentro de las 8 semanas a partir de la fecha en que se debitó su cuenta.",
+  "pay_via_sepa": "Pague con SEPA",
+  "contact_firstname": "Nombre",
+  "contact_lastname": "Apellido"
+}

@@ -1,0 +1,23 @@
+{
+  "signup": "Participar",
+  "email": "Email",
+  "address": "Dirección",
+  "zipCode": "Código Postal",
+  "city": "Ciudad",
+  "subtype": "Categoría",
+  "country": "País",
+  "password_repeat": "Repite la contraseña",
+  "mayPublish": "Acepto que mi nombre se publique en el sitio web de la Campaña Trillion Tree.",
+  "mayContact": "Acepto que la organización de niños y jóvenes Plant-for-the-Planet me contacte como parte de los desafíos de plantar árboles.",
+  "firstname": "Nombre",
+  "lastname": "Apellido",
+  "company_or_orga_name": "Nombre",
+  "i_am_a": "soy un",
+  "i_am": "yo soy",
+  "tpo_title": "Organización de plantación de árboles",
+  "individual_title": "Solo yo",
+  "company_title": "Empresa",
+  "education_title": "Colegio",
+  "already_have_account": "Ya tienes una cuenta?",
+  "education": "Educación"
+}

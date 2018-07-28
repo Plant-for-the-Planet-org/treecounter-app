@@ -1,1 +1,8 @@
-{ }
+{
+  "set": "Einstellen",
+  "set_target": "Anvisieren",
+  "title": "Titel",
+  "target_count": "Zielanzahl",
+  "target_year": "Zieljahr",
+  "target_comment": "Zielkommentar"
+}

@@ -82,7 +82,7 @@ export default class UserContributions extends React.Component {
       case 'list':
         return (
           <View {...this.props} style={styles.listContainer}>
-            <Text>Tree List under progres</Text>
+            <Text>Tree List under progress</Text>
           </View>
         );
         break;
@@ -94,58 +94,27 @@ export default class UserContributions extends React.Component {
   render() {
     const { userProfileId, userContributions } = this.props;
     return (
-      <ScrollView contentContaierStyle={styles.container}>
-        <View style={styles.container}>
-          <View style={styles.headContainer}>
-            <PrimaryButton
-              onClick={event => {
-                setTimeout(() => {
-                  this.props.navigation.navigate(
-                    getLocalRoute('app_registerTrees')
-                  );
-                }, 0);
-              }}
-              image={plantedTarget}
-            >
-              Register new trees
-            </PrimaryButton>
-          </View>
-          <TabView
-            navigationState={this.state}
-            renderScene={this._renderScene}
-            renderTabBar={this._renderTabBar}
-            onIndexChange={this._handleIndexChange}
-          />
+      <ScrollView contentContainerStyle={{ flex: 1 }}>
+        <View style={styles.headContainer}>
+          <PrimaryButton
+            onClick={event => {
+              setTimeout(() => {
+                this.props.navigation.navigate(
+                  getLocalRoute('app_registerTrees')
+                );
+              }, 0);
+            }}
+            image={plantedTarget}
+          >
+            Register new trees
+          </PrimaryButton>
         </View>
-        {/* <View style={styles.inputContainer}>
-          {Object.keys(userContributions).length > 0 ? (
-            <View>
-              <ArcGISContributionsMap userId={userProfileId} />
-              <ContributionsMapLegend />
-              <View className="contribution-container">
-                <ContributionCardList contributions={userContributions} />
-              </View>
-              <View className="contribution-buttons">
-                <TouchableHighlight
-                  onPress={() => getLocalRoute('app_registerTrees')}
-                >
-                  <Text>{i18n.t('label.registerFurther')}</Text>
-                  uri={'app_registerTrees'}
-                </TouchableHighlight>
-                <TouchableHighlight
-                  onPress={() => getLocalRoute('app_donateTrees')}
-                >
-                  uri={'app_donateTrees'}
-                  <Text>{i18n.t('label.donate_trees')}</Text>
-                </TouchableHighlight>
-              </View>
-            </View>
-          ) : (
-            <View className="no-contribution-wrapper">
-              <Text>{i18n.t('label.no_contributions')}</Text>
-            </View>
-          )}
-        </View> */}
+        <TabView
+          navigationState={this.state}
+          renderScene={this._renderScene}
+          renderTabBar={this._renderTabBar}
+          onIndexChange={this._handleIndexChange}
+        />
       </ScrollView>
     );
   }

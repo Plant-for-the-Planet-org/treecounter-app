@@ -1,0 +1,37 @@
+<svg ref="canvas"
+  data-name="Layer 2"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 850 850">
+  <g ref="Baum_Klein">
+<polygon
+            ref="p-pot-72"
+            className="p pot hide"
+            points="598.6,216.3 619,234 605.5,242.1 592.6,230.9"
+          />
+          <path
+            ref="p-shadow-72"
+            className="p shadow hide"
+            d="M606.5,224.9l10,8.7l-8.9,5.9c0,0,7.4-5.7,6.3-6.9L606.5,224.9z"
+          />
+          <path
+            ref="p-leaf1-72"
+            className="p leaf1 hide"
+            d="M612.7,221.9c1.5-1.7,3.3-3.2,6-2C617.3,221.7,614.9,222.5,612.7,221.9z"
+          />
+          <path
+            ref="p-stem-72"
+            className="p stem hide"
+            d="M609.2,225.5c2.3-2,6.9-4.1,6.7-11c-1.4,6.8-5.1,8.8-7.4,10.5L609.2,225.5L609.2,225.5"
+          />
+          <path
+            ref="p-leaf2-72"
+            className="p leaf2 hide"
+            d="M615.6,216.2c1.5-2.6,5.2-5.4,8.6-5.3C621.5,215,618.5,216.8,615.6,216.2z"
+          />
+          <path
+            ref="p-leaf3-72"
+            className="p leaf3 hide"
+            d="M615.7,216.2c4.5-1.9,5.6-9.8,4-12.7C617.2,205.5,613.1,213.2,615.7,216.2z"
+          />
+  </g>
+</svg>

@@ -4,7 +4,6 @@ import i18n from '../../locales/i18n';
 import ballonsSvg from '../../assets/svgAssets/ballons.svg';
 import cloud1Svg from '../../assets/svgAssets/cloud1.svg';
 import cloud2Svg from '../../assets/svgAssets/cloud2.svg';
-import pot01 from '../../assets/svgAssets/pot01.svg';
 import darkCrownTree001 from '../../assets/svgAssets/darkCrownTree001.svg';
 import darkCrownTree002 from '../../assets/svgAssets/darkCrownTree002.svg';
 

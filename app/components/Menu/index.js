@@ -53,11 +53,7 @@ export default class Menu extends Component {
                       className={
                         menuItem.uri.substr(
                           menuItem.uri.lastIndexOf('/') + 1
-                        ) === path ||
-                        (pathname.indexOf('leaderboard') + 1 &&
-                          menuItem.uri.substr(
-                            menuItem.uri.lastIndexOf('/') + 1
-                          ) === 'explore')
+                        ) === path || pathname.includes(menuItem.uri)
                           ? 'menu_item_selected'
                           : 'menu_item_unselected'
                       }
@@ -68,11 +64,7 @@ export default class Menu extends Component {
                           menuItem.icon && menuItem.icon !== 'none'
                             ? menuItem.uri.substr(
                                 menuItem.uri.lastIndexOf('/') + 1
-                              ) === path ||
-                              (pathname.indexOf('leaderboard') + 1 &&
-                                menuItem.uri.substr(
-                                  menuItem.uri.lastIndexOf('/') + 1
-                                ) === 'explore')
+                              ) === path || pathname.includes(menuItem.uri)
                               ? images[menuItem.icon + '_red']
                               : images[menuItem.icon]
                             : null

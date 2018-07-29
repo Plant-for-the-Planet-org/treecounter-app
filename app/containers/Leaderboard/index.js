@@ -33,9 +33,9 @@ class LeaderBoardContainer extends React.Component {
       },
       tabInfo: {
         tabs: tabs,
-        activeTab: match.path.includes('explore')
-          ? 'app_explore'
-          : 'app_leaderboard'
+        activeTab: match.path.includes('leaderboard')
+          ? 'app_leaderboard'
+          : 'app_explore'
       },
       mapInfo: {}
     };

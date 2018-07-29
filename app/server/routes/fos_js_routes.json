@@ -1042,7 +1042,7 @@
       "tokens": [
         ["variable", "/", "[^/]++", "subSection"],
         ["variable", "/", "[^/]++", "section"],
-        ["text", "/leaderboard"],
+        ["text", "/explore/leaderboard"],
         ["variable", "/", "(\\w{2})?", "_locale"]
       ],
       "defaults": { "subSection": null, "_locale": null },

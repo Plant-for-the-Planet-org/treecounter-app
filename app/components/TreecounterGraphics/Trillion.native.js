@@ -5,8 +5,8 @@ import ballonsSvg from '../../assets/svgAssets/ballons.svg';
 import cloud1Svg from '../../assets/svgAssets/cloud1.svg';
 import cloud2Svg from '../../assets/svgAssets/cloud2.svg';
 import pot01 from '../../assets/svgAssets/pot01.svg';
-import darkCrownTree02 from '../../assets/svgAssets/darkCrownTree02.svg';
-import darkCrownTree05 from '../../assets/svgAssets/darkCrownTree05.svg';
+import darkCrownTree001 from '../../assets/svgAssets/darkCrownTree001.svg';
+import darkCrownTree002 from '../../assets/svgAssets/darkCrownTree002.svg';
 
 import { svgBackground } from '../../assets';
 import { trillionCampaign } from '../../actions/trillionAction';
@@ -152,10 +152,10 @@ export default class Trillion extends Component {
             </Svg>
           </View>
           <View style={styles.potStyle}>
-            <SvgUri width="400" height="350" source={darkCrownTree02} />
+            <SvgUri width="400" height="350" source={darkCrownTree001} />
           </View>
           <View style={styles.potStyle}>
-            <SvgUri width="400" height="350" source={darkCrownTree05} />
+            <SvgUri width="400" height="350" source={darkCrownTree002} />
           </View>
         </View>
       </View>

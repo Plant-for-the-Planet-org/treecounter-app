@@ -4,6 +4,11 @@ import i18n from '../../locales/i18n';
 import { tree } from '../../assets';
 import { Text, TextInput, View } from 'react-native';
 import styles from '../../styles/currencies/treeCounterSelector';
+import RadioForm, {
+  RadioButton,
+  RadioButtonInput,
+  RadioButtonLabel
+} from 'react-native-simple-radio-button';
 
 class TreeCountSelector extends React.Component {
   constructor(props) {
@@ -18,7 +23,9 @@ class TreeCountSelector extends React.Component {
       isFixed: true,
       fixedTreeCount: fixedDefaultTreeCount,
       variableTreeCount: variableDefaultTreeCount,
-      variableAmount: props.treeCountToAmount(variableDefaultTreeCount)
+      variableAmount: props.treeCountToAmount(variableDefaultTreeCount),
+      value3Index: -1,
+      fixedIndex: -1
     };
 
     props.onChange({
@@ -93,65 +100,123 @@ class TreeCountSelector extends React.Component {
 
   render() {
     const { treeCountOptions, currency, treeCountToAmount } = this.props;
-    console.log('treeCountOptions.fixedTreeCountOptions)');
-    console.log(treeCountOptions.fixedTreeCountOptions);
+    let radio_props = [];
+    treeCountOptions.fixedTreeCountOptions.map(treeCount => {
+      let label = treeCount + '         ' + i18n.t('label.trees');
+      radio_props.push({ label: label, value: treeCount });
+    });
+
+    let fixed_radio_props = [];
+    fixed_radio_props.push({ label: '', value: this.state.variableTreeCount });
+
     return (
       <View style={styles.treecount_container}>
         <Text strong={true}>{i18n.t('label.no_of_trees')}</Text>
-        {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
-          return (
-            <View style={styles.treecount_price_conversion} key={treeCount}>
-              <Text style={styles.counter_label}>
-                {/* <input
-                type="radio"
-                value={treeCount}
-                checked={
-                  treeCount === this.state.fixedTreeCount &&
-                  true === this.state.isFixed
-                }
-                onChange={evt =>
-                  this.handleFixedTreeCountChange(evt.target.value)
-                }
-              /> */}
-                {treeCount} {i18n.t('label.trees')}
-              </Text>
-              <Text>=</Text>
-              <Text key={treeCount} style={styles.counter_label}>
-                {treeCountToAmount(treeCount)} {currency}
-              </Text>
-            </View>
-          );
-        })}
 
-        <View style={styles.treecount_price_conversion}>
-          {/* <input
-            type="radio"
-            value={this.state.variableTreeCount}
-            checked={!this.state.isFixed}
-            onChange={evt =>
-              this.handleVariableTreeCountSelected(evt.target.value)
-            }
-          /> */}
-          <TextInput
-            editable={!this.state.isFixed}
-            keyboardType="numeric"
-            onChangeText={evt =>
-              this.handleVariableTreeCountChange(evt.target.value)
-            }
-            value={String(this.state.variableTreeCount)}
-          />
-          <Text key="variable"> {i18n.t('label.trees')}</Text>
-          <Text>=</Text>
+        <View style={styles.treecount_priceContainer_row}>
+          <View style={styles.treecount_price_radio_container}>
+            <RadioForm>
+              {/* To create radio buttons, loop through your array of options */}
+              {radio_props.map((obj, i) => {
+                return (
+                  <RadioButton labelHorizontal={true} key={i}>
+                    <RadioButtonInput
+                      buttonInnerColor={'#ec6453'}
+                      buttonOuterColor={'#ec6453'}
+                      obj={obj}
+                      index={i}
+                      isSelected={
+                        obj.value === this.state.fixedTreeCount &&
+                        this.state.isFixed
+                      }
+                      onPress={(value, index) => {
+                        this.handleFixedTreeCountChange(value);
+                      }}
+                    />
+                    <RadioButtonLabel
+                      obj={obj}
+                      index={i}
+                      labelHorizontal={true}
+                      labelWrapStyle={{}}
+                    />
+                  </RadioButton>
+                );
+              })}
+            </RadioForm>
+          </View>
+          <View style={styles.treecount_price_conversion_Column}>
+            {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
+              return (
+                <View
+                  style={styles.treecount_price_conversion_Text}
+                  key={treeCount + 'container'}
+                >
+                  <Text>=</Text>
+                  <Text key={treeCount}>{treeCountToAmount(treeCount)}</Text>
+                  <Text> {currency}</Text>
+                </View>
+              );
+            })}
+          </View>
+        </View>
 
-          <TextInput
-            editable={!this.state.isFixed}
-            keyboardType="numeric"
-            onChangeText={evt =>
-              this.handleVariableAmountChange(evt.target.value)
-            }
-            value={String(this.state.variableAmount)}
-          />
-          <Text> {currency}</Text>
+        <View style={styles.treecount_priceContainer_row}>
+          <View style={styles.treecount_price_radio_container}>
+            <RadioForm>
+              {fixed_radio_props.map((obj, i) => {
+                return (
+                  <RadioButton
+                    style={{ padding: 0, width: 30 }}
+                    labelHorizontal={true}
+                    key={i}
+                  >
+                    <RadioButtonInput
+                      obj={obj}
+                      index={i}
+                      buttonInnerColor={'#ec6453'}
+                      buttonOuterColor={'#ec6453'}
+                      isSelected={!this.state.isFixed}
+                      onPress={(value, index) => {
+                        this.handleVariableTreeCountSelected(value);
+                      }}
+                    />
+                  </RadioButton>
+                );
+              })}
+            </RadioForm>
+
+            <TextInput
+              editable={!this.state.isFixed}
+              style={styles.treecount_price_conversion_Text_input}
+              keyboardType="numeric"
+              onChangeText={evt =>
+                this.handleVariableTreeCountChange(evt.target.value)
+              }
+              value={String(this.state.variableTreeCount)}
+            />
+            <Text
+              key="variable"
+              style={styles.treecount_price_conversion_lebel}
+            >
+              {i18n.t('label.trees')}
+            </Text>
+          </View>
+          <View style={styles.treecount_price_conversion_Text}>
+            <Text style={styles.treecount_price_conversion_Text_equal}>=</Text>
+
+            <TextInput
+              editable={!this.state.isFixed}
+              style={styles.treecount_price_conversion_Text_input}
+              keyboardType="numeric"
+              onChangeText={evt =>
+                this.handleVariableAmountChange(evt.target.value)
+              }
+              value={String(this.state.variableAmount)}
+            />
+            <Text style={styles.treecount_price_conversion_Text_equal}>
+              {currency}
+            </Text>
+          </View>
         </View>
       </View>
     );

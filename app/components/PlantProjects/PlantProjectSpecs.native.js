@@ -96,7 +96,9 @@ class PlantProjectSpecs extends React.Component {
           </Text>
           <ToolTip
             ref="tooltip"
-            actions={[{ text: this.state.tooltipText }]}
+            actions={[
+              { text: this.state.tooltipText ? this.state.tooltipText : '' }
+            ]}
             underlayColor={'black'}
             style={styles.selectedName}
           >

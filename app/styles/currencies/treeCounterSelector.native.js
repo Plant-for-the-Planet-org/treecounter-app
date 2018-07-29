@@ -2,24 +2,37 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (currentSelectorStyles = EStyleSheet.create({
   treecount_container: {
-    marginTop: 30
+    marginTop: 30,
+    width: 350
   },
-
-  treecount_price_conversion: {
+  treecount_priceContainer_row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 25,
-    paddingRight: 40,
-    paddingBottom: 0,
-    paddingLeft: 40,
     width: '100%'
   },
-  counter_label: {
-    color: 'black'
+  treecount_price_conversion_Text: {
+    flex: 1,
+    flexDirection: 'row',
+    width: 160
   },
-  counter_text: {
+  treecount_price_conversion_Column: {
+    flexDirection: 'column'
+  },
+
+  treecount_price_radio_container: {
+    flexDirection: 'row',
+    width: 127
+  },
+  treecount_price_conversion_Text_input: {
+    width: 60,
+    paddingLeft: 10,
+    marginVertical: 10
+  },
+  treecount_price_conversion_lebel: {
     width: 40,
-    color: 'black'
-    // border-bottom: 1px solid mix(white, #424242, 70%);
+    marginVertical: 10
+  },
+  treecount_price_conversion_Text_equal: {
+    marginVertical: 10
   }
 }));

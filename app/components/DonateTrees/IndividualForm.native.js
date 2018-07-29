@@ -12,9 +12,7 @@ let Form = t.form.Form;
 export default class IndividualForm extends Component {
   render() {
     return (
-      <CardLayout
-        style={{ flex: 1, justifyContent: 'flex-start', paddingTop: 10 }}
-      >
+      <CardLayout>
         <Form
           ref={'donorDetailsForm'}
           type={receiptIndividualFormSchema}

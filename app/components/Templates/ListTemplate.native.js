@@ -73,7 +73,7 @@ function renderRowButton(button, stylesheet, style, title) {
   return (
     <TouchableHighlight
       key={button.type}
-      style={[stylesheet.button, style.addButtonStyle]}
+      style={[style.addButtonStyle]}
       onPress={button.click}
       underlayColor={'#f2f2f2'}
     >

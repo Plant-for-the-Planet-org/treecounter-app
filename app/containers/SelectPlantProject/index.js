@@ -11,6 +11,9 @@ import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction
 import SelectPlantProject from '../../components/SelectPlantProject';
 
 class SelectPlantProjectContainer extends Component {
+  componentDidMount() {
+    // this.props.selectPlantProjectAction(1);
+  }
   render() {
     return (
       <SelectPlantProject

@@ -108,7 +108,10 @@ export default class SelectPlantProject extends Component {
         <Slick style={styles.slickWrapper} showsPagination={false}>
           {featuredProjects.length !== 0
             ? featuredProjects.map(project => (
-                <CardLayout style={{ width: 350, height: 620 }}>
+                <CardLayout
+                  style={{ width: 350, height: 620 }}
+                  key={project.id}
+                >
                   <View style={styles.plantProjectContentFull}>
                     <PlantProjectFull
                       callExpanded={() => this.callExpanded()}

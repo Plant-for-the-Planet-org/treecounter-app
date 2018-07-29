@@ -19,7 +19,7 @@ i18next.init({
   resources: {
     en: {
       translation: {
-        label: labels
+        label: enlabels
       }
     },
     de: {

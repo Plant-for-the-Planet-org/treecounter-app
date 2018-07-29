@@ -11,6 +11,7 @@ import {
   schemaOptions,
   signupFormSchema
 } from '../../../server/parsedSchemas/signup';
+import i18n from '../../../locales/i18n.js';
 
 let TCombForm = t.form.Form;
 
@@ -33,37 +34,37 @@ export default class SignUp extends Component {
     let { Profiletype } = this.state;
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>Join In</TextHeading>
+        <TextHeading>{i18n.t('label.signUp')}</TextHeading>
         <div className="signup-types">
           <SignUpType
             active={Profiletype === 'tpo'}
             imgSrc={SignupOrganization}
-            salutation="I am a"
-            title="Tree-Planting Organisation"
+            salutation={i18n.t('label.i_am_a')}
+            title={i18n.t('label.tpo_title')}
             type="tpo"
             onProfileClick={this.ProfileChange}
           />
           <SignUpType
             active={Profiletype === 'individual'}
             imgSrc={SignupJustMe}
-            salutation="I am"
-            title="Just me"
+            salutation={i18n.t('label.i_am')}
+            title={i18n.t('label.individual_title')}
             type="individual"
             onProfileClick={this.ProfileChange}
           />
           <SignUpType
             active={Profiletype === 'company'}
             imgSrc={SignupOrganization}
-            salutation="I am a"
-            title="Company"
+            salutation={i18n.t('label.i_am_a')}
+            title={i18n.t('label.company_title')}
             type="company"
             onProfileClick={this.ProfileChange}
           />
           <SignUpType
             active={Profiletype === 'education'}
             imgSrc={SignupOrganization}
-            salutation="I am a"
-            title="School"
+            salutation={i18n.t('label.i_am_a')}
+            title={i18n.t('label.education_title')}
             type="education"
             onProfileClick={this.ProfileChange}
           />
@@ -78,7 +79,7 @@ export default class SignUp extends Component {
             <PrimaryButton
               onClick={this.props.onSignUpClicked.bind(this, Profiletype)}
             >
-              Sign Up
+              {i18n.t('label.signUp')}
             </PrimaryButton>
           </CardLayout>
         </div>

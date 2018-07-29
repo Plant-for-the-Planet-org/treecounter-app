@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 
 import UserSynopsis from '../Common/UserSynopsis';
 import UserHomepageLink from '../Common/UserHomepageLink';
-// import ArcGISContributionsMap from '../ArcGISMaps/ArcGISContributionsMap';
+import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 
+/**
+ * MapIds:
+ *   - d601683709dc415b99ddc1bc66a6d8eb
+ *   - 534da741b327459eb117f4cc93acd98e
+ */
 const UserFootprint = ({ userProfile }) => {
-  console.log('UserFootprint userProfile: ', userProfile);
   return (
     <div>
       <UserSynopsis
@@ -15,9 +19,12 @@ const UserFootprint = ({ userProfile }) => {
       />
       <UserHomepageLink
         homepageUrl={userProfile.url}
-        caption={userProfile.homepageCaption}
+        caption={userProfile.linkText}
       />
-      {/* <ArcGISContributionsMap contributions={userProfile.contributions} /> */}
+      <ArcGISContributionsMap
+        webMapId={'d601683709dc415b99ddc1bc66a6d8eb'}
+        userId={userProfile.id}
+      />
       {/*<UserBarChart contributions={userProfile.contributions} />*/}
     </div>
   );

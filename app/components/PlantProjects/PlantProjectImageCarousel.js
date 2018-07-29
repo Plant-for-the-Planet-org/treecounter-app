@@ -12,6 +12,7 @@ const PlantProjectImageCarousel = props => {
     return null;
   }
   const settings = {
+    adaptiveHeight: true,
     nextArrow: (
       <CarouselNavigation
         styleName="tpo-footer-nav-img__right"
@@ -48,7 +49,7 @@ const PlantProjectImageCarousel = props => {
 };
 
 PlantProjectImageCarousel.propTypes = {
-  projectImages: PropTypes.array.isRequired
+  projectImages: PropTypes.array
 };
 
 export default PlantProjectImageCarousel;

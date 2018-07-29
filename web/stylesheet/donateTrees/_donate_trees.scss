@@ -1,14 +1,17 @@
 .donate-tress__container {
   position: relative;
-  width: 416px;
+  width: 100%;
+  height: auto;
 
   .treecount-selector-wrapper {
-    height: 250px;
+    height: 280px;
   }
 
   .pftp-tabs__type {
-    width: 300px;
-    margin-bottom: 15px;
+    margin-top: 5%;
+    @include for-phone-only {
+      margin-top: 10%;
+    }
   }
 
   .donate-tree-nav-img__right {
@@ -31,13 +34,11 @@
     display: block;
     padding: 0;
     top: -90px;
-    left: -5%;
+    left: -20px;
   }
 
   .content-header_container {
-    height: 80px;
     line-height: 2.5;
-    font-size: 24px;
     align-items: unset;
   }
 
@@ -52,60 +53,41 @@
     .project-teaser__container {
       .teaser-image__container {
         .teaser__projectImage {
-          height: 100px;
+          width: 100%;
+          height: auto;
         }
       }
     }
 
-    .project-specs__container {
-      .column {
-        font-weight: normal;
-      }
-    }
+    .project-action-links {
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
 
-    .collapsed {
-      border: none;
-      cursor: pointer;
-      span {
+      .select_different_project_style {
+        display: flex;
         color: #ec6453;
-      }
-    }
-
-    .expanded {
-      border: none;
-      cursor: pointer;
-      span {
-        color: #ec6453;
-      }
-    }
-
-    .slick-dots {
-      top: -70px;
-      height: 20px;
-      left: 6px;
-
-      li {
-        margin: 0 1px;
+        margin-top: 10px;
+        cursor: pointer;
       }
 
-      button {
-        width: 10px;
-        height: 10px;
+      .link {
+        padding: 10px 0;
+      }
+      .collapsed {
+        border: none;
+        cursor: pointer;
+        span {
+          color: #ec6453;
+        }
       }
 
-      button:before {
-        color: transparent;
-        border: 3px solid #ffffff;
-        border-radius: 100%;
-        line-height: 10px;
-        opacity: 1;
-        width: 10px;
-        height: 10px;
-      }
-
-      .slick-active button:before {
-        color: #ffffff;
-        opacity: 1;
+      .expanded {
+        border: none;
+        cursor: pointer;
+        span {
+          color: #ec6453;
+        }
       }
     }
   }
@@ -135,7 +117,8 @@
 
   .treecount-container {
     margin-top: 30px;
-    height: 200px;
+    height: auto;
+
     .treecount-price-conversion {
       display: flex;
       justify-content: space-between;
@@ -160,4 +143,205 @@
       }
     }
   }
+}
+
+.select-project__container {
+  @extend .donate-tress__container;
+  width: 100%;
+  .slick-initialized {
+    margin: 35px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+
+    .see-more-toggle__container {
+      display: inline-block;
+    }
+  }
+  .plant_project_content {
+    max-height: 500px;
+    overflow: auto;
+  }
+}
+
+.projects-list {
+  border-radius: 6px;
+  border-spacing: 0;
+  border: solid 2px #efefef;
+  padding: 10px;
+  color: #686060;
+  width: 99%;
+  max-width: 100%;
+  margin: 0 4px;
+
+  .pftp-button-primary {
+    font-size: 13px;
+    padding: 5px;
+    width: 70px;
+    margin: 0;
+    height: 30px;
+    border-radius: 3px;
+  }
+
+  .align-left {
+    text-align: left;
+  }
+
+  .align-right {
+    text-align: right;
+  }
+
+  th {
+    font-weight: normal;
+    padding: 5px;
+    border-bottom: solid 2px #efefef;
+    width: 25%;
+  }
+
+  td {
+    padding: 5px;
+  }
+}
+
+.all-projects-card {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+  margin: 20px;
+
+  .table-responsive {
+    width: calc(100% - 60px);
+    overflow-y: scroll;
+    min-height: 0.01%;
+    overflow-x: auto;
+  }
+
+  .pftp-textfield {
+    width: 60%;
+    margin-bottom: 30px;
+    .search-bar__button {
+      height: 36px;
+      width: 35px;
+      border-bottom: 1px solid #c6c6c6;
+
+      .material-icons {
+        font-size: 20px;
+        line-height: 2;
+      }
+    }
+  }
+}
+
+.project-modal-card-layout {
+  @extend .tpo-footer-card-layout;
+  margin: 0 -20px;
+  box-shadow: none;
+  overflow: scroll;
+  max-height: 80vh;
+  min-width: 500px;
+
+  .collapsed {
+    border: none;
+    cursor: pointer;
+    span {
+      color: #ec6453;
+    }
+  }
+
+  .expanded {
+    border: none;
+    cursor: pointer;
+    span {
+      color: #ec6453;
+    }
+  }
+}
+.payment_options__wrapper {
+  min-height: 470px;
+}
+.payment-option {
+  display: flex;
+  flex-direction: column;
+  border: solid 0.7px #0e7baa;
+  border-radius: 6px;
+  margin-bottom: 20px;
+
+  .__PrivateStripeElement {
+    height: 60px;
+  }
+
+  .StripeElement {
+    padding: 20px;
+    width: auto;
+  }
+
+  .pftp-button-primary {
+    margin: 10px;
+    width: calc(100% - 20px);
+    display: flex;
+    border-radius: 22px;
+  }
+
+  .payment-option-header {
+    padding: 10px;
+    background-color: #0e7baa;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      height: 25px;
+      transition: 1s;
+    }
+
+    span {
+      display: flex;
+      img {
+        margin-right: 20px;
+      }
+    }
+
+    .arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  .mandate-acceptance {
+    text-align: left;
+    color: #686060;
+    font-size: 14px;
+    padding: 20px;
+    padding-top: 0px;
+  }
+
+  .centerize-paypal {
+    margin: 40px 0;
+  }
+
+  .confirm-checkbox {
+    text-align: left;
+    padding: 20px;
+    color: #686060;
+    font-size: 14px;
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  }
+
+  .account-details {
+    @extend .confirm-checkbox;
+    color: #89a550;
+    width: 240px;
+  }
+}
+
+.display-none {
+  display: none;
+}
+
+.payment-success {
+  padding: 30px;
+  width: 300px;
 }

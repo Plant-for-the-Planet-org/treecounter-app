@@ -7,7 +7,8 @@ export default class Trillion extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Logged In{' ' + i18n.t('name.label')}
+          {i18n.t('label.logged_in')}
+          {' ' + i18n.t('name.label')}
         </Text>
       </View>
     );

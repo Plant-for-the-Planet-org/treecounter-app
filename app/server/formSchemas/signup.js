@@ -6,36 +6,28 @@ export default {
       name: {
         type: 'string',
         title: 'label.company_or_orga_name',
-        attr: {
-          maxlength: 255
-        },
+        attr: { maxlength: 255 },
         maxLength: 255,
         propertyOrder: 1
       },
       address: {
         type: 'string',
         title: 'label.address',
-        attr: {
-          maxlength: 255
-        },
+        attr: { maxlength: 255 },
         maxLength: 255,
         propertyOrder: 2
       },
       zipCode: {
         type: 'string',
         title: 'label.zipCode',
-        attr: {
-          maxlength: 50
-        },
+        attr: { maxlength: 50 },
         maxLength: 50,
         propertyOrder: 3
       },
       city: {
         type: 'string',
         title: 'label.city',
-        attr: {
-          maxlength: 150
-        },
+        attr: { maxlength: 150 },
         maxLength: 150,
         propertyOrder: 4
       },
@@ -556,17 +548,13 @@ export default {
         ],
         type: 'string',
         title: 'label.country',
-        attr: {
-          maxlength: 2
-        },
+        attr: { maxlength: 2 },
         propertyOrder: 5
       },
       email: {
         type: 'string',
         title: 'label.email',
-        attr: {
-          maxlength: 100
-        },
+        attr: { maxlength: 100 },
         widget: 'email',
         icon: 'email',
         maxLength: 100,
@@ -579,9 +567,7 @@ export default {
           first: {
             type: 'string',
             title: 'label.password',
-            attr: {
-              class: 'password-field'
-            },
+            attr: { class: 'password-field' },
             widget: 'password',
             icon: 'key',
             propertyOrder: 1
@@ -589,9 +575,7 @@ export default {
           second: {
             type: 'string',
             title: 'label.password_repeat',
-            attr: {
-              class: 'password-field'
-            },
+            attr: { class: 'password-field' },
             widget: 'password',
             propertyOrder: 2
           }
@@ -629,18 +613,14 @@ export default {
       firstname: {
         type: 'string',
         title: 'label.firstname',
-        attr: {
-          maxlength: 255
-        },
+        attr: { maxlength: 255 },
         maxLength: 255,
         propertyOrder: 1
       },
       lastname: {
         type: 'string',
         title: 'label.lastname',
-        attr: {
-          maxlength: 255
-        },
+        attr: { maxlength: 255 },
         maxLength: 255,
         propertyOrder: 2
       },
@@ -1161,17 +1141,13 @@ export default {
         ],
         type: 'string',
         title: 'label.country',
-        attr: {
-          maxlength: 2
-        },
+        attr: { maxlength: 2 },
         propertyOrder: 3
       },
       email: {
         type: 'string',
         title: 'label.email',
-        attr: {
-          maxlength: 100
-        },
+        attr: { maxlength: 100 },
         widget: 'email',
         icon: 'email',
         maxLength: 100,
@@ -1184,9 +1160,7 @@ export default {
           first: {
             type: 'string',
             title: 'label.password',
-            attr: {
-              class: 'password-field'
-            },
+            attr: { class: 'password-field' },
             widget: 'password',
             icon: 'key',
             propertyOrder: 1
@@ -1194,9 +1168,7 @@ export default {
           second: {
             type: 'string',
             title: 'label.password_repeat',
-            attr: {
-              class: 'password-field'
-            },
+            attr: { class: 'password-field' },
             widget: 'password',
             propertyOrder: 2
           }
@@ -1226,9 +1198,7 @@ export default {
       name: {
         type: 'string',
         title: 'label.company_or_orga_name',
-        attr: {
-          maxlength: 255
-        },
+        attr: { maxlength: 255 },
         maxLength: 255,
         propertyOrder: 1
       },
@@ -1756,17 +1726,13 @@ export default {
         ],
         type: 'string',
         title: 'label.country',
-        attr: {
-          maxlength: 2
-        },
+        attr: { maxlength: 2 },
         propertyOrder: 3
       },
       email: {
         type: 'string',
         title: 'label.email',
-        attr: {
-          maxlength: 100
-        },
+        attr: { maxlength: 100 },
         widget: 'email',
         icon: 'email',
         maxLength: 100,
@@ -1779,9 +1745,7 @@ export default {
           first: {
             type: 'string',
             title: 'label.password',
-            attr: {
-              class: 'password-field'
-            },
+            attr: { class: 'password-field' },
             widget: 'password',
             icon: 'key',
             propertyOrder: 1
@@ -1789,9 +1753,7 @@ export default {
           second: {
             type: 'string',
             title: 'label.password_repeat',
-            attr: {
-              class: 'password-field'
-            },
+            attr: { class: 'password-field' },
             widget: 'password',
             propertyOrder: 2
           }
@@ -1821,15 +1783,18 @@ export default {
       name: {
         type: 'string',
         title: 'label.company_or_orga_name',
-        attr: {
-          maxlength: 255
-        },
+        attr: { maxlength: 255 },
         maxLength: 255,
         propertyOrder: 1
       },
       subType: {
-        enum: ['primary', 'secondary', 'higher', 'other'],
-        enum_titles: ['0', '1', '2', '3'],
+        enum: [
+          'education-primary',
+          'education-secondary',
+          'education-higher',
+          'education-other'
+        ],
+        enum_titles: ['Primary', 'Secondary', 'Higher', 'Other'],
         type: 'string',
         title: 'subType',
         propertyOrder: 2
@@ -2351,17 +2316,13 @@ export default {
         ],
         type: 'string',
         title: 'label.country',
-        attr: {
-          maxlength: 2
-        },
+        attr: { maxlength: 2 },
         propertyOrder: 3
       },
       email: {
         type: 'string',
         title: 'label.email',
-        attr: {
-          maxlength: 100
-        },
+        attr: { maxlength: 100 },
         widget: 'email',
         icon: 'email',
         maxLength: 100,
@@ -2374,9 +2335,7 @@ export default {
           first: {
             type: 'string',
             title: 'label.password',
-            attr: {
-              class: 'password-field'
-            },
+            attr: { class: 'password-field' },
             widget: 'password',
             icon: 'key',
             propertyOrder: 1
@@ -2384,9 +2343,7 @@ export default {
           second: {
             type: 'string',
             title: 'label.password_repeat',
-            attr: {
-              class: 'password-field'
-            },
+            attr: { class: 'password-field' },
             widget: 'password',
             propertyOrder: 2
           }
@@ -2416,15 +2373,18 @@ export default {
       name: {
         type: 'string',
         title: 'label.company_or_orga_name',
-        attr: {
-          maxlength: 255
-        },
+        attr: { maxlength: 255 },
         maxLength: 255,
         propertyOrder: 1
       },
       subType: {
-        enum: ['Non Profit', 'Service Club', 'Political Party', 'Other'],
-        enum_titles: ['0', '1', '2', '3'],
+        enum: [
+          'organization-non-profit',
+          'organization-service_club',
+          'organization-non-profit',
+          'organization-other'
+        ],
+        enum_titles: ['Non Profit', 'Service Club', 'Political Party', 'Other'],
         type: 'string',
         title: 'subType',
         propertyOrder: 2
@@ -2946,17 +2906,13 @@ export default {
         ],
         type: 'string',
         title: 'label.country',
-        attr: {
-          maxlength: 2
-        },
+        attr: { maxlength: 2 },
         propertyOrder: 3
       },
       email: {
         type: 'string',
         title: 'label.email',
-        attr: {
-          maxlength: 100
-        },
+        attr: { maxlength: 100 },
         widget: 'email',
         icon: 'email',
         maxLength: 100,
@@ -2969,9 +2925,7 @@ export default {
           first: {
             type: 'string',
             title: 'label.password',
-            attr: {
-              class: 'password-field'
-            },
+            attr: { class: 'password-field' },
             widget: 'password',
             icon: 'key',
             propertyOrder: 1
@@ -2979,9 +2933,7 @@ export default {
           second: {
             type: 'string',
             title: 'label.password_repeat',
-            attr: {
-              class: 'password-field'
-            },
+            attr: { class: 'password-field' },
             widget: 'password',
             propertyOrder: 2
           }
@@ -3011,15 +2963,13 @@ export default {
       name: {
         type: 'string',
         title: 'label.company_or_orga_name',
-        attr: {
-          maxlength: 255
-        },
+        attr: { maxlength: 255 },
         maxLength: 255,
         propertyOrder: 1
       },
       subType: {
-        enum: ['City', 'State', 'Country'],
-        enum_titles: ['0', '1', '2'],
+        enum: ['government-city', 'government-state', 'government-country'],
+        enum_titles: ['City', 'State', 'Country'],
         type: 'string',
         title: 'subType',
         propertyOrder: 2
@@ -3541,17 +3491,13 @@ export default {
         ],
         type: 'string',
         title: 'label.country',
-        attr: {
-          maxlength: 2
-        },
+        attr: { maxlength: 2 },
         propertyOrder: 3
       },
       email: {
         type: 'string',
         title: 'label.email',
-        attr: {
-          maxlength: 100
-        },
+        attr: { maxlength: 100 },
         widget: 'email',
         icon: 'email',
         maxLength: 100,
@@ -3564,9 +3510,7 @@ export default {
           first: {
             type: 'string',
             title: 'label.password',
-            attr: {
-              class: 'password-field'
-            },
+            attr: { class: 'password-field' },
             widget: 'password',
             icon: 'key',
             propertyOrder: 1
@@ -3574,9 +3518,7 @@ export default {
           second: {
             type: 'string',
             title: 'label.password_repeat',
-            attr: {
-              class: 'password-field'
-            },
+            attr: { class: 'password-field' },
             widget: 'password',
             propertyOrder: 2
           }

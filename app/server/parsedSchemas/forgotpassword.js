@@ -1,9 +1,9 @@
 import schemaLiform from '../formSchemas/forgotpassword';
-import parseJsonToTcomb from '../parserLiformToTcomb';
+import callParser from '../callParser';
 
 const {
   transformedSchema: forgotPasswordFormSchema,
   schemaOptions
-} = parseJsonToTcomb(schemaLiform);
+} = callParser(schemaLiform);
 
 export { schemaOptions, forgotPasswordFormSchema };

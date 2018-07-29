@@ -10,8 +10,6 @@ import UserHome from '../../components/UserHome';
 
 class UserHomeContainer extends React.Component {
   render() {
-    console.log('Home Component Render with props- ', this.props);
-
     const { treecounterData, currentUserProfile } = this.props;
 
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { profile } from '../../assets';
 import { getImageUrl } from '../../actions/apiRouting';
+import { ProfilePic } from '../../assets';
 
 const UserProfileImage = ({ profileImage }) => {
   return (
@@ -11,7 +11,7 @@ const UserProfileImage = ({ profileImage }) => {
           src={
             profileImage
               ? getImageUrl('profile', 'thumb', profileImage)
-              : profile
+              : ProfilePic
           }
         />
       }

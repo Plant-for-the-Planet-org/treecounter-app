@@ -6,14 +6,52 @@ import Notification from './Notification';
 import Popover from '../Common/Popover';
 import UserDetails from './UserDetails';
 import RoundedButton from '../Common/Button/RoundedButton';
+import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
 
-const HeaderFields = ({ updateRoute, isLoggedIn, userProfile, onLogout }) => {
+const HeaderFields = ({
+  userFeeds,
+  updateRoute,
+  isLoggedIn,
+  userProfile,
+  onLogout,
+  fetchMoreNotifications,
+  markSeenNotificationAction
+}) => {
   return isLoggedIn ? (
     <div className="header-icons">
-      <Popover button={<i className="material-icons">notifications_none</i>}>
-        <Notification />
-      </Popover>
+      <div className="pftp-popover-notification">
+        <Popover
+          onPopoverClosed={() => {
+            userFeeds && userFeeds.userFeeds.length
+              ? markSeenNotificationAction(userFeeds.userFeeds[0].id)
+              : null;
+          }}
+          button={
+            <div className="notification-bell">
+              <div
+                className={
+                  userFeeds && userFeeds.unRead > 0
+                    ? 'unread-circle'
+                    : 'unread-circle adjust-zindex'
+                }
+              >
+                <span className="unread-number-align">
+                  {userFeeds && userFeeds.unRead > 0 ? userFeeds.unRead : 0}
+                </span>
+              </div>
+              <div className="bell-icon">
+                <i className="material-icons">notifications_none</i>
+              </div>
+            </div>
+          }
+        >
+          <Notification
+            fetchMoreNotifications={fetchMoreNotifications}
+            userFeeds={userFeeds}
+          />
+        </Popover>
+      </div>
       <Popover
         button={
           <img
@@ -36,10 +74,10 @@ const HeaderFields = ({ updateRoute, isLoggedIn, userProfile, onLogout }) => {
   ) : (
     <div className="header-icons">
       <RoundedButton onClick={updateRoute.bind(this, 'app_login')}>
-        Log In
+        {i18n.t('label.login')}
       </RoundedButton>
       <RoundedButton onClick={updateRoute.bind(this, 'app_signup')}>
-        Sign Up
+        {i18n.t('label.signUp')}
       </RoundedButton>
     </div>
   );
@@ -47,9 +85,12 @@ const HeaderFields = ({ updateRoute, isLoggedIn, userProfile, onLogout }) => {
 
 HeaderFields.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
+  fetchMoreNotifications: PropTypes.func,
+  markSeenNotificationAction: PropTypes.func,
   userProfile: PropTypes.object,
   onLogout: PropTypes.func.isRequired,
-  updateRoute: PropTypes.func
+  updateRoute: PropTypes.func,
+  userFeeds: PropTypes.object
 };
 
 export default HeaderFields;

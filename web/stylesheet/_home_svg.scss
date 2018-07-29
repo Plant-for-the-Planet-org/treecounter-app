@@ -1,8 +1,11 @@
 .svg-text-container {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: grid;
-  background-color: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  background-color: transparent;
+  box-shadow: none;
   padding: 20px;
   margin-bottom: 20px;
 
@@ -12,12 +15,13 @@
     align-items: center;
     grid-column-gap: 16px;
     position: relative;
+    @include for-phone-only {
+      grid-column-gap: 5px;
+    }
 
     span {
-      @extend .pftp-text-basic;
+      @extend .pftp-text-span;
       font-size: 13.5px;
-      font-weight: normal;
-      text-align: left;
       color: $headerTextColor;
     }
     img {
@@ -29,6 +33,9 @@
       font-weight: 600;
       text-align: left;
       color: $headerTextColor;
+      @include for-phone-only {
+        font-size: 15.5px;
+      }
     }
 
     .svg-text-container__row--col2 {
@@ -39,17 +46,45 @@
   .svg-text-container__bar {
     width: 120px;
     height: 3px;
-    margin: auto;
+    margin: 27px auto;
     background-color: $colorPrimary;
-    margin-top: 27px;
-    margin-bottom: 27px;
     border: 0;
+    @include for-phone-only {
+      margin: 13px auto;
+    }
+    @include for-xs-phone-only {
+      margin: 7px auto;
+    }
   }
 
-  .fixed-planted-details,
+  .fixed-planted-details {
+    position: absolute;
+    right: 0;
+    bottom: -120px;
+    padding: 0px;
+   
+    img {
+      height: 15px;
+      vertical-align: middle;
+    }
+    @include for-phone-only {
+      font-size: 8px;
+      right: 0;
+      left: 30px;
+      bottom: -5px;
+      padding: 0px;
+      img {
+        height: 11px;
+        vertical-align: middle;
+      }
+    }
+  }
+
   .fixed-target-comment {
-    position: relative;
-    padding: 10px 20px 0;
+    position: absolute;
+    // Magic Numbers
+    right: -15px;
+    top: 80px;
   }
 }
 
@@ -68,7 +103,7 @@
     .fixed-planted-details {
       position: absolute;
       right: 0;
-      bottom: -70px;
+      bottom: -50px;
       padding: 0px;
     }
 

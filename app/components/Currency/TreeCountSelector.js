@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
+import i18n from '../../locales/i18n';
+import { tree } from '../../assets';
 
 class TreeCountSelector extends React.Component {
   constructor(props) {
@@ -18,7 +20,10 @@ class TreeCountSelector extends React.Component {
       variableAmount: props.treeCountToAmount(variableDefaultTreeCount)
     };
 
-    props.onChange(fixedDefaultTreeCount);
+    props.onChange({
+      treeCount: fixedDefaultTreeCount,
+      amount: this.props.treeCountToAmount(fixedDefaultTreeCount)
+    });
 
     this.handleFixedTreeCountChange = this.handleFixedTreeCountChange.bind(
       this
@@ -35,43 +40,54 @@ class TreeCountSelector extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // TODO: seems to be a deprecated life cycle method
     if (this.props.currency !== nextProps.currency) {
-      console.log(
-        '########### currency has changed',
-        this.props.currency,
-        nextProps.currency
-      );
       this.handleVariableTreeCountChange(this.state.variableTreeCount);
     }
   }
-
   handleFixedTreeCountChange(treeCount) {
-    this.setState({ fixedTreeCount: parseInt(treeCount), isFixed: true });
-    this.props.onChange(treeCount);
+    this.updateStateAndParent({
+      fixedTreeCount: parseInt(treeCount),
+      isFixed: true
+    });
   }
 
   handleVariableTreeCountChange(treeCount) {
-    this.setState({
+    if (treeCount === '') {
+      treeCount = 0;
+    }
+    this.updateStateAndParent({
       variableTreeCount: parseInt(treeCount),
       variableAmount: this.props.treeCountToAmount(treeCount)
     });
-    this.props.onChange(treeCount);
   }
 
   handleVariableAmountChange(amount) {
+    if (amount === '') {
+      amount = 0;
+    }
     const treeCount = this.props.amountToTreeCount(amount);
-    this.setState({
+    this.updateStateAndParent({
       variableAmount: parseInt(amount),
       variableTreeCount: treeCount
     });
-
-    this.props.onChange(treeCount);
   }
 
   handleVariableTreeCountSelected() {
-    this.setState({ isFixed: false });
-    this.props.onChange(this.state.variableTreeCount);
+    this.updateStateAndParent({ isFixed: false });
+  }
+
+  updateStateAndParent(updates) {
+    const newState = { ...this.state, ...updates };
+    this.setState(newState);
+
+    this.props.onChange({
+      treeCount: newState.isFixed
+        ? newState.fixedTreeCount
+        : newState.variableTreeCount,
+      amount: newState.isFixed
+        ? this.props.treeCountToAmount(newState.fixedTreeCount)
+        : newState.variableAmount
+    });
   }
 
   render() {
@@ -79,7 +95,7 @@ class TreeCountSelector extends React.Component {
 
     return (
       <div className={'treecount-container'}>
-        <TextBlock strong={true}>Number of Trees</TextBlock>
+        <TextBlock strong={true}>{i18n.t('label.no_of_trees')}</TextBlock>
         {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
           return (
             <div className="treecount-price-conversion" key={treeCount}>
@@ -95,7 +111,7 @@ class TreeCountSelector extends React.Component {
                     this.handleFixedTreeCountChange(evt.target.value)
                   }
                 />
-                {treeCount} Trees
+                {treeCount} {i18n.t('label.trees')}
               </label>
               <span>=</span>
               <span>
@@ -123,7 +139,7 @@ class TreeCountSelector extends React.Component {
                 this.handleVariableTreeCountChange(evt.target.value)
               }
             />{' '}
-            Trees
+            {i18n.t('label.trees')}
           </label>
           <span>=</span>
           <span>

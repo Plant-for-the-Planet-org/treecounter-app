@@ -1,22 +1,22 @@
 import React from 'react';
-import * as constants from '../../SupportedLanguages/en';
 import { MapPinRed, MapPinBlue, MapPinGreen } from '../../assets';
 import TextSpan from '../Common/Text/TextSpan';
+import i18n from '../../locales/i18n.js';
 
 const ContributionsMapLegend = () => (
   <div className="user-contributions__location--icons">
     <img className="user-contributions__location--icons--img" src={MapPinRed} />
-    <TextSpan>{constants.formStrings.singleTree}</TextSpan>
+    <TextSpan>{i18n.t('label.singleTree')}</TextSpan>
     <img
       className="user-contributions__location--icons--img"
       src={MapPinBlue}
     />
-    <TextSpan>{constants.formStrings.severalTrees}</TextSpan>
+    <TextSpan>{i18n.t('label.severalTrees')}</TextSpan>
     <img
       className="user-contributions__location--icons--img"
       src={MapPinGreen}
     />
-    <TextSpan>{constants.formStrings.donateTrees}</TextSpan>
+    <TextSpan>{i18n.t('label.donatedTrees')}</TextSpan>
   </div>
 );
 

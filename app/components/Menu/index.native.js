@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableNativeFeedback,
-  ScrollView,
-  SafeAreaView,
-  StyleSheet
-} from 'react-native';
-import MenuGroup from './MenuItem.native';
+import { View, Image, ScrollView, SafeAreaView } from 'react-native';
+import MenuGroup, { MenuItem } from './MenuItem.native';
 import PropTypes, { func } from 'prop-types';
+import styles from '../../styles/menu';
 import { updateRoute } from '../../helpers/routerHelper';
+import { close_green } from '../../assets';
+import i18n from '../../locales/i18n.js';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 export default class Menu extends Component {
   static propTypes = {
@@ -21,9 +17,8 @@ export default class Menu extends Component {
   //TODO hkurra
   //Ideally this should be in the container but for now to keep the same container for both web and app it's better to keep it here
   onPressMenu = item => {
-    const { dispatch } = this.props.navigation;
-    console.log('clicked ', item, dispatch);
-    updateRoute(item.uri, dispatch, 0);
+    const { navigation } = this.props;
+    updateRoute(item.uri, navigation, 0);
   };
 
   render() {
@@ -39,19 +34,22 @@ export default class Menu extends Component {
               onPress={this.onPressMenu}
             />
           ))}
+          <MenuItem
+            onPress={() => {
+              this.props.logoutUser();
+            }}
+            title={i18n.t('label.logout')}
+            iconUrl={close_green}
+          />
+          <MenuItem
+            onPress={() => {
+              this.onPressMenu({ uri: getLocalRoute('app_faq') });
+            }}
+            title={i18n.t('label.faqs')}
+            iconUrl={close_green}
+          />
         </ScrollView>
       </SafeAreaView>
     );
   }
 }
-export const styles = StyleSheet.create({
-  outerContainer: {
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    flex: 1
-  },
-  imageStyle: {
-    paddingLeft: 43,
-    paddingBottom: 20
-  }
-});

@@ -14,8 +14,12 @@ class Popover extends Component {
 
   CalculatePopoverPosition() {
     let popoverButtonRect = this.refs.popover_button.getBoundingClientRect();
+    let right =
+      (2 * window.innerWidth -
+        (popoverButtonRect.left + popoverButtonRect.right)) /
+      2;
     this.popoverPosition = {
-      right: window.innerWidth - popoverButtonRect.right,
+      right: right,
       top: popoverButtonRect.bottom
     };
   }
@@ -27,6 +31,9 @@ class Popover extends Component {
 
   PopoverBlurred() {
     this.refs.popover.blur();
+    if (this.props.onPopoverClosed) {
+      this.props.onPopoverClosed();
+    }
     this.setState({ focused: false });
   }
 
@@ -52,7 +59,7 @@ class Popover extends Component {
           style={
             this.state.focused
               ? {
-                  right: this.popoverPosition.right,
+                  right: this.popoverPosition.right - 20,
                   top: this.popoverPosition.top
                 }
               : null
@@ -63,11 +70,12 @@ class Popover extends Component {
           ref="popover"
           tabIndex="0"
           onBlur={this.PopoverBlurred}
+          onClick={this.PopoverBlurred}
           onFocus={this.PopoverFocused}
           style={
             this.state.focused
               ? {
-                  right: this.popoverPosition.right - 10,
+                  right: this.popoverPosition.right - 35,
                   top: this.popoverPosition.top + 15
                 }
               : null
@@ -82,6 +90,7 @@ class Popover extends Component {
 
 Popover.propTypes = {
   children: PropTypes.element,
+  onPopoverClosed: PropTypes.func,
   button: PropTypes.element
 };
 

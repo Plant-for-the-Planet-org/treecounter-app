@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
+import i18n from '../../locales/i18n.js';
 
 const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
   return (
     <div className="pftp-selectfield">
-      <TextBlock strong={true}>Currency</TextBlock>
+      <TextBlock strong={true}>{i18n.t('label.currency')}</TextBlock>
       <select
         className="pftp-selectfield__select"
         required="required"
@@ -19,7 +20,7 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
               value={value}
               key={value}
             >
-              {currencies[value]}
+              {currencies[value]} [{value}]
             </option>
           );
         })}

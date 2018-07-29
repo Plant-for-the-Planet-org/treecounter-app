@@ -9,15 +9,12 @@ import Login from '../../components/Authentication/Login/index';
 
 class LoginContainer extends React.Component {
   onPress = () => {
-    // let result = this.refs.loginForm.validate();
-    // if (result.isValid()) {
+    let result = this.refs.loginContainer.refs.loginForm.validate();
+    console.log(result);
     let value = this.refs.loginContainer.refs.loginForm.getValue();
     if (value) {
       this.onClick(value);
     }
-    // } else if (this.props.onError) {
-    //   this.props.onError(result.errors);
-    // }
   };
 
   onClick(value) {
@@ -29,7 +26,9 @@ class LoginContainer extends React.Component {
       <Login
         ref={'loginContainer'}
         onPress={this.onPress}
-        updateRoute={this.props.route}
+        updateRoute={(routeName, id) =>
+          this.props.route(routeName, id, this.props.navigation)
+        }
       />
     );
   }
@@ -39,7 +38,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       login,
-      route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
+      route: (routeName, id, navigation) => dispatch =>
+        updateRoute(routeName, navigation || dispatch, id)
     },
     dispatch
   );
@@ -49,5 +49,6 @@ export default connect(null, mapDispatchToProps)(LoginContainer);
 
 LoginContainer.propTypes = {
   login: PropTypes.func,
-  route: PropTypes.func
+  route: PropTypes.func,
+  navigation: PropTypes.object.isRequired
 };

@@ -1,25 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-//import { history } from '../../components/Common/BrowserRouter';
+import { bindActionCreators } from 'redux';
 
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantProjectSelector';
 import UserFootprint from './UserFootprint';
-//import {getLocalRoute} from '../../actions/apiRouting'
 import { currentUserProfileSelector } from '../../selectors/index';
-// import {selectPlantProjectIdAction} from '../../actions/selectPlantProjectIdAction'
-// import {followUnSubscribeAction} from '../../actions/followUnSubscribeAction'
-// import {followSubscribeAction} from '../../actions/followSubscribeAction'
-// import {supportTreecounterAction} from '../../actions/supportTreecounterAction'
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import CardLayout from '../../components/Common/Card/CardLayout';
-/**
- * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Public-TreeCounter
- */
+import { followUser, unfollowUser } from '../../actions/followActions';
+import { getLocalRoute } from '../../actions/apiRouting';
+import { history } from '../Common/BrowserRouter';
+import i18n from '../../locales/i18n';
+
+export const getProfileTypeName = function(profileType) {
+  switch (profileType) {
+    case 'tpo': {
+      return i18n.t('label.tpo_title');
+    }
+    case 'company': {
+      return i18n.t('label.company_title');
+    }
+    case 'individual': {
+      return i18n.t('label.individual_name');
+    }
+    case 'education': {
+      return i18n.t('label.education');
+    }
+  }
+};
 class PublicTreeCounter extends React.Component {
   constructor(props) {
     super(props);
@@ -46,8 +61,8 @@ class PublicTreeCounter extends React.Component {
   isUserFollower() {
     const { treecounter, currentUserProfile } = this.props;
     const followeeIds =
-      currentUserProfile && currentUserProfile.treecounter.followee_ids
-        ? currentUserProfile.treecounter.followee_ids
+      currentUserProfile && currentUserProfile.treecounter.followeeIds
+        ? currentUserProfile.treecounter.followeeIds
             .split(',')
             .map(s => parseInt(s))
         : [];
@@ -66,22 +81,23 @@ class PublicTreeCounter extends React.Component {
   // ACTION METHODS
   //------------------------------------------------------------------------------------------------------------
   onFollowChanged() {
-    // this.isUserFollower() ?
-    //   this.props.followUnSubscribeAction(this.props.treecounter.id) :
-    //   this.props.followSubscribeAction(this.props.treecounter.id)
+    if (null !== this.props.currentUserProfile) {
+      this.isUserFollower()
+        ? this.props.unfollowSubscribeAction(this.props.treecounter.id)
+        : this.props.followSubscribeAction(this.props.treecounter.id);
+    } else {
+      history.push(getLocalRoute('app_login'));
+    }
   }
 
   onPlantProjectSelected(selectedPlantProjectId) {
-    console.log(selectedPlantProjectId);
-    // console.log('onPlantProjectSelected', selectedPlantProjectId)
-    // this.props.selectPlantProjectIdAction(selectedPlantProjectId)
-    //history.push(getLocalRoute('app_donateTrees'))
+    this.props.selectPlantProjectIdAction(selectedPlantProjectId);
+    history.push(getLocalRoute('app_donateTrees'));
   }
 
   onRegisterSupporter() {
-    console.log('**onRegisterSupporter**');
-    // this.props.supportTreecounter(this.props.treecounter)
-    //history.push(getLocalRoute('app_donateTrees'))
+    this.props.supportTreecounterAction(this.props.treecounter);
+    history.push(getLocalRoute('app_donateTrees'));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -94,7 +110,8 @@ class PublicTreeCounter extends React.Component {
         community: treecounter.countCommunity,
         personal: treecounter.countPersonal,
         targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
       };
       this.setState({ svgData });
     }
@@ -122,7 +139,7 @@ class PublicTreeCounter extends React.Component {
     };
     const headerProps = {
       caption,
-      profileType,
+      profileType: getProfileTypeName(profileType),
       logo,
       isUserFollower,
       isUserLoggedIn,
@@ -159,16 +176,16 @@ class PublicTreeCounter extends React.Component {
           />
         </div>
         <div className="tree-counter-footer__container">
-          {'tpo' === userProfile.type ? (
+          {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
             <TpoDonationPlantProjectSelector
               {...tpoProps}
               onSelect={this.onPlantProjectSelected}
             />
-          ) : (
+          ) : userProfile.synopsis1 || userProfile.synopsis2 ? (
             <CardLayout>
               <UserFootprint userProfile={userProfile} />
             </CardLayout>
-          )}
+          ) : null}
         </div>
       </div>
     );
@@ -177,21 +194,23 @@ class PublicTreeCounter extends React.Component {
 
 PublicTreeCounter.propTypes = {
   treecounter: PropTypes.object,
-  currentUserProfile: PropTypes.object
-  // supportTreecounter: PropTypes.func.isRequired,
-  // selectPlantProjectIdAction: PropTypes.func.isRequired,
-  // followSubscribeAction: PropTypes.func.isRequired,
-  // followUnSubscribeAction: PropTypes.func.isRequired
+  currentUserProfile: PropTypes.object,
+  followSubscribeAction: PropTypes.func,
+  unfollowSubscribeAction: PropTypes.func,
+  selectPlantProjectIdAction: PropTypes.func,
+  supportTreecounterAction: PropTypes.func
 };
 
 const mapDispatchToProps = dispatch => {
-  console.log(dispatch);
-  return {
-    // supportTreecounter: treecounter => dispatch(supportTreecounterAction(treecounter)),
-    // selectPlantProjectIdAction: selectedPlantProjectId => dispatch(selectPlantProjectIdAction(selectedPlantProjectId)),
-    // followSubscribeAction: treecounterId => dispatch(followSubscribeAction(treecounterId)),
-    // followUnSubscribeAction: treecounterId => dispatch(followUnSubscribeAction(treecounterId))
-  };
+  return bindActionCreators(
+    {
+      selectPlantProjectIdAction: selectPlantProjectAction,
+      supportTreecounterAction: supportTreecounterAction,
+      followSubscribeAction: followUser,
+      unfollowSubscribeAction: unfollowUser
+    },
+    dispatch
+  );
 };
 
 const mapStateToProps = state => ({

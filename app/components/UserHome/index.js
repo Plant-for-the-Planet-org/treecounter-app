@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import i18n from '../../locales/i18n';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import SvgContainer from '../Common/SvgContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
-import { profile } from '../../assets';
-import { getImageUrl } from '../../actions/apiRouting';
+import UserProfileImage from '../Common/UserProfileImage';
+import { getProfileTypeName } from '../PublicTreeCounter/PublicTreecounter';
 
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
+
     let svgData = {};
-    const { treecounterData } = props;
+    const { treecounterData, userProfile } = props;
     if (treecounterData) {
-      svgData = treecounterData;
+      svgData = { ...treecounterData, type: userProfile.type };
     }
     this.state = {
       svgData: svgData
@@ -22,35 +23,28 @@ export default class UserHome extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { treecounterData } = nextProps;
+    const { treecounterData, userProfile } = nextProps;
     if (treecounterData) {
-      let svgData = treecounterData;
+      let svgData = { ...treecounterData, type: userProfile.type };
       this.setState({ svgData });
     }
   }
 
   render() {
-    console.log('Home Component Render with props- ', this.props);
-
     const { treecounterData, userProfile } = this.props;
+    const profileType = getProfileTypeName(userProfile.type);
     let { svgData } = this.state;
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <div className="tree-counter-profile flex-column">
-          <div className="header-logo">
-            {
-              <img
-                src={
-                  userProfile.image
-                    ? getImageUrl('profile', 'thumb', userProfile.image)
-                    : profile
-                }
-              />
-            }
-          </div>
-          <div className="tree-counter-name">{userProfile.name}</div>
-          <div className="tree-counter-row">
-            <UserProfileTypeLabel profileType={userProfile.type} />
+        <div className="tree-counter-profile flex-column user-home-profile">
+          <UserProfileImage profileImage={userProfile.image} />
+          <div className="user-info">
+            <div className="tree-counter-name">
+              {userProfile.treecounter.displayName}
+            </div>
+            <div className="tree-counter-row">
+              <UserProfileTypeLabel profileType={profileType} />
+            </div>
           </div>
         </div>
         <div className="canvasContainer flex-column">

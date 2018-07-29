@@ -9,6 +9,7 @@ import {
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import TextHeading from '../../Common/Heading/TextHeading';
 import CardLayout from '../../Common/Card/CardLayout';
+import i18n from '../../../locales/i18n';
 
 let TCombForm = t.form.Form;
 
@@ -16,7 +17,7 @@ class ResetPassword extends Component {
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>Reset Your Password</TextHeading>
+        <TextHeading>{i18n.t('label.reset_ur_password')}</TextHeading>
         <CardLayout>
           <TCombForm
             ref="resetPasswordForm"
@@ -25,7 +26,7 @@ class ResetPassword extends Component {
             value={this.props.value}
           />
           <PrimaryButton onClick={this.props.onSetPassword}>
-            Set Password
+            {i18n.t('label.set')} {i18n.t('label.password')}
           </PrimaryButton>
         </CardLayout>
       </div>

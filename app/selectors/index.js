@@ -3,13 +3,20 @@ import { denormalize } from 'normalizr';
 
 import { userProfileSchema, plantProjectSchema } from '../schemas';
 import { getCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
+import { getUserFeeds } from '../reducers/userFeedReducer';
 import {
   getPlantProjects,
   getPaymentGateways,
   getTpos
 } from '../reducers/entitiesReducer';
+import { getSupportedTreecounter } from '../reducers/supportedTreecounterReducer';
 import { getSelectedPlantProjectId } from '../reducers/selectedPlantProjectIdReducer';
+import { getPledges } from '../reducers/pledgeReducer';
+import { getPaymentStatus } from '../reducers/paymentStatus';
+import { getCurrencies } from '../reducers/currenciesReducer';
 
+export const supportedTreecounterSelector = state =>
+  getSupportedTreecounter(state);
 export const currentUserProfileIdSelector = state =>
   getCurrentUserProfileId(state);
 export const selectedPlantProjectIdSelector = state =>
@@ -18,6 +25,10 @@ export const paymentGatewaysSelector = state => getPaymentGateways(state);
 export const tposSelector = state => getTpos(state);
 export const plantProjectsSelector = state => getPlantProjects(state);
 export const entitiesSelector = state => state.entities;
+export const userFeedsSelector = state => getUserFeeds(state);
+export const pledgesSelector = state => getPledges(state);
+export const currenciesSelector = state => getCurrencies(state);
+export const paymentStatusSelector = state => getPaymentStatus(state);
 
 function logSelectorUpdate(selectorName, args = 'None') {
   const debug = false;
@@ -43,6 +54,31 @@ function logSelectorUpdate(selectorName, args = 'None') {
  * dependent on only the 3 relevant entity types above. This has the effect that the selector will produce
  * a new result whenever state.entities is modified (ANY entity is added/updated/deleted).
  */
+
+export const getAllPlantProjectsSelector = createSelector(
+  plantProjectsSelector,
+  entitiesSelector,
+  tposSelector,
+  (plantProjects, entities, tpos) => {
+    let normalisedProjects = Object.keys(plantProjects).reduce(
+      (projects, id) => {
+        let projectsArray = [];
+        projects.push(
+          denormalize(plantProjects[id], plantProjectSchema, entities)
+        );
+        return projects;
+      },
+      []
+    );
+    let tpoNameExpandedProjects = normalisedProjects.map(project => {
+      project.tpo_name = tpos[project.tpoId].name;
+      return project;
+    });
+
+    return tpoNameExpandedProjects;
+  }
+);
+
 export const currentUserProfileSelector = createSelector(
   currentUserProfileIdSelector,
   entitiesSelector,

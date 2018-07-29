@@ -6,13 +6,21 @@ import { TextAreaTemplate } from '../components/Templates/TextAreaTemplate';
 import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
 import { SelectTemplate } from '../components/Templates/SelectTemplate';
 import { MapTemplate } from '../components/Templates/MapTemplate';
-import { ListTemplate } from '../components/Templates/ListTemplate';
+import { ListTemplateGenerator } from '../components/Templates/ListTemplate';
 import { FilePickerTemplate } from '../components/Templates/FilePickerTemplate';
+import { FloatInputTemplate } from '../components/Templates/FloatInputTemplate';
+import { DatePickerTemplate } from '../components/Templates/DatePickerTemplate';
 
 // Import assets
 import * as images from '../assets';
 
-export default function parseJsonToTcomb(liformSchemaJson) {
+function isEmail(x) {
+  return /(.)+@(.)+/.test(x);
+}
+
+transform.registerFormat('email', isEmail);
+
+export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));
 
   function getParsedSchema(liformSchema) {
@@ -34,7 +42,7 @@ export default function parseJsonToTcomb(liformSchemaJson) {
     return liformSchema;
   }
 
-  function getSchemaOptions(liformSchema) {
+  function getSchemaOptions(liformSchema, innerConfig = {}) {
     let properties = liformSchema.properties;
     let schemaOptions = {
       fields: {}
@@ -45,12 +53,21 @@ export default function parseJsonToTcomb(liformSchemaJson) {
         if (
           properties[propertyKey].type &&
           (properties[propertyKey].type === 'string' ||
-            properties[propertyKey].type === 'integer')
+            properties[propertyKey].type === 'integer' ||
+            properties[propertyKey].type === 'number')
         ) {
           if (properties[propertyKey].hasOwnProperty('icon')) {
             options.config = {
               iconUrl: images[properties[propertyKey].icon]
             };
+            if (properties[propertyKey].icon === 'email') {
+              options.config = { ...options.config, email: true };
+              properties[propertyKey].format = 'email';
+            }
+          }
+          if (propertyKey === 'email') {
+            options.config = { ...options.config, email: true };
+            properties[propertyKey].format = 'email';
           }
           if (!properties[propertyKey].hasOwnProperty('enum')) {
             options.placeholder = properties[propertyKey].title;
@@ -65,6 +82,10 @@ export default function parseJsonToTcomb(liformSchemaJson) {
               options.type = 'text';
             } else if (properties[propertyKey].type === 'integer') {
               options.type = 'number';
+              options.keyboardType = 'numeric';
+            } else if (properties[propertyKey].type === 'number') {
+              options.type = 'number';
+              options.template = FloatInputTemplate;
             }
           } else {
             options.label = '';
@@ -95,11 +116,19 @@ export default function parseJsonToTcomb(liformSchemaJson) {
             options.template = MapTemplate;
             break;
           case 'date':
-          case 'hidden':
+            options.template = DatePickerTemplate;
             options.type = properties[propertyKey].widget;
             break;
+          case 'hidden':
+            options.type = properties[propertyKey].widget;
+            options.hidden = true;
+            break;
           case 'file':
-            options.template = FilePickerTemplate;
+            options.template =
+              (innerConfig[propertyKey] &&
+                innerConfig[propertyKey].file &&
+                innerConfig[propertyKey].file.template) ||
+              FilePickerTemplate;
             break;
         }
         // Widgets SwitchCase ENDS
@@ -124,33 +153,55 @@ export default function parseJsonToTcomb(liformSchemaJson) {
           }
         } ******/
         if (properties[propertyKey].type === 'array') {
+          let title = properties[propertyKey].title;
+          let arrayConfig =
+            innerConfig[propertyKey] &&
+            innerConfig[propertyKey][properties[propertyKey].type];
+          let arrayTemplate = ListTemplateGenerator({})(title);
+          let disableRemove = true;
+          if (arrayConfig && arrayConfig.template) {
+            arrayTemplate = arrayConfig.template(title);
+            disableRemove = arrayConfig.disableRemove;
+          }
+
           let arrayOptions = {
-            placeholder: properties[propertyKey].title,
+            placeholder: title,
             auto: 'none',
             autoCapitalize: 'none',
             disableOrder: true,
-            disableRemove: true,
-            template: ListTemplate(properties[propertyKey].title)
+            disableRemove: disableRemove,
+            template: arrayTemplate
           };
           schemaOptions['fields'][propertyKey] = {
             ...arrayOptions,
-            ...{ item: getSchemaOptions(properties[propertyKey].items) }
+            ...{
+              item: getSchemaOptions(properties[propertyKey].items, innerConfig)
+            }
           };
           schemaOptions['fields'][propertyKey].item['disableOrder'] = true;
         }
         // ************************************************
         if (
           liformSchema.required &&
-          liformSchema.required.indexOf(propertyKey)
+          liformSchema.required.indexOf(propertyKey) != -1
         ) {
-          options['error'] = 'required';
+          options.config = { ...options.config, required: true };
+        }
+        if (liformSchema.properties[propertyKey].attr) {
+          options.config = {
+            ...options.config,
+            attr: liformSchema.properties[propertyKey].attr
+          };
+        }
+        if (validator) {
+          options.error = validator;
         }
       }
     }
     return schemaOptions;
   }
 
-  let schemaOptions = getSchemaOptions(liformSchema);
+  let schemaOptions = getSchemaOptions(liformSchema, config);
 
   let transformedSchema = transform(getParsedSchema(liformSchema));
   return { schemaOptions: schemaOptions, transformedSchema: transformedSchema };

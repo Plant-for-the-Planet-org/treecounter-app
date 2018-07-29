@@ -23,15 +23,20 @@
     flex-direction: column;
     position: fixed;
     background-color: #fff;
+    max-height: 400px;
     color: black;
     overflow: auto;
     right: -10000px;
-    border-radius: 20px;
+    border-radius: 10px;
     min-width: 250px;
     z-index: 999;
     box-shadow: $boxShadow;
     outline: none;
     padding: 10px 20px;
+    @include for-phone-only {
+      max-height: 50%;
+      max-width: 70%;
+    }
   }
   .pftp-popover__arrow {
     position: fixed;
@@ -47,3 +52,15 @@
     border-bottom: 15px solid white;
   }
 }
+
+.pftp-popover__container::-webkit-scrollbar {
+  width: 6px;
+  height: 2px;
+  display: none;
+}
+
+.pftp-popover__container::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 20px;
+}
+

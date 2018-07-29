@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import { SignupOrganization, SignupJustMe } from '../../../assets';
-import * as join from '../../../constants/strings';
+import i18n from '../../../locales/i18n.js';
 
 class SingupType extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class SingupType extends Component {
                 : styles.bottomTypeLabel
             }
           >
-            {join.iamlabel}
+            {i18n.t('label.i_am_a')}
           </Text>
           <View
             style={
@@ -63,7 +63,7 @@ class SingupType extends Component {
                 : styles.bottomTypeLabel
             }
           >
-            {join[this.props.profileType]}
+            {this.props.title}
           </Text>
         </View>
       </View>
@@ -86,7 +86,6 @@ export default class SignupTypes extends Component {
   }
 
   changeProfile(type) {
-    console.log(type);
     this.setState({
       Profiletype: type
     });
@@ -109,26 +108,30 @@ export default class SignupTypes extends Component {
           <View style={styles.innerContainer}>
             <SingupType
               iconUrl={SignupOrganization}
-              profileType={'tpo'}
+              profileType="tpo"
               selected={this.state.Profiletype == 'tpo'}
+              title={i18n.t('label.tpo_title')}
               onClick={this.changeProfile}
             />
             <SingupType
-              profileType={'individual'}
+              profileType="individual"
               iconUrl={SignupJustMe}
               selected={this.state.Profiletype == 'individual'}
+              title={i18n.t('label.individual_title')}
               onClick={this.changeProfile}
             />
             <SingupType
               iconUrl={SignupOrganization}
               selected={this.state.Profiletype == 'company'}
-              profileType={'company'}
+              title={i18n.t('label.company_title')}
+              profileType="company"
               onClick={this.changeProfile}
             />
             <SingupType
               iconUrl={SignupOrganization}
               selected={this.state.Profiletype == 'education'}
-              profileType={'education'}
+              title={i18n.t('label.education_title')}
+              profileType="education"
               onClick={this.changeProfile}
             />
           </View>

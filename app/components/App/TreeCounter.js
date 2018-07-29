@@ -7,6 +7,7 @@ import { NotificationContainer } from 'react-notifications';
 import PropTypes from 'prop-types';
 
 // Components imports
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import GiftTreesContainer from '../../containers/GiftTrees';
 import TargetContainer from '../../containers/TargetContainer';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
@@ -22,6 +23,7 @@ import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import FAQContainer from '../../containers/FAQ';
+import PledgeContainer from '../../containers/Pledge';
 
 import Footer from '../Footer';
 
@@ -32,13 +34,15 @@ import Trillion from '../TreecounterGraphics/Trillion';
 
 import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
+import { NotificationAction } from '../../actions/notificationAction';
 import { getAccessToken } from '../../utils/user';
-import { currentUserProfileSelector } from '../../selectors/index';
+import { currentUserProfileSelector } from '../../selectors';
 import { getLocalRoute } from '../../actions/apiRouting';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
-import DonationTreesContainer from '../../containers/DonateTrees/index';
+import DonationTreesContainer from '../../containers/DonateTrees';
 
-import EditUserProfileContainer from '../../containers/EditUserProfile/index';
+import EditUserProfileContainer from '../../containers/EditUserProfile';
+import LeaderboardContainer from '../../containers/Leaderboard';
 // Class implementation
 class TreeCounter extends Component {
   constructor(props) {
@@ -60,6 +64,7 @@ class TreeCounter extends Component {
       let token = await getAccessToken();
       if (token) {
         this.props.loadUserProfile();
+        this.props.NotificationAction();
       } else {
         this.setState({ loading: false, isLoggedIn: false });
       }
@@ -111,7 +116,7 @@ class TreeCounter extends Component {
         <BrowserRouter history={history}>
           <div className="app-container">
             <HeaderContainer />
-            <SideMenuContainer loggedIn={isLoggedIn} />
+            <Route component={SideMenuContainer} />
             <div className="app-container__content">
               <PublicRoute exact path="/" component={Trillion} />
               <Route
@@ -152,6 +157,24 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_passwordSent')}
                 component={EmailSentContainer}
               />
+              <Route
+                path={getLocalRoute('app_explore')}
+                component={LeaderboardContainer}
+              />
+              <Route
+                exact
+                path={getLocalRoute('app_leaderboard') + '/:section'}
+                component={LeaderboardContainer}
+              />
+              <Route
+                exact
+                path={
+                  getLocalRoute('app_leaderboard') +
+                  '/:section' +
+                  '/:subSection'
+                }
+                component={LeaderboardContainer}
+              />
               <PrivateRoute
                 path={getLocalRoute('app_target')}
                 component={TargetContainer}
@@ -175,14 +198,21 @@ class TreeCounter extends Component {
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
               <Route
+                path={getLocalRoute('app_giftTrees')}
+                component={GiftTreesContainer}
+              />
+              <Route
+                path={getLocalRoute('app_selectProject')}
+                component={SelectPlantProjectContainer}
+              />
+              <Route
                 path={getLocalRoute('app_donateTrees')}
                 component={DonationTreesContainer}
               />
               <Route
-                path={getLocalRoute('app_giftTrees')}
-                component={GiftTreesContainer}
+                path={getLocalRoute('app_pledge') + '/:eventSlug'}
+                component={PledgeContainer}
               />
-              {/* Routes which essentially show svg */}
               <Route
                 path={getLocalRoute('app_treecounter') + '/:treecounterId'}
                 component={PublicTreecounterContainer}
@@ -205,6 +235,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       loadUserProfile,
+      NotificationAction,
       loadTpos
     },
     dispatch
@@ -216,6 +247,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(TreeCounter);
 TreeCounter.propTypes = {
   userProfile: PropTypes.object,
   loadUserProfile: PropTypes.func,
+  NotificationAction: PropTypes.func,
   loadTpos: PropTypes.func,
   dispatch: PropTypes.func
 };

@@ -5,6 +5,9 @@
 
   .register-tree__form--row {
     display: flex;
+    @include for-phone-only {
+      flex-direction: column;
+    }
 
     .register-tree__form--row__spacer {
       width: 20px;
@@ -12,6 +15,8 @@
 
     fieldset {
       flex: 1;
+      display: flex;
+      flex-direction: column;
     }
   }
 }

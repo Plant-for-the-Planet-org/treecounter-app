@@ -5,6 +5,7 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import CardLayout from '../Common/Card/CardLayout';
 import ContentHeader from '../Common/ContentHeader';
 import PlantProjectCarousel from './PlantProjectCarousel';
+import i18n from '../../locales/i18n';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component---TpoDonationPlantProjectSelector
@@ -31,7 +32,6 @@ class TpoDonationPlantProjectSelector extends React.Component {
   }
 
   onCarouselChange(newPlantProjectId) {
-    console.log('onCarouselChange:: currentPlantProjectId', newPlantProjectId);
     this.setState({ currentPlantProjectId: newPlantProjectId });
   }
 
@@ -39,19 +39,14 @@ class TpoDonationPlantProjectSelector extends React.Component {
     const { plantProjects, onSelect, tpoName } = this.props;
     const caption =
       plantProjects.length === 1
-        ? 'caption.plant_project'
-        : 'caption.plant_projects';
-    const TagName = 'PlantProjectFull';
+        ? i18n.t('label.plant_project')
+        : i18n.t('label.plant_projects');
+    const TagName = i18n.t('label.plant_project_full');
 
     return (
       <CardLayout className="tpo-footer-card-layout">
-        <ContentHeader caption={caption} />
-        {1 === plantProjects.length ? (
-          <TagName
-            plantProject={plantProjects.find(() => true)}
-            expanded={false}
-          />
-        ) : (
+        <div className="tpo-footer__container">
+          <ContentHeader caption={caption} />
           <PlantProjectCarousel
             contentTag={TagName}
             plantProjects={plantProjects}
@@ -59,12 +54,12 @@ class TpoDonationPlantProjectSelector extends React.Component {
             currentPlantProjectId={this.state.currentPlantProjectId}
             onChange={this.onCarouselChange}
           />
-        )}
-        <PrimaryButton
-          onClick={() => onSelect(this.state.currentPlantProjectId)}
-        >
-          button.label.donate
-        </PrimaryButton>
+          <PrimaryButton
+            onClick={() => onSelect(this.state.currentPlantProjectId)}
+          >
+            {i18n.t('label.donate')}
+          </PrimaryButton>
+        </div>
       </CardLayout>
     );
   }

@@ -6,12 +6,14 @@ import cloud1Svg from '../../assets/svgAssets/cloud1.svg';
 import cloud2Svg from '../../assets/svgAssets/cloud2.svg';
 import darkCrownTree001 from '../../assets/svgAssets/darkCrownTree001.svg';
 import darkCrownTree002 from '../../assets/svgAssets/darkCrownTree002.svg';
+import * as trees from '../../assets/svgAssets';
 
 import { svgBackground } from '../../assets';
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgUri from 'react-native-svg-uri';
 import Svg, { Circle } from 'react-native-svg';
 
+const totalCount = Array.from({ length: 72 }, (v, k) => k + 1);
 export default class Trillion extends Component {
   constructor() {
     super();
@@ -110,23 +112,41 @@ export default class Trillion extends Component {
         </Text>
         <View style={styles.svgStyle}>
           <Image style={styles.imageStyle} source={svgBackground} />
-          <Animated.View style={{ transform: [{ rotate: RotateBallonsData }] }}>
-            <SvgUri width="400" height="400" source={ballonsSvg} />
-          </Animated.View>
           <View style={styles.cloudStyle}>
             <Animated.View
               style={{ transform: [{ rotate: RotateClouds1Data }] }}
             >
-              <SvgUri width="400" height="400" source={cloud1Svg} />
+              <SvgUri width="420" height="420" source={cloud1Svg} />
             </Animated.View>
           </View>
           <View style={styles.cloudStyle}>
             <Animated.View
               style={{ transform: [{ rotate: RotateClouds2Data }] }}
             >
-              <SvgUri width="400" height="400" source={cloud2Svg} />
+              <SvgUri width="420" height="420" source={cloud2Svg} />
             </Animated.View>
           </View>
+          <Animated.View style={{ transform: [{ rotate: RotateBallonsData }] }}>
+            <SvgUri width="400" height="400" source={ballonsSvg} />
+          </Animated.View>
+          {/* {totalCount.map(i => (
+            <View key={'tree-' + i} style={styles.potStyle}>
+              <SvgUri
+                width="420"
+                height="420"
+                source={trees['darkCrownTree' + ('' + i).padStart(3, '0')]}
+              />
+            </View>
+          ))} */}
+          {totalCount.map(i => (
+            <View key={'pot-' + i} style={styles.potStyle}>
+              <SvgUri
+                width="420"
+                height="420"
+                source={trees['pot' + ('' + i).padStart(2, '0')]}
+              />
+            </View>
+          ))}
           <View style={styles.circleStyle}>
             <Svg height="400" width="400">
               <Circle
@@ -149,12 +169,6 @@ export default class Trillion extends Component {
                 strokeDasharray={this.state.plantedDasharray}
               />
             </Svg>
-          </View>
-          <View style={styles.potStyle}>
-            <SvgUri width="400" height="350" source={darkCrownTree001} />
-          </View>
-          <View style={styles.potStyle}>
-            <SvgUri width="400" height="350" source={darkCrownTree002} />
           </View>
         </View>
       </View>
@@ -182,25 +196,27 @@ const styles = StyleSheet.create({
   },
   cloudStyle: {
     flex: 1,
-    width: 400,
-    height: 400,
+    width: 420,
+    height: 420,
     elevation: 2,
     position: 'absolute',
-    top: 0
+    top: -12,
+    left: -10
   },
   potStyle: {
     flex: 1,
-    width: 400,
-    height: 400,
+    width: 420,
+    height: 420,
     elevation: 4,
     position: 'absolute',
-    top: 0
+    top: -12,
+    left: -10
   },
   circleStyle: {
     flex: 1,
     width: 400,
     height: 400,
-    elevation: 3,
+    elevation: 5,
     position: 'absolute',
     top: 0
   },

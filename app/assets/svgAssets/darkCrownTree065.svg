@@ -5,7 +5,7 @@
   <g ref="Baum_Klein">
     <path
             ref="t-crown-06"
-            className="t crown hide"
+            styleUid="darkTreeCrown"       style="fill:#66922e;"
             d="M261.6,208.7c3.7,4,3.5,10.3-0.5,14s-10.3,3.5-14-0.5s-3.5-10.2,0.5-13.9C251.5,204.5,257.8,204.7,261.6,208.7C261.6,208.6,261.6,208.7,261.6,208.7z"
           />
           <path

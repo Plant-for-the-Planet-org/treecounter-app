@@ -151,9 +151,19 @@ class TreeCountSelector extends React.Component {
                   style={styles.treecount_price_conversion_Text}
                   key={treeCount + 'container'}
                 >
-                  <Text>=</Text>
-                  <Text key={treeCount}>{treeCountToAmount(treeCount)}</Text>
-                  <Text> {currency}</Text>
+                  <Text style={styles.treecount_price_conversion_Text_equal2}>
+                    =
+                  </Text>
+                  <Text
+                    style={styles.treecount_price_conversion_Text_input}
+                    key={treeCount}
+                  >
+                    {treeCountToAmount(treeCount)}
+                  </Text>
+                  <Text style={styles.treecount_price_conversion_Text_currency}>
+                    {' '}
+                    {currency}
+                  </Text>
                 </View>
               );
             })}
@@ -202,18 +212,18 @@ class TreeCountSelector extends React.Component {
             </Text>
           </View>
           <View style={styles.treecount_price_conversion_Text}>
-            <Text style={styles.treecount_price_conversion_Text_equal}>=</Text>
+            <Text style={styles.treecount_price_conversion_Text_equal2}>=</Text>
 
             <TextInput
               editable={!this.state.isFixed}
-              style={styles.treecount_price_conversion_Text_input}
+              style={styles.treecount_price_conversion_Text_input2}
               keyboardType="numeric"
               onChangeText={evt =>
                 this.handleVariableAmountChange(evt.target.value)
               }
               value={String(this.state.variableAmount)}
             />
-            <Text style={styles.treecount_price_conversion_Text_equal}>
+            <Text style={styles.treecount_price_conversion_Text_currency}>
               {currency}
             </Text>
           </View>

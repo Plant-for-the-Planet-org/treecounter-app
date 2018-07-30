@@ -7,13 +7,18 @@ export default (dottedtabbar = EStyleSheet.create({
     backgroundColor: '$primary'
   },
   tabItemActive: {
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    width: 20,
+    height: 20,
+    borderRadius: 20 / 2,
+    marginRight: 5
   },
   tabItem: {
     width: 20,
     height: 20,
     borderRadius: 20 / 2,
     borderWidth: 3,
-    borderColor: '#ffffff'
+    borderColor: '#ffffff',
+    marginRight: 5
   }
 }));

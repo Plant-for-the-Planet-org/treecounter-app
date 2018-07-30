@@ -90,7 +90,9 @@ export default class Pledge extends Component {
                 {this.props.pledges.latest.map(pledge => (
                   <div className="row-list-item" key={pledge.id}>
                     <span>{pledge.firstname + ' ' + pledge.lastname}</span>
-                    <span>{pledge.treeCount}</span>
+                    <span>
+                      {parseInt(pledge.treeCount).toLocaleString('en')}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -110,7 +112,9 @@ export default class Pledge extends Component {
                 {this.props.pledges.highest.map(pledge => (
                   <div className="row-list-item" key={pledge.id}>
                     <span>{pledge.firstname + ' ' + pledge.lastname}</span>
-                    <span>{pledge.treeCount}</span>
+                    <span>
+                      {parseInt(pledge.treeCount).toLocaleString('en')}
+                    </span>
                   </div>
                 ))}
               </div>

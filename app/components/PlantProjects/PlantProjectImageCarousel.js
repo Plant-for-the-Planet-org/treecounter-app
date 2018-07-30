@@ -39,7 +39,7 @@ const PlantProjectImageCarousel = props => {
               src={getImageUrl('project', 'large', projectImage.image)}
             />
             <div className="project-image__description">
-              {projectImage.description}
+              <i>{projectImage.description}</i>
             </div>
           </div>
         ))}

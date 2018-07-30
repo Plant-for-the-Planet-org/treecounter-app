@@ -16,6 +16,7 @@ class UserContributionsContainer extends React.Component {
       <UserContributions
         userProfileId={this.props.userProfileId}
         userContributions={this.props.userContributions}
+        navigation={this.props.navigation}
       />
     );
   }
@@ -30,5 +31,6 @@ export default connect(mapStateToProps)(UserContributionsContainer);
 
 UserContributionsContainer.propTypes = {
   userProfileId: PropTypes.number.isRequired,
-  userContributions: PropTypes.array.isRequired
+  userContributions: PropTypes.array.isRequired,
+  navigation: PropTypes.any
 };

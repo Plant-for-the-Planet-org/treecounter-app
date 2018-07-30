@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
-
+import Accordion from 'react-native-collapsible/Accordion';
 import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
-import { View, Text } from 'react-native';
-
+import { View, Text, TouchableOpacity, Image } from 'react-native';
+import faqStyles from '../../styles/faq.native';
+import { foldout } from '../../assets';
 export default class ContributionCard extends React.Component {
   constructor(props) {
     super(props);
@@ -17,6 +18,25 @@ export default class ContributionCard extends React.Component {
     };
   }
 
+  _renderContent(section) {
+    return (
+      <View style={faqStyles.content}>
+        <Text>Test Data</Text>
+      </View>
+    );
+  }
+
+  _renderHeader(section, index, isActive) {
+    return (
+      <View style={faqStyles.header}>
+        <Text style={faqStyles.headerText}>Details</Text>
+        <Image
+          style={faqStyles.imageStyle}
+          source={isActive ? foldin : foldout}
+        />
+      </View>
+    );
+  }
   closeLightbox = () => this.setState({ lightboxIsOpen: false });
 
   openLightbox = () => this.setState({ lightboxIsOpen: true });
@@ -82,63 +102,19 @@ export default class ContributionCard extends React.Component {
                 {i18n.t('label.pictures')}
               </Text>
             ) : null}
-            {/* <Lightbox
-              currentImage={this.state.currentImage}
-              images={imagesArray}
-              isOpen={this.state.lightboxIsOpen}
-              onClose={this.closeLightbox}
-              onClickNext={this.gotoNext}
-              onClickPrev={this.gotoPrevious}
-            /> */}
-          </View>
-          <View className="contribution-container__right-column">
-            {contribution.contributionMeasurements
-              .slice(0, 3)
-              .map(measurement => (
-                <Text key={measurement.id}>
-                  {contribution.plantDate === measurement.measurementDate
-                    ? i18n.t('label.planting_day')
-                    : new Date(
-                        measurement.measurementDate
-                      ).toLocaleDateString() +
-                      (measurement.diameter + 'cm').padStart(10) +
-                      ((measurement.height / 100).toFixed(1) + 'm').padStart(
-                        10
-                      )}
-                </Text>
-              ))}
-            {contribution.contributionMeasurements.length > 3 ? (
-              <View className={seeLabel} onPress={this.onViewExpanded}>
-                {this.state.viewExpanded
-                  ? i18n.t('label.see_less')
-                  : '+ ' + i18n.t('label.see_more')}
-              </View>
+            {contribution.contributionMeasurements.length > 0 ? (
+              <Accordion
+                sections={contribution.contributionMeasurements}
+                renderHeader={this._renderHeader}
+                renderContent={this._renderContent}
+                touchableComponent={TouchableOpacity}
+              />
             ) : null}
-            {this.state.viewExpanded
-              ? contribution.contributionMeasurements
-                  .slice(3)
-                  .map(measurement => (
-                    <Text key={measurement.id}>
-                      {new Date(
-                        measurement.measurementDate
-                      ).toLocaleDateString() +
-                        (measurement.diameter + 'cm').padStart(10) +
-                        ((measurement.height / 100).toFixed(1) + 'm').padStart(
-                          10
-                        )}
-                    </Text>
-                  ))
-              : null}
-            {/* <Link
-              to={getLocalRoute('app_editTrees', {
-                contribution: contribution.id
-              })}
-            > */}
+          </View>
+          <View>
             <Text>{i18n.t('label.update')}</Text>
-            {/* </Link> */}
           </View>
         </View>
-        {/* <hr className="contribution-container__partition" /> */}
       </View>
     );
   }

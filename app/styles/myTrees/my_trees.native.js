@@ -21,7 +21,7 @@ export default (myTreesStyle = EStyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  listContainer: { backgroundColor: 'white' },
+  listContainer: { backgroundColor: 'white', flex: 1 },
   contributionMapLegend: {
     flexDirection: 'row',
     justifyContent: 'center',

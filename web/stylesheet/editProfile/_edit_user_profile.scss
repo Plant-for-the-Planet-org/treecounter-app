@@ -144,6 +144,9 @@
         }
         .project-teaser {
           .project-teaser-item {
+            .pftp-textfield {
+              margin-top: 20px;
+            }
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             column-gap: 20px;

@@ -15,6 +15,7 @@ import i18n from '../../locales/i18n.js';
 import DonateTrees from '../../containers/DonateTrees';
 import FAQContainer from '../../containers/FAQ';
 import RegisterTrees from '../../containers/RegisterTrees';
+import UserContributions from '../../containers/UserContributions';
 
 const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
 const headerLabels = {
@@ -25,6 +26,8 @@ const headerLabels = {
   [getLocalRoute('app_target')]: 'label.set_target',
   [getLocalRoute('app_donateTrees')]: 'label.donate_trees',
   [getLocalRoute('app_faq')]: 'label.faqs',
+  [getLocalRoute('app_faq')]: 'label.faqs',
+  [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees'
 };
 
@@ -51,6 +54,9 @@ export const getDrawerNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
+      },
+      [getLocalRoute('app_myTrees')]: {
+        screen: UserContributions
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: DonationTreesContainer

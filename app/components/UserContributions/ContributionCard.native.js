@@ -2,11 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
-import Lightbox from 'react-images';
-import { Link } from 'react-router-dom';
 
-import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
-import TextSpan from '../Common/Text/TextSpan';
+import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
 import { View, Text } from 'react-native';
 
@@ -50,23 +47,26 @@ export default class ContributionCard extends React.Component {
       <View>
         <View
           style={{
-            borderLeft:
-              '5px solid ' +
-              (contribution.contributionType == 'donation'
+            borderWidth: 1,
+            borderLeftWidth: 4,
+            borderColor: '#e6e6e6',
+            borderLeftColor:
+              contribution.contributionType == 'donation'
                 ? '#95c243'
                 : contribution.treeCount > 1
                   ? '#68aeec'
-                  : '#ec6453')
+                  : '#ec6453',
+            padding: 10,
+            justifyContent: 'space-between',
+            minHeight: 100,
+            marginBottom: 10,
+            margin: 10
           }}
           key={`contribution-${contribution.id}`}
-          className={`contribution-container__card ${
-            contribution.contributionType
-          }`}
         >
           <View className="contribution-container__left-column">
             <Text strong={true}>
               {contribution.treeCount +
-                ' ' +
                 contribution.treeSpecies +
                 i18n.t('label.tree')}
             </Text>

@@ -81,12 +81,13 @@ const PlantProjectTemplate = function(itemIndex) {
           >
             <div className="project-teaser-item">
               {locals.inputs.name}
-              {parseInt(locals.inputs.countTarget).toLocaleString('en')}
-              {locals.inputs.survivalRate}%
+              {/* {parseInt(locals.inputs.countTarget).toLocaleString('en')} */}
+              {locals.inputs.countTarget}
+              {locals.inputs.survivalRate}
             </div>
             <div className="project-teaser-item">
               {locals.inputs.imageFile}
-              {locals.inputs.treeCost.toFixed(2)}
+              {locals.inputs.treeCost}
               {locals.inputs.currency}
             </div>
             <div className="separator" />

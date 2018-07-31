@@ -11,11 +11,11 @@ import {
 
 import i18n from '../../locales/i18n.js';
 import SelectPlantTabView from './selectplant.tab.native';
-import IndividualForm from './individualForm.native';
+import IndividualForm from './IndividualForm.native';
 import CompanyForm from './companyForm';
-import { View, TouchableOpacity } from 'react-native';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
-import dottedTabBarStyle from '../../styles/common/dotted_tabbar';
+
+import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 
 const pageHeadings = [
   {
@@ -231,24 +231,10 @@ export default class DonateTrees extends Component {
     this.props.paymentClear();
   }
   _renderTabBar = props => {
-    console.log('tabbar props');
-    console.log(props);
-    return (
-      <View style={dottedTabBarStyle.tabBar}>
-        {props.navigationState.routes.map((route, i) => {
-          return (
-            <TouchableOpacity
-              style={
-                this.state.index === i
-                  ? dottedTabBarStyle.tabItemActive
-                  : dottedTabBarStyle.tabItem
-              }
-              key={'route' + i}
-              onPress={() => this.setState({ index: i })}
-            />
-          );
-        })}
-      </View>
+    return renderDottedTabbar(
+      props.navigationState.routes,
+      this.state.index,
+      index => this.setState({ index })
     );
   };
 
@@ -312,16 +298,12 @@ export default class DonateTrees extends Component {
     }
 
     {
-      this.state.modeReceipt === DonateTrees.data.tabsReceipt[0].id &&
-      route.key === 'individual'
-        ? (screenToShow = <IndividualForm />)
-        : null;
+      // this.state.modeReceipt === DonateTrees.data.tabsReceipt[0].id &&
+      route.key === 'individual' ? (screenToShow = <IndividualForm />) : null;
     }
     {
-      this.state.modeReceipt === DonateTrees.data.tabsReceipt[1].id &&
-      route.key === 'company'
-        ? (screenToShow = <CompanyForm />)
-        : null;
+      // this.state.modeReceipt === DonateTrees.data.tabsReceipt[1].id &&
+      route.key === 'company' ? (screenToShow = <CompanyForm />) : null;
     }
     return screenToShow;
   };

@@ -11,6 +11,8 @@ import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectTeaser from './PlantProjectTeaser';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import PlantProjectDetails from './PlantProjectDetails';
+import CardLayout from '../Common/Card/CardLayout';
+import PrimaryButton from '../Common/Button/PrimaryButton';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -78,7 +80,7 @@ class PlantProjectFull extends React.Component {
       plantProjectImages
     };
     return (
-      <View style={styles.projectFullContainer}>
+      <CardLayout style={styles.projectFullContainer}>
         <View style={styles.projectTeaserContainer}>
           <PlantProjectTeaser {...teaserProps} />
         </View>
@@ -91,18 +93,21 @@ class PlantProjectFull extends React.Component {
             seeMore={!this.state.expanded}
             onToggle={this.toggleExpanded}
           />
+          {this.props.selectAnotherProject ? (
+            <View styles={styles.select_different_project_style}>
+              <Text onPress={this.props.projectClear}>
+                {i18n.t('label.different_project')}
+              </Text>
+            </View>
+          ) : null}
         </View>
-
-        {this.props.selectAnotherProject ? (
-          <View
-            styles={styles.select_different_project_style}
-            onClick={this.props.projectClear}
-          >
-            {i18n.t('label.different_project')}
-          </View>
+        {this.props.showNextButton ? (
+          <PrimaryButton onClick={() => this.props.onNextClick()}>
+            {i18n.t('label.next')}
+          </PrimaryButton>
         ) : null}
         {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
-      </View>
+      </CardLayout>
     );
   }
 }

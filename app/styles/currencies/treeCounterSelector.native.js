@@ -25,7 +25,8 @@ export default (currentSelectorStyles = EStyleSheet.create({
   },
   treecount_price_conversion_Text_input: {
     // width: 60,
-    paddingLeft: 10
+    paddingLeft: 3,
+    marginTop: 5
     //  marginVertical: 10
   },
   treecount_price_conversion_lebel: {
@@ -35,15 +36,17 @@ export default (currentSelectorStyles = EStyleSheet.create({
   },
   treecount_price_conversion_Text_currency: {
     //  marginVertical: 10,
+    marginTop: 5,
     marginLeft: 10
   },
   treecount_price_conversion_Text_equal2: {
-    marginLeft: 59
+    marginLeft: 59,
+    paddingRight: 60,
     // marginRight: 10,
-    //  marginVertical: 10
+    marginVertical: 5
   },
   treecount_price_conversion_Text_input2: {
-    paddingLeft: 10,
-    marginTop: -20
+    paddingLeft: 8,
+    marginTop: -10
   }
 }));

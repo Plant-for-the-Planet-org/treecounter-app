@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import t from 'tcomb-form';
 
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card/CardLayout';
@@ -17,7 +16,7 @@ import {
 import i18n from '../../locales/i18n.js';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import SelectPlantTabView from './selectplant.tab.native';
-import IndividualForm from './individualForm';
+import IndividualForm from './individualForm.native';
 import CompanyForm from './companyForm';
 import { View, TouchableOpacity } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject';
@@ -143,6 +142,43 @@ export default class DonateTrees extends Component {
     return directPaymentAvailable ? 0 : 777; // some amount TBD
   }
 
+  Tab1validated() {
+    if (this.props.selectedProject) {
+      this._handleIndexChange(1);
+    }
+  }
+
+  Tab2validated() {
+    if (this.state.selectedTreeCount) {
+      this.setState({
+        form: {
+          ...this.state.form,
+          treeCount: this.state.selectedTreeCount
+        }
+      });
+      this._handleIndexChange(2);
+    }
+  }
+
+  Tab3validated() {
+    let value = this.refs.donateReceipt.getValue();
+    let receipt = {};
+    if (value) {
+      if (this.state.modeReceipt === 'individual') {
+        receipt['receiptIndividual'] = value;
+      } else {
+        receipt['receiptCompany'] = value;
+      }
+      this.setState({
+        form: {
+          ...this.state.form,
+          ...receipt
+        }
+      });
+      this._handleIndexChange(3);
+    }
+  }
+
   handleTreeCountCurrencyChange(treeCountCurrencyData) {
     this.setState({
       selectedCurrency: treeCountCurrencyData.currency,
@@ -159,58 +195,11 @@ export default class DonateTrees extends Component {
     return null === userCurrency ? selectedProject.currency : userCurrency;
   }
 
-  indexChange(index) {
-    this.setState({
-      pageIndex: index
-    });
-  }
-
   handleExpandedClicked = optionNumber => {
     this.setState({
       expandedOption: optionNumber
     });
   };
-
-  checkValidation = [
-    () => {
-      if (this.props.selectedProject) {
-        return true;
-      }
-      return false;
-    },
-    () => {
-      if (this.state.selectedTreeCount) {
-        this.setState({
-          form: {
-            ...this.state.form,
-            treeCount: this.state.selectedTreeCount
-          }
-        });
-        return true;
-      }
-      return false;
-    },
-    () => {
-      console.log(this.refs.donateReceipt.validate());
-      let value = this.refs.donateReceipt.getValue();
-      let receipt = {};
-      if (value) {
-        if (this.state.modeReceipt === 'individual') {
-          receipt['receiptIndividual'] = value;
-        } else {
-          receipt['receiptCompany'] = value;
-        }
-        this.setState({
-          form: {
-            ...this.state.form,
-            ...receipt
-          }
-        });
-        return true;
-      }
-      return false;
-    }
-  ];
 
   handleModeReceiptChange(tab) {
     this.setState({
@@ -301,6 +290,8 @@ export default class DonateTrees extends Component {
               plantProject={this.props.selectedProject}
               tpoName={this.props.selectedTpo.name}
               selectAnotherProject={true}
+              showNextButton={true}
+              onNextClick={() => this.Tab1validated()}
               projectClear={this.props.plantProjectClear}
             />
           ))
@@ -314,9 +305,11 @@ export default class DonateTrees extends Component {
               treeCost={plantProject.treeCost}
               rates={currencies.currency_rates[plantProject.currency].rates}
               fees={1}
+              showNextButton={true}
               currencies={currencies.currency_names} // TODO: connect to data from API
               selectedCurrency={this.determineDefaultCurrency()}
               treeCountOptions={plantProject.paymentSetup.treeCountOptions}
+              onNextClick={() => this.Tab2validated()}
               selectedTreeCount={this.state.selectedTreeCount}
               onChange={this.handleTreeCountCurrencyChange}
             />
@@ -346,6 +339,7 @@ export default class DonateTrees extends Component {
       <SelectPlantTabView />
     ) : !plantProject ? null : (
       <TabView
+        animationEnabled={true}
         navigationState={this.state}
         renderScene={this._renderScene}
         renderTabBar={this._renderTabBar}

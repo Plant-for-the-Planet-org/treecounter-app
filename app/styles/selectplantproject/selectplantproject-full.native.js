@@ -11,6 +11,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectSpecsContainer: {
     flex: 0.3
   },
+  select_different_project_style: {
+    marginLeft: 10
+  },
   seeMoreContainer: {
     flex: 0.1,
     paddingTop: 20,

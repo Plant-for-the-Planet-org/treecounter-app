@@ -111,8 +111,6 @@ class TreeCountSelector extends React.Component {
 
     return (
       <View style={styles.treecount_container}>
-        <Text strong={true}>{i18n.t('label.no_of_trees')}</Text>
-
         <View style={styles.treecount_priceContainer_row}>
           <View style={styles.treecount_price_radio_container}>
             <RadioForm>
@@ -121,6 +119,7 @@ class TreeCountSelector extends React.Component {
                 return (
                   <RadioButton labelHorizontal={true} key={i}>
                     <RadioButtonInput
+                      buttonSize={15}
                       buttonInnerColor={'#ec6453'}
                       buttonOuterColor={'#ec6453'}
                       obj={obj}
@@ -183,6 +182,7 @@ class TreeCountSelector extends React.Component {
                     <RadioButtonInput
                       obj={obj}
                       index={i}
+                      buttonSize={15}
                       buttonInnerColor={'#ec6453'}
                       buttonOuterColor={'#ec6453'}
                       isSelected={!this.state.isFixed}

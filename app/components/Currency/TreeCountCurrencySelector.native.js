@@ -5,6 +5,8 @@ import CurrencySelector from './CurrencySelector';
 import TreeCountSelector from './TreeCountSelector';
 import { View } from 'react-native';
 import CardLayout from '../Common/Card/CardLayout';
+import PrimaryButton from '../Common/Button/PrimaryButton';
+import i18n from '../../locales/i18n';
 
 class TreeCountCurrencySelector extends React.Component {
   constructor(props) {
@@ -88,6 +90,11 @@ class TreeCountCurrencySelector extends React.Component {
           treeCountOptions={treeCountOptions}
           defaultTreeCount={this.state.selectedTreeCount}
         />
+        {this.props.showNextButton ? (
+          <PrimaryButton onClick={() => this.props.onNextClick()}>
+            {i18n.t('label.next')}
+          </PrimaryButton>
+        ) : null}
       </CardLayout>
     );
   }

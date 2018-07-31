@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
-import Lightbox from 'react-images';
-import { Link } from 'react-router-dom';
 
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import TextSpan from '../Common/Text/TextSpan';

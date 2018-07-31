@@ -73,7 +73,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
 
         let navigationConfig = {
           headerStyle: styles.container,
-          // headerTintColor: '#fff',
+          headerTintColor: '#fff',
           title: i18n.t(headerLabels[navigation.state.routeName])
         };
         if (homeRoutes.includes(navigation.state.routeName)) {

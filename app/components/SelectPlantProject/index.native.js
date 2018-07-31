@@ -108,30 +108,16 @@ export default class SelectPlantProject extends Component {
         <Slick style={styles.slickWrapper} showsPagination={false}>
           {featuredProjects.length !== 0
             ? featuredProjects.map(project => (
-                <CardLayout
-                  style={{ width: 350, height: 620 }}
+                <PlantProjectFull
                   key={project.id}
-                >
-                  <View style={styles.plantProjectContentFull}>
-                    <PlantProjectFull
-                      callExpanded={() => this.callExpanded()}
-                      expanded={false}
-                      plantProject={project}
-                      tpoName={project.tpo_name}
-                    />
-                  </View>
-                  <View style={styles.footer}>
-                    <PrimaryButton
-                      onClick={() =>
-                        this.onSelectClickedFeaturedProjects(project.id)
-                      }
-                      buttonStyle={styles.plantProjectSelectButtonStyle}
-                      textStyle={styles.plantProjectSelectTextStyle}
-                    >
-                      {i18n.t('label.select_project')}
-                    </PrimaryButton>
-                  </View>
-                </CardLayout>
+                  callExpanded={() => this.callExpanded()}
+                  expanded={false}
+                  plantProject={project}
+                  onSelectClickedFeaturedProjects={id =>
+                    this.onSelectClickedFeaturedProjects(id)
+                  }
+                  tpoName={project.tpo_name}
+                />
               ))
             : null}
         </Slick>

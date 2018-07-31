@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card/CardLayout';
-import TextBlock from '../Common/Text/TextBlock';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import { TabView } from 'react-native-tab-view';
 import {
@@ -14,12 +10,10 @@ import {
 } from '../../server/parsedSchemas/donateTrees';
 
 import i18n from '../../locales/i18n.js';
-import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import SelectPlantTabView from './selectplant.tab.native';
 import IndividualForm from './individualForm.native';
 import CompanyForm from './companyForm';
 import { View, TouchableOpacity } from 'react-native';
-import styles from '../../styles/selectplantproject/selectplantproject';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import dottedTabBarStyle from '../../styles/common/dotted_tabbar';
 

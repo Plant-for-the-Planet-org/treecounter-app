@@ -2,8 +2,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
-    width: '100%',
-    flex: 1
+    flex: 1,
+    padding: 10
   },
   projectTeaserContainer: {
     flex: 0.6
@@ -12,12 +12,19 @@ export default (selectplantprojectFull = EStyleSheet.create({
     flex: 0.3
   },
   select_different_project_style: {
-    marginLeft: 10
+    flex: 1,
+    paddingTop: 10
+  },
+  select_different_project_style_text: {
+    color: '#ec6453',
+    fontSize: 13,
+    textAlign: 'center'
   },
   seeMoreContainer: {
     flex: 0.1,
+    flexDirection: 'row',
     paddingTop: 20,
     alignSelf: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-between'
   }
 }));

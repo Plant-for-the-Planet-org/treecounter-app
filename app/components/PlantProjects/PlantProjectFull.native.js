@@ -35,6 +35,7 @@ class PlantProjectFull extends React.Component {
 
   render() {
     const {
+      id: id,
       name: projectName,
       isCertified: isCertified,
       plantProjectImages,
@@ -94,13 +95,23 @@ class PlantProjectFull extends React.Component {
             onToggle={this.toggleExpanded}
           />
           {this.props.selectAnotherProject ? (
-            <View styles={styles.select_different_project_style}>
-              <Text onPress={this.props.projectClear}>
+            <View style={styles.select_different_project_style}>
+              <Text
+                onPress={this.props.projectClear}
+                style={styles.select_different_project_style_text}
+              >
                 {i18n.t('label.different_project')}
               </Text>
             </View>
           ) : null}
         </View>
+        {!this.props.selectAnotherProject ? (
+          <PrimaryButton
+            onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
+          >
+            {i18n.t('label.select_project')}
+          </PrimaryButton>
+        ) : null}
         {this.props.showNextButton ? (
           <PrimaryButton onClick={() => this.props.onNextClick()}>
             {i18n.t('label.next')}

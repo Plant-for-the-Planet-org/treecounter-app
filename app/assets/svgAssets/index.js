@@ -1,3 +1,7 @@
+import cloud1 from './cloud1.svg';
+import cloud2 from './cloud2.svg';
+import ballons from './ballons.svg';
+
 import darkCrownTree001 from './darkCrownTree001.svg';
 import darkCrownTree002 from './darkCrownTree002.svg';
 import darkCrownTree003 from './darkCrownTree003.svg';
@@ -144,6 +148,9 @@ import pot71 from './pot71.svg';
 import pot72 from './pot72.svg';
 
 export {
+  cloud1,
+  cloud2,
+  ballons,
   darkCrownTree001,
   darkCrownTree002,
   darkCrownTree003,

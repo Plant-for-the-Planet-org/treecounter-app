@@ -10,14 +10,14 @@
           />
           <path
             ref="t-shadow-37"
-            className="t shadow hide"
+            styleUid="darkTreeShadow"       style="fill:#50742b;"
             d="M342.2,153.2c0.4,5.7,3.7,11.7,10,12.6c6.3,0.9,13.1-2.2,14.6-7.9c0.4,7.1-5,13.3-12.1,13.7c-5.9,0.4-11.3-3.4-13.1-9C339.8,156.9,342.2,153.2,342.2,153.2z"
           />
           <path
             id="Stamm-37"
             ref="t-stem-37"
             data-seq="37"
-            className="t stem hide"
+            styleUid="darkTreeStem"       style="fill:#2e411c;"
             d="M359.6,175.6l-2.4-9l3.6-7.6l-2.2,0.6l-2.2,3.8l-1.6-6.2l-1.7,1.6l1.9,7.2l-4.4-1.5l-1,2.3l4.8,2.5c0,0,0.6,2.6,1.9,7.2S360.6,179.7,359.6,175.6z"
           />
   </g>

@@ -5,32 +5,32 @@
   <g ref="Baum_Klein">
     <polygon
             ref="p-pot-21"
-            className="p pot hide"
+            styleUid="pot"       style="fill:#85aa4f;"
             points="524.1,669.7 513.3,673.6 513,666.9 519.8,664.4"
           />
           <path
             ref="p-shadow-21"
-            className="p shadow hide"
+            styleUid="potShadow"       style="fill:#729235;"
             d="M519.2,670.9l-5.3,2l-0.3-4.5c0,0,0.6,4,1.3,3.8L519.2,670.9z"
           />
           <path
             ref="p-leaf1-21"
-            className="p leaf1 hide"
+            styleUid="potLeaf1"       style="fill:#66922f;"
             d="M519.1,673.8c0.5,0.9,0.3,2-0.5,2.7C518.2,675.6,518.4,674.5,519.1,673.8z"
           />
           <path
             ref="p-stem-21"
-            className="p stem hide"
+            styleUid="potStem"       style="fill:#564f48;"
             d="M518.5,671.8c0.3,1.3,0.1,3.4,2.7,4.8c-1.5-1.2-2.4-3-2.4-4.9L518.5,671.8L518.5,671.8"
           />
           <path
             ref="p-leaf2-21"
-            className="p leaf2 hide"
+            styleUid="potLeaf2"       style="fill:#87bc24;"
             d="M520.6,676.1c0.8,1.3,0.9,2.9,0.2,4.3C519.8,678.5,519.8,677,520.6,676.1z"
           />
           <path
             ref="p-leaf3-21"
-            className="p leaf3 hide"
+            styleUid="potLeaf3"       style="fill:#50752c;"
             d="M520.6,676.1c-0.2,2.1,2.5,4.1,4,4.1C524.3,678.8,522.2,675.7,520.6,676.1z"
           />
   </g>

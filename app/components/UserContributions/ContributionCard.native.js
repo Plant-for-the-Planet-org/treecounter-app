@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
-
-import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
-import TextSpan from '../Common/Text/TextSpan';
+import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
 import { View, Text } from 'react-native';
 

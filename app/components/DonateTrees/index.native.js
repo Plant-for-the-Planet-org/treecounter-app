@@ -10,38 +10,11 @@ import {
 } from '../../server/parsedSchemas/donateTrees';
 
 import i18n from '../../locales/i18n.js';
-import SelectPlantTabView from './selectplant.tab.native';
-import IndividualForm from './IndividualForm.native';
-import CompanyForm from './companyForm';
+import SelectPlantTabView from './selectplant.tab';
+import RecieptTabsView from './receiptTabs';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
-
-const pageHeadings = [
-  {
-    heading: i18n.t('label.donateTrees'),
-    description: i18n.t('label.donate_trees_description')
-  },
-  {
-    heading: i18n.t('label.donateTrees'),
-    description: ''
-  },
-  {
-    heading: i18n.t('label.donateTrees'),
-    description: ''
-  },
-  {
-    heading: i18n.t('label.donateTrees'),
-    description: ''
-  }
-];
-
-const headings = [
-  i18n.t('label.heading_project'),
-  i18n.t('label.heading_donate_details'),
-  i18n.t('label.heading_donor_details'),
-  i18n.t('label.heading_payment')
-];
 
 export default class DonateTrees extends Component {
   static data = {
@@ -85,8 +58,8 @@ export default class DonateTrees extends Component {
       routes: [
         { key: 'selectPlant', title: 'Select Plant Project' },
         { key: 'currency', title: 'Currency Selector' },
-        { key: 'individual', title: 'Individual Form' },
-        { key: 'company', title: 'Company Form' }
+        { key: 'recipient', title: 'Recipient' },
+        { key: 'payments', title: 'Payments' }
       ]
     };
 
@@ -299,12 +272,19 @@ export default class DonateTrees extends Component {
 
     {
       // this.state.modeReceipt === DonateTrees.data.tabsReceipt[0].id &&
-      route.key === 'individual' ? (screenToShow = <IndividualForm />) : null;
+      route.key === 'recipient'
+        ? (screenToShow = (
+            <RecieptTabsView
+              updateRecieptType={() => this.updateReciptType()}
+              recipientType={this.state.modeReceipt}
+            />
+          ))
+        : null;
     }
-    {
-      // this.state.modeReceipt === DonateTrees.data.tabsReceipt[1].id &&
-      route.key === 'company' ? (screenToShow = <CompanyForm />) : null;
-    }
+    // {
+    //   // this.state.modeReceipt === DonateTrees.data.tabsReceipt[1].id &&
+    //   route.key === 'company' ? (screenToShow = <CompanyForm />) : null;
+    // }
     return screenToShow;
   };
   _handleIndexChange = index => this.setState({ index });

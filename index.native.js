@@ -4,7 +4,7 @@ import App from './app/components/App';
 /* app.js */
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-console.disableYellowBox = true;
+console.disableYellowBox = false;
 
 // import {
 //   setCustomView,

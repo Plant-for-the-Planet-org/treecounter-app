@@ -73,8 +73,6 @@ class TreeCountCurrencySelector extends React.Component {
 
   render() {
     const { currencies, treeCountOptions } = this.props;
-    console.log('Shubhi currencies');
-    console.log(currencies);
     return (
       <CardLayout>
         <CurrencySelector

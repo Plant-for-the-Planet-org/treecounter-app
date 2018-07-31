@@ -199,9 +199,7 @@ class TreeCountSelector extends React.Component {
               editable={!this.state.isFixed}
               style={styles.treecount_price_conversion_Text_input}
               keyboardType="numeric"
-              onChangeText={evt =>
-                this.handleVariableTreeCountChange(evt.target.value)
-              }
+              onChangeText={evt => this.handleVariableTreeCountChange(evt)}
               value={String(this.state.variableTreeCount)}
             />
             <Text
@@ -218,9 +216,7 @@ class TreeCountSelector extends React.Component {
               editable={!this.state.isFixed}
               style={styles.treecount_price_conversion_Text_input2}
               keyboardType="numeric"
-              onChangeText={evt =>
-                this.handleVariableAmountChange(evt.target.value)
-              }
+              onChangeText={evt => this.handleVariableAmountChange(evt)}
               value={String(this.state.variableAmount)}
             />
             <Text style={styles.treecount_price_conversion_Text_currency}>

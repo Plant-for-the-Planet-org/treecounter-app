@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Animated, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import dottedTabBarStyle from '../../../styles/common/dotted_tabbar';
 
 export const renderDottedTabbar = (routes, selectedIndex, onPress) => {

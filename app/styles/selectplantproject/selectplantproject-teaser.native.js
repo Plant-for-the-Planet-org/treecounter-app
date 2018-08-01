@@ -2,12 +2,12 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (selectplantTeaserStyles = EStyleSheet.create({
   project_teaser__container: {
-    flex: 1,
+    // flex: 1,
     width: '100%'
   },
   project_teaser__content: {
     width: '100%',
-    flex: 0.3
+    height: 60
   },
   column: {
     marginTop: 5,
@@ -21,8 +21,7 @@ export default (selectplantTeaserStyles = EStyleSheet.create({
   },
   teaser__projectImageContainer: {
     width: '100%',
-    flex: 0.7,
-    padding: 5
+    height: 190
   },
   teaser__projectImage: {
     width: '100%',

@@ -11,7 +11,7 @@ let Form = t.form.Form;
 export default class CompanyForm extends Component {
   render() {
     return (
-      <CardLayout>
+      <CardLayout style={{ padding: 10 }}>
         <Form
           ref={'donorDetailsForm'}
           type={receiptCompanyFormSchema}

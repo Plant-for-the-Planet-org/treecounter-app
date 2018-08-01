@@ -6,10 +6,10 @@ export default (selectplantprojectFull = EStyleSheet.create({
     padding: 10
   },
   projectTeaserContainer: {
-    flex: 0.6
+    height: 250
   },
   projectSpecsContainer: {
-    flex: 0.3
+    height: 180
   },
   select_different_project_style: {
     flex: 1,
@@ -21,10 +21,12 @@ export default (selectplantprojectFull = EStyleSheet.create({
     textAlign: 'center'
   },
   seeMoreContainer: {
-    flex: 0.1,
+    height: 40,
     flexDirection: 'row',
-    paddingTop: 20,
     alignSelf: 'center',
     justifyContent: 'space-between'
+  },
+  buttonContainer: {
+    flex: 1
   }
 }));

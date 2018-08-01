@@ -105,19 +105,21 @@ class PlantProjectFull extends React.Component {
             </View>
           ) : null}
         </View>
-        {!this.props.selectAnotherProject ? (
-          <PrimaryButton
-            onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
-          >
-            {i18n.t('label.select_project')}
-          </PrimaryButton>
-        ) : null}
-        {this.props.showNextButton ? (
-          <PrimaryButton onClick={() => this.props.onNextClick()}>
-            {i18n.t('label.next')}
-          </PrimaryButton>
-        ) : null}
-        {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
+        <View style={styles.buttonContainer}>
+          {!this.props.selectAnotherProject ? (
+            <PrimaryButton
+              onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
+            >
+              {i18n.t('label.select_project')}
+            </PrimaryButton>
+          ) : null}
+          {this.props.showNextButton ? (
+            <PrimaryButton onClick={() => this.props.onNextClick()}>
+              {i18n.t('label.next')}
+            </PrimaryButton>
+          ) : null}
+          {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
+        </View>
       </CardLayout>
     );
   }

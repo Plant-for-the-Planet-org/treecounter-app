@@ -11,6 +11,8 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import styles from '../../styles/header.native';
 import BurgerMenu from '../../components/Header/BurgerMenu';
+import HeaderRight from '../../components/Header/HeaderFields';
+
 import i18n from '../../locales/i18n.js';
 import DonateTrees from '../../containers/DonateTrees';
 import FAQContainer from '../../containers/FAQ';
@@ -78,6 +80,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
         };
         if (homeRoutes.includes(navigation.state.routeName)) {
           navigationConfig.headerLeft = BurgerMenu(navigation);
+          navigationConfig.headerRight = HeaderRight(navigation);
         }
 
         return navigationConfig;

@@ -76,7 +76,6 @@ export default (myTreesStyle = EStyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontWeight: '500',
-    color: '$colorPrimaryAccent',
-    flex: 1
+    color: '$colorPrimaryAccent'
   }
 }));

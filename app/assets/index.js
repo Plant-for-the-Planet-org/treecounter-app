@@ -36,6 +36,7 @@ import checkedIcon from './images/icons/checkbox_checked.png';
 import uncheckedIcon from './images/icons/checkbox_unchecked.png';
 import ProfilePic from './images/profile_pics.png';
 import EditGreen from './images/icons/edit_green.png';
+import EditOrange from './images/icons/edit_orange.png';
 import QuestionMarkGreen from './images/icons/questionmark_green.png';
 import country from './images/icons/country.png';
 import organization from './images/icons/organization.png';
@@ -168,5 +169,6 @@ export {
   map_legend_TreeDensity,
   burgur_menu_icon,
   foldin,
-  foldout
+  foldout,
+  EditOrange
 };

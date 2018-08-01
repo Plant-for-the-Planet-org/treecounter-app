@@ -7,7 +7,7 @@ import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from '../../styles/myTrees/user_contribution_card';
-import { foldout, foldin } from '../../assets';
+import { foldout, foldin, MapPinRed, EditOrange } from '../../assets';
 export default class ContributionCard extends React.Component {
   constructor(props) {
     super(props);
@@ -39,9 +39,9 @@ export default class ContributionCard extends React.Component {
           </View>
         ) : null}
         {measurementsAvailable
-          ? section.contributionMeasurements.map(measurement => {
+          ? section.contributionMeasurements.map((measurement, index) => {
               return (
-                <View style={styles.actionBar}>
+                <View style={styles.actionBar} key={`measurement-${index}`}>
                   <Text>
                     {new Date(measurement.measurementDate).toLocaleDateString()}
                   </Text>
@@ -146,20 +146,16 @@ export default class ContributionCard extends React.Component {
             ) : null}
           </View>
           <View style={styles.actionBar}>
-            <TouchableOpacity
-              style={styles.actionButton}
+            <ActionButton
               onPress={() => console.log('click action button')}
-            >
-              <Text style={styles.actionButtonText}>{i18n.t('label.map')}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.actionButton}
+              text={i18n.t('label.map')}
+              image={MapPinRed}
+            />
+            <ActionButton
               onPress={() => console.log('click action button')}
-            >
-              <Text style={styles.actionButtonText}>
-                {i18n.t('label.update')}
-              </Text>
-            </TouchableOpacity>
+              text={i18n.t('label.update')}
+              image={EditOrange}
+            />
           </View>
         </View>
       </View>
@@ -169,4 +165,31 @@ export default class ContributionCard extends React.Component {
 
 ContributionCard.propTypes = {
   contribution: PropTypes.object.isRequired
+};
+
+class ActionButton extends React.Component {
+  render() {
+    return (
+      <TouchableOpacity
+        style={styles.actionButton}
+        onPress={event => {
+          console.log('click action button');
+          this.props.onPress && this.props.onPress(event);
+        }}
+      >
+        {this.props.image ? (
+          <Image source={this.props.image} style={styles.imageStyle} />
+        ) : null}
+        {this.props.text ? (
+          <Text style={styles.actionButtonText}>{this.props.text}</Text>
+        ) : null}
+      </TouchableOpacity>
+    );
+  }
+}
+
+ActionButton.propTypes = {
+  onPress: PropTypes.func,
+  text: PropTypes.string,
+  image: PropTypes.any
 };

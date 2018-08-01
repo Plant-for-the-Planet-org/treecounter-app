@@ -21,7 +21,8 @@ export default (currentSelectorStyles = EStyleSheet.create({
   treecount_price_conversion_Text_input: {
     // width: 60,
     paddingLeft: 3,
-    marginTop: 5
+    marginTop: 5,
+    width: 28
     //  marginVertical: 10
   },
 
@@ -49,7 +50,7 @@ export default (currentSelectorStyles = EStyleSheet.create({
   treecount_price_conversion_Text_input2: {
     paddingLeft: 8,
     marginTop: -3,
-    width: 40
+    width: 38
   },
   treecount_price_conversion_Text_input3: {
     marginTop: -10,

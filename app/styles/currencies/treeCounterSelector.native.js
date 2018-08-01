@@ -10,28 +10,29 @@ export default (currentSelectorStyles = EStyleSheet.create({
     // justifyContent: 'space-between',
     width: '100%'
   },
-  treecount_price_conversion_Text: {
-    flex: 1,
+  treecount_price_radio_container: {
     flexDirection: 'row',
-    maxWidth: 160
+    width: 127
   },
   treecount_price_conversion_Column: {
     flexDirection: 'column'
   },
 
-  treecount_price_radio_container: {
-    flexDirection: 'row',
-    maxWidth: 127
-  },
   treecount_price_conversion_Text_input: {
     // width: 60,
     paddingLeft: 3,
     marginTop: 5
     //  marginVertical: 10
   },
+
+  treecount_price_conversion_Text: {
+    flex: 1,
+    flexDirection: 'row',
+    maxWidth: 160
+  },
   treecount_price_conversion_lebel: {
     width: 40,
-    marginLeft: 30,
+    marginLeft: 28,
     marginVertical: 10
   },
   treecount_price_conversion_Text_currency: {
@@ -47,6 +48,20 @@ export default (currentSelectorStyles = EStyleSheet.create({
   },
   treecount_price_conversion_Text_input2: {
     paddingLeft: 8,
-    marginTop: -10
+    marginTop: -3,
+    width: 40
+  },
+  treecount_price_conversion_Text_input3: {
+    marginTop: -10,
+    width: 28
+  },
+
+  radio_button: {
+    width: 20,
+    margin: 5
+  },
+  radio_label: {
+    width: 107,
+    flexDirection: 'row'
   }
 }));

@@ -96,6 +96,15 @@ export default {
           maxLength: 15,
           propertyOrder: 5
         },
+        city: {
+          type: 'string',
+          title: 'label.city',
+          attr: {
+            maxlength: 255
+          },
+          maxLength: 255,
+          propertyOrder: 6
+        },
         country: {
           enum: [
             'AF',
@@ -614,15 +623,6 @@ export default {
           type: 'string',
           title: 'label.country',
           attr: { maxlength: 2 },
-          propertyOrder: 6
-        },
-        city: {
-          type: 'string',
-          title: 'label.city',
-          attr: {
-            maxlength: 255
-          },
-          maxLength: 255,
           propertyOrder: 7
         }
       },

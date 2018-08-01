@@ -16,8 +16,12 @@ export default (textInputStyles = EStyleSheet.create({
     marginLeft: 10,
     width: '80%',
     fontSize: 16,
-    color: '#000',
+    color: '#686060',
     borderBottomWidth: 1,
     borderColor: '#cecece'
+  },
+  emptyView: {
+    width: 26,
+    height: 26
   }
 }));

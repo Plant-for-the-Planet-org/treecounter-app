@@ -104,24 +104,22 @@ export default class SelectPlantProject extends Component {
   render() {
     let { featuredProjects } = this.state;
     return (
-      <ScrollView>
-        <Slick style={styles.slickWrapper} showsPagination={false}>
-          {featuredProjects.length !== 0
-            ? featuredProjects.map(project => (
-                <PlantProjectFull
-                  key={project.id}
-                  callExpanded={() => this.callExpanded()}
-                  expanded={false}
-                  plantProject={project}
-                  onSelectClickedFeaturedProjects={id =>
-                    this.onSelectClickedFeaturedProjects(id)
-                  }
-                  tpoName={project.tpo_name}
-                />
-              ))
-            : null}
-        </Slick>
-      </ScrollView>
+      <Slick style={styles.slickWrapper} showsPagination={false}>
+        {featuredProjects.length !== 0
+          ? featuredProjects.map(project => (
+              <PlantProjectFull
+                key={project.id}
+                callExpanded={() => this.callExpanded()}
+                expanded={false}
+                plantProject={project}
+                onSelectClickedFeaturedProjects={id =>
+                  this.onSelectClickedFeaturedProjects(id)
+                }
+                tpoName={project.tpo_name}
+              />
+            ))
+          : null}
+      </Slick>
     );
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView } from 'react-native-tab-view';
 import { renderBasicTabbar } from '../../components/Common/Tabs/basicTabbar';
-import IndividualForm from './individualForm.native';
+import IndividualForm from './IndividualForm.native';
 import CompanyForm from './companyForm';
 
 export default class RecieptTabsView extends Component {
@@ -29,7 +29,14 @@ export default class RecieptTabsView extends Component {
     });
   };
 
-  _handleIndexChange = index => this.setState({ index });
+  _handleIndexChange = index => {
+    this.setState({ index });
+    if (index == 0) {
+      this.props.onReciptTabChange('individual');
+    } else {
+      this.props.onReciptTabChange('company');
+    }
+  };
 
   _renderTabBar = props => {
     return renderBasicTabbar(
@@ -42,9 +49,19 @@ export default class RecieptTabsView extends Component {
   _renderSelectPlantScene = ({ route }) => {
     switch (route.key) {
       case 'individual':
-        return <IndividualForm />;
+        return (
+          <IndividualForm
+            showNextButton={this.props.showNextButton}
+            goToNextTab={value => this.props.goToNextTab(value)}
+          />
+        );
       case 'company':
-        return <CompanyForm />;
+        return (
+          <CompanyForm
+            showNextButton={this.props.showNextButton}
+            goToNextTab={value => this.props.goToNextTab(value)}
+          />
+        );
       default:
         return null;
     }

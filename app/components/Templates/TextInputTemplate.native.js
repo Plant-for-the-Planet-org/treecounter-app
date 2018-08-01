@@ -24,11 +24,14 @@ export function TextInputTemplate(locals) {
       <View style={styles.containerStyle}>
         {locals.config.iconUrl ? (
           <Image style={styles.imageStyle} source={locals.config.iconUrl} />
-        ) : null}
+        ) : (
+          <View style={styles.emptyView} />
+        )}
         <TextInput
           style={styles.textboxStyle}
           secureTextEntry={locals.secureTextEntry}
           placeholder={i18n.t(locals.placeholder)}
+          placeholderTextColor={'#686060'}
           keyboardType={locals.keyboardType}
           maxLength={locals.maxLength}
           multiline={locals.multiline}

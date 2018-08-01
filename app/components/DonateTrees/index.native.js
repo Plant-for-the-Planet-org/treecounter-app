@@ -126,23 +126,17 @@ export default class DonateTrees extends Component {
       this._handleIndexChange(2);
     }
   }
-
-  Tab3validated() {
-    let value = this.refs.donateReceipt.getValue();
-    let receipt = {};
+  goToNextTab(value) {
     if (value) {
-      if (this.state.modeReceipt === 'individual') {
-        receipt['receiptIndividual'] = value;
-      } else {
-        receipt['receiptCompany'] = value;
-      }
       this.setState({
         form: {
           ...this.state.form,
-          ...receipt
+          ...value
         }
       });
       this._handleIndexChange(3);
+    } else {
+      // Do nothing
     }
   }
 
@@ -271,20 +265,16 @@ export default class DonateTrees extends Component {
     }
 
     {
-      // this.state.modeReceipt === DonateTrees.data.tabsReceipt[0].id &&
       route.key === 'recipient'
         ? (screenToShow = (
             <RecieptTabsView
-              updateRecieptType={() => this.updateReciptType()}
-              recipientType={this.state.modeReceipt}
+              showNextButton={true}
+              goToNextTab={value => this.goToNextTab(value)}
+              onReciptTabChange={tab => this.handleModeReceiptChange(tab)}
             />
           ))
         : null;
     }
-    // {
-    //   // this.state.modeReceipt === DonateTrees.data.tabsReceipt[1].id &&
-    //   route.key === 'company' ? (screenToShow = <CompanyForm />) : null;
-    // }
     return screenToShow;
   };
   _handleIndexChange = index => this.setState({ index });

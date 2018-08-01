@@ -207,6 +207,8 @@ class TreeCountSelector extends React.Component {
               />
               <Text
                 key="variable"
+                ellipsizeMode="tail"
+                numberOfLines={1}
                 style={styles.treecount_price_conversion_lebel}
               >
                 {i18n.t('label.trees')}

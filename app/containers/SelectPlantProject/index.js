@@ -12,7 +12,7 @@ import SelectPlantProject from '../../components/SelectPlantProject';
 
 class SelectPlantProjectContainer extends Component {
   componentDidMount() {
-    this.props.selectPlantProjectAction(1);
+    //this.props.selectPlantProjectAction(1);
   }
   render() {
     return (

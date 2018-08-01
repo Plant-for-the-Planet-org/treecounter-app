@@ -83,6 +83,8 @@ import map_legend_TreeDensity from './images/Legend_TreeDensity.png';
 import burgur_menu_icon from './images/icons/menu-icon.jpg';
 import foldin from './images/icons/foldin.png';
 import foldout from './images/icons/foldout.png';
+import userAvtar from './images/icons/user_avtar.png';
+import home from './images/icons/home.png';
 
 export {
   bmzLogo,
@@ -168,5 +170,7 @@ export {
   map_legend_TreeDensity,
   burgur_menu_icon,
   foldin,
-  foldout
+  foldout,
+  userAvtar,
+  home
 };

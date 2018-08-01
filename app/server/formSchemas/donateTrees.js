@@ -51,7 +51,7 @@ export default {
           maxLength: 50,
           minLength: 2,
           propertyOrder: 1,
-          icon: 'key'
+          icon: 'userAvtar'
         },
         lastname: {
           type: 'string',
@@ -64,7 +64,7 @@ export default {
           maxLength: 50,
           minLength: 2,
           propertyOrder: 2,
-          icon: 'key'
+          icon: 'userAvtar'
         },
         email: {
           type: 'string',
@@ -660,7 +660,8 @@ export default {
           pattern: '.{2,}',
           maxLength: 50,
           minLength: 2,
-          propertyOrder: 2
+          propertyOrder: 2,
+          icon: 'userAvtar'
         },
         lastname: {
           type: 'string',
@@ -672,7 +673,8 @@ export default {
           pattern: '.{2,}',
           maxLength: 50,
           minLength: 2,
-          propertyOrder: 3
+          propertyOrder: 3,
+          icon: 'userAvtar'
         },
         email: {
           type: 'string',
@@ -681,6 +683,7 @@ export default {
             maxlength: 50
           },
           widget: 'email',
+          icon: 'email',
           maxLength: 50,
           propertyOrder: 4
         },
@@ -691,7 +694,8 @@ export default {
             maxlength: 255
           },
           maxLength: 255,
-          propertyOrder: 5
+          propertyOrder: 5,
+          icon: 'home'
         },
         zipCode: {
           type: 'string',

@@ -46,5 +46,13 @@ export default (treecounterStyles = EStyleSheet.create({
     flex: 1,
     top: 190,
     left: 0
+  },
+  svgTextContainer: {
+    elevation: 6,
+    top: -200,
+    left: 100
+  },
+  svgTextRow: {
+    width: 400
   }
 }));

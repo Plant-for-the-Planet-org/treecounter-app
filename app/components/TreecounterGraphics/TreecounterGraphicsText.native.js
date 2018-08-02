@@ -9,6 +9,8 @@ import { pot, tree } from '../../assets';
 import SvgUri from 'react-native-svg-uri';
 import i18n from '../../locales/i18n.js';
 
+import svgStyles from '../../styles/common/treecounter_svg';
+
 class TreecounterGraphicsText extends Component {
   constructor() {
     super();
@@ -55,8 +57,8 @@ class TreecounterGraphicsText extends Component {
     } = this.props;
 
     return (
-      <View className="svg-text-container">
-        <View className="svg-text-container__row">
+      <View style={svgStyles.svgTextContainer} className="svg-text-container">
+        <View style={svgStyles.svgTextRow} className="svg-text-container__row">
           <Image className="svg-text-container__row--col" source={pot} />
           <View className="svg-text-container__row--col2">
             <View>
@@ -81,8 +83,8 @@ class TreecounterGraphicsText extends Component {
         <View className="svg-text-container__bar" />
         <View className="svg-text-container__row">
           <SvgUri
-            width="50"
-            height="50"
+            width="30"
+            height="30"
             className="svg-text-container__row--col"
             source={tree}
           />

@@ -4,12 +4,13 @@ import i18n from '../../locales/i18n';
 
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
+import TreecounterGraphicsText from './TreecounterGraphicsText';
 
 export default class Trillion extends Component {
   constructor() {
     super();
     this.state = {
-      svgData: {},
+      svgData: null,
       displayName: '',
       loading: true
     };
@@ -40,6 +41,12 @@ export default class Trillion extends Component {
           {' ' + i18n.t('name.label')}
         </Text>
         <SvgContainer {...this.state.svgData} />
+        {/* {this.state.svgData !== null ? (
+          <TreecounterGraphicsText
+            trillion={true}
+            treecounterData={this.state.svgData}
+          />
+        ) : null} */}
       </View>
     );
   }

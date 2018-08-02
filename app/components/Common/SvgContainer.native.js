@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Animated, Easing, Image } from 'react-native';
+import { Text, View, Animated, Easing, Image } from 'react-native';
 import i18n from '../../locales/i18n';
 import PropTypes from 'prop-types';
 

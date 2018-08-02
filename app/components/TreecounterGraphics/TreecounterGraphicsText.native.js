@@ -57,10 +57,10 @@ class TreecounterGraphicsText extends Component {
     } = this.props;
 
     return (
-      <View style={svgStyles.svgTextContainer} className="svg-text-container">
-        <View style={svgStyles.svgTextRow} className="svg-text-container__row">
-          <Image className="svg-text-container__row--col" source={pot} />
-          <View className="svg-text-container__row--col2">
+      <View style={svgStyles.svgTextContainer}>
+        <View style={svgStyles.svgTextRow}>
+          <Image style={svgStyles.svgColumn1} source={pot} />
+          <View style={svgStyles.svgColumn2}>
             <View>
               <Text>
                 {i18n.t('label.target') +
@@ -81,14 +81,11 @@ class TreecounterGraphicsText extends Component {
           </View>
         </View>
         <View className="svg-text-container__bar" />
-        <View className="svg-text-container__row">
-          <SvgUri
-            width="30"
-            height="30"
-            className="svg-text-container__row--col"
-            source={tree}
-          />
-          <View className="svg-text-container__row--col2">
+        <View style={svgStyles.svgTextRow}>
+          <View style={svgStyles.svgColumn1}>
+            <SvgUri width="30" height="30" source={tree} />
+          </View>
+          <View style={svgStyles.svgColumn2}>
             <View>
               <Text>{i18n.t('label.planted')}</Text>
               <Text>{this.convertNumber(parseInt(planted), 2)}</Text>

@@ -49,10 +49,23 @@ export default (treecounterStyles = EStyleSheet.create({
   },
   svgTextContainer: {
     elevation: 6,
-    top: -200,
-    left: 100
+    top: -280,
+    left: 0,
+    width: 180,
+    flexDirection: 'column'
   },
   svgTextRow: {
-    width: 400
+    flexDirection: 'row'
+  },
+  svgColumn1: {
+    width: 30,
+    height: 30,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    resizeMode: 'contain'
+  },
+  svgColumn2: {
+    flex: 2
   }
 }));

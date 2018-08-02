@@ -15,9 +15,7 @@ export function TextInputTemplate(locals) {
   let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
   let error =
     locals.hasError && locals.error ? (
-      <Text accessibilityLiveRegion="polite" style={errorBlockStyle}>
-        {locals.error}
-      </Text>
+      <Text style={errorBlockStyle}>{locals.error}</Text>
     ) : null;
   return (
     <View style={styles.container}>
@@ -43,7 +41,7 @@ export function TextInputTemplate(locals) {
           autoCapitalize={locals.autoCapitalize}
         />
       </View>
-      {error}
+      <View style={styles.errorStyle}>{error}</View>
     </View>
   );
 }

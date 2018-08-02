@@ -28,10 +28,10 @@ export default (tabbarStyles = EStyleSheet.create({
   },
   textActive: {
     color: '#ec6453',
-    fontSize: 15
+    fontSize: 13
   },
   text: {
     color: '#aba2a2',
-    fontSize: 15
+    fontSize: 13
   }
 }));

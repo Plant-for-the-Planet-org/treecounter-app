@@ -49,12 +49,21 @@ export default (currentSelectorStyles = EStyleSheet.create({
   },
   treecount_price_conversion_Text_input2: {
     paddingLeft: 8,
-    marginTop: -3,
-    width: 38
+    marginTop: -7,
+    width: 38,
+    borderBottomWidth: 1,
+    borderColor: '#686060',
+    paddingBottom: 2,
+    alignSelf: 'center'
   },
   treecount_price_conversion_Text_input3: {
     marginTop: -10,
-    width: 28
+    width: 38,
+    borderBottomWidth: 1,
+    paddingBottom: 4,
+    borderColor: '#686060',
+    alignSelf: 'center',
+    textAlign: 'center'
   },
 
   radio_button: {

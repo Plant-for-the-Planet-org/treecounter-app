@@ -12,7 +12,8 @@ export default (loginStyles = EStyleSheet.create({
   inputContainer: {
     width: '100%',
     height: 400,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    padding: 10
   },
   button: {
     height: 50,
@@ -35,12 +36,12 @@ export default (loginStyles = EStyleSheet.create({
     color: '#575756',
     width: Dimensions.get('window').width * 0.5,
     fontWeight: 'bold',
-    justifyContent: 'flex-start',
+    textAlign: 'center',
     marginBottom: 20
   },
   titleTextUnderline: {
     height: 3,
-    width: 117,
+    width: Dimensions.get('window').width * 0.5,
     backgroundColor: '$primary'
   },
   bottomRow: {
@@ -53,7 +54,7 @@ export default (loginStyles = EStyleSheet.create({
     color: '$textColor'
   },
   bottomTextHighlight: {
-    fontSize: 11,
+    fontSize: 12,
     color: '#ec6453'
   },
   loginHeader: {

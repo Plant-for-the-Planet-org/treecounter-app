@@ -56,9 +56,9 @@ export default class DonateTrees extends Component {
       expandedOption: '1',
       showSelectProject: false,
       routes: [
-        { key: 'selectPlant', title: 'Select Plant Project' },
-        { key: 'currency', title: 'Currency Selector' },
-        { key: 'recipient', title: 'Recipient' },
+        { key: 'selectPlant', title: 'Select Plant' },
+        { key: 'currency', title: 'Donation Details' },
+        { key: 'recipient', title: 'Donor Details' },
         { key: 'payments', title: 'Payments' }
       ]
     };
@@ -71,7 +71,9 @@ export default class DonateTrees extends Component {
     this.determineDefaultCurrency = this.determineDefaultCurrency.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.onTabChange(this.state.routes[0].title);
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedProject) {
@@ -201,7 +203,9 @@ export default class DonateTrees extends Component {
     return renderDottedTabbar(
       props.navigationState.routes,
       this.state.index,
-      index => this.setState({ index })
+      index => {
+        this._handleIndexChange(index);
+      }
     );
   };
 
@@ -277,12 +281,15 @@ export default class DonateTrees extends Component {
     }
     return screenToShow;
   };
-  _handleIndexChange = index => this.setState({ index });
+  _handleIndexChange = index => {
+    this.props.onTabChange(this.state.routes[index].title);
+    this.setState({ index });
+  };
 
   render() {
     let plantProject = this.props.selectedProject;
     return this.state.showSelectProject ? (
-      <SelectPlantTabView />
+      <SelectPlantTabView onTabChange={tab => this.props.onTabChange(tab)} />
     ) : !plantProject ? null : (
       <TabView
         animationEnabled={true}

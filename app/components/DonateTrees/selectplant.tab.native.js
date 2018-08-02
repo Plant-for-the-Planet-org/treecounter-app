@@ -13,11 +13,16 @@ export default class SelectPlantTabView extends Component {
     this.state = {
       routes: [
         { key: 'featured', title: 'Featured' },
-        { key: 'map', title: 'Map' },
-        { key: 'price', title: 'Price' }
+        { key: 'past', title: 'Past' },
+        { key: 'list', title: 'List' },
+        { key: 'price', title: 'Price' },
+        { key: 'map', title: 'Map' }
       ],
       index: 0
     };
+  }
+  componentDidMount() {
+    this.props.onTabChange('Select Plant');
   }
 
   indexChange(index) {
@@ -32,7 +37,9 @@ export default class SelectPlantTabView extends Component {
     });
   };
 
-  _handleIndexChange = index => this.setState({ index });
+  _handleIndexChange = index => {
+    this.setState({ index });
+  };
 
   _renderTabBar = props => {
     return renderBasicTabbar(

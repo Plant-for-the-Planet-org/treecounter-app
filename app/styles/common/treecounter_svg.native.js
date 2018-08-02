@@ -51,7 +51,7 @@ export default (treecounterStyles = EStyleSheet.create({
     elevation: 6,
     top: -280,
     left: 0,
-    width: 180,
+    width: 190,
     flexDirection: 'column'
   },
   svgTextRow: {
@@ -67,5 +67,24 @@ export default (treecounterStyles = EStyleSheet.create({
   },
   svgColumn2: {
     flex: 2
+  },
+  divider: {
+    height: 3,
+    width: 70,
+    backgroundColor: '$primary',
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    justifyContent: 'center'
+  },
+  svgTitleText: {
+    fontSize: 10,
+    color: '#686060'
+  },
+  svgTextValue: {
+    fontSize: 16,
+    color: '#686060',
+    fontWeight: '600'
   }
 }));

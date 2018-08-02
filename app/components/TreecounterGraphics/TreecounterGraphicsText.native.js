@@ -61,38 +61,42 @@ class TreecounterGraphicsText extends Component {
         <View style={svgStyles.svgTextRow}>
           <Image style={svgStyles.svgColumn1} source={pot} />
           <View style={svgStyles.svgColumn2}>
-            <View>
-              <Text>
-                {i18n.t('label.target') +
-                  (this.props.trillion
-                    ? ''
-                    : targetYear
-                      ? ' ' + i18n.t('label.by') + ' ' + targetYear
-                      : '') +
-                  ' '}
+            <Text style={svgStyles.svgTitleText}>
+              {i18n.t('label.target') +
+                (this.props.trillion
+                  ? ''
+                  : targetYear
+                    ? ' ' + i18n.t('label.by') + ' ' + targetYear
+                    : '') +
+                ' '}
+            </Text>
+            <Text style={svgStyles.svgTextValue}>
+              {this.convertNumber(target, 2)}
+            </Text>
+            {this.props.trillion ? (
+              <Text style={svgStyles.svgTitleText}>
+                {target.toLocaleString('en')}
               </Text>
-              <Text>{this.convertNumber(target, 2)}</Text>
-              <Text>
-                {this.props.trillion ? (
-                  <Text>{target.toLocaleString('en')}</Text>
-                ) : null}
-              </Text>
-            </View>
+            ) : null}
           </View>
         </View>
-        <View className="svg-text-container__bar" />
+        <View style={svgStyles.divider} />
         <View style={svgStyles.svgTextRow}>
           <View style={svgStyles.svgColumn1}>
             <SvgUri width="30" height="30" source={tree} />
           </View>
           <View style={svgStyles.svgColumn2}>
-            <View>
-              <Text>{i18n.t('label.planted')}</Text>
-              <Text>{this.convertNumber(parseInt(planted), 2)}</Text>
-              {this.props.trillion ? (
-                <Text>{parseInt(planted).toLocaleString('en')}</Text>
-              ) : null}
-            </View>
+            <Text style={svgStyles.svgTitleText}>
+              {i18n.t('label.planted')}
+            </Text>
+            <Text style={svgStyles.svgTextValue}>
+              {this.convertNumber(parseInt(planted), 2)}
+            </Text>
+            {this.props.trillion ? (
+              <Text style={svgStyles.svgTitleText}>
+                {parseInt(planted).toLocaleString('en')}
+              </Text>
+            ) : null}
           </View>
           {this.props.trillion ? null : (
             <View className="svg-text-container__row--col2">

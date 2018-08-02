@@ -7,6 +7,8 @@ import * as svgs from '../../assets/svgAssets';
 
 import { svgBackground } from '../../assets';
 import SvgUri from 'react-native-svg-uri';
+
+import treecounterStyles from '../../styles/common/treecounter_svg';
 import Svg, { Circle } from 'react-native-svg';
 
 const totalCount = Array.from({ length: 72 }, (v, k) => k + 1);
@@ -92,17 +94,17 @@ export default class SvgContainer extends Component {
     });
     let treesWidth = this.state.treesWidth;
     return (
-      <View style={styles.container}>
-        <View style={styles.svgStyle}>
-          <Image style={styles.imageStyle} source={svgBackground} />
-          <View style={styles.cloudStyle}>
+      <View style={treecounterStyles.container}>
+        <View style={treecounterStyles.svgStyle}>
+          <Image style={treecounterStyles.imageStyle} source={svgBackground} />
+          <View style={treecounterStyles.cloudStyle}>
             <Animated.View
               style={{ transform: [{ rotate: RotateClouds1Data }] }}
             >
               <SvgUri width="420" height="420" source={svgs['cloud1']} />
             </Animated.View>
           </View>
-          <View style={styles.cloudStyle}>
+          <View style={treecounterStyles.cloudStyle}>
             <Animated.View
               style={{ transform: [{ rotate: RotateClouds2Data }] }}
             >
@@ -115,7 +117,7 @@ export default class SvgContainer extends Component {
           {totalCount.map(
             i =>
               i <= treesWidth ? (
-                <View key={'tree-' + i} style={styles.potStyle}>
+                <View key={'tree-' + i} style={treecounterStyles.potStyle}>
                   <SvgUri
                     width="420"
                     height="420"
@@ -127,7 +129,7 @@ export default class SvgContainer extends Component {
           {totalCount.map(
             i =>
               i > treesWidth ? (
-                <View key={'pot-' + i} style={styles.potStyle}>
+                <View key={'pot-' + i} style={treecounterStyles.potStyle}>
                   <SvgUri
                     width="420"
                     height="420"
@@ -136,7 +138,7 @@ export default class SvgContainer extends Component {
                 </View>
               ) : null
           )}
-          <View style={styles.circleStyle}>
+          <View style={treecounterStyles.circleStyle}>
             <Svg height="400" width="400">
               <Circle
                 cx="200"
@@ -184,52 +186,3 @@ SvgContainer.defaultProps = {
   exposeMissing: true,
   targetYear: 2020
 };
-
-const skyBlue = '#F5FCFF';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: skyBlue
-  },
-  svgStyle: {
-    width: 400,
-    height: 400
-  },
-  cloudStyle: {
-    flex: 1,
-    width: 420,
-    height: 420,
-    elevation: 2,
-    position: 'absolute',
-    top: -12,
-    left: -10
-  },
-  potStyle: {
-    flex: 1,
-    width: 420,
-    height: 420,
-    elevation: 4,
-    position: 'absolute',
-    top: -12,
-    left: -10
-  },
-  circleStyle: {
-    flex: 1,
-    width: 400,
-    height: 400,
-    elevation: 5,
-    position: 'absolute',
-    top: 0
-  },
-  imageStyle: {
-    overflow: 'visible',
-    width: 400,
-    height: 400,
-    flex: 1,
-    top: 190,
-    left: 0
-  }
-});

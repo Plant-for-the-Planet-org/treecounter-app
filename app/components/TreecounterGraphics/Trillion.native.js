@@ -41,12 +41,12 @@ export default class Trillion extends Component {
           {' ' + i18n.t('name.label')}
         </Text>
         <SvgContainer {...this.state.svgData} />
-        {/* {this.state.svgData !== null ? (
+        {this.state.svgData !== null ? (
           <TreecounterGraphicsText
             trillion={true}
             treecounterData={this.state.svgData}
           />
-        ) : null} */}
+        ) : null}
       </View>
     );
   }

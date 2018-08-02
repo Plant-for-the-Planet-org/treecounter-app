@@ -81,6 +81,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 DonationTreesContainer.propTypes = {
   selectedProject: PropTypes.object,
+  navigation: PropTypes.object,
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,

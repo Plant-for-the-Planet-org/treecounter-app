@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Image, View, TouchableHighlight } from 'react-native';
+import { Image, View, TouchableOpacity } from 'react-native';
 import { iosSearchWhite, iosNotificationWhite } from '../../assets';
 
 export default (HeaderRight = function(navigation) {
@@ -12,14 +12,18 @@ export default (HeaderRight = function(navigation) {
         alignItems: 'center'
       }}
     >
-      <Image
-        source={iosSearchWhite}
-        style={{ height: 30, width: 30, marginRight: 20 }}
-      />
-      <Image
-        source={iosNotificationWhite}
-        style={{ height: 30, width: 30, marginRight: 20 }}
-      />
+      <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+        <Image
+          source={iosSearchWhite}
+          style={{ height: 30, width: 30, marginRight: 20 }}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Image
+          source={iosNotificationWhite}
+          style={{ height: 30, width: 30, marginRight: 20 }}
+        />
+      </TouchableOpacity>
     </View>
   );
 });

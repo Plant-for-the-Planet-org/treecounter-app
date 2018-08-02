@@ -1,5 +1,6 @@
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import React from 'react';
+import { Animated } from 'react-native';
 import Trillion from '../TreecounterGraphics/Trillion';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
@@ -10,14 +11,15 @@ import DonationTreesContainer from '../../containers/DonateTrees';
 import { getLocalRoute } from '../../actions/apiRouting';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import styles from '../../styles/header.native';
-import BurgerMenu from '../../components/Header/BurgerMenu';
-import HeaderRight from '../../components/Header/HeaderFields';
+import BurgerMenu from '../Header/BurgerMenu';
+import HeaderRight from '../Header/HeaderFields';
 
-import i18n from '../../locales/i18n.js';
+import i18n from '../../locales/i18n';
 import DonateTrees from '../../containers/DonateTrees';
 import FAQContainer from '../../containers/FAQ';
 import RegisterTrees from '../../containers/RegisterTrees';
 import UserContributions from '../../containers/UserContributions';
+import SearchLayout from '../Header/SearchLayout.native';
 
 const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
 const headerLabels = {
@@ -87,9 +89,29 @@ export const getDrawerNavigator = function(isLoggedIn) {
       }
     }
   );
+  const searchNavigator = StackNavigator(
+    {
+      Search: {
+        screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />
+      }
+    },
+    {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
   const AppDrawerNavigator = DrawerNavigator(
     {
-      Category: baseNavigator
+      Category: baseNavigator,
+      searchNavigator: searchNavigator
     },
     {
       gesturesEnabled: false,

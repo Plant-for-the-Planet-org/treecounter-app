@@ -84,7 +84,10 @@ class TreeCounter extends Component {
 
   render() {
     let isLoggedIn = this.state.isLoggedIn;
-
+    let userLang = navigator.language || navigator.userLanguage;
+    userLang = userLang.split('-')[0];
+    let path = window.location.pathname.split('/')[2];
+    // let url = null;
     const PrivateRoute = ({ component: Component, ...rest }) => (
       <Route
         {...rest}
@@ -115,6 +118,7 @@ class TreeCounter extends Component {
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
+            <Redirect from={path} to={userLang} />
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             <div className="app-container__content">

@@ -1,5 +1,9 @@
 import i18next from 'i18next';
-import enlabels from './en/index';
+import labels from './en/labels';
+import deLabels from './de/labels';
+
+let userLang = navigator.language || navigator.userLanguage;
+console.log('**************', userLang);
 
 i18next.init({
   interpolation: {
@@ -7,13 +11,20 @@ i18next.init({
     escapeValue: false
   },
   // Add language detector later
-  lng: 'en', // 'en' | 'es'
+  // lng: 'en', // 'en' | 'es'
+  lng: 'de', // just to test
+  //lng: userLang    otherwise..
 
   // Using simple hardcoded resources for simple example
   resources: {
     en: {
       translation: {
         label: enlabels
+      }
+    },
+    de: {
+      translation: {
+        label: deLabels
       }
     }
   }

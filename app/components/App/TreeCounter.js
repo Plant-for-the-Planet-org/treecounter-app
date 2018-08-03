@@ -118,7 +118,10 @@ class TreeCounter extends Component {
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
-            <Redirect from={path} to={userLang} />
+            <Redirect
+              from="/app_dev.php/:lng/*"
+              to={'/app_dev.php/' + userLang}
+            />
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             <div className="app-container__content">

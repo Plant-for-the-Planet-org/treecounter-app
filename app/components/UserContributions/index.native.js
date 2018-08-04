@@ -110,6 +110,7 @@ export default class UserContributions extends React.Component {
           </PrimaryButton>
         </View>
         <TabView
+          useNativeDriver={true}
           navigationState={this.state}
           renderScene={this._renderScene}
           renderTabBar={this._renderTabBar}

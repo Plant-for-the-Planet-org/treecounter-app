@@ -105,6 +105,13 @@ class PlantProjectFull extends React.Component {
             </View>
           ) : null}
         </View>
+        {this.state.expanded ? (
+          <View style={styles.plantProjectDetails}>
+            <PlantProjectDetails {...detailsProps} />
+          </View>
+        ) : (
+          <View style={styles.plantProjectDetails} />
+        )}
         <View style={styles.buttonContainer}>
           {!this.props.selectAnotherProject ? (
             <PrimaryButton
@@ -118,7 +125,6 @@ class PlantProjectFull extends React.Component {
               {i18n.t('label.next')}
             </PrimaryButton>
           ) : null}
-          {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
         </View>
       </CardLayout>
     );

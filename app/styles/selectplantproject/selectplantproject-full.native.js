@@ -26,6 +26,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
     justifyContent: 'center'
   },
   buttonContainer: {
-    flex: 1
+    height: 50
+  },
+  plantProjectDetails: {
+    flexGrow: 1
   }
 }));

@@ -73,7 +73,7 @@ class TreeCountCurrencySelector extends React.Component {
   render() {
     const { currencies, treeCountOptions } = this.props;
     return (
-      <CardLayout>
+      <CardLayout style={{ padding: 20 }}>
         <CurrencySelector
           currencies={currencies}
           onChange={this.handleCurrencyChange}

@@ -70,6 +70,7 @@ export default class RecieptTabsView extends Component {
   render() {
     return (
       <TabView
+        useNativeDriver={true}
         navigationState={this.state}
         renderScene={this._renderSelectPlantScene}
         renderTabBar={this._renderTabBar}

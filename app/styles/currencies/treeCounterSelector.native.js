@@ -3,7 +3,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default (currentSelectorStyles = EStyleSheet.create({
   treecount_container: {
     marginTop: 30,
-    width: 350
+    width: '100%'
   },
   treecount_priceContainer_row: {
     flexDirection: 'row',
@@ -39,11 +39,12 @@ export default (currentSelectorStyles = EStyleSheet.create({
   treecount_price_conversion_Text_currency: {
     //  marginVertical: 10,
     marginTop: 5,
-    marginLeft: 10
+    marginLeft: 10,
+    marginRight: 20
   },
   treecount_price_conversion_Text_equal2: {
     marginLeft: 59,
-    paddingRight: 60,
+    paddingRight: 50,
     // marginRight: 10,
     marginVertical: 5
   },

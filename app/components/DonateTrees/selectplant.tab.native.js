@@ -65,6 +65,7 @@ export default class SelectPlantTabView extends Component {
   render() {
     return (
       <TabView
+        useNativeDriver={true}
         navigationState={this.state}
         renderScene={this._renderSelectPlantScene}
         renderTabBar={this._renderTabBar}

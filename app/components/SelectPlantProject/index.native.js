@@ -104,19 +104,33 @@ export default class SelectPlantProject extends Component {
   render() {
     let { featuredProjects } = this.state;
     return (
-      <Slick style={styles.slickWrapper} showsPagination={false}>
+      <Slick
+        style={styles.slickWrapper}
+        showsPagination={true}
+        paginationStyle={{
+          position: 'absolute',
+          top: 0,
+          bottom: 490,
+          elevation: 9
+        }}
+        activeDotStyle={{
+          backgroundColor: '#b9d384'
+        }}
+      >
         {featuredProjects.length !== 0
           ? featuredProjects.map(project => (
-              <PlantProjectFull
-                key={project.id}
-                callExpanded={() => this.callExpanded()}
-                expanded={false}
-                plantProject={project}
-                onSelectClickedFeaturedProjects={id =>
-                  this.onSelectClickedFeaturedProjects(id)
-                }
-                tpoName={project.tpo_name}
-              />
+              <ScrollView key={project.id}>
+                <PlantProjectFull
+                  key={'projectFull' + project.id}
+                  callExpanded={() => this.callExpanded()}
+                  expanded={false}
+                  plantProject={project}
+                  onSelectClickedFeaturedProjects={id =>
+                    this.onSelectClickedFeaturedProjects(id)
+                  }
+                  tpoName={project.tpo_name}
+                />
+              </ScrollView>
             ))
           : null}
       </Slick>

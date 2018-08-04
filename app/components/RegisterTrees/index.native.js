@@ -75,6 +75,7 @@ export default class RegisterTrees extends Component {
       <ScrollView>
         <CardLayout>
           <TabView
+            useNativeDriver={true}
             ref="registerTreeForm"
             navigationState={this.state}
             renderScene={this._renderScene}

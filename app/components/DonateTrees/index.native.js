@@ -15,6 +15,7 @@ import RecieptTabsView from './receiptTabs';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
+import { ScrollView } from 'react-native';
 
 export default class DonateTrees extends Component {
   static data = {
@@ -235,16 +236,18 @@ export default class DonateTrees extends Component {
     {
       this.props.selectedTpo && route.key === 'selectPlant'
         ? (screenToShow = (
-            <PlantProjectFull
-              callExpanded={this.callExpanded}
-              expanded={false}
-              plantProject={this.props.selectedProject}
-              tpoName={this.props.selectedTpo.name}
-              selectAnotherProject={true}
-              showNextButton={true}
-              onNextClick={() => this.Tab1validated()}
-              projectClear={this.props.plantProjectClear}
-            />
+            <ScrollView>
+              <PlantProjectFull
+                callExpanded={this.callExpanded}
+                expanded={false}
+                plantProject={this.props.selectedProject}
+                tpoName={this.props.selectedTpo.name}
+                selectAnotherProject={true}
+                showNextButton={true}
+                onNextClick={() => this.Tab1validated()}
+                projectClear={this.props.plantProjectClear}
+              />
+            </ScrollView>
           ))
         : null;
     }
@@ -296,6 +299,7 @@ export default class DonateTrees extends Component {
         navigationState={this.state}
         renderScene={this._renderScene}
         renderTabBar={this._renderTabBar}
+        useNativeDriver={true}
         onIndexChange={this._handleIndexChange}
       />
     );

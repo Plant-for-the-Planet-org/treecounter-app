@@ -66,12 +66,18 @@ export const getDrawerNavigator = function(isLoggedIn) {
         screen: DonationTreesContainer
       },
       [getLocalRoute('app_faq')]: FAQContainer
+      // Search: {
+      //   screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />,
+      //   navigationOptions: {
+      //     drawerLockMode: 'locked-closed',
+      //     header: null
+      //   }
+      // }
     },
     {
       initialRouteName: isLoggedIn
         ? getLocalRoute('app_userHome')
         : getLocalRoute('app_login'),
-
       navigationOptions: ({ navigation }) => {
         console.log('navigation options', navigation);
 
@@ -110,7 +116,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
   );
   const AppDrawerNavigator = DrawerNavigator(
     {
-      Category: baseNavigator,
+      baseNavigator,
       searchNavigator: searchNavigator
     },
     {

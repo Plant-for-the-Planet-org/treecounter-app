@@ -10,11 +10,14 @@ import {
 } from 'react-native';
 
 import SearchBar from './SearchBar';
-import Header from './Header';
+import Header from './Header.native';
 import { getSuggestions, profileTypeToImage } from '../../helpers/utils';
 import { getImageUrl } from '../../actions/apiRouting';
+import { getLocalRoute } from '../../actions/apiRouting';
+import { withNavigation } from 'react-navigation';
+import styles from '../../styles/header/search_layout.native';
 
-export default class SearchLayout extends React.Component {
+class SearchLayout extends React.Component {
   static SearchBar = SearchBar;
   static Header = Header;
 
@@ -38,17 +41,12 @@ export default class SearchLayout extends React.Component {
       this.setState({ q: suggestions });
       console.log('suggestions', suggestions);
     });
-    //this.props.onChangeQuery && this.props.onChangeQuery(q);
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Header
-          backgroundColor={this.props.headerBackgroundColor}
-          tintColor={this.props.headerTintColor}
-          backButton={Platform.OS === 'android'}
-        >
+        <Header backButton={Platform.OS === 'android'}>
           <SearchBar
             onChangeQuery={this._handleChangeQuery}
             onSubmit={this._handleSubmit}
@@ -73,10 +71,11 @@ export default class SearchLayout extends React.Component {
                   style={styles.searchResult}
                   key={'suggestion' + i}
                   onPress={() => {
-                    console.log('click suggestions', suggestion);
-                    Linking.openURL(
-                      'http://localhost:8080/app_dev.php/en/t/' + suggestion.id
+                    this.props.navigation.navigate(
+                      getLocalRoute('app_userHome'),
+                      { suggestion }
                     );
+                    console.log('click suggestions', suggestion);
                   }}
                 >
                   <Image
@@ -98,26 +97,4 @@ export default class SearchLayout extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF'
-  },
-  searchResult: {
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    padding: 20,
-    paddingBottom: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  profileImage: {
-    height: 30,
-    width: 30,
-    marginRight: 5
-  },
-  profileText: {
-    fontSize: 20,
-    color: '#b9d384'
-  }
-});
+export default withNavigation(SearchLayout);

@@ -1,3 +1,13 @@
+import { postDirectRequest } from '../../app/utils/api';
+import {
+  profile,
+  country,
+  organization,
+  company,
+  education,
+  competition
+} from '../assets';
+
 export function queryParamsToObject(queryParams) {
   let returnObject = {};
   try {
@@ -42,3 +52,33 @@ export function formatDate(date) {
   date = yyyy + '-' + mm + '-' + dd;
   return date;
 }
+
+function escapeRegexCharacters(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+const getSuggestionValue = suggestion => `${suggestion.name}`;
+
+export function getSuggestions(value) {
+  return new Promise(resolve => {
+    postDirectRequest('/suggest', 'q=' + value.trim()).then(result => {
+      let jdata = result.data;
+      const escapedValue = escapeRegexCharacters(value.trim());
+      if (escapedValue === '') {
+        resolve([]);
+      }
+      const regex = new RegExp('\\b' + escapedValue, 'i');
+
+      resolve(jdata.filter(person => regex.test(getSuggestionValue(person))));
+    });
+  });
+}
+
+export const profileTypeToImage = {
+  individual: profile,
+  country,
+  tpo: organization,
+  organization,
+  company,
+  education,
+  competition
+};

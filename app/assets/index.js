@@ -77,7 +77,8 @@ import esriLogo from './images/logo_esri.png';
 import bmzLogo from './images/logo_bmz.jpg';
 import questionmark_orange from './images/icons/questionmark.png';
 import gift_icon from './images/icons/gift_icon.png';
-
+import iosSearchWhite from './images/icons/ios_icon_search_white.png';
+import iosNotificationWhite from './images/icons/ios_icon_notification_white.png';
 import map_legend_Restoration from './images/Legend_Restoration.png';
 import map_legend_Trees from './images/Legend_Trees.png';
 import map_legend_TreeDensity from './images/Legend_TreeDensity.png';
@@ -172,5 +173,7 @@ export {
   burgur_menu_icon,
   foldin,
   foldout,
-  EditOrange
+  EditOrange,
+  iosSearchWhite,
+  iosNotificationWhite
 };

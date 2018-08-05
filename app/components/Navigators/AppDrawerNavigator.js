@@ -1,5 +1,6 @@
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import React from 'react';
+import { Animated } from 'react-native';
 import Trillion from '../TreecounterGraphics/Trillion';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
@@ -10,12 +11,15 @@ import DonationTreesContainer from '../../containers/DonateTrees';
 import { getLocalRoute } from '../../actions/apiRouting';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import styles from '../../styles/header.native';
-import BurgerMenu from '../../components/Header/BurgerMenu';
-import i18n from '../../locales/i18n.js';
+import BurgerMenu from '../Header/BurgerMenu';
+import HeaderRight from '../Header/HeaderFields';
+
+import i18n from '../../locales/i18n';
 import DonateTrees from '../../containers/DonateTrees';
 import FAQContainer from '../../containers/FAQ';
 import RegisterTrees from '../../containers/RegisterTrees';
 import UserContributions from '../../containers/UserContributions';
+import SearchLayout from '../Header/SearchLayout.native';
 
 const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
 const headerLabels = {
@@ -62,12 +66,18 @@ export const getDrawerNavigator = function(isLoggedIn) {
         screen: DonationTreesContainer
       },
       [getLocalRoute('app_faq')]: FAQContainer
+      // Search: {
+      //   screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />,
+      //   navigationOptions: {
+      //     drawerLockMode: 'locked-closed',
+      //     header: null
+      //   }
+      // }
     },
     {
       initialRouteName: isLoggedIn
         ? getLocalRoute('app_userHome')
         : getLocalRoute('app_login'),
-
       navigationOptions: ({ navigation }) => {
         console.log('navigation options', navigation);
 
@@ -78,15 +88,36 @@ export const getDrawerNavigator = function(isLoggedIn) {
         };
         if (homeRoutes.includes(navigation.state.routeName)) {
           navigationConfig.headerLeft = BurgerMenu(navigation);
+          navigationConfig.headerRight = HeaderRight(navigation);
         }
 
         return navigationConfig;
       }
     }
   );
+  const searchNavigator = StackNavigator(
+    {
+      Search: {
+        screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />
+      }
+    },
+    {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
   const AppDrawerNavigator = DrawerNavigator(
     {
-      Category: baseNavigator
+      baseNavigator,
+      searchNavigator: searchNavigator
     },
     {
       gesturesEnabled: false,

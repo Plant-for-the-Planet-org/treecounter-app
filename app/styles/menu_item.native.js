@@ -22,7 +22,7 @@ export default (menuStyles = EStyleSheet.create({
   imageStyle: {
     width: 17,
     height: 18,
-    resizeMode: 'center'
+    resizeMode: 'contain'
   },
   textStyle: {
     paddingLeft: 5,

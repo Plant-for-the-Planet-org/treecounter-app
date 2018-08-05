@@ -83,8 +83,10 @@ import map_legend_TreeDensity from './images/Legend_TreeDensity.png';
 import burgur_menu_icon from './images/icons/menu-icon.jpg';
 import foldin from './images/icons/foldin.png';
 import foldout from './images/icons/foldout.png';
+import svgBackground from './svgAssets/svg_background.png';
 
 export {
+  svgBackground,
   bmzLogo,
   esriLogo,
   pledge_highest,

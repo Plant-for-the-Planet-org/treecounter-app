@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import '../../sass/treecounter.scss';
 import PropTypes from 'prop-types';
 // import TargetComment from '../TreecounterGraphics/TargetComment';
 // import PlantDetails from '../TreecounterGraphics/PlantDetails';
@@ -660,22 +659,6 @@ export default class SvgContainer extends Component {
           <path
             className="st29"
             d="M661.9,663.8c12.6,13.8,23.9,24.9,31.8,29.7c0,0-13.6-14.2-17.9-18.1C671.6,671.4,661.9,663.8,661.9,663.8z"
-          />
-          <ellipse
-            transform="matrix(0.6821 -0.7312 0.7312 0.6821 -271.4115 696.9774)"
-            className="st30"
-            cx="666"
-            cy="660.7"
-            rx="1.3"
-            ry="1.3"
-          />
-          <ellipse
-            transform="matrix(0.6821 -0.7312 0.7312 0.6821 -279.9945 693.9464)"
-            className="st31"
-            cx="658.2"
-            cy="669"
-            rx="1.3"
-            ry="1.3"
           />
         </g>
         <g ref="Baum_Klein">

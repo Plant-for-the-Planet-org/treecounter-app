@@ -36,6 +36,7 @@ import checkedIcon from './images/icons/checkbox_checked.png';
 import uncheckedIcon from './images/icons/checkbox_unchecked.png';
 import ProfilePic from './images/profile_pics.png';
 import EditGreen from './images/icons/edit_green.png';
+import EditOrange from './images/icons/edit_orange.png';
 import QuestionMarkGreen from './images/icons/questionmark_green.png';
 import country from './images/icons/country.png';
 import organization from './images/icons/organization.png';
@@ -84,8 +85,10 @@ import map_legend_TreeDensity from './images/Legend_TreeDensity.png';
 import burgur_menu_icon from './images/icons/menu-icon.jpg';
 import foldin from './images/icons/foldin.png';
 import foldout from './images/icons/foldout.png';
+import svgBackground from './svgAssets/svg_background.png';
 
 export {
+  svgBackground,
   bmzLogo,
   esriLogo,
   pledge_highest,
@@ -170,6 +173,7 @@ export {
   burgur_menu_icon,
   foldin,
   foldout,
+  EditOrange,
   iosSearchWhite,
   iosNotificationWhite
 };

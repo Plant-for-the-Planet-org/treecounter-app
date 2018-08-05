@@ -1,0 +1,37 @@
+<svg ref="canvas"
+  data-name="Layer 2"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 850 850">
+  <g ref="Baum_Klein">
+    <polygon
+            ref="p-pot-60"
+            styleUid="pot"       style="fill:#85aa4f;"
+            points="162.7,499.1 157.1,472.7 172.8,474.3 176.3,491"
+          />
+          <path
+            ref="p-shadow-60"
+            styleUid="potShadow"       style="fill:#729235;"
+            d="M161.6,487.5l-2.8-12.9l10.6,0.7c0,0-9.4,0.1-9.2,1.8L161.6,487.5z"
+          />
+          <path
+            ref="p-leaf1-60"
+            styleUid="potLeaf1"       style="fill:#66922f;"
+            d="M154.8,486.1c-2.2,0.4-4.5,0.6-6-2C151,483.5,153.4,484.3,154.8,486.1z"
+          />
+          <path
+            ref="p-stem-60"
+            styleUid="potStem"       style="fill:#564f48;"
+            d="M159.8,485.4c-3.1,0.2-7.9-0.9-12,4.8c5.2-4.5,9.4-4,12.2-4L159.8,485.4L159.8,485.4"
+          />
+          <path
+            ref="p-leaf2-60"
+            styleUid="potLeaf2"       style="fill:#87bc24;"
+            d="M149,488.9c-2.8,1.2-7.4,1.2-10.1-0.9C143.6,486.4,147.1,486.8,149,488.9z"
+          />
+          <path
+            ref="p-leaf3-60"
+            styleUid="potLeaf3"       style="fill:#50752c;"
+            d="M149,488.8c-4.7-1.3-10.4,4.4-10.9,7.8C141.4,496.5,149.3,492.8,149,488.8z"
+          />
+  </g>
+</svg>

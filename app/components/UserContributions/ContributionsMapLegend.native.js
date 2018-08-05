@@ -7,21 +7,12 @@ import styles from '../../styles/myTrees/my_trees.native';
 
 const ContributionsMapLegend = () => (
   <View style={styles.contributionMapLegend}>
-    <Image
-      className="user-contributions__location--icons--img"
-      source={MapPinRed}
-    />
-    <Text>{i18n.t('label.singleTree')}</Text>
-    <Image
-      className="user-contributions__location--icons--img"
-      source={MapPinBlue}
-    />
-    <Text>{i18n.t('label.severalTrees')}</Text>
-    <Image
-      className="user-contributions__location--icons--img"
-      source={MapPinGreen}
-    />
-    <Text>{i18n.t('label.donatedTrees')}</Text>
+    <Image source={MapPinRed} style={styles.image} />
+    <Text style={styles.text}>{i18n.t('label.singleTree')}</Text>
+    <Image source={MapPinBlue} style={styles.image} />
+    <Text style={styles.text}>{i18n.t('label.severalTrees')}</Text>
+    <Image source={MapPinGreen} style={styles.image} />
+    <Text style={styles.text}>{i18n.t('label.donatedTrees')}</Text>
   </View>
 );
 

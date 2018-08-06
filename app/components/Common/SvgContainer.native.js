@@ -9,6 +9,7 @@ import { svgBackground } from '../../assets';
 import SvgUri from 'react-native-svg-uri';
 
 import treecounterStyles from '../../styles/common/treecounter_svg';
+import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import Svg, { Circle } from 'react-native-svg';
 
 const totalCount = Array.from({ length: 72 }, (v, k) => k + 1);
@@ -23,6 +24,7 @@ export default class SvgContainer extends Component {
     this.RotateClouds1ValueHolder = new Animated.Value(0);
     this.RotateClouds2ValueHolder = new Animated.Value(0);
   }
+
   componentWillReceiveProps(nextProps) {
     let { planted, target } = nextProps;
     let plantedWidth = this.calculatePlantedWidth(planted, target, 112);
@@ -101,26 +103,30 @@ export default class SvgContainer extends Component {
             <Animated.View
               style={{ transform: [{ rotate: RotateClouds1Data }] }}
             >
-              <SvgUri width="420" height="420" source={svgs['cloud1']} />
+              <SvgUri width="100%" height="100%" source={svgs['cloud1']} />
             </Animated.View>
           </View>
           <View style={treecounterStyles.cloudStyle}>
             <Animated.View
               style={{ transform: [{ rotate: RotateClouds2Data }] }}
             >
-              <SvgUri width="420" height="420" source={svgs['cloud2']} />
+              <SvgUri width="100%" height="100%" source={svgs['cloud2']} />
             </Animated.View>
           </View>
-          <Animated.View style={{ transform: [{ rotate: RotateBallonsData }] }}>
-            <SvgUri width="400" height="400" source={svgs['ballons']} />
-          </Animated.View>
+          <View style={treecounterStyles.cloudStyle}>
+            <Animated.View
+              style={{ transform: [{ rotate: RotateBallonsData }] }}
+            >
+              <SvgUri width="100%" height="100%" source={svgs['ballons']} />
+            </Animated.View>
+          </View>
           {totalCount.map(
             i =>
               i <= treesWidth ? (
                 <View key={'tree-' + i} style={treecounterStyles.potStyle}>
                   <SvgUri
-                    width="420"
-                    height="420"
+                    width="100%"
+                    height="100%"
                     source={svgs['darkCrownTree' + ('' + i).padStart(3, '0')]}
                   />
                 </View>
@@ -131,18 +137,18 @@ export default class SvgContainer extends Component {
               i > treesWidth ? (
                 <View key={'pot-' + i} style={treecounterStyles.potStyle}>
                   <SvgUri
-                    width="420"
-                    height="420"
+                    width="100%"
+                    height="100%"
                     source={svgs['pot' + ('' + i).padStart(2, '0')]}
                   />
                 </View>
               ) : null
           )}
           <View style={treecounterStyles.circleStyle}>
-            <Svg height="400" width="400">
+            <Svg height="100%" width="100%" viewBox="0 0 400 400">
               <Circle
                 cx="200"
-                cy="197"
+                cy="200"
                 r="112"
                 fill="none"
                 stroke="#c4d19a"
@@ -150,16 +156,24 @@ export default class SvgContainer extends Component {
               />
               <Circle
                 cx="200"
-                cy="197"
+                cy="200"
                 r="112"
                 fill="none"
                 stroke="#4d6c29"
                 rotation="-90"
-                origin="200, 197"
+                origin="200, 200"
                 strokeWidth="30"
                 strokeDasharray={this.state.plantedDasharray}
               />
             </Svg>
+          </View>
+          <View style={treecounterStyles.svgContentContainer}>
+            {this.props !== null ? (
+              <TreecounterGraphicsText
+                trillion={true}
+                treecounterData={this.props}
+              />
+            ) : null}
           </View>
         </View>
       </View>

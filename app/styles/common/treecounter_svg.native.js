@@ -1,65 +1,84 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
 
-const skyBlue = '#F5FCFF';
+//Only take multiple of 10s
+const squareDimension =
+  Math.floor(
+    Math.min(Dimensions.get('window').width, Dimensions.get('window').height) /
+      10
+  ) * 10;
 
 export default (treecounterStyles = EStyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: skyBlue
+    width: '100%',
+    height: '100%'
   },
   svgStyle: {
-    width: 400,
-    height: 400
+    width: '100%',
+    height: '100%'
   },
   cloudStyle: {
     flex: 1,
-    width: 420,
-    height: 420,
+    width: '105%',
+    height: '105%',
     elevation: 2,
     position: 'absolute',
-    top: -12,
-    left: -10
+    top: '-2.5%',
+    left: '-2.5%'
   },
   potStyle: {
     flex: 1,
-    width: 420,
-    height: 420,
+    width: '105%',
+    height: '105%',
     elevation: 4,
     position: 'absolute',
-    top: -12,
-    left: -10
+    top: '-2.5%',
+    left: '-2.5%'
   },
   circleStyle: {
     flex: 1,
-    width: 400,
-    height: 400,
+    width: '100%',
+    height: '100%',
     elevation: 5,
     position: 'absolute',
     top: 0
   },
   imageStyle: {
     overflow: 'visible',
-    width: 400,
-    height: 400,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+    position: 'absolute',
     flex: 1,
-    top: 190,
+    top: 0,
     left: 0
   },
+  svgContentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    height: '100%',
+    width: '100%'
+  },
+  svgContainer: {
+    width: squareDimension,
+    height: squareDimension
+  },
   svgTextContainer: {
-    elevation: 6,
-    top: -280,
-    left: 0,
-    width: 190,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    width: '40%',
+    marginTop: 'auto',
+    marginBottom: 'auto'
   },
   svgTextRow: {
     flexDirection: 'row'
   },
   svgColumn1: {
-    width: 30,
-    height: 30,
+    width: '100%',
+    height: '100%',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -70,7 +89,8 @@ export default (treecounterStyles = EStyleSheet.create({
   },
   divider: {
     height: 3,
-    width: 70,
+    width: '30%',
+    position: 'relative',
     backgroundColor: '$primary',
     marginTop: 10,
     marginBottom: 10,

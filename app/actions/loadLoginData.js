@@ -9,8 +9,8 @@ export function loadLoginData() {
   const request = getAuthenticatedRequest('data_loginLoad_get');
   return dispatch => {
     request.then(res => {
-      dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
       dispatch(setCurrentUserProfileId(res.data.id));
+      dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
     });
   };
 }

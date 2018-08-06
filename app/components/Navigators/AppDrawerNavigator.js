@@ -61,7 +61,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
         screen: ForgotPasswordContainer
       },
       [getLocalRoute('app_myTrees')]: {
-        screen: isLoggedIn ? UserContributions : null
+        screen: isLoggedIn ? UserContributions : LoginContainer
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: DonationTreesContainer

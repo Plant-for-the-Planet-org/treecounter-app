@@ -23,11 +23,21 @@ export default (myTreesStyle = EStyleSheet.create({
   },
   listContainer: { backgroundColor: 'white', flex: 1 },
   contributionMapLegend: {
+    width: '100%',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
-    padding: 5,
-    alignSelf: 'flex-end'
+    padding: 5
+  },
+  image: {
+    height: 30,
+    width: 25
+  },
+  text: {
+    fontSize: '1rem',
+    '@media (min-width: 250) and (max-width: 350)': {
+      fontSize: '.7rem'
+    }
   }
 }));

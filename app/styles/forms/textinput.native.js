@@ -11,7 +11,7 @@ export default (textInputStyles = EStyleSheet.create({
     width: '100%',
     flexDirection: 'column'
   },
-  imageStyle: { width: 26, height: 26, resizeMode: 'center' },
+  imageStyle: { width: 26, height: 26, resizeMode: 'contain' },
   textboxStyle: {
     flex: 1,
     marginLeft: 10,

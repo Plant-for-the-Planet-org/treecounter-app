@@ -24,7 +24,9 @@ export default (tabbarStyles = EStyleSheet.create({
   tabItem: {
     flex: 1,
     alignItems: 'center',
-    padding: 10
+    padding: 10,
+    borderBottomColor: '#e6e6e6',
+    borderBottomWidth: 2
   },
   textActive: {
     color: '#ec6453',

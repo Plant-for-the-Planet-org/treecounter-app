@@ -36,6 +36,7 @@ import checkedIcon from './images/icons/checkbox_checked.png';
 import uncheckedIcon from './images/icons/checkbox_unchecked.png';
 import ProfilePic from './images/profile_pics.png';
 import EditGreen from './images/icons/edit_green.png';
+import EditOrange from './images/icons/edit_orange.png';
 import QuestionMarkGreen from './images/icons/questionmark_green.png';
 import country from './images/icons/country.png';
 import organization from './images/icons/organization.png';
@@ -76,7 +77,8 @@ import esriLogo from './images/logo_esri.png';
 import bmzLogo from './images/logo_bmz.jpg';
 import questionmark_orange from './images/icons/questionmark.png';
 import gift_icon from './images/icons/gift_icon.png';
-
+import iosSearchWhite from './images/icons/ios_icon_search_white.png';
+import iosNotificationWhite from './images/icons/ios_icon_notification_white.png';
 import map_legend_Restoration from './images/Legend_Restoration.png';
 import map_legend_Trees from './images/Legend_Trees.png';
 import map_legend_TreeDensity from './images/Legend_TreeDensity.png';
@@ -85,8 +87,10 @@ import foldin from './images/icons/foldin.png';
 import foldout from './images/icons/foldout.png';
 import userAvtar from './images/icons/user_avtar.png';
 import home from './images/icons/home.png';
+import svgBackground from './svgAssets/svg_background.png';
 
 export {
+  svgBackground,
   bmzLogo,
   esriLogo,
   pledge_highest,
@@ -172,5 +176,8 @@ export {
   foldin,
   foldout,
   userAvtar,
-  home
+  home,
+  EditOrange,
+  iosSearchWhite,
+  iosNotificationWhite
 };

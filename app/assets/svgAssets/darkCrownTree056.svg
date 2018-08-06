@@ -1,0 +1,24 @@
+<svg ref="canvas"
+  data-name="Layer 2"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 850 850">
+  <g ref="Baum_Klein">
+    <path
+            ref="t-crown-11"
+            styleUid="darkTreeCrown"       style="fill:#66922e;"
+            d="M154,388.9c5.4,0.8,9.1,5.8,8.4,11.2s-5.8,9.1-11.2,8.4c-5.4-0.8-9.1-5.7-8.4-11.1C143.6,391.9,148.6,388.1,154,388.9L154,388.9z"
+          />
+          <path
+            ref="t-shadow-11"
+            styleUid="darkTreeShadow"       style="fill:#50742b;"
+            d="M145.2,405.3c4.2,1.4,9.3,0.8,11.9-3.4c2.5-4.2,2.3-9.9-1.2-12.7c5.2,1.6,8.2,7.1,6.6,12.3c-1.4,4.7-6,7.6-10.8,6.9C147.1,408.1,145.2,405.3,145.2,405.3z"
+          />
+          <path
+            id="Stamm-11"
+            ref="t-stem-11"
+            data-seq="11"
+            styleUid="darkTreeStem"       style="fill:#2e411c;"
+            d="M166.2,399.7l-7.1-1l-4.3-4.8l-0.2,1.7l2,2.7l-4.9-0.7l0.6,1.7l5.7,0.8l-2.4,2.6l1.3,1.4l3.2-2.7c0,0,2,0.3,5.7,0.8C169.5,402.8,169.4,400.1,166.2,399.7z"
+          />
+  </g>
+</svg>

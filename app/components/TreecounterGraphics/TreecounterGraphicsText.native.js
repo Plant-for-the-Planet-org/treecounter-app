@@ -98,13 +98,6 @@ class TreecounterGraphicsText extends Component {
               </Text>
             ) : null}
           </View>
-          {this.props.trillion ? null : (
-            <View className="svg-text-container__row--col2">
-              {/* <ArrowButton
-                onToggle={e => this.setState({ ifPlantedDetails: e })}
-              /> */}
-            </View>
-          )}
         </View>
         {/* {this.state.ifPlantedDetails ? (
           <PlantedDetails

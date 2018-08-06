@@ -19,6 +19,7 @@ import DonateTrees from '../../containers/DonateTrees';
 import FAQContainer from '../../containers/FAQ';
 import RegisterTrees from '../../containers/RegisterTrees';
 import UserContributions from '../../containers/UserContributions';
+import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout.native';
 
 const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
@@ -51,7 +52,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
         screen: DonateTrees
       },
       [getLocalRoute('app_userHome')]: {
-        screen: Trillion
+        screen: isLoggedIn ? UserHomeContainer : LoginContainer
       },
       [getLocalRoute('app_registerTrees')]: {
         screen: isLoggedIn ? RegisterTrees : LoginContainer
@@ -60,11 +61,12 @@ export const getDrawerNavigator = function(isLoggedIn) {
         screen: ForgotPasswordContainer
       },
       [getLocalRoute('app_myTrees')]: {
-        screen: UserContributions
+        screen: isLoggedIn ? UserContributions : null
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: DonationTreesContainer
       },
+      [getLocalRoute('app_homepage')]: { screen: Trillion },
       [getLocalRoute('app_faq')]: FAQContainer
       // Search: {
       //   screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />,

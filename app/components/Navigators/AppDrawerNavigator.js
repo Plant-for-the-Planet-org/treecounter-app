@@ -36,7 +36,7 @@ const headerLabels = {
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees'
 };
 
-export const getDrawerNavigator = function(isLoggedIn, userProfile) {
+export const getDrawerNavigator = function(isLoggedIn) {
   const baseNavigator = StackNavigator(
     {
       [getLocalRoute('app_login')]: {

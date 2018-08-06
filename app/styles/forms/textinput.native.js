@@ -8,7 +8,8 @@ export default (textInputStyles = EStyleSheet.create({
     paddingBottom: 20
   },
   container: {
-    width: '100%'
+    width: '100%',
+    flexDirection: 'column'
   },
   imageStyle: { width: 26, height: 26, resizeMode: 'contain' },
   textboxStyle: {
@@ -16,8 +17,12 @@ export default (textInputStyles = EStyleSheet.create({
     marginLeft: 10,
     width: '80%',
     fontSize: 16,
-    color: '#000',
+    color: '#686060',
     borderBottomWidth: 1,
     borderColor: '#cecece'
+  },
+  emptyView: {
+    width: 26,
+    height: 26
   }
 }));

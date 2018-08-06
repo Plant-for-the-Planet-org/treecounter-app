@@ -1,20 +1,21 @@
 import { Text, View, Picker } from 'react-native';
 import React from 'react';
 import i18n from '../../locales/i18n';
+// import { Dropdown } from 'react-native-material-dropdown';
 
 export function SelectTemplate(locals) {
   let containerStyle = {
     paddingBottom: 20
   };
   let pickerStyle = {
-    marginLeft: 10,
+    marginLeft: 36,
     borderColor: '#cecece',
     borderBottomWidth: 1,
-    height: 45
+    height: 40
   };
   let itemStyle = {
-    color: '#cecece',
-    height: 45,
+    color: '#686060',
+    height: 40,
     textAlign: 'left',
     fontSize: 16
   };

@@ -14,7 +14,7 @@ export default (selectplantprojectSpecs = EStyleSheet.create({
     width: '100%',
     paddingTop: 10,
     flexDirection: 'row',
-    paddingLeft: 38
+    paddingLeft: 22
   },
   project_specs__taxdeductibleText: {
     fontSize: 13,
@@ -26,7 +26,7 @@ export default (selectplantprojectSpecs = EStyleSheet.create({
   },
 
   project_specs__item: {
-    width: 350,
+    width: '100%',
     paddingTop: 5,
     paddingRight: 15,
     paddingLeft: 5,
@@ -54,17 +54,13 @@ export default (selectplantprojectSpecs = EStyleSheet.create({
   },
 
   spec_icon__container: {
-    height: 15,
-    width: 15,
-    flex: 0.2,
-    marginVertical: 2,
-    justifyContent: 'center',
-    alignItems: 'center'
+    height: 17,
+    width: 17,
+    marginRight: 4
   },
   spec_icon: {
-    height: 15,
-    width: 15,
-    alignSelf: 'center',
-    justifyContent: 'center'
+    height: 17,
+    width: 17,
+    resizeMode: 'contain'
   }
 }));

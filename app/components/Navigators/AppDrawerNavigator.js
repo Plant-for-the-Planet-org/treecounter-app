@@ -61,11 +61,12 @@ export const getDrawerNavigator = function(isLoggedIn) {
         screen: ForgotPasswordContainer
       },
       [getLocalRoute('app_myTrees')]: {
-        screen: UserContributions
+        screen: isLoggedIn ? UserContributions : null
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: DonationTreesContainer
       },
+      [getLocalRoute('app_homepage')]: { screen: Trillion },
       [getLocalRoute('app_faq')]: FAQContainer
       // Search: {
       //   screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />,

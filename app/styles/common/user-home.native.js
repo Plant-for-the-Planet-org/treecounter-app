@@ -3,11 +3,11 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default (buttonStyles = EStyleSheet.create({
   homeContainer: {
     flex: 1,
-    flexDirection: 'column',
-    padding: 10
+    flexDirection: 'column'
   },
   userProfileContainer: {
     flexDirection: 'row',
+    padding: 10,
     marginBottom: 10
   },
   userInfo: {
@@ -16,6 +16,12 @@ export default (buttonStyles = EStyleSheet.create({
   },
   userInfoName: {
     marginBottom: 10
+  },
+  svgContainer: {
+    width: 370,
+    height: 370,
+    maxWidth: '100%',
+    maxHeight: '100%'
   },
   profileImageContainer: {
     width: 50,

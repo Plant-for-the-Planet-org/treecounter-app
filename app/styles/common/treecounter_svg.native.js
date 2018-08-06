@@ -1,13 +1,10 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const skyBlue = '#F5FCFF';
-
 export default (treecounterStyles = EStyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: skyBlue,
     width: '100%',
     height: '100%'
   },

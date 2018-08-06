@@ -21,7 +21,7 @@ import {
 class PlantProjectSpecs extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tootltipText: '', deducibleText: '' };
+    this.state = { tootltipText: 'dummy', deducibleText: ' ' };
   }
   componentDidMount() {
     if (this.props.taxDeduction && this.props.taxDeduction.length > 2) {
@@ -97,8 +97,10 @@ class PlantProjectSpecs extends React.Component {
           </Text>
           <ToolTip
             ref="tooltip"
-            actions={[{ text: this.state.tooltipText }]}
-            underlayColor={'blue'}
+            actions={[
+              { text: this.state.tooltipText ? this.state.tooltipText : '' }
+            ]}
+            underlayColor={'black'}
             style={styles.selectedName}
           >
             <Image

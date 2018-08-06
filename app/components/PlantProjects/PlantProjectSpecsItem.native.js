@@ -32,9 +32,11 @@ const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
           </ToolTip>
         ) : null}
       </View>
-      <View style={styles.project_specs__itemText}>
-        <Text style={styles.project_specs__itemText_right}>{value}</Text>
-      </View>
+      {value && (value !== undefined || value !== 'undefined') ? (
+        <View style={styles.project_specs__itemText}>
+          <Text style={styles.project_specs__itemText_right}>{value}</Text>
+        </View>
+      ) : null}
     </View>
   );
 };

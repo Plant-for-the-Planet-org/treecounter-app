@@ -15,20 +15,21 @@ export function TextInputTemplate(locals) {
   let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
   let error =
     locals.hasError && locals.error ? (
-      <Text accessibilityLiveRegion="polite" style={errorBlockStyle}>
-        {locals.error}
-      </Text>
+      <Text style={errorBlockStyle}>{locals.error}</Text>
     ) : null;
   return (
     <View style={styles.container}>
       <View style={styles.containerStyle}>
         {locals.config.iconUrl ? (
           <Image style={styles.imageStyle} source={locals.config.iconUrl} />
-        ) : null}
+        ) : (
+          <View style={styles.emptyView} />
+        )}
         <TextInput
           style={styles.textboxStyle}
           secureTextEntry={locals.secureTextEntry}
           placeholder={i18n.t(locals.placeholder)}
+          placeholderTextColor={'#686060'}
           keyboardType={locals.keyboardType}
           maxLength={locals.maxLength}
           multiline={locals.multiline}
@@ -40,7 +41,7 @@ export function TextInputTemplate(locals) {
           autoCapitalize={locals.autoCapitalize}
         />
       </View>
-      {error}
+      <View style={styles.errorStyle}>{error}</View>
     </View>
   );
 }

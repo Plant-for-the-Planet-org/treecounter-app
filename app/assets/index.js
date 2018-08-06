@@ -85,6 +85,8 @@ import map_legend_TreeDensity from './images/Legend_TreeDensity.png';
 import burgur_menu_icon from './images/icons/menu-icon.jpg';
 import foldin from './images/icons/foldin.png';
 import foldout from './images/icons/foldout.png';
+import userAvtar from './images/icons/user_avtar.png';
+import home from './images/icons/home.png';
 import svgBackground from './svgAssets/svg_background.png';
 
 export {
@@ -173,6 +175,8 @@ export {
   burgur_menu_icon,
   foldin,
   foldout,
+  userAvtar,
+  home,
   EditOrange,
   iosSearchWhite,
   iosNotificationWhite

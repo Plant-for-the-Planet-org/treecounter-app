@@ -2,18 +2,33 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
-    width: '100%',
-    flex: 1
+    flex: 1,
+    padding: 10
   },
   projectTeaserContainer: {
-    flex: 0.5,
-    flexBasis: 50
+    height: 250
   },
   projectSpecsContainer: {
-    flex: 0.3,
-    flexBasis: 40
+    height: 180
+  },
+  select_different_project_style: {
+    paddingTop: 10,
+    marginLeft: 20
+  },
+  select_different_project_style_text: {
+    color: '#ec6453',
+    fontSize: 13,
+    textAlign: 'center'
   },
   seeMoreContainer: {
-    alignSelf: 'center'
+    height: 40,
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  buttonContainer: {
+    height: 50
+  },
+  plantProjectDetails: {
+    flexGrow: 1
   }
 }));

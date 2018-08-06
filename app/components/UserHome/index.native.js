@@ -48,43 +48,37 @@ export default class UserHome extends Component {
 
   render() {
     const { treecounterData, userProfile } = this.props;
-    const profileType = userProfile
-      ? this.getProfileTypeName(userProfile.type)
-      : null;
+    const profileType = this.getProfileTypeName(userProfile.type);
     let { svgData } = this.state;
 
     return (
       <View style={styles.homeContainer}>
-        {userProfile ? (
-          <View>
-            <View style={styles.userProfileContainer}>
-              <View style={styles.profileImageContainer}>
-                <Image
-                  style={styles.profileImage}
-                  source={{
-                    uri: getImageUrl('profile', 'thumb', userProfile.image)
-                  }}
-                />
-              </View>
-
-              <View style={styles.userInfo}>
-                <View style={styles.userInfoName}>
-                  <Text style={styles.nameStyle}>{userProfile.fullname}</Text>
-                </View>
-                <View style={styles.userInfoProfileType}>
-                  <View style={styles.profileTypeContainer}>
-                    <Text style={styles.profileTypeStyle}>{profileType}</Text>
-                  </View>
-                </View>
-              </View>
+        <View>
+          <View style={styles.userProfileContainer}>
+            <View style={styles.profileImageContainer}>
+              <Image
+                style={styles.profileImage}
+                source={{
+                  uri: getImageUrl('profile', 'thumb', userProfile.image)
+                }}
+              />
             </View>
-            <View style={styles.svgContainer}>
-              <SvgContainer {...svgData} />>
+
+            <View style={styles.userInfo}>
+              <View style={styles.userInfoName}>
+                <Text style={styles.nameStyle}>{userProfile.fullname}</Text>
+              </View>
+              <View style={styles.userInfoProfileType}>
+                <View style={styles.profileTypeContainer}>
+                  <Text style={styles.profileTypeStyle}>{profileType}</Text>
+                </View>
+              </View>
             </View>
           </View>
-        ) : (
-          <LoadingIndicator />
-        )}
+          <View style={styles.svgContainer}>
+            <SvgContainer {...svgData} />>
+          </View>
+        </View>
       </View>
     );
   }

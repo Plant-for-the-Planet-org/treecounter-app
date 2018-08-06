@@ -6,6 +6,7 @@ import { getDrawerNavigator } from '../../components/Navigators/AppDrawerNavigat
 import { getAccessToken } from '../../utils/user';
 import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
+import { currentUserProfileSelector } from '../../selectors';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 
 class AppDrawerNavigatorContainer extends Component {
@@ -58,7 +59,7 @@ const mapStateToProps = state => {
   console.log('state', state);
   return {
     appDrawer: state.appDrawer,
-    userProfile: state.entities.userProfile
+    userProfile: currentUserProfileSelector(state)
   };
 };
 

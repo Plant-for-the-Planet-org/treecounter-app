@@ -50,7 +50,8 @@ export default {
           pattern: '.{2,}',
           maxLength: 50,
           minLength: 2,
-          propertyOrder: 1
+          propertyOrder: 1,
+          icon: 'userAvtar'
         },
         lastname: {
           type: 'string',
@@ -62,7 +63,8 @@ export default {
           pattern: '.{2,}',
           maxLength: 50,
           minLength: 2,
-          propertyOrder: 2
+          propertyOrder: 2,
+          icon: 'userAvtar'
         },
         email: {
           type: 'string',
@@ -72,6 +74,7 @@ export default {
           },
           widget: 'email',
           maxLength: 50,
+          icon: 'email',
           propertyOrder: 3
         },
         address: {
@@ -80,6 +83,7 @@ export default {
           attr: {
             maxlength: 255
           },
+          icon: 'home',
           maxLength: 255,
           propertyOrder: 4
         },
@@ -361,7 +365,7 @@ export default {
           ],
           enum_titles: [
             'Afghanistan',
-            'Åland Islands',
+            '\u00c5land Islands',
             'Albania',
             'Algeria',
             'American Samoa',
@@ -417,10 +421,10 @@ export default {
             'Congo - Kinshasa',
             'Cook Islands',
             'Costa Rica',
-            'Côte d’Ivoire',
+            'C\u00f4te d\u2019Ivoire',
             'Croatia',
             'Cuba',
-            'Curaçao',
+            'Cura\u00e7ao',
             'Cyprus',
             'Czechia',
             'Denmark',
@@ -543,13 +547,13 @@ export default {
             'Portugal',
             'Puerto Rico',
             'Qatar',
-            'Réunion',
+            'R\u00e9union',
             'Romania',
             'Russia',
             'Rwanda',
             'Samoa',
             'San Marino',
-            'São Tomé & Príncipe',
+            'S\u00e3o Tom\u00e9 & Pr\u00edncipe',
             'Saudi Arabia',
             'Senegal',
             'Serbia',
@@ -567,7 +571,7 @@ export default {
             'South Sudan',
             'Spain',
             'Sri Lanka',
-            'St. Barthélemy',
+            'St. Barth\u00e9lemy',
             'St. Helena',
             'St. Kitts & Nevis',
             'St. Lucia',
@@ -618,6 +622,7 @@ export default {
           ],
           type: 'string',
           title: 'label.country',
+          attr: { maxlength: 2 },
           propertyOrder: 7
         }
       },
@@ -655,7 +660,8 @@ export default {
           pattern: '.{2,}',
           maxLength: 50,
           minLength: 2,
-          propertyOrder: 2
+          propertyOrder: 2,
+          icon: 'userAvtar'
         },
         lastname: {
           type: 'string',
@@ -667,7 +673,8 @@ export default {
           pattern: '.{2,}',
           maxLength: 50,
           minLength: 2,
-          propertyOrder: 3
+          propertyOrder: 3,
+          icon: 'userAvtar'
         },
         email: {
           type: 'string',
@@ -676,6 +683,7 @@ export default {
             maxlength: 50
           },
           widget: 'email',
+          icon: 'email',
           maxLength: 50,
           propertyOrder: 4
         },
@@ -686,7 +694,8 @@ export default {
             maxlength: 255
           },
           maxLength: 255,
-          propertyOrder: 5
+          propertyOrder: 5,
+          icon: 'home'
         },
         zipCode: {
           type: 'string',

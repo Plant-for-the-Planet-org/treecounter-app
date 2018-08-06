@@ -104,39 +104,36 @@ export default class SelectPlantProject extends Component {
   render() {
     let { featuredProjects } = this.state;
     return (
-      <ScrollView>
-        <CardLayout style={{ width: 350, flex: 1 }}>
-          <View style={styles.cardContent}>
-            <Slick style={styles.slickWrapper} showsPagination={false}>
-              {featuredProjects.length !== 0
-                ? featuredProjects.map(project => (
-                    <View key={project.id} style={styles.plantProjectContent}>
-                      <View style={styles.plantProjectContentFull}>
-                        <PlantProjectFull
-                          callExpanded={() => this.callExpanded()}
-                          expanded={false}
-                          plantProject={project}
-                          tpoName={project.tpo_name}
-                        />
-                      </View>
-                      <View style={styles.footer}>
-                        <PrimaryButton
-                          onClick={() =>
-                            this.onSelectClickedFeaturedProjects(project.id)
-                          }
-                          buttonStyle={styles.plantProjectSelectButtonStyle}
-                          textStyle={styles.plantProjectSelectTextStyle}
-                        >
-                          {i18n.t('label.select_project')}
-                        </PrimaryButton>
-                      </View>
-                    </View>
-                  ))
-                : null}
-            </Slick>
-          </View>
-        </CardLayout>
-      </ScrollView>
+      <Slick
+        style={styles.slickWrapper}
+        showsPagination={true}
+        paginationStyle={{
+          position: 'absolute',
+          top: 0,
+          bottom: 490,
+          elevation: 9
+        }}
+        activeDotStyle={{
+          backgroundColor: '#b9d384'
+        }}
+      >
+        {featuredProjects.length !== 0
+          ? featuredProjects.map(project => (
+              <ScrollView key={project.id}>
+                <PlantProjectFull
+                  key={'projectFull' + project.id}
+                  callExpanded={() => this.callExpanded()}
+                  expanded={false}
+                  plantProject={project}
+                  onSelectClickedFeaturedProjects={id =>
+                    this.onSelectClickedFeaturedProjects(id)
+                  }
+                  tpoName={project.tpo_name}
+                />
+              </ScrollView>
+            ))
+          : null}
+      </Slick>
     );
   }
 }

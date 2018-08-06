@@ -23,12 +23,18 @@ export default (filledTabBar = EStyleSheet.create({
   },
   textActive: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: '1.1rem',
+    '@media (min-width: 250) and (max-width: 350)': {
+      fontSize: '.8rem'
+    },
     padding: 10
   },
   text: {
     color: '$colorPrimaryAccentLight',
     padding: 10,
-    fontSize: 18
+    fontSize: '1.1rem',
+    '@media (min-width: 250) and (max-width: 350)': {
+      fontSize: '.8rem'
+    }
   }
 }));

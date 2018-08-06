@@ -7,13 +7,25 @@ export default (buttonStyles = EStyleSheet.create({
     borderColor: '$primary',
     borderWidth: 1,
     borderRadius: 6,
+    padding: 10,
+    margin: 5,
     alignItems: 'center',
     justifyContent: 'center'
   },
   primaryButtonText: {
     fontSize: 25,
-    color: 'white',
-    width: '100%',
-    textAlign: 'center'
+    color: 'white'
+    // width: '100%',
+    // textAlign: 'center'
+  },
+  textContainer: {
+    // width: '100%',
+    flexDirection: 'row'
+    // justifyContent: 'center',
+    // alignItems: 'center'
+  },
+  image: {
+    height: 30,
+    width: 30
   }
 }));

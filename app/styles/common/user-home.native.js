@@ -1,4 +1,12 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
+
+//Only take multiple of 10s
+const squareDimension =
+  Math.floor(
+    Math.min(Dimensions.get('window').width, Dimensions.get('window').height) /
+      10
+  ) * 10;
 
 export default (buttonStyles = EStyleSheet.create({
   homeContainer: {
@@ -18,8 +26,8 @@ export default (buttonStyles = EStyleSheet.create({
     marginBottom: 10
   },
   svgContainer: {
-    width: 370,
-    height: 370,
+    width: squareDimension,
+    height: squareDimension,
     maxWidth: '100%',
     maxHeight: '100%'
   },

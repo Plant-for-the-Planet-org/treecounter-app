@@ -1,4 +1,12 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
+
+//Only take multiple of 10s
+const squareDimension =
+  Math.floor(
+    Math.min(Dimensions.get('window').width, Dimensions.get('window').height) /
+      10
+  ) * 10;
 
 export default (treecounterStyles = EStyleSheet.create({
   container: {
@@ -56,8 +64,8 @@ export default (treecounterStyles = EStyleSheet.create({
     width: '100%'
   },
   svgContainer: {
-    width: 400,
-    height: 400
+    width: squareDimension,
+    height: squareDimension
   },
   svgTextContainer: {
     flexDirection: 'column',

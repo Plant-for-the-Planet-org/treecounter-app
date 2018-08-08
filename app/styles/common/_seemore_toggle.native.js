@@ -1,9 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (donateTreesStyles = EStyleSheet.create({
-  see_more_toggle__container: {
-    paddingTop: 10
-  },
+  see_more_toggle__container: {},
   expandedText: {
     color: '$primary',
     textAlign: 'center',

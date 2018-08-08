@@ -1,0 +1,96 @@
+import React, { Component } from 'react';
+import { View, ScrollView, Dimensions } from 'react-native';
+import styles from '../../../styles/selectplantproject/selectplantproject';
+import i18n from '../../../locales/i18n.js';
+
+import Slick from 'react-native-slick';
+import PlantProjectFull from '../../PlantProjects/PlantProjectFull';
+import PrimaryButton from '../../Common/Button/PrimaryButton.native';
+import CardLayout from '../../Common/Card/CardLayout';
+
+export default class FeaturedProjects extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      expanded: false,
+      pageIndex: 0,
+      featuredProjects: props.plantProjects
+    };
+  }
+  componentWillMount() {
+    let { plantProjects } = this.props;
+
+    let featuredProjects = plantProjects.reduce((projects, project) => {
+      if (project.isFeatured) {
+        projects.push(project);
+      }
+      return projects;
+    }, []);
+    this.setState({
+      featuredProjects: featuredProjects
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let { plantProjects } = nextProps;
+    let featuredProjects = plantProjects.reduce((projects, project) => {
+      if (project.isFeatured) {
+        projects.push(project);
+      }
+      return projects;
+    }, []);
+    this.setState({
+      featuredProjects: featuredProjects
+    });
+  }
+
+  onSelectClickedFeaturedProjects = id => {
+    this.props.selectProject(id);
+  };
+
+  callExpanded = () => {
+    this.setState({
+      expanded: !this.state.expanded
+    });
+  };
+
+  render() {
+    let { featuredProjects } = this.state;
+    return (
+      <Slick
+        style={styles.slickWrapper}
+        showsPagination={true}
+        paginationStyle={{
+          position: 'absolute',
+          top: 80,
+          bottom: 490,
+
+          elevation: 9,
+          height: 20,
+          backgroundColor: 'rgba(52, 52, 52, 0.8)'
+        }}
+        activeDotStyle={{
+          backgroundColor: '#b9d384'
+        }}
+      >
+        {featuredProjects.length !== 0
+          ? featuredProjects.map(project => (
+              <ScrollView key={project.id}>
+                <PlantProjectFull
+                  key={'projectFull' + project.id}
+                  callExpanded={() => this.callExpanded()}
+                  expanded={false}
+                  plantProject={project}
+                  onSelectClickedFeaturedProjects={id =>
+                    this.onSelectClickedFeaturedProjects(id)
+                  }
+                  tpoName={project.tpo_name}
+                />
+              </ScrollView>
+            ))
+          : null}
+      </Slick>
+    );
+  }
+}

@@ -88,6 +88,7 @@ import foldout from './images/icons/foldout.png';
 import userAvtar from './images/icons/user_avtar.png';
 import home from './images/icons/home.png';
 import svgBackground from './svgAssets/svg_background.png';
+import imageUpload from './images/icons/upload_image.png';
 
 export {
   svgBackground,
@@ -179,5 +180,6 @@ export {
   home,
   EditOrange,
   iosSearchWhite,
-  iosNotificationWhite
+  iosNotificationWhite,
+  imageUpload
 };

@@ -2,6 +2,7 @@ import { Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { imageUpload } from '../../assets';
 import i18n from '../../locales/i18n';
+import styles from '../../styles/file_picker.native';
 
 const ImagePicker = require('react-native-image-picker');
 const options = {
@@ -14,7 +15,7 @@ const options = {
 
 export function FilePickerTemplate(locals) {
   return (
-    <View>
+    <View style={styles.filePickerContainer}>
       <TouchableOpacity
         onPress={event => {
           ImagePicker.showImagePicker(options, response => {
@@ -34,15 +35,19 @@ export function FilePickerTemplate(locals) {
         }}
       >
         <Image source={imageUpload} style={{ height: 100, width: 100 }} />
-        {!locals.value ? (
-          <Text>{i18n.t('label.select_file')}</Text>
-        ) : (
-          <Image
-            source={{ uri: locals.value }}
-            style={{ height: 100, width: 100, marginLeft: 20 }}
-          />
-        )}
       </TouchableOpacity>
+      {!locals.value ? (
+        <Text>{i18n.t('label.select_file')}</Text>
+      ) : (
+        <Image
+          source={
+            !locals.value.includes('base64')
+              ? getImageUrl('project', 'small', locals.value)
+              : { uri: locals.value }
+          }
+          style={{ height: 100, width: 100, marginLeft: 20 }}
+        />
+      )}
     </View>
   );
 }

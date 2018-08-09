@@ -4,8 +4,7 @@ export default (datePickerStyle = EStyleSheet.create({
   filePickerContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 10
+    alignItems: 'center'
   },
   underlineStyle: {
     height: 2,

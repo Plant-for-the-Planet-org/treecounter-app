@@ -78,6 +78,7 @@ import bmzLogo from './images/logo_bmz.jpg';
 import questionmark_orange from './images/icons/questionmark.png';
 import gift_icon from './images/icons/gift_icon.png';
 import iosSearchWhite from './images/icons/ios_icon_search_white.png';
+import iosSearchGreen from './images/icons/ios_icon_search_green.png';
 import iosNotificationWhite from './images/icons/ios_icon_notification_white.png';
 import map_legend_Restoration from './images/Legend_Restoration.png';
 import map_legend_Trees from './images/Legend_Trees.png';
@@ -88,6 +89,7 @@ import foldout from './images/icons/foldout.png';
 import userAvtar from './images/icons/user_avtar.png';
 import home from './images/icons/home.png';
 import svgBackground from './svgAssets/svg_background.png';
+import imageUpload from './images/icons/upload_image.png';
 
 export {
   svgBackground,
@@ -179,5 +181,7 @@ export {
   home,
   EditOrange,
   iosSearchWhite,
-  iosNotificationWhite
+  iosNotificationWhite,
+  imageUpload,
+  iosSearchGreen
 };

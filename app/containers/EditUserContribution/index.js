@@ -10,13 +10,17 @@ import EditUserContribution from '../../components/EditUserContribution';
 import { sortedUserContributionsSelector } from '../../selectors/index';
 
 class EditUserContributionsContainer extends React.Component {
-  onSubmit = () => {
-    let value = this.refs.editTrees.refs.editTreeForm.getValue();
+  onSubmit = (mode, registerTreeForm) => {
+    registerTreeForm =
+      registerTreeForm || this.refs.editTrees.refs.editTreeForm;
+    const value = registerTreeForm.getValue();
+    const { props } = this;
     if (value) {
       let plantContribution = { plant_contribution: value };
-      this.props.editTree(
+      const treeID = props.editTree(
         plantContribution,
-        this.props.match.params.selectedTreeId
+        (props.match && props.match.params.selectedTreeId) ||
+          (props.navigation && props.navigation.getParam('selectedTreeId'))
       );
     }
   };

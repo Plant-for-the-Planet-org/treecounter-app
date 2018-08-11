@@ -9,14 +9,14 @@ import {
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
-import { iosSearchWhite } from '../../assets';
+import { iosSearchGreen } from '../../assets';
 import styles, {
   SearchContainerWidth
 } from '../../styles/header/search_bar.native';
 
 const SearchIcon = () => (
   <View style={styles.searchIconContainer}>
-    <Image source={iosSearchWhite} style={styles.searchIcon} />
+    <Image source={iosSearchGreen} style={styles.searchIcon} />
   </View>
 );
 

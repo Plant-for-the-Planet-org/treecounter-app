@@ -23,10 +23,18 @@ class EditUserContributionsContainer extends React.Component {
 
   render() {
     let { props } = this;
-    let userContribution = props.userContributions.filter(
-      contribution =>
-        contribution.id == parseInt(props.match.params.selectedTreeId)
-    )[0];
+    let userContribution = null;
+    if (props.match) {
+      userContribution = props.userContributions.filter(
+        contribution =>
+          contribution.id == parseInt(props.match.params.selectedTreeId)
+      )[0];
+    } else if (props.navigation) {
+      userContribution = props.navigation.getParam(
+        'contribution',
+        userContribution
+      );
+    }
     return (
       <EditUserContribution
         ref={'editTrees'}
@@ -56,5 +64,5 @@ EditUserContributionsContainer.propTypes = {
     params: PropTypes.shape({
       selectedTreeId: PropTypes.string
     })
-  }).isRequired
+  })
 };

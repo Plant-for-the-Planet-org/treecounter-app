@@ -1,5 +1,5 @@
 import { normalize } from 'normalizr';
-import { NotificationManager } from 'react-notifications';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { putAuthenticatedRequest } from '../utils/api';
 
 import { updateRoute } from '../helpers/routerHelper';

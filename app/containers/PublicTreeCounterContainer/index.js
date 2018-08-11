@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import updateRoute from '../../helpers/routerHelper';
 import PublicTreecounter from '../../components/PublicTreeCounter/PublicTreecounter';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 
@@ -48,13 +49,25 @@ class PublicTreecounterContainer extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      route: (routeName, id, params) => dispatch =>
+        updateRoute(routeName, dispatch, id, params)
+    },
+    dispatch
+  );
+};
+
 const mapStateToProps = function(state) {
   return {
     userTpos: state.entities.tpo
   };
 };
 
-export default connect(mapStateToProps)(PublicTreecounterContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  PublicTreecounterContainer
+);
 
 import PropTypes from 'prop-types';
 PublicTreecounterContainer.propTypes = {

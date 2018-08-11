@@ -1,4 +1,7 @@
 import React from 'react';
+import { View, Text } from 'react-native';
+import buttonStyles from '../../../styles/common/button';
+
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n';
 
@@ -8,16 +11,16 @@ const FollowLabelButton = ({ isLoggedIn, isSubscribed, onClick }) => {
     : i18n.t('label.subscribe');
 
   return (
-    <button
-      className={
+    <View
+      style={
         isLoggedIn && isSubscribed
-          ? 'pftp-button-following'
-          : 'pftp-button-follow'
+          ? buttonStyles.followingButton
+          : buttonStyles.followButton
       }
       onClick={() => onClick()}
     >
       {label}
-    </button>
+    </View>
   );
 };
 

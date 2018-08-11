@@ -17,7 +17,12 @@ import CardLayout from '../../components/Common/Card/CardLayout';
 import { followUser, unfollowUser } from '../../actions/followActions';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { history } from '../Common/BrowserRouter';
-import { getProfileTypeName } from './utils';
+import {
+  getProfileTypeName,
+  isMyself,
+  isUserFollower,
+  amISupporting
+} from './utils';
 import i18n from '../../locales/i18n';
 
 class PublicTreeCounter extends React.Component {
@@ -33,41 +38,11 @@ class PublicTreeCounter extends React.Component {
   }
 
   //------------------------------------------------------------------------------------------------------------
-  // HELPER METHODS
-  //------------------------------------------------------------------------------------------------------------
-  isMyself() {
-    const { treecounter, currentUserProfile } = this.props;
-    return (
-      null !== currentUserProfile &&
-      currentUserProfile.treecounter.id === treecounter.id
-    );
-  }
-
-  isUserFollower() {
-    const { treecounter, currentUserProfile } = this.props;
-    const followeeIds =
-      currentUserProfile && currentUserProfile.treecounter.followeeIds
-        ? currentUserProfile.treecounter.followeeIds
-            .split(',')
-            .map(s => parseInt(s))
-        : [];
-    return followeeIds.includes(treecounter.id);
-  }
-
-  amISupporting() {
-    const { treecounter, currentUserProfile } = this.props;
-    return currentUserProfile
-      ? currentUserProfile.supported_treecounter &&
-          currentUserProfile.supported_treecounter.id === treecounter.id
-      : false;
-  }
-
-  //------------------------------------------------------------------------------------------------------------
   // ACTION METHODS
   //------------------------------------------------------------------------------------------------------------
   onFollowChanged() {
     if (null !== this.props.currentUserProfile) {
-      this.isUserFollower()
+      isUserFollower()
         ? this.props.unfollowSubscribeAction(this.props.treecounter.id)
         : this.props.followSubscribeAction(this.props.treecounter.id);
     } else {
@@ -113,12 +88,12 @@ class PublicTreeCounter extends React.Component {
 
     const { userProfile, displayName: caption } = treecounter;
     const { type: profileType, image: logo } = userProfile;
-    const isUserFollower = this.isUserFollower();
+    const isUserFollower = isUserFollower();
     const isUserLoggedIn = null !== currentUserProfile;
-    const showFollow = !this.isMyself();
+    const showFollow = !isMyself();
 
     const supportProps = {
-      active: !this.amISupporting(),
+      active: !amISupporting(),
       isUserLoggedIn,
       caption
     };
@@ -144,7 +119,7 @@ class PublicTreeCounter extends React.Component {
             followChanged={this.onFollowChanged}
           />
           {'tpo' !== userProfile.type &&
-            !this.isMyself() && (
+            !isMyself() && (
               <div className="support-button-container ">
                 <SupportButton
                   {...supportProps}

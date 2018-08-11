@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getImageUrl } from '../../actions/apiRouting';
-import { View, Text, Image } from 'react-native';
-import styles from '../../styles/common/user-home';
+import { View, Text, Image, ImageBackground } from 'react-native';
+import styles from '../../styles/user-home';
 import i18n from '../../locales/i18n';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -47,6 +47,7 @@ export default class UserHome extends Component {
                   uri: getImageUrl('profile', 'thumb', userProfile.image)
                 }}
               />
+              <View style={styles.circle} />
             </View>
 
             <View style={styles.userInfo}>

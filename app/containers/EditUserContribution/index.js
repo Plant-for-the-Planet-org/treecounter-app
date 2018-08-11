@@ -20,7 +20,8 @@ class EditUserContributionsContainer extends React.Component {
       const treeID = props.editTree(
         plantContribution,
         (props.match && props.match.params.selectedTreeId) ||
-          (props.navigation && props.navigation.getParam('selectedTreeId'))
+          (props.navigation && props.navigation.getParam('selectedTreeId')),
+        this.props.navigation
       );
     }
   };

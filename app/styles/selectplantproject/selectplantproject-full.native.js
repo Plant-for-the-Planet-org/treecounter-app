@@ -2,7 +2,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
-    flex: 1,
+    height: 800,
     padding: 10
   },
   projectTeaserContainer: {

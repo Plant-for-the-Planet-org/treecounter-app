@@ -22,7 +22,7 @@ import { getPaymentStatus } from '../../reducers/paymentStatus';
 
 class DonationTreesContainer extends Component {
   componentDidMount() {
-    // this.props.selectPlantProjectAction(1);
+    //  this.props.selectPlantProjectAction(1);
     this.props.fetchCurrencies();
     console.log('In donate Tree Route' + this.props.navigation);
     console.log(this.props.navigation);
@@ -33,6 +33,7 @@ class DonationTreesContainer extends Component {
   }
   render() {
     let flag = this.props.currentUserProfile ? true : false;
+    console.log('donate tree called');
     return (
       <DonateTrees
         ref={'donateTreesContainer'}

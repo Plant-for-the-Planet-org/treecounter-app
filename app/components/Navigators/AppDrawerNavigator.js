@@ -1,4 +1,4 @@
-import { DrawerNavigator, StackNavigator } from 'react-navigation';
+import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
 import React from 'react';
 import { Animated } from 'react-native';
 import Trillion from '../TreecounterGraphics/Trillion';
@@ -39,7 +39,7 @@ const headerLabels = {
 };
 
 export const getDrawerNavigator = function(isLoggedIn) {
-  const baseNavigator = StackNavigator(
+  const baseNavigator = createStackNavigator(
     {
       [getLocalRoute('app_login')]: {
         screen: LoginContainer
@@ -103,7 +103,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
       }
     }
   );
-  const searchNavigator = StackNavigator(
+  const searchNavigator = createStackNavigator(
     {
       Search: {
         screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />
@@ -122,7 +122,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
       }
     }
   );
-  const AppDrawerNavigator = DrawerNavigator(
+  const AppDrawerNavigator = createDrawerNavigator(
     {
       baseNavigator,
       searchNavigator: searchNavigator

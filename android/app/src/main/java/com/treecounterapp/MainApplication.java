@@ -3,8 +3,8 @@ package com.treecounterapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.imagepicker.ImagePickerPackage;
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.horcrux.svg.SvgPackage;
 import com.reactlibrary.RNTooltipsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -27,9 +27,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNI18nPackage(),
             new ImagePickerPackage(),
-            new SvgPackage(),
+            new RNI18nPackage(),
+            new SvgPackage()
             new RNTooltipsPackage()
       );
     }

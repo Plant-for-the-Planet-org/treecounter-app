@@ -1,6 +1,13 @@
-import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  Image
+} from 'react-native';
 import React from 'react';
 import i18n from '../../locales/i18n';
+import { close_green } from '../../assets';
 
 const styles = {
   addButtonStyle: {
@@ -70,10 +77,22 @@ function renderRowWithoutButtons(item) {
 }
 
 function renderRowButton(button, stylesheet, style, title) {
+  if (button.type == 'remove') {
+    return (
+      <TouchableOpacity
+        key={button.type}
+        style={[style.addButtonStyle]}
+        onPress={button.click}
+        underlayColor={'#f2f2f2'}
+      >
+        <Image source={close_green} />
+      </TouchableOpacity>
+    );
+  }
   return (
     <TouchableHighlight
       key={button.type}
-      style={[stylesheet.button, style.addButtonStyle]}
+      style={[style.addButtonStyle]}
       onPress={button.click}
       underlayColor={'#f2f2f2'}
     >
@@ -96,11 +115,16 @@ function renderButtonGroup(buttons, stylesheet) {
 
 function renderRow(item, stylesheet) {
   return (
-    <View key={item.key} style={{ flexDirection: 'row' }}>
-      <View style={{ flex: 1 }}>{item.input}</View>
-      <View style={{ flex: 1 }}>
-        {renderButtonGroup(item.buttons, stylesheet)}
-      </View>
+    <View
+      key={item.key}
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+      }}
+    >
+      <View style={{ marginRight: 5 }}>{item.input}</View>
+      <View>{renderButtonGroup(item.buttons, stylesheet)}</View>
     </View>
   );
 }

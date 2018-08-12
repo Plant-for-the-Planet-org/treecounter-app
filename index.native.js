@@ -1,8 +1,10 @@
 import { AppRegistry, Platform } from 'react-native';
 import App from './app/components/App';
-
+import './ReactotronConfig';
 /* app.js */
 import EStyleSheet from 'react-native-extended-stylesheet';
+
+console.disableYellowBox = false;
 
 // import {
 //   setCustomView,

@@ -24,8 +24,13 @@ class DonationTreesContainer extends Component {
   componentDidMount() {
     // this.props.selectPlantProjectAction(1);
     this.props.fetchCurrencies();
+    console.log('In donate Tree Route' + this.props.navigation);
+    console.log(this.props.navigation);
   }
 
+  onTabChange(title) {
+    this.props.navigation.setParams({ titleParam: title });
+  }
   render() {
     let flag = this.props.currentUserProfile ? true : false;
     return (
@@ -38,6 +43,7 @@ class DonationTreesContainer extends Component {
         donate={(donationContribution, plantProjectId) =>
           this.props.donate(donationContribution, plantProjectId, flag)
         }
+        onTabChange={title => this.onTabChange(title)}
         supportTreecounter={this.props.supportTreecounter}
         paymentStatus={this.props.paymentStatus}
         paymentClear={this.props.paymentClear}
@@ -75,6 +81,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 DonationTreesContainer.propTypes = {
   selectedProject: PropTypes.object,
+  navigation: PropTypes.object,
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,

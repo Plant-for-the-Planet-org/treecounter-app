@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 
 import ContributionCardList from './ContributionCardList';
 import ContributionsMapLegend from './ContributionsMapLegend';
-import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card/CardLayout';
-import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n.js';
 import {
   Text,
@@ -14,7 +11,7 @@ import {
   Animated,
   ScrollView
 } from 'react-native';
-import styles from '../../styles/my_trees.native';
+import styles from '../../styles/myTrees/my_trees.native';
 import tabBarStyles from '../../styles/common/tabbar.native';
 
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -75,6 +72,7 @@ export default class UserContributions extends React.Component {
         return (
           <View {...this.props} style={styles.mapContainer}>
             <Text>Map</Text>
+
             <ContributionsMapLegend />
           </View>
         );
@@ -82,14 +80,17 @@ export default class UserContributions extends React.Component {
       case 'list':
         return (
           <View {...this.props} style={styles.listContainer}>
-            <Text>Tree List under progress</Text>
+            <ScrollView>
+              <ContributionCardList
+                contributions={this.props.userContributions}
+              />
+            </ScrollView>
           </View>
         );
         break;
         return null;
     }
   };
-  xw;
 
   render() {
     const { userProfileId, userContributions } = this.props;
@@ -110,6 +111,7 @@ export default class UserContributions extends React.Component {
           </PrimaryButton>
         </View>
         <TabView
+          useNativeDriver={true}
           navigationState={this.state}
           renderScene={this._renderScene}
           renderTabBar={this._renderTabBar}

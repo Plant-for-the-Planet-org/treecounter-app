@@ -9,7 +9,9 @@ const SupportButton = ({ active, isUserLoggedIn, onRegisterSupporter }) => {
     <div className="gift-icon">
       <div className="display-text">
         <SecondaryButton
-          onClick={() => (isUserLoggedIn ? onRegisterSupporter() : null)}
+          onClick={() =>
+            isUserLoggedIn && active ? onRegisterSupporter() : null
+          }
         >
           {i18n.t('label.support')}
           {/* <span className="support-button-caption">{caption}</span> */}
@@ -18,7 +20,9 @@ const SupportButton = ({ active, isUserLoggedIn, onRegisterSupporter }) => {
       <div className="display-icon">
         <img
           src={gift_icon}
-          onClick={() => (isUserLoggedIn ? onRegisterSupporter() : null)}
+          onClick={() =>
+            isUserLoggedIn && active ? onRegisterSupporter() : null
+          }
         />
       </div>
     </div>

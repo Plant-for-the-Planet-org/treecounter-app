@@ -55,7 +55,7 @@ export async function getSessionId() {
 }
 
 export async function getRequest(route, params, authenticated = false) {
-  let url = await getApiRoute(route, params);
+  let url = getApiRoute(route, params);
   return await axios
     .get(url, await getHeaders(authenticated))
     .then(checkStatus)

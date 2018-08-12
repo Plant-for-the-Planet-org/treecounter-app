@@ -1,21 +1,13 @@
 const routes = require('../server/routes/fos_js_routes.json');
-
 import Routing from './router.min.js';
-import { context, initialProps } from '../config';
+import { context } from '../config';
+import { getLocale } from './getLocale';
 
 Routing.setRoutingData(routes);
 
-export const getApiRoute = async (routeName, params) => {
+export const getApiRoute = (routeName, params) => {
   const { scheme, host, base: baseUrl } = context;
-  let locale;
-  if (navigator) {
-    let userLang = navigator.language || navigator.userLanguage;
-    locale = userLang.split('-')[0];
-  } else {
-    locale = await getLanguages.then(languages => {
-      languages[0].split('-')[0]; // ['en-US', 'en']
-    });
-  }
+  let locale = getLocale();
   const serverName = `${scheme}://${host}`;
   params =
     'api_login_check' === routeName

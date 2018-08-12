@@ -5,9 +5,17 @@ import { context, initialProps } from '../config';
 
 Routing.setRoutingData(routes);
 
-export const getApiRoute = (routeName, params) => {
+export const getApiRoute = async (routeName, params) => {
   const { scheme, host, base: baseUrl } = context;
-  const { locale } = initialProps;
+  let locale;
+  if (navigator) {
+    let userLang = navigator.language || navigator.userLanguage;
+    locale = userLang.split('-')[0];
+  } else {
+    locale = await getLanguages.then(languages => {
+      languages[0].split('-')[0]; // ['en-US', 'en']
+    });
+  }
   const serverName = `${scheme}://${host}`;
   params =
     'api_login_check' === routeName
@@ -22,10 +30,8 @@ export const getApiRoute = (routeName, params) => {
 
 export const getLocalRoute = (routeName, params) => {
   const { base: baseUrl } = context;
-  const { locale } = initialProps;
 
   const url = `${baseUrl}${Routing.generate(routeName, {
-    _locale: locale,
     ...params
   })}`;
   return url;

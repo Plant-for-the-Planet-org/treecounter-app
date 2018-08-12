@@ -17,7 +17,7 @@ import {
   amISupporting
 } from './utils';
 
-export default class PublicTreeCounter extends React.Component {
+class PublicTreeCounter extends React.Component {
   constructor(props) {
     super(props);
 
@@ -80,7 +80,7 @@ export default class PublicTreeCounter extends React.Component {
 
     const { userProfile, displayName: caption } = treecounter;
     const { type: profileType, image: logo } = userProfile;
-    const isUserFollower = isUserFollower(treecounter, currentUserProfile);
+    const isUserFollowerBool = isUserFollower(treecounter, currentUserProfile);
     const isUserLoggedIn = null !== currentUserProfile;
     const showFollow = !isMyself(treecounter, currentUserProfile);
 
@@ -93,7 +93,7 @@ export default class PublicTreeCounter extends React.Component {
       caption,
       profileType: getProfileTypeName(profileType),
       logo,
-      isUserFollower,
+      isUserFollowerBool,
       isUserLoggedIn,
       showFollow
     };
@@ -153,3 +153,5 @@ PublicTreeCounter.propTypes = {
   supportTreecounterAction: PropTypes.func,
   route: PropTypes.func
 };
+
+export default PublicTreeCounter;

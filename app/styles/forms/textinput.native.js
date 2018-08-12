@@ -1,17 +1,27 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (textInputStyles = EStyleSheet.create({
-  containerStyle: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    paddingBottom: 20
-  },
   container: {
     width: '100%',
     flexDirection: 'column'
   },
-  imageStyle: { width: 26, height: 26, resizeMode: 'contain' },
+  containerStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingBottom: 20
+  },
+
+  imageContainerStyle: {
+    width: 26,
+    height: 26
+  },
+  imageStyle: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain'
+  },
   textboxStyle: {
     flex: 1,
     marginLeft: 10,

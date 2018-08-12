@@ -60,9 +60,9 @@ export default class UserHome extends Component {
               </View>
             </View>
           </View>
-          <View style={styles.svgContainer}>
+          {/* <View style={styles.svgContainer}>
             <SvgContainer {...svgData} />>
-          </View>
+          </View> */}
         </View>
       </View>
     );

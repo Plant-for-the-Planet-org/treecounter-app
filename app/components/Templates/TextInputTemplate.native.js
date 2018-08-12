@@ -21,7 +21,9 @@ export function TextInputTemplate(locals) {
     <View style={styles.container}>
       <View style={styles.containerStyle}>
         {locals.config.iconUrl ? (
-          <Image style={styles.imageStyle} source={locals.config.iconUrl} />
+          <View style={styles.imageContainerStyle}>
+            <Image style={styles.imageStyle} source={locals.config.iconUrl} />
+          </View>
         ) : (
           <View style={styles.emptyView} />
         )}
@@ -31,6 +33,7 @@ export function TextInputTemplate(locals) {
           placeholder={i18n.t(locals.placeholder)}
           placeholderTextColor={'#686060'}
           keyboardType={locals.keyboardType}
+          underlineColorAndroid={'transparent'}
           maxLength={locals.maxLength}
           multiline={locals.multiline}
           value={String(locals.value)}

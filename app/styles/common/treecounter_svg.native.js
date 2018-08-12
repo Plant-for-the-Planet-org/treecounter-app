@@ -81,8 +81,8 @@ export default (treecounterStyles = EStyleSheet.create({
     height: '100%',
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    resizeMode: 'contain'
+    justifyContent: 'center'
+    // resizeMode: 'contain'
   },
   svgColumn2: {
     flex: 2

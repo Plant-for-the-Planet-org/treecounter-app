@@ -129,6 +129,11 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
                 innerConfig[propertyKey].file &&
                 innerConfig[propertyKey].file.template) ||
               FilePickerTemplate;
+            options.config = {
+              ...options.config,
+              category: properties[propertyKey]['category'],
+              variant: properties[propertyKey]['variant']
+            };
             break;
         }
         // Widgets SwitchCase ENDS

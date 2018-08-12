@@ -25,7 +25,6 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		28348A572108EC45000CEC07 /* libToolTipMenu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28348A542108EA92000CEC07 /* libToolTipMenu.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D02E4C21E0B4AEC006451C7 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157351DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		2D02E4C31E0B4AEC006451C7 /* libRCTImage-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */; };
@@ -1165,7 +1164,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

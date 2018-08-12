@@ -3,7 +3,12 @@ package com.treecounterapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+<<<<<<< HEAD
 import com.horcrux.svg.SvgPackage;
+=======
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
+import com.reactlibrary.RNTooltipsPackage;
+>>>>>>> fix/language-rerouting
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -24,8 +29,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+<<<<<<< HEAD
             new SvgPackage()
            // new RNTooltipsPackage()
+=======
+            new RNI18nPackage(),
+            new RNTooltipsPackage()
+>>>>>>> fix/language-rerouting
       );
     }
 

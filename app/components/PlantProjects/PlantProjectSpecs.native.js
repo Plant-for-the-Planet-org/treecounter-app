@@ -40,7 +40,7 @@ class PlantProjectSpecs extends React.Component {
       )
     };
   }
-  componentDidMount() {
+  componentWillMount() {
     if (this.props.taxDeduction && this.props.taxDeduction.length > 2) {
       let tooltipText1 = '';
       let deducibleText1 = '';

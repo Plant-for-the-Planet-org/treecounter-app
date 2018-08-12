@@ -106,16 +106,16 @@ export default class SelectPlantProject extends Component {
     return (
       <Slick
         style={styles.slickWrapper}
-        showsPagination={true}
-        paginationStyle={{
-          position: 'absolute',
-          top: 0,
-          bottom: 490,
-          elevation: 9
-        }}
-        activeDotStyle={{
-          backgroundColor: '#b9d384'
-        }}
+        // showsPagination={true}
+        // paginationStyle={{
+        //   position: 'absolute',
+        //   top: 0,
+        //   bottom: 490,
+        //   elevation: 9
+        // }}
+        // activeDotStyle={{
+        //   backgroundColor: '#b9d384'
+        // }}
       >
         {featuredProjects.length !== 0
           ? featuredProjects.map(project => (

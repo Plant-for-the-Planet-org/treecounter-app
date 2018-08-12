@@ -9,12 +9,8 @@ const FollowLabelButton = ({ isLoggedIn, isSubscribed, onClick }) => {
 
   return (
     <button
-      className={
-        isLoggedIn && isSubscribed
-          ? 'pftp-button-following'
-          : 'pftp-button-follow'
-      }
-      onClick={() => onClick()}
+      className={isSubscribed ? 'pftp-button-following' : 'pftp-button-follow'}
+      onClick={() => (isLoggedIn ? onClick() : null)}
     >
       {label}
     </button>

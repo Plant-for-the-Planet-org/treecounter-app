@@ -38,6 +38,8 @@
     "react-native-collapsible": "^0.12.0",
     "react-native-extended-stylesheet": "^0.8.1",
     "react-native-htmlview": "^0.12.1",
+    "react-native-i18n": "^2.0.15",
+    "react-native-image-picker": "^0.26.10",
     "react-native-simple-radio-button": "^2.7.2",
     "react-native-slick": "^1.0.1",
     "react-native-svg": "^6.4.1",

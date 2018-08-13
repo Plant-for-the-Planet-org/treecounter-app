@@ -6,7 +6,7 @@ import SvgContainer from '../Common/SvgContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import UserProfileImage from '../Common/UserProfileImage';
-import { getProfileTypeName } from '../PublicTreeCounter/PublicTreecounter';
+import { getProfileTypeName } from '../PublicTreeCounter/utils';
 
 export default class UserHome extends Component {
   constructor(props) {

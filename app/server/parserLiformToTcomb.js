@@ -159,9 +159,14 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
             innerConfig[propertyKey][properties[propertyKey].type];
           let arrayTemplate = ListTemplateGenerator({})(title);
           let disableRemove = true;
-          if (arrayConfig && arrayConfig.template) {
-            arrayTemplate = arrayConfig.template(title);
-            disableRemove = arrayConfig.disableRemove;
+          if (arrayConfig) {
+            arrayTemplate = arrayConfig.template
+              ? arrayConfig.template(title)
+              : arrayTemplate;
+            disableRemove =
+              arrayConfig.disableRemove !== 'undefined'
+                ? arrayConfig.disableRemove
+                : disableRemove;
           }
 
           let arrayOptions = {

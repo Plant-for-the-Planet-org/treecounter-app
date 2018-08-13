@@ -8,7 +8,6 @@ import {
   closeSideNavAction,
   toggleSideNavAction
 } from '../../actions/setSideNavAction';
-import i18n from '../../locales/i18n.js';
 
 class BurgerMenu extends Component {
   constructor() {
@@ -21,7 +20,7 @@ class BurgerMenu extends Component {
         onClick={this.props.toggleSideNavAction}
         className="material-icons burger-icon"
       >
-        {i18n.t('label.menu')}
+        {'menu'}
       </i>
     );
   }

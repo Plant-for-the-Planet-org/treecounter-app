@@ -7,6 +7,7 @@ import i18n from '../../locales/i18n';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SvgContainer from '../Common/SvgContainer';
+import { getProfileTypeName } from '../PublicTreeCounter/utils';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -22,22 +23,6 @@ export default class UserHome extends Component {
     };
   }
 
-  getProfileTypeName = function(profileType) {
-    switch (profileType) {
-      case 'tpo': {
-        return i18n.t('label.tpo_title');
-      }
-      case 'company': {
-        return i18n.t('label.company_title');
-      }
-      case 'individual': {
-        return i18n.t('label.individual_name');
-      }
-      case 'education': {
-        return i18n.t('label.education');
-      }
-    }
-  };
   componentWillReceiveProps(nextProps) {
     const { treecounterData, userProfile } = nextProps;
     if (treecounterData) {
@@ -48,7 +33,7 @@ export default class UserHome extends Component {
 
   render() {
     const { treecounterData, userProfile } = this.props;
-    const profileType = this.getProfileTypeName(userProfile.type);
+    const profileType = getProfileTypeName(userProfile.type);
     let { svgData } = this.state;
 
     return (

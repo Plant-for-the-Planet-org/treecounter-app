@@ -4,15 +4,23 @@ import {
 } from '../formSchemas/registerTrees';
 import callParser from '../callParser';
 
+const config = {
+  contributionImages: {
+    array: {
+      disableRemove: false
+    }
+  }
+};
+
 const {
   transformedSchema: singleTreeRegisterFormSchema,
   schemaOptions: schemaOptionsSingleTree
-} = callParser(singleTreeForm);
+} = callParser(singleTreeForm, config);
 
 const {
   transformedSchema: multipleTreesRegisterFormSchema,
   schemaOptions: schemaOptionsMultipleTrees
-} = callParser(multipleTreesForm);
+} = callParser(multipleTreesForm, config);
 
 export {
   singleTreeRegisterFormSchema,

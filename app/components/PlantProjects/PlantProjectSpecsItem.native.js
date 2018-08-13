@@ -19,18 +19,18 @@ const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
         <Text style={styles.project_specs__itemText_left}>{label + ' '}</Text>
         {rightIcon
           ? null
-          : // <ToolTip
-            //   actions={[
-            //     {
-            //       text:
-            //         'Percentage of planted trees that survive the first year after planting.'
-            //     }
-            //   ]}
-            //   underlayColor={'black'}
-            //   style={styles.selectedName}
-            // >
-            //   <Image style={styles.spec_icon} source={rightIcon} />
-            // </ToolTip>
+          : // :  <ToolTip
+            //      actions={[
+            //        {
+            //          text:
+            //            'Percentage of planted trees that survive the first year after planting.'
+            //        }
+            //      ]}
+            //      underlayColor={'black'}
+            //      style={styles.selectedName}
+            //    >
+            //      <Image style={styles.spec_icon} source={rightIcon} />
+            //    </ToolTip>
             null}
       </View>
       {value && (value !== undefined || value !== 'undefined') ? (

@@ -5,7 +5,7 @@ import i18n from '../../locales/i18n.js';
 import { View, Text, Image, TouchableHighlight } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-spec';
 // import ToolTip from 'react-native-tooltip';
-import RNTooltips from 'react-native-tooltips';
+//import RNTooltips from 'react-native-tooltips';
 
 import {
   locationIcon,
@@ -129,11 +129,11 @@ class PlantProjectSpecs extends React.Component {
               source={questionmark_orange}
             />
           </ToolTip> */}
-          <RNTooltips
+          {/* <RNTooltips
             text={this.state.tootltipText}
             visible={this.state.visible}
             reference={this.state.reference}
-          />
+          /> */}
         </View>
       </View>
     );

@@ -1,15 +1,23 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
+import { Dimensions } from 'react-native';
+
+const Layout = {
+  window: {
+    height: Dimensions.get('window').height - 2 * 56
+  }
+};
+
 export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
-    height: 800,
-    padding: 10
+    padding: 10,
+    height: Layout.window.height
   },
   projectTeaserContainer: {
-    height: 250
+    height: Layout.window.height * 0.4
   },
   projectSpecsContainer: {
-    height: 180
+    height: Layout.window.height * 0.3
   },
   select_different_project_style: {
     paddingTop: 10,
@@ -21,12 +29,12 @@ export default (selectplantprojectFull = EStyleSheet.create({
     textAlign: 'center'
   },
   seeMoreContainer: {
-    height: 40,
+    height: Layout.window.height * 0.1,
     flexDirection: 'row',
     justifyContent: 'center'
   },
   buttonContainer: {
-    height: 50
+    height: Layout.window.height * 0.1
   },
   plantProjectDetails: {
     flexGrow: 1

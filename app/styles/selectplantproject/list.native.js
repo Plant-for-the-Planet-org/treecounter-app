@@ -7,7 +7,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 10,
-    borderColor: '$borderColor',
+    borderColor: '#aba2a2',
     borderStyle: 'solid',
     borderBottomWidth: 1,
     borderTopWidth: 1
@@ -60,11 +60,11 @@ export default (selectplantprojectFull = EStyleSheet.create({
     paddingLeft: 10,
     color: '$textColor',
     borderBottomWidth: 1,
-    borderColor: '$borderColor'
+    borderColor: '#aba2a2'
   },
 
   listContentContainer: {
-    borderColor: '$borderColor',
+    borderColor: '#aba2a2',
     borderStyle: 'solid',
     borderLeftWidth: 1,
     borderRightWidth: 1,

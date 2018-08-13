@@ -113,21 +113,21 @@ class PlantProjectFull extends React.Component {
         )}
         <View style={styles.buttonContainer}>
           {!this.props.selectAnotherProject ? (
-            // <PrimaryButton
-            //   onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
-            // >
-            //   {i18n.t('label.select_project')}
-            // </PrimaryButton>
-            <TouchableHighlight
-              onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
-              style={styles.button}
+            <PrimaryButton
+              onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
             >
-              <Text style={styles.buttonText}>
-                {' '}
-                {i18n.t('label.select_project')}
-              </Text>
-            </TouchableHighlight>
-          ) : null}
+              {i18n.t('label.select_project')}
+            </PrimaryButton>
+          ) : // <TouchableHighlight
+          //   onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
+          //   style={styles.button}
+          // >
+          //   <Text style={styles.buttonText}>
+          //     {' '}
+          //     {i18n.t('label.select_project')}
+          //   </Text>
+          // </TouchableHighlight>
+          null}
           {this.props.showNextButton ? (
             <PrimaryButton onClick={() => this.props.onNextClick()}>
               {i18n.t('label.next')}

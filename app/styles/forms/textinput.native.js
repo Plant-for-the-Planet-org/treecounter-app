@@ -14,8 +14,8 @@ export default (textInputStyles = EStyleSheet.create({
   },
 
   imageContainerStyle: {
-    width: 26,
-    height: 26
+    width: 20,
+    height: 20
   },
   imageStyle: {
     width: '100%',
@@ -24,15 +24,16 @@ export default (textInputStyles = EStyleSheet.create({
   },
   textboxStyle: {
     flex: 1,
+    height: 35,
     marginLeft: 10,
     width: '80%',
-    fontSize: 16,
+    fontSize: 13,
     color: '#686060',
     borderBottomWidth: 1,
     borderColor: '#cecece'
   },
   emptyView: {
-    width: 26,
-    height: 26
+    width: 20,
+    height: 20
   }
 }));

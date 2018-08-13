@@ -85,6 +85,7 @@ export default class PriceProjects extends Component {
                       height: 170,
                       flexDirection: 'column'
                     }}
+                    key={'priceSorted' + project.id}
                   >
                     <View style={styles.projectNameContainer}>
                       <Text style={styles.projectNameText}>{project.name}</Text>

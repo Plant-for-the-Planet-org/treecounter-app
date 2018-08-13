@@ -16,7 +16,7 @@ import CardLayout from '../../Common/Card/CardLayout';
 const { height, width } = Dimensions.get('window');
 import { getAppBarHeight } from '../../../styles/common/header';
 import SeeMoreToggle from '../../Common/SeeMoreToggle';
-import SearchBar from '../../Header/SearchBar.ios';
+import SearchBar from '../../Header/SearchBar';
 import { iosSearchWhite } from '../../../assets';
 
 export default class ListProjects extends Component {
@@ -75,6 +75,7 @@ export default class ListProjects extends Component {
           flex: 1,
           flexDirection: 'column'
         }}
+        key={'listViewProject'}
       >
         <View style={[styles.searchContainer]}>
           <TextInput
@@ -105,6 +106,7 @@ export default class ListProjects extends Component {
                       height: 170,
                       flexDirection: 'column'
                     }}
+                    key={'filtered' + project.id}
                   >
                     <View style={styles.projectNameContainer}>
                       <Text style={styles.projectNameText}>{project.name}</Text>

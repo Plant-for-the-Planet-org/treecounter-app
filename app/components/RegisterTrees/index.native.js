@@ -73,7 +73,7 @@ export default class RegisterTrees extends Component {
   render() {
     return (
       <ScrollView>
-        <CardLayout>
+        <CardLayout style={{ flex: 1 }}>
           <TabView
             useNativeDriver={true}
             ref="registerTreeForm"

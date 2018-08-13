@@ -42,6 +42,7 @@ export function TextInputTemplate(locals) {
           onKeyPress={locals.onKeyPress}
           returnKeyType={locals.returnKeyType}
           autoCapitalize={locals.autoCapitalize}
+          allowFontScaling={true}
         />
       </View>
       <View style={styles.errorStyle}>{error}</View>

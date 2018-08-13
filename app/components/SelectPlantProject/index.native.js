@@ -12,8 +12,8 @@ export default class SelectPlantTabView extends Component {
 
     this.state = {
       routes: [
-        { key: 'list', title: 'List' },
         { key: 'featured', title: 'Featured' },
+        { key: 'list', title: 'List' },
         { key: 'past', title: 'Past' },
 
         { key: 'price', title: 'Price' },

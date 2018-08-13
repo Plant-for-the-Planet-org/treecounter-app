@@ -16,10 +16,12 @@ export default (donateTreesStyles = EStyleSheet.create({
   expanded: {
     height: 40,
     flex: 1,
+    padding: 10,
     alignItems: 'center'
   },
   collapsed: {
     height: 40,
+    padding: 10,
     alignItems: 'center',
     flex: 1
   }

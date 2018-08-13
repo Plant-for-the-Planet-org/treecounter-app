@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { updateRoute } from '../../helpers/routerHelper';
 import SearchAutosuggest from './SearchAutosuggest';
-import i18n from '../../locales/i18n.js';
 
 class SearchBar extends React.Component {
   suggestionClicked = (event, data) => {
@@ -21,7 +20,7 @@ class SearchBar extends React.Component {
       <div>
         <div className="search-bar">
           <SearchAutosuggest onSuggestionClicked={this.suggestionClicked} />
-          <i className="material-icons search-icon">{i18n.t('label.search')}</i>
+          <i className="material-icons search-icon">{'search'}</i>
         </div>
       </div>
     );

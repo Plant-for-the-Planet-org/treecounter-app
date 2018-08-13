@@ -20,8 +20,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     height: Layout.window.height * 0.3
   },
   select_different_project_style: {
-    paddingTop: 10,
-    marginLeft: 20
+    marginLeft: 20,
+    alignSelf: 'center'
   },
   select_different_project_style_text: {
     color: '#ec6453',
@@ -31,7 +31,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   seeMoreContainer: {
     height: Layout.window.height * 0.1,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   buttonContainer: {
     height: Layout.window.height * 0.1

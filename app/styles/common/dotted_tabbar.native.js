@@ -5,20 +5,19 @@ export default (dottedtabbar = EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     paddingBottom: 5,
-    paddingTop: 5,
     backgroundColor: '$primary'
   },
   tabItemActive: {
     backgroundColor: '#ffffff',
-    width: 15,
-    height: 15,
-    borderRadius: 15 / 2,
+    width: 10,
+    height: 10,
+    borderRadius: 10 / 2,
     marginRight: 5
   },
   tabItem: {
-    width: 15,
-    height: 15,
-    borderRadius: 15 / 2,
+    width: 10,
+    height: 10,
+    borderRadius: 10 / 2,
     borderWidth: 3,
     borderColor: '#ffffff',
     marginRight: 5

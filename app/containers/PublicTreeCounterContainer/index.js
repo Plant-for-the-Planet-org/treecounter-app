@@ -8,7 +8,6 @@ import { currentUserProfileSelector } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import { followUser, unfollowUser } from '../../actions/followActions';
-import { withNavigation } from 'react-navigation';
 
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 
@@ -36,7 +35,7 @@ class PublicTreecounterContainer extends Component {
   fetchAndSetSearchResult(props) {
     const { treecounterLookupAction } = props;
     console.log('fetchAndSetSearchResult');
-    treecounterLookupAction(this.getTreeCounterId(props))
+    treecounterLookupAction(this.getTreeCounterId(props), this.props.navigation)
       .then(treecounter => {
         this.setState({
           treecounter,
@@ -50,7 +49,7 @@ class PublicTreecounterContainer extends Component {
     this.fetchAndSetSearchResult(this.props);
   }
   componentWillReceiveProps(nextProps) {
-    if (this.getTreeCounterId(props) === this.getTreeCounterId(nextProps))
+    if (this.getTreeCounterId(this.props) === this.getTreeCounterId(nextProps))
       return;
     this.fetchAndSetSearchResult(nextProps);
   }

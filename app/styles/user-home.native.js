@@ -15,6 +15,7 @@ export default (buttonStyles = EStyleSheet.create({
   },
   userProfileContainer: {
     flexDirection: 'row',
+    flex: 1,
     padding: 10,
     marginBottom: 10
   },
@@ -48,6 +49,7 @@ export default (buttonStyles = EStyleSheet.create({
   profileImage: {
     width: 65,
     height: 65,
+    resizeMode: 'contain',
     padding: 5
   },
   nameStyle: {

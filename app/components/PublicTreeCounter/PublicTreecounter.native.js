@@ -5,7 +5,8 @@ import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
-import CardLayout from '../../components/Common/Card/CardLayout';
+import stylesHome from '../../styles/user-home';
+import stylesPublicPage from '../../styles/public-page';
 
 import {
   getProfileTypeName,
@@ -69,7 +70,7 @@ class PublicTreeCounter extends React.Component {
     const { treecounter, currentUserProfile } = this.props;
     if (null === treecounter) {
       return (
-        <View className="trillion-container sidenav-wrapper">
+        <View>
           <LoadingIndicator />
         </View>
       );
@@ -101,23 +102,21 @@ class PublicTreeCounter extends React.Component {
     };
 
     return (
-      <View className="app-container__content--center sidenav-wrapper">
-        <View className="tree-counter-header">
+      <View>
+        <View style={stylesPublicPage.header}>
           <TreecounterHeader
             {...headerProps}
             followChanged={this.onFollowChanged}
           />
           {'tpo' !== userProfile.type &&
             !isMyself(treecounter, currentUserProfile) && (
-              <View className="support-button-container ">
-                {/* <SupportButton
-                  {...supportProps}
-                  onRegisterSupporter={this.onRegisterSupporter}
-                /> */}
-              </View>
+              <SupportButton
+                {...supportProps}
+                onRegisterSupporter={this.onRegisterSupporter}
+              />
             )}
         </View>
-        <View className="canvasContainer flex-column">
+        <View style={stylesHome.svgContainer}>
           <SvgContainer {...this.state.svgData} />
         </View>
       </View>

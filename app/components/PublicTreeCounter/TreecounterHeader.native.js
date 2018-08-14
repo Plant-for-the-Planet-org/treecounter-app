@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { View, Text, Image } from 'react-native';
 
-import { View, Text, Image, ImageBackground } from 'react-native';
+import { getImageUrl } from '../../actions/apiRouting';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import userHomeStyles from '../../styles/user-home';
 
@@ -17,7 +18,12 @@ const TreecounterHeader = ({
   return (
     <View style={userHomeStyles.userProfileContainer}>
       <View style={userHomeStyles.profileImageContainer}>
-        <Image style={userHomeStyles.profileImage} source={logo} />
+        <Image
+          style={userHomeStyles.profileImage}
+          source={{
+            uri: getImageUrl('profile', 'thumb', logo)
+          }}
+        />
         <View style={userHomeStyles.circle} />
       </View>
 

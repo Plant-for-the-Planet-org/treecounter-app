@@ -31,7 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
             new ImagePickerPackage(),
             new RNI18nPackage(),
             new SvgPackage()
-            new RNTooltipsPackage()
+          //  new RNTooltipsPackage()
       );
     }
 

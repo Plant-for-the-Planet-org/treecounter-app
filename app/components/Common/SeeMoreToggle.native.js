@@ -18,7 +18,7 @@ const SeeMoreToggle = ({ seeMore, onToggle, style }) => {
 };
 
 SeeMoreToggle.propTypes = {
-  seeMore: PropTypes.bool.isRequired,
+  seeMore: PropTypes.bool,
   onToggle: PropTypes.func
 };
 

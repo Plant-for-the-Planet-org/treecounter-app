@@ -9,6 +9,8 @@ import CardLayout from '../../Common/Card/CardLayout';
 const { height, width } = Dimensions.get('window');
 import { getAppBarHeight } from '../../../styles/common/header';
 import SeeMoreToggle from '../../Common/SeeMoreToggle';
+import Proptypes from 'prop-types';
+import ListViewProjects from './listview';
 
 export default class PriceProjects extends Component {
   constructor(props) {
@@ -70,80 +72,15 @@ export default class PriceProjects extends Component {
   render() {
     let { priceSortedProjects } = this.state;
     return (
-      <CardLayout
-        style={{
-          flex: 1,
-          flexDirection: 'column'
-        }}
-      >
-        <ScrollView>
-          <View style={styles.listContentContainer}>
-            {priceSortedProjects.length !== 0
-              ? priceSortedProjects.map(project => (
-                  <View
-                    style={{
-                      height: 170,
-                      flexDirection: 'column'
-                    }}
-                    key={'priceSorted' + project.id}
-                  >
-                    <View style={styles.projectNameContainer}>
-                      <Text style={styles.projectNameText}>{project.name}</Text>
-                      <Text
-                        style={[styles.projectNameText, styles.tpoNameText]}
-                      >
-                        By {project.tpo_name}
-                      </Text>
-                    </View>
-                    <View style={styles.projectMetaContainer}>
-                      <View style={styles.projectMetaLabels}>
-                        <Text style={styles.textStyle}>Location</Text>
-                        <Text style={styles.textStyle}>Planted Trees</Text>
-                        <Text style={styles.textStyle}>Survival Rate</Text>
-                        <Text style={styles.textStyle}>Cost Per Tree</Text>
-                      </View>
-                      <View style={styles.projectMetaValue}>
-                        <Text style={styles.textStyle}>{project.location}</Text>
-                        <Text style={styles.textStyle}>
-                          {project.countPlanted}
-                        </Text>
-                        <Text style={styles.textStyle}>
-                          {project.survivalRate}
-                        </Text>
-                        <Text style={styles.textStyle}>
-                          {project.treeCost.toFixed(2)}
-                        </Text>
-                      </View>
-                    </View>
-                    <View style={styles.projectButtonContainer}>
-                      <SeeMoreToggle
-                        style={{ paddingLeft: 5 }}
-                        seeMore={!this.state.expanded}
-                        onToggle={this.toggleExpanded}
-                      />
-                      <PrimaryButton
-                        buttonStyle={{
-                          height: 20,
-                          paddingLeft: 2,
-                          paddingRight: 2,
-                          paddingTop: 0,
-                          paddingBottom: 0,
-                          margin: 0,
-                          borderWidth: 0,
-                          borderRadius: 0,
-                          marginRight: 5
-                        }}
-                        textStyle={{ fontSize: 12 }}
-                      >
-                        select project
-                      </PrimaryButton>
-                    </View>
-                  </View>
-                ))
-              : null}
-          </View>
-        </ScrollView>
+      <CardLayout style={styles.cardStyle}>
+        <ListViewProjects projects={priceSortedProjects} />
       </CardLayout>
     );
   }
 }
+
+PriceProjects.propTypes = {
+  plantProjects: Proptypes.array.isRequired,
+  selectProject: Proptypes.func.isRequired,
+  currencies: Proptypes.array.isRequired
+};

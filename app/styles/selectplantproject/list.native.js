@@ -3,6 +3,14 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { SearchContainerWidth } from '../header/search_bar';
 
 export default (selectplantprojectFull = EStyleSheet.create({
+  cardStyle: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  listItemContainer: {
+    flexDirection: 'column',
+    height: 150
+  },
   projectNameContainer: {
     paddingTop: 5,
     paddingBottom: 5,
@@ -33,9 +41,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   projectButtonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginLeft: 5,
-    marginRight: 5
+    justifyContent: 'space-between'
   },
   textStyle: {
     fontSize: 12,
@@ -45,7 +51,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   searchContainer: {
     width: '100%',
     flexDirection: 'row',
-    margin: 5,
+    margin: 1,
     height: 40
   },
   searchIcon: {
@@ -58,9 +64,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
     fontSize: 14,
     paddingTop: 1,
     paddingLeft: 10,
-    color: '$textColor',
-    borderBottomWidth: 1,
-    borderColor: '#aba2a2'
+    color: '$textColor'
   },
 
   listContentContainer: {
@@ -69,6 +73,20 @@ export default (selectplantprojectFull = EStyleSheet.create({
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderBottomWidth: 1,
-    margin: 10
+    margin: 1
+  },
+  buttonStyle: {
+    height: 20,
+    paddingLeft: 2,
+    paddingRight: 2,
+    paddingTop: 0,
+    paddingBottom: 0,
+    margin: 0,
+    borderWidth: 0,
+    borderRadius: 0,
+    marginRight: 5
+  },
+  buttonTextStyle: {
+    fontSize: 12
   }
 }));

@@ -4,25 +4,27 @@ export default (donateTreesStyles = EStyleSheet.create({
   see_more_toggle__container: {},
   expandedText: {
     color: '$primary',
-    textAlign: 'center',
     fontSize: 13
   },
   collapsedText: {
     color: '#ec6453',
-    fontSize: 13,
-    textAlign: 'center'
+    fontSize: 13
   },
 
   expanded: {
     height: 40,
-    flex: 1,
-    padding: 10,
+    width: 100,
+    paddingRight: 10,
+    paddingBottom: 10,
+    paddingTop: 10,
     alignItems: 'center'
   },
   collapsed: {
     height: 40,
-    padding: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
+    paddingTop: 10,
     alignItems: 'center',
-    flex: 1
+    width: 100
   }
 }));

@@ -17,18 +17,13 @@ const TreecounterHeader = ({
   return (
     <View style={userHomeStyles.userProfileContainer}>
       <View style={userHomeStyles.profileImageContainer}>
-        <Image
-          style={userHomeStyles.profileImage}
-          source={{
-            uri: getImageUrl('profile', 'thumb', userProfile.image)
-          }}
-        />
+        <Image style={userHomeStyles.profileImage} source={logo} />
         <View style={userHomeStyles.circle} />
       </View>
 
       <View style={userHomeStyles.userInfo}>
         <View style={userHomeStyles.userInfoName}>
-          <Text style={userHomeStyles.nameStyle}>{userProfile.fullname}</Text>
+          <Text style={userHomeStyles.nameStyle}>{caption}</Text>
         </View>
         <View style={userHomeStyles.userInfoProfileType}>
           <View style={userHomeStyles.profileTypeContainer}>

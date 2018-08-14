@@ -110,10 +110,10 @@ class PublicTreeCounter extends React.Component {
           {'tpo' !== userProfile.type &&
             !isMyself(treecounter, currentUserProfile) && (
               <View className="support-button-container ">
-                <SupportButton
+                {/* <SupportButton
                   {...supportProps}
                   onRegisterSupporter={this.onRegisterSupporter}
-                />
+                /> */}
               </View>
             )}
         </View>

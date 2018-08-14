@@ -8,6 +8,7 @@ import { currentUserProfileSelector } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import { followUser, unfollowUser } from '../../actions/followActions';
+import { withNavigation } from 'react-navigation';
 
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 
@@ -22,13 +23,20 @@ class PublicTreecounterContainer extends Component {
     };
   }
 
-  fetchAndSetSearchResult(props) {
-    const {
-      match: { params },
-      treecounterLookupAction
-    } = props;
+  getTreeCounterId(props) {
+    let treeCounterId = null;
+    if (props.match) {
+      treeCounterId = props.match.params.treecounterId;
+    } else if (props.navigation) {
+      treeCounterId = props.navigation.getParam('treeCounterId', treeCounterId);
+    }
+    return treeCounterId;
+  }
 
-    treecounterLookupAction(params.treecounterId)
+  fetchAndSetSearchResult(props) {
+    const { treecounterLookupAction } = props;
+    console.log('fetchAndSetSearchResult');
+    treecounterLookupAction(this.getTreeCounterId(props))
       .then(treecounter => {
         this.setState({
           treecounter,
@@ -42,10 +50,7 @@ class PublicTreecounterContainer extends Component {
     this.fetchAndSetSearchResult(this.props);
   }
   componentWillReceiveProps(nextProps) {
-    if (
-      this.props.match.params.treecounterId ===
-      nextProps.match.params.treecounterId
-    )
+    if (this.getTreeCounterId(props) === this.getTreeCounterId(nextProps))
       return;
     this.fetchAndSetSearchResult(nextProps);
   }
@@ -104,5 +109,6 @@ PublicTreecounterContainer.propTypes = {
     params: PropTypes.shape({
       treecounterId: PropTypes.string
     })
-  }).isRequired
+  }),
+  navigation: PropTypes.any
 };

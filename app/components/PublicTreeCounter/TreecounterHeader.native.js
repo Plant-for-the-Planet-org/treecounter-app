@@ -9,7 +9,7 @@ const TreecounterHeader = ({
   caption,
   profileType,
   logo,
-  isUserFollower,
+  isUserFollowerBool,
   isUserLoggedIn,
   showFollow,
   followChanged
@@ -31,7 +31,7 @@ const TreecounterHeader = ({
           </View>
           {showFollow && (
             <FollowLabelButton
-              isSubscribed={isUserFollower}
+              isSubscribed={isUserFollowerBool}
               isLoggedIn={isUserLoggedIn}
               onClick={() => followChanged()}
             />
@@ -46,7 +46,7 @@ TreecounterHeader.propTypes = {
   caption: PropTypes.string.isRequired,
   profileType: PropTypes.string.isRequired,
   logo: PropTypes.string,
-  isUserFollower: PropTypes.bool.isRequired,
+  isUserFollowerBool: PropTypes.bool.isRequired,
   isUserLoggedIn: PropTypes.bool.isRequired,
   showFollow: PropTypes.bool.isRequired,
   followChanged: PropTypes.func.isRequired

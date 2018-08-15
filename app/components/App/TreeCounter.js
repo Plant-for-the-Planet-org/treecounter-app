@@ -84,7 +84,6 @@ class TreeCounter extends Component {
 
   render() {
     let isLoggedIn = this.state.isLoggedIn;
-
     const PrivateRoute = ({ component: Component, ...rest }) => (
       <Route
         {...rest}

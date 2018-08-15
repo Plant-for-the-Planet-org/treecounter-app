@@ -71,10 +71,16 @@ class SearchLayout extends React.Component {
                   style={styles.searchResult}
                   key={'suggestion' + i}
                   onPress={() => {
-                    this.props.navigation.navigate(
-                      getLocalRoute('app_userHome'),
-                      { suggestion }
-                    );
+                    setTimeout(() => {
+                      this.props.navigation.navigate(
+                        getLocalRoute('app_treecounter'),
+                        {
+                          treeCounterId: suggestion.slug || suggestion.id,
+                          suggestion
+                        }
+                      );
+                    }, 0);
+
                     console.log('click suggestions', suggestion);
                   }}
                 >

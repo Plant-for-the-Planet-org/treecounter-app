@@ -5,9 +5,16 @@ import classnames from 'classnames';
 import Accordion from 'react-native-collapsible/Accordion';
 import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  Image
+} from 'react-native';
 import styles from '../../styles/myTrees/user_contribution_card';
 import { foldout, foldin, MapPinRed, EditOrange } from '../../assets';
+import _ from 'lodash';
 export default class ContributionCard extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +26,6 @@ export default class ContributionCard extends React.Component {
   }
 
   _renderContent(section) {
-    console.log('section', section);
     const measurementsAvailable =
       section.contributionMeasurements &&
       section.contributionMeasurements.length > 0;
@@ -27,7 +33,7 @@ export default class ContributionCard extends React.Component {
       <View style={styles.content}>
         {section.treeScientificName ? (
           <Text>{'Scientific Name: ' + section.treeScientificName}</Text>
-        ) : null};
+        ) : null}
         {measurementsAvailable ? (
           <View>
             <View style={styles.actionBar}>
@@ -46,14 +52,13 @@ export default class ContributionCard extends React.Component {
                     {new Date(measurement.measurementDate).toLocaleDateString()}
                   </Text>
                   <Text>
-                    {(
-                      (measurement.height * 10).toFixed(1) +
-                      ' ' +
-                      'mm'
-                    ).padStart(10)}
+                    {_.padStart(
+                      (measurement.height * 10).toFixed(1) + ' ' + 'mm',
+                      10
+                    )}
                   </Text>
                   <Text>
-                    {(measurement.diameter + ' ' + 'cm').padStart(10)}
+                    {_.padStart(measurement.diameter + ' ' + 'cm', 10)}
                   </Text>
                 </View>
               );
@@ -124,14 +129,10 @@ export default class ContributionCard extends React.Component {
                 contribution.treeSpecies +
                 i18n.t('label.tree')}
             </Text>
-            {/* <Text>
-              {contribution.geoLatitude + ', ' + contribution.geoLongitude}
-            </Text> */}
             <Text style={styles.dateStyle}>
               {moment(new Date(contribution.plantDate)).format('DD MMM YYYY')}
             </Text>
-            {imagesArray.length ? (
-              // <a onClick={this.openLightbox}>{i18n.t('label.pictures')}</a>
+            {imagesArray.length > 0 ? (
               <Text onPress={this.openLightbox}>
                 {i18n.t('label.pictures')}
               </Text>
@@ -170,20 +171,21 @@ ContributionCard.propTypes = {
 class ActionButton extends React.Component {
   render() {
     return (
-      <TouchableOpacity
+      <TouchableHighlight
         style={styles.actionButton}
         onPress={event => {
-          console.log('click action button');
           this.props.onPress && this.props.onPress(event);
         }}
       >
-        {this.props.image ? (
-          <Image source={this.props.image} style={styles.imageStyle} />
-        ) : null}
-        {this.props.text ? (
-          <Text style={styles.actionButtonText}>{this.props.text}</Text>
-        ) : null}
-      </TouchableOpacity>
+        <View>
+          {this.props.image != null ? (
+            <Image source={this.props.image} style={styles.imageStyle} />
+          ) : null}
+          {this.props.text != null ? (
+            <Text style={styles.actionButtonText}>{this.props.text}</Text>
+          ) : null}
+        </View>
+      </TouchableHighlight>
     );
   }
 }

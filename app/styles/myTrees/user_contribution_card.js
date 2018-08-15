@@ -5,6 +5,21 @@ export default (myTreesStyle = EStyleSheet.create({
     flex: 1,
     paddingVertical: 20
   },
+  contributionContainer: {
+    borderWidth: 1,
+    borderLeftWidth: 4,
+    borderColor: '#e6e6e6',
+    // borderLeftColor:
+    //   contribution.contributionType == 'donation'
+    //     ? '#95c243'
+    //     : contribution.treeCount > 1
+    //       ? '#68aeec'
+    //       : '#ec6453',
+    justifyContent: 'space-between',
+    minHeight: 60,
+    marginBottom: 10,
+    margin: 10
+  },
   container: {
     justifyContent: 'center',
     alignItems: 'center',

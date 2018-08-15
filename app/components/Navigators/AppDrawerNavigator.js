@@ -1,4 +1,4 @@
-import { DrawerNavigator, StackNavigator } from 'react-navigation';
+import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
 import React from 'react';
 import { Animated } from 'react-native';
 import Trillion from '../TreecounterGraphics/Trillion';
@@ -22,6 +22,7 @@ import UserContributions from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout.native';
 import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
+import EditUserContributionContainer from '../../containers/EditUserContribution';
 
 const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
 const headerLabels = {
@@ -34,11 +35,12 @@ const headerLabels = {
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
-  [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees'
+  [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
+  [getLocalRoute('app_editTrees')]: 'label.edit_trees'
 };
 
 export const getDrawerNavigator = function(isLoggedIn) {
-  const baseNavigator = StackNavigator(
+  const baseNavigator = createStackNavigator(
     {
       [getLocalRoute('app_login')]: {
         screen: LoginContainer
@@ -69,6 +71,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_homepage')]: { screen: Trillion },
       [getLocalRoute('app_faq')]: FAQContainer,
+      [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
       [getLocalRoute('app_treecounter')]: PublicTreecounterContainer
       // Search: {
       //   screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />,
@@ -102,7 +105,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
       }
     }
   );
-  const searchNavigator = StackNavigator(
+  const searchNavigator = createStackNavigator(
     {
       Search: {
         screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />
@@ -121,7 +124,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
       }
     }
   );
-  const AppDrawerNavigator = DrawerNavigator(
+  const AppDrawerNavigator = createDrawerNavigator(
     {
       baseNavigator,
       searchNavigator: searchNavigator

@@ -19,7 +19,7 @@ const formLayoutSingleTree = locals => {
   return (
     <div className="register-tree__form">
       <div className="register-tree__form--row">
-        {parseInt(locals.inputs.treeCount).toLocaleString('en')}
+        {locals.inputs.treeCount}
         {locals.inputs.treeSpecies}
       </div>
       <div className="register-tree__form--row">{locals.inputs.plantDate}</div>
@@ -43,7 +43,7 @@ const formLayoutMultipleTrees = locals => {
   return (
     <div className="register-tree__form">
       <div className="register-tree__form--row">
-        {parseInt(locals.inputs.treeCount).toLocaleString('en')}
+        {locals.inputs.treeCount}
         <div className="register-tree__form--row__spacer" />
         {locals.inputs.treeSpecies}
       </div>

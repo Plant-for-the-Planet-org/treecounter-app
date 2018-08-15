@@ -3,6 +3,7 @@ import React from 'react';
 import { imageUpload } from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/file_picker.native';
+import { getImageUrl } from '../../actions/apiRouting';
 
 const ImagePicker = require('react-native-image-picker');
 const options = {
@@ -14,6 +15,8 @@ const options = {
 };
 
 export function FilePickerTemplate(locals) {
+  let { category, variant } = locals.config || {};
+
   return (
     <View style={styles.filePickerContainer}>
       <TouchableOpacity
@@ -40,11 +43,11 @@ export function FilePickerTemplate(locals) {
         <Text>{i18n.t('label.select_file')}</Text>
       ) : (
         <Image
-          source={
-            !locals.value.includes('base64')
-              ? getImageUrl('project', 'small', locals.value)
-              : { uri: locals.value }
-          }
+          source={{
+            uri: !locals.value.includes('base64')
+              ? getImageUrl(category, variant, locals.value)
+              : locals.value
+          }}
           style={{ height: 100, width: 100, marginLeft: 20 }}
         />
       )}

@@ -8,7 +8,7 @@ export default (BurgerMenu = function(navigation) {
     <TouchableHighlight
       onPress={() => {
         console.log('Press data');
-        navigation.navigate('DrawerOpen');
+        navigation.openDrawer();
       }}
     >
       <Image

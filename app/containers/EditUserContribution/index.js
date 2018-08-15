@@ -10,27 +10,66 @@ import EditUserContribution from '../../components/EditUserContribution';
 import { sortedUserContributionsSelector } from '../../selectors/index';
 
 class EditUserContributionsContainer extends React.Component {
-  onSubmit = () => {
-    let value = this.refs.editTrees.refs.editTreeForm.getValue();
+  _userContribution = null;
+  _mergeContributionImages(updatedTreeContribution) {
+    if (
+      !updatedTreeContribution.contributionImages ||
+      updatedTreeContribution.contributionImages.length == 0
+    ) {
+      return updatedTreeContribution;
+    }
+    const newContributionImages = updatedTreeContribution.contributionImages;
+    let contributionImages = [];
+    contributionImages = newContributionImages.map(newContributionImage => {
+      if (newContributionImage.image.includes('base64')) {
+        let { image: imageFile } = newContributionImage;
+
+        return newContributionImage.id
+          ? { imageFile, id: newContributionImage.id }
+          : { imageFile };
+      }
+      return newContributionImage;
+    });
+    return {
+      ...updatedTreeContribution,
+      contributionImages
+    };
+  }
+  onSubmit = (mode, registerTreeForm) => {
+    registerTreeForm =
+      registerTreeForm || this.refs.editTrees.refs.editTreeForm;
+    let value = registerTreeForm.getValue();
+    const { props } = this;
     if (value) {
+      value = this._mergeContributionImages(value);
       let plantContribution = { plant_contribution: value };
-      this.props.editTree(
+      props.editTree(
         plantContribution,
-        this.props.match.params.selectedTreeId
+        (props.match && props.match.params.selectedTreeId) ||
+          (props.navigation && props.navigation.getParam('selectedTreeId')),
+        this.props.navigation
       );
     }
   };
 
   render() {
     let { props } = this;
-    let userContribution = props.userContributions.filter(
-      contribution =>
-        contribution.id == parseInt(props.match.params.selectedTreeId)
-    )[0];
+
+    if (props.match) {
+      this._userContribution = props.userContributions.filter(
+        contribution =>
+          contribution.id == parseInt(props.match.params.selectedTreeId)
+      )[0];
+    } else if (props.navigation) {
+      this._userContribution = props.navigation.getParam(
+        'contribution',
+        this._userContribution
+      );
+    }
     return (
       <EditUserContribution
         ref={'editTrees'}
-        userContribution={userContribution}
+        userContribution={this._userContribution}
         onSubmit={this.onSubmit}
       />
     );
@@ -52,9 +91,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 EditUserContributionsContainer.propTypes = {
   userContributions: PropTypes.array.isRequired,
   editTree: PropTypes.func,
+  navigation: PropTypes.any,
   match: PropTypes.shape({
     params: PropTypes.shape({
       selectedTreeId: PropTypes.string
     })
-  }).isRequired
+  })
 };

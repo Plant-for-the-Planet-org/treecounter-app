@@ -20,6 +20,20 @@ class AppDrawerNavigatorContainer extends Component {
     };
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    //If there is no change in the user login state then don't re-render the component
+    if (
+      (nextState.loading === this.state.loading &&
+        nextState.isLoggedIn === this.state.isLoggedIn &&
+        (!nextProps.userProfile && !this.props.userProfile)) ||
+      (nextProps.userProfile &&
+        this.props.userProfile &&
+        nextProps.userProfile.id === this.props.userProfile.id)
+    ) {
+      return false;
+    }
+    return true;
+  }
   async componentWillMount() {
     const { userProfile } = this.props;
     const isLoggedIn = null !== userProfile;
@@ -38,7 +52,9 @@ class AppDrawerNavigatorContainer extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.userProfile !== this.props.userProfile) {
       let isLoggedIn = null !== nextProps.userProfile;
-      this.setState({ loading: false, isLoggedIn: isLoggedIn });
+      if (isLoggedIn !== this.state.isLoggedIn) {
+        this.setState({ loading: false, isLoggedIn: isLoggedIn });
+      }
     }
   }
   render() {

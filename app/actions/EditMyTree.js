@@ -1,5 +1,5 @@
 import { normalize } from 'normalizr';
-import { NotificationManager } from 'react-notifications';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { putAuthenticatedRequest } from '../utils/api';
 
 import { updateRoute } from '../helpers/routerHelper';
@@ -7,7 +7,7 @@ import { mergeEntities } from '../reducers/entitiesReducer';
 import { contributionSchema, treecounterSchema } from '../schemas/index';
 import { debug } from '../debug/index';
 
-export function editTree(plantContribution, plantId) {
+export function editTree(plantContribution, plantId, navigation) {
   return dispatch => {
     putAuthenticatedRequest('plantContribution_put', plantContribution, {
       plantContribution: plantId
@@ -19,7 +19,7 @@ export function editTree(plantContribution, plantId) {
         NotificationManager.success(statusText, 'Success', 5000);
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
-        updateRoute('app_myTrees', dispatch);
+        updateRoute('app_myTrees', navigation || dispatch);
       })
       .catch(error => {
         debug(error.response);

@@ -4,15 +4,14 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --hot --config ./web/webpack.config.js",
-    "build": "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail",
-    "build:server": "webpack --config ./web/config/webpack.server.config.js --progress --profile --bail",
+    "build":
+      "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail",
+    "build:server":
+      "webpack --config ./web/config/webpack.server.config.js --progress --profile --bail",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
+    "*.js": ["prettier --single-quote --write", "git add"]
   },
   "dependencies": {
     "autosuggest-highlight": "^3.1.1",
@@ -46,7 +45,7 @@
     "react-native-svg-uri": "^1.2.3",
     "react-native-tab-view": "^1.0.2",
     "react-native-tooltip": "^5.2.0",
-    "react-navigation": "^1.1.2",
+    "react-navigation": "^2.11.2",
     "react-navigation-redux-helpers": "^1.0.5",
     "react-notifications": "^1.4.3",
     "react-redux": "^5.0.6",

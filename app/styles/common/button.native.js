@@ -15,8 +15,28 @@ export default (buttonStyles = EStyleSheet.create({
   primaryButtonText: {
     fontSize: 25,
     color: 'white'
-    // width: '100%',
-    // textAlign: 'center'
+  },
+  followingButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '$colorPrimaryAccent',
+    height: 30,
+    width: 100,
+    marginRight: 10,
+    padding: 5
+  },
+  followButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '$primary',
+    height: 30,
+    width: 80,
+    marginRight: 10,
+    padding: 5
+  },
+  followButtonText: {
+    color: '#ffffff',
+    fontSize: 15
   },
   textContainer: {
     // width: '100%',

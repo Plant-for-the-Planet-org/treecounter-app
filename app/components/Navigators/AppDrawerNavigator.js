@@ -21,6 +21,7 @@ import RegisterTrees from '../../containers/RegisterTrees';
 import UserContributions from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout.native';
+import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
 import EditUserContributionContainer from '../../containers/EditUserContribution';
 
 const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
@@ -70,7 +71,8 @@ export const getDrawerNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_homepage')]: { screen: Trillion },
       [getLocalRoute('app_faq')]: FAQContainer,
-      [getLocalRoute('app_editTrees')]: EditUserContributionContainer
+      [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
+      [getLocalRoute('app_treecounter')]: PublicTreecounterContainer
       // Search: {
       //   screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />,
       //   navigationOptions: {

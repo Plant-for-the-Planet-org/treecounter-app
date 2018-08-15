@@ -18,6 +18,14 @@ export default (buttonStyles = EStyleSheet.create({
     padding: 10,
     marginBottom: 10
   },
+  circle: {
+    borderRadius: 35,
+    borderWidth: 5,
+    borderColor: '#fff',
+    position: 'absolute',
+    height: 70,
+    width: 70
+  },
   userInfo: {
     padding: 10,
     flexDirection: 'column'
@@ -32,17 +40,17 @@ export default (buttonStyles = EStyleSheet.create({
     maxHeight: '100%'
   },
   profileImageContainer: {
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
     alignSelf: 'center',
     justifyContent: 'center'
   },
   profileImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain'
+    width: 65,
+    height: 65,
+    resizeMode: 'contain',
+    padding: 5
   },
-
   nameStyle: {
     fontSize: 17,
     color: '$textColor'
@@ -60,7 +68,6 @@ export default (buttonStyles = EStyleSheet.create({
   },
   profileTypeStyle: {
     color: '#ffffff',
-
     fontSize: 15
   }
 }));

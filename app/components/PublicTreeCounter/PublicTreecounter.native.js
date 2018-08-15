@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { View } from 'react-native';
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
-import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantProjectSelector';
-import UserFootprint from './UserFootprint';
 import SvgContainer from '../Common/SvgContainer';
-import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
-import CardLayout from '../../components/Common/Card/CardLayout';
+import stylesHome from '../../styles/user-home';
+import stylesPublicPage from '../../styles/public-page';
 
 import {
   getProfileTypeName,
@@ -72,9 +70,9 @@ class PublicTreeCounter extends React.Component {
     const { treecounter, currentUserProfile } = this.props;
     if (null === treecounter) {
       return (
-        <div className="trillion-container sidenav-wrapper">
+        <View>
           <LoadingIndicator />
-        </div>
+        </View>
       );
     }
 
@@ -104,42 +102,24 @@ class PublicTreeCounter extends React.Component {
     };
 
     return (
-      <div className="app-container__content--center sidenav-wrapper">
-        <div className="tree-counter-header">
+      <View>
+        <View style={stylesPublicPage.header}>
           <TreecounterHeader
             {...headerProps}
             followChanged={this.onFollowChanged}
           />
           {'tpo' !== userProfile.type &&
             !isMyself(treecounter, currentUserProfile) && (
-              <div className="support-button-container ">
-                <SupportButton
-                  {...supportProps}
-                  onRegisterSupporter={this.onRegisterSupporter}
-                />
-              </div>
+              <SupportButton
+                {...supportProps}
+                onRegisterSupporter={this.onRegisterSupporter}
+              />
             )}
-        </div>
-        <div className="canvasContainer flex-column">
+        </View>
+        <View style={stylesHome.svgContainer}>
           <SvgContainer {...this.state.svgData} />
-          <TreecounterGraphicsText
-            trillion={false}
-            treecounterData={this.state.svgData}
-          />
-        </div>
-        <div className="tree-counter-footer__container">
-          {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
-            <TpoDonationPlantProjectSelector
-              {...tpoProps}
-              onSelect={this.onPlantProjectSelected}
-            />
-          ) : userProfile.synopsis1 || userProfile.synopsis2 ? (
-            <CardLayout>
-              <UserFootprint userProfile={userProfile} />
-            </CardLayout>
-          ) : null}
-        </div>
-      </div>
+        </View>
+      </View>
     );
   }
 }

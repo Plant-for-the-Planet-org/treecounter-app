@@ -5,12 +5,12 @@ import { treecounterSchema } from '../schemas/index';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { updateRoute } from '../helpers/routerHelper';
 
-export function treecounterLookupAction(treecounterId) {
+export function treecounterLookupAction(treecounterId, navigation = undefined) {
   return (dispatch, getState) => {
     // the treecounter might already exist in normalized form in the redux-store
     // if so we de-normalize and just return it
     if (!treecounterId) {
-      updateRoute('app_homepage', dispatch);
+      updateRoute('app_homepage', navigation || dispatch);
       return Promise.reject('user not available');
     }
     return new Promise(function(resolve) {
@@ -34,7 +34,7 @@ export function treecounterLookupAction(treecounterId) {
           resolve(treecounter);
         })
         .catch(error => {
-          updateRoute('app_homepage', dispatch);
+          updateRoute('app_homepage', navigation || dispatch);
           Promise.reject(error);
         });
     });

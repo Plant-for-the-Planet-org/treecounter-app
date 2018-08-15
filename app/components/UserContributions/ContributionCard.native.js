@@ -14,8 +14,10 @@ import {
 } from 'react-native';
 import styles from '../../styles/myTrees/user_contribution_card';
 import { foldout, foldin, MapPinRed, EditOrange } from '../../assets';
+import { getLocalRoute } from '../../actions/apiRouting';
+import { withNavigation } from 'react-navigation';
 import _ from 'lodash';
-export default class ContributionCard extends React.Component {
+class ContributionCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,6 +28,7 @@ export default class ContributionCard extends React.Component {
   }
 
   _renderContent(section) {
+    console.log('section', section);
     const measurementsAvailable =
       section.contributionMeasurements &&
       section.contributionMeasurements.length > 0;
@@ -153,7 +156,13 @@ export default class ContributionCard extends React.Component {
               image={MapPinRed}
             />
             <ActionButton
-              onPress={() => console.log('click action button')}
+              onPress={() => {
+                console.log('click update button');
+                this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
+                  selectedTreeId: contribution.id,
+                  contribution
+                });
+              }}
               text={i18n.t('label.update')}
               image={EditOrange}
             />
@@ -177,7 +186,7 @@ class ActionButton extends React.Component {
           this.props.onPress && this.props.onPress(event);
         }}
       >
-        <View>
+        <View style={{ flexDirection: 'row' }}>
           {this.props.image != null ? (
             <Image source={this.props.image} style={styles.imageStyle} />
           ) : null}
@@ -195,3 +204,5 @@ ActionButton.propTypes = {
   text: PropTypes.string,
   image: PropTypes.any
 };
+
+export default withNavigation(ContributionCard);

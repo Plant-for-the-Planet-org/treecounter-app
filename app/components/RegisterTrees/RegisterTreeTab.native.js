@@ -9,12 +9,12 @@ const Form = t.form.Form;
 export default class RegisterTreeTab extends PureComponent {
   render() {
     return (
-      <View style={{ backgroundColor: '#ffffff' }}>
+      <View style={{ backgroundColor: '#ffffff', flex: 1 }}>
         <Form
           ref="multipleTreesForm"
           type={this.props.schemaType}
           options={this.props.schemaOptions}
-          value={{ treeCount: 1 }}
+          value={this.props.value ? this.props.value : { treeCount: 1 }}
         />
         <PrimaryButton
           onClick={() => {

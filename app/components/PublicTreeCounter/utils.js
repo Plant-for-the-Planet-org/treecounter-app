@@ -16,3 +16,27 @@ export const getProfileTypeName = function(profileType) {
     }
   }
 };
+
+export const isMyself = function(treecounter, currentUserProfile) {
+  return (
+    null !== currentUserProfile &&
+    currentUserProfile.treecounter.id === treecounter.id
+  );
+};
+
+export const isUserFollower = function(treecounter, currentUserProfile) {
+  const followeeIds =
+    currentUserProfile && currentUserProfile.treecounter.followeeIds
+      ? currentUserProfile.treecounter.followeeIds
+          .split(',')
+          .map(s => parseInt(s))
+      : [];
+  return followeeIds.includes(treecounter.id);
+};
+
+export const amISupporting = function(treecounter, currentUserProfile) {
+  return currentUserProfile
+    ? currentUserProfile.supported_treecounter &&
+        currentUserProfile.supported_treecounter.id === treecounter.id
+    : false;
+};

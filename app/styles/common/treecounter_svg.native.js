@@ -70,22 +70,25 @@ export default (treecounterStyles = EStyleSheet.create({
   svgTextContainer: {
     flexDirection: 'column',
     width: '40%',
+    height: '30%',
     marginTop: 'auto',
     marginBottom: 'auto'
   },
   svgTextRow: {
-    flexDirection: 'row'
-  },
-  svgColumn1: {
-    width: '100%',
-    height: '100%',
-    flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
-    // resizeMode: 'contain'
+  },
+  svgColumn1: {
+    maxWidth: 40,
+    maxHeight: 40,
+    resizeMode: 'contain',
+    marginRight: 10
   },
   svgColumn2: {
-    flex: 2
+    maxWidth: 100,
+    maxHeight: 40,
+    resizeMode: 'contain'
   },
   divider: {
     height: 3,
@@ -100,11 +103,13 @@ export default (treecounterStyles = EStyleSheet.create({
   },
   svgTitleText: {
     fontSize: 10,
-    color: '#686060'
+    color: '#686060',
+    width: 'auto'
   },
   svgTextValue: {
     fontSize: 16,
     color: '#686060',
-    fontWeight: '600'
+    fontWeight: '600',
+    width: 'auto'
   }
 }));

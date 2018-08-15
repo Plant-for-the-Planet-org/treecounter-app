@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 // import PlantedDetails from './PlantedDetails';
 import TargetComment from './TargetComment';
 import ArrowButton from '../Common/ArrowButton';
-import { pot, tree } from '../../assets';
-import SvgUri from 'react-native-svg-uri';
+import { pot, darkTree } from '../../assets';
 import i18n from '../../locales/i18n.js';
 
 import svgStyles from '../../styles/common/treecounter_svg';
@@ -82,9 +81,7 @@ class TreecounterGraphicsText extends Component {
         </View>
         <View style={svgStyles.divider} />
         <View style={svgStyles.svgTextRow}>
-          <View style={svgStyles.svgColumn1}>
-            <SvgUri width="30" height="30" source={tree} />
-          </View>
+          <Image style={svgStyles.svgColumn1} source={darkTree} />
           <View style={svgStyles.svgColumn2}>
             <Text style={svgStyles.svgTitleText}>
               {i18n.t('label.planted')}

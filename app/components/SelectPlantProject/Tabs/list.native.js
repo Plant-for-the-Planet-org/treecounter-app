@@ -94,7 +94,10 @@ export default class ListProjects extends Component {
           </View>
         </View>
 
-        <ListViewProjects projects={filteredProjects} />
+        <ListViewProjects
+          projects={filteredProjects}
+          selectProject={projectId => this.props.selectProject(projectId)}
+        />
       </CardLayout>
     );
   }

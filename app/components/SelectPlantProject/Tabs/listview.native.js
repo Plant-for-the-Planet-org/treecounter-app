@@ -63,10 +63,14 @@ export default class ListViewProjects extends Component {
                     </View>
                   </View>
                   <View style={styles.projectButtonContainer}>
-                    <SeeMoreToggle seeMore={true} />
+                    <View style={{ marginVertical: -10 }}>
+                      <SeeMoreToggle seeMore={true} />
+                    </View>
+
                     <PrimaryButton
                       buttonStyle={styles.buttonStyle}
                       textStyle={styles.buttonTextStyle}
+                      onClick={() => this.props.selectProject(project.id)}
                     >
                       select project
                     </PrimaryButton>

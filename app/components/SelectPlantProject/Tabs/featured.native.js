@@ -59,22 +59,7 @@ export default class FeaturedProjects extends Component {
     let { featuredProjects } = this.state;
     return (
       <ScrollView>
-        <Slick
-          style={styles.slickWrapper}
-          showsPagination={false}
-          // paginationStyle={{
-          //   position: 'absolute',
-          //   top: 80,
-          //   bottom: 490,
-
-          //   elevation: 9,
-          //   height: 20,
-          //   backgroundColor: 'rgba(52, 52, 52, 0.8)'
-          // }}
-          // activeDotStyle={{
-          //   backgroundColor: '#b9d384'
-          // }}
-        >
+        <Slick style={styles.slickWrapper} showsPagination={false}>
           {featuredProjects.length !== 0
             ? featuredProjects.map(project => (
                 <PlantProjectFull

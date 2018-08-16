@@ -99,7 +99,7 @@ class TreeCountSelector extends React.Component {
         {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
           return (
             <div className="treecount-price-conversion" key={treeCount}>
-              <label key={treeCount}>
+              <label key={treeCount} className="price-conversion__radio">
                 <input
                   type="radio"
                   value={treeCount}
@@ -113,8 +113,8 @@ class TreeCountSelector extends React.Component {
                 />
                 {treeCount} {i18n.t('label.trees')}
               </label>
-              <span>=</span>
-              <span>
+              <span className="price-conversion__equal">=</span>
+              <span className="price-conversion__radio">
                 {treeCountToAmount(treeCount)} {currency}
               </span>
             </div>
@@ -122,7 +122,7 @@ class TreeCountSelector extends React.Component {
         })}
 
         <div className="treecount-price-conversion">
-          <label key="variable">
+          <label key="variable" className="price-conversion__radio">
             <input
               type="radio"
               value={this.state.variableTreeCount}
@@ -131,18 +131,24 @@ class TreeCountSelector extends React.Component {
                 this.handleVariableTreeCountSelected(evt.target.value)
               }
             />
-            <input
-              type="text"
-              disabled={this.state.isFixed}
-              value={this.state.variableTreeCount}
-              onChange={evt =>
-                this.handleVariableTreeCountChange(evt.target.value)
+            <div
+              className="inputContainer"
+              onClick={evt =>
+                this.handleVariableTreeCountSelected(evt.target.value)
               }
-            />{' '}
-            {i18n.t('label.trees')}
+            >
+              <input
+                type="text"
+                value={this.state.variableTreeCount}
+                onChange={evt =>
+                  this.handleVariableTreeCountChange(evt.target.value)
+                }
+              />{' '}
+              {i18n.t('label.trees')}
+            </div>
           </label>
-          <span>=</span>
-          <span>
+          <span className="price-conversion__equal">=</span>
+          <span className="price-conversion__radio">
             <input
               type="text"
               disabled={this.state.isFixed}

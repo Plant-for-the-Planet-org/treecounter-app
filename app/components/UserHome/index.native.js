@@ -37,8 +37,8 @@ export default class UserHome extends Component {
     let { svgData } = this.state;
 
     return (
-      <View style={styles.homeContainer}>
-        <View>
+      <View>
+        <View style={styles.header}>
           <View style={styles.userProfileContainer}>
             <View style={styles.profileImageContainer}>
               <Image
@@ -61,9 +61,9 @@ export default class UserHome extends Component {
               </View>
             </View>
           </View>
-          <View style={styles.svgContainer}>
-            <SvgContainer {...svgData} />>
-          </View>
+        </View>
+        <View style={styles.svgContainer}>
+          <SvgContainer {...svgData} />>
         </View>
       </View>
     );

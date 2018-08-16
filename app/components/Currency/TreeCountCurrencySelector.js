@@ -95,7 +95,7 @@ TreeCountCurrencySelector.propTypes = {
   selectedCurrency: PropTypes.string.isRequired,
   treeCountOptions: PropTypes.object.isRequired,
   selectedTreeCount: PropTypes.number.isRequired,
-  treeCost: PropTypes.number.isRequired,
+  treeCost: PropTypes.any.isRequired,
   rates: PropTypes.object.isRequired,
   fees: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired

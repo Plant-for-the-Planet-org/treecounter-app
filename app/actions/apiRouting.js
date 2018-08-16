@@ -5,9 +5,9 @@ import { getLocale } from './getLocale';
 
 Routing.setRoutingData(routes);
 
-export const getApiRoute = (routeName, params) => {
+export const getApiRoute = async (routeName, params) => {
   const { scheme, host, base: baseUrl } = context;
-  let locale = getLocale();
+  let locale = await getLocale();
   const serverName = `${scheme}://${host}`;
   params =
     'api_login_check' === routeName

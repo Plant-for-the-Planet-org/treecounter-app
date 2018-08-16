@@ -166,7 +166,7 @@ class ContributionCard extends React.Component {
               <Lightbox
                 backgroundColor={'rgba(52, 52, 52, 0.8)'}
                 underlayColor={'white'}
-                swipeToDismiss={true}
+                swipeToDismiss={false}
                 renderContent={() => this._renderLightBox(imagesArray)}
               >
                 <Text style={[styles.pictureText, { padding: 0 }]}>

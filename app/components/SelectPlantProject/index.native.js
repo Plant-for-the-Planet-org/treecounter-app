@@ -6,7 +6,7 @@ import i18n from '../../locales/i18n.js';
 import Slick from 'react-native-slick';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import PrimaryButton from '../Common/Button/PrimaryButton.native';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 const { width, height } = Dimensions.get('window');
 
 export default class SelectPlantProject extends Component {

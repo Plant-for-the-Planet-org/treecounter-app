@@ -197,7 +197,7 @@ export default class SvgContainer extends Component {
           <View style={treecounterStyles.svgContentContainer}>
             {this.props !== null ? (
               <TreecounterGraphicsText
-                trillion={true}
+                trillion={this.props.trillion}
                 treecounterData={this.props}
               />
             ) : null}
@@ -215,7 +215,8 @@ SvgContainer.propTypes = {
   community: PropTypes.number.isRequired,
   personal: PropTypes.number.isRequired,
   targetYear: PropTypes.number,
-  exposeMissing: PropTypes.bool
+  exposeMissing: PropTypes.bool,
+  trillion: PropTypes.bool
 };
 
 SvgContainer.defaultProps = {
@@ -223,6 +224,7 @@ SvgContainer.defaultProps = {
   target: 0,
   planted: 0,
   community: 0,
+  trillion: false,
   personal: 0,
   exposeMissing: true,
   targetYear: 2020

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import t from 'tcomb-form';
 import PropTypes from 'prop-types';
 
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import ContentHeader from '../Common/ContentHeader';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextSpan from '../Common/Text/TextBlock';

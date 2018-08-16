@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import TextHeading from '../../Common/Heading/TextHeading';
-import CardLayout from '../../Common/Card/CardLayout';
+import CardLayout from '../../Common/Card';
 import TextBlock from '../../Common/Text/TextBlock';
 import { RedEmail } from '../../../assets';
 import SecondaryButton from '../../Common/Button/SecondaryButton';

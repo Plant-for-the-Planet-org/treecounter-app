@@ -86,15 +86,9 @@ export const getDrawerNavigator = function(isLoggedIn) {
         ? getLocalRoute('app_userHome')
         : getLocalRoute('app_login'),
       navigationOptions: ({ navigation }) => {
-        console.log('navigation options', navigation);
-        let title = navigation.getParam('titleParam');
         let navigationConfig = {
           headerStyle: styles.container,
-          headerTintColor: '#fff',
-          title:
-            title != undefined
-              ? title
-              : i18n.t(headerLabels[navigation.state.routeName])
+          headerTintColor: '#fff'
         };
         if (homeRoutes.includes(navigation.state.routeName)) {
           navigationConfig.headerLeft = BurgerMenu(navigation);

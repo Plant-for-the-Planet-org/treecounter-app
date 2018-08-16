@@ -1,5 +1,5 @@
-import { getAuthenticatedRequest } from '../utils/api';
+import { getRequest } from '../utils/api';
 
 export function FAQAction() {
-  return getAuthenticatedRequest('public_faqs_get');
+  return getRequest('public_faqs_get');
 }

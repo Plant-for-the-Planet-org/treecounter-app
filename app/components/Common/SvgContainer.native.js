@@ -11,7 +11,14 @@ import SvgUri from 'react-native-svg-uri';
 import treecounterStyles from '../../styles/common/treecounter_svg';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import Svg, { Circle } from 'react-native-svg';
+import { Dimensions } from 'react-native';
 
+//Only take multiple of 10s
+const squareDimension =
+  Math.floor(
+    Math.min(Dimensions.get('window').width, Dimensions.get('window').height) /
+      10
+  ) * 10;
 const totalCount = Array.from({ length: 72 }, (v, k) => k + 1);
 export default class SvgContainer extends Component {
   constructor() {
@@ -101,7 +108,9 @@ export default class SvgContainer extends Component {
           <Image style={treecounterStyles.imageStyle} source={svgBackground} />
           <View style={treecounterStyles.cloudStyle}>
             <Animated.View
-              style={{ transform: [{ rotate: RotateClouds1Data }] }}
+              style={{
+                transform: [{ rotate: RotateClouds1Data }]
+              }}
             >
               <SvgUri width="100%" height="100%" source={svgs['cloud1']} />
             </Animated.View>

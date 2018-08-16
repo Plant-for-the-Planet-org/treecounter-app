@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getImageUrl } from '../../actions/apiRouting';
-import { View, Text, Image, ImageBackground } from 'react-native';
+import { View, Text, Image, ImageBackground, platform } from 'react-native';
 import styles from '../../styles/user-home';
 import i18n from '../../locales/i18n';
 import LoadingIndicator from '../Common/LoadingIndicator';
@@ -37,8 +37,8 @@ export default class UserHome extends Component {
     let { svgData } = this.state;
 
     return (
-      <View style={styles.homeContainer}>
-        <View>
+      <View>
+        <View style={styles.header}>
           <View style={styles.userProfileContainer}>
             <View style={styles.profileImageContainer}>
               <Image
@@ -61,10 +61,12 @@ export default class UserHome extends Component {
               </View>
             </View>
           </View>
-          {/* <View style={styles.svgContainer}>
-            <SvgContainer {...svgData} />
-          </View> */}
         </View>
+        ( Platform.OS !== 'android' ?
+        <View style={styles.svgContainer}>
+          <SvgContainer {...svgData} />> : null
+        </View>
+        )
       </View>
     );
   }

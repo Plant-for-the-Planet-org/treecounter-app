@@ -108,6 +108,7 @@ export default class GiftTrees extends Component {
       form: {
         recipientType: modeReceipt
       },
+      giftTreecounterName: null,
       expanded: false,
       expandedOption: '1',
       showNextButton: true,
@@ -184,7 +185,8 @@ export default class GiftTrees extends Component {
             form: {
               ...this.state.form,
               giftInvitation: value
-            }
+            },
+            giftTreecounterName: value.firstname + ' ' + value.lastname
           });
           return true;
         }
@@ -261,7 +263,8 @@ export default class GiftTrees extends Component {
       form: {
         ...this.state.form,
         giftTreecounter: event.suggestion.id
-      }
+      },
+      giftTreecounterName: event.suggestion.name
     });
   };
 
@@ -287,14 +290,20 @@ export default class GiftTrees extends Component {
     let displayNone = classNames({
       'display-none': !this.state.showNextButton
     });
+    let { pageIndex } = this.state;
+
     if (this.refs.slider) {
       setTimeout(() => {
-        if (this.state.pageIndex === 4) {
-          this.refs.slider.slickGoTo(this.state.pageIndex);
+        if (pageIndex === 4) {
+          this.refs.slider.slickGoTo(pageIndex);
         }
       }, 1000);
     }
-    let { pageIndex } = this.state;
+    let heading =
+      pageHeadings[pageIndex].heading +
+      (this.state.giftTreecounterName !== null
+        ? ' to ' + this.state.giftTreecounterName
+        : '');
     const NextArrow = function(props) {
       function validated() {
         if (props.checkValidation[props.currentSlide].call(props.context)) {
@@ -360,7 +369,7 @@ export default class GiftTrees extends Component {
     ) : (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>
-          {pageHeadings[this.state.pageIndex].heading}
+          {heading}
           <DescriptionHeading>
             {pageHeadings[this.state.pageIndex].description}
           </DescriptionHeading>

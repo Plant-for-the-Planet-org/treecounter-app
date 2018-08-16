@@ -26,11 +26,7 @@ const PlantProjectSpecs = ({
   return (
     <div className="project-specs__container">
       <div className="project-info">
-        <PlantProjectSpecsItem
-          icon={locationIcon}
-          value={location}
-          label={i18n.t('label.location')}
-        />
+        <PlantProjectSpecsItem icon={locationIcon} label={location} />
         <PlantProjectSpecsItem
           icon={plantedTarget}
           value={countPlanted}

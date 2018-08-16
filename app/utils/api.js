@@ -55,7 +55,7 @@ export async function getSessionId() {
 }
 
 export async function getRequest(route, params, authenticated = false) {
-  let url = getApiRoute(route, params);
+  let url = await getApiRoute(route, params);
   return await axios
     .get(url, await getHeaders(authenticated))
     .then(checkStatus)
@@ -68,7 +68,7 @@ export async function getAuthenticatedRequest(route, params) {
 }
 
 export async function postRequest(route, data, params, authenticated = false) {
-  let url = getApiRoute(route, params);
+  let url = await getApiRoute(route, params);
   return await axios
     .post(url, data, await getHeaders(authenticated))
     .then(checkStatus)
@@ -92,7 +92,7 @@ export async function postAuthenticatedRequest(route, data, params) {
 }
 
 export async function putRequest(route, data, params, authenticated = false) {
-  let url = getApiRoute(route, params);
+  let url = await getApiRoute(route, params);
   return await axios
     .put(url, data, await getHeaders(authenticated))
     .then(checkStatus)
@@ -105,7 +105,7 @@ export async function putAuthenticatedRequest(route, data, params) {
 }
 
 export async function deleteRequest(route, params, authenticated = false) {
-  let url = getApiRoute(route, params);
+  let url = await getApiRoute(route, params);
   return await axios
     .delete(url, await getHeaders(authenticated))
     .then(checkStatus)

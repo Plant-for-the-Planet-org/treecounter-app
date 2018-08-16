@@ -185,7 +185,8 @@ export default class GiftTrees extends Component {
             form: {
               ...this.state.form,
               giftInvitation: value
-            }
+            },
+            giftTreecounterName: value.firstname + ' ' + value.lastname
           });
           return true;
         }

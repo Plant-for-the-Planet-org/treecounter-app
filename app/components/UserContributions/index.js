@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ContributionCardList from './ContributionCardList';
 import ContributionsMapLegend from './ContributionsMapLegend';
 import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n.js';
 import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';

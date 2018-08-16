@@ -11,7 +11,7 @@ import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectTeaser from './PlantProjectTeaser';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import PlantProjectDetails from './PlantProjectDetails';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull

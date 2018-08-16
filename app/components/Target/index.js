@@ -9,7 +9,7 @@ import {
 
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n.js';
 
 let TCombForm = t.form.Form;

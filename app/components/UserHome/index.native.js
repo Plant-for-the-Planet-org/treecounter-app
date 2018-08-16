@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getImageUrl } from '../../actions/apiRouting';
-import { View, Text, Image, ImageBackground } from 'react-native';
+import { ScrollView, View, Text, Image } from 'react-native';
 import styles from '../../styles/user-home';
+import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -37,7 +38,7 @@ export default class UserHome extends Component {
     let { svgData } = this.state;
 
     return (
-      <View>
+      <ScrollView>
         <View style={styles.header}>
           <View style={styles.userProfileContainer}>
             <View style={styles.profileImageContainer}>
@@ -65,7 +66,16 @@ export default class UserHome extends Component {
         <View style={styles.svgContainer}>
           <SvgContainer {...svgData} />>
         </View>
-      </View>
+        <View>
+          {'tpo' === userProfile.type &&
+          1 <= tpoProps.plantProjects.length ? null : userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
+          userProfile.synopsis2 ? (
+            <CardLayout>
+              <Text style={styles.footerText}>{userProfile.synopsis1}</Text>
+            </CardLayout>
+          ) : null}
+        </View>
+      </ScrollView>
     );
   }
 }

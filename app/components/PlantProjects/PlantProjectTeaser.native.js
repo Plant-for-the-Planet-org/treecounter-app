@@ -34,7 +34,7 @@ const PlantProjectTeaser = ({
           </View>
         </View>
         <Text style={styles.project_teaser__contentText}>
-          {i18n.t('label.by')} {tpoName}
+          {i18n.t('label.by') + ' ' + tpoName}
         </Text>
       </View>
       {projectImage ? (

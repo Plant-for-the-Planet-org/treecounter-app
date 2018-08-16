@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import SearchAutosuggest from '../Header/SearchAutosuggest';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';

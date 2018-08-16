@@ -69,11 +69,7 @@ class PublicTreeCounter extends React.Component {
   render() {
     const { treecounter, currentUserProfile } = this.props;
     if (null === treecounter) {
-      return (
-        <View>
-          <LoadingIndicator />
-        </View>
-      );
+      return <LoadingIndicator />;
     }
 
     const { userProfile, displayName: caption } = treecounter;

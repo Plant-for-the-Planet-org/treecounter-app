@@ -13,6 +13,11 @@ export default (buttonStyles = EStyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    elevation: 3
+  },
   userProfileContainer: {
     flexDirection: 'row',
     flex: 1,

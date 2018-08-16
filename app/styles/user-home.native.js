@@ -58,7 +58,8 @@ export default (buttonStyles = EStyleSheet.create({
     width: 65,
     height: 65,
     resizeMode: 'contain',
-    padding: 5
+    padding: 5,
+    borderRadius: 33
   },
   nameStyle: {
     fontSize: 17,

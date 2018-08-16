@@ -4,6 +4,7 @@ import { ScrollView, View, Text } from 'react-native';
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import PlantProjectCarousel from '../PlantProjects/PlantProjectCarousel';
 import SvgContainer from '../Common/SvgContainer';
 import CardLayout from '../Common/Card';
 import stylesHome from '../../styles/user-home';
@@ -117,9 +118,12 @@ class PublicTreeCounter extends React.Component {
           <SvgContainer {...this.state.svgData} />
         </View>
         <View>
-          {'tpo' === userProfile.type &&
-          1 <= tpoProps.plantProjects.length ? null : userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
-          userProfile.synopsis2 ? (
+          {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
+            <PlantProjectCarousel
+              {...tpoProps}
+              onSelect={this.onPlantProjectSelected}
+            />
+          ) : userProfile.synopsis1 || userProfile.synopsis2 ? (
             <CardLayout>
               <Text style={stylesHome.footerText}>{userProfile.synopsis1}</Text>
             </CardLayout>

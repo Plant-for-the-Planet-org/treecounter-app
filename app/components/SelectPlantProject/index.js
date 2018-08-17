@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import ContentHeader from '../Common/ContentHeader';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import PrimaryButton from '../Common/Button/PrimaryButton';

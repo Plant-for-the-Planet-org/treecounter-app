@@ -4,7 +4,7 @@ import './ReactotronConfig';
 /* app.js */
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-console.disableYellowBox = false;
+console.disableYellowBox = true;
 
 // import {
 //   setCustomView,

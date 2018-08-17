@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 
 import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import ContentHeader from '../Common/ContentHeader';
 import TextBlock from '../Common/Text/TextBlock';
 import InlineLink from '../Common/InlineLink';

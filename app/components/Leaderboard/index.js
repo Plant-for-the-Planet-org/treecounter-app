@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import MapTab from './MapTab';
 import Tabs from '../Common/Tabs';
 import {

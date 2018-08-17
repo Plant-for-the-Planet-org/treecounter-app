@@ -82,3 +82,28 @@ export const profileTypeToImage = {
   education,
   competition
 };
+
+export function mergeContributionImages(updatedTreeContribution) {
+  if (
+    !updatedTreeContribution.contributionImages ||
+    updatedTreeContribution.contributionImages.length == 0
+  ) {
+    return updatedTreeContribution;
+  }
+  const newContributionImages = updatedTreeContribution.contributionImages;
+  let contributionImages = [];
+  contributionImages = newContributionImages.map(newContributionImage => {
+    if (newContributionImage.image.includes('base64')) {
+      let { image: imageFile } = newContributionImage;
+
+      return newContributionImage.id
+        ? { imageFile, id: newContributionImage.id }
+        : { imageFile };
+    }
+    return newContributionImage;
+  });
+  return {
+    ...updatedTreeContribution,
+    contributionImages
+  };
+}

@@ -22,8 +22,8 @@ const squareDimension =
   ) * 10;
 const totalCount = Array.from({ length: 72 }, (v, k) => k + 1);
 export default class SvgContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       treesWidth: 0,
       plantedDasharray: '0,1000'
@@ -42,6 +42,16 @@ export default class SvgContainer extends Component {
       treesWidth: TreesWidth
     });
   }
+
+  componentWillMount() {
+    let { planted, target } = this.props;
+    let plantedWidth = this.calculatePlantedWidth(planted, target, 112);
+    let TreesWidth = this.calculateTreesWidth(planted, target);
+    this.setState({
+      plantedDasharray: plantedWidth + ',1000',
+      treesWidth: TreesWidth
+    });
+  }
   componentDidMount() {
     this.StartBallonsRotateFunction();
     this.StartClouds1RotateFunction();
@@ -50,11 +60,19 @@ export default class SvgContainer extends Component {
 
   calculatePlantedWidth(planted, target, radius) {
     let total = 2 * 3.14 * radius;
-    return total / (1 + target / planted);
+    if (target === 0) {
+      return total;
+    } else {
+      return total / (1 + target / planted);
+    }
   }
 
   calculateTreesWidth(planted, target) {
-    return parseInt(72 / (1 + target / planted));
+    if (target === 0) {
+      return 72;
+    } else {
+      return Math.round(72 / (1 + target / planted));
+    }
   }
 
   StartBallonsRotateFunction() {
@@ -183,7 +201,7 @@ export default class SvgContainer extends Component {
           <View style={treecounterStyles.svgContentContainer}>
             {this.props !== null ? (
               <TreecounterGraphicsText
-                trillion={true}
+                trillion={this.props.trillion}
                 treecounterData={this.props}
               />
             ) : null}
@@ -201,7 +219,8 @@ SvgContainer.propTypes = {
   community: PropTypes.number.isRequired,
   personal: PropTypes.number.isRequired,
   targetYear: PropTypes.number,
-  exposeMissing: PropTypes.bool
+  exposeMissing: PropTypes.bool,
+  trillion: PropTypes.bool
 };
 
 SvgContainer.defaultProps = {
@@ -209,6 +228,7 @@ SvgContainer.defaultProps = {
   target: 0,
   planted: 0,
   community: 0,
+  trillion: false,
   personal: 0,
   exposeMissing: true,
   targetYear: 2020

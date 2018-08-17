@@ -9,7 +9,7 @@ import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectTeaser from './PlantProjectTeaser';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import PlantProjectDetails from './PlantProjectDetails';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { TouchableHighlight } from 'react-native';
 /**

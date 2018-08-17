@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import CurrencySelector from './CurrencySelector';
 import TreeCountSelector from './TreeCountSelector';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n';
 

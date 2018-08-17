@@ -5,43 +5,19 @@ import PropTypes from 'prop-types';
 
 import { editTree } from '../../actions/EditMyTree';
 import EditUserContribution from '../../components/EditUserContribution';
-
+import { mergeContributionImages } from '../../helpers/utils';
 // Actions
 import { sortedUserContributionsSelector } from '../../selectors/index';
 
 class EditUserContributionsContainer extends React.Component {
   _userContribution = null;
-  _mergeContributionImages(updatedTreeContribution) {
-    if (
-      !updatedTreeContribution.contributionImages ||
-      updatedTreeContribution.contributionImages.length == 0
-    ) {
-      return updatedTreeContribution;
-    }
-    const newContributionImages = updatedTreeContribution.contributionImages;
-    let contributionImages = [];
-    contributionImages = newContributionImages.map(newContributionImage => {
-      if (newContributionImage.image.includes('base64')) {
-        let { image: imageFile } = newContributionImage;
-
-        return newContributionImage.id
-          ? { imageFile, id: newContributionImage.id }
-          : { imageFile };
-      }
-      return newContributionImage;
-    });
-    return {
-      ...updatedTreeContribution,
-      contributionImages
-    };
-  }
   onSubmit = (mode, registerTreeForm) => {
     registerTreeForm =
       registerTreeForm || this.refs.editTrees.refs.editTreeForm;
     let value = registerTreeForm.getValue();
     const { props } = this;
     if (value) {
-      value = this._mergeContributionImages(value);
+      value = mergeContributionImages(value);
       let plantContribution = { plant_contribution: value };
       props.editTree(
         plantContribution,

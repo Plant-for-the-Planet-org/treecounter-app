@@ -39,7 +39,7 @@ export default class Trillion extends Component {
     return (
       <View>
         <View style={svgStyles.svgContainer}>
-          <SvgContainer {...this.state.svgData} />>
+          <SvgContainer {...this.state.svgData} trillion={true} />
         </View>
       </View>
     );

@@ -1,4 +1,4 @@
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import t from 'tcomb-form-native';
 import React, { Component } from 'react';
 import {

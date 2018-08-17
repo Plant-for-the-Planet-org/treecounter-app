@@ -12,7 +12,7 @@ import TextHeading from '../../components/Common/Heading/TextHeading';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 import i18n from '../../locales/i18n.js';
 
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 
 export default class FAQ extends Component {
   GetFAQList() {

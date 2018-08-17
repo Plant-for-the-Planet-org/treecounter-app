@@ -17,7 +17,7 @@ import {
 import i18n from '../../../locales/i18n.js';
 
 import styles from '../../../styles/login';
-import CardLayout from '../../Common/Card/CardLayout';
+import CardLayout from '../../Common/Card';
 
 let Form = t.form.Form;
 

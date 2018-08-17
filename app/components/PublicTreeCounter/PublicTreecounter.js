@@ -8,7 +8,7 @@ import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantPr
 import UserFootprint from './UserFootprint';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
-import CardLayout from '../../components/Common/Card/CardLayout';
+import CardLayout from '../../components/Common/Card';
 
 import {
   getProfileTypeName,

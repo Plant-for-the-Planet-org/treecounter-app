@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --hot --config ./web/webpack.config.js",
-    "build":
-      "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail",
-    "build:server":
-      "webpack --config ./web/config/webpack.server.config.js --progress --profile --bail",
+    "build": "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail",
+    "build:server": "webpack --config ./web/config/webpack.server.config.js --progress --profile --bail",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": ["prettier --single-quote --write", "git add"]
+    "*.js": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "autosuggest-highlight": "^3.1.1",
@@ -39,6 +40,7 @@
     "react-native-htmlview": "^0.12.1",
     "react-native-i18n": "^2.0.15",
     "react-native-image-picker": "^0.26.10",
+    "react-native-lightbox": "^0.7.0",
     "react-native-simple-radio-button": "^2.7.2",
     "react-native-slick": "^1.0.1",
     "react-native-svg": "^6.4.1",

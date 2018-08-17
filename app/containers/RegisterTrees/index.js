@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import RegisterTrees from '../../components/RegisterTrees';
 import { registerTree } from '../../actions/registerTree';
 import { userTreecounterSelector } from '../../selectors/index';
+import { mergeContributionImages } from '../../helpers/utils';
 
 class RegisterTreesContainer extends Component {
   constructor() {
@@ -17,6 +18,7 @@ class RegisterTreesContainer extends Component {
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
     console.log(registerTreeForm.validate());
     let value = registerTreeForm.getValue();
+    value = mergeContributionImages(value);
     if (value) {
       this.props.registerTree(
         value,

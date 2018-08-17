@@ -25,7 +25,7 @@ export function registerTree(
         NotificationManager.success(statusText, 'Success', 5000);
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
-        updateRoute('app_userHome', dispatch || navigation);
+        updateRoute('app_userHome', navigation || dispatch);
       })
       .catch(error => {
         debug(error.response);

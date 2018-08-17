@@ -5,11 +5,21 @@ import classnames from 'classnames';
 import Accordion from 'react-native-collapsible/Accordion';
 import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  FlatList
+} from 'react-native';
 import styles from '../../styles/myTrees/user_contribution_card';
 import { foldout, foldin, MapPinRed, EditOrange } from '../../assets';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
+import Lightbox from 'react-native-lightbox';
+
+const WINDOW_WIDTH = Dimensions.get('window').width;
 
 class ContributionCard extends React.Component {
   constructor(props) {
@@ -21,6 +31,25 @@ class ContributionCard extends React.Component {
     };
   }
 
+  _renderLightBox = imageArray => (
+    <View style={{ width: WINDOW_WIDTH, height: WINDOW_WIDTH }}>
+      <FlatList
+        horizontal
+        data={imageArray}
+        renderItem={({ item }) => (
+          <View style={{ width: WINDOW_WIDTH, height: WINDOW_WIDTH }}>
+            <Image
+              style={{ flex: 1 }}
+              resizeMode="contain"
+              source={{
+                uri: item.src
+              }}
+            />
+          </View>
+        )}
+      />
+    </View>
+  );
   _renderContent(section) {
     console.log('section', section);
     const measurementsAvailable =
@@ -134,10 +163,16 @@ class ContributionCard extends React.Component {
               {moment(new Date(contribution.plantDate)).format('DD MMM YYYY')}
             </Text>
             {imagesArray.length ? (
-              // <a onClick={this.openLightbox}>{i18n.t('label.pictures')}</a>
-              <Text onPress={this.openLightbox}>
-                {i18n.t('label.pictures')}
-              </Text>
+              <Lightbox
+                backgroundColor={'rgba(52, 52, 52, 0.8)'}
+                underlayColor={'white'}
+                swipeToDismiss={false}
+                renderContent={() => this._renderLightBox(imagesArray)}
+              >
+                <Text style={[styles.pictureText, { padding: 0 }]}>
+                  {i18n.t('label.pictures')}
+                </Text>
+              </Lightbox>
             ) : null}
             {contribution.contributionMeasurements.length > 0 ? (
               <Accordion

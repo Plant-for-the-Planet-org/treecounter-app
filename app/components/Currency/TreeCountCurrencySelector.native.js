@@ -72,8 +72,9 @@ class TreeCountCurrencySelector extends React.Component {
 
   render() {
     const { currencies, treeCountOptions } = this.props;
+    console.log('Tree Count currency selector called up');
     return (
-      <CardLayout style={{ padding: 20 }}>
+      <CardLayout>
         <CurrencySelector
           currencies={currencies}
           onChange={this.handleCurrencyChange}
@@ -105,7 +106,9 @@ TreeCountCurrencySelector.propTypes = {
   treeCost: PropTypes.number.isRequired,
   rates: PropTypes.object.isRequired,
   fees: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  showNextButton: PropTypes.bool,
+  onNextClick: PropTypes.func
 };
 
 export default TreeCountCurrencySelector;

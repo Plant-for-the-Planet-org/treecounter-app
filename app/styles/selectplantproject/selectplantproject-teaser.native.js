@@ -2,7 +2,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (selectplantTeaserStyles = EStyleSheet.create({
   project_teaser__container: {
-    // flex: 1,
+    height: '100%',
     width: '100%'
   },
   project_teaser__content: {
@@ -21,12 +21,13 @@ export default (selectplantTeaserStyles = EStyleSheet.create({
   },
   teaser__projectImageContainer: {
     width: '100%',
-    height: 190
+    height: '80%',
+    paddingBottom: 10
   },
   teaser__projectImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'stretch'
+    width: undefined,
+    height: undefined,
+    flex: 1
   },
 
   teaser__certified: {

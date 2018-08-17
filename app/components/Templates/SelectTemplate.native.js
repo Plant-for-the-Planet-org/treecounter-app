@@ -2,36 +2,25 @@ import { Text, View, Picker } from 'react-native';
 import React from 'react';
 import i18n from '../../locales/i18n';
 // import { Dropdown } from 'react-native-material-dropdown';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import styles from '../../styles/forms/select';
 
 export function SelectTemplate(locals) {
-  let containerStyle = {
-    paddingBottom: 20
-  };
-  let pickerStyle = {
-    marginLeft: 36,
-    borderColor: '#cecece',
-    borderBottomWidth: 1,
-    height: 40
-  };
-  let itemStyle = {
-    color: '#686060',
-    height: 40,
-    textAlign: 'left',
-    fontSize: 16
-  };
   return (
-    <View style={containerStyle}>
+    <View style={styles.pickerViewStyle}>
       <Picker
         mode="dropdown"
         selectedValue={locals.value}
         onValueChange={(itemValue, itemIndex) => locals.onChange(itemValue)}
-        style={pickerStyle}
-        itemStyle={itemStyle}
+        style={styles.pickerStyle}
+        itemStyle={styles.itemStyle}
       >
         {locals.options.map(option => (
           <Picker.Item
+            itemStyle={styles.itemStyle}
             key={option.value}
             label={i18n.t(option.text)}
+            color={'#686060'}
             value={option.value}
           />
         ))}

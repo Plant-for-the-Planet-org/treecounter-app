@@ -12,6 +12,7 @@ import treecounterStyles from '../../styles/common/treecounter_svg';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import Svg, { Circle } from 'react-native-svg';
 import { Dimensions } from 'react-native';
+import _ from 'lodash';
 
 //Only take multiple of 10s
 const squareDimension =
@@ -154,23 +155,26 @@ export default class SvgContainer extends Component {
                   <SvgUri
                     width="100%"
                     height="100%"
-                    source={svgs['darkCrownTree' + ('' + i).padStart(3, '0')]}
+                    // source = {svgs['darkCrownTree' + ('' + i)]}
+                    source={
+                      svgs[_.padStart('darkCrownTree' + ('' + i), 3, '0')]
+                    }
                   />
                 </View>
               ) : null
           )}
-          {totalCount.map(
-            i =>
-              i > treesWidth ? (
-                <View key={'pot-' + i} style={treecounterStyles.potStyle}>
-                  <SvgUri
-                    width="100%"
-                    height="100%"
-                    source={svgs['pot' + ('' + i).padStart(2, '0')]}
-                  />
-                </View>
-              ) : null
-          )}
+          {totalCount.map(i => {
+            return i > treesWidth ? (
+              <View key={'pot-' + i} style={treecounterStyles.potStyle}>
+                <SvgUri
+                  width="100%"
+                  height="100%"
+                  // source = {svgs['pot' + ('' + i)]}
+                  source={svgs[_.padStart('pot' + ('' + i), 2, '0')]}
+                />
+              </View>
+            ) : null;
+          })}
           <View style={treecounterStyles.circleStyle}>
             <Svg height="100%" width="100%" viewBox="0 0 400 400">
               <Circle

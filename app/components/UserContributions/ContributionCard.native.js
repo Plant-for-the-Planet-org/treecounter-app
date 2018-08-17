@@ -9,6 +9,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  TouchableHighlight,
   Image,
   Dimensions,
   FlatList
@@ -21,6 +22,7 @@ import Lightbox from 'react-native-lightbox';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
+import _ from 'lodash';
 class ContributionCard extends React.Component {
   constructor(props) {
     super(props);
@@ -59,7 +61,7 @@ class ContributionCard extends React.Component {
       <View style={styles.content}>
         {section.treeScientificName ? (
           <Text>{'Scientific Name: ' + section.treeScientificName}</Text>
-        ) : null};
+        ) : null}
         {measurementsAvailable ? (
           <View>
             <View style={styles.actionBar}>
@@ -78,14 +80,13 @@ class ContributionCard extends React.Component {
                     {new Date(measurement.measurementDate).toLocaleDateString()}
                   </Text>
                   <Text>
-                    {(
-                      (measurement.height * 10).toFixed(1) +
-                      ' ' +
-                      'mm'
-                    ).padStart(10)}
+                    {_.padStart(
+                      (measurement.height * 10).toFixed(1) + ' ' + 'mm',
+                      10
+                    )}
                   </Text>
                   <Text>
-                    {(measurement.diameter + ' ' + 'cm').padStart(10)}
+                    {_.padStart(measurement.diameter + ' ' + 'cm', 10)}
                   </Text>
                 </View>
               );
@@ -156,9 +157,6 @@ class ContributionCard extends React.Component {
                 contribution.treeSpecies +
                 i18n.t('label.tree')}
             </Text>
-            {/* <Text>
-              {contribution.geoLatitude + ', ' + contribution.geoLongitude}
-            </Text> */}
             <Text style={styles.dateStyle}>
               {moment(new Date(contribution.plantDate)).format('DD MMM YYYY')}
             </Text>
@@ -214,20 +212,21 @@ ContributionCard.propTypes = {
 class ActionButton extends React.Component {
   render() {
     return (
-      <TouchableOpacity
+      <TouchableHighlight
         style={styles.actionButton}
         onPress={event => {
-          console.log('click action button');
           this.props.onPress && this.props.onPress(event);
         }}
       >
-        {this.props.image ? (
-          <Image source={this.props.image} style={styles.imageStyle} />
-        ) : null}
-        {this.props.text ? (
-          <Text style={styles.actionButtonText}>{this.props.text}</Text>
-        ) : null}
-      </TouchableOpacity>
+        <View style={{ flexDirection: 'row' }}>
+          {this.props.image != null ? (
+            <Image source={this.props.image} style={styles.imageStyle} />
+          ) : null}
+          {this.props.text != null ? (
+            <Text style={styles.actionButtonText}>{this.props.text}</Text>
+          ) : null}
+        </View>
+      </TouchableHighlight>
     );
   }
 }

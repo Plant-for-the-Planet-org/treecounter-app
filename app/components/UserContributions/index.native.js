@@ -124,5 +124,6 @@ export default class UserContributions extends React.Component {
 
 UserContributions.propTypes = {
   userProfileId: PropTypes.number.isRequired,
-  userContributions: PropTypes.array.isRequired
+  userContributions: PropTypes.array.isRequired,
+  navigation: PropTypes.any
 };

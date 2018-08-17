@@ -20,7 +20,6 @@ export default (buttonStyles = EStyleSheet.create({
   },
   userProfileContainer: {
     flexDirection: 'row',
-    flex: 1,
     padding: 10,
     marginBottom: 10
   },

@@ -6,11 +6,12 @@ import com.facebook.react.ReactApplication;
 import com.imagepicker.ImagePickerPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.horcrux.svg.SvgPackage;
-import com.reactlibrary.RNTooltipsPackage;
+
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+// import com.reactlibrary.RNTooltipsPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
             new ImagePickerPackage(),
             new RNI18nPackage(),
             new SvgPackage()
-            new RNTooltipsPackage()
+          //  new RNTooltipsPackage()
       );
     }
 

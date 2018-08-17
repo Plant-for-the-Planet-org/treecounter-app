@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SeeMoreToggle from '../Common/SeeMoreToggle';
-// import PlantProjectDetails from './PlantProjectDetails';
-// import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
 import { View, Text } from 'react-native';
@@ -13,6 +11,7 @@ import PlantProjectSpecs from './PlantProjectSpecs';
 import PlantProjectDetails from './PlantProjectDetails';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import { TouchableHighlight } from 'react-native';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -119,7 +118,16 @@ class PlantProjectFull extends React.Component {
             >
               {i18n.t('label.select_project')}
             </PrimaryButton>
-          ) : null}
+          ) : // <TouchableHighlight
+          //   onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
+          //   style={styles.button}
+          // >
+          //   <Text style={styles.buttonText}>
+          //     {' '}
+          //     {i18n.t('label.select_project')}
+          //   </Text>
+          // </TouchableHighlight>
+          null}
           {this.props.showNextButton ? (
             <PrimaryButton onClick={() => this.props.onNextClick()}>
               {i18n.t('label.next')}
@@ -137,7 +145,10 @@ PlantProjectFull.propTypes = {
   callExpanded: PropTypes.func,
   tpoName: PropTypes.string,
   selectAnotherProject: PropTypes.bool,
-  projectClear: PropTypes.func
+  projectClear: PropTypes.func,
+  showNextButton: PropTypes.bool,
+  onNextClick: PropTypes.func,
+  onSelectClickedFeaturedProjects: PropTypes.func
 };
 
 export default PlantProjectFull;

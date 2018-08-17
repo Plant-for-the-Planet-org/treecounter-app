@@ -1,6 +1,7 @@
 import CardLayout from '../Common/Card';
 import t from 'tcomb-form-native';
 import React, { Component } from 'react';
+import { ScrollView } from 'react-native';
 
 import {
   receiptIndividualFormSchema,
@@ -25,18 +26,20 @@ export default class IndividualForm extends Component {
   }
   render() {
     return (
-      <CardLayout style={{ padding: 10 }}>
-        <Form
-          ref="donateReceipt"
-          type={receiptIndividualFormSchema}
-          options={individualSchemaOptions}
-        />
-        {this.props.showNextButton ? (
-          <PrimaryButton onClick={() => this.onNextClick()}>
-            {i18n.t('label.next')}
-          </PrimaryButton>
-        ) : null}
-      </CardLayout>
+      <ScrollView>
+        <CardLayout style={{ padding: 10 }}>
+          <Form
+            ref="donateReceipt"
+            type={receiptIndividualFormSchema}
+            options={individualSchemaOptions}
+          />
+          {this.props.showNextButton ? (
+            <PrimaryButton onClick={() => this.onNextClick()}>
+              {i18n.t('label.next')}
+            </PrimaryButton>
+          ) : null}
+        </CardLayout>
+      </ScrollView>
     );
   }
 }

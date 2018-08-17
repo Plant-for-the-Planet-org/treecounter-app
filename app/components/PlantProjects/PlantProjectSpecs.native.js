@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlantProjectSpecsItem from './PlantProjectSpecsItem';
 import i18n from '../../locales/i18n.js';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableHighlight } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-spec';
-import ToolTip from 'react-native-tooltip';
+// import ToolTip from 'react-native-tooltip';
+//import RNTooltips from 'react-native-tooltips';
 
 import {
   locationIcon,
@@ -21,9 +22,25 @@ import {
 class PlantProjectSpecs extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tootltipText: 'dummy', deducibleText: ' ' };
+    this.state = {
+      tootltipText: 'dummy',
+      visible: false,
+      deducibleText: ' ',
+      reference: (
+        <TouchableHighlight
+          onPress={() => {
+            this.toggleTooltip();
+          }}
+        >
+          <Image
+            style={styles.project_specs__taxdeductibleIcon}
+            source={questionmark_orange}
+          />
+        </TouchableHighlight>
+      )
+    };
   }
-  componentDidMount() {
+  componentWillMount() {
     if (this.props.taxDeduction && this.props.taxDeduction.length > 2) {
       let tooltipText1 = '';
       let deducibleText1 = '';
@@ -43,6 +60,9 @@ class PlantProjectSpecs extends React.Component {
     } else if (this.props.taxDeduction) {
       this.setState({ deducibleText: this.props.taxDeduction.join(',') });
     }
+  }
+  toggleTooltip() {
+    this.setState({ visible: !this.state.visible });
   }
 
   render() {
@@ -95,7 +115,8 @@ class PlantProjectSpecs extends React.Component {
           <Text style={styles.project_specs__taxdeductibleText}>
             {this.state.deducibleText}
           </Text>
-          <ToolTip
+          {this.state.reference}
+          {/* <ToolTip
             ref="tooltip"
             actions={[
               { text: this.state.tooltipText ? this.state.tooltipText : '' }
@@ -107,7 +128,12 @@ class PlantProjectSpecs extends React.Component {
               style={styles.project_specs__taxdeductibleIcon}
               source={questionmark_orange}
             />
-          </ToolTip>
+          </ToolTip> */}
+          {/* <RNTooltips
+            text={this.state.tootltipText}
+            visible={this.state.visible}
+            reference={this.state.reference}
+          /> */}
         </View>
       </View>
     );

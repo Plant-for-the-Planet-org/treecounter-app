@@ -51,19 +51,26 @@ export default (selectplantprojectFull = EStyleSheet.create({
   searchContainer: {
     width: '100%',
     flexDirection: 'row',
-    margin: 1,
-    height: 40
+    margin: 3,
+    height: 40,
+    alignItems: 'center',
+    borderColor: '#aba2a2',
+    borderStyle: 'solid',
+    borderBottomWidth: 1
   },
-  searchIcon: {
+  searchIconContainer: {
     height: 15,
     width: 15,
+    marginRight: 1
+  },
+  searchIcon: {
+    height: '100%',
+    width: '100%',
     resizeMode: 'contain'
   },
   searchInput: {
     flex: 1,
     fontSize: 14,
-    paddingTop: 1,
-    paddingLeft: 10,
     color: '$textColor'
   },
 

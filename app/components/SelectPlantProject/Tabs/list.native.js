@@ -17,7 +17,7 @@ const { height, width } = Dimensions.get('window');
 import { getAppBarHeight } from '../../../styles/common/header';
 import SeeMoreToggle from '../../Common/SeeMoreToggle';
 import SearchBar from '../../Header/SearchBar';
-import { iosSearchWhite } from '../../../assets';
+import { iosSearchGrey } from '../../../assets';
 import ListViewProjects from './listview';
 import Proptypes from 'prop-types';
 
@@ -90,7 +90,7 @@ export default class ListProjects extends Component {
           />
 
           <View style={styles.searchIconContainer}>
-            <Image source={iosSearchWhite} style={styles.searchIcon} />
+            <Image source={iosSearchGrey} style={styles.searchIcon} />
           </View>
         </View>
 

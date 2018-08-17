@@ -91,7 +91,7 @@ import home from './images/icons/home.png';
 import svgBackground from './svgAssets/svg_background.png';
 import darkTree from './images/darkTree.png';
 import imageUpload from './images/icons/upload_image.png';
-// import iosSearchGrey from './images/icons/search_grey.png';
+import iosSearchGrey from './images/icons/search_grey.png';
 
 export {
   darkTree,
@@ -186,6 +186,6 @@ export {
   iosSearchWhite,
   iosNotificationWhite,
   imageUpload,
-  iosSearchGreen
-  // iosSearchGrey
+  iosSearchGreen,
+  iosSearchGrey
 };

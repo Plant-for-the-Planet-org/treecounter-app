@@ -29,7 +29,6 @@ const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
-  [getLocalRoute('app_userHome')]: 'label.home',
   [getLocalRoute('app_target')]: 'label.set_target',
   [getLocalRoute('app_donateTrees')]: 'label.donate_trees',
   [getLocalRoute('app_faq')]: 'label.faqs',
@@ -86,9 +85,16 @@ export const getDrawerNavigator = function(isLoggedIn) {
         ? getLocalRoute('app_userHome')
         : getLocalRoute('app_login'),
       navigationOptions: ({ navigation }) => {
+        console.log('navigation options', navigation);
+        let title = navigation.getParam('titleParam');
         let navigationConfig = {
           headerStyle: styles.container,
-          headerTintColor: '#fff'
+          headerTintColor: '#fff',
+          headerBackTitle: null,
+          title:
+            title != undefined
+              ? title
+              : i18n.t(headerLabels[navigation.state.routeName])
         };
         if (homeRoutes.includes(navigation.state.routeName)) {
           navigationConfig.headerLeft = BurgerMenu(navigation);

@@ -11,7 +11,7 @@ import styles from '../../../styles/selectplantproject/list';
 import i18n from '../../../locales/i18n.js';
 
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import CardLayout from '../../Common/Card/CardLayout';
+import CardLayout from '../../Common/Card';
 
 const { height, width } = Dimensions.get('window');
 import { getAppBarHeight } from '../../../styles/common/header';

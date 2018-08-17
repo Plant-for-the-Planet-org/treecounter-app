@@ -5,8 +5,6 @@ import i18n from '../../../locales/i18n.js';
 
 import Slick from 'react-native-slick';
 import PlantProjectFull from '../../PlantProjects/PlantProjectFull';
-import PrimaryButton from '../../Common/Button/PrimaryButton.native';
-import CardLayout from '../../Common/Card/CardLayout';
 
 export default class FeaturedProjects extends Component {
   constructor(props) {

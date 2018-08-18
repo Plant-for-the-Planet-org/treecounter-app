@@ -4,7 +4,7 @@ import './ReactotronConfig';
 /* app.js */
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-console.disableYellowBox = false;
+console.disableYellowBox = true;
 
 // import {
 //   setCustomView,
@@ -22,7 +22,8 @@ EStyleSheet.build({
   $colorPrimary: '#b7d37f',
   $colorPrimaryDark: '#b7d37f',
   $colorPrimaryAccent: '#e86f56',
-  $colorPrimaryAccentLight: '#ec6453'
+  $colorPrimaryAccentLight: '#ec6453',
+  $borderColor: '#aba2a2'
 });
 
 // const customTextProps = {

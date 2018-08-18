@@ -1,9 +1,36 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
+const getHeaderText = function(padding, margin) {
+  return {
+    textAlign: 'left',
+    fontSize: 16,
+    fontWeight: '500',
+    textAlign: 'left',
+    marginLeft: margin,
+    color: '$colorPrimaryAccent',
+    paddingRight: padding,
+    flex: 1
+  };
+};
 export default (myTreesStyle = EStyleSheet.create({
   contentContainer: {
     flex: 1,
     paddingVertical: 20
+  },
+  contributionContainer: {
+    borderWidth: 1,
+    borderLeftWidth: 4,
+    borderColor: '#e6e6e6',
+    // borderLeftColor:
+    //   contribution.contributionType == 'donation'
+    //     ? '#95c243'
+    //     : contribution.treeCount > 1
+    //       ? '#68aeec'
+    //       : '#ec6453',
+    justifyContent: 'space-between',
+    minHeight: 60,
+    marginBottom: 10,
+    margin: 10
   },
   container: {
     justifyContent: 'center',
@@ -31,16 +58,8 @@ export default (myTreesStyle = EStyleSheet.create({
     fontSize: 16,
     textAlign: 'left'
   },
-  headerText: {
-    textAlign: 'left',
-    fontSize: 16,
-    fontWeight: '500',
-    textAlign: 'left',
-    marginLeft: 8,
-    color: '$colorPrimaryAccent',
-    paddingRight: 12,
-    flex: 1
-  },
+  headerText: getHeaderText(12, 8),
+  pictureText: getHeaderText(0, 0),
   content: {
     marginTop: 8,
     padding: 0,

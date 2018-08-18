@@ -9,7 +9,7 @@ import {
 } from '../../../server/parsedSchemas/forgotpassword';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import TextHeading from '../../Common/Heading/TextHeading';
-import CardLayout from '../../Common/Card/CardLayout';
+import CardLayout from '../../Common/Card';
 import InlineLink from '../../Common/InlineLink';
 import TextBlock from '../../Common/Text/TextBlock';
 import TextSpan from '../../Common/Text/TextSpan';

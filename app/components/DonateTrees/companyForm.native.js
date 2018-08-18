@@ -1,10 +1,11 @@
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import t from 'tcomb-form-native';
 import React, { Component } from 'react';
 import {
   receiptCompanyFormSchema,
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
+import { ScrollView } from 'react-native';
 
 let Form = t.form.Form;
 
@@ -23,18 +24,20 @@ export default class CompanyForm extends Component {
 
   render() {
     return (
-      <CardLayout style={{ padding: 10 }}>
-        <Form
-          ref="donateReceipt"
-          type={receiptCompanyFormSchema}
-          options={companySchemaOptions}
-        />
-        {this.props.showNextButton ? (
-          <PrimaryButton onClick={() => this.onNextClick()}>
-            {i18n.t('label.next')}
-          </PrimaryButton>
-        ) : null}
-      </CardLayout>
+      <ScrollView>
+        <CardLayout style={{ padding: 10 }}>
+          <Form
+            ref="donateReceipt"
+            type={receiptCompanyFormSchema}
+            options={companySchemaOptions}
+          />
+          {this.props.showNextButton ? (
+            <PrimaryButton onClick={() => this.onNextClick()}>
+              {i18n.t('label.next')}
+            </PrimaryButton>
+          ) : null}
+        </CardLayout>
+      </ScrollView>
     );
   }
 }

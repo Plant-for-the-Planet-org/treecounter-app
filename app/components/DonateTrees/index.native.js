@@ -10,7 +10,7 @@ import {
 } from '../../server/parsedSchemas/donateTrees';
 
 import i18n from '../../locales/i18n.js';
-import SelectPlantTabView from './selectplant.tab';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import RecieptTabsView from './receiptTabs';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
@@ -292,7 +292,7 @@ export default class DonateTrees extends Component {
   render() {
     let plantProject = this.props.selectedProject;
     return this.state.showSelectProject ? (
-      <SelectPlantTabView onTabChange={tab => this.props.onTabChange(tab)} />
+      <SelectPlantProjectContainer />
     ) : !plantProject ? null : (
       <TabView
         animationEnabled={true}

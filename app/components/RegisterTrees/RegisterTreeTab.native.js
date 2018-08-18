@@ -9,7 +9,7 @@ const Form = t.form.Form;
 export default class RegisterTreeTab extends PureComponent {
   render() {
     return (
-      <View style={{ backgroundColor: '#ffffff' }}>
+      <View style={{ backgroundColor: '#ffffff', flex: 1 }}>
         <Form
           ref="multipleTreesForm"
           type={this.props.schemaType}
@@ -25,7 +25,9 @@ export default class RegisterTreeTab extends PureComponent {
               );
           }}
         >
-          {i18n.t('label.register')}
+          {this.props.buttonTitle
+            ? this.props.buttonTitle
+            : i18n.t('label.register')}
         </PrimaryButton>
       </View>
     );
@@ -37,5 +39,6 @@ RegisterTreeTab.propTypes = {
   onRegister: PropTypes.func,
   schemaType: PropTypes.any.isRequired,
   schemaOptions: PropTypes.any.isRequired,
-  value: PropTypes.any
+  value: PropTypes.any,
+  buttonTitle: PropTypes.string
 };

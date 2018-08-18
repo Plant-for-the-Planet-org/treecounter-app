@@ -8,7 +8,7 @@ import {
 } from '../../../server/parsedSchemas/resetPassword';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import TextHeading from '../../Common/Heading/TextHeading';
-import CardLayout from '../../Common/Card/CardLayout';
+import CardLayout from '../../Common/Card';
 import i18n from '../../../locales/i18n';
 
 let TCombForm = t.form.Form;

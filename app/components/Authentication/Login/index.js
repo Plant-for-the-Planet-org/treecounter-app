@@ -8,7 +8,7 @@ import {
 } from '../../../server/parsedSchemas/login';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import TextHeading from '../../Common/Heading/TextHeading';
-import CardLayout from '../../Common/Card/CardLayout';
+import CardLayout from '../../Common/Card';
 import LoginFooter from './LoginFooter';
 import i18n from '../../../locales/i18n.js';
 

@@ -20,9 +20,11 @@ export default (buttonStyles = EStyleSheet.create({
   },
   userProfileContainer: {
     flexDirection: 'row',
-    flex: 1,
     padding: 10,
     marginBottom: 10
+  },
+  footerText: {
+    color: '#686060'
   },
   circle: {
     borderRadius: 35,

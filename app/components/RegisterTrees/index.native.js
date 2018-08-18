@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import { TabView } from 'react-native-tab-view';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import {
   singleTreeRegisterFormSchema,
   schemaOptionsSingleTree,
@@ -73,7 +73,7 @@ export default class RegisterTrees extends Component {
   render() {
     return (
       <ScrollView>
-        <CardLayout>
+        <CardLayout style={{ flex: 1 }}>
           <TabView
             useNativeDriver={true}
             ref="registerTreeForm"

@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
+import CardLayout from '../Common/Card';
 import stylesHome from '../../styles/user-home';
 import stylesPublicPage from '../../styles/public-page';
 
@@ -98,7 +99,7 @@ class PublicTreeCounter extends React.Component {
     };
 
     return (
-      <View>
+      <ScrollView>
         <View style={stylesPublicPage.header}>
           <TreecounterHeader
             {...headerProps}
@@ -115,7 +116,16 @@ class PublicTreeCounter extends React.Component {
         <View style={stylesHome.svgContainer}>
           <SvgContainer {...this.state.svgData} />
         </View>
-      </View>
+        <View>
+          {'tpo' === userProfile.type &&
+          1 <= tpoProps.plantProjects.length ? null : userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
+          userProfile.synopsis2 ? (
+            <CardLayout>
+              <Text style={stylesHome.footerText}>{userProfile.synopsis1}</Text>
+            </CardLayout>
+          ) : null}
+        </View>
+      </ScrollView>
     );
   }
 }

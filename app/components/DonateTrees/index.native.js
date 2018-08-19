@@ -317,5 +317,6 @@ DonateTrees.propTypes = {
   paymentClear: PropTypes.func,
   supportTreecounter: PropTypes.object,
   paymentStatus: PropTypes.object,
-  plantProjectClear: PropTypes.func
+  plantProjectClear: PropTypes.func,
+  onTabChange: PropTypes.func
 };

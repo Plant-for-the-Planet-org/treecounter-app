@@ -35,8 +35,6 @@ export default class SelectPlantTabView extends Component {
   };
 
   _handleIndexChange = index => {
-    console.log('tab index update');
-    console.log(index);
     this.setState({ index });
   };
 
@@ -65,17 +63,11 @@ export default class SelectPlantTabView extends Component {
         return null;
     }
   };
-  _canJumpToTab = ({ route }) => {
-    console.log('can jump to');
-
-    // console.log(route);
-    return false;
-  };
 
   render() {
     return (
       <TabView
-        //   useNativeDriver={true}
+        useNativeDriver
         navigationState={this.state}
         renderScene={this._renderSelectPlantScene}
         renderTabBar={this._renderTabBar}

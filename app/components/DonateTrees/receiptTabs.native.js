@@ -17,6 +17,7 @@ import i18n from '../../locales/i18n.js';
 
 import CardLayout from '../../components/Common/Card';
 import styles from '../../styles/common/tabbar';
+import PropTypes from 'prop-types';
 
 let Form = t.form.Form;
 

@@ -1,8 +1,24 @@
 import React, { Component } from 'react';
-import { TabView } from 'react-native-tab-view';
-import { renderBasicTabbar } from '../../components/Common/Tabs/basicTabbar';
-import IndividualForm from './IndividualForm.native';
-import CompanyForm from './companyForm';
+import { TabView, TabBar } from 'react-native-tab-view';
+import t from 'tcomb-form-native';
+import {
+  receiptCompanyFormSchema,
+  companySchemaOptions
+} from '../../server/parsedSchemas/donateTrees';
+import { ScrollView } from 'react-native';
+
+import {
+  receiptIndividualFormSchema,
+  individualSchemaOptions
+} from '../../server/parsedSchemas/donateTrees';
+
+import PrimaryButton from '../../components/Common/Button/PrimaryButton';
+import i18n from '../../locales/i18n.js';
+
+import CardLayout from '../../components/Common/Card';
+import styles from '../../styles/common/tabbar';
+
+let Form = t.form.Form;
 
 export default class RecieptTabsView extends Component {
   constructor(props) {
@@ -15,12 +31,23 @@ export default class RecieptTabsView extends Component {
       ],
       index: 0
     };
+    this.tabView = React.createRef();
+    this.setIndividualDonateReceipt = element => {
+      this.individualRecipt = element;
+    };
+    this.setCompanyDonateReceipt = element => {
+      this.companyRecipt = element;
+    };
   }
 
   indexChange(index) {
     this.setState({
       index: index
     });
+  }
+
+  componentDidMount() {
+    this.props.onReciptTabChange('individual');
   }
 
   handleExpandedClicked = optionNumber => {
@@ -39,28 +66,69 @@ export default class RecieptTabsView extends Component {
   };
 
   _renderTabBar = props => {
-    return renderBasicTabbar(
-      props.navigationState.routes,
-      this.state.index,
-      index => this._handleIndexChange(index)
+    return (
+      <TabBar
+        {...props}
+        style={{
+          flexDirection: 'row',
+          zIndex: 4,
+          elevation: 5,
+          backgroundColor: '#ffffff'
+        }}
+        tabStyle={{ width: '50%', padding: 0 }}
+        labelStyle={{
+          color: '#00000',
+          fontSize: 11
+        }}
+        indicatorStyle={styles.textActive}
+      />
     );
+  };
+  onNextClickIndividual = () => {
+    this.props.goToNextTab(this.individualRecipt.getValue());
+  };
+
+  onNextClickCompany = () => {
+    this.props.goToNextTab(this.companyRecipt.getValue());
   };
 
   _renderSelectPlantScene = ({ route }) => {
     switch (route.key) {
       case 'individual':
         return (
-          <IndividualForm
-            showNextButton={this.props.showNextButton}
-            goToNextTab={value => this.props.goToNextTab(value)}
-          />
+          <ScrollView>
+            <CardLayout style={{ padding: 10 }}>
+              <Form
+                ref={this.setIndividualDonateReceipt}
+                type={receiptIndividualFormSchema}
+                options={individualSchemaOptions}
+                value={this.props.currentUserProfile}
+              />
+              {this.props.showNextButton ? (
+                <PrimaryButton onClick={() => this.onNextClickIndividual()}>
+                  {i18n.t('label.next')}
+                </PrimaryButton>
+              ) : null}
+            </CardLayout>
+          </ScrollView>
         );
       case 'company':
         return (
-          <CompanyForm
-            showNextButton={this.props.showNextButton}
-            goToNextTab={value => this.props.goToNextTab(value)}
-          />
+          <ScrollView>
+            <CardLayout style={{ padding: 10 }}>
+              <Form
+                ref={this.setCompanyDonateReceipt}
+                type={receiptCompanyFormSchema}
+                options={companySchemaOptions}
+                value={this.props.currentUserProfile}
+              />
+              {this.props.showNextButton ? (
+                <PrimaryButton onClick={() => this.onNextClickCompany()}>
+                  {i18n.t('label.next')}
+                </PrimaryButton>
+              ) : null}
+            </CardLayout>
+          </ScrollView>
         );
       default:
         return null;
@@ -70,6 +138,7 @@ export default class RecieptTabsView extends Component {
   render() {
     return (
       <TabView
+        ref={this.tabView}
         useNativeDriver={true}
         navigationState={this.state}
         renderScene={this._renderSelectPlantScene}
@@ -79,3 +148,10 @@ export default class RecieptTabsView extends Component {
     );
   }
 }
+
+RecieptTabsView.propTypes = {
+  currentUserProfile: PropTypes.object,
+  goToNextTab: PropTypes.func,
+  showNextButton: PropTypes.bool,
+  onReciptTabChange: PropTypes.func
+};

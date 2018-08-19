@@ -5,35 +5,20 @@ export default (tabbarStyles = EStyleSheet.create({
     flex: 1
   },
   tabBar: {
-    flexDirection: 'row',
-    paddingTop: 10,
-    backgroundColor: '#ffffff',
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.4,
-    shadowRadius: 2,
-    elevation: 1
-  },
-  tabItemActive: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 10,
-    borderBottomColor: '#ec6453',
-    borderBottomWidth: 2
+    backgroundColor: '#ffffff'
   },
   tabItem: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 10,
-    borderBottomColor: '#e6e6e6',
-    borderBottomWidth: 2
+    padding: 0,
+    width: 75
   },
   textActive: {
     color: '#ec6453',
-    fontSize: 13
+    fontSize: 11,
+    backgroundColor: '#ec6453',
+    width: 75
   },
-  text: {
+  textStyle: {
     color: '#aba2a2',
-    fontSize: 13
+    fontSize: 11
   }
 }));

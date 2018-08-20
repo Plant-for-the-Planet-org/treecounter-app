@@ -70,17 +70,10 @@ export default class RecieptTabsView extends Component {
     return (
       <TabBar
         {...props}
-        style={{
-          flexDirection: 'row',
-          zIndex: 4,
-          elevation: 5,
-          backgroundColor: '#ffffff'
-        }}
-        tabStyle={{ width: '50%', padding: 0 }}
-        labelStyle={{
-          color: '#00000',
-          fontSize: 11
-        }}
+        indicatorStyle={styles.indicator}
+        style={styles.tabBar}
+        tabStyle={{ width: 200 }}
+        labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
       />
     );

@@ -13,7 +13,7 @@ export function SelectTemplate(locals) {
         selectedValue={locals.value}
         onValueChange={(itemValue, itemIndex) => locals.onChange(itemValue)}
         style={styles.pickerStyle}
-        itemStyle={styles.itemStyle}
+        //  itemStyle={styles.itemStyle}
       >
         {locals.options.map(option => (
           <Picker.Item

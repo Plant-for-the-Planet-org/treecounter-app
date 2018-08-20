@@ -5,7 +5,7 @@ import i18n from '../../locales/i18n.js';
 import { View, Text, Image, TouchableHighlight } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-spec';
 // import ToolTip from 'react-native-tooltip';
-//import RNTooltips from 'react-native-tooltips';
+import Tooltips from 'react-native-tooltips';
 
 import {
   locationIcon,
@@ -26,18 +26,8 @@ class PlantProjectSpecs extends React.Component {
       tootltipText: 'dummy',
       visible: false,
       deducibleText: ' ',
-      reference: (
-        <TouchableHighlight
-          onPress={() => {
-            this.toggleTooltip();
-          }}
-        >
-          <Image
-            style={styles.project_specs__taxdeductibleIcon}
-            source={questionmark_orange}
-          />
-        </TouchableHighlight>
-      )
+      reference: undefined,
+      dismiss: false
     };
   }
   componentWillMount() {
@@ -61,8 +51,8 @@ class PlantProjectSpecs extends React.Component {
       this.setState({ deducibleText: this.props.taxDeduction.join(',') });
     }
   }
-  toggleTooltip() {
-    this.setState({ visible: !this.state.visible });
+  _onPress(ref) {
+    this.setState({ visible: true, dismiss: false, reference: ref });
   }
 
   render() {
@@ -115,7 +105,6 @@ class PlantProjectSpecs extends React.Component {
           <Text style={styles.project_specs__taxdeductibleText}>
             {this.state.deducibleText}
           </Text>
-          {this.state.reference}
           {/* <ToolTip
             ref="tooltip"
             actions={[
@@ -129,11 +118,26 @@ class PlantProjectSpecs extends React.Component {
               source={questionmark_orange}
             />
           </ToolTip> */}
-          {/* <RNTooltips
-            text={this.state.tootltipText}
+          <TouchableHighlight
+            ref={ref => {
+              this.ref1 = ref;
+            }}
+            onPress={() => {
+              this._onPress(this.ref1);
+            }}
+          >
+            <Image
+              style={styles.project_specs__taxdeductibleIcon}
+              source={questionmark_orange}
+            />
+          </TouchableHighlight>
+          <Tooltips
+            text={this.state.tooltipText}
             visible={this.state.visible}
+            //  dismiss={this.state.dismiss}
             reference={this.state.reference}
-          /> */}
+            autoHide={true}
+          />
         </View>
       </View>
     );

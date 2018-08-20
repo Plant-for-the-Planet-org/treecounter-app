@@ -6,11 +6,11 @@ export default (textInputStyles = EStyleSheet.create({
     marginLeft: 28,
     borderColor: '#cecece',
     borderBottomWidth: 1,
-    height: 35,
-    marginBottom: 20
+    height: 45
+    // marginBottom: 20
   },
   pickerStyle: {
-    height: 35
+    height: 45
   },
   itemStyle: {
     color: '#686060',

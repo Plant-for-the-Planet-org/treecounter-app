@@ -2,14 +2,14 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (textInputStyles = EStyleSheet.create({
   container: {
-    width: '100%',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    flex: 1
   },
   containerStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
+    flex: 1,
     paddingBottom: 20
   },
 
@@ -23,10 +23,9 @@ export default (textInputStyles = EStyleSheet.create({
     resizeMode: 'contain'
   },
   textboxStyle: {
-    flex: 1,
     height: 35,
+    flexGrow: 1,
     marginLeft: 10,
-    width: '80%',
     fontSize: 13,
     color: '#686060',
     borderBottomWidth: 1,

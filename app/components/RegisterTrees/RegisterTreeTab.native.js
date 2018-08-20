@@ -25,6 +25,9 @@ const formLayoutTreesTemplate = locals => {
         {locals.inputs.treeClassification}
         {locals.inputs.treeScientificName}
       </View>
+      <View style={styles.registerTree__form__row}>
+        {locals.inputs.contributionMeasurements}
+      </View>
     </View>
   );
 };

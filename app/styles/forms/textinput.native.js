@@ -29,7 +29,7 @@ export default (textInputStyles = EStyleSheet.create({
     fontSize: 13,
     color: '#686060',
     borderBottomWidth: 1,
-    borderColor: '#cecece'
+    borderColor: '$inputBorderColor'
   },
   emptyView: {
     width: 20,

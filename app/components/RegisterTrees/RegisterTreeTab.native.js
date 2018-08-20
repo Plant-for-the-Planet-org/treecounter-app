@@ -17,15 +17,20 @@ const formLayoutTreesTemplate = locals => {
       <View style={styles.registerTree__form__row}>
         {locals.inputs.plantDate}
       </View>
-      {locals.inputs.geoLocation}
       <View style={styles.registerTree__form__row}>
+        {locals.inputs.geoLocation}
+      </View>
+
+      <View
+        style={[styles.registerTree__form__alignLeftRow, styles.margin_top10]}
+      >
         {locals.inputs.contributionImages}
       </View>
       <View style={styles.registerTree__form__row}>
         {locals.inputs.treeClassification}
         {locals.inputs.treeScientificName}
       </View>
-      <View style={styles.registerTree__form__row}>
+      <View style={styles.registerTree__form__alignLeftRow}>
         {locals.inputs.contributionMeasurements}
       </View>
     </View>
@@ -39,7 +44,7 @@ export default class RegisterTreeTab extends PureComponent {
       ...this.props.schemaOptions
     };
     return (
-      <View style={{ backgroundColor: '#ffffff', width: 200 }}>
+      <View style={{ backgroundColor: '#ffffff' }}>
         <Form
           ref="multipleTreesForm"
           type={this.props.schemaType}

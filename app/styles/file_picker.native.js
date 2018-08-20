@@ -10,7 +10,7 @@ export default (datePickerStyle = EStyleSheet.create({
   underlineStyle: {
     height: 2,
     flex: 1,
-    backgroundColor: '#dad7d7'
+    backgroundColor: '$inputBorderColor'
   },
   dateValueStyle: {
     color: '$textColor',

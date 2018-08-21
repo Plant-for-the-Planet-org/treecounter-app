@@ -2,6 +2,9 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 
 export default (loginStyles = EStyleSheet.create({
+  scrollViewStyle: {
+    flexGrow: 1
+  },
   container: {
     flex: 1,
     justifyContent: 'center',

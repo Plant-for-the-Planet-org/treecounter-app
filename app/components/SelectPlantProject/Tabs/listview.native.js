@@ -1,24 +1,11 @@
 import React, { Component } from 'react';
-import {
-  View,
-  ScrollView,
-  Dimensions,
-  Text,
-  TextInput,
-  Image
-} from 'react-native';
+import { View, ScrollView, Text, Image } from 'react-native';
 import styles from '../../../styles/selectplantproject/list';
-import i18n from '../../../locales/i18n.js';
-
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import CardLayout from '../../Common/Card';
 
-const { height, width } = Dimensions.get('window');
-import { getAppBarHeight } from '../../../styles/common/header';
 import SeeMoreToggle from '../../Common/SeeMoreToggle';
-import SearchBar from '../../Header/SearchBar';
-import { iosSearchWhite } from '../../../assets';
 import Proptypes from 'prop-types';
+import { getImageUrl } from '../../../actions/apiRouting';
 
 export default class ListViewProjects extends Component {
   constructor(props) {
@@ -37,11 +24,27 @@ export default class ListViewProjects extends Component {
                   key={'filtered' + project.id}
                 >
                   <View style={styles.projectNameContainer}>
-                    <Text style={styles.projectNameText}>{project.name}</Text>
-                    <Text style={[styles.projectNameText, styles.tpoNameText]}>
-                      By {project.tpo_name}
-                    </Text>
+                    {project.image ? (
+                      <View style={styles.projectImageContainer}>
+                        <Image
+                          style={styles.projectImage}
+                          source={{
+                            uri: getImageUrl('project', 'small', project.image)
+                          }}
+                        />
+                      </View>
+                    ) : null}
+
+                    <View style={styles.projectNameTextContainer}>
+                      <Text style={styles.projectNameText}>{project.name}</Text>
+                      <Text
+                        style={[styles.projectNameText, styles.tpoNameText]}
+                      >
+                        By {project.tpo_name}
+                      </Text>
+                    </View>
                   </View>
+
                   <View style={styles.projectMetaContainer}>
                     <View style={styles.projectMetaLabels}>
                       <Text style={styles.textStyle}>Location</Text>

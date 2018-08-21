@@ -15,11 +15,32 @@ export default (selectplantprojectFull = EStyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 10,
-    borderColor: '#aba2a2',
+    borderColor: '#efefef',
     borderStyle: 'solid',
     borderBottomWidth: 1,
-    borderTopWidth: 1
+    borderTopWidth: 1,
+    flexDirection: 'row'
   },
+  projectImageContainer: {
+    width: 25,
+    height: 25,
+    marginRight: 10
+    // borderRadius: 13,
+    // borderWidth: 1,
+    // borderColor: '#fff'
+    // alignItems: 'center',
+    // justifyContent: 'center'
+  },
+  projectImage: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+    resizeMode: 'contain'
+  },
+  projectNameTextContainer: {
+    flexDirection: 'column'
+  },
+
   tpoNameText: {
     fontStyle: 'italic',
     fontWeight: '100'
@@ -54,7 +75,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
     margin: 3,
     height: 40,
     alignItems: 'center',
-    borderColor: '#aba2a2',
+    borderColor: '#efefef',
     borderStyle: 'solid',
     borderBottomWidth: 1
   },
@@ -75,7 +96,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
 
   listContentContainer: {
-    borderColor: '#aba2a2',
+    borderColor: '#efefef',
     borderStyle: 'solid',
     borderLeftWidth: 1,
     borderRightWidth: 1,
@@ -100,10 +121,16 @@ export default (selectplantprojectFull = EStyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center'
   },
-  imageStyle: {
+  imageStyleContainer: {
     width: 10,
     height: 10
   },
+  imageStyle: {
+    flex: 1,
+    width: undefined,
+    height: undefined
+  },
+
   cardHeader: {
     flexDirection: 'row',
     paddingBottom: 10

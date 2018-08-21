@@ -86,7 +86,7 @@ class PlantProjectSpecs extends React.Component {
           />
           <PlantProjectSpecsItem
             icon={tree_survival}
-            value={survivalRate}
+            value={survivalRate + '%'}
             rightIcon={questionmark_orange}
             label={i18n.t('label.survival_rate')}
           />

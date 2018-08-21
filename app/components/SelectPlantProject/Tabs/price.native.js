@@ -90,10 +90,16 @@ export default class PriceProjects extends Component {
         <View style={styles.cardHeader}>
           <Text style={styles.headingStyle}>Cost Per Tree</Text>
           <View style={styles.sortContainer}>
-            <TouchableHighlight onPress={() => this.sortProjects('desc')}>
+            <TouchableHighlight
+              style={styles.imageStyleContainer}
+              onPress={() => this.sortProjects('desc')}
+            >
               <Image style={styles.imageStyle} source={foldin} />
             </TouchableHighlight>
-            <TouchableHighlight onPress={() => this.sortProjects('asc')}>
+            <TouchableHighlight
+              style={styles.imageStyleContainer}
+              onPress={() => this.sortProjects('asc')}
+            >
               <Image style={styles.imageStyle} source={foldout} />
             </TouchableHighlight>
           </View>

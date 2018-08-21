@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Text } from 'react-native';
+import { View, TouchableHighlight, Image, Text } from 'react-native';
 import styles from '../../../styles/selectplantproject/list';
-import i18n from '../../../locales/i18n.js';
-
-import PrimaryButton from '../../Common/Button/PrimaryButton';
 import CardLayout from '../../Common/Card';
 
-const { height, width } = Dimensions.get('window');
-import { getAppBarHeight } from '../../../styles/common/header';
-import SeeMoreToggle from '../../Common/SeeMoreToggle';
 import Proptypes from 'prop-types';
 import ListViewProjects from './listview';
+import { foldout, foldin } from '../../../assets';
 
 export default class PriceProjects extends Component {
   constructor(props) {
@@ -40,25 +35,6 @@ export default class PriceProjects extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    let { plantProjects, currencies } = nextProps;
-    currencies = currencies.currencies;
-    let priceSortedProjects = plantProjects;
-    if (currencies) {
-      priceSortedProjects = plantProjects.sort(function(a, b) {
-        return (
-          a.treeCost *
-            parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
-          b.treeCost *
-            parseFloat(currencies.currency_rates['EUR'].rates[b.currency])
-        );
-      });
-    }
-    this.setState({
-      priceSortedProjects: priceSortedProjects
-    });
-  }
-
   onSelectProject = id => {
     this.props.selectProject(id);
   };
@@ -69,10 +45,60 @@ export default class PriceProjects extends Component {
     });
   };
 
+  sortProjects = sortType => {
+    if (sortType === 'desc') {
+      let { plantProjects, currencies } = this.props;
+      currencies = currencies.currencies;
+      let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
+      if (currencies) {
+        priceSortedProjects = priceSortedProjects.sort(function(a, b) {
+          return (
+            b.treeCost *
+              parseFloat(currencies.currency_rates['EUR'].rates[b.currency]) -
+            a.treeCost *
+              parseFloat(currencies.currency_rates['EUR'].rates[a.currency])
+          );
+        });
+      }
+      this.setState({
+        priceSortedProjects: priceSortedProjects
+      });
+    } else {
+      let { plantProjects, currencies } = this.props;
+      currencies = currencies.currencies;
+      let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
+      if (currencies) {
+        priceSortedProjects = priceSortedProjects.sort(function(a, b) {
+          return (
+            a.treeCost *
+              parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
+            b.treeCost *
+              parseFloat(currencies.currency_rates['EUR'].rates[b.currency])
+          );
+        });
+      }
+      this.setState({
+        priceSortedProjects: priceSortedProjects
+      });
+    }
+  };
+
   render() {
     let { priceSortedProjects } = this.state;
     return (
       <CardLayout style={styles.cardStyle}>
+        <View style={styles.cardHeader}>
+          <Text style={styles.headingStyle}>Cost Per Tree</Text>
+          <View style={styles.sortContainer}>
+            <TouchableHighlight onPress={() => this.sortProjects('desc')}>
+              <Image style={styles.imageStyle} source={foldin} />
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() => this.sortProjects('asc')}>
+              <Image style={styles.imageStyle} source={foldout} />
+            </TouchableHighlight>
+          </View>
+        </View>
+
         <ListViewProjects projects={priceSortedProjects} />
       </CardLayout>
     );

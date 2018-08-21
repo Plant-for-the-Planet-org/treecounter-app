@@ -95,5 +95,22 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   buttonTextStyle: {
     fontSize: 12
+  },
+  sortContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  imageStyle: {
+    width: 10,
+    height: 10
+  },
+  cardHeader: {
+    flexDirection: 'row',
+    paddingBottom: 10
+  },
+  headingStyle: {
+    fontSize: 16,
+    marginRight: 10,
+    color: '$textColor'
   }
 }));

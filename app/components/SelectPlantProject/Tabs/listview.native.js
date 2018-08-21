@@ -55,10 +55,10 @@ export default class ListViewProjects extends Component {
                         {project.countPlanted}
                       </Text>
                       <Text style={styles.textStyle}>
-                        {project.survivalRate}
+                        {project.survivalRate} %
                       </Text>
                       <Text style={styles.textStyle}>
-                        {project.treeCost.toFixed(2)}
+                        {project.currency + ' ' + project.treeCost.toFixed(2)}
                       </Text>
                     </View>
                   </View>

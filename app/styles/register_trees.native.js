@@ -20,5 +20,9 @@ export default (registerTreesStyle = EStyleSheet.create({
     alignSelf: 'flex-start',
     ...row
   },
+  registerTree__form__row__split: {
+    alignSelf: 'flex-start',
+    width: '100%'
+  },
   margin_top10
 }));

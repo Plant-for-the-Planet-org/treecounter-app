@@ -30,7 +30,7 @@ const formLayoutTreesTemplate = locals => {
         {locals.inputs.treeClassification}
         {locals.inputs.treeScientificName}
       </View>
-      <View style={styles.registerTree__form__alignLeftRow}>
+      <View style={styles.registerTree__form__row__split}>
         {locals.inputs.contributionMeasurements}
       </View>
     </View>

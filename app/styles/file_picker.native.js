@@ -3,7 +3,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default (datePickerStyle = EStyleSheet.create({
   filePickerContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     padding: 5
   },

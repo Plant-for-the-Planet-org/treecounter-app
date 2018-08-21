@@ -4,8 +4,8 @@ export default (mapTemplateStyle = EStyleSheet.create({
   mapContainer: {
     backgroundColor: '$placeholderColor',
     height: 200,
-    flex: 1,
+    width: '100%',
     justifyContent: 'center',
-    padding: 50
+    alignItems: 'center'
   }
 }));

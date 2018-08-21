@@ -150,7 +150,7 @@ export function DatePickerTemplate(locals) {
     ) : null;
 
   return (
-    <View style={formGroupStyle}>
+    <View style={[formGroupStyle, { flex: 1 }]}>
       <CollapsibleDatePickerIOS locals={locals} />
       {help}
       {error}

@@ -6,7 +6,7 @@ export default (sloginStyles = EStyleSheet.create({
     justifyContent: 'center',
     padding: 20,
     alignItems: 'center',
-    backgroundColor: '#f0f0f0'
+    backgroundColor: '$backgroundScreen'
   },
   inputContainer: {
     width: '100%',

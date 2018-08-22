@@ -11,10 +11,13 @@ export default (selectplantprojectFull = EStyleSheet.create({
     flexDirection: 'column',
     height: 150
   },
+  selectedItemStyle: {
+    backgroundColor: '#efefef'
+  },
   projectNameContainer: {
     paddingTop: 5,
     paddingBottom: 5,
-    paddingLeft: 10,
+    paddingLeft: 5,
     borderColor: '#efefef',
     borderStyle: 'solid',
     borderBottomWidth: 1,
@@ -52,7 +55,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectMetaContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10
+    padding: 5
   },
   projectMetaLabels: {
     // paddingLeft: 5
@@ -62,7 +65,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   projectButtonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingBottom: 5
   },
   textStyle: {
     fontSize: 12,

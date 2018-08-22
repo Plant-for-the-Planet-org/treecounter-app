@@ -3,17 +3,28 @@ import PropTypes from 'prop-types';
 import styles from '../../styles/selectplantproject/selectplantproject-spec';
 import { View, Text, Image, TouchableHighlight } from 'react-native';
 import Tooltips from 'react-native-tooltips';
-
+import EStyleSheet from 'react-native-extended-stylesheet';
 class PlantProjectSpecsItem extends React.Component {
   _onPress(ref) {
-    this.setState({ visible: true, dismiss: false, reference: ref });
+    if (this.state.specTooltipVisible) {
+      this.setState({ specTooltipVisible: false, dismiss: true });
+    } else {
+      this.setState({
+        specTooltipVisible: true,
+        dismiss: false,
+        reference: ref
+      });
+    }
   }
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
+      specTooltipVisible: false,
       reference: undefined
     };
+  }
+  onTooltipHide() {
+    this.setState({ specTooltipVisible: false });
   }
   render() {
     let { label, value, icon, rightIcon } = this.props;
@@ -46,9 +57,18 @@ class PlantProjectSpecsItem extends React.Component {
             text={
               'Percentage of planted trees that survive the first year after planting.'
             }
-            visible={this.state.visible}
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginLeft: 10
+            }}
+            clickToHide={true}
+            visible={this.state.specTooltipVisible}
             reference={this.state.reference}
             autoHide={true}
+            tintColor={EStyleSheet.value('$colorPrimaryAccent')}
+            textColor={EStyleSheet.value('$placeholderColor')}
+            onHide={() => this.onTooltipHide()}
           />
         </View>
         {value && (value !== undefined || value !== 'undefined') ? (

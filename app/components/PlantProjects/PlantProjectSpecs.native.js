@@ -6,6 +6,8 @@ import { View, Text, Image, TouchableHighlight } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-spec';
 // import ToolTip from 'react-native-tooltip';
 import Tooltips from 'react-native-tooltips';
+/* app.js */
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 import {
   locationIcon,
@@ -24,7 +26,7 @@ class PlantProjectSpecs extends React.Component {
     super(props);
     this.state = {
       tootltipText: 'dummy',
-      visible: false,
+      specvisible: false,
       deducibleText: ' ',
       reference: undefined,
       dismiss: false
@@ -52,7 +54,14 @@ class PlantProjectSpecs extends React.Component {
     }
   }
   _onPress(ref) {
-    this.setState({ visible: true, dismiss: false, reference: ref });
+    if (this.state.specvisible) {
+      this.setState({ specvisible: false });
+    } else {
+      this.setState({ specvisible: true, dismiss: false, reference: ref });
+    }
+  }
+  onTooltipHide() {
+    this.setState({ specvisible: false });
   }
 
   render() {
@@ -133,10 +142,14 @@ class PlantProjectSpecs extends React.Component {
           </TouchableHighlight>
           <Tooltips
             text={this.state.tooltipText}
-            visible={this.state.visible}
+            visible={this.state.specvisible}
+            clickToHide={true}
             //  dismiss={this.state.dismiss}
             reference={this.state.reference}
             autoHide={true}
+            tintColor={EStyleSheet.value('$colorPrimaryAccent')}
+            textColor={EStyleSheet.value('$placeholderColor')}
+            onHide={() => this.onTooltipHide()}
           />
         </View>
       </View>

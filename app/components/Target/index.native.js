@@ -16,6 +16,7 @@ import {
 } from '../../server/parsedSchemas/target';
 
 import styles from '../../styles/login';
+import CardLayout from '../Common/Card';
 
 let Form = t.form.Form;
 
@@ -23,23 +24,23 @@ export default class Target extends Component {
   render() {
     let { treecounter } = this.props;
     return (
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.loginHeader}>
-          <Text style={styles.titleText}>{i18n.t('label.set_target')}</Text>
-          <View style={styles.titleTextUnderline} />
-        </View>
-        <View style={styles.inputContainer}>
-          <Form
-            ref={'setTargetForm'}
-            type={targetFormSchema}
-            options={schemaOptions}
-          />
-          <TouchableHighlight
-            onPress={this.props.onSubmitTarget}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>{i18n.t('label.set_target')}</Text>
-          </TouchableHighlight>
+      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+        <View style={styles.container}>
+          <CardLayout style={styles.inputContainer}>
+            <Form
+              ref={'setTargetForm'}
+              type={targetFormSchema}
+              options={schemaOptions}
+            />
+            <TouchableHighlight
+              onPress={this.props.onSubmitTarget}
+              style={styles.button}
+            >
+              <Text style={styles.buttonText}>
+                {i18n.t('label.set_target')}
+              </Text>
+            </TouchableHighlight>
+          </CardLayout>
         </View>
       </ScrollView>
     );

@@ -8,8 +8,11 @@ import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { currentUserProfileSelector } from '../../selectors';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import ProgressModal from '../../components/Common/ModalDialog/ProgressModal.native';
+import { View } from 'react-native';
 
 class AppDrawerNavigatorContainer extends Component {
+  _AppDrawerNavigator = undefined;
   constructor(props) {
     super(props);
     const { userProfile } = this.props;
@@ -23,14 +26,21 @@ class AppDrawerNavigatorContainer extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     //If there is no change in the user login state then don't re-render the component
     if (
-      (nextState.loading === this.state.loading &&
+      this.props.progressModel === nextProps.progressModel &&
+      ((nextState.loading === this.state.loading &&
         nextState.isLoggedIn === this.state.isLoggedIn &&
         (!nextProps.userProfile && !this.props.userProfile)) ||
-      (nextProps.userProfile &&
-        this.props.userProfile &&
-        nextProps.userProfile.id === this.props.userProfile.id)
+        (nextProps.userProfile &&
+          this.props.userProfile &&
+          nextProps.userProfile.id === this.props.userProfile.id))
     ) {
       return false;
+    }
+    if (this.props.progressModel === nextProps.progressModel) {
+      this._AppDrawerNavigator = getDrawerNavigator(
+        nextState.isLoggedIn,
+        nextProps.dispatch
+      );
     }
     return true;
   }
@@ -59,15 +69,27 @@ class AppDrawerNavigatorContainer extends Component {
   }
   render() {
     if (!this.state.loading) {
-      const AppDrawerNavigator = getDrawerNavigator(this.state.isLoggedIn);
-      return <AppDrawerNavigator />;
+      if (!this._AppDrawerNavigator) {
+        this._AppDrawerNavigator = getDrawerNavigator(
+          this.state.isLoggedIn,
+          this.props.dispatch
+        );
+      }
+
+      return (
+        <View style={{ flex: 1 }}>
+          <this._AppDrawerNavigator />
+          {this.props.progressModel ? <ProgressModal modalVisible /> : null}
+        </View>
+      );
     }
     return <LoadingIndicator />;
   }
 
   static propTypes = {
     dispatch: PropTypes.func,
-    loadUserProfile: PropTypes.func
+    loadUserProfile: PropTypes.func,
+    progressModel: PropTypes.bool
   };
 }
 
@@ -75,18 +97,22 @@ const mapStateToProps = state => {
   console.log('state', state);
   return {
     appDrawer: state.appDrawer,
-    userProfile: currentUserProfileSelector(state)
+    userProfile: currentUserProfileSelector(state),
+    progressModel: state.modelDialogState.progressModel
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      loadUserProfile,
-      loadTpos
-    },
-    dispatch
-  );
+  return {
+    dispatch,
+    ...bindActionCreators(
+      {
+        loadUserProfile,
+        loadTpos
+      },
+      dispatch
+    )
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(

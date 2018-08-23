@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  ScrollView
-} from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import {
   loginFormSchema,

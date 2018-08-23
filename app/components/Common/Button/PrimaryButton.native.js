@@ -11,7 +11,7 @@ const PrimaryButton = ({
   image
 }) => (
   <TouchableItem
-    activeOpacity={0.8}
+    activeOpacity={0.6}
     onPress={() => onClick()}
     style={[styles.primaryButton, buttonStyle]}
   >

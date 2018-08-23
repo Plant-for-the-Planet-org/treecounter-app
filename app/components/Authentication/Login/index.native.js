@@ -18,6 +18,7 @@ import i18n from '../../../locales/i18n.js';
 
 import styles from '../../../styles/login';
 import CardLayout from '../../Common/Card';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 
 let Form = t.form.Form;
 
@@ -40,12 +41,9 @@ export default class Login extends Component {
               type={loginFormSchema}
               options={schemaOptions}
             />
-            <TouchableHighlight
-              onPress={this.props.onPress}
-              style={styles.button}
-            >
-              <Text style={styles.buttonText}>{i18n.t('label.login')}</Text>
-            </TouchableHighlight>
+            <PrimaryButton onClick={this.props.onPress}>
+              {i18n.t('label.login')}
+            </PrimaryButton>
             <View style={styles.bottomRow}>
               <Text style={styles.bottomText}>
                 {i18n.t('label.forgot_ur_password')}

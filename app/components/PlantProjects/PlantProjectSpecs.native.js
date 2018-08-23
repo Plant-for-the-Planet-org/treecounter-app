@@ -6,6 +6,7 @@ import { View, Text, Image, TouchableHighlight } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-spec';
 // import ToolTip from 'react-native-tooltip';
 //import RNTooltips from 'react-native-tooltips';
+import TouchableItem from '../../components/Common/TouchableItem.native';
 
 import {
   locationIcon,
@@ -27,7 +28,7 @@ class PlantProjectSpecs extends React.Component {
       visible: false,
       deducibleText: ' ',
       reference: (
-        <TouchableHighlight
+        <TouchableItem
           onPress={() => {
             this.toggleTooltip();
           }}
@@ -36,7 +37,7 @@ class PlantProjectSpecs extends React.Component {
             style={styles.project_specs__taxdeductibleIcon}
             source={questionmark_orange}
           />
-        </TouchableHighlight>
+        </TouchableItem>
       )
     };
   }

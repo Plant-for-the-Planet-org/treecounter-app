@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  ImageBackground,
-  ScrollView
-} from 'react-native';
+import { Text, View, ImageBackground, ScrollView } from 'react-native';
 
 import {
   schemaOptions,
   signupFormSchema
 } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
-
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 import styles from '../../../styles/login';
 import SignupTypes from './SignupType';
 
@@ -56,12 +49,9 @@ export default class SignUp extends Component {
               type={signupFormSchema[Profiletype]}
               options={schemaOptions[Profiletype]}
             />
-            <TouchableHighlight
-              onPress={this.props.onSignUpClicked.bind(this, Profiletype)}
-              style={styles.button}
-            >
-              <Text style={styles.buttonText}>{i18n.t('label.signUp')}</Text>
-            </TouchableHighlight>
+            <PrimaryButton onPress={this.onResetPassword}>
+              {i18n.t('label.signUp')}
+            </PrimaryButton>
             <View style={styles.bottomRow}>
               <Text style={styles.bottomText}>
                 {i18n.t('label.already_have_account')}

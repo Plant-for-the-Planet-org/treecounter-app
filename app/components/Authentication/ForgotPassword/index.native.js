@@ -9,8 +9,8 @@ import {
 
 import styles from '../../../styles/forgetpassword';
 
-import { Text, View, TouchableHighlight, ImageBackground } from 'react-native';
-
+import { Text, View, ImageBackground, ScrollView } from 'react-native';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 let Form = t.form.Form;
 
 export default class ForgotPassword extends Component {
@@ -20,37 +20,28 @@ export default class ForgotPassword extends Component {
 
   render() {
     return (
-      <ImageBackground style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.titleText}>
-            {i18n.t('label.forgot_ur_password')}
-          </Text>
-          <View style={styles.titleTextUnderline} />
-        </View>
-        <View style={styles.inputContainer}>
-          <Form
-            ref={'forgotPasswordForm'}
-            type={forgotPasswordFormSchema}
-            options={schemaOptions}
-          />
-          <TouchableHighlight
-            onPress={this.onResetPassword}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
+      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+        <ImageBackground style={styles.container}>
+          <View style={styles.inputContainer}>
+            <Form
+              ref={'forgotPasswordForm'}
+              type={forgotPasswordFormSchema}
+              options={schemaOptions}
+            />
+            <PrimaryButton onPress={this.onResetPassword}>
               {i18n.t('label.reset_password')}
-            </Text>
-          </TouchableHighlight>
-          <View style={styles.bottomRow}>
-            <Text
-              onPress={this.onLoginClicked}
-              style={styles.bottomTextHighlight}
-            >
-              {i18n.t('label.try_again_login')}
-            </Text>
+            </PrimaryButton>
+            <View style={styles.bottomRow}>
+              <Text
+                onPress={this.onLoginClicked}
+                style={styles.bottomTextHighlight}
+              >
+                {i18n.t('label.try_again_login')}
+              </Text>
+            </View>
           </View>
-        </View>
-      </ImageBackground>
+        </ImageBackground>
+      </ScrollView>
     );
   }
 }

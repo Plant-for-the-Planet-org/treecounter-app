@@ -32,47 +32,45 @@ export default class Login extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.loginHeader}>
-          <Text style={styles.titleText}>{i18n.t('label.login')}</Text>
-          <View style={styles.titleTextUnderline} />
+      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+        <View style={styles.container}>
+          <CardLayout style={styles.inputContainer}>
+            <Form
+              ref={'loginForm'}
+              type={loginFormSchema}
+              options={schemaOptions}
+            />
+            <TouchableHighlight
+              onPress={this.props.onPress}
+              style={styles.button}
+            >
+              <Text style={styles.buttonText}>{i18n.t('label.login')}</Text>
+            </TouchableHighlight>
+            <View style={styles.bottomRow}>
+              <Text style={styles.bottomText}>
+                {i18n.t('label.forgot_ur_password')}
+              </Text>
+              <Text
+                onPress={this.onForgotPasswordClicked}
+                style={styles.bottomTextHighlight}
+              >
+                {i18n.t('label.reset')}
+              </Text>
+            </View>
+            <View style={styles.bottomRow}>
+              <Text style={styles.bottomText}>
+                {i18n.t('label.dont_have_account')}
+              </Text>
+              <Text
+                onPress={this.onSignupClicked}
+                style={styles.bottomTextHighlight}
+              >
+                {i18n.t('label.signUp')}.
+              </Text>
+            </View>
+          </CardLayout>
         </View>
-        <CardLayout style={styles.inputContainer}>
-          <Form
-            ref={'loginForm'}
-            type={loginFormSchema}
-            options={schemaOptions}
-          />
-          <TouchableHighlight
-            onPress={this.props.onPress}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>{i18n.t('label.login')}</Text>
-          </TouchableHighlight>
-          <View style={styles.bottomRow}>
-            <Text style={styles.bottomText}>
-              {i18n.t('label.forgot_ur_password')}
-            </Text>
-            <Text
-              onPress={this.onForgotPasswordClicked}
-              style={styles.bottomTextHighlight}
-            >
-              {i18n.t('label.reset')}
-            </Text>
-          </View>
-          <View style={styles.bottomRow}>
-            <Text style={styles.bottomText}>
-              {i18n.t('label.dont_have_account')}
-            </Text>
-            <Text
-              onPress={this.onSignupClicked}
-              style={styles.bottomTextHighlight}
-            >
-              {i18n.t('label.signUp')}.
-            </Text>
-          </View>
-        </CardLayout>
-      </View>
+      </ScrollView>
     );
   }
 }

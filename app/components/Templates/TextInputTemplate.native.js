@@ -24,9 +24,7 @@ export function TextInputTemplate(locals) {
           <View style={styles.imageContainerStyle}>
             <Image style={styles.imageStyle} source={locals.config.iconUrl} />
           </View>
-        ) : (
-          <View style={styles.emptyView} />
-        )}
+        ) : null}
         <TextInput
           style={styles.textboxStyle}
           secureTextEntry={locals.secureTextEntry}

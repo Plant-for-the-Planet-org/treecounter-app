@@ -9,11 +9,11 @@ import {
   View,
   Text,
   TouchableOpacity,
-  TouchableHighlight,
   Image,
   Dimensions,
   FlatList
 } from 'react-native';
+import TouchableItem from '../../components/Common/TouchableItem';
 import styles from '../../styles/myTrees/user_contribution_card';
 import { foldout, foldin, MapPinRed, EditOrange } from '../../assets';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -212,7 +212,8 @@ ContributionCard.propTypes = {
 class ActionButton extends React.Component {
   render() {
     return (
-      <TouchableHighlight
+      <TouchableItem
+        activeOpacity={0.5}
         style={styles.actionButton}
         onPress={event => {
           this.props.onPress && this.props.onPress(event);
@@ -226,7 +227,7 @@ class ActionButton extends React.Component {
             <Text style={styles.actionButtonText}>{this.props.text}</Text>
           ) : null}
         </View>
-      </TouchableHighlight>
+      </TouchableItem>
     );
   }
 }

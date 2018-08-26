@@ -43,6 +43,8 @@ import DonationTreesContainer from '../../containers/DonateTrees';
 
 import EditUserProfileContainer from '../../containers/EditUserProfile';
 import LeaderboardContainer from '../../containers/Leaderboard';
+import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
+
 // Class implementation
 class TreeCounter extends Component {
   constructor(props) {
@@ -114,6 +116,7 @@ class TreeCounter extends Component {
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
+            <ProgressModal isOpen={this.props.progressModel} />
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             <div className="app-container__content">
@@ -227,7 +230,8 @@ class TreeCounter extends Component {
 }
 
 const mapStateToProps = state => ({
-  userProfile: currentUserProfileSelector(state)
+  userProfile: currentUserProfileSelector(state),
+  progressModel: state.modelDialogState.progressModel
 });
 
 const mapDispatchToProps = dispatch => {
@@ -248,5 +252,6 @@ TreeCounter.propTypes = {
   loadUserProfile: PropTypes.func,
   NotificationAction: PropTypes.func,
   loadTpos: PropTypes.func,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
+  progressModel: PropTypes.bool
 };

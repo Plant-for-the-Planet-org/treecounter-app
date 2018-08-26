@@ -100,7 +100,9 @@ export const getDrawerNavigator = function(isLoggedIn) {
           navigationConfig.headerLeft = BurgerMenu(navigation);
           navigationConfig.headerRight = HeaderRight(navigation);
         }
-
+        if (navigation.state.routeName === getLocalRoute('app_treecounter')) {
+          navigationConfig.headerRight = HeaderRight(navigation);
+        }
         return navigationConfig;
       }
     }

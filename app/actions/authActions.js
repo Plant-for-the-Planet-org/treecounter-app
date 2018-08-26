@@ -7,20 +7,27 @@ import { postRequest } from '../utils/api';
 import { updateJWT } from '../utils/user';
 import { NotificationAction } from './notificationAction';
 import { loadTpos } from './loadTposAction';
-
+import { setProgressModelState } from '../reducers/modelDialogReducer';
+import _ from 'lodash';
 export const userLogout = createAction('USER_LOGOUT');
-export function login(data) {
+export function login(data, navigation = undefined) {
   const request = postRequest('api_login_check', data);
 
   return dispatch => {
-    request.then(res => {
-      const { token, refresh_token } = res.data;
-      updateJWT(token, refresh_token);
-      dispatch(loadUserProfile());
-      dispatch(NotificationAction());
-      updateRoute('app_userHome', dispatch);
-      return token;
-    });
+    dispatch(setProgressModelState(true));
+    request
+      .then(res => {
+        const { token, refresh_token } = res.data;
+        updateJWT(token, refresh_token);
+        dispatch(loadUserProfile());
+        dispatch(NotificationAction());
+        updateRoute('app_userHome', navigation || dispatch);
+        _.delay(() => dispatch(setProgressModelState(false)), 1000);
+        return token;
+      })
+      .catch(err => {
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 

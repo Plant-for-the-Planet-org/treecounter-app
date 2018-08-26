@@ -7,7 +7,7 @@ import styles from '../../styles/forms/select';
 
 export function SelectTemplate(locals) {
   return (
-    <View style={styles.pickerViewStyle}>
+    <View style={styles.containerStyle}>
       <Picker
         mode="dropdown"
         selectedValue={locals.value}

@@ -65,6 +65,11 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
               properties[propertyKey].format = 'email';
             }
           }
+          if (properties[propertyKey].hasOwnProperty('style')) {
+            options.config = {
+              style: properties[propertyKey].style
+            };
+          }
           if (propertyKey === 'email') {
             options.config = { ...options.config, email: true };
             properties[propertyKey].format = 'email';

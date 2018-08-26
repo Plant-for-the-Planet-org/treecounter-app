@@ -1,36 +1,29 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import { context } from '../../../app/config/index';
 import { View, Text } from 'react-native';
-// import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
+import VideoContainer from '../../components/Common/VideoContainer';
+import React from 'react';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectDetails
  */
-const PlantProjectDetails = ({
-  description,
-  homepageUrl,
-  homepageCaption,
-  plantProjectImages,
-  videoUrl,
-  mapData
-}) => {
-  if (context.debug && !videoUrl) {
-    videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
+class PlantProjectDetails extends React.Component {
+  constructor(props) {
+    super(props);
   }
-  return (
-    <View style={{ width: '100%', height: 200 }}>
-      <Text>Dummy content</Text>
-      <Text>Dummy content</Text>
-      <Text>Dummy content</Text>
-      <Text>Dummy content</Text>
-      <Text>Dummy content</Text>
-      <Text>Dummy content</Text>
-      <Text>Dummy content</Text>
-    </View>
-  );
-};
+  render() {
+    let vUrl = this.props.videoUrl;
+    if (context.debug && !this.props.videoUrl) {
+      vUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
+    }
+    return (
+      <View style={{ height: 200 }}>
+        <VideoContainer url={vUrl} />
+      </View>
+    );
+  }
+}
 
 PlantProjectDetails.propTypes = {
   description: PropTypes.string,

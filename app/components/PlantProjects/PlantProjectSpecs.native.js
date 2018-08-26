@@ -5,7 +5,10 @@ import i18n from '../../locales/i18n.js';
 import { View, Text, Image, TouchableHighlight } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-spec';
 // import ToolTip from 'react-native-tooltip';
-//import RNTooltips from 'react-native-tooltips';
+//import Tooltips from 'react-native-tooltips';
+import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
+/* app.js */
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 import {
   locationIcon,
@@ -23,21 +26,11 @@ class PlantProjectSpecs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tootltipText: 'dummy',
-      visible: false,
+      tooltipText: 'dummy',
+      specvisible: false,
       deducibleText: ' ',
-      reference: (
-        <TouchableHighlight
-          onPress={() => {
-            this.toggleTooltip();
-          }}
-        >
-          <Image
-            style={styles.project_specs__taxdeductibleIcon}
-            source={questionmark_orange}
-          />
-        </TouchableHighlight>
-      )
+      reference: undefined,
+      dismiss: false
     };
   }
   componentWillMount() {
@@ -61,8 +54,20 @@ class PlantProjectSpecs extends React.Component {
       this.setState({ deducibleText: this.props.taxDeduction.join(',') });
     }
   }
-  toggleTooltip() {
-    this.setState({ visible: !this.state.visible });
+  _onPress(ref) {
+    if (this.state.specvisible) {
+      this.setState({ specvisible: false });
+    } else {
+      this.setState({ specvisible: true, dismiss: false, reference: ref });
+    }
+  }
+  onTooltipHide() {
+    this.setState({ specvisible: false });
+  }
+  getItems() {
+    let arr = [];
+    arr.push({ label: this.state.tooltipText, onPress: () => {} });
+    return arr;
   }
 
   render() {
@@ -96,7 +101,7 @@ class PlantProjectSpecs extends React.Component {
           />
           <PlantProjectSpecsItem
             icon={tree_survival}
-            value={survivalRate}
+            value={survivalRate + '%'}
             rightIcon={questionmark_orange}
             label={i18n.t('label.survival_rate')}
           />
@@ -115,7 +120,17 @@ class PlantProjectSpecs extends React.Component {
           <Text style={styles.project_specs__taxdeductibleText}>
             {this.state.deducibleText}
           </Text>
-          {this.state.reference}
+          <View style={{ alignItems: 'center' }}>
+            <ReactNativeTooltipMenu
+              buttonComponent={
+                <Image
+                  style={styles.project_specs__taxdeductibleIcon}
+                  source={questionmark_orange}
+                />
+              }
+              items={this.getItems()}
+            />
+          </View>
           {/* <ToolTip
             ref="tooltip"
             actions={[
@@ -129,11 +144,6 @@ class PlantProjectSpecs extends React.Component {
               source={questionmark_orange}
             />
           </ToolTip> */}
-          {/* <RNTooltips
-            text={this.state.tootltipText}
-            visible={this.state.visible}
-            reference={this.state.reference}
-          /> */}
         </View>
       </View>
     );

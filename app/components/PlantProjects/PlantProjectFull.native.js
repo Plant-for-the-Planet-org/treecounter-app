@@ -11,7 +11,7 @@ import PlantProjectSpecs from './PlantProjectSpecs';
 import PlantProjectDetails from './PlantProjectDetails';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import { TouchableHighlight } from 'react-native';
+import { ScrollView } from 'react-native';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -80,61 +80,64 @@ class PlantProjectFull extends React.Component {
       plantProjectImages
     };
     return (
-      <CardLayout style={styles.projectFullContainer}>
-        <View style={styles.projectTeaserContainer}>
-          <PlantProjectTeaser {...teaserProps} />
-        </View>
-        <View style={styles.projectSpecsContainer}>
-          <PlantProjectSpecs {...specsProps} />
-        </View>
-
-        <View style={styles.seeMoreContainer}>
-          <SeeMoreToggle
-            seeMore={!this.state.expanded}
-            onToggle={this.toggleExpanded}
-          />
-          {this.props.selectAnotherProject ? (
-            <View style={styles.select_different_project_style}>
-              <Text
-                onPress={this.props.projectClear}
-                style={styles.select_different_project_style_text}
-              >
-                {i18n.t('label.different_project')}
-              </Text>
-            </View>
-          ) : null}
-        </View>
-        {this.state.expanded ? (
-          <View style={styles.plantProjectDetails}>
-            <PlantProjectDetails {...detailsProps} />
+      <ScrollView>
+        x
+        <CardLayout style={styles.projectFullContainer}>
+          <View style={styles.projectTeaserContainer}>
+            <PlantProjectTeaser {...teaserProps} />
           </View>
-        ) : (
-          <View style={styles.plantProjectDetails} />
-        )}
-        <View style={styles.buttonContainer}>
-          {!this.props.selectAnotherProject ? (
-            <PrimaryButton
-              onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
-            >
-              {i18n.t('label.select_project')}
-            </PrimaryButton>
-          ) : // <TouchableHighlight
-          //   onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
-          //   style={styles.button}
-          // >
-          //   <Text style={styles.buttonText}>
-          //     {' '}
-          //     {i18n.t('label.select_project')}
-          //   </Text>
-          // </TouchableHighlight>
-          null}
-          {this.props.showNextButton ? (
-            <PrimaryButton onClick={() => this.props.onNextClick()}>
-              {i18n.t('label.next')}
-            </PrimaryButton>
-          ) : null}
-        </View>
-      </CardLayout>
+          <View style={styles.projectSpecsContainer}>
+            <PlantProjectSpecs {...specsProps} />
+          </View>
+
+          <View style={styles.seeMoreContainer}>
+            <SeeMoreToggle
+              seeMore={!this.state.expanded}
+              onToggle={this.toggleExpanded}
+            />
+            {this.props.selectAnotherProject ? (
+              <View style={styles.select_different_project_style}>
+                <Text
+                  onPress={this.props.projectClear}
+                  style={styles.select_different_project_style_text}
+                >
+                  {i18n.t('label.different_project')}
+                </Text>
+              </View>
+            ) : null}
+          </View>
+          {this.state.expanded ? (
+            <View style={styles.plantProjectDetails}>
+              <PlantProjectDetails {...detailsProps} />
+            </View>
+          ) : (
+            <View style={styles.plantProjectDetails} />
+          )}
+          <View style={styles.buttonContainer}>
+            {!this.props.selectAnotherProject ? (
+              <PrimaryButton
+                onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
+              >
+                {i18n.t('label.select_project')}
+              </PrimaryButton>
+            ) : // <TouchableHighlight
+            //   onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
+            //   style={styles.button}
+            // >
+            //   <Text style={styles.buttonText}>
+            //     {' '}
+            //     {i18n.t('label.select_project')}
+            //   </Text>
+            // </TouchableHighlight>
+            null}
+            {this.props.showNextButton ? (
+              <PrimaryButton onClick={() => this.props.onNextClick()}>
+                {i18n.t('label.next')}
+              </PrimaryButton>
+            ) : null}
+          </View>
+        </CardLayout>
+      </ScrollView>
     );
   }
 }

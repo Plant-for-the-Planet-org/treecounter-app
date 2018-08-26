@@ -138,7 +138,6 @@ android {
 
 dependencies {
     compile project(':react-native-youtube')
-    compile project(':react-native-tooltips')
     compile project(':react-native-image-picker')
     compile project(':react-native-i18n')
     compile project(':react-native-svg')

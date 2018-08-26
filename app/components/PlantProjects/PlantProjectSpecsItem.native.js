@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../styles/selectplantproject/selectplantproject-spec';
 import { View, Text, Image, TouchableHighlight } from 'react-native';
-import Tooltips from 'react-native-tooltips';
+// import Tooltips from 'react-native-tooltips';
+import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import EStyleSheet from 'react-native-extended-stylesheet';
 class PlantProjectSpecsItem extends React.Component {
   _onPress(ref) {
@@ -42,18 +43,32 @@ class PlantProjectSpecsItem extends React.Component {
         >
           <Text style={styles.project_specs__itemText_left}>{label + ' '}</Text>
           {rightIcon ? (
-            <TouchableHighlight
-              ref={ref => {
-                this.ref1 = ref;
-              }}
-              onPress={() => {
-                this._onPress(this.ref1);
-              }}
-            >
-              <Image style={styles.spec_icon} source={rightIcon} />
-            </TouchableHighlight>
-          ) : null}
-          <Tooltips
+            <View>
+              <ReactNativeTooltipMenu
+                buttonComponent={
+                  <Image style={styles.spec_icon} source={rightIcon} />
+                }
+                items={[
+                  {
+                    label: `Percentage of planted trees
+                      that survive the first year after planting.`,
+                    onPress: () => {}
+                  }
+                ]}
+              />
+            </View>
+          ) : // <TouchableHighlight
+          //   ref={ref => {
+          //     this.ref1 = ref;
+          //   }}
+          //   onPress={() => {
+          //     this._onPress(this.ref1);
+          //   }}
+          // >
+          //   <Image style={styles.spec_icon} source={rightIcon} />
+          // </TouchableHighlight>
+          null}
+          {/* <Tooltips
             text={
               'Percentage of planted trees that survive the first year after planting.'
             }
@@ -69,7 +84,7 @@ class PlantProjectSpecsItem extends React.Component {
             tintColor={EStyleSheet.value('$colorPrimaryAccent')}
             textColor={EStyleSheet.value('$placeholderColor')}
             onHide={() => this.onTooltipHide()}
-          />
+          /> */}
         </View>
         {value && (value !== undefined || value !== 'undefined') ? (
           <View style={styles.project_specs__itemText}>

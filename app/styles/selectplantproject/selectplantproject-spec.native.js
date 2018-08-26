@@ -63,7 +63,7 @@ export default (selectplantprojectSpecs = EStyleSheet.create({
   spec_icon: {
     height: 14,
     width: 14,
-    flex: 1,
+
     resizeMode: 'contain'
   }
 }));

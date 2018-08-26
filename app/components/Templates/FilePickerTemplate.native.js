@@ -39,16 +39,14 @@ export function FilePickerTemplate(locals) {
       >
         <Image source={imageUpload} style={{ height: 100, width: 100 }} />
       </TouchableOpacity>
-      {!locals.value ? (
-        <Text>{i18n.t('label.select_file')}</Text>
-      ) : (
+      {!locals.value ? null : (
         <Image
           source={{
             uri: !locals.value.includes('base64')
               ? getImageUrl(category, variant, locals.value)
               : locals.value
           }}
-          style={{ height: 100, width: 100, marginLeft: 20 }}
+          style={{ height: 80, width: 80, marginLeft: 20 }}
         />
       )}
     </View>

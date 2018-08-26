@@ -18,15 +18,13 @@ export function TextInputTemplate(locals) {
       <Text style={errorBlockStyle}>{locals.error}</Text>
     ) : null;
   return (
-    <View style={styles.container}>
-      <View style={styles.containerStyle}>
+    <View style={[styles.container]}>
+      <View style={[styles.containerStyle, locals.config.style]}>
         {locals.config.iconUrl ? (
           <View style={styles.imageContainerStyle}>
             <Image style={styles.imageStyle} source={locals.config.iconUrl} />
           </View>
-        ) : (
-          <View style={styles.emptyView} />
-        )}
+        ) : null}
         <TextInput
           style={styles.textboxStyle}
           secureTextEntry={locals.secureTextEntry}

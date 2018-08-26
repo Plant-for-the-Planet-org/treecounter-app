@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import TouchableItem from '../TouchableItem';
 import styles from '../../../styles/common/button';
-import { TouchableHighlight, Text, Image, View } from 'react-native';
+import { Text, Image, View } from 'react-native';
 const PrimaryButton = ({
   onClick,
   children,
@@ -10,7 +10,8 @@ const PrimaryButton = ({
   textStyle,
   image
 }) => (
-  <TouchableHighlight
+  <TouchableItem
+    activeOpacity={0.6}
     onPress={() => onClick()}
     style={[styles.primaryButton, buttonStyle]}
   >
@@ -18,7 +19,7 @@ const PrimaryButton = ({
       <Image source={image} style={image ? styles.image : { width: 0 }} />
       <Text style={[styles.primaryButtonText, textStyle]}>{children}</Text>
     </View>
-  </TouchableHighlight>
+  </TouchableItem>
 );
 
 PrimaryButton.propTypes = {

@@ -11,15 +11,39 @@ export default (selectplantprojectFull = EStyleSheet.create({
     flexDirection: 'column',
     height: 150
   },
+  selectedItemStyle: {
+    backgroundColor: '#efefef'
+  },
   projectNameContainer: {
     paddingTop: 5,
     paddingBottom: 5,
-    paddingLeft: 10,
-    borderColor: '#aba2a2',
+    paddingLeft: 5,
+    borderColor: '#efefef',
     borderStyle: 'solid',
     borderBottomWidth: 1,
-    borderTopWidth: 1
+    borderTopWidth: 1,
+    flexDirection: 'row'
   },
+  projectImageContainer: {
+    width: 25,
+    height: 25,
+    marginRight: 10
+    // borderRadius: 13,
+    // borderWidth: 1,
+    // borderColor: '#fff'
+    // alignItems: 'center',
+    // justifyContent: 'center'
+  },
+  projectImage: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+    resizeMode: 'contain'
+  },
+  projectNameTextContainer: {
+    flexDirection: 'column'
+  },
+
   tpoNameText: {
     fontStyle: 'italic',
     fontWeight: '100'
@@ -31,7 +55,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectMetaContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10
+    padding: 5
   },
   projectMetaLabels: {
     // paddingLeft: 5
@@ -41,7 +65,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   projectButtonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingBottom: 5
   },
   textStyle: {
     fontSize: 12,
@@ -54,7 +79,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
     margin: 3,
     height: 40,
     alignItems: 'center',
-    borderColor: '#aba2a2',
+    borderColor: '#efefef',
     borderStyle: 'solid',
     borderBottomWidth: 1
   },
@@ -75,7 +100,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
 
   listContentContainer: {
-    borderColor: '#aba2a2',
+    borderColor: '#efefef',
     borderStyle: 'solid',
     borderLeftWidth: 1,
     borderRightWidth: 1,
@@ -95,5 +120,28 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   buttonTextStyle: {
     fontSize: 12
+  },
+  sortContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  imageStyleContainer: {
+    width: 10,
+    height: 10
+  },
+  imageStyle: {
+    flex: 1,
+    width: undefined,
+    height: undefined
+  },
+
+  cardHeader: {
+    flexDirection: 'row',
+    paddingBottom: 10
+  },
+  headingStyle: {
+    fontSize: 16,
+    marginRight: 10,
+    color: '$textColor'
   }
 }));

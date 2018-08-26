@@ -67,6 +67,7 @@ class SideMenuContainer extends Component {
     return this.state.loading ? null : (
       <Menu
         isOpen={this.props.isOpen}
+        userProfile={this.props.userProfile}
         menuData={this.state.schema}
         navigation={this.props.navigation}
         path={path}
@@ -81,7 +82,8 @@ class SideMenuContainer extends Component {
 
 const mapStateToProps = state => ({
   isOpen: state.sideNav && state.sideNav.open,
-  loggedIn: currentUserProfileSelector(state) !== null
+  loggedIn: currentUserProfileSelector(state) !== null,
+  userProfile: currentUserProfileSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
@@ -100,5 +102,6 @@ SideMenuContainer.propTypes = {
   navigation: PropTypes.any,
   location: PropTypes.object,
   toggleSideNavAction: PropTypes.func.isRequired,
-  clearSupport: PropTypes.func
+  clearSupport: PropTypes.func,
+  userProfile: PropTypes.any
 };

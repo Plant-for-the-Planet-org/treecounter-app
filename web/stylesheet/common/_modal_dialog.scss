@@ -36,6 +36,11 @@
     align-items: center;
   }
 }
+.progressModal {
+  @extend .Modal;
+  min-width: 100px;
+  min-height: 100px;
+}
 .Overlay {
   position: fixed;
   top: 0;

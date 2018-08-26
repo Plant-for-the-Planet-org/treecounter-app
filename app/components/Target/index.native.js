@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  ScrollView
-} from 'react-native';
+import { View, ScrollView } from 'react-native';
 import i18n from '../../locales/i18n.js';
 
 import {
@@ -17,12 +11,11 @@ import {
 
 import styles from '../../styles/login';
 import CardLayout from '../Common/Card';
-
+import PrimaryButton from '../Common/Button/PrimaryButton';
 let Form = t.form.Form;
 
 export default class Target extends Component {
   render() {
-    let { treecounter } = this.props;
     return (
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <View style={styles.container}>
@@ -32,14 +25,9 @@ export default class Target extends Component {
               type={targetFormSchema}
               options={schemaOptions}
             />
-            <TouchableHighlight
-              onPress={this.props.onSubmitTarget}
-              style={styles.button}
-            >
-              <Text style={styles.buttonText}>
-                {i18n.t('label.set_target')}
-              </Text>
-            </TouchableHighlight>
+            <PrimaryButton onClick={this.props.onSubmitTarget}>
+              {i18n.t('label.set_target')}
+            </PrimaryButton>
           </CardLayout>
         </View>
       </ScrollView>

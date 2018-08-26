@@ -49,7 +49,7 @@ export default class SignUp extends Component {
               type={signupFormSchema[Profiletype]}
               options={schemaOptions[Profiletype]}
             />
-            <PrimaryButton onPress={this.onResetPassword}>
+            <PrimaryButton onClick={this.onResetPassword}>
               {i18n.t('label.signUp')}
             </PrimaryButton>
             <View style={styles.bottomRow}>

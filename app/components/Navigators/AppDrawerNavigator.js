@@ -74,7 +74,8 @@ export const getDrawerNavigator = function(isLoggedIn) {
       [getLocalRoute('app_homepage')]: { screen: Trillion },
       [getLocalRoute('app_faq')]: FAQContainer,
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
-      [getLocalRoute('app_treecounter')]: PublicTreecounterContainer
+      [getLocalRoute('app_treecounter')]: PublicTreecounterContainer,
+      ['about_us']: { screen: Trillion }
       // Search: {
       //   screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />,
       //   navigationOptions: {

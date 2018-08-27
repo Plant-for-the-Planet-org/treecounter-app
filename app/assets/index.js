@@ -94,6 +94,7 @@ import imageUpload from './images/icons/upload_image.png';
 import iosSearchGrey from './images/icons/search_grey.png';
 import iosLogout from './images/icons/ios_logout.png';
 import iosFaqs from './images/icons/ios_faqs.png';
+import iosInformation from './images/icons/ios_information.png';
 
 export {
   darkTree,
@@ -191,5 +192,6 @@ export {
   iosSearchGreen,
   iosSearchGrey,
   iosLogout,
-  iosFaqs
+  iosFaqs,
+  iosInformation
 };

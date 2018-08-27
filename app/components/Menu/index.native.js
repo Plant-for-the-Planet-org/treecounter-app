@@ -5,7 +5,7 @@ import PropTypes, { func } from 'prop-types';
 import styles from '../../styles/menu';
 import menuItemStyles from '../../styles/menu_item';
 import { updateRoute } from '../../helpers/routerHelper';
-import { iosLogout, iosFaqs, ProfilePic } from '../../assets';
+import { iosLogout, iosFaqs, ProfilePic, iosInformation } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { getImageUrl } from '../../actions/apiRouting';
@@ -56,11 +56,7 @@ export default class Menu extends Component {
             <LargeMenuItem
               style={{ paddingLeft: 0 }}
               onPress={() => {
-                updateRoute(
-                  getLocalRoute('app_login'),
-                  this.props.navigation,
-                  0
-                );
+                this.onPressMenu({ uri: getLocalRoute('app_login') });
               }}
               title={i18n.t('label.login')}
               iconUrl={iosLogout}
@@ -96,6 +92,13 @@ export default class Menu extends Component {
             />
           </View>
         )}
+        <LargeMenuItem
+          onPress={() => {
+            this.onPressMenu({ uri: 'about_us' });
+          }}
+          title={i18n.t('label.about_us')}
+          iconUrl={iosInformation}
+        />
       </SafeAreaView>
     );
   }

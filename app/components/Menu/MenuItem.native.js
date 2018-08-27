@@ -48,14 +48,14 @@ export class MenuItem extends Component {
 
   render() {
     return (
-      <TouchableOpacity onPress={this.props.onPress}>
+      <TouchableItem onPress={this.props.onPress}>
         <View style={styles.menuItemContainer}>
           <Image style={styles.imageStyle} source={this.props.iconUrl} />
           <Text style={styles.textStyle}>
             {this.props.titleId ? i18n.t('label.load') : this.props.title}
           </Text>
         </View>
-      </TouchableOpacity>
+      </TouchableItem>
     );
   }
 }

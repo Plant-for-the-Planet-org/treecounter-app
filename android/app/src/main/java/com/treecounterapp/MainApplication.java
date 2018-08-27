@@ -3,6 +3,8 @@ package com.treecounterapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.taessina.paypal.RNPaypalWrapperPackage;
+import br.com.vizir.rn.paypal.PayPalPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.horcrux.svg.SvgPackage;
@@ -28,6 +30,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNPaypalWrapperPackage(),
+            new PayPalPackage(),
             new ImagePickerPackage(),
             new RNI18nPackage(),
             new SvgPackage()

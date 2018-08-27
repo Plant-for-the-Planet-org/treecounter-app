@@ -1,4 +1,8 @@
 rootProject.name = 'TreecounterApp'
+include ':react-native-paypal-wrapper'
+project(':react-native-paypal-wrapper').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-paypal-wrapper/android')
+include ':react-native-paypal'
+project(':react-native-paypal').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-paypal/android')
 include ':react-native-image-picker'
 project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
 include ':react-native-i18n'

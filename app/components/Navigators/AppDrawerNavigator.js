@@ -24,7 +24,10 @@ import SearchLayout from '../Header/SearchLayout.native';
 import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
 import EditUserContributionContainer from '../../containers/EditUserContribution';
 
-const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
+const homeRoutes = [
+  getLocalRoute('app_homepage'),
+  getLocalRoute('app_userHome')
+];
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -83,7 +86,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
     {
       initialRouteName: isLoggedIn
         ? getLocalRoute('app_userHome')
-        : getLocalRoute('app_login'),
+        : getLocalRoute('app_homepage'),
       navigationOptions: ({ navigation }) => {
         console.log('navigation options', navigation);
         let title = navigation.getParam('titleParam');

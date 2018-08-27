@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import PropTypes, { func } from 'prop-types';
-
+import TouchableItem from '../../components/Common/TouchableItem';
 import * as images from '../../assets';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/menu_item';
+
 export default class MenuGroup extends Component {
   static propTypes = {
     title: PropTypes.string,
@@ -55,6 +56,29 @@ export class MenuItem extends Component {
           </Text>
         </View>
       </TouchableOpacity>
+    );
+  }
+}
+
+export class LargeMenuItem extends Component {
+  static propTypes = {
+    iconUrl: PropTypes.any,
+    titleId: PropTypes.any, //key it will use for localization
+    title: PropTypes.string,
+    onPress: PropTypes.func.isRequired,
+    style: PropTypes.any
+  };
+
+  render() {
+    return (
+      <TouchableItem onPress={this.props.onPress}>
+        <View style={[styles.largeMenuItemContainer, this.props.style]}>
+          <Image style={styles.largeImageStyle} source={this.props.iconUrl} />
+          <Text style={styles.largeTextStyle}>
+            {this.props.titleId ? i18n.t('label.load') : this.props.title}
+          </Text>
+        </View>
+      </TouchableItem>
     );
   }
 }

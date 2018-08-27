@@ -92,6 +92,8 @@ import svgBackground from './svgAssets/svg_background.png';
 import darkTree from './images/darkTree.png';
 import imageUpload from './images/icons/upload_image.png';
 import iosSearchGrey from './images/icons/search_grey.png';
+import iosLogout from './images/icons/ios_logout.png';
+import iosFaqs from './images/icons/ios_faqs.png';
 
 export {
   darkTree,
@@ -187,5 +189,7 @@ export {
   iosNotificationWhite,
   imageUpload,
   iosSearchGreen,
-  iosSearchGrey
+  iosSearchGrey,
+  iosLogout,
+  iosFaqs
 };

@@ -9,7 +9,7 @@ jobs:
       only:
         - staging
     docker:
-      - image: circleci/node:8
+      - image: alpine
 
     environment:
       HOST: ssh-840600-pftp2014@jetzt-die-welt-retten.de

@@ -46,7 +46,7 @@ jobs:
           name: Setup SSH to Domain Factory
           command: |
             mkdir -p ~/.ssh
-            echo $DF_HOST_KEY >> ~/.ssh/known_hosts
+            ssh-keyscan jetzt-die-welt-retten.de 2>/dev/null >> ~/.ssh/known_hosts
             (umask 077; touch ~/.ssh/id_rsa; chmod 0600 ~/.ssh/id_rsa)
             echo $ID_RSA | base64 -d > ~/.ssh/id_rsa
       - run:
@@ -58,6 +58,6 @@ jobs:
 
             ssh $HOST "cd $WD_REACT; git fetch origin $BRANCH"
             ssh $HOST "cd $WD_REACT; git merge $BRANCH"
-            ssh $HOST "cd $WD_REACT; /usr/bin/npm run install"
+            ssh $HOST "cd $WD_REACT; /usr/bin/npm install"
             ssh $HOST "cd $WD_REACT; /usr/bin/npm run build:server"
             ssh $HOST "cd $WD_SYMFONY; sh ./circleci/integrate-app.sh $WD_REACT; ls -l web"

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PayPal from 'react-native-paypal-wrapper';
 import { TouchableHighlight, Text, View } from 'react-native';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 
 class PaypalComponent extends React.Component {
   constructor(props) {
@@ -13,8 +14,8 @@ class PaypalComponent extends React.Component {
       'AVM8OuLVHPJJFABHQdXdrmV0QZU5jS0w_AYtMzijVqm1etflKYpKXdQoqMUX5b5mQqHrRhKBG_oKPb5i'
     );
     PayPal.pay({
-      price: '40.70',
-      currency: 'MYR',
+      price: this.props.amount.toString(),
+      currency: this.props.currency,
       description: 'Your description goes here'
     })
       .then(confirm => console.log(confirm))
@@ -22,14 +23,24 @@ class PaypalComponent extends React.Component {
   }
 
   render() {
-    const { amount, currency, account, onSuccess } = this.props;
-
     // see https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4/customize-button/
 
     return (
-      <View>
+      <View
+        style={{
+          margin: 10,
+          backgroundColor: '#eee',
+          width: 200,
+          borderRadius: 100 / 4,
+          borderColor: 'transparent'
+        }}
+      >
         <TouchableHighlight onPress={() => this.onPayclick()}>
-          <Text>Pay</Text>
+          <Text>
+            <Text style={styles.paraStyle}>Pay with </Text>
+            <Text style={styles.payStyle}>Pay</Text>
+            <Text style={styles.payStyle}>Pal</Text>
+          </Text>
         </TouchableHighlight>
       </View>
     );

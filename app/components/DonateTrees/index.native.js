@@ -42,7 +42,7 @@ export default class DonateTrees extends Component {
           ? 'individual'
           : 'company';
     } else {
-      modeReceipt = '';
+      modeReceipt = 'individual';
     }
 
     this.state = {
@@ -132,10 +132,16 @@ export default class DonateTrees extends Component {
   }
   goToNextTab(value) {
     if (value) {
+      let receipt = {};
+      if (this.state.modeReceipt === 'individual') {
+        receipt['receiptIndividual'] = value;
+      } else {
+        receipt['receiptCompany'] = value;
+      }
       this.setState({
         form: {
           ...this.state.form,
-          ...value
+          ...receipt
         }
       });
       this._handleIndexChange(3);
@@ -212,6 +218,7 @@ export default class DonateTrees extends Component {
   };
 
   _renderScene = ({ route }) => {
+    const { selectedProject } = this.props;
     let receipt;
     if (this.state.modeReceipt === 'individual') {
       receipt = this.state.form['receiptIndividual']
@@ -227,14 +234,13 @@ export default class DonateTrees extends Component {
     let paymentMethods;
     if (receipt) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
-      const countryCurrencies = plantProject.paymentSetup.countries;
+      const countryCurrencies = selectedProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
-        countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+        countryCurrency = selectedProject.paymentSetup.defaultCountryKey;
       }
       paymentMethods =
-        plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
+        selectedProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
-    let plantProject = this.props.selectedProject;
     let currencies = this.props.currencies.currencies;
 
     let screenToShow;
@@ -245,7 +251,7 @@ export default class DonateTrees extends Component {
               <PlantProjectFull
                 callExpanded={this.callExpanded}
                 expanded={false}
-                plantProject={this.props.selectedProject}
+                plantProject={selectedProject}
                 tpoName={this.props.selectedTpo.name}
                 selectAnotherProject={true}
                 showNextButton={true}
@@ -261,13 +267,13 @@ export default class DonateTrees extends Component {
       this.props.selectedTpo && currencies && route.key === 'currency'
         ? (screenToShow = (
             <TreeCountCurrencySelector
-              treeCost={plantProject.treeCost}
-              rates={currencies.currency_rates[plantProject.currency].rates}
+              treeCost={selectedProject.treeCost}
+              rates={currencies.currency_rates[selectedProject.currency].rates}
               fees={1}
               showNextButton={true}
               currencies={currencies.currency_names} // TODO: connect to data from API
               selectedCurrency={this.determineDefaultCurrency()}
-              treeCountOptions={plantProject.paymentSetup.treeCountOptions}
+              treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
               onNextClick={() => this.Tab2validated()}
               selectedTreeCount={this.state.selectedTreeCount}
               onChange={this.handleTreeCountCurrencyChange}
@@ -292,9 +298,9 @@ export default class DonateTrees extends Component {
         ? (screenToShow = (
             <PaymentSelector
               paymentMethods={paymentMethods}
-              accounts={plantProject.paymentSetup.accounts}
+              accounts={selectedProject.paymentSetup.accounts}
               stripePublishableKey={
-                plantProject.paymentSetup.stripePublishableKey
+                selectedProject.paymentSetup.stripePublishableKey
               }
               amount={this.state.selectedAmount}
               currency={this.state.selectedCurrency}
@@ -327,11 +333,11 @@ export default class DonateTrees extends Component {
   };
 
   render() {
-    let plantProject = this.props.selectedProject;
+    const { selectedProject } = this.props;
 
     return this.state.showSelectProject ? (
       <SelectPlantProjectContainer />
-    ) : !plantProject ? null : (
+    ) : !selectedProject ? null : (
       <TabView
         animationEnabled={true}
         navigationState={this.state}

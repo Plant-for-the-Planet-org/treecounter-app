@@ -4,69 +4,83 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Paypal from './Gateways/Paypal';
-import { View } from 'react-native';
-import { foldin, foldout } from '../../assets';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { foldin, foldout, payment_paypal } from '../../assets';
 import Accordion from 'react-native-collapsible/Accordion';
+import styles from '../../styles/payment.styles';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
     super(props);
   }
   _renderHeader(section, index, isActive) {
+    let paymentGateway = section.key;
+    if (paymentGateway === 'paypal') {
+      return (
+        <View style={styles.header}>
+          <Image style={styles.logoStyle} src={payment_paypal} />
+          <Image
+            style={styles.imageStyle}
+            source={isActive ? foldin : foldout}
+          />
+        </View>
+      );
+    }
     return (
       <View style={styles.header}>
-        <Text style={styles.headerText}>{section.gateway}</Text>
+        <Text style={styles.headerText}>{paymentGateway}</Text>
         <Image style={styles.imageStyle} source={isActive ? foldin : foldout} />
       </View>
     );
   }
 
   _renderContent(section) {
-    const { accounts, paymentMethods, amount, currency, context } = this.props;
-    const gatewayProps = {
-      context: context,
-      currency: currency,
-      onFailure: this.props.onFailure,
-      onError: this.props.onError
-    };
-    let paymentGateway = section.gateway;
+    let paymentGateway = section.key;
     let content = 'simple';
     if ('paypal' === paymentGateway) {
-      content = (
-        <Paypal
-          key={gateway}
-          amount={this.props.amount}
-          currency={this.props.currency}
-          account={accounts[paymentGateway]}
-          {...gatewayProps}
-        />
+      return (
+        <View style={styles.content}>
+          <Paypal
+            amount={this.props.amount}
+            currency={this.props.currency}
+            account={section.value}
+          />
+        </View>
       );
     }
-    return;
-    <View style={styles.content}>{content}</View>;
+    return (
+      <View>
+        <Text>Dummy</Text>
+      </View>
+    );
   }
 
   render() {
     const { accounts, paymentMethods, amount, currency, context } = this.props;
-    const gatewayProps = {
-      context: context,
-      currency: currency,
-      onFailure: this.props.onFailure,
-      onError: this.props.onError
-    };
+    //convert to arrya
+    let arr = [];
+    for (let key in paymentMethods) {
+      let obj = {};
+      if (accounts.hasOwnProperty(paymentMethods[key])) {
+        obj.key = key;
+        obj.value = accounts[paymentMethods[key]];
+        arr.push(obj);
+      }
+    }
     return (
-      <View>
+      <View style={{ flex: 1 }}>
+        <Text>
+          Amount: {amount} {currency}
+        </Text>
+
         <View>
-          <Text>
-            Amount: {amount} {currency}
-          </Text>
+          <Accordion
+            sections={arr}
+            renderHeader={this._renderHeader}
+            renderContent={event => this._renderContent(event)}
+            touchableComponent={TouchableOpacity}
+          />
         </View>
-        <Accordion
-          sections={this.props.paymentMethods}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-          touchableComponent={TouchableOpacity}
-        />
       </View>
     );
   }

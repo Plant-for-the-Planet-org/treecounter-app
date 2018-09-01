@@ -1,0 +1,63 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2
+jobs:
+  build:
+    branches:
+      only:
+        - staging
+    docker:
+      - image: alpine
+
+    environment:
+      HOST: ssh-840600-pftp2014@jetzt-die-welt-retten.de
+      PROJ_DIR: /kunden/188089_20457/pftp2014/source
+      ENV_VARS: ./env_vars.sh
+
+    working_directory: ~/ttc-app
+
+    steps:
+      - run: echo "$CIRCLE_BRANCH"
+      - run:
+          name: Setting Environment Variables
+          command: |
+            > $ENV_VARS
+            if [[ "${CIRCLE_BRANCH}" == "staging" ]]
+            then
+              echo 'export WD_REACT="$PROJ_DIR/ttc-app_staging"' >>  $ENV_VARS
+              echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_staging"' >>  $ENV_VARS
+              echo 'export BRANCH="staging"' >>  $ENV_VARS
+            fi
+            cat $ENV_VARS
+            source $ENV_VARS
+            echo $WD_REACT
+            echo $BRANCH
+
+      # add SSH support
+      - run:
+          name: Install packages
+          command: |
+            apk update && apk add openssh
+      # ID_RSA has been set up in project settings as base64 encoded content of 'id_rsa' file
+      # https://circleci.com/gh/Plant-for-the-Planet-org/treecounter-platform/edit#env-vars
+      - run:
+          name: Setup SSH to Domain Factory
+          command: |
+            mkdir -p ~/.ssh
+            ssh-keyscan jetzt-die-welt-retten.de 2>/dev/null >> ~/.ssh/known_hosts
+            (umask 077; touch ~/.ssh/id_rsa; chmod 0600 ~/.ssh/id_rsa)
+            echo $ID_RSA | base64 -d > ~/.ssh/id_rsa
+      - run:
+          name: Build Application
+          command: |
+            source $ENV_VARS
+            echo $WD_REACT
+            echo $BRANCH
+
+            ssh $HOST "cd $WD_REACT; git fetch origin $BRANCH"
+            ssh $HOST "cd $WD_REACT; git merge $BRANCH"
+            ssh $HOST "cd $WD_REACT; /usr/bin/npm install"
+            ssh $HOST "cd $WD_REACT; /usr/bin/npm run build:server"
+            ssh $HOST "cd $WD_SYMFONY; sh ./circleci/integrate-app.sh $WD_REACT; ls -l web"

@@ -7,7 +7,8 @@ import Paypal from './Gateways/Paypal';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { foldin, foldout, payment_paypal } from '../../assets';
 import Accordion from 'react-native-collapsible/Accordion';
-import styles from '../../styles/payment.styles';
+import styles from '../../styles/payment.styles.native';
+import StripeCC from './Gateways/StripeCC';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
@@ -18,7 +19,10 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     if (paymentGateway === 'paypal') {
       return (
         <View style={styles.header}>
-          <Image style={styles.logoStyle} src={payment_paypal} />
+          <View style={styles.logoContainer}>
+            <Image style={styles.logoStyle} src={payment_paypal} />
+          </View>
+
           <Image
             style={styles.imageStyle}
             source={isActive ? foldin : foldout}
@@ -36,11 +40,21 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
 
   _renderContent(section) {
     let paymentGateway = section.key;
-    let content = 'simple';
     if ('paypal' === paymentGateway) {
       return (
         <View style={styles.content}>
           <Paypal
+            amount={this.props.amount}
+            currency={this.props.currency}
+            account={section.value}
+          />
+        </View>
+      );
+    }
+    if ('stripe_cc' === paymentGateway) {
+      return (
+        <View style={styles.content}>
+          <StripeCC
             amount={this.props.amount}
             currency={this.props.currency}
             account={section.value}
@@ -68,10 +82,11 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       }
     }
     return (
-      <View style={{ flex: 1 }}>
-        <Text>
+      <View style={{ flex: 1, alignItems: 'center' }}>
+        <Text style={{ fontWeight: 'bold' }}>
           Amount: {amount} {currency}
         </Text>
+        <Text style={{ fontWeight: 'bold' }}>Trees: {context.treeCount}</Text>
 
         <View>
           <Accordion

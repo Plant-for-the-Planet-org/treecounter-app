@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PayPal from 'react-native-paypal-wrapper';
 import { TouchableHighlight, Text, View } from 'react-native';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
 
 class PaypalComponent extends React.Component {
   constructor(props) {
@@ -31,15 +30,32 @@ class PaypalComponent extends React.Component {
           margin: 10,
           backgroundColor: '#eee',
           width: 200,
+          padding: 10,
           borderRadius: 100 / 4,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
           borderColor: 'transparent'
         }}
       >
         <TouchableHighlight onPress={() => this.onPayclick()}>
           <Text>
-            <Text style={styles.paraStyle}>Pay with </Text>
-            <Text style={styles.payStyle}>Pay</Text>
-            <Text style={styles.payStyle}>Pal</Text>
+            <Text style={{ fontSize: 11, fontStyle: 'italic' }}>Pay with </Text>
+            <Text
+              style={{
+                fontSize: 14,
+                fontWeight: 'bold',
+                fontStyle: 'italic',
+                color: 'blue'
+              }}
+            >
+              Pay
+            </Text>
+            <Text
+              style={{ fontSize: 14, fontWeight: 'bold', fontStyle: 'italic' }}
+            >
+              Pal
+            </Text>
           </Text>
         </TouchableHighlight>
       </View>

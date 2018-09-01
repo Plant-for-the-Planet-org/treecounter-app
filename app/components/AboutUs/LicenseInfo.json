@@ -1,0 +1,89 @@
+{
+  "appLicenses": {
+    "react-native@0.55.3": {
+      "licenses": "MIT",
+      "repository": "https://github.com/facebook/react-native",
+      "path":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-native",
+      "licenseFile":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-native/LICENSE"
+    },
+    "react-navigation": {
+      "licenses": "BSD-2-Clause",
+      "repository": "https://github.com/react-navigation/react-navigation",
+      "publisher": "Adam Miskiewicz",
+      "email": "adam@sk3vy.com",
+      "path":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-navigation",
+      "licenseFile":
+        "https://github.com/react-navigation/react-navigation/blob/master/LICENSE"
+    },
+    "react-native-collapsible": {
+      "licenses": "MIT",
+      "repository":
+        "https://oblador@github.com/oblador/react-native-collapsible",
+      "publisher": "Joel Arvidsson",
+      "email": "joel@oblador.se",
+      "licenseFile":
+        "https://github.com/oblador/react-native-collapsible/blob/master/LICENSE"
+    },
+    "react-native-slick@1.0.1": {
+      "licenses": "ISC",
+      "repository": "https://github.com/ahmed3mar/react-native-slick",
+      "path":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-native-slick",
+      "licenseFile":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-native-slick/LICENSE"
+    },
+    "react-native-svg-uri@1.2.3": {
+      "licenses": "ISC",
+      "repository": "https://github.com/matiascba/react-native-svg-uri",
+      "publisher": "Matias Cortes",
+      "path":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-native-svg-uri",
+      "licenseFile":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-native-svg-uri/README.md"
+    },
+    "react-native-svg@6.5.2": {
+      "licenses": "MIT",
+      "repository": "https://github.com/magicismight/react-native-svg",
+      "path":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-native-svg",
+      "licenseFile":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-native-svg/LICENSE"
+    },
+    "react-native-tab-view@0.0.77": {
+      "licenses": "MIT",
+      "repository":
+        "https://github.com/react-native-community/react-native-tab-view",
+      "publisher": "Satyajit Sahoo",
+      "email": "satyajit.happy@gmail.com",
+      "url": "https://github.com/satya164/",
+      "path":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-navigation-deprecated-tab-navigator/node_modules/react-native-tab-view",
+      "licenseFile":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-navigation-deprecated-tab-navigator/node_modules/react-native-tab-view/LICENSE.md"
+    },
+    "react-native-tab-view@1.0.2": {
+      "licenses": "MIT",
+      "repository":
+        "https://github.com/react-native-community/react-native-tab-view",
+      "publisher": "Satyajit Sahoo",
+      "email": "satyajit.happy@gmail.com",
+      "url": "https://github.com/satya164/",
+      "path":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-native-tab-view",
+      "licenseFile":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-native-tab-view/LICENSE.md"
+    },
+    "react-native-youtube@1.1.0": {
+      "licenses": "MIT",
+      "repository": "https://github.com/inProgress-team/react-native-youtube",
+      "publisher": "Param Aggarwal",
+      "path":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-native-youtube",
+      "licenseFile":
+        "/Users/moveon/DATA/PROJECT/REACT_NATIVE/TreePlant/treecounter-app/node_modules/react-native-youtube/LICENSE"
+    }
+  }
+}

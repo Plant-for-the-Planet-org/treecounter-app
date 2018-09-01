@@ -15,8 +15,8 @@ import RecieptTabsView from './receiptTabs';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
-import { ScrollView } from 'react-native';
 import PaymentSelector from '../Payment/PaymentSelector';
+import { ScrollView, View, Text } from 'react-native';
 
 export default class DonateTrees extends Component {
   static data = {
@@ -65,12 +65,16 @@ export default class DonateTrees extends Component {
       ]
     };
 
-    this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
+    // this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
     this.handleTreeCountCurrencyChange = this.handleTreeCountCurrencyChange.bind(
       this
     );
     this.determineDefaultCurrency = this.determineDefaultCurrency.bind(this);
+
+    this.setRecipientTabRef = element => {
+      this.recipientTab = element;
+    };
   }
 
   componentDidMount() {
@@ -174,28 +178,8 @@ export default class DonateTrees extends Component {
 
   handleModeReceiptChange(tab) {
     this.setState({
-      modeReceipt: tab,
-      form: {
-        ...this.state.form,
-        recipientType: tab
-      }
+      modeReceipt: tab
     });
-  }
-
-  handlePaymentApproved(paymentResponse) {
-    let sendState = { ...this.state.form };
-    if (this.props.supportTreecounter.treecounterId) {
-      sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
-    }
-    this.props.donate(
-      {
-        ...this.state.form,
-        paymentResponse,
-        amount: this.state.selectedAmount,
-        currency: this.state.selectedCurrency
-      },
-      this.props.selectedProject.id
-    );
   }
 
   callExpanded = bool => {
@@ -215,6 +199,16 @@ export default class DonateTrees extends Component {
         this._handleIndexChange(index);
       }
     );
+  };
+
+  getRecieptFormState = () => {
+    if (this.state.modeReceipt === 'individual' && this.recipientTab) {
+      if (this.recipientTab.individualRecipt)
+        return this.recipientTab.individualRecipt.getValue();
+    } else if (this.state.modeReceipt === 'company') {
+      if (this.companyRecipt) return this.recipientTab.companyRecipt.getValue();
+    }
+    return null;
   };
 
   _renderScene = ({ route }) => {
@@ -286,7 +280,9 @@ export default class DonateTrees extends Component {
       route.key === 'recipient'
         ? (screenToShow = (
             <RecieptTabsView
+              ref={this.setRecipientTabRef}
               showNextButton={true}
+              currentUserProfile={this.props.currentUserProfile}
               goToNextTab={value => this.goToNextTab(value)}
               onReciptTabChange={tab => this.handleModeReceiptChange(tab)}
             />
@@ -328,8 +324,20 @@ export default class DonateTrees extends Component {
     return screenToShow;
   };
   _handleIndexChange = index => {
-    this.props.onTabChange(this.state.routes[index].title);
-    this.setState({ index });
+    if (this._canJumpToTab(index)) {
+      this.setState({ index });
+      this.props.onTabChange(this.state.routes[index].title);
+    }
+  };
+
+  _canJumpToTab = index => {
+    if (index === 3) {
+      if (this.getRecieptFormState() != null) {
+        return true;
+      }
+      return false;
+    }
+    return true;
   };
 
   render() {
@@ -339,7 +347,6 @@ export default class DonateTrees extends Component {
       <SelectPlantProjectContainer />
     ) : !selectedProject ? null : (
       <TabView
-        animationEnabled={true}
         navigationState={this.state}
         renderScene={this._renderScene}
         renderTabBar={this._renderTabBar}
@@ -359,5 +366,6 @@ DonateTrees.propTypes = {
   paymentClear: PropTypes.func,
   supportTreecounter: PropTypes.object,
   paymentStatus: PropTypes.object,
-  plantProjectClear: PropTypes.func
+  plantProjectClear: PropTypes.func,
+  onTabChange: PropTypes.func
 };

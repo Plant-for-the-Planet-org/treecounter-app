@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
-import { Image, TouchableHighlight } from 'react-native';
+import TouchableItem from '../../components/Common/TouchableItem';
+import { Image } from 'react-native';
 import { burgur_menu_icon } from '../../assets';
 
 export default (BurgerMenu = function(navigation) {
   return (
-    <TouchableHighlight
+    <TouchableItem
       onPress={() => {
         console.log('Press data');
         navigation.openDrawer();
@@ -15,6 +15,6 @@ export default (BurgerMenu = function(navigation) {
         source={burgur_menu_icon}
         style={{ height: 30, width: 30, margin: 5 }}
       />
-    </TouchableHighlight>
+    </TouchableItem>
   );
 });

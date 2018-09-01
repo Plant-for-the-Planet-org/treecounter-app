@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.taessina.paypal.RNPaypalWrapperPackage;
-import br.com.vizir.rn.paypal.PayPalPackage;
+import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.imagepicker.ImagePickerPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.horcrux.svg.SvgPackage;
@@ -31,7 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNPaypalWrapperPackage(),
-            new PayPalPackage(),
+            new ReactNativeYouTube(),
             new ImagePickerPackage(),
             new RNI18nPackage(),
             new SvgPackage()

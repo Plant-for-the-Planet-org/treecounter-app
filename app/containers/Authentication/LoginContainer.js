@@ -18,7 +18,7 @@ class LoginContainer extends React.Component {
   };
 
   onClick(value) {
-    this.props.login(value);
+    this.props.login(value, this.props.navigation);
   }
 
   render() {

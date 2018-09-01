@@ -57,4 +57,4 @@ buck-out/
 
 #app build
 web/prod
-web/server
+app/config/index.js

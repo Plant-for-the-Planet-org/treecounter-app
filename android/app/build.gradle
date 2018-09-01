@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-device-info')
     compile project(':react-native-paypal-wrapper')
     compile project(':react-native-youtube')
     compile project(':react-native-image-picker')

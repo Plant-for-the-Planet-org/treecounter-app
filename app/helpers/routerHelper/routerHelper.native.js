@@ -9,7 +9,7 @@ export function updateRoute(routeName, navigation, id) {
   }
 
   if (id === 0) {
-    navigation.navigate('DrawerClose');
+    navigation.closeDrawer();
   }
   navigation.navigate(route);
 }

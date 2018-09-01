@@ -9,6 +9,7 @@ import LoadingIndicator from '../Common/LoadingIndicator';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SvgContainer from '../Common/SvgContainer';
 import { getProfileTypeName } from '../PublicTreeCounter/utils';
+import { ProfilePic } from '../../assets';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -44,9 +45,13 @@ export default class UserHome extends Component {
             <View style={styles.profileImageContainer}>
               <Image
                 style={styles.profileImage}
-                source={{
-                  uri: getImageUrl('profile', 'thumb', userProfile.image)
-                }}
+                source={
+                  userProfile.image
+                    ? {
+                        uri: getImageUrl('profile', 'thumb', userProfile.image)
+                      }
+                    : ProfilePic
+                }
               />
               <View style={styles.circle} />
             </View>

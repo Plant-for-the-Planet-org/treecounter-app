@@ -33,13 +33,17 @@ export default class Menu extends Component {
           <View style={styles.profileContainer}>
             <Image
               style={styles.profileImageStyle}
-              source={{
-                uri: getImageUrl(
-                  'profile',
-                  'thumb',
-                  this.props.userProfile.image
-                )
-              }}
+              source={
+                this.props.userProfile.image
+                  ? {
+                      uri: getImageUrl(
+                        'profile',
+                        'thumb',
+                        this.props.userProfile.image
+                      )
+                    }
+                  : ProfilePic
+              }
             />
 
             <Text style={styles.profileTextHeading}>

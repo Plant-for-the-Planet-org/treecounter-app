@@ -15,6 +15,7 @@ import RecieptTabsView from './receiptTabs';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
+import PaymentSelector from '../Payment/PaymentSelector';
 import { ScrollView, View, Text } from 'react-native';
 
 export default class DonateTrees extends Component {
@@ -41,7 +42,7 @@ export default class DonateTrees extends Component {
           ? 'individual'
           : 'company';
     } else {
-      modeReceipt = '';
+      modeReceipt = 'individual';
     }
 
     this.state = {
@@ -135,6 +136,18 @@ export default class DonateTrees extends Component {
   }
   goToNextTab(value) {
     if (value) {
+      let receipt = {};
+      if (this.state.modeReceipt === 'individual') {
+        receipt['receiptIndividual'] = value;
+      } else {
+        receipt['receiptCompany'] = value;
+      }
+      this.setState({
+        form: {
+          ...this.state.form,
+          ...receipt
+        }
+      });
       this._handleIndexChange(3);
     } else {
       // Do nothing
@@ -199,19 +212,31 @@ export default class DonateTrees extends Component {
   };
 
   _renderScene = ({ route }) => {
-    let plantProject = this.props.selectedProject;
-    let currencies = this.props.currencies.currencies;
-    let receipt = this.getRecieptFormState();
-
+    const { selectedProject } = this.props;
+    let receipt;
+    if (this.state.modeReceipt === 'individual') {
+      receipt = this.state.form['receiptIndividual']
+        ? this.state.form['receiptIndividual']
+        : '';
+    } else {
+      receipt = this.state.form['receiptCompany']
+        ? this.state.form['receiptCompany']
+        : '';
+    }
+    let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
+    let email = receipt !== '' ? receipt.email : '';
+    let paymentMethods;
     if (receipt) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
-      const countryCurrencies = plantProject.paymentSetup.countries;
+      const countryCurrencies = selectedProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
-        countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+        countryCurrency = selectedProject.paymentSetup.defaultCountryKey;
       }
       paymentMethods =
-        plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
+        selectedProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
+    let currencies = this.props.currencies.currencies;
+
     let screenToShow;
     {
       this.props.selectedTpo && route.key === 'selectPlant'
@@ -220,7 +245,7 @@ export default class DonateTrees extends Component {
               <PlantProjectFull
                 callExpanded={this.callExpanded}
                 expanded={false}
-                plantProject={this.props.selectedProject}
+                plantProject={selectedProject}
                 tpoName={this.props.selectedTpo.name}
                 selectAnotherProject={true}
                 showNextButton={true}
@@ -236,13 +261,13 @@ export default class DonateTrees extends Component {
       this.props.selectedTpo && currencies && route.key === 'currency'
         ? (screenToShow = (
             <TreeCountCurrencySelector
-              treeCost={plantProject.treeCost}
-              rates={currencies.currency_rates[plantProject.currency].rates}
+              treeCost={selectedProject.treeCost}
+              rates={currencies.currency_rates[selectedProject.currency].rates}
               fees={1}
               showNextButton={true}
               currencies={currencies.currency_names} // TODO: connect to data from API
               selectedCurrency={this.determineDefaultCurrency()}
-              treeCountOptions={plantProject.paymentSetup.treeCountOptions}
+              treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
               onNextClick={() => this.Tab2validated()}
               selectedTreeCount={this.state.selectedTreeCount}
               onChange={this.handleTreeCountCurrencyChange}
@@ -267,9 +292,32 @@ export default class DonateTrees extends Component {
     {
       route.key === 'payments'
         ? (screenToShow = (
-            <View>
-              <Text>Payments</Text>
-            </View>
+            <PaymentSelector
+              paymentMethods={paymentMethods}
+              accounts={selectedProject.paymentSetup.accounts}
+              stripePublishableKey={
+                selectedProject.paymentSetup.stripePublishableKey
+              }
+              amount={this.state.selectedAmount}
+              currency={this.state.selectedCurrency}
+              expandedOption={this.state.expandedOption}
+              handleExpandedClicked={this.handleExpandedClicked}
+              context={{
+                tpoName: this.props.selectedTpo.name,
+                donorEmail: email,
+                donorName: name,
+                treeCount: this.state.selectedTreeCount
+              }}
+              onSuccess={paymentResponse =>
+                this.handlePaymentApproved(paymentResponse)
+              }
+              onFailure={data =>
+                console.log('/////////////////// payment failure ', data)
+              }
+              onError={data =>
+                console.log('/////////////////// payment error ', data)
+              }
+            />
           ))
         : null;
     }
@@ -293,10 +341,11 @@ export default class DonateTrees extends Component {
   };
 
   render() {
-    let plantProject = this.props.selectedProject;
+    const { selectedProject } = this.props;
+
     return this.state.showSelectProject ? (
       <SelectPlantProjectContainer />
-    ) : !plantProject ? null : (
+    ) : !selectedProject ? null : (
       <TabView
         navigationState={this.state}
         renderScene={this._renderScene}

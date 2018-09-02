@@ -10,7 +10,8 @@ import {
   foldout,
   payment_paypal,
   payment_sepa,
-  payment_bank
+  payment_bank,
+  payment_credit
 } from '../../assets';
 import Accordion from 'react-native-collapsible/Accordion';
 import styles from '../../styles/payment.styles.native';
@@ -23,7 +24,7 @@ import Offline from './Gateways/Offline';
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
     super(props);
-    this.decorateSuccess = this.decorateSuccess.bind(this);
+    this.decorateSuccess = this.donateSuccess.bind(this);
   }
   _renderHeader(section, index, isActive) {
     let paymentGateway = section.key;
@@ -65,6 +66,19 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         </View>
       );
     }
+    if ('stripe_cc' === paymentGateway) {
+      <View style={styles.header}>
+        <View style={styles.logoContainer}>
+          <Image
+            style={[styles.logoStyle, { width: 40 }]}
+            source={payment_credit}
+          />
+          <Text style={styles.headerText}>{i18n.t('label.creditCard')}</Text>
+        </View>
+
+        <Image style={styles.imageStyle} source={isActive ? foldin : foldout} />
+      </View>;
+    }
     if (paymentGateway === 'paypal') {
       return (
         <View style={styles.header}>
@@ -87,7 +101,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     );
   }
 
-  decorateSuccess(gateway, accountName) {
+  donateSuccess(gateway, accountName) {
     return response =>
       this.props.onSuccess({ gateway, accountName, ...response });
   }
@@ -112,7 +126,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
 
   _renderContent(section) {
-    const { accounts, paymentMethods, amount, currency, context } = this.props;
+    const { currency, context } = this.props;
     const gatewayProps = {
       context: context,
       currency: currency,
@@ -139,7 +153,9 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             amount={this.props.amount}
             currency={this.props.currency}
             account={section.value}
-            onSuccess={this.decorateSuccess(paymentGateway, accountName)}
+            setLoading={value => this.props.setProgressModelState(value)}
+            onSuccess={this.donateSuccess(paymentGateway, accountName)}
+            {...gatewayProps}
           />
         </View>
       );
@@ -151,7 +167,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             amount={this.props.amount}
             currency={this.props.currency}
             account={section.value}
-            onSuccess={this.decorateSuccess(paymentGateway, accountName)}
+            onSuccess={this.donateSuccess(paymentGateway, accountName)}
             {...gatewayProps}
           />
         </View>
@@ -222,7 +238,8 @@ PaymentSelector.propTypes = {
   context: PropTypes.object.isRequired,
   onSuccess: PropTypes.func.isRequired,
   onFailure: PropTypes.func.isRequired,
-  onError: PropTypes.func.isRequired
+  onError: PropTypes.func.isRequired,
+  setProgressModelState: PropTypes.func
 };
 
 export default PaymentSelector;

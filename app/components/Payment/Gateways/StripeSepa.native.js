@@ -46,6 +46,7 @@ export default class StripeSepa extends Component {
 
   render() {
     const { currency, context } = this.props;
+
     return (
       <View
         style={{

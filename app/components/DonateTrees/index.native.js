@@ -298,6 +298,7 @@ export default class DonateTrees extends Component {
               stripePublishableKey={
                 selectedProject.paymentSetup.stripePublishableKey
               }
+              setProgressModelState={this.props.setProgressModelState}
               amount={this.state.selectedAmount}
               currency={this.state.selectedCurrency}
               expandedOption={this.state.expandedOption}
@@ -383,5 +384,6 @@ DonateTrees.propTypes = {
   supportTreecounter: PropTypes.object,
   paymentStatus: PropTypes.object,
   plantProjectClear: PropTypes.func,
-  onTabChange: PropTypes.func
+  onTabChange: PropTypes.func,
+  setProgressModelState: PropTypes.func
 };

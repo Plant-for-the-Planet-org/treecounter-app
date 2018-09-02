@@ -304,6 +304,7 @@ export default class DonateTrees extends Component {
               expandedOption={this.state.expandedOption}
               handleExpandedClicked={this.handleExpandedClicked}
               paymentStatus={this.props.paymentStatus}
+              paymentClear={this.props.paymentClear}
               context={{
                 tpoName: this.props.selectedTpo.name,
                 donorEmail: email,

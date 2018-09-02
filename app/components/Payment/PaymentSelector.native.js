@@ -12,7 +12,8 @@ import {
   payment_paypal,
   payment_sepa,
   payment_bank,
-  payment_credit
+  payment_credit,
+  check_green
 } from '../../assets';
 import Accordion from 'react-native-collapsible/Accordion';
 import styles from '../../styles/payment.styles.native';
@@ -22,6 +23,7 @@ import StripeSepa from './Gateways/StripeSepa';
 import i18n from '../../locales/i18n';
 import Offline from './Gateways/Offline';
 import InlineLink from '../Common/InlineLink.native';
+import PrimaryButton from '../Common/Button/PrimaryButton';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
@@ -150,6 +152,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             amount={this.props.amount}
             currency={this.props.currency}
             account={section.value}
+            onSuccess={this.donateSuccess(paymentGateway, accountName)}
           />
         </View>
       );
@@ -217,15 +220,32 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     }
     return (
       <CardLayout style={{ flex: 1, alignItems: 'center' }}>
-        {this.props.paymentStatus && this.props.paymentStatus.message ? (
+        {this.props.paymentStatus && this.props.paymentStatus.status ? (
           <View style={{ flex: 1, alignItems: 'center' }}>
+            <Image
+              style={[styles.logoStyle, { width: 40 }]}
+              source={check_green}
+            />
             <Text style={{ padding: 10 }}>
               {i18n.t('label.thankyou')} {context.treeCount} {'  '}
               {i18n.t('label.receive_mail')}
             </Text>
-            <Text>
-              <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+
+            <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+          </View>
+        ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
+          <View style={{ flex: 1, alignItems: 'center' }}>
+            <Image
+              style={[styles.logoStyle, { width: 40 }]}
+              source={check_green}
+            />
+            <Text style={{ padding: 10 }}>
+              {'Error ' + this.props.paymentStatus.message}
             </Text>
+
+            <PrimaryButton onClick={() => this.props.paymentClear()}>
+              Try Again
+            </PrimaryButton>
           </View>
         ) : (
           <View style={{ flex: 1, alignItems: 'center' }}>
@@ -264,7 +284,8 @@ PaymentSelector.propTypes = {
   onFailure: PropTypes.func.isRequired,
   onError: PropTypes.func.isRequired,
   setProgressModelState: PropTypes.func,
-  paymentStatus: PropTypes.any
+  paymentStatus: PropTypes.any,
+  paymentClear: PropTypes.func
 };
 
 export default withNavigation(PaymentSelector);

@@ -2,16 +2,23 @@
 /* eslint-disable no-console, react/no-multi-comp */
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import CardLayout from '../Common/Card';
 import Paypal from './Gateways/Paypal';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { foldin, foldout, payment_paypal, payment_sepa } from '../../assets';
+import {
+  foldin,
+  foldout,
+  payment_paypal,
+  payment_sepa,
+  payment_bank
+} from '../../assets';
 import Accordion from 'react-native-collapsible/Accordion';
 import styles from '../../styles/payment.styles.native';
 import StripeCC from './Gateways/StripeCC';
 import stripe from 'tipsi-stripe';
 import StripeSepa from './Gateways/StripeSepa';
 import i18n from '../../locales/i18n';
+import Offline from './Gateways/Offline';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
@@ -20,6 +27,26 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
   _renderHeader(section, index, isActive) {
     let paymentGateway = section.key;
+    if ('offline' === paymentGateway) {
+      return (
+        <View style={styles.header}>
+          <View style={styles.logoContainer}>
+            <Image
+              style={[styles.logoStyle, { width: 40 }]}
+              source={payment_bank}
+            />
+            <Text style={styles.headerText}>
+              {i18n.t('label.bank_transfer')}
+            </Text>
+          </View>
+
+          <Image
+            style={styles.imageStyle}
+            source={isActive ? foldin : foldout}
+          />
+        </View>
+      );
+    }
     if ('stripe_sepa' === paymentGateway) {
       return (
         <View style={styles.header}>
@@ -130,6 +157,20 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         </View>
       );
     }
+    if ('offline' === paymentGateway) {
+      return (
+        <View style={styles.content}>
+          <Offline
+            key={paymentGateway}
+            amount={this.props.amount}
+            currency={this.props.currency}
+            account={section.value}
+            onSuccess={this.decorateSuccess(paymentGateway, accountName)}
+            {...gatewayProps}
+          />
+        </View>
+      );
+    }
 
     return (
       <View>
@@ -151,7 +192,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       }
     }
     return (
-      <View style={{ flex: 1, alignItems: 'center' }}>
+      <CardLayout style={{ flex: 1, alignItems: 'center' }}>
         <Text style={{ fontWeight: 'bold' }}>
           Amount: {amount} {currency}
         </Text>
@@ -165,7 +206,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             touchableComponent={TouchableOpacity}
           />
         </View>
-      </View>
+      </CardLayout>
     );
   }
 }

@@ -45,6 +45,8 @@ export default class StripeCC extends Component {
       const token = stripe
         .createTokenWithCard(params)
         .then(token => {
+          token.id = token.tokenId;
+          token.card.id = token.card.cardId;
           this.props.setLoading(false);
           this.props.onSuccess(token);
           console.log('tokem' + token);

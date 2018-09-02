@@ -2,36 +2,42 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import i18n from '../../../locales/i18n';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import { IbanElement } from '../Stripe/stripeDefs';
 import stripe from 'tipsi-stripe';
+import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 
 const styles = StyleSheet.create({
   field: {
+    height: 30,
     width: 300,
     color: '#449aeb',
     borderColor: '#000',
     borderWidth: 1,
-    borderRadius: 5
+    padding: 2
   }
 });
 
 export default class StripeSepa extends Component {
   handleSubmit = ev => {
     const { currency, context, account } = this.props;
-    stripe.setOptions({
-      publishableKey: account.authorization.accountId
-    });
+    let ibanPattern = new RegExp(
+      /^DE\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|DE\d{20}$/i
+    );
+
+    if (!this._iban || !ibanPattern.test(this._iban)) {
+      NotificationManager.error('Please enter Correct IBAN', 'Error');
+      return;
+    }
     const params = {
-      accountNumber: this._iban,
-      countryCode: 'DE',
-      currency,
-      accountHolderName: context.donorName
+      accountNumber: this._iban.replace(/\s/g, ''),
+      countryCode: 'de',
+      currency: currency
     };
     stripe
       .createTokenWithBankAccount(params)
       .then(token => {
-        this.props.onSuccess(token);
-        console.log('token' + token);
+        console.log('token Test' + token);
+        token = { ...token, id: token.tokenId };
+        this.props.onSuccess({ token });
       })
       .catch(err => {
         console.log(err);
@@ -50,7 +56,7 @@ export default class StripeSepa extends Component {
       >
         <TextInput
           style={styles.field}
-          placeholder={currency}
+          placeholder={'DE00 0000 0000 0000 0000 00'}
           placeholderTextColor={'#686060'}
           underlineColorAndroid={'transparent'}
           onChangeText={value => {
@@ -59,7 +65,7 @@ export default class StripeSepa extends Component {
           }}
           allowFontScaling={true}
         />
-        <Text style={{ textAlign: 'justify', color: 'black' }}>
+        <Text style={{ textAlign: 'justify', color: 'black', marginTop: 5 }}>
           {i18n.t('label.stripe_sepa_des1')} {context.tpoName}{' '}
           {i18n.t('label.stripe_sepa_des2')}
         </Text>

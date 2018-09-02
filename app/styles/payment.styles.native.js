@@ -21,11 +21,14 @@ export default (paymentStyles = EStyleSheet.create({
     height: 50
   },
   logoContainer: {
-    width: 50,
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     height: 30
   },
   logoStyle: {
-    flex: 1,
+    height: 30,
     resizeMode: 'contain'
   },
   content: {

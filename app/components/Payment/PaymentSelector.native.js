@@ -5,11 +5,13 @@ import PropTypes from 'prop-types';
 
 import Paypal from './Gateways/Paypal';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { foldin, foldout, payment_paypal } from '../../assets';
+import { foldin, foldout, payment_paypal, payment_sepa } from '../../assets';
 import Accordion from 'react-native-collapsible/Accordion';
 import styles from '../../styles/payment.styles.native';
 import StripeCC from './Gateways/StripeCC';
 import stripe from 'tipsi-stripe';
+import StripeSepa from './Gateways/StripeSepa';
+import i18n from '../../locales/i18n';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
@@ -18,10 +20,28 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
   _renderHeader(section, index, isActive) {
     let paymentGateway = section.key;
-    if (paymentGateway === 'paypal') {
+    if ('stripe_sepa' === paymentGateway) {
       return (
         <View style={styles.header}>
           <View style={styles.logoContainer}>
+            <Image
+              style={[styles.logoStyle, { width: 40 }]}
+              source={payment_sepa}
+            />
+            <Text style={styles.headerText}>{i18n.t('label.sepa_debit')}</Text>
+          </View>
+
+          <Image
+            style={styles.imageStyle}
+            source={isActive ? foldin : foldout}
+          />
+        </View>
+      );
+    }
+    if (paymentGateway === 'paypal') {
+      return (
+        <View style={styles.header}>
+          <View style={[styles.logoStyle, { width: 80 }]}>
             <Image style={styles.logoStyle} source={payment_paypal} />
           </View>
 
@@ -65,6 +85,13 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
 
   _renderContent(section) {
+    const { accounts, paymentMethods, amount, currency, context } = this.props;
+    const gatewayProps = {
+      context: context,
+      currency: currency,
+      onFailure: this.props.onFailure,
+      onError: this.props.onError
+    };
     let paymentGateway = section.key;
     const accountName = this.props.paymentMethods[paymentGateway];
     if ('paypal' === paymentGateway) {
@@ -90,6 +117,19 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         </View>
       );
     }
+    if ('stripe_sepa' === paymentGateway) {
+      return (
+        <View style={styles.content}>
+          <StripeSepa
+            amount={this.props.amount}
+            currency={this.props.currency}
+            account={section.value}
+            {...gatewayProps}
+          />
+        </View>
+      );
+    }
+
     return (
       <View>
         <Text>Dummy</Text>

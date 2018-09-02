@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { PaymentCardTextField } from 'tipsi-stripe';
+import stripe, { PaymentCardTextField } from 'tipsi-stripe';
+import TouchableItem from '../../Common/TouchableItem.native';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 
 const styles = StyleSheet.create({
   field: {
@@ -12,7 +14,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class FieldExample extends Component {
+export default class StripeCC extends Component {
   state = {
     valid: false,
     params: {
@@ -23,6 +25,8 @@ export default class FieldExample extends Component {
     }
   };
 
+  componentDidMount() {}
+
   handleFieldParamsChange = (valid, params) => {
     this.setState({
       valid,
@@ -30,10 +34,34 @@ export default class FieldExample extends Component {
     });
   };
 
+  payviaCard() {
+    if (this.state.valid) {
+      const params = {
+        number: this.state.params.number,
+        expMonth: this.state.params.expMonth,
+        expYear: this.state.params.expYear,
+        cvc: this.state.params.cvc
+      };
+      const token = stripe
+        .createTokenWithCard(params)
+        .then(token => {
+          this.props.onSuccess(token);
+          console.log('tokem' + token);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      console.log('pay via card');
+    } else {
+      console.log('Enter valid details');
+    }
+  }
+
   render() {
     const { valid, params } = this.state;
     return (
-      <View>
+      <View style={{ flexDirection: 'column' }}>
         <Text style={styles.header}>PaymentCardTextField Example</Text>
         <PaymentCardTextField
           accessible={false}
@@ -43,7 +71,7 @@ export default class FieldExample extends Component {
           expirationPlaceholder="MM/YY"
           cvcPlaceholder="CVC"
         />
-        <View style={styles.params}>
+        {/* <View style={styles.params}>
           <Text style={styles.instruction}>Valid:</Text>
           <Text style={styles.instruction}>Number: {params.number || '-'}</Text>
           <Text style={styles.instruction}>
@@ -51,7 +79,8 @@ export default class FieldExample extends Component {
           </Text>
           <Text style={styles.instruction}>Year: {params.expYear || '-'}</Text>
           <Text style={styles.instruction}>CVC: {params.cvc || '-'}</Text>
-        </View>
+        </View> */}
+        <PrimaryButton onClick={() => this.payviaCard()}>Pay</PrimaryButton>
       </View>
     );
   }

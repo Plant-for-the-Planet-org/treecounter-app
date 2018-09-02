@@ -9,12 +9,14 @@ import { foldin, foldout, payment_paypal, payment_sepa } from '../../assets';
 import Accordion from 'react-native-collapsible/Accordion';
 import styles from '../../styles/payment.styles.native';
 import StripeCC from './Gateways/StripeCC';
+import stripe from 'tipsi-stripe';
 import StripeSepa from './Gateways/StripeSepa';
 import i18n from '../../locales/i18n';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
     super(props);
+    this.decorateSuccess = this.decorateSuccess.bind(this);
   }
   _renderHeader(section, index, isActive) {
     let paymentGateway = section.key;
@@ -58,6 +60,30 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     );
   }
 
+  decorateSuccess(gateway, accountName) {
+    return response =>
+      this.props.onSuccess({ gateway, accountName, ...response });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.paymentMethods) {
+      // lookup stripe related payment methods for the current country/currency combination
+      const stripeGateways = Object.keys(nextProps.paymentMethods).filter(
+        gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)
+      );
+
+      // do not load Stripe if not required
+      if (stripeGateways.length > 0) {
+        // componentDidMount only runs in a browser environment.
+        // In addition to loading asynchronously, this code is safe to server-side render.
+
+        stripe.setOptions({
+          publishableKey: nextProps.stripePublishableKey
+        });
+      }
+    }
+  }
+
   _renderContent(section) {
     const { accounts, paymentMethods, amount, currency, context } = this.props;
     const gatewayProps = {
@@ -67,6 +93,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       onError: this.props.onError
     };
     let paymentGateway = section.key;
+    const accountName = this.props.paymentMethods[paymentGateway];
     if ('paypal' === paymentGateway) {
       return (
         <View style={styles.content}>
@@ -85,6 +112,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             amount={this.props.amount}
             currency={this.props.currency}
             account={section.value}
+            onSuccess={this.decorateSuccess(paymentGateway, accountName)}
           />
         </View>
       );

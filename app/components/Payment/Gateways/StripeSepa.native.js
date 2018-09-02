@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
-import { PaymentCardTextField } from 'tipsi-stripe';
 import i18n from '../../../locales/i18n';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
+import { IbanElement } from '../Stripe/stripeDefs';
+import stripe from 'tipsi-stripe';
 
 const styles = StyleSheet.create({
   field: {
@@ -14,6 +16,28 @@ const styles = StyleSheet.create({
 });
 
 export default class StripeSepa extends Component {
+  handleSubmit = ev => {
+    const { currency, context, account } = this.props;
+    stripe.setOptions({
+      publishableKey: account.authorization.accountId
+    });
+    const params = {
+      accountNumber: this._iban,
+      countryCode: 'DE',
+      currency,
+      accountHolderName: context.donorName
+    };
+    stripe
+      .createTokenWithBankAccount(params)
+      .then(token => {
+        this.props.onSuccess(token);
+        console.log('token' + token);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     const { currency, context } = this.props;
     return (
@@ -29,13 +53,19 @@ export default class StripeSepa extends Component {
           placeholder={currency}
           placeholderTextColor={'#686060'}
           underlineColorAndroid={'transparent'}
-          onChangeText={value => console.log('on change')}
+          onChangeText={value => {
+            this._iban = value;
+            console.log(value);
+          }}
           allowFontScaling={true}
         />
         <Text style={{ textAlign: 'justify', color: 'black' }}>
           {i18n.t('label.stripe_sepa_des1')} {context.tpoName}{' '}
           {i18n.t('label.stripe_sepa_des2')}
         </Text>
+        <PrimaryButton onClick={() => this.handleSubmit()}>
+          {i18n.t('label.pay_via_sepa')}
+        </PrimaryButton>
       </View>
     );
   }

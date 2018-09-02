@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import Paypal from './Gateways/Paypal';
 import { withNavigation } from 'react-navigation';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import {
   foldin,
   foldout,
@@ -256,14 +256,14 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
               Trees: {context.treeCount}
             </Text>
 
-            <View>
+            <ScrollView>
               <Accordion
                 sections={arr}
                 renderHeader={this._renderHeader}
                 renderContent={event => this._renderContent(event)}
                 touchableComponent={TouchableOpacity}
               />
-            </View>
+            </ScrollView>
           </View>
         )}
       </CardLayout>

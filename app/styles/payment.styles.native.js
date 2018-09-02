@@ -1,4 +1,8 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
+
 export default (paymentStyles = EStyleSheet.create({
   imageStyle: {
     width: 17,
@@ -25,6 +29,7 @@ export default (paymentStyles = EStyleSheet.create({
     resizeMode: 'contain'
   },
   content: {
+    width,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'

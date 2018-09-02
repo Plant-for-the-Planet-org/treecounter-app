@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import stripe, { PaymentCardTextField } from 'tipsi-stripe';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
+import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 
 const styles = StyleSheet.create({
   field: {
@@ -49,7 +50,7 @@ export default class StripeCC extends Component {
           token.card.id = token.card.cardId;
           this.props.setLoading(false);
           this.props.onSuccess(token);
-          console.log('tokem' + token);
+          console.log(token);
         })
         .catch(err => {
           this.props.setLoading(false);
@@ -58,15 +59,14 @@ export default class StripeCC extends Component {
 
       console.log('pay via card');
     } else {
-      console.log('Enter valid details');
+      NotificationManager.error('Please enter Correct Card Details', 'Error');
     }
   }
 
   render() {
     const { valid, params } = this.state;
     return (
-      <View style={{ flexDirection: 'column' }}>
-        <Text style={styles.header}>PaymentCardTextField Example</Text>
+      <View style={{ flexDirection: 'column', padding: 10 }}>
         <PaymentCardTextField
           accessible={false}
           style={styles.field}

@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import Paypal from './Gateways/Paypal';
+import { withNavigation } from 'react-navigation';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import {
   foldin,
@@ -20,6 +21,7 @@ import stripe from 'tipsi-stripe';
 import StripeSepa from './Gateways/StripeSepa';
 import i18n from '../../locales/i18n';
 import Offline from './Gateways/Offline';
+import InlineLink from '../Common/InlineLink.native';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
@@ -67,17 +69,22 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       );
     }
     if ('stripe_cc' === paymentGateway) {
-      <View style={styles.header}>
-        <View style={styles.logoContainer}>
-          <Image
-            style={[styles.logoStyle, { width: 40 }]}
-            source={payment_credit}
-          />
-          <Text style={styles.headerText}>{i18n.t('label.creditCard')}</Text>
-        </View>
+      return (
+        <View style={styles.header}>
+          <View style={styles.logoContainer}>
+            <Image
+              style={[styles.logoStyle, { width: 40 }]}
+              source={payment_credit}
+            />
+            <Text style={styles.headerText}>{i18n.t('label.creditCard')}</Text>
+          </View>
 
-        <Image style={styles.imageStyle} source={isActive ? foldin : foldout} />
-      </View>;
+          <Image
+            style={styles.imageStyle}
+            source={isActive ? foldin : foldout}
+          />
+        </View>
+      );
     }
     if (paymentGateway === 'paypal') {
       return (
@@ -135,6 +142,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     };
     let paymentGateway = section.key;
     const accountName = this.props.paymentMethods[paymentGateway];
+
     if ('paypal' === paymentGateway) {
       return (
         <View style={styles.content}>
@@ -209,19 +217,35 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     }
     return (
       <CardLayout style={{ flex: 1, alignItems: 'center' }}>
-        <Text style={{ fontWeight: 'bold' }}>
-          Amount: {amount} {currency}
-        </Text>
-        <Text style={{ fontWeight: 'bold' }}>Trees: {context.treeCount}</Text>
+        {this.props.paymentStatus && this.props.paymentStatus.message ? (
+          <View style={{ flex: 1, alignItems: 'center' }}>
+            <Text style={{ padding: 10 }}>
+              {i18n.t('label.thankyou')} {context.treeCount} {'  '}
+              {i18n.t('label.receive_mail')}
+            </Text>
+            <Text>
+              <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+            </Text>
+          </View>
+        ) : (
+          <View style={{ flex: 1, alignItems: 'center' }}>
+            <Text style={{ fontWeight: 'bold' }}>
+              Amount: {amount} {currency}
+            </Text>
+            <Text style={{ fontWeight: 'bold' }}>
+              Trees: {context.treeCount}
+            </Text>
 
-        <View>
-          <Accordion
-            sections={arr}
-            renderHeader={this._renderHeader}
-            renderContent={event => this._renderContent(event)}
-            touchableComponent={TouchableOpacity}
-          />
-        </View>
+            <View>
+              <Accordion
+                sections={arr}
+                renderHeader={this._renderHeader}
+                renderContent={event => this._renderContent(event)}
+                touchableComponent={TouchableOpacity}
+              />
+            </View>
+          </View>
+        )}
       </CardLayout>
     );
   }
@@ -239,7 +263,8 @@ PaymentSelector.propTypes = {
   onSuccess: PropTypes.func.isRequired,
   onFailure: PropTypes.func.isRequired,
   onError: PropTypes.func.isRequired,
-  setProgressModelState: PropTypes.func
+  setProgressModelState: PropTypes.func,
+  paymentStatus: PropTypes.any
 };
 
-export default PaymentSelector;
+export default withNavigation(PaymentSelector);

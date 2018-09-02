@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PayPal from 'react-native-paypal-wrapper';
-import { TouchableHighlight, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import TouchableItem from '../../../components/Common/TouchableItem';
 
 class PaypalComponent extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class PaypalComponent extends React.Component {
           borderColor: 'transparent'
         }}
       >
-        <TouchableHighlight onPress={() => this.onPayclick()}>
+        <TouchableItem onPress={() => this.onPayclick()}>
           <Text>
             <Text style={{ fontSize: 11, fontStyle: 'italic' }}>Pay with </Text>
             <Text
@@ -57,7 +58,7 @@ class PaypalComponent extends React.Component {
               Pal
             </Text>
           </Text>
-        </TouchableHighlight>
+        </TouchableItem>
       </View>
     );
   }

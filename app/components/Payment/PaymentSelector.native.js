@@ -124,6 +124,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             amount={this.props.amount}
             currency={this.props.currency}
             account={section.value}
+            onSuccess={this.decorateSuccess(paymentGateway, accountName)}
             {...gatewayProps}
           />
         </View>

@@ -6,23 +6,23 @@ export default (paymentStyles = EStyleSheet.create({
     resizeMode: 'contain'
   },
   header: {
-    flex: 1,
     flexDirection: 'row',
     padding: 10,
     margin: 10,
     backgroundColor: '#0e7baa',
     color: '#ffffff',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 5,
+    height: 50
   },
   logoContainer: {
-    width: 200,
-    height: 300
+    width: 50,
+    height: 30
   },
   logoStyle: {
     flex: 1,
-    width: undefined,
-    height: undefined
+    resizeMode: 'contain'
   },
   content: {
     flexDirection: 'row',

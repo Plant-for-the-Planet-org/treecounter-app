@@ -20,7 +20,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       return (
         <View style={styles.header}>
           <View style={styles.logoContainer}>
-            <Image style={styles.logoStyle} src={payment_paypal} />
+            <Image style={styles.logoStyle} source={payment_paypal} />
           </View>
 
           <Image

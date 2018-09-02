@@ -12,12 +12,13 @@ export default (paymentStyles = EStyleSheet.create({
   header: {
     flexDirection: 'row',
     padding: 10,
-    margin: 10,
+    marginTop: 10,
     backgroundColor: '#0e7baa',
     color: '#ffffff',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderRadius: 5,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
     height: 50
   },
   logoContainer: {
@@ -32,12 +33,14 @@ export default (paymentStyles = EStyleSheet.create({
     resizeMode: 'contain'
   },
   content: {
-    width,
+    width: width - 60,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
-    // borderColor: '#0e7baa',
-    // borderWidth: 1
+    justifyContent: 'center',
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
+    borderColor: '#0e7baa',
+    borderWidth: 1
   },
   headerText: {
     color: '#fff'

@@ -45,7 +45,7 @@ export default class StripeSepa extends Component {
   };
 
   render() {
-    const { loading, token, params } = this.state;
+    const { currency, context } = this.props;
 
     return (
       <View
@@ -70,17 +70,9 @@ export default class StripeSepa extends Component {
           {i18n.t('label.stripe_sepa_des1')} {context.tpoName}{' '}
           {i18n.t('label.stripe_sepa_des2')}
         </Text>
-        <PrimaryButton
-          loading={loading}
-          onClick={this.handleBankAccountPayPress}
-        >
-          Generate token
+        <PrimaryButton onClick={() => this.handleSubmit()}>
+          {i18n.t('label.pay_via_sepa')}
         </PrimaryButton>
-        <View style={styles.token}>
-          {token && (
-            <Text style={styles.instruction}>Token: {token.tokenId}</Text>
-          )}
-        </View>
       </View>
     );
   }

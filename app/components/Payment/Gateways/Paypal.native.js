@@ -18,8 +18,10 @@ class PaypalComponent extends React.Component {
       currency: this.props.currency,
       description: 'Your description goes here'
     })
-      .then(confirm => {
-        this.props.onSuccess(confirm);
+      .then((confirm, payment) => {
+        let response = confirm.response;
+        response.paymentID = response.id;
+        this.props.onSuccess(response);
         console.log('confirmed called up');
       })
       .catch(error => this.props.onSuccess(data));

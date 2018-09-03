@@ -36,8 +36,9 @@ export default class StripeSepa extends Component {
       .createTokenWithBankAccount(params)
       .then(token => {
         console.log('token Test' + token);
-        token = { ...token, id: token.tokenId };
-        this.props.onSuccess({ token });
+        let tokenObj = token;
+        tokenObj.id = token.tokenId;
+        this.props.onSuccess(tokenObj);
       })
       .catch(err => {
         console.log(err);

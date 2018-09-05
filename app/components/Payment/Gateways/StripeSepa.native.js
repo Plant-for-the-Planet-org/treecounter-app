@@ -28,17 +28,22 @@ export default class StripeSepa extends Component {
       return;
     }
     const params = {
-      accountNumber: this._iban.replace(/\s/g, ''),
+      type: 'sepaDebit',
+      iban: this._iban.replace(/\s/g, ''),
       countryCode: 'de',
-      currency: currency
+      currency: currency,
+      email: context.donorEmail,
+      name: context.donorName
     };
     stripe
-      .createTokenWithBankAccount(params)
+      .createSourceWithParams(params)
       .then(token => {
-        console.log('token Test' + token);
-        let tokenObj = token;
-        tokenObj.id = token.tokenId;
-        this.props.onSuccess(tokenObj);
+        console.log('token Test', token);
+        token.sepa_debit = token.sepaDebitDetails;
+        token.type = 'sepa_debit';
+        // let tokenObj = token;
+        // tokenObj.id = token.tokenId;
+        this.props.onSuccess(token);
       })
       .catch(err => {
         console.log(err);

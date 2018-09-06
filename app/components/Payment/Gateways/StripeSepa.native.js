@@ -41,6 +41,9 @@ export default class StripeSepa extends Component {
         console.log('token Test', token);
         token.sepa_debit = token.sepaDebitDetails;
         token.type = 'sepa_debit';
+        //TODO hkurra it will start working once this will get merged
+        //https://github.com/tipsi/tipsi-stripe/pull/319/files
+        token.id = token.id || token.sourceId;
         // let tokenObj = token;
         // tokenObj.id = token.tokenId;
         this.props.onSuccess(token);

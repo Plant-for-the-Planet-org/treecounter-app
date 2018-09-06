@@ -34,5 +34,10 @@ export default (textInputStyles = EStyleSheet.create({
   emptyView: {
     width: 20,
     height: 20
+  },
+  errorTextStyle: {
+    color: '$colorError',
+    fontSize: 11,
+    marginTop: -12
   }
 }));

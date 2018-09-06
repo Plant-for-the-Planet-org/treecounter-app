@@ -2,6 +2,7 @@ import { normalize } from 'normalizr';
 import { debug } from '../debug/index';
 import { postAuthenticatedRequest, postRequest } from '../utils/api';
 import { mergeEntities } from '../reducers/entitiesReducer';
+import { setProgressModelState } from '../reducers/modelDialogReducer';
 import {
   contributionSchema,
   treecounterSchema,
@@ -17,6 +18,7 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
   let route = loggedIn ? 'donationContribution_post' : 'donate_post';
 
   return dispatch => {
+    dispatch(setProgressModelState(true));
     if (
       donationContribution.paymentResponse.type &&
       donationContribution.paymentResponse.type === 'error'
@@ -46,7 +48,7 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
           }
 
           dispatch(paymentSuccess({ status: true, message: 'success' }));
-
+          dispatch(setProgressModelState(false));
           console.log(`Thank you for planting ${
             contribution.treeCount
           } trees with us!
@@ -59,6 +61,7 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
           dispatch(
             paymentFailed({ status: false, message: response.response.data })
           );
+          dispatch(setProgressModelState(false));
         });
     }
   };

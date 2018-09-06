@@ -85,8 +85,7 @@ export default {
           },
           icon: 'home',
           maxLength: 255,
-          propertyOrder: 4,
-          style: { marginLeft: 20 }
+          propertyOrder: 4
         },
         zipCode: {
           type: 'string',
@@ -95,8 +94,7 @@ export default {
             maxlength: 15
           },
           maxLength: 15,
-          propertyOrder: 5,
-          style: { marginLeft: 20 }
+          propertyOrder: 5
         },
         city: {
           type: 'string',
@@ -105,8 +103,7 @@ export default {
             maxlength: 255
           },
           maxLength: 255,
-          propertyOrder: 6,
-          style: { marginLeft: 20 }
+          propertyOrder: 6
         },
         country: {
           enum: [
@@ -698,8 +695,7 @@ export default {
           },
           maxLength: 255,
           propertyOrder: 5,
-          icon: 'home',
-          style: { marginLeft: 20 }
+          icon: 'home'
         },
         zipCode: {
           type: 'string',
@@ -708,8 +704,7 @@ export default {
             maxlength: 15
           },
           maxLength: 15,
-          propertyOrder: 6,
-          style: { marginLeft: 20 }
+          propertyOrder: 6
         },
         city: {
           type: 'string',
@@ -718,8 +713,7 @@ export default {
             maxlength: 255
           },
           maxLength: 255,
-          propertyOrder: 7,
-          style: { marginLeft: 20 }
+          propertyOrder: 7
         },
         country: {
           enum: [

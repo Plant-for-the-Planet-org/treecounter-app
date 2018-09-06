@@ -25,7 +25,8 @@ EStyleSheet.build({
   $colorPrimaryAccentLight: '#ec6453',
   $borderColor: '#aba2a2',
   $inputBorderColor: '#dad7d7',
-  $backgroundScreen: '#f1f1f1'
+  $backgroundScreen: '#f1f1f1',
+  $colorError: '#ff0033'
 });
 
 // const customTextProps = {

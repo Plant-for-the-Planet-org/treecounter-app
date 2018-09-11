@@ -31,19 +31,22 @@ export default (currentSelectorStyles = EStyleSheet.create({
     flexDirection: 'column'
   },
 
-  treecount_price_conversion_Text_input: {
-    paddingLeft: 3,
-    marginTop: 5,
-    // width: 28
-    width: width * 0.2
-  },
-
   treecount_price_conversion_Text_container: {
     flex: 1,
     flexDirection: 'row',
     // maxWidth: 160
     width: width * 0.6
   },
+
+  treecount_price_conversion_Text_input: {
+    paddingLeft: 3,
+    marginTop: 5,
+    // width: 28
+    width: width * 0.2,
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+
   treecount_price_conversion_lebel: {
     // marginLeft: 28,
     marginLeft: width * 0.1,

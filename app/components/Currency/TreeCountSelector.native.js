@@ -102,7 +102,7 @@ class TreeCountSelector extends React.Component {
     const { treeCountOptions, currency, treeCountToAmount } = this.props;
     let radio_props = [];
     treeCountOptions.fixedTreeCountOptions.map(treeCount => {
-      let label = treeCount + '          ' + i18n.t('label.trees');
+      let label = treeCount + '     ' + i18n.t('label.trees');
       radio_props.push({ label: label, value: treeCount });
     });
 
@@ -148,7 +148,7 @@ class TreeCountSelector extends React.Component {
             {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
               return (
                 <View
-                  style={styles.treecount_price_conversion_Text}
+                  style={styles.treecount_price_conversion_Text_container}
                   key={treeCount + 'container'}
                 >
                   <Text style={styles.treecount_price_conversion_Text_equal2}>
@@ -161,7 +161,6 @@ class TreeCountSelector extends React.Component {
                     {treeCountToAmount(treeCount)}
                   </Text>
                   <Text style={styles.treecount_price_conversion_Text_currency}>
-                    {' '}
                     {currency}
                   </Text>
                 </View>
@@ -175,11 +174,7 @@ class TreeCountSelector extends React.Component {
             <RadioForm>
               {fixed_radio_props.map((obj, i) => {
                 return (
-                  <RadioButton
-                    style={{ padding: 0, width: 30 }}
-                    labelHorizontal={true}
-                    key={i}
-                  >
+                  <RadioButton labelHorizontal={true} key={i}>
                     <RadioButtonInput
                       obj={obj}
                       index={i}
@@ -215,7 +210,7 @@ class TreeCountSelector extends React.Component {
               </Text>
             </View>
           </View>
-          <View style={styles.treecount_price_conversion_Text}>
+          <View style={styles.treecount_price_conversion_Text_container}>
             <Text style={styles.treecount_price_conversion_Text_equal2}>=</Text>
 
             <TextInput

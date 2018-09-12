@@ -23,9 +23,13 @@ export default (currentSelectorStyles = EStyleSheet.create({
     margin: 5
   },
   radio_label: {
-    width: width * 0.3,
+    width: width * 0.2,
     //width: 107,
     flexDirection: 'row'
+  },
+  radio_label1: {
+    width: width * 0.2
+    //width: 107,
   },
   treecount_price_conversion_Column: {
     flexDirection: 'column'
@@ -44,7 +48,8 @@ export default (currentSelectorStyles = EStyleSheet.create({
     // width: 28
     width: width * 0.2,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    textAlign: 'center'
   },
 
   treecount_price_conversion_lebel: {

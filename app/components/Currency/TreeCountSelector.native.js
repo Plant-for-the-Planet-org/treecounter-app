@@ -102,7 +102,14 @@ class TreeCountSelector extends React.Component {
     const { treeCountOptions, currency, treeCountToAmount } = this.props;
     let radio_props = [];
     treeCountOptions.fixedTreeCountOptions.map(treeCount => {
-      let label = treeCount + '     ' + i18n.t('label.trees');
+      let label = (
+        <View style={{ flextDirection: 'row' }}>
+          <Text>
+            {treeCount}{' '}
+            <Text style={{ paddingLeft: 20 }}>{i18n.t('label.trees')}</Text>
+          </Text>
+        </View>
+      );
       radio_props.push({ label: label, value: treeCount });
     });
 
@@ -136,7 +143,7 @@ class TreeCountSelector extends React.Component {
                     <RadioButtonLabel
                       obj={obj}
                       index={i}
-                      labelWrapStyle={styles.radio_label}
+                      labelWrapStyle={styles.radio_label1}
                       labelHorizontal={true}
                     />
                   </RadioButton>

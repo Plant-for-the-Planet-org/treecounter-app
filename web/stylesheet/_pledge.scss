@@ -138,12 +138,20 @@
     background-color: #ffffff;
     border: solid 1.4px #e6e6e6;
     padding: 20px;
+    margin:10px;
     // margin-right: 30px;
     cursor: pointer;
     text-align: center;
 
-    img {
-      width: 60px;
+    .imgContainer {
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width:auto;
+        height:auto;
+      }
     }
   }
 }

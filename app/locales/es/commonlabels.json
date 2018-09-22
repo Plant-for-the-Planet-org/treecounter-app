@@ -1,7 +1,7 @@
 {
   "loading": "cargando ...",
-  "isRequired": " es requerido",
-  "enterValidEmail": "Ingrese un email valido",
+  "isRequired": " es obligatorio",
+  "enterValidEmail": "Ingrese un correo valido",
   "invalidLength": "Longitud inválida: debe ser menor que",
   "invalidValueMsg": "Por favor ingrese válido"
 }

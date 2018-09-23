@@ -87,8 +87,7 @@ export default (treecounterStyles = EStyleSheet.create({
   },
   svgColumn2: {
     maxWidth: 100,
-    maxHeight: 40,
-    resizeMode: 'contain'
+    maxHeight: 40
   },
   divider: {
     height: 3,

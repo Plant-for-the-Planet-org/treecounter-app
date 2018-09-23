@@ -2,7 +2,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { getDrawerNavigator } from '../../components/Navigators/AppDrawerNavigator';
+import {
+  getDrawerNavigator,
+  getTabNavigator
+} from '../../components/Navigators/AppDrawerNavigator';
 import { getAccessToken } from '../../utils/user';
 import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';

@@ -1,7 +1,6 @@
 {
-  "total_trees": "Gesamtbäume",
-  "most_recent": "Neueste Zusagen",
-  "biggest_pledges": "Größte Versprechen",
-  "pledge": "Versprechen",
-  "pledge_des": "Nach der Verpfändung erhalten Sie eine E-Mail, die Ihnen mitteilt, wie Sie die verpfändeten Bäume spenden können. Ein Baum kostet 1 €."
+  "total_trees": "Bäume gesamt",
+  "most_recent": "neueste Baumversprechen",
+  "biggest_pledges": "Größte Baumversprechen",
+  "pledge_des": "Nach dem Baumversprechen erhältst du eine E-Mail, die dir mitteilt, wie du die versprochenen Bäume spenden kannst. Ein Baum kostet 1 €."
 }

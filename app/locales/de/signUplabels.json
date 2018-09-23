@@ -1,23 +1,10 @@
 {
-  "signup": "Dazu kommen",
-  "email": "E-Mail-",
+  "signup": "Mitmachen ",
+  "email": "E-Mail",
   "address": "Adresse",
-  "zipCode": "Plz",
+  "zipCode": "Postleitzahl",
   "city": "City",
   "subtype": "Kategorie",
   "country": "Land",
-  "password_repeat": "Passwort wiederholen",
-  "mayPublish": "Ich bin damit einverstanden, dass mein Name auf der Website der Trillion Tree Campaign veröffentlicht wird.",
-  "mayContact": "Ich stimme zu, dass ich von der Kinder- und Jugendorganisation Plant-for-the-Planet als Teil von Baumpflanz-Herausforderungen kontaktiert werden kann.",
-  "firstname": "Vorname",
-  "lastname": "Zuname",
-  "company_or_orga_name": "Name",
-  "i_am_a": "Ich bin ein",
-  "i_am": "ich bin",
-  "tpo_title": "Baumpflanz-Organisation",
-  "individual_title": "Nur ich",
-  "company_title": "Unternehmen",
-  "education_title": "Schule",
-  "already_have_account": "Hast du schon ein Konto?",
-  "education": "Bildung"
+  "mayPublish": "Ich bin damit einverstanden, dass mein Name auf der Website der Trillion Tree Campaign veröffentlicht wird."
 }

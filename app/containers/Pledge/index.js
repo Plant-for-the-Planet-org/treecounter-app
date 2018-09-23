@@ -32,6 +32,8 @@ class PledgeContainer extends Component {
         pledges={this.props.pledges}
         postPledge={data => this.postPledgeRequest(data)}
         eventSlug={this.props.match.params.eventSlug}
+        eventName={this.props.match.params.eventName}
+        eventImage={this.props.match.params.eventImage}
       />
     );
   }
@@ -57,7 +59,9 @@ PledgeContainer.propTypes = {
   clearTimeoutAction: PropTypes.func,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      eventSlug: PropTypes.string
+      eventSlug: PropTypes.string,
+      eventName: PropTypes.string,
+      eventImage: PropTypes.string
     })
   }).isRequired
 };

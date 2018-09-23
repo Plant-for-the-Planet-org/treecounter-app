@@ -76,7 +76,9 @@ class Trillion extends Component {
               className="event_item"
               onClick={() =>
                 updateRoute('app_pledge', null, null, {
-                  eventSlug: element.slug
+                  eventSlug: element.slug,
+                  eventName: element.name,
+                  eventImage: element.image
                 })
               }
             >

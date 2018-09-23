@@ -6,8 +6,9 @@ import CardLayout from '../Common/Card';
 import ContentHeader from '../Common/ContentHeader';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextSpan from '../Common/Text/TextBlock';
+import { getImageUrl } from '../../actions/apiRouting';
 
-import { pledge_highest, pledge_latest, esriLogo, bmzLogo } from '../../assets';
+import { pledge_highest, pledge_latest } from '../../assets';
 
 import {
   pledgeFormSchema,
@@ -54,18 +55,14 @@ export default class Pledge extends Component {
     this.setState({ value }); // <- keep track of value changes
   }
   render() {
-    let { eventSlug } = this.props;
+    let { eventImage, eventName } = this.props;
     return this.props.pledges && this.props.pledges.total !== undefined ? (
       <div className="sidenav-wrapper app-container__content--center">
         <div className="conference_heading">
           <div className="esri_logo_background">
-            <img
-              src={eventSlug === 'esri-user-conference' ? esriLogo : bmzLogo}
-            />
+            <img src={getImageUrl('event', 'thumb', eventImage)} />
           </div>
-          {eventSlug === 'esri-user-conference'
-            ? 'ESRI User Conference'
-            : 'BMZ User Conference'}
+          {eventName}
         </div>
         <CardLayout className="total_trees">
           <span className="total_number">
@@ -143,5 +140,7 @@ export default class Pledge extends Component {
 Pledge.propTypes = {
   pledges: PropTypes.object,
   eventSlug: PropTypes.string,
-  postPledge: PropTypes.func
+  postPledge: PropTypes.func,
+  eventName: PropTypes.string,
+  eventImage: PropTypes.string
 };

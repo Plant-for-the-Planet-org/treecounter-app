@@ -46,7 +46,15 @@ async function getHeaders(authenticated = false) {
 
 export async function getSessionId() {
   return fetchItem('session_id')
-    .then(sessionId => sessionId)
+    .then(sessionId => {
+      if (sessionId !== undefined) {
+        return sessionId;
+      } else {
+        const sessionId = uuidv1();
+        saveItem('session_id', sessionId);
+        return sessionId;
+      }
+    })
     .catch(() => {
       const sessionId = uuidv1();
       saveItem('session_id', sessionId);

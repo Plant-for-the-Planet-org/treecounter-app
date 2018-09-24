@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { trillionCampaign } from '../../actions/trillionAction';
+import { pledgeEventsAction } from '../../actions/pledgeEventsAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from './TreecounterGraphicsText';
@@ -10,13 +11,14 @@ import { updateRoute } from '../../helpers/routerHelper';
 import TextHeading from '../Common/Heading/TextHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n.js';
-import { esriLogo, bmzLogo } from '../../assets';
+import { getImageUrl } from '../../actions/apiRouting';
 
 class Trillion extends Component {
   constructor() {
     super();
     this.state = {
       svgData: {},
+      pledgeEventData: [],
       displayName: '',
       loading: true
     };
@@ -36,6 +38,12 @@ class Trillion extends Component {
           displayName: data.displayName,
           loading: false
         });
+      })
+      .catch(error => console.log(error));
+
+    pledgeEventsAction()
+      .then(({ data }) => {
+        this.setState({ pledgeEventData: data });
       })
       .catch(error => console.log(error));
   }
@@ -63,30 +71,25 @@ class Trillion extends Component {
         </TextHeading>
         <TextBlock>Trillion Tree Events today</TextBlock>
         <div className="events_row">
-          <div
-            className="event_item"
-            onClick={() =>
-              updateRoute('app_pledge', null, null, {
-                eventSlug: 'esri-user-conference'
-              })
-            }
-          >
-            <img src={esriLogo} />
-            <TextBlock>User Conference</TextBlock>
-          </div>
-          {/* <div
-            className="event_item"
-            onClick={() =>
-              updateRoute('app_pledge', null, null, {
-                eventSlug: 'bmz-zukunftskongress'
-              })
-            }
-          >
-            <img src={bmzLogo} />
-            <TextBlock>User Conference</TextBlock>
-          </div> */}
-        </div>
+          {this.state.pledgeEventData.map(element => (
+            <div
+              className="event_item"
+              onClick={() =>
+                updateRoute('app_pledge', null, null, {
+                  eventSlug: element.slug,
+                  eventName: element.name,
+                  eventImage: element.image
+                })
+              }
+            >
+              <div className="imgContainer">
+                <img src={getImageUrl('event', 'thumb', element.image)} />
+              </div>
 
+              <TextBlock>User Conference</TextBlock>
+            </div>
+          ))}
+        </div>
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />
           {this.state.svgData === null ? (

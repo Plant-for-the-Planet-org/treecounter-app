@@ -2668,18 +2668,6 @@
           "variable",
           "/",
           "[^/]++",
-          "eventName"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "eventImage"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
           "eventSlug"
         ],
         [

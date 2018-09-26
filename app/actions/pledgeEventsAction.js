@@ -1,5 +1,10 @@
 import { getRequest } from '../utils/api';
+import { setPledgeEvents } from '../reducers/pledgeReducer';
 
 export function pledgeEventsAction() {
-  return getRequest('public_pledgeEvents_get');
+  return dispatch => {
+    getRequest('public_pledgeEvents_get').then(val =>
+      dispatch(setPledgeEvents(val))
+    );
+  };
 }

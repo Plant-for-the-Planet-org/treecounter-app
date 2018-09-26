@@ -55,94 +55,108 @@ export default class Pledge extends Component {
     this.setState({ value }); // <- keep track of value changes
   }
   render() {
-    let { eventImage, eventName } = this.props;
-    return this.props.pledges && this.props.pledges.total !== undefined ? (
-      <div className="sidenav-wrapper app-container__content--center">
-        <div className="conference_heading">
-          <div className="esri_logo_background">
-            <img src={getImageUrl('event', 'thumb', eventImage)} />
-          </div>
-          {eventName}
-        </div>
-        <CardLayout className="total_trees">
-          <span className="total_number">
-            {parseInt(this.props.pledges.total).toLocaleString('en', {
-              useGrouping: true
-            })}
-          </span>
-          <span className="total_text">{i18n.t('label.total_trees')}</span>
-        </CardLayout>
-        <div className="pledge_content--center">
-          <div className="row">
-            <CardLayout className="recent-pledges">
-              <div className="before_table_header">
-                <img src={pledge_latest} />
-                <span>{i18n.t('label.most_recent')}</span>
+    if (this.props.pledges && this.props.pledges.total !== undefined) {
+      let selectedPledge = this.props.pledges.filter(
+        val => val.slug === eventSlug
+      );
+      if (selectedPledge && selectedPledge.length > 0) {
+        return (
+          <div className="sidenav-wrapper app-container__content--center">
+            <div className="conference_heading">
+              <div className="esri_logo_background">
+                <img
+                  src={getImageUrl('event', 'thumb', selectedPledge[0].image)}
+                />
               </div>
-              <div className="recent-pledges-table">
-                <div className="pledges-header row-list-item">
-                  <span>{i18n.t('label.name')}</span>
-                  <span>{i18n.t('label.trees')}</span>
-                </div>
-                <div className="pledges-list">
-                  {this.props.pledges.latest.map(pledge => (
-                    <div className="row-list-item" key={pledge.id}>
-                      <span>{pledge.firstname + ' ' + pledge.lastname}</span>
-                      <span>
-                        {parseInt(pledge.treeCount).toLocaleString('en')}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              {selectedPledge[0].name}
+            </div>
+            <CardLayout className="total_trees">
+              <span className="total_number">
+                {parseInt(this.props.pledges.total).toLocaleString('en', {
+                  useGrouping: true
+                })}
+              </span>
+              <span className="total_text">{i18n.t('label.total_trees')}</span>
             </CardLayout>
-            <CardLayout className="recent-pledges">
-              <div className="before_table_header">
-                <img src={pledge_highest} />
-                <span>{i18n.t('label.biggest_pledges')}</span>
-              </div>
-              <div className="recent-pledges-table">
-                <div className="pledges-header row-list-item">
-                  <span>{i18n.t('label.name')}</span>
-                  <span>{i18n.t('label.trees')}</span>
-                </div>
-                <div className="pledges-list">
-                  {this.props.pledges.highest.map(pledge => (
-                    <div className="row-list-item" key={pledge.id}>
-                      <span>{pledge.firstname + ' ' + pledge.lastname}</span>
-                      <span>
-                        {parseInt(pledge.treeCount).toLocaleString('en')}
-                      </span>
+            <div className="pledge_content--center">
+              <div className="row">
+                <CardLayout className="recent-pledges">
+                  <div className="before_table_header">
+                    <img src={pledge_latest} />
+                    <span>{i18n.t('label.most_recent')}</span>
+                  </div>
+                  <div className="recent-pledges-table">
+                    <div className="pledges-header row-list-item">
+                      <span>{i18n.t('label.name')}</span>
+                      <span>{i18n.t('label.trees')}</span>
                     </div>
-                  ))}
-                </div>
+                    <div className="pledges-list">
+                      {this.props.pledges.latest.map(pledge => (
+                        <div className="row-list-item" key={pledge.id}>
+                          <span>
+                            {pledge.firstname + ' ' + pledge.lastname}
+                          </span>
+                          <span>
+                            {parseInt(pledge.treeCount).toLocaleString('en')}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </CardLayout>
+                <CardLayout className="recent-pledges">
+                  <div className="before_table_header">
+                    <img src={pledge_highest} />
+                    <span>{i18n.t('label.biggest_pledges')}</span>
+                  </div>
+                  <div className="recent-pledges-table">
+                    <div className="pledges-header row-list-item">
+                      <span>{i18n.t('label.name')}</span>
+                      <span>{i18n.t('label.trees')}</span>
+                    </div>
+                    <div className="pledges-list">
+                      {this.props.pledges.highest.map(pledge => (
+                        <div className="row-list-item" key={pledge.id}>
+                          <span>
+                            {pledge.firstname + ' ' + pledge.lastname}
+                          </span>
+                          <span>
+                            {parseInt(pledge.treeCount).toLocaleString('en')}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </CardLayout>
               </div>
-            </CardLayout>
+              <CardLayout className="pledge-form">
+                <ContentHeader caption={'Pledge Trees'} />
+                <TCombForm
+                  ref="pledgeForm"
+                  type={pledgeFormSchema}
+                  options={allSchemaOptions}
+                  value={this.state.value}
+                  onChange={value => this.onFormChange(value)}
+                />
+                <PrimaryButton onClick={() => this.onFormSubmit()}>
+                  {i18n.t('label.pledge')}
+                </PrimaryButton>
+                <TextSpan>{i18n.t('label.pledge_des')}</TextSpan>
+              </CardLayout>
+            </div>
           </div>
-          <CardLayout className="pledge-form">
-            <ContentHeader caption={'Pledge Trees'} />
-            <TCombForm
-              ref="pledgeForm"
-              type={pledgeFormSchema}
-              options={allSchemaOptions}
-              value={this.state.value}
-              onChange={value => this.onFormChange(value)}
-            />
-            <PrimaryButton onClick={() => this.onFormSubmit()}>
-              {i18n.t('label.pledge')}
-            </PrimaryButton>
-            <TextSpan>{i18n.t('label.pledge_des')}</TextSpan>
-          </CardLayout>
-        </div>
-      </div>
-    ) : null;
+        );
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
   }
 }
 
 Pledge.propTypes = {
   pledges: PropTypes.object,
   eventSlug: PropTypes.string,
-  postPledge: PropTypes.func,
-  eventName: PropTypes.string,
-  eventImage: PropTypes.string
+  postPledge: PropTypes.func
 };

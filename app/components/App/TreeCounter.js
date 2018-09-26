@@ -212,10 +212,7 @@ class TreeCounter extends Component {
                 component={DonationTreesContainer}
               />
               <Route
-                path={
-                  getLocalRoute('app_pledge') +
-                  '/:eventSlug/:eventImage/:eventName'
-                }
+                path={getLocalRoute('app_pledge') + '/:eventSlug'}
                 component={PledgeContainer}
               />
               <Route

@@ -12,6 +12,8 @@ import TextHeading from '../Common/Heading/TextHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
+import { pledgesSelector } from '../../selectors';
+import { connect } from 'react-redux';
 
 class Trillion extends Component {
   constructor() {
@@ -41,11 +43,7 @@ class Trillion extends Component {
       })
       .catch(error => console.log(error));
 
-    pledgeEventsAction()
-      .then(({ data }) => {
-        this.setState({ pledgeEventData: data });
-      })
-      .catch(error => console.log(error));
+    pledgeEventsAction();
   }
 
   shouldComponentUpdate() {
@@ -69,18 +67,18 @@ class Trillion extends Component {
             </SecondaryAccentButton>
           </ButtonHeading>
         </TextHeading>
-        <TextBlock>Trillion Tree Events today</TextBlock>
+        {this.state.pledgeEventData.length > 0 ? (
+          <TextBlock>Trillion Tree Events today</TextBlock>
+        ) : null}
         <div className="events_row">
           {this.state.pledgeEventData.map(element => (
             <div
               className="event_item"
-              onClick={() =>
+              onClick={() => {
                 updateRoute('app_pledge', null, null, {
-                  eventSlug: element.slug,
-                  eventName: element.name,
-                  eventImage: element.image
-                })
-              }
+                  eventSlug: element.slug
+                });
+              }}
             >
               <div className="imgContainer">
                 <img src={getImageUrl('event', 'thumb', element.image)} />
@@ -107,5 +105,7 @@ class Trillion extends Component {
     );
   }
 }
-
-export default Trillion;
+const mapStateToProps = state => ({
+  pledges: pledgesSelector(state)
+});
+export default connect(mapStateToProps)(Trillion);

@@ -25,11 +25,11 @@ class SideMenuContainer extends Component {
   }
   componentDidMount() {
     this.props.loggedIn
-      ? AuthenticatedSideMenuSchema.subscribe(
+      ? AuthenticatedSideMenuSchema('mobile.bottom').subscribe(
           success => this.setState({ schema: success, loading: false }),
           error => console.log(error)
         )
-      : PublicSideMenuSchema.subscribe(
+      : PublicSideMenuSchema('mobile.bottom').subscribe(
           success => {
             if (success && success instanceof Array) {
               this.setState({ schema: success, loading: false });
@@ -44,11 +44,11 @@ class SideMenuContainer extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.loggedIn !== this.props.loggedIn) {
       nextProps.loggedIn
-        ? AuthenticatedSideMenuSchema.subscribe(
+        ? AuthenticatedSideMenuSchema('mobile.bottom').subscribe(
             success => this.setState({ schema: success, loading: false }),
             error => console.log(error)
           )
-        : PublicSideMenuSchema.subscribe(
+        : PublicSideMenuSchema('mobile.bottom').subscribe(
             success => this.setState({ schema: success, loading: false }),
             error => console.log(error)
           );

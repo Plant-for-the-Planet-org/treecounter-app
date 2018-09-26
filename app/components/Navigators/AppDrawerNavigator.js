@@ -39,12 +39,13 @@ const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
-  // [getLocalRoute('app_target')]: 'label.set_target',
-  // [getLocalRoute('app_donateTrees')]: 'label.donate_trees',
+  [getLocalRoute('app_target')]: 'label.set_target',
+  [getLocalRoute('app_donateTrees')]: 'label.donate_trees',
   [getLocalRoute('app_faq')]: 'label.faqs',
-  // [getLocalRoute('app_myTrees')]: 'label.my_trees',
-  // [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
-  // [getLocalRoute('app_editTrees')]: 'label.edit_trees',
+  [getLocalRoute('app_myTrees')]: 'label.my_trees',
+  [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
+  [getLocalRoute('app_homepage')]: 'World',
+  [getLocalRoute('app_userHome')]: 'Me',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license'
@@ -139,20 +140,37 @@ export const getDrawerNavigator = function(isLoggedIn) {
 export const getTabNavigator = function(isLoggedIn) {
   const ApptabNavigator = createBottomTabNavigator(
     {
+      [getLocalRoute('app_userHome')]: {
+        screen: isLoggedIn ? UserHomeContainer : LoginContainer,
+        navigationOptions: {
+          tabBarLabel: i18n.t(headerLabels[getLocalRoute('app_userHome')])
+        }
+      },
       [getLocalRoute('app_target')]: {
-        screen: isLoggedIn ? TargetContainer : LoginContainer
+        screen: isLoggedIn ? TargetContainer : LoginContainer,
+        navigationOptions: {
+          tabBarLabel: i18n.t(headerLabels[getLocalRoute('app_target')])
+        }
       },
 
-      [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer
-      },
       [getLocalRoute('app_myTrees')]: {
-        screen: isLoggedIn ? UserContributions : LoginContainer
+        screen: isLoggedIn ? UserContributions : LoginContainer,
+        navigationOptions: {
+          tabBarLabel: i18n.t(headerLabels[getLocalRoute('app_myTrees')])
+        }
       },
       [getLocalRoute('app_donateTrees')]: {
-        screen: DonationTreesContainer
+        screen: DonationTreesContainer,
+        navigationOptions: {
+          tabBarLabel: i18n.t(headerLabels[getLocalRoute('app_donateTrees')])
+        }
       },
-      [getLocalRoute('app_homepage')]: { screen: Trillion }
+      [getLocalRoute('app_homepage')]: {
+        screen: Trillion,
+        navigationOptions: {
+          tabBarLabel: i18n.t(headerLabels[getLocalRoute('app_homepage')])
+        }
+      }
     },
     {
       tabBarOptions: {

@@ -1,5 +1,5 @@
 {
-  "signup": "Participar",
+  "signup": "Participa",
   "email": "Email",
   "address": "Dirección",
   "zipCode": "Código Postal",
@@ -12,12 +12,12 @@
   "firstname": "Nombre",
   "lastname": "Apellido",
   "company_or_orga_name": "Nombre",
-  "i_am_a": "soy un",
-  "i_am": "yo soy",
+  "i_am_a": "Soy ",
+  "i_am": "Soy",
   "tpo_title": "Organización de plantación de árboles",
   "individual_title": "Solo yo",
   "company_title": "Empresa",
   "education_title": "Colegio",
-  "already_have_account": "Ya tienes una cuenta?",
+  "already_have_account": "¿Ya tienes una cuenta?",
   "education": "Educación"
 }

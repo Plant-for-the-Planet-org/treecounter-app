@@ -1,10 +1,16 @@
 import { getRequest } from '../utils/api';
-import { setPledgeEvents } from '../reducers/pledgeReducer';
+import { setPledgeEvents } from '../reducers/pledgeEventReducer';
 
-export function pledgeEventsAction() {
+export function fetchpledgeEventsAction() {
   return dispatch => {
     getRequest('public_pledgeEvents_get').then(val =>
-      dispatch(setPledgeEvents(val))
+      dispatch(
+        setPledgeEvents(
+          val.data.sort(function(a, b) {
+            return a.position < b.position;
+          })
+        )
+      )
     );
   };
 }

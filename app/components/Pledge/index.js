@@ -55,10 +55,17 @@ export default class Pledge extends Component {
     this.setState({ value }); // <- keep track of value changes
   }
   render() {
-    if (this.props.pledges && this.props.pledges.total !== undefined) {
-      let selectedPledge = this.props.pledges.filter(
-        val => val.slug === eventSlug
-      );
+    if (this.props.pledges) {
+      let selectedPledge;
+      if (
+        this.props.pledgeEvents &&
+        this.props.pledgeEvents.pledgeEvents.length > 0
+      ) {
+        selectedPledge = this.props.pledgeEvents.pledgeEvents.filter(
+          val => val.slug === this.props.eventSlug
+        );
+      }
+
       if (selectedPledge && selectedPledge.length > 0) {
         return (
           <div className="sidenav-wrapper app-container__content--center">
@@ -158,5 +165,6 @@ export default class Pledge extends Component {
 Pledge.propTypes = {
   pledges: PropTypes.object,
   eventSlug: PropTypes.string,
-  postPledge: PropTypes.func
+  postPledge: PropTypes.func,
+  pledgeEvents: PropTypes.object
 };

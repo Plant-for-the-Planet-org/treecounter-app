@@ -7,7 +7,10 @@ const path = require('path');
 module.exports = webpackMerge(commonConfig, {
   entry: {
     bundle: ['babel-polyfill', path.join(__dirname, '../../index.web.js')],
-    widget: ['babel-polyfill', path.join(__dirname, '../../widget.js')]
+    widget: [
+      'babel-polyfill',
+      path.join(__dirname, '../widgets/basic/widget.js')
+    ]
   },
   output: {
     path: path.join(__dirname, '../prod'),

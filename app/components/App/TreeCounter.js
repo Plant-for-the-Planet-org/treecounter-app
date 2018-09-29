@@ -24,6 +24,7 @@ import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import FAQContainer from '../../containers/FAQ';
 import PledgeContainer from '../../containers/Pledge';
+import RedemptionContainer from '../../containers/RedemptionContainer';
 
 import Footer from '../Footer';
 
@@ -211,6 +212,14 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_donateTrees')}
                 component={DonationTreesContainer}
               />
+              <Route
+                path={'/app_redemption' + '/:token'}
+                component={RedemptionContainer}
+              />
+              {/*<Route*/}
+              {/*path={'/app_redemption'}*/}
+              {/*component={RedemptionContainer}*/}
+              {/*/>*/}
               <Route
                 path={
                   getLocalRoute('app_pledge') +

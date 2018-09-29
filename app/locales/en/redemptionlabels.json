@@ -1,0 +1,20 @@
+{
+  "redeem_trees": "Redeem Trees",
+  "enter_code": "Please enter a Tree Voucher, merchandise code or Token to claim your treees to redeem",
+  "log_in": "Please log in or sign up to redeem your code",
+  "validate_code": "Validate Code",
+  "geo_location": "Geo Location",
+  "add_images": "Add Images",
+  "tree_classification": "Tree Classification",
+  "tree_scientific_name": "Tree Scientific Name",
+  "add_measurements": "Add Measurements",
+  "tree_diameter": "Tree Diameter",
+  "tree_height": "Tree Height",
+  "measurement_date": "Measurement Date",
+  "heading_register_trees": "Register Planted Trees",
+  "register_description": "Report trees you planted. These trees will show up in your tree-counter. You can later update, edit or delete entries in \"My Trees\".",
+  "register": "Register",
+  "many_trees": "Many Trees",
+  "plant_project": "Plant Project",
+  "plant_projects": "Plant Projects"
+}

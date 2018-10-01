@@ -201,7 +201,7 @@ export default class SelectPlantProject extends Component {
               />
             ) : null}
             <PrimaryButton
-              onPress={() => this.onSelectClicked(this.state.modalProject.id)}
+              onClick={() => this.onSelectClicked(this.state.modalProject.id)}
             >
               {i18n.t('label.select_project')}
             </PrimaryButton>

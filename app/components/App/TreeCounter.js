@@ -45,6 +45,7 @@ import DonationTreesContainer from '../../containers/DonateTrees';
 import EditUserProfileContainer from '../../containers/EditUserProfile';
 import LeaderboardContainer from '../../containers/Leaderboard';
 import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
+import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -76,6 +77,7 @@ class TreeCounter extends Component {
 
   componentDidMount() {
     this.props.loadTpos();
+    this.props.fetchpledgeEventsAction();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -221,10 +223,7 @@ class TreeCounter extends Component {
               {/*component={RedemptionContainer}*/}
               {/*/>*/}
               <Route
-                path={
-                  getLocalRoute('app_pledge') +
-                  '/:eventSlug/:eventImage/:eventName'
-                }
+                path={getLocalRoute('app_pledge') + '/:eventSlug'}
                 component={PledgeContainer}
               />
               <Route
@@ -265,5 +264,6 @@ TreeCounter.propTypes = {
   NotificationAction: PropTypes.func,
   loadTpos: PropTypes.func,
   dispatch: PropTypes.func,
-  progressModel: PropTypes.bool
+  progressModel: PropTypes.bool,
+  fetchpledgeEventsAction: PropTypes.func
 };

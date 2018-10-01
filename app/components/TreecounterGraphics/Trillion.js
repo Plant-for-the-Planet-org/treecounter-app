@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { trillionCampaign } from '../../actions/trillionAction';
-import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from './TreecounterGraphicsText';
@@ -14,7 +13,6 @@ import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
 import { pledgeEventSelector } from '../../selectors';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 class Trillion extends Component {
@@ -44,8 +42,6 @@ class Trillion extends Component {
         });
       })
       .catch(error => console.log(error));
-
-    this.props.fetchpledgeEventsAction();
   }
 
   shouldComponentUpdate() {
@@ -76,6 +72,7 @@ class Trillion extends Component {
             <div className="events_row">
               {this.props.pledgeEvents.pledgeEvents.map(element => (
                 <div
+                  key={element.slug}
                   className="event_item"
                   onClick={() => {
                     updateRoute('app_pledge', null, null, {
@@ -111,16 +108,12 @@ class Trillion extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchpledgeEventsAction }, dispatch);
-};
 
 const mapStateToProps = state => ({
   pledgeEvents: pledgeEventSelector(state)
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Trillion);
+export default connect(mapStateToProps)(Trillion);
 
 Trillion.propTypes = {
-  pledgeEvents: PropTypes.object,
-  fetchpledgeEventsAction: PropTypes.func
+  pledgeEvents: PropTypes.object
 };

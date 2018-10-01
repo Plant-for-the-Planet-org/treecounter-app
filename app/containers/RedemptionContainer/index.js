@@ -43,7 +43,9 @@ class RedemptionContainer extends Component {
       this.setState({ isLoggedIn: isLoggedIn });
     }
   }
-
+  validateCode(data) {
+    updateRoute('app_redemption', null, null, { token: data });
+  }
   render() {
     return (
       <Redemption
@@ -53,6 +55,7 @@ class RedemptionContainer extends Component {
         codeStatus={this.state.codeStatus}
         updateRoute={this.props.route}
         isLoggedIn={this.state.isLoggedIn}
+        validateCode={data => this.validateCode(data)}
       />
     );
   }

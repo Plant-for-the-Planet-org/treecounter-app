@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 
 import {
-  targetFormSchema,
+  redemptionFormSchema,
   schemaOptions
-} from '../../server/parsedSchemas/target';
+} from '../../server/parsedSchemas/redemption';
 
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextHeading from '../Common/Heading/TextHeading';
@@ -25,10 +25,10 @@ const formLayout = locals => {
   );
 };
 
-const allSchemaOptions = {
-  template: formLayout,
-  ...schemaOptions
-};
+// const allSchemaOptions = {
+//   template: formLayout,
+//   ...schemaOptions
+// };
 
 export default class Redemption extends Component {
   constructor(props) {
@@ -37,7 +37,13 @@ export default class Redemption extends Component {
 
   render() {
     console.log(this.props);
-    const { page_status, code, isLoggedIn, updateRoute } = this.props;
+    const {
+      page_status,
+      code,
+      isLoggedIn,
+      updateRoute,
+      validateCode
+    } = this.props;
     let content, button;
     if (code === null || code === undefined) {
       content = (
@@ -47,7 +53,7 @@ export default class Redemption extends Component {
       );
       button = (
         <div className="row">
-          <PrimaryButton onClick={updateRoute.bind(this, 'app_login')}>
+          <PrimaryButton onClick={validateCode(code)}>
             {i18n.t('label.validate_code')}
           </PrimaryButton>
         </div>
@@ -88,9 +94,10 @@ export default class Redemption extends Component {
         <CardLayout>
           {content}
           <TCombForm
-            ref="setTargetForm"
-            type={targetFormSchema}
-            options={allSchemaOptions}
+            ref="redemptionForm"
+            type={redemptionFormSchema}
+            options={schemaOptions}
+            value={this.props.code}
           />
           {button}
         </CardLayout>

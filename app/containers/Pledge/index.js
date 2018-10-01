@@ -8,7 +8,7 @@ import {
   postPledge,
   clearTimeoutAction
 } from '../../actions/pledgeAction';
-import { pledgesSelector } from '../../selectors';
+import { pledgesSelector, pledgeEventSelector } from '../../selectors';
 
 import Pledge from '../../components/Pledge';
 
@@ -31,16 +31,16 @@ class PledgeContainer extends Component {
       <Pledge
         pledges={this.props.pledges}
         postPledge={data => this.postPledgeRequest(data)}
+        pledgeEvents={this.props.pledgeEvents}
         eventSlug={this.props.match.params.eventSlug}
-        eventName={this.props.match.params.eventName}
-        eventImage={this.props.match.params.eventImage}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  pledges: pledgesSelector(state)
+  pledges: pledgesSelector(state),
+  pledgeEvents: pledgeEventSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
@@ -54,14 +54,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(PledgeContainer);
 
 PledgeContainer.propTypes = {
   pledges: PropTypes.object,
+  pledgeEvents: PropTypes.object,
   fetchPledgesAction: PropTypes.func,
   postPledge: PropTypes.func,
   clearTimeoutAction: PropTypes.func,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      eventSlug: PropTypes.string,
-      eventName: PropTypes.string,
-      eventImage: PropTypes.string
+      eventSlug: PropTypes.string
     })
   }).isRequired
 };

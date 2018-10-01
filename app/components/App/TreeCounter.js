@@ -250,8 +250,7 @@ const mapDispatchToProps = dispatch => {
     {
       loadUserProfile,
       NotificationAction,
-      loadTpos,
-      fetchpledgeEventsAction
+      loadTpos
     },
     dispatch
   );

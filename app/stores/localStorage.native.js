@@ -24,8 +24,15 @@ export const saveItem = async (key, value) => {
 };
 
 export const fetchItem = async key => {
-  let item = await AsyncStorage.getItem(key);
-  return item;
+  try {
+    const serializedState = await AsyncStorage.getItem(key);
+    if (serializedState === null) {
+      return undefined;
+    }
+    return serializedState;
+  } catch (err) {
+    return undefined;
+  }
 };
 
 export const clearStorage = async () => {

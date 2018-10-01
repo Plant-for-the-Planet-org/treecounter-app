@@ -366,12 +366,6 @@
           "variable",
           "/",
           "[^/]++",
-          "menuName"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
           "_locale"
         ],
         [
@@ -3098,6 +3092,46 @@
         ]
       ],
       "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "public_pledgeEvents_get": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "uid"
+        ],
+        [
+          "text",
+          "/pledgeEvents"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/public"
+        ]
+      ],
+      "defaults": {
+        "uid": null,
+        "_locale": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": [

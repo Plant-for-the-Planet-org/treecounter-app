@@ -50,5 +50,5 @@ export default connect(null, mapDispatchToProps)(LoginContainer);
 LoginContainer.propTypes = {
   login: PropTypes.func,
   route: PropTypes.func,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object
 };

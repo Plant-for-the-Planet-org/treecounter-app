@@ -107,3 +107,14 @@ export function mergeContributionImages(updatedTreeContribution) {
     contributionImages
   };
 }
+
+export function getDocumentTitle(pageTitle, siteRequired = true) {
+  const siteTitle = 'Trillion Tree Campaign';
+  if (!pageTitle) {
+    return siteTitle;
+  }
+  if (siteRequired && pageTitle != siteTitle) {
+    pageTitle = `${pageTitle} | ${siteTitle}`;
+  }
+  return pageTitle;
+}

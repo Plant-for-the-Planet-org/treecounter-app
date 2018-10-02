@@ -9,6 +9,7 @@ import TextSpan from '../Common/Text/TextBlock';
 import { getImageUrl } from '../../actions/apiRouting';
 
 import { pledge_highest, pledge_latest } from '../../assets';
+import { getDocumentTitle } from '../../helpers/utils';
 
 import {
   pledgeFormSchema,
@@ -56,6 +57,7 @@ export default class Pledge extends Component {
   }
   render() {
     let { eventImage, eventName } = this.props;
+    document.title = getDocumentTitle(eventName);
     return this.props.pledges && this.props.pledges.total !== undefined ? (
       <div className="sidenav-wrapper app-container__content--center">
         <div className="conference_heading">

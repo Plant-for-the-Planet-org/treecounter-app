@@ -3,6 +3,7 @@ import axios from 'axios';
 import { context } from '../../../app/config';
 import { tree_outline } from '../../../app/assets';
 const widget = require('./basic.widget.html');
+import './basic.widget.scss';
 
 const { scheme, host, base: baseUrl } = context;
 export async function getRequest(route, params) {

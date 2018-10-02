@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { trillionCampaign } from '../../actions/trillionAction';
-import { pledgeEventsAction } from '../../actions/pledgeEventsAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from './TreecounterGraphicsText';
@@ -12,6 +11,9 @@ import TextHeading from '../Common/Heading/TextHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
+import { pledgeEventSelector } from '../../selectors';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Trillion extends Component {
   constructor() {
@@ -40,12 +42,6 @@ class Trillion extends Component {
         });
       })
       .catch(error => console.log(error));
-
-    pledgeEventsAction()
-      .then(({ data }) => {
-        this.setState({ pledgeEventData: data });
-      })
-      .catch(error => console.log(error));
   }
 
   shouldComponentUpdate() {
@@ -69,27 +65,32 @@ class Trillion extends Component {
             </SecondaryAccentButton>
           </ButtonHeading>
         </TextHeading>
-        <TextBlock>Trillion Tree Events today</TextBlock>
-        <div className="events_row">
-          {this.state.pledgeEventData.map(element => (
-            <div
-              className="event_item"
-              onClick={() =>
-                updateRoute('app_pledge', null, null, {
-                  eventSlug: element.slug,
-                  eventName: element.name,
-                  eventImage: element.image
-                })
-              }
-            >
-              <div className="imgContainer">
-                <img src={getImageUrl('event', 'thumb', element.image)} />
-              </div>
+        {this.props.pledgeEvents &&
+        this.props.pledgeEvents.pledgeEvents.length > 0 ? (
+          <div>
+            <TextBlock>Trillion Tree Events today</TextBlock>
+            <div className="events_row">
+              {this.props.pledgeEvents.pledgeEvents.map(element => (
+                <div
+                  key={element.slug}
+                  className="event_item"
+                  onClick={() => {
+                    updateRoute('app_pledge', null, null, {
+                      eventSlug: element.slug
+                    });
+                  }}
+                >
+                  <div className="imgContainer">
+                    <img src={getImageUrl('event', 'thumb', element.image)} />
+                  </div>
 
-              <TextBlock>User Conference</TextBlock>
+                  <TextBlock>{element.name}</TextBlock>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ) : null}
+
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />
           {this.state.svgData === null ? (
@@ -108,4 +109,11 @@ class Trillion extends Component {
   }
 }
 
-export default Trillion;
+const mapStateToProps = state => ({
+  pledgeEvents: pledgeEventSelector(state)
+});
+export default connect(mapStateToProps)(Trillion);
+
+Trillion.propTypes = {
+  pledgeEvents: PropTypes.object
+};

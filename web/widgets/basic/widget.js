@@ -27,10 +27,11 @@ document.addEventListener('DOMContentLoaded', function() {
   for (let i = 0; i < allBlockQuote.length; i++) {
     console.log(allBlockQuote[i].attributes);
     if (allBlockQuote[i].attributes.getNamedItem('pftp')) {
-      let uid = allBlockQuote[i].attributes.getNamedItem('data-userid');
+      let uid = allBlockQuote[i].attributes.getNamedItem('data-treecounterId');
       if (uid) {
-        uid = parseInt(uid.nodeValue);
-        uid = isNaN(uid) ? uid.nodeValue : uid;
+        uid = isNaN(parseInt(uid.nodeValue))
+          ? uid.nodeValue
+          : parseInt(uid.nodeValue);
         getRequest('treecounter_get', { uid })
           .then(result => {
             const { data } = result;

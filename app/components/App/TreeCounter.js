@@ -215,7 +215,7 @@ class TreeCounter extends Component {
                 component={DonationTreesContainer}
               />
               <Route
-                path={'/app_redemption' + '/:token'}
+                path={getLocalRoute('app_giftRedemption')}
                 component={RedemptionContainer}
               />
               {/*<Route*/}
@@ -250,7 +250,8 @@ const mapDispatchToProps = dispatch => {
     {
       loadUserProfile,
       NotificationAction,
-      loadTpos
+      loadTpos,
+      fetchpledgeEventsAction
     },
     dispatch
   );

@@ -2,7 +2,7 @@ export default {
   title: 'redemption',
   type: 'object',
   properties: {
-    email: {
+    code: {
       type: 'string',
       title: 'label.code',
       propertyOrder: 1

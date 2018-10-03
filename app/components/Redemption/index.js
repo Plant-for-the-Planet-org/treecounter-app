@@ -15,21 +15,6 @@ import i18n from '../../locales/i18n.js';
 
 let TCombForm = t.form.Form;
 
-const formLayout = locals => {
-  return (
-    <div className="target-form">
-      <div className="row">
-        <div>hey</div>
-      </div>
-    </div>
-  );
-};
-
-// const allSchemaOptions = {
-//   template: formLayout,
-//   ...schemaOptions
-// };
-
 export default class Redemption extends Component {
   constructor(props) {
     super(props);
@@ -37,13 +22,8 @@ export default class Redemption extends Component {
 
   render() {
     console.log(this.props);
-    const {
-      page_status,
-      code,
-      isLoggedIn,
-      updateRoute,
-      validateCode
-    } = this.props;
+    const { page_status, code, updateRoute, validateCode } = this.props;
+    const flag = this.props.isLoggedIn ? true : false;
     let content, button;
     if (code === null || code === undefined) {
       content = (
@@ -53,13 +33,13 @@ export default class Redemption extends Component {
       );
       button = (
         <div className="row">
-          <PrimaryButton onClick={validateCode(code)}>
+          <PrimaryButton onClick={this.props.validateCode}>
             {i18n.t('label.validate_code')}
           </PrimaryButton>
         </div>
       );
     } else {
-      if (!isLoggedIn) {
+      if (!flag) {
         content = (
           <div className="no-contribution-wrapper">
             {i18n.t('label.log_in')}
@@ -111,7 +91,7 @@ Redemption.propTypes = {
   code_info: PropTypes.object,
   codeStatus: PropTypes.object,
   code: PropTypes.string,
-  isLoggedIn: PropTypes.boolean,
+  isLoggedIn: PropTypes.func,
   updateRoute: PropTypes.func,
   setRedemptionCode: PropTypes.func,
   validateCode: PropTypes.func

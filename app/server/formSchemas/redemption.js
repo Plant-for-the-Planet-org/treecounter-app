@@ -4,7 +4,7 @@ export default {
   properties: {
     code: {
       type: 'string',
-      title: 'label.code',
+      placeholder: 'label.code',
       propertyOrder: 1
     }
   },

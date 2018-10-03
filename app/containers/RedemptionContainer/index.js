@@ -5,15 +5,18 @@ import PropTypes from 'prop-types';
 import Redemption from '../../components/Redemption/index';
 import { currentUserProfileSelector } from '../../selectors';
 import { updateRoute } from '../../helpers/routerHelper';
+import { redemptionSelector } from '../../selectors/index';
+import {
+  validateCodeAction,
+  setRedemptionCodeAction
+} from '../../actions/redemptionAction';
 
 class RedemptionContainer extends Component {
   constructor(props) {
     super(props);
     const { match } = props;
     this.state = {
-      codeStatus: null,
       code: match.params.token,
-      codeInfo: null,
       page_status: 'code-unknown'
     };
   }
@@ -23,6 +26,13 @@ class RedemptionContainer extends Component {
       this.setState({ code: nextProps.match.params.token });
     }
   }
+  componentDidMount() {
+    let isLoggedIn = this.props.userProfile ? true : false;
+    let isCode = this.state.code ? true : false;
+    if (isCode && isLoggedIn) {
+      this.props.validateCodeAction(this.state.code);
+    }
+  }
   validateCode = () => {
     console.log(this.refs.redemptionContainer.refs.redemptionForm.getValue());
     let value = this.refs.redemptionContainer.refs.redemptionForm.getValue();
@@ -30,16 +40,22 @@ class RedemptionContainer extends Component {
       updateRoute('app_giftRedemption', null, null, { token: value.code });
     }
   };
+  setRedemptionCode = () => {
+    console.log(this.refs.redemptionContainer.refs.redemptionForm.getValue());
+    let value = this.refs.redemptionContainer.refs.redemptionForm.getValue();
+    if (value) {
+      updateRoute('app_giftRedemption', null, null, { token: value.code });
+    }
+  };
   render() {
-    let isLoggedIn = this.props.userProfile ? true : false;
     return (
       <Redemption
         ref={'redemptionContainer'}
         code={this.state.code}
         page_status={this.state.page_status}
-        code_info={this.state.codeInfo}
-        codeStatus={this.state.codeStatus}
+        validateCodeInfo={this.props.validateCodeInfo}
         updateRoute={this.props.route}
+        setRedemptionCode={this.setRedemptionCode}
         isLoggedIn={this.props.userProfile}
         validateCode={this.validateCode}
       />
@@ -49,13 +65,16 @@ class RedemptionContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    userProfile: currentUserProfileSelector(state)
+    userProfile: currentUserProfileSelector(state),
+    validateCodeInfo: redemptionSelector(state)
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      validateCodeAction,
+      setRedemptionCodeAction,
       route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
     },
     dispatch
@@ -70,5 +89,8 @@ RedemptionContainer.propTypes = {
   match: PropTypes.object,
   route: PropTypes.func,
   userProfile: PropTypes.object,
-  setRedemptionCode: PropTypes.func
+  setRedemptionCode: PropTypes.func,
+  validateCodeInfo: PropTypes.func,
+  validateCodeAction: PropTypes.func,
+  setRedemptionCodeAction: PropTypes.func
 };

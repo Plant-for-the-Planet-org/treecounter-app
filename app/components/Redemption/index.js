@@ -22,7 +22,7 @@ export default class Redemption extends Component {
 
   render() {
     console.log(this.props);
-    const { page_status, code, updateRoute, validateCode } = this.props;
+    const { code, updateRoute } = this.props;
     const flag = this.props.isLoggedIn ? true : false;
     let content, button;
     if (code === null || code === undefined) {
@@ -63,8 +63,17 @@ export default class Redemption extends Component {
             </div>
           </div>
         );
+      } else {
+        button = (
+          <div className="row">
+            <PrimaryButton onClick={this.props.setRedemptionCode}>
+              {i18n.t('label.redeem_code')}
+            </PrimaryButton>
+          </div>
+        );
       }
     }
+    let value = { code: this.props.code };
     return (
       <div className="app-container__content--center sidenav-wrapper redemption_container">
         <TextHeading>
@@ -77,7 +86,7 @@ export default class Redemption extends Component {
             ref="redemptionForm"
             type={redemptionFormSchema}
             options={schemaOptions}
-            value={this.props.code}
+            value={value}
           />
           {button}
         </CardLayout>
@@ -88,8 +97,7 @@ export default class Redemption extends Component {
 
 Redemption.propTypes = {
   page_status: PropTypes.string,
-  code_info: PropTypes.object,
-  codeStatus: PropTypes.object,
+  validateCodeInfo: PropTypes.func,
   code: PropTypes.string,
   isLoggedIn: PropTypes.func,
   updateRoute: PropTypes.func,

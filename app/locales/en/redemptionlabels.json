@@ -3,5 +3,6 @@
   "enter_code": "Please enter a Tree Voucher, merchandise code or Token to claim your treees to redeem",
   "log_in": "Please log in or sign up to redeem your code",
   "validate_code": "Validate Code",
-  "code": "Code"
+  "code": "Code",
+  "redeem_code": "Redeem Code"
 }

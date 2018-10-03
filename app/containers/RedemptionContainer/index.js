@@ -17,7 +17,12 @@ class RedemptionContainer extends Component {
       page_status: 'code-unknown'
     };
   }
-
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match !== this.props.match) {
+      // let isLoggedIn = null !== nextProps.userProfile;
+      this.setState({ code: nextProps.match.params.token });
+    }
+  }
   validateCode = () => {
     console.log(this.refs.redemptionContainer.refs.redemptionForm.getValue());
     let value = this.refs.redemptionContainer.refs.redemptionForm.getValue();

@@ -9,6 +9,7 @@ import UserFootprint from './UserFootprint';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import CardLayout from '../../components/Common/Card';
+import { getDocumentTitle } from '../../helpers/utils';
 
 import {
   getProfileTypeName,
@@ -102,7 +103,7 @@ class PublicTreeCounter extends React.Component {
       defaultPlantProjectId: null,
       tpoName: caption
     };
-
+    document.title = getDocumentTitle(caption);
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <div className="tree-counter-header">

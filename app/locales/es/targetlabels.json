@@ -1,8 +1,7 @@
 {
-  "set": "Set",
   "set_target": "Poner un objectivo",
   "title": "Título",
-  "target_count": "Recuento objetivo",
+  "target_count": "Recuento del objetivo",
   "target_year": "Año objetivo",
   "target_comment": "Objetivo de comentario"
 }

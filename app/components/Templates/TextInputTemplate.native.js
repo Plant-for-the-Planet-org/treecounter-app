@@ -15,7 +15,9 @@ export function TextInputTemplate(locals) {
   let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
   let error =
     locals.hasError && locals.error ? (
-      <Text style={errorBlockStyle}>{locals.error}</Text>
+      <Text style={[errorBlockStyle, styles.errorTextStyle]}>
+        {locals.error}
+      </Text>
     ) : null;
   return (
     <View style={[styles.container]}>

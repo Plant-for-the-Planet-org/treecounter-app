@@ -3,6 +3,9 @@ package com.treecounterapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.gettipsi.stripe.StripeReactPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.taessina.paypal.RNPaypalWrapperPackage;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.imagepicker.ImagePickerPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
@@ -29,6 +32,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new StripeReactPackage(),
+            new RNDeviceInfo(),
+            new RNPaypalWrapperPackage(),
             new ReactNativeYouTube(),
             new ImagePickerPackage(),
             new RNI18nPackage(),

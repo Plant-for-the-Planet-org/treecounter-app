@@ -23,8 +23,14 @@ import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout.native';
 import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
 import EditUserContributionContainer from '../../containers/EditUserContribution';
+import AboutUsContainer from '../../containers/AboutUs';
+import LicenseInfoList from '../AboutUs/LicenseInfoList.native';
 
-const homeRoutes = [getLocalRoute('app_login'), getLocalRoute('app_userHome')];
+const homeRoutes = [
+  getLocalRoute('app_homepage'),
+  getLocalRoute('app_userHome'),
+  getLocalRoute('app_treecounter')
+];
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -35,7 +41,9 @@ const headerLabels = {
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
-  [getLocalRoute('app_editTrees')]: 'label.edit_trees'
+  [getLocalRoute('app_editTrees')]: 'label.edit_trees',
+  ['about_us']: 'label.about_us',
+  ['license_info_list']: 'label.open_source_license'
 };
 
 export const getDrawerNavigator = function(isLoggedIn) {
@@ -71,7 +79,10 @@ export const getDrawerNavigator = function(isLoggedIn) {
       [getLocalRoute('app_homepage')]: { screen: Trillion },
       [getLocalRoute('app_faq')]: FAQContainer,
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
-      [getLocalRoute('app_treecounter')]: PublicTreecounterContainer
+      [getLocalRoute('app_treecounter')]: PublicTreecounterContainer,
+      ['about_us']: { screen: AboutUsContainer },
+      ['license_info_list']: { screen: LicenseInfoList }
+
       // Search: {
       //   screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />,
       //   navigationOptions: {
@@ -83,7 +94,7 @@ export const getDrawerNavigator = function(isLoggedIn) {
     {
       initialRouteName: isLoggedIn
         ? getLocalRoute('app_userHome')
-        : getLocalRoute('app_login'),
+        : getLocalRoute('app_homepage'),
       navigationOptions: ({ navigation }) => {
         console.log('navigation options', navigation);
         let title = navigation.getParam('titleParam');
@@ -97,11 +108,14 @@ export const getDrawerNavigator = function(isLoggedIn) {
               : i18n.t(headerLabels[navigation.state.routeName])
         };
         if (homeRoutes.includes(navigation.state.routeName)) {
-          navigationConfig.headerLeft = BurgerMenu(navigation);
           navigationConfig.headerRight = HeaderRight(navigation);
         }
-        if (navigation.state.routeName === getLocalRoute('app_treecounter')) {
-          navigationConfig.headerRight = HeaderRight(navigation);
+        if (
+          navigation.state.routeName === getLocalRoute('app_userHome') ||
+          (navigation.state.routeName === getLocalRoute('app_homepage') &&
+            !isLoggedIn)
+        ) {
+          navigationConfig.headerLeft = BurgerMenu(navigation);
         }
         return navigationConfig;
       }

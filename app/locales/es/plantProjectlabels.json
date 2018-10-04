@@ -1,10 +1,10 @@
 {
   "tax_deductible": "Deducible de impuestos",
   "location": "Ubicación",
-  "planted": "Plantado",
+  "planted": "Plantados",
   "target": "Objetivo",
   "in": "en",
   "donate": "Donar",
   "plant_project_full": "PlantProjectFull",
-  "different_project": "Seleccione Proyecto Diferente"
+  "different_project": "Seleccione un Proyecto Diferente"
 }

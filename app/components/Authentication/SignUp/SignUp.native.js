@@ -49,7 +49,11 @@ export default class SignUp extends Component {
               type={signupFormSchema[Profiletype]}
               options={schemaOptions[Profiletype]}
             />
-            <PrimaryButton onClick={this.onResetPassword}>
+            <PrimaryButton
+              onClick={() => {
+                this.props.onSignUpClicked(Profiletype);
+              }}
+            >
               {i18n.t('label.signUp')}
             </PrimaryButton>
             <View style={styles.bottomRow}>

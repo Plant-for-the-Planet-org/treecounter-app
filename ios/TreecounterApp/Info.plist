@@ -59,6 +59,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>com.paypal.ppclient.touch.v1</string>
+		<string>com.paypal.ppclient.touch.v2</string>
+		<string>org-appextension-feature-password-management</string>
+	</array>
 	<key>UIAppFonts</key>
 	<array/>
 </dict>

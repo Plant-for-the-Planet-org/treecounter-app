@@ -65,7 +65,7 @@ export default class DonateTrees extends Component {
       ]
     };
 
-    // this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
+    this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
     this.handleTreeCountCurrencyChange = this.handleTreeCountCurrencyChange.bind(
       this
@@ -298,10 +298,13 @@ export default class DonateTrees extends Component {
               stripePublishableKey={
                 selectedProject.paymentSetup.stripePublishableKey
               }
+              setProgressModelState={this.props.setProgressModelState}
               amount={this.state.selectedAmount}
               currency={this.state.selectedCurrency}
               expandedOption={this.state.expandedOption}
               handleExpandedClicked={this.handleExpandedClicked}
+              paymentStatus={this.props.paymentStatus}
+              paymentClear={this.props.paymentClear}
               context={{
                 tpoName: this.props.selectedTpo.name,
                 donorEmail: email,
@@ -340,6 +343,22 @@ export default class DonateTrees extends Component {
     return true;
   };
 
+  handlePaymentApproved(paymentResponse) {
+    let sendState = { ...this.state.form };
+    if (this.props.supportTreecounter.treecounterId) {
+      sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
+    }
+    this.props.donate(
+      {
+        ...this.state.form,
+        paymentResponse,
+        amount: this.state.selectedAmount,
+        currency: this.state.selectedCurrency
+      },
+      this.props.selectedProject.id
+    );
+  }
+
   render() {
     const { selectedProject } = this.props;
 
@@ -367,5 +386,6 @@ DonateTrees.propTypes = {
   supportTreecounter: PropTypes.object,
   paymentStatus: PropTypes.object,
   plantProjectClear: PropTypes.func,
-  onTabChange: PropTypes.func
+  onTabChange: PropTypes.func,
+  setProgressModelState: PropTypes.func
 };

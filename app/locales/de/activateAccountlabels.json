@@ -1,7 +1,7 @@
 {
   "activate_ur_account": "Aktiviere deinen Account",
-  "not_yet_activated": "Sie haben Ihr Konto noch nicht aktiviert.",
-  "received_email": "Sie sollten eine E-Mail erhalten haben, als Sie sich angemeldet haben. Bitte klicken Sie auf den Aktivierungslink in dieser E-Mail, um den Anmeldevorgang abzuschließen.",
-  "not_received_email": "Wenn Sie die Aktivierungs-E-Mail nicht erhalten haben, klicken Sie auf den folgenden Link, um sie erneut zu senden.",
-  "resent_email": "E-Mail zurücksenden"
+  "not_yet_activated": "Du hast dein Konto noch nicht aktiviert.",
+  "received_email": "Du solltest eine E-Mail erhalten haben, als du dich angemeldet hast. Bitte klicke auf den Aktivierungslink in dieser E-Mail, um den Anmeldevorgang abzuschließen.",
+  "not_received_email": "Falls du die Aktivierungs-Mail nicht erhalten haben sollest, klicke auf den folgenden Link, um sie erneut zu senden.",
+  "resent_email": "E-Mail nochmals senden"
 }

@@ -10,6 +10,22 @@ import { currentUserProfileSelector } from '../../selectors';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import ProgressModal from '../../components/Common/ModalDialog/ProgressModal.native';
 import { View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import { fetchpledgeEventsAction } from '../actions/pledgeEventsAction';
+EStyleSheet.build({
+  // always call EStyleSheet.build() even if you don't use global variables!
+  $primary: '#b9d384',
+  $textColor: '#686060',
+  $placeholderColor: '#e9e9e9',
+  $colorPrimary: '#b7d37f',
+  $colorPrimaryDark: '#b7d37f',
+  $colorPrimaryAccent: '#e86f56',
+  $colorPrimaryAccentLight: '#ec6453',
+  $borderColor: '#aba2a2',
+  $inputBorderColor: '#dad7d7',
+  $backgroundScreen: '#f1f1f1',
+  $colorError: '#ff0033'
+});
 
 class AppDrawerNavigatorContainer extends Component {
   _AppDrawerNavigator = undefined;
@@ -54,6 +70,7 @@ class AppDrawerNavigatorContainer extends Component {
         this.setState({ loading: false, isLoggedIn: false });
       }
     }
+    this.props.fetchpledgeEventsAction();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -83,7 +100,8 @@ class AppDrawerNavigatorContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     loadUserProfile: PropTypes.func,
-    progressModel: PropTypes.bool
+    progressModel: PropTypes.bool,
+    fetchpledgeEventsAction: PropTypes.func
   };
 }
 
@@ -102,7 +120,8 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators(
       {
         loadUserProfile,
-        loadTpos
+        loadTpos,
+        fetchpledgeEventsAction
       },
       dispatch
     )

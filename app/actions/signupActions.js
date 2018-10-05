@@ -15,8 +15,6 @@ export function signUp(profileType, userData) {
           const { token, refresh_token, data } = res.data;
           updateJWT(token, refresh_token);
           dispatch(loadUserProfile());
-        })
-        .then(() => {
           NotificationManager.success(
             'Registration Successful',
             'Congrats',

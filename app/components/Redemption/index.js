@@ -48,16 +48,10 @@ export default class Redemption extends Component {
         button = (
           <div className="redemption-form">
             <div className="row">
-              <PrimaryButton
-                className="half"
-                onClick={updateRoute.bind(this, 'app_login')}
-              >
+              <PrimaryButton className="half" onClick={this.props.loginButton}>
                 {i18n.t('label.login')}
               </PrimaryButton>
-              <PrimaryButton
-                className="half"
-                onClick={updateRoute.bind(this, 'app_signup')}
-              >
+              <PrimaryButton className="half" onClick={this.props.signupButton}>
                 {i18n.t('label.signUp')}
               </PrimaryButton>
             </div>
@@ -74,10 +68,16 @@ export default class Redemption extends Component {
       }
     }
     let value = { code: this.props.code };
+    let heading;
+    if (this.props.path === 'redeem') {
+      heading = i18n.t('label.redeem_trees');
+    } else if (this.props.path === 'claim') {
+      heading = i18n.t('label.claim_trees');
+    }
     return (
       <div className="app-container__content--center sidenav-wrapper redemption_container">
         <TextHeading>
-          {i18n.t('label.redeem_trees')}
+          {heading}
           <TextBlock>{i18n.t('label.trillionTreeMessage1')}</TextBlock>
         </TextHeading>
         <CardLayout>
@@ -102,5 +102,8 @@ Redemption.propTypes = {
   isLoggedIn: PropTypes.func,
   updateRoute: PropTypes.func,
   setRedemptionCode: PropTypes.func,
-  validateCode: PropTypes.func
+  validateCode: PropTypes.func,
+  loginButton: PropTypes.func,
+  signupButton: PropTypes.func,
+  path: PropTypes.string
 };

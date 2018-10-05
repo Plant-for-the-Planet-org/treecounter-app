@@ -214,18 +214,18 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_donateTrees')}
                 component={DonationTreesContainer}
               />
-              {/*<Route*/}
-              {/*path={getLocalRoute('app_giftRedemption')}*/}
-              {/*component={RedemptionContainer}*/}
-              {/*/>*/}
               <Route
                 path={getLocalRoute('app_giftRedemption') + '/:token?'}
                 component={RedemptionContainer}
               />
-              {/*<Route*/}
-              {/*path={'/app_redemption'}*/}
-              {/*component={RedemptionContainer}*/}
-              {/*/>*/}
+              <Route
+                path={getLocalRoute('app_claim') + '/:type' + '/:code'}
+                component={RedemptionContainer}
+              />
+              <Route
+                path={getLocalRoute('app_redeem') + '/:type?' + '/:code?'}
+                component={RedemptionContainer}
+              />
               <Route
                 path={getLocalRoute('app_pledge') + '/:eventSlug'}
                 component={PledgeContainer}

@@ -10,20 +10,32 @@ import {
   validateCodeAction,
   setRedemptionCodeAction
 } from '../../actions/redemptionAction';
+import { setAccessDenied } from '../../actions/authActions';
 
 class RedemptionContainer extends Component {
   constructor(props) {
     super(props);
     const { match } = props;
+    let type;
+    if (
+      (match.path.includes('redeem') && match.params.type === null) ||
+      match.params.type === undefined
+    ) {
+      type = 'gift';
+    } else {
+      type = match.params.type;
+    }
     this.state = {
-      code: match.params.token,
-      page_status: 'code-unknown'
+      code: match.params.code,
+      type: type,
+      page_status: 'code-unknown',
+      path: match.path.includes('claim') ? 'claim' : 'redeem'
     };
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.match !== this.props.match) {
       // let isLoggedIn = null !== nextProps.userProfile;
-      this.setState({ code: nextProps.match.params.token });
+      this.setState({ code: nextProps.match.params.code });
     }
   }
   componentDidMount() {
@@ -36,16 +48,44 @@ class RedemptionContainer extends Component {
   validateCode = () => {
     console.log(this.refs.redemptionContainer.refs.redemptionForm.getValue());
     let value = this.refs.redemptionContainer.refs.redemptionForm.getValue();
+    let path;
+    if (this.state.path === 'claim') {
+      path = 'app_claim';
+    } else if (this.state.path === 'redeem') {
+      path = 'app_redeem';
+    }
     if (value) {
-      updateRoute('app_giftRedemption', null, null, { token: value.code });
+      updateRoute(path, null, null, {
+        type: this.state.type,
+        code: value.code
+      });
     }
   };
   setRedemptionCode = () => {
     console.log(this.refs.redemptionContainer.refs.redemptionForm.getValue());
     let value = this.refs.redemptionContainer.refs.redemptionForm.getValue();
-    if (value) {
-      updateRoute('app_giftRedemption', null, null, { token: value.code });
+    let path;
+    if (this.state.path === 'claim') {
+      path = 'app_claim';
+    } else if (this.state.path === 'redeem') {
+      path = 'app_redeem';
     }
+    if (value) {
+      updateRoute(path, null, null, {
+        type: this.state.type,
+        code: value.code
+      });
+    }
+  };
+  loginButton = () => {
+    const path =
+      '/' + this.state.path + '/' + this.state.type + '/' + this.state.code;
+    this.props.setAccessDenied({ uri: path }, null, 'app_login');
+  };
+  signupButton = () => {
+    const path =
+      '/' + this.state.path + '/' + this.state.type + '/' + this.state.code;
+    this.props.setAccessDenied({ uri: path }, null, 'app_signup');
   };
   render() {
     return (
@@ -58,6 +98,9 @@ class RedemptionContainer extends Component {
         setRedemptionCode={this.setRedemptionCode}
         isLoggedIn={this.props.userProfile}
         validateCode={this.validateCode}
+        loginButton={this.loginButton}
+        signupButton={this.signupButton}
+        path={this.state.path}
       />
     );
   }
@@ -74,6 +117,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       validateCodeAction,
+      setAccessDenied,
       setRedemptionCodeAction,
       route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
     },
@@ -92,5 +136,6 @@ RedemptionContainer.propTypes = {
   setRedemptionCode: PropTypes.func,
   validateCodeInfo: PropTypes.func,
   validateCodeAction: PropTypes.func,
-  setRedemptionCodeAction: PropTypes.func
+  setRedemptionCodeAction: PropTypes.func,
+  setAccessDenied: PropTypes.func
 };

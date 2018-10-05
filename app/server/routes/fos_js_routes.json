@@ -1378,7 +1378,19 @@
       "schemes": []
     },
     "app_claim": {
-      "tokens": [["variable", "/", "[^/]++", "token"], ["text", "/claim"]],
+      "tokens": [["variable", "/", "[^/]++", "code"],
+        ["variable", "/", "[^/]++", "type"],
+        ["text", "/claim"]],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "app_redeem": {
+      "tokens": [["variable", "/", "[^/]++", "code"],
+        ["variable", "/", "[^/]++", "type"],
+        ["text", "/redeem"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],

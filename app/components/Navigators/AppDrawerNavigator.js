@@ -1,8 +1,7 @@
 import {
   createBottomTabNavigator,
   createDrawerNavigator,
-  createStackNavigator,
-  TabBarBottom
+  createStackNavigator
 } from 'react-navigation';
 import React from 'react';
 import { Animated } from 'react-native';
@@ -14,27 +13,24 @@ import TargetContainer from '../../containers/TargetContainer';
 import DonationTreesContainer from '../../containers/DonateTrees';
 
 import { getLocalRoute } from '../../actions/apiRouting';
-import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import styles from '../../styles/header.native';
 import BurgerMenu from '../Header/BurgerMenu';
 import HeaderRight from '../Header/HeaderFields';
 
 import i18n from '../../locales/i18n';
 import FAQContainer from '../../containers/FAQ';
-import RegisterTrees from '../../containers/RegisterTrees';
 import UserContributions from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout.native';
-import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
 import EditUserContributionContainer from '../../containers/EditUserContribution';
 import AboutUsContainer from '../../containers/AboutUs';
 import LicenseInfoList from '../AboutUs/LicenseInfoList.native';
+import TabContainer from './TabContainer';
+import Menu from '../Menu';
+import DonateTrees from '../../containers/DonateTrees';
+import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
+import { withNavigation } from 'react-navigation';
 
-const homeRoutes = [
-  getLocalRoute('app_homepage'),
-  getLocalRoute('app_userHome'),
-  getLocalRoute('app_treecounter')
-];
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -51,7 +47,7 @@ const headerLabels = {
   ['license_info_list']: 'label.open_source_license'
 };
 
-export const getDrawerNavigator = function(isLoggedIn) {
+export const getAppNavigator = function(isLoggedIn) {
   const baseNavigator = createStackNavigator(
     {
       [getLocalRoute('app_login')]: {
@@ -62,46 +58,25 @@ export const getDrawerNavigator = function(isLoggedIn) {
         screen: SignUpContainer
       },
 
-      [getLocalRoute('app_forgotPassword')]: {
-        screen: ForgotPasswordContainer
-      },
       [getLocalRoute('app_userHome')]: {
         screen: isLoggedIn ? UserHomeContainer : LoginContainer
       },
-      [getLocalRoute('app_homepage')]: { screen: Trillion },
+
+      [getLocalRoute('app_forgotPassword')]: {
+        screen: ForgotPasswordContainer
+      },
 
       [getLocalRoute('app_faq')]: FAQContainer,
-      [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
+      [getLocalRoute('app_treecounter')]: Trillion,
 
       ['about_us']: { screen: AboutUsContainer },
-      ['license_info_list']: { screen: LicenseInfoList },
-      ['tab-navigation']: { screen: getTabNavigator(isLoggedIn) }
+
+      ['license_info_list']: { screen: LicenseInfoList }
     },
     {
-      initialRouteName: 'tab-navigation',
+      headerMode: 'none',
       navigationOptions: ({ navigation }) => {
-        console.log('navigation options', navigation);
-        let title = navigation.getParam('titleParam');
-        let navigationConfig = {
-          headerStyle: styles.container,
-          headerTintColor: '#fff',
-          headerBackTitle: null,
-          title:
-            title != undefined
-              ? title
-              : i18n.t(headerLabels[navigation.state.routeName])
-        };
-        // if (homeRoutes.includes(navigation.state.routeName)) {
-        navigationConfig.headerRight = HeaderRight(navigation);
-        // }
-        // if (
-        //   navigation.state.routeName === getLocalRoute('app_userHome') ||
-        //   (navigation.state.routeName === getLocalRoute('app_homepage') &&
-        //     !isLoggedIn)
-        // ) {
-        navigationConfig.headerLeft = BurgerMenu(navigation);
-        // }
-        return navigationConfig;
+        header: null;
       }
     }
   );
@@ -124,52 +99,30 @@ export const getDrawerNavigator = function(isLoggedIn) {
       }
     }
   );
-  const AppDrawerNavigator = createDrawerNavigator(
-    {
-      baseNavigator,
-      searchNavigator: searchNavigator
-    },
-    {
-      gesturesEnabled: false,
-      contentComponent: SideMenuContainer
-    }
-  );
-  return AppDrawerNavigator;
-};
 
-export const getTabNavigator = function(isLoggedIn) {
   const ApptabNavigator = createBottomTabNavigator(
     {
       [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer,
-        navigationOptions: {
-          tabBarLabel: i18n.t(headerLabels[getLocalRoute('app_userHome')])
-        }
+        screen: isLoggedIn ? UserHomeContainer : LoginContainer
       },
       [getLocalRoute('app_target')]: {
-        screen: isLoggedIn ? TargetContainer : LoginContainer,
-        navigationOptions: {
-          tabBarLabel: i18n.t(headerLabels[getLocalRoute('app_target')])
-        }
+        screen: isLoggedIn ? TargetContainer : LoginContainer
       },
 
       [getLocalRoute('app_myTrees')]: {
-        screen: isLoggedIn ? UserContributions : LoginContainer,
-        navigationOptions: {
-          tabBarLabel: i18n.t(headerLabels[getLocalRoute('app_myTrees')])
-        }
+        screen: isLoggedIn ? UserContributions : LoginContainer
       },
       [getLocalRoute('app_donateTrees')]: {
-        screen: DonationTreesContainer,
-        navigationOptions: {
-          tabBarLabel: i18n.t(headerLabels[getLocalRoute('app_donateTrees')])
-        }
+        screen: DonationTreesContainer
       },
       [getLocalRoute('app_homepage')]: {
-        screen: Trillion,
-        navigationOptions: {
-          tabBarLabel: i18n.t(headerLabels[getLocalRoute('app_homepage')])
-        }
+        screen: Trillion
+      },
+      [getLocalRoute('app_forgotPassword')]: {
+        screen: ForgotPasswordContainer
+      },
+      [getLocalRoute('app_signup')]: {
+        screen: SignUpContainer
       }
     },
     {
@@ -178,14 +131,58 @@ export const getTabNavigator = function(isLoggedIn) {
           ? getLocalRoute('app_userHome')
           : getLocalRoute('app_homepage'),
         tabBarPosition: 'bottom',
-        tabBarOptions: {
-          activeTintColor: 'tomato',
-          inactiveTintColor: 'gray'
-        },
-        animatedEnable: false,
+
+        animatedEnable: true,
         swipeEnable: false
+      },
+      tabBarComponent: TabContainer
+    }
+  );
+
+  const appStackNavigator = createStackNavigator(
+    {
+      Tab: ApptabNavigator,
+      Base: baseNavigator
+    },
+    {
+      navigationOptions: ({ navigation }) => {
+        console.log('navigation options', navigation);
+        let title = navigation.getParam('titleParam');
+        let navigationConfig = {
+          headerStyle: styles.container,
+          headerTintColor: '#fff',
+          headerBackTitle: null,
+          title:
+            title != undefined
+              ? title
+              : i18n.t(headerLabels[navigation.state.routeName])
+        };
+        // if (homeRoutes.includes(navigation.state.routeName)) {
+        navigationConfig.headerRight = HeaderRight(navigation);
+        // }
+        // if (
+        //   navigation.state.routeName === getLocalRoute('app_userHome') ||
+        //   (navigation.state.routeName === getLocalRoute('app_homepage') &&
+        //     !isLoggedIn)
+        // ) {
+        if (navigation.state.routeName === 'Tab') {
+          navigationConfig.headerLeft = BurgerMenu(navigation);
+        }
+        return navigationConfig;
       }
     }
   );
-  return ApptabNavigator;
+
+  const AppNavigator = createDrawerNavigator(
+    {
+      appStackNavigator,
+      searchNavigator: searchNavigator
+    },
+    {
+      initialRouteName: 'appStackNavigator',
+      gesturesEnabled: false,
+      contentComponent: Menu
+    }
+  );
+  return AppNavigator;
 };

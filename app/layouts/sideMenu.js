@@ -2,10 +2,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { getRequest, getAuthenticatedRequest } from '../utils/api';
 
-const PublicSideMenuSchema = menuName => {
+const PublicSideMenuSchema = menuNameParam => {
   return new Observable(observe => {
     getRequest('public_menu_get', {
-      menuName: menuName
+      menuName: menuNameParam
     })
       .then(({ data }) => {
         observe.next(data);
@@ -15,10 +15,10 @@ const PublicSideMenuSchema = menuName => {
   });
 };
 
-const AuthenticatedSideMenuSchema = menuName => {
+const AuthenticatedSideMenuSchema = menuNameParam => {
   return new Observable(observe => {
     getAuthenticatedRequest('data_menu_get', {
-      menuName: menuName
+      menuName: menuNameParam
     })
       .then(({ data }) => {
         observe.next(data);

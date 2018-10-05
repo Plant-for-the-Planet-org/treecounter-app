@@ -3,36 +3,36 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import Menu from '../../components/Menu';
 import { currentUserProfileSelector } from '../../selectors/index';
 import { toggleSideNavAction } from '../../actions/setSideNavAction';
 import { clearSupport } from '../../actions/supportTreecounterAction';
+import { withNavigation } from 'react-navigation';
 
-// Actions
-import { logoutUser } from '../../actions/authActions';
 import {
   PublicSideMenuSchema,
   AuthenticatedSideMenuSchema
 } from '../../layouts/sideMenu';
+import TabComponent from './Tabcomponent.native';
 
-class SideMenuContainer extends Component {
+class BottomTabContainer extends Component {
   constructor() {
     super();
     this.state = {
-      schema: {},
+      schema: [],
       loading: true
     };
   }
   componentDidMount() {
     this.props.loggedIn
-      ? AuthenticatedSideMenuSchema('web.main').subscribe(
-          success => this.setState({ schema: success, loading: false }),
+      ? AuthenticatedSideMenuSchema('mobile.bottom').subscribe(
+          success =>
+            this.setState({ schema: success[0].menuItems, loading: false }),
           error => console.log(error)
         )
-      : PublicSideMenuSchema('web.main').subscribe(
+      : PublicSideMenuSchema('mobile.bottom').subscribe(
           success => {
             if (success && success instanceof Array) {
-              this.setState({ schema: success, loading: false });
+              this.setState({ schema: success[0].menuItems, loading: false });
             } else {
               console.log('error in fetching side menu');
             }
@@ -44,11 +44,11 @@ class SideMenuContainer extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.loggedIn !== this.props.loggedIn) {
       nextProps.loggedIn
-        ? AuthenticatedSideMenuSchema('web.main').subscribe(
+        ? AuthenticatedSideMenuSchema('mobile.bottom').subscribe(
             success => this.setState({ schema: success, loading: false }),
             error => console.log(error)
           )
-        : PublicSideMenuSchema('web.main').subscribe(
+        : PublicSideMenuSchema('mobile.bottom').subscribe(
             success => this.setState({ schema: success, loading: false }),
             error => console.log(error)
           );
@@ -56,25 +56,11 @@ class SideMenuContainer extends Component {
   }
 
   render() {
-    let path = undefined;
-    let pathname = undefined;
-
-    if (this.props.location) {
-      pathname = this.props.location.pathname;
-      path = pathname.substr(pathname.lastIndexOf('/') + 1);
-    }
-
     return this.state.loading ? null : (
-      <Menu
-        isOpen={this.props.isOpen}
+      <TabComponent
         userProfile={this.props.userProfile}
         menuData={this.state.schema}
         navigation={this.props.navigation}
-        path={path}
-        toggleSideNavAction={this.props.toggleSideNavAction}
-        clearSupport={this.props.clearSupport}
-        logoutUser={this.props.logoutUser}
-        pathname={pathname}
       />
     );
   }
@@ -87,21 +73,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { logoutUser, toggleSideNavAction, clearSupport },
-    dispatch
-  );
+  return bindActionCreators({ toggleSideNavAction, clearSupport }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SideMenuContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(BottomTabContainer);
 
-SideMenuContainer.propTypes = {
-  isOpen: PropTypes.bool,
+BottomTabContainer.propTypes = {
   loggedIn: PropTypes.bool,
-  logoutUser: PropTypes.func.isRequired,
   navigation: PropTypes.any,
-  location: PropTypes.object,
-  toggleSideNavAction: PropTypes.func.isRequired,
-  clearSupport: PropTypes.func,
   userProfile: PropTypes.any
 };

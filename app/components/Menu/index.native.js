@@ -69,14 +69,14 @@ export default class Menu extends Component {
         )}
         <ScrollView>
           <View style={styles.imageStyle} />
-          {this.props.menuData.map(element => (
+          {/* {this.props.menuData.map(element => (
             <MenuGroup
               title={element.caption}
               key={element.sequence}
               menuItems={element.menuItems}
               onPress={this.onPressMenu}
             />
-          ))}
+          ))} */}
         </ScrollView>
         {this.props.userProfile && (
           <View>

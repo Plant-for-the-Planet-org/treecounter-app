@@ -8,13 +8,22 @@ import AppDrawerNavigatorContainer from '../../containers/Navigators/AppDrawerNa
 import { connect } from 'react-redux';
 import { loadTpos } from '../../actions/loadTposAction';
 import { bindActionCreators } from 'redux';
+import { getTabNavigator } from '../Navigators/AppDrawerNavigator';
+import { View } from 'react-native';
+import TabContainer from '../Navigators/TabContainer';
 
 class App extends Component {
   componentDidMount() {
     this.props.loadTpos();
   }
   render() {
-    return <AppDrawerNavigatorContainer />;
+    return (
+      <View style={{ flex: 1 }}>
+        <AppDrawerNavigatorContainer />
+      </View>
+    );
+
+    return;
   }
 }
 

@@ -13,7 +13,7 @@ module.exports = webpackMerge(commonConfig, {
     ]
   },
   output: {
-    path: path.join(__dirname, '../prod'),
+    path: path.join(__dirname, '../server'),
     filename: '[name].js'
   },
 

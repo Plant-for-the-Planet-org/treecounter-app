@@ -14,9 +14,10 @@ export default class UserHome extends Component {
 
     let svgData = {};
     const { treecounterData, userProfile } = props;
-    if (treecounterData) {
-      svgData = { ...treecounterData, type: userProfile.type };
-    }
+    if (userProfile)
+      if (treecounterData) {
+        svgData = { ...treecounterData, type: userProfile.type };
+      }
     this.state = {
       svgData: svgData
     };

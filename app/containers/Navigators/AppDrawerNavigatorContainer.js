@@ -83,9 +83,7 @@ class AppDrawerNavigatorContainer extends Component {
   }
   render() {
     if (!this.state.loading) {
-      if (!this._AppNavigator) {
-        this._AppNavigator = getAppNavigator(this.state.isLoggedIn);
-      }
+      this._AppNavigator = getAppNavigator(this.state.isLoggedIn);
 
       return (
         <View style={{ flex: 1 }}>

@@ -22,25 +22,25 @@ import FAQContainer from '../../containers/FAQ';
 import UserContributions from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout.native';
-import EditUserContributionContainer from '../../containers/EditUserContribution';
 import AboutUsContainer from '../../containers/AboutUs';
 import LicenseInfoList from '../AboutUs/LicenseInfoList.native';
-import TabContainer from './TabContainer';
-import Menu from '../Menu';
-import DonateTrees from '../../containers/DonateTrees';
+import TabContainer from '../../containers/Menu/TabContainer';
+import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
+import GiftTrees from '../../containers/GiftTrees';
+import LeaderBoard from '../Leaderboard';
 import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
-import { withNavigation } from 'react-navigation';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_target')]: 'label.set_target',
-  [getLocalRoute('app_donateTrees')]: 'label.donate_trees',
+  [getLocalRoute('app_donateTrees')]: 'label.donate',
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
   [getLocalRoute('app_homepage')]: 'World',
+  [getLocalRoute('app_userHome')]: 'Me',
   [getLocalRoute('app_userHome')]: 'Me',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
@@ -50,6 +50,9 @@ const headerLabels = {
 export const getAppNavigator = function(isLoggedIn) {
   const baseNavigator = createStackNavigator(
     {
+      [getLocalRoute('app_userHome')]: {
+        screen: isLoggedIn ? UserHomeContainer : LoginContainer
+      },
       [getLocalRoute('app_login')]: {
         screen: LoginContainer
       },
@@ -58,16 +61,12 @@ export const getAppNavigator = function(isLoggedIn) {
         screen: SignUpContainer
       },
 
-      [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer
-      },
-
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
       },
 
       [getLocalRoute('app_faq')]: FAQContainer,
-      [getLocalRoute('app_treecounter')]: Trillion,
+      [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
 
       ['about_us']: { screen: AboutUsContainer },
 
@@ -123,13 +122,16 @@ export const getAppNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
+      },
+      [getLocalRoute('app_giftTrees')]: {
+        screen: GiftTrees
+      },
+      [getLocalRoute('app_explore')]: {
+        screen: LeaderBoard
       }
     },
     {
       tabBarOptions: {
-        initialRouteName: isLoggedIn
-          ? getLocalRoute('app_userHome')
-          : getLocalRoute('app_homepage'),
         tabBarPosition: 'bottom',
 
         animatedEnable: true,
@@ -181,7 +183,7 @@ export const getAppNavigator = function(isLoggedIn) {
     {
       initialRouteName: 'appStackNavigator',
       gesturesEnabled: false,
-      contentComponent: Menu
+      contentComponent: SideMenuContainer
     }
   );
   return AppNavigator;

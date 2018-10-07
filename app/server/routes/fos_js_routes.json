@@ -359,6 +359,12 @@
     "data_menu_get": {
       "tokens": [
         [
+          "variable",
+          "/",
+          "[^/]++",
+          "menuName"
+        ],
+        [
           "text",
           "/menu"
         ],

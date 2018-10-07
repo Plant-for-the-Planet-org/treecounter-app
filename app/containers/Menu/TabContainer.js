@@ -3,16 +3,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import { currentUserProfileSelector } from '../../selectors/index';
+import { currentUserProfileSelector } from '../../selectors';
 import { toggleSideNavAction } from '../../actions/setSideNavAction';
 import { clearSupport } from '../../actions/supportTreecounterAction';
-import { withNavigation } from 'react-navigation';
 
 import {
   PublicSideMenuSchema,
   AuthenticatedSideMenuSchema
 } from '../../layouts/sideMenu';
-import TabComponent from './Tabcomponent.native';
+import TabComponent from '../../components/Menu/Tabcomponent';
 
 class BottomTabContainer extends Component {
   constructor() {
@@ -56,6 +55,8 @@ class BottomTabContainer extends Component {
   }
 
   render() {
+    console.log('authenticated scheema');
+    console.log(this.state.schema);
     return this.state.loading ? null : (
       <TabComponent
         userProfile={this.props.userProfile}

@@ -63,8 +63,8 @@ export default class TabComponent extends Component {
                 <Text
                   style={[
                     activeElement === element.uri
-                      ? { color: '#ec6453' }
-                      : { color: 'black' }
+                      ? { color: '#ec6453', fontSize: 12 }
+                      : { color: 'black', fontSize: 12 }
                   ]}
                 >
                   {element.caption === 'menu_item.competition'

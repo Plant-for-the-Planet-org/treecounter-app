@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import updateRoute from '../../helpers/routerHelper';
+import { updateRoute } from '../../helpers/routerHelper';
 import PublicTreecounter from '../../components/PublicTreeCounter/PublicTreecounter';
 import { currentUserProfileSelector } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';

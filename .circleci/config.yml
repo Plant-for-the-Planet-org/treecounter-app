@@ -7,6 +7,7 @@ jobs:
   build:
     branches:
       only:
+        - master
         - staging
         - dev
     docker:
@@ -25,7 +26,11 @@ jobs:
           name: Setting Environment Variables
           command: |
             > $ENV_VARS
-            if [[ "${CIRCLE_BRANCH}" == "staging" ]]
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]
+            then
+              echo 'export WD_REACT="$PROJ_DIR/ttc-app_prod"' >>  $ENV_VARS
+              echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_prod"' >>  $ENV_VARS
+            elif [[ "${CIRCLE_BRANCH}" == "staging" ]]
             then
               echo 'export WD_REACT="$PROJ_DIR/ttc-app_staging"' >>  $ENV_VARS
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_staging"' >>  $ENV_VARS

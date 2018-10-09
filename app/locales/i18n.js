@@ -1,8 +1,9 @@
 import i18next from 'i18next';
 import enlabels from './en';
 import deLabels from './de';
+import { getLocale } from '../actions/getLocale';
 
-let userLang = navigator.language || navigator.userLanguage;
+let userLang = getLocale();
 
 i18next.init({
   interpolation: {

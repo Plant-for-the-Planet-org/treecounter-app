@@ -14,20 +14,22 @@ export default class TabComponent extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      selectedMenu: this.props.menuData[0]
-    };
   }
 
   //TODO hkurra
   //Ideally this should be in the container but for now to keep the same container for both web and app it's better to keep it here
   onPressMenu = item => {
     const { navigation } = this.props;
-    this.setState({ selectedMenu: item });
     updateRoute(item.uri, navigation, 0);
   };
 
   render() {
+    let activeElement = this.props.navigation.state.routes[0].routeName;
+    if (this.props.navigation.state.index) {
+      activeElement = this.props.navigation.state.routes[
+        this.props.navigation.state.index
+      ].routeName;
+    }
     return (
       <View
         style={{
@@ -52,7 +54,7 @@ export default class TabComponent extends Component {
                   <Image
                     style={{ width: 20, height: 20 }}
                     source={
-                      this.state.selectedMenu.caption === element.caption
+                      activeElement === element.uri
                         ? images[element.icon + '_red']
                         : images[element.icon]
                     }
@@ -60,7 +62,7 @@ export default class TabComponent extends Component {
                 </View>
                 <Text
                   style={[
-                    this.state.selectedMenu.caption === element.caption
+                    activeElement === element.uri
                       ? { color: '#ec6453' }
                       : { color: 'black' }
                   ]}

@@ -1,12 +1,14 @@
-import { getRequest, postRequest } from '../utils/api';
+import {
+  getRequest,
+  postAuthenticatedRequest,
+  postRequest
+} from '../utils/api';
 import { NotificationManager } from 'react-notifications';
-import { validateCode } from '../reducers/redemptionReducer';
+import { redemptCode, validateCode } from '../reducers/redemptionReducer';
 
-export function validateCodeAction(code) {
+export function validateCodeAction(data, params) {
   return dispatch => {
-    getRequest('pledgeEvent_get', {
-      token: code
-    }).then(res => {
+    postAuthenticatedRequest('validateCode_post', data, params).then(res => {
       dispatch(validateCode(res.data));
     });
   };
@@ -14,15 +16,8 @@ export function validateCodeAction(code) {
 
 export function setRedemptionCodeAction(data, params) {
   return dispatch => {
-    postRequest('eventPledge_post', data, params)
-      .then(res => {
-        console.log(dispatch, res);
-        const { statusText } = res;
-
-        NotificationManager.success(statusText, 'Success', 5000);
-      })
-      .catch(error => {
-        NotificationManager.error(error.response.data.message, 'Error', 5000);
-      });
+    postAuthenticatedRequest('convertCode_post', data, params).then(res => {
+      dispatch(redemptCode(res.data));
+    });
   };
 }

@@ -22,9 +22,10 @@ export default class Redemption extends Component {
 
   render() {
     console.log(this.props);
+    console.log(this.props.validateCodeInfo);
     const { code, updateRoute } = this.props;
     const flag = this.props.isLoggedIn ? true : false;
-    let content, button;
+    let content, button, statusText, buttonText;
     if (code === null || code === undefined) {
       content = (
         <div className="no-contribution-wrapper">
@@ -58,10 +59,29 @@ export default class Redemption extends Component {
           </div>
         );
       } else {
+        if (
+          this.props.validateCodeInfo != null &&
+          this.props.validateCodeInfo.validateCodeInfo != null &&
+          this.props.validateCodeInfo.validateCodeInfo.statusText != null
+        ) {
+          statusText = this.props.validateCodeInfo.validateCodeInfo.statusText;
+        } else {
+          statusText = '';
+        }
+        if (
+          this.props.validateCodeInfo != null &&
+          this.props.validateCodeInfo.validateCodeInfo != null &&
+          this.props.validateCodeInfo.validateCodeInfo.buttonText != null
+        ) {
+          buttonText = this.props.validateCodeInfo.validateCodeInfo.buttonText;
+        } else {
+          buttonText = i18n.t('label.redeem_code');
+        }
+        content = <div className="no-contribution-wrapper">{statusText}</div>;
         button = (
           <div className="row">
             <PrimaryButton onClick={this.props.setRedemptionCode}>
-              {i18n.t('label.redeem_code')}
+              {buttonText}
             </PrimaryButton>
           </div>
         );
@@ -98,6 +118,7 @@ export default class Redemption extends Component {
 Redemption.propTypes = {
   page_status: PropTypes.string,
   validateCodeInfo: PropTypes.func,
+  redemptCodeInfo: PropTypes.func,
   code: PropTypes.string,
   isLoggedIn: PropTypes.func,
   updateRoute: PropTypes.func,

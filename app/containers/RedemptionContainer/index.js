@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 import Redemption from '../../components/Redemption/index';
 import { currentUserProfileSelector } from '../../selectors';
 import { updateRoute } from '../../helpers/routerHelper';
-import { redemptionSelector } from '../../selectors/index';
+import {
+  redemptionCodeSelector,
+  validationCodeSelector
+} from '../../selectors/index';
 import {
   validateCodeAction,
   setRedemptionCodeAction
@@ -42,7 +45,20 @@ class RedemptionContainer extends Component {
     let isLoggedIn = this.props.userProfile ? true : false;
     let isCode = this.state.code ? true : false;
     if (isCode && isLoggedIn) {
-      this.props.validateCodeAction(this.state.code);
+      this.props.validateCodeAction({
+        type: this.state.type,
+        code: this.state.code
+      });
+    }
+  }
+  componentDidUpdate() {
+    let isLoggedIn = this.props.userProfile ? true : false;
+    let isCode = this.state.code ? true : false;
+    if (isCode && isLoggedIn && this.props.validateCodeInfo === null) {
+      this.props.validateCodeAction({
+        type: this.state.type,
+        code: this.state.code
+      });
     }
   }
   validateCode = () => {
@@ -109,7 +125,8 @@ class RedemptionContainer extends Component {
 const mapStateToProps = state => {
   return {
     userProfile: currentUserProfileSelector(state),
-    validateCodeInfo: redemptionSelector(state)
+    validateCodeInfo: validationCodeSelector(state),
+    redemptCodeInfo: redemptionCodeSelector(state)
   };
 };
 
@@ -135,6 +152,7 @@ RedemptionContainer.propTypes = {
   userProfile: PropTypes.object,
   setRedemptionCode: PropTypes.func,
   validateCodeInfo: PropTypes.func,
+  redemptCodeInfo: PropTypes.func,
   validateCodeAction: PropTypes.func,
   setRedemptionCodeAction: PropTypes.func,
   setAccessDenied: PropTypes.func

@@ -10,6 +10,7 @@ import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import CardLayout from '../../components/Common/Card';
 import { getDocumentTitle } from '../../helpers/utils';
+import i18n from '../../locales/i18n.js';
 
 import {
   getProfileTypeName,
@@ -111,11 +112,40 @@ class PublicTreeCounter extends React.Component {
             {...headerProps}
             followChanged={this.onFollowChanged}
           />
-          {'tpo' !== userProfile.type &&
+
+          {('individual' == userProfile.type ||
+            'plantAmbassador' == userProfile.type) && (
+            <SupportButton
+              {...supportProps}
+              buttonLabel={i18n.t('label.gift_trees')}
+              onRegisterSupporter={this.onRegisterSupporter}
+            />
+          )}
+
+          {('company' == userProfile.type ||
+            'education' == userProfile.type ||
+            'non-profit' == userProfile.type ||
+            'govt' == userProfile.type ||
+            'plantClub' == userProfile.type) &&
             !isMyself(treecounter, currentUserProfile) && (
               <div className="support-button-container ">
                 <SupportButton
                   {...supportProps}
+                  buttonLabel={i18n.t('label.plant_trees')}
+                  onRegisterSupporter={this.onRegisterSupporter}
+                />
+              </div>
+            )}
+          {('company' == userProfile.type ||
+            'education' == userProfile.type ||
+            'non-profit' == userProfile.type ||
+            'govt' == userProfile.type ||
+            'plantClub' == userProfile.type) &&
+            isMyself(treecounter, currentUserProfile) && (
+              <div className="support-button-container ">
+                <SupportButton
+                  {...supportProps}
+                  buttonLabel={i18n.t('label.support')}
                   onRegisterSupporter={this.onRegisterSupporter}
                 />
               </div>

@@ -70,23 +70,25 @@ class Trillion extends Component {
           <div>
             <TextBlock>Trillion Tree Events today</TextBlock>
             <div className="events_row">
-              {this.props.pledgeEvents.pledgeEvents.map(element => (
-                <div
-                  key={element.slug}
-                  className="event_item"
-                  onClick={() => {
-                    updateRoute('app_pledge', null, null, {
-                      eventSlug: element.slug
-                    });
-                  }}
-                >
-                  <div className="imgContainer">
-                    <img src={getImageUrl('event', 'thumb', element.image)} />
-                  </div>
+              {this.props.pledgeEvents.pledgeEvents
+                .sort((val1, val2) => val1.position > val2.position)
+                .map(element => (
+                  <div
+                    key={element.slug}
+                    className="event_item"
+                    onClick={() => {
+                      updateRoute('app_pledge', null, null, {
+                        eventSlug: element.slug
+                      });
+                    }}
+                  >
+                    <div className="imgContainer">
+                      <img src={getImageUrl('event', 'thumb', element.image)} />
+                    </div>
 
-                  <TextBlock>{element.name}</TextBlock>
-                </div>
-              ))}
+                    <TextBlock>{element.name}</TextBlock>
+                  </div>
+                ))}
             </div>
           </div>
         ) : null}

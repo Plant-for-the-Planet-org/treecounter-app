@@ -61,19 +61,17 @@ export default class Redemption extends Component {
       } else {
         if (
           this.props.validateCodeInfo != null &&
-          this.props.validateCodeInfo.validateCodeInfo != null &&
-          this.props.validateCodeInfo.validateCodeInfo.statusText != null
+          this.props.validateCodeInfo.statusText != null
         ) {
-          statusText = this.props.validateCodeInfo.validateCodeInfo.statusText;
+          statusText = this.props.validateCodeInfo.statusText;
         } else {
           statusText = '';
         }
         if (
           this.props.validateCodeInfo != null &&
-          this.props.validateCodeInfo.validateCodeInfo != null &&
-          this.props.validateCodeInfo.validateCodeInfo.buttonText != null
+          this.props.validateCodeInfo.buttonText != null
         ) {
-          buttonText = this.props.validateCodeInfo.validateCodeInfo.buttonText;
+          buttonText = this.props.validateCodeInfo.buttonText;
         } else {
           buttonText = i18n.t('label.redeem_code');
         }

@@ -36,6 +36,7 @@ export default class TabComponent extends Component {
           height: 'auto',
           width: '100%',
           flexDirection: 'row',
+          justifyContent: 'space-between',
           paddingRight: 10
         }}
       >

@@ -10,8 +10,8 @@ const getToastConfig = function(timeout) {
     delay: 0
   };
 };
-class _NotificationManager {
-  success(message, title, timeOut) {
+export class NotificationManager {
+  static success(message, title, timeOut) {
     console.log(message, title);
     Toast.show(title + (message ? '\n ' + message : ''), {
       ...getToastConfig(timeOut),
@@ -19,7 +19,7 @@ class _NotificationManager {
     });
   }
 
-  error(message, title, timeOut) {
+  static error(message, title, timeOut) {
     console.log(message, title);
     Toast.show(title + (message ? '\n ' + message : ''), {
       ...getToastConfig(timeOut),
@@ -27,5 +27,3 @@ class _NotificationManager {
     });
   }
 }
-
-export const NotificationManager = new _NotificationManager();

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { getDrawerNavigator } from '../../components/Navigators/AppDrawerNavigator';
+import { getAppNavigator } from '../../components/Navigators/AppDrawerNavigator';
 import { getAccessToken } from '../../utils/user';
 import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
@@ -11,7 +11,7 @@ import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import ProgressModal from '../../components/Common/ModalDialog/ProgressModal.native';
 import { View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { fetchpledgeEventsAction } from '../actions/pledgeEventsAction';
+import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
 EStyleSheet.build({
   // always call EStyleSheet.build() even if you don't use global variables!
   $primary: '#b9d384',
@@ -28,7 +28,7 @@ EStyleSheet.build({
 });
 
 class AppDrawerNavigatorContainer extends Component {
-  _AppDrawerNavigator = undefined;
+  _AppNavigator = undefined;
   constructor(props) {
     super(props);
     const { userProfile } = this.props;
@@ -53,7 +53,7 @@ class AppDrawerNavigatorContainer extends Component {
       return false;
     }
     if (this.props.progressModel === nextProps.progressModel) {
-      this._AppDrawerNavigator = getDrawerNavigator(nextState.isLoggedIn);
+      this._AppDrawerNavigator = getAppNavigator(nextState.isLoggedIn);
     }
     return true;
   }
@@ -83,13 +83,11 @@ class AppDrawerNavigatorContainer extends Component {
   }
   render() {
     if (!this.state.loading) {
-      if (!this._AppDrawerNavigator) {
-        this._AppDrawerNavigator = getDrawerNavigator(this.state.isLoggedIn);
-      }
+      this._AppNavigator = getAppNavigator(this.state.isLoggedIn);
 
       return (
         <View style={{ flex: 1 }}>
-          <this._AppDrawerNavigator />
+          <this._AppNavigator />
           {this.props.progressModel ? <ProgressModal modalVisible /> : null}
         </View>
       );

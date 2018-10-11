@@ -139,7 +139,7 @@ class SearchBar extends React.PureComponent {
     if (this.props.onCancelPress) {
       this.props.onCancelPress(this.props.navigation.goBack);
     } else {
-      this.props.navigation.navigate('baseNavigator');
+      this.props.navigation.navigate('appStackNavigator');
     }
   };
 }

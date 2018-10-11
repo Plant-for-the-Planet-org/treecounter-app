@@ -17,11 +17,16 @@ export function login(data, navigation = undefined) {
     dispatch(setProgressModelState(true));
     request
       .then(res => {
-        const { token, refresh_token } = res.data;
+        const { token, refresh_token, data } = res.data;
         updateJWT(token, refresh_token);
         dispatch(loadUserProfile());
         dispatch(NotificationAction());
-        updateRoute('app_userHome', navigation || dispatch);
+        updateRoute(
+          data.routeName,
+          navigation || dispatch,
+          null,
+          data.routeParams
+        );
         _.delay(() => dispatch(setProgressModelState(false)), 1000);
         return token;
       })

@@ -125,7 +125,11 @@ class TreeCounter extends Component {
               <PublicRoute exact path="/" component={Trillion} />
               <Route
                 exact
-                path={getLocalRoute('app_homepage')}
+                path={
+                  getLocalRoute('app_homepage') !== '/'
+                    ? getLocalRoute('app_homepage')
+                    : 'null'
+                }
                 component={Trillion}
               />
               <PublicRoute

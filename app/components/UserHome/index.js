@@ -7,7 +7,7 @@ import LoadingIndicator from '../Common/LoadingIndicator';
 import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import UserProfileImage from '../Common/UserProfileImage';
 import { getProfileTypeName } from '../PublicTreeCounter/utils';
-
+import { getDocumentTitle } from '../../helpers/utils';
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +33,7 @@ export default class UserHome extends Component {
 
   render() {
     const { treecounterData, userProfile } = this.props;
+    document.title = getDocumentTitle(userProfile.treecounter.displayName);
     const profileType = getProfileTypeName(userProfile.type);
     let { svgData } = this.state;
     return (

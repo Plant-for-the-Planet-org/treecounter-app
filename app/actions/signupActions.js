@@ -12,7 +12,7 @@ export function signUp(profileType, userData) {
       dispatch(setProgressModelState(true));
       postRequest('signup_post', userData, { profileType: profileType })
         .then(res => {
-          const { token, refresh_token } = res.data;
+          const { token, refresh_token, data } = res.data;
           updateJWT(token, refresh_token);
           dispatch(loadUserProfile());
         })
@@ -22,7 +22,7 @@ export function signUp(profileType, userData) {
             'Congrats',
             5000
           );
-          updateRoute('app_userHome', dispatch);
+          updateRoute(data.routeName, dispatch, null, data.routeParams);
           dispatch(setProgressModelState(false));
         })
         .catch(err => {

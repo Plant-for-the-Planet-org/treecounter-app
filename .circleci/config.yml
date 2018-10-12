@@ -76,3 +76,4 @@ jobs:
           command: |
             source $ENV_VARS
             ssh $HOST "cd $WD_SYMFONY; sh .circleci/integrate-app.sh $CIRCLE_BRANCH"
+

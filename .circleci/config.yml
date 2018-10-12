@@ -9,6 +9,7 @@ jobs:
       only:
         - master
         - staging
+        - devel
         - dev
     docker:
       - image: alpine
@@ -76,4 +77,3 @@ jobs:
           command: |
             source $ENV_VARS
             ssh $HOST "cd $WD_SYMFONY; sh .circleci/integrate-app.sh $CIRCLE_BRANCH"
-

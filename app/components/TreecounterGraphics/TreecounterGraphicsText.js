@@ -60,67 +60,102 @@ class TreecounterGraphicsText extends Component {
         type
       }
     } = this.props;
+    let dom;
 
-    return (
-      <div className="svg-text-container">
-        <div className="svg-text-container__row">
-          <img className="svg-text-container__row--col" src={pot} />
-          <div className="svg-text-container__row--col2">
-            <span>
-              {i18n.t('label.target') +
-                (this.props.trillion
-                  ? ''
-                  : targetYear
-                    ? ' ' + i18n.t('label.by') + ' ' + targetYear
-                    : '') +
-                ' '}
-              <br />
-              <strong>{this.convertNumber(target, 2)}</strong>
-              {this.props.trillion ? (
-                <div>
-                  {/* {this.getTwoWordString(NumberToWords.toWords(target))} */}
-                  {target.toLocaleString('en')}
-                </div>
-              ) : null}
-            </span>
-          </div>
-        </div>
-        {this.state.ifTargetComment ? (
-          <TargetComment comment={targetComment} />
-        ) : null}
-        <hr className="svg-text-container__bar" />
-        <div className="svg-text-container__row">
-          <img className="svg-text-container__row--col" src={tree} />
-          <div className="svg-text-container__row--col2">
-            <span>
-              {i18n.t('label.planted')}
-              <br />
-              <strong>{this.convertNumber(parseInt(planted), 2)}</strong>
-              {this.props.trillion ? (
-                <div>
-                  {/* {this.getTwoWordString(NumberToWords.toWords(planted))} */}
-                  {parseInt(planted).toLocaleString('en')}
-                </div>
-              ) : null}
-            </span>
-          </div>
-          {this.props.trillion ? null : (
+    {
+      dom = !this.state.ifPlantedDetails ? (
+        <div className="svg-text-container">
+          <div className="svg-text-container__row">
+            <img className="svg-text-container__row--col" src={pot} />
             <div className="svg-text-container__row--col2">
-              <ArrowButton
-                onToggle={e => this.setState({ ifPlantedDetails: e })}
-              />
+              <span>
+                {i18n.t('label.target') +
+                  (this.props.trillion
+                    ? ''
+                    : targetYear
+                      ? ' ' + i18n.t('label.by') + ' ' + targetYear
+                      : '') +
+                  ' '}
+                <br />
+                <strong>{this.convertNumber(target, 2)}</strong>
+                {this.props.trillion ? (
+                  <div>
+                    {/* {this.getTwoWordString(NumberToWords.toWords(target))} */}
+                    {target.toLocaleString('en')}
+                  </div>
+                ) : null}
+              </span>
             </div>
-          )}
+          </div>
+          {this.state.ifTargetComment ? (
+            <TargetComment comment={targetComment} />
+          ) : null}
+          <hr className="svg-text-container__bar" />
+          <div className="svg-text-container__row">
+            <img className="svg-text-container__row--col" src={tree} />
+            <div className="svg-text-container__row--col2">
+              <span>
+                {i18n.t('label.planted')}
+                <br />
+                <strong>{this.convertNumber(parseInt(planted), 2)}</strong>
+                {this.props.trillion ? (
+                  <div>
+                    {/* {this.getTwoWordString(NumberToWords.toWords(planted))} */}
+                    {parseInt(planted).toLocaleString('en')}
+                  </div>
+                ) : null}
+              </span>
+            </div>
+            {this.props.trillion ? null : (
+              <div className="svg-text-container__row--col2">
+                <ArrowButton
+                  onToggle={e => this.setState({ ifPlantedDetails: e })}
+                />
+              </div>
+            )}
+          </div>
         </div>
-        {this.state.ifPlantedDetails ? (
-          <PlantedDetails
-            personal={personal}
-            community={community}
-            type={type}
-          />
-        ) : null}
-      </div>
-    );
+      ) : (
+        <div className="svg-text-container">
+          <div className="svg-text-container__row">
+            <img className="svg-text-container__row--col" src={tree} />
+            <div className="svg-text-container__row--col2">
+              <span>
+                {i18n.t('label.planted')}
+                <br />
+                <strong>{personal.toFixed().toLocaleString('en')}</strong>
+              </span>
+            </div>
+            {this.props.trillion ? null : (
+              <div className="svg-text-container__row--col2">
+                <ArrowButton
+                  onToggle={e => this.setState({ ifPlantedDetails: e })}
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="svg-text-container__row">
+            <img className="svg-text-container__row--col" src={tree} />
+            <div className="svg-text-container__row--col2">
+              <span>
+                {i18n.t('label.planted')}
+                <br />
+                <strong>{community.toFixed().toLocaleString('en')}</strong>
+              </span>
+            </div>
+            {this.props.trillion ? null : (
+              <div className="svg-text-container__row--col2">
+                <ArrowButton
+                  onToggle={e => this.setState({ ifPlantedDetails: e })}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+    return dom;
   }
 }
 

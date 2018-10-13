@@ -274,7 +274,7 @@ export default class DonateTrees extends Component {
       nextArrow: (
         <NextArrow checkValidation={this.checkValidation} context={this} />
       ),
-      infinite: true,
+      infinite: false,
       adaptiveHeight: true,
       currentSlide: this.state.pageIndex,
       prevArrow: (

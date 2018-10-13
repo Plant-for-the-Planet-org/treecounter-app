@@ -283,7 +283,30 @@ export default class DonateTrees extends Component {
           src={arrow_left_green}
         />
       ),
-      beforeChange: (oldIndex, index) => this.indexChange(index)
+      beforeChange: (oldIndex, index) => {
+        //payment index
+        if (
+          index > oldIndex &&
+          this.checkValidation[index - 1] &&
+          this.checkValidation[oldIndex]
+        ) {
+          const lastIndexCheck = this.checkValidation[index - 1].call(this);
+          const oldIndexCheck = this.checkValidation[oldIndex].call(this);
+          if (oldIndexCheck && lastIndexCheck) {
+            this.indexChange(index);
+          } else {
+            if (this.refs.slider) {
+              setTimeout(() => {
+                this.refs.slider.slickGoTo(
+                  !oldIndexCheck ? oldIndex : index - 1
+                );
+              }, 1000);
+            }
+          }
+        } else {
+          this.indexChange(index);
+        }
+      }
     };
 
     let plantProject = this.props.selectedProject;

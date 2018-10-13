@@ -44,7 +44,7 @@ const PlantedDetails = ({ personal, community, type }) => (
 export default PlantedDetails;
 
 PlantedDetails.propTypes = {
-  personal: PropTypes.string.isRequired,
-  community: PropTypes.string.isRequired,
+  personal: PropTypes.number.isRequired,
+  community: PropTypes.number.isRequired,
   type: PropTypes.string
 };

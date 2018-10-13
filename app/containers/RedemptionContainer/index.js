@@ -87,9 +87,9 @@ class RedemptionContainer extends Component {
       path = 'app_redeem';
     }
     if (value) {
-      updateRoute(path, null, null, {
+      this.props.setRedemptionCodeAction({
         type: this.state.type,
-        code: value.code
+        code: this.state.code
       });
     }
   };

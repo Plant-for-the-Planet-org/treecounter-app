@@ -25,7 +25,13 @@ export default class Redemption extends Component {
     console.log(this.props.validateCodeInfo);
     const { code, updateRoute } = this.props;
     const flag = this.props.isLoggedIn ? true : false;
-    let content, button, statusText, buttonText;
+    let content,
+      button,
+      statusText = '',
+      buttonText = i18n.t('label.redeem_code'),
+      successText = '',
+      errorText = '',
+      actionText = '';
     if (code === null || code === undefined) {
       content = (
         <div className="no-contribution-wrapper">
@@ -61,26 +67,77 @@ export default class Redemption extends Component {
       } else {
         if (
           this.props.validateCodeInfo != null &&
-          this.props.validateCodeInfo.statusText != null
-        ) {
-          statusText = this.props.validateCodeInfo.statusText;
-        } else {
-          statusText = '';
-        }
-        if (
-          this.props.validateCodeInfo != null &&
           this.props.validateCodeInfo.buttonText != null
         ) {
           buttonText = this.props.validateCodeInfo.buttonText;
-        } else {
-          buttonText = i18n.t('label.redeem_code');
         }
-        content = <div className="no-contribution-wrapper">{statusText}</div>;
         button = (
           <div className="row">
             <PrimaryButton onClick={this.props.setRedemptionCode}>
               {buttonText}
             </PrimaryButton>
+          </div>
+        );
+        if (
+          this.props.validateCodeInfo != null &&
+          this.props.validateCodeInfo.status === 'success' &&
+          this.props.validateCodeInfo.statusText != null
+        ) {
+          statusText = this.props.validateCodeInfo.statusText;
+        }
+        if (
+          this.props.validateCodeInfo != null &&
+          this.props.validateCodeInfo.status === 'success' &&
+          this.props.validateCodeInfo.successText != null
+        ) {
+          successText = this.props.validateCodeInfo.successText;
+        }
+        if (
+          this.props.redemptCodeInfo != null &&
+          this.props.redemptCodeInfo.status === 'success' &&
+          this.props.redemptCodeInfo.successText != null
+        ) {
+          successText = this.props.redemptCodeInfo.successText;
+          button = '';
+        }
+        if (
+          this.props.validateCodeInfo != null &&
+          this.props.validateCodeInfo.status === 'error' &&
+          this.props.validateCodeInfo.errorText != null
+        ) {
+          errorText = this.props.validateCodeInfo.errorText;
+        }
+        if (
+          this.props.validateCodeInfo != null &&
+          this.props.validateCodeInfo.actionText != null
+        ) {
+          actionText = this.props.validateCodeInfo.actionText;
+        }
+        if (
+          this.props.redemptCodeInfo != null &&
+          this.props.redemptCodeInfo.actionText != null
+        ) {
+          actionText = this.props.redemptCodeInfo.actionText;
+          button = '';
+        }
+        if (
+          this.props.validateCodeInfo != null &&
+          this.props.validateCodeInfo.status === 'error'
+        ) {
+          button = (
+            <div className="row">
+              <PrimaryButton onClick={this.props.validateCode}>
+                {i18n.t('label.validate_code')}
+              </PrimaryButton>
+            </div>
+          );
+        }
+        content = (
+          <div>
+            <div className="no-contribution-wrapper">{actionText}</div>
+            <div className="no-contribution-wrapper">{errorText}</div>
+            <div className="no-contribution-wrapper">{successText}</div>
+            <div className="no-contribution-wrapper">{statusText}</div>
           </div>
         );
       }

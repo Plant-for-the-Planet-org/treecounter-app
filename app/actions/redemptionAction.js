@@ -17,7 +17,7 @@ export function validateCodeAction(data, params) {
 export function setRedemptionCodeAction(data, params) {
   return dispatch => {
     postAuthenticatedRequest('convertCode_post', data, params).then(res => {
-      dispatch(redemptCode(res.data));
+      dispatch(redemptCode(res.data.response));
     });
   };
 }

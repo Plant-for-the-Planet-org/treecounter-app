@@ -6,14 +6,11 @@ import Redemption from '../../components/Redemption/index';
 import { currentUserProfileSelector } from '../../selectors';
 import { updateRoute } from '../../helpers/routerHelper';
 import {
-  redemptionCodeSelector,
-  validationCodeSelector
-} from '../../selectors/index';
-import {
   validateCodeAction,
   setRedemptionCodeAction
 } from '../../actions/redemptionAction';
 import { setAccessDenied } from '../../actions/authActions';
+import i18n from '../../locales/i18n.js';
 
 class RedemptionContainer extends Component {
   constructor(props) {
@@ -32,33 +29,76 @@ class RedemptionContainer extends Component {
       code: match.params.code,
       type: type,
       page_status: 'code-unknown',
+      code_status: 'error',
+      status_text: '',
+      success_text: '',
+      error_text: '',
+      action_text: '',
+      button_text: i18n.t('label.redeem_code'),
+      tpos: null,
+      loading: true,
       path: match.path.includes('claim') ? 'claim' : 'redeem'
     };
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.match !== this.props.match) {
+  callSetState(isCode, isLoggedIn, code, type) {
+    if (isCode && isLoggedIn) {
+      this.setState({ loading: true });
+      validateCodeAction({
+        type: type,
+        code: code
+      }).then(
+        success => {
+          this.setState({
+            loading: false,
+            page_status: 'code-validated',
+            code_status: success.data.status,
+            status_text: success.data.statusText,
+            success_text: success.data.successText,
+            error_text: success.data.errorText,
+            action_text: success.data.actionText,
+            button_text: success.data.buttonText,
+            tpos: success.data.tpos
+          });
+        },
+        error => {}
+      );
+    } else if (isCode && !isLoggedIn) {
+      console.log('in lofged1');
+      this.setState({
+        loading: false,
+        page_status: 'not-logged-in',
+        action_text: i18n.t('label.log_in')
+      });
+    } else {
+      this.setState({
+        loading: false,
+        page_status: 'code-unknown',
+        action_text: i18n.t('label.enter_code')
+      });
+    }
+  }
+  componentWillMount() {
+    let isLoggedIn = this.props.userProfile ? true : false;
+    let isCode = this.state.code ? true : false;
+    this.callSetState(isCode, isLoggedIn, this.state.code, this.state.type);
+  }
+  componentWillUpdate(nextProps, nextState) {
+    console.log(nextState);
+    console.log(nextProps);
+    if (
+      nextProps.match !== this.props.match ||
+      nextProps.userProfile != this.props.userProfile
+    ) {
       // let isLoggedIn = null !== nextProps.userProfile;
       this.setState({ code: nextProps.match.params.code });
-    }
-  }
-  componentDidMount() {
-    let isLoggedIn = this.props.userProfile ? true : false;
-    let isCode = this.state.code ? true : false;
-    if (isCode && isLoggedIn) {
-      this.props.validateCodeAction({
-        type: this.state.type,
-        code: this.state.code
-      });
-    }
-  }
-  componentDidUpdate() {
-    let isLoggedIn = this.props.userProfile ? true : false;
-    let isCode = this.state.code ? true : false;
-    if (isCode && isLoggedIn && this.props.validateCodeInfo === null) {
-      this.props.validateCodeAction({
-        type: this.state.type,
-        code: this.state.code
-      });
+      let isLoggedIn = nextProps.userProfile ? true : false;
+      let isCode = nextProps.match.params.code ? true : false;
+      this.callSetState(
+        isCode,
+        isLoggedIn,
+        nextProps.match.params.code,
+        nextProps.match.params.type
+      );
     }
   }
   validateCode = () => {
@@ -71,6 +111,8 @@ class RedemptionContainer extends Component {
       path = 'app_redeem';
     }
     if (value) {
+      // let isCode = value ? true : false;
+      // this.callSetState(isCode);
       updateRoute(path, null, null, {
         type: this.state.type,
         code: value.code
@@ -86,11 +128,30 @@ class RedemptionContainer extends Component {
     } else if (this.state.path === 'redeem') {
       path = 'app_redeem';
     }
+    this.setState({ loading: true });
     if (value) {
-      this.props.setRedemptionCodeAction({
+      setRedemptionCodeAction({
         type: this.state.type,
         code: this.state.code
-      });
+      }).then(
+        success => {
+          this.setState({
+            loading: false,
+            page_status: 'success',
+            code_status: success.data.response.status,
+            status_text: success.data.response.statusText,
+            success_text: success.data.response.successText,
+            error_text: success.data.response.errorText,
+            action_text: success.data.response.actionText,
+            button_text: success.data.response.buttonText,
+            tpos: success.data.response.tpos
+          });
+          if (success.data.response.status === 'error') {
+            this.setState({ page_status: 'code-validated' });
+          }
+        },
+        error => {}
+      );
     }
   };
   loginButton = () => {
@@ -109,7 +170,6 @@ class RedemptionContainer extends Component {
         ref={'redemptionContainer'}
         code={this.state.code}
         page_status={this.state.page_status}
-        validateCodeInfo={this.props.validateCodeInfo}
         updateRoute={this.props.route}
         setRedemptionCode={this.setRedemptionCode}
         isLoggedIn={this.props.userProfile}
@@ -117,6 +177,14 @@ class RedemptionContainer extends Component {
         loginButton={this.loginButton}
         signupButton={this.signupButton}
         path={this.state.path}
+        code_status={this.state.code_status}
+        status_text={this.state.status_text}
+        success_text={this.state.success_text}
+        error_text={this.state.error_text}
+        action_text={this.state.action_text}
+        button_text={this.state.button_text}
+        tpos={this.state.tpos}
+        loading={this.state.loading}
       />
     );
   }
@@ -124,18 +192,14 @@ class RedemptionContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    userProfile: currentUserProfileSelector(state),
-    validateCodeInfo: validationCodeSelector(state),
-    redemptCodeInfo: redemptionCodeSelector(state)
+    userProfile: currentUserProfileSelector(state)
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      validateCodeAction,
       setAccessDenied,
-      setRedemptionCodeAction,
       route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
     },
     dispatch
@@ -151,9 +215,5 @@ RedemptionContainer.propTypes = {
   route: PropTypes.func,
   userProfile: PropTypes.object,
   setRedemptionCode: PropTypes.func,
-  validateCodeInfo: PropTypes.func,
-  redemptCodeInfo: PropTypes.func,
-  validateCodeAction: PropTypes.func,
-  setRedemptionCodeAction: PropTypes.func,
   setAccessDenied: PropTypes.func
 };

@@ -15,10 +15,6 @@ import { getPledges } from '../reducers/pledgeReducer';
 import { getPledgeEvents } from '../reducers/pledgeEventReducer';
 import { getPaymentStatus } from '../reducers/paymentStatus';
 import { getCurrencies } from '../reducers/currenciesReducer';
-import {
-  getRedemptionInfo,
-  getValidateInfo
-} from '../reducers/redemptionReducer';
 
 export const supportedTreecounterSelector = state =>
   getSupportedTreecounter(state);
@@ -35,8 +31,6 @@ export const pledgesSelector = state => getPledges(state);
 export const currenciesSelector = state => getCurrencies(state);
 export const paymentStatusSelector = state => getPaymentStatus(state);
 export const pledgeEventSelector = state => getPledgeEvents(state);
-export const validationCodeSelector = state => getValidateInfo(state);
-export const redemptionCodeSelector = state => getRedemptionInfo(state);
 
 function logSelectorUpdate(selectorName, args = 'None') {
   const debug = false;

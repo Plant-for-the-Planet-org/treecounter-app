@@ -68,10 +68,8 @@ export function setAccessDenied(data, params, path) {
   return dispatch => {
     postRequest('public_accessDenied', data, params)
       .then(res => {
-        console.log(dispatch, res);
         const { statusText } = res;
         updateRoute(path, dispatch);
-        _.delay(() => dispatch(setProgressModelState(false)), 1000);
         NotificationManager.success(statusText, 'Success', 5000);
       })
       .catch(error => {

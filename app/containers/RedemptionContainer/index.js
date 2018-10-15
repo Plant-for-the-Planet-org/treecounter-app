@@ -63,7 +63,6 @@ class RedemptionContainer extends Component {
         error => {}
       );
     } else if (isCode && !isLoggedIn) {
-      console.log('in lofged1');
       this.setState({
         loading: false,
         page_status: 'not-logged-in',
@@ -83,8 +82,6 @@ class RedemptionContainer extends Component {
     this.callSetState(isCode, isLoggedIn, this.state.code, this.state.type);
   }
   componentWillUpdate(nextProps, nextState) {
-    console.log(nextState);
-    console.log(nextProps);
     if (
       nextProps.match !== this.props.match ||
       nextProps.userProfile != this.props.userProfile
@@ -102,7 +99,6 @@ class RedemptionContainer extends Component {
     }
   }
   validateCode = () => {
-    console.log(this.refs.redemptionContainer.refs.redemptionForm.getValue());
     let value = this.refs.redemptionContainer.refs.redemptionForm.getValue();
     let path;
     if (this.state.path === 'claim') {
@@ -120,7 +116,6 @@ class RedemptionContainer extends Component {
     }
   };
   setRedemptionCode = () => {
-    console.log(this.refs.redemptionContainer.refs.redemptionForm.getValue());
     let value = this.refs.redemptionContainer.refs.redemptionForm.getValue();
     let path;
     if (this.state.path === 'claim') {
@@ -157,11 +152,13 @@ class RedemptionContainer extends Component {
   loginButton = () => {
     const path =
       '/' + this.state.path + '/' + this.state.type + '/' + this.state.code;
+    this.setState({ loading: true });
     this.props.setAccessDenied({ uri: path }, null, 'app_login');
   };
   signupButton = () => {
     const path =
       '/' + this.state.path + '/' + this.state.type + '/' + this.state.code;
+    this.setState({ loading: true });
     this.props.setAccessDenied({ uri: path }, null, 'app_signup');
   };
   render() {

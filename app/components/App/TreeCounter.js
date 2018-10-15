@@ -219,10 +219,6 @@ class TreeCounter extends Component {
                 component={DonationTreesContainer}
               />
               <Route
-                path={getLocalRoute('app_giftRedemption') + '/:token?'}
-                component={RedemptionContainer}
-              />
-              <Route
                 path={getLocalRoute('app_claim') + '/:type' + '/:code'}
                 component={RedemptionContainer}
               />

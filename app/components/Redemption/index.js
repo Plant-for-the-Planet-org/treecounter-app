@@ -22,7 +22,6 @@ export default class Redemption extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { code, updateRoute } = this.props;
     let content, button;
     content = (

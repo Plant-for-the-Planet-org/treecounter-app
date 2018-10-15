@@ -26,6 +26,7 @@
     }
     img {
       max-width: 46px;
+      padding:10px;
     }
     .smallImage {
       max-width: 20px;
@@ -43,7 +44,7 @@
 
     .svg-text-container__row--col2 {
       // align-self: end;
-      // justify-self:end;
+      justify-self:end;
     }
   }
 

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import PlantedDetails from './PlantedDetails';
 import TargetComment from './TargetComment';
 import ArrowButton from '../Common/ArrowButton';
-import { pot, tree } from '../../assets';
+import { pot, tree, tree_outline } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import ReactTooltip from 'react-tooltip';
 import { questionmark_orange, close_green } from '../../assets';
@@ -48,6 +48,10 @@ class TreecounterGraphicsText extends Component {
     } else {
       return n;
     }
+  }
+  updateState(stateVal) {
+    this.setState({ ifPlantedDetails: stateVal });
+    this.props.onToggle(stateVal);
   }
 
   render() {
@@ -110,9 +114,7 @@ class TreecounterGraphicsText extends Component {
             </div>
             {this.props.trillion ? null : (
               <div className="svg-text-container__row--col2">
-                <ArrowButton
-                  onToggle={e => this.setState({ ifPlantedDetails: e })}
-                />
+                <ArrowButton onToggle={e => this.updateState(e)} />
               </div>
             )}
           </div>
@@ -120,12 +122,15 @@ class TreecounterGraphicsText extends Component {
       ) : (
         <div className="svg-text-container">
           <div className="svg-text-container__row">
+            <div className="svg-text-container__row--col" />
+            <div className="svg-text-container__row--col" />
+
             <div className="svg-text-container__row--col2">
               <img
                 className="smallImage"
                 src={close_green}
                 onClick={() => {
-                  this.setState({ ifPlantedDetails: false });
+                  this.setState(() => this.updateState(false));
                 }}
               />
             </div>
@@ -134,50 +139,54 @@ class TreecounterGraphicsText extends Component {
           <div className="svg-text-container__row">
             <img className="svg-text-container__row--col" src={tree} />
             <div className="svg-text-container__row--col">
-              <span>
+              <div>
+                {i18n.t(
+                  'individual' === type
+                    ? 'label.individual_plant_personal'
+                    : 'label.tpo_plant_personal'
+                )}
+              </div>
+              <div>
                 <strong>{personal.toFixed().toLocaleString('en')}</strong>
-                <span>
-                  {i18n.t(
-                    'individual' === type
-                      ? 'label.individual_plant_personal'
-                      : 'label.tpo_plant_personal'
-                  )}
-                </span>
-              </span>
+              </div>
             </div>
           </div>
 
+          <hr className="svg-text-container__bar" />
+
           <div className="svg-text-container__row">
-            <img className="svg-text-container__row--col" src={tree} />
+            <img className="svg-text-container__row--col" src={tree_outline} />
             <div className="svg-text-container__row--col">
-              <span>
-                <strong>
-                  {community.toFixed().toLocaleString('en') + ' '}
-                </strong>
+              <div>
                 <span>
                   {i18n.t(
                     'individual' === type
                       ? 'label.individual_plant_community'
                       : 'label.tpo_individual_plant_community'
                   )}
-                </span>
-                <div className="tooltip">
-                  <a data-tip data-for="community">
-                    <img className="smallImage" src={questionmark_orange} />
-                  </a>
+                  <div className="tooltip">
+                    <a data-tip data-for="community">
+                      <img className="smallImage" src={questionmark_orange} />
+                    </a>
 
-                  <ReactTooltip id="community" effect="solid" type="dark">
-                    <span className="tooltip-text">
-                      Trees planted by people who made this tree counter their
-                      community. Your community can be any other profile that
-                      you want to support towards reaching their tree target,
-                      like your school, city or employer. If you plant or donate
-                      trees, these will then also appear in your community’s
-                      tree-counter.
-                    </span>
-                  </ReactTooltip>
-                </div>
-              </span>
+                    <ReactTooltip id="community" effect="solid" type="dark">
+                      <span className="tooltip-text">
+                        Trees planted by people who made this tree counter their
+                        community. Your community can be any other profile that
+                        you want to support towards reaching their tree target,
+                        like your school, city or employer. If you plant or
+                        donate trees, these will then also appear in your
+                        community’s tree-counter.
+                      </span>
+                    </ReactTooltip>
+                  </div>
+                </span>
+              </div>
+              <div>
+                <strong>
+                  {community.toFixed().toLocaleString('en') + ' '}
+                </strong>
+              </div>
             </div>
           </div>
         </div>
@@ -189,7 +198,8 @@ class TreecounterGraphicsText extends Component {
 
 TreecounterGraphicsText.propTypes = {
   treecounterData: PropTypes.object.isRequired,
-  trillion: PropTypes.bool
+  trillion: PropTypes.bool,
+  onToggle: PropTypes.func
 };
 
 export default TreecounterGraphicsText;

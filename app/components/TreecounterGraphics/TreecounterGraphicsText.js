@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import NumberToWords from 'number-to-words';
-
-import PlantedDetails from './PlantedDetails';
 import TargetComment from './TargetComment';
 import ArrowButton from '../Common/ArrowButton';
 import { pot, tree, tree_outline } from '../../assets';
 import i18n from '../../locales/i18n.js';
-import ReactTooltip from 'react-tooltip';
-import { questionmark_orange, close_green } from '../../assets';
+import PlantedDetails from './PlantedDetails';
 
 class TreecounterGraphicsText extends Component {
   constructor() {
@@ -112,7 +108,7 @@ class TreecounterGraphicsText extends Component {
                 ) : null}
               </span>
             </div>
-            {this.props.trillion || community == 0 ? null : (
+            {this.props.trillion ? null : (
               <div className="svg-text-container__row--col2">
                 <ArrowButton onToggle={e => this.updateState(e)} />
               </div>
@@ -120,77 +116,12 @@ class TreecounterGraphicsText extends Component {
           </div>
         </div>
       ) : (
-        <div className="svg-text-container">
-          <div className="svg-text-container__row">
-            <div className="svg-text-container__row--col" />
-            <div className="svg-text-container__row--col" />
-
-            <div className="svg-text-container__row--col2 closeContainer">
-              <img
-                className="smallImage"
-                src={close_green}
-                onClick={() => {
-                  this.setState(() => this.updateState(false));
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="svg-text-container__row">
-            <img className="svg-text-container__row--col" src={tree} />
-            <div className="svg-text-container__row--col">
-              <div className="textLabel">
-                {i18n.t(
-                  'individual' === type
-                    ? 'label.individual_plant_personal'
-                    : 'label.tpo_plant_personal'
-                )}
-              </div>
-              <div>
-                <strong>{personal.toFixed().toLocaleString('en')}</strong>
-              </div>
-            </div>
-          </div>
-
-          <hr className="svg-text-container__bar" />
-
-          <div className="svg-text-container__row">
-            <img className="svg-text-container__row--col" src={tree_outline} />
-            <div className="svg-text-container__row--col">
-              <div className="community_row">
-                <div className="communtiy_col textLabel">
-                  {i18n.t(
-                    'individual' === type
-                      ? 'label.individual_plant_community'
-                      : 'label.tpo_individual_plant_community'
-                  )}
-                </div>
-
-                <div className="tooltip communtiy_col">
-                  <a data-tip data-for="community">
-                    <img className="smallImage" src={questionmark_orange} />
-                  </a>
-
-                  <ReactTooltip id="community" effect="solid" type="dark">
-                    <span className="tooltip-text">
-                      Trees planted by people who made this tree counter their
-                      community. Your community can be any other profile that
-                      you want to support towards reaching their tree target,
-                      like your school, city or employer. If you plant or donate
-                      trees, these will then also appear in your community’s
-                      tree-counter.
-                    </span>
-                  </ReactTooltip>
-                </div>
-              </div>
-              <div>
-                <strong>
-                  {community.toFixed().toLocaleString('en') + ' '}
-                </strong>
-              </div>
-            </div>
-          </div>
-        </div>
+        <PlantedDetails
+          personal={personal}
+          community={community}
+          type={type}
+          onToggle={e => this.updateState(false)}
+        />
       );
     }
     return dom;

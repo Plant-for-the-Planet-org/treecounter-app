@@ -74,7 +74,7 @@ class PublicTreeCounter extends React.Component {
       const treecounter = this.props.treecounter;
       let svgData = {
         id: treecounter.id,
-        target: treecounter.countCommunity, // light color
+        target: treecounter.countCommunity + treecounter.countPersonal, // light color
         planted: treecounter.countPersonal, //dark color
         community: treecounter.countCommunity,
         personal: treecounter.countPersonal,

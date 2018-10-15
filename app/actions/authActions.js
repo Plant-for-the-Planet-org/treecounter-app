@@ -9,6 +9,7 @@ import { NotificationAction } from './notificationAction';
 import { loadTpos } from './loadTposAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import _ from 'lodash';
+import { NotificationManager } from 'react-notifications';
 export const userLogout = createAction('USER_LOGOUT');
 export function login(data, navigation = undefined) {
   const request = postRequest('api_login_check', data);
@@ -61,5 +62,20 @@ export function reset_password(data) {
         updateRoute('app_login', dispatch);
       })
       .catch(err => debug(err));
+  };
+}
+export function setAccessDenied(data, params, path) {
+  return dispatch => {
+    postRequest('public_accessDenied', data, params)
+      .then(res => {
+        console.log(dispatch, res);
+        const { statusText } = res;
+        updateRoute(path, dispatch);
+        _.delay(() => dispatch(setProgressModelState(false)), 1000);
+        NotificationManager.success(statusText, 'Success', 5000);
+      })
+      .catch(error => {
+        // NotificationManager.error(error.response.data.message, 'Error', 5000);
+      });
   };
 }

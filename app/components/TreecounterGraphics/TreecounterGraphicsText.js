@@ -112,7 +112,7 @@ class TreecounterGraphicsText extends Component {
                 ) : null}
               </span>
             </div>
-            {this.props.trillion ? null : (
+            {this.props.trillion || community == 0 ? null : (
               <div className="svg-text-container__row--col2">
                 <ArrowButton onToggle={e => this.updateState(e)} />
               </div>
@@ -125,7 +125,7 @@ class TreecounterGraphicsText extends Component {
             <div className="svg-text-container__row--col" />
             <div className="svg-text-container__row--col" />
 
-            <div className="svg-text-container__row--col2">
+            <div className="svg-text-container__row--col2 closeContainer">
               <img
                 className="smallImage"
                 src={close_green}
@@ -139,7 +139,7 @@ class TreecounterGraphicsText extends Component {
           <div className="svg-text-container__row">
             <img className="svg-text-container__row--col" src={tree} />
             <div className="svg-text-container__row--col">
-              <div>
+              <div className="textLabel">
                 {i18n.t(
                   'individual' === type
                     ? 'label.individual_plant_personal'
@@ -157,30 +157,31 @@ class TreecounterGraphicsText extends Component {
           <div className="svg-text-container__row">
             <img className="svg-text-container__row--col" src={tree_outline} />
             <div className="svg-text-container__row--col">
-              <div>
-                <span>
+              <div className="community_row">
+                <div className="communtiy_col textLabel">
                   {i18n.t(
                     'individual' === type
                       ? 'label.individual_plant_community'
                       : 'label.tpo_individual_plant_community'
                   )}
-                  <div className="tooltip">
-                    <a data-tip data-for="community">
-                      <img className="smallImage" src={questionmark_orange} />
-                    </a>
+                </div>
 
-                    <ReactTooltip id="community" effect="solid" type="dark">
-                      <span className="tooltip-text">
-                        Trees planted by people who made this tree counter their
-                        community. Your community can be any other profile that
-                        you want to support towards reaching their tree target,
-                        like your school, city or employer. If you plant or
-                        donate trees, these will then also appear in your
-                        community’s tree-counter.
-                      </span>
-                    </ReactTooltip>
-                  </div>
-                </span>
+                <div className="tooltip communtiy_col">
+                  <a data-tip data-for="community">
+                    <img className="smallImage" src={questionmark_orange} />
+                  </a>
+
+                  <ReactTooltip id="community" effect="solid" type="dark">
+                    <span className="tooltip-text">
+                      Trees planted by people who made this tree counter their
+                      community. Your community can be any other profile that
+                      you want to support towards reaching their tree target,
+                      like your school, city or employer. If you plant or donate
+                      trees, these will then also appear in your community’s
+                      tree-counter.
+                    </span>
+                  </ReactTooltip>
+                </div>
               </div>
               <div>
                 <strong>

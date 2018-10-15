@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { View, Image, ScrollView, SafeAreaView, Text } from 'react-native';
-import MenuGroup, { MenuItem, LargeMenuItem } from './MenuItem.native';
+import { LargeMenuItem } from './MenuItem.native';
 import PropTypes, { func } from 'prop-types';
 import styles from '../../styles/menu';
-import menuItemStyles from '../../styles/menu_item';
 import { updateRoute } from '../../helpers/routerHelper';
 import { iosLogout, iosFaqs, ProfilePic, iosInformation } from '../../assets';
 import i18n from '../../locales/i18n.js';
@@ -69,14 +68,6 @@ export default class Menu extends Component {
         )}
         <ScrollView>
           <View style={styles.imageStyle} />
-          {this.props.menuData.map(element => (
-            <MenuGroup
-              title={element.caption}
-              key={element.sequence}
-              menuItems={element.menuItems}
-              onPress={this.onPressMenu}
-            />
-          ))}
         </ScrollView>
         {this.props.userProfile && (
           <View>

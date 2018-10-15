@@ -79,5 +79,6 @@ export default PlantedDetails;
 PlantedDetails.propTypes = {
   personal: PropTypes.number.isRequired,
   community: PropTypes.number.isRequired,
-  type: PropTypes.string
+  type: PropTypes.string,
+  onToggle: PropTypes.func
 };

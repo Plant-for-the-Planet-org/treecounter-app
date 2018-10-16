@@ -9,7 +9,7 @@ import { NotificationAction } from './notificationAction';
 import { loadTpos } from './loadTposAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import _ from 'lodash';
-import { NotificationManager } from 'react-notifications';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 export const userLogout = createAction('USER_LOGOUT');
 export function login(data, navigation = undefined) {
   const request = postRequest('api_login_check', data);

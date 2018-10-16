@@ -28,13 +28,13 @@ class RedemptionContainer extends Component {
     this.state = {
       code: match.params.code,
       type: type,
-      page_status: 'code-unknown',
-      code_status: 'error',
-      status_text: '',
-      success_text: '',
-      error_text: '',
-      action_text: '',
-      button_text: i18n.t('label.redeem_code'),
+      pageStatus: 'code-unknown',
+      codeStatus: 'error',
+      statusText: '',
+      successText: '',
+      errorText: '',
+      actionText: '',
+      buttonText: i18n.t('label.redeem_code'),
       tpos: null,
       loading: true,
       path: match.path.includes('claim') ? 'claim' : 'redeem'
@@ -50,13 +50,13 @@ class RedemptionContainer extends Component {
         success => {
           this.setState({
             loading: false,
-            page_status: 'code-validated',
-            code_status: success.data.status,
-            status_text: success.data.statusText,
-            success_text: success.data.successText,
-            error_text: success.data.errorText,
-            action_text: success.data.actionText,
-            button_text: success.data.buttonText,
+            pageStatus: 'code-validated',
+            codeStatus: success.data.status,
+            statusText: success.data.statusText,
+            successText: success.data.successText,
+            errorText: success.data.errorText,
+            actionText: success.data.actionText,
+            buttonText: success.data.buttonText,
             tpos: success.data.tpos
           });
         },
@@ -65,18 +65,18 @@ class RedemptionContainer extends Component {
     } else if (isCode && !isLoggedIn) {
       this.setState({
         loading: false,
-        page_status: 'not-logged-in',
-        action_text: i18n.t('label.log_in')
+        pageStatus: 'not-logged-in',
+        actionText: i18n.t('label.log_in')
       });
     } else {
       this.setState({
         loading: false,
-        page_status: 'code-unknown',
-        action_text: i18n.t('label.enter_code')
+        pageStatus: 'code-unknown',
+        actionText: i18n.t('label.enter_code')
       });
     }
   }
-  componentWillMount() {
+  componentDidMount() {
     let isLoggedIn = this.props.userProfile ? true : false;
     let isCode = this.state.code ? true : false;
     this.callSetState(isCode, isLoggedIn, this.state.code, this.state.type);
@@ -132,17 +132,17 @@ class RedemptionContainer extends Component {
         success => {
           this.setState({
             loading: false,
-            page_status: 'success',
-            code_status: success.data.response.status,
-            status_text: success.data.response.statusText,
-            success_text: success.data.response.successText,
-            error_text: success.data.response.errorText,
-            action_text: success.data.response.actionText,
-            button_text: success.data.response.buttonText,
+            pageStatus: 'success',
+            codeStatus: success.data.response.status,
+            statusText: success.data.response.statusText,
+            successText: success.data.response.successText,
+            errorText: success.data.response.errorText,
+            actionText: success.data.response.actionText,
+            buttonText: success.data.response.buttonText,
             tpos: success.data.response.tpos
           });
           if (success.data.response.status === 'error') {
-            this.setState({ page_status: 'code-validated' });
+            this.setState({ pageStatus: 'code-validated' });
           }
         },
         error => {}
@@ -166,7 +166,7 @@ class RedemptionContainer extends Component {
       <Redemption
         ref={'redemptionContainer'}
         code={this.state.code}
-        page_status={this.state.page_status}
+        pageStatus={this.state.pageStatus}
         updateRoute={this.props.route}
         setRedemptionCode={this.setRedemptionCode}
         isLoggedIn={this.props.userProfile}
@@ -174,12 +174,12 @@ class RedemptionContainer extends Component {
         loginButton={this.loginButton}
         signupButton={this.signupButton}
         path={this.state.path}
-        code_status={this.state.code_status}
-        status_text={this.state.status_text}
-        success_text={this.state.success_text}
-        error_text={this.state.error_text}
-        action_text={this.state.action_text}
-        button_text={this.state.button_text}
+        codeStatus={this.state.codeStatus}
+        statusText={this.state.statusText}
+        successText={this.state.successText}
+        errorText={this.state.errorText}
+        actionText={this.state.actionText}
+        buttonText={this.state.buttonText}
         tpos={this.state.tpos}
         loading={this.state.loading}
       />

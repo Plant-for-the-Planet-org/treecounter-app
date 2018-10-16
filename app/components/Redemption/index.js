@@ -26,15 +26,15 @@ export default class Redemption extends Component {
     let content, button;
     content = (
       <div>
-        <div className="no-contribution-wrapper">{this.props.action_text}</div>
-        <div className="no-contribution-wrapper">{this.props.error_text}</div>
-        <div className="no-contribution-wrapper">{this.props.success_text}</div>
-        <div className="no-contribution-wrapper">{this.props.status_text}</div>
+        <div className="no-contribution-wrapper">{this.props.actionText}</div>
+        <div className="no-contribution-wrapper">{this.props.errorText}</div>
+        <div className="no-contribution-wrapper">{this.props.successText}</div>
+        <div className="no-contribution-wrapper">{this.props.statusText}</div>
       </div>
     );
     if (
-      this.props.page_status === 'code-validated' &&
-      this.props.code_status === 'error'
+      this.props.pageStatus === 'code-validated' &&
+      this.props.codeStatus === 'error'
     ) {
       button = (
         <div className="row">
@@ -43,7 +43,7 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </div>
       );
-    } else if (this.props.page_status === 'code-unknown') {
+    } else if (this.props.pageStatus === 'code-unknown') {
       button = (
         <div className="row">
           <PrimaryButton onClick={this.props.validateCode}>
@@ -51,7 +51,7 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </div>
       );
-    } else if (this.props.page_status === 'not-logged-in') {
+    } else if (this.props.pageStatus === 'not-logged-in') {
       button = (
         <div className="redemption-form">
           <div className="row">
@@ -68,7 +68,7 @@ export default class Redemption extends Component {
       button = (
         <div className="row">
           <PrimaryButton onClick={this.props.setRedemptionCode}>
-            {this.props.button_text}
+            {this.props.buttonText}
           </PrimaryButton>
         </div>
       );
@@ -93,6 +93,18 @@ export default class Redemption extends Component {
         </TextHeading>
         <CardLayout>
           {content}
+          {/*<div className="events_row">*/}
+          {/*{this.props.tpos*/}
+          {/*.map(element => (*/}
+          {/*<div>*/}
+          {/*<div className="imgContainer">*/}
+          {/*<img src={getImageUrl('event', 'thumb', element.icon)} />*/}
+          {/*</div>*/}
+
+          {/*<TextBlock>{element.name}</TextBlock>*/}
+          {/*</div>*/}
+          {/*))}*/}
+          {/*</div>*/}
           <TCombForm
             ref="redemptionForm"
             type={redemptionFormSchema}
@@ -107,7 +119,7 @@ export default class Redemption extends Component {
 }
 
 Redemption.propTypes = {
-  page_status: PropTypes.string,
+  pageStatus: PropTypes.string,
   code: PropTypes.string,
   isLoggedIn: PropTypes.func,
   updateRoute: PropTypes.func,
@@ -117,11 +129,11 @@ Redemption.propTypes = {
   signupButton: PropTypes.func,
   path: PropTypes.string,
   loading: PropTypes.boolean,
-  code_status: PropTypes.string,
-  status_text: PropTypes.string,
-  success_text: PropTypes.string,
-  error_text: PropTypes.string,
-  action_text: PropTypes.string,
-  button_text: PropTypes.string,
-  tpos: PropTypes.func
+  codeStatus: PropTypes.string,
+  statusText: PropTypes.string,
+  successText: PropTypes.string,
+  errorText: PropTypes.string,
+  actionText: PropTypes.string,
+  buttonText: PropTypes.string,
+  tpos: PropTypes.array
 };

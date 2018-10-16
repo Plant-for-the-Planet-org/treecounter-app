@@ -22,6 +22,7 @@ import publicTreecounterlabels from './publicTreecounterlabels.json';
 import editUserProfilelabels from './editUserProfilelabels.json';
 import selectPlantProjectlabels from './selectPlantProjectlabels.json';
 import pledgelabels from './pledgelabels.json';
+import redemptionlables from './redemptionlabels.json';
 import footerlabels from './footerlabels.json';
 export default {
   ...loginlabels,
@@ -48,5 +49,6 @@ export default {
   ...editUserProfilelabels,
   ...selectPlantProjectlabels,
   ...pledgelabels,
+  ...redemptionlables,
   ...footerlabels
 };

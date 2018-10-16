@@ -81,7 +81,7 @@ class RedemptionContainer extends Component {
     let isCode = this.state.code ? true : false;
     this.callSetState(isCode, isLoggedIn, this.state.code, this.state.type);
   }
-  componentWillUpdate(nextProps, nextState) {
+  componentWillReceiveProps(nextProps) {
     if (
       nextProps.match !== this.props.match ||
       nextProps.userProfile != this.props.userProfile

@@ -10,7 +10,9 @@ export function ListTemplateGenerator(config) {
       renderAddButton: locals => {
         return (
           <div className="pftp-addbutton">
-            <button onClick={locals.add.click}>+&nbsp;{i18n.t(title)}</button>
+            <button type="button" onClick={locals.add.click}>
+              +&nbsp;{i18n.t(title)}
+            </button>
           </div>
         );
       },

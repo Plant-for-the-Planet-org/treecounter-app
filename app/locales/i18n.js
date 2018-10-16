@@ -4,7 +4,7 @@ import deLabels from './de';
 import { getLocale } from '../actions/getLocale';
 
 let userLang = getLocale();
-
+console.log('userLang', userLang, i18next);
 i18next.init({
   interpolation: {
     // React already does escaping

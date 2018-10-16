@@ -9,7 +9,7 @@ import { userProfileSchema, plantProjectSchema } from '../schemas/index';
 
 import { normalize } from 'normalizr';
 import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
-
+import { setProgressModelState } from '../reducers/modelDialogReducer';
 const profileTypeToReq = {
   profile: 'profile_put',
   about_me: 'profileAboutMe_put',
@@ -19,6 +19,7 @@ const profileTypeToReq = {
 
 export function addPlantProject(plantProject) {
   return dispatch => {
+    dispatch(setProgressModelState(true));
     return new Promise(function(resolve) {
       postAuthenticatedRequest('plantProject_post', plantProject)
         .then(res => {
@@ -36,10 +37,12 @@ export function addPlantProject(plantProject) {
             5000
           );
           resolve(plantProject);
+          dispatch(setProgressModelState(false));
         })
         .catch(err => {
           debug(err);
           NotificationManager.error(err.message, 'Profile update Error', 5000);
+          dispatch(setProgressModelState(false));
         });
     });
   };
@@ -67,6 +70,7 @@ export function deletePlantProject(plantProjectId) {
 
 export function updatePlantProject(plantProject) {
   return dispatch => {
+    dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
       let projectId = plantProject.id;
       delete plantProject.id;
@@ -84,10 +88,12 @@ export function updatePlantProject(plantProject) {
             dispatch(deleteEntity({ plantProjectImage: deleteIds }));
           }
           resolve(res.data);
+          dispatch(setProgressModelState(false));
         })
         .catch(err => {
           debug(err);
           reject(err);
+          dispatch(setProgressModelState(false));
         });
     });
   };
@@ -95,6 +101,7 @@ export function updatePlantProject(plantProject) {
 
 export function updateUserProfile(data, profileType) {
   return dispatch => {
+    dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
       putAuthenticatedRequest(profileTypeToReq[profileType], data)
         .then(res => {
@@ -104,10 +111,12 @@ export function updateUserProfile(data, profileType) {
             dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
           }
           resolve(res.data);
+          dispatch(setProgressModelState(false));
         })
         .catch(err => {
           debug(err);
           reject(err);
+          dispatch(setProgressModelState(false));
         });
     });
   };

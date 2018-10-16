@@ -16,22 +16,9 @@ import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 import PaymentSelector from '../Payment/PaymentSelector';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 
 export default class DonateTrees extends Component {
-  static data = {
-    tabsReceipt: [
-      {
-        name: i18n.t('label.individual_name'),
-        id: 'individual'
-      },
-      {
-        name: i18n.t('label.company_title'),
-        id: 'company'
-      }
-    ]
-  };
-
   constructor(props) {
     super(props);
 

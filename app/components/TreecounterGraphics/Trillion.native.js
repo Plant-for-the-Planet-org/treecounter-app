@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Animated, Easing, Image } from 'react-native';
-import i18n from '../../locales/i18n';
+import { View } from 'react-native';
 
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
 import svgStyles from '../../styles/common/treecounter_svg';
-
-import TreecounterGraphicsText from './TreecounterGraphicsText';
 
 export default class Trillion extends Component {
   constructor() {

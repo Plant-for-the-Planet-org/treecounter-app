@@ -20,7 +20,18 @@ export default class Redemption extends Component {
   constructor(props) {
     super(props);
   }
-
+  onSetRedemption() {
+    let value = this.refs.redemptionForm.getValue();
+    if (value) {
+      this.props.setRedemptionCode(value);
+    }
+  }
+  onValidationCode() {
+    let value = this.refs.redemptionForm.getValue();
+    if (value) {
+      this.props.validateCode(value);
+    }
+  }
   render() {
     const { code, updateRoute } = this.props;
     let content, button;
@@ -38,7 +49,7 @@ export default class Redemption extends Component {
     ) {
       button = (
         <div className="row">
-          <PrimaryButton onClick={this.props.validateCode}>
+          <PrimaryButton onClick={() => this.onValidationCode()}>
             {i18n.t('label.validate_code')}
           </PrimaryButton>
         </div>
@@ -46,7 +57,7 @@ export default class Redemption extends Component {
     } else if (this.props.pageStatus === 'code-unknown') {
       button = (
         <div className="row">
-          <PrimaryButton onClick={this.props.validateCode}>
+          <PrimaryButton onClick={() => this.onValidationCode()}>
             {i18n.t('label.validate_code')}
           </PrimaryButton>
         </div>
@@ -67,7 +78,7 @@ export default class Redemption extends Component {
     } else {
       button = (
         <div className="row">
-          <PrimaryButton onClick={this.props.setRedemptionCode}>
+          <PrimaryButton onClick={() => this.onSetRedemption()}>
             {this.props.buttonText}
           </PrimaryButton>
         </div>

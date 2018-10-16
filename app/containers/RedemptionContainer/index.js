@@ -98,8 +98,8 @@ class RedemptionContainer extends Component {
       );
     }
   }
-  validateCode = () => {
-    let value = this.refs.redemptionContainer.refs.redemptionForm.getValue();
+  validateCode(data) {
+    let value = data;
     let path;
     if (this.state.path === 'claim') {
       path = 'app_claim';
@@ -114,9 +114,9 @@ class RedemptionContainer extends Component {
         code: value.code
       });
     }
-  };
-  setRedemptionCode = () => {
-    let value = this.refs.redemptionContainer.refs.redemptionForm.getValue();
+  }
+  setRedemptionCode(data) {
+    let value = data;
     let path;
     if (this.state.path === 'claim') {
       path = 'app_claim';
@@ -148,7 +148,7 @@ class RedemptionContainer extends Component {
         error => {}
       );
     }
-  };
+  }
   loginButton = () => {
     const path =
       '/' + this.state.path + '/' + this.state.type + '/' + this.state.code;
@@ -164,13 +164,12 @@ class RedemptionContainer extends Component {
   render() {
     return (
       <Redemption
-        ref={'redemptionContainer'}
         code={this.state.code}
         pageStatus={this.state.pageStatus}
         updateRoute={this.props.route}
-        setRedemptionCode={this.setRedemptionCode}
+        setRedemptionCode={data => this.setRedemptionCode(data)}
         isLoggedIn={this.props.userProfile}
-        validateCode={this.validateCode}
+        validateCode={data => this.validateCode(data)}
         loginButton={this.loginButton}
         signupButton={this.signupButton}
         path={this.state.path}

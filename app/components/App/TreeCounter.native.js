@@ -4,6 +4,8 @@
  */
 
 import React, { Component } from 'react';
+//TODO import this first to avoid any init issue of i18n
+import i18n from '../../locales/i18n.js';
 import AppDrawerNavigatorContainer from '../../containers/Navigators/AppDrawerNavigatorContainer';
 import { connect } from 'react-redux';
 import { loadTpos } from '../../actions/loadTposAction';

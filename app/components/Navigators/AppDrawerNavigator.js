@@ -29,6 +29,8 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import GiftTrees from '../../containers/GiftTrees';
 import LeaderBoard from '../Leaderboard';
 import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
+import RegisterTrees from '../../containers/RegisterTrees';
+import EditUserContributionContainer from '../../containers/EditUserContribution';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -50,6 +52,9 @@ const headerLabels = {
 export const getAppNavigator = function(isLoggedIn) {
   const baseNavigator = createStackNavigator(
     {
+      [getLocalRoute('app_registerTrees')]: {
+        screen: RegisterTrees
+      },
       [getLocalRoute('app_userHome')]: {
         screen: isLoggedIn ? UserHomeContainer : LoginContainer
       },
@@ -128,7 +133,8 @@ export const getAppNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_explore')]: {
         screen: LeaderBoard
-      }
+      },
+      [getLocalRoute('app_editTrees')]: EditUserContributionContainer
     },
     {
       tabBarOptions: {

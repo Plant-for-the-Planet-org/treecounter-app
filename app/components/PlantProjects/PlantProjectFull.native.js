@@ -46,14 +46,20 @@ class PlantProjectFull extends React.Component {
       paymentSetup,
       survivalRate: survivalRate,
       images,
+      imageFile,
       description,
       homepageUrl: homepageUrl,
       homepageCaption: homepageCaption,
       videoUrl: videoUrl,
       geoLocation
     } = this.props.plantProject;
-    const projectImage =
-      plantProjectImages && plantProjectImages.find(() => true);
+    let projectImage = null;
+
+    if (imageFile) {
+      projectImage = { image: imageFile };
+    } else {
+      projectImage = plantProjectImages && plantProjectImages.find(() => true);
+    }
 
     const teaserProps = {
       tpoName: this.props.tpoName,

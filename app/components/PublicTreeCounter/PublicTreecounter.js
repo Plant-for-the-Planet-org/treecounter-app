@@ -115,41 +115,32 @@ class PublicTreeCounter extends React.Component {
 
           {('individual' == userProfile.type ||
             'plantAmbassador' == userProfile.type) && (
-            <SupportButton
-              {...supportProps}
-              buttonLabel={i18n.t('label.gift_trees')}
-              onRegisterSupporter={this.onRegisterSupporter}
-            />
+            <div className="support-button-container ">
+              <SupportButton
+                {...supportProps}
+                buttonLabel={i18n.t('label.gift_trees')}
+                onRegisterSupporter={this.onRegisterSupporter}
+              />
+            </div>
           )}
 
           {('company' == userProfile.type ||
             'education' == userProfile.type ||
             'non-profit' == userProfile.type ||
             'govt' == userProfile.type ||
-            'plantClub' == userProfile.type) &&
-            !isMyself(treecounter, currentUserProfile) && (
-              <div className="support-button-container ">
-                <SupportButton
-                  {...supportProps}
-                  buttonLabel={i18n.t('label.plant_trees')}
-                  onRegisterSupporter={this.onRegisterSupporter}
-                />
-              </div>
-            )}
-          {('company' == userProfile.type ||
-            'education' == userProfile.type ||
-            'non-profit' == userProfile.type ||
-            'govt' == userProfile.type ||
-            'plantClub' == userProfile.type) &&
-            isMyself(treecounter, currentUserProfile) && (
-              <div className="support-button-container ">
-                <SupportButton
-                  {...supportProps}
-                  buttonLabel={i18n.t('label.support')}
-                  onRegisterSupporter={this.onRegisterSupporter}
-                />
-              </div>
-            )}
+            'plantClub' == userProfile.type) && (
+            <div className="support-button-container ">
+              <SupportButton
+                {...supportProps}
+                buttonLabel={
+                  isUserLoggedIn
+                    ? i18n.t('label.support')
+                    : i18n.t('label.plant_trees')
+                }
+                onRegisterSupporter={this.onRegisterSupporter}
+              />
+            </div>
+          )}
         </div>
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />

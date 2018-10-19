@@ -121,28 +121,30 @@ export default class RegisterTrees extends Component {
           </DescriptionHeading>
         </TextHeading>
         <CardLayout>
-          <Tabs
-            data={RegisterTrees.data.tabs}
-            onTabChange={this.handleModeOptionChange}
-          >
-            {this.state.mode === RegisterTrees.data.tabs[0].id ? (
-              <TCombForm
-                ref="registerTreeForm"
-                type={singleTreeRegisterFormSchema}
-                options={schemaOptionsSingle}
-                value={this.state.individual}
-              />
-            ) : (
-              <TCombForm
-                ref="registerTreeForm"
-                type={multipleTreesRegisterFormSchema}
-                options={schemaOptionsMultiple}
-              />
-            )}
-          </Tabs>
-          <PrimaryButton onClick={this.onSubmitClick}>
-            {i18n.t('label.register')}
-          </PrimaryButton>
+          <form onSubmit={this.onSubmitClick}>
+            <Tabs
+              data={RegisterTrees.data.tabs}
+              onTabChange={this.handleModeOptionChange}
+            >
+              {this.state.mode === RegisterTrees.data.tabs[0].id ? (
+                <TCombForm
+                  ref="registerTreeForm"
+                  type={singleTreeRegisterFormSchema}
+                  options={schemaOptionsSingle}
+                  value={this.state.individual}
+                />
+              ) : (
+                <TCombForm
+                  ref="registerTreeForm"
+                  type={multipleTreesRegisterFormSchema}
+                  options={schemaOptionsMultiple}
+                />
+              )}
+            </Tabs>
+            <PrimaryButton onClick={this.onSubmitClick}>
+              {i18n.t('label.register')}
+            </PrimaryButton>
+          </form>
         </CardLayout>
       </div>
     );

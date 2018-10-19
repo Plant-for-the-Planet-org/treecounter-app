@@ -9,6 +9,7 @@ import { NotificationAction } from './notificationAction';
 import { loadTpos } from './loadTposAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import _ from 'lodash';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 export const userLogout = createAction('USER_LOGOUT');
 export function login(data, navigation = undefined) {
   const request = postRequest('api_login_check', data);
@@ -17,11 +18,16 @@ export function login(data, navigation = undefined) {
     dispatch(setProgressModelState(true));
     request
       .then(res => {
-        const { token, refresh_token } = res.data;
+        const { token, refresh_token, data } = res.data;
         updateJWT(token, refresh_token);
         dispatch(loadUserProfile());
         dispatch(NotificationAction());
-        updateRoute('app_userHome', navigation || dispatch);
+        updateRoute(
+          data.routeName,
+          navigation || dispatch,
+          null,
+          data.routeParams
+        );
         _.delay(() => dispatch(setProgressModelState(false)), 1000);
         return token;
       })
@@ -56,5 +62,18 @@ export function reset_password(data) {
         updateRoute('app_login', dispatch);
       })
       .catch(err => debug(err));
+  };
+}
+export function setAccessDenied(data, params, path) {
+  return dispatch => {
+    postRequest('public_accessDenied', data, params)
+      .then(res => {
+        const { statusText } = res;
+        updateRoute(path, dispatch);
+        NotificationManager.success(statusText, 'Success', 5000);
+      })
+      .catch(error => {
+        // NotificationManager.error(error.response.data.message, 'Error', 5000);
+      });
   };
 }

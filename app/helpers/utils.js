@@ -85,6 +85,7 @@ export const profileTypeToImage = {
 
 export function mergeContributionImages(updatedTreeContribution) {
   if (
+    !updatedTreeContribution ||
     !updatedTreeContribution.contributionImages ||
     updatedTreeContribution.contributionImages.length == 0
   ) {

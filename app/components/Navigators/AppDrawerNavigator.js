@@ -44,7 +44,7 @@ const headerLabels = {
   [getLocalRoute('app_homepage')]: 'World',
   [getLocalRoute('app_userHome')]: 'Me',
   [getLocalRoute('app_userHome')]: 'Me',
-  [getLocalRoute('app_editTrees')]: 'Edit trees',
+  [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license'

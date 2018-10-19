@@ -42,8 +42,10 @@ const headerLabels = {
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
   [getLocalRoute('app_homepage')]: 'World',
+  [getLocalRoute('app_explore')]: 'label.explore',
   [getLocalRoute('app_userHome')]: 'Me',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
+  [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license'

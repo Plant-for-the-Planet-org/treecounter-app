@@ -43,7 +43,6 @@ const headerLabels = {
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
   [getLocalRoute('app_homepage')]: 'World',
   [getLocalRoute('app_userHome')]: 'Me',
-  [getLocalRoute('app_userHome')]: 'Me',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
@@ -121,6 +120,13 @@ export const getAppNavigator = function(isLoggedIn) {
           title = i18n.t(
             headerLabels[navigation.state.routes[index].routeName]
           );
+          if (navigation.state.routes[index].hasOwnProperty('params')) {
+            const childTitle = navigation.state.routes[index].params.titleParam;
+
+            if (childTitle) {
+              title = childTitle;
+            }
+          }
         }
       }
     } catch (err) {

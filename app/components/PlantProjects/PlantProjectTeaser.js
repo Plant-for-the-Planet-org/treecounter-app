@@ -16,7 +16,7 @@ const PlantProjectTeaser = ({
   return (
     <div className="project-teaser__container">
       <div className="column">
-        <span>
+        <span className="teaser__tpoHeading">
           {projectName}{' '}
           <span>
             {isCertified ? (

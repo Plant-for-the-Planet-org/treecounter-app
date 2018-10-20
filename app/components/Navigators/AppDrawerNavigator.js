@@ -42,8 +42,10 @@ const headerLabels = {
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
   [getLocalRoute('app_homepage')]: 'World',
+  [getLocalRoute('app_explore')]: 'label.explore',
   [getLocalRoute('app_userHome')]: 'Me',
-  [getLocalRoute('app_userHome')]: 'Me',
+  [getLocalRoute('app_editTrees')]: 'label.edit_trees',
+  [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license'
@@ -75,7 +77,8 @@ export const getAppNavigator = function(isLoggedIn) {
 
       ['about_us']: { screen: AboutUsContainer },
 
-      ['license_info_list']: { screen: LicenseInfoList }
+      ['license_info_list']: { screen: LicenseInfoList },
+      [getLocalRoute('app_editTrees')]: EditUserContributionContainer
     },
     {
       headerMode: 'none',
@@ -103,11 +106,41 @@ export const getAppNavigator = function(isLoggedIn) {
       }
     }
   );
+  const getTitle = function(navigation) {
+    let title = navigation.getParam('titleParam');
+    try {
+      if (!title) {
+        title = i18n.t(headerLabels[navigation.state.routeName]);
+      }
+      if (!title) {
+        const index = navigation.state.index;
+        if (
+          index > -1 &&
+          navigation.state.routes &&
+          navigation.state.routes.length > 0
+        ) {
+          title = i18n.t(
+            headerLabels[navigation.state.routes[index].routeName]
+          );
+          if (navigation.state.routes[index].hasOwnProperty('params')) {
+            const childTitle = navigation.state.routes[index].params.titleParam;
 
+            if (childTitle) {
+              title = childTitle;
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
+    return title;
+  };
   const ApptabNavigator = createBottomTabNavigator(
     {
       [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer
+        screen: isLoggedIn ? UserHomeContainer : Trillion
       },
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
@@ -133,8 +166,7 @@ export const getAppNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_explore')]: {
         screen: LeaderBoard
-      },
-      [getLocalRoute('app_editTrees')]: EditUserContributionContainer
+      }
     },
     {
       tabBarOptions: {
@@ -160,10 +192,7 @@ export const getAppNavigator = function(isLoggedIn) {
           headerStyle: styles.container,
           headerTintColor: '#fff',
           headerBackTitle: null,
-          title:
-            title != undefined
-              ? title
-              : i18n.t(headerLabels[navigation.state.routeName])
+          title: getTitle(navigation)
         };
         // if (homeRoutes.includes(navigation.state.routeName)) {
         navigationConfig.headerRight = HeaderRight(navigation);

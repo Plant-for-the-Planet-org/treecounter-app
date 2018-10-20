@@ -24,6 +24,9 @@ class TreecounterGraphicsText extends Component {
   // }
 
   convertNumber(n, d) {
+    if (isNaN(n) || undefined) {
+      return 0;
+    }
     let x = ('' + n).length;
     if (x > 5) {
       let p = Math.pow;
@@ -108,7 +111,8 @@ class TreecounterGraphicsText extends Component {
                 ) : null}
               </span>
             </div>
-            {this.props.trillion ? null : (
+            {this.props.trillion ||
+            this.convertNumber(parseInt(community), 2) == 0 ? null : (
               <div className="svg-text-container__row--col2">
                 <ArrowButton onToggle={e => this.updateState(e)} />
               </div>
@@ -117,8 +121,8 @@ class TreecounterGraphicsText extends Component {
         </div>
       ) : (
         <PlantedDetails
-          personal={personal}
-          community={community}
+          personal={this.convertNumber(parseInt(personal), 2)}
+          community={this.convertNumber(parseInt(community), 2)}
           type={type}
           onToggle={e => this.updateState(false)}
         />

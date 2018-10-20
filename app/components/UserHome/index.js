@@ -32,7 +32,8 @@ export default class UserHome extends Component {
   }
   updateSvg(toggle) {
     if (toggle) {
-      const treecounter = this.props.treecounter;
+      const treecounter = this.props.treecounterData;
+      const profileType = this.props.userProfile.type;
       let svgData = {
         id: treecounter.id,
         target: treecounter.countCommunity + treecounter.countPersonal, // light color
@@ -41,11 +42,12 @@ export default class UserHome extends Component {
         personal: treecounter.countPersonal,
         targetComment: treecounter.targetComment,
         targetYear: treecounter.targetYear,
-        type: treecounter.userProfile.type
+        type: profileType
       };
       this.setState({ svgData: Object.assign({}, svgData) });
     } else {
-      const treecounter = this.props.treecounter;
+      const treecounter = this.props.treecounterData;
+      const profileType = this.props.userProfile.type;
       let svgData = {
         id: treecounter.id,
         target: treecounter.countTarget,
@@ -54,7 +56,7 @@ export default class UserHome extends Component {
         personal: treecounter.countPersonal,
         targetComment: treecounter.targetComment,
         targetYear: treecounter.targetYear,
-        type: treecounter.userProfile.type
+        type: profileType
       };
       this.setState({ svgData: Object.assign({}, svgData) });
     }

@@ -7,12 +7,12 @@ import { getLocalRoute } from '../../actions/apiRouting';
 
 export default class Menu extends Component {
   sideNavImage() {
+    const route = this.props.userProfile
+      ? getLocalRoute('app_userHome')
+      : getLocalRoute('app_homepage');
     return (
       <div className="app-container__sidenav--image">
-        <Link
-          to={getLocalRoute('app_homepage')}
-          onClick={() => this.linkClicked()}
-        >
+        <Link to={route} onClick={() => this.linkClicked()}>
           {' '}
           <img src={images['SideMenuImage']} />
         </Link>
@@ -109,5 +109,6 @@ Menu.propTypes = {
   path: PropTypes.string,
   toggleSideNavAction: PropTypes.func.isRequired,
   clearSupport: PropTypes.func,
-  pathname: PropTypes.string
+  pathname: PropTypes.string,
+  userProfile: PropTypes.any
 };

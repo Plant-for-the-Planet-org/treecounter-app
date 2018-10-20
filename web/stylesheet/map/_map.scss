@@ -5,3 +5,13 @@
   margin-top: 20px;
   box-sizing: border-box;
 }
+.map-template__error {
+  input {
+    border-color: $colorError;
+  }
+}
+.map-template__error-disc {
+  .error-msg {
+    margin-top: 0;
+  }
+}

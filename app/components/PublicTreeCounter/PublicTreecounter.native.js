@@ -8,7 +8,7 @@ import PlantProjectCarousel from '../PlantProjects/PlantProjectCarousel';
 import SvgContainer from '../Common/SvgContainer';
 import CardLayout from '../Common/Card';
 import stylesHome from '../../styles/user-home';
-import stylesPublicPage from '../../styles/public-page';
+import stylesPublicPage from '../../styles/public-page.native';
 
 import {
   getProfileTypeName,
@@ -104,6 +104,7 @@ class PublicTreeCounter extends React.Component {
         <View style={stylesPublicPage.header}>
           <TreecounterHeader
             {...headerProps}
+            containerStyle={{ width: '70%' }}
             followChanged={this.onFollowChanged}
           />
           {'tpo' !== userProfile.type &&

@@ -10,7 +10,7 @@ export default class Menu extends Component {
     return (
       <div className="app-container__sidenav--image">
         <Link
-          to={getLocalRoute('app_userHome')}
+          to={getLocalRoute('app_homepage')}
           onClick={() => this.linkClicked()}
         >
           {' '}

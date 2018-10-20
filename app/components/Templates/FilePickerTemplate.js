@@ -30,7 +30,7 @@ export function FilePickerTemplate(locals) {
           className="browse-button"
           onClick={() => console.log('clicked Browse', this.refs)}
         >
-          {i18n.t('label.browse')}
+          {i18n.t(locals.label)}
         </button>
         {!locals.value ? (
           <span className="value-label">{i18n.t('label.select_file')}</span>

@@ -80,14 +80,20 @@ export default (treecounterStyles = EStyleSheet.create({
     justifyContent: 'center'
   },
   svgColumn1: {
-    maxWidth: 40,
-    maxHeight: 40,
+    maxWidth: 30,
+    maxHeight: 30,
     resizeMode: 'contain',
     marginRight: 10
   },
   svgColumn2: {
     maxWidth: 100,
     maxHeight: 40
+  },
+  svgArrow: {
+    width: '30%',
+    height: '60%',
+    alignSelf: 'center',
+    marginLeft: 10
   },
   divider: {
     height: 3,
@@ -110,5 +116,13 @@ export default (treecounterStyles = EStyleSheet.create({
     color: '#686060',
     fontWeight: '600',
     width: 'auto'
-  }
+  },
+  closeContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    padding: 5
+  },
+  closeIcon: { width: 20, height: 20 },
+  closeIconImg: { width: '100%', height: '100%' }
 }));

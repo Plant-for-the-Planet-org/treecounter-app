@@ -19,7 +19,7 @@ class SideMenuContainer extends Component {
   constructor() {
     super();
     this.state = {
-      schema: {},
+      schema: [],
       loading: true
     };
   }

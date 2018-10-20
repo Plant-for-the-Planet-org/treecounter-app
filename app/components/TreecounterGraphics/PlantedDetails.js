@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
 import ReactTooltip from 'react-tooltip';
 import { questionmark_orange, close_green } from '../../assets';
-import { pot, tree, tree_outline } from '../../assets';
+import { tree, tree_outline } from '../../assets';
 
 const PlantedDetails = ({ personal, community, type, onToggle }) => (
   <div className="svg-text-container">

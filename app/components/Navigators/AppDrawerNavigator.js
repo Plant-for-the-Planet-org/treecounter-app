@@ -25,12 +25,12 @@ import SearchLayout from '../Header/SearchLayout.native';
 import AboutUsContainer from '../../containers/AboutUs';
 import LicenseInfoList from '../AboutUs/LicenseInfoList.native';
 import TabContainer from '../../containers/Menu/TabContainer';
-import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import GiftTrees from '../../containers/GiftTrees';
 import LeaderBoard from '../Leaderboard';
 import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
 import RegisterTrees from '../../containers/RegisterTrees';
 import EditUserContributionContainer from '../../containers/EditUserContribution';
+import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -154,7 +154,6 @@ export const getAppNavigator = function(isLoggedIn) {
     },
     {
       navigationOptions: ({ navigation }) => {
-        console.log('navigation options', navigation);
         let title = navigation.getParam('titleParam');
         let navigationConfig = {
           headerStyle: styles.container,

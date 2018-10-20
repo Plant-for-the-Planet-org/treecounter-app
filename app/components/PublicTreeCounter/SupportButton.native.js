@@ -2,19 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Image } from 'react-native';
 import { gift_icon } from '../../assets';
-
+import TouchableItem from '../Common/TouchableItem.native';
 import styles from '../../styles/public-page';
 
 const SupportButton = ({ active, isUserLoggedIn, onRegisterSupporter }) => {
   return (
-    <View style={styles.giftIcon}>
+    <TouchableItem
+      activeOpacity={0.6}
+      style={styles.giftIcon}
+      onPress={() => onRegisterSupporter()}
+    >
       <Image
         source={gift_icon}
-        onClick={() =>
-          isUserLoggedIn && active ? onRegisterSupporter() : null
-        }
+        onClick={() => (true ? onRegisterSupporter() : null)}
       />
-    </View>
+    </TouchableItem>
   );
 };
 

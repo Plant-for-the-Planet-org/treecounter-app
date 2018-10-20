@@ -49,6 +49,7 @@ class PublicTreecounterContainer extends Component {
     this.fetchAndSetSearchResult(this.props);
   }
   componentWillReceiveProps(nextProps) {
+    console.log('test, props', nextProps);
     if (this.getTreeCounterId(this.props) === this.getTreeCounterId(nextProps))
       return;
     this.fetchAndSetSearchResult(nextProps);
@@ -63,7 +64,9 @@ class PublicTreecounterContainer extends Component {
         unfollowSubscribeAction={this.props.unfollowSubscribeAction}
         selectPlantProjectIdAction={this.props.selectPlantProjectIdAction}
         supportTreecounterAction={this.props.supportTreecounterAction}
-        route={this.props.route}
+        route={(routeName, id, params) =>
+          this.props.route(routeName, id, params, this.props.navigation)
+        }
       />
     );
   }
@@ -77,8 +80,8 @@ const mapDispatchToProps = dispatch => {
       followSubscribeAction: followUser,
       unfollowSubscribeAction: unfollowUser,
       treecounterLookupAction: treecounterLookupAction,
-      route: (routeName, id, params) => dispatch =>
-        updateRoute(routeName, dispatch, id, params)
+      route: (routeName, id, params, navigation) => dispatch =>
+        updateRoute(routeName, navigation || dispatch, id, params)
     },
     dispatch
   );

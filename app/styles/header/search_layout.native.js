@@ -23,6 +23,6 @@ export default (styles = EStyleSheet.create({
   profileText: {
     fontSize: 20,
     color: '#b9d384',
-    width: '98%'
+    width: '97%'
   }
 }));

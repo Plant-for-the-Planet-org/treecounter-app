@@ -8,6 +8,7 @@ import { iosLogout, iosFaqs, ProfilePic, iosInformation } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { getImageUrl } from '../../actions/apiRouting';
+import TouchableItem from '../../components/Common/TouchableItem.native';
 
 import { row } from '../../styles/common/common_styles';
 
@@ -24,12 +25,19 @@ export default class Menu extends Component {
     const { navigation } = this.props;
     updateRoute(item.uri, navigation, 0);
   };
+  onPressUserProfile = () => {
+    const { navigation } = this.props;
+    updateRoute('app_userHome', navigation, 0);
+  };
 
   render() {
     return (
       <SafeAreaView style={styles.outerContainer}>
         {this.props.userProfile ? (
-          <View style={styles.profileContainer}>
+          <TouchableItem
+            style={styles.profileContainer}
+            onPress={() => this.onPressUserProfile()}
+          >
             <Image
               style={styles.profileImageStyle}
               source={
@@ -51,7 +59,7 @@ export default class Menu extends Component {
             <Text style={styles.profileText}>
               {this.props.userProfile.email}
             </Text>
-          </View>
+          </TouchableItem>
         ) : (
           <View style={styles.profileContainer}>
             <Image style={styles.profileImageStyle} source={ProfilePic} />

@@ -12,7 +12,10 @@ export default (selectplantprojectFull = EStyleSheet.create({
     height: 150
   },
   selectedItemStyle: {
-    backgroundColor: '#efefef'
+    backgroundColor: '#e3e3e3'
+  },
+  evenItemStyle: {
+    backgroundColor: '#f0f0f0'
   },
   projectNameContainer: {
     paddingTop: 5,

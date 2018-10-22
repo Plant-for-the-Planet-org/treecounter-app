@@ -90,11 +90,15 @@ export default (treecounterStyles = EStyleSheet.create({
     width: '30%',
     maxHeight: 30,
     resizeMode: 'contain',
-    marginRight: 10
+    marginRight: 10,
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
   svgColumn2: {
     width: '70%',
-    maxHeight: 40
+    maxHeight: 40,
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
   svgColumn2Temp: {
     width: '70%',
@@ -117,7 +121,8 @@ export default (treecounterStyles = EStyleSheet.create({
     marginBottom: 10,
     marginLeft: 'auto',
     marginRight: 'auto',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignSelf: 'center'
   },
   svgTitleText: {
     fontSize: 10,

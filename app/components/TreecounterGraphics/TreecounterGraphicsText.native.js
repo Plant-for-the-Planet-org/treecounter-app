@@ -93,8 +93,7 @@ class TreecounterGraphicsText extends Component {
                 <Text style={svgStyles.svgTextValue}>
                   {this.convertNumber(parseInt(planted), 2)}
                 </Text>
-                {this.props.trillion ||
-                this.convertNumber(parseInt(community), 2) == 0 ? null : (
+                {this.props.trillion ? null : (
                   <View style={svgStyles.svgArrow}>
                     <ArrowButton onToggle={e => this.updateState(e)} />
                   </View>

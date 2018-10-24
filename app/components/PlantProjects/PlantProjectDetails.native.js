@@ -18,7 +18,7 @@ class PlantProjectDetails extends React.Component {
       vUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
     }
     return (
-      <View style={{ height: 200 }}>
+      <View style={{ height: 200, width: '100%' }}>
         <VideoContainer url={vUrl} />
       </View>
     );

@@ -31,7 +31,6 @@ const PlantProjectDetails = ({
         <UserHomepageLink homepageUrl={homepageUrl} caption={homepageCaption} />
       )}
       {videoUrl && <VideoContainer url={videoUrl} />}
-      {/* {mapData && <ArcGISContributionsMap mapData={mapData} />} */}
     </div>
   );
 };

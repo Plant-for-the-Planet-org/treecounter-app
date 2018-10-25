@@ -71,7 +71,7 @@ export default class SvgContainer extends Component {
     if (target === 0) {
       return 72;
     } else {
-      return Math.round(72 / (0 + target / planted));
+      return Math.round(72 / (1 + target / planted));
     }
   }
 

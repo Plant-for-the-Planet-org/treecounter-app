@@ -17,11 +17,7 @@ class PlantProjectDetails extends React.Component {
     if (context.debug && !this.props.videoUrl) {
       vUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
     }
-    return (
-      <View style={{ height: 200 }}>
-        <VideoContainer url={vUrl} />
-      </View>
-    );
+    return <VideoContainer url={vUrl} />;
   }
 }
 

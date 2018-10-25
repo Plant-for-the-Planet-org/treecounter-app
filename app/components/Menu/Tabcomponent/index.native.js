@@ -37,7 +37,11 @@ export default class TabComponent extends Component {
           width: '100%',
           flexDirection: 'row',
           justifyContent: 'space-between',
-          paddingRight: 10
+          paddingRight: 10,
+          backgroundColor: 'white',
+          shadowOffset: { width: 0, height: 4 },
+          shadowColor: 'rgba(0, 0, 0, 0.1)',
+          shadowRadius: 12
         }}
       >
         {this.props.menuData &&

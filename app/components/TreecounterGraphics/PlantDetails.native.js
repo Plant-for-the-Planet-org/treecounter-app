@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
-import { close_green, darkTree, tree_outline } from '../../assets';
+import { close_green, darkTree, lightTree } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import svgStyles from '../../styles/common/treecounter_svg';
 import { View, Image, Text } from 'react-native';
@@ -64,7 +64,7 @@ class PlantedDetails extends Component {
         </View>
         <View style={svgStyles.divider} />
         <View style={svgStyles.svgTextRow}>
-          <Image style={svgStyles.svgColumn1} source={tree_outline} />
+          <Image style={svgStyles.svgColumn1} source={lightTree} />
           <View style={svgStyles.svgColumn2Temp}>
             <View>
               <Text style={{ fontSize: 8, color: '#686060', width: 'auto' }}>

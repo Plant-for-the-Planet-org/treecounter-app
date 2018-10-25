@@ -18,6 +18,10 @@ import { redeemSignIn, redeemRed, redeemGreen } from '../../assets';
 
 let TCombForm = t.form.Form;
 
+// const allSchemaOptions = {
+//   template: formLayout,
+//   ...schemaOptions
+// };
 export default class Redemption extends Component {
   constructor(props) {
     super(props);
@@ -121,7 +125,13 @@ export default class Redemption extends Component {
       );
     } else {
       form = null;
-      button = null;
+      button = (
+        <div className="row">
+          <PrimaryButton onClick={() => this.onSetRedemption()}>
+            {this.props.buttonText}
+          </PrimaryButton>
+        </div>
+      );
     }
     let value = { code: this.props.code };
     let heading;

@@ -13,6 +13,8 @@ import TextHeading from '../Common/Heading/TextHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n.js';
+import DescriptionHeading from '../Common/Heading/DescriptionHeading';
+import { redeemSignIn, redeemRed, redeemGreen } from '../../assets';
 
 let TCombForm = t.form.Form;
 
@@ -34,13 +36,32 @@ export default class Redemption extends Component {
   }
   render() {
     const { code, updateRoute } = this.props;
-    let content, button;
+    let content,
+      button,
+      icon,
+      errorText,
+      successText,
+      actionText,
+      statusText,
+      form;
+    errorText = this.props.errorText ? (
+      <div className="pftp-description-heading">{this.props.errorText}</div>
+    ) : null;
+    successText = this.props.successText ? (
+      <div className="pftp-description-heading">{this.props.successText}</div>
+    ) : null;
+    actionText = this.props.actionText ? (
+      <div className="pftp-description-heading">{this.props.actionText}</div>
+    ) : null;
+    statusText = this.props.statusText ? (
+      <div className="pftp-description-heading">{this.props.statusText}</div>
+    ) : null;
     content = (
       <div>
-        <div className="no-contribution-wrapper">{this.props.actionText}</div>
-        <div className="no-contribution-wrapper">{this.props.errorText}</div>
-        <div className="no-contribution-wrapper">{this.props.successText}</div>
-        <div className="no-contribution-wrapper">{this.props.statusText}</div>
+        {actionText}
+        {errorText}
+        {successText}
+        {statusText}
       </div>
     );
     if (
@@ -54,6 +75,7 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </div>
       );
+      icon = redeemRed;
     } else if (this.props.pageStatus === 'code-unknown') {
       button = (
         <div className="row">
@@ -62,6 +84,7 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </div>
       );
+      icon = redeemGreen;
     } else if (this.props.pageStatus === 'not-logged-in') {
       button = (
         <div className="redemption-form">
@@ -75,6 +98,7 @@ export default class Redemption extends Component {
           </div>
         </div>
       );
+      icon = redeemSignIn;
     } else {
       button = (
         <div className="row">
@@ -83,8 +107,22 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </div>
       );
+      icon = redeemGreen;
     }
 
+    if (this.props.pageStatus !== 'success') {
+      form = (
+        <TCombForm
+          ref="redemptionForm"
+          type={redemptionFormSchema}
+          options={schemaOptions}
+          value={value}
+        />
+      );
+    } else {
+      form = null;
+      button = null;
+    }
     let value = { code: this.props.code };
     let heading;
     if (this.props.path === 'redeem') {
@@ -100,28 +138,16 @@ export default class Redemption extends Component {
       <div className="app-container__content--center sidenav-wrapper redemption_container">
         <TextHeading>
           {heading}
-          <TextBlock>{i18n.t('label.trillionTreeMessage1')}</TextBlock>
+          <DescriptionHeading>
+            {i18n.t('label.redeem_heading')}
+          </DescriptionHeading>
         </TextHeading>
-        <CardLayout>
+        <CardLayout className="redeem_card_layout">
+          <div className="imageContainerRedeem">
+            <img src={icon} />
+          </div>
           {content}
-          {/*<div className="events_row">*/}
-          {/*{this.props.tpos*/}
-          {/*.map(element => (*/}
-          {/*<div>*/}
-          {/*<div className="imgContainer">*/}
-          {/*<img src={getImageUrl('event', 'thumb', element.icon)} />*/}
-          {/*</div>*/}
-
-          {/*<TextBlock>{element.name}</TextBlock>*/}
-          {/*</div>*/}
-          {/*))}*/}
-          {/*</div>*/}
-          <TCombForm
-            ref="redemptionForm"
-            type={redemptionFormSchema}
-            options={schemaOptions}
-            value={value}
-          />
+          {form}
           {button}
         </CardLayout>
       </div>

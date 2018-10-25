@@ -1,4 +1,25 @@
 .redemption_container {
+
+  .redeem_card_layout {
+    @extend .pftp-card-layout;
+    max-width: 416px;
+
+    .imageContainerRedeem {
+      width: 76px;
+      height: 76px;
+      margin: 35px;
+      @include for-phone-only {
+        width: 66px;
+        height: 66px;
+        img {
+          width: 66px;
+          height: 66px;
+        }
+      }
+    }
+  }
+
+
   .pftp-card-layout {
     .redemption-form {
       display: flex;

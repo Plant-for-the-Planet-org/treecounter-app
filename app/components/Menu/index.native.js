@@ -84,7 +84,7 @@ export default class Menu extends Component {
           <View style={styles.centerMenu}>
             <LargeMenuItem
               onPress={() => {
-                this.onPressMenu({ uri: getLocalRoute('app_faq') });
+                this.onPressMenu({ uri: getLocalRoute('app_editProfile') });
               }}
               title={i18n.t('label.edit_profile')}
               iconUrl={EditGreen}

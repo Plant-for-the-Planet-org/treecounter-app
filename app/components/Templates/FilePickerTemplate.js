@@ -16,7 +16,26 @@ export function FilePickerTemplate(locals) {
     } else locals.onChange($event.target.value);
   }
   let error = locals.hasError;
-
+  let label;
+  if (locals.label !== 'label.upload_profile_picture') {
+    if (!locals.value) {
+      label = (
+        <span className="value-label">{i18n.t('label.select_file')}</span>
+      );
+    } else {
+      label = (
+        <img
+          src={
+            !locals.value.includes('base64')
+              ? getImageUrl('project', 'small', locals.value)
+              : locals.value
+          }
+        />
+      );
+    }
+  } else {
+    label = null;
+  }
   return (
     <div className="filepicker-wrapper">
       <div className="pftp-filepicker">
@@ -32,17 +51,7 @@ export function FilePickerTemplate(locals) {
         >
           {i18n.t(locals.label)}
         </button>
-        {!locals.value ? (
-          <span className="value-label">{i18n.t('label.select_file')}</span>
-        ) : (
-          <img
-            src={
-              !locals.value.includes('base64')
-                ? getImageUrl('project', 'small', locals.value)
-                : locals.value
-            }
-          />
-        )}
+        {label}
       </div>
       {error && locals.error ? locals.error : null}
     </div>

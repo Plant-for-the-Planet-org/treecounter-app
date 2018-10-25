@@ -30,6 +30,37 @@ export default class UserHome extends Component {
       this.setState({ svgData });
     }
   }
+  updateSvg(toggle) {
+    if (toggle) {
+      const treecounter = this.props.treecounterData;
+      const profileType = this.props.userProfile.type;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countCommunity + treecounter.countPersonal, // light color
+        planted: treecounter.countPersonal, //dark color
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: profileType
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    } else {
+      const treecounter = this.props.treecounterData;
+      const profileType = this.props.userProfile.type;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countTarget,
+        planted: treecounter.countPlanted,
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: profileType
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    }
+  }
 
   render() {
     const { treecounterData, userProfile } = this.props;
@@ -59,6 +90,7 @@ export default class UserHome extends Component {
             <TreecounterGraphicsText
               trillion={false}
               treecounterData={svgData}
+              onToggle={toggleVal => this.updateSvg(toggleVal)}
             />
           )}
         </div>

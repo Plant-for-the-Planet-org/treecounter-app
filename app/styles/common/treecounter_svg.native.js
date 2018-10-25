@@ -76,29 +76,53 @@ export default (treecounterStyles = EStyleSheet.create({
   },
   svgTextRow: {
     flexDirection: 'row',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center'
   },
+
+  svgPlantDetailRow: {
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center'
+  },
   svgColumn1: {
-    maxWidth: 40,
-    maxHeight: 40,
+    width: '30%',
+    maxHeight: 30,
     resizeMode: 'contain',
-    marginRight: 10
+    marginRight: 10,
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
   svgColumn2: {
-    maxWidth: 100,
-    maxHeight: 40
+    width: '70%',
+    maxHeight: 40,
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  svgColumn2Temp: {
+    width: '70%',
+    maxHeight: 40,
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  svgArrow: {
+    width: '20%',
+    height: 20,
+    alignSelf: 'center',
+    marginLeft: 10
   },
   divider: {
     height: 3,
-    width: '30%',
+    width: '60%',
     position: 'relative',
     backgroundColor: '$primary',
     marginTop: 10,
     marginBottom: 10,
     marginLeft: 'auto',
     marginRight: 'auto',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignSelf: 'center'
   },
   svgTitleText: {
     fontSize: 10,
@@ -110,5 +134,14 @@ export default (treecounterStyles = EStyleSheet.create({
     color: '#686060',
     fontWeight: '600',
     width: 'auto'
-  }
+  },
+  closeContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    margin: 5,
+    maxHeight: 20
+  },
+  closeIcon: { width: 20, height: 20 },
+  closeIconImg: { width: '100%', height: '100%' }
 }));

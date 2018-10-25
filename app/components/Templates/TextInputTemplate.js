@@ -3,6 +3,7 @@ import i18n from '../../locales/i18n';
 import { formatDate } from '../../helpers/utils';
 
 export function TextInputTemplate(locals) {
+  console.log(locals);
   function onChange($event) {
     let value =
       locals.type === 'number' && $event.target.value
@@ -16,19 +17,23 @@ export function TextInputTemplate(locals) {
     return today;
   }
   let error = locals.hasError;
+  let className;
+  if (locals.help === 'redeem') {
+    className = 'pftp-textfield_redeeminput';
+  } else {
+    if (!error) {
+      className = 'pftp-textfield__inputgroup';
+    } else {
+      className = 'pftp-textfield__error-inputgroup';
+    }
+  }
   return locals.type !== 'hidden' ? (
     <div className="pftp-textfield-container">
       <div className="pftp-textfield">
         {locals.config.iconUrl ? (
           <img className="pftp-textfield__icon" src={locals.config.iconUrl} />
         ) : null}
-        <div
-          className={
-            !error
-              ? 'pftp-textfield__inputgroup'
-              : 'pftp-textfield__error-inputgroup'
-          }
-        >
+        <div className={className}>
           {locals.type === 'date' ? (
             <input
               type={locals.type}

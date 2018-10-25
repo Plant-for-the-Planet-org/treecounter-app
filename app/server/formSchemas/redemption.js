@@ -5,7 +5,8 @@ export default {
     code: {
       type: 'string',
       placeholder: 'label.code',
-      propertyOrder: 1
+      propertyOrder: 1,
+      help: 'redeem'
     }
   },
   required: ['code'],

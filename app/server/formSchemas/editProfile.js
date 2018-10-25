@@ -601,7 +601,7 @@ export default {
         properties: {
           imageFile: {
             type: 'string',
-            title: 'label.avatar',
+            title: 'label.upload_profile_picture',
             widget: 'file',
             propertyOrder: 1
           }
@@ -1362,7 +1362,7 @@ export default {
         properties: {
           imageFile: {
             type: 'string',
-            title: 'label.avatar',
+            title: 'label.upload_profile_picture',
             widget: 'file',
             propertyOrder: 1
           }
@@ -2062,7 +2062,7 @@ export default {
         properties: {
           imageFile: {
             type: 'string',
-            title: 'label.avatar',
+            title: 'label.upload_profile_picture',
             widget: 'file',
             propertyOrder: 1
           }
@@ -2762,7 +2762,7 @@ export default {
         properties: {
           imageFile: {
             type: 'string',
-            title: 'label.avatar',
+            title: 'label.upload_profile_picture',
             widget: 'file',
             propertyOrder: 1
           }
@@ -3462,7 +3462,7 @@ export default {
         properties: {
           imageFile: {
             type: 'string',
-            title: 'label.avatar',
+            title: 'label.upload_profile_picture',
             widget: 'file',
             propertyOrder: 1
           }
@@ -4162,7 +4162,7 @@ export default {
         properties: {
           imageFile: {
             type: 'string',
-            title: 'label.avatar',
+            title: 'label.upload_profile_picture',
             widget: 'file',
             propertyOrder: 1
           }
@@ -4290,7 +4290,7 @@ export const plantProject = {
       },
       imageFile: {
         type: 'string',
-        title: 'label.avatar',
+        title: 'label.browse',
         widget: 'file',
         propertyOrder: 4
       },
@@ -4923,7 +4923,7 @@ export const plantProject = {
           properties: {
             image: {
               type: 'string',
-              title: 'imageFile',
+              title: 'label.browse',
               widget: 'file',
               propertyOrder: 1
             },

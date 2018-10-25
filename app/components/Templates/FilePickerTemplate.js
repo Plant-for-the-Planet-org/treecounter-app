@@ -17,25 +17,26 @@ export function FilePickerTemplate(locals) {
   }
   let error = locals.hasError;
   let label;
-  if (locals.label !== 'label.upload_profile_picture') {
-    if (!locals.value) {
+  if (locals.value) {
+    label = (
+      <img
+        src={
+          !locals.value.includes('base64')
+            ? getImageUrl('project', 'small', locals.value)
+            : locals.value
+        }
+      />
+    );
+  } else {
+    if (locals.label !== 'label.upload_profile_picture') {
       label = (
         <span className="value-label">{i18n.t('label.select_file')}</span>
       );
     } else {
-      label = (
-        <img
-          src={
-            !locals.value.includes('base64')
-              ? getImageUrl('project', 'small', locals.value)
-              : locals.value
-          }
-        />
-      );
+      label = null;
     }
-  } else {
-    label = null;
   }
+
   return (
     <div className="filepicker-wrapper">
       <div className="pftp-filepicker">

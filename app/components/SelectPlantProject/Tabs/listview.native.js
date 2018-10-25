@@ -17,9 +17,13 @@ export default class ListViewProjects extends Component {
   constructor(props) {
     super(props);
     this.state = { selectedItem: null };
+    this.toggleExpanded = this.toggleExpanded.bind(this);
   }
   highLightProject(projectId) {
     this.setState({ selectedItem: projectId });
+  }
+  toggleExpanded() {
+    console.log('expanded called');
   }
   render() {
     let { projects } = this.props;
@@ -27,18 +31,21 @@ export default class ListViewProjects extends Component {
       <ScrollView>
         <View style={styles.listContentContainer}>
           {projects.length !== 0
-            ? projects.map(project => (
+            ? projects.map((project, index) => (
                 <TouchableHighlight
                   underlayColor={'transparent'}
                   onPress={() => this.highLightProject(project.id)}
                 >
                   <View
                     style={styles.listItemContainer}
-                    style={
+                    style={[
                       this.state.selectedItem === project.id
                         ? styles.selectedItemStyle
+                        : null,
+                      index % 2 === 0 && this.state.selectedItem !== project.id
+                        ? styles.evenItemStyle
                         : null
-                    }
+                    ]}
                     key={'filtered' + project.id}
                   >
                     <View style={styles.projectNameContainer}>
@@ -91,7 +98,10 @@ export default class ListViewProjects extends Component {
                     </View>
                     <View style={styles.projectButtonContainer}>
                       <View style={{ marginVertical: -5 }}>
-                        <SeeMoreToggle seeMore={true} />
+                        <SeeMoreToggle
+                          seeMore={true}
+                          onToggle={this.toggleExpanded}
+                        />
                       </View>
 
                       <PrimaryButton

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { chevron_right } from '../../assets';
+import TouchableItem from './TouchableItem.native';
+import { Image } from 'react-native';
 
 class ArrowButton extends Component {
   constructor(props) {
@@ -16,16 +18,16 @@ class ArrowButton extends Component {
   }
 
   render() {
-    let arrowStyles = {
-      transform: 'rotate(90deg)'
-    };
     return (
-      <button
-        className="arrow-button-rotatable"
-        onClick={() => this.handleArrowButtonClick()}
+      <TouchableItem
+        style={{ width: '100%', height: '100%' }}
+        onPress={() => this.handleArrowButtonClick()}
       >
-        <img src={chevron_right} />
-      </button>
+        <Image
+          style={{ width: '100%', height: '100%' }}
+          source={chevron_right}
+        />
+      </TouchableItem>
     );
   }
 }

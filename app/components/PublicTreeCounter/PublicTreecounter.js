@@ -70,6 +70,35 @@ class PublicTreeCounter extends React.Component {
       this.setState({ svgData });
     }
   }
+  updateSvg(toggle) {
+    if (toggle) {
+      const treecounter = this.props.treecounter;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countCommunity + treecounter.countPersonal, // light color
+        planted: treecounter.countPersonal, //dark color
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    } else {
+      const treecounter = this.props.treecounter;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countTarget,
+        planted: treecounter.countPlanted,
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    }
+  }
   render() {
     const { treecounter, currentUserProfile } = this.props;
     if (null === treecounter) {
@@ -146,6 +175,7 @@ class PublicTreeCounter extends React.Component {
           <SvgContainer {...this.state.svgData} />
           <TreecounterGraphicsText
             trillion={false}
+            onToggle={toggleVal => this.updateSvg(toggleVal)}
             treecounterData={this.state.svgData}
           />
         </div>

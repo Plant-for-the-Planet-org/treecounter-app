@@ -38,7 +38,7 @@ export const singleTreeForm = {
         properties: {
           image: {
             type: 'string',
-            title: 'imageFile',
+            title: 'label.browse',
             widget: 'file',
             propertyOrder: 1,
             category: 'contribution',
@@ -146,7 +146,7 @@ export const multipleTreesForm = {
         properties: {
           image: {
             type: 'string',
-            title: 'imageFile',
+            title: 'label.browse',
             widget: 'file',
             propertyOrder: 1
           }

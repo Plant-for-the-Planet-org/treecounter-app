@@ -6,6 +6,7 @@ import CardLayout from '../../Common/Card';
 import Proptypes from 'prop-types';
 import ListViewProjects from './listview';
 import { foldout, foldin } from '../../../assets';
+import TouchableItem from '../../Common/TouchableItem.native';
 
 export default class PriceProjects extends Component {
   constructor(props) {
@@ -86,18 +87,18 @@ export default class PriceProjects extends Component {
         <View style={styles.cardHeader}>
           <Text style={styles.headingStyle}>Cost Per Tree</Text>
           <View style={styles.sortContainer}>
-            <TouchableHighlight
+            <TouchableItem
               style={styles.imageStyleContainer}
               onPress={() => this.sortProjects('desc')}
             >
               <Image style={styles.imageStyle} source={foldin} />
-            </TouchableHighlight>
-            <TouchableHighlight
+            </TouchableItem>
+            <TouchableItem
               style={styles.imageStyleContainer}
               onPress={() => this.sortProjects('asc')}
             >
               <Image style={styles.imageStyle} source={foldout} />
-            </TouchableHighlight>
+            </TouchableItem>
           </View>
         </View>
 

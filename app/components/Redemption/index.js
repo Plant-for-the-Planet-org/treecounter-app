@@ -49,7 +49,7 @@ export default class Redemption extends Component {
       statusText,
       form;
     errorText = this.props.errorText ? (
-      <div className="pftp-description-heading">{this.props.errorText}</div>
+      <div className="pftp-error-heading">{this.props.errorText}</div>
     ) : null;
     successText = this.props.successText ? (
       <div className="pftp-description-heading">{this.props.successText}</div>
@@ -62,10 +62,10 @@ export default class Redemption extends Component {
     ) : null;
     content = (
       <div>
-        {actionText}
         {errorText}
-        {successText}
         {statusText}
+        {successText}
+        {actionText}
       </div>
     );
     if (
@@ -91,15 +91,16 @@ export default class Redemption extends Component {
       icon = redeemGreen;
     } else if (this.props.pageStatus === 'not-logged-in') {
       button = (
-        <div className="redemption-form">
-          <div className="row">
-            <PrimaryButton className="half" onClick={this.props.loginButton}>
-              {i18n.t('label.login')}
-            </PrimaryButton>
-            <PrimaryButton className="half" onClick={this.props.signupButton}>
-              {i18n.t('label.signUp')}
-            </PrimaryButton>
-          </div>
+        <div className="row">
+          <PrimaryButton onClick={this.props.loginButton}>
+            {i18n.t('label.login')}
+          </PrimaryButton>
+          <button
+            className="pftp-button-primary1"
+            onClick={this.props.signupButton}
+          >
+            {i18n.t('label.signUp')}
+          </button>
         </div>
       );
       icon = redeemSignIn;
@@ -114,6 +115,7 @@ export default class Redemption extends Component {
       icon = redeemGreen;
     }
 
+    let value = { code: this.props.code };
     if (this.props.pageStatus !== 'success') {
       form = (
         <TCombForm
@@ -127,13 +129,12 @@ export default class Redemption extends Component {
       form = null;
       button = (
         <div className="row">
-          <PrimaryButton onClick={() => this.onSetRedemption()}>
+          <PrimaryButton onClick={() => this.props.updateRoute('app_myTrees')}>
             {this.props.buttonText}
           </PrimaryButton>
         </div>
       );
     }
-    let value = { code: this.props.code };
     let heading;
     if (this.props.path === 'redeem') {
       heading = i18n.t('label.redeem_trees');

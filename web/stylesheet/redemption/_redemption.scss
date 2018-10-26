@@ -1,5 +1,9 @@
 .redemption_container {
 
+  .pftp-error-heading {
+    @extend .pftp-description-heading;
+    color: $colorError;
+  }
   .redeem_card_layout {
     @extend .pftp-card-layout;
     max-width: 416px;
@@ -17,10 +21,7 @@
         }
       }
     }
-  }
 
-
-  .pftp-card-layout {
     .redemption-form {
       display: flex;
       flex-direction: column;
@@ -35,20 +36,31 @@
 
       .half {
         width: 48%;
+        margin-left: 15px;
+        @include for-phone-only {
+          width: 100%;
+        }
+      }
+      .half1 {
+        width: 48%;
         @include for-phone-only {
           width: 100%;
         }
       }
     }
-
     @include for-phone-only {
       padding: 10% 10%;
     }
   }
+
   .pftp-button-primary {
     width: auto;
     margin: auto;
     align-items: center;
     margin-top: 30px;
+  }
+  .pftp-button-primary1 {
+    @extend .pftp-button-primary;
+    margin-left: 15px;
   }
 }

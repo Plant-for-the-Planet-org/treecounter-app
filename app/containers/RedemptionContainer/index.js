@@ -138,7 +138,7 @@ class RedemptionContainer extends Component {
             successText: success.data.response.successText,
             errorText: success.data.response.errorText,
             actionText: success.data.response.actionText,
-            buttonText: success.data.response.buttonText,
+            buttonText: i18n.t('label.my_trees'),
             tpos: success.data.response.tpos
           });
           if (success.data.response.status === 'error') {

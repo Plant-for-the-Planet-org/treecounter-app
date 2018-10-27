@@ -99,6 +99,7 @@ class RedemptionContainer extends Component {
     }
   }
   validateCode(data) {
+    console.log(data);
     let value = data;
     let path;
     if (this.state.path === 'claim') {
@@ -111,7 +112,7 @@ class RedemptionContainer extends Component {
       // this.callSetState(isCode);
       updateRoute(path, null, null, {
         type: this.state.type,
-        code: value.code
+        code: value.code.replace(/\s/g, '')
       });
     }
   }
@@ -127,7 +128,7 @@ class RedemptionContainer extends Component {
     if (value) {
       setRedemptionCodeAction({
         type: this.state.type,
-        code: this.state.code
+        code: this.state.code.replace(/\s/g, '')
       }).then(
         success => {
           this.setState({

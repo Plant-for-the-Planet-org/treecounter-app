@@ -3,7 +3,6 @@ import i18n from '../../locales/i18n';
 import { formatDate } from '../../helpers/utils';
 
 export function TextInputTemplate(locals) {
-  console.log(locals);
   function onChange($event) {
     let value =
       locals.type === 'number' && $event.target.value

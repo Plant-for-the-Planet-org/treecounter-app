@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { View, Image, ScrollView, SafeAreaView, Text } from 'react-native';
 import { LargeMenuItem } from './MenuItem.native';
 import PropTypes, { func } from 'prop-types';
-import styles from '../../styles/menu';
+import styles from '../../styles/menu.native';
 import { updateRoute } from '../../helpers/routerHelper';
-import { iosLogout, iosFaqs, ProfilePic, iosInformation } from '../../assets';
+import {
+  iosLogout,
+  iosFaqs,
+  ProfilePic,
+  iosInformation,
+  EditGreen
+} from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { getImageUrl } from '../../actions/apiRouting';
@@ -75,10 +81,14 @@ export default class Menu extends Component {
           </View>
         )}
         <ScrollView>
-          <View style={styles.imageStyle} />
-        </ScrollView>
-        {this.props.userProfile && (
-          <View>
+          <View style={styles.centerMenu}>
+            <LargeMenuItem
+              onPress={() => {
+                this.onPressMenu({ uri: getLocalRoute('app_editProfile') });
+              }}
+              title={i18n.t('label.edit_profile')}
+              iconUrl={EditGreen}
+            />
             <LargeMenuItem
               onPress={() => {
                 this.onPressMenu({ uri: getLocalRoute('app_faq') });
@@ -86,6 +96,10 @@ export default class Menu extends Component {
               title={i18n.t('label.faqs')}
               iconUrl={iosFaqs}
             />
+          </View>
+        </ScrollView>
+        {this.props.userProfile && (
+          <View>
             <LargeMenuItem
               onPress={() => {
                 this.props.logoutUser();

@@ -30,6 +30,7 @@ import LeaderBoard from '../Leaderboard';
 import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
 import RegisterTrees from '../../containers/RegisterTrees';
 import EditUserContributionContainer from '../../containers/EditUserContribution';
+import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 
 const headerLabels = {
@@ -45,6 +46,7 @@ const headerLabels = {
   [getLocalRoute('app_explore')]: 'label.explore',
   [getLocalRoute('app_userHome')]: 'Me',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
+  [getLocalRoute('app_editProfile')]: 'label.edit_profile',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
@@ -56,6 +58,9 @@ export const getAppNavigator = function(isLoggedIn) {
     {
       [getLocalRoute('app_registerTrees')]: {
         screen: RegisterTrees
+      },
+      [getLocalRoute('app_editProfile')]: {
+        screen: EditUserProfile
       },
       [getLocalRoute('app_userHome')]: {
         screen: isLoggedIn ? UserHomeContainer : LoginContainer

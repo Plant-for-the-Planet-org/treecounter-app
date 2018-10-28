@@ -63,7 +63,7 @@ export const getAppNavigator = function(isLoggedIn) {
         screen: EditUserProfile
       },
       [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer
+        screen: isLoggedIn ? UserHomeContainer : Trillion
       },
       [getLocalRoute('app_login')]: {
         screen: LoginContainer
@@ -145,7 +145,7 @@ export const getAppNavigator = function(isLoggedIn) {
   const ApptabNavigator = createBottomTabNavigator(
     {
       [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer
+        screen: isLoggedIn ? UserHomeContainer : Trillion
       },
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer

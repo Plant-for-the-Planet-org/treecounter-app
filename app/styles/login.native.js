@@ -7,15 +7,16 @@ export default (loginStyles = EStyleSheet.create({
     backgroundColor: 'white'
   },
   container: {
-    flex: 1,
+    flex: 0.7,
     width: '100%',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     padding: 20,
     flexGrow: 1
   },
   headerContainer: {
+    flex: 0.3,
     flexDirection: 'column',
-    justifyContent: 'center',
+
     alignItems: 'center',
     margin: 20
   },

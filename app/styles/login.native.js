@@ -2,21 +2,29 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 
 export default (loginStyles = EStyleSheet.create({
-  scrollViewStyle: {
-    flexGrow: 1
+  parentContainer: {
+    flex: 1,
+    backgroundColor: 'white'
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    alignItems: 'center',
-    backgroundColor: '$backgroundScreen'
-  },
-  inputContainer: {
     width: '100%',
     justifyContent: 'center',
-    padding: 10
+    padding: 20,
+    flexGrow: 1
   },
+  headerContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 20
+  },
+  imageStyle: {
+    width: 100,
+    height: 50
+  },
+
+  inputContainer: {},
   button: {
     height: 50,
     backgroundColor: '$primary',
@@ -48,8 +56,8 @@ export default (loginStyles = EStyleSheet.create({
   },
   bottomRow: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
+    padding: 10,
+    alignItems: 'flex-start'
   },
   bottomText: {
     fontSize: 11,

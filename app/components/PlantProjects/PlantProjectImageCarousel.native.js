@@ -41,7 +41,7 @@ class PlantProjectImageCarousel extends Component {
 
   renderImage = idx => (
     <Image
-      style={StyleSheet.absoluteFill}
+      //   style={StyleSheet.absoluteFill}
       resizeMode="contain"
       source={{
         uri: getImageUrl('project', 'large', this.props.images[idx].image)
@@ -63,7 +63,7 @@ class PlantProjectImageCarousel extends Component {
                 key={url}
                 source={{
                   uri: getImageUrl('project', 'large', url.image),
-                  width: 200
+                  width: 100
                 }}
                 resizeMode="contain"
               />
@@ -91,7 +91,9 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   image: {
-    height: 100
+    height: 100,
+    margin: 5,
+    resizeMode: 'contain'
   }
 });
 export default PlantProjectImageCarousel;

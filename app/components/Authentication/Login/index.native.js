@@ -14,6 +14,7 @@ import styles from '../../../styles/login';
 
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { SideMenuImage } from '../../../assets';
+import TouchableItem from '../../Common/TouchableItem.native';
 
 let Form = t.form.Form;
 
@@ -31,8 +32,9 @@ export default class Login extends Component {
       <View style={styles.parentContainer}>
         <View style={styles.headerContainer}>
           <Image style={styles.imageStyle} source={SideMenuImage} />
-          <Text style={styles.bottomTextHighlight}>
-            Please Sign In With your TTC Account.
+          <Text style={styles.loginTextStyle}>Login</Text>
+          <Text style={styles.loginDescriptionStyle}>
+            {i18n.t('label.login_description')}
           </Text>
         </View>
 
@@ -45,22 +47,20 @@ export default class Login extends Component {
             />
           </View>
           <View style={styles.bottomRow}>
-            <Text
-              onPress={this.onForgotPasswordClicked}
-              style={styles.bottomTextHighlight}
-            >
-              {i18n.t('label.forgot_ur_password')}
-            </Text>
+            <TouchableItem onPress={this.onForgotPasswordClicked}>
+              <Text style={styles.bottomTextHighlight}>
+                {i18n.t('label.forgot_ur_password')}
+              </Text>
+            </TouchableItem>
           </View>
           <View style={styles.bottomRow}>
-            <Text
-              onPress={this.onSignupClicked}
-              style={styles.bottomTextHighlight}
-            >
-              {i18n.t('label.dont_have_account')}
-              {'  '}
-              {i18n.t('label.signUp')}
-            </Text>
+            <TouchableItem onPress={this.onSignupClicked}>
+              <Text style={styles.bottomTextHighlight}>
+                {i18n.t('label.dont_have_account')}
+                {'  '}
+                {i18n.t('label.signUp')}
+              </Text>
+            </TouchableItem>
 
             <PrimaryButton
               onClick={this.props.onPress}

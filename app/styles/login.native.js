@@ -11,6 +11,7 @@ export default (loginStyles = EStyleSheet.create({
     width: '100%',
     // justifyContent: 'center',
     padding: 20,
+    paddingTop: 30,
     flexGrow: 1
   },
   headerContainer: {
@@ -76,5 +77,13 @@ export default (loginStyles = EStyleSheet.create({
     color: '#575756',
     width: Dimensions.get('window').width * 0.8,
     justifyContent: 'flex-start'
+  },
+  loginTextStyle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    padding: 10
+  },
+  loginDescriptionStyle: {
+    fontSize: 11
   }
 }));

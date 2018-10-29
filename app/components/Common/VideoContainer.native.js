@@ -27,18 +27,22 @@ class VideoContainer extends React.Component {
   }
   _onReady(event) {
     // access to player in all event handlers via event.target
-    //  event.target.pauseVideo();
+    //event.target.pauseVideo();
   }
   render() {
     if (this.state.videoId) {
       return (
         <YouTube
-          play={true}
+          ref={component => {
+            this._youTubeRef = component;
+          }}
           videoId={this.state.videoId}
-          style={{ height: 200, width: 100 }}
+          style={{ height: 300 }}
+          play={true}
         />
       );
     }
+    console.log(this.state);
     return null;
   }
 }

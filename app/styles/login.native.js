@@ -2,6 +2,11 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 
 export default (loginStyles = EStyleSheet.create({
+  scrollContainer: {
+    backgroundColor: 'white',
+    flex: 1
+  },
+
   parentContainer: {
     flex: 1,
     backgroundColor: 'white'

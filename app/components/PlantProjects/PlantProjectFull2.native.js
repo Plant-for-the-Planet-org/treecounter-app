@@ -4,14 +4,15 @@ import PropTypes from 'prop-types';
 import SeeMoreToggle from '../Common/SeeMoreToggle';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
-import { View, Text } from 'react-native';
-import styles from '../../styles/selectplantproject/selectplantproject-full';
+import { View, Text, Image } from 'react-native';
+import styles from '../../styles/selectplantproject/selectplantproject-full2';
 import PlantProjectTeaser from './PlantProjectTeaser';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import PlantProjectDetails from './PlantProjectDetails';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { ScrollView } from 'react-native';
+import { getImageUrl } from '../../actions/apiRouting';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -86,63 +87,64 @@ class PlantProjectFull extends React.Component {
       plantProjectImages
     };
     return (
-      <ScrollView>
-        <CardLayout style={styles.projectFullContainer}>
-          <View style={styles.projectTeaserContainer}>
-            <PlantProjectTeaser {...teaserProps} />
+      <CardLayout style={styles.projectFullContainer}>
+        <View style={styles.projectImageContainer}>
+          <Image
+            style={styles.teaser__projectImage}
+            resizeMethod="scale"
+            // resizeMode="center"
+            source={{
+              uri: getImageUrl(
+                'project',
+                'large',
+                teaserProps.projectImage.image
+              )
+            }}
+          />
+        </View>
+        <View style={styles.projectSpecsContainer}>
+          <View style={styles.treeCounterContainer}>
+            <View style={styles.treePlantedContainer}>
+              <Text style={styles.treePlantedtext}>
+                {specsProps.countPlanted}
+              </Text>
+              <Text>
+                {i18n.t('label.trees') + ' ' + i18n.t('label.planted')}
+              </Text>
+            </View>
+            <View style={styles.targetContainer}>
+              <Text>{specsProps.countTarget}</Text>
+            </View>
           </View>
-          <View style={styles.projectSpecsContainer}>
-            <PlantProjectSpecs {...specsProps} />
+          <View style={styles.projectNameContainer}>
+            <Text>{teaserProps.projectName}</Text>
+          </View>
+          <View style={styles.projectdetailsContainer}>
+            <View style={styles.locationContainer}>
+              <Text>{specsProps.location}</Text>
+              <Text>
+                {i18n.t('label.survival_rate')} {specsProps.survivalRate}%
+              </Text>
+            </View>
+
+            <View style={styles.costContainer}>
+              <Text>${specsProps.treeCost}</Text>
+            </View>
           </View>
 
-          <View style={styles.seeMoreContainer}>
-            <SeeMoreToggle
-              seeMore={!this.state.expanded}
-              onToggle={this.toggleExpanded}
-            />
-            {this.props.selectAnotherProject ? (
-              <View style={styles.select_different_project_style}>
-                <Text
-                  onPress={this.props.projectClear}
-                  style={styles.select_different_project_style_text}
-                >
-                  {i18n.t('label.different_project')}
-                </Text>
-              </View>
-            ) : null}
-          </View>
-          {this.state.expanded ? (
-            <View style={styles.plantProjectDetails}>
-              <PlantProjectDetails {...detailsProps} />
+          <View style={styles.actionContainer}>
+            <View style={styles.byOrgContainer}>
+              <Text>{teaserProps.tpoName}</Text>
             </View>
-          ) : (
-            <View style={styles.plantProjectDetails} />
-          )}
-          <View style={styles.buttonContainer}>
-            {!this.props.selectAnotherProject ? (
-              <PrimaryButton
-                onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
-              >
-                {i18n.t('label.select_project')}
-              </PrimaryButton>
-            ) : // <TouchableHighlight
-            //   onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
-            //   style={styles.button}
-            // >
-            //   <Text style={styles.buttonText}>
-            //     {' '}
-            //     {i18n.t('label.select_project')}
-            //   </Text>
-            // </TouchableHighlight>
-            null}
-            {this.props.showNextButton ? (
-              <PrimaryButton onClick={() => this.props.onNextClick()}>
-                {i18n.t('label.next')}
-              </PrimaryButton>
-            ) : null}
+
+            <View style={styles.buttonContainer}>
+              {/* <PrimaryButton>
+                  <Text>Donate</Text>
+              </PrimaryButton> */}
+            </View>
           </View>
-        </CardLayout>
-      </ScrollView>
+        </View>
+      </CardLayout>
     );
   }
 }

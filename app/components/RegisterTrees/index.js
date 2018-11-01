@@ -19,13 +19,17 @@ import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
 
 let TCombForm = t.form.Form;
 
+const isTpo = props1 => {
+  const currentUserProfile = props1.currentUserProfile;
+  let tpo = false;
+  if (currentUserProfile && currentUserProfile.type === 'tpo') {
+    tpo = true;
+  }
+  return tpo;
+};
+
 const getSingleTreeLayout = props1 => {
   const formLayoutSingleTree = locals => {
-    const currentUserProfile = props1.currentUserProfile;
-    let showPlantProject = false;
-    if (currentUserProfile && currentUserProfile.type === 'tpo') {
-      showPlantProject = true;
-    }
     return (
       <div className="register-tree__form">
         <div className="register-tree__form--row">
@@ -39,7 +43,7 @@ const getSingleTreeLayout = props1 => {
         <div className="register-tree__form--row">
           {locals.inputs.contributionImages}
         </div>
-        {showPlantProject ? (
+        {isTpo(props1) ? (
           <div className="register-tree__form--row">
             {locals.inputs.plantProject}
           </div>
@@ -59,26 +63,34 @@ const getSingleTreeLayout = props1 => {
   return formLayoutSingleTree;
 };
 
-const formLayoutMultipleTrees = locals => {
-  return (
-    <div className="register-tree__form">
-      <div className="register-tree__form--row">
-        {locals.inputs.treeCount}
-        <div className="register-tree__form--row__spacer" />
-        {locals.inputs.treeSpecies}
+const getMultipleTreeLayout = props1 => {
+  return locals => {
+    return (
+      <div className="register-tree__form">
+        <div className="register-tree__form--row">
+          {locals.inputs.treeCount}
+          <div className="register-tree__form--row__spacer" />
+          {locals.inputs.treeSpecies}
+        </div>
+        <div className="register-tree__form--row">
+          {locals.inputs.plantDate}
+        </div>
+        {locals.inputs.geoLocation}
+        <div className="register-tree__form--row">
+          {locals.inputs.contributionImages}
+        </div>
+        {isTpo(props1) ? (
+          <div className="register-tree__form--row">
+            {locals.inputs.plantProject}
+          </div>
+        ) : null}
       </div>
-      <div className="register-tree__form--row">{locals.inputs.plantDate}</div>
-      {locals.inputs.geoLocation}
-      <div className="register-tree__form--row">
-        {locals.inputs.contributionImages}
-      </div>
-    </div>
-  );
+    );
+  };
 };
 
-const schemaOptionsSingle = (template, props) => {
+const getPlantProjectEnum = props => {
   const currentUserProfile = props.currentUserProfile;
-  let showPlantProject = false;
   if (currentUserProfile && currentUserProfile.type === 'tpo') {
     let newEnum = [];
     for (let plantProject in props.plantProjects) {
@@ -87,19 +99,27 @@ const schemaOptionsSingle = (template, props) => {
         text: props.plantProjects[plantProject].name
       });
     }
-    schemaOptionsSingleTree.fields.plantProject.template = getSelectTemplate(
-      newEnum
-    );
   }
+};
+
+const schemaOptionsSingle = (template, props) => {
+  schemaOptionsSingleTree.fields.plantProject.template = getSelectTemplate(
+    getPlantProjectEnum(props)
+  );
   return {
     template,
     ...schemaOptionsSingleTree
   };
 };
 
-const schemaOptionsMultiple = {
-  template: formLayoutMultipleTrees,
-  ...schemaOptionsMultipleTrees
+const schemaOptionsMultiple = (template, props) => {
+  schemaOptionsMultipleTrees.fields.plantProject.template = getSelectTemplate(
+    getPlantProjectEnum(props)
+  );
+  return {
+    template,
+    ...schemaOptionsMultipleTrees
+  };
 };
 
 export default class RegisterTrees extends Component {
@@ -173,7 +193,10 @@ export default class RegisterTrees extends Component {
                 <TCombForm
                   ref="registerTreeForm"
                   type={multipleTreesRegisterFormSchema}
-                  options={schemaOptionsMultiple}
+                  options={schemaOptionsMultiple(
+                    getMultipleTreeLayout(this.props),
+                    this.props
+                  )}
                 />
               )}
             </Tabs>

@@ -11,12 +11,15 @@ import {
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
+import _ from 'lodash';
 
 const Form = t.form.Form;
 export default class EditUserProfile extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      passwordNotSameError: false,
       index: 0,
       routes: [
         {
@@ -51,6 +54,16 @@ export default class EditUserProfile extends Component {
 
   getFormSchemaOption = (userType, profileType) => {
     let schemaOptions = parsedSchema[userType][profileType].schemaOptions;
+    if (profileType == 'password') {
+      try {
+        schemaOptions.fields.password.fields.first.hasError = schemaOptions.fields.password.fields.second.hasError = this.state.passwordNotSameError;
+        schemaOptions.fields.password.fields.first.error = schemaOptions.fields.password.fields.second.error = (
+          <Text>{i18n.t('label.same_password_error')}</Text>
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
 
     return schemaOptions;
   };
@@ -118,11 +131,26 @@ export default class EditUserProfile extends Component {
                   ref={'password'}
                   type={parsedSchema[type].password.transformedSchema}
                   options={this.getFormSchemaOption(type, 'password')}
-                  value={this.props.currentUserProfile}
+                  value={{
+                    ...this.props.currentUserProfile
+                  }}
                 />
               </View>
               <PrimaryButton
                 onClick={() => {
+                  let value = this.refs.tabView.refs.password.getValue();
+                  if (
+                    value &&
+                    (!value.password ||
+                      value.password.first !== value.password.second)
+                  ) {
+                    //same password
+                    this.setState({
+                      passwordNotSameError: true
+                    });
+                    return;
+                  }
+                  this.setState({ passwordNotSameError: false });
                   this.props.onSave(type, 'password', this.refs.tabView.refs);
                 }}
               >

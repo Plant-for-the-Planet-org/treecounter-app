@@ -110,7 +110,6 @@ class RedemptionContainer extends Component {
     }
   }
   validateCode(data) {
-    console.log(data);
     let value = data;
     let path;
     if (this.state.path === 'claim') {

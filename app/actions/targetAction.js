@@ -6,21 +6,21 @@ import { updateRoute } from '../helpers/routerHelper';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { treecounterSchema } from '../schemas/index';
 import { putAuthenticatedRequest } from '../utils/api';
+import { setProgressModelState } from '../reducers/modelDialogReducer';
 
 export function SubmitTarget(treecounterData) {
   return dispatch => {
+    dispatch(setProgressModelState(true));
     putAuthenticatedRequest('target_put', treecounterData)
       .then(res => {
         dispatch(mergeEntities(normalize(res.data, treecounterSchema)));
         updateRoute('app_userHome', dispatch);
+        dispatch(setProgressModelState(false));
       })
       .catch(error => {
         debug(error);
-        NotificationManager.error(
-          error.response.data.message,
-          error.response.data.code,
-          5000
-        );
+        NotificationManager.error(error.response.data.message, 'Error', 5000);
+        dispatch(setProgressModelState(false));
       });
   };
 }

@@ -2,30 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-
 import { updateRoute } from '../../helpers/routerHelper';
 import SearchAutosuggest from './SearchAutosuggest';
-import i18n from '../../locales/i18n.js';
 
 class SearchBar extends React.Component {
-  suggestionClicked = (context, event) => {
+  suggestionClicked = (event, data) => {
     this.props.route('app_treecounter', null, {
-      treecounter: event.suggestion.id
+      treecounter: data.suggestion.slug || data.suggestion.id
     });
+    if (data.method === 'enter') {
+      event.preventDefault();
+    }
   };
 
   render() {
     return (
-      <form>
+      <div>
         <div className="search-bar">
           <SearchAutosuggest onSuggestionClicked={this.suggestionClicked} />
-          <span className="search-bar__button">
-            <i className="material-icons header-icons">
-              {i18n.t('label.search')}
-            </i>
-          </span>
+          <i className="material-icons search-icon">{'search'}</i>
         </div>
-      </form>
+      </div>
     );
   }
 }

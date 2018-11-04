@@ -9,7 +9,7 @@ const TreecounterHeader = ({
   caption,
   profileType,
   logo,
-  isUserFollower,
+  isUserFollowerBool,
   isUserLoggedIn,
   showFollow,
   followChanged
@@ -17,16 +17,18 @@ const TreecounterHeader = ({
   return (
     <div className="tree-counter-profile flex-column">
       <UserProfileImage profileImage={logo} />
-      <div className="tree-counter-name">{caption}</div>
-      <div className="tree-counter-row">
-        <UserProfileTypeLabel profileType={profileType} />
-        {showFollow && (
-          <FollowLabelButton
-            isSubscribed={isUserFollower}
-            isLoggedIn={isUserLoggedIn}
-            onClick={() => followChanged()}
-          />
-        )}
+      <div className="user-info">
+        <div className="tree-counter-name">{caption}</div>
+        <div className="tree-counter-row">
+          <UserProfileTypeLabel profileType={profileType} />
+          {showFollow && (
+            <FollowLabelButton
+              isSubscribed={isUserFollowerBool}
+              isLoggedIn={isUserLoggedIn}
+              onClick={() => followChanged()}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -36,7 +38,7 @@ TreecounterHeader.propTypes = {
   caption: PropTypes.string.isRequired,
   profileType: PropTypes.string.isRequired,
   logo: PropTypes.string,
-  isUserFollower: PropTypes.bool.isRequired,
+  isUserFollowerBool: PropTypes.bool.isRequired,
   isUserLoggedIn: PropTypes.bool.isRequired,
   showFollow: PropTypes.bool.isRequired,
   followChanged: PropTypes.func.isRequired

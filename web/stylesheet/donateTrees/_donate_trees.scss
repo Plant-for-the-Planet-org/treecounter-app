@@ -1,13 +1,18 @@
 .donate-tress__container {
   position: relative;
-  width: 416px;
+  width: 100%;
+  //max-width: 400px;
+  height: auto;
 
   .treecount-selector-wrapper {
-    height: 250px;
+    height: 280px;
   }
 
   .pftp-tabs__type {
-    margin-bottom: 15px;
+    margin-top: 5%;
+    @include for-phone-only {
+      margin-top: 10%;
+    }
   }
 
   .donate-tree-nav-img__right {
@@ -30,13 +35,11 @@
     display: block;
     padding: 0;
     top: -90px;
-    left: -5%;
+    left: -20px;
   }
 
   .content-header_container {
-    height: 80px;
     line-height: 2.5;
-    font-size: 24px;
     align-items: unset;
   }
 
@@ -51,22 +54,10 @@
     .project-teaser__container {
       .teaser-image__container {
         .teaser__projectImage {
-          height: 100px;
+          width: 100%;
+          height: auto;
+          margin: 10px;
         }
-      }
-    }
-
-    .project-specs__container {
-      flex-direction: column;
-      .plants-info {
-        flex-basis: auto;
-        flex-grow: auto;
-        margin: 0;
-      }
-      .project-info {
-        flex-basis: auto;
-        flex-grow: auto;
-        margin: 0;
       }
     }
 
@@ -74,6 +65,13 @@
       display: flex;
       justify-content: space-between;
       font-size: 15px;
+
+      .select_different_project_style {
+        display: flex;
+        color: #ec6453;
+        margin-top: 10px;
+        cursor: pointer;
+      }
 
       .link {
         padding: 10px 0;
@@ -91,41 +89,6 @@
         cursor: pointer;
         span {
           color: #ec6453;
-        }
-      }
-    }
-
-    .slick-dots {
-      top: -70px;
-      height: 10px;
-
-      li {
-        margin: 0 5px;
-        width: 8px;
-        height: 8px;
-      }
-
-      button {
-        width: 5px;
-        height: 5px;
-      }
-
-      button:before {
-        color: transparent;
-        border: 2px solid #ffffff;
-        border-radius: 100%;
-        line-height: 10px;
-        opacity: 1;
-        width: 5px;
-        height: 5px;
-      }
-
-      .slick-active {
-        background-color: #ffffff;
-        border-radius: 100%;
-        button:before {
-          color: #ffffff;
-          opacity: 1;
         }
       }
     }
@@ -156,7 +119,8 @@
 
   .treecount-container {
     margin-top: 30px;
-    height: 200px;
+    height: auto;
+
     .treecount-price-conversion {
       display: flex;
       justify-content: space-between;
@@ -170,6 +134,12 @@
         input {
           margin: 0 10px;
         }
+      }
+      .price-conversion__radio {
+        width: 30%;
+      }
+      .price-conversion__equal {
+        width: 10%;
       }
 
       input[type="text"] {
@@ -185,7 +155,8 @@
 
 .select-project__container {
   @extend .donate-tress__container;
-  width: 718px;
+  width: 100%;
+  max-width: 850px;
   .slick-initialized {
     margin: 35px;
     margin-top: 30px;
@@ -194,20 +165,10 @@
     .see-more-toggle__container {
       display: inline-block;
     }
-
-    .project-specs__container {
-      flex-direction: row;
-      .plants-info {
-        flex-basis: 0;
-        flex-grow: 1;
-        margin-left: 15px;
-      }
-      .project-info {
-        flex-basis: 0;
-        flex-grow: 1;
-        margin-right: 15px;
-      }
-    }
+  }
+  .plant_project_content {
+    max-height: 500px;
+    overflow: auto;
   }
 }
 
@@ -217,14 +178,16 @@
   border: solid 2px #efefef;
   padding: 10px;
   color: #686060;
-  width: 665px;
-  margin: 0 -30px;
+  width: 99%;
+  max-width: 100%;
+  margin: 0 4px;
 
   .pftp-button-primary {
     font-size: 13px;
     padding: 5px;
     width: 70px;
-    height: 30px;
+    margin: 0;
+    min-height: 30px;
     border-radius: 3px;
   }
 
@@ -253,12 +216,21 @@
   align-items: center;
   display: flex;
   margin-top: 20px;
+  width: 100%;
+  margin: 20px;
+
+  .table-responsive {
+    width: calc(100% - 60px);
+    overflow-y: scroll;
+    min-height: 0.01%;
+    overflow-x: auto;
+  }
 
   .pftp-textfield {
     width: 60%;
     margin-bottom: 30px;
     .search-bar__button {
-      height: 35px;
+      height: 36px;
       width: 35px;
       border-bottom: 1px solid #c6c6c6;
 
@@ -274,6 +246,8 @@
   @extend .tpo-footer-card-layout;
   margin: 0 -20px;
   box-shadow: none;
+  overflow: scroll;
+  max-height: 80vh;
   min-width: 500px;
 
   .collapsed {
@@ -291,4 +265,91 @@
       color: #ec6453;
     }
   }
+}
+.payment_options__wrapper {
+  min-height: 470px;
+}
+.payment-option {
+  display: flex;
+  flex-direction: column;
+  border: solid 0.7px #0e7baa;
+  border-radius: 6px;
+  margin-bottom: 20px;
+
+  .__PrivateStripeElement {
+    height: 20px;
+  }
+
+  .StripeElement {
+    padding: 20px;
+    width: auto;
+  }
+
+  .pftp-button-primary {
+    margin: 10px;
+    width: calc(100% - 20px);
+    display: flex;
+    border-radius: 22px;
+  }
+
+  .payment-option-header {
+    padding: 10px;
+    background-color: #0e7baa;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      height: 25px;
+      transition: 1s;
+    }
+
+    span {
+      display: flex;
+      img {
+        margin-right: 20px;
+      }
+    }
+
+    .arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  .mandate-acceptance {
+    text-align: left;
+    color: #686060;
+    font-size: 14px;
+    padding: 20px;
+    padding-top: 0px;
+  }
+
+  .centerize-paypal {
+    margin: 40px 0;
+  }
+
+  .confirm-checkbox {
+    text-align: left;
+    padding: 20px;
+    color: #686060;
+    font-size: 14px;
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  }
+
+  .account-details {
+    @extend .confirm-checkbox;
+    color: #89a550;
+    width: 240px;
+  }
+}
+
+.display-none {
+  display: none;
+}
+
+.payment-success {
+  padding: 30px;
 }

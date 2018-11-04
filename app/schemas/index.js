@@ -17,7 +17,7 @@ tpoSchema.define({
 
 plantProjectSchema.define({
   tpo: tpoSchema,
-  projectImages: [plantProjectImageSchema]
+  plantProjectImages: [plantProjectImageSchema]
 });
 
 plantProjectImageSchema.define({
@@ -34,7 +34,8 @@ contributionImageSchema.define({
 });
 
 userProfileSchema.define({
-  treecounter: treecounterSchema
+  treecounter: treecounterSchema,
+  plantProjects: [plantProjectSchema]
 });
 
 treecounterSchema.define({

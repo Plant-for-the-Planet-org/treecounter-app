@@ -1,6 +1,6 @@
 import React from 'react';
 import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import t from 'tcomb-form';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
@@ -13,106 +13,182 @@ import {
 import PaswordUpdatedDialog from './PaswordUpdateModal';
 import ConfirmProfileDeletion from './ConfirmProfileDeletionModal';
 import i18n from '../../locales/i18n.js';
+import PlantProjectTemplate from './PlantProjectTemplate';
+import {
+  UserProfileTemplate,
+  UserAboutmeTemplate,
+  UserPasswordUpdateTemplate
+} from './PlantProjectUserProfileTemplates';
 
+const plantProjectFormOptions = {
+  template: PlantProjectTemplate(),
+  ...plantProjectSchema.schemaOptions
+};
 let TCombForm = t.form.Form;
+const emptyProjectInfo = { name: '' };
+
 export default class EditUserProfile extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
-    console.log(parsedSchema);
     this.state = {
-      showConfirmProfileDeletion: false
+      showConfirmProfileDeletion: false,
+      passwordNotSameError: false,
+      plantProjects: (props &&
+        props.currentUserProfile &&
+        props.currentUserProfile.plantProjects) || [emptyProjectInfo]
     };
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      plantProjects: (nextProps &&
+        nextProps.currentUserProfile &&
+        nextProps.currentUserProfile.plantProjects) || [emptyProjectInfo]
+    });
+  }
+
   toggleConfirmProfileDeletion = () => {
     this.setState({
       showConfirmProfileDeletion: !this.state.showConfirmProfileDeletion
     });
   };
 
-  getFormTemplate = (userType, profileType) => {
-    console.log(profileType);
-    switch (profileType) {
-      case 'profile': {
-        return locals => {
-          console.log(locals);
-          return (
-            <div className="tComb-template__profile-form">
-              <div>
-                {locals.inputs.title}
-                {locals.inputs.name}
-                {locals.inputs.firstname}
-                {locals.inputs.lastname}
-                {locals.inputs.gender}
-                {locals.inputs.subType}
-              </div>
+  handleAddNewProject = () => {
+    const newPlantProjects = [...this.state.plantProjects]; // clone the array
+    newPlantProjects.push(emptyProjectInfo);
+    this.setState({ plantProjects: newPlantProjects });
+  };
 
-              <div>
-                {locals.inputs.address}
-                {locals.inputs.zipCode}
-                {locals.inputs.city}
-                {locals.inputs.country}
-                <div>
-                  {locals.inputs.mayContact}
-                  {locals.inputs.mayPublish}
-                </div>
-              </div>
-            </div>
-          );
-        };
+  handleDeleteProjectCLick = (plantProject, index) => {
+    if (plantProject.id) {
+      this.props.deletePlantProject(plantProject.id);
+    } else {
+      const newPlantProjects = [...this.state.plantProjects]; // clone the array
+      newPlantProjects.splice(index, 1);
+      this.setState({ plantProjects: newPlantProjects });
+    }
+  };
+
+  mergeProjectImages(newPlantProjectImages, oldPlantProjectImages = []) {
+    if (!newPlantProjectImages) {
+      return oldPlantProjectImages;
+    }
+    let uploadPlantProjectImages = [];
+    uploadPlantProjectImages = newPlantProjectImages.map(newProjectImage => {
+      if (newProjectImage.image.includes('base64')) {
+        let { image: imageFile, description } = newProjectImage;
+
+        return newProjectImage.id
+          ? { imageFile, description, id: newProjectImage.id }
+          : { imageFile, description };
       }
-      case 'about_me': {
-        return locals => {
-          console.log(locals);
-          return (
-            <div className="tComb-template__about-me-form">
-              <div>
-                {locals.inputs.synopsis1}
-                {locals.inputs.synopsis2}
-              </div>
+      return newProjectImage;
+    });
 
-              <div>
-                {locals.inputs.url}
-                {locals.inputs.linkText}
-              </div>
-            </div>
-          );
-        };
+    return uploadPlantProjectImages;
+  }
+
+  handleSaveProjectClick = (plantProject, index) => {
+    let formRef = 'plantProject' + index;
+    console.log(this.refs[formRef].validate());
+
+    let value = this.refs[formRef].getValue();
+    if (value) {
+      //if image file is same dont update it
+      //similarly need to handle for 'plantProjectImages array
+      if (value.imageFile == plantProject.imageFile) {
+        value = Object.assign({}, value);
+        delete value.imageFile;
       }
-      case 'password': {
-        return locals => {
-          console.log(locals);
-          return (
-            <div className="tComb-template__password-form">
-              <div>{locals.inputs.currentPassword}</div>
-
-              <div>{locals.inputs.password}</div>
-            </div>
-          );
-        };
+      let plantProjectImages = this.mergeProjectImages(
+        value.plantProjectImages,
+        plantProject.plantProjectImages
+      );
+      if (plantProject.id) {
+        this.props.updatePlantProject({
+          ...value,
+          id: plantProject.id,
+          plantProjectImages
+        });
+      } else {
+        this.props.addPlantProject(value);
       }
     }
   };
 
-  getFormSchemaOption = (userType, profileType) => {
-    if (profileType == 'project') {
-      return {
-        template: locals => {
-          return <div>{locals.inputs.plantProjects}</div>;
-        },
-        ...plantProjectSchema.schemaOptions
-      };
+  getFormTemplate = (userType, profileType) => {
+    switch (profileType) {
+      case 'profile':
+        return UserProfileTemplate;
+      case 'about_me':
+        return UserAboutmeTemplate;
+      case 'password':
+        return UserPasswordUpdateTemplate;
     }
+  };
+
+  getFormSchemaOption = (userType, profileType) => {
     let schemaOptions = parsedSchema[userType][profileType].schemaOptions;
+    if (profileType == 'password') {
+      try {
+        schemaOptions.fields.password.fields.first.hasError = schemaOptions.fields.password.fields.second.hasError = this.state.passwordNotSameError;
+        schemaOptions.fields.password.fields.first.error = schemaOptions.fields.password.fields.second.error = (
+          <div className="error-msg">{i18n.t('label.same_password_error')}</div>
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     return {
       template: this.getFormTemplate(userType, profileType),
       ...schemaOptions
     };
   };
 
+  getPlantProjectList = () => {
+    let plantProjectList = this.state.plantProjects.map(
+      (plantProject, index) => {
+        return (
+          <React.Fragment key={index}>
+            <div className="user-profile__project-form-group">
+              <div className="plant-project__item">
+                <TCombForm
+                  ref={'plantProject' + index}
+                  type={plantProjectSchema.transformedSchema}
+                  options={{
+                    template: PlantProjectTemplate(index),
+                    ...plantProjectSchema.schemaOptions
+                  }}
+                  value={plantProject}
+                />
+                <PrimaryButton
+                  onClick={() => {
+                    this.handleSaveProjectClick(plantProject, index);
+                  }}
+                >
+                  {i18n.t('label.save_changes')}
+                </PrimaryButton>
+                <div
+                  key={index}
+                  onClick={() => {
+                    this.handleDeleteProjectCLick(plantProject, index);
+                  }}
+                  className="delete-project"
+                >
+                  {i18n.t('label.delete_project')}
+                </div>
+              </div>
+            </div>
+          </React.Fragment>
+        );
+      }
+    );
+    return plantProjectList;
+  };
+
   render() {
-    console.log('___render___Edit_userprofile');
     const { type, image } = this.props.currentUserProfile;
+
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
         <ConfirmProfileDeletion
@@ -123,11 +199,14 @@ export default class EditUserProfile extends React.Component {
             this.toggleConfirmProfileDeletion();
           }}
         />
+
         <PaswordUpdatedDialog
           isOpen={this.props.openPasswordUpdatedDialog}
           onRequestClose={this.props.handlePaswordUpdatedClose}
         />
+
         <TextHeading>{i18n.t('label.edit_profile')}</TextHeading>
+
         <CardLayout className="user-profile__form-group">
           <div className="profile-image__container">
             <UserProfileImage profileImage={image} />
@@ -153,14 +232,22 @@ export default class EditUserProfile extends React.Component {
             {i18n.t('label.save_changes')}
           </PrimaryButton>
         </CardLayout>
-        <div className="user-profile__project-form-group">
-          <TCombForm
-            ref={'project'}
-            type={plantProjectSchema.transformedSchema}
-            options={this.getFormSchemaOption('tpo', 'project')}
-            value={this.props.currentUserProfile}
-          />
-        </div>
+
+        {type == 'tpo' ? (
+          <div className="plant-project__container">
+            {this.getPlantProjectList()}
+            <div className="pftp-addbutton">
+              <button
+                onClick={() => {
+                  this.handleAddNewProject();
+                }}
+              >
+                +&nbsp;{i18n.t('label.new_project')}
+              </button>
+            </div>
+          </div>
+        ) : null}
+
         <CardLayout className="user-profile__form-group">
           <div className="form-group__heading">{i18n.t('label.about_me')}</div>
           <TCombForm
@@ -177,6 +264,7 @@ export default class EditUserProfile extends React.Component {
             {i18n.t('label.save_changes')}
           </PrimaryButton>
         </CardLayout>
+
         <CardLayout className="user-profile__form-group">
           <div className="form-group__heading">
             {i18n.t('label.change_password')}
@@ -188,12 +276,21 @@ export default class EditUserProfile extends React.Component {
           />
           <PrimaryButton
             onClick={() => {
+              let value = this.refs.password.getValue();
+              if (value && value.password.first !== value.password.second) {
+                //same password
+                this.setState({ passwordNotSameError: true });
+                return;
+              }
+              this.setState({ passwordNotSameError: false });
+              console.log('password', value);
               this.props.onSave(type, 'password');
             }}
           >
             {i18n.t('label.change_password')}
           </PrimaryButton>
         </CardLayout>
+
         <div className="delete-profile__button">
           <SecondaryButton
             onClick={() => {
@@ -213,7 +310,10 @@ EditUserProfile.propTypes = {
   currentUserProfile: PropTypes.object,
   openPasswordUpdatedDialog: PropTypes.bool,
   handlePaswordUpdatedClose: PropTypes.func,
-  deleteProfile: PropTypes.func.isRequired
+  deleteProfile: PropTypes.func.isRequired,
+  updatePlantProject: PropTypes.func.isRequired,
+  deletePlantProject: PropTypes.func.isRequired,
+  addPlantProject: PropTypes.func.isRequired
 };
 
 export { PaswordUpdatedDialog, ConfirmProfileDeletion };

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
-import { check_green } from '../../../assets';
+import { close_green } from '../../../assets';
 
 const ModalDialog = ({ children, isOpen, onRequestClose }) => (
   <Modal
@@ -11,10 +11,11 @@ const ModalDialog = ({ children, isOpen, onRequestClose }) => (
     portalClassName="ModalPortal"
     ariaHideApp={false}
     onRequestClose={onRequestClose}
+    shouldFocusAfterRender={true}
   >
     <img
       className="closeIcon"
-      src={check_green}
+      src={close_green}
       onClick={() => {
         onRequestClose();
       }}

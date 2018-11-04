@@ -150,7 +150,6 @@
   position: relative;
   width: 100%;
   height: 100%;
-  margin-top: 0;
 }
 .canvasContainer svg {
   width: auto;
@@ -317,11 +316,11 @@
 }
 
 .pledgedBottle {
-  fill: #7f6c5e;
+  fill: #85aa4f;
 }
 
 .pledgedShadow {
-  fill: #5e4c43;
+  fill: #729235;
 }
 
 .pledgedLeaf01 {
@@ -340,13 +339,6 @@
   fill: #564f48;
 }
 
-.openCircle {
-  fill: none;
-  stroke: #c4d19a;
-  stroke-miterlimit: 10;
-  stroke-width: 45px;
-}
-
 .communityCircle {
   fill: none;
   stroke: #7da12c;
@@ -363,121 +355,9 @@
 
 .pledgedCircle {
   fill: none;
-  stroke: #5d4b43;
+  stroke: #c3d194;
   stroke-miterlimit: 10;
   stroke-width: 45px;
-}
-
-.st8 {
-  fill: #ffffff;
-  stroke: #cbcacb;
-  stroke-miterlimit: 10;
-}
-
-.st9 {
-  fill: #ffffff;
-  stroke: #cac9ca;
-  stroke-miterlimit: 10;
-}
-
-.st10 {
-  fill: #ffffff;
-}
-
-.st11 {
-  fill: #e97d5f;
-}
-
-.st12 {
-  fill: #f5d1d9;
-}
-
-.st13 {
-  fill: #6e3f22;
-  stroke: #6e3f22;
-  stroke-miterlimit: 10;
-}
-
-.st14 {
-  fill: #736741;
-}
-
-.st15 {
-  fill: none;
-  stroke: #736741;
-  stroke-miterlimit: 10;
-}
-
-.st16 {
-  fill: #836240;
-}
-
-.st17 {
-  fill: #6e3f22;
-}
-
-.st18 {
-  fill: none;
-  stroke: #ad544d;
-  stroke-miterlimit: 10;
-}
-
-.st19 {
-  opacity: 0.5;
-  fill: #ffffff;
-}
-
-.st20 {
-  fill: #714923;
-}
-
-.st21 {
-  fill: #93a378;
-}
-
-.st22 {
-  fill: none;
-  stroke: #a79880;
-  stroke-miterlimit: 10;
-}
-
-.st23 {
-  fill: none;
-  stroke: #b6a48b;
-  stroke-miterlimit: 10;
-}
-
-.st24 {
-  fill: #b4a589;
-}
-
-.st25 {
-  fill: #abd2b8;
-}
-
-.st26 {
-  opacity: 0.2;
-  fill: #ffffff;
-}
-
-.st27 {
-  fill: #a6947a;
-}
-
-.st28 {
-  fill: #938e56;
-}
-
-.st29 {
-  fill: #f4ac9e;
-}
-
-.st30 {
-  fill: #a07353;
-}
-
-.st31 {
-  fill: #712e0f;
 }
 
 #btcBackground {
@@ -755,7 +635,6 @@ iframe {
   border: none;
   width: 100%;
   height: 100%;
-  min-height: 30rem;
 }
 
 .mainMenu {

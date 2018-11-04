@@ -1,0 +1,36 @@
+import EStyleSheet from 'react-native-extended-stylesheet';
+
+export default (selectPlantTreeStyles = EStyleSheet.create({
+  slickWrapper: {
+    height: '100%'
+  },
+
+  cardContent: {
+    width: '100%',
+    flex: 1
+  },
+
+  plantProjectContent: {
+    flex: 1,
+    width: '100%'
+    // justifyContent: 'center',
+    // alignItems: 'center'
+  },
+  plantProjectContentFull: {
+    flex: 0.8,
+    width: '100%'
+  },
+  footer: {
+    width: '100%',
+    flex: 0.2
+  }
+  // plantProjectSelectButtonStyle: {
+  //   height: 43,
+  //   width: '80%',
+  //   marginLeft: 18,
+  //   marginRight: 40
+  // },
+  // plantProjectSelectTextStyle: {
+  //   fontSize: 15
+  // }
+}));

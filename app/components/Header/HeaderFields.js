@@ -20,26 +20,38 @@ const HeaderFields = ({
 }) => {
   return isLoggedIn ? (
     <div className="header-icons">
-      <Popover
-        onPopoverClosed={() =>
-          markSeenNotificationAction(userFeeds.userFeeds[0].id)
-        }
-        button={
-          <div className="notification-bell">
-            {userFeeds && userFeeds.unRead > 0 ? (
-              <div className="unread-circle">
-                <span className="unread-number-align">{userFeeds.unRead}</span>
+      <div className="pftp-popover-notification">
+        <Popover
+          onPopoverClosed={() => {
+            userFeeds && userFeeds.userFeeds.length
+              ? markSeenNotificationAction(userFeeds.userFeeds[0].id)
+              : null;
+          }}
+          button={
+            <div className="notification-bell">
+              <div
+                className={
+                  userFeeds && userFeeds.unRead > 0
+                    ? 'unread-circle'
+                    : 'unread-circle adjust-zindex'
+                }
+              >
+                <span className="unread-number-align">
+                  {userFeeds && userFeeds.unRead > 0 ? userFeeds.unRead : 0}
+                </span>
               </div>
-            ) : null}
-            <i className="material-icons">notifications_none</i>
-          </div>
-        }
-      >
-        <Notification
-          fetchMoreNotifications={fetchMoreNotifications}
-          userFeeds={userFeeds}
-        />
-      </Popover>
+              <div className="bell-icon">
+                <i className="material-icons">notifications_none</i>
+              </div>
+            </div>
+          }
+        >
+          <Notification
+            fetchMoreNotifications={fetchMoreNotifications}
+            userFeeds={userFeeds}
+          />
+        </Popover>
+      </div>
       <Popover
         button={
           <img

@@ -1,7 +1,6 @@
-import { NavigationActions } from 'react-navigation';
 import { getLocalRoute } from '../../actions/apiRouting';
 
-export function updateRoute(routeName, dispatch, id) {
+export function updateRoute(routeName, navigation, id) {
   let route = routeName;
   try {
     route = getLocalRoute(routeName);
@@ -10,12 +9,7 @@ export function updateRoute(routeName, dispatch, id) {
   }
 
   if (id === 0) {
-    //drawer action
-    dispatch(
-      NavigationActions.navigate({
-        routeName: 'DrawerClose'
-      })
-    );
+    navigation.closeDrawer();
   }
-  dispatch(NavigationActions.navigate({ routeName: route }));
+  navigation.navigate(route);
 }

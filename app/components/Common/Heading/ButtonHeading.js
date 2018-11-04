@@ -8,7 +8,7 @@ const ButtonHeading = ({ children }) => (
 );
 
 ButtonHeading.propTypes = {
-  children: PropTypes.string
+  children: PropTypes.node
 };
 
 export default ButtonHeading;

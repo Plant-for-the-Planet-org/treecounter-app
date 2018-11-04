@@ -36,14 +36,22 @@ export const singleTreeForm = {
         title: 'prototype',
         type: 'object',
         properties: {
-          imageFile: {
+          image: {
             type: 'string',
-            title: 'imageFile',
+            title: 'label.browse',
             widget: 'file',
-            propertyOrder: 1
+            propertyOrder: 1,
+            category: 'contribution',
+            variant: 'small'
+          },
+          id: {
+            type: 'number',
+            title: 'id',
+            widget: 'hidden',
+            propertyOrder: 3
           }
         },
-        required: ['imageFile']
+        required: ['image']
       },
       propertyOrder: 5
     },
@@ -94,7 +102,7 @@ export const singleTreeForm = {
       propertyOrder: 8
     }
   },
-  required: ['treeCount', 'treeSpecies', 'plantDate'],
+  required: ['treeCount', 'treeSpecies', 'plantDate', 'geoLocation'],
   submit_url: '',
   submit_method: 'POST'
 };
@@ -136,19 +144,19 @@ export const multipleTreesForm = {
         title: 'prototype',
         type: 'object',
         properties: {
-          imageFile: {
+          image: {
             type: 'string',
-            title: 'imageFile',
+            title: 'label.browse',
             widget: 'file',
             propertyOrder: 1
           }
         },
-        required: ['imageFile']
+        required: ['image']
       },
       propertyOrder: 5
     }
   },
-  required: ['treeCount', 'treeSpecies', 'plantDate'],
+  required: ['treeCount', 'treeSpecies', 'plantDate', 'geoLocation'],
   submit_url: '',
   submit_method: 'POST'
 };

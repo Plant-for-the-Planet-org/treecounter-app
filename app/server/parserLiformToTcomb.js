@@ -8,11 +8,19 @@ import { SelectTemplate } from '../components/Templates/SelectTemplate';
 import { MapTemplate } from '../components/Templates/MapTemplate';
 import { ListTemplateGenerator } from '../components/Templates/ListTemplate';
 import { FilePickerTemplate } from '../components/Templates/FilePickerTemplate';
+import { FloatInputTemplate } from '../components/Templates/FloatInputTemplate';
+import { DatePickerTemplate } from '../components/Templates/DatePickerTemplate';
 
 // Import assets
 import * as images from '../assets';
 
-export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
+function isEmail(x) {
+  return /(.)+@(.)+/.test(x);
+}
+
+transform.registerFormat('email', isEmail);
+
+export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
   let liformSchema = JSON.parse(JSON.stringify(liformSchemaJson));
 
   function getParsedSchema(liformSchema) {
@@ -45,12 +53,29 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
         if (
           properties[propertyKey].type &&
           (properties[propertyKey].type === 'string' ||
-            properties[propertyKey].type === 'integer')
+            properties[propertyKey].type === 'integer' ||
+            properties[propertyKey].type === 'number')
         ) {
           if (properties[propertyKey].hasOwnProperty('icon')) {
             options.config = {
               iconUrl: images[properties[propertyKey].icon]
             };
+            if (properties[propertyKey].icon === 'email') {
+              options.config = { ...options.config, email: true };
+              properties[propertyKey].format = 'email';
+            }
+          }
+          if (
+            innerConfig[propertyKey] &&
+            innerConfig[propertyKey].hasOwnProperty('style')
+          ) {
+            options.config = {
+              style: innerConfig[propertyKey].style
+            };
+          }
+          if (propertyKey === 'email') {
+            options.config = { ...options.config, email: true };
+            properties[propertyKey].format = 'email';
           }
           if (!properties[propertyKey].hasOwnProperty('enum')) {
             options.placeholder = properties[propertyKey].title;
@@ -65,6 +90,10 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
               options.type = 'text';
             } else if (properties[propertyKey].type === 'integer') {
               options.type = 'number';
+              options.keyboardType = 'numeric';
+            } else if (properties[propertyKey].type === 'number') {
+              options.type = 'number';
+              options.template = FloatInputTemplate;
             }
           } else {
             options.label = '';
@@ -95,11 +124,24 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
             options.template = MapTemplate;
             break;
           case 'date':
-          case 'hidden':
+            options.template = DatePickerTemplate;
             options.type = properties[propertyKey].widget;
             break;
+          case 'hidden':
+            options.type = properties[propertyKey].widget;
+            options.hidden = true;
+            break;
           case 'file':
-            options.template = FilePickerTemplate;
+            options.template =
+              (innerConfig[propertyKey] &&
+                innerConfig[propertyKey].file &&
+                innerConfig[propertyKey].file.template) ||
+              FilePickerTemplate;
+            options.config = {
+              ...options.config,
+              category: properties[propertyKey]['category'],
+              variant: properties[propertyKey]['variant']
+            };
             break;
         }
         // Widgets SwitchCase ENDS
@@ -124,31 +166,53 @@ export default function parseJsonToTcomb(liformSchemaJson, config = {}) {
           }
         } ******/
         if (properties[propertyKey].type === 'array') {
-          let arrayTemplate = innerConfig[properties[propertyKey].type];
-          console.log('array', arrayTemplate);
           let title = properties[propertyKey].title;
+          let arrayConfig =
+            innerConfig[propertyKey] &&
+            innerConfig[propertyKey][properties[propertyKey].type];
+          let arrayTemplate = ListTemplateGenerator({})(title);
+          let disableRemove = true;
+          if (arrayConfig) {
+            arrayTemplate = arrayConfig.template
+              ? arrayConfig.template(title)
+              : arrayTemplate;
+            disableRemove =
+              arrayConfig.disableRemove !== 'undefined'
+                ? arrayConfig.disableRemove
+                : disableRemove;
+          }
+
           let arrayOptions = {
             placeholder: title,
             auto: 'none',
             autoCapitalize: 'none',
             disableOrder: true,
-            disableRemove: true,
-            template: !arrayTemplate
-              ? ListTemplateGenerator({})(title)
-              : arrayTemplate(title)
+            disableRemove: disableRemove,
+            template: arrayTemplate
           };
           schemaOptions['fields'][propertyKey] = {
             ...arrayOptions,
-            ...{ item: getSchemaOptions(properties[propertyKey].items) }
+            ...{
+              item: getSchemaOptions(properties[propertyKey].items, innerConfig)
+            }
           };
           schemaOptions['fields'][propertyKey].item['disableOrder'] = true;
         }
         // ************************************************
         if (
           liformSchema.required &&
-          liformSchema.required.indexOf(propertyKey)
+          liformSchema.required.indexOf(propertyKey) != -1
         ) {
-          options['error'] = 'required';
+          options.config = { ...options.config, required: true };
+        }
+        if (liformSchema.properties[propertyKey].attr) {
+          options.config = {
+            ...options.config,
+            attr: liformSchema.properties[propertyKey].attr
+          };
+        }
+        if (validator) {
+          options.error = validator;
         }
       }
     }

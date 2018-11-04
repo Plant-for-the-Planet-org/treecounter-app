@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import renderHTML from 'react-render-html';
 import { getImageUrl } from '../../actions/apiRouting';
+import { SignupJustMe } from '../../assets';
+import i18n from '../../locales/i18n';
 
 export default class Notification extends Component {
   NotificationDisplay(notifications) {
@@ -10,7 +12,13 @@ export default class Notification extends Component {
       <div key={notification.id}>
         <li className="popover__list-item">
           <div className="list-item__wrapper">
-            <img src={getImageUrl('profile', 'thumb', notification.image)} />
+            <img
+              src={
+                notification.image
+                  ? getImageUrl('profile', 'thumb', notification.image)
+                  : SignupJustMe
+              }
+            />
             <div className="item-html__wrapper">
               {renderHTML(notification.message)}
             </div>
@@ -23,7 +31,7 @@ export default class Notification extends Component {
 
   render() {
     let { userFeeds } = this.props;
-    return userFeeds ? (
+    return userFeeds && userFeeds.userFeeds.length ? (
       <div>
         <ul className="notification-popover">
           {this.NotificationDisplay(userFeeds)}
@@ -37,12 +45,14 @@ export default class Notification extends Component {
             }
             className="list-item__wrapper"
           >
-            <span>See all notifications</span>
+            <span>{i18n.t('label.all_notifications')}</span>
           </div>
         ) : null}
       </div>
     ) : (
-      <ul style={widthStyle} />
+      <div className="popover__no_notification">
+        {i18n.t('label.no_notifications')}
+      </div>
     );
   }
 }
@@ -51,5 +61,3 @@ Notification.propTypes = {
   userFeeds: PropTypes.object,
   fetchMoreNotifications: PropTypes.func
 };
-
-const widthStyle = { width: '244px' };

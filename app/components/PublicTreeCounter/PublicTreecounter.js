@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantProjectSelector';
 import UserFootprint from './UserFootprint';
-import { currentUserProfileSelector } from '../../selectors/index';
-import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
-import CardLayout from '../../components/Common/Card/CardLayout';
-import { followUser, unfollowUser } from '../../actions/followActions';
+import CardLayout from '../../components/Common/Card';
+import { getDocumentTitle } from '../../helpers/utils';
+import i18n from '../../locales/i18n.js';
+
+import {
+  getProfileTypeName,
+  isMyself,
+  isUserFollower,
+  amISupporting
+} from './utils';
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {
@@ -28,53 +32,26 @@ class PublicTreeCounter extends React.Component {
   }
 
   //------------------------------------------------------------------------------------------------------------
-  // HELPER METHODS
-  //------------------------------------------------------------------------------------------------------------
-  isMyself() {
-    const { treecounter, currentUserProfile } = this.props;
-    return (
-      null !== currentUserProfile &&
-      currentUserProfile.treecounter.id === treecounter.id
-    );
-  }
-
-  isUserFollower() {
-    const { treecounter, currentUserProfile } = this.props;
-    const followeeIds =
-      currentUserProfile && currentUserProfile.treecounter.followeeIds
-        ? currentUserProfile.treecounter.followeeIds
-            .split(',')
-            .map(s => parseInt(s))
-        : [];
-    return followeeIds.includes(treecounter.id);
-  }
-
-  amISupporting() {
-    const { treecounter, currentUserProfile } = this.props;
-    return currentUserProfile
-      ? currentUserProfile.supported_treecounter &&
-          currentUserProfile.supported_treecounter.id === treecounter.id
-      : false;
-  }
-
-  //------------------------------------------------------------------------------------------------------------
   // ACTION METHODS
   //------------------------------------------------------------------------------------------------------------
   onFollowChanged() {
-    this.isUserFollower()
-      ? this.props.unfollowSubscribeAction(this.props.treecounter.id)
-      : this.props.followSubscribeAction(this.props.treecounter.id);
+    if (null !== this.props.currentUserProfile) {
+      isUserFollower(this.props.treecounter, this.props.currentUserProfile)
+        ? this.props.unfollowSubscribeAction(this.props.treecounter.id)
+        : this.props.followSubscribeAction(this.props.treecounter.id);
+    } else {
+      this.props.route('app_login');
+    }
   }
 
   onPlantProjectSelected(selectedPlantProjectId) {
     this.props.selectPlantProjectIdAction(selectedPlantProjectId);
-    //history.push(getLocalRoute('app_donateTrees'))
+    this.props.route('app_donateTrees');
   }
 
   onRegisterSupporter() {
-    console.log('**onRegisterSupporter**');
-    // this.props.supportTreecounter(this.props.treecounter)
-    //history.push(getLocalRoute('app_donateTrees'))
+    this.props.supportTreecounterAction(this.props.treecounter);
+    this.props.route('app_donateTrees');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -87,9 +64,39 @@ class PublicTreeCounter extends React.Component {
         community: treecounter.countCommunity,
         personal: treecounter.countPersonal,
         targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
       };
       this.setState({ svgData });
+    }
+  }
+  updateSvg(toggle) {
+    if (toggle) {
+      const treecounter = this.props.treecounter;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countCommunity + treecounter.countPersonal, // light color
+        planted: treecounter.countPersonal, //dark color
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    } else {
+      const treecounter = this.props.treecounter;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countTarget,
+        planted: treecounter.countPlanted,
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
     }
   }
   render() {
@@ -104,20 +111,20 @@ class PublicTreeCounter extends React.Component {
 
     const { userProfile, displayName: caption } = treecounter;
     const { type: profileType, image: logo } = userProfile;
-    const isUserFollower = this.isUserFollower();
+    const isUserFollowerBool = isUserFollower(treecounter, currentUserProfile);
     const isUserLoggedIn = null !== currentUserProfile;
-    const showFollow = !this.isMyself();
+    const showFollow = !isMyself(treecounter, currentUserProfile);
 
     const supportProps = {
-      active: !this.amISupporting(),
+      active: !amISupporting(treecounter, currentUserProfile),
       isUserLoggedIn,
       caption
     };
     const headerProps = {
       caption,
-      profileType,
+      profileType: getProfileTypeName(profileType),
       logo,
-      isUserFollower,
+      isUserFollowerBool,
       isUserLoggedIn,
       showFollow
     };
@@ -126,7 +133,7 @@ class PublicTreeCounter extends React.Component {
       defaultPlantProjectId: null,
       tpoName: caption
     };
-
+    document.title = getDocumentTitle(caption);
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <div className="tree-counter-header">
@@ -134,34 +141,55 @@ class PublicTreeCounter extends React.Component {
             {...headerProps}
             followChanged={this.onFollowChanged}
           />
-          {'tpo' !== userProfile.type &&
-            !this.isMyself() && (
-              <div className="support-button-container ">
-                <SupportButton
-                  {...supportProps}
-                  onRegisterSupporter={this.onRegisterSupporter}
-                />
-              </div>
-            )}
+
+          {('individual' == userProfile.type ||
+            'plantAmbassador' == userProfile.type) && (
+            <div className="support-button-container ">
+              <SupportButton
+                {...supportProps}
+                buttonLabel={i18n.t('label.gift_trees')}
+                onRegisterSupporter={this.onRegisterSupporter}
+              />
+            </div>
+          )}
+
+          {('company' == userProfile.type ||
+            'education' == userProfile.type ||
+            'non-profit' == userProfile.type ||
+            'govt' == userProfile.type ||
+            'plantClub' == userProfile.type) && (
+            <div className="support-button-container ">
+              <SupportButton
+                {...supportProps}
+                buttonLabel={
+                  isUserLoggedIn
+                    ? i18n.t('label.support')
+                    : i18n.t('label.plant_trees')
+                }
+                onRegisterSupporter={this.onRegisterSupporter}
+              />
+            </div>
+          )}
         </div>
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />
           <TreecounterGraphicsText
             trillion={false}
+            onToggle={toggleVal => this.updateSvg(toggleVal)}
             treecounterData={this.state.svgData}
           />
         </div>
         <div className="tree-counter-footer__container">
-          {'tpo' === userProfile.type ? (
+          {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
             <TpoDonationPlantProjectSelector
               {...tpoProps}
               onSelect={this.onPlantProjectSelected}
             />
-          ) : (
+          ) : userProfile.synopsis1 || userProfile.synopsis2 ? (
             <CardLayout>
               <UserFootprint userProfile={userProfile} />
             </CardLayout>
-          )}
+          ) : null}
         </div>
       </div>
     );
@@ -173,23 +201,9 @@ PublicTreeCounter.propTypes = {
   currentUserProfile: PropTypes.object,
   followSubscribeAction: PropTypes.func,
   unfollowSubscribeAction: PropTypes.func,
-  selectPlantProjectIdAction: PropTypes.func
+  selectPlantProjectIdAction: PropTypes.func,
+  supportTreecounterAction: PropTypes.func,
+  route: PropTypes.func
 };
 
-const mapDispatchToProps = dispatch => {
-  console.log(dispatch);
-  return bindActionCreators(
-    {
-      selectPlantProjectIdAction: selectPlantProjectAction,
-      followSubscribeAction: followUser,
-      unfollowSubscribeAction: unfollowUser
-    },
-    dispatch
-  );
-};
-
-const mapStateToProps = state => ({
-  currentUserProfile: currentUserProfileSelector(state)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PublicTreeCounter);
+export default PublicTreeCounter;

@@ -1,15 +1,27 @@
 import schemaLiform from '../formSchemas/donateTrees';
-import parseJsonToTcomb from '../parserLiformToTcomb';
+import callParser from '../callParser';
+
+const config = {
+  address: {
+    style: { marginLeft: 20 }
+  },
+  zipCode: {
+    style: { marginLeft: 20 }
+  },
+  city: {
+    style: { marginLeft: 20 }
+  }
+};
 
 const {
   transformedSchema: receiptIndividualFormSchema,
   schemaOptions: individualSchemaOptions
-} = parseJsonToTcomb(schemaLiform.properties.receiptIndividual);
+} = callParser(schemaLiform.properties.receiptIndividual, config);
 
 const {
   transformedSchema: receiptCompanyFormSchema,
   schemaOptions: companySchemaOptions
-} = parseJsonToTcomb(schemaLiform.properties.receiptCompany);
+} = callParser(schemaLiform.properties.receiptCompany, config);
 
 export {
   individualSchemaOptions,

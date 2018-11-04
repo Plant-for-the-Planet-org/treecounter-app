@@ -1,0 +1,11 @@
+{
+  "creditCard": "Kreditkarte",
+  "confirm":
+    "Ich bestätige, dass ich den Betrag über {{amount}}{{currency}} auf das folgende Konto.",
+  "bank_transfer": "Banküberweisung",
+  "pay_via": "Bezahlen per Banküberweisung",
+  "pay": "Bezahlen",
+  "sepa_debit": "SEPA-Lastschrift",
+  "stripe_sepa_des1":
+    "Indem du deine IBAN zur Verfügung stellst und diese Zahlung bestätigst, autorisierst du"
+}

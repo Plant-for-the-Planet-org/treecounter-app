@@ -1,52 +1,51 @@
 import { Text, View, Image, TextInput } from 'react-native';
 import React from 'react';
 import i18n from '../../locales/i18n';
-
+import styles from '../../styles/forms/textinput';
 export function TextInputTemplate(locals) {
-  let containerStyle = {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: 20,
-    paddingBottom: 20
-  };
-  let imageStyle = { width: 26, height: 26, resizeMode: 'center' };
-  let textboxStyle = {
-    flex: 1,
-    marginLeft: 10,
-    fontSize: 16,
-    color: '#000',
-    borderBottomWidth: 1,
-    borderColor: '#cecece'
-  };
-  let errorBlockStyle = locals.stylesheet.errorBlock;
+  if (locals.hidden) {
+    return null;
+  }
+  function onChange(value) {
+    value =
+      locals.keyboardType === 'numeric' && value ? parseInt(value) : value;
+    locals.onChange(value);
+  }
+
+  let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
   let error =
     locals.hasError && locals.error ? (
-      <Text accessibilityLiveRegion="polite" style={errorBlockStyle}>
+      <Text style={[errorBlockStyle, styles.errorTextStyle]}>
         {locals.error}
       </Text>
     ) : null;
   return (
-    <View>
-      <View style={containerStyle}>
+    <View style={[styles.container]}>
+      <View style={[styles.containerStyle, locals.config.style]}>
         {locals.config.iconUrl ? (
-          <Image style={imageStyle} source={locals.config.iconUrl} />
+          <View style={styles.imageContainerStyle}>
+            <Image style={styles.imageStyle} source={locals.config.iconUrl} />
+          </View>
         ) : null}
         <TextInput
-          style={textboxStyle}
+          style={styles.textboxStyle}
           secureTextEntry={locals.secureTextEntry}
           placeholder={i18n.t(locals.placeholder)}
+          placeholderTextColor={'#686060'}
           keyboardType={locals.keyboardType}
+          underlineColorAndroid={'transparent'}
           maxLength={locals.maxLength}
           multiline={locals.multiline}
-          value={locals.value}
-          onChangeText={value => locals.onChange(value)}
+          value={String(locals.value)}
+          onChangeText={value => onChange(value)}
           onChange={locals.onChangeNative}
           onKeyPress={locals.onKeyPress}
           returnKeyType={locals.returnKeyType}
           autoCapitalize={locals.autoCapitalize}
+          allowFontScaling={true}
         />
       </View>
-      {error}
+      <View style={styles.errorStyle}>{error}</View>
     </View>
   );
 }

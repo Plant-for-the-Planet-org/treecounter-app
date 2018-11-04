@@ -1,33 +1,38 @@
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 
 import { updateRoute } from '../helpers/routerHelper';
-import { debug } from '../debug/index';
-import { postRequest } from '../utils/api';
+import { postRequest, getRequest } from '../utils/api';
 import { updateJWT } from '../utils/user';
 import { loadUserProfile } from './loadUserProfileAction';
+import { setProgressModelState } from '../reducers/modelDialogReducer';
 
 export function signUp(profileType, userData) {
-  debug(userData, profileType);
   if (userData.password.first === userData.password.second) {
     return dispatch => {
+      dispatch(setProgressModelState(true));
       postRequest('signup_post', userData, { profileType: profileType })
         .then(res => {
-          const { token, refresh_token } = res.data;
+          const { token, refresh_token, data } = res.data;
           updateJWT(token, refresh_token);
           dispatch(loadUserProfile());
-          debug('registration successful');
-        })
-        .then(() => {
           NotificationManager.success(
             'Registration Successful',
             'Congrats',
             5000
           );
-          updateRoute('app_userHome', dispatch);
+          updateRoute(data.routeName, dispatch, null, data.routeParams);
+          dispatch(setProgressModelState(false));
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          dispatch(setProgressModelState(false));
+        });
     };
   } else {
-    window.alert('Password Invalid');
+    window.alert('Password do not match');
   }
+}
+
+export function accountActivate(token) {
+  return getRequest('app_accountActivate', { token: token });
 }

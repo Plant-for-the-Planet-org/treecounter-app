@@ -15,11 +15,15 @@ const TpoCardText = props => {
       <p className="name_tag">{cardtext.region}</p>
       <div className="middle_tag">
         <span className="col-md-8 text-left">{i18n.t('label.planted')}: </span>{' '}
-        <span className="col-md-4 text-right">{cardtext.countPlanted}</span>
+        <span className="col-md-4 text-right">
+          {parseInt(cardtext.countPlanted).toLocaleString('en')}
+        </span>
       </div>
       <div className="middle_tag">
         <span className="col-md-8 text-left">{i18n.t('label.target')}:</span>{' '}
-        <span className="text-right col-md-4">{cardtext.countTarget}</span>
+        <span className="text-right col-md-4">
+          {parseInt(cardtext.countTarget).toLocaleString('en')}
+        </span>
       </div>
       <div className="middle_tag">
         <span className="col-md-8 text-left">
@@ -37,7 +41,9 @@ const TpoCardText = props => {
       </div>
       <div className="middle_tag1">
         <span className="col-md-8 text-left">{i18n.t('label.Cost')}:</span>{' '}
-        <span className="text-right col-md-4">{cardtext.treeCost}</span>
+        <span className="text-right col-md-4">
+          {cardtext.treeCost.toFixed(2)}
+        </span>
       </div>
     </div>
   );

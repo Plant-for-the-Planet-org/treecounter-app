@@ -8,7 +8,8 @@ import {
   plantedTarget,
   target,
   tree_survival,
-  dollar
+  dollar,
+  questionmark_orange
 } from '../../assets';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectSpecs
@@ -25,11 +26,7 @@ const PlantProjectSpecs = ({
   return (
     <div className="project-specs__container">
       <div className="project-info">
-        <PlantProjectSpecsItem
-          icon={locationIcon}
-          value={location}
-          label={i18n.t('label.location')}
-        />
+        <PlantProjectSpecsItem icon={locationIcon} label={location} />
         <PlantProjectSpecsItem
           icon={plantedTarget}
           value={countPlanted}
@@ -44,22 +41,25 @@ const PlantProjectSpecs = ({
       <div className="plants-info">
         <PlantProjectSpecsItem
           icon={tree_survival}
-          value={survivalRate}
+          value={survivalRate + '%'}
+          rightIcon={questionmark_orange}
           label={i18n.t('label.survival_rate')}
         />
         <PlantProjectSpecsItem
           icon={dollar}
-          value={`${currency} ${treeCost}`}
+          value={`${currency} ${parseFloat(treeCost).toLocaleString('en')}`}
           label={i18n.t('label.Cost')}
         />
         <div className="project-specs__taxdeductible">
-          {taxDeduction
-            ? i18n.t('label.tax_deductible') +
-              ' ' +
-              i18n.t('label.in') +
-              ' ' +
-              taxDeduction.join(', ')
-            : null}
+          {taxDeduction && taxDeduction.length ? (
+            <div className="tax-deductible">
+              {i18n.t('label.tax_deductible') +
+                ' ' +
+                i18n.t('label.in') +
+                ' ' +
+                taxDeduction.join(', ')}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

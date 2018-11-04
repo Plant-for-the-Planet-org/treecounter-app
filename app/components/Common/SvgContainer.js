@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import '../../sass/treecounter.scss';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug/index';
 // import TargetComment from '../TreecounterGraphics/TargetComment';
 // import PlantDetails from '../TreecounterGraphics/PlantDetails';
 
 export default class SvgContainer extends Component {
   constructor(props) {
-    debug('constructing SvgContainer with props: ', props);
-    console.log('########## constructor');
     super(props);
     const { exposeMissing } = this.props;
 
@@ -41,8 +37,6 @@ export default class SvgContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('########## componentWillReceiveProps');
-
     if (!nextProps.id) {
       return;
     }
@@ -148,7 +142,6 @@ export default class SvgContainer extends Component {
   // RESET
   //********************************************************************************************************************
   renderReset() {
-    console.log('##### renderSections');
     //------------------------------------------------------------------------------------------------------------------
     // define class names for all trees and pots, set all trees visible, pots hidden
     this.getAllTreeIds().map(function(treeId) {
@@ -176,7 +169,6 @@ export default class SvgContainer extends Component {
   // RENDER Tees/Pots
   //********************************************************************************************************************
   renderSections(sectionTrees, values, total) {
-    console.log('##### renderSections');
     const maxTicks = 125;
     const maxAngleLength = 1477;
     const interval = 30;
@@ -258,13 +250,6 @@ export default class SvgContainer extends Component {
   }
 
   getSectionAngleRanges(sectionConfig, values, total, maxAngle) {
-    console.log(
-      'sectionConfig, values, total, maxAngle',
-      sectionConfig,
-      values,
-      total,
-      maxAngle
-    );
     const sectionAngleRanges = new Map();
     let currentMax = 0;
     Object.keys(sectionConfig).map(
@@ -674,22 +659,6 @@ export default class SvgContainer extends Component {
           <path
             className="st29"
             d="M661.9,663.8c12.6,13.8,23.9,24.9,31.8,29.7c0,0-13.6-14.2-17.9-18.1C671.6,671.4,661.9,663.8,661.9,663.8z"
-          />
-          <ellipse
-            transform="matrix(0.6821 -0.7312 0.7312 0.6821 -271.4115 696.9774)"
-            className="st30"
-            cx="666"
-            cy="660.7"
-            rx="1.3"
-            ry="1.3"
-          />
-          <ellipse
-            transform="matrix(0.6821 -0.7312 0.7312 0.6821 -279.9945 693.9464)"
-            className="st31"
-            cx="658.2"
-            cy="669"
-            rx="1.3"
-            ry="1.3"
           />
         </g>
         <g ref="Baum_Klein">

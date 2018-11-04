@@ -70,6 +70,7 @@ class Popover extends Component {
           ref="popover"
           tabIndex="0"
           onBlur={this.PopoverBlurred}
+          onClick={this.PopoverBlurred}
           onFocus={this.PopoverFocused}
           style={
             this.state.focused

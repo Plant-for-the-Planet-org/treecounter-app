@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { v1 as uuidv1 } from 'uuid';
 
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { fetchItem, saveItem } from '../stores/localStorage';
 import { getAccessToken } from './user';
 import { getApiRoute } from '../actions/apiRouting';
 import { getStore } from '../components/App/index';
 import { logoutUser } from '../actions/authActions';
+import { context } from '../config';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -17,8 +19,10 @@ function checkStatus(response) {
 }
 
 function onAPIError(error) {
-  if (error.response.status === 401) {
-    console.log('clear storage');
+  if (error.response) {
+    NotificationManager.error(error.response.data.message, 'Error', 5000);
+  }
+  if (error.response && error.response.status === 401) {
     getStore().dispatch(logoutUser());
   } else {
     throw error;
@@ -42,7 +46,15 @@ async function getHeaders(authenticated = false) {
 
 export async function getSessionId() {
   return fetchItem('session_id')
-    .then(sessionId => sessionId)
+    .then(sessionId => {
+      if (sessionId !== undefined) {
+        return sessionId;
+      } else {
+        const sessionId = uuidv1();
+        saveItem('session_id', sessionId);
+        return sessionId;
+      }
+    })
     .catch(() => {
       const sessionId = uuidv1();
       saveItem('session_id', sessionId);
@@ -51,7 +63,7 @@ export async function getSessionId() {
 }
 
 export async function getRequest(route, params, authenticated = false) {
-  let url = getApiRoute(route, params);
+  let url = await getApiRoute(route, params);
   return await axios
     .get(url, await getHeaders(authenticated))
     .then(checkStatus)
@@ -64,7 +76,18 @@ export async function getAuthenticatedRequest(route, params) {
 }
 
 export async function postRequest(route, data, params, authenticated = false) {
-  let url = getApiRoute(route, params);
+  let url = await getApiRoute(route, params);
+  return await axios
+    .post(url, data, await getHeaders(authenticated))
+    .then(checkStatus)
+    .then(onAPIResponse)
+    .catch(onAPIError);
+}
+
+export async function postDirectRequest(path, data, authenticated = false) {
+  const { scheme, host } = context;
+  const serverName = `${scheme}://${host}`;
+  const url = `${serverName}${path}`;
   return await axios
     .post(url, data, await getHeaders(authenticated))
     .then(checkStatus)
@@ -77,7 +100,7 @@ export async function postAuthenticatedRequest(route, data, params) {
 }
 
 export async function putRequest(route, data, params, authenticated = false) {
-  let url = getApiRoute(route, params);
+  let url = await getApiRoute(route, params);
   return await axios
     .put(url, data, await getHeaders(authenticated))
     .then(checkStatus)
@@ -87,4 +110,17 @@ export async function putRequest(route, data, params, authenticated = false) {
 
 export async function putAuthenticatedRequest(route, data, params) {
   return putRequest(route, data, params, true);
+}
+
+export async function deleteRequest(route, params, authenticated = false) {
+  let url = await getApiRoute(route, params);
+  return await axios
+    .delete(url, await getHeaders(authenticated))
+    .then(checkStatus)
+    .then(onAPIResponse)
+    .catch(onAPIError);
+}
+
+export async function deleteAuthenticatedRequest(route, params) {
+  return deleteRequest(route, params, true);
 }

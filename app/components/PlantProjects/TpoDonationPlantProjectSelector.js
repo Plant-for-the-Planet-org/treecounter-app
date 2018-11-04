@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import ContentHeader from '../Common/ContentHeader';
 import PlantProjectCarousel from './PlantProjectCarousel';
 import i18n from '../../locales/i18n';
@@ -32,7 +32,6 @@ class TpoDonationPlantProjectSelector extends React.Component {
   }
 
   onCarouselChange(newPlantProjectId) {
-    console.log('onCarouselChange:: currentPlantProjectId', newPlantProjectId);
     this.setState({ currentPlantProjectId: newPlantProjectId });
   }
 
@@ -46,13 +45,8 @@ class TpoDonationPlantProjectSelector extends React.Component {
 
     return (
       <CardLayout className="tpo-footer-card-layout">
-        <ContentHeader caption={caption} />
-        {1 === plantProjects.length ? (
-          <TagName
-            plantProject={plantProjects.find(() => true)}
-            expanded={false}
-          />
-        ) : (
+        <div className="tpo-footer__container">
+          <ContentHeader caption={caption} />
           <PlantProjectCarousel
             contentTag={TagName}
             plantProjects={plantProjects}
@@ -60,12 +54,12 @@ class TpoDonationPlantProjectSelector extends React.Component {
             currentPlantProjectId={this.state.currentPlantProjectId}
             onChange={this.onCarouselChange}
           />
-        )}
-        <PrimaryButton
-          onClick={() => onSelect(this.state.currentPlantProjectId)}
-        >
-          {i18n.t('label.donate')}
-        </PrimaryButton>
+          <PrimaryButton
+            onClick={() => onSelect(this.state.currentPlantProjectId)}
+          >
+            {i18n.t('label.donate')}
+          </PrimaryButton>
+        </div>
       </CardLayout>
     );
   }

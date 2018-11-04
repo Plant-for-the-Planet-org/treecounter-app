@@ -5,7 +5,7 @@ import t from 'tcomb-form';
 import Tabs from '../Common/Tabs';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import {
   singleTreeRegisterFormSchema,
   schemaOptionsSingleTree,
@@ -13,6 +13,8 @@ import {
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
+import RegistrationMap from './RegistrationMap';
+import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 
 let TCombForm = t.form.Form;
 
@@ -94,6 +96,7 @@ export default class RegisterTrees extends Component {
     // Bind Local method
     this.onSubmitClick = this.onSubmitClick.bind(this);
     this.handleModeOptionChange = this.handleModeOptionChange.bind(this);
+    this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
   }
 
   onSubmitClick() {
@@ -104,33 +107,44 @@ export default class RegisterTrees extends Component {
     this.setState({ mode: tab });
   }
 
+  handleGeoLocationChange(geoLocation) {
+    console.log(geoLocation);
+  }
+
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>{i18n.t('label.heading_register_trees')}</TextHeading>
+        <TextHeading>
+          {i18n.t('label.heading_register_trees')}
+          <DescriptionHeading>
+            {i18n.t('label.register_description')}
+          </DescriptionHeading>
+        </TextHeading>
         <CardLayout>
-          <Tabs
-            data={RegisterTrees.data.tabs}
-            onTabChange={this.handleModeOptionChange}
-          >
-            {this.state.mode === RegisterTrees.data.tabs[0].id ? (
-              <TCombForm
-                ref="registerTreeForm"
-                type={singleTreeRegisterFormSchema}
-                options={schemaOptionsSingle}
-                value={this.state.individual}
-              />
-            ) : (
-              <TCombForm
-                ref="registerTreeForm"
-                type={multipleTreesRegisterFormSchema}
-                options={schemaOptionsMultiple}
-              />
-            )}
-          </Tabs>
-          <PrimaryButton onClick={this.onSubmitClick}>
-            {i18n.t('label.register')}
-          </PrimaryButton>
+          <form onSubmit={this.onSubmitClick}>
+            <Tabs
+              data={RegisterTrees.data.tabs}
+              onTabChange={this.handleModeOptionChange}
+            >
+              {this.state.mode === RegisterTrees.data.tabs[0].id ? (
+                <TCombForm
+                  ref="registerTreeForm"
+                  type={singleTreeRegisterFormSchema}
+                  options={schemaOptionsSingle}
+                  value={this.state.individual}
+                />
+              ) : (
+                <TCombForm
+                  ref="registerTreeForm"
+                  type={multipleTreesRegisterFormSchema}
+                  options={schemaOptionsMultiple}
+                />
+              )}
+            </Tabs>
+            <PrimaryButton onClick={this.onSubmitClick}>
+              {i18n.t('label.register')}
+            </PrimaryButton>
+          </form>
         </CardLayout>
       </div>
     );

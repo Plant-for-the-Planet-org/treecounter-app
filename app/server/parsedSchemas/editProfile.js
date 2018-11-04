@@ -1,19 +1,33 @@
 import schemaLiform, { plantProject } from '../formSchemas/editProfile';
-import parseJsonToTcomb from '../parserLiformToTcomb';
-import PlantProjectListTemplate from '../../components/EditUserProfile/PlantProjectListTemplate';
+import PlantProjectImageListTemplate from '../../components/EditUserProfile/PlantProjectImageListTemplate.js';
+
+import callParser from '../callParser';
+// import FilePickerTemplate from '../../components/EditUserProfile/PlantProjectFilePickerTemplate';
 
 const parsedSchema = {};
 Object.keys(schemaLiform).map(userType => {
   parsedSchema[userType] = Object.assign(
     {},
     ...Object.keys(schemaLiform[userType]).map(k => ({
-      [k]: parseJsonToTcomb(schemaLiform[userType][k].schema)
+      [k]: callParser(schemaLiform[userType][k].schema)
     }))
   );
 });
 
-const plantProjectSchema = parseJsonToTcomb(plantProject.schema, {
-  array: PlantProjectListTemplate
-});
+const config = {
+  plantProjectImages: {
+    array: {
+      template: PlantProjectImageListTemplate,
+      disableRemove: false
+    }
+  }
+};
+const plantProjectSchema = callParser(plantProject.schema, config);
 
+// {
+//   plantProjects: {
+//     array: { template: PlantProjectListTemplate, disableRemove: false }
+//   },
+//   image: { file: { template: FilePickerTemplate } }
+// }
 export { parsedSchema, plantProjectSchema };

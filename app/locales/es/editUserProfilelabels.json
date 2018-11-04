@@ -1,0 +1,18 @@
+{
+  "sure": "¿Estás seguro?",
+  "delete_confirmation": "Una vez confirmado, todos los datos de su cuenta serán eliminados. Esto no se puede deshacer",
+  "password_changed": "tu contraseña ha sido cambiada con éxito",
+  "return_to_profile": "Volver a mi perfil",
+  "new_project": "Agregar nuevo proyecto",
+  "Location": "Ubicación",
+  "description": "Descripción",
+  "gallery": "Galería de Imágenes",
+  "video": "Vídeo",
+  "updated_successful": "Actualizado exitosamente",
+  "error_title": "Error de actualización del perfil",
+  "plant_project_update_success": "Proyecto de planta actualizado con éxito",
+  "plant_project_delete_success": "Proyecto de Plantación eliminado con éxito",
+  "plant_project_added_success": "Proyecto de Plantación creado con éxito",
+  "plant_project_error_title": "Error de actualización del proyecto de plantación",
+  "same_password_error": "Por favor ingrese la misma contraseña"
+}

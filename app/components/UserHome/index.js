@@ -1,56 +1,83 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import i18n from '../../locales/i18n';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import SvgContainer from '../Common/SvgContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
-import { profile } from '../../assets';
-import { getImageUrl } from '../../actions/apiRouting';
-
+import UserProfileImage from '../Common/UserProfileImage';
+import { getProfileTypeName } from '../PublicTreeCounter/utils';
+import { getDocumentTitle } from '../../helpers/utils';
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
+
     let svgData = {};
-    const { treecounterData } = props;
-    if (treecounterData) {
-      svgData = treecounterData;
-    }
+    const { treecounterData, userProfile } = props;
+    if (userProfile)
+      if (treecounterData) {
+        svgData = { ...treecounterData, type: userProfile.type };
+      }
     this.state = {
       svgData: svgData
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    const { treecounterData } = nextProps;
+    const { treecounterData, userProfile } = nextProps;
     if (treecounterData) {
-      let svgData = treecounterData;
+      let svgData = { ...treecounterData, type: userProfile.type };
       this.setState({ svgData });
+    }
+  }
+  updateSvg(toggle) {
+    if (toggle) {
+      const treecounter = this.props.treecounterData;
+      const profileType = this.props.userProfile.type;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countCommunity + treecounter.countPersonal, // light color
+        planted: treecounter.countPersonal, //dark color
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: profileType
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    } else {
+      const treecounter = this.props.treecounterData;
+      const profileType = this.props.userProfile.type;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countTarget,
+        planted: treecounter.countPlanted,
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: profileType
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
     }
   }
 
   render() {
-    console.log('Home Component Render with props- ', this.props);
-
     const { treecounterData, userProfile } = this.props;
+    document.title = getDocumentTitle(userProfile.treecounter.displayName);
+    const profileType = getProfileTypeName(userProfile.type);
     let { svgData } = this.state;
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <div className="tree-counter-profile flex-column">
-          <div className="header-logo">
-            {
-              <img
-                src={
-                  userProfile.image
-                    ? getImageUrl('profile', 'thumb', userProfile.image)
-                    : profile
-                }
-              />
-            }
-          </div>
-          <div className="tree-counter-name">{userProfile.name}</div>
-          <div className="tree-counter-row">
-            <UserProfileTypeLabel profileType={userProfile.type} />
+        <div className="tree-counter-profile flex-column user-home-profile">
+          <UserProfileImage profileImage={userProfile.image} />
+          <div className="user-info">
+            <div className="tree-counter-name">
+              {userProfile.treecounter.displayName}
+            </div>
+            <div className="tree-counter-row">
+              <UserProfileTypeLabel profileType={profileType} />
+            </div>
           </div>
         </div>
         <div className="canvasContainer flex-column">
@@ -63,6 +90,7 @@ export default class UserHome extends Component {
             <TreecounterGraphicsText
               trillion={false}
               treecounterData={svgData}
+              onToggle={toggleVal => this.updateSvg(toggleVal)}
             />
           )}
         </div>

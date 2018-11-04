@@ -23,6 +23,8 @@ import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import FAQContainer from '../../containers/FAQ';
+import PledgeContainer from '../../containers/Pledge';
+import RedemptionContainer from '../../containers/RedemptionContainer';
 
 import Footer from '../Footer';
 
@@ -35,12 +37,17 @@ import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { NotificationAction } from '../../actions/notificationAction';
 import { getAccessToken } from '../../utils/user';
-import { currentUserProfileSelector } from '../../selectors/index';
+import { currentUserProfileSelector } from '../../selectors';
 import { getLocalRoute } from '../../actions/apiRouting';
 import SuccessfullyActivatedAccount from '../../containers/Authentication/SuccessfullActivatedContainer';
 import DonationTreesContainer from '../../containers/DonateTrees/index';
+import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 
-import EditUserProfileContainer from '../../containers/EditUserProfile/index';
+import EditUserProfileContainer from '../../containers/EditUserProfile';
+import LeaderboardContainer from '../../containers/Leaderboard';
+import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
+import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
+
 // Class implementation
 class TreeCounter extends Component {
   constructor(props) {
@@ -71,6 +78,7 @@ class TreeCounter extends Component {
 
   componentDidMount() {
     this.props.loadTpos();
+    this.props.fetchpledgeEventsAction();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -82,7 +90,6 @@ class TreeCounter extends Component {
 
   render() {
     let isLoggedIn = this.state.isLoggedIn;
-
     const PrivateRoute = ({ component: Component, ...rest }) => (
       <Route
         {...rest}
@@ -113,13 +120,18 @@ class TreeCounter extends Component {
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
+            <ProgressModal isOpen={this.props.progressModel} />
             <HeaderContainer />
-            <SideMenuContainer loggedIn={isLoggedIn} />
+            <Route component={SideMenuContainer} />
             <div className="app-container__content">
               <PublicRoute exact path="/" component={Trillion} />
               <Route
                 exact
-                path={getLocalRoute('app_homepage')}
+                path={
+                  getLocalRoute('app_homepage') !== '/'
+                    ? getLocalRoute('app_homepage')
+                    : 'null'
+                }
                 component={Trillion}
               />
               <PublicRoute
@@ -155,6 +167,24 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_passwordSent')}
                 component={EmailSentContainer}
               />
+              <Route
+                path={getLocalRoute('app_explore')}
+                component={LeaderboardContainer}
+              />
+              <Route
+                exact
+                path={getLocalRoute('app_leaderboard') + '/:section'}
+                component={LeaderboardContainer}
+              />
+              <Route
+                exact
+                path={
+                  getLocalRoute('app_leaderboard') +
+                  '/:section' +
+                  '/:subSection'
+                }
+                component={LeaderboardContainer}
+              />
               <PrivateRoute
                 path={getLocalRoute('app_target')}
                 component={TargetContainer}
@@ -178,16 +208,28 @@ class TreeCounter extends Component {
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
               <Route
-                path={getLocalRoute('app_donateTrees')}
-                component={DonationTreesContainer}
-              />
-              <Route
                 path={getLocalRoute('app_giftTrees')}
                 component={GiftTreesContainer}
               />
               <Route
                 path={getLocalRoute('app_selectProject')}
                 component={SelectPlantProjectContainer}
+              />
+              <Route
+                path={getLocalRoute('app_donateTrees')}
+                component={DonationTreesContainer}
+              />
+              <Route
+                path={getLocalRoute('app_claim') + '/:type' + '/:code'}
+                component={RedemptionContainer}
+              />
+              <Route
+                path={getLocalRoute('app_redeem') + '/:type?' + '/:code?'}
+                component={RedemptionContainer}
+              />
+              <Route
+                path={getLocalRoute('app_pledge') + '/:eventSlug'}
+                component={PledgeContainer}
               />
               <Route
                 path={getLocalRoute('app_treecounter') + '/:treecounterId'}
@@ -204,7 +246,8 @@ class TreeCounter extends Component {
 }
 
 const mapStateToProps = state => ({
-  userProfile: currentUserProfileSelector(state)
+  userProfile: currentUserProfileSelector(state),
+  progressModel: state.modelDialogState.progressModel
 });
 
 const mapDispatchToProps = dispatch => {
@@ -212,7 +255,8 @@ const mapDispatchToProps = dispatch => {
     {
       loadUserProfile,
       NotificationAction,
-      loadTpos
+      loadTpos,
+      fetchpledgeEventsAction
     },
     dispatch
   );
@@ -225,5 +269,7 @@ TreeCounter.propTypes = {
   loadUserProfile: PropTypes.func,
   NotificationAction: PropTypes.func,
   loadTpos: PropTypes.func,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
+  progressModel: PropTypes.bool,
+  fetchpledgeEventsAction: PropTypes.func
 };

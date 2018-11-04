@@ -1,0 +1,28 @@
+{
+  "menu": "menu",
+  "signUp": "Sign Up",
+  "home": "home",
+  "search": "search",
+  "placeholder_value": "Type a name ...",
+  "welcome_hi": "Hi ",
+  "welcome_symbol": "",
+  "edit_profile": "Edit Profile",
+  "help": "Help",
+  "logout": "Logout",
+  "save_changes": "Save Changes",
+  "about_me": "About me",
+  "change_password": "Change password",
+  "delete_profile": "Delete Profile",
+  "un_subscribe": "Following",
+  "subscribe": "Follow",
+  "profile": "Profile",
+  "gender": "Gender",
+  "password": "Password",
+  "no_notifications": "You have no notifications",
+  "all_notifications": "See all notifications",
+  "success_title": "Success",
+  "about_us": "About",
+  "open_source_license": "Open Source License",
+  "license_credit_info":
+    "This Application uses Open source components.you can find the source code of their open source projects along with license information below. we acknowledge and are greatful to these developers for their contributions to open source"
+}

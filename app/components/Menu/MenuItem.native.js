@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import PropTypes, { func } from 'prop-types';
-
+import TouchableItem from '../../components/Common/TouchableItem';
 import * as images from '../../assets';
 import i18n from '../../locales/i18n.js';
+import styles from '../../styles/menu_item';
 
 export default class MenuGroup extends Component {
   static propTypes = {
@@ -37,9 +38,9 @@ export default class MenuGroup extends Component {
   }
 }
 
-class MenuItem extends Component {
+export class MenuItem extends Component {
   static propTypes = {
-    iconUrl: PropTypes.string,
+    iconUrl: PropTypes.any,
     titleId: PropTypes.any, //key it will use for localization
     title: PropTypes.string,
     onPress: PropTypes.func.isRequired
@@ -47,58 +48,37 @@ class MenuItem extends Component {
 
   render() {
     return (
-      <TouchableOpacity onPress={this.props.onPress}>
+      <TouchableItem onPress={this.props.onPress}>
         <View style={styles.menuItemContainer}>
           <Image style={styles.imageStyle} source={this.props.iconUrl} />
           <Text style={styles.textStyle}>
             {this.props.titleId ? i18n.t('label.load') : this.props.title}
           </Text>
         </View>
-      </TouchableOpacity>
+      </TouchableItem>
     );
   }
 }
 
-export const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    paddingLeft: 40,
-    paddingBottom: 10
-  },
-  menuItemContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingLeft: 3,
-    paddingBottom: 10
-  },
-  groupMenuContainer: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    paddingBottom: 10
-  },
-  imageStyle: {
-    width: 17,
-    height: 18,
-    resizeMode: 'center'
-  },
-  textStyle: {
-    paddingLeft: 5,
-    fontSize: 11,
-    color: '#6a6161'
-  },
-  gropuTextStyle: {
-    fontWeight: '600',
-    fontSize: 11,
-    color: '#6a6161',
-    marginBottom: 8
-  },
-  titleTextUnderline: {
-    height: 2,
-    width: 25,
-    backgroundColor: '#b9d384',
-    marginLeft: 2
+export class LargeMenuItem extends Component {
+  static propTypes = {
+    iconUrl: PropTypes.any,
+    titleId: PropTypes.any, //key it will use for localization
+    title: PropTypes.string,
+    onPress: PropTypes.func.isRequired,
+    style: PropTypes.any
+  };
+
+  render() {
+    return (
+      <TouchableItem onPress={this.props.onPress}>
+        <View style={[styles.largeMenuItemContainer, this.props.style]}>
+          <Image style={styles.largeImageStyle} source={this.props.iconUrl} />
+          <Text style={styles.largeTextStyle}>
+            {this.props.titleId ? i18n.t('label.load') : this.props.title}
+          </Text>
+        </View>
+      </TouchableItem>
+    );
   }
-});
+}

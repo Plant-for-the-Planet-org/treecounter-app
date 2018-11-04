@@ -1,0 +1,11 @@
+{
+  "sure": "Bist du dir sicher ?",
+  "delete_confirmation": "Sobald du bestätigst, werden alle deine Kontodaten gelöscht. Das kann nicht rückgängig gemacht werden",
+  "password_changed": "Dein Passwort wurde erfolgreich geändert",
+  "return_to_profile": "Zurück zu meinem Profil",
+  "new_project": "Neues Projekt hinzufügen",
+  "Location": "Lage",
+  "description": "Beschreibung",
+  "gallery": "Bildergalerie",
+  "video": "Video"
+}

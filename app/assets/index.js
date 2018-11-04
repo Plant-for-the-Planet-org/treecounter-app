@@ -11,7 +11,16 @@ import heart_outline from './images/icons/heart_outline.png';
 import rocket_outline from './images/icons/rocket_outline.png';
 import shovel_outline from './images/icons/shovel_outline.png';
 import target_outline from './images/icons/target_outline.png';
-import pot from './images/pot.svg';
+import tree_outline_red from './images/icons/tree_outline_red.png';
+import gift_outline_red from './images/icons/gift_outline_red.png';
+import challenge_outline_red from './images/icons/challenge_outline_red.png';
+import heart_outline_red from './images/icons/heart_outline_red.png';
+import rocket_outline_red from './images/icons/rocket_outline_red.png';
+import shovel_outline_red from './images/icons/shovel_outline_red.png';
+import target_outline_red from './images/icons/target_outline_red.png';
+import pledge_highest from './images/pledge_biggest.png';
+import pledge_latest from './images/pledge_recent.png';
+import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/tree.svg';
 import SideMenuImage from './images/side_menu.png';
@@ -27,10 +36,12 @@ import checkedIcon from './images/icons/checkbox_checked.png';
 import uncheckedIcon from './images/icons/checkbox_unchecked.png';
 import ProfilePic from './images/profile_pics.png';
 import EditGreen from './images/icons/edit_green.png';
+import EditOrange from './images/icons/edit_orange.png';
 import QuestionMarkGreen from './images/icons/questionmark_green.png';
 import country from './images/icons/country.png';
 import organization from './images/icons/organization.png';
 import competition from './images/icons/competition.png';
+import competition_outline from './images/icons/competition.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
 import arrow_right_orange from './images/icons/arrow_right_orange.png';
@@ -44,8 +55,61 @@ import dollar from './images/icons/dollar.png';
 import arrow_right_green from './images/icons/arrow_right_green.png';
 import arrow_left_green from './images/icons/arrow_left_green.png';
 import check_green from './images/icons/check_green.png';
+import payment_arrow from './images/icons/payment_arrow_white.png';
+import payment_bank from './images/icons/payment_banktransfer_white.png';
+import payment_credit from './images/icons/payment_creditcard_white.png';
+import payment_paypal from './images/icons/payment_paypal_white.png';
+import payment_sepa from './images/icons/payment_sepa_white.png';
+import attention from './images/icons/attention.png';
+import leaderboards_countries_green from './images/icons/leaderboards_countries_green.png';
+import leaderboards_countries_grey from './images/icons/leaderboards_countries_grey.png';
+import leaderboards_education_green from './images/icons/leaderboards_education_green.png';
+import leaderboards_education_grey from './images/icons/leaderboards_education_grey.png';
+import leaderboards_indiv_green from './images/icons/leaderboards_indiv_green.png';
+import leaderboards_indiv_grey from './images/icons/leaderboards_indiv_grey.png';
+import leaderboards_organisations_green from './images/icons/leaderboards_organisations_green.png';
+import leaderboards_organisations_grey from './images/icons/leaderboards_organisations_grey.png';
+import leaderboards_tpo_green from './images/icons/leaderboards_tpo_green.png';
+import leaderboards_tpo_grey from './images/icons/leaderboards_tpo_grey.png';
+import leaderboards_company_grey from './images/icons/leaderboards_company_grey.png';
+import leaderboards_company_green from './images/icons/leaderboards_company_green.png';
+import close_green from './images/icons/close_green.png';
+import esriLogo from './images/logo_esri.png';
+import bmzLogo from './images/logo_bmz.jpg';
+import questionmark_orange from './images/icons/questionmark.png';
+import gift_icon from './images/icons/gift_icon.png';
+import iosSearchWhite from './images/icons/ios_icon_search_white.png';
+import iosSearchGreen from './images/icons/ios_icon_search_green.png';
+import iosNotificationWhite from './images/icons/ios_icon_notification_white.png';
+import map_legend_Restoration from './images/Legend_Restoration.png';
+import map_legend_Trees from './images/Legend_Trees.png';
+import map_legend_TreeDensity from './images/Legend_TreeDensity.png';
+import burgur_menu_icon from './images/icons/menu-icon.jpg';
+import foldin from './images/icons/foldin.png';
+import foldout from './images/icons/foldout.png';
+import userAvtar from './images/icons/user_avtar.png';
+import home from './images/icons/home.png';
+import svgBackground from './svgAssets/svg_background.png';
+import darkTree from './images/darkTree.png';
+import imageUpload from './images/icons/upload_image.png';
+import iosSearchGrey from './images/icons/search_grey.png';
+import iosLogout from './images/icons/ios_logout.png';
+import iosFaqs from './images/icons/ios_faqs.png';
+import iosInformation from './images/icons/ios_information.png';
+import lightTree from './images/lightTree.png';
 
 export {
+  darkTree,
+  svgBackground,
+  bmzLogo,
+  esriLogo,
+  pledge_highest,
+  pledge_latest,
+  payment_arrow,
+  payment_bank,
+  payment_credit,
+  payment_paypal,
+  payment_sepa,
   MapPinBlue,
   MapPinGreen,
   MapPinRed,
@@ -63,6 +127,13 @@ export {
   plantingTreeImage,
   key,
   email,
+  tree_outline_red,
+  gift_outline_red,
+  challenge_outline_red,
+  heart_outline_red,
+  rocket_outline_red,
+  shovel_outline_red,
+  target_outline_red,
   tree_outline,
   gift_outline,
   challenge_outline,
@@ -79,6 +150,7 @@ export {
   country,
   organization,
   competition,
+  competition_outline,
   education,
   company,
   arrow_left_orange,
@@ -91,5 +163,39 @@ export {
   dollar,
   arrow_right_green,
   arrow_left_green,
-  check_green
+  check_green,
+  attention,
+  leaderboards_countries_grey,
+  leaderboards_countries_green,
+  leaderboards_education_green,
+  leaderboards_education_grey,
+  leaderboards_indiv_green,
+  leaderboards_indiv_grey,
+  leaderboards_organisations_green,
+  leaderboards_organisations_grey,
+  leaderboards_tpo_green,
+  leaderboards_tpo_grey,
+  leaderboards_company_grey,
+  leaderboards_company_green,
+  close_green,
+  questionmark_orange,
+  gift_icon,
+  map_legend_Restoration,
+  map_legend_Trees,
+  map_legend_TreeDensity,
+  burgur_menu_icon,
+  foldin,
+  foldout,
+  userAvtar,
+  home,
+  EditOrange,
+  iosSearchWhite,
+  iosNotificationWhite,
+  imageUpload,
+  iosSearchGreen,
+  iosSearchGrey,
+  iosLogout,
+  iosFaqs,
+  iosInformation,
+  lightTree
 };

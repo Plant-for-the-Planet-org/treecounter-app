@@ -2,19 +2,32 @@ import {
   singleTreeForm,
   multipleTreesForm
 } from '../formSchemas/registerTrees';
-import parseJsonToTcomb from '../parserLiformToTcomb';
+import callParser from '../callParser';
+//import MeasurementListTemplate from '../../components/RegisterTrees/MeasurementListTemplate';
+const config = {
+  contributionImages: {
+    array: {
+      disableRemove: false
+    }
+  }
+  // contributionMeasurements: {
+  //   array: {
+  //     template: MeasurementListTemplate,
+  //     disableRemove: false
+  //   }
+  // }
+};
 
 const {
   transformedSchema: singleTreeRegisterFormSchema,
   schemaOptions: schemaOptionsSingleTree
-} = parseJsonToTcomb(singleTreeForm);
+} = callParser(singleTreeForm, config);
 
 const {
   transformedSchema: multipleTreesRegisterFormSchema,
   schemaOptions: schemaOptionsMultipleTrees
-} = parseJsonToTcomb(multipleTreesForm);
+} = callParser(multipleTreesForm, config);
 
-console.log(schemaOptionsSingleTree);
 export {
   singleTreeRegisterFormSchema,
   multipleTreesRegisterFormSchema,

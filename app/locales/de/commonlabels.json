@@ -1,0 +1,5 @@
+{
+  "loading": "Laden ...",
+  "enterValidEmail": "Gib eine gültige Email-Adresse ein",
+  "invalidLength": "Ungültige Länge: sollte kürzer sein als {length}"
+}

@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  ImageBackground,
-  ScrollView
-} from 'react-native';
+import { Text, View, ImageBackground, ScrollView } from 'react-native';
 
 import {
   schemaOptions,
   signupFormSchema
 } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
-
-import { loginStyles } from '../Login';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
+import styles from '../../../styles/login';
 import SignupTypes from './SignupType';
 
 let Form = t.form.Form;
@@ -56,12 +49,13 @@ export default class SignUp extends Component {
               type={signupFormSchema[Profiletype]}
               options={schemaOptions[Profiletype]}
             />
-            <TouchableHighlight
-              onPress={this.props.onSignUpClicked.bind(this, Profiletype)}
-              style={styles.button}
+            <PrimaryButton
+              onClick={() => {
+                this.props.onSignUpClicked(Profiletype);
+              }}
             >
-              <Text style={styles.buttonText}>{i18n.t('label.signUp')}</Text>
-            </TouchableHighlight>
+              {i18n.t('label.signUp')}
+            </PrimaryButton>
             <View style={styles.bottomRow}>
               <Text style={styles.bottomText}>
                 {i18n.t('label.already_have_account')}
@@ -86,8 +80,8 @@ SignUp.propTypes = {
   onError: PropTypes.func
 };
 
-export const styles = StyleSheet.create({
-  ...loginStyles,
-  titleText: { ...loginStyles.titleText, width: 129 },
-  titleTextUnderline: { ...loginStyles.titleTextUnderline, width: 119 }
-});
+// export const styles = StyleSheet.create({
+//   ...loginStyles,
+//   titleText: { ...loginStyles.titleText, width: 129 },
+//   titleTextUnderline: { ...loginStyles.titleTextUnderline, width: 119 }
+// });

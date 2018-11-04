@@ -9,7 +9,7 @@ import {
 
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n.js';
 
 let TCombForm = t.form.Form;
@@ -45,7 +45,7 @@ export default class Target extends Component {
 
   render() {
     return (
-      <div className="app-container__content--center sidenav-wrapper">
+      <div className="app-container__content--center sidenav-wrapper target_container">
         <TextHeading>{i18n.t('label.set_target')}</TextHeading>
         <CardLayout>
           <TCombForm

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import TextHeading from '../../Common/Heading/TextHeading';
-import CardLayout from '../../Common/Card/CardLayout';
+import CardLayout from '../../Common/Card';
 import TextBlock from '../../Common/Text/TextBlock';
 import { check_green } from '../../../assets';
 import InlineLink from '../../../components/Common/InlineLink';

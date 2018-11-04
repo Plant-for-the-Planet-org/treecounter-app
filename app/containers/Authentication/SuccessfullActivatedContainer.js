@@ -3,30 +3,23 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import SuccessfullyActivatedAccount from '../../components/Authentication/SuccessfullyActivated';
-import NotificationManager from '../../notification/PopupNotificaiton/notificationManager';
+import { accountActivate } from '../../actions/signupActions';
 
 export default class SuccessfullyActivatedContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: null
+      success: false
     };
   }
 
   componentWillMount() {
-    // this.token = this.props.match.params.token;
-    this.setState({ token: this.props.match.params.token });
-    axios
-      .get('/auth/en/accountActivate', {
-        token: this.state.token
-      })
-      .then(success => console.log(success))
-      .catch(err =>
-        NotificationManager.error(err.message, 'Some error occured', 5000)
-      );
+    accountActivate(this.props.match.params.token).then(res =>
+      this.setState({ success: true })
+    );
   }
   render() {
-    return <SuccessfullyActivatedAccount />;
+    return this.state.success ? <SuccessfullyActivatedAccount /> : null;
   }
 }
 

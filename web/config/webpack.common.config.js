@@ -43,6 +43,13 @@ const config = {
   },
   plugins: [
     new HtmlWebPackPlugin({
+      inject: true,
+      chunks: ['widget'],
+      filename: './testwidget.html',
+      template: './web/widget.index.html'
+    }),
+    new HtmlWebPackPlugin({
+      chunks: ['bundle'],
       template: './web/index.html',
       filename: './index.html'
     }),

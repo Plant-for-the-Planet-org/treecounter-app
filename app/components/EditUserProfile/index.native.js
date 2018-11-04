@@ -78,7 +78,6 @@ export default class EditUserProfile extends Component {
               </View>
               <PrimaryButton
                 onClick={() => {
-                  console.log('refs', this.refs);
                   this.props.onSave(type, 'profile', this.refs.tabView.refs);
                 }}
               >
@@ -90,19 +89,47 @@ export default class EditUserProfile extends Component {
         break;
       case 'desc':
         return (
-          <View {...this.props} style={styles.listContainer}>
-            <ScrollView>
-              <Text>Description</Text>
-            </ScrollView>
-          </View>
+          <ScrollView>
+            <CardLayout style={{ flex: 1 }}>
+              <View {...this.props} style={styles.mapContainer}>
+                <Form
+                  ref={'about_me'}
+                  type={parsedSchema[type].about_me.transformedSchema}
+                  options={this.getFormSchemaOption(type, 'about_me')}
+                  value={this.props.currentUserProfile}
+                />
+              </View>
+              <PrimaryButton
+                onClick={() => {
+                  this.props.onSave(type, 'about_me', this.refs.tabView.refs);
+                }}
+              >
+                {i18n.t('label.save_changes')}
+              </PrimaryButton>
+            </CardLayout>
+          </ScrollView>
         );
       case 'security':
         return (
-          <View {...this.props} style={styles.listContainer}>
-            <ScrollView>
-              <Text>Security</Text>
-            </ScrollView>
-          </View>
+          <ScrollView>
+            <CardLayout style={{ flex: 1 }}>
+              <View {...this.props} style={styles.mapContainer}>
+                <Form
+                  ref={'password'}
+                  type={parsedSchema[type].password.transformedSchema}
+                  options={this.getFormSchemaOption(type, 'password')}
+                  value={this.props.currentUserProfile}
+                />
+              </View>
+              <PrimaryButton
+                onClick={() => {
+                  this.props.onSave(type, 'password', this.refs.tabView.refs);
+                }}
+              >
+                {i18n.t('label.change_password')}
+              </PrimaryButton>
+            </CardLayout>
+          </ScrollView>
         );
         break;
         return null;

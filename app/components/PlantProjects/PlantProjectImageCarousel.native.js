@@ -9,13 +9,6 @@ import {
 import React, { Component } from 'react';
 import { getImageUrl } from '../../actions/apiRouting';
 
-const urls = [
-  'https://d919ce141ef35c47fc40-b9166a60eccf0f83d2d9c63fa65b9129.ssl.cf5.rackcdn.com/images/67003.max-620x600.jpg',
-  'https://d919ce141ef35c47fc40-b9166a60eccf0f83d2d9c63fa65b9129.ssl.cf5.rackcdn.com/images/51681.max-620x600.jpg',
-  'https://d919ce141ef35c47fc40-b9166a60eccf0f83d2d9c63fa65b9129.ssl.cf5.rackcdn.com/images/66812.max-620x600.jpg',
-  'https://myanimelist.cdn-dena.com/s/common/uploaded_files/1438960604-925d1997518b66f8508c749f36810793.jpeg'
-];
-
 class PlantProjectImageCarousel extends Component {
   imageCarousel;
 
@@ -41,7 +34,7 @@ class PlantProjectImageCarousel extends Component {
 
   renderImage = idx => (
     <Image
-      //   style={StyleSheet.absoluteFill}
+      style={StyleSheet.absoluteFill}
       resizeMode="contain"
       source={{
         uri: getImageUrl('project', 'large', this.props.images[idx].image)
@@ -58,15 +51,15 @@ class PlantProjectImageCarousel extends Component {
             renderContent={this.renderImage}
           >
             {this.props.images.map(url => (
-              <Image
-                style={styles.image}
-                key={url}
-                source={{
-                  uri: getImageUrl('project', 'large', url.image),
-                  width: 100
-                }}
-                resizeMode="contain"
-              />
+              <View style={styles.imageContainer}>
+                <Image
+                  style={styles.image}
+                  key={url}
+                  source={{
+                    uri: getImageUrl('project', 'large', url.image)
+                  }}
+                />
+              </View>
             ))}
           </ImageCarousel>
         </View>
@@ -90,10 +83,18 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center'
   },
-  image: {
+  imageContainer: {
     height: 100,
-    margin: 5,
-    resizeMode: 'contain'
+    width: 100,
+    maxHeight: 100,
+    maxWidth: 100,
+    marginLeft: 5,
+    marginRight: 5
+  },
+  image: {
+    flex: 1,
+    width: undefined,
+    height: undefined
   }
 });
 export default PlantProjectImageCarousel;

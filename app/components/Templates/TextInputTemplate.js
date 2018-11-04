@@ -17,15 +17,13 @@ export function TextInputTemplate(locals) {
   }
   let error = locals.hasError;
   let className;
-  if (locals.help === 'redeem') {
-    className = 'pftp-textfield_redeeminput';
+
+  if (!error) {
+    className = 'pftp-textfield__inputgroup';
   } else {
-    if (!error) {
-      className = 'pftp-textfield__inputgroup';
-    } else {
-      className = 'pftp-textfield__error-inputgroup';
-    }
+    className = 'pftp-textfield__error-inputgroup';
   }
+
   return locals.type !== 'hidden' ? (
     <div className="pftp-textfield-container">
       <div className="pftp-textfield">
@@ -51,6 +49,7 @@ export function TextInputTemplate(locals) {
               onChange={onChange}
             />
           )}
+
           <span
             className={
               !error

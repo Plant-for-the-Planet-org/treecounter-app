@@ -170,6 +170,7 @@ export default class Redemption extends Component {
                   autoComplete="new-password"
                   required="required"
                   disabled={disabled}
+                  maxLength="20"
                   value={value}
                   onChange={evt => this.onChange(evt.target.value)}
                 />

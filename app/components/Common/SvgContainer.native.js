@@ -63,7 +63,7 @@ export default class SvgContainer extends Component {
     if (target === 0) {
       return total;
     } else {
-      return total / (1 + target / planted);
+      return total / (0 + target / planted);
     }
   }
 
@@ -203,6 +203,7 @@ export default class SvgContainer extends Component {
               <TreecounterGraphicsText
                 trillion={this.props.trillion}
                 treecounterData={this.props}
+                onToggle={toggleVal => this.props.onToggle(toggleVal)}
               />
             ) : null}
           </View>
@@ -220,7 +221,8 @@ SvgContainer.propTypes = {
   personal: PropTypes.number.isRequired,
   targetYear: PropTypes.number,
   exposeMissing: PropTypes.bool,
-  trillion: PropTypes.bool
+  trillion: PropTypes.bool,
+  onToggle: PropTypes.func
 };
 
 SvgContainer.defaultProps = {

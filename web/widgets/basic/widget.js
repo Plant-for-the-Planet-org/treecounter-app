@@ -3,6 +3,7 @@ import axios from 'axios';
 import { context } from '../../../app/config';
 import { tree_outline } from '../../../app/assets';
 import './basic.widget.scss';
+import i18n from './locales/i18n';
 const widget = require('./basic.widget.html');
 const { scheme, host, base: baseUrl } = context;
 
@@ -42,8 +43,14 @@ document.addEventListener('DOMContentLoaded', function() {
             shadowRoot.innerHTML =
               cssStyle +
               widget
-                .replace('${tree-count}', result.data.countPersonal)
+                .replace(
+                  '${tree-count}',
+                  i18n.t('label.planted_trees', {
+                    count: result.data.countPersonal
+                  })
+                )
                 .replace('${user}', result.data.displayName)
+                .replace('${plant_trees}', i18n.t('label.plant_trees'))
                 .replace('${img-src}', tree_outline)
                 .replace('${user-id}', uid);
             console.log(result);
@@ -52,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.pftp = {
               giftTree: event => {
                 console.log(event);
-
                 const uid = event.target.id;
                 const url = `${serverName}${baseUrl}/giftTrees?uid=${uid}`;
                 console.log(serverName);

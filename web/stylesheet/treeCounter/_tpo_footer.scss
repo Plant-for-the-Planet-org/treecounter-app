@@ -88,8 +88,12 @@
       line-height: 1.52;
       text-align: left;
       color: $headerTextColor;
+      .teaser__tpoHeading {
+        padding-left: 5px;
+      }
       .teaser__tpoName {
         font-weight: normal;
+        padding-left: 5px;
       }
       .teaser__certified {
         width: 14px;

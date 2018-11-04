@@ -1,7 +1,7 @@
 {
   "loading": "loading ...",
-  "isRequired": " is Required",
+  "isRequired": "{{context}} is Required",
   "enterValidEmail": "Enter valid Email",
-  "invalidLength": "Invalid Length: should be less than ",
-  "invalidValueMsg": "Please enter valid "
+  "invalidLength": "Invalid Length: should be less than {length}",
+  "invalidValueMsg": "Please enter valid {{context}}"
 }

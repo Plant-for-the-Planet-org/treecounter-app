@@ -629,11 +629,11 @@ export default {
       required: [
         'firstname',
         'lastname',
-        'email',
-        'address',
-        'zipCode',
-        'city',
-        'country'
+        'email'
+        // 'address',
+        // 'zipCode',
+        // 'city',
+        // 'country'
       ],
       propertyOrder: 6
     },

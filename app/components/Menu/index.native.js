@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { View, Image, ScrollView, SafeAreaView, Text } from 'react-native';
-import MenuGroup, { MenuItem, LargeMenuItem } from './MenuItem.native';
+import { LargeMenuItem } from './MenuItem.native';
 import PropTypes, { func } from 'prop-types';
-import styles from '../../styles/menu';
-import menuItemStyles from '../../styles/menu_item';
+import styles from '../../styles/menu.native';
 import { updateRoute } from '../../helpers/routerHelper';
-import { iosLogout, iosFaqs, ProfilePic, iosInformation } from '../../assets';
+import {
+  iosLogout,
+  iosFaqs,
+  ProfilePic,
+  iosInformation,
+  EditGreen
+} from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { getImageUrl } from '../../actions/apiRouting';
+import TouchableItem from '../../components/Common/TouchableItem.native';
 
 import { row } from '../../styles/common/common_styles';
 
@@ -25,12 +31,19 @@ export default class Menu extends Component {
     const { navigation } = this.props;
     updateRoute(item.uri, navigation, 0);
   };
+  onPressUserProfile = () => {
+    const { navigation } = this.props;
+    updateRoute('app_userHome', navigation, 0);
+  };
 
   render() {
     return (
       <SafeAreaView style={styles.outerContainer}>
         {this.props.userProfile ? (
-          <View style={styles.profileContainer}>
+          <TouchableItem
+            style={styles.profileContainer}
+            onPress={() => this.onPressUserProfile()}
+          >
             <Image
               style={styles.profileImageStyle}
               source={
@@ -52,7 +65,7 @@ export default class Menu extends Component {
             <Text style={styles.profileText}>
               {this.props.userProfile.email}
             </Text>
-          </View>
+          </TouchableItem>
         ) : (
           <View style={styles.profileContainer}>
             <Image style={styles.profileImageStyle} source={ProfilePic} />
@@ -68,18 +81,14 @@ export default class Menu extends Component {
           </View>
         )}
         <ScrollView>
-          <View style={styles.imageStyle} />
-          {this.props.menuData.map(element => (
-            <MenuGroup
-              title={element.caption}
-              key={element.sequence}
-              menuItems={element.menuItems}
-              onPress={this.onPressMenu}
+          <View style={styles.centerMenu}>
+            <LargeMenuItem
+              onPress={() => {
+                this.onPressMenu({ uri: getLocalRoute('app_editProfile') });
+              }}
+              title={i18n.t('label.edit_profile')}
+              iconUrl={EditGreen}
             />
-          ))}
-        </ScrollView>
-        {this.props.userProfile && (
-          <View>
             <LargeMenuItem
               onPress={() => {
                 this.onPressMenu({ uri: getLocalRoute('app_faq') });
@@ -87,6 +96,10 @@ export default class Menu extends Component {
               title={i18n.t('label.faqs')}
               iconUrl={iosFaqs}
             />
+          </View>
+        </ScrollView>
+        {this.props.userProfile && (
+          <View>
             <LargeMenuItem
               onPress={() => {
                 this.props.logoutUser();

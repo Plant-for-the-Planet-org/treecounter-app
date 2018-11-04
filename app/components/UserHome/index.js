@@ -14,9 +14,10 @@ export default class UserHome extends Component {
 
     let svgData = {};
     const { treecounterData, userProfile } = props;
-    if (treecounterData) {
-      svgData = { ...treecounterData, type: userProfile.type };
-    }
+    if (userProfile)
+      if (treecounterData) {
+        svgData = { ...treecounterData, type: userProfile.type };
+      }
     this.state = {
       svgData: svgData
     };
@@ -27,6 +28,37 @@ export default class UserHome extends Component {
     if (treecounterData) {
       let svgData = { ...treecounterData, type: userProfile.type };
       this.setState({ svgData });
+    }
+  }
+  updateSvg(toggle) {
+    if (toggle) {
+      const treecounter = this.props.treecounterData;
+      const profileType = this.props.userProfile.type;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countCommunity + treecounter.countPersonal, // light color
+        planted: treecounter.countPersonal, //dark color
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: profileType
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    } else {
+      const treecounter = this.props.treecounterData;
+      const profileType = this.props.userProfile.type;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countTarget,
+        planted: treecounter.countPlanted,
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: profileType
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
     }
   }
 
@@ -58,6 +90,7 @@ export default class UserHome extends Component {
             <TreecounterGraphicsText
               trillion={false}
               treecounterData={svgData}
+              onToggle={toggleVal => this.updateSvg(toggleVal)}
             />
           )}
         </div>

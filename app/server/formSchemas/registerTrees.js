@@ -38,7 +38,7 @@ export const singleTreeForm = {
         properties: {
           image: {
             type: 'string',
-            title: 'imageFile',
+            title: 'label.browse',
             widget: 'file',
             propertyOrder: 1,
             category: 'contribution',
@@ -102,7 +102,7 @@ export const singleTreeForm = {
       propertyOrder: 8
     }
   },
-  required: ['treeCount', 'treeSpecies', 'plantDate'],
+  required: ['treeCount', 'treeSpecies', 'plantDate', 'geoLocation'],
   submit_url: '',
   submit_method: 'POST'
 };
@@ -146,7 +146,7 @@ export const multipleTreesForm = {
         properties: {
           image: {
             type: 'string',
-            title: 'imageFile',
+            title: 'label.browse',
             widget: 'file',
             propertyOrder: 1
           }
@@ -156,7 +156,7 @@ export const multipleTreesForm = {
       propertyOrder: 5
     }
   },
-  required: ['treeCount', 'treeSpecies', 'plantDate'],
+  required: ['treeCount', 'treeSpecies', 'plantDate', 'geoLocation'],
   submit_url: '',
   submit_method: 'POST'
 };

@@ -41,6 +41,7 @@ import QuestionMarkGreen from './images/icons/questionmark_green.png';
 import country from './images/icons/country.png';
 import organization from './images/icons/organization.png';
 import competition from './images/icons/competition.png';
+import competition_outline from './images/icons/competition.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
 import arrow_right_orange from './images/icons/arrow_right_orange.png';
@@ -98,6 +99,7 @@ import iosInformation from './images/icons/ios_information.png';
 import redeemGreen from './images/icons/redeem_green.png';
 import redeemRed from './images/icons/redeem_red.png';
 import redeemSignIn from './images/icons/redeem_signin.png';
+import lightTree from './images/lightTree.png';
 
 export {
   darkTree,
@@ -151,6 +153,7 @@ export {
   country,
   organization,
   competition,
+  competition_outline,
   education,
   company,
   arrow_left_orange,
@@ -199,5 +202,6 @@ export {
   iosInformation,
   redeemGreen,
   redeemRed,
-  redeemSignIn
+  redeemSignIn,
+  lightTree
 };

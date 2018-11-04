@@ -4,7 +4,7 @@ import { View, Text, Image } from 'react-native';
 
 import { getImageUrl } from '../../actions/apiRouting';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
-import userHomeStyles from '../../styles/user-home';
+import userHomeStyles from '../../styles/user-home.native';
 
 const TreecounterHeader = ({
   caption,
@@ -13,10 +13,11 @@ const TreecounterHeader = ({
   isUserFollowerBool,
   isUserLoggedIn,
   showFollow,
-  followChanged
+  followChanged,
+  containerStyle
 }) => {
   return (
-    <View style={userHomeStyles.userProfileContainer}>
+    <View style={[userHomeStyles.userProfileContainer, containerStyle]}>
       <View style={userHomeStyles.profileImageContainer}>
         <Image
           style={userHomeStyles.profileImage}
@@ -55,7 +56,8 @@ TreecounterHeader.propTypes = {
   isUserFollowerBool: PropTypes.bool.isRequired,
   isUserLoggedIn: PropTypes.bool.isRequired,
   showFollow: PropTypes.bool.isRequired,
-  followChanged: PropTypes.func.isRequired
+  followChanged: PropTypes.func.isRequired,
+  containerStyle: PropTypes.object
 };
 
 export default TreecounterHeader;

@@ -9,6 +9,8 @@ import {
   plantProjectSchema
 } from '../../server/parsedSchemas/editProfile';
 import CardLayout from '../Common/Card';
+import PrimaryButton from '../Common/Button/PrimaryButton';
+import i18n from '../../locales/i18n.js';
 
 const Form = t.form.Form;
 export default class EditUserProfile extends Component {
@@ -58,16 +60,32 @@ export default class EditUserProfile extends Component {
     switch (route.key) {
       case 'basic':
         return (
-          <CardLayout style={{ flex: 1 }}>
-            <View {...this.props} style={styles.mapContainer}>
+          <ScrollView>
+            <CardLayout style={{ flex: 1 }}>
               <Form
-                ref={'profile'}
-                type={parsedSchema[type].profile.transformedSchema}
-                options={this.getFormSchemaOption(type, 'profile')}
+                ref={'image'}
+                type={parsedSchema[type].image.transformedSchema}
+                options={parsedSchema[type].image.schemaOptions}
                 value={this.props.currentUserProfile}
               />
-            </View>
-          </CardLayout>
+              <View {...this.props} style={styles.mapContainer}>
+                <Form
+                  ref={'profile'}
+                  type={parsedSchema[type].profile.transformedSchema}
+                  options={this.getFormSchemaOption(type, 'profile')}
+                  value={this.props.currentUserProfile}
+                />
+              </View>
+              <PrimaryButton
+                onClick={() => {
+                  console.log('refs', this.refs);
+                  this.props.onSave(type, 'profile', this.refs.tabView.refs);
+                }}
+              >
+                {i18n.t('label.save_changes')}
+              </PrimaryButton>
+            </CardLayout>
+          </ScrollView>
         );
         break;
       case 'desc':
@@ -96,6 +114,7 @@ export default class EditUserProfile extends Component {
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.headContainer} />
         <TabView
+          ref={'tabView'}
           useNativeDriver={true}
           navigationState={this.state}
           renderScene={this._renderScene.bind(this)}

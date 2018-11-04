@@ -103,6 +103,7 @@ $trans-time: 300ms;
   }
   .pftp-textfield_redeeminput {
     @extend .pftp-textfield__inputgroup;
+    position: relative;
     input,
     textarea {
       border-radius:3px;
@@ -113,6 +114,15 @@ $trans-time: 300ms;
       color: $headerTextColor;
       margin-top: 30px;
       text-align: center;
+      padding-right: 30px;
+    }
+    .glyphicon {
+      position: absolute;
+      padding: 10px;
+      pointer-events: auto;
+      right: 0px;
+      height: 20px;
+      width: 20px;
     }
   }
   .pftp-textfield__error-inputgroup {

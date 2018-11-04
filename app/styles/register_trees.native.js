@@ -9,13 +9,16 @@ export default (registerTreesStyle = EStyleSheet.create({
     // flex: 1
   },
   registerTree__form: {
-    width: width - 60,
     flexDirection: 'column',
     paddingTop: 20,
     justifyContent: 'flex-start',
+    alignItems: 'stretch'
+  },
+  registerTree__form__row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
-  registerTree__form__row: row,
   registerTree__form__alignLeftRow: {
     alignSelf: 'flex-start',
     ...row

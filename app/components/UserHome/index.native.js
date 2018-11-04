@@ -105,7 +105,8 @@ export default class UserHome extends Component {
         </View>
         <View>
           {'tpo' === userProfile.type &&
-          1 <= tpoProps.plantProjects.length ? null : userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
+          1 <=
+            userProfile.plantProjects.length ? null : userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
           userProfile.synopsis2 ? (
             <CardLayout>
               <Text style={styles.footerText}>{userProfile.synopsis1}</Text>

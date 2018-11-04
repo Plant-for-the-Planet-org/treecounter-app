@@ -16,6 +16,7 @@ import i18n from '../../locales/i18n.js';
 import RegistrationMap from './RegistrationMap';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
+import { getPlantProjectEnum } from '../../helpers/utils';
 
 let TCombForm = t.form.Form;
 
@@ -89,22 +90,9 @@ const getMultipleTreeLayout = props1 => {
   };
 };
 
-const getPlantProjectEnum = props => {
-  const currentUserProfile = props.currentUserProfile;
-  if (currentUserProfile && currentUserProfile.type === 'tpo') {
-    let newEnum = [];
-    for (let plantProject in props.plantProjects) {
-      newEnum.push({
-        value: props.plantProjects[plantProject].id,
-        text: props.plantProjects[plantProject].name
-      });
-    }
-  }
-};
-
 const schemaOptionsSingle = (template, props) => {
   schemaOptionsSingleTree.fields.plantProject.template = getSelectTemplate(
-    getPlantProjectEnum(props)
+    getPlantProjectEnum(props.currentUserProfile)
   );
   return {
     template,
@@ -114,7 +102,7 @@ const schemaOptionsSingle = (template, props) => {
 
 const schemaOptionsMultiple = (template, props) => {
   schemaOptionsMultipleTrees.fields.plantProject.template = getSelectTemplate(
-    getPlantProjectEnum(props)
+    getPlantProjectEnum(props.currentUserProfile)
   );
   return {
     template,
@@ -212,6 +200,5 @@ export default class RegisterTrees extends Component {
 
 RegisterTrees.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  currentUserProfile: PropTypes.any.isRequired,
-  plantProjects: PropTypes.any.isRequired
+  currentUserProfile: PropTypes.any.isRequired
 };

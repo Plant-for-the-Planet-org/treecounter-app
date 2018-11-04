@@ -7,10 +7,7 @@ import RegisterTrees from '../../components/RegisterTrees';
 import { registerTree } from '../../actions/registerTree';
 import { userTreecounterSelector } from '../../selectors/index';
 import { mergeContributionImages } from '../../helpers/utils';
-import {
-  currentUserProfileSelector,
-  plantProjectsSelector
-} from '../../selectors/index';
+import { currentUserProfileSelector } from '../../selectors/index';
 
 class RegisterTreesContainer extends Component {
   constructor() {
@@ -39,7 +36,6 @@ class RegisterTreesContainer extends Component {
         ref="registerTrees"
         onSubmit={this.onSubmit}
         currentUserProfile={this.props.currentUserProfile}
-        plantProjects={this.props.plantProjects}
       />
     );
   }
@@ -48,8 +44,7 @@ class RegisterTreesContainer extends Component {
 const mapStateToProps = state => {
   return {
     treecounter: userTreecounterSelector(state),
-    currentUserProfile: currentUserProfileSelector(state),
-    plantProjects: plantProjectsSelector(state)
+    currentUserProfile: currentUserProfileSelector(state)
   };
 };
 

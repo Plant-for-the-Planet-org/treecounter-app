@@ -87,7 +87,9 @@ export default class UserHome extends Component {
 
             <View style={styles.userInfo}>
               <View style={styles.userInfoName}>
-                <Text style={styles.nameStyle}>{userProfile.fullname}</Text>
+                <Text style={styles.nameStyle}>
+                  {userProfile.treecounter.displayName}
+                </Text>
               </View>
               <View style={styles.userInfoProfileType}>
                 <View style={styles.profileTypeContainer}>

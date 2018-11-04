@@ -3,27 +3,27 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 const Layout = {
   window: {
-    height: Dimensions.get('window').height - (56 + 70 + 20)
+    height: Dimensions.get('window').height - (56 + 70 + 20),
+    width: Dimensions.get('window').width
   }
 };
 
 export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
-    padding: 10,
+    // padding: 10,
     flexDirection: 'column',
-    height: Layout.window.height * 0.5
-    // height: Layout.window.height
+    height: Layout.window.width * 0.5 + 110
   },
   projectImageContainer: {
-    height: '60%'
+    height: Layout.window.width * 0.5,
+    width: Layout.window.width * 0.9
   },
   teaser__projectImage: {
-    width: undefined,
-    height: undefined,
     flex: 1
   },
   treeCounterContainer: {
     flexDirection: 'row',
+    width: Layout.window.width * 0.9,
     justifyContent: 'space-between',
     backgroundColor: '#d2e3af'
   },
@@ -73,6 +73,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
   buttonContainer: {
     flexDirection: 'row'
   },
+  buttonItem: {
+    padding: 5
+  },
   buttonStyle: {
     height: 20,
     paddingLeft: 2,
@@ -85,6 +88,15 @@ export default (selectplantprojectFull = EStyleSheet.create({
     marginRight: 5
   },
   buttonTextStyle: {
+    fontSize: 12
+  },
+  moreButtonStyle: {
+    backgroundColor: 'white',
+    borderWidth: 0.5,
+    borderColor: '$primary'
+  },
+  moreButtonTextStyle: {
+    color: '$primary',
     fontSize: 12
   }
 }));

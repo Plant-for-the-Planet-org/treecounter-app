@@ -85,7 +85,6 @@ class PlantProjectFull extends React.Component {
         <View style={styles.projectImageContainer}>
           <Image
             style={styles.teaser__projectImage}
-            resizeMethod="scale"
             // resizeMode="center"
             source={{
               uri: getImageUrl(
@@ -94,6 +93,7 @@ class PlantProjectFull extends React.Component {
                 teaserProps.projectImage.image
               )
             }}
+            resizeMode={'cover'}
           />
         </View>
         <View style={styles.projectSpecsContainer}>
@@ -135,18 +135,20 @@ class PlantProjectFull extends React.Component {
 
             <View style={styles.buttonContainer}>
               <PrimaryButton
+                style={styles.buttonItem}
+                buttonStyle={[styles.buttonStyle, styles.moreButtonStyle]}
+                textStyle={[styles.moreButtonTextStyle, styles.buttonTextStyle]}
+                onClick={() => this.toggleExpanded(id)}
+              >
+                <Text>More</Text>
+              </PrimaryButton>
+              <PrimaryButton
+                style={styles.buttonItem}
                 buttonStyle={styles.buttonStyle}
                 textStyle={styles.buttonTextStyle}
                 onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
               >
                 <Text>Donate</Text>
-              </PrimaryButton>
-              <PrimaryButton
-                buttonStyle={styles.buttonStyle}
-                textStyle={styles.buttonTextStyle}
-                onClick={() => this.toggleExpanded(id)}
-              >
-                <Text>More</Text>
               </PrimaryButton>
             </View>
           </View>

@@ -2,14 +2,13 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (textInputStyles = EStyleSheet.create({
   container: {
-    flexDirection: 'column',
-    flex: 1
+    // flexDirection: 'column',
+    //flex: 1
   },
   containerStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    flex: 1,
     paddingBottom: 20
   },
 

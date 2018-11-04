@@ -96,6 +96,9 @@ import iosSearchGrey from './images/icons/search_grey.png';
 import iosLogout from './images/icons/ios_logout.png';
 import iosFaqs from './images/icons/ios_faqs.png';
 import iosInformation from './images/icons/ios_information.png';
+import redeemGreen from './images/icons/redeem_green.png';
+import redeemRed from './images/icons/redeem_red.png';
+import redeemSignIn from './images/icons/redeem_signin.png';
 import lightTree from './images/lightTree.png';
 
 export {
@@ -197,5 +200,8 @@ export {
   iosLogout,
   iosFaqs,
   iosInformation,
+  redeemGreen,
+  redeemRed,
+  redeemSignIn,
   lightTree
 };

@@ -5,7 +5,7 @@ import SeeMoreToggle from '../Common/SeeMoreToggle';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
 import { View, Text } from 'react-native';
-import styles from '../../styles/selectplantproject/selectplantproject-full';
+import styles from '../../styles/selectplantproject/selectplantproject-full.native';
 import PlantProjectTeaser from './PlantProjectTeaser';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import PlantProjectDetails from './PlantProjectDetails';
@@ -86,8 +86,8 @@ class PlantProjectFull extends React.Component {
       plantProjectImages
     };
     return (
-      <ScrollView>
-        <CardLayout style={styles.projectFullContainer}>
+      <CardLayout style={styles.projectFullContainer}>
+        <ScrollView>
           <View style={styles.projectTeaserContainer}>
             <PlantProjectTeaser {...teaserProps} />
           </View>
@@ -141,8 +141,8 @@ class PlantProjectFull extends React.Component {
               </PrimaryButton>
             ) : null}
           </View>
-        </CardLayout>
-      </ScrollView>
+        </ScrollView>
+      </CardLayout>
     );
   }
 }

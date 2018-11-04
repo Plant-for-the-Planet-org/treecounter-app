@@ -20,17 +20,11 @@ class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
     this.toggleExpanded = this.toggleExpanded.bind(this);
-    this.state = { expanded: props.expanded };
-    if (props.callExpanded) {
-      props.callExpanded(!this.state.expanded);
-    }
   }
 
-  toggleExpanded() {
-    if (this.props.callExpanded) {
-      this.props.callExpanded(!this.state.expanded);
-    }
-    this.setState({ expanded: !this.state.expanded });
+  toggleExpanded(id) {
+    this.props.callExpanded(!this.state.expanded);
+    this.props.onSelectClickedFeaturedProjects(id);
   }
 
   render() {
@@ -108,7 +102,7 @@ class PlantProjectFull extends React.Component {
               <Text style={styles.treePlantedtext}>
                 {specsProps.countPlanted}
               </Text>
-              <Text>
+              <Text style={styles.treePlantedtext}>
                 {i18n.t('label.trees') + ' ' + i18n.t('label.planted')}
               </Text>
             </View>
@@ -117,18 +111,20 @@ class PlantProjectFull extends React.Component {
             </View>
           </View>
           <View style={styles.projectNameContainer}>
-            <Text>{teaserProps.projectName}</Text>
+            <Text style={styles.project_teaser__contentText}>
+              {teaserProps.projectName}
+            </Text>
           </View>
           <View style={styles.projectdetailsContainer}>
             <View style={styles.locationContainer}>
-              <Text>{specsProps.location}</Text>
-              <Text>
-                {i18n.t('label.survival_rate')} {specsProps.survivalRate}%
+              <Text style={styles.locationText}>{specsProps.location}</Text>
+              <Text style={styles.survivalText}>
+                {i18n.t('label.survival_rate')} {':'} {specsProps.survivalRate}%
               </Text>
             </View>
 
             <View style={styles.costContainer}>
-              <Text>${specsProps.treeCost}</Text>
+              <Text style={styles.costText}>${specsProps.treeCost}</Text>
             </View>
           </View>
 
@@ -138,9 +134,20 @@ class PlantProjectFull extends React.Component {
             </View>
 
             <View style={styles.buttonContainer}>
-              {/* <PrimaryButton>
-                  <Text>Donate</Text>
-              </PrimaryButton> */}
+              <PrimaryButton
+                buttonStyle={styles.buttonStyle}
+                textStyle={styles.buttonTextStyle}
+                onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
+              >
+                <Text>Donate</Text>
+              </PrimaryButton>
+              <PrimaryButton
+                buttonStyle={styles.buttonStyle}
+                textStyle={styles.buttonTextStyle}
+                onClick={() => this.toggleExpanded(id)}
+              >
+                <Text>More</Text>
+              </PrimaryButton>
             </View>
           </View>
         </View>

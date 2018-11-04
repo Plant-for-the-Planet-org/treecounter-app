@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { updateRoute } from '../../helpers/routerHelper';
 
 import {
   getAllPlantProjectsSelector,
@@ -15,13 +16,21 @@ class SelectPlantProjectContainer extends Component {
     //  this.props.selectPlantProjectAction(1);
   }
   render() {
+    console.log('select plant props', this.props);
     return (
       <SelectPlantProject
         plantProjects={this.props.plantProjects}
         selectProject={this.props.selectPlantProjectAction}
         currencies={this.props.currencies}
+        onMoreClick={id => this.onMoreClick(id)}
       />
     );
+  }
+  onMoreClick(id) {
+    // const { navigation } = this.props;
+    // console.log('OnMore')
+    // updateRoute('app_donateTrees', navigation, id );
+    this.props.selectProject(id);
   }
 }
 

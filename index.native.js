@@ -3,7 +3,7 @@ import App from './app/components/App';
 import './ReactotronConfig';
 /* app.js */
 
-console.disableYellowBox = false;
+console.disableYellowBox = true;
 
 // import {
 //   setCustomView,

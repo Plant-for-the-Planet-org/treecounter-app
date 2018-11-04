@@ -39,7 +39,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     borderRightColor: '#b9d384'
   },
   treePlantedtext: {
-    paddingRight: 5
+    paddingRight: 5,
+    color: 'white'
   },
   targetContainer: { flexDirection: 'row', padding: 5 },
   projectdetailsContainer: {
@@ -51,6 +52,39 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   costContainer: { flexDirection: 'row' },
   actionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  project_teaser__contentText: {
+    fontSize: 16
+  },
+  locationText: {
+    fontSize: 12,
+    color: '$textColor',
+    fontStyle: 'italic'
+  },
+  survivalText: {
+    fontSize: 13,
+    color: '$textColor'
+  },
+  costText: {
+    fontSize: 20
+  },
+  buttonContainer: {
     flexDirection: 'row'
+  },
+  buttonStyle: {
+    height: 20,
+    paddingLeft: 2,
+    paddingRight: 2,
+    paddingTop: 0,
+    paddingBottom: 0,
+    margin: 0,
+    borderWidth: 0,
+    borderRadius: 0,
+    marginRight: 5
+  },
+  buttonTextStyle: {
+    fontSize: 12
   }
 }));

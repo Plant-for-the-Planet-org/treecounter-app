@@ -350,7 +350,7 @@ export default class DonateTrees extends Component {
     const { selectedProject } = this.props;
 
     return this.state.showSelectProject ? (
-      <SelectPlantProjectContainer />
+      <SelectPlantProjectContainer {...this.props} />
     ) : !selectedProject ? null : (
       <TabView
         navigationState={this.state}

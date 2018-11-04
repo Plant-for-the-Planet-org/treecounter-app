@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
-
-import {
-  redemptionFormSchema,
-  schemaOptions
-} from '../../server/parsedSchemas/redemption';
-
 import LoadingIndicator from '../Common/LoadingIndicator';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextHeading from '../Common/Heading/TextHeading';
@@ -14,7 +8,12 @@ import TextBlock from '../Common/Text/TextBlock';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n.js';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
-import { redeemSignIn, redeemRed, redeemGreen } from '../../assets';
+import {
+  redeemSignIn,
+  redeemRed,
+  redeemGreen,
+  close_green
+} from '../../assets';
 
 let TCombForm = t.form.Form;
 
@@ -25,18 +24,28 @@ let TCombForm = t.form.Form;
 export default class Redemption extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      value: this.props.code
+    };
+    this.onChange = this.onChange.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ value: nextProps.code });
   }
   onSetRedemption() {
-    let value = this.refs.redemptionForm.getValue();
-    if (value) {
-      this.props.setRedemptionCode(value);
+    // let value = this.refs.redemptionForm.getValue();
+    if (this.state.value) {
+      this.props.setRedemptionCode(this.state.value);
     }
   }
   onValidationCode() {
-    let value = this.refs.redemptionForm.getValue();
-    if (value) {
-      this.props.validateCode(value);
+    // let value = this.refs.redemptionForm.getValue();
+    if (this.state.value) {
+      this.props.validateCode(this.state.value);
     }
+  }
+  onChange(value) {
+    this.setState({ value: value });
   }
   render() {
     const { code, updateRoute } = this.props;
@@ -115,15 +124,59 @@ export default class Redemption extends Component {
       icon = redeemGreen;
     }
 
-    let value = { code: this.props.code };
+    let value = this.state.value;
     if (this.props.pageStatus !== 'success') {
-      form = (
-        <TCombForm
-          ref="redemptionForm"
-          type={redemptionFormSchema}
-          options={schemaOptions}
-          value={value}
+      let disabled = false;
+      if (this.props.pageStatus === 'code-unknown') {
+        disabled = false;
+        // form = (
+        //   <TCombForm
+        //     ref="redemptionForm"
+        //     type={redemptionEditableFormSchema}
+        //     options={schemaOptionsRedeemEditable}
+        //     value={value}
+        //     onChange={this.onCrossClick()}
+        //   />
+        // );
+      } else {
+        disabled = true;
+        // form = (
+        //   <TCombForm
+        //     ref="redemptionForm"
+        //     type={redemptionNonEditableFormSchema}
+        //     options={schemaOptionsRedeemNonEditable}
+        //     value={value}
+        //   />
+        // );
+      }
+      const onCrossClick = () => {
+        this.props.updateRoute('app_redeem');
+      };
+      let right_icon = disabled ? (
+        <img
+          className="glyphicon"
+          src={close_green}
+          onClick={() => onCrossClick()}
         />
+      ) : null;
+      form = (
+        <div className="pftp-textfield-container">
+          <div className="pftp-textfield">
+            <div className="pftp-textfield_redeeminput">
+              <div>
+                {right_icon}
+                <input
+                  type="text"
+                  autoComplete="new-password"
+                  required="required"
+                  disabled={disabled}
+                  value={value}
+                  onChange={evt => this.onChange(evt.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       );
     } else {
       form = null;

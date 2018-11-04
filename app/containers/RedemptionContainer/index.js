@@ -66,13 +66,24 @@ class RedemptionContainer extends Component {
       this.setState({
         loading: false,
         pageStatus: 'not-logged-in',
-        actionText: i18n.t('label.log_in')
+        actionText: i18n.t('label.log_in'),
+        statusText: '',
+        successText: '',
+        errorText: '',
+        buttonText: i18n.t('label.redeem_code'),
+        tpos: null
       });
     } else {
       this.setState({
         loading: false,
         pageStatus: 'code-unknown',
-        actionText: i18n.t('label.enter_code')
+        actionText: i18n.t('label.enter_code'),
+        statusText: '',
+        successText: '',
+        errorText: '',
+        code: '',
+        buttonText: i18n.t('label.redeem_code'),
+        tpos: null
       });
     }
   }
@@ -112,7 +123,7 @@ class RedemptionContainer extends Component {
       // this.callSetState(isCode);
       updateRoute(path, null, null, {
         type: this.state.type,
-        code: value.code.replace(/\s/g, '')
+        code: value.replace(/\s/g, '')
       });
     }
   }

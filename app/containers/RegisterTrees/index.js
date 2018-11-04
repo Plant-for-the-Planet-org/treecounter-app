@@ -60,6 +60,5 @@ RegisterTreesContainer.propTypes = {
   registerTree: PropTypes.func.isRequired,
   treecounter: PropTypes.object,
   navigation: PropTypes.object,
-  currentUserProfile: PropTypes.object,
-  plantProjects: PropTypes.any
+  currentUserProfile: PropTypes.object
 };

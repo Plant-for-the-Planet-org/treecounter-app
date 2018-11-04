@@ -100,6 +100,5 @@ export default class RegisterTrees extends Component {
 
 RegisterTrees.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  currentUserProfile: PropTypes.any.isRequired,
-  plantProjects: PropTypes.any.isRequired
+  currentUserProfile: PropTypes.any.isRequired
 };

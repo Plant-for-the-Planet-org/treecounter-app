@@ -16,8 +16,6 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import { getImageUrl } from '../../actions/apiRouting';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 
-import { row } from '../../styles/common/common_styles';
-
 export default class Menu extends Component {
   static propTypes = {
     menuData: PropTypes.array.isRequired,
@@ -82,13 +80,15 @@ export default class Menu extends Component {
         )}
         <ScrollView>
           <View style={styles.centerMenu}>
-            <LargeMenuItem
-              onPress={() => {
-                this.onPressMenu({ uri: getLocalRoute('app_editProfile') });
-              }}
-              title={i18n.t('label.edit_profile')}
-              iconUrl={EditGreen}
-            />
+            {this.props.userProfile ? (
+              <LargeMenuItem
+                onPress={() => {
+                  this.onPressMenu({ uri: getLocalRoute('app_editProfile') });
+                }}
+                title={i18n.t('label.edit_profile')}
+                iconUrl={EditGreen}
+              />
+            ) : null}
             <LargeMenuItem
               onPress={() => {
                 this.onPressMenu({ uri: getLocalRoute('app_faq') });

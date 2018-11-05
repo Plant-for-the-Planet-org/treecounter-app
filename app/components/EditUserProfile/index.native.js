@@ -12,6 +12,7 @@ import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
 import _ from 'lodash';
+import { ProfileImagePickerTemplate } from './profileImagePickerTemplate.native';
 
 const Form = t.form.Form;
 export default class EditUserProfile extends Component {
@@ -63,6 +64,8 @@ export default class EditUserProfile extends Component {
       } catch (err) {
         console.log(err);
       }
+    } else if (profileType == 'image') {
+      schemaOptions.fields.imageFile.template = ProfileImagePickerTemplate;
     }
 
     return schemaOptions;
@@ -78,8 +81,8 @@ export default class EditUserProfile extends Component {
               <Form
                 ref={'image'}
                 type={parsedSchema[type].image.transformedSchema}
-                options={parsedSchema[type].image.schemaOptions}
-                value={this.props.currentUserProfile}
+                options={this.getFormSchemaOption(type, 'image')}
+                value={{ imageFile: this.props.currentUserProfile.image }}
               />
               <View {...this.props} style={styles.mapContainer}>
                 <Form

@@ -14,7 +14,8 @@ module.exports = webpackMerge(commonConfig, {
   },
   output: {
     path: path.join(__dirname, '../server'),
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: '/'
   },
 
   plugins: [

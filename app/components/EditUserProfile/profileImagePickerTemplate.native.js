@@ -2,6 +2,7 @@ import { View, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import styles from '../../styles/file_picker.native';
 import UserProfileImage from '../Common/UserProfileImage';
+import { close_green } from '../../assets';
 
 const ImagePicker = require('react-native-image-picker');
 const options = {
@@ -36,6 +37,7 @@ export function ProfileImagePickerTemplate(locals) {
         }}
       >
         <UserProfileImage profileImage={locals.value} />
+        <Image style={styles.addIcon} source={close_green} />
       </TouchableOpacity>
     </View>
   );

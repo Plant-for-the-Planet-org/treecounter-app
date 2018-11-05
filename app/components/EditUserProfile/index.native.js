@@ -12,7 +12,7 @@ import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
 import _ from 'lodash';
-import { ProfileImagePickerTemplate } from './profileImagePickerTemplate.native';
+import { ProfileImagePickerTemplate } from './ProfileImagePickerTemplate.native';
 
 const Form = t.form.Form;
 export default class EditUserProfile extends Component {

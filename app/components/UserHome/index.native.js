@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getImageUrl } from '../../actions/apiRouting';
 import { ScrollView, View, Text, Image } from 'react-native';
 import styles from '../../styles/user-home';
 import CardLayout from '../Common/Card';
-import i18n from '../../locales/i18n';
-import LoadingIndicator from '../Common/LoadingIndicator';
-import PrimaryButton from '../Common/Button/PrimaryButton';
 import SvgContainer from '../Common/SvgContainer';
 import { getProfileTypeName } from '../PublicTreeCounter/utils';
-import { ProfilePic } from '../../assets';
+import UserProfileImage from '../Common/UserProfileImage';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -71,19 +67,7 @@ export default class UserHome extends Component {
       <ScrollView>
         <View style={styles.header}>
           <View style={styles.userProfileContainer}>
-            <View style={styles.profileImageContainer}>
-              <Image
-                style={styles.profileImage}
-                source={
-                  userProfile.image
-                    ? {
-                        uri: getImageUrl('profile', 'thumb', userProfile.image)
-                      }
-                    : ProfilePic
-                }
-              />
-              <View style={styles.circle} />
-            </View>
+            <UserProfileImage profileImage={userProfile.image} />
 
             <View style={styles.userInfo}>
               <View style={styles.userInfoName}>

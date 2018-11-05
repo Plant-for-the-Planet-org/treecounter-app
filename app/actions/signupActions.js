@@ -1,7 +1,7 @@
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 
 import { updateRoute } from '../helpers/routerHelper';
-import { postRequest, getRequest } from '../utils/api';
+import { postRequest } from '../utils/api';
 import { updateJWT } from '../utils/user';
 import { loadUserProfile } from './loadUserProfileAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
@@ -34,5 +34,5 @@ export function signUp(profileType, userData) {
 }
 
 export function accountActivate(token) {
-  return getRequest('app_accountActivate', { token: token });
+  return postRequest('auth_accountActivate_post', { token: token });
 }

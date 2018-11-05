@@ -4,6 +4,10 @@ export default (sloginStyles = EStyleSheet.create({
   scrollViewStyle: {
     flexGrow: 1
   },
+  imageStyle: {
+    width: 50,
+    height: 50
+  },
   container: {
     flex: 1,
     justifyContent: 'center',

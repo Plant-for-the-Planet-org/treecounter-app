@@ -73,7 +73,7 @@ export default class Menu extends Component {
             <LargeMenuItem
               style={{ paddingLeft: 0 }}
               onPress={() => {
-                this.onPressMenu({ uri: getLocalRoute('app_login') });
+                this.onPressMenu({ uri: 'app_login' });
               }}
               title={i18n.t('label.login')}
               iconUrl={iosLogout}
@@ -95,6 +95,12 @@ export default class Menu extends Component {
               }}
               title={i18n.t('label.faqs')}
               iconUrl={iosFaqs}
+            />
+            <LargeMenuItem
+              onPress={() => {
+                this.onPressMenu({ uri: 'app_accountActivation' });
+              }}
+              title={'Activate Account'}
             />
           </View>
         </ScrollView>

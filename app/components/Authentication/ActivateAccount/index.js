@@ -15,15 +15,15 @@ export default class ActivateAccount extends Component {
         <CardLayout>
           <img src={RedEmail} />
           <div className={'gap'} />
-          <TextBlock strong={true}>
-            {i18n.t('label.not_yet_activated')}
-          </TextBlock>
+          <Text strong={true}>{i18n.t('label.not_yet_activated')}</Text>
           <div className={'gap'} />
           <TextBlock>{i18n.t('label.received_email')}</TextBlock>
           <div className={'gap'} />
           <TextBlock>{i18n.t('label.not_received_email')}</TextBlock>
           <div className={'gap'} />
-          <SecondaryButton>{i18n.t('label.resent_email')}</SecondaryButton>
+          <SecondaryButton onClick={() => sendEmail()}>
+            {i18n.t('label.resent_email')}
+          </SecondaryButton>
         </CardLayout>
       </div>
     );

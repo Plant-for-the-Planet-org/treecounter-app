@@ -32,6 +32,7 @@ import RegisterTrees from '../../containers/RegisterTrees';
 import EditUserContributionContainer from '../../containers/EditUserContribution';
 import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
+import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -76,7 +77,9 @@ export const getAppNavigator = function(isLoggedIn) {
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
       },
-
+      [getLocalRoute('app_accountActivation')]: {
+        screen: ActivateAccountContainer
+      },
       [getLocalRoute('app_faq')]: FAQContainer,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
 

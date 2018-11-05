@@ -139,8 +139,12 @@ class TreeCounter extends Component {
                 component={SignUpContainer}
               />
               <PublicRoute
-                path={getLocalRoute('app_accountActivation') + '/:token'}
+                path={getLocalRoute('app_accountActivate') + '/:token'}
                 component={SuccessfullyActivatedAccount}
+              />
+              <PublicRoute
+                path={getLocalRoute('app_accountActivation')}
+                component={ActivateAccountContainer}
               />
               {/*<Route exact path={getLocalRoute("app_donateTrees")} render={() => (isLoggedIn ? null : <Redirect to={getLocalRoute("app_login")}/>)}/>*/}
               <PrivateRoute

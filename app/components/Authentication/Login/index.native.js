@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Text, View, Image, ScrollView } from 'react-native';
 
 import {
   loginFormSchema,
@@ -11,8 +11,10 @@ import {
 import i18n from '../../../locales/i18n.js';
 
 import styles from '../../../styles/login';
-import CardLayout from '../../Common/Card';
+
 import PrimaryButton from '../../Common/Button/PrimaryButton';
+import { SideMenuImage } from '../../../assets';
+import TouchableItem from '../../Common/TouchableItem.native';
 
 let Form = t.form.Form;
 
@@ -27,40 +29,59 @@ export default class Login extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
-        <View style={styles.container}>
-          <CardLayout style={styles.inputContainer}>
-            <Form
-              ref={'loginForm'}
-              type={loginFormSchema}
-              options={schemaOptions}
-            />
-            <PrimaryButton onClick={this.props.onPress}>
-              {i18n.t('label.login')}
-            </PrimaryButton>
-            <View style={styles.bottomRow}>
-              <Text style={styles.bottomText}>
-                {i18n.t('label.forgot_ur_password')}
-              </Text>
-              <Text
-                onPress={this.onForgotPasswordClicked}
-                style={styles.bottomTextHighlight}
-              >
-                {i18n.t('label.reset')}
-              </Text>
+      <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}>
+        <View style={styles.parentContainer}>
+          <View style={styles.headerContainer}>
+            <Image style={styles.imageStyle} source={SideMenuImage} />
+            <Text style={styles.loginTextStyle}>Login</Text>
+            <Text style={styles.loginDescriptionStyle}>
+              {i18n.t('label.login_description')}
+            </Text>
+          </View>
+
+          <View style={styles.container}>
+            <View style={styles.inputContainer}>
+              <Form
+                ref={'loginForm'}
+                type={loginFormSchema}
+                options={schemaOptions}
+              />
             </View>
             <View style={styles.bottomRow}>
-              <Text style={styles.bottomText}>
-                {i18n.t('label.dont_have_account')}
-              </Text>
-              <Text
-                onPress={this.onSignupClicked}
-                style={styles.bottomTextHighlight}
-              >
-                {i18n.t('label.signUp')}.
-              </Text>
+              <TouchableItem onPress={this.onForgotPasswordClicked}>
+                <Text style={styles.bottomTextHighlight}>
+                  {i18n.t('label.forgot_ur_password')}
+                </Text>
+              </TouchableItem>
             </View>
-          </CardLayout>
+            <View style={styles.bottomRow}>
+              <TouchableItem onPress={this.onSignupClicked}>
+                <Text style={styles.bottomTextHighlight}>
+                  {i18n.t('label.dont_have_account')}
+                  {'  '}
+                  {i18n.t('label.signUp')}
+                </Text>
+              </TouchableItem>
+
+              <PrimaryButton
+                onClick={this.props.onPress}
+                buttonStyle={{
+                  width: 60,
+                  height: 20,
+                  borderWidth: 0,
+                  borderRadius: 0,
+                  padding: 0,
+                  margin: 0,
+                  alignSelf: 'center',
+                  position: 'absolute',
+                  right: 0
+                }}
+                textStyle={{ fontSize: 12 }}
+              >
+                {i18n.t('label.login')}
+              </PrimaryButton>
+            </View>
+          </View>
         </View>
       </ScrollView>
     );

@@ -4,6 +4,7 @@ import { context } from '../../../app/config/index';
 import { View, Text } from 'react-native';
 import VideoContainer from '../../components/Common/VideoContainer';
 import React from 'react';
+import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectDetails
@@ -17,7 +18,14 @@ class PlantProjectDetails extends React.Component {
     if (context.debug && !this.props.videoUrl) {
       vUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
     }
-    return <VideoContainer url={vUrl} />;
+    return (
+      <View style={{ flexDirection: 'column' }}>
+        <PlantProjectImageCarousel images={this.props.plantProjectImages} />
+        <View style={{ paddingTop: 20 }}>
+          <VideoContainer url={vUrl} />;
+        </View>
+      </View>
+    );
   }
 }
 

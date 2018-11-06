@@ -66,13 +66,24 @@ class RedemptionContainer extends Component {
       this.setState({
         loading: false,
         pageStatus: 'not-logged-in',
-        actionText: i18n.t('label.log_in')
+        actionText: i18n.t('label.log_in'),
+        statusText: '',
+        successText: '',
+        errorText: '',
+        buttonText: i18n.t('label.redeem_code'),
+        tpos: null
       });
     } else {
       this.setState({
         loading: false,
         pageStatus: 'code-unknown',
-        actionText: i18n.t('label.enter_code')
+        actionText: i18n.t('label.enter_code'),
+        statusText: '',
+        successText: '',
+        errorText: '',
+        code: '',
+        buttonText: i18n.t('label.redeem_code'),
+        tpos: null
       });
     }
   }
@@ -111,7 +122,7 @@ class RedemptionContainer extends Component {
       // this.callSetState(isCode);
       updateRoute(path, null, null, {
         type: this.state.type,
-        code: value.code
+        code: value.replace(/\s/g, '')
       });
     }
   }
@@ -127,7 +138,7 @@ class RedemptionContainer extends Component {
     if (value) {
       setRedemptionCodeAction({
         type: this.state.type,
-        code: this.state.code
+        code: this.state.code.replace(/\s/g, '')
       }).then(
         success => {
           this.setState({
@@ -138,7 +149,7 @@ class RedemptionContainer extends Component {
             successText: success.data.response.successText,
             errorText: success.data.response.errorText,
             actionText: success.data.response.actionText,
-            buttonText: success.data.response.buttonText,
+            buttonText: i18n.t('label.my_trees'),
             tpos: success.data.response.tpos
           });
           if (success.data.response.status === 'error') {

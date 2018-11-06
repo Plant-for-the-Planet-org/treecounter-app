@@ -4,7 +4,7 @@ import transform from 'tcomb-json-schema';
 import { TextInputTemplate } from '../components/Templates/TextInputTemplate';
 import { TextAreaTemplate } from '../components/Templates/TextAreaTemplate';
 import { CheckboxTemplate } from '../components/Templates/CheckboxTemplate';
-import { SelectTemplate } from '../components/Templates/SelectTemplate';
+import { getSelectTemplate } from '../components/Templates/SelectTemplate';
 import { MapTemplate } from '../components/Templates/MapTemplate';
 import { ListTemplateGenerator } from '../components/Templates/ListTemplate';
 import { FilePickerTemplate } from '../components/Templates/FilePickerTemplate';
@@ -98,7 +98,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
           } else {
             options.label = '';
             options.auto = 'none';
-            options.template = SelectTemplate;
+            options.template = getSelectTemplate();
             options.nullOption = {
               value: '',
               text: properties[propertyKey].title

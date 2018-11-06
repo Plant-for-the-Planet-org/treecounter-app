@@ -6,6 +6,7 @@ $muted-color: mix(white, $bg-color, 70%);
   align-items: center;
   flex-direction: column;
   margin-bottom: 20px;
+  width: 100%;
 
   .pftp-selectfield__select {
     background: none;

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Dimensions } from 'react-native';
-import styles from '../../../styles/selectplantproject/selectplantproject';
-import i18n from '../../../locales/i18n.js';
-
-import Slick from 'react-native-slick';
 import PlantProjectFull2 from '../../PlantProjects/PlantProjectFull2';
 
 export default class FeaturedProjects extends Component {
@@ -47,10 +43,6 @@ export default class FeaturedProjects extends Component {
     this.props.selectProject(id);
   };
 
-  callExpanded = id => {
-    this.props.callExpanded(id);
-  };
-
   render() {
     let { featuredProjects } = this.state;
     return (
@@ -59,7 +51,7 @@ export default class FeaturedProjects extends Component {
           ? featuredProjects.map(project => (
               <PlantProjectFull2
                 key={'projectFull' + project.id}
-                callExpanded={id => this.callExpanded(id)}
+                onMoreClick={id => this.props.onMoreClick(id)}
                 plantProject={project}
                 onSelectClickedFeaturedProjects={id =>
                   this.onSelectClickedFeaturedProjects(id)

@@ -27,10 +27,10 @@ class SelectPlantProjectContainer extends Component {
     );
   }
   onMoreClick(id) {
-    // const { navigation } = this.props;
-    // console.log('OnMore')
-    // updateRoute('app_donateTrees', navigation, id );
-    this.props.selectProject(id);
+    this.props.selectPlantProjectAction(id);
+    const { navigation } = this.props;
+    console.log('OnMore');
+    updateRoute('selected_project', navigation, 1);
   }
 }
 

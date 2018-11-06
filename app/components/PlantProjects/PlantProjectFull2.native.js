@@ -6,25 +6,20 @@ import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
 import { View, Text, Image } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full2';
-import PlantProjectTeaser from './PlantProjectTeaser';
-import PlantProjectSpecs from './PlantProjectSpecs';
-import PlantProjectDetails from './PlantProjectDetails';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import { ScrollView } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
-class PlantProjectFull extends React.Component {
+class PlantProjectFull2 extends React.Component {
   constructor(props) {
     super(props);
     this.toggleExpanded = this.toggleExpanded.bind(this);
   }
 
   toggleExpanded(id) {
-    this.props.callExpanded(!this.state.expanded);
-    this.props.onSelectClickedFeaturedProjects(id);
+    this.props.onMoreClick(id);
   }
 
   render() {
@@ -71,15 +66,6 @@ class PlantProjectFull extends React.Component {
       treeCost,
       taxDeduction: paymentSetup.taxDeduction
     };
-    const detailsProps = {
-      description,
-      images,
-      homepageUrl,
-      homepageCaption,
-      videoUrl,
-      mapData: queryParamsToObject(geoLocation),
-      plantProjectImages
-    };
     return (
       <CardLayout style={styles.projectFullContainer}>
         <View style={styles.projectImageContainer}>
@@ -87,11 +73,7 @@ class PlantProjectFull extends React.Component {
             style={styles.teaser__projectImage}
             // resizeMode="center"
             source={{
-              uri: getImageUrl(
-                'project',
-                'large',
-                teaserProps.projectImage.image
-              )
+              uri: getImageUrl('project', 'large', teaserProps.projectImage)
             }}
             resizeMode={'cover'}
           />
@@ -158,9 +140,8 @@ class PlantProjectFull extends React.Component {
   }
 }
 
-PlantProjectFull.propTypes = {
+PlantProjectFull2.propTypes = {
   plantProject: PropTypes.object.isRequired,
-  expanded: PropTypes.bool.isRequired,
   callExpanded: PropTypes.func,
   tpoName: PropTypes.string,
   selectAnotherProject: PropTypes.bool,
@@ -170,4 +151,4 @@ PlantProjectFull.propTypes = {
   onSelectClickedFeaturedProjects: PropTypes.func
 };
 
-export default PlantProjectFull;
+export default PlantProjectFull2;

@@ -15,6 +15,27 @@ import _ from 'lodash';
 import { ProfileImagePickerTemplate } from './ProfileImagePickerTemplate.native';
 
 const Form = t.form.Form;
+function UserProfileTemplate(locals) {
+  return (
+    <View>
+      {locals.inputs.title}
+      {locals.inputs.name}
+      {locals.inputs.firstname}
+      {locals.inputs.lastname}
+      {locals.inputs.gender}
+      {locals.inputs.subType}
+
+      {locals.inputs.address}
+      {locals.inputs.zipCode}
+      {locals.inputs.city}
+      {locals.inputs.country}
+
+      {locals.inputs.mayContact}
+      {locals.inputs.mayPublish}
+    </View>
+  );
+}
+
 export default class EditUserProfile extends Component {
   constructor(props) {
     super(props);
@@ -66,6 +87,8 @@ export default class EditUserProfile extends Component {
       }
     } else if (profileType == 'image') {
       schemaOptions.fields.imageFile.template = ProfileImagePickerTemplate;
+    } else if (profileType == 'profile') {
+      schemaOptions.template = UserProfileTemplate;
     }
 
     return schemaOptions;

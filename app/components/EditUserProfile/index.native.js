@@ -46,15 +46,15 @@ export default class EditUserProfile extends Component {
       routes: [
         {
           key: 'basic',
-          title: 'Basic'
+          title: i18n.t('label.basic_profile')
         },
         {
           key: 'desc',
-          title: 'Description'
+          title: i18n.t('label.description')
         },
         {
           key: 'security',
-          title: 'Security'
+          title: i18n.t('label.profile_security')
         }
       ]
     };

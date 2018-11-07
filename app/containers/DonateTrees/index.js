@@ -51,6 +51,7 @@ class DonationTreesContainer extends Component {
         paymentClear={this.props.paymentClear}
         setProgressModelState={this.props.setProgressModelState}
         plantProjectClear={this.props.clearPlantProject}
+        {...this.props}
       />
     );
   }

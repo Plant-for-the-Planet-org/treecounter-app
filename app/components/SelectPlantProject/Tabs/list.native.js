@@ -41,10 +41,6 @@ export default class ListProjects extends Component {
     });
   }
 
-  onSelectProject = id => {
-    this.props.selectProject(id);
-  };
-
   callExpanded = () => {
     this.setState({
       expanded: !this.state.expanded
@@ -97,6 +93,7 @@ export default class ListProjects extends Component {
         <ListViewProjects
           projects={filteredProjects}
           selectProject={projectId => this.props.selectProject(projectId)}
+          onMoreClick={projectId => this.props.onMoreClick(projectId)}
         />
       </CardLayout>
     );

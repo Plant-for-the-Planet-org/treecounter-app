@@ -22,8 +22,8 @@ export default class ListViewProjects extends Component {
   highLightProject(projectId) {
     this.setState({ selectedItem: projectId });
   }
-  toggleExpanded() {
-    console.log('expanded called');
+  toggleExpanded(id) {
+    this.props.onMoreClick(id);
   }
   render() {
     let { projects } = this.props;
@@ -100,7 +100,7 @@ export default class ListViewProjects extends Component {
                       <View style={{ marginVertical: -5 }}>
                         <SeeMoreToggle
                           seeMore={true}
-                          onToggle={this.toggleExpanded}
+                          onToggle={() => this.toggleExpanded(project.id)}
                         />
                       </View>
 

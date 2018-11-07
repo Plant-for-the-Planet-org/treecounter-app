@@ -87,7 +87,9 @@ export default class UserHome extends Component {
 
             <View style={styles.userInfo}>
               <View style={styles.userInfoName}>
-                <Text style={styles.nameStyle}>{userProfile.fullname}</Text>
+                <Text style={styles.nameStyle}>
+                  {userProfile.treecounter.displayName}
+                </Text>
               </View>
               <View style={styles.userInfoProfileType}>
                 <View style={styles.profileTypeContainer}>
@@ -105,7 +107,8 @@ export default class UserHome extends Component {
         </View>
         <View>
           {'tpo' === userProfile.type &&
-          1 <= tpoProps.plantProjects.length ? null : userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
+          1 <=
+            userProfile.plantProjects.length ? null : userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
           userProfile.synopsis2 ? (
             <CardLayout>
               <Text style={styles.footerText}>{userProfile.synopsis1}</Text>

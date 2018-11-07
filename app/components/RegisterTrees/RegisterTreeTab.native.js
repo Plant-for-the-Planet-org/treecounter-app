@@ -7,40 +7,44 @@ import i18n from '../../locales/i18n.js';
 import styles from '../../styles/register_trees.native';
 const Form = t.form.Form;
 
-const formLayoutTreesTemplate = locals => {
-  return (
-    <View style={styles.registerTree__form}>
-      <View style={styles.registerTree__form__row}>
-        {locals.inputs.treeCount}
-        {locals.inputs.treeSpecies}
-      </View>
-      <View style={styles.registerTree__form__row}>
-        {locals.inputs.plantDate}
-      </View>
-      <View style={styles.registerTree__form__row}>
-        {locals.inputs.geoLocation}
-      </View>
+getFormLayoutTemplate = mode => {
+  const formLayoutTreesTemplate = locals => {
+    console.log('locals', locals.inputs);
+    return (
+      <View style={styles.registerTree__form}>
+        <View style={styles.registerTree__form__row}>
+          <View style={{ flex: mode === 'multiple-trees' ? 1 : 0 }}>
+            {locals.inputs.treeCount}
+          </View>
+          <View style={{ flex: 1 }}>{locals.inputs.treeSpecies}</View>
+        </View>
 
-      <View
-        style={[styles.registerTree__form__alignLeftRow, styles.margin_top10]}
-      >
-        {locals.inputs.contributionImages}
+        {locals.inputs.plantDate}
+
+        {locals.inputs.geoLocation}
+
+        {locals.inputs.plantProject}
+        <View
+          style={[styles.registerTree__form__alignLeftRow, styles.margin_top10]}
+        />
+        <View style={styles.registerTree__form__row}>
+          <View style={{ flex: 1 }}>{locals.inputs.treeClassification}</View>
+          <View style={{ flex: 1 }}>{locals.inputs.treeScientificName}</View>
+        </View>
+        <View style={styles.registerTree__form__row__split}>
+          {locals.inputs.contributionMeasurements}
+        </View>
       </View>
-      <View style={styles.registerTree__form__row}>
-        {locals.inputs.treeClassification}
-        {locals.inputs.treeScientificName}
-      </View>
-      <View style={styles.registerTree__form__row__split}>
-        {locals.inputs.contributionMeasurements}
-      </View>
-    </View>
-  );
+    );
+  };
+  return formLayoutTreesTemplate;
 };
 
 export default class RegisterTreeTab extends PureComponent {
   render() {
+    console.log('locals', this.props);
     const schemaOptionsMultiple = {
-      template: formLayoutTreesTemplate,
+      template: getFormLayoutTemplate(this.props.mode),
       ...this.props.schemaOptions
     };
     return (

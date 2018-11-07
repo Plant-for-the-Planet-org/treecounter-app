@@ -57,14 +57,16 @@ class DonationTreesContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  selectedProject: selectedPlantProjectSelector(state),
-  selectedTpo: selectedTpoSelector(state),
-  currentUserProfile: currentUserProfileSelector(state),
-  supportTreecounter: supportedTreecounterSelector(state),
-  currencies: currenciesSelector(state),
-  paymentStatus: getPaymentStatus(state)
-});
+const mapStateToProps = state => {
+  return {
+    selectedProject: selectedPlantProjectSelector(state),
+    selectedTpo: selectedTpoSelector(state),
+    currentUserProfile: currentUserProfileSelector(state),
+    supportTreecounter: supportedTreecounterSelector(state),
+    currencies: currenciesSelector(state),
+    paymentStatus: getPaymentStatus(state)
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(

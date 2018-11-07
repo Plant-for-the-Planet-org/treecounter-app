@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SeeMoreToggle from '../Common/SeeMoreToggle';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
 import { View, Text, Image } from 'react-native';
@@ -67,13 +66,16 @@ class PlantProjectFull2 extends React.Component {
       taxDeduction: paymentSetup.taxDeduction
     };
     return (
-      <CardLayout style={styles.projectFullContainer}>
+      <CardLayout style={[styles.projectFullContainer, this.props.cardStyle]}>
         <View style={styles.projectImageContainer}>
           <Image
             style={styles.teaser__projectImage}
-            // resizeMode="center"
             source={{
-              uri: getImageUrl('project', 'large', teaserProps.projectImage)
+              uri: getImageUrl(
+                'project',
+                'large',
+                teaserProps.projectImage.image
+              )
             }}
             resizeMode={'cover'}
           />
@@ -116,14 +118,20 @@ class PlantProjectFull2 extends React.Component {
             </View>
 
             <View style={styles.buttonContainer}>
-              <PrimaryButton
-                style={styles.buttonItem}
-                buttonStyle={[styles.buttonStyle, styles.moreButtonStyle]}
-                textStyle={[styles.moreButtonTextStyle, styles.buttonTextStyle]}
-                onClick={() => this.toggleExpanded(id)}
-              >
-                <Text>More</Text>
-              </PrimaryButton>
+              {this.props.showMoreButton && (
+                <PrimaryButton
+                  style={styles.buttonItem}
+                  buttonStyle={[styles.buttonStyle, styles.moreButtonStyle]}
+                  textStyle={[
+                    styles.moreButtonTextStyle,
+                    styles.buttonTextStyle
+                  ]}
+                  onClick={() => this.toggleExpanded(id)}
+                >
+                  <Text>More</Text>
+                </PrimaryButton>
+              )}
+
               <PrimaryButton
                 style={styles.buttonItem}
                 buttonStyle={styles.buttonStyle}

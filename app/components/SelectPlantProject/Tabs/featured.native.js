@@ -56,6 +56,7 @@ export default class FeaturedProjects extends Component {
                 onSelectClickedFeaturedProjects={id =>
                   this.onSelectClickedFeaturedProjects(id)
                 }
+                showMoreButton={true}
                 tpoName={project.tpo_name}
               />
             ))

@@ -38,7 +38,7 @@ class VideoContainer extends React.Component {
           }}
           videoId={this.state.videoId}
           style={{ height: 300 }}
-          play={true}
+          play={false}
         />
       );
     }

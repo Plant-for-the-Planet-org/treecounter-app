@@ -87,14 +87,17 @@ class EditUserProfileContainer extends React.Component {
       });
   };
 
-  onSave = (usertype, profileType) => {
-    console.log(
-      this.refs.EditUserProfileContainer.refs[profileType].validate()
-    );
-    let value = this.refs.EditUserProfileContainer.refs[profileType].getValue();
-    let imageValue = this.refs.EditUserProfileContainer.refs[
-      'image'
-    ].getValue();
+  onSave = (usertype, profileType, formRefs) => {
+    const profileForm =
+      (formRefs && formRefs[profileType]) ||
+      this.refs.EditUserProfileContainer.refs[profileType];
+    const imageForm =
+      (formRefs && formRefs['image']) ||
+      this.refs.EditUserProfileContainer.refs['image'];
+    console.log(profileForm.validate());
+    let value = profileForm.getValue();
+
+    let imageValue = imageForm.getValue();
     if (imageValue) {
       this.props.updateUserProfile(imageValue, 'image');
     }

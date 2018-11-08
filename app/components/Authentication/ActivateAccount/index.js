@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import TextHeading from '../../Common/Heading/TextHeading';
 import CardLayout from '../../Common/Card';
@@ -15,13 +16,15 @@ export default class ActivateAccount extends Component {
         <CardLayout>
           <img src={RedEmail} />
           <div className={'gap'} />
-          <Text strong={true}>{i18n.t('label.not_yet_activated')}</Text>
+          <TextBlock strong={true}>
+            {i18n.t('label.not_yet_activated')}
+          </TextBlock>
           <div className={'gap'} />
           <TextBlock>{i18n.t('label.received_email')}</TextBlock>
           <div className={'gap'} />
           <TextBlock>{i18n.t('label.not_received_email')}</TextBlock>
           <div className={'gap'} />
-          <SecondaryButton onClick={() => sendEmail()}>
+          <SecondaryButton onClick={() => this.props.sendEmail()}>
             {i18n.t('label.resent_email')}
           </SecondaryButton>
         </CardLayout>
@@ -29,3 +32,8 @@ export default class ActivateAccount extends Component {
     );
   }
 }
+
+ActivateAccount.propTypes = {
+  sendEmail: PropTypes.func,
+  email: PropTypes.string
+};

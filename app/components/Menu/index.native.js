@@ -96,12 +96,6 @@ export default class Menu extends Component {
               title={i18n.t('label.faqs')}
               iconUrl={iosFaqs}
             />
-            <LargeMenuItem
-              onPress={() => {
-                this.onPressMenu({ uri: 'app_accountActivation' });
-              }}
-              title={'Activate Account'}
-            />
           </View>
         </ScrollView>
         {this.props.userProfile && (

@@ -3,25 +3,30 @@ import { loadUserProfile } from './loadUserProfileAction';
 import { debug } from '../debug/index';
 import { createAction } from 'redux-actions';
 import { clearStorage } from '../stores/localStorage';
-import { postRequest } from '../utils/api';
-import { updateJWT } from '../utils/user';
+import { postRequest, postActivateLinkRequest } from '../utils/api';
+import { updateJWT, updateActivateToken } from '../utils/user';
 import { NotificationAction } from './notificationAction';
 import { loadTpos } from './loadTposAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import _ from 'lodash';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 export const userLogout = createAction('USER_LOGOUT');
-export function login(data, navigation = undefined) {
-  const request = postRequest('api_login_check', data);
+
+export function login(credentials, navigation = undefined) {
+  const request = postRequest('api_login_check', credentials);
 
   return dispatch => {
     dispatch(setProgressModelState(true));
     request
       .then(res => {
         const { token, refresh_token, data } = res.data;
-        updateJWT(token, refresh_token);
-        dispatch(loadUserProfile());
-        dispatch(NotificationAction());
+        if (data.routeName === 'app_accountActivation') {
+          updateActivateToken(credentials._username, token);
+        } else {
+          updateJWT(token, refresh_token);
+          dispatch(loadUserProfile());
+          dispatch(NotificationAction());
+        }
         updateRoute(
           data.routeName,
           navigation || dispatch,
@@ -50,6 +55,16 @@ export function forgot_password(data) {
     postRequest('auth_forgotPassword_post', data)
       .then(res => {
         updateRoute('app_passwordSent', dispatch);
+      })
+      .catch(err => debug(err));
+  };
+}
+
+export function sendEmail() {
+  return dispatch => {
+    postActivateLinkRequest('auth_sendActivationLink_post')
+      .then(res => {
+        updateRoute('app_login', dispatch);
       })
       .catch(err => debug(err));
   };

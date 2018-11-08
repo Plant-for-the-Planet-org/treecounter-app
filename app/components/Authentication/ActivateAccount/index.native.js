@@ -29,3 +29,8 @@ export default class ActivateAccount extends Component {
     );
   }
 }
+
+ActivateAccount.propTypes = {
+  sendEmail: PropTypes.func,
+  email: PropTypes.string
+};

@@ -89,7 +89,7 @@ export const getAppNavigator = function(isLoggedIn) {
       ['license_info_list']: { screen: LicenseInfoList },
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
 
-      [getLocalRoute('selected_project')]: {
+      [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
       },
       [getLocalRoute('app_donateTrees')]: {
@@ -168,7 +168,7 @@ export const getAppNavigator = function(isLoggedIn) {
       [getLocalRoute('app_donateTrees')]: {
         screen: DonationTreesContainer
       },
-      [getLocalRoute('selected_project')]: {
+      [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
       },
       [getLocalRoute('app_homepage')]: {

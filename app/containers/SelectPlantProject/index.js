@@ -27,7 +27,7 @@ class SelectPlantProjectContainer extends Component {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     console.log('OnMore');
-    updateRoute('selected_project', navigation, 1);
+    updateRoute('app_selectProject', navigation, 1);
   }
 }
 

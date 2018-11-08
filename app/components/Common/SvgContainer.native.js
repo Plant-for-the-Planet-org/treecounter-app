@@ -71,7 +71,7 @@ export default class SvgContainer extends Component {
     if (target === 0) {
       return 72;
     } else {
-      return Math.round(72 / (1 + target / planted));
+      return Math.round(72 * plantet / target);
     }
   }
 
@@ -148,29 +148,24 @@ export default class SvgContainer extends Component {
               <SvgUri width="100%" height="100%" source={svgs['ballons']} />
             </Animated.View>
           </View>
-          {totalCount.map(
-            i =>
-              i <= treesWidth ? (
-                <View key={'tree-' + i} style={treecounterStyles.potStyle}>
-                  <SvgUri
-                    width="100%"
-                    height="100%"
-                    // source = {svgs['darkCrownTree' + ('' + i)]}
-                    source={
-                      svgs[_.padStart('darkCrownTree' + ('' + i), 3, '0')]
-                    }
-                  />
-                </View>
-              ) : null
-          )}
+          {totalCount.map(i => {
+            return i <= treesWidth ? (
+              <View key={'tree-' + i} style={treecounterStyles.potStyle}>
+                <SvgUri
+                  width="100%"
+                  height="100%"
+                  source={svgs['darkCrownTree' + _.padStart('' + i, 3, '0')]}
+                />
+              </View>
+            ) : null;
+          })}
           {totalCount.map(i => {
             return i > treesWidth ? (
               <View key={'pot-' + i} style={treecounterStyles.potStyle}>
                 <SvgUri
                   width="100%"
                   height="100%"
-                  // source = {svgs['pot' + ('' + i)]}
-                  source={svgs[_.padStart('pot' + ('' + i), 2, '0')]}
+                  source={svgs['pot' + _.padStart('' + i, 2, '0')]}
                 />
               </View>
             ) : null;

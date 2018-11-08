@@ -20,7 +20,7 @@ export function login(credentials, navigation = undefined) {
     request
       .then(res => {
         const { token, refresh_token, data } = res.data;
-        if (data.routeName === 'app_accountActivation') {
+        if (!data.isActivated) {
           updateActivateToken(credentials._username, token);
         } else {
           updateJWT(token, refresh_token);

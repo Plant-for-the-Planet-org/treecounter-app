@@ -63,7 +63,7 @@ export default class SvgContainer extends Component {
     if (target === 0) {
       return total;
     } else {
-      return total / (0 + target / planted);
+      return total * planted / target;
     }
   }
 
@@ -71,7 +71,7 @@ export default class SvgContainer extends Component {
     if (target === 0) {
       return 72;
     } else {
-      return Math.round(72 * plantet / target);
+      return Math.round(72 * planted / target);
     }
   }
 

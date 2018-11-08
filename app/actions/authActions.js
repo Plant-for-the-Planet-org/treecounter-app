@@ -60,11 +60,11 @@ export function forgot_password(data) {
   };
 }
 
-export function sendEmail() {
+export function sendEmail(navigation = undefined) {
   return dispatch => {
     postActivateLinkRequest('auth_sendActivationLink_post')
       .then(res => {
-        updateRoute('app_login', dispatch);
+        updateRoute('app_login', navigation || dispatch);
       })
       .catch(err => debug(err));
   };

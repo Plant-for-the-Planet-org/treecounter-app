@@ -21,7 +21,7 @@ export default class ActivateAccount extends Component {
           <Text style={styles.textStyle}>
             {i18n.t('label.not_received_email')}
           </Text>
-          <SecondaryButton onClick={() => sendEmail()}>
+          <SecondaryButton onClick={() => this.props.sendEmail()}>
             {i18n.t('label.resent_email')}
           </SecondaryButton>
         </View>

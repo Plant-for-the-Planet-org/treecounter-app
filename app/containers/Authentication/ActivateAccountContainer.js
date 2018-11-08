@@ -25,7 +25,7 @@ class ActivateAccountContainer extends React.Component {
   render() {
     return (
       <ActivateAccount
-        sendEmail={this.props.sendEmail}
+        sendEmail={this.props.sendEmail.bind(this, this.props.navigation)}
         email={this.state.email}
       />
     );
@@ -44,5 +44,6 @@ const mapDispatchToProps = dispatch => {
 export default connect(null, mapDispatchToProps)(ActivateAccountContainer);
 
 ActivateAccountContainer.propTypes = {
-  sendEmail: PropTypes.func
+  sendEmail: PropTypes.func,
+  navigation: PropTypes.object
 };

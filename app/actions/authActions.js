@@ -85,7 +85,7 @@ export function setAccessDenied(data, params, path) {
       .then(res => {
         const { statusText } = res;
         updateRoute(path, dispatch);
-        NotificationManager.success(statusText, 'Success', 5000);
+        // NotificationManager.success(statusText, 'Success', 5000);
       })
       .catch(error => {
         // NotificationManager.error(error.response.data.message, 'Error', 5000);

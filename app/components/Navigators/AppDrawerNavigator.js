@@ -33,6 +33,7 @@ import EditUserContributionContainer from '../../containers/EditUserContribution
 import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
+import SelectedPlantProject from '../../containers/SelectedPlantProject';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -86,7 +87,14 @@ export const getAppNavigator = function(isLoggedIn) {
       ['about_us']: { screen: AboutUsContainer },
 
       ['license_info_list']: { screen: LicenseInfoList },
-      [getLocalRoute('app_editTrees')]: EditUserContributionContainer
+      [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
+
+      [getLocalRoute('selected_project')]: {
+        screen: SelectedPlantProject
+      },
+      [getLocalRoute('app_donateTrees')]: {
+        screen: DonationTreesContainer
+      }
     },
     {
       headerMode: 'none',
@@ -159,6 +167,9 @@ export const getAppNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: DonationTreesContainer
+      },
+      [getLocalRoute('selected_project')]: {
+        screen: SelectedPlantProject
       },
       [getLocalRoute('app_homepage')]: {
         screen: Trillion

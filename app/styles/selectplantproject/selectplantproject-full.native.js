@@ -10,7 +10,8 @@ const Layout = {
 
 export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
-    padding: 10,
+    //padding: 10,
+
     flexDirection: 'column'
     // height: Layout.window.height
   },
@@ -47,5 +48,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
   plantProjectDetails: {
     flexGrow: 1,
     flexBasis: 'auto'
+  },
+  cardStyle: {
+    margin: 0,
+    padding: 0
   }
 }));

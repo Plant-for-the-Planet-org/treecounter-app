@@ -7,7 +7,8 @@ import {
   updateUserProfile,
   updatePlantProject,
   deletePlantProject,
-  addPlantProject
+  addPlantProject,
+  deleteUserProfile
 } from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
@@ -27,7 +28,15 @@ class EditUserProfileContainer extends React.Component {
     };
   }
   deleteProfile = () => {
-    console.log('call Profile Deletion API here');
+    console.log(
+      'call Profile Deletion API here',
+      this.props.currentUserProfile
+    );
+    this.props
+      .deleteUserProfile(this.props.currentUserProfile.id)
+      .then(data => {
+        console.log(data);
+      });
   };
 
   updatePlantProject = plantProject => {
@@ -161,7 +170,8 @@ const mapDispatchToProps = dispatch => {
       updateUserProfile,
       updatePlantProject,
       deletePlantProject,
-      addPlantProject
+      addPlantProject,
+      deleteUserProfile
     },
     dispatch
   );
@@ -175,5 +185,6 @@ EditUserProfileContainer.propTypes = {
   updateUserProfile: PropTypes.func,
   updatePlantProject: PropTypes.func,
   deletePlantProject: PropTypes.func,
-  addPlantProject: PropTypes.func
+  addPlantProject: PropTypes.func,
+  deleteUserProfile: PropTypes.func
 };

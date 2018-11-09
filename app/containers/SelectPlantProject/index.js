@@ -50,5 +50,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 SelectPlantProjectContainer.propTypes = {
   plantProjects: PropTypes.array,
   currencies: PropTypes.object,
-  selectPlantProjectAction: PropTypes.func
+  selectPlantProjectAction: PropTypes.func,
+  navigation: PropTypes.any
 };

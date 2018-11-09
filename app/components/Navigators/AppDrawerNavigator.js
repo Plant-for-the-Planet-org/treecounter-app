@@ -32,6 +32,7 @@ import RegisterTrees from '../../containers/RegisterTrees';
 import EditUserContributionContainer from '../../containers/EditUserContribution';
 import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
+import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
 
 const headerLabels = {
@@ -77,7 +78,9 @@ export const getAppNavigator = function(isLoggedIn) {
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
       },
-
+      [getLocalRoute('app_accountActivation')]: {
+        screen: ActivateAccountContainer
+      },
       [getLocalRoute('app_faq')]: FAQContainer,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
 
@@ -86,7 +89,7 @@ export const getAppNavigator = function(isLoggedIn) {
       ['license_info_list']: { screen: LicenseInfoList },
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
 
-      [getLocalRoute('selected_project')]: {
+      [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
       },
       [getLocalRoute('app_donateTrees')]: {
@@ -165,7 +168,7 @@ export const getAppNavigator = function(isLoggedIn) {
       [getLocalRoute('app_donateTrees')]: {
         screen: DonationTreesContainer
       },
-      [getLocalRoute('selected_project')]: {
+      [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
       },
       [getLocalRoute('app_homepage')]: {

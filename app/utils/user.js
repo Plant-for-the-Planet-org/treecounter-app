@@ -1,6 +1,7 @@
 import { fetchItem, saveItem } from '../stores/localStorage';
 import jwtDecode from 'jwt-decode';
 import { postRequest } from './api';
+import { email } from '../assets';
 
 export const getAccessToken = () => {
   return fetchItem('token')
@@ -26,6 +27,11 @@ export const updateJWT = (token, refresh_token) => {
   saveItem('refresh_token', refresh_token);
   saveItem('token_expires', `${getExpirationTimeStamp(token)}`);
   return;
+};
+
+export const updateActivateToken = (email, activate_token) => {
+  saveItem('activate_token', activate_token);
+  saveItem('email', email);
 };
 
 const getExpirationTimeStamp = token => {

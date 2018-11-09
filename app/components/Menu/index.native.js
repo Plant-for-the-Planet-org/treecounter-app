@@ -71,7 +71,7 @@ export default class Menu extends Component {
             <LargeMenuItem
               style={{ paddingLeft: 0 }}
               onPress={() => {
-                this.onPressMenu({ uri: getLocalRoute('app_login') });
+                this.onPressMenu({ uri: 'app_login' });
               }}
               title={i18n.t('label.login')}
               iconUrl={iosLogout}

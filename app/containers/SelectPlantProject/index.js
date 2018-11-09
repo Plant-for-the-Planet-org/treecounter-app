@@ -12,9 +12,6 @@ import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction
 import SelectPlantProject from '../../components/SelectPlantProject';
 
 class SelectPlantProjectContainer extends Component {
-  componentDidMount() {
-    //  this.props.selectPlantProjectAction(1);
-  }
   render() {
     console.log('select plant props', this.props);
     return (
@@ -30,7 +27,7 @@ class SelectPlantProjectContainer extends Component {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     console.log('OnMore');
-    updateRoute('selected_project', navigation, 1);
+    updateRoute('app_selectProject', navigation, 1);
   }
 }
 
@@ -50,5 +47,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 SelectPlantProjectContainer.propTypes = {
   plantProjects: PropTypes.array,
   currencies: PropTypes.object,
-  selectPlantProjectAction: PropTypes.func
+  selectPlantProjectAction: PropTypes.func,
+  navigation: PropTypes.object
 };

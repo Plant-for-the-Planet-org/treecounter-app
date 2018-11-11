@@ -31,12 +31,12 @@ export default (editProfileStyle = EStyleSheet.create({
     textAlign: 'center'
   },
   bottomRow: {
-    backgroundColor: '$colorPrimaryDark',
+    backgroundColor: '#85a64d',
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
   buttonStyle: {
-    backgroundColor: '$colorPrimaryAccent',
+    backgroundColor: '#85a64d',
     flex: 1,
     borderWidth: 0,
     borderRadius: 0,

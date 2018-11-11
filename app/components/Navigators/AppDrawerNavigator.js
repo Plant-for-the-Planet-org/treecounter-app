@@ -109,7 +109,23 @@ export const getAppNavigator = function(isLoggedIn) {
     {
       Search: {
         screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />
-      },
+      }
+    },
+    {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
+  const deleteProfileNavigator = createStackNavigator(
+    {
       ['delete_profile_confirm']: { screen: ConfirmProfileDeletionModal }
     },
     {
@@ -234,7 +250,8 @@ export const getAppNavigator = function(isLoggedIn) {
   const AppNavigator = createDrawerNavigator(
     {
       appStackNavigator,
-      searchNavigator: searchNavigator
+      searchNavigator: searchNavigator,
+      deleteProfileNavigator
     },
     {
       initialRouteName: 'appStackNavigator',

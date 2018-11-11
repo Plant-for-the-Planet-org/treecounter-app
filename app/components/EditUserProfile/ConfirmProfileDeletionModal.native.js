@@ -9,16 +9,18 @@ import i18n from '../../locales/i18n.js';
 class ConfirmProfileDeletionModal extends Component {
   constructor(props) {
     super(props);
+    this.state = { username: '' };
   }
 
   render() {
+    const deleteProfile = this.props.navigation.getParam('deleteProfile');
     return (
       <View style={styles.confirmDeleteContainer}>
         <ScrollView
           contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
         >
           <View style={styles.container}>
-            <Text style={styles.textHeader}>Are You Sure !</Text>
+            <Text style={styles.textHeader}>Are You Sure?</Text>
             <Text style={styles.textPara}>
               Deleting your account is permanent.
             </Text>
@@ -31,6 +33,11 @@ class ConfirmProfileDeletionModal extends Component {
               Tree Campaign.
             </Text>
             <TextInput
+              ref={el => {
+                this.username = el;
+              }}
+              onChangeText={username => this.setState({ username })}
+              value={this.state.username}
               style={styles.textInputfield}
               placeholder={'DELETE'}
               placeholderTextColor={'#686060'}
@@ -41,13 +48,17 @@ class ConfirmProfileDeletionModal extends Component {
               autoCapitalize={true}
               allowFontScaling={true}
             />
+            <Text style={[styles.textPara, { marginTop: 15 }]}>
+              Please type DELETE in all capitals letters and click Delete button
+              to continue with your account deletion.
+            </Text>
           </View>
         </ScrollView>
         <View style={styles.bottomRow}>
           <PrimaryButton
             buttonStyle={styles.buttonStyle}
             onClick={() => {
-              this.props.onSave(type, 'profile', this.refs.tabView.refs);
+              this.props.navigation.goBack(null);
             }}
           >
             {'GO BACK'}
@@ -55,7 +66,10 @@ class ConfirmProfileDeletionModal extends Component {
           <PrimaryButton
             buttonStyle={styles.buttonStyle}
             onClick={() => {
-              this.props.onSave(type, 'profile', this.refs.tabView.refs);
+              if (this.state.username === 'DELETE') {
+                deleteProfile();
+                this.props.navigation.goBack(null);
+              }
             }}
           >
             {'DELETE'}

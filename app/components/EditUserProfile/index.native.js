@@ -126,9 +126,9 @@ export default class EditUserProfile extends Component {
               <PrimaryButton
                 buttonStyle={styles.deleteProfileButton}
                 onClick={() => {
-                  // this.props.deleteProfile();
-                  //delete_profile_confirm
-                  this.props.navigation.navigate('delete_profile_confirm');
+                  this.props.navigation.navigate('delete_profile_confirm', {
+                    deleteProfile: this.props.deleteProfile
+                  });
                 }}
               >
                 {i18n.t('label.delete_profile')}

@@ -22,15 +22,13 @@ class ConfirmProfileDeletionModal extends Component {
           <View style={styles.container}>
             <Text style={styles.textHeader}>Are You Sure?</Text>
             <Text style={styles.textPara}>
-              Deleting your account is permanent.
+              {i18n.t('label.deletion_warning_heading')}
             </Text>
             <Text style={styles.textPara}>
-              All your personal information will be deleted unless required for
-              legal and accounting purpose.
+              {i18n.t('label.deletion_warning_summery')}
             </Text>
             <Text style={styles.textPara}>
-              Trees you have planted will continue to be part of the Trillion
-              Tree Campaign.
+              {i18n.t('label.deletion_warning_summery_1')}
             </Text>
             <TextInput
               ref={el => {
@@ -49,8 +47,7 @@ class ConfirmProfileDeletionModal extends Component {
               allowFontScaling={true}
             />
             <Text style={[styles.textPara, { marginTop: 15 }]}>
-              Please type DELETE in all capitals letters and click Delete button
-              to continue with your account deletion.
+              {i18n.t('label.deletion_prerequisite')}
             </Text>
           </View>
         </ScrollView>

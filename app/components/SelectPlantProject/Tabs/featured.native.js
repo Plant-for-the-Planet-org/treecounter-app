@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Dimensions } from 'react-native';
-import styles from '../../../styles/selectplantproject/selectplantproject';
-import i18n from '../../../locales/i18n.js';
-
-import Slick from 'react-native-slick';
-import PlantProjectFull from '../../PlantProjects/PlantProjectFull';
+import PlantProjectFull2 from '../../PlantProjects/PlantProjectFull2';
 
 export default class FeaturedProjects extends Component {
   constructor(props) {
@@ -47,32 +43,24 @@ export default class FeaturedProjects extends Component {
     this.props.selectProject(id);
   };
 
-  callExpanded = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    });
-  };
-
   render() {
     let { featuredProjects } = this.state;
     return (
       <ScrollView>
-        {featuredProjects && featuredProjects.length > 0 ? (
-          <Slick style={styles.slickWrapper} showsPagination={false}>
-            {featuredProjects.map(project => (
-              <PlantProjectFull
+        {featuredProjects && featuredProjects.length > 0
+          ? featuredProjects.map(project => (
+              <PlantProjectFull2
                 key={'projectFull' + project.id}
-                callExpanded={() => this.callExpanded()}
-                expanded={false}
+                onMoreClick={id => this.props.onMoreClick(id)}
                 plantProject={project}
                 onSelectClickedFeaturedProjects={id =>
                   this.onSelectClickedFeaturedProjects(id)
                 }
+                showMoreButton={true}
                 tpoName={project.tpo_name}
               />
-            ))}
-          </Slick>
-        ) : null}
+            ))
+          : null}
       </ScrollView>
     );
   }

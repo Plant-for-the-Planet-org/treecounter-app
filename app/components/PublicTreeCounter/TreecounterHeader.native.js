@@ -5,7 +5,7 @@ import { View, Text, Image } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import userHomeStyles from '../../styles/user-home.native';
-
+import UserProfileImage from '../Common/UserProfileImage';
 const TreecounterHeader = ({
   caption,
   profileType,
@@ -18,16 +18,7 @@ const TreecounterHeader = ({
 }) => {
   return (
     <View style={[userHomeStyles.userProfileContainer, containerStyle]}>
-      <View style={userHomeStyles.profileImageContainer}>
-        <Image
-          style={userHomeStyles.profileImage}
-          source={{
-            uri: getImageUrl('profile', 'thumb', logo)
-          }}
-        />
-        <View style={userHomeStyles.circle} />
-      </View>
-
+      <UserProfileImage profileImage={logo} />
       <View style={userHomeStyles.userInfo}>
         <View style={userHomeStyles.userInfoName}>
           <Text style={userHomeStyles.nameStyle}>{caption}</Text>

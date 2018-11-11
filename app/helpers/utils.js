@@ -119,3 +119,17 @@ export function getDocumentTitle(pageTitle, siteRequired = true) {
   }
   return pageTitle;
 }
+
+export function getPlantProjectEnum(currentUserProfile) {
+  if (currentUserProfile && currentUserProfile.type === 'tpo') {
+    let newEnum = [];
+    for (let plantProject in currentUserProfile.plantProjects) {
+      newEnum.push({
+        value: currentUserProfile.plantProjects[plantProject].id,
+        text: currentUserProfile.plantProjects[plantProject].name
+      });
+    }
+    return newEnum;
+  }
+  return undefined;
+}

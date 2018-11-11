@@ -17,6 +17,18 @@ export const singleTreeForm = {
       title: 'label.tree_species',
       propertyOrder: 2
     },
+    plantProject: {
+      enum: ['1', '2', '3', '5'],
+      enum_titles: [
+        'Campeche Rainforest Restoration',
+        'project_2',
+        'project_3',
+        'project_5'
+      ],
+      type: 'string',
+      title: 'Plant Project',
+      propertyOrder: 2
+    },
     plantDate: {
       type: 'string',
       title: 'label.plant_date',
@@ -119,6 +131,18 @@ export const multipleTreesForm = {
       },
       pattern: '.{1,}',
       propertyOrder: 1
+    },
+    plantProject: {
+      enum: ['1', '2', '3', '5'],
+      enum_titles: [
+        'Campeche Rainforest Restoration',
+        'project_2',
+        'project_3',
+        'project_5'
+      ],
+      type: 'string',
+      title: 'Plant Project',
+      propertyOrder: 2
     },
     treeSpecies: {
       type: 'string',

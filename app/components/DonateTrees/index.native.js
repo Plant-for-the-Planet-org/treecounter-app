@@ -12,11 +12,10 @@ import {
 import i18n from '../../locales/i18n.js';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import RecieptTabsView from './receiptTabs';
-import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 import PaymentSelector from '../Payment/PaymentSelector';
-import { ScrollView } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 
 export default class DonateTrees extends Component {
   constructor(props) {
@@ -45,7 +44,7 @@ export default class DonateTrees extends Component {
       expandedOption: '1',
       showSelectProject: false,
       routes: [
-        { key: 'selectPlant', title: 'Select Plant' },
+        // { key: 'selectPlant', title: 'Select Plant' },
         { key: 'currency', title: 'Donation Details' },
         { key: 'recipient', title: 'Donor Details' },
         { key: 'payments', title: 'Payments' }
@@ -106,7 +105,7 @@ export default class DonateTrees extends Component {
 
   Tab1validated() {
     if (this.props.selectedProject) {
-      this._handleIndexChange(1);
+      this._handleIndexChange(0);
     }
   }
 
@@ -118,7 +117,7 @@ export default class DonateTrees extends Component {
           treeCount: this.state.selectedTreeCount
         }
       });
-      this._handleIndexChange(2);
+      this._handleIndexChange(1);
     }
   }
   goToNextTab(value) {
@@ -135,7 +134,7 @@ export default class DonateTrees extends Component {
           ...receipt
         }
       });
-      this._handleIndexChange(3);
+      this._handleIndexChange(2);
     } else {
       // Do nothing
     }
@@ -225,40 +224,47 @@ export default class DonateTrees extends Component {
     let currencies = this.props.currencies.currencies;
 
     let screenToShow;
-    {
-      this.props.selectedTpo && route.key === 'selectPlant'
-        ? (screenToShow = (
-            <ScrollView>
-              <PlantProjectFull
-                callExpanded={this.callExpanded}
-                expanded={false}
-                plantProject={selectedProject}
-                tpoName={this.props.selectedTpo.name}
-                selectAnotherProject={true}
-                showNextButton={true}
-                onNextClick={() => this.Tab1validated()}
-                projectClear={this.props.plantProjectClear}
-              />
-            </ScrollView>
-          ))
-        : null;
-    }
+    // {
+    //   this.props.selectedTpo && route.key === 'selectPlant'
+    //     ? (screenToShow = (
+    //         <ScrollView>
+    //           <PlantProjectFull
+    //             callExpanded={this.callExpanded}
+    //             expanded={false}
+    //             plantProject={selectedProject}
+    //             tpoName={this.props.selectedTpo.name}
+    //             selectAnotherProject={true}
+    //             showNextButton={true}
+    //             onNextClick={() => this.Tab1validated()}
+    //             projectClear={this.props.plantProjectClear}
+    //           />
+    //         </ScrollView>
+    //       ))
+    //     : null;
+    // }
 
     {
       this.props.selectedTpo && currencies && route.key === 'currency'
         ? (screenToShow = (
-            <TreeCountCurrencySelector
-              treeCost={selectedProject.treeCost}
-              rates={currencies.currency_rates[selectedProject.currency].rates}
-              fees={1}
-              showNextButton={true}
-              currencies={currencies.currency_names} // TODO: connect to data from API
-              selectedCurrency={this.determineDefaultCurrency()}
-              treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
-              onNextClick={() => this.Tab2validated()}
-              selectedTreeCount={this.state.selectedTreeCount}
-              onChange={this.handleTreeCountCurrencyChange}
-            />
+            <View>
+              <TreeCountCurrencySelector
+                treeCost={selectedProject.treeCost}
+                rates={
+                  currencies.currency_rates[selectedProject.currency].rates
+                }
+                fees={1}
+                showNextButton={true}
+                currencies={currencies.currency_names} // TODO: connect to data from API
+                selectedCurrency={this.determineDefaultCurrency()}
+                treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
+                onNextClick={() => this.Tab2validated()}
+                selectedTreeCount={this.state.selectedTreeCount}
+                onChange={this.handleTreeCountCurrencyChange}
+              />
+              <Text onPress={this.props.plantProjectClear}>
+                {i18n.t('label.different_project')}
+              </Text>
+            </View>
           ))
         : null;
     }
@@ -321,7 +327,7 @@ export default class DonateTrees extends Component {
   };
 
   _canJumpToTab = index => {
-    if (index === 3) {
+    if (index === 2) {
       if (this.getRecieptFormState() != null) {
         return true;
       }
@@ -350,7 +356,7 @@ export default class DonateTrees extends Component {
     const { selectedProject } = this.props;
 
     return this.state.showSelectProject ? (
-      <SelectPlantProjectContainer />
+      <SelectPlantProjectContainer {...this.props} />
     ) : !selectedProject ? null : (
       <TabView
         navigationState={this.state}

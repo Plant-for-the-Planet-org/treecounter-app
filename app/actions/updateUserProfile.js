@@ -122,11 +122,11 @@ export function updateUserProfile(data, profileType) {
   };
 }
 
-export function deleteUserProfile(profileID) {
+export function deleteUserProfile(userProfile) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
-      deleteAuthenticatedRequest('profile_delete', profileID)
+      deleteAuthenticatedRequest('profile_delete', { userProfile })
         .then(res => {
           debug(res.status);
           debug(res);

@@ -151,6 +151,7 @@ class EditUserProfileContainer extends React.Component {
         updatePlantProject={this.updatePlantProject}
         deletePlantProject={this.deletePlantProject}
         addPlantProject={this.addPlantProject}
+        navigation={this.props.navigation}
       />
     );
   }
@@ -186,5 +187,6 @@ EditUserProfileContainer.propTypes = {
   updatePlantProject: PropTypes.func,
   deletePlantProject: PropTypes.func,
   addPlantProject: PropTypes.func,
-  deleteUserProfile: PropTypes.func
+  deleteUserProfile: PropTypes.func,
+  navigation: PropTypes.func
 };

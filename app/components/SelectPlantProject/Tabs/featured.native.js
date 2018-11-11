@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Dimensions } from 'react-native';
-import PlantProjectFull2 from '../../PlantProjects/PlantProjectFull2';
+import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 
 export default class FeaturedProjects extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ export default class FeaturedProjects extends Component {
       <ScrollView>
         {featuredProjects && featuredProjects.length > 0
           ? featuredProjects.map(project => (
-              <PlantProjectFull2
+              <PlantProjectSnippet
                 key={'projectFull' + project.id}
                 onMoreClick={id => this.props.onMoreClick(id)}
                 plantProject={project}

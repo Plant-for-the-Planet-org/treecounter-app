@@ -11,7 +11,7 @@ import { getImageUrl } from '../../actions/apiRouting';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
-class PlantProjectFull2 extends React.Component {
+class PlantProjectSnippet extends React.Component {
   constructor(props) {
     super(props);
     this.toggleExpanded = this.toggleExpanded.bind(this);
@@ -43,6 +43,7 @@ class PlantProjectFull2 extends React.Component {
       geoLocation
     } = this.props.plantProject;
     let projectImage = null;
+    let treeCountWidth = 100 - countPlanted / countTarget * 100;
 
     if (imageFile) {
       projectImage = { image: imageFile };
@@ -82,15 +83,39 @@ class PlantProjectFull2 extends React.Component {
         </View>
         <View style={styles.projectSpecsContainer}>
           <View style={styles.treeCounterContainer}>
-            <View style={styles.treePlantedContainer}>
-              <Text style={styles.treePlantedtext}>
-                {specsProps.countPlanted}
-              </Text>
-              <Text style={styles.treePlantedtext}>
-                {i18n.t('label.trees') + ' ' + i18n.t('label.planted')}
-              </Text>
+            <View style={[styles.treePlantedContainer]}>
+              <View
+                style={[styles.treePlantedChildContainer]}
+                style={
+                  treeCountWidth > 0
+                    ? {
+                        height: '100%',
+                        flexDirection: 'row',
+                        backgroundColor: '#b9d384',
+                        borderColor: '#b9d384',
+                        width: treeCountWidth + '%',
+                        padding: 5,
+                        paddingRight: 10,
+                        borderTopRightRadius: 10,
+                        borderBottomRightRadius: 10,
+                        borderWidth: 0.5
+                      }
+                    : {
+                        height: '100%',
+                        flexDirection: 'row'
+                      }
+                }
+              >
+                <Text style={styles.treePlantedtext}>
+                  {specsProps.countPlanted}
+                </Text>
+                <Text style={styles.treePlantedtext}>
+                  {i18n.t('label.trees')}
+                </Text>
+              </View>
             </View>
-            <View style={styles.targetContainer}>
+
+            <View style={[styles.targetContainer]}>
               <Text>{specsProps.countTarget}</Text>
             </View>
           </View>
@@ -148,7 +173,7 @@ class PlantProjectFull2 extends React.Component {
   }
 }
 
-PlantProjectFull2.propTypes = {
+PlantProjectSnippet.propTypes = {
   plantProject: PropTypes.object.isRequired,
   callExpanded: PropTypes.func,
   tpoName: PropTypes.string,
@@ -159,4 +184,4 @@ PlantProjectFull2.propTypes = {
   onSelectClickedFeaturedProjects: PropTypes.func
 };
 
-export default PlantProjectFull2;
+export default PlantProjectSnippet;

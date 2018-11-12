@@ -123,16 +123,6 @@ export default class EditUserProfile extends Component {
               >
                 {i18n.t('label.save_changes')}
               </PrimaryButton>
-              <PrimaryButton
-                buttonStyle={styles.deleteProfileButton}
-                onClick={() => {
-                  this.props.navigation.navigate('delete_profile_confirm', {
-                    deleteProfile: this.props.deleteProfile
-                  });
-                }}
-              >
-                {i18n.t('label.delete_profile')}
-              </PrimaryButton>
             </CardLayout>
           </ScrollView>
         );
@@ -192,6 +182,16 @@ export default class EditUserProfile extends Component {
                 }}
               >
                 {i18n.t('label.change_password')}
+              </PrimaryButton>
+              <PrimaryButton
+                buttonStyle={styles.deleteProfileButton}
+                onClick={() => {
+                  this.props.navigation.navigate('delete_profile_confirm', {
+                    deleteProfile: this.props.deleteProfile
+                  });
+                }}
+              >
+                {i18n.t('label.delete_profile')}
               </PrimaryButton>
             </CardLayout>
           </ScrollView>

@@ -21,14 +21,16 @@ export default (editProfileStyle = EStyleSheet.create({
   textHeader: {
     color: '#fff',
     fontSize: 24,
-    marginBottom: 25
+    marginBottom: 25,
+    fontWeight: 'bold'
   },
   textPara: {
     color: '#fff',
     fontSize: 18,
     paddingLeft: 15,
     paddingRight: 15,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontWeight: '100'
   },
   bottomRow: {
     backgroundColor: '#85a64d',
@@ -36,6 +38,7 @@ export default (editProfileStyle = EStyleSheet.create({
     justifyContent: 'space-around'
   },
   buttonStyle: {
+    borderColor: '#85a64d',
     backgroundColor: '#85a64d',
     flex: 1,
     borderWidth: 0,

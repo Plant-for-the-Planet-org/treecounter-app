@@ -10,8 +10,8 @@ import i18n from '../../locales/i18n.js';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import {
   redeemSignIn,
-  redeemRed,
-  redeemGreen,
+  redeem_outline_red,
+  redeem_outline,
   close_green
 } from '../../assets';
 
@@ -88,7 +88,7 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </div>
       );
-      icon = redeemRed;
+      icon = redeem_outline_red;
     } else if (this.props.pageStatus === 'code-unknown') {
       button = (
         <div className="row">
@@ -97,7 +97,7 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </div>
       );
-      icon = redeemGreen;
+      icon = redeem_outline;
     } else if (this.props.pageStatus === 'not-logged-in') {
       button = (
         <div className="row">
@@ -121,7 +121,7 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </div>
       );
-      icon = redeemGreen;
+      icon = redeem_outline;
     }
 
     let value = this.state.value;

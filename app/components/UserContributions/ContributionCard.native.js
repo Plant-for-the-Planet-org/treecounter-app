@@ -132,7 +132,18 @@ class ContributionCard extends React.Component {
 
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
-      ? 'Gifted on ' + plantDate + ' to ' + <a href={giveeSlug}>{givee}</a>
+      ? [
+          <Text>{'Gifted on ' + plantDate + ' to '}</Text>,
+          <Text
+            onPress={() =>
+              this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+                treeCounterId: giveeSlug
+              })
+            }
+          >
+            {givee}
+          </Text>
+        ]
       : 'Donated on ' + plantDate;
   }
 
@@ -144,18 +155,58 @@ class ContributionCard extends React.Component {
     return 'Planted on ' + plantDate + ', Added on ' + registrationDate;
   }
 
-  dedicateActionLine(isGift, givee, giveeSlug) {
-    return isGift ? 'Dedicated to ' + <a href={giveeSlug}>{givee}</a> : '';
-  }
+  dedicateActionLine = (isGift, givee, giveeSlug) => {
+    return isGift
+      ? [
+          <Text>Dedicated to</Text>,
+          <Text
+            onPress={() =>
+              this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+                treeCounterId: giveeSlug
+              })
+            }
+          >
+            {' ' + givee}
+          </Text>
+        ]
+      : '';
+  };
 
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && giver
-      ? 'Given on ' + redemptionDate + ' by ' + <a href={giveeSlug}>{givee}</a>
+      ? [
+          <Text>{'Given on ' + redemptionDate + ' by '}</Text>,
+          <Text
+            onPress={() =>
+              this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+                treeCounterId: giveeSlug
+              })
+            }
+          >
+            {givee}
+          </Text>
+        ]
       : redemptionCode
         ? 'Redeemed on ' + redemptionDate
         : 'Dedicated on ' +
           redemptionDate +
-          (givee ? ' by ' + <a href={giveeSlug}>{givee}</a> : '');
+          (givee
+            ? [
+                <Text>{' by '}</Text>,
+                <Text
+                  onPress={() =>
+                    this.props.navigation.navigate(
+                      getLocalRoute('app_treecounter'),
+                      {
+                        treeCounterId: giveeSlug
+                      }
+                    )
+                  }
+                >
+                  {givee}
+                </Text>
+              ]
+            : '');
   }
 
   render() {

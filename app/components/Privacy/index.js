@@ -33,14 +33,14 @@ export default class Privacy extends Component {
     ) : (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>
-          {i18n.t('label.faqs')}
-          <DescriptionHeading>
-            {i18n.t('label.description1')}
-            <a href={'https://' + i18n.t('label.description2')} target="_blank">
-              {i18n.t('label.description2')}
-            </a>{' '}
-            {i18n.t('label.description3')}
-          </DescriptionHeading>
+          {i18n.t('label.privacy')}
+          {/*<DescriptionHeading>*/}
+          {/*{i18n.t('label.description1')}*/}
+          {/*<a href={'https://' + i18n.t('label.description2')} target="_blank">*/}
+          {/*{i18n.t('label.description2')}*/}
+          {/*</a>{' '}*/}
+          {/*{i18n.t('label.description3')}*/}
+          {/*</DescriptionHeading>*/}
         </TextHeading>
         <CardLayout>
           <Accordion accordion={false}>{this.GetPrivacyList()}</Accordion>

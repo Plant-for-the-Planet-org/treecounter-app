@@ -10,7 +10,7 @@ import {
 } from '../../server/parsedSchemas/donateTrees';
 
 import i18n from '../../locales/i18n.js';
-import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+
 import RecieptTabsView from './receiptTabs';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
@@ -64,10 +64,15 @@ export default class DonateTrees extends Component {
   }
 
   componentDidMount() {
+    const { navigation } = this.props;
     this.props.onTabChange(this.state.routes[0].title);
+    if (!this.props.selectedProject) {
+      updateRoute('app_selectProject_snippet', navigation, 1);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
+    const { navigation } = this.props;
     if (nextProps.selectedProject) {
       this.setState({
         showSelectProject: false
@@ -84,9 +89,7 @@ export default class DonateTrees extends Component {
         this.setState({ selectedTreeCount: nextTreeCount });
       }
     } else {
-      this.setState({
-        showSelectProject: true
-      });
+      updateRoute('app_selectProject_snippet', navigation, 1);
     }
   }
 
@@ -353,11 +356,7 @@ export default class DonateTrees extends Component {
   }
 
   render() {
-    const { selectedProject } = this.props;
-
-    return this.state.showSelectProject ? (
-      <SelectPlantProjectContainer {...this.props} />
-    ) : !selectedProject ? null : (
+    return (
       <TabView
         navigationState={this.state}
         renderScene={this._renderScene}

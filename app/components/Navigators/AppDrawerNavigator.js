@@ -34,6 +34,7 @@ import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -199,6 +200,9 @@ export const getAppNavigator = function(isLoggedIn) {
       Base: baseNavigator,
       [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
+      },
+      [getLocalRoute('app_selectProject_snippet')]: {
+        screen: SelectPlantProjectContainer
       }
     },
     {

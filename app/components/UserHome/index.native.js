@@ -6,6 +6,7 @@ import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
 import { getProfileTypeName } from '../PublicTreeCounter/utils';
 import UserProfileImage from '../Common/UserProfileImage';
+import ContributionCardList from '../UserContributions/ContributionCardList';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -99,6 +100,7 @@ export default class UserHome extends Component {
             </CardLayout>
           ) : null}
         </View>
+        <ContributionCardList contributions={this.props.userContributions} />
       </ScrollView>
     );
   }
@@ -106,5 +108,8 @@ export default class UserHome extends Component {
 
 UserHome.propTypes = {
   treecounterData: PropTypes.object,
-  userProfile: PropTypes.object
+  userProfile: PropTypes.object,
+  userProfileId: PropTypes.number.isRequired,
+  userContributions: PropTypes.array.isRequired,
+  navigation: PropTypes.any
 };

@@ -132,6 +132,53 @@
       "methods": ["POST"],
       "schemes": []
     },
+    "challenge_post": {
+      "tokens": [
+        ["text", "/challenge"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["POST"],
+      "schemes": []
+    },
+    "challengeDecline_put": {
+      "tokens": [
+        ["variable", "/", "[^/]++", "token"],
+        ["text", "/challenge"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["PUT"],
+      "schemes": []
+    },
+    "challengeAccept_put": {
+      "tokens": [
+        ["variable", "/", "[^/]++", "token"],
+        ["text", "/challenge"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["PUT"],
+      "schemes": []
+    },
     "data_userProfile_get": {
       "tokens": [
         ["text", "/loadUserProfile"],
@@ -366,6 +413,21 @@
       "requirements": [],
       "hosttokens": [],
       "methods": ["DELETE"],
+      "schemes": []
+    },
+    "public_userNotification": {
+      "tokens": [
+        ["text", "/userNotification"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
+      ],
+      "defaults": {
+        "_locale": null
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["POST"],
       "schemes": []
     },
     "public_accessDenied": {
@@ -1114,7 +1176,7 @@
     "app_accountActivate": {
       "tokens": [
         ["variable", "/", "[^/]++", "token"],
-        ["text", "/account-activation"]
+        ["text", "/account-activate"]
       ],
       "defaults": [],
       "requirements": [],
@@ -1293,6 +1355,37 @@
     },
     "app_privacy": {
       "tokens": [["text", "/data-protection-policy"]],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "app_userNotification": {
+      "tokens": [
+        ["variable", "/", "[^/]++", "uid"],
+        ["text", "/user-notification"]
+      ],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "app_challenge": {
+      "tokens": [["text", "/challenge"]],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["GET"],
+      "schemes": []
+    },
+    "app_challengeResponse": {
+      "tokens": [
+        ["variable", "/", "[^/]++", "token"],
+        ["variable", "/", "[^/]++", "action"],
+        ["text", "/challengeResponse"]
+      ],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],

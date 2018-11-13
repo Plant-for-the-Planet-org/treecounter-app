@@ -89,15 +89,6 @@ export default class Menu extends Component {
                 iconUrl={EditGreen}
               />
             ) : null}
-            {this.props.userProfile ? (
-              <LargeMenuItem
-                onPress={() => {
-                  this.onPressMenu({ uri: getLocalRoute('app_myTrees') });
-                }}
-                title={i18n.t('My trees')}
-                iconUrl={EditGreen}
-              />
-            ) : null}
             <LargeMenuItem
               onPress={() => {
                 this.onPressMenu({ uri: getLocalRoute('app_faq') });

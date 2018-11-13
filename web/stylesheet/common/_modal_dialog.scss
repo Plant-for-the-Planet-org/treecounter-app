@@ -2,6 +2,11 @@
   z-index: 10000;
 }
 .Modal {
+  @include for-phone-only {
+    min-width: initial;
+    margin: 0;
+    padding: 40px 30px;
+  }
   position: absolute;
   top: 50%;
   left: 50%;

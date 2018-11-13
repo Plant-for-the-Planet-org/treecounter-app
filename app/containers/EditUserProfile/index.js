@@ -13,6 +13,7 @@ import {
 import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
+import { logoutUser } from '../../actions/authActions';
 
 const profileTypeLabel = {
   about_me: i18n.t('label.about_me'),
@@ -36,6 +37,7 @@ class EditUserProfileContainer extends React.Component {
       .deleteUserProfile(this.props.currentUserProfile.id)
       .then(data => {
         console.log(data);
+        this.props.logoutUser();
       });
   };
 
@@ -172,7 +174,8 @@ const mapDispatchToProps = dispatch => {
       updatePlantProject,
       deletePlantProject,
       addPlantProject,
-      deleteUserProfile
+      deleteUserProfile,
+      logoutUser
     },
     dispatch
   );
@@ -188,5 +191,6 @@ EditUserProfileContainer.propTypes = {
   deletePlantProject: PropTypes.func,
   addPlantProject: PropTypes.func,
   deleteUserProfile: PropTypes.func,
-  navigation: PropTypes.func
+  navigation: PropTypes.func,
+  logoutUser: PropTypes.func
 };

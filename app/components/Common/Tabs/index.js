@@ -29,11 +29,12 @@ class Tabs extends React.Component {
 
     return (
       <div className="pftp-tabs">
-        <form className="pftp-tabs__type">
+        <div className="pftp-tabs__type">
           {data.map(ele => {
             return (
               <label
                 key={ele.id}
+                onClick={this.handleTabChange}
                 className={
                   'radio pftp-tabs__type--option ' +
                   (this.state.activeTab === ele.id ? 'active' : '')
@@ -49,7 +50,7 @@ class Tabs extends React.Component {
               </label>
             );
           })}
-        </form>
+        </div>
         {children}
       </div>
     );

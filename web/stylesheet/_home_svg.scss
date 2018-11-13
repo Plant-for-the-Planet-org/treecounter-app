@@ -19,13 +19,16 @@
       grid-column-gap: 5px;
     }
 
-    span {
+    span, .textLabel {
       @extend .pftp-text-span;
       font-size: 13.5px;
       color: $headerTextColor;
     }
     img {
       max-width: 46px;
+    }
+    .smallImage {
+     width:100%
     }
     strong {
       @extend .pftp-text-basic;
@@ -39,8 +42,19 @@
     }
 
     .svg-text-container__row--col2 {
-      align-self: end;
+      // align-self: end;
+      justify-self:end;
     }
+    .closeContainer {
+      max-width:25px;
+    }
+    .community_row{
+      display: flex;
+      .communtiy_col {
+        align-self: center;
+      }
+    }
+
   }
 
   .svg-text-container__bar {

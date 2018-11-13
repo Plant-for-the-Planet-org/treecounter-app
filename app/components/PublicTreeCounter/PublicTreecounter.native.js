@@ -8,7 +8,7 @@ import PlantProjectCarousel from '../PlantProjects/PlantProjectCarousel';
 import SvgContainer from '../Common/SvgContainer';
 import CardLayout from '../Common/Card';
 import stylesHome from '../../styles/user-home';
-import stylesPublicPage from '../../styles/public-page';
+import stylesPublicPage from '../../styles/public-page.native';
 
 import {
   getProfileTypeName,
@@ -68,6 +68,35 @@ class PublicTreeCounter extends React.Component {
       this.setState({ svgData });
     }
   }
+  updateSvg(toggle) {
+    if (toggle) {
+      const treecounter = this.props.treecounter;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countCommunity + treecounter.countPersonal, // light color
+        planted: treecounter.countPersonal, //dark color
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    } else {
+      const treecounter = this.props.treecounter;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countTarget,
+        planted: treecounter.countPlanted,
+        community: treecounter.countCommunity,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    }
+  }
   render() {
     const { treecounter, currentUserProfile } = this.props;
     if (null === treecounter) {
@@ -104,6 +133,7 @@ class PublicTreeCounter extends React.Component {
         <View style={stylesPublicPage.header}>
           <TreecounterHeader
             {...headerProps}
+            containerStyle={{ width: '70%' }}
             followChanged={this.onFollowChanged}
           />
           {'tpo' !== userProfile.type &&
@@ -115,7 +145,10 @@ class PublicTreeCounter extends React.Component {
             )}
         </View>
         <View style={stylesHome.svgContainer}>
-          <SvgContainer {...this.state.svgData} />
+          <SvgContainer
+            {...this.state.svgData}
+            onToggle={toggleVal => this.updateSvg(toggleVal)}
+          />
         </View>
         <View>
           {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (

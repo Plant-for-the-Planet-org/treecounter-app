@@ -3,5 +3,6 @@
   "dont_have_account": "Don't have an account?",
   "login": "Log In",
   "password": "Password",
-  "current_password": "Current Password"
+  "current_password": "Current Password",
+  "login_description": "Login with your Trillion Tree Campaign Account to access your personal tree counter. You can sign up if you do not yet, have an account."
 }

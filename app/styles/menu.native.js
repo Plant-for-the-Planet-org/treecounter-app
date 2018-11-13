@@ -29,5 +29,8 @@ export default (menuStyles = EStyleSheet.create({
   profileText: {
     fontSize: 13,
     color: '$textColor'
+  },
+  centerMenu: {
+    marginTop: 22
   }
 }));

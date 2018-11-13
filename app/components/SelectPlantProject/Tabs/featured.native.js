@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Dimensions } from 'react-native';
-import styles from '../../../styles/selectplantproject/selectplantproject';
-import i18n from '../../../locales/i18n.js';
-
-import Slick from 'react-native-slick';
-import PlantProjectFull from '../../PlantProjects/PlantProjectFull';
+import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 
 export default class FeaturedProjects extends Component {
   constructor(props) {
@@ -47,32 +43,24 @@ export default class FeaturedProjects extends Component {
     this.props.selectProject(id);
   };
 
-  callExpanded = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    });
-  };
-
   render() {
     let { featuredProjects } = this.state;
     return (
       <ScrollView>
-        <Slick style={styles.slickWrapper} showsPagination={false}>
-          {featuredProjects.length !== 0
-            ? featuredProjects.map(project => (
-                <PlantProjectFull
-                  key={'projectFull' + project.id}
-                  callExpanded={() => this.callExpanded()}
-                  expanded={false}
-                  plantProject={project}
-                  onSelectClickedFeaturedProjects={id =>
-                    this.onSelectClickedFeaturedProjects(id)
-                  }
-                  tpoName={project.tpo_name}
-                />
-              ))
-            : null}
-        </Slick>
+        {featuredProjects && featuredProjects.length > 0
+          ? featuredProjects.map(project => (
+              <PlantProjectSnippet
+                key={'projectFull' + project.id}
+                onMoreClick={id => this.props.onMoreClick(id)}
+                plantProject={project}
+                onSelectClickedFeaturedProjects={id =>
+                  this.onSelectClickedFeaturedProjects(id)
+                }
+                showMoreButton={true}
+                tpoName={project.tpo_name}
+              />
+            ))
+          : null}
       </ScrollView>
     );
   }

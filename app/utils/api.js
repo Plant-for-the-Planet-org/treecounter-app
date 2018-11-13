@@ -44,6 +44,16 @@ async function getHeaders(authenticated = false) {
   }
 }
 
+async function getActivateLinkHeaders() {
+  const headers = { 'X-SESSION-ID': await getSessionId() };
+  return {
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${await fetchItem('activate_token')}`
+    }
+  };
+}
+
 export async function getSessionId() {
   return fetchItem('session_id')
     .then(sessionId => {
@@ -73,6 +83,15 @@ export async function getRequest(route, params, authenticated = false) {
 
 export async function getAuthenticatedRequest(route, params) {
   return getRequest(route, params, true);
+}
+
+export async function postActivateLinkRequest(route, data, params) {
+  let url = await getApiRoute(route, params);
+  return await axios
+    .post(url, data, await getActivateLinkHeaders())
+    .then(checkStatus)
+    .then(onAPIResponse)
+    .catch(onAPIError);
 }
 
 export async function postRequest(route, data, params, authenticated = false) {

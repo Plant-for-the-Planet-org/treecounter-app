@@ -227,8 +227,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
               source={check_green}
             />
             <Text style={{ padding: 10 }}>
-              {i18n.t('label.thankyou')} {context.treeCount} {'  '}
-              {i18n.t('label.receive_mail')}
+              {i18n.t('label.thankyou_planting', { count: context.treeCount })}
             </Text>
 
             <InlineLink uri={'app_userHome'} caption={'Return Home'} />

@@ -2,21 +2,36 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 
 export default (loginStyles = EStyleSheet.create({
-  scrollViewStyle: {
-    flexGrow: 1
+  scrollContainer: {
+    backgroundColor: 'white',
+    flex: 1
+  },
+
+  parentContainer: {
+    flex: 1,
+    backgroundColor: 'white'
   },
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    alignItems: 'center',
-    backgroundColor: '$backgroundScreen'
-  },
-  inputContainer: {
+    flex: 0.7,
     width: '100%',
-    justifyContent: 'center',
-    padding: 10
+    // justifyContent: 'center',
+    padding: 20,
+    paddingTop: 30,
+    flexGrow: 1
   },
+  headerContainer: {
+    flex: 0.3,
+    flexDirection: 'column',
+
+    alignItems: 'center',
+    margin: 20
+  },
+  imageStyle: {
+    width: 100,
+    height: 50
+  },
+
+  inputContainer: {},
   button: {
     height: 50,
     backgroundColor: '$primary',
@@ -48,8 +63,8 @@ export default (loginStyles = EStyleSheet.create({
   },
   bottomRow: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
+    padding: 10,
+    alignItems: 'flex-start'
   },
   bottomText: {
     fontSize: 11,
@@ -67,5 +82,13 @@ export default (loginStyles = EStyleSheet.create({
     color: '#575756',
     width: Dimensions.get('window').width * 0.8,
     justifyContent: 'flex-start'
+  },
+  loginTextStyle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    padding: 10
+  },
+  loginDescriptionStyle: {
+    fontSize: 11
   }
 }));

@@ -24,6 +24,7 @@ import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import FAQContainer from '../../containers/FAQ';
 import PledgeContainer from '../../containers/Pledge';
+import RedemptionContainer from '../../containers/RedemptionContainer';
 
 import Footer from '../Footer';
 
@@ -38,13 +39,16 @@ import { NotificationAction } from '../../actions/notificationAction';
 import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors';
 import { getLocalRoute } from '../../actions/apiRouting';
+import SuccessfullyActivatedAccount from '../../containers/Authentication/SuccessfullActivatedContainer';
+import DonationTreesContainer from '../../containers/DonateTrees/index';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
-import DonationTreesContainer from '../../containers/DonateTrees';
 
 import EditUserProfileContainer from '../../containers/EditUserProfile';
 import LeaderboardContainer from '../../containers/Leaderboard';
 import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
+import PrivacyContainer from '../../containers/Privacy';
+import ImprintContainer from '../../containers/Imprint';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -137,6 +141,10 @@ class TreeCounter extends Component {
                 component={SignUpContainer}
               />
               <PublicRoute
+                path={getLocalRoute('app_accountActivate') + '/:token'}
+                component={SuccessfullyActivatedAccount}
+              />
+              <PublicRoute
                 path={getLocalRoute('app_accountActivation')}
                 component={ActivateAccountContainer}
               />
@@ -204,6 +212,14 @@ class TreeCounter extends Component {
                 component={EditUserProfileContainer}
               />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
+              <Route
+                path={getLocalRoute('app_privacy')}
+                component={PrivacyContainer}
+              />
+              <Route
+                path={getLocalRoute('app_imprint')}
+                component={ImprintContainer}
+              />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
               <Route
                 path={getLocalRoute('app_giftTrees')}
@@ -216,6 +232,14 @@ class TreeCounter extends Component {
               <Route
                 path={getLocalRoute('app_donateTrees')}
                 component={DonationTreesContainer}
+              />
+              <Route
+                path={getLocalRoute('app_claim') + '/:type' + '/:code'}
+                component={RedemptionContainer}
+              />
+              <Route
+                path={getLocalRoute('app_redeem') + '/:type?' + '/:code?'}
+                component={RedemptionContainer}
               />
               <Route
                 path={getLocalRoute('app_pledge') + '/:eventSlug'}

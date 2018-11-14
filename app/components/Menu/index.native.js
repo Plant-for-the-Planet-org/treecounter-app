@@ -91,6 +91,13 @@ export default class Menu extends Component {
             ) : null}
             <LargeMenuItem
               onPress={() => {
+                this.onPressMenu({ uri: getLocalRoute('app_redeem') });
+              }}
+              title={i18n.t('label.redeem_trees')}
+              iconUrl={iosFaqs}
+            />
+            <LargeMenuItem
+              onPress={() => {
                 this.onPressMenu({ uri: getLocalRoute('app_faq') });
               }}
               title={i18n.t('label.faqs')}

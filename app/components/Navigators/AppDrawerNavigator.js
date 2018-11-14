@@ -34,6 +34,7 @@ import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
+import RedemptionContainer from '../../containers/RedemptionContainer';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -49,6 +50,8 @@ const headerLabels = {
   [getLocalRoute('app_userHome')]: 'Me',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   [getLocalRoute('app_editProfile')]: 'label.edit_profile',
+  [getLocalRoute('app_redeem')]: 'label.redeem_trees',
+  [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
@@ -87,6 +90,13 @@ export const getAppNavigator = function(isLoggedIn) {
       ['about_us']: { screen: AboutUsContainer },
 
       ['license_info_list']: { screen: LicenseInfoList },
+
+      [getLocalRoute('app_redeem')]: {
+        screen: RedemptionContainer
+      },
+      [getLocalRoute('app_claim')]: {
+        screen: RedemptionContainer
+      },
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
 
       [getLocalRoute('app_selectProject')]: {
@@ -170,6 +180,12 @@ export const getAppNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
+      },
+      [getLocalRoute('app_redeem')]: {
+        screen: RedemptionContainer
+      },
+      [getLocalRoute('app_claim')]: {
+        screen: RedemptionContainer
       },
       [getLocalRoute('app_homepage')]: {
         screen: Trillion

@@ -14,7 +14,8 @@ import {
   redeem_outline,
   close_green
 } from '../../assets';
-
+import styles from '../../styles/redeem';
+import { ScrollView, View, Image, TextInput } from 'react-native';
 let TCombForm = t.form.Form;
 
 // const allSchemaOptions = {
@@ -58,49 +59,49 @@ export default class Redemption extends Component {
       statusText,
       form;
     errorText = this.props.errorText ? (
-      <div className="pftp-error-heading">{this.props.errorText}</div>
+      <View>{this.props.errorText}</View>
     ) : null;
     successText = this.props.successText ? (
-      <div className="pftp-description-heading">{this.props.successText}</div>
+      <View>{this.props.successText}</View>
     ) : null;
     actionText = this.props.actionText ? (
-      <div className="pftp-description-heading">{this.props.actionText}</div>
+      <View className="pftp-description-heading">{this.props.actionText}</View>
     ) : null;
     statusText = this.props.statusText ? (
-      <div className="pftp-description-heading">{this.props.statusText}</div>
+      <View className="pftp-description-heading">{this.props.statusText}</View>
     ) : null;
     content = (
-      <div>
+      <View>
         {errorText}
         {statusText}
         {successText}
         {actionText}
-      </div>
+      </View>
     );
     if (
       this.props.pageStatus === 'code-validated' &&
       this.props.codeStatus === 'error'
     ) {
       button = (
-        <div className="row">
+        <View className="row">
           <PrimaryButton onClick={() => this.onValidationCode()}>
             {i18n.t('label.validate_code')}
           </PrimaryButton>
-        </div>
+        </View>
       );
       icon = redeem_outline_red;
     } else if (this.props.pageStatus === 'code-unknown') {
       button = (
-        <div className="row">
+        <View className="row">
           <PrimaryButton onClick={() => this.onValidationCode()}>
             {i18n.t('label.validate_code')}
           </PrimaryButton>
-        </div>
+        </View>
       );
       icon = redeem_outline;
     } else if (this.props.pageStatus === 'not-logged-in') {
       button = (
-        <div className="row">
+        <View className="row">
           <PrimaryButton onClick={this.props.loginButton}>
             {i18n.t('label.login')}
           </PrimaryButton>
@@ -110,16 +111,16 @@ export default class Redemption extends Component {
           >
             {i18n.t('label.signUp')}
           </button>
-        </div>
+        </View>
       );
       icon = redeemSignIn;
     } else {
       button = (
-        <div className="row">
+        <View className="row">
           <PrimaryButton onClick={() => this.onSetRedemption()}>
             {this.props.buttonText}
           </PrimaryButton>
-        </div>
+        </View>
       );
       icon = redeem_outline;
     }
@@ -160,33 +161,32 @@ export default class Redemption extends Component {
         />
       ) : null;
       form = (
-        <div className="pftp-textfield-container">
-          <div className="pftp-textfield">
-            <div className="pftp-textfield_redeeminput">
-              <div>
+        <View className="pftp-textfield-container">
+          <View className="pftp-textfield">
+            <View className="pftp-textfield_redeeminput">
+              <View>
                 {right_icon}
-                <input
+                <TextInput
                   type="text"
                   autoComplete="new-password"
                   required="required"
                   disabled={disabled}
-                  maxLength="20"
                   value={value}
                   onChange={evt => this.onChange(evt.target.value)}
                 />
-              </div>
-            </div>
-          </div>
-        </div>
+              </View>
+            </View>
+          </View>
+        </View>
       );
     } else {
       form = null;
       button = (
-        <div className="row">
+        <View className="row">
           <PrimaryButton onClick={() => this.props.route('app_myTrees')}>
             {this.props.buttonText}
           </PrimaryButton>
-        </div>
+        </View>
       );
     }
     let heading;
@@ -196,26 +196,26 @@ export default class Redemption extends Component {
       heading = i18n.t('label.claim_trees');
     }
     return this.props.loading ? (
-      <div className="sidenav-wrapper">
+      <View>
         <LoadingIndicator />
-      </div>
+      </View>
     ) : (
-      <div className="app-container__content--center sidenav-wrapper redemption_container">
-        <TextHeading>
+      <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}>
+        <View style={styles.headerContainer}>
           {heading}
-          <DescriptionHeading>
-            {i18n.t('label.redeem_heading')}
-          </DescriptionHeading>
-        </TextHeading>
-        <CardLayout className="redeem_card_layout">
-          <div className="imageContainerRedeem">
-            <img src={icon} />
-          </div>
+          {/*<DescriptionHeading>*/}
+          {/*{i18n.t('label.redeem_heading')}*/}
+          {/*</DescriptionHeading>*/}
+        </View>
+        <CardLayout>
+          {/*<View>*/}
+          <Image source={icon} />
+          {/*</View>*/}
           {content}
           {form}
           {button}
         </CardLayout>
-      </div>
+      </ScrollView>
     );
   }
 }

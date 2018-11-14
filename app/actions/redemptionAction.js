@@ -3,7 +3,6 @@ import {
   postAuthenticatedRequest,
   postRequest
 } from '../utils/api';
-import { NotificationManager } from 'react-notifications';
 
 export function validateCodeAction(data, params) {
   return postAuthenticatedRequest('validateCode_post', data, params);

@@ -99,9 +99,6 @@ export const getAppNavigator = function(isLoggedIn) {
       },
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
 
-      [getLocalRoute('app_selectProject')]: {
-        screen: SelectedPlantProject
-      },
       [getLocalRoute('app_donateTrees')]: {
         screen: DonationTreesContainer
       }
@@ -190,17 +187,18 @@ export const getAppNavigator = function(isLoggedIn) {
       [getLocalRoute('app_homepage')]: {
         screen: Trillion
       },
-      [getLocalRoute('app_forgotPassword')]: {
-        screen: ForgotPasswordContainer
-      },
-      [getLocalRoute('app_signup')]: {
-        screen: SignUpContainer
-      },
+
       [getLocalRoute('app_giftTrees')]: {
         screen: GiftTrees
       },
       [getLocalRoute('app_explore')]: {
         screen: LeaderBoard
+      },
+      [getLocalRoute('app_signup')]: {
+        screen: SignUpContainer
+      },
+      [getLocalRoute('app_forgotPassword')]: {
+        screen: ForgotPasswordContainer
       }
     },
     {
@@ -217,7 +215,10 @@ export const getAppNavigator = function(isLoggedIn) {
   const appStackNavigator = createStackNavigator(
     {
       Tab: ApptabNavigator,
-      Base: baseNavigator
+      Base: baseNavigator,
+      [getLocalRoute('app_selectProject')]: {
+        screen: SelectedPlantProject
+      }
     },
     {
       navigationOptions: ({ navigation }) => {

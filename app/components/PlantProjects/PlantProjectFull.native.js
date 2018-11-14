@@ -10,7 +10,7 @@ import PlantProjectDetails from './PlantProjectDetails';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { ScrollView } from 'react-native';
-import PlantProjectFull2 from './PlantProjectFull2.native';
+import PlantProjectSnippet from './PlantProjectSnippet.native';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -42,7 +42,7 @@ class PlantProjectFull extends React.Component {
       <ScrollView>
         <CardLayout style={styles.projectFullContainer}>
           <View>
-            <PlantProjectFull2
+            <PlantProjectSnippet
               cardStyle={styles.cardStyle}
               key={'projectFull' + this.props.plantProject.id}
               showMoreButton={false}
@@ -68,6 +68,9 @@ class PlantProjectFull extends React.Component {
         </CardLayout>
       </ScrollView>
     );
+  }
+  componentWillUnmount() {
+    this.props.onBackClick();
   }
 }
 

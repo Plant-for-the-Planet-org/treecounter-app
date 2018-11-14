@@ -42,8 +42,8 @@ class DonationTreesContainer extends Component {
         selectedTpo={this.props.selectedTpo}
         currentUserProfile={this.props.currentUserProfile}
         currencies={this.props.currencies}
-        donate={(donationContribution, plantProjectId) =>
-          this.props.donate(donationContribution, plantProjectId, flag)
+        donate={(donationContribution, plantProjectId, profile) =>
+          this.props.donate(donationContribution, plantProjectId, profile)
         }
         onTabChange={title => this.onTabChange(title)}
         supportTreecounter={this.props.supportTreecounter}

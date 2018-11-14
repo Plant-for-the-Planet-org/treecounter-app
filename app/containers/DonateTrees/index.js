@@ -42,8 +42,8 @@ class DonationTreesContainer extends Component {
         selectedTpo={this.props.selectedTpo}
         currentUserProfile={this.props.currentUserProfile}
         currencies={this.props.currencies}
-        donate={(donationContribution, plantProjectId) =>
-          this.props.donate(donationContribution, plantProjectId, flag)
+        donate={(donationContribution, plantProjectId, profile) =>
+          this.props.donate(donationContribution, plantProjectId, profile)
         }
         onTabChange={title => this.onTabChange(title)}
         supportTreecounter={this.props.supportTreecounter}
@@ -51,19 +51,22 @@ class DonationTreesContainer extends Component {
         paymentClear={this.props.paymentClear}
         setProgressModelState={this.props.setProgressModelState}
         plantProjectClear={this.props.clearPlantProject}
+        {...this.props}
       />
     );
   }
 }
 
-const mapStateToProps = state => ({
-  selectedProject: selectedPlantProjectSelector(state),
-  selectedTpo: selectedTpoSelector(state),
-  currentUserProfile: currentUserProfileSelector(state),
-  supportTreecounter: supportedTreecounterSelector(state),
-  currencies: currenciesSelector(state),
-  paymentStatus: getPaymentStatus(state)
-});
+const mapStateToProps = state => {
+  return {
+    selectedProject: selectedPlantProjectSelector(state),
+    selectedTpo: selectedTpoSelector(state),
+    currentUserProfile: currentUserProfileSelector(state),
+    supportTreecounter: supportedTreecounterSelector(state),
+    currencies: currenciesSelector(state),
+    paymentStatus: getPaymentStatus(state)
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(

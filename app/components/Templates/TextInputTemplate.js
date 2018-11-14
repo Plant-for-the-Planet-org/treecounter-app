@@ -16,19 +16,21 @@ export function TextInputTemplate(locals) {
     return today;
   }
   let error = locals.hasError;
+  let className;
+
+  if (!error) {
+    className = 'pftp-textfield__inputgroup';
+  } else {
+    className = 'pftp-textfield__error-inputgroup';
+  }
+
   return locals.type !== 'hidden' ? (
     <div className="pftp-textfield-container">
       <div className="pftp-textfield">
         {locals.config.iconUrl ? (
           <img className="pftp-textfield__icon" src={locals.config.iconUrl} />
         ) : null}
-        <div
-          className={
-            !error
-              ? 'pftp-textfield__inputgroup'
-              : 'pftp-textfield__error-inputgroup'
-          }
-        >
+        <div className={className}>
           {locals.type === 'date' ? (
             <input
               type={locals.type}
@@ -47,6 +49,7 @@ export function TextInputTemplate(locals) {
               onChange={onChange}
             />
           )}
+
           <span
             className={
               !error

@@ -4,10 +4,16 @@ const commonConfig = require('./webpack.common.config.js');
 const path = require('path');
 
 module.exports = webpackMerge(commonConfig, {
-  entry: ['babel-polyfill', path.join(__dirname, '../../index.web.js')],
+  entry: {
+    bundle: ['babel-polyfill', path.join(__dirname, '../../index.web.js')],
+    widget: [
+      'babel-polyfill',
+      path.join(__dirname, '../widgets/basic/widget.js')
+    ]
+  },
   output: {
     path: path.join(__dirname, '../dist'),
-    filename: 'index.js',
+    filename: '[name].js',
     publicPath: '/'
   },
   devtool: 'source-map',

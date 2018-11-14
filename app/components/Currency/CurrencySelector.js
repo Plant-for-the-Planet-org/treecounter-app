@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n.js';
+import { currencySort } from './utils';
 
 const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
+  let currenciesArray = currencySort(Object.keys(currencies));
+
   return (
     <div className="pftp-selectfield">
       <TextBlock strong={true}>{i18n.t('label.currency')}</TextBlock>
@@ -13,7 +16,7 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
         value={selectedCurrency}
         onChange={evt => onChange(evt.target.value)}
       >
-        {Object.keys(currencies).map(value => {
+        {currenciesArray.map(value => {
           return (
             <option
               className="pftp-selectfield__option"

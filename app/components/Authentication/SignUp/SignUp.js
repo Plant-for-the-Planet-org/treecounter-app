@@ -71,16 +71,18 @@ export default class SignUp extends Component {
         </div>
         <div className={'card-width'}>
           <CardLayout>
-            <TCombForm
-              ref={'signupForm'}
-              type={signupFormSchema[Profiletype]}
-              options={schemaOptions[Profiletype]}
-            />
-            <PrimaryButton
-              onClick={this.props.onSignUpClicked.bind(this, Profiletype)}
-            >
-              {i18n.t('label.signUp')}
-            </PrimaryButton>
+            <form onSubmit={this.props.onSignUpClicked.bind(this, Profiletype)}>
+              <TCombForm
+                ref={'signupForm'}
+                type={signupFormSchema[Profiletype]}
+                options={schemaOptions[Profiletype]}
+              />
+              <PrimaryButton
+                onClick={this.props.onSignUpClicked.bind(this, Profiletype)}
+              >
+                {i18n.t('label.signUp')}
+              </PrimaryButton>
+            </form>
           </CardLayout>
         </div>
       </div>

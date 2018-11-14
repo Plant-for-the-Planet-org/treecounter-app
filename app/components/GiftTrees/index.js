@@ -380,8 +380,9 @@ export default class GiftTrees extends Component {
               <img src={check_green} />
               <div className={'gap'} />
               <TextBlock strong={true}>
-                {i18n.t('label.thankyou')} {this.state.treeCount}{' '}
-                {i18n.t('label.receive_mail')}
+                {i18n.t('label.thankyou_planting', {
+                  count: this.state.treeCount
+                })}
               </TextBlock>
               <div className={'gap'} />
               <TextBlock>

@@ -12,7 +12,8 @@ import {
 import i18n from '../../locales/i18n.js';
 import { renderFilledTabBar } from '../Common/Tabs';
 import RegisterTreeTab from './RegisterTreeTab.native';
-
+import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
+import { getPlantProjectEnum } from '../../helpers/utils';
 export default class RegisterTrees extends Component {
   constructor() {
     super();
@@ -51,6 +52,15 @@ export default class RegisterTrees extends Component {
   };
 
   _renderScene = ({ route }) => {
+    const plantProjects = getSelectTemplate(
+      getPlantProjectEnum(
+        this.props.currentUserProfile,
+        this.props.plantProjects
+      )
+    );
+    schemaOptionsSingleTree.fields.plantProject.template = plantProjects;
+    schemaOptionsMultipleTrees.fields.plantProject.template = plantProjects;
+
     return (
       <RegisterTreeTab
         onRegister={this.props.onSubmit}
@@ -78,7 +88,7 @@ export default class RegisterTrees extends Component {
             useNativeDriver={true}
             ref="registerTreeForm"
             navigationState={this.state}
-            renderScene={this._renderScene}
+            renderScene={this._renderScene.bind(this)}
             renderTabBar={this._renderTabBar}
             onIndexChange={this._handleIndexChange}
           />
@@ -89,5 +99,6 @@ export default class RegisterTrees extends Component {
 }
 
 RegisterTrees.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  currentUserProfile: PropTypes.any.isRequired
 };

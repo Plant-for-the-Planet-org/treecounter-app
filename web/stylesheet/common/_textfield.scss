@@ -102,6 +102,30 @@ $trans-time: 300ms;
       background: $colorError;
     }
   }
+  .pftp-textfield_redeeminput {
+    @extend .pftp-textfield__inputgroup;
+    position: relative;
+    input,
+    textarea {
+      border-radius:3px;
+      -moz-border-radius:3px;
+      -webkit-border-radius:3px;
+      border: 1.5px solid $colorRedeemBorder;
+      background-color: $colorRedeemInside;
+      color: $headerTextColor;
+      margin-top: 30px;
+      text-align: center;
+      padding-right: 30px;
+    }
+    .glyphicon {
+      position: absolute;
+      padding: 10px;
+      pointer-events: auto;
+      right: 0px;
+      height: 20px;
+      width: 20px;
+    }
+  }
   .pftp-textfield__error-inputgroup {
     @extend .pftp-textfield__inputgroup;
     input,

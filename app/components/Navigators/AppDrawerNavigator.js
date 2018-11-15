@@ -23,6 +23,7 @@ import UserContributions from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout.native';
 import AboutUsContainer from '../../containers/AboutUs';
+import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal.native';
 import LicenseInfoList from '../AboutUs/LicenseInfoList.native';
 import TabContainer from '../../containers/Menu/TabContainer';
 import GiftTrees from '../../containers/GiftTrees';
@@ -52,7 +53,8 @@ const headerLabels = {
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
-  ['license_info_list']: 'label.open_source_license'
+  ['license_info_list']: 'label.open_source_license',
+  ['delete_profile_confirm']: 'label.delete_profile'
 };
 
 export const getAppNavigator = function(isLoggedIn) {
@@ -105,6 +107,23 @@ export const getAppNavigator = function(isLoggedIn) {
       Search: {
         screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />
       }
+    },
+    {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
+  const deleteProfileNavigator = createStackNavigator(
+    {
+      ['delete_profile_confirm']: { screen: ConfirmProfileDeletionModal }
     },
     {
       headerMode: 'none',
@@ -229,7 +248,8 @@ export const getAppNavigator = function(isLoggedIn) {
   const AppNavigator = createDrawerNavigator(
     {
       appStackNavigator,
-      searchNavigator: searchNavigator
+      searchNavigator: searchNavigator,
+      deleteProfileNavigator
     },
     {
       initialRouteName: 'appStackNavigator',

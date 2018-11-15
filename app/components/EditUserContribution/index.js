@@ -88,8 +88,9 @@ export default class EditUserContribution extends Component {
     this.onSubmitClick = this.onSubmitClick.bind(this);
   }
 
-  onSubmitClick() {
+  onSubmitClick(event) {
     this.props.onSubmit();
+    event && event.preventDefault();
   }
 
   render() {

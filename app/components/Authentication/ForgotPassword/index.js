@@ -33,7 +33,12 @@ export default class ForgotPassword extends Component {
                 type={forgotPasswordFormSchema}
                 options={schemaOptions}
               />
-              <PrimaryButton onClick={this.props.onResetPassword}>
+              <PrimaryButton
+                onClick={event => {
+                  this.props.onResetPassword();
+                  event.preventDefault();
+                }}
+              >
                 {i18n.t('label.reset_password')}
               </PrimaryButton>
             </form>

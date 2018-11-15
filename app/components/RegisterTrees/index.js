@@ -140,8 +140,10 @@ export default class RegisterTrees extends Component {
     this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
   }
 
-  onSubmitClick() {
+  onSubmitClick(event) {
+    console.log('event', event);
     this.props.onSubmit(this.state.mode);
+    event.preventDefault();
   }
 
   handleModeOptionChange(tab) {

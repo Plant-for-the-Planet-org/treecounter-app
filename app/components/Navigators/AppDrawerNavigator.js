@@ -91,7 +91,7 @@ export const getAppNavigator = function(isLoggedIn) {
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
 
       [getLocalRoute('app_donateTrees')]: {
-        screen: DonationTreesContainer
+        screen: SelectPlantProjectContainer
       }
     },
     {
@@ -159,17 +159,15 @@ export const getAppNavigator = function(isLoggedIn) {
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
       },
-
       [getLocalRoute('app_myTrees')]: {
         screen: isLoggedIn ? UserContributions : LoginContainer
       },
       [getLocalRoute('app_donateTrees')]: {
-        screen: DonationTreesContainer
+        screen: SelectPlantProjectContainer
       },
       [getLocalRoute('app_homepage')]: {
         screen: Trillion
       },
-
       [getLocalRoute('app_giftTrees')]: {
         screen: GiftTrees
       },
@@ -201,8 +199,8 @@ export const getAppNavigator = function(isLoggedIn) {
       [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
       },
-      [getLocalRoute('app_selectProject_snippet')]: {
-        screen: SelectPlantProjectContainer
+      [getLocalRoute('app_donate_detail')]: {
+        screen: DonationTreesContainer
       }
     },
     {

@@ -20,6 +20,7 @@ class SelectPlantProjectContainer extends Component {
         selectProject={this.props.selectPlantProjectAction}
         currencies={this.props.currencies}
         onMoreClick={id => this.onMoreClick(id)}
+        {...this.props}
       />
     );
   }
@@ -28,6 +29,10 @@ class SelectPlantProjectContainer extends Component {
     const { navigation } = this.props;
     console.log('OnMore');
     updateRoute('app_selectProject', navigation, 1);
+  }
+  selectPlantProjectAction() {
+    this.props.selectPlantProjectAction();
+    updateRoute('app_donate_detail', navigation, 1);
   }
 }
 

@@ -37,7 +37,7 @@ class SelectedPlantProjectContainer extends Component {
   selectProject(id) {
     const { navigation } = this.props;
     this.props.selectPlantProjectAction(id);
-    updateRoute('app_donateTrees', navigation, 1);
+    updateRoute('app_donate_detail', navigation, 1);
   }
   render() {
     if (this.props.selectedProject) {

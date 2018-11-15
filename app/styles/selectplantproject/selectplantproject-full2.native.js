@@ -12,7 +12,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
     // padding: 10,
     flexDirection: 'column',
-    height: Layout.window.width * 0.5 + 110
+    height: Layout.window.width * 0.5 + 130
   },
   projectImageContainer: {
     height: Layout.window.width * 0.5,
@@ -50,7 +50,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   projectdetailsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingBottom: 8
   },
   locationContainer: {
     flexDirection: 'column'
@@ -66,11 +67,14 @@ export default (selectplantprojectFull = EStyleSheet.create({
   locationText: {
     fontSize: 12,
     color: '$textColor',
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+    paddingTop: 3,
+    paddingBottom: 3
   },
   survivalText: {
     fontSize: 13,
-    color: '$textColor'
+    color: '$textColor',
+    paddingTop: 3
   },
   costText: {
     fontSize: 20

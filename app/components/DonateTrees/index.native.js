@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import { TabView } from 'react-native-tab-view';
-import {
-  individualSchemaOptions,
-  receiptIndividualFormSchema,
-  receiptCompanyFormSchema,
-  companySchemaOptions
-} from '../../server/parsedSchemas/donateTrees';
 
 import i18n from '../../locales/i18n.js';
 
@@ -15,7 +9,8 @@ import RecieptTabsView from './receiptTabs';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 import PaymentSelector from '../Payment/PaymentSelector';
-import { ScrollView, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
+import { updateRoute } from '../../helpers/routerHelper';
 
 export default class DonateTrees extends Component {
   constructor(props) {
@@ -66,9 +61,6 @@ export default class DonateTrees extends Component {
   componentDidMount() {
     const { navigation } = this.props;
     this.props.onTabChange(this.state.routes[0].title);
-    if (!this.props.selectedProject) {
-      updateRoute('app_selectProject_snippet', navigation, 1);
-    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -215,7 +207,7 @@ export default class DonateTrees extends Component {
     let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
     let email = receipt !== '' ? receipt.email : '';
     let paymentMethods;
-    if (receipt) {
+    if (receipt && selectedProject) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
       const countryCurrencies = selectedProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
@@ -247,7 +239,10 @@ export default class DonateTrees extends Component {
     // }
 
     {
-      this.props.selectedTpo && currencies && route.key === 'currency'
+      this.props.selectedTpo &&
+      currencies &&
+      route.key === 'currency' &&
+      this.props.selectedProject
         ? (screenToShow = (
             <View>
               <TreeCountCurrencySelector
@@ -264,9 +259,6 @@ export default class DonateTrees extends Component {
                 selectedTreeCount={this.state.selectedTreeCount}
                 onChange={this.handleTreeCountCurrencyChange}
               />
-              <Text onPress={this.props.plantProjectClear}>
-                {i18n.t('label.different_project')}
-              </Text>
             </View>
           ))
         : null;
@@ -286,7 +278,7 @@ export default class DonateTrees extends Component {
         : null;
     }
     {
-      route.key === 'payments'
+      route.key === 'payments' && selectedProject
         ? (screenToShow = (
             <PaymentSelector
               paymentMethods={paymentMethods}

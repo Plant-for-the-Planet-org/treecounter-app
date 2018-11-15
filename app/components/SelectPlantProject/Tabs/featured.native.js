@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Dimensions } from 'react-native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
+import { updateRoute } from '../../../helpers/routerHelper';
 
 export default class FeaturedProjects extends Component {
   constructor(props) {
@@ -41,6 +42,9 @@ export default class FeaturedProjects extends Component {
 
   onSelectClickedFeaturedProjects = id => {
     this.props.selectProject(id);
+
+    const { navigation } = this.props;
+    updateRoute('app_donate_detail', navigation, 1);
   };
 
   render() {

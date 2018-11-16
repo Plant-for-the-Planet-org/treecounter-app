@@ -7,15 +7,18 @@ import TextHeading from '../Common/Heading/TextHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n.js';
+import TouchableItem from '../../components/Common/TouchableItem';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import {
   redeemSignIn,
-  redeem_outline_red,
-  redeem_outline,
+  redeemRed,
+  redeemGreen,
   close_green
 } from '../../assets';
 import styles from '../../styles/redeem';
-import { ScrollView, View, Image, TextInput } from 'react-native';
+import { ScrollView, View, Image, TextInput, Text } from 'react-native';
+import { getLocalRoute } from '../../actions/apiRouting';
+import { updateRoute } from '../../helpers/routerHelper';
 let TCombForm = t.form.Form;
 
 // const allSchemaOptions = {
@@ -59,16 +62,26 @@ export default class Redemption extends Component {
       statusText,
       form;
     errorText = this.props.errorText ? (
-      <View>{this.props.errorText}</View>
+      <View>
+        <Text style={styles.errorTextStyle}>{this.props.errorText}</Text>
+      </View>
     ) : null;
     successText = this.props.successText ? (
-      <View>{this.props.successText}</View>
+      <View>
+        <Text style={styles.descriptionTextStyle}>
+          {this.props.successText}
+        </Text>
+      </View>
     ) : null;
     actionText = this.props.actionText ? (
-      <View className="pftp-description-heading">{this.props.actionText}</View>
+      <View>
+        <Text style={styles.descriptionTextStyle}>{this.props.actionText}</Text>
+      </View>
     ) : null;
     statusText = this.props.statusText ? (
-      <View className="pftp-description-heading">{this.props.statusText}</View>
+      <View>
+        <Text style={styles.descriptionTextStyle}>{this.props.statusText}</Text>
+      </View>
     ) : null;
     content = (
       <View>
@@ -83,46 +96,53 @@ export default class Redemption extends Component {
       this.props.codeStatus === 'error'
     ) {
       button = (
-        <View className="row">
+        <View style={styles.buttonStyle}>
           <PrimaryButton onClick={() => this.onValidationCode()}>
             {i18n.t('label.validate_code')}
           </PrimaryButton>
         </View>
       );
-      icon = redeem_outline_red;
+      icon = <Image style={styles.imageStyle} source={redeemRed} />;
+      // icon = redeemRed;
     } else if (this.props.pageStatus === 'code-unknown') {
       button = (
-        <View className="row">
+        <View style={styles.buttonStyle}>
           <PrimaryButton onClick={() => this.onValidationCode()}>
             {i18n.t('label.validate_code')}
           </PrimaryButton>
         </View>
       );
-      icon = redeem_outline;
+      icon = <Image style={styles.imageStyle} source={redeemGreen} />;
+      // icon = redeemGreen;
     } else if (this.props.pageStatus === 'not-logged-in') {
       button = (
-        <View className="row">
-          <PrimaryButton onClick={this.props.loginButton}>
+        <View style={styles.loginButtons}>
+          <PrimaryButton
+            style={styles.loginButton1}
+            onClick={this.props.loginButton}
+          >
             {i18n.t('label.login')}
           </PrimaryButton>
-          <button
-            className="pftp-button-primary1"
+          <PrimaryButton
+            style={styles.loginButton1}
             onClick={this.props.signupButton}
           >
             {i18n.t('label.signUp')}
-          </button>
+          </PrimaryButton>
         </View>
       );
-      icon = redeemSignIn;
+      icon = <Image style={styles.imageLoginStyle} source={redeemSignIn} />;
+      // icon = redeemSignIn;
     } else {
       button = (
-        <View className="row">
+        <View style={styles.buttonStyle}>
           <PrimaryButton onClick={() => this.onSetRedemption()}>
             {this.props.buttonText}
           </PrimaryButton>
         </View>
       );
-      icon = redeem_outline;
+      icon = <Image style={styles.imageStyle} source={redeemGreen} />;
+      // icon = redeemGreen;
     }
 
     let value = this.state.value;
@@ -151,31 +171,30 @@ export default class Redemption extends Component {
         // );
       }
       const onCrossClick = () => {
-        this.props.route('app_redeem');
+        this.props.navigation.navigate(getLocalRoute('app_redeem'));
       };
+      // let right_icon = (
+      //   <TouchableItem onPress={() => {this.onPressMenu({ uri: getLocalRoute('app_redeem') });}}>
+      //     <Image
+      //       style={styles.glyphiconStyle}
+      //       source={close_green}
+      //     />
+      //   </TouchableItem>
+      // );
       let right_icon = disabled ? (
-        <img
-          className="glyphicon"
-          src={close_green}
-          onClick={() => onCrossClick()}
-        />
+        <Image style={styles.glyphiconStyle} source={close_green} />
       ) : null;
       form = (
-        <View className="pftp-textfield-container">
-          <View className="pftp-textfield">
-            <View className="pftp-textfield_redeeminput">
-              <View>
-                {right_icon}
-                <TextInput
-                  type="text"
-                  autoComplete="new-password"
-                  required="required"
-                  disabled={disabled}
-                  value={value}
-                  onChange={evt => this.onChange(evt.target.value)}
-                />
-              </View>
-            </View>
+        <View style={styles.redeemInputView}>
+          <View>
+            <TextInput
+              style={styles.inputStyle}
+              editable={!disabled}
+              value={value}
+              maxLength={20}
+              onChangeText={evt => this.onChange(evt)}
+            />
+            {right_icon}
           </View>
         </View>
       );
@@ -183,7 +202,11 @@ export default class Redemption extends Component {
       form = null;
       button = (
         <View className="row">
-          <PrimaryButton onClick={() => this.props.route('app_myTrees')}>
+          <PrimaryButton
+            onClick={() =>
+              this.props.navigation.navigate(getLocalRoute('app_myTrees'))
+            }
+          >
             {this.props.buttonText}
           </PrimaryButton>
         </View>
@@ -196,25 +219,38 @@ export default class Redemption extends Component {
       heading = i18n.t('label.claim_trees');
     }
     return this.props.loading ? (
-      <View>
+      <View style={styles.loadingContainer}>
         <LoadingIndicator />
       </View>
     ) : (
-      <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}>
-        <View style={styles.headerContainer}>
-          {heading}
-          {/*<DescriptionHeading>*/}
-          {/*{i18n.t('label.redeem_heading')}*/}
-          {/*</DescriptionHeading>*/}
+      <ScrollView>
+        <View style={styles.parentContainer}>
+          <View style={styles.headerContainer}>
+            <Text style={styles.titleText}>
+              {i18n.t('label.redeem_heading')}
+            </Text>
+          </View>
+          <View style={styles.contentContainer}>
+            <CardLayout style={styles.cardContainer}>
+              {icon}
+              {content}
+              {form}
+              {button}
+            </CardLayout>
+          </View>
         </View>
-        <CardLayout>
-          {/*<View>*/}
-          <Image source={icon} />
-          {/*</View>*/}
-          {content}
-          {form}
-          {button}
-        </CardLayout>
+
+        {/*<View style={styles.parentContainer}>*/}
+        {/*<View style={styles.headerContainer}>*/}
+        {/*{heading}*/}
+        {/*/!*<DescriptionHeading>*!/*/}
+        {/*/!*{i18n.t('label.redeem_heading')}*!/*/}
+        {/*/!*</DescriptionHeading>*!/*/}
+        {/*</View>*/}
+        {/*<View style={styles.contentContainer}>*/}
+
+        {/*</View>*/}
+        {/*</View>*/}
       </ScrollView>
     );
   }

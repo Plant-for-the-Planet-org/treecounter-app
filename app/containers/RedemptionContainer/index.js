@@ -11,6 +11,7 @@ import {
 } from '../../actions/redemptionAction';
 import { setAccessDenied } from '../../actions/authActions';
 import i18n from '../../locales/i18n.js';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 class RedemptionContainer extends Component {
   constructor(props) {
@@ -144,10 +145,22 @@ class RedemptionContainer extends Component {
     if (value) {
       // let isCode = value ? true : false;
       // this.callSetState(isCode);
-      updateRoute(path, this.props.navigation, null, {
-        type: this.state.type,
-        code: value.replace(/\s/g, '')
-      });
+      if (this.props.navigation) {
+        this.props.navigation.navigate(getLocalRoute(path), {
+          type: this.state.type,
+          code: value.replace(/\s/g, '')
+        });
+      } else if (this.props.match) {
+        updateRoute(path, null, null, {
+          type: this.state.type,
+          code: value.replace(/\s/g, '')
+        });
+      }
+
+      // this.props.route(path,0,{
+      //   type: this.state.type,
+      //   code: value.replace(/\s/g, '')
+      // }, this.props.navigation);
     }
   }
   setRedemptionCode(data) {

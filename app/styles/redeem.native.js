@@ -2,93 +2,94 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 
 export default (redeemStyles = EStyleSheet.create({
-  scrollContainer: {
-    backgroundColor: 'white',
+  scrollContainer: {},
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  parentContainer: {
+    flexDirection: 'column',
     flex: 1
   },
-
-  parentContainer: {
-    flex: 1,
-    backgroundColor: 'white'
+  contentContainer: {
+    margin: 15,
+    marginTop: 10,
+    flexDirection: 'column'
   },
-  container: {
-    flex: 0.7,
-    width: '100%',
-    // justifyContent: 'center',
-    padding: 20,
-    paddingTop: 30,
-    flexGrow: 1
+  cardContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    alignItems: 'center'
   },
   headerContainer: {
-    flex: 0.3,
     flexDirection: 'column',
-
+    backgroundColor: 'white',
     alignItems: 'center',
-    margin: 20
-  },
-  imageStyle: {
-    width: 100,
-    height: 50
-  },
-
-  inputContainer: {},
-  button: {
-    height: 50,
-    backgroundColor: '$primary',
-    borderColor: '$primary',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 21,
-    marginTop: 30,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
-  buttonText: {
-    fontSize: 29,
-    color: 'white',
-    alignSelf: 'center'
+    padding: 20
   },
   titleText: {
-    fontSize: 41,
     color: '#575756',
-    width: Dimensions.get('window').width * 0.5,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20
+    fontSize: 15,
+    textAlign: 'center'
   },
-  titleTextUnderline: {
-    height: 3,
-    width: Dimensions.get('window').width * 0.5,
-    backgroundColor: '$primary'
+  imageStyle: {
+    width: 59,
+    height: 81,
+    margin: 15
   },
-  bottomRow: {
-    flexDirection: 'row',
+  imageLoginStyle: {
+    width: 50,
+    height: 50,
+    margin: 25
+  },
+  descriptionTextStyle: {
+    color: '$textColor',
+    fontSize: 15,
+    margin: 15,
+    textAlign: 'center'
+  },
+  errorTextStyle: {
+    color: '$colorError',
+    margin: 15,
+    fontSize: 15,
+    textAlign: 'center'
+  },
+  inputStyle: {
+    borderRadius: 3,
+    borderWidth: 1.5,
+    borderColor: '$colorRedeemBorder',
+    borderStyle: 'solid',
+    backgroundColor: '$colorRedeemInside',
+    color: '$textColor',
+    margin: 10,
     padding: 10,
-    alignItems: 'flex-start'
+    textAlign: 'center',
+    paddingRight: 10
   },
-  bottomText: {
-    fontSize: 11,
-    color: '$textColor'
+  glyphiconStyle: {
+    position: 'absolute',
+    padding: 10,
+    right: 20,
+    top: 17,
+    height: 25,
+    width: 25
   },
-  bottomTextHighlight: {
-    fontSize: 12,
-    color: '#ec6453'
+  iconCrossStyle: {
+    width: '100%',
+    height: '100%'
   },
-  loginHeader: {
-    marginBottom: 60
+  redeemInputView: {
+    position: 'relative',
+    width: '100%'
   },
-  descriptionText: {
-    fontSize: 20,
-    color: '#575756',
-    width: Dimensions.get('window').width * 0.8,
-    justifyContent: 'flex-start'
+  loginButtons: {
+    flex: 1,
+    flexDirection: 'row'
   },
-  loginTextStyle: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    padding: 10
+  loginButton1: {
+    margin: 20
   },
-  loginDescriptionStyle: {
-    fontSize: 11
+  buttonStyle: {
+    margin: 20
   }
 }));

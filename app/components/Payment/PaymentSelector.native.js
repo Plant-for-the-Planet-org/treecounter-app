@@ -152,6 +152,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             amount={this.props.amount}
             currency={this.props.currency}
             account={section.value}
+            mode={this.props.accounts[accountName].mode}
             onSuccess={this.donateSuccess(paymentGateway, accountName)}
           />
         </View>

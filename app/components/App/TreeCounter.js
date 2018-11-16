@@ -126,7 +126,7 @@ class TreeCounter extends Component {
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             <div className="app-container__content">
-              <PublicRoute exact path="/" component={Trillion} />
+              <Route exact path="/" component={Trillion} />
               <Route
                 exact
                 path={

@@ -18,8 +18,8 @@ export default (menuStyles = EStyleSheet.create({
     marginTop: 10
   },
   burgerMenuImageStyle: {
-    width: 25,
-    height: 25,
+    width: 30,
+    height: 30,
     marginLeft: 20
   },
   profileImageStyle: {

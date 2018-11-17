@@ -7,25 +7,34 @@ const Layout = {
     width: Dimensions.get('window').width
   }
 };
+const rowHeight = 20;
 
 export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
-    // padding: 10,
+    padding: 0,
     flexDirection: 'column',
-    height: Layout.window.width * 0.5 + 110
+    height: Layout.window.width * 0.5 + rowHeight * 7
   },
   projectImageContainer: {
     height: Layout.window.width * 0.5,
-    width: Layout.window.width * 0.9
+    width: Layout.window.width * 0.95
   },
   teaser__projectImage: {
     flex: 1
   },
   treeCounterContainer: {
     flexDirection: 'row',
-    width: Layout.window.width * 0.9,
+    width: Layout.window.width * 0.95,
     justifyContent: 'space-between',
-    backgroundColor: '#d2e3af'
+    backgroundColor: '#d2e3af',
+    shadowOffset: {
+      width: 0,
+      height: -3
+    },
+    height: rowHeight * 1.5,
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1
   },
   treePlantedContainer: {
     flexDirection: 'row',
@@ -35,6 +44,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   treePlantedChildContainer: {
     height: '100%',
     flexDirection: 'row',
+    paddingTop: 5,
+    paddingBottom: 5,
     backgroundColor: '#b9d384',
     borderRightColor: '#b9d384'
   },
@@ -50,7 +61,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   projectdetailsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    height: rowHeight * 2,
+    padding: 5
   },
   locationContainer: {
     flexDirection: 'column'
@@ -58,7 +71,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
   costContainer: { flexDirection: 'row' },
   actionContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    height: rowHeight,
+    padding: 5
   },
   project_teaser__contentText: {
     fontSize: 16
@@ -103,5 +118,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
   moreButtonTextStyle: {
     color: '$primary',
     fontSize: 12
+  },
+  projectNameContainer: {
+    height: rowHeight * 1.5,
+    padding: 5
   }
 }));

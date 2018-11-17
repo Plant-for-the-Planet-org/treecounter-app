@@ -10,6 +10,7 @@ import {
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import SelectPlantProject from '../../components/SelectPlantProject';
+import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper.native';
 
 class SelectPlantProjectContainer extends Component {
   render() {
@@ -32,7 +33,7 @@ class SelectPlantProjectContainer extends Component {
   }
   selectPlantProjectAction() {
     this.props.selectPlantProjectAction();
-    updateRoute('app_donate_detail', navigation, 1);
+    updateStaticRoute('app_donate_detail', navigation);
   }
 }
 

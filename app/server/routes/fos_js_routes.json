@@ -1030,22 +1030,6 @@
       "methods": ["GET"],
       "schemes": []
     },
-    "app_donate_detail": {
-      "tokens": [["text", "/donate-detail"]],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": ["GET"],
-      "schemes": []
-    },
-    "app_selectProject_snippet": {
-      "tokens": [["text", "/select-project-snippet"]],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": ["GET"],
-      "schemes": []
-    },
     "app_homepage": {
       "tokens": [["text", "/"]],
       "defaults": [],

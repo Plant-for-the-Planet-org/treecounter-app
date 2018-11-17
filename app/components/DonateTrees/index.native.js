@@ -10,7 +10,6 @@ import RecieptTabsView from './receiptTabs';
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 import PaymentSelector from '../Payment/PaymentSelector';
 import { View, Text } from 'react-native';
-import { updateRoute } from '../../helpers/routerHelper';
 
 export default class DonateTrees extends Component {
   constructor(props) {
@@ -37,7 +36,6 @@ export default class DonateTrees extends Component {
       },
       expanded: false,
       expandedOption: '1',
-      showSelectProject: false,
       routes: [
         // { key: 'selectPlant', title: 'Select Plant' },
         { key: 'currency', title: 'Donation Details' },
@@ -66,9 +64,6 @@ export default class DonateTrees extends Component {
   componentWillReceiveProps(nextProps) {
     const { navigation } = this.props;
     if (nextProps.selectedProject) {
-      this.setState({
-        showSelectProject: false
-      });
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
           .fixedDefaultTreeCount;
@@ -80,8 +75,6 @@ export default class DonateTrees extends Component {
       if (nextTreeCount !== currentTreeCount) {
         this.setState({ selectedTreeCount: nextTreeCount });
       }
-    } else {
-      updateRoute('app_selectProject_snippet', navigation, 1);
     }
   }
 

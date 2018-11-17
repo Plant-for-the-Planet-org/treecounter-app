@@ -57,7 +57,7 @@ const headerLabels = {
   ['delete_profile_confirm']: 'label.delete_profile'
 };
 
-export const getAppNavigator = function(isLoggedIn) {
+export const getAppNavigator = function(isLoggedIn, userProfile) {
   const baseNavigator = createStackNavigator(
     {
       [getLocalRoute('app_registerTrees')]: {
@@ -238,7 +238,7 @@ export const getAppNavigator = function(isLoggedIn) {
         //     !isLoggedIn)
         // ) {
         if (navigation.state.routeName === 'Tab') {
-          navigationConfig.headerLeft = BurgerMenu(navigation);
+          navigationConfig.headerLeft = BurgerMenu(navigation, userProfile);
         }
         return navigationConfig;
       }

@@ -171,18 +171,17 @@ export default class Redemption extends Component {
         // );
       }
       const onCrossClick = () => {
-        this.props.navigation.navigate(getLocalRoute('app_redeem'));
+        updateRoute('app_redeem', this.props.navigation, null, {
+          code: null
+        });
       };
-      // let right_icon = (
-      //   <TouchableItem onPress={() => {this.onPressMenu({ uri: getLocalRoute('app_redeem') });}}>
-      //     <Image
-      //       style={styles.glyphiconStyle}
-      //       source={close_green}
-      //     />
-      //   </TouchableItem>
-      // );
       let right_icon = disabled ? (
-        <Image style={styles.glyphiconStyle} source={close_green} />
+        <TouchableItem
+          style={styles.glyphiconTouch}
+          onPress={() => onCrossClick()}
+        >
+          <Image style={styles.glyphiconStyle} source={close_green} />
+        </TouchableItem>
       ) : null;
       form = (
         <View style={styles.redeemInputView}>
@@ -203,9 +202,7 @@ export default class Redemption extends Component {
       button = (
         <View className="row">
           <PrimaryButton
-            onClick={() =>
-              this.props.navigation.navigate(getLocalRoute('app_myTrees'))
-            }
+            onClick={() => updateRoute('app_myTrees', this.props.navigation)}
           >
             {this.props.buttonText}
           </PrimaryButton>
@@ -230,14 +227,14 @@ export default class Redemption extends Component {
               {i18n.t('label.redeem_heading')}
             </Text>
           </View>
-          <View style={styles.contentContainer}>
-            <CardLayout style={styles.cardContainer}>
-              {icon}
-              {content}
-              {form}
-              {button}
-            </CardLayout>
-          </View>
+          {/*<View style={styles.contentContainer}>*/}
+          <CardLayout style={styles.cardContainer}>
+            {icon}
+            {content}
+            {form}
+            {button}
+          </CardLayout>
+          {/*</View>*/}
         </View>
 
         {/*<View style={styles.parentContainer}>*/}

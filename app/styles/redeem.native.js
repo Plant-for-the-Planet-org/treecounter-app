@@ -66,12 +66,13 @@ export default (redeemStyles = EStyleSheet.create({
     textAlign: 'center',
     paddingRight: 10
   },
+  glyphiconTouch: {},
   glyphiconStyle: {
     position: 'absolute',
     padding: 10,
     right: 20,
-    top: 17,
     height: 25,
+    top: -42,
     width: 25
   },
   iconCrossStyle: {

@@ -145,22 +145,10 @@ class RedemptionContainer extends Component {
     if (value) {
       // let isCode = value ? true : false;
       // this.callSetState(isCode);
-      if (this.props.navigation) {
-        this.props.navigation.navigate(getLocalRoute(path), {
-          type: this.state.type,
-          code: value.replace(/\s/g, '')
-        });
-      } else if (this.props.match) {
-        updateRoute(path, null, null, {
-          type: this.state.type,
-          code: value.replace(/\s/g, '')
-        });
-      }
-
-      // this.props.route(path,0,{
-      //   type: this.state.type,
-      //   code: value.replace(/\s/g, '')
-      // }, this.props.navigation);
+      updateRoute(path, this.props.navigation, null, {
+        type: this.state.type,
+        code: value.replace(/\s/g, '')
+      });
     }
   }
   setRedemptionCode(data) {

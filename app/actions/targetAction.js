@@ -19,8 +19,8 @@ export function SubmitTarget(treecounterData) {
       })
       .catch(error => {
         debug(error);
-        NotificationManager.error(error.response.data.message, 'Error', 5000);
         dispatch(setProgressModelState(false));
+        NotificationManager.error(error.response.data.message, 'Error', 5000);
       });
   };
 }

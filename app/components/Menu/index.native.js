@@ -8,8 +8,8 @@ import {
   iosLogout,
   iosFaqs,
   ProfilePic,
-  iosInformation,
-  EditGreen
+  infoGrey,
+  editGrey
 } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -86,7 +86,7 @@ export default class Menu extends Component {
                   this.onPressMenu({ uri: getLocalRoute('app_editProfile') });
                 }}
                 title={i18n.t('label.edit_profile')}
-                iconUrl={EditGreen}
+                iconUrl={editGrey}
               />
             ) : null}
             <LargeMenuItem
@@ -121,7 +121,7 @@ export default class Menu extends Component {
             this.onPressMenu({ uri: 'about_us' });
           }}
           title={i18n.t('label.about_us')}
-          iconUrl={iosInformation}
+          iconUrl={infoGrey}
         />
       </SafeAreaView>
     );

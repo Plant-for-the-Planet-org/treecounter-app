@@ -18,8 +18,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     backgroundColor: '#f0f0f0'
   },
   projectNameContainer: {
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: 8,
+    paddingBottom: 8,
     paddingLeft: 5,
     borderColor: '#efefef',
     borderStyle: 'solid',

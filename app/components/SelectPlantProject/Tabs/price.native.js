@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableHighlight, Image, Text } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import styles from '../../../styles/selectplantproject/list';
 import CardLayout from '../../Common/Card';
 

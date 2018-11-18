@@ -108,7 +108,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderBottomWidth: 1,
-    margin: 1
+    marginBottom: 1,
+    flexDirection: 'column'
   },
   buttonStyle: {
     height: 20,

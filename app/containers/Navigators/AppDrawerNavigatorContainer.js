@@ -53,7 +53,10 @@ class AppDrawerNavigatorContainer extends Component {
       return false;
     }
     if (this.props.progressModel === nextProps.progressModel) {
-      this._AppNavigator = getAppNavigator(nextState.isLoggedIn);
+      this._AppNavigator = getAppNavigator(
+        nextState.isLoggedIn,
+        nextProps.userProfile
+      );
     }
     return true;
   }
@@ -84,7 +87,10 @@ class AppDrawerNavigatorContainer extends Component {
   render() {
     if (!this.state.loading) {
       if (!this._AppNavigator) {
-        this._AppNavigator = getAppNavigator(this.state.isLoggedIn);
+        this._AppNavigator = getAppNavigator(
+          this.state.isLoggedIn,
+          this.props.userProfile
+        );
       }
 
       return (

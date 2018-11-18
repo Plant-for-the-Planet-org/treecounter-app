@@ -35,6 +35,7 @@ import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -57,7 +58,7 @@ const headerLabels = {
   ['delete_profile_confirm']: 'label.delete_profile'
 };
 
-export const getAppNavigator = function(isLoggedIn) {
+export const getAppNavigator = function(isLoggedIn, userProfile) {
   const baseNavigator = createStackNavigator(
     {
       [getLocalRoute('app_registerTrees')]: {
@@ -90,9 +91,8 @@ export const getAppNavigator = function(isLoggedIn) {
 
       ['license_info_list']: { screen: LicenseInfoList },
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
-
       [getLocalRoute('app_donateTrees')]: {
-        screen: DonationTreesContainer
+        screen: SelectPlantProjectContainer
       }
     },
     {
@@ -177,17 +177,15 @@ export const getAppNavigator = function(isLoggedIn) {
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
       },
-
       [getLocalRoute('app_myTrees')]: {
         screen: isLoggedIn ? UserContributions : LoginContainer
       },
       [getLocalRoute('app_donateTrees')]: {
-        screen: DonationTreesContainer
+        screen: SelectPlantProjectContainer
       },
       [getLocalRoute('app_homepage')]: {
         screen: Trillion
       },
-
       [getLocalRoute('app_giftTrees')]: {
         screen: GiftTrees
       },
@@ -218,6 +216,9 @@ export const getAppNavigator = function(isLoggedIn) {
       Base: baseNavigator,
       [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
+      },
+      ['app_donate_detail']: {
+        screen: DonationTreesContainer
       }
     },
     {
@@ -238,7 +239,7 @@ export const getAppNavigator = function(isLoggedIn) {
         //     !isLoggedIn)
         // ) {
         if (navigation.state.routeName === 'Tab') {
-          navigationConfig.headerLeft = BurgerMenu(navigation);
+          navigationConfig.headerLeft = BurgerMenu(navigation, userProfile);
         }
         return navigationConfig;
       }

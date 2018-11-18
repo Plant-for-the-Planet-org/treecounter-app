@@ -103,6 +103,7 @@ import redeem_outline from './images/icons/redeem_outline.png';
 import redeem_outline_red from './images/icons/redeem_outline_red.png';
 import lightTree from './images/lightTree.png';
 import AppStoreLogo from './images/appstore-logo.png';
+import targetPlanted from './images/target.png';
 
 export {
   AppStoreLogo,
@@ -209,5 +210,6 @@ export {
   redeemSignIn,
   redeem_outline,
   redeem_outline_red,
-  lightTree
+  lightTree,
+  targetPlanted
 };

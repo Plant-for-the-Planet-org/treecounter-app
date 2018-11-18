@@ -21,6 +21,20 @@ class PlantProjectDetails extends React.Component {
     return (
       <View style={{ flexDirection: 'column' }}>
         <PlantProjectImageCarousel images={this.props.plantProjectImages} />
+        <View
+          style={{
+            paddingTop: 20
+          }}
+        >
+          <Text
+            style={{
+              textAlign: 'justify',
+              color: '#686060'
+            }}
+          >
+            {this.props.description}
+          </Text>
+        </View>
         <View style={{ paddingTop: 20 }}>
           <VideoContainer url={vUrl} />;
         </View>

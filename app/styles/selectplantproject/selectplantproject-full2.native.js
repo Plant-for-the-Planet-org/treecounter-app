@@ -13,7 +13,6 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
     padding: 0,
     flexDirection: 'column',
-    height: Layout.window.width * 0.5 + rowHeight * 6 + 10,
     paddingBottom: 5
   },
   projectImageContainer: {

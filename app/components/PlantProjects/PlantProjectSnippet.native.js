@@ -68,19 +68,22 @@ class PlantProjectSnippet extends React.Component {
     };
     return (
       <CardLayout style={[styles.projectFullContainer, this.props.cardStyle]}>
-        <View style={styles.projectImageContainer}>
-          <Image
-            style={styles.teaser__projectImage}
-            source={{
-              uri: getImageUrl(
-                'project',
-                'large',
-                teaserProps.projectImage.image
-              )
-            }}
-            resizeMode={'cover'}
-          />
-        </View>
+        {projectImage && (
+          <View style={styles.projectImageContainer}>
+            <Image
+              style={styles.teaser__projectImage}
+              source={{
+                uri: getImageUrl(
+                  'project',
+                  'large',
+                  teaserProps.projectImage.image
+                )
+              }}
+              resizeMode={'cover'}
+            />
+          </View>
+        )}
+
         <View style={styles.projectSpecsContainer}>
           <View style={styles.treeCounterContainer}>
             <View style={[styles.treePlantedContainer]}>

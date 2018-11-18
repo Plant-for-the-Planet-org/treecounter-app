@@ -54,6 +54,7 @@ class PlantProjectFull extends React.Component {
             />
           </View>
 
+          <View style={styles.horizontalRule} />
           <View style={styles.plantProjectDetails}>
             <PlantProjectDetails {...detailsProps} />
           </View>

@@ -47,6 +47,8 @@ import EditUserProfileContainer from '../../containers/EditUserProfile';
 import LeaderboardContainer from '../../containers/Leaderboard';
 import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
+import PrivacyContainer from '../../containers/Privacy';
+import ImprintContainer from '../../containers/Imprint';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -124,7 +126,7 @@ class TreeCounter extends Component {
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             <div className="app-container__content">
-              <PublicRoute exact path="/" component={Trillion} />
+              <Route exact path="/" component={Trillion} />
               <Route
                 exact
                 path={
@@ -210,6 +212,14 @@ class TreeCounter extends Component {
                 component={EditUserProfileContainer}
               />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
+              <Route
+                path={getLocalRoute('app_privacy')}
+                component={PrivacyContainer}
+              />
+              <Route
+                path={getLocalRoute('app_imprint')}
+                component={ImprintContainer}
+              />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
               <Route
                 path={getLocalRoute('app_giftTrees')}

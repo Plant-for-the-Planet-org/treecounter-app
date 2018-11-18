@@ -231,7 +231,8 @@ export default class DonateTrees extends Component {
         amount: this.state.selectedAmount,
         currency: this.state.selectedCurrency
       },
-      this.props.selectedProject.id
+      this.props.selectedProject.id,
+      this.props.currentUserProfile
     );
   }
 

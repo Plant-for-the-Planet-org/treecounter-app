@@ -23,7 +23,7 @@ $trans-time: 300ms;
   .pftp-textfield__icon {
     width: 20px;
     padding-right: 8px;
-   // margin-left: -30px;
+    // margin-left: -30px;
   }
   .pftp-textfield__inputgroup {
     position: relative;
@@ -45,6 +45,7 @@ $trans-time: 300ms;
         outline: none;
       }
       &:focus ~ label,
+      &:invalid ~ label,
       &:valid ~ label {
         top: -14px;
         font-size: 12px;

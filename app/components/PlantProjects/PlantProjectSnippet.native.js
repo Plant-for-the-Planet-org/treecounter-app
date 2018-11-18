@@ -7,6 +7,7 @@ import styles from '../../styles/selectplantproject/selectplantproject-full2.nat
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { getImageUrl } from '../../actions/apiRouting';
+import { targetPlanted } from '../../assets';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -93,8 +94,8 @@ class PlantProjectSnippet extends React.Component {
                         backgroundColor: '#b9d384',
                         borderColor: '#b9d384',
                         width: treeCountWidth + '%',
-                        padding: 5,
                         paddingRight: 10,
+                        padding: 5,
                         borderTopRightRadius: 10,
                         borderBottomRightRadius: 10,
                         borderWidth: 0.5
@@ -115,7 +116,10 @@ class PlantProjectSnippet extends React.Component {
             </View>
 
             <View style={[styles.targetContainer]}>
-              <Text>{specsProps.countTarget}</Text>
+              <Text style={styles.treePlantedtext}>
+                {specsProps.countTarget.toLocaleString('en')}
+              </Text>
+              <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
             </View>
           </View>
           <View style={styles.projectNameContainer}>

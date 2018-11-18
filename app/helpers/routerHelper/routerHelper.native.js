@@ -13,3 +13,8 @@ export function updateRoute(routeName, navigation, id) {
   }
   navigation.navigate(route);
 }
+
+export function updateStaticRoute(routeName, navigation, id) {
+  let route = routeName;
+  navigation.navigate(route);
+}

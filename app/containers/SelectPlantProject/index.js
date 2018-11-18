@@ -18,7 +18,7 @@ class SelectPlantProjectContainer extends Component {
     return (
       <SelectPlantProject
         plantProjects={this.props.plantProjects}
-        selectProject={this.props.selectPlantProjectAction}
+        selectProject={id => this.selectPlantProjectAction(id)}
         currencies={this.props.currencies}
         onMoreClick={id => this.onMoreClick(id)}
         {...this.props}
@@ -31,8 +31,9 @@ class SelectPlantProjectContainer extends Component {
     console.log('OnMore');
     updateRoute('app_selectProject', navigation, 1);
   }
-  selectPlantProjectAction() {
-    this.props.selectPlantProjectAction();
+  selectPlantProjectAction(id) {
+    this.props.selectPlantProjectAction(id);
+    const { navigation } = this.props;
     updateStaticRoute('app_donate_detail', navigation);
   }
 }

@@ -13,7 +13,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
     padding: 0,
     flexDirection: 'column',
-    height: Layout.window.width * 0.5 + rowHeight * 7
+    height: Layout.window.width * 0.5 + rowHeight * 6 + 10,
+    paddingBottom: 5
   },
   projectImageContainer: {
     height: Layout.window.width * 0.5,
@@ -73,7 +74,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     height: rowHeight,
-    padding: 5
+    paddingLeft: 5
   },
   project_teaser__contentText: {
     fontSize: 16
@@ -81,7 +82,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   locationText: {
     fontSize: 12,
     color: '$textColor',
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+    paddingBottom: 2
   },
   survivalText: {
     fontSize: 13,

@@ -8,6 +8,7 @@ import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { getImageUrl } from '../../actions/apiRouting';
 import { targetPlanted } from '../../assets';
+import TouchableItem from '../Common/TouchableItem.native';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -67,114 +68,120 @@ class PlantProjectSnippet extends React.Component {
       taxDeduction: paymentSetup.taxDeduction
     };
     return (
-      <CardLayout style={[styles.projectFullContainer, this.props.cardStyle]}>
-        {projectImage && (
-          <View style={styles.projectImageContainer}>
-            <Image
-              style={styles.teaser__projectImage}
-              source={{
-                uri: getImageUrl(
-                  'project',
-                  'large',
-                  teaserProps.projectImage.image
-                )
-              }}
-              resizeMode={'cover'}
-            />
-          </View>
-        )}
+      <TouchableItem onPress={() => this.props.onMoreClick(id)}>
+        <CardLayout style={[styles.projectFullContainer, this.props.cardStyle]}>
+          {projectImage && (
+            <View style={styles.projectImageContainer}>
+              <Image
+                style={styles.teaser__projectImage}
+                source={{
+                  uri: getImageUrl(
+                    'project',
+                    'large',
+                    teaserProps.projectImage.image
+                  )
+                }}
+                resizeMode={'cover'}
+              />
+            </View>
+          )}
 
-        <View style={styles.projectSpecsContainer}>
-          <View style={styles.treeCounterContainer}>
-            <View style={[styles.treePlantedContainer]}>
-              <View
-                style={[styles.treePlantedChildContainer]}
-                style={
-                  treeCountWidth > 0
-                    ? {
-                        height: '100%',
-                        flexDirection: 'row',
-                        backgroundColor: '#b9d384',
-                        borderColor: '#b9d384',
-                        width: treeCountWidth + '%',
-                        paddingRight: 10,
-                        padding: 5,
-                        borderTopRightRadius: 10,
-                        borderBottomRightRadius: 10,
-                        borderWidth: 0.5
-                      }
-                    : {
-                        height: '100%',
-                        flexDirection: 'row'
-                      }
-                }
-              >
+          <View style={styles.projectSpecsContainer}>
+            <View style={styles.treeCounterContainer}>
+              <View style={[styles.treePlantedContainer]}>
+                <View
+                  style={[styles.treePlantedChildContainer]}
+                  style={
+                    treeCountWidth > 0
+                      ? {
+                          height: '100%',
+                          flexDirection: 'row',
+                          backgroundColor: '#b9d384',
+                          borderColor: '#b9d384',
+                          width: treeCountWidth + '%',
+                          paddingRight: 10,
+                          padding: 5,
+                          borderTopRightRadius: 10,
+                          borderBottomRightRadius: 10,
+                          borderWidth: 0.5
+                        }
+                      : {
+                          height: '100%',
+                          flexDirection: 'row'
+                        }
+                  }
+                >
+                  <Text style={styles.treePlantedtext}>
+                    {specsProps.countPlanted}
+                  </Text>
+                  <Text style={styles.treePlantedtext}>
+                    {i18n.t('label.trees')}
+                  </Text>
+                </View>
+              </View>
+
+              <View style={[styles.targetContainer]}>
                 <Text style={styles.treePlantedtext}>
-                  {specsProps.countPlanted}
+                  {specsProps.countTarget.toLocaleString('en')}
                 </Text>
-                <Text style={styles.treePlantedtext}>
-                  {i18n.t('label.trees')}
+                <Image
+                  source={targetPlanted}
+                  style={{ width: 15, height: 15 }}
+                />
+              </View>
+            </View>
+            <View style={styles.projectNameContainer}>
+              <Text style={styles.project_teaser__contentText}>
+                {teaserProps.projectName}
+              </Text>
+            </View>
+            <View style={styles.projectdetailsContainer}>
+              <View style={styles.locationContainer}>
+                <Text style={styles.locationText}>{specsProps.location}</Text>
+                <Text style={styles.survivalText}>
+                  {i18n.t('label.survival_rate')} {':'}{' '}
+                  {specsProps.survivalRate}%
                 </Text>
+              </View>
+
+              <View style={styles.costContainer}>
+                <Text style={styles.costText}>${specsProps.treeCost}</Text>
               </View>
             </View>
 
-            <View style={[styles.targetContainer]}>
-              <Text style={styles.treePlantedtext}>
-                {specsProps.countTarget.toLocaleString('en')}
-              </Text>
-              <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
-            </View>
-          </View>
-          <View style={styles.projectNameContainer}>
-            <Text style={styles.project_teaser__contentText}>
-              {teaserProps.projectName}
-            </Text>
-          </View>
-          <View style={styles.projectdetailsContainer}>
-            <View style={styles.locationContainer}>
-              <Text style={styles.locationText}>{specsProps.location}</Text>
-              <Text style={styles.survivalText}>
-                {i18n.t('label.survival_rate')} {':'} {specsProps.survivalRate}%
-              </Text>
-            </View>
+            <View style={styles.actionContainer}>
+              <View style={styles.byOrgContainer}>
+                <Text>{teaserProps.tpoName}</Text>
+              </View>
 
-            <View style={styles.costContainer}>
-              <Text style={styles.costText}>${specsProps.treeCost}</Text>
-            </View>
-          </View>
+              <View style={styles.buttonContainer}>
+                {this.props.showMoreButton && (
+                  <PrimaryButton
+                    style={styles.buttonItem}
+                    buttonStyle={[styles.buttonStyle, styles.moreButtonStyle]}
+                    textStyle={[
+                      styles.moreButtonTextStyle,
+                      styles.buttonTextStyle
+                    ]}
+                    onClick={() => this.toggleExpanded(id)}
+                  >
+                    <Text>More</Text>
+                  </PrimaryButton>
+                )}
 
-          <View style={styles.actionContainer}>
-            <View style={styles.byOrgContainer}>
-              <Text>{teaserProps.tpoName}</Text>
-            </View>
-
-            <View style={styles.buttonContainer}>
-              {this.props.showMoreButton && (
                 <PrimaryButton
                   style={styles.buttonItem}
-                  buttonStyle={[styles.buttonStyle, styles.moreButtonStyle]}
-                  textStyle={[
-                    styles.moreButtonTextStyle,
-                    styles.buttonTextStyle
-                  ]}
-                  onClick={() => this.toggleExpanded(id)}
+                  buttonStyle={styles.buttonStyle}
+                  textStyle={styles.buttonTextStyle}
+                  onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
                 >
-                  <Text>More</Text>
+                  <Text>Donate</Text>
                 </PrimaryButton>
-              )}
-
-              <PrimaryButton
-                style={styles.buttonItem}
-                buttonStyle={styles.buttonStyle}
-                textStyle={styles.buttonTextStyle}
-                onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
-              >
-                <Text>Donate</Text>
-              </PrimaryButton>
+              </View>
             </View>
           </View>
-        </View>
-      </CardLayout>
+        </CardLayout>
+      </TouchableItem>
     );
   }
 }

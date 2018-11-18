@@ -35,7 +35,6 @@ import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
-import SelectedPlantProject from '../../containers/';
 import RedemptionContainer from '../../containers/RedemptionContainer';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 

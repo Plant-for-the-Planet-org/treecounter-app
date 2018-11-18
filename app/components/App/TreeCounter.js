@@ -49,6 +49,7 @@ import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
 import PrivacyContainer from '../../containers/Privacy';
 import ImprintContainer from '../../containers/Imprint';
+import DownloadAppModal from '../DownloadAppStore';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -56,9 +57,19 @@ class TreeCounter extends Component {
     super(props);
     const { userProfile } = this.props;
     const isLoggedIn = null !== userProfile;
+    let IS_IPAD = navigator.userAgent.match(/iPad/i) != null,
+      IS_IPHONE =
+        !IS_IPAD &&
+        (navigator.userAgent.match(/iPhone/i) != null ||
+          navigator.userAgent.match(/iPod/i) != null),
+      IS_IOS = IS_IPAD || IS_IPHONE,
+      IS_ANDROID = !IS_IOS && navigator.userAgent.match(/android/i) != null;
     this.state = {
       loading: true,
-      isLoggedIn: isLoggedIn
+      isLoggedIn: isLoggedIn,
+      isIOS: IS_IOS,
+      isAndroid: IS_ANDROID,
+      isCancelled: false
     };
   }
 
@@ -88,6 +99,12 @@ class TreeCounter extends Component {
       let isLoggedIn = null !== nextProps.userProfile;
       this.setState({ loading: false, isLoggedIn: isLoggedIn });
     }
+  }
+
+  continueOnSite() {
+    this.setState({
+      isCancelled: true
+    });
   }
 
   render() {
@@ -123,6 +140,10 @@ class TreeCounter extends Component {
         <BrowserRouter history={history}>
           <div className="app-container">
             <ProgressModal isOpen={this.props.progressModel} />
+            <DownloadAppModal
+              isOpen={this.state.isIOS && !this.state.isCancelled}
+              continueOnSite={this.continueOnSite.bind(this)}
+            />
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             <div className="app-container__content">

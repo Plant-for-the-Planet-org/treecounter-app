@@ -46,6 +46,27 @@
   min-width: 100px;
   min-height: 100px;
 }
+
+.widthAdjust {
+  min-width: 350px;
+}
+
+.image_full_width {
+  width: 100%;
+}
+
+.continue_on_site {
+  background-color: #efefef;
+  height: 52px;
+  line-height: 2.7;
+  border-radius: 5px;
+}
+
+.or_class {
+  margin: 20px;
+  font-weight: 600;
+}
+
 .Overlay {
   position: fixed;
   top: 0;

@@ -87,7 +87,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   survivalText: {
     fontSize: 13,
-    color: '$textColor'
+    color: '$textColor',
+    paddingTop: 3
   },
   costText: {
     fontSize: 20

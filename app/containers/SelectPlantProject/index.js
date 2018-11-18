@@ -10,6 +10,7 @@ import {
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import SelectPlantProject from '../../components/SelectPlantProject';
+import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper.native';
 
 class SelectPlantProjectContainer extends Component {
   render() {
@@ -20,6 +21,7 @@ class SelectPlantProjectContainer extends Component {
         selectProject={this.props.selectPlantProjectAction}
         currencies={this.props.currencies}
         onMoreClick={id => this.onMoreClick(id)}
+        {...this.props}
       />
     );
   }
@@ -28,6 +30,10 @@ class SelectPlantProjectContainer extends Component {
     const { navigation } = this.props;
     console.log('OnMore');
     updateRoute('app_selectProject', navigation, 1);
+  }
+  selectPlantProjectAction() {
+    this.props.selectPlantProjectAction();
+    updateStaticRoute('app_donate_detail', navigation);
   }
 }
 

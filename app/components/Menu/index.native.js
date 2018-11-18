@@ -123,7 +123,7 @@ export default class Menu extends Component {
           onPress={() => {
             this.onPressMenu({ uri: 'about_us' });
           }}
-          title={i18n.t('label.about_us')}
+          title={i18n.t('label.information')}
           iconUrl={infoGrey}
         />
       </SafeAreaView>

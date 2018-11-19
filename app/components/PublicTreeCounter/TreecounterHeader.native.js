@@ -42,7 +42,7 @@ const TreecounterHeader = ({
 
 TreecounterHeader.propTypes = {
   caption: PropTypes.string.isRequired,
-  profileType: PropTypes.string.isRequired,
+  profileType: PropTypes.string,
   logo: PropTypes.string,
   isUserFollowerBool: PropTypes.bool.isRequired,
   isUserLoggedIn: PropTypes.bool.isRequired,

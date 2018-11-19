@@ -47,6 +47,7 @@ const headerLabels = {
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_target')]: 'label.set_target',
   [getLocalRoute('app_donateTrees')]: 'label.donate',
+
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
@@ -58,12 +59,14 @@ const headerLabels = {
   [getLocalRoute('app_redeem')]: 'label.redeem_trees',
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
+  [getLocalRoute('app_selectProject')]: 'label.donate',
   [getLocalRoute('app_imprint')]: 'label.imprint',
   [getLocalRoute('app_privacy')]: 'label.data_protection',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license',
-  ['delete_profile_confirm']: 'label.delete_profile'
+  ['delete_profile_confirm']: 'label.delete_profile',
+  ['app_donate_detail']: 'label.donate'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -113,7 +116,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: RedemptionContainer
       },
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
-      [getLocalRoute('app_donateTrees')]: {
+      ['app_donate_detail']: {
         screen: SelectPlantProjectContainer
       }
     },

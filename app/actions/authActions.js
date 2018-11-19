@@ -50,11 +50,11 @@ export function logoutUser() {
   };
 }
 
-export function forgot_password(data) {
+export function forgot_password(data, navigation = undefined) {
   return dispatch => {
     postRequest('auth_forgotPassword_post', data)
       .then(res => {
-        updateRoute('app_passwordSent', dispatch);
+        updateRoute('app_passwordSent', navigation || dispatch);
       })
       .catch(err => debug(err));
   };
@@ -70,11 +70,11 @@ export function sendEmail(navigation = undefined) {
   };
 }
 
-export function reset_password(data) {
+export function reset_password(data, navigation = undefined) {
   return dispatch => {
     postRequest('auth_resetPassword_post', data)
       .then(res => {
-        updateRoute('app_login', dispatch);
+        updateRoute('app_login', navigation || dispatch);
       })
       .catch(err => debug(err));
   };

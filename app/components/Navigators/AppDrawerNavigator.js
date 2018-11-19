@@ -36,6 +36,7 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -73,11 +74,12 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_login')]: {
         screen: LoginContainer
       },
-
+      [getLocalRoute('app_passwordSent')]: {
+        screen: EmailSentContainer
+      },
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
       },
-
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
       },

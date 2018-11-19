@@ -14,6 +14,7 @@ import i18n from '../../locales/i18n.js';
 import _ from 'lodash';
 import { ProfileImagePickerTemplate } from './ProfileImagePickerTemplate.native';
 import styles from '../../styles/edit_profile.native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const Form = t.form.Form;
 function UserProfileTemplate(locals) {
@@ -100,7 +101,7 @@ export default class EditUserProfile extends Component {
     switch (route.key) {
       case 'basic':
         return (
-          <ScrollView>
+          <KeyboardAwareScrollView>
             <CardLayout style={{ flex: 1 }}>
               <Form
                 ref={'image'}
@@ -124,12 +125,12 @@ export default class EditUserProfile extends Component {
                 {i18n.t('label.save_changes')}
               </PrimaryButton>
             </CardLayout>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         );
         break;
       case 'desc':
         return (
-          <ScrollView>
+          <KeyboardAwareScrollView>
             <CardLayout style={{ flex: 1 }}>
               <View {...this.props}>
                 <Form
@@ -147,11 +148,11 @@ export default class EditUserProfile extends Component {
                 {i18n.t('label.save_changes')}
               </PrimaryButton>
             </CardLayout>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         );
       case 'security':
         return (
-          <ScrollView>
+          <KeyboardAwareScrollView>
             <CardLayout style={{ flex: 1 }}>
               <View {...this.props}>
                 <Form
@@ -194,7 +195,7 @@ export default class EditUserProfile extends Component {
                 {i18n.t('label.delete_profile')}
               </PrimaryButton>
             </CardLayout>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         );
         break;
         return null;

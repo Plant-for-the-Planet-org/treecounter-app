@@ -23,7 +23,7 @@ const PrimaryButton = ({
 );
 
 PrimaryButton.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.node,
   onClick: PropTypes.func
 };
 

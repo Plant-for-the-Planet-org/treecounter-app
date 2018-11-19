@@ -48,7 +48,7 @@ export default class Redemption extends Component {
     this.setState({ value: value });
   }
   render() {
-    const { code, updateRoute } = this.props;
+    const { code } = this.props;
     let content,
       button,
       icon,
@@ -150,7 +150,7 @@ export default class Redemption extends Component {
         // );
       }
       const onCrossClick = () => {
-        this.props.updateRoute('app_redeem');
+        this.props.route('app_redeem');
       };
       let right_icon = disabled ? (
         <img
@@ -183,7 +183,7 @@ export default class Redemption extends Component {
       form = null;
       button = (
         <div className="row">
-          <PrimaryButton onClick={() => this.props.updateRoute('app_myTrees')}>
+          <PrimaryButton onClick={() => this.props.route('app_myTrees')}>
             {this.props.buttonText}
           </PrimaryButton>
         </div>
@@ -224,7 +224,7 @@ Redemption.propTypes = {
   pageStatus: PropTypes.string,
   code: PropTypes.string,
   isLoggedIn: PropTypes.any,
-  updateRoute: PropTypes.func,
+  route: PropTypes.func,
   setRedemptionCode: PropTypes.func,
   validateCode: PropTypes.func,
   loginButton: PropTypes.func,
@@ -237,5 +237,6 @@ Redemption.propTypes = {
   errorText: PropTypes.string,
   actionText: PropTypes.string,
   buttonText: PropTypes.string,
-  tpos: PropTypes.array
+  tpos: PropTypes.array,
+  navigation: PropTypes.any
 };

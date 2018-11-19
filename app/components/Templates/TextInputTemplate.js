@@ -35,7 +35,6 @@ export function TextInputTemplate(locals) {
             <input
               type={locals.type}
               autoComplete="new-password"
-              required="required"
               max={todayDate()}
               value={locals.value}
               onChange={onChange}
@@ -44,7 +43,6 @@ export function TextInputTemplate(locals) {
             <input
               type={locals.type}
               autoComplete="new-password"
-              required="required"
               value={locals.value}
               onChange={onChange}
             />

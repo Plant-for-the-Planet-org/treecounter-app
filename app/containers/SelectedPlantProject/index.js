@@ -7,7 +7,7 @@ import {
   selectedPlantProjectSelector,
   selectedTpoSelector
 } from '../../selectors';
-import { updateRoute } from '../../helpers/routerHelper';
+import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
 
 import {
@@ -37,7 +37,7 @@ class SelectedPlantProjectContainer extends Component {
   selectProject(id) {
     const { navigation } = this.props;
     this.props.selectPlantProjectAction(id);
-    updateRoute('app_donateTrees', navigation, 1);
+    updateStaticRoute('app_donate_detail', navigation);
   }
   render() {
     if (this.props.selectedProject) {

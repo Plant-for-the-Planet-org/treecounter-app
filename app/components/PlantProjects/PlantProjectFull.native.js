@@ -41,7 +41,7 @@ class PlantProjectFull extends React.Component {
     return (
       <ScrollView>
         <CardLayout style={styles.projectFullContainer}>
-          <View>
+          <View style={styles.snippetContainer}>
             <PlantProjectSnippet
               cardStyle={styles.cardStyle}
               key={'projectFull' + this.props.plantProject.id}
@@ -54,14 +54,15 @@ class PlantProjectFull extends React.Component {
             />
           </View>
 
+          <View style={styles.horizontalRule} />
           <View style={styles.plantProjectDetails}>
             <PlantProjectDetails {...detailsProps} />
           </View>
 
           <View style={styles.buttonContainer}>
             {this.props.showGoback ? (
-              <PrimaryButton onClick={() => this.props.onBackClick()}>
-                GO Back
+              <PrimaryButton onClick={() => this.props.selectProject(id)}>
+                {i18n.t('label.donate')}
               </PrimaryButton>
             ) : null}
           </View>

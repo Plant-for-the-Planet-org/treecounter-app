@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableHighlight, Image, Text } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import styles from '../../../styles/selectplantproject/list';
 import CardLayout from '../../Common/Card';
 
@@ -114,5 +114,5 @@ export default class PriceProjects extends Component {
 PriceProjects.propTypes = {
   plantProjects: Proptypes.array.isRequired,
   selectProject: Proptypes.func.isRequired,
-  currencies: Proptypes.array.isRequired
+  currencies: Proptypes.object.isRequired
 };

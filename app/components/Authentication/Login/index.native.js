@@ -32,8 +32,11 @@ export default class Login extends Component {
       <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}>
         <View style={styles.parentContainer}>
           <View style={styles.headerContainer}>
-            <Image style={styles.imageStyle} source={SideMenuImage} />
-            <Text style={styles.loginTextStyle}>Login</Text>
+            <Image
+              style={styles.imageStyle}
+              resizeMode={'contain'}
+              source={SideMenuImage}
+            />
             <Text style={styles.loginDescriptionStyle}>
               {i18n.t('label.login_description')}
             </Text>
@@ -65,18 +68,8 @@ export default class Login extends Component {
 
               <PrimaryButton
                 onClick={this.props.onPress}
-                buttonStyle={{
-                  width: 60,
-                  height: 20,
-                  borderWidth: 0,
-                  borderRadius: 0,
-                  padding: 0,
-                  margin: 0,
-                  alignSelf: 'center',
-                  position: 'absolute',
-                  right: 0
-                }}
-                textStyle={{ fontSize: 12 }}
+                buttonStyle={styles.loginButtonStyle}
+                textStyle={{ fontSize: 16 }}
               >
                 {i18n.t('label.login')}
               </PrimaryButton>

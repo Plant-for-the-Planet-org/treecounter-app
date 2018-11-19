@@ -24,7 +24,9 @@ EStyleSheet.build({
   $borderColor: '#aba2a2',
   $inputBorderColor: '#dad7d7',
   $backgroundScreen: '#f1f1f1',
-  $colorError: '#ff0033'
+  $colorError: '#ff0033',
+  $colorRedeemBorder: '#9fc356',
+  $colorRedeemInside: '#f5fbe8'
 });
 
 class AppDrawerNavigatorContainer extends Component {
@@ -53,7 +55,10 @@ class AppDrawerNavigatorContainer extends Component {
       return false;
     }
     if (this.props.progressModel === nextProps.progressModel) {
-      this._AppNavigator = getAppNavigator(nextState.isLoggedIn);
+      this._AppNavigator = getAppNavigator(
+        nextState.isLoggedIn,
+        nextProps.userProfile
+      );
     }
     return true;
   }
@@ -84,7 +89,10 @@ class AppDrawerNavigatorContainer extends Component {
   render() {
     if (!this.state.loading) {
       if (!this._AppNavigator) {
-        this._AppNavigator = getAppNavigator(this.state.isLoggedIn);
+        this._AppNavigator = getAppNavigator(
+          this.state.isLoggedIn,
+          this.props.userProfile
+        );
       }
 
       return (

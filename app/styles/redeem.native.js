@@ -35,12 +35,14 @@ export default (redeemStyles = EStyleSheet.create({
   imageStyle: {
     width: 59,
     height: 81,
-    margin: 15
+    margin: 15,
+    resizeMode: 'contain'
   },
   imageLoginStyle: {
     width: 50,
     height: 50,
-    margin: 25
+    margin: 25,
+    resizeMode: 'contain'
   },
   descriptionTextStyle: {
     color: '$textColor',

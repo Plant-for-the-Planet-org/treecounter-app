@@ -9,7 +9,8 @@ import {
   iosFaqs,
   ProfilePic,
   infoGrey,
-  editGrey
+  editGrey,
+  redeem_outline
 } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -97,7 +98,7 @@ export default class Menu extends Component {
                 });
               }}
               title={i18n.t('label.redeem_trees')}
-              iconUrl={iosFaqs}
+              iconUrl={redeem_outline}
             />
             <LargeMenuItem
               onPress={() => {

@@ -35,7 +35,11 @@ import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
+import RedemptionContainer from '../../containers/RedemptionContainer';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
+import ImprintContainer from '../../containers/Imprint';
+import PrivacyContainer from '../../containers/Privacy';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -43,6 +47,7 @@ const headerLabels = {
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_target')]: 'label.set_target',
   [getLocalRoute('app_donateTrees')]: 'label.donate',
+
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
@@ -51,11 +56,17 @@ const headerLabels = {
   [getLocalRoute('app_userHome')]: 'Me',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   [getLocalRoute('app_editProfile')]: 'label.edit_profile',
+  [getLocalRoute('app_redeem')]: 'label.redeem_trees',
+  [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
+  [getLocalRoute('app_selectProject')]: 'label.donate',
+  [getLocalRoute('app_imprint')]: 'label.imprint',
+  [getLocalRoute('app_privacy')]: 'label.data_protection',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license',
-  ['delete_profile_confirm']: 'label.delete_profile'
+  ['delete_profile_confirm']: 'label.delete_profile',
+  ['app_donate_detail']: 'label.donate'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -73,11 +84,12 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_login')]: {
         screen: LoginContainer
       },
-
+      [getLocalRoute('app_passwordSent')]: {
+        screen: EmailSentContainer
+      },
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
       },
-
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
       },
@@ -90,8 +102,21 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       ['about_us']: { screen: AboutUsContainer },
 
       ['license_info_list']: { screen: LicenseInfoList },
+
+      [getLocalRoute('app_imprint')]: {
+        screen: ImprintContainer
+      },
+      [getLocalRoute('app_privacy')]: {
+        screen: PrivacyContainer
+      },
+      [getLocalRoute('app_redeem')]: {
+        screen: RedemptionContainer
+      },
+      [getLocalRoute('app_claim')]: {
+        screen: RedemptionContainer
+      },
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
-      [getLocalRoute('app_donateTrees')]: {
+      ['app_donate_detail']: {
         screen: SelectPlantProjectContainer
       }
     },
@@ -182,6 +207,15 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
+      },
+      [getLocalRoute('app_selectProject')]: {
+        screen: SelectedPlantProject
+      },
+      [getLocalRoute('app_redeem')]: {
+        screen: RedemptionContainer
+      },
+      [getLocalRoute('app_claim')]: {
+        screen: RedemptionContainer
       },
       [getLocalRoute('app_homepage')]: {
         screen: Trillion

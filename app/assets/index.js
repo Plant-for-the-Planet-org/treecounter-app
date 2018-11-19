@@ -104,6 +104,8 @@ import redeem_outline_red from './images/icons/redeem_outline_red.png';
 import lightTree from './images/lightTree.png';
 import AppStoreLogo from './images/appstore-logo.png';
 import targetPlanted from './images/target.png';
+import infoGrey from './images/icons/info_grey.png';
+import editGrey from './images/icons/edit_grey.png';
 
 export {
   AppStoreLogo,
@@ -211,5 +213,7 @@ export {
   redeem_outline,
   redeem_outline_red,
   lightTree,
-  targetPlanted
+  targetPlanted,
+  infoGrey,
+  editGrey
 };

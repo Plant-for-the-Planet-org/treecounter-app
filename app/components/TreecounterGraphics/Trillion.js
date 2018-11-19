@@ -34,7 +34,7 @@ class Trillion extends Component {
             id: 1,
             target: data.countTarget,
             planted: data.countPlanted,
-            community: data.countCommunity,
+            community: data.countReceived,
             personal: data.countPersonal
           },
           displayName: data.displayName,

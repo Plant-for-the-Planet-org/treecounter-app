@@ -86,7 +86,7 @@ class TreecounterGraphicsText extends Component {
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(target))} */}
-                    {target.toLocaleString('en')}
+                    {target ? target.toLocaleString('en') : null}
                   </div>
                 ) : null}
               </span>

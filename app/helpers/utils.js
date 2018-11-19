@@ -133,3 +133,5 @@ export function getPlantProjectEnum(currentUserProfile) {
   }
   return undefined;
 }
+
+export const paymentFee = 0;

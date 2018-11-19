@@ -26,7 +26,7 @@ import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import i18n from '../../locales/i18n.js';
 import PaymentSelector from '../Payment/PaymentSelector';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
-
+import { paymentFee } from '../../helpers/utils';
 let TCombForm = t.form.Form;
 
 const pageHeadings = [
@@ -399,7 +399,7 @@ export default class DonateTrees extends Component {
                         rates={
                           currencies.currency_rates[plantProject.currency].rates
                         }
-                        fees={1}
+                        fees={paymentFee}
                         currencies={currencies.currency_names} // TODO: connect to data from API
                         selectedCurrency={this.determineDefaultCurrency()}
                         treeCountOptions={

@@ -16,6 +16,7 @@ import RecieptTabsView from './receiptTabs';
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 import PaymentSelector from '../Payment/PaymentSelector';
 import { ScrollView, View, Text } from 'react-native';
+import { paymentFee } from '../../helpers/utils';
 
 export default class DonateTrees extends Component {
   constructor(props) {
@@ -252,7 +253,7 @@ export default class DonateTrees extends Component {
                 rates={
                   currencies.currency_rates[selectedProject.currency].rates
                 }
-                fees={1}
+                fees={paymentFee}
                 showNextButton={true}
                 currencies={currencies.currency_names} // TODO: connect to data from API
                 selectedCurrency={this.determineDefaultCurrency()}

@@ -8,8 +8,8 @@ import {
   iosLogout,
   iosFaqs,
   ProfilePic,
-  iosInformation,
-  EditGreen
+  infoGrey,
+  editGrey
 } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -27,7 +27,7 @@ export default class Menu extends Component {
   //Ideally this should be in the container but for now to keep the same container for both web and app it's better to keep it here
   onPressMenu = item => {
     const { navigation } = this.props;
-    updateRoute(item.uri, navigation, 0);
+    updateRoute(item.uri, navigation, 0, item.params);
   };
   onPressUserProfile = () => {
     const { navigation } = this.props;
@@ -86,9 +86,19 @@ export default class Menu extends Component {
                   this.onPressMenu({ uri: getLocalRoute('app_editProfile') });
                 }}
                 title={i18n.t('label.edit_profile')}
-                iconUrl={EditGreen}
+                iconUrl={editGrey}
               />
             ) : null}
+            <LargeMenuItem
+              onPress={() => {
+                this.onPressMenu({
+                  uri: getLocalRoute('app_redeem'),
+                  params: { code: null }
+                });
+              }}
+              title={i18n.t('label.redeem_trees')}
+              iconUrl={iosFaqs}
+            />
             <LargeMenuItem
               onPress={() => {
                 this.onPressMenu({ uri: getLocalRoute('app_faq') });
@@ -113,8 +123,8 @@ export default class Menu extends Component {
           onPress={() => {
             this.onPressMenu({ uri: 'about_us' });
           }}
-          title={i18n.t('label.about_us')}
-          iconUrl={iosInformation}
+          title={i18n.t('label.information')}
+          iconUrl={infoGrey}
         />
       </SafeAreaView>
     );

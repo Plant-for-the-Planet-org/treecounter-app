@@ -1,6 +1,6 @@
 import { getLocalRoute } from '../../actions/apiRouting';
 
-export function updateRoute(routeName, navigation, id) {
+export function updateRoute(routeName, navigation, id, params) {
   let route = routeName;
   try {
     route = getLocalRoute(routeName);
@@ -11,7 +11,7 @@ export function updateRoute(routeName, navigation, id) {
   if (id === 0) {
     navigation.closeDrawer();
   }
-  navigation.navigate(route);
+  navigation.navigate(route, params);
 }
 
 export function updateStaticRoute(routeName, navigation, id) {

@@ -9,7 +9,8 @@ export default (buttonStyles = EStyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowColor: 'rgba(0, 0, 0, 0.1)',
     shadowRadius: 12,
-    margin: 10,
+    margin: 15,
+    marginTop: 10,
     padding: 10
   }
 }));

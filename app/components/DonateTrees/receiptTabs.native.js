@@ -18,6 +18,7 @@ import i18n from '../../locales/i18n.js';
 import CardLayout from '../../components/Common/Card';
 import styles from '../../styles/common/tabbar';
 import PropTypes from 'prop-types';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 let Form = t.form.Form;
 
@@ -90,7 +91,7 @@ export default class RecieptTabsView extends Component {
     switch (route.key) {
       case 'individual':
         return (
-          <ScrollView>
+          <KeyboardAwareScrollView>
             <CardLayout style={{ padding: 10 }}>
               <Form
                 ref={this.setIndividualDonateReceipt}
@@ -104,11 +105,11 @@ export default class RecieptTabsView extends Component {
                 </PrimaryButton>
               ) : null}
             </CardLayout>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         );
       case 'company':
         return (
-          <ScrollView>
+          <KeyboardAwareScrollView>
             <CardLayout style={{ padding: 10 }}>
               <Form
                 ref={this.setCompanyDonateReceipt}
@@ -122,7 +123,7 @@ export default class RecieptTabsView extends Component {
                 </PrimaryButton>
               ) : null}
             </CardLayout>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         );
       default:
         return null;

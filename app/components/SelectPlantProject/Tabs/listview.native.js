@@ -35,6 +35,7 @@ export default class ListViewProjects extends Component {
                 <TouchableHighlight
                   underlayColor={'transparent'}
                   onPress={() => this.highLightProject(project.id)}
+                  key={project.id}
                 >
                   <View
                     style={styles.listItemContainer}

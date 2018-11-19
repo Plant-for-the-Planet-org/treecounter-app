@@ -79,12 +79,12 @@ export function reset_password(data, navigation = undefined) {
       .catch(err => debug(err));
   };
 }
-export function setAccessDenied(data, params, path) {
+export function setAccessDenied(data, params, path, navigation = undefined) {
   return dispatch => {
     postRequest('public_accessDenied', data, params)
       .then(res => {
         const { statusText } = res;
-        updateRoute(path, dispatch);
+        updateRoute(path, navigation || dispatch);
         // NotificationManager.success(statusText, 'Success', 5000);
       })
       .catch(error => {

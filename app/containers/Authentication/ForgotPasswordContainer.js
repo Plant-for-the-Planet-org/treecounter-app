@@ -21,7 +21,7 @@ class ForgotPasswordContainer extends React.Component {
   };
 
   onClick(value) {
-    this.props.forgot_password(value);
+    this.props.forgot_password(value, this.props.navigation);
   }
 
   render() {

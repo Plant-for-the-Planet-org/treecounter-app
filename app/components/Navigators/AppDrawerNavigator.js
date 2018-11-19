@@ -37,6 +37,7 @@ import ActivateAccountContainer from '../../containers/Authentication/ActivateAc
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
 import RedemptionContainer from '../../containers/RedemptionContainer';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ImprintContainer from '../../containers/Imprint';
 import PrivacyContainer from '../../containers/Privacy';
 
@@ -80,11 +81,12 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_login')]: {
         screen: LoginContainer
       },
-
+      [getLocalRoute('app_passwordSent')]: {
+        screen: EmailSentContainer
+      },
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
       },
-
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
       },

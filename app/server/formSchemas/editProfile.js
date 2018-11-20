@@ -1418,7 +1418,8 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
-            propertyOrder: 1
+            propertyOrder: 1,
+            widget: 'password'
           },
           password: {
             title: 'password',
@@ -2118,7 +2119,8 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
-            propertyOrder: 1
+            propertyOrder: 1,
+            widget: 'password'
           },
           password: {
             title: 'password',
@@ -2818,7 +2820,8 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
-            propertyOrder: 1
+            propertyOrder: 1,
+            widget: 'password'
           },
           password: {
             title: 'password',

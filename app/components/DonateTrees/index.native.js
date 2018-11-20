@@ -8,8 +8,8 @@ import i18n from '../../locales/i18n.js';
 import RecieptTabsView from './receiptTabs';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
-import PaymentSelector from '../Payment/PaymentSelector';
-import { View, Text } from 'react-native';
+// import PaymentSelector from '../Payment/PaymentSelector';
+import { View, Text, Alert } from 'react-native';
 import { paymentFee } from '../../helpers/utils';
 
 export default class DonateTrees extends Component {
@@ -40,8 +40,8 @@ export default class DonateTrees extends Component {
       routes: [
         // { key: 'selectPlant', title: 'Select Plant' },
         { key: 'currency', title: 'Donation Details' },
-        { key: 'recipient', title: 'Donor Details' },
-        { key: 'payments', title: 'Payments' }
+        { key: 'recipient', title: 'Donor Details' }
+        // { key: 'payments', title: 'Payments' }
       ]
     };
 
@@ -123,7 +123,12 @@ export default class DonateTrees extends Component {
           ...receipt
         }
       });
-      this._handleIndexChange(2);
+      Alert.alert(
+        'Payments Link Sent',
+        'Payment Link sent to your mail',
+        [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
+        { cancelable: false }
+      );
     } else {
       // Do nothing
     }
@@ -272,39 +277,39 @@ export default class DonateTrees extends Component {
         : null;
     }
     {
-      route.key === 'payments' && selectedProject
-        ? (screenToShow = (
-            <PaymentSelector
-              paymentMethods={paymentMethods}
-              accounts={selectedProject.paymentSetup.accounts}
-              stripePublishableKey={
-                selectedProject.paymentSetup.stripePublishableKey
-              }
-              setProgressModelState={this.props.setProgressModelState}
-              amount={this.state.selectedAmount}
-              currency={this.state.selectedCurrency}
-              expandedOption={this.state.expandedOption}
-              handleExpandedClicked={this.handleExpandedClicked}
-              paymentStatus={this.props.paymentStatus}
-              paymentClear={this.props.paymentClear}
-              context={{
-                tpoName: this.props.selectedTpo.name,
-                donorEmail: email,
-                donorName: name,
-                treeCount: this.state.selectedTreeCount
-              }}
-              onSuccess={paymentResponse =>
-                this.handlePaymentApproved(paymentResponse)
-              }
-              onFailure={data =>
-                console.log('/////////////////// payment failure ', data)
-              }
-              onError={data =>
-                console.log('/////////////////// payment error ', data)
-              }
-            />
-          ))
-        : null;
+      // route.key === 'payments' && selectedProject
+      //   ? (screenToShow = (
+      //       <PaymentSelector
+      //         paymentMethods={paymentMethods}
+      //         accounts={selectedProject.paymentSetup.accounts}
+      //         stripePublishableKey={
+      //           selectedProject.paymentSetup.stripePublishableKey
+      //         }
+      //         setProgressModelState={this.props.setProgressModelState}
+      //         amount={this.state.selectedAmount}
+      //         currency={this.state.selectedCurrency}
+      //         expandedOption={this.state.expandedOption}
+      //         handleExpandedClicked={this.handleExpandedClicked}
+      //         paymentStatus={this.props.paymentStatus}
+      //         paymentClear={this.props.paymentClear}
+      //         context={{
+      //           tpoName: this.props.selectedTpo.name,
+      //           donorEmail: email,
+      //           donorName: name,
+      //           treeCount: this.state.selectedTreeCount
+      //         }}
+      //         onSuccess={paymentResponse =>
+      //           this.handlePaymentApproved(paymentResponse)
+      //         }
+      //         onFailure={data =>
+      //           console.log('/////////////////// payment failure ', data)
+      //         }
+      //         onError={data =>
+      //           console.log('/////////////////// payment error ', data)
+      //         }
+      //       />
+      //     ))
+      //   : null;
     }
     return screenToShow;
   };

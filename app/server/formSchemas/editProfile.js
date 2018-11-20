@@ -620,13 +620,11 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
-            widget: 'textarea',
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
-            widget: 'textarea',
             propertyOrder: 2
           },
           synopsis1: {
@@ -1381,13 +1379,11 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
-            widget: 'textarea',
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
-            widget: 'textarea',
             propertyOrder: 2
           },
           synopsis1: {
@@ -2082,13 +2078,11 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
-            widget: 'textarea',
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
-            widget: 'textarea',
             propertyOrder: 2
           },
           synopsis1: {
@@ -2783,13 +2777,11 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
-            widget: 'textarea',
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
-            widget: 'textarea',
             propertyOrder: 2
           },
           synopsis1: {
@@ -3484,13 +3476,11 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
-            widget: 'textarea',
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
-            widget: 'textarea',
             propertyOrder: 2
           },
           synopsis1: {
@@ -4184,13 +4174,11 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
-            widget: 'textarea',
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
-            widget: 'textarea',
             propertyOrder: 2
           },
           synopsis1: {

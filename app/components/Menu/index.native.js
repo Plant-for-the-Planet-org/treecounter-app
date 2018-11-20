@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, Image, ScrollView, SafeAreaView, Text } from 'react-native';
+import {
+  View,
+  Image,
+  ScrollView,
+  SafeAreaView,
+  Text,
+  Linking
+} from 'react-native';
 import { LargeMenuItem } from './MenuItem.native';
 import PropTypes, { func } from 'prop-types';
 import styles from '../../styles/menu.native';
@@ -22,6 +29,38 @@ export default class Menu extends Component {
     menuData: PropTypes.array.isRequired,
     onPress: PropTypes.func,
     userProfile: PropTypes.any
+  };
+
+  componentDidMount() {
+    Linking.getInitialURL()
+      .then(url => {
+        if (url) {
+          this.resetStackToProperRoute(url);
+        }
+      })
+      .catch(e => {});
+
+    // This listener handles the case where the app is woken up from the Universal or Deep Linking
+    Linking.addEventListener('url', this.appWokeUp);
+  }
+
+  componentWillUnmount() {
+    // Remove the listener
+    Linking.removeEventListener('url', this.appWokeUp);
+  }
+
+  appWokeUp = event => {
+    // this handles the use case where the app is running in the background and is activated by the listener...
+    // Alert.alert(‘Linking Listener’,‘url  ’ + event.url)
+    this.resetStackToProperRoute(event.url);
+  };
+
+  resetStackToProperRoute = url => {
+    // Do Whatever you need to do within your app to redirect users to the proper route
+    let urlBreak = url.split('/');
+    console.log(urlBreak);
+    const { navigation } = this.props;
+    updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0);
   };
 
   //TODO hkurra

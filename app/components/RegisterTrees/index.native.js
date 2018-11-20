@@ -14,6 +14,8 @@ import { renderFilledTabBar } from '../Common/Tabs';
 import RegisterTreeTab from './RegisterTreeTab.native';
 import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
 import { getPlantProjectEnum } from '../../helpers/utils';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 export default class RegisterTrees extends Component {
   constructor() {
     super();
@@ -82,7 +84,7 @@ export default class RegisterTrees extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <KeyboardAwareScrollView>
         <CardLayout style={{ flex: 1 }}>
           <TabView
             useNativeDriver={true}
@@ -93,7 +95,7 @@ export default class RegisterTrees extends Component {
             onIndexChange={this._handleIndexChange}
           />
         </CardLayout>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }

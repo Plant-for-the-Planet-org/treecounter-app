@@ -20,6 +20,7 @@ import { ScrollView, View, Image, TextInput, Text } from 'react-native';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { updateRoute } from '../../helpers/routerHelper';
 let TCombForm = t.form.Form;
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 // const allSchemaOptions = {
 //   template: formLayout,
@@ -220,7 +221,7 @@ export default class Redemption extends Component {
         <LoadingIndicator />
       </View>
     ) : (
-      <ScrollView>
+      <KeyboardAwareScrollView>
         <View style={styles.parentContainer}>
           <View style={styles.headerContainer}>
             <Text style={styles.titleText}>
@@ -248,7 +249,7 @@ export default class Redemption extends Component {
 
         {/*</View>*/}
         {/*</View>*/}
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }

@@ -33,7 +33,9 @@ class PlantProjectDetails extends React.Component {
           onPress={() => this._goToURL()}
         >
           <Image source={link} style={styles.linkIcon} />
-          <Text style={styles.linkText}>{this.props.linkText}</Text>
+          <Text style={styles.linkText}>
+            {this.props.linkText ? this.props.linkText : 'Link'}
+          </Text>
         </TouchableItem>
 
         <View style={styles.videoContainer}>

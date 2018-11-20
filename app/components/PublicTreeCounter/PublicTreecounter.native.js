@@ -59,7 +59,7 @@ class PublicTreeCounter extends React.Component {
         id: treecounter.id,
         target: treecounter.countTarget,
         planted: treecounter.countPlanted,
-        community: treecounter.countCommunity,
+        community: treecounter.countReceived,
         personal: treecounter.countPersonal,
         targetComment: treecounter.targetComment,
         targetYear: treecounter.targetYear,
@@ -73,9 +73,9 @@ class PublicTreeCounter extends React.Component {
       const treecounter = this.props.treecounter;
       let svgData = {
         id: treecounter.id,
-        target: treecounter.countCommunity + treecounter.countPersonal, // light color
+        target: treecounter.countReceived + treecounter.countPersonal, // light color
         planted: treecounter.countPersonal, //dark color
-        community: treecounter.countCommunity,
+        community: treecounter.countReceived,
         personal: treecounter.countPersonal,
         targetComment: treecounter.targetComment,
         targetYear: treecounter.targetYear,
@@ -88,7 +88,7 @@ class PublicTreeCounter extends React.Component {
         id: treecounter.id,
         target: treecounter.countTarget,
         planted: treecounter.countPlanted,
-        community: treecounter.countCommunity,
+        community: treecounter.countReceived,
         personal: treecounter.countPersonal,
         targetComment: treecounter.targetComment,
         targetYear: treecounter.targetYear,

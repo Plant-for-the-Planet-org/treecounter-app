@@ -3,8 +3,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default (buttonStyles = EStyleSheet.create({
   primaryButton: {
     height: 50,
-    backgroundColor: '$primary',
-    borderColor: '$primary',
+    backgroundColor: '#a4c65e',
+    borderColor: '#a4c65e',
     borderWidth: 1,
     borderRadius: 6,
     padding: 10,

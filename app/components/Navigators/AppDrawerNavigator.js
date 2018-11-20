@@ -23,6 +23,7 @@ import UserContributions from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout.native';
 import AboutUsContainer from '../../containers/AboutUs';
+import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal.native';
 import LicenseInfoList from '../AboutUs/LicenseInfoList.native';
 import TabContainer from '../../containers/Menu/TabContainer';
 import GiftTrees from '../../containers/GiftTrees';
@@ -34,6 +35,11 @@ import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
+import RedemptionContainer from '../../containers/RedemptionContainer';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
+import ImprintContainer from '../../containers/Imprint';
+import PrivacyContainer from '../../containers/Privacy';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -41,6 +47,7 @@ const headerLabels = {
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_target')]: 'label.set_target',
   [getLocalRoute('app_donateTrees')]: 'label.donate',
+
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
@@ -49,13 +56,20 @@ const headerLabels = {
   [getLocalRoute('app_userHome')]: 'Me',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   [getLocalRoute('app_editProfile')]: 'label.edit_profile',
+  [getLocalRoute('app_redeem')]: 'label.redeem_trees',
+  [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
+  [getLocalRoute('app_selectProject')]: 'label.donate',
+  [getLocalRoute('app_imprint')]: 'label.imprint',
+  [getLocalRoute('app_privacy')]: 'label.data_protection',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
-  ['license_info_list']: 'label.open_source_license'
+  ['license_info_list']: 'label.open_source_license',
+  ['delete_profile_confirm']: 'label.delete_profile',
+  ['app_donate_detail']: 'label.donate'
 };
 
-export const getAppNavigator = function(isLoggedIn) {
+export const getAppNavigator = function(isLoggedIn, userProfile) {
   const baseNavigator = createStackNavigator(
     {
       [getLocalRoute('app_registerTrees')]: {
@@ -70,11 +84,12 @@ export const getAppNavigator = function(isLoggedIn) {
       [getLocalRoute('app_login')]: {
         screen: LoginContainer
       },
-
+      [getLocalRoute('app_passwordSent')]: {
+        screen: EmailSentContainer
+      },
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
       },
-
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
       },
@@ -87,10 +102,22 @@ export const getAppNavigator = function(isLoggedIn) {
       ['about_us']: { screen: AboutUsContainer },
 
       ['license_info_list']: { screen: LicenseInfoList },
-      [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
 
-      [getLocalRoute('app_donateTrees')]: {
-        screen: DonationTreesContainer
+      [getLocalRoute('app_imprint')]: {
+        screen: ImprintContainer
+      },
+      [getLocalRoute('app_privacy')]: {
+        screen: PrivacyContainer
+      },
+      [getLocalRoute('app_redeem')]: {
+        screen: RedemptionContainer
+      },
+      [getLocalRoute('app_claim')]: {
+        screen: RedemptionContainer
+      },
+      [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
+      ['app_donate_detail']: {
+        screen: SelectPlantProjectContainer
       }
     },
     {
@@ -105,6 +132,23 @@ export const getAppNavigator = function(isLoggedIn) {
       Search: {
         screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />
       }
+    },
+    {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
+  const deleteProfileNavigator = createStackNavigator(
+    {
+      ['delete_profile_confirm']: { screen: ConfirmProfileDeletionModal }
     },
     {
       headerMode: 'none',
@@ -158,17 +202,24 @@ export const getAppNavigator = function(isLoggedIn) {
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
       },
-
       [getLocalRoute('app_myTrees')]: {
         screen: isLoggedIn ? UserContributions : LoginContainer
       },
       [getLocalRoute('app_donateTrees')]: {
-        screen: DonationTreesContainer
+        screen: SelectPlantProjectContainer
+      },
+      [getLocalRoute('app_selectProject')]: {
+        screen: SelectedPlantProject
+      },
+      [getLocalRoute('app_redeem')]: {
+        screen: RedemptionContainer
+      },
+      [getLocalRoute('app_claim')]: {
+        screen: RedemptionContainer
       },
       [getLocalRoute('app_homepage')]: {
         screen: Trillion
       },
-
       [getLocalRoute('app_giftTrees')]: {
         screen: GiftTrees
       },
@@ -199,6 +250,9 @@ export const getAppNavigator = function(isLoggedIn) {
       Base: baseNavigator,
       [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
+      },
+      ['app_donate_detail']: {
+        screen: DonationTreesContainer
       }
     },
     {
@@ -219,7 +273,7 @@ export const getAppNavigator = function(isLoggedIn) {
         //     !isLoggedIn)
         // ) {
         if (navigation.state.routeName === 'Tab') {
-          navigationConfig.headerLeft = BurgerMenu(navigation);
+          navigationConfig.headerLeft = BurgerMenu(navigation, userProfile);
         }
         return navigationConfig;
       }
@@ -229,7 +283,8 @@ export const getAppNavigator = function(isLoggedIn) {
   const AppNavigator = createDrawerNavigator(
     {
       appStackNavigator,
-      searchNavigator: searchNavigator
+      searchNavigator: searchNavigator,
+      deleteProfileNavigator
     },
     {
       initialRouteName: 'appStackNavigator',

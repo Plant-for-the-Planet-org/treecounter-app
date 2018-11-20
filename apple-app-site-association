@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "UYRJ8SA699.org.reactjs.native.example.TreecounterApp",
+                "paths": [ "*" ]
+            }
+        ]
+    }
+}

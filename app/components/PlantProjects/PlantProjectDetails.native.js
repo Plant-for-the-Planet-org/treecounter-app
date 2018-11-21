@@ -27,16 +27,18 @@ class PlantProjectDetails extends React.Component {
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>{this.props.description}</Text>
         </View>
+        {this.props.url && (
+          <TouchableItem
+            style={styles.linkTextContainer}
+            onPress={() => this._goToURL()}
+          >
+            <Image source={link} style={styles.linkIcon} />
 
-        <TouchableItem
-          style={styles.linkTextContainer}
-          onPress={() => this._goToURL()}
-        >
-          <Image source={link} style={styles.linkIcon} />
-          <Text style={styles.linkText}>
-            {this.props.linkText ? this.props.linkText : 'Link'}
-          </Text>
-        </TouchableItem>
+            <Text style={styles.linkText}>
+              {this.props.linkText ? this.props.linkText : 'Link'}
+            </Text>
+          </TouchableItem>
+        )}
 
         <View style={styles.videoContainer}>
           <VideoContainer url={vUrl} />;

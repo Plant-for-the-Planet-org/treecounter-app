@@ -14,7 +14,7 @@ class SignUpContainer extends React.Component {
   }
 
   onClick(profileType, value) {
-    this.props.signUp(profileType, value);
+    this.props.signUp(profileType, value, this.props.navigation);
   }
 
   onSignUpClicked = profileType => {

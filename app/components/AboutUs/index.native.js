@@ -17,7 +17,7 @@ class AboutUs extends Component {
       <ScrollView>
         <LargeMenuItem
           onPress={() => {
-            console.log('open change log');
+            //  console.log('open change log');
           }}
           title={version}
         />
@@ -35,7 +35,7 @@ class AboutUs extends Component {
         />
         <LargeMenuItem
           onPress={() => {
-            console.log('open Third party here');
+            // console.log('open Third party here');
             this.props.navigation.navigate('license_info_list', {
               licenseList: LicenseInfo
             });

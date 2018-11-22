@@ -36,14 +36,7 @@ export default class TouchableItem extends React.Component {
       const { style, onPress, ...rest } = this.props;
       return (
         <TouchableNativeFeedback
-          onPress={
-            onPress
-              ? () =>
-                  requestAnimationFrame(() => {
-                    onPress();
-                  })
-              : null
-          }
+          onPress={onPress}
           {...rest}
           style={null}
           background={TouchableNativeFeedback.Ripple(

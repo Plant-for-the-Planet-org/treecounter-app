@@ -30,7 +30,7 @@ export default class Trillion extends Component {
           loading: false
         });
       })
-      .catch(error => console.log(error));
+      .catch(error => error);
   }
 
   render() {

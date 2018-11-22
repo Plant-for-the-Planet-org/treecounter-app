@@ -53,7 +53,7 @@ class ContributionCard extends React.Component {
     </View>
   );
   _renderContent(section) {
-    console.log('section', section);
+    //console.log('section', section);
     const measurementsAvailable =
       section.contributionMeasurements &&
       section.contributionMeasurements.length > 0;
@@ -183,13 +183,13 @@ class ContributionCard extends React.Component {
           </View>
           <View style={styles.actionBar}>
             <ActionButton
-              onPress={() => console.log('click action button')}
+              onPress={() => null}
               text={i18n.t('label.map')}
               image={MapPinRed}
             />
             <ActionButton
               onPress={() => {
-                console.log('click update button');
+                //console.log('click update button');
                 this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
                   selectedTreeId: contribution.id,
                   contribution

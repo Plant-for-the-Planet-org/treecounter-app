@@ -42,7 +42,7 @@ export default class RegisterTrees extends Component {
   _handleIndexChange = index => this.setState({ index });
 
   handleGeoLocationChange(geoLocation) {
-    console.log(geoLocation);
+    //console.log(geoLocation);
   }
 
   _renderTabBar = props => {

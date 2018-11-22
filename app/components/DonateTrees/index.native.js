@@ -9,8 +9,10 @@ import RecieptTabsView from './receiptTabs';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 // import PaymentSelector from '../Payment/PaymentSelector';
-import { View, Text, Alert } from 'react-native';
+import { View, Text, Alert, Linking } from 'react-native';
 import { paymentFee } from '../../helpers/utils';
+import { getLocalRoute } from '../../actions/apiRouting';
+import { context } from '../../config';
 
 export default class DonateTrees extends Component {
   constructor(props) {
@@ -60,6 +62,14 @@ export default class DonateTrees extends Component {
   componentDidMount() {
     const { navigation } = this.props;
     this.props.onTabChange(this.state.routes[0].title);
+    Linking.getInitialURL()
+      .then(url => {
+        if (url) {
+          this.handleOpenURL(url);
+        }
+      })
+      .catch(err => {});
+    Linking.addEventListener('url', this.handleOpenURL);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -77,7 +87,33 @@ export default class DonateTrees extends Component {
         this.setState({ selectedTreeCount: nextTreeCount });
       }
     }
+    if (nextProps.paymentStatus && nextProps.paymentStatus.token) {
+      this.openGateWay(
+        getLocalRoute('app_payment', {
+          donationContribution: nextProps.paymentStatus.token
+        })
+      );
+    }
   }
+
+  handleOpenURL = url => {
+    if (url === 'paymentSuccess') {
+      this.props.loadUserProfile();
+    } else {
+      // handle failure
+    }
+  };
+
+  // open your gateway
+  openGateWay = async url => {
+    url = 'localhost:8080' + url;
+    const canOpen = await Linking.canOpenURL(url);
+    if (canOpen) {
+      Linking.openURL(url).catch(err =>
+        console.error('An error occurred', err)
+      );
+    }
+  };
 
   getFees() {
     const directCurrencies = this.state.countryCurrencies.map(
@@ -117,17 +153,14 @@ export default class DonateTrees extends Component {
       } else {
         receipt['receiptCompany'] = value;
       }
-      this.setState({
-        form: {
-          ...this.state.form,
-          ...receipt
-        }
-      });
-      Alert.alert(
-        'Payments Link Sent',
-        'Payment Link sent to your mail',
-        [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
-        { cancelable: false }
+      this.setState(
+        {
+          form: {
+            ...this.state.form,
+            ...receipt
+          }
+        },
+        this.handlePaymentApproved
       );
     } else {
       // Do nothing
@@ -170,6 +203,7 @@ export default class DonateTrees extends Component {
 
   componentWillUnmount() {
     this.props.paymentClear();
+    Linking.removeEventListener('url', this.handleOpenURL);
   }
   _renderTabBar = props => {
     return renderDottedTabbar(
@@ -330,7 +364,7 @@ export default class DonateTrees extends Component {
     return true;
   };
 
-  handlePaymentApproved(paymentResponse) {
+  handlePaymentApproved() {
     let sendState = { ...this.state.form };
     if (this.props.supportTreecounter.treecounterId) {
       sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
@@ -338,7 +372,12 @@ export default class DonateTrees extends Component {
     this.props.donate(
       {
         ...this.state.form,
-        paymentResponse,
+        paymentResponse: {
+          gateway: 'offline',
+          accountName: 'offline_US',
+          isConfirmed: true,
+          confirmation: 'iOS referred payment'
+        },
         amount: this.state.selectedAmount,
         currency: this.state.selectedCurrency
       },
@@ -371,5 +410,6 @@ DonateTrees.propTypes = {
   paymentStatus: PropTypes.object,
   plantProjectClear: PropTypes.func,
   onTabChange: PropTypes.func,
-  setProgressModelState: PropTypes.func
+  setProgressModelState: PropTypes.func,
+  loadUserProfile: PropTypes.func
 };

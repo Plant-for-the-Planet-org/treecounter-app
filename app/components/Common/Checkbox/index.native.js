@@ -15,7 +15,7 @@ class CheckBox extends React.Component {
     width: 20,
     height: 20,
     marginRight: 10,
-    resizeMode: 'center'
+    resizeMode: 'contain'
   };
 
   textboxStyle = {

@@ -26,7 +26,9 @@ class PlantProjectFull extends React.Component {
       homepageCaption: homepageCaption,
       videoUrl: videoUrl,
       geoLocation,
-      plantProjectImages
+      plantProjectImages,
+      url,
+      linkText
     } = this.props.plantProject;
 
     const detailsProps = {
@@ -36,7 +38,9 @@ class PlantProjectFull extends React.Component {
       homepageCaption,
       videoUrl,
       mapData: queryParamsToObject(geoLocation),
-      plantProjectImages
+      plantProjectImages,
+      url,
+      linkText
     };
     return (
       <ScrollView>

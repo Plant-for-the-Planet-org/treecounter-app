@@ -72,7 +72,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectdetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: rowHeight * 2,
+    height: rowHeight * 2 + 6,
     padding: 5
   },
   locationContainer: {
@@ -86,21 +86,33 @@ export default (selectplantprojectFull = EStyleSheet.create({
     paddingLeft: 5
   },
   project_teaser__contentText: {
-    fontSize: 16
+    fontSize: 16,
+    color: '$cardTextColor'
+  },
+  byOrgContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end'
+  },
+  byOrgText: {
+    fontSize: 16,
+    color: '$cardTextColor'
   },
   locationText: {
-    fontSize: 12,
+    fontSize: 10,
     color: '$textColor',
     fontStyle: 'italic',
-    paddingBottom: 2
+    paddingBottom: 2,
+    color: '$cardTextColor'
   },
   survivalText: {
-    fontSize: 13,
-    color: '$textColor',
-    paddingTop: 3
+    fontSize: 12,
+    paddingTop: 3,
+    paddingBottom: 8,
+    color: '$cardTextColor'
   },
   costText: {
-    fontSize: 20
+    fontSize: 18,
+    color: '$cardTextColor'
   },
   buttonContainer: {
     flexDirection: 'row'

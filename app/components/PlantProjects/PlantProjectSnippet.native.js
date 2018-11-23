@@ -152,10 +152,12 @@ class PlantProjectSnippet extends React.Component {
             <View style={styles.projectdetailsContainer}>
               <View style={styles.locationContainer}>
                 <Text style={styles.locationText}>{specsProps.location}</Text>
-                <Text style={styles.survivalText}>
-                  {i18n.t('label.survival_rate')} {':'}{' '}
-                  {specsProps.survivalRate}%
-                </Text>
+                <View style={{ paddingTop: 3, paddingBottom: 3 }}>
+                  <Text style={styles.survivalText}>
+                    {i18n.t('label.survival_rate')} {':'}{' '}
+                    {specsProps.survivalRate}%
+                  </Text>
+                </View>
               </View>
 
               <View style={styles.costContainer}>
@@ -165,7 +167,7 @@ class PlantProjectSnippet extends React.Component {
 
             <View style={styles.actionContainer}>
               <View style={styles.byOrgContainer}>
-                <Text>{teaserProps.tpoName}</Text>
+                <Text style={styles.byOrgText}>{teaserProps.tpoName}</Text>
               </View>
 
               <View style={styles.buttonContainer}>

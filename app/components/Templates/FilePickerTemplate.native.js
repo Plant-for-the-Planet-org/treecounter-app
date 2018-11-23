@@ -22,14 +22,14 @@ export function FilePickerTemplate(locals) {
       <TouchableOpacity
         onPress={event => {
           ImagePicker.showImagePicker(options, response => {
-            console.log('Response = ', response);
+            //console.log('Response = ', response);
 
             if (response.didCancel) {
-              console.log('User cancelled image picker');
+              //console.log('User cancelled image picker');
             } else if (response.error) {
-              console.log('ImagePicker Error: ', response.error);
+              // console.log('ImagePicker Error: ', response.error);
             } else if (response.customButton) {
-              console.log('User tapped custom button: ', response.customButton);
+              // console.log('User tapped custom button: ', response.customButton);
             } else {
               let source = { uri: response.uri };
               locals.onChange('data:image/jpeg;base64,' + response.data);

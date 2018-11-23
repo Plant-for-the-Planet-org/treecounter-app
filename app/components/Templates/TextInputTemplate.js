@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '../../locales/i18n';
 import { formatDate } from '../../helpers/utils';
-
+import { getLocale } from '../../actions/getLocale';
 export function TextInputTemplate(locals) {
   const locale = getLocale();
   function onChange($event) {

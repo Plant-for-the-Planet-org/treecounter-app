@@ -24,6 +24,7 @@ import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout.native';
 import AboutUsContainer from '../../containers/AboutUs';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal.native';
+import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal.native';
 import LicenseInfoList from '../AboutUs/LicenseInfoList.native';
 import TabContainer from '../../containers/Menu/TabContainer';
 import GiftTrees from '../../containers/GiftTrees';
@@ -69,7 +70,11 @@ const headerLabels = {
   ['app_donate_detail']: 'label.donate'
 };
 
-export const getAppNavigator = function(isLoggedIn, userProfile) {
+export const getAppNavigator = function(
+  isLoggedIn,
+  userProfile,
+  isWelcomeScreenEnabled = false
+) {
   const baseNavigator = createStackNavigator(
     {
       [getLocalRoute('app_registerTrees')]: {
@@ -149,6 +154,23 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
   const deleteProfileNavigator = createStackNavigator(
     {
       ['delete_profile_confirm']: { screen: ConfirmProfileDeletionModal }
+    },
+    {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
+  const welcomeScreenNavigator = createStackNavigator(
+    {
+      ['welcome_screen']: { screen: WelcomeScreenModal }
     },
     {
       headerMode: 'none',
@@ -284,10 +306,13 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     {
       appStackNavigator,
       searchNavigator: searchNavigator,
-      deleteProfileNavigator
+      deleteProfileNavigator,
+      welcomeScreenNavigator
     },
     {
-      initialRouteName: 'appStackNavigator',
+      initialRouteName: isWelcomeScreenEnabled
+        ? 'welcomeScreenNavigator'
+        : 'appStackNavigator',
       gesturesEnabled: false,
       contentComponent: SideMenuContainer
     }

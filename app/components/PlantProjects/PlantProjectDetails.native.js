@@ -1,17 +1,20 @@
 import PropTypes from 'prop-types';
 
 import { context } from '../../../app/config/index';
-import { View, Text } from 'react-native';
+import { View, Text, Linking, Image } from 'react-native';
 import VideoContainer from '../../components/Common/VideoContainer';
 import React from 'react';
 import PlantProjectImageCarousel from './PlantProjectImageCarousel';
-
+import styles from '../../styles/selectplantproject/plant-details.native';
+import { link } from '../../assets';
+import TouchableItem from '../../components/Common/TouchableItem';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectDetails
  */
 class PlantProjectDetails extends React.Component {
   constructor(props) {
     super(props);
+    this._goToURL = this._goToURL.bind(this);
   }
   render() {
     let vUrl = this.props.videoUrl;
@@ -19,27 +22,40 @@ class PlantProjectDetails extends React.Component {
       vUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
     }
     return (
-      <View style={{ flexDirection: 'column' }}>
+      <View style={styles.carousalContainer}>
         <PlantProjectImageCarousel images={this.props.plantProjectImages} />
-        <View
-          style={{
-            paddingTop: 20
-          }}
-        >
-          <Text
-            style={{
-              textAlign: 'justify',
-              color: '#686060'
-            }}
-          >
-            {this.props.description}
-          </Text>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.descriptionText}>{this.props.description}</Text>
         </View>
-        <View style={{ paddingTop: 20 }}>
+        {this.props.url && (
+          <TouchableItem
+            style={styles.linkTextContainer}
+            onPress={() => this._goToURL()}
+          >
+            <Image source={link} style={styles.linkIcon} />
+
+            <Text style={styles.linkText}>
+              {this.props.linkText ? this.props.linkText : 'Link'}
+            </Text>
+          </TouchableItem>
+        )}
+
+        <View style={styles.videoContainer}>
           <VideoContainer url={vUrl} />;
         </View>
       </View>
     );
+  }
+
+  _goToURL() {
+    const { url } = this.props;
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log("Don't know how to open URI: " + url);
+      }
+    });
   }
 }
 

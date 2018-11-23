@@ -53,7 +53,7 @@ const headerLabels = {
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
   [getLocalRoute('app_homepage')]: 'World',
   [getLocalRoute('app_explore')]: 'label.explore',
-  [getLocalRoute('app_userHome')]: 'Me',
+  [getLocalRoute('app_userHome')]: 'Trillion Tree Campaign',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   [getLocalRoute('app_editProfile')]: 'label.edit_profile',
   [getLocalRoute('app_redeem')]: 'label.redeem_trees',

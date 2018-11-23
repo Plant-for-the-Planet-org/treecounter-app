@@ -4,9 +4,15 @@ import { View } from 'react-native';
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
 import svgStyles from '../../styles/common/treecounter_svg';
-import { userTreecounterDataSelector } from '../../selectors';
+import {
+  pledgeEventSelector,
+  userTreecounterDataSelector
+} from '../../selectors';
+import LoadingIndicator from '../Common/LoadingIndicator';
+import connect from 'react-redux/es/connect/connect';
+import PropTypes from 'prop-types';
 
-export default class Trillion extends Component {
+class Trillion extends Component {
   constructor() {
     super();
     this.state = {
@@ -32,9 +38,13 @@ export default class Trillion extends Component {
       })
       .catch(error => console.log(error));
   }
-
+  shouldComponentUpdate() {
+    return true;
+  }
   render() {
-    return (
+    return this.state.loading ? (
+      <LoadingIndicator />
+    ) : (
       <View>
         <View style={svgStyles.svgContainer}>
           <SvgContainer {...this.state.svgData} trillion={true} />
@@ -43,3 +53,13 @@ export default class Trillion extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  pledgeEvents: pledgeEventSelector(state)
+});
+
+export default connect(mapStateToProps)(Trillion);
+
+Trillion.propTypes = {
+  pledgeEvents: PropTypes.object
+};

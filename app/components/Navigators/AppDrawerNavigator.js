@@ -52,7 +52,7 @@ const headerLabels = {
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
   [getLocalRoute('app_homepage')]: 'World',
-  [getLocalRoute('app_explore')]: 'label.explore',
+  [getLocalRoute('app_explore')]: 'World',
   [getLocalRoute('app_userHome')]: 'Me',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   [getLocalRoute('app_editProfile')]: 'label.edit_profile',
@@ -72,9 +72,6 @@ const headerLabels = {
 export const getAppNavigator = function(isLoggedIn, userProfile) {
   const baseNavigator = createStackNavigator(
     {
-      [getLocalRoute('app_registerTrees')]: {
-        screen: RegisterTrees
-      },
       [getLocalRoute('app_editProfile')]: {
         screen: EditUserProfile
       },
@@ -197,40 +194,23 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
   const ApptabNavigator = createBottomTabNavigator(
     {
       [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : Trillion
+        screen: isLoggedIn ? UserHomeContainer : LoginContainer
+      },
+      [getLocalRoute('app_registerTrees')]: {
+        screen: isLoggedIn ? RegisterTrees : LoginContainer
       },
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
       },
-      [getLocalRoute('app_myTrees')]: {
-        screen: isLoggedIn ? UserContributions : LoginContainer
-      },
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
       },
-      [getLocalRoute('app_selectProject')]: {
-        screen: SelectedPlantProject
-      },
-      [getLocalRoute('app_redeem')]: {
-        screen: RedemptionContainer
-      },
-      [getLocalRoute('app_claim')]: {
-        screen: RedemptionContainer
-      },
-      [getLocalRoute('app_homepage')]: {
-        screen: Trillion
-      },
+
       [getLocalRoute('app_giftTrees')]: {
         screen: GiftTrees
       },
       [getLocalRoute('app_explore')]: {
-        screen: LeaderBoard
-      },
-      [getLocalRoute('app_signup')]: {
-        screen: SignUpContainer
-      },
-      [getLocalRoute('app_forgotPassword')]: {
-        screen: ForgotPasswordContainer
+        screen: Trillion
       }
     },
     {

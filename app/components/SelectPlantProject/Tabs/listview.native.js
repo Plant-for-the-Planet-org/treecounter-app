@@ -29,17 +29,14 @@ export default class ListViewProjects extends Component {
           {projects.length !== 0
             ? projects.map((project, index) => (
                 <PlantProjectSnippet
-                  cardStyle={{
-                    padding: 0,
-                    margin: 0
-                  }}
+                  cardStyle={styles.cardStyle}
                   key={'projectFull' + project.id}
                   onMoreClick={id => this.props.onMoreClick(id)}
                   plantProject={project}
                   onSelectClickedFeaturedProjects={id =>
                     this.props.selectProject(id)
                   }
-                  showMoreButton={true}
+                  showMoreButton={false}
                   tpoName={project.tpo_name}
                 />
               ))

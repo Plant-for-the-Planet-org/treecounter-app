@@ -10,10 +10,8 @@ const Layout = {
 const rowHeight = 20;
 
 export default (selectplantprojectFull = EStyleSheet.create({
-  projectFullContainer: {
-    padding: 0,
+  projectSnippetContainer: {
     flexDirection: 'column',
-    paddingBottom: 5,
 
     shadowOffset: {
       width: 0,
@@ -25,14 +23,14 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   projectImageContainer: {
     height: Layout.window.width * 0.5,
-    width: Layout.window.width * 0.95
+    width: '100%'
   },
   teaser__projectImage: {
     flex: 1
   },
   treeCounterContainer: {
     flexDirection: 'row',
-    width: Layout.window.width * 0.95,
+    width: '100%',
     justifyContent: 'space-between',
     backgroundColor: '#d2e3af',
     shadowOffset: {

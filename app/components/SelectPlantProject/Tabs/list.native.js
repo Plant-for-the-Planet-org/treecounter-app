@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import {
-  View,
-  ScrollView,
-  Dimensions,
-  Text,
-  TextInput,
-  Image
-} from 'react-native';
+import { View, Dimensions, TextInput, Image } from 'react-native';
+
 import styles from '../../../styles/selectplantproject/list';
 import i18n from '../../../locales/i18n.js';
 
@@ -102,5 +96,6 @@ export default class ListProjects extends Component {
 
 ListProjects.propTypes = {
   plantProjects: Proptypes.array.isRequired,
-  selectProject: Proptypes.func.isRequired
+  selectProject: Proptypes.func.isRequired,
+  onMoreClick: Proptypes.func.isRequired
 };

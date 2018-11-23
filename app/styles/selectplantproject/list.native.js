@@ -1,12 +1,12 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-
-import { SearchContainerWidth } from '../header/search_bar';
-
+import { Dimensions } from 'react-native';
+const Layout = {
+  window: {
+    height: Dimensions.get('window').height - (56 + 70 + 20),
+    width: Dimensions.get('window').width
+  }
+};
 export default (selectplantprojectFull = EStyleSheet.create({
-  cardStyle: {
-    flex: 1,
-    flexDirection: 'column'
-  },
   listItemContainer: {
     flexDirection: 'column',
     height: 150
@@ -147,5 +147,11 @@ export default (selectplantprojectFull = EStyleSheet.create({
     fontSize: 16,
     marginRight: 10,
     color: '$textColor'
+  },
+  cardStyle: {
+    width: Layout.window.width * 0.95,
+    padding: 0,
+    margin: 0,
+    marginBottom: 8
   }
 }));

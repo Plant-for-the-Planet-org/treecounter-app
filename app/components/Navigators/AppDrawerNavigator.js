@@ -73,7 +73,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
   const baseNavigator = createStackNavigator(
     {
       [getLocalRoute('app_editProfile')]: {
-        screen: EditUserProfile
+        screen: isLoggedIn ? EditUserProfile : LoginContainer
       },
       [getLocalRoute('app_userHome')]: {
         screen: isLoggedIn ? UserHomeContainer : Trillion

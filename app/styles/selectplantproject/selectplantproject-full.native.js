@@ -56,13 +56,21 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   cardStyle: {
     padding: 0,
-    margin: 0
+    margin: 0,
+    marginBottom: 8,
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowOpacity: 0,
+    elevation: 0,
+    width: Layout.window.width * 0.95
   },
   horizontalRule: {
     borderBottomColor: '$primary',
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 1,
     marginBottom: 10,
-    marginLeft: 5,
-    marginRight: 5
+    marginLeft: 10,
+    marginRight: 10
   }
 }));

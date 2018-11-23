@@ -296,11 +296,13 @@ export default class DonateTrees extends Component {
               onSuccess={paymentResponse =>
                 this.handlePaymentApproved(paymentResponse)
               }
-              onFailure={data =>
-                console.log('/////////////////// payment failure ', data)
+              onFailure={
+                data => data
+                //console.log('/////////////////// payment failure ', data)
               }
-              onError={data =>
-                console.log('/////////////////// payment error ', data)
+              onError={
+                data => data
+                //('/////////////////// payment error ', data)
               }
             />
           ))

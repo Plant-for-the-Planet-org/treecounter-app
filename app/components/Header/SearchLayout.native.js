@@ -39,7 +39,7 @@ class SearchLayout extends React.Component {
   _handleChangeQuery = q => {
     getSuggestions(q).then(suggestions => {
       this.setState({ q: suggestions });
-      console.log('suggestions', suggestions);
+      //console.log('suggestions', suggestions);
     });
   };
 
@@ -81,7 +81,7 @@ class SearchLayout extends React.Component {
                       );
                     }, 0);
 
-                    console.log('click suggestions', suggestion);
+                    //  console.log('click suggestions', suggestion);
                   }}
                 >
                   <Image

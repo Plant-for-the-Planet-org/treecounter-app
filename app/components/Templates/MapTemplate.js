@@ -12,7 +12,10 @@ export function MapTemplate(locals) {
         geoLocation={geolocation}
         onLocationSelected={newValue => {
           if (newValue.countryCode) {
-            newValue['country'] = newValue.countryCode.substring(0, 2);
+            newValue['country'] =
+              newValue.countryCode.length > 2
+                ? newValue.countryCode.substring(0, 2)
+                : newValue.countryCode;
           }
           delete newValue.countryCode;
           let valueString = objectToQueryParams(newValue);

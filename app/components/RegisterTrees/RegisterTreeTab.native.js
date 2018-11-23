@@ -9,7 +9,7 @@ const Form = t.form.Form;
 
 getFormLayoutTemplate = mode => {
   const formLayoutTreesTemplate = locals => {
-    console.log('locals', locals.inputs);
+    //console.log('locals', locals.inputs);
     return (
       <View style={styles.registerTree__form}>
         <View style={styles.registerTree__form__row}>
@@ -42,7 +42,7 @@ getFormLayoutTemplate = mode => {
 
 export default class RegisterTreeTab extends PureComponent {
   render() {
-    console.log('locals', this.props);
+    //console.log('locals', this.props);
     const schemaOptionsMultiple = {
       template: getFormLayoutTemplate(this.props.mode),
       ...this.props.schemaOptions

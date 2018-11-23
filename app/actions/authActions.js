@@ -50,13 +50,18 @@ export function logoutUser() {
   };
 }
 
-export function forgot_password(data) {
+export function forgot_password(data, navigation = undefined) {
   return dispatch => {
+    dispatch(setProgressModelState(true));
     postRequest('auth_forgotPassword_post', data)
       .then(res => {
-        updateRoute('app_passwordSent', dispatch);
+        dispatch(setProgressModelState(false));
+        updateRoute('app_passwordSent', navigation || dispatch);
       })
-      .catch(err => debug(err));
+      .catch(err => {
+        debug(err);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 
@@ -70,21 +75,21 @@ export function sendEmail(navigation = undefined) {
   };
 }
 
-export function reset_password(data) {
+export function reset_password(data, navigation = undefined) {
   return dispatch => {
     postRequest('auth_resetPassword_post', data)
       .then(res => {
-        updateRoute('app_login', dispatch);
+        updateRoute('app_login', navigation || dispatch);
       })
       .catch(err => debug(err));
   };
 }
-export function setAccessDenied(data, params, path) {
+export function setAccessDenied(data, params, path, navigation = undefined) {
   return dispatch => {
     postRequest('public_accessDenied', data, params)
       .then(res => {
         const { statusText } = res;
-        updateRoute(path, dispatch);
+        updateRoute(path, navigation || dispatch);
         // NotificationManager.success(statusText, 'Success', 5000);
       })
       .catch(error => {

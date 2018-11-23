@@ -9,8 +9,9 @@ import {
 } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import styles from '../../../styles/login';
+import styles from '../../../styles/login.native';
 import SignupTypes from './SignupType';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 let Form = t.form.Form;
 
@@ -36,12 +37,8 @@ export default class SignUp extends Component {
   render() {
     let { Profiletype } = this.state;
     return (
-      <ScrollView>
-        <ImageBackground style={styles.container}>
-          <View style={styles.loginHeader}>
-            <Text style={styles.titleText}>{i18n.t('label.signUp')}.</Text>
-            <View style={styles.titleTextUnderline} />
-          </View>
+      <KeyboardAwareScrollView>
+        <ImageBackground style={[styles.container, styles.parentContainer]}>
           <SignupTypes changeProfile={this.changeProfile} />
           <View style={styles.inputContainer}>
             <Form
@@ -64,12 +61,12 @@ export default class SignUp extends Component {
                 onPress={this.onLoginClicked}
                 style={styles.bottomTextHighlight}
               >
-                {i18n.t('label.logint')}
+                {i18n.t('label.login')}
               </Text>
             </View>
           </View>
         </ImageBackground>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }

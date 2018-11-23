@@ -34,12 +34,19 @@ export default class UserHome extends Component {
     if (toggle) {
       const treecounter = this.props.treecounterData;
       const profileType = this.props.userProfile.type;
+      if (isNaN(parseInt(treecounter.community))) {
+        treecounter.community = 0;
+      }
+      if (isNaN(parseInt(treecounter.personal))) {
+        treecounter.personal = 0;
+      }
+
       let svgData = {
         id: treecounter.id,
-        target: treecounter.countCommunity + treecounter.countPersonal, // light color
-        planted: treecounter.countPersonal, //dark color
-        community: treecounter.countCommunity,
-        personal: treecounter.countPersonal,
+        target: treecounter.community + treecounter.personal, // light color
+        planted: treecounter.personal, //dark color
+        community: treecounter.community,
+        personal: treecounter.personal,
         targetComment: treecounter.targetComment,
         targetYear: treecounter.targetYear,
         type: profileType
@@ -50,10 +57,10 @@ export default class UserHome extends Component {
       const profileType = this.props.userProfile.type;
       let svgData = {
         id: treecounter.id,
-        target: treecounter.countTarget,
-        planted: treecounter.countPlanted,
-        community: treecounter.countCommunity,
-        personal: treecounter.countPersonal,
+        target: treecounter.target,
+        planted: treecounter.planted,
+        community: treecounter.community,
+        personal: treecounter.personal,
         targetComment: treecounter.targetComment,
         targetYear: treecounter.targetYear,
         type: profileType

@@ -4,15 +4,17 @@ import { Dimensions } from 'react-native';
 
 const Layout = {
   window: {
-    height: Dimensions.get('window').height - (56 + 70 + 20)
+    height: Dimensions.get('window').height - (56 + 70 + 20),
+    width: Dimensions.get('window').width
   }
 };
 
 export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
     //padding: 10,
-
-    flexDirection: 'column'
+    padding: 0,
+    flexDirection: 'column',
+    width: Layout.window.width * 0.95
     // height: Layout.window.height
   },
   projectTeaserContainer: {
@@ -49,8 +51,18 @@ export default (selectplantprojectFull = EStyleSheet.create({
     flexGrow: 1,
     flexBasis: 'auto'
   },
+  snippetContainer: {
+    width: Layout.window.width * 0.95
+  },
   cardStyle: {
-    margin: 0,
-    padding: 0
+    padding: 0,
+    margin: 0
+  },
+  horizontalRule: {
+    borderBottomColor: '$primary',
+    borderBottomWidth: 0.5,
+    marginBottom: 10,
+    marginLeft: 5,
+    marginRight: 5
   }
 }));

@@ -42,17 +42,17 @@ class Paypal extends React.Component {
   };
 
   render() {
-    const { amount, currency, account, onSuccess } = this.props;
+    const { amount, mode, currency, account, onSuccess } = this.props;
 
     const { showButton } = this.state;
 
     const CLIENT = {
-      sandbox: account.authorization.client_id
+      [mode]: account.authorization.client_id
     };
 
     const payment = () =>
       // eslint-disable-next-line react/prop-types
-      paypal.rest.payment.create('sandbox', CLIENT, {
+      paypal.rest.payment.create(mode, CLIENT, {
         transactions: [
           {
             amount: {
@@ -103,7 +103,7 @@ class Paypal extends React.Component {
         <div className={displayNone}>
           {showButton && (
             <paypal.Button.react
-              env="sandbox"
+              env={mode}
               style={buttonStyle}
               client={CLIENT}
               commit={false}
@@ -127,6 +127,7 @@ Paypal.propTypes = {
   handleExpandedClicked: PropTypes.func,
   isScriptLoaded: PropTypes.bool,
   isScriptLoadSucceed: PropTypes.bool,
+  mode: PropTypes.string,
   onSuccess: PropTypes.func
 };
 

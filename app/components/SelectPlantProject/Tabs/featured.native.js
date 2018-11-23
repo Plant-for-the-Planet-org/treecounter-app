@@ -3,6 +3,7 @@ import { ScrollView } from 'react-native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
+import scrollStyle from '../../../styles/common/scrollStyle.native';
 
 export default class FeaturedProjects extends Component {
   constructor(props) {
@@ -50,7 +51,7 @@ export default class FeaturedProjects extends Component {
   render() {
     let { featuredProjects } = this.state;
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
         {featuredProjects && featuredProjects.length > 0
           ? featuredProjects.map(project => (
               <PlantProjectSnippet

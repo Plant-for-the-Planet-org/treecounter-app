@@ -54,7 +54,7 @@ export default class ListProjects extends Component {
   render() {
     let { filteredProjects } = this.state;
     return (
-      <CardLayout key={'listViewProject'} style={{ padding: 0 }}>
+      <CardLayout key={'listViewProject'} style={{ flex: 1, padding: 0 }}>
         <View style={[styles.searchContainer]}>
           <TextInput
             ref={view => {

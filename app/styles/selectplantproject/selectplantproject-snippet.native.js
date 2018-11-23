@@ -82,7 +82,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   actionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: rowHeight,
+    height: rowHeight + rowHeight / 2,
     paddingLeft: 5
   },
   project_teaser__contentText: {
@@ -109,14 +109,20 @@ export default (selectplantprojectFull = EStyleSheet.create({
     padding: 5
   },
   buttonStyle: {
-    height: 20,
-    paddingLeft: 2,
-    paddingRight: 2,
-    paddingTop: 0,
-    paddingBottom: 0,
-    margin: 0,
-    borderWidth: 0,
-    borderRadius: 0,
+    // height: 20,
+    // paddingLeft: 2,
+    // paddingRight: 2,
+    // paddingTop: 0,
+    // paddingBottom: 0,
+    // margin: 0,
+    // borderWidth: 0,
+    // borderRadius: 0,
+    // marginRight: 5
+    width: 80,
+    height: 30,
+    borderWidth: 1,
+    borderRadius: 6,
+    padding: 0,
     marginRight: 5
   },
   buttonTextStyle: {

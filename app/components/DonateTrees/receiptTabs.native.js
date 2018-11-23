@@ -5,7 +5,6 @@ import {
   receiptCompanyFormSchema,
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
-import { ScrollView } from 'react-native';
 
 import {
   receiptIndividualFormSchema,

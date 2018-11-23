@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
 import svgStyles from '../../styles/common/treecounter_svg';
+import styles from '../../styles/trillion.native';
 import {
   pledgeEventSelector,
   userTreecounterDataSelector
@@ -11,6 +12,8 @@ import {
 import LoadingIndicator from '../Common/LoadingIndicator';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
+import CardLayout from '../Common/Card';
+import i18n from '../../locales/i18n';
 
 class Trillion extends Component {
   constructor() {
@@ -45,11 +48,23 @@ class Trillion extends Component {
     return this.state.loading ? (
       <LoadingIndicator />
     ) : (
-      <View>
-        <View style={svgStyles.svgContainer}>
-          <SvgContainer {...this.state.svgData} trillion={true} />
+      <ScrollView>
+        <View style={styles.parentContainer}>
+          <View style={svgStyles.svgContainer}>
+            <SvgContainer {...this.state.svgData} trillion={true} />
+          </View>
+          <CardLayout style={styles.cardContainer}>
+            <Text style={styles.titleText}>
+              {' '}
+              {i18n.t('label.trillionTreeMessage1')}
+            </Text>
+            <Text style={styles.titleText}>
+              {' '}
+              {i18n.t('label.trillionTreeMessage2')}
+            </Text>
+          </CardLayout>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }

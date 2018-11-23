@@ -41,18 +41,14 @@ class PlantProjectFull extends React.Component {
     return (
       <ScrollView>
         <CardLayout style={styles.projectFullContainer}>
-          <View style={styles.snippetContainer}>
-            <PlantProjectSnippet
-              cardStyle={styles.cardStyle}
-              key={'projectFull' + this.props.plantProject.id}
-              showMoreButton={false}
-              plantProject={this.props.plantProject}
-              onSelectClickedFeaturedProjects={id =>
-                this.props.selectProject(id)
-              }
-              tpoName={this.props.plantProject.tpo_name}
-            />
-          </View>
+          <PlantProjectSnippet
+            cardStyle={styles.cardStyle}
+            key={'projectFull' + this.props.plantProject.id}
+            showMoreButton={false}
+            plantProject={this.props.plantProject}
+            onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
+            tpoName={this.props.plantProject.tpo_name}
+          />
 
           <View style={styles.horizontalRule} />
           <View style={styles.plantProjectDetails}>

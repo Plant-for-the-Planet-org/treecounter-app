@@ -18,8 +18,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
       height: 3
     },
     shadowOpacity: 0.5,
-    elevation: 1,
-    marginBottom: 8
+    elevation: 1
   },
   projectImageContainer: {
     height: Layout.window.width * 0.5,
@@ -58,6 +57,11 @@ export default (selectplantprojectFull = EStyleSheet.create({
   treePlantedtext: {
     paddingRight: 5,
     color: 'white'
+  },
+  treePlantedtextPlanted: {
+    paddingRight: 5,
+    color: 'white'
+    // width: '100%'
   },
   targetContainer: {
     flexDirection: 'row',

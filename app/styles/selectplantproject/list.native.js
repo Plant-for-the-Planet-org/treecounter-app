@@ -84,7 +84,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     alignItems: 'center',
     borderColor: '#efefef',
     borderStyle: 'solid',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    padding: 10
   },
   searchIconContainer: {
     height: 15,
@@ -141,7 +142,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
 
   cardHeader: {
     flexDirection: 'row',
-    paddingBottom: 10
+    padding: 10
   },
   headingStyle: {
     fontSize: 16,
@@ -149,9 +150,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
     color: '$textColor'
   },
   cardStyle: {
-    width: Layout.window.width * 0.95,
+    width: Layout.window.width - 30,
     padding: 0,
     margin: 0,
-    marginBottom: 8
+    paddingBottom: 10
   }
 }));

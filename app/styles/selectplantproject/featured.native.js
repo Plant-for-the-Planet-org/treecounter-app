@@ -9,6 +9,8 @@ const Layout = {
 };
 export default (featured = EStyleSheet.create({
   cardStyle: {
-    width: Layout.window.width * 0.95
+    width: Layout.window.width - 30,
+    padding: 0,
+    paddingBottom: 10
   }
 }));

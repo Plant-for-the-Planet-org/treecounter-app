@@ -83,7 +83,7 @@ export default class PriceProjects extends Component {
   render() {
     let { priceSortedProjects } = this.state;
     return (
-      <CardLayout style={styles.cardStyle}>
+      <CardLayout style={{ padding: 0 }}>
         <View style={styles.cardHeader}>
           <Text style={styles.headingStyle}>Cost Per Tree</Text>
           <View style={styles.sortContainer}>

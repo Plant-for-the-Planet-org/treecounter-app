@@ -11,11 +11,9 @@ const Layout = {
 
 export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
-    //padding: 10,
     padding: 0,
     flexDirection: 'column',
-    width: Layout.window.width * 0.95
-    // height: Layout.window.height
+    width: Layout.window.width - 30
   },
   projectTeaserContainer: {
     height: Layout.window.height * 0.5
@@ -52,19 +50,19 @@ export default (selectplantprojectFull = EStyleSheet.create({
     flexBasis: 'auto'
   },
   snippetContainer: {
-    width: Layout.window.width * 0.95
+    width: Layout.window.width - 30
   },
   cardStyle: {
     padding: 0,
     margin: 0,
-    marginBottom: 8,
     shadowOffset: {
       width: 0,
       height: 0
     },
+    width: '100%',
     shadowOpacity: 0,
     elevation: 0,
-    width: Layout.window.width * 0.95
+    paddingBottom: 10
   },
   horizontalRule: {
     borderBottomColor: '$primary',

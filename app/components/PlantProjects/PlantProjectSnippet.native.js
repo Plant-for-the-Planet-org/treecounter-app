@@ -123,12 +123,14 @@ class PlantProjectSnippet extends React.Component {
                         }
                   }
                 >
-                  <Text style={styles.treePlantedtext}>
-                    {specsProps.countPlanted}
-                  </Text>
-                  <Text style={styles.treePlantedtext}>
-                    {i18n.t('label.trees')}
-                  </Text>
+                  <View style={{ width: '100%', flexDirection: 'row' }}>
+                    <Text style={styles.treePlantedtextPlanted}>
+                      {specsProps.countPlanted}
+                    </Text>
+                    <Text style={styles.treePlantedtext}>
+                      {i18n.t('label.trees')}
+                    </Text>
+                  </View>
                 </View>
               </View>
 

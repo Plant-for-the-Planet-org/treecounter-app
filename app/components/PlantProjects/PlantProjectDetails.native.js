@@ -23,12 +23,13 @@ class PlantProjectDetails extends React.Component {
         <PlantProjectImageCarousel images={this.props.plantProjectImages} />
         <View
           style={{
+            padding: 10,
             paddingTop: 20
           }}
         >
           <Text
             style={{
-              textAlign: 'justify',
+              textAlign: 'left',
               color: '#686060'
             }}
           >

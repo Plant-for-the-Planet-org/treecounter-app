@@ -25,23 +25,21 @@ export default class ListViewProjects extends Component {
     let { projects } = this.props;
     return (
       <ScrollView>
-        <View style={styles.listContentContainer}>
-          {projects.length !== 0
-            ? projects.map((project, index) => (
-                <PlantProjectSnippet
-                  cardStyle={styles.cardStyle}
-                  key={'projectFull' + project.id}
-                  onMoreClick={id => this.props.onMoreClick(id)}
-                  plantProject={project}
-                  onSelectClickedFeaturedProjects={id =>
-                    this.props.selectProject(id)
-                  }
-                  showMoreButton={false}
-                  tpoName={project.tpo_name}
-                />
-              ))
-            : null}
-        </View>
+        {projects.length !== 0
+          ? projects.map((project, index) => (
+              <PlantProjectSnippet
+                cardStyle={styles.cardStyle}
+                key={'projectFull' + project.id}
+                onMoreClick={id => this.props.onMoreClick(id)}
+                plantProject={project}
+                onSelectClickedFeaturedProjects={id =>
+                  this.props.selectProject(id)
+                }
+                showMoreButton={false}
+                tpoName={project.tpo_name}
+              />
+            ))
+          : null}
       </ScrollView>
     );
   }

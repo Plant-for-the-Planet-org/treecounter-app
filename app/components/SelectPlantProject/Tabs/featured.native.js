@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions } from 'react-native';
+import { ScrollView } from 'react-native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
@@ -55,7 +55,7 @@ export default class FeaturedProjects extends Component {
           ? featuredProjects.map(project => (
               <PlantProjectSnippet
                 key={'projectFull' + project.id}
-                style={styles.cardStyle}
+                cardStyle={styles.cardStyle}
                 onMoreClick={id => this.props.onMoreClick(id)}
                 plantProject={project}
                 onSelectClickedFeaturedProjects={id =>

@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import t from 'tcomb-form';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import TextHeading from '../Common/Heading/TextHeading';
-import TextBlock from '../Common/Text/TextBlock';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n.js';
 import TouchableItem from '../../components/Common/TouchableItem';
-import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import {
   redeemSignIn,
   redeemRed,
@@ -16,16 +12,10 @@ import {
   close_green
 } from '../../assets';
 import styles from '../../styles/redeem';
-import { ScrollView, View, Image, TextInput, Text } from 'react-native';
-import { getLocalRoute } from '../../actions/apiRouting';
+import { View, Image, TextInput, Text } from 'react-native';
 import { updateRoute } from '../../helpers/routerHelper';
-let TCombForm = t.form.Form;
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-// const allSchemaOptions = {
-//   template: formLayout,
-//   ...schemaOptions
-// };
 export default class Redemption extends Component {
   constructor(props) {
     super(props);
@@ -38,13 +28,11 @@ export default class Redemption extends Component {
     this.setState({ value: nextProps.code });
   }
   onSetRedemption() {
-    // let value = this.refs.redemptionForm.getValue();
     if (this.state.value) {
       this.props.setRedemptionCode(this.state.value);
     }
   }
   onValidationCode() {
-    // let value = this.refs.redemptionForm.getValue();
     if (this.state.value) {
       this.props.validateCode(this.state.value);
     }
@@ -53,7 +41,6 @@ export default class Redemption extends Component {
     this.setState({ value: value });
   }
   render() {
-    const { code } = this.props;
     let content,
       button,
       icon,
@@ -114,7 +101,6 @@ export default class Redemption extends Component {
         </View>
       );
       icon = <Image style={styles.imageStyle} source={redeemGreen} />;
-      // icon = redeemGreen;
     } else if (this.props.pageStatus === 'not-logged-in') {
       button = (
         <View style={styles.loginButtons}>
@@ -133,7 +119,6 @@ export default class Redemption extends Component {
         </View>
       );
       icon = <Image style={styles.imageLoginStyle} source={redeemSignIn} />;
-      // icon = redeemSignIn;
     } else {
       button = (
         <View style={styles.buttonStyle}>
@@ -143,7 +128,6 @@ export default class Redemption extends Component {
         </View>
       );
       icon = <Image style={styles.imageStyle} source={redeemGreen} />;
-      // icon = redeemGreen;
     }
 
     let value = this.state.value;
@@ -151,25 +135,8 @@ export default class Redemption extends Component {
       let disabled = false;
       if (this.props.pageStatus === 'code-unknown') {
         disabled = false;
-        // form = (
-        //   <TCombForm
-        //     ref="redemptionForm"
-        //     type={redemptionEditableFormSchema}
-        //     options={schemaOptionsRedeemEditable}
-        //     value={value}
-        //     onChange={this.onCrossClick()}
-        //   />
-        // );
       } else {
         disabled = true;
-        // form = (
-        //   <TCombForm
-        //     ref="redemptionForm"
-        //     type={redemptionNonEditableFormSchema}
-        //     options={schemaOptionsRedeemNonEditable}
-        //     value={value}
-        //   />
-        // );
       }
       const onCrossClick = () => {
         updateRoute('app_redeem', this.props.navigation, null, {
@@ -228,27 +195,13 @@ export default class Redemption extends Component {
               {i18n.t('label.redeem_heading')}
             </Text>
           </View>
-          {/*<View style={styles.contentContainer}>*/}
           <CardLayout style={styles.cardContainer}>
             {icon}
             {content}
             {form}
             {button}
           </CardLayout>
-          {/*</View>*/}
         </View>
-
-        {/*<View style={styles.parentContainer}>*/}
-        {/*<View style={styles.headerContainer}>*/}
-        {/*{heading}*/}
-        {/*/!*<DescriptionHeading>*!/*/}
-        {/*/!*{i18n.t('label.redeem_heading')}*!/*/}
-        {/*/!*</DescriptionHeading>*!/*/}
-        {/*</View>*/}
-        {/*<View style={styles.contentContainer}>*/}
-
-        {/*</View>*/}
-        {/*</View>*/}
       </KeyboardAwareScrollView>
     );
   }

@@ -17,7 +17,7 @@ export function signUp(profileType, userData) {
             updateActivateToken(userData.email, token);
           } else {
             updateJWT(token, refresh_token);
-            dispatch(loadUserProfile());
+            dispatch(loadUserProfile(data));
             NotificationManager.success(
               'Registration Successful',
               'Congrats',

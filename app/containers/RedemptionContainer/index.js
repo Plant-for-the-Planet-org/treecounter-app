@@ -11,7 +11,6 @@ import {
 } from '../../actions/redemptionAction';
 import { setAccessDenied } from '../../actions/authActions';
 import i18n from '../../locales/i18n.js';
-import { getLocalRoute } from '../../actions/apiRouting';
 
 class RedemptionContainer extends Component {
   constructor(props) {
@@ -126,7 +125,6 @@ class RedemptionContainer extends Component {
         let code = null;
         type = nextProps.navigation.getParam('type', type);
         code = nextProps.navigation.getParam('code', code);
-        // let isLoggedIn = null !== nextProps.userProfile;
         this.setState({ code: code });
         let isLoggedIn = nextProps.userProfile ? true : false;
         let isCode = code ? true : false;
@@ -143,8 +141,6 @@ class RedemptionContainer extends Component {
       path = 'app_redeem';
     }
     if (value) {
-      // let isCode = value ? true : false;
-      // this.callSetState(isCode);
       updateRoute(path, this.props.navigation, null, {
         type: this.state.type,
         code: value.replace(/\s/g, '')

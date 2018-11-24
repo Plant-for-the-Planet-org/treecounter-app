@@ -10,29 +10,26 @@ const Layout = {
 const rowHeight = 20;
 
 export default (selectplantprojectFull = EStyleSheet.create({
-  projectFullContainer: {
-    padding: 0,
+  projectSnippetContainer: {
     flexDirection: 'column',
-    paddingBottom: 5,
 
     shadowOffset: {
       width: 0,
       height: 3
     },
     shadowOpacity: 0.5,
-    elevation: 1,
-    marginBottom: 8
+    elevation: 1
   },
   projectImageContainer: {
     height: Layout.window.width * 0.5,
-    width: Layout.window.width * 0.95
+    width: '100%'
   },
   teaser__projectImage: {
     flex: 1
   },
   treeCounterContainer: {
     flexDirection: 'row',
-    width: Layout.window.width * 0.95,
+    width: '100%',
     justifyContent: 'space-between',
     backgroundColor: '#d2e3af',
     shadowOffset: {
@@ -61,6 +58,11 @@ export default (selectplantprojectFull = EStyleSheet.create({
     paddingRight: 5,
     color: 'white'
   },
+  treePlantedtextPlanted: {
+    paddingRight: 5,
+    color: 'white'
+    // width: '100%'
+  },
   targetContainer: {
     flexDirection: 'row',
     padding: 5,
@@ -70,7 +72,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectdetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: rowHeight * 2,
+    height: rowHeight * 2 + 6,
     padding: 5
   },
   locationContainer: {
@@ -80,25 +82,37 @@ export default (selectplantprojectFull = EStyleSheet.create({
   actionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: rowHeight,
+    height: rowHeight + rowHeight / 2,
     paddingLeft: 5
   },
   project_teaser__contentText: {
-    fontSize: 16
+    fontSize: 16,
+    color: '$cardTextColor'
+  },
+  byOrgContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end'
+  },
+  byOrgText: {
+    fontSize: 16,
+    color: '$cardTextColor'
   },
   locationText: {
-    fontSize: 12,
+    fontSize: 10,
     color: '$textColor',
     fontStyle: 'italic',
-    paddingBottom: 2
+    paddingBottom: 2,
+    color: '$cardTextColor'
   },
   survivalText: {
-    fontSize: 13,
-    color: '$textColor',
-    paddingTop: 3
+    fontSize: 12,
+    paddingTop: 3,
+    paddingBottom: 8,
+    color: '$cardTextColor'
   },
   costText: {
-    fontSize: 20
+    fontSize: 18,
+    color: '$cardTextColor'
   },
   buttonContainer: {
     flexDirection: 'row'
@@ -107,14 +121,20 @@ export default (selectplantprojectFull = EStyleSheet.create({
     padding: 5
   },
   buttonStyle: {
-    height: 20,
-    paddingLeft: 2,
-    paddingRight: 2,
-    paddingTop: 0,
-    paddingBottom: 0,
-    margin: 0,
-    borderWidth: 0,
-    borderRadius: 0,
+    // height: 20,
+    // paddingLeft: 2,
+    // paddingRight: 2,
+    // paddingTop: 0,
+    // paddingBottom: 0,
+    // margin: 0,
+    // borderWidth: 0,
+    // borderRadius: 0,
+    // marginRight: 5
+    width: 80,
+    height: 30,
+    borderWidth: 1,
+    borderRadius: 6,
+    padding: 0,
     marginRight: 5
   },
   buttonTextStyle: {

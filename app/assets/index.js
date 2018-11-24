@@ -106,6 +106,7 @@ import AppStoreLogo from './images/appstore-logo.png';
 import targetPlanted from './images/target.png';
 import infoGrey from './images/icons/info_grey.png';
 import editGrey from './images/icons/edit_grey.png';
+import welcomeLogo from './images/icons/welcomeLogo.png';
 
 export {
   AppStoreLogo,
@@ -215,5 +216,6 @@ export {
   lightTree,
   targetPlanted,
   infoGrey,
-  editGrey
+  editGrey,
+  welcomeLogo
 };

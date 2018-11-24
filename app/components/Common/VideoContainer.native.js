@@ -42,7 +42,7 @@ class VideoContainer extends React.Component {
         />
       );
     }
-    console.log(this.state);
+    // console.log(this.state);
     return null;
   }
 }

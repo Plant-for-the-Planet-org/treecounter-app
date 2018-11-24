@@ -4,6 +4,13 @@ import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 import PriceProjects from './Tabs/price';
 import styles from '../../styles/common/tabbar';
+import { Dimensions } from 'react-native';
+
+const Layout = {
+  window: {
+    width: Dimensions.get('window').width
+  }
+};
 
 export default class SelectPlantTabView extends Component {
   constructor(props) {
@@ -13,9 +20,7 @@ export default class SelectPlantTabView extends Component {
       routes: [
         { key: 'featured', title: 'Featured' },
         { key: 'list', title: 'List' },
-        { key: 'past', title: 'Past' },
-        { key: 'price', title: 'Price' },
-        { key: 'map', title: 'Map' }
+        { key: 'price', title: 'Price' }
       ],
       index: 0
     };
@@ -44,7 +49,7 @@ export default class SelectPlantTabView extends Component {
         {...props}
         indicatorStyle={styles.indicator}
         style={styles.tabBar}
-        tabStyle={styles.tabItem}
+        tabStyle={{ width: Layout.window.width / 3 }}
         labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
       />

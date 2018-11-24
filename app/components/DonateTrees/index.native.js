@@ -106,7 +106,7 @@ export default class DonateTrees extends Component {
 
   // open your gateway
   openGateWay = async url => {
-    url = 'localhost:8080' + url;
+    url = context.scheme + '://' + context.host + url;
     const canOpen = await Linking.canOpenURL(url);
     if (canOpen) {
       Linking.openURL(url).catch(err =>

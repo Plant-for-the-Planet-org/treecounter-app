@@ -133,4 +133,12 @@ export function getPlantProjectEnum(currentUserProfile) {
   }
   return undefined;
 }
+export function isTpo(currentUserProfile) {
+  let tpo = false;
+  if (currentUserProfile && currentUserProfile.type === 'tpo') {
+    tpo = true;
+  }
+  return tpo;
+}
+
 export const paymentFee = 0;

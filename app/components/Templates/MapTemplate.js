@@ -11,7 +11,12 @@ export function MapTemplate(locals) {
       <ArcGISContributionCaptureMap
         geoLocation={geolocation}
         onLocationSelected={newValue => {
-          newValue['country'] = newValue.countryCode;
+          if (newValue.countryCode) {
+            newValue['country'] =
+              newValue.countryCode.length > 2
+                ? newValue.countryCode.substring(0, 2)
+                : newValue.countryCode;
+          }
           delete newValue.countryCode;
           let valueString = objectToQueryParams(newValue);
 

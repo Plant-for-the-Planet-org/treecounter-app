@@ -135,7 +135,7 @@ class SearchBar extends React.PureComponent {
   };
 
   _handlePressCancelButton = () => {
-    console.log('_handlePressCancelButton', this.props.navigation);
+    //console.log('_handlePressCancelButton', this.props.navigation);
     if (this.props.onCancelPress) {
       this.props.onCancelPress(this.props.navigation.goBack);
     } else {

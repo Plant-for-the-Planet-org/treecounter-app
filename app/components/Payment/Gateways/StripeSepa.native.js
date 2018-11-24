@@ -38,7 +38,7 @@ export default class StripeSepa extends Component {
     stripe
       .createSourceWithParams(params)
       .then(token => {
-        console.log('token Test', token);
+        //console.log('token Test', token);
         token.sepa_debit = token.sepaDebitDetails;
         token.type = 'sepa_debit';
         //TODO hkurra it will start working once this will get merged
@@ -49,7 +49,7 @@ export default class StripeSepa extends Component {
         this.props.onSuccess(token);
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -71,7 +71,7 @@ export default class StripeSepa extends Component {
           underlineColorAndroid={'transparent'}
           onChangeText={value => {
             this._iban = value;
-            console.log(value);
+            //console.log(value);
           }}
           allowFontScaling={true}
         />

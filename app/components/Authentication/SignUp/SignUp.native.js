@@ -61,7 +61,7 @@ export default class SignUp extends Component {
                 onPress={this.onLoginClicked}
                 style={styles.bottomTextHighlight}
               >
-                {i18n.t('label.logint')}
+                {i18n.t('label.login')}
               </Text>
             </View>
           </View>

@@ -71,6 +71,7 @@ jobs:
             ssh $HOST "cd $WD_REACT; git merge FETCH_HEAD"
             ssh $HOST "cd $WD_REACT; /usr/bin/npm install"
             ssh $HOST "cd $WD_REACT; /usr/bin/npm run build:server"
+            ssh $HOST "cd $WD_REACT; sed -i 's%com/4.8%com/4.7%' web/server/bundle.js"
 
       - run:
           name: Integrate React Build into Symfony

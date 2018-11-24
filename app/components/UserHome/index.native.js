@@ -6,6 +6,7 @@ import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
 import { getProfileTypeName } from '../PublicTreeCounter/utils';
 import UserProfileImage from '../Common/UserProfileImage';
+import scrollStyle from '../../styles/common/scrollStyle';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -70,7 +71,7 @@ export default class UserHome extends Component {
     let { svgData } = this.state;
 
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
         <View style={styles.header}>
           <View style={styles.userProfileContainer}>
             <UserProfileImage profileImage={userProfile.image} />

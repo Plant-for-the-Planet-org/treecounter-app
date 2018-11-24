@@ -28,12 +28,19 @@ export default class Menu extends Component {
   static propTypes = {
     menuData: PropTypes.array.isRequired,
     onPress: PropTypes.func,
-    userProfile: PropTypes.any
+    userProfile: PropTypes.any,
+    navigation: PropTypes.any,
+    lastRoute: PropTypes.any
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps && nextProps.lastRoute != this.props.lastRoute) {
-      this.props.navigation.navigate(getLocalRoute(nextProps.lastRoute));
+      updateRoute(
+        nextProps.lastRoute.routeName,
+        this.props.navigation,
+        0,
+        nextProps.lastRoute.routeParams
+      );
     }
   }
 

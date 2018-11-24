@@ -110,5 +110,5 @@ SideMenuContainer.propTypes = {
   toggleSideNavAction: PropTypes.func.isRequired,
   clearSupport: PropTypes.func,
   userProfile: PropTypes.any,
-  lastRoute: PropTypes.string
+  lastRoute: PropTypes.any
 };

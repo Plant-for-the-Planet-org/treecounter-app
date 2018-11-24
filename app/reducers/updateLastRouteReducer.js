@@ -4,7 +4,7 @@ export const setLastRoute = createAction('SET_LAST_ROUTE');
 export const getLastRoute = state => state.lastRoute;
 
 export const initialState = {
-  lastRoute: ''
+  lastRoute: {}
 };
 
 const updateLastRouteReducer = handleActions(

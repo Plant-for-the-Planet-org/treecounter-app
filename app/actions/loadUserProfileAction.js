@@ -17,7 +17,7 @@ export function loadUserProfile(returnData, navigation) {
       dispatch(setCurrentUserProfileId(res.data.id));
       dispatch(setProgressModelState(false));
       if (returnData) {
-        dispatch(setLastRoute(returnData.routeName));
+        dispatch(setLastRoute(returnData));
       }
     });
   };

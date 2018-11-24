@@ -19,7 +19,7 @@ export default class ListViewProjects extends Component {
   render() {
     let { projects } = this.props;
     return (
-      <ScrollView contentContainerStyle={{ backgroundColor: 'white' }}>
+      <ScrollView contentContainerStyle={scrollStyleNative.styleContainer}>
         {projects.length !== 0
           ? projects.map(project => (
               <PlantProjectSnippet

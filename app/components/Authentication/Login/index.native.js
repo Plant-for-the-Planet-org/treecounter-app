@@ -30,7 +30,9 @@ export default class Login extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+      <ScrollView
+        contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
+      >
         <View style={styles.parentContainer}>
           <View style={styles.headerContainer}>
             <Image
@@ -59,14 +61,15 @@ export default class Login extends Component {
               </TouchableItem>
             </View>
             <View style={styles.bottomRow}>
-              <TouchableItem onPress={this.onSignupClicked}>
+              <TouchableItem
+                style={{ paddingRight: 5 }}
+                onPress={this.onSignupClicked}
+              >
                 <Text style={styles.bottomTextHighlight}>
-                  {i18n.t('label.dont_have_account')}
-                  {'  '}
-                  {i18n.t('label.signUp')}
+                  {i18n.t('label.dont_have_account')} {i18n.t('label.signUp')}
                 </Text>
               </TouchableItem>
-
+              {'  '}
               <PrimaryButton
                 onClick={this.props.onPress}
                 buttonStyle={styles.loginButtonStyle}

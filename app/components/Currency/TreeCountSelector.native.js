@@ -151,7 +151,7 @@ class TreeCountSelector extends React.Component {
                   style={styles.treecount_price_conversion_Text}
                   key={treeCount + 'container'}
                 >
-                  <Text style={styles.treecount_price_conversion_Text_equal2}>
+                  <Text style={styles.treecount_price_conversion_Text_equal}>
                     =
                   </Text>
                   <Text
@@ -225,7 +225,7 @@ class TreeCountSelector extends React.Component {
               onChangeText={evt => this.handleVariableAmountChange(evt)}
               value={String(this.state.variableAmount)}
             />
-            <Text style={styles.treecount_price_conversion_Text_currency}>
+            <Text style={styles.treecount_price_conversion_Text_currency2}>
               {currency}
             </Text>
           </View>

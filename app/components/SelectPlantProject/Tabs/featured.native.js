@@ -51,7 +51,9 @@ export default class FeaturedProjects extends Component {
   render() {
     let { featuredProjects } = this.state;
     return (
-      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+      <ScrollView
+        contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
+      >
         {featuredProjects && featuredProjects.length > 0
           ? featuredProjects.map(project => (
               <PlantProjectSnippet

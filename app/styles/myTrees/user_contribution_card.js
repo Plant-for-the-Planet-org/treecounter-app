@@ -69,7 +69,7 @@ export default (myTreesStyle = EStyleSheet.create({
   imageStyle: {
     width: 17,
     height: 18,
-    resizeMode: 'center'
+    resizeMode: 'contain'
   },
   seprator: {
     height: 2,

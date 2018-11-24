@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
 import { View, Text, Image } from 'react-native';
-import styles from '../../styles/selectplantproject/selectplantproject-full2.native';
+import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { getImageUrl } from '../../actions/apiRouting';
@@ -44,7 +44,12 @@ class PlantProjectSnippet extends React.Component {
       geoLocation
     } = this.props.plantProject;
     let projectImage = null;
-    let treeCountWidth = 100 - countPlanted / countTarget * 100;
+    let treePlantedRatio = countPlanted / countTarget;
+    let treeCountWidth = 100 - treePlantedRatio * 100;
+    if (treeCountWidth < 0) {
+      treeCountWidth = 100;
+    }
+    console.log(name, treeCountWidth);
 
     if (imageFile) {
       projectImage = { image: imageFile };
@@ -68,8 +73,14 @@ class PlantProjectSnippet extends React.Component {
       taxDeduction: paymentSetup.taxDeduction
     };
     return (
-      <TouchableItem onPress={() => this.props.onMoreClick(id)}>
-        <CardLayout style={[styles.projectFullContainer, this.props.cardStyle]}>
+      <TouchableItem
+        onPress={() =>
+          this.props.onMoreClick ? this.props.onMoreClick(id) : null
+        }
+      >
+        <CardLayout
+          style={[styles.projectSnippetContainer, this.props.cardStyle]}
+        >
           {projectImage && (
             <View style={styles.projectImageContainer}>
               <Image
@@ -107,16 +118,19 @@ class PlantProjectSnippet extends React.Component {
                         }
                       : {
                           height: '100%',
-                          flexDirection: 'row'
+                          flexDirection: 'row',
+                          padding: 5
                         }
                   }
                 >
-                  <Text style={styles.treePlantedtext}>
-                    {specsProps.countPlanted}
-                  </Text>
-                  <Text style={styles.treePlantedtext}>
-                    {i18n.t('label.trees')}
-                  </Text>
+                  <View style={{ width: '100%', flexDirection: 'row' }}>
+                    <Text style={styles.treePlantedtextPlanted}>
+                      {specsProps.countPlanted}
+                    </Text>
+                    <Text style={styles.treePlantedtext}>
+                      {i18n.t('label.trees')}
+                    </Text>
+                  </View>
                 </View>
               </View>
 
@@ -138,10 +152,12 @@ class PlantProjectSnippet extends React.Component {
             <View style={styles.projectdetailsContainer}>
               <View style={styles.locationContainer}>
                 <Text style={styles.locationText}>{specsProps.location}</Text>
-                <Text style={styles.survivalText}>
-                  {i18n.t('label.survival_rate')} {':'}{' '}
-                  {specsProps.survivalRate}%
-                </Text>
+                <View style={{ paddingTop: 3, paddingBottom: 3 }}>
+                  <Text style={styles.survivalText}>
+                    {i18n.t('label.survival_rate')} {':'}{' '}
+                    {specsProps.survivalRate}%
+                  </Text>
+                </View>
               </View>
 
               <View style={styles.costContainer}>
@@ -151,7 +167,7 @@ class PlantProjectSnippet extends React.Component {
 
             <View style={styles.actionContainer}>
               <View style={styles.byOrgContainer}>
-                <Text>{teaserProps.tpoName}</Text>
+                <Text style={styles.byOrgText}>{teaserProps.tpoName}</Text>
               </View>
 
               <View style={styles.buttonContainer}>

@@ -37,7 +37,7 @@ export default class LicenseInfoList extends Component {
         <TouchableItem
           onPress={() => {
             Linking.openURL(licenseFileUrl).catch(err => {
-              console.log(err);
+              //console.log(err);
             });
           }}
         >
@@ -47,7 +47,7 @@ export default class LicenseInfoList extends Component {
         <TouchableItem
           onPress={() => {
             Linking.openURL(repoPath).catch(err => {
-              console.log(err);
+              // console.log(err);
             });
           }}
         >

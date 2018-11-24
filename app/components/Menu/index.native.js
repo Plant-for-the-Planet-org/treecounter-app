@@ -16,7 +16,8 @@ import {
   iosFaqs,
   ProfilePic,
   infoGrey,
-  editGrey
+  editGrey,
+  redeem_outline
 } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -27,8 +28,21 @@ export default class Menu extends Component {
   static propTypes = {
     menuData: PropTypes.array.isRequired,
     onPress: PropTypes.func,
-    userProfile: PropTypes.any
+    userProfile: PropTypes.any,
+    navigation: PropTypes.any,
+    lastRoute: PropTypes.any
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps && nextProps.lastRoute != this.props.lastRoute) {
+      updateRoute(
+        nextProps.lastRoute.routeName,
+        this.props.navigation,
+        0,
+        nextProps.lastRoute.routeParams
+      );
+    }
+  }
 
   componentDidMount() {
     Linking.getInitialURL()
@@ -57,17 +71,17 @@ export default class Menu extends Component {
   resetStackToProperRoute = url => {
     // Do Whatever you need to do within your app to redirect users to the proper route
     let urlBreak = url.split('/');
-    console.log(urlBreak);
+    //console.log(urlBreak);
     const { navigation } = this.props;
     updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0);
   };
 
   //TODO hkurra
   //Ideally this should be in the container but for now to keep the same container for both web and app it's better to keep it here
-  onPressMenu = item => {
+  onPressMenu(item) {
     const { navigation } = this.props;
-    updateRoute(item.uri, navigation, 0, item.params);
-  };
+    updateRoute(item.uri, navigation, 0, this.params);
+  }
   onPressUserProfile = () => {
     const { navigation } = this.props;
     updateRoute('app_userHome', navigation, 0);
@@ -109,9 +123,7 @@ export default class Menu extends Component {
             <Text style={styles.profileTextHeading}>{'Guest'}</Text>
             <LargeMenuItem
               style={{ paddingLeft: 0 }}
-              onPress={() => {
-                this.onPressMenu({ uri: 'app_login' });
-              }}
+              onPress={this.onPressMenu.bind(this, { uri: 'app_login' })}
               title={i18n.t('label.login')}
               iconUrl={iosLogout}
             />
@@ -121,27 +133,25 @@ export default class Menu extends Component {
           <View style={styles.centerMenu}>
             {this.props.userProfile ? (
               <LargeMenuItem
-                onPress={() => {
-                  this.onPressMenu({ uri: getLocalRoute('app_editProfile') });
-                }}
+                onPress={this.onPressMenu.bind(this, {
+                  uri: 'app_editProfile'
+                })}
                 title={i18n.t('label.edit_profile')}
                 iconUrl={editGrey}
               />
             ) : null}
             <LargeMenuItem
-              onPress={() => {
-                this.onPressMenu({
-                  uri: getLocalRoute('app_redeem'),
-                  params: { code: null }
-                });
-              }}
+              onPress={this.onPressMenu.bind(this, {
+                uri: getLocalRoute('app_redeem'),
+                params: { code: null }
+              })}
               title={i18n.t('label.redeem_trees')}
-              iconUrl={iosFaqs}
+              iconUrl={redeem_outline}
             />
             <LargeMenuItem
-              onPress={() => {
-                this.onPressMenu({ uri: getLocalRoute('app_faq') });
-              }}
+              onPress={this.onPressMenu.bind(this, {
+                uri: getLocalRoute('app_faq')
+              })}
               title={i18n.t('label.faqs')}
               iconUrl={iosFaqs}
             />
@@ -150,18 +160,14 @@ export default class Menu extends Component {
         {this.props.userProfile && (
           <View>
             <LargeMenuItem
-              onPress={() => {
-                this.props.logoutUser();
-              }}
+              onPress={this.props.logoutUser}
               title={i18n.t('label.logout')}
               iconUrl={iosLogout}
             />
           </View>
         )}
         <LargeMenuItem
-          onPress={() => {
-            this.onPressMenu({ uri: 'about_us' });
-          }}
+          onPress={this.onPressMenu.bind(this, { uri: 'about_us' })}
           title={i18n.t('label.information')}
           iconUrl={infoGrey}
         />

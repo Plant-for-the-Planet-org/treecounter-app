@@ -5,7 +5,6 @@ import {
   receiptCompanyFormSchema,
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
-import { ScrollView } from 'react-native';
 
 import {
   receiptIndividualFormSchema,
@@ -92,7 +91,7 @@ export default class RecieptTabsView extends Component {
       case 'individual':
         return (
           <KeyboardAwareScrollView>
-            <CardLayout style={{ padding: 10 }}>
+            <CardLayout>
               <Form
                 ref={this.setIndividualDonateReceipt}
                 type={receiptIndividualFormSchema}
@@ -110,7 +109,7 @@ export default class RecieptTabsView extends Component {
       case 'company':
         return (
           <KeyboardAwareScrollView>
-            <CardLayout style={{ padding: 10 }}>
+            <CardLayout>
               <Form
                 ref={this.setCompanyDonateReceipt}
                 type={receiptCompanyFormSchema}

@@ -24,7 +24,7 @@ export function login(credentials, navigation = undefined) {
           updateActivateToken(credentials._username, token);
         } else {
           updateJWT(token, refresh_token);
-          dispatch(loadUserProfile());
+          dispatch(loadUserProfile(data));
           dispatch(NotificationAction());
         }
         updateRoute(
@@ -33,7 +33,7 @@ export function login(credentials, navigation = undefined) {
           null,
           data.routeParams
         );
-        _.delay(() => dispatch(setProgressModelState(false)), 1000);
+        dispatch(setProgressModelState(false));
         return token;
       })
       .catch(err => {
@@ -52,11 +52,16 @@ export function logoutUser() {
 
 export function forgot_password(data, navigation = undefined) {
   return dispatch => {
+    dispatch(setProgressModelState(true));
     postRequest('auth_forgotPassword_post', data)
       .then(res => {
+        dispatch(setProgressModelState(false));
         updateRoute('app_passwordSent', navigation || dispatch);
       })
-      .catch(err => debug(err));
+      .catch(err => {
+        debug(err);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 

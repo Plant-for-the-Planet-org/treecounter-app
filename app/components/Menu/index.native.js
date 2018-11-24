@@ -31,6 +31,12 @@ export default class Menu extends Component {
     userProfile: PropTypes.any
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps && nextProps.lastRoute != this.props.lastRoute) {
+      this.props.navigation.navigate(getLocalRoute(nextProps.lastRoute));
+    }
+  }
+
   componentDidMount() {
     Linking.getInitialURL()
       .then(url => {

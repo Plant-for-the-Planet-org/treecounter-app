@@ -27,8 +27,7 @@ export default (textInputStyles = EStyleSheet.create({
     marginLeft: 10,
     borderColor: '#cecece',
     borderBottomWidth: 1,
-    height: 45,
-    marginLeft: 28
+    height: 45
   },
   itemStyle: {
     color: '#cecece',

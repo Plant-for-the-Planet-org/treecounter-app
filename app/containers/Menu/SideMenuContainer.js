@@ -79,6 +79,7 @@ class SideMenuContainer extends Component {
         clearSupport={this.props.clearSupport}
         logoutUser={this.props.logoutUser}
         pathname={pathname}
+        lastRoute={this.props.lastRoute}
       />
     );
   }
@@ -87,7 +88,8 @@ class SideMenuContainer extends Component {
 const mapStateToProps = state => ({
   isOpen: state.sideNav && state.sideNav.open,
   loggedIn: currentUserProfileSelector(state) !== null,
-  userProfile: currentUserProfileSelector(state)
+  userProfile: currentUserProfileSelector(state),
+  lastRoute: state.lastRouteState.lastRoute
 });
 
 const mapDispatchToProps = dispatch => {
@@ -107,5 +109,6 @@ SideMenuContainer.propTypes = {
   location: PropTypes.object,
   toggleSideNavAction: PropTypes.func.isRequired,
   clearSupport: PropTypes.func,
-  userProfile: PropTypes.any
+  userProfile: PropTypes.any,
+  lastRoute: PropTypes.string
 };

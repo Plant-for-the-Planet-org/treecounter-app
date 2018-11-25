@@ -25,7 +25,10 @@ export default (currentSelectorStyles = EStyleSheet.create({
 
   treecount_price_conversion_Text_input: {
     marginVertical: 10,
-    width: '15%'
+    minWidth: '15%',
+    maxWidth: '25%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
   },
 
   treecount_price_conversion_Text: {
@@ -36,23 +39,39 @@ export default (currentSelectorStyles = EStyleSheet.create({
 
   treecount_price_conversion_Text_currency: {
     marginVertical: 10,
-    width: '20%'
+    minWidth: '20%',
+    maxWidth: '30%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
   },
   treecount_price_conversion_Text_currency2: {
     marginTop: 5,
-    width: '20%'
+    minWidth: '20%'
   },
   treecount_price_conversion_Text_equal: {
-    marginLeft: '25%',
-    marginRight: '25%',
+    minWidth: '30%',
+    maxWidth: '50%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+
     marginVertical: 10,
     alignSelf: 'center'
   },
 
   treecount_price_conversion_Text_equal2: {
-    marginLeft: '15%',
-    marginRight: '15%',
-    marginVertical: 5,
+    // marginLeft: '15%',
+    // marginRight: '15%',
+    // marginVertical: 5,
+    // alignSelf: 'center'
+
+    minWidth: '20%',
+    maxWidth: '30%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    marginVertical: 10,
     alignSelf: 'center'
   },
   treecount_price_conversion_Text_input2: {
@@ -64,14 +83,18 @@ export default (currentSelectorStyles = EStyleSheet.create({
     paddingBottom: 2,
     alignSelf: 'center'
   },
+  treecount_price_conversion_Text_input3Container: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    minWidth: '14%',
+    maxWidth: '26%'
+  },
   treecount_price_conversion_Text_input3: {
     marginTop: -10,
-    width: '12%',
-    borderBottomWidth: 1,
     paddingBottom: 4,
+    borderBottomWidth: 1,
     borderColor: '#686060',
-    alignSelf: 'center',
-    textAlign: 'center'
+    alignSelf: 'center'
   },
 
   radio_button: {

@@ -244,6 +244,7 @@ export default class DonateTrees extends Component {
                 rates={
                   currencies.currency_rates[selectedProject.currency].rates
                 }
+                selectedProject={selectedProject}
                 fees={paymentFee}
                 showNextButton={true}
                 currencies={currencies.currency_names} // TODO: connect to data from API

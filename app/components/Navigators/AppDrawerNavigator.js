@@ -231,7 +231,7 @@ export const getAppNavigator = function(
       [getLocalRoute('app_giftTrees')]: {
         screen: GiftTrees
       },
-      [getLocalRoute('app_explore')]: {
+      [getLocalRoute('app_homepage')]: {
         screen: Trillion
       }
     },

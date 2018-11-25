@@ -151,19 +151,17 @@ class TreeCountSelector extends React.Component {
                   style={styles.treecount_price_conversion_Text}
                   key={treeCount + 'container'}
                 >
-                  <Text style={styles.treecount_price_conversion_Text_equal}>
-                    =
-                  </Text>
-                  <Text
-                    style={styles.treecount_price_conversion_Text_input}
-                    key={treeCount}
-                  >
-                    {treeCountToAmount(treeCount)}
-                  </Text>
-                  <Text style={styles.treecount_price_conversion_Text_currency}>
-                    {' '}
-                    {currency}
-                  </Text>
+                  <View style={styles.treecount_price_conversion_Text_equal}>
+                    <Text>=</Text>
+                  </View>
+                  <View style={styles.treecount_price_conversion_Text_input}>
+                    <Text style={{ width: '100%' }} key={treeCount}>
+                      {treeCountToAmount(treeCount)}
+                    </Text>
+                  </View>
+                  <View style={styles.treecount_price_conversion_Text_currency}>
+                    <Text style={{ width: '100%' }}> {currency}</Text>
+                  </View>
                 </View>
               );
             })}
@@ -216,18 +214,24 @@ class TreeCountSelector extends React.Component {
             </View>
           </View>
           <View style={styles.treecount_price_conversion_Text}>
-            <Text style={styles.treecount_price_conversion_Text_equal2}>=</Text>
+            <View style={styles.treecount_price_conversion_Text_equal2}>
+              <Text>=</Text>
+            </View>
+            <View
+              style={styles.treecount_price_conversion_Text_input3Container}
+            >
+              <TextInput
+                editable={!this.state.isFixed}
+                style={styles.treecount_price_conversion_Text_input3}
+                keyboardType="numeric"
+                onChangeText={evt => this.handleVariableAmountChange(evt)}
+                value={String(this.state.variableAmount)}
+              />
+            </View>
 
-            <TextInput
-              editable={!this.state.isFixed}
-              style={styles.treecount_price_conversion_Text_input3}
-              keyboardType="numeric"
-              onChangeText={evt => this.handleVariableAmountChange(evt)}
-              value={String(this.state.variableAmount)}
-            />
-            <Text style={styles.treecount_price_conversion_Text_currency2}>
-              {currency}
-            </Text>
+            <View style={styles.treecount_price_conversion_Text_currency2}>
+              <Text style={{ width: '100%' }}>{currency}</Text>
+            </View>
           </View>
         </View>
       </View>

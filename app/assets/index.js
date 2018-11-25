@@ -108,6 +108,9 @@ import infoGrey from './images/icons/info_grey.png';
 import editGrey from './images/icons/edit_grey.png';
 import welcomeLogo from './images/icons/welcomeLogo.png';
 
+import world_outline from './images/world_outline.png';
+import world_outline_red from './images/world_outline_red.png';
+
 export {
   AppStoreLogo,
   darkTree,
@@ -217,5 +220,7 @@ export {
   targetPlanted,
   infoGrey,
   editGrey,
-  welcomeLogo
+  welcomeLogo,
+  world_outline_red,
+  world_outline
 };

@@ -7,7 +7,7 @@ import styles from '../../styles/selectplantproject/selectplantproject-snippet.n
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { getImageUrl } from '../../actions/apiRouting';
-import { targetPlanted } from '../../assets';
+import { targetPlanted, tick } from '../../assets';
 import TouchableItem from '../Common/TouchableItem.native';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -148,11 +148,17 @@ class PlantProjectSnippet extends React.Component {
               <Text style={styles.project_teaser__contentText}>
                 {teaserProps.projectName}
               </Text>
+              {teaserProps.isCertified ? (
+                <Image
+                  source={tick}
+                  style={{ width: 15, height: 15, marginLeft: 5, marginTop: 2 }}
+                />
+              ) : null}
             </View>
             <View style={styles.projectdetailsContainer}>
               <View style={styles.locationContainer}>
                 <Text style={styles.locationText}>{specsProps.location}</Text>
-                <View style={{ paddingTop: 3, paddingBottom: 3 }}>
+                <View>
                   <Text style={styles.survivalText}>
                     {i18n.t('label.survival_rate')} {':'}{' '}
                     {specsProps.survivalRate}%

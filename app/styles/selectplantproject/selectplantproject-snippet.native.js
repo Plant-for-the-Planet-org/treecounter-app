@@ -72,7 +72,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectdetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: rowHeight * 2 + 6,
+    height: rowHeight * 2,
     padding: 5
   },
   locationContainer: {
@@ -131,7 +131,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
     // borderRadius: 0,
     // marginRight: 5
     width: 80,
-    height: 30,
+    height: 25,
     borderWidth: 1,
     borderRadius: 6,
     padding: 0,
@@ -151,6 +151,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   projectNameContainer: {
     height: rowHeight * 1.5,
-    padding: 5
+    padding: 5,
+    flexDirection: 'row'
   }
 }));

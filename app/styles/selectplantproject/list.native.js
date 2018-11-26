@@ -1,12 +1,12 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-
-import { SearchContainerWidth } from '../header/search_bar';
-
+import { Dimensions } from 'react-native';
+const Layout = {
+  window: {
+    height: Dimensions.get('window').height - (56 + 70 + 20),
+    width: Dimensions.get('window').width
+  }
+};
 export default (selectplantprojectFull = EStyleSheet.create({
-  cardStyle: {
-    flex: 1,
-    flexDirection: 'column'
-  },
   listItemContainer: {
     flexDirection: 'column',
     height: 150
@@ -18,8 +18,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     backgroundColor: '#f0f0f0'
   },
   projectNameContainer: {
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: 8,
+    paddingBottom: 8,
     paddingLeft: 5,
     borderColor: '#efefef',
     borderStyle: 'solid',
@@ -84,7 +84,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     alignItems: 'center',
     borderColor: '#efefef',
     borderStyle: 'solid',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    padding: 10
   },
   searchIconContainer: {
     height: 15,
@@ -108,7 +109,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderBottomWidth: 1,
-    margin: 1
+    marginBottom: 1,
+    flexDirection: 'column'
   },
   buttonStyle: {
     height: 20,
@@ -140,11 +142,17 @@ export default (selectplantprojectFull = EStyleSheet.create({
 
   cardHeader: {
     flexDirection: 'row',
-    paddingBottom: 10
+    padding: 10
   },
   headingStyle: {
     fontSize: 16,
     marginRight: 10,
     color: '$textColor'
+  },
+  cardStyle: {
+    width: Layout.window.width - 30,
+    padding: 0,
+    margin: 0,
+    paddingBottom: 10
   }
 }));

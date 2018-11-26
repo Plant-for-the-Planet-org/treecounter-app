@@ -10,8 +10,8 @@ class PaypalComponent extends React.Component {
   }
   onPayclick() {
     PayPal.initialize(
-      PayPal.SANDBOX,
-      'AVM8OuLVHPJJFABHQdXdrmV0QZU5jS0w_AYtMzijVqm1etflKYpKXdQoqMUX5b5mQqHrRhKBG_oKPb5i'
+      this.props.mode === 'production' ? PayPal.PRODUCTION : PayPal.SANDBOX,
+      account.authorization.client_id
     );
     PayPal.pay({
       price: this.props.amount.toString(),
@@ -22,7 +22,7 @@ class PaypalComponent extends React.Component {
         let response = confirm.response;
         response.paymentID = response.id;
         this.props.onSuccess(response);
-        console.log('confirmed called up');
+        //  console.log('confirmed called up');
       })
       .catch(error => this.props.onSuccess(data));
   }
@@ -77,6 +77,7 @@ PaypalComponent.propTypes = {
   handleExpandedClicked: PropTypes.func,
   isScriptLoaded: PropTypes.bool,
   isScriptLoadSucceed: PropTypes.bool,
+  mode: PropTypes.string,
   onSuccess: PropTypes.func
 };
 

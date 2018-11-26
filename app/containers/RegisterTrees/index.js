@@ -28,6 +28,7 @@ class RegisterTreesContainer extends Component {
         this.props.navigation
       );
     }
+    return false;
   };
 
   render() {

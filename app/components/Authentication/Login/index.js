@@ -27,7 +27,12 @@ export default class Login extends Component {
               options={schemaOptions}
             />
 
-            <PrimaryButton onClick={this.props.onPress}>
+            <PrimaryButton
+              onClick={event => {
+                this.props.onPress();
+                event.preventDefault();
+              }}
+            >
               {i18n.t('label.login')}
             </PrimaryButton>
           </form>

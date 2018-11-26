@@ -7,9 +7,8 @@ import i18n from '../../locales/i18n.js';
 import styles from '../../styles/register_trees.native';
 const Form = t.form.Form;
 
-getFormLayoutTemplate = mode => {
+getFormLayoutTemplate = (mode, isTpo) => {
   const formLayoutTreesTemplate = locals => {
-    console.log('locals', locals.inputs);
     return (
       <View style={styles.registerTree__form}>
         <View style={styles.registerTree__form__row}>
@@ -23,7 +22,7 @@ getFormLayoutTemplate = mode => {
 
         {locals.inputs.geoLocation}
 
-        {locals.inputs.plantProject}
+        {isTpo ? locals.inputs.plantProject : null}
         <View
           style={[styles.registerTree__form__alignLeftRow, styles.margin_top10]}
         />
@@ -42,9 +41,9 @@ getFormLayoutTemplate = mode => {
 
 export default class RegisterTreeTab extends PureComponent {
   render() {
-    console.log('locals', this.props);
+    //console.log('locals', this.props);
     const schemaOptionsMultiple = {
-      template: getFormLayoutTemplate(this.props.mode),
+      template: getFormLayoutTemplate(this.props.mode, this.props.isTpo),
       ...this.props.schemaOptions
     };
     return (
@@ -79,5 +78,6 @@ RegisterTreeTab.propTypes = {
   schemaType: PropTypes.any.isRequired,
   schemaOptions: PropTypes.any.isRequired,
   value: PropTypes.any,
-  buttonTitle: PropTypes.string
+  buttonTitle: PropTypes.string,
+  isTpo: PropTypes.bool
 };

@@ -5,7 +5,6 @@ import {
   receiptCompanyFormSchema,
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
-import { ScrollView } from 'react-native';
 
 import {
   receiptIndividualFormSchema,
@@ -18,6 +17,7 @@ import i18n from '../../locales/i18n.js';
 import CardLayout from '../../components/Common/Card';
 import styles from '../../styles/common/tabbar';
 import PropTypes from 'prop-types';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 let Form = t.form.Form;
 
@@ -90,8 +90,8 @@ export default class RecieptTabsView extends Component {
     switch (route.key) {
       case 'individual':
         return (
-          <ScrollView>
-            <CardLayout style={{ padding: 10 }}>
+          <KeyboardAwareScrollView>
+            <CardLayout>
               <Form
                 ref={this.setIndividualDonateReceipt}
                 type={receiptIndividualFormSchema}
@@ -104,12 +104,12 @@ export default class RecieptTabsView extends Component {
                 </PrimaryButton>
               ) : null}
             </CardLayout>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         );
       case 'company':
         return (
-          <ScrollView>
-            <CardLayout style={{ padding: 10 }}>
+          <KeyboardAwareScrollView>
+            <CardLayout>
               <Form
                 ref={this.setCompanyDonateReceipt}
                 type={receiptCompanyFormSchema}
@@ -122,7 +122,7 @@ export default class RecieptTabsView extends Component {
                 </PrimaryButton>
               ) : null}
             </CardLayout>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         );
       default:
         return null;

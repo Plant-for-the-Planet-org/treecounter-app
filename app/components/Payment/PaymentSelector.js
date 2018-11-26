@@ -46,8 +46,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         stripeJs.src = 'https://js.stripe.com/v3/';
         stripeJs.async = true;
         stripeJs.onload = () => {
-          // The setTimeout lets us pretend that Stripe.js took a long time to load
-          // Take it out of your production code!
           this.setState({
             stripe: window.Stripe(props.stripePublishableKey)
           });
@@ -80,8 +78,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           stripeJs.src = 'https://js.stripe.com/v3/';
           stripeJs.async = true;
           stripeJs.onload = () => {
-            // The setTimeout lets us pretend that Stripe.js took a long time to load
-            // Take it out of your production code!
             this.setState({
               stripe: window.Stripe(nextProps.stripePublishableKey)
             });

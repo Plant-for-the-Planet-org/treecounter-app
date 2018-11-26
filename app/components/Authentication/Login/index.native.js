@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import { Text, View, Image, ScrollView } from 'react-native';
+import scrollStyle from '../../../styles/common/scrollStyle';
 
 import {
   loginFormSchema,
@@ -29,7 +30,9 @@ export default class Login extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}>
+      <ScrollView
+        contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
+      >
         <View style={styles.parentContainer}>
           <View style={styles.headerContainer}>
             <Image
@@ -58,14 +61,15 @@ export default class Login extends Component {
               </TouchableItem>
             </View>
             <View style={styles.bottomRow}>
-              <TouchableItem onPress={this.onSignupClicked}>
+              <TouchableItem
+                style={{ paddingRight: 5 }}
+                onPress={this.onSignupClicked}
+              >
                 <Text style={styles.bottomTextHighlight}>
-                  {i18n.t('label.dont_have_account')}
-                  {'  '}
-                  {i18n.t('label.signUp')}
+                  {i18n.t('label.dont_have_account')} {i18n.t('label.signUp')}
                 </Text>
               </TouchableItem>
-
+              {'  '}
               <PrimaryButton
                 onClick={this.props.onPress}
                 buttonStyle={styles.loginButtonStyle}

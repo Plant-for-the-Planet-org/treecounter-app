@@ -24,6 +24,7 @@ import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout.native';
 import AboutUsContainer from '../../containers/AboutUs';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal.native';
+import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal.native';
 import LicenseInfoList from '../AboutUs/LicenseInfoList.native';
 import TabContainer from '../../containers/Menu/TabContainer';
 import GiftTrees from '../../containers/GiftTrees';
@@ -53,7 +54,7 @@ const headerLabels = {
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
   [getLocalRoute('app_homepage')]: 'World',
   [getLocalRoute('app_explore')]: 'label.explore',
-  [getLocalRoute('app_userHome')]: 'Me',
+  [getLocalRoute('app_userHome')]: 'Trillion Tree Campaign',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   [getLocalRoute('app_editProfile')]: 'label.edit_profile',
   [getLocalRoute('app_redeem')]: 'label.redeem_trees',
@@ -69,14 +70,15 @@ const headerLabels = {
   ['app_donate_detail']: 'label.donate'
 };
 
-export const getAppNavigator = function(isLoggedIn, userProfile) {
+export const getAppNavigator = function(
+  isLoggedIn,
+  userProfile,
+  isWelcomeScreenEnabled = false
+) {
   const baseNavigator = createStackNavigator(
     {
-      [getLocalRoute('app_registerTrees')]: {
-        screen: RegisterTrees
-      },
       [getLocalRoute('app_editProfile')]: {
-        screen: EditUserProfile
+        screen: isLoggedIn ? EditUserProfile : LoginContainer
       },
       [getLocalRoute('app_userHome')]: {
         screen: isLoggedIn ? UserHomeContainer : Trillion
@@ -163,6 +165,23 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
+  const welcomeScreenNavigator = createStackNavigator(
+    {
+      ['welcome_screen']: { screen: WelcomeScreenModal }
+    },
+    {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
   const getTitle = function(navigation) {
     let title = navigation.getParam('titleParam');
     try {
@@ -197,40 +216,23 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
   const ApptabNavigator = createBottomTabNavigator(
     {
       [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : Trillion
+        screen: isLoggedIn ? UserHomeContainer : LoginContainer
+      },
+      [getLocalRoute('app_registerTrees')]: {
+        screen: isLoggedIn ? RegisterTrees : LoginContainer
       },
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
       },
-      [getLocalRoute('app_myTrees')]: {
-        screen: isLoggedIn ? UserContributions : LoginContainer
-      },
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
       },
-      [getLocalRoute('app_selectProject')]: {
-        screen: SelectedPlantProject
-      },
-      [getLocalRoute('app_redeem')]: {
-        screen: RedemptionContainer
-      },
-      [getLocalRoute('app_claim')]: {
-        screen: RedemptionContainer
+
+      [getLocalRoute('app_giftTrees')]: {
+        screen: SelectPlantProjectContainer
       },
       [getLocalRoute('app_homepage')]: {
         screen: Trillion
-      },
-      [getLocalRoute('app_giftTrees')]: {
-        screen: GiftTrees
-      },
-      [getLocalRoute('app_explore')]: {
-        screen: LeaderBoard
-      },
-      [getLocalRoute('app_signup')]: {
-        screen: SignUpContainer
-      },
-      [getLocalRoute('app_forgotPassword')]: {
-        screen: ForgotPasswordContainer
       }
     },
     {
@@ -284,10 +286,13 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     {
       appStackNavigator,
       searchNavigator: searchNavigator,
-      deleteProfileNavigator
+      deleteProfileNavigator,
+      welcomeScreenNavigator
     },
     {
-      initialRouteName: 'appStackNavigator',
+      initialRouteName: isWelcomeScreenEnabled
+        ? 'welcomeScreenNavigator'
+        : 'appStackNavigator',
       gesturesEnabled: false,
       contentComponent: SideMenuContainer
     }

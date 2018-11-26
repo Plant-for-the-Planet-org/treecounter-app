@@ -85,7 +85,7 @@ export default class EditUserProfile extends Component {
           <Text>{i18n.t('label.same_password_error')}</Text>
         );
       } catch (err) {
-        console.log(err);
+        //console.log(err);
       }
     } else if (profileType == 'image') {
       schemaOptions.fields.imageFile.template = ProfileImagePickerTemplate;

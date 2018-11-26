@@ -44,7 +44,6 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
             donationContribution.paymentResponse.confirmation ===
             'iOS referred payment'
           ) {
-            console.log(contribution.token);
             dispatch(
               paymentSuccess({
                 status: true,

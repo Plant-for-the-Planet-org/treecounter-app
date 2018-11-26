@@ -14,6 +14,7 @@ import {
   selectPlantProjectAction,
   clearPlantProject
 } from '../../actions/selectPlantProjectAction';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { fetchCurrencies } from '../../actions/currencies';
 import { donate, paymentClear } from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
@@ -51,6 +52,7 @@ class DonationTreesContainer extends Component {
         paymentClear={this.props.paymentClear}
         setProgressModelState={this.props.setProgressModelState}
         plantProjectClear={this.props.clearPlantProject}
+        loadUserProfile={this.props.loadUserProfile}
         {...this.props}
       />
     );
@@ -76,7 +78,8 @@ const mapDispatchToProps = dispatch => {
       donate,
       paymentClear,
       clearPlantProject,
-      setProgressModelState
+      setProgressModelState,
+      loadUserProfile
     },
     dispatch
   );

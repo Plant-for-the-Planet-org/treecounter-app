@@ -13,7 +13,7 @@ import i18n from '../../locales/i18n.js';
 import { renderFilledTabBar } from '../Common/Tabs';
 import RegisterTreeTab from './RegisterTreeTab.native';
 import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
-import { getPlantProjectEnum } from '../../helpers/utils';
+import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default class RegisterTrees extends Component {
@@ -42,7 +42,7 @@ export default class RegisterTrees extends Component {
   _handleIndexChange = index => this.setState({ index });
 
   handleGeoLocationChange(geoLocation) {
-    console.log(geoLocation);
+    //console.log(geoLocation);
   }
 
   _renderTabBar = props => {
@@ -66,6 +66,7 @@ export default class RegisterTrees extends Component {
     return (
       <RegisterTreeTab
         onRegister={this.props.onSubmit}
+        isTpo={isTpo(this.props.currentUserProfile)}
         mode={route.key}
         schemaType={
           route.key == 'single-tree'

@@ -80,12 +80,12 @@ export default class Privacy extends Component {
                 ? `${context.scheme}://${context.host}${url}`
                 : url;
             } catch (err) {
-              console.log(err);
+              //console.log(err);
             }
 
-            console.log('clicked link: ', url);
+            // console.log('clicked link: ', url);
             Linking.openURL(url).catch(err => {
-              console.log(err);
+              //console.log(err);
             });
           }}
         />

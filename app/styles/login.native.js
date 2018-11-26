@@ -15,7 +15,7 @@ export default (loginStyles = EStyleSheet.create({
     flex: 0.7,
     width: '100%',
     // justifyContent: 'center',
-    padding: 20,
+    padding: 15,
     paddingTop: 30,
     flexGrow: 1
   },
@@ -63,8 +63,10 @@ export default (loginStyles = EStyleSheet.create({
   },
   bottomRow: {
     flexDirection: 'row',
-    padding: 10,
-    alignItems: 'flex-start'
+    paddingTop: 10,
+    paddingBottom: 10,
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
   },
   bottomText: {
     fontSize: 11,

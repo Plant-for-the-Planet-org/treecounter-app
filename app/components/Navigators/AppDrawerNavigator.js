@@ -70,11 +70,7 @@ const headerLabels = {
   ['app_donate_detail']: 'label.donate'
 };
 
-export const getAppNavigator = function(
-  isLoggedIn,
-  userProfile,
-  isWelcomeScreenEnabled = false
-) {
+export const getAppNavigator = function(isLoggedIn, userProfile) {
   const baseNavigator = createStackNavigator(
     {
       [getLocalRoute('app_editProfile')]: {
@@ -290,9 +286,7 @@ export const getAppNavigator = function(
       welcomeScreenNavigator
     },
     {
-      initialRouteName: isWelcomeScreenEnabled
-        ? 'welcomeScreenNavigator'
-        : 'appStackNavigator',
+      initialRouteName: 'appStackNavigator',
       gesturesEnabled: false,
       contentComponent: SideMenuContainer
     }

@@ -198,7 +198,7 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_passwordSent')}
                 component={EmailSentContainer}
               />
-              <PublicRoute
+              <Route
                 path={getLocalRoute('app_payment') + '/:donationContribution'}
                 component={AppPaymentContainer}
               />

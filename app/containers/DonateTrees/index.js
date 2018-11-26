@@ -102,5 +102,6 @@ DonationTreesContainer.propTypes = {
   fetchCurrencies: PropTypes.func,
   clearPlantProject: PropTypes.func,
   supportTreecounter: PropTypes.object,
-  setProgressModelState: PropTypes.func
+  setProgressModelState: PropTypes.func,
+  loadUserProfile: PropTypes.func
 };

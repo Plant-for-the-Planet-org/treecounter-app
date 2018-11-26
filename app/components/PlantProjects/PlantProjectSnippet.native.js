@@ -49,7 +49,6 @@ class PlantProjectSnippet extends React.Component {
     if (treeCountWidth < 0) {
       treeCountWidth = 100;
     }
-    console.log(name, treeCountWidth);
 
     if (imageFile) {
       projectImage = { image: imageFile };

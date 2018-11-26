@@ -449,4 +449,13 @@ export function getCountryIso2(countryCode) {
     return countryCode;
   }
 }
+
+export function isTpo(currentUserProfile) {
+  let tpo = false;
+  if (currentUserProfile && currentUserProfile.type === 'tpo') {
+    tpo = true;
+  }
+  return tpo;
+}
+
 export const paymentFee = 0;

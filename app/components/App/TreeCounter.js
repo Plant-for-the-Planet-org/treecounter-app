@@ -50,6 +50,7 @@ import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
 import PrivacyContainer from '../../containers/Privacy';
 import ImprintContainer from '../../containers/Imprint';
 import DownloadAppModal from '../DownloadAppStore';
+import AppPaymentContainer from '../../containers/AppPayment';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -193,6 +194,10 @@ class TreeCounter extends Component {
               <PublicRoute
                 path={getLocalRoute('app_passwordSent')}
                 component={EmailSentContainer}
+              />
+              <PublicRoute
+                path={getLocalRoute('app_payment') + '/:donationContribution'}
+                component={AppPaymentContainer}
               />
               <Route
                 path={getLocalRoute('app_explore')}

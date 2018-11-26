@@ -28,7 +28,8 @@ class PlantProjectFull extends React.Component {
       geoLocation,
       plantProjectImages,
       url,
-      linkText
+      linkText,
+      tpo_name
     } = this.props.plantProject;
 
     const detailsProps = {
@@ -51,7 +52,7 @@ class PlantProjectFull extends React.Component {
             showMoreButton={false}
             plantProject={this.props.plantProject}
             onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
-            tpoName={this.props.plantProject.tpo_name}
+            tpoName={tpo_name}
           />
 
           <View style={styles.horizontalRule} />

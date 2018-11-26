@@ -55,6 +55,9 @@ export default class Menu extends Component {
 
     // This listener handles the case where the app is woken up from the Universal or Deep Linking
     Linking.addEventListener('url', this.appWokeUp);
+    if (!this.props.userProfile) {
+      updateRoute('app_homepage', this.props.navigation, 0);
+    }
   }
 
   componentWillUnmount() {

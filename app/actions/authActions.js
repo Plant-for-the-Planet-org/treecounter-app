@@ -69,7 +69,7 @@ export function sendEmail(navigation = undefined) {
   return dispatch => {
     postActivateLinkRequest('auth_sendActivationLink_post')
       .then(res => {
-        updateRoute('app_login', navigation || dispatch);
+        // console.log(res);
       })
       .catch(err => debug(err));
   };

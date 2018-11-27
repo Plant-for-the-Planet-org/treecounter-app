@@ -1,15 +1,14 @@
 import React from 'react';
 import i18n from '../../locales/i18n';
-import styles from '../../styles/forms/select';
+import styles from '../../styles/forms/select.native';
 
 import PropTypes from 'prop-types';
 import { Text, View, Animated, TouchableOpacity, Picker } from 'react-native';
 import datePickerStyle from '../../styles/date_picker.native';
-import { formatDate } from '../../helpers/utils';
 
 const UIPICKER_HEIGHT = 216;
 
-class SelectTemplate extends React.PureComponent {
+class SelectTemplateIOS extends React.PureComponent {
   constructor(props) {
     super(props);
     this._onPress = this.onPress.bind(this);
@@ -112,7 +111,7 @@ class SelectTemplate extends React.PureComponent {
   }
 }
 
-SelectTemplate.propTypes = {
+SelectTemplateIOS.propTypes = {
   locals: PropTypes.object.isRequired
 };
 
@@ -144,7 +143,7 @@ export function getSelectTemplate(enumOption) {
     return (
       //formGroupStyle
       <View style={[{ flex: 1 }]}>
-        <SelectTemplate locals={locals} options={options} />
+        <SelectTemplateIOS locals={locals} options={options} />
         {help}
         {error}
       </View>

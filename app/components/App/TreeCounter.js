@@ -141,10 +141,13 @@ class TreeCounter extends Component {
         <BrowserRouter history={history}>
           <div className="app-container">
             <ProgressModal isOpen={this.props.progressModel} />
-            <DownloadAppModal
-              isOpen={this.state.isIOS && !this.state.isCancelled}
-              continueOnSite={this.continueOnSite.bind(this)}
-            />
+            {window.location.pathname.indexOf('donation-payment') >
+            -1 ? null : (
+              <DownloadAppModal
+                isOpen={this.state.isIOS && !this.state.isCancelled}
+                continueOnSite={this.continueOnSite.bind(this)}
+              />
+            )}
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             <div className="app-container__content">
@@ -195,7 +198,7 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_passwordSent')}
                 component={EmailSentContainer}
               />
-              <PublicRoute
+              <Route
                 path={getLocalRoute('app_payment') + '/:donationContribution'}
                 component={AppPaymentContainer}
               />

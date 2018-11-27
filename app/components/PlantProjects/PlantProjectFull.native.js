@@ -61,19 +61,15 @@ class PlantProjectFull extends React.Component {
           </View>
 
           <View style={styles.buttonContainer}>
-            {this.props.showGoback ? (
-              <PrimaryButton onClick={() => this.props.selectProject(id)}>
-                {i18n.t('label.donate')}
-              </PrimaryButton>
-            ) : null}
+            <PrimaryButton onClick={() => this.props.selectProject(id)}>
+              {i18n.t('label.donate')}
+            </PrimaryButton>
           </View>
         </CardLayout>
       </ScrollView>
     );
   }
-  componentWillUnmount() {
-    this.props.onBackClick();
-  }
+  componentWillUnmount() {}
 }
 
 PlantProjectFull.propTypes = {
@@ -83,7 +79,6 @@ PlantProjectFull.propTypes = {
   showNextButton: PropTypes.bool,
   onNextClick: PropTypes.func,
   selectProject: PropTypes.func,
-  showGoback: PropTypes.bool,
   onBackClick: PropTypes.func
 };
 

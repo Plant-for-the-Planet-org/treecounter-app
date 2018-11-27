@@ -87,6 +87,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
     borderBottomWidth: 1,
     padding: 10
   },
+  searchItem: {
+    paddingBottom: 10
+  },
   searchIconContainer: {
     height: 15,
     width: 15,

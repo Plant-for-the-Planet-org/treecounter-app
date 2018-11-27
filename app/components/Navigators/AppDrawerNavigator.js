@@ -70,11 +70,7 @@ const headerLabels = {
   ['app_donate_detail']: 'label.donate'
 };
 
-export const getAppNavigator = function(
-  isLoggedIn,
-  userProfile,
-  isWelcomeScreenEnabled = false
-) {
+export const getAppNavigator = function(isLoggedIn, userProfile) {
   const baseNavigator = createStackNavigator(
     {
       [getLocalRoute('app_editProfile')]: {
@@ -117,10 +113,7 @@ export const getAppNavigator = function(
       [getLocalRoute('app_claim')]: {
         screen: RedemptionContainer
       },
-      [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
-      ['app_donate_detail']: {
-        screen: SelectPlantProjectContainer
-      }
+      [getLocalRoute('app_editTrees')]: EditUserContributionContainer
     },
     {
       headerMode: 'none',
@@ -215,6 +208,9 @@ export const getAppNavigator = function(
   };
   const ApptabNavigator = createBottomTabNavigator(
     {
+      [getLocalRoute('app_homepage')]: {
+        screen: Trillion
+      },
       [getLocalRoute('app_userHome')]: {
         screen: isLoggedIn ? UserHomeContainer : LoginContainer
       },
@@ -230,9 +226,6 @@ export const getAppNavigator = function(
 
       [getLocalRoute('app_giftTrees')]: {
         screen: SelectPlantProjectContainer
-      },
-      [getLocalRoute('app_homepage')]: {
-        screen: Trillion
       }
     },
     {
@@ -290,9 +283,7 @@ export const getAppNavigator = function(
       welcomeScreenNavigator
     },
     {
-      initialRouteName: isWelcomeScreenEnabled
-        ? 'welcomeScreenNavigator'
-        : 'appStackNavigator',
+      initialRouteName: 'appStackNavigator',
       gesturesEnabled: false,
       contentComponent: SideMenuContainer
     }

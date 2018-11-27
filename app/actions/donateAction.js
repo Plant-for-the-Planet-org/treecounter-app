@@ -44,7 +44,6 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
             donationContribution.paymentResponse.confirmation ===
             'iOS referred payment'
           ) {
-            console.log(contribution.token);
             dispatch(
               paymentSuccess({
                 status: true,
@@ -52,6 +51,7 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
                 message: 'success'
               })
             );
+            dispatch(setProgressModelState(false));
           } else {
             dispatch(
               mergeEntities(normalize(contribution, contributionSchema))

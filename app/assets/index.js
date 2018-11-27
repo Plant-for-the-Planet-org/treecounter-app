@@ -110,9 +110,6 @@ import welcomeLogo from './images/icons/welcomeLogo.png';
 import world_outline from './images/world_outline.png';
 import world_outline_red from './images/world_outline_red.png';
 
-import world_outline from './images/world_outline.png';
-import world_outline_red from './images/world_outline_red.png';
-
 export {
   AppStoreLogo,
   darkTree,

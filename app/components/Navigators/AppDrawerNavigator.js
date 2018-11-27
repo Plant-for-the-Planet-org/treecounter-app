@@ -117,10 +117,7 @@ export const getAppNavigator = function(
       [getLocalRoute('app_claim')]: {
         screen: RedemptionContainer
       },
-      [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
-      ['app_donate_detail']: {
-        screen: SelectPlantProjectContainer
-      }
+      [getLocalRoute('app_editTrees')]: EditUserContributionContainer
     },
     {
       headerMode: 'none',
@@ -215,6 +212,9 @@ export const getAppNavigator = function(
   };
   const ApptabNavigator = createBottomTabNavigator(
     {
+      [getLocalRoute('app_homepage')]: {
+        screen: Trillion
+      },
       [getLocalRoute('app_userHome')]: {
         screen: isLoggedIn ? UserHomeContainer : LoginContainer
       },
@@ -230,9 +230,6 @@ export const getAppNavigator = function(
 
       [getLocalRoute('app_giftTrees')]: {
         screen: SelectPlantProjectContainer
-      },
-      [getLocalRoute('app_homepage')]: {
-        screen: Trillion
       }
     },
     {

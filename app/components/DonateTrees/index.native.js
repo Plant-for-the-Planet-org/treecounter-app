@@ -97,10 +97,15 @@ export default class DonateTrees extends Component {
   }
 
   handleOpenURL = url => {
-    if (url === 'paymentSuccess') {
-      this.props.loadUserProfile();
+    if (url.url.split('//')[1] === 'paymentSuccess') {
+      if (this.props.currentUserProfile) {
+        this.props.loadUserProfile();
+      }
+      this.props.updateRoute('app_userHome');
     } else {
       // handle failure
+      this.props.paymentClear();
+      this.goToNextTab(1);
     }
   };
 
@@ -412,5 +417,6 @@ DonateTrees.propTypes = {
   plantProjectClear: PropTypes.func,
   onTabChange: PropTypes.func,
   setProgressModelState: PropTypes.func,
-  loadUserProfile: PropTypes.func
+  loadUserProfile: PropTypes.func,
+  updateRoute: PropTypes.func
 };

@@ -51,6 +51,7 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
                 message: 'success'
               })
             );
+            dispatch(setProgressModelState(false));
           } else {
             dispatch(
               mergeEntities(normalize(contribution, contributionSchema))

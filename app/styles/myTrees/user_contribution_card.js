@@ -101,10 +101,7 @@ let myTreesStyle = (color, borderColor) =>
       fontWeight: '500',
       color: '$colorPrimaryAccent'
     },
-    cardContainer: {
-      borderRadius: 5,
-      margin: 5,
-      backgroundColor: 'white',
+    addPadding: {
       padding: 10,
       paddingLeft: 20
     },

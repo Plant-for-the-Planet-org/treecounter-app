@@ -23,6 +23,7 @@ import Lightbox from 'react-native-lightbox';
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
 import _ from 'lodash';
+import CardLayout from '../Common/Card';
 class ContributionCard extends React.Component {
   constructor(props) {
     super(props);
@@ -261,7 +262,7 @@ class ContributionCard extends React.Component {
           : '#ec6453';
     let styles = myTreesStyle(labelColor, borderColor);
     return contributionType === 'donation' ? (
-      <View style={styles.cardContainer}>
+      <CardLayout style={styles.addPadding}>
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
           <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
@@ -291,9 +292,9 @@ class ContributionCard extends React.Component {
             {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
           </Text>
         </View>
-      </View>
+      </CardLayout>
     ) : contributionType === 'planting' ? (
-      <View style={styles.cardContainer}>
+      <CardLayout style={styles.addPadding}>
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
           <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
@@ -323,9 +324,9 @@ class ContributionCard extends React.Component {
             {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
           </Text>
         </View>
-      </View>
+      </CardLayout>
     ) : (
-      <View style={styles.cardContainer}>
+      <CardLayout style={styles.addPadding}>
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
           <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
@@ -355,7 +356,7 @@ class ContributionCard extends React.Component {
             {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
           </Text>
         </View>
-      </View>
+      </CardLayout>
     );
     {
       /* <View

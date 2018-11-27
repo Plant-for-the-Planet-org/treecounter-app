@@ -14,7 +14,7 @@ export function CheckboxTemplate(locals) {
     width: 20,
     height: 20,
     marginRight: 10,
-    resizeMode: 'center'
+    resizeMode: 'contain'
   };
 
   let textboxStyle = {

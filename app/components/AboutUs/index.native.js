@@ -4,6 +4,7 @@ import { ScrollView } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import i18n from '../../locales/i18n';
 import { withNavigation } from 'react-navigation';
+import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 const LicenseInfo = require('./LicenseInfo.json');
 
 //Run license-checker --production  --json > license.json to fetch license info from package.json:
@@ -16,19 +17,25 @@ class AboutUs extends Component {
       <ScrollView>
         <LargeMenuItem
           onPress={() => {
-            console.log('open change log');
+            //  console.log('open change log');
           }}
           title={version}
         />
         <LargeMenuItem
           onPress={() => {
-            console.log('open change log');
+            updateRoute('app_privacy', this.props.navigation, null);
           }}
-          title={i18n.t('label.privacy')}
+          title={i18n.t('label.data_protection')}
         />
         <LargeMenuItem
           onPress={() => {
-            console.log('open Third party here');
+            updateRoute('app_imprint', this.props.navigation, null);
+          }}
+          title={i18n.t('label.imprint')}
+        />
+        <LargeMenuItem
+          onPress={() => {
+            // console.log('open Third party here');
             this.props.navigation.navigate('license_info_list', {
               licenseList: LicenseInfo
             });

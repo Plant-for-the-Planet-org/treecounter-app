@@ -13,6 +13,8 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
 import _ from 'lodash';
 import { ProfileImagePickerTemplate } from './ProfileImagePickerTemplate.native';
+import styles from '../../styles/edit_profile.native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const Form = t.form.Form;
 function UserProfileTemplate(locals) {
@@ -83,7 +85,7 @@ export default class EditUserProfile extends Component {
           <Text>{i18n.t('label.same_password_error')}</Text>
         );
       } catch (err) {
-        console.log(err);
+        //console.log(err);
       }
     } else if (profileType == 'image') {
       schemaOptions.fields.imageFile.template = ProfileImagePickerTemplate;
@@ -99,7 +101,7 @@ export default class EditUserProfile extends Component {
     switch (route.key) {
       case 'basic':
         return (
-          <ScrollView>
+          <KeyboardAwareScrollView>
             <CardLayout style={{ flex: 1 }}>
               <Form
                 ref={'image'}
@@ -107,7 +109,7 @@ export default class EditUserProfile extends Component {
                 options={this.getFormSchemaOption(type, 'image')}
                 value={{ imageFile: this.props.currentUserProfile.image }}
               />
-              <View {...this.props} style={styles.mapContainer}>
+              <View {...this.props}>
                 <Form
                   ref={'profile'}
                   type={parsedSchema[type].profile.transformedSchema}
@@ -123,14 +125,14 @@ export default class EditUserProfile extends Component {
                 {i18n.t('label.save_changes')}
               </PrimaryButton>
             </CardLayout>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         );
         break;
       case 'desc':
         return (
-          <ScrollView>
+          <KeyboardAwareScrollView>
             <CardLayout style={{ flex: 1 }}>
-              <View {...this.props} style={styles.mapContainer}>
+              <View {...this.props}>
                 <Form
                   ref={'about_me'}
                   type={parsedSchema[type].about_me.transformedSchema}
@@ -146,13 +148,13 @@ export default class EditUserProfile extends Component {
                 {i18n.t('label.save_changes')}
               </PrimaryButton>
             </CardLayout>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         );
       case 'security':
         return (
-          <ScrollView>
+          <KeyboardAwareScrollView>
             <CardLayout style={{ flex: 1 }}>
-              <View {...this.props} style={styles.mapContainer}>
+              <View {...this.props}>
                 <Form
                   ref={'password'}
                   type={parsedSchema[type].password.transformedSchema}
@@ -182,8 +184,18 @@ export default class EditUserProfile extends Component {
               >
                 {i18n.t('label.change_password')}
               </PrimaryButton>
+              <PrimaryButton
+                buttonStyle={styles.deleteProfileButton}
+                onClick={() => {
+                  this.props.navigation.navigate('delete_profile_confirm', {
+                    deleteProfile: this.props.deleteProfile
+                  });
+                }}
+              >
+                {i18n.t('label.delete_profile')}
+              </PrimaryButton>
             </CardLayout>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         );
         break;
         return null;
@@ -193,7 +205,7 @@ export default class EditUserProfile extends Component {
   render() {
     return (
       <ScrollView contentContainerStyle={{ flex: 1 }}>
-        <View style={styles.headContainer} />
+        <View />
         <TabView
           ref={'tabView'}
           useNativeDriver={true}

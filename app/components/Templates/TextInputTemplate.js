@@ -1,8 +1,9 @@
 import React from 'react';
 import i18n from '../../locales/i18n';
 import { formatDate } from '../../helpers/utils';
-
+import { getLocale } from '../../actions/getLocale';
 export function TextInputTemplate(locals) {
+  const locale = getLocale();
   function onChange($event) {
     let value =
       locals.type === 'number' && $event.target.value
@@ -23,7 +24,7 @@ export function TextInputTemplate(locals) {
   } else {
     className = 'pftp-textfield__error-inputgroup';
   }
-
+  const isDate = locals.type === 'date';
   return locals.type !== 'hidden' ? (
     <div className="pftp-textfield-container">
       <div className="pftp-textfield">
@@ -31,11 +32,12 @@ export function TextInputTemplate(locals) {
           <img className="pftp-textfield__icon" src={locals.config.iconUrl} />
         ) : null}
         <div className={className}>
-          {locals.type === 'date' ? (
+          {isDate ? (
             <input
+              date-format="dd/mm/yyyy"
+              lang={locale}
               type={locals.type}
               autoComplete="new-password"
-              required="required"
               max={todayDate()}
               value={locals.value}
               onChange={onChange}
@@ -44,7 +46,6 @@ export function TextInputTemplate(locals) {
             <input
               type={locals.type}
               autoComplete="new-password"
-              required="required"
               value={locals.value}
               onChange={onChange}
             />
@@ -64,7 +65,9 @@ export function TextInputTemplate(locals) {
                 : 'pftp-textfield__inputgroup--error-bar'
             }
           />
-          <label>{i18n.t(locals.label)}</label>
+          <label className={locals.value || isDate ? 'float-label' : ''}>
+            {i18n.t(locals.label)}
+          </label>
         </div>
       </div>
       {error && locals.error ? locals.error : null}

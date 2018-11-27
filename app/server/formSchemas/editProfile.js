@@ -620,13 +620,11 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
-            widget: 'textarea',
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
-            widget: 'textarea',
             propertyOrder: 2
           },
           synopsis1: {
@@ -1381,13 +1379,11 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
-            widget: 'textarea',
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
-            widget: 'textarea',
             propertyOrder: 2
           },
           synopsis1: {
@@ -1418,7 +1414,8 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
-            propertyOrder: 1
+            propertyOrder: 1,
+            widget: 'password'
           },
           password: {
             title: 'password',
@@ -2081,13 +2078,11 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
-            widget: 'textarea',
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
-            widget: 'textarea',
             propertyOrder: 2
           },
           synopsis1: {
@@ -2118,7 +2113,8 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
-            propertyOrder: 1
+            propertyOrder: 1,
+            widget: 'password'
           },
           password: {
             title: 'password',
@@ -2781,13 +2777,11 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
-            widget: 'textarea',
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
-            widget: 'textarea',
             propertyOrder: 2
           },
           synopsis1: {
@@ -2818,7 +2812,8 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
-            propertyOrder: 1
+            propertyOrder: 1,
+            widget: 'password'
           },
           password: {
             title: 'password',
@@ -3481,13 +3476,11 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
-            widget: 'textarea',
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
-            widget: 'textarea',
             propertyOrder: 2
           },
           synopsis1: {
@@ -4181,13 +4174,11 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
-            widget: 'textarea',
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
-            widget: 'textarea',
             propertyOrder: 2
           },
           synopsis1: {

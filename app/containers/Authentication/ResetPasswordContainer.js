@@ -21,7 +21,7 @@ class ResetPassswordContainer extends React.Component {
   };
 
   onClick(value) {
-    this.props.reset_password(value);
+    this.props.reset_password(value, this.props.navigation);
   }
 
   render() {
@@ -50,6 +50,7 @@ const mapDispatchToProps = dispatch => {
 ResetPassswordContainer.propTypes = {
   reset_password: PropTypes.func,
   route: PropTypes.func,
+  navigation: PropTypes.any,
   match: PropTypes.shape({
     params: PropTypes.shape({
       token: PropTypes.string

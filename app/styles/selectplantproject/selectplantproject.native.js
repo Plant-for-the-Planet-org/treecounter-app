@@ -13,8 +13,6 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
   plantProjectContent: {
     flex: 1,
     width: '100%'
-    // justifyContent: 'center',
-    // alignItems: 'center'
   },
   plantProjectContentFull: {
     flex: 0.8,
@@ -23,14 +21,12 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
   footer: {
     width: '100%',
     flex: 0.2
+  },
+  selectedProjectRow: {
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  selectedProjectCol: {
+    paddingLeft: 5
   }
-  // plantProjectSelectButtonStyle: {
-  //   height: 43,
-  //   width: '80%',
-  //   marginLeft: 18,
-  //   marginRight: 40
-  // },
-  // plantProjectSelectTextStyle: {
-  //   fontSize: 15
-  // }
 }));

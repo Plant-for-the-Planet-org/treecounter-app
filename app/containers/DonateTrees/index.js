@@ -14,6 +14,7 @@ import {
   selectPlantProjectAction,
   clearPlantProject
 } from '../../actions/selectPlantProjectAction';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { fetchCurrencies } from '../../actions/currencies';
 import { donate, paymentClear } from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
@@ -42,8 +43,8 @@ class DonationTreesContainer extends Component {
         selectedTpo={this.props.selectedTpo}
         currentUserProfile={this.props.currentUserProfile}
         currencies={this.props.currencies}
-        donate={(donationContribution, plantProjectId) =>
-          this.props.donate(donationContribution, plantProjectId, flag)
+        donate={(donationContribution, plantProjectId, profile) =>
+          this.props.donate(donationContribution, plantProjectId, profile)
         }
         onTabChange={title => this.onTabChange(title)}
         supportTreecounter={this.props.supportTreecounter}
@@ -51,6 +52,7 @@ class DonationTreesContainer extends Component {
         paymentClear={this.props.paymentClear}
         setProgressModelState={this.props.setProgressModelState}
         plantProjectClear={this.props.clearPlantProject}
+        loadUserProfile={this.props.loadUserProfile}
         {...this.props}
       />
     );
@@ -76,7 +78,8 @@ const mapDispatchToProps = dispatch => {
       donate,
       paymentClear,
       clearPlantProject,
-      setProgressModelState
+      setProgressModelState,
+      loadUserProfile
     },
     dispatch
   );
@@ -99,5 +102,6 @@ DonationTreesContainer.propTypes = {
   fetchCurrencies: PropTypes.func,
   clearPlantProject: PropTypes.func,
   supportTreecounter: PropTypes.object,
-  setProgressModelState: PropTypes.func
+  setProgressModelState: PropTypes.func,
+  loadUserProfile: PropTypes.func
 };

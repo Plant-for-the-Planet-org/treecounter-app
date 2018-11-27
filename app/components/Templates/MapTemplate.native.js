@@ -9,7 +9,7 @@ export function MapTemplate(locals) {
       <PrimaryButton
         onClick={() => {
           locals.onChange(
-            'geoLongitude=76.74475009999871&geoLatitude=76.74475009999871&country=IND'
+            'geoLongitude=76.74475009999871&geoLatitude=76.74475009999871&country=IN'
           );
         }}
       >

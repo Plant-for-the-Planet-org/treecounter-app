@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import t from 'tcomb-form';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextHeading from '../Common/Heading/TextHeading';
-import TextBlock from '../Common/Text/TextBlock';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n.js';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import {
   redeemSignIn,
-  redeem_outline_red,
-  redeem_outline,
+  redeemRed,
+  redeemGreen,
   close_green
 } from '../../assets';
 
-let TCombForm = t.form.Form;
-
-// const allSchemaOptions = {
-//   template: formLayout,
-//   ...schemaOptions
-// };
 export default class Redemption extends Component {
   constructor(props) {
     super(props);
@@ -33,13 +25,11 @@ export default class Redemption extends Component {
     this.setState({ value: nextProps.code });
   }
   onSetRedemption() {
-    // let value = this.refs.redemptionForm.getValue();
     if (this.state.value) {
       this.props.setRedemptionCode(this.state.value);
     }
   }
   onValidationCode() {
-    // let value = this.refs.redemptionForm.getValue();
     if (this.state.value) {
       this.props.validateCode(this.state.value);
     }
@@ -48,7 +38,6 @@ export default class Redemption extends Component {
     this.setState({ value: value });
   }
   render() {
-    const { code, updateRoute } = this.props;
     let content,
       button,
       icon,
@@ -88,7 +77,7 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </div>
       );
-      icon = redeem_outline_red;
+      icon = redeemRed;
     } else if (this.props.pageStatus === 'code-unknown') {
       button = (
         <div className="row">
@@ -97,7 +86,7 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </div>
       );
-      icon = redeem_outline;
+      icon = redeemGreen;
     } else if (this.props.pageStatus === 'not-logged-in') {
       button = (
         <div className="row">
@@ -121,7 +110,7 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </div>
       );
-      icon = redeem_outline;
+      icon = redeemGreen;
     }
 
     let value = this.state.value;
@@ -129,28 +118,11 @@ export default class Redemption extends Component {
       let disabled = false;
       if (this.props.pageStatus === 'code-unknown') {
         disabled = false;
-        // form = (
-        //   <TCombForm
-        //     ref="redemptionForm"
-        //     type={redemptionEditableFormSchema}
-        //     options={schemaOptionsRedeemEditable}
-        //     value={value}
-        //     onChange={this.onCrossClick()}
-        //   />
-        // );
       } else {
         disabled = true;
-        // form = (
-        //   <TCombForm
-        //     ref="redemptionForm"
-        //     type={redemptionNonEditableFormSchema}
-        //     options={schemaOptionsRedeemNonEditable}
-        //     value={value}
-        //   />
-        // );
       }
       const onCrossClick = () => {
-        this.props.updateRoute('app_redeem');
+        this.props.route('app_redeem');
       };
       let right_icon = disabled ? (
         <img
@@ -183,7 +155,7 @@ export default class Redemption extends Component {
       form = null;
       button = (
         <div className="row">
-          <PrimaryButton onClick={() => this.props.updateRoute('app_myTrees')}>
+          <PrimaryButton onClick={() => this.props.route('app_myTrees')}>
             {this.props.buttonText}
           </PrimaryButton>
         </div>
@@ -224,7 +196,7 @@ Redemption.propTypes = {
   pageStatus: PropTypes.string,
   code: PropTypes.string,
   isLoggedIn: PropTypes.any,
-  updateRoute: PropTypes.func,
+  route: PropTypes.func,
   setRedemptionCode: PropTypes.func,
   validateCode: PropTypes.func,
   loginButton: PropTypes.func,
@@ -237,5 +209,6 @@ Redemption.propTypes = {
   errorText: PropTypes.string,
   actionText: PropTypes.string,
   buttonText: PropTypes.string,
-  tpos: PropTypes.array
+  tpos: PropTypes.array,
+  navigation: PropTypes.any
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SeeMoreToggle from '../Common/SeeMoreToggle';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
 import { View, Text } from 'react-native';
@@ -10,7 +9,8 @@ import PlantProjectDetails from './PlantProjectDetails';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { ScrollView } from 'react-native';
-import PlantProjectFull2 from './PlantProjectFull2.native';
+import PlantProjectSnippet from './PlantProjectSnippet.native';
+import scrollStyle from '../../styles/common/scrollStyle';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -26,7 +26,10 @@ class PlantProjectFull extends React.Component {
       homepageCaption: homepageCaption,
       videoUrl: videoUrl,
       geoLocation,
-      plantProjectImages
+      plantProjectImages,
+      url,
+      linkText,
+      tpo_name
     } = this.props.plantProject;
 
     const detailsProps = {
@@ -36,39 +39,37 @@ class PlantProjectFull extends React.Component {
       homepageCaption,
       videoUrl,
       mapData: queryParamsToObject(geoLocation),
-      plantProjectImages
+      plantProjectImages,
+      url,
+      linkText
     };
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
         <CardLayout style={styles.projectFullContainer}>
-          <View>
-            <PlantProjectFull2
-              cardStyle={styles.cardStyle}
-              key={'projectFull' + this.props.plantProject.id}
-              showMoreButton={false}
-              plantProject={this.props.plantProject}
-              onSelectClickedFeaturedProjects={id =>
-                this.props.selectProject(id)
-              }
-              tpoName={this.props.plantProject.tpo_name}
-            />
-          </View>
+          <PlantProjectSnippet
+            cardStyle={styles.cardStyle}
+            key={'projectFull' + this.props.plantProject.id}
+            showMoreButton={false}
+            plantProject={this.props.plantProject}
+            onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
+            tpoName={tpo_name}
+          />
 
+          <View style={styles.horizontalRule} />
           <View style={styles.plantProjectDetails}>
             <PlantProjectDetails {...detailsProps} />
           </View>
 
           <View style={styles.buttonContainer}>
-            {this.props.showGoback ? (
-              <PrimaryButton onClick={() => this.props.onBackClick()}>
-                GO Back
-              </PrimaryButton>
-            ) : null}
+            <PrimaryButton onClick={() => this.props.selectProject(id)}>
+              {i18n.t('label.donate')}
+            </PrimaryButton>
           </View>
         </CardLayout>
       </ScrollView>
     );
   }
+  componentWillUnmount() {}
 }
 
 PlantProjectFull.propTypes = {
@@ -78,7 +79,6 @@ PlantProjectFull.propTypes = {
   showNextButton: PropTypes.bool,
   onNextClick: PropTypes.func,
   selectProject: PropTypes.func,
-  showGoback: PropTypes.bool,
   onBackClick: PropTypes.func
 };
 

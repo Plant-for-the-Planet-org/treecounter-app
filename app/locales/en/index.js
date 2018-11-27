@@ -24,6 +24,9 @@ import selectPlantProjectlabels from './selectPlantProjectlabels.json';
 import pledgelabels from './pledgelabels.json';
 import redemptionlables from './redemptionlabels.json';
 import footerlabels from './footerlabels.json';
+import welcomeScreenlabels from './welcomeScreenlabels.json';
+import emailSendActivationlabels from './emailSentActivationlabels.json';
+
 export default {
   ...loginlabels,
   ...headerlabels,
@@ -50,5 +53,7 @@ export default {
   ...selectPlantProjectlabels,
   ...pledgelabels,
   ...redemptionlables,
-  ...footerlabels
+  ...footerlabels,
+  ...welcomeScreenlabels,
+  ...emailSendActivationlabels
 };

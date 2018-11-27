@@ -203,7 +203,7 @@ export const userTreecounterDataSelector = createSelector(
           implicitTarget: treecounter.implicitTarget,
           planted: treecounter.countPlanted,
           personal: treecounter.countPersonal,
-          community: treecounter.countCommunity,
+          community: treecounter.countReceived,
           targetComment: treecounter.targetComment,
           targetYear: treecounter.targetYear
         };

@@ -47,6 +47,10 @@ import EditUserProfileContainer from '../../containers/EditUserProfile';
 import LeaderboardContainer from '../../containers/Leaderboard';
 import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
+import PrivacyContainer from '../../containers/Privacy';
+import ImprintContainer from '../../containers/Imprint';
+import DownloadAppModal from '../DownloadAppStore';
+import AppPaymentContainer from '../../containers/AppPayment';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -54,9 +58,19 @@ class TreeCounter extends Component {
     super(props);
     const { userProfile } = this.props;
     const isLoggedIn = null !== userProfile;
+    let IS_IPAD = navigator.userAgent.match(/iPad/i) != null,
+      IS_IPHONE =
+        !IS_IPAD &&
+        (navigator.userAgent.match(/iPhone/i) != null ||
+          navigator.userAgent.match(/iPod/i) != null),
+      IS_IOS = IS_IPAD || IS_IPHONE,
+      IS_ANDROID = !IS_IOS && navigator.userAgent.match(/android/i) != null;
     this.state = {
       loading: true,
-      isLoggedIn: isLoggedIn
+      isLoggedIn: isLoggedIn,
+      isIOS: IS_IOS,
+      isAndroid: IS_ANDROID,
+      isCancelled: false
     };
   }
 
@@ -86,6 +100,12 @@ class TreeCounter extends Component {
       let isLoggedIn = null !== nextProps.userProfile;
       this.setState({ loading: false, isLoggedIn: isLoggedIn });
     }
+  }
+
+  continueOnSite() {
+    this.setState({
+      isCancelled: true
+    });
   }
 
   render() {
@@ -121,10 +141,14 @@ class TreeCounter extends Component {
         <BrowserRouter history={history}>
           <div className="app-container">
             <ProgressModal isOpen={this.props.progressModel} />
+            <DownloadAppModal
+              isOpen={this.state.isIOS && !this.state.isCancelled}
+              continueOnSite={this.continueOnSite.bind(this)}
+            />
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             <div className="app-container__content">
-              <PublicRoute exact path="/" component={Trillion} />
+              <Route exact path="/" component={Trillion} />
               <Route
                 exact
                 path={
@@ -171,6 +195,10 @@ class TreeCounter extends Component {
                 path={getLocalRoute('app_passwordSent')}
                 component={EmailSentContainer}
               />
+              <PublicRoute
+                path={getLocalRoute('app_payment') + '/:donationContribution'}
+                component={AppPaymentContainer}
+              />
               <Route
                 path={getLocalRoute('app_explore')}
                 component={LeaderboardContainer}
@@ -210,6 +238,14 @@ class TreeCounter extends Component {
                 component={EditUserProfileContainer}
               />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
+              <Route
+                path={getLocalRoute('app_privacy')}
+                component={PrivacyContainer}
+              />
+              <Route
+                path={getLocalRoute('app_imprint')}
+                component={ImprintContainer}
+              />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
               <Route
                 path={getLocalRoute('app_giftTrees')}

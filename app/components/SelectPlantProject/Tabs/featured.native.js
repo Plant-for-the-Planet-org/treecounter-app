@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions } from 'react-native';
-import PlantProjectFull2 from '../../PlantProjects/PlantProjectFull2';
+import { ScrollView } from 'react-native';
+import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import styles from '../../../styles/selectplantproject/featured.native';
+import scrollStyle from '../../../styles/common/scrollStyle.native';
 
 export default class FeaturedProjects extends Component {
   constructor(props) {
@@ -41,22 +44,25 @@ export default class FeaturedProjects extends Component {
 
   onSelectClickedFeaturedProjects = id => {
     this.props.selectProject(id);
+    const { navigation } = this.props;
+    updateStaticRoute('app_donate_detail', navigation);
   };
 
   render() {
     let { featuredProjects } = this.state;
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
         {featuredProjects && featuredProjects.length > 0
           ? featuredProjects.map(project => (
-              <PlantProjectFull2
+              <PlantProjectSnippet
                 key={'projectFull' + project.id}
+                cardStyle={styles.cardStyle}
                 onMoreClick={id => this.props.onMoreClick(id)}
                 plantProject={project}
                 onSelectClickedFeaturedProjects={id =>
                   this.onSelectClickedFeaturedProjects(id)
                 }
-                showMoreButton={true}
+                showMoreButton={false}
                 tpoName={project.tpo_name}
               />
             ))

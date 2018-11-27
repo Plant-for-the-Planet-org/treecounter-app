@@ -1,22 +1,8 @@
 import React, { Component } from 'react';
-import {
-  View,
-  ScrollView,
-  Dimensions,
-  Text,
-  TextInput,
-  Image
-} from 'react-native';
+import { View, Dimensions, TextInput, Image } from 'react-native';
+
 import styles from '../../../styles/selectplantproject/list';
-import i18n from '../../../locales/i18n.js';
-
-import PrimaryButton from '../../Common/Button/PrimaryButton';
 import CardLayout from '../../Common/Card';
-
-const { height, width } = Dimensions.get('window');
-import { getAppBarHeight } from '../../../styles/common/header';
-import SeeMoreToggle from '../../Common/SeeMoreToggle';
-import SearchBar from '../../Header/SearchBar';
 import { iosSearchGrey } from '../../../assets';
 import ListViewProjects from './listview';
 import Proptypes from 'prop-types';
@@ -68,25 +54,27 @@ export default class ListProjects extends Component {
   render() {
     let { filteredProjects } = this.state;
     return (
-      <CardLayout style={styles.cardStyle} key={'listViewProject'}>
-        <View style={[styles.searchContainer]}>
-          <TextInput
-            ref={view => {
-              this._textInput = view;
-            }}
-            clearButtonMode="while-editing"
-            onChangeText={this._handleChangeText}
-            value={this.state.text}
-            autoCapitalize="none"
-            autoCorrect={false}
-            returnKeyType="search"
-            placeholder="Search"
-            placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
-            style={[styles.searchInput]}
-          />
+      <CardLayout key={'listViewProject'} style={{ flex: 1, padding: 0 }}>
+        <View style={styles.searchItem}>
+          <View style={[styles.searchContainer]}>
+            <TextInput
+              ref={view => {
+                this._textInput = view;
+              }}
+              clearButtonMode="while-editing"
+              onChangeText={this._handleChangeText}
+              value={this.state.text}
+              autoCapitalize="none"
+              autoCorrect={false}
+              returnKeyType="search"
+              placeholder="Search"
+              placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
+              style={[styles.searchInput]}
+            />
 
-          <View style={styles.searchIconContainer}>
-            <Image source={iosSearchGrey} style={styles.searchIcon} />
+            <View style={styles.searchIconContainer}>
+              <Image source={iosSearchGrey} style={styles.searchIcon} />
+            </View>
           </View>
         </View>
 
@@ -102,5 +90,6 @@ export default class ListProjects extends Component {
 
 ListProjects.propTypes = {
   plantProjects: Proptypes.array.isRequired,
-  selectProject: Proptypes.func.isRequired
+  selectProject: Proptypes.func.isRequired,
+  onMoreClick: Proptypes.func.isRequired
 };

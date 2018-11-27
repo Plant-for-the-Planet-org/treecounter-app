@@ -6,6 +6,7 @@ import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
 import { getProfileTypeName } from '../PublicTreeCounter/utils';
 import UserProfileImage from '../Common/UserProfileImage';
+import scrollStyle from '../../styles/common/scrollStyle';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -31,12 +32,18 @@ export default class UserHome extends Component {
   updateSvg(toggle) {
     if (toggle) {
       const treecounter = this.props.treecounterData;
+      if (isNaN(parseInt(treecounter.community))) {
+        treecounter.community = 0;
+      }
+      if (isNaN(parseInt(treecounter.personal))) {
+        treecounter.personal = 0;
+      }
       let svgData = {
         id: treecounter.id,
-        target: treecounter.countCommunity + treecounter.countPersonal, // light color
-        planted: treecounter.countPersonal, //dark color
-        community: treecounter.countCommunity,
-        personal: treecounter.countPersonal,
+        target: treecounter.community + treecounter.personal, // light color
+        planted: treecounter.personal, //dark color
+        community: treecounter.community,
+        personal: treecounter.personal,
         targetComment: treecounter.targetComment,
         targetYear: treecounter.targetYear,
         type: this.props.userProfile.type
@@ -46,10 +53,10 @@ export default class UserHome extends Component {
       const treecounter = this.props.treecounterData;
       let svgData = {
         id: treecounter.id,
-        target: treecounter.countTarget,
-        planted: treecounter.countPlanted,
-        community: treecounter.countCommunity,
-        personal: treecounter.countPersonal,
+        target: treecounter.target,
+        planted: treecounter.planted,
+        community: treecounter.community,
+        personal: treecounter.personal,
         targetComment: treecounter.targetComment,
         targetYear: treecounter.targetYear,
         type: this.props.userProfile.type
@@ -64,7 +71,7 @@ export default class UserHome extends Component {
     let { svgData } = this.state;
 
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={[{ flex: 1 }]}>
         <View style={styles.header}>
           <View style={styles.userProfileContainer}>
             <UserProfileImage profileImage={userProfile.image} />

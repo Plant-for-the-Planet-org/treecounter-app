@@ -15,7 +15,7 @@ export default (loginStyles = EStyleSheet.create({
     flex: 0.7,
     width: '100%',
     // justifyContent: 'center',
-    padding: 20,
+    padding: 15,
     paddingTop: 30,
     flexGrow: 1
   },
@@ -63,8 +63,10 @@ export default (loginStyles = EStyleSheet.create({
   },
   bottomRow: {
     flexDirection: 'row',
-    padding: 10,
-    alignItems: 'flex-start'
+    paddingTop: 10,
+    paddingBottom: 10,
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
   },
   bottomText: {
     fontSize: 11,
@@ -72,7 +74,8 @@ export default (loginStyles = EStyleSheet.create({
   },
   bottomTextHighlight: {
     fontSize: 12,
-    color: '#ec6453'
+    color: '#ec6453',
+    flexDirection: 'row'
   },
   loginHeader: {
     marginBottom: 60
@@ -82,6 +85,7 @@ export default (loginStyles = EStyleSheet.create({
     color: '#575756',
     width: Dimensions.get('window').width * 0.8,
     justifyContent: 'flex-start'
+    // fontFamily: 'Open Sans'
   },
   loginTextStyle: {
     fontSize: 14,
@@ -89,6 +93,19 @@ export default (loginStyles = EStyleSheet.create({
     padding: 10
   },
   loginDescriptionStyle: {
-    fontSize: 11
+    fontSize: 12,
+    color: '$textColor',
+    textAlign: 'center'
+  },
+  loginButtonStyle: {
+    width: 100,
+    height: 40,
+    borderWidth: 1,
+    borderRadius: 6,
+    padding: 0,
+    margin: 0,
+    alignSelf: 'center',
+    position: 'absolute',
+    right: 0
   }
 }));

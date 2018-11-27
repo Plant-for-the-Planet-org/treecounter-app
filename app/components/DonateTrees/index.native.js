@@ -2,20 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import { TabView } from 'react-native-tab-view';
-import {
-  individualSchemaOptions,
-  receiptIndividualFormSchema,
-  receiptCompanyFormSchema,
-  companySchemaOptions
-} from '../../server/parsedSchemas/donateTrees';
 
 import i18n from '../../locales/i18n.js';
-import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+
 import RecieptTabsView from './receiptTabs';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
-import PaymentSelector from '../Payment/PaymentSelector';
-import { ScrollView, View, Text } from 'react-native';
+// import PaymentSelector from '../Payment/PaymentSelector';
+import { View, Text, Alert, Linking } from 'react-native';
+import { paymentFee } from '../../helpers/utils';
+import { getLocalRoute } from '../../actions/apiRouting';
+import { context } from '../../config';
 
 export default class DonateTrees extends Component {
   constructor(props) {
@@ -42,12 +39,11 @@ export default class DonateTrees extends Component {
       },
       expanded: false,
       expandedOption: '1',
-      showSelectProject: false,
       routes: [
         // { key: 'selectPlant', title: 'Select Plant' },
         { key: 'currency', title: 'Donation Details' },
-        { key: 'recipient', title: 'Donor Details' },
-        { key: 'payments', title: 'Payments' }
+        { key: 'recipient', title: 'Donor Details' }
+        // { key: 'payments', title: 'Payments' }
       ]
     };
 
@@ -64,14 +60,21 @@ export default class DonateTrees extends Component {
   }
 
   componentDidMount() {
+    const { navigation } = this.props;
     this.props.onTabChange(this.state.routes[0].title);
+    Linking.getInitialURL()
+      .then(url => {
+        if (url) {
+          this.handleOpenURL(url);
+        }
+      })
+      .catch(err => {});
+    Linking.addEventListener('url', this.handleOpenURL);
   }
 
   componentWillReceiveProps(nextProps) {
+    const { navigation } = this.props;
     if (nextProps.selectedProject) {
-      this.setState({
-        showSelectProject: false
-      });
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
           .fixedDefaultTreeCount;
@@ -83,12 +86,34 @@ export default class DonateTrees extends Component {
       if (nextTreeCount !== currentTreeCount) {
         this.setState({ selectedTreeCount: nextTreeCount });
       }
-    } else {
-      this.setState({
-        showSelectProject: true
-      });
+    }
+    if (nextProps.paymentStatus && nextProps.paymentStatus.token) {
+      this.openGateWay(
+        getLocalRoute('app_payment', {
+          donationContribution: nextProps.paymentStatus.token
+        })
+      );
     }
   }
+
+  handleOpenURL = url => {
+    if (url === 'paymentSuccess') {
+      this.props.loadUserProfile();
+    } else {
+      // handle failure
+    }
+  };
+
+  // open your gateway
+  openGateWay = async url => {
+    url = context.scheme + '://' + context.host + url;
+    const canOpen = await Linking.canOpenURL(url);
+    if (canOpen) {
+      Linking.openURL(url).catch(err =>
+        console.error('An error occurred', err)
+      );
+    }
+  };
 
   getFees() {
     const directCurrencies = this.state.countryCurrencies.map(
@@ -128,13 +153,15 @@ export default class DonateTrees extends Component {
       } else {
         receipt['receiptCompany'] = value;
       }
-      this.setState({
-        form: {
-          ...this.state.form,
-          ...receipt
-        }
-      });
-      this._handleIndexChange(2);
+      this.setState(
+        {
+          form: {
+            ...this.state.form,
+            ...receipt
+          }
+        },
+        this.handlePaymentApproved
+      );
     } else {
       // Do nothing
     }
@@ -176,6 +203,7 @@ export default class DonateTrees extends Component {
 
   componentWillUnmount() {
     this.props.paymentClear();
+    Linking.removeEventListener('url', this.handleOpenURL);
   }
   _renderTabBar = props => {
     return renderDottedTabbar(
@@ -212,7 +240,7 @@ export default class DonateTrees extends Component {
     let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
     let email = receipt !== '' ? receipt.email : '';
     let paymentMethods;
-    if (receipt) {
+    if (receipt && selectedProject) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
       const countryCurrencies = selectedProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
@@ -244,7 +272,10 @@ export default class DonateTrees extends Component {
     // }
 
     {
-      this.props.selectedTpo && currencies && route.key === 'currency'
+      this.props.selectedTpo &&
+      currencies &&
+      route.key === 'currency' &&
+      this.props.selectedProject
         ? (screenToShow = (
             <View>
               <TreeCountCurrencySelector
@@ -252,7 +283,8 @@ export default class DonateTrees extends Component {
                 rates={
                   currencies.currency_rates[selectedProject.currency].rates
                 }
-                fees={1}
+                selectedProject={selectedProject}
+                fees={paymentFee}
                 showNextButton={true}
                 currencies={currencies.currency_names} // TODO: connect to data from API
                 selectedCurrency={this.determineDefaultCurrency()}
@@ -261,9 +293,6 @@ export default class DonateTrees extends Component {
                 selectedTreeCount={this.state.selectedTreeCount}
                 onChange={this.handleTreeCountCurrencyChange}
               />
-              <Text onPress={this.props.plantProjectClear}>
-                {i18n.t('label.different_project')}
-              </Text>
             </View>
           ))
         : null;
@@ -283,39 +312,39 @@ export default class DonateTrees extends Component {
         : null;
     }
     {
-      route.key === 'payments'
-        ? (screenToShow = (
-            <PaymentSelector
-              paymentMethods={paymentMethods}
-              accounts={selectedProject.paymentSetup.accounts}
-              stripePublishableKey={
-                selectedProject.paymentSetup.stripePublishableKey
-              }
-              setProgressModelState={this.props.setProgressModelState}
-              amount={this.state.selectedAmount}
-              currency={this.state.selectedCurrency}
-              expandedOption={this.state.expandedOption}
-              handleExpandedClicked={this.handleExpandedClicked}
-              paymentStatus={this.props.paymentStatus}
-              paymentClear={this.props.paymentClear}
-              context={{
-                tpoName: this.props.selectedTpo.name,
-                donorEmail: email,
-                donorName: name,
-                treeCount: this.state.selectedTreeCount
-              }}
-              onSuccess={paymentResponse =>
-                this.handlePaymentApproved(paymentResponse)
-              }
-              onFailure={data =>
-                console.log('/////////////////// payment failure ', data)
-              }
-              onError={data =>
-                console.log('/////////////////// payment error ', data)
-              }
-            />
-          ))
-        : null;
+      // route.key === 'payments' && selectedProject
+      //   ? (screenToShow = (
+      //       <PaymentSelector
+      //         paymentMethods={paymentMethods}
+      //         accounts={selectedProject.paymentSetup.accounts}
+      //         stripePublishableKey={
+      //           selectedProject.paymentSetup.stripePublishableKey
+      //         }
+      //         setProgressModelState={this.props.setProgressModelState}
+      //         amount={this.state.selectedAmount}
+      //         currency={this.state.selectedCurrency}
+      //         expandedOption={this.state.expandedOption}
+      //         handleExpandedClicked={this.handleExpandedClicked}
+      //         paymentStatus={this.props.paymentStatus}
+      //         paymentClear={this.props.paymentClear}
+      //         context={{
+      //           tpoName: this.props.selectedTpo.name,
+      //           donorEmail: email,
+      //           donorName: name,
+      //           treeCount: this.state.selectedTreeCount
+      //         }}
+      //         onSuccess={paymentResponse =>
+      //           this.handlePaymentApproved(paymentResponse)
+      //         }
+      //         onFailure={data =>
+      //           console.log('/////////////////// payment failure ', data)
+      //         }
+      //         onError={data =>
+      //           console.log('/////////////////// payment error ', data)
+      //         }
+      //       />
+      //     ))
+      //   : null;
     }
     return screenToShow;
   };
@@ -336,7 +365,7 @@ export default class DonateTrees extends Component {
     return true;
   };
 
-  handlePaymentApproved(paymentResponse) {
+  handlePaymentApproved() {
     let sendState = { ...this.state.form };
     if (this.props.supportTreecounter.treecounterId) {
       sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
@@ -344,20 +373,22 @@ export default class DonateTrees extends Component {
     this.props.donate(
       {
         ...this.state.form,
-        paymentResponse,
+        paymentResponse: {
+          gateway: 'offline',
+          accountName: 'offline_US',
+          isConfirmed: true,
+          confirmation: 'iOS referred payment'
+        },
         amount: this.state.selectedAmount,
         currency: this.state.selectedCurrency
       },
-      this.props.selectedProject.id
+      this.props.selectedProject.id,
+      this.props.currentUserProfile
     );
   }
 
   render() {
-    const { selectedProject } = this.props;
-
-    return this.state.showSelectProject ? (
-      <SelectPlantProjectContainer {...this.props} />
-    ) : !selectedProject ? null : (
+    return (
       <TabView
         navigationState={this.state}
         renderScene={this._renderScene}
@@ -380,5 +411,6 @@ DonateTrees.propTypes = {
   paymentStatus: PropTypes.object,
   plantProjectClear: PropTypes.func,
   onTabChange: PropTypes.func,
-  setProgressModelState: PropTypes.func
+  setProgressModelState: PropTypes.func,
+  loadUserProfile: PropTypes.func
 };

@@ -50,14 +50,14 @@ export default class StripeCC extends Component {
           token.card.id = token.card.cardId;
           this.props.setLoading(false);
           this.props.onSuccess(token);
-          console.log(token);
+          //console.log(token);
         })
         .catch(err => {
           this.props.setLoading(false);
           this.props.onError();
         });
 
-      console.log('pay via card');
+      //console.log('pay via card');
     } else {
       NotificationManager.error('Please enter Correct Card Details', 'Error');
     }

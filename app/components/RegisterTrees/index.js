@@ -16,18 +16,9 @@ import i18n from '../../locales/i18n.js';
 import RegistrationMap from './RegistrationMap';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
-import { getPlantProjectEnum } from '../../helpers/utils';
+import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 
 let TCombForm = t.form.Form;
-
-const isTpo = props1 => {
-  const currentUserProfile = props1.currentUserProfile;
-  let tpo = false;
-  if (currentUserProfile && currentUserProfile.type === 'tpo') {
-    tpo = true;
-  }
-  return tpo;
-};
 
 const getSingleTreeLayout = props1 => {
   const formLayoutSingleTree = locals => {
@@ -44,7 +35,7 @@ const getSingleTreeLayout = props1 => {
         <div className="register-tree__form--row">
           {locals.inputs.contributionImages}
         </div>
-        {isTpo(props1) ? (
+        {isTpo(props1.currentUserProfile) ? (
           <div className="register-tree__form--row">
             {locals.inputs.plantProject}
           </div>
@@ -80,7 +71,7 @@ const getMultipleTreeLayout = props1 => {
         <div className="register-tree__form--row">
           {locals.inputs.contributionImages}
         </div>
-        {isTpo(props1) ? (
+        {isTpo(props1.currentUserProfile) ? (
           <div className="register-tree__form--row">
             {locals.inputs.plantProject}
           </div>
@@ -140,8 +131,10 @@ export default class RegisterTrees extends Component {
     this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
   }
 
-  onSubmitClick() {
+  onSubmitClick(event) {
+    console.log('event', event);
     this.props.onSubmit(this.state.mode);
+    event.preventDefault();
   }
 
   handleModeOptionChange(tab) {

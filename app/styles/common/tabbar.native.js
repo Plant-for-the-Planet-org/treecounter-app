@@ -7,10 +7,7 @@ export default (tabbarStyles = EStyleSheet.create({
   tabBar: {
     backgroundColor: '#ffffff'
   },
-  tabItem: {
-    padding: 0,
-    width: 75
-  },
+  tabItem: {},
   textActive: {
     // color: '#ec6453',
     backgroundColor: '#ec6453'
@@ -18,6 +15,6 @@ export default (tabbarStyles = EStyleSheet.create({
   },
   textStyle: {
     color: '#aba2a2',
-    fontSize: 11
+    fontSize: 12
   }
 }));

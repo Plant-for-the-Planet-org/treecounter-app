@@ -26,8 +26,8 @@ export default (treecounterStyles = EStyleSheet.create({
     height: '105%',
     elevation: 2,
     position: 'absolute',
-    top: '-2.5%',
-    left: '-2.5%'
+    top: -10,
+    left: -10
   },
   potStyle: {
     flex: 1,
@@ -35,8 +35,8 @@ export default (treecounterStyles = EStyleSheet.create({
     height: '105%',
     elevation: 4,
     position: 'absolute',
-    top: '-2.5%',
-    left: '-2.5%'
+    top: -10,
+    left: -10
   },
   circleStyle: {
     flex: 1,

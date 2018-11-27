@@ -66,14 +66,14 @@ class SelectTemplateIOS extends React.PureComponent {
     }
 
     let formattedValue = locals.value ? locals.value : '';
-    if (locals.config) {
-      if (locals.config.format && formattedValue) {
-        formattedValue = locals.config.format(locals.value);
-      } else if (!formattedValue) {
-        formattedValue = locals.config.defaultValueText
-          ? locals.config.defaultValueText
-          : i18n.t(locals.label);
-      }
+
+    let filteredValue = this.props.options.filter(
+      item => item.value === locals.value
+    );
+
+    if (filteredValue && filteredValue.length > 0) {
+      formattedValue = i18n.t(filteredValue[0].text);
+    } else {
     }
     const height = this.state.isCollapsed ? 0 : UIPICKER_HEIGHT;
     return (

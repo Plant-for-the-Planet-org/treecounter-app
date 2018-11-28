@@ -4,18 +4,28 @@ import PrimaryButton from '../../components/Common/Button/PrimaryButton';
 import mapTemplateStyle from '../../styles/mapTemplate.native';
 
 export function MapTemplate(locals) {
+  let latitude, longitude;
   return (
     <View style={mapTemplateStyle.mapContainer}>
       <PrimaryButton
         onClick={() => {
-          locals.onChange(
-            'geoLongitude=76.74475009999871&geoLatitude=76.74475009999871&country=IN'
-          );
+          navigator.geolocation.getCurrentPosition(location => {
+            latitude = location.coords.latitude;
+            longitude = location.coords.longitude;
+            locals.onChange(
+              'geoLongitude=' +
+                longitude +
+                '&geoLatitude=' +
+                latitude +
+                '&country=IN'
+            );
+          });
         }}
       >
-        Default Location
+        Get Device Location
       </PrimaryButton>
       <Text>Maps under construction</Text>
+      <Text>{'Latitude: ' + latitude + ', Longitude: ' + longitude}</Text>
     </View>
   );
 }

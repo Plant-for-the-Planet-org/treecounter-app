@@ -47,7 +47,19 @@ const createOptions = (fontSize: string, padding: ?string) => {
 };
 
 class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      submitClicked: false
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleSubmit = ev => {
+    this.setState({
+      submitClicked: true
+    });
     ev.preventDefault();
     if (this.props.stripe) {
       this.props.stripe
@@ -74,7 +86,14 @@ class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
       'display-none': !this.props.expanded
     });
     return (
-      <form className="payment-option" onSubmit={this.handleSubmit}>
+      <form
+        className="payment-option"
+        onSubmit={
+          this.state.submitClicked
+            ? ev => ev.preventDefault()
+            : this.handleSubmit
+        }
+      >
         <div onClick={this.handleArrowClick} className="payment-option-header">
           <span>
             <img className="logo" src={payment_credit} />

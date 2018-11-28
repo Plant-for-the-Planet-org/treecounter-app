@@ -82,7 +82,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   actionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: rowHeight + rowHeight / 2,
+    //height: rowHeight + rowHeight / 2,
     paddingLeft: 5
   },
   project_teaser__contentText: {
@@ -91,7 +91,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   byOrgContainer: {
     flexDirection: 'row',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    flexWrap: 'wrap'
   },
   byOrgText: {
     fontSize: 16,

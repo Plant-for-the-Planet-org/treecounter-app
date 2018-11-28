@@ -38,6 +38,7 @@ export default class TabComponent extends Component {
           flexDirection: 'row',
           justifyContent: 'space-between',
           paddingRight: 10,
+          paddingLeft: 10,
           backgroundColor: 'white',
           shadowOffset: { width: 0, height: 4 },
           shadowColor: 'rgba(0, 0, 0, 0.1)',
@@ -72,9 +73,7 @@ export default class TabComponent extends Component {
                       : { color: 'black', fontSize: 12 }
                   ]}
                 >
-                  {element.caption === 'menu_item.competition'
-                    ? 'Competition'
-                    : element.caption}
+                  {element.caption}
                 </Text>
               </View>
             </TouchableItem>

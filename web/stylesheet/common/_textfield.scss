@@ -44,9 +44,7 @@ $trans-time: 300ms;
       &:focus {
         outline: none;
       }
-      &:focus ~ label,
-      &:invalid ~ label,
-      &:valid ~ label {
+      &:focus ~ label {
         top: -14px;
         font-size: 12px;
         color: $colorPrimary;
@@ -75,6 +73,11 @@ $trans-time: 300ms;
     }
     .error-label {
       color: $colorError !important;
+    }
+    .float-label {
+      top: -14px;
+      font-size: 12px;
+      color: $colorPrimary;
     }
 
     .pftp-textfield__inputgroup--bar {
@@ -107,9 +110,9 @@ $trans-time: 300ms;
     position: relative;
     input,
     textarea {
-      border-radius:3px;
-      -moz-border-radius:3px;
-      -webkit-border-radius:3px;
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
       border: 1.5px solid $colorRedeemBorder;
       background-color: $colorRedeemInside;
       color: $headerTextColor;

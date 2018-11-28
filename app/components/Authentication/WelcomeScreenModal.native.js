@@ -35,7 +35,7 @@ class WelcomeScreenModal extends Component {
               {i18n.t('label.welcome_screen_summery_1')}
             </Text>
             <TouchableItem
-              onPress={() => updateRoute('app_userHome', this.props.navigation)}
+              onPress={() => updateRoute('app_homepage', this.props.navigation)}
             >
               <Text
                 style={[styles.textPara, { marginTop: 20, fontWeight: 'bold' }]}

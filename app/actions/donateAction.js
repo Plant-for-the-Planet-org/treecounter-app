@@ -40,21 +40,40 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
       request
         .then(response => {
           const { contribution, treecounter, plantProject } = response.data;
+          if (
+            donationContribution.paymentResponse.confirmation ===
+            'iOS referred payment'
+          ) {
+            dispatch(
+              paymentSuccess({
+                status: true,
+                token: contribution.token,
+                message: 'success'
+              })
+            );
+            dispatch(setProgressModelState(false));
+          } else {
+            dispatch(
+              mergeEntities(normalize(contribution, contributionSchema))
+            );
+            dispatch(
+              mergeEntities(normalize(plantProject, plantProjectSchema))
+            );
+            if (treecounter) {
+              dispatch(
+                mergeEntities(normalize(treecounter, treecounterSchema))
+              );
+            }
 
-          dispatch(mergeEntities(normalize(contribution, contributionSchema)));
-          dispatch(mergeEntities(normalize(plantProject, plantProjectSchema)));
-          if (treecounter) {
-            dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
-          }
-
-          dispatch(paymentSuccess({ status: true, message: 'success' }));
-          dispatch(setProgressModelState(false));
-          console.log(`Thank you for planting ${
-            contribution.treeCount
-          } trees with us!
+            dispatch(paymentSuccess({ status: true, message: 'success' }));
+            dispatch(setProgressModelState(false));
+            console.log(`Thank you for planting ${
+              contribution.treeCount
+            } trees with us!
           Your donation has been registered as: ${contribution.uid}
           You will receive an email with a donation receipt in time.
           Green Button: "Return to Profile"`);
+          }
         })
         .catch(response => {
           debug('error: ', response);

@@ -55,24 +55,26 @@ export default class ListProjects extends Component {
     let { filteredProjects } = this.state;
     return (
       <CardLayout key={'listViewProject'} style={{ flex: 1, padding: 0 }}>
-        <View style={[styles.searchContainer]}>
-          <TextInput
-            ref={view => {
-              this._textInput = view;
-            }}
-            clearButtonMode="while-editing"
-            onChangeText={this._handleChangeText}
-            value={this.state.text}
-            autoCapitalize="none"
-            autoCorrect={false}
-            returnKeyType="search"
-            placeholder="Search"
-            placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
-            style={[styles.searchInput]}
-          />
+        <View style={styles.searchItem}>
+          <View style={[styles.searchContainer]}>
+            <TextInput
+              ref={view => {
+                this._textInput = view;
+              }}
+              clearButtonMode="while-editing"
+              onChangeText={this._handleChangeText}
+              value={this.state.text}
+              autoCapitalize="none"
+              autoCorrect={false}
+              returnKeyType="search"
+              placeholder="Search"
+              placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
+              style={[styles.searchInput]}
+            />
 
-          <View style={styles.searchIconContainer}>
-            <Image source={iosSearchGrey} style={styles.searchIcon} />
+            <View style={styles.searchIconContainer}>
+              <Image source={iosSearchGrey} style={styles.searchIcon} />
+            </View>
           </View>
         </View>
 

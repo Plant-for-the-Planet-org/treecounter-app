@@ -71,7 +71,7 @@ export default class UserHome extends Component {
     let { svgData } = this.state;
 
     return (
-      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+      <ScrollView contentContainerStyle={[{ flex: 1 }]}>
         <View style={styles.header}>
           <View style={styles.userProfileContainer}>
             <UserProfileImage profileImage={userProfile.image} />

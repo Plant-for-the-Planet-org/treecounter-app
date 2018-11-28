@@ -7,7 +7,7 @@ import styles from '../../styles/selectplantproject/selectplantproject-snippet.n
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { getImageUrl } from '../../actions/apiRouting';
-import { targetPlanted } from '../../assets';
+import { targetPlanted, tick } from '../../assets';
 import TouchableItem from '../Common/TouchableItem.native';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -16,6 +16,23 @@ class PlantProjectSnippet extends React.Component {
   constructor(props) {
     super(props);
     this.toggleExpanded = this.toggleExpanded.bind(this);
+    this.currency_symbols = {
+      USD: '$', // US Dollar
+      EUR: '€', // Euro
+      CRC: '₡', // Costa Rican Colón
+      GBP: '£', // British Pound Sterling
+      ILS: '₪', // Israeli New Sheqel
+      INR: '₹', // Indian Rupee
+      JPY: '¥', // Japanese Yen
+      KRW: '₩', // South Korean Won
+      NGN: '₦', // Nigerian Naira
+      PHP: '₱', // Philippine Peso
+      PLN: 'zł', // Polish Zloty
+      PYG: '₲', // Paraguayan Guarani
+      THB: '฿', // Thai Baht
+      UAH: '₴', // Ukrainian Hryvnia
+      VND: '₫' // Vietnamese Dong
+    };
   }
 
   toggleExpanded(id) {
@@ -49,8 +66,6 @@ class PlantProjectSnippet extends React.Component {
     if (treeCountWidth < 0) {
       treeCountWidth = 100;
     }
-    console.log(name, treeCountWidth);
-
     if (imageFile) {
       projectImage = { image: imageFile };
     } else {
@@ -148,11 +163,17 @@ class PlantProjectSnippet extends React.Component {
               <Text style={styles.project_teaser__contentText}>
                 {teaserProps.projectName}
               </Text>
+              {teaserProps.isCertified ? (
+                <Image
+                  source={tick}
+                  style={{ width: 15, height: 15, marginLeft: 5, marginTop: 2 }}
+                />
+              ) : null}
             </View>
             <View style={styles.projectdetailsContainer}>
               <View style={styles.locationContainer}>
                 <Text style={styles.locationText}>{specsProps.location}</Text>
-                <View style={{ paddingTop: 3, paddingBottom: 3 }}>
+                <View>
                   <Text style={styles.survivalText}>
                     {i18n.t('label.survival_rate')} {':'}{' '}
                     {specsProps.survivalRate}%
@@ -161,7 +182,12 @@ class PlantProjectSnippet extends React.Component {
               </View>
 
               <View style={styles.costContainer}>
-                <Text style={styles.costText}>${specsProps.treeCost}</Text>
+                <Text style={styles.costText}>
+                  {this.currency_symbols[currency]
+                    ? this.currency_symbols[currency]
+                    : currency}{' '}
+                  {specsProps.treeCost}
+                </Text>
               </View>
             </View>
 
@@ -191,7 +217,7 @@ class PlantProjectSnippet extends React.Component {
                   textStyle={styles.buttonTextStyle}
                   onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
                 >
-                  <Text>Donate</Text>
+                  <Text> {i18n.t('label.donate')}</Text>
                 </PrimaryButton>
               </View>
             </View>

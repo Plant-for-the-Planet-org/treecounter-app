@@ -12,7 +12,6 @@ import ProgressModal from '../../components/Common/ModalDialog/ProgressModal.nat
 import { View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
-import { fetchItem, saveItem } from '../../stores/localStorage';
 EStyleSheet.build({
   // always call EStyleSheet.build() even if you don't use global variables!
   $primary: '#b9d384',
@@ -39,8 +38,7 @@ class AppDrawerNavigatorContainer extends Component {
     const isLoggedIn = null !== userProfile;
     this.state = {
       loading: true,
-      isLoggedIn: isLoggedIn,
-      welcomeScreen: false
+      isLoggedIn: isLoggedIn
     };
   }
 
@@ -60,8 +58,7 @@ class AppDrawerNavigatorContainer extends Component {
     if (this.props.progressModel === nextProps.progressModel) {
       this._AppNavigator = getAppNavigator(
         nextState.isLoggedIn,
-        nextProps.userProfile,
-        this.state.welcomeScreen
+        nextProps.userProfile
       );
     }
     return true;
@@ -81,16 +78,6 @@ class AppDrawerNavigatorContainer extends Component {
     }
     this.props.fetchpledgeEventsAction();
   }
-  async componentDidMount() {
-    const welcome = await fetchItem('welcome');
-    if (welcome == null) {
-      this.setWelcomeEnable(true);
-    }
-    saveItem('welcome', JSON.stringify({ value: 'true' }));
-  }
-  setWelcomeEnable(isEnabled) {
-    this.setState({ welcomeScreen: isEnabled });
-  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.userProfile !== this.props.userProfile) {
       let isLoggedIn = null !== nextProps.userProfile;
@@ -104,8 +91,7 @@ class AppDrawerNavigatorContainer extends Component {
       if (!this._AppNavigator) {
         this._AppNavigator = getAppNavigator(
           this.state.isLoggedIn,
-          this.props.userProfile,
-          this.state.welcomeScreen
+          this.props.userProfile
         );
       }
 

@@ -14,7 +14,11 @@ import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n';
-
+import { getAllPlantProjectsSelector } from '../../selectors';
+import PlantProjectSnippet from '../../components/PlantProjects/PlantProjectSnippet.native';
+import { bindActionCreators } from 'redux';
+import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 class Trillion extends Component {
   constructor() {
     super();
@@ -44,6 +48,17 @@ class Trillion extends Component {
   shouldComponentUpdate() {
     return true;
   }
+  onMoreClick(id) {
+    this.props.selectPlantProjectAction(id);
+    const { navigation } = this.props;
+    console.log('OnMore');
+    updateRoute('app_selectProject', navigation);
+  }
+  onSelectClickedFeaturedProjects = id => {
+    this.props.selectPlantProjectAction(id);
+    const { navigation } = this.props;
+    updateStaticRoute('app_donate_detail', navigation);
+  };
   render() {
     return this.state.loading ? (
       <LoadingIndicator />
@@ -63,6 +78,22 @@ class Trillion extends Component {
               {i18n.t('label.trillionTreeMessage2')}
             </Text>
           </CardLayout>
+          <View>
+            {this.props.plantProjects
+              .filter(filterProj => filterProj.allowDonations)
+              .map(project => (
+                <PlantProjectSnippet
+                  key={'trillion' + project.id}
+                  onMoreClick={id => this.onMoreClick(id)}
+                  plantProject={project}
+                  onSelectClickedFeaturedProjects={id =>
+                    this.onSelectClickedFeaturedProjects(id)
+                  }
+                  showMoreButton={false}
+                  tpoName={project.tpo_name}
+                />
+              ))}
+          </View>
         </View>
       </ScrollView>
     );
@@ -70,10 +101,14 @@ class Trillion extends Component {
 }
 
 const mapStateToProps = state => ({
-  pledgeEvents: pledgeEventSelector(state)
+  pledgeEvents: pledgeEventSelector(state),
+  plantProjects: getAllPlantProjectsSelector(state)
 });
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ selectPlantProjectAction }, dispatch);
+};
 
-export default connect(mapStateToProps)(Trillion);
+export default connect(mapStateToProps, mapDispatchToProps)(Trillion);
 
 Trillion.propTypes = {
   pledgeEvents: PropTypes.object

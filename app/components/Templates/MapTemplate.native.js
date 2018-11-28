@@ -13,11 +13,7 @@ export function MapTemplate(locals) {
             latitude = location.coords.latitude;
             longitude = location.coords.longitude;
             locals.onChange(
-              'geoLongitude=' +
-                longitude +
-                '&geoLatitude=' +
-                latitude +
-                '&country=IN'
+              'geoLongitude=' + longitude + '&geoLatitude=' + latitude
             );
           });
         }}

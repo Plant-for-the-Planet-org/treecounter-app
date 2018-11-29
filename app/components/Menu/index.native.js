@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Image,
-  ScrollView,
-  SafeAreaView,
-  Text,
-  Linking
-} from 'react-native';
+import { View, Image, ScrollView, Text, Linking } from 'react-native';
 import { LargeMenuItem } from './MenuItem.native';
 import PropTypes, { func } from 'prop-types';
 import styles from '../../styles/menu.native';
@@ -99,7 +92,7 @@ export default class Menu extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.outerContainer}>
+      <View style={styles.outerContainer}>
         {this.props.userProfile ? (
           <TouchableItem
             style={styles.profileContainer}
@@ -181,7 +174,7 @@ export default class Menu extends Component {
           title={i18n.t('label.information')}
           iconUrl={infoGrey}
         />
-      </SafeAreaView>
+      </View>
     );
   }
 }

@@ -10,7 +10,8 @@ import AppDrawerNavigatorContainer from '../../containers/Navigators/AppDrawerNa
 import { connect } from 'react-redux';
 import { loadTpos } from '../../actions/loadTposAction';
 import { bindActionCreators } from 'redux';
-import { View, SafeAreaView } from 'react-native';
+import { View } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 
 class App extends Component {
   componentDidMount() {
@@ -18,7 +19,10 @@ class App extends Component {
   }
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+      <SafeAreaView
+        forceInset={{ top: 'never' }}
+        style={{ flex: 1, backgroundColor: '#fff' }}
+      >
         <AppDrawerNavigatorContainer />
       </SafeAreaView>
     );

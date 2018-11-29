@@ -38,7 +38,6 @@ export default class CountryProjects extends Component {
 
   sortProjects(sortType) {
     let { plantProjects } = this.props;
-    console.log('sort called', plantProjects, sortType);
     if (sortType == 'desc') {
       let countrySortedProjects = JSON.parse(JSON.stringify(plantProjects));
 

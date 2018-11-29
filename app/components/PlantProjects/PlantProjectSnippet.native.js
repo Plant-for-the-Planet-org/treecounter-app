@@ -160,13 +160,22 @@ class PlantProjectSnippet extends React.Component {
               </View>
             </View>
             <View style={styles.projectNameContainer}>
-              <Text style={styles.project_teaser__contentText}>
+              <Text
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={styles.project_teaser__contentText}
+              >
                 {teaserProps.projectName}
               </Text>
               {teaserProps.isCertified ? (
                 <Image
                   source={tick}
-                  style={{ width: 15, height: 15, marginLeft: 5, marginTop: 2 }}
+                  style={{
+                    width: 15,
+                    height: 15,
+                    marginTop: 5,
+                    marginLeft: 5
+                  }}
                 />
               ) : null}
             </View>
@@ -196,7 +205,7 @@ class PlantProjectSnippet extends React.Component {
                 <Text
                   style={styles.byOrgText}
                   ellipsizeMode="tail"
-                  numberOfLines={2}
+                  numberOfLines={1}
                 >
                   {teaserProps.tpoName}
                 </Text>

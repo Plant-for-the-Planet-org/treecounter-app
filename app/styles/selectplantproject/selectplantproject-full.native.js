@@ -19,7 +19,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     height: Layout.window.height * 0.5
   },
   projectSpecsContainer: {
-    height: Layout.window.height * 0.3
+    height: Layout.window.height * 0.3,
+    width: '100%'
   },
   select_different_project_style: {
     height: 40,

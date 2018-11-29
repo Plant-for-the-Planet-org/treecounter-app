@@ -7,6 +7,7 @@ import Proptypes from 'prop-types';
 import ListViewProjects from './listview';
 import { foldout, foldin } from '../../../assets';
 import TouchableItem from '../../Common/TouchableItem.native';
+import _ from 'lodash';
 
 export default class CountryProjects extends Component {
   constructor(props) {
@@ -41,21 +42,32 @@ export default class CountryProjects extends Component {
     if (sortType == 'desc') {
       let countrySortedProjects = JSON.parse(JSON.stringify(plantProjects));
 
-      countrySortedProjects = countrySortedProjects.sort(function(a, b) {
-        return b.country > a.country;
-      });
+      countrySortedProjects = _.orderBy(
+        countrySortedProjects,
+        ['country'],
+        'desc'
+      );
+      //1 Cap => ME
+      // 2>MX
+      // 3 ->SK
+      // 4 ->WF
+      // 5 -> NU
+      // 1 2 5 3 4
+      // 4 3 5 2 1
 
       this.setState({
-        countrySortedProjects: Object.assign([], countrySortedProjects)
+        countrySortedProjects: countrySortedProjects
       });
     } else {
       let { plantProjects } = this.props;
 
       let countrySortedProjects = plantProjects;
 
-      countrySortedProjects = countrySortedProjects.sort(function(a, b) {
-        return a.country > b.country;
-      });
+      countrySortedProjects = _.orderBy(
+        countrySortedProjects,
+        ['country'],
+        'asc'
+      );
       this.setState({
         countrySortedProjects: Object.assign([], countrySortedProjects)
       });

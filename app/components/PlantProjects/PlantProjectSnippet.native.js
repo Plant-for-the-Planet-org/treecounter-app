@@ -193,7 +193,13 @@ class PlantProjectSnippet extends React.Component {
 
             <View style={styles.actionContainer}>
               <View style={styles.byOrgContainer}>
-                <Text style={styles.byOrgText}>{teaserProps.tpoName}</Text>
+                <Text
+                  style={styles.byOrgText}
+                  ellipsizeMode="tail"
+                  numberOfLines={2}
+                >
+                  {teaserProps.tpoName}
+                </Text>
               </View>
 
               <View style={styles.buttonContainer}>

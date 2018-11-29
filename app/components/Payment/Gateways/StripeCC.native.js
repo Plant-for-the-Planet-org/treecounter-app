@@ -22,7 +22,8 @@ export default class StripeCC extends Component {
       expMonth: 0,
       expYear: 0,
       cvc: ''
-    }
+    },
+    submitClicked: false
   };
 
   componentDidMount() {}
@@ -36,6 +37,9 @@ export default class StripeCC extends Component {
 
   payviaCard() {
     if (this.state.valid) {
+      this.setState({
+        submitClicked: true
+      });
       const params = {
         number: this.state.params.number,
         expMonth: this.state.params.expMonth,
@@ -75,7 +79,13 @@ export default class StripeCC extends Component {
           expirationPlaceholder="MM/YY"
           cvcPlaceholder="CVC"
         />
-        <PrimaryButton onClick={() => this.payviaCard()}>Pay</PrimaryButton>
+        <PrimaryButton
+          onClick={
+            this.state.submitClicked ? () => null : () => this.payviaCard()
+          }
+        >
+          Pay
+        </PrimaryButton>
       </View>
     );
   }

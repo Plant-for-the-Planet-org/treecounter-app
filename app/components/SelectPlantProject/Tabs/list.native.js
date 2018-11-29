@@ -54,7 +54,7 @@ export default class ListProjects extends Component {
   render() {
     let { filteredProjects } = this.state;
     return (
-      <CardLayout key={'listViewProject'} style={{ flex: 1, padding: 0 }}>
+      <View key={'listViewProject'}>
         <View style={styles.searchItem}>
           <View style={[styles.searchContainer]}>
             <TextInput
@@ -83,7 +83,7 @@ export default class ListProjects extends Component {
           selectProject={projectId => this.props.selectProject(projectId)}
           onMoreClick={projectId => this.props.onMoreClick(projectId)}
         />
-      </CardLayout>
+      </View>
     );
   }
 }

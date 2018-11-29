@@ -133,6 +133,9 @@ let myTreesStyle = (color, borderColor) =>
     gap: {
       marginBottom: 5
     },
+    restrictTextLength: {
+      width: '80%'
+    },
     leftBorder: {
       height: '100%',
       position: 'absolute',

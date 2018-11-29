@@ -268,12 +268,26 @@ class ContributionCard extends React.Component {
           <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
         ) : null}
         {plantProjectLine ? (
-          <Text style={styles.gap}>{plantProjectLine}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.gap, styles.restrictTextLength]}
+          >
+            {plantProjectLine}
+          </Text>
         ) : null}
         {donateActionLine ? (
-          <Text style={styles.gap}>{donateActionLine}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.gap, styles.restrictTextLength]}
+          >
+            {donateActionLine}
+          </Text>
         ) : null}
-        {tpoLine ? <Text>{tpoLine}</Text> : null}
+        {tpoLine ? (
+          <Text numberOfLines={1} style={styles.restrictTextLength}>
+            {tpoLine}
+          </Text>
+        ) : null}
         {mayUpdate ? (
           <Text
             style={styles.updateTextStyle}
@@ -300,12 +314,26 @@ class ContributionCard extends React.Component {
           <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
         ) : null}
         {plantProjectLine ? (
-          <Text style={styles.gap}>{plantProjectLine}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.gap, styles.restrictTextLength]}
+          >
+            {plantProjectLine}
+          </Text>
         ) : null}
         {plantActionLine ? (
-          <Text style={styles.gap}>{plantActionLine}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.gap, styles.restrictTextLength]}
+          >
+            {plantActionLine}
+          </Text>
         ) : null}
-        {dedicateActionLine ? <Text>{dedicateActionLine}</Text> : null}
+        {dedicateActionLine ? (
+          <Text numberOfLines={1} style={styles.restrictTextLength}>
+            {dedicateActionLine}
+          </Text>
+        ) : null}
         {mayUpdate ? (
           <Text
             style={styles.updateTextStyle}
@@ -332,12 +360,26 @@ class ContributionCard extends React.Component {
           <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
         ) : null}
         {plantProjectLine ? (
-          <Text style={styles.gap}>{plantProjectLine}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.gap, styles.restrictTextLength]}
+          >
+            {plantProjectLine}
+          </Text>
         ) : null}
         {redeemActionLine ? (
-          <Text style={styles.gap}>{redeemActionLine}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.gap, styles.restrictTextLength]}
+          >
+            {redeemActionLine}
+          </Text>
         ) : null}
-        {tpoLine ? <Text>{tpoLine}</Text> : null}
+        {tpoLine ? (
+          <Text numberOfLines={1} style={styles.restrictTextLength}>
+            {tpoLine}
+          </Text>
+        ) : null}
         {mayUpdate ? (
           <Text
             style={styles.updateTextStyle}

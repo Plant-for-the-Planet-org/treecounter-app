@@ -113,7 +113,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_claim')]: {
         screen: RedemptionContainer
       },
-      [getLocalRoute('app_editTrees')]: EditUserContributionContainer
+      [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
+      [getLocalRoute('app_target')]: {
+        screen: isLoggedIn ? TargetContainer : LoginContainer
+      }
     },
     {
       headerMode: 'none',
@@ -216,9 +219,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       [getLocalRoute('app_registerTrees')]: {
         screen: isLoggedIn ? RegisterTrees : LoginContainer
-      },
-      [getLocalRoute('app_target')]: {
-        screen: isLoggedIn ? TargetContainer : LoginContainer
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer

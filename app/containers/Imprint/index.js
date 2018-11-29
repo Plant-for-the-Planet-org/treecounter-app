@@ -1,6 +1,7 @@
 import React from 'react';
 import Imprint from '../../components/Imprint';
 import { ImprintAction } from '../../actions/imprintAction';
+import _ from 'lodash';
 
 class ImprintContainer extends React.Component {
   constructor() {
@@ -14,10 +15,18 @@ class ImprintContainer extends React.Component {
   componentWillMount() {
     ImprintAction().then(
       success => {
-        this.setState({
-          loading: false,
-          imprints: success.data
-        });
+        try {
+          const imprint = _.sortBy(success.data, ['position', 'id']);
+          this.setState({
+            loading: false,
+            imprints: imprint
+          });
+        } catch (err) {
+          console.log(err);
+          this.setState({
+            loading: false
+          });
+        }
       },
       error => console.log(error)
     );

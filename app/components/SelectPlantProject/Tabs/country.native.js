@@ -47,13 +47,6 @@ export default class CountryProjects extends Component {
         ['country'],
         'desc'
       );
-      //1 Cap => ME
-      // 2>MX
-      // 3 ->SK
-      // 4 ->WF
-      // 5 -> NU
-      // 1 2 5 3 4
-      // 4 3 5 2 1
 
       this.setState({
         countrySortedProjects: countrySortedProjects

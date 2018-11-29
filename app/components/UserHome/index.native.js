@@ -131,15 +131,37 @@ export default class UserHome extends Component {
               />>
             </View>
             <View>
-              {'tpo' === userProfile.type &&
-              1 <=
-                userProfile.plantProjects
-                  .length ? null : userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
-              userProfile.synopsis2 ? (
+              {userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
+              userProfile.synopsis2 ||
+              userProfile.linkText ||
+              userProfile.url ? (
                 <CardLayout>
-                  <Text style={styles.footerText}>{userProfile.synopsis1}</Text>
+                  {userProfile.synopsis1 ? (
+                    <Text style={styles.footerText}>
+                      {userProfile.synopsis1}
+                    </Text>
+                  ) : null}
+                  {userProfile.synopsis2 ? (
+                    <Text style={styles.footerText}>
+                      {userProfile.synopsis2}
+                    </Text>
+                  ) : null}
+                  {userProfile.linkText ? (
+                    <Text style={styles.footerText}>
+                      {userProfile.linkText}
+                    </Text>
+                  ) : null}
+                  {userProfile.url ? (
+                    <Text style={styles.footerText}>{userProfile.url}</Text>
+                  ) : null}
                 </CardLayout>
               ) : null}
+            </View>
+            <View>
+              {'tpo' === userProfile.type &&
+              1 <= userProfile.plantProjects.length
+                ? null
+                : null}
             </View>
           </ScrollView>
         );

@@ -164,10 +164,29 @@ class PublicTreeCounter extends React.Component {
           />
         </View>
         <View>
-          {userProfile.synopsis1 || userProfile.synopsis2 ? (
+          {userProfile.synopsis1 ||
+          userProfile.synopsis2 ||
+          userProfile.linkText ||
+          userProfile.url ? (
             <CardLayout>
-              <Text style={stylesHome.footerText}>{userProfile.synopsis1}</Text>
-              <Text style={stylesHome.footerText}>{userProfile.synopsis2}</Text>
+              {userProfile.synopsis1 ? (
+                <Text style={stylesHome.footerText}>
+                  {userProfile.synopsis1}
+                </Text>
+              ) : null}
+              {userProfile.synopsis2 ? (
+                <Text style={stylesHome.footerText}>
+                  {userProfile.synopsis2}
+                </Text>
+              ) : null}
+              {userProfile.linkText ? (
+                <Text style={stylesHome.footerText}>
+                  {userProfile.linkText}
+                </Text>
+              ) : null}
+              {userProfile.url ? (
+                <Text style={stylesHome.footerText}>{userProfile.url}</Text>
+              ) : null}
             </CardLayout>
           ) : null}
         </View>

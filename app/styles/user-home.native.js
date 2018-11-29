@@ -24,7 +24,8 @@ export default (buttonStyles = EStyleSheet.create({
     marginBottom: 10
   },
   footerText: {
-    color: '#686060'
+    color: '#686060',
+    padding: 10
   },
   circle: {
     borderRadius: 35,

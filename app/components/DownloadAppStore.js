@@ -5,7 +5,8 @@ import { AppStoreLogo } from '../assets';
 
 export class DownloadAppModal extends Component {
   redirectUser() {
-    window.location = '//TODO add app link once app is launched';
+    window.location =
+      'https://itunes.apple.com/in/app/plant-for-the-planet/id1444740626?mt=8';
   }
   render() {
     let { isOpen, onRequestClose, continueOnSite } = this.props;

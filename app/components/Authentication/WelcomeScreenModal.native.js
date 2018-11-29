@@ -29,9 +29,6 @@ class WelcomeScreenModal extends Component {
               {i18n.t('label.welcome_to_ttc')}
             </Text>
             <Text style={styles.textPara}>
-              {i18n.t('label.welcome_to_ttc')}
-            </Text>
-            <Text style={styles.textPara}>
               {i18n.t('label.welcome_screen_summery')}
             </Text>
             <Text style={styles.textPara}>
@@ -40,7 +37,9 @@ class WelcomeScreenModal extends Component {
             <TouchableItem
               onPress={() => updateRoute('app_homepage', this.props.navigation)}
             >
-              <Text style={[styles.textPara, { marginTop: 15 }]}>
+              <Text
+                style={[styles.textPara, { marginTop: 20, fontWeight: 'bold' }]}
+              >
                 {i18n.t('label.deletion_prerequisite')}
               </Text>
             </TouchableItem>

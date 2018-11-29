@@ -9,16 +9,11 @@ import { userTreecounterSelector } from '../../selectors/index';
 
 class TargetContainer extends React.Component {
   onSubmitTarget = () => {
-    // let result = this.refs.loginForm.validate();
-    // if (result.isValid()) {
     console.log(this.refs.targetContainer.refs.setTargetForm.validate());
     let value = this.refs.targetContainer.refs.setTargetForm.getValue();
     if (value) {
-      this.props.SubmitTarget(value);
+      this.props.SubmitTarget(value, this.props.navigation);
     }
-    // } else if (this.props.onError) {
-    //   this.props.onError(result.errors);
-    // }
   };
 
   render() {

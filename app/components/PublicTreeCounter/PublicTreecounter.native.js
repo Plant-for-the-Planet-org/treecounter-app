@@ -16,6 +16,8 @@ import {
   isUserFollower,
   amISupporting
 } from './utils';
+import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet.native';
+import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {
@@ -97,6 +99,17 @@ class PublicTreeCounter extends React.Component {
       this.setState({ svgData: Object.assign({}, svgData) });
     }
   }
+  onMoreClick(id) {
+    this.props.selectPlantProjectIdAction(id);
+    const { navigation } = this.props;
+    console.log('OnMore');
+    updateRoute('app_selectProject', navigation);
+  }
+  onSelectClickedFeaturedProjects = id => {
+    this.props.selectPlantProjectIdAction(id);
+    const { navigation } = this.props;
+    updateStaticRoute('app_donate_detail', navigation);
+  };
   render() {
     const { treecounter, currentUserProfile } = this.props;
     if (null === treecounter) {
@@ -151,15 +164,31 @@ class PublicTreeCounter extends React.Component {
           />
         </View>
         <View>
-          {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
-            <PlantProjectCarousel
-              {...tpoProps}
-              onSelect={this.onPlantProjectSelected}
-            />
-          ) : userProfile.synopsis1 || userProfile.synopsis2 ? (
+          {userProfile.synopsis1 || userProfile.synopsis2 ? (
             <CardLayout>
               <Text style={stylesHome.footerText}>{userProfile.synopsis1}</Text>
+              <Text style={stylesHome.footerText}>{userProfile.synopsis2}</Text>
             </CardLayout>
+          ) : null}
+        </View>
+        <View>
+          {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
+            <View>
+              {tpoProps.plantProjects
+                .filter(filterProj => filterProj.allowDonations)
+                .map(project => (
+                  <PlantProjectSnippet
+                    key={'trillion' + project.id}
+                    onMoreClick={id => this.onMoreClick(id)}
+                    plantProject={project}
+                    onSelectClickedFeaturedProjects={id =>
+                      this.onSelectClickedFeaturedProjects(id)
+                    }
+                    showMoreButton={false}
+                    tpoName={project.tpo_name}
+                  />
+                ))}
+            </View>
           ) : null}
         </View>
       </ScrollView>
@@ -174,7 +203,8 @@ PublicTreeCounter.propTypes = {
   unfollowSubscribeAction: PropTypes.func,
   selectPlantProjectIdAction: PropTypes.func,
   supportTreecounterAction: PropTypes.func,
-  route: PropTypes.func
+  route: PropTypes.func,
+  navigation: PropTypes.any
 };
 
 export default PublicTreeCounter;

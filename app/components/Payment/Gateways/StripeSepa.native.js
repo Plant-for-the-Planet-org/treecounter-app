@@ -17,7 +17,16 @@ const styles = StyleSheet.create({
 });
 
 export default class StripeSepa extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      submitClicked: false
+    };
+  }
   handleSubmit = ev => {
+    this.setState({
+      submitClicked: true
+    });
     const { currency, context, account } = this.props;
     let ibanPattern = new RegExp(
       /^DE\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|DE\d{20}$/i
@@ -79,7 +88,11 @@ export default class StripeSepa extends Component {
           {i18n.t('label.stripe_sepa_des1')} {context.tpoName}{' '}
           {i18n.t('label.stripe_sepa_des2')}
         </Text>
-        <PrimaryButton onClick={() => this.handleSubmit()}>
+        <PrimaryButton
+          onClick={
+            this.state.submitClicked ? () => null : () => this.handleSubmit()
+          }
+        >
           {i18n.t('label.pay_via_sepa')}
         </PrimaryButton>
       </View>

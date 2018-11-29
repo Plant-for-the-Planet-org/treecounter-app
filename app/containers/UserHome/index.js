@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 
 import {
   userTreecounterDataSelector,
-  currentUserProfileSelector
+  currentUserProfileSelector,
+  currentUserProfileIdSelector,
+  sortedUserContributionsSelector
 } from '../../selectors';
+
 import UserHome from '../../components/UserHome';
 
 class UserHomeContainer extends React.Component {
@@ -16,12 +19,17 @@ class UserHomeContainer extends React.Component {
       <UserHome
         treecounterData={treecounterData}
         userProfile={currentUserProfile}
+        userProfileId={this.props.userProfileId}
+        userContributions={this.props.userContributions}
+        navigation={this.props.navigation}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
+  userContributions: sortedUserContributionsSelector(state),
+  userProfileId: currentUserProfileIdSelector(state),
   treecounterData: userTreecounterDataSelector(state),
   currentUserProfile: currentUserProfileSelector(state)
 });
@@ -30,5 +38,8 @@ export default connect(mapStateToProps)(UserHomeContainer);
 
 UserHomeContainer.propTypes = {
   treecounterData: PropTypes.object,
-  currentUserProfile: PropTypes.object
+  currentUserProfile: PropTypes.object,
+  userProfileId: PropTypes.number.isRequired,
+  userContributions: PropTypes.array.isRequired,
+  navigation: PropTypes.any
 };

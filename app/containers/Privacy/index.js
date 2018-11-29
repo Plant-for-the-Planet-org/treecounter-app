@@ -14,10 +14,15 @@ class PrivacyContainer extends React.Component {
   componentWillMount() {
     PrivacyAction().then(
       success => {
-        this.setState({
-          loading: false,
-          privacy: success.data
-        });
+        try {
+          const privacy = _.sortBy(success.data, ['position', 'id']);
+          this.setState({
+            loading: false,
+            privacy: privacy
+          });
+        } catch (err) {
+          console.log(err);
+        }
       },
       error => console.log(error)
     );

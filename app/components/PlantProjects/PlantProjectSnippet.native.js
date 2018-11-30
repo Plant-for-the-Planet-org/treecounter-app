@@ -61,11 +61,17 @@ class PlantProjectSnippet extends React.Component {
       geoLocation
     } = this.props.plantProject;
     let projectImage = null;
-    let treePlantedRatio = countPlanted / countTarget;
-    let treeCountWidth = 100 - treePlantedRatio * 100;
-    if (treeCountWidth < 0) {
+    let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
+    treePlantedRatio = parseFloat(treePlantedRatio);
+    let treeCountWidth;
+    if (treePlantedRatio > 1) {
       treeCountWidth = 100;
+    } else if (treePlantedRatio < 0) {
+      treeCountWidth = 0;
+    } else {
+      treeCountWidth = treePlantedRatio * 100;
     }
+
     if (imageFile) {
       projectImage = { image: imageFile };
     } else {
@@ -89,8 +95,12 @@ class PlantProjectSnippet extends React.Component {
     };
     return (
       <TouchableItem
-        onPress={() =>
-          this.props.onMoreClick ? this.props.onMoreClick(id) : null
+        onPress={
+          !this.props.onMoreClick
+            ? null
+            : () => {
+                this.props.onMoreClick(id);
+              }
         }
       >
         <CardLayout
@@ -137,15 +147,21 @@ class PlantProjectSnippet extends React.Component {
                           padding: 5
                         }
                   }
+                />
+                <View
+                  style={{
+                    width: '100%',
+                    flexDirection: 'row',
+                    position: 'absolute',
+                    alignItems: 'center'
+                  }}
                 >
-                  <View style={{ width: '100%', flexDirection: 'row' }}>
-                    <Text style={styles.treePlantedtextPlanted}>
-                      {specsProps.countPlanted}
-                    </Text>
-                    <Text style={styles.treePlantedtext}>
-                      {i18n.t('label.trees')}
-                    </Text>
-                  </View>
+                  <Text style={styles.treePlantedtextPlanted}>
+                    {specsProps.countPlanted}
+                  </Text>
+                  <Text style={styles.treePlantedtext}>
+                    {i18n.t('label.trees')}
+                  </Text>
                 </View>
               </View>
 
@@ -173,8 +189,8 @@ class PlantProjectSnippet extends React.Component {
                   style={{
                     width: 15,
                     height: 15,
-                    marginTop: 5,
-                    marginLeft: 5
+                    marginLeft: 5,
+                    maxWidth: '10%'
                   }}
                 />
               ) : null}

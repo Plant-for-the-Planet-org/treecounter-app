@@ -57,12 +57,14 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   treePlantedtext: {
     paddingRight: 5,
+    paddingTop: 5,
     color: 'white'
   },
   treePlantedtextPlanted: {
     paddingRight: 5,
-    color: 'white'
-    // width: '100%'
+    color: 'white',
+    paddingTop: 5,
+    paddingLeft: 5
   },
   targetContainer: {
     flexDirection: 'row',
@@ -89,7 +91,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   project_teaser__contentText: {
     fontSize: 16,
-    color: '$cardTextColor'
+    color: '$cardTextColor',
+    maxWidth: '90%'
   },
   byOrgContainer: {
     width: '70%',

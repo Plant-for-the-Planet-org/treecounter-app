@@ -64,6 +64,7 @@ class PublicTreecounterContainer extends Component {
         unfollowSubscribeAction={this.props.unfollowSubscribeAction}
         selectPlantProjectIdAction={this.props.selectPlantProjectIdAction}
         supportTreecounterAction={this.props.supportTreecounterAction}
+        navigation={this.props.navigation}
         route={(routeName, id, params) =>
           this.props.route(routeName, id, params, this.props.navigation)
         }

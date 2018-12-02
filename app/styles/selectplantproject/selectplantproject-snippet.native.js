@@ -18,7 +18,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
       height: 3
     },
     shadowOpacity: 0.5,
-    elevation: 1
+    elevation: 1,
+    width: '100%'
   },
   projectImageContainer: {
     height: Layout.window.width * 0.5,
@@ -56,12 +57,14 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   treePlantedtext: {
     paddingRight: 5,
+    paddingTop: 5,
     color: 'white'
   },
   treePlantedtextPlanted: {
     paddingRight: 5,
-    color: 'white'
-    // width: '100%'
+    color: 'white',
+    paddingTop: 5,
+    paddingLeft: 5
   },
   targetContainer: {
     flexDirection: 'row',
@@ -82,20 +85,23 @@ export default (selectplantprojectFull = EStyleSheet.create({
   actionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: '100%',
     //height: rowHeight + rowHeight / 2,
     paddingLeft: 5
   },
   project_teaser__contentText: {
     fontSize: 16,
-    color: '$cardTextColor'
+    color: '$cardTextColor',
+    maxWidth: '90%'
   },
   byOrgContainer: {
+    width: '70%',
     flexDirection: 'row',
-    alignItems: 'flex-end',
-    flexWrap: 'wrap'
+    alignItems: 'center'
   },
   byOrgText: {
     fontSize: 16,
+    width: '100%',
     color: '$cardTextColor'
   },
   locationText: {
@@ -116,7 +122,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
     color: '$cardTextColor'
   },
   buttonContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    width: '30%',
+    justifyContent: 'flex-end'
   },
   buttonItem: {
     padding: 5
@@ -152,7 +160,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   projectNameContainer: {
     height: rowHeight * 1.5,
+    flexDirection: 'row',
+    width: '100%',
     padding: 5,
-    flexDirection: 'row'
+    alignItems: 'center'
   }
 }));

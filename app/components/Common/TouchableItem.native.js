@@ -29,11 +29,15 @@ export default class TouchableItem extends React.Component {
      * platform design guidelines.
      * We need to pass the background prop to specify a borderless ripple effect.
      */
+    if (!this.props.onPress) {
+      return <View {...this.props}>{this.props.children}</View>;
+    }
     if (
       Platform.OS === 'android' &&
       Platform.Version >= ANDROID_VERSION_LOLLIPOP
     ) {
       const { style, onPress, ...rest } = this.props;
+
       return (
         <TouchableNativeFeedback
           onPress={onPress ? () => requestAnimationFrame(onPress) : null}

@@ -17,7 +17,8 @@ import {
   ProfilePic,
   infoGrey,
   editGrey,
-  redeem_outline
+  redeem_outline,
+  target_outline
 } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -150,6 +151,16 @@ export default class Menu extends Component {
                 iconUrl={editGrey}
               />
             ) : null}
+            {this.props.userProfile ? (
+              <LargeMenuItem
+                onPress={this.onPressMenu.bind(this, {
+                  uri: 'app_target'
+                })}
+                title={i18n.t('label.set_target')}
+                iconUrl={target_outline}
+              />
+            ) : null}
+
             <LargeMenuItem
               onPress={this.onPressMenu.bind(this, {
                 uri: getLocalRoute('app_redeem'),

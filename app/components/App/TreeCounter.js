@@ -141,7 +141,7 @@ class TreeCounter extends Component {
         <BrowserRouter history={history}>
           <div className="app-container">
             <ProgressModal isOpen={this.props.progressModel} />
-            {window.location.pathname.indexOf('donation-payment') ||
+            {window.location.pathname.indexOf('donation-payment') > -1 ||
             window.location.pathname.indexOf('account-activate') > -1 ? null : (
               <DownloadAppModal
                 isOpen={this.state.isIOS && !this.state.isCancelled}

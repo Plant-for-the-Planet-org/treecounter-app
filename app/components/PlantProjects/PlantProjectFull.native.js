@@ -50,6 +50,7 @@ class PlantProjectFull extends React.Component {
             cardStyle={styles.cardStyle}
             key={'projectFull' + this.props.plantProject.id}
             showMoreButton={false}
+            clickable={false}
             plantProject={this.props.plantProject}
             onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
             tpoName={tpo_name}

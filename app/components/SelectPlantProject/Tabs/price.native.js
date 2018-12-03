@@ -17,7 +17,7 @@ export default class PriceProjects extends Component {
       priceSortedProjects: props.plantProjects
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     let { plantProjects, currencies } = this.props;
     currencies = currencies.currencies;
     let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
@@ -42,7 +42,7 @@ export default class PriceProjects extends Component {
     });
   };
 
-  sortProjects = sortType => {
+  sortProjects(sortType) {
     if (sortType === 'desc') {
       let { plantProjects, currencies } = this.props;
       currencies = currencies.currencies;
@@ -78,7 +78,7 @@ export default class PriceProjects extends Component {
         priceSortedProjects: priceSortedProjects
       });
     }
-  };
+  }
 
   render() {
     let { priceSortedProjects } = this.state;
@@ -89,13 +89,13 @@ export default class PriceProjects extends Component {
           <View style={styles.sortContainer}>
             <TouchableItem
               style={styles.imageStyleContainer}
-              onPress={() => this.sortProjects('desc')}
+              onPress={this.sortProjects.bind(this, 'desc')}
             >
               <Image style={styles.imageStyle} source={foldin} />
             </TouchableItem>
             <TouchableItem
               style={styles.imageStyleContainer}
-              onPress={() => this.sortProjects('asc')}
+              onPress={this.sortProjects.bind(this, 'asc')}
             >
               <Image style={styles.imageStyle} source={foldout} />
             </TouchableItem>

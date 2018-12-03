@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, View, Text, Dimensions, Image } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  Dimensions,
+  Image,
+  Linking
+} from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
 import styles from '../../styles/user-home';
@@ -152,7 +159,12 @@ export default class UserHome extends Component {
                     </Text>
                   ) : null}
                   {userProfile.url ? (
-                    <Text style={styles.footerText}>{userProfile.url}</Text>
+                    <Text
+                      style={styles.linkText}
+                      onPress={() => this._goToURL(userProfile.url)}
+                    >
+                      {userProfile.url}
+                    </Text>
                   ) : null}
                 </CardLayout>
               ) : null}
@@ -177,6 +189,16 @@ export default class UserHome extends Component {
         return null;
     }
   };
+
+  _goToURL(url) {
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log("Don't know how to open URI: " + url);
+      }
+    });
+  }
 
   render() {
     return (

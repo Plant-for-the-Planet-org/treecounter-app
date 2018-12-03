@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, Linking } from 'react-native';
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
@@ -185,7 +185,12 @@ class PublicTreeCounter extends React.Component {
                 </Text>
               ) : null}
               {userProfile.url ? (
-                <Text style={stylesHome.footerText}>{userProfile.url}</Text>
+                <Text
+                  style={stylesHome.linkText}
+                  onPress={() => this._goToURL(userProfile.url)}
+                >
+                  {userProfile.url}
+                </Text>
               ) : null}
             </CardLayout>
           ) : null}
@@ -212,6 +217,16 @@ class PublicTreeCounter extends React.Component {
         </View>
       </ScrollView>
     );
+  }
+
+  _goToURL(url) {
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log("Don't know how to open URI: " + url);
+      }
+    });
   }
 }
 

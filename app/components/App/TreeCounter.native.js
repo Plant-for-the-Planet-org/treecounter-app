@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { loadTpos } from '../../actions/loadTposAction';
 import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 
 class App extends Component {
   componentDidMount() {
@@ -18,9 +19,12 @@ class App extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <SafeAreaView
+        forceInset={{ top: 'never' }}
+        style={{ flex: 1, backgroundColor: '#fff' }}
+      >
         <AppDrawerNavigatorContainer />
-      </View>
+      </SafeAreaView>
     );
 
     return;

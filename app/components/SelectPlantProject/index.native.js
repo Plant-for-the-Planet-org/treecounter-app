@@ -5,6 +5,7 @@ import ListProjects from './Tabs/list';
 import PriceProjects from './Tabs/price';
 import styles from '../../styles/common/tabbar';
 import { Dimensions } from 'react-native';
+import CountryProjects from './Tabs/country.native';
 
 const Layout = {
   window: {
@@ -20,7 +21,8 @@ export default class SelectPlantTabView extends Component {
       routes: [
         { key: 'featured', title: 'Featured' },
         { key: 'list', title: 'List' },
-        { key: 'price', title: 'Price' }
+        { key: 'price', title: 'Price' },
+        { key: 'country', title: 'Country' }
       ],
       index: 0
     };
@@ -49,7 +51,7 @@ export default class SelectPlantTabView extends Component {
         {...props}
         indicatorStyle={styles.indicator}
         style={styles.tabBar}
-        tabStyle={{ width: Layout.window.width / 3 }}
+        tabStyle={{ width: Layout.window.width / 4 }}
         labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
       />
@@ -64,6 +66,8 @@ export default class SelectPlantTabView extends Component {
         return <ListProjects {...this.props} />;
       case 'price':
         return <PriceProjects {...this.props} />;
+      case 'country':
+        return <CountryProjects {...this.props} />;
       default:
         return null;
     }
@@ -77,7 +81,6 @@ export default class SelectPlantTabView extends Component {
         renderScene={this._renderSelectPlantScene}
         renderTabBar={this._renderTabBar}
         onIndexChange={this._handleIndexChange}
-        //   canJumpToTab={this._canJumpToTab}
       />
     );
   }

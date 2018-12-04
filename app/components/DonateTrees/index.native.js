@@ -310,6 +310,7 @@ export default class DonateTrees extends Component {
               ref={this.setRecipientTabRef}
               showNextButton={true}
               currentUserProfile={this.props.currentUserProfile}
+              formValue={this.state.form}
               goToNextTab={value => this.goToNextTab(value)}
               onReciptTabChange={tab => this.handleModeReceiptChange(tab)}
             />

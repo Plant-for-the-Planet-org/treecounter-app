@@ -56,21 +56,30 @@ export default (selectplantprojectFull = EStyleSheet.create({
     borderRightColor: '#b9d384'
   },
   treePlantedtext: {
-    paddingRight: 5,
-    paddingTop: 5,
+    // padding: 5,
+    paddingLeft: 5,
     color: 'white'
   },
-  treePlantedtextPlanted: {
-    paddingRight: 5,
+  treePlantedtextTrees: {
     color: 'white',
     paddingTop: 5,
     paddingLeft: 5
   },
+  treePlantedtextPlanted: {
+    color: 'white',
+    paddingTop: 5,
+    paddingLeft: 5
+  },
+  treePlantedtext: {
+    color: 'white'
+    //padding: 5
+  },
   targetContainer: {
     flexDirection: 'row',
-    padding: 5,
+    alignItems: 'center',
     width: '40%',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    paddingRight: 5
   },
   projectdetailsContainer: {
     flexDirection: 'row',

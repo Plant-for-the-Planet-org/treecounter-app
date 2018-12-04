@@ -25,9 +25,9 @@ class PlantedProgressBar extends React.Component {
 
     return (
       <View style={styles.treeCounterContainer}>
-        <View style={[styles.treePlantedContainer]}>
+        <View style={styles.treePlantedContainer}>
           <View
-            style={[styles.treePlantedChildContainer]}
+            style={styles.treePlantedChildContainer}
             style={
               treeCountWidth > 0
                 ? {
@@ -64,11 +64,13 @@ class PlantedProgressBar extends React.Component {
           </View>
         </View>
 
-        <View style={[styles.targetContainer]}>
+        <View style={styles.targetContainer}>
           <Text style={styles.treePlantedtext}>
             {countTarget ? countTarget.toLocaleString('en') : null}
           </Text>
-          <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
+          <View style={{ paddingLeft: 5, paddingRight: 5 }}>
+            <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
+          </View>
         </View>
       </View>
     );

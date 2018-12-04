@@ -45,7 +45,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   treePlantedContainer: {
     flexDirection: 'row',
     height: '100%',
-    width: '60%'
+    width: '100%'
   },
   treePlantedChildContainer: {
     height: '100%',
@@ -58,6 +58,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   treePlantedtext: {
     // padding: 5,
     paddingLeft: 5,
+    paddingTop: 5,
     color: 'white'
   },
   treePlantedtextTrees: {
@@ -75,11 +76,12 @@ export default (selectplantprojectFull = EStyleSheet.create({
     //padding: 5
   },
   targetContainer: {
+    width: '100%',
     flexDirection: 'row',
+    position: 'absolute',
     alignItems: 'center',
-    width: '40%',
-    justifyContent: 'flex-end',
-    paddingRight: 5
+    paddingTop: 5,
+    justifyContent: 'flex-end'
   },
   projectdetailsContainer: {
     flexDirection: 'row',

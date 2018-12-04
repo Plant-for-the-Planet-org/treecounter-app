@@ -24,14 +24,11 @@ export function MapTemplate(locals) {
         {console.log(locals.value.split('&')[0].split('=')[1])} */}
         {'Latitude: ' +
           (locals.value.split('geoLatitude=')[1]
-            ? locals.value.split('geoLatitude=')[1].toFixed(2)
+            ? parseFloat(locals.value.split('geoLatitude=')[1]).toFixed(2)
             : locals.value.split('geoLatitude=')[1]) +
           ', Longitude: ' +
           (locals.value.split('&')[0].split('=')[1]
-            ? locals.value
-                .split('&')[0]
-                .split('=')[1]
-                .toFixed(2)
+            ? parseFloat(locals.value.split('&')[0].split('=')[1]).toFixed(2)
             : locals.value.split('&')[0].split('=')[1])}
       </Text>
     </View>

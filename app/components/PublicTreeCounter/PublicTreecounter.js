@@ -9,6 +9,8 @@ import UserFootprint from './UserFootprint';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import CardLayout from '../../components/Common/Card';
+import { getDocumentTitle } from '../../helpers/utils';
+import i18n from '../../locales/i18n.js';
 
 import {
   getProfileTypeName,
@@ -59,13 +61,42 @@ class PublicTreeCounter extends React.Component {
         id: treecounter.id,
         target: treecounter.countTarget,
         planted: treecounter.countPlanted,
-        community: treecounter.countCommunity,
+        community: treecounter.countReceived,
         personal: treecounter.countPersonal,
         targetComment: treecounter.targetComment,
         targetYear: treecounter.targetYear,
         type: treecounter.userProfile.type
       };
       this.setState({ svgData });
+    }
+  }
+  updateSvg(toggle) {
+    if (toggle) {
+      const treecounter = this.props.treecounter;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countReceived + treecounter.countPersonal, // light color
+        planted: treecounter.countPersonal, //dark color
+        community: treecounter.countReceived,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    } else {
+      const treecounter = this.props.treecounter;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countTarget,
+        planted: treecounter.countPlanted,
+        community: treecounter.countReceived,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
     }
   }
   render() {
@@ -102,7 +133,7 @@ class PublicTreeCounter extends React.Component {
       defaultPlantProjectId: null,
       tpoName: caption
     };
-
+    document.title = getDocumentTitle(caption);
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <div className="tree-counter-header">
@@ -110,20 +141,41 @@ class PublicTreeCounter extends React.Component {
             {...headerProps}
             followChanged={this.onFollowChanged}
           />
-          {'tpo' !== userProfile.type &&
-            !isMyself(treecounter, currentUserProfile) && (
-              <div className="support-button-container ">
-                <SupportButton
-                  {...supportProps}
-                  onRegisterSupporter={this.onRegisterSupporter}
-                />
-              </div>
-            )}
+
+          {('individual' == userProfile.type ||
+            'plantAmbassador' == userProfile.type) && (
+            <div className="support-button-container ">
+              <SupportButton
+                {...supportProps}
+                buttonLabel={i18n.t('label.gift_trees')}
+                onRegisterSupporter={this.onRegisterSupporter}
+              />
+            </div>
+          )}
+
+          {('company' == userProfile.type ||
+            'education' == userProfile.type ||
+            'non-profit' == userProfile.type ||
+            'govt' == userProfile.type ||
+            'plantClub' == userProfile.type) && (
+            <div className="support-button-container ">
+              <SupportButton
+                {...supportProps}
+                buttonLabel={
+                  isUserLoggedIn
+                    ? i18n.t('label.support')
+                    : i18n.t('label.plant_trees')
+                }
+                onRegisterSupporter={this.onRegisterSupporter}
+              />
+            </div>
+          )}
         </div>
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />
           <TreecounterGraphicsText
             trillion={false}
+            onToggle={toggleVal => this.updateSvg(toggleVal)}
             treecounterData={this.state.svgData}
           />
         </div>

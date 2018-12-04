@@ -7,16 +7,17 @@ import LoadingIndicator from '../Common/LoadingIndicator';
 import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import UserProfileImage from '../Common/UserProfileImage';
 import { getProfileTypeName } from '../PublicTreeCounter/utils';
-
+import { getDocumentTitle } from '../../helpers/utils';
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
 
     let svgData = {};
     const { treecounterData, userProfile } = props;
-    if (treecounterData) {
-      svgData = { ...treecounterData, type: userProfile.type };
-    }
+    if (userProfile)
+      if (treecounterData) {
+        svgData = { ...treecounterData, type: userProfile.type };
+      }
     this.state = {
       svgData: svgData
     };
@@ -29,9 +30,48 @@ export default class UserHome extends Component {
       this.setState({ svgData });
     }
   }
+  updateSvg(toggle) {
+    if (toggle) {
+      const treecounter = this.props.treecounterData;
+      const profileType = this.props.userProfile.type;
+      if (isNaN(parseInt(treecounter.community))) {
+        treecounter.community = 0;
+      }
+      if (isNaN(parseInt(treecounter.personal))) {
+        treecounter.personal = 0;
+      }
+
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.community + treecounter.personal, // light color
+        planted: treecounter.personal, //dark color
+        community: treecounter.community,
+        personal: treecounter.personal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: profileType
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    } else {
+      const treecounter = this.props.treecounterData;
+      const profileType = this.props.userProfile.type;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.target,
+        planted: treecounter.planted,
+        community: treecounter.community,
+        personal: treecounter.personal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: profileType
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    }
+  }
 
   render() {
     const { treecounterData, userProfile } = this.props;
+    document.title = getDocumentTitle(userProfile.treecounter.displayName);
     const profileType = getProfileTypeName(userProfile.type);
     let { svgData } = this.state;
     return (
@@ -57,6 +97,7 @@ export default class UserHome extends Component {
             <TreecounterGraphicsText
               trillion={false}
               treecounterData={svgData}
+              onToggle={toggleVal => this.updateSvg(toggleVal)}
             />
           )}
         </div>

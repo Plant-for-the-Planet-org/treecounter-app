@@ -3,24 +3,42 @@ import { loadUserProfile } from './loadUserProfileAction';
 import { debug } from '../debug/index';
 import { createAction } from 'redux-actions';
 import { clearStorage } from '../stores/localStorage';
-import { postRequest } from '../utils/api';
-import { updateJWT } from '../utils/user';
+import { postRequest, postActivateLinkRequest } from '../utils/api';
+import { updateJWT, updateActivateToken } from '../utils/user';
 import { NotificationAction } from './notificationAction';
 import { loadTpos } from './loadTposAction';
-
+import { setProgressModelState } from '../reducers/modelDialogReducer';
+import _ from 'lodash';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 export const userLogout = createAction('USER_LOGOUT');
-export function login(data) {
-  const request = postRequest('api_login_check', data);
+
+export function login(credentials, navigation = undefined) {
+  const request = postRequest('api_login_check', credentials);
 
   return dispatch => {
-    request.then(res => {
-      const { token, refresh_token } = res.data;
-      updateJWT(token, refresh_token);
-      dispatch(loadUserProfile());
-      dispatch(NotificationAction());
-      updateRoute('app_userHome', dispatch);
-      return token;
-    });
+    dispatch(setProgressModelState(true));
+    request
+      .then(res => {
+        const { token, refresh_token, data } = res.data;
+        if (!data.isActivated) {
+          updateActivateToken(credentials._username, token);
+        } else {
+          updateJWT(token, refresh_token);
+          dispatch(loadUserProfile(data));
+          dispatch(NotificationAction());
+        }
+        updateRoute(
+          data.routeName,
+          navigation || dispatch,
+          null,
+          data.routeParams
+        );
+        dispatch(setProgressModelState(false));
+        return token;
+      })
+      .catch(err => {
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 
@@ -32,22 +50,50 @@ export function logoutUser() {
   };
 }
 
-export function forgot_password(data) {
+export function forgot_password(data, navigation = undefined) {
   return dispatch => {
+    dispatch(setProgressModelState(true));
     postRequest('auth_forgotPassword_post', data)
       .then(res => {
-        updateRoute('app_passwordSent', dispatch);
+        dispatch(setProgressModelState(false));
+        updateRoute('app_passwordSent', navigation || dispatch);
+      })
+      .catch(err => {
+        debug(err);
+        dispatch(setProgressModelState(false));
+      });
+  };
+}
+
+export function sendEmail(navigation = undefined) {
+  return dispatch => {
+    postActivateLinkRequest('auth_sendActivationLink_post')
+      .then(res => {
+        // console.log(res);
       })
       .catch(err => debug(err));
   };
 }
 
-export function reset_password(data) {
+export function reset_password(data, navigation = undefined) {
   return dispatch => {
     postRequest('auth_resetPassword_post', data)
       .then(res => {
-        updateRoute('app_login', dispatch);
+        updateRoute('app_login', navigation || dispatch);
       })
       .catch(err => debug(err));
+  };
+}
+export function setAccessDenied(data, params, path, navigation = undefined) {
+  return dispatch => {
+    postRequest('public_accessDenied', data, params)
+      .then(res => {
+        const { statusText } = res;
+        updateRoute(path, navigation || dispatch);
+        // NotificationManager.success(statusText, 'Success', 5000);
+      })
+      .catch(error => {
+        // NotificationManager.error(error.response.data.message, 'Error', 5000);
+      });
   };
 }

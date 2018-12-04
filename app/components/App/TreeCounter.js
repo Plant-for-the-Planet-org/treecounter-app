@@ -24,6 +24,7 @@ import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import FAQContainer from '../../containers/FAQ';
 import PledgeContainer from '../../containers/Pledge';
+import RedemptionContainer from '../../containers/RedemptionContainer';
 
 import Footer from '../Footer';
 
@@ -38,20 +39,38 @@ import { NotificationAction } from '../../actions/notificationAction';
 import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors';
 import { getLocalRoute } from '../../actions/apiRouting';
+import SuccessfullyActivatedAccount from '../../containers/Authentication/SuccessfullActivatedContainer';
+import DonationTreesContainer from '../../containers/DonateTrees/index';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
-import DonationTreesContainer from '../../containers/DonateTrees';
 
 import EditUserProfileContainer from '../../containers/EditUserProfile';
 import LeaderboardContainer from '../../containers/Leaderboard';
+import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
+import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
+import PrivacyContainer from '../../containers/Privacy';
+import ImprintContainer from '../../containers/Imprint';
+import DownloadAppModal from '../DownloadAppStore';
+import AppPaymentContainer from '../../containers/AppPayment';
+
 // Class implementation
 class TreeCounter extends Component {
   constructor(props) {
     super(props);
     const { userProfile } = this.props;
     const isLoggedIn = null !== userProfile;
+    let IS_IPAD = navigator.userAgent.match(/iPad/i) != null,
+      IS_IPHONE =
+        !IS_IPAD &&
+        (navigator.userAgent.match(/iPhone/i) != null ||
+          navigator.userAgent.match(/iPod/i) != null),
+      IS_IOS = IS_IPAD || IS_IPHONE,
+      IS_ANDROID = !IS_IOS && navigator.userAgent.match(/android/i) != null;
     this.state = {
       loading: true,
-      isLoggedIn: isLoggedIn
+      isLoggedIn: isLoggedIn,
+      isIOS: IS_IOS,
+      isAndroid: IS_ANDROID,
+      isCancelled: false
     };
   }
 
@@ -73,6 +92,7 @@ class TreeCounter extends Component {
 
   componentDidMount() {
     this.props.loadTpos();
+    this.props.fetchpledgeEventsAction();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -80,6 +100,12 @@ class TreeCounter extends Component {
       let isLoggedIn = null !== nextProps.userProfile;
       this.setState({ loading: false, isLoggedIn: isLoggedIn });
     }
+  }
+
+  continueOnSite() {
+    this.setState({
+      isCancelled: true
+    });
   }
 
   render() {
@@ -114,18 +140,34 @@ class TreeCounter extends Component {
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
+            <ProgressModal isOpen={this.props.progressModel} />
+            {window.location.pathname.indexOf('donation-payment') > -1 ||
+            window.location.pathname.indexOf('account-activate') > -1 ? null : (
+              <DownloadAppModal
+                isOpen={this.state.isIOS && !this.state.isCancelled}
+                continueOnSite={this.continueOnSite.bind(this)}
+              />
+            )}
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             <div className="app-container__content">
-              <PublicRoute exact path="/" component={Trillion} />
+              <Route exact path="/" component={Trillion} />
               <Route
                 exact
-                path={getLocalRoute('app_homepage')}
+                path={
+                  getLocalRoute('app_homepage') !== '/'
+                    ? getLocalRoute('app_homepage')
+                    : 'null'
+                }
                 component={Trillion}
               />
               <PublicRoute
                 path={getLocalRoute('app_signup')}
                 component={SignUpContainer}
+              />
+              <PublicRoute
+                path={getLocalRoute('app_accountActivate') + '/:token'}
+                component={SuccessfullyActivatedAccount}
               />
               <PublicRoute
                 path={getLocalRoute('app_accountActivation')}
@@ -155,6 +197,10 @@ class TreeCounter extends Component {
               <PublicRoute
                 path={getLocalRoute('app_passwordSent')}
                 component={EmailSentContainer}
+              />
+              <Route
+                path={getLocalRoute('app_payment') + '/:donationContribution'}
+                component={AppPaymentContainer}
               />
               <Route
                 path={getLocalRoute('app_explore')}
@@ -195,6 +241,14 @@ class TreeCounter extends Component {
                 component={EditUserProfileContainer}
               />
               <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
+              <Route
+                path={getLocalRoute('app_privacy')}
+                component={PrivacyContainer}
+              />
+              <Route
+                path={getLocalRoute('app_imprint')}
+                component={ImprintContainer}
+              />
               {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
               <Route
                 path={getLocalRoute('app_giftTrees')}
@@ -207,6 +261,14 @@ class TreeCounter extends Component {
               <Route
                 path={getLocalRoute('app_donateTrees')}
                 component={DonationTreesContainer}
+              />
+              <Route
+                path={getLocalRoute('app_claim') + '/:type' + '/:code'}
+                component={RedemptionContainer}
+              />
+              <Route
+                path={getLocalRoute('app_redeem') + '/:type?' + '/:code?'}
+                component={RedemptionContainer}
               />
               <Route
                 path={getLocalRoute('app_pledge') + '/:eventSlug'}
@@ -227,7 +289,8 @@ class TreeCounter extends Component {
 }
 
 const mapStateToProps = state => ({
-  userProfile: currentUserProfileSelector(state)
+  userProfile: currentUserProfileSelector(state),
+  progressModel: state.modelDialogState.progressModel
 });
 
 const mapDispatchToProps = dispatch => {
@@ -235,7 +298,8 @@ const mapDispatchToProps = dispatch => {
     {
       loadUserProfile,
       NotificationAction,
-      loadTpos
+      loadTpos,
+      fetchpledgeEventsAction
     },
     dispatch
   );
@@ -248,5 +312,7 @@ TreeCounter.propTypes = {
   loadUserProfile: PropTypes.func,
   NotificationAction: PropTypes.func,
   loadTpos: PropTypes.func,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
+  progressModel: PropTypes.bool,
+  fetchpledgeEventsAction: PropTypes.func
 };

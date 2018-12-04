@@ -2,16 +2,18 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (datePickerStyle = EStyleSheet.create({
   datePickerContainer: {
-    marginLeft: 10
+    marginLeft: 10,
+    flex: 1,
+    marginBottom: 20
   },
   underlineStyle: {
-    height: 2,
+    height: 1,
     flex: 1,
-    backgroundColor: '#dad7d7'
+    backgroundColor: '$inputBorderColor'
   },
   dateValueStyle: {
     color: '$textColor',
-    fontSize: 17,
-    paddingBottom: 1
+    fontSize: 13,
+    paddingBottom: 7
   }
 }));

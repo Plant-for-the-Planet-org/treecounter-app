@@ -20,12 +20,12 @@ export default (buttonStyles = EStyleSheet.create({
   },
   userProfileContainer: {
     flexDirection: 'row',
-    flex: 1,
     padding: 10,
     marginBottom: 10
   },
   footerText: {
-    color: '#686060'
+    color: '#686060',
+    padding: 10
   },
   circle: {
     borderRadius: 35,
@@ -58,7 +58,8 @@ export default (buttonStyles = EStyleSheet.create({
     width: 65,
     height: 65,
     resizeMode: 'contain',
-    padding: 5
+    padding: 5,
+    borderRadius: 33
   },
   nameStyle: {
     fontSize: 17,

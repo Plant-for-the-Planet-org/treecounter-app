@@ -27,14 +27,21 @@ export default class ForgotPassword extends Component {
               <TextSpan>{i18n.t('label.enter_mail')}</TextSpan>
             </div>
             <br />
-            <TCombForm
-              ref="forgotPasswordForm"
-              type={forgotPasswordFormSchema}
-              options={schemaOptions}
-            />
-            <PrimaryButton onClick={this.props.onResetPassword}>
-              {i18n.t('label.reset_password')}
-            </PrimaryButton>
+            <form onSubmit={this.props.onResetPassword}>
+              <TCombForm
+                ref="forgotPasswordForm"
+                type={forgotPasswordFormSchema}
+                options={schemaOptions}
+              />
+              <PrimaryButton
+                onClick={event => {
+                  this.props.onResetPassword();
+                  event.preventDefault();
+                }}
+              >
+                {i18n.t('label.reset_password')}
+              </PrimaryButton>
+            </form>
             <TextBlock>
               <InlineLink
                 uri={'app_login'}

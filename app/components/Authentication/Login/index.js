@@ -20,14 +20,22 @@ export default class Login extends Component {
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>{i18n.t('label.login')}</TextHeading>
         <CardLayout>
-          <TCombForm
-            ref="loginForm"
-            type={loginFormSchema}
-            options={schemaOptions}
-          />
-          <PrimaryButton onClick={this.props.onPress}>
-            {i18n.t('label.login')}
-          </PrimaryButton>
+          <form onSubmit={this.props.onPress}>
+            <TCombForm
+              ref="loginForm"
+              type={loginFormSchema}
+              options={schemaOptions}
+            />
+
+            <PrimaryButton
+              onClick={event => {
+                this.props.onPress();
+                event.preventDefault();
+              }}
+            >
+              {i18n.t('label.login')}
+            </PrimaryButton>
+          </form>
           <LoginFooter />
         </CardLayout>
       </div>

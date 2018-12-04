@@ -136,10 +136,10 @@
         }
       }
       .price-conversion__radio {
-        width:30%;
+        width: 30%;
       }
       .price-conversion__equal {
-        width:10%;
+        width: 10%;
       }
 
       input[type="text"] {
@@ -187,7 +187,7 @@
     padding: 5px;
     width: 70px;
     margin: 0;
-    height: 30px;
+    min-height: 30px;
     border-radius: 3px;
   }
 
@@ -352,5 +352,8 @@
 
 .payment-success {
   padding: 30px;
+}
+
+.payment-options-container {
   width: 300px;
 }

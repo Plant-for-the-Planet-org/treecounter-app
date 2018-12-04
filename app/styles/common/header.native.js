@@ -6,7 +6,7 @@ const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 56;
 
 const { height, width } = Dimensions.get('window');
 
-const getAppBarHeight = isLandscape => {
+export const getAppBarHeight = isLandscape => {
   return Platform.OS === 'ios'
     ? isLandscape && !Platform.isPad
       ? 32

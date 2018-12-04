@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-// import { history } from '../Common/BrowserRouter';
 
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
@@ -201,7 +200,7 @@ export default class SelectPlantProject extends Component {
               />
             ) : null}
             <PrimaryButton
-              onPress={() => this.onSelectClicked(this.state.modalProject.id)}
+              onClick={() => this.onSelectClicked(this.state.modalProject.id)}
             >
               {i18n.t('label.select_project')}
             </PrimaryButton>

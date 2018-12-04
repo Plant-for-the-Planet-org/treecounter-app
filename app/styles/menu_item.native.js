@@ -13,6 +13,14 @@ export default (menuStyles = EStyleSheet.create({
     paddingLeft: 3,
     paddingBottom: 10
   },
+  largeMenuItemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingLeft: 20,
+    paddingTop: 2,
+    paddingBottom: 10
+  },
   groupMenuContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
@@ -24,10 +32,20 @@ export default (menuStyles = EStyleSheet.create({
     height: 18,
     resizeMode: 'contain'
   },
+  largeImageStyle: {
+    width: 25,
+    height: 25,
+    resizeMode: 'contain'
+  },
   textStyle: {
     paddingLeft: 5,
     fontSize: 11,
     color: '#6a6161'
+  },
+  largeTextStyle: {
+    paddingLeft: 5,
+    fontSize: '1 rem',
+    color: '$textColor'
   },
   gropuTextStyle: {
     fontWeight: '600',

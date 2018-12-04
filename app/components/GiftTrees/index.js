@@ -14,6 +14,7 @@ import { arrow_left_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+import { paymentFee } from '../../helpers/utils';
 
 import {
   individualSchemaOptions,
@@ -380,8 +381,9 @@ export default class GiftTrees extends Component {
               <img src={check_green} />
               <div className={'gap'} />
               <TextBlock strong={true}>
-                {i18n.t('label.thankyou')} {this.state.treeCount}{' '}
-                {i18n.t('label.receive_mail')}
+                {i18n.t('label.thankyou_planting', {
+                  count: this.state.treeCount
+                })}
               </TextBlock>
               <div className={'gap'} />
               <TextBlock>
@@ -443,7 +445,7 @@ export default class GiftTrees extends Component {
                     rates={
                       currencies.currency_rates[plantProject.currency].rates
                     }
-                    fees={1}
+                    fees={paymentFee}
                     currencies={currencies.currency_names}
                     selectedCurrency={this.determineDefaultCurrency()}
                     treeCountOptions={

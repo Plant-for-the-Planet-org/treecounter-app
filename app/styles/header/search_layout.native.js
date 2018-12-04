@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
 
 export default (styles = EStyleSheet.create({
   container: {
@@ -11,7 +12,8 @@ export default (styles = EStyleSheet.create({
     padding: 20,
     paddingBottom: 1,
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: Dimensions.get('window').width
   },
   profileImage: {
     height: 30,
@@ -20,6 +22,7 @@ export default (styles = EStyleSheet.create({
   },
   profileText: {
     fontSize: 20,
-    color: '#b9d384'
+    color: '#b9d384',
+    width: '97%'
   }
 }));

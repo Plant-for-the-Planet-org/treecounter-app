@@ -18,7 +18,7 @@ class LoginContainer extends React.Component {
   };
 
   onClick(value) {
-    this.props.login(value);
+    this.props.login(value, this.props.navigation);
   }
 
   render() {
@@ -50,5 +50,5 @@ export default connect(null, mapDispatchToProps)(LoginContainer);
 LoginContainer.propTypes = {
   login: PropTypes.func,
   route: PropTypes.func,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object
 };

@@ -7,6 +7,7 @@
   "update": " Update",
   "my_trees": "My Trees",
   "donate_trees": "Donate trees",
+  "donate": "Donate",
   "no_contributions": "Trees you register or donate will appear here.",
   "singleTree": "Single Tree",
   "severalTrees": "Several Trees",
@@ -16,5 +17,6 @@
   "url": "Link of your Profile / Website",
   "linkText": "Text for your Link",
   "select_file": "Select a file from computer",
-  "browse": "Browse"
+  "browse": "Browse",
+  "upload_profile_picture": "Upload New Profile Picture"
 }

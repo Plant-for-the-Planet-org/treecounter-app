@@ -17,7 +17,7 @@ import tabBarStyles from '../../styles/common/tabbar.native';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { plantedTarget } from '../../assets';
 import { getLocalRoute } from '../../actions/apiRouting';
-import { TabView } from 'react-native-tab-view';
+import { TabView, TabBar } from 'react-native-tab-view';
 
 export default class UserContributions extends React.Component {
   constructor() {
@@ -37,31 +37,13 @@ export default class UserContributions extends React.Component {
 
   _renderTabBar = props => {
     return (
-      <View style={tabBarStyles.tabBar}>
-        {props.navigationState.routes.map((route, i) => {
-          return (
-            <TouchableOpacity
-              style={
-                this.state.index === i
-                  ? tabBarStyles.tabItemActive
-                  : tabBarStyles.tabItem
-              }
-              key={'route' + i}
-              onPress={() => this.setState({ index: i })}
-            >
-              <Animated.Text
-                style={
-                  this.state.index === i
-                    ? tabBarStyles.textActive
-                    : tabBarStyles.text
-                }
-              >
-                {route.title}
-              </Animated.Text>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+      <TabBar
+        {...props}
+        indicatorStyle={tabBarStyles.indicator}
+        style={[tabBarStyles.tabBar]}
+        labelStyle={tabBarStyles.textStyle}
+        indicatorStyle={tabBarStyles.textActive}
+      />
     );
   };
 
@@ -124,5 +106,6 @@ export default class UserContributions extends React.Component {
 
 UserContributions.propTypes = {
   userProfileId: PropTypes.number.isRequired,
-  userContributions: PropTypes.array.isRequired
+  userContributions: PropTypes.array.isRequired,
+  navigation: PropTypes.any
 };

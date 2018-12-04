@@ -6,6 +6,7 @@
  */
 
 #import "AppDelegate.h"
+#import "RCTLinkingManager.h"
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -30,6 +31,21 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity
+ restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+{
+  return [RCTLinkingManager application:application
+                   continueUserActivity:userActivity
+                     restorationHandler:restorationHandler];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  return [RCTLinkingManager application:application openURL:url options:options];
 }
 
 @end

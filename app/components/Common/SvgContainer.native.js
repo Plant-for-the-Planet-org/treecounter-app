@@ -12,6 +12,7 @@ import treecounterStyles from '../../styles/common/treecounter_svg';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import Svg, { Circle } from 'react-native-svg';
 import { Dimensions } from 'react-native';
+import _ from 'lodash';
 
 //Only take multiple of 10s
 const squareDimension =
@@ -62,7 +63,7 @@ export default class SvgContainer extends Component {
     if (target === 0) {
       return total;
     } else {
-      return total / (1 + target / planted);
+      return total * planted / target;
     }
   }
 
@@ -70,7 +71,7 @@ export default class SvgContainer extends Component {
     if (target === 0) {
       return 72;
     } else {
-      return Math.round(72 / (1 + target / planted));
+      return Math.round(72 * planted / target);
     }
   }
 
@@ -147,30 +148,28 @@ export default class SvgContainer extends Component {
               <SvgUri width="100%" height="100%" source={svgs['ballons']} />
             </Animated.View>
           </View>
-          {totalCount.map(
-            i =>
-              i <= treesWidth ? (
-                <View key={'tree-' + i} style={treecounterStyles.potStyle}>
-                  <SvgUri
-                    width="100%"
-                    height="100%"
-                    source={svgs['darkCrownTree' + ('' + i).padStart(3, '0')]}
-                  />
-                </View>
-              ) : null
-          )}
-          {totalCount.map(
-            i =>
-              i > treesWidth ? (
-                <View key={'pot-' + i} style={treecounterStyles.potStyle}>
-                  <SvgUri
-                    width="100%"
-                    height="100%"
-                    source={svgs['pot' + ('' + i).padStart(2, '0')]}
-                  />
-                </View>
-              ) : null
-          )}
+          {totalCount.map(i => {
+            return i <= treesWidth ? (
+              <View key={'tree-' + i} style={treecounterStyles.potStyle}>
+                <SvgUri
+                  width="100%"
+                  height="100%"
+                  source={svgs['darkCrownTree' + _.padStart('' + i, 3, '0')]}
+                />
+              </View>
+            ) : null;
+          })}
+          {totalCount.map(i => {
+            return i > treesWidth ? (
+              <View key={'pot-' + i} style={treecounterStyles.potStyle}>
+                <SvgUri
+                  width="100%"
+                  height="100%"
+                  source={svgs['pot' + _.padStart('' + i, 2, '0')]}
+                />
+              </View>
+            ) : null;
+          })}
           <View style={treecounterStyles.circleStyle}>
             <Svg height="100%" width="100%" viewBox="0 0 400 400">
               <Circle
@@ -199,6 +198,7 @@ export default class SvgContainer extends Component {
               <TreecounterGraphicsText
                 trillion={this.props.trillion}
                 treecounterData={this.props}
+                onToggle={toggleVal => this.props.onToggle(toggleVal)}
               />
             ) : null}
           </View>
@@ -216,7 +216,8 @@ SvgContainer.propTypes = {
   personal: PropTypes.number.isRequired,
   targetYear: PropTypes.number,
   exposeMissing: PropTypes.bool,
-  trillion: PropTypes.bool
+  trillion: PropTypes.bool,
+  onToggle: PropTypes.func
 };
 
 SvgContainer.defaultProps = {

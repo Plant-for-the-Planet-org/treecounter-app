@@ -1,20 +1,20 @@
 {
-  "tree": " árbol",
+  "tree": " árbol",
   "pictures": "Imágenes",
   "planting_day": "Día de siembra",
   "see_less": "- Ver menos",
   "see_more": "Ver más",
-  "update": " Actualizar",
+  "update": " Actualizar",
   "my_trees": "Mis árboles",
   "donate_trees": "Donar árboles",
   "no_contributions": "Los árboles que usted registre o done aparecerán aquí.",
-  "singleTree": "Solo árbol",
-  "severalTrees": "Varios árboles",
+  "singleTree": "Árbol individual",
+  "severalTrees": "Varios Árboles",
   "donatedTrees": "Árboles donados",
   "synopsis1": "Introducción",
   "synopsis2": "Información Adicional",
   "url": "Enlace de su perfil / sitio web",
   "linkText": "Texto para su enlace",
-  "select_file": "Seleccione un archivo de la computadora",
-  "browse": "Navega"
+  "select_file": "Seleccione un archivo del ordenador",
+  "browse": "Navegar"
 }

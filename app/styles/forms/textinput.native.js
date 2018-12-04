@@ -1,28 +1,42 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (textInputStyles = EStyleSheet.create({
+  container: {
+    // flexDirection: 'column',
+    //flex: 1
+  },
   containerStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
+    alignItems: 'center',
     paddingBottom: 20
   },
-  container: {
-    width: '100%',
-    flexDirection: 'column'
+
+  imageContainerStyle: {
+    width: 20,
+    height: 20
   },
-  imageStyle: { width: 26, height: 26, resizeMode: 'contain' },
+  imageStyle: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain'
+  },
   textboxStyle: {
-    flex: 1,
+    height: 35,
+    flexGrow: 1,
     marginLeft: 10,
-    width: '80%',
-    fontSize: 16,
+    fontSize: 13,
     color: '#686060',
     borderBottomWidth: 1,
-    borderColor: '#cecece'
+    borderColor: '$inputBorderColor'
   },
   emptyView: {
-    width: 26,
-    height: 26
+    width: 20,
+    height: 20
+  },
+  errorTextStyle: {
+    color: '$colorError',
+    fontSize: 11,
+    marginTop: -12
   }
 }));

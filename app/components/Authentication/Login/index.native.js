@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  ScrollView
-} from 'react-native';
+import { Text, View, Image, ScrollView } from 'react-native';
+import scrollStyle from '../../../styles/common/scrollStyle';
 
 import {
   loginFormSchema,
@@ -17,7 +12,10 @@ import {
 import i18n from '../../../locales/i18n.js';
 
 import styles from '../../../styles/login';
-import CardLayout from '../../Common/Card';
+
+import PrimaryButton from '../../Common/Button/PrimaryButton';
+import { SideMenuImage } from '../../../assets';
+import TouchableItem from '../../Common/TouchableItem.native';
 
 let Form = t.form.Form;
 
@@ -32,47 +30,57 @@ export default class Login extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.loginHeader}>
-          <Text style={styles.titleText}>{i18n.t('label.login')}</Text>
-          <View style={styles.titleTextUnderline} />
+      <ScrollView
+        contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
+      >
+        <View style={styles.parentContainer}>
+          <View style={styles.headerContainer}>
+            <Image
+              style={styles.imageStyle}
+              resizeMode={'contain'}
+              source={SideMenuImage}
+            />
+            <Text style={styles.loginDescriptionStyle}>
+              {i18n.t('label.login_description')}
+            </Text>
+          </View>
+
+          <View style={styles.container}>
+            <View style={styles.inputContainer}>
+              <Form
+                ref={'loginForm'}
+                type={loginFormSchema}
+                options={schemaOptions}
+              />
+            </View>
+            <View style={styles.bottomRow}>
+              <TouchableItem onPress={this.onForgotPasswordClicked}>
+                <Text style={styles.bottomTextHighlight}>
+                  {i18n.t('label.forgot_ur_password')}
+                </Text>
+              </TouchableItem>
+            </View>
+            <View style={styles.bottomRow}>
+              <TouchableItem
+                style={{ paddingRight: 5 }}
+                onPress={this.onSignupClicked}
+              >
+                <Text style={styles.bottomTextHighlight}>
+                  {i18n.t('label.dont_have_account')} {i18n.t('label.signUp')}
+                </Text>
+              </TouchableItem>
+              {'  '}
+              <PrimaryButton
+                onClick={this.props.onPress}
+                buttonStyle={styles.loginButtonStyle}
+                textStyle={{ fontSize: 16 }}
+              >
+                {i18n.t('label.login')}
+              </PrimaryButton>
+            </View>
+          </View>
         </View>
-        <CardLayout style={styles.inputContainer}>
-          <Form
-            ref={'loginForm'}
-            type={loginFormSchema}
-            options={schemaOptions}
-          />
-          <TouchableHighlight
-            onPress={this.props.onPress}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>{i18n.t('label.login')}</Text>
-          </TouchableHighlight>
-          <View style={styles.bottomRow}>
-            <Text style={styles.bottomText}>
-              {i18n.t('label.forgot_ur_password')}
-            </Text>
-            <Text
-              onPress={this.onForgotPasswordClicked}
-              style={styles.bottomTextHighlight}
-            >
-              {i18n.t('label.reset')}
-            </Text>
-          </View>
-          <View style={styles.bottomRow}>
-            <Text style={styles.bottomText}>
-              {i18n.t('label.dont_have_account')}
-            </Text>
-            <Text
-              onPress={this.onSignupClicked}
-              style={styles.bottomTextHighlight}
-            >
-              {i18n.t('label.signUp')}.
-            </Text>
-          </View>
-        </CardLayout>
-      </View>
+      </ScrollView>
     );
   }
 }

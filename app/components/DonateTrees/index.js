@@ -26,6 +26,7 @@ import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import i18n from '../../locales/i18n.js';
 import PaymentSelector from '../Payment/PaymentSelector';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
+import { paymentFee } from '../../helpers/utils';
 
 let TCombForm = t.form.Form;
 
@@ -231,7 +232,8 @@ export default class DonateTrees extends Component {
         amount: this.state.selectedAmount,
         currency: this.state.selectedCurrency
       },
-      this.props.selectedProject.id
+      this.props.selectedProject.id,
+      this.props.currentUserProfile
     );
   }
 
@@ -274,7 +276,7 @@ export default class DonateTrees extends Component {
       nextArrow: (
         <NextArrow checkValidation={this.checkValidation} context={this} />
       ),
-      infinite: true,
+      infinite: false,
       adaptiveHeight: true,
       currentSlide: this.state.pageIndex,
       prevArrow: (
@@ -283,7 +285,30 @@ export default class DonateTrees extends Component {
           src={arrow_left_green}
         />
       ),
-      beforeChange: (oldIndex, index) => this.indexChange(index)
+      beforeChange: (oldIndex, index) => {
+        //payment index
+        if (
+          index > oldIndex &&
+          this.checkValidation[index - 1] &&
+          this.checkValidation[oldIndex]
+        ) {
+          const lastIndexCheck = this.checkValidation[index - 1].call(this);
+          const oldIndexCheck = this.checkValidation[oldIndex].call(this);
+          if (oldIndexCheck && lastIndexCheck) {
+            this.indexChange(index);
+          } else {
+            if (this.refs.slider) {
+              setTimeout(() => {
+                this.refs.slider.slickGoTo(
+                  !oldIndexCheck ? oldIndex : index - 1
+                );
+              }, 1000);
+            }
+          }
+        } else {
+          this.indexChange(index);
+        }
+      }
     };
 
     let plantProject = this.props.selectedProject;
@@ -323,131 +348,139 @@ export default class DonateTrees extends Component {
           </DescriptionHeading>
         </TextHeading>
         <CardLayout className="tpo-footer-card-layout">
-          {this.props.paymentStatus && this.props.paymentStatus.status ? (
-            <div className="payment-success">
-              <img src={check_green} />
-              <div className={'gap'} />
-              <TextBlock strong={true}>
-                {i18n.t('label.thankyou')} {this.state.treeCount}{' '}
-                {i18n.t('label.receive_mail')}
-              </TextBlock>
-              <div className={'gap'} />
-              <TextBlock>
-                <InlineLink uri={'app_userHome'} caption={'Return Home'} />
-              </TextBlock>
-            </div>
-          ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
-            <div className="payment-success">
-              <img src={check_green} />
-              <div className={'gap'} />
-              <TextBlock strong={true}>
-                {'Error ' + this.props.paymentStatus.message}
-              </TextBlock>
-              <div className={'gap'} />
-              <TextBlock>
-                <PrimaryButton onClick={this.props.paymentClear}>
-                  Try again
-                </PrimaryButton>
-              </TextBlock>
-            </div>
-          ) : (
-            <div className="donate-tress__container">
-              <ContentHeader caption={headings[this.state.pageIndex]} />
-              <Slider {...settings} ref="slider">
-                <div>
-                  {this.props.selectedTpo ? (
-                    <PlantProjectFull
-                      callExpanded={this.callExpanded}
-                      expanded={false}
-                      plantProject={this.props.selectedProject}
-                      tpoName={this.props.selectedTpo.name}
-                      selectAnotherProject={true}
-                      projectClear={this.props.plantProjectClear}
-                    />
-                  ) : null}
-                </div>
-                <div>
-                  {this.props.selectedTpo && currencies ? (
-                    <TreeCountCurrencySelector
-                      treeCost={plantProject.treeCost.toFixed(2)}
-                      rates={
-                        currencies.currency_rates[plantProject.currency].rates
-                      }
-                      fees={1}
-                      currencies={currencies.currency_names} // TODO: connect to data from API
-                      selectedCurrency={this.determineDefaultCurrency()}
-                      treeCountOptions={
-                        plantProject.paymentSetup.treeCountOptions
-                      }
-                      selectedTreeCount={this.state.selectedTreeCount}
-                      onChange={this.handleTreeCountCurrencyChange}
-                    />
-                  ) : null}
-                </div>
-                <div>
-                  <Tabs
-                    data={DonateTrees.data.tabsReceipt}
-                    onTabChange={this.handleModeReceiptChange}
-                    activeTab={
-                      this.state.modeReceipt !== ''
-                        ? this.state.modeReceipt
-                        : null
-                    }
-                  >
-                    {this.state.modeReceipt ===
-                    DonateTrees.data.tabsReceipt[0].id ? (
-                      <TCombForm
-                        ref="donateReceipt"
-                        type={receiptIndividualFormSchema}
-                        options={individualSchemaOptions}
-                        value={this.props.currentUserProfile}
+          <form onSubmit={this.checkValidation[2]}>
+            {this.props.paymentStatus && this.props.paymentStatus.status ? (
+              <div className="payment-success">
+                <img src={check_green} />
+                <div className={'gap'} />
+                <TextBlock strong={true}>
+                  {i18n.t('label.thankyou_planting', {
+                    count: this.state.treeCount
+                  })}
+                </TextBlock>
+                <div className={'gap'} />
+                <TextBlock>
+                  <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+                </TextBlock>
+              </div>
+            ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
+              <div className="payment-success">
+                <img src={check_green} />
+                <div className={'gap'} />
+                <TextBlock strong={true}>
+                  {'Error ' + this.props.paymentStatus.message}
+                </TextBlock>
+                <div className={'gap'} />
+                <TextBlock>
+                  <PrimaryButton onClick={this.props.paymentClear}>
+                    Try again
+                  </PrimaryButton>
+                </TextBlock>
+              </div>
+            ) : (
+              <div className="donate-tress__container">
+                <ContentHeader caption={headings[this.state.pageIndex]} />
+                <Slider {...settings} ref="slider">
+                  <div>
+                    {this.props.selectedTpo ? (
+                      <PlantProjectFull
+                        callExpanded={this.callExpanded}
+                        expanded={false}
+                        plantProject={this.props.selectedProject}
+                        tpoName={this.props.selectedTpo.name}
+                        selectAnotherProject={true}
+                        projectClear={this.props.plantProjectClear}
                       />
-                    ) : (
-                      <TCombForm
-                        ref="donateReceipt"
-                        type={receiptCompanyFormSchema}
-                        options={companySchemaOptions}
-                        value={this.props.currentUserProfile}
+                    ) : null}
+                  </div>
+                  <div>
+                    {this.props.selectedTpo && currencies ? (
+                      <TreeCountCurrencySelector
+                        treeCost={plantProject.treeCost.toFixed(2)}
+                        rates={
+                          currencies.currency_rates[plantProject.currency].rates
+                        }
+                        fees={paymentFee}
+                        currencies={currencies.currency_names} // TODO: connect to data from API
+                        selectedCurrency={this.determineDefaultCurrency()}
+                        treeCountOptions={
+                          plantProject.paymentSetup.treeCountOptions
+                        }
+                        selectedTreeCount={this.state.selectedTreeCount}
+                        onChange={this.handleTreeCountCurrencyChange}
                       />
-                    )}
-                  </Tabs>
-                </div>
-                <div>
-                  {this.props.selectedTpo ? (
-                    <PaymentSelector
-                      paymentMethods={paymentMethods}
-                      accounts={plantProject.paymentSetup.accounts}
-                      stripePublishableKey={
-                        plantProject.paymentSetup.stripePublishableKey
+                    ) : null}
+                  </div>
+
+                  <div>
+                    <Tabs
+                      data={DonateTrees.data.tabsReceipt}
+                      onTabChange={this.handleModeReceiptChange}
+                      activeTab={
+                        this.state.modeReceipt !== ''
+                          ? this.state.modeReceipt
+                          : null
                       }
-                      amount={this.state.selectedAmount}
-                      currency={this.state.selectedCurrency}
-                      expandedOption={this.state.expandedOption}
-                      handleExpandedClicked={this.handleExpandedClicked}
-                      context={{
-                        tpoName: this.props.selectedTpo.name,
-                        donorEmail: email,
-                        donorName: name,
-                        treeCount: this.state.selectedTreeCount
-                      }}
-                      onSuccess={paymentResponse =>
-                        this.handlePaymentApproved(paymentResponse)
-                      }
-                      onFailure={data =>
-                        console.log(
-                          '/////////////////// payment failure ',
-                          data
-                        )
-                      }
-                      onError={data =>
-                        console.log('/////////////////// payment error ', data)
-                      }
-                    />
-                  ) : null}
-                </div>
-              </Slider>
-            </div>
-          )}
+                    >
+                      {this.state.modeReceipt ===
+                      DonateTrees.data.tabsReceipt[0].id ? (
+                        <TCombForm
+                          ref="donateReceipt"
+                          type={receiptIndividualFormSchema}
+                          options={individualSchemaOptions}
+                          value={this.props.currentUserProfile}
+                        />
+                      ) : (
+                        <TCombForm
+                          ref="donateReceipt"
+                          type={receiptCompanyFormSchema}
+                          options={companySchemaOptions}
+                          value={this.props.currentUserProfile}
+                        />
+                      )}
+                    </Tabs>
+                  </div>
+
+                  <div>
+                    {this.props.selectedTpo ? (
+                      <PaymentSelector
+                        paymentMethods={paymentMethods}
+                        accounts={plantProject.paymentSetup.accounts}
+                        stripePublishableKey={
+                          plantProject.paymentSetup.stripePublishableKey
+                        }
+                        amount={this.state.selectedAmount}
+                        currency={this.state.selectedCurrency}
+                        expandedOption={this.state.expandedOption}
+                        handleExpandedClicked={this.handleExpandedClicked}
+                        context={{
+                          tpoName: this.props.selectedTpo.name,
+                          donorEmail: email,
+                          donorName: name,
+                          treeCount: this.state.selectedTreeCount
+                        }}
+                        onSuccess={paymentResponse =>
+                          this.handlePaymentApproved(paymentResponse)
+                        }
+                        onFailure={data =>
+                          console.log(
+                            '/////////////////// payment failure ',
+                            data
+                          )
+                        }
+                        onError={data =>
+                          console.log(
+                            '/////////////////// payment error ',
+                            data
+                          )
+                        }
+                      />
+                    ) : null}
+                  </div>
+                </Slider>
+              </div>
+            )}
+          </form>
         </CardLayout>
       </div>
     );

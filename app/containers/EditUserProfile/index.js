@@ -7,11 +7,13 @@ import {
   updateUserProfile,
   updatePlantProject,
   deletePlantProject,
-  addPlantProject
+  addPlantProject,
+  deleteUserProfile
 } from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
+import { logoutUser } from '../../actions/authActions';
 
 const profileTypeLabel = {
   about_me: i18n.t('label.about_me'),
@@ -27,7 +29,16 @@ class EditUserProfileContainer extends React.Component {
     };
   }
   deleteProfile = () => {
-    console.log('call Profile Deletion API here');
+    console.log(
+      'call Profile Deletion API here',
+      this.props.currentUserProfile
+    );
+    this.props
+      .deleteUserProfile(this.props.currentUserProfile.id)
+      .then(data => {
+        console.log(data);
+        this.props.logoutUser();
+      });
   };
 
   updatePlantProject = plantProject => {
@@ -87,14 +98,17 @@ class EditUserProfileContainer extends React.Component {
       });
   };
 
-  onSave = (usertype, profileType) => {
-    console.log(
-      this.refs.EditUserProfileContainer.refs[profileType].validate()
-    );
-    let value = this.refs.EditUserProfileContainer.refs[profileType].getValue();
-    let imageValue = this.refs.EditUserProfileContainer.refs[
-      'image'
-    ].getValue();
+  onSave = (usertype, profileType, formRefs) => {
+    const profileForm =
+      (formRefs && formRefs[profileType]) ||
+      this.refs.EditUserProfileContainer.refs[profileType];
+    const imageForm =
+      (formRefs && formRefs['image']) ||
+      this.refs.EditUserProfileContainer.refs['image'];
+    console.log(profileForm.validate());
+    let value = profileForm.getValue();
+
+    let imageValue = imageForm.getValue();
     if (imageValue) {
       this.props.updateUserProfile(imageValue, 'image');
     }
@@ -139,6 +153,7 @@ class EditUserProfileContainer extends React.Component {
         updatePlantProject={this.updatePlantProject}
         deletePlantProject={this.deletePlantProject}
         addPlantProject={this.addPlantProject}
+        navigation={this.props.navigation}
       />
     );
   }
@@ -158,7 +173,9 @@ const mapDispatchToProps = dispatch => {
       updateUserProfile,
       updatePlantProject,
       deletePlantProject,
-      addPlantProject
+      addPlantProject,
+      deleteUserProfile,
+      logoutUser
     },
     dispatch
   );
@@ -172,5 +189,8 @@ EditUserProfileContainer.propTypes = {
   updateUserProfile: PropTypes.func,
   updatePlantProject: PropTypes.func,
   deletePlantProject: PropTypes.func,
-  addPlantProject: PropTypes.func
+  addPlantProject: PropTypes.func,
+  deleteUserProfile: PropTypes.func,
+  navigation: PropTypes.func,
+  logoutUser: PropTypes.func
 };

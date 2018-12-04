@@ -41,6 +41,7 @@ import QuestionMarkGreen from './images/icons/questionmark_green.png';
 import country from './images/icons/country.png';
 import organization from './images/icons/organization.png';
 import competition from './images/icons/competition.png';
+import competition_outline from './images/icons/competition.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
 import arrow_right_orange from './images/icons/arrow_right_orange.png';
@@ -91,8 +92,26 @@ import home from './images/icons/home.png';
 import svgBackground from './svgAssets/svg_background.png';
 import darkTree from './images/darkTree.png';
 import imageUpload from './images/icons/upload_image.png';
+import iosSearchGrey from './images/icons/search_grey.png';
+import iosLogout from './images/icons/ios_logout.png';
+import iosFaqs from './images/icons/ios_faqs.png';
+import iosInformation from './images/icons/ios_information.png';
+import redeemGreen from './images/icons/redeemGreen.png';
+import redeemRed from './images/icons/redeemRed.png';
+import redeemSignIn from './images/icons/redeem_signin.png';
+import redeem_outline from './images/icons/redeem_outline.png';
+import redeem_outline_red from './images/icons/redeem_outline_red.png';
+import lightTree from './images/lightTree.png';
+import AppStoreLogo from './images/appstore-logo.png';
+import targetPlanted from './images/target.png';
+import infoGrey from './images/icons/info_grey.png';
+import editGrey from './images/icons/edit_grey.png';
+import welcomeLogo from './images/icons/welcomeLogo.png';
+import world_outline from './images/world_outline.png';
+import world_outline_red from './images/world_outline_red.png';
 
 export {
+  AppStoreLogo,
   darkTree,
   svgBackground,
   bmzLogo,
@@ -144,6 +163,7 @@ export {
   country,
   organization,
   competition,
+  competition_outline,
   education,
   company,
   arrow_left_orange,
@@ -185,5 +205,21 @@ export {
   iosSearchWhite,
   iosNotificationWhite,
   imageUpload,
-  iosSearchGreen
+  iosSearchGreen,
+  iosSearchGrey,
+  iosLogout,
+  iosFaqs,
+  iosInformation,
+  redeemGreen,
+  redeemRed,
+  redeemSignIn,
+  redeem_outline,
+  redeem_outline_red,
+  lightTree,
+  targetPlanted,
+  infoGrey,
+  editGrey,
+  welcomeLogo,
+  world_outline,
+  world_outline_red
 };

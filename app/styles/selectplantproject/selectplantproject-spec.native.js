@@ -3,18 +3,20 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default (selectplantprojectSpecs = EStyleSheet.create({
   project_specs__container: {
     width: '100%',
-    height: '100%',
-    flex: 1
+    height: '100%'
   },
   project_info: {
     width: '100%',
-    paddingTop: 10
+    height: '80%',
+    paddingTop: 10,
+    paddingBottom: 10
   },
   project_specs__taxdeductible: {
     width: '100%',
     paddingTop: 10,
     flexDirection: 'row',
-    paddingLeft: 22
+    paddingLeft: 22,
+    height: '20%'
   },
   project_specs__taxdeductibleText: {
     fontSize: 13,
@@ -54,13 +56,14 @@ export default (selectplantprojectSpecs = EStyleSheet.create({
   },
 
   spec_icon__container: {
-    height: 17,
-    width: 17,
+    height: 14,
+    width: 14,
     marginRight: 4
   },
   spec_icon: {
-    height: 17,
-    width: 17,
+    height: 14,
+    width: 14,
+
     resizeMode: 'contain'
   }
 }));

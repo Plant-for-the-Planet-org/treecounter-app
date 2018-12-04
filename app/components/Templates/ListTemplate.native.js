@@ -1,13 +1,8 @@
-import {
-  View,
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
-  Image
-} from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import i18n from '../../locales/i18n';
 import { close_green } from '../../assets';
+import TouchableItem from '../../components/Common/TouchableItem';
 
 const styles = {
   addButtonStyle: {
@@ -79,18 +74,18 @@ function renderRowWithoutButtons(item) {
 function renderRowButton(button, stylesheet, style, title) {
   if (button.type == 'remove') {
     return (
-      <TouchableOpacity
+      <TouchableItem
         key={button.type}
         style={[style.addButtonStyle]}
         onPress={button.click}
         underlayColor={'#f2f2f2'}
       >
         <Image source={close_green} />
-      </TouchableOpacity>
+      </TouchableItem>
     );
   }
   return (
-    <TouchableHighlight
+    <TouchableItem
       key={button.type}
       style={[style.addButtonStyle]}
       onPress={button.click}
@@ -99,7 +94,7 @@ function renderRowButton(button, stylesheet, style, title) {
       <Text style={[stylesheet.buttonText, style.addButtonText]}>
         +&nbsp;{i18n.t(title)}
       </Text>
-    </TouchableHighlight>
+    </TouchableItem>
   );
 }
 

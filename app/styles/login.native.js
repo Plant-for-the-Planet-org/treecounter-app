@@ -2,19 +2,36 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 
 export default (loginStyles = EStyleSheet.create({
-  container: {
+  scrollContainer: {
+    backgroundColor: 'white',
+    flex: 1
+  },
+
+  parentContainer: {
     flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0'
+    backgroundColor: 'white'
   },
-  inputContainer: {
+  container: {
+    flex: 0.7,
     width: '100%',
-    height: 400,
-    justifyContent: 'center',
-    padding: 10
+    // justifyContent: 'center',
+    padding: 15,
+    paddingTop: 30,
+    flexGrow: 1
   },
+  headerContainer: {
+    flex: 0.3,
+    flexDirection: 'column',
+
+    alignItems: 'center',
+    margin: 20
+  },
+  imageStyle: {
+    width: 100,
+    height: 50
+  },
+
+  inputContainer: {},
   button: {
     height: 50,
     backgroundColor: '$primary',
@@ -46,8 +63,10 @@ export default (loginStyles = EStyleSheet.create({
   },
   bottomRow: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
+    paddingTop: 10,
+    paddingBottom: 10,
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
   },
   bottomText: {
     fontSize: 11,
@@ -55,7 +74,8 @@ export default (loginStyles = EStyleSheet.create({
   },
   bottomTextHighlight: {
     fontSize: 12,
-    color: '#ec6453'
+    color: '#ec6453',
+    flexDirection: 'row'
   },
   loginHeader: {
     marginBottom: 60
@@ -65,5 +85,27 @@ export default (loginStyles = EStyleSheet.create({
     color: '#575756',
     width: Dimensions.get('window').width * 0.8,
     justifyContent: 'flex-start'
+    // fontFamily: 'Open Sans'
+  },
+  loginTextStyle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    padding: 10
+  },
+  loginDescriptionStyle: {
+    fontSize: 12,
+    color: '$textColor',
+    textAlign: 'center'
+  },
+  loginButtonStyle: {
+    width: 100,
+    height: 40,
+    borderWidth: 1,
+    borderRadius: 6,
+    padding: 0,
+    margin: 0,
+    alignSelf: 'center',
+    position: 'absolute',
+    right: 0
   }
 }));

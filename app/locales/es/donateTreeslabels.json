@@ -4,16 +4,17 @@
   "featuredProjects": "proyectos destacados",
   "project": "Proyecto",
   "organisation": "Organización",
-  "Cost": "Costo por árbol",
+  "Cost": "Coste por árbol",
   "donateTrees": "Done árboles",
   "individual": "Árbol individual",
   "survival_rate": "Tasa de supervivencia",
-  "plantedTrees": "Árboles plantados",
-  "registerFurther": "Registre más árboles",
+  "plantedTrees": "Árboles Plantados",
+  "registerFurther": "Añade Más Árboles",
   "individual_name": "Individual",
-  "next": "Siguiente",
-  "delete_project": "eliminar Proyecto",
-  "thankyou": "Gracias por plantar",
-  "receive_mail": "árboles con nosotros! Recibirá un correo electrónico con un recibo de donación a tiempo.",
-  "donate_trees_description": "Elija un proyecto que plantará los árboles para usted."
+  "next": "Continua",
+  "delete_project": "Eliminar Proyecto",
+  "thankyou_planting":
+    "Gracias por plantar {{count}} árboles con nosotros! Recibirá un correo electrónico con un recibo de donación a tiempo.",
+  "donate_trees_description":
+    "Elija un proyecto que plantará los árboles para usted."
 }

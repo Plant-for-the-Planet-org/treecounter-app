@@ -18,12 +18,14 @@ export default (myTreesStyle = EStyleSheet.create({
   mapContainer: {
     width: '100%',
     flex: 1,
+    height: '100%',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  listContainer: { backgroundColor: 'white', flex: 1 },
+  listContainer: { backgroundColor: 'grey', flex: 1 },
   contributionMapLegend: {
     width: '100%',
+    height: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

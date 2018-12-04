@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import updateRoute from '../../helpers/routerHelper';
+import { updateRoute } from '../../helpers/routerHelper';
 import PublicTreecounter from '../../components/PublicTreeCounter/PublicTreecounter';
 import { currentUserProfileSelector } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
@@ -49,6 +49,7 @@ class PublicTreecounterContainer extends Component {
     this.fetchAndSetSearchResult(this.props);
   }
   componentWillReceiveProps(nextProps) {
+    console.log('test, props', nextProps);
     if (this.getTreeCounterId(this.props) === this.getTreeCounterId(nextProps))
       return;
     this.fetchAndSetSearchResult(nextProps);
@@ -63,7 +64,10 @@ class PublicTreecounterContainer extends Component {
         unfollowSubscribeAction={this.props.unfollowSubscribeAction}
         selectPlantProjectIdAction={this.props.selectPlantProjectIdAction}
         supportTreecounterAction={this.props.supportTreecounterAction}
-        route={this.props.route}
+        navigation={this.props.navigation}
+        route={(routeName, id, params) =>
+          this.props.route(routeName, id, params, this.props.navigation)
+        }
       />
     );
   }
@@ -77,8 +81,8 @@ const mapDispatchToProps = dispatch => {
       followSubscribeAction: followUser,
       unfollowSubscribeAction: unfollowUser,
       treecounterLookupAction: treecounterLookupAction,
-      route: (routeName, id, params) => dispatch =>
-        updateRoute(routeName, dispatch, id, params)
+      route: (routeName, id, params, navigation) => dispatch =>
+        updateRoute(routeName, navigation || dispatch, id, params)
     },
     dispatch
   );

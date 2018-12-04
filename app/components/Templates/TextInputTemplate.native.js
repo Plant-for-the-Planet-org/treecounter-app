@@ -15,22 +15,25 @@ export function TextInputTemplate(locals) {
   let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
   let error =
     locals.hasError && locals.error ? (
-      <Text style={errorBlockStyle}>{locals.error}</Text>
+      <Text style={[errorBlockStyle, styles.errorTextStyle]}>
+        {locals.error}
+      </Text>
     ) : null;
   return (
-    <View style={styles.container}>
-      <View style={styles.containerStyle}>
+    <View style={[styles.container]}>
+      <View style={[styles.containerStyle, locals.config.style]}>
         {locals.config.iconUrl ? (
-          <Image style={styles.imageStyle} source={locals.config.iconUrl} />
-        ) : (
-          <View style={styles.emptyView} />
-        )}
+          <View style={styles.imageContainerStyle}>
+            <Image style={styles.imageStyle} source={locals.config.iconUrl} />
+          </View>
+        ) : null}
         <TextInput
           style={styles.textboxStyle}
           secureTextEntry={locals.secureTextEntry}
           placeholder={i18n.t(locals.placeholder)}
           placeholderTextColor={'#686060'}
           keyboardType={locals.keyboardType}
+          underlineColorAndroid={'transparent'}
           maxLength={locals.maxLength}
           multiline={locals.multiline}
           value={String(locals.value)}
@@ -39,6 +42,7 @@ export function TextInputTemplate(locals) {
           onKeyPress={locals.onKeyPress}
           returnKeyType={locals.returnKeyType}
           autoCapitalize={locals.autoCapitalize}
+          allowFontScaling={true}
         />
       </View>
       <View style={styles.errorStyle}>{error}</View>

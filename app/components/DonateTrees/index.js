@@ -87,7 +87,10 @@ export default class DonateTrees extends Component {
       pageIndex: 0,
       modeReceipt: modeReceipt,
       selectedCurrency: 'USD', // TODO: should be initialized via this.determineDefaultCurrency()
-      selectedTreeCount: 0,
+      selectedTreeCount: this.props.selectedProject
+        ? this.props.selectedProject.paymentSetup.treeCountOptions
+            .fixedDefaultTreeCount
+        : 0,
       selectedAmount: 0,
       form: {
         recipientType: modeReceipt
@@ -105,22 +108,24 @@ export default class DonateTrees extends Component {
     this.determineDefaultCurrency = this.determineDefaultCurrency.bind(this);
   }
 
+  componentDidMount() {}
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedProject) {
       this.setState({
         showSelectProject: false
       });
-      const nextTreeCount =
-        nextProps.selectedProject.paymentSetup.treeCountOptions
-          .fixedDefaultTreeCount;
-      const currentTreeCount = this.props.selectedProject
-        ? this.props.selectedProject.paymentSetup.treeCountOptions
-            .fixedDefaultTreeCount
-        : null;
+      // const nextTreeCount =
+      //   nextProps.selectedProject.paymentSetup.treeCountOptions
+      //     .fixedDefaultTreeCount;
+      // const currentTreeCount = this.props.selectedProject
+      //   ? this.props.selectedProject.paymentSetup.treeCountOptions
+      //       .fixedDefaultTreeCount
+      //   : null;
 
-      if (nextTreeCount !== currentTreeCount) {
-        this.setState({ selectedTreeCount: nextTreeCount });
-      }
+      // if (nextTreeCount !== currentTreeCount) {
+      //   this.setState({ selectedTreeCount: nextTreeCount });
+      // }
     } else {
       this.setState({
         showSelectProject: true

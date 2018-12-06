@@ -7,24 +7,6 @@ import { tree } from '../../assets';
 class TreeCountSelector extends React.Component {
   constructor(props) {
     super(props);
-
-    const {
-      fixedDefaultTreeCount,
-      variableDefaultTreeCount
-    } = props.treeCountOptions;
-
-    this.state = {
-      isFixed: true,
-      fixedTreeCount: fixedDefaultTreeCount,
-      variableTreeCount: variableDefaultTreeCount,
-      variableAmount: props.treeCountToAmount(variableDefaultTreeCount)
-    };
-
-    props.onChange({
-      treeCount: fixedDefaultTreeCount,
-      amount: this.props.treeCountToAmount(fixedDefaultTreeCount)
-    });
-
     this.handleFixedTreeCountChange = this.handleFixedTreeCountChange.bind(
       this
     );
@@ -37,11 +19,12 @@ class TreeCountSelector extends React.Component {
     this.handleVariableTreeCountSelected = this.handleVariableTreeCountSelected.bind(
       this
     );
+    this.getVariableAmount = this.getVariableAmount.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.currency !== nextProps.currency) {
-      this.handleVariableTreeCountChange(this.state.variableTreeCount);
+      this.handleVariableTreeCountChange(this.props.variableTreeCount);
     }
   }
   handleFixedTreeCountChange(treeCount) {
@@ -67,9 +50,12 @@ class TreeCountSelector extends React.Component {
     }
     const treeCount = this.props.amountToTreeCount(amount);
     this.updateStateAndParent({
-      variableAmount: parseInt(amount),
       variableTreeCount: treeCount
     });
+  }
+
+  getVariableAmount() {
+    return this.props.treeCountToAmount(this.props.variableTreeCount);
   }
 
   handleVariableTreeCountSelected() {
@@ -77,16 +63,10 @@ class TreeCountSelector extends React.Component {
   }
 
   updateStateAndParent(updates) {
-    const newState = { ...this.state, ...updates };
-    this.setState(newState);
-
     this.props.onChange({
-      treeCount: newState.isFixed
-        ? newState.fixedTreeCount
-        : newState.variableTreeCount,
-      amount: newState.isFixed
-        ? this.props.treeCountToAmount(newState.fixedTreeCount)
-        : newState.variableAmount
+      isFixed: updates.isFixed,
+      variableTreeCount: updates.variableTreeCount,
+      fixedTreeCount: updates.fixedTreeCount
     });
   }
 
@@ -104,8 +84,8 @@ class TreeCountSelector extends React.Component {
                   type="radio"
                   value={treeCount}
                   checked={
-                    treeCount === this.state.fixedTreeCount &&
-                    true === this.state.isFixed
+                    treeCount === this.props.fixedTreeCount &&
+                    true === this.props.isFixed
                   }
                   onChange={evt =>
                     this.handleFixedTreeCountChange(evt.target.value)
@@ -125,8 +105,8 @@ class TreeCountSelector extends React.Component {
           <label key="variable" className="price-conversion__radio">
             <input
               type="radio"
-              value={this.state.variableTreeCount}
-              checked={!this.state.isFixed}
+              value={this.props.variableTreeCount}
+              checked={!this.props.isFixed}
               onChange={evt =>
                 this.handleVariableTreeCountSelected(evt.target.value)
               }
@@ -139,7 +119,7 @@ class TreeCountSelector extends React.Component {
             >
               <input
                 type="text"
-                value={this.state.variableTreeCount}
+                value={this.props.variableTreeCount}
                 onChange={evt =>
                   this.handleVariableTreeCountChange(evt.target.value)
                 }
@@ -151,8 +131,8 @@ class TreeCountSelector extends React.Component {
           <span className="price-conversion__radio">
             <input
               type="text"
-              disabled={this.state.isFixed}
-              value={this.state.variableAmount}
+              disabled={this.props.isFixed}
+              value={this.props.variableAmount}
               onChange={evt =>
                 this.handleVariableAmountChange(evt.target.value)
               }
@@ -171,7 +151,10 @@ TreeCountSelector.propTypes = {
   treeCountToAmount: PropTypes.func.isRequired,
   amountToTreeCount: PropTypes.func.isRequired,
   currency: PropTypes.string.isRequired,
-  defaultTreeCount: PropTypes.number.isRequired
+  variableTreeCount: PropTypes.number,
+  fixedTreeCount: PropTypes.number,
+  isFixed: PropTypes.bool,
+  variableAmount: PropTypes.number
 };
 
 export default TreeCountSelector;

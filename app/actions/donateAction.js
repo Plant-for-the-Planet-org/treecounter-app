@@ -45,10 +45,17 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
             'iOS referred payment'
           ) {
             dispatch(
-              paymentSuccess({
-                status: true,
-                token: contribution.token,
-                message: 'success'
+              // paymentSuccess({
+              //   status: true,
+              //   token: contribution.token,
+              //   message: 'success'
+              // })
+
+              paymentFailed({
+                status: false,
+                message: response.response
+                  ? response.response.data
+                  : response.error
               })
             );
             dispatch(setProgressModelState(false));
@@ -65,7 +72,9 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
               );
             }
 
-            dispatch(paymentSuccess({ status: true, message: 'success' }));
+            //  dispatch(paymentSuccess({ status: true, message: 'success' }));
+            dispatch(paymentFailed({ status: false, message: 'success' }));
+            // paymentFailed({ status: false, message: response.response?response.response.data: response.error })
             dispatch(setProgressModelState(false));
             console.log(`Thank you for planting ${
               contribution.treeCount
@@ -78,7 +87,12 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
         .catch(response => {
           debug('error: ', response);
           dispatch(
-            paymentFailed({ status: false, message: response.response.data })
+            paymentFailed({
+              status: false,
+              message: response.response
+                ? response.response.data
+                : response.error
+            })
           );
           dispatch(setProgressModelState(false));
         });

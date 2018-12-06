@@ -11,7 +11,9 @@ class TreeCountCurrencySelector extends React.Component {
     this.state = {
       selectedCurrency: props.selectedCurrency,
       selectedTreeCount: props.selectedTreeCount,
-      selectedAmount: 0
+      selectedAmount: 0,
+      fixedTreeCount: props.treeCountOptions.fixedDefaultTreeCount,
+      variableTreeCount: props.treeCountOptions.variableDefaultTreeCount
     };
 
     this.calculateAmount = this.calculateAmount.bind(this);
@@ -33,9 +35,17 @@ class TreeCountCurrencySelector extends React.Component {
   }
 
   handleTreeCountChange(treeCountData) {
+    let treeAmount = treeCountData.isFixed
+      ? this.calculateAmount(treeCountData.fixedTreeCount)
+      : this.calculateAmount(treeCountData.variableTreeCount);
     this.updateStateAndParent({
-      selectedTreeCount: treeCountData.treeCount,
-      selectedAmount: treeCountData.amount
+      selectedTreeCount: treeCountData.isFixed
+        ? treeCountData.fixedTreeCount
+        : treeCountData.variableTreeCount,
+      selectedAmount: treeAmount,
+      fixedTreeCount: treeCountData.fixedTreeCount,
+      variableTreeCount: treeCountData.variableTreeCount,
+      variableTreeAmount: this.calculateAmount(treeCountData.variableTreeCount)
     });
   }
 
@@ -79,11 +89,14 @@ class TreeCountCurrencySelector extends React.Component {
         />
         <TreeCountSelector
           currency={this.state.selectedCurrency}
-          amountToTreeCount={this.calculateTreeCount}
-          treeCountToAmount={this.calculateAmount}
           onChange={this.handleTreeCountChange}
           treeCountOptions={treeCountOptions}
-          defaultTreeCount={this.state.selectedTreeCount}
+          amountToTreeCount={this.calculateTreeCount}
+          treeCountToAmount={this.calculateAmount}
+          variableAmount={this.state.variableTreeAmount}
+          variableTreeCount={this.state.variableTreeCount}
+          fixedTreeCount={this.state.fixedTreeCount}
+          isFixed={this.state.isFixed}
         />
       </div>
     );
@@ -98,7 +111,8 @@ TreeCountCurrencySelector.propTypes = {
   treeCost: PropTypes.any.isRequired,
   rates: PropTypes.object.isRequired,
   fees: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  treeCountToAmount: PropTypes.func
 };
 
 export default TreeCountCurrencySelector;

@@ -3,36 +3,85 @@ const fs = require('fs');
 
 const list = [
   {
-    api: 'https://www.trilliontreecampaign.org/public/v1.0/en/forms',
+    objectKey: 'targetUpdate_form',
+    file: 'target.js'
+  },
+  {
+    objectKey: 'donationContribution_form',
+    file: 'donateTrees.js'
+  },
+  {
+    objectKey: 'giftDonationContribution_form',
+    file: 'giftTrees.js'
+  },
+  {
+    objectKey: 'plantContribution_forms',
+    file: 'registerTrees.js'
+  },
+  {
+    objectKey: 'signup_forms',
     file: 'signup.js'
   }
 ];
 
-for (let i in list) {
-  axios
-    .get(list[i]['api'])
-    .then(response => {
-      if (response.status >= 200 && response.status < 300) {
-        return response;
-      } else {
-        let error = new Error(response);
-        throw error;
-      }
-    })
-    .then(response => {
-      console.log(JSON.stringify(response.data.targetUpdate_form.data.schema));
-      fs.writeFile(
-        './app/server/formSchemas/' + list[i]['file'],
-        'export default ' +
-          JSON.stringify(response.data.targetUpdate_form.data.schema),
-        function(err) {
-          if (err) {
-            return console.log(err);
-          }
-
-          console.log('The file was saved!');
+axios
+  .get('https://www.trilliontreecampaign.org/public/v1.0/en/forms')
+  .then(response => {
+    if (response.status >= 200 && response.status < 300) {
+      return response;
+    } else {
+      let error = new Error(response);
+      throw error;
+    }
+  })
+  .then(response => {
+    for (let i in list) {
+      if (list[i].file === 'signup.js') {
+        for (let type of Object.keys(response.data[list[i].objectKey])) {
+          response.data[list[i].objectKey][type] =
+            response.data[list[i].objectKey][type].schema;
         }
-      );
-    })
-    .catch(err => console.log(err));
-}
+        fs.writeFile(
+          './app/server/formSchemas/' + list[i].file,
+          'export default ' + JSON.stringify(response.data[list[i].objectKey]),
+          function(err) {
+            if (err) {
+              return console.log(err);
+            }
+
+            console.log('The file was saved!');
+          }
+        );
+      } else if (list[i].file === 'registerTrees.js') {
+        let newFormat = {};
+        for (let type of Object.keys(response.data[list[i].objectKey].data)) {
+          newFormat[type] = response.data[list[i].objectKey].data[type].schema;
+        }
+        fs.writeFile(
+          './app/server/formSchemas/' + list[i].file,
+          'export default ' + JSON.stringify(newFormat),
+          function(err) {
+            if (err) {
+              return console.log(err);
+            }
+
+            console.log('The file was saved!');
+          }
+        );
+      } else {
+        fs.writeFile(
+          './app/server/formSchemas/' + list[i].file,
+          'export default ' +
+            JSON.stringify(response.data[list[i].objectKey].data.schema),
+          function(err) {
+            if (err) {
+              return console.log(err);
+            }
+
+            console.log('The file was saved!');
+          }
+        );
+      }
+    }
+  })
+  .catch(err => console.log(err));

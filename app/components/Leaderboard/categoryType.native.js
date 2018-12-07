@@ -8,46 +8,9 @@ import {
   Dimensions
 } from 'react-native';
 import TouchableItem from '../Common/TouchableItem.native';
-import {
-  leaderboards_countries_grey,
-  leaderboards_countries_green,
-  leaderboards_education_green,
-  leaderboards_education_grey,
-  leaderboards_indiv_green,
-  leaderboards_indiv_grey,
-  leaderboards_organisations_green,
-  leaderboards_organisations_grey,
-  leaderboards_tpo_green,
-  leaderboards_tpo_grey,
-  leaderboards_company_grey,
-  leaderboards_company_green
-} from '../../assets';
-import i18n from '../../locales/i18n.js';
 import { PropTypes } from 'prop-types';
 
-const categoryIcons = {
-  country: {
-    normal: leaderboards_countries_grey,
-    selected: leaderboards_countries_green
-  },
-  tpo: { normal: leaderboards_tpo_grey, selected: leaderboards_tpo_green },
-  organization: {
-    normal: leaderboards_organisations_grey,
-    selected: leaderboards_organisations_green
-  },
-  education: {
-    normal: leaderboards_education_grey,
-    selected: leaderboards_education_green
-  },
-  company: {
-    normal: leaderboards_company_grey,
-    selected: leaderboards_company_green
-  },
-  individual: {
-    normal: leaderboards_indiv_grey,
-    selected: leaderboards_indiv_green
-  }
-};
+import { categoryIcons } from '../../helpers/utils';
 
 class CategoryType extends Component {
   constructor(props) {
@@ -55,7 +18,7 @@ class CategoryType extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick() {
-    this.props.onClick(this.props.index);
+    this.props.onClick(this.props.index, this.props.category);
   }
   render() {
     return (
@@ -100,11 +63,11 @@ export default class CategoryTypes extends Component {
     _scrollView.scrollToEnd({ animated: true });
   }
 
-  changeCategory(index) {
+  changeCategory(index, category) {
     this.setState({
       selectedIndex: index
     });
-    // this.props.changeCategory(index);
+    this.props.handleCategoryChange(category);
     if (index === this.props.categoryInfo.categoryKeys.length) {
       this.scrollView.scrollToEnd({ animated: true });
     } else if (index === 0) {
@@ -123,7 +86,7 @@ export default class CategoryTypes extends Component {
             iconUrl={
               categoryIcons[category][isSelected ? 'selected' : 'normal']
             }
-            profileType="tpo"
+            category={category}
             selected={isSelected}
             index={index}
             title={categoryInfo.categories[category]}

@@ -80,13 +80,16 @@ class LeaderBoardContainer extends React.Component {
     orderBy = this.state.sortingQuery.orderBy,
     period = this.state.sortingQuery.period
   ) => {
-    updateRoute(
-      this.state.tabInfo.activeTab,
-      null,
-      null,
-      { section },
-      objectToQueryParams({ orderBy, period })
-    );
+    if (!this.props.navigation) {
+      updateRoute(
+        this.state.tabInfo.activeTab,
+        null,
+        null,
+        { section },
+        objectToQueryParams({ orderBy, period })
+      );
+    }
+
     this.setState({
       sectionInfo: { section, query: { orderBy, period } },
       queryResult: null

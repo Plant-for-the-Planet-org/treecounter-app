@@ -7,7 +7,44 @@ import {
   education,
   competition
 } from '../assets';
+import {
+  leaderboards_countries_grey,
+  leaderboards_countries_green,
+  leaderboards_education_green,
+  leaderboards_education_grey,
+  leaderboards_indiv_green,
+  leaderboards_indiv_grey,
+  leaderboards_organisations_green,
+  leaderboards_organisations_grey,
+  leaderboards_tpo_green,
+  leaderboards_tpo_grey,
+  leaderboards_company_grey,
+  leaderboards_company_green
+} from '../assets';
 
+export const categoryIcons = {
+  country: {
+    normal: leaderboards_countries_grey,
+    selected: leaderboards_countries_green
+  },
+  tpo: { normal: leaderboards_tpo_grey, selected: leaderboards_tpo_green },
+  organization: {
+    normal: leaderboards_organisations_grey,
+    selected: leaderboards_organisations_green
+  },
+  education: {
+    normal: leaderboards_education_grey,
+    selected: leaderboards_education_green
+  },
+  company: {
+    normal: leaderboards_company_grey,
+    selected: leaderboards_company_green
+  },
+  individual: {
+    normal: leaderboards_indiv_grey,
+    selected: leaderboards_indiv_green
+  }
+};
 export function queryParamsToObject(queryParams) {
   let returnObject = {};
   try {

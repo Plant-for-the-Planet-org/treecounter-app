@@ -133,7 +133,7 @@ class Trillion extends Component {
         );
       }
       case 'leaderBoard': {
-        return <Leaderboard />;
+        return <Leaderboard navigation={this.props.navigation} />;
       }
       default:
         return null;

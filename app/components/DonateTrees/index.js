@@ -428,14 +428,20 @@ export default class DonateTrees extends Component {
                           ref="donateReceipt"
                           type={receiptIndividualFormSchema}
                           options={individualSchemaOptions}
-                          value={this.props.currentUserProfile}
+                          value={
+                            this.props.currentUserProfile ||
+                            this.state.form['receiptIndividual']
+                          }
                         />
                       ) : (
                         <TCombForm
                           ref="donateReceipt"
                           type={receiptCompanyFormSchema}
                           options={companySchemaOptions}
-                          value={this.props.currentUserProfile}
+                          value={
+                            this.props.currentUserProfile ||
+                            this.state.form['receiptCompany']
+                          }
                         />
                       )}
                     </Tabs>

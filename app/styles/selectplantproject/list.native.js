@@ -17,16 +17,6 @@ export default (selectplantprojectFull = EStyleSheet.create({
   evenItemStyle: {
     backgroundColor: '#f0f0f0'
   },
-  projectNameContainer: {
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 5,
-    borderColor: '#efefef',
-    borderStyle: 'solid',
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
-    flexDirection: 'row'
-  },
   projectImageContainer: {
     width: 25,
     height: 25,

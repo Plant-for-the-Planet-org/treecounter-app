@@ -268,7 +268,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         //     !isLoggedIn)
         // ) {
         if (navigation.state.routeName === 'Tab') {
-          navigationConfig.headerLeft = BurgerMenu(navigation, userProfile);
+          navigationConfig.headerLeft = <BurgerMenu navigation={navigation} />;
         }
         return navigationConfig;
       }

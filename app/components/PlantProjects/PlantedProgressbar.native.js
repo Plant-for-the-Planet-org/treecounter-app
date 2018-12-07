@@ -78,8 +78,8 @@ class PlantedProgressBar extends React.Component {
 }
 
 PlantedProgressBar.propTypes = {
-  countPlanted: PropTypes.string,
-  countTarget: PropTypes.string
+  countPlanted: PropTypes.number,
+  countTarget: PropTypes.number
 };
 
 export default PlantedProgressBar;

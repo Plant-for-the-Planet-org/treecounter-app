@@ -63,5 +63,6 @@ SelectPlantProjectContainer.propTypes = {
   plantProjects: PropTypes.array,
   currencies: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
+  fetchCurrencies: PropTypes.func
 };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { PropTypes } from 'prop-types';
-import CategoryTypes from './categoryType.native';
+import CategoryTypes from './categoryTypes';
 import LoadingIndicator from '../Common/LoadingIndicator';
 
 export default class Leaderboard extends Component {
@@ -26,6 +26,7 @@ export default class Leaderboard extends Component {
 
     return listItemsUI;
   };
+
   render() {
     return (
       <View style={{ flex: 1 }}>

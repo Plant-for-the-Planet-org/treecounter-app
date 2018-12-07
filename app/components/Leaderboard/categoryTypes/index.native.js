@@ -1,46 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground, ScrollView } from 'react-native';
-import TouchableItem from '../Common/TouchableItem.native';
+import { View, ScrollView } from 'react-native';
 import { PropTypes } from 'prop-types';
-import { categoryIcons } from '../../helpers/utils';
-import styles from '../../styles/leaderboard/leader_board';
-
-class CategoryType extends Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick() {
-    this.props.onClick(this.props.index, this.props.category);
-  }
-  render() {
-    return (
-      <View style={{ margin: 5 }}>
-        <View>
-          <TouchableItem onPress={this.handleClick}>
-            <ImageBackground
-              style={styles.imageStyle}
-              source={this.props.iconUrl}
-            >
-              <View style={styles.circle} />
-            </ImageBackground>
-          </TouchableItem>
-        </View>
-        <View>
-          <Text
-            style={
-              this.props.selected
-                ? styles.selectedBottomTypeLabel
-                : styles.bottomTypeLabel
-            }
-          >
-            {this.props.title}
-          </Text>
-        </View>
-      </View>
-    );
-  }
-}
+import { categoryIcons } from '../../../helpers/utils';
+import styles from '../../../styles/leaderboard/leader_board';
+import CategoryType from './categoryType.native';
 
 export default class CategoryTypes extends Component {
   constructor(props) {
@@ -67,6 +30,7 @@ export default class CategoryTypes extends Component {
       this.scrollView.scrollTo({ x: 0, y: 0, animated: true });
     }
   }
+
   getCategoryView = () => {
     const { categoryInfo, sectionInfo } = this.props;
     let categoryUI = null;
@@ -90,6 +54,7 @@ export default class CategoryTypes extends Component {
     }
     return categoryUI;
   };
+
   render() {
     return (
       <View style={styles.outerContainer}>
@@ -110,12 +75,4 @@ CategoryTypes.propTypes = {
   changeCategory: PropTypes.func,
   categoryInfo: PropTypes.object,
   sectionInfo: PropTypes.object
-};
-
-CategoryType.propTypes = {
-  index: PropTypes.any,
-  onClick: PropTypes.func,
-  selected: PropTypes.any,
-  iconUrl: PropTypes.any,
-  title: PropTypes.string
 };

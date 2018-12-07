@@ -19,8 +19,9 @@ import PlantProjectSnippet from '../../components/PlantProjects/PlantProjectSnip
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import Leaderboard from '../../containers/Leaderboard';
+import { TabView, TabBar } from 'react-native-tab-view';
 
-import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 const Layout = {
   window: {
     width: Dimensions.get('window').width
@@ -132,6 +133,7 @@ class Trillion extends Component {
         );
       }
       case 'leaderBoard': {
+        return <Leaderboard />;
       }
       default:
         return null;

@@ -28,14 +28,15 @@ class LeaderBoardContainer extends React.Component {
       queryResult: null,
       exploreData: {},
       sectionInfo: {
-        section: match.params.section,
-        subSection: match.params.subSection
+        section: match && match.params.section,
+        subSection: match && match.params.subSection
       },
       tabInfo: {
         tabs: tabs,
-        activeTab: match.path.includes('explore')
-          ? 'app_explore'
-          : 'app_leaderboard'
+        activeTab:
+          match && match.path.includes('explore')
+            ? 'app_explore'
+            : 'app_leaderboard'
       },
       mapInfo: {}
     };
@@ -43,7 +44,7 @@ class LeaderBoardContainer extends React.Component {
 
   getDefaultQuery(searchQuery, orderBy, period) {
     let searchQueryObject = queryParamsToObject(searchQuery);
-    if (!Object.keys(searchQuery).length > 0) {
+    if (!searchQuery || !Object.keys(searchQuery).length > 0) {
       searchQueryObject = {
         orderBy,
         period
@@ -150,7 +151,7 @@ class LeaderBoardContainer extends React.Component {
           timePeriodsInfo,
           mapInfo,
           sortingQuery: this.getDefaultQuery(
-            this.props.location.search,
+            this.props && this.props.location && this.props.location.search,
             orderByOptionsInfo.orderByOptionsKeys[0],
             timePeriodsInfo.timePeriodsKeys[0]
           )

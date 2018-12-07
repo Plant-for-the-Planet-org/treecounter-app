@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { PropTypes } from 'prop-types';
+import CategoryTypes from './categoryType.native';
 
 export default class Leaderboard extends Component {
   constructor(props) {
@@ -8,7 +9,14 @@ export default class Leaderboard extends Component {
   }
 
   render() {
-    return <Text>Leader Board UnderConstruction !!</Text>;
+    return (
+      <View style={{ flex: 1 }}>
+        <CategoryTypes
+          categoryInfo={this.props.categoryInfo}
+          sectionInfo={this.props.sectionInfo}
+        />
+      </View>
+    );
   }
 }
 

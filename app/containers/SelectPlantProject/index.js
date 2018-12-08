@@ -48,7 +48,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  fetchCurrencies;
   return bindActionCreators(
     { selectPlantProjectAction, fetchCurrencies },
     dispatch

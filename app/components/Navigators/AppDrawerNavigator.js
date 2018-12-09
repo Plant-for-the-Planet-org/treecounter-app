@@ -116,6 +116,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
+      },
+      ['app_gift_projects']: {
+        screen: SelectPlantProjectContainer
       }
     },
     {
@@ -225,7 +228,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
 
       [getLocalRoute('app_giftTrees')]: {
-        screen: SelectPlantProjectContainer
+        screen: GiftTrees
       }
     },
     {

@@ -70,6 +70,7 @@ export default class DonateTrees extends Component {
       })
       .catch(err => {});
     Linking.addEventListener('url', this.handleOpenURL);
+    console.log('user info in donate screen', this.props.navigation.state);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -283,6 +284,13 @@ export default class DonateTrees extends Component {
       this.props.selectedProject
         ? (screenToShow = (
             <View>
+              {this.props.navigation.state.params != undefined &&
+              this.props.navigation.state.params.firstname != undefined ? (
+                <Text>
+                  Gift Trees to {this.props.navigation.state.params.firstname}
+                </Text>
+              ) : null}
+
               <TreeCountCurrencySelector
                 treeCost={selectedProject.treeCost}
                 rates={

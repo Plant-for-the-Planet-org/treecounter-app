@@ -31,7 +31,11 @@ class SelectedPlantProjectContainer extends Component {
   selectProject(id) {
     const { navigation } = this.props;
     this.props.selectPlantProjectAction(id);
-    updateStaticRoute('app_donate_detail', navigation);
+    updateStaticRoute(
+      'app_donate_detail',
+      navigation,
+      navigation.getParam('userForm')
+    );
   }
   render() {
     if (this.props.selectedProject) {

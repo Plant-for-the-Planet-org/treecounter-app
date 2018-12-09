@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { updateRoute } from '../../helpers/routerHelper';
 
 import {
   selectedPlantProjectSelector,
@@ -20,9 +21,18 @@ import GiftTrees from '../../components/GiftTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 
 class GiftTreesContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.openProjects = this.openProjects.bind(this);
+  }
   componentDidMount() {
-    // this.props.selectPlantProjectAction(1);
     this.props.fetchCurrencies();
+  }
+  openProjects(formValue) {
+    //  console.log('in gif tree', formValue);
+    updateRoute('app_gift_projects', this.props.navigation, 0, {
+      userForm: formValue
+    });
   }
 
   render() {
@@ -36,6 +46,7 @@ class GiftTreesContainer extends Component {
         gift={(donationContribution, plantProjectId) =>
           this.props.gift(donationContribution, plantProjectId, flag)
         }
+        openProjects={this.openProjects}
         paymentStatus={this.props.paymentStatus}
         paymentClear={this.props.paymentClear}
         plantProjectClear={this.props.clearPlantProject}

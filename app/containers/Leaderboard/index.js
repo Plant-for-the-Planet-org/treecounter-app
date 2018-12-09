@@ -54,7 +54,10 @@ class LeaderBoardContainer extends React.Component {
   }
 
   sendSearchQuery(
-    section = this.state.sectionInfo.section,
+    section = this.state.sectionInfo.section ||
+      (this.state.categoryInfo &&
+        this.state.categoryInfo.categoryKeys &&
+        this.state.categoryInfo.categoryKeys[0]),
     subSection = this.state.sectionInfo.subSection,
     orderBy = this.state.sortingQuery.orderBy,
     period = this.state.sortingQuery.period

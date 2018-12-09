@@ -45,6 +45,7 @@ export default class LeaderboardItem extends Component {
             <PlantedProgressBar
               countPlanted={this.props.planted}
               countTarget={this.props.target}
+              hideTargetImage
             />
           </TouchableItem>
         </View>

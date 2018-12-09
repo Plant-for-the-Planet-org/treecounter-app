@@ -187,5 +187,6 @@ export default LeaderBoardContainer;
 
 LeaderBoardContainer.propTypes = {
   match: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  navigation: PropTypes.any
 };

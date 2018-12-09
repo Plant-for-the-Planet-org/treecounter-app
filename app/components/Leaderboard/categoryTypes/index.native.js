@@ -24,7 +24,7 @@ export default class CategoryTypes extends Component {
       selectedIndex: index
     });
     this.props.handleCategoryChange(category);
-    if (index === this.props.categoryInfo.categoryKeys.length) {
+    if (index === this.props.categoryInfo.categoryKeys.length - 1) {
       this.scrollView.scrollToEnd({ animated: true });
     } else if (index === 0) {
       this.scrollView.scrollTo({ x: 0, y: 0, animated: true });
@@ -59,12 +59,13 @@ export default class CategoryTypes extends Component {
     return (
       <View style={styles.outerContainer}>
         <ScrollView
+          contentContainerStyle={[styles.innerContainer]}
           horizontal={true}
           ref={ref => {
             this.scrollView = ref;
           }}
         >
-          <View style={styles.innerContainer}>{this.getCategoryView()}</View>
+          {this.getCategoryView()}
         </ScrollView>
       </View>
     );

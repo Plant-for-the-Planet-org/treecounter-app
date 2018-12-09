@@ -14,15 +14,18 @@ export default class CategoryType extends Component {
   }
   render() {
     return (
-      <View style={{ margin: 5 }}>
+      <View
+        style={{ margin: 5, justifyContent: 'center', alignItems: 'center' }}
+      >
         <View>
-          <TouchableItem onPress={this.handleClick}>
+          <TouchableItem
+            onPress={this.handleClick}
+            style={{ justifyContent: 'center' }}
+          >
             <ImageBackground
               style={styles.imageStyle}
               source={this.props.iconUrl}
-            >
-              <View style={styles.circle} />
-            </ImageBackground>
+            />
           </TouchableItem>
         </View>
         <View>

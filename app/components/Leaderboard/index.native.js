@@ -42,25 +42,24 @@ export default class Leaderboard extends Component {
             style={styles.cardImageStyle}
           />
           {this.props.queryResult ? (
-            <ScrollView
-              contentContainerStyle={{ flexGrow: 1, padding: 10 }}
-              horizontal={false}
-            >
-              {this.props.queryResult.map((result, index) => {
-                return (
-                  <LeaderboardItem
-                    key={'LeaderboardItem' + index}
-                    // iconUrl={
-                    //   categoryIcons[category][isSelected ? 'selected' : 'normal']
-                    // }
-                    planted={result.planted}
-                    target={result.target}
-                    index={index}
-                    title={result.caption}
-                    // onClick={this.changeCategory}
-                  />
-                );
-              })}
+            <ScrollView contentContainerStyle={{}} horizontal={false}>
+              <View style={{ width: '95%', padding: 10 }}>
+                {this.props.queryResult.map((result, index) => {
+                  return (
+                    <LeaderboardItem
+                      key={'LeaderboardItem' + index}
+                      // iconUrl={
+                      //   categoryIcons[category][isSelected ? 'selected' : 'normal']
+                      // }
+                      planted={result.planted}
+                      target={result.target}
+                      index={index}
+                      title={result.caption}
+                      // onClick={this.changeCategory}
+                    />
+                  );
+                })}
+              </View>
             </ScrollView>
           ) : (
             <LoadingIndicator />

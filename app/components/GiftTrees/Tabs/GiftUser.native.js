@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import SearchLayout from '../../Header/SearchLayout.native';
+import { View, TextInput } from 'react-native';
+import SearchUser from './SearchUser.native';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 
 export default class GiftUser extends Component {
   constructor(props) {
     super(props);
+    this.state = { selectedSuggestion: null };
+    this.onNextClick = this.onNextClick.bind(this);
+    this.onSearchResultClick = this.onSearchResultClick.bind(this);
   }
   componentWillMount() {}
-
-  _handleChangeQuery = q => {
-    getSuggestions(q).then(suggestions => {
-      this.setState({ q: suggestions });
-      //console.log('suggestions', suggestions);
-    });
-  };
-  _handleSubmit = q => {
-    this.props.onSubmit && this.props.onSubmit(q);
-  };
+  onSearchResultClick(suggestion) {
+    console.log('suggestion clicked', suggestion);
+    this.setState({ selectedSuggestion: suggestion });
+  }
+  onNextClick() {
+    if (this.state.selectedSuggestion) {
+      this.props.openProjects(this.state.selectedSuggestion, 'userType');
+    }
+  }
   render() {
-    return <SearchLayout searchInputUnderlineColorAndroid="#fff" />;
+    return (
+      <View style={{ flex: 1, flexDirection: 'column' }}>
+        <View style={{ flex: 0.8 }}>
+          <SearchUser onSearchResultClick={this.onSearchResultClick} />
+        </View>
+
+        <View style={{ flex: 0.2 }}>
+          <PrimaryButton onClick={this.onNextClick}>Next</PrimaryButton>
+        </View>
+      </View>
+    );
   }
 }

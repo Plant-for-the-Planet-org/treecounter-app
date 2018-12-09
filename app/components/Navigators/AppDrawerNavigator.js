@@ -67,7 +67,8 @@ const headerLabels = {
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license',
   ['delete_profile_confirm']: 'label.delete_profile',
-  ['app_donate_detail']: 'label.donate'
+  ['app_donate_detail']: 'label.donate',
+  ['app_gift_projects']: 'label.gift_trees'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {

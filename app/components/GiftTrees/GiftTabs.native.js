@@ -17,8 +17,8 @@ export default class GiftTabView extends Component {
 
     this.state = {
       routes: [
-        { key: 'email', title: 'Email' },
-        { key: 'user', title: 'User' }
+        { key: 'user', title: 'User' },
+        { key: 'email', title: 'Email' }
       ],
       index: 0
     };

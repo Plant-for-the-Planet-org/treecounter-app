@@ -8,9 +8,9 @@ export default class GiftTrees extends Component {
     super(props);
     this.openProjects = this.openProjects.bind(this);
   }
-  openProjects(formValue) {
+  openProjects(formValue, type) {
     // console.log('Open Project called up ', formValue);
-    this.props.openProjects(formValue);
+    this.props.openProjects(formValue, type);
   }
   render() {
     return <GiftTabView openProjects={this.openProjects} {...this.props} />;

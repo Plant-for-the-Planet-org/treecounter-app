@@ -23,7 +23,7 @@ export default class GiftEmail extends Component {
   onNextClick() {
     if (this.giftInvitation.getValue()) {
       this.setState({ formValue: this.giftInvitation.getValue() });
-      this.props.openProjects(this.giftInvitation.getValue());
+      this.props.openProjects(this.giftInvitation.getValue(), 'invitation');
     }
   }
 
@@ -41,6 +41,6 @@ export default class GiftEmail extends Component {
     );
   }
   componentWillUnmount() {
-    console.log('Gift Email Unmounted');
+    // console.log('Gift Email Unmounted');
   }
 }

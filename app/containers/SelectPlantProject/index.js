@@ -16,7 +16,6 @@ import { fetchCurrencies } from '../../actions/currencies';
 class SelectPlantProjectContainer extends Component {
   componentDidMount() {
     this.props.fetchCurrencies();
-    console.log(this.props.navigation.state, 'userInfo params');
   }
   render() {
     console.log('select plant props', this.props);
@@ -33,7 +32,6 @@ class SelectPlantProjectContainer extends Component {
   onMoreClick(id) {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
-    console.log('OnMore');
     updateRoute(
       'app_selectProject',
       navigation,
@@ -44,11 +42,10 @@ class SelectPlantProjectContainer extends Component {
   selectPlantProjectAction(id) {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
-    updateStaticRoute(
-      'app_donate_detail',
-      navigation,
-      navigation.getParam('userForm')
-    );
+    updateStaticRoute('app_donate_detail', navigation, {
+      userForm: navigation.getParam('userForm'),
+      giftMethod: navigation.getParam('giftMethod')
+    });
   }
 }
 

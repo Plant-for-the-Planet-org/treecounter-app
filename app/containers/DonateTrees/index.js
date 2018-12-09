@@ -16,7 +16,7 @@ import {
 } from '../../actions/selectPlantProjectAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { fetchCurrencies } from '../../actions/currencies';
-import { donate, paymentClear } from '../../actions/donateAction';
+import { donate, paymentClear, gift } from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 
 import { updateRoute } from '../../helpers/routerHelper';
@@ -80,6 +80,7 @@ const mapDispatchToProps = dispatch => {
       selectPlantProjectAction,
       fetchCurrencies,
       donate,
+      gift,
       paymentClear,
       clearPlantProject,
       setProgressModelState,
@@ -105,6 +106,7 @@ DonationTreesContainer.propTypes = {
   selectPlantProjectAction: PropTypes.func,
   paymentClear: PropTypes.func,
   donate: PropTypes.func,
+  gift: PropTypes.func,
   fetchCurrencies: PropTypes.func,
   clearPlantProject: PropTypes.func,
   supportTreecounter: PropTypes.object,

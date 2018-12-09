@@ -28,10 +28,11 @@ class GiftTreesContainer extends Component {
   componentDidMount() {
     this.props.fetchCurrencies();
   }
-  openProjects(formValue) {
+  openProjects(formValue, type) {
     //  console.log('in gif tree', formValue);
     updateRoute('app_gift_projects', this.props.navigation, 0, {
-      userForm: formValue
+      userForm: formValue,
+      giftMethod: type
     });
   }
 
@@ -88,5 +89,6 @@ GiftTreesContainer.propTypes = {
   gift: PropTypes.func,
   fetchCurrencies: PropTypes.func,
   paymentClear: PropTypes.func,
-  clearPlantProject: PropTypes.func
+  clearPlantProject: PropTypes.func,
+  navigation: PropTypes.any
 };

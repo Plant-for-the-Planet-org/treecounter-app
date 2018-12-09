@@ -29,7 +29,7 @@ class SearchUser extends React.Component {
   state = {
     q: [],
     searchResultClicked: false,
-    selectedSuggectionName: ''
+    selectedSuggestionName: ''
   };
 
   _handleSubmit = q => {
@@ -44,10 +44,13 @@ class SearchUser extends React.Component {
     });
   };
 
-  _onNavigationClick = suggestion => {
+  _onNavigationClick(suggestion) {
     if (this.props.onSearchResultClick) {
       this.props.onSearchResultClick(suggestion);
-      this.setState({ searchResultClicked: true });
+      this.setState({
+        searchResultClicked: true,
+        selectedSuggestionName: suggestion.name
+      });
     } else {
       this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
         treeCounterId: suggestion.slug || suggestion.id,
@@ -55,17 +58,17 @@ class SearchUser extends React.Component {
       });
       this.setState({
         searchResultClicked: true,
-        selectedSuggectionName: suggestion.name
+        selectedSuggestionName: suggestion.name
       });
     }
-  };
+  }
 
   render() {
     return (
       <View>
         <SearchBar
           onChangeQuery={this._handleChangeQuery}
-          inputValue={this.state.selectedSuggectionName}
+          inputValue={this.state.selectedSuggestionName}
           onSubmit={this._handleSubmit}
           placeholderTextColor={this.props.searchInputPlaceholderTextColor}
           textColor={this.props.searchInputTextColor}
@@ -86,7 +89,7 @@ class SearchUser extends React.Component {
                 <TouchableOpacity
                   style={styles.searchResult}
                   key={'suggestion' + i}
-                  onPress={() => this._onNavigationClick(suggestion)}
+                  onPress={this._onNavigationClick.bind(this, suggestion)}
                 >
                   <Image
                     style={styles.profileImage}

@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions } from 'react-native';
+
 const boxShadow = {
   shadowOpacity: 0.5,
   shadowOffset: { width: 0, height: 8 },

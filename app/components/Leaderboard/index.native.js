@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground, Image } from 'react-native';
+import { Text, View, ImageBackground, Image, ScrollView } from 'react-native';
 import { PropTypes } from 'prop-types';
 import CategoryTypes from './categoryTypes';
 import LoadingIndicator from '../Common/LoadingIndicator';
@@ -10,6 +10,7 @@ import TouchableItem from '../../components/Common/TouchableItem.native';
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import ContextMenuItem from './contextMenuItem.native';
 import { categoryIcons } from '../../helpers/utils';
+import LeaderboardItem from './leaderBoardListItem.native';
 
 export default class Leaderboard extends Component {
   constructor(props) {
@@ -41,11 +42,26 @@ export default class Leaderboard extends Component {
             style={styles.cardImageStyle}
           />
           {this.props.queryResult ? (
-            <Text>
-              Query Results ashdbajs ahsbdajsd habsdjas habs das dkahsd asdhasd
-              aahsbdas dihabsdahsd iabsdahsd hiabsdahsd ahsd asd ashjdbajsd ashd
-              ahsd ahs dasd
-            </Text>
+            <ScrollView
+              contentContainerStyle={{ flexGrow: 1, padding: 10 }}
+              horizontal={false}
+            >
+              {this.props.queryResult.map((result, index) => {
+                return (
+                  <LeaderboardItem
+                    key={'LeaderboardItem' + index}
+                    // iconUrl={
+                    //   categoryIcons[category][isSelected ? 'selected' : 'normal']
+                    // }
+                    planted={result.planted}
+                    target={result.target}
+                    index={index}
+                    title={result.caption}
+                    // onClick={this.changeCategory}
+                  />
+                );
+              })}
+            </ScrollView>
           ) : (
             <LoadingIndicator />
           )}

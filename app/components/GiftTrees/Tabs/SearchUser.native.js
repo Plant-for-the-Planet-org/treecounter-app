@@ -65,7 +65,7 @@ class SearchUser extends React.Component {
       <View>
         <SearchBar
           onChangeQuery={this._handleChangeQuery}
-          value={this.state.selectedSuggestionName}
+          inputValue={this.state.selectedSuggectionName}
           onSubmit={this._handleSubmit}
           placeholderTextColor={this.props.searchInputPlaceholderTextColor}
           textColor={this.props.searchInputTextColor}

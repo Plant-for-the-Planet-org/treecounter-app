@@ -69,6 +69,13 @@ class SearchBar extends React.PureComponent {
     if (this.props.textColor) {
       searchInputStyle.color = this.props.textColor;
     }
+    let inputValue = this.state.text;
+    if (
+      this.props.inputvalue &&
+      this.props.inputvalue.includes(this.state.text)
+    ) {
+      inputValue = this.props.inputValue;
+    }
 
     return (
       <View style={styles.container}>
@@ -79,7 +86,7 @@ class SearchBar extends React.PureComponent {
             }}
             clearButtonMode="while-editing"
             onChangeText={this._handleChangeText}
-            value={this.state.text}
+            value={inputValue}
             autoCapitalize="none"
             autoCorrect={false}
             returnKeyType="search"

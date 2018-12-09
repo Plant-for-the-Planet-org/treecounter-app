@@ -36,7 +36,7 @@ class Trillion extends Component {
       displayName: '',
       loading: true,
       routes: [
-        { key: 'world', title: 'Worls' },
+        { key: 'world', title: 'World' },
         { key: 'leaderBoard', title: 'LeaderBoard' }
       ],
       index: 0

@@ -22,7 +22,12 @@ export default (LeaderboardStyle = EStyleSheet.create({
     width: 25
   },
   cardStyle: {
-    ...boxShadow
+    ...boxShadow,
+    flexGrow: 1,
+    alignItems: 'center'
+  },
+  cardImageStyle: {
+    top: -50
   },
   outerContainer: {
     alignItems: 'stretch',

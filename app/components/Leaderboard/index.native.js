@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground } from 'react-native';
+import { Text, View, ImageBackground, Image } from 'react-native';
 import { PropTypes } from 'prop-types';
 import CategoryTypes from './categoryTypes';
 import LoadingIndicator from '../Common/LoadingIndicator';
@@ -9,28 +9,46 @@ import { tick } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import ContextMenuItem from './contextMenuItem.native';
+import { categoryIcons } from '../../helpers/utils';
 
 export default class Leaderboard extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedCategory: ''
+    };
   }
 
-  handleCategoryChange = section => {
-    this.props.handleSectionChange(section);
+  handleCategoryChange = category => {
+    this.props.handleSectionChange(category);
+    this.setState({ selectedCategory: category });
   };
 
   _getTableView = () => {
     console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
     const { categoryInfo, sectionInfo } = this.props;
-    if (this.props.queryResult)
+    const selectedCategory =
+      this.state.selectedCategory ||
+      (categoryInfo &&
+        categoryInfo.categoryKeys &&
+        categoryInfo.categoryKeys[0]);
+    if (selectedCategory)
       listItemsUI = (
         <CardLayout style={styles.cardStyle}>
-          <Text>
-            Query Results ashdbajs ahsbdajsd habsdjas habs das dkahsd asdhasd
-            aahsbdas dihabsdahsd iabsdahsd hiabsdahsd ahsd asd ashjdbajsd ashd
-            ahsd ahs dasd
-          </Text>
+          <Image
+            source={categoryIcons[selectedCategory]['selected']}
+            style={styles.cardImageStyle}
+          />
+          {this.props.queryResult ? (
+            <Text>
+              Query Results ashdbajs ahsbdajsd habsdjas habs das dkahsd asdhasd
+              aahsbdas dihabsdahsd iabsdahsd hiabsdahsd ahsd asd ashjdbajsd ashd
+              ahsd ahs dasd
+            </Text>
+          ) : (
+            <LoadingIndicator />
+          )}
         </CardLayout>
       );
 
@@ -60,19 +78,19 @@ export default class Leaderboard extends Component {
           }
           items={[
             {
-              label: data => {
+              label: () => {
                 return <ContextMenuItem selected>All time</ContextMenuItem>;
               },
               onPress: () => {}
             },
             {
-              label: data => {
+              label: () => {
                 return <ContextMenuItem>Last year</ContextMenuItem>;
               },
               onPress: () => {}
             },
             {
-              label: data => {
+              label: () => {
                 return <ContextMenuItem>Last 5 years</ContextMenuItem>;
               },
               onPress: () => {}

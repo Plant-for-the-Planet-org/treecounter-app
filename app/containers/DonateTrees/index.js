@@ -27,8 +27,8 @@ class DonationTreesContainer extends Component {
   componentDidMount() {
     //  this.props.selectPlantProjectAction(1);
     this.props.fetchCurrencies();
-    console.log('In donate Tree Route' + this.props.navigation);
-    console.log(this.props.navigation);
+    // console.log('In donate Tree Route' + this.props.navigation);
+    // console.log(this.props.navigation);
   }
 
   onTabChange(title) {
@@ -36,7 +36,7 @@ class DonationTreesContainer extends Component {
   }
   render() {
     let flag = this.props.currentUserProfile ? true : false;
-    console.log('donate tree called');
+    // console.log('donate tree called');
     return (
       <DonateTrees
         ref={'donateTreesContainer'}

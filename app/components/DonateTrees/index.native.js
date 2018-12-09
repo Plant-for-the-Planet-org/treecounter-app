@@ -295,7 +295,11 @@ export default class DonateTrees extends Component {
         ? (screenToShow = (
             <View>
               {this.state.giftTreeCounterName ? (
-                <Text>Gift Trees to {this.state.giftTreeCounterName}</Text>
+                <View
+                  style={{ flexDirection: 'row', justifyContent: 'center' }}
+                >
+                  <Text>Gift Trees to {this.state.giftTreeCounterName}</Text>
+                </View>
               ) : null}
 
               <TreeCountCurrencySelector

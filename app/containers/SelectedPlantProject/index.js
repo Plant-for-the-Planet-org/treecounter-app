@@ -22,7 +22,6 @@ class SelectedPlantProjectContainer extends Component {
   }
   componentDidMount() {
     //  this.props.selectPlantProjectAction(1);
-    console.log(this.props.navigation);
   }
 
   onTabChange(title) {

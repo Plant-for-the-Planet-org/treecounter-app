@@ -67,12 +67,12 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
 
             dispatch(paymentSuccess({ status: true, message: 'success' }));
             dispatch(setProgressModelState(false));
-            console.log(`Thank you for planting ${
-              contribution.treeCount
-            } trees with us!
-          Your donation has been registered as: ${contribution.uid}
-          You will receive an email with a donation receipt in time.
-          Green Button: "Return to Profile"`);
+            //   console.log(`Thank you for planting ${
+            //     contribution.treeCount
+            //   } trees with us!
+            // Your donation has been registered as: ${contribution.uid}
+            // You will receive an email with a donation receipt in time.
+            // Green Button: "Return to Profile"`);
           }
         })
         .catch(response => {
@@ -116,12 +116,12 @@ export function gift(donationContribution, plantProjectId, loggedIn) {
           const [contribution] = treecounter.contributions.splice(-1);
           dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
 
-          console.log(`Thank you for planting ${
-            contribution.treeCount
-          } trees with us!
-          Your donation has been registered as: ${contribution.uid}
-          You will receive an email with a donation receipt in time.
-          Green Button: "Return to Profile"`);
+          // console.log(`Thank you for planting ${
+          //   contribution.treeCount
+          // } trees with us!
+          // Your donation has been registered as: ${contribution.uid}
+          // You will receive an email with a donation receipt in time.
+          // Green Button: "Return to Profile"`);
         })
         .catch(response => {
           debug('error: ', response);

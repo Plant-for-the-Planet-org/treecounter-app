@@ -12,7 +12,7 @@ export default class GiftUser extends Component {
   }
   componentWillMount() {}
   onSearchResultClick(suggestion) {
-    console.log('suggestion clicked', suggestion);
+    // console.log('suggestion clicked', suggestion);
     this.setState({ selectedSuggestion: suggestion });
   }
   onNextClick() {

@@ -5,7 +5,7 @@ import CategoryTypes from './categoryTypes';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import CardLayout from '../Common/Card';
 import styles from '../../styles/leaderboard/leader_board';
-import { tick } from '../../assets';
+import { selector_menu } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import ContextMenuItem from './contextMenuItem.native';
@@ -97,7 +97,7 @@ export default class Leaderboard extends Component {
                 this.refs['tooltip'].toggle();
               }}
             >
-              <ImageBackground style={styles.contextMenu} source={tick} />
+              <Image style={styles.contextMenu} source={selector_menu} />
             </TouchableItem>
           }
           items={[

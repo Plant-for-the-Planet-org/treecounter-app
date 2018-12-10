@@ -32,20 +32,24 @@ class SelectPlantProjectContainer extends Component {
   onMoreClick(id) {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
-    updateRoute(
-      'app_selectProject',
-      navigation,
-      1,
-      navigation.getParam('userForm')
-    );
+    if (navigation) {
+      updateRoute(
+        'app_selectProject',
+        navigation,
+        1,
+        navigation.getParam('userForm')
+      );
+    }
   }
   selectPlantProjectAction(id) {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
-    updateStaticRoute('app_donate_detail', navigation, {
-      userForm: navigation.getParam('userForm'),
-      giftMethod: navigation.getParam('giftMethod')
-    });
+    if (navigation) {
+      updateStaticRoute('app_donate_detail', navigation, {
+        userForm: navigation.getParam('userForm'),
+        giftMethod: navigation.getParam('giftMethod')
+      });
+    }
   }
 }
 

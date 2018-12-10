@@ -28,7 +28,9 @@ export default class LeaderboardItem extends Component {
           }}
         >
           <TouchableItem
-            onPress={() => this.props.onPress(this.props.treeCounterId)}
+            onPress={() =>
+              this.props.onPress(this.props.treeCounterId, this.props.uri)
+            }
             style={{ justifyContent: 'center' }}
           >
             <Text
@@ -58,5 +60,6 @@ LeaderboardItem.propTypes = {
   iconUrl: PropTypes.any,
   title: PropTypes.string,
   treeCounterId: PropTypes.any,
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
+  uri: PropTypes.any
 };

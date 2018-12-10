@@ -81,7 +81,8 @@ class LeaderBoardContainer extends React.Component {
   handleSectionChange = (
     section = this.state.sectionInfo.section,
     orderBy = this.state.sortingQuery.orderBy,
-    period = this.state.sortingQuery.period
+    period = this.state.sortingQuery.period,
+    subSection = this.state.sectionInfo.subSection
   ) => {
     if (!this.props.navigation) {
       updateRoute(
@@ -97,12 +98,7 @@ class LeaderBoardContainer extends React.Component {
       sectionInfo: { section, query: { orderBy, period } },
       queryResult: null
     });
-    this.sendSearchQuery(
-      section,
-      this.state.sectionInfo.subSection,
-      orderBy,
-      period
-    );
+    this.sendSearchQuery(section, subSection, orderBy, period);
   };
 
   handleTabChange = tab => {

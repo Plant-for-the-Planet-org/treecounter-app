@@ -39,10 +39,23 @@ export default class Leaderboard extends Component {
     this.setState({ timeSorting: sortValue });
   };
 
-  _handleItemPress(treeCounterId) {
-    this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-      treeCounterId
-    });
+  _handleItemPress(treeCounterId, uri) {
+    console.log(treeCounterId);
+    if (treeCounterId) {
+      this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+        treeCounterId
+      });
+    } else if (uri) {
+      const pathComponent = uri.split('/');
+      const selectedSorting =
+        this.state.timeSorting || this.props.timePeriodsInfo.timePeriodsKeys[0];
+      this.props.handleSectionChange(
+        this.state.selectedCategory || this.props.categoryInfo.categoryKeys[0],
+        undefined,
+        selectedSorting,
+        pathComponent[pathComponent.length - 1]
+      );
+    }
   }
 
   _getTableView = () => {
@@ -77,6 +90,7 @@ export default class Leaderboard extends Component {
                       index={index}
                       title={result.caption}
                       treeCounterId={result.treecounterId}
+                      uri={result.uri}
                       // onClick={this.changeCategory}
                     />
                   );

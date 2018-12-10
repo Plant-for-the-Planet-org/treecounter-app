@@ -12,12 +12,14 @@ import ContextMenuItem from './contextMenuItem.native';
 import { categoryIcons } from '../../helpers/utils';
 import LeaderboardItem from './leaderBoardListItem.native';
 import { getLocalRoute } from '../../actions/apiRouting';
+import i18n from '../../locales/i18n';
 
 export default class Leaderboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedCategory: ''
+      selectedCategory: '',
+      timeSorting: ''
     };
     this._handleItemPress = this._handleItemPress.bind(this);
   }
@@ -26,6 +28,17 @@ export default class Leaderboard extends Component {
     this.props.handleSectionChange(category);
     this.setState({ selectedCategory: category });
   };
+
+  _handleSortingChange = sortValue => {
+    console.log('call sort here', sortValue);
+    this.props.handleSectionChange(
+      this.state.selectedCategory || this.props.categoryInfo.categoryKeys[0],
+      undefined,
+      sortValue
+    );
+    this.setState({ timeSorting: sortValue });
+  };
+
   _handleItemPress(treeCounterId) {
     this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
       treeCounterId
@@ -78,6 +91,36 @@ export default class Leaderboard extends Component {
 
     return listItemsUI;
   };
+
+  _getContextMenuItems = () => {
+    let contextMenuItems = [];
+    if (
+      this.props.timePeriodsInfo &&
+      this.props.timePeriodsInfo.timePeriodsKeys
+    ) {
+      const selectedSorting =
+        this.state.timeSorting || this.props.timePeriodsInfo.timePeriodsKeys[0];
+      contextMenuItems = this.props.timePeriodsInfo.timePeriodsKeys.map(
+        option => {
+          return {
+            label: () => {
+              return (
+                <ContextMenuItem selected={selectedSorting === option}>
+                  {i18n.t(this.props.timePeriodsInfo.timePeriods[option])}
+                </ContextMenuItem>
+              );
+            },
+            onPress: () => {
+              this._handleSortingChange(option);
+            }
+          };
+        }
+      );
+    }
+
+    return contextMenuItems;
+  };
+
   _getSortView = () => {
     sortView = (
       <View style={styles.sortView}>
@@ -100,26 +143,7 @@ export default class Leaderboard extends Component {
               <Image style={styles.contextMenu} source={selector_menu} />
             </TouchableItem>
           }
-          items={[
-            {
-              label: () => {
-                return <ContextMenuItem selected>All time</ContextMenuItem>;
-              },
-              onPress: () => {}
-            },
-            {
-              label: () => {
-                return <ContextMenuItem>Last year</ContextMenuItem>;
-              },
-              onPress: () => {}
-            },
-            {
-              label: () => {
-                return <ContextMenuItem>Last 5 years</ContextMenuItem>;
-              },
-              onPress: () => {}
-            }
-          ]}
+          items={this._getContextMenuItems()}
         />
       </View>
     );

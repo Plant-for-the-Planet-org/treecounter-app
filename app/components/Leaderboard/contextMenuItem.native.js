@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image } from 'react-native';
-import { checkedIcon, unCheckedIcon } from '../../assets';
+import { radio_button_selected, radio_button } from '../../assets';
 
 const ContextMenuItem = ({ children, selected }) => (
   <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
     <Text>{children}</Text>
     <Image
-      style={{ height: 15, width: 15, marginLeft: 5 }}
-      source={selected ? checkedIcon : unCheckedIcon}
+      style={{ height: 20, width: 20, marginLeft: 5, resizeMode: 'contain' }}
+      source={selected ? radio_button_selected : radio_button}
     />
   </View>
 );

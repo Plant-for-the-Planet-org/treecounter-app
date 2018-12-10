@@ -431,21 +431,6 @@ export default class DonateTrees extends Component {
           this.props.currentUserProfile
         );
       }
-      this.props.gift(
-        {
-          sendState,
-          paymentResponse: {
-            gateway: 'offline',
-            accountName: 'offline_US',
-            isConfirmed: true,
-            confirmation: 'iOS referred payment'
-          },
-          amount: this.state.selectedAmount,
-          currency: this.state.selectedCurrency
-        },
-        this.props.selectedProject.id,
-        this.props.currentUserProfile
-      );
       return;
     }
     sendState = { ...this.state.form };

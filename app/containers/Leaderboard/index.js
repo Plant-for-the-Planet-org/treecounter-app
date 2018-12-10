@@ -182,6 +182,7 @@ class LeaderBoardContainer extends React.Component {
         queryResult={this.state.queryResult}
         mapInfo={this.state.mapInfo}
         sortingQuery={this.state.sortingQuery}
+        navigation={this.props.navigation}
       />
     );
   }

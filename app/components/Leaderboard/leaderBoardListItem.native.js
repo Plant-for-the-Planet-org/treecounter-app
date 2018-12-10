@@ -2,17 +2,13 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import TouchableItem from '../Common/TouchableItem.native';
 import { PropTypes } from 'prop-types';
-// import styles from '../../../styles/leaderboard/leader_board';
 import PlantedProgressBar from '../PlantProjects/PlantedProgressbar.native';
 
 export default class LeaderboardItem extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
   }
-  handleClick() {
-    console.log('handle click here');
-  }
+
   render() {
     return (
       <View
@@ -32,7 +28,7 @@ export default class LeaderboardItem extends Component {
           }}
         >
           <TouchableItem
-            onPress={this.handleClick}
+            onPress={() => this.props.onPress(this.props.treeCounterId)}
             style={{ justifyContent: 'center' }}
           >
             <Text
@@ -60,5 +56,7 @@ LeaderboardItem.propTypes = {
   planted: PropTypes.any,
   target: PropTypes.any,
   iconUrl: PropTypes.any,
-  title: PropTypes.string
+  title: PropTypes.string,
+  treeCounterId: PropTypes.any,
+  onPress: PropTypes.func
 };

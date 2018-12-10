@@ -11,6 +11,7 @@ import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import ContextMenuItem from './contextMenuItem.native';
 import { categoryIcons } from '../../helpers/utils';
 import LeaderboardItem from './leaderBoardListItem.native';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 export default class Leaderboard extends Component {
   constructor(props) {
@@ -18,12 +19,18 @@ export default class Leaderboard extends Component {
     this.state = {
       selectedCategory: ''
     };
+    this._handleItemPress = this._handleItemPress.bind(this);
   }
 
-  handleCategoryChange = category => {
+  _handleCategoryChange = category => {
     this.props.handleSectionChange(category);
     this.setState({ selectedCategory: category });
   };
+  _handleItemPress(treeCounterId) {
+    this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+      treeCounterId
+    });
+  }
 
   _getTableView = () => {
     console.log(this.props.queryResult);
@@ -48,6 +55,7 @@ export default class Leaderboard extends Component {
                   return (
                     <LeaderboardItem
                       key={'LeaderboardItem' + index}
+                      onPress={this._handleItemPress}
                       // iconUrl={
                       //   categoryIcons[category][isSelected ? 'selected' : 'normal']
                       // }
@@ -55,6 +63,7 @@ export default class Leaderboard extends Component {
                       target={result.target}
                       index={index}
                       title={result.caption}
+                      treeCounterId={result.treecounterId}
                       // onClick={this.changeCategory}
                     />
                   );
@@ -122,7 +131,7 @@ export default class Leaderboard extends Component {
         <CategoryTypes
           categoryInfo={this.props.categoryInfo}
           sectionInfo={this.props.sectionInfo}
-          handleCategoryChange={this.handleCategoryChange}
+          handleCategoryChange={this._handleCategoryChange}
         />
         {this._getSortView()}
         {this._getTableView()}
@@ -141,5 +150,6 @@ Leaderboard.propTypes = {
   handleTabChange: PropTypes.func,
   queryResult: PropTypes.array,
   mapInfo: PropTypes.object,
-  sortingQuery: PropTypes.object
+  sortingQuery: PropTypes.object,
+  navigation: PropTypes.navigation
 };

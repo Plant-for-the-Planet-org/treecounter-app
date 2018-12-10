@@ -78,7 +78,7 @@ export default class DonateTrees extends Component {
           params.userForm.firstname + ' ' + params.userForm.lastname
       });
     }
-    if (params !== undefined && params.giftMethod === 'userType') {
+    if (params !== undefined && params.giftMethod === 'direct') {
       this.setState({ giftTreeCounterName: params.userForm.name });
     }
   }
@@ -395,17 +395,41 @@ export default class DonateTrees extends Component {
     let sendState;
     if (params !== undefined && params.giftMethod != null) {
       if (params.giftMethod === 'invitation') {
-        sendState = {
-          ...this.state.form,
-          giftInvitation: params.userForm,
-          giftMethod: params.giftMethod
-        };
-      } else if (params.giftMethod === 'userType') {
-        sendState = {
-          ...this.state.form,
-          giftTreecounter: params.userForm.id,
-          giftMethod: params.giftMethod
-        };
+        this.props.gift(
+          {
+            ...this.state.form,
+            giftInvitation: params.userForm,
+            giftMethod: params.giftMethod,
+            paymentResponse: {
+              gateway: 'offline',
+              accountName: 'offline_US',
+              isConfirmed: true,
+              confirmation: 'iOS referred payment'
+            },
+            amount: this.state.selectedAmount,
+            currency: this.state.selectedCurrency
+          },
+          this.props.selectedProject.id,
+          this.props.currentUserProfile
+        );
+      } else if (params.giftMethod === 'direct') {
+        this.props.gift(
+          {
+            ...this.state.form,
+            giftTreecounter: params.userForm.id,
+            giftMethod: params.giftMethod,
+            paymentResponse: {
+              gateway: 'offline',
+              accountName: 'offline_US',
+              isConfirmed: true,
+              confirmation: 'iOS referred payment'
+            },
+            amount: this.state.selectedAmount,
+            currency: this.state.selectedCurrency
+          },
+          this.props.selectedProject.id,
+          this.props.currentUserProfile
+        );
       }
       this.props.gift(
         {

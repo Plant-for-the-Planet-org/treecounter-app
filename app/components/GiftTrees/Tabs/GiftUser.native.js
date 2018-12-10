@@ -17,7 +17,7 @@ export default class GiftUser extends Component {
   }
   onNextClick() {
     if (this.state.selectedSuggestion) {
-      this.props.openProjects(this.state.selectedSuggestion, 'userType');
+      this.props.openProjects(this.state.selectedSuggestion, 'direct');
     }
   }
   render() {

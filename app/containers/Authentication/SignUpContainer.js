@@ -10,18 +10,15 @@ import { signUp } from '../../actions/signupActions';
 class SignUpContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.onClick = this.onClick.bind(this);
-  }
-
-  onClick(profileType, value) {
-    this.props.signUp(profileType, value);
+    this.state = { formValue: {} };
   }
 
   onSignUpClicked = profileType => {
     console.log(this.refs.signupContainer.refs.signupForm.validate());
-    let value = this.refs.signupContainer.refs.signupForm.getValue();
-    if (value) {
-      this.onClick(profileType, value);
+    let formValue = this.refs.signupContainer.refs.signupForm.getValue();
+    if (formValue) {
+      this.props.signUp(profileType, formValue);
+      this.setState({ formValue: formValue });
     }
   };
 
@@ -30,6 +27,7 @@ class SignUpContainer extends React.Component {
       <SignUp
         ref="signupContainer"
         onSignUpClicked={this.onSignUpClicked}
+        formValue={this.state.formValue}
         updateRoute={(routeName, id) =>
           this.props.route(routeName, id, this.props.navigation)
         }

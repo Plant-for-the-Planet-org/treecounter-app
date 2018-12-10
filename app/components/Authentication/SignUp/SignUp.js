@@ -76,13 +76,14 @@ export default class SignUp extends Component {
                 ref={'signupForm'}
                 type={signupFormSchema[Profiletype]}
                 options={schemaOptions[Profiletype]}
+                value={this.props.formValue}
               />
               <PrimaryButton
                 onClick={event => {
                   this.props.onSignUpClicked(Profiletype);
                   event.preventDefault();
                 }}
-                onClick={this.props.onSignUpClicked.bind(this, Profiletype)}
+                // onClick={this.props.onSignUpClicked.bind(this, Profiletype)}
               >
                 {i18n.t('label.signUp')}
               </PrimaryButton>
@@ -95,5 +96,6 @@ export default class SignUp extends Component {
 }
 
 SignUp.propTypes = {
-  onSignUpClicked: PropTypes.func.isRequired
+  onSignUpClicked: PropTypes.func.isRequired,
+  formValue: PropTypes.any
 };

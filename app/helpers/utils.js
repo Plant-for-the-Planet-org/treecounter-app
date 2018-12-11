@@ -7,6 +7,42 @@ import {
   education,
   competition
 } from '../assets';
+import _ from 'lodash';
+import React from 'react';
+//this will
+export const handleServerResponseError = function(
+  serverFormError,
+  formSchemaOptions
+) {
+  let newOptions = formSchemaOptions;
+  const data = serverFormError.response.data;
+  if (data && data.code == 400 && data.hasOwnProperty('errors')) {
+    for (let property in data.errors.children) {
+      if (
+        data.errors.children.hasOwnProperty(property) &&
+        data.errors.children[property].hasOwnProperty('errors')
+      ) {
+        newOptions = _.cloneDeep(formSchemaOptions);
+        newOptions.fields[property].hasError = true;
+        let oldValidator = newOptions.fields[property].error;
+        if (typeof oldValidator === 'function') {
+          newOptions.fields[property].error = (value, path, context) => {
+            let errorReturn = oldValidator(value, path, context);
+            if (!errorReturn) {
+              errorReturn = (
+                <View className="error-msg">
+                  {data.errors.children[property].errors.toString()}
+                </View>
+              );
+            }
+            return errorReturn;
+          };
+        }
+      }
+    }
+  }
+  return newOptions;
+};
 
 export function queryParamsToObject(queryParams) {
   let returnObject = {};

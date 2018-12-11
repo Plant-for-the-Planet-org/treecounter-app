@@ -7,10 +7,7 @@ import TextHeading from '../../Common/Heading/TextHeading';
 import CardLayout from '../../Common/Card';
 import SignUpType from './SignUpType';
 import { SignupJustMe, SignupOrganization } from '../../../assets';
-import {
-  schemaOptions,
-  signupFormSchema
-} from '../../../server/parsedSchemas/signup';
+import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
 
 let TCombForm = t.form.Form;
@@ -75,7 +72,7 @@ export default class SignUp extends Component {
               <TCombForm
                 ref={'signupForm'}
                 type={signupFormSchema[Profiletype]}
-                options={schemaOptions[Profiletype]}
+                options={this.props.schemaOptions[Profiletype]}
                 value={this.props.formValue}
               />
               <PrimaryButton
@@ -97,5 +94,6 @@ export default class SignUp extends Component {
 
 SignUp.propTypes = {
   onSignUpClicked: PropTypes.func.isRequired,
-  formValue: PropTypes.any
+  formValue: PropTypes.any,
+  schemaOptions: PropTypes.any
 };

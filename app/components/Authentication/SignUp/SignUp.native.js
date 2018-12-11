@@ -45,6 +45,7 @@ export default class SignUp extends Component {
               ref={'signupForm'}
               type={signupFormSchema[Profiletype]}
               options={schemaOptions[Profiletype]}
+              value={this.props.formValue}
             />
             <PrimaryButton
               onClick={() => {
@@ -74,7 +75,8 @@ export default class SignUp extends Component {
 SignUp.propTypes = {
   updateRoute: PropTypes.func,
   onSignUpClicked: PropTypes.func,
-  onError: PropTypes.func
+  onError: PropTypes.func,
+  formValue: PropTypes.any
 };
 
 // export const styles = StyleSheet.create({

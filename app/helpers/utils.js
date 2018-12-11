@@ -30,9 +30,9 @@ export const handleServerResponseError = function(
             let errorReturn = oldValidator(value, path, context);
             if (!errorReturn) {
               errorReturn = (
-                <View className="error-msg">
+                <div className="error-msg">
                   {data.errors.children[property].errors.toString()}
-                </View>
+                </div>
               );
             }
             return errorReturn;

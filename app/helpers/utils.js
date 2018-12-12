@@ -7,6 +7,53 @@ import {
   education,
   competition
 } from '../assets';
+import _ from 'lodash';
+import { getErrorView } from '../server/validator';
+
+/*
+/* This Will take server's error response and form SchemaOptions
+/* it returns new schema options based on the Server error else same schema options
+/* new options contains error field based on server options
+/* Eg options.field.email.hasError = true;
+*/
+export const handleServerResponseError = function(
+  serverFormError,
+  formSchemaOptions
+) {
+  let newOptions = formSchemaOptions;
+  const data =
+    serverFormError &&
+    serverFormError.response &&
+    serverFormError.response.data;
+  if (data && data.code == 400 && data.hasOwnProperty('errors')) {
+    for (let property in data.errors.children) {
+      if (
+        data.errors.children.hasOwnProperty(property) &&
+        data.errors.children[property].hasOwnProperty('errors')
+      ) {
+        newOptions = _.cloneDeep(formSchemaOptions);
+        newOptions.fields[property].hasError = true;
+        let oldValidator = newOptions.fields[property].error;
+        if (typeof oldValidator === 'function') {
+          newOptions.fields[property].error = (value, path, context) => {
+            let errorReturn = oldValidator(value, path, context);
+            if (!errorReturn) {
+              errorReturn = getErrorView(
+                data.errors.children[property].errors.toString()
+              );
+            } else {
+              //if there are some front end validation error then remove server error from schema options
+              newOptions.fields[property].hasError = false;
+              newOptions.fields[property].error = oldValidator;
+            }
+            return errorReturn;
+          };
+        }
+      }
+    }
+  }
+  return newOptions;
+};
 
 export function queryParamsToObject(queryParams) {
   let returnObject = {};

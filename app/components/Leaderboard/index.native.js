@@ -61,12 +61,16 @@ export default class Leaderboard extends Component {
   _getTableView = () => {
     console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
-    const { categoryInfo, sectionInfo } = this.props;
+    const { categoryInfo } = this.props;
     const selectedCategory =
       this.state.selectedCategory ||
       (categoryInfo &&
         categoryInfo.categoryKeys &&
         categoryInfo.categoryKeys[0]);
+    const selectedSorting =
+      this.state.timeSorting ||
+      (this.props.timePeriodsInfo &&
+        this.props.timePeriodsInfo.timePeriodsKeys[0]);
     if (selectedCategory)
       listItemsUI = (
         <CardLayout style={styles.cardStyle}>
@@ -74,17 +78,23 @@ export default class Leaderboard extends Component {
             source={categoryIcons[selectedCategory]['selected']}
             style={styles.cardImageStyle}
           />
+          <View style={styles.plantedContainer}>
+            <Text style={styles.plantedTextStyle}>
+              Planted on{' '}
+              {this.props.timePeriodsInfo.timePeriods[selectedSorting]}
+            </Text>
+            <View style={styles.plantedUnderline} />
+          </View>
+
           {this.props.queryResult ? (
             <ScrollView contentContainerStyle={{}} horizontal={false}>
-              <View style={{ width: '95%', padding: 10 }}>
+              <View style={{ width: '98%', padding: 10 }}>
                 {this.props.queryResult.map((result, index) => {
                   return (
                     <LeaderboardItem
                       key={'LeaderboardItem' + index}
                       onPress={this._handleItemPress}
-                      // iconUrl={
-                      //   categoryIcons[category][isSelected ? 'selected' : 'normal']
-                      // }
+                      image={result.image}
                       planted={result.planted}
                       target={result.target}
                       index={index}

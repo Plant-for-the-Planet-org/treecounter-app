@@ -27,10 +27,27 @@ export default (LeaderboardStyle = EStyleSheet.create({
     ...boxShadow,
     flex: 1,
     padding: 0,
+    justifyContent: 'flex-start',
     alignItems: 'center'
   },
   cardImageStyle: {
     top: -50
+  },
+  plantedContainer: {
+    top: -25,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  plantedTextStyle: {
+    marginBottom: 5,
+    fontSize: 20,
+    color: '$colorPrimaryAccent'
+  },
+  plantedUnderline: {
+    height: 2,
+    width: '50%',
+    backgroundColor: '$colorPrimaryAccent'
   },
   outerContainer: {
     alignItems: 'stretch',

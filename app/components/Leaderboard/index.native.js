@@ -91,7 +91,6 @@ export default class Leaderboard extends Component {
                       title={result.caption}
                       treeCounterId={result.treecounterId}
                       uri={result.uri}
-                      // onClick={this.changeCategory}
                     />
                   );
                 })}
@@ -136,9 +135,12 @@ export default class Leaderboard extends Component {
   };
 
   _getSortView = () => {
+    if (!this.props.categoryInfo) {
+      return null;
+    }
     sortView = (
       <View style={styles.sortView}>
-        <Text>Sort by time</Text>
+        <Text style={styles.itemViewText}>Sort by time</Text>
         <ReactNativeTooltipMenu
           ref={'tooltip'}
           labelContainerStyle={{
@@ -165,7 +167,7 @@ export default class Leaderboard extends Component {
   };
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <View style={styles.leaderBoardContainer}>
         <CategoryTypes
           categoryInfo={this.props.categoryInfo}
           sectionInfo={this.props.sectionInfo}

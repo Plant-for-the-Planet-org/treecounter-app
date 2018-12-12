@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import TouchableItem from '../Common/TouchableItem.native';
 import { PropTypes } from 'prop-types';
 import PlantedProgressBar from '../PlantProjects/PlantedProgressbar.native';
+import styles from '../../styles/leaderboard/leader_board';
 
 export default class LeaderboardItem extends Component {
   constructor(props) {
@@ -11,35 +12,18 @@ export default class LeaderboardItem extends Component {
 
   render() {
     return (
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginBottom: 10
-        }}
-      >
+      <View style={styles.itemView}>
         <View>
-          <Text>{this.props.index + 1}</Text>
+          <Text style={styles.itemViewText}>{this.props.index + 1}</Text>
         </View>
-        <View
-          style={{
-            marginLeft: 10
-          }}
-        >
+        <View style={[{ marginLeft: 10 }]}>
           <TouchableItem
             onPress={() =>
               this.props.onPress(this.props.treeCounterId, this.props.uri)
             }
             style={{ justifyContent: 'center' }}
           >
-            <Text
-              style={{
-                marginBottom: 10
-              }}
-            >
-              {this.props.title}
-            </Text>
+            <Text style={styles.itemViewText}>{this.props.title}</Text>
             <PlantedProgressBar
               countPlanted={this.props.planted}
               countTarget={this.props.target}

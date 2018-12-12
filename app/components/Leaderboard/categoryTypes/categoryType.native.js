@@ -14,9 +14,7 @@ export default class CategoryType extends Component {
   }
   render() {
     return (
-      <View
-        style={{ margin: 5, justifyContent: 'center', alignItems: 'center' }}
-      >
+      <View style={styles.categoryType}>
         <View>
           <TouchableItem
             onPress={this.handleClick}

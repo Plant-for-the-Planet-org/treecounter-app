@@ -7,9 +7,10 @@ const boxShadow = {
   shadowRadius: 12
 };
 export default (LeaderboardStyle = EStyleSheet.create({
+  leaderBoardContainer: { flex: 1, backgroundColor: '#fff' },
   tooltipContainerStyle: {
     ...boxShadow,
-    marginTop: -25,
+    marginTop: -35,
     marginRight: 10
   },
   sortView: {
@@ -90,5 +91,20 @@ export default (LeaderboardStyle = EStyleSheet.create({
     alignItems: 'flex-end',
     flex: 1,
     marginBottom: 10
+  },
+  itemView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10
+  },
+  itemViewText: {
+    marginBottom: 10,
+    color: '$lightTextColor'
+  },
+  categoryType: {
+    margin: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }));

@@ -3,10 +3,7 @@ import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import { Text, View, ImageBackground, ScrollView } from 'react-native';
 
-import {
-  schemaOptions,
-  signupFormSchema
-} from '../../../server/parsedSchemas/signup';
+import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import styles from '../../../styles/login.native';
@@ -44,7 +41,7 @@ export default class SignUp extends Component {
             <Form
               ref={'signupForm'}
               type={signupFormSchema[Profiletype]}
-              options={schemaOptions[Profiletype]}
+              options={this.props.schemaOptions[Profiletype]}
               value={this.props.formValue}
             />
             <PrimaryButton
@@ -76,11 +73,6 @@ SignUp.propTypes = {
   updateRoute: PropTypes.func,
   onSignUpClicked: PropTypes.func,
   onError: PropTypes.func,
-  formValue: PropTypes.any
+  formValue: PropTypes.any,
+  schemaOptions: PropTypes.any
 };
-
-// export const styles = StyleSheet.create({
-//   ...loginStyles,
-//   titleText: { ...loginStyles.titleText, width: 129 },
-//   titleTextUnderline: { ...loginStyles.titleTextUnderline, width: 119 }
-// });

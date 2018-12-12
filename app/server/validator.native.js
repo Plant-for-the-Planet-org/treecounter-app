@@ -25,3 +25,6 @@ export const commonValidator = function(value, path, context) {
     }
   }
 };
+export const getErrorView = function(text) {
+  return text;
+};

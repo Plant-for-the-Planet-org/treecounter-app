@@ -8,14 +8,23 @@ import {
   competition
 } from '../assets';
 import _ from 'lodash';
-import React from 'react';
-//this will
+import { getErrorView } from '../server/validator';
+
+/*
+/* This Will take server's error response and form SchemaOptions
+/* it returns new schema options based on the Server error else same schema options
+/* new options contains error field based on server options
+/* Eg options.field.email.hasError = true;
+*/
 export const handleServerResponseError = function(
   serverFormError,
   formSchemaOptions
 ) {
   let newOptions = formSchemaOptions;
-  const data = serverFormError.response.data;
+  const data =
+    serverFormError &&
+    serverFormError.response &&
+    serverFormError.response.data;
   if (data && data.code == 400 && data.hasOwnProperty('errors')) {
     for (let property in data.errors.children) {
       if (
@@ -29,11 +38,13 @@ export const handleServerResponseError = function(
           newOptions.fields[property].error = (value, path, context) => {
             let errorReturn = oldValidator(value, path, context);
             if (!errorReturn) {
-              errorReturn = (
-                <div className="error-msg">
-                  {data.errors.children[property].errors.toString()}
-                </div>
+              errorReturn = getErrorView(
+                data.errors.children[property].errors.toString()
               );
+            } else {
+              //if there are some front end validation error then remove server error from schema options
+              newOptions.fields[property].hasError = false;
+              newOptions.fields[property].error = oldValidator;
             }
             return errorReturn;
           };

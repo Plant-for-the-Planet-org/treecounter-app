@@ -80,7 +80,6 @@ export default class SignUp extends Component {
                   this.props.onSignUpClicked(Profiletype);
                   event.preventDefault();
                 }}
-                // onClick={this.props.onSignUpClicked.bind(this, Profiletype)}
               >
                 {i18n.t('label.signUp')}
               </PrimaryButton>

@@ -71,8 +71,8 @@ class SearchBar extends React.PureComponent {
     }
     let inputValue = this.state.text;
     if (
-      this.props.inputvalue &&
-      this.props.inputvalue.includes(this.state.text)
+      this.props.inputValue &&
+      this.props.inputValue.includes(this.state.text)
     ) {
       inputValue = this.props.inputValue;
     }

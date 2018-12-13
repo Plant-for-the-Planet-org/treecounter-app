@@ -77,6 +77,13 @@ class TreeCountCurrencySelector extends React.Component {
     return (
       <CardLayout>
         <View style={{ flexDirection: 'column' }}>
+          {this.props.giftTreeCounterName ? (
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+              <Text style={{ fontWeight: 'bold' }}>
+                Gift Trees to {this.props.giftTreeCounterName}
+              </Text>
+            </View>
+          ) : null}
           <View style={styles.selectedProjectRow}>
             <Text>{this.props.selectedProject.name}</Text>
           </View>

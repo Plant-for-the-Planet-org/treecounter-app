@@ -293,31 +293,20 @@ export default class DonateTrees extends Component {
       route.key === 'currency' &&
       this.props.selectedProject
         ? (screenToShow = (
-            <View>
-              {this.state.giftTreeCounterName ? (
-                <View
-                  style={{ flexDirection: 'row', justifyContent: 'center' }}
-                >
-                  <Text>Gift Trees to {this.state.giftTreeCounterName}</Text>
-                </View>
-              ) : null}
-
-              <TreeCountCurrencySelector
-                treeCost={selectedProject.treeCost}
-                rates={
-                  currencies.currency_rates[selectedProject.currency].rates
-                }
-                selectedProject={selectedProject}
-                fees={paymentFee}
-                showNextButton={true}
-                currencies={currencies.currency_names} // TODO: connect to data from API
-                selectedCurrency={this.determineDefaultCurrency()}
-                treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
-                onNextClick={() => this.Tab2validated()}
-                selectedTreeCount={this.state.selectedTreeCount}
-                onChange={this.handleTreeCountCurrencyChange}
-              />
-            </View>
+            <TreeCountCurrencySelector
+              treeCost={selectedProject.treeCost}
+              rates={currencies.currency_rates[selectedProject.currency].rates}
+              giftTreeCounterName={this.state.giftTreeCounterName}
+              selectedProject={selectedProject}
+              fees={paymentFee}
+              showNextButton={true}
+              currencies={currencies.currency_names} // TODO: connect to data from API
+              selectedCurrency={this.determineDefaultCurrency()}
+              treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
+              onNextClick={() => this.Tab2validated()}
+              selectedTreeCount={this.state.selectedTreeCount}
+              onChange={this.handleTreeCountCurrencyChange}
+            />
           ))
         : null;
     }

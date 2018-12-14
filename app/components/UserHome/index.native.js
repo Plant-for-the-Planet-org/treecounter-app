@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, View, Text, Dimensions, Image } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  Dimensions,
+  Image,
+  Linking
+} from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
 import styles from '../../styles/user-home';
@@ -131,15 +138,42 @@ export default class UserHome extends Component {
               />>
             </View>
             <View>
-              {'tpo' === userProfile.type &&
-              1 <=
-                userProfile.plantProjects
-                  .length ? null : userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
-              userProfile.synopsis2 ? (
+              {userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
+              userProfile.synopsis2 ||
+              userProfile.linkText ||
+              userProfile.url ? (
                 <CardLayout>
-                  <Text style={styles.footerText}>{userProfile.synopsis1}</Text>
+                  {userProfile.synopsis1 ? (
+                    <Text style={styles.footerText}>
+                      {userProfile.synopsis1}
+                    </Text>
+                  ) : null}
+                  {userProfile.synopsis2 ? (
+                    <Text style={styles.footerText}>
+                      {userProfile.synopsis2}
+                    </Text>
+                  ) : null}
+                  {userProfile.linkText ? (
+                    <Text style={styles.footerText}>
+                      {userProfile.linkText}
+                    </Text>
+                  ) : null}
+                  {userProfile.url ? (
+                    <Text
+                      style={styles.linkText}
+                      onPress={() => this._goToURL(userProfile.url)}
+                    >
+                      {userProfile.url}
+                    </Text>
+                  ) : null}
                 </CardLayout>
               ) : null}
+            </View>
+            <View>
+              {'tpo' === userProfile.type &&
+              1 <= userProfile.plantProjects.length
+                ? null
+                : null}
             </View>
           </ScrollView>
         );
@@ -155,6 +189,16 @@ export default class UserHome extends Component {
         return null;
     }
   };
+
+  _goToURL(url) {
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log("Don't know how to open URI: " + url);
+      }
+    });
+  }
 
   render() {
     return (

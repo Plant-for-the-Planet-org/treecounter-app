@@ -11,8 +11,12 @@ import {
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import SelectPlantProject from '../../components/SelectPlantProject';
 import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper.native';
+import { fetchCurrencies } from '../../actions/currencies';
 
 class SelectPlantProjectContainer extends Component {
+  componentDidMount() {
+    this.props.fetchCurrencies();
+  }
   render() {
     console.log('select plant props', this.props);
     return (
@@ -44,7 +48,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ selectPlantProjectAction }, dispatch);
+  return bindActionCreators(
+    { selectPlantProjectAction, fetchCurrencies },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -55,5 +62,6 @@ SelectPlantProjectContainer.propTypes = {
   plantProjects: PropTypes.array,
   currencies: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
+  fetchCurrencies: PropTypes.func
 };

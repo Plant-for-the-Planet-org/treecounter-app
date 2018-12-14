@@ -96,7 +96,10 @@ export default class RecieptTabsView extends Component {
                 ref={this.setIndividualDonateReceipt}
                 type={receiptIndividualFormSchema}
                 options={individualSchemaOptions}
-                value={this.props.currentUserProfile}
+                value={
+                  this.props.currentUserProfile ||
+                  this.props.formValue['receiptIndividual']
+                }
               />
               {this.props.showNextButton ? (
                 <PrimaryButton onClick={() => this.onNextClickIndividual()}>
@@ -114,7 +117,10 @@ export default class RecieptTabsView extends Component {
                 ref={this.setCompanyDonateReceipt}
                 type={receiptCompanyFormSchema}
                 options={companySchemaOptions}
-                value={this.props.currentUserProfile}
+                value={
+                  this.props.currentUserProfile ||
+                  this.props.formValue['receiptCompany']
+                }
               />
               {this.props.showNextButton ? (
                 <PrimaryButton onClick={() => this.onNextClickCompany()}>

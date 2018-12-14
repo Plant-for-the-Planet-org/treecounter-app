@@ -347,39 +347,35 @@ export default class DonateTrees extends Component {
             {pageHeadings[this.state.pageIndex].description}
           </DescriptionHeading>
         </TextHeading>
+        {this.props.paymentStatus &&
+          this.props.paymentStatus.message && (
+            <div className="payment-success">
+              <div className={'gap'} />
+              <TextBlock strong={true}>
+                {'Error ' + this.props.paymentStatus.message}
+              </TextBlock>
+            </div>
+          )}
         <CardLayout className="tpo-footer-card-layout">
-          <form onSubmit={this.checkValidation[2]}>
-            {this.props.paymentStatus && this.props.paymentStatus.status ? (
-              <div className="payment-success">
-                <img src={check_green} />
-                <div className={'gap'} />
-                <TextBlock strong={true}>
-                  {i18n.t('label.thankyou_planting', {
-                    count: this.state.treeCount
-                  })}
-                </TextBlock>
-                <div className={'gap'} />
-                <TextBlock>
-                  <InlineLink uri={'app_userHome'} caption={'Return Home'} />
-                </TextBlock>
-              </div>
-            ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
-              <div className="payment-success">
-                <img src={check_green} />
-                <div className={'gap'} />
-                <TextBlock strong={true}>
-                  {'Error ' + this.props.paymentStatus.message}
-                </TextBlock>
-                <div className={'gap'} />
-                <TextBlock>
-                  <PrimaryButton onClick={this.props.paymentClear}>
-                    Try again
-                  </PrimaryButton>
-                </TextBlock>
-              </div>
-            ) : (
+          {this.props.paymentStatus && this.props.paymentStatus.status ? (
+            <div className="payment-success">
+              <img src={check_green} />
+              <div className={'gap'} />
+              <TextBlock strong={true}>
+                {i18n.t('label.thankyou_planting', {
+                  count: this.state.treeCount
+                })}
+              </TextBlock>
+              <div className={'gap'} />
+              <TextBlock>
+                <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+              </TextBlock>
+            </div>
+          ) : (
+            <form onSubmit={this.checkValidation[2]}>
               <div className="donate-tress__container">
                 <ContentHeader caption={headings[this.state.pageIndex]} />
+
                 <Slider {...settings} ref="slider">
                   <div>
                     {this.props.selectedTpo ? (
@@ -428,14 +424,20 @@ export default class DonateTrees extends Component {
                           ref="donateReceipt"
                           type={receiptIndividualFormSchema}
                           options={individualSchemaOptions}
-                          value={this.props.currentUserProfile}
+                          value={
+                            this.props.currentUserProfile ||
+                            this.state.form['receiptIndividual']
+                          }
                         />
                       ) : (
                         <TCombForm
                           ref="donateReceipt"
                           type={receiptCompanyFormSchema}
                           options={companySchemaOptions}
-                          value={this.props.currentUserProfile}
+                          value={
+                            this.props.currentUserProfile ||
+                            this.state.form['receiptCompany']
+                          }
                         />
                       )}
                     </Tabs>
@@ -479,8 +481,8 @@ export default class DonateTrees extends Component {
                   </div>
                 </Slider>
               </div>
-            )}
-          </form>
+            </form>
+          )}
         </CardLayout>
       </div>
     );

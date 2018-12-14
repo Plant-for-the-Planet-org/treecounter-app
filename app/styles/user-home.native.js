@@ -27,6 +27,10 @@ export default (buttonStyles = EStyleSheet.create({
     color: '#686060',
     padding: 10
   },
+  linkText: {
+    color: '$colorPrimaryAccent',
+    padding: 10
+  },
   circle: {
     borderRadius: 35,
     borderWidth: 5,

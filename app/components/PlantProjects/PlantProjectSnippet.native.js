@@ -9,6 +9,7 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import { getImageUrl } from '../../actions/apiRouting';
 import { targetPlanted, tick } from '../../assets';
 import TouchableItem from '../Common/TouchableItem.native';
+import PlantedProgressBar from './PlantedProgressbar.native';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -61,11 +62,17 @@ class PlantProjectSnippet extends React.Component {
       geoLocation
     } = this.props.plantProject;
     let projectImage = null;
-    let treePlantedRatio = countPlanted / countTarget;
-    let treeCountWidth = 100 - treePlantedRatio * 100;
-    if (treeCountWidth < 0) {
+    let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
+    treePlantedRatio = parseFloat(treePlantedRatio);
+    let treeCountWidth;
+    if (treePlantedRatio > 1) {
       treeCountWidth = 100;
+    } else if (treePlantedRatio < 0) {
+      treeCountWidth = 0;
+    } else {
+      treeCountWidth = treePlantedRatio * 100;
     }
+
     if (imageFile) {
       projectImage = { image: imageFile };
     } else {
@@ -89,8 +96,12 @@ class PlantProjectSnippet extends React.Component {
     };
     return (
       <TouchableItem
-        onPress={() =>
-          this.props.onMoreClick ? this.props.onMoreClick(id) : null
+        onPress={
+          !this.props.onMoreClick
+            ? null
+            : () => {
+                this.props.onMoreClick(id);
+              }
         }
       >
         <CardLayout
@@ -113,60 +124,27 @@ class PlantProjectSnippet extends React.Component {
           )}
 
           <View style={styles.projectSpecsContainer}>
-            <View style={styles.treeCounterContainer}>
-              <View style={[styles.treePlantedContainer]}>
-                <View
-                  style={[styles.treePlantedChildContainer]}
-                  style={
-                    treeCountWidth > 0
-                      ? {
-                          height: '100%',
-                          flexDirection: 'row',
-                          backgroundColor: '#b9d384',
-                          borderColor: '#b9d384',
-                          width: treeCountWidth + '%',
-                          paddingRight: 10,
-                          padding: 5,
-                          borderTopRightRadius: 10,
-                          borderBottomRightRadius: 10,
-                          borderWidth: 0.5
-                        }
-                      : {
-                          height: '100%',
-                          flexDirection: 'row',
-                          padding: 5
-                        }
-                  }
-                >
-                  <View style={{ width: '100%', flexDirection: 'row' }}>
-                    <Text style={styles.treePlantedtextPlanted}>
-                      {specsProps.countPlanted}
-                    </Text>
-                    <Text style={styles.treePlantedtext}>
-                      {i18n.t('label.trees')}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-
-              <View style={[styles.targetContainer]}>
-                <Text style={styles.treePlantedtext}>
-                  {specsProps.countTarget.toLocaleString('en')}
-                </Text>
-                <Image
-                  source={targetPlanted}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
+            <PlantedProgressBar
+              countPlanted={specsProps.countPlanted}
+              countTarget={specsProps.countTarget}
+            />
             <View style={styles.projectNameContainer}>
-              <Text style={styles.project_teaser__contentText}>
+              <Text
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={styles.project_teaser__contentText}
+              >
                 {teaserProps.projectName}
               </Text>
               {teaserProps.isCertified ? (
                 <Image
                   source={tick}
-                  style={{ width: 15, height: 15, marginLeft: 5, marginTop: 2 }}
+                  style={{
+                    width: 15,
+                    height: 15,
+                    marginLeft: 5,
+                    maxWidth: '10%'
+                  }}
                 />
               ) : null}
             </View>
@@ -196,7 +174,7 @@ class PlantProjectSnippet extends React.Component {
                 <Text
                   style={styles.byOrgText}
                   ellipsizeMode="tail"
-                  numberOfLines={2}
+                  numberOfLines={1}
                 >
                   {teaserProps.tpoName}
                 </Text>

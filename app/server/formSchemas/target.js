@@ -4,14 +4,14 @@ export default {
   properties: {
     countTarget: {
       type: 'integer',
-      title: 'Total Tree Target',
+      title: 'label.target_count',
       icon: null,
       help: null,
       propertyOrder: 1
     },
     targetYear: {
       type: 'integer',
-      title: 'Target Year',
+      title: 'label.target_year',
       icon: null,
       help: null,
       propertyOrder: 2

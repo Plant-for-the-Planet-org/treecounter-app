@@ -16,7 +16,7 @@ export default {
       properties: {
         firstname: {
           type: 'string',
-          title: 'First name',
+          title: 'label.firstname',
           attr: { maxlength: 50 },
           icon: null,
           help: null,
@@ -25,7 +25,7 @@ export default {
         },
         lastname: {
           type: 'string',
-          title: 'Last Name',
+          title: 'label.lastname',
           attr: { maxlength: 50 },
           icon: null,
           help: null,
@@ -34,7 +34,7 @@ export default {
         },
         email: {
           type: 'string',
-          title: 'Email',
+          title: 'label.email',
           attr: { maxlength: 50 },
           icon: null,
           help: null,
@@ -58,21 +58,21 @@ export default {
     },
     treeCount: {
       type: 'number',
-      title: 'Tree Count',
+      title: 'label.tree_count',
       icon: null,
       help: null,
       propertyOrder: 4
     },
     amount: {
       type: 'number',
-      title: 'Amount',
+      title: 'label.amount',
       icon: null,
       help: null,
       propertyOrder: 5
     },
     currency: {
       type: 'string',
-      title: 'Currency',
+      title: 'label.currency',
       attr: { maxlength: 3 },
       icon: null,
       help: null,
@@ -81,7 +81,7 @@ export default {
     },
     paymentResponse: {
       type: 'hidden',
-      title: 'Payment Method',
+      title: 'label.payment_method',
       widget: 'hidden',
       icon: null,
       help: null,
@@ -100,7 +100,7 @@ export default {
       properties: {
         firstname: {
           type: 'string',
-          title: 'First name',
+          title: 'label.firstname',
           attr: { maxlength: 50, pattern: '.{2,}' },
           pattern: '.{2,}',
           icon: null,
@@ -111,7 +111,7 @@ export default {
         },
         lastname: {
           type: 'string',
-          title: 'Last Name',
+          title: 'label.lastname',
           attr: { maxlength: 50, pattern: '.{2,}' },
           pattern: '.{2,}',
           icon: null,
@@ -122,7 +122,7 @@ export default {
         },
         email: {
           type: 'string',
-          title: 'Email',
+          title: 'label.email',
           attr: { maxlength: 50 },
           widget: 'email',
           icon: null,
@@ -132,7 +132,7 @@ export default {
         },
         address: {
           type: 'string',
-          title: 'Address',
+          title: 'label.address',
           attr: { maxlength: 255 },
           icon: null,
           help: null,
@@ -141,7 +141,7 @@ export default {
         },
         zipCode: {
           type: 'string',
-          title: 'Zip Code',
+          title: 'label.zipCode',
           attr: { maxlength: 15 },
           icon: null,
           help: null,
@@ -150,7 +150,7 @@ export default {
         },
         city: {
           type: 'string',
-          title: 'City',
+          title: 'label.city',
           attr: { maxlength: 255 },
           icon: null,
           help: null,
@@ -673,7 +673,7 @@ export default {
             'Zimbabwe'
           ],
           type: 'string',
-          title: 'Country',
+          title: 'label.country',
           icon: null,
           help: null,
           propertyOrder: 7
@@ -698,7 +698,7 @@ export default {
       properties: {
         companyname: {
           type: 'string',
-          title: 'Organization',
+          title: 'label.company_or_orga_name',
           attr: { maxlength: 255 },
           icon: null,
           help: null,
@@ -707,7 +707,7 @@ export default {
         },
         firstname: {
           type: 'string',
-          title: 'First Name',
+          title: 'label.contact_firstname',
           attr: { maxlength: 50, pattern: '.{2,}' },
           pattern: '.{2,}',
           icon: null,
@@ -718,7 +718,7 @@ export default {
         },
         lastname: {
           type: 'string',
-          title: 'Last Name',
+          title: 'label.contact_lastname',
           attr: { maxlength: 50, pattern: '.{2,}' },
           pattern: '.{2,}',
           icon: null,
@@ -729,7 +729,7 @@ export default {
         },
         email: {
           type: 'string',
-          title: 'Email',
+          title: 'label.email',
           attr: { maxlength: 50 },
           widget: 'email',
           icon: null,
@@ -739,7 +739,7 @@ export default {
         },
         address: {
           type: 'string',
-          title: 'Address',
+          title: 'label.address',
           attr: { maxlength: 255 },
           icon: null,
           help: null,
@@ -748,7 +748,7 @@ export default {
         },
         zipCode: {
           type: 'string',
-          title: 'Zip Code',
+          title: 'label.zipCode',
           attr: { maxlength: 15 },
           icon: null,
           help: null,
@@ -757,7 +757,7 @@ export default {
         },
         city: {
           type: 'string',
-          title: 'City',
+          title: 'label.city',
           attr: { maxlength: 255 },
           icon: null,
           help: null,
@@ -1280,7 +1280,7 @@ export default {
             'Zimbabwe'
           ],
           type: 'string',
-          title: 'Country',
+          title: 'label.country',
           icon: null,
           help: null,
           propertyOrder: 8

@@ -1,11 +1,7 @@
 export default {
   tpo: {
     profile: {
-      values: {
-        country: 'MC',
-        mayPublish: true,
-        mayContact: true
-      },
+      values: { country: 'MC', mayPublish: true, mayContact: true },
       schema: {
         title: 'tpo',
         type: 'object',
@@ -13,36 +9,36 @@ export default {
           name: {
             type: 'string',
             title: 'label.company_or_orga_name',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 1
           },
           address: {
             type: 'string',
             title: 'label.address',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 2
           },
           zipCode: {
             type: 'string',
             title: 'label.zipCode',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 3
           },
           city: {
             type: 'string',
             title: 'label.city',
-            attr: {
-              maxlength: 150
-            },
+            attr: { maxlength: 150 },
+            icon: null,
+            help: null,
             maxLength: 150,
             propertyOrder: 4
           },
@@ -563,27 +559,31 @@ export default {
             ],
             type: 'string',
             title: 'label.country',
-            attr: {
-              maxlength: 2
-            },
+            attr: { maxlength: 2 },
+            icon: null,
+            help: null,
             propertyOrder: 5
           },
           mayPublish: {
             type: 'boolean',
             title: 'label.mayPublish',
+            icon: null,
+            help: null,
             propertyOrder: 6
           },
           mayContact: {
             type: 'boolean',
             title: 'label.mayContact',
+            icon: null,
+            help: null,
             propertyOrder: 7
           },
           phone: {
             type: 'string',
             title: 'label.phone',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 8
           }
@@ -603,6 +603,8 @@ export default {
             type: 'string',
             title: 'label.upload_profile_picture',
             widget: 'file',
+            icon: null,
+            help: null,
             propertyOrder: 1
           }
         },
@@ -620,23 +622,33 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
+            widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
+            widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           synopsis1: {
             type: 'string',
             title: 'label.synopsis1',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 3
           },
           synopsis2: {
             type: 'string',
             title: 'label.synopsis2',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 4
           }
         },
@@ -645,9 +657,7 @@ export default {
       }
     },
     password: {
-      values: {
-        password: []
-      },
+      values: { password: [] },
       schema: {
         title: 'profile_password',
         type: 'object',
@@ -655,7 +665,8 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
-            widget: 'password',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           password: {
@@ -665,23 +676,24 @@ export default {
               first: {
                 type: 'string',
                 title: 'label.password',
-                attr: {
-                  class: 'password-field'
-                },
+                attr: { class: 'password-field' },
                 widget: 'password',
                 icon: 'key',
+                help: null,
                 propertyOrder: 1
               },
               second: {
                 type: 'string',
                 title: 'label.password_repeat',
-                attr: {
-                  class: 'password-field'
-                },
+                attr: { class: 'password-field' },
                 widget: 'password',
+                icon: null,
+                help: null,
                 propertyOrder: 2
               }
             },
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
@@ -693,11 +705,7 @@ export default {
   },
   individual: {
     profile: {
-      values: {
-        country: 'MC',
-        mayPublish: false,
-        mayContact: false
-      },
+      values: { country: 'MC', mayPublish: false, mayContact: false },
       schema: {
         title: 'treedonor',
         type: 'object',
@@ -705,63 +713,63 @@ export default {
           gender: {
             type: 'string',
             title: 'label.gender',
-            attr: {
-              maxlength: 1
-            },
+            attr: { maxlength: 1 },
+            icon: null,
+            help: null,
             maxLength: 1,
             propertyOrder: 1
           },
           title: {
             type: 'string',
             title: 'label.title',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 2
           },
           firstname: {
             type: 'string',
             title: 'label.firstname',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 3
           },
           lastname: {
             type: 'string',
             title: 'label.lastname',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 4
           },
           address: {
             type: 'string',
             title: 'label.address',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 5
           },
           zipCode: {
             type: 'string',
             title: 'label.zipCode',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 6
           },
           city: {
             type: 'string',
             title: 'label.city',
-            attr: {
-              maxlength: 150
-            },
+            attr: { maxlength: 150 },
+            icon: null,
+            help: null,
             maxLength: 150,
             propertyOrder: 7
           },
@@ -1282,27 +1290,31 @@ export default {
             ],
             type: 'string',
             title: 'label.country',
-            attr: {
-              maxlength: 2
-            },
+            attr: { maxlength: 2 },
+            icon: null,
+            help: null,
             propertyOrder: 8
           },
           mayPublish: {
             type: 'boolean',
             title: 'label.mayPublish',
+            icon: null,
+            help: null,
             propertyOrder: 9
           },
           mayContact: {
             type: 'boolean',
             title: 'label.mayContact',
+            icon: null,
+            help: null,
             propertyOrder: 10
           },
           phone: {
             type: 'string',
             title: 'label.phone',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 11
           }
@@ -1311,46 +1323,6 @@ export default {
         submit_url: '',
         submit_method: 'POST'
       }
-    },
-    project: {
-      values: [],
-      schema: {
-        title: 'profile_image',
-        type: 'object',
-        properties: {
-          contributionMeasurements: {
-            type: 'array',
-            title: 'label.add_measurements',
-            items: {
-              title: 'prototype',
-              type: 'object',
-              properties: {
-                diameter: {
-                  type: 'integer',
-                  title: 'label.tree_diameter',
-                  propertyOrder: 1
-                },
-                height: {
-                  type: 'integer',
-                  title: 'label.tree_height',
-                  propertyOrder: 2
-                },
-                measurementDate: {
-                  type: 'string',
-                  title: 'label.measurement_date',
-                  widget: 'date',
-                  propertyOrder: 3
-                }
-              },
-              required: ['diameter', 'height', 'measurementDate']
-            },
-            propertyOrder: 8
-          }
-        }
-      },
-      required: ['imageFile'],
-      submit_url: '',
-      submit_method: 'POST'
     },
     image: {
       values: [],
@@ -1362,6 +1334,8 @@ export default {
             type: 'string',
             title: 'label.upload_profile_picture',
             widget: 'file',
+            icon: null,
+            help: null,
             propertyOrder: 1
           }
         },
@@ -1379,23 +1353,33 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
+            widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
+            widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           synopsis1: {
             type: 'string',
             title: 'label.synopsis1',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 3
           },
           synopsis2: {
             type: 'string',
             title: 'label.synopsis2',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 4
           }
         },
@@ -1404,9 +1388,7 @@ export default {
       }
     },
     password: {
-      values: {
-        password: []
-      },
+      values: { password: [] },
       schema: {
         title: 'profile_password',
         type: 'object',
@@ -1414,8 +1396,9 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
-            propertyOrder: 1,
-            widget: 'password'
+            icon: null,
+            help: null,
+            propertyOrder: 1
           },
           password: {
             title: 'password',
@@ -1424,23 +1407,24 @@ export default {
               first: {
                 type: 'string',
                 title: 'label.password',
-                attr: {
-                  class: 'password-field'
-                },
+                attr: { class: 'password-field' },
                 widget: 'password',
                 icon: 'key',
+                help: null,
                 propertyOrder: 1
               },
               second: {
                 type: 'string',
                 title: 'label.password_repeat',
-                attr: {
-                  class: 'password-field'
-                },
+                attr: { class: 'password-field' },
                 widget: 'password',
+                icon: null,
+                help: null,
                 propertyOrder: 2
               }
             },
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
@@ -1452,11 +1436,7 @@ export default {
   },
   company: {
     profile: {
-      values: {
-        country: 'MC',
-        mayPublish: false,
-        mayContact: false
-      },
+      values: { country: 'MC', mayPublish: false, mayContact: false },
       schema: {
         title: 'treedonor',
         type: 'object',
@@ -1464,43 +1444,45 @@ export default {
           name: {
             type: 'string',
             title: 'label.company_or_orga_name',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 1
           },
           subType: {
-            enum: ['Other'],
-            enum_titles: ['0'],
+            enum: ['company-other'],
+            enum_titles: ['Other'],
             type: 'string',
             title: 'subType',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           address: {
             type: 'string',
             title: 'label.address',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 3
           },
           zipCode: {
             type: 'string',
             title: 'label.zipCode',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 4
           },
           city: {
             type: 'string',
             title: 'label.city',
-            attr: {
-              maxlength: 150
-            },
+            attr: { maxlength: 150 },
+            icon: null,
+            help: null,
             maxLength: 150,
             propertyOrder: 5
           },
@@ -2021,27 +2003,31 @@ export default {
             ],
             type: 'string',
             title: 'label.country',
-            attr: {
-              maxlength: 2
-            },
+            attr: { maxlength: 2 },
+            icon: null,
+            help: null,
             propertyOrder: 6
           },
           mayPublish: {
             type: 'boolean',
             title: 'label.mayPublish',
+            icon: null,
+            help: null,
             propertyOrder: 7
           },
           mayContact: {
             type: 'boolean',
             title: 'label.mayContact',
+            icon: null,
+            help: null,
             propertyOrder: 8
           },
           phone: {
             type: 'string',
             title: 'label.phone',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 9
           }
@@ -2061,6 +2047,8 @@ export default {
             type: 'string',
             title: 'label.upload_profile_picture',
             widget: 'file',
+            icon: null,
+            help: null,
             propertyOrder: 1
           }
         },
@@ -2078,23 +2066,33 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
+            widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
+            widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           synopsis1: {
             type: 'string',
             title: 'label.synopsis1',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 3
           },
           synopsis2: {
             type: 'string',
             title: 'label.synopsis2',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 4
           }
         },
@@ -2103,9 +2101,7 @@ export default {
       }
     },
     password: {
-      values: {
-        password: []
-      },
+      values: { password: [] },
       schema: {
         title: 'profile_password',
         type: 'object',
@@ -2113,8 +2109,9 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
-            propertyOrder: 1,
-            widget: 'password'
+            icon: null,
+            help: null,
+            propertyOrder: 1
           },
           password: {
             title: 'password',
@@ -2123,23 +2120,24 @@ export default {
               first: {
                 type: 'string',
                 title: 'label.password',
-                attr: {
-                  class: 'password-field'
-                },
+                attr: { class: 'password-field' },
                 widget: 'password',
                 icon: 'key',
+                help: null,
                 propertyOrder: 1
               },
               second: {
                 type: 'string',
                 title: 'label.password_repeat',
-                attr: {
-                  class: 'password-field'
-                },
+                attr: { class: 'password-field' },
                 widget: 'password',
+                icon: null,
+                help: null,
                 propertyOrder: 2
               }
             },
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
@@ -2151,11 +2149,7 @@ export default {
   },
   education: {
     profile: {
-      values: {
-        country: 'MC',
-        mayPublish: false,
-        mayContact: false
-      },
+      values: { country: 'MC', mayPublish: false, mayContact: false },
       schema: {
         title: 'treedonor',
         type: 'object',
@@ -2163,43 +2157,50 @@ export default {
           name: {
             type: 'string',
             title: 'label.company_or_orga_name',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 1
           },
           subType: {
-            enum: ['primary', 'secondary', 'higher', 'other'],
-            enum_titles: ['0', '1', '2', '3'],
+            enum: [
+              'education-primary',
+              'education-secondary',
+              'education-higher',
+              'education-other'
+            ],
+            enum_titles: ['Primary', 'Secondary', 'Higher', 'Other'],
             type: 'string',
             title: 'subType',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           address: {
             type: 'string',
             title: 'label.address',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 3
           },
           zipCode: {
             type: 'string',
             title: 'label.zipCode',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 4
           },
           city: {
             type: 'string',
             title: 'label.city',
-            attr: {
-              maxlength: 150
-            },
+            attr: { maxlength: 150 },
+            icon: null,
+            help: null,
             maxLength: 150,
             propertyOrder: 5
           },
@@ -2720,27 +2721,31 @@ export default {
             ],
             type: 'string',
             title: 'label.country',
-            attr: {
-              maxlength: 2
-            },
+            attr: { maxlength: 2 },
+            icon: null,
+            help: null,
             propertyOrder: 6
           },
           mayPublish: {
             type: 'boolean',
             title: 'label.mayPublish',
+            icon: null,
+            help: null,
             propertyOrder: 7
           },
           mayContact: {
             type: 'boolean',
             title: 'label.mayContact',
+            icon: null,
+            help: null,
             propertyOrder: 8
           },
           phone: {
             type: 'string',
             title: 'label.phone',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 9
           }
@@ -2760,6 +2765,8 @@ export default {
             type: 'string',
             title: 'label.upload_profile_picture',
             widget: 'file',
+            icon: null,
+            help: null,
             propertyOrder: 1
           }
         },
@@ -2777,23 +2784,33 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
+            widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
+            widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           synopsis1: {
             type: 'string',
             title: 'label.synopsis1',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 3
           },
           synopsis2: {
             type: 'string',
             title: 'label.synopsis2',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 4
           }
         },
@@ -2802,9 +2819,7 @@ export default {
       }
     },
     password: {
-      values: {
-        password: []
-      },
+      values: { password: [] },
       schema: {
         title: 'profile_password',
         type: 'object',
@@ -2812,8 +2827,9 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
-            propertyOrder: 1,
-            widget: 'password'
+            icon: null,
+            help: null,
+            propertyOrder: 1
           },
           password: {
             title: 'password',
@@ -2822,23 +2838,24 @@ export default {
               first: {
                 type: 'string',
                 title: 'label.password',
-                attr: {
-                  class: 'password-field'
-                },
+                attr: { class: 'password-field' },
                 widget: 'password',
                 icon: 'key',
+                help: null,
                 propertyOrder: 1
               },
               second: {
                 type: 'string',
                 title: 'label.password_repeat',
-                attr: {
-                  class: 'password-field'
-                },
+                attr: { class: 'password-field' },
                 widget: 'password',
+                icon: null,
+                help: null,
                 propertyOrder: 2
               }
             },
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
@@ -2850,11 +2867,7 @@ export default {
   },
   organization: {
     profile: {
-      values: {
-        country: 'MC',
-        mayPublish: false,
-        mayContact: false
-      },
+      values: { country: 'MC', mayPublish: false, mayContact: false },
       schema: {
         title: 'treedonor',
         type: 'object',
@@ -2862,43 +2875,50 @@ export default {
           name: {
             type: 'string',
             title: 'label.company_or_orga_name',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 1
           },
           subType: {
-            enum: ['Non Profit', 'Service Club', 'Political Party', 'Other'],
-            enum_titles: ['0', '1', '2', '3'],
+            enum: ['0', '1', '2', '3'],
+            enum_titles: [
+              'Non Profit',
+              'Service Club',
+              'Political Party',
+              'Other'
+            ],
             type: 'string',
             title: 'subType',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           address: {
             type: 'string',
             title: 'label.address',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 3
           },
           zipCode: {
             type: 'string',
             title: 'label.zipCode',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 4
           },
           city: {
             type: 'string',
             title: 'label.city',
-            attr: {
-              maxlength: 150
-            },
+            attr: { maxlength: 150 },
+            icon: null,
+            help: null,
             maxLength: 150,
             propertyOrder: 5
           },
@@ -3419,27 +3439,31 @@ export default {
             ],
             type: 'string',
             title: 'label.country',
-            attr: {
-              maxlength: 2
-            },
+            attr: { maxlength: 2 },
+            icon: null,
+            help: null,
             propertyOrder: 6
           },
           mayPublish: {
             type: 'boolean',
             title: 'label.mayPublish',
+            icon: null,
+            help: null,
             propertyOrder: 7
           },
           mayContact: {
             type: 'boolean',
             title: 'label.mayContact',
+            icon: null,
+            help: null,
             propertyOrder: 8
           },
           phone: {
             type: 'string',
             title: 'label.phone',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 9
           }
@@ -3459,6 +3483,8 @@ export default {
             type: 'string',
             title: 'label.upload_profile_picture',
             widget: 'file',
+            icon: null,
+            help: null,
             propertyOrder: 1
           }
         },
@@ -3476,23 +3502,33 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
+            widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
+            widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           synopsis1: {
             type: 'string',
             title: 'label.synopsis1',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 3
           },
           synopsis2: {
             type: 'string',
             title: 'label.synopsis2',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 4
           }
         },
@@ -3501,9 +3537,7 @@ export default {
       }
     },
     password: {
-      values: {
-        password: []
-      },
+      values: { password: [] },
       schema: {
         title: 'profile_password',
         type: 'object',
@@ -3511,6 +3545,8 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           password: {
@@ -3520,23 +3556,24 @@ export default {
               first: {
                 type: 'string',
                 title: 'label.password',
-                attr: {
-                  class: 'password-field'
-                },
+                attr: { class: 'password-field' },
                 widget: 'password',
                 icon: 'key',
+                help: null,
                 propertyOrder: 1
               },
               second: {
                 type: 'string',
                 title: 'label.password_repeat',
-                attr: {
-                  class: 'password-field'
-                },
+                attr: { class: 'password-field' },
                 widget: 'password',
+                icon: null,
+                help: null,
                 propertyOrder: 2
               }
             },
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
@@ -3548,11 +3585,7 @@ export default {
   },
   government: {
     profile: {
-      values: {
-        country: 'MC',
-        mayPublish: false,
-        mayContact: false
-      },
+      values: { country: 'MC', mayPublish: false, mayContact: false },
       schema: {
         title: 'treedonor',
         type: 'object',
@@ -3560,43 +3593,45 @@ export default {
           name: {
             type: 'string',
             title: 'label.company_or_orga_name',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 1
           },
           subType: {
-            enum: ['City', 'State', 'Country'],
-            enum_titles: ['0', '1', '2'],
+            enum: ['government-city', 'government-state', 'government-country'],
+            enum_titles: ['City', 'State', 'Country'],
             type: 'string',
             title: 'subType',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           address: {
             type: 'string',
             title: 'label.address',
-            attr: {
-              maxlength: 255
-            },
+            attr: { maxlength: 255 },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 3
           },
           zipCode: {
             type: 'string',
             title: 'label.zipCode',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 4
           },
           city: {
             type: 'string',
             title: 'label.city',
-            attr: {
-              maxlength: 150
-            },
+            attr: { maxlength: 150 },
+            icon: null,
+            help: null,
             maxLength: 150,
             propertyOrder: 5
           },
@@ -4117,27 +4152,31 @@ export default {
             ],
             type: 'string',
             title: 'label.country',
-            attr: {
-              maxlength: 2
-            },
+            attr: { maxlength: 2 },
+            icon: null,
+            help: null,
             propertyOrder: 6
           },
           mayPublish: {
             type: 'boolean',
             title: 'label.mayPublish',
+            icon: null,
+            help: null,
             propertyOrder: 7
           },
           mayContact: {
             type: 'boolean',
             title: 'label.mayContact',
+            icon: null,
+            help: null,
             propertyOrder: 8
           },
           phone: {
             type: 'string',
             title: 'label.phone',
-            attr: {
-              maxlength: 50
-            },
+            attr: { maxlength: 50 },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 9
           }
@@ -4157,6 +4196,8 @@ export default {
             type: 'string',
             title: 'label.upload_profile_picture',
             widget: 'file',
+            icon: null,
+            help: null,
             propertyOrder: 1
           }
         },
@@ -4174,23 +4215,33 @@ export default {
           url: {
             type: 'string',
             title: 'label.url',
+            widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
+            widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           synopsis1: {
             type: 'string',
             title: 'label.synopsis1',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 3
           },
           synopsis2: {
             type: 'string',
             title: 'label.synopsis2',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 4
           }
         },
@@ -4199,9 +4250,7 @@ export default {
       }
     },
     password: {
-      values: {
-        password: []
-      },
+      values: { password: [] },
       schema: {
         title: 'profile_password',
         type: 'object',
@@ -4209,6 +4258,8 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           password: {
@@ -4218,23 +4269,24 @@ export default {
               first: {
                 type: 'string',
                 title: 'label.password',
-                attr: {
-                  class: 'password-field'
-                },
+                attr: { class: 'password-field' },
                 widget: 'password',
                 icon: 'key',
+                help: null,
                 propertyOrder: 1
               },
               second: {
                 type: 'string',
                 title: 'label.password_repeat',
-                attr: {
-                  class: 'password-field'
-                },
+                attr: { class: 'password-field' },
                 widget: 'password',
+                icon: null,
+                help: null,
                 propertyOrder: 2
               }
             },
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
@@ -4243,322 +4295,5 @@ export default {
         submit_method: 'POST'
       }
     }
-  }
-};
-
-export const plantProject = {
-  values: {
-    countTarget: '0',
-    plantProjectImages: []
-  },
-  schema: {
-    title: 'plantProject',
-    type: 'object',
-    properties: {
-      name: {
-        type: 'string',
-        title: 'name',
-        attr: {
-          maxlength: 255
-        },
-        maxLength: 255,
-        propertyOrder: 1
-      },
-      countTarget: {
-        type: 'number',
-        title: 'countTarget',
-        propertyOrder: 2
-      },
-      survivalRate: {
-        type: 'integer',
-        title: 'survivalRate',
-        attr: {
-          maxlength: 3,
-          pattern: '.{1,}'
-        },
-        pattern: '.{1,}',
-        propertyOrder: 3
-      },
-      imageFile: {
-        type: 'string',
-        title: 'label.browse',
-        widget: 'file',
-        propertyOrder: 4
-      },
-      treeCost: {
-        type: 'number',
-        title: 'treeCost',
-        propertyOrder: 5
-      },
-      currency: {
-        enum: [
-          'EUR',
-          'USD',
-          'GBP',
-          'AUD',
-          'SGD',
-          '',
-          'ALL',
-          'DZD',
-          'AMD',
-          'AWG',
-          'AZN',
-          'BSD',
-          'BDT',
-          'BBD',
-          'BZD',
-          'BMD',
-          'BWP',
-          'BND',
-          'BGN',
-          'KHR',
-          'CAD',
-          'KYD',
-          'CNY',
-          'CDF',
-          'HRK',
-          'DKK',
-          'DOP',
-          'XCD',
-          'EGP',
-          'ETB',
-          'FJD',
-          'GMD',
-          'GEL',
-          'GIP',
-          'GYD',
-          'HTG',
-          'HKD',
-          'ISK',
-          'IDR',
-          'ILS',
-          'JMD',
-          'KZT',
-          'KES',
-          'KGS',
-          'LBP',
-          'LSL',
-          'LRD',
-          'MOP',
-          'MKD',
-          'MWK',
-          'MYR',
-          'MVR',
-          'MXN',
-          'MDL',
-          'MNT',
-          'MAD',
-          'MZN',
-          'MMK',
-          'NAD',
-          'NPR',
-          'ANG',
-          'TWD',
-          'NZD',
-          'NGN',
-          'NOK',
-          'PKR',
-          'PGK',
-          'PHP',
-          'PLN',
-          'QAR',
-          'RON',
-          'RUB',
-          'WST',
-          'SAR',
-          'RSD',
-          'SCR',
-          'SLL',
-          'SBD',
-          'SOS',
-          'ZAR',
-          'LKR',
-          'SZL',
-          'SEK',
-          'CHF',
-          'TJS',
-          'TZS',
-          'THB',
-          'TOP',
-          'TTD',
-          'TRY',
-          'UAH',
-          'AED',
-          'UZS',
-          'YER',
-          'ZMW'
-        ],
-
-        enum_titles: [
-          'Euro',
-          'US Dollar',
-          'British Pound',
-          'Australian Dollar',
-          'Singapore Dollar',
-          '--------------------',
-          'Albanian Lek',
-          'Algerian Dinar',
-          'Armenian Dram',
-          'Aruban Florin',
-          'Azerbaijani Manat',
-          'Bahamian Dollar',
-          'Bangladeshi Taka',
-          'Barbadian Dollar',
-          'Belize Dollar',
-          'Bermudan Dollar',
-          'Botswanan Pula',
-          'Brunei Dollar',
-          'Bulgarian Lev',
-          'Cambodian Riel',
-          'Canadian Dollar',
-          'Cayman Islands Dollar',
-          'Chinese Yuan',
-          'Congolese Franc',
-          'Croatian Kuna',
-          'Danish Krone',
-          'Dominican Peso',
-          'East Caribbean Dollar',
-          'Egyptian Pound',
-          'Ethiopian Birr',
-          'Fijian Dollar',
-          'Gambian Dalasi',
-          'Georgian Lari',
-          'Gibraltar Pound',
-          'Guyanaese Dollar',
-          'Haitian Gourde',
-          'Hong Kong Dollar',
-          'Icelandic Króna',
-          'Indonesian Rupiah',
-          'Israeli New Shekel',
-          'Jamaican Dollar',
-          'Kazakhstani Tenge',
-          'Kenyan Shilling',
-          'Kyrgystani Som',
-          'Lebanese Pound',
-          'Lesotho Loti',
-          'Liberian Dollar',
-          'Macanese Pataca',
-          'Macedonian Denar',
-          'Malawian Kwacha',
-          'Malaysian Ringgit',
-          'Maldivian Rufiyaa',
-          'Mexican Peso',
-          'Moldovan Leu',
-          'Mongolian Tugrik',
-          'Moroccan Dirham',
-          'Mozambican Metical',
-          'Myanmar Kyat',
-          'Namibian Dollar',
-          'Nepalese Rupee',
-          'Netherlands Antillean Guilder',
-          'New Taiwan Dollar',
-          'New Zealand Dollar',
-          'Nigerian Naira',
-          'Norwegian Krone',
-          'Pakistani Rupee',
-          'Papua New Guinean Kina',
-          'Philippine Piso',
-          'Polish Zloty',
-          'Qatari Rial',
-          'Romanian Leu',
-          'Russian Ruble',
-          'Samoan Tala',
-          'Saudi Riyal',
-          'Serbian Dinar',
-          'Seychellois Rupee',
-          'Sierra Leonean Leone',
-          'Solomon Islands Dollar',
-          'Somali Shilling',
-          'South African Rand',
-          'Sri Lankan Rupee',
-          'Swazi Lilangeni',
-          'Swedish Krona',
-          'Swiss Franc',
-          'Tajikistani Somoni',
-          'Tanzanian Shilling',
-          'Thai Baht',
-          'Tongan Paʻanga',
-          'Trinidad & Tobago Dollar',
-          'Turkish Lira',
-          'Ukrainian Hryvnia',
-          'United Arab Emirates Dirham',
-          'Uzbekistani Som',
-          'Yemeni Rial',
-          'Zambian Kwacha'
-        ],
-        type: 'string',
-        title: 'currency',
-        propertyOrder: 6
-      },
-      location: {
-        type: 'string',
-        title: 'location',
-        widget: 'textarea',
-        propertyOrder: 7
-      },
-      geoLocation: {
-        type: 'string',
-        title: 'label.geo_location',
-        widget: 'map',
-        propertyOrder: 9
-      },
-      description: {
-        type: 'string',
-        title: 'description',
-        widget: 'textarea',
-        propertyOrder: 10
-      },
-      url: {
-        type: 'string',
-        title: 'url',
-        widget: 'textarea',
-        propertyOrder: 11
-      },
-      linkText: {
-        type: 'string',
-        title: 'linkText',
-        widget: 'textarea',
-        propertyOrder: 12
-      },
-      plantProjectImages: {
-        type: 'array',
-        title: 'label.add_images',
-        items: {
-          title: 'prototype',
-          type: 'object',
-          properties: {
-            image: {
-              type: 'string',
-              title: 'label.browse',
-              widget: 'file',
-              propertyOrder: 1
-            },
-            description: {
-              type: 'string',
-              title: 'description',
-              widget: 'textarea',
-              propertyOrder: 2
-            },
-            id: {
-              type: 'number',
-              title: 'id',
-              widget: 'hidden',
-              propertyOrder: 3
-            }
-          },
-          required: ['image']
-        },
-        propertyOrder: 13
-      },
-      videoUrl: {
-        type: 'string',
-        title: 'videoUrl',
-        widget: 'textarea',
-        propertyOrder: 14
-      }
-    },
-    required: ['name', 'treeCost', 'currency', 'country'],
-    submit_url: '',
-    submit_method: 'POST'
   }
 };

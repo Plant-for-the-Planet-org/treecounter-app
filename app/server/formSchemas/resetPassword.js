@@ -6,6 +6,8 @@ export default {
       type: 'string',
       title: 'token',
       widget: 'hidden',
+      icon: null,
+      help: null,
       propertyOrder: 1
     },
     password: {
@@ -15,29 +17,29 @@ export default {
         first: {
           type: 'string',
           title: 'label.password',
-          attr: {
-            class: 'password-field'
-          },
+          attr: { class: 'password-field' },
           widget: 'password',
           icon: 'key',
+          help: null,
           propertyOrder: 1
         },
         second: {
           type: 'string',
           title: 'label.password_repeat',
-          attr: {
-            class: 'password-field'
-          },
+          attr: { class: 'password-field' },
           widget: 'password',
           icon: 'key',
+          help: null,
           propertyOrder: 2
         }
       },
       required: ['first', 'second'],
+      icon: null,
+      help: null,
       propertyOrder: 2
     }
   },
   required: ['token', 'password'],
-  submit_url: '/app_dev.php/auth/en/resetPassword',
+  submit_url: '/auth/v1.0/en/resetPassword',
   submit_method: 'POST'
 };

@@ -5,33 +5,35 @@ export default {
     firstname: {
       type: 'string',
       title: 'label.firstname',
-      attr: {
-        maxlength: 255
-      },
+      attr: { maxlength: 255 },
+      icon: null,
+      help: null,
       maxLength: 255,
       propertyOrder: 1
     },
     lastname: {
       type: 'string',
       title: 'label.lastname',
-      attr: {
-        maxlength: 255
-      },
+      attr: { maxlength: 255 },
+      icon: null,
+      help: null,
       maxLength: 255,
       propertyOrder: 2
     },
     email: {
       type: 'string',
       title: 'label.email',
-      attr: {
-        maxlength: 255
-      },
+      attr: { maxlength: 255 },
+      icon: null,
+      help: null,
       maxLength: 255,
       propertyOrder: 3
     },
     treeCount: {
       type: 'integer',
       title: 'label.tree_count',
+      icon: null,
+      help: null,
       propertyOrder: 4
     }
   },

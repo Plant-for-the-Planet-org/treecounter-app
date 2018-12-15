@@ -6,13 +6,15 @@ export default {
       type: 'string',
       title: 'label.email',
       icon: 'email',
+      help: null,
       propertyOrder: 1
     },
     _password: {
       type: 'string',
       title: 'label.password',
-      icon: 'key',
       widget: 'password',
+      icon: 'key',
+      help: null,
       propertyOrder: 2
     }
   },

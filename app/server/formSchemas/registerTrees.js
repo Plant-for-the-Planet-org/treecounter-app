@@ -5,7 +5,7 @@ export default {
     properties: {
       treeCount: {
         type: 'number',
-        title: 'Tree Count',
+        title: 'label.tree_count',
         widget: 'hidden',
         icon: null,
         help: null,
@@ -13,14 +13,14 @@ export default {
       },
       treeSpecies: {
         type: 'string',
-        title: 'Tree Species',
+        title: 'label.tree_species',
         icon: null,
         help: null,
         propertyOrder: 2
       },
       plantDate: {
         type: 'string',
-        title: 'Plant Date',
+        title: 'label.plant_date',
         widget: 'date',
         icon: null,
         help: null,
@@ -36,7 +36,7 @@ export default {
       },
       contributionImages: {
         type: 'array',
-        title: 'Add Images',
+        title: 'label.add_images',
         items: {
           title: 'prototype',
           type: 'object',
@@ -60,7 +60,7 @@ export default {
       },
       treeClassification: {
         type: 'string',
-        title: 'Tree Classification',
+        title: 'label.tree_classification',
         attr: { maxlength: 255 },
         icon: null,
         help: null,
@@ -85,21 +85,21 @@ export default {
           properties: {
             diameter: {
               type: 'integer',
-              title: 'Tree Diameter',
+              title: 'label.tree_diameter',
               icon: null,
               help: null,
               propertyOrder: 1
             },
             height: {
               type: 'integer',
-              title: 'Tree Height',
+              title: 'label.tree_height',
               icon: null,
               help: null,
               propertyOrder: 2
             },
             measurementDate: {
               type: 'string',
-              title: 'Measurement Date',
+              title: 'label.measurement_date',
               widget: 'date',
               icon: null,
               help: null,
@@ -125,21 +125,21 @@ export default {
     properties: {
       treeCount: {
         type: 'number',
-        title: 'Tree Count',
+        title: 'label.tree_count',
         icon: null,
         help: null,
         propertyOrder: 1
       },
       treeSpecies: {
         type: 'string',
-        title: 'Tree Species',
+        title: 'label.tree_species',
         icon: null,
         help: null,
         propertyOrder: 2
       },
       plantDate: {
         type: 'string',
-        title: 'Plant Date',
+        title: 'label.plant_date',
         widget: 'date',
         icon: null,
         help: null,
@@ -155,7 +155,7 @@ export default {
       },
       contributionImages: {
         type: 'array',
-        title: 'Add Images',
+        title: 'label.add_images',
         items: {
           title: 'prototype',
           type: 'object',

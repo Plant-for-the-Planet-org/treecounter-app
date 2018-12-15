@@ -21,6 +21,26 @@ const list = [
   {
     objectKey: 'signup_forms',
     file: 'signup.js'
+  },
+  {
+    objectKey: 'auth_forgotPassword_form',
+    file: 'forgotpassword.js'
+  },
+  {
+    objectKey: 'auth_login_form',
+    file: 'login.js'
+  },
+  {
+    objectKey: 'eventPledge_form',
+    file: 'pledge.js'
+  },
+  {
+    objectKey: 'auth_resetPassword_form',
+    file: 'resetPassword.js'
+  },
+  {
+    objectKey: 'profileUpdate_forms',
+    file: 'editProfile.js'
   }
 ];
 
@@ -36,6 +56,17 @@ axios
   })
   .then(response => {
     for (let i in list) {
+      fs.writeFile(
+        './app/server/formSchemas/temp.js',
+        'export default ' + JSON.stringify(response.data),
+        function(err) {
+          if (err) {
+            return console.log(err);
+          }
+
+          console.log('The file was saved!');
+        }
+      );
       if (list[i].file === 'signup.js') {
         for (let type of Object.keys(response.data[list[i].objectKey])) {
           response.data[list[i].objectKey][type] =
@@ -60,6 +91,18 @@ axios
         fs.writeFile(
           './app/server/formSchemas/' + list[i].file,
           'export default ' + JSON.stringify(newFormat),
+          function(err) {
+            if (err) {
+              return console.log(err);
+            }
+
+            console.log('The file was saved!');
+          }
+        );
+      } else if (list[i].file === 'editProfile.js') {
+        fs.writeFile(
+          './app/server/formSchemas/' + list[i].file,
+          'export default ' + JSON.stringify(response.data[list[i].objectKey]),
           function(err) {
             if (err) {
               return console.log(err);

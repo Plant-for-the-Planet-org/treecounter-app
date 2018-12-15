@@ -14,6 +14,7 @@ import styles, {
   SearchContainerWidth
 } from '../../styles/header/search_bar.native';
 import PropTypes from 'prop-types';
+import { TouchableItem } from '../../components/Common/TouchableItem.native';
 
 const SearchIcon = () => (
   <View style={styles.searchIconContainer}>
@@ -112,7 +113,7 @@ class SearchBar extends React.PureComponent {
               { opacity: showCancelButton ? 1 : 0 }
             ]}
           >
-            <TouchableOpacity
+            <TouchableItem
               style={styles.button}
               hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
               onLayout={this._handleLayoutCancelButton}
@@ -126,7 +127,7 @@ class SearchBar extends React.PureComponent {
               >
                 Cancel
               </Text>
-            </TouchableOpacity>
+            </TouchableItem>
           </View>
         )}
       </View>

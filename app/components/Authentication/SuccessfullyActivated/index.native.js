@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-
-import TextHeading from '../../Common/Heading/TextHeading';
-import CardLayout from '../../Common/Card';
-import TextBlock from '../../Common/Text/TextBlock';
 import PropTypes from 'prop-types';
+import i18n from '../../../locales/i18n.js';
+import { Text, View, Image, ScrollView } from 'react-native';
+
+import styles from '../../../styles/accountActivate';
 
 import { check_green, redeemSignIn } from '../../../assets';
-import InlineLink from '../../../components/Common/InlineLink';
+import InlineLink from '../../Common/InlineLink';
 
 export default class SuccessfullyActivatedAccount extends Component {
   render() {
@@ -19,38 +19,35 @@ export default class SuccessfullyActivatedAccount extends Component {
     const login = <InlineLink caption="log in" uri={'app_login'} />;
 
     return (
-      <div className="app-container__content--center sidenav-wrapper">
-        <TextHeading>Account Activation</TextHeading>
-        <CardLayout>
+      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+        <View style={styles.container}>
           {this.props.success ? (
-            <img src={check_green} />
+            <Image source={check_green} style={styles.imageStyle} />
           ) : (
-            <img src={redeemSignIn} />
+            <Image source={redeemSignIn} style={styles.imageStyle} />
           )}
-          <div className={'gap'} />
           {this.props.success ? (
-            <TextBlock>
+            <Text style={styles.textStyle}>
               You have successfully activated your <br />account.
-            </TextBlock>
+            </Text>
           ) : (
-            <TextBlock>
+            <Text style={styles.textStyle}>
               Your account has already been activated <br />previously.
-            </TextBlock>
+            </Text>
           )}
-          <div className={'gap'} />
-
           {this.props.success ? (
-            <TextBlock>
+            <Text style={styles.textStyle}>
               You can {customizeProfile} now <br />or {setTarget}
-            </TextBlock>
+            </Text>
           ) : (
-            <TextBlock>You can {login}.</TextBlock>
+            <Text style={styles.textStyle}>You can {login}.</Text>
           )}
-        </CardLayout>
-      </div>
+        </View>
+      </ScrollView>
     );
   }
 }
+
 SuccessfullyActivatedAccount.propTypes = {
   success: PropTypes.any
 };

@@ -125,13 +125,17 @@ export default class ContributionCard extends React.Component {
                     </TextSpan>
                   ))
               : null}
-            <Link
-              to={getLocalRoute('app_editTrees', {
-                contribution: contribution.id
-              })}
-            >
-              {i18n.t('label.update')}
-            </Link>
+            {contribution.contributionType == 'donation' ? (
+              <TextSpan> {i18n.t('label.donation_contribution')}</TextSpan>
+            ) : (
+              <Link
+                to={getLocalRoute('app_editTrees', {
+                  contribution: contribution.id
+                })}
+              >
+                {i18n.t('label.update')}
+              </Link>
+            )}
           </div>
         </div>
         <hr className="contribution-container__partition" />

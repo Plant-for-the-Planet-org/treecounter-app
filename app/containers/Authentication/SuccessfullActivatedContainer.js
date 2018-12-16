@@ -24,11 +24,7 @@ export default class SuccessfullyActivatedContainer extends React.Component {
   }
   render() {
     return !this.state.loading ? (
-      this.state.success ? (
-        <SuccessfullyActivatedAccount success={this.state.success} />
-      ) : (
-        <SuccessfullyActivatedAccount success={this.state.success} />
-      )
+      <SuccessfullyActivatedAccount success={this.state.success} />
     ) : (
       <div className="sidenav-wrapper">
         <LoadingIndicator />

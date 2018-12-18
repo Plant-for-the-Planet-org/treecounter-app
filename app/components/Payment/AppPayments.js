@@ -48,6 +48,7 @@ export default class AppPayments extends Component {
 
   render() {
     let { paymentInfo } = this.props;
+    console.log(paymentInfo);
     let paymentMethods;
     if (paymentInfo) {
       let countryCurrency = `${paymentInfo.country}/${paymentInfo.currency}`;
@@ -91,6 +92,18 @@ export default class AppPayments extends Component {
             </div>
           ) : (
             <div className="payment-options-container">
+              {paymentInfo &&
+                (paymentInfo.giftRecipient ? (
+                  <div>
+                    <div>{paymentInfo.plantProjectName}</div>
+                    <div>
+                      {paymentInfo.treeCount} Gift To{' '}
+                      {paymentInfo.giftRecipient}
+                    </div>
+                  </div>
+                ) : (
+                  <div>Donate To {paymentInfo.plantProjectName}</div>
+                ))}
               {paymentInfo ? (
                 <PaymentSelector
                   paymentMethods={paymentMethods}

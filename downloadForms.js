@@ -60,17 +60,6 @@ axios
   })
   .then(response => {
     for (let i in list) {
-      fs.writeFile(
-        './app/server/formSchemas/temp.js',
-        'export default ' + JSON.stringify(response.data),
-        function(err) {
-          if (err) {
-            return console.log(err);
-          }
-
-          console.log('The file was saved!');
-        }
-      );
       if (list[i].file === 'signup.js') {
         for (let type of Object.keys(response.data[list[i].objectKey])) {
           response.data[list[i].objectKey][type] =

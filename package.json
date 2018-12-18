@@ -3,16 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --hot --config ./web/webpack.config.js",
-    "build": "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail",
-    "build:server": "webpack --config ./web/config/webpack.server.config.js --profile --bail",
+    "start":
+      "node downloadForms.js && git add . && lint-staged && webpack-dev-server --hot --config ./web/webpack.config.js",
+    "build":
+      "node downloadForms.js && git add . && lint-staged && webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail",
+    "build:server":
+      "node downloadForms.js && git add . && lint-staged && webpack --config ./web/config/webpack.server.config.js --profile --bail",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
+    "*.js": ["prettier --single-quote --write", "git add"]
   },
   "dependencies": {
     "autosuggest-highlight": "^3.1.1",

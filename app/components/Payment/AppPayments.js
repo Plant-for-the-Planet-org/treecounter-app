@@ -92,18 +92,6 @@ export default class AppPayments extends Component {
             </div>
           ) : (
             <div className="payment-options-container">
-              {paymentInfo &&
-                (paymentInfo.giftRecipient ? (
-                  <div>
-                    <div>{paymentInfo.plantProjectName}</div>
-                    <div>
-                      {paymentInfo.treeCount} Gift To{' '}
-                      {paymentInfo.giftRecipient}
-                    </div>
-                  </div>
-                ) : (
-                  <div>Donate To {paymentInfo.plantProjectName}</div>
-                ))}
               {paymentInfo ? (
                 <PaymentSelector
                   paymentMethods={paymentMethods}
@@ -116,7 +104,10 @@ export default class AppPayments extends Component {
                   expandedOption={this.state.expandedOption}
                   handleExpandedClicked={this.handleExpandedClicked}
                   context={{
-                    treeCount: paymentInfo.treeCount
+                    treeCount: paymentInfo.treeCount,
+                    tpoName: paymentInfo.tpoName,
+                    giftTreeCounterName: paymentInfo.giftRecipient,
+                    plantProjectName: paymentInfo.plantProjectName
                   }}
                   onSuccess={paymentResponse =>
                     this.handlePaymentApproved(paymentResponse)

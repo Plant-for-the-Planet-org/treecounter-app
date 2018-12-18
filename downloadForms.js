@@ -41,6 +41,10 @@ const list = [
   {
     objectKey: 'profileUpdate_forms',
     file: 'editProfile.js'
+  },
+  {
+    objectKey: 'plantProject_form',
+    file: 'plantProject.js'
   }
 ];
 

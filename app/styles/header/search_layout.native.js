@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 
 export default (styles = EStyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#F5FCFF'
   },
   searchResult: {

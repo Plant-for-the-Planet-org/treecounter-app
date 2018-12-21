@@ -111,9 +111,17 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     return paymentMethods ? (
       <StripeProvider stripe={this.state.stripe}>
         <div className="payment_options__wrapper">
+          <div>{gatewayProps.context.tpoName}</div>
+          {gatewayProps.context.giftTreecounterName && (
+            <div>
+              Gift {gatewayProps.context.treeCount} Trees to{' '}
+              {gatewayProps.context.giftTreecounterName}
+            </div>
+          )}
           <div>
             Amount: {amount} {currency}
           </div>
+
           <div>Trees: {context.treeCount}</div>
           {Object.keys(paymentMethods).map(gateway => {
             const accountName = paymentMethods[gateway];

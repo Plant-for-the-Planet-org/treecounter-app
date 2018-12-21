@@ -103,7 +103,7 @@ export default class Leaderboard extends Component {
   };
 
   getTableView = () => {
-    console.log(this.props.queryResult);
+    // console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
     const { categoryInfo, sectionInfo } = this.props;
     if (this.props.queryResult)

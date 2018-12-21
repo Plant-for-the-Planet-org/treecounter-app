@@ -5,6 +5,7 @@ import i18n from '../../locales/i18n';
 import { View, Text, Image } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import { targetPlanted } from '../../assets';
+
 class PlantedProgressBar extends React.Component {
   constructor(props) {
     super(props);
@@ -68,9 +69,11 @@ class PlantedProgressBar extends React.Component {
           <Text style={styles.treePlantedtext}>
             {countTarget ? countTarget.toLocaleString('en') : null}
           </Text>
-          <View style={{ paddingLeft: 5, paddingRight: 5 }}>
-            <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
-          </View>
+          {!this.props.hideTargetImage ? (
+            <View style={{ paddingLeft: 5, paddingRight: 5 }}>
+              <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
+            </View>
+          ) : null}
         </View>
       </View>
     );
@@ -79,7 +82,8 @@ class PlantedProgressBar extends React.Component {
 
 PlantedProgressBar.propTypes = {
   countPlanted: PropTypes.number,
-  countTarget: PropTypes.number
+  countTarget: PropTypes.number,
+  hideTargetImage: PropTypes.bool
 };
 
 export default PlantedProgressBar;

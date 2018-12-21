@@ -27,7 +27,8 @@ EStyleSheet.build({
   $colorError: '#ff0033',
   $colorRedeemBorder: '#9fc356',
   $colorRedeemInside: '#f5fbe8',
-  $cardTextColor: '#686060'
+  $cardTextColor: '#686060',
+  $lightTextColor: '#9c9b9b'
 });
 
 class AppDrawerNavigatorContainer extends Component {

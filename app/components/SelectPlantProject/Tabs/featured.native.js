@@ -45,7 +45,12 @@ export default class FeaturedProjects extends Component {
   onSelectClickedFeaturedProjects = id => {
     this.props.selectProject(id);
     const { navigation } = this.props;
-    updateStaticRoute('app_donate_detail', navigation);
+    updateStaticRoute(
+      'app_donate_detail',
+      navigation,
+      0,
+      navigation.getParam('userForm')
+    );
   };
 
   render() {

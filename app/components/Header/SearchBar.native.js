@@ -13,6 +13,8 @@ import { iosSearchGreen } from '../../assets';
 import styles, {
   SearchContainerWidth
 } from '../../styles/header/search_bar.native';
+import PropTypes from 'prop-types';
+import { TouchableItem } from '../../components/Common/TouchableItem.native';
 
 const SearchIcon = () => (
   <View style={styles.searchIconContainer}>
@@ -33,6 +35,11 @@ class SearchBar extends React.PureComponent {
     requestAnimationFrame(() => {
       this._textInput.focus();
     });
+    if (this.props.style) {
+      if (this.props.style.width) {
+        this.setState({ inputWidth: this.props.style.width });
+      }
+    }
   }
 
   _handleLayoutCancelButton = e => {
@@ -65,21 +72,34 @@ class SearchBar extends React.PureComponent {
 
   render() {
     let { inputWidth, showCancelButton } = this.state;
+
     let searchInputStyle = {};
     if (this.props.textColor) {
       searchInputStyle.color = this.props.textColor;
     }
+    let inputValue = this.state.text;
+    if (
+      this.props.inputValue &&
+      this.props.inputValue.includes(this.state.text)
+    ) {
+      inputValue = this.props.inputValue;
+    }
 
     return (
       <View style={styles.container}>
-        <View style={[styles.searchContainer, { width: inputWidth }]}>
+        <View
+          style={[
+            this.props.style ? this.props.style : styles.searchContainer,
+            { width: inputWidth }
+          ]}
+        >
           <TextInput
             ref={view => {
               this._textInput = view;
             }}
             clearButtonMode="while-editing"
             onChangeText={this._handleChangeText}
-            value={this.state.text}
+            value={inputValue}
             autoCapitalize="none"
             autoCorrect={false}
             returnKeyType="search"
@@ -92,33 +112,35 @@ class SearchBar extends React.PureComponent {
           <SearchIcon />
         </View>
 
-        <View
-          key={
-            showCancelButton
-              ? 'visible-cancel-button'
-              : 'layout-only-cancel-button'
-          }
-          style={[
-            styles.buttonContainer,
-            { opacity: showCancelButton ? 1 : 0 }
-          ]}
-        >
-          <TouchableOpacity
-            style={styles.button}
-            hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
-            onLayout={this._handleLayoutCancelButton}
-            onPress={data => this._handlePressCancelButton()}
+        {!this.props.hideCancel && (
+          <View
+            key={
+              showCancelButton
+                ? 'visible-cancel-button'
+                : 'layout-only-cancel-button'
+            }
+            style={[
+              styles.buttonContainer,
+              { opacity: showCancelButton ? 1 : 0 }
+            ]}
           >
-            <Text
-              style={{
-                fontSize: 17,
-                color: this.props.tintColor || '#007AFF'
-              }}
+            <TouchableItem
+              style={styles.button}
+              hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
+              onLayout={this._handleLayoutCancelButton}
+              onPress={data => this._handlePressCancelButton()}
             >
-              Cancel
-            </Text>
-          </TouchableOpacity>
-        </View>
+              <Text
+                style={{
+                  fontSize: 17,
+                  color: this.props.tintColor || '#007AFF'
+                }}
+              >
+                Cancel
+              </Text>
+            </TouchableItem>
+          </View>
+        )}
       </View>
     );
   }
@@ -135,7 +157,6 @@ class SearchBar extends React.PureComponent {
   };
 
   _handlePressCancelButton = () => {
-    //console.log('_handlePressCancelButton', this.props.navigation);
     if (this.props.onCancelPress) {
       this.props.onCancelPress(this.props.navigation.goBack);
     } else {
@@ -143,5 +164,16 @@ class SearchBar extends React.PureComponent {
     }
   };
 }
+
+SearchBar.propTypes = {
+  onChangeQuery: PropTypes.func,
+  onSubmit: PropTypes.func,
+  onCancelPress: PropTypes.func,
+  tintColor: PropTypes.any,
+  textColor: PropTypes.any,
+  inputValue: PropTypes.string,
+  navigation: PropTypes.any,
+  hideCancel: PropTypes.any
+};
 
 export default withNavigation(SearchBar);

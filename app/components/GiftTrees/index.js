@@ -213,7 +213,7 @@ export default class GiftTrees extends Component {
       return false;
     },
     () => {
-      console.log(this.refs.donateReceipt.validate());
+      //console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {

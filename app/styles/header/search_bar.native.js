@@ -12,7 +12,8 @@ export const SearchContainerWidth =
 
 export default (styles = EStyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
+    width: '100%',
     flexDirection: 'row'
   },
   buttonContainer: {

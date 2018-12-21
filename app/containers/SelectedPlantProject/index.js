@@ -22,7 +22,6 @@ class SelectedPlantProjectContainer extends Component {
   }
   componentDidMount() {
     //  this.props.selectPlantProjectAction(1);
-    console.log(this.props.navigation);
   }
 
   onTabChange(title) {
@@ -31,7 +30,13 @@ class SelectedPlantProjectContainer extends Component {
   selectProject(id) {
     const { navigation } = this.props;
     this.props.selectPlantProjectAction(id);
-    updateStaticRoute('app_donate_detail', navigation);
+    if (navigation) {
+      updateStaticRoute(
+        'app_donate_detail',
+        navigation,
+        navigation.getParam('userForm')
+      );
+    }
   }
   render() {
     if (this.props.selectedProject) {

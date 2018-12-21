@@ -35,6 +35,11 @@ class SearchBar extends React.PureComponent {
     requestAnimationFrame(() => {
       this._textInput.focus();
     });
+    if (this.props.style) {
+      if (this.props.style.width) {
+        this.setState({ inputWidth: this.props.style.width });
+      }
+    }
   }
 
   _handleLayoutCancelButton = e => {
@@ -67,6 +72,7 @@ class SearchBar extends React.PureComponent {
 
   render() {
     let { inputWidth, showCancelButton } = this.state;
+
     let searchInputStyle = {};
     if (this.props.textColor) {
       searchInputStyle.color = this.props.textColor;
@@ -81,7 +87,12 @@ class SearchBar extends React.PureComponent {
 
     return (
       <View style={styles.container}>
-        <View style={[styles.searchContainer, { width: inputWidth }]}>
+        <View
+          style={[
+            this.props.style ? this.props.style : styles.searchContainer,
+            { width: inputWidth }
+          ]}
+        >
           <TextInput
             ref={view => {
               this._textInput = view;

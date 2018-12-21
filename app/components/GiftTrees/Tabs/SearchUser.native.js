@@ -65,7 +65,7 @@ class SearchUser extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{ width: '100%' }}>
         <SearchBar
           onChangeQuery={this._handleChangeQuery}
           inputValue={this.state.selectedSuggestionName}
@@ -77,6 +77,7 @@ class SearchUser extends React.Component {
             this.props.searchInputUnderlineColorAndroid ||
             this.props.headerBackgroundColor
           }
+          style={{ width: '100%', height: 30, marginTop: 10, paddingLeft: 27 }}
           tintColor={
             this.props.searchInputTintColor || this.props.headerTintColor
           }

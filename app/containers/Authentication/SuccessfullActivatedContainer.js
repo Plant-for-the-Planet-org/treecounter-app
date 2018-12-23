@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import SuccessfullyActivatedAccount from '../../components/Authentication/SuccessfullyActivated';
 import { accountActivate } from '../../actions/signupActions';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import { updateRoute } from '../../helpers/routerHelper';
 
 export default class SuccessfullyActivatedContainer extends React.Component {
   constructor(props) {
@@ -16,7 +17,14 @@ export default class SuccessfullyActivatedContainer extends React.Component {
 
   componentWillMount() {
     accountActivate(this.props.match.params.token)
-      .then(res => this.setState({ success: true, loading: false }))
+      .then(res => {
+        const { data } = res.data;
+        if (data.routeName !== 'app_userHome') {
+          updateRoute(data.routeName, null, null, data.routeParams);
+        } else {
+          this.setState({ success: true, loading: false });
+        }
+      })
       .catch(err => {
         console.log(err);
         this.setState({ success: false, loading: false });

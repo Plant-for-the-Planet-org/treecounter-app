@@ -7,7 +7,91 @@ import {
   education,
   competition
 } from '../assets';
+import {
+  leaderboards_countries_grey,
+  leaderboards_countries_green,
+  leaderboards_education_green,
+  leaderboards_education_grey,
+  leaderboards_indiv_green,
+  leaderboards_indiv_grey,
+  leaderboards_organisations_green,
+  leaderboards_organisations_grey,
+  leaderboards_tpo_green,
+  leaderboards_tpo_grey,
+  leaderboards_company_grey,
+  leaderboards_company_green
+} from '../assets';
+import _ from 'lodash';
+import { getErrorView } from '../server/validator';
 
+/*
+/* This Will take server's error response and form SchemaOptions
+/* it returns new schema options based on the Server error else same schema options
+/* new options contains error field based on server options
+/* Eg options.field.email.hasError = true;
+*/
+export const handleServerResponseError = function(
+  serverFormError,
+  formSchemaOptions
+) {
+  let newOptions = formSchemaOptions;
+  const data =
+    serverFormError &&
+    serverFormError.response &&
+    serverFormError.response.data;
+  if (data && data.code == 400 && data.hasOwnProperty('errors')) {
+    for (let property in data.errors.children) {
+      if (
+        data.errors.children.hasOwnProperty(property) &&
+        data.errors.children[property].hasOwnProperty('errors')
+      ) {
+        newOptions = _.cloneDeep(formSchemaOptions);
+        newOptions.fields[property].hasError = true;
+        let oldValidator = newOptions.fields[property].error;
+        if (typeof oldValidator === 'function') {
+          newOptions.fields[property].error = (value, path, context) => {
+            let errorReturn = oldValidator(value, path, context);
+            if (!errorReturn) {
+              errorReturn = getErrorView(
+                data.errors.children[property].errors.toString()
+              );
+            } else {
+              //if there are some front end validation error then remove server error from schema options
+              newOptions.fields[property].hasError = false;
+              newOptions.fields[property].error = oldValidator;
+            }
+            return errorReturn;
+          };
+        }
+      }
+    }
+  }
+  return newOptions;
+};
+
+export const categoryIcons = {
+  country: {
+    normal: leaderboards_countries_grey,
+    selected: leaderboards_countries_green
+  },
+  tpo: { normal: leaderboards_tpo_grey, selected: leaderboards_tpo_green },
+  organization: {
+    normal: leaderboards_organisations_grey,
+    selected: leaderboards_organisations_green
+  },
+  education: {
+    normal: leaderboards_education_grey,
+    selected: leaderboards_education_green
+  },
+  company: {
+    normal: leaderboards_company_grey,
+    selected: leaderboards_company_green
+  },
+  individual: {
+    normal: leaderboards_indiv_grey,
+    selected: leaderboards_indiv_green
+  }
+};
 export function queryParamsToObject(queryParams) {
   let returnObject = {};
   try {

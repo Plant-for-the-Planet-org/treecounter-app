@@ -67,7 +67,8 @@ const headerLabels = {
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license',
   ['delete_profile_confirm']: 'label.delete_profile',
-  ['app_donate_detail']: 'label.donate'
+  ['app_donate_detail']: 'label.donate',
+  ['app_gift_projects']: 'label.gift_trees'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -116,6 +117,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
+      },
+      ['app_gift_projects']: {
+        screen: SelectPlantProjectContainer
       }
     },
     {
@@ -225,7 +229,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
 
       [getLocalRoute('app_giftTrees')]: {
-        screen: SelectPlantProjectContainer
+        screen: GiftTrees
       }
     },
     {
@@ -268,7 +272,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         //     !isLoggedIn)
         // ) {
         if (navigation.state.routeName === 'Tab') {
-          navigationConfig.headerLeft = BurgerMenu(navigation, userProfile);
+          navigationConfig.headerLeft = <BurgerMenu navigation={navigation} />;
         }
         return navigationConfig;
       }

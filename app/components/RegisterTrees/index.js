@@ -81,9 +81,9 @@ const getMultipleTreeLayout = props1 => {
   };
 };
 
-const schemaOptionsSingle = (template, props) => {
+const schemaOptionsSingle = (template, plantProjects) => {
   schemaOptionsSingleTree.fields.plantProject.template = getSelectTemplate(
-    getPlantProjectEnum(props.currentUserProfile)
+    plantProjects
   );
   return {
     template,
@@ -91,9 +91,9 @@ const schemaOptionsSingle = (template, props) => {
   };
 };
 
-const schemaOptionsMultiple = (template, props) => {
+const schemaOptionsMultiple = (template, plantProjects) => {
   schemaOptionsMultipleTrees.fields.plantProject.template = getSelectTemplate(
-    getPlantProjectEnum(props.currentUserProfile)
+    plantProjects
   );
   return {
     template,
@@ -146,6 +146,12 @@ export default class RegisterTrees extends Component {
   }
 
   render() {
+    const tpoPlantProjects = getPlantProjectEnum(this.props.currentUserProfile);
+    const plantProject =
+      tpoPlantProjects &&
+      tpoPlantProjects.length > 0 &&
+      tpoPlantProjects[0].value;
+
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>
@@ -166,9 +172,9 @@ export default class RegisterTrees extends Component {
                   type={singleTreeRegisterFormSchema}
                   options={schemaOptionsSingle(
                     getSingleTreeLayout(this.props),
-                    this.props
+                    tpoPlantProjects
                   )}
-                  value={this.state.individual}
+                  value={{ ...this.state.individual, plantProject }}
                 />
               ) : (
                 <TCombForm
@@ -176,8 +182,9 @@ export default class RegisterTrees extends Component {
                   type={multipleTreesRegisterFormSchema}
                   options={schemaOptionsMultiple(
                     getMultipleTreeLayout(this.props),
-                    this.props
+                    tpoPlantProjects
                   )}
+                  value={{ plantProject }}
                 />
               )}
             </Tabs>

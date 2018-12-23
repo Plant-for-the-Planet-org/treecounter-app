@@ -11,8 +11,12 @@ import {
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import SelectPlantProject from '../../components/SelectPlantProject';
 import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper.native';
+import { fetchCurrencies } from '../../actions/currencies';
 
 class SelectPlantProjectContainer extends Component {
+  componentDidMount() {
+    this.props.fetchCurrencies();
+  }
   render() {
     console.log('select plant props', this.props);
     return (
@@ -28,13 +32,24 @@ class SelectPlantProjectContainer extends Component {
   onMoreClick(id) {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
-    console.log('OnMore');
-    updateRoute('app_selectProject', navigation, 1);
+    if (navigation) {
+      updateRoute(
+        'app_selectProject',
+        navigation,
+        1,
+        navigation.getParam('userForm')
+      );
+    }
   }
   selectPlantProjectAction(id) {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
-    updateStaticRoute('app_donate_detail', navigation);
+    if (navigation) {
+      updateStaticRoute('app_donate_detail', navigation, {
+        userForm: navigation.getParam('userForm'),
+        giftMethod: navigation.getParam('giftMethod')
+      });
+    }
   }
 }
 
@@ -44,7 +59,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ selectPlantProjectAction }, dispatch);
+  return bindActionCreators(
+    { selectPlantProjectAction, fetchCurrencies },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -55,5 +73,6 @@ SelectPlantProjectContainer.propTypes = {
   plantProjects: PropTypes.array,
   currencies: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
+  fetchCurrencies: PropTypes.func
 };

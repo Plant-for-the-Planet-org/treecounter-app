@@ -74,6 +74,8 @@ class TreeCounter extends Component {
     };
   }
 
+  _appRoutes = undefined;
+
   async componentWillMount() {
     const { userProfile } = this.props;
     const isLoggedIn = null !== userProfile;
@@ -98,6 +100,7 @@ class TreeCounter extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.userProfile !== this.props.userProfile) {
       let isLoggedIn = null !== nextProps.userProfile;
+      this._appRoutes = undefined;
       this.setState({ loading: false, isLoggedIn: isLoggedIn });
     }
   }
@@ -108,7 +111,7 @@ class TreeCounter extends Component {
     });
   }
 
-  render() {
+  initRoutes() {
     let isLoggedIn = this.state.isLoggedIn;
     const PrivateRoute = ({ component: Component, ...rest }) => (
       <Route
@@ -135,14 +138,146 @@ class TreeCounter extends Component {
         }
       />
     );
+    this._appRoutes = (
+      <div className="app-container__content">
+        <Route exact path="/" component={Trillion} />
+        <Route
+          exact
+          path={
+            getLocalRoute('app_homepage') !== '/'
+              ? getLocalRoute('app_homepage')
+              : 'null'
+          }
+          component={Trillion}
+        />
+        <PublicRoute
+          path={getLocalRoute('app_signup')}
+          component={SignUpContainer}
+        />
+        <PublicRoute
+          path={getLocalRoute('app_accountActivate') + '/:token'}
+          component={SuccessfullyActivatedAccount}
+        />
+        <PublicRoute
+          path={getLocalRoute('app_accountActivation')}
+          component={ActivateAccountContainer}
+        />
+        {/*<Route exact path={getLocalRoute("app_donateTrees")} render={() => (isLoggedIn ? null : <Redirect to={getLocalRoute("app_login")}/>)}/>*/}
+        <PrivateRoute
+          path={getLocalRoute('app_signupSuccess')}
+          component={SignupSuccessPage}
+        />
+        <PrivateRoute
+          path={getLocalRoute('app_userHome')}
+          component={UserHomeContainer}
+        />
+        <PublicRoute
+          path={getLocalRoute('app_login')}
+          component={LoginContainer}
+        />
+        <PublicRoute
+          path={getLocalRoute('app_forgotPassword')}
+          component={ForgotPasswordContainer}
+        />
+        <PublicRoute
+          path={getLocalRoute('app_resetPassword') + '/:token'}
+          component={ResetPasswordContainer}
+        />
+        <PublicRoute
+          path={getLocalRoute('app_passwordSent')}
+          component={EmailSentContainer}
+        />
+        <Route
+          path={getLocalRoute('app_payment') + '/:donationContribution'}
+          component={AppPaymentContainer}
+        />
+        <Route
+          path={getLocalRoute('app_explore')}
+          component={LeaderboardContainer}
+        />
+        <Route
+          exact
+          path={getLocalRoute('app_leaderboard') + '/:section'}
+          component={LeaderboardContainer}
+        />
+        <Route
+          exact
+          path={getLocalRoute('app_leaderboard') + '/:section' + '/:subSection'}
+          component={LeaderboardContainer}
+        />
+        <PrivateRoute
+          path={getLocalRoute('app_target')}
+          component={TargetContainer}
+        />
+        <PrivateRoute
+          path={getLocalRoute('app_registerTrees')}
+          component={RegisterTreesContainer}
+        />
+        <PrivateRoute
+          path={getLocalRoute('app_editTrees') + '/:selectedTreeId'}
+          component={EditUserContributionContainer}
+        />
+        <PrivateRoute
+          path={getLocalRoute('app_myTrees')}
+          component={UserContributionsContainer}
+        />
+        <PrivateRoute
+          path={getLocalRoute('app_editProfile')}
+          component={EditUserProfileContainer}
+        />
+        <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
+        <Route
+          path={getLocalRoute('app_privacy')}
+          component={PrivacyContainer}
+        />
+        <Route
+          path={getLocalRoute('app_imprint')}
+          component={ImprintContainer}
+        />
+        {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
+        <Route
+          path={getLocalRoute('app_giftTrees')}
+          component={GiftTreesContainer}
+        />
+        <Route
+          path={getLocalRoute('app_selectProject')}
+          component={SelectPlantProjectContainer}
+        />
+        <Route
+          path={getLocalRoute('app_donateTrees')}
+          component={DonationTreesContainer}
+        />
+        <Route
+          path={getLocalRoute('app_claim') + '/:type' + '/:code'}
+          component={RedemptionContainer}
+        />
+        <Route
+          path={getLocalRoute('app_redeem') + '/:type?' + '/:code?'}
+          component={RedemptionContainer}
+        />
+        <Route
+          path={getLocalRoute('app_pledge') + '/:eventSlug'}
+          component={PledgeContainer}
+        />
+        <Route
+          path={getLocalRoute('app_treecounter') + '/:treecounterId'}
+          component={PublicTreecounterContainer}
+        />
+      </div>
+    );
+  }
 
+  render() {
+    if (!this._appRoutes) {
+      this.initRoutes();
+    }
     return !this.state.loading ? (
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
             <ProgressModal isOpen={this.props.progressModel} />
-            {window.location.pathname.indexOf('donation-payment') >
-            -1 ? null : (
+            {window.location.pathname.indexOf('donation-payment') > -1 ||
+            window.location.pathname.indexOf('account-activate') > -1 ? null : (
               <DownloadAppModal
                 isOpen={this.state.isIOS && !this.state.isCancelled}
                 continueOnSite={this.continueOnSite.bind(this)}
@@ -150,135 +285,7 @@ class TreeCounter extends Component {
             )}
             <HeaderContainer />
             <Route component={SideMenuContainer} />
-            <div className="app-container__content">
-              <Route exact path="/" component={Trillion} />
-              <Route
-                exact
-                path={
-                  getLocalRoute('app_homepage') !== '/'
-                    ? getLocalRoute('app_homepage')
-                    : 'null'
-                }
-                component={Trillion}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_signup')}
-                component={SignUpContainer}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_accountActivate') + '/:token'}
-                component={SuccessfullyActivatedAccount}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_accountActivation')}
-                component={ActivateAccountContainer}
-              />
-              {/*<Route exact path={getLocalRoute("app_donateTrees")} render={() => (isLoggedIn ? null : <Redirect to={getLocalRoute("app_login")}/>)}/>*/}
-              <PrivateRoute
-                path={getLocalRoute('app_signupSuccess')}
-                component={SignupSuccessPage}
-              />
-              <PrivateRoute
-                path={getLocalRoute('app_userHome')}
-                component={UserHomeContainer}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_login')}
-                component={LoginContainer}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_forgotPassword')}
-                component={ForgotPasswordContainer}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_resetPassword') + '/:token'}
-                component={ResetPasswordContainer}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_passwordSent')}
-                component={EmailSentContainer}
-              />
-              <Route
-                path={getLocalRoute('app_payment') + '/:donationContribution'}
-                component={AppPaymentContainer}
-              />
-              <Route
-                path={getLocalRoute('app_explore')}
-                component={LeaderboardContainer}
-              />
-              <Route
-                exact
-                path={getLocalRoute('app_leaderboard') + '/:section'}
-                component={LeaderboardContainer}
-              />
-              <Route
-                exact
-                path={
-                  getLocalRoute('app_leaderboard') +
-                  '/:section' +
-                  '/:subSection'
-                }
-                component={LeaderboardContainer}
-              />
-              <PrivateRoute
-                path={getLocalRoute('app_target')}
-                component={TargetContainer}
-              />
-              <PrivateRoute
-                path={getLocalRoute('app_registerTrees')}
-                component={RegisterTreesContainer}
-              />
-              <PrivateRoute
-                path={getLocalRoute('app_editTrees') + '/:selectedTreeId'}
-                component={EditUserContributionContainer}
-              />
-              <PrivateRoute
-                path={getLocalRoute('app_myTrees')}
-                component={UserContributionsContainer}
-              />
-              <PrivateRoute
-                path={getLocalRoute('app_editProfile')}
-                component={EditUserProfileContainer}
-              />
-              <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
-              <Route
-                path={getLocalRoute('app_privacy')}
-                component={PrivacyContainer}
-              />
-              <Route
-                path={getLocalRoute('app_imprint')}
-                component={ImprintContainer}
-              />
-              {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
-              <Route
-                path={getLocalRoute('app_giftTrees')}
-                component={GiftTreesContainer}
-              />
-              <Route
-                path={getLocalRoute('app_selectProject')}
-                component={SelectPlantProjectContainer}
-              />
-              <Route
-                path={getLocalRoute('app_donateTrees')}
-                component={DonationTreesContainer}
-              />
-              <Route
-                path={getLocalRoute('app_claim') + '/:type' + '/:code'}
-                component={RedemptionContainer}
-              />
-              <Route
-                path={getLocalRoute('app_redeem') + '/:type?' + '/:code?'}
-                component={RedemptionContainer}
-              />
-              <Route
-                path={getLocalRoute('app_pledge') + '/:eventSlug'}
-                component={PledgeContainer}
-              />
-              <Route
-                path={getLocalRoute('app_treecounter') + '/:treecounterId'}
-                component={PublicTreecounterContainer}
-              />
-            </div>
+            {this._appRoutes}
             <Footer />
           </div>
         </BrowserRouter>

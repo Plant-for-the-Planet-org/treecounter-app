@@ -40,5 +40,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(TargetContainer);
 TargetContainer.propTypes = {
   treecounter: PropTypes.object.isRequired,
   dispatch: PropTypes.func,
-  SubmitTarget: PropTypes.func.isRequired
+  SubmitTarget: PropTypes.func.isRequired,
+  navigation: PropTypes.any
 };

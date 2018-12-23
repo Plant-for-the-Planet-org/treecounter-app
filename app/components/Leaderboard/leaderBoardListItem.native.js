@@ -24,8 +24,9 @@ export default class LeaderboardItem extends Component {
             }
             style={{ justifyContent: 'center' }}
           >
-            <Text style={styles.itemViewText}>{this.props.title}</Text>
             <View>
+              <Text style={styles.itemViewText}>{this.props.title}</Text>
+
               <PlantedProgressBar
                 countPlanted={this.props.planted}
                 countTarget={this.props.target}

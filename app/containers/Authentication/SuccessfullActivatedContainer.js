@@ -3,22 +3,33 @@ import PropTypes from 'prop-types';
 
 import SuccessfullyActivatedAccount from '../../components/Authentication/SuccessfullyActivated';
 import { accountActivate } from '../../actions/signupActions';
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
 
 export default class SuccessfullyActivatedContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      success: false
+      success: false,
+      loading: true
     };
   }
 
   componentWillMount() {
-    accountActivate(this.props.match.params.token).then(res =>
-      this.setState({ success: true })
-    );
+    accountActivate(this.props.match.params.token)
+      .then(res => this.setState({ success: true, loading: false }))
+      .catch(err => {
+        console.log(err);
+        this.setState({ success: false, loading: false });
+      });
   }
   render() {
-    return this.state.success ? <SuccessfullyActivatedAccount /> : null;
+    return !this.state.loading ? (
+      <SuccessfullyActivatedAccount success={this.state.success} />
+    ) : (
+      <div className="sidenav-wrapper">
+        <LoadingIndicator />
+      </div>
+    );
   }
 }
 

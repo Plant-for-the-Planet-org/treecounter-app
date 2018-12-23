@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View, Dimensions } from 'react-native';
 
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
@@ -19,13 +19,27 @@ import PlantProjectSnippet from '../../components/PlantProjects/PlantProjectSnip
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import Leaderboard from '../../containers/Leaderboard';
+import { TabView, TabBar } from 'react-native-tab-view';
+
+const Layout = {
+  window: {
+    width: Dimensions.get('window').width
+  }
+};
+import tabStyles from '../../styles/common/tabbar';
 class Trillion extends Component {
   constructor() {
     super();
     this.state = {
       svgData: null,
       displayName: '',
-      loading: true
+      loading: true,
+      routes: [
+        { key: 'world', title: 'World' },
+        { key: 'leaderBoard', title: 'LeaderBoard' }
+      ],
+      index: 0
     };
   }
   componentDidMount() {
@@ -59,43 +73,82 @@ class Trillion extends Component {
     const { navigation } = this.props;
     updateStaticRoute('app_donate_detail', navigation);
   };
+
+  _handleIndexChange = index => {
+    this.setState({ index });
+  };
+
+  _renderTabBar = props => {
+    return (
+      <TabBar
+        {...props}
+        indicatorStyle={tabStyles.indicator}
+        style={tabStyles.tabBar}
+        tabStyle={{ width: Layout.window.width / 2 }}
+        labelStyle={tabStyles.textStyle}
+        indicatorStyle={tabStyles.textActive}
+      />
+    );
+  };
+
+  _renderScreen = ({ route }) => {
+    switch (route.key) {
+      case 'world': {
+        return this.state.loading ? (
+          <LoadingIndicator />
+        ) : (
+          <ScrollView>
+            <View style={styles.parentContainer}>
+              <View style={svgStyles.svgContainer}>
+                <SvgContainer {...this.state.svgData} trillion={true} />
+              </View>
+              <CardLayout style={styles.cardContainer}>
+                <Text style={styles.titleText}>
+                  {' '}
+                  {i18n.t('label.trillionTreeMessage1')}
+                </Text>
+                <Text style={styles.titleText}>
+                  {' '}
+                  {i18n.t('label.trillionTreeMessage2')}
+                </Text>
+              </CardLayout>
+              <View>
+                {this.props.plantProjects
+                  .filter(filterProj => filterProj.allowDonations)
+                  .map(project => (
+                    <PlantProjectSnippet
+                      key={'trillion' + project.id}
+                      onMoreClick={id => this.onMoreClick(id)}
+                      plantProject={project}
+                      onSelectClickedFeaturedProjects={id =>
+                        this.onSelectClickedFeaturedProjects(id)
+                      }
+                      showMoreButton={false}
+                      tpoName={project.tpo_name}
+                    />
+                  ))}
+              </View>
+            </View>
+          </ScrollView>
+        );
+      }
+      case 'leaderBoard': {
+        return <Leaderboard navigation={this.props.navigation} />;
+      }
+      default:
+        return null;
+    }
+  };
+
   render() {
-    return this.state.loading ? (
-      <LoadingIndicator />
-    ) : (
-      <ScrollView>
-        <View style={styles.parentContainer}>
-          <View style={svgStyles.svgContainer}>
-            <SvgContainer {...this.state.svgData} trillion={true} />
-          </View>
-          <CardLayout style={styles.cardContainer}>
-            <Text style={styles.titleText}>
-              {' '}
-              {i18n.t('label.trillionTreeMessage1')}
-            </Text>
-            <Text style={styles.titleText}>
-              {' '}
-              {i18n.t('label.trillionTreeMessage2')}
-            </Text>
-          </CardLayout>
-          <View>
-            {this.props.plantProjects
-              .filter(filterProj => filterProj.allowDonations)
-              .map(project => (
-                <PlantProjectSnippet
-                  key={'trillion' + project.id}
-                  onMoreClick={id => this.onMoreClick(id)}
-                  plantProject={project}
-                  onSelectClickedFeaturedProjects={id =>
-                    this.onSelectClickedFeaturedProjects(id)
-                  }
-                  showMoreButton={false}
-                  tpoName={project.tpo_name}
-                />
-              ))}
-          </View>
-        </View>
-      </ScrollView>
+    return (
+      <TabView
+        useNativeDriver
+        navigationState={this.state}
+        renderScene={this._renderScreen}
+        renderTabBar={this._renderTabBar}
+        onIndexChange={this._handleIndexChange}
+      />
     );
   }
 }

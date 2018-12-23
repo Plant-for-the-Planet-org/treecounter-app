@@ -41,5 +41,22 @@ export function signUp(profileType, userData) {
 }
 
 export function accountActivate(token) {
-  return postRequest('auth_accountActivate_post', { token: token });
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    return postRequest('auth_accountActivate_post', { token: token })
+      .then(res => {
+        const { token, refresh_token, data } = res.data;
+        if (data.routeName !== 'app_userHome') {
+          updateJWT(token, refresh_token);
+          dispatch(loadUserProfile());
+          updateRoute(data.routeName, dispatch, null, data.routeParams);
+        }
+        dispatch(setProgressModelState(false));
+        return res;
+      })
+      .catch(err => {
+        dispatch(setProgressModelState(false));
+        throw err;
+      });
+  };
 }

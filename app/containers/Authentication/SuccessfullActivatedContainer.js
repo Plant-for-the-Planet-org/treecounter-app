@@ -1,50 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { bindActionCreators } from 'redux';
 import SuccessfullyActivatedAccount from '../../components/Authentication/SuccessfullyActivated';
 import { accountActivate } from '../../actions/signupActions';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
-import { updateRoute } from '../../helpers/routerHelper';
+import connect from 'react-redux/es/connect/connect';
 
-export default class SuccessfullyActivatedContainer extends React.Component {
+class SuccessfullyActivatedContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      success: false,
-      loading: true
+      success: false
     };
   }
 
   componentWillMount() {
-    accountActivate(this.props.match.params.token)
+    this.props
+      .accountActivate(this.props.match.params.token)
       .then(res => {
-        const { data } = res.data;
-        if (data.routeName !== 'app_userHome') {
-          updateRoute(data.routeName, null, null, data.routeParams);
-        } else {
-          this.setState({ success: true, loading: false });
-        }
+        console.log('in container');
+        this.setState({ success: true });
       })
       .catch(err => {
         console.log(err);
-        this.setState({ success: false, loading: false });
+        this.setState({ success: false });
       });
   }
   render() {
-    return !this.state.loading ? (
-      <SuccessfullyActivatedAccount success={this.state.success} />
-    ) : (
-      <div className="sidenav-wrapper">
-        <LoadingIndicator />
-      </div>
-    );
+    console.log(this.state);
+    return <SuccessfullyActivatedAccount success={this.state.success} />;
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      accountActivate
+    },
+    dispatch
+  );
+};
+
+export default connect(null, mapDispatchToProps)(
+  SuccessfullyActivatedContainer
+);
 
 SuccessfullyActivatedContainer.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       token: PropTypes.string
     })
-  }).isRequired
+  }).isRequired,
+  accountActivate: PropTypes.any
 };

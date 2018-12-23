@@ -268,25 +268,6 @@ export default class DonateTrees extends Component {
     let currencies = this.props.currencies.currencies;
 
     let screenToShow;
-    // {
-    //   this.props.selectedTpo && route.key === 'selectPlant'
-    //     ? (screenToShow = (
-    //         <ScrollView>
-    //           <PlantProjectFull
-    //             callExpanded={this.callExpanded}
-    //             expanded={false}
-    //             plantProject={selectedProject}
-    //             tpoName={this.props.selectedTpo.name}
-    //             selectAnotherProject={true}
-    //             showNextButton={true}
-    //             onNextClick={() => this.Tab1validated()}
-    //             projectClear={this.props.plantProjectClear}
-    //           />
-    //         </ScrollView>
-    //       ))
-    //     : null;
-    // }
-
     {
       this.props.selectedTpo &&
       currencies &&

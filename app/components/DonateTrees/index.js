@@ -459,6 +459,7 @@ export default class DonateTrees extends Component {
                           tpoName: this.props.selectedTpo.name,
                           donorEmail: email,
                           donorName: name,
+                          supportTreecounter: this.props.supportTreecounter,
                           treeCount: this.state.selectedTreeCount,
                           plantProjectName: plantProject.name
                         }}

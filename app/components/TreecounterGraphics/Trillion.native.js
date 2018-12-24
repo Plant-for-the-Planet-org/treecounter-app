@@ -28,6 +28,9 @@ const Layout = {
   }
 };
 import tabStyles from '../../styles/common/tabbar';
+import { saveItem, fetchItem } from '../../stores/localStorage.native';
+import Constants from '../../utils/const';
+
 class Trillion extends Component {
   constructor() {
     super();
@@ -45,19 +48,38 @@ class Trillion extends Component {
   componentDidMount() {
     trillionCampaign()
       .then(({ data }) => {
+        const svgData = {
+          id: 1,
+          target: data.countTarget,
+          planted: data.countPlanted,
+          community: data.countReceived,
+          personal: data.countPersonal,
+          displayName: data.displayName
+        };
         this.setState({
-          svgData: {
-            id: 1,
-            target: data.countTarget,
-            planted: data.countPlanted,
-            community: data.countReceived,
-            personal: data.countPersonal
-          },
-          displayName: data.displayName,
+          svgData,
+          displayName: svgData.displayName,
           loading: false
         });
+        saveItem(Constants.storageKeys.svgData, JSON.stringify(svgData));
       })
-      .catch(error => error);
+      .catch(error => {
+        console.log(error);
+        fetchItem(Constants.storageKeys.svgData).then(svgData => {
+          try {
+            svgData = JSON.parse(svgData);
+            if (svgData) {
+              this.setState({
+                svgData,
+                displayName: svgData.displayName,
+                loading: false
+              });
+            }
+          } catch (err) {
+            console.log(error);
+          }
+        });
+      });
   }
   shouldComponentUpdate() {
     return true;

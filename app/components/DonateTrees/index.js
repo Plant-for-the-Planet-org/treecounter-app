@@ -459,7 +459,9 @@ export default class DonateTrees extends Component {
                           tpoName: this.props.selectedTpo.name,
                           donorEmail: email,
                           donorName: name,
-                          treeCount: this.state.selectedTreeCount
+                          supportTreecounter: this.props.supportTreecounter,
+                          treeCount: this.state.selectedTreeCount,
+                          plantProjectName: plantProject.name
                         }}
                         onSuccess={paymentResponse =>
                           this.handlePaymentApproved(paymentResponse)

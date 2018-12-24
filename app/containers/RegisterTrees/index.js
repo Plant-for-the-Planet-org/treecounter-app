@@ -17,7 +17,7 @@ class RegisterTreesContainer extends Component {
   onSubmit = (mode, registerTreeForm) => {
     registerTreeForm =
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
-    console.log(registerTreeForm.validate());
+    // console.log(registerTreeForm.validate());
     let value = registerTreeForm.getValue();
     value = mergeContributionImages(value);
     if (value) {

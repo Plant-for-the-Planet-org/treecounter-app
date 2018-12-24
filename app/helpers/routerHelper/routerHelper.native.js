@@ -14,7 +14,7 @@ export function updateRoute(routeName, navigation, id, params) {
   navigation.navigate(route, params);
 }
 
-export function updateStaticRoute(routeName, navigation, id) {
+export function updateStaticRoute(routeName, navigation, params) {
   let route = routeName;
-  navigation.navigate(route);
+  navigation.navigate(route, params);
 }

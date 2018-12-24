@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions } from 'react-native';
-import styles from '../../../styles/selectplantproject/selectplantproject';
-import i18n from '../../../locales/i18n.js';
-
-import Slick from 'react-native-slick';
-import PlantProjectFull from '../../PlantProjects/PlantProjectFull';
-import PrimaryButton from '../../Common/Button/PrimaryButton.native';
-import CardLayout from '../../Common/Card/CardLayout';
+import { ScrollView } from 'react-native';
+import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import styles from '../../../styles/selectplantproject/featured.native';
+import scrollStyle from '../../../styles/common/scrollStyle.native';
 
 export default class FeaturedProjects extends Component {
   constructor(props) {
@@ -47,49 +44,34 @@ export default class FeaturedProjects extends Component {
 
   onSelectClickedFeaturedProjects = id => {
     this.props.selectProject(id);
-  };
-
-  callExpanded = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    });
+    const { navigation } = this.props;
+    updateStaticRoute(
+      'app_donate_detail',
+      navigation,
+      0,
+      navigation.getParam('userForm')
+    );
   };
 
   render() {
     let { featuredProjects } = this.state;
     return (
-      <ScrollView>
-        <Slick
-          style={styles.slickWrapper}
-          showsPagination={false}
-          // paginationStyle={{
-          //   position: 'absolute',
-          //   top: 80,
-          //   bottom: 490,
-
-          //   elevation: 9,
-          //   height: 20,
-          //   backgroundColor: 'rgba(52, 52, 52, 0.8)'
-          // }}
-          // activeDotStyle={{
-          //   backgroundColor: '#b9d384'
-          // }}
-        >
-          {featuredProjects.length !== 0
-            ? featuredProjects.map(project => (
-                <PlantProjectFull
-                  key={'projectFull' + project.id}
-                  callExpanded={() => this.callExpanded()}
-                  expanded={false}
-                  plantProject={project}
-                  onSelectClickedFeaturedProjects={id =>
-                    this.onSelectClickedFeaturedProjects(id)
-                  }
-                  tpoName={project.tpo_name}
-                />
-              ))
-            : null}
-        </Slick>
+      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+        {featuredProjects && featuredProjects.length > 0
+          ? featuredProjects.map(project => (
+              <PlantProjectSnippet
+                key={'projectFull' + project.id}
+                cardStyle={styles.cardStyle}
+                onMoreClick={id => this.props.onMoreClick(id)}
+                plantProject={project}
+                onSelectClickedFeaturedProjects={id =>
+                  this.onSelectClickedFeaturedProjects(id)
+                }
+                showMoreButton={false}
+                tpoName={project.tpo_name}
+              />
+            ))
+          : null}
       </ScrollView>
     );
   }

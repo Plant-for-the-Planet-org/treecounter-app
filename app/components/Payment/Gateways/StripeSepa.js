@@ -47,11 +47,17 @@ class _StripeSepa extends React.Component<
 > {
   constructor(props) {
     super(props);
+    this.state = {
+      submitClicked: false
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit = ev => {
+    this.setState({
+      submitClicked: true
+    });
     const { currency, context } = this.props;
     ev.preventDefault();
     if (this.props.stripe) {
@@ -87,7 +93,14 @@ class _StripeSepa extends React.Component<
       'display-none': !this.props.expanded
     });
     return (
-      <form className="payment-option" onSubmit={this.handleSubmit}>
+      <form
+        className="payment-option"
+        onSubmit={
+          this.state.submitClicked
+            ? ev => ev.preventDefault()
+            : this.handleSubmit
+        }
+      >
         <div onClick={this.handleArrowClick} className="payment-option-header">
           <span>
             <img className="logo" src={payment_sepa} />

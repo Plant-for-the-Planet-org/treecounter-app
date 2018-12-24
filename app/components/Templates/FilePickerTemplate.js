@@ -16,6 +16,26 @@ export function FilePickerTemplate(locals) {
     } else locals.onChange($event.target.value);
   }
   let error = locals.hasError;
+  let label;
+  if (locals.value) {
+    label = (
+      <img
+        src={
+          !locals.value.includes('base64')
+            ? getImageUrl('project', 'small', locals.value)
+            : locals.value
+        }
+      />
+    );
+  } else {
+    if (locals.label !== 'label.upload_profile_picture') {
+      label = (
+        <span className="value-label">{i18n.t('label.select_file')}</span>
+      );
+    } else {
+      label = null;
+    }
+  }
 
   return (
     <div className="filepicker-wrapper">
@@ -27,22 +47,15 @@ export function FilePickerTemplate(locals) {
           onChange={onChange}
         />
         <button
+          type="button"
           className="browse-button"
-          onClick={() => console.log('clicked Browse', this.refs)}
+          onClick={e => {
+            console.log('clicked Browse', this && this.refs);
+          }}
         >
-          {i18n.t('label.browse')}
+          {i18n.t(locals.label)}
         </button>
-        {!locals.value ? (
-          <span className="value-label">{i18n.t('label.select_file')}</span>
-        ) : (
-          <img
-            src={
-              !locals.value.includes('base64')
-                ? getImageUrl('project', 'small', locals.value)
-                : locals.value
-            }
-          />
-        )}
+        {label}
       </div>
       {error && locals.error ? locals.error : null}
     </div>

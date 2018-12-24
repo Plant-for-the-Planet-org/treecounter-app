@@ -6,6 +6,9 @@ import userFeedReducer from './userFeedReducer';
 import fetchPledgesReducer from './pledgeReducer';
 import currenciesReducer from './currenciesReducer';
 import paymentStatusReducer from './paymentStatus';
+import modelDialogReducer from './modelDialogReducer';
+import pledgeEventReducer from './pledgeEventReducer';
+import updateLastRouteReducer from './updateLastRouteReducer';
 
 const commonReducers = {
   entities: entitiesReducer,
@@ -15,7 +18,10 @@ const commonReducers = {
   userFeeds: userFeedReducer,
   pledges: fetchPledgesReducer,
   currencies: currenciesReducer,
-  paymentStatus: paymentStatusReducer
+  paymentStatus: paymentStatusReducer,
+  modelDialogState: modelDialogReducer,
+  pledgeEvents: pledgeEventReducer,
+  lastRouteState: updateLastRouteReducer
 };
 
 export default commonReducers;

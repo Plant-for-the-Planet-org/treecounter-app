@@ -16,7 +16,7 @@ const PlantProjectTeaser = ({
   return (
     <div className="project-teaser__container">
       <div className="column">
-        <span>
+        <span className="teaser__tpoHeading">
           {projectName}{' '}
           <span>
             {isCertified ? (
@@ -25,7 +25,7 @@ const PlantProjectTeaser = ({
           </span>
         </span>
         <div className="teaser__tpoName">
-          {i18n.t('label.by')} {tpoName}
+          {i18n.t('label.by') + ' ' + tpoName}
         </div>
       </div>
       {projectImage ? (

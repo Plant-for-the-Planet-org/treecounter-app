@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 
 import CurrencySelector from './CurrencySelector';
 import TreeCountSelector from './TreeCountSelector';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n';
-
+import { Dimensions, View, Text } from 'react-native';
+import styles from '../../styles/selectplantproject/selectplantproject.native';
 class TreeCountCurrencySelector extends React.Component {
   constructor(props) {
     super(props);
@@ -72,22 +73,62 @@ class TreeCountCurrencySelector extends React.Component {
 
   render() {
     const { currencies, treeCountOptions } = this.props;
-    console.log('Tree Count currency selector called up');
+    // console.log('Tree Count currency selector called up');
     return (
       <CardLayout>
+        <View style={{ flexDirection: 'column' }}>
+          <View style={styles.selectedProjectRow}>
+            <Text>{this.props.selectedProject.name}</Text>
+          </View>
+          {this.props.giftTreeCounterName ? (
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                width: '100%'
+              }}
+            >
+              <Text numberOfLines={1} ellipsizeMode={'tail'}>
+                <Text>{this.state.selectedTreeCount}</Text>
+                <Text style={styles.selectedProjectCol}> Trees</Text> Gift to{' '}
+                {this.props.giftTreeCounterName}
+              </Text>
+              {this.props.giftTreeCounterName}
+            </View>
+          ) : (
+            <View style={styles.selectedProjectRow}>
+              <Text>{this.state.selectedTreeCount}</Text>
+              <Text style={styles.selectedProjectCol}>Trees</Text>
+            </View>
+          )}
+
+          <View style={styles.selectedProjectRow}>
+            <Text>Amount : </Text>
+            <Text style={styles.selectedProjectCol}>
+              {this.state.selectedAmount}
+            </Text>
+            <Text style={styles.selectedProjectCol}>
+              {this.state.selectedCurrency}
+            </Text>
+          </View>
+        </View>
         <CurrencySelector
           currencies={currencies}
           onChange={this.handleCurrencyChange}
           selectedCurrency={this.state.selectedCurrency}
         />
-        <TreeCountSelector
-          currency={this.state.selectedCurrency}
-          amountToTreeCount={this.calculateTreeCount}
-          treeCountToAmount={this.calculateAmount}
-          onChange={this.handleTreeCountChange}
-          treeCountOptions={treeCountOptions}
-          defaultTreeCount={this.state.selectedTreeCount}
-        />
+
+        <View style={{ width: Dimensions.get('window').width - 30 }}>
+          <TreeCountSelector
+            currency={this.state.selectedCurrency}
+            amountToTreeCount={this.calculateTreeCount}
+            treeCountToAmount={this.calculateAmount}
+            onChange={this.handleTreeCountChange}
+            treeCountOptions={treeCountOptions}
+            defaultTreeCount={this.state.selectedTreeCount}
+          />
+        </View>
+
         {this.props.showNextButton ? (
           <PrimaryButton onClick={() => this.props.onNextClick()}>
             {i18n.t('label.next')}
@@ -108,7 +149,8 @@ TreeCountCurrencySelector.propTypes = {
   fees: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   showNextButton: PropTypes.bool,
-  onNextClick: PropTypes.func
+  onNextClick: PropTypes.func,
+  selectedProject: PropTypes.object.isRequired
 };
 
 export default TreeCountCurrencySelector;

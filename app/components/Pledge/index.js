@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import t from 'tcomb-form';
 import PropTypes from 'prop-types';
 
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import ContentHeader from '../Common/ContentHeader';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextSpan from '../Common/Text/TextBlock';
 
-import { pledge_highest, pledge_latest, esriLogo, bmzLogo } from '../../assets';
+import { pledge_highest, pledge_latest } from '../../assets';
+import { getImageUrl } from '../../actions/apiRouting';
+import { getDocumentTitle } from '../../helpers/utils';
 
 import {
   pledgeFormSchema,
@@ -54,18 +56,23 @@ export default class Pledge extends Component {
     this.setState({ value }); // <- keep track of value changes
   }
   render() {
-    let { eventSlug } = this.props;
+    let selectedPledge = {};
+    if (
+      this.props.pledgeEvents &&
+      this.props.pledgeEvents.pledgeEvents.length > 0
+    ) {
+      selectedPledge = this.props.pledgeEvents.pledgeEvents.filter(
+        val => val.slug === this.props.eventSlug
+      )[0];
+    }
+    document.title = getDocumentTitle(selectedPledge.name);
     return this.props.pledges && this.props.pledges.total !== undefined ? (
       <div className="sidenav-wrapper app-container__content--center">
         <div className="conference_heading">
           <div className="esri_logo_background">
-            <img
-              src={eventSlug === 'esri-user-conference' ? esriLogo : bmzLogo}
-            />
+            <img src={getImageUrl('event', 'thumb', selectedPledge.image)} />
           </div>
-          {eventSlug === 'esri-user-conference'
-            ? 'ESRI User Conference'
-            : 'BMZ User Conference'}
+          {selectedPledge.name}
         </div>
         <CardLayout className="total_trees">
           <span className="total_number">
@@ -75,66 +82,68 @@ export default class Pledge extends Component {
           </span>
           <span className="total_text">{i18n.t('label.total_trees')}</span>
         </CardLayout>
-        <div className="row">
-          <CardLayout className="recent-pledges">
-            <div className="before_table_header">
-              <img src={pledge_latest} />
-              <span>{i18n.t('label.most_recent')}</span>
-            </div>
-            <div className="recent-pledges-table">
-              <div className="pledges-header row-list-item">
-                <span>{i18n.t('label.name')}</span>
-                <span>{i18n.t('label.trees')}</span>
+        <div className="pledge_content--center">
+          <div className="row">
+            <CardLayout className="recent-pledges">
+              <div className="before_table_header">
+                <img src={pledge_latest} />
+                <span>{i18n.t('label.most_recent')}</span>
               </div>
-              <div className="pledges-list">
-                {this.props.pledges.latest.map(pledge => (
-                  <div className="row-list-item" key={pledge.id}>
-                    <span>{pledge.firstname + ' ' + pledge.lastname}</span>
-                    <span>
-                      {parseInt(pledge.treeCount).toLocaleString('en')}
-                    </span>
-                  </div>
-                ))}
+              <div className="recent-pledges-table">
+                <div className="pledges-header row-list-item">
+                  <span>{i18n.t('label.name')}</span>
+                  <span>{i18n.t('label.trees')}</span>
+                </div>
+                <div className="pledges-list">
+                  {this.props.pledges.latest.map(pledge => (
+                    <div className="row-list-item" key={pledge.id}>
+                      <span>{pledge.firstname + ' ' + pledge.lastname}</span>
+                      <span>
+                        {parseInt(pledge.treeCount).toLocaleString('en')}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </CardLayout>
-          <CardLayout className="recent-pledges">
-            <div className="before_table_header">
-              <img src={pledge_highest} />
-              <span>{i18n.t('label.biggest_pledges')}</span>
-            </div>
-            <div className="recent-pledges-table">
-              <div className="pledges-header row-list-item">
-                <span>{i18n.t('label.name')}</span>
-                <span>{i18n.t('label.trees')}</span>
+            </CardLayout>
+            <CardLayout className="recent-pledges">
+              <div className="before_table_header">
+                <img src={pledge_highest} />
+                <span>{i18n.t('label.biggest_pledges')}</span>
               </div>
-              <div className="pledges-list">
-                {this.props.pledges.highest.map(pledge => (
-                  <div className="row-list-item" key={pledge.id}>
-                    <span>{pledge.firstname + ' ' + pledge.lastname}</span>
-                    <span>
-                      {parseInt(pledge.treeCount).toLocaleString('en')}
-                    </span>
-                  </div>
-                ))}
+              <div className="recent-pledges-table">
+                <div className="pledges-header row-list-item">
+                  <span>{i18n.t('label.name')}</span>
+                  <span>{i18n.t('label.trees')}</span>
+                </div>
+                <div className="pledges-list">
+                  {this.props.pledges.highest.map(pledge => (
+                    <div className="row-list-item" key={pledge.id}>
+                      <span>{pledge.firstname + ' ' + pledge.lastname}</span>
+                      <span>
+                        {parseInt(pledge.treeCount).toLocaleString('en')}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            </CardLayout>
+          </div>
+          <CardLayout className="pledge-form">
+            <ContentHeader caption={'Pledge Trees'} />
+            <TCombForm
+              ref="pledgeForm"
+              type={pledgeFormSchema}
+              options={allSchemaOptions}
+              value={this.state.value}
+              onChange={value => this.onFormChange(value)}
+            />
+            <PrimaryButton onClick={() => this.onFormSubmit()}>
+              {i18n.t('label.pledge')}
+            </PrimaryButton>
+            <TextSpan>{i18n.t('label.pledge_des')}</TextSpan>
           </CardLayout>
         </div>
-        <CardLayout className="pledge-form">
-          <ContentHeader caption={'Pledge Trees'} />
-          <TCombForm
-            ref="pledgeForm"
-            type={pledgeFormSchema}
-            options={allSchemaOptions}
-            value={this.state.value}
-            onChange={value => this.onFormChange(value)}
-          />
-          <PrimaryButton onClick={() => this.onFormSubmit()}>
-            {i18n.t('label.pledge')}
-          </PrimaryButton>
-          <TextSpan>{i18n.t('label.pledge_des')}</TextSpan>
-        </CardLayout>
       </div>
     ) : null;
   }
@@ -143,5 +152,6 @@ export default class Pledge extends Component {
 Pledge.propTypes = {
   pledges: PropTypes.object,
   eventSlug: PropTypes.string,
-  postPledge: PropTypes.func
+  postPledge: PropTypes.func,
+  pledgeEvents: PropTypes.any
 };

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import SearchAutosuggest from '../Header/SearchAutosuggest';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
@@ -14,6 +14,7 @@ import { arrow_left_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+import { paymentFee } from '../../helpers/utils';
 
 import {
   individualSchemaOptions,
@@ -108,6 +109,7 @@ export default class GiftTrees extends Component {
       form: {
         recipientType: modeReceipt
       },
+      giftTreecounterName: null,
       expanded: false,
       expandedOption: '1',
       showNextButton: true,
@@ -184,7 +186,8 @@ export default class GiftTrees extends Component {
             form: {
               ...this.state.form,
               giftInvitation: value
-            }
+            },
+            giftTreecounterName: value.firstname + ' ' + value.lastname
           });
           return true;
         }
@@ -210,7 +213,7 @@ export default class GiftTrees extends Component {
       return false;
     },
     () => {
-      console.log(this.refs.donateReceipt.validate());
+      //console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
@@ -261,7 +264,8 @@ export default class GiftTrees extends Component {
       form: {
         ...this.state.form,
         giftTreecounter: event.suggestion.id
-      }
+      },
+      giftTreecounterName: event.suggestion.name
     });
   };
 
@@ -287,14 +291,20 @@ export default class GiftTrees extends Component {
     let displayNone = classNames({
       'display-none': !this.state.showNextButton
     });
+    let { pageIndex } = this.state;
+
     if (this.refs.slider) {
       setTimeout(() => {
-        if (this.state.pageIndex === 4) {
-          this.refs.slider.slickGoTo(this.state.pageIndex);
+        if (pageIndex === 4) {
+          this.refs.slider.slickGoTo(pageIndex);
         }
       }, 1000);
     }
-    let { pageIndex } = this.state;
+    let heading =
+      pageHeadings[pageIndex].heading +
+      (this.state.giftTreecounterName !== null
+        ? ' to ' + this.state.giftTreecounterName
+        : '');
     const NextArrow = function(props) {
       function validated() {
         if (props.checkValidation[props.currentSlide].call(props.context)) {
@@ -360,7 +370,7 @@ export default class GiftTrees extends Component {
     ) : (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>
-          {pageHeadings[this.state.pageIndex].heading}
+          {heading}
           <DescriptionHeading>
             {pageHeadings[this.state.pageIndex].description}
           </DescriptionHeading>
@@ -371,8 +381,9 @@ export default class GiftTrees extends Component {
               <img src={check_green} />
               <div className={'gap'} />
               <TextBlock strong={true}>
-                {i18n.t('label.thankyou')} {this.state.treeCount}{' '}
-                {i18n.t('label.receive_mail')}
+                {i18n.t('label.thankyou_planting', {
+                  count: this.state.treeCount
+                })}
               </TextBlock>
               <div className={'gap'} />
               <TextBlock>
@@ -434,7 +445,7 @@ export default class GiftTrees extends Component {
                     rates={
                       currencies.currency_rates[plantProject.currency].rates
                     }
-                    fees={1}
+                    fees={paymentFee}
                     currencies={currencies.currency_names}
                     selectedCurrency={this.determineDefaultCurrency()}
                     treeCountOptions={

@@ -1,25 +1,42 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-
-import { SearchContainerWidth } from '../header/search_bar';
-
+import { Dimensions } from 'react-native';
+const Layout = {
+  window: {
+    height: Dimensions.get('window').height - (56 + 70 + 20),
+    width: Dimensions.get('window').width
+  }
+};
 export default (selectplantprojectFull = EStyleSheet.create({
-  cardStyle: {
-    flex: 1,
-    flexDirection: 'column'
-  },
   listItemContainer: {
     flexDirection: 'column',
     height: 150
   },
-  projectNameContainer: {
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 10,
-    borderColor: '#aba2a2',
-    borderStyle: 'solid',
-    borderBottomWidth: 1,
-    borderTopWidth: 1
+  selectedItemStyle: {
+    backgroundColor: '#e3e3e3'
   },
+  evenItemStyle: {
+    backgroundColor: '#f0f0f0'
+  },
+  projectImageContainer: {
+    width: 25,
+    height: 25,
+    marginRight: 10
+    // borderRadius: 13,
+    // borderWidth: 1,
+    // borderColor: '#fff'
+    // alignItems: 'center',
+    // justifyContent: 'center'
+  },
+  projectImage: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+    resizeMode: 'contain'
+  },
+  projectNameTextContainer: {
+    flexDirection: 'column'
+  },
+
   tpoNameText: {
     fontStyle: 'italic',
     fontWeight: '100'
@@ -31,7 +48,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectMetaContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10
+    padding: 5
   },
   projectMetaLabels: {
     // paddingLeft: 5
@@ -41,7 +58,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   projectButtonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingBottom: 5
   },
   textStyle: {
     fontSize: 12,
@@ -51,29 +69,43 @@ export default (selectplantprojectFull = EStyleSheet.create({
   searchContainer: {
     width: '100%',
     flexDirection: 'row',
-    margin: 1,
-    height: 40
+    margin: 3,
+    height: 40,
+    alignItems: 'center',
+    borderColor: '#efefef',
+    borderStyle: 'solid',
+    borderBottomWidth: 1,
+    padding: 10
   },
-  searchIcon: {
+  searchItem: {
+    // paddingBottom: 10
+    backgroundColor: 'white'
+    //marginRight: 15
+  },
+  searchIconContainer: {
     height: 15,
     width: 15,
+    marginRight: 1
+  },
+  searchIcon: {
+    height: '100%',
+    width: '100%',
     resizeMode: 'contain'
   },
   searchInput: {
     flex: 1,
     fontSize: 14,
-    paddingTop: 1,
-    paddingLeft: 10,
     color: '$textColor'
   },
 
   listContentContainer: {
-    borderColor: '#aba2a2',
+    borderColor: '#efefef',
     borderStyle: 'solid',
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderBottomWidth: 1,
-    margin: 1
+    marginBottom: 1,
+    flexDirection: 'column'
   },
   buttonStyle: {
     height: 20,
@@ -88,5 +120,35 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   buttonTextStyle: {
     fontSize: 12
+  },
+  sortContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  imageStyleContainer: {
+    width: 10,
+    height: 10
+  },
+  imageStyle: {
+    flex: 1,
+    width: undefined,
+    height: undefined
+  },
+
+  cardHeader: {
+    flexDirection: 'row',
+    padding: 10,
+    backgroundColor: 'white'
+  },
+  headingStyle: {
+    fontSize: 16,
+    marginRight: 10,
+    color: '$textColor'
+  },
+  cardStyle: {
+    width: Layout.window.width - 30,
+    padding: 0,
+    //margin: 0,
+    paddingBottom: 10
   }
 }));

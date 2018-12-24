@@ -9,6 +9,7 @@ export function TextAreaTemplate(locals) {
     height: 150
   };
   let textboxStyle = {
+    flex: 1,
     marginLeft: 10,
     fontSize: 16,
     color: '#000',

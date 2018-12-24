@@ -1,23 +1,9 @@
 import React, { Component } from 'react';
-import {
-  View,
-  ScrollView,
-  Dimensions,
-  Text,
-  TextInput,
-  Image
-} from 'react-native';
+import { View, Dimensions, TextInput, Image } from 'react-native';
+
 import styles from '../../../styles/selectplantproject/list';
-import i18n from '../../../locales/i18n.js';
-
-import PrimaryButton from '../../Common/Button/PrimaryButton';
-import CardLayout from '../../Common/Card/CardLayout';
-
-const { height, width } = Dimensions.get('window');
-import { getAppBarHeight } from '../../../styles/common/header';
-import SeeMoreToggle from '../../Common/SeeMoreToggle';
-import SearchBar from '../../Header/SearchBar';
-import { iosSearchWhite } from '../../../assets';
+import CardLayout from '../../Common/Card';
+import { iosSearchGrey } from '../../../assets';
 import ListViewProjects from './listview';
 import Proptypes from 'prop-types';
 
@@ -40,10 +26,6 @@ export default class ListProjects extends Component {
       filteredProjects: this.props.plantProjects
     });
   }
-
-  onSelectProject = id => {
-    this.props.selectProject(id);
-  };
 
   callExpanded = () => {
     this.setState({
@@ -72,35 +54,42 @@ export default class ListProjects extends Component {
   render() {
     let { filteredProjects } = this.state;
     return (
-      <CardLayout style={styles.cardStyle} key={'listViewProject'}>
-        <View style={[styles.searchContainer]}>
-          <TextInput
-            ref={view => {
-              this._textInput = view;
-            }}
-            clearButtonMode="while-editing"
-            onChangeText={this._handleChangeText}
-            value={this.state.text}
-            autoCapitalize="none"
-            autoCorrect={false}
-            returnKeyType="search"
-            placeholder="Search"
-            placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
-            style={[styles.searchInput]}
-          />
+      <View key={'listViewProject'}>
+        <View style={styles.searchItem}>
+          <View style={[styles.searchContainer]}>
+            <TextInput
+              ref={view => {
+                this._textInput = view;
+              }}
+              clearButtonMode="while-editing"
+              onChangeText={this._handleChangeText}
+              value={this.state.text}
+              autoCapitalize="none"
+              autoCorrect={false}
+              returnKeyType="search"
+              placeholder="Search"
+              placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
+              style={[styles.searchInput]}
+            />
 
-          <View style={styles.searchIconContainer}>
-            <Image source={iosSearchWhite} style={styles.searchIcon} />
+            <View style={styles.searchIconContainer}>
+              <Image source={iosSearchGrey} style={styles.searchIcon} />
+            </View>
           </View>
         </View>
 
-        <ListViewProjects projects={filteredProjects} />
-      </CardLayout>
+        <ListViewProjects
+          projects={filteredProjects}
+          selectProject={projectId => this.props.selectProject(projectId)}
+          onMoreClick={projectId => this.props.onMoreClick(projectId)}
+        />
+      </View>
     );
   }
 }
 
 ListProjects.propTypes = {
   plantProjects: Proptypes.array.isRequired,
-  selectProject: Proptypes.func.isRequired
+  selectProject: Proptypes.func.isRequired,
+  onMoreClick: Proptypes.func.isRequired
 };

@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import { TabView } from 'react-native-tab-view';
-
-import { renderBasicTabbar } from '../../components/Common/Tabs/basicTabbar';
+import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 import PriceProjects from './Tabs/price';
+import styles from '../../styles/common/tabbar';
+import { Dimensions } from 'react-native';
+import CountryProjects from './Tabs/country.native';
+
+const Layout = {
+  window: {
+    width: Dimensions.get('window').width
+  }
+};
 
 export default class SelectPlantTabView extends Component {
   constructor(props) {
@@ -14,10 +21,8 @@ export default class SelectPlantTabView extends Component {
       routes: [
         { key: 'featured', title: 'Featured' },
         { key: 'list', title: 'List' },
-        { key: 'past', title: 'Past' },
-
         { key: 'price', title: 'Price' },
-        { key: 'map', title: 'Map' }
+        { key: 'country', title: 'Country' }
       ],
       index: 0
     };
@@ -41,10 +46,15 @@ export default class SelectPlantTabView extends Component {
   };
 
   _renderTabBar = props => {
-    return renderBasicTabbar(
-      props.navigationState.routes,
-      this.state.index,
-      index => this._handleIndexChange(index)
+    return (
+      <TabBar
+        {...props}
+        indicatorStyle={styles.indicator}
+        style={styles.tabBar}
+        tabStyle={{ width: Layout.window.width / 4 }}
+        labelStyle={styles.textStyle}
+        indicatorStyle={styles.textActive}
+      />
     );
   };
 
@@ -56,6 +66,8 @@ export default class SelectPlantTabView extends Component {
         return <ListProjects {...this.props} />;
       case 'price':
         return <PriceProjects {...this.props} />;
+      case 'country':
+        return <CountryProjects {...this.props} />;
       default:
         return null;
     }
@@ -64,7 +76,7 @@ export default class SelectPlantTabView extends Component {
   render() {
     return (
       <TabView
-        useNativeDriver={true}
+        useNativeDriver
         navigationState={this.state}
         renderScene={this._renderSelectPlantScene}
         renderTabBar={this._renderTabBar}

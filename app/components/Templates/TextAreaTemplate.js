@@ -37,7 +37,13 @@ export function TextAreaTemplate(locals) {
                 : 'pftp-textfield__inputgroup--error-bar'
             }
           />
-          <label className={locals.hasError ? 'error-label' : ''}>
+          <label
+            className={
+              (locals.hasError ? 'error-label' : '') + locals.value
+                ? 'float-label'
+                : ''
+            }
+          >
             {i18n.t(locals.label)}
           </label>
         </div>

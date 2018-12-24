@@ -8,14 +8,29 @@ export function MapTemplate(locals) {
     <View style={mapTemplateStyle.mapContainer}>
       <PrimaryButton
         onClick={() => {
-          locals.onChange(
-            'geoLongitude=76.74475009999871&geoLatitude=76.74475009999871&country=IND'
-          );
+          navigator.geolocation.getCurrentPosition(location => {
+            let { latitude, longitude } = location.coords;
+            locals.onChange(
+              'geoLongitude=' + longitude + '&geoLatitude=' + latitude
+            );
+          });
         }}
       >
-        Default Location
+        Get Device Location
       </PrimaryButton>
       <Text>Maps under construction</Text>
+      <Text>
+        {/* {console.log(locals.value.split('geoLatitude=')[1])}
+        {console.log(locals.value.split('&')[0].split('=')[1])} */}
+        {'Latitude: ' +
+          (locals.value.split('geoLatitude=')[1]
+            ? parseFloat(locals.value.split('geoLatitude=')[1]).toFixed(2)
+            : locals.value.split('geoLatitude=')[1]) +
+          ', Longitude: ' +
+          (locals.value.split('&')[0].split('=')[1]
+            ? parseFloat(locals.value.split('&')[0].split('=')[1]).toFixed(2)
+            : locals.value.split('&')[0].split('=')[1])}
+      </Text>
     </View>
   );
 }

@@ -4,7 +4,7 @@ import t from 'tcomb-form';
 
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 import {
   singleTreeRegisterFormSchema,
   schemaOptionsSingleTree,
@@ -88,8 +88,9 @@ export default class EditUserContribution extends Component {
     this.onSubmitClick = this.onSubmitClick.bind(this);
   }
 
-  onSubmitClick() {
+  onSubmitClick(event) {
     this.props.onSubmit();
+    event && event.preventDefault();
   }
 
   render() {
@@ -97,26 +98,28 @@ export default class EditUserContribution extends Component {
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>{i18n.t('label.edit_trees')}</TextHeading>
         <CardLayout>
-          <div className="register-tree__form">
-            {this.state.mode === EditUserContribution.mode.singleTree ? (
-              <TCombForm
-                ref="editTreeForm"
-                type={singleTreeRegisterFormSchema}
-                options={schemaOptionsSingle}
-                value={this.props.userContribution}
-              />
-            ) : (
-              <TCombForm
-                ref="editTreeForm"
-                type={multipleTreesRegisterFormSchema}
-                options={schemaOptionsMultiple}
-                value={this.props.userContribution}
-              />
-            )}
-          </div>
-          <PrimaryButton onClick={this.onSubmitClick}>
-            {i18n.t('label.update')}
-          </PrimaryButton>
+          <form onSubmit={this.onSubmitClick}>
+            <div className="register-tree__form">
+              {this.state.mode === EditUserContribution.mode.singleTree ? (
+                <TCombForm
+                  ref="editTreeForm"
+                  type={singleTreeRegisterFormSchema}
+                  options={schemaOptionsSingle}
+                  value={this.props.userContribution}
+                />
+              ) : (
+                <TCombForm
+                  ref="editTreeForm"
+                  type={multipleTreesRegisterFormSchema}
+                  options={schemaOptionsMultiple}
+                  value={this.props.userContribution}
+                />
+              )}
+            </div>
+            <PrimaryButton onClick={this.onSubmitClick}>
+              {i18n.t('label.update')}
+            </PrimaryButton>
+          </form>
         </CardLayout>
       </div>
     );

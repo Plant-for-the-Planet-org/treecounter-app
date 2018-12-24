@@ -17,6 +17,18 @@ export const singleTreeForm = {
       title: 'label.tree_species',
       propertyOrder: 2
     },
+    plantProject: {
+      enum: ['1', '2', '3', '5'],
+      enum_titles: [
+        'Campeche Rainforest Restoration',
+        'project_2',
+        'project_3',
+        'project_5'
+      ],
+      type: 'string',
+      title: 'Plant Project',
+      propertyOrder: 2
+    },
     plantDate: {
       type: 'string',
       title: 'label.plant_date',
@@ -38,7 +50,7 @@ export const singleTreeForm = {
         properties: {
           image: {
             type: 'string',
-            title: 'imageFile',
+            title: 'label.browse',
             widget: 'file',
             propertyOrder: 1,
             category: 'contribution',
@@ -102,7 +114,7 @@ export const singleTreeForm = {
       propertyOrder: 8
     }
   },
-  required: ['treeCount', 'treeSpecies', 'plantDate'],
+  required: ['treeCount', 'treeSpecies', 'plantDate', 'geoLocation'],
   submit_url: '',
   submit_method: 'POST'
 };
@@ -119,6 +131,18 @@ export const multipleTreesForm = {
       },
       pattern: '.{1,}',
       propertyOrder: 1
+    },
+    plantProject: {
+      enum: ['1', '2', '3', '5'],
+      enum_titles: [
+        'Campeche Rainforest Restoration',
+        'project_2',
+        'project_3',
+        'project_5'
+      ],
+      type: 'string',
+      title: 'Plant Project',
+      propertyOrder: 2
     },
     treeSpecies: {
       type: 'string',
@@ -146,7 +170,7 @@ export const multipleTreesForm = {
         properties: {
           image: {
             type: 'string',
-            title: 'imageFile',
+            title: 'label.browse',
             widget: 'file',
             propertyOrder: 1
           }
@@ -156,7 +180,7 @@ export const multipleTreesForm = {
       propertyOrder: 5
     }
   },
-  required: ['treeCount', 'treeSpecies', 'plantDate'],
+  required: ['treeCount', 'treeSpecies', 'plantDate', 'geoLocation'],
   submit_url: '',
   submit_method: 'POST'
 };

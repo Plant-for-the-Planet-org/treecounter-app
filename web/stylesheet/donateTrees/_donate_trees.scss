@@ -1,7 +1,7 @@
 .donate-tress__container {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  //max-width: 400px;
   height: auto;
 
   .treecount-selector-wrapper {
@@ -135,6 +135,12 @@
           margin: 0 10px;
         }
       }
+      .price-conversion__radio {
+        width: 30%;
+      }
+      .price-conversion__equal {
+        width: 10%;
+      }
 
       input[type="text"] {
         border: none;
@@ -181,7 +187,7 @@
     padding: 5px;
     width: 70px;
     margin: 0;
-    height: 30px;
+    min-height: 30px;
     border-radius: 3px;
   }
 
@@ -271,7 +277,7 @@
   margin-bottom: 20px;
 
   .__PrivateStripeElement {
-    height: 60px;
+    height: 20px;
   }
 
   .StripeElement {
@@ -346,5 +352,8 @@
 
 .payment-success {
   padding: 30px;
+}
+
+.payment-options-container {
   width: 300px;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Platform,
-  StyleSheet,
+  ScrollView,
   Text,
   View,
   TouchableOpacity,
@@ -39,7 +39,7 @@ class SearchLayout extends React.Component {
   _handleChangeQuery = q => {
     getSuggestions(q).then(suggestions => {
       this.setState({ q: suggestions });
-      console.log('suggestions', suggestions);
+      //console.log('suggestions', suggestions);
     });
   };
 
@@ -64,7 +64,7 @@ class SearchLayout extends React.Component {
         </Header>
 
         {this.state.q ? (
-          <View>
+          <ScrollView>
             {this.state.q.map((suggestion, i) => {
               return (
                 <TouchableOpacity
@@ -80,8 +80,6 @@ class SearchLayout extends React.Component {
                         }
                       );
                     }, 0);
-
-                    console.log('click suggestions', suggestion);
                   }}
                 >
                   <Image
@@ -96,7 +94,7 @@ class SearchLayout extends React.Component {
                 </TouchableOpacity>
               );
             })}
-          </View>
+          </ScrollView>
         ) : null}
       </View>
     );

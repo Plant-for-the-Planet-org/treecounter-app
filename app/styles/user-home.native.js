@@ -13,10 +13,23 @@ export default (buttonStyles = EStyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    elevation: 3
+  },
   userProfileContainer: {
     flexDirection: 'row',
     padding: 10,
     marginBottom: 10
+  },
+  footerText: {
+    color: '#686060',
+    padding: 10
+  },
+  linkText: {
+    color: '$colorPrimaryAccent',
+    padding: 10
   },
   circle: {
     borderRadius: 35,
@@ -46,10 +59,11 @@ export default (buttonStyles = EStyleSheet.create({
     justifyContent: 'center'
   },
   profileImage: {
-    width: 65,
-    height: 65,
+    width: '93%',
+    height: '93%',
     resizeMode: 'contain',
-    padding: 5
+    padding: 5,
+    borderRadius: 33
   },
   nameStyle: {
     fontSize: 17,

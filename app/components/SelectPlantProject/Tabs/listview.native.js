@@ -1,80 +1,40 @@
 import React, { Component } from 'react';
-import {
-  View,
-  ScrollView,
-  Dimensions,
-  Text,
-  TextInput,
-  Image
-} from 'react-native';
+import { ScrollView } from 'react-native';
 import styles from '../../../styles/selectplantproject/list';
-import i18n from '../../../locales/i18n.js';
-
-import PrimaryButton from '../../Common/Button/PrimaryButton';
-import CardLayout from '../../Common/Card/CardLayout';
-
-const { height, width } = Dimensions.get('window');
-import { getAppBarHeight } from '../../../styles/common/header';
-import SeeMoreToggle from '../../Common/SeeMoreToggle';
-import SearchBar from '../../Header/SearchBar';
-import { iosSearchWhite } from '../../../assets';
+import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
 import Proptypes from 'prop-types';
+import scrollStyleNative from '../../../styles/common/scrollStyle.native';
 
 export default class ListViewProjects extends Component {
   constructor(props) {
     super(props);
+    this.state = { selectedItem: null };
   }
-
+  highLightProject(projectId) {
+    this.setState({ selectedItem: projectId });
+  }
+  selectProject(id) {
+    this.props.selectProject(id);
+  }
   render() {
     let { projects } = this.props;
     return (
-      <ScrollView>
-        <View style={styles.listContentContainer}>
-          {projects.length !== 0
-            ? projects.map(project => (
-                <View
-                  style={styles.listItemContainer}
-                  key={'filtered' + project.id}
-                >
-                  <View style={styles.projectNameContainer}>
-                    <Text style={styles.projectNameText}>{project.name}</Text>
-                    <Text style={[styles.projectNameText, styles.tpoNameText]}>
-                      By {project.tpo_name}
-                    </Text>
-                  </View>
-                  <View style={styles.projectMetaContainer}>
-                    <View style={styles.projectMetaLabels}>
-                      <Text style={styles.textStyle}>Location</Text>
-                      <Text style={styles.textStyle}>Planted Trees</Text>
-                      <Text style={styles.textStyle}>Survival Rate</Text>
-                      <Text style={styles.textStyle}>Cost Per Tree</Text>
-                    </View>
-                    <View style={styles.projectMetaValue}>
-                      <Text style={styles.textStyle}>{project.location}</Text>
-                      <Text style={styles.textStyle}>
-                        {project.countPlanted}
-                      </Text>
-                      <Text style={styles.textStyle}>
-                        {project.survivalRate}
-                      </Text>
-                      <Text style={styles.textStyle}>
-                        {project.treeCost.toFixed(2)}
-                      </Text>
-                    </View>
-                  </View>
-                  <View style={styles.projectButtonContainer}>
-                    <SeeMoreToggle seeMore={true} />
-                    <PrimaryButton
-                      buttonStyle={styles.buttonStyle}
-                      textStyle={styles.buttonTextStyle}
-                    >
-                      select project
-                    </PrimaryButton>
-                  </View>
-                </View>
-              ))
-            : null}
-        </View>
+      <ScrollView contentContainerStyle={scrollStyleNative.styleContainer}>
+        {projects.length !== 0
+          ? projects.map(project => (
+              <PlantProjectSnippet
+                cardStyle={styles.cardStyle}
+                key={'projectFull' + project.id}
+                onMoreClick={id => this.props.onMoreClick(id)}
+                plantProject={project}
+                onSelectClickedFeaturedProjects={id =>
+                  this.props.selectProject(id)
+                }
+                showMoreButton={false}
+                tpoName={project.tpo_name}
+              />
+            ))
+          : null}
       </ScrollView>
     );
   }

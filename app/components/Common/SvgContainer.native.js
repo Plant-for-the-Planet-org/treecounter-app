@@ -11,12 +11,19 @@ import SvgUri from 'react-native-svg-uri';
 import treecounterStyles from '../../styles/common/treecounter_svg';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import Svg, { Circle } from 'react-native-svg';
+import { Dimensions } from 'react-native';
 import _ from 'lodash';
 
+//Only take multiple of 10s
+const squareDimension =
+  Math.floor(
+    Math.min(Dimensions.get('window').width, Dimensions.get('window').height) /
+      10
+  ) * 10;
 const totalCount = Array.from({ length: 72 }, (v, k) => k + 1);
 export default class SvgContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       treesWidth: 0,
       plantedDasharray: '0,1000'
@@ -35,6 +42,16 @@ export default class SvgContainer extends Component {
       treesWidth: TreesWidth
     });
   }
+
+  componentWillMount() {
+    let { planted, target } = this.props;
+    let plantedWidth = this.calculatePlantedWidth(planted, target, 112);
+    let TreesWidth = this.calculateTreesWidth(planted, target);
+    this.setState({
+      plantedDasharray: plantedWidth + ',1000',
+      treesWidth: TreesWidth
+    });
+  }
   componentDidMount() {
     this.StartBallonsRotateFunction();
     this.StartClouds1RotateFunction();
@@ -43,11 +60,19 @@ export default class SvgContainer extends Component {
 
   calculatePlantedWidth(planted, target, radius) {
     let total = 2 * 3.14 * radius;
-    return total / (1 + target / planted);
+    if (target === 0) {
+      return total;
+    } else {
+      return total * planted / target;
+    }
   }
 
   calculateTreesWidth(planted, target) {
-    return parseInt(72 / (1 + target / planted));
+    if (target === 0) {
+      return 72;
+    } else {
+      return Math.round(72 * planted / target);
+    }
   }
 
   StartBallonsRotateFunction() {
@@ -102,7 +127,9 @@ export default class SvgContainer extends Component {
           <Image style={treecounterStyles.imageStyle} source={svgBackground} />
           <View style={treecounterStyles.cloudStyle}>
             <Animated.View
-              style={{ transform: [{ rotate: RotateClouds1Data }] }}
+              style={{
+                transform: [{ rotate: RotateClouds1Data }]
+              }}
             >
               <SvgUri width="100%" height="100%" source={svgs['cloud1']} />
             </Animated.View>
@@ -121,29 +148,24 @@ export default class SvgContainer extends Component {
               <SvgUri width="100%" height="100%" source={svgs['ballons']} />
             </Animated.View>
           </View>
-          {totalCount.map(
-            i =>
-              i <= treesWidth ? (
-                <View key={'tree-' + i} style={treecounterStyles.potStyle}>
-                  <SvgUri
-                    width="100%"
-                    height="100%"
-                    // source = {svgs['darkCrownTree' + ('' + i)]}
-                    source={
-                      svgs[_.padStart('darkCrownTree' + ('' + i), 3, '0')]
-                    }
-                  />
-                </View>
-              ) : null
-          )}
+          {totalCount.map(i => {
+            return i <= treesWidth ? (
+              <View key={'tree-' + i} style={treecounterStyles.potStyle}>
+                <SvgUri
+                  width="100%"
+                  height="100%"
+                  source={svgs['darkCrownTree' + _.padStart('' + i, 3, '0')]}
+                />
+              </View>
+            ) : null;
+          })}
           {totalCount.map(i => {
             return i > treesWidth ? (
               <View key={'pot-' + i} style={treecounterStyles.potStyle}>
                 <SvgUri
                   width="100%"
                   height="100%"
-                  // source = {svgs['pot' + ('' + i)]}
-                  source={svgs[_.padStart('pot' + ('' + i), 2, '0')]}
+                  source={svgs['pot' + _.padStart('' + i, 2, '0')]}
                 />
               </View>
             ) : null;
@@ -174,8 +196,9 @@ export default class SvgContainer extends Component {
           <View style={treecounterStyles.svgContentContainer}>
             {this.props !== null ? (
               <TreecounterGraphicsText
-                trillion={true}
+                trillion={this.props.trillion}
                 treecounterData={this.props}
+                onToggle={toggleVal => this.props.onToggle(toggleVal)}
               />
             ) : null}
           </View>
@@ -192,7 +215,9 @@ SvgContainer.propTypes = {
   community: PropTypes.number.isRequired,
   personal: PropTypes.number.isRequired,
   targetYear: PropTypes.number,
-  exposeMissing: PropTypes.bool
+  exposeMissing: PropTypes.bool,
+  trillion: PropTypes.bool,
+  onToggle: PropTypes.func
 };
 
 SvgContainer.defaultProps = {
@@ -200,6 +225,7 @@ SvgContainer.defaultProps = {
   target: 0,
   planted: 0,
   community: 0,
+  trillion: false,
   personal: 0,
   exposeMissing: true,
   targetYear: 2020

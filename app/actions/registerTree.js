@@ -4,8 +4,9 @@ import { postAuthenticatedRequest } from '../utils/api';
 
 import { updateRoute } from '../helpers/routerHelper';
 import { mergeEntities } from '../reducers/entitiesReducer';
-import { contributionSchema, treecounterSchema } from '../schemas/index';
-import { debug } from '../debug/index';
+import { contributionSchema, treecounterSchema } from '../schemas';
+import { debug } from '../debug';
+import { setProgressModelState } from '../reducers/modelDialogReducer';
 
 export function registerTree(
   plantContribution,
@@ -14,6 +15,7 @@ export function registerTree(
   navigation
 ) {
   return dispatch => {
+    dispatch(setProgressModelState(true));
     postAuthenticatedRequest('plantContribution_post', plantContribution, {
       treecounter: treecounterId,
       mode: mode
@@ -25,10 +27,12 @@ export function registerTree(
         NotificationManager.success(statusText, 'Success', 5000);
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
-        updateRoute('app_userHome', dispatch || navigation);
+        dispatch(setProgressModelState(false));
+        updateRoute('app_userHome', navigation || dispatch);
       })
       .catch(error => {
         debug(error.response);
+        dispatch(setProgressModelState(false));
         NotificationManager.error(error.response.data.message, 'Error', 5000);
       });
   };

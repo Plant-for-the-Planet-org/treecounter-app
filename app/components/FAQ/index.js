@@ -12,12 +12,12 @@ import TextHeading from '../../components/Common/Heading/TextHeading';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 import i18n from '../../locales/i18n.js';
 
-import CardLayout from '../Common/Card/CardLayout';
+import CardLayout from '../Common/Card';
 
 export default class FAQ extends Component {
   GetFAQList() {
-    return this.props.faqs.map(faq => (
-      <AccordionItem>
+    return this.props.faqs.map((faq, i) => (
+      <AccordionItem key={'faq' + i}>
         <AccordionItemTitle>
           <div className="u-position-relative">
             {faq.question}

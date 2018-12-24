@@ -19,7 +19,10 @@ export default class SignUpType extends Component {
         className={'signup-type ' + (active ? 'active' : '')}
         onClick={this.OnProfileClick}
       >
-        <img src={imgSrc} />
+        <div className="signupTypeImage">
+          <img src={imgSrc} />
+        </div>
+
         <div className="signup-type__text">
           <TextSpan>{salutation}</TextSpan>
           <hr />

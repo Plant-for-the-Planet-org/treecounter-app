@@ -21,7 +21,7 @@ class ForgotPasswordContainer extends React.Component {
   };
 
   onClick(value) {
-    this.props.forgot_password(value);
+    this.props.forgot_password(value, this.props.navigation);
   }
 
   render() {
@@ -53,5 +53,5 @@ export default connect(null, mapDispatchToProps)(ForgotPasswordContainer);
 ForgotPasswordContainer.propTypes = {
   forgot_password: PropTypes.func,
   route: PropTypes.func,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object
 };

@@ -14,9 +14,12 @@ import {
   selectPlantProjectAction,
   clearPlantProject
 } from '../../actions/selectPlantProjectAction';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { fetchCurrencies } from '../../actions/currencies';
-import { donate, paymentClear } from '../../actions/donateAction';
+import { donate, paymentClear, gift } from '../../actions/donateAction';
+import { setProgressModelState } from '../../reducers/modelDialogReducer';
 
+import { updateRoute } from '../../helpers/routerHelper';
 import DonateTrees from '../../components/DonateTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 
@@ -24,8 +27,8 @@ class DonationTreesContainer extends Component {
   componentDidMount() {
     //  this.props.selectPlantProjectAction(1);
     this.props.fetchCurrencies();
-    console.log('In donate Tree Route' + this.props.navigation);
-    console.log(this.props.navigation);
+    // console.log('In donate Tree Route' + this.props.navigation);
+    // console.log(this.props.navigation);
   }
 
   onTabChange(title) {
@@ -33,7 +36,7 @@ class DonationTreesContainer extends Component {
   }
   render() {
     let flag = this.props.currentUserProfile ? true : false;
-    console.log('donate tree called');
+    // console.log('donate tree called');
     return (
       <DonateTrees
         ref={'donateTreesContainer'}
@@ -41,27 +44,35 @@ class DonationTreesContainer extends Component {
         selectedTpo={this.props.selectedTpo}
         currentUserProfile={this.props.currentUserProfile}
         currencies={this.props.currencies}
-        donate={(donationContribution, plantProjectId) =>
-          this.props.donate(donationContribution, plantProjectId, flag)
+        donate={(donationContribution, plantProjectId, profile) =>
+          this.props.donate(donationContribution, plantProjectId, profile)
         }
         onTabChange={title => this.onTabChange(title)}
         supportTreecounter={this.props.supportTreecounter}
         paymentStatus={this.props.paymentStatus}
         paymentClear={this.props.paymentClear}
+        setProgressModelState={this.props.setProgressModelState}
         plantProjectClear={this.props.clearPlantProject}
+        loadUserProfile={this.props.loadUserProfile}
+        updateRoute={(routeName, id) =>
+          this.props.route(routeName, id, this.props.navigation)
+        }
+        {...this.props}
       />
     );
   }
 }
 
-const mapStateToProps = state => ({
-  selectedProject: selectedPlantProjectSelector(state),
-  selectedTpo: selectedTpoSelector(state),
-  currentUserProfile: currentUserProfileSelector(state),
-  supportTreecounter: supportedTreecounterSelector(state),
-  currencies: currenciesSelector(state),
-  paymentStatus: getPaymentStatus(state)
-});
+const mapStateToProps = state => {
+  return {
+    selectedProject: selectedPlantProjectSelector(state),
+    selectedTpo: selectedTpoSelector(state),
+    currentUserProfile: currentUserProfileSelector(state),
+    supportTreecounter: supportedTreecounterSelector(state),
+    currencies: currenciesSelector(state),
+    paymentStatus: getPaymentStatus(state)
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
@@ -69,8 +80,13 @@ const mapDispatchToProps = dispatch => {
       selectPlantProjectAction,
       fetchCurrencies,
       donate,
+      gift,
       paymentClear,
-      clearPlantProject
+      clearPlantProject,
+      setProgressModelState,
+      loadUserProfile,
+      route: (routeName, id, navigation) => dispatch =>
+        updateRoute(routeName, navigation || dispatch, id)
     },
     dispatch
   );
@@ -90,7 +106,11 @@ DonationTreesContainer.propTypes = {
   selectPlantProjectAction: PropTypes.func,
   paymentClear: PropTypes.func,
   donate: PropTypes.func,
+  gift: PropTypes.func,
   fetchCurrencies: PropTypes.func,
   clearPlantProject: PropTypes.func,
-  supportTreecounter: PropTypes.object
+  supportTreecounter: PropTypes.object,
+  setProgressModelState: PropTypes.func,
+  loadUserProfile: PropTypes.func,
+  route: PropTypes.func
 };

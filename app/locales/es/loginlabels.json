@@ -1,7 +1,7 @@
 {
-  "reset": "Reiniciar.",
+  "reset": "Restaurar.",
   "dont_have_account": "No tienes una cuenta?",
-  "login": "Iniciar Sesión",
+  "login": "Iniciar sesión",
   "password": "Contraseña",
   "current_password": "Contraseña Actual"
 }

@@ -58,7 +58,10 @@ export default class GiftUser extends Component {
           </View>
         </CardLayout>
         <CardLayout style={{ flex: 0.8 }}>
-          <SearchUser onSearchResultClick={this.onSearchResultClick} />
+          <SearchUser
+            onSearchResultClick={this.onSearchResultClick}
+            currentUserProfile={this.props.currentUserProfile}
+          />
 
           <TextInput
             multiline={true}

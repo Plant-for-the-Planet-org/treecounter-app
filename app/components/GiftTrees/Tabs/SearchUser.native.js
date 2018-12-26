@@ -45,24 +45,23 @@ class SearchUser extends React.Component {
   };
 
   _onNavigationClick(suggestion) {
-    if (this.props.onSearchResultClick) {
+    if (
+      this.props.onSearchResultClick &&
+      !this.isMyself(suggestion, this.props.currentUserProfile)
+    ) {
       this.props.onSearchResultClick(suggestion);
-      this.setState({
-        searchResultClicked: true,
-        selectedSuggestionName: suggestion.name
-      });
-    } else {
-      this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-        treeCounterId: suggestion.slug || suggestion.id,
-        suggestion
-      });
       this.setState({
         searchResultClicked: true,
         selectedSuggestionName: suggestion.name
       });
     }
   }
-
+  isMyself(treecounter, currentUserProfile) {
+    return (
+      null !== currentUserProfile &&
+      currentUserProfile.treecounter.id === treecounter.id
+    );
+  }
   render() {
     return (
       <View style={{ width: '100%' }}>

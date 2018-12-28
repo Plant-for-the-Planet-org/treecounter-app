@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, ScrollView } from 'react-native';
+import { Text, View, Image, ScrollView, Animated } from 'react-native';
 import { PropTypes } from 'prop-types';
 import CategoryTypes from './categoryTypes';
 import LoadingIndicator from '../Common/LoadingIndicator';
@@ -20,7 +20,8 @@ export default class Leaderboard extends Component {
     super(props);
     this.state = {
       selectedCategory: '',
-      timeSorting: ''
+      timeSorting: '',
+      scrollY: new Animated.Value(0)
     };
     this._handleItemPress = this._handleItemPress.bind(this);
   }
@@ -60,6 +61,11 @@ export default class Leaderboard extends Component {
   }
 
   _getTableView = selectedCategory => {
+    const headerHeight = this.state.scrollY.interpolate({
+      inputRange: [0, 60],
+      outputRange: [-30, -65],
+      extrapolate: 'clamp'
+    });
     console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
     let maxPlanted = 0;
@@ -72,17 +78,21 @@ export default class Leaderboard extends Component {
       listItemsUI = (
         <CardLayout style={styles.cardStyle}>
           {selectedCategory && (
-            <Image
+            <Animated.Image
               source={categoryIcons[selectedCategory]['selected']}
-              style={styles.cardImageStyle}
+              style={[styles.cardImageStyle, { top: headerHeight }]}
             />
           )}
           <ScrollView
+            scrollEventThrottle={16}
             contentContainerStyle={{
               justifyContent: 'flex-start',
               flexGrow: 1
             }}
             horizontal={false}
+            onScroll={Animated.event([
+              { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
+            ])}
           >
             {this.props.queryResult ? (
               <View style={{ width: '98%', padding: 10, marginTop: 15 }}>

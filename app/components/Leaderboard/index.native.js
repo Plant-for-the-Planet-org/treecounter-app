@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground, Image, ScrollView } from 'react-native';
+import { Text, View, Image, ScrollView } from 'react-native';
 import { PropTypes } from 'prop-types';
 import CategoryTypes from './categoryTypes';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import CardLayout from '../Common/Card';
 import styles from '../../styles/leaderboard/leader_board';
-import { selector_menu } from '../../assets';
+import { selector_menu, filter } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import ContextMenuItem from './contextMenuItem.native';
@@ -13,6 +13,7 @@ import { categoryIcons } from '../../helpers/utils';
 import LeaderboardItem from './leaderBoardListItem.native';
 import { getLocalRoute } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n';
+import _ from 'lodash';
 
 export default class Leaderboard extends Component {
   constructor(props) {
@@ -58,37 +59,33 @@ export default class Leaderboard extends Component {
     }
   }
 
-  _getTableView = () => {
+  _getTableView = selectedCategory => {
     console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
-    const { categoryInfo } = this.props;
-    const selectedCategory =
-      this.state.selectedCategory ||
-      (categoryInfo &&
-        categoryInfo.categoryKeys &&
-        categoryInfo.categoryKeys[0]);
-    const selectedSorting =
-      this.state.timeSorting ||
-      (this.props.timePeriodsInfo &&
-        this.props.timePeriodsInfo.timePeriodsKeys[0]);
+    let maxPlanted = 0;
+    if (this.props.queryResult) {
+      const sortedQueryResults = _.sortBy(this.props.queryResult, ['planted']);
+      maxPlanted = sortedQueryResults[sortedQueryResults.length - 1].planted;
+    }
+
     if (selectedCategory)
       listItemsUI = (
         <CardLayout style={styles.cardStyle}>
-          <Image
-            source={categoryIcons[selectedCategory]['selected']}
-            style={styles.cardImageStyle}
-          />
-          <View style={styles.plantedContainer}>
-            <Text style={styles.plantedTextStyle}>
-              Planted on{' '}
-              {this.props.timePeriodsInfo.timePeriods[selectedSorting]}
-            </Text>
-            <View style={styles.plantedUnderline} />
-          </View>
-
-          {this.props.queryResult ? (
-            <ScrollView contentContainerStyle={{}} horizontal={false}>
-              <View style={{ width: '98%', padding: 10 }}>
+          {selectedCategory && (
+            <Image
+              source={categoryIcons[selectedCategory]['selected']}
+              style={styles.cardImageStyle}
+            />
+          )}
+          <ScrollView
+            contentContainerStyle={{
+              justifyContent: 'flex-start',
+              flexGrow: 1
+            }}
+            horizontal={false}
+          >
+            {this.props.queryResult ? (
+              <View style={{ width: '98%', padding: 10, marginTop: 15 }}>
                 {this.props.queryResult.map((result, index) => {
                   return (
                     <LeaderboardItem
@@ -96,7 +93,7 @@ export default class Leaderboard extends Component {
                       onPress={this._handleItemPress}
                       image={result.image}
                       planted={result.planted}
-                      target={result.target}
+                      target={maxPlanted}
                       index={index}
                       title={result.caption}
                       treeCounterId={result.treecounterId}
@@ -105,10 +102,10 @@ export default class Leaderboard extends Component {
                   );
                 })}
               </View>
-            </ScrollView>
-          ) : (
-            <LoadingIndicator />
-          )}
+            ) : (
+              <LoadingIndicator />
+            )}
+          </ScrollView>
         </CardLayout>
       );
 
@@ -148,9 +145,18 @@ export default class Leaderboard extends Component {
     if (!this.props.categoryInfo) {
       return null;
     }
+    const selectedSorting =
+      this.state.timeSorting ||
+      (this.props.timePeriodsInfo &&
+        this.props.timePeriodsInfo.timePeriodsKeys[0]);
     sortView = (
       <View style={styles.sortView}>
-        <Text style={styles.itemViewText}>Sort by time</Text>
+        <Text style={styles.itemViewText}>
+          Sort by{': '}
+          <Text style={styles.plantedTextStyle}>
+            {this.props.timePeriodsInfo.timePeriods[selectedSorting]}
+          </Text>
+        </Text>
         <ReactNativeTooltipMenu
           ref={'tooltip'}
           labelContainerStyle={{
@@ -166,7 +172,7 @@ export default class Leaderboard extends Component {
                 this.refs['tooltip'].toggle();
               }}
             >
-              <Image style={styles.contextMenu} source={selector_menu} />
+              <Image style={styles.contextMenu} source={filter} />
             </TouchableItem>
           }
           items={this._getContextMenuItems()}
@@ -176,6 +182,12 @@ export default class Leaderboard extends Component {
     return sortView;
   };
   render() {
+    const { categoryInfo } = this.props;
+    const selectedCategory =
+      this.state.selectedCategory ||
+      (categoryInfo &&
+        categoryInfo.categoryKeys &&
+        categoryInfo.categoryKeys[0]);
     return (
       <View style={styles.leaderBoardContainer}>
         <CategoryTypes
@@ -184,7 +196,8 @@ export default class Leaderboard extends Component {
           handleCategoryChange={this._handleCategoryChange}
         />
         {this._getSortView()}
-        {this._getTableView()}
+
+        {this._getTableView(selectedCategory)}
       </View>
     );
   }

@@ -73,6 +73,7 @@ export default class Imprint extends Component {
       <View style={styles.content}>
         <HTMLView
           value={section.description}
+          addLineBreaks={false}
           stylesheet={styles}
           onLinkPress={url => {
             try {

@@ -14,7 +14,7 @@ import styles, {
   SearchContainerWidth
 } from '../../styles/header/search_bar.native';
 import PropTypes from 'prop-types';
-import { TouchableItem } from '../../components/Common/TouchableItem.native';
+import TouchableItem from '../../components/Common/TouchableItem.native';
 
 const SearchIcon = () => (
   <View style={styles.searchIconContainer}>
@@ -111,36 +111,33 @@ class SearchBar extends React.PureComponent {
 
           <SearchIcon />
         </View>
-
-        {!this.props.hideCancel && (
-          <View
-            key={
-              showCancelButton
-                ? 'visible-cancel-button'
-                : 'layout-only-cancel-button'
-            }
-            style={[
-              styles.buttonContainer,
-              { opacity: showCancelButton ? 1 : 0 }
-            ]}
+        <View
+          key={
+            showCancelButton
+              ? 'visible-cancel-button'
+              : 'layout-only-cancel-button'
+          }
+          style={[
+            styles.buttonContainer,
+            { opacity: showCancelButton ? 1 : 0 }
+          ]}
+        >
+          <TouchableItem
+            style={styles.button}
+            hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
+            onLayout={this._handleLayoutCancelButton}
+            onPress={this._handlePressCancelButton}
           >
-            <TouchableItem
-              style={styles.button}
-              hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
-              onLayout={this._handleLayoutCancelButton}
-              onPress={data => this._handlePressCancelButton()}
+            <Text
+              style={{
+                fontSize: 17,
+                color: this.props.tintColor || '#007AFF'
+              }}
             >
-              <Text
-                style={{
-                  fontSize: 17,
-                  color: this.props.tintColor || '#007AFF'
-                }}
-              >
-                Cancel
-              </Text>
-            </TouchableItem>
-          </View>
-        )}
+              Cancel
+            </Text>
+          </TouchableItem>
+        </View>
       </View>
     );
   }
@@ -172,8 +169,7 @@ SearchBar.propTypes = {
   tintColor: PropTypes.any,
   textColor: PropTypes.any,
   inputValue: PropTypes.string,
-  navigation: PropTypes.any,
-  hideCancel: PropTypes.any
+  navigation: PropTypes.any
 };
 
 export default withNavigation(SearchBar);

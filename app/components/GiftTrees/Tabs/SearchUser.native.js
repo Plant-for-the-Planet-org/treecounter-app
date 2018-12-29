@@ -80,7 +80,6 @@ class SearchUser extends React.Component {
           tintColor={
             this.props.searchInputTintColor || this.props.headerTintColor
           }
-          hideCancel
         />
 
         {this.state.q && !this.state.searchResultClicked ? (

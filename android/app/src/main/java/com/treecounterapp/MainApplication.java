@@ -6,7 +6,6 @@ import com.facebook.react.ReactApplication;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 //import com.gettipsi.stripe.StripeReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.taessina.paypal.RNPaypalWrapperPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.horcrux.svg.SvgPackage;
@@ -35,7 +34,6 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactNativeYouTube(),
            // new StripeReactPackage(),
             new RNDeviceInfo(),
-            new RNPaypalWrapperPackage(),
             new ImagePickerPackage(),
             new RNI18nPackage(),
             new SvgPackage()

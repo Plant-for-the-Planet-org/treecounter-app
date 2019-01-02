@@ -140,7 +140,6 @@ dependencies {
     compile project(':react-native-youtube')
     //compile project(':tipsi-stripe')
     compile project(':react-native-device-info')
-    compile project(':react-native-paypal-wrapper')
     compile project(':react-native-image-picker')
     compile project(':react-native-i18n')
     compile project(':react-native-svg')

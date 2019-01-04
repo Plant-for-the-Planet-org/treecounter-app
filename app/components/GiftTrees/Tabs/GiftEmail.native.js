@@ -34,7 +34,14 @@ export default class GiftEmail extends Component {
     }
   }
   onChangeText(val) {
-    this.setState({ giftMessage: val });
+    if (!this.giftInvitation.getValue()) {
+      this.giftInvitation.validate();
+    } else {
+      this.setState({ formValue: this.giftInvitation.getValue() });
+    }
+    this.setState({
+      giftMessage: val
+    });
   }
 
   render() {
@@ -69,7 +76,7 @@ export default class GiftEmail extends Component {
             ref={this.setGiftInvitation}
             type={giftInvitationFormSchema}
             options={giftInvitationSchemaOptions}
-            value={this.props.formValue}
+            value={this.state.formValue}
           />
           <TextInput
             multiline={true}

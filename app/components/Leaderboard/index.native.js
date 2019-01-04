@@ -63,8 +63,16 @@ export default class Leaderboard extends Component {
   _getTableView = selectedCategory => {
     const headerHeight = this.state.scrollY.interpolate({
       inputRange: [0, 60],
-      outputRange: [-30, -65],
+      outputRange: [-25, -55],
       extrapolate: 'clamp'
+    });
+    const headerTranslate = Animated.diffClamp(
+      this.state.scrollY,
+      0,
+      60
+    ).interpolate({
+      inputRange: [0, 60],
+      outputRange: [0, -20]
     });
     console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
@@ -83,16 +91,22 @@ export default class Leaderboard extends Component {
               style={[styles.cardImageStyle, { top: headerHeight }]}
             />
           )}
-          <ScrollView
+          <Animated.ScrollView
+            bounces={false}
             scrollEventThrottle={16}
             contentContainerStyle={{
               justifyContent: 'flex-start',
               flexGrow: 1
             }}
             horizontal={false}
-            onScroll={Animated.event([
-              { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
-            ])}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
+              {
+                listener: event => {
+                  this.props.handleScrollAnimation(event);
+                }
+              }
+            )}
           >
             {this.props.queryResult ? (
               <View style={{ width: '98%', padding: 10, marginTop: 15 }}>
@@ -115,7 +129,7 @@ export default class Leaderboard extends Component {
             ) : (
               <LoadingIndicator />
             )}
-          </ScrollView>
+          </Animated.ScrollView>
         </CardLayout>
       );
 
@@ -224,5 +238,6 @@ Leaderboard.propTypes = {
   queryResult: PropTypes.array,
   mapInfo: PropTypes.object,
   sortingQuery: PropTypes.object,
-  navigation: PropTypes.navigation
+  navigation: PropTypes.navigation,
+  handleScrollAnimation: PropTypes.func
 };

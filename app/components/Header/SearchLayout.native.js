@@ -16,6 +16,7 @@ import { getImageUrl } from '../../actions/apiRouting';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import styles from '../../styles/header/search_layout.native';
+import _ from 'lodash';
 
 class SearchLayout extends React.Component {
   static SearchBar = SearchBar;
@@ -30,6 +31,10 @@ class SearchLayout extends React.Component {
   state = {
     q: []
   };
+  constructor(props) {
+    super(props);
+    this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 2000);
+  }
 
   _handleSubmit = q => {
     this.props.onSubmit && this.props.onSubmit(q);
@@ -48,7 +53,7 @@ class SearchLayout extends React.Component {
       <View style={styles.container}>
         <Header backButton={Platform.OS === 'android'}>
           <SearchBar
-            onChangeQuery={this._handleChangeQuery}
+            onChangeQuery={this.onChangeTextDelayed}
             onSubmit={this._handleSubmit}
             placeholderTextColor={this.props.searchInputPlaceholderTextColor}
             textColor={this.props.searchInputTextColor}

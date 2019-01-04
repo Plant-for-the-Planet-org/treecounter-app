@@ -15,6 +15,7 @@ import { getImageUrl } from '../../../actions/apiRouting';
 import { getLocalRoute } from '../../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import styles from '../../../styles/header/search_layout.native';
+import _ from 'lodash';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
@@ -25,6 +26,10 @@ class SearchUser extends React.Component {
     headerBackgroundColor: '#b9d384',
     headerTintColor: '#fff'
   };
+  constructor(props) {
+    super(props);
+    this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 2000);
+  }
 
   state = {
     q: [],
@@ -51,7 +56,9 @@ class SearchUser extends React.Component {
     ) {
       this.props.onSearchResultClick(suggestion);
       this.setState({
-        searchResultClicked: true,
+        searchResultClicked: true
+      });
+      this.setState({
         selectedSuggestionName: suggestion.name
       });
     }
@@ -66,7 +73,7 @@ class SearchUser extends React.Component {
     return (
       <View style={{ width: '100%' }}>
         <SearchBar
-          onChangeQuery={this._handleChangeQuery}
+          onChangeQuery={this.onChangeTextDelayed}
           inputValue={this.state.selectedSuggestionName}
           onSubmit={this._handleSubmit}
           placeholderTextColor={this.props.searchInputPlaceholderTextColor}

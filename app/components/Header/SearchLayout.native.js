@@ -33,7 +33,7 @@ class SearchLayout extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 2000);
+    this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 200);
   }
 
   _handleSubmit = q => {
@@ -62,6 +62,7 @@ class SearchLayout extends React.Component {
               this.props.searchInputUnderlineColorAndroid ||
               this.props.headerBackgroundColor
             }
+            showCancelSearchButton={true}
             tintColor={
               this.props.searchInputTintColor || this.props.headerTintColor
             }

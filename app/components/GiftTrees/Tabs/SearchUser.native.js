@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Platform,
-  ScrollView,
-  Text,
-  View,
-  TouchableOpacity,
-  Image
-} from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity, Image } from 'react-native';
 
 import SearchBar from '../../../components/Header/SearchBar.native';
 import Header from '../../../components/Header/Header.native';
@@ -28,7 +21,7 @@ class SearchUser extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 2000);
+    this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 200);
   }
 
   state = {
@@ -83,7 +76,14 @@ class SearchUser extends React.Component {
             this.props.searchInputUnderlineColorAndroid ||
             this.props.headerBackgroundColor
           }
-          style={{ width: '100%', height: 30, marginTop: 10, paddingLeft: 27 }}
+          showCancelSearchButton={false}
+          style={{
+            width: '100%',
+            height: 30,
+            marginTop: 10,
+            paddingLeft: 27,
+            flexDirection: 'row'
+          }}
           tintColor={
             this.props.searchInputTintColor || this.props.headerTintColor
           }

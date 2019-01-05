@@ -124,21 +124,23 @@ class SearchBar extends React.PureComponent {
             { opacity: showCancelButton ? 1 : 0 }
           ]}
         >
-          <TouchableItem
-            style={styles.button}
-            hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
-            onLayout={this._handleLayoutCancelButton}
-            onPress={this._handlePressCancelButton}
-          >
-            <Text
-              style={{
-                fontSize: 17,
-                color: this.props.tintColor || '#007AFF'
-              }}
+          {this.props.showCancelSearchButton && (
+            <TouchableItem
+              style={styles.button}
+              hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
+              onLayout={this._handleLayoutCancelButton}
+              onPress={this._handlePressCancelButton}
             >
-              Cancel
-            </Text>
-          </TouchableItem>
+              <Text
+                style={{
+                  fontSize: 17,
+                  color: this.props.tintColor || '#007AFF'
+                }}
+              >
+                Cancel
+              </Text>
+            </TouchableItem>
+          )}
         </View>
       </View>
     );
@@ -156,22 +158,18 @@ class SearchBar extends React.PureComponent {
   };
 
   _handlePressCancelButton = () => {
-    if (this.props.onCancelPress) {
-      this.props.onCancelPress(this.props.navigation.goBack);
-    } else {
-      this.props.navigation.navigate('appStackNavigator');
-    }
+    this.props.navigation.navigate('appStackNavigator');
   };
 }
 
 SearchBar.propTypes = {
   onChangeQuery: PropTypes.func,
   onSubmit: PropTypes.func,
-  onCancelPress: PropTypes.func,
   tintColor: PropTypes.any,
   textColor: PropTypes.any,
   inputValue: PropTypes.string,
-  navigation: PropTypes.any
+  navigation: PropTypes.any,
+  showCancelSearchButton: PropTypes.boolean
 };
 
 export default withNavigation(SearchBar);

@@ -18,8 +18,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
       height: 3
     },
     shadowOpacity: 0.5,
-    elevation: 1,
-    width: '100%'
+    elevation: 1
   },
   projectImageContainer: {
     height: Layout.window.width * 0.5,

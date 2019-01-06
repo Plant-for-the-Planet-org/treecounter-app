@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Platform,
-  ScrollView,
-  Text,
-  View,
-  TouchableOpacity,
-  Image
-} from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity, Image } from 'react-native';
 
 import SearchBar from '../../../components/Header/SearchBar.native';
 import Header from '../../../components/Header/Header.native';
@@ -15,6 +8,7 @@ import { getImageUrl } from '../../../actions/apiRouting';
 import { getLocalRoute } from '../../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import styles from '../../../styles/header/search_layout.native';
+import _ from 'lodash';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
@@ -25,6 +19,10 @@ class SearchUser extends React.Component {
     headerBackgroundColor: '#b9d384',
     headerTintColor: '#fff'
   };
+  constructor(props) {
+    super(props);
+    this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 200);
+  }
 
   state = {
     q: [],
@@ -45,29 +43,30 @@ class SearchUser extends React.Component {
   };
 
   _onNavigationClick(suggestion) {
-    if (this.props.onSearchResultClick) {
+    if (
+      this.props.onSearchResultClick &&
+      !this.isMyself(suggestion, this.props.currentUserProfile)
+    ) {
       this.props.onSearchResultClick(suggestion);
       this.setState({
-        searchResultClicked: true,
-        selectedSuggestionName: suggestion.name
-      });
-    } else {
-      this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-        treeCounterId: suggestion.slug || suggestion.id,
-        suggestion
+        searchResultClicked: true
       });
       this.setState({
-        searchResultClicked: true,
         selectedSuggestionName: suggestion.name
       });
     }
   }
-
+  isMyself(treecounter, currentUserProfile) {
+    return (
+      null !== currentUserProfile &&
+      currentUserProfile.treecounter.id === treecounter.id
+    );
+  }
   render() {
     return (
       <View style={{ width: '100%' }}>
         <SearchBar
-          onChangeQuery={this._handleChangeQuery}
+          onChangeQuery={this.onChangeTextDelayed}
           inputValue={this.state.selectedSuggestionName}
           onSubmit={this._handleSubmit}
           placeholderTextColor={this.props.searchInputPlaceholderTextColor}
@@ -77,11 +76,17 @@ class SearchUser extends React.Component {
             this.props.searchInputUnderlineColorAndroid ||
             this.props.headerBackgroundColor
           }
-          style={{ width: '100%', height: 30, marginTop: 10, paddingLeft: 27 }}
+          showCancelSearchButton={false}
+          style={{
+            width: '100%',
+            height: 30,
+            marginTop: 10,
+            paddingLeft: 27,
+            flexDirection: 'row'
+          }}
           tintColor={
             this.props.searchInputTintColor || this.props.headerTintColor
           }
-          hideCancel
         />
 
         {this.state.q && !this.state.searchResultClicked ? (

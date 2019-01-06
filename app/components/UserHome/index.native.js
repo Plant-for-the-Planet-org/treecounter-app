@@ -54,6 +54,11 @@ export default class UserHome extends Component {
 
   _handleIndexChange = index => {
     this.setState({ index });
+    this.props.navigation.setParams({
+      handleSort: title => {
+        console.log('sorting');
+      }
+    });
   };
 
   _renderTabBar = props => {

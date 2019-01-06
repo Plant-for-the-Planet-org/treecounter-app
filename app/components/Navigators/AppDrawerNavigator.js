@@ -182,8 +182,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
-  const getTitle = function(navigation) {
-    let title = navigation.getParam('titleParam');
+  const getParam = function(navigation, paramName) {
+    let title = navigation.getParam(paramName);
     try {
       if (!title) {
         title = i18n.t(headerLabels[navigation.state.routeName]);
@@ -199,7 +199,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
             headerLabels[navigation.state.routes[index].routeName]
           );
           if (navigation.state.routes[index].hasOwnProperty('params')) {
-            const childTitle = navigation.state.routes[index].params.titleParam;
+            const childTitle = navigation.state.routes[index].params[paramName];
 
             if (childTitle) {
               title = childTitle;
@@ -256,15 +256,18 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     },
     {
       navigationOptions: ({ navigation }) => {
-        let title = navigation.getParam('titleParam');
+        let sortHandler = getParam(navigation, 'handleSort');
+
         let navigationConfig = {
           headerStyle: styles.container,
           headerTintColor: '#fff',
           headerBackTitle: null,
-          title: getTitle(navigation)
+          title: getParam(navigation, 'titleParam')
         };
         // if (homeRoutes.includes(navigation.state.routeName)) {
-        navigationConfig.headerRight = HeaderRight(navigation);
+        navigationConfig.headerRight = (
+          <HeaderRight navigation={navigation} sortHandler={sortHandler} />
+        );
         // }
         // if (
         //   navigation.state.routeName === getLocalRoute('app_userHome') ||

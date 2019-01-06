@@ -5,10 +5,7 @@ import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
 import svgStyles from '../../styles/common/treecounter_svg';
 import styles from '../../styles/trillion.native';
-import {
-  pledgeEventSelector,
-  userTreecounterDataSelector
-} from '../../selectors';
+import { pledgeEventSelector } from '../../selectors';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
@@ -101,11 +98,6 @@ class Trillion extends Component {
 
   _handleIndexChange = index => {
     this.setState({ index, offsetY: new Animated.Value(0) });
-    //    this.props.navigation.setParams({
-    //      handleSort: title => {
-    //        console.log('sorting');
-    //      }
-    //    });
   };
 
   _renderTabBar = props => {

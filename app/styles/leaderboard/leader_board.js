@@ -31,22 +31,27 @@ export default (LeaderboardStyle = EStyleSheet.create({
     alignItems: 'center'
   },
   cardImageStyle: {
-    top: -50
+    position: 'absolute',
+    top: -30,
+    zIndex: 1000,
+    height: 60,
+    width: 60
   },
   plantedContainer: {
-    top: -25,
+    top: 25,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center'
   },
   plantedTextStyle: {
     marginBottom: 5,
-    fontSize: 20,
+    fontSize: 14,
     color: '$colorPrimaryAccent'
   },
   plantedUnderline: {
     height: 2,
     width: '50%',
+    marginBottom: 20,
     backgroundColor: '$colorPrimaryAccent'
   },
   outerContainer: {
@@ -59,9 +64,9 @@ export default (LeaderboardStyle = EStyleSheet.create({
     alignSelf: 'center',
     marginBottom: 5,
     flexGrow: 1,
-    backgroundColor: '#fff',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10
+    backgroundColor: '#fff'
+    // borderBottomLeftRadius: 10,
+    // borderBottomRightRadius: 10
   },
   imageStyle: {
     width: 40,
@@ -74,20 +79,20 @@ export default (LeaderboardStyle = EStyleSheet.create({
     }
   },
   selectedBottomTypeLabel: {
+    fontWeight: 'bold',
     color: '#95c243',
-    fontSize: '.7rem',
+    fontSize: '.8rem',
     '@media (min-width: 250) and (max-width: 350)': {
-      fontSize: '.6rem'
-    },
-    maxWidth: 80
+      fontSize: '.7rem'
+    }
   },
   bottomTypeLabel: {
+    fontWeight: 'bold',
     color: '#9c9b9b',
     fontSize: '.7rem',
     '@media (min-width: 250) and (max-width: 350)': {
       fontSize: '.6rem'
-    },
-    maxWidth: 80
+    }
   },
   selectedSeprater: {
     backgroundColor: '#95c243',

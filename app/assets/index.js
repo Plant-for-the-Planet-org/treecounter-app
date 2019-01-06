@@ -112,6 +112,7 @@ import world_outline_red from './images/world_outline_red.png';
 import selector_menu from './images/icons/selector_menu.png';
 import radio_button from './images/icons/radio_button.png';
 import radio_button_selected from './images/icons/radio_button_selected.png';
+import filter from './images/icons/filter.png';
 
 export {
   AppStoreLogo,
@@ -227,5 +228,6 @@ export {
   world_outline_red,
   selector_menu,
   radio_button_selected,
-  radio_button
+  radio_button,
+  filter
 };

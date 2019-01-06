@@ -39,8 +39,8 @@ class PlantedProgressBar extends React.Component {
                     width: treeCountWidth + '%',
                     paddingRight: 10,
                     padding: 5,
-                    borderTopRightRadius: 10,
-                    borderBottomRightRadius: 10,
+                    borderTopRightRadius: 20,
+                    borderBottomRightRadius: 20,
                     borderWidth: 0.5
                   }
                 : {
@@ -65,16 +65,17 @@ class PlantedProgressBar extends React.Component {
           </View>
         </View>
 
-        <View style={styles.targetContainer}>
-          <Text style={styles.treePlantedtext}>
-            {countTarget ? countTarget.toLocaleString('en') : null}
-          </Text>
-          {!this.props.hideTargetImage ? (
+        {!this.props.hideTargetImage ? (
+          <View style={styles.targetContainer}>
+            <Text style={styles.treePlantedtext}>
+              {countTarget ? countTarget.toLocaleString('en') : null}
+            </Text>
+
             <View style={{ paddingLeft: 5, paddingRight: 5 }}>
               <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
             </View>
-          ) : null}
-        </View>
+          </View>
+        ) : null}
       </View>
     );
   }

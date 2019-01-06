@@ -39,8 +39,8 @@ class PlantedProgressBar extends React.Component {
                     width: treeCountWidth + '%',
                     paddingRight: 10,
                     padding: 5,
-                    borderTopRightRadius: 10,
-                    borderBottomRightRadius: 10,
+                    borderTopRightRadius: 20,
+                    borderBottomRightRadius: 20,
                     borderWidth: 0.5
                   }
                 : {

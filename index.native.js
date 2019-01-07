@@ -4,6 +4,7 @@ import './ReactotronConfig';
 /* app.js */
 
 console.disableYellowBox = true;
+console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
 
 // import {
 //   setCustomView,

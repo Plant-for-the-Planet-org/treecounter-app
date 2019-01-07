@@ -49,7 +49,7 @@ export default class TouchableItem extends React.Component {
           )}
         >
           <View pointerEvents="box-only" style={style}>
-            {React.Children.only(this.props.children)}
+            {this.props.children}
           </View>
         </TouchableNativeFeedback>
       );

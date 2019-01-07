@@ -9,7 +9,6 @@ import { NotificationAction } from './notificationAction';
 import { loadTpos } from './loadTposAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import _ from 'lodash';
-import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 export const userLogout = createAction('USER_LOGOUT');
 
 export function login(credentials, navigation = undefined) {
@@ -17,7 +16,7 @@ export function login(credentials, navigation = undefined) {
 
   return dispatch => {
     dispatch(setProgressModelState(true));
-    request
+    return request
       .then(res => {
         const { token, refresh_token, data } = res.data;
         if (!data.isActivated) {
@@ -38,6 +37,7 @@ export function login(credentials, navigation = undefined) {
       })
       .catch(err => {
         dispatch(setProgressModelState(false));
+        throw err;
       });
   };
 }
@@ -61,6 +61,7 @@ export function forgot_password(data, navigation = undefined) {
       .catch(err => {
         debug(err);
         dispatch(setProgressModelState(false));
+        throw err;
       });
   };
 }

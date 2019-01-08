@@ -103,6 +103,7 @@ export default class Leaderboard extends Component {
   };
 
   render() {
+    this.o.o;
     const {
       tabInfo,
       categoryInfo,
@@ -130,7 +131,7 @@ export default class Leaderboard extends Component {
         </TextHeading>
         <CardLayout className="leader-board__container">
           <Tabs
-            data={tabInfo.tabs}
+            data={tabInfo.tabs.indis}
             activeTab={tabInfo.activeTab}
             onTabChange={this.props.handleTabChange}
           >

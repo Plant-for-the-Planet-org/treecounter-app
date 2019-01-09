@@ -20,7 +20,7 @@ class LoginContainer extends React.Component {
     console.log(result);
     let value = this.refs.loginContainer.refs.loginForm.getValue();
     if (value) {
-      this.onClick();
+      this.onClick(value);
     }
   };
 

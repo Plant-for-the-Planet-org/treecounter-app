@@ -114,7 +114,7 @@ export const singleTreeForm = {
       propertyOrder: 8
     }
   },
-  required: ['treeCount', 'treeSpecies', 'plantDate', 'geoLocation'],
+  // required: ['treeCount', 'treeSpecies', 'plantDate', 'geoLocation'],
   submit_url: '',
   submit_method: 'POST'
 };

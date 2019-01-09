@@ -8,11 +8,35 @@ import { registerTree } from '../../actions/registerTree';
 import { userTreecounterSelector } from '../../selectors/index';
 import { mergeContributionImages } from '../../helpers/utils';
 import { currentUserProfileSelector } from '../../selectors/index';
+import {
+  singleTreeRegisterFormSchema,
+  schemaOptionsSingleTree
+} from '../../server/parsedSchemas/registerTrees';
+import { handleServerResponseError } from '../../helpers/utils';
 
 class RegisterTreesContainer extends Component {
   constructor() {
     super();
+    this.state = {
+      schemaOptionsSingleTree: schemaOptionsSingleTree
+    };
   }
+
+  updateTemplateSingle(template, plantProjects) {
+    this.state.schemaOptionsSingleTree.fields.plantProject.template = getSelectTemplate(
+      plantProjects
+    );
+    this.setState({
+      schemaOptionsSingleTree: {
+        template,
+        ...schemaOptionsSingleTree
+      }
+    });
+  }
+  // return {
+  //   template,
+  //   ...schemaOptionsSingleTree
+  // };
 
   onSubmit = (mode, registerTreeForm) => {
     registerTreeForm =
@@ -21,14 +45,34 @@ class RegisterTreesContainer extends Component {
     let value = registerTreeForm.getValue();
     value = mergeContributionImages(value);
     if (value) {
-      this.props.registerTree(
-        value,
-        this.props.treecounter.id,
-        mode,
-        this.props.navigation
-      );
+      this.props
+        .registerTree(
+          value,
+          this.props.treecounter.id,
+          mode,
+          this.props.navigation
+        )
+        .then(val => val)
+        .catch(err => {
+          if (mode === 'single-tree') {
+            let newSchemaOptions = handleServerResponseError(
+              err,
+              this.state.schemaOptionsSingleTree.fields
+            );
+            this.setState(
+              {
+                schemaOptionsSingleTree: {
+                  ...this.state.schemaOptionsSingleTree,
+                  newSchemaOptions
+                }
+              },
+              () => {
+                this.refs.registerTrees.refs.registerTreeForm.validate();
+              }
+            );
+          }
+        });
     }
-    return false;
   };
 
   render() {
@@ -36,7 +80,9 @@ class RegisterTreesContainer extends Component {
       <RegisterTrees
         ref="registerTrees"
         onSubmit={this.onSubmit}
+        schemaOptionsSingleTree={this.state.schemaOptionsSingleTree}
         currentUserProfile={this.props.currentUserProfile}
+        updateTemplateSingle={this.updateTemplateSingle}
       />
     );
   }

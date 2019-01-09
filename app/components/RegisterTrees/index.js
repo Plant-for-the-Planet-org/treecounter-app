@@ -8,7 +8,6 @@ import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card';
 import {
   singleTreeRegisterFormSchema,
-  schemaOptionsSingleTree,
   multipleTreesRegisterFormSchema,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
@@ -82,13 +81,14 @@ const getMultipleTreeLayout = props1 => {
 };
 
 const schemaOptionsSingle = (template, plantProjects) => {
-  schemaOptionsSingleTree.fields.plantProject.template = getSelectTemplate(
-    plantProjects
-  );
-  return {
-    template,
-    ...schemaOptionsSingleTree
-  };
+  // schemaOptionsSingleTree.fields.plantProject.template = getSelectTemplate(
+  //   plantProjects
+  // );
+  // return {
+  //   template,
+  //   ...schemaOptionsSingleTree
+  // };
+  this.props.updatedTemplate(template, plantProjects);
 };
 
 const schemaOptionsMultiple = (template, plantProjects) => {
@@ -117,7 +117,6 @@ export default class RegisterTrees extends Component {
 
   constructor() {
     super();
-
     this.state = {
       mode: '',
       individual: {
@@ -151,6 +150,9 @@ export default class RegisterTrees extends Component {
       tpoPlantProjects &&
       tpoPlantProjects.length > 0 &&
       tpoPlantProjects[0].value;
+    if (plantProject) {
+      schemaOptionsSingle(getSingleTreeLayout(this.props), tpoPlantProjects);
+    }
 
     return (
       <div className="app-container__content--center sidenav-wrapper">
@@ -170,10 +172,7 @@ export default class RegisterTrees extends Component {
                 <TCombForm
                   ref="registerTreeForm"
                   type={singleTreeRegisterFormSchema}
-                  options={schemaOptionsSingle(
-                    getSingleTreeLayout(this.props),
-                    tpoPlantProjects
-                  )}
+                  options={this.props.schemaOptionsSingleTree}
                   value={{ ...this.state.individual, plantProject }}
                 />
               ) : (
@@ -200,5 +199,7 @@ export default class RegisterTrees extends Component {
 
 RegisterTrees.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  currentUserProfile: PropTypes.any.isRequired
+  currentUserProfile: PropTypes.any.isRequired,
+  updateTemplateSingle: PropTypes.func,
+  schemaOptionsSingleTree: PropTypes.object
 };

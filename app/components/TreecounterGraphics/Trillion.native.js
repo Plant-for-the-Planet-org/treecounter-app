@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View, Dimensions } from 'react-native';
+import { ScrollView, Text, View, Dimensions, Animated } from 'react-native';
 
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
 import svgStyles from '../../styles/common/treecounter_svg';
 import styles from '../../styles/trillion.native';
-import {
-  pledgeEventSelector,
-  userTreecounterDataSelector
-} from '../../selectors';
+import { pledgeEventSelector } from '../../selectors';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
@@ -28,6 +25,11 @@ const Layout = {
   }
 };
 import tabStyles from '../../styles/common/tabbar';
+import { saveItem, fetchItem } from '../../stores/localStorage.native';
+import Constants from '../../utils/const';
+
+const height = Dimensions.get('window').height;
+let viewheight = height - 50;
 class Trillion extends Component {
   constructor() {
     super();
@@ -35,6 +37,7 @@ class Trillion extends Component {
       svgData: null,
       displayName: '',
       loading: true,
+      offsetY: new Animated.Value(0),
       routes: [
         { key: 'world', title: 'World' },
         { key: 'leaderBoard', title: 'LeaderBoard' }
@@ -45,19 +48,38 @@ class Trillion extends Component {
   componentDidMount() {
     trillionCampaign()
       .then(({ data }) => {
+        const svgData = {
+          id: 1,
+          target: data.countTarget,
+          planted: data.countPlanted,
+          community: data.countReceived,
+          personal: data.countPersonal,
+          displayName: data.displayName
+        };
         this.setState({
-          svgData: {
-            id: 1,
-            target: data.countTarget,
-            planted: data.countPlanted,
-            community: data.countReceived,
-            personal: data.countPersonal
-          },
-          displayName: data.displayName,
+          svgData,
+          displayName: svgData.displayName,
           loading: false
         });
+        saveItem(Constants.storageKeys.svgData, JSON.stringify(svgData));
       })
-      .catch(error => error);
+      .catch(error => {
+        console.log(error);
+        fetchItem(Constants.storageKeys.svgData).then(svgData => {
+          try {
+            svgData = JSON.parse(svgData);
+            if (svgData) {
+              this.setState({
+                svgData,
+                displayName: svgData.displayName,
+                loading: false
+              });
+            }
+          } catch (err) {
+            console.log(error);
+          }
+        });
+      });
   }
   shouldComponentUpdate() {
     return true;
@@ -75,7 +97,7 @@ class Trillion extends Component {
   };
 
   _handleIndexChange = index => {
-    this.setState({ index });
+    this.setState({ index, offsetY: new Animated.Value(0) });
   };
 
   _renderTabBar = props => {
@@ -97,7 +119,17 @@ class Trillion extends Component {
         return this.state.loading ? (
           <LoadingIndicator />
         ) : (
-          <ScrollView>
+          <ScrollView
+            bounces={false}
+            scrollEventThrottle={16}
+            contentContainerStyle={{
+              justifyContent: 'flex-start',
+              flexGrow: 2
+            }}
+            onScroll={Animated.event([
+              { nativeEvent: { contentOffset: { y: this.state.offsetY } } }
+            ])}
+          >
             <View style={styles.parentContainer}>
               <View style={svgStyles.svgContainer}>
                 <SvgContainer {...this.state.svgData} trillion={true} />
@@ -133,7 +165,14 @@ class Trillion extends Component {
         );
       }
       case 'leaderBoard': {
-        return <Leaderboard navigation={this.props.navigation} />;
+        return (
+          <Leaderboard
+            navigation={this.props.navigation}
+            handleScrollAnimation={Animated.event([
+              { nativeEvent: { contentOffset: { y: this.state.offsetY } } }
+            ])}
+          />
+        );
       }
       default:
         return null;
@@ -141,14 +180,33 @@ class Trillion extends Component {
   };
 
   render() {
+    const headerTranslate = Animated.diffClamp(
+      this.state.offsetY,
+      0,
+      120
+    ).interpolate({
+      inputRange: [0, 120],
+      outputRange: [0, -50]
+    });
+
     return (
-      <TabView
-        useNativeDriver
-        navigationState={this.state}
-        renderScene={this._renderScreen}
-        renderTabBar={this._renderTabBar}
-        onIndexChange={this._handleIndexChange}
-      />
+      <Animated.View
+        style={[
+          { height: viewheight },
+          {
+            transform: [{ translateY: headerTranslate }],
+            flexGrow: 1
+          }
+        ]}
+      >
+        <TabView
+          useNativeDriver
+          navigationState={this.state}
+          renderScene={this._renderScreen}
+          renderTabBar={this._renderTabBar}
+          onIndexChange={this._handleIndexChange}
+        />
+      </Animated.View>
     );
   }
 }

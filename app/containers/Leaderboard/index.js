@@ -179,6 +179,7 @@ class LeaderBoardContainer extends React.Component {
         mapInfo={this.state.mapInfo}
         sortingQuery={this.state.sortingQuery}
         navigation={this.props.navigation}
+        handleScrollAnimation={this.props.handleScrollAnimation}
       />
     );
   }
@@ -188,5 +189,6 @@ export default LeaderBoardContainer;
 LeaderBoardContainer.propTypes = {
   match: PropTypes.object,
   location: PropTypes.object,
-  navigation: PropTypes.any
+  navigation: PropTypes.any,
+  handleScrollAnimation: PropTypes.func
 };

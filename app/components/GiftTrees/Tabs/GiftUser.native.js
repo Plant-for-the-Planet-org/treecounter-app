@@ -31,7 +31,7 @@ export default class GiftUser extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1, flexDirection: 'column' }}>
+      <View style={{ flex: 1, flexDirection: 'column', width: '100%' }}>
         <CardLayout>
           <View style={{ flexDirection: 'row' }}>
             <View style={{ width: 40, height: 40, alignSelf: 'center' }}>
@@ -58,7 +58,10 @@ export default class GiftUser extends Component {
           </View>
         </CardLayout>
         <CardLayout style={{ flex: 0.8 }}>
-          <SearchUser onSearchResultClick={this.onSearchResultClick} />
+          <SearchUser
+            onSearchResultClick={this.onSearchResultClick}
+            currentUserProfile={this.props.currentUserProfile}
+          />
 
           <TextInput
             multiline={true}

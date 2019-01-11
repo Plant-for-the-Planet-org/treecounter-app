@@ -69,7 +69,7 @@ export default class Login extends Component {
                   {i18n.t('label.dont_have_account')} {i18n.t('label.signUp')}
                 </Text>
               </TouchableItem>
-              {'  '}
+
               <PrimaryButton
                 onClick={this.props.onPress}
                 buttonStyle={styles.loginButtonStyle}

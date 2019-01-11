@@ -131,21 +131,21 @@ export default class SvgContainer extends Component {
                 transform: [{ rotate: RotateClouds1Data }]
               }}
             >
-              <SvgUri width="100%" height="100%" source={svgs['cloud1']} />
+              <SvgUri width="100%" height="100%" svgXmlData={svgs['cloud1']} />
             </Animated.View>
           </View>
           <View style={treecounterStyles.cloudStyle}>
             <Animated.View
               style={{ transform: [{ rotate: RotateClouds2Data }] }}
             >
-              <SvgUri width="100%" height="100%" source={svgs['cloud2']} />
+              <SvgUri width="100%" height="100%" svgXmlData={svgs['cloud2']} />
             </Animated.View>
           </View>
           <View style={treecounterStyles.cloudStyle}>
             <Animated.View
               style={{ transform: [{ rotate: RotateBallonsData }] }}
             >
-              <SvgUri width="100%" height="100%" source={svgs['ballons']} />
+              <SvgUri width="100%" height="100%" svgXmlData={svgs['ballons']} />
             </Animated.View>
           </View>
           {totalCount.map(i => {
@@ -154,7 +154,9 @@ export default class SvgContainer extends Component {
                 <SvgUri
                   width="100%"
                   height="100%"
-                  source={svgs['darkCrownTree' + _.padStart('' + i, 3, '0')]}
+                  svgXmlData={
+                    svgs['darkCrownTree' + _.padStart('' + i, 3, '0')]
+                  }
                 />
               </View>
             ) : null;
@@ -165,7 +167,7 @@ export default class SvgContainer extends Component {
                 <SvgUri
                   width="100%"
                   height="100%"
-                  source={svgs['pot' + _.padStart('' + i, 2, '0')]}
+                  svgXmlData={svgs['pot' + _.padStart('' + i, 2, '0')]}
                 />
               </View>
             ) : null;

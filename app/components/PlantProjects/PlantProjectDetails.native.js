@@ -41,7 +41,7 @@ class PlantProjectDetails extends React.Component {
         )}
 
         <View style={styles.videoContainer}>
-          <VideoContainer url={vUrl} />;
+          <VideoContainer url={vUrl} />
         </View>
       </View>
     );

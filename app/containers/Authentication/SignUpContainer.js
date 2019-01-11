@@ -76,5 +76,5 @@ export default connect(null, mapDispatchToProps)(SignUpContainer);
 SignUpContainer.propTypes = {
   signUp: PropTypes.func,
   route: PropTypes.func,
-  navigation: PropTypes.object
+  navigation: PropTypes.any
 };

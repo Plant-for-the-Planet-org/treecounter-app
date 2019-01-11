@@ -6,6 +6,7 @@ import { Alert } from 'react-native';
 /* app.js */
 
 console.disableYellowBox = true;
+console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
 
 const parseErrorStack = error => {
   if (!error || !error.stack) {

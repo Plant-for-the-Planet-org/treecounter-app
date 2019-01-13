@@ -26,12 +26,7 @@ export function login(credentials, navigation = undefined) {
           dispatch(loadUserProfile(data));
           dispatch(NotificationAction());
         }
-        updateRoute(
-          data.routeName,
-          navigation || dispatch,
-          null,
-          data.routeParams
-        );
+
         dispatch(setProgressModelState(false));
         return token;
       })

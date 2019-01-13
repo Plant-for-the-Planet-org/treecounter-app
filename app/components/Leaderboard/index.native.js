@@ -238,6 +238,6 @@ Leaderboard.propTypes = {
   queryResult: PropTypes.array,
   mapInfo: PropTypes.object,
   sortingQuery: PropTypes.object,
-  navigation: PropTypes.navigation,
+  navigation: PropTypes.any,
   handleScrollAnimation: PropTypes.func
 };

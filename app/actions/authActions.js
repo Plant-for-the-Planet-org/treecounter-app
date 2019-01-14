@@ -33,7 +33,7 @@ export function login(credentials, navigation = undefined) {
           data.routeParams
         );
         dispatch(setProgressModelState(false));
-        return token;
+        return res;
       })
       .catch(err => {
         dispatch(setProgressModelState(false));

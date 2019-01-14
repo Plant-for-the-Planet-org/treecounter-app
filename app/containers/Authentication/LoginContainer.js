@@ -40,8 +40,7 @@ class LoginContainer extends React.Component {
           this.setState(
             {
               schemaOptions: {
-                ...this.state.schemaOptions,
-                newSchemaOptions
+                ...newSchemaOptions
               }
             },
             () => {

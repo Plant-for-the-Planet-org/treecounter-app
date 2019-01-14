@@ -57,13 +57,12 @@ class RegisterTreesContainer extends Component {
           if (mode === 'single-tree') {
             let newSchemaOptions = handleServerResponseError(
               err,
-              this.state.schemaOptionsSingleTree.fields
+              this.state.schemaOptionsSingleTree
             );
             this.setState(
               {
                 schemaOptionsSingleTree: {
-                  ...this.state.schemaOptionsSingleTree,
-                  newSchemaOptions
+                  ...newSchemaOptions
                 }
               },
               () => {

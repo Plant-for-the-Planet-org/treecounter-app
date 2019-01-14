@@ -33,7 +33,7 @@ export function registerTree(
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         dispatch(setProgressModelState(false));
         updateRoute('app_userHome', navigation || dispatch);
-        return true;
+        return res;
       })
       .catch(error => {
         debug(error.response);

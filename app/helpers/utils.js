@@ -40,12 +40,12 @@ export const handleServerResponseError = function(
     serverFormError.response &&
     serverFormError.response.data;
   if (data && data.code == 400 && data.hasOwnProperty('errors')) {
+    newOptions = _.cloneDeep(formSchemaOptions);
     for (let property in data.errors.children) {
       if (
         data.errors.children.hasOwnProperty(property) &&
         data.errors.children[property].hasOwnProperty('errors')
       ) {
-        newOptions = _.cloneDeep(formSchemaOptions);
         newOptions.fields[property].hasError = true;
         let oldValidator = newOptions.fields[property].error;
         if (typeof oldValidator === 'function') {
@@ -57,7 +57,7 @@ export const handleServerResponseError = function(
               );
             } else {
               //if there are some front end validation error then remove server error from schema options
-              newOptions.fields[property].hasError = false;
+              // newOptions.fields[property].hasError = false;
               newOptions.fields[property].error = oldValidator;
             }
             return errorReturn;

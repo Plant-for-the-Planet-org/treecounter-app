@@ -130,7 +130,7 @@ export default class Leaderboard extends Component {
         </TextHeading>
         <CardLayout className="leader-board__container">
           <Tabs
-            data={tabInfo.tabs.indis}
+            data={tabInfo.tabs}
             activeTab={tabInfo.activeTab}
             onTabChange={this.props.handleTabChange}
           >

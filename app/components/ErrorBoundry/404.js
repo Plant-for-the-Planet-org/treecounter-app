@@ -93,7 +93,8 @@ export default class PageNotFound extends React.Component {
         {/* <img src={infoGrey} /> */}
         {/* <h1>404</h1>
         <h4>Page not found.</h4> */}
-        <p>To avoid this situation on this planet lets plant some trees. </p>
+
+        <p>{i18n.t('label.planting_404')}</p>
         <SecondaryButton onClick={() => updateRoute('app_homepage')}>
           {i18n.t('label.plant_trees')}
         </SecondaryButton>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { infoGrey } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
+import i18n from '../../locales/i18n.js';
 
 @withRouter
 export default class BodyErrorBoundary extends React.Component {
@@ -60,16 +61,14 @@ export default class BodyErrorBoundary extends React.Component {
       return (
         <div className={'error-container sidenav-wrapper'}>
           <img src={infoGrey} />
-          <h1>Something went wrong.</h1>
-          <h4>Sorry for the inconveniences.</h4>
-          <p>
-            We have reported this error to our developers with a cup of coffee.
-          </p>
+          <h1>{i18n.t('label.something_went_x')}</h1>
+          <h4>{i18n.t('label.sorry_inconveniences')}</h4>
+          <p>{i18n.t('label.error_reported')}</p>
           <div>
             <p>
-              You will be redirected to home page in
-              <span className={'counter'}>{' ' + this.secondsRemaining} </span>
-              seconds
+              {i18n.t('label.home_page_redirected', {
+                seconds: this.secondsRemaining
+              })}
             </p>
           </div>
         </div>

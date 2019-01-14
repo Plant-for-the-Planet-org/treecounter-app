@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { infoGrey } from '../../assets';
+import i18n from '../../locales/i18n.js';
+
 export default class GlobalErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -20,11 +22,9 @@ export default class GlobalErrorBoundary extends React.Component {
       return (
         <div className={'error-container'}>
           <img src={infoGrey} />
-          <h1>Something went wrong.</h1>
-          <h4>Sorry for the inconveniences.</h4>
-          <p>
-            We have reported this error to our developers with a cup of coffee.
-          </p>
+          <h1>{i18n.t('label.something_went_x')}</h1>
+          <h4>{i18n.t('label.sorry_inconveniences')}</h4>
+          <p>{i18n.t('label.error_reported')}</p>
         </div>
       );
     }

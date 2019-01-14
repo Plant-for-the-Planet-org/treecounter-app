@@ -8,13 +8,11 @@ import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card';
 import {
   singleTreeRegisterFormSchema,
-  multipleTreesRegisterFormSchema,
-  schemaOptionsMultipleTrees
+  multipleTreesRegisterFormSchema
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
 import RegistrationMap from './RegistrationMap';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
-import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 
 let TCombForm = t.form.Form;

@@ -9,7 +9,6 @@ import { userTreecounterSelector } from '../../selectors/index';
 import { mergeContributionImages } from '../../helpers/utils';
 import { currentUserProfileSelector } from '../../selectors/index';
 import {
-  singleTreeRegisterFormSchema,
   schemaOptionsSingleTree,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';

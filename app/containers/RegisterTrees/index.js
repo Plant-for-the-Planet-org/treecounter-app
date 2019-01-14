@@ -105,6 +105,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 RegisterTreesContainer.propTypes = {
   registerTree: PropTypes.func.isRequired,
   treecounter: PropTypes.object,
-  navigation: PropTypes.object,
+  navigation: PropTypes.any,
   currentUserProfile: PropTypes.object
 };

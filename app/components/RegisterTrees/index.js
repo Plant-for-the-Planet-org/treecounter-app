@@ -88,7 +88,7 @@ const schemaOptionsSingle = (template, plantProjects) => {
   //   template,
   //   ...schemaOptionsSingleTree
   // };
-  this.props.updatedTemplate(template, plantProjects);
+  this.props.updateTemplateSingle(template, plantProjects);
 };
 
 const schemaOptionsMultiple = (template, plantProjects) => {
@@ -173,7 +173,7 @@ export default class RegisterTrees extends Component {
                   ref="registerTreeForm"
                   type={singleTreeRegisterFormSchema}
                   options={this.props.schemaOptionsSingleTree}
-                  value={{ ...this.state.individual, plantProject }}
+                  // value={{ ...this.state.individual, plantProject }}
                 />
               ) : (
                 <TCombForm

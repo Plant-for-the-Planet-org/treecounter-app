@@ -10,7 +10,8 @@ import { mergeContributionImages } from '../../helpers/utils';
 import { currentUserProfileSelector } from '../../selectors/index';
 import {
   singleTreeRegisterFormSchema,
-  schemaOptionsSingleTree
+  schemaOptionsSingleTree,
+  schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
 import { handleServerResponseError } from '../../helpers/utils';
 
@@ -18,7 +19,8 @@ class RegisterTreesContainer extends Component {
   constructor() {
     super();
     this.state = {
-      schemaOptionsSingleTree: schemaOptionsSingleTree
+      schemaOptionsSingleTree: schemaOptionsSingleTree,
+      schemaOptionsMultipleTrees: schemaOptionsMultipleTrees
     };
   }
 
@@ -33,10 +35,18 @@ class RegisterTreesContainer extends Component {
       }
     });
   }
-  // return {
-  //   template,
-  //   ...schemaOptionsSingleTree
-  // };
+
+  updateTemplateMultiple(template, plantProjects) {
+    this.state.schemaOptionsMultipleTrees.fields.plantProject.template = getSelectTemplate(
+      plantProjects
+    );
+    this.setState({
+      schemaOptionsMultipleTrees: {
+        template,
+        ...schemaOptionsMultipleTrees
+      }
+    });
+  }
 
   onSubmit = (mode, registerTreeForm) => {
     registerTreeForm =
@@ -70,6 +80,22 @@ class RegisterTreesContainer extends Component {
               }
             );
           }
+          if (mode === 'multiple-trees') {
+            let newSchemaOptions = handleServerResponseError(
+              err,
+              this.state.schemaOptionsMultipleTrees
+            );
+            this.setState(
+              {
+                schemaOptionsMultipleTrees: {
+                  ...newSchemaOptions
+                }
+              },
+              () => {
+                this.refs.registerTrees.refs.registerTreeForm.validate();
+              }
+            );
+          }
         });
     }
   };
@@ -80,8 +106,10 @@ class RegisterTreesContainer extends Component {
         ref="registerTrees"
         onSubmit={this.onSubmit}
         schemaOptionsSingleTree={this.state.schemaOptionsSingleTree}
+        schemaOptionsMultipleTrees={this.state.schemaOptionsMultipleTrees}
         currentUserProfile={this.props.currentUserProfile}
         updateTemplateSingle={this.updateTemplateSingle}
+        updateTemplateMultiple={this.updateTemplateMultiple}
       />
     );
   }

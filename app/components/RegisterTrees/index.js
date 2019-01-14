@@ -81,24 +81,11 @@ const getMultipleTreeLayout = props1 => {
 };
 
 const schemaOptionsSingle = (template, plantProjects) => {
-  // schemaOptionsSingleTree.fields.plantProject.template = getSelectTemplate(
-  //   plantProjects
-  // );
-  // return {
-  //   template,
-  //   ...schemaOptionsSingleTree
-  // };
   this.props.updateTemplateSingle(template, plantProjects);
 };
 
 const schemaOptionsMultiple = (template, plantProjects) => {
-  schemaOptionsMultipleTrees.fields.plantProject.template = getSelectTemplate(
-    plantProjects
-  );
-  return {
-    template,
-    ...schemaOptionsMultipleTrees
-  };
+  this.props.updateTemplateMultiple(template, plantProjects);
 };
 
 export default class RegisterTrees extends Component {
@@ -153,6 +140,12 @@ export default class RegisterTrees extends Component {
     if (plantProject) {
       schemaOptionsSingle(getSingleTreeLayout(this.props), tpoPlantProjects);
     }
+    if (plantProject) {
+      schemaOptionsMultiple(
+        getMultipleTreeLayout(this.props),
+        tpoPlantProjects
+      );
+    }
 
     return (
       <div className="app-container__content--center sidenav-wrapper">
@@ -173,16 +166,13 @@ export default class RegisterTrees extends Component {
                   ref="registerTreeForm"
                   type={singleTreeRegisterFormSchema}
                   options={this.props.schemaOptionsSingleTree}
-                  // value={{ ...this.state.individual, plantProject }}
+                  value={{ ...this.state.individual, plantProject }}
                 />
               ) : (
                 <TCombForm
                   ref="registerTreeForm"
                   type={multipleTreesRegisterFormSchema}
-                  options={schemaOptionsMultiple(
-                    getMultipleTreeLayout(this.props),
-                    tpoPlantProjects
-                  )}
+                  options={this.props.schemaOptionsMultipleTrees}
                   value={{ plantProject }}
                 />
               )}
@@ -201,5 +191,7 @@ RegisterTrees.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   currentUserProfile: PropTypes.any.isRequired,
   updateTemplateSingle: PropTypes.func,
-  schemaOptionsSingleTree: PropTypes.object
+  updateTemplateMultiple: PropTypes.func,
+  schemaOptionsSingleTree: PropTypes.object,
+  schemaOptionsMultipleTrees: PropTypes.object
 };

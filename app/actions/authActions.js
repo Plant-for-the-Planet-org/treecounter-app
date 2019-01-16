@@ -48,10 +48,11 @@ export function logoutUser() {
 export function forgot_password(data, navigation = undefined) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    postRequest('auth_forgotPassword_post', data)
+    return postRequest('auth_forgotPassword_post', data)
       .then(res => {
         dispatch(setProgressModelState(false));
         updateRoute('app_passwordSent', navigation || dispatch);
+        return res;
       })
       .catch(err => {
         debug(err);
@@ -73,11 +74,14 @@ export function sendEmail(navigation = undefined) {
 
 export function reset_password(data, navigation = undefined) {
   return dispatch => {
-    postRequest('auth_resetPassword_post', data)
+    return postRequest('auth_resetPassword_post', data)
       .then(res => {
         updateRoute('app_login', navigation || dispatch);
       })
-      .catch(err => debug(err));
+      .catch(err => {
+        debug(err);
+        throw err;
+      });
   };
 }
 export function setAccessDenied(data, params, path, navigation = undefined) {

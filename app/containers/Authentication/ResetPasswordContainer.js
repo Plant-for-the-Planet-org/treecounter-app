@@ -7,10 +7,14 @@ import ResetPassword from '../../components/Authentication/ResetPasssword';
 import { reset_password } from '../../actions/authActions';
 import { updateRoute } from '../../helpers/routerHelper';
 
+import { schemaOptions } from '../../server/parsedSchemas/resetPassword';
+import { handleServerResponseError } from '../../helpers/utils';
+
 class ResetPassswordContainer extends React.Component {
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
+    this.state = { schemaProp: schemaOptions };
   }
   onPress = () => {
     let value = this.refs.resetPasswordContainer.refs.resetPasswordForm.getValue();
@@ -21,7 +25,25 @@ class ResetPassswordContainer extends React.Component {
   };
 
   onClick(value) {
-    this.props.reset_password(value, this.props.navigation);
+    this.props
+      .reset_password(value, this.props.navigation)
+      .then(val => {})
+      .catch(err => {
+        let newSchemaOptions = handleServerResponseError(
+          err,
+          this.state.schemaProp
+        );
+        this.setState(
+          {
+            schemaProp: {
+              ...newSchemaOptions
+            }
+          },
+          () => {
+            this.refs.resetPasswordContainer.refs.resetPasswordForm.validate();
+          }
+        );
+      });
   }
 
   render() {
@@ -29,6 +51,7 @@ class ResetPassswordContainer extends React.Component {
     return (
       <ResetPassword
         ref="resetPasswordContainer"
+        schemaProp={this.state.schemaProp}
         onSetPassword={this.onPress}
         updateRoute={this.props.route}
         value={value}

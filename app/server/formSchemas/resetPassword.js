@@ -33,11 +33,11 @@ export default {
           propertyOrder: 2
         }
       },
-      required: ['first', 'second'],
+      // required: ['first', 'second'],
       propertyOrder: 2
     }
   },
-  required: ['token', 'password'],
+  // required: ['token', 'password'],
   submit_url: '/app_dev.php/auth/en/resetPassword',
   submit_method: 'POST'
 };

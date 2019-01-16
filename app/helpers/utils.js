@@ -34,40 +34,71 @@ export const handleServerResponseError = function(
   serverFormError,
   formSchemaOptions
 ) {
-  let newOptions = formSchemaOptions;
   const data =
     serverFormError &&
     serverFormError.response &&
     serverFormError.response.data;
   if (data && data.code == 400 && data.hasOwnProperty('errors')) {
-    newOptions = _.cloneDeep(formSchemaOptions);
+    let newOptions = _.cloneDeep(formSchemaOptions);
     for (let property in data.errors.children) {
-      if (
-        data.errors.children.hasOwnProperty(property) &&
-        data.errors.children[property].hasOwnProperty('errors')
-      ) {
-        newOptions.fields[property].hasError = true;
-        let oldValidator = newOptions.fields[property].error;
-        if (typeof oldValidator === 'function') {
-          newOptions.fields[property].error = (value, path, context) => {
-            let errorReturn = oldValidator(value, path, context);
-            if (!errorReturn) {
-              errorReturn = getErrorView(
-                data.errors.children[property].errors.toString()
-              );
-            } else {
-              //if there are some front end validation error then remove server error from schema options
-              // newOptions.fields[property].hasError = false;
-              newOptions.fields[property].error = oldValidator;
-            }
-            return errorReturn;
-          };
-        }
-      }
+      updateFormSchema(newOptions, data[property]);
+    }
+
+    return newOptions;
+  }
+  return formSchemaOptions;
+};
+
+export function updateFormSchema(optionSchema, responseData) {
+  for (let property in responseData.children) {
+    if (
+      responseData.errors.children.hasOwnProperty(property) &&
+      responseData.errors.children[property].hasOwnProperty('errors') &&
+      responseData.errors.children[property].errors.length > 0
+    ) {
+      newOptions = updateOptionsObject(
+        optionSchema,
+        property,
+        responseData.errors.children[property].errors
+      );
+    } else if (
+      responseData.errors.children.hasOwnProperty(property) &&
+      responseData.errors.children[property].hasOwnProperty('children')
+    ) {
+      // let children = data.errors.children[property].children;
+      // for (let childProperty in children) {
+      //   updateOptionsObject(
+      //     newOptions.fields[property],
+      //     childProperty,
+      //     children[childProperty].errors
+      //   );
+      // }
+      updateFormSchema(
+        optionSchema.fields[property],
+        responseData.errors.children[property]
+      );
     }
   }
-  return newOptions;
-};
+  return;
+}
+
+export function updateOptionsObject(newOptions, property, errors) {
+  newOptions.fields[property].hasError = true;
+  let oldValidator = newOptions.fields[property].error;
+  if (typeof oldValidator === 'function') {
+    newOptions.fields[property].error = (value, path, context) => {
+      let errorReturn = oldValidator(value, path, context);
+      if (errors && errors.length > 0) {
+        errorReturn = getErrorView(errors.toString());
+      } else {
+        //if there are some front end validation error then remove server error from schema options
+        // newOptions.fields[property].hasError = false;
+        newOptions.fields[property].error = oldValidator;
+      }
+      return errorReturn;
+    };
+  }
+}
 
 export const categoryIcons = {
   country: {

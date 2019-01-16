@@ -23,7 +23,7 @@ class ResetPassword extends Component {
             <TCombForm
               ref="resetPasswordForm"
               type={resetPasswordFormSchema}
-              options={schemaOptions}
+              options={this.props.schemaProp}
               value={this.props.value}
             />
             <PrimaryButton
@@ -43,7 +43,8 @@ class ResetPassword extends Component {
 
 ResetPassword.propTypes = {
   onSetPassword: PropTypes.func,
-  value: PropTypes.object
+  value: PropTypes.object,
+  schemaProp: PropTypes.object
 };
 
 export default ResetPassword;

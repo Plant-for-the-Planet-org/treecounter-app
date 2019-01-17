@@ -11,7 +11,6 @@ import {
   multipleTreesRegisterFormSchema
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
-import RegistrationMap from './RegistrationMap';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 

@@ -41,7 +41,10 @@ export const handleServerResponseError = function(
   if (data && data.code == 400 && data.hasOwnProperty('errors')) {
     let newOptions = _.cloneDeep(formSchemaOptions);
     for (let property in data.errors.children) {
-      updateFormSchema(newOptions, data[property]);
+      updateFormSchema(
+        newOptions.fields[property],
+        data.errors.children[property]
+      );
     }
 
     return newOptions;
@@ -49,55 +52,34 @@ export const handleServerResponseError = function(
   return formSchemaOptions;
 };
 
+/**
+ * Update Form Schema recursively by iterating over properties under nth depth level.
+ *  */
 export function updateFormSchema(optionSchema, responseData) {
-  for (let property in responseData.children) {
-    if (
-      responseData.errors.children.hasOwnProperty(property) &&
-      responseData.errors.children[property].hasOwnProperty('errors') &&
-      responseData.errors.children[property].errors.length > 0
-    ) {
-      newOptions = updateOptionsObject(
-        optionSchema,
-        property,
-        responseData.errors.children[property].errors
-      );
-    } else if (
-      responseData.errors.children.hasOwnProperty(property) &&
-      responseData.errors.children[property].hasOwnProperty('children')
-    ) {
-      // let children = data.errors.children[property].children;
-      // for (let childProperty in children) {
-      //   updateOptionsObject(
-      //     newOptions.fields[property],
-      //     childProperty,
-      //     children[childProperty].errors
-      //   );
-      // }
+  if (responseData.children) {
+    for (let property in responseData.children) {
       updateFormSchema(
         optionSchema.fields[property],
-        responseData.errors.children[property]
+        responseData.children[property]
       );
     }
+  } else if (responseData.errors && responseData.errors.length > 0) {
+    optionSchema.hasError = true;
+    let oldValidator = optionSchema.error;
+    if (typeof oldValidator === 'function') {
+      optionSchema.error = (value, path, context) => {
+        let errorReturn = oldValidator(value, path, context);
+        if (responseData.errors && responseData.errors.length > 0) {
+          errorReturn = getErrorView(responseData.errors.toString());
+        } else {
+          optionSchema.error = oldValidator;
+        }
+        return errorReturn;
+      };
+    }
+    return;
   }
   return;
-}
-
-export function updateOptionsObject(newOptions, property, errors) {
-  newOptions.fields[property].hasError = true;
-  let oldValidator = newOptions.fields[property].error;
-  if (typeof oldValidator === 'function') {
-    newOptions.fields[property].error = (value, path, context) => {
-      let errorReturn = oldValidator(value, path, context);
-      if (errors && errors.length > 0) {
-        errorReturn = getErrorView(errors.toString());
-      } else {
-        //if there are some front end validation error then remove server error from schema options
-        // newOptions.fields[property].hasError = false;
-        newOptions.fields[property].error = oldValidator;
-      }
-      return errorReturn;
-    };
-  }
 }
 
 export const categoryIcons = {

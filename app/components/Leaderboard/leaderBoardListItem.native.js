@@ -37,7 +37,8 @@ export default class LeaderboardItem extends Component {
         </View>
         <UserProfileImage
           profileImage={this.props.image}
-          style={{ height: 60, width: 60 }}
+          style={styles.imageContainerStyle}
+          imageStyle={styles.imageStyle}
         />
       </View>
     );

@@ -9,6 +9,7 @@ const boxShadow = {
 export default (LeaderboardStyle = EStyleSheet.create({
   leaderBoardContainer: { flex: 1, backgroundColor: '#fff' },
   tooltipContainerStyle: {
+    zIndex: 1000000000,
     ...boxShadow,
     marginTop: -35,
     marginRight: 10
@@ -32,7 +33,7 @@ export default (LeaderboardStyle = EStyleSheet.create({
   },
   cardImageStyle: {
     position: 'absolute',
-    top: -30,
+    top: -35,
     zIndex: 1000,
     height: 60,
     width: 60
@@ -68,14 +69,18 @@ export default (LeaderboardStyle = EStyleSheet.create({
     // borderBottomLeftRadius: 10,
     // borderBottomRightRadius: 10
   },
-  imageStyle: {
-    width: 40,
-    '@media (min-width: 250) and (max-width: 300)': {
-      width: 50
-    },
-    height: 40,
-    '@media (min-width: 250) and (max-width: 300)': {
+  imageContainerStyle: {
+    width: 60,
+    height: 60,
+    '@media (max-width: 350)': {
+      width: 50,
       height: 50
+    }
+  },
+  imageStyle: {
+    borderRadius: 30,
+    '@media (max-width: 350)': {
+      borderRadius: 25
     }
   },
   selectedBottomTypeLabel: {

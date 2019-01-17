@@ -65,7 +65,7 @@ export default class Leaderboard extends Component {
   };
 
   getTableView = () => {
-    // console.log(this.props.queryResult);
+    console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
     const { categoryInfo, sectionInfo } = this.props;
     if (this.props.queryResult)
@@ -79,22 +79,27 @@ export default class Leaderboard extends Component {
             <div className="table-header-item other">Target</div>
           </div>
           <div className="table-body">
-            {this.props.queryResult.map((d, index) => (
-              <div className="table-row" key={'tr' + index}>
-                <div className="table-col country">
-                  <span className="countryIndex">{index + 1 + '.  '}</span>
-                  <Link to={d.uri}>{d.caption}</Link>
+            {this.props.queryResult.map((d, index) => {
+              const isPrivate = d.hasOwnProperty('mayPublish') && !d.mayPublish;
+              return (
+                <div className="table-row" key={'tr' + index}>
+                  <div className="table-col country">
+                    <span className="countryIndex">{index + 1 + '.  '}</span>
+                    <Link to={isPrivate ? '#' : d.uri}>
+                      {isPrivate ? i18n.t('label.tree_planter') : d.caption}
+                    </Link>
+                  </div>
+                  <div className="table-col other">
+                    <div className="table-col-phone-header">Planted</div>
+                    <span>{parseInt(d.planted).toLocaleString('en')}</span>
+                  </div>
+                  <div className="table-col other">
+                    <div className="table-col-phone-header">Target</div>
+                    <span>{parseInt(d.target).toLocaleString('en')}</span>
+                  </div>
                 </div>
-                <div className="table-col other">
-                  <div className="table-col-phone-header">Planted</div>
-                  <span>{parseInt(d.planted).toLocaleString('en')}</span>
-                </div>
-                <div className="table-col other">
-                  <div className="table-col-phone-header">Target</div>
-                  <span>{parseInt(d.target).toLocaleString('en')}</span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       );

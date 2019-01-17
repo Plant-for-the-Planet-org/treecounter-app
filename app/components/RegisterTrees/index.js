@@ -12,7 +12,6 @@ import {
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
-import RegistrationMap from './RegistrationMap';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
@@ -81,13 +80,6 @@ const getMultipleTreeLayout = props1 => {
 };
 
 const schemaOptionsSingle = (template, plantProjects) => {
-  // schemaOptionsSingleTree.fields.plantProject.template = getSelectTemplate(
-  //   plantProjects
-  // );
-  // return {
-  //   template,
-  //   ...schemaOptionsSingleTree
-  // };
   this.props.updateTemplateSingle(template, plantProjects);
 };
 
@@ -173,7 +165,7 @@ export default class RegisterTrees extends Component {
                   ref="registerTreeForm"
                   type={singleTreeRegisterFormSchema}
                   options={this.props.schemaOptionsSingleTree}
-                  // value={{ ...this.state.individual, plantProject }}
+                  value={{ ...this.state.individual, plantProject }}
                 />
               ) : (
                 <TCombForm

@@ -18,25 +18,24 @@ export default class CategoryType extends Component {
         <View>
           <TouchableItem
             onPress={this.handleClick}
-            style={{ justifyContent: 'center' }}
+            style={{
+              justifyContent: 'center',
+              paddingTop: 4,
+              paddingBottom: 4
+            }}
           >
-            <ImageBackground
-              style={styles.imageStyle}
-              source={this.props.iconUrl}
-            />
+            <Text
+              style={
+                this.props.selected
+                  ? styles.selectedBottomTypeLabel
+                  : styles.bottomTypeLabel
+              }
+            >
+              {this.props.title}
+            </Text>
           </TouchableItem>
         </View>
-        <View>
-          <Text
-            style={
-              this.props.selected
-                ? styles.selectedBottomTypeLabel
-                : styles.bottomTypeLabel
-            }
-          >
-            {this.props.title}
-          </Text>
-        </View>
+        <View />
       </View>
     );
   }

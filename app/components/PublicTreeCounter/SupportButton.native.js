@@ -12,10 +12,7 @@ const SupportButton = ({ active, isUserLoggedIn, onRegisterSupporter }) => {
       style={styles.giftIcon}
       onPress={() => onRegisterSupporter()}
     >
-      <Image
-        source={gift_icon}
-        onClick={() => (true ? onRegisterSupporter() : null)}
-      />
+      <Image source={gift_icon} onClick={() => onRegisterSupporter()} />
     </TouchableItem>
   );
 };

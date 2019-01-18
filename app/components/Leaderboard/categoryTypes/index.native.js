@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Animated } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { categoryIcons } from '../../../helpers/utils';
 import styles from '../../../styles/leaderboard/leader_board';
@@ -57,7 +57,7 @@ export default class CategoryTypes extends Component {
 
   render() {
     return (
-      <View style={styles.outerContainer}>
+      <Animated.View style={[styles.outerContainer, this.props.style]}>
         <ScrollView
           contentContainerStyle={[styles.innerContainer]}
           horizontal={true}
@@ -67,7 +67,7 @@ export default class CategoryTypes extends Component {
         >
           {this.getCategoryView()}
         </ScrollView>
-      </View>
+      </Animated.View>
     );
   }
 }

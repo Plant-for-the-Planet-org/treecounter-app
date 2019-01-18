@@ -494,7 +494,7 @@ ActionButton.propTypes = {
   onPress: PropTypes.func,
   text: PropTypes.string,
   image: PropTypes.any,
-  navigation: PropTypes.Object
+  navigation: PropTypes.any
 };
 
 export default withNavigation(ContributionCard);

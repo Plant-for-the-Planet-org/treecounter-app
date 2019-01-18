@@ -12,13 +12,18 @@ export function loadUserProfile(returnData, navigation) {
 
   return dispatch => {
     dispatch(setProgressModelState(true));
-    request.then(res => {
-      dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
-      dispatch(setCurrentUserProfileId(res.data.id));
-      dispatch(setProgressModelState(false));
-      if (returnData) {
-        dispatch(setLastRoute(returnData));
-      }
-    });
+    request
+      .then(res => {
+        dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
+        dispatch(setCurrentUserProfileId(res.data.id));
+        dispatch(setProgressModelState(false));
+        if (returnData) {
+          dispatch(setLastRoute(returnData));
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        dispatch(setProgressModelState(false));
+      });
   };
 }

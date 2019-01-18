@@ -26,8 +26,6 @@ class App extends Component {
         <AppDrawerNavigatorContainer />
       </SafeAreaView>
     );
-
-    return;
   }
 }
 

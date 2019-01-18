@@ -5,7 +5,7 @@ import CategoryTypes from './categoryTypes';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import CardLayout from '../Common/Card';
 import styles from '../../styles/leaderboard/leader_board';
-import { selector_menu, filter } from '../../assets';
+import { filter } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import ContextMenuItem from './contextMenuItem.native';

@@ -144,11 +144,11 @@ class Trillion extends Component {
               </View>
               {this.props.pledgeEvents &&
               this.props.pledgeEvents.pledgeEvents.length > 0 ? (
-                <View>
-                  <Text style={styles.titleText}>
+                <View style={styles.pledgeContainer}>
+                  <Text style={styles.pledgeText}>
                     Trillion Tree Events today
                   </Text>
-                  <View>
+                  <View style={styles.pledgeEventContainer}>
                     {this.props.pledgeEvents.pledgeEvents
                       .sort((val1, val2) => val1.position > val2.position)
                       .map(element => (

@@ -142,37 +142,37 @@ class Trillion extends Component {
               <View style={svgStyles.svgContainer}>
                 <SvgContainer {...this.state.svgData} trillion={true} />
               </View>
-              {this.props.pledgeEvents &&
-              this.props.pledgeEvents.pledgeEvents.length > 0 ? (
-                <View style={styles.pledgeContainer}>
-                  <Text style={styles.pledgeText}>
-                    Trillion Tree Events today
-                  </Text>
-                  <View style={styles.pledgeEventContainer}>
-                    {this.props.pledgeEvents.pledgeEvents
-                      .sort((val1, val2) => val1.position > val2.position)
-                      .map(element => (
-                        <CardLayout
-                          key={element.slug}
-                          className="event_item"
-                          onClick={() => {
-                            updateRoute('app_pledge', null, null, {
-                              eventSlug: element.slug
-                            });
-                          }}
-                        >
-                          <View className="imgContainer">
-                            <Image
-                              src={getImageUrl('event', 'thumb', element.image)}
-                            />
-                          </View>
+              {/*{this.props.pledgeEvents &&*/}
+              {/*this.props.pledgeEvents.pledgeEvents.length > 0 ? (*/}
+              {/*<View style={styles.pledgeContainer}>*/}
+              {/*<Text style={styles.pledgeText}>*/}
+              {/*Trillion Tree Events today*/}
+              {/*</Text>*/}
+              {/*<View style={styles.pledgeEventContainer}>*/}
+              {/*{this.props.pledgeEvents.pledgeEvents*/}
+              {/*.sort((val1, val2) => val1.position > val2.position)*/}
+              {/*.map(element => (*/}
+              {/*<CardLayout*/}
+              {/*key={element.slug}*/}
+              {/*className="event_item"*/}
+              {/*onClick={() => {*/}
+              {/*updateRoute('app_pledge', null, null, {*/}
+              {/*eventSlug: element.slug*/}
+              {/*});*/}
+              {/*}}*/}
+              {/*>*/}
+              {/*<View className="imgContainer">*/}
+              {/*<Image*/}
+              {/*src={getImageUrl('event', 'thumb', element.image)}*/}
+              {/*/>*/}
+              {/*</View>*/}
 
-                          <Text style={styles.titleText}>{element.name}</Text>
-                        </CardLayout>
-                      ))}
-                  </View>
-                </View>
-              ) : null}
+              {/*<Text style={styles.titleText}>{element.name}</Text>*/}
+              {/*</CardLayout>*/}
+              {/*))}*/}
+              {/*</View>*/}
+              {/*</View>*/}
+              {/*) : null}*/}
               <CardLayout style={styles.cardContainer}>
                 <Text style={styles.titleText}>
                   {' '}

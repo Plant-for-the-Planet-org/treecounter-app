@@ -73,12 +73,15 @@ export function sendEmail(navigation = undefined) {
 }
 
 export function reset_password(data, navigation = undefined) {
+  dispatch(setProgressModelState(true));
   return dispatch => {
     return postRequest('auth_resetPassword_post', data)
       .then(res => {
+        dispatch(setProgressModelState(false));
         updateRoute('app_login', navigation || dispatch);
       })
       .catch(err => {
+        dispatch(setProgressModelState(false));
         debug(err);
         throw err;
       });

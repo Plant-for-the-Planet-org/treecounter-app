@@ -14,11 +14,12 @@ class ResetPassswordContainer extends React.Component {
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
-    this.state = { schemaProp: schemaOptions };
+    this.state = { schemaProp: schemaOptions, formValue: {} };
   }
   onPress = () => {
     let value = this.refs.resetPasswordContainer.refs.resetPasswordForm.getValue();
     if (value) {
+      this.setState({ formValue: value });
       let forgotPassword = value;
       this.onClick(forgotPassword);
     }
@@ -54,7 +55,7 @@ class ResetPassswordContainer extends React.Component {
         schemaProp={this.state.schemaProp}
         onSetPassword={this.onPress}
         updateRoute={this.props.route}
-        value={value}
+        formValue={{ ...this.state.formValue, ...value }}
       />
     );
   }

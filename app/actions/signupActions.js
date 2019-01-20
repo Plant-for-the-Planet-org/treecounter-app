@@ -46,10 +46,12 @@ export function accountActivate(token) {
     return postRequest('auth_accountActivate_post', { token: token })
       .then(res => {
         const { token, refresh_token, data } = res.data;
+        updateJWT(token, refresh_token);
+        dispatch(loadUserProfile());
         if (data.routeName !== 'app_userHome') {
-          updateJWT(token, refresh_token);
-          dispatch(loadUserProfile());
           updateRoute(data.routeName, dispatch, null, data.routeParams);
+        } else {
+          updateRoute('app_accountActivated', dispatch, null, null);
         }
         dispatch(setProgressModelState(false));
         return res;

@@ -162,6 +162,10 @@ class TreeCounter extends Component {
               path={getLocalRoute('app_accountActivate') + '/:token'}
               component={SuccessfullyActivatedAccount}
             />
+            <PrivateRoute
+              path={getLocalRoute('app_accountActivated')}
+              component={SuccessfullyActivatedAccount}
+            />
             <PublicRoute
               path={getLocalRoute('app_accountActivation')}
               component={ActivateAccountContainer}

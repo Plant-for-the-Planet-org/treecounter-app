@@ -1,17 +1,24 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Platform } from 'react-native';
 
 const boxShadow = {
   shadowOpacity: 0.5,
   shadowOffset: { width: 0, height: 8 },
   shadowColor: 'rgba(0, 0, 0, 0.3)',
-  shadowRadius: 12
+  shadowRadius: 12,
+  elevation: 4
 };
 export default (LeaderboardStyle = EStyleSheet.create({
-  leaderBoardContainer: { flex: 1, backgroundColor: '#fff' },
+  leaderBoardContainer: {
+    flex: 1,
+    backgroundColor: Platform.OS === 'android' ? 'transparent' : '#fff',
+    position: 'relative'
+  },
+
   tooltipContainerStyle: {
-    zIndex: 1000000000,
+    zIndex: 7,
     ...boxShadow,
-    marginTop: -35,
+    marginTop: Platform.OS === 'android' ? -10 : -35,
     marginRight: 10
   },
   sortView: {
@@ -33,10 +40,11 @@ export default (LeaderboardStyle = EStyleSheet.create({
   },
   cardImageStyle: {
     position: 'absolute',
-    top: -35,
     zIndex: 1000,
     height: 60,
-    width: 60
+    width: 60,
+    elevation: 10,
+    left: '40%'
   },
   plantedContainer: {
     top: 25,

@@ -19,7 +19,7 @@ const Header = ({
   return (
     <header className="app-header">
       <div className="app-header__home">
-        {/* <BurgerMenu /> */}
+        <BurgerMenu />
         {isLoggedIn ? <HomeButton /> : null}
       </div>
       <SearchBar />

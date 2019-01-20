@@ -135,7 +135,7 @@ export default class UserHome extends Component {
               <SvgContainer
                 {...svgData}
                 onToggle={toggleVal => this.updateSvg(toggleVal)}
-              />>
+              />
             </View>
             <View>
               {userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector

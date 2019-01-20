@@ -61,19 +61,6 @@ export default class Leaderboard extends Component {
   }
 
   _getTableView = selectedCategory => {
-    const headerHeight = this.state.scrollY.interpolate({
-      inputRange: [0, 60],
-      outputRange: [-25, -55],
-      extrapolate: 'clamp'
-    });
-    const headerTranslate = Animated.diffClamp(
-      this.state.scrollY,
-      0,
-      60
-    ).interpolate({
-      inputRange: [0, 60],
-      outputRange: [0, -20]
-    });
     console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
     let maxPlanted = 0;
@@ -85,12 +72,6 @@ export default class Leaderboard extends Component {
     if (selectedCategory)
       listItemsUI = (
         <CardLayout style={styles.cardStyle}>
-          {selectedCategory && (
-            <Animated.Image
-              source={categoryIcons[selectedCategory]['selected']}
-              style={[styles.cardImageStyle, { top: headerHeight }]}
-            />
-          )}
           <Animated.ScrollView
             bounces={false}
             scrollEventThrottle={16}
@@ -98,7 +79,7 @@ export default class Leaderboard extends Component {
               justifyContent: 'flex-start',
               flexGrow: 1
             }}
-            horizontal={false}
+            showsHorizontalScrollIndicator={false}
             onScroll={Animated.event(
               [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
               {
@@ -111,15 +92,27 @@ export default class Leaderboard extends Component {
             {this.props.queryResult ? (
               <View style={{ width: '98%', padding: 10, marginTop: 15 }}>
                 {this.props.queryResult.map((result, index) => {
+                  const isPrivate =
+                    result.hasOwnProperty('mayPublish') && !result.mayPublish;
                   return (
                     <LeaderboardItem
                       key={'LeaderboardItem' + index}
-                      onPress={this._handleItemPress}
+                      onPress={
+                        isPrivate
+                          ? () => {
+                              return;
+                            }
+                          : this._handleItemPress
+                      }
                       image={result.image}
                       planted={result.planted}
                       target={maxPlanted}
                       index={index}
-                      title={result.caption}
+                      title={
+                        isPrivate
+                          ? i18n.t('label.tree_planter')
+                          : result.caption
+                      }
                       treeCounterId={result.treecounterId}
                       uri={result.uri}
                     />
@@ -206,6 +199,11 @@ export default class Leaderboard extends Component {
     return sortView;
   };
   render() {
+    const headerHeight = this.state.scrollY.interpolate({
+      inputRange: [0, 60],
+      outputRange: [70, 45],
+      extrapolate: 'clamp'
+    });
     const { categoryInfo } = this.props;
     const selectedCategory =
       this.state.selectedCategory ||
@@ -222,6 +220,12 @@ export default class Leaderboard extends Component {
         {this._getSortView()}
 
         {this._getTableView(selectedCategory)}
+        {selectedCategory && (
+          <Animated.Image
+            source={categoryIcons[selectedCategory]['selected']}
+            style={[styles.cardImageStyle, { top: headerHeight }]}
+          />
+        )}
       </View>
     );
   }

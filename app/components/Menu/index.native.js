@@ -171,7 +171,7 @@ export default class Menu extends Component {
             />
           </View>
         </ScrollView>
-        {this.props.userProfile && (
+        {this.props.userProfile ? (
           <View>
             <LargeMenuItem
               onPress={this.props.logoutUser}
@@ -179,7 +179,7 @@ export default class Menu extends Component {
               iconUrl={iosLogout}
             />
           </View>
-        )}
+        ) : null}
         <LargeMenuItem
           onPress={this.onPressMenu.bind(this, { uri: 'about_us' })}
           title={i18n.t('label.information')}

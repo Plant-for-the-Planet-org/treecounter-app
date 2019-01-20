@@ -34,40 +34,53 @@ export const handleServerResponseError = function(
   serverFormError,
   formSchemaOptions
 ) {
-  let newOptions = formSchemaOptions;
   const data =
     serverFormError &&
     serverFormError.response &&
     serverFormError.response.data;
   if (data && data.code == 400 && data.hasOwnProperty('errors')) {
+    let newOptions = _.cloneDeep(formSchemaOptions);
     for (let property in data.errors.children) {
-      if (
-        data.errors.children.hasOwnProperty(property) &&
-        data.errors.children[property].hasOwnProperty('errors')
-      ) {
-        newOptions = _.cloneDeep(formSchemaOptions);
-        newOptions.fields[property].hasError = true;
-        let oldValidator = newOptions.fields[property].error;
-        if (typeof oldValidator === 'function') {
-          newOptions.fields[property].error = (value, path, context) => {
-            let errorReturn = oldValidator(value, path, context);
-            if (!errorReturn) {
-              errorReturn = getErrorView(
-                data.errors.children[property].errors.toString()
-              );
-            } else {
-              //if there are some front end validation error then remove server error from schema options
-              newOptions.fields[property].hasError = false;
-              newOptions.fields[property].error = oldValidator;
-            }
-            return errorReturn;
-          };
-        }
-      }
+      updateFormSchema(
+        newOptions.fields[property],
+        data.errors.children[property]
+      );
     }
+
+    return newOptions;
   }
-  return newOptions;
+  return formSchemaOptions;
 };
+
+/**
+ * Update Form Schema recursively by iterating over properties under nth depth level.
+ *  */
+export function updateFormSchema(optionSchema, responseData) {
+  if (responseData.children) {
+    for (let property in responseData.children) {
+      updateFormSchema(
+        optionSchema.fields[property],
+        responseData.children[property]
+      );
+    }
+  } else if (responseData.errors && responseData.errors.length > 0) {
+    optionSchema.hasError = true;
+    let oldValidator = optionSchema.error;
+    if (typeof oldValidator === 'function') {
+      optionSchema.error = (value, path, context) => {
+        let errorReturn = oldValidator(value, path, context);
+        if (responseData.errors && responseData.errors.length > 0) {
+          errorReturn = getErrorView(responseData.errors.toString());
+        } else {
+          optionSchema.error = oldValidator;
+        }
+        return errorReturn;
+      };
+    }
+    return;
+  }
+  return;
+}
 
 export const categoryIcons = {
   country: {

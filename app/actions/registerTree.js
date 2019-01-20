@@ -16,10 +16,14 @@ export function registerTree(
 ) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    postAuthenticatedRequest('plantContribution_post', plantContribution, {
-      treecounter: treecounterId,
-      mode: mode
-    })
+    return postAuthenticatedRequest(
+      'plantContribution_post',
+      plantContribution,
+      {
+        treecounter: treecounterId,
+        mode: mode
+      }
+    )
       .then(res => {
         const { statusText } = res;
         const { contribution, treecounter } = res.data;
@@ -29,11 +33,13 @@ export function registerTree(
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         dispatch(setProgressModelState(false));
         updateRoute('app_userHome', navigation || dispatch);
+        return res;
       })
       .catch(error => {
         debug(error.response);
         dispatch(setProgressModelState(false));
         NotificationManager.error(error.response.data.message, 'Error', 5000);
+        throw error;
       });
   };
 }

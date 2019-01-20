@@ -61,11 +61,6 @@ export default class Leaderboard extends Component {
   }
 
   _getTableView = selectedCategory => {
-    const headerHeight = this.state.scrollY.interpolate({
-      inputRange: [0, 60],
-      outputRange: [-35, -60],
-      extrapolate: 'clamp'
-    });
     console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
     let maxPlanted = 0;
@@ -77,12 +72,6 @@ export default class Leaderboard extends Component {
     if (selectedCategory)
       listItemsUI = (
         <CardLayout style={styles.cardStyle}>
-          {selectedCategory && (
-            <Animated.Image
-              source={categoryIcons[selectedCategory]['selected']}
-              style={[styles.cardImageStyle, { top: headerHeight }]}
-            />
-          )}
           <Animated.ScrollView
             bounces={false}
             scrollEventThrottle={16}
@@ -210,6 +199,11 @@ export default class Leaderboard extends Component {
     return sortView;
   };
   render() {
+    const headerHeight = this.state.scrollY.interpolate({
+      inputRange: [0, 60],
+      outputRange: [70, 45],
+      extrapolate: 'clamp'
+    });
     const { categoryInfo } = this.props;
     const selectedCategory =
       this.state.selectedCategory ||
@@ -226,6 +220,12 @@ export default class Leaderboard extends Component {
         {this._getSortView()}
 
         {this._getTableView(selectedCategory)}
+        {selectedCategory && (
+          <Animated.Image
+            source={categoryIcons[selectedCategory]['selected']}
+            style={[styles.cardImageStyle, { top: headerHeight }]}
+          />
+        )}
       </View>
     );
   }

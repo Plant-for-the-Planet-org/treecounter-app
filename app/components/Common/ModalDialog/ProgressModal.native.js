@@ -15,7 +15,6 @@ export default class ProgressModal extends Component {
           Alert.alert('Loading cancelled in between');
         }}
       >
-        >
         <View
           style={{
             flex: 1,

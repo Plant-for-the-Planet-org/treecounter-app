@@ -124,7 +124,7 @@ class SearchBar extends React.PureComponent {
             { opacity: showCancelButton ? 1 : 0 }
           ]}
         >
-          {this.props.showCancelSearchButton && (
+          {this.props.showCancelSearchButton ? (
             <TouchableItem
               style={styles.button}
               hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
@@ -140,7 +140,7 @@ class SearchBar extends React.PureComponent {
                 Cancel
               </Text>
             </TouchableItem>
-          )}
+          ) : null}
         </View>
       </View>
     );

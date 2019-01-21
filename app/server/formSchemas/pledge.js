@@ -24,6 +24,7 @@ export default {
       type: 'string',
       title: 'label.email',
       attr: { maxlength: 255 },
+      widget: 'email',
       icon: null,
       help: null,
       maxLength: 255,
@@ -32,6 +33,8 @@ export default {
     treeCount: {
       type: 'integer',
       title: 'label.tree_count',
+      attr: { pattern: '.{1,}' },
+      pattern: '.{1,}',
       icon: null,
       help: null,
       propertyOrder: 4

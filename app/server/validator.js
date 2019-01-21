@@ -25,12 +25,14 @@ export const commonValidator = function(value, path, context) {
       }
     }
   } else {
-    return (
-      <div className="error-msg">
-        {i18n.t('label.invalidValueMsg', {
-          context: i18n.t(context.options.label)
-        })}
-      </div>
+    return getErrorView(
+      i18n.t('label.invalidValueMsg', {
+        context: i18n.t(context.options.label)
+      })
     );
   }
+};
+
+export const getErrorView = function(text) {
+  return <div className="error-msg">{text}</div>;
 };

@@ -45,5 +45,5 @@ export default connect(null, mapDispatchToProps)(ActivateAccountContainer);
 
 ActivateAccountContainer.propTypes = {
   sendEmail: PropTypes.func,
-  navigation: PropTypes.object
+  navigation: PropTypes.any
 };

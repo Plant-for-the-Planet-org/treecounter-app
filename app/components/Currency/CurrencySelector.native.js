@@ -1,28 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import i18n from '../../locales/i18n.js';
-import { View, Picker, Text } from 'react-native';
+import { View } from 'react-native';
 import styles from '../../styles/currencies/currencyselector';
-import { currencySort } from './utils';
+import t from 'tcomb-form-native';
+import { getFormSchema } from '../../server/parsedSchemas/currencySelector';
+
+let Form = t.form.Form;
 
 const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
-  let currenciesArray = currencySort(Object.keys(currencies));
+  const {
+    schemaOptions,
+    transformedSchema: currencySelectorFormSchema
+  } = getFormSchema(currencies);
 
+  console.log('selectedCurrency', schemaOptions);
   return (
     <View style={styles.containerStyle}>
-      <Picker
-        mode="dropdown"
-        selectedValue={selectedCurrency}
-        onValueChange={(itemValue, itemIndex) => onChange(itemValue)}
-        style={styles.pickerStyle}
-        itemStyle={styles.itemStyle}
-      >
-        {currenciesArray.map(value => {
-          return (
-            <Picker.Item key={value} label={currencies[value]} value={value} />
-          );
-        })}
-      </Picker>
+      <Form
+        onChange={currency => {
+          onChange(currency.currency);
+        }}
+        type={currencySelectorFormSchema}
+        //        options={schemaOptions}
+        value={{ currency: selectedCurrency }}
+      />
     </View>
   );
 };

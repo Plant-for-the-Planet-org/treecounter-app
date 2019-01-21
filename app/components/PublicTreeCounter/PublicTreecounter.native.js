@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, Linking } from 'react-native';
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
@@ -150,12 +150,12 @@ class PublicTreeCounter extends React.Component {
             followChanged={this.onFollowChanged}
           />
           {'tpo' !== userProfile.type &&
-            !isMyself(treecounter, currentUserProfile) && (
-              <SupportButton
-                {...supportProps}
-                onRegisterSupporter={this.onRegisterSupporter}
-              />
-            )}
+          !isMyself(treecounter, currentUserProfile) ? (
+            <SupportButton
+              {...supportProps}
+              onRegisterSupporter={this.onRegisterSupporter}
+            />
+          ) : null}
         </View>
         <View style={stylesHome.svgContainer}>
           <SvgContainer
@@ -164,10 +164,34 @@ class PublicTreeCounter extends React.Component {
           />
         </View>
         <View>
-          {userProfile.synopsis1 || userProfile.synopsis2 ? (
+          {userProfile.synopsis1 ||
+          userProfile.synopsis2 ||
+          userProfile.linkText ||
+          userProfile.url ? (
             <CardLayout>
-              <Text style={stylesHome.footerText}>{userProfile.synopsis1}</Text>
-              <Text style={stylesHome.footerText}>{userProfile.synopsis2}</Text>
+              {userProfile.synopsis1 ? (
+                <Text style={stylesHome.footerText}>
+                  {userProfile.synopsis1}
+                </Text>
+              ) : null}
+              {userProfile.synopsis2 ? (
+                <Text style={stylesHome.footerText}>
+                  {userProfile.synopsis2}
+                </Text>
+              ) : null}
+              {userProfile.linkText ? (
+                <Text style={stylesHome.footerText}>
+                  {userProfile.linkText}
+                </Text>
+              ) : null}
+              {userProfile.url ? (
+                <Text
+                  style={stylesHome.linkText}
+                  onPress={() => this._goToURL(userProfile.url)}
+                >
+                  {userProfile.url}
+                </Text>
+              ) : null}
             </CardLayout>
           ) : null}
         </View>
@@ -193,6 +217,16 @@ class PublicTreeCounter extends React.Component {
         </View>
       </ScrollView>
     );
+  }
+
+  _goToURL(url) {
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log("Don't know how to open URI: " + url);
+      }
+    });
   }
 }
 

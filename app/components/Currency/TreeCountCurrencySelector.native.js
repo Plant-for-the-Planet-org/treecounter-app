@@ -80,10 +80,28 @@ class TreeCountCurrencySelector extends React.Component {
           <View style={styles.selectedProjectRow}>
             <Text>{this.props.selectedProject.name}</Text>
           </View>
-          <View style={styles.selectedProjectRow}>
-            <Text>{this.state.selectedTreeCount}</Text>
-            <Text style={styles.selectedProjectCol}>Trees</Text>
-          </View>
+          {this.props.giftTreeCounterName ? (
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                width: '100%'
+              }}
+            >
+              <Text numberOfLines={1} ellipsizeMode={'tail'}>
+                <Text>{this.state.selectedTreeCount}</Text>
+                <Text style={styles.selectedProjectCol}> Trees</Text> Gift to{' '}
+                {this.props.giftTreeCounterName}
+              </Text>
+              <Text>{this.props.giftTreeCounterName}</Text>
+            </View>
+          ) : (
+            <View style={styles.selectedProjectRow}>
+              <Text>{this.state.selectedTreeCount}</Text>
+              <Text style={styles.selectedProjectCol}>Trees</Text>
+            </View>
+          )}
+
           <View style={styles.selectedProjectRow}>
             <Text>Amount : </Text>
             <Text style={styles.selectedProjectCol}>

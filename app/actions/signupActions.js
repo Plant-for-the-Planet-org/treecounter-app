@@ -10,7 +10,7 @@ export function signUp(profileType, userData) {
   if (userData.password.first === userData.password.second) {
     return dispatch => {
       dispatch(setProgressModelState(true));
-      postRequest('signup_post', userData, { profileType: profileType })
+      return postRequest('signup_post', userData, { profileType: profileType })
         .then(res => {
           const { token, refresh_token, data } = res.data;
           if (!data.isActivated) {
@@ -27,10 +27,12 @@ export function signUp(profileType, userData) {
 
           updateRoute(data.routeName, dispatch, null, data.routeParams);
           dispatch(setProgressModelState(false));
+          return res;
         })
         .catch(err => {
           console.log(err);
           dispatch(setProgressModelState(false));
+          throw err;
         });
     };
   } else {

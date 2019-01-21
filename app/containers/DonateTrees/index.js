@@ -16,7 +16,7 @@ import {
 } from '../../actions/selectPlantProjectAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { fetchCurrencies } from '../../actions/currencies';
-import { donate, paymentClear } from '../../actions/donateAction';
+import { donate, paymentClear, gift } from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 
 import { updateRoute } from '../../helpers/routerHelper';
@@ -27,8 +27,8 @@ class DonationTreesContainer extends Component {
   componentDidMount() {
     //  this.props.selectPlantProjectAction(1);
     this.props.fetchCurrencies();
-    console.log('In donate Tree Route' + this.props.navigation);
-    console.log(this.props.navigation);
+    // console.log('In donate Tree Route' + this.props.navigation);
+    // console.log(this.props.navigation);
   }
 
   onTabChange(title) {
@@ -36,7 +36,7 @@ class DonationTreesContainer extends Component {
   }
   render() {
     let flag = this.props.currentUserProfile ? true : false;
-    console.log('donate tree called');
+    // console.log('donate tree called');
     return (
       <DonateTrees
         ref={'donateTreesContainer'}
@@ -80,6 +80,7 @@ const mapDispatchToProps = dispatch => {
       selectPlantProjectAction,
       fetchCurrencies,
       donate,
+      gift,
       paymentClear,
       clearPlantProject,
       setProgressModelState,
@@ -97,7 +98,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 DonationTreesContainer.propTypes = {
   selectedProject: PropTypes.object,
-  navigation: PropTypes.object,
+  navigation: PropTypes.any,
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
@@ -105,6 +106,7 @@ DonationTreesContainer.propTypes = {
   selectPlantProjectAction: PropTypes.func,
   paymentClear: PropTypes.func,
   donate: PropTypes.func,
+  gift: PropTypes.func,
   fetchCurrencies: PropTypes.func,
   clearPlantProject: PropTypes.func,
   supportTreecounter: PropTypes.object,

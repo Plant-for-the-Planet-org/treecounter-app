@@ -1,7 +1,7 @@
 import React from 'react';
 import Privacy from '../../components/Privacy';
 import { PrivacyAction } from '../../actions/privacyAction';
-
+import _ from 'lodash';
 class PrivacyContainer extends React.Component {
   constructor() {
     super();

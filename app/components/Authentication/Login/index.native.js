@@ -50,7 +50,8 @@ export default class Login extends Component {
               <Form
                 ref={'loginForm'}
                 type={loginFormSchema}
-                options={schemaOptions}
+                options={this.props.schemaOptions}
+                value={this.props.formValue}
               />
             </View>
             <View style={styles.bottomRow}>
@@ -69,7 +70,7 @@ export default class Login extends Component {
                   {i18n.t('label.dont_have_account')} {i18n.t('label.signUp')}
                 </Text>
               </TouchableItem>
-              {'  '}
+
               <PrimaryButton
                 onClick={this.props.onPress}
                 buttonStyle={styles.loginButtonStyle}
@@ -88,5 +89,7 @@ export default class Login extends Component {
 Login.propTypes = {
   onPress: PropTypes.func.isRequired,
   onError: PropTypes.func,
-  updateRoute: PropTypes.func
+  updateRoute: PropTypes.func,
+  formValue: PropTypes.any,
+  schemaOptions: PropTypes.any
 };

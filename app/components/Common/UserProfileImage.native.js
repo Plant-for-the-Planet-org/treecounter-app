@@ -5,11 +5,11 @@ import { ProfilePic } from '../../assets';
 import { View, Image } from 'react-native';
 import styles from '../../styles/user-home.native';
 
-const UserProfileImage = ({ profileImage }) => {
+const UserProfileImage = ({ profileImage, style, imageStyle }) => {
   return (
-    <View style={styles.profileImageContainer}>
+    <View style={[styles.profileImageContainer, style]}>
       <Image
-        style={styles.profileImage}
+        style={[styles.profileImage, imageStyle]}
         source={
           profileImage
             ? {
@@ -20,7 +20,7 @@ const UserProfileImage = ({ profileImage }) => {
             : ProfilePic
         }
       />
-      <View style={styles.circle} />
+      <View style={[styles.circle, style]} />
     </View>
   );
 };

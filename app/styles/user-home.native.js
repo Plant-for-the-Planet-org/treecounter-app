@@ -27,6 +27,10 @@ export default (buttonStyles = EStyleSheet.create({
     color: '#686060',
     padding: 10
   },
+  linkText: {
+    color: '$colorPrimaryAccent',
+    padding: 10
+  },
   circle: {
     borderRadius: 35,
     borderWidth: 5,
@@ -55,8 +59,8 @@ export default (buttonStyles = EStyleSheet.create({
     justifyContent: 'center'
   },
   profileImage: {
-    width: 65,
-    height: 65,
+    width: '93%',
+    height: '93%',
     resizeMode: 'contain',
     padding: 5,
     borderRadius: 33

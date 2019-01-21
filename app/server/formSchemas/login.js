@@ -18,7 +18,7 @@ export default {
       propertyOrder: 2
     }
   },
-  required: ['_username', '_password'],
+  // required: ['_username', '_password'],
   submit_url: '/api/login_check',
   submit_method: 'POST'
 };

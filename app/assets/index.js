@@ -109,6 +109,10 @@ import editGrey from './images/icons/edit_grey.png';
 import welcomeLogo from './images/icons/welcomeLogo.png';
 import world_outline from './images/world_outline.png';
 import world_outline_red from './images/world_outline_red.png';
+import selector_menu from './images/icons/selector_menu.png';
+import radio_button from './images/icons/radio_button.png';
+import radio_button_selected from './images/icons/radio_button_selected.png';
+import filter from './images/icons/filter.png';
 
 export {
   AppStoreLogo,
@@ -221,5 +225,9 @@ export {
   editGrey,
   welcomeLogo,
   world_outline,
-  world_outline_red
+  world_outline_red,
+  selector_menu,
+  radio_button_selected,
+  radio_button,
+  filter
 };

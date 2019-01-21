@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
 import { PropTypes } from 'prop-types';
+import GiftTabView from './GiftTabs.native';
+import { updateRoute } from '../../helpers/routerHelper';
 
 export default class GiftTrees extends Component {
   constructor(props) {
     super(props);
+    this.openProjects = this.openProjects.bind(this);
   }
-
+  openProjects(formValue, type) {
+    // console.log('Open Project called up ', formValue);
+    this.props.openProjects(formValue, type);
+  }
   render() {
-    return <Text>Gift tree UnderConstruction!!</Text>;
+    return <GiftTabView openProjects={this.openProjects} {...this.props} />;
   }
 }
 

@@ -8,14 +8,10 @@ import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card';
 import {
   singleTreeRegisterFormSchema,
-  schemaOptionsSingleTree,
-  multipleTreesRegisterFormSchema,
-  schemaOptionsMultipleTrees
+  multipleTreesRegisterFormSchema
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
-import RegistrationMap from './RegistrationMap';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
-import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 
 let TCombForm = t.form.Form;
@@ -81,24 +77,12 @@ const getMultipleTreeLayout = props1 => {
   };
 };
 
-const schemaOptionsSingle = (template, props) => {
-  schemaOptionsSingleTree.fields.plantProject.template = getSelectTemplate(
-    getPlantProjectEnum(props.currentUserProfile)
-  );
-  return {
-    template,
-    ...schemaOptionsSingleTree
-  };
+const schemaOptionsSingle = (template, plantProjects) => {
+  this.props.updateTemplateSingle(template, plantProjects);
 };
 
-const schemaOptionsMultiple = (template, props) => {
-  schemaOptionsMultipleTrees.fields.plantProject.template = getSelectTemplate(
-    getPlantProjectEnum(props.currentUserProfile)
-  );
-  return {
-    template,
-    ...schemaOptionsMultipleTrees
-  };
+const schemaOptionsMultiple = (template, plantProjects) => {
+  this.props.updateTemplateMultiple(template, plantProjects);
 };
 
 export default class RegisterTrees extends Component {
@@ -117,7 +101,6 @@ export default class RegisterTrees extends Component {
 
   constructor() {
     super();
-
     this.state = {
       mode: '',
       individual: {
@@ -146,6 +129,21 @@ export default class RegisterTrees extends Component {
   }
 
   render() {
+    const tpoPlantProjects = getPlantProjectEnum(this.props.currentUserProfile);
+    const plantProject =
+      tpoPlantProjects &&
+      tpoPlantProjects.length > 0 &&
+      tpoPlantProjects[0].value;
+    if (plantProject) {
+      schemaOptionsSingle(getSingleTreeLayout(this.props), tpoPlantProjects);
+    }
+    if (plantProject) {
+      schemaOptionsMultiple(
+        getMultipleTreeLayout(this.props),
+        tpoPlantProjects
+      );
+    }
+
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>
@@ -164,20 +162,15 @@ export default class RegisterTrees extends Component {
                 <TCombForm
                   ref="registerTreeForm"
                   type={singleTreeRegisterFormSchema}
-                  options={schemaOptionsSingle(
-                    getSingleTreeLayout(this.props),
-                    this.props
-                  )}
-                  value={this.state.individual}
+                  options={this.props.schemaOptionsSingleTree}
+                  value={{ ...this.state.individual, plantProject }}
                 />
               ) : (
                 <TCombForm
                   ref="registerTreeForm"
                   type={multipleTreesRegisterFormSchema}
-                  options={schemaOptionsMultiple(
-                    getMultipleTreeLayout(this.props),
-                    this.props
-                  )}
+                  options={this.props.schemaOptionsMultipleTrees}
+                  value={{ plantProject }}
                 />
               )}
             </Tabs>
@@ -193,5 +186,9 @@ export default class RegisterTrees extends Component {
 
 RegisterTrees.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  currentUserProfile: PropTypes.any.isRequired
+  currentUserProfile: PropTypes.any.isRequired,
+  updateTemplateSingle: PropTypes.func,
+  updateTemplateMultiple: PropTypes.func,
+  schemaOptionsSingleTree: PropTypes.object,
+  schemaOptionsMultipleTrees: PropTypes.object
 };

@@ -9,6 +9,7 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import { getImageUrl } from '../../actions/apiRouting';
 import { targetPlanted, tick } from '../../assets';
 import TouchableItem from '../Common/TouchableItem.native';
+import PlantedProgressBar from './PlantedProgressbar.native';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -106,7 +107,7 @@ class PlantProjectSnippet extends React.Component {
         <CardLayout
           style={[styles.projectSnippetContainer, this.props.cardStyle]}
         >
-          {projectImage && (
+          {projectImage ? (
             <View style={styles.projectImageContainer}>
               <Image
                 style={styles.teaser__projectImage}
@@ -120,61 +121,13 @@ class PlantProjectSnippet extends React.Component {
                 resizeMode={'cover'}
               />
             </View>
-          )}
+          ) : null}
 
           <View style={styles.projectSpecsContainer}>
-            <View style={styles.treeCounterContainer}>
-              <View style={[styles.treePlantedContainer]}>
-                <View
-                  style={[styles.treePlantedChildContainer]}
-                  style={
-                    treeCountWidth > 0
-                      ? {
-                          height: '100%',
-                          flexDirection: 'row',
-                          backgroundColor: '#b9d384',
-                          borderColor: '#b9d384',
-                          width: treeCountWidth + '%',
-                          paddingRight: 10,
-                          padding: 5,
-                          borderTopRightRadius: 10,
-                          borderBottomRightRadius: 10,
-                          borderWidth: 0.5
-                        }
-                      : {
-                          height: '100%',
-                          flexDirection: 'row',
-                          padding: 5
-                        }
-                  }
-                />
-                <View
-                  style={{
-                    width: '100%',
-                    flexDirection: 'row',
-                    position: 'absolute',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Text style={styles.treePlantedtextPlanted}>
-                    {specsProps.countPlanted}
-                  </Text>
-                  <Text style={styles.treePlantedtext}>
-                    {i18n.t('label.trees')}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={[styles.targetContainer]}>
-                <Text style={styles.treePlantedtext}>
-                  {specsProps.countTarget.toLocaleString('en')}
-                </Text>
-                <Image
-                  source={targetPlanted}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
+            <PlantedProgressBar
+              countPlanted={specsProps.countPlanted}
+              countTarget={specsProps.countTarget}
+            />
             <View style={styles.projectNameContainer}>
               <Text
                 ellipsizeMode="tail"

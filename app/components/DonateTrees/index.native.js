@@ -44,7 +44,8 @@ export default class DonateTrees extends Component {
         { key: 'currency', title: 'Donation Details' },
         { key: 'recipient', title: 'Donor Details' }
         // { key: 'payments', title: 'Payments' }
-      ]
+      ],
+      giftTreeCounterName: null
     };
 
     this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
@@ -70,6 +71,16 @@ export default class DonateTrees extends Component {
       })
       .catch(err => {});
     Linking.addEventListener('url', this.handleOpenURL);
+    let params = this.props.navigation.state.params;
+    if (params !== undefined && params.giftMethod === 'invitation') {
+      this.setState({
+        giftTreeCounterName:
+          params.userForm.firstname + ' ' + params.userForm.lastname
+      });
+    }
+    if (params !== undefined && params.giftMethod === 'direct') {
+      this.setState({ giftTreeCounterName: params.userForm.name });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -257,48 +268,26 @@ export default class DonateTrees extends Component {
     let currencies = this.props.currencies.currencies;
 
     let screenToShow;
-    // {
-    //   this.props.selectedTpo && route.key === 'selectPlant'
-    //     ? (screenToShow = (
-    //         <ScrollView>
-    //           <PlantProjectFull
-    //             callExpanded={this.callExpanded}
-    //             expanded={false}
-    //             plantProject={selectedProject}
-    //             tpoName={this.props.selectedTpo.name}
-    //             selectAnotherProject={true}
-    //             showNextButton={true}
-    //             onNextClick={() => this.Tab1validated()}
-    //             projectClear={this.props.plantProjectClear}
-    //           />
-    //         </ScrollView>
-    //       ))
-    //     : null;
-    // }
-
     {
       this.props.selectedTpo &&
       currencies &&
       route.key === 'currency' &&
       this.props.selectedProject
         ? (screenToShow = (
-            <View>
-              <TreeCountCurrencySelector
-                treeCost={selectedProject.treeCost}
-                rates={
-                  currencies.currency_rates[selectedProject.currency].rates
-                }
-                selectedProject={selectedProject}
-                fees={paymentFee}
-                showNextButton={true}
-                currencies={currencies.currency_names} // TODO: connect to data from API
-                selectedCurrency={this.determineDefaultCurrency()}
-                treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
-                onNextClick={() => this.Tab2validated()}
-                selectedTreeCount={this.state.selectedTreeCount}
-                onChange={this.handleTreeCountCurrencyChange}
-              />
-            </View>
+            <TreeCountCurrencySelector
+              treeCost={selectedProject.treeCost}
+              rates={currencies.currency_rates[selectedProject.currency].rates}
+              giftTreeCounterName={this.state.giftTreeCounterName}
+              selectedProject={selectedProject}
+              fees={paymentFee}
+              showNextButton={true}
+              currencies={currencies.currency_names} // TODO: connect to data from API
+              selectedCurrency={this.determineDefaultCurrency()}
+              treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
+              onNextClick={() => this.Tab2validated()}
+              selectedTreeCount={this.state.selectedTreeCount}
+              onChange={this.handleTreeCountCurrencyChange}
+            />
           ))
         : null;
     }
@@ -310,6 +299,7 @@ export default class DonateTrees extends Component {
               ref={this.setRecipientTabRef}
               showNextButton={true}
               currentUserProfile={this.props.currentUserProfile}
+              formValue={this.state.form}
               goToNextTab={value => this.goToNextTab(value)}
               onReciptTabChange={tab => this.handleModeReceiptChange(tab)}
             />
@@ -371,7 +361,49 @@ export default class DonateTrees extends Component {
   };
 
   handlePaymentApproved() {
-    let sendState = { ...this.state.form };
+    let params = this.props.navigation.state.params;
+    let sendState;
+    if (params !== undefined && params.giftMethod != null) {
+      if (params.giftMethod === 'invitation') {
+        this.props.gift(
+          {
+            ...this.state.form,
+            giftInvitation: params.userForm,
+            giftMethod: params.giftMethod,
+            paymentResponse: {
+              gateway: 'offline',
+              accountName: 'offline_US',
+              isConfirmed: true,
+              confirmation: 'iOS referred payment'
+            },
+            amount: this.state.selectedAmount,
+            currency: this.state.selectedCurrency
+          },
+          this.props.selectedProject.id,
+          this.props.currentUserProfile
+        );
+      } else if (params.giftMethod === 'direct') {
+        this.props.gift(
+          {
+            ...this.state.form,
+            giftTreecounter: params.userForm.id,
+            giftMethod: params.giftMethod,
+            paymentResponse: {
+              gateway: 'offline',
+              accountName: 'offline_US',
+              isConfirmed: true,
+              confirmation: 'iOS referred payment'
+            },
+            amount: this.state.selectedAmount,
+            currency: this.state.selectedCurrency
+          },
+          this.props.selectedProject.id,
+          this.props.currentUserProfile
+        );
+      }
+      return;
+    }
+    sendState = { ...this.state.form };
     if (this.props.supportTreecounter.treecounterId) {
       sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
     }

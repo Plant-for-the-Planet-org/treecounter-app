@@ -62,7 +62,11 @@ class PlantProjectFull extends React.Component {
           </View>
 
           <View style={styles.buttonContainer}>
-            <PrimaryButton onClick={() => this.props.selectProject(id)}>
+            <PrimaryButton
+              onClick={() =>
+                this.props.selectProject(this.props.plantProject.id)
+              }
+            >
               {i18n.t('label.donate')}
             </PrimaryButton>
           </View>

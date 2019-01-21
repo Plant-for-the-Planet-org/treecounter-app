@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 
-import {
-  loginFormSchema,
-  schemaOptions
-} from '../../../server/parsedSchemas/login';
+import { loginFormSchema } from '../../../server/parsedSchemas/login';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import TextHeading from '../../Common/Heading/TextHeading';
 import CardLayout from '../../Common/Card';
@@ -24,7 +21,8 @@ export default class Login extends Component {
             <TCombForm
               ref="loginForm"
               type={loginFormSchema}
-              options={schemaOptions}
+              options={this.props.schemaOptions}
+              value={this.props.formValue}
             />
 
             <PrimaryButton
@@ -44,5 +42,7 @@ export default class Login extends Component {
 }
 
 Login.propTypes = {
-  onPress: PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired,
+  formValue: PropTypes.any,
+  schemaOptions: PropTypes.any
 };

@@ -30,9 +30,16 @@ class GiftTreesContainer extends Component {
   }
   openProjects(formValue, type) {
     //  console.log('in gif tree', formValue);
+    let title = '';
+    if (formValue.firstname) {
+      title = formValue.firstname + ' ' + formValue.lastname;
+    } else {
+      title = formValue.name;
+    }
     updateRoute('app_gift_projects', this.props.navigation, 0, {
       userForm: formValue,
-      giftMethod: type
+      giftMethod: type,
+      titleParam: 'Gift Trees To ' + title
     });
   }
 

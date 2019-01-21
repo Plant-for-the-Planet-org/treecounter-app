@@ -12,11 +12,7 @@ const SupportButton = ({
   return (
     <div className="gift-icon">
       <div className="display-text">
-        <SecondaryButton
-          onClick={() =>
-            isUserLoggedIn && active ? onRegisterSupporter() : null
-          }
-        >
+        <SecondaryButton onClick={() => onRegisterSupporter()}>
           {/* {i18n.t('label.support')} */}
           {buttonLabel}
         </SecondaryButton>

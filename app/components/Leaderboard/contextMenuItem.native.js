@@ -5,7 +5,13 @@ import { radio_button_selected, radio_button } from '../../assets';
 import styles from '../../styles/leaderboard/leader_board';
 
 const ContextMenuItem = ({ children, selected }) => (
-  <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+  <View
+    style={{
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingRight: 5
+    }}
+  >
     <Text style={styles.itemViewText}>{children}</Text>
     <Image
       style={{ height: 20, width: 20, marginLeft: 5, resizeMode: 'contain' }}

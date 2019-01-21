@@ -22,9 +22,9 @@ import {
 } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
-import { getImageUrl } from '../../actions/apiRouting';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import { fetchItem, saveItem } from '../../stores/localStorage';
+import UserProfileImage from '../Common/UserProfileImage.native';
 
 export default class Menu extends Component {
   static propTypes = {
@@ -106,19 +106,12 @@ export default class Menu extends Component {
             style={styles.profileContainer}
             onPress={() => this.onPressUserProfile()}
           >
-            <Image
-              style={styles.profileImageStyle}
-              source={
-                this.props.userProfile.image
-                  ? {
-                      uri: getImageUrl(
-                        'profile',
-                        'thumb',
-                        this.props.userProfile.image
-                      )
-                    }
-                  : ProfilePic
+            <UserProfileImage
+              profileImage={
+                this.props.userProfile && this.props.userProfile.image
               }
+              style={styles.profileImageStyle}
+              imageStyle={{ borderRadius: 30 }}
             />
 
             <Text style={styles.profileTextHeading}>
@@ -178,7 +171,7 @@ export default class Menu extends Component {
             />
           </View>
         </ScrollView>
-        {this.props.userProfile && (
+        {this.props.userProfile ? (
           <View>
             <LargeMenuItem
               onPress={this.props.logoutUser}
@@ -186,7 +179,7 @@ export default class Menu extends Component {
               iconUrl={iosLogout}
             />
           </View>
-        )}
+        ) : null}
         <LargeMenuItem
           onPress={this.onPressMenu.bind(this, { uri: 'about_us' })}
           title={i18n.t('label.information')}

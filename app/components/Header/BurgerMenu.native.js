@@ -1,12 +1,10 @@
 import React, { PureComponent } from 'react';
 import TouchableItem from '../../components/Common/TouchableItem';
-import { Image } from 'react-native';
-import { getImageUrl } from '../../actions/apiRouting';
-import { ProfilePic } from '../../assets';
-import styles from '../../styles/menu';
+import styles from '../../styles/menu.native';
 import { currentUserProfileSelector } from '../../selectors';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import UserProfileImage from '../Common/UserProfileImage.native';
 
 class BurgerMenu extends PureComponent {
   render() {
@@ -17,15 +15,10 @@ class BurgerMenu extends PureComponent {
           navigation.openDrawer();
         }}
       >
-        <Image
+        <UserProfileImage
+          profileImage={userProfile && userProfile.image}
           style={styles.burgerMenuImageStyle}
-          source={
-            userProfile && userProfile.image
-              ? {
-                  uri: getImageUrl('profile', 'thumb', userProfile.image)
-                }
-              : ProfilePic
-          }
+          imageStyle={{ borderRadius: 16 }}
         />
       </TouchableItem>
     );

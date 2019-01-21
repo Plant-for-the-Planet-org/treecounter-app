@@ -19,6 +19,10 @@ function checkStatus(response) {
 }
 
 function onAPIError(error) {
+  //400 : INPUT_VALIDATION_ERROR dont show error balloons
+  if (error.response && error.response.status === 400) {
+    throw error;
+  }
   if (error.response) {
     NotificationManager.error(error.response.data.message, 'Error', 5000);
   }

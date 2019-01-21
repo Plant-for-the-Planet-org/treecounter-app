@@ -1,16 +1,24 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Platform } from 'react-native';
 
 const boxShadow = {
   shadowOpacity: 0.5,
   shadowOffset: { width: 0, height: 8 },
   shadowColor: 'rgba(0, 0, 0, 0.3)',
-  shadowRadius: 12
+  shadowRadius: 12,
+  elevation: 4
 };
 export default (LeaderboardStyle = EStyleSheet.create({
-  leaderBoardContainer: { flex: 1, backgroundColor: '#fff' },
+  leaderBoardContainer: {
+    flex: 1,
+    backgroundColor: Platform.OS === 'android' ? 'transparent' : '#fff',
+    position: 'relative'
+  },
+
   tooltipContainerStyle: {
+    zIndex: 7,
     ...boxShadow,
-    marginTop: -35,
+    marginTop: Platform.OS === 'android' ? -10 : -35,
     marginRight: 10
   },
   sortView: {
@@ -31,22 +39,28 @@ export default (LeaderboardStyle = EStyleSheet.create({
     alignItems: 'center'
   },
   cardImageStyle: {
-    top: -50
+    position: 'absolute',
+    zIndex: 1000,
+    height: 60,
+    width: 60,
+    elevation: 10,
+    left: '40%'
   },
   plantedContainer: {
-    top: -25,
+    top: 25,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center'
   },
   plantedTextStyle: {
     marginBottom: 5,
-    fontSize: 20,
+    fontSize: 14,
     color: '$colorPrimaryAccent'
   },
   plantedUnderline: {
     height: 2,
     width: '50%',
+    marginBottom: 20,
     backgroundColor: '$colorPrimaryAccent'
   },
   outerContainer: {
@@ -59,35 +73,39 @@ export default (LeaderboardStyle = EStyleSheet.create({
     alignSelf: 'center',
     marginBottom: 5,
     flexGrow: 1,
-    backgroundColor: '#fff',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10
+    backgroundColor: '#fff'
+    // borderBottomLeftRadius: 10,
+    // borderBottomRightRadius: 10
   },
-  imageStyle: {
-    width: 40,
-    '@media (min-width: 250) and (max-width: 300)': {
-      width: 50
-    },
-    height: 40,
-    '@media (min-width: 250) and (max-width: 300)': {
+  imageContainerStyle: {
+    width: 60,
+    height: 60,
+    '@media (max-width: 350)': {
+      width: 50,
       height: 50
     }
   },
+  imageStyle: {
+    borderRadius: 30,
+    '@media (max-width: 350)': {
+      borderRadius: 25
+    }
+  },
   selectedBottomTypeLabel: {
+    fontWeight: 'bold',
     color: '#95c243',
-    fontSize: '.7rem',
+    fontSize: '.8rem',
     '@media (min-width: 250) and (max-width: 350)': {
-      fontSize: '.6rem'
-    },
-    maxWidth: 80
+      fontSize: '.7rem'
+    }
   },
   bottomTypeLabel: {
+    fontWeight: 'bold',
     color: '#9c9b9b',
     fontSize: '.7rem',
     '@media (min-width: 250) and (max-width: 350)': {
       fontSize: '.6rem'
-    },
-    maxWidth: 80
+    }
   },
   selectedSeprater: {
     backgroundColor: '#95c243',

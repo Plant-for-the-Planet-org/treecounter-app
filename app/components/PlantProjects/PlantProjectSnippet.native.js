@@ -107,7 +107,7 @@ class PlantProjectSnippet extends React.Component {
         <CardLayout
           style={[styles.projectSnippetContainer, this.props.cardStyle]}
         >
-          {projectImage && (
+          {projectImage ? (
             <View style={styles.projectImageContainer}>
               <Image
                 style={styles.teaser__projectImage}
@@ -121,7 +121,7 @@ class PlantProjectSnippet extends React.Component {
                 resizeMode={'cover'}
               />
             </View>
-          )}
+          ) : null}
 
           <View style={styles.projectSpecsContainer}>
             <PlantedProgressBar

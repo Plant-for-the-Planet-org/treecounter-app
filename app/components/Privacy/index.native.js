@@ -74,6 +74,7 @@ export default class Privacy extends Component {
         <HTMLView
           value={section.description}
           stylesheet={styles}
+          addLineBreaks={false}
           onLinkPress={url => {
             try {
               url = url.startsWith('/')

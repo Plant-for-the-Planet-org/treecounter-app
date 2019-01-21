@@ -16,16 +16,20 @@ class SuccessfullyActivatedContainer extends React.Component {
   }
 
   componentWillMount() {
-    this.props
-      .accountActivate(this.props.match.params.token)
-      .then(res => {
-        console.log('in container');
-        this.setState({ success: true });
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({ success: false });
-      });
+    if (this.props.match.params.token) {
+      this.props
+        .accountActivate(this.props.match.params.token)
+        .then(res => {
+          console.log('in container');
+          this.setState({ success: true });
+        })
+        .catch(err => {
+          console.log(err);
+          this.setState({ success: false });
+        });
+    } else {
+      this.setState({ success: true });
+    }
   }
   render() {
     console.log(this.state);

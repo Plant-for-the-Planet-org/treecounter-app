@@ -34,9 +34,9 @@ class CheckBox extends React.Component {
             <Image style={this.imageStyle} source={uncheckedIcon} />
           )}
         </TouchableOpacity>
-        {this.props.title && (
+        {this.props.title ? (
           <Text style={this.textboxStyle}>{this.props.title}</Text>
-        )}
+        ) : null}
       </View>
     );
   }

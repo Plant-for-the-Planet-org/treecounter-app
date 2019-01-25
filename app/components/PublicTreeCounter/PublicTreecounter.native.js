@@ -150,12 +150,12 @@ class PublicTreeCounter extends React.Component {
             followChanged={this.onFollowChanged}
           />
           {'tpo' !== userProfile.type &&
-            !isMyself(treecounter, currentUserProfile) && (
-              <SupportButton
-                {...supportProps}
-                onRegisterSupporter={this.onRegisterSupporter}
-              />
-            )}
+          !isMyself(treecounter, currentUserProfile) ? (
+            <SupportButton
+              {...supportProps}
+              onRegisterSupporter={this.onRegisterSupporter}
+            />
+          ) : null}
         </View>
         <View style={stylesHome.svgContainer}>
           <SvgContainer

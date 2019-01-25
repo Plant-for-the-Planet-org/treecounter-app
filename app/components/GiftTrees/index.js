@@ -107,7 +107,8 @@ export default class GiftTrees extends Component {
       selectedTreeCount: 0,
       selectedAmount: 0,
       form: {
-        recipientType: modeReceipt
+        recipientType: modeReceipt,
+        giftMethod: 'direct'
       },
       giftTreecounterName: null,
       expanded: false,

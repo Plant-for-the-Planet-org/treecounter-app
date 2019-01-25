@@ -50,7 +50,8 @@ export default class Login extends Component {
               <Form
                 ref={'loginForm'}
                 type={loginFormSchema}
-                options={schemaOptions}
+                options={this.props.schemaOptions}
+                value={this.props.formValue}
               />
             </View>
             <View style={styles.bottomRow}>
@@ -88,5 +89,7 @@ export default class Login extends Component {
 Login.propTypes = {
   onPress: PropTypes.func.isRequired,
   onError: PropTypes.func,
-  updateRoute: PropTypes.func
+  updateRoute: PropTypes.func,
+  formValue: PropTypes.any,
+  schemaOptions: PropTypes.any
 };

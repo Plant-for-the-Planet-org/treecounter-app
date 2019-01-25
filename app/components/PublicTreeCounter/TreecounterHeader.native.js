@@ -27,13 +27,13 @@ const TreecounterHeader = ({
           <View style={userHomeStyles.profileTypeContainer}>
             <Text style={userHomeStyles.profileTypeStyle}>{profileType}</Text>
           </View>
-          {showFollow && (
+          {showFollow ? (
             <FollowLabelButton
               isSubscribed={isUserFollowerBool}
               isLoggedIn={isUserLoggedIn}
               onClick={() => followChanged()}
             />
-          )}
+          ) : null}
         </View>
       </View>
     </View>

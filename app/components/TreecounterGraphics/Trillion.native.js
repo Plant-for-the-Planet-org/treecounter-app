@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View, Dimensions, Animated } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  Dimensions,
+  Animated,
+  Image
+} from 'react-native';
 
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
@@ -27,6 +34,7 @@ const Layout = {
 import tabStyles from '../../styles/common/tabbar';
 import { saveItem, fetchItem } from '../../stores/localStorage.native';
 import Constants from '../../utils/const';
+import { getImageUrl } from '../../actions/apiRouting';
 
 const height = Dimensions.get('window').height;
 let viewheight = height - 50;
@@ -134,6 +142,37 @@ class Trillion extends Component {
               <View style={svgStyles.svgContainer}>
                 <SvgContainer {...this.state.svgData} trillion={true} />
               </View>
+              {/*{this.props.pledgeEvents &&*/}
+              {/*this.props.pledgeEvents.pledgeEvents.length > 0 ? (*/}
+              {/*<View style={styles.pledgeContainer}>*/}
+              {/*<Text style={styles.pledgeText}>*/}
+              {/*Trillion Tree Events today*/}
+              {/*</Text>*/}
+              {/*<View style={styles.pledgeEventContainer}>*/}
+              {/*{this.props.pledgeEvents.pledgeEvents*/}
+              {/*.sort((val1, val2) => val1.position > val2.position)*/}
+              {/*.map(element => (*/}
+              {/*<CardLayout*/}
+              {/*key={element.slug}*/}
+              {/*className="event_item"*/}
+              {/*onClick={() => {*/}
+              {/*updateRoute('app_pledge', null, null, {*/}
+              {/*eventSlug: element.slug*/}
+              {/*});*/}
+              {/*}}*/}
+              {/*>*/}
+              {/*<View className="imgContainer">*/}
+              {/*<Image*/}
+              {/*src={getImageUrl('event', 'thumb', element.image)}*/}
+              {/*/>*/}
+              {/*</View>*/}
+
+              {/*<Text style={styles.titleText}>{element.name}</Text>*/}
+              {/*</CardLayout>*/}
+              {/*))}*/}
+              {/*</View>*/}
+              {/*</View>*/}
+              {/*) : null}*/}
               <CardLayout style={styles.cardContainer}>
                 <Text style={styles.titleText}>
                   {' '}
@@ -144,6 +183,7 @@ class Trillion extends Component {
                   {i18n.t('label.trillionTreeMessage2')}
                 </Text>
               </CardLayout>
+
               <View>
                 {this.props.plantProjects
                   .filter(filterProj => filterProj.allowDonations)

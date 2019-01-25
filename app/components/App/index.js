@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 import TreeCounter from './TreeCounter';
 import configureStore from '../../stores/TreecounterStore';
-// import { debug } from '../../debug/index';
+import GlobalErrorBoundary from '../ErrorBoundry/globalErrorBoundry';
 
 let store;
 
@@ -15,7 +15,9 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <TreeCounter />
+        <GlobalErrorBoundary>
+          <TreeCounter />
+        </GlobalErrorBoundary>
       </Provider>
     );
   }

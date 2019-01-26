@@ -34,7 +34,7 @@ export default class SignUp extends Component {
   render() {
     let { Profiletype } = this.state;
     return (
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView enableOnAndroid={true}>
         <ImageBackground style={[styles.container, styles.parentContainer]}>
           <SignupTypes changeProfile={this.changeProfile} />
           <View style={styles.inputContainer}>

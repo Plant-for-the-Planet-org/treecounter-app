@@ -32,7 +32,7 @@ export default class Leaderboard extends Component {
   };
 
   _handleSortingChange = sortValue => {
-    console.log('call sort here', sortValue);
+    // console.log('call sort here', sortValue);
     this.props.handleSectionChange(
       this.state.selectedCategory || this.props.categoryInfo.categoryKeys[0],
       undefined,
@@ -42,7 +42,7 @@ export default class Leaderboard extends Component {
   };
 
   _handleItemPress(treeCounterId, uri) {
-    console.log(treeCounterId);
+    //console.log(treeCounterId);
     if (treeCounterId) {
       this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
         treeCounterId
@@ -61,7 +61,7 @@ export default class Leaderboard extends Component {
   }
 
   _getTableView = selectedCategory => {
-    console.log(this.props.queryResult);
+    //console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
     let maxPlanted = 0;
     if (this.props.queryResult) {

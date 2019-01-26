@@ -4,6 +4,7 @@ import SearchUser from './SearchUser.native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import CardLayout from '../../Common/Card';
 import { iosInformation } from '../../../assets';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default class GiftUser extends Component {
   constructor(props) {
@@ -31,7 +32,14 @@ export default class GiftUser extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1, flexDirection: 'column', width: '100%' }}>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          width: '100%',
+          height: '100%'
+        }}
+      >
         <CardLayout>
           <View style={{ flexDirection: 'row' }}>
             <View style={{ width: 40, height: 40, alignSelf: 'center' }}>
@@ -70,6 +78,7 @@ export default class GiftUser extends Component {
               margin: 10,
               padding: 5
             }}
+            underlineColorAndroid={'transparent'}
             onChangeText={val => this.onChangeText(val)}
             placeholder={'Gift Message'}
           />

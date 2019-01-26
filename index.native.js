@@ -19,7 +19,7 @@ const parseErrorStack = error => {
 
 // intercept react-native error handling
 if (ErrorUtils.getGlobalHandler) {
-  console.log('ErrorUtils._globalHandler', ErrorUtils._globalHandler);
+  //console.log('ErrorUtils._globalHandler', ErrorUtils._globalHandler);
   this.defaultHandler =
     (ErrorUtils.getGlobalHandler && ErrorUtils.getGlobalHandler()) ||
     ErrorUtils._globalHandler;
@@ -28,7 +28,7 @@ if (ErrorUtils.getGlobalHandler) {
 
 async function wrapGlobalHandler(error, isFatal) {
   const stack = parseErrorStack(error);
-  console.log(error, stack, isFatal);
+  //console.log(error, stack, isFatal);
   Alert.alert('Error', 'Something went wrong.');
   this.defaultHandler(error, isFatal); //after you're finished, call the defaultHandler so that react-native also gets the error
 }

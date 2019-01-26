@@ -1,4 +1,4 @@
-import { Text, View, Image, TextInput } from 'react-native';
+import { Text, View, Image, TextInput, Platform } from 'react-native';
 import React from 'react';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/forms/textinput';
@@ -28,7 +28,7 @@ export function TextInputTemplate(locals) {
           </View>
         ) : null}
         <TextInput
-          style={styles.textboxStyle}
+          style={[styles.textboxStyle]}
           secureTextEntry={locals.secureTextEntry}
           placeholder={i18n.t(locals.placeholder)}
           placeholderTextColor={'#686060'}

@@ -325,7 +325,7 @@ export default class EditUserProfile extends React.Component {
                       />
                       <span>{follow.displayName}</span>
                       <FollowLabelButton
-                        label={'unFollow'}
+                        label={i18n.t('label.un_follow')}
                         isSubscribed={true}
                         isLoggedIn={false}
                         onClick={() => this.props.unfollowUser(follow.id)}

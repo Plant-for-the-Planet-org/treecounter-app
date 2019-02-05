@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TargetComment from './TargetComment';
 import ArrowButton from '../Common/ArrowButton';
-import { pot, tree, tree_outline } from '../../assets';
+import { pot, darkTree, tree_outline } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import PlantedDetails from './PlantedDetails';
 
@@ -97,7 +97,7 @@ class TreecounterGraphicsText extends Component {
           ) : null}
           <hr className="svg-text-container__bar" />
           <div className="svg-text-container__row">
-            <img className="svg-text-container__row--col" src={tree} />
+            <img className="svg-text-container__row--col" src={darkTree} />
             <div className="svg-text-container__row--col2">
               <span>
                 {i18n.t('label.planted')}

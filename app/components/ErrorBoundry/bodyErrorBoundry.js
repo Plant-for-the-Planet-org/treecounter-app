@@ -5,11 +5,13 @@ import { infoGrey } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
 import i18n from '../../locales/i18n.js';
 
-@withRouter
-export default class BodyErrorBoundary extends React.Component {
+class BodyErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { seconds: 30, hasErrorOccurred: false };
+    this.state = {
+      seconds: 30,
+      hasErrorOccurred: false
+    };
     this.secondsRemaining;
     this.intervalHandle;
     // this.handleChange = this.handleChange.bind(this);
@@ -22,7 +24,10 @@ export default class BodyErrorBoundary extends React.Component {
     console.log('ROUTE CHANGED');
     clearInterval(this.intervalHandle);
     this.secondsRemaining;
-    this.setState({ hasErrorOccurred: false, seconds: 30 });
+    this.setState({
+      hasErrorOccurred: false,
+      seconds: 30
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,7 +37,13 @@ export default class BodyErrorBoundary extends React.Component {
   }
   componentDidCatch(error, info) {
     this.secondsRemaining = 30;
-    this.setState({ hasErrorOccurred: true, seconds: 30 }, this.startCountDown);
+    this.setState(
+      {
+        hasErrorOccurred: true,
+        seconds: 30
+      },
+      this.startCountDown
+    );
     console.log(error, info);
 
     // You can also log the error to an error reporting service
@@ -61,11 +72,12 @@ export default class BodyErrorBoundary extends React.Component {
       return (
         <div className={'error-container sidenav-wrapper'}>
           <img src={infoGrey} />
-          <h1>{i18n.t('label.something_went_x')}</h1>
-          <h4>{i18n.t('label.sorry_inconveniences')}</h4>
-          <p>{i18n.t('label.error_reported')}</p>
+          <h1>{i18n.t('label.something_went_x')} </h1>
+          <h4> {i18n.t('label.sorry_inconveniences')} </h4>
+          <p> {i18n.t('label.error_reported')} </p>
           <div>
             <p>
+              {' '}
               {i18n.t('label.home_page_redirected', {
                 seconds: this.secondsRemaining
               })}
@@ -82,3 +94,5 @@ BodyErrorBoundary.propTypes = {
   children: PropTypes.any,
   location: PropTypes.any
 };
+
+export default withRouter(BodyErrorBoundary);

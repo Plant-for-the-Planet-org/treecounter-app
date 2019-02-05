@@ -1,0 +1,107 @@
+.pftp-button-primary, .pftp-button-secondary, .pftp-button-follow, .pftp-button-following, .pftp-button-rounded, .pftp-basic-widget-container .plant-button {
+  background-color: #bad788;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 24px;
+  display: flex;
+  width: 100%;
+  border-radius: 7px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer; }
+
+.pftp-button-secondary {
+  background-color: #e86f56; }
+
+.pftp-button-follow, .pftp-button-following {
+  margin: 0 10px;
+  border-radius: 0;
+  padding: 0;
+  height: 30px;
+  width: inherit;
+  background-color: #b7d37f;
+  color: white;
+  font-size: 17px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  padding: 0 24px; }
+
+.pftp-button-following {
+  background-color: #e86f56; }
+
+.support-button-caption {
+  max-width: 115px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+
+.pftp-button-rounded, .pftp-basic-widget-container .plant-button {
+  background-color: transparent;
+  margin: 0 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  border: 2px solid;
+  white-space: nowrap;
+  border-radius: 10px; }
+
+.pftp-button-transparent {
+  color: #bad788;
+  text-align: left;
+  cursor: pointer;
+  padding: 5px 0;
+  display: flex;
+  align-items: center; }
+  .pftp-button-transparent:hover {
+    color: #bad788; }
+  .pftp-button-transparent img {
+    height: 18px !important; }
+  .pftp-button-transparent span {
+    padding: 0 10px; }
+
+.pftp-addbutton {
+  display: flex;
+  align-items: center;
+  padding: 10px 0 20px; }
+  .pftp-addbutton button {
+    color: #ec6453;
+    background: transparent;
+    border: none;
+    cursor: pointer; }
+
+.pftp-basic-widget-container {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  outline: none;
+  background-color: #f4f4f4; }
+  @media (max-width: 360px) {
+    .pftp-basic-widget-container {
+      flex-direction: column; } }
+  .pftp-basic-widget-container img {
+    display: block; }
+  .pftp-basic-widget-container .planted-text {
+    font-family: Open Sans;
+    font-size: 24px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: black;
+    font-weight: 500;
+    padding: 20px; }
+  .pftp-basic-widget-container .plant-button {
+    background-color: #e86f56;
+    border: none;
+    width: inherit;
+    font-size: 24px; }
+
+/*# sourceMappingURL=widget.css.map*/

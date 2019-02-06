@@ -12,6 +12,7 @@ export default class App extends Component {
     super();
     store = configureStore();
   }
+
   render() {
     return (
       <Provider store={store}>

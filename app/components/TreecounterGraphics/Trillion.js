@@ -59,11 +59,11 @@ class Trillion extends Component {
           {this.state.displayName}
           <TextBlock>{i18n.t('label.trillionTreeMessage1')}</TextBlock>
           <TextBlock>{i18n.t('label.trillionTreeMessage2')}</TextBlock>
-          <ButtonHeading>
-            <SecondaryAccentButton onClick={updateRoute.bind(this, 'app_faq')}>
-              {i18n.t('label.faqs')}
-            </SecondaryAccentButton>
-          </ButtonHeading>
+          {/*<ButtonHeading>*/}
+          {/*<SecondaryAccentButton onClick={updateRoute.bind(this, 'app_faq')}>*/}
+          {/*{i18n.t('label.faqs')}*/}
+          {/*</SecondaryAccentButton>*/}
+          {/*</ButtonHeading>*/}
         </TextHeading>
         {this.props.pledgeEvents &&
         this.props.pledgeEvents.pledgeEvents.length > 0 ? (

@@ -51,7 +51,7 @@ class SearchLayout extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header backButton={Platform.OS === 'android'}>
+        <Header>
           <SearchBar
             onChangeQuery={this.onChangeTextDelayed}
             onSubmit={this._handleSubmit}

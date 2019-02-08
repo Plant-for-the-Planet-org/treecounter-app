@@ -211,7 +211,7 @@ export default class Leaderboard extends Component {
         categoryInfo.categoryKeys &&
         categoryInfo.categoryKeys[0]);
     return (
-      <View style={styles.leaderBoardContainer}>
+      <Animated.View style={styles.leaderBoardContainer}>
         <CategoryTypes
           categoryInfo={this.props.categoryInfo}
           sectionInfo={this.props.sectionInfo}
@@ -221,12 +221,14 @@ export default class Leaderboard extends Component {
 
         {this._getTableView(selectedCategory)}
         {selectedCategory && (
-          <Animated.Image
-            source={categoryIcons[selectedCategory]['selected']}
-            style={[styles.cardImageStyle, { top: headerHeight }]}
-          />
+          <Animated.View style={[styles.cardImageStyle, { top: headerHeight }]}>
+            <Animated.Image
+              source={categoryIcons[selectedCategory]['selected']}
+              style={[{ height: '100%', width: '100%' }]}
+            />
+          </Animated.View>
         )}
-      </View>
+      </Animated.View>
     );
   }
 }

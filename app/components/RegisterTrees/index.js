@@ -129,6 +129,7 @@ export default class RegisterTrees extends Component {
   }
 
   render() {
+    this.test.ty;
     const tpoPlantProjects = getPlantProjectEnum(this.props.currentUserProfile);
     const plantProject =
       tpoPlantProjects &&

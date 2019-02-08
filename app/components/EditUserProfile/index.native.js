@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { TabView, TabBar } from 'react-native-tab-view';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, Image } from 'react-native';
 import tabBarStyles from '../../styles/common/tabbar.native';
 import t from 'tcomb-form-native';
 import {
@@ -15,6 +15,9 @@ import _ from 'lodash';
 import { ProfileImagePickerTemplate } from './ProfileImagePickerTemplate.native';
 import styles from '../../styles/edit_profile.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import FollowLabelButton from '../Common/Button/FollowLabelButton';
+import UserProfileImage from '../Common/UserProfileImage';
+import LoadingIndicator from '../Common/LoadingIndicator';
 
 const Form = t.form.Form;
 function UserProfileTemplate(locals) {
@@ -51,6 +54,10 @@ export default class EditUserProfile extends Component {
           title: i18n.t('label.basic_profile')
         },
         {
+          key: 'following',
+          title: i18n.t('label.un_subscribe')
+        },
+        {
           key: 'desc',
           title: i18n.t('label.description')
         },
@@ -70,6 +77,9 @@ export default class EditUserProfile extends Component {
         style={[tabBarStyles.tabBar]}
         labelStyle={tabBarStyles.textStyle}
         indicatorStyle={tabBarStyles.textActive}
+        scrollEnabled
+        bounces
+        useNativeDriver
       />
     );
   };
@@ -97,7 +107,7 @@ export default class EditUserProfile extends Component {
   };
 
   _renderScene = ({ route }) => {
-    const { type, image } = this.props.currentUserProfile;
+    const { type, treecounter: treeCounter } = this.props.currentUserProfile;
     switch (route.key) {
       case 'basic':
         return (
@@ -150,6 +160,43 @@ export default class EditUserProfile extends Component {
             </CardLayout>
           </KeyboardAwareScrollView>
         );
+      case 'following':
+        return (
+          <CardLayout>
+            {console.log(
+              'followeeList',
+              this.props.followeeList,
+              treeCounter.followeeIds
+            ) ||
+            (treeCounter &&
+              treeCounter.followeeIds &&
+              this.props.followeeList &&
+              this.props.followeeList.length > 0) ? (
+              <View>
+                {this.props.followeeList.map(follow => (
+                  <View key={follow.id} style={styles.followerRow}>
+                    <UserProfileImage profileImage={follow.userProfile.image} />
+                    <Text>{follow.displayName}</Text>
+                    <FollowLabelButton
+                      label={i18n.t('label.un_follow')}
+                      isSubscribed={true}
+                      isLoggedIn={false}
+                      onClick={() => {
+                        console.log('cliked_unfollowUser');
+                        this.props.unfollowUser(follow.id);
+                      }}
+                    />
+                  </View>
+                ))}
+              </View>
+            ) : this.props.followeeList ? (
+              <Text>You are not following anybody</Text>
+            ) : (
+              <LoadingIndicator />
+            )}
+          </CardLayout>
+        );
+
       case 'security':
         return (
           <KeyboardAwareScrollView>
@@ -227,5 +274,7 @@ EditUserProfile.propTypes = {
   deleteProfile: PropTypes.func.isRequired,
   updatePlantProject: PropTypes.func.isRequired,
   deletePlantProject: PropTypes.func.isRequired,
-  addPlantProject: PropTypes.func.isRequired
+  addPlantProject: PropTypes.func.isRequired,
+  followeeList: PropTypes.array,
+  unfollowUser: PropTypes.func
 };

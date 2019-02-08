@@ -65,6 +65,9 @@ export default class UserHome extends Component {
         tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={tabStyles.textStyle}
         indicatorStyle={tabStyles.textActive}
+        scrollEnabled
+        bounces
+        useNativeDriver
       />
     );
   };

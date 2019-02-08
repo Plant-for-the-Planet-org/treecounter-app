@@ -94,9 +94,7 @@ export default class EditUserProfile extends Component {
         schemaOptions.fields.password.fields.first.error = schemaOptions.fields.password.fields.second.error = (
           <Text>{i18n.t('label.same_password_error')}</Text>
         );
-      } catch (err) {
-        //console.log(err);
-      }
+      } catch (err) {}
     } else if (profileType == 'image') {
       schemaOptions.fields.imageFile.template = ProfileImagePickerTemplate;
     } else if (profileType == 'profile') {
@@ -162,38 +160,36 @@ export default class EditUserProfile extends Component {
         );
       case 'following':
         return (
-          <CardLayout>
-            {console.log(
-              'followeeList',
-              this.props.followeeList,
-              treeCounter.followeeIds
-            ) ||
-            (treeCounter &&
+          <CardLayout style={{ flex: 1 }}>
+            <ScrollView>
+              {treeCounter &&
               treeCounter.followeeIds &&
               this.props.followeeList &&
-              this.props.followeeList.length > 0) ? (
-              <View>
-                {this.props.followeeList.map(follow => (
-                  <View key={follow.id} style={styles.followerRow}>
-                    <UserProfileImage profileImage={follow.userProfile.image} />
-                    <Text>{follow.displayName}</Text>
-                    <FollowLabelButton
-                      label={i18n.t('label.un_follow')}
-                      isSubscribed={true}
-                      isLoggedIn={false}
-                      onClick={() => {
-                        console.log('cliked_unfollowUser');
-                        this.props.unfollowUser(follow.id);
-                      }}
-                    />
-                  </View>
-                ))}
-              </View>
-            ) : this.props.followeeList ? (
-              <Text>You are not following anybody</Text>
-            ) : (
-              <LoadingIndicator />
-            )}
+              this.props.followeeList.length > 0 ? (
+                <View>
+                  {this.props.followeeList.map(follow => (
+                    <View key={follow.id} style={styles.followerRow}>
+                      <UserProfileImage
+                        profileImage={follow.userProfile.image}
+                      />
+                      <Text>{follow.displayName}</Text>
+                      <FollowLabelButton
+                        label={i18n.t('label.un_follow')}
+                        isSubscribed={true}
+                        isLoggedIn={false}
+                        onClick={() => {
+                          this.props.unfollowUser(follow.id);
+                        }}
+                      />
+                    </View>
+                  ))}
+                </View>
+              ) : this.props.followeeList ? (
+                <Text>{i18n.t('label.not_following_anybody')}</Text>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </ScrollView>
           </CardLayout>
         );
 

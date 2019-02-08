@@ -30,7 +30,7 @@ class EditUserProfileContainer extends React.Component {
     this.state = {
       showPasswordDialog: false,
       fetchingFolloweeIds: false,
-      followeeInfo: []
+      followeeInfo: undefined
     };
   }
 
@@ -59,6 +59,8 @@ class EditUserProfileContainer extends React.Component {
             console.log(error);
           });
       });
+    } else {
+      this.setState({ followeeInfo: [] });
     }
   };
 

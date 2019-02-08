@@ -72,7 +72,7 @@ class Trillion extends Component {
         saveItem(Constants.storageKeys.svgData, JSON.stringify(svgData));
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
         fetchItem(Constants.storageKeys.svgData).then(svgData => {
           try {
             svgData = JSON.parse(svgData);
@@ -84,7 +84,7 @@ class Trillion extends Component {
               });
             }
           } catch (err) {
-            console.log(error);
+            //console.log(error);
           }
         });
       });
@@ -95,7 +95,7 @@ class Trillion extends Component {
   onMoreClick(id) {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
-    console.log('OnMore');
+    //console.log('OnMore');
     updateRoute('app_selectProject', navigation);
   }
   onSelectClickedFeaturedProjects = id => {

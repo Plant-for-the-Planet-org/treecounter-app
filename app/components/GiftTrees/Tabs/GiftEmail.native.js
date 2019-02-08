@@ -43,10 +43,23 @@ export default class GiftEmail extends Component {
       giftMessage: val
     });
   }
-
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('Should component update called');
+    let returnValue = false;
+    Object.entries(this.props).forEach(
+      ([key, val]) =>
+        nextProps[key] !== val ? (returnValue = true) : (returnValue = false)
+    );
+    Object.entries(this.state).forEach(
+      ([key, val]) =>
+        nextState[key] !== val ? (returnValue = true) : (returnValue = false)
+    );
+    return returnValue;
+  }
   render() {
+    console.log('Render of email called');
     return (
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView enableOnAndroid={true}>
         <CardLayout>
           <View style={{ flexDirection: 'row' }}>
             <View style={{ width: 40, height: 40, alignSelf: 'center' }}>
@@ -88,12 +101,24 @@ export default class GiftEmail extends Component {
               margin: 10,
               padding: 5
             }}
+            underlineColorAndroid={'transparent'}
             onChangeText={val => this.onChangeText(val)}
             placeholder={'Gift Message'}
           />
           <PrimaryButton onClick={this.onNextClick}>Next</PrimaryButton>
         </CardLayout>
       </KeyboardAwareScrollView>
+    );
+  }
+  componentDidUpdate(prevProps, prevState) {
+    console.log('component did update called');
+    Object.entries(this.props).forEach(
+      ([key, val]) =>
+        prevProps[key] !== val && console.log(`Prop '${key}' changed`)
+    );
+    Object.entries(this.state).forEach(
+      ([key, val]) =>
+        prevState[key] !== val && console.log(`State '${key}' changed`)
     );
   }
   componentWillUnmount() {

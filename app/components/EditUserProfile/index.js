@@ -306,8 +306,7 @@ export default class EditUserProfile extends React.Component {
               <div className="form-group__heading">
                 {i18n.t('label.un_subscribe')}
               </div>
-              {console.log('followeeList', this.props.followeeList) ||
-              this.props.followeeList.length > 0 ? (
+              {this.props.followeeList && this.props.followeeList.length > 0 ? (
                 <div className="follow-container">
                   {this.props.followeeList.map(follow => (
                     <div key={follow.id}>

@@ -6,10 +6,12 @@ import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/register_trees.native';
 const Form = t.form.Form;
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 getFormLayoutTemplate = (mode, isTpo) => {
   const formLayoutTreesTemplate = locals => {
     return (
+      // <KeyboardAwareScrollView style={{ flex: 1 }}>
       <View style={styles.registerTree__form}>
         <View style={styles.registerTree__form__row}>
           <View style={{ flex: mode === 'multiple-trees' ? 1 : 0 }}>
@@ -34,6 +36,7 @@ getFormLayoutTemplate = (mode, isTpo) => {
           {locals.inputs.contributionMeasurements}
         </View>
       </View>
+      // </KeyboardAwareScrollView>
     );
   };
   return formLayoutTreesTemplate;
@@ -47,27 +50,29 @@ export default class RegisterTreeTab extends PureComponent {
       ...this.props.schemaOptions
     };
     return (
-      <View style={{ backgroundColor: '#ffffff' }}>
-        <Form
-          ref="multipleTreesForm"
-          type={this.props.schemaType}
-          options={schemaOptionsMultiple}
-          value={this.props.value ? this.props.value : { treeCount: 1 }}
-        />
-        <PrimaryButton
-          onClick={() => {
-            this.props.onRegister &&
-              this.props.onRegister(
-                this.props.mode,
-                this.refs.multipleTreesForm
-              );
-          }}
-        >
-          {this.props.buttonTitle
-            ? this.props.buttonTitle
-            : i18n.t('label.register')}
-        </PrimaryButton>
-      </View>
+      <KeyboardAwareScrollView style={{ flex: 1 }}>
+        <View style={{ backgroundColor: '#ffffff' }}>
+          <Form
+            ref="multipleTreesForm"
+            type={this.props.schemaType}
+            options={schemaOptionsMultiple}
+            value={this.props.value ? this.props.value : { treeCount: 1 }}
+          />
+          <PrimaryButton
+            onClick={() => {
+              this.props.onRegister &&
+                this.props.onRegister(
+                  this.props.mode,
+                  this.refs.multipleTreesForm
+                );
+            }}
+          >
+            {this.props.buttonTitle
+              ? this.props.buttonTitle
+              : i18n.t('label.register')}
+          </PrimaryButton>
+        </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

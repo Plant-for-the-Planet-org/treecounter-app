@@ -35,7 +35,7 @@ export function TextInputTemplate(locals) {
           keyboardType={locals.keyboardType}
           underlineColorAndroid={'transparent'}
           maxLength={locals.maxLength}
-          multiline={locals.multiline}
+          multiline={!!locals.multiline}
           value={String(locals.value)}
           onChangeText={value => onChange(value)}
           onChange={locals.onChangeNative}

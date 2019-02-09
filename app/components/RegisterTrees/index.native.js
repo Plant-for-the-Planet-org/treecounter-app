@@ -85,18 +85,17 @@ export default class RegisterTrees extends Component {
 
   render() {
     return (
-      <KeyboardAwareScrollView>
-        <CardLayout style={{ flex: 1 }}>
-          <TabView
-            useNativeDriver={true}
-            ref="registerTreeForm"
-            navigationState={this.state}
-            renderScene={this._renderScene.bind(this)}
-            renderTabBar={this._renderTabBar}
-            onIndexChange={this._handleIndexChange}
-          />
-        </CardLayout>
-      </KeyboardAwareScrollView>
+      <CardLayout style={{ flex: 1 }}>
+        <TabView
+          useNativeDriver={true}
+          ref="registerTreeForm"
+          navigationState={this.state}
+          renderScene={this._renderScene}
+          renderTabBar={this._renderTabBar}
+          onIndexChange={this._handleIndexChange}
+        />
+      </CardLayout>
+      // </KeyboardAwareScrollView>
     );
   }
 }

@@ -24,6 +24,7 @@ import LoadingIndicator from '../Common/LoadingIndicator';
 import { ProfilePic } from '../../assets';
 import { getImageUrl } from '../../actions/apiRouting';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
+import { updateRoute } from '../../helpers/routerHelper';
 
 const plantProjectFormOptions = {
   template: PlantProjectTemplate(),
@@ -324,7 +325,17 @@ export default class EditUserProfile extends React.Component {
                           className="image-rounded-border"
                         />
                       </div>
-                      <div className="col col2">{follow.displayName}</div>
+                      <div
+                        className="col col2"
+                        onClick={() => {
+                          console.log('follow.id', follow.id);
+                          updateRoute('app_treecounter', null, follow.id, {
+                            treecounter: follow.id
+                          });
+                        }}
+                      >
+                        {follow.displayName}
+                      </div>
                       <div className="col col3">
                         <FollowLabelButton
                           label={i18n.t('label.un_follow')}

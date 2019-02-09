@@ -90,12 +90,10 @@
       font-stretch: normal;
       line-height: 1.52;
       letter-spacing: normal;
-      text-align: left;
+      // text-align: left;
       color: #9c9b9b;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      & div {
+
+      & .follow-container-row {
         display: flex;
         // flex-wrap: wrap;
         justify-content: space-between;
@@ -106,10 +104,33 @@
           width: 100%;
         }
         & span {
-          margin-right: 5px;
+          // margin-right: 5px;
+        }
+
+        & .col {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          flex-basis: 0;
+          // background: blue;
+          text-align: start;
+          align-items: flex-start;
+        }
+        & .col1 {
+          flex-grow: 0;
+          flex-basis: auto;
+        }
+        & .col2 {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+        & .col3 {
+          align-items: flex-end;
         }
       }
       & img {
+        width: 30px;
         height: 30px;
         margin-right: 10px;
       }

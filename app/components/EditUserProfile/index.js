@@ -309,26 +309,30 @@ export default class EditUserProfile extends React.Component {
               {this.props.followeeList && this.props.followeeList.length > 0 ? (
                 <div className="follow-container">
                   {this.props.followeeList.map(follow => (
-                    <div key={follow.id}>
-                      <img
-                        src={
-                          follow.userProfile.image
-                            ? getImageUrl(
-                                'profile',
-                                'thumb',
-                                follow.userProfile.image
-                              )
-                            : ProfilePic
-                        }
-                        className="image-rounded-border"
-                      />
-                      <span>{follow.displayName}</span>
-                      <FollowLabelButton
-                        label={i18n.t('label.un_follow')}
-                        isSubscribed={true}
-                        isLoggedIn={false}
-                        onClick={() => this.props.unfollowUser(follow.id)}
-                      />
+                    <div className="follow-container-row" key={follow.id}>
+                      <div className="col col1">
+                        <img
+                          src={
+                            follow.userProfile.image
+                              ? getImageUrl(
+                                  'profile',
+                                  'thumb',
+                                  follow.userProfile.image
+                                )
+                              : ProfilePic
+                          }
+                          className="image-rounded-border"
+                        />
+                      </div>
+                      <div className="col col2">{follow.displayName}</div>
+                      <div className="col col3">
+                        <FollowLabelButton
+                          label={i18n.t('label.un_follow')}
+                          isSubscribed={true}
+                          isLoggedIn={false}
+                          onClick={() => this.props.unfollowUser(follow.id)}
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>

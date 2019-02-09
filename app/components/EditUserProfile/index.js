@@ -328,7 +328,6 @@ export default class EditUserProfile extends React.Component {
                       <div
                         className="col col2"
                         onClick={() => {
-                          console.log('follow.id', follow.id);
                           updateRoute('app_treecounter', null, follow.id, {
                             treecounter: follow.id
                           });

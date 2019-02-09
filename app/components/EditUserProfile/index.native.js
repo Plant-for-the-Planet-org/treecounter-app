@@ -18,6 +18,9 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import UserProfileImage from '../Common/UserProfileImage';
 import LoadingIndicator from '../Common/LoadingIndicator';
+import TouchableItem from '../Common/TouchableItem.native';
+import { updateRoute } from '../../helpers/routerHelper';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 const Form = t.form.Form;
 function UserProfileTemplate(locals) {
@@ -54,16 +57,16 @@ export default class EditUserProfile extends Component {
           title: i18n.t('label.basic_profile')
         },
         {
-          key: 'following',
-          title: i18n.t('label.un_subscribe')
-        },
-        {
           key: 'desc',
           title: i18n.t('label.description')
         },
         {
           key: 'security',
           title: i18n.t('label.profile_security')
+        },
+        {
+          key: 'following',
+          title: i18n.t('label.un_subscribe')
         }
       ]
     };
@@ -172,7 +175,22 @@ export default class EditUserProfile extends Component {
                       <UserProfileImage
                         profileImage={follow.userProfile.image}
                       />
-                      <Text>{follow.displayName}</Text>
+                      <TouchableItem
+                        style={styles.followerCol}
+                        onPress={() => {
+                          setTimeout(() => {
+                            this.props.navigation.navigate(
+                              getLocalRoute('app_treecounter'),
+                              {
+                                treeCounterId: follow.id
+                              }
+                            );
+                          }, 0);
+                        }}
+                      >
+                        <Text>{follow.displayName}</Text>
+                      </TouchableItem>
+
                       <FollowLabelButton
                         label={i18n.t('label.un_follow')}
                         isSubscribed={true}

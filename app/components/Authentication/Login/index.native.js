@@ -3,6 +3,7 @@ import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import { Text, View, Image, ScrollView } from 'react-native';
 import scrollStyle from '../../../styles/common/scrollStyle';
+import { ReCaptcha } from 'react-native-recaptcha-v3';
 
 import {
   loginFormSchema,
@@ -28,11 +29,20 @@ export default class Login extends Component {
     this.props.updateRoute('app_signup');
   };
 
+  verifyCallback = token => {
+    console.log(token, 'verifycallback');
+  };
+
   render() {
     return (
       <ScrollView
         contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
       >
+        <ReCaptcha
+          siteKey="6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF"
+          action="login_app"
+          onExecute={this.verifyCallback}
+        />
         <View style={styles.parentContainer}>
           <View style={styles.headerContainer}>
             <Image

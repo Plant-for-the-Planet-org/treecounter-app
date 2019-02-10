@@ -21,6 +21,13 @@ import TouchableItem from '../../Common/TouchableItem.native';
 let Form = t.form.Form;
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recaptchaToken: null
+    };
+  }
+
   onForgotPasswordClicked = () => {
     this.props.updateRoute('app_forgotPassword');
   };
@@ -30,6 +37,10 @@ export default class Login extends Component {
   };
 
   verifyCallback = token => {
+    // Here you will get the final token!!!
+    this.setState({
+      recaptchaToken: token
+    });
     console.log(token, 'verifycallback');
   };
 
@@ -82,7 +93,7 @@ export default class Login extends Component {
               </TouchableItem>
 
               <PrimaryButton
-                onClick={this.props.onPress}
+                onClick={event => this.props.onPress(this.state.recaptchaToken)}
                 buttonStyle={styles.loginButtonStyle}
                 textStyle={{ fontSize: 16 }}
               >

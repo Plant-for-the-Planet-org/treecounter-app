@@ -13,12 +13,14 @@ import i18n from '../../../locales/i18n.js';
 
 let TCombForm = t.form.Form;
 
-const verifyCallback = token => {
-  // Here you will get the final token!!!
-  console.log(token, 'verifycallback');
-};
-
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recaptchaToken: null
+    };
+  }
+
   componentDidMount() {
     loadReCaptcha({
       key: '6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF',
@@ -27,13 +29,22 @@ export default class Login extends Component {
       onError: e => {}
     });
   }
+
+  verifyCallback = token => {
+    // Here you will get the final token!!!
+    this.setState({
+      recaptchaToken: token
+    });
+    console.log(token, 'verifycallback');
+  };
+
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <ReCaptcha
           action="login"
           sitekey="6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF"
-          verifyCallback={verifyCallback}
+          verifyCallback={this.verifyCallback}
         />
         <TextHeading>{i18n.t('label.login')}</TextHeading>
         <CardLayout>
@@ -47,7 +58,7 @@ export default class Login extends Component {
 
             <PrimaryButton
               onClick={event => {
-                this.props.onPress();
+                this.props.onPress(this.state.recaptchaToken);
                 event.preventDefault();
               }}
             >

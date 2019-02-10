@@ -92,7 +92,7 @@ class SearchBar extends React.PureComponent {
         <View
           style={[
             this.props.style ? this.props.style : styles.searchContainer,
-            { width: inputWidth }
+            this.props.style ? { width: inputWidth } : null
           ]}
         >
           <TextInput
@@ -106,6 +106,7 @@ class SearchBar extends React.PureComponent {
             autoCorrect={false}
             returnKeyType="search"
             placeholder="Search"
+            underlineColorAndroid={'transparent'}
             placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
             onSubmitEditing={this._handleSubmit}
             style={[styles.searchInput, searchInputStyle]}
@@ -169,7 +170,7 @@ SearchBar.propTypes = {
   textColor: PropTypes.any,
   inputValue: PropTypes.string,
   navigation: PropTypes.any,
-  showCancelSearchButton: PropTypes.boolean
+  showCancelSearchButton: PropTypes.bool
 };
 
 export default withNavigation(SearchBar);

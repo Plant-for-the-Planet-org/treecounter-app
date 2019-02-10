@@ -85,7 +85,7 @@ export default class RegisterTrees extends Component {
 
   render() {
     return (
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView enableOnAndroid={true}>
         <CardLayout style={{ flex: 1 }}>
           <TabView
             useNativeDriver={true}

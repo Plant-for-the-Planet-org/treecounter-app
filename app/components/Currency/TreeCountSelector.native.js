@@ -198,6 +198,7 @@ class TreeCountSelector extends React.Component {
             <View style={styles.radio_label}>
               <TextInput
                 editable={!this.state.isFixed}
+                underlineColorAndroid={'transparent'}
                 style={styles.treecount_price_conversion_Text_input2}
                 keyboardType="numeric"
                 onChangeText={evt => this.handleVariableTreeCountChange(evt)}
@@ -222,6 +223,7 @@ class TreeCountSelector extends React.Component {
             >
               <TextInput
                 editable={!this.state.isFixed}
+                underlineColorAndroid={'transparent'}
                 style={styles.treecount_price_conversion_Text_input3}
                 keyboardType="numeric"
                 onChangeText={evt => this.handleVariableAmountChange(evt)}

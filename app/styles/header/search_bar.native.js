@@ -13,30 +13,31 @@ export const SearchContainerWidth =
 export default (styles = EStyleSheet.create({
   container: {
     // flex: 1,
-    width: '100%',
-    flexDirection: 'row'
+    width: '90%',
+    flexDirection: 'row',
+    // marginLeft: 10,
+    marginRight: 5,
+    marginTop: 10,
+    marginBottom: 10
+  },
+  searchContainer: {
+    height: 30,
+    width: '90%',
+    backgroundColor: '#f2f2f2',
+    borderRadius: 5,
+    paddingLeft: 27,
+    marginLeft: 10
   },
   buttonContainer: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    paddingTop: 15,
+    width: '20%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: 6
   },
   button: {
     paddingRight: 17,
     paddingLeft: 2
-  },
-  searchContainer: {
-    height: 30,
-    width: SearchContainerWidth,
-    backgroundColor: '#f2f2f2',
-    borderRadius: 5,
-    marginHorizontal: SearchContainerHorizontalMargin,
-    marginTop: 10,
-    paddingLeft: 27
   },
   searchIconContainer: {
     position: 'absolute',
@@ -50,9 +51,8 @@ export default (styles = EStyleSheet.create({
     resizeMode: 'contain'
   },
   searchInput: {
-    flex: 1,
     fontSize: 14,
-    paddingTop: 1,
+    paddingTop: 5,
     color: '$primary'
   }
 }));

@@ -5,8 +5,7 @@ import { infoGrey } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
 import i18n from '../../locales/i18n.js';
 
-@withRouter
-export default class BodyErrorBoundary extends React.Component {
+class BodyErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { seconds: 30, hasErrorOccurred: false };
@@ -82,3 +81,5 @@ BodyErrorBoundary.propTypes = {
   children: PropTypes.any,
   location: PropTypes.any
 };
+
+export default withRouter(BodyErrorBoundary);

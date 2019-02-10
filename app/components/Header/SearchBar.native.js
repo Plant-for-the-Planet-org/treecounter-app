@@ -92,7 +92,7 @@ class SearchBar extends React.PureComponent {
         <View
           style={[
             this.props.style ? this.props.style : styles.searchContainer,
-            { width: inputWidth }
+            this.props.style ? { width: inputWidth } : null
           ]}
         >
           <TextInput

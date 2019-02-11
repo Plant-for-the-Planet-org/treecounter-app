@@ -53,6 +53,7 @@ import DownloadAppModal from '../DownloadAppStore';
 import AppPaymentContainer from '../../containers/AppPayment';
 import BodyErrorBoundary from '../ErrorBoundry/bodyErrorBoundry';
 import PageNotFound from '../ErrorBoundry/404';
+import ChallengeContainer from '../../containers/Challenge';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -234,6 +235,10 @@ class TreeCounter extends Component {
             <PrivateRoute
               path={getLocalRoute('app_editProfile')}
               component={EditUserProfileContainer}
+            />
+            <PrivateRoute
+              path={getLocalRoute('app_challenge')}
+              component={ChallengeContainer}
             />
             <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
             <Route

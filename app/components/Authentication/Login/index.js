@@ -35,7 +35,6 @@ export default class Login extends Component {
     this.setState({
       recaptchaToken: token
     });
-    console.log(token, 'verifycallback');
   };
 
   render() {

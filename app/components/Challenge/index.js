@@ -14,6 +14,7 @@ import {
 } from '../../server/parsedSchemas/giftTrees';
 import i18n from '../../locales/i18n';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
+import TextBlock from '../Common/Text/TextBlock';
 
 let TCombForm = t.form.Form;
 
@@ -36,7 +37,9 @@ export default class Challenge extends Component {
 
     this.state = {
       form: {
-        giftMethod: 'direct'
+        challengeMethod: 'direct',
+        goal: 100,
+        endDate: 2020
       }
     };
     this.handleModeUserChange = this.handleModeUserChange.bind(this);
@@ -45,7 +48,10 @@ export default class Challenge extends Component {
   handleModeUserChange(tab) {
     this.setState({
       modeUser: tab,
-      form: { ...this.state.form, giftMethod: tab }
+      form: {
+        ...this.state.form,
+        challengeMethod: tab
+      }
     });
   }
 
@@ -53,9 +59,25 @@ export default class Challenge extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        giftTreecounter: event.suggestion.id
+        challenged: event.suggestion.id
       },
-      giftTreecounterName: event.suggestion.name
+      challengedName: event.suggestion.name
+    });
+  };
+
+  handleTreesChange = value => {
+    this.setState({
+      form: {
+        goal: value
+      }
+    });
+  };
+
+  handleEndDateChange = value => {
+    this.setState({
+      form: {
+        endDate: value
+      }
     });
   };
 
@@ -71,7 +93,7 @@ export default class Challenge extends Component {
           </DescriptionHeading>
         </TextHeading>
         <CardLayout className="tpo-footer-card-layout">
-          <div className="donate-tress__container">
+          <div className="challenge__container">
             <Tabs
               data={Challenge.data.tabsUser}
               onTabChange={this.handleModeUserChange}
@@ -89,6 +111,28 @@ export default class Challenge extends Component {
                 />
               )}
             </Tabs>
+            <div className="number_trees">
+              <TextBlock>Challenge to plant</TextBlock>
+              <span className="input_trees">
+                <input
+                  type="number"
+                  value={this.state.form.goal}
+                  onChange={evt => this.handleTreesChange(evt.target.value)}
+                />
+                <TextBlock>trees</TextBlock>
+              </span>
+            </div>
+            <div className="trees_by_time">
+              <input type="radio" value="indefinite" />
+              <TextBlock>Indefinite</TextBlock>
+              <input type="radio" value="test" className="radio_margin_left" />
+              <TextBlock>by </TextBlock>
+              <input
+                type="number"
+                value={this.state.form.endDate}
+                onChange={evt => this.handleEndDateChange(evt.target.value)}
+              />
+            </div>
           </div>
           <PrimaryButton>Challenge</PrimaryButton>
         </CardLayout>

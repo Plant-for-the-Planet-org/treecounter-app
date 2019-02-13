@@ -1,0 +1,41 @@
+.challenge__container {
+  padding: 20px;
+  width: auto;
+  @extend .donate-tress__container;
+
+  input[type="number"] {
+    border: none;
+    border-radius: 0;
+    margin-left: 5px;
+    padding: 0;
+    width: 40px;
+    border-bottom: 1px solid mix(white, #424242, 70%);
+  }
+
+  input[type="radio"] {
+    margin-right: 5px;
+    margin-top: 3px;
+  }
+
+  .number_trees {
+    margin-top: 20px;
+    width: 350px;
+
+    .input_trees {
+      display: flex;
+      width: 80px;
+      margin: auto;
+    }
+  }
+
+  .trees_by_time {
+    display: flex;
+    width: 60%;
+    margin: auto;
+    margin-top: 20px;
+
+    .radio_margin_left {
+      margin-left: 35px;
+    }
+  }
+}

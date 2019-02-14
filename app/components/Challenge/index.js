@@ -40,7 +40,8 @@ export default class Challenge extends Component {
         challengeMethod: 'direct',
         goal: 100,
         endDate: 2020
-      }
+      },
+      checked: 'indefinite'
     };
     this.handleModeUserChange = this.handleModeUserChange.bind(this);
   }
@@ -57,10 +58,7 @@ export default class Challenge extends Component {
 
   suggestionClicked = (context, event) => {
     this.setState({
-      form: {
-        ...this.state.form,
-        challenged: event.suggestion.id
-      },
+      challenged: event.suggestion.id,
       challengedName: event.suggestion.name
     });
   };
@@ -79,6 +77,33 @@ export default class Challenge extends Component {
         endDate: value
       }
     });
+  };
+
+  radioChange = event => {
+    this.setState({
+      checked: event.target.value
+    });
+  };
+
+  challenge = () => {
+    let requestData;
+    if (this.state.modeUser === 'invitation') {
+      let value = this.refs.challengeUser.getValue();
+      requestData = {
+        ...this.state.form,
+        ...value
+      };
+    } else {
+      requestData = {
+        ...this.state.form,
+        challenged: this.state.challenged
+      };
+    }
+    if (this.state.checked === 'indefinite') {
+      requestData.endDate = 'indefinite';
+    }
+
+    console.log(requestData);
   };
 
   render() {
@@ -123,9 +148,20 @@ export default class Challenge extends Component {
               </span>
             </div>
             <div className="trees_by_time">
-              <input type="radio" value="indefinite" />
+              <input
+                type="radio"
+                onChange={event => this.radioChange(event)}
+                value="indefinite"
+                checked={this.state.checked === 'indefinite'}
+              />
               <TextBlock>Indefinite</TextBlock>
-              <input type="radio" value="test" className="radio_margin_left" />
+              <input
+                type="radio"
+                value="custom"
+                onChange={event => this.radioChange(event)}
+                checked={this.state.checked === 'custom'}
+                className="radio_margin_left"
+              />
               <TextBlock>by </TextBlock>
               <input
                 type="number"
@@ -134,7 +170,7 @@ export default class Challenge extends Component {
               />
             </div>
           </div>
-          <PrimaryButton>Challenge</PrimaryButton>
+          <PrimaryButton onClick={this.challenge}>Challenge</PrimaryButton>
         </CardLayout>
       </div>
     );
@@ -142,12 +178,5 @@ export default class Challenge extends Component {
 }
 
 Challenge.propTypes = {
-  selectedProject: PropTypes.object,
-  selectedTpo: PropTypes.object,
-  currentUserProfile: PropTypes.object,
-  currencies: PropTypes.object,
-  gift: PropTypes.func,
-  paymentStatus: PropTypes.object,
-  paymentClear: PropTypes.func,
-  plantProjectClear: PropTypes.func
+  challenge: PropTypes.func
 };

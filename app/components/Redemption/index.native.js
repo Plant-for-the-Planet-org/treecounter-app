@@ -90,7 +90,13 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </View>
       );
-      icon = <Image style={styles.imageStyle} source={redeemRed} />;
+      icon = (
+        <Image
+          style={styles.imageStyle}
+          resizeMode="contain"
+          source={redeemRed}
+        />
+      );
       // icon = redeemRed;
     } else if (this.props.pageStatus === 'code-unknown') {
       button = (
@@ -100,7 +106,13 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </View>
       );
-      icon = <Image style={styles.imageStyle} source={redeemGreen} />;
+      icon = (
+        <Image
+          style={styles.imageStyle}
+          resizeMode="contain"
+          source={redeemGreen}
+        />
+      );
     } else if (this.props.pageStatus === 'not-logged-in') {
       button = (
         <View style={styles.loginButtons}>
@@ -118,7 +130,13 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </View>
       );
-      icon = <Image style={styles.imageLoginStyle} source={redeemSignIn} />;
+      icon = (
+        <Image
+          style={styles.imageLoginStyle}
+          resizeMode="contain"
+          source={redeemSignIn}
+        />
+      );
     } else {
       button = (
         <View style={styles.buttonStyle}>
@@ -127,7 +145,13 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </View>
       );
-      icon = <Image style={styles.imageStyle} source={redeemGreen} />;
+      icon = (
+        <Image
+          style={styles.imageStyle}
+          resizeMode="contain"
+          source={redeemGreen}
+        />
+      );
     }
 
     let value = this.state.value;

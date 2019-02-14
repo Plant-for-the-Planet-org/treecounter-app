@@ -14,7 +14,8 @@ const ContextMenuItem = ({ children, selected }) => (
   >
     <Text style={styles.itemViewText}>{children}</Text>
     <Image
-      style={{ height: 20, width: 20, marginLeft: 5, resizeMode: 'contain' }}
+      resizeMode={'contain'}
+      style={{ height: 20, width: 20, marginLeft: 5 }}
       source={selected ? radio_button_selected : radio_button}
     />
   </View>

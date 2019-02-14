@@ -124,7 +124,11 @@ export default class SvgContainer extends Component {
     return (
       <View style={treecounterStyles.container}>
         <View style={treecounterStyles.svgStyle}>
-          <Image style={treecounterStyles.imageStyle} source={svgBackground} />
+          <Image
+            style={treecounterStyles.imageStyle}
+            resizeMode="contain"
+            source={svgBackground}
+          />
           <View style={treecounterStyles.cloudStyle}>
             <Animated.View
               style={{

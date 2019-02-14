@@ -47,8 +47,7 @@ export default (styles = EStyleSheet.create({
   },
   searchIcon: {
     height: 15,
-    width: 15,
-    resizeMode: 'contain'
+    width: 15
   },
   searchInput: {
     fontSize: 14,

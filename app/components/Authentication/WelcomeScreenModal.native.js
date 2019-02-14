@@ -24,7 +24,11 @@ class WelcomeScreenModal extends Component {
           contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
         >
           <View style={styles.container}>
-            <Image style={styles.imageStyle} source={welcomeLogo} />
+            <Image
+              style={styles.imageStyle}
+              resizeMode="contain"
+              source={welcomeLogo}
+            />
             <Text style={styles.textHeader}>
               {i18n.t('label.welcome_to_ttc')}
             </Text>

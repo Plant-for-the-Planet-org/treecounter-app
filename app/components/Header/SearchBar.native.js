@@ -18,7 +18,11 @@ import TouchableItem from '../../components/Common/TouchableItem.native';
 
 const SearchIcon = () => (
   <View style={styles.searchIconContainer}>
-    <Image source={iosSearchGreen} style={styles.searchIcon} />
+    <Image
+      source={iosSearchGreen}
+      resizeMode="contain"
+      style={styles.searchIcon}
+    />
   </View>
 );
 

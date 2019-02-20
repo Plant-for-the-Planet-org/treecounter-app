@@ -160,6 +160,19 @@
           margin: 2px;
           margin-right: 5px;
         }
+
+        .tooltip {
+          height: 20px;
+          width: 20px;
+          display: inline;
+          margin: 0;
+          margin-left: 5px;
+
+          .tooltip-image {
+            height: 15px;
+            width: 15px;
+          }
+        }
       }
       .currency-symbol {
         margin-right: 2px;
@@ -239,14 +252,6 @@
       margin-bottom: 43px;
     }
   }
-}
-
-.tooltip {
-  height: 25px;
-  width: 25px;
-  display: inline;
-  margin: 0;
-  margin-left: 5px;
 }
 
 .tooltip-text {

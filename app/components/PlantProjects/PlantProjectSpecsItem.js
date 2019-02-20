@@ -11,7 +11,7 @@ const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
         {rightIcon ? (
           <div className="tooltip">
             <a data-tip data-for="survival-rate">
-              <img src={rightIcon} />
+              <img className="tooltip-image" src={rightIcon} />
             </a>
 
             <ReactTooltip id="survival-rate" effect="solid" type="dark">

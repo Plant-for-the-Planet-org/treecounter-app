@@ -32,7 +32,7 @@ export default class Leaderboard extends Component {
   };
 
   _handleSortingChange = sortValue => {
-    console.log('call sort here', sortValue);
+    // console.log('call sort here', sortValue);
     this.props.handleSectionChange(
       this.state.selectedCategory || this.props.categoryInfo.categoryKeys[0],
       undefined,
@@ -42,7 +42,7 @@ export default class Leaderboard extends Component {
   };
 
   _handleItemPress(treeCounterId, uri) {
-    console.log(treeCounterId);
+    //console.log(treeCounterId);
     if (treeCounterId) {
       this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
         treeCounterId
@@ -61,7 +61,7 @@ export default class Leaderboard extends Component {
   }
 
   _getTableView = selectedCategory => {
-    console.log(this.props.queryResult);
+    //console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
     let maxPlanted = 0;
     if (this.props.queryResult) {
@@ -211,7 +211,7 @@ export default class Leaderboard extends Component {
         categoryInfo.categoryKeys &&
         categoryInfo.categoryKeys[0]);
     return (
-      <View style={styles.leaderBoardContainer}>
+      <Animated.View style={styles.leaderBoardContainer}>
         <CategoryTypes
           categoryInfo={this.props.categoryInfo}
           sectionInfo={this.props.sectionInfo}
@@ -221,12 +221,14 @@ export default class Leaderboard extends Component {
 
         {this._getTableView(selectedCategory)}
         {selectedCategory && (
-          <Animated.Image
-            source={categoryIcons[selectedCategory]['selected']}
-            style={[styles.cardImageStyle, { top: headerHeight }]}
-          />
+          <Animated.View style={[styles.cardImageStyle, { top: headerHeight }]}>
+            <Animated.Image
+              source={categoryIcons[selectedCategory]['selected']}
+              style={[{ height: '100%', width: '100%' }]}
+            />
+          </Animated.View>
         )}
-      </View>
+      </Animated.View>
     );
   }
 }

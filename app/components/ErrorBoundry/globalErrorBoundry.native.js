@@ -9,7 +9,7 @@ export default class GlobalErrorBoundary extends React.Component {
 
   componentDidCatch(error, info) {
     this.setState({ hasErrorOccurred: true });
-    console.log(error, info);
+    //console.log(error, info);
   }
 
   render() {

@@ -37,8 +37,14 @@ function onAPIResponse(response) {
   return response;
 }
 
-async function getHeaders(authenticated = false) {
-  const headers = { 'X-SESSION-ID': await getSessionId() };
+async function getHeaders(authenticated = false, recaptcha) {
+  let headers = { 'X-SESSION-ID': await getSessionId() };
+  if (recaptcha) {
+    headers = {
+      ...headers,
+      'X-CAPTCHA-TOKEN': recaptcha
+    };
+  }
   if (authenticated) {
     return {
       headers: { ...headers, Authorization: `Bearer ${await getAccessToken()}` }
@@ -98,10 +104,16 @@ export async function postActivateLinkRequest(route, data, params) {
     .catch(onAPIError);
 }
 
-export async function postRequest(route, data, params, authenticated = false) {
+export async function postRequest(
+  route,
+  data,
+  params,
+  authenticated = false,
+  recaptcha = false
+) {
   let url = await getApiRoute(route, params);
   return await axios
-    .post(url, data, await getHeaders(authenticated))
+    .post(url, data, await getHeaders(authenticated, recaptcha))
     .then(checkStatus)
     .then(onAPIResponse)
     .catch(onAPIError);

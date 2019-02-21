@@ -6,11 +6,17 @@ import { updateJWT, updateActivateToken } from '../utils/user';
 import { loadUserProfile } from './loadUserProfileAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 
-export function signUp(profileType, userData) {
+export function signUp(profileType, userData, recaptchaToken) {
   if (userData.password.first === userData.password.second) {
     return dispatch => {
       dispatch(setProgressModelState(true));
-      return postRequest('signup_post', userData, { profileType: profileType })
+      return postRequest(
+        'signup_post',
+        userData,
+        { profileType: profileType },
+        false,
+        recaptchaToken
+      )
         .then(res => {
           const { token, refresh_token, data } = res.data;
           if (!data.isActivated) {

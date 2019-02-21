@@ -7,6 +7,7 @@ import { getApiRoute } from '../../../app/actions/apiRouting';
 import axios from 'axios';
 import { context } from '../../../app/config';
 import './treecounter.widget.scss';
+
 const { scheme, host, base: baseUrl } = context;
 
 const serverName = `${scheme}://${host}`;
@@ -35,6 +36,13 @@ document.addEventListener('DOMContentLoaded', function() {
         'treecounter'
     ) {
       let uid = allBlockQuote[i].attributes.getNamedItem('data-treecounterId');
+      let showGraphics = allBlockQuote[i].attributes.getNamedItem(
+        'data-show-graphics'
+      );
+      if (showGraphics && showGraphics === 'false') {
+        showGraphics = false;
+      }
+      showGraphics = true;
       if (uid) {
         uid = isNaN(parseInt(uid.nodeValue))
           ? uid.nodeValue
@@ -45,7 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const header = document.createElement('header');
 
             let div = document.createElement('div');
-            const shadowRoot = div.attachShadow({ mode: 'open' });
+            div.className = 'pftp-widget-tree-counter-container';
+            const shadowRoot = div.attachShadow({ mode: 'closed' });
             shadowRoot.innerHTML = cssStyle;
             const newDivNode = allBlockQuote[i].parentNode.insertBefore(
               div,
@@ -62,15 +71,24 @@ document.addEventListener('DOMContentLoaded', function() {
               type: treecounter.userProfile.type
             };
             ReactDOM.render(
-              <App {...svgData} />,
+              <App {...svgData} showGraphics />,
               shadowRoot,
               () => (shadowRoot.innerHTML = cssStyle + shadowRoot.innerHTML)
             );
 
             allBlockQuote[i].parentNode.removeChild(allBlockQuote[i]);
+            window.pftp = {
+              giftTree: event => {
+                console.log(event);
+                const uid = event.target.id;
+                const url = `${serverName}${baseUrl}/giftTrees?uid=${uid}`;
+                console.log(serverName);
+                window.open(url, '_blank');
+              }
+            };
           })
           .catch(error => {
-            console.log(error);
+            console.log(error, 'name');
           });
       }
     }

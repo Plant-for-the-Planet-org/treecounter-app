@@ -5,3 +5,19 @@
 @import "../../stylesheet/layer.css";
 @import "../../stylesheet/common/text";
 @import "../../stylesheet/arrow_button_rotatable";
+@import "../../stylesheet/common/button";
+
+.pftp-button-secondary {
+  width: 40%;
+  align-self: flex-end;
+  margin-right: 20px;
+  outline: none;
+}
+.pftp-widget-img {
+  align-self: flex-start;
+  width: 30%;
+}
+.pftp-widget-row {
+  display: flex;
+  justify-content: space-between;
+}

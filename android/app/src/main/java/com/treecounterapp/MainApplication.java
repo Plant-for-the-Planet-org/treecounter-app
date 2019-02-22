@@ -4,10 +4,8 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
-import com.gettipsi.stripe.StripeReactPackage;
+//import com.gettipsi.stripe.StripeReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.taessina.paypal.RNPaypalWrapperPackage;
-import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.imagepicker.ImagePickerPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.horcrux.svg.SvgPackage;
@@ -34,10 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new ReactNativeYouTube(),
-            new StripeReactPackage(),
+           // new StripeReactPackage(),
             new RNDeviceInfo(),
-            new RNPaypalWrapperPackage(),
-            new ReactNativeYouTube(),
             new ImagePickerPackage(),
             new RNI18nPackage(),
             new SvgPackage()

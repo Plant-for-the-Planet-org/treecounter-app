@@ -135,7 +135,7 @@ export default class UserHome extends Component {
               <SvgContainer
                 {...svgData}
                 onToggle={toggleVal => this.updateSvg(toggleVal)}
-              />>
+              />
             </View>
             <View>
               {userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
@@ -195,7 +195,7 @@ export default class UserHome extends Component {
       if (supported) {
         Linking.openURL(url);
       } else {
-        console.log("Don't know how to open URI: " + url);
+        //console.log("Don't know how to open URI: " + url);
       }
     });
   }

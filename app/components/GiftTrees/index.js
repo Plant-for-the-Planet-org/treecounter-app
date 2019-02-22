@@ -107,7 +107,8 @@ export default class GiftTrees extends Component {
       selectedTreeCount: 0,
       selectedAmount: 0,
       form: {
-        recipientType: modeReceipt
+        recipientType: modeReceipt,
+        giftMethod: 'direct'
       },
       giftTreecounterName: null,
       expanded: false,
@@ -213,7 +214,7 @@ export default class GiftTrees extends Component {
       return false;
     },
     () => {
-      console.log(this.refs.donateReceipt.validate());
+      //console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
@@ -496,6 +497,9 @@ export default class GiftTrees extends Component {
                       tpoName: this.props.selectedTpo.name,
                       donorEmail: email,
                       donorName: name,
+                      treeCount: this.state.selectedTreeCount,
+                      plantProjectName: plantProject.name,
+                      giftTreeCounterName: name,
                       treeCount: this.state.selectedTreeCount
                     }}
                     onSuccess={paymentResponse =>

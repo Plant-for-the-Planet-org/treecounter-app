@@ -5,6 +5,7 @@ import i18n from '../../locales/i18n';
 import { View, Text, Image } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import { targetPlanted } from '../../assets';
+
 class PlantedProgressBar extends React.Component {
   constructor(props) {
     super(props);
@@ -38,8 +39,8 @@ class PlantedProgressBar extends React.Component {
                     width: treeCountWidth + '%',
                     paddingRight: 10,
                     padding: 5,
-                    borderTopRightRadius: 10,
-                    borderBottomRightRadius: 10,
+                    borderTopRightRadius: 20,
+                    borderBottomRightRadius: 20,
                     borderWidth: 0.5
                   }
                 : {
@@ -64,14 +65,17 @@ class PlantedProgressBar extends React.Component {
           </View>
         </View>
 
-        <View style={styles.targetContainer}>
-          <Text style={styles.treePlantedtext}>
-            {countTarget ? countTarget.toLocaleString('en') : null}
-          </Text>
-          <View style={{ paddingLeft: 5, paddingRight: 5 }}>
-            <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
+        {!this.props.hideTargetImage ? (
+          <View style={styles.targetContainer}>
+            <Text style={styles.treePlantedtext}>
+              {countTarget ? countTarget.toLocaleString('en') : null}
+            </Text>
+
+            <View style={{ paddingLeft: 5, paddingRight: 5 }}>
+              <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
+            </View>
           </View>
-        </View>
+        ) : null}
       </View>
     );
   }
@@ -79,7 +83,8 @@ class PlantedProgressBar extends React.Component {
 
 PlantedProgressBar.propTypes = {
   countPlanted: PropTypes.number,
-  countTarget: PropTypes.number
+  countTarget: PropTypes.number,
+  hideTargetImage: PropTypes.bool
 };
 
 export default PlantedProgressBar;

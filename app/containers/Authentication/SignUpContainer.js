@@ -16,12 +16,12 @@ class SignUpContainer extends React.Component {
     this.state = { formValue: {}, schemaOptions };
   }
 
-  onSignUpClicked = profileType => {
+  onSignUpClicked = (profileType, token) => {
     console.log(this.refs.signupContainer.refs.signupForm.validate());
     let formValue = this.refs.signupContainer.refs.signupForm.getValue();
     if (formValue) {
       this.props
-        .signUp(profileType, formValue)
+        .signUp(profileType, formValue, token)
         .then(success => {})
         .catch(err => {
           console.log('err signup data', err);
@@ -76,5 +76,5 @@ export default connect(null, mapDispatchToProps)(SignUpContainer);
 SignUpContainer.propTypes = {
   signUp: PropTypes.func,
   route: PropTypes.func,
-  navigation: PropTypes.object
+  navigation: PropTypes.any
 };

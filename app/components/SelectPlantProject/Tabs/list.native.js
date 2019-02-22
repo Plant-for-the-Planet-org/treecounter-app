@@ -62,6 +62,7 @@ export default class ListProjects extends Component {
                 this._textInput = view;
               }}
               clearButtonMode="while-editing"
+              underlineColorAndroid={'transparent'}
               onChangeText={this._handleChangeText}
               value={this.state.text}
               autoCapitalize="none"

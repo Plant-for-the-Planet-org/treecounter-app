@@ -74,11 +74,17 @@ export default class DonateTrees extends Component {
     super(props);
 
     let modeReceipt;
+    let receipt = {};
     if (props.currentUserProfile) {
       modeReceipt =
         props.currentUserProfile.type === 'individual'
           ? 'individual'
           : 'company';
+      if (modeReceipt === 'individual') {
+        receipt['receiptIndividual'] = props.currentUserProfile;
+      } else {
+        receipt['receiptCompany'] = props.currentUserProfile;
+      }
     } else {
       modeReceipt = '';
     }
@@ -90,7 +96,8 @@ export default class DonateTrees extends Component {
       selectedTreeCount: 0,
       selectedAmount: 0,
       form: {
-        recipientType: modeReceipt
+        recipientType: modeReceipt,
+        ...receipt
       },
       expanded: false,
       expandedOption: '1',
@@ -189,7 +196,7 @@ export default class DonateTrees extends Component {
       return false;
     },
     () => {
-      console.log(this.refs.donateReceipt.validate());
+      // console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
@@ -224,6 +231,18 @@ export default class DonateTrees extends Component {
     let sendState = { ...this.state.form };
     if (this.props.supportTreecounter.treecounterId) {
       sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
+    }
+    let recipientType;
+    if (this.state.modeReceipt === 'individual') {
+      recipientType = 'receiptIndividual';
+    } else {
+      recipientType = 'receiptCompany';
+    }
+    if (
+      !this.props.currentUserProfile.address &&
+      this.state.form[recipientType].address
+    ) {
+      this.props.updateUserProfile(this.state.form[recipientType], 'profile');
     }
     this.props.donate(
       {
@@ -325,9 +344,9 @@ export default class DonateTrees extends Component {
     }
     let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
     let email = receipt !== '' ? receipt.email : '';
-
     let paymentMethods;
-    if (receipt) {
+
+    if (receipt && plantProject) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
       const countryCurrencies = plantProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
@@ -424,20 +443,14 @@ export default class DonateTrees extends Component {
                           ref="donateReceipt"
                           type={receiptIndividualFormSchema}
                           options={individualSchemaOptions}
-                          value={
-                            this.props.currentUserProfile ||
-                            this.state.form['receiptIndividual']
-                          }
+                          value={this.state.form['receiptIndividual']}
                         />
                       ) : (
                         <TCombForm
                           ref="donateReceipt"
                           type={receiptCompanyFormSchema}
                           options={companySchemaOptions}
-                          value={
-                            this.props.currentUserProfile ||
-                            this.state.form['receiptCompany']
-                          }
+                          value={this.state.form['receiptCompany']}
                         />
                       )}
                     </Tabs>
@@ -459,7 +472,9 @@ export default class DonateTrees extends Component {
                           tpoName: this.props.selectedTpo.name,
                           donorEmail: email,
                           donorName: name,
-                          treeCount: this.state.selectedTreeCount
+                          supportTreecounter: this.props.supportTreecounter,
+                          treeCount: this.state.selectedTreeCount,
+                          plantProjectName: plantProject.name
                         }}
                         onSuccess={paymentResponse =>
                           this.handlePaymentApproved(paymentResponse)
@@ -498,5 +513,6 @@ DonateTrees.propTypes = {
   paymentClear: PropTypes.func,
   supportTreecounter: PropTypes.object,
   paymentStatus: PropTypes.object,
-  plantProjectClear: PropTypes.func
+  plantProjectClear: PropTypes.func,
+  updateUserProfile: PropTypes.func
 };

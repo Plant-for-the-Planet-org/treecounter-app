@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Modal, Text } from 'react-native';
+import { View, Modal, Alert } from 'react-native';
 
 import LoadingIndicator from '../LoadingIndicator';
 
@@ -11,6 +11,9 @@ export default class ProgressModal extends Component {
         transparent={true}
         visible={this.props.modalVisible}
         elevation="10"
+        onRequestClose={() => {
+          Alert.alert('Loading cancelled in between');
+        }}
       >
         <View
           style={{

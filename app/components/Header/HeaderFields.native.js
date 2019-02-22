@@ -18,14 +18,14 @@ export default (HeaderRight = function(navigation, isLoggedIn) {
           style={{ height: 25, width: 25, marginRight: 20 }}
         />
       </TouchableOpacity>
-      {isLoggedIn && (
+      {isLoggedIn ? (
         <TouchableOpacity>
           <Image
             source={iosNotificationWhite}
             style={{ height: 25, width: 25, marginRight: 20 }}
           />
         </TouchableOpacity>
-      )}
+      ) : null}
     </View>
   );
 });

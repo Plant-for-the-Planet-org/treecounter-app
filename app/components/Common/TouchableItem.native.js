@@ -49,7 +49,7 @@ export default class TouchableItem extends React.Component {
           )}
         >
           <View pointerEvents="box-only" style={style}>
-            {React.Children.only(this.props.children)}
+            {this.props.children}
           </View>
         </TouchableNativeFeedback>
       );
@@ -57,6 +57,7 @@ export default class TouchableItem extends React.Component {
 
     return (
       <TouchableOpacity
+        hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
         activeOpacity={
           this.props.activeOpacity ? this.props.activeOpacity : 0.2
         }

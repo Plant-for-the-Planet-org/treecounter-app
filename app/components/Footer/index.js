@@ -22,6 +22,17 @@ const Footer = () => {
         <TransparentButton onClick={() => updateRoute('app_privacy')}>
           <span>{i18n.t('label.privacy')}</span>
         </TransparentButton>
+        <span className="seprator">|</span>
+        <a
+          className="pftp-button-transparent"
+          href="mailto:support@trilliontreecampaign.org"
+        >
+          <span>{i18n.t('label.contact')}</span>
+        </a>
+        <span className="seprator">|</span>
+        <TransparentButton onClick={() => updateRoute('app_faq')}>
+          <span>{i18n.t('label.faqs')}</span>
+        </TransparentButton>
       </div>
     </div>
   );

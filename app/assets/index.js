@@ -22,7 +22,7 @@ import pledge_highest from './images/pledge_biggest.png';
 import pledge_latest from './images/pledge_recent.png';
 import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
-import tree from './images/tree.svg';
+import tree from './images/darkTree.png';
 import SideMenuImage from './images/side_menu.png';
 import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
@@ -109,6 +109,10 @@ import editGrey from './images/icons/edit_grey.png';
 import welcomeLogo from './images/icons/welcomeLogo.png';
 import world_outline from './images/world_outline.png';
 import world_outline_red from './images/world_outline_red.png';
+import selector_menu from './images/icons/selector_menu.png';
+import radio_button from './images/icons/radio_button.png';
+import radio_button_selected from './images/icons/radio_button_selected.png';
+import filter from './images/icons/filter.png';
 
 export {
   AppStoreLogo,
@@ -221,5 +225,9 @@ export {
   editGrey,
   welcomeLogo,
   world_outline,
-  world_outline_red
+  world_outline_red,
+  selector_menu,
+  radio_button_selected,
+  radio_button,
+  filter
 };

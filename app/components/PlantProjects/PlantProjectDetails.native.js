@@ -27,7 +27,7 @@ class PlantProjectDetails extends React.Component {
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>{this.props.description}</Text>
         </View>
-        {this.props.url && (
+        {this.props.url ? (
           <TouchableItem
             style={styles.linkTextContainer}
             onPress={() => this._goToURL()}
@@ -38,10 +38,10 @@ class PlantProjectDetails extends React.Component {
               {this.props.linkText ? this.props.linkText : 'Link'}
             </Text>
           </TouchableItem>
-        )}
+        ) : null}
 
         <View style={styles.videoContainer}>
-          <VideoContainer url={vUrl} />;
+          <VideoContainer url={vUrl} />
         </View>
       </View>
     );
@@ -53,7 +53,7 @@ class PlantProjectDetails extends React.Component {
       if (supported) {
         Linking.openURL(url);
       } else {
-        console.log("Don't know how to open URI: " + url);
+        // console.log("Don't know how to open URI: " + url);
       }
     });
   }

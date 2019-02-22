@@ -16,7 +16,8 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Profiletype: 'individual'
+      Profiletype: 'individual',
+      recaptchaToken: null
     };
     this.ProfileChange = this.ProfileChange.bind(this);
   }
@@ -26,6 +27,13 @@ export default class SignUp extends Component {
       Profiletype: type
     });
   }
+
+  verifyCallback = token => {
+    // Here you will get the final token!!!
+    this.setState({
+      recaptchaToken: token
+    });
+  };
 
   render() {
     let { Profiletype } = this.state;
@@ -77,7 +85,10 @@ export default class SignUp extends Component {
               />
               <PrimaryButton
                 onClick={event => {
-                  this.props.onSignUpClicked(Profiletype);
+                  this.props.onSignUpClicked(
+                    Profiletype,
+                    this.state.recaptchaToken
+                  );
                   event.preventDefault();
                 }}
               >

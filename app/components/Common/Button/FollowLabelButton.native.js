@@ -15,7 +15,7 @@ const FollowLabelButton = ({ isLoggedIn, isSubscribed, onClick }) => {
       style={
         isSubscribed ? buttonStyles.followingButton : buttonStyles.followButton
       }
-      onClick={() => (isLoggedIn ? onClick() : null)}
+      onClick={() => onClick()}
     >
       <Text style={buttonStyles.followButtonText}>{label}</Text>
     </View>

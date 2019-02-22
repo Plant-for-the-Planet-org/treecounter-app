@@ -101,7 +101,7 @@ export default class EditUserProfile extends Component {
     switch (route.key) {
       case 'basic':
         return (
-          <KeyboardAwareScrollView>
+          <KeyboardAwareScrollView enableOnAndroid={true}>
             <CardLayout style={{ flex: 1 }}>
               <Form
                 ref={'image'}
@@ -130,7 +130,7 @@ export default class EditUserProfile extends Component {
         break;
       case 'desc':
         return (
-          <KeyboardAwareScrollView>
+          <KeyboardAwareScrollView enableOnAndroid={true}>
             <CardLayout style={{ flex: 1 }}>
               <View {...this.props}>
                 <Form
@@ -152,7 +152,7 @@ export default class EditUserProfile extends Component {
         );
       case 'security':
         return (
-          <KeyboardAwareScrollView>
+          <KeyboardAwareScrollView enableOnAndroid={true}>
             <CardLayout style={{ flex: 1 }}>
               <View {...this.props}>
                 <Form

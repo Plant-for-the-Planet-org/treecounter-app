@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { bindActionCreators } from 'redux';
 import SuccessfullyActivatedAccount from '../../components/Authentication/SuccessfullyActivated';
 import { accountActivate } from '../../actions/signupActions';
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import connect from 'react-redux/es/connect/connect';
 
-export default class SuccessfullyActivatedContainer extends React.Component {
+class SuccessfullyActivatedContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,19 +16,45 @@ export default class SuccessfullyActivatedContainer extends React.Component {
   }
 
   componentWillMount() {
-    accountActivate(this.props.match.params.token).then(res =>
-      this.setState({ success: true })
-    );
+    if (this.props.match.params.token) {
+      this.props
+        .accountActivate(this.props.match.params.token)
+        .then(res => {
+          console.log('in container');
+          this.setState({ success: true });
+        })
+        .catch(err => {
+          console.log(err);
+          this.setState({ success: false });
+        });
+    } else {
+      this.setState({ success: true });
+    }
   }
   render() {
-    return this.state.success ? <SuccessfullyActivatedAccount /> : null;
+    console.log(this.state);
+    return <SuccessfullyActivatedAccount success={this.state.success} />;
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      accountActivate
+    },
+    dispatch
+  );
+};
+
+export default connect(null, mapDispatchToProps)(
+  SuccessfullyActivatedContainer
+);
 
 SuccessfullyActivatedContainer.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       token: PropTypes.string
     })
-  }).isRequired
+  }).isRequired,
+  accountActivate: PropTypes.any
 };

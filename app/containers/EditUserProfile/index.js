@@ -191,6 +191,6 @@ EditUserProfileContainer.propTypes = {
   deletePlantProject: PropTypes.func,
   addPlantProject: PropTypes.func,
   deleteUserProfile: PropTypes.func,
-  navigation: PropTypes.func,
+  navigation: PropTypes.any,
   logoutUser: PropTypes.func
 };

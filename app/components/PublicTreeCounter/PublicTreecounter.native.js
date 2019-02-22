@@ -102,7 +102,7 @@ class PublicTreeCounter extends React.Component {
   onMoreClick(id) {
     this.props.selectPlantProjectIdAction(id);
     const { navigation } = this.props;
-    console.log('OnMore');
+    //console.log('OnMore');
     updateRoute('app_selectProject', navigation);
   }
   onSelectClickedFeaturedProjects = id => {
@@ -150,12 +150,12 @@ class PublicTreeCounter extends React.Component {
             followChanged={this.onFollowChanged}
           />
           {'tpo' !== userProfile.type &&
-            !isMyself(treecounter, currentUserProfile) && (
-              <SupportButton
-                {...supportProps}
-                onRegisterSupporter={this.onRegisterSupporter}
-              />
-            )}
+          !isMyself(treecounter, currentUserProfile) ? (
+            <SupportButton
+              {...supportProps}
+              onRegisterSupporter={this.onRegisterSupporter}
+            />
+          ) : null}
         </View>
         <View style={stylesHome.svgContainer}>
           <SvgContainer

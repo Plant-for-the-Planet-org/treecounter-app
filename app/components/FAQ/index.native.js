@@ -30,6 +30,7 @@ export default class FAQ extends Component {
       <View style={styles.content}>
         <HTMLView
           value={section.answer}
+          addLineBreaks={false}
           stylesheet={styles}
           onLinkPress={url => {
             try {

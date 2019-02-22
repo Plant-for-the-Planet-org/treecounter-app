@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableHighlight } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -38,6 +38,11 @@ class PlantProjectSnippet extends React.Component {
 
   toggleExpanded(id) {
     this.props.onMoreClick(id);
+  }
+  containerPress(id) {
+    if (this.props.onMoreClick) {
+      this.props.onMoreClick(id);
+    }
   }
 
   render() {
@@ -95,19 +100,14 @@ class PlantProjectSnippet extends React.Component {
       taxDeduction: paymentSetup.taxDeduction
     };
     return (
-      <TouchableItem
-        onPress={
-          !this.props.onMoreClick
-            ? null
-            : () => {
-                this.props.onMoreClick(id);
-              }
-        }
+      <TouchableHighlight
+        underlayColor={'transparent'}
+        onPress={() => this.containerPress(id)}
       >
         <CardLayout
           style={[styles.projectSnippetContainer, this.props.cardStyle]}
         >
-          {projectImage && (
+          {projectImage ? (
             <View style={styles.projectImageContainer}>
               <Image
                 style={styles.teaser__projectImage}
@@ -121,7 +121,7 @@ class PlantProjectSnippet extends React.Component {
                 resizeMode={'cover'}
               />
             </View>
-          )}
+          ) : null}
 
           <View style={styles.projectSpecsContainer}>
             <PlantedProgressBar
@@ -181,20 +181,6 @@ class PlantProjectSnippet extends React.Component {
               </View>
 
               <View style={styles.buttonContainer}>
-                {this.props.showMoreButton && (
-                  <PrimaryButton
-                    style={styles.buttonItem}
-                    buttonStyle={[styles.buttonStyle, styles.moreButtonStyle]}
-                    textStyle={[
-                      styles.moreButtonTextStyle,
-                      styles.buttonTextStyle
-                    ]}
-                    onClick={() => this.toggleExpanded(id)}
-                  >
-                    <Text>More</Text>
-                  </PrimaryButton>
-                )}
-
                 <PrimaryButton
                   style={styles.buttonItem}
                   buttonStyle={styles.buttonStyle}
@@ -207,7 +193,7 @@ class PlantProjectSnippet extends React.Component {
             </View>
           </View>
         </CardLayout>
-      </TouchableItem>
+      </TouchableHighlight>
     );
   }
 }

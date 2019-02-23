@@ -16,7 +16,8 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Profiletype: 'individual'
+      Profiletype: 'individual',
+      recaptchaToken: null
     };
     this.changeProfile = this.changeProfile.bind(this);
   }
@@ -31,10 +32,22 @@ export default class SignUp extends Component {
     });
   }
 
+  verifyCallback = token => {
+    // Here you will get the final token!!!
+    this.setState({
+      recaptchaToken: token
+    });
+  };
+
   render() {
     let { Profiletype } = this.state;
     return (
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView enableOnAndroid={true}>
+        <ReCaptchaV3
+          captchaDomain={'https://www.plant-for-the-planet.org'}
+          siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
+          onReceiveToken={token => verifyCallback(token)}
+        />
         <ImageBackground style={[styles.container, styles.parentContainer]}>
           <SignupTypes changeProfile={this.changeProfile} />
           <View style={styles.inputContainer}>
@@ -46,7 +59,10 @@ export default class SignUp extends Component {
             />
             <PrimaryButton
               onClick={() => {
-                this.props.onSignUpClicked(Profiletype);
+                this.props.onSignUpClicked(
+                  Profiletype,
+                  this.state.recaptchaToken
+                );
               }}
             >
               {i18n.t('label.signUp')}

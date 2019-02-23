@@ -65,6 +65,9 @@ export default class UserHome extends Component {
         tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={tabStyles.textStyle}
         indicatorStyle={tabStyles.textActive}
+        scrollEnabled
+        bounces
+        useNativeDriver
       />
     );
   };
@@ -195,7 +198,7 @@ export default class UserHome extends Component {
       if (supported) {
         Linking.openURL(url);
       } else {
-        console.log("Don't know how to open URI: " + url);
+        //console.log("Don't know how to open URI: " + url);
       }
     });
   }

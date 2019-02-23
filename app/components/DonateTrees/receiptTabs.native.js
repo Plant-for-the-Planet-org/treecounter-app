@@ -90,7 +90,7 @@ export default class RecieptTabsView extends Component {
     switch (route.key) {
       case 'individual':
         return (
-          <KeyboardAwareScrollView>
+          <KeyboardAwareScrollView enableOnAndroid={true}>
             <CardLayout>
               <Form
                 ref={this.setIndividualDonateReceipt}
@@ -111,7 +111,7 @@ export default class RecieptTabsView extends Component {
         );
       case 'company':
         return (
-          <KeyboardAwareScrollView>
+          <KeyboardAwareScrollView enableOnAndroid={true}>
             <CardLayout>
               <Form
                 ref={this.setCompanyDonateReceipt}

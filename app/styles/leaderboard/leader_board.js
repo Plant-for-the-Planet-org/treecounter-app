@@ -43,8 +43,8 @@ export default (LeaderboardStyle = EStyleSheet.create({
     zIndex: 1000,
     height: 60,
     width: 60,
-    elevation: 10,
-    left: '40%'
+    left: '40%',
+    elevation: 10
   },
   plantedContainer: {
     top: 25,

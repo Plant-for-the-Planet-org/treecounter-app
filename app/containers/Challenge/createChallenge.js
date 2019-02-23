@@ -8,7 +8,7 @@ import { challenge } from '../../actions/challengeActions';
 import { updateRoute } from '../../helpers/routerHelper';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 
-import Challenge from '../../components/Challenge';
+import Challenge from '../../components/Challenge/createChallenge';
 
 class ChallengeContainer extends Component {
   onTabChange(title) {

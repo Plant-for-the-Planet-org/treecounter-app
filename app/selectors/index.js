@@ -107,6 +107,14 @@ export const userTreecounterSelector = createSelector(
   }
 );
 
+export const userChallengesSelector = createSelector(
+  userTreecounterSelector,
+  userTreecounter => {
+    logSelectorUpdate('userChallengesSelector');
+    return null === userTreecounter ? null : userTreecounter.challenges;
+  }
+);
+
 /**
  * Returns the current user's de-normalized contributions or null
  * TODO: analyze whether return value null should be replace by empty array

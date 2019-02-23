@@ -53,7 +53,7 @@ import DownloadAppModal from '../DownloadAppStore';
 import AppPaymentContainer from '../../containers/AppPayment';
 import BodyErrorBoundary from '../ErrorBoundry/bodyErrorBoundry';
 import PageNotFound from '../ErrorBoundry/404';
-import ChallengeContainer from '../../containers/Challenge';
+import ChallengeContainer from '../../containers/Challenge/createChallenge';
 
 // Class implementation
 class TreeCounter extends Component {

@@ -15,21 +15,21 @@ class LoginContainer extends React.Component {
     this.state = { formValue: {}, schemaOptions };
   }
 
-  onPress = () => {
+  onPress = recaptchaToken => {
     let result = this.refs.loginContainer.refs.loginForm.validate();
     console.log(result);
     let value = this.refs.loginContainer.refs.loginForm.getValue();
     if (value) {
-      this.onClick(value);
+      this.onClick(value, recaptchaToken);
     }
   };
 
-  onClick(value) {
+  onClick(value, recaptchaToken) {
     console.log(this.refs.loginContainer.refs.loginForm.validate());
     let formValue = this.refs.loginContainer.refs.loginForm.getValue();
     if (formValue) {
       this.props
-        .login(value, this.props.navigation)
+        .login(value, recaptchaToken, this.props.navigation)
         .then(val => val)
         .catch(err => {
           console.log('err signup data', err);

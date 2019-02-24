@@ -11,8 +11,14 @@ import { setProgressModelState } from '../reducers/modelDialogReducer';
 import _ from 'lodash';
 export const userLogout = createAction('USER_LOGOUT');
 
-export function login(credentials, navigation = undefined) {
-  const request = postRequest('api_login_check', credentials);
+export function login(credentials, recaptchaToken, navigation = undefined) {
+  const request = postRequest(
+    'api_login_check',
+    credentials,
+    null,
+    false,
+    recaptchaToken
+  );
 
   return dispatch => {
     dispatch(setProgressModelState(true));

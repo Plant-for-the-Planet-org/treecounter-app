@@ -7,12 +7,12 @@ import { getApiRoute } from '../../../app/actions/apiRouting';
 import axios from 'axios';
 import { context } from '../../../app/config';
 import './treecounter.widget.scss';
-
+import retargetEvents from 'react-shadow-dom-retarget-events';
 const { scheme, host, base: baseUrl } = context;
 
 const serverName = `${scheme}://${host}`;
-const cssStyle = `<link href="treecounterwidget.css" rel="stylesheet"/>
-  <link href="${serverName}/treecounterwidget.css" rel="stylesheet"/>`;
+const cssStyle = `<link href="treecounterwidget.css" rel="stylesheet"/>`;
+// <link href="${serverName}/treecounterwidget.css" rel="stylesheet"/>`;
 
 export async function getRequest(route, params) {
   let url = await getApiRoute(route, params);
@@ -61,22 +61,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let div = document.createElement('div');
             div.className = 'pftp-widget-tree-counter-container';
-            const shadowRoot = div.attachShadow({ mode: 'closed' });
-            shadowRoot.innerHTML = cssStyle;
+            const shadowRoot = div.attachShadow({ mode: 'open' });
+            // shadowRoot.innerHTML = cssStyle;
             const newDivNode = allBlockQuote[i].parentNode.insertBefore(
               div,
               allBlockQuote[i]
             );
             ReactDOM.render(
               <App
+                key={'test_app'}
                 treecounter={treecounter}
                 showGraphics={!!showGraphics}
                 showDonateButton={!!showDonateButton}
               />,
-              shadowRoot,
-              () => (shadowRoot.innerHTML = cssStyle + shadowRoot.innerHTML)
+              shadowRoot
+              // () => (div.innerHTML = cssStyle + div.innerHTML)
             );
-
+            retargetEvents(shadowRoot);
             allBlockQuote[i].parentNode.removeChild(allBlockQuote[i]);
             window.pftp = {
               giftTree: event => {

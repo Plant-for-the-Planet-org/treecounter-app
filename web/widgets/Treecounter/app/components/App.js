@@ -4,6 +4,7 @@ import TreecounterGraphicsText from '../../../../../app/components/TreecounterGr
 import SecondaryButton from '../../../../../app/components/Common/Button/SecondaryButton';
 import { SideMenuImage } from '../../../../../app/assets';
 import PropTypes from 'prop-types';
+import ReactTooltipStyle from '../../../../../node_modules/react-tooltip/dist/style';
 
 export default class App extends Component {
   constructor(props) {
@@ -71,7 +72,16 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="widget-container" tabIndex={'-1'} id={'widget-container'}>
+      <div
+        className="widget-container"
+        // tabIndex={'-1'}
+        id={'widget-container'}
+        _reactinternal={this._inputRef1}
+        ref={this._inputRef1}
+      >
+        <link href="treecounterwidget.css" rel="stylesheet" />
+        <link href="${serverName}/treecounterwidget.css" rel="stylesheet" />
+        <style>{ReactTooltipStyle}</style>
         <div className="pftp-widget-row">
           <div className={'pftp-widget-img__container'}>
             {this.props.showGraphics && (

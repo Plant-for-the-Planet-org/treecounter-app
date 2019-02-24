@@ -6,6 +6,25 @@
 @import "../../stylesheet/treecounter.css";
 @import "../../stylesheet/layer.css";
 @import "../../stylesheet/common/text";
+.tooltip {
+  height: 25px;
+  width: 25px;
+  display: inline;
+  margin: 0;
+  margin-left: 5px;
+}
+
+.tooltip-text {
+  display: flex;
+}
+
+.__react_component_tooltip {
+  width: 200px;
+
+  @include for-phone-only {
+    width: 100px;
+  }
+}
 
 .pftp-button-secondary {
   width: 40%;
@@ -25,6 +44,7 @@
   justify-content: space-between;
 }
 .pftp-widget-img__container {
+  outline: none;
   flex: 10;
   height: 100%;
   display: flex;

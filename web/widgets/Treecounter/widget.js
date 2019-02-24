@@ -39,8 +39,15 @@ document.addEventListener('DOMContentLoaded', function() {
       let showGraphics = allBlockQuote[i].attributes.getNamedItem(
         'data-show-graphics'
       );
+      let showDonateButton = allBlockQuote[i].attributes.getNamedItem(
+        'data-show-donate-button'
+      );
+
       if (showGraphics && showGraphics.nodeValue === 'false') {
         showGraphics = false;
+      }
+      if (showDonateButton && showDonateButton.nodeValue === 'false') {
+        showDonateButton = false;
       }
 
       if (uid) {
@@ -61,7 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
               allBlockQuote[i]
             );
             ReactDOM.render(
-              <App treecounter={treecounter} showGraphics={showGraphics} />,
+              <App
+                treecounter={treecounter}
+                showGraphics={!!showGraphics}
+                showDonateButton={!!showDonateButton}
+              />,
               shadowRoot,
               () => (shadowRoot.innerHTML = cssStyle + shadowRoot.innerHTML)
             );

@@ -79,14 +79,16 @@ export default class App extends Component {
             )}
           </div>
 
-          <SecondaryButton
-            onClick={event => {
-              console.log('SecondaryButton', window, windows, this);
-              window.pftp.giftTree(event);
-            }}
-          >
-            Plant Trees
-          </SecondaryButton>
+          {this.props.showDonateButton && (
+            <SecondaryButton
+              onClick={event => {
+                console.log('SecondaryButton', window, windows, this);
+                window.pftp.giftTree(event);
+              }}
+            >
+              Plant Trees
+            </SecondaryButton>
+          )}
         </div>
 
         {/* <button
@@ -114,5 +116,6 @@ export default class App extends Component {
 
 App.propTypes = {
   showGraphics: PropTypes.bool,
-  treecounter: PropTypes.object
+  treecounter: PropTypes.object,
+  showDonateButton: PropTypes.bool
 };

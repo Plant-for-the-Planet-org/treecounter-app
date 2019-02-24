@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import TextSpan from '../Common/Text/TextSpan';
 import i18n from '../../locales/i18n.js';
+import { updateRoute } from '../../helpers/routerHelper';
 
 export default class ContributionCard extends React.Component {
   constructor(props) {
@@ -36,7 +37,89 @@ export default class ContributionCard extends React.Component {
     this.setState({
       viewExpanded: !this.state.viewExpanded
     });
+  treeCountLine(treeCount, treeSpecies) {
+    return treeCount + ' ' + (treeSpecies ? treeSpecies : '');
+  }
 
+  plantProjectLine(plantProjectName, country) {
+    return (plantProjectName ? plantProjectName + ', ' : '') + country;
+  }
+
+  donateActionLine(isGift, plantDate, givee, giveeSlug) {
+    return isGift
+      ? [
+          <TextSpan>{'Gifted on ' + plantDate + ' to '}</TextSpan>,
+          <TextSpan
+            onPress={() =>
+              updateRoute(getLocalRoute('app_treecounter'), {
+                treeCounterId: giveeSlug
+              })
+            }
+          >
+            {givee}
+          </TextSpan>
+        ]
+      : 'Donated on ' + plantDate;
+  }
+
+  tpoLine(tpoName) {
+    return tpoName ? 'Planted by ' + tpoName : '';
+  }
+
+  plantActionLine(plantDate, registrationDate) {
+    return 'Planted on ' + plantDate + ', Added on ' + registrationDate;
+  }
+
+  dedicateActionLine = (isGift, givee, giveeSlug) => {
+    return isGift
+      ? [
+          <TextSpan>Dedicated to</TextSpan>,
+          <TextSpan
+            onPress={() =>
+              updateRoute(getLocalRoute('app_treecounter'), {
+                treeCounterId: giveeSlug
+              })
+            }
+          >
+            {' ' + givee}
+          </TextSpan>
+        ]
+      : '';
+  };
+
+  redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
+    return redemptionCode && giver
+      ? [
+          <TextSpan>{'Given on ' + redemptionDate + ' by '}</TextSpan>,
+          <TextSpan
+            onPress={() =>
+              updateRoute(getLocalRoute('app_treecounter'), {
+                treeCounterId: giveeSlug
+              })
+            }
+          >
+            {givee}
+          </TextSpan>
+        ]
+      : redemptionCode
+        ? 'Redeemed on ' + redemptionDate
+        : 'Dedicated on ' +
+          redemptionDate +
+          (givee
+            ? [
+                <TextSpan>{' by '}</TextSpan>,
+                <TextSpan
+                  onPress={() =>
+                    updateRoute(getLocalRoute('app_treecounter'), {
+                      treeCounterId: giveeSlug
+                    })
+                  }
+                >
+                  {givee}
+                </TextSpan>
+              ]
+            : '');
+  }
   render() {
     let { contribution } = this.props;
     let imagesArray = contribution.contributionImages.map(image => {
@@ -45,6 +128,54 @@ export default class ContributionCard extends React.Component {
     let seeLabel = classnames('see-more-label-style', {
       'see-more__active': this.state.viewExpanded
     });
+    let {
+      treeCount,
+      treeSpecies,
+      plantProjectName,
+      country,
+      isGift,
+      plantDate,
+      givee,
+      giveeSlug,
+      tpoName,
+      mayUpdate,
+      cardType,
+      contributionType,
+      registrationDate,
+      redemptionCode,
+      redemptionDate
+    } = contribution;
+    // let imagesArray = contribution.contributionImages.map(image => {
+    //   return { src: getImageUrl('contribution', 'medium', image.image) };
+    // });
+    // let seeLabel = classnames('see-more-label-style', {
+    //   'see-more__active': this.state.viewExpanded
+    // });
+
+    let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
+    let plantProjectLine = this.plantProjectLine(plantProjectName, country);
+    let donateActionLine = this.donateActionLine(
+      isGift,
+      plantDate,
+      givee,
+      giveeSlug
+    );
+    let tpoLine = this.tpoLine(tpoName);
+    let plantActionLine = this.plantActionLine(plantDate, registrationDate);
+    let dedicateActionLine = this.dedicateActionLine(givee, giveeSlug);
+    let redeemActionLine = this.redeemActionLine(
+      redemptionCode,
+      redemptionDate,
+      givee,
+      giveeSlug
+    );
+    let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
+    let borderColor =
+      contributionType == 'donation'
+        ? '#95c243'
+        : treeCount > 1
+          ? '#68aeec'
+          : '#ec6453';
     return (
       <div>
         <div

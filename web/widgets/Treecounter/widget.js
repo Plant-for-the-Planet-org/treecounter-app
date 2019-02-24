@@ -39,10 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
       let showGraphics = allBlockQuote[i].attributes.getNamedItem(
         'data-show-graphics'
       );
-      if (showGraphics && showGraphics === 'false') {
+      if (showGraphics && showGraphics.nodeValue === 'false') {
         showGraphics = false;
       }
-      showGraphics = true;
+
       if (uid) {
         uid = isNaN(parseInt(uid.nodeValue))
           ? uid.nodeValue
@@ -60,18 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
               div,
               allBlockQuote[i]
             );
-            let svgData = {
-              id: treecounter.id,
-              target: treecounter.countTarget,
-              planted: treecounter.countPlanted,
-              community: parseInt(treecounter.countCommunity),
-              personal: treecounter.countPersonal,
-              targetComment: 'test',
-              targetYear: treecounter.targetYear,
-              type: treecounter.userProfile.type
-            };
             ReactDOM.render(
-              <App {...svgData} showGraphics />,
+              <App treecounter={treecounter} showGraphics={showGraphics} />,
               shadowRoot,
               () => (shadowRoot.innerHTML = cssStyle + shadowRoot.innerHTML)
             );

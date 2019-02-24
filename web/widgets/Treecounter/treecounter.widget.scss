@@ -1,11 +1,11 @@
 @import "../../stylesheet/variables";
 @import "../../stylesheet/mixin";
+@import "../../stylesheet/common/button";
+@import "../../stylesheet/arrow_button_rotatable";
 @import "../../stylesheet/home_svg";
 @import "../../stylesheet/treecounter.css";
 @import "../../stylesheet/layer.css";
 @import "../../stylesheet/common/text";
-@import "../../stylesheet/arrow_button_rotatable";
-@import "../../stylesheet/common/button";
 
 .pftp-button-secondary {
   width: 40%;
@@ -16,8 +16,19 @@
 .pftp-widget-img {
   align-self: flex-start;
   width: 30%;
+  flex-grow: 10;
 }
 .pftp-widget-row {
+  // margin-right: auto;
+  width: 100%;
   display: flex;
   justify-content: space-between;
+}
+.pftp-widget-img__container {
+  flex: 10;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
 }

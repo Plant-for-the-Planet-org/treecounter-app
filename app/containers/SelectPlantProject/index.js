@@ -18,10 +18,13 @@ class SelectPlantProjectContainer extends Component {
     this.props.fetchCurrencies();
   }
   render() {
-    console.log('select plant props', this.props);
+    //filter project only donatable
+    let plantProjects = this.props.plantProjects.filter(
+      project => project.allowDonations
+    );
     return (
       <SelectPlantProject
-        plantProjects={this.props.plantProjects}
+        plantProjects={plantProjects}
         selectProject={id => this.selectPlantProjectAction(id)}
         currencies={this.props.currencies}
         onMoreClick={id => this.onMoreClick(id)}

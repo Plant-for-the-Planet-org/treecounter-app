@@ -54,11 +54,13 @@ class TpoDonationPlantProjectSelector extends React.Component {
             currentPlantProjectId={this.state.currentPlantProjectId}
             onChange={this.onCarouselChange}
           />
-          <PrimaryButton
-            onClick={() => onSelect(this.state.currentPlantProjectId)}
-          >
-            {i18n.t('label.donate')}
-          </PrimaryButton>
+          {plantProjects[this.state.currentPlantProjectId].allowDonations ? (
+            <PrimaryButton
+              onClick={() => onSelect(this.state.currentPlantProjectId)}
+            >
+              {i18n.t('label.donate')}
+            </PrimaryButton>
+          ) : null}
         </div>
       </CardLayout>
     );

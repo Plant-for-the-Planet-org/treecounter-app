@@ -4,14 +4,14 @@ export default {
   properties: {
     token: {
       type: 'string',
-      title: 'token',
+      title: null,
       widget: 'hidden',
       icon: null,
       help: null,
       propertyOrder: 1
     },
     password: {
-      title: 'password',
+      title: null,
       type: 'object',
       properties: {
         first: {

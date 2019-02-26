@@ -11,7 +11,7 @@ export default {
       propertyOrder: 1
     },
     giftInvitation: {
-      title: 'giftInvitation',
+      title: null,
       type: 'object',
       properties: {
         firstname: {
@@ -89,13 +89,13 @@ export default {
     },
     recipientType: {
       type: 'string',
-      title: 'recipientType',
+      title: null,
       icon: null,
       help: null,
       propertyOrder: 8
     },
     receiptIndividual: {
-      title: 'receiptIndividual',
+      title: null,
       type: 'object',
       properties: {
         firstname: {
@@ -693,7 +693,7 @@ export default {
       propertyOrder: 9
     },
     receiptCompany: {
-      title: 'receiptCompany',
+      title: null,
       type: 'object',
       properties: {
         companyname: {

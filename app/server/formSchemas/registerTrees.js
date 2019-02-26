@@ -28,7 +28,7 @@ export default {
       },
       geoLocation: {
         type: 'string',
-        title: 'Geo Location',
+        title: 'label.geo_location',
         widget: 'map',
         icon: null,
         help: null,
@@ -69,7 +69,7 @@ export default {
       },
       treeScientificName: {
         type: 'string',
-        title: 'Tree Scientific Name',
+        title: 'label.tree_scientific_name',
         attr: { maxlength: 255 },
         icon: null,
         help: null,
@@ -78,7 +78,7 @@ export default {
       },
       contributionMeasurements: {
         type: 'array',
-        title: 'Add Measurements',
+        title: 'label.add_measurements',
         items: {
           title: 'prototype',
           type: 'object',
@@ -147,7 +147,7 @@ export default {
       },
       geoLocation: {
         type: 'string',
-        title: 'Geo Location',
+        title: 'label.geo_location',
         widget: 'map',
         icon: null,
         help: null,

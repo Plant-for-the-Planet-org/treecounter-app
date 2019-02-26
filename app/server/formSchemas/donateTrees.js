@@ -35,13 +35,13 @@ export default {
     },
     recipientType: {
       type: 'string',
-      title: 'recipientType',
+      title: null,
       icon: null,
       help: null,
       propertyOrder: 5
     },
     receiptIndividual: {
-      title: 'receiptIndividual',
+      title: null,
       type: 'object',
       properties: {
         firstname: {
@@ -639,7 +639,7 @@ export default {
       propertyOrder: 6
     },
     receiptCompany: {
-      title: 'receiptCompany',
+      title: null,
       type: 'object',
       properties: {
         companyname: {

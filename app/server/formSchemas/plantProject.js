@@ -245,7 +245,7 @@ export default {
     },
     location: {
       type: 'string',
-      title: 'Location',
+      title: 'label.location',
       widget: 'textarea',
       icon: null,
       help: null,
@@ -253,7 +253,7 @@ export default {
     },
     geoLocation: {
       type: 'string',
-      title: 'Geo Location',
+      title: 'label.geo_location',
       widget: 'map',
       icon: null,
       help: null,
@@ -300,7 +300,7 @@ export default {
           },
           description: {
             type: 'string',
-            title: 'description',
+            title: null,
             widget: 'textarea',
             icon: null,
             help: null,
@@ -308,7 +308,7 @@ export default {
           },
           id: {
             type: 'number',
-            title: 'id',
+            title: null,
             widget: 'hidden',
             icon: null,
             help: null,

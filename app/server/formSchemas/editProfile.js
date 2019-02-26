@@ -670,7 +670,7 @@ export default {
             propertyOrder: 1
           },
           password: {
-            title: 'password',
+            title: null,
             type: 'object',
             properties: {
               first: {
@@ -1401,7 +1401,7 @@ export default {
             propertyOrder: 1
           },
           password: {
-            title: 'password',
+            title: null,
             type: 'object',
             properties: {
               first: {
@@ -1454,7 +1454,7 @@ export default {
             enum: ['company-other'],
             enum_titles: ['Other'],
             type: 'string',
-            title: 'subType',
+            title: null,
             icon: null,
             help: null,
             propertyOrder: 2
@@ -2114,7 +2114,7 @@ export default {
             propertyOrder: 1
           },
           password: {
-            title: 'password',
+            title: null,
             type: 'object',
             properties: {
               first: {
@@ -2172,7 +2172,7 @@ export default {
             ],
             enum_titles: ['Primary', 'Secondary', 'Higher', 'Other'],
             type: 'string',
-            title: 'subType',
+            title: null,
             icon: null,
             help: null,
             propertyOrder: 2
@@ -2832,7 +2832,7 @@ export default {
             propertyOrder: 1
           },
           password: {
-            title: 'password',
+            title: null,
             type: 'object',
             properties: {
               first: {
@@ -2890,7 +2890,7 @@ export default {
               'Other'
             ],
             type: 'string',
-            title: 'subType',
+            title: null,
             icon: null,
             help: null,
             propertyOrder: 2
@@ -3550,7 +3550,7 @@ export default {
             propertyOrder: 1
           },
           password: {
-            title: 'password',
+            title: null,
             type: 'object',
             properties: {
               first: {
@@ -3603,7 +3603,7 @@ export default {
             enum: ['government-city', 'government-state', 'government-country'],
             enum_titles: ['City', 'State', 'Country'],
             type: 'string',
-            title: 'subType',
+            title: null,
             icon: null,
             help: null,
             propertyOrder: 2
@@ -4263,7 +4263,7 @@ export default {
             propertyOrder: 1
           },
           password: {
-            title: 'password',
+            title: null,
             type: 'object',
             properties: {
               first: {

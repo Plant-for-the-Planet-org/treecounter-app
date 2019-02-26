@@ -572,7 +572,7 @@ export default {
         propertyOrder: 6
       },
       password: {
-        title: 'password',
+        title: null,
         type: 'object',
         properties: {
           first: {
@@ -1181,7 +1181,7 @@ export default {
         propertyOrder: 4
       },
       password: {
-        title: 'password',
+        title: null,
         type: 'object',
         properties: {
           first: {
@@ -1244,7 +1244,7 @@ export default {
         enum: ['company-other'],
         enum_titles: ['Other'],
         type: 'string',
-        title: 'subType',
+        title: null,
         icon: null,
         help: null,
         propertyOrder: 2
@@ -1782,7 +1782,7 @@ export default {
         propertyOrder: 4
       },
       password: {
-        title: 'password',
+        title: null,
         type: 'object',
         properties: {
           first: {
@@ -1850,7 +1850,7 @@ export default {
         ],
         enum_titles: ['Primary', 'Secondary', 'Higher', 'Other'],
         type: 'string',
-        title: 'subType',
+        title: null,
         icon: null,
         help: null,
         propertyOrder: 2
@@ -2388,7 +2388,7 @@ export default {
         propertyOrder: 4
       },
       password: {
-        title: 'password',
+        title: null,
         type: 'object',
         properties: {
           first: {
@@ -2451,7 +2451,7 @@ export default {
         enum: ['0', '1', '2', '3'],
         enum_titles: ['Non Profit', 'Service Club', 'Political Party', 'Other'],
         type: 'string',
-        title: 'subType',
+        title: null,
         icon: null,
         help: null,
         propertyOrder: 2
@@ -2989,7 +2989,7 @@ export default {
         propertyOrder: 4
       },
       password: {
-        title: 'password',
+        title: null,
         type: 'object',
         properties: {
           first: {
@@ -3052,7 +3052,7 @@ export default {
         enum: ['government-city', 'government-state', 'government-country'],
         enum_titles: ['City', 'State', 'Country'],
         type: 'string',
-        title: 'subType',
+        title: null,
         icon: null,
         help: null,
         propertyOrder: 2
@@ -3590,7 +3590,7 @@ export default {
         propertyOrder: 4
       },
       password: {
-        title: 'password',
+        title: null,
         type: 'object',
         properties: {
           first: {

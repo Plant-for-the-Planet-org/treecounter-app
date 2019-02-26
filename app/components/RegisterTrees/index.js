@@ -108,9 +108,11 @@ export default class RegisterTrees extends Component {
 
   updateTemplate(template, plantProjects, formSchema) {
     let newFormSchema = Object.assign({}, formSchema);
-    newFormSchema.fields.plantProject.template = getSelectTemplate(
-      plantProjects
-    );
+    if (plantProjects) {
+      newFormSchema.fields.plantProject.template = getSelectTemplate(
+        plantProjects
+      );
+    }
     newFormSchema = { template, ...newFormSchema };
     return newFormSchema;
   }
@@ -133,6 +135,10 @@ export default class RegisterTrees extends Component {
     const tpoPlantProjects = getPlantProjectEnum(this.props.currentUserProfile);
     const isSingleTree = this.state.mode === RegisterTrees.data.tabs[0].id;
 
+    const template = isSingleTree
+      ? getSingleTreeLayout(this.props)
+      : getMultipleTreeLayout(this.props);
+
     let formSchemaOptions = isSingleTree
       ? this.props.schemaOptionsSingleTree
       : this.props.schemaOptionsMultipleTrees;
@@ -141,15 +147,12 @@ export default class RegisterTrees extends Component {
       tpoPlantProjects &&
       tpoPlantProjects.length > 0 &&
       tpoPlantProjects[0].value;
-    if (plantProject) {
-      formSchemaOptions = this.updateTemplate(
-        isSingleTree
-          ? getSingleTreeLayout(this.props)
-          : getMultipleTreeLayout(this.props),
-        tpoPlantProjects,
-        formSchemaOptions
-      );
-    }
+
+    formSchemaOptions = this.updateTemplate(
+      template,
+      tpoPlantProjects,
+      formSchemaOptions
+    );
 
     return (
       <div className="app-container__content--center sidenav-wrapper">

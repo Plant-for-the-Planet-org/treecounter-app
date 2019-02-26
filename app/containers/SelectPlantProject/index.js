@@ -6,7 +6,8 @@ import { updateRoute } from '../../helpers/routerHelper';
 
 import {
   getAllPlantProjectsSelector,
-  currenciesSelector
+  currenciesSelector,
+  sortedUserContributionsSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import SelectPlantProject from '../../components/SelectPlantProject';
@@ -14,6 +15,40 @@ import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper.nativ
 import { fetchCurrencies } from '../../actions/currencies';
 
 class SelectPlantProjectContainer extends Component {
+  componentWillMount() {
+    let plantProjects = this.props.plantProjects.filter(
+      project => project.allowDonations
+    );
+    let userPreviousDonations = this.props.userSortedContributions.filter(
+      project => project.contributionType === 'donation'
+    );
+    if (userPreviousDonations.length > 0) {
+      let selectedProject = plantProjects.filter(
+        project => project.id === userPreviousDonations[0].plantProjectId
+      );
+      if (selectedProject.length > 0) {
+        this.selectPlantProjectAction(selectedProject[0].id);
+      }
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let plantProjects = nextProps.plantProjects.filter(
+      project => project.allowDonations
+    );
+    let userPreviousDonations = nextProps.userSortedContributions.filter(
+      project => project.contributionType === 'donation'
+    );
+    if (userPreviousDonations.length > 0) {
+      let selectedProject = plantProjects.filter(
+        project => project.id === userPreviousDonations[0].plantProjectId
+      );
+      if (selectedProject.length > 0) {
+        this.selectPlantProjectAction(selectedProject[0].id);
+      }
+    }
+  }
+
   componentDidMount() {
     this.props.fetchCurrencies();
   }
@@ -58,6 +93,7 @@ class SelectPlantProjectContainer extends Component {
 
 const mapStateToProps = state => ({
   plantProjects: getAllPlantProjectsSelector(state),
+  userSortedContributions: sortedUserContributionsSelector(state),
   currencies: currenciesSelector(state)
 });
 
@@ -74,6 +110,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 SelectPlantProjectContainer.propTypes = {
   plantProjects: PropTypes.array,
+  userSortedContributions: PropTypes.array,
   currencies: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
   navigation: PropTypes.any,

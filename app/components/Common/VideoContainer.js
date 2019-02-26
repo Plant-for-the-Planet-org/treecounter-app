@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import YouTube from 'react-youtube';
+import ModalDialog from './ModalDialog';
 
 class VideoContainer extends React.Component {
   constructor(props) {
@@ -31,9 +32,14 @@ class VideoContainer extends React.Component {
   render() {
     if (this.state.videoId) {
       return (
-        <div className="youtube-video__container">
-          <YouTube videoId={this.state.videoId} onReady={this._onReady} />
-        </div>
+        <ModalDialog
+          isOpen={this.props.isOpen}
+          onRequestClose={this.props.onRequestClose}
+        >
+          <div className="youtube-video__container">
+            <YouTube videoId={this.state.videoId} onReady={this._onReady} />
+          </div>
+        </ModalDialog>
       );
     }
     return null;
@@ -41,7 +47,9 @@ class VideoContainer extends React.Component {
 }
 
 VideoContainer.propTypes = {
-  url: PropTypes.string
+  url: PropTypes.string,
+  isOpen: PropTypes.bool,
+  onRequestClose: PropTypes.func
 };
 
 export default VideoContainer;

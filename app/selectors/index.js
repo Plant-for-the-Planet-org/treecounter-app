@@ -126,7 +126,6 @@ export const userContributionsSelector = createSelector(
 export const userGiftsSelector = createSelector(
   userTreecounterSelector,
   userTreecounter => {
-    logSelectorUpdate('userContributionsSelector');
     return null === userTreecounter ? null : userTreecounter.gifts;
   }
 );
@@ -137,7 +136,6 @@ export const sortedUserContributionsSelector = createSelector(
   userContributionsSelector,
   userGiftsSelector,
   (contributions, gifts) => {
-    console.log(contributions, gifts);
     let newContributions = [];
     if (contributions !== null && gifts !== null) {
       for (let i = 0; i < contributions.length; i++) {
@@ -149,16 +147,20 @@ export const sortedUserContributionsSelector = createSelector(
         newContributions.push(gifts[i]);
       }
     }
-    logSelectorUpdate('sortedUserContributionsSelector');
-    return null === contributions
-      ? []
-      : null === gifts
-        ? contributions.sort(
-            (c1, c2) => Date.parse(c2.plantDate) - Date.parse(c1.plantDate)
-          )
-        : newContributions.sort(
-            (c1, c2) => Date.parse(c2.plantDate) - Date.parse(c1.plantDate)
-          );
+
+    let returnContributions = [];
+    if (null !== contributions) {
+      if (null === gifts) {
+        returnContributions = contributions.sort(
+          (c1, c2) => Date.parse(c2.plantDate) - Date.parse(c1.plantDate)
+        );
+      } else {
+        returnContributions = newContributions.sort(
+          (c1, c2) => Date.parse(c2.plantDate) - Date.parse(c1.plantDate)
+        );
+      }
+    }
+    return returnContributions;
   }
 );
 

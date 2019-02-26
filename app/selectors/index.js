@@ -120,17 +120,45 @@ export const userContributionsSelector = createSelector(
 );
 
 /**
+ * Returns the current user's de-normalized gifts or null
+ * TODO: analyze whether return value null should be replace by empty array
+ */
+export const userGiftsSelector = createSelector(
+  userTreecounterSelector,
+  userTreecounter => {
+    logSelectorUpdate('userContributionsSelector');
+    return null === userTreecounter ? null : userTreecounter.gifts;
+  }
+);
+/**
  * Returns the contributions associated with the current user's treecounter sorted by date or null
  */
 export const sortedUserContributionsSelector = createSelector(
   userContributionsSelector,
-  contributions => {
+  userGiftsSelector,
+  (contributions, gifts) => {
+    console.log(contributions, gifts);
+    let newContributions = [];
+    if (contributions !== null && gifts !== null) {
+      for (let i = 0; i < contributions.length; i++) {
+        contributions[i].category = 'contributions';
+        newContributions.push(contributions[i]);
+      }
+      for (let i = 0; i < gifts.length; i++) {
+        gifts[i].category = 'gifts';
+        newContributions.push(gifts[i]);
+      }
+    }
     logSelectorUpdate('sortedUserContributionsSelector');
     return null === contributions
       ? []
-      : contributions.sort(
-          (c1, c2) => Date.parse(c2.plantDate) - Date.parse(c1.plantDate)
-        );
+      : null === gifts
+        ? contributions.sort(
+            (c1, c2) => Date.parse(c2.plantDate) - Date.parse(c1.plantDate)
+          )
+        : newContributions.sort(
+            (c1, c2) => Date.parse(c2.plantDate) - Date.parse(c1.plantDate)
+          );
   }
 );
 

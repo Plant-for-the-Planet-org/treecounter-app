@@ -54,12 +54,12 @@ document.addEventListener('DOMContentLoaded', function() {
           : parseInt(uid.nodeValue);
         getRequest('treecounter_get', { uid })
           .then(result => {
+            document.registerElement('pftp-widget-treecounter');
             const treecounter = result.data;
-            const header = document.createElement('header');
 
-            let div = document.createElement('div');
+            let div = document.createElement('pftp-widget-treecounter');
             div.className = 'pftp-widget-tree-counter-container';
-            const shadowRoot = div.attachShadow({ mode: 'open' });
+            const shadowRoot = div.attachShadow({ mode: 'closed' });
             const newDivNode = allBlockQuote[i].parentNode.insertBefore(
               div,
               allBlockQuote[i]

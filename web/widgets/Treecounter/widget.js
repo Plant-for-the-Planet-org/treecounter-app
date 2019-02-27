@@ -7,7 +7,7 @@ import { getApiRoute } from '../../../app/actions/apiRouting';
 import axios from 'axios';
 import { context } from '../../../app/config';
 import './treecounter.widget.scss';
-import retargetEvents from 'react-shadow-dom-retarget-events';
+// import retargetEvents from 'react-shadow-dom-retarget-events';
 const { scheme, host, base: baseUrl } = context;
 
 const serverName = `${scheme}://${host}`;
@@ -70,20 +70,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 treecounter={treecounter}
                 showGraphics={!!showGraphics}
                 showDonateButton={!!showDonateButton}
+                serverName={serverName}
+                baseUrl={baseUrl}
               />,
               shadowRoot
             );
             retargetEvents(shadowRoot);
             allBlockQuote[i].parentNode.removeChild(allBlockQuote[i]);
-            window.pftp = {
-              giftTree: event => {
-                console.log(event);
-                const uid = event.target.id;
-                const url = `${serverName}${baseUrl}/giftTrees?uid=${uid}`;
-                console.log(serverName);
-                window.open(url, '_blank');
-              }
-            };
           })
           .catch(error => {
             console.log(error, 'name');

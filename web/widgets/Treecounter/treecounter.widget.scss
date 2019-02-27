@@ -31,6 +31,9 @@
   align-self: flex-end;
   margin-right: 20px;
   outline: none;
+  @include for-phone-only {
+    font-size: 14px;
+  }
 }
 .pftp-widget-img {
   align-self: flex-start;

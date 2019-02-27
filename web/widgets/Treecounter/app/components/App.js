@@ -5,6 +5,8 @@ import SecondaryButton from '../../../../../app/components/Common/Button/Seconda
 import { SideMenuImage } from '../../../../../app/assets';
 import PropTypes from 'prop-types';
 import ReactTooltipStyle from '../../../../../node_modules/react-tooltip/dist/style';
+import i18n from '../../../../../app/locales/i18n.js';
+import { getLocalRoute } from '../../../../../app/actions/apiRouting';
 
 export default class App extends Component {
   constructor(props) {
@@ -71,6 +73,7 @@ export default class App extends Component {
   }
 
   render() {
+    const { serverName, baseUrl, treecounter } = this.props;
     return (
       <div
         className="widget-container"
@@ -80,7 +83,7 @@ export default class App extends Component {
         ref={this._inputRef1}
       >
         <link href="treecounterwidget.css" rel="stylesheet" />
-        <link href="${serverName}/treecounterwidget.css" rel="stylesheet" />
+        <link href={`${serverName}/treecounterwidget.css" rel="stylesheet"`} />
         <style>{ReactTooltipStyle}</style>
         <div className="pftp-widget-row">
           <div className={'pftp-widget-img__container'}>
@@ -93,24 +96,16 @@ export default class App extends Component {
             <SecondaryButton
               onClick={event => {
                 console.log('SecondaryButton', window, windows, this);
-                window.pftp.giftTree(event);
+                const url = `${serverName}/${getLocalRoute(
+                  'app_registerTrees'
+                )}?uid=${treecounter.id}`;
+                window.open(url, '_blank');
               }}
             >
-              Plant Trees
+              {i18n.t('label.plant_trees')}
             </SecondaryButton>
           )}
         </div>
-
-        {/* <button
-          className="pftp-button-secondary"
-          type="button"
-          onClick={event => {
-            console.log('SecondaryButton', window, windows, this);
-            window.pftp.giftTree(event);
-          }}
-        >
-          Plant Trees
-        </button> */}
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />
           <TreecounterGraphicsText
@@ -127,5 +122,7 @@ export default class App extends Component {
 App.propTypes = {
   showGraphics: PropTypes.bool,
   treecounter: PropTypes.object,
-  showDonateButton: PropTypes.bool
+  showDonateButton: PropTypes.bool,
+  serverName: PropTypes.string,
+  baseUrl: PropTypes.string
 };

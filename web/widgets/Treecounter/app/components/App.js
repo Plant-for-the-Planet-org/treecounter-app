@@ -74,6 +74,9 @@ export default class App extends Component {
 
   render() {
     const { serverName, baseUrl, treecounter } = this.props;
+    const style = `.canvasContainer {
+      background-color:${this.props.backgroundColor};
+    }`;
     return (
       <div
         className="widget-container"
@@ -84,6 +87,7 @@ export default class App extends Component {
       >
         <link href="treecounterwidget.css" rel="stylesheet" />
         <link href={`${serverName}/treecounterwidget.css" rel="stylesheet"`} />
+        <style>{style}</style>
         <style>{ReactTooltipStyle}</style>
         <div className="pftp-widget-row">
           <div className={'pftp-widget-img__container'}>
@@ -124,5 +128,6 @@ App.propTypes = {
   treecounter: PropTypes.object,
   showDonateButton: PropTypes.bool,
   serverName: PropTypes.string,
-  baseUrl: PropTypes.string
+  baseUrl: PropTypes.string,
+  backgroundColor: PropTypes.string
 };

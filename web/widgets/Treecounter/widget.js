@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', function() {
       let showDonateButton = allBlockQuote[i].attributes.getNamedItem(
         'data-show-donate-button'
       );
+      let backgroundColor = allBlockQuote[i].attributes.getNamedItem(
+        'data-background-color'
+      );
 
       if (showGraphics && showGraphics.nodeValue === 'false') {
         showGraphics = false;
@@ -47,7 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (showDonateButton && showDonateButton.nodeValue === 'false') {
         showDonateButton = false;
       }
-
+      if (backgroundColor && backgroundColor.nodeValue) {
+        backgroundColor = backgroundColor.nodeValue;
+      }
       if (uid) {
         uid = isNaN(parseInt(uid.nodeValue))
           ? uid.nodeValue
@@ -72,10 +77,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 showDonateButton={!!showDonateButton}
                 serverName={serverName}
                 baseUrl={baseUrl}
+                backgroundColor={backgroundColor}
               />,
               shadowRoot
             );
-            retargetEvents(shadowRoot);
             allBlockQuote[i].parentNode.removeChild(allBlockQuote[i]);
           })
           .catch(error => {

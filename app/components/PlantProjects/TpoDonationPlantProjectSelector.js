@@ -37,6 +37,7 @@ class TpoDonationPlantProjectSelector extends React.Component {
 
   render() {
     const { plantProjects, onSelect, tpoName } = this.props;
+    let state = this.state;
     const caption =
       plantProjects.length === 1
         ? i18n.t('label.plant_project')
@@ -54,7 +55,9 @@ class TpoDonationPlantProjectSelector extends React.Component {
             currentPlantProjectId={this.state.currentPlantProjectId}
             onChange={this.onCarouselChange}
           />
-          {plantProjects[this.state.currentPlantProjectId].allowDonations ? (
+          {plantProjects.filter(
+            project => project.id === state.currentPlantProjectId
+          )[0].allowDonations ? (
             <PrimaryButton
               onClick={() => onSelect(this.state.currentPlantProjectId)}
             >

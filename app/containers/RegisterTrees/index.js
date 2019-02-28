@@ -22,31 +22,6 @@ class RegisterTreesContainer extends Component {
       schemaOptionsMultipleTrees: schemaOptionsMultipleTrees
     };
   }
-
-  updateTemplateSingle(template, plantProjects) {
-    this.state.schemaOptionsSingleTree.fields.plantProject.template = getSelectTemplate(
-      plantProjects
-    );
-    this.setState({
-      schemaOptionsSingleTree: {
-        template,
-        ...schemaOptionsSingleTree
-      }
-    });
-  }
-
-  updateTemplateMultiple(template, plantProjects) {
-    this.state.schemaOptionsMultipleTrees.fields.plantProject.template = getSelectTemplate(
-      plantProjects
-    );
-    this.setState({
-      schemaOptionsMultipleTrees: {
-        template,
-        ...schemaOptionsMultipleTrees
-      }
-    });
-  }
-
   onSubmit = (mode, registerTreeForm) => {
     registerTreeForm =
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
@@ -107,8 +82,6 @@ class RegisterTreesContainer extends Component {
         schemaOptionsSingleTree={this.state.schemaOptionsSingleTree}
         schemaOptionsMultipleTrees={this.state.schemaOptionsMultipleTrees}
         currentUserProfile={this.props.currentUserProfile}
-        updateTemplateSingle={this.updateTemplateSingle}
-        updateTemplateMultiple={this.updateTemplateMultiple}
       />
     );
   }

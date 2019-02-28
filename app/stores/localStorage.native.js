@@ -37,7 +37,7 @@ export const fetchItem = async key => {
 
 export const clearStorage = async () => {
   const welcomeKey = await fetchItem('welcome');
-  console.log(welcomeKey);
+  //console.log(welcomeKey);
   await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
   saveItem('welcome', welcomeKey);
 };

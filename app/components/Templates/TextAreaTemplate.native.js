@@ -33,7 +33,7 @@ export function TextAreaTemplate(locals) {
           placeholder={i18n.t(locals.placeholder)}
           keyboardType={locals.keyboardType}
           maxLength={locals.maxLength}
-          multiline={6}
+          multiline={true}
           value={locals.value}
           onChangeText={value => locals.onChange(value)}
           onChange={locals.onChangeNative}

@@ -13,7 +13,7 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
     transformedSchema: currencySelectorFormSchema
   } = getFormSchema(currencies);
 
-  console.log('selectedCurrency', schemaOptions);
+  //console.log('selectedCurrency', schemaOptions);
   return (
     <View style={styles.containerStyle}>
       <Form

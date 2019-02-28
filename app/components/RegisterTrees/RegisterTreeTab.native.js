@@ -5,6 +5,7 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/register_trees.native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const Form = t.form.Form;
 
 getFormLayoutTemplate = (mode, isTpo) => {
@@ -47,27 +48,29 @@ export default class RegisterTreeTab extends PureComponent {
       ...this.props.schemaOptions
     };
     return (
-      <View style={{ backgroundColor: '#ffffff' }}>
-        <Form
-          ref="multipleTreesForm"
-          type={this.props.schemaType}
-          options={schemaOptionsMultiple}
-          value={this.props.value ? this.props.value : { treeCount: 1 }}
-        />
-        <PrimaryButton
-          onClick={() => {
-            this.props.onRegister &&
-              this.props.onRegister(
-                this.props.mode,
-                this.refs.multipleTreesForm
-              );
-          }}
-        >
-          {this.props.buttonTitle
-            ? this.props.buttonTitle
-            : i18n.t('label.register')}
-        </PrimaryButton>
-      </View>
+      <KeyboardAwareScrollView enableOnAndroid={true}>
+        <View style={{ backgroundColor: '#ffffff' }}>
+          <Form
+            ref="multipleTreesForm"
+            type={this.props.schemaType}
+            options={schemaOptionsMultiple}
+            value={this.props.value ? this.props.value : { treeCount: 1 }}
+          />
+          <PrimaryButton
+            onClick={() => {
+              this.props.onRegister &&
+                this.props.onRegister(
+                  this.props.mode,
+                  this.refs.multipleTreesForm
+                );
+            }}
+          >
+            {this.props.buttonTitle
+              ? this.props.buttonTitle
+              : i18n.t('label.register')}
+          </PrimaryButton>
+        </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

@@ -190,7 +190,7 @@ export default class Redemption extends Component {
       </View>
     ) : (
       <View style={{ flex: 1 }}>
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView enableOnAndroid={true}>
           <View style={styles.parentContainer}>
             <View style={styles.headerContainer}>
               <Text style={styles.titleText}>

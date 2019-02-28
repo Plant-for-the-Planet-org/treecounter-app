@@ -1,4 +1,5 @@
-import schemaLiform, { plantProject } from '../formSchemas/editProfile';
+import plantProject from '../formSchemas/plantProject';
+import schemaLiform from '../formSchemas/editProfile';
 import PlantProjectImageListTemplate from '../../components/EditUserProfile/PlantProjectImageListTemplate.js';
 
 import callParser from '../callParser';
@@ -22,7 +23,7 @@ const config = {
     }
   }
 };
-const plantProjectSchema = callParser(plantProject.schema, config);
+const plantProjectSchema = callParser(plantProject, config);
 
 // {
 //   plantProjects: {

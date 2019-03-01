@@ -24,6 +24,13 @@ export async function getRequest(route, params) {
     });
 }
 
+class TreeCounterWidget extends HTMLElement {
+  constructor() {
+    // Always call super first in constructor
+    super();
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   let allBlockQuote = document.getElementsByTagName('blockquote');
   for (let i = 0; i < allBlockQuote.length; i++) {
@@ -59,7 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
           : parseInt(uid.nodeValue);
         getRequest('treecounter_get', { uid })
           .then(result => {
-            document.registerElement('pftp-widget-treecounter');
+            let customElementRegistry = window.customElements;
+
+            customElementRegistry.define(
+              'pftp-widget-treecounter',
+              TreeCounterWidget
+            );
             const treecounter = result.data;
 
             let div = document.createElement('pftp-widget-treecounter');

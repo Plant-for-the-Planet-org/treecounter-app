@@ -29,16 +29,17 @@
 
 .pftp-button-secondary {
   width: 40%;
-  align-self: flex-end;
+  align-self: center;
   margin-right: 20px;
   outline: none;
+  margin-top: 0;
   @include for-phone-only {
     font-size: 14px;
   }
 }
 .pftp-widget-img {
   align-self: flex-start;
-  width: 30%;
+  width: 50%;
   flex-grow: 10;
 }
 .pftp-widget-row {
@@ -46,6 +47,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 }
 .pftp-widget-img__container {
   outline: none;

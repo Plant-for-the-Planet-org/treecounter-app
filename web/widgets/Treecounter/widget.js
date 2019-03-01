@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const treecounter = result.data;
 
             let div = document.createElement('pftp-widget-treecounter');
-            div.className = 'pftp-widget-tree-counter-container';
             const shadowRoot = div.attachShadow({ mode: 'closed' });
             const newDivNode = allBlockQuote[i].parentNode.insertBefore(
               div,

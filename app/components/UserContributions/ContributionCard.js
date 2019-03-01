@@ -45,11 +45,7 @@ export default class ContributionCard extends React.Component {
     let seeLabel = classnames('see-more-label-style', {
       'see-more__active': this.state.viewExpanded
     });
-    let treeSpecies =
-      contribution.treeSpecies !== null &&
-      contribution.treeSpecies !== undefined
-        ? contribution.treeSpecies
-        : '';
+    let treeSpecies = contribution.treeSpecies ? contribution.treeSpecies : '';
     return (
       <div>
         <div

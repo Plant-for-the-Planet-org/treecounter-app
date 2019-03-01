@@ -78,47 +78,57 @@ export default class App extends Component {
       background-color:${this.props.backgroundColor};
     }`;
     return (
-      <div
-        className="widget-container"
-        // tabIndex={'-1'}
-        id={'widget-container'}
-        _reactinternal={this._inputRef1}
-        ref={this._inputRef1}
-      >
-        <link href="treecounterwidget.css" rel="stylesheet" />
-        <link href={`${serverName}/treecounterwidget.css" rel="stylesheet"`} />
-        <style>{style}</style>
-        <style>{ReactTooltipStyle}</style>
-        <div className="pftp-widget-row">
-          <div className={'pftp-widget-img__container'}>
-            {this.props.showGraphics && (
-              <img src={SideMenuImage} className={'pftp-widget-img'} />
+      <React.Fragment>
+        {/* Scoped CSS: CSS defined inside shadow DOM is scoped
+        to it. Style rules don't leak out and page styles don't bleed in. */}
+        {/* Simplifies CSS - Scoped DOM means you can use simple CSS selectors,
+        more generic id/class names, and not worry about naming conflicts. */}
+        {/* Reset inherited CSS  */}
+        {/* why? */}
+
+        {/*Inherited properties will be inherited as usual. It's better to think of the shadow
+          boundary as affecting the cascade, namely the scope of selectors and the importance of rules. */}
+        <style>{`:host {all: initial;}`}</style>
+        <div className="widget-container" id={'widget-container'}>
+          <link href="treecounterwidget.css" rel="stylesheet" />
+          <link
+            href={`${serverName}/treecounterwidget.css" rel="stylesheet"`}
+          />
+          {/* Apply CSS hooks here */}
+          <style>{style}</style>
+          {/* Apply React Tooltip Libarary CSS */}
+          <style>{ReactTooltipStyle}</style>
+          <div className="pftp-widget-row">
+            <div className={'pftp-widget-img__container'}>
+              {this.props.showGraphics && (
+                <img src={SideMenuImage} className={'pftp-widget-img'} />
+              )}
+            </div>
+
+            {this.props.showDonateButton && (
+              <SecondaryButton
+                onClick={event => {
+                  console.log('SecondaryButton', window, windows, this);
+                  const url = `${serverName}/${getLocalRoute(
+                    'app_registerTrees'
+                  )}?uid=${treecounter.id}`;
+                  window.open(url, '_blank');
+                }}
+              >
+                {i18n.t('label.plant_trees')}
+              </SecondaryButton>
             )}
           </div>
-
-          {this.props.showDonateButton && (
-            <SecondaryButton
-              onClick={event => {
-                console.log('SecondaryButton', window, windows, this);
-                const url = `${serverName}/${getLocalRoute(
-                  'app_registerTrees'
-                )}?uid=${treecounter.id}`;
-                window.open(url, '_blank');
-              }}
-            >
-              {i18n.t('label.plant_trees')}
-            </SecondaryButton>
-          )}
+          <div className="canvasContainer flex-column">
+            <SvgContainer {...this.state.svgData} />
+            <TreecounterGraphicsText
+              trillion={false}
+              onToggle={toggleVal => this.updateSvg(toggleVal)}
+              treecounterData={this.state.svgData}
+            />
+          </div>
         </div>
-        <div className="canvasContainer flex-column">
-          <SvgContainer {...this.state.svgData} />
-          <TreecounterGraphicsText
-            trillion={false}
-            onToggle={toggleVal => this.updateSvg(toggleVal)}
-            treecounterData={this.state.svgData}
-          />
-        </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

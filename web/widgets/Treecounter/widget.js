@@ -7,9 +7,10 @@ import { getApiRoute } from '../../../app/actions/apiRouting';
 import axios from 'axios';
 import { context } from '../../../app/config';
 import './treecounter.widget.scss';
-// import retargetEvents from 'react-shadow-dom-retarget-events';
+// import native Shim to compile ES6 class as it is
+import './native-shim';
+import PFTPWidgetTreeCounter from './PFTPNativeTreeCounterWidget';
 const { scheme, host, base: baseUrl } = context;
-
 const serverName = `${scheme}://${host}`;
 
 export async function getRequest(route, params) {
@@ -22,13 +23,6 @@ export async function getRequest(route, params) {
     .catch(error => {
       return error;
     });
-}
-
-class TreeCounterWidget extends HTMLElement {
-  constructor() {
-    // Always call super first in constructor
-    super();
-  }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -66,11 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
           : parseInt(uid.nodeValue);
         getRequest('treecounter_get', { uid })
           .then(result => {
+            if (!result.data) {
+              return;
+            }
             let customElementRegistry = window.customElements;
-
+            //Register New Custom element in DOM
             customElementRegistry.define(
               'pftp-widget-treecounter',
-              TreeCounterWidget
+              PFTPWidgetTreeCounter
             );
             const treecounter = result.data;
 

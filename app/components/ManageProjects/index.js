@@ -8,6 +8,9 @@ import { plantProjectSchema } from '../../server/parsedSchemas/editProfile';
 import PlantProjectTemplate from '../EditUserProfile/PlantProjectTemplate';
 import { EditOrange, close_green, MapPinRed } from '../../assets';
 import _ from 'lodash';
+import TextHeading from '../Common/Heading/TextHeading';
+import DescriptionHeading from '../Common/Heading/DescriptionHeading';
+import CardLayout from '../Common/Card';
 
 let TCombForm = t.form.Form;
 const emptyProjectInfo = {
@@ -252,22 +255,36 @@ export default class ManageProjects extends Component {
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
         {type == 'tpo' ? (
-          <div className="manage-project-container">
-            <div className="project-list-container plant-project__container edit-user-profile__container">
-              {this.getPlantProjectList()}
+          <React.Fragment>
+            <TextHeading>
+              {'My Dashboard'}
+              <DescriptionHeading>
+                {
+                  "You can manage your plant projects, and view donations you've received"
+                }
+              </DescriptionHeading>
+            </TextHeading>
+            <div className="manage-project-container">
+              <div className="project-list-container plant-project__container edit-user-profile__container">
+                {this.getPlantProjectList()}
 
-              <div className="pftp-addbutton">
-                <button
-                  onClick={() => {
-                    this.handleAddNewProject();
-                  }}
-                >
-                  +&nbsp;{i18n.t('label.new_project')}
-                </button>
+                <div className="pftp-addbutton">
+                  <button
+                    onClick={() => {
+                      this.handleAddNewProject();
+                    }}
+                  >
+                    +&nbsp;{i18n.t('label.new_project')}
+                  </button>
+                </div>
+              </div>
+              <div className="donation-info-list">
+                <CardLayout>Total Donations</CardLayout>
+                <CardLayout>Connect to stripe</CardLayout>
+                <CardLayout>Recent Donations</CardLayout>
               </div>
             </div>
-            <div className="donation-info-list" />
-          </div>
+          </React.Fragment>
         ) : null}
       </div>
     );

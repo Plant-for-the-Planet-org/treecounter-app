@@ -20,8 +20,12 @@
     }
     .donation-info-list {
       align-self: flex-start;
+      min-width: 35%;
     }
-
+    .pftp-card-layout {
+      margin: 0;
+      margin-bottom: 20px;
+    }
     .pftp-collapsible-card-layout {
       @extend .pftp-card-layout;
       display: flex;
@@ -35,8 +39,6 @@
       position: relative;
       transition: all 0.3s ease-in-out;
       width: 100%;
-      margin: 0;
-      margin-bottom: 10px;
       font-size: 14px;
       @include for-tablet {
         max-width: 500px;

@@ -22,7 +22,10 @@ class PlantProjectFull extends React.Component {
     if (this.props.plantProject.imageFile) {
       projectImage = { image: this.props.plantProject.imageFile };
     } else {
-      projectImage = plantProjectImages && plantProjectImages.find(() => true);
+      projectImage =
+        this.props.plantProject &&
+        this.props.plantProject.plantProjectImages &&
+        this.props.plantProject.plantProjectImages.find(() => true);
     }
     this.state = { expanded: props.expanded, projectImage: projectImage };
     if (props.callExpanded) {

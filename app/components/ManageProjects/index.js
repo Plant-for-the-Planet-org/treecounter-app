@@ -37,7 +37,7 @@ class CollapsiblePlantProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      plantProjectsPickerVisibility: !props.plantProject.name
+      plantProjectsPickerVisibility: false //!props.plantProject.name
     };
   }
   togglePicker = () => {
@@ -49,7 +49,28 @@ class CollapsiblePlantProject extends Component {
     const { plantProject, children } = this.props;
     console.log('__plantProject___', plantProject);
     return (
-      <div className="pftp-collapsible-card-layout">
+      <div
+        className="pftp-collapsible-card-layout"
+        draggable={!this.state.plantProjectsPickerVisibility}
+        onDragStart={event => {
+          event.dataTransfer.setData('text/plain', plantProject.id);
+          event.dropEffect = 'move';
+        }}
+        onDrop={event => {
+          event.preventDefault();
+          // Get the id of the target and add the moved element to the target's DOM
+          let data = event.dataTransfer.getData('text/plain');
+
+          console.log(
+            'Moved Project :' + data + ' on project ' + plantProject.id
+          );
+        }}
+        onDragOver={event => {
+          event.preventDefault();
+          // Get the id of the target and add the moved element to the target's DOM
+          event.dataTransfer.dropEffect = 'move';
+        }}
+      >
         <div className="pftp-card-header">
           <div className="project-editor-row">
             <span className={'plant-project-name'}>

@@ -92,7 +92,8 @@ export default class App extends Component {
         <div className="widget-container" id={'widget-container'}>
           <link href="treecounterwidget.css" rel="stylesheet" />
           <link
-            href={`${serverName}/treecounterwidget.css" rel="stylesheet"`}
+            href={`${serverName}/treecounterwidget.css"`}
+            rel="stylesheet"
           />
           {/* Apply CSS hooks here */}
           <style>{style}</style>

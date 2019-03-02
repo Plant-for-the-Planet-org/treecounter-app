@@ -14,6 +14,9 @@ import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
 import { logoutUser } from '../../actions/authActions';
+import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
+import { getRequest } from '../../utils/api';
+import { unfollowUser } from '../../actions/followActions';
 
 const profileTypeLabel = {
   about_me: i18n.t('label.about_me'),
@@ -25,8 +28,53 @@ class EditUserProfileContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showPasswordDialog: false
+      showPasswordDialog: false,
+      fetchingFolloweeIds: false,
+      followeeInfo: undefined
     };
+  }
+
+  fetchFolloweeinfo = () => {
+    const currentUserProfile = this.props.currentUserProfile;
+
+    if (
+      currentUserProfile &&
+      currentUserProfile.treecounter &&
+      currentUserProfile.treecounter.followeeIds
+    ) {
+      const followeeIdsList = currentUserProfile.treecounter.followeeIds.split(
+        ','
+      );
+      let _FolloweeInfo = [];
+      followeeIdsList.forEach(id => {
+        this.props
+          .treecounterLookupAction(id, this.props.navigation)
+          .then(treecounter => {
+            _FolloweeInfo.push(treecounter);
+            if (followeeIdsList.length == _FolloweeInfo.length) {
+              this.setState({ followeeInfo: _FolloweeInfo });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      });
+    } else {
+      this.setState({ followeeInfo: [] });
+    }
+  };
+
+  componentDidMount() {
+    this.fetchFolloweeinfo();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.currentUserProfile.treecounter.followeeIds !==
+      this.props.currentUserProfile.treecounter.followeeIds
+    ) {
+      this.fetchFolloweeinfo();
+    }
   }
   deleteProfile = () => {
     console.log(
@@ -154,6 +202,8 @@ class EditUserProfileContainer extends React.Component {
         deletePlantProject={this.deletePlantProject}
         addPlantProject={this.addPlantProject}
         navigation={this.props.navigation}
+        followeeList={this.state.followeeInfo}
+        unfollowUser={this.props.unfollowUser}
       />
     );
   }
@@ -175,7 +225,9 @@ const mapDispatchToProps = dispatch => {
       deletePlantProject,
       addPlantProject,
       deleteUserProfile,
-      logoutUser
+      logoutUser,
+      unfollowUser,
+      treecounterLookupAction
     },
     dispatch
   );
@@ -192,5 +244,7 @@ EditUserProfileContainer.propTypes = {
   addPlantProject: PropTypes.func,
   deleteUserProfile: PropTypes.func,
   navigation: PropTypes.any,
-  logoutUser: PropTypes.func
+  logoutUser: PropTypes.func,
+  unfollowUser: PropTypes.func,
+  treecounterLookupAction: PropTypes.func
 };

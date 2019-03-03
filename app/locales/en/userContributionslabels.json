@@ -21,5 +21,7 @@
   "upload_profile_picture": "Upload New Profile Picture",
   "delete": "Delete",
   "confirm": "Comfirm",
-  "my_tree_delete_confirm": "Are you sure you want to delete this tree"
+  "delete_contribution": "Delete Contribution",
+  "my_tree_delete_confirm": "Are you sure you want to delete this tree",
+  "delete_my_trees_action": "This action will permanently delete this item."
 }

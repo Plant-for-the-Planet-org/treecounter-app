@@ -40,7 +40,7 @@ class WelcomeScreenModal extends Component {
               <Text
                 style={[styles.textPara, { marginTop: 20, fontWeight: 'bold' }]}
               >
-                {i18n.t('label.deletion_prerequisite')}
+                {i18n.t('label.view_global_treecounter')}
               </Text>
             </TouchableItem>
           </View>

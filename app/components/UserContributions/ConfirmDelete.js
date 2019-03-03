@@ -8,13 +8,17 @@ import i18n from '../../locales/i18n';
 const ConfirmDeletion = ({ isOpen, onRequestClose, handleDeletion }) => (
   <ModalDialog isOpen={isOpen} onRequestClose={onRequestClose}>
     <div>
+      <img className="success-image" src={attention} />
+      <div className="confirm-message">
+        {i18n.t('label.delete_my_trees_action')}
+      </div>
       <div className="message">{i18n.t('label.my_tree_delete_confirm')}</div>
       <SecondaryButton
         onClick={() => {
           handleDeletion && handleDeletion();
         }}
       >
-        {i18n.t('label.delete_profile')}
+        {i18n.t('label.delete')}
       </SecondaryButton>
     </div>
   </ModalDialog>

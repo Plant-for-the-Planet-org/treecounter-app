@@ -78,8 +78,7 @@
 //   }
   
   .plant-project-details__container {
-      padding: 5px;
-      width : 100%;
+    padding: 5px;
     .tpo-footer-nav-img__left {
       max-height: 30px;
       max-width: 30px;
@@ -110,7 +109,7 @@
       }
 
       .image__container {
-       flex: 0 0 23%;
+       flex: 0 0 21%;
        height:100px;
        margin: 1%;
   
@@ -119,6 +118,10 @@
          height:100%;
        }
       }
+    }
+    .video-link {
+      padding: 0px;
+      display: flex;
     }
   }
 

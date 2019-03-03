@@ -1,11 +1,7 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Slider from 'react-slick';
-import { arrow_left_green, arrow_right_green } from '../../assets';
-import CarouselNavigation from '../Common/CarouselNavigation';
 import { getImageUrl } from '../../actions/apiRouting';
-import { render } from 'react-dom';
 
 class PlantProjectImageCarousel extends React.Component {
   itemsSize = 3;

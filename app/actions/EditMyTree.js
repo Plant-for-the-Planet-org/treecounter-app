@@ -1,10 +1,17 @@
 import { normalize } from 'normalizr';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
-import { putAuthenticatedRequest } from '../utils/api';
+import {
+  putAuthenticatedRequest,
+  deleteAuthenticatedRequest
+} from '../utils/api';
 
 import { updateRoute } from '../helpers/routerHelper';
-import { mergeEntities } from '../reducers/entitiesReducer';
-import { contributionSchema, treecounterSchema } from '../schemas/index';
+import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
+import {
+  contributionSchema,
+  treecounterSchema,
+  userProfileSchema
+} from '../schemas/index';
 import { debug } from '../debug/index';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 
@@ -29,5 +36,29 @@ export function editTree(plantContribution, plantId, navigation) {
         dispatch(setProgressModelState(false));
         NotificationManager.error(error.response.data.message, 'Error', 5000);
       });
+  };
+}
+
+export function deleteContribution(plantContributionId) {
+  return dispatch => {
+    return new Promise(function(resolve, reject) {
+      deleteAuthenticatedRequest('plantContribution_delete', {
+        plantContribution: plantContributionId
+      })
+        .then(res => {
+          const { treecounter } = res.data;
+          dispatch(
+            deleteEntity({
+              contribution: [plantContributionId]
+            })
+          );
+          dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
+          resolve(treecounter);
+        })
+        .catch(err => {
+          debug(err);
+          reject(err);
+        });
+    });
   };
 }

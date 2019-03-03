@@ -30,7 +30,6 @@ export default handleActions(
       if (action.payload && action.payload.entities) {
         return merge({}, state, action.payload.entities);
       }
-
       return state;
     },
     ENTITY_DELETE: (state, action) => {

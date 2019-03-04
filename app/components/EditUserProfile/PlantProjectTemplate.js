@@ -123,6 +123,9 @@ const PlantProjectTemplate = function(itemIndex) {
             {/* <div className="sub-item-header">{i18n.t('label.video')}</div> */}
             {locals.inputs.videoUrl}
           </div>
+          <div className="project-sub-item">
+            {locals.inputs.acceptDonations}
+          </div>
         </div>
       </div>
     );

@@ -4,12 +4,27 @@ import PropTypes from 'prop-types';
 import * as images from '../../assets';
 import i18n from '../../locales/i18n';
 import { getLocalRoute } from '../../actions/apiRouting';
+import { context } from '../../config';
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  FacebookIcon,
+  TwitterIcon
+} from 'react-share';
 
 export default class Menu extends Component {
   sideNavImage() {
     const route = this.props.userProfile
       ? getLocalRoute('app_userHome')
       : getLocalRoute('app_homepage');
+    console.log(
+      context.scheme +
+        '://' +
+        context.host +
+        getLocalRoute('app_treecounter', {
+          treecounter: this.props.userProfile.treecounter.slug
+        })
+    );
     return (
       <div className="app-container__sidenav--image">
         <Link to={route} onClick={() => this.linkClicked()}>
@@ -98,6 +113,32 @@ export default class Menu extends Component {
             </ul>
           </div>
         ))}
+        <div className="share_buttons">
+          <FacebookShareButton
+            url={
+              context.scheme +
+              '://' +
+              context.host +
+              getLocalRoute('app_treecounter', {
+                treecounter: this.props.userProfile.treecounter.slug
+              })
+            }
+          >
+            <FacebookIcon size={32} round />
+          </FacebookShareButton>
+          <TwitterShareButton
+            url={
+              context.scheme +
+              '://' +
+              context.host +
+              getLocalRoute('app_treecounter', {
+                treecounter: this.props.userProfile.treecounter.slug
+              })
+            }
+          >
+            <TwitterIcon size={32} round />
+          </TwitterShareButton>
+        </div>
       </div>
     );
   }

@@ -17,14 +17,6 @@ export default class Menu extends Component {
     const route = this.props.userProfile
       ? getLocalRoute('app_userHome')
       : getLocalRoute('app_homepage');
-    console.log(
-      context.scheme +
-        '://' +
-        context.host +
-        getLocalRoute('app_treecounter', {
-          treecounter: this.props.userProfile.treecounter.slug
-        })
-    );
     return (
       <div className="app-container__sidenav--image">
         <Link to={route} onClick={() => this.linkClicked()}>
@@ -113,32 +105,34 @@ export default class Menu extends Component {
             </ul>
           </div>
         ))}
-        <div className="share_buttons">
-          <FacebookShareButton
-            url={
-              context.scheme +
-              '://' +
-              context.host +
-              getLocalRoute('app_treecounter', {
-                treecounter: this.props.userProfile.treecounter.slug
-              })
-            }
-          >
-            <FacebookIcon size={32} round />
-          </FacebookShareButton>
-          <TwitterShareButton
-            url={
-              context.scheme +
-              '://' +
-              context.host +
-              getLocalRoute('app_treecounter', {
-                treecounter: this.props.userProfile.treecounter.slug
-              })
-            }
-          >
-            <TwitterIcon size={32} round />
-          </TwitterShareButton>
-        </div>
+        {this.props.userProfile ? (
+          <div className="share_buttons">
+            <FacebookShareButton
+              url={
+                context.scheme +
+                '://' +
+                context.host +
+                getLocalRoute('app_treecounter', {
+                  treecounter: this.props.userProfile.treecounter.slug
+                })
+              }
+            >
+              <FacebookIcon size={32} round />
+            </FacebookShareButton>
+            <TwitterShareButton
+              url={
+                context.scheme +
+                '://' +
+                context.host +
+                getLocalRoute('app_treecounter', {
+                  treecounter: this.props.userProfile.treecounter.slug
+                })
+              }
+            >
+              <TwitterIcon size={32} round />
+            </TwitterShareButton>
+          </div>
+        ) : null}
       </div>
     );
   }

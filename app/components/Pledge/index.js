@@ -52,9 +52,11 @@ export default class Pledge extends Component {
       this.setState({ value: {} });
     }
   }
+
   onFormChange(value) {
     this.setState({ value }); // <- keep track of value changes
   }
+
   render() {
     let selectedPledge = {};
     if (
@@ -81,20 +83,6 @@ export default class Pledge extends Component {
             })}
           </span>
           <span className="total_text">{i18n.t('label.total_trees')}</span>
-        </CardLayout>
-        <CardLayout className="pledge-form">
-          <ContentHeader caption={'Pledge Trees'} />
-          <TCombForm
-            ref="pledgeForm"
-            type={pledgeFormSchema}
-            options={allSchemaOptions}
-            value={this.state.value}
-            onChange={value => this.onFormChange(value)}
-          />
-          <PrimaryButton onClick={() => this.onFormSubmit()}>
-            {i18n.t('label.pledge')}
-          </PrimaryButton>
-          <TextSpan>{i18n.t('label.pledge_des')}</TextSpan>
         </CardLayout>
         <div className="pledge_content--center">
           <div className="row">
@@ -143,6 +131,20 @@ export default class Pledge extends Component {
               </div>
             </CardLayout>
           </div>
+          <CardLayout className="pledge-form">
+            <ContentHeader caption={'Pledge Trees'} />
+            <TCombForm
+              ref="pledgeForm"
+              type={pledgeFormSchema}
+              options={allSchemaOptions}
+              value={this.state.value}
+              onChange={value => this.onFormChange(value)}
+            />
+            <PrimaryButton onClick={() => this.onFormSubmit()}>
+              {i18n.t('label.pledge')}
+            </PrimaryButton>
+            <TextSpan>{i18n.t('label.pledge_des')}</TextSpan>
+          </CardLayout>
         </div>
       </div>
     ) : null;

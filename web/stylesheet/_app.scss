@@ -72,6 +72,11 @@
         .share_buttons {
           display: flex;
           margin-left: 15px;
+
+          img {
+            height: 20px;
+            margin-right: 10px;
+          }
         }
       }
 

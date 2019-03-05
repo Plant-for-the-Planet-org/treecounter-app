@@ -46,7 +46,7 @@ export default class SignUp extends Component {
         <ReCaptchaV3
           captchaDomain={'https://www.plant-for-the-planet.org'}
           siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
-          onReceiveToken={token => verifyCallback(token)}
+          onReceiveToken={token => this.verifyCallback(token)}
         />
         <ImageBackground style={[styles.container, styles.parentContainer]}>
           <SignupTypes changeProfile={this.changeProfile} />

@@ -5,12 +5,8 @@ import * as images from '../../assets';
 import i18n from '../../locales/i18n';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  FacebookIcon,
-  TwitterIcon
-} from 'react-share';
+import { allowedUrls } from '../../config/socialShare';
+import { FacebookShareButton, TwitterShareButton } from 'react-share';
 
 export default class Menu extends Component {
   sideNavImage() {
@@ -30,6 +26,38 @@ export default class Menu extends Component {
   linkClicked() {
     this.props.toggleSideNavAction();
     this.props.clearSupport();
+  }
+
+  renderShareButtons() {
+    let { pathname } = this.props;
+    if (
+      allowedUrls.filter(url => pathname.split('/').includes(url)).length > 0
+    ) {
+      let redirectPath = '';
+      if (pathname.split('/').includes('home')) {
+        redirectPath =
+          context.scheme +
+          '://' +
+          context.host +
+          getLocalRoute('app_treecounter', {
+            treecounter: this.props.userProfile.treecounter.slug
+          });
+      } else {
+        redirectPath = context.scheme + '://' + context.host + pathname;
+      }
+      return (
+        <div className="share_buttons">
+          <FacebookShareButton url={redirectPath}>
+            <img src={images['facebook']} />
+          </FacebookShareButton>
+          <TwitterShareButton url={redirectPath}>
+            <img src={images['twitter']} />
+          </TwitterShareButton>
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 
   render() {
@@ -105,34 +133,7 @@ export default class Menu extends Component {
             </ul>
           </div>
         ))}
-        {this.props.userProfile ? (
-          <div className="share_buttons">
-            <FacebookShareButton
-              url={
-                context.scheme +
-                '://' +
-                context.host +
-                getLocalRoute('app_treecounter', {
-                  treecounter: this.props.userProfile.treecounter.slug
-                })
-              }
-            >
-              <FacebookIcon size={32} round />
-            </FacebookShareButton>
-            <TwitterShareButton
-              url={
-                context.scheme +
-                '://' +
-                context.host +
-                getLocalRoute('app_treecounter', {
-                  treecounter: this.props.userProfile.treecounter.slug
-                })
-              }
-            >
-              <TwitterIcon size={32} round />
-            </TwitterShareButton>
-          </div>
-        ) : null}
+        {this.renderShareButtons()}
       </div>
     );
   }

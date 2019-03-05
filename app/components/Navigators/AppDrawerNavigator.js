@@ -256,7 +256,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     },
     {
       navigationOptions: ({ navigation }) => {
-        let title = navigation.getParam('titleParam');
         let navigationConfig = {
           headerStyle: styles.container,
           headerTintColor: '#fff',

@@ -76,6 +76,9 @@ import leaderboards_company_green from './images/icons/leaderboards_company_gree
 import close_green from './images/icons/close_green.png';
 import esriLogo from './images/logo_esri.png';
 import bmzLogo from './images/logo_bmz.jpg';
+import shareIcon from './images/share-sign.png';
+import facebook from './images/facebook.svg';
+import twitter from './images/twitter.svg';
 import questionmark_orange from './images/icons/questionmark.png';
 import gift_icon from './images/icons/gift_icon.png';
 import iosSearchWhite from './images/icons/ios_icon_search_white.png';
@@ -113,6 +116,7 @@ import selector_menu from './images/icons/selector_menu.png';
 import radio_button from './images/icons/radio_button.png';
 import radio_button_selected from './images/icons/radio_button_selected.png';
 import filter from './images/icons/filter.png';
+import welcomeScreen from './images/welcome-screen.png';
 
 export {
   AppStoreLogo,
@@ -229,5 +233,9 @@ export {
   selector_menu,
   radio_button_selected,
   radio_button,
-  filter
+  filter,
+  shareIcon,
+  facebook,
+  twitter,
+  welcomeScreen
 };

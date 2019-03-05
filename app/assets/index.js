@@ -116,6 +116,7 @@ import selector_menu from './images/icons/selector_menu.png';
 import radio_button from './images/icons/radio_button.png';
 import radio_button_selected from './images/icons/radio_button_selected.png';
 import filter from './images/icons/filter.png';
+import welcomeScreen from './images/welcome-screen.png';
 
 export {
   AppStoreLogo,
@@ -235,5 +236,6 @@ export {
   filter,
   shareIcon,
   facebook,
-  twitter
+  twitter,
+  welcomeScreen
 };

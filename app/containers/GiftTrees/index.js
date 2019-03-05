@@ -36,11 +36,13 @@ class GiftTreesContainer extends Component {
     } else {
       title = formValue.name;
     }
-    updateRoute('app_gift_projects', this.props.navigation, 0, {
-      userForm: formValue,
-      giftMethod: type,
-      titleParam: 'Gift Trees To ' + title
-    });
+    if (this.props.navigation) {
+      updateRoute('app_gift_projects', this.props.navigation, 0, {
+        userForm: formValue,
+        giftMethod: type,
+        titleParam: 'Gift Trees To ' + title
+      });
+    }
   }
 
   render() {

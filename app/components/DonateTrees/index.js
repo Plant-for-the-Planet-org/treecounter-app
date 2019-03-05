@@ -217,6 +217,44 @@ export default class DonateTrees extends Component {
     }
   ];
 
+  checkValidationPreviousArrow = [
+    () => {
+      return false;
+    },
+    () => {
+      if (this.state.selectedTreeCount) {
+        this.setState({
+          form: {
+            ...this.state.form,
+            treeCount: this.state.selectedTreeCount
+          }
+        });
+        return true;
+      }
+      return false;
+    },
+    () => {
+      // console.log(this.refs.donateReceipt.validate());
+      let value = this.refs.donateReceipt.getValue();
+      let receipt = {};
+      if (value) {
+        if (this.state.modeReceipt === 'individual') {
+          receipt['receiptIndividual'] = value;
+        } else {
+          receipt['receiptCompany'] = value;
+        }
+        this.setState({
+          form: {
+            ...this.state.form,
+            ...receipt
+          }
+        });
+        return true;
+      }
+      return false;
+    }
+  ];
+
   handleModeReceiptChange(tab) {
     this.setState({
       modeReceipt: tab,
@@ -304,7 +342,11 @@ export default class DonateTrees extends Component {
       currentSlide: this.state.pageIndex,
       prevArrow: (
         <CarouselNavigation
-          styleName="donate-tree-nav-img__left"
+          styleName={
+            this.state.pageIndex === 0
+              ? 'display-none'
+              : 'donate-tree-nav-img__left'
+          }
           src={arrow_left_green}
         />
       ),

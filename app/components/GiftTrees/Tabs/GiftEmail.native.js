@@ -17,7 +17,7 @@ export default class GiftEmail extends Component {
     this.setGiftInvitation = element => {
       this.giftInvitation = element;
     };
-    this.state = { formValue: null, giftMessage: '' };
+    this.state = { form: null, giftMessage: '' };
     this.onNextClick = this.onNextClick.bind(this);
   }
 
@@ -25,11 +25,18 @@ export default class GiftEmail extends Component {
 
   onNextClick() {
     if (this.giftInvitation.getValue()) {
-      this.setState({ formValue: this.giftInvitation.getValue() });
-      this.props.openProjects(
-        this.giftInvitation.getValue(),
-        'invitation',
-        this.state.giftMessage
+      // this.setState({ form: this.giftInvitation.getValue(), ...this.state.giftMessage });
+      // const mergedObj = {form: this.giftInvitation.getValue(), ...this.state.giftMessage}
+      this.setState(
+        {
+          form: {
+            ...this.state.form,
+            giftMessage: this.state.giftMessage
+          }
+        },
+        () => {
+          this.props.openProjects(this.state.form, 'invitation');
+        }
       );
     }
   }
@@ -37,7 +44,7 @@ export default class GiftEmail extends Component {
     if (!this.giftInvitation.getValue()) {
       this.giftInvitation.validate();
     } else {
-      this.setState({ formValue: this.giftInvitation.getValue() });
+      this.setState({ form: this.giftInvitation.getValue() });
     }
     this.setState({
       giftMessage: val
@@ -89,7 +96,7 @@ export default class GiftEmail extends Component {
             ref={this.setGiftInvitation}
             type={giftInvitationFormSchema}
             options={giftInvitationSchemaOptions}
-            value={this.state.formValue}
+            value={this.state.form}
           />
           <TextInput
             multiline={true}

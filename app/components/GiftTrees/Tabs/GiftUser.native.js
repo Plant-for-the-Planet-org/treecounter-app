@@ -20,10 +20,22 @@ export default class GiftUser extends Component {
   }
   onNextClick() {
     if (this.state.selectedSuggestion) {
-      this.props.openProjects(
-        this.state.selectedSuggestion,
-        'direct',
-        this.state.giftMessage
+      // this.props.openProjects(
+      //   this.state.selectedSuggestion,
+      //   'direct',
+      //   this.state.giftMessage
+      // );
+      this.setState(
+        {
+          form: {
+            ...this.state.form,
+            giftTreecounter: this.state.selectedSuggestion.id,
+            giftMessage: this.state.giftMessage
+          }
+        },
+        () => {
+          this.props.openProjects(this.state.form, 'direct');
+        }
       );
     }
   }

@@ -179,6 +179,12 @@ export default class GiftTrees extends Component {
       if (this.state.modeUser === 'direct') {
         let returnValue;
         returnValue = this.state.form.giftTreecounter ? true : false;
+        this.setState({
+          form: {
+            ...this.state.form,
+            giftMessage: this.state.giftMessage
+          }
+        });
         return returnValue;
       } else {
         let value = this.refs.giftInvitation.getValue();
@@ -186,7 +192,8 @@ export default class GiftTrees extends Component {
           this.setState({
             form: {
               ...this.state.form,
-              giftInvitation: value
+              giftInvitation: value,
+              giftMessage: this.state.giftMessage
             },
             giftTreecounterName: value.firstname + ' ' + value.lastname
           });
@@ -246,6 +253,7 @@ export default class GiftTrees extends Component {
   handleModeUserChange(tab) {
     this.setState({
       modeUser: tab,
+      giftMessage: '',
       form: { ...this.state.form, giftMethod: tab }
     });
   }
@@ -287,6 +295,9 @@ export default class GiftTrees extends Component {
       expanded: bool
     });
   };
+  handleMessageChange(event) {
+    this.setState({ giftMessage: event.target.value });
+  }
 
   render() {
     let displayNone = classNames({
@@ -333,7 +344,11 @@ export default class GiftTrees extends Component {
       adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation
-          styleName="donate-tree-nav-img__left"
+          styleName={
+            this.state.pageIndex === 0
+              ? 'display-none'
+              : 'donate-tree-nav-img__left'
+          }
           src={arrow_left_green}
         />
       ),
@@ -415,16 +430,34 @@ export default class GiftTrees extends Component {
                     onTabChange={this.handleModeUserChange}
                   >
                     {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
-                      <SearchAutosuggest
-                        onSuggestionClicked={this.suggestionClicked}
-                        clearSuggestions={false}
-                      />
+                      <React.Fragment>
+                        <SearchAutosuggest
+                          onSuggestionClicked={this.suggestionClicked}
+                          clearSuggestions={false}
+                        />
+                        <div className="pftp-textarea">
+                          <textarea
+                            value={this.state.giftMessage}
+                            placeholder="Gift Message"
+                            onChange={this.handleMessageChange.bind(this)}
+                          />
+                        </div>
+                      </React.Fragment>
                     ) : (
-                      <TCombForm
-                        ref="giftInvitation"
-                        type={giftInvitationFormSchema}
-                        options={giftInvitationSchemaOptions}
-                      />
+                      <React.Fragment>
+                        <TCombForm
+                          ref="giftInvitation"
+                          type={giftInvitationFormSchema}
+                          options={giftInvitationSchemaOptions}
+                        />
+                        <div className="pftp-textarea">
+                          <textarea
+                            value={this.state.giftMessage}
+                            placeholder="Gift Message"
+                            onChange={this.handleMessageChange.bind(this)}
+                          />
+                        </div>
+                      </React.Fragment>
                     )}
                   </Tabs>
                 </div>

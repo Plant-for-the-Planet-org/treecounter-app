@@ -135,7 +135,15 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           </div>
 
           <div>Trees: {context.treeCount}</div>
-
+          <div className="confirm-checkbox">
+            <input type="checkbox" />
+            Make this donation every{' '}
+            <select className="recurring_select" required="required">
+              <option className="pftp-selectfield__option">week</option>
+              <option className="pftp-selectfield__option">month</option>
+              <option className="pftp-selectfield__option">yearly</option>
+            </select>
+          </div>
           {Object.keys(paymentMethods).map(gateway => {
             const accountName = paymentMethods[gateway];
             if ('stripe_cc' === gateway) {

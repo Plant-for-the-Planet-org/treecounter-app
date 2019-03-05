@@ -20,7 +20,7 @@
     padding: 0px;
     height:37px;
   }
-  
+
 }
 .donate-tress__container {
   position: relative;
@@ -28,8 +28,8 @@
   height: auto;
   box-shadow: 0px 4px 12px 0 rgba(0, 0, 0, 0.1);
   width: 100%;
-  margin-top:10px; 
- 
+  margin-top:10px;
+
 
   .treecount-selector-wrapper {
     height: 280px;
@@ -173,7 +173,7 @@
   display:flex;
   align-items: center;
   flex-direction: row;
-  padding:5px; 
+  padding:5px;
   padding-top: 10px;
   font-size: 16px;
   line-height: 1.38;
@@ -190,7 +190,7 @@
   .project-specs__detail {
     display:flex;
     width:50%;
-    
+
     .project-specs-left__container {
       display:flex;
       flex-direction: column;
@@ -251,13 +251,13 @@
   .collapsed {
     border: none;
     cursor: pointer;
-    
+
   }
 
   .expanded {
     border: none;
     cursor: pointer;
-   
+
   }
 }
 
@@ -413,6 +413,23 @@
 }
 .payment_options__wrapper {
   min-height: 470px;
+  .confirm-checkbox {
+    text-align: left;
+    padding: 20px;
+    color: #686060;
+    font-size: 14px;
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  }
+  .recurring_select {
+    width: 101.4px;
+    height: 37px;
+    opacity: 0.5;
+    border-radius: 19px;
+    border: solid 1px #464646;
+  }
 }
 .payment-option {
   display: flex;
@@ -520,11 +537,11 @@
           position: absolute;
           align-items: center;
           height: 100%;
-          padding-left:5px; 
+          padding-left:5px;
           .treePlantedtextTrees {
             padding-left:5px;
           }
-          
+
           font-size: 13px;
           font-weight: normal;
           font-style: normal;
@@ -549,7 +566,7 @@
         display: flex;
         padding: 5;
       }
-     
+
     }
     .targetContainer {
       width: 100%;

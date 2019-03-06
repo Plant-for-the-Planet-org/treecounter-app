@@ -36,8 +36,8 @@ export default (buttonStyles = EStyleSheet.create({
     borderWidth: 5,
     borderColor: '#fff',
     position: 'absolute',
-    height: 70,
-    width: 70
+    height: 60,
+    width: 60
   },
   userInfo: {
     padding: 10,
@@ -53,8 +53,8 @@ export default (buttonStyles = EStyleSheet.create({
     maxHeight: '100%'
   },
   profileImageContainer: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     alignSelf: 'center',
     justifyContent: 'center'
   },

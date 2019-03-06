@@ -3,6 +3,7 @@ import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import { Text, View, Image, ScrollView } from 'react-native';
 import scrollStyle from '../../../styles/common/scrollStyle';
+import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 
 import {
   loginFormSchema,
@@ -20,6 +21,13 @@ import TouchableItem from '../../Common/TouchableItem.native';
 let Form = t.form.Form;
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recaptchaToken: null
+    };
+  }
+
   onForgotPasswordClicked = () => {
     this.props.updateRoute('app_forgotPassword');
   };
@@ -28,11 +36,23 @@ export default class Login extends Component {
     this.props.updateRoute('app_signup');
   };
 
+  verifyCallback = token => {
+    // Here you will get the final token!!!
+    this.setState({
+      recaptchaToken: token
+    });
+  };
+
   render() {
     return (
       <ScrollView
         contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
       >
+        <ReCaptchaV3
+          captchaDomain={'https://www.plant-for-the-planet.org'}
+          siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
+          onReceiveToken={token => this.verifyCallback(token)}
+        />
         <View style={styles.parentContainer}>
           <View style={styles.headerContainer}>
             <Image
@@ -72,7 +92,7 @@ export default class Login extends Component {
               </TouchableItem>
 
               <PrimaryButton
-                onClick={this.props.onPress}
+                onClick={event => this.props.onPress(this.state.recaptchaToken)}
                 buttonStyle={styles.loginButtonStyle}
                 textStyle={{ fontSize: 16 }}
               >

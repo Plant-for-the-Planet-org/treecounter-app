@@ -99,6 +99,7 @@
     margin-left: 10px;
   }
 }
+
 .tree-counter-row {
   margin-top: 10px;
   display: flex;
@@ -165,5 +166,75 @@
     width: 12px;
     height: 13px;
     margin-right: 7px;
+  }
+}
+
+.width_group_footer {
+  width: 60%;
+}
+.group_user_table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .table-header {
+    margin: 0 12px;
+    padding: 8px;
+    display: flex;
+    border-bottom: 2px solid #e6e6e6;
+
+    .table-header-item {
+      display: flex;
+      padding-left: 17px;
+      justify-content: flex-start;
+    }
+
+    .target {
+      flex: 0 0 20%;
+      justify-content: flex-end;
+    }
+
+    .planted {
+      @extend .target;
+    }
+
+    .support {
+      @extend .target;
+    }
+
+    .contributor {
+      flex: 0 0 40%;
+      padding-left: 0;
+    }
+  }
+
+  .table-row {
+    display: flex;
+    margin: 0 12px;
+    padding: 8px;
+
+    .table-col {
+      display: flex;
+      padding-left: 17px;
+    }
+
+    .target {
+      flex: 0 0 20%;
+      justify-content: flex-end;
+    }
+
+    .planted {
+      @extend .target;
+    }
+
+    .support {
+      @extend .target;
+    }
+
+    .contributor {
+      flex: 0 0 40%;
+      padding-left: 0;
+      justify-content: flex-start;
+    }
   }
 }

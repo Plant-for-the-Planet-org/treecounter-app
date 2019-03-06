@@ -37,7 +37,7 @@ class CollapsiblePlantProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      plantProjectsPickerVisibility: false //!props.plantProject.name
+      plantProjectsPickerVisibility: !props.plantProject.name
     };
   }
   togglePicker = () => {

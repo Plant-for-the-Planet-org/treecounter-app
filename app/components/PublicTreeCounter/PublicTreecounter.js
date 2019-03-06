@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MetaTags from 'react-meta-tags';
 
-import { welcomeScreen } from '../../assets';
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
@@ -138,12 +136,6 @@ class PublicTreeCounter extends React.Component {
     document.title = getDocumentTitle(caption);
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <MetaTags>
-          <title>Page 1</title>
-          <meta name="description" content="Some description." />
-          <meta property="og:title" content="User Treecounter" />
-          <meta property="og:image" content={welcomeScreen} />
-        </MetaTags>
         <div className="tree-counter-header">
           <TreecounterHeader
             {...headerProps}

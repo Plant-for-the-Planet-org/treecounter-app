@@ -19,6 +19,7 @@ import {
   isUserFollower,
   amISupporting
 } from './utils';
+import PrimaryButton from '../Common/Button/PrimaryButton';
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {
@@ -50,8 +51,8 @@ class PublicTreeCounter extends React.Component {
     this.props.route('app_donateTrees');
   }
 
-  onRegisterSupporter() {
-    this.props.supportTreecounterAction(this.props.treecounter);
+  onRegisterSupporter(treecounter) {
+    this.props.supportTreecounterAction(treecounter);
     this.props.route('app_donateTrees');
   }
 
@@ -149,7 +150,9 @@ class PublicTreeCounter extends React.Component {
               <SupportButton
                 {...supportProps}
                 buttonLabel={i18n.t('label.gift_trees')}
-                onRegisterSupporter={this.onRegisterSupporter}
+                onRegisterSupporter={() =>
+                  this.onRegisterSupporter(treecounter)
+                }
               />
             </div>
           )}
@@ -219,9 +222,16 @@ class PublicTreeCounter extends React.Component {
                         ).toLocaleString('en')}
                       </div>
                       <div className="table-col support">
-                        {parseInt(
-                          treecounter.directChildren[childrenId].countTarget
-                        ).toLocaleString('en')}
+                        <PrimaryButton
+                          className="support-button-group-footer"
+                          onClick={() =>
+                            this.onRegisterSupporter(
+                              treecounter.directChildren[childrenId]
+                            )
+                          }
+                        >
+                          {i18n.t('label.support')}
+                        </PrimaryButton>
                       </div>
                     </div>
                   );

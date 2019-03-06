@@ -178,14 +178,12 @@
   width: 100%;
 
   .table-header {
-    margin: 0 12px;
-    padding: 8px;
+    padding: 8px 0;
     display: flex;
     border-bottom: 2px solid #e6e6e6;
 
     .table-header-item {
       display: flex;
-      padding-left: 17px;
       justify-content: flex-start;
     }
 
@@ -210,17 +208,23 @@
 
   .table-row {
     display: flex;
-    margin: 0 12px;
-    padding: 8px;
+    padding: 15px 0;
 
     .table-col {
       display: flex;
-      padding-left: 17px;
     }
 
     .target {
       flex: 0 0 20%;
       justify-content: flex-end;
+    }
+
+    .support-button-group-footer {
+      padding: 5px;
+      font-size: 15px;
+      margin: 0;
+      border-radius: 2px;
+      width: 75px;
     }
 
     .planted {

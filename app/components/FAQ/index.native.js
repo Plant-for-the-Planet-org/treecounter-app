@@ -14,6 +14,7 @@ import {
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { context } from '../../config';
 import styles from '../../styles/faq';
+import TabContainer from '../../containers/Menu/TabContainer';
 
 export default class FAQ extends Component {
   _renderHeader(section, index, isActive) {
@@ -54,15 +55,25 @@ export default class FAQ extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-      <ScrollView>
-        <Accordion
-          sections={this.props.faqs}
-          renderSectionTitle={this._renderSectionTitle}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-          touchableComponent={TouchableOpacity}
-        />
-      </ScrollView>
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <Accordion
+            sections={this.props.faqs}
+            renderSectionTitle={this._renderSectionTitle}
+            renderHeader={this._renderHeader}
+            renderContent={this._renderContent}
+            touchableComponent={TouchableOpacity}
+          />
+        </ScrollView>
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 0
+          }}
+        >
+          <TabContainer {...this.props} />
+        </View>
+      </View>
     );
   }
 }

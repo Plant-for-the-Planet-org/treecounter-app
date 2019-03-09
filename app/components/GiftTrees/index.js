@@ -279,15 +279,32 @@ export default class GiftTrees extends Component {
   };
 
   handlePaymentApproved(paymentResponse) {
-    this.props.gift(
-      {
-        ...this.state.form,
-        paymentResponse,
-        amount: this.state.selectedAmount,
-        currency: this.state.selectedCurrency
-      },
-      this.props.selectedProject.id
-    );
+    if (this.state.form.giftMethod === direct) {
+      this.props.gift(
+        {
+          directGift: {
+            treeCounter: this.state.form.giftTreecounter,
+            message: this.state.giftMessage
+          },
+          paymentResponse,
+          ...this.state.form,
+          amount: this.state.selectedAmount,
+          currency: this.state.selectedCurrency
+        },
+        this.props.selectedProject.id
+      );
+    } else {
+      this.props.gift(
+        {
+          invitationGift: { message: this.state.giftMessage },
+          paymentResponse,
+          ...this.state.form,
+          amount: this.state.selectedAmount,
+          currency: this.state.selectedCurrency
+        },
+        this.props.selectedProject.id
+      );
+    }
   }
 
   callExpanded = bool => {
@@ -296,6 +313,7 @@ export default class GiftTrees extends Component {
     });
   };
   handleMessageChange(event) {
+    //set giftMessage as part of form only as we are setting treecounter.
     this.setState({ giftMessage: event.target.value });
   }
 

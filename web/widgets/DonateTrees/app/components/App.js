@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import ReactTooltipStyle from '../../../../../node_modules/react-tooltip/dist/style';
 import i18n from '../../../../../app/locales/i18n.js';
 import { getLocalRoute } from '../../../../../app/actions/apiRouting';
+import PlantedProgressBar from '../../../../../app/components/PlantProjects/PlantedProgressbar';
 
 export default class App extends Component {
   constructor(props) {
@@ -86,6 +87,11 @@ export default class App extends Component {
         ref={this._inputRef1}
       >
         Donate flow will come here
+        <PlantedProgressBar
+          countPlanted={50000}
+          countTarget={100000}
+          // hideTargetImage
+        />
         {/* <link
           href="https://firebasestorage.googleapis.com/v0/b/pictureappbackend-test.appspot.com/o/TreeCounterWidget%2Fv1%2Ftreecounterwidget.css?alt=media&token=26864f0f-9934-4410-9480-aaa304627a38"
           rel="stylesheet"

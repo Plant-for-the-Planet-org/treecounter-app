@@ -8,7 +8,8 @@ import {
   selectedTpoSelector,
   currentUserProfileSelector,
   currenciesSelector,
-  supportedTreecounterSelector
+  supportedTreecounterSelector,
+  recurringMonthsSelector
 } from '../../selectors';
 import {
   selectPlantProjectAction,
@@ -24,11 +25,13 @@ import { setProgressModelState } from '../../reducers/modelDialogReducer';
 import { updateRoute } from '../../helpers/routerHelper';
 import DonateTrees from '../../components/DonateTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
+import { fetchRecurringMonths } from '../../actions/recurringAction';
 
 class DonationTreesContainer extends Component {
   componentDidMount() {
     //  this.props.selectPlantProjectAction(1);
     this.props.fetchCurrencies();
+    this.props.fetchRecurringMonths();
     // console.log('In donate Tree Route' + this.props.navigation);
     // console.log(this.props.navigation);
   }
@@ -37,6 +40,7 @@ class DonationTreesContainer extends Component {
     this.props.navigation.setParams({ titleParam: title });
   }
   render() {
+    console.log(this.props.recurringMonths);
     let flag = this.props.currentUserProfile ? true : false;
     // console.log('donate tree called');
     return (
@@ -49,6 +53,7 @@ class DonationTreesContainer extends Component {
         donate={(donationContribution, plantProjectId, profile) =>
           this.props.donate(donationContribution, plantProjectId, profile)
         }
+        recurringMonths={this.props.recurringMonths}
         updateUserProfile={this.props.updateUserProfile}
         onTabChange={title => this.onTabChange(title)}
         supportTreecounter={this.props.supportTreecounter}
@@ -73,6 +78,7 @@ const mapStateToProps = state => {
     currentUserProfile: currentUserProfileSelector(state),
     supportTreecounter: supportedTreecounterSelector(state),
     currencies: currenciesSelector(state),
+    recurringMonths: recurringMonthsSelector(state),
     paymentStatus: getPaymentStatus(state)
   };
 };
@@ -82,6 +88,7 @@ const mapDispatchToProps = dispatch => {
     {
       selectPlantProjectAction,
       fetchCurrencies,
+      fetchRecurringMonths,
       donate,
       gift,
       paymentClear,
@@ -106,12 +113,14 @@ DonationTreesContainer.propTypes = {
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
+  recurringMonths: PropTypes.any,
   paymentStatus: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
   paymentClear: PropTypes.func,
   donate: PropTypes.func,
   gift: PropTypes.func,
   fetchCurrencies: PropTypes.func,
+  fetchRecurringMonths: PropTypes.func,
   clearPlantProject: PropTypes.func,
   supportTreecounter: PropTypes.object,
   setProgressModelState: PropTypes.func,

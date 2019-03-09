@@ -9,6 +9,7 @@ import paymentStatusReducer from './paymentStatus';
 import modelDialogReducer from './modelDialogReducer';
 import pledgeEventReducer from './pledgeEventReducer';
 import updateLastRouteReducer from './updateLastRouteReducer';
+import recurringReducer from './recurringReducers';
 
 const commonReducers = {
   entities: entitiesReducer,
@@ -18,6 +19,7 @@ const commonReducers = {
   userFeeds: userFeedReducer,
   pledges: fetchPledgesReducer,
   currencies: currenciesReducer,
+  recurringMonths: recurringReducer,
   paymentStatus: paymentStatusReducer,
   modelDialogState: modelDialogReducer,
   pledgeEvents: pledgeEventReducer,

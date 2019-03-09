@@ -9,6 +9,7 @@ import Paypal from './Gateways/Paypal';
 import Offline from './Gateways/Offline';
 
 import { StripeProvider, Elements } from './Stripe/stripeDefs';
+import i18n from '../../locales/i18n';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
@@ -16,17 +17,42 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
 
     this.state = {
       stripe: null,
-      errorMessage: null
+      errorMessage: null,
+      recurringMnemonic: 'yearly',
+      isRecurrent: false
     };
 
     this.decorateSuccess = this.decorateSuccess.bind(this);
+    this.handleRecurring = this.handleRecurring.bind(this);
+    this.setRecurringMnemonic = this.setRecurringMnemonic.bind(this);
   }
 
   decorateSuccess(gateway, accountName) {
     return response =>
       this.props.onSuccess({ gateway, accountName, ...response });
   }
+  handleRecurring(event) {
+    let recurringMnemonic: '';
+    if (event.target.checked) {
+      recurringMnemonic = this.state.recurringMnemonic;
+    }
+    this.setState({
+      isRecurrent: event.target.checked
+    });
+    this.props.handleRecurring(event.target.checked, recurringMnemonic);
+  }
 
+  setRecurringMnemonic(event) {
+    console.log(event.target.value);
+    let recurringMnemonic = '';
+    if (this.state.isRecurrent) {
+      recurringMnemonic = event.target.value;
+    }
+    this.setState({
+      recurringMnemonic: event.target.value
+    });
+    this.props.handleRecurring(this.state.isRecurrent, recurringMnemonic);
+  }
   componentDidMount() {
     let props = this.props;
     if (props.paymentMethods) {
@@ -136,12 +162,25 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
 
           <div>Trees: {context.treeCount}</div>
           <div className="confirm-checkbox">
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              onChange={event => this.handleRecurring(event)}
+            />
             Make this donation every{' '}
-            <select className="recurring_select" required="required">
-              <option className="pftp-selectfield__option">week</option>
-              <option className="pftp-selectfield__option">month</option>
-              <option className="pftp-selectfield__option">yearly</option>
+            <select
+              className="recurring_select"
+              required="required"
+              onChange={event => this.setRecurringMnemonic(event)}
+            >
+              {this.props.recurringMonths.recurringMonths.enum.map(option => (
+                <option
+                  key={option}
+                  className="pftp-selectfield__option"
+                  value={option}
+                >
+                  {i18n.t(option)}
+                </option>
+              ))}
             </select>
           </div>
           {Object.keys(paymentMethods).map(gateway => {
@@ -234,12 +273,14 @@ PaymentSelector.propTypes = {
   stripePublishableKey: PropTypes.string,
   expandedOption: PropTypes.string,
   handleExpandedClicked: PropTypes.func,
+  recurringMonths: PropTypes.object,
   amount: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
   context: PropTypes.object.isRequired,
   onSuccess: PropTypes.func.isRequired,
   onFailure: PropTypes.func.isRequired,
-  onError: PropTypes.func.isRequired
+  onError: PropTypes.func.isRequired,
+  handleRecurring: PropTypes.func
 };
 
 export default PaymentSelector;

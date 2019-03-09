@@ -100,6 +100,8 @@ export default class DonateTrees extends Component {
         ...receipt
       },
       expanded: false,
+      isRecurrent: false,
+      recurrencyMnemonic: '',
       expandedOption: '1',
       showSelectProject: false
     };
@@ -110,6 +112,7 @@ export default class DonateTrees extends Component {
       this
     );
     this.determineDefaultCurrency = this.determineDefaultCurrency.bind(this);
+    this.handleRecurring = this.handleRecurring.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -226,7 +229,12 @@ export default class DonateTrees extends Component {
       }
     });
   }
-
+  handleRecurring(isRecurrent, recurrencyMnemonic = '') {
+    this.setState({
+      isRecurrent: isRecurrent,
+      recurrencyMnemonic: recurrencyMnemonic
+    });
+  }
   handlePaymentApproved(paymentResponse) {
     let sendState = { ...this.state.form };
     if (this.props.supportTreecounter.treecounterId) {
@@ -249,7 +257,9 @@ export default class DonateTrees extends Component {
         ...this.state.form,
         paymentResponse,
         amount: this.state.selectedAmount,
-        currency: this.state.selectedCurrency
+        currency: this.state.selectedCurrency,
+        isRecurrent: this.state.isRecurrent,
+        recurrencyMnemonic: this.state.recurrencyMnemonic
       },
       this.props.selectedProject.id,
       this.props.currentUserProfile
@@ -470,6 +480,7 @@ export default class DonateTrees extends Component {
                         }
                         amount={this.state.selectedAmount}
                         currency={this.state.selectedCurrency}
+                        recurringMonths={this.props.recurringMonths}
                         expandedOption={this.state.expandedOption}
                         handleExpandedClicked={this.handleExpandedClicked}
                         context={{
@@ -480,6 +491,9 @@ export default class DonateTrees extends Component {
                           treeCount: this.state.selectedTreeCount,
                           plantProjectName: plantProject.name
                         }}
+                        handleRecurring={(isRecurrent, recurrencyMnemonic) =>
+                          this.handleRecurring(isRecurrent, recurrencyMnemonic)
+                        }
                         onSuccess={paymentResponse =>
                           this.handlePaymentApproved(paymentResponse)
                         }
@@ -513,6 +527,7 @@ DonateTrees.propTypes = {
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
+  recurringMonths: PropTypes.object,
   donate: PropTypes.func,
   paymentClear: PropTypes.func,
   supportTreecounter: PropTypes.object,

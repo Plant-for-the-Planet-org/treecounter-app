@@ -15,6 +15,7 @@ import { getPledges } from '../reducers/pledgeReducer';
 import { getPledgeEvents } from '../reducers/pledgeEventReducer';
 import { getPaymentStatus } from '../reducers/paymentStatus';
 import { getCurrencies } from '../reducers/currenciesReducer';
+import { getRecurringMonth } from '../reducers/recurringReducers';
 
 export const supportedTreecounterSelector = state =>
   getSupportedTreecounter(state);
@@ -29,6 +30,7 @@ export const entitiesSelector = state => state.entities;
 export const userFeedsSelector = state => getUserFeeds(state);
 export const pledgesSelector = state => getPledges(state);
 export const currenciesSelector = state => getCurrencies(state);
+export const recurringMonthsSelector = state => getRecurringMonth(state);
 export const paymentStatusSelector = state => getPaymentStatus(state);
 export const pledgeEventSelector = state => getPledgeEvents(state);
 

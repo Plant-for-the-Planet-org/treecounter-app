@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ChallengeCard from './ChallengeCard';
+import ChallengeCard from './challengeCard';
 
 const ChallengeList = props => {
   const { challenges } = props;

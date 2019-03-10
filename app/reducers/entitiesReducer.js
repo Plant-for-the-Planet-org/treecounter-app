@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import merge from 'lodash/merge';
+import _ from 'lodash';
 import { debug } from '../debug/index';
 
 export const initialState = {
@@ -22,6 +23,7 @@ export const getTreecounters = state => state.entities.treecounter;
 
 export const mergeEntities = createAction('ENTITIES_MERGE');
 export const deleteEntity = createAction('ENTITY_DELETE');
+export const unlinkEntity = createAction('ENTITY_UNLINK');
 
 export default handleActions(
   {
@@ -43,6 +45,18 @@ export default handleActions(
           .reduce((p, id) => ({ ...p, [id]: state[entity][id] }), {});
       });
 
+      return state;
+    },
+    ENTITIES_UNLINK: (state, action) => {
+      state = { ...state };
+
+      Object.keys(action.payload).forEach(entity => {
+        let toBeModified = _.get(entity, state);
+        let modified = toBeModified.filter(
+          item => !action.payload[entity].includes(item)
+        );
+        _.set(state, modified);
+      });
       return state;
     }
   },

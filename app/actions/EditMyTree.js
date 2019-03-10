@@ -10,7 +10,7 @@ import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
 import {
   contributionSchema,
   treecounterSchema,
-  userProfileSchema
+  plantProjectSchema
 } from '../schemas/index';
 import { debug } from '../debug/index';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
@@ -46,14 +46,17 @@ export function deleteContribution(plantContributionId) {
         plantContribution: plantContributionId
       })
         .then(res => {
-          const { treecounter } = res.data;
+          const { merge, unlink } = res.data;
+          const toBeDeleted = res.data['delete'];
+          dispatch(deleteEntity(toBeDeleted));
           dispatch(
-            deleteEntity({
-              contribution: [plantContributionId]
-            })
+            mergeEntities(normalize(merge.treecounter, treecounterSchema))
           );
-          dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
-          resolve(treecounter);
+          merge.plantProject &&
+            dispatch(
+              mergeEntities(normalize(merge.plantProject, plantProjectSchema))
+            );
+          dispatch(unlinkEntities(unlink));
         })
         .catch(err => {
           debug(err);

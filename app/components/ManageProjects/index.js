@@ -56,7 +56,6 @@ class CollapsiblePlantProject extends Component {
   }
   render() {
     const { plantProject, children } = this.props;
-    console.log('__plantProject___', plantProject);
     return (
       <div
         className="pftp-collapsible-card-layout"
@@ -70,10 +69,6 @@ class CollapsiblePlantProject extends Component {
           // Get the id of the target and add the moved element to the target's DOM
           let data = event.dataTransfer.getData('text/plain');
           this.dropProject(event, plantProject.position);
-
-          console.log(
-            'Moved Project :' + data + ' on project ' + plantProject.id
-          );
         }}
         onDragOver={event => {
           event.preventDefault();
@@ -115,7 +110,7 @@ class CollapsiblePlantProject extends Component {
                 <span className="margin-item light-text">
                   {plantProject.countPlanted}
                 </span>
-                <span>{'Trees planted'}</span>
+                <span>{i18n.t('label.trees_planted')}</span>
               </span>
             </div>
           )}
@@ -172,7 +167,6 @@ export default class ManageProjects extends Component {
 
   handleSaveProjectClick = (plantProject, index) => {
     let formRef = 'plantProject' + index;
-    console.log(this.refs[formRef].validate());
 
     let value = this.refs[formRef].getValue();
     if (value) {
@@ -250,7 +244,6 @@ export default class ManageProjects extends Component {
                         this.handleDeleteProjectCLick(plantProject, index);
                       } else {
                         //collapsed all
-                        console.log('test test');
                         if (this.refs['CollapsiblePlantProject' + index]) {
                           this.refs[
                             'CollapsiblePlantProject' + index
@@ -262,7 +255,7 @@ export default class ManageProjects extends Component {
                       }
                     }}
                   >
-                    {'Discard Changes'}
+                    {i18n.toString('label.discard_changes')}
                   </SecondaryButton>
                 </div>
               </div>
@@ -275,7 +268,6 @@ export default class ManageProjects extends Component {
   };
 
   handleAddNewProject = () => {
-    console.log('____handleAddNewProject____');
     const newPlantProjects = [...this.state.plantProjects]; // clone the array
     newPlantProjects.push(emptyProjectInfo);
     this.setState({ plantProjects: newPlantProjects });
@@ -288,11 +280,9 @@ export default class ManageProjects extends Component {
         {type == 'tpo' ? (
           <React.Fragment>
             <TextHeading>
-              {'My Dashboard'}
+              {i18n.t('label.my_dashboard')}
               <DescriptionHeading>
-                {
-                  "You can manage your plant projects, and view donations you've received"
-                }
+                {i18n.t('label.project_heading')}
               </DescriptionHeading>
             </TextHeading>
             <div className="manage-project-container">
@@ -310,9 +300,9 @@ export default class ManageProjects extends Component {
                 </div>
               </div>
               <div className="donation-info-list">
-                <CardLayout>Total Donations</CardLayout>
-                <CardLayout>Connect to stripe</CardLayout>
-                <CardLayout>Recent Donations</CardLayout>
+                <CardLayout>{i18n.t('label.total_donation')}</CardLayout>
+                <CardLayout>{i18n.t('label.connect_to_stripe')}</CardLayout>
+                <CardLayout>{i18n.t('label.recent_donations')}</CardLayout>
               </div>
             </div>
           </React.Fragment>

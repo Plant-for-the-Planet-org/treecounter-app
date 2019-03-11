@@ -178,11 +178,10 @@ export default class GiftTrees extends Component {
     () => {
       if (this.state.modeUser === 'direct') {
         let returnValue;
-        returnValue = this.state.form.giftTreecounter ? true : false;
+        returnValue = this.state.form.directGift.treecounter ? true : false;
         this.setState({
           form: {
-            ...this.state.form,
-            giftMessage: this.state.giftMessage
+            ...this.state.form
           }
         });
         return returnValue;
@@ -192,8 +191,7 @@ export default class GiftTrees extends Component {
           this.setState({
             form: {
               ...this.state.form,
-              giftInvitation: value,
-              giftMessage: this.state.giftMessage
+              giftInvitation: value
             },
             giftTreecounterName: value.firstname + ' ' + value.lastname
           });
@@ -253,7 +251,7 @@ export default class GiftTrees extends Component {
   handleModeUserChange(tab) {
     this.setState({
       modeUser: tab,
-      giftMessage: '',
+      message: '',
       form: { ...this.state.form, giftMethod: tab }
     });
   }
@@ -272,20 +270,16 @@ export default class GiftTrees extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        giftTreecounter: event.suggestion.id
+        directGift: { treecounter: event.suggestion.id }
       },
       giftTreecounterName: event.suggestion.name
     });
   };
 
   handlePaymentApproved(paymentResponse) {
-    if (this.state.form.giftMethod === direct) {
+    if (this.state.form.giftMethod === 'direct') {
       this.props.gift(
         {
-          directGift: {
-            treeCounter: this.state.form.giftTreecounter,
-            message: this.state.giftMessage
-          },
           paymentResponse,
           ...this.state.form,
           amount: this.state.selectedAmount,
@@ -296,7 +290,6 @@ export default class GiftTrees extends Component {
     } else {
       this.props.gift(
         {
-          invitationGift: { message: this.state.giftMessage },
           paymentResponse,
           ...this.state.form,
           amount: this.state.selectedAmount,
@@ -313,8 +306,27 @@ export default class GiftTrees extends Component {
     });
   };
   handleMessageChange(event) {
-    //set giftMessage as part of form only as we are setting treecounter.
-    this.setState({ giftMessage: event.target.value });
+    //set message as part of form only as we are setting treecounter.
+    this.setState({});
+    this.setState({
+      form: {
+        ...this.state.form,
+        directGift: {
+          ...this.state.form.directGift,
+          message: event.target.value
+        }
+      }
+    });
+  }
+  handleInvitationMessageChange(event) {
+    //set message as part of form only as we are setting treecounter.
+    this.setState({
+      form: {
+        ...this.state.form,
+        invitationGift: { message: event.target.value }
+      },
+      giftTreecounterName: event.suggestion.name
+    });
   }
 
   render() {
@@ -455,7 +467,6 @@ export default class GiftTrees extends Component {
                         />
                         <div className="pftp-textarea">
                           <textarea
-                            value={this.state.giftMessage}
                             placeholder="Gift Message"
                             onChange={this.handleMessageChange.bind(this)}
                           />
@@ -470,9 +481,10 @@ export default class GiftTrees extends Component {
                         />
                         <div className="pftp-textarea">
                           <textarea
-                            value={this.state.giftMessage}
                             placeholder="Gift Message"
-                            onChange={this.handleMessageChange.bind(this)}
+                            onChange={this.handleInvitationMessageChange.bind(
+                              this
+                            )}
                           />
                         </div>
                       </React.Fragment>

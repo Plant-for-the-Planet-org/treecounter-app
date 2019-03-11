@@ -11,6 +11,7 @@ import _ from 'lodash';
 import TextHeading from '../Common/Heading/TextHeading';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import CardLayout from '../Common/Card';
+import { postChangeOrder } from '../../actions/manageProject';
 
 let TCombForm = t.form.Form;
 const emptyProjectInfo = {
@@ -39,12 +40,20 @@ class CollapsiblePlantProject extends Component {
     this.state = {
       plantProjectsPickerVisibility: !props.plantProject.name
     };
+    this.dropProject = this.dropProject.bind(this);
   }
   togglePicker = () => {
     this.setState({
       plantProjectsPickerVisibility: !this.state.plantProjectsPickerVisibility
     });
   };
+  dropProject(event, position) {
+    let project_id = event.dataTransfer.getData('text/plain');
+    let data = {
+      position: position
+    };
+    postChangeOrder(data, { plantProject: project_id });
+  }
   render() {
     const { plantProject, children } = this.props;
     console.log('__plantProject___', plantProject);
@@ -60,6 +69,7 @@ class CollapsiblePlantProject extends Component {
           event.preventDefault();
           // Get the id of the target and add the moved element to the target's DOM
           let data = event.dataTransfer.getData('text/plain');
+          this.dropProject(event, plantProject.position);
 
           console.log(
             'Moved Project :' + data + ' on project ' + plantProject.id

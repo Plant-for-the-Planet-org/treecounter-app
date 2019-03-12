@@ -18,7 +18,14 @@ export default (editProfileStyle = EStyleSheet.create({
     width: 30,
     marginRight: 5
   },
-  details: {
+  flexStyle: {
     flexDirection: 'row'
+  },
+  treecount_input: {
+    paddingLeft: 8,
+    width: 50,
+    borderBottomWidth: 1,
+    borderColor: '#686060',
+    paddingBottom: 2
   }
 }));

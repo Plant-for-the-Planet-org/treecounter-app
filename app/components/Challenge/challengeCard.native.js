@@ -34,7 +34,7 @@ export default class ChallengeCard extends React.Component {
         <Text style={challengesStyle.goalStyle}>
           {goal + ' Trees by ' + end_date}
         </Text>
-        <View style={challengesStyle.details}>
+        <View style={challengesStyle.flexStyle}>
           <UserProfileImage profileImage={avatar} />
           <View>
             <Text>{direction === 'target' ? 'from' : 'to'}</Text>

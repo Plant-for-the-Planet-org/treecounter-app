@@ -10,24 +10,38 @@ import {
   Dimensions,
   FlatList
 } from 'react-native';
-import TouchableItem from '../../components/Common/TouchableItem';
+
 import challengesStyle from '../../styles/challenge';
 
 import CardLayout from '../Common/Card';
+import UserProfileImage from '../Common/UserProfileImage';
 
 export default class ChallengeCard extends React.Component {
   render() {
     let { challenge } = this.props;
     console.log(challenge);
-    let { direction, goal, end_date, status, created, fullname } = challenge;
+    let {
+      direction,
+      goal,
+      avatar,
+      end_date,
+      status,
+      created,
+      fullname
+    } = challenge;
     return (
       <CardLayout>
         <Text style={challengesStyle.goalStyle}>
           {goal + ' Trees by ' + end_date}
         </Text>
-        <Text>{direction === 'target' ? 'from' : 'to'}</Text>
+        <View style={challengesStyle.details}>
+          <UserProfileImage profileImage={avatar} />
+          <View>
+            <Text>{direction === 'target' ? 'from' : 'to'}</Text>
+            <Text>{fullname}</Text>
+          </View>
+        </View>
         <Text>{created}</Text>
-        <Text>{fullname}</Text>
         {direction === 'target' ? (
           <Text>Dummy</Text>
         ) : (

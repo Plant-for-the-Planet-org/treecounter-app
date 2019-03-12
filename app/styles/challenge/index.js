@@ -12,5 +12,13 @@ export default (editProfileStyle = EStyleSheet.create({
     borderRadius: 6,
     width: 120,
     textAlign: 'center'
+  },
+  profileImage: {
+    height: 30,
+    width: 30,
+    marginRight: 5
+  },
+  details: {
+    flexDirection: 'row'
   }
 }));

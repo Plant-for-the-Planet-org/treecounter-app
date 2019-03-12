@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import { TabView, TabBar, SceneMap, View } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar';
 import { Dimensions } from 'react-native';
-import ChallengeListContainer from '../../containers/Challenge/challengeList';
+import ChallengeUser from './Tabs/ChallengeUser';
+import ChallengeEmail from './Tabs/ChallengeEmail';
 
 const Layout = {
   window: {
@@ -56,9 +57,9 @@ export default class GiftTabView extends Component {
   _renderSelectionScene = ({ route }) => {
     switch (route.key) {
       case 'email':
-        return <ChallengeListContainer />;
+        return <ChallengeEmail />;
       case 'user':
-        return <ChallengeListContainer />;
+        return <ChallengeUser />;
       default:
         return null;
     }

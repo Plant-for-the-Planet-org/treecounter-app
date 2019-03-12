@@ -6,10 +6,10 @@ import App from './app/components/App';
 import { getApiRoute } from '../../../app/actions/apiRouting';
 import axios from 'axios';
 import { context } from '../../../app/config';
-import './treecounter.widget.scss';
+import './progressbarwidget.scss';
 // import native Shim to compile ES6 class as it is
 import './native-shim';
-import PFTPWidgetTreeCounter from './PFTPNativeTreeCounterWidget';
+import PFTPWidgetTreeCounter from './PFTPNativeProgressbarWidget';
 const { scheme, host, base: baseUrl } = context;
 const serverName = `${scheme}://${host}`;
 
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (
       allBlockQuote[i].attributes.getNamedItem('pftp') &&
       allBlockQuote[i].attributes.getNamedItem('data-widget-type').nodeValue ===
-        'treecounter'
+        'progressbar'
     ) {
       let uid = allBlockQuote[i].attributes.getNamedItem('data-treecounterId');
       let showGraphics = allBlockQuote[i].attributes.getNamedItem(
@@ -66,12 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
             let customElementRegistry = window.customElements;
             //Register New Custom element in DOM
             customElementRegistry.define(
-              'pftp-widget-treecounter',
+              'pftp-widget-progressbar',
               PFTPWidgetTreeCounter
             );
             const treecounter = result.data;
 
-            let div = document.createElement('pftp-widget-treecounter');
+            let div = document.createElement('pftp-widget-progressbar');
             const shadowRoot = div.attachShadow({ mode: 'closed' });
             const newDivNode = allBlockQuote[i].parentNode.insertBefore(
               div,

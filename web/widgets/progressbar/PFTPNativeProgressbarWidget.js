@@ -1,4 +1,4 @@
-export default class PFTPWidgetTreeCounter extends HTMLElement {
+export default class PFTPProgressbarWidget extends HTMLElement {
   constructor() {
     // Always call super first in constructor
     super();

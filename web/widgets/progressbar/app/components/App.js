@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PlantedProgressBar from '../../../../../app/components/PlantProjects/PlantedProgressbar';
-import TreecounterGraphicsText from '../../../../../app/components/TreecounterGraphics/TreecounterGraphicsText';
 import SecondaryButton from '../../../../../app/components/Common/Button/SecondaryButton';
 import { SideMenuImage } from '../../../../../app/assets';
 import PropTypes from 'prop-types';
@@ -13,62 +12,17 @@ export default class App extends Component {
     super(props);
     const treecounter = this.props.treecounter;
     this.state = {
-      svgData: {
-        id: treecounter.id,
-        target: treecounter.countTarget,
-        planted: treecounter.countPlanted,
-        community: treecounter.countReceived,
-        personal: treecounter.countPersonal,
-        targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear,
-        type: treecounter.userProfile.type
-      }
+      target: treecounter.countTarget,
+      planted: treecounter.countPlanted
     };
-  }
-  updateSvg(toggle) {
-    console.log(toggle);
-    if (toggle) {
-      const treecounter = this.props.treecounter;
-      let svgData = {
-        id: treecounter.id,
-        target: treecounter.countReceived + treecounter.countPersonal, // light color
-        planted: treecounter.countPersonal, //dark color
-        community: treecounter.countReceived,
-        personal: treecounter.countPersonal,
-        targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear,
-        type: treecounter.userProfile.type
-      };
-      this.setState({ svgData: Object.assign({}, svgData) });
-    } else {
-      const treecounter = this.props.treecounter;
-      let svgData = {
-        id: treecounter.id,
-        target: treecounter.countTarget,
-        planted: treecounter.countPlanted,
-        community: treecounter.countReceived,
-        personal: treecounter.countPersonal,
-        targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear,
-        type: treecounter.userProfile.type
-      };
-      this.setState({ svgData: Object.assign({}, svgData) });
-    }
   }
   componentWillReceiveProps(nextProps) {
     const treecounter = nextProps.treecounter;
     if (treecounter) {
-      let svgData = {
-        id: treecounter.id,
+      this.setState({
         target: treecounter.countTarget,
-        planted: treecounter.countPlanted,
-        community: treecounter.countReceived,
-        personal: treecounter.countPersonal,
-        targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear,
-        type: treecounter.userProfile.type
-      };
-      this.setState({ svgData });
+        planted: treecounter.countPlanted
+      });
     }
   }
 
@@ -90,9 +44,9 @@ export default class App extends Component {
           boundary as affecting the cascade, namely the scope of selectors and the importance of rules. */}
         <style>{`:host {all: initial;}`}</style>
         <div className="widget-container" id={'widget-container'}>
-          <link href="treecounterwidget.css" rel="stylesheet" />
+          <link href="progressbarwidget.css" rel="stylesheet" />
           <link
-            href={`${serverName}/treecounterwidget.css"`}
+            href={`${serverName}/progressbarwidget.css"`}
             rel="stylesheet"
           />
           {/* Apply CSS hooks here */}
@@ -123,11 +77,9 @@ export default class App extends Component {
             )}
           </div>
           <div className="canvasContainer flex-column">
-            <SvgContainer {...this.state.svgData} />
-            <TreecounterGraphicsText
-              trillion={false}
-              onToggle={toggleVal => this.updateSvg(toggleVal)}
-              treecounterData={this.state.svgData}
+            <PlantedProgressBar
+              countPlanted={this.state.target}
+              countTarget={this.state.planted}
             />
           </div>
         </div>

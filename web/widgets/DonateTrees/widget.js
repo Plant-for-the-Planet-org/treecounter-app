@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
       let backgroundColor = allBlockQuote[i].attributes.getNamedItem(
         'data-background-color'
       );
+      let ProjectId = allBlockQuote[i].attributes.getNamedItem(
+        'data-projectId'
+      );
 
       if (showGraphics && showGraphics.nodeValue === 'false') {
         showGraphics = false;
@@ -56,16 +59,19 @@ document.addEventListener('DOMContentLoaded', function() {
       if (backgroundColor && backgroundColor.nodeValue) {
         backgroundColor = backgroundColor.nodeValue;
       }
+      if (ProjectId && ProjectId.nodeValue) {
+        ProjectId = ProjectId.nodeValue;
+      }
       if (uid) {
         uid = isNaN(parseInt(uid.nodeValue))
           ? uid.nodeValue
           : parseInt(uid.nodeValue);
         getRequest('treecounter_get', { uid })
           .then(result => {
-            document.registerElement('pftp-widget-treecounter');
+            document.registerElement('pftp-widget-donation');
             const treecounter = result.data;
 
-            let div = document.createElement('pftp-widget-treecounter');
+            let div = document.createElement('pftp-widget-donation');
             // div.className = 'pftp-widget-tree-counter-container';
             const shadowRoot = div.attachShadow({ mode: 'closed' });
             const newDivNode = allBlockQuote[i].parentNode.insertBefore(
@@ -73,35 +79,48 @@ document.addEventListener('DOMContentLoaded', function() {
               allBlockQuote[i]
             );
 
-            shadowRoot.innerHTML =
-              cssStyle +
-              `<button class="pftp-button-follow" type="button" id="${uid}" onclick="pftp.giftTree(event)">Donate trees</button>`;
+            ReactDOM.render(
+              <App
+                key={'test_app'}
+                treecounter={treecounter}
+                showGraphics={!!showGraphics}
+                showDonateButton={!!showDonateButton}
+                serverName={serverName}
+                baseUrl={baseUrl}
+                backgroundColor={backgroundColor}
+                ProjectId={ProjectId}
+              />,
+              shadowRoot
+            );
+            // shadowRoot.innerHTML =
+            //   cssStyle +
+            //   `<button class="pftp-button-follow" type="button" id="${uid}" onclick="pftp.giftTree(event)">Donate trees</button>`;
 
-            window.pftp = {
-              giftTree: event => {
-                console.log(event);
-                // const uid = event.target.id;
-                // const url = `${serverName}${baseUrl}/giftTrees?uid=${uid}`;
-                // console.log(serverName);
-                // window.open(url, '_blank');
-                const body = document.body;
-                let div = document.createElement('div');
-                div.className = 'overlay-container ';
-                body.appendChild(div);
-                ReactDOM.render(
-                  <App
-                    key={'test_app'}
-                    treecounter={treecounter}
-                    showGraphics={!!showGraphics}
-                    showDonateButton={!!showDonateButton}
-                    serverName={serverName}
-                    baseUrl={baseUrl}
-                    backgroundColor={backgroundColor}
-                  />,
-                  div
-                );
-              }
-            };
+            // window.pftp = {
+            //   giftTree: event => {
+            //     console.log(event);
+            //     // const uid = event.target.id;
+            //     // const url = `${serverName}${baseUrl}/giftTrees?uid=${uid}`;
+            //     // console.log(serverName);
+            //     // window.open(url, '_blank');
+            //     const body = document.body;
+            //     let div = document.createElement('div');
+            //     div.className = 'overlay-container ';
+            //     body.appendChild(div);
+            //     ReactDOM.render(
+            //       <App
+            //         key={'test_app'}
+            //         treecounter={treecounter}
+            //         showGraphics={!!showGraphics}
+            //         showDonateButton={!!showDonateButton}
+            //         serverName={serverName}
+            //         baseUrl={baseUrl}
+            //         backgroundColor={backgroundColor}
+            //       />,
+            //       div
+            //     );
+            //   }
+            // };
             allBlockQuote[i].parentNode.removeChild(allBlockQuote[i]);
           })
           .catch(error => {

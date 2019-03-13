@@ -8,6 +8,10 @@ import ReactTooltipStyle from '../../../../../node_modules/react-tooltip/dist/st
 import i18n from '../../../../../app/locales/i18n.js';
 import { getLocalRoute } from '../../../../../app/actions/apiRouting';
 import PlantedProgressBar from '../../../../../app/components/PlantProjects/PlantedProgressbar';
+import PlantProjectFull from '../../../../../app/components/PlantProjects/PlantProjectFull';
+import PrimaryButton from '../../../../../app/components/Common/Button/PrimaryButton';
+import ReactDOM from 'react-dom';
+import DonationFlow from './DonationFLow';
 
 export default class App extends Component {
   constructor(props) {
@@ -25,36 +29,6 @@ export default class App extends Component {
         type: treecounter.userProfile.type
       }
     };
-  }
-  updateSvg(toggle) {
-    console.log(toggle);
-    if (toggle) {
-      const treecounter = this.props.treecounter;
-      let svgData = {
-        id: treecounter.id,
-        target: treecounter.countReceived + treecounter.countPersonal, // light color
-        planted: treecounter.countPersonal, //dark color
-        community: treecounter.countReceived,
-        personal: treecounter.countPersonal,
-        targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear,
-        type: treecounter.userProfile.type
-      };
-      this.setState({ svgData: Object.assign({}, svgData) });
-    } else {
-      const treecounter = this.props.treecounter;
-      let svgData = {
-        id: treecounter.id,
-        target: treecounter.countTarget,
-        planted: treecounter.countPlanted,
-        community: treecounter.countReceived,
-        personal: treecounter.countPersonal,
-        targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear,
-        type: treecounter.userProfile.type
-      };
-      this.setState({ svgData: Object.assign({}, svgData) });
-    }
   }
   componentWillReceiveProps(nextProps) {
     const treecounter = nextProps.treecounter;
@@ -74,10 +48,15 @@ export default class App extends Component {
   }
 
   render() {
-    const { serverName, baseUrl, treecounter } = this.props;
+    const { serverName, baseUrl, treecounter, ProjectId } = this.props;
+    console.log('treecounter', treecounter);
     const style = `.canvasContainer {
       background-color:${this.props.backgroundColor};
     }`;
+    const plantProjects = treecounter.userProfile.plantProjects;
+    const result = plantProjects.find(
+      plantProject => plantProject.id == ProjectId
+    );
     return (
       <div
         className="widget-container"
@@ -86,48 +65,30 @@ export default class App extends Component {
         _reactinternal={this._inputRef1}
         ref={this._inputRef1}
       >
-        Donate flow will come here
-        <PlantedProgressBar
-          countPlanted={50000}
-          countTarget={100000}
-          // hideTargetImage
+        <link href="donatetreewidget.css" rel="stylesheet" />
+        <link href={`${serverName}/donatetreewidget.css"`} rel="stylesheet" />
+        <PlantProjectFull
+          callExpanded={false}
+          expanded={false}
+          plantProject={result}
+          tpoName={'harsh'}
+          selectAnotherProject={true}
+          projectClear={undefined}
         />
-        {/* <link
-          href="https://firebasestorage.googleapis.com/v0/b/pictureappbackend-test.appspot.com/o/TreeCounterWidget%2Fv1%2Ftreecounterwidget.css?alt=media&token=26864f0f-9934-4410-9480-aaa304627a38"
-          rel="stylesheet"
-        />
-        <link href={`${serverName}/treecounterwidget.css" rel="stylesheet"`} />
-        <style>{style}</style>
-        <style>{ReactTooltipStyle}</style>
-        <div className="pftp-widget-row">
-          <div className={'pftp-widget-img__container'}>
-            {this.props.showGraphics && (
-              <img src={SideMenuImage} className={'pftp-widget-img'} />
-            )}
-          </div>
-
-          {this.props.showDonateButton && (
-            <SecondaryButton
-              onClick={event => {
-                console.log('SecondaryButton', window, windows, this);
-                const url = `${serverName}/${getLocalRoute(
-                  'app_registerTrees'
-                )}?uid=${treecounter.id}`;
-                window.open(url, '_blank');
-              }}
-            >
-              {i18n.t('label.plant_trees')}
-            </SecondaryButton>
-          )}
+        <div className="select-project_button__container">
+          <PrimaryButton
+            onClick={event => {
+              console.log(event);
+              const body = document.body;
+              let div = document.createElement('div');
+              div.className = 'overlay-container ';
+              body.appendChild(div);
+              ReactDOM.render(<DonationFlow />, div);
+            }}
+          >
+            {i18n.t('label.donate')}
+          </PrimaryButton>
         </div>
-        <div className="canvasContainer flex-column">
-          <SvgContainer {...this.state.svgData} />
-          <TreecounterGraphicsText
-            trillion={false}
-            onToggle={toggleVal => this.updateSvg(toggleVal)}
-            treecounterData={this.state.svgData}
-          />
-        </div> */}
       </div>
     );
   }
@@ -139,5 +100,6 @@ App.propTypes = {
   showDonateButton: PropTypes.bool,
   serverName: PropTypes.string,
   baseUrl: PropTypes.string,
-  backgroundColor: PropTypes.string
+  backgroundColor: PropTypes.string,
+  ProjectId: PropTypes.any
 };

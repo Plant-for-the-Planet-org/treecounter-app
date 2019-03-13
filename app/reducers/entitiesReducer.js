@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import merge from 'lodash/merge';
-import _ from 'lodash';
+import get from 'lodash/get';
+import set from 'lodash/set';
 import { debug } from '../debug/index';
 
 export const initialState = {
@@ -47,15 +48,15 @@ export default handleActions(
 
       return state;
     },
-    ENTITIES_UNLINK: (state, action) => {
+    ENTITY_UNLINK: (state, action) => {
       state = { ...state };
 
       Object.keys(action.payload).forEach(entity => {
-        let toBeModified = _.get(entity, state);
+        let toBeModified = get(state, entity);
         let modified = toBeModified.filter(
           item => !action.payload[entity].includes(item)
         );
-        _.set(state, modified);
+        set(state, entity, modified);
       });
       return state;
     }

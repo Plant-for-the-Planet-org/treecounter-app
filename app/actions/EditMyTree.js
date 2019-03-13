@@ -6,7 +6,11 @@ import {
 } from '../utils/api';
 
 import { updateRoute } from '../helpers/routerHelper';
-import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
+import {
+  deleteEntity,
+  mergeEntities,
+  unlinkEntity
+} from '../reducers/entitiesReducer';
 import {
   contributionSchema,
   treecounterSchema,
@@ -48,15 +52,18 @@ export function deleteContribution(plantContributionId) {
         .then(res => {
           const { merge, unlink } = res.data;
           const toBeDeleted = res.data['delete'];
+          dispatch(unlinkEntity(unlink));
           dispatch(deleteEntity(toBeDeleted));
-          dispatch(
-            mergeEntities(normalize(merge.treecounter, treecounterSchema))
-          );
-          merge.plantProject &&
+          merge &&
+            merge.treecounter &&
+            dispatch(
+              mergeEntities(normalize(merge.treecounter, treecounterSchema))
+            );
+          merge &&
+            merge.plantProject &&
             dispatch(
               mergeEntities(normalize(merge.plantProject, plantProjectSchema))
             );
-          dispatch(unlinkEntities(unlink));
         })
         .catch(err => {
           debug(err);

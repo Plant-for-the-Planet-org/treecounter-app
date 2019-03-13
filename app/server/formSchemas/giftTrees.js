@@ -56,6 +56,13 @@ export default {
           },
           maxLength: 50,
           propertyOrder: 3
+        },
+        message: {
+          type: 'string',
+          title: 'label.message',
+          widget: 'textarea',
+          icon: null,
+          propertyOrder: 4
         }
       },
       required: ['firstname', 'lastname', 'email'],

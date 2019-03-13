@@ -320,15 +320,6 @@ export default class GiftTrees extends Component {
       }
     });
   }
-  handleInvitationMessageChange(event) {
-    //set message as part of form only as we are setting treecounter.
-    this.setState({
-      form: {
-        ...this.state.form,
-        invitationGift: { message: event.target.value }
-      }
-    });
-  }
 
   render() {
     let displayNone = classNames({
@@ -482,14 +473,6 @@ export default class GiftTrees extends Component {
                           type={giftInvitationFormSchema}
                           options={giftInvitationSchemaOptions}
                         />
-                        <div className="pftp-textarea">
-                          <textarea
-                            placeholder="Gift Message"
-                            onChange={this.handleInvitationMessageChange.bind(
-                              this
-                            )}
-                          />
-                        </div>
                       </React.Fragment>
                     )}
                   </Tabs>

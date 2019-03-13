@@ -304,11 +304,11 @@ export default class ManageProjects extends Component {
                   </button>
                 </div>
               </div>
-              <div className="donation-info-list">
-                <CardLayout>{i18n.t('label.total_donation')}</CardLayout>
-                <CardLayout>{i18n.t('label.connect_to_stripe')}</CardLayout>
-                <CardLayout>{i18n.t('label.recent_donations')}</CardLayout>
-              </div>
+              {/*<div className="donation-info-list">*/}
+              {/*<CardLayout>{i18n.t('label.total_donation')}</CardLayout>*/}
+              {/*<CardLayout>{i18n.t('label.connect_to_stripe')}</CardLayout>*/}
+              {/*<CardLayout>{i18n.t('label.recent_donations')}</CardLayout>*/}
+              {/*</div>*/}
             </div>
           </React.Fragment>
         ) : null}

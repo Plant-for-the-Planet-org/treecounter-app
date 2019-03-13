@@ -92,35 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
               />,
               shadowRoot
             );
-            // shadowRoot.innerHTML =
-            //   cssStyle +
-            //   `<button class="pftp-button-follow" type="button" id="${uid}" onclick="pftp.giftTree(event)">Donate trees</button>`;
-
-            // window.pftp = {
-            //   giftTree: event => {
-            //     console.log(event);
-            //     // const uid = event.target.id;
-            //     // const url = `${serverName}${baseUrl}/giftTrees?uid=${uid}`;
-            //     // console.log(serverName);
-            //     // window.open(url, '_blank');
-            //     const body = document.body;
-            //     let div = document.createElement('div');
-            //     div.className = 'overlay-container ';
-            //     body.appendChild(div);
-            //     ReactDOM.render(
-            //       <App
-            //         key={'test_app'}
-            //         treecounter={treecounter}
-            //         showGraphics={!!showGraphics}
-            //         showDonateButton={!!showDonateButton}
-            //         serverName={serverName}
-            //         baseUrl={baseUrl}
-            //         backgroundColor={backgroundColor}
-            //       />,
-            //       div
-            //     );
-            //   }
-            // };
             allBlockQuote[i].parentNode.removeChild(allBlockQuote[i]);
           })
           .catch(error => {

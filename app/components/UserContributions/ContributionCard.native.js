@@ -22,7 +22,7 @@ import Lightbox from 'react-native-lightbox';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
-import _ from 'lodash';
+import padStart from 'lodash/padStart';
 import CardLayout from '../Common/Card';
 class ContributionCard extends React.Component {
   constructor(props) {
@@ -81,14 +81,12 @@ class ContributionCard extends React.Component {
                     {new Date(measurement.measurementDate).toLocaleDateString()}
                   </Text>
                   <Text>
-                    {_.padStart(
+                    {padStart(
                       (measurement.height * 10).toFixed(1) + ' ' + 'mm',
                       10
                     )}
                   </Text>
-                  <Text>
-                    {_.padStart(measurement.diameter + ' ' + 'cm', 10)}
-                  </Text>
+                  <Text>{padStart(measurement.diameter + ' ' + 'cm', 10)}</Text>
                 </View>
               );
             })

@@ -12,7 +12,7 @@ import treecounterStyles from '../../styles/common/treecounter_svg';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import Svg, { Circle } from 'react-native-svg';
 import { Dimensions } from 'react-native';
-import _ from 'lodash';
+import padStart from 'lodash/padStart';
 
 //Only take multiple of 10s
 const squareDimension =
@@ -154,9 +154,7 @@ export default class SvgContainer extends Component {
                 <SvgUri
                   width="100%"
                   height="100%"
-                  svgXmlData={
-                    svgs['darkCrownTree' + _.padStart('' + i, 3, '0')]
-                  }
+                  svgXmlData={svgs['darkCrownTree' + padStart('' + i, 3, '0')]}
                 />
               </View>
             ) : null;
@@ -167,7 +165,7 @@ export default class SvgContainer extends Component {
                 <SvgUri
                   width="100%"
                   height="100%"
-                  svgXmlData={svgs['pot' + _.padStart('' + i, 2, '0')]}
+                  svgXmlData={svgs['pot' + padStart('' + i, 2, '0')]}
                 />
               </View>
             ) : null;

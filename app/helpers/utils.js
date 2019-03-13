@@ -21,7 +21,7 @@ import {
   leaderboards_company_grey,
   leaderboards_company_green
 } from '../assets';
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import { getErrorView } from '../server/validator';
 
 /*
@@ -39,7 +39,7 @@ export const handleServerResponseError = function(
     serverFormError.response &&
     serverFormError.response.data;
   if (data && data.code == 400 && data.hasOwnProperty('errors')) {
-    let newOptions = _.cloneDeep(formSchemaOptions);
+    let newOptions = cloneDeep(formSchemaOptions);
     for (let property in data.errors.children) {
       updateFormSchema(
         newOptions.fields[property],

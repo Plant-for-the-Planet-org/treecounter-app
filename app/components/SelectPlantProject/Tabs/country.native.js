@@ -7,7 +7,7 @@ import Proptypes from 'prop-types';
 import ListViewProjects from './listview';
 import { foldout, foldin } from '../../../assets';
 import TouchableItem from '../../Common/TouchableItem.native';
-import _ from 'lodash';
+import orderBy from 'lodash/orderBy';
 
 export default class CountryProjects extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ export default class CountryProjects extends Component {
     if (sortType == 'desc') {
       let countrySortedProjects = JSON.parse(JSON.stringify(plantProjects));
 
-      countrySortedProjects = _.orderBy(
+      countrySortedProjects = orderBy(
         countrySortedProjects,
         ['country'],
         'desc'
@@ -56,7 +56,7 @@ export default class CountryProjects extends Component {
 
       let countrySortedProjects = plantProjects;
 
-      countrySortedProjects = _.orderBy(
+      countrySortedProjects = orderBy(
         countrySortedProjects,
         ['country'],
         'asc'

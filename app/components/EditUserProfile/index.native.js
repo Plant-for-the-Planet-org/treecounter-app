@@ -11,7 +11,6 @@ import {
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
-import _ from 'lodash';
 import { ProfileImagePickerTemplate } from './ProfileImagePickerTemplate.native';
 import styles from '../../styles/edit_profile.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';

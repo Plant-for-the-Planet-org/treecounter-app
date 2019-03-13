@@ -8,7 +8,6 @@ import { updateJWT, updateActivateToken } from '../utils/user';
 import { NotificationAction } from './notificationAction';
 import { loadTpos } from './loadTposAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
-import _ from 'lodash';
 export const userLogout = createAction('USER_LOGOUT');
 
 export function login(credentials, recaptchaToken, navigation = undefined) {

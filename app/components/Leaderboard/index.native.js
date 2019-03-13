@@ -13,7 +13,7 @@ import { categoryIcons } from '../../helpers/utils';
 import LeaderboardItem from './leaderBoardListItem.native';
 import { getLocalRoute } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n';
-import _ from 'lodash';
+import sortBy from 'lodash/sortBy';
 
 export default class Leaderboard extends Component {
   constructor(props) {
@@ -65,7 +65,7 @@ export default class Leaderboard extends Component {
     let listItemsUI = <LoadingIndicator />;
     let maxPlanted = 0;
     if (this.props.queryResult) {
-      const sortedQueryResults = _.sortBy(this.props.queryResult, ['planted']);
+      const sortedQueryResults = sortBy(this.props.queryResult, ['planted']);
       maxPlanted = sortedQueryResults[sortedQueryResults.length - 1].planted;
     }
 

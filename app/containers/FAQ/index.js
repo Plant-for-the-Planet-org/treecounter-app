@@ -2,7 +2,7 @@ import React from 'react';
 
 import FAQ from '../../components/FAQ';
 import { FAQAction } from '../../actions/faqAction';
-import _ from 'lodash';
+import sortBy from 'lodash/sortBy';
 
 class FAQContainer extends React.Component {
   constructor() {
@@ -16,7 +16,7 @@ class FAQContainer extends React.Component {
   componentWillMount() {
     FAQAction().then(
       success => {
-        const faqs = _.sortBy(success.data, ['position', 'id']);
+        const faqs = sortBy(success.data, ['position', 'id']);
         this.setState({
           loading: false,
           faqs

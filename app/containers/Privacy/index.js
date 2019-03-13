@@ -1,7 +1,7 @@
 import React from 'react';
 import Privacy from '../../components/Privacy';
 import { PrivacyAction } from '../../actions/privacyAction';
-import _ from 'lodash';
+import sortBy from 'lodash/sortBy';
 class PrivacyContainer extends React.Component {
   constructor() {
     super();
@@ -15,7 +15,7 @@ class PrivacyContainer extends React.Component {
     PrivacyAction().then(
       success => {
         try {
-          const privacy = _.sortBy(success.data, ['position', 'id']);
+          const privacy = sortBy(success.data, ['position', 'id']);
           this.setState({
             loading: false,
             privacy: privacy

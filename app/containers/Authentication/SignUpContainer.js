@@ -7,7 +7,6 @@ import { updateRoute } from '../../helpers/routerHelper';
 import { SignUp } from '../../components/Authentication';
 import { signUp } from '../../actions/signupActions';
 import { schemaOptions } from '../../server/parsedSchemas/signup';
-import _ from 'lodash';
 import { handleServerResponseError } from '../../helpers/utils';
 
 class SignUpContainer extends React.Component {

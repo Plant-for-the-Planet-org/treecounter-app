@@ -16,7 +16,7 @@ import { getImageUrl } from '../../actions/apiRouting';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import styles from '../../styles/header/search_layout.native';
-import _ from 'lodash';
+import debounce from 'lodash/debounce';
 
 class SearchLayout extends React.Component {
   static SearchBar = SearchBar;
@@ -33,7 +33,7 @@ class SearchLayout extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 200);
+    this.onChangeTextDelayed = debounce(this._handleChangeQuery, 200);
   }
 
   _handleSubmit = q => {

@@ -53,29 +53,18 @@ export default class App extends Component {
           <style>{style}</style>
           {/* Apply React Tooltip Library CSS */}
           <style>{ReactTooltipStyle}</style>
-          <div className="pftp-widget-row">
-            <div className={'pftp-widget-img__container'}>
-              {this.props.showGraphics && (
-                <img
-                  src={serverName + SideMenuImage}
-                  className={'pftp-widget-img'}
-                />
-              )}
-            </div>
-
-            {this.props.showDonateButton && (
-              <SecondaryButton
-                onClick={event => {
-                  const url = `${serverName}/${getLocalRoute(
-                    'app_registerTrees'
-                  )}?uid=${treecounter.id}`;
-                  window.open(url, '_blank');
-                }}
-              >
-                {i18n.t('label.plant_trees')}
-              </SecondaryButton>
-            )}
-          </div>
+          {this.props.showDonateButton && (
+            <SecondaryButton
+              onClick={event => {
+                const url = `${serverName}/${getLocalRoute(
+                  'app_registerTrees'
+                )}?uid=${treecounter.id}`;
+                window.open(url, '_blank');
+              }}
+            >
+              {i18n.t('label.plant_trees')}
+            </SecondaryButton>
+          )}
           <div className="canvasContainer flex-column">
             <PlantedProgressBar
               countPlanted={this.state.target}

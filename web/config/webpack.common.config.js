@@ -51,7 +51,7 @@ const config = {
     new HtmlWebPackPlugin({
       inject: true,
       chunks: ['progressbarwidget'],
-      filename: './testprogressbar.html',
+      filename: './progressbarwidget.html',
       template: './web/widget.index.html'
     }),
     new HtmlWebPackPlugin({

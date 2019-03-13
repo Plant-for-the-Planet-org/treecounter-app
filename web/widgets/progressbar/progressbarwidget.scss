@@ -70,3 +70,18 @@
     }
   }
 }
+.pftp-button-secondary {
+  width: 20%;
+  align-self: center;
+  margin-right: 20px;
+  outline: none;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.pftp-widget-row {
+  // margin-right: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

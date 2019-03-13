@@ -205,11 +205,13 @@ export default class SelectPlantProject extends Component {
                 tpoName={this.state.modalProject.tpo_name}
               />
             ) : null}
-            <PrimaryButton
-              onClick={() => this.onSelectClicked(this.state.modalProject.id)}
-            >
-              {i18n.t('label.select_project')}
-            </PrimaryButton>
+            <div className="select-project_button__container">
+              <PrimaryButton
+                onClick={() => this.onSelectClicked(this.state.modalProject.id)}
+              >
+                {i18n.t('label.select_project')}
+              </PrimaryButton>
+            </div>
           </div>
         </ModalDialog>
         <div className="select-project__container">

@@ -7,7 +7,8 @@ import { currentUserProfileSelector } from '../../selectors/index';
 import {
   updatePlantProject,
   deletePlantProject,
-  addPlantProject
+  addPlantProject,
+  orderPlantProject
 } from '../../actions/updateUserProfile';
 
 class ManageProjectContainer extends Component {
@@ -79,6 +80,9 @@ class ManageProjectContainer extends Component {
         updatePlantProject={this.updatePlantProject}
         deletePlantProject={this.deletePlantProject}
         addPlantProject={this.addPlantProject}
+        orderPlantProject={(data, params) =>
+          this.props.orderPlantProject(data, params)
+        }
       />
     );
   }
@@ -93,7 +97,8 @@ const mapDispatchToProps = dispatch => {
     {
       updatePlantProject,
       deletePlantProject,
-      addPlantProject
+      addPlantProject,
+      orderPlantProject
     },
     dispatch
   );
@@ -107,5 +112,6 @@ ManageProjectContainer.propTypes = {
   currentUserProfile: PropTypes.object,
   updatePlantProject: PropTypes.func.isRequired,
   deletePlantProject: PropTypes.func.isRequired,
-  addPlantProject: PropTypes.func.isRequired
+  addPlantProject: PropTypes.func.isRequired,
+  orderPlantProject: PropTypes.func.isRequired
 };

@@ -11,7 +11,6 @@ import _ from 'lodash';
 import TextHeading from '../Common/Heading/TextHeading';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import CardLayout from '../Common/Card';
-import { postChangeOrder } from '../../actions/manageProject';
 
 let TCombForm = t.form.Form;
 const emptyProjectInfo = {
@@ -52,7 +51,7 @@ class CollapsiblePlantProject extends Component {
     let data = {
       position: position
     };
-    postChangeOrder(data, { plantProject: project_id });
+    this.props.orderPlantProject(data, { plantProject: project_id });
   }
   render() {
     const { plantProject, children } = this.props;
@@ -125,7 +124,8 @@ class CollapsiblePlantProject extends Component {
 CollapsiblePlantProject.propTypes = {
   plantProject: PropTypes.object,
   children: PropTypes.node,
-  deleteProject: PropTypes.func.isRequired
+  deleteProject: PropTypes.func.isRequired,
+  orderPlantProject: PropTypes.func.isRequired
 };
 
 export default class ManageProjects extends Component {
@@ -139,10 +139,12 @@ export default class ManageProjects extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    let plantProjects = (nextProps &&
+      nextProps.currentUserProfile &&
+      nextProps.currentUserProfile.plantProjects) || [emptyProjectInfo];
+    plantProjects = _.sortBy(plantProjects, ['position']);
     this.setState({
-      plantProjects: (nextProps &&
-        nextProps.currentUserProfile &&
-        nextProps.currentUserProfile.plantProjects) || [emptyProjectInfo]
+      plantProjects: plantProjects
     });
   }
 
@@ -217,6 +219,9 @@ export default class ManageProjects extends Component {
             deleteProject={() => {
               this.handleDeleteProjectCLick(plantProject, index);
             }}
+            orderPlantProject={(data, params) =>
+              this.props.orderPlantProject(data, params)
+            }
           >
             <div className="user-profile__project-form-group">
               <div className="plant-project__item">
@@ -316,5 +321,6 @@ ManageProjects.propTypes = {
   currentUserProfile: PropTypes.object,
   updatePlantProject: PropTypes.func.isRequired,
   deletePlantProject: PropTypes.func.isRequired,
-  addPlantProject: PropTypes.func.isRequired
+  addPlantProject: PropTypes.func.isRequired,
+  orderPlantProject: PropTypes.func.isRequired
 };

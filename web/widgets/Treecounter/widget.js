@@ -29,11 +29,16 @@ document.addEventListener('DOMContentLoaded', function() {
   let allBlockQuote = document.getElementsByTagName('blockquote');
   for (let i = 0; i < allBlockQuote.length; i++) {
     console.log(allBlockQuote[i].attributes);
-    if (
-      allBlockQuote[i].attributes.getNamedItem('pftp') &&
-      allBlockQuote[i].attributes.getNamedItem('data-widget-type').nodeValue ===
-        'treecounter'
-    ) {
+    let widgetType = allBlockQuote[i].attributes.getNamedItem(
+      'data-widget-type'
+    );
+    const isPFTPBlockQuote = !!allBlockQuote[i].attributes.getNamedItem('pftp');
+    if (!isPFTPBlockQuote || !widgetType) {
+      return;
+    }
+    widgetType = widgetType.nodeValue;
+    const isStandardTreecounter = widgetType === 'standard';
+    if (widgetType === 'treecounter' || isStandardTreecounter) {
       let uid = allBlockQuote[i].attributes.getNamedItem('data-treecounterId');
       let showGraphics = allBlockQuote[i].attributes.getNamedItem(
         'data-show-graphics'
@@ -65,10 +70,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             let customElementRegistry = window.customElements;
             //Register New Custom element in DOM
-            customElementRegistry.define(
-              'pftp-widget-treecounter',
-              PFTPWidgetTreeCounter
-            );
+            try {
+              customElementRegistry.define(
+                'pftp-widget-treecounter',
+                PFTPWidgetTreeCounter
+              );
+            } catch (err) {}
+
             const treecounter = result.data;
 
             let div = document.createElement('pftp-widget-treecounter');
@@ -81,11 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
               <App
                 key={'test_app'}
                 treecounter={treecounter}
-                showGraphics={!!showGraphics}
+                showGraphics={!!showGraphics && !isStandardTreecounter}
                 showDonateButton={!!showDonateButton}
                 serverName={serverName}
                 baseUrl={baseUrl}
                 backgroundColor={backgroundColor}
+                isStandardTreecounter={isStandardTreecounter}
               />,
               shadowRoot
             );

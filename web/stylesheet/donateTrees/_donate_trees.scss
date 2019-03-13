@@ -423,6 +423,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 
   }
 }
@@ -509,6 +510,12 @@
 
 .payment-success {
   padding: 30px;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      width:80px;height:80px;
+    }
 }
 
 .payment-options-container {

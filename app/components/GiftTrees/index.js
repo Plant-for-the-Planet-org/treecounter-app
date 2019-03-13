@@ -32,6 +32,7 @@ import i18n from '../../locales/i18n';
 import PaymentSelector from '../Payment/PaymentSelector';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import TextBlock from '../Common/Text/TextBlock';
+import InlineLink from '../Common/InlineLink';
 
 let TCombForm = t.form.Form;
 
@@ -325,8 +326,7 @@ export default class GiftTrees extends Component {
       form: {
         ...this.state.form,
         invitationGift: { message: event.target.value }
-      },
-      giftTreecounterName: event.suggestion.name
+      }
     });
   }
 
@@ -339,7 +339,9 @@ export default class GiftTrees extends Component {
     if (this.refs.slider) {
       setTimeout(() => {
         if (pageIndex === 4) {
-          this.refs.slider.slickGoTo(pageIndex);
+          if (this.refs.slider && this.refs.slider.slickGoTo) {
+            this.refs.slider.slickGoTo(pageIndex);
+          }
         }
       }, 1000);
     }

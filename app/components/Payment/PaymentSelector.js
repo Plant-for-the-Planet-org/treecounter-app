@@ -122,7 +122,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             {giftToName && <div>{gatewayProps.context.plantProjectName}</div>}
             {giftToName && (
               <div>
-                {gatewayProps.context.treeCount} Trees Gift To {giftToName}}
+                {gatewayProps.context.treeCount} Trees Gift To {giftToName}
               </div>
             )}
             {!giftToName && (

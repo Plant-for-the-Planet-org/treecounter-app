@@ -31,7 +31,7 @@ export default class GiftEmail extends Component {
         {
           form: {
             ...this.state.form,
-            giftMessage: this.state.giftMessage
+            message: this.state.giftMessage
           }
         },
         () => {
@@ -97,20 +97,6 @@ export default class GiftEmail extends Component {
             type={giftInvitationFormSchema}
             options={giftInvitationSchemaOptions}
             value={this.state.form}
-          />
-          <TextInput
-            multiline={true}
-            style={{
-              height: 100,
-              color: '#686060',
-              borderColor: '#c4bfbf',
-              borderWidth: 1,
-              margin: 10,
-              padding: 5
-            }}
-            underlineColorAndroid={'transparent'}
-            onChangeText={val => this.onChangeText(val)}
-            placeholder={'Gift Message'}
           />
           <PrimaryButton onClick={this.onNextClick}>Next</PrimaryButton>
         </CardLayout>

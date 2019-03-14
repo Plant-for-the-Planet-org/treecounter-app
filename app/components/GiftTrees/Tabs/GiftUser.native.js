@@ -16,21 +16,16 @@ export default class GiftUser extends Component {
   componentWillMount() {}
   onSearchResultClick(suggestion) {
     // console.log('suggestion clicked', suggestion);
-    this.setState({ selectedSuggestion: suggestion, giftMessage: '' });
+    this.setState({ selectedSuggestion: suggestion, message: '' });
   }
   onNextClick() {
     if (this.state.selectedSuggestion) {
-      // this.props.openProjects(
-      //   this.state.selectedSuggestion,
-      //   'direct',
-      //   this.state.giftMessage
-      // );
       this.setState(
         {
           form: {
             ...this.state.form,
             giftTreecounter: this.state.selectedSuggestion.id,
-            giftMessage: this.state.giftMessage
+            message: this.state.message
           }
         },
         () => {
@@ -40,7 +35,7 @@ export default class GiftUser extends Component {
     }
   }
   onChangeText(val) {
-    this.setState({ giftMessage: val });
+    this.setState({ message: val });
   }
   render() {
     return (

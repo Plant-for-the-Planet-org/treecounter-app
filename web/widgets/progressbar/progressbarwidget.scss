@@ -11,10 +11,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: #f1f1f1;
 }
 .planted-project-progressbar {
   display: flex;
-  width: 70%;
+  flex: 1 1 auto;
   justify-content: space-between;
   background-color: #d2e3af;
   height: 34px;
@@ -85,12 +86,17 @@
   }
 }
 .pftp-widget-img__container {
-  width: 10%;
-}
-.pftp-widget-img__container {
-  align-self: center;
+  flex: 0 0 40px;
+  img {
+    width: 100%;
+  }
 }
 .pftp-button-secondary {
-  width: 20%;
+  width: 100%;
   font-size: 12px;
+}
+.pftp-widget-btn__container {
+  flex: 0 0 10%;
+  margin-left: 10px;
+  margin-right: 10px;
 }

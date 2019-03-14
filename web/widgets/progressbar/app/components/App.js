@@ -44,7 +44,7 @@ export default class App extends Component {
         {/*Inherited properties will be inherited as usual. It's better to think of the shadow
           boundary as affecting the cascade, namely the scope of selectors and the importance of rules. */}
         <style>{`:host {all: initial;}`}</style>
-        <div className="widget-container" id={'widget-container'}>
+        <div>
           <link href="progressbarwidget.css" rel="stylesheet" />
           <link
             href={`${serverName}/progressbarwidget.css"`}
@@ -54,33 +54,35 @@ export default class App extends Component {
           <style>{style}</style>
           {/* Apply React Tooltip Library CSS */}
           <style>{ReactTooltipStyle}</style>
-          <div className={'pftp-widget-img__container'}>
-            {this.props.showGraphics && (
-              <img src={serverName + tree} className={'pftp-widget-img'} />
-            )}
-          </div>
+          <div className="widget-container" id={'widget-container'}>
+            <div className={'pftp-widget-img__container'}>
+              {this.props.showGraphics && (
+                <img src={tree} className={'pftp-widget-img'} />
+              )}
+            </div>
 
-          <PlantedProgressBar
-            countPlanted={
-              this.state.target == 0
-                ? this.state.planted * 2
-                : this.state.target
-            }
-            countTarget={this.state.planted}
-          />
-          <div className={'pftp-widget-img__container'}>
-            {this.props.showDonateButton && (
-              <SecondaryButton
-                onClick={event => {
-                  const url = `${serverName}/${getLocalRoute(
-                    'app_registerTrees'
-                  )}?uid=${treecounter.id}`;
-                  window.open(url, '_blank');
-                }}
-              >
-                {i18n.t('label.plant_trees')}
-              </SecondaryButton>
-            )}
+            <PlantedProgressBar
+              countPlanted={
+                this.state.target == 0
+                  ? this.state.planted * 2
+                  : this.state.target
+              }
+              countTarget={this.state.planted}
+            />
+            <div className={'pftp-widget-btn__container'}>
+              {this.props.showDonateButton && (
+                <SecondaryButton
+                  onClick={event => {
+                    const url = `${serverName}/${getLocalRoute(
+                      'app_registerTrees'
+                    )}?uid=${treecounter.id}`;
+                    window.open(url, '_blank');
+                  }}
+                >
+                  {i18n.t('label.plant_trees')}
+                </SecondaryButton>
+              )}
+            </div>
           </div>
         </div>
       </React.Fragment>

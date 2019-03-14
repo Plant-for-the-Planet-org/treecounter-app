@@ -6,9 +6,10 @@ import {
 import t from 'tcomb-form-native';
 import CardLayout from '../../Common/Card';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import { TextInput, View, Picker, Text } from 'react-native';
+import { TextInput, View, Text } from 'react-native';
 import ChallengeListContainer from '../../../containers/Challenge/challengeList';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
 
 import challengeStyles from '../../../styles/challenge';
@@ -24,12 +25,20 @@ export default class ChallengeEmail extends Component {
       formValue: null,
       treeCount: 1000,
       isChecked: false,
-      byYear: 'Year'
+      byYear: ''
     };
+    let currentYear = new Date().getFullYear(),
+      years = [];
+    let endYear = currentYear + 20;
+
+    while (currentYear <= endYear) {
+      years.push(currentYear++);
+    }
+    this.years = years.map(item => {
+      return { value: item };
+    });
     this.onNextClick = this.onNextClick.bind(this);
   }
-
-  componentWillMount() {}
 
   onNextClick() {
     if (this.giftInvitation.getValue()) {
@@ -47,7 +56,6 @@ export default class ChallengeEmail extends Component {
   }
 
   render() {
-    console.log('Render of email called');
     return (
       <KeyboardAwareScrollView enableOnAndroid={true}>
         <CardLayout>
@@ -63,30 +71,39 @@ export default class ChallengeEmail extends Component {
               keyboardType="numeric"
               style={challengeStyles.treecount_input}
               onChangeText={evt => this.handleTreeCountChange(evt)}
-              value={String(this.state.treeCount)}
+              value={this.state.treeCount.toLocaleString()}
             />
             <Text>Trees</Text>
           </View>
-          <CheckBox
-            style={{ flex: 1 }}
-            onClick={() => {
-              this.setState({
-                isChecked: !this.state.isChecked
-              });
-            }}
-            isChecked={this.state.isChecked}
-            rightText={'by'}
-          />
-          <Picker
-            selectedValue={this.state.byYear}
-            onValueChange={(itemValue, itemIndex) =>
-              this.setState({
-                language: itemValue
-              })
-            }
-          >
-            <Picker.Item label="2019" value="2019" />
-          </Picker>
+          <View style={challengeStyles.flexStyle}>
+            <CheckBox
+              onClick={() => {
+                this.setState({
+                  isChecked: !this.state.isChecked
+                });
+              }}
+              style={{
+                width: 70
+              }}
+              isChecked={this.state.isChecked}
+              rightText={'by'}
+            />
+            <Dropdown
+              containerStyle={{
+                width: 70
+              }}
+              dropdownOffset={{
+                top: 0
+              }}
+              selectedItem={item =>
+                this.setState({
+                  byYear: item
+                })
+              }
+              label="Year"
+              data={this.years}
+            />
+          </View>
           <PrimaryButton onClick={this.onNextClick}>Challenge</PrimaryButton>
         </CardLayout>
         <ChallengeListContainer />

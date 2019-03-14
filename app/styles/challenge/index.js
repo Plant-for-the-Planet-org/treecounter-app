@@ -2,7 +2,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (editProfileStyle = EStyleSheet.create({
   goalStyle: {
-    fontSize: 25,
+    fontSize: 18,
     fontWeight: '600'
   },
   statusLabel: {
@@ -10,8 +10,23 @@ export default (editProfileStyle = EStyleSheet.create({
     padding: 10,
     textTransform: 'capitalize',
     borderRadius: 6,
-    width: 120,
+    overflow: 'hidden',
+    marginLeft: 20,
+    marginTop: 40,
+    width: 110,
+    height: 40,
     textAlign: 'center'
+  },
+  buttonStyle: {
+    padding: 10,
+    textTransform: 'capitalize',
+    borderRadius: 6,
+    marginLeft: 20,
+    width: 110,
+    height: 40
+  },
+  limitWidth: {
+    width: 190
   },
   profileImage: {
     height: 30,
@@ -27,5 +42,12 @@ export default (editProfileStyle = EStyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#686060',
     paddingBottom: 2
+  },
+  textStyle: {
+    fontSize: 16
+  },
+  textPadding: {
+    paddingLeft: 5,
+    paddingTop: 5
   }
 }));

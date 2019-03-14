@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 import i18n from '../../locales/i18n.js';
 import {
@@ -15,6 +16,8 @@ import challengesStyle from '../../styles/challenge';
 
 import CardLayout from '../Common/Card';
 import UserProfileImage from '../Common/UserProfileImage';
+import PrimaryButton from '../Common/Button/PrimaryButton';
+import SecondaryButton from '../Common/Button/SecondaryButton';
 
 export default class ChallengeCard extends React.Component {
   render() {
@@ -31,22 +34,55 @@ export default class ChallengeCard extends React.Component {
     } = challenge;
     return (
       <CardLayout>
-        <Text style={challengesStyle.goalStyle}>
-          {goal + ' Trees by ' + end_date}
-        </Text>
         <View style={challengesStyle.flexStyle}>
-          <UserProfileImage profileImage={avatar} />
-          <View>
-            <Text>{direction === 'target' ? 'from' : 'to'}</Text>
-            <Text>{fullname}</Text>
+          <View style={challengesStyle.limitWidth}>
+            <Text style={challengesStyle.goalStyle}>
+              {goal.toLocaleString() + ' Trees by ' + end_date}
+            </Text>
+            <View style={challengesStyle.flexStyle}>
+              <UserProfileImage profileImage={avatar} />
+              <View>
+                <View
+                  style={[
+                    challengesStyle.flexStyle,
+                    challengesStyle.textPadding
+                  ]}
+                >
+                  <Text style={challengesStyle.textStyle}>
+                    {direction === 'target' ? 'from ' : 'to '}
+                  </Text>
+                  <Text style={challengesStyle.textStyle}>{fullname}</Text>
+                </View>
+                <Text
+                  style={[
+                    challengesStyle.textStyle,
+                    challengesStyle.textPadding
+                  ]}
+                >
+                  {moment(created).format('D MMM, YYYY')}
+                </Text>
+              </View>
+            </View>
           </View>
+          {direction === 'target' ? (
+            <View>
+              <PrimaryButton
+                buttonStyle={challengesStyle.buttonStyle}
+                textStyle={challengesStyle.textStyle}
+              >
+                Accept
+              </PrimaryButton>
+              <SecondaryButton
+                buttonStyle={challengesStyle.buttonStyle}
+                textStyle={challengesStyle.textStyle}
+              >
+                Reject
+              </SecondaryButton>
+            </View>
+          ) : (
+            <Text style={challengesStyle.statusLabel}>{status}</Text>
+          )}
         </View>
-        <Text>{created}</Text>
-        {direction === 'target' ? (
-          <Text>Dummy</Text>
-        ) : (
-          <Text style={challengesStyle.statusLabel}>{status}</Text>
-        )}
       </CardLayout>
     );
   }

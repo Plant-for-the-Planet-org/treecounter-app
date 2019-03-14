@@ -105,7 +105,8 @@ export function orderPlantProject(data, params) {
       postAuthenticatedRequest('plantProject_position', data, params)
         .then(res => {
           const { statusText } = res;
-          dispatch(mergeEntities(normalize(res.data, plantProjectSchema)));
+          const plantProjects = { plantProjects: res.data };
+          dispatch(mergeEntities(normalize(plantProjects, userProfileSchema)));
           resolve(res.data);
           dispatch(setProgressModelState(false));
         })

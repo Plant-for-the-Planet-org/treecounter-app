@@ -21,7 +21,8 @@ export default class App extends Component {
         targetComment: treecounter.targetComment,
         targetYear: treecounter.targetYear,
         type: treecounter.userProfile.type
-      }
+      },
+      showDonationFlow: false
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -49,6 +50,7 @@ export default class App extends Component {
     if (
       !treecounter ||
       !treecounter.userProfile ||
+      treecounter.userProfile.type != 'tpo' ||
       !treecounter.userProfile.plantProjects ||
       treecounter.userProfile.plantProjects.length == 0
     ) {
@@ -65,27 +67,31 @@ export default class App extends Component {
         {/* Apply CSS hooks here */}
         <style>{style}</style>
         <PlantProjectFull
-          callExpanded={false}
           expanded={false}
           plantProject={result}
-          tpoName={'harsh'}
+          tpoName={treecounter.userProfile.fullname}
           selectAnotherProject={false}
           projectClear={undefined}
         />
         <div className="select-project_button__container">
           <PrimaryButton
             onClick={event => {
-              console.log(event);
-              const body = document.body;
-              let div = document.createElement('div');
-              div.className = 'overlay-container ';
-              body.appendChild(div);
-              ReactDOM.render(<DonationFlow />, div);
+              // console.log(event);
+              // const body = document.body;
+              // let div = document.createElement('div');
+              // div.className = 'overlay-container ';
+              // body.appendChild(div);
+              // ReactDOM.render(<DonationFlow />, div);
+              this.setState({ showDonationFlow: true });
             }}
           >
             {i18n.t('label.donate')}
           </PrimaryButton>
         </div>
+        <DonationFlow
+          isOpen={this.state.showDonationFlow}
+          onRequestClose={() => this.setState({ showDonationFlow: false })}
+        />
       </div>
     );
   }

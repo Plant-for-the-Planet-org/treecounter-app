@@ -7,6 +7,13 @@ import { getApiRoute } from '../../../app/actions/apiRouting';
 import axios from 'axios';
 import { context } from '../../../app/config';
 import './donateTrees.widget.scss';
+//dont forgot to include this file to remove following error from console
+// Failed to construct 'HTMLElement': Please use the 'new' operator, this DOM object constructor cannot be called as a function.
+
+import '../common/native-shim';
+import PFTPNativeDonationWidget, {
+  PFTPNativeDonationWidgetFlow
+} from './PFTPNativeDonationWidget';
 
 // import retargetEvents from 'react-shadow-dom-retarget-events';
 const { scheme, host, base: baseUrl } = context;
@@ -70,7 +77,17 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!result.data) {
               return;
             }
-            document.registerElement('pftp-widget-donation');
+            // document.registerElement('pftp-widget-donation');
+            let customElementRegistry = window.customElements;
+            //Register New Custom element in DOM
+            customElementRegistry.define(
+              'pftp-widget-donation',
+              PFTPNativeDonationWidget
+            );
+            customElementRegistry.define(
+              'pftp-widget-donation-flow',
+              PFTPNativeDonationWidgetFlow
+            );
             const treecounter = result.data;
 
             let div = document.createElement('pftp-widget-donation');

@@ -8,7 +8,8 @@ import axios from 'axios';
 import { context } from '../../../app/config';
 import './treecounter.widget.scss';
 // import native Shim to compile ES6 class as it is
-import './native-shim';
+
+import '../common/native-shim';
 import PFTPWidgetTreeCounter from './PFTPNativeTreeCounterWidget';
 const { scheme, host, base: baseUrl } = context;
 const serverName = `${scheme}://${host}`;

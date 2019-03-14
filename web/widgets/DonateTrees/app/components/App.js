@@ -43,24 +43,27 @@ export default class App extends Component {
 
   render() {
     const { serverName, baseUrl, treecounter, ProjectId } = this.props;
-    console.log('treecounter', treecounter);
     const style = `.canvasContainer {
       background-color:${this.props.backgroundColor};
     }`;
+    if (
+      !treecounter ||
+      !treecounter.userProfile ||
+      !treecounter.userProfile.plantProjects ||
+      treecounter.userProfile.plantProjects.length == 0
+    ) {
+      return null;
+    }
     const plantProjects = treecounter.userProfile.plantProjects;
     const result = plantProjects.find(
       plantProject => plantProject.id == ProjectId
     );
     return (
-      <div
-        className="widget-container"
-        // tabIndex={'-1'}
-        id={'widget-container'}
-        _reactinternal={this._inputRef1}
-        ref={this._inputRef1}
-      >
+      <div className="widget-container" id={'widget-container'}>
         <link href="donatetreewidget.css" rel="stylesheet" />
         <link href={`${serverName}/donatetreewidget.css"`} rel="stylesheet" />
+        {/* Apply CSS hooks here */}
+        <style>{style}</style>
         <PlantProjectFull
           callExpanded={false}
           expanded={false}

@@ -24,9 +24,8 @@ export async function getRequest(route, params) {
       return error;
     });
 }
-const cssStyle = `<link href="donatetreewidget.css" rel="stylesheet"/>
-<link href="${serverName}/widget.css" rel="stylesheet"/>`;
-
+//TODO harsh@onezeroeight.co
+//Move this code as common code under common folder under  widget
 document.addEventListener('DOMContentLoaded', function() {
   let allBlockQuote = document.getElementsByTagName('blockquote');
   for (let i = 0; i < allBlockQuote.length; i++) {
@@ -68,6 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
           : parseInt(uid.nodeValue);
         getRequest('treecounter_get', { uid })
           .then(result => {
+            if (!result.data) {
+              return;
+            }
             document.registerElement('pftp-widget-donation');
             const treecounter = result.data;
 

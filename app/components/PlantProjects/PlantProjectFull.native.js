@@ -64,7 +64,7 @@ class PlantProjectFull extends React.Component {
             <View style={styles.plantProjectDetails}>
               <PlantProjectDetails {...detailsProps} />
             </View>
-
+          {this.props.plantProject.allowDonations ? (
             <View style={styles.buttonContainer}>
               <PrimaryButton
                 onClick={() =>
@@ -73,7 +73,7 @@ class PlantProjectFull extends React.Component {
               >
                 {i18n.t('label.donate')}
               </PrimaryButton>
-            </View>
+            </View> ) : null}
           </CardLayout>
         </ScrollView>
         <View

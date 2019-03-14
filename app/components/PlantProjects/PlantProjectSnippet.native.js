@@ -180,16 +180,20 @@ class PlantProjectSnippet extends React.Component {
                 </Text>
               </View>
 
-              <View style={styles.buttonContainer}>
-                <PrimaryButton
-                  style={styles.buttonItem}
-                  buttonStyle={styles.buttonStyle}
-                  textStyle={styles.buttonTextStyle}
-                  onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
-                >
-                  <Text> {i18n.t('label.donate')}</Text>
-                </PrimaryButton>
-              </View>
+              {this.props.plantProject.allowDonations ? (
+                <View style={styles.buttonContainer}>
+                  <PrimaryButton
+                    style={styles.buttonItem}
+                    buttonStyle={styles.buttonStyle}
+                    textStyle={styles.buttonTextStyle}
+                    onClick={() =>
+                      this.props.onSelectClickedFeaturedProjects(id)
+                    }
+                  >
+                    <Text> {i18n.t('label.donate')}</Text>
+                  </PrimaryButton>
+                </View>
+              ) : null}
             </View>
           </View>
         </CardLayout>

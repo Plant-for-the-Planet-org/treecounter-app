@@ -13,6 +13,7 @@ import { View, Text, Alert, Linking } from 'react-native';
 import { paymentFee } from '../../helpers/utils';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
+import TabContainer from '../../containers/Menu/TabContainer';
 
 export default class DonateTrees extends Component {
   constructor(props) {
@@ -426,13 +427,23 @@ export default class DonateTrees extends Component {
 
   render() {
     return (
-      <TabView
-        navigationState={this.state}
-        renderScene={this._renderScene}
-        renderTabBar={this._renderTabBar}
-        useNativeDriver={true}
-        onIndexChange={this._handleIndexChange}
-      />
+      <View style={{ flex: 1 }}>
+        <TabView
+          navigationState={this.state}
+          renderScene={this._renderScene}
+          renderTabBar={this._renderTabBar}
+          useNativeDriver={true}
+          onIndexChange={this._handleIndexChange}
+        />
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 0
+          }}
+        >
+          <TabContainer {...this.props} />
+        </View>
+      </View>
     );
   }
 }

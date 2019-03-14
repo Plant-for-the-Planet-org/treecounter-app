@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import SvgContainer from '../../../../../app/components/Common/SvgContainer';
-import TreecounterGraphicsText from '../../../../../app/components/TreecounterGraphics/TreecounterGraphicsText';
-import SecondaryButton from '../../../../../app/components/Common/Button/SecondaryButton';
-import { SideMenuImage } from '../../../../../app/assets';
 import PropTypes from 'prop-types';
-import ReactTooltipStyle from '../../../../../node_modules/react-tooltip/dist/style';
+
 import i18n from '../../../../../app/locales/i18n.js';
-import { getLocalRoute } from '../../../../../app/actions/apiRouting';
-import PlantedProgressBar from '../../../../../app/components/PlantProjects/PlantedProgressbar';
 import PlantProjectFull from '../../../../../app/components/PlantProjects/PlantProjectFull';
 import PrimaryButton from '../../../../../app/components/Common/Button/PrimaryButton';
 import ReactDOM from 'react-dom';
@@ -72,7 +66,7 @@ export default class App extends Component {
           expanded={false}
           plantProject={result}
           tpoName={'harsh'}
-          selectAnotherProject={true}
+          selectAnotherProject={false}
           projectClear={undefined}
         />
         <div className="select-project_button__container">

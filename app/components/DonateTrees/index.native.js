@@ -386,7 +386,7 @@ export default class DonateTrees extends Component {
       } else if (params.giftMethod === 'direct') {
         this.props.gift(
           {
-            ...this.state.form,
+            directGift: { ...this.state.form },
             giftTreecounter: params.userForm.id,
             giftMethod: params.giftMethod,
             paymentResponse: {

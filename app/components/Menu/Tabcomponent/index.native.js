@@ -24,17 +24,8 @@ export default class TabComponent extends Component {
   };
 
   render() {
-    let activeElement =
-      this.props.navigation &&
-      this.props.navigation.state &&
-      this.props.navigation.state.routes
-        ? this.props.navigation.state.routes[0].routeName
-        : null;
-    if (
-      this.props.navigation &&
-      this.props.navigation.state &&
-      this.props.navigation.state.index
-    ) {
+    let activeElement = this.props.navigation.state.routes[0].routeName;
+    if (this.props.navigation.state.index) {
       activeElement = this.props.navigation.state.routes[
         this.props.navigation.state.index
       ].routeName;

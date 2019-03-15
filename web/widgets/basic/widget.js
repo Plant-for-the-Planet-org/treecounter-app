@@ -27,11 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let allBlockQuote = document.getElementsByTagName('blockquote');
   for (let i = 0; i < allBlockQuote.length; i++) {
     console.log(allBlockQuote[i].attributes);
-    if (
-      allBlockQuote[i].attributes.getNamedItem('pftp') &&
-      allBlockQuote[i].attributes.getNamedItem('data-widget-type').nodeValue ===
-        'basic'
-    ) {
+    if (allBlockQuote[i].attributes.getNamedItem('pftp')) {
       let uid = allBlockQuote[i].attributes.getNamedItem('data-treecounterId');
       if (uid) {
         uid = isNaN(parseInt(uid.nodeValue))

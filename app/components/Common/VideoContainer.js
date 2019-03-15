@@ -1,27 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import YouTube from 'react-youtube';
-import ModalDialog from './ModalDialog';
 
 class VideoContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { videoId: null };
-  }
-  componentWillMount() {
-    if (this.props.url) {
-      let ID = '';
-      let url;
-      url = this.props.url
-        .replace(/(>|<)/gi, '')
-        .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-      if (url[2] !== undefined) {
-        ID = url[2].split(/[^0-9a-z_\-]/i);
-        ID = ID[0];
-        this.setState({ videoId: ID });
-      } else {
-        ID = url;
-        this.setState({ videoId: ID });
+    if (props.url) {
+      let url = new URL(props.url);
+      if (url.searchParams) {
+        this.state = { videoId: url.searchParams.get('v') };
+        if (!this.state.videoId) {
+          if (url.pathname && url.pathname.includes('embed')) {
+            let splitted = url.pathname.split('/');
+            this.state.videoId =
+              splitted && splitted.length && splitted[splitted.length - 1];
+          }
+        }
       }
     }
   }
@@ -32,14 +26,9 @@ class VideoContainer extends React.Component {
   render() {
     if (this.state.videoId) {
       return (
-        <ModalDialog
-          isOpen={this.props.isOpen}
-          onRequestClose={this.props.onRequestClose}
-        >
-          <div className="youtube-video__container">
-            <YouTube videoId={this.state.videoId} onReady={this._onReady} />
-          </div>
-        </ModalDialog>
+        <div className="youtube-video__container">
+          <YouTube videoId={this.state.videoId} onReady={this._onReady} />
+        </div>
       );
     }
     return null;
@@ -47,9 +36,7 @@ class VideoContainer extends React.Component {
 }
 
 VideoContainer.propTypes = {
-  url: PropTypes.string,
-  isOpen: PropTypes.bool,
-  onRequestClose: PropTypes.func
+  url: PropTypes.string
 };
 
 export default VideoContainer;

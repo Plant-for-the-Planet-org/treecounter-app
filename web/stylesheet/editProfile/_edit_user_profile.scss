@@ -78,69 +78,6 @@
       @extend .tComb-template-form-group;
       column-gap: 211px;
     }
-    .follow-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      width: 100%;
-      align-items: center;
-      font-size: 15.5px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 1.52;
-      letter-spacing: normal;
-      // text-align: left;
-      color: #9c9b9b;
-
-      & .follow-container-row {
-        display: flex;
-        // flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        margin: 5px 0;
-        width: 45%;
-        @include for-tablet {
-          width: 100%;
-        }
-        & span {
-          // margin-right: 5px;
-        }
-
-        & .col {
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-          flex-basis: 0;
-          // background: blue;
-          text-align: start;
-          align-items: flex-start;
-        }
-        & .col1 {
-          flex-grow: 0;
-          flex-basis: auto;
-        }
-        & .col2 {
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          cursor: pointer;
-        }
-        & .col3 {
-          align-items: flex-end;
-        }
-      }
-      & img {
-        width: 30px;
-        height: 30px;
-        margin-right: 10px;
-      }
-      & button {
-        min-width: auto;
-        margin: 0;
-        padding: 0 15px;
-      }
-    }
   }
   .plant-project__container {
     display: flex;

@@ -69,15 +69,6 @@
             }
           }
         }
-        .share_buttons {
-          display: flex;
-          margin-left: 15px;
-
-          img {
-            height: 20px;
-            margin-right: 10px;
-          }
-        }
       }
 
       .menu_item_selected {
@@ -95,7 +86,7 @@
         flex: 1;
         display: flex;
         margin-top: 49px;
-       // background-color: #eae8e8;
+        background-color: #eae8e8;
         justify-content: center;
         align-items: center;
 

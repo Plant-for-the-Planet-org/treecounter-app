@@ -198,18 +198,20 @@ class PublicTreeCounter extends React.Component {
         <View>
           {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
             <View>
-              {tpoProps.plantProjects.map(project => (
-                <PlantProjectSnippet
-                  key={'trillion' + project.id}
-                  onMoreClick={id => this.onMoreClick(id)}
-                  plantProject={project}
-                  onSelectClickedFeaturedProjects={id =>
-                    this.onSelectClickedFeaturedProjects(id)
-                  }
-                  showMoreButton={false}
-                  tpoName={project.tpo_name}
-                />
-              ))}
+              {tpoProps.plantProjects
+                .filter(filterProj => filterProj.allowDonations)
+                .map(project => (
+                  <PlantProjectSnippet
+                    key={'trillion' + project.id}
+                    onMoreClick={id => this.onMoreClick(id)}
+                    plantProject={project}
+                    onSelectClickedFeaturedProjects={id =>
+                      this.onSelectClickedFeaturedProjects(id)
+                    }
+                    showMoreButton={false}
+                    tpoName={project.tpo_name}
+                  />
+                ))}
             </View>
           ) : null}
         </View>

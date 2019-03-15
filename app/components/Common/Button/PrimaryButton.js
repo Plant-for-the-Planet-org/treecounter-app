@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PrimaryButton = ({ onClick, children, className }) => (
+const PrimaryButton = ({ onClick, children }) => (
   <button
-    className={className + ' pftp-button-primary'}
+    className="pftp-button-primary"
     onClick={onClick ? e => onClick(e) : null}
   >
     {children}
@@ -12,8 +12,7 @@ const PrimaryButton = ({ onClick, children, className }) => (
 
 PrimaryButton.propTypes = {
   children: PropTypes.string,
-  onClick: PropTypes.func,
-  className: PropTypes.string
+  onClick: PropTypes.func
 };
 
 export default PrimaryButton;

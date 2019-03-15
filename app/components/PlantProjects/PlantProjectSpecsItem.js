@@ -5,27 +5,29 @@ import ReactTooltip from 'react-tooltip';
 const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
   return (
     <div className="project-specs__item">
-      {icon ? <img src={icon} /> : null}
-      <div>{label}</div>
-      {rightIcon ? (
-        <div className="tooltip">
-          <a data-tip data-for="survival-rate">
-            <img src={rightIcon} />
-          </a>
+      <span className="align-center">
+        {icon ? <img src={icon} /> : null}
+        <span>{label}</span>
+        {rightIcon ? (
+          <div className="tooltip">
+            <a data-tip data-for="survival-rate">
+              <img src={rightIcon} />
+            </a>
 
-          <ReactTooltip id="survival-rate" effect="solid" type="dark">
-            <span className="tooltip-text">
-              Percentage of planted trees that survive the first year after
-              planting.
-            </span>
-          </ReactTooltip>
-        </div>
-      ) : null}
-      <div className="project-specs__item__value">
+            <ReactTooltip id="survival-rate" effect="solid" type="dark">
+              <span className="tooltip-text">
+                Percentage of planted trees that survive the first year after
+                planting.
+              </span>
+            </ReactTooltip>
+          </div>
+        ) : null}
+      </span>
+      <span>
         {typeof value == 'number'
           ? parseFloat(value).toLocaleString('en')
           : value}
-      </div>
+      </span>
     </div>
   );
 };

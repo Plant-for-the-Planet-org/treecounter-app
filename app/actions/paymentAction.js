@@ -8,6 +8,6 @@ export function getPaymentInfo(paymentInfoId) {
 export function payPost(paymentResponse, paymentInfoId) {
   let request = { paymentResponse: paymentResponse };
   return postRequest('pay_post', request, {
-    token: paymentInfoId
+    donationContribution: paymentInfoId
   });
 }

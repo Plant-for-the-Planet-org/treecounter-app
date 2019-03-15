@@ -26,7 +26,7 @@ import AboutUsContainer from '../../containers/AboutUs';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal.native';
 import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal.native';
 import LicenseInfoList from '../AboutUs/LicenseInfoList.native';
-import BottomTabContainer from '../../containers/Menu/TabContainer';
+import TabContainer from '../../containers/Menu/TabContainer';
 import GiftTrees from '../../containers/GiftTrees';
 import LeaderBoard from '../Leaderboard';
 import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
@@ -239,7 +239,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         animatedEnable: true,
         swipeEnable: false
       },
-      tabBarComponent: BottomTabContainer
+      tabBarComponent: TabContainer
     }
   );
 
@@ -256,6 +256,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     },
     {
       navigationOptions: ({ navigation }) => {
+        let title = navigation.getParam('titleParam');
         let navigationConfig = {
           headerStyle: styles.container,
           headerTintColor: '#fff',

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MetaTags from 'react-meta-tags';
 
 import { welcomeScreen } from '../../assets';
 import SupportButton from './SupportButton';
@@ -20,6 +19,7 @@ import {
   isUserFollower,
   amISupporting
 } from './utils';
+import PrimaryButton from '../Common/Button/PrimaryButton';
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {
@@ -51,8 +51,8 @@ class PublicTreeCounter extends React.Component {
     this.props.route('app_donateTrees');
   }
 
-  onRegisterSupporter() {
-    this.props.supportTreecounterAction(this.props.treecounter);
+  onRegisterSupporter(treecounter) {
+    this.props.supportTreecounterAction(treecounter);
     this.props.route('app_donateTrees');
   }
 
@@ -138,12 +138,6 @@ class PublicTreeCounter extends React.Component {
     document.title = getDocumentTitle(caption);
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <MetaTags>
-          <title>Page 1</title>
-          <meta name="description" content="Some description." />
-          <meta property="og:title" content="User Treecounter" />
-          <meta property="og:image" content={welcomeScreen} />
-        </MetaTags>
         <div className="tree-counter-header">
           <TreecounterHeader
             {...headerProps}
@@ -156,7 +150,9 @@ class PublicTreeCounter extends React.Component {
               <SupportButton
                 {...supportProps}
                 buttonLabel={i18n.t('label.gift_trees')}
-                onRegisterSupporter={this.onRegisterSupporter}
+                onRegisterSupporter={() =>
+                  this.onRegisterSupporter(treecounter)
+                }
               />
             </div>
           )}
@@ -199,6 +195,51 @@ class PublicTreeCounter extends React.Component {
             </CardLayout>
           ) : null}
         </div>
+        {treecounter.directChildren ? (
+          <CardLayout className="width_group_footer">
+            <div className="group_user_table">
+              <div className="table-header">
+                <div className="table-header-item contributor">Contributor</div>
+                <div className="table-header-item planted">Planted Trees</div>
+                <div className="table-header-item target">Target</div>
+                <div className="table-header-item support" />
+              </div>
+              <div className="table-body">
+                {Object.keys(treecounter.directChildren).map(childrenId => {
+                  return (
+                    <div className="table-row" key={'tr' + childrenId}>
+                      <div className="table-col contributor">
+                        {treecounter.directChildren[childrenId].displayName}
+                      </div>
+                      <div className="table-col planted">
+                        {parseInt(
+                          treecounter.directChildren[childrenId].countPlanted
+                        ).toLocaleString('en')}
+                      </div>
+                      <div className="table-col target">
+                        {parseInt(
+                          treecounter.directChildren[childrenId].countTarget
+                        ).toLocaleString('en')}
+                      </div>
+                      <div className="table-col support">
+                        <PrimaryButton
+                          className="support-button-group-footer"
+                          onClick={() =>
+                            this.onRegisterSupporter(
+                              treecounter.directChildren[childrenId]
+                            )
+                          }
+                        >
+                          {i18n.t('label.support')}
+                        </PrimaryButton>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </CardLayout>
+        ) : null}
       </div>
     );
   }

@@ -164,6 +164,13 @@ export default class Menu extends Component {
             />
             <LargeMenuItem
               onPress={this.onPressMenu.bind(this, {
+                uri: getLocalRoute('app_competitions')
+              })}
+              title={i18n.t('label.competitions')}
+              iconUrl={redeem_outline}
+            />
+            <LargeMenuItem
+              onPress={this.onPressMenu.bind(this, {
                 uri: getLocalRoute('app_faq')
               })}
               title={i18n.t('label.faqs')}

@@ -41,6 +41,7 @@ import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ImprintContainer from '../../containers/Imprint';
 import PrivacyContainer from '../../containers/Privacy';
+import CompetitionContainer from '../../containers/CompetitionContainer';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -58,6 +59,7 @@ const headerLabels = {
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   [getLocalRoute('app_editProfile')]: 'label.edit_profile',
   [getLocalRoute('app_redeem')]: 'label.redeem_trees',
+  [getLocalRoute('app_competitions')]: 'label.competitions',
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   [getLocalRoute('app_selectProject')]: 'label.donate',
@@ -110,6 +112,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       [getLocalRoute('app_redeem')]: {
         screen: RedemptionContainer
+      },
+      [getLocalRoute('app_competitions')]: {
+        screen: CompetitionContainer
       },
       [getLocalRoute('app_claim')]: {
         screen: RedemptionContainer

@@ -73,6 +73,11 @@
       textarea {
         height: 75px !important;
       }
+      .column {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
     .tComb-template__password-form {
       @extend .tComb-template-form-group;

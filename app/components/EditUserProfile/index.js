@@ -198,7 +198,16 @@ export default class EditUserProfile extends React.Component {
       image,
       treecounter: treeCounter
     } = this.props.currentUserProfile;
-
+    //earlier we have synopsis1 and synopsis two fields to manage user intriduction
+    //now we will show only one which is synopsis1, to show both info for old user lets merge them here
+    const updatedUserProfile = {
+      ...this.props.currentUserProfile,
+      synopsis1:
+        this.props.currentUserProfile.synopsis1 +
+        '\n' +
+        this.props.currentUserProfile.synopsis2
+    };
+    console.log('currentUserProfile1', updatedUserProfile);
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
         <ConfirmProfileDeletion
@@ -224,7 +233,7 @@ export default class EditUserProfile extends React.Component {
               ref={'image'}
               type={parsedSchema[type].image.transformedSchema}
               options={parsedSchema[type].image.schemaOptions}
-              value={this.props.currentUserProfile}
+              value={updatedUserProfile}
             />
           </div>
 
@@ -232,7 +241,7 @@ export default class EditUserProfile extends React.Component {
             ref={'profile'}
             type={parsedSchema[type].profile.transformedSchema}
             options={this.getFormSchemaOption(type, 'profile')}
-            value={this.props.currentUserProfile}
+            value={updatedUserProfile}
           />
           <PrimaryButton
             onClick={() => {
@@ -264,7 +273,7 @@ export default class EditUserProfile extends React.Component {
             ref={'about_me'}
             type={parsedSchema[type].about_me.transformedSchema}
             options={this.getFormSchemaOption(type, 'about_me')}
-            value={this.props.currentUserProfile}
+            value={updatedUserProfile}
           />
           <PrimaryButton
             onClick={() => {

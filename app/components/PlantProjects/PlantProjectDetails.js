@@ -12,57 +12,28 @@ import VideoContainer from '../Common/VideoContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectDetails
  */
-class PlantProjectDetails extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { showVideo: false };
+const PlantProjectDetails = ({
+  description,
+  homepageUrl,
+  homepageCaption,
+  plantProjectImages,
+  videoUrl,
+  mapData
+}) => {
+  if (context.debug && !videoUrl) {
+    videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
   }
-  handleClick() {
-    this.setState({ showVideo: true });
-  }
-  toggleVideoDialog() {
-    this.setState({ showVideo: false });
-  }
-  render() {
-    let {
-      description,
-      homepageUrl,
-      homepageCaption,
-      plantProjectImages,
-      videoUrl,
-      mapData
-    } = this.props;
-    if (!videoUrl) {
-      videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
-    }
-    return (
-      <div className="plant-project-details__container">
-        <PlantProjectImageCarousel
-          projectImages={plantProjectImages}
-          carousalImageClick={this.props.onImageClick}
-        />
-        <UserSynopsis synopsis1={description} />
-        {homepageUrl && (
-          <UserHomepageLink
-            homepageUrl={homepageUrl}
-            caption={homepageCaption}
-          />
-        )}
-
-        {videoUrl && (
-          <div className="video-link">
-            <a onClick={this.handleClick.bind(this)}>{videoUrl}</a>
-          </div>
-        )}
-        <VideoContainer
-          isOpen={this.state.showVideo}
-          onRequestClose={this.toggleVideoDialog.bind(this)}
-          url={videoUrl}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="plant-project-details__container">
+      <PlantProjectImageCarousel projectImages={plantProjectImages} />
+      <UserSynopsis synopsis1={description} />
+      {homepageUrl && (
+        <UserHomepageLink homepageUrl={homepageUrl} caption={homepageCaption} />
+      )}
+      {videoUrl && <VideoContainer url={videoUrl} />}
+    </div>
+  );
+};
 
 PlantProjectDetails.propTypes = {
   description: PropTypes.string,
@@ -70,8 +41,7 @@ PlantProjectDetails.propTypes = {
   homepageCaption: PropTypes.string,
   videoUrl: PropTypes.string,
   mapData: PropTypes.object,
-  plantProjectImages: PropTypes.array,
-  onImageClick: PropTypes.func
+  plantProjectImages: PropTypes.array
 };
 
 export default PlantProjectDetails;

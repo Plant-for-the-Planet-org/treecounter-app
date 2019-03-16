@@ -2,15 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n';
 
-const FollowLabelButton = ({
-  isLoggedIn,
-  isSubscribed,
-  onClick,
-  label = undefined
-}) => {
-  label =
-    label ||
-    (isSubscribed ? i18n.t('label.un_subscribe') : i18n.t('label.subscribe'));
+const FollowLabelButton = ({ isLoggedIn, isSubscribed, onClick }) => {
+  const label = isSubscribed
+    ? i18n.t('label.un_subscribe')
+    : i18n.t('label.subscribe');
 
   return (
     <button
@@ -26,8 +21,7 @@ FollowLabelButton.propTypes = {
   children: PropTypes.string,
   onClick: PropTypes.func,
   isSubscribed: PropTypes.bool,
-  isLoggedIn: PropTypes.bool,
-  label: PropTypes.string
+  isLoggedIn: PropTypes.bool
 };
 
 export default FollowLabelButton;

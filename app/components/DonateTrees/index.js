@@ -285,11 +285,7 @@ export default class DonateTrees extends Component {
       }
 
       return (
-        <div
-          className={['select-project_button__container', displayNone].join(
-            ' '
-          )}
-        >
+        <div className={displayNone}>
           <PrimaryButton onClick={validated}>Next</PrimaryButton>
         </div>
       );

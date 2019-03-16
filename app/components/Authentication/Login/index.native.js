@@ -51,7 +51,7 @@ export default class Login extends Component {
         <ReCaptchaV3
           captchaDomain={'https://www.plant-for-the-planet.org'}
           siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
-          onReceiveToken={token => this.verifyCallback(token)}
+          onReceiveToken={token => verifyCallback(token)}
         />
         <View style={styles.parentContainer}>
           <View style={styles.headerContainer}>

@@ -120,14 +120,9 @@ export default class SelectPlantProject extends Component {
   };
 
   callExpanded = () => {
-    this.setState(
-      {
-        expanded: !this.state.expanded
-      },
-      () => {
-        this.forceUpdate();
-      }
-    );
+    this.setState({
+      expanded: !this.state.expanded
+    });
   };
 
   onSelectClickedFeaturedProjects = id => {
@@ -167,10 +162,8 @@ export default class SelectPlantProject extends Component {
       priceSortedProjects
     } = this.state;
     const settings = {
-      dots: false,
+      dots: true,
       infinite: true,
-      lazyLoad: true,
-      adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation
           styleName="tpo-footer-nav-img__left"
@@ -182,7 +175,8 @@ export default class SelectPlantProject extends Component {
           styleName="tpo-footer-nav-img__right"
           src={arrow_right_orange}
         />
-      )
+      ),
+      afterChange: index => this.plantProjectChanged(index)
     };
 
     return (
@@ -205,46 +199,39 @@ export default class SelectPlantProject extends Component {
                 tpoName={this.state.modalProject.tpo_name}
               />
             ) : null}
-            <div className="select-project_button__container">
-              <PrimaryButton
-                onClick={() => this.onSelectClicked(this.state.modalProject.id)}
-              >
-                {i18n.t('label.select_project')}
-              </PrimaryButton>
-            </div>
+            <PrimaryButton
+              onClick={() => this.onSelectClicked(this.state.modalProject.id)}
+            >
+              {i18n.t('label.select_project')}
+            </PrimaryButton>
           </div>
         </ModalDialog>
-        <div className="select-project__container">
-          <div className="select-project__header">
-            {i18n.t('label.featuredProjects')}{' '}
-          </div>
-          <Slider {...settings}>
-            {featuredProjects.length !== 0
-              ? featuredProjects.map(project => (
-                  <CardLayout
-                    className="plant_project_content"
-                    key={project.id}
-                  >
-                    <PlantProjectFull
-                      callExpanded={() => this.callExpanded()}
-                      expanded={false}
-                      plantProject={project}
-                      tpoName={project.tpo_name}
-                    />
-                    <div className="select-project_button__container">
+        <CardLayout className="tpo-footer-card-layout">
+          <div className="select-project__container">
+            <ContentHeader caption={i18n.t('label.featuredProjects')} />
+            <Slider {...settings}>
+              {featuredProjects.length !== 0
+                ? featuredProjects.map(project => (
+                    <div key={project.id} className="plant_project_content">
+                      <PlantProjectFull
+                        callExpanded={() => this.callExpanded()}
+                        expanded={false}
+                        plantProject={project}
+                        tpoName={project.tpo_name}
+                      />
                       <PrimaryButton
                         onClick={() =>
                           this.onSelectClickedFeaturedProjects(project.id)
                         }
                       >
-                        {i18n.t('label.donate')}
+                        {i18n.t('label.select_project')}
                       </PrimaryButton>
                     </div>
-                  </CardLayout>
-                ))
-              : null}
-          </Slider>
-        </div>
+                  ))
+                : null}
+            </Slider>
+          </div>
+        </CardLayout>
         <CardLayout className="tpo-footer-card-layout">
           <div className="select-project__container">
             <Tabs

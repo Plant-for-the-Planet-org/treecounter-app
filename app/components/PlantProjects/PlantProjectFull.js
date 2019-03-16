@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import PlantProjectTeaser from './PlantProjectTeaser';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import SeeMoreToggle from '../Common/SeeMoreToggle';
 import PlantProjectDetails from './PlantProjectDetails';
 import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
-import CardLayout from '../Common/Card';
-import { getImageUrl } from '../../actions/apiRouting';
-import PlantedProgressBar from './PlantedProgressbar';
-import { tick } from '../../assets';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -18,16 +15,7 @@ class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
     this.toggleExpanded = this.toggleExpanded.bind(this);
-    let projectImage;
-    if (this.props.plantProject.imageFile) {
-      projectImage = { image: this.props.plantProject.imageFile };
-    } else {
-      projectImage =
-        this.props.plantProject &&
-        this.props.plantProject.plantProjectImages &&
-        this.props.plantProject.plantProjectImages.find(() => true);
-    }
-    this.state = { expanded: props.expanded, projectImage: projectImage };
+    this.state = { expanded: props.expanded };
     if (props.callExpanded) {
       props.callExpanded(!this.state.expanded);
     }
@@ -38,9 +26,6 @@ class PlantProjectFull extends React.Component {
       this.props.callExpanded(!this.state.expanded);
     }
     this.setState({ expanded: !this.state.expanded });
-  }
-  updateProjectImage(projectImage) {
-    this.setState({ projectImage: projectImage });
   }
 
   render() {
@@ -96,45 +81,9 @@ class PlantProjectFull extends React.Component {
       plantProjectImages
     };
     return (
-      <React.Fragment>
-        <div className="project-teaser__container">
-          {projectImage ? (
-            <div className="teaser-image__container">
-              <img
-                className="teaser__projectImage"
-                src={getImageUrl(
-                  'project',
-                  'large',
-                  this.state.projectImage.image
-                )}
-                alt={projectImage.description}
-              />
-            </div>
-          ) : null}
-
-          <div className="row">
-            <PlantedProgressBar
-              countPlanted={specsProps.countPlanted}
-              countTarget={specsProps.countTarget}
-            />
-          </div>
-          <div className="row">
-            <div className="teaser__tpoHeading">{projectName}</div>
-            <div className="teaser__certified__container">
-              {isCertified ? (
-                <img className="teaser__certified" src={tick} />
-              ) : null}
-            </div>
-          </div>
-        </div>
-        <div className="project-specs__container">
-          <div className="project-specs__detail">
-            <PlantProjectSpecs {...specsProps} />
-          </div>
-          <div className="project-specs__cost">
-            {specsProps.currency} {specsProps.treeCost}
-          </div>
-        </div>
+      <div>
+        <PlantProjectTeaser {...teaserProps} />
+        <PlantProjectSpecs {...specsProps} />
         <div className="project-action-links">
           <SeeMoreToggle
             seeMore={!this.state.expanded}
@@ -149,13 +98,8 @@ class PlantProjectFull extends React.Component {
             </div>
           ) : null}
         </div>
-        {this.state.expanded && (
-          <PlantProjectDetails
-            {...detailsProps}
-            onImageClick={this.updateProjectImage.bind(this)}
-          />
-        )}
-      </React.Fragment>
+        {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
+      </div>
     );
   }
 }

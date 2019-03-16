@@ -4,9 +4,8 @@ import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 import PriceProjects from './Tabs/price';
 import styles from '../../styles/common/tabbar';
-import { Dimensions, View } from 'react-native';
+import { Dimensions } from 'react-native';
 import CountryProjects from './Tabs/country.native';
-import TabContainer from '../../containers/Menu/TabContainer';
 
 const Layout = {
   window: {
@@ -76,25 +75,13 @@ export default class SelectPlantTabView extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <TabView
-          useNativeDriver
-          navigationState={this.state}
-          renderScene={this._renderSelectPlantScene}
-          renderTabBar={this._renderTabBar}
-          onIndexChange={this._handleIndexChange}
-        />
-        {this.props.navigation.getParam('giftMethod') ? (
-          <View
-            style={{
-              position: 'absolute',
-              bottom: 0
-            }}
-          >
-            <TabContainer {...this.props} />
-          </View>
-        ) : null}
-      </View>
+      <TabView
+        useNativeDriver
+        navigationState={this.state}
+        renderScene={this._renderSelectPlantScene}
+        renderTabBar={this._renderTabBar}
+        onIndexChange={this._handleIndexChange}
+      />
     );
   }
 }

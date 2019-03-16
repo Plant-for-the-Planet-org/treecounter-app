@@ -15,7 +15,6 @@ import styles from '../../styles/redeem';
 import { View, Image, TextInput, Text } from 'react-native';
 import { updateRoute } from '../../helpers/routerHelper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import TabContainer from '../../containers/Menu/TabContainer';
 
 export default class Redemption extends Component {
   constructor(props) {
@@ -189,32 +188,21 @@ export default class Redemption extends Component {
         <LoadingIndicator />
       </View>
     ) : (
-      <View style={{ flex: 1 }}>
-        <KeyboardAwareScrollView enableOnAndroid={true}>
-          <View style={styles.parentContainer}>
-            <View style={styles.headerContainer}>
-              <Text style={styles.titleText}>
-                {i18n.t('label.redeem_heading')}
-              </Text>
-            </View>
-            <CardLayout style={styles.cardContainer}>
-              {icon}
-              {content}
-              {form}
-              {button}
-            </CardLayout>
+      <KeyboardAwareScrollView enableOnAndroid={true}>
+        <View style={styles.parentContainer}>
+          <View style={styles.headerContainer}>
+            <Text style={styles.titleText}>
+              {i18n.t('label.redeem_heading')}
+            </Text>
           </View>
-        </KeyboardAwareScrollView>
-
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0
-          }}
-        >
-          <TabContainer {...this.props} />
+          <CardLayout style={styles.cardContainer}>
+            {icon}
+            {content}
+            {form}
+            {button}
+          </CardLayout>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

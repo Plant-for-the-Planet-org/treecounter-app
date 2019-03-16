@@ -10,10 +10,6 @@ module.exports = webpackMerge(commonConfig, {
     widget: [
       'babel-polyfill',
       path.join(__dirname, '../widgets/basic/widget.js')
-    ],
-    treecounterwidget: [
-      'babel-polyfill',
-      path.join(__dirname, '../widgets/Treecounter/widget.js')
     ]
   },
   output: {

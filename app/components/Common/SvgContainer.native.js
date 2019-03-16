@@ -58,10 +58,6 @@ export default class SvgContainer extends Component {
     this.StartClouds2RotateFunction();
   }
 
-  shouldComponentUpdate(nextProps) {
-    return JSON.stringify(nextProps) !== JSON.stringify(this.props);
-  }
-
   calculatePlantedWidth(planted, target, radius) {
     let total = 2 * 3.14 * radius;
     if (target === 0) {

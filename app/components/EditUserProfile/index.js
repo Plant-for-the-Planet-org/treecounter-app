@@ -19,6 +19,12 @@ import {
   UserAboutmeTemplate,
   UserPasswordUpdateTemplate
 } from './PlantProjectUserProfileTemplates';
+import LoadingIndicator from '../Common/LoadingIndicator';
+
+import { ProfilePic } from '../../assets';
+import { getImageUrl } from '../../actions/apiRouting';
+import FollowLabelButton from '../Common/Button/FollowLabelButton';
+import { updateRoute } from '../../helpers/routerHelper';
 
 const plantProjectFormOptions = {
   template: PlantProjectTemplate(),
@@ -187,7 +193,11 @@ export default class EditUserProfile extends React.Component {
   };
 
   render() {
-    const { type, image } = this.props.currentUserProfile;
+    const {
+      type,
+      image,
+      treecounter: treeCounter
+    } = this.props.currentUserProfile;
 
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
@@ -291,6 +301,56 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
 
+        {treeCounter &&
+          treeCounter.followeeIds && (
+            <CardLayout className="user-profile__form-group">
+              <div className="form-group__heading">
+                {i18n.t('label.un_subscribe')}
+              </div>
+              {this.props.followeeList && this.props.followeeList.length > 0 ? (
+                <div className="follow-container">
+                  {this.props.followeeList.map(follow => (
+                    <div className="follow-container-row" key={follow.id}>
+                      <div className="col col1">
+                        <img
+                          src={
+                            follow.userProfile.image
+                              ? getImageUrl(
+                                  'profile',
+                                  'thumb',
+                                  follow.userProfile.image
+                                )
+                              : ProfilePic
+                          }
+                          className="image-rounded-border"
+                        />
+                      </div>
+                      <div
+                        className="col col2"
+                        onClick={() => {
+                          updateRoute('app_treecounter', null, follow.id, {
+                            treecounter: follow.id
+                          });
+                        }}
+                      >
+                        {follow.displayName}
+                      </div>
+                      <div className="col col3">
+                        <FollowLabelButton
+                          label={i18n.t('label.un_follow')}
+                          isSubscribed={true}
+                          isLoggedIn={false}
+                          onClick={() => this.props.unfollowUser(follow.id)}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </CardLayout>
+          )}
         <div className="delete-profile__button">
           <SecondaryButton
             onClick={() => {
@@ -313,7 +373,9 @@ EditUserProfile.propTypes = {
   deleteProfile: PropTypes.func.isRequired,
   updatePlantProject: PropTypes.func.isRequired,
   deletePlantProject: PropTypes.func.isRequired,
-  addPlantProject: PropTypes.func.isRequired
+  addPlantProject: PropTypes.func.isRequired,
+  followeeList: PropTypes.array,
+  unfollowUser: PropTypes.func
 };
 
 export { PaswordUpdatedDialog, ConfirmProfileDeletion };

@@ -65,6 +65,9 @@ export default class UserHome extends Component {
         tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={tabStyles.textStyle}
         indicatorStyle={tabStyles.textActive}
+        scrollEnabled
+        bounces
+        useNativeDriver
       />
     );
   };
@@ -106,7 +109,7 @@ export default class UserHome extends Component {
   }
 
   _renderUserHome = ({ route }) => {
-    const { treecounterData, userProfile } = this.props;
+    const { userProfile } = this.props;
     const profileType = getProfileTypeName(userProfile.type);
     let { svgData } = this.state;
     switch (route.key) {
@@ -138,7 +141,7 @@ export default class UserHome extends Component {
               />
             </View>
             <View>
-              {userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
+              {userProfile.synopsis1 ||
               userProfile.synopsis2 ||
               userProfile.linkText ||
               userProfile.url ? (

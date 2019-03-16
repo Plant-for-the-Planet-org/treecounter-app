@@ -8,6 +8,7 @@ export const treecounterSchema = new schema.Entity('treecounter');
 export const contributionSchema = new schema.Entity('contribution');
 export const plantProjectImageSchema = new schema.Entity('plantProjectImage');
 export const contributionImageSchema = new schema.Entity('contributionImage');
+export const challengeSchema = new schema.Entity('challenges');
 
 tpoSchema.define({
   treecounter: treecounterSchema,
@@ -29,6 +30,10 @@ contributionSchema.define({
   contributionImages: [contributionImageSchema]
 });
 
+challengeSchema.define({
+  treecounter: treecounterSchema
+});
+
 contributionImageSchema.define({
   contribution: contributionSchema
 });
@@ -39,5 +44,6 @@ userProfileSchema.define({
 });
 
 treecounterSchema.define({
-  contributions: [contributionSchema]
+  contributions: [contributionSchema],
+  challenges: [challengeSchema]
 });

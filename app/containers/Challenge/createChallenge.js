@@ -22,7 +22,7 @@ class ChallengeContainer extends Component {
         updateRoute={(routeName, id) =>
           this.props.route(routeName, id, this.props.navigation)
         }
-        challenge={this.props.challenge}
+        challengeUser={this.props.challenge}
       />
     );
   }

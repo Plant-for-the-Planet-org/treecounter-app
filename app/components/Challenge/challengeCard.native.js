@@ -30,7 +30,8 @@ export default class ChallengeCard extends React.Component {
       end_date,
       status,
       created,
-      fullname
+      fullname,
+      token
     } = challenge;
     return (
       <CardLayout>
@@ -64,17 +65,23 @@ export default class ChallengeCard extends React.Component {
               </View>
             </View>
           </View>
-          {direction === 'target' ? (
+          {direction === 'target' && status === 'pending' ? (
             <View>
               <PrimaryButton
                 buttonStyle={challengesStyle.buttonStyle}
                 textStyle={challengesStyle.textStyle}
+                onClick={() =>
+                  this.props.challengeStatus({ status: 'accept' }, token)
+                }
               >
                 Accept
               </PrimaryButton>
               <SecondaryButton
                 buttonStyle={challengesStyle.buttonStyle}
                 textStyle={challengesStyle.textStyle}
+                onClick={() =>
+                  this.props.challengeStatus({ status: 'declined' }, token)
+                }
               >
                 Reject
               </SecondaryButton>

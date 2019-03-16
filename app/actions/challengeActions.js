@@ -1,4 +1,7 @@
-import { postAuthenticatedRequest } from '../utils/api';
+import {
+  postAuthenticatedRequest,
+  putAuthenticatedRequest
+} from '../utils/api';
 
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 
@@ -8,6 +11,25 @@ export function challenge(challengeDetails) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     let request = postAuthenticatedRequest(route, challengeDetails);
+    request
+      .then(response => {
+        dispatch(setProgressModelState(false));
+      })
+      .catch(response => {
+        debug('error: ', response);
+        dispatch(setProgressModelState(false));
+      });
+  };
+}
+
+export function challengeStatus(status, token) {
+  let route = 'challenge_put';
+
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    let request = postAuthenticatedRequest(route, status, {
+      token: token
+    });
     request
       .then(response => {
         dispatch(setProgressModelState(false));

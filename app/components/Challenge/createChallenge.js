@@ -102,8 +102,9 @@ export default class Challenge extends Component {
     if (this.state.checked === 'indefinite') {
       requestData.endDate = 'indefinite';
     }
-
     console.log(requestData);
+
+    this.props.challengeUser(requestData);
   };
 
   render() {
@@ -178,5 +179,5 @@ export default class Challenge extends Component {
 }
 
 Challenge.propTypes = {
-  challenge: PropTypes.func
+  challengeUser: PropTypes.func
 };

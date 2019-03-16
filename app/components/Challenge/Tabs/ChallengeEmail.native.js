@@ -42,7 +42,21 @@ export default class ChallengeEmail extends Component {
 
   onNextClick() {
     if (this.giftInvitation.getValue()) {
-      console.log('hello');
+      let value = this.giftInvitation.getValue();
+      requestData = {
+        ...this.state.form,
+        ...value
+      };
+      if (!this.state.isChecked) {
+        requestData.endDate = 'indefinite';
+      } else {
+        requestData.endDate = this.state.byYear;
+      }
+      console.log(requestData);
+
+      this.props.challengeUser(requestData);
+    } else {
+      this.giftInvitation.validate();
     }
   }
 

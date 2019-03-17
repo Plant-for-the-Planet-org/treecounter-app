@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PlantedProgressBar from '../../../../../app/components/PlantProjects/PlantedProgressbar';
 import SecondaryButton from '../../../../../app/components/Common/Button/SecondaryButton';
-import { SideMenuImage } from '../../../../../app/assets';
+import { tree } from '../../../../../app/assets';
+
 import PropTypes from 'prop-types';
 import ReactTooltipStyle from '../../../../../node_modules/react-tooltip/dist/style';
 import i18n from '../../../../../app/locales/i18n.js';
@@ -53,23 +54,33 @@ export default class App extends Component {
           <style>{style}</style>
           {/* Apply React Tooltip Library CSS */}
           <style>{ReactTooltipStyle}</style>
-          {this.props.showDonateButton && (
-            <SecondaryButton
-              onClick={event => {
-                const url = `${serverName}/${getLocalRoute(
-                  'app_registerTrees'
-                )}?uid=${treecounter.id}`;
-                window.open(url, '_blank');
-              }}
-            >
-              {i18n.t('label.plant_trees')}
-            </SecondaryButton>
-          )}
-          <div className="canvasContainer flex-column">
-            <PlantedProgressBar
-              countPlanted={this.state.target}
-              countTarget={this.state.planted}
-            />
+          <div className={'pftp-widget-img__container'}>
+            {this.props.showGraphics && (
+              <img src={tree} className={'pftp-widget-img'} />
+            )}
+          </div>
+
+          <PlantedProgressBar
+            countPlanted={
+              this.state.target == 0
+                ? this.state.planted * 2
+                : this.state.target
+            }
+            countTarget={this.state.planted}
+          />
+          <div className={'pftp-widget-img__container'}>
+            {this.props.showDonateButton && (
+              <SecondaryButton
+                onClick={event => {
+                  const url = `${serverName}/${getLocalRoute(
+                    'app_registerTrees'
+                  )}?uid=${treecounter.id}`;
+                  window.open(url, '_blank');
+                }}
+              >
+                {i18n.t('label.plant_trees')}
+              </SecondaryButton>
+            )}
           </div>
         </div>
       </React.Fragment>

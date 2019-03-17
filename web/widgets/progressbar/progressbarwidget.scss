@@ -1,6 +1,20 @@
+@import "../../stylesheet/variables";
+@import "../../stylesheet/mixin";
+@import "../../stylesheet/common/button";
+@import "../../stylesheet/arrow_button_rotatable";
+@import "../../stylesheet/home_svg";
+@import "../../stylesheet/treecounter.css";
+@import "../../stylesheet/layer.css";
+@import "../../stylesheet/common/text";
+
+.widget-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .planted-project-progressbar {
   display: flex;
-  width: 100%;
+  width: 70%;
   justify-content: space-between;
   background-color: #d2e3af;
   height: 34px;
@@ -70,18 +84,13 @@
     }
   }
 }
+.pftp-widget-img__container {
+  width: 10%;
+}
+.pftp-widget-img__container {
+  align-self: center;
+}
 .pftp-button-secondary {
   width: 20%;
-  align-self: center;
-  margin-right: 20px;
-  outline: none;
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-.pftp-widget-row {
-  // margin-right: auto;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  font-size: 12px;
 }

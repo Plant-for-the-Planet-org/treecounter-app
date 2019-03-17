@@ -11,6 +11,15 @@ export default {
         help: null,
         propertyOrder: 1
       },
+      plantProject: {
+        enum: ['4', '6'],
+        enum_titles: ['project_4', 'Campeche Rainforest Restoration 2'],
+        type: 'string',
+        title: 'label.plant_project',
+        icon: null,
+        help: null,
+        propertyOrder: 2
+      },
       treeSpecies: {
         type: 'string',
         title: 'label.tree_species',
@@ -133,6 +142,15 @@ export default {
         icon: null,
         help: null,
         propertyOrder: 1
+      },
+      plantProject: {
+        enum: ['4', '6'],
+        enum_titles: ['project_4', 'Campeche Rainforest Restoration 2'],
+        type: 'string',
+        title: 'label.plant_project',
+        icon: null,
+        help: null,
+        propertyOrder: 2
       },
       treeSpecies: {
         type: 'string',

@@ -48,12 +48,17 @@ class PlantProjectDetails extends React.Component {
             caption={homepageCaption}
           />
         )}
+
+        {videoUrl && (
+          <div className="video-link">
+            <a onClick={this.handleClick.bind(this)}>{videoUrl}</a>
+          </div>
+        )}
         <VideoContainer
           isOpen={this.state.showVideo}
           onRequestClose={this.toggleVideoDialog.bind(this)}
           url={videoUrl}
         />
-        {videoUrl && <a onClick={this.handleClick.bind(this)}>{videoUrl}</a>}
       </div>
     );
   }

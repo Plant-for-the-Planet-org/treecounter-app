@@ -30,8 +30,8 @@ const SupportButton = ({
 };
 
 SupportButton.propTypes = {
-  active: PropTypes.bool.isRequired,
-  isUserLoggedIn: PropTypes.bool.isRequired,
+  active: PropTypes.bool,
+  isUserLoggedIn: PropTypes.bool,
   onRegisterSupporter: PropTypes.func,
   buttonLabel: PropTypes.string
 };

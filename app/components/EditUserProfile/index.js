@@ -205,7 +205,8 @@ export default class EditUserProfile extends React.Component {
       synopsis1:
         this.props.currentUserProfile.synopsis1 +
         '\n' +
-        this.props.currentUserProfile.synopsis2
+        this.props.currentUserProfile.synopsis2,
+      synopsis2: ''
     };
     console.log('currentUserProfile1', updatedUserProfile);
     return (

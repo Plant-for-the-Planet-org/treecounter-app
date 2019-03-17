@@ -62,12 +62,8 @@ export default class App extends Component {
             </div>
 
             <PlantedProgressBar
-              countPlanted={
-                this.state.target == 0
-                  ? this.state.planted * 2
-                  : this.state.target
-              }
-              countTarget={this.state.planted}
+              countPlanted={this.state.planted}
+              countTarget={this.state.target}
             />
             <div className={'pftp-widget-btn__container'}>
               {this.props.showDonateButton && (

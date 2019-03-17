@@ -15,7 +15,7 @@ import {
 import i18n from '../../locales/i18n';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import TextBlock from '../Common/Text/TextBlock';
-import ChallengesListContainer from '../../containers/Challenge/challengeList';
+import ChallengeList from './challengeList';
 
 let TCombForm = t.form.Form;
 
@@ -42,6 +42,7 @@ export default class Challenge extends Component {
         goal: 100,
         endDate: 2020
       },
+      tempForm: {},
       checked: 'indefinite'
     };
     this.handleModeUserChange = this.handleModeUserChange.bind(this);
@@ -57,6 +58,10 @@ export default class Challenge extends Component {
     });
   }
 
+  onFormChange = value => {
+    this.setState({ tempForm: value });
+  };
+
   suggestionClicked = (context, event) => {
     this.setState({
       challenged: event.suggestion.id,
@@ -67,6 +72,7 @@ export default class Challenge extends Component {
   handleTreesChange = value => {
     this.setState({
       form: {
+        ...this.state.form,
         goal: value
       }
     });
@@ -75,6 +81,7 @@ export default class Challenge extends Component {
   handleEndDateChange = value => {
     this.setState({
       form: {
+        ...this.state.form,
         endDate: value
       }
     });
@@ -92,7 +99,7 @@ export default class Challenge extends Component {
       let value = this.refs.challengeUser.getValue();
       requestData = {
         ...this.state.form,
-        ...value
+        invitee: { ...value }
       };
     } else {
       requestData = {
@@ -101,9 +108,8 @@ export default class Challenge extends Component {
       };
     }
     if (this.state.checked === 'indefinite') {
-      requestData.endDate = 'indefinite';
+      delete requestData.endDate;
     }
-    console.log(requestData);
 
     this.props.challengeUser(requestData);
   };
@@ -135,6 +141,8 @@ export default class Challenge extends Component {
                   ref="challengeUser"
                   type={challengeFormSchema}
                   options={challengeFormSchemaOptions}
+                  value={this.state.tempForm}
+                  onChange={this.onFormChange}
                 />
               )}
             </Tabs>
@@ -174,12 +182,19 @@ export default class Challenge extends Component {
           </div>
           <PrimaryButton onClick={this.challenge}>Challenge</PrimaryButton>
         </CardLayout>
-        <ChallengesListContainer />
+        <ChallengeList
+          challenges={this.props.challenges}
+          navigation={this.props.navigation}
+          challengeStatus={this.props.challengeStatus}
+        />
       </div>
     );
   }
 }
 
 Challenge.propTypes = {
-  challengeUser: PropTypes.func
+  challengeUser: PropTypes.func,
+  challenges: PropTypes.array.isRequired,
+  challengeStatus: PropTypes.func,
+  navigation: PropTypes.any
 };

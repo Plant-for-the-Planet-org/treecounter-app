@@ -38,7 +38,9 @@ export default class ChallengeCard extends React.Component {
         <View style={challengesStyle.flexStyle}>
           <View style={challengesStyle.limitWidth}>
             <Text style={challengesStyle.goalStyle}>
-              {goal.toLocaleString() + ' Trees by ' + end_date}
+              {goal.toLocaleString() +
+                ' Trees' +
+                (end_date !== null ? ' by ' + end_date : '')}
             </Text>
             <View style={challengesStyle.flexStyle}>
               <UserProfileImage profileImage={avatar} />

@@ -17,6 +17,7 @@ export function challenge(challengeDetails) {
     request
       .then(response => {
         dispatch(setProgressModelState(false));
+        dispatch(mergeEntities(normalize(response.data, challengeSchema)));
       })
       .catch(response => {
         debug('error: ', response);

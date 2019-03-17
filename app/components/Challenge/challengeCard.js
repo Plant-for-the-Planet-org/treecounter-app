@@ -29,7 +29,9 @@ export default class ChallengeCard extends React.Component {
           <div className="flex-row">
             <div className="limit-width">
               <span className="goal-style">
-                {goal.toLocaleString() + ' Trees by ' + end_date}
+                {goal.toLocaleString() +
+                  ' Trees' +
+                  (end_date !== null ? ' by ' + end_date : '')}
               </span>
               <div className="flex-row">
                 <UserProfileImage profileImage={avatar} />

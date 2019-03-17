@@ -3,10 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { challenge } from '../../actions/challengeActions';
+import { challenge, challengeStatus } from '../../actions/challengeActions';
 
 import { updateRoute } from '../../helpers/routerHelper';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
+import { userChallengesSelector } from '../../selectors';
 
 import Challenge from '../../components/Challenge/createChallenge';
 
@@ -23,6 +24,9 @@ class ChallengeContainer extends Component {
           this.props.route(routeName, id, this.props.navigation)
         }
         challengeUser={this.props.challenge}
+        challenges={this.props.userChallenges}
+        navigation={this.props.navigation}
+        challengeStatus={this.props.challengeStatus}
       />
     );
   }
@@ -30,13 +34,14 @@ class ChallengeContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    state
+    userChallenges: userChallengesSelector(state)
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      challengeStatus,
       setProgressModelState,
       challenge,
       route: (routeName, id, navigation) => dispatch =>
@@ -51,6 +56,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(ChallengeContainer);
 ChallengeContainer.propTypes = {
   navigation: PropTypes.any,
   setProgressModelState: PropTypes.func,
+  userChallenges: PropTypes.array,
   challenge: PropTypes.func,
-  route: PropTypes.func
+  route: PropTypes.func,
+  challengeStatus: PropTypes.func
 };

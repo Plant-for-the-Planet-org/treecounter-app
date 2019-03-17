@@ -49,21 +49,21 @@ export default {
       properties: {
         firstname: {
           type: 'string',
-          title: null,
+          title: 'label.firstname',
           icon: null,
           help: null,
           propertyOrder: 1
         },
         lastname: {
           type: 'string',
-          title: null,
+          title: 'label.lastname',
           icon: null,
           help: null,
           propertyOrder: 2
         },
         email: {
           type: 'string',
-          title: null,
+          title: 'label.email',
           widget: 'email',
           icon: null,
           help: null,

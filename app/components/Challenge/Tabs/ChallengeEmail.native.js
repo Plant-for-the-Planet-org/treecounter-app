@@ -7,7 +7,7 @@ import t from 'tcomb-form-native';
 import CardLayout from '../../Common/Card';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { TextInput, View, Text } from 'react-native';
-import ChallengeListContainer from '../../../containers/Challenge/challengeList';
+import ChallengeList from '../challengeList';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
@@ -22,10 +22,10 @@ export default class ChallengeEmail extends Component {
       this.challengeInvitation = element;
     };
     this.state = {
-      formValue: null,
       treeCount: 1000,
       isChecked: false,
-      byYear: ''
+      byYear: '',
+      tempForm: {}
     };
     let currentYear = new Date().getFullYear(),
       years = [];
@@ -44,21 +44,22 @@ export default class ChallengeEmail extends Component {
     if (this.giftInvitation.getValue()) {
       let value = this.giftInvitation.getValue();
       requestData = {
-        ...this.state.form,
-        ...value
+        invitee: { ...value }
       };
-      if (!this.state.isChecked) {
-        requestData.endDate = 'indefinite';
-      } else {
+      if (this.state.isChecked) {
         requestData.endDate = this.state.byYear;
       }
-      console.log(requestData);
-
+      requestData.challengeMethod = 'invitation';
+      requestData.goal = this.state.treeCount;
       this.props.challengeUser(requestData);
     } else {
       this.giftInvitation.validate();
     }
   }
+
+  onFormChange = value => {
+    this.setState({ tempForm: value });
+  };
 
   handleTreeCountChange(treeCount) {
     if (treeCount === '') {
@@ -77,7 +78,8 @@ export default class ChallengeEmail extends Component {
             ref={this.setChallengeInvitation}
             type={challengeFormSchema}
             options={challengeFormSchemaOptions}
-            value={this.state.formValue}
+            value={this.state.tempForm}
+            onChange={this.onFormChange}
           />
           <View style={challengeStyles.flexStyle}>
             <Text>Challenge to plant </Text>
@@ -120,7 +122,11 @@ export default class ChallengeEmail extends Component {
           </View>
           <PrimaryButton onClick={this.onNextClick}>Challenge</PrimaryButton>
         </CardLayout>
-        <ChallengeListContainer />
+        <ChallengeList
+          challenges={this.props.challenges}
+          navigation={this.props.navigation}
+          challengeStatus={this.props.challengeStatus}
+        />
       </KeyboardAwareScrollView>
     );
   }

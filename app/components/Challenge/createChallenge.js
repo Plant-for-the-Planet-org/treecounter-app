@@ -9,12 +9,13 @@ import SearchAutosuggest from '../Header/SearchAutosuggest';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 
 import {
-  giftInvitationFormSchema,
-  giftInvitationSchemaOptions
-} from '../../server/parsedSchemas/giftTrees';
+  challengeFormSchema,
+  challengeFormSchemaOptions
+} from '../../server/parsedSchemas/challenge';
 import i18n from '../../locales/i18n';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import TextBlock from '../Common/Text/TextBlock';
+import ChallengesListContainer from '../../containers/Challenge/challengeList';
 
 let TCombForm = t.form.Form;
 
@@ -132,8 +133,8 @@ export default class Challenge extends Component {
               ) : (
                 <TCombForm
                   ref="challengeUser"
-                  type={giftInvitationFormSchema}
-                  options={giftInvitationSchemaOptions}
+                  type={challengeFormSchema}
+                  options={challengeFormSchemaOptions}
                 />
               )}
             </Tabs>
@@ -173,6 +174,7 @@ export default class Challenge extends Component {
           </div>
           <PrimaryButton onClick={this.challenge}>Challenge</PrimaryButton>
         </CardLayout>
+        <ChallengesListContainer />
       </div>
     );
   }

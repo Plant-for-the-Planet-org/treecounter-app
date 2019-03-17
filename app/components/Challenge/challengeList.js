@@ -10,8 +10,9 @@ const ChallengeList = props => {
     challenge =>
       challenge && (
         <ChallengeCard
+          key={challenge.id}
           challenge={challenge}
-          challengeStatus={this.props.challengeStatus}
+          challengeStatus={props.challengeStatus}
         />
       )
   );

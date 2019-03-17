@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
-  giftInvitationFormSchema,
-  giftInvitationSchemaOptions
+  challengeFormSchema,
+  challengeFormSchemaOptions
 } from '../../../server/parsedSchemas/giftTrees';
 import t from 'tcomb-form-native';
 import CardLayout from '../../Common/Card';
@@ -18,8 +18,8 @@ let TCombForm = t.form.Form;
 export default class ChallengeEmail extends Component {
   constructor(props) {
     super(props);
-    this.setGiftInvitation = element => {
-      this.giftInvitation = element;
+    this.setChallengeInvitation = element => {
+      this.challengeInvitation = element;
     };
     this.state = {
       formValue: null,
@@ -74,9 +74,9 @@ export default class ChallengeEmail extends Component {
       <KeyboardAwareScrollView enableOnAndroid={true}>
         <CardLayout>
           <TCombForm
-            ref={this.setGiftInvitation}
-            type={giftInvitationFormSchema}
-            options={giftInvitationSchemaOptions}
+            ref={this.setChallengeInvitation}
+            type={challengeFormSchema}
+            options={challengeFormSchemaOptions}
             value={this.state.formValue}
           />
           <View style={challengeStyles.flexStyle}>

@@ -43,45 +43,40 @@ export default {
       help: null,
       propertyOrder: 5
     },
-    firstname: {
-      type: 'string',
+    invitee: {
       title: null,
-      attr: {
-        maxlength: 50
+      type: 'object',
+      properties: {
+        firstname: {
+          type: 'string',
+          title: null,
+          icon: null,
+          help: null,
+          propertyOrder: 1
+        },
+        lastname: {
+          type: 'string',
+          title: null,
+          icon: null,
+          help: null,
+          propertyOrder: 2
+        },
+        email: {
+          type: 'string',
+          title: null,
+          widget: 'email',
+          icon: null,
+          help: null,
+          propertyOrder: 3
+        }
       },
+      required: ['firstname', 'lastname', 'email'],
       icon: null,
       help: null,
-      maxLength: 50,
       propertyOrder: 6
-    },
-    lastname: {
-      type: 'string',
-      title: null,
-      attr: {
-        maxlength: 50
-      },
-      icon: null,
-      help: null,
-      maxLength: 50,
-      propertyOrder: 7
-    },
-    email: {
-      type: 'string',
-      title: null,
-      widget: 'email',
-      icon: null,
-      help: null,
-      propertyOrder: 8
     }
   },
-  required: [
-    'goal',
-    'endDate',
-    'challengeMethod',
-    'firstname',
-    'lastname',
-    'email'
-  ],
+  required: ['goal', 'endDate', 'challengeMethod', 'invitee'],
   submit_url: '',
   submit_method: 'POST'
 };

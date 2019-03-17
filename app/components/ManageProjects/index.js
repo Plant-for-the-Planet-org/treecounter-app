@@ -260,7 +260,7 @@ export default class ManageProjects extends Component {
                       }
                     }}
                   >
-                    {i18n.toString('label.discard_changes')}
+                    {i18n.t('label.discard_changes')}
                   </SecondaryButton>
                 </div>
               </div>

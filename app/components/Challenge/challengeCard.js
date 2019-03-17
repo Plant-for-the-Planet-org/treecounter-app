@@ -50,7 +50,7 @@ export default class ChallengeCard extends React.Component {
               <div>
                 <PrimaryButton
                   onClick={() =>
-                    this.props.challengeStatus({ status: 'accept' }, token)
+                    this.props.challengeStatus({ status: 'active' }, token)
                   }
                   className="button-width"
                 >

@@ -45,6 +45,7 @@ export function editTree(plantContribution, plantId, navigation) {
 
 export function deleteContribution(plantContributionId) {
   return dispatch => {
+    dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
       deleteAuthenticatedRequest('plantContribution_delete', {
         plantContribution: plantContributionId
@@ -64,9 +65,11 @@ export function deleteContribution(plantContributionId) {
             dispatch(
               mergeEntities(normalize(merge.plantProject, plantProjectSchema))
             );
+          dispatch(setProgressModelState(false));
         })
         .catch(err => {
           debug(err);
+          dispatch(setProgressModelState(false));
           reject(err);
         });
     });

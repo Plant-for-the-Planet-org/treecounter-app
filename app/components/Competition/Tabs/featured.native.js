@@ -4,6 +4,7 @@ import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
+import CompetitionSnippet from '../CompetitionSnippet.native';
 
 export default class FeaturedCompetitions extends Component {
   constructor(props) {
@@ -53,10 +54,6 @@ export default class FeaturedCompetitions extends Component {
 
   render() {
     let { featuredProjects } = this.state;
-    return (
-      <View>
-        <Text>Featured</Text>
-      </View>
-    );
+    return <CompetitionSnippet />;
   }
 }

@@ -16,7 +16,11 @@ import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
 let TCombForm = t.form.Form;
 
-const getSingleTreeLayout = props1 => {
+const getSingleTreeLayout = (
+  props1,
+  _onClickAddClassification,
+  showClassification
+) => {
   const formLayoutSingleTree = locals => {
     return (
       <div className="register-tree__form">
@@ -37,7 +41,17 @@ const getSingleTreeLayout = props1 => {
           </div>
         ) : null}
 
-        <div className="register-tree__form--row">
+        <div className="pftp-addbutton">
+          <button type="button" onClick={_onClickAddClassification}>
+            +&nbsp;{i18n.t('label.add_classification')}
+          </button>
+        </div>
+        <div
+          className={
+            'register-tree__form--row ' +
+            (!showClassification ? 'register-tree___hide-content' : '')
+          }
+        >
           {locals.inputs.treeClassification}
           <div className="register-tree__form--row__spacer" />
           {locals.inputs.treeScientificName}
@@ -97,7 +111,8 @@ export default class RegisterTrees extends Component {
       mode: '',
       individual: {
         treeCount: 1
-      }
+      },
+      showClassification: false
     };
 
     // Bind Local method
@@ -131,12 +146,21 @@ export default class RegisterTrees extends Component {
     console.log(geoLocation);
   }
 
+  toggleClassification = () => {
+    this.setState({
+      showClassification: !this.state.showClassification
+    });
+  };
   render() {
     const tpoPlantProjects = getPlantProjectEnum(this.props.currentUserProfile);
     const isSingleTree = this.state.mode === RegisterTrees.data.tabs[0].id;
 
     const template = isSingleTree
-      ? getSingleTreeLayout(this.props)
+      ? getSingleTreeLayout(
+          this.props,
+          this.toggleClassification,
+          this.state.showClassification
+        )
       : getMultipleTreeLayout(this.props);
 
     let formSchemaOptions = isSingleTree

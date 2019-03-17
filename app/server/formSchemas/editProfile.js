@@ -4555,6 +4555,13 @@ export const plantProject = {
         title: 'videoUrl',
         widget: 'textarea',
         propertyOrder: 14
+      },
+      acceptDonations: {
+        type: 'boolean',
+        title: 'label.acceptDonations',
+        icon: null,
+        help: null,
+        propertyOrder: 15
       }
     },
     required: ['name', 'treeCost', 'currency', 'country'],

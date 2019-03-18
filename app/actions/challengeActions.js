@@ -6,7 +6,7 @@ import {
 
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import { mergeEntities } from '../reducers/entitiesReducer';
-import { challengeSchema } from '../schemas';
+import { treecounterSchema } from '../schemas';
 
 export function challenge(challengeDetails) {
   let route = 'challenge_post';
@@ -17,7 +17,7 @@ export function challenge(challengeDetails) {
     request
       .then(response => {
         dispatch(setProgressModelState(false));
-        dispatch(mergeEntities(normalize(response.data, challengeSchema)));
+        dispatch(mergeEntities(normalize(response.data, treecounterSchema)));
       })
       .catch(response => {
         debug('error: ', response);

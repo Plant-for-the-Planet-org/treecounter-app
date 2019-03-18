@@ -117,6 +117,8 @@ import radio_button from './images/icons/radio_button.png';
 import radio_button_selected from './images/icons/radio_button_selected.png';
 import filter from './images/icons/filter.png';
 import welcomeScreen from './images/welcome-screen.png';
+import flagTarget from './images/flag_target.png';
+import compCalendar from './images/calendar_comp.png';
 
 export {
   AppStoreLogo,
@@ -237,5 +239,7 @@ export {
   shareIcon,
   facebook,
   twitter,
-  welcomeScreen
+  welcomeScreen,
+  flagTarget,
+  compCalendar
 };

@@ -1,18 +1,26 @@
 import React from 'react';
 import CardLayout from '../Common/Card';
-import styles from '../../styles/selectplantproject/selectplantproject-snippet';
+import styles from '../../styles/competition/competition-snippet.native';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
-import PlantedProgressBar from '../PlantProjects/PlantedProgressbar.native';
 import tick from '../../assets/images/icons/tick.png';
 import i18n from '../../locales/i18n';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import CompetitionProgressBar from './CompetitionProgressBar';
+import { compCalendar } from '../../assets';
 
 class CompetitionSnippet extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  toggleExpanded(id) {
+    this.props.onMoreClick(id);
+  }
+  containerPress(id) {
+    if (this.props.onMoreClick) {
+      this.props.onMoreClick(id);
+    }
+  }
   render() {
     return (
       <TouchableHighlight
@@ -37,64 +45,46 @@ class CompetitionSnippet extends React.Component {
           {/*) : null}*/}
 
           <View style={styles.projectSpecsContainer}>
-            <PlantedProgressBar countPlanted={1000} countTarget={1000} />
-            <View style={styles.projectNameContainer}>
-              <Text
-                ellipsizeMode="tail"
-                numberOfLines={1}
-                style={styles.project_teaser__contentText}
-              >
-                project name
-              </Text>
-              {/*{teaserProps.isCertified ? (*/}
-              {/*<Image*/}
-              {/*source={tick}*/}
-              {/*style={{*/}
-              {/*width: 15,*/}
-              {/*height: 15,*/}
-              {/*marginLeft: 5,*/}
-              {/*maxWidth: '10%'*/}
-              {/*}}*/}
-              {/*/>*/}
-              {/*) : null}*/}
-            </View>
-            <View style={styles.projectdetailsContainer}>
-              <View style={styles.locationContainer}>
-                <Text style={styles.locationText}>delhi</Text>
-                <View>
-                  <Text style={styles.survivalText}>
-                    {i18n.t('label.survival_rate')} {':'} 100%
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.costContainer}>
-                <Text style={styles.costText}>sadsada</Text>
-              </View>
-            </View>
-
-            <View style={styles.actionContainer}>
-              <View style={styles.byOrgContainer}>
+            <CompetitionProgressBar countPlanted={20} countTarget={1000} />
+            <View style={styles.competitionContent}>
+              <View style={styles.projectNameContainer}>
                 <Text
-                  style={styles.byOrgText}
                   ellipsizeMode="tail"
                   numberOfLines={1}
+                  style={styles.project_teaser__contentText}
                 >
-                  'tpo name'
+                  WorldWide Tree Planting Campaign
                 </Text>
               </View>
-
-              <View style={styles.buttonContainer}>
-                <PrimaryButton
-                  style={styles.buttonItem}
-                  buttonStyle={styles.buttonStyle}
-                  textStyle={styles.buttonTextStyle}
-                  // onClick={() =>
-                  //   this.props.onSelectClickedFeaturedProjects(id)
-                  // }
+              <View style={styles.projectNameContainer}>
+                <Text
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={styles.project_teaser__contentByText}
                 >
-                  <Text> {i18n.t('label.donate')}</Text>
-                </PrimaryButton>
+                  by World Wide Fund for Nature
+                </Text>
+              </View>
+              {/*<View style={styles.projectdetailsContainer}>*/}
+              {/**/}
+              {/*</View>*/}
+
+              <View style={styles.actionContainer}>
+                <View style={styles.byOrgContainer}>
+                  <Image
+                    source={compCalendar}
+                    style={{ width: 15, height: 15 }}
+                  />
+                  <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+                    Ends Nov 19, 2019
+                  </Text>
+                </View>
+
+                <View style={styles.buttonContainer}>
+                  <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+                    290 participants
+                  </Text>
+                </View>
               </View>
             </View>
           </View>

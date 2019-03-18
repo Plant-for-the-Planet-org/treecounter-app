@@ -54,6 +54,8 @@ export default class FeaturedCompetitions extends Component {
 
   render() {
     let { featuredProjects } = this.state;
-    return <CompetitionSnippet />;
+    return (
+      <CompetitionSnippet onMoreClick={id => this.props.onMoreClick(id)} />
+    );
   }
 }

@@ -7,6 +7,7 @@ import CardLayout from '../../Common/Card';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
+import challengeStyles from '../../../styles/challenge';
 
 export default class ChallengeUser extends Component {
   constructor(props) {

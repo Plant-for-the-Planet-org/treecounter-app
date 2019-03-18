@@ -57,9 +57,21 @@ export default class GiftTabView extends Component {
   _renderSelectionScene = ({ route }) => {
     switch (route.key) {
       case 'email':
-        return <ChallengeEmail challengeUser={this.props.challengeUser} />;
+        return (
+          <ChallengeEmail
+            challengeUser={this.props.challengeUser}
+            challenges={this.props.challenges}
+            challengeStatus={this.props.challengeStatus}
+          />
+        );
       case 'user':
-        return <ChallengeUser challengeUser={this.props.challengeUser} />;
+        return (
+          <ChallengeUser
+            challengeUser={this.props.challengeUser}
+            challenges={this.props.challenges}
+            challengeStatus={this.props.challengeStatus}
+          />
+        );
       default:
         return null;
     }

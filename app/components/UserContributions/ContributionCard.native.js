@@ -338,7 +338,8 @@ class ContributionCard extends React.Component {
           style={styles.deleteTextStyle}
           onPress={() => {
             this.props.navigation.navigate('delete_contribution', {
-              deleteContribution: this.props.deleteContribution
+              deleteContribution: () =>
+                this.props.deleteContribution(contribution.id)
             });
           }}
         >

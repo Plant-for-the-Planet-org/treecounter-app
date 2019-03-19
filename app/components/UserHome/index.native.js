@@ -185,6 +185,7 @@ export default class UserHome extends Component {
           <ScrollView>
             <ContributionCardList
               contributions={this.props.userContributions}
+              deleteContribution={this.props.deleteContribution}
             />
           </ScrollView>
         );
@@ -221,5 +222,6 @@ UserHome.propTypes = {
   userProfile: PropTypes.object,
   userProfileId: PropTypes.number.isRequired,
   userContributions: PropTypes.array.isRequired,
+  deleteContribution: PropTypes.func,
   navigation: PropTypes.any
 };

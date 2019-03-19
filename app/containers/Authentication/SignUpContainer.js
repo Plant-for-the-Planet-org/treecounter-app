@@ -16,6 +16,11 @@ class SignUpContainer extends React.Component {
     this.state = { formValue: {}, schemaOptions };
   }
 
+  componentWillUnmount() {
+    let gBatch = document.getElementsByClassName('grecaptcha-badge');
+    gBatch[0].style.visibility = 'hidden';
+  }
+
   onSignUpClicked = (profileType, token) => {
     console.log(this.refs.signupContainer.refs.signupForm.validate());
     let formValue = this.refs.signupContainer.refs.signupForm.getValue();

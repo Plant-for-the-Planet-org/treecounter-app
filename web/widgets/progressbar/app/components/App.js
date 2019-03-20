@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PlantedProgressBar from '../../../../../app/components/PlantProjects/PlantedProgressbar';
-import TreecounterGraphicsText from '../../../../../app/components/TreecounterGraphics/TreecounterGraphicsText';
 import SecondaryButton from '../../../../../app/components/Common/Button/SecondaryButton';
-import { SideMenuImage } from '../../../../../app/assets';
+import { tree } from '../../../../../app/assets';
+
 import PropTypes from 'prop-types';
 import ReactTooltipStyle from '../../../../../node_modules/react-tooltip/dist/style';
 import i18n from '../../../../../app/locales/i18n.js';
@@ -13,62 +13,17 @@ export default class App extends Component {
     super(props);
     const treecounter = this.props.treecounter;
     this.state = {
-      svgData: {
-        id: treecounter.id,
-        target: treecounter.countTarget,
-        planted: treecounter.countPlanted,
-        community: treecounter.countReceived,
-        personal: treecounter.countPersonal,
-        targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear,
-        type: treecounter.userProfile.type
-      }
+      target: treecounter.countTarget,
+      planted: treecounter.countPlanted
     };
-  }
-  updateSvg(toggle) {
-    console.log(toggle);
-    if (toggle) {
-      const treecounter = this.props.treecounter;
-      let svgData = {
-        id: treecounter.id,
-        target: treecounter.countReceived + treecounter.countPersonal, // light color
-        planted: treecounter.countPersonal, //dark color
-        community: treecounter.countReceived,
-        personal: treecounter.countPersonal,
-        targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear,
-        type: treecounter.userProfile.type
-      };
-      this.setState({ svgData: Object.assign({}, svgData) });
-    } else {
-      const treecounter = this.props.treecounter;
-      let svgData = {
-        id: treecounter.id,
-        target: treecounter.countTarget,
-        planted: treecounter.countPlanted,
-        community: treecounter.countReceived,
-        personal: treecounter.countPersonal,
-        targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear,
-        type: treecounter.userProfile.type
-      };
-      this.setState({ svgData: Object.assign({}, svgData) });
-    }
   }
   componentWillReceiveProps(nextProps) {
     const treecounter = nextProps.treecounter;
     if (treecounter) {
-      let svgData = {
-        id: treecounter.id,
+      this.setState({
         target: treecounter.countTarget,
-        planted: treecounter.countPlanted,
-        community: treecounter.countReceived,
-        personal: treecounter.countPersonal,
-        targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear,
-        type: treecounter.userProfile.type
-      };
-      this.setState({ svgData });
+        planted: treecounter.countPlanted
+      });
     }
   }
 
@@ -89,46 +44,38 @@ export default class App extends Component {
         {/*Inherited properties will be inherited as usual. It's better to think of the shadow
           boundary as affecting the cascade, namely the scope of selectors and the importance of rules. */}
         <style>{`:host {all: initial;}`}</style>
-        <div className="widget-container" id={'widget-container'}>
-          <link href="treecounterwidget.css" rel="stylesheet" />
-          <link
-            href={`${serverName}/treecounterwidget.css"`}
-            rel="stylesheet"
-          />
+        <div>
+          <link href="progressbarwidget.css" rel="stylesheet" />
+          <link href={`${serverName}/progressbarwidget.css`} rel="stylesheet" />
           {/* Apply CSS hooks here */}
           <style>{style}</style>
           {/* Apply React Tooltip Library CSS */}
           <style>{ReactTooltipStyle}</style>
-          <div className="pftp-widget-row">
-            <div className={'pftp-widget-img__container'}>
-              {this.props.showGraphics && (
-                <img
-                  src={serverName + SideMenuImage}
-                  className={'pftp-widget-img'}
-                />
-              )}
-            </div>
-
-            {this.props.showDonateButton && (
-              <SecondaryButton
-                onClick={event => {
-                  const url = `${serverName}/${getLocalRoute(
-                    'app_registerTrees'
-                  )}?uid=${treecounter.id}`;
-                  window.open(url, '_blank');
-                }}
-              >
-                {i18n.t('label.plant_trees')}
-              </SecondaryButton>
+          <div className="widget-container" id={'widget-container'}>
+            {this.props.showGraphics && (
+              <div className={'pftp-widget-img__container'}>
+                <img src={tree} className={'pftp-widget-img'} />
+              </div>
             )}
-          </div>
-          <div className="canvasContainer flex-column">
-            <SvgContainer {...this.state.svgData} />
-            <TreecounterGraphicsText
-              trillion={false}
-              onToggle={toggleVal => this.updateSvg(toggleVal)}
-              treecounterData={this.state.svgData}
+
+            <PlantedProgressBar
+              countPlanted={this.state.planted}
+              countTarget={this.state.target}
             />
+            {this.props.showDonateButton && (
+              <div className={'pftp-widget-btn__container'}>
+                <SecondaryButton
+                  onClick={event => {
+                    const url = `${serverName}/${getLocalRoute(
+                      'app_registerTrees'
+                    )}?uid=${treecounter.id}`;
+                    window.open(url, '_blank');
+                  }}
+                >
+                  {i18n.t('label.plant_trees')}
+                </SecondaryButton>
+              </div>
+            )}
           </div>
         </div>
       </React.Fragment>

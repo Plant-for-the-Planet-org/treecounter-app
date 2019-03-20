@@ -6,10 +6,11 @@ export default {
       type: 'string',
       title: 'label.email',
       icon: 'email',
+      help: null,
       propertyOrder: 1
     }
   },
-  // required: ['email'],
+  required: ['email'],
   submit_url: '/app_dev.php/auth/en/forgotPassword',
   submit_method: 'POST'
 };

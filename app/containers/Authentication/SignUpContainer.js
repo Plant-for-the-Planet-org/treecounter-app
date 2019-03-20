@@ -54,6 +54,7 @@ class SignUpContainer extends React.Component {
         updateRoute={(routeName, id) =>
           this.props.route(routeName, id, this.props.navigation)
         }
+        {...this.props}
         schemaOptions={this.state.schemaOptions}
       />
     );

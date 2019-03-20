@@ -46,27 +46,24 @@ export default class App extends Component {
         <style>{`:host {all: initial;}`}</style>
         <div>
           <link href="progressbarwidget.css" rel="stylesheet" />
-          <link
-            href={`${serverName}/progressbarwidget.css"`}
-            rel="stylesheet"
-          />
+          <link href={`${serverName}/progressbarwidget.css`} rel="stylesheet" />
           {/* Apply CSS hooks here */}
           <style>{style}</style>
           {/* Apply React Tooltip Library CSS */}
           <style>{ReactTooltipStyle}</style>
           <div className="widget-container" id={'widget-container'}>
-            <div className={'pftp-widget-img__container'}>
-              {this.props.showGraphics && (
+            {this.props.showGraphics && (
+              <div className={'pftp-widget-img__container'}>
                 <img src={tree} className={'pftp-widget-img'} />
-              )}
-            </div>
+              </div>
+            )}
 
             <PlantedProgressBar
               countPlanted={this.state.planted}
               countTarget={this.state.target}
             />
-            <div className={'pftp-widget-btn__container'}>
-              {this.props.showDonateButton && (
+            {this.props.showDonateButton && (
+              <div className={'pftp-widget-btn__container'}>
                 <SecondaryButton
                   onClick={event => {
                     const url = `${serverName}/${getLocalRoute(
@@ -77,8 +74,8 @@ export default class App extends Component {
                 >
                   {i18n.t('label.plant_trees')}
                 </SecondaryButton>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </React.Fragment>

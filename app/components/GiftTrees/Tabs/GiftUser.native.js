@@ -5,6 +5,7 @@ import PrimaryButton from '../../Common/Button/PrimaryButton';
 import CardLayout from '../../Common/Card';
 import { iosInformation } from '../../../assets';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import i18n from '../../../locales/i18n';
 
 export default class GiftUser extends Component {
   constructor(props) {
@@ -32,62 +33,63 @@ export default class GiftUser extends Component {
   }
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-          width: '100%',
-          height: '100%'
-        }}
-      >
-        <CardLayout>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ width: 40, height: 40, alignSelf: 'center' }}>
-              <Image
-                style={{ width: undefined, height: undefined, flex: 1 }}
-                source={iosInformation}
-              />
+      <KeyboardAwareScrollView enableOnAndroid={true}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            width: '100%',
+            height: '100%'
+          }}
+        >
+          <CardLayout>
+            <View style={{ flexDirection: 'row' }}>
+              <View style={{ width: 40, height: 40, alignSelf: 'center' }}>
+                <Image
+                  style={{ width: undefined, height: undefined, flex: 1 }}
+                  source={iosInformation}
+                />
+              </View>
+
+              <Text
+                style={{
+                  padding: 5,
+                  color: '#c4bfbf',
+                  marginRight: 10,
+                  width: '90%',
+                  color: '#686060'
+                }}
+              >
+                {i18n.t('label.gift_trees_description')}
+              </Text>
             </View>
+          </CardLayout>
+          <CardLayout style={{ flex: 0.8 }}>
+            <SearchUser
+              onSearchResultClick={this.onSearchResultClick}
+              currentUserProfile={this.props.currentUserProfile}
+            />
 
-            <Text
+            <TextInput
+              multiline={true}
               style={{
-                padding: 5,
-                color: '#c4bfbf',
-                marginRight: 10,
-                width: '90%',
-                color: '#686060'
+                height: 100,
+                margin: 10,
+                padding: 5
               }}
-            >
-              Select a person for whom you want to donate trees.Trees you then
-              donate will appear in recipeint tree-counter as well as your
-              own.If Recipeint does not have a tree-counter then s(he) will get
-              email notification.
-            </Text>
+              underlineColorAndroid={'transparent'}
+              onChangeText={val => this.onChangeText(val)}
+              placeholder={'Gift Message'}
+            />
+          </CardLayout>
+
+          <View style={{ flex: 0.2 }}>
+            <PrimaryButton onClick={this.onNextClick}>
+              {i18n.t('label.next')}
+            </PrimaryButton>
           </View>
-        </CardLayout>
-        <CardLayout style={{ flex: 0.8 }}>
-          <SearchUser
-            onSearchResultClick={this.onSearchResultClick}
-            currentUserProfile={this.props.currentUserProfile}
-          />
-
-          <TextInput
-            multiline={true}
-            style={{
-              height: 100,
-              margin: 10,
-              padding: 5
-            }}
-            underlineColorAndroid={'transparent'}
-            onChangeText={val => this.onChangeText(val)}
-            placeholder={'Gift Message'}
-          />
-        </CardLayout>
-
-        <View style={{ flex: 0.2 }}>
-          <PrimaryButton onClick={this.onNextClick}>Next</PrimaryButton>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

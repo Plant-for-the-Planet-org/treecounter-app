@@ -18,6 +18,10 @@ module.exports = webpackMerge(commonConfig, {
     donatetreewidget: [
       'babel-polyfill',
       path.join(__dirname, '../widgets/DonateTrees/widget.js')
+    ],
+    progressbarwidget: [
+      'babel-polyfill',
+      path.join(__dirname, '../widgets/progressbar/widget.js')
     ]
   },
   output: {

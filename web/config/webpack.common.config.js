@@ -50,6 +50,12 @@ const config = {
     }),
     new HtmlWebPackPlugin({
       inject: true,
+      chunks: ['progressbarwidget'],
+      filename: './progressbarwidget.html',
+      template: './web/widget.index.html'
+    }),
+    new HtmlWebPackPlugin({
+      inject: true,
       chunks: ['treecounterwidget'],
       filename: './treecounterwidget.html',
       template: './web/widget.index.html'

@@ -243,20 +243,20 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
 
-        {type == 'tpo' ? (
-          <div className="plant-project__container">
-            {this.getPlantProjectList()}
-            <div className="pftp-addbutton">
-              <button
-                onClick={() => {
-                  this.handleAddNewProject();
-                }}
-              >
-                +&nbsp;{i18n.t('label.new_project')}
-              </button>
-            </div>
-          </div>
-        ) : null}
+        {/*{type == 'tpo' ? (*/}
+        {/*<div className="plant-project__container">*/}
+        {/*{this.getPlantProjectList()}*/}
+        {/*<div className="pftp-addbutton">*/}
+        {/*<button*/}
+        {/*onClick={() => {*/}
+        {/*this.handleAddNewProject();*/}
+        {/*}}*/}
+        {/*>*/}
+        {/*+&nbsp;{i18n.t('label.new_project')}*/}
+        {/*</button>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        {/*) : null}*/}
 
         <CardLayout className="user-profile__form-group">
           <div className="form-group__heading">{i18n.t('label.about_me')}</div>

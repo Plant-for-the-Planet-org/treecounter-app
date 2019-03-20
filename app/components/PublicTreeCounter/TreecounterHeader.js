@@ -20,7 +20,7 @@ const TreecounterHeader = ({
       <div className="user-info">
         <div className="tree-counter-name">{caption}</div>
         <div className="tree-counter-row">
-          <UserProfileTypeLabel profileType={profileType} />
+          {!!profileType && <UserProfileTypeLabel profileType={profileType} />}
           {showFollow && (
             <FollowLabelButton
               isSubscribed={isUserFollowerBool}

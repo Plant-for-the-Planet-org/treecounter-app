@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     widgetType = widgetType.nodeValue;
-    const isStandardTreecounter = widgetType === 'standard';
+    const isStandardTreecounter = widgetType === 'treecounter-standard';
     if (widgetType === 'treecounter' || isStandardTreecounter) {
       let uid = allBlockQuote[i].attributes.getNamedItem('data-treecounterId');
       let showGraphics = allBlockQuote[i].attributes.getNamedItem(

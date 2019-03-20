@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
         'donateTrees'
     ) {
       let uid = allBlockQuote[i].attributes.getNamedItem('data-treecounterId');
-      let showGraphics = allBlockQuote[i].attributes.getNamedItem(
-        'data-show-graphics'
+      let inlineDonation = allBlockQuote[i].attributes.getNamedItem(
+        'data-inline-donation'
       );
       let showDonateButton = allBlockQuote[i].attributes.getNamedItem(
         'data-show-donate-button'
@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
         'data-projectId'
       );
 
-      if (showGraphics && showGraphics.nodeValue === 'false') {
-        showGraphics = false;
+      if (inlineDonation && inlineDonation.nodeValue === 'false') {
+        inlineDonation = false;
       }
       if (showDonateButton && showDonateButton.nodeValue === 'false') {
         showDonateButton = false;
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
               <App
                 key={'test_app'}
                 treecounter={treecounter}
-                showGraphics={!!showGraphics}
+                inlineDonation={!!inlineDonation}
                 showDonateButton={!!showDonateButton}
                 serverName={serverName}
                 baseUrl={baseUrl}

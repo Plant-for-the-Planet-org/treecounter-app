@@ -6,6 +6,7 @@ import PlantProjectFull from '../../../../../app/components/PlantProjects/PlantP
 import PrimaryButton from '../../../../../app/components/Common/Button/PrimaryButton';
 import ReactDOM from 'react-dom';
 import DonationFlow from './DonationFLow';
+import { getLocalRoute } from '../../../../../app/actions/apiRouting';
 
 export default class App extends Component {
   constructor(props) {
@@ -43,7 +44,13 @@ export default class App extends Component {
   }
 
   render() {
-    const { serverName, baseUrl, treecounter, ProjectId } = this.props;
+    const {
+      serverName,
+      baseUrl,
+      treecounter,
+      ProjectId,
+      inlineDonation
+    } = this.props;
     const style = `.canvasContainer {
       background-color:${this.props.backgroundColor};
     }`;
@@ -83,7 +90,14 @@ export default class App extends Component {
               // div.className = 'overlay-container ';
               // body.appendChild(div);
               // ReactDOM.render(<DonationFlow />, div);
-              this.setState({ showDonationFlow: true });
+              if (inlineDonation) {
+                this.setState({ showDonationFlow: true });
+              } else {
+                const url = `${serverName}/${getLocalRoute(
+                  'app_donateTrees'
+                )}?projectId=${ProjectId}`;
+                window.open(url, '_blank');
+              }
             }}
           >
             {i18n.t('label.donate')}
@@ -105,5 +119,6 @@ App.propTypes = {
   serverName: PropTypes.string,
   baseUrl: PropTypes.string,
   backgroundColor: PropTypes.string,
-  ProjectId: PropTypes.any
+  ProjectId: PropTypes.any,
+  inlineDonation: PropTypes.bool
 };

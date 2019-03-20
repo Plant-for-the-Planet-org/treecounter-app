@@ -46,10 +46,7 @@ export default class App extends Component {
         <style>{`:host {all: initial;}`}</style>
         <div>
           <link href="progressbarwidget.css" rel="stylesheet" />
-          <link
-            href={`${serverName}/progressbarwidget.css"`}
-            rel="stylesheet"
-          />
+          <link href={`${serverName}/progressbarwidget.css`} rel="stylesheet" />
           {/* Apply CSS hooks here */}
           <style>{style}</style>
           {/* Apply React Tooltip Library CSS */}

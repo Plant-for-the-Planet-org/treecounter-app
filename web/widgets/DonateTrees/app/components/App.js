@@ -71,7 +71,7 @@ export default class App extends Component {
     return (
       <div className="widget-container" id={'widget-container'}>
         <link href="donatetreewidget.css" rel="stylesheet" />
-        <link href={`${serverName}/donatetreewidget.css"`} rel="stylesheet" />
+        <link href={`${serverName}/donatetreewidget.css`} rel="stylesheet" />
         {/* Apply CSS hooks here */}
         <style>{style}</style>
         <PlantProjectFull

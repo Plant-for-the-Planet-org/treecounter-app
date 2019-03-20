@@ -61,6 +61,12 @@ const config = {
       template: './web/widget.index.html'
     }),
     new HtmlWebPackPlugin({
+      inject: true,
+      chunks: ['donatetreewidget'],
+      filename: './donatetreewidget.html',
+      template: './web/widget.index.html'
+    }),
+    new HtmlWebPackPlugin({
       chunks: ['bundle'],
       template: './web/index.html',
       filename: './index.html'

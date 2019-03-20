@@ -57,9 +57,10 @@ export default class App extends Component {
       return null;
     }
     const plantProjects = treecounter.userProfile.plantProjects;
-    const result = plantProjects.find(
+    let result = plantProjects.find(
       plantProject => plantProject.id == ProjectId
     );
+    if (!result) result = plantProjects[0];
     return (
       <div className="widget-container" id={'widget-container'}>
         <link href="donatetreewidget.css" rel="stylesheet" />

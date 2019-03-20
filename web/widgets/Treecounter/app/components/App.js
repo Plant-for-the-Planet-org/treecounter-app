@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import ReactTooltipStyle from '../../../../../node_modules/react-tooltip/dist/style';
 import i18n from '../../../../../app/locales/i18n.js';
 import { getLocalRoute } from '../../../../../app/actions/apiRouting';
+import TreecounterHeader from '../../../../../app/components/PublicTreeCounter/TreecounterHeader';
 
 export default class App extends Component {
   constructor(props) {
@@ -57,6 +58,7 @@ export default class App extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const treecounter = nextProps.treecounter;
+
     if (treecounter) {
       let svgData = {
         id: treecounter.id,
@@ -74,6 +76,16 @@ export default class App extends Component {
 
   render() {
     const { serverName, baseUrl, treecounter } = this.props;
+    const { userProfile, displayName: caption } = treecounter;
+    const { type: profileType, image: logo } = userProfile;
+    const headerProps = {
+      caption,
+      profileType: undefined,
+      logo,
+      isUserFollowerBool: false,
+      isUserLoggedIn: false,
+      showFollow: false
+    };
     const style = `.canvasContainer {
       background-color:${this.props.backgroundColor};
     }`;
@@ -106,6 +118,14 @@ export default class App extends Component {
                   src={serverName + SideMenuImage}
                   className={'pftp-widget-img'}
                 />
+              )}
+              {this.props.isStandardTreecounter && (
+                <div className="tree-counter-header">
+                  <TreecounterHeader
+                    {...headerProps}
+                    followChanged={this.onFollowChanged}
+                  />
+                </div>
               )}
             </div>
 
@@ -142,5 +162,6 @@ App.propTypes = {
   showDonateButton: PropTypes.bool,
   serverName: PropTypes.string,
   baseUrl: PropTypes.string,
-  backgroundColor: PropTypes.string
+  backgroundColor: PropTypes.string,
+  isStandardTreecounter: PropTypes.bool
 };

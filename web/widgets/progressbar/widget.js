@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (
       allBlockQuote[i].attributes.getNamedItem('pftp') &&
       allBlockQuote[i].attributes.getNamedItem('data-widget-type').nodeValue ===
-        'progressbar'
+        'treecounter-progress'
     ) {
       let uid = allBlockQuote[i].attributes.getNamedItem('data-treecounterId');
       let showGraphics = allBlockQuote[i].attributes.getNamedItem(

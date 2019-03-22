@@ -1,15 +1,23 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 
 const Layout = {
   window: {
     width: Dimensions.get('window').width
   }
 };
+
 export const SearchContainerHorizontalMargin = 10;
 export const SearchContainerWidth =
   Layout.window.width - SearchContainerHorizontalMargin * 2;
-
+//On android, there is default paddingTop , override it to make the text centerline
+export const centerTextInput =
+  Platform.OS === 'android'
+    ? {
+        paddingTop: 0,
+        paddingBottom: 0
+      }
+    : {};
 export default (styles = EStyleSheet.create({
   container: {
     // flex: 1,
@@ -18,7 +26,8 @@ export default (styles = EStyleSheet.create({
     // marginLeft: 10,
     marginRight: 5,
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    alignItems: 'center'
   },
   searchContainer: {
     height: 30,
@@ -53,10 +62,7 @@ export default (styles = EStyleSheet.create({
   searchInput: {
     fontSize: 14,
     paddingTop: 5,
-    lineHeight: 24,
     color: '$primary',
-    textAlignVertical: 'center',
-    paddingTop: 0,
-    paddingBottom: 0
+    ...centerTextInput
   }
 }));

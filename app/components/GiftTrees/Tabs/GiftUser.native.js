@@ -79,7 +79,7 @@ export default class GiftUser extends Component {
               }}
               underlineColorAndroid={'transparent'}
               onChangeText={val => this.onChangeText(val)}
-              placeholder={'Gift Message'}
+              placeholder={i18n.t('label.gift_message')}
             />
           </CardLayout>
 

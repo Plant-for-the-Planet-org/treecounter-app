@@ -90,8 +90,14 @@ export default class GiftEmail extends Component {
             </View>
           </CardLayout>
           <CardLayout>
+            <TCombForm
+              ref={this.setGiftInvitation}
+              type={giftInvitationFormSchema}
+              options={giftInvitationSchemaOptions}
+              value={this.state.formValue}
+            />
             <TextInput
-              // multiline={true}
+              multiline={true}
               style={{
                 height: 100,
                 color: '#686060',
@@ -102,15 +108,8 @@ export default class GiftEmail extends Component {
               }}
               underlineColorAndroid={'transparent'}
               onChangeText={val => this.onChangeText(val)}
-              placeholder={'Gift Message'}
+              placeholder={i18n.t('label.gift_message')}
             />
-            <TCombForm
-              ref={this.setGiftInvitation}
-              type={giftInvitationFormSchema}
-              options={giftInvitationSchemaOptions}
-              value={this.state.formValue}
-            />
-
             <PrimaryButton onClick={this.onNextClick}>
               {i18n.t('next')}
             </PrimaryButton>

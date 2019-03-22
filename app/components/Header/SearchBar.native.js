@@ -139,7 +139,7 @@ class SearchBar extends React.PureComponent {
                   color: this.props.tintColor || '#007AFF'
                 }}
               >
-                Cancel
+                {i18n.t('label.cancel')}
               </Text>
             </TouchableItem>
           ) : null}

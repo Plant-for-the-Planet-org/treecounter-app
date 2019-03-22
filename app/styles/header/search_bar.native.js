@@ -53,6 +53,10 @@ export default (styles = EStyleSheet.create({
   searchInput: {
     fontSize: 14,
     paddingTop: 5,
-    color: '$primary'
+    lineHeight: 24,
+    color: '$primary',
+    textAlignVertical: 'center',
+    paddingTop: 0,
+    paddingBottom: 0
   }
 }));

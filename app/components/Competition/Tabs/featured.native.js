@@ -5,6 +5,7 @@ import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
+import PropTypes from 'prop-types';
 
 export default class FeaturedCompetitions extends Component {
   constructor(props) {
@@ -54,8 +55,24 @@ export default class FeaturedCompetitions extends Component {
 
   render() {
     let { featuredProjects } = this.state;
+    console.log(this.props);
     return (
-      <CompetitionSnippet onMoreClick={id => this.props.onMoreClick(id)} />
+      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+        {this.props.allCompetitions.competitions &&
+        this.props.allCompetitions.competitions.length > 0
+          ? this.props.allCompetitions.competitions.map(project => (
+              <CompetitionSnippet
+                key={'competition' + project.id}
+                cardStyle={styles.cardStyle}
+                onMoreClick={id => this.props.onMoreClick(id)}
+                competition={project}
+              />
+            ))
+          : null}
+      </ScrollView>
     );
   }
 }
+FeaturedCompetitions.propTypes = {
+  allCompetitions: PropTypes.any
+};

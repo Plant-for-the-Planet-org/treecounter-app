@@ -27,7 +27,7 @@ export default (selectCompetitionFull = EStyleSheet.create({
     padding: 10
   },
   projectImageContainer: {
-    height: Layout.window.width * 0.5,
+    height: Layout.window.width * 0.2,
     width: '100%'
   },
   teaser__projectImage: {

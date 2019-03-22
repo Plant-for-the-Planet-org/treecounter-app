@@ -7,6 +7,7 @@ import tick from '../../assets/images/icons/tick.png';
 import i18n from '../../locales/i18n';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import CompetitionProgressBar from './CompetitionProgressBar';
+import PropTypes from 'prop-types';
 import { compCalendar } from '../../assets';
 
 class CompetitionSnippet extends React.Component {
@@ -22,6 +23,7 @@ class CompetitionSnippet extends React.Component {
     }
   }
   render() {
+    console.log(this.props.competition);
     return (
       <TouchableHighlight
         underlayColor={'transparent'}
@@ -45,7 +47,29 @@ class CompetitionSnippet extends React.Component {
           {/*) : null}*/}
 
           <View style={styles.projectSpecsContainer}>
-            <CompetitionProgressBar countPlanted={20} countTarget={1000} />
+            {this.props.competition && this.props.competition.image ? (
+              <View style={styles.projectImageContainer}>
+                <Image
+                  style={styles.teaser__projectImage}
+                  source={{
+                    uri: getImageUrl(
+                      'project',
+                      'large',
+                      this.props.competition.image
+                    )
+                  }}
+                  resizeMode={'cover'}
+                />
+              </View>
+            ) : null}
+            <CompetitionProgressBar
+              countPlanted={
+                this.props.competition && this.props.competition.score
+              }
+              countTarget={
+                this.props.competition && this.props.competition.goal
+              }
+            />
             <View style={styles.competitionContent}>
               <View style={styles.projectNameContainer}>
                 <Text
@@ -53,7 +77,7 @@ class CompetitionSnippet extends React.Component {
                   numberOfLines={1}
                   style={styles.project_teaser__contentText}
                 >
-                  WorldWide Tree Planting Campaign
+                  {this.props.competition && this.props.competition.name}
                 </Text>
               </View>
               <View style={styles.projectNameContainer}>
@@ -62,7 +86,8 @@ class CompetitionSnippet extends React.Component {
                   numberOfLines={1}
                   style={styles.project_teaser__contentByText}
                 >
-                  by World Wide Fund for Nature
+                  by{' '}
+                  {this.props.competition && this.props.competition.ownerName}
                 </Text>
               </View>
               {/*<View style={styles.projectdetailsContainer}>*/}
@@ -82,7 +107,10 @@ class CompetitionSnippet extends React.Component {
 
                 <View style={styles.buttonContainer}>
                   <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
-                    290 participants
+                    {this.props.competition &&
+                    this.props.competition.competitorCount > 0
+                      ? `${this.props.competition.competitorCount} participants`
+                      : 'Join'}
                   </Text>
                 </View>
               </View>
@@ -95,3 +123,6 @@ class CompetitionSnippet extends React.Component {
 }
 
 export default CompetitionSnippet;
+CompetitionSnippet.propTypes = {
+  competition: PropTypes.any
+};

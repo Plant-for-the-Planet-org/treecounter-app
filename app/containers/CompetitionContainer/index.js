@@ -1,31 +1,55 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import Competiton from '../../components/Competition/index.native';
-import SelectPlantProject from '../../components/SelectPlantProject';
 import { updateRoute } from '../../helpers/routerHelper';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { fetchCompetitions } from '../../actions/competition';
+import { competitionsSelector } from '../../selectors';
 
 class CompetitionContainer extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.fetchCompetitions('all');
+  }
+
   render() {
-    return <Competiton onMoreClick={id => this.onMoreClick(id)} />;
+    return (
+      <Competiton
+        allCompetitions={this.props.competitions}
+        onMoreClick={id => this.onMoreClick(id)}
+      />
+    );
   }
   onMoreClick(id) {
     //this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
-    if (navigation) {
-      updateRoute(
-        'app_selectCompetition',
-        navigation,
-        1,
-        navigation.getParam('userForm')
-      );
-    }
+    // if (navigation) {
+    //   updateRoute(
+    //     'app_selectCompetition',
+    //     navigation,
+    //     1,
+    //     navigation.getParam('userForm')
+    //   );
+    // }
   }
 }
+const mapStateToProps = state => ({
+  competitions: competitionsSelector(state)
+});
 
-export default CompetitionContainer;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ fetchCompetitions }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  CompetitionContainer
+);
 CompetitionContainer.propTypes = {
-  navigation: PropTypes.any
+  navigation: PropTypes.any,
+  fetchCompetitions: PropTypes.any,
+  competitions: PropTypes.any
 };

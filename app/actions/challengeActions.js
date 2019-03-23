@@ -1,7 +1,8 @@
 import { normalize } from 'normalizr';
 import {
   postAuthenticatedRequest,
-  putAuthenticatedRequest
+  putAuthenticatedRequest,
+  putRequest
 } from '../utils/api';
 
 import { setProgressModelState } from '../reducers/modelDialogReducer';
@@ -34,6 +35,54 @@ export function challengeStatus(status, token) {
     let request = putAuthenticatedRequest(route, status, {
       token: token
     });
+    request
+      .then(response => {
+        dispatch(setProgressModelState(false));
+        dispatch(mergeEntities(normalize(response.data, challengeSchema)));
+      })
+      .catch(response => {
+        debug('error: ', response);
+        dispatch(setProgressModelState(false));
+      });
+  };
+}
+
+export function denyChallenge(token) {
+  let route = 'challengeDecline_put';
+
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    let request = putRequest(
+      route,
+      { status: 'decline' },
+      {
+        token: token
+      }
+    );
+    request
+      .then(response => {
+        dispatch(setProgressModelState(false));
+        dispatch(mergeEntities(normalize(response.data, challengeSchema)));
+      })
+      .catch(response => {
+        debug('error: ', response);
+        dispatch(setProgressModelState(false));
+      });
+  };
+}
+
+export function acceptChallenge(token) {
+  let route = 'challenge_put';
+
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    let request = putAuthenticatedRequest(
+      route,
+      { status: 'active' },
+      {
+        token: token
+      }
+    );
     request
       .then(response => {
         dispatch(setProgressModelState(false));

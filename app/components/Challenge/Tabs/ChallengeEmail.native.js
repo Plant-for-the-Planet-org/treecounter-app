@@ -29,7 +29,7 @@ export default class ChallengeEmail extends Component {
     };
     let currentYear = new Date().getFullYear(),
       years = [];
-    let endYear = currentYear + 20;
+    let endYear = currentYear + 10;
 
     while (currentYear <= endYear) {
       years.push(currentYear++);

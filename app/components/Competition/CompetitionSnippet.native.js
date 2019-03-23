@@ -9,6 +9,7 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import CompetitionProgressBar from './CompetitionProgressBar';
 import PropTypes from 'prop-types';
 import { compCalendar } from '../../assets';
+import CompetitionTopCompetitor from './CompetitionTopCompetitor.native';
 
 class CompetitionSnippet extends React.Component {
   constructor(props) {
@@ -47,21 +48,21 @@ class CompetitionSnippet extends React.Component {
           {/*) : null}*/}
 
           <View style={styles.projectSpecsContainer}>
-            {this.props.competition && this.props.competition.image ? (
-              <View style={styles.projectImageContainer}>
-                <Image
-                  style={styles.teaser__projectImage}
-                  source={{
-                    uri: getImageUrl(
-                      'project',
-                      'large',
-                      this.props.competition.image
-                    )
-                  }}
-                  resizeMode={'cover'}
-                />
-              </View>
-            ) : null}
+            {/*{this.props.competition && this.props.competition.image ? (*/}
+            {/*<View style={styles.projectImageContainer}>*/}
+            {/*<Image*/}
+            {/*style={styles.teaser__projectImage}*/}
+            {/*source={{*/}
+            {/*uri: getImageUrl(*/}
+            {/*'project',*/}
+            {/*'large',*/}
+            {/*this.props.competition.image*/}
+            {/*)*/}
+            {/*}}*/}
+            {/*resizeMode={'cover'}*/}
+            {/*/>*/}
+            {/*</View>*/}
+            {/*) : null}*/}
             <CompetitionProgressBar
               countPlanted={
                 this.props.competition && this.props.competition.score
@@ -93,7 +94,23 @@ class CompetitionSnippet extends React.Component {
               {/*<View style={styles.projectdetailsContainer}>*/}
               {/**/}
               {/*</View>*/}
-
+              <View style={styles.topCompetitorContainer}>
+                {this.props.competition &&
+                this.props.competition.topEnrollments &&
+                this.props.competition.topEnrollments.length > 0 ? (
+                  <View>
+                    <View style={styles.horizontalRule} />
+                    {this.props.competition.topEnrollments.map((top, index) => (
+                      <CompetitionTopCompetitor
+                        topCompetitor={top}
+                        index={index}
+                        key={index}
+                      />
+                    ))}
+                    <View style={styles.horizontalRule} />
+                  </View>
+                ) : null}
+              </View>
               <View style={styles.actionContainer}>
                 <View style={styles.byOrgContainer}>
                   <Image
@@ -101,7 +118,8 @@ class CompetitionSnippet extends React.Component {
                     style={{ width: 15, height: 15 }}
                   />
                   <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
-                    Ends Nov 19, 2019
+                    Ends{' '}
+                    {this.props.competition && this.props.competition.endDate}
                   </Text>
                 </View>
 

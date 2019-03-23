@@ -18,12 +18,37 @@ import {
 class SelectedCompetitionContainer extends Component {
   constructor(props) {
     super(props);
+    const { match } = props;
+    let competition_id = null;
+    if (match) {
+      competition_id = match.params.competition;
+    } else if (props.navigation) {
+      competition_id = props.navigation.competition;
+    }
+    this.state = {
+      competition_id: competition_id
+    };
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match) {
+    } else if (nextProps.navigation && this.props.navigation) {
+      if (nextProps.navigation !== this.props.navigation) {
+        this.setState({
+          competition_id: nextProps.navigation.competition
+        });
+      }
+    }
   }
   componentDidMount() {}
 
   render() {
-    if (this.props.selectedProject) {
-      return <CompetitionFull {...this.props} />;
+    if (this.state.competition_id) {
+      return (
+        <CompetitionFull
+          {...this.props}
+          competition_id={this.state.competition_id}
+        />
+      );
     } else {
       return null;
     }
@@ -41,7 +66,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 );
 
 SelectedCompetitionContainer.propTypes = {
-  selectedProject: PropTypes.object,
-  selectedTpo: PropTypes.object,
-  clearPlantProject: PropTypes.func
+  match: PropTypes.any,
+  navigation: PropTypes.any
 };

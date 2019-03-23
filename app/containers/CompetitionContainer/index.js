@@ -13,7 +13,7 @@ class CompetitionContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchCompetitions('all');
+    this.props.fetchCompetitions('featured');
   }
 
   render() {
@@ -27,14 +27,9 @@ class CompetitionContainer extends React.Component {
   onMoreClick(id) {
     //this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
-    // if (navigation) {
-    //   updateRoute(
-    //     'app_selectCompetition',
-    //     navigation,
-    //     1,
-    //     navigation.getParam('userForm')
-    //   );
-    // }
+    if (navigation) {
+      updateRoute('app_competition', navigation, 1, { competition: id });
+    }
   }
 }
 const mapStateToProps = state => ({

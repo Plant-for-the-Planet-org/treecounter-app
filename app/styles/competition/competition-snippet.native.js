@@ -186,5 +186,45 @@ export default (selectCompetitionFull = EStyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     alignItems: 'center'
+  },
+  topCompetitorContainer: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  topCompetitorSection: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 3,
+    width: '100%',
+    justifyContent: 'space-between'
+  },
+  topCompetitorName: {
+    width: '70%',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  topCompetitorScore: {
+    width: '30%',
+    justifyContent: 'flex-end'
+  },
+  topCompetitorScoreText: {
+    fontSize: 14,
+    color: '$cardTextColor',
+    maxWidth: '100%'
+  },
+  topCompetitorDiv: {
+    width: '100%',
+    paddingLeft: 10,
+    paddingRight: 10,
+    height: 3
+  },
+  horizontalRule: {
+    borderBottomColor: '#f1f1f1',
+    borderBottomWidth: 2,
+    margin: 10
+  },
+  profileImageStyle: {
+    width: 30,
+    height: 30
   }
 }));

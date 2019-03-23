@@ -12,6 +12,9 @@ class CompetitionFull extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  componentWillReceiveProps(nextProps) {}
+  componentDidMount() {}
   render() {
     return (
       <View>

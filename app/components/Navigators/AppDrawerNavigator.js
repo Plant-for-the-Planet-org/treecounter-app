@@ -64,7 +64,7 @@ const headerLabels = {
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   [getLocalRoute('app_selectProject')]: 'label.donate',
-  // [getLocalRoute('app_selectCompetition')]: 'label.competitions',
+  [getLocalRoute('app_competition')]: 'label.competitions',
   [getLocalRoute('app_imprint')]: 'label.imprint',
   [getLocalRoute('app_privacy')]: 'label.data_protection',
   ['about_us']: 'label.about_us',
@@ -257,9 +257,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
       },
-      // [getLocalRoute('app_selectCompetition')]: {
-      //   screen: SelectedCompetition
-      // },
+      [getLocalRoute('app_competition')]: {
+        screen: SelectedCompetition
+      },
       ['app_donate_detail']: {
         screen: DonationTreesContainer
       }

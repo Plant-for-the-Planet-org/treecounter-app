@@ -4,12 +4,12 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { acceptChallenge } from '../../actions/challengeActions';
-import RedirectedEmail from '../../components/Challenge/RedirectedPublicDenyEmail';
+import RedirectedPrivateAcceptEmail from '../../components/Challenge/RedirectedPublicDenyEmail';
 
 class RedirectedPrivateAcceptEmailContainer extends React.Component {
   render() {
     return (
-      <RedirectedEmail
+      <RedirectedPrivateAcceptEmail
         acceptChallenge={this.props.acceptChallenge.bind(
           this,
           this.props.match.params.token
@@ -28,7 +28,9 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(RedirectedEmailContainer);
+export default connect(null, mapDispatchToProps)(
+  RedirectedPrivateAcceptEmailContainer
+);
 
 RedirectedPrivateAcceptEmailContainer.propTypes = {
   acceptChallenge: PropTypes.func,

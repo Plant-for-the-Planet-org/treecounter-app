@@ -54,7 +54,7 @@ export function denyChallenge(token) {
     dispatch(setProgressModelState(true));
     let request = putRequest(
       route,
-      { status: 'decline' },
+      { status: 'declined' },
       {
         token: token
       }

@@ -15,18 +15,14 @@ export default class RedirectedPrivateAcceptEmail extends Component {
   }
 
   componentWillMount() {
-    if (this.props.match.params.token) {
-      this.props
-        .acceptChallenge(this.props.match.params.token)
-        .then(res => {
-          this.setState({ success: true });
-        })
-        .catch(err => {
-          this.setState({ success: false });
-        });
-    } else {
-      this.setState({ success: true });
-    }
+    this.props
+      .acceptChallenge()
+      .then(res => {
+        this.setState({ success: true });
+      })
+      .catch(err => {
+        this.setState({ success: false });
+      });
   }
   render() {
     return (

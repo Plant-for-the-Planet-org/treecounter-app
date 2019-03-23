@@ -211,7 +211,7 @@ class TreeCounter extends Component {
             />
             <Route
               path={
-                getLocalRoute('app_challengeResponse') + '/declined' + '/:token'
+                getLocalRoute('app_challengeResponse') + '/decline' + '/:token'
               }
               component={RedirectedPublicDenyEmail}
             />

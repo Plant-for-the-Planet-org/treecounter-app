@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Image, Text } from 'react-native';
+import { ScrollView, View, TextInput, Image, Text } from 'react-native';
 import SearchUser from './SearchUser.native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import ChallengeList from '../challengeList';
@@ -62,7 +62,7 @@ export default class ChallengeUser extends Component {
 
   render() {
     return (
-      <View
+      <ScrollView
         style={{
           flex: 1,
           flexDirection: 'column',
@@ -121,7 +121,7 @@ export default class ChallengeUser extends Component {
           navigation={this.props.navigation}
           challengeStatus={this.props.challengeStatus}
         />
-      </View>
+      </ScrollView>
     );
   }
 }

@@ -18,6 +18,7 @@ import CardLayout from '../Common/Card';
 import UserProfileImage from '../Common/UserProfileImage';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
+import { upwardArrow, downwardArrow } from '../../assets/index.js';
 
 export default class ChallengeCard extends React.Component {
   render() {
@@ -56,14 +57,23 @@ export default class ChallengeCard extends React.Component {
                   </Text>
                   <Text style={challengesStyle.textStyle}>{fullname}</Text>
                 </View>
-                <Text
-                  style={[
-                    challengesStyle.textStyle,
-                    challengesStyle.textPadding
-                  ]}
-                >
-                  {moment(created).format('D MMM, YYYY')}
-                </Text>
+                <View style={challengesStyle.flexStyle}>
+                  <Image
+                    style={challengesStyle.imageStyle}
+                    resizeMode="contain"
+                    source={
+                      direction === 'target' ? downwardArrow : upwardArrow
+                    }
+                  />
+                  <Text
+                    style={[
+                      challengesStyle.textStyle,
+                      challengesStyle.textPadding
+                    ]}
+                  >
+                    {moment(created).format('D MMM, YYYY')}
+                  </Text>
+                </View>
               </View>
             </View>
           </View>

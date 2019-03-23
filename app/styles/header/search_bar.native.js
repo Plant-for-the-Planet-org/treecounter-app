@@ -21,6 +21,7 @@ export default (styles = EStyleSheet.create({
     marginBottom: 10
   },
   searchContainer: {
+    flexDirection: 'row',
     height: 30,
     width: '90%',
     backgroundColor: '#f2f2f2',

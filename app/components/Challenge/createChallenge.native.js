@@ -11,14 +11,14 @@ const Layout = {
   }
 };
 
-export default class GiftTabView extends Component {
+export default class ChallengeTabView extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       routes: [
-        { key: 'email', title: 'Email' },
-        { key: 'user', title: 'Search User' }
+        { key: 'user', title: 'Search User' },
+        { key: 'email', title: 'Email' }
       ],
       index: 0
     };
@@ -56,17 +56,17 @@ export default class GiftTabView extends Component {
 
   _renderSelectionScene = ({ route }) => {
     switch (route.key) {
-      case 'email':
+      case 'user':
         return (
-          <ChallengeEmail
+          <ChallengeUser
             challengeUser={this.props.challengeUser}
             challenges={this.props.challenges}
             challengeStatus={this.props.challengeStatus}
           />
         );
-      case 'user':
+      case 'email':
         return (
-          <ChallengeUser
+          <ChallengeEmail
             challengeUser={this.props.challengeUser}
             challenges={this.props.challenges}
             challengeStatus={this.props.challengeStatus}

@@ -21,8 +21,8 @@ export default (editProfileStyle = EStyleSheet.create({
     padding: 10,
     textTransform: 'capitalize',
     borderRadius: 6,
-    marginLeft: 20,
-    width: 110,
+    marginLeft: 35,
+    width: 100,
     height: 40
   },
   limitWidth: {
@@ -34,7 +34,8 @@ export default (editProfileStyle = EStyleSheet.create({
     marginRight: 5
   },
   flexStyle: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    paddingTop: 5
   },
   treecount_input: {
     paddingLeft: 8,
@@ -47,7 +48,10 @@ export default (editProfileStyle = EStyleSheet.create({
     fontSize: 16
   },
   textPadding: {
-    paddingLeft: 5,
-    paddingTop: 5
+    paddingLeft: 5
+  },
+  imageStyle: {
+    height: 15,
+    width: 15
   }
 }));

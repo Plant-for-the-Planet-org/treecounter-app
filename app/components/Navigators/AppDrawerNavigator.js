@@ -116,7 +116,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: RedemptionContainer
       },
       [getLocalRoute('app_competitions')]: {
-        screen: CompetitionContainer
+        screen: isLoggedIn ? CompetitionContainer : LoginContainer
       },
       [getLocalRoute('app_claim')]: {
         screen: RedemptionContainer

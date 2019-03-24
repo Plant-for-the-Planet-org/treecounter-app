@@ -13,7 +13,6 @@ class CompetitionTopCompetitor extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <View style={styles.topCompetitorSection}>
         <View style={styles.topCompetitorName}>

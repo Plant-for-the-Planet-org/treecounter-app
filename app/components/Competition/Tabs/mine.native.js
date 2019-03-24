@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
+import CompetitionSnippet from '../CompetitionSnippet.native';
 
 export default class MineCompetitions extends Component {
   constructor(props) {
@@ -54,9 +55,18 @@ export default class MineCompetitions extends Component {
   render() {
     let { featuredProjects } = this.state;
     return (
-      <View>
-        <Text>Mine</Text>
-      </View>
+      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+        {this.props.mineCompetitions && this.props.mineCompetitions.length > 0
+          ? this.props.mineCompetitions.map(project => (
+              <CompetitionSnippet
+                key={'competition' + project.id}
+                cardStyle={styles.cardStyle}
+                onMoreClick={id => this.props.onMoreClick(id)}
+                competition={project}
+              />
+            ))
+          : null}
+      </ScrollView>
     );
   }
 }

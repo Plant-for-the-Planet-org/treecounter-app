@@ -71,5 +71,89 @@ export default (selectedCompetitionFull = EStyleSheet.create({
     marginBottom: 10,
     marginLeft: 10,
     marginRight: 10
+  },
+  profileImageStyle: {
+    width: 40,
+    height: 40
+  },
+  topCompetitorContainer: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  topCompetitorSection: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 3,
+    width: '100%',
+    justifyContent: 'space-between'
+  },
+  topCompetitorName: {
+    width: '70%',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  topCompetitorScore: {
+    width: '30%',
+    justifyContent: 'flex-end'
+  },
+  topCompetitorNameText: {
+    fontSize: 14,
+    color: '$cardTextColor',
+    maxWidth: '100%',
+    fontWeight: 'bold'
+  },
+  topCompetitorScoreText: {
+    fontSize: 14,
+    color: '$cardTextColor',
+    maxWidth: '100%'
+  },
+  topCompetitorDiv: {
+    width: '100%',
+    paddingLeft: 10,
+    paddingRight: 10,
+    height: 3
+  },
+  headingParticipantContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    width: '100%',
+    padding: 10
+  },
+  textHeadingParticipants: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#666666'
+  },
+  participantNameContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    padding: 5
+  },
+  confirm_delete_button: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  buttonItem: {
+    padding: 5
+  },
+  buttonStyle: {
+    // height: 20,
+    // paddingLeft: 2,
+    // paddingRight: 2,
+    // paddingTop: 0,
+    // paddingBottom: 0,
+    // margin: 0,
+    // borderWidth: 0,
+    // borderRadius: 0,
+    // marginRight: 5
+    height: 30,
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingLeft: 5,
+    paddingRight: 5,
+    marginRight: 5
+  },
+  buttonTextStyle: {
+    fontSize: 14
   }
 }));

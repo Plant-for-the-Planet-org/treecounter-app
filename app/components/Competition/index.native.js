@@ -5,6 +5,10 @@ import styles from '../../styles/common/tabbar';
 import MineCompetitions from './Tabs/mine.native';
 import FeaturedCompetitions from './Tabs/featured.native';
 import AllCompetitions from './Tabs/all.native';
+import {
+  fetchAllCompetitions,
+  fetchMineCompetitions
+} from '../../actions/competition';
 
 const Layout = {
   window: {
@@ -21,7 +25,9 @@ class Competiton extends React.Component {
         { key: 'featured', title: 'FEATURED' },
         { key: 'all', title: 'ALL' }
       ],
-      index: 1
+      index: 1,
+      allCompetitions: [],
+      mineCompetitions: []
     };
   }
   indexChange(index) {
@@ -30,6 +36,30 @@ class Competiton extends React.Component {
     });
   }
 
+  componentDidMount() {
+    fetchAllCompetitions().then(res => {
+      this.setState({
+        allCompetitions: res.data.merge.competitionPager[0].competitions
+      });
+    });
+    fetchMineCompetitions().then(res => {
+      console.log(res.data);
+      let mineComeptitions = [];
+      if (res.data && res.data.owned && res.data.owned.length > 0) {
+        res.data.owned.forEach(val => {
+          mineComeptitions.push(val);
+        });
+      }
+      if (res.data && res.data.enrolled && res.data.enrolled.length > 0) {
+        res.data.enrolled.forEach(val => {
+          mineComeptitions.push(val);
+        });
+      }
+      this.setState({
+        mineCompetitions: mineComeptitions
+      });
+    });
+  }
   handleExpandedClicked = optionNumber => {
     this.setState({
       expandedOption: optionNumber
@@ -56,17 +86,28 @@ class Competiton extends React.Component {
   _renderSelectPlantScene = ({ route }) => {
     switch (route.key) {
       case 'mine':
-        return <MineCompetitions {...this.props} />;
+        return (
+          <MineCompetitions
+            {...this.props}
+            mineCompetitions={this.state.mineCompetitions}
+          />
+        );
       case 'featured':
         return <FeaturedCompetitions {...this.props} />;
       case 'all':
-        return <AllCompetitions {...this.props} />;
+        return (
+          <AllCompetitions
+            {...this.props}
+            allCompetitions={this.state.allCompetitions}
+          />
+        );
       default:
         return null;
     }
   };
 
   render() {
+    console.log(this.state);
     return (
       <View style={{ flex: 1 }}>
         <TabView

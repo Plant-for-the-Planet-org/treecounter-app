@@ -177,15 +177,14 @@ export default (selectCompetitionFull = EStyleSheet.create({
     // borderWidth: 0,
     // borderRadius: 0,
     // marginRight: 5
-    width: 80,
-    height: 25,
+    height: 35,
     borderWidth: 1,
     borderRadius: 6,
-    padding: 0,
+    padding: 5,
     marginRight: 5
   },
   buttonTextStyle: {
-    fontSize: 12
+    fontSize: 14
   },
   moreButtonStyle: {
     backgroundColor: 'white',

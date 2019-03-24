@@ -24,7 +24,6 @@ class CompetitionSnippet extends React.Component {
     }
   }
   render() {
-    console.log(this.props.competition);
     return (
       <TouchableHighlight
         underlayColor={'transparent'}

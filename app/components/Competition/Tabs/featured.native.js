@@ -55,7 +55,6 @@ export default class FeaturedCompetitions extends Component {
 
   render() {
     let { featuredProjects } = this.state;
-    console.log(this.props);
     return (
       <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
         {this.props.allCompetitions.competitions &&

@@ -1,5 +1,12 @@
 import React from 'react';
-import { ScrollView, Text, View, TouchableOpacity, Image } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  StyleSheet
+} from 'react-native';
 
 import SearchBar from '../../../components/Header/SearchBar.native';
 import Header from '../../../components/Header/Header.native';
@@ -8,6 +15,8 @@ import { getImageUrl } from '../../../actions/apiRouting';
 import { getLocalRoute } from '../../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import styles from '../../../styles/header/search_layout.native';
+import searchBarStyles from '../../../styles/header/search_bar.native';
+
 import _ from 'lodash';
 
 class SearchUser extends React.Component {
@@ -78,11 +87,10 @@ class SearchUser extends React.Component {
           }
           showCancelSearchButton={false}
           style={{
+            ...searchBarStyles.searchContainer,
             width: '100%',
-            height: 30,
-            marginTop: 10,
-            paddingLeft: 27,
-            flexDirection: 'row'
+            backgroundColor: 'transparent',
+            marginTop: 10
           }}
           tintColor={
             this.props.searchInputTintColor || this.props.headerTintColor

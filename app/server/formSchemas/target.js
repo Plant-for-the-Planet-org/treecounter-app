@@ -5,22 +5,20 @@ export default {
     countTarget: {
       type: 'integer',
       title: 'label.target_count',
-      propertyOrder: 1,
       icon: null,
-      help: null
+      help: null,
+      propertyOrder: 1
     },
     targetYear: {
       type: 'integer',
       title: 'label.target_year',
       pattern: '[0-9]{4}',
-      propertyOrder: 2,
-      minimum: 1000,
-      maximum: 9999,
       icon: null,
-      help: null
+      help: null,
+      propertyOrder: 2
     }
   },
   required: ['countTarget'],
-  submit_url: '/app_dev.php/api/en/targets/2',
+  submit_url: '/api/v1.0/en/targets',
   submit_method: 'PUT'
 };

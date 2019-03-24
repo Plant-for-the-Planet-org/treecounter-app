@@ -15,6 +15,7 @@ import styles, {
 } from '../../styles/header/search_bar.native';
 import PropTypes from 'prop-types';
 import TouchableItem from '../../components/Common/TouchableItem.native';
+import i18n from '../../locales/i18n.js';
 
 const SearchIcon = () => (
   <View style={styles.searchIconContainer}>
@@ -105,7 +106,7 @@ class SearchBar extends React.PureComponent {
             autoCapitalize="none"
             autoCorrect={false}
             returnKeyType="search"
-            placeholder="Search"
+            placeholder={i18n.t('label.search')}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
             onSubmitEditing={this._handleSubmit}
@@ -138,7 +139,7 @@ class SearchBar extends React.PureComponent {
                   color: this.props.tintColor || '#007AFF'
                 }}
               >
-                Cancel
+                {i18n.t('label.cancel')}
               </Text>
             </TouchableItem>
           ) : null}

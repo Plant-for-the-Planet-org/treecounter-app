@@ -98,6 +98,26 @@ export function updatePlantProject(plantProject) {
     });
   };
 }
+export function orderPlantProject(data, params) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    return new Promise(function(resolve, reject) {
+      postAuthenticatedRequest('plantProject_position', data, params)
+        .then(res => {
+          const { statusText } = res;
+          const plantProjects = { plantProjects: res.data };
+          dispatch(mergeEntities(normalize(plantProjects, userProfileSchema)));
+          resolve(res.data);
+          dispatch(setProgressModelState(false));
+        })
+        .catch(err => {
+          debug(err);
+          reject(err);
+          dispatch(setProgressModelState(false));
+        });
+    });
+  };
+}
 
 export function updateUserProfile(data, profileType) {
   return dispatch => {

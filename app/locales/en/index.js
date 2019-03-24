@@ -27,6 +27,7 @@ import footerlabels from './footerlabels.json';
 import welcomeScreenlabels from './welcomeScreenlabels.json';
 import emailSendActivationlabels from './emailSentActivationlabels.json';
 import competitionlabels from './competitionlabels.json';
+import manageProjectlabels from './manageProjectlabels.json';
 
 export default {
   ...loginlabels,
@@ -57,5 +58,6 @@ export default {
   ...footerlabels,
   ...welcomeScreenlabels,
   ...emailSendActivationlabels,
-  ...competitionlabels
+  ...competitionlabels,
+  ...manageProjectlabels
 };

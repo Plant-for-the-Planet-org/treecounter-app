@@ -23,7 +23,7 @@ class SelectedCompetitionContainer extends Component {
     if (match) {
       competition_id = match.params.competition;
     } else if (props.navigation) {
-      competition_id = props.navigation.competition;
+      competition_id = props.navigation.getParam('competition', null);
     }
     this.state = {
       competition_id: competition_id
@@ -34,7 +34,7 @@ class SelectedCompetitionContainer extends Component {
     } else if (nextProps.navigation && this.props.navigation) {
       if (nextProps.navigation !== this.props.navigation) {
         this.setState({
-          competition_id: nextProps.navigation.competition
+          competition_id: nextProps.navigation.getParam('competition', null)
         });
       }
     }
@@ -42,6 +42,7 @@ class SelectedCompetitionContainer extends Component {
   componentDidMount() {}
 
   render() {
+    console.log(this.state, this.props);
     if (this.state.competition_id) {
       return (
         <CompetitionFull

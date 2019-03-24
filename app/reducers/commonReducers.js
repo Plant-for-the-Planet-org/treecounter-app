@@ -10,6 +10,7 @@ import modelDialogReducer from './modelDialogReducer';
 import pledgeEventReducer from './pledgeEventReducer';
 import updateLastRouteReducer from './updateLastRouteReducer';
 import competitionReducers from './competitionReducer';
+import competitionDetailReducer from './competitionDetailReducer';
 
 const commonReducers = {
   entities: entitiesReducer,
@@ -23,7 +24,8 @@ const commonReducers = {
   modelDialogState: modelDialogReducer,
   pledgeEvents: pledgeEventReducer,
   lastRouteState: updateLastRouteReducer,
-  competitions: competitionReducers
+  competitions: competitionReducers,
+  competitionDetail: competitionDetailReducer
 };
 
 export default commonReducers;

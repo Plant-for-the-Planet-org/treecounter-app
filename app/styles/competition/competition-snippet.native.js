@@ -117,8 +117,23 @@ export default (selectCompetitionFull = EStyleSheet.create({
     color: '$cardTextColor',
     maxWidth: '90%'
   },
+  project_teaser__contentDescriptionText: {
+    fontSize: 14,
+    color: '$cardTextColor'
+  },
+  bottomText: {
+    fontSize: 14,
+    color: '$cardTextColor',
+    paddingLeft: 5,
+    paddingRight: 5
+  },
   byOrgContainer: {
     width: '50%',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  emailContainer: {
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center'
   },
@@ -183,6 +198,11 @@ export default (selectCompetitionFull = EStyleSheet.create({
   },
   projectNameContainer: {
     height: rowHeight * 1.5,
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center'
+  },
+  projectDescriptionContainer: {
     flexDirection: 'row',
     width: '100%',
     alignItems: 'center'

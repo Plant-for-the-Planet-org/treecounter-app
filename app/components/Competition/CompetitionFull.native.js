@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import { getImageUrl } from '../../actions/apiRouting';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
+import snippetStyles from '../../styles/competition/competition-snippet.native';
 import CardLayout from '../Common/Card';
 import { ScrollView } from 'react-native';
 import scrollStyle from '../../styles/common/scrollStyle';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchCompetitionDetail } from '../../actions/competition';
+import { competitionDetailSelector } from '../../selectors';
+import CompetitionProgressBar from './CompetitionProgressBar';
+import { compCalendar } from '../../assets';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -14,12 +22,94 @@ class CompetitionFull extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {}
-  componentDidMount() {}
+  componentDidMount() {
+    if (this.props.competition_id) {
+      this.props.fetchCompetitionDetail(this.props.competition_id);
+    }
+  }
   render() {
+    console.log(this.props);
+    const competitionDetail = this.props.competitionDetail.competitionDetail;
     return (
       <View>
         <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
-          <CardLayout style={styles.projectFullContainer} />
+          <CardLayout style={[snippetStyles.projectSnippetContainer]}>
+            <View style={snippetStyles.projectSpecsContainer}>
+              {competitionDetail && competitionDetail.image ? (
+                <View style={styles.projectImageContainer}>
+                  <Image
+                    style={styles.teaser__projectImage}
+                    source={{
+                      uri: getImageUrl(
+                        'project',
+                        'large',
+                        competitionDetail.image
+                      )
+                    }}
+                    resizeMode={'cover'}
+                  />
+                </View>
+              ) : null}
+              <CompetitionProgressBar
+                countPlanted={competitionDetail && competitionDetail.score}
+                countTarget={competitionDetail && competitionDetail.goal}
+              />
+              <View style={snippetStyles.competitionContent}>
+                <View style={snippetStyles.projectNameContainer}>
+                  <Text
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={snippetStyles.project_teaser__contentText}
+                  >
+                    {competitionDetail && competitionDetail.name}
+                  </Text>
+                </View>
+                <View style={snippetStyles.projectNameContainer}>
+                  <Text
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={snippetStyles.project_teaser__contentByText}
+                  >
+                    by {competitionDetail && competitionDetail.ownerName}
+                  </Text>
+                </View>
+                <View style={snippetStyles.projectDescriptionContainer}>
+                  <Text
+                    style={snippetStyles.project_teaser__contentDescriptionText}
+                  >
+                    {competitionDetail && competitionDetail.description}
+                  </Text>
+                </View>
+                {/*<View style={styles.projectdetailsContainer}>*/}
+                {/**/}
+                {/*</View>*/}
+                <View style={snippetStyles.actionContainer}>
+                  <View style={snippetStyles.emailContainer}>
+                    <Image
+                      source={compCalendar}
+                      style={{ width: 15, height: 15 }}
+                    />
+                    <Text style={snippetStyles.bottomText}>
+                      {competitionDetail && competitionDetail.email}
+                    </Text>
+                  </View>
+                </View>
+                <View style={snippetStyles.actionContainer}>
+                  <View style={snippetStyles.byOrgContainer}>
+                    <Image
+                      source={compCalendar}
+                      style={{ width: 15, height: 15 }}
+                    />
+                    <Text style={snippetStyles.bottomText}>
+                      Ends {competitionDetail && competitionDetail.endDate}
+                    </Text>
+                  </View>
+
+                  <View style={snippetStyles.buttonContainer} />
+                </View>
+              </View>
+            </View>
+          </CardLayout>
         </ScrollView>
       </View>
     );
@@ -27,14 +117,22 @@ class CompetitionFull extends React.Component {
   componentWillUnmount() {}
 }
 
-CompetitionFull.propTypes = {
-  plantProject: PropTypes.object.isRequired,
-  tpoName: PropTypes.string,
-  projectClear: PropTypes.func,
-  showNextButton: PropTypes.bool,
-  onNextClick: PropTypes.func,
-  selectProject: PropTypes.func,
-  onBackClick: PropTypes.func
+const mapStateToProps = state => ({
+  competitionDetail: competitionDetailSelector(state)
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      fetchCompetitionDetail
+    },
+    dispatch
+  );
 };
 
-export default CompetitionFull;
+export default connect(mapStateToProps, mapDispatchToProps)(CompetitionFull);
+CompetitionFull.propTypes = {
+  competition_id: PropTypes.any,
+  fetchCompetitionDetail: PropTypes.func,
+  competitionDetail: PropTypes.any
+};

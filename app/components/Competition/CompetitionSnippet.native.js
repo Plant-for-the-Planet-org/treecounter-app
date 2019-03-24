@@ -28,25 +28,9 @@ class CompetitionSnippet extends React.Component {
     return (
       <TouchableHighlight
         underlayColor={'transparent'}
-        onPress={() => this.containerPress(id)}
+        onPress={() => this.containerPress(this.props.competition.id)}
       >
         <CardLayout style={[styles.projectSnippetContainer]}>
-          {/*{projectImage ? (*/}
-          {/*<View style={styles.projectImageContainer}>*/}
-          {/*<Image*/}
-          {/*style={styles.teaser__projectImage}*/}
-          {/*source={{*/}
-          {/*uri: getImageUrl(*/}
-          {/*'project',*/}
-          {/*'large',*/}
-          {/*teaserProps.projectImage.image*/}
-          {/*)*/}
-          {/*}}*/}
-          {/*resizeMode={'cover'}*/}
-          {/*/>*/}
-          {/*</View>*/}
-          {/*) : null}*/}
-
           <View style={styles.projectSpecsContainer}>
             {/*{this.props.competition && this.props.competition.image ? (*/}
             {/*<View style={styles.projectImageContainer}>*/}
@@ -117,7 +101,7 @@ class CompetitionSnippet extends React.Component {
                     source={compCalendar}
                     style={{ width: 15, height: 15 }}
                   />
-                  <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+                  <Text style={styles.bottomText}>
                     Ends{' '}
                     {this.props.competition && this.props.competition.endDate}
                   </Text>

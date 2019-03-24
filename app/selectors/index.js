@@ -15,10 +15,8 @@ import { getPledges } from '../reducers/pledgeReducer';
 import { getPledgeEvents } from '../reducers/pledgeEventReducer';
 import { getPaymentStatus } from '../reducers/paymentStatus';
 import { getCurrencies } from '../reducers/currenciesReducer';
-import {
-  getCompetitions,
-  getCompetitionDetail
-} from '../reducers/competitionReducer';
+import { getCompetitions } from '../reducers/competitionReducer';
+import { getCompetitionDetail } from '../reducers/competitionDetailReducer';
 
 export const supportedTreecounterSelector = state =>
   getSupportedTreecounter(state);

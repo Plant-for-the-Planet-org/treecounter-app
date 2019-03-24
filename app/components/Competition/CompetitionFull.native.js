@@ -231,7 +231,7 @@ class CompetitionFull extends React.Component {
                             <CompetitionParticipant
                               competitor={top}
                               index={index}
-                              type="request_join"
+                              type="invite"
                               key={index}
                             />
                           ) : null

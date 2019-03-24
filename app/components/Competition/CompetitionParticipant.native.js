@@ -30,7 +30,8 @@ class CompetitionParticipant extends React.Component {
             <Text style={styles.topCompetitorNameText}>
               {this.props.competitor.treecounterDisplayName}
             </Text>
-            {this.props.type === 'participants' ? (
+            {this.props.type === 'participants' ||
+            this.props.type === 'invite' ? (
               <Text style={styles.topCompetitorScoreText}>
                 {this.props.competitor.score} Planted
               </Text>
@@ -62,6 +63,16 @@ class CompetitionParticipant extends React.Component {
               textStyle={snippetStyles.buttonTextStyle}
             >
               <Text> {i18n.t('label.support')}</Text>
+            </PrimaryButton>
+          </View>
+        ) : this.props.type === 'invite' ? (
+          <View style={styles.topCompetitorScore}>
+            <PrimaryButton
+              style={snippetStyles.buttonItem}
+              buttonStyle={snippetStyles.buttonStyle}
+              textStyle={snippetStyles.buttonTextStyle}
+            >
+              <Text> {i18n.t('label.cancel')}</Text>
             </PrimaryButton>
           </View>
         ) : null}

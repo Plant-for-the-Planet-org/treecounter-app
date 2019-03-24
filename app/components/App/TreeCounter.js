@@ -42,6 +42,7 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import SuccessfullyActivatedAccount from '../../containers/Authentication/SuccessfullActivatedContainer';
 import DonationTreesContainer from '../../containers/DonateTrees/index';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
+import ManageProjectContainer from '../../containers/ManageProjects';
 
 import EditUserProfileContainer from '../../containers/EditUserProfile';
 import LeaderboardContainer from '../../containers/Leaderboard';
@@ -162,14 +163,16 @@ class TreeCounter extends Component {
               }
               component={Trillion}
             />
-            <PublicRoute
-              path={getLocalRoute('app_signup')}
-              component={SignUpContainer}
-            />
+
             <PublicRoute
               path={getLocalRoute('app_accountActivate') + '/:token'}
               component={SuccessfullyActivatedAccount}
             />
+            <PublicRoute
+              path={getLocalRoute('app_signup') + '/:type?'}
+              component={SignUpContainer}
+            />
+
             <Route
               path={getLocalRoute('app_accountActivated')}
               component={SuccessfullyActivatedAccount}
@@ -296,6 +299,10 @@ class TreeCounter extends Component {
             <Route
               path={getLocalRoute('app_treecounter') + '/:treecounterId'}
               component={PublicTreecounterContainer}
+            />
+            <Route
+              path={getLocalRoute('app_manageProjects')}
+              component={ManageProjectContainer}
             />
             <Route component={PageNotFound} />
           </Switch>

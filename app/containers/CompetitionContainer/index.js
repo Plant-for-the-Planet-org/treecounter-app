@@ -20,15 +20,18 @@ class CompetitionContainer extends React.Component {
     return (
       <Competiton
         allCompetitions={this.props.competitions}
-        onMoreClick={id => this.onMoreClick(id)}
+        onMoreClick={(id, type) => this.onMoreClick(id, type)}
       />
     );
   }
-  onMoreClick(id) {
+  onMoreClick(id, type) {
     //this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
-      updateRoute('app_competition', navigation, 1, { competition: id });
+      updateRoute('app_competition', navigation, 1, {
+        competition: id,
+        type: type
+      });
     }
   }
 }

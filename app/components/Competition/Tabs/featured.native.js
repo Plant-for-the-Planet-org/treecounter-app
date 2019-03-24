@@ -63,8 +63,9 @@ export default class FeaturedCompetitions extends Component {
               <CompetitionSnippet
                 key={'competition' + project.id}
                 cardStyle={styles.cardStyle}
-                onMoreClick={id => this.props.onMoreClick(id)}
+                onMoreClick={(id, type) => this.props.onMoreClick(id, type)}
                 competition={project}
+                type="featured"
               />
             ))
           : null}

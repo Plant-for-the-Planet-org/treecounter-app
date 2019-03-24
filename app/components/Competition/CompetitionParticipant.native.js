@@ -30,7 +30,7 @@ class CompetitionParticipant extends React.Component {
             <Text style={styles.topCompetitorNameText}>
               {this.props.competitor.treecounterDisplayName}
             </Text>
-            {this.props.type === 'participant' ? (
+            {this.props.type === 'participants' ? (
               <Text style={styles.topCompetitorScoreText}>
                 {this.props.competitor.score} Planted
               </Text>

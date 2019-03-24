@@ -47,11 +47,13 @@ class Competiton extends React.Component {
       let mineComeptitions = [];
       if (res.data && res.data.owned && res.data.owned.length > 0) {
         res.data.owned.forEach(val => {
+          val.category = 'owned';
           mineComeptitions.push(val);
         });
       }
       if (res.data && res.data.enrolled && res.data.enrolled.length > 0) {
         res.data.enrolled.forEach(val => {
+          val.category = 'enrolled';
           mineComeptitions.push(val);
         });
       }

@@ -37,6 +37,20 @@ class CompetitionFull extends React.Component {
   render() {
     console.log(this.props);
     const competitionDetail = this.props.competitionDetail.competitionDetail;
+    let participantCount = 0,
+      requestCount = 0,
+      inviteCount = 0;
+    if (competitionDetail && competitionDetail.allEnrollments) {
+      for (let i = 0; i < competitionDetail.allEnrollments.length; i++) {
+        if (competitionDetail.allEnrollments[i].status === 'enrolled') {
+          participantCount++;
+        } else if (competitionDetail.allEnrollments[i].status === 'pending') {
+          requestCount++;
+        } else if (competitionDetail.allEnrollments[i].status === 'invited') {
+          inviteCount++;
+        }
+      }
+    }
     return (
       <View>
         <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
@@ -116,21 +130,37 @@ class CompetitionFull extends React.Component {
                     </View>
 
                     <View style={snippetStyles.buttonContainer}>
-                      <PrimaryButton
-                        style={snippetStyles.buttonItem}
-                        buttonStyle={snippetStyles.buttonStyle}
-                        textStyle={snippetStyles.buttonTextStyle}
-                      >
-                        <Text> {i18n.t('label.request_to_join')}</Text>
-                      </PrimaryButton>
+                      {this.props.type === 'owned' ? (
+                        <PrimaryButton
+                          style={snippetStyles.buttonItem}
+                          buttonStyle={snippetStyles.buttonStyle}
+                          textStyle={snippetStyles.buttonTextStyle}
+                        >
+                          <Text> {i18n.t('label.edit')}</Text>
+                        </PrimaryButton>
+                      ) : this.props.type === 'enrolled' ? (
+                        <PrimaryButton
+                          style={snippetStyles.buttonItem}
+                          buttonStyle={snippetStyles.buttonStyle}
+                          textStyle={snippetStyles.buttonTextStyle}
+                        >
+                          <Text> {i18n.t('label.leave')}</Text>
+                        </PrimaryButton>
+                      ) : (
+                        <PrimaryButton
+                          style={snippetStyles.buttonItem}
+                          buttonStyle={snippetStyles.buttonStyle}
+                          textStyle={snippetStyles.buttonTextStyle}
+                        >
+                          <Text> {i18n.t('label.request_to_join')}</Text>
+                        </PrimaryButton>
+                      )}
                     </View>
                   </View>
                 </View>
               </View>
             </CardLayout>
-            {competitionDetail &&
-            competitionDetail.allEnrollments &&
-            competitionDetail.allEnrollments.length > 0 ? (
+            {participantCount > 0 ? (
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
@@ -141,22 +171,23 @@ class CompetitionFull extends React.Component {
                   </View>
                   <View style={styles.topCompetitorContainer}>
                     <View>
-                      {competitionDetail.allEnrollments.map((top, index) => (
-                        <CompetitionParticipant
-                          competitor={top}
-                          index={index}
-                          type="participants"
-                          key={index}
-                        />
-                      ))}
+                      {competitionDetail.allEnrollments.map(
+                        (top, index) =>
+                          top.status === 'enrolled' ? (
+                            <CompetitionParticipant
+                              competitor={top}
+                              index={index}
+                              type="participants"
+                              key={index}
+                            />
+                          ) : null
+                      )}
                     </View>
                   </View>
                 </View>
               </CardLayout>
             ) : null}
-            {competitionDetail &&
-            competitionDetail.allEnrollments &&
-            competitionDetail.allEnrollments.length > 0 ? (
+            {requestCount > 0 && this.props.type === 'owned' ? (
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
@@ -167,14 +198,44 @@ class CompetitionFull extends React.Component {
                   </View>
                   <View style={styles.topCompetitorContainer}>
                     <View>
-                      {competitionDetail.allEnrollments.map((top, index) => (
-                        <CompetitionParticipant
-                          competitor={top}
-                          index={index}
-                          type="request_join"
-                          key={index}
-                        />
-                      ))}
+                      {competitionDetail.allEnrollments.map(
+                        (top, index) =>
+                          top.status === 'pending' ? (
+                            <CompetitionParticipant
+                              competitor={top}
+                              index={index}
+                              type="request_join"
+                              key={index}
+                            />
+                          ) : null
+                      )}
+                    </View>
+                  </View>
+                </View>
+              </CardLayout>
+            ) : null}
+            {competitionDetail &&
+            competitionDetail.allEnrollments &&
+            competitionDetail.allEnrollments.length > 0 &&
+            this.props.type !== 'owned' ? (
+              <CardLayout style={[snippetStyles.projectSnippetContainer]}>
+                <View style={snippetStyles.projectSpecsContainer}>
+                  <View style={styles.headingParticipantContainer}>
+                    <Text style={styles.textHeadingParticipants}>INVITE</Text>
+                  </View>
+                  <View style={styles.topCompetitorContainer}>
+                    <View>
+                      {competitionDetail.allEnrollments.map(
+                        (top, index) =>
+                          top.status === 'invited' ? (
+                            <CompetitionParticipant
+                              competitor={top}
+                              index={index}
+                              type="request_join"
+                              key={index}
+                            />
+                          ) : null
+                      )}
                     </View>
                   </View>
                 </View>
@@ -205,5 +266,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(CompetitionFull);
 CompetitionFull.propTypes = {
   competition_id: PropTypes.any,
   fetchCompetitionDetail: PropTypes.func,
-  competitionDetail: PropTypes.any
+  competitionDetail: PropTypes.any,
+  type: PropTypes.any
 };

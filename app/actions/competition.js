@@ -36,7 +36,9 @@ export function leaveCompetition(id) {
     let data = {
       competition: id
     };
-    postAuthenticatedRequest('competitionLeave_post', data).then(res => {
+    postAuthenticatedRequest('competitionLeave_post', data, {
+      version: 'v1.1'
+    }).then(res => {
       dispatch(
         mergeEntities(
           normalize(
@@ -62,7 +64,9 @@ export function enrollCompetition(id) {
     let data = {
       competition: id
     };
-    postAuthenticatedRequest('competitionEnroll_post', data).then(res => {
+    postAuthenticatedRequest('competitionEnroll_post', data, {
+      version: 'v1.1'
+    }).then(res => {
       dispatch(
         mergeEntities(
           normalize(

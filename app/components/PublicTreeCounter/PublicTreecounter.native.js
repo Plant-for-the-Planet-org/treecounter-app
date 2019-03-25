@@ -158,10 +158,12 @@ class PublicTreeCounter extends React.Component {
           ) : null}
         </View>
         <View style={stylesHome.svgContainer}>
-          <SvgContainer
-            {...this.state.svgData}
-            onToggle={toggleVal => this.updateSvg(toggleVal)}
-          />
+          {Object.keys(this.state.svgData).length !== 0 ? (
+            <SvgContainer
+              {...this.state.svgData}
+              onToggle={toggleVal => this.updateSvg(toggleVal)}
+            />
+          ) : null}
         </View>
         <View>
           {userProfile.synopsis1 ||

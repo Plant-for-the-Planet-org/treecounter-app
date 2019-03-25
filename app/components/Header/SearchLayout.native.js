@@ -17,6 +17,7 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import styles from '../../styles/header/search_layout.native';
 import _ from 'lodash';
+import { updateRoute } from '../../helpers/routerHelper';
 
 class SearchLayout extends React.Component {
   static SearchBar = SearchBar;
@@ -48,6 +49,26 @@ class SearchLayout extends React.Component {
     });
   };
 
+  redirectToResult(suggestion) {
+    // if(suggestion.type === 'treecounter') {
+    //   this.props.navigation.navigate(
+    //     getLocalRoute('app_treecounter'),
+    //     {
+    //       treeCounterId: suggestion.slug || suggestion.id,
+    //       suggestion
+    //     }
+    //   );
+    // } else if (suggestion.type === 'leaderboard') {
+    //   updateRoute('app_leaderboard', null, null, {
+    //     section: suggestion.section
+    //   })
+    // }
+    this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+      treeCounterId: suggestion.slug || suggestion.id,
+      suggestion
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -77,15 +98,7 @@ class SearchLayout extends React.Component {
                   style={styles.searchResult}
                   key={'suggestion' + i}
                   onPress={() => {
-                    setTimeout(() => {
-                      this.props.navigation.navigate(
-                        getLocalRoute('app_treecounter'),
-                        {
-                          treeCounterId: suggestion.slug || suggestion.id,
-                          suggestion
-                        }
-                      );
-                    }, 0);
+                    setTimeout(() => this.redirectToResult(suggestion), 0);
                   }}
                 >
                   <Image

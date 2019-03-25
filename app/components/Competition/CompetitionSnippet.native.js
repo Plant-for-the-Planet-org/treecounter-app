@@ -9,7 +9,13 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import CompetitionProgressBar from './CompetitionProgressBar';
 import PropTypes from 'prop-types';
 import { compCalendar } from '../../assets';
+import { bindActionCreators } from 'redux';
 import CompetitionTopCompetitor from './CompetitionTopCompetitor.native';
+import {
+  userCompetitionEnrolledSelector,
+  userTreecounterSelector
+} from '../../selectors';
+import connect from 'react-redux/es/connect/connect';
 
 class CompetitionSnippet extends React.Component {
   constructor(props) {
@@ -24,6 +30,33 @@ class CompetitionSnippet extends React.Component {
     }
   }
   render() {
+    const competitionDetail = this.props.competition;
+    let status = '',
+      button = '';
+    const competitionEnrollments = this.props.competitionEnrollments;
+    if (
+      competitionDetail &&
+      competitionDetail.id &&
+      this.props.competitionEnrollments
+    ) {
+      for (let i = 0; i < competitionEnrollments.length; i++) {
+        if (competitionDetail.id === competitionEnrollments[i].competitionId) {
+          status = competitionEnrollments[i].status;
+        }
+      }
+    }
+    if (
+      competitionDetail &&
+      competitionDetail.ownerTreecounterId === this.props.treeCounter.id
+    ) {
+      button = i18n.t('label.edit');
+    } else if (status === '') {
+      button = i18n.t('label.join');
+    } else if (status === 'enrolled') {
+      button = i18n.t('label.leave');
+    } else if (status === 'pending') {
+      button = i18n.t('label.cancel_join_request');
+    }
     return (
       <TouchableHighlight
         underlayColor={'transparent'}
@@ -111,9 +144,7 @@ class CompetitionSnippet extends React.Component {
                     {this.props.competition &&
                     this.props.competition.competitorCount > 0
                       ? `${this.props.competition.competitorCount} participants`
-                      : this.props.type !== 'mine'
-                        ? i18n.t('label.join')
-                        : null}
+                      : button}
                   </Text>
                 </View>
               </View>
@@ -125,8 +156,20 @@ class CompetitionSnippet extends React.Component {
   }
 }
 
-export default CompetitionSnippet;
+const mapStateToProps = state => ({
+  treeCounter: userTreecounterSelector(state),
+  competitionEnrollments: userCompetitionEnrolledSelector(state)
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({}, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CompetitionSnippet);
 CompetitionSnippet.propTypes = {
   competition: PropTypes.any,
-  type: PropTypes.any
+  type: PropTypes.any,
+  onMoreClick: PropTypes.any,
+  competitionEnrollments: PropTypes.any,
+  treeCounter: PropTypes.any
 };

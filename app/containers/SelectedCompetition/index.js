@@ -14,6 +14,7 @@ import {
   clearPlantProject,
   selectPlantProjectAction
 } from '../../actions/selectPlantProjectAction';
+import { enrollCompetition, leaveCompetition } from '../../actions/competition';
 
 class SelectedCompetitionContainer extends Component {
   constructor(props) {
@@ -28,6 +29,8 @@ class SelectedCompetitionContainer extends Component {
     this.state = {
       competition_id: competition_id
     };
+    this.leaveCompetition = this.leaveCompetition.bind(this);
+    this.enrollCompetition = this.enrollCompetition.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.match) {
@@ -39,6 +42,12 @@ class SelectedCompetitionContainer extends Component {
       }
     }
   }
+  leaveCompetition(id) {
+    this.props.leaveCompetition(id);
+  }
+  enrollCompetition(id) {
+    this.props.enrollCompetition(id);
+  }
   componentDidMount() {}
 
   render() {
@@ -48,6 +57,8 @@ class SelectedCompetitionContainer extends Component {
         <CompetitionFull
           {...this.props}
           competition_id={this.state.competition_id}
+          leaveCompetition={id => this.leaveCompetition(id)}
+          enrollCompetition={id => this.enrollCompetition(id)}
         />
       );
     } else {
@@ -59,7 +70,13 @@ class SelectedCompetitionContainer extends Component {
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators(
+    {
+      leaveCompetition,
+      enrollCompetition
+    },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -68,5 +85,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 SelectedCompetitionContainer.propTypes = {
   match: PropTypes.any,
-  navigation: PropTypes.any
+  navigation: PropTypes.any,
+  leaveCompetition: PropTypes.any,
+  enrollCompetition: PropTypes.any
 };

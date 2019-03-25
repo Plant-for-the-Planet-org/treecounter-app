@@ -1,9 +1,16 @@
-import { getAuthenticatedRequest, getRequest } from '../utils/api';
-import { setCompetitions } from '../reducers/competitionReducer';
+import {
+  getAuthenticatedRequest,
+  getRequest,
+  postAuthenticatedRequest
+} from '../utils/api';
 import { setCompetitionDetail } from '../reducers/competitionDetailReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import { mergeEntities } from '../reducers/entitiesReducer';
-import { competitionPagerSchema } from '../schemas';
+import {
+  competitionEnrollmentSchema,
+  competitionPagerSchema,
+  competitionSchema
+} from '../schemas';
 import { normalize } from 'normalizr';
 
 export function fetchCompetitions(category) {
@@ -23,6 +30,58 @@ export function fetchCompetitions(category) {
   };
 }
 
+export function leaveCompetition(id) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    let data = {
+      competition: id
+    };
+    postAuthenticatedRequest('competitionLeave_post', data).then(res => {
+      dispatch(
+        mergeEntities(
+          normalize(
+            res.data.merge.competitionEnrollment,
+            competitionEnrollmentSchema
+          )
+        )
+      );
+      if (res.data.merge.competition) {
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competition, competitionSchema)
+          )
+        );
+      }
+      dispatch(setProgressModelState(false));
+    });
+  };
+}
+export function enrollCompetition(id) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    let data = {
+      competition: id
+    };
+    postAuthenticatedRequest('competitionEnroll_post', data).then(res => {
+      dispatch(
+        mergeEntities(
+          normalize(
+            res.data.merge.competitionEnrollment,
+            competitionEnrollmentSchema
+          )
+        )
+      );
+      if (res.data.merge.competition) {
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competition, competitionSchema)
+          )
+        );
+      }
+      dispatch(setProgressModelState(false));
+    });
+  };
+}
 export function fetchAllCompetitions() {
   return getAuthenticatedRequest('competitions_get', { category: 'all' });
 }

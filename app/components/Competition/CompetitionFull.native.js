@@ -89,6 +89,7 @@ class CompetitionFull extends React.Component {
             style={snippetStyles.buttonItem}
             buttonStyle={snippetStyles.buttonStyle}
             textStyle={snippetStyles.buttonTextStyle}
+            onClick={() => this.props.enrollCompetition(competitionDetail.id)}
           >
             <Text> {i18n.t('label.join')}</Text>
           </PrimaryButton>
@@ -99,6 +100,7 @@ class CompetitionFull extends React.Component {
             style={snippetStyles.buttonItem}
             buttonStyle={snippetStyles.buttonStyle}
             textStyle={snippetStyles.buttonTextStyle}
+            onClick={() => this.props.enrollCompetition(competitionDetail.id)}
           >
             <Text> {i18n.t('label.request_to_join')}</Text>
           </PrimaryButton>
@@ -115,6 +117,7 @@ class CompetitionFull extends React.Component {
           style={snippetStyles.buttonItem}
           buttonStyle={snippetStyles.buttonStyle}
           textStyle={snippetStyles.buttonTextStyle}
+          onClick={() => this.props.leaveCompetition(competitionDetail.id)}
         >
           <Text> {i18n.t('label.leave')}</Text>
         </PrimaryButton>
@@ -125,6 +128,7 @@ class CompetitionFull extends React.Component {
           style={snippetStyles.buttonItem}
           buttonStyle={snippetStyles.buttonStyle}
           textStyle={snippetStyles.buttonTextStyle}
+          onClick={() => this.props.leaveCompetition(competitionDetail.id)}
         >
           <Text> {i18n.t('label.cancel_join_request')}</Text>
         </PrimaryButton>
@@ -330,5 +334,7 @@ CompetitionFull.propTypes = {
   fetchCompetitionDetail: PropTypes.func,
   competitionDetail: PropTypes.any,
   treeCounter: PropTypes.any,
-  competitionEnrollments: PropTypes.any
+  competitionEnrollments: PropTypes.any,
+  leaveCompetition: PropTypes.any,
+  enrollCompetition: PropTypes.any
 };

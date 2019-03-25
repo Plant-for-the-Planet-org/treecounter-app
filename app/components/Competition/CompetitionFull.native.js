@@ -10,7 +10,11 @@ import scrollStyle from '../../styles/common/scrollStyle';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchCompetitionDetail } from '../../actions/competition';
-import { competitionDetailSelector } from '../../selectors';
+import {
+  competitionDetailSelector,
+  userCompetitionEnrolledSelector,
+  userTreecounterSelector
+} from '../../selectors';
 import CompetitionProgressBar from './CompetitionProgressBar';
 import { compCalendar } from '../../assets';
 import i18n from '../../locales/i18n';
@@ -36,6 +40,8 @@ class CompetitionFull extends React.Component {
 
   render() {
     console.log(this.props);
+    let status = '',
+      button = null;
     const competitionDetail = this.props.competitionDetail.competitionDetail;
     let participantCount = 0,
       requestCount = 0,
@@ -51,6 +57,80 @@ class CompetitionFull extends React.Component {
         }
       }
     }
+    const competitionEnrollments = this.props.competitionEnrollments;
+    if (
+      competitionDetail &&
+      competitionDetail.id &&
+      this.props.competitionEnrollments
+    ) {
+      for (let i = 0; i < competitionEnrollments.length; i++) {
+        if (competitionDetail.id === competitionEnrollments[i].competitionId) {
+          status = competitionEnrollments[i].status;
+        }
+      }
+    }
+    if (
+      competitionDetail &&
+      competitionDetail.ownerTreecounterId === this.props.treeCounter.id
+    ) {
+      button = (
+        <PrimaryButton
+          style={snippetStyles.buttonItem}
+          buttonStyle={snippetStyles.buttonStyle}
+          textStyle={snippetStyles.buttonTextStyle}
+        >
+          <Text> {i18n.t('label.edit')}</Text>
+        </PrimaryButton>
+      );
+    } else if (status === '') {
+      if (competitionDetail && competitionDetail.access === 'immediate') {
+        button = (
+          <PrimaryButton
+            style={snippetStyles.buttonItem}
+            buttonStyle={snippetStyles.buttonStyle}
+            textStyle={snippetStyles.buttonTextStyle}
+          >
+            <Text> {i18n.t('label.join')}</Text>
+          </PrimaryButton>
+        );
+      } else if (competitionDetail && competitionDetail.access === 'request') {
+        button = (
+          <PrimaryButton
+            style={snippetStyles.buttonItem}
+            buttonStyle={snippetStyles.buttonStyle}
+            textStyle={snippetStyles.buttonTextStyle}
+          >
+            <Text> {i18n.t('label.request_to_join')}</Text>
+          </PrimaryButton>
+        );
+      } else if (
+        competitionDetail &&
+        competitionDetail.access === 'invitation'
+      ) {
+        button = null;
+      }
+    } else if (status === 'enrolled') {
+      button = (
+        <PrimaryButton
+          style={snippetStyles.buttonItem}
+          buttonStyle={snippetStyles.buttonStyle}
+          textStyle={snippetStyles.buttonTextStyle}
+        >
+          <Text> {i18n.t('label.leave')}</Text>
+        </PrimaryButton>
+      );
+    } else if (status === 'pending') {
+      button = (
+        <PrimaryButton
+          style={snippetStyles.buttonItem}
+          buttonStyle={snippetStyles.buttonStyle}
+          textStyle={snippetStyles.buttonTextStyle}
+        >
+          <Text> {i18n.t('label.cancel_join_request')}</Text>
+        </PrimaryButton>
+      );
+    }
+
     return (
       <View>
         <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
@@ -114,7 +194,11 @@ class CompetitionFull extends React.Component {
                         style={{ width: 15, height: 15 }}
                       />
                       <Text style={snippetStyles.bottomText}>
-                        {competitionDetail && competitionDetail.email}
+                        {competitionDetail &&
+                          competitionDetail.contact +
+                            ', ' +
+                            competitionDetail &&
+                          competitionDetail.email}
                       </Text>
                     </View>
                   </View>
@@ -129,33 +213,7 @@ class CompetitionFull extends React.Component {
                       </Text>
                     </View>
 
-                    <View style={snippetStyles.buttonContainer}>
-                      {this.props.type === 'owned' ? (
-                        <PrimaryButton
-                          style={snippetStyles.buttonItem}
-                          buttonStyle={snippetStyles.buttonStyle}
-                          textStyle={snippetStyles.buttonTextStyle}
-                        >
-                          <Text> {i18n.t('label.edit')}</Text>
-                        </PrimaryButton>
-                      ) : this.props.type === 'enrolled' ? (
-                        <PrimaryButton
-                          style={snippetStyles.buttonItem}
-                          buttonStyle={snippetStyles.buttonStyle}
-                          textStyle={snippetStyles.buttonTextStyle}
-                        >
-                          <Text> {i18n.t('label.leave')}</Text>
-                        </PrimaryButton>
-                      ) : (
-                        <PrimaryButton
-                          style={snippetStyles.buttonItem}
-                          buttonStyle={snippetStyles.buttonStyle}
-                          textStyle={snippetStyles.buttonTextStyle}
-                        >
-                          <Text> {i18n.t('label.request_to_join')}</Text>
-                        </PrimaryButton>
-                      )}
-                    </View>
+                    <View style={snippetStyles.buttonContainer}>{button}</View>
                   </View>
                 </View>
               </View>
@@ -187,7 +245,10 @@ class CompetitionFull extends React.Component {
                 </View>
               </CardLayout>
             ) : null}
-            {requestCount > 0 && this.props.type === 'owned' ? (
+            {requestCount > 0 &&
+            competitionDetail &&
+            competitionDetail.ownerTreecounterId ===
+              this.props.treeCounter.id ? (
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
@@ -216,8 +277,7 @@ class CompetitionFull extends React.Component {
             ) : null}
             {competitionDetail &&
             competitionDetail.allEnrollments &&
-            competitionDetail.allEnrollments.length > 0 &&
-            this.props.type !== 'owned' ? (
+            competitionDetail.allEnrollments.length > 0 ? (
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
@@ -250,7 +310,9 @@ class CompetitionFull extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  competitionDetail: competitionDetailSelector(state)
+  competitionDetail: competitionDetailSelector(state),
+  treeCounter: userTreecounterSelector(state),
+  competitionEnrollments: userCompetitionEnrolledSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
@@ -267,5 +329,6 @@ CompetitionFull.propTypes = {
   competition_id: PropTypes.any,
   fetchCompetitionDetail: PropTypes.func,
   competitionDetail: PropTypes.any,
-  type: PropTypes.any
+  treeCounter: PropTypes.any,
+  competitionEnrollments: PropTypes.any
 };

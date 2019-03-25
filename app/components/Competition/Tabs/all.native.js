@@ -5,6 +5,8 @@ import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
+import PropTypes from 'prop-types';
+import FeaturedCompetitions from './featured.native';
 
 export default class AllCompetitions extends Component {
   constructor(props) {
@@ -12,33 +14,42 @@ export default class AllCompetitions extends Component {
 
     this.state = {
       expanded: false,
-      pageIndex: 2
+      pageIndex: 2,
+      featuredCompetitions: []
     };
   }
   componentWillMount() {
-    // let { plantProjects } = this.props;
-    // let featuredProjects = plantProjects.reduce((projects, project) => {
-    //   if (project.isFeatured) {
-    //     projects.push(project);
-    //   }
-    //   return projects;
-    // }, []);
-    // this.setState({
-    //   featuredProjects: featuredProjects
-    // });
+    let { allCompetitions } = this.props;
+    let featuredCompetitions = [];
+    if (allCompetitions.length > 0) {
+      allCompetitions.forEach(val => {
+        if (val.category === 'all') {
+          val.competitions.forEach(comp => {
+            featuredCompetitions.push(comp);
+          });
+        }
+      });
+    }
+    this.setState({
+      featuredCompetitions: featuredCompetitions
+    });
   }
 
   componentWillReceiveProps(nextProps) {
-    // let { plantProjects } = nextProps;
-    // let featuredProjects = plantProjects.reduce((projects, project) => {
-    //   if (project.isFeatured) {
-    //     projects.push(project);
-    //   }
-    //   return projects;
-    // }, []);
-    // this.setState({
-    //   featuredProjects: featuredProjects
-    // });
+    let { allCompetitions } = nextProps;
+    let featuredCompetitions = [];
+    if (allCompetitions.length > 0) {
+      allCompetitions.forEach(val => {
+        if (val.category === 'all') {
+          val.competitions.forEach(comp => {
+            featuredCompetitions.push(comp);
+          });
+        }
+      });
+    }
+    this.setState({
+      featuredCompetitions: featuredCompetitions
+    });
   }
 
   onSelectClickedFeaturedProjects = id => {
@@ -53,15 +64,15 @@ export default class AllCompetitions extends Component {
   };
 
   render() {
-    let { featuredProjects } = this.state;
+    let { featuredCompetitions } = this.state;
     return (
       <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
-        {this.props.allCompetitions && this.props.allCompetitions.length > 0
-          ? this.props.allCompetitions.map(project => (
+        {featuredCompetitions.length > 0
+          ? featuredCompetitions.map(project => (
               <CompetitionSnippet
                 key={'competition' + project.id}
                 cardStyle={styles.cardStyle}
-                onMoreClick={(id, type) => this.props.onMoreClick(id, type)}
+                onMoreClick={id => this.props.onMoreClick(id)}
                 competition={project}
                 type="all"
               />
@@ -71,3 +82,6 @@ export default class AllCompetitions extends Component {
     );
   }
 }
+AllCompetitions.propTypes = {
+  allCompetitions: PropTypes.any
+};

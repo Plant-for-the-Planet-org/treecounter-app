@@ -5,6 +5,11 @@ export const plantProjectSchema = new schema.Entity('plantProject');
 export const paymentGatewaySchema = new schema.Entity('paymentGateway');
 export const userProfileSchema = new schema.Entity('userProfile');
 export const treecounterSchema = new schema.Entity('treecounter');
+export const competitionSchema = new schema.Entity('competition');
+export const competitionEnrollmentSchema = new schema.Entity(
+  'competitionEnrollment'
+);
+export const competitionPagerSchema = new schema.Entity('competitionPager');
 export const contributionSchema = new schema.Entity('contribution');
 export const plantProjectImageSchema = new schema.Entity('plantProjectImage');
 export const contributionImageSchema = new schema.Entity('contributionImage');
@@ -24,6 +29,20 @@ plantProjectImageSchema.define({
   plantProject: plantProjectSchema
 });
 
+competitionSchema.define({
+  treecounter: treecounterSchema,
+  topEnrollments: [competitionEnrollmentSchema],
+  allEnrollments: [competitionEnrollmentSchema]
+});
+
+competitionEnrollmentSchema.define({
+  competition: competitionSchema
+});
+
+competitionPagerSchema.define({
+  competitions: [competitionSchema]
+});
+
 contributionSchema.define({
   treecounter: treecounterSchema,
   contributionImages: [contributionImageSchema]
@@ -39,5 +58,6 @@ userProfileSchema.define({
 });
 
 treecounterSchema.define({
-  contributions: [contributionSchema]
+  contributions: [contributionSchema],
+  competitions: [competitionSchema]
 });

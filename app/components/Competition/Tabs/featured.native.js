@@ -13,33 +13,42 @@ export default class FeaturedCompetitions extends Component {
 
     this.state = {
       expanded: false,
-      pageIndex: 1
+      pageIndex: 1,
+      featuredCompetitions: []
     };
   }
   componentWillMount() {
-    // let { plantProjects } = this.props;
-    // let featuredProjects = plantProjects.reduce((projects, project) => {
-    //   if (project.isFeatured) {
-    //     projects.push(project);
-    //   }
-    //   return projects;
-    // }, []);
-    // this.setState({
-    //   featuredProjects: featuredProjects
-    // });
+    let { allCompetitions } = this.props;
+    let featuredCompetitions = [];
+    if (allCompetitions.length > 0) {
+      allCompetitions.forEach(val => {
+        if (val.category === 'featured') {
+          val.competitions.forEach(comp => {
+            featuredCompetitions.push(comp);
+          });
+        }
+      });
+    }
+    this.setState({
+      featuredCompetitions: featuredCompetitions
+    });
   }
 
   componentWillReceiveProps(nextProps) {
-    // let { plantProjects } = nextProps;
-    // let featuredProjects = plantProjects.reduce((projects, project) => {
-    //   if (project.isFeatured) {
-    //     projects.push(project);
-    //   }
-    //   return projects;
-    // }, []);
-    // this.setState({
-    //   featuredProjects: featuredProjects
-    // });
+    let { allCompetitions } = nextProps;
+    let featuredCompetitions = [];
+    if (allCompetitions.length > 0) {
+      allCompetitions.forEach(val => {
+        if (val.category === 'featured') {
+          val.competitions.forEach(comp => {
+            featuredCompetitions.push(comp);
+          });
+        }
+      });
+    }
+    this.setState({
+      featuredCompetitions: featuredCompetitions
+    });
   }
 
   onSelectClickedFeaturedProjects = id => {
@@ -54,16 +63,15 @@ export default class FeaturedCompetitions extends Component {
   };
 
   render() {
-    let { featuredProjects } = this.state;
+    let { featuredCompetitions } = this.state;
     return (
       <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
-        {this.props.allCompetitions.competitions &&
-        this.props.allCompetitions.competitions.length > 0
-          ? this.props.allCompetitions.competitions.map(project => (
+        {featuredCompetitions.length > 0
+          ? featuredCompetitions.map(project => (
               <CompetitionSnippet
                 key={'competition' + project.id}
                 cardStyle={styles.cardStyle}
-                onMoreClick={(id, type) => this.props.onMoreClick(id, type)}
+                onMoreClick={id => this.props.onMoreClick(id)}
                 competition={project}
                 type="featured"
               />

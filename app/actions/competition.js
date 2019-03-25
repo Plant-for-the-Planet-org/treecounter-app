@@ -2,16 +2,24 @@ import { getAuthenticatedRequest, getRequest } from '../utils/api';
 import { setCompetitions } from '../reducers/competitionReducer';
 import { setCompetitionDetail } from '../reducers/competitionDetailReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
+import { mergeEntities } from '../reducers/entitiesReducer';
+import { competitionPagerSchema } from '../schemas';
+import { normalize } from 'normalizr';
 
 export function fetchCompetitions(category) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    getAuthenticatedRequest('competitions_get', { category: category }).then(
-      res => {
-        dispatch(setCompetitions(res.data));
-        dispatch(setProgressModelState(false));
-      }
-    );
+    getAuthenticatedRequest('competitions_get', {
+      category: category,
+      limit: 100
+    }).then(res => {
+      dispatch(
+        mergeEntities(
+          normalize(res.data.merge.competitionPager[0], competitionPagerSchema)
+        )
+      );
+      dispatch(setProgressModelState(false));
+    });
   };
 }
 

@@ -2,7 +2,9 @@
   "competitions": "Competitions",
   "leave": "Leave",
   "edit": "Edit",
+  "join": "Join",
   "request_to_join": "Request to Join",
   "confirm": "Confirm",
-  "delete": "Delete"
+  "delete": "Delete",
+  "cancel_join_request": "Cancel Join Request"
 }

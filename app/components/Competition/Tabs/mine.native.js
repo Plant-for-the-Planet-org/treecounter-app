@@ -56,9 +56,9 @@ export default class MineCompetitions extends Component {
                 <CompetitionSnippet
                   key={'competition' + project.id}
                   cardStyle={styles.cardStyle}
-                  onMoreClick={(id, type) => this.props.onMoreClick(id, type)}
+                  onMoreClick={id => this.props.onMoreClick(id)}
                   competition={project}
-                  type={project.category}
+                  type="mine"
                 />
               ))
             : null}

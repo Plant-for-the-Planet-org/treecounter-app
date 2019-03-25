@@ -5,7 +5,10 @@ import { updateRoute } from '../../helpers/routerHelper';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchCompetitions } from '../../actions/competition';
-import { competitionsSelector } from '../../selectors';
+import {
+  competitionsSelector,
+  getAllCompetitionsSelector
+} from '../../selectors';
 
 class CompetitionContainer extends React.Component {
   constructor(props) {
@@ -14,29 +17,30 @@ class CompetitionContainer extends React.Component {
 
   componentDidMount() {
     this.props.fetchCompetitions('featured');
+    this.props.fetchCompetitions('all');
   }
 
   render() {
+    console.log(this.props);
     return (
       <Competiton
-        allCompetitions={this.props.competitions}
-        onMoreClick={(id, type) => this.onMoreClick(id, type)}
+        allCompetitions={this.props.allCompetitions}
+        onMoreClick={id => this.onMoreClick(id)}
       />
     );
   }
-  onMoreClick(id, type) {
+  onMoreClick(id) {
     //this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
       updateRoute('app_competition', navigation, 1, {
-        competition: id,
-        type: type
+        competition: id
       });
     }
   }
 }
 const mapStateToProps = state => ({
-  competitions: competitionsSelector(state)
+  allCompetitions: getAllCompetitionsSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
@@ -49,5 +53,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 CompetitionContainer.propTypes = {
   navigation: PropTypes.any,
   fetchCompetitions: PropTypes.any,
-  competitions: PropTypes.any
+  allCompetitions: PropTypes.any
 };

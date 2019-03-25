@@ -18,18 +18,16 @@ class CompetitionSnippet extends React.Component {
   toggleExpanded(id) {
     this.props.onMoreClick(id);
   }
-  containerPress(id, type) {
+  containerPress(id) {
     if (this.props.onMoreClick) {
-      this.props.onMoreClick(id, type);
+      this.props.onMoreClick(id);
     }
   }
   render() {
     return (
       <TouchableHighlight
         underlayColor={'transparent'}
-        onPress={() =>
-          this.containerPress(this.props.competition.id, this.props.type)
-        }
+        onPress={() => this.containerPress(this.props.competition.id)}
       >
         <CardLayout style={[styles.projectSnippetContainer]}>
           <View style={styles.projectSpecsContainer}>
@@ -114,7 +112,7 @@ class CompetitionSnippet extends React.Component {
                     this.props.competition.competitorCount > 0
                       ? `${this.props.competition.competitorCount} participants`
                       : this.props.type !== 'mine'
-                        ? 'Join'
+                        ? i18n.t('label.join')
                         : null}
                   </Text>
                 </View>

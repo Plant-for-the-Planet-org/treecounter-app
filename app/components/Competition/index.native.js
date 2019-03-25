@@ -26,7 +26,6 @@ class Competiton extends React.Component {
         { key: 'all', title: 'ALL' }
       ],
       index: 1,
-      allCompetitions: [],
       mineCompetitions: []
     };
   }
@@ -37,11 +36,6 @@ class Competiton extends React.Component {
   }
 
   componentDidMount() {
-    fetchAllCompetitions().then(res => {
-      this.setState({
-        allCompetitions: res.data.merge.competitionPager[0].competitions
-      });
-    });
     fetchMineCompetitions().then(res => {
       console.log(res.data);
       let mineComeptitions = [];
@@ -97,12 +91,7 @@ class Competiton extends React.Component {
       case 'featured':
         return <FeaturedCompetitions {...this.props} />;
       case 'all':
-        return (
-          <AllCompetitions
-            {...this.props}
-            allCompetitions={this.state.allCompetitions}
-          />
-        );
+        return <AllCompetitions {...this.props} />;
       default:
         return null;
     }

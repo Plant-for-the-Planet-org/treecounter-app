@@ -46,9 +46,9 @@ export default class PriceProjects extends Component {
     if (sortType === 'desc') {
       let { plantProjects, currencies } = this.props;
       currencies = currencies.currencies;
-      let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
+      let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
       if (currencies) {
-        priceSortedProjects = priceSortedProjects.sort(function(a, b) {
+        priceSortedProjectsNew = priceSortedProjectsNew.sort(function(a, b) {
           return (
             b.treeCost *
               parseFloat(currencies.currency_rates['EUR'].rates[b.currency]) -
@@ -58,14 +58,14 @@ export default class PriceProjects extends Component {
         });
       }
       this.setState({
-        priceSortedProjects: priceSortedProjects
+        priceSortedProjects: priceSortedProjectsNew
       });
     } else {
       let { plantProjects, currencies } = this.props;
       currencies = currencies.currencies;
-      let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
+      let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
       if (currencies) {
-        priceSortedProjects = priceSortedProjects.sort(function(a, b) {
+        priceSortedProjectsNew = priceSortedProjectsNew.sort(function(a, b) {
           return (
             a.treeCost *
               parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
@@ -75,7 +75,7 @@ export default class PriceProjects extends Component {
         });
       }
       this.setState({
-        priceSortedProjects: priceSortedProjects
+        priceSortedProjects: priceSortedProjectsNew
       });
     }
   }

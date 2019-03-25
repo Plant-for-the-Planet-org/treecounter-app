@@ -9,7 +9,6 @@ import paymentStatusReducer from './paymentStatus';
 import modelDialogReducer from './modelDialogReducer';
 import pledgeEventReducer from './pledgeEventReducer';
 import updateLastRouteReducer from './updateLastRouteReducer';
-import competitionReducers from './competitionReducer';
 import competitionDetailReducer from './competitionDetailReducer';
 
 const commonReducers = {
@@ -24,7 +23,6 @@ const commonReducers = {
   modelDialogState: modelDialogReducer,
   pledgeEvents: pledgeEventReducer,
   lastRouteState: updateLastRouteReducer,
-  competitions: competitionReducers,
   competitionDetail: competitionDetailReducer
 };
 

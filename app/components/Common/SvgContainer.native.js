@@ -24,9 +24,12 @@ const totalCount = Array.from({ length: 72 }, (v, k) => k + 1);
 export default class SvgContainer extends Component {
   constructor(props) {
     super(props);
+    let { planted, target } = this.props;
+    let plantedWidth = this.calculatePlantedWidth(planted, target, 112);
+    let TreesWidth = this.calculateTreesWidth(planted, target);
     this.state = {
-      treesWidth: 0,
-      plantedDasharray: '0,1000'
+      plantedDasharray: plantedWidth + ',1000',
+      treesWidth: TreesWidth
     };
     this.RotateBallonsValueHolder = new Animated.Value(0);
     this.RotateClouds1ValueHolder = new Animated.Value(0);
@@ -35,23 +38,16 @@ export default class SvgContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     let { planted, target } = nextProps;
-    let plantedWidth = this.calculatePlantedWidth(planted, target, 112);
-    let TreesWidth = this.calculateTreesWidth(planted, target);
-    this.setState({
-      plantedDasharray: plantedWidth + ',1000',
-      treesWidth: TreesWidth
-    });
+    if (this.props.planted !== planted || this.props.target !== target) {
+      let plantedWidth = this.calculatePlantedWidth(planted, target, 112);
+      let TreesWidth = this.calculateTreesWidth(planted, target);
+      this.setState({
+        plantedDasharray: plantedWidth + ',1000',
+        treesWidth: TreesWidth
+      });
+    }
   }
 
-  componentWillMount() {
-    let { planted, target } = this.props;
-    let plantedWidth = this.calculatePlantedWidth(planted, target, 112);
-    let TreesWidth = this.calculateTreesWidth(planted, target);
-    this.setState({
-      plantedDasharray: plantedWidth + ',1000',
-      treesWidth: TreesWidth
-    });
-  }
   componentDidMount() {
     this.StartBallonsRotateFunction();
     this.StartClouds1RotateFunction();
@@ -163,10 +159,7 @@ export default class SvgContainer extends Component {
                   }
                 />
               </View>
-            ) : null;
-          })}
-          {totalCount.map(i => {
-            return i > treesWidth ? (
+            ) : (
               <View key={'pot-' + i} style={treecounterStyles.potStyle}>
                 <SvgUri
                   width="100%"
@@ -174,7 +167,7 @@ export default class SvgContainer extends Component {
                   svgXmlData={svgs['pot' + _.padStart('' + i, 2, '0')]}
                 />
               </View>
-            ) : null;
+            );
           })}
           <View style={treecounterStyles.circleStyle}>
             <Svg height="100%" width="100%" viewBox="0 0 400 400">

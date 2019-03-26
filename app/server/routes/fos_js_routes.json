@@ -2,12 +2,7 @@
   "base_url": "",
   "routes": {
     "api_login_check": {
-      "tokens": [
-        [
-          "text",
-          "\/api\/login_check"
-        ]
-      ],
+      "tokens": [["text", "/api/login_check"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
@@ -16,485 +11,210 @@
     },
     "auth_forgotPassword_post": {
       "tokens": [
-        [
-          "text",
-          "\/forgotPassword"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/auth"
-        ]
+        ["text", "/forgotPassword"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/auth"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "auth_resetPassword_form": {
       "tokens": [
-        [
-          "text",
-          "\/resetPassword"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/auth"
-        ]
+        ["text", "/resetPassword"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/auth"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "auth_resetPassword_post": {
       "tokens": [
-        [
-          "text",
-          "\/resetPassword"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/auth"
-        ]
+        ["text", "/resetPassword"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/auth"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "auth_sendActivationLink_post": {
       "tokens": [
-        [
-          "text",
-          "\/sendActivationLink"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/sendActivationLink"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "auth_accountActivate_post": {
       "tokens": [
-        [
-          "text",
-          "\/accountActivate"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/auth"
-        ]
+        ["text", "/accountActivate"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/auth"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "auth_accountActivationToken_debug": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "userProfile"
-        ],
-        [
-          "text",
-          "\/accountActivationToken"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/auth"
-        ]
+        ["variable", "/", "[^/]++", "userProfile"],
+        ["text", "/accountActivationToken"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/auth"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "auth_accountDeActivate_debug": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "userProfile"
-        ],
-        [
-          "text",
-          "\/accountDeActivate"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/auth"
-        ]
+        ["variable", "/", "[^/]++", "userProfile"],
+        ["text", "/accountDeActivate"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/auth"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "post_token_refreshapi_token_refresh": {
       "tokens": [
-        [
-          "text",
-          "\/token_refresh"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/token_refresh"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "challenge_post": {
       "tokens": [
-        [
-          "text",
-          "\/challenge"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/challenge"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "challengeAccept_put": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "token"
-        ],
-        [
-          "text",
-          "\/challenge"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "token"],
+        ["text", "/challenge"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "PUT"
-      ],
+      "methods": ["PUT"],
       "schemes": []
     },
     "challengeDecline_put": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "token"
-        ],
-        [
-          "text",
-          "\/challenge"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["variable", "/", "[^/]++", "token"],
+        ["text", "/challenge"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "PUT"
-      ],
+      "methods": ["PUT"],
       "schemes": []
     },
     "data_userProfile_get": {
       "tokens": [
-        [
-          "text",
-          "\/loadUserProfile"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/loadUserProfile"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "data_loginLoad_get": {
       "tokens": [
-        [
-          "text",
-          "\/loadLoginData"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/loadLoginData"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "data_menu_get": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "category"
-        ],
-        [
-          "text",
-          "\/menu"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "category"],
+        ["text", "/menu"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "category": "web.main",
@@ -502,757 +222,326 @@
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "followSubscribe_post": {
       "tokens": [
-        [
-          "text",
-          "\/followSubscribe"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/followSubscribe"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "followUnSubscribe_post": {
       "tokens": [
-        [
-          "text",
-          "\/followUnSubscribe"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/followUnSubscribe"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "forms_get": {
       "tokens": [
-        [
-          "text",
-          "\/forms"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/forms"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "targetUpdate_form": {
       "tokens": [
-        [
-          "text",
-          "\/targets\/updateForm"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/targets/updateForm"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "target_put": {
       "tokens": [
-        [
-          "text",
-          "\/targets"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/targets"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "PUT"
-      ],
+      "methods": ["PUT"],
       "schemes": []
     },
     "donationContribution_form": {
       "tokens": [
-        [
-          "text",
-          "\/donationContributionForm"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/donationContributionForm"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "giftDonationContribution_form": {
       "tokens": [
-        [
-          "text",
-          "\/giftDonationContributionForm"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/giftDonationContributionForm"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "donationContribution_post": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "plantProject"
-        ],
-        [
-          "text",
-          "\/donationContributions"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "plantProject"],
+        ["text", "/donationContributions"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "giftDonationContribution_post": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "plantProject"
-        ],
-        [
-          "text",
-          "\/giftDonationContributions"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "plantProject"],
+        ["text", "/giftDonationContributions"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "donationContributionByToken_get": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "token"
-        ],
-        [
-          "text",
-          "\/donationByToken"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "token"],
+        ["text", "/donationByToken"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "plantContribution_forms": {
       "tokens": [
-        [
-          "text",
-          "\/plantContributionForms"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/plantContributionForms"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "plantContribution_get": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "plantContribution"
-        ],
-        [
-          "text",
-          "\/plantContributions"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "plantContribution"],
+        ["text", "/plantContributions"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "plantContribution_post": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "mode"
-        ],
-        [
-          "text",
-          "\/plantContributions"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "mode"],
+        ["text", "/plantContributions"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "plantContribution_put": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "plantContribution"
-        ],
-        [
-          "text",
-          "\/plantContributions"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "plantContribution"],
+        ["text", "/plantContributions"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "PUT"
-      ],
+      "methods": ["PUT"],
       "schemes": []
     },
     "plantContribution_delete": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "plantContribution"
-        ],
-        [
-          "text",
-          "\/plantContributions"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "plantContribution"],
+        ["text", "/plantContributions"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "DELETE"
-      ],
+      "methods": ["DELETE"],
       "schemes": []
     },
     "plantContribution_post_deprecated": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "mode"
-        ],
-        [
-          "text",
-          "\/plantContributions"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "treecounter"
-        ],
-        [
-          "text",
-          "\/treecounters"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "mode"],
+        ["text", "/plantContributions"],
+        ["variable", "/", "[^/]++", "treecounter"],
+        ["text", "/treecounters"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "public_userNotification": {
       "tokens": [
-        [
-          "text",
-          "\/userNotification"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/userNotification"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "public_accessDenied": {
       "tokens": [
-        [
-          "text",
-          "\/accessDenied"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/accessDenied"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "data_tpos_get": {
       "tokens": [
-        [
-          "text",
-          "\/loadTpos"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/loadTpos"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "public_currencies_get": {
       "tokens": [
-        [
-          "text",
-          "\/currencies"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/currencies"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "public_menu_get": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "category"
-        ],
-        [
-          "text",
-          "\/menu"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["variable", "/", "[^/]++", "category"],
+        ["text", "/menu"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "category": "web.main",
@@ -1260,144 +549,62 @@
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "public_signupTypes": {
       "tokens": [
-        [
-          "text",
-          "\/signupTypes"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/signupTypes"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "public_registrationTypes": {
       "tokens": [
-        [
-          "text",
-          "\/registrationTypes"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/registrationTypes"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "public_exploreData_get": {
       "tokens": [
-        [
-          "text",
-          "\/exploreData"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/exploreData"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "public_exploreQuery_get": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "subSection"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "section"
-        ],
-        [
-          "text",
-          "\/exploreQuery"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["variable", "/", "[^/]++", "subSection"],
+        ["variable", "/", "[^/]++", "section"],
+        ["text", "/exploreQuery"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "subSection": null,
@@ -1405,39 +612,16 @@
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "treecounter_get": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "uid"
-        ],
-        [
-          "text",
-          "\/treecounter"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["variable", "/", "[^/]++", "uid"],
+        ["text", "/treecounter"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "uid": null,
@@ -1445,220 +629,94 @@
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "eventPledge_form": {
       "tokens": [
-        [
-          "text",
-          "\/eventPledgeForm"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/eventPledgeForm"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "public_pledgeEvents_get": {
       "tokens": [
-        [
-          "text",
-          "\/pledgeEvents"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/pledgeEvents"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "pledgeEvent_get": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "eventSlug"
-        ],
-        [
-          "text",
-          "\/pledgeEvent"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["variable", "/", "[^/]++", "eventSlug"],
+        ["text", "/pledgeEvent"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "eventPledge_post": {
       "tokens": [
-        [
-          "text",
-          "\/eventPledge"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "pledgeEventSlug"
-        ],
-        [
-          "text",
-          "\/pledgeEvent"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/eventPledge"],
+        ["variable", "/", "[^/]++", "pledgeEventSlug"],
+        ["text", "/pledgeEvent"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "targetLog_get": {
       "tokens": [
-        [
-          "text",
-          "\/target"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/target"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "targetLogs_get": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "sort"
-        ],
-        [
-          "text",
-          "\/target"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["variable", "/", "[^/]++", "sort"],
+        ["text", "/target"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "sort": null,
@@ -1666,988 +724,449 @@
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "donate_post": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "plantProject"
-        ],
-        [
-          "text",
-          "\/donationContributions"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["variable", "/", "[^/]++", "plantProject"],
+        ["text", "/donationContributions"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "giftDonate_post": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "plantProject"
-        ],
-        [
-          "text",
-          "\/giftDonationContributions"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["variable", "/", "[^/]++", "plantProject"],
+        ["text", "/giftDonationContributions"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "paymentInfo_get": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "token"
-        ],
-        [
-          "text",
-          "\/paymentInfo"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["variable", "/", "[^/]++", "token"],
+        ["text", "/paymentInfo"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "pay_post": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "token"
-        ],
-        [
-          "text",
-          "\/pay"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["variable", "/", "[^/]++", "token"],
+        ["text", "/pay"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "public_faqs_get": {
       "tokens": [
-        [
-          "text",
-          "\/faqs"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/faqs"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "public_privacy_get": {
       "tokens": [
-        [
-          "text",
-          "\/privacy"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/privacy"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "public_imprint_get": {
       "tokens": [
-        [
-          "text",
-          "\/imprint"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/public"
-        ]
+        ["text", "/imprint"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/public"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "validateCode_post": {
       "tokens": [
-        [
-          "text",
-          "\/validateCode"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/validateCode"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "convertCode_post": {
       "tokens": [
-        [
-          "text",
-          "\/convertCode"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/convertCode"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "signup_forms": {
       "tokens": [
-        [
-          "text",
-          "\/signupForms"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/auth"
-        ]
+        ["text", "/signupForms"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/auth"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "profileUpdate_forms": {
       "tokens": [
-        [
-          "text",
-          "\/profileUpdateForms"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/auth"
-        ]
+        ["text", "/profileUpdateForms"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/auth"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "signup_post": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "profileType"
-        ],
-        [
-          "text",
-          "\/signup"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/auth"
-        ]
+        ["variable", "/", "[^/]++", "profileType"],
+        ["text", "/signup"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/auth"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "profile_put": {
       "tokens": [
-        [
-          "text",
-          "\/profileUpdate"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/profileUpdate"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "PUT"
-      ],
+      "methods": ["PUT"],
       "schemes": []
     },
     "profileImage_put": {
       "tokens": [
-        [
-          "text",
-          "\/profileImageUpdate"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/profileImageUpdate"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "PUT"
-      ],
+      "methods": ["PUT"],
       "schemes": []
     },
     "profilePassword_put": {
       "tokens": [
-        [
-          "text",
-          "\/profilePasswordUpdate"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/profilePasswordUpdate"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "PUT"
-      ],
+      "methods": ["PUT"],
       "schemes": []
     },
     "profileAboutMe_put": {
       "tokens": [
-        [
-          "text",
-          "\/profileAboutMe"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/profileAboutMe"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "PUT"
-      ],
+      "methods": ["PUT"],
       "schemes": []
     },
     "profile_delete": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "userProfile"
-        ],
-        [
-          "text",
-          "\/profileDelete"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "userProfile"],
+        ["text", "/profileDelete"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "DELETE"
-      ],
+      "methods": ["DELETE"],
       "schemes": []
     },
     "plantProject_form": {
       "tokens": [
-        [
-          "text",
-          "\/plantProjectForm"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/plantProjectForm"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "plantProject_post": {
       "tokens": [
-        [
-          "text",
-          "\/plantProjects"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/plantProjects"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "plantProject_put": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "plantProject"
-        ],
-        [
-          "text",
-          "\/plantProjects"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "plantProject"],
+        ["text", "/plantProjects"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "PUT"
+      "methods": ["PUT"],
+      "schemes": []
+    },
+
+    "profileDedication_put": {
+      "tokens": [
+        ["variable", "/", "[^/]++", "supportedTreecounter"],
+        ["text", "/profileDedication"],
+
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": ["PUT"],
       "schemes": []
     },
     "plantProject_delete": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "plantProject"
-        ],
-        [
-          "text",
-          "\/plantProjects"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["variable", "/", "[^/]++", "plantProject"],
+        ["text", "/plantProjects"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "DELETE"
-      ],
+      "methods": ["DELETE"],
       "schemes": []
     },
     "plantProject_position": {
       "tokens": [
-        [
-          "text",
-          "\/position"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "plantProject"
-        ],
-        [
-          "text",
-          "\/plantProjects"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/position"],
+        ["variable", "/", "[^/]++", "plantProject"],
+        ["text", "/plantProjects"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "userfeeds_get": {
       "tokens": [
-        [
-          "text",
-          "\/userfeeds"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/userfeeds"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "userfeedsMore_get": {
       "tokens": [
-        [
-          "text",
-          "\/more"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "lastId"
-        ],
-        [
-          "text",
-          "\/userfeeds"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/more"],
+        ["variable", "/", "[^/]++", "lastId"],
+        ["text", "/userfeeds"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "userFeedsMarkRead_post": {
       "tokens": [
-        [
-          "text",
-          "\/userfeeds\/markRead"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/userfeeds/markRead"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "userFeedsMarkUnRead_post": {
       "tokens": [
-        [
-          "text",
-          "\/userfeeds\/markUnRead"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/userfeeds/markUnRead"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "userfeedsAll_get": {
       "tokens": [
-        [
-          "text",
-          "\/userfeedsAll"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "version"
-        ],
-        [
-          "text",
-          "\/api"
-        ]
+        ["text", "/userfeedsAll"],
+        ["variable", "/", "[^/]++", "_locale"],
+        ["variable", "/", "[^/]++", "version"],
+        ["text", "/api"]
       ],
       "defaults": {
         "_locale": []
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "bazinga_jstranslation_js": {
       "tokens": [
-        [
-          "variable",
-          ".",
-          "js|json",
-          "_format"
-        ],
-        [
-          "variable",
-          "\/",
-          "[\\w]+",
-          "domain"
-        ],
-        [
-          "text",
-          "\/translations"
-        ]
+        ["variable", ".", "js|json", "_format"],
+        ["variable", "/", "[\\w]+", "domain"],
+        ["text", "/translations"]
       ],
       "defaults": {
         "domain": "messages",
@@ -2658,18 +1177,11 @@
         "domain": "[\\w]+"
       },
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "gesdinet_jwt_refresh_token": {
-      "tokens": [
-        [
-          "text",
-          "\/api\/token\/refresh"
-        ]
-      ],
+      "tokens": [["text", "/api/token/refresh"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
@@ -2678,22 +1190,9 @@
     },
     "liip_imagine_filter": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          ".+",
-          "path"
-        ],
-        [
-          "variable",
-          "\/",
-          "[A-z0-9_-]*",
-          "filter"
-        ],
-        [
-          "text",
-          "\/media\/cache\/resolve"
-        ]
+        ["variable", "/", ".+", "path"],
+        ["variable", "/", "[A-z0-9_-]*", "filter"],
+        ["text", "/media/cache/resolve"]
       ],
       "defaults": [],
       "requirements": {
@@ -2701,169 +1200,84 @@
         "path": ".+"
       },
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "search2": {
-      "tokens": [
-        [
-          "text",
-          "\/search2"
-        ]
-      ],
+      "tokens": [["text", "/search2"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
+      "methods": ["POST"],
       "schemes": []
     },
     "app_selectProject": {
-      "tokens": [
-        [
-          "text",
-          "\/select-project"
-        ]
-      ],
+      "tokens": [["text", "/select-project"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_homepage": {
-      "tokens": [
-        [
-          "text",
-          "\/"
-        ]
-      ],
+      "tokens": [["text", "/"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_pledge": {
-      "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "eventSlug"
-        ],
-        [
-          "text",
-          "\/pledge"
-        ]
-      ],
+      "tokens": [["variable", "/", "[^/]++", "eventSlug"], ["text", "/pledge"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_explore": {
-      "tokens": [
-        [
-          "text",
-          "\/explore"
-        ]
-      ],
+      "tokens": [["text", "/explore"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_leaderboard": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "subSection"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "section"
-        ],
-        [
-          "text",
-          "\/leaderboard"
-        ]
+        ["variable", "/", "[^/]++", "subSection"],
+        ["variable", "/", "[^/]++", "section"],
+        ["text", "/leaderboard"]
       ],
       "defaults": {
         "subSection": null
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_faq": {
-      "tokens": [
-        [
-          "text",
-          "\/faq"
-        ]
-      ],
+      "tokens": [["text", "/faq"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_giftTrees": {
-      "tokens": [
-        [
-          "text",
-          "\/gift-trees"
-        ]
-      ],
+      "tokens": [["text", "/gift-trees"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_redeem": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "code"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "type"
-        ],
-        [
-          "text",
-          "\/redeem"
-        ]
+        ["variable", "/", "[^/]++", "code"],
+        ["variable", "/", "[^/]++", "type"],
+        ["text", "/redeem"]
       ],
       "defaults": {
         "type": "gift",
@@ -2871,495 +1285,257 @@
       },
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_claim": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "code"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "type"
-        ],
-        [
-          "text",
-          "\/claim"
-        ]
+        ["variable", "/", "[^/]++", "code"],
+        ["variable", "/", "[^/]++", "type"],
+        ["text", "/claim"]
       ],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_accountActivate": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "token"
-        ],
-        [
-          "text",
-          "\/account-activate"
-        ]
+        ["variable", "/", "[^/]++", "token"],
+        ["text", "/account-activate"]
       ],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_accountActivated": {
-      "tokens": [
-        [
-          "text",
-          "\/account-activated"
-        ]
-      ],
+      "tokens": [["text", "/account-activated"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_accountActivation": {
-      "tokens": [
-        [
-          "text",
-          "\/account-activation"
-        ]
-      ],
+      "tokens": [["text", "/account-activation"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_forgotPassword": {
-      "tokens": [
-        [
-          "text",
-          "\/forgot-password"
-        ]
-      ],
+      "tokens": [["text", "/forgot-password"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_resetPassword": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "token"
-        ],
-        [
-          "text",
-          "\/reset-password"
-        ]
+        ["variable", "/", "[^/]++", "token"],
+        ["text", "/reset-password"]
       ],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_passwordSent": {
-      "tokens": [
-        [
-          "text",
-          "\/password-sent"
-        ]
-      ],
+      "tokens": [["text", "/password-sent"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_userHome": {
-      "tokens": [
-        [
-          "text",
-          "\/home"
-        ]
-      ],
+      "tokens": [["text", "/home"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_login": {
-      "tokens": [
-        [
-          "text",
-          "\/login"
-        ]
-      ],
+      "tokens": [["text", "/login"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_donateTrees": {
-      "tokens": [
-        [
-          "text",
-          "\/donate-trees"
-        ]
-      ],
+      "tokens": [["text", "/donate-trees"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_donateTrees_support": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "supportedTreecounter"
-        ],
-        [
-          "text",
-          "\/donate-trees"
-        ]
+        ["variable", "/", "[^/]++", "supportedTreecounter"],
+        ["text", "/donate-trees"]
       ],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_myTrees": {
-      "tokens": [
-        [
-          "text",
-          "\/my-trees"
-        ]
-      ],
+      "tokens": [["text", "/my-trees"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_editTrees": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "contribution"
-        ],
-        [
-          "text",
-          "\/edit-trees"
-        ]
+        ["variable", "/", "[^/]++", "contribution"],
+        ["text", "/edit-trees"]
       ],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_registerTrees": {
-      "tokens": [
-        [
-          "text",
-          "\/register-trees"
-        ]
-      ],
+      "tokens": [["text", "/register-trees"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_signup": {
-      "tokens": [
-        [
-          "text",
-          "\/signup"
-        ]
-      ],
+      "tokens": [["text", "/signup"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_editProfile": {
-      "tokens": [
-        [
-          "text",
-          "\/edit-profile"
-        ]
-      ],
+      "tokens": [["text", "/edit-profile"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_signupSuccess": {
-      "tokens": [
-        [
-          "text",
-          "\/signup-success"
-        ]
-      ],
+      "tokens": [["text", "/signup-success"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_target": {
-      "tokens": [
-        [
-          "text",
-          "\/target"
-        ]
-      ],
+      "tokens": [["text", "/target"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_treecounter": {
-      "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "treecounter"
-        ],
-        [
-          "text",
-          "\/t"
-        ]
-      ],
+      "tokens": [["variable", "/", "[^/]++", "treecounter"], ["text", "/t"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_stripeConnect": {
-      "tokens": [
-        [
-          "text",
-          "\/stripe-connect"
-        ]
-      ],
+      "tokens": [["text", "/stripe-connect"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_competitions": {
-      "tokens": [
-        [
-          "text",
-          "\/competitions"
-        ]
-      ],
+      "tokens": [["text", "/competitions"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_manageProjects": {
-      "tokens": [
-        [
-          "text",
-          "\/manage-plant-projects"
-        ]
-      ],
+      "tokens": [["text", "/manage-plant-projects"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_imprint": {
-      "tokens": [
-        [
-          "text",
-          "\/imprint"
-        ]
-      ],
+      "tokens": [["text", "/imprint"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_privacy": {
-      "tokens": [
-        [
-          "text",
-          "\/data-protection-policy"
-        ]
-      ],
+      "tokens": [["text", "/data-protection-policy"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_userNotification": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "uid"
-        ],
-        [
-          "text",
-          "\/user-notification"
-        ]
+        ["variable", "/", "[^/]++", "uid"],
+        ["text", "/user-notification"]
       ],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_challenge": {
-      "tokens": [
-        [
-          "text",
-          "\/challenge"
-        ]
-      ],
+      "tokens": [["text", "/challenge"]],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_challengeResponse": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "token"
-        ],
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "action"
-        ],
-        [
-          "text",
-          "\/challenge-response"
-        ]
+        ["variable", "/", "[^/]++", "token"],
+        ["variable", "/", "[^/]++", "action"],
+        ["text", "/challenge-response"]
       ],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     },
     "app_payment": {
       "tokens": [
-        [
-          "variable",
-          "\/",
-          "[^\/]++",
-          "donationContribution"
-        ],
-        [
-          "text",
-          "\/donation-payment"
-        ]
+        ["variable", "/", "[^/]++", "donationContribution"],
+        ["text", "/donation-payment"]
       ],
       "defaults": [],
       "requirements": [],
       "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "schemes": []
     }
   },

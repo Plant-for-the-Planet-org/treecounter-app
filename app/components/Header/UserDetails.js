@@ -55,34 +55,31 @@ const UserDetails = ({
             </ReactTooltip>
           </div>
         </div>
-        <div className="pick-profile-container">
-          <PrimaryButton
-            className="pick-profile-primary-button"
-            onClick={() => openProfilePickerModal()}
-          >
-            Pick Profile
-          </PrimaryButton>
-        </div>
-
-        <div className="pick-profile-container">
-          <div>
-            <img
-              src={
-                userProfile.image
-                  ? getImageUrl('profile', 'thumb', userProfile.image)
-                  : ProfilePic
-              }
-            />
+        {userProfile.supportedTreecounter ? (
+          <div className="pick-profile-container">
+            <div>
+              <img src={ProfilePic} />
+            </div>
+            <div className="pick-profile-username">
+              {userProfile.supportedTreecounter.displayName}
+            </div>
+            <PrimaryButton
+              className="pick-profile-primary-button"
+              onClick={() => openProfilePickerModal()}
+            >
+              Edit
+            </PrimaryButton>
           </div>
-          <div className="pick-profile-username">Jorgo Miridis</div>
-
-          <PrimaryButton
-            className="pick-profile-primary-button"
-            onClick={() => openProfilePickerModal()}
-          >
-            Edit
-          </PrimaryButton>
-        </div>
+        ) : (
+          <div className="pick-profile-container">
+            <PrimaryButton
+              className="pick-profile-primary-button"
+              onClick={() => openProfilePickerModal()}
+            >
+              Pick Profile
+            </PrimaryButton>
+          </div>
+        )}
 
         <TransparentButton onClick={() => updateRoute('app_editProfile')}>
           <img src={EditGreen} />

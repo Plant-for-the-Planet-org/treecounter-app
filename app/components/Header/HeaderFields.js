@@ -23,8 +23,9 @@ class HeaderFields extends Component {
     this.setState({ profilePickerModal: false });
   }
 
-  suggestionClicked(event, value) {
-    console.log('suggestion clicked.', event, value);
+  pickupProfile(value) {
+    this.props.updateProfileDedication({ supportedTreecounter: value });
+    this.closeProfilePickerModal();
   }
   render() {
     const {
@@ -93,7 +94,7 @@ class HeaderFields extends Component {
         <ProfilePickerModal
           isOpen={this.state.profilePickerModal}
           onRequestClose={this.closeProfilePickerModal.bind(this)}
-          suggestionClicked={this.suggestionClicked.bind(this)}
+          pickupProfile={this.pickupProfile.bind(this)}
         />
       </div>
     ) : (
@@ -121,7 +122,8 @@ HeaderFields.propTypes = {
   userProfile: PropTypes.object,
   onLogout: PropTypes.func.isRequired,
   updateRoute: PropTypes.func,
-  userFeeds: PropTypes.object
+  userFeeds: PropTypes.object,
+  updateProfileDedication: PropTypes.func
 };
 
 export default HeaderFields;

@@ -131,7 +131,6 @@ export default {
               'ER',
               'EE',
               'ET',
-              'EZ',
               'FK',
               'FO',
               'FJ',
@@ -237,6 +236,8 @@ export default {
               'PN',
               'PL',
               'PT',
+              'XA',
+              'XB',
               'PR',
               'QA',
               'RE',
@@ -298,7 +299,6 @@ export default {
               'UA',
               'AE',
               'GB',
-              'UN',
               'US',
               'UY',
               'UZ',
@@ -388,7 +388,6 @@ export default {
               'Eritrea',
               'Estonia',
               'Ethiopia',
-              'Eurozone',
               'Falkland Islands',
               'Faroe Islands',
               'Fiji',
@@ -494,6 +493,8 @@ export default {
               'Pitcairn Islands',
               'Poland',
               'Portugal',
+              'Pseudo-Accents',
+              'Pseudo-Bidi',
               'Puerto Rico',
               'Qatar',
               'Réunion',
@@ -555,7 +556,6 @@ export default {
               'Ukraine',
               'United Arab Emirates',
               'United Kingdom',
-              'United Nations',
               'United States',
               'Uruguay',
               'Uzbekistan',
@@ -605,6 +605,44 @@ export default {
           }
         },
         required: ['name', 'address', 'zipCode', 'city', 'country'],
+        submit_url: '',
+        submit_method: 'POST'
+      }
+    },
+    email: {
+      values: {
+        newEmail: []
+      },
+      schema: {
+        title: 'profile_email',
+        type: 'object',
+        properties: {
+          newEmail: {
+            title: null,
+            type: 'object',
+            properties: {
+              first: {
+                type: 'string',
+                title: 'label.new_email',
+                icon: null,
+                help: null,
+                propertyOrder: 1
+              },
+              second: {
+                type: 'string',
+                title: 'label.new_email_repeat',
+                icon: null,
+                help: null,
+                propertyOrder: 2
+              }
+            },
+            required: ['first', 'second'],
+            icon: null,
+            help: null,
+            propertyOrder: 1
+          }
+        },
+        required: ['newEmail'],
         submit_url: '',
         submit_method: 'POST'
       }
@@ -720,6 +758,25 @@ export default {
           }
         },
         required: ['currentPassword'],
+        submit_url: '',
+        submit_method: 'POST'
+      }
+    },
+    dedication: {
+      values: [],
+      schema: {
+        title: 'profile_image',
+        type: 'object',
+        properties: {
+          supportedTreecounter: {
+            type: 'hidden',
+            title: 'label.dedication_treecounter',
+            widget: 'hidden',
+            icon: null,
+            help: null,
+            propertyOrder: 1
+          }
+        },
         submit_url: '',
         submit_method: 'POST'
       }
@@ -890,7 +947,6 @@ export default {
               'ER',
               'EE',
               'ET',
-              'EZ',
               'FK',
               'FO',
               'FJ',
@@ -996,6 +1052,8 @@ export default {
               'PN',
               'PL',
               'PT',
+              'XA',
+              'XB',
               'PR',
               'QA',
               'RE',
@@ -1057,7 +1115,6 @@ export default {
               'UA',
               'AE',
               'GB',
-              'UN',
               'US',
               'UY',
               'UZ',
@@ -1147,7 +1204,6 @@ export default {
               'Eritrea',
               'Estonia',
               'Ethiopia',
-              'Eurozone',
               'Falkland Islands',
               'Faroe Islands',
               'Fiji',
@@ -1253,6 +1309,8 @@ export default {
               'Pitcairn Islands',
               'Poland',
               'Portugal',
+              'Pseudo-Accents',
+              'Pseudo-Bidi',
               'Puerto Rico',
               'Qatar',
               'Réunion',
@@ -1314,7 +1372,6 @@ export default {
               'Ukraine',
               'United Arab Emirates',
               'United Kingdom',
-              'United Nations',
               'United States',
               'Uruguay',
               'Uzbekistan',
@@ -1368,6 +1425,44 @@ export default {
         submit_method: 'POST'
       }
     },
+    email: {
+      values: {
+        newEmail: []
+      },
+      schema: {
+        title: 'profile_email',
+        type: 'object',
+        properties: {
+          newEmail: {
+            title: null,
+            type: 'object',
+            properties: {
+              first: {
+                type: 'string',
+                title: 'label.new_email',
+                icon: null,
+                help: null,
+                propertyOrder: 1
+              },
+              second: {
+                type: 'string',
+                title: 'label.new_email_repeat',
+                icon: null,
+                help: null,
+                propertyOrder: 2
+              }
+            },
+            required: ['first', 'second'],
+            icon: null,
+            help: null,
+            propertyOrder: 1
+          }
+        },
+        required: ['newEmail'],
+        submit_url: '',
+        submit_method: 'POST'
+      }
+    },
     image: {
       values: [],
       schema: {
@@ -1482,6 +1577,25 @@ export default {
         submit_url: '',
         submit_method: 'POST'
       }
+    },
+    dedication: {
+      values: [],
+      schema: {
+        title: 'profile_image',
+        type: 'object',
+        properties: {
+          supportedTreecounter: {
+            type: 'hidden',
+            title: 'label.dedication_treecounter',
+            widget: 'hidden',
+            icon: null,
+            help: null,
+            propertyOrder: 1
+          }
+        },
+        submit_url: '',
+        submit_method: 'POST'
+      }
     }
   },
   company: {
@@ -1510,7 +1624,7 @@ export default {
             enum: ['company-other'],
             enum_titles: ['Other'],
             type: 'string',
-            title: null,
+            title: 'label.sub_type',
             icon: null,
             help: null,
             propertyOrder: 2
@@ -1625,7 +1739,6 @@ export default {
               'ER',
               'EE',
               'ET',
-              'EZ',
               'FK',
               'FO',
               'FJ',
@@ -1731,6 +1844,8 @@ export default {
               'PN',
               'PL',
               'PT',
+              'XA',
+              'XB',
               'PR',
               'QA',
               'RE',
@@ -1792,7 +1907,6 @@ export default {
               'UA',
               'AE',
               'GB',
-              'UN',
               'US',
               'UY',
               'UZ',
@@ -1882,7 +1996,6 @@ export default {
               'Eritrea',
               'Estonia',
               'Ethiopia',
-              'Eurozone',
               'Falkland Islands',
               'Faroe Islands',
               'Fiji',
@@ -1988,6 +2101,8 @@ export default {
               'Pitcairn Islands',
               'Poland',
               'Portugal',
+              'Pseudo-Accents',
+              'Pseudo-Bidi',
               'Puerto Rico',
               'Qatar',
               'Réunion',
@@ -2049,7 +2164,6 @@ export default {
               'Ukraine',
               'United Arab Emirates',
               'United Kingdom',
-              'United Nations',
               'United States',
               'Uruguay',
               'Uzbekistan',
@@ -2103,6 +2217,44 @@ export default {
         submit_method: 'POST'
       }
     },
+    email: {
+      values: {
+        newEmail: []
+      },
+      schema: {
+        title: 'profile_email',
+        type: 'object',
+        properties: {
+          newEmail: {
+            title: null,
+            type: 'object',
+            properties: {
+              first: {
+                type: 'string',
+                title: 'label.new_email',
+                icon: null,
+                help: null,
+                propertyOrder: 1
+              },
+              second: {
+                type: 'string',
+                title: 'label.new_email_repeat',
+                icon: null,
+                help: null,
+                propertyOrder: 2
+              }
+            },
+            required: ['first', 'second'],
+            icon: null,
+            help: null,
+            propertyOrder: 1
+          }
+        },
+        required: ['newEmail'],
+        submit_url: '',
+        submit_method: 'POST'
+      }
+    },
     image: {
       values: [],
       schema: {
@@ -2214,6 +2366,25 @@ export default {
           }
         },
         required: ['currentPassword'],
+        submit_url: '',
+        submit_method: 'POST'
+      }
+    },
+    dedication: {
+      values: [],
+      schema: {
+        title: 'profile_image',
+        type: 'object',
+        properties: {
+          supportedTreecounter: {
+            type: 'hidden',
+            title: 'label.dedication_treecounter',
+            widget: 'hidden',
+            icon: null,
+            help: null,
+            propertyOrder: 1
+          }
+        },
         submit_url: '',
         submit_method: 'POST'
       }
@@ -2250,7 +2421,7 @@ export default {
             ],
             enum_titles: ['Primary', 'Secondary', 'Higher', 'Other'],
             type: 'string',
-            title: null,
+            title: 'label.sub_type',
             icon: null,
             help: null,
             propertyOrder: 2
@@ -2365,7 +2536,6 @@ export default {
               'ER',
               'EE',
               'ET',
-              'EZ',
               'FK',
               'FO',
               'FJ',
@@ -2471,6 +2641,8 @@ export default {
               'PN',
               'PL',
               'PT',
+              'XA',
+              'XB',
               'PR',
               'QA',
               'RE',
@@ -2532,7 +2704,6 @@ export default {
               'UA',
               'AE',
               'GB',
-              'UN',
               'US',
               'UY',
               'UZ',
@@ -2622,7 +2793,6 @@ export default {
               'Eritrea',
               'Estonia',
               'Ethiopia',
-              'Eurozone',
               'Falkland Islands',
               'Faroe Islands',
               'Fiji',
@@ -2728,6 +2898,8 @@ export default {
               'Pitcairn Islands',
               'Poland',
               'Portugal',
+              'Pseudo-Accents',
+              'Pseudo-Bidi',
               'Puerto Rico',
               'Qatar',
               'Réunion',
@@ -2789,7 +2961,6 @@ export default {
               'Ukraine',
               'United Arab Emirates',
               'United Kingdom',
-              'United Nations',
               'United States',
               'Uruguay',
               'Uzbekistan',
@@ -2839,6 +3010,44 @@ export default {
           }
         },
         required: ['name', 'subType', 'country'],
+        submit_url: '',
+        submit_method: 'POST'
+      }
+    },
+    email: {
+      values: {
+        newEmail: []
+      },
+      schema: {
+        title: 'profile_email',
+        type: 'object',
+        properties: {
+          newEmail: {
+            title: null,
+            type: 'object',
+            properties: {
+              first: {
+                type: 'string',
+                title: 'label.new_email',
+                icon: null,
+                help: null,
+                propertyOrder: 1
+              },
+              second: {
+                type: 'string',
+                title: 'label.new_email_repeat',
+                icon: null,
+                help: null,
+                propertyOrder: 2
+              }
+            },
+            required: ['first', 'second'],
+            icon: null,
+            help: null,
+            propertyOrder: 1
+          }
+        },
+        required: ['newEmail'],
         submit_url: '',
         submit_method: 'POST'
       }
@@ -2954,6 +3163,25 @@ export default {
           }
         },
         required: ['currentPassword'],
+        submit_url: '',
+        submit_method: 'POST'
+      }
+    },
+    dedication: {
+      values: [],
+      schema: {
+        title: 'profile_image',
+        type: 'object',
+        properties: {
+          supportedTreecounter: {
+            type: 'hidden',
+            title: 'label.dedication_treecounter',
+            widget: 'hidden',
+            icon: null,
+            help: null,
+            propertyOrder: 1
+          }
+        },
         submit_url: '',
         submit_method: 'POST'
       }
@@ -2990,7 +3218,7 @@ export default {
               'Other'
             ],
             type: 'string',
-            title: null,
+            title: 'label.sub_type',
             icon: null,
             help: null,
             propertyOrder: 2
@@ -3105,7 +3333,6 @@ export default {
               'ER',
               'EE',
               'ET',
-              'EZ',
               'FK',
               'FO',
               'FJ',
@@ -3211,6 +3438,8 @@ export default {
               'PN',
               'PL',
               'PT',
+              'XA',
+              'XB',
               'PR',
               'QA',
               'RE',
@@ -3272,7 +3501,6 @@ export default {
               'UA',
               'AE',
               'GB',
-              'UN',
               'US',
               'UY',
               'UZ',
@@ -3362,7 +3590,6 @@ export default {
               'Eritrea',
               'Estonia',
               'Ethiopia',
-              'Eurozone',
               'Falkland Islands',
               'Faroe Islands',
               'Fiji',
@@ -3468,6 +3695,8 @@ export default {
               'Pitcairn Islands',
               'Poland',
               'Portugal',
+              'Pseudo-Accents',
+              'Pseudo-Bidi',
               'Puerto Rico',
               'Qatar',
               'Réunion',
@@ -3529,7 +3758,6 @@ export default {
               'Ukraine',
               'United Arab Emirates',
               'United Kingdom',
-              'United Nations',
               'United States',
               'Uruguay',
               'Uzbekistan',
@@ -3579,6 +3807,44 @@ export default {
           }
         },
         required: ['name', 'subType', 'country'],
+        submit_url: '',
+        submit_method: 'POST'
+      }
+    },
+    email: {
+      values: {
+        newEmail: []
+      },
+      schema: {
+        title: 'profile_email',
+        type: 'object',
+        properties: {
+          newEmail: {
+            title: null,
+            type: 'object',
+            properties: {
+              first: {
+                type: 'string',
+                title: 'label.new_email',
+                icon: null,
+                help: null,
+                propertyOrder: 1
+              },
+              second: {
+                type: 'string',
+                title: 'label.new_email_repeat',
+                icon: null,
+                help: null,
+                propertyOrder: 2
+              }
+            },
+            required: ['first', 'second'],
+            icon: null,
+            help: null,
+            propertyOrder: 1
+          }
+        },
+        required: ['newEmail'],
         submit_url: '',
         submit_method: 'POST'
       }
@@ -3694,6 +3960,25 @@ export default {
           }
         },
         required: ['currentPassword'],
+        submit_url: '',
+        submit_method: 'POST'
+      }
+    },
+    dedication: {
+      values: [],
+      schema: {
+        title: 'profile_image',
+        type: 'object',
+        properties: {
+          supportedTreecounter: {
+            type: 'hidden',
+            title: 'label.dedication_treecounter',
+            widget: 'hidden',
+            icon: null,
+            help: null,
+            propertyOrder: 1
+          }
+        },
         submit_url: '',
         submit_method: 'POST'
       }
@@ -3725,7 +4010,7 @@ export default {
             enum: ['government-city', 'government-state', 'government-country'],
             enum_titles: ['City', 'State', 'Country'],
             type: 'string',
-            title: null,
+            title: 'label.sub_type',
             icon: null,
             help: null,
             propertyOrder: 2
@@ -3840,7 +4125,6 @@ export default {
               'ER',
               'EE',
               'ET',
-              'EZ',
               'FK',
               'FO',
               'FJ',
@@ -3946,6 +4230,8 @@ export default {
               'PN',
               'PL',
               'PT',
+              'XA',
+              'XB',
               'PR',
               'QA',
               'RE',
@@ -4007,7 +4293,6 @@ export default {
               'UA',
               'AE',
               'GB',
-              'UN',
               'US',
               'UY',
               'UZ',
@@ -4097,7 +4382,6 @@ export default {
               'Eritrea',
               'Estonia',
               'Ethiopia',
-              'Eurozone',
               'Falkland Islands',
               'Faroe Islands',
               'Fiji',
@@ -4203,6 +4487,8 @@ export default {
               'Pitcairn Islands',
               'Poland',
               'Portugal',
+              'Pseudo-Accents',
+              'Pseudo-Bidi',
               'Puerto Rico',
               'Qatar',
               'Réunion',
@@ -4264,7 +4550,6 @@ export default {
               'Ukraine',
               'United Arab Emirates',
               'United Kingdom',
-              'United Nations',
               'United States',
               'Uruguay',
               'Uzbekistan',
@@ -4314,6 +4599,44 @@ export default {
           }
         },
         required: ['name', 'subType', 'country'],
+        submit_url: '',
+        submit_method: 'POST'
+      }
+    },
+    email: {
+      values: {
+        newEmail: []
+      },
+      schema: {
+        title: 'profile_email',
+        type: 'object',
+        properties: {
+          newEmail: {
+            title: null,
+            type: 'object',
+            properties: {
+              first: {
+                type: 'string',
+                title: 'label.new_email',
+                icon: null,
+                help: null,
+                propertyOrder: 1
+              },
+              second: {
+                type: 'string',
+                title: 'label.new_email_repeat',
+                icon: null,
+                help: null,
+                propertyOrder: 2
+              }
+            },
+            required: ['first', 'second'],
+            icon: null,
+            help: null,
+            propertyOrder: 1
+          }
+        },
+        required: ['newEmail'],
         submit_url: '',
         submit_method: 'POST'
       }
@@ -4429,6 +4752,25 @@ export default {
           }
         },
         required: ['currentPassword'],
+        submit_url: '',
+        submit_method: 'POST'
+      }
+    },
+    dedication: {
+      values: [],
+      schema: {
+        title: 'profile_image',
+        type: 'object',
+        properties: {
+          supportedTreecounter: {
+            type: 'hidden',
+            title: 'label.dedication_treecounter',
+            widget: 'hidden',
+            icon: null,
+            help: null,
+            propertyOrder: 1
+          }
+        },
         submit_url: '',
         submit_method: 'POST'
       }

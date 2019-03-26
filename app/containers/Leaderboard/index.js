@@ -111,6 +111,35 @@ class LeaderBoardContainer extends React.Component {
     }
   };
 
+  componentWillReceiveProps(nextProps) {
+    console.log('__componentWillReceiveProps__');
+
+    if (!this.props.navigation) {
+      const { match } = nextProps;
+      const sendNewQuery =
+        match.params.subSection != this.props.match.params.subSection;
+      this.setState(
+        {
+          tabInfo: {
+            tabs: tabs,
+            activeTab:
+              match && match.path.includes('explore')
+                ? 'app_explore'
+                : 'app_leaderboard'
+          },
+          sectionInfo: {
+            section: match && match.params.section,
+            subSection: match && match.params.subSection
+          },
+          queryResult: sendNewQuery ? null : this.state.queryResult
+        },
+        () => {
+          sendNewQuery && this.sendSearchQuery();
+        }
+      );
+    }
+  }
+
   componentWillMount() {
     ExploreDataAction().then(
       success => {

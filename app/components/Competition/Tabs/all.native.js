@@ -83,5 +83,6 @@ export default class AllCompetitions extends Component {
   }
 }
 AllCompetitions.propTypes = {
-  allCompetitions: PropTypes.any
+  allCompetitions: PropTypes.any,
+  onMoreClick: PropTypes.any
 };

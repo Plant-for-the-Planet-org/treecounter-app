@@ -7,6 +7,8 @@ import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import ActionButton from 'react-native-action-button';
 import CardLayout from '../../Common/Card';
+import PropTypes from 'prop-types';
+import FeaturedCompetitions from './featured.native';
 
 export default class MineCompetitions extends Component {
   constructor(props) {
@@ -15,7 +17,8 @@ export default class MineCompetitions extends Component {
     this.state = {
       expanded: false,
       pageIndex: 0,
-      showCompetitionForm: false
+      showCompetitionForm: false,
+      featuredCompetitions: []
     };
     this.onActionButtonPress = this.onActionButtonPress.bind(this);
   }
@@ -25,34 +28,54 @@ export default class MineCompetitions extends Component {
     });
   }
   componentDidMount() {
-    if (this.props.mineCompetitions.length === 0) {
+    let { allCompetitions } = this.props;
+    let featuredCompetitions = [];
+    if (allCompetitions.length > 0) {
+      allCompetitions.forEach(val => {
+        if (val.category === 'mine') {
+          val.competitions.forEach(comp => {
+            featuredCompetitions.push(comp);
+          });
+        }
+      });
+    }
+    this.setState({
+      featuredCompetitions: featuredCompetitions
+    });
+  }
+  componentWillReceiveProps(nextProps) {
+    let { allCompetitions } = nextProps;
+    let featuredCompetitions = [];
+    if (allCompetitions.length > 0) {
+      allCompetitions.forEach(val => {
+        if (val.category === 'mine') {
+          val.competitions.forEach(comp => {
+            featuredCompetitions.push(comp);
+          });
+        }
+      });
+    }
+    this.setState({
+      featuredCompetitions: featuredCompetitions
+    });
+    if (featuredCompetitions.length === 0) {
       this.setState({
         showCompetitionForm: true
       });
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log('nextProps', nextProps);
-    if (nextProps.mineCompetitions !== this.props.mineCompetitions) {
-      if (nextProps.mineCompetitions.length === 0) {
-        this.setState({
-          showCompetitionForm: true
-        });
-      } else {
-        this.setState({
-          showCompetitionForm: false
-        });
-      }
+    } else {
+      this.setState({
+        showCompetitionForm: false
+      });
     }
   }
 
   render() {
-    let { featuredProjects } = this.state;
+    let { featuredProjects, featuredCompetitions } = this.state;
     return !this.state.showCompetitionForm ? (
       <View style={styles.mineContainer}>
         <ScrollView style={styles.mineContainer}>
-          {this.props.mineCompetitions && this.props.mineCompetitions.length > 0
-            ? this.props.mineCompetitions.map(project => (
+          {featuredCompetitions.length > 0
+            ? featuredCompetitions.map(project => (
                 <CompetitionSnippet
                   key={'competition' + project.id}
                   cardStyle={styles.cardStyle}
@@ -80,3 +103,7 @@ export default class MineCompetitions extends Component {
     );
   }
 }
+MineCompetitions.propTypes = {
+  allCompetitions: PropTypes.any,
+  onMoreClick: PropTypes.any
+};

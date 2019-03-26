@@ -25,8 +25,7 @@ class Competiton extends React.Component {
         { key: 'featured', title: 'FEATURED' },
         { key: 'all', title: 'ALL' }
       ],
-      index: 1,
-      mineCompetitions: []
+      index: 1
     };
   }
   indexChange(index) {
@@ -35,27 +34,6 @@ class Competiton extends React.Component {
     });
   }
 
-  componentDidMount() {
-    fetchMineCompetitions().then(res => {
-      console.log(res.data);
-      let mineComeptitions = [];
-      if (res.data && res.data.owned && res.data.owned.length > 0) {
-        res.data.owned.forEach(val => {
-          val.category = 'owned';
-          mineComeptitions.push(val);
-        });
-      }
-      if (res.data && res.data.enrolled && res.data.enrolled.length > 0) {
-        res.data.enrolled.forEach(val => {
-          val.category = 'enrolled';
-          mineComeptitions.push(val);
-        });
-      }
-      this.setState({
-        mineCompetitions: mineComeptitions
-      });
-    });
-  }
   handleExpandedClicked = optionNumber => {
     this.setState({
       expandedOption: optionNumber
@@ -82,12 +60,7 @@ class Competiton extends React.Component {
   _renderSelectPlantScene = ({ route }) => {
     switch (route.key) {
       case 'mine':
-        return (
-          <MineCompetitions
-            {...this.props}
-            mineCompetitions={this.state.mineCompetitions}
-          />
-        );
+        return <MineCompetitions {...this.props} />;
       case 'featured':
         return <FeaturedCompetitions {...this.props} />;
       case 'all':

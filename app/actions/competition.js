@@ -90,7 +90,20 @@ export function fetchAllCompetitions() {
   return getAuthenticatedRequest('competitions_get', { category: 'all' });
 }
 export function fetchMineCompetitions() {
-  return getAuthenticatedRequest('competitionsMine_get');
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    getAuthenticatedRequest('competitionsMine_get', {
+      category: category,
+      limit: 100
+    }).then(res => {
+      dispatch(
+        mergeEntities(
+          normalize(res.data.merge.competitionPager[0], competitionPagerSchema)
+        )
+      );
+      dispatch(setProgressModelState(false));
+    });
+  };
 }
 export function fetchCompetitionDetail(id) {
   return dispatch => {

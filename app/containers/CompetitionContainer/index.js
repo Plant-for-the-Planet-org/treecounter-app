@@ -4,7 +4,10 @@ import Competiton from '../../components/Competition/index.native';
 import { updateRoute } from '../../helpers/routerHelper';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchCompetitions } from '../../actions/competition';
+import {
+  fetchCompetitions,
+  fetchMineCompetitions
+} from '../../actions/competition';
 import {
   competitionsSelector,
   getAllCompetitionsSelector
@@ -18,6 +21,7 @@ class CompetitionContainer extends React.Component {
   componentDidMount() {
     this.props.fetchCompetitions('featured');
     this.props.fetchCompetitions('all');
+    this.props.fetchMineCompetitions();
   }
 
   render() {
@@ -44,7 +48,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchCompetitions }, dispatch);
+  return bindActionCreators(
+    {
+      fetchCompetitions,
+      fetchMineCompetitions
+    },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -53,5 +63,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 CompetitionContainer.propTypes = {
   navigation: PropTypes.any,
   fetchCompetitions: PropTypes.any,
-  allCompetitions: PropTypes.any
+  allCompetitions: PropTypes.any,
+  fetchMineCompetitions: PropTypes.any
 };

@@ -81,11 +81,15 @@
 }
 
 .pftp-button-back__container {
-  display: block;
-  position: absolute;
-  left: 20px;
-  top: 20px;
+  display: flex;
+  align-self: flex-start;
+  margin-top: 20px;
+  margin-left: 20px;
+
   cursor: pointer;
+  .pftp-button-transparent {
+    color: $colorPrimaryAccentLight !important;
+  }
 }
 
 .pftp-addbutton {

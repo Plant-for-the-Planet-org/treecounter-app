@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TransparentButton from './TransparentButton';
-import { arrow_left_orange } from '../../../assets';
+import { arrow_left_orange_outline } from '../../../assets';
 
 const BackButton = ({ onClick, children, className }) => (
   <div
@@ -9,7 +9,7 @@ const BackButton = ({ onClick, children, className }) => (
     onClick={() => onClick()}
   >
     <TransparentButton onClick={onClick}>
-      <img src={arrow_left_orange} />
+      <img src={arrow_left_orange_outline} />
       {children}
     </TransparentButton>
   </div>

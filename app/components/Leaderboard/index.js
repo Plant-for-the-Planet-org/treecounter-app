@@ -66,13 +66,15 @@ export default class Leaderboard extends Component {
 
   getTableView = hasSubSection => {
     let listItemsUI = <LoadingIndicator />;
-    const { categoryInfo, sectionInfo } = this.props;
+    const { categoryInfo, sectionInfo, queryResultSelfData } = this.props;
     if (this.props.queryResult)
       listItemsUI = (
         <div className="leaderboard-table">
           <div className="table-header">
             <div className="table-header-item country">
-              {'   ' + categoryInfo.categoryHeader[sectionInfo.section]}
+              {hasSubSection && queryResultSelfData
+                ? queryResultSelfData.caption
+                : '   ' + categoryInfo.categoryHeader[sectionInfo.section]}
             </div>
             <div className="table-header-item planted">Planted</div>
             <div className="table-header-item other">Target</div>
@@ -225,5 +227,6 @@ Leaderboard.propTypes = {
   queryResult: PropTypes.array,
   mapInfo: PropTypes.object,
   sortingQuery: PropTypes.object,
-  handleBackButton: PropTypes.func
+  handleBackButton: PropTypes.func,
+  queryResultSelfData: PropTypes.any
 };

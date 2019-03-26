@@ -26,6 +26,7 @@ class LeaderBoardContainer extends React.Component {
     const { match } = props;
     this.state = {
       queryResult: null,
+      queryResultSelfData: null,
       exploreData: {},
       sectionInfo: {
         section: match && match.params.section,
@@ -70,7 +71,10 @@ class LeaderBoardContainer extends React.Component {
           success.data instanceof Object &&
           success.data.data
         ) {
-          this.setState({ queryResult: success.data.data });
+          this.setState({
+            queryResult: success.data.data,
+            queryResultSelfData: success.data.self
+          });
         }
       },
       error => {
@@ -241,6 +245,7 @@ class LeaderBoardContainer extends React.Component {
         navigation={this.props.navigation}
         handleScrollAnimation={this.props.handleScrollAnimation}
         handleBackButton={this.handleBackButton}
+        queryResultSelfData={this.state.queryResultSelfData}
       />
     );
   }

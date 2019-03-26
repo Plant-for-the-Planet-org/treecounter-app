@@ -54,6 +54,7 @@ export function leaveCompetition(id) {
           )
         );
       }
+      dispatch(fetchMineCompetitions());
       dispatch(setProgressModelState(false));
     });
   };
@@ -82,6 +83,7 @@ export function enrollCompetition(id) {
           )
         );
       }
+      dispatch(fetchMineCompetitions());
       dispatch(setProgressModelState(false));
     });
   };

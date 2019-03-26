@@ -94,10 +94,7 @@ export function fetchAllCompetitions() {
 export function fetchMineCompetitions() {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    getAuthenticatedRequest('competitionsMine_get', {
-      category: category,
-      limit: 100
-    }).then(res => {
+    getAuthenticatedRequest('competitionsMine_get').then(res => {
       dispatch(
         mergeEntities(
           normalize(res.data.merge.competitionPager[0], competitionPagerSchema)

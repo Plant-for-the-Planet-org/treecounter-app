@@ -5,7 +5,7 @@ import {
   LeaderBoardDataAction
 } from '../../actions/exploreAction';
 import PropTypes from 'prop-types';
-import { updateRoute } from '../../helpers/routerHelper';
+import { updateRoute, replaceRoute } from '../../helpers/routerHelper';
 import i18n from '../../locales/i18n';
 import { objectToQueryParams, queryParamsToObject } from '../../helpers/utils';
 
@@ -31,6 +31,7 @@ class LeaderBoardContainer extends React.Component {
         section: match && match.params.section,
         subSection: match && match.params.subSection
       },
+      sortingQueryParam: {},
       tabInfo: {
         tabs: tabs,
         activeTab:
@@ -59,8 +60,8 @@ class LeaderBoardContainer extends React.Component {
         this.state.categoryInfo.categoryKeys &&
         this.state.categoryInfo.categoryKeys[0]),
     subSection = this.state.sectionInfo.subSection,
-    orderBy = this.state.sortingQuery.orderBy,
-    period = this.state.sortingQuery.period
+    orderBy = this.state.sortingQueryParam.orderBy,
+    period = this.state.sortingQueryParam.period
   ) {
     LeaderBoardDataAction({ section, orderBy, period, subSection }).then(
       success => {
@@ -78,10 +79,28 @@ class LeaderBoardContainer extends React.Component {
     );
   }
 
+  handleBackButton = (
+    section = this.state.sectionInfo.section,
+    orderBy = this.state.sortingQueryParam.orderBy,
+    period = this.state.sortingQueryParam.period,
+    subSection = this.state.sectionInfo.subSection
+  ) => {
+    if (!this.props.navigation) {
+      replaceRoute(
+        this.state.tabInfo.activeTab,
+        null,
+        null,
+        { section },
+        objectToQueryParams({ orderBy, period })
+      );
+      return;
+    }
+  };
+
   handleSectionChange = (
     section = this.state.sectionInfo.section,
-    orderBy = this.state.sortingQuery.orderBy,
-    period = this.state.sortingQuery.period,
+    orderBy = this.state.sortingQueryParam.orderBy,
+    period = this.state.sortingQueryParam.period,
     subSection = this.state.sectionInfo.subSection
   ) => {
     if (!this.props.navigation) {
@@ -92,10 +111,12 @@ class LeaderBoardContainer extends React.Component {
         { section },
         objectToQueryParams({ orderBy, period })
       );
+      return;
     }
 
     this.setState({
-      sectionInfo: { section, query: { orderBy, period } },
+      sectionInfo: { section, subSection },
+      sortingQueryParam: { orderBy, period },
       queryResult: null
     });
     this.sendSearchQuery(section, subSection, orderBy, period);
@@ -111,13 +132,22 @@ class LeaderBoardContainer extends React.Component {
     }
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps, nextState) {
     console.log('__componentWillReceiveProps__');
 
     if (!this.props.navigation) {
       const { match } = nextProps;
+      const newSortingQueryParam = this.getDefaultQuery(
+        nextProps && nextProps.location && nextProps.location.search,
+        this.state.sortingQueryParam.orderBy,
+        this.state.sortingQueryParam.period
+      );
+      // const
       const sendNewQuery =
-        match.params.subSection != this.props.match.params.subSection;
+        match.params.subSection != this.props.match.params.subSection ||
+        match.params.section != this.props.match.params.section ||
+        newSortingQueryParam.orderBy != this.state.sortingQueryParam.orderBy ||
+        newSortingQueryParam.period != this.state.sortingQueryParam.period;
       this.setState(
         {
           tabInfo: {
@@ -131,6 +161,7 @@ class LeaderBoardContainer extends React.Component {
             section: match && match.params.section,
             subSection: match && match.params.subSection
           },
+          sortingQueryParam: newSortingQueryParam,
           queryResult: sendNewQuery ? null : this.state.queryResult
         },
         () => {
@@ -140,7 +171,7 @@ class LeaderBoardContainer extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     ExploreDataAction().then(
       success => {
         const categoryInfo = {};
@@ -181,7 +212,7 @@ class LeaderBoardContainer extends React.Component {
           orderByOptionsInfo,
           timePeriodsInfo,
           mapInfo,
-          sortingQuery: this.getDefaultQuery(
+          sortingQueryParam: this.getDefaultQuery(
             this.props && this.props.location && this.props.location.search,
             orderByOptionsInfo.orderByOptionsKeys[0],
             timePeriodsInfo.timePeriodsKeys[0]
@@ -206,9 +237,10 @@ class LeaderBoardContainer extends React.Component {
         handleTabChange={this.handleTabChange}
         queryResult={this.state.queryResult}
         mapInfo={this.state.mapInfo}
-        sortingQuery={this.state.sortingQuery}
+        sortingQuery={this.state.sortingQueryParam}
         navigation={this.props.navigation}
         handleScrollAnimation={this.props.handleScrollAnimation}
+        handleBackButton={this.handleBackButton}
       />
     );
   }

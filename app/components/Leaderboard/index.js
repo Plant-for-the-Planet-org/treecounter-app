@@ -10,7 +10,7 @@ import DescriptionHeading from '../../components/Common/Heading/DescriptionHeadi
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import i18n from '../../locales/i18n';
 import { categoryIcons } from '../../helpers/utils';
-
+import BackButton from '../Common/Button/BackButton';
 export default class Leaderboard extends Component {
   constructor(props) {
     super(props);
@@ -64,7 +64,7 @@ export default class Leaderboard extends Component {
     return categoryUI;
   };
 
-  getTableView = () => {
+  getTableView = hasSubSection => {
     let listItemsUI = <LoadingIndicator />;
     const { categoryInfo, sectionInfo } = this.props;
     if (this.props.queryResult)
@@ -112,7 +112,9 @@ export default class Leaderboard extends Component {
       categoryInfo,
       orderByOptionsInfo,
       timePeriodsInfo,
-      sortingQuery
+      sortingQuery,
+      sectionInfo,
+      handleBackButton
     } = this.props;
     if (!categoryInfo) {
       return (
@@ -124,6 +126,16 @@ export default class Leaderboard extends Component {
     let isMapTab = tabInfo.activeTab === tabInfo.tabs[0].id;
     return (
       <div className="app-container__content--center sidenav-wrapper">
+        {!isMapTab && sectionInfo.subSection ? (
+          <BackButton
+            onClick={() => {
+              // this.handleCategoryChange(sectionInfo.section);
+              this.props.handleBackButton();
+            }}
+          >
+            {categoryInfo.categoryHeader[sectionInfo.section]}
+          </BackButton>
+        ) : null}
         <TextHeading>
           {i18n.t('label.explore')}
           {isMapTab ? (
@@ -189,7 +201,7 @@ export default class Leaderboard extends Component {
                 </div>
 
                 <div className="leaderboard-list__table">
-                  {this.getTableView()}
+                  {this.getTableView(!!sectionInfo.subSection)}
                 </div>
               </div>
             ) : (
@@ -212,5 +224,6 @@ Leaderboard.propTypes = {
   handleTabChange: PropTypes.func,
   queryResult: PropTypes.array,
   mapInfo: PropTypes.object,
-  sortingQuery: PropTypes.object
+  sortingQuery: PropTypes.object,
+  handleBackButton: PropTypes.func
 };

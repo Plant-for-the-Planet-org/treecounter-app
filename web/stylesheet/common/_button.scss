@@ -1,6 +1,6 @@
 .pftp-button-primary {
- background-color: $colorPrimary;
- 
+  background-color: $colorPrimary;
+
   border: none;
   color: white;
   padding: 10px 20px;
@@ -78,6 +78,14 @@
   span {
     padding: 0 10px;
   }
+}
+
+.pftp-button-back__container {
+  display: block;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  cursor: pointer;
 }
 
 .pftp-addbutton {

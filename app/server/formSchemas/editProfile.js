@@ -761,25 +761,6 @@ export default {
         submit_url: '',
         submit_method: 'POST'
       }
-    },
-    dedication: {
-      values: [],
-      schema: {
-        title: 'profile_image',
-        type: 'object',
-        properties: {
-          supportedTreecounter: {
-            type: 'hidden',
-            title: 'label.dedication_treecounter',
-            widget: 'hidden',
-            icon: null,
-            help: null,
-            propertyOrder: 1
-          }
-        },
-        submit_url: '',
-        submit_method: 'POST'
-      }
     }
   },
   individual: {
@@ -1577,25 +1558,6 @@ export default {
         submit_url: '',
         submit_method: 'POST'
       }
-    },
-    dedication: {
-      values: [],
-      schema: {
-        title: 'profile_image',
-        type: 'object',
-        properties: {
-          supportedTreecounter: {
-            type: 'hidden',
-            title: 'label.dedication_treecounter',
-            widget: 'hidden',
-            icon: null,
-            help: null,
-            propertyOrder: 1
-          }
-        },
-        submit_url: '',
-        submit_method: 'POST'
-      }
     }
   },
   company: {
@@ -2366,25 +2328,6 @@ export default {
           }
         },
         required: ['currentPassword'],
-        submit_url: '',
-        submit_method: 'POST'
-      }
-    },
-    dedication: {
-      values: [],
-      schema: {
-        title: 'profile_image',
-        type: 'object',
-        properties: {
-          supportedTreecounter: {
-            type: 'hidden',
-            title: 'label.dedication_treecounter',
-            widget: 'hidden',
-            icon: null,
-            help: null,
-            propertyOrder: 1
-          }
-        },
         submit_url: '',
         submit_method: 'POST'
       }
@@ -3166,25 +3109,6 @@ export default {
         submit_url: '',
         submit_method: 'POST'
       }
-    },
-    dedication: {
-      values: [],
-      schema: {
-        title: 'profile_image',
-        type: 'object',
-        properties: {
-          supportedTreecounter: {
-            type: 'hidden',
-            title: 'label.dedication_treecounter',
-            widget: 'hidden',
-            icon: null,
-            help: null,
-            propertyOrder: 1
-          }
-        },
-        submit_url: '',
-        submit_method: 'POST'
-      }
     }
   },
   organization: {
@@ -3963,25 +3887,6 @@ export default {
         submit_url: '',
         submit_method: 'POST'
       }
-    },
-    dedication: {
-      values: [],
-      schema: {
-        title: 'profile_image',
-        type: 'object',
-        properties: {
-          supportedTreecounter: {
-            type: 'hidden',
-            title: 'label.dedication_treecounter',
-            widget: 'hidden',
-            icon: null,
-            help: null,
-            propertyOrder: 1
-          }
-        },
-        submit_url: '',
-        submit_method: 'POST'
-      }
     }
   },
   government: {
@@ -4752,25 +4657,6 @@ export default {
           }
         },
         required: ['currentPassword'],
-        submit_url: '',
-        submit_method: 'POST'
-      }
-    },
-    dedication: {
-      values: [],
-      schema: {
-        title: 'profile_image',
-        type: 'object',
-        properties: {
-          supportedTreecounter: {
-            type: 'hidden',
-            title: 'label.dedication_treecounter',
-            widget: 'hidden',
-            icon: null,
-            help: null,
-            propertyOrder: 1
-          }
-        },
         submit_url: '',
         submit_method: 'POST'
       }

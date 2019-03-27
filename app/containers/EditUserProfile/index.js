@@ -8,14 +8,14 @@ import {
   updatePlantProject,
   deletePlantProject,
   addPlantProject,
-  deleteUserProfile
+  deleteUserProfile,
+  updateEmail
 } from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
 import { logoutUser } from '../../actions/authActions';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
-import { getRequest } from '../../utils/api';
 import { unfollowUser } from '../../actions/followActions';
 
 const profileTypeLabel = {
@@ -198,6 +198,7 @@ class EditUserProfileContainer extends React.Component {
         openPasswordUpdatedDialog={this.state.showPasswordDialog}
         handlePaswordUpdatedClose={this.handleCloseModal}
         deleteProfile={this.deleteProfile}
+        updateEmail={this.props.updateEmail}
         updatePlantProject={this.updatePlantProject}
         deletePlantProject={this.deletePlantProject}
         addPlantProject={this.addPlantProject}
@@ -243,6 +244,7 @@ EditUserProfileContainer.propTypes = {
   deletePlantProject: PropTypes.func,
   addPlantProject: PropTypes.func,
   deleteUserProfile: PropTypes.func,
+  updateEmail: PropTypes.func,
   navigation: PropTypes.any,
   logoutUser: PropTypes.func,
   unfollowUser: PropTypes.func,

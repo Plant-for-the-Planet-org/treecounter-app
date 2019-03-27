@@ -11,6 +11,9 @@
   "logout": "Logout",
   "save_changes": "Save Changes",
   "about_me": "About me",
+  "change_email": "Change Email",
+  "new_email": "New Email",
+  "new_email_repeat": "Confirm New Email",
   "change_password": "Change password",
   "delete_profile": "Delete Profile",
   "un_subscribe": "Following",
@@ -24,7 +27,6 @@
   "success_title": "Success",
   "about_us": "About",
   "open_source_license": "Open Source License",
-  "license_credit_info":
-    "This Application uses Open source components.you can find the source code of their open source projects along with license information below. we acknowledge and are greatful to these developers for their contributions to open source",
+  "license_credit_info": "This Application uses Open source components.you can find the source code of their open source projects along with license information below. we acknowledge and are greatful to these developers for their contributions to open source",
   "not_following_anybody": "You are not following anybody"
 }

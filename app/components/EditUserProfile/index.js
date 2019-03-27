@@ -132,6 +132,15 @@ export default class EditUserProfile extends React.Component {
     }
   };
 
+  changeEmail = () => {
+    let formRef = 'change_email';
+    console.log(this.refs[formRef].validate());
+
+    let value = this.refs[formRef].getValue();
+
+    this.props.updateEmail(value);
+  };
+
   getFormSchemaOption = (userType, profileType) => {
     let schemaOptions = parsedSchema[userType][profileType].schemaOptions;
     if (profileType == 'password') {
@@ -311,6 +320,24 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
 
+        <CardLayout className="user-profile__form-group">
+          <div className="form-group__heading">
+            {i18n.t('label.change_email')}
+          </div>
+          <TCombForm
+            ref={'change_email'}
+            type={parsedSchema[type].email.transformedSchema}
+            options={this.getFormSchemaOption(type, 'email')}
+          />
+          <PrimaryButton
+            onClick={() => {
+              this.changeEmail();
+            }}
+          >
+            {i18n.t('label.save_changes')}
+          </PrimaryButton>
+        </CardLayout>
+
         {treeCounter &&
           treeCounter.followeeIds && (
             <CardLayout className="user-profile__form-group">
@@ -381,6 +408,7 @@ EditUserProfile.propTypes = {
   openPasswordUpdatedDialog: PropTypes.bool,
   handlePaswordUpdatedClose: PropTypes.func,
   deleteProfile: PropTypes.func.isRequired,
+  updateEmail: PropTypes.func,
   updatePlantProject: PropTypes.func.isRequired,
   deletePlantProject: PropTypes.func.isRequired,
   addPlantProject: PropTypes.func.isRequired,

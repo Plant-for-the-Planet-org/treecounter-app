@@ -164,3 +164,26 @@ export function deleteUserProfile(userProfile) {
     });
   };
 }
+
+export function updateEmail(newEmail) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    return new Promise(function(resolve, reject) {
+      putAuthenticatedRequest('profileEmail_put', { newEmail })
+        .then(res => {
+          debug(res.status);
+          debug(res);
+          if (res.data && res.data instanceof Object) {
+            dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
+          }
+          resolve(res.data);
+          dispatch(setProgressModelState(false));
+        })
+        .catch(err => {
+          debug(err);
+          reject(err);
+          dispatch(setProgressModelState(false));
+        });
+    });
+  };
+}

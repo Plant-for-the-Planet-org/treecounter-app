@@ -18,7 +18,7 @@ export default (HeaderRight = function(navigation, userProfile, isLoggedIn) {
 
   function renderShareButtons() {
     let { state } = navigation;
-    let pathname = state.index
+    let pathname = state.hasOwnProperty('index')
       ? state.routes[state.index].routeName
       : state.routeName;
     if (

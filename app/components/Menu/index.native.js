@@ -77,6 +77,24 @@ export default class Menu extends Component {
     // this handles the use case where the app is running in the background and is activated by the listener...
     // Alert.alert(‘Linking Listener’,‘url  ’ + event.url)
     this.resetStackToProperRoute(event.url);
+    if (event.url.indexOf('signup') > 0) {
+      this.handleOpenURL(event.url);
+    }
+  };
+
+  handleOpenURL = url => {
+    let linkArr = url.split('/');
+    if (linkArr && linkArr.length > 0) {
+      if (linkArr[1] === 'signup') {
+        if (linkArr.length > 2) {
+          this.props.navigation.navigate(getLocalRoute('app_signup'), {
+            profileTypeParam: linkArr[2]
+          });
+        } else {
+          this.props.navigation.navigate(getLocalRoute('app_signup'));
+        }
+      }
+    }
   };
 
   resetStackToProperRoute = url => {

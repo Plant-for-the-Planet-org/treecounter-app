@@ -54,6 +54,7 @@ import DownloadAppModal from '../DownloadAppStore';
 import AppPaymentContainer from '../../containers/AppPayment';
 import BodyErrorBoundary from '../ErrorBoundry/bodyErrorBoundry';
 import PageNotFound from '../ErrorBoundry/404';
+import WidgetShareContainer from '../../containers/WidgetsShare';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -255,7 +256,7 @@ class TreeCounter extends Component {
             {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
             <Route
               path={getLocalRoute('app_giftTrees')}
-              component={GiftTreesContainer}
+              component={WidgetShareContainer}
             />
             <Route
               path={getLocalRoute('app_selectProject')}
@@ -284,6 +285,10 @@ class TreeCounter extends Component {
             <Route
               path={getLocalRoute('app_manageProjects')}
               component={ManageProjectContainer}
+            />
+            <PrivateRoute
+              path={'http://localhost:8080/app_dev.php/widget-share'}
+              component={DonationTreesContainer}
             />
             <Route component={PageNotFound} />
           </Switch>

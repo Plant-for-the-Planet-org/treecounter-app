@@ -169,7 +169,7 @@ export function updateEmail(newEmail) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
-      putAuthenticatedRequest('profileEmail_put', { newEmail })
+      putAuthenticatedRequest('profileEmail_put', { ...newEmail })
         .then(res => {
           debug(res.status);
           debug(res);

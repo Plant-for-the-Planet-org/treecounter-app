@@ -5,7 +5,7 @@
       "tokens": [
         [
           "text",
-          "\/api\/login_check"
+          "/api/login_check"
         ]
       ],
       "defaults": [],
@@ -18,23 +18,23 @@
       "tokens": [
         [
           "text",
-          "\/forgotPassword"
+          "/forgotPassword"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/auth"
+          "/auth"
         ]
       ],
       "defaults": {
@@ -51,23 +51,23 @@
       "tokens": [
         [
           "text",
-          "\/resetPassword"
+          "/resetPassword"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/auth"
+          "/auth"
         ]
       ],
       "defaults": {
@@ -84,23 +84,23 @@
       "tokens": [
         [
           "text",
-          "\/resetPassword"
+          "/resetPassword"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/auth"
+          "/auth"
         ]
       ],
       "defaults": {
@@ -117,23 +117,23 @@
       "tokens": [
         [
           "text",
-          "\/sendActivationLink"
+          "/sendActivationLink"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -150,23 +150,23 @@
       "tokens": [
         [
           "text",
-          "\/accountActivate"
+          "/accountActivate"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/auth"
+          "/auth"
         ]
       ],
       "defaults": {
@@ -183,29 +183,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "userProfile"
         ],
         [
           "text",
-          "\/accountActivationToken"
+          "/accountActivationToken"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/auth"
+          "/auth"
         ]
       ],
       "defaults": {
@@ -222,29 +222,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "userProfile"
         ],
         [
           "text",
-          "\/accountDeActivate"
+          "/accountDeActivate"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/auth"
+          "/auth"
         ]
       ],
       "defaults": {
@@ -261,23 +261,23 @@
       "tokens": [
         [
           "text",
-          "\/token_refresh"
+          "/token_refresh"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -287,6 +287,105 @@
       "hosttokens": [],
       "methods": [
         "POST"
+      ],
+      "schemes": []
+    },
+    "challenge_form": {
+      "tokens": [
+        [
+          "text",
+          "/challengeForm"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "challengeResponse_form": {
+      "tokens": [
+        [
+          "text",
+          "/challengeResponseForm"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "challengeDecline_form": {
+      "tokens": [
+        [
+          "text",
+          "/challengeDeclineForm"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
       ],
       "schemes": []
     },
@@ -294,23 +393,23 @@
       "tokens": [
         [
           "text",
-          "\/challenge"
+          "/challenge"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -323,33 +422,33 @@
       ],
       "schemes": []
     },
-    "challengeAccept_put": {
+    "challenge_put": {
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "token"
         ],
         [
           "text",
-          "\/challenge"
+          "/challenge"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -366,29 +465,500 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "token"
         ],
         [
           "text",
-          "\/challenge"
+          "/challenge"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "PUT"
+      ],
+      "schemes": []
+    },
+    "competition_form": {
+      "tokens": [
+        [
+          "text",
+          "/competitionForm"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "competitions_get": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "category"
+        ],
+        [
+          "text",
+          "/competitions"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/public"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "competitionsMine_get": {
+      "tokens": [
+        [
+          "text",
+          "/competitionsMine"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "competition_get": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "uid"
+        ],
+        [
+          "text",
+          "/competition"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/public"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "competition_post": {
+      "tokens": [
+        [
+          "text",
+          "/competition"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "POST"
+      ],
+      "schemes": []
+    },
+    "competition_put": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "competition"
+        ],
+        [
+          "text",
+          "/competition"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "PUT"
+      ],
+      "schemes": []
+    },
+    "competition_delete": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "competition"
+        ],
+        [
+          "text",
+          "/competition"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "DELETE"
+      ],
+      "schemes": []
+    },
+    "competitionInvitation_form": {
+      "tokens": [
+        [
+          "text",
+          "/competitionInvitationForm"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "competitionEnroll_post": {
+      "tokens": [
+        [
+          "text",
+          "/competitionEnroll"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "POST"
+      ],
+      "schemes": []
+    },
+    "competitionLeave_post": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "competition"
+        ],
+        [
+          "text",
+          "/competitionLeave"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "POST"
+      ],
+      "schemes": []
+    },
+    "competitionInvitation_post": {
+      "tokens": [
+        [
+          "text",
+          "/competitionInvitation"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "POST"
+      ],
+      "schemes": []
+    },
+    "competitionEnrollment_delete": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "token"
+        ],
+        [
+          "text",
+          "/competitionEnrollment"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "DELETE"
+      ],
+      "schemes": []
+    },
+    "competitionEnrollment_put": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "token"
+        ],
+        [
+          "text",
+          "/competitionEnrollment"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
         ]
       ],
       "defaults": {
@@ -405,23 +975,23 @@
       "tokens": [
         [
           "text",
-          "\/loadUserProfile"
+          "/loadUserProfile"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -438,23 +1008,23 @@
       "tokens": [
         [
           "text",
-          "\/loadLoginData"
+          "/loadLoginData"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -471,29 +1041,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "category"
         ],
         [
           "text",
-          "\/menu"
+          "/menu"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -511,23 +1081,23 @@
       "tokens": [
         [
           "text",
-          "\/followSubscribe"
+          "/followSubscribe"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -544,23 +1114,23 @@
       "tokens": [
         [
           "text",
-          "\/followUnSubscribe"
+          "/followUnSubscribe"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -577,23 +1147,23 @@
       "tokens": [
         [
           "text",
-          "\/forms"
+          "/forms"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -610,23 +1180,23 @@
       "tokens": [
         [
           "text",
-          "\/targets\/updateForm"
+          "/targets/updateForm"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -643,23 +1213,23 @@
       "tokens": [
         [
           "text",
-          "\/targets"
+          "/targets"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -676,23 +1246,23 @@
       "tokens": [
         [
           "text",
-          "\/donationContributionForm"
+          "/donationContributionForm"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -709,23 +1279,23 @@
       "tokens": [
         [
           "text",
-          "\/giftDonationContributionForm"
+          "/giftDonationContributionForm"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -742,29 +1312,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "plantProject"
         ],
         [
           "text",
-          "\/donationContributions"
+          "/donationContributions"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -781,29 +1351,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "plantProject"
         ],
         [
           "text",
-          "\/giftDonationContributions"
+          "/giftDonationContributions"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -820,29 +1390,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "token"
         ],
         [
           "text",
-          "\/donationByToken"
+          "/donationByToken"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -859,23 +1429,23 @@
       "tokens": [
         [
           "text",
-          "\/plantContributionForms"
+          "/plantContributionForms"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -892,29 +1462,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "plantContribution"
         ],
         [
           "text",
-          "\/plantContributions"
+          "/plantContributions"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -931,29 +1501,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "mode"
         ],
         [
           "text",
-          "\/plantContributions"
+          "/plantContributions"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -970,29 +1540,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "plantContribution"
         ],
         [
           "text",
-          "\/plantContributions"
+          "/plantContributions"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -1009,29 +1579,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "plantContribution"
         ],
         [
           "text",
-          "\/plantContributions"
+          "/plantContributions"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -1048,39 +1618,39 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "mode"
         ],
         [
           "text",
-          "\/plantContributions"
+          "/plantContributions"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "treecounter"
         ],
         [
           "text",
-          "\/treecounters"
+          "/treecounters"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -1097,23 +1667,23 @@
       "tokens": [
         [
           "text",
-          "\/userNotification"
+          "/userNotification"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1130,23 +1700,23 @@
       "tokens": [
         [
           "text",
-          "\/accessDenied"
+          "/accessDenied"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1163,23 +1733,23 @@
       "tokens": [
         [
           "text",
-          "\/loadTpos"
+          "/loadTpos"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1196,23 +1766,23 @@
       "tokens": [
         [
           "text",
-          "\/currencies"
+          "/currencies"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1229,29 +1799,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "category"
         ],
         [
           "text",
-          "\/menu"
+          "/menu"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1269,23 +1839,23 @@
       "tokens": [
         [
           "text",
-          "\/signupTypes"
+          "/signupTypes"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1302,23 +1872,23 @@
       "tokens": [
         [
           "text",
-          "\/registrationTypes"
+          "/registrationTypes"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1335,23 +1905,23 @@
       "tokens": [
         [
           "text",
-          "\/exploreData"
+          "/exploreData"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1368,35 +1938,35 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "subSection"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "section"
         ],
         [
           "text",
-          "\/exploreQuery"
+          "/exploreQuery"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1414,29 +1984,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "uid"
         ],
         [
           "text",
-          "\/treecounter"
+          "/treecounter"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1454,23 +2024,23 @@
       "tokens": [
         [
           "text",
-          "\/eventPledgeForm"
+          "/eventPledgeForm"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1487,23 +2057,23 @@
       "tokens": [
         [
           "text",
-          "\/pledgeEvents"
+          "/pledgeEvents"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1520,29 +2090,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "eventSlug"
         ],
         [
           "text",
-          "\/pledgeEvent"
+          "/pledgeEvent"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1559,33 +2129,33 @@
       "tokens": [
         [
           "text",
-          "\/eventPledge"
+          "/eventPledge"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "pledgeEventSlug"
         ],
         [
           "text",
-          "\/pledgeEvent"
+          "/pledgeEvent"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1602,23 +2172,23 @@
       "tokens": [
         [
           "text",
-          "\/target"
+          "/target"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1635,29 +2205,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "sort"
         ],
         [
           "text",
-          "\/target"
+          "/target"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1675,29 +2245,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "plantProject"
         ],
         [
           "text",
-          "\/donationContributions"
+          "/donationContributions"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1714,29 +2284,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "plantProject"
         ],
         [
           "text",
-          "\/giftDonationContributions"
+          "/giftDonationContributions"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1753,29 +2323,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "token"
         ],
         [
           "text",
-          "\/paymentInfo"
+          "/paymentInfo"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1792,29 +2362,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "token"
         ],
         [
           "text",
-          "\/pay"
+          "/pay"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1831,23 +2401,23 @@
       "tokens": [
         [
           "text",
-          "\/faqs"
+          "/faqs"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1864,23 +2434,23 @@
       "tokens": [
         [
           "text",
-          "\/privacy"
+          "/privacy"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1897,23 +2467,23 @@
       "tokens": [
         [
           "text",
-          "\/imprint"
+          "/imprint"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/public"
+          "/public"
         ]
       ],
       "defaults": {
@@ -1930,23 +2500,23 @@
       "tokens": [
         [
           "text",
-          "\/validateCode"
+          "/validateCode"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -1963,23 +2533,23 @@
       "tokens": [
         [
           "text",
-          "\/convertCode"
+          "/convertCode"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -1996,23 +2566,23 @@
       "tokens": [
         [
           "text",
-          "\/signupForms"
+          "/signupForms"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/auth"
+          "/auth"
         ]
       ],
       "defaults": {
@@ -2029,23 +2599,23 @@
       "tokens": [
         [
           "text",
-          "\/profileUpdateForms"
+          "/profileUpdateForms"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/auth"
+          "/auth"
         ]
       ],
       "defaults": {
@@ -2062,29 +2632,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "profileType"
         ],
         [
           "text",
-          "\/signup"
+          "/signup"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/auth"
+          "/auth"
         ]
       ],
       "defaults": {
@@ -2101,23 +2671,23 @@
       "tokens": [
         [
           "text",
-          "\/profileUpdate"
+          "/profileUpdate"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2134,23 +2704,23 @@
       "tokens": [
         [
           "text",
-          "\/profileImageUpdate"
+          "/profileImageUpdate"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2167,23 +2737,56 @@
       "tokens": [
         [
           "text",
-          "\/profilePasswordUpdate"
+          "/profilePasswordUpdate"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "PUT"
+      ],
+      "schemes": []
+    },
+    "profileEmail_put": {
+      "tokens": [
+        [
+          "text",
+          "/profileEmailUpdate"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
         ]
       ],
       "defaults": {
@@ -2200,23 +2803,56 @@
       "tokens": [
         [
           "text",
-          "\/profileAboutMe"
+          "/profileAboutMe"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "PUT"
+      ],
+      "schemes": []
+    },
+    "profileDedication_put": {
+      "tokens": [
+        [
+          "text",
+          "/profileDedication"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
         ]
       ],
       "defaults": {
@@ -2233,29 +2869,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "userProfile"
         ],
         [
           "text",
-          "\/profileDelete"
+          "/profileDelete"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2272,23 +2908,23 @@
       "tokens": [
         [
           "text",
-          "\/plantProjectForm"
+          "/plantProjectForm"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2305,23 +2941,23 @@
       "tokens": [
         [
           "text",
-          "\/plantProjects"
+          "/plantProjects"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2338,29 +2974,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "plantProject"
         ],
         [
           "text",
-          "\/plantProjects"
+          "/plantProjects"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2377,29 +3013,29 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "plantProject"
         ],
         [
           "text",
-          "\/plantProjects"
+          "/plantProjects"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2416,33 +3052,33 @@
       "tokens": [
         [
           "text",
-          "\/position"
+          "/position"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "plantProject"
         ],
         [
           "text",
-          "\/plantProjects"
+          "/plantProjects"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2459,23 +3095,23 @@
       "tokens": [
         [
           "text",
-          "\/userfeeds"
+          "/userfeeds"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2492,33 +3128,33 @@
       "tokens": [
         [
           "text",
-          "\/more"
+          "/more"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "lastId"
         ],
         [
           "text",
-          "\/userfeeds"
+          "/userfeeds"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2535,23 +3171,23 @@
       "tokens": [
         [
           "text",
-          "\/userfeeds\/markRead"
+          "/userfeeds/markRead"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2568,23 +3204,23 @@
       "tokens": [
         [
           "text",
-          "\/userfeeds\/markUnRead"
+          "/userfeeds/markUnRead"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2601,23 +3237,23 @@
       "tokens": [
         [
           "text",
-          "\/userfeedsAll"
+          "/userfeedsAll"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "_locale"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "version"
         ],
         [
           "text",
-          "\/api"
+          "/api"
         ]
       ],
       "defaults": {
@@ -2640,13 +3276,13 @@
         ],
         [
           "variable",
-          "\/",
+          "/",
           "[\\w]+",
           "domain"
         ],
         [
           "text",
-          "\/translations"
+          "/translations"
         ]
       ],
       "defaults": {
@@ -2667,7 +3303,7 @@
       "tokens": [
         [
           "text",
-          "\/api\/token\/refresh"
+          "/api/token/refresh"
         ]
       ],
       "defaults": [],
@@ -2680,19 +3316,19 @@
       "tokens": [
         [
           "variable",
-          "\/",
+          "/",
           ".+",
           "path"
         ],
         [
           "variable",
-          "\/",
+          "/",
           "[A-z0-9_-]*",
           "filter"
         ],
         [
           "text",
-          "\/media\/cache\/resolve"
+          "/media/cache/resolve"
         ]
       ],
       "defaults": [],
@@ -2710,7 +3346,7 @@
       "tokens": [
         [
           "text",
-          "\/search2"
+          "/search2"
         ]
       ],
       "defaults": [],
@@ -2725,7 +3361,7 @@
       "tokens": [
         [
           "text",
-          "\/select-project"
+          "/select-project"
         ]
       ],
       "defaults": [],
@@ -2740,7 +3376,7 @@
       "tokens": [
         [
           "text",
-          "\/"
+          "/"
         ]
       ],
       "defaults": [],
@@ -2755,13 +3391,13 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "eventSlug"
         ],
         [
           "text",
-          "\/pledge"
+          "/pledge"
         ]
       ],
       "defaults": [],
@@ -2776,7 +3412,7 @@
       "tokens": [
         [
           "text",
-          "\/explore"
+          "/explore"
         ]
       ],
       "defaults": [],
@@ -2791,19 +3427,19 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "subSection"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "section"
         ],
         [
           "text",
-          "\/leaderboard"
+          "/leaderboard"
         ]
       ],
       "defaults": {
@@ -2820,7 +3456,7 @@
       "tokens": [
         [
           "text",
-          "\/faq"
+          "/faq"
         ]
       ],
       "defaults": [],
@@ -2835,7 +3471,7 @@
       "tokens": [
         [
           "text",
-          "\/gift-trees"
+          "/gift-trees"
         ]
       ],
       "defaults": [],
@@ -2850,19 +3486,19 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "code"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "type"
         ],
         [
           "text",
-          "\/redeem"
+          "/redeem"
         ]
       ],
       "defaults": {
@@ -2880,19 +3516,19 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "code"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "type"
         ],
         [
           "text",
-          "\/claim"
+          "/claim"
         ]
       ],
       "defaults": [],
@@ -2907,13 +3543,13 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "token"
         ],
         [
           "text",
-          "\/account-activate"
+          "/account-activate"
         ]
       ],
       "defaults": [],
@@ -2928,7 +3564,7 @@
       "tokens": [
         [
           "text",
-          "\/account-activated"
+          "/account-activated"
         ]
       ],
       "defaults": [],
@@ -2943,7 +3579,7 @@
       "tokens": [
         [
           "text",
-          "\/account-activation"
+          "/account-activation"
         ]
       ],
       "defaults": [],
@@ -2958,7 +3594,7 @@
       "tokens": [
         [
           "text",
-          "\/forgot-password"
+          "/forgot-password"
         ]
       ],
       "defaults": [],
@@ -2973,13 +3609,13 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "token"
         ],
         [
           "text",
-          "\/reset-password"
+          "/reset-password"
         ]
       ],
       "defaults": [],
@@ -2994,7 +3630,7 @@
       "tokens": [
         [
           "text",
-          "\/password-sent"
+          "/password-sent"
         ]
       ],
       "defaults": [],
@@ -3009,7 +3645,7 @@
       "tokens": [
         [
           "text",
-          "\/home"
+          "/home"
         ]
       ],
       "defaults": [],
@@ -3024,7 +3660,7 @@
       "tokens": [
         [
           "text",
-          "\/login"
+          "/login"
         ]
       ],
       "defaults": [],
@@ -3039,7 +3675,7 @@
       "tokens": [
         [
           "text",
-          "\/donate-trees"
+          "/donate-trees"
         ]
       ],
       "defaults": [],
@@ -3054,13 +3690,13 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "supportedTreecounter"
         ],
         [
           "text",
-          "\/donate-trees"
+          "/donate-trees"
         ]
       ],
       "defaults": [],
@@ -3075,7 +3711,7 @@
       "tokens": [
         [
           "text",
-          "\/my-trees"
+          "/my-trees"
         ]
       ],
       "defaults": [],
@@ -3090,13 +3726,13 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "contribution"
         ],
         [
           "text",
-          "\/edit-trees"
+          "/edit-trees"
         ]
       ],
       "defaults": [],
@@ -3111,7 +3747,7 @@
       "tokens": [
         [
           "text",
-          "\/register-trees"
+          "/register-trees"
         ]
       ],
       "defaults": [],
@@ -3125,11 +3761,19 @@
     "app_signup": {
       "tokens": [
         [
+          "variable",
+          "/",
+          "[^/]++",
+          "type"
+        ],
+        [
           "text",
-          "\/signup"
+          "/signup"
         ]
       ],
-      "defaults": [],
+      "defaults": {
+        "type": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": [
@@ -3141,7 +3785,7 @@
       "tokens": [
         [
           "text",
-          "\/edit-profile"
+          "/edit-profile"
         ]
       ],
       "defaults": [],
@@ -3156,7 +3800,7 @@
       "tokens": [
         [
           "text",
-          "\/signup-success"
+          "/signup-success"
         ]
       ],
       "defaults": [],
@@ -3171,7 +3815,7 @@
       "tokens": [
         [
           "text",
-          "\/target"
+          "/target"
         ]
       ],
       "defaults": [],
@@ -3186,13 +3830,13 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "treecounter"
         ],
         [
           "text",
-          "\/t"
+          "/t"
         ]
       ],
       "defaults": [],
@@ -3207,7 +3851,7 @@
       "tokens": [
         [
           "text",
-          "\/stripe-connect"
+          "/stripe-connect"
         ]
       ],
       "defaults": [],
@@ -3222,7 +3866,28 @@
       "tokens": [
         [
           "text",
-          "\/competitions"
+          "/competitions"
+        ]
+      ],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "app_competition": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "competition"
+        ],
+        [
+          "text",
+          "/competition"
         ]
       ],
       "defaults": [],
@@ -3237,7 +3902,7 @@
       "tokens": [
         [
           "text",
-          "\/manage-plant-projects"
+          "/manage-plant-projects"
         ]
       ],
       "defaults": [],
@@ -3252,7 +3917,7 @@
       "tokens": [
         [
           "text",
-          "\/imprint"
+          "/imprint"
         ]
       ],
       "defaults": [],
@@ -3267,7 +3932,7 @@
       "tokens": [
         [
           "text",
-          "\/data-protection-policy"
+          "/data-protection-policy"
         ]
       ],
       "defaults": [],
@@ -3282,13 +3947,13 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "uid"
         ],
         [
           "text",
-          "\/user-notification"
+          "/user-notification"
         ]
       ],
       "defaults": [],
@@ -3303,7 +3968,7 @@
       "tokens": [
         [
           "text",
-          "\/challenge"
+          "/challenge"
         ]
       ],
       "defaults": [],
@@ -3318,19 +3983,19 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "token"
         ],
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "action"
         ],
         [
           "text",
-          "\/challenge-response"
+          "/challenge-response"
         ]
       ],
       "defaults": [],
@@ -3345,13 +4010,13 @@
       "tokens": [
         [
           "variable",
-          "\/",
-          "[^\/]++",
+          "/",
+          "[^/]++",
           "donationContribution"
         ],
         [
           "text",
-          "\/donation-payment"
+          "/donation-payment"
         ]
       ],
       "defaults": [],

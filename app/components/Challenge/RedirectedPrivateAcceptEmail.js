@@ -15,14 +15,7 @@ export default class RedirectedPrivateAcceptEmail extends Component {
   }
 
   componentWillMount() {
-    this.props
-      .acceptChallenge()
-      .then(res => {
-        this.setState({ success: true });
-      })
-      .catch(err => {
-        this.setState({ success: false });
-      });
+    this.props.acceptChallenge();
   }
   render() {
     return (

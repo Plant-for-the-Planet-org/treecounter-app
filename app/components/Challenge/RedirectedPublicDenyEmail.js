@@ -15,14 +15,7 @@ export default class RedirectedPublicDenyEmail extends Component {
   }
 
   componentWillMount() {
-    this.props
-      .denyChallenge()
-      .then(res => {
-        this.setState({ success: true });
-      })
-      .catch(err => {
-        this.setState({ success: false });
-      });
+    this.props.denyChallenge();
   }
 
   render() {

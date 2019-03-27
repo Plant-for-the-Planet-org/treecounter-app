@@ -33,21 +33,6 @@ export default class SignUp extends Component {
     });
   }
 
-  componentDidMount() {
-    Linking.getInitialURL()
-      .then(url => {
-        if (url) {
-          this.handleOpenURL(url);
-        }
-      })
-      .catch(err => {});
-    Linking.addEventListener('url', this.handleOpenURL);
-  }
-
-  componentWillUnmount() {
-    Linking.removeEventListener('url', this.handleOpenURL);
-  }
-
   verifyCallback = token => {
     // Here you will get the final token!!!
     this.setState({
@@ -55,27 +40,9 @@ export default class SignUp extends Component {
     });
   };
 
-  handleOpenURL = url => {
-    let linkArr = url.url.split('/');
-    if (linkArr && linkArr.length > 0) {
-      if (linkArr[1] === 'signup') {
-        if (linkArr.length > 2) {
-          this.setState({
-            ProfileTypeParam: linkArr[2],
-            Profiletype: 'individual'
-          });
-        } else {
-          this.setState({
-            ProfileTypeParam: null,
-            Profiletype: 'individual'
-          });
-        }
-      }
-    }
-  };
-
   render() {
-    let { Profiletype, ProfileTypeParam } = this.state;
+    let { Profiletype } = this.state;
+    let ProfileTypeParam = this.props.navigation.getParam('profileTypeParam');
     let type;
     if (signupFormSchema[ProfileTypeParam]) {
       type = ProfileTypeParam;
@@ -90,10 +57,12 @@ export default class SignUp extends Component {
           onReceiveToken={token => this.verifyCallback(token)}
         />
         <ImageBackground style={[styles.container, styles.parentContainer]}>
-          {!this.state.ProfileTypeParam ? (
+          {!ProfileTypeParam ? (
             <SignupTypes changeProfile={this.changeProfile} />
           ) : (
-            <Text>{type.toUpperCase()} Profile Type</Text>
+            <Text style={{ textAlign: 'center' }}>
+              {type.toUpperCase()} Profile Type
+            </Text>
           )}
           <View style={styles.inputContainer}>
             <Form

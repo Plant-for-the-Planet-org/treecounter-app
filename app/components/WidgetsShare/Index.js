@@ -105,6 +105,7 @@ export default class WidgetShare extends PureComponent {
           </div>
         </CardLayout>
         <CardLayout className="pftp-widgets-preview">
+          <h6>{i18n.t('label.widget_preview')}</h6>
           <iframe
             width="200"
             height="200"

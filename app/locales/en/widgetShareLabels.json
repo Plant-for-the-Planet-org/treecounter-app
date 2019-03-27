@@ -8,5 +8,6 @@
   "widget_global_tree_counter": "Global Tree counter",
   "widget_standard_tree_counter": "Standard Tree counter",
   "widget_progress_tree_counter": "Progress Tree counter",
-  "widget_donate_trees": "Donate Trees"
+  "widget_donate_trees": "Donate Trees",
+  "widget_preview": "Widget Preview"
 }

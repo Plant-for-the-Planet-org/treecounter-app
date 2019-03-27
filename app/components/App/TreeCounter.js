@@ -256,7 +256,7 @@ class TreeCounter extends Component {
             {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
             <Route
               path={getLocalRoute('app_giftTrees')}
-              component={WidgetShareContainer}
+              component={GiftTreesContainer}
             />
             <Route
               path={getLocalRoute('app_selectProject')}
@@ -287,8 +287,8 @@ class TreeCounter extends Component {
               component={ManageProjectContainer}
             />
             <PrivateRoute
-              path={'http://localhost:8080/app_dev.php/widget-share'}
-              component={DonationTreesContainer}
+              path={getLocalRoute('app_widgetBuilder')}
+              component={WidgetShareContainer}
             />
             <Route component={PageNotFound} />
           </Switch>

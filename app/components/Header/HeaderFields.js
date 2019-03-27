@@ -108,7 +108,7 @@ class HeaderFields extends Component {
         <ProfilePickerModal
           isOpen={this.state.profilePickerModal}
           onRequestClose={this.closeProfilePickerModal.bind(this)}
-          suggestionClicked={this.suggestionClicked.bind(this)}
+          pickupProfile={this.pickupProfile.bind(this)}
         />
       </div>
     );

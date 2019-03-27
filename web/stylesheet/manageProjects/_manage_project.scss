@@ -1,9 +1,11 @@
 .app-container__content {
   // align-items: unset !important;
-  .pftp-button-primary {
-    margin-top: 10px;
-  }
+
   .manage-project-container {
+    .pftp-button-primary {
+      margin-top: 10px;
+    }
+
     display: flex;
     width: 100%;
     flex-wrap: wrap;

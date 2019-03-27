@@ -1,6 +1,6 @@
 .pftp-button-primary {
- background-color: $colorPrimary;
- 
+  background-color: $colorPrimary;
+
   border: none;
   color: white;
   padding: 10px 20px;
@@ -77,6 +77,18 @@
 
   span {
     padding: 0 10px;
+  }
+}
+
+.pftp-button-back__container {
+  display: flex;
+  align-self: flex-start;
+  margin-top: 20px;
+  margin-left: 20px;
+
+  cursor: pointer;
+  .pftp-button-transparent {
+    color: $colorPrimaryAccentLight !important;
   }
 }
 

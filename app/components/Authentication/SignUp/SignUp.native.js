@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { Text, View, ImageBackground, ScrollView } from 'react-native';
+import { Text, View, ImageBackground, Linking } from 'react-native';
 
 import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
@@ -9,6 +9,7 @@ import PrimaryButton from '../../Common/Button/PrimaryButton';
 import styles from '../../../styles/login.native';
 import SignupTypes from './SignupType';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 
 let Form = t.form.Form;
 
@@ -32,6 +33,21 @@ export default class SignUp extends Component {
     });
   }
 
+  componentDidMount() {
+    Linking.getInitialURL()
+      .then(url => {
+        if (url) {
+          this.handleOpenURL(url);
+        }
+      })
+      .catch(err => {});
+    Linking.addEventListener('url', this.handleOpenURL);
+  }
+
+  componentWillUnmount() {
+    Linking.removeEventListener('url', this.handleOpenURL);
+  }
+
   verifyCallback = token => {
     // Here you will get the final token!!!
     this.setState({
@@ -39,8 +55,33 @@ export default class SignUp extends Component {
     });
   };
 
+  handleOpenURL = url => {
+    let linkArr = url.url.split('/');
+    if (linkArr && linkArr.length > 0) {
+      if (linkArr[1] === 'signup') {
+        if (linkArr.length > 2) {
+          this.setState({
+            ProfileTypeParam: linkArr[2],
+            Profiletype: 'individual'
+          });
+        } else {
+          this.setState({
+            ProfileTypeParam: null,
+            Profiletype: 'individual'
+          });
+        }
+      }
+    }
+  };
+
   render() {
-    let { Profiletype } = this.state;
+    let { Profiletype, ProfileTypeParam } = this.state;
+    let type;
+    if (signupFormSchema[ProfileTypeParam]) {
+      type = ProfileTypeParam;
+    } else {
+      type = Profiletype;
+    }
     return (
       <KeyboardAwareScrollView enableOnAndroid={true}>
         <ReCaptchaV3
@@ -49,20 +90,21 @@ export default class SignUp extends Component {
           onReceiveToken={token => this.verifyCallback(token)}
         />
         <ImageBackground style={[styles.container, styles.parentContainer]}>
-          <SignupTypes changeProfile={this.changeProfile} />
+          {!this.state.ProfileTypeParam ? (
+            <SignupTypes changeProfile={this.changeProfile} />
+          ) : (
+            <Text>{type.toUpperCase()} Profile Type</Text>
+          )}
           <View style={styles.inputContainer}>
             <Form
               ref={'signupForm'}
-              type={signupFormSchema[Profiletype]}
-              options={this.props.schemaOptions[Profiletype]}
+              type={signupFormSchema[type]}
+              options={this.props.schemaOptions[type]}
               value={this.props.formValue}
             />
             <PrimaryButton
               onClick={() => {
-                this.props.onSignUpClicked(
-                  Profiletype,
-                  this.state.recaptchaToken
-                );
+                this.props.onSignUpClicked(type, this.state.recaptchaToken);
               }}
             >
               {i18n.t('label.signUp')}

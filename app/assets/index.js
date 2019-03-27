@@ -45,6 +45,7 @@ import competition_outline from './images/icons/competition.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
 import arrow_right_orange from './images/icons/arrow_right_orange.png';
+import arrow_left_orange_outline from './images/icons/arrow_left_orange_outline.png';
 import arrow_left_orange from './images/icons/arrow_left_orange.png';
 import tick from './images/icons/tick.png';
 import locationIcon from './images/icons/location.png';
@@ -239,7 +240,8 @@ export {
   shareIcon,
   facebook,
   twitter,
-  welcomeScreen,
   upwardArrow,
-  downwardArrow
+  downwardArrow,
+  welcomeScreen,
+  arrow_left_orange_outline
 };

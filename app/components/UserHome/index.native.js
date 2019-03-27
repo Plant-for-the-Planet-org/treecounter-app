@@ -52,6 +52,10 @@ export default class UserHome extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps) {
+    return JSON.stringify(nextProps) !== JSON.stringify(this.props);
+  }
+
   _handleIndexChange = index => {
     this.setState({ index });
   };

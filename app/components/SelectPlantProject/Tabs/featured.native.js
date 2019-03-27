@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, FlatList } from 'react-native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
@@ -28,6 +28,21 @@ export default class FeaturedProjects extends Component {
       featuredProjects: featuredProjects
     });
   }
+  _keyExtractor = (item, index) => item.id.toString();
+
+  _renderItem = ({ item }) => (
+    <PlantProjectSnippet
+      key={'projectFull' + item.id}
+      cardStyle={styles.cardStyle}
+      onMoreClick={id => this.props.onMoreClick(id)}
+      plantProject={item}
+      onSelectClickedFeaturedProjects={id =>
+        this.onSelectClickedFeaturedProjects(id)
+      }
+      showMoreButton={false}
+      tpoName={item.tpo_name}
+    />
+  );
 
   componentWillReceiveProps(nextProps) {
     let { plantProjects } = nextProps;
@@ -56,23 +71,11 @@ export default class FeaturedProjects extends Component {
   render() {
     let { featuredProjects } = this.state;
     return (
-      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
-        {featuredProjects && featuredProjects.length > 0
-          ? featuredProjects.map(project => (
-              <PlantProjectSnippet
-                key={'projectFull' + project.id}
-                cardStyle={styles.cardStyle}
-                onMoreClick={id => this.props.onMoreClick(id)}
-                plantProject={project}
-                onSelectClickedFeaturedProjects={id =>
-                  this.onSelectClickedFeaturedProjects(id)
-                }
-                showMoreButton={false}
-                tpoName={project.tpo_name}
-              />
-            ))
-          : null}
-      </ScrollView>
+      <FlatList
+        data={featuredProjects}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
+      />
     );
   }
 }

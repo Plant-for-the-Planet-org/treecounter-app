@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { Text, View, ImageBackground, ScrollView } from 'react-native';
+import { Text, View, ImageBackground, Linking } from 'react-native';
 
 import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
@@ -9,6 +9,7 @@ import PrimaryButton from '../../Common/Button/PrimaryButton';
 import styles from '../../../styles/login.native';
 import SignupTypes from './SignupType';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 
 let Form = t.form.Form;
 
@@ -41,6 +42,13 @@ export default class SignUp extends Component {
 
   render() {
     let { Profiletype } = this.state;
+    let ProfileTypeParam = this.props.navigation.getParam('profileTypeParam');
+    let type;
+    if (signupFormSchema[ProfileTypeParam]) {
+      type = ProfileTypeParam;
+    } else {
+      type = Profiletype;
+    }
     return (
       <KeyboardAwareScrollView enableOnAndroid={true}>
         <ReCaptchaV3
@@ -49,20 +57,23 @@ export default class SignUp extends Component {
           onReceiveToken={token => this.verifyCallback(token)}
         />
         <ImageBackground style={[styles.container, styles.parentContainer]}>
-          <SignupTypes changeProfile={this.changeProfile} />
+          {!ProfileTypeParam ? (
+            <SignupTypes changeProfile={this.changeProfile} />
+          ) : (
+            <Text style={{ textAlign: 'center' }}>
+              {type.toUpperCase()} Profile Type
+            </Text>
+          )}
           <View style={styles.inputContainer}>
             <Form
               ref={'signupForm'}
-              type={signupFormSchema[Profiletype]}
-              options={this.props.schemaOptions[Profiletype]}
+              type={signupFormSchema[type]}
+              options={this.props.schemaOptions[type]}
               value={this.props.formValue}
             />
             <PrimaryButton
               onClick={() => {
-                this.props.onSignUpClicked(
-                  Profiletype,
-                  this.state.recaptchaToken
-                );
+                this.props.onSignUpClicked(type, this.state.recaptchaToken);
               }}
             >
               {i18n.t('label.signUp')}

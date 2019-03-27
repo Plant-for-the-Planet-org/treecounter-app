@@ -315,13 +315,19 @@ class TreeCounter extends Component {
     if (!this._appRoutes) {
       this.initRoutes();
     }
+    if (window.location.pathname.indexOf('signup') > -1 && this.state.isIOS) {
+      this.openApp(window.location.pathname);
+      return null;
+    }
     return !this.state.loading ? (
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
             <ProgressModal isOpen={this.props.progressModel} />
+
             {window.location.pathname.indexOf('donation-payment') > -1 ||
-            window.location.pathname.indexOf('account-activate') > -1 ? null : (
+            window.location.pathname.indexOf('account-activate') > -1 ||
+            window.location.pathname.indexOf('signup') > -1 ? null : (
               <DownloadAppModal
                 isOpen={this.state.isIOS && !this.state.isCancelled}
                 continueOnSite={this.continueOnSite.bind(this)}
@@ -336,6 +342,10 @@ class TreeCounter extends Component {
         <NotificationContainer />
       </div>
     ) : null;
+  }
+
+  openApp(linkUrl) {
+    window.location.href = 'trilliontreecampaign:' + linkUrl;
   }
 }
 

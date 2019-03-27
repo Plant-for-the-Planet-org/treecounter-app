@@ -54,6 +54,9 @@ import DownloadAppModal from '../DownloadAppStore';
 import AppPaymentContainer from '../../containers/AppPayment';
 import BodyErrorBoundary from '../ErrorBoundry/bodyErrorBoundry';
 import PageNotFound from '../ErrorBoundry/404';
+import ChallengeContainer from '../../containers/Challenge/createChallenge';
+import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPublicDenyEmail';
+import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -203,6 +206,18 @@ class TreeCounter extends Component {
               path={getLocalRoute('app_passwordSent')}
               component={EmailSentContainer}
             />
+            <PrivateRoute
+              path={
+                getLocalRoute('app_challengeResponse') + '/active' + '/:token'
+              }
+              component={RedirectedPrivateAcceptEmail}
+            />
+            <Route
+              path={
+                getLocalRoute('app_challengeResponse') + '/decline' + '/:token'
+              }
+              component={RedirectedPublicDenyEmail}
+            />
             <Route
               path={getLocalRoute('app_payment') + '/:donationContribution'}
               component={AppPaymentContainer}
@@ -242,6 +257,10 @@ class TreeCounter extends Component {
             <PrivateRoute
               path={getLocalRoute('app_editProfile')}
               component={EditUserProfileContainer}
+            />
+            <PrivateRoute
+              path={getLocalRoute('app_challenge')}
+              component={ChallengeContainer}
             />
             <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
             <Route

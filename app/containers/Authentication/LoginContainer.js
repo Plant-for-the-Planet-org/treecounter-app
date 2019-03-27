@@ -15,6 +15,11 @@ class LoginContainer extends React.Component {
     this.state = { formValue: {}, schemaOptions };
   }
 
+  componentWillUnmount() {
+    let gBatch = document.getElementsByClassName('grecaptcha-badge');
+    gBatch[0].style.visibility = 'hidden';
+  }
+
   onPress = recaptchaToken => {
     let result = this.refs.loginContainer.refs.loginForm.validate();
     console.log(result);

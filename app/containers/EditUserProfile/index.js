@@ -226,6 +226,7 @@ const mapDispatchToProps = dispatch => {
       deletePlantProject,
       addPlantProject,
       deleteUserProfile,
+      updateEmail,
       logoutUser,
       unfollowUser,
       treecounterLookupAction

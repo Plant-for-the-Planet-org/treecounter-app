@@ -5,7 +5,7 @@ import DescriptionHeading from '../../components/Common/Heading/DescriptionHeadi
 import i18n from '../../locales/i18n.js';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import js from 'react-syntax-highlighter/dist/esm/languages/hljs/xml';
-import dark from 'react-syntax-highlighter/dist/esm/styles/hljs/dark';
+import dark from 'react-syntax-highlighter/dist/esm/styles/hljs/lightfair';
 
 SyntaxHighlighter.registerLanguage('xml', js);
 import CardLayout from '../Common/Card';

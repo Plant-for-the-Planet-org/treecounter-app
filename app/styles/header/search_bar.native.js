@@ -45,7 +45,7 @@ export default (styles = EStyleSheet.create({
     marginBottom: 6
   },
   button: {
-    paddingRight: 17,
+    paddingRight: 10,
     paddingLeft: 2
   },
   searchIconContainer: {

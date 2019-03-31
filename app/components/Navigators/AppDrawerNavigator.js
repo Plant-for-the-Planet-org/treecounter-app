@@ -42,6 +42,7 @@ import EmailSentContainer from '../../containers/Authentication/EmailSentContain
 import ImprintContainer from '../../containers/Imprint';
 import PrivacyContainer from '../../containers/Privacy';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
+import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -97,6 +98,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: ActivateAccountContainer
       },
       [getLocalRoute('app_faq')]: FAQContainer,
+      ['pickup_profile_modal']: ProfilePickerModal,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
 
       ['about_us']: { screen: AboutUsContainer },
@@ -167,6 +169,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
+
   const welcomeScreenNavigator = createStackNavigator(
     {
       ['welcome_screen']: { screen: WelcomeScreenModal }

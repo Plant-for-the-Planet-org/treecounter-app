@@ -85,6 +85,9 @@ export class LargeMenuItem extends Component {
           <Text style={styles.largeTextStyle}>
             {this.props.titleId ? i18n.t('label.load') : this.props.title}
           </Text>
+          {this.props.details ? (
+            <Text style={styles.largeTextStyle}>{this.props.details}</Text>
+          ) : null}
         </View>
       </TouchableItem>
     );

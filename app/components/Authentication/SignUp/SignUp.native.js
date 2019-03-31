@@ -7,9 +7,10 @@ import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import styles from '../../../styles/login.native';
-import SignupTypes from './SignupType';
+import { SignupTypes, SignUpType } from './SignupType';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
+import { SignupOrganization, SignupJustMe } from '../../../assets';
 
 let Form = t.form.Form;
 
@@ -43,11 +44,16 @@ export default class SignUp extends Component {
   render() {
     let { Profiletype } = this.state;
     let ProfileTypeParam = this.props.navigation.getParam('profileTypeParam');
-    let type;
+    let type, icon;
     if (signupFormSchema[ProfileTypeParam]) {
       type = ProfileTypeParam;
     } else {
       type = Profiletype;
+    }
+    if (type === 'individual') {
+      icon = SignupJustMe;
+    } else {
+      icon = SignupOrganization;
     }
     return (
       <KeyboardAwareScrollView enableOnAndroid={true}>
@@ -60,9 +66,13 @@ export default class SignUp extends Component {
           {!ProfileTypeParam ? (
             <SignupTypes changeProfile={this.changeProfile} />
           ) : (
-            <Text style={{ textAlign: 'center' }}>
-              {type.toUpperCase()} Profile Type
-            </Text>
+            <View style={{ alignSelf: 'center' }}>
+              <SignUpType
+                iconUrl={icon}
+                title={type.toUpperCase()}
+                profileType={type}
+              />
+            </View>
           )}
           <View style={styles.inputContainer}>
             <Form

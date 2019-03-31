@@ -12,10 +12,10 @@ import {
 import { SignupOrganization, SignupJustMe } from '../../../assets';
 import i18n from '../../../locales/i18n.js';
 
-class SingupType extends Component {
+export class SignUpType extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleClick = this.handleClick && this.handleClick.bind(this);
   }
   handleClick() {
     this.props.onClick(this.props.profileType);
@@ -71,7 +71,7 @@ class SingupType extends Component {
   }
 }
 
-export default class SignupTypes extends Component {
+export class SignupTypes extends Component {
   constructor(props) {
     super(props);
     this.state = {

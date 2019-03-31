@@ -50,11 +50,16 @@ export default class SignUp extends Component {
 
   render() {
     let { Profiletype, ProfileTypeParam } = this.state;
-    let type;
+    let type, icon;
     if (signupFormSchema[ProfileTypeParam]) {
       type = ProfileTypeParam;
     } else {
       type = Profiletype;
+    }
+    if (type === 'individual') {
+      icon = SignupJustMe;
+    } else {
+      icon = SignupOrganization;
     }
     return (
       <div className="app-container__content--center sidenav-wrapper">
@@ -94,7 +99,15 @@ export default class SignUp extends Component {
               onProfileClick={this.ProfileChange}
             />
           </div>
-        ) : null}
+        ) : (
+          <SignUpType
+            imgSrc={icon}
+            salutation={i18n.t('label.i_am_a')}
+            title={type.toUpperCase()}
+            active={false}
+            type={type}
+          />
+        )}
         <div className={'card-width'}>
           <CardLayout>
             <form onSubmit={this.props.onSignUpClicked.bind(this, type)}>

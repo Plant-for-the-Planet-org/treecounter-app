@@ -180,6 +180,14 @@ export default class Menu extends Component {
               title={i18n.t('label.redeem_trees')}
               iconUrl={redeem_outline}
             />
+            {this.props.userProfile ? (
+              <LargeMenuItem
+                onPress={this.onPressMenu.bind(this, {
+                  uri: 'app_challenge'
+                })}
+                title={'Challenge'}
+              />
+            ) : null}
             <LargeMenuItem
               onPress={this.onPressMenu.bind(this, {
                 uri: getLocalRoute('app_faq')

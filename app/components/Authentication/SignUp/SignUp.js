@@ -22,6 +22,18 @@ export default class SignUp extends Component {
     this.ProfileChange = this.ProfileChange.bind(this);
   }
 
+  componentDidMount() {
+    loadReCaptcha({
+      key: '6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF',
+      id: uuid(),
+      onSuccess: () => {
+        let gBatch = document.getElementsByClassName('grecaptcha-badge');
+        gBatch[0].style.visibility = 'visible';
+      },
+      onError: e => {}
+    });
+  }
+
   ProfileChange(type) {
     this.setState({
       Profiletype: type,
@@ -63,6 +75,11 @@ export default class SignUp extends Component {
     }
     return (
       <div className="app-container__content--center sidenav-wrapper">
+        <ReCaptcha
+          action="login"
+          sitekey="6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF"
+          verifyCallback={this.verifyCallback}
+        />
         <TextHeading>{i18n.t('label.signUp')}</TextHeading>
         {!this.state.ProfileTypeParam ? (
           <div className="signup-types">

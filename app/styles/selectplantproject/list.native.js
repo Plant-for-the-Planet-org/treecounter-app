@@ -30,8 +30,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectImage: {
     flex: 1,
     width: undefined,
-    height: undefined,
-    resizeMode: 'contain'
+    height: undefined
   },
   projectNameTextContainer: {
     flexDirection: 'column'
@@ -89,8 +88,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   searchIcon: {
     height: '100%',
-    width: '100%',
-    resizeMode: 'contain'
+    width: '100%'
   },
   searchInput: {
     flex: 1,

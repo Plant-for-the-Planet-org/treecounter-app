@@ -74,7 +74,11 @@ export default class ListProjects extends Component {
             />
 
             <View style={styles.searchIconContainer}>
-              <Image source={iosSearchGrey} style={styles.searchIcon} />
+              <Image
+                source={iosSearchGrey}
+                resizeMode="contain"
+                style={styles.searchIcon}
+              />
             </View>
           </View>
         </View>

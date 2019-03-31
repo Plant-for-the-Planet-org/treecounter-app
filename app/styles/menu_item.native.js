@@ -29,13 +29,11 @@ export default (menuStyles = EStyleSheet.create({
   },
   imageStyle: {
     width: 17,
-    height: 18,
-    resizeMode: 'contain'
+    height: 18
   },
   largeImageStyle: {
     width: 25,
-    height: 25,
-    resizeMode: 'contain'
+    height: 25
   },
   textStyle: {
     paddingLeft: 5,

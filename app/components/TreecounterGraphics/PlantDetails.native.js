@@ -43,7 +43,11 @@ class PlantedDetails extends Component {
         </View>
 
         <View style={svgStyles.svgPlantDetailRow}>
-          <Image style={svgStyles.svgColumn1} source={darkTree} />
+          <Image
+            style={svgStyles.svgColumn1}
+            resizeMode="contain"
+            source={darkTree}
+          />
           <View style={svgStyles.svgColumn2Temp}>
             <View>
               <Text style={{ fontSize: 8, color: '#686060', width: 'auto' }}>
@@ -64,7 +68,11 @@ class PlantedDetails extends Component {
         </View>
         <View style={svgStyles.divider} />
         <View style={svgStyles.svgTextRow}>
-          <Image style={svgStyles.svgColumn1} source={lightTree} />
+          <Image
+            style={svgStyles.svgColumn1}
+            resizeMode="contain"
+            source={lightTree}
+          />
           <View style={svgStyles.svgColumn2Temp}>
             <View>
               <Text style={{ fontSize: 8, color: '#686060', width: 'auto' }}>

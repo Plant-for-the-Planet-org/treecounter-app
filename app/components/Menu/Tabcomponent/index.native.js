@@ -61,6 +61,8 @@ export default class TabComponent extends Component {
                   />
                 </View>
                 <Text
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
                   style={[
                     activeElement === element.uri
                       ? styles.selectedBottomMenuItemText

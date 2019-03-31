@@ -151,7 +151,7 @@ export default class Menu extends Component {
             />
           </View>
         )}
-        <ScrollView style={{ width: '100%' }}>
+        <ScrollView style={styles.sideNavigationActionMenuContainer}>
           <View style={styles.centerMenu}>
             {this.props.userProfile ? (
               <LargeMenuItem

@@ -4,6 +4,7 @@ import PropTypes, { func } from 'prop-types';
 import { updateRoute } from '../../../helpers/routerHelper/tabrouteHelper.native';
 import TouchableItem from '../../../components/Common/TouchableItem.native';
 import * as images from '../../../assets';
+import styles from '../../../styles/menu_item.native';
 
 export default class TabComponent extends Component {
   static propTypes = {
@@ -40,20 +41,7 @@ export default class TabComponent extends Component {
       ].routeName;
     }
     return (
-      <View
-        style={{
-          height: 'auto',
-          width: '100%',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingRight: 10,
-          paddingLeft: 10,
-          backgroundColor: 'white',
-          shadowOffset: { width: 0, height: 4 },
-          shadowColor: 'rgba(0, 0, 0, 0.1)',
-          shadowRadius: 12
-        }}
-      >
+      <View style={styles.bottomMenuContainer}>
         {this.props.menuData &&
           this.props.menuData.map(element => (
             <TouchableItem
@@ -61,18 +49,10 @@ export default class TabComponent extends Component {
               key={element.caption}
               style={{ flex: 1 }}
             >
-              <View
-                style={[
-                  {
-                    flexDirection: 'column',
-                    margin: 5,
-                    alignItems: 'center'
-                  }
-                ]}
-              >
-                <View style={{ width: 20, height: 20 }}>
+              <View style={styles.bottomMenuItemContainer}>
+                <View style={styles.bottomMenuItemImage}>
                   <Image
-                    style={{ width: 20, height: 20 }}
+                    style={styles.bottomMenuItemImage}
                     source={
                       activeElement === element.uri
                         ? images[element.icon + '_red']
@@ -83,8 +63,8 @@ export default class TabComponent extends Component {
                 <Text
                   style={[
                     activeElement === element.uri
-                      ? { color: '#ec6453', fontSize: 12 }
-                      : { color: 'black', fontSize: 12 }
+                      ? styles.selectedBottomMenuItemText
+                      : styles.bottomMenuItemText
                   ]}
                 >
                   {element.caption}

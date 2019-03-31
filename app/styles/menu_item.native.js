@@ -56,5 +56,36 @@ export default (menuStyles = EStyleSheet.create({
     width: 25,
     backgroundColor: '$primary',
     marginLeft: 2
+  },
+
+  ///Bottom Menu Related Styles:
+  bottomMenuContainer: {
+    height: 'auto',
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 10,
+    paddingLeft: 10,
+    backgroundColor: 'white',
+    shadowOffset: { width: 0, height: 4 },
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowRadius: 12
+  },
+  bottomMenuItemContainer: {
+    flexDirection: 'column',
+    margin: 5,
+    alignItems: 'center'
+  },
+  bottomMenuItemImage: {
+    height: 20,
+    width: 20
+  },
+  bottomMenuItemText: {
+    fontSize: 12,
+    color: '$textColor'
+  },
+  selectedBottomMenuItemText: {
+    color: '$colorPrimaryAccentLight',
+    fontSize: 12
   }
 }));

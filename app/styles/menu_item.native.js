@@ -18,7 +18,7 @@ export default (menuStyles = EStyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingLeft: 20,
-    paddingTop: 2,
+    paddingTop: 10,
     paddingBottom: 10
   },
   groupMenuContainer: {

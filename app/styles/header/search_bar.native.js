@@ -30,7 +30,6 @@ export default (styles = EStyleSheet.create({
     alignItems: 'center'
   },
   searchContainer: {
-    flexDirection: 'row',
     height: 30,
     width: '90%',
     backgroundColor: '#f2f2f2',
@@ -57,7 +56,8 @@ export default (styles = EStyleSheet.create({
   },
   searchIcon: {
     height: 15,
-    width: 15
+    width: 15,
+    resizeMode: 'contain'
   },
   searchInput: {
     fontSize: 14,

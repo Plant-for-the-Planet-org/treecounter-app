@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, ScrollView, SafeAreaView, Text } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import PropTypes, { func } from 'prop-types';
 import { updateRoute } from '../../../helpers/routerHelper/tabrouteHelper.native';
 import TouchableItem from '../../../components/Common/TouchableItem.native';
@@ -59,10 +59,15 @@ export default class TabComponent extends Component {
             <TouchableItem
               onPress={() => this.onPressMenu(element)}
               key={element.caption}
+              style={{ flex: 1 }}
             >
               <View
                 style={[
-                  { flexDirection: 'column', margin: 5, alignItems: 'center' }
+                  {
+                    flexDirection: 'column',
+                    margin: 5,
+                    alignItems: 'center'
+                  }
                 ]}
               >
                 <View style={{ width: 20, height: 20 }}>

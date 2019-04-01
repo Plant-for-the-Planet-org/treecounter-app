@@ -1,22 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { ScrollView, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 
 import ChallengeCard from './challengeCard';
 
-const ChallengeList = props => {
-  const { challenges } = props;
+class ChallengeList extends Component {
+  render() {
+    const { challenges } = this.props;
+    return (
+      <FlatList
+        data={challenges}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
+      />
+    );
+  }
+  _keyExtractor = (item, index) => item.id.toString();
 
-  return challenges.map(
-    challenge =>
-      challenge && (
-        <ChallengeCard
-          key={challenge.id}
-          challenge={challenge}
-          challengeStatus={props.challengeStatus}
-        />
-      )
+  _renderItem = ({ item }) => (
+    <ChallengeCard
+      key={item.id}
+      challenge={item}
+      challengeStatus={this.props.challengeStatus}
+    />
   );
-};
+}
 
 ChallengeList.propTypes = {
   challenges: PropTypes.array.isRequired,

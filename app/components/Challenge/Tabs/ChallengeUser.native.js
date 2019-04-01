@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
-import { ScrollView, View, TextInput, Image, Text } from 'react-native';
+import {
+  ScrollView,
+  View,
+  TextInput,
+  Image,
+  Text,
+  Platform
+} from 'react-native';
 import SearchUser from './SearchUser.native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import ChallengeList from '../challengeList';
 import CardLayout from '../../Common/Card';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
 import challengeStyles from '../../../styles/challenge';
+
+const centerTextInput =
+  Platform.OS === 'android'
+    ? {
+        paddingTop: 0,
+        paddingBottom: 0
+      }
+    : {};
 
 export default class ChallengeUser extends Component {
   constructor(props) {
@@ -79,7 +93,8 @@ export default class ChallengeUser extends Component {
             <Text>Challenge to plant </Text>
             <TextInput
               keyboardType="numeric"
-              style={challengeStyles.treecount_input}
+              underlineColorAndroid={'transparent'}
+              style={[challengeStyles.treecount_input, centerTextInput]}
               onChangeText={evt => this.handleTreeCountChange(evt)}
               value={this.state.treeCount.toLocaleString()}
             />

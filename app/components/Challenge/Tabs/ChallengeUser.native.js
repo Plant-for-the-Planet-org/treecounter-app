@@ -89,7 +89,7 @@ export default class ChallengeUser extends Component {
             onSearchResultClick={this.onSearchResultClick}
             currentUserProfile={this.props.currentUserProfile}
           />
-          <View style={challengeStyles.flexStyle}>
+          <View style={challengeStyles.flexContainerStyle}>
             <Text>Challenge to plant </Text>
             <TextInput
               keyboardType="numeric"
@@ -100,7 +100,7 @@ export default class ChallengeUser extends Component {
             />
             <Text>Trees</Text>
           </View>
-          <View style={challengeStyles.flexStyle}>
+          <View style={challengeStyles.flexContainerStyle}>
             <CheckBox
               onClick={() => {
                 this.setState({

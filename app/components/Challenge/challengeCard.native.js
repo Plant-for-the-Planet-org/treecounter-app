@@ -99,7 +99,11 @@ export default class ChallengeCard extends React.Component {
               </SecondaryButton>
             </View>
           ) : (
-            <Text style={challengesStyle.statusLabel}>{status}</Text>
+            <View>
+              <Text style={challengesStyle.statusLabel}>
+                {status && status.toUpperCase()}
+              </Text>
+            </View>
           )}
         </View>
       </CardLayout>

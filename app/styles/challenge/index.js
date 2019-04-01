@@ -1,4 +1,13 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Platform } from 'react-native';
+
+export const centerTextInput =
+  Platform.OS === 'android'
+    ? {
+        paddingTop: 0,
+        paddingBottom: 0
+      }
+    : {};
 
 const buttonStyle = {
   padding: 10,
@@ -47,7 +56,8 @@ export default (editProfileStyle = EStyleSheet.create({
     width: 50,
     borderBottomWidth: 1,
     borderColor: '#686060',
-    paddingBottom: 2
+    paddingBottom: 2,
+    ...centerTextInput
   },
   textStyle: {
     fontSize: 16

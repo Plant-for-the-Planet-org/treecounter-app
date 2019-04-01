@@ -125,15 +125,12 @@ class SearchBar extends React.PureComponent {
               ? 'visible-cancel-button'
               : 'layout-only-cancel-button'
           }
-          style={[
-            styles.buttonContainer,
-            { opacity: showCancelButton ? 1 : 0 }
-          ]}
+          style={[{ opacity: showCancelButton ? 1 : 0 }]}
         >
           {this.props.showCancelSearchButton ? (
             <TouchableItem
               style={styles.button}
-              hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
+              hitSlop={{ top: 15, bottom: 15, left: 1, right: 20 }}
               onLayout={this._handleLayoutCancelButton}
               onPress={this._handlePressCancelButton}
             >

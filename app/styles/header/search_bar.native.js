@@ -20,17 +20,14 @@ export const centerTextInput =
     : {};
 export default (styles = EStyleSheet.create({
   container: {
-    // flex: 1,
     width: '90%',
     flexDirection: 'row',
-    // marginLeft: 10,
     marginRight: 5,
     marginTop: 10,
     marginBottom: 10,
     alignItems: 'center'
   },
   searchContainer: {
-    flexDirection: 'row',
     height: 30,
     width: '90%',
     backgroundColor: '#f2f2f2',
@@ -38,15 +35,8 @@ export default (styles = EStyleSheet.create({
     paddingLeft: 27,
     marginLeft: 10
   },
-  buttonContainer: {
-    width: '20%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 6
-  },
   button: {
-    paddingRight: 17,
+    paddingRight: 2,
     paddingLeft: 2
   },
   searchIconContainer: {
@@ -57,7 +47,8 @@ export default (styles = EStyleSheet.create({
   },
   searchIcon: {
     height: 15,
-    width: 15
+    width: 15,
+    resizeMode: 'contain'
   },
   searchInput: {
     fontSize: 14,

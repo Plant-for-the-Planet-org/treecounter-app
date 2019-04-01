@@ -36,6 +36,10 @@ export default class Login extends Component {
     this.props.updateRoute('app_signup');
   };
 
+  onProfilePickerClick = () => {
+    this.props.updateRoute('pickup_profile_modal');
+  };
+
   verifyCallback = token => {
     // Here you will get the final token!!!
     this.setState({
@@ -85,6 +89,15 @@ export default class Login extends Component {
               <TouchableItem
                 style={{ paddingRight: 5 }}
                 onPress={this.onSignupClicked}
+              >
+                <Text style={styles.bottomTextHighlight}>
+                  {i18n.t('label.dont_have_account')} {i18n.t('label.signUp')}
+                </Text>
+              </TouchableItem>
+
+              <TouchableItem
+                style={{ paddingRight: 5 }}
+                onPress={this.onProfilePickerClick}
               >
                 <Text style={styles.bottomTextHighlight}>
                   {i18n.t('label.dont_have_account')} {i18n.t('label.signUp')}

@@ -57,7 +57,7 @@ export default class Menu extends Component {
             to={getLocalRoute('app_widgetBuilder')}
             onClick={() => console.log('redirect_widget_share')}
           >
-            <img src={images.shareIcon} />
+            <img src={images.webProgramming} />
           </Link>
         </div>
       );

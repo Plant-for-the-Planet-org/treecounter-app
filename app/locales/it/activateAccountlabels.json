@@ -1,7 +1,5 @@
 {
   "activate_ur_account": "Attiva il tuo account",
   "not_yet_activated": "Non hai ancora attivato il tuo account.",
-  "received_email": "Dovresti aver ricevuto un'email quando ti sei registrato. Fare clic sul collegamento di attivazione fornito in questa e-mail per completare la procedura di iscrizione.",
-  "not_received_email": "Se non hai ricevuto l'email di attivazione, fai clic sul link per inviarlo di nuovo.",
   "resent_email": "Rinvia l'e-mail"
 }

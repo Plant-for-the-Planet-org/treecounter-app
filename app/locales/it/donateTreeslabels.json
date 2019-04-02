@@ -1,7 +1,6 @@
 {
   "certified": "Certificato",
   "nonCertified": "Non certificato",
-  "featuredProjects": "Progetti in vetrina",
   "project": "Progetto",
   "organisation": "Organizzazione",
   "Cost": "Costo per albero",
@@ -13,7 +12,5 @@
   "individual_name": "Individuale",
   "next": "Continua",
   "delete_project": "Elimina progetto",
-  "thankyou": "Grazie per aver piantato",
-  "receive_mail": "alberi con noi! Riceverai una email con ricevuta della donazione a tempo.",
   "donate_trees_description": "Scegli un progetto che pianti gli alberi per te."
 }

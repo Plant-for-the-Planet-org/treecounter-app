@@ -14,5 +14,11 @@
   "plant_project_delete_success": "Plant Project deleted successfully",
   "plant_project_added_success": "Plant Project created successfully",
   "plant_project_error_title": "Plant project update Error",
-  "same_password_error": "Please enter same password"
+  "same_password_error": "Please enter same password",
+  "basic_profile": "Basic",
+  "profile_security": "Security",
+  "deletion_warning_heading": " Deleting your account is permanent.",
+  "deletion_warning_summery": "All your personal information will be deleted unless required for legal and accounting purpose.",
+  "deletion_warning_summery_1": "Trees you have planted will continue to be part of the Trillion Tree Campaign.",
+  "deletion_prerequisite": " Please type DELETE in all capitals letters and click Delete button to continue with your account deletion."
 }

@@ -1,12 +1,9 @@
 {
   "amount": "quantità:",
   "creditCard": "Carta di credito",
-  "confirm": "Confermo che pagherò l'importo di",
-  "following_account": "al seguente account.",
   "bank_transfer": "Bonifico",
   "pay_via": "Paga tramite bonifico bancario",
   "pay": "Paga",
-  "sepa_debit": "Addebito diretto SEPA",
   "stripe_sepa_des1": "Fornendo il tuo IBAN e confermando questo pagamento, stai autorizzando",
   "stripe_sepa_des2": "e Stripe, il nostro fornitore di servizi di pagamento, per inviare istruzioni alla tua banca per addebitare il tuo conto in conformità con tali istruzioni. Hai diritto a un rimborso dalla tua banca secondo i termini e le condizioni del contratto con la tua banca. Un rimborso deve essere richiesto entro 8 settimane a partire dalla data in cui è stato addebitato il tuo account.",
   "pay_via_sepa": "Paga con SEPA",

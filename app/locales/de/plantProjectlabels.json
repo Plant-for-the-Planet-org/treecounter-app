@@ -1,5 +1,7 @@
 {
-  "location": "Lage",
+  "tax_deductible": "Steuerlich absetzbar",
+  "location": "Ort",
+  "planted": "Gepflanzt",
   "target": "Ziel",
   "in": "im",
   "donate": "Spenden",

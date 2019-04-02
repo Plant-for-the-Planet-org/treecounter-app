@@ -239,6 +239,7 @@ export default class DonateTrees extends Component {
       recipientType = 'receiptCompany';
     }
     if (
+      this.props.currentUserProfile &&
       !this.props.currentUserProfile.address &&
       this.state.form[recipientType].address
     ) {
@@ -391,7 +392,12 @@ export default class DonateTrees extends Component {
               </TextBlock>
             </div>
           ) : (
-            <form onSubmit={this.checkValidation[2]}>
+            <form
+              onSubmit={event => {
+                this.checkValidation[2]();
+                event.preventDefault();
+              }}
+            >
               <div className="donate-tress__container">
                 <ContentHeader caption={headings[this.state.pageIndex]} />
 

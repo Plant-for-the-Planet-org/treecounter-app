@@ -58,7 +58,7 @@ class SearchUser extends React.Component {
   }
   isMyself(treecounter, currentUserProfile) {
     return (
-      null !== currentUserProfile &&
+      !!currentUserProfile &&
       currentUserProfile.treecounter.id === treecounter.id
     );
   }

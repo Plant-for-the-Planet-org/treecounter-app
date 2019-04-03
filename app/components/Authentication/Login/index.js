@@ -25,7 +25,10 @@ export default class Login extends Component {
     loadReCaptcha({
       key: '6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF',
       id: uuid(),
-      onSuccess: () => {},
+      onSuccess: () => {
+        let gBatch = document.getElementsByClassName('grecaptcha-badge');
+        gBatch[0].style.visibility = 'visible';
+      },
       onError: e => {}
     });
   }

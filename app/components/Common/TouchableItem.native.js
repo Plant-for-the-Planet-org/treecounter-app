@@ -57,7 +57,6 @@ export default class TouchableItem extends React.Component {
 
     return (
       <TouchableOpacity
-        hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
         activeOpacity={
           this.props.activeOpacity ? this.props.activeOpacity : 0.2
         }

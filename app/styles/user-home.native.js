@@ -61,7 +61,6 @@ export default (buttonStyles = EStyleSheet.create({
   profileImage: {
     width: '93%',
     height: '93%',
-    resizeMode: 'contain',
     padding: 5,
     borderRadius: 33
   },

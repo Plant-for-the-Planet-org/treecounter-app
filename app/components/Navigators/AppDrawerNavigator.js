@@ -41,6 +41,7 @@ import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ImprintContainer from '../../containers/Imprint';
 import PrivacyContainer from '../../containers/Privacy';
+import ChallengeContainer from '../../containers/Challenge/createChallenge';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -118,6 +119,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
       },
+      [getLocalRoute('app_challenge')]: ChallengeContainer,
       ['app_gift_projects']: {
         screen: SelectPlantProjectContainer
       }

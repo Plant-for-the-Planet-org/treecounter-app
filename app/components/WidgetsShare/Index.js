@@ -52,7 +52,7 @@ export default class WidgetShare extends PureComponent {
       data-treecounterId="${this.props.currentUserProfile.treecounter.slug}"
       pftp
       data-widget-type="${this.state.activeWidget.type}"
-      cite="https://www.trilliontreecampaign.org/" >
+      cite="${this.props.serverName}" >
         ${this.state.activeWidget.type} widget loading...
     </blockquote>
     <script
@@ -69,7 +69,7 @@ export default class WidgetShare extends PureComponent {
             {i18n.t('label.widget_share_description')}
           </DescriptionHeading>
         </TextHeading>
-        <CardLayout>
+        <CardLayout className={'pftp-widget-card'}>
           <h6> {i18n.t('label.widget_share_choose_widget')}</h6>
           <div className={'pftp-widgets'}>
             <div className="pftp-widgets__type">
@@ -101,10 +101,10 @@ export default class WidgetShare extends PureComponent {
           <div className={'pftp-widget-html-snippet'}>
             <SyntaxHighlighter language="xml" style={dark}>
               {widgetCode}
-            </SyntaxHighlighter>;
+            </SyntaxHighlighter>
           </div>
         </CardLayout>
-        <CardLayout className="pftp-widgets-preview">
+        <CardLayout className={'pftp-widget-card'}>
           <h6>{i18n.t('label.widget_preview')}</h6>
           <iframe
             width="200"

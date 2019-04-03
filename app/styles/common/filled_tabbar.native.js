@@ -7,7 +7,7 @@ export default (filledTabBar = EStyleSheet.create({
   tabBar: {
     flexDirection: 'row',
     backgroundColor: '#ffffff',
-    borderWidth: 4,
+    borderWidth: 3,
     borderColor: '$colorPrimaryAccentLight',
     borderRadius: 5,
     margin: 15
@@ -15,6 +15,7 @@ export default (filledTabBar = EStyleSheet.create({
   tabItemActive: {
     flex: 1,
     alignItems: 'center',
+    padding: 0,
     backgroundColor: '$colorPrimaryAccentLight'
   },
   tabItem: {

@@ -36,7 +36,7 @@ export function signUp(profileType, userData, recaptchaToken) {
           return res;
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
           dispatch(setProgressModelState(false));
           throw err;
         });

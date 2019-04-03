@@ -81,7 +81,7 @@ export default class ChallengeEmail extends Component {
             value={this.state.tempForm}
             onChange={this.onFormChange}
           />
-          <View style={challengeStyles.flexStyle}>
+          <View style={challengeStyles.flexContainerStyle}>
             <Text>Challenge to plant </Text>
             <TextInput
               keyboardType="numeric"
@@ -91,7 +91,7 @@ export default class ChallengeEmail extends Component {
             />
             <Text>Trees</Text>
           </View>
-          <View style={challengeStyles.flexStyle}>
+          <View style={challengeStyles.flexContainerStyle}>
             <CheckBox
               onClick={() => {
                 this.setState({

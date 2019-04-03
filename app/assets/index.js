@@ -120,6 +120,7 @@ import filter from './images/icons/filter.png';
 import welcomeScreen from './images/welcome-screen.png';
 import upwardArrow from './images/right-arrow.png';
 import downwardArrow from './images/left-arrow.png';
+import challengeIcon from './images/icons/flag.png';
 
 export {
   AppStoreLogo,
@@ -243,5 +244,6 @@ export {
   upwardArrow,
   downwardArrow,
   welcomeScreen,
-  arrow_left_orange_outline
+  arrow_left_orange_outline,
+  challengeIcon
 };

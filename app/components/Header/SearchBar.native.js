@@ -115,6 +115,7 @@ class SearchBar extends React.PureComponent {
             placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
             onSubmitEditing={this._handleSubmit}
             style={[styles.searchInput, searchInputStyle]}
+            autoCapitalize={'sentences'}
           />
 
           <SearchIcon />

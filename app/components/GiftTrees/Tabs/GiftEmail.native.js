@@ -109,6 +109,7 @@ export default class GiftEmail extends Component {
               underlineColorAndroid={'transparent'}
               onChangeText={val => this.onChangeText(val)}
               placeholder={i18n.t('label.gift_message')}
+              autoCapitalize={'sentences'}
             />
             <PrimaryButton onClick={this.onNextClick}>
               {i18n.t('next')}

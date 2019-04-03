@@ -3,6 +3,11 @@
     margin-bottom: 15px;
     align-self: self-start;
   }
+  .pftp-widgets-warning {
+    color: #d52d2d;
+    font-size: 16px;
+    text-align: center;
+  }
   .pftp-widgets {
     align-items: center;
     display: flex;
@@ -64,5 +69,10 @@
     @include for-phone-only {
       max-width: 350px !important;
     }
+  }
+  .pftp-preview-widget-card {
+    @extend .pftp-widget-card;
+    padding: 10px 30px;
+    height: 530px;
   }
 }

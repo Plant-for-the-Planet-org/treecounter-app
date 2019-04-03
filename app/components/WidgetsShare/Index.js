@@ -52,6 +52,9 @@ export default class WidgetShare extends PureComponent {
       data-treecounterId="${this.props.currentUserProfile.treecounter.slug}"
       pftp
       data-widget-type="${this.state.activeWidget.type}"
+      data-show-graphics="true"
+      data-show-donate-button="true"
+      data-background-color="#FFF"
       cite="${this.props.serverName}" >
         ${this.state.activeWidget.type} widget loading...
     </blockquote>
@@ -59,8 +62,9 @@ export default class WidgetShare extends PureComponent {
       type="text/javascript"
       src="${this.props.serverName}/${this.state.activeWidget.script}">
     </script>
+
     `;
-    const iframeContent = `<div style="height:300px">${widgetCode}</div>`;
+    const iframeContent = `${widgetCode}<style>.widget-container{height:100%, width:100%} body{height:100vh} html{height:100vh}</style>`;
     return (
       <div className="app-container__content--center sidenav-wrapper pftp-widgets-share-container">
         <TextHeading>
@@ -69,51 +73,66 @@ export default class WidgetShare extends PureComponent {
             {i18n.t('label.widget_share_description')}
           </DescriptionHeading>
         </TextHeading>
-        <CardLayout className={'pftp-widget-card'}>
-          <h6> {i18n.t('label.widget_share_choose_widget')}</h6>
-          <div className={'pftp-widgets'}>
-            <div className="pftp-widgets__type">
-              {widgetList.map(widget => {
-                return (
-                  <label
-                    key={widget.type}
-                    onClick={() => this.handleWidgetChoiceChange(widget)}
-                    className={
-                      'radio pftp-widgets__type--option ' +
-                      (this.state.activeWidget.type === widget.type
-                        ? 'active'
-                        : '')
-                    }
-                  >
-                    <input
-                      type="radio"
-                      value={widget.type}
-                      checked={this.state.activeWidget.type === widget.type}
-                      onChange={() => this.handleWidgetChoiceChange(widget)}
-                    />
-                    <span>{i18n.t(widget.label)}</span>
-                  </label>
-                );
-              })}
+        {!this.props.currentUserProfile.mayPublish ? (
+          <CardLayout className={'pftp-widget-card'}>
+            <div className={'pftp-widgets-warning'}>
+              {i18n.t('label.widget_not_public_acct_warning')}
             </div>
-          </div>
-          <h6> {i18n.t('label.widget_share_copy_paste_html_snippet')}</h6>
-          <div className={'pftp-widget-html-snippet'}>
-            <SyntaxHighlighter language="xml" style={dark}>
-              {widgetCode}
-            </SyntaxHighlighter>
-          </div>
-        </CardLayout>
-        <CardLayout className={'pftp-widget-card'}>
-          <h6>{i18n.t('label.widget_preview')}</h6>
-          <iframe
-            width="200"
-            height="200"
-            id="pftp-widgets-preview"
-            ref="iframe"
-            srcDoc={iframeContent}
-          />
-        </CardLayout>
+          </CardLayout>
+        ) : (
+          <React.Fragment>
+            <CardLayout className={'pftp-widget-card'}>
+              <h6> {i18n.t('label.widget_share_choose_widget')}</h6>
+              <div className={'pftp-widgets'}>
+                <div className="pftp-widgets__type">
+                  {widgetList.map(widget => {
+                    if (
+                      widget.tpo &&
+                      this.props.currentUserProfile.type != 'tpo'
+                    ) {
+                      return null;
+                    }
+                    return (
+                      <label
+                        key={widget.type}
+                        onClick={() => this.handleWidgetChoiceChange(widget)}
+                        className={
+                          'radio pftp-widgets__type--option ' +
+                          (this.state.activeWidget.type === widget.type
+                            ? 'active'
+                            : '')
+                        }
+                      >
+                        <input
+                          type="radio"
+                          value={widget.type}
+                          checked={this.state.activeWidget.type === widget.type}
+                          onChange={() => this.handleWidgetChoiceChange(widget)}
+                        />
+                        <span>{i18n.t(widget.label)}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+              <h6> {i18n.t('label.widget_share_copy_paste_html_snippet')}</h6>
+              <div className={'pftp-widget-html-snippet'}>
+                <SyntaxHighlighter language="xml" style={dark}>
+                  {widgetCode}
+                </SyntaxHighlighter>
+              </div>
+            </CardLayout>' '<CardLayout className={'pftp-preview-widget-card '}>
+              <h6>{i18n.t('label.widget_preview')}</h6>
+              <iframe
+                width="200"
+                height="480"
+                id="pftp-widgets-preview"
+                ref="iframe"
+                srcDoc={iframeContent}
+              />
+            </CardLayout>
+          </React.Fragment>
+        )}
       </div>
     );
   }

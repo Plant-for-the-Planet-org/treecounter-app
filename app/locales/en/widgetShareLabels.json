@@ -9,5 +9,7 @@
   "widget_standard_tree_counter": "Standard Tree counter",
   "widget_progress_tree_counter": "Progress Tree counter",
   "widget_donate_trees": "Donate Trees",
-  "widget_preview": "Widget Preview"
+  "widget_preview": "Widget Preview",
+  "widget_not_public_acct_warning":
+    "Your profile is not publicly visible, To create your Tree Counter widget please set your account to public in Edit Profile"
 }

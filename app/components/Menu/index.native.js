@@ -192,20 +192,21 @@ export default class Menu extends Component {
             />
           </View>
         </ScrollView>
-        {this.props.userProfile ? (
-          <View>
+
+        <View style={styles.sideNavigationActionMenuContainer}>
+          {this.props.userProfile ? (
             <LargeMenuItem
               onPress={this.props.logoutUser}
               title={i18n.t('label.logout')}
               iconUrl={icons.iosLogout}
             />
-          </View>
-        ) : null}
-        <LargeMenuItem
-          onPress={this.onPressMenu.bind(this, { uri: 'about_us' })}
-          title={i18n.t('label.information')}
-          iconUrl={icons.infoGrey}
-        />
+          ) : null}
+          <LargeMenuItem
+            onPress={this.onPressMenu.bind(this, { uri: 'about_us' })}
+            title={i18n.t('label.information')}
+            iconUrl={icons.infoGrey}
+          />
+        </View>
       </SafeAreaView>
     );
   }

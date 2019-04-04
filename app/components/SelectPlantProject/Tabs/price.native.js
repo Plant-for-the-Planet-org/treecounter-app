@@ -89,12 +89,14 @@ export default class PriceProjects extends Component {
           <View style={styles.sortContainer}>
             <TouchableItem
               style={styles.imageStyleContainer}
+              hitSlop={{ left: 50, right: 150 }}
               onPress={this.sortProjects.bind(this, 'desc')}
             >
               <Image style={styles.imageStyle} source={foldin} />
             </TouchableItem>
             <TouchableItem
               style={styles.imageStyleContainer}
+              hitSlop={{ left: 50, right: 150 }}
               onPress={this.sortProjects.bind(this, 'asc')}
             >
               <Image style={styles.imageStyle} source={foldout} />

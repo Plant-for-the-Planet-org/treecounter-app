@@ -71,6 +71,7 @@ export default class ListProjects extends Component {
               placeholder="Search"
               placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
               style={[styles.searchInput]}
+              autoCapitalize={'sentences'}
             />
 
             <View style={styles.searchIconContainer}>

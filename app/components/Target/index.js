@@ -42,6 +42,9 @@ export default class Target extends Component {
       initialValues: { countTarget, targetYear, targetComment }
     };
   }
+  shouldComponentUpdate(nextProps) {
+    return JSON.stringify(nextProps) !== JSON.stringify(this.props);
+  }
 
   render() {
     return (

@@ -82,6 +82,7 @@ export default class ChallengeUser extends Component {
               style={challengeStyles.treecount_input}
               onChangeText={evt => this.handleTreeCountChange(evt)}
               value={this.state.treeCount.toLocaleString()}
+              autoCapitalize={'sentences'}
             />
             <Text>Trees</Text>
           </View>

@@ -45,7 +45,7 @@ export function TextInputTemplate(locals) {
           onChange={locals.onChangeNative}
           onKeyPress={locals.onKeyPress}
           returnKeyType={locals.returnKeyType}
-          autoCapitalize={locals.autoCapitalize}
+          autoCapitalize={'sentences'}
           allowFontScaling={true}
         />
       </View>

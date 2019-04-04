@@ -43,7 +43,8 @@ export default (editProfileStyle = EStyleSheet.create({
   flexContainerStyle: {
     flexDirection: 'row',
     paddingTop: 5,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 10
   },
   flexStyle: {
     flexDirection: 'row',

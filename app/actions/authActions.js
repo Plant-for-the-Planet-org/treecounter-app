@@ -32,7 +32,20 @@ export function login(credentials, recaptchaToken, navigation = undefined) {
           dispatch(loadUserProfile(data));
           dispatch(NotificationAction());
         }
-
+        //On App it is causing crash or undefined behavior
+        //May be Dispatch load user profile and Update route causing some issue in
+        //App Drawer Navigator , for now putting a 0 sec timeout to delay the this until store gets updated
+        //We require this updateRuute if server sent route name in response like activation screen else we can ignore this
+        setTimeout(
+          () =>
+            updateRoute(
+              data.routeName,
+              navigation || dispatch,
+              null,
+              data.routeParams
+            ),
+          0
+        );
         dispatch(setProgressModelState(false));
         return res;
       })

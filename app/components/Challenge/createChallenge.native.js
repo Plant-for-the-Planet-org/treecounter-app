@@ -62,6 +62,7 @@ export default class ChallengeTabView extends Component {
             challengeUser={this.props.challengeUser}
             challenges={this.props.challenges}
             challengeStatus={this.props.challengeStatus}
+            currentUserProfile={this.props.currentUserProfile}
           />
         );
       case 'email':

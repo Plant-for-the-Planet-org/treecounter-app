@@ -21,7 +21,7 @@ export function challenge(challengeDetails) {
         dispatch(mergeEntities(normalize(response.data, treecounterSchema)));
       })
       .catch(response => {
-        debug('error: ', response);
+        console.log('error: ', response);
         dispatch(setProgressModelState(false));
       });
   };

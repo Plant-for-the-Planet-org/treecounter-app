@@ -7,7 +7,10 @@ import { challenge, challengeStatus } from '../../actions/challengeActions';
 
 import { updateRoute } from '../../helpers/routerHelper';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
-import { userChallengesSelector } from '../../selectors';
+import {
+  userChallengesSelector,
+  currentUserProfileSelector
+} from '../../selectors';
 
 import Challenge from '../../components/Challenge/createChallenge';
 
@@ -27,6 +30,7 @@ class ChallengeContainer extends Component {
         challenges={this.props.userChallenges}
         navigation={this.props.navigation}
         challengeStatus={this.props.challengeStatus}
+        currentUserProfile={this.props.userProfile}
       />
     );
   }
@@ -34,7 +38,8 @@ class ChallengeContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    userChallenges: userChallengesSelector(state)
+    userChallenges: userChallengesSelector(state),
+    userProfile: currentUserProfileSelector(state)
   };
 };
 
@@ -59,5 +64,6 @@ ChallengeContainer.propTypes = {
   userChallenges: PropTypes.array,
   challenge: PropTypes.func,
   route: PropTypes.func,
-  challengeStatus: PropTypes.func
+  challengeStatus: PropTypes.func,
+  userProfile: PropTypes.any
 };

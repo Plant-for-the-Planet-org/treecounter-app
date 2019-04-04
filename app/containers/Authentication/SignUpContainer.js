@@ -26,7 +26,7 @@ class SignUpContainer extends React.Component {
     let formValue = this.refs.signupContainer.refs.signupForm.getValue();
     if (formValue) {
       this.props
-        .signUp(profileType, formValue, token)
+        .signUp(profileType, formValue, token, this.props.navigation)
         .then(success => {})
         .catch(err => {
           console.log('err signup data', err);

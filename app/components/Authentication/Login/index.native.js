@@ -23,9 +23,7 @@ let Form = t.form.Form;
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      recaptchaToken: null
-    };
+    this._recaptchaToken = undefined;
   }
 
   onForgotPasswordClicked = () => {
@@ -38,16 +36,14 @@ export default class Login extends Component {
 
   verifyCallback = token => {
     // Here you will get the final token!!!
-    this.setState({
-      recaptchaToken: token
-    });
+    this._recaptchaToken = token;
   };
 
   handleLoginClick = () => {
     if (this.refs.loginForm.getValue()) {
       Keyboard.dismiss();
     }
-    this.props.onPress(this.state.recaptchaToken);
+    this.props.onPress(this._recaptchaToken);
   };
   render() {
     return (

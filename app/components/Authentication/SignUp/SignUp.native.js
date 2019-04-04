@@ -17,10 +17,10 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Profiletype: 'individual',
-      recaptchaToken: null
+      Profiletype: 'individual'
     };
     this.changeProfile = this.changeProfile.bind(this);
+    this._recaptchaToken = undefined;
   }
 
   onLoginClicked = () => {
@@ -34,10 +34,8 @@ export default class SignUp extends Component {
   }
 
   verifyCallback = token => {
+    this._recaptchaToken = token;
     // Here you will get the final token!!!
-    this.setState({
-      recaptchaToken: token
-    });
   };
 
   render() {
@@ -73,7 +71,7 @@ export default class SignUp extends Component {
             />
             <PrimaryButton
               onClick={() => {
-                this.props.onSignUpClicked(type, this.state.recaptchaToken);
+                this.props.onSignUpClicked(type, this._recaptchaToken);
               }}
             >
               {i18n.t('label.signUp')}

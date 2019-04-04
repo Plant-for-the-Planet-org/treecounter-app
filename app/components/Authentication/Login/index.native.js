@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { Text, View, Image, ScrollView } from 'react-native';
+import { Text, View, Image, ScrollView, Keyboard } from 'react-native';
 import scrollStyle from '../../../styles/common/scrollStyle';
 import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 
@@ -43,10 +43,17 @@ export default class Login extends Component {
     });
   };
 
+  handleLoginClick = () => {
+    if (this.refs.loginForm.getValue()) {
+      Keyboard.dismiss();
+    }
+    this.props.onPress(this.state.recaptchaToken);
+  };
   render() {
     return (
       <ScrollView
         contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
+        keyboardShouldPersistTaps={'handled'}
       >
         <ReCaptchaV3
           captchaDomain={'https://www.plant-for-the-planet.org'}
@@ -92,7 +99,7 @@ export default class Login extends Component {
               </TouchableItem>
 
               <PrimaryButton
-                onClick={event => this.props.onPress(this.state.recaptchaToken)}
+                onClick={this.handleLoginClick}
                 buttonStyle={styles.loginButtonStyle}
                 textStyle={{ fontSize: 16 }}
               >

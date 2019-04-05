@@ -9,6 +9,14 @@ import ActionButton from 'react-native-action-button';
 import CardLayout from '../../Common/Card';
 import PropTypes from 'prop-types';
 import FeaturedCompetitions from './featured.native';
+import t from 'tcomb-form-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { signupFormSchema } from '../../../server/parsedSchemas/signup';
+import {
+  competitionFormSchema,
+  competitionFormSchemaOptions
+} from '../../../server/parsedSchemas/competition';
+let Form = t.form.Form;
 
 export default class MineCompetitions extends Component {
   constructor(props) {
@@ -93,13 +101,15 @@ export default class MineCompetitions extends Component {
         />
       </View>
     ) : (
-      <View style={styles.mineFContainer}>
-        <CardLayout style={[styles.mineFormContainer]}>
-          <View style={styles.mineSpecsContainer}>
-            <Text>This is form</Text>
-          </View>
+      <KeyboardAwareScrollView enableOnAndroid={true}>
+        <CardLayout>
+          <Form
+            ref={'competitionForm'}
+            type={competitionFormSchema}
+            options={competitionFormSchemaOptions}
+          />
         </CardLayout>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

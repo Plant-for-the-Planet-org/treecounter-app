@@ -63,7 +63,7 @@ export default (HeaderRight = function(navigation, userProfile, isLoggedIn) {
           style={{ height: 25, width: 25, marginRight: 20 }}
         />
       </TouchableOpacity>
-      {(() => renderShareButtons())()}
+      {userProfile ? (() => renderShareButtons())() : null}
       {isLoggedIn ? (
         <TouchableOpacity>
           <Image

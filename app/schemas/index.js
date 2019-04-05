@@ -13,6 +13,7 @@ export const competitionPagerSchema = new schema.Entity('competitionPager');
 export const contributionSchema = new schema.Entity('contribution');
 export const plantProjectImageSchema = new schema.Entity('plantProjectImage');
 export const contributionImageSchema = new schema.Entity('contributionImage');
+export const challengeSchema = new schema.Entity('challenge');
 
 tpoSchema.define({
   treecounter: treecounterSchema,
@@ -48,6 +49,10 @@ contributionSchema.define({
   contributionImages: [contributionImageSchema]
 });
 
+challengeSchema.define({
+  treecounter: treecounterSchema
+});
+
 contributionImageSchema.define({
   contribution: contributionSchema
 });
@@ -59,5 +64,6 @@ userProfileSchema.define({
 
 treecounterSchema.define({
   contributions: [contributionSchema],
-  competitions: [competitionSchema]
+  competitions: [competitionSchema],
+  challenges: [challengeSchema]
 });

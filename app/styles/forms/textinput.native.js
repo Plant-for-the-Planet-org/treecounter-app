@@ -18,8 +18,7 @@ export default (textInputStyles = EStyleSheet.create({
   },
   imageStyle: {
     width: '100%',
-    height: '100%',
-    resizeMode: 'contain'
+    height: '100%'
   },
   textboxStyle: {
     height: 35,

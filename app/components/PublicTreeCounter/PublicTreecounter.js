@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { welcomeScreen } from '../../assets';
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';

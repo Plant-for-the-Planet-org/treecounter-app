@@ -122,7 +122,7 @@ export function getSelectTemplate(enumOption) {
     // let formGroupStyle = stylesheet.formGroup.normal;
     // let controlLabelStyle = stylesheet.controlLabel.normal;
     // let helpBlockStyle = stylesheet.helpBlock.normal;
-    // const errorBlockStyle = stylesheet.errorBlock;
+    const errorBlockStyle = stylesheet && stylesheet.errorBlock;
 
     // if (locals.hasError) {
     //   formGroupStyle = stylesheet.formGroup.error;

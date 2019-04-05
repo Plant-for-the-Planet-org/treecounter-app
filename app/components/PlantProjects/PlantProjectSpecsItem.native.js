@@ -50,7 +50,11 @@ class PlantProjectSpecsItem extends React.Component {
                   alignItems: 'center'
                 }}
                 buttonComponent={
-                  <Image style={styles.spec_icon} source={rightIcon} />
+                  <Image
+                    style={styles.spec_icon}
+                    resizeMode="contain"
+                    source={rightIcon}
+                  />
                 }
                 items={[
                   {
@@ -68,7 +72,7 @@ class PlantProjectSpecsItem extends React.Component {
           //     this._onPress(this.ref1);
           //   }}
           // >
-          //   <Image style={styles.spec_icon} source={rightIcon} />
+          //   <Image style={styles.spec_icon} resizeMode="contain" source={rightIcon} />
           // </TouchableHighlight>
           null}
           {/* <Tooltips

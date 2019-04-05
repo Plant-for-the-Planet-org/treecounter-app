@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const PrimaryButton = ({ onClick, children, className }) => (
   <button
-    className={className + ' pftp-button-primary'}
+    className={'pftp-button-primary ' + className}
     onClick={onClick ? e => onClick(e) : null}
   >
     {children}

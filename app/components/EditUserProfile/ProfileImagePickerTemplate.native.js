@@ -37,7 +37,11 @@ export function ProfileImagePickerTemplate(locals) {
         }}
       >
         <UserProfileImage profileImage={locals.value} />
-        <Image style={styles.addIcon} source={close_green} />
+        <Image
+          resizeMode="contain"
+          style={styles.addIcon}
+          source={close_green}
+        />
       </TouchableOpacity>
     </View>
   );

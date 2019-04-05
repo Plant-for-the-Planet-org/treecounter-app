@@ -31,8 +31,7 @@ export default (welcomeScreenStyle = EStyleSheet.create({
   imageStyle: {
     width: 250,
     height: 250,
-    margin: 15,
-    resizeMode: 'contain'
+    margin: 15
   },
   textPara: {
     color: '#fff',

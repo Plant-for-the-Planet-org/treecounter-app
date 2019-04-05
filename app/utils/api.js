@@ -45,6 +45,7 @@ async function getHeaders(authenticated = false, recaptcha) {
       'X-CAPTCHA-TOKEN': recaptcha
     };
   }
+  console.log(headers);
   if (authenticated) {
     return {
       headers: { ...headers, Authorization: `Bearer ${await getAccessToken()}` }

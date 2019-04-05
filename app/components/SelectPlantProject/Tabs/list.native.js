@@ -71,10 +71,15 @@ export default class ListProjects extends Component {
               placeholder="Search"
               placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
               style={[styles.searchInput]}
+              autoCapitalize={'sentences'}
             />
 
             <View style={styles.searchIconContainer}>
-              <Image source={iosSearchGrey} style={styles.searchIcon} />
+              <Image
+                source={iosSearchGrey}
+                resizeMode="contain"
+                style={styles.searchIcon}
+              />
             </View>
           </View>
         </View>

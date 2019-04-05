@@ -189,7 +189,11 @@ export default class Leaderboard extends Component {
                 this.refs['tooltip'].toggle();
               }}
             >
-              <Image style={styles.contextMenu} source={filter} />
+              <Image
+                resizeMode="contain"
+                style={styles.contextMenu}
+                source={filter}
+              />
             </TouchableItem>
           }
           items={this._getContextMenuItems()}

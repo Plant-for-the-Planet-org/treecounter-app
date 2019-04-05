@@ -7,6 +7,7 @@ import tick from '../../assets/images/icons/tick.png';
 import i18n from '../../locales/i18n';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import CompetitionProgressBar from './CompetitionProgressBar';
+import TouchableItem from '../../components/Common/TouchableItem';
 import PropTypes from 'prop-types';
 import { compCalendar } from '../../assets';
 import { bindActionCreators } from 'redux';
@@ -49,13 +50,45 @@ class CompetitionSnippet extends React.Component {
       competitionDetail &&
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
     ) {
-      button = i18n.t('label.edit');
+      button = (
+        <TouchableItem>
+          <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+            i18n.t('label.edit')
+          </Text>
+        </TouchableItem>
+      );
     } else if (status === '') {
-      button = i18n.t('label.join');
+      button = (
+        <TouchableItem
+          onPress={() =>
+            this.props.enrollCompetition(this.props.competition.id)
+          }
+        >
+          <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+            i18n.t('label.join')
+          </Text>
+        </TouchableItem>
+      );
     } else if (status === 'enrolled') {
-      button = i18n.t('label.leave');
+      button = (
+        <TouchableItem
+          onPress={() => this.props.leaveCompetition(this.props.competition.id)}
+        >
+          <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+            i18n.t('label.leave')
+          </Text>
+        </TouchableItem>
+      );
     } else if (status === 'pending') {
-      button = i18n.t('label.cancel_join_request');
+      button = (
+        <TouchableItem
+          onPress={() => this.props.leaveCompetition(this.props.competition.id)}
+        >
+          <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+            i18n.t('label.cancel_join_request')
+          </Text>
+        </TouchableItem>
+      );
     }
     return (
       <TouchableHighlight
@@ -113,7 +146,7 @@ class CompetitionSnippet extends React.Component {
               <View style={styles.topCompetitorContainer}>
                 {this.props.competition &&
                 this.props.competition.topEnrollments &&
-                this.props.competition.topEnrollments.length > 0 ? (
+                this.props.competition.topEnrollments.length === 3 ? (
                   <View>
                     <View style={styles.horizontalRule} />
                     {this.props.competition.topEnrollments.map((top, index) => (
@@ -140,12 +173,15 @@ class CompetitionSnippet extends React.Component {
                 </View>
 
                 <View style={styles.buttonContainer}>
-                  <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
-                    {this.props.competition &&
-                    this.props.competition.competitorCount > 0
-                      ? `${this.props.competition.competitorCount} participants`
-                      : button}
-                  </Text>
+                  {this.props.competition &&
+                  this.props.competition.competitorCount > 0 ? (
+                    <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+                      `${this.props.competition.competitorCount + 1}{' '}
+                      participants`
+                    </Text>
+                  ) : (
+                    button
+                  )}
                 </View>
               </View>
             </View>
@@ -171,5 +207,7 @@ CompetitionSnippet.propTypes = {
   type: PropTypes.any,
   onMoreClick: PropTypes.any,
   competitionEnrollments: PropTypes.any,
-  treeCounter: PropTypes.any
+  treeCounter: PropTypes.any,
+  leaveCompetition: PropTypes.any,
+  enrollCompetition: PropTypes.any
 };

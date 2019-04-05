@@ -240,6 +240,9 @@ class CompetitionFull extends React.Component {
                               competitor={top}
                               index={index}
                               type="participants"
+                              confirmPart={id => this.props.confirmPart(id)}
+                              declinePart={id => this.props.declinePart(id)}
+                              declineinvite={id => this.props.declineinvite(id)}
                               key={index}
                             />
                           ) : null
@@ -270,6 +273,9 @@ class CompetitionFull extends React.Component {
                               competitor={top}
                               index={index}
                               type="request_join"
+                              confirmPart={id => this.props.confirmPart(id)}
+                              declinePart={id => this.props.declinePart(id)}
+                              declineinvite={id => this.props.declineinvite(id)}
                               key={index}
                             />
                           ) : null
@@ -296,6 +302,9 @@ class CompetitionFull extends React.Component {
                               competitor={top}
                               index={index}
                               type="invite"
+                              confirmPart={id => this.props.confirmPart(id)}
+                              declinePart={id => this.props.declinePart(id)}
+                              declineinvite={id => this.props.declineinvite(id)}
                               key={index}
                             />
                           ) : null
@@ -336,5 +345,8 @@ CompetitionFull.propTypes = {
   treeCounter: PropTypes.any,
   competitionEnrollments: PropTypes.any,
   leaveCompetition: PropTypes.any,
-  enrollCompetition: PropTypes.any
+  enrollCompetition: PropTypes.any,
+  confirmPart: PropTypes.any,
+  declinePart: PropTypes.any,
+  declineinvite: PropTypes.any
 };

@@ -73,6 +73,8 @@ export default class AllCompetitions extends Component {
                 key={'competition' + project.id}
                 cardStyle={styles.cardStyle}
                 onMoreClick={id => this.props.onMoreClick(id)}
+                leaveCompetition={id => this.props.leaveCompetition(id)}
+                enrollCompetition={id => this.props.enrollCompetition(id)}
                 competition={project}
                 type="all"
               />
@@ -84,5 +86,7 @@ export default class AllCompetitions extends Component {
 }
 AllCompetitions.propTypes = {
   allCompetitions: PropTypes.any,
-  onMoreClick: PropTypes.any
+  onMoreClick: PropTypes.any,
+  leaveCompetition: PropTypes.any,
+  enrollCompetition: PropTypes.any
 };

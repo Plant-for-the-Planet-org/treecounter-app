@@ -41,6 +41,9 @@ class CompetitionParticipant extends React.Component {
                   style={snippetStyles.buttonItem}
                   buttonStyle={snippetStyles.buttonStyle}
                   textStyle={snippetStyles.buttonTextStyle}
+                  onClick={() =>
+                    this.props.confirmPart(this.props.competitor.id)
+                  }
                 >
                   <Text> {i18n.t('label.confirm')}</Text>
                 </PrimaryButton>
@@ -48,6 +51,9 @@ class CompetitionParticipant extends React.Component {
                   style={snippetStyles.buttonItem}
                   buttonStyle={snippetStyles.buttonStyle}
                   textStyle={snippetStyles.buttonTextStyle}
+                  onClick={() =>
+                    this.props.declinePart(this.props.competitor.id)
+                  }
                 >
                   <Text> {i18n.t('label.delete')}</Text>
                 </PrimaryButton>
@@ -71,6 +77,7 @@ class CompetitionParticipant extends React.Component {
               style={snippetStyles.buttonItem}
               buttonStyle={snippetStyles.buttonStyle}
               textStyle={snippetStyles.buttonTextStyle}
+              onClick={() => this.props.declineinvite(this.props.competitor.id)}
             >
               <Text> {i18n.t('label.cancel')}</Text>
             </PrimaryButton>
@@ -85,5 +92,8 @@ export default CompetitionParticipant;
 CompetitionParticipant.propTypes = {
   index: PropTypes.number,
   competitor: PropTypes.any,
-  type: PropTypes.any
+  type: PropTypes.any,
+  confirmPart: PropTypes.any,
+  declinePart: PropTypes.any,
+  declineinvite: PropTypes.any
 };

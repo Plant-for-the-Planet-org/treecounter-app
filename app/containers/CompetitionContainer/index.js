@@ -5,8 +5,10 @@ import { updateRoute } from '../../helpers/routerHelper';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
+  enrollCompetition,
   fetchCompetitions,
-  fetchMineCompetitions
+  fetchMineCompetitions,
+  leaveCompetition
 } from '../../actions/competition';
 import {
   competitionsSelector,
@@ -23,13 +25,20 @@ class CompetitionContainer extends React.Component {
     this.props.fetchCompetitions('all');
     this.props.fetchMineCompetitions();
   }
-
+  leaveCompetition(id) {
+    this.props.leaveCompetition(id);
+  }
+  enrollCompetition(id) {
+    this.props.enrollCompetition(id);
+  }
   render() {
     console.log(this.props);
     return (
       <Competiton
         allCompetitions={this.props.allCompetitions}
         onMoreClick={id => this.onMoreClick(id)}
+        leaveCompetition={id => this.leaveCompetition(id)}
+        enrollCompetition={id => this.enrollCompetition(id)}
       />
     );
   }
@@ -51,7 +60,9 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       fetchCompetitions,
-      fetchMineCompetitions
+      fetchMineCompetitions,
+      leaveCompetition,
+      enrollCompetition
     },
     dispatch
   );
@@ -64,5 +75,7 @@ CompetitionContainer.propTypes = {
   navigation: PropTypes.any,
   fetchCompetitions: PropTypes.any,
   allCompetitions: PropTypes.any,
-  fetchMineCompetitions: PropTypes.any
+  fetchMineCompetitions: PropTypes.any,
+  leaveCompetition: PropTypes.any,
+  enrollCompetition: PropTypes.any
 };

@@ -89,6 +89,8 @@ export default class MineCompetitions extends Component {
                   cardStyle={styles.cardStyle}
                   onMoreClick={id => this.props.onMoreClick(id)}
                   competition={project}
+                  leaveCompetition={id => this.props.leaveCompetition(id)}
+                  enrollCompetition={id => this.props.enrollCompetition(id)}
                   type="mine"
                 />
               ))
@@ -115,5 +117,7 @@ export default class MineCompetitions extends Component {
 }
 MineCompetitions.propTypes = {
   allCompetitions: PropTypes.any,
-  onMoreClick: PropTypes.any
+  onMoreClick: PropTypes.any,
+  leaveCompetition: PropTypes.any,
+  enrollCompetition: PropTypes.any
 };

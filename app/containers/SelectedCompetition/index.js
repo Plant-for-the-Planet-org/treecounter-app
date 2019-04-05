@@ -15,6 +15,7 @@ import {
   selectPlantProjectAction
 } from '../../actions/selectPlantProjectAction';
 import { enrollCompetition, leaveCompetition } from '../../actions/competition';
+import CompetitionParticipant from '../../components/Competition/CompetitionParticipant.native';
 
 class SelectedCompetitionContainer extends Component {
   constructor(props) {
@@ -59,6 +60,9 @@ class SelectedCompetitionContainer extends Component {
           competition_id={this.state.competition_id}
           leaveCompetition={id => this.leaveCompetition(id)}
           enrollCompetition={id => this.enrollCompetition(id)}
+          confirmPart={id => this.props.confirmPart(id)}
+          declinePart={id => this.props.declinePart(id)}
+          declineinvite={id => this.props.declineinvite(id)}
         />
       );
     } else {

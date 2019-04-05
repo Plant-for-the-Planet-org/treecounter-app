@@ -200,7 +200,7 @@ export default {
         propertyOrder: 5
       }
     },
-    required: ['treeCount', 'plantDate'],
+    required: ['treeCount', 'plantDate', 'geoLocation'],
     submit_url: '',
     submit_method: 'POST'
   }

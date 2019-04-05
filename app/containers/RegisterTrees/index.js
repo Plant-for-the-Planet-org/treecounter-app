@@ -50,7 +50,11 @@ class RegisterTreesContainer extends Component {
                 }
               },
               () => {
-                this.refs.registerTrees.refs.registerTreeForm.validate();
+                if (registerTreeForm) {
+                  registerTreeForm.validate();
+                } else {
+                  this.refs.registerTrees.refs.registerTreeForm.validate();
+                }
               }
             );
           }
@@ -66,7 +70,11 @@ class RegisterTreesContainer extends Component {
                 }
               },
               () => {
-                this.refs.registerTrees.refs.registerTreeForm.validate();
+                if (registerTreeForm) {
+                  registerTreeForm.validate();
+                } else {
+                  this.refs.registerTrees.refs.registerTreeForm.validate();
+                }
               }
             );
           }

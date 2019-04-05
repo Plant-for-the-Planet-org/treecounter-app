@@ -44,7 +44,7 @@ export function login(credentials, recaptchaToken, navigation = undefined) {
               null,
               data.routeParams
             ),
-          0
+          1000
         );
         dispatch(setProgressModelState(false));
         return res;

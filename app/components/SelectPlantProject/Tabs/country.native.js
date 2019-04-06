@@ -70,7 +70,7 @@ export default class CountryProjects extends Component {
   render() {
     let { countrySortedProjects } = this.state;
     return (
-      <View>
+      <View style={styles.flexContainer}>
         <View style={styles.cardHeader}>
           <Text style={styles.headingStyle}>Sort by Country</Text>
           <View style={styles.sortContainer}>
@@ -90,12 +90,13 @@ export default class CountryProjects extends Component {
             </TouchableItem>
           </View>
         </View>
-
-        <ListViewProjects
-          projects={countrySortedProjects}
-          selectProject={projectId => this.props.selectProject(projectId)}
-          onMoreClick={projectId => this.props.onMoreClick(projectId)}
-        />
+        <View style={styles.listViewContainer}>
+          <ListViewProjects
+            projects={countrySortedProjects}
+            selectProject={projectId => this.props.selectProject(projectId)}
+            onMoreClick={projectId => this.props.onMoreClick(projectId)}
+          />
+        </View>
       </View>
     );
   }

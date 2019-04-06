@@ -14,7 +14,13 @@ import {
   clearPlantProject,
   selectPlantProjectAction
 } from '../../actions/selectPlantProjectAction';
-import { enrollCompetition, leaveCompetition } from '../../actions/competition';
+import {
+  confirmPart,
+  declineinvite,
+  declinePart,
+  enrollCompetition,
+  leaveCompetition
+} from '../../actions/competition';
 import CompetitionParticipant from '../../components/Competition/CompetitionParticipant.native';
 
 class SelectedCompetitionContainer extends Component {
@@ -77,7 +83,10 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       leaveCompetition,
-      enrollCompetition
+      enrollCompetition,
+      confirmPart,
+      declinePart,
+      declineinvite
     },
     dispatch
   );
@@ -91,5 +100,8 @@ SelectedCompetitionContainer.propTypes = {
   match: PropTypes.any,
   navigation: PropTypes.any,
   leaveCompetition: PropTypes.any,
-  enrollCompetition: PropTypes.any
+  enrollCompetition: PropTypes.any,
+  confirmPart: PropTypes.any,
+  declinePart: PropTypes.any,
+  declineinvite: PropTypes.any
 };

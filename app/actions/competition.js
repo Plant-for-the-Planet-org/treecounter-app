@@ -1,11 +1,13 @@
 import {
+  deleteAuthenticatedRequest,
   getAuthenticatedRequest,
   getRequest,
-  postAuthenticatedRequest
+  postAuthenticatedRequest,
+  putAuthenticatedRequest
 } from '../utils/api';
 import { setCompetitionDetail } from '../reducers/competitionDetailReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
-import { mergeEntities } from '../reducers/entitiesReducer';
+import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
 import {
   competitionEnrollmentSchema,
   competitionPagerSchema,
@@ -25,6 +27,82 @@ export function fetchCompetitions(category) {
           normalize(res.data.merge.competitionPager[0], competitionPagerSchema)
         )
       );
+      dispatch(setProgressModelState(false));
+    });
+  };
+}
+
+export function confirmPart(id) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    let data = {
+      status: 'enrolled'
+    };
+    putAuthenticatedRequest('competitionEnrollment_put', data, {
+      token: id
+    }).then(res => {
+      dispatch(
+        mergeEntities(
+          normalize(
+            res.data.merge.competitionEnrollment,
+            competitionEnrollmentSchema
+          )
+        )
+      );
+      if (res.data.merge.competition) {
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competition, competitionSchema)
+          )
+        );
+      }
+      dispatch(setProgressModelState(false));
+    });
+  };
+}
+
+export function declinePart(id) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    let data = {
+      status: 'declined'
+    };
+    putAuthenticatedRequest('competitionEnrollment_put', data, {
+      token: id
+    }).then(res => {
+      dispatch(
+        mergeEntities(
+          normalize(
+            res.data.merge.competitionEnrollment,
+            competitionEnrollmentSchema
+          )
+        )
+      );
+      if (res.data.merge.competition) {
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competition, competitionSchema)
+          )
+        );
+      }
+      dispatch(setProgressModelState(false));
+    });
+  };
+}
+export function declineinvite(id) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    deleteAuthenticatedRequest('competitionEnrollment_delete', null, {
+      token: id
+    }).then(res => {
+      dispatch(deleteEntity(res.data.merge.competitionEnrollment));
+      if (res.data.merge.competition) {
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competition, competitionSchema)
+          )
+        );
+      }
       dispatch(setProgressModelState(false));
     });
   };

@@ -4,7 +4,7 @@ export default {
     type: 'object',
     properties: {
       treeCount: {
-        type: 'number',
+        type: 'integer',
         title: 'label.tree_count',
         widget: 'hidden',
         icon: null,
@@ -137,7 +137,7 @@ export default {
     type: 'object',
     properties: {
       treeCount: {
-        type: 'number',
+        type: 'integer',
         title: 'label.tree_count',
         icon: null,
         help: null,

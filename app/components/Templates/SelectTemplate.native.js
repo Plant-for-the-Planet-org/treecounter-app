@@ -3,7 +3,14 @@ import i18n from '../../locales/i18n';
 import styles from '../../styles/forms/select.native';
 
 import PropTypes from 'prop-types';
-import { Text, View, Animated, TouchableOpacity, Picker } from 'react-native';
+import {
+  Text,
+  View,
+  Animated,
+  TouchableOpacity,
+  Picker,
+  Platform
+} from 'react-native';
 import datePickerStyle from '../../styles/date_picker.native';
 
 const UIPICKER_HEIGHT = 216;
@@ -76,6 +83,29 @@ class SelectTemplateIOS extends React.PureComponent {
     } else {
     }
     const height = this.state.isCollapsed ? 0 : UIPICKER_HEIGHT;
+    if (Platform.OS === 'android') {
+      return (
+        <View style={{ marginBottom: 8 }}>
+          <Picker
+            mode="dropdown"
+            selectedValue={formattedValue}
+            onValueChange={itemValue => locals.onChange(itemValue)}
+            style={[datepickerStyle, { marginBottom: -2, marginTop: -10 }]}
+          >
+            {this.props.options.map(option => (
+              <Picker.Item
+                itemStyle={styles.itemStyle}
+                key={option.value}
+                label={i18n.t(option.text)}
+                color={'#686060'}
+                value={option.value}
+              />
+            ))}
+          </Picker>
+          <View style={[datePickerStyle.underlineStyle, { marginLeft: 8 }]} />
+        </View>
+      );
+    }
     return (
       <View style={datePickerStyle.datePickerContainer}>
         <TouchableOpacity
@@ -84,7 +114,6 @@ class SelectTemplateIOS extends React.PureComponent {
           onPress={this._onPress}
         >
           <Text style={dateValueStyle}>{formattedValue}</Text>
-          <View style={datePickerStyle.underlineStyle} />
         </TouchableOpacity>
         <Animated.View
           style={{ height: this.state.height, overflow: 'hidden' }}

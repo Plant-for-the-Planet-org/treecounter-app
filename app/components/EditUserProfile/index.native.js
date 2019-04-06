@@ -107,6 +107,9 @@ export default class EditUserProfile extends Component {
     return schemaOptions;
   };
 
+  changePasswordErrorState = value =>
+    this.setState({ passwordNotSameError: value });
+
   _renderScene = ({ route }) => {
     const { onSave, currentUserProfile } = this.props;
     const { type, treecounter: treeCounter } = currentUserProfile;
@@ -186,9 +189,7 @@ export default class EditUserProfile extends Component {
             getFormSchemaOption={this.getFormSchemaOption}
             navigation={this.props.navigation}
             deleteProfile={this.props.deleteProfile}
-            onSamePasswordErrorState={value => {
-              this.setState({ passwordNotSameError: value });
-            }}
+            onSamePasswordErrorState={this.changePasswordErrorState}
           />
         );
         break;

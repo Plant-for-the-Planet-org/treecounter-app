@@ -97,7 +97,7 @@ export default class MineCompetitions extends Component {
             : null}
         </ScrollView>
         <ActionButton
-          buttonColor="rgba(255,255,255,1)"
+          buttonColor="rgba(183, 211, 127, 1)"
           buttonTextStyle={styles.action_button}
           onPress={() => this.onActionButtonPress()}
         />

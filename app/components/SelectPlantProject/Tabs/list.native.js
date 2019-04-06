@@ -70,7 +70,7 @@ export default class ListProjects extends Component {
               returnKeyType="search"
               placeholder="Search"
               placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
-              style={[styles.searchInput]}
+              style={[styles.searchInput, { paddingVertical: 0 }]}
               autoCapitalize={'sentences'}
             />
 

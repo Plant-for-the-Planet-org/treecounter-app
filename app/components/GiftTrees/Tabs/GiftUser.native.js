@@ -17,7 +17,11 @@ export default class GiftUser extends Component {
   componentWillMount() {}
   onSearchResultClick(suggestion) {
     // console.log('suggestion clicked', suggestion);
-    this.setState({ selectedSuggestion: suggestion, giftMessage: '' });
+    this.setState({
+      selectedSuggestion: suggestion,
+      giftMessage: '',
+      error: ''
+    });
   }
   onNextClick() {
     if (this.state.selectedSuggestion) {
@@ -26,6 +30,8 @@ export default class GiftUser extends Component {
         'direct',
         this.state.giftMessage
       );
+    } else {
+      this.setState({ error: 'Select Valid User Profile' });
     }
   }
   onChangeText(val) {
@@ -69,6 +75,16 @@ export default class GiftUser extends Component {
               onSearchResultClick={this.onSearchResultClick}
               currentUserProfile={this.props.currentUserProfile}
             />
+            <View>
+              <Text
+                style={{
+                  color: '#ff0033',
+                  fontSize: 11
+                }}
+              >
+                {this.state.error}
+              </Text>
+            </View>
 
             <TextInput
               multiline={true}

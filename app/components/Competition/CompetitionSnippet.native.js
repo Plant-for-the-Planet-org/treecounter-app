@@ -33,7 +33,7 @@ class CompetitionSnippet extends React.Component {
   render() {
     const competitionDetail = this.props.competition;
     let status = '',
-      button = '';
+      button = <Text style={{ paddingLeft: 5, paddingRight: 5 }}>''</Text>;
     const competitionEnrollments = this.props.competitionEnrollments;
     if (
       competitionDetail &&
@@ -53,7 +53,7 @@ class CompetitionSnippet extends React.Component {
       button = (
         <TouchableItem>
           <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
-            i18n.t('label.edit')
+            {i18n.t('label.edit')}
           </Text>
         </TouchableItem>
       );
@@ -65,7 +65,7 @@ class CompetitionSnippet extends React.Component {
           }
         >
           <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
-            i18n.t('label.join')
+            {i18n.t('label.join')}
           </Text>
         </TouchableItem>
       );
@@ -75,7 +75,7 @@ class CompetitionSnippet extends React.Component {
           onPress={() => this.props.leaveCompetition(this.props.competition.id)}
         >
           <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
-            i18n.t('label.leave')
+            {i18n.t('label.leave')}
           </Text>
         </TouchableItem>
       );
@@ -85,7 +85,7 @@ class CompetitionSnippet extends React.Component {
           onPress={() => this.props.leaveCompetition(this.props.competition.id)}
         >
           <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
-            i18n.t('label.cancel_join_request')
+            {i18n.t('label.cancel_join_request')}
           </Text>
         </TouchableItem>
       );
@@ -176,8 +176,7 @@ class CompetitionSnippet extends React.Component {
                   {this.props.competition &&
                   this.props.competition.competitorCount > 0 ? (
                     <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
-                      `${this.props.competition.competitorCount + 1}{' '}
-                      participants`
+                      {this.props.competition.competitorCount + 1} participants
                     </Text>
                   ) : (
                     button

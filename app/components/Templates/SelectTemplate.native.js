@@ -119,10 +119,11 @@ class SelectTemplateIOS extends React.PureComponent {
             {
               width: '100%',
               height: 35,
-              marginLeft: 15,
+              marginLeft: 10,
               marginBottom: 10,
               paddingRight: 10
-            }
+            },
+            locals.config.style
           ]}
           dropdownOffset={{
             top: 10,

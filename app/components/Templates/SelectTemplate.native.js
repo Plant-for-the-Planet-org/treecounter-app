@@ -119,9 +119,9 @@ class SelectTemplateIOS extends React.PureComponent {
             {
               width: '100%',
               height: 35,
-              marginLeft: 20,
+              marginLeft: 15,
               marginBottom: 10,
-              marginRight: 10
+              paddingRight: 10
             }
           ]}
           dropdownOffset={{
@@ -132,12 +132,13 @@ class SelectTemplateIOS extends React.PureComponent {
             fontSize: 13,
             color: '#686060'
           }}
+          value={i18n.t(locals.value)}
           textColor="rgba(104,96,96, 0.8)"
           selectedItemColor="rgba(104,96,96, 0.8)"
-          labelExtractor={item => item.text || locals.value}
+          labelExtractor={item => i18n.t(item.text)}
           valueExtractor={item => item.value}
           onChangeText={item => locals.onChange(item)}
-          label={i18n.t(locals.value.text)}
+          // label={i18n.t(locals.value.text)}
           data={this.props.options}
         />
       );

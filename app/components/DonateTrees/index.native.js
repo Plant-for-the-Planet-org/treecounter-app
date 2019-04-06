@@ -244,7 +244,6 @@ export default class DonateTrees extends React.PureComponent {
   };
 
   _renderScene = ({ route }) => {
-    console.log('__DONATE_Trees', route, this.props);
     const { selectedProject } = this.props;
     let receipt;
     if (this.state.modeReceipt === 'individual') {

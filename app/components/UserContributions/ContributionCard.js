@@ -274,7 +274,9 @@ export default class ContributionCard extends React.Component {
             {!isPending ? (
               <TextSpan>
                 {' '}
-                {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+                {cardType && cardType.length > 0
+                  ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+                  : ''}
               </TextSpan>
             ) : (
               <Link
@@ -361,7 +363,9 @@ export default class ContributionCard extends React.Component {
             {!isPending ? (
               <TextSpan>
                 {' '}
-                {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+                {cardType && cardType.length > 0
+                  ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+                  : ''}
               </TextSpan>
             ) : (
               <Link
@@ -444,7 +448,9 @@ export default class ContributionCard extends React.Component {
             {!isPending ? (
               <TextSpan>
                 {' '}
-                {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+                {cardType && cardType.length > 0
+                  ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+                  : ''}
               </TextSpan>
             ) : (
               <Link

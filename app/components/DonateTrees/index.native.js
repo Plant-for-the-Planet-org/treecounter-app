@@ -152,7 +152,7 @@ export default class DonateTrees extends React.PureComponent {
     }
   }
 
-  Tab2validated() {
+  Tab2validated = () => {
     if (this.state.selectedTreeCount) {
       this.setState({
         form: {
@@ -162,7 +162,7 @@ export default class DonateTrees extends React.PureComponent {
       });
       this._handleIndexChange(1);
     }
-  }
+  };
   goToNextTab(value) {
     if (value) {
       let receipt = {};

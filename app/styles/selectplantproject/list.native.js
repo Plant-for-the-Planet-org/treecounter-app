@@ -7,6 +7,9 @@ const Layout = {
   }
 };
 export default (selectplantprojectFull = EStyleSheet.create({
+  flexContainer: {
+    flex: 1
+  },
   listItemContainer: {
     flexDirection: 'column',
     height: 150
@@ -136,7 +139,11 @@ export default (selectplantprojectFull = EStyleSheet.create({
   cardHeader: {
     flexDirection: 'row',
     padding: 10,
+
     backgroundColor: 'white'
+  },
+  listViewContainer: {
+    flex: 1
   },
   headingStyle: {
     fontSize: 16,

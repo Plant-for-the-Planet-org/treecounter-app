@@ -132,7 +132,7 @@ class Trillion extends Component {
             scrollEventThrottle={16}
             contentContainerStyle={{
               justifyContent: 'flex-start',
-              flexGrow: 2
+              flexGrow: 3
             }}
             onScroll={Animated.event([
               { nativeEvent: { contentOffset: { y: this.state.offsetY } } }
@@ -184,7 +184,7 @@ class Trillion extends Component {
                 </Text>
               </CardLayout>
 
-              <View>
+              <View style={{ flex: 1 }}>
                 {this.props.plantProjects
                   .filter(filterProj => filterProj.allowDonations)
                   .map(project => (

@@ -8,7 +8,7 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n';
 import { Dimensions, View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject.native';
-class TreeCountCurrencySelector extends React.Component {
+class TreeCountCurrencySelector extends React.PureComponent {
   constructor(props) {
     super(props);
 

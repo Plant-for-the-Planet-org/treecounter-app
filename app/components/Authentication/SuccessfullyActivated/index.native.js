@@ -22,9 +22,17 @@ export default class SuccessfullyActivatedAccount extends Component {
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <View style={styles.container}>
           {this.props.success ? (
-            <Image source={check_green} style={styles.imageStyle} />
+            <Image
+              source={check_green}
+              resizeMode="contain"
+              style={styles.imageStyle}
+            />
           ) : (
-            <Image source={redeemSignIn} style={styles.imageStyle} />
+            <Image
+              source={redeemSignIn}
+              resizeMode="contain"
+              style={styles.imageStyle}
+            />
           )}
           {this.props.success ? (
             <Text style={styles.textStyle}>

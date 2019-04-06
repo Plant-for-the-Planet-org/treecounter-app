@@ -203,6 +203,7 @@ class TreeCountSelector extends React.Component {
                 keyboardType="numeric"
                 onChangeText={evt => this.handleVariableTreeCountChange(evt)}
                 value={String(this.state.variableTreeCount)}
+                autoCapitalize={'sentences'}
               />
               <Text
                 key="variable"
@@ -228,6 +229,7 @@ class TreeCountSelector extends React.Component {
                 keyboardType="numeric"
                 onChangeText={evt => this.handleVariableAmountChange(evt)}
                 value={String(this.state.variableAmount)}
+                autoCapitalize={'sentences'}
               />
             </View>
 

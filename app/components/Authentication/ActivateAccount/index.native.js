@@ -20,7 +20,11 @@ export default class ActivateAccount extends Component {
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         {this.state.sentClicked ? (
           <View style={styles.container}>
-            <Image source={RedEmail} style={styles.imageStyle} />
+            <Image
+              source={RedEmail}
+              resizeMode={'contain'}
+              style={styles.imageStyle}
+            />
             <Text style={styles.textStyle}>
               {i18n.t('label.mail_sent_activation')}
             </Text>
@@ -41,7 +45,11 @@ export default class ActivateAccount extends Component {
           </View>
         ) : (
           <View style={styles.container}>
-            <Image source={RedEmail} style={styles.imageStyle} />
+            <Image
+              source={RedEmail}
+              resizeMode={'contain'}
+              style={styles.imageStyle}
+            />
             <Text style={styles.boldText}>
               {i18n.t('label.not_yet_activated')}
             </Text>

@@ -100,7 +100,11 @@ class ContributionCard extends React.Component {
   _renderHeader(section, index, isActive) {
     return (
       <View style={styles.header}>
-        <Image style={styles.imageStyle} source={isActive ? foldin : foldout} />
+        <Image
+          resizeMode="center"
+          style={styles.imageStyle}
+          source={isActive ? foldin : foldout}
+        />
         <Text style={styles.headerText}>Details</Text>
       </View>
     );
@@ -303,7 +307,9 @@ class ContributionCard extends React.Component {
         ) : null}
         <View style={styles.labelStyle}>
           <Text style={styles.labelTextStyle}>
-            {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+            {cardType && cardType.length > 0
+              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+              : ''}
           </Text>
         </View>
       </CardLayout>
@@ -360,7 +366,9 @@ class ContributionCard extends React.Component {
         ) : null}
         <View style={styles.labelStyle}>
           <Text style={styles.labelTextStyle}>
-            {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+            {cardType && cardType.length > 0
+              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+              : ''}
           </Text>
         </View>
       </CardLayout>
@@ -406,7 +414,9 @@ class ContributionCard extends React.Component {
         ) : null}
         <View style={styles.labelStyle}>
           <Text style={styles.labelTextStyle}>
-            {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+            {cardType && cardType.length > 0
+              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+              : ''}
           </Text>
         </View>
       </CardLayout>
@@ -492,7 +502,11 @@ class ActionButton extends React.Component {
       >
         <View style={{ flexDirection: 'row' }}>
           {this.props.image != null ? (
-            <Image source={this.props.image} style={styles.imageStyle} />
+            <Image
+              resizeMode="center"
+              source={this.props.image}
+              style={styles.imageStyle}
+            />
           ) : null}
           {this.props.text != null ? (
             <Text style={styles.actionButtonText}>{this.props.text}</Text>

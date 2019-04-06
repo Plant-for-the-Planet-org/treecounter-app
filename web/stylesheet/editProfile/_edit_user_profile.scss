@@ -73,6 +73,11 @@
       textarea {
         height: 75px !important;
       }
+      .column {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
     .tComb-template__password-form {
       @extend .tComb-template-form-group;
@@ -157,12 +162,11 @@
     }
     .user-profile__project-form-group {
       // .fieldset-depth-1 {
-      margin: 30px;
-      width: 100%;
 
       .plant-project__item {
-        @extend .user-profile__form-group;
-        padding: 27px 25px 21px;
+        // @extend .user-profile__form-group;
+        // padding: 27px 25px 21px;
+        // margin: 0 0 30px 0;
         select {
           font-size: 14px !important;
         }
@@ -173,7 +177,7 @@
           height: 75px !important;
           font-size: 16px !important;
         }
-        margin: 0 0 30px 0;
+
         .item-header {
           @extend .form-group__heading;
           content: "Project" counter(div);

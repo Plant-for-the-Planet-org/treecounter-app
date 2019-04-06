@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import GiftTabView from './GiftTabs.native';
+import GiftTabView from './GiftTabs';
 import { updateRoute } from '../../helpers/routerHelper';
 
 export default class GiftTrees extends Component {

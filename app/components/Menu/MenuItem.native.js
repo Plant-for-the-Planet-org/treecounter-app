@@ -50,7 +50,11 @@ export class MenuItem extends Component {
     return (
       <TouchableItem onPress={this.props.onPress}>
         <View style={styles.menuItemContainer}>
-          <Image style={styles.imageStyle} source={this.props.iconUrl} />
+          <Image
+            resizeMode="contain"
+            style={styles.imageStyle}
+            source={this.props.iconUrl}
+          />
           <Text style={styles.textStyle}>
             {this.props.titleId ? i18n.t('label.load') : this.props.title}
           </Text>
@@ -73,7 +77,11 @@ export class LargeMenuItem extends Component {
     return (
       <TouchableItem onPress={this.props.onPress}>
         <View style={[styles.largeMenuItemContainer, this.props.style]}>
-          <Image style={styles.largeImageStyle} source={this.props.iconUrl} />
+          <Image
+            resizeMode="contain"
+            style={styles.largeImageStyle}
+            source={this.props.iconUrl}
+          />
           <Text style={styles.largeTextStyle}>
             {this.props.titleId ? i18n.t('label.load') : this.props.title}
           </Text>

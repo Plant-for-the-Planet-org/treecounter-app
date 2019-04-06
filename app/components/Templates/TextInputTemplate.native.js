@@ -24,7 +24,11 @@ export function TextInputTemplate(locals) {
       <View style={[styles.containerStyle, locals.config.style]}>
         {locals.config.iconUrl ? (
           <View style={styles.imageContainerStyle}>
-            <Image style={styles.imageStyle} source={locals.config.iconUrl} />
+            <Image
+              resizeMode="contain"
+              style={styles.imageStyle}
+              source={locals.config.iconUrl}
+            />
           </View>
         ) : null}
         <TextInput
@@ -41,7 +45,7 @@ export function TextInputTemplate(locals) {
           onChange={locals.onChangeNative}
           onKeyPress={locals.onKeyPress}
           returnKeyType={locals.returnKeyType}
-          autoCapitalize={locals.autoCapitalize}
+          autoCapitalize={'sentences'}
           allowFontScaling={true}
         />
       </View>

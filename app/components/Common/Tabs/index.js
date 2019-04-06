@@ -15,9 +15,9 @@ class Tabs extends React.Component {
     this.handleTabChange = this.handleTabChange.bind(this);
   }
 
-  handleTabChange(changeEvent) {
-    this.setState({ activeTab: changeEvent.target.value });
-    this.emitTabChange(changeEvent.target.value);
+  handleTabChange(value) {
+    this.setState({ activeTab: value });
+    this.emitTabChange(value);
   }
 
   emitTabChange(tab) {
@@ -34,7 +34,7 @@ class Tabs extends React.Component {
             return (
               <label
                 key={ele.id}
-                onClick={this.handleTabChange}
+                onClick={() => this.handleTabChange(ele.id)}
                 className={
                   'radio pftp-tabs__type--option ' +
                   (this.state.activeTab === ele.id ? 'active' : '')
@@ -44,7 +44,7 @@ class Tabs extends React.Component {
                   type="radio"
                   value={ele.id}
                   checked={this.state.activeTab === ele.id}
-                  onChange={this.handleTabChange}
+                  onChange={() => this.handleTabChange(ele.id)}
                 />
                 <span>{ele.name}</span>
               </label>

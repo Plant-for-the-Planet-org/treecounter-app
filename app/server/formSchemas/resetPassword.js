@@ -4,12 +4,14 @@ export default {
   properties: {
     token: {
       type: 'string',
-      title: 'token',
+      title: null,
       widget: 'hidden',
+      icon: null,
+      help: null,
       propertyOrder: 1
     },
     password: {
-      title: 'password',
+      title: null,
       type: 'object',
       properties: {
         first: {
@@ -20,6 +22,7 @@ export default {
           },
           widget: 'password',
           icon: 'key',
+          help: null,
           propertyOrder: 1
         },
         second: {
@@ -30,14 +33,17 @@ export default {
           },
           widget: 'password',
           icon: 'key',
+          help: null,
           propertyOrder: 2
         }
       },
       required: ['first', 'second'],
+      icon: null,
+      help: null,
       propertyOrder: 2
     }
   },
   required: ['token', 'password'],
-  submit_url: '/app_dev.php/auth/en/resetPassword',
+  submit_url: '/auth/v1.0/en/resetPassword',
   submit_method: 'POST'
 };

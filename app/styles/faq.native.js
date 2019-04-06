@@ -38,8 +38,7 @@ export default (faqStyles = EStyleSheet.create({
   },
   imageStyle: {
     width: 17,
-    height: 18,
-    resizeMode: 'contain'
+    height: 18
   },
 
   a: {

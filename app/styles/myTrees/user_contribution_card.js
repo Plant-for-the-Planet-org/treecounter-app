@@ -71,8 +71,7 @@ let myTreesStyle = (color, borderColor) =>
     },
     imageStyle: {
       width: 17,
-      height: 18,
-      resizeMode: 'center'
+      height: 18
     },
     seprator: {
       height: 2,

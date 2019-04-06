@@ -15,10 +15,15 @@ import styles, {
 } from '../../styles/header/search_bar.native';
 import PropTypes from 'prop-types';
 import TouchableItem from '../../components/Common/TouchableItem.native';
+import i18n from '../../locales/i18n.js';
 
 const SearchIcon = () => (
   <View style={styles.searchIconContainer}>
-    <Image source={iosSearchGreen} style={styles.searchIcon} />
+    <Image
+      source={iosSearchGreen}
+      resizeMode="contain"
+      style={styles.searchIcon}
+    />
   </View>
 );
 
@@ -105,11 +110,12 @@ class SearchBar extends React.PureComponent {
             autoCapitalize="none"
             autoCorrect={false}
             returnKeyType="search"
-            placeholder="Search"
+            placeholder={i18n.t('label.search')}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
             onSubmitEditing={this._handleSubmit}
             style={[styles.searchInput, searchInputStyle]}
+            autoCapitalize={'sentences'}
           />
 
           <SearchIcon />
@@ -120,15 +126,12 @@ class SearchBar extends React.PureComponent {
               ? 'visible-cancel-button'
               : 'layout-only-cancel-button'
           }
-          style={[
-            styles.buttonContainer,
-            { opacity: showCancelButton ? 1 : 0 }
-          ]}
+          style={[{ opacity: showCancelButton ? 1 : 0 }]}
         >
           {this.props.showCancelSearchButton ? (
             <TouchableItem
               style={styles.button}
-              hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
+              hitSlop={{ top: 15, bottom: 15, left: 1, right: 20 }}
               onLayout={this._handleLayoutCancelButton}
               onPress={this._handlePressCancelButton}
             >
@@ -138,7 +141,7 @@ class SearchBar extends React.PureComponent {
                   color: this.props.tintColor || '#007AFF'
                 }}
               >
-                Cancel
+                {i18n.t('label.cancel')}
               </Text>
             </TouchableItem>
           ) : null}

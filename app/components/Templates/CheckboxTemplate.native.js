@@ -13,8 +13,7 @@ export function CheckboxTemplate(locals) {
   let imageStyle = {
     width: 20,
     height: 20,
-    marginRight: 10,
-    resizeMode: 'contain'
+    marginRight: 10
   };
 
   let textboxStyle = {
@@ -28,9 +27,17 @@ export function CheckboxTemplate(locals) {
     <View style={containerStyle}>
       <TouchableOpacity onPress={checkboxClicked}>
         {locals.value ? (
-          <Image style={imageStyle} source={checkedIcon} />
+          <Image
+            style={imageStyle}
+            resizeMode={'contain'}
+            source={checkedIcon}
+          />
         ) : (
-          <Image style={imageStyle} source={uncheckedIcon} />
+          <Image
+            style={imageStyle}
+            resizeMode={'contain'}
+            source={uncheckedIcon}
+          />
         )}
       </TouchableOpacity>
       <Text style={textboxStyle}>{i18n.t(locals.label)}</Text>

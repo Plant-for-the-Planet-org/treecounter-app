@@ -11,6 +11,7 @@ import CardLayout from '../Common/Card';
 import { getImageUrl } from '../../actions/apiRouting';
 import PlantedProgressBar from './PlantedProgressbar';
 import { tick } from '../../assets';
+import { updateRoute } from '../../helpers/routerHelper';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -43,6 +44,11 @@ class PlantProjectFull extends React.Component {
     this.setState({ projectImage: projectImage });
   }
 
+  updateRoute(link) {
+    updateRoute('app_treecounter', null, null, {
+      treecounter: link
+    });
+  }
   render() {
     const {
       name: projectName,
@@ -126,6 +132,15 @@ class PlantProjectFull extends React.Component {
               ) : null}
             </div>
           </div>
+          {teaserProps.tpoName && (
+            <div className="row">
+              <div className="teaser__tpoHeading">
+                <a onClick={() => this.updateRoute(teaserProps.tpoName)}>
+                  By {teaserProps.tpoName}
+                </a>
+              </div>
+            </div>
+          )}
         </div>
         <div className="project-specs__container">
           <div className="project-specs__detail">
@@ -149,12 +164,12 @@ class PlantProjectFull extends React.Component {
             </div>
           ) : null}
         </div>
-        {this.state.expanded && (
+        {this.state.expanded ? (
           <PlantProjectDetails
             {...detailsProps}
             onImageClick={this.updateProjectImage.bind(this)}
           />
-        )}
+        ) : null}
       </React.Fragment>
     );
   }

@@ -28,8 +28,7 @@ export default (LeaderboardStyle = EStyleSheet.create({
   },
   contextMenu: {
     height: 25,
-    width: 25,
-    resizeMode: 'contain'
+    width: 25
   },
   cardStyle: {
     ...boxShadow,

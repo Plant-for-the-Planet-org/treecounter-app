@@ -1,6 +1,7 @@
 import React from 'react';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/forms/select.native';
+import { Dropdown } from 'react-native-material-dropdown';
 
 import PropTypes from 'prop-types';
 import {
@@ -9,7 +10,8 @@ import {
   Animated,
   TouchableOpacity,
   Picker,
-  Platform
+  Platform,
+  TouchableNativeFeedback
 } from 'react-native';
 import datePickerStyle from '../../styles/date_picker.native';
 
@@ -85,25 +87,59 @@ class SelectTemplateIOS extends React.PureComponent {
     const height = this.state.isCollapsed ? 0 : UIPICKER_HEIGHT;
     if (Platform.OS === 'android') {
       return (
-        <View style={{ marginBottom: 8 }}>
-          <Picker
-            mode="dropdown"
-            selectedValue={formattedValue}
-            onValueChange={itemValue => locals.onChange(itemValue)}
-            style={[datepickerStyle, { marginBottom: -2, marginTop: -10 }]}
-          >
-            {this.props.options.map(option => (
-              <Picker.Item
-                itemStyle={styles.itemStyle}
-                key={option.value}
-                label={i18n.t(option.text)}
-                color={'#686060'}
-                value={option.value}
-              />
-            ))}
-          </Picker>
-          <View style={[datePickerStyle.underlineStyle, { marginLeft: 8 }]} />
-        </View>
+        //   <View style={datePickerStyle.datePickerContainer}>
+        //     <TouchableNativeFeedback
+        //       style={touchableStyle}
+        //       disabled={locals.disabled}
+        //       onPress={this._onPress}
+        //     >
+        //       <Text style={dateValueStyle}>{formattedValue}</Text>
+        //     </TouchableNativeFeedback>
+        //     <Picker
+        //       mode="dropdown"
+        //       selectedValue={formattedValue}
+        //       onValueChange={itemValue => locals.onChange(itemValue)}
+        //       style={[datepickerStyle, { marginBottom: -2, marginTop: -10 }]}
+        //     >
+        //       {this.props.options.map(option => (
+        //         <Picker.Item
+        //           itemStyle={styles.itemStyle}
+        //           key={option.value}
+        //           label={i18n.t(option.text)}
+        //           color={'#686060'}
+        //           value={option.value}
+        //         />
+        //       ))}
+        //     </Picker>
+        //     <View style={[datePickerStyle.underlineStyle, { marginLeft: 8 }]} />
+        //   </View>
+        // );
+        <Dropdown
+          containerStyle={[
+            {
+              width: '100%',
+              height: 35,
+              marginLeft: 20,
+              marginBottom: 10,
+              marginRight: 10
+            }
+          ]}
+          dropdownOffset={{
+            top: 10,
+            left: 0
+          }}
+          itemTextStyle={{
+            fontSize: 13,
+            color: '#686060'
+          }}
+          textColor="rgba(104,96,96, 0.8)"
+          selectedItemColor="rgba(104,96,96, 0.8)"
+          labelExtractor={item => item.text || locals.value}
+          valueExtractor={item => item.value}
+          onChangeText={item => locals.onChange(item)}
+          label={i18n.t(locals.value.text)}
+          data={this.props.options}
+        />
       );
     }
     return (

@@ -307,7 +307,9 @@ class ContributionCard extends React.Component {
         ) : null}
         <View style={styles.labelStyle}>
           <Text style={styles.labelTextStyle}>
-            {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+            {cardType && cardType.length > 0
+              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+              : ''}
           </Text>
         </View>
       </CardLayout>
@@ -353,7 +355,9 @@ class ContributionCard extends React.Component {
         ) : null}
         <View style={styles.labelStyle}>
           <Text style={styles.labelTextStyle}>
-            {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+            {cardType && cardType.length > 0
+              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+              : ''}
           </Text>
         </View>
       </CardLayout>
@@ -399,7 +403,9 @@ class ContributionCard extends React.Component {
         ) : null}
         <View style={styles.labelStyle}>
           <Text style={styles.labelTextStyle}>
-            {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+            {cardType && cardType.length > 0
+              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+              : ''}
           </Text>
         </View>
       </CardLayout>

@@ -156,9 +156,20 @@ class EditUserProfileContainer extends React.Component {
     console.log(profileForm.validate());
     let value = profileForm.getValue();
 
-    let imageValue = imageForm.getValue();
-    if (imageValue) {
-      this.props.updateUserProfile(imageValue, 'image');
+    let imageValue = undefined;
+    if (!!imageForm) {
+      imageValue = imageForm.getValue();
+    }
+    if (!!imageValue) {
+      this.props
+        .updateUserProfile(imageValue, 'image')
+        .catch(
+          NotificationManager.error(
+            'Image upload Err',
+            i18n.t('label.error_title'),
+            5000
+          )
+        );
     }
     if (value) {
       this.props

@@ -38,7 +38,8 @@ class CollapsibleDatePickerAndroid extends React.PureComponent {
   openDatePicker() {
     try {
       DatePickerAndroid.open({
-        date: new Date()
+        date: new Date(),
+        maxDate: new Date()
       }).then(date => {
         if (date.action !== DatePickerAndroid.dismissedAction) {
           //Please take note that the number of the months is based on

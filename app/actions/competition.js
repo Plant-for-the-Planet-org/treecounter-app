@@ -146,6 +146,7 @@ export function enrollCompetition(id) {
     postAuthenticatedRequest('competitionEnroll_post', data, {
       version: 'v1.1'
     }).then(res => {
+      console.log(JSON.stringify(res.data));
       dispatch(
         mergeEntities(
           normalize(
@@ -186,7 +187,8 @@ export function fetchCompetitionDetail(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     getAuthenticatedRequest('competition_get', { uid: id }).then(res => {
-      dispatch(setCompetitionDetail(res.data));
+      dispatch(mergeEntities(normalize(res.data, competitionSchema)));
+      dispatch(setCompetitionDetail(id));
       dispatch(setProgressModelState(false));
     });
   };

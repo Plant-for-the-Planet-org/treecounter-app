@@ -42,7 +42,7 @@ class CompetitionFull extends React.Component {
     console.log(this.props);
     let status = '',
       button = null;
-    const competitionDetail = this.props.competitionDetail.competitionDetail;
+    const competitionDetail = this.props.competitionDetail;
     let participantCount = 0,
       requestCount = 0,
       inviteCount = 0;

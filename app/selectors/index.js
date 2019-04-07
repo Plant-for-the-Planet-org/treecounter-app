@@ -4,7 +4,8 @@ import { denormalize } from 'normalizr';
 import {
   userProfileSchema,
   plantProjectSchema,
-  competitionPagerSchema
+  competitionPagerSchema,
+  competitionSchema
 } from '../schemas';
 import { getCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
 import { getUserFeeds } from '../reducers/userFeedReducer';
@@ -43,8 +44,8 @@ export const pledgesSelector = state => getPledges(state);
 export const currenciesSelector = state => getCurrencies(state);
 export const paymentStatusSelector = state => getPaymentStatus(state);
 export const pledgeEventSelector = state => getPledgeEvents(state);
-export const competitionDetailSelector = state => getCompetitionDetail(state);
-
+export const selectedCompetitionIdSelector = state =>
+  getCompetitionDetail(state);
 function logSelectorUpdate(selectorName, args = 'None') {
   const debug = false;
   debug && console.log('SELECTOR: ' + selectorName, args);
@@ -94,6 +95,20 @@ export const getAllPlantProjectsSelector = createSelector(
   }
 );
 
+// export const competitionDetailSelector = state => getCompetitionDetail(state);
+export const competitionDetailSelector = createSelector(
+  selectedCompetitionIdSelector,
+  entitiesSelector,
+  (selectedCompetitionId, entities) => {
+    return null === selectedCompetitionId
+      ? null
+      : denormalize(
+          entities.competition[selectedCompetitionId.competitionDetail],
+          competitionSchema,
+          entities
+        );
+  }
+);
 export const getAllCompetitionsSelector = createSelector(
   competitionPagerSelector,
   entitiesSelector,

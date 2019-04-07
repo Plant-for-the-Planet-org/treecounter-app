@@ -179,7 +179,9 @@ class CompetitionSnippet extends React.Component {
                       {this.props.competition.competitorCount + 1} participants
                     </Text>
                   ) : (
-                    button
+                    <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+                      button
+                    </Text>
                   )}
                 </View>
               </View>

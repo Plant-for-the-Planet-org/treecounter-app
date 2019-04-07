@@ -128,7 +128,7 @@ export default {
         propertyOrder: 8
       }
     },
-    required: ['treeCount', 'plantDate'],
+    required: ['treeCount', 'plantDate', 'geoLocation'],
     submit_url: '',
     submit_method: 'POST'
   },

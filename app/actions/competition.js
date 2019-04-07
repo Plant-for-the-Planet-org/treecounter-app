@@ -11,9 +11,12 @@ import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
 import {
   competitionEnrollmentSchema,
   competitionPagerSchema,
-  competitionSchema
+  competitionSchema,
+  treecounterSchema
 } from '../schemas';
 import { normalize } from 'normalizr';
+import { debug } from '../debug';
+import { NotificationManager } from 'react-notifications';
 
 export function fetchCompetitions(category) {
   return dispatch => {
@@ -21,14 +24,22 @@ export function fetchCompetitions(category) {
     getAuthenticatedRequest('competitions_get', {
       category: category,
       limit: 100
-    }).then(res => {
-      dispatch(
-        mergeEntities(
-          normalize(res.data.merge.competitionPager[0], competitionPagerSchema)
-        )
-      );
-      dispatch(setProgressModelState(false));
-    });
+    })
+      .then(res => {
+        dispatch(
+          mergeEntities(
+            normalize(
+              res.data.merge.competitionPager[0],
+              competitionPagerSchema
+            )
+          )
+        );
+        dispatch(setProgressModelState(false));
+      })
+      .catch(err => {
+        debug(err);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 
@@ -40,24 +51,36 @@ export function confirmPart(id) {
     };
     putAuthenticatedRequest('competitionEnrollment_put', data, {
       token: id
-    }).then(res => {
-      dispatch(
-        mergeEntities(
-          normalize(
-            res.data.merge.competitionEnrollment,
-            competitionEnrollmentSchema
-          )
-        )
-      );
-      if (res.data.merge.competition) {
+    })
+      .then(res => {
         dispatch(
           mergeEntities(
-            normalize(res.data.merge.competition, competitionSchema)
+            normalize(
+              res.data.merge.competitionEnrollment,
+              competitionEnrollmentSchema
+            )
           )
         );
-      }
-      dispatch(setProgressModelState(false));
-    });
+        if (res.data.merge.competition) {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.competition, competitionSchema)
+            )
+          );
+        }
+        if (res.data.merge.treecounter) {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.treecounter, treecounterSchema)
+            )
+          );
+        }
+        dispatch(setProgressModelState(false));
+      })
+      .catch(err => {
+        debug(err);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 
@@ -69,24 +92,36 @@ export function declinePart(id) {
     };
     putAuthenticatedRequest('competitionEnrollment_put', data, {
       token: id
-    }).then(res => {
-      dispatch(
-        mergeEntities(
-          normalize(
-            res.data.merge.competitionEnrollment,
-            competitionEnrollmentSchema
-          )
-        )
-      );
-      if (res.data.merge.competition) {
+    })
+      .then(res => {
         dispatch(
           mergeEntities(
-            normalize(res.data.merge.competition, competitionSchema)
+            normalize(
+              res.data.merge.competitionEnrollment,
+              competitionEnrollmentSchema
+            )
           )
         );
-      }
-      dispatch(setProgressModelState(false));
-    });
+        if (res.data.merge.competition) {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.competition, competitionSchema)
+            )
+          );
+        }
+        if (res.data.merge.treecounter) {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.treecounter, treecounterSchema)
+            )
+          );
+        }
+        dispatch(setProgressModelState(false));
+      })
+      .catch(err => {
+        debug(err);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 export function declineinvite(id) {
@@ -94,17 +129,29 @@ export function declineinvite(id) {
     dispatch(setProgressModelState(true));
     deleteAuthenticatedRequest('competitionEnrollment_delete', null, {
       token: id
-    }).then(res => {
-      dispatch(deleteEntity(res.data.merge.competitionEnrollment));
-      if (res.data.merge.competition) {
-        dispatch(
-          mergeEntities(
-            normalize(res.data.merge.competition, competitionSchema)
-          )
-        );
-      }
-      dispatch(setProgressModelState(false));
-    });
+    })
+      .then(res => {
+        dispatch(deleteEntity(res.data.merge.competitionEnrollment));
+        if (res.data.merge.competition) {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.competition, competitionSchema)
+            )
+          );
+        }
+        if (res.data.merge.treecounter) {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.treecounter, treecounterSchema)
+            )
+          );
+        }
+        dispatch(setProgressModelState(false));
+      })
+      .catch(err => {
+        debug(err);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 
@@ -115,26 +162,40 @@ export function leaveCompetition(id) {
       competition: id
     };
     postAuthenticatedRequest('competitionLeave_post', data, {
-      version: 'v1.1'
-    }).then(res => {
-      dispatch(
-        mergeEntities(
-          normalize(
-            res.data.merge.competitionEnrollment,
-            competitionEnrollmentSchema
-          )
-        )
-      );
-      if (res.data.merge.competition) {
+      version: 'v1.1',
+      competition: id
+    })
+      .then(res => {
+        console.log(JSON.stringify(res.data));
         dispatch(
           mergeEntities(
-            normalize(res.data.merge.competition, competitionSchema)
+            normalize(
+              res.data.merge.competitionEnrollment,
+              competitionEnrollmentSchema
+            )
           )
         );
-      }
-      dispatch(fetchMineCompetitions());
-      dispatch(setProgressModelState(false));
-    });
+        if (res.data.merge.competition) {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.competition, competitionSchema)
+            )
+          );
+        }
+        if (res.data.merge.treecounter) {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.treecounter, treecounterSchema)
+            )
+          );
+        }
+        dispatch(fetchMineCompetitions());
+        dispatch(setProgressModelState(false));
+      })
+      .catch(err => {
+        debug(err);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 export function enrollCompetition(id) {
@@ -145,26 +206,38 @@ export function enrollCompetition(id) {
     };
     postAuthenticatedRequest('competitionEnroll_post', data, {
       version: 'v1.1'
-    }).then(res => {
-      console.log(JSON.stringify(res.data));
-      dispatch(
-        mergeEntities(
-          normalize(
-            res.data.merge.competitionEnrollment,
-            competitionEnrollmentSchema
-          )
-        )
-      );
-      if (res.data.merge.competition) {
+    })
+      .then(res => {
+        console.log(JSON.stringify(res.data));
         dispatch(
           mergeEntities(
-            normalize(res.data.merge.competition, competitionSchema)
+            normalize(
+              res.data.merge.competitionEnrollment,
+              competitionEnrollmentSchema
+            )
           )
         );
-      }
-      dispatch(fetchMineCompetitions());
-      dispatch(setProgressModelState(false));
-    });
+        if (res.data.merge.competition) {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.competition, competitionSchema)
+            )
+          );
+        }
+        if (res.data.merge.treecounter) {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.treecounter, treecounterSchema)
+            )
+          );
+        }
+        dispatch(fetchMineCompetitions());
+        dispatch(setProgressModelState(false));
+      })
+      .catch(err => {
+        debug(err);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 export function fetchAllCompetitions() {
@@ -173,23 +246,36 @@ export function fetchAllCompetitions() {
 export function fetchMineCompetitions() {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    getAuthenticatedRequest('competitionsMine_get').then(res => {
-      dispatch(
-        mergeEntities(
-          normalize(res.data.merge.competitionPager[0], competitionPagerSchema)
-        )
-      );
-      dispatch(setProgressModelState(false));
-    });
+    getAuthenticatedRequest('competitionsMine_get')
+      .then(res => {
+        dispatch(
+          mergeEntities(
+            normalize(
+              res.data.merge.competitionPager[0],
+              competitionPagerSchema
+            )
+          )
+        );
+        dispatch(setProgressModelState(false));
+      })
+      .catch(err => {
+        debug(err);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 export function fetchCompetitionDetail(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    getAuthenticatedRequest('competition_get', { uid: id }).then(res => {
-      dispatch(mergeEntities(normalize(res.data, competitionSchema)));
-      dispatch(setCompetitionDetail(id));
-      dispatch(setProgressModelState(false));
-    });
+    getAuthenticatedRequest('competition_get', { uid: id })
+      .then(res => {
+        dispatch(mergeEntities(normalize(res.data, competitionSchema)));
+        dispatch(setCompetitionDetail(id));
+        dispatch(setProgressModelState(false));
+      })
+      .catch(err => {
+        debug(err);
+        dispatch(setProgressModelState(false));
+      });
   };
 }

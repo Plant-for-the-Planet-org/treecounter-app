@@ -16,6 +16,8 @@ import {
   competitionFormSchema,
   competitionFormSchemaOptions
 } from '../../../server/parsedSchemas/competition';
+import i18n from '../../../locales/i18n';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 let Form = t.form.Form;
 
 export default class MineCompetitions extends Component {
@@ -78,6 +80,7 @@ export default class MineCompetitions extends Component {
   }
 
   render() {
+    console.log(this.props.formValue);
     let { featuredProjects, featuredCompetitions } = this.state;
     return !this.state.showCompetitionForm ? (
       <View style={styles.mineContainer}>
@@ -109,7 +112,16 @@ export default class MineCompetitions extends Component {
             ref={'competitionForm'}
             type={competitionFormSchema}
             options={competitionFormSchemaOptions}
+            value={this.props.formValue}
           />
+          <PrimaryButton
+            onClick={event => {
+              this.props.onCreateCompetition();
+              event.preventDefault();
+            }}
+          >
+            {i18n.t('label.create_competition')}
+          </PrimaryButton>
         </CardLayout>
       </KeyboardAwareScrollView>
     );
@@ -119,5 +131,7 @@ MineCompetitions.propTypes = {
   allCompetitions: PropTypes.any,
   onMoreClick: PropTypes.any,
   leaveCompetition: PropTypes.any,
-  enrollCompetition: PropTypes.any
+  enrollCompetition: PropTypes.any,
+  formValue: PropTypes.any,
+  onCreateCompetition: PropTypes.any
 };

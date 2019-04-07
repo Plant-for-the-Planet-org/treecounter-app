@@ -6,5 +6,12 @@
   "request_to_join": "Request to Join",
   "confirm": "Confirm",
   "delete": "Delete",
-  "cancel_join_request": "Cancel Join Request"
+  "cancel_join_request": "Cancel Join Request",
+  "competition_name": "Competition Name",
+  "competition_goal": "Tree Target",
+  "competition_end_date": "End Date",
+  "competition_access": "Who can Join",
+  "competition_image": "Add Image",
+  "competition_description": "Type a Description (expands with text)",
+  "create_competition": "Create Competition"
 }

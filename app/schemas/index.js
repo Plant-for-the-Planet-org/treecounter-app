@@ -37,7 +37,7 @@ competitionSchema.define({
 });
 
 competitionEnrollmentSchema.define({
-  competition: competitionSchema
+  competitionEnrollment: competitionSchema
 });
 
 competitionPagerSchema.define({

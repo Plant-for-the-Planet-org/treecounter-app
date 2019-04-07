@@ -31,9 +31,10 @@ class CompetitionSnippet extends React.Component {
     }
   }
   render() {
+    console.log(this.props);
     const competitionDetail = this.props.competition;
     let status = '',
-      button = <Text style={{ paddingLeft: 5, paddingRight: 5 }}>''</Text>;
+      button = <Text style={{ paddingLeft: 5, paddingRight: 5 }} />;
     const competitionEnrollments = this.props.competitionEnrollments;
     if (
       competitionDetail &&
@@ -179,9 +180,7 @@ class CompetitionSnippet extends React.Component {
                       {this.props.competition.competitorCount + 1} participants
                     </Text>
                   ) : (
-                    <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
-                      button
-                    </Text>
+                    button
                   )}
                 </View>
               </View>

@@ -4,7 +4,7 @@ export default {
   properties: {
     name: {
       type: 'string',
-      title: 'label.competition.name',
+      title: 'label.competition_name',
       attr: { maxlength: 255 },
       icon: null,
       help: null,
@@ -20,7 +20,7 @@ export default {
     },
     endDate: {
       type: 'string',
-      title: 'label.competition.end_date',
+      title: 'label.competition_end_date',
       widget: 'date',
       icon: null,
       help: null,
@@ -41,7 +41,7 @@ export default {
     },
     image: {
       type: 'string',
-      title: 'label.competition.image',
+      title: 'label.competition_image',
       attr: { maxlength: 255 },
       icon: null,
       help: null,
@@ -50,31 +50,31 @@ export default {
     },
     description: {
       type: 'string',
-      title: 'label.competition.description',
+      title: 'label.competition_description',
       widget: 'textarea',
       icon: null,
       help: null,
       propertyOrder: 6
-    },
-    contact: {
-      type: 'string',
-      title: 'label.competition.contact',
-      attr: { maxlength: 255 },
-      icon: null,
-      help: null,
-      maxLength: 255,
-      propertyOrder: 7
-    },
-    email: {
-      type: 'string',
-      title: 'label.competition.email',
-      attr: { maxlength: 50 },
-      widget: 'email',
-      icon: null,
-      help: null,
-      maxLength: 50,
-      propertyOrder: 8
     }
+    // contact: {
+    //   type: 'string',
+    //   title: 'label.competition.contact',
+    //   attr: { maxlength: 255 },
+    //   icon: null,
+    //   help: null,
+    //   maxLength: 255,
+    //   propertyOrder: 7
+    // },
+    // email: {
+    //   type: 'string',
+    //   title: 'label.competition.email',
+    //   attr: { maxlength: 50 },
+    //   widget: 'email',
+    //   icon: null,
+    //   help: null,
+    //   maxLength: 50,
+    //   propertyOrder: 8
+    // }
   },
   required: ['name', 'goal', 'endDate', 'access'],
   submit_url: '',

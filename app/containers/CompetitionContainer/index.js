@@ -18,8 +18,10 @@ import {
 class CompetitionContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { formValue: {} };
   }
 
+  createCompetition = () => {};
   componentDidMount() {
     this.props.fetchCompetitions('featured');
     this.props.fetchCompetitions('all');
@@ -39,6 +41,8 @@ class CompetitionContainer extends React.Component {
         onMoreClick={id => this.onMoreClick(id)}
         leaveCompetition={id => this.leaveCompetition(id)}
         enrollCompetition={id => this.enrollCompetition(id)}
+        formValue={this.state.formValue}
+        onCreateCompetition={this.createCompetition}
       />
     );
   }

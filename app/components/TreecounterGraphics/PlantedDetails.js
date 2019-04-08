@@ -77,8 +77,8 @@ const PlantedDetails = ({ personal, community, type, onToggle }) => (
 export default PlantedDetails;
 
 PlantedDetails.propTypes = {
-  personal: PropTypes.number.isRequired,
-  community: PropTypes.number.isRequired,
+  personal: PropTypes.string.isRequired,
+  community: PropTypes.string.isRequired,
   type: PropTypes.string,
   onToggle: PropTypes.func
 };

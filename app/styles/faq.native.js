@@ -45,5 +45,6 @@ export default (faqStyles = EStyleSheet.create({
     fontWeight: '300',
     color: '$colorPrimaryAccent'
   },
-  p: { color: '#938989' }
+  p: { color: '#938989' },
+  br: { marginBottom: -25 }
 }));

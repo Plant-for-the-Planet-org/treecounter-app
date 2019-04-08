@@ -314,7 +314,7 @@ class ContributionCard extends React.Component {
         </View>
       </CardLayout>
     ) : contributionType === 'planting' ? (
-      <CardLayout style={styles.addPadding}>
+      <CardLayout style={[styles.addPadding, styles.minHeight]}>
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
           <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
@@ -340,6 +340,17 @@ class ContributionCard extends React.Component {
             {dedicateActionLine}
           </Text>
         ) : null}
+        <Text
+          style={styles.deleteTextStyle}
+          onPress={() => {
+            this.props.navigation.navigate('delete_contribution', {
+              deleteContribution: () =>
+                this.props.deleteContribution(contribution.id)
+            });
+          }}
+        >
+          {i18n.t('label.delete')}
+        </Text>
         {mayUpdate ? (
           <Text
             style={styles.updateTextStyle}
@@ -474,7 +485,9 @@ class ContributionCard extends React.Component {
 }
 
 ContributionCard.propTypes = {
-  contribution: PropTypes.object.isRequired
+  contribution: PropTypes.object.isRequired,
+  deleteContribution: PropTypes.func,
+  navigation: PropTypes.any
 };
 
 class ActionButton extends React.Component {

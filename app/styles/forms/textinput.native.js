@@ -21,7 +21,6 @@ export default (textInputStyles = EStyleSheet.create({
     height: '100%'
   },
   textboxStyle: {
-    height: 35,
     flex: 1,
     // flexGrow: 1,
     marginLeft: 10,

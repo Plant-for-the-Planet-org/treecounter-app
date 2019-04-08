@@ -269,7 +269,12 @@ class ContributionCard extends React.Component {
       <CardLayout style={styles.addPadding}>
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
-          <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
+          >
+            {treeCountLine}
+          </Text>
         ) : null}
         {plantProjectLine ? (
           <Text
@@ -317,7 +322,12 @@ class ContributionCard extends React.Component {
       <CardLayout style={styles.addPadding}>
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
-          <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
+          >
+            {treeCountLine}
+          </Text>
         ) : null}
         {plantProjectLine ? (
           <Text
@@ -365,7 +375,12 @@ class ContributionCard extends React.Component {
       <CardLayout style={styles.addPadding}>
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
-          <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
+          >
+            {treeCountLine}
+          </Text>
         ) : null}
         {plantProjectLine ? (
           <Text

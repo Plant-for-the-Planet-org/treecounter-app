@@ -90,6 +90,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
       },
+      [getLocalRoute('app_myTrees')]: {
+        screen: UserContributions
+      },
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
       },

@@ -30,6 +30,7 @@ class SearchUser extends React.Component {
   };
   constructor(props) {
     super(props);
+
     this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 200);
   }
 
@@ -49,6 +50,7 @@ class SearchUser extends React.Component {
     getSuggestions(q).then(suggestions => {
       this.setState({ q: suggestions });
     });
+    this.setState({ selectedSuggestionName: null });
   };
 
   _onNavigationClick(suggestion) {
@@ -119,7 +121,9 @@ class SearchUser extends React.Component {
               );
             })}
           </ScrollView>
-        ) : null}
+        ) : (
+          <Text>No Search Result Found.</Text>
+        )}
       </View>
     );
   }

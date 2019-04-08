@@ -121,9 +121,7 @@ class SearchUser extends React.Component {
               );
             })}
           </ScrollView>
-        ) : (
-          <Text>No Search Result Found.</Text>
-        )}
+        ) : null}
       </View>
     );
   }

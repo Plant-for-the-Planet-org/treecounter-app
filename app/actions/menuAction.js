@@ -1,4 +1,5 @@
 import { getRequest, getAuthenticatedRequest } from '../utils/api';
+import { debug } from '../debug';
 
 export function MenuAction(isAuthenticated = false) {
   return isAuthenticated

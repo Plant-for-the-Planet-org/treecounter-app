@@ -110,7 +110,8 @@ export default class ChallengeEmail extends Component {
                 width: 70
               }}
               dropdownOffset={{
-                top: 0
+                top: 0,
+                left: 0
               }}
               onChangeText={item =>
                 this.setState({

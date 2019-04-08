@@ -374,6 +374,7 @@ export default class DonateTrees extends React.PureComponent {
     this.props.donate(
       {
         ...this.state.form,
+        recipientType: this.state.modeReceipt,
         paymentResponse: {
           gateway: 'offline',
           accountName: 'offline_US',

@@ -4,8 +4,21 @@ import PrimaryButton from '../../components/Common/Button/PrimaryButton';
 import mapTemplateStyle from '../../styles/mapTemplate.native';
 
 export function MapTemplate(locals) {
+  let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
+  const error =
+    locals.hasError && locals.error ? (
+      <Text accessibilityLiveRegion="polite" style={errorBlockStyle}>
+        {locals.error}
+      </Text>
+    ) : null;
+  const borderStyle = locals.hasError
+    ? {
+        borderWidth: 2,
+        borderColor: 'red'
+      }
+    : {};
   return (
-    <View style={mapTemplateStyle.mapContainer}>
+    <View style={[mapTemplateStyle.mapContainer, borderStyle]}>
       <PrimaryButton
         onClick={() => {
           navigator.geolocation.getCurrentPosition(location => {
@@ -31,6 +44,7 @@ export function MapTemplate(locals) {
             ? parseFloat(locals.value.split('&')[0].split('=')[1]).toFixed(2)
             : locals.value.split('&')[0].split('=')[1])}
       </Text>
+      {error}
     </View>
   );
 }

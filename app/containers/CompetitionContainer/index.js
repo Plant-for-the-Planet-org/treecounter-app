@@ -15,6 +15,8 @@ import {
   competitionsSelector,
   getAllCompetitionsSelector
 } from '../../selectors';
+import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+import PublicTreecounter from '../../components/PublicTreeCounter/PublicTreecounter';
 
 class CompetitionContainer extends React.Component {
   constructor(props) {
@@ -44,6 +46,7 @@ class CompetitionContainer extends React.Component {
         leaveCompetition={id => this.leaveCompetition(id)}
         enrollCompetition={id => this.enrollCompetition(id)}
         onCreateCompetition={this.createCompetition}
+        supportTreecounterAction={this.props.supportTreecounterAction}
       />
     );
   }
@@ -68,7 +71,8 @@ const mapDispatchToProps = dispatch => {
       fetchMineCompetitions,
       leaveCompetition,
       enrollCompetition,
-      createCompetition
+      createCompetition,
+      supportTreecounterAction
     },
     dispatch
   );
@@ -84,5 +88,6 @@ CompetitionContainer.propTypes = {
   fetchMineCompetitions: PropTypes.any,
   leaveCompetition: PropTypes.any,
   enrollCompetition: PropTypes.any,
-  createCompetition: PropTypes.any
+  createCompetition: PropTypes.any,
+  supportTreecounterAction: PropTypes.any
 };

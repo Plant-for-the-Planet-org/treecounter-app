@@ -22,6 +22,7 @@ import {
   leaveCompetition
 } from '../../actions/competition';
 import CompetitionParticipant from '../../components/Competition/CompetitionParticipant.native';
+import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 
 class SelectedCompetitionContainer extends Component {
   constructor(props) {
@@ -69,6 +70,7 @@ class SelectedCompetitionContainer extends Component {
           confirmPart={id => this.props.confirmPart(id)}
           declinePart={id => this.props.declinePart(id)}
           declineinvite={id => this.props.declineinvite(id)}
+          supportTreecounterAction={this.props.supportTreecounterAction}
         />
       );
     } else {
@@ -86,7 +88,8 @@ const mapDispatchToProps = dispatch => {
       enrollCompetition,
       confirmPart,
       declinePart,
-      declineinvite
+      declineinvite,
+      supportTreecounterAction
     },
     dispatch
   );
@@ -103,5 +106,6 @@ SelectedCompetitionContainer.propTypes = {
   enrollCompetition: PropTypes.any,
   confirmPart: PropTypes.any,
   declinePart: PropTypes.any,
-  declineinvite: PropTypes.any
+  declineinvite: PropTypes.any,
+  supportTreecounterAction: PropTypes.any
 };

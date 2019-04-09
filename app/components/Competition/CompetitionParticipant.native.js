@@ -8,12 +8,18 @@ import { flagTarget } from '../../assets';
 import UserProfileImage from '../Common/UserProfileImage.native';
 import snippetStyles from '../../styles/competition/competition-snippet.native';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 
 class CompetitionParticipant extends React.Component {
   constructor(props) {
     super(props);
+    this.supportButton = this.supportButton.bind(this);
   }
 
+  supportButton() {
+    this.props.supportTreecounterAction(this.props.competitor.treecounterSlug);
+    updateRoute('app_donateTrees', this.props.navigation);
+  }
   render() {
     return (
       <View style={styles.topCompetitorSection}>
@@ -67,6 +73,7 @@ class CompetitionParticipant extends React.Component {
               style={snippetStyles.buttonItem}
               buttonStyle={snippetStyles.buttonStyle}
               textStyle={snippetStyles.buttonTextStyle}
+              onClick={() => this.supportButton()}
             >
               <Text> {i18n.t('label.support')}</Text>
             </PrimaryButton>
@@ -95,5 +102,6 @@ CompetitionParticipant.propTypes = {
   type: PropTypes.any,
   confirmPart: PropTypes.any,
   declinePart: PropTypes.any,
-  declineinvite: PropTypes.any
+  declineinvite: PropTypes.any,
+  supportTreecounterAction: PropTypes.any
 };

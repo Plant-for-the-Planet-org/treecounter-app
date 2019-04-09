@@ -243,6 +243,9 @@ class CompetitionFull extends React.Component {
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               declineinvite={id => this.props.declineinvite(id)}
+                              supportTreecounterAction={
+                                this.props.supportTreecounterAction
+                              }
                               key={index}
                             />
                           ) : null
@@ -276,6 +279,9 @@ class CompetitionFull extends React.Component {
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               declineinvite={id => this.props.declineinvite(id)}
+                              supportTreecounterAction={
+                                this.props.supportTreecounterAction
+                              }
                               key={index}
                             />
                           ) : null
@@ -305,6 +311,9 @@ class CompetitionFull extends React.Component {
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               declineinvite={id => this.props.declineinvite(id)}
+                              supportTreecounterAction={
+                                this.props.supportTreecounterAction
+                              }
                               key={index}
                             />
                           ) : null
@@ -348,5 +357,6 @@ CompetitionFull.propTypes = {
   enrollCompetition: PropTypes.any,
   confirmPart: PropTypes.any,
   declinePart: PropTypes.any,
-  declineinvite: PropTypes.any
+  declineinvite: PropTypes.any,
+  supportTreecounterAction: PropTypes.any
 };

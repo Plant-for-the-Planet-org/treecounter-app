@@ -8,7 +8,7 @@ import { registerTree } from '../../actions/registerTree';
 import { userTreecounterSelector } from '../../selectors/index';
 import { mergeContributionImages } from '../../helpers/utils';
 import { currentUserProfileSelector } from '../../selectors/index';
-import { NavigationEvents } from 'react-navigation';
+import NavigationEvents from './importNavigationEvents';
 
 import {
   schemaOptionsSingleTree,
@@ -87,15 +87,17 @@ class RegisterTreesContainer extends PureComponent {
 
   render() {
     return [
-      <NavigationEvents
-        onWillFocus={payload => {
-          this.setState({ loadSvg: true });
-        }}
-        onWillBlur={payload => {
-          this.setState({ loadSvg: false });
-        }}
-        key="navigation-events"
-      />,
+      this.props.navigation ? (
+        <NavigationEvents
+          onWillFocus={payload => {
+            this.setState({ loadSvg: true });
+          }}
+          onWillBlur={payload => {
+            this.setState({ loadSvg: false });
+          }}
+          key="navigation-events"
+        />
+      ) : null,
       this.state.loadSvg ? (
         <RegisterTrees
           key="register-tree"

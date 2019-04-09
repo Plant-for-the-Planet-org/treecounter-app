@@ -8,7 +8,7 @@ import {
   Image
 } from 'react-native';
 
-import { NavigationEvents } from 'react-navigation';
+import NavigationEvents from './importNavigationEvents';
 
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
@@ -232,15 +232,17 @@ class Trillion extends PureComponent {
     console.log(this.state.loadSvg);
 
     return [
-      <NavigationEvents
-        onWillFocus={payload => {
-          this.setState({ loadSvg: true });
-        }}
-        onWillBlur={payload => {
-          this.setState({ loadSvg: false });
-        }}
-        key="navigation-events"
-      />,
+      this.props.navigation ? (
+        <NavigationEvents
+          onWillFocus={payload => {
+            this.setState({ loadSvg: true });
+          }}
+          onWillBlur={payload => {
+            this.setState({ loadSvg: false });
+          }}
+          key="navigation-events"
+        />
+      ) : null,
       <Animated.View
         style={[
           { height: viewheight },
@@ -277,5 +279,6 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(Trillion);
 
 Trillion.propTypes = {
-  pledgeEvents: PropTypes.object
+  pledgeEvents: PropTypes.object,
+  navigation: PropTypes.any
 };

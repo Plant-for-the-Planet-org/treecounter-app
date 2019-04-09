@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 
-import { NavigationEvents } from 'react-navigation';
+import NavigationEvents from './importNavigationEvents';
 import { deleteContribution } from '../../actions/EditMyTree';
-
-import { View } from 'react-native';
 
 import {
   userTreecounterDataSelector,
@@ -25,19 +23,21 @@ class UserHomeContainer extends React.Component {
     };
   }
   render() {
-    const { treecounterData, currentUserProfile } = this.props;
+    const { treecounterData, currentUserProfile, navigation } = this.props;
     console.log(this.state.loadSvg);
 
     return [
-      <NavigationEvents
-        onWillFocus={payload => {
-          this.setState({ loadSvg: true });
-        }}
-        onWillBlur={payload => {
-          this.setState({ loadSvg: false });
-        }}
-        key="navigation-events"
-      />,
+      navigation ? (
+        <NavigationEvents
+          onWillFocus={payload => {
+            this.setState({ loadSvg: true });
+          }}
+          onWillBlur={payload => {
+            this.setState({ loadSvg: false });
+          }}
+          key="navigation-events"
+        />
+      ) : null,
       this.state.loadSvg ? (
         <UserHome
           key="user-home"

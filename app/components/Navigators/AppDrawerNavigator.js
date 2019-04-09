@@ -24,6 +24,7 @@ import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout';
 import AboutUsContainer from '../../containers/AboutUs';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
+import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
 import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import BottomTabContainer from '../../containers/Menu/TabContainer';
@@ -72,6 +73,7 @@ const headerLabels = {
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license',
   ['delete_profile_confirm']: 'label.delete_profile',
+  ['delete_contribution']: 'label.delete_contribution',
   ['app_donate_detail']: 'label.donate',
   ['app_gift_projects']: 'label.gift_trees'
 };
@@ -93,6 +95,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
+      },
+      [getLocalRoute('app_myTrees')]: {
+        screen: UserContributions
       },
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
@@ -157,6 +162,25 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
   const deleteProfileNavigator = createStackNavigator(
     {
       ['delete_profile_confirm']: { screen: ConfirmProfileDeletionModal }
+    },
+    {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
+  const deleteContributionNavigator = createStackNavigator(
+    {
+      ['delete_contribution']: {
+        screen: ConfirmContributionDeletionModal
+      }
     },
     {
       headerMode: 'none',
@@ -296,6 +320,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       appStackNavigator,
       searchNavigator: searchNavigator,
       deleteProfileNavigator,
+      deleteContributionNavigator,
       welcomeScreenNavigator
     },
     {

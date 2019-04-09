@@ -47,6 +47,15 @@ class SearchBar extends React.PureComponent {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.inputValue &&
+      nextProps.inputValue.toLowerCase().includes(this.state.text.toLowerCase())
+    ) {
+      this.setState({ text: nextProps.inputValue });
+    }
+  }
+
   _handleLayoutCancelButton = e => {
     if (this.state.showCancelButton) {
       return;
@@ -83,14 +92,6 @@ class SearchBar extends React.PureComponent {
       searchInputStyle.color = this.props.textColor;
     }
     let inputValue = this.state.text;
-    if (
-      this.props.inputValue &&
-      this.props.inputValue
-        .toLowerCase()
-        .includes(this.state.text.toLowerCase())
-    ) {
-      inputValue = this.props.inputValue;
-    }
 
     return (
       <View style={styles.container}>

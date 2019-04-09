@@ -209,7 +209,11 @@ export default class DonateTrees extends React.PureComponent {
 
   handleModeReceiptChange(tab) {
     this.setState({
-      modeReceipt: tab
+      modeReceipt: tab,
+      form: {
+        ...this.state.form,
+        recipientType: tab
+      }
     });
   }
 

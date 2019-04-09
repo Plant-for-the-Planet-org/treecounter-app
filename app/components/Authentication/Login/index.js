@@ -16,9 +16,7 @@ let TCombForm = t.form.Form;
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      recaptchaToken: null
-    };
+    this._recaptchaToken = undefined;
   }
 
   componentDidMount() {
@@ -35,11 +33,8 @@ export default class Login extends Component {
 
   verifyCallback = token => {
     // Here you will get the final token!!!
-    this.setState({
-      recaptchaToken: token
-    });
+    this._recaptchaToken = token;
   };
-
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">
@@ -60,7 +55,7 @@ export default class Login extends Component {
 
             <PrimaryButton
               onClick={event => {
-                this.props.onPress(this.state.recaptchaToken);
+                this.props.onPress(this._recaptchaToken);
                 event.preventDefault();
               }}
             >

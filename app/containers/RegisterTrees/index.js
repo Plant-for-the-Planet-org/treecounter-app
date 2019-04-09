@@ -22,7 +22,7 @@ class RegisterTreesContainer extends PureComponent {
     this.state = {
       schemaOptionsSingleTree: schemaOptionsSingleTree,
       schemaOptionsMultipleTrees: schemaOptionsMultipleTrees,
-      loadSvg: false
+      loadSvg: true
     };
   }
   onSubmit = (mode, registerTreeForm) => {

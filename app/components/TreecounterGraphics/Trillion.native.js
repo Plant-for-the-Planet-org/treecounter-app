@@ -48,7 +48,7 @@ class Trillion extends PureComponent {
       displayName: '',
       loading: true,
       offsetY: new Animated.Value(0),
-      loadSvg: false,
+      loadSvg: true,
       routes: [
         { key: 'world', title: 'World' },
         { key: 'leaderBoard', title: 'LeaderBoard' }

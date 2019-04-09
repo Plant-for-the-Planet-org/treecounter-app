@@ -5,6 +5,7 @@ import { updateRoute } from '../../helpers/routerHelper';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
+  createCompetition,
   enrollCompetition,
   fetchCompetitions,
   fetchMineCompetitions,
@@ -18,10 +19,11 @@ import {
 class CompetitionContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { formValue: {} };
   }
 
-  createCompetition = () => {};
+  createCompetition = value => {
+    this.props.createCompetition(value, this.props.navigation);
+  };
   componentDidMount() {
     this.props.fetchCompetitions('featured');
     this.props.fetchCompetitions('all');
@@ -41,7 +43,6 @@ class CompetitionContainer extends React.Component {
         onMoreClick={id => this.onMoreClick(id)}
         leaveCompetition={id => this.leaveCompetition(id)}
         enrollCompetition={id => this.enrollCompetition(id)}
-        formValue={this.state.formValue}
         onCreateCompetition={this.createCompetition}
       />
     );
@@ -66,7 +67,8 @@ const mapDispatchToProps = dispatch => {
       fetchCompetitions,
       fetchMineCompetitions,
       leaveCompetition,
-      enrollCompetition
+      enrollCompetition,
+      createCompetition
     },
     dispatch
   );
@@ -81,5 +83,6 @@ CompetitionContainer.propTypes = {
   allCompetitions: PropTypes.any,
   fetchMineCompetitions: PropTypes.any,
   leaveCompetition: PropTypes.any,
-  enrollCompetition: PropTypes.any
+  enrollCompetition: PropTypes.any,
+  createCompetition: PropTypes.any
 };

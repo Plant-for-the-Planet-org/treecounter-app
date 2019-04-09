@@ -29,9 +29,9 @@ export default {
     access: {
       enum: ['immediate', 'request', 'invitation'],
       enum_titles: [
-        'label.competition_access.immediate',
-        'label.competition_access.request',
-        'label.competition_access.invitation'
+        'label.competition_access_immediate',
+        'label.competition_access_request',
+        'label.competition_access_invitation'
       ],
       type: 'string',
       title: 'label.competition_access',
@@ -39,15 +39,15 @@ export default {
       help: null,
       propertyOrder: 4
     },
-    image: {
-      type: 'string',
-      title: 'label.competition_image',
-      attr: { maxlength: 255 },
-      icon: null,
-      help: null,
-      maxLength: 255,
-      propertyOrder: 5
-    },
+    // image: {
+    //   type: 'string',
+    //   title: 'label.competition_image',
+    //   attr: { maxlength: 255 },
+    //   icon: null,
+    //   help: null,
+    //   maxLength: 255,
+    //   propertyOrder: 5
+    // },
     description: {
       type: 'string',
       title: 'label.competition_description',

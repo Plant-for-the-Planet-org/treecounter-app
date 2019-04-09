@@ -17,6 +17,7 @@ import {
 import { normalize } from 'normalizr';
 import { debug } from '../debug';
 import { NotificationManager } from 'react-notifications';
+import { updateRoute } from '../helpers/routerHelper';
 
 export function fetchCompetitions(category) {
   return dispatch => {
@@ -167,14 +168,7 @@ export function leaveCompetition(id) {
     })
       .then(res => {
         console.log(JSON.stringify(res.data));
-        dispatch(
-          mergeEntities(
-            normalize(
-              res.data.merge.competitionEnrollment,
-              competitionEnrollmentSchema
-            )
-          )
-        );
+
         if (res.data.merge.competition) {
           dispatch(
             mergeEntities(
@@ -182,18 +176,40 @@ export function leaveCompetition(id) {
             )
           );
         }
-        if (res.data.merge.treecounter) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.treecounter, treecounterSchema)
-            )
-          );
-        }
+        dispatch(
+          deleteEntity({
+            competitionEnrollment: res.data.delete.competitionEnrollment
+          })
+        );
         dispatch(fetchMineCompetitions());
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
         debug(err);
+        dispatch(setProgressModelState(false));
+      });
+  };
+}
+
+export function createCompetition(value, navigation) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    postAuthenticatedRequest('competition_post', value)
+      .then(res => {
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competition, competitionSchema)
+          )
+        );
+        dispatch(setCompetitionDetail(res.data.merge.competition[0].id));
+        updateRoute('app_competition', navigation || dispatch, 1, {
+          competition: id
+        });
+        dispatch(setProgressModelState(true));
+      })
+      .catch(error => {
+        console.log(error);
+        debug(error);
         dispatch(setProgressModelState(false));
       });
   };

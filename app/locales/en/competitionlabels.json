@@ -13,5 +13,8 @@
   "competition_access": "Who can Join",
   "competition_image": "Add Image",
   "competition_description": "Type a Description (expands with text)",
-  "create_competition": "Create Competition"
+  "create_competition": "Create Competition",
+  "competition_access_immediate": "Immediate",
+  "competition_access_request": "Request",
+  "competition_access_invitation": "Invitation"
 }

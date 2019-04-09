@@ -196,19 +196,15 @@ export function createCompetition(value, navigation) {
     dispatch(setProgressModelState(true));
     postAuthenticatedRequest('competition_post', value)
       .then(res => {
-        dispatch(
-          mergeEntities(
-            normalize(res.data.merge.competition, competitionSchema)
-          )
-        );
-        dispatch(setCompetitionDetail(res.data.merge.competition[0].id));
+        console.log(res);
+        dispatch(mergeEntities(normalize(res.data, competitionSchema)));
+        dispatch(setCompetitionDetail(res.data.id));
         updateRoute('app_competition', navigation || dispatch, 1, {
-          competition: id
+          competition: res.data.id
         });
-        dispatch(setProgressModelState(true));
+        dispatch(setProgressModelState(false));
       })
       .catch(error => {
-        console.log(error);
         debug(error);
         dispatch(setProgressModelState(false));
       });

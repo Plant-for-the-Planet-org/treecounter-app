@@ -12,8 +12,8 @@ export default {
       propertyOrder: 1
     },
     goal: {
-      type: 'number',
-      title: 'label.competition.goal',
+      type: 'string',
+      title: 'label.competition_goal',
       icon: null,
       help: null,
       propertyOrder: 2

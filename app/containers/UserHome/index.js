@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 
+import NavigationEvents from './importNavigationEvents';
 import { deleteContribution } from '../../actions/EditMyTree';
 
 import {
@@ -15,19 +16,40 @@ import {
 import UserHome from '../../components/UserHome';
 
 class UserHomeContainer extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      loadSvg: true
+    };
+  }
   render() {
-    const { treecounterData, currentUserProfile } = this.props;
+    const { treecounterData, currentUserProfile, navigation } = this.props;
+    console.log(this.state.loadSvg);
 
-    return (
-      <UserHome
-        treecounterData={treecounterData}
-        userProfile={currentUserProfile}
-        userProfileId={this.props.userProfileId}
-        userContributions={this.props.userContributions}
-        navigation={this.props.navigation}
-        deleteContribution={this.props.deleteContribution}
-      />
-    );
+    return [
+      navigation ? (
+        <NavigationEvents
+          onWillFocus={payload => {
+            this.setState({ loadSvg: true });
+          }}
+          onWillBlur={payload => {
+            this.setState({ loadSvg: false });
+          }}
+          key="navigation-events"
+        />
+      ) : null,
+      this.state.loadSvg ? (
+        <UserHome
+          key="user-home"
+          treecounterData={treecounterData}
+          userProfile={currentUserProfile}
+          userProfileId={this.props.userProfileId}
+          userContributions={this.props.userContributions}
+          navigation={this.props.navigation}
+          deleteContribution={this.props.deleteContribution}
+        />
+      ) : null
+    ];
   }
 }
 

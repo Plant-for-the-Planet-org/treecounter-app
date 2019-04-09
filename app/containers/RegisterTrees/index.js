@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,18 +8,21 @@ import { registerTree } from '../../actions/registerTree';
 import { userTreecounterSelector } from '../../selectors/index';
 import { mergeContributionImages } from '../../helpers/utils';
 import { currentUserProfileSelector } from '../../selectors/index';
+import { NavigationEvents } from 'react-navigation';
+
 import {
   schemaOptionsSingleTree,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
 import { handleServerResponseError } from '../../helpers/utils';
 
-class RegisterTreesContainer extends Component {
+class RegisterTreesContainer extends PureComponent {
   constructor() {
     super();
     this.state = {
       schemaOptionsSingleTree: schemaOptionsSingleTree,
-      schemaOptionsMultipleTrees: schemaOptionsMultipleTrees
+      schemaOptionsMultipleTrees: schemaOptionsMultipleTrees,
+      loadSvg: false
     };
   }
   onSubmit = (mode, registerTreeForm) => {
@@ -83,15 +86,27 @@ class RegisterTreesContainer extends Component {
   };
 
   render() {
-    return (
-      <RegisterTrees
-        ref="registerTrees"
-        onSubmit={this.onSubmit}
-        schemaOptionsSingleTree={this.state.schemaOptionsSingleTree}
-        schemaOptionsMultipleTrees={this.state.schemaOptionsMultipleTrees}
-        currentUserProfile={this.props.currentUserProfile}
-      />
-    );
+    return [
+      <NavigationEvents
+        onWillFocus={payload => {
+          this.setState({ loadSvg: true });
+        }}
+        onWillBlur={payload => {
+          this.setState({ loadSvg: false });
+        }}
+        key="navigation-events"
+      />,
+      this.state.loadSvg ? (
+        <RegisterTrees
+          key="register-tree"
+          ref="registerTrees"
+          onSubmit={this.onSubmit}
+          schemaOptionsSingleTree={this.state.schemaOptionsSingleTree}
+          schemaOptionsMultipleTrees={this.state.schemaOptionsMultipleTrees}
+          currentUserProfile={this.props.currentUserProfile}
+        />
+      ) : null
+    ];
   }
 }
 

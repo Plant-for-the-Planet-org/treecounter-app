@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   ScrollView,
   Text,
@@ -7,6 +7,8 @@ import {
   Animated,
   Image
 } from 'react-native';
+
+import { NavigationEvents } from 'react-navigation';
 
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
@@ -38,7 +40,7 @@ import { getImageUrl } from '../../actions/apiRouting';
 
 const height = Dimensions.get('window').height;
 let viewheight = height - 50;
-class Trillion extends Component {
+class Trillion extends PureComponent {
   constructor() {
     super();
     this.state = {
@@ -46,6 +48,7 @@ class Trillion extends Component {
       displayName: '',
       loading: true,
       offsetY: new Animated.Value(0),
+      loadSvg: false,
       routes: [
         { key: 'world', title: 'World' },
         { key: 'leaderBoard', title: 'LeaderBoard' }
@@ -89,9 +92,7 @@ class Trillion extends Component {
         });
       });
   }
-  shouldComponentUpdate() {
-    return true;
-  }
+
   onMoreClick(id) {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
@@ -228,8 +229,18 @@ class Trillion extends Component {
       inputRange: [0, 120],
       outputRange: [0, -50]
     });
+    console.log(this.state.loadSvg);
 
-    return (
+    return [
+      <NavigationEvents
+        onWillFocus={payload => {
+          this.setState({ loadSvg: true });
+        }}
+        onWillBlur={payload => {
+          this.setState({ loadSvg: false });
+        }}
+        key="navigation-events"
+      />,
       <Animated.View
         style={[
           { height: viewheight },
@@ -238,16 +249,19 @@ class Trillion extends Component {
             flexGrow: 1
           }
         ]}
+        key="world-tab"
       >
-        <TabView
-          useNativeDriver
-          navigationState={this.state}
-          renderScene={this._renderScreen}
-          renderTabBar={this._renderTabBar}
-          onIndexChange={this._handleIndexChange}
-        />
+        {this.state.loadSvg ? (
+          <TabView
+            useNativeDriver
+            navigationState={this.state}
+            renderScene={this._renderScreen}
+            renderTabBar={this._renderTabBar}
+            onIndexChange={this._handleIndexChange}
+          />
+        ) : null}
       </Animated.View>
-    );
+    ];
   }
 }
 
@@ -255,6 +269,7 @@ const mapStateToProps = state => ({
   pledgeEvents: pledgeEventSelector(state),
   plantProjects: getAllPlantProjectsSelector(state)
 });
+
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ selectPlantProjectAction }, dispatch);
 };

@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 
+import { NavigationEvents } from 'react-navigation';
 import { deleteContribution } from '../../actions/EditMyTree';
+
+import { View } from 'react-native';
 
 import {
   userTreecounterDataSelector,
@@ -15,19 +18,38 @@ import {
 import UserHome from '../../components/UserHome';
 
 class UserHomeContainer extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      loadSvg: true
+    };
+  }
   render() {
     const { treecounterData, currentUserProfile } = this.props;
+    console.log(this.state.loadSvg);
 
-    return (
-      <UserHome
-        treecounterData={treecounterData}
-        userProfile={currentUserProfile}
-        userProfileId={this.props.userProfileId}
-        userContributions={this.props.userContributions}
-        navigation={this.props.navigation}
-        deleteContribution={this.props.deleteContribution}
-      />
-    );
+    return [
+      <NavigationEvents
+        onWillFocus={payload => {
+          this.setState({ loadSvg: true });
+        }}
+        onWillBlur={payload => {
+          this.setState({ loadSvg: false });
+        }}
+        key="navigation-events"
+      />,
+      this.state.loadSvg ? (
+        <UserHome
+          key="user-home"
+          treecounterData={treecounterData}
+          userProfile={currentUserProfile}
+          userProfileId={this.props.userProfileId}
+          userContributions={this.props.userContributions}
+          navigation={this.props.navigation}
+          deleteContribution={this.props.deleteContribution}
+        />
+      ) : null
+    ];
   }
 }
 

@@ -229,7 +229,6 @@ class Trillion extends PureComponent {
       inputRange: [0, 120],
       outputRange: [0, -50]
     });
-    console.log(this.state.loadSvg);
 
     return [
       this.props.navigation ? (

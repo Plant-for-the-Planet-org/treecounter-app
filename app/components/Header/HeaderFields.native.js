@@ -10,7 +10,6 @@ import { Share } from 'react-native';
 
 export default (HeaderRight = function(navigation, userProfile, isLoggedIn) {
   function handleShare(redirectPath) {
-    console.log(navigation.state);
     Share.share({
       url: redirectPath
     });

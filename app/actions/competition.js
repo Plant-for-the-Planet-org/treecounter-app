@@ -14,7 +14,6 @@ import {
 } from '../reducers/entitiesReducer';
 import {
   competitionEnrollmentSchema,
-  competitionEnrollSchema,
   competitionPagerSchema,
   competitionSchema,
   treecounterSchema
@@ -177,7 +176,11 @@ export function leaveCompetition(id) {
         console.log(JSON.stringify(res.data));
 
         if (res.data.merge) {
-          dispatch(mergeEntities(normalize(res.data.merge, competitionSchema)));
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.competition, [competitionSchema])
+            )
+          );
         }
         dispatch(unlinkEntity(res.data.unlink));
         dispatch(deleteEntity(res.data.delete));
@@ -197,9 +200,15 @@ export function createCompetition(value, navigation) {
       .then(res => {
         console.log(res);
         dispatch(
-          mergeEntities(normalize(res.data.merge, competitionEnrollSchema))
+          mergeEntities(
+            normalize(res.data.merge.competition, [competitionSchema])
+          )
         );
-        dispatch(setCompetitionDetail(res.data.merge.competition[0].id));
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.treecounter, [treecounterSchema])
+          )
+        );
         updateRoute('app_competition', navigation || dispatch, 1, {
           competition: res.data.merge.competition[0].id
         });
@@ -211,6 +220,7 @@ export function createCompetition(value, navigation) {
       });
   };
 }
+
 export function enrollCompetition(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
@@ -223,7 +233,21 @@ export function enrollCompetition(id) {
       .then(res => {
         console.log(JSON.stringify(res.data));
         dispatch(
-          mergeEntities(normalize(res.data.merge, competitionEnrollSchema))
+          mergeEntities(
+            normalize(res.data.merge.treecounter, [treecounterSchema])
+          )
+        );
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competition, [competitionSchema])
+          )
+        );
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competitionEnrollment, [
+              competitionEnrollmentSchema
+            ])
+          )
         );
         dispatch(setProgressModelState(false));
       })
@@ -236,6 +260,7 @@ export function enrollCompetition(id) {
 export function fetchAllCompetitions() {
   return getAuthenticatedRequest('competitions_get', { category: 'all' });
 }
+
 export function fetchMineCompetitions() {
   return dispatch => {
     dispatch(setProgressModelState(true));

@@ -38,7 +38,6 @@ class CompetitionContainer extends React.Component {
     this.props.enrollCompetition(id);
   }
   render() {
-    console.log(this.props);
     return (
       <Competiton
         allCompetitions={this.props.allCompetitions}

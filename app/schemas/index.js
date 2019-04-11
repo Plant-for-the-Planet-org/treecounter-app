@@ -7,7 +7,6 @@ export const paymentGatewaySchema = new schema.Entity('paymentGateway');
 export const competitionEnrollmentSchema = new schema.Entity(
   'competitionEnrollment'
 );
-export const competitionEnrollSchema = new schema.Entity('competitionEnroll');
 export const competitionPagerSchema = new schema.Entity('competitionPager');
 export const contributionSchema = new schema.Entity('contribution');
 export const contributionImageSchema = new schema.Entity('contributionImage');
@@ -22,19 +21,8 @@ challengeSchema.define({
 });
 
 competitionSchema.define({
-  treecounter: treecounterSchema,
   topEnrollments: [competitionEnrollmentSchema],
   allEnrollments: [competitionEnrollmentSchema]
-});
-
-competitionEnrollmentSchema.define({
-  treecounter: treecounterSchema
-});
-
-competitionEnrollSchema.define({
-  treecounter: [treecounterSchema],
-  competition: [competitionSchema],
-  competitionEnrollment: [competitionEnrollmentSchema]
 });
 
 competitionPagerSchema.define({

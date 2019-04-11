@@ -297,16 +297,12 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
           headerTitleStyle: { paddingRight: 12 },
           headerTintColor: '#fff',
           headerBackTitle: null,
-          title: getTitle(navigation)
+          title: getTitle(navigation),
+          headerRight: (
+            <HeaderRight navigation={navigation} userProfile={userProfile} />
+          )
         };
-        // if (homeRoutes.includes(navigation.state.routeName)) {
-        navigationConfig.headerRight = HeaderRight(navigation, userProfile);
-        // }
-        // if (
-        //   navigation.state.routeName === getLocalRoute('app_userHome') ||
-        //   (navigation.state.routeName === getLocalRoute('app_homepage') &&
-        //     !isLoggedIn)
-        // ) {
+
         if (navigation.state.routeName === 'Tab') {
           navigationConfig.headerLeft = <BurgerMenu navigation={navigation} />;
         }

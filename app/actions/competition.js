@@ -50,10 +50,7 @@ export function fetchCompetitions(category) {
 export function confirmPart(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    let data = {
-      status: 'enrolled'
-    };
-    putAuthenticatedRequest('competitionEnrollment_put', data, {
+    putAuthenticatedRequest('competitionEnrollment_accept', null, {
       token: id
     })
       .then(res => {
@@ -92,10 +89,7 @@ export function confirmPart(id) {
 export function declinePart(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    let data = {
-      status: 'declined'
-    };
-    putAuthenticatedRequest('competitionEnrollment_put', data, {
+    putAuthenticatedRequest('competitionEnrollment_decline', null, {
       token: id
     })
       .then(res => {

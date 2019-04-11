@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import {
+  currentUserProfileSelector,
   selectedPlantProjectSelector,
   selectedTpoSelector
 } from '../../selectors';
@@ -19,10 +20,12 @@ import {
   declineinvite,
   declinePart,
   enrollCompetition,
+  invitePart,
   leaveCompetition
 } from '../../actions/competition';
 import CompetitionParticipant from '../../components/Competition/CompetitionParticipant.native';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+import Challenge from '../../components/Challenge/createChallenge';
 
 class SelectedCompetitionContainer extends Component {
   constructor(props) {
@@ -71,6 +74,10 @@ class SelectedCompetitionContainer extends Component {
           declinePart={id => this.props.declinePart(id)}
           declineinvite={id => this.props.declineinvite(id)}
           supportTreecounterAction={this.props.supportTreecounterAction}
+          currentUserProfile={this.props.userProfile}
+          invitePart={(competition, competitor) =>
+            this.props.invitePart(competition, competitor)
+          }
         />
       );
     } else {
@@ -79,7 +86,9 @@ class SelectedCompetitionContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  userProfile: currentUserProfileSelector(state)
+});
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
@@ -89,6 +98,7 @@ const mapDispatchToProps = dispatch => {
       confirmPart,
       declinePart,
       declineinvite,
+      invitePart,
       supportTreecounterAction
     },
     dispatch

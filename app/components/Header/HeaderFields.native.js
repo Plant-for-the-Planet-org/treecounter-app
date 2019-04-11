@@ -32,7 +32,7 @@ export default class HeaderRight extends Component {
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
   }
-  renderShareButtons() {
+  renderShareButtons(userProfile) {
     let { state } = this.props.navigation;
     let pathname = state.hasOwnProperty('index')
       ? state.routes[state.index].routeName
@@ -87,7 +87,7 @@ export default class HeaderRight extends Component {
             style={{ height: 25, width: 25, marginRight: 20 }}
           />
         </TouchableOpacity>
-        {userProfile ? (() => this.renderShareButtons())() : null}
+        {!!userProfile ? (() => this.renderShareButtons(userProfile))() : null}
         {isLoggedIn ? (
           <TouchableOpacity>
             <Image

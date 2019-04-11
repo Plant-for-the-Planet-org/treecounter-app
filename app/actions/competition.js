@@ -7,16 +7,20 @@ import {
 } from '../utils/api';
 import { setCompetitionDetail } from '../reducers/competitionDetailReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
-import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
+import {
+  deleteEntity,
+  mergeEntities,
+  unlinkEntity
+} from '../reducers/entitiesReducer';
 import {
   competitionEnrollmentSchema,
+  competitionEnrollSchema,
   competitionPagerSchema,
   competitionSchema,
   treecounterSchema
 } from '../schemas';
 import { normalize } from 'normalizr';
 import { debug } from '../debug';
-import { NotificationManager } from 'react-notifications';
 import { updateRoute } from '../helpers/routerHelper';
 
 export function fetchCompetitions(category) {
@@ -54,6 +58,7 @@ export function confirmPart(id) {
       token: id
     })
       .then(res => {
+        console.log(res);
         dispatch(
           mergeEntities(
             normalize(
@@ -95,6 +100,7 @@ export function declinePart(id) {
       token: id
     })
       .then(res => {
+        console.log(res);
         dispatch(
           mergeEntities(
             normalize(
@@ -132,6 +138,7 @@ export function declineinvite(id) {
       token: id
     })
       .then(res => {
+        console.log(res);
         dispatch(deleteEntity(res.data.merge.competitionEnrollment));
         if (res.data.merge.competition) {
           dispatch(
@@ -169,19 +176,11 @@ export function leaveCompetition(id) {
       .then(res => {
         console.log(JSON.stringify(res.data));
 
-        if (res.data.merge.competition) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.competition, competitionSchema)
-            )
-          );
+        if (res.data.merge) {
+          dispatch(mergeEntities(normalize(res.data.merge, competitionSchema)));
         }
-        dispatch(
-          deleteEntity({
-            competitionEnrollment: res.data.delete.competitionEnrollment
-          })
-        );
-        dispatch(fetchMineCompetitions());
+        dispatch(unlinkEntity(res.data.unlink));
+        dispatch(deleteEntity(res.data.delete));
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
@@ -197,10 +196,12 @@ export function createCompetition(value, navigation) {
     postAuthenticatedRequest('competition_post', value)
       .then(res => {
         console.log(res);
-        dispatch(mergeEntities(normalize(res.data, competitionSchema)));
-        dispatch(setCompetitionDetail(res.data.id));
+        dispatch(
+          mergeEntities(normalize(res.data.merge, competitionEnrollSchema))
+        );
+        dispatch(setCompetitionDetail(res.data.merge.competition[0].id));
         updateRoute('app_competition', navigation || dispatch, 1, {
-          competition: res.data.id
+          competition: res.data.merge.competition[0].id
         });
         dispatch(setProgressModelState(false));
       })
@@ -222,28 +223,8 @@ export function enrollCompetition(id) {
       .then(res => {
         console.log(JSON.stringify(res.data));
         dispatch(
-          mergeEntities(
-            normalize(
-              res.data.merge.competitionEnrollment,
-              competitionEnrollmentSchema
-            )
-          )
+          mergeEntities(normalize(res.data.merge, competitionEnrollSchema))
         );
-        if (res.data.merge.competition) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.competition, competitionSchema)
-            )
-          );
-        }
-        if (res.data.merge.treecounter) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.treecounter, treecounterSchema)
-            )
-          );
-        }
-        dispatch(fetchMineCompetitions());
         dispatch(setProgressModelState(false));
       })
       .catch(err => {

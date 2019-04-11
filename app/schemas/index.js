@@ -1,4 +1,5 @@
 import { schema } from 'normalizr';
+import { tree } from '../assets';
 
 export const challengeSchema = new schema.Entity('challenge');
 export const competitionSchema = new schema.Entity('competition');
@@ -6,6 +7,7 @@ export const paymentGatewaySchema = new schema.Entity('paymentGateway');
 export const competitionEnrollmentSchema = new schema.Entity(
   'competitionEnrollment'
 );
+export const competitionEnrollSchema = new schema.Entity('competitionEnroll');
 export const competitionPagerSchema = new schema.Entity('competitionPager');
 export const contributionSchema = new schema.Entity('contribution');
 export const contributionImageSchema = new schema.Entity('contributionImage');
@@ -26,7 +28,13 @@ competitionSchema.define({
 });
 
 competitionEnrollmentSchema.define({
-  competition: competitionSchema
+  treecounter: treecounterSchema
+});
+
+competitionEnrollSchema.define({
+  treecounter: [treecounterSchema],
+  competition: [competitionSchema],
+  competitionEnrollment: [competitionEnrollmentSchema]
 });
 
 competitionPagerSchema.define({

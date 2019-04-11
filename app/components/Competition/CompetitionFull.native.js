@@ -39,7 +39,6 @@ class CompetitionFull extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     let status = '',
       button = null;
     const competitionDetail = this.props.competitionDetail;

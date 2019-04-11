@@ -5,10 +5,6 @@ import styles from '../../styles/common/tabbar';
 import MineCompetitions from './Tabs/mine.native';
 import FeaturedCompetitions from './Tabs/featured.native';
 import AllCompetitions from './Tabs/all.native';
-import {
-  fetchAllCompetitions,
-  fetchMineCompetitions
-} from '../../actions/competition';
 
 const Layout = {
   window: {
@@ -71,7 +67,6 @@ class Competiton extends React.Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <View style={{ flex: 1 }}>
         <TabView

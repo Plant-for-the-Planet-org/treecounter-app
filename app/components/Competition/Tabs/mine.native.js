@@ -80,7 +80,6 @@ export default class MineCompetitions extends Component {
   componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
     if (allCompetitions !== this.props.allCompetitions) {
-      console.log('nextPRops', nextProps);
       let featuredCompetitions = [];
       if (allCompetitions.length > 0) {
         allCompetitions.forEach(val => {
@@ -106,12 +105,10 @@ export default class MineCompetitions extends Component {
     }
   }
   onCreateCompetition() {
-    console.log(this.createCompetition.refs.input.state.value);
     if (this.createCompetition.refs.input.state.value) {
       this.setState({
         formValue: this.createCompetition.refs.input.state.value
       });
-      console.log(this.createCompetition.refs.input.state.value);
       this.props.onCreateCompetition(
         this.createCompetition.refs.input.state.value
       );
@@ -161,7 +158,6 @@ export default class MineCompetitions extends Component {
     );
   }
   componentDidUpdate(prevProps, prevState) {
-    console.log('component did update called');
     Object.entries(this.props).forEach(
       ([key, val]) =>
         prevProps[key] !== val && console.log(`Prop '${key}' changed`)

@@ -21,7 +21,7 @@ export default class HeaderRight extends Component {
 
   handleBackPress = () => {
     const { navigation } = this.props;
-    if (navigation.state.index === 0 || navigation.state.routeName === 'Tab') {
+    if (navigation.state.routeName === 'Tab') {
       BackHandler.exitApp();
       return null;
     }

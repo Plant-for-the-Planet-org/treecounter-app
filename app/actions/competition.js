@@ -276,6 +276,23 @@ export function fetchMineCompetitions() {
       });
   };
 }
+
+export function invitePart(competition, competitor) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    postAuthenticatedRequest('competitionInvitation_post', {
+      competition: competition,
+      competitor: competitor
+    })
+      .then(res => {
+        dispatch(setProgressModelState(false));
+      })
+      .catch(err => {
+        debug(err);
+        dispatch(setProgressModelState(false));
+      });
+  };
+}
 export function fetchCompetitionDetail(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));

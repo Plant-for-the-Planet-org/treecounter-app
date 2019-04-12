@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
-import { Image, View, TouchableOpacity } from 'react-native';
+import {
+  Image,
+  View,
+  TouchableOpacity,
+  BackHandler,
+  NavigationActions
+} from 'react-native';
 
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
@@ -8,15 +14,26 @@ import { allowedUrls } from '../../config/socialShare';
 import { iosSearchWhite, iosNotificationWhite, shareIcon } from '../../assets';
 import { Share } from 'react-native';
 
-export default (HeaderRight = function(navigation, userProfile, isLoggedIn) {
-  function handleShare(redirectPath) {
-    Share.share({
-      url: redirectPath
-    });
+export default class HeaderRight extends Component {
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
   }
 
-  function renderShareButtons() {
-    let { state } = navigation;
+  handleBackPress = () => {
+    const { navigation } = this.props;
+    if (navigation.state.routeName === 'Tab') {
+      BackHandler.exitApp();
+      return null;
+    }
+    this.props.navigation.goBack();
+    return true;
+  };
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
+  }
+  renderShareButtons(userProfile) {
+    let { state } = this.props.navigation;
     let pathname = state.hasOwnProperty('index')
       ? state.routes[state.index].routeName
       : state.routeName;
@@ -36,7 +53,7 @@ export default (HeaderRight = function(navigation, userProfile, isLoggedIn) {
         redirectPath = context.scheme + '://' + context.host + pathname;
       }
       return (
-        <TouchableOpacity onPress={() => handleShare(redirectPath)}>
+        <TouchableOpacity onPress={() => this.handleShare(redirectPath)}>
           <Image
             source={shareIcon}
             style={{ height: 25, width: 25, marginRight: 20 }}
@@ -48,29 +65,38 @@ export default (HeaderRight = function(navigation, userProfile, isLoggedIn) {
     }
   }
 
-  return (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
-      <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-        <Image
-          source={iosSearchWhite}
-          style={{ height: 25, width: 25, marginRight: 20 }}
-        />
-      </TouchableOpacity>
-      {userProfile ? (() => renderShareButtons())() : null}
-      {isLoggedIn ? (
-        <TouchableOpacity>
+  handleShare(redirectPath) {
+    //  console.log(navigation.state);
+    Share.share({
+      url: redirectPath
+    });
+  }
+  render() {
+    const { navigation, userProfile, isLoggedIn } = this.props;
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
           <Image
-            source={iosNotificationWhite}
+            source={iosSearchWhite}
             style={{ height: 25, width: 25, marginRight: 20 }}
           />
         </TouchableOpacity>
-      ) : null}
-    </View>
-  );
-});
+        {!!userProfile ? (() => this.renderShareButtons(userProfile))() : null}
+        {isLoggedIn ? (
+          <TouchableOpacity>
+            <Image
+              source={iosNotificationWhite}
+              style={{ height: 25, width: 25, marginRight: 20 }}
+            />
+          </TouchableOpacity>
+        ) : null}
+      </View>
+    );
+  }
+}

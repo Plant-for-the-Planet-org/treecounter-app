@@ -21,6 +21,8 @@ import i18n from '../../locales/i18n';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import CompetitionTopCompetitor from './CompetitionTopCompetitor.native';
 import CompetitionParticipant from './CompetitionParticipant.native';
+import searchBarStyles from '../../styles/header/search_bar.native';
+import SearchUser from '../Challenge/Tabs/SearchUser.native';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -28,6 +30,7 @@ import CompetitionParticipant from './CompetitionParticipant.native';
 class CompetitionFull extends React.Component {
   constructor(props) {
     super(props);
+    this.onSearchResultClick = this.onSearchResultClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {}
@@ -38,6 +41,10 @@ class CompetitionFull extends React.Component {
     }
   }
 
+  onSearchResultClick(q) {
+    console.log(q);
+    this.props.invitePart(this.props.competitionDetail.id, q.id);
+  }
   render() {
     let status = '',
       button = null;
@@ -291,8 +298,9 @@ class CompetitionFull extends React.Component {
               </CardLayout>
             ) : null}
             {competitionDetail &&
-            competitionDetail.allEnrollments &&
-            competitionDetail.allEnrollments.length > 0 ? (
+            competitionDetail.access === 'invitation' &&
+            competitionDetail.ownerTreecounterId ===
+              this.props.treeCounter.id ? (
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
@@ -300,6 +308,10 @@ class CompetitionFull extends React.Component {
                   </View>
                   <View style={styles.topCompetitorContainer}>
                     <View>
+                      <SearchUser
+                        onSearchResultClick={this.onSearchResultClick}
+                        currentUserProfile={this.props.currentUserProfile}
+                      />
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>
                           top.status === 'invited' ? (

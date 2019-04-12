@@ -355,10 +355,10 @@ export default class DonateTrees extends React.PureComponent {
           {
             ...this.state.form,
             directGift: {
-              treecounter: params.userForm.id,
-              message: params.userForm.giftMessage
+              treecounter: params.userForm.treeCounter,
+              message: params.userForm.message
             },
-
+            giftTreecounter: params.userForm.id,
             giftMethod: params.giftMethod,
             paymentResponse: {
               gateway: 'offline',

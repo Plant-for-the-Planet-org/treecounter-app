@@ -71,7 +71,6 @@ export function confirmPart(id) {
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
-        console.log('/################ Competition COnfirm Error');
         console.log(err);
         dispatch(setProgressModelState(false));
       });

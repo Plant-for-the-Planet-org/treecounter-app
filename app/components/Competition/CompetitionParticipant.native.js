@@ -48,7 +48,7 @@ class CompetitionParticipant extends React.Component {
                   buttonStyle={snippetStyles.buttonStyle}
                   textStyle={snippetStyles.buttonTextStyle}
                   onClick={() =>
-                    this.props.confirmPart(this.props.competitor.id)
+                    this.props.confirmPart(this.props.competitor.token)
                   }
                 >
                   <Text> {i18n.t('label.confirm')}</Text>
@@ -58,7 +58,7 @@ class CompetitionParticipant extends React.Component {
                   buttonStyle={snippetStyles.buttonStyle}
                   textStyle={snippetStyles.buttonTextStyle}
                   onClick={() =>
-                    this.props.declinePart(this.props.competitor.id)
+                    this.props.declinePart(this.props.competitor.token)
                   }
                 >
                   <Text> {i18n.t('label.delete')}</Text>
@@ -84,7 +84,9 @@ class CompetitionParticipant extends React.Component {
               style={snippetStyles.buttonItem}
               buttonStyle={snippetStyles.buttonStyle}
               textStyle={snippetStyles.buttonTextStyle}
-              onClick={() => this.props.declineinvite(this.props.competitor.id)}
+              onClick={() =>
+                this.props.declineinvite(this.props.competitor.token)
+              }
             >
               <Text> {i18n.t('label.cancel')}</Text>
             </PrimaryButton>

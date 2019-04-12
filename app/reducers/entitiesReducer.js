@@ -60,10 +60,12 @@ export default handleActions(
 
       Object.keys(action.payload).forEach(entity => {
         let toBeModified = get(state, entity);
-        let modified = toBeModified.filter(
-          item => !action.payload[entity].includes(item)
-        );
-        set(state, entity, modified);
+        if (toBeModified) {
+          let modified = toBeModified.filter(
+            item => !action.payload[entity].includes(item)
+          );
+          set(state, entity, modified);
+        }
       });
       return state;
     }

@@ -85,7 +85,7 @@ class CompetitionParticipant extends React.Component {
               buttonStyle={snippetStyles.buttonStyle}
               textStyle={snippetStyles.buttonTextStyle}
               onClick={() =>
-                this.props.declineinvite(this.props.competitor.token)
+                this.props.cancelInvite(this.props.competitor.token)
               }
             >
               <Text> {i18n.t('label.cancel')}</Text>
@@ -104,6 +104,6 @@ CompetitionParticipant.propTypes = {
   type: PropTypes.any,
   confirmPart: PropTypes.any,
   declinePart: PropTypes.any,
-  declineinvite: PropTypes.any,
+  cancelInvite: PropTypes.any,
   supportTreecounterAction: PropTypes.any
 };

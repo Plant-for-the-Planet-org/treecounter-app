@@ -95,33 +95,19 @@ export function declinePart(id) {
       });
   };
 }
-export function declineinvite(id) {
+export function cancelInvite(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    deleteAuthenticatedRequest('competitionEnrollment_delete', null, {
+    deleteAuthenticatedRequest('competitionEnrollment_delete', {
       token: id
     })
       .then(res => {
-        console.log(res);
-        dispatch(deleteEntity(res.data.merge.competitionEnrollment));
-        if (res.data.merge.competition) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.competition, competitionSchema)
-            )
-          );
-        }
-        if (res.data.merge.treecounter) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.treecounter, treecounterSchema)
-            )
-          );
-        }
+        dispatch(unlinkEntity(res.data.unlink));
+        dispatch(deleteEntity(res.data.delete));
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
-        debug(err);
+        console.log(err);
         dispatch(setProgressModelState(false));
       });
   };
@@ -247,15 +233,28 @@ export function fetchMineCompetitions() {
 export function invitePart(competition, competitor) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    postAuthenticatedRequest('competitionInvitation_post', {
+    let data = {
       competition: competition,
       competitor: competitor
-    })
+    };
+    postAuthenticatedRequest('competitionInvitation_post', data)
       .then(res => {
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competition, [competitionSchema])
+          )
+        );
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competitionEnrollment, [
+              competitionEnrollmentSchema
+            ])
+          )
+        );
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
-        debug(err);
+        console.log(err);
         dispatch(setProgressModelState(false));
       });
   };

@@ -42,11 +42,9 @@ class CompetitionFull extends React.Component {
   }
 
   onSearchResultClick(q) {
-    console.log(q);
     this.props.invitePart(this.props.competitionDetail.id, q.id);
   }
   render() {
-    console.log(this.props);
     let status = '',
       button = null;
     const competitionDetail = this.props.competitionDetail;
@@ -249,7 +247,7 @@ class CompetitionFull extends React.Component {
                               type="participants"
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
-                              declineinvite={id => this.props.declineinvite(id)}
+                              cancelInvite={id => this.props.cancelInvite(id)}
                               supportTreecounterAction={
                                 this.props.supportTreecounterAction
                               }
@@ -285,7 +283,7 @@ class CompetitionFull extends React.Component {
                               type="request_join"
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
-                              declineinvite={id => this.props.declineinvite(id)}
+                              cancelInvite={id => this.props.cancelInvite(id)}
                               supportTreecounterAction={
                                 this.props.supportTreecounterAction
                               }
@@ -322,7 +320,7 @@ class CompetitionFull extends React.Component {
                               type="invite"
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
-                              declineinvite={id => this.props.declineinvite(id)}
+                              cancelInvite={id => this.props.cancelInvite(id)}
                               supportTreecounterAction={
                                 this.props.supportTreecounterAction
                               }
@@ -369,6 +367,6 @@ CompetitionFull.propTypes = {
   enrollCompetition: PropTypes.any,
   confirmPart: PropTypes.any,
   declinePart: PropTypes.any,
-  declineinvite: PropTypes.any,
+  cancelInvite: PropTypes.any,
   supportTreecounterAction: PropTypes.any
 };

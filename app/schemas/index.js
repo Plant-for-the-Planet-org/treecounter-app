@@ -1,4 +1,5 @@
 import { schema } from 'normalizr';
+import { tree } from '../assets';
 
 export const challengeSchema = new schema.Entity('challenge');
 export const competitionSchema = new schema.Entity('competition');
@@ -20,13 +21,8 @@ challengeSchema.define({
 });
 
 competitionSchema.define({
-  treecounter: treecounterSchema,
   topEnrollments: [competitionEnrollmentSchema],
   allEnrollments: [competitionEnrollmentSchema]
-});
-
-competitionEnrollmentSchema.define({
-  competition: competitionSchema
 });
 
 competitionPagerSchema.define({

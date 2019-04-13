@@ -7,7 +7,11 @@ import {
 } from '../utils/api';
 import { setCompetitionDetail } from '../reducers/competitionDetailReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
-import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
+import {
+  deleteEntity,
+  mergeEntities,
+  unlinkEntity
+} from '../reducers/entitiesReducer';
 import {
   competitionEnrollmentSchema,
   competitionPagerSchema,
@@ -16,7 +20,6 @@ import {
 } from '../schemas';
 import { normalize } from 'normalizr';
 import { debug } from '../debug';
-import { NotificationManager } from 'react-notifications';
 import { updateRoute } from '../helpers/routerHelper';
 
 export function fetchCompetitions(category) {
@@ -47,39 +50,28 @@ export function fetchCompetitions(category) {
 export function confirmPart(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    let data = {
-      status: 'enrolled'
-    };
-    putAuthenticatedRequest('competitionEnrollment_put', data, {
+    putAuthenticatedRequest('competitionEnrollment_accept', null, {
       token: id
     })
       .then(res => {
         dispatch(
           mergeEntities(
-            normalize(
-              res.data.merge.competitionEnrollment,
+            normalize(res.data.merge.competitionEnrollment, [
               competitionEnrollmentSchema
-            )
+            ])
           )
         );
         if (res.data.merge.competition) {
           dispatch(
             mergeEntities(
-              normalize(res.data.merge.competition, competitionSchema)
-            )
-          );
-        }
-        if (res.data.merge.treecounter) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.treecounter, treecounterSchema)
+              normalize(res.data.merge.competition, [competitionSchema])
             )
           );
         }
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
-        debug(err);
+        console.log(err);
         dispatch(setProgressModelState(false));
       });
   };
@@ -88,35 +80,12 @@ export function confirmPart(id) {
 export function declinePart(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    let data = {
-      status: 'declined'
-    };
-    putAuthenticatedRequest('competitionEnrollment_put', data, {
+    putAuthenticatedRequest('competitionEnrollment_decline', null, {
       token: id
     })
       .then(res => {
-        dispatch(
-          mergeEntities(
-            normalize(
-              res.data.merge.competitionEnrollment,
-              competitionEnrollmentSchema
-            )
-          )
-        );
-        if (res.data.merge.competition) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.competition, competitionSchema)
-            )
-          );
-        }
-        if (res.data.merge.treecounter) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.treecounter, treecounterSchema)
-            )
-          );
-        }
+        dispatch(unlinkEntity(res.data.unlink));
+        dispatch(deleteEntity(res.data.delete));
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
@@ -125,32 +94,19 @@ export function declinePart(id) {
       });
   };
 }
-export function declineinvite(id) {
+export function cancelInvite(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    deleteAuthenticatedRequest('competitionEnrollment_delete', null, {
+    deleteAuthenticatedRequest('competitionEnrollment_delete', {
       token: id
     })
       .then(res => {
-        dispatch(deleteEntity(res.data.merge.competitionEnrollment));
-        if (res.data.merge.competition) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.competition, competitionSchema)
-            )
-          );
-        }
-        if (res.data.merge.treecounter) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.treecounter, treecounterSchema)
-            )
-          );
-        }
+        dispatch(unlinkEntity(res.data.unlink));
+        dispatch(deleteEntity(res.data.delete));
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
-        debug(err);
+        console.log(err);
         dispatch(setProgressModelState(false));
       });
   };
@@ -167,21 +123,15 @@ export function leaveCompetition(id) {
       competition: id
     })
       .then(res => {
-        console.log(JSON.stringify(res.data));
-
-        if (res.data.merge.competition) {
+        if (res.data.merge) {
           dispatch(
             mergeEntities(
-              normalize(res.data.merge.competition, competitionSchema)
+              normalize(res.data.merge.competition, [competitionSchema])
             )
           );
         }
-        dispatch(
-          deleteEntity({
-            competitionEnrollment: res.data.delete.competitionEnrollment
-          })
-        );
-        dispatch(fetchMineCompetitions());
+        dispatch(unlinkEntity(res.data.unlink));
+        dispatch(deleteEntity(res.data.delete));
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
@@ -196,11 +146,18 @@ export function createCompetition(value, navigation) {
     dispatch(setProgressModelState(true));
     postAuthenticatedRequest('competition_post', value)
       .then(res => {
-        console.log(res);
-        dispatch(mergeEntities(normalize(res.data, competitionSchema)));
-        dispatch(setCompetitionDetail(res.data.id));
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competition, [competitionSchema])
+          )
+        );
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.treecounter, [treecounterSchema])
+          )
+        );
         updateRoute('app_competition', navigation || dispatch, 1, {
-          competition: res.data.id
+          competition: res.data.merge.competition[0].id
         });
         dispatch(setProgressModelState(false));
       })
@@ -210,6 +167,7 @@ export function createCompetition(value, navigation) {
       });
   };
 }
+
 export function enrollCompetition(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
@@ -220,30 +178,23 @@ export function enrollCompetition(id) {
       version: 'v1.1'
     })
       .then(res => {
-        console.log(JSON.stringify(res.data));
         dispatch(
           mergeEntities(
-            normalize(
-              res.data.merge.competitionEnrollment,
-              competitionEnrollmentSchema
-            )
+            normalize(res.data.merge.treecounter, [treecounterSchema])
           )
         );
-        if (res.data.merge.competition) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.competition, competitionSchema)
-            )
-          );
-        }
-        if (res.data.merge.treecounter) {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.treecounter, treecounterSchema)
-            )
-          );
-        }
-        dispatch(fetchMineCompetitions());
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competition, [competitionSchema])
+          )
+        );
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competitionEnrollment, [
+              competitionEnrollmentSchema
+            ])
+          )
+        );
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
@@ -255,6 +206,7 @@ export function enrollCompetition(id) {
 export function fetchAllCompetitions() {
   return getAuthenticatedRequest('competitions_get', { category: 'all' });
 }
+
 export function fetchMineCompetitions() {
   return dispatch => {
     dispatch(setProgressModelState(true));
@@ -280,15 +232,28 @@ export function fetchMineCompetitions() {
 export function invitePart(competition, competitor) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    postAuthenticatedRequest('competitionInvitation_post', {
+    let data = {
       competition: competition,
       competitor: competitor
-    })
+    };
+    postAuthenticatedRequest('competitionInvitation_post', data)
       .then(res => {
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competition, [competitionSchema])
+          )
+        );
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competitionEnrollment, [
+              competitionEnrollmentSchema
+            ])
+          )
+        );
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
-        debug(err);
+        console.log(err);
         dispatch(setProgressModelState(false));
       });
   };

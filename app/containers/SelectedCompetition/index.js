@@ -17,7 +17,7 @@ import {
 } from '../../actions/selectPlantProjectAction';
 import {
   confirmPart,
-  declineinvite,
+  cancelInvite,
   declinePart,
   enrollCompetition,
   invitePart,
@@ -72,7 +72,7 @@ class SelectedCompetitionContainer extends Component {
           enrollCompetition={id => this.enrollCompetition(id)}
           confirmPart={id => this.props.confirmPart(id)}
           declinePart={id => this.props.declinePart(id)}
-          declineinvite={id => this.props.declineinvite(id)}
+          cancelInvite={id => this.props.cancelInvite(id)}
           supportTreecounterAction={this.props.supportTreecounterAction}
           currentUserProfile={this.props.userProfile}
           invitePart={(competition, competitor) =>
@@ -97,7 +97,7 @@ const mapDispatchToProps = dispatch => {
       enrollCompetition,
       confirmPart,
       declinePart,
-      declineinvite,
+      cancelInvite,
       invitePart,
       supportTreecounterAction
     },
@@ -116,6 +116,6 @@ SelectedCompetitionContainer.propTypes = {
   enrollCompetition: PropTypes.any,
   confirmPart: PropTypes.any,
   declinePart: PropTypes.any,
-  declineinvite: PropTypes.any,
+  cancelInvite: PropTypes.any,
   supportTreecounterAction: PropTypes.any
 };

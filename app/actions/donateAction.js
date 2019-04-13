@@ -26,7 +26,7 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
       dispatch(
         paymentFailed({
           status: false,
-          message: donationContribution.paymentResponse.error.message
+          message: donationContribution.paymentResponse.error.message || 'error'
         })
       );
     } else {
@@ -78,7 +78,10 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
         .catch(response => {
           debug('error: ', response);
           dispatch(
-            paymentFailed({ status: false, message: response.response.data })
+            paymentFailed({
+              status: false,
+              message: response.response.data || 'error'
+            })
           );
           dispatch(setProgressModelState(false));
         });
@@ -98,7 +101,7 @@ export function gift(donationContribution, plantProjectId, loggedIn) {
       dispatch(
         paymentFailed({
           status: false,
-          message: donationContribution.paymentResponse.error.message
+          message: donationContribution.paymentResponse.error.message || 'error'
         })
       );
     } else {
@@ -150,7 +153,10 @@ export function gift(donationContribution, plantProjectId, loggedIn) {
         .catch(response => {
           debug('error: ', response);
           dispatch(
-            paymentFailed({ status: false, message: response.response.data })
+            paymentFailed({
+              status: false,
+              message: response.response.data || 'error'
+            })
           );
           dispatch(setProgressModelState(false));
         });

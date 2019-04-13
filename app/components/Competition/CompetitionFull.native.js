@@ -16,7 +16,7 @@ import {
   userTreecounterSelector
 } from '../../selectors';
 import CompetitionProgressBar from './CompetitionProgressBar';
-import { compCalendar } from '../../assets';
+import { compCalendar, email } from '../../assets';
 import i18n from '../../locales/i18n';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import CompetitionTopCompetitor from './CompetitionTopCompetitor.native';
@@ -196,21 +196,23 @@ class CompetitionFull extends React.Component {
                   {/*<View style={styles.projectdetailsContainer}>*/}
                   {/**/}
                   {/*</View>*/}
-                  <View style={snippetStyles.actionContainer}>
-                    <View style={snippetStyles.emailContainer}>
-                      <Image
-                        source={compCalendar}
-                        style={{ width: 15, height: 15 }}
-                      />
-                      <Text style={snippetStyles.bottomText}>
-                        {competitionDetail &&
-                          competitionDetail.contact +
-                            ', ' +
-                            competitionDetail &&
-                          competitionDetail.email}
-                      </Text>
+                  {competitionDetail && competitionDetail.email ? (
+                    <View style={snippetStyles.actionContainer}>
+                      <View style={snippetStyles.emailContainer}>
+                        <Image
+                          source={email}
+                          style={{ width: 15, height: 15 }}
+                        />
+                        <Text style={snippetStyles.bottomText}>
+                          {competitionDetail &&
+                            competitionDetail.contact +
+                              ', ' +
+                              competitionDetail &&
+                            competitionDetail.email}
+                        </Text>
+                      </View>
                     </View>
-                  </View>
+                  ) : null}
                   <View style={snippetStyles.actionContainer}>
                     <View style={snippetStyles.byOrgContainer}>
                       <Image

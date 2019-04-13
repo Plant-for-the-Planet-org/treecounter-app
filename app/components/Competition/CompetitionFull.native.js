@@ -310,6 +310,7 @@ class CompetitionFull extends React.Component {
                       <SearchUser
                         onSearchResultClick={this.onSearchResultClick}
                         currentUserProfile={this.props.currentUserProfile}
+                        clearTextOnClick={true}
                       />
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>
@@ -335,6 +336,8 @@ class CompetitionFull extends React.Component {
             ) : null}
             {competitionDetail &&
             inviteCount > 0 &&
+            competitionDetail.ownerTreecounterId !==
+              this.props.treeCounter.id &&
             competitionDetail.access === 'invitation' ? (
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
                 <View style={snippetStyles.projectSpecsContainer}>

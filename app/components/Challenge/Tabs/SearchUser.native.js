@@ -52,7 +52,9 @@ class SearchUser extends React.Component {
         searchResultClicked: true
       });
       this.setState({
-        selectedSuggestionName: suggestion.name
+        selectedSuggestionName: this.props.clearTextOnClick
+          ? ''
+          : suggestion.name
       });
     }
   }

@@ -176,7 +176,7 @@ class CompetitionSnippet extends React.Component {
                   {this.props.competition &&
                   this.props.competition.competitorCount > 0 ? (
                     <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
-                      {this.props.competition.competitorCount + 1} participants
+                      {this.props.competition.competitorCount} participants
                     </Text>
                   ) : (
                     button

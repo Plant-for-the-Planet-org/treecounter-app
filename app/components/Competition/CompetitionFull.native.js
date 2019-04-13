@@ -333,6 +333,38 @@ class CompetitionFull extends React.Component {
                 </View>
               </CardLayout>
             ) : null}
+            {competitionDetail &&
+            inviteCount > 0 &&
+            competitionDetail.access === 'invitation' ? (
+              <CardLayout style={[snippetStyles.projectSnippetContainer]}>
+                <View style={snippetStyles.projectSpecsContainer}>
+                  <View style={styles.headingParticipantContainer}>
+                    <Text style={styles.textHeadingParticipants}>INVITED</Text>
+                  </View>
+                  <View style={styles.topCompetitorContainer}>
+                    <View>
+                      {competitionDetail.allEnrollments.map(
+                        (top, index) =>
+                          top.status === 'invited' ? (
+                            <CompetitionParticipant
+                              competitor={top}
+                              index={index}
+                              type="request_join"
+                              confirmPart={id => this.props.confirmPart(id)}
+                              declinePart={id => this.props.declinePart(id)}
+                              cancelInvite={id => this.props.cancelInvite(id)}
+                              supportTreecounterAction={
+                                this.props.supportTreecounterAction
+                              }
+                              key={index}
+                            />
+                          ) : null
+                      )}
+                    </View>
+                  </View>
+                </View>
+              </CardLayout>
+            ) : null}
           </View>
         </ScrollView>
       </View>

@@ -194,8 +194,6 @@ export function updateEmail(newEmail) {
     return new Promise(function(resolve, reject) {
       putAuthenticatedRequest('profileEmail_put', { ...newEmail })
         .then(res => {
-          debug(res.status);
-          debug(res);
           if (res.data && res.data instanceof Object) {
             dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
           }
@@ -205,6 +203,13 @@ export function updateEmail(newEmail) {
         .catch(err => {
           debug(err);
           reject(err);
+          if (err.response.data.code === 400) {
+            NotificationManager.error(
+              err.response.data.errors.children.newEmail.errors[0],
+              'Email update Error',
+              5000
+            );
+          }
           dispatch(setProgressModelState(false));
         });
     });

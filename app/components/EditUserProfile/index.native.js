@@ -73,7 +73,7 @@ export default class EditUserProfile extends Component {
   }
 
   changeEmail = () => {
-    let value = this.refs.tabView.refs.change_email.getValue();
+    let value = this.refs.tabView.refs.securityTabView.refs.change_email.getValue();
     this.props.updateEmail(value);
   };
 
@@ -189,6 +189,7 @@ export default class EditUserProfile extends Component {
       case 'security':
         return (
           <SecurityTabView
+            ref="securityTabView"
             onSave={onSave}
             currentUserProfile={currentUserProfile}
             getFormSchemaOption={this.getFormSchemaOption}

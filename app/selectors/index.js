@@ -1,13 +1,21 @@
 import { createSelector } from 'reselect';
 import { denormalize } from 'normalizr';
 
-import { userProfileSchema, plantProjectSchema } from '../schemas';
+import {
+  userProfileSchema,
+  plantProjectSchema,
+  competitionPagerSchema,
+  competitionSchema
+} from '../schemas';
 import { getCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
 import { getUserFeeds } from '../reducers/userFeedReducer';
 import {
   getPlantProjects,
   getPaymentGateways,
-  getTpos
+  getTpos,
+  getCompetitionPager,
+  getCompetition,
+  getCompetitionEnrollment
 } from '../reducers/entitiesReducer';
 import { getSupportedTreecounter } from '../reducers/supportedTreecounterReducer';
 import { getSelectedPlantProjectId } from '../reducers/selectedPlantProjectIdReducer';
@@ -15,6 +23,7 @@ import { getPledges } from '../reducers/pledgeReducer';
 import { getPledgeEvents } from '../reducers/pledgeEventReducer';
 import { getPaymentStatus } from '../reducers/paymentStatus';
 import { getCurrencies } from '../reducers/currenciesReducer';
+import { getCompetitionDetail } from '../reducers/competitionDetailReducer';
 
 export const supportedTreecounterSelector = state =>
   getSupportedTreecounter(state);
@@ -25,13 +34,18 @@ export const selectedPlantProjectIdSelector = state =>
 export const paymentGatewaysSelector = state => getPaymentGateways(state);
 export const tposSelector = state => getTpos(state);
 export const plantProjectsSelector = state => getPlantProjects(state);
+export const competitionPagerSelector = state => getCompetitionPager(state);
+export const competitionSelector = state => getCompetition(state);
+export const competitionEnrollmentSelector = state =>
+  getCompetitionEnrollment(state);
 export const entitiesSelector = state => state.entities;
 export const userFeedsSelector = state => getUserFeeds(state);
 export const pledgesSelector = state => getPledges(state);
 export const currenciesSelector = state => getCurrencies(state);
 export const paymentStatusSelector = state => getPaymentStatus(state);
 export const pledgeEventSelector = state => getPledgeEvents(state);
-
+export const selectedCompetitionIdSelector = state =>
+  getCompetitionDetail(state);
 function logSelectorUpdate(selectorName, args = 'None') {
   const debug = false;
   debug && console.log('SELECTOR: ' + selectorName, args);
@@ -78,6 +92,37 @@ export const getAllPlantProjectsSelector = createSelector(
     });
 
     return tpoNameExpandedProjects;
+  }
+);
+
+// export const competitionDetailSelector = state => getCompetitionDetail(state);
+export const competitionDetailSelector = createSelector(
+  selectedCompetitionIdSelector,
+  entitiesSelector,
+  (selectedCompetitionId, entities) => {
+    return null === selectedCompetitionId
+      ? null
+      : denormalize(
+          entities.competition[selectedCompetitionId.competitionDetail],
+          competitionSchema,
+          entities
+        );
+  }
+);
+export const getAllCompetitionsSelector = createSelector(
+  competitionPagerSelector,
+  entitiesSelector,
+  (competitionPager, entities) => {
+    let normalisedCompetitions = Object.keys(competitionPager).reduce(
+      (competitions, id) => {
+        competitions.push(
+          denormalize(competitionPager[id], competitionPagerSchema, entities)
+        );
+        return competitions;
+      },
+      []
+    );
+    return normalisedCompetitions;
   }
 );
 
@@ -135,6 +180,14 @@ export const userGiftsSelector = createSelector(
   userTreecounterSelector,
   userTreecounter => {
     return null === userTreecounter ? null : userTreecounter.gifts;
+  }
+);
+export const userCompetitionEnrolledSelector = createSelector(
+  userTreecounterSelector,
+  userTreecounter => {
+    return null === userTreecounter
+      ? null
+      : userTreecounter.competitionEnrollments;
   }
 );
 /**

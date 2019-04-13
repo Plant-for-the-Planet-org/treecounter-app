@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { Text, View, ImageBackground, Linking } from 'react-native';
+import {
+  Text,
+  View,
+  ImageBackground,
+  ScrollView,
+  Keyboard
+} from 'react-native';
 
 import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
@@ -18,10 +24,10 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Profiletype: 'individual',
-      recaptchaToken: null
+      Profiletype: 'individual'
     };
     this.changeProfile = this.changeProfile.bind(this);
+    this._recaptchaToken = undefined;
   }
 
   onLoginClicked = () => {
@@ -35,11 +41,15 @@ export default class SignUp extends Component {
   }
 
   verifyCallback = token => {
+    this._recaptchaToken = token;
     // Here you will get the final token!!!
-    this.setState({
-      recaptchaToken: token
-    });
   };
+  onSignUpClicked(type) {
+    if (this.refs.signupForm.getValue()) {
+      Keyboard.dismiss();
+    }
+    this.props.onSignUpClicked(type, this._recaptchaToken);
+  }
 
   render() {
     let { Profiletype } = this.state;
@@ -56,7 +66,10 @@ export default class SignUp extends Component {
       icon = SignupOrganization;
     }
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
+      <ScrollView
+        // contentContainerStyle={[{ flex: 1 }]}
+        keyboardShouldPersistTaps={'handled'}
+      >
         <ReCaptchaV3
           captchaDomain={'https://www.plant-for-the-planet.org'}
           siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
@@ -74,18 +87,14 @@ export default class SignUp extends Component {
               />
             </View>
           )}
-          <View style={styles.inputContainer}>
+          <View style={{ flex: 1 }}>
             <Form
               ref={'signupForm'}
               type={signupFormSchema[type]}
               options={this.props.schemaOptions[type]}
               value={this.props.formValue}
             />
-            <PrimaryButton
-              onClick={() => {
-                this.props.onSignUpClicked(type, this.state.recaptchaToken);
-              }}
-            >
+            <PrimaryButton onClick={this.onSignUpClicked.bind(this, type)}>
               {i18n.t('label.signUp')}
             </PrimaryButton>
             <View style={styles.bottomRow}>
@@ -101,7 +110,7 @@ export default class SignUp extends Component {
             </View>
           </View>
         </ImageBackground>
-      </KeyboardAwareScrollView>
+      </ScrollView>
     );
   }
 }

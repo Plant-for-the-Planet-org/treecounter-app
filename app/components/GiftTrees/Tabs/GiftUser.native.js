@@ -13,23 +13,33 @@ export default class GiftUser extends Component {
     this.state = { selectedSuggestion: null };
     this.onNextClick = this.onNextClick.bind(this);
     this.onSearchResultClick = this.onSearchResultClick.bind(this);
+    this.state = { form: {} };
   }
   componentWillMount() {}
   onSearchResultClick(suggestion) {
     // console.log('suggestion clicked', suggestion);
-    this.setState({ selectedSuggestion: suggestion, giftMessage: '' });
+    this.setState({ selectedSuggestion: suggestion });
   }
   onNextClick() {
     if (this.state.selectedSuggestion) {
-      this.props.openProjects(
-        this.state.selectedSuggestion,
-        'direct',
-        this.state.giftMessage
+      this.setState(
+        {
+          form: {
+            treeCounter: this.state.selectedSuggestion.id,
+            message: this.state.message,
+            name: this.state.selectedSuggestion.name
+          }
+        },
+        () => {
+          this.props.openProjects(this.state.form, 'direct');
+        }
       );
+    } else {
+      this.setState({ error: 'Select Valid User Profile' });
     }
   }
   onChangeText(val) {
-    this.setState({ giftMessage: val });
+    this.setState({ message: val });
   }
   render() {
     return (
@@ -69,6 +79,16 @@ export default class GiftUser extends Component {
               onSearchResultClick={this.onSearchResultClick}
               currentUserProfile={this.props.currentUserProfile}
             />
+            <View>
+              <Text
+                style={{
+                  color: '#ff0033',
+                  fontSize: 11
+                }}
+              >
+                {this.state.error}
+              </Text>
+            </View>
 
             <TextInput
               multiline={true}

@@ -5,10 +5,10 @@ import SearchBar from '../../../components/Header/SearchBar.native';
 import Header from '../../../components/Header/Header.native';
 import { getSuggestions, profileTypeToImage } from '../../../helpers/utils';
 import { getImageUrl } from '../../../actions/apiRouting';
-import { getLocalRoute } from '../../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import styles from '../../../styles/header/search_layout.native';
 import _ from 'lodash';
+import searchBarStyles from '../../../styles/header/search_bar.native';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
@@ -36,7 +36,7 @@ class SearchUser extends React.Component {
 
   // TODO: debounce
   _handleChangeQuery = q => {
-    this.setState({ searchResultClicked: false });
+    this.setState({ selectedSuggestionName: '', searchResultClicked: false });
     getSuggestions(q).then(suggestions => {
       this.setState({ q: suggestions });
     });
@@ -52,13 +52,15 @@ class SearchUser extends React.Component {
         searchResultClicked: true
       });
       this.setState({
-        selectedSuggestionName: suggestion.name
+        selectedSuggestionName: this.props.clearTextOnClick
+          ? ''
+          : suggestion.name
       });
     }
   }
   isMyself(treecounter, currentUserProfile) {
     return (
-      null !== currentUserProfile &&
+      !!currentUserProfile &&
       currentUserProfile.treecounter.id === treecounter.id
     );
   }
@@ -78,11 +80,9 @@ class SearchUser extends React.Component {
           }
           showCancelSearchButton={false}
           style={{
+            ...searchBarStyles.searchContainer,
             width: '100%',
-            height: 30,
-            marginTop: 10,
-            paddingLeft: 27,
-            flexDirection: 'row'
+            backgroundColor: 'transparent'
           }}
           tintColor={
             this.props.searchInputTintColor || this.props.headerTintColor

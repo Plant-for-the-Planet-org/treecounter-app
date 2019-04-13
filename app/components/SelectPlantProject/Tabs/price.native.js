@@ -83,18 +83,20 @@ export default class PriceProjects extends Component {
   render() {
     let { priceSortedProjects } = this.state;
     return (
-      <View>
+      <View style={styles.flexContainer}>
         <View style={styles.cardHeader}>
           <Text style={styles.headingStyle}>Cost Per Tree</Text>
           <View style={styles.sortContainer}>
             <TouchableItem
               style={styles.imageStyleContainer}
+              hitSlop={{ left: 50, right: 150 }}
               onPress={this.sortProjects.bind(this, 'desc')}
             >
               <Image style={styles.imageStyle} source={foldin} />
             </TouchableItem>
             <TouchableItem
               style={styles.imageStyleContainer}
+              hitSlop={{ left: 50, right: 150 }}
               onPress={this.sortProjects.bind(this, 'asc')}
             >
               <Image style={styles.imageStyle} source={foldout} />
@@ -102,11 +104,13 @@ export default class PriceProjects extends Component {
           </View>
         </View>
 
-        <ListViewProjects
-          projects={priceSortedProjects}
-          selectProject={projectId => this.props.selectProject(projectId)}
-          onMoreClick={projectId => this.props.onMoreClick(projectId)}
-        />
+        <View style={styles.listViewContainer}>
+          <ListViewProjects
+            projects={priceSortedProjects}
+            selectProject={projectId => this.props.selectProject(projectId)}
+            onMoreClick={projectId => this.props.onMoreClick(projectId)}
+          />
+        </View>
       </View>
     );
   }

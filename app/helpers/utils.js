@@ -156,7 +156,7 @@ function escapeRegexCharacters(str) {
 const getSuggestionValue = suggestion => `${suggestion.name}`;
 
 export function getSuggestions(value) {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     postDirectRequest('/suggest', 'q=' + value.trim()).then(result => {
       let jdata = result.data;
       const escapedValue = escapeRegexCharacters(value.trim());
@@ -165,7 +165,11 @@ export function getSuggestions(value) {
       }
       const regex = new RegExp('\\b' + escapedValue, 'i');
 
-      resolve(jdata.filter(person => regex.test(getSuggestionValue(person))));
+      if (jdata) {
+        resolve(jdata.filter(person => regex.test(getSuggestionValue(person))));
+      } else {
+        reject(jdata);
+      }
     });
   });
 }

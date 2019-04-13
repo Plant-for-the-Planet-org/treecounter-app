@@ -65,6 +65,7 @@ export default class UserContributions extends React.Component {
             <ScrollView>
               <ContributionCardList
                 contributions={this.props.userContributions}
+                deleteContribution={this.props.deleteContribution}
               />
             </ScrollView>
           </View>
@@ -107,5 +108,6 @@ export default class UserContributions extends React.Component {
 UserContributions.propTypes = {
   userProfileId: PropTypes.number.isRequired,
   userContributions: PropTypes.array.isRequired,
-  navigation: PropTypes.any
+  navigation: PropTypes.any,
+  deleteContribution: PropTypes.func
 };

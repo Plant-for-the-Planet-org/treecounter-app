@@ -23,7 +23,6 @@ import { upwardArrow, downwardArrow } from '../../assets/index.js';
 export default class ChallengeCard extends React.Component {
   render() {
     let { challenge } = this.props;
-    console.log(challenge);
     let {
       direction,
       goal,
@@ -99,7 +98,11 @@ export default class ChallengeCard extends React.Component {
               </SecondaryButton>
             </View>
           ) : (
-            <Text style={challengesStyle.statusLabel}>{status}</Text>
+            <View>
+              <Text style={challengesStyle.statusLabel}>
+                {status && status.toUpperCase()}
+              </Text>
+            </View>
           )}
         </View>
       </CardLayout>

@@ -47,6 +47,15 @@ class SearchBar extends React.PureComponent {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.inputValue &&
+      nextProps.inputValue.toLowerCase().includes(this.state.text.toLowerCase())
+    ) {
+      this.setState({ text: nextProps.inputValue });
+    }
+  }
+
   _handleLayoutCancelButton = e => {
     if (this.state.showCancelButton) {
       return;
@@ -83,14 +92,6 @@ class SearchBar extends React.PureComponent {
       searchInputStyle.color = this.props.textColor;
     }
     let inputValue = this.state.text;
-    if (
-      this.props.inputValue &&
-      this.props.inputValue
-        .toLowerCase()
-        .includes(this.state.text.toLowerCase())
-    ) {
-      inputValue = this.props.inputValue;
-    }
 
     return (
       <View style={styles.container}>
@@ -115,6 +116,7 @@ class SearchBar extends React.PureComponent {
             placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
             onSubmitEditing={this._handleSubmit}
             style={[styles.searchInput, searchInputStyle]}
+            autoCapitalize={'sentences'}
           />
 
           <SearchIcon />
@@ -125,15 +127,12 @@ class SearchBar extends React.PureComponent {
               ? 'visible-cancel-button'
               : 'layout-only-cancel-button'
           }
-          style={[
-            styles.buttonContainer,
-            { opacity: showCancelButton ? 1 : 0 }
-          ]}
+          style={[{ opacity: showCancelButton ? 1 : 0 }]}
         >
           {this.props.showCancelSearchButton ? (
             <TouchableItem
               style={styles.button}
-              hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
+              hitSlop={{ top: 15, bottom: 15, left: 1, right: 20 }}
               onLayout={this._handleLayoutCancelButton}
               onPress={this._handlePressCancelButton}
             >

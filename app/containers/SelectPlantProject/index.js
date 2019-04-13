@@ -27,7 +27,8 @@ class SelectPlantProjectContainer extends Component {
         project => project.id === userPreviousDonations[0].plantProjectId
       );
       if (selectedProject.length > 0) {
-        this.selectPlantProjectAction(selectedProject[0].id);
+        //TODO hkurra commenting this to fix donation on APP
+        // this.selectPlantProjectAction(selectedProject[0].id);
       }
     }
   }
@@ -44,7 +45,8 @@ class SelectPlantProjectContainer extends Component {
         project => project.id === userPreviousDonations[0].plantProjectId
       );
       if (selectedProject.length > 0) {
-        this.selectPlantProjectAction(selectedProject[0].id);
+        //TODO hkurra commenting this to fix donation on APP
+        // this.selectPlantProjectAction(selectedProject[0].id);
       }
     }
   }

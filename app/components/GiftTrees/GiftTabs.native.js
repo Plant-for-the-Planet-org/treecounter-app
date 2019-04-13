@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar';
 import { Dimensions } from 'react-native';
-import GiftToUser from './Tabs/GiftUser.native';
-import GiftEmail from './Tabs/GiftEmail.native';
+import GiftToUser from './Tabs/GiftUser';
+import GiftEmail from './Tabs/GiftEmail';
 
 const Layout = {
   window: {

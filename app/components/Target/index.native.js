@@ -15,6 +15,9 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 let Form = t.form.Form;
 
 export default class Target extends Component {
+  shouldComponentUpdate(nextProps) {
+    return JSON.stringify(nextProps) !== JSON.stringify(this.props);
+  }
   render() {
     return (
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>

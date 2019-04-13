@@ -50,14 +50,12 @@ export default (trillionStyles = EStyleSheet.create({
   imageStyle: {
     width: 59,
     height: 81,
-    margin: 15,
-    resizeMode: 'contain'
+    margin: 15
   },
   imageLoginStyle: {
     width: 50,
     height: 50,
-    margin: 25,
-    resizeMode: 'contain'
+    margin: 25
   },
   descriptionTextStyle: {
     color: '$textColor',

@@ -24,7 +24,11 @@ class WelcomeScreenModal extends Component {
           contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
         >
           <View style={styles.container}>
-            <Image style={styles.imageStyle} source={welcomeLogo} />
+            <Image
+              style={styles.imageStyle}
+              resizeMode="contain"
+              source={welcomeLogo}
+            />
             <Text style={styles.textHeader}>
               {i18n.t('label.welcome_to_ttc')}
             </Text>
@@ -40,7 +44,7 @@ class WelcomeScreenModal extends Component {
               <Text
                 style={[styles.textPara, { marginTop: 20, fontWeight: 'bold' }]}
               >
-                {i18n.t('label.deletion_prerequisite')}
+                {i18n.t('label.view_global_treecounter')}
               </Text>
             </TouchableItem>
           </View>

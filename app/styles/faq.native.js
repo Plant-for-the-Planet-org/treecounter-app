@@ -38,13 +38,13 @@ export default (faqStyles = EStyleSheet.create({
   },
   imageStyle: {
     width: 17,
-    height: 18,
-    resizeMode: 'contain'
+    height: 18
   },
 
   a: {
     fontWeight: '300',
     color: '$colorPrimaryAccent'
   },
-  p: { color: '#938989' }
+  p: { color: '#938989' },
+  br: { marginBottom: -25 }
 }));

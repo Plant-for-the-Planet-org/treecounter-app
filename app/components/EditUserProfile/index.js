@@ -95,8 +95,6 @@ export default class EditUserProfile extends React.Component {
 
   handleSaveProjectClick = (plantProject, index) => {
     let formRef = 'plantProject' + index;
-    console.log(this.refs[formRef].validate());
-
     let value = this.refs[formRef].getValue();
     if (value) {
       //if image file is same dont update it
@@ -217,7 +215,6 @@ export default class EditUserProfile extends React.Component {
         this.props.currentUserProfile.synopsis2,
       synopsis2: ''
     };
-    console.log('currentUserProfile1', updatedUserProfile);
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
         <ConfirmProfileDeletion
@@ -312,7 +309,6 @@ export default class EditUserProfile extends React.Component {
                 return;
               }
               this.setState({ passwordNotSameError: false });
-              console.log('password', value);
               this.props.onSave(type, 'password');
             }}
           >

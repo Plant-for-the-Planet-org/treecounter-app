@@ -70,30 +70,33 @@ export default class CountryProjects extends Component {
   render() {
     let { countrySortedProjects } = this.state;
     return (
-      <View>
+      <View style={styles.flexContainer}>
         <View style={styles.cardHeader}>
           <Text style={styles.headingStyle}>Sort by Country</Text>
           <View style={styles.sortContainer}>
             <TouchableItem
               style={styles.imageStyleContainer}
+              hitSlop={{ left: 50, right: 150 }}
               onPress={this.sortProjects.bind(this, 'desc')}
             >
               <Image style={styles.imageStyle} source={foldin} />
             </TouchableItem>
             <TouchableItem
               style={styles.imageStyleContainer}
+              hitSlop={{ left: 50, right: 150 }}
               onPress={this.sortProjects.bind(this, 'asc')}
             >
               <Image style={styles.imageStyle} source={foldout} />
             </TouchableItem>
           </View>
         </View>
-
-        <ListViewProjects
-          projects={countrySortedProjects}
-          selectProject={projectId => this.props.selectProject(projectId)}
-          onMoreClick={projectId => this.props.onMoreClick(projectId)}
-        />
+        <View style={styles.listViewContainer}>
+          <ListViewProjects
+            projects={countrySortedProjects}
+            selectProject={projectId => this.props.selectProject(projectId)}
+            onMoreClick={projectId => this.props.onMoreClick(projectId)}
+          />
+        </View>
       </View>
     );
   }

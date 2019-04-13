@@ -82,6 +82,7 @@ export default class StripeSepa extends Component {
             this._iban = value;
             //console.log(value);
           }}
+          autoCapitalize={'sentences'}
           allowFontScaling={true}
         />
         <Text style={{ textAlign: 'justify', color: 'black', marginTop: 5 }}>

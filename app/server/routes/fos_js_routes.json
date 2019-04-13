@@ -755,6 +755,45 @@
       ],
       "schemes": []
     },
+    "competition_test": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "accessType"
+        ],
+        [
+          "text",
+          "/testCompetition"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
     "competitionInvitation_form": {
       "tokens": [
         [
@@ -932,8 +971,55 @@
       ],
       "schemes": []
     },
-    "competitionEnrollment_put": {
+    "competitionEnrollment_accept": {
       "tokens": [
+        [
+          "text",
+          "/accept"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "token"
+        ],
+        [
+          "text",
+          "/competitionEnrollment"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "PUT"
+      ],
+      "schemes": []
+    },
+    "competitionEnrollment_decline": {
+      "tokens": [
+        [
+          "text",
+          "/decline"
+        ],
         [
           "variable",
           "/",
@@ -4017,6 +4103,21 @@
         [
           "text",
           "/donation-payment"
+        ]
+      ],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "app_widgetBuilder": {
+      "tokens": [
+        [
+          "text",
+          "/widget-builder"
         ]
       ],
       "defaults": [],

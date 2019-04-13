@@ -50,7 +50,6 @@ export default (treecounterStyles = EStyleSheet.create({
     overflow: 'visible',
     width: '100%',
     height: '100%',
-    resizeMode: 'contain',
     position: 'absolute',
     flex: 1,
     top: 0,
@@ -89,7 +88,6 @@ export default (treecounterStyles = EStyleSheet.create({
   svgColumn1: {
     width: '30%',
     maxHeight: 30,
-    resizeMode: 'contain',
     marginRight: 10,
     marginLeft: 'auto',
     marginRight: 'auto'

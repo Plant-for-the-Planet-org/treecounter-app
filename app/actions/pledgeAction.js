@@ -30,7 +30,6 @@ export function postPledge(data, params) {
   return dispatch => {
     postRequest('eventPledge_post', data, params)
       .then(res => {
-        console.log(dispatch, res);
         const { statusText } = res;
 
         NotificationManager.success(statusText, 'Success', 5000);

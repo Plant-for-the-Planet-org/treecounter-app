@@ -26,6 +26,7 @@ import redemptionlables from './redemptionlabels.json';
 import footerlabels from './footerlabels.json';
 import welcomeScreenlabels from './welcomeScreenlabels.json';
 import emailSendActivationlabels from './emailSentActivationlabels.json';
+import competitionlabels from './competitionlabels.json';
 import challengelabels from './challengelabels.json';
 import manageProjectlabels from './manageProjectlabels.json';
 
@@ -58,6 +59,7 @@ export default {
   ...footerlabels,
   ...welcomeScreenlabels,
   ...emailSendActivationlabels,
+  ...competitionlabels,
   ...challengelabels,
   ...manageProjectlabels
 };

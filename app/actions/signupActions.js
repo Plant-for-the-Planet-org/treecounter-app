@@ -46,7 +46,6 @@ export function signUp(
           return res;
         })
         .catch(err => {
-          // console.log(err);
           dispatch(setProgressModelState(false));
           throw err;
         });

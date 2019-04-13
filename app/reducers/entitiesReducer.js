@@ -12,13 +12,20 @@ export const initialState = {
   paymentGateway: {},
   treecounter: {},
   plantProjectImage: {},
-  plantContributionImage: {}
+  plantContributionImage: {},
+  competitionPager: {},
+  competition: {},
+  competitionEnrollment: {}
 };
 
 export const getUserProfiles = state => state.entities.userProfile;
 export const getContributions = state => state.entities.contribution;
 export const getTpos = state => state.entities.tpo;
 export const getPlantProjects = state => state.entities.plantProject;
+export const getCompetitionPager = state => state.entities.competitionPager;
+export const getCompetition = state => state.entities.competition;
+export const getCompetitionEnrollment = state =>
+  state.entities.competitionEnrollment;
 export const getPaymentGateways = state => state.entities.paymentGateway;
 export const getTreecounters = state => state.entities.treecounter;
 
@@ -53,10 +60,12 @@ export default handleActions(
 
       Object.keys(action.payload).forEach(entity => {
         let toBeModified = get(state, entity);
-        let modified = toBeModified.filter(
-          item => !action.payload[entity].includes(item)
-        );
-        set(state, entity, modified);
+        if (toBeModified) {
+          let modified = toBeModified.filter(
+            item => !action.payload[entity].includes(item)
+          );
+          set(state, entity, modified);
+        }
       });
       return state;
     }

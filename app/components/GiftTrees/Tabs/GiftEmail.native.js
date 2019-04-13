@@ -41,7 +41,6 @@ export default class GiftEmail extends Component {
     }
   }
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('Should component update called');
     let returnValue = false;
     Object.entries(this.props).forEach(
       ([key, val]) =>
@@ -54,7 +53,6 @@ export default class GiftEmail extends Component {
     return returnValue;
   }
   render() {
-    console.log('Render of email called');
     return (
       <KeyboardAwareScrollView enableOnAndroid={true}>
         <View
@@ -99,7 +97,6 @@ export default class GiftEmail extends Component {
     );
   }
   componentDidUpdate(prevProps, prevState) {
-    console.log('component did update called');
     Object.entries(this.props).forEach(
       ([key, val]) =>
         prevProps[key] !== val && console.log(`Prop '${key}' changed`)
@@ -108,8 +105,5 @@ export default class GiftEmail extends Component {
       ([key, val]) =>
         prevState[key] !== val && console.log(`State '${key}' changed`)
     );
-  }
-  componentWillUnmount() {
-    // console.log('Gift Email Unmounted');
   }
 }

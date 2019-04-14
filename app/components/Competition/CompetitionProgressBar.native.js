@@ -55,7 +55,9 @@ class CompetitionProgressBar extends React.Component {
               width: '100%',
               flexDirection: 'row',
               position: 'absolute',
-              alignItems: 'center'
+              alignItems: 'center',
+              paddingTop: 8,
+              paddingBottom: 8
             }}
           >
             <Text style={styles.treePlantedtextPlanted}>{countPlanted}</Text>
@@ -71,7 +73,7 @@ class CompetitionProgressBar extends React.Component {
               {countTarget ? countTarget.toLocaleString('en') : null}
             </Text>
 
-            <View style={{ paddingLeft: 5, paddingRight: 5 }}>
+            <View style={{ paddingLeft: 5, paddingRight: 16 }}>
               <Image source={flagTarget} style={{ width: 15, height: 15 }} />
             </View>
           </View>

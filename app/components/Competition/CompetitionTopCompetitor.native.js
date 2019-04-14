@@ -17,7 +17,7 @@ class CompetitionTopCompetitor extends React.Component {
       <View style={styles.topCompetitorSection}>
         <View style={styles.topCompetitorName}>
           <Text style={styles.topCompetitorScoreText}>
-            {this.props.index + 1 + ')'}
+            {this.props.index + 1}
           </Text>
           <UserProfileImage
             profileImage={

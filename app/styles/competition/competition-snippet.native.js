@@ -24,7 +24,10 @@ export default (selectCompetitionFull = EStyleSheet.create({
     borderTopLeftRadius: 10
   },
   competitionContent: {
-    padding: 10
+    paddingTop: 10,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingBottom: 16
   },
   projectImageContainer: {
     height: Layout.window.width * 0.2,
@@ -38,14 +41,9 @@ export default (selectCompetitionFull = EStyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     backgroundColor: '#d2e3af',
-    shadowOffset: {
-      width: 0,
-      height: -3
-    },
-    height: rowHeight * 1.5,
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    height: rowHeight * 1.7
   },
   treePlantedContainer: {
     flexDirection: 'row',
@@ -55,37 +53,32 @@ export default (selectCompetitionFull = EStyleSheet.create({
   treePlantedChildContainer: {
     height: '100%',
     flexDirection: 'row',
-    paddingTop: 5,
-    paddingBottom: 5,
     backgroundColor: '#b9d384',
     borderRightColor: '#b9d384'
   },
   treePlantedtext: {
     // padding: 5,
     paddingLeft: 5,
-    paddingTop: 5,
-    color: 'white'
+    color: 'white',
+    fontWeight: 'bold'
   },
   treePlantedtextTrees: {
     color: 'white',
-    paddingTop: 5,
-    paddingLeft: 5
+    paddingLeft: 5,
+    fontWeight: 'bold'
   },
   treePlantedtextPlanted: {
     color: 'white',
-    paddingTop: 5,
-    paddingLeft: 5
-  },
-  treePlantedtext: {
-    color: 'white'
-    //padding: 5
+    fontWeight: 'bold',
+    paddingLeft: 16
   },
   targetContainer: {
     width: '100%',
     flexDirection: 'row',
     position: 'absolute',
     alignItems: 'center',
-    paddingTop: 5,
+    paddingTop: 8,
+    paddingBottom: 8,
     justifyContent: 'flex-end'
   },
   projectdetailsContainer: {
@@ -102,9 +95,8 @@ export default (selectCompetitionFull = EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    //height: rowHeight + rowHeight / 2,
-    paddingLeft: 5,
     paddingTop: 10
+    //height: rowHeight + rowHeight / 2,
   },
   project_teaser__contentText: {
     fontSize: 16,
@@ -126,6 +118,11 @@ export default (selectCompetitionFull = EStyleSheet.create({
     color: '$cardTextColor',
     paddingLeft: 5,
     paddingRight: 5
+  },
+  bottomParticipantText: {
+    fontSize: 14,
+    color: 'rgba(0, 0, 0, 0.6)',
+    paddingLeft: 5
   },
   byOrgContainer: {
     width: '50%',
@@ -196,7 +193,12 @@ export default (selectCompetitionFull = EStyleSheet.create({
     fontSize: 12
   },
   projectNameContainer: {
-    height: rowHeight * 1.5,
+    flexDirection: 'row',
+    paddingBottom: 5,
+    width: '100%',
+    alignItems: 'center'
+  },
+  projectByNameContainer: {
     flexDirection: 'row',
     width: '100%',
     alignItems: 'center'
@@ -213,18 +215,20 @@ export default (selectCompetitionFull = EStyleSheet.create({
   topCompetitorSection: {
     flex: 1,
     flexDirection: 'row',
-    padding: 3,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 10,
     width: '100%',
     justifyContent: 'space-between'
   },
   topCompetitorName: {
-    width: '70%',
+    width: '90%',
     alignItems: 'center',
     flexDirection: 'row'
   },
   topCompetitorScore: {
-    width: '30%',
-    justifyContent: 'flex-end'
+    width: '10%',
+    alignItems: 'flex-end'
   },
   topCompetitorScoreText: {
     fontSize: 14,
@@ -240,7 +244,7 @@ export default (selectCompetitionFull = EStyleSheet.create({
   horizontalRule: {
     borderBottomColor: '#f1f1f1',
     borderBottomWidth: 2,
-    margin: 10
+    marginTop: 10
   },
   profileImageStyle: {
     width: 30,

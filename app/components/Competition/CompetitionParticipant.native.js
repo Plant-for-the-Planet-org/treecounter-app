@@ -105,5 +105,6 @@ CompetitionParticipant.propTypes = {
   confirmPart: PropTypes.any,
   declinePart: PropTypes.any,
   cancelInvite: PropTypes.any,
-  supportTreecounterAction: PropTypes.any
+  supportTreecounterAction: PropTypes.any,
+  navigation: PropTypes.any
 };

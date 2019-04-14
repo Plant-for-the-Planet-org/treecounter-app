@@ -247,6 +247,7 @@ class CompetitionFull extends React.Component {
                               competitor={top}
                               index={index}
                               type="participants"
+                              navigation={this.props.navigation}
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               cancelInvite={id => this.props.cancelInvite(id)}
@@ -283,6 +284,7 @@ class CompetitionFull extends React.Component {
                               competitor={top}
                               index={index}
                               type="request_join"
+                              navigation={this.props.navigation}
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               cancelInvite={id => this.props.cancelInvite(id)}
@@ -321,6 +323,7 @@ class CompetitionFull extends React.Component {
                               competitor={top}
                               index={index}
                               type="invite"
+                              navigation={this.props.navigation}
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               cancelInvite={id => this.props.cancelInvite(id)}
@@ -355,6 +358,7 @@ class CompetitionFull extends React.Component {
                               competitor={top}
                               index={index}
                               type="request_join"
+                              navigation={this.props.navigation}
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               cancelInvite={id => this.props.cancelInvite(id)}

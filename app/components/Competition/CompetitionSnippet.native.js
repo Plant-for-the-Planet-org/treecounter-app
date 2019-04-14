@@ -53,13 +53,14 @@ class CompetitionSnippet extends React.Component {
       competitionDetail &&
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
     ) {
-      button = (
-        <TouchableItem>
-          <Text style={styles.bottomParticipantText}>
-            {i18n.t('label.edit')}
-          </Text>
-        </TouchableItem>
-      );
+      // button = (
+      //   <TouchableItem>
+      //     <Text style={styles.bottomParticipantText}>
+      //       {i18n.t('label.edit')}
+      //     </Text>
+      //   </TouchableItem>
+      // );
+      button = <Text style={{ paddingLeft: 5, paddingRight: 5 }} />;
     } else if (status === '') {
       button = (
         <TouchableItem

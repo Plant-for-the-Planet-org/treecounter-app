@@ -78,15 +78,16 @@ class CompetitionFull extends React.Component {
       competitionDetail &&
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
     ) {
-      button = (
-        <PrimaryButton
-          style={snippetStyles.buttonItem}
-          buttonStyle={snippetStyles.buttonStyle}
-          textStyle={snippetStyles.buttonTextStyle}
-        >
-          <Text> {i18n.t('label.edit')}</Text>
-        </PrimaryButton>
-      );
+      // button = (
+      //   <PrimaryButton
+      //     style={snippetStyles.buttonItem}
+      //     buttonStyle={snippetStyles.buttonStyle}
+      //     textStyle={snippetStyles.buttonTextStyle}
+      //   >
+      //     <Text> {i18n.t('label.edit')}</Text>
+      //   </PrimaryButton>
+      // );
+      button = null;
     } else if (status === '') {
       if (competitionDetail && competitionDetail.access === 'immediate') {
         button = (

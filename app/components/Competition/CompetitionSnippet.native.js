@@ -62,17 +62,36 @@ class CompetitionSnippet extends React.Component {
       // );
       button = <Text style={{ paddingLeft: 5, paddingRight: 5 }} />;
     } else if (status === '') {
-      button = (
-        <TouchableItem
-          onPress={() =>
-            this.props.enrollCompetition(this.props.competition.id)
-          }
-        >
-          <Text style={styles.bottomParticipantText}>
-            {i18n.t('label.join')}
-          </Text>
-        </TouchableItem>
-      );
+      if (competitionDetail && competitionDetail.access === 'immediate') {
+        button = (
+          <TouchableItem
+            onPress={() =>
+              this.props.enrollCompetition(this.props.competition.id)
+            }
+          >
+            <Text style={styles.bottomParticipantText}>
+              {i18n.t('label.join')}
+            </Text>
+          </TouchableItem>
+        );
+      } else if (competitionDetail && competitionDetail.access === 'request') {
+        button = (
+          <TouchableItem
+            onPress={() =>
+              this.props.enrollCompetition(this.props.competition.id)
+            }
+          >
+            <Text style={styles.bottomParticipantText}>
+              {i18n.t('label.request_to_join')}
+            </Text>
+          </TouchableItem>
+        );
+      } else if (
+        competitionDetail &&
+        competitionDetail.access === 'invitation'
+      ) {
+        button = null;
+      }
     } else if (status === 'enrolled') {
       button = (
         <TouchableItem

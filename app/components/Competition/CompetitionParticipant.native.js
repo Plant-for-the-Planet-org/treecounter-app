@@ -14,13 +14,70 @@ class CompetitionParticipant extends React.Component {
   constructor(props) {
     super(props);
     this.supportButton = this.supportButton.bind(this);
+    this.plantButton = this.plantButton.bind(this);
   }
 
   supportButton() {
     this.props.supportTreecounterAction(this.props.competitor.treecounterSlug);
     updateRoute('app_donateTrees', this.props.navigation);
   }
+  plantButton() {
+    updateRoute('app_donateTrees', this.props.navigation);
+  }
   render() {
+    let support_button = null;
+    console.log(
+      this.props.competitor.treecounterSlug,
+      this.props.treeCounter.slug
+    );
+    if (
+      this.props.type === 'participants' &&
+      this.props.competitor.treecounterSlug === this.props.treeCounter.slug
+    ) {
+      support_button = (
+        <View style={styles.topCompetitorScore}>
+          <PrimaryButton
+            style={snippetStyles.buttonItem}
+            buttonStyle={snippetStyles.buttonStyle}
+            textStyle={snippetStyles.buttonTextStyle}
+            onClick={() => this.plantButton()}
+          >
+            <Text> {i18n.t('label.plant_trees')}</Text>
+          </PrimaryButton>
+        </View>
+      );
+    } else if (
+      this.props.type === 'participants' &&
+      this.props.competitor.treecounterSlug !== this.props.treeCounter.slug
+    ) {
+      support_button = (
+        <View style={styles.topCompetitorScore}>
+          <PrimaryButton
+            style={snippetStyles.buttonItem}
+            buttonStyle={snippetStyles.buttonStyle}
+            textStyle={snippetStyles.buttonTextStyle}
+            onClick={() => this.supportButton()}
+          >
+            <Text> {i18n.t('label.support')}</Text>
+          </PrimaryButton>
+        </View>
+      );
+    } else if (this.props.type === 'invite') {
+      support_button = (
+        <View style={styles.topCompetitorScore}>
+          <PrimaryButton
+            style={snippetStyles.buttonItem}
+            buttonStyle={snippetStyles.buttonStyle}
+            textStyle={snippetStyles.buttonTextStyle}
+            onClick={() => this.props.cancelInvite(this.props.competitor.token)}
+          >
+            <Text> {i18n.t('label.cancel')}</Text>
+          </PrimaryButton>
+        </View>
+      );
+    } else {
+      support_button = null;
+    }
     return (
       <View style={styles.topCompetitorSection}>
         <View style={styles.topCompetitorName}>
@@ -34,7 +91,10 @@ class CompetitionParticipant extends React.Component {
 
           <View style={styles.participantNameContainer}>
             <Text style={styles.topCompetitorNameText}>
-              {this.props.competitor.treecounterDisplayName}
+              {this.props.competitor.treecounterSlug ===
+              this.props.treeCounter.slug
+                ? 'Me'
+                : this.props.competitor.treecounterDisplayName}
             </Text>
             {this.props.type === 'participants' ||
             this.props.type === 'invite' ? (
@@ -67,31 +127,7 @@ class CompetitionParticipant extends React.Component {
             ) : null}
           </View>
         </View>
-        {this.props.type === 'participants' ? (
-          <View style={styles.topCompetitorScore}>
-            <PrimaryButton
-              style={snippetStyles.buttonItem}
-              buttonStyle={snippetStyles.buttonStyle}
-              textStyle={snippetStyles.buttonTextStyle}
-              onClick={() => this.supportButton()}
-            >
-              <Text> {i18n.t('label.support')}</Text>
-            </PrimaryButton>
-          </View>
-        ) : this.props.type === 'invite' ? (
-          <View style={styles.topCompetitorScore}>
-            <PrimaryButton
-              style={snippetStyles.buttonItem}
-              buttonStyle={snippetStyles.buttonStyle}
-              textStyle={snippetStyles.buttonTextStyle}
-              onClick={() =>
-                this.props.cancelInvite(this.props.competitor.token)
-              }
-            >
-              <Text> {i18n.t('label.cancel')}</Text>
-            </PrimaryButton>
-          </View>
-        ) : null}
+        {support_button}
       </View>
     );
   }

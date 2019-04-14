@@ -249,6 +249,8 @@ class CompetitionFull extends React.Component {
                               index={index}
                               type="participants"
                               navigation={this.props.navigation}
+                              treeCounter={this.props.treeCounter}
+                              competitionDetail={competitionDetail}
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               cancelInvite={id => this.props.cancelInvite(id)}
@@ -286,6 +288,8 @@ class CompetitionFull extends React.Component {
                               index={index}
                               type="request_join"
                               navigation={this.props.navigation}
+                              treeCounter={this.props.treeCounter}
+                              competitionDetail={competitionDetail}
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               cancelInvite={id => this.props.cancelInvite(id)}
@@ -325,6 +329,8 @@ class CompetitionFull extends React.Component {
                               index={index}
                               type="invite"
                               navigation={this.props.navigation}
+                              treeCounter={this.props.treeCounter}
+                              competitionDetail={competitionDetail}
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               cancelInvite={id => this.props.cancelInvite(id)}
@@ -360,6 +366,8 @@ class CompetitionFull extends React.Component {
                               index={index}
                               type="request_join"
                               navigation={this.props.navigation}
+                              treeCounter={this.props.treeCounter}
+                              competitionDetail={competitionDetail}
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               cancelInvite={id => this.props.cancelInvite(id)}

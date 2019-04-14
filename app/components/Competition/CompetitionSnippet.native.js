@@ -22,14 +22,17 @@ class CompetitionSnippet extends React.Component {
   constructor(props) {
     super(props);
   }
+
   toggleExpanded(id) {
     this.props.onMoreClick(id);
   }
+
   containerPress(id) {
     if (this.props.onMoreClick) {
       this.props.onMoreClick(id);
     }
   }
+
   render() {
     const competitionDetail = this.props.competition;
     let status = '',
@@ -52,7 +55,7 @@ class CompetitionSnippet extends React.Component {
     ) {
       button = (
         <TouchableItem>
-          <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+          <Text style={styles.bottomParticipantText}>
             {i18n.t('label.edit')}
           </Text>
         </TouchableItem>
@@ -64,7 +67,7 @@ class CompetitionSnippet extends React.Component {
             this.props.enrollCompetition(this.props.competition.id)
           }
         >
-          <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+          <Text style={styles.bottomParticipantText}>
             {i18n.t('label.join')}
           </Text>
         </TouchableItem>
@@ -74,7 +77,7 @@ class CompetitionSnippet extends React.Component {
         <TouchableItem
           onPress={() => this.props.leaveCompetition(this.props.competition.id)}
         >
-          <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+          <Text style={styles.bottomParticipantText}>
             {i18n.t('label.leave')}
           </Text>
         </TouchableItem>
@@ -84,7 +87,7 @@ class CompetitionSnippet extends React.Component {
         <TouchableItem
           onPress={() => this.props.leaveCompetition(this.props.competition.id)}
         >
-          <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+          <Text style={styles.bottomParticipantText}>
             {i18n.t('label.cancel_join_request')}
           </Text>
         </TouchableItem>
@@ -103,12 +106,12 @@ class CompetitionSnippet extends React.Component {
             {/*style={styles.teaser__projectImage}*/}
             {/*source={{*/}
             {/*uri: getImageUrl(*/}
-            {/*'project',*/}
-            {/*'large',*/}
+            {/*"project",*/}
+            {/*"large",*/}
             {/*this.props.competition.image*/}
             {/*)*/}
             {/*}}*/}
-            {/*resizeMode={'cover'}*/}
+            {/*resizeMode={"cover"}*/}
             {/*/>*/}
             {/*</View>*/}
             {/*) : null}*/}
@@ -130,7 +133,7 @@ class CompetitionSnippet extends React.Component {
                   {this.props.competition && this.props.competition.name}
                 </Text>
               </View>
-              <View style={styles.projectNameContainer}>
+              <View style={styles.projectByNameContainer}>
                 <Text
                   ellipsizeMode="tail"
                   numberOfLines={1}
@@ -175,7 +178,7 @@ class CompetitionSnippet extends React.Component {
                 <View style={styles.buttonContainer}>
                   {this.props.competition &&
                   this.props.competition.competitorCount > 0 ? (
-                    <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+                    <Text style={styles.bottomParticipantText}>
                       {this.props.competition.competitorCount} participants
                     </Text>
                   ) : (

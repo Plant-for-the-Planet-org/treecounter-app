@@ -63,10 +63,16 @@ class SearchLayout extends React.Component {
     //     section: suggestion.section
     //   })
     // }
-    this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-      treeCounterId: suggestion.slug || suggestion.id,
-      suggestion
-    });
+    if (suggestion.category === 'profile') {
+      this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+        treeCounterId: suggestion.slug || suggestion.id,
+        suggestion
+      });
+    } else if (suggestion.category === 'competition') {
+      this.props.navigation.navigate(getLocalRoute('app_competition'), {
+        competition: suggestion.id
+      });
+    }
   }
 
   render() {
@@ -107,7 +113,7 @@ class SearchLayout extends React.Component {
                       suggestion.image
                         ? {
                             uri: getImageUrl(
-                              'profile',
+                              suggestion.category,
                               'avatar',
                               suggestion.image
                             )

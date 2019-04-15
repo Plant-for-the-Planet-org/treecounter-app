@@ -2,7 +2,6 @@
   "loading": "Laden ...",
   "isRequired": "{{context}} wird benötigt",
   "enterValidEmail": "Gib eine gültige Email-Adresse ein",
-  "invalidLength": "Ungültige Länge: sollte kürzer sein als {length}",
   "invalidValueMsg": "Bitte gib eine gültige {{context}} ein",
   "something_went_x": "Etwas ist schief gelaufen.",
   "sorry_inconveniences": "Entschuldige die Umstände.",

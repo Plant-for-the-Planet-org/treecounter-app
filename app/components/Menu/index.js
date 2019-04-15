@@ -53,6 +53,12 @@ export default class Menu extends Component {
           <TwitterShareButton url={redirectPath}>
             <img src={images['twitter']} />
           </TwitterShareButton>
+          <Link
+            to={getLocalRoute('app_widgetBuilder')}
+            onClick={() => console.log('redirect_widget_share')}
+          >
+            <img src={images.webProgramming} />
+          </Link>
         </div>
       );
     } else {

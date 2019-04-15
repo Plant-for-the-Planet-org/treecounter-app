@@ -21,7 +21,7 @@ import {
 import { normalize } from 'normalizr';
 import { debug } from '../debug';
 import { updateRoute } from '../helpers/routerHelper';
-import { NotificationManager } from 'react-notifications';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 
 export function fetchCompetitions(category) {
   return dispatch => {
@@ -160,12 +160,13 @@ export function createCompetition(value, navigation) {
         updateRoute('app_competition', navigation || dispatch, 1, {
           competition: res.data.merge.competition[0].id
         });
+
+        dispatch(setProgressModelState(false));
         NotificationManager.success(
-          statusText,
-          'Competition created successfully',
+          'Competition Created successfully',
+          'Success',
           5000
         );
-        dispatch(setProgressModelState(false));
         dispatch(fetchMineCompetitions());
       })
       .catch(error => {

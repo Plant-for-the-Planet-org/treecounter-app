@@ -320,6 +320,7 @@ class CompetitionFull extends React.Component {
                         onSearchResultClick={this.onSearchResultClick}
                         currentUserProfile={this.props.currentUserProfile}
                         clearTextOnClick={true}
+                        alreadyInvited={competitionDetail.allEnrollments}
                       />
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>
@@ -360,7 +361,9 @@ class CompetitionFull extends React.Component {
                     <View>
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>
-                          top.status === 'invited' ? (
+                          top.status === 'invited' &&
+                          top.treecounterSlug ===
+                            this.props.treeCounter.slug ? (
                             <CompetitionParticipant
                               competitor={top}
                               index={index}

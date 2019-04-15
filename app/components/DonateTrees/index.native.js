@@ -2,36 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import { TabView } from 'react-native-tab-view';
-import {
-  individualSchemaOptions,
-  receiptIndividualFormSchema,
-  receiptCompanyFormSchema,
-  companySchemaOptions
-} from '../../server/parsedSchemas/donateTrees';
 
 import i18n from '../../locales/i18n.js';
-import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+
 import RecieptTabsView from './receiptTabs';
-import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
-import PaymentSelector from '../Payment/PaymentSelector';
-import { ScrollView, View, Text } from 'react-native';
+// import PaymentSelector from '../Payment/PaymentSelector';
+import { View, Text, Alert, Linking } from 'react-native';
+import { paymentFee } from '../../helpers/utils';
+import { getLocalRoute } from '../../actions/apiRouting';
+import { context } from '../../config';
+import TabContainer from '../../containers/Menu/TabContainer';
+import LoadingIndicator from '../Common/LoadingIndicator';
 
-export default class DonateTrees extends Component {
-  static data = {
-    tabsReceipt: [
-      {
-        name: i18n.t('label.individual_name'),
-        id: 'individual'
-      },
-      {
-        name: i18n.t('label.company_title'),
-        id: 'company'
-      }
-    ]
-  };
-
+export default class DonateTrees extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -56,13 +41,13 @@ export default class DonateTrees extends Component {
       },
       expanded: false,
       expandedOption: '1',
-      showSelectProject: false,
       routes: [
-        { key: 'selectPlant', title: 'Select Plant' },
+        // { key: 'selectPlant', title: 'Select Plant' },
         { key: 'currency', title: 'Donation Details' },
-        { key: 'recipient', title: 'Donor Details' },
-        { key: 'payments', title: 'Payments' }
-      ]
+        { key: 'recipient', title: 'Donor Details' }
+        // { key: 'payments', title: 'Payments' }
+      ],
+      giftTreeCounterName: null
     };
 
     this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
@@ -78,14 +63,31 @@ export default class DonateTrees extends Component {
   }
 
   componentDidMount() {
+    const { navigation } = this.props;
     this.props.onTabChange(this.state.routes[0].title);
+    Linking.getInitialURL()
+      .then(url => {
+        if (url) {
+          this.handleOpenURL(url);
+        }
+      })
+      .catch(err => {});
+    Linking.addEventListener('url', this.handleOpenURL);
+    let params = this.props.navigation.state.params;
+    if (params !== undefined && params.giftMethod === 'invitation') {
+      this.setState({
+        giftTreeCounterName:
+          params.userForm.firstname + ' ' + params.userForm.lastname
+      });
+    }
+    if (params !== undefined && params.giftMethod === 'direct') {
+      this.setState({ giftTreeCounterName: params.userForm.name });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
+    const { navigation } = this.props;
     if (nextProps.selectedProject) {
-      this.setState({
-        showSelectProject: false
-      });
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
           .fixedDefaultTreeCount;
@@ -97,12 +99,39 @@ export default class DonateTrees extends Component {
       if (nextTreeCount !== currentTreeCount) {
         this.setState({ selectedTreeCount: nextTreeCount });
       }
-    } else {
-      this.setState({
-        showSelectProject: true
-      });
+    }
+    if (nextProps.paymentStatus && nextProps.paymentStatus.token) {
+      this.openGateWay(
+        getLocalRoute('app_payment', {
+          donationContribution: nextProps.paymentStatus.token
+        })
+      );
     }
   }
+
+  handleOpenURL = url => {
+    if (url.url.split('//')[1] === 'paymentSuccess') {
+      if (this.props.currentUserProfile) {
+        this.props.loadUserProfile();
+      }
+      this.props.updateRoute('app_userHome');
+    } else {
+      // handle failure
+      this.props.paymentClear();
+      this.goToNextTab(1);
+    }
+  };
+
+  // open your gateway
+  openGateWay = async url => {
+    url = context.scheme + '://' + context.host + url;
+    const canOpen = await Linking.canOpenURL(url);
+    if (canOpen) {
+      Linking.openURL(url).catch(err =>
+        console.error('An error occurred', err)
+      );
+    }
+  };
 
   getFees() {
     const directCurrencies = this.state.countryCurrencies.map(
@@ -119,11 +148,11 @@ export default class DonateTrees extends Component {
 
   Tab1validated() {
     if (this.props.selectedProject) {
-      this._handleIndexChange(1);
+      this._handleIndexChange(0);
     }
   }
 
-  Tab2validated() {
+  Tab2validated = () => {
     if (this.state.selectedTreeCount) {
       this.setState({
         form: {
@@ -131,9 +160,9 @@ export default class DonateTrees extends Component {
           treeCount: this.state.selectedTreeCount
         }
       });
-      this._handleIndexChange(2);
+      this._handleIndexChange(1);
     }
-  }
+  };
   goToNextTab(value) {
     if (value) {
       let receipt = {};
@@ -142,13 +171,15 @@ export default class DonateTrees extends Component {
       } else {
         receipt['receiptCompany'] = value;
       }
-      this.setState({
-        form: {
-          ...this.state.form,
-          ...receipt
-        }
-      });
-      this._handleIndexChange(3);
+      this.setState(
+        {
+          form: {
+            ...this.state.form,
+            ...receipt
+          }
+        },
+        this.handlePaymentApproved
+      );
     } else {
       // Do nothing
     }
@@ -178,7 +209,11 @@ export default class DonateTrees extends Component {
 
   handleModeReceiptChange(tab) {
     this.setState({
-      modeReceipt: tab
+      modeReceipt: tab,
+      form: {
+        ...this.state.form,
+        recipientType: tab
+      }
     });
   }
 
@@ -190,6 +225,7 @@ export default class DonateTrees extends Component {
 
   componentWillUnmount() {
     this.props.paymentClear();
+    Linking.removeEventListener('url', this.handleOpenURL);
   }
   _renderTabBar = props => {
     return renderDottedTabbar(
@@ -226,7 +262,7 @@ export default class DonateTrees extends Component {
     let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
     let email = receipt !== '' ? receipt.email : '';
     let paymentMethods;
-    if (receipt) {
+    if (receipt && selectedProject) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
       const countryCurrencies = selectedProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
@@ -237,94 +273,43 @@ export default class DonateTrees extends Component {
     }
     let currencies = this.props.currencies.currencies;
 
-    let screenToShow;
-    {
-      this.props.selectedTpo && route.key === 'selectPlant'
-        ? (screenToShow = (
-            <ScrollView>
-              <PlantProjectFull
-                callExpanded={this.callExpanded}
-                expanded={false}
-                plantProject={selectedProject}
-                tpoName={this.props.selectedTpo.name}
-                selectAnotherProject={true}
-                showNextButton={true}
-                onNextClick={() => this.Tab1validated()}
-                projectClear={this.props.plantProjectClear}
-              />
-            </ScrollView>
-          ))
-        : null;
-    }
+    switch (route.key) {
+      case 'currency':
+        return this.props.selectedTpo &&
+          currencies &&
+          this.props.selectedProject ? (
+          <TreeCountCurrencySelector
+            treeCost={selectedProject.treeCost}
+            rates={currencies.currency_rates[selectedProject.currency].rates}
+            giftTreeCounterName={this.state.giftTreeCounterName}
+            selectedProject={selectedProject}
+            fees={paymentFee}
+            showNextButton={true}
+            currencies={currencies.currency_names} // TODO: connect to data from API
+            selectedCurrency={this.determineDefaultCurrency()}
+            treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
+            onNextClick={this.Tab2validated}
+            selectedTreeCount={this.state.selectedTreeCount}
+            onChange={this.handleTreeCountCurrencyChange}
+          />
+        ) : (
+          <LoadingIndicator />
+        );
+        break;
 
-    {
-      this.props.selectedTpo && currencies && route.key === 'currency'
-        ? (screenToShow = (
-            <TreeCountCurrencySelector
-              treeCost={selectedProject.treeCost}
-              rates={currencies.currency_rates[selectedProject.currency].rates}
-              fees={1}
-              showNextButton={true}
-              currencies={currencies.currency_names} // TODO: connect to data from API
-              selectedCurrency={this.determineDefaultCurrency()}
-              treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
-              onNextClick={() => this.Tab2validated()}
-              selectedTreeCount={this.state.selectedTreeCount}
-              onChange={this.handleTreeCountCurrencyChange}
-            />
-          ))
-        : null;
+      case 'recipient': {
+        return (
+          <RecieptTabsView
+            ref={this.setRecipientTabRef}
+            showNextButton={true}
+            currentUserProfile={this.props.currentUserProfile}
+            formValue={this.state.form}
+            goToNextTab={value => this.goToNextTab(value)}
+            onReciptTabChange={tab => this.handleModeReceiptChange(tab)}
+          />
+        );
+      }
     }
-
-    {
-      route.key === 'recipient'
-        ? (screenToShow = (
-            <RecieptTabsView
-              ref={this.setRecipientTabRef}
-              showNextButton={true}
-              currentUserProfile={this.props.currentUserProfile}
-              goToNextTab={value => this.goToNextTab(value)}
-              onReciptTabChange={tab => this.handleModeReceiptChange(tab)}
-            />
-          ))
-        : null;
-    }
-    {
-      route.key === 'payments'
-        ? (screenToShow = (
-            <PaymentSelector
-              paymentMethods={paymentMethods}
-              accounts={selectedProject.paymentSetup.accounts}
-              stripePublishableKey={
-                selectedProject.paymentSetup.stripePublishableKey
-              }
-              setProgressModelState={this.props.setProgressModelState}
-              amount={this.state.selectedAmount}
-              currency={this.state.selectedCurrency}
-              expandedOption={this.state.expandedOption}
-              handleExpandedClicked={this.handleExpandedClicked}
-              paymentStatus={this.props.paymentStatus}
-              paymentClear={this.props.paymentClear}
-              context={{
-                tpoName: this.props.selectedTpo.name,
-                donorEmail: email,
-                donorName: name,
-                treeCount: this.state.selectedTreeCount
-              }}
-              onSuccess={paymentResponse =>
-                this.handlePaymentApproved(paymentResponse)
-              }
-              onFailure={data =>
-                console.log('/////////////////// payment failure ', data)
-              }
-              onError={data =>
-                console.log('/////////////////// payment error ', data)
-              }
-            />
-          ))
-        : null;
-    }
-    return screenToShow;
   };
   _handleIndexChange = index => {
     if (this._canJumpToTab(index)) {
@@ -334,7 +319,7 @@ export default class DonateTrees extends Component {
   };
 
   _canJumpToTab = index => {
-    if (index === 3) {
+    if (index === 2) {
       if (this.getRecieptFormState() != null) {
         return true;
       }
@@ -343,35 +328,93 @@ export default class DonateTrees extends Component {
     return true;
   };
 
-  handlePaymentApproved(paymentResponse) {
-    let sendState = { ...this.state.form };
+  handlePaymentApproved() {
+    let params = this.props.navigation.state.params;
+    let sendState;
+    if (params !== undefined && params.giftMethod != null) {
+      if (params.giftMethod === 'invitation') {
+        this.props.gift(
+          {
+            ...this.state.form,
+            giftInvitation: params.userForm,
+            giftMethod: params.giftMethod,
+            paymentResponse: {
+              gateway: 'offline',
+              accountName: 'offline_US',
+              isConfirmed: true,
+              confirmation: 'iOS referred payment'
+            },
+            amount: this.state.selectedAmount,
+            currency: this.state.selectedCurrency
+          },
+          this.props.selectedProject.id,
+          this.props.currentUserProfile
+        );
+      } else if (params.giftMethod === 'direct') {
+        this.props.gift(
+          {
+            ...this.state.form,
+            directGift: {
+              treecounter: params.userForm.treeCounter,
+              message: params.userForm.message
+            },
+            giftTreecounter: params.userForm.id,
+            giftMethod: params.giftMethod,
+            paymentResponse: {
+              gateway: 'offline',
+              accountName: 'offline_US',
+              isConfirmed: true,
+              confirmation: 'iOS referred payment'
+            },
+            amount: this.state.selectedAmount,
+            currency: this.state.selectedCurrency
+          },
+          this.props.selectedProject.id,
+          this.props.currentUserProfile
+        );
+      }
+      return;
+    }
+    sendState = { ...this.state.form };
     if (this.props.supportTreecounter.treecounterId) {
       sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
     }
     this.props.donate(
       {
         ...this.state.form,
-        paymentResponse,
+        paymentResponse: {
+          gateway: 'offline',
+          accountName: 'offline_US',
+          isConfirmed: true,
+          confirmation: 'iOS referred payment'
+        },
         amount: this.state.selectedAmount,
         currency: this.state.selectedCurrency
       },
-      this.props.selectedProject.id
+      this.props.selectedProject.id,
+      this.props.currentUserProfile
     );
   }
 
   render() {
-    const { selectedProject } = this.props;
-
-    return this.state.showSelectProject ? (
-      <SelectPlantProjectContainer />
-    ) : !selectedProject ? null : (
-      <TabView
-        navigationState={this.state}
-        renderScene={this._renderScene}
-        renderTabBar={this._renderTabBar}
-        useNativeDriver={true}
-        onIndexChange={this._handleIndexChange}
-      />
+    return (
+      <View style={{ flex: 1 }}>
+        <TabView
+          navigationState={this.state}
+          renderScene={this._renderScene}
+          renderTabBar={this._renderTabBar}
+          useNativeDriver={true}
+          onIndexChange={this._handleIndexChange}
+        />
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 0
+          }}
+        >
+          <TabContainer {...this.props} />
+        </View>
+      </View>
     );
   }
 }
@@ -387,5 +430,7 @@ DonateTrees.propTypes = {
   paymentStatus: PropTypes.object,
   plantProjectClear: PropTypes.func,
   onTabChange: PropTypes.func,
-  setProgressModelState: PropTypes.func
+  setProgressModelState: PropTypes.func,
+  loadUserProfile: PropTypes.func,
+  updateRoute: PropTypes.func
 };

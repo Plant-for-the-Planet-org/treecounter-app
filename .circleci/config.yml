@@ -7,7 +7,9 @@ jobs:
   build:
     branches:
       only:
+        - master
         - staging
+        - devel
         - dev
     docker:
       - image: alpine
@@ -25,10 +27,18 @@ jobs:
           name: Setting Environment Variables
           command: |
             > $ENV_VARS
-            if [[ "${CIRCLE_BRANCH}" == "staging" ]]
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]
+            then
+              echo 'export WD_REACT="$PROJ_DIR/ttc-app_prod"' >>  $ENV_VARS
+              echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_prod"' >>  $ENV_VARS
+            elif [[ "${CIRCLE_BRANCH}" == "staging" ]]
             then
               echo 'export WD_REACT="$PROJ_DIR/ttc-app_staging"' >>  $ENV_VARS
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_staging"' >>  $ENV_VARS
+            elif [[ "${CIRCLE_BRANCH}" == "devel" ]]
+            then
+              echo 'export WD_REACT="$PROJ_DIR/ttc-app_devel"' >>  $ENV_VARS
+              echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_devel"' >>  $ENV_VARS
             elif [[ "${CIRCLE_BRANCH}" == "dev" ]]
             then
               echo 'export WD_REACT="$PROJ_DIR/ttc-app_test"' >>  $ENV_VARS
@@ -60,7 +70,13 @@ jobs:
             ssh $HOST "cd $WD_REACT; git fetch origin $CIRCLE_BRANCH"
             ssh $HOST "cd $WD_REACT; git merge FETCH_HEAD"
             ssh $HOST "cd $WD_REACT; /usr/bin/npm install"
-            ssh $HOST "cd $WD_REACT; /usr/bin/npm run build:server"
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]
+            then
+              ssh $HOST "cd $WD_REACT; /usr/bin/npm run build:prod_server"
+            else
+              ssh $HOST "cd $WD_REACT; /usr/bin/npm run build:server"
+            fi
+            ssh $HOST "cd $WD_REACT; sed -i 's%com/4.8%com/4.7%' web/server/bundle.js"
 
       - run:
           name: Integrate React Build into Symfony

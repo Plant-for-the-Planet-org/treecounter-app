@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PlantProjectTeaser from './PlantProjectTeaser';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import SeeMoreToggle from '../Common/SeeMoreToggle';
 import PlantProjectDetails from './PlantProjectDetails';
 import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
+import CardLayout from '../Common/Card';
+import { getImageUrl } from '../../actions/apiRouting';
+import PlantedProgressBar from './PlantedProgressbar';
+import { tick } from '../../assets';
+import { updateRoute } from '../../helpers/routerHelper';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -15,7 +19,16 @@ class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
     this.toggleExpanded = this.toggleExpanded.bind(this);
-    this.state = { expanded: props.expanded };
+    let projectImage;
+    if (this.props.plantProject.imageFile) {
+      projectImage = { image: this.props.plantProject.imageFile };
+    } else {
+      projectImage =
+        this.props.plantProject &&
+        this.props.plantProject.plantProjectImages &&
+        this.props.plantProject.plantProjectImages.find(() => true);
+    }
+    this.state = { expanded: props.expanded, projectImage: projectImage };
     if (props.callExpanded) {
       props.callExpanded(!this.state.expanded);
     }
@@ -27,7 +40,15 @@ class PlantProjectFull extends React.Component {
     }
     this.setState({ expanded: !this.state.expanded });
   }
+  updateProjectImage(projectImage) {
+    this.setState({ projectImage: projectImage });
+  }
 
+  updateRoute(link) {
+    updateRoute('app_treecounter', null, null, {
+      treecounter: link
+    });
+  }
   render() {
     const {
       name: projectName,
@@ -41,14 +62,20 @@ class PlantProjectFull extends React.Component {
       paymentSetup,
       survivalRate: survivalRate,
       images,
+      imageFile,
       description,
       homepageUrl: homepageUrl,
       homepageCaption: homepageCaption,
       videoUrl: videoUrl,
       geoLocation
     } = this.props.plantProject;
-    const projectImage =
-      plantProjectImages && plantProjectImages.find(() => true);
+    let projectImage = null;
+
+    if (imageFile) {
+      projectImage = { image: imageFile };
+    } else {
+      projectImage = plantProjectImages && plantProjectImages.find(() => true);
+    }
 
     const teaserProps = {
       tpoName: this.props.tpoName,
@@ -75,9 +102,54 @@ class PlantProjectFull extends React.Component {
       plantProjectImages
     };
     return (
-      <div>
-        <PlantProjectTeaser {...teaserProps} />
-        <PlantProjectSpecs {...specsProps} />
+      <React.Fragment>
+        <div className="project-teaser__container">
+          {projectImage ? (
+            <div className="teaser-image__container">
+              <img
+                className="teaser__projectImage"
+                src={getImageUrl(
+                  'project',
+                  'large',
+                  this.state.projectImage.image
+                )}
+                alt={projectImage.description}
+              />
+            </div>
+          ) : null}
+
+          <div className="row">
+            <PlantedProgressBar
+              countPlanted={specsProps.countPlanted}
+              countTarget={specsProps.countTarget}
+            />
+          </div>
+          <div className="row">
+            <div className="teaser__tpoHeading">{projectName}</div>
+            <div className="teaser__certified__container">
+              {isCertified ? (
+                <img className="teaser__certified" src={tick} />
+              ) : null}
+            </div>
+          </div>
+          {teaserProps.tpoName && (
+            <div className="row">
+              <div className="teaser__tpoHeading">
+                <a onClick={() => this.updateRoute(teaserProps.tpoName)}>
+                  By {teaserProps.tpoName}
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="project-specs__container">
+          <div className="project-specs__detail">
+            <PlantProjectSpecs {...specsProps} />
+          </div>
+          <div className="project-specs__cost">
+            {specsProps.currency} {specsProps.treeCost}
+          </div>
+        </div>
         <div className="project-action-links">
           <SeeMoreToggle
             seeMore={!this.state.expanded}
@@ -92,8 +164,13 @@ class PlantProjectFull extends React.Component {
             </div>
           ) : null}
         </div>
-        {this.state.expanded && <PlantProjectDetails {...detailsProps} />}
-      </div>
+        {this.state.expanded ? (
+          <PlantProjectDetails
+            {...detailsProps}
+            onImageClick={this.updateProjectImage.bind(this)}
+          />
+        ) : null}
+      </React.Fragment>
     );
   }
 }

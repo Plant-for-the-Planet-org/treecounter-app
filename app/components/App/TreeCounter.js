@@ -1,6 +1,6 @@
 // Library imports
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NotificationContainer } from 'react-notifications';
@@ -24,6 +24,7 @@ import BrowserRouter from '../Common/BrowserRouter';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import FAQContainer from '../../containers/FAQ';
 import PledgeContainer from '../../containers/Pledge';
+import RedemptionContainer from '../../containers/RedemptionContainer';
 
 import Footer from '../Footer';
 
@@ -38,12 +39,25 @@ import { NotificationAction } from '../../actions/notificationAction';
 import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors';
 import { getLocalRoute } from '../../actions/apiRouting';
+import SuccessfullyActivatedAccount from '../../containers/Authentication/SuccessfullActivatedContainer';
+import DonationTreesContainer from '../../containers/DonateTrees/index';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
-import DonationTreesContainer from '../../containers/DonateTrees';
+import ManageProjectContainer from '../../containers/ManageProjects';
 
 import EditUserProfileContainer from '../../containers/EditUserProfile';
 import LeaderboardContainer from '../../containers/Leaderboard';
 import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
+import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
+import PrivacyContainer from '../../containers/Privacy';
+import ImprintContainer from '../../containers/Imprint';
+import DownloadAppModal from '../DownloadAppStore';
+import AppPaymentContainer from '../../containers/AppPayment';
+import BodyErrorBoundary from '../ErrorBoundry/bodyErrorBoundry';
+import PageNotFound from '../ErrorBoundry/404';
+import WidgetShareContainer from '../../containers/WidgetsShare';
+import ChallengeContainer from '../../containers/Challenge/createChallenge';
+import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPublicDenyEmail';
+import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -51,11 +65,23 @@ class TreeCounter extends Component {
     super(props);
     const { userProfile } = this.props;
     const isLoggedIn = null !== userProfile;
+    let IS_IPAD = navigator.userAgent.match(/iPad/i) != null,
+      IS_IPHONE =
+        !IS_IPAD &&
+        (navigator.userAgent.match(/iPhone/i) != null ||
+          navigator.userAgent.match(/iPod/i) != null),
+      IS_IOS = IS_IPAD || IS_IPHONE,
+      IS_ANDROID = !IS_IOS && navigator.userAgent.match(/android/i) != null;
     this.state = {
       loading: true,
-      isLoggedIn: isLoggedIn
+      isLoggedIn: isLoggedIn,
+      isIOS: IS_IOS,
+      isAndroid: IS_ANDROID,
+      isCancelled: false
     };
   }
+
+  _appRoutes = undefined;
 
   async componentWillMount() {
     const { userProfile } = this.props;
@@ -75,16 +101,29 @@ class TreeCounter extends Component {
 
   componentDidMount() {
     this.props.loadTpos();
+    this.props.fetchpledgeEventsAction();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.userProfile !== this.props.userProfile) {
+    if (
+      nextProps.userProfile !== this.props.userProfile &&
+      (!nextProps.userProfile ||
+        !this.props.userProfile ||
+        nextProps.userProfile.id != this.props.userProfile.id)
+    ) {
       let isLoggedIn = null !== nextProps.userProfile;
+      this._appRoutes = undefined;
       this.setState({ loading: false, isLoggedIn: isLoggedIn });
     }
   }
 
-  render() {
+  continueOnSite() {
+    this.setState({
+      isCancelled: true
+    });
+  }
+
+  initRoutes() {
     let isLoggedIn = this.state.isLoggedIn;
     const PrivateRoute = ({ component: Component, ...rest }) => (
       <Route
@@ -111,121 +150,207 @@ class TreeCounter extends Component {
         }
       />
     );
+    this._appRoutes = (
+      <div className="app-container__content">
+        <BodyErrorBoundary>
+          <Switch>
+            <Route exact path="/" component={Trillion} />
+            <Route
+              exact
+              path={
+                getLocalRoute('app_homepage') !== '/'
+                  ? getLocalRoute('app_homepage')
+                  : 'null'
+              }
+              component={Trillion}
+            />
 
+            <PublicRoute
+              path={getLocalRoute('app_accountActivate') + '/:token'}
+              component={SuccessfullyActivatedAccount}
+            />
+            <PublicRoute
+              path={getLocalRoute('app_signup') + '/:type?'}
+              component={SignUpContainer}
+            />
+
+            <Route
+              path={getLocalRoute('app_accountActivated')}
+              component={SuccessfullyActivatedAccount}
+            />
+            <PublicRoute
+              path={getLocalRoute('app_accountActivation')}
+              component={ActivateAccountContainer}
+            />
+            {/*<Route exact path={getLocalRoute("app_donateTrees")} render={() => (isLoggedIn ? null : <Redirect to={getLocalRoute("app_login")}/>)}/>*/}
+            <PrivateRoute
+              path={getLocalRoute('app_signupSuccess')}
+              component={SignupSuccessPage}
+            />
+            <PrivateRoute
+              path={getLocalRoute('app_userHome')}
+              component={UserHomeContainer}
+            />
+            <PublicRoute
+              path={getLocalRoute('app_login')}
+              component={LoginContainer}
+            />
+            <PublicRoute
+              path={getLocalRoute('app_forgotPassword')}
+              component={ForgotPasswordContainer}
+            />
+            <PublicRoute
+              path={getLocalRoute('app_resetPassword') + '/:token'}
+              component={ResetPasswordContainer}
+            />
+            <PublicRoute
+              path={getLocalRoute('app_passwordSent')}
+              component={EmailSentContainer}
+            />
+            <PrivateRoute
+              path={
+                getLocalRoute('app_challengeResponse') + '/active' + '/:token'
+              }
+              component={RedirectedPrivateAcceptEmail}
+            />
+            <Route
+              path={
+                getLocalRoute('app_challengeResponse') + '/decline' + '/:token'
+              }
+              component={RedirectedPublicDenyEmail}
+            />
+            <Route
+              path={getLocalRoute('app_payment') + '/:donationContribution'}
+              component={AppPaymentContainer}
+            />
+            <Route
+              path={getLocalRoute('app_explore')}
+              component={LeaderboardContainer}
+            />
+            <Route
+              exact
+              path={getLocalRoute('app_leaderboard') + '/:section'}
+              component={LeaderboardContainer}
+            />
+            <Route
+              exact
+              path={
+                getLocalRoute('app_leaderboard') + '/:section' + '/:subSection'
+              }
+              component={LeaderboardContainer}
+            />
+            <PrivateRoute
+              path={getLocalRoute('app_target')}
+              component={TargetContainer}
+            />
+            <PrivateRoute
+              path={getLocalRoute('app_registerTrees')}
+              component={RegisterTreesContainer}
+            />
+            <PrivateRoute
+              path={getLocalRoute('app_editTrees') + '/:selectedTreeId'}
+              component={EditUserContributionContainer}
+            />
+            <PrivateRoute
+              path={getLocalRoute('app_myTrees')}
+              component={UserContributionsContainer}
+            />
+            <PrivateRoute
+              path={getLocalRoute('app_editProfile')}
+              component={EditUserProfileContainer}
+            />
+            <PrivateRoute
+              path={getLocalRoute('app_challenge')}
+              component={ChallengeContainer}
+            />
+            <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
+            <Route
+              path={getLocalRoute('app_privacy')}
+              component={PrivacyContainer}
+            />
+            <Route
+              path={getLocalRoute('app_imprint')}
+              component={ImprintContainer}
+            />
+            {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
+            <Route
+              path={getLocalRoute('app_giftTrees')}
+              component={GiftTreesContainer}
+            />
+            <Route
+              path={getLocalRoute('app_selectProject')}
+              component={SelectPlantProjectContainer}
+            />
+            <Route
+              path={getLocalRoute('app_donateTrees')}
+              component={DonationTreesContainer}
+            />
+            <Route
+              path={getLocalRoute('app_claim') + '/:type' + '/:code'}
+              component={RedemptionContainer}
+            />
+            <Route
+              path={getLocalRoute('app_redeem') + '/:type?' + '/:code?'}
+              component={RedemptionContainer}
+            />
+            <Route
+              path={getLocalRoute('app_pledge') + '/:eventSlug'}
+              component={PledgeContainer}
+            />
+            <Route
+              path={getLocalRoute('app_treecounter') + '/:treecounterId'}
+              component={PublicTreecounterContainer}
+            />
+            <Route
+              path={getLocalRoute('app_manageProjects')}
+              component={ManageProjectContainer}
+            />
+            <PrivateRoute
+              path={getLocalRoute('app_widgetBuilder')}
+              component={WidgetShareContainer}
+            />
+            <Route component={PageNotFound} />
+          </Switch>
+        </BodyErrorBoundary>
+      </div>
+    );
+  }
+
+  render() {
+    if (!this._appRoutes) {
+      this.initRoutes();
+    }
+    if (window.location.pathname.indexOf('signup') > -1 && this.state.isIOS) {
+      this.openApp(window.location.pathname);
+      return null;
+    }
     return !this.state.loading ? (
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
             <ProgressModal isOpen={this.props.progressModel} />
+
+            {window.location.pathname.indexOf('donation-payment') > -1 ||
+            window.location.pathname.indexOf('account-activate') > -1 ||
+            window.location.pathname.indexOf('signup') > -1 ? null : (
+              <DownloadAppModal
+                isOpen={this.state.isIOS && !this.state.isCancelled}
+                continueOnSite={this.continueOnSite.bind(this)}
+              />
+            )}
             <HeaderContainer />
             <Route component={SideMenuContainer} />
-            <div className="app-container__content">
-              <PublicRoute exact path="/" component={Trillion} />
-              <Route
-                exact
-                path={getLocalRoute('app_homepage')}
-                component={Trillion}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_signup')}
-                component={SignUpContainer}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_accountActivation')}
-                component={ActivateAccountContainer}
-              />
-              {/*<Route exact path={getLocalRoute("app_donateTrees")} render={() => (isLoggedIn ? null : <Redirect to={getLocalRoute("app_login")}/>)}/>*/}
-              <PrivateRoute
-                path={getLocalRoute('app_signupSuccess')}
-                component={SignupSuccessPage}
-              />
-              <PrivateRoute
-                path={getLocalRoute('app_userHome')}
-                component={UserHomeContainer}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_login')}
-                component={LoginContainer}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_forgotPassword')}
-                component={ForgotPasswordContainer}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_resetPassword') + '/:token'}
-                component={ResetPasswordContainer}
-              />
-              <PublicRoute
-                path={getLocalRoute('app_passwordSent')}
-                component={EmailSentContainer}
-              />
-              <Route
-                path={getLocalRoute('app_explore')}
-                component={LeaderboardContainer}
-              />
-              <Route
-                exact
-                path={getLocalRoute('app_leaderboard') + '/:section'}
-                component={LeaderboardContainer}
-              />
-              <Route
-                exact
-                path={
-                  getLocalRoute('app_leaderboard') +
-                  '/:section' +
-                  '/:subSection'
-                }
-                component={LeaderboardContainer}
-              />
-              <PrivateRoute
-                path={getLocalRoute('app_target')}
-                component={TargetContainer}
-              />
-              <PrivateRoute
-                path={getLocalRoute('app_registerTrees')}
-                component={RegisterTreesContainer}
-              />
-              <PrivateRoute
-                path={getLocalRoute('app_editTrees') + '/:selectedTreeId'}
-                component={EditUserContributionContainer}
-              />
-              <PrivateRoute
-                path={getLocalRoute('app_myTrees')}
-                component={UserContributionsContainer}
-              />
-              <PrivateRoute
-                path={getLocalRoute('app_editProfile')}
-                component={EditUserProfileContainer}
-              />
-              <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
-              {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
-              <Route
-                path={getLocalRoute('app_giftTrees')}
-                component={GiftTreesContainer}
-              />
-              <Route
-                path={getLocalRoute('app_selectProject')}
-                component={SelectPlantProjectContainer}
-              />
-              <Route
-                path={getLocalRoute('app_donateTrees')}
-                component={DonationTreesContainer}
-              />
-              <Route
-                path={getLocalRoute('app_pledge') + '/:eventSlug'}
-                component={PledgeContainer}
-              />
-              <Route
-                path={getLocalRoute('app_treecounter') + '/:treecounterId'}
-                component={PublicTreecounterContainer}
-              />
-            </div>
+            {this._appRoutes}
             <Footer />
           </div>
         </BrowserRouter>
         <NotificationContainer />
       </div>
     ) : null;
+  }
+
+  openApp(linkUrl) {
+    window.location.href = 'trilliontreecampaign:' + linkUrl;
   }
 }
 
@@ -239,7 +364,8 @@ const mapDispatchToProps = dispatch => {
     {
       loadUserProfile,
       NotificationAction,
-      loadTpos
+      loadTpos,
+      fetchpledgeEventsAction
     },
     dispatch
   );
@@ -253,5 +379,6 @@ TreeCounter.propTypes = {
   NotificationAction: PropTypes.func,
   loadTpos: PropTypes.func,
   dispatch: PropTypes.func,
-  progressModel: PropTypes.bool
+  progressModel: PropTypes.bool,
+  fetchpledgeEventsAction: PropTypes.func
 };

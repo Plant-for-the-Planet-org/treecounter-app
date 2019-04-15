@@ -2,36 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { gift_icon } from '../../assets';
 import SecondaryButton from '../Common/Button/SecondaryButton';
-import i18n from '../../locales/i18n.js';
 
-const SupportButton = ({ active, isUserLoggedIn, onRegisterSupporter }) => {
+const SupportButton = ({
+  active,
+  isUserLoggedIn,
+  onRegisterSupporter,
+  buttonLabel
+}) => {
   return (
     <div className="gift-icon">
       <div className="display-text">
-        <SecondaryButton
-          onClick={() =>
-            isUserLoggedIn && active ? onRegisterSupporter() : null
-          }
-        >
-          {i18n.t('label.support')}
-          {/* <span className="support-button-caption">{caption}</span> */}
+        <SecondaryButton onClick={() => onRegisterSupporter()}>
+          {/* {i18n.t('label.support')} */}
+          {buttonLabel}
         </SecondaryButton>
       </div>
-      <div className="display-icon">
+      {/* <div className="display-icon">
         <img
           src={gift_icon}
           onClick={() =>
             isUserLoggedIn && active ? onRegisterSupporter() : null
           }
         />
-      </div>
+      </div> */}
     </div>
   );
 };
 
 SupportButton.propTypes = {
-  active: PropTypes.bool.isRequired,
-  isUserLoggedIn: PropTypes.bool.isRequired,
-  onRegisterSupporter: PropTypes.func
+  active: PropTypes.bool,
+  isUserLoggedIn: PropTypes.bool,
+  onRegisterSupporter: PropTypes.func,
+  buttonLabel: PropTypes.string
 };
 export default SupportButton;

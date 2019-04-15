@@ -19,6 +19,10 @@ function checkStatus(response) {
 }
 
 function onAPIError(error) {
+  //400 : INPUT_VALIDATION_ERROR dont show error balloons
+  if (error.response && error.response.status === 400) {
+    throw error;
+  }
   if (error.response) {
     NotificationManager.error(error.response.data.message, 'Error', 5000);
   }
@@ -33,8 +37,15 @@ function onAPIResponse(response) {
   return response;
 }
 
-async function getHeaders(authenticated = false) {
-  const headers = { 'X-SESSION-ID': await getSessionId() };
+async function getHeaders(authenticated = false, recaptcha) {
+  let headers = { 'X-SESSION-ID': await getSessionId() };
+  if (recaptcha) {
+    headers = {
+      ...headers,
+      'X-CAPTCHA-TOKEN': recaptcha
+    };
+  }
+  console.log(headers);
   if (authenticated) {
     return {
       headers: { ...headers, Authorization: `Bearer ${await getAccessToken()}` }
@@ -44,9 +55,27 @@ async function getHeaders(authenticated = false) {
   }
 }
 
+async function getActivateLinkHeaders() {
+  const headers = { 'X-SESSION-ID': await getSessionId() };
+  return {
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${await fetchItem('activate_token')}`
+    }
+  };
+}
+
 export async function getSessionId() {
   return fetchItem('session_id')
-    .then(sessionId => sessionId)
+    .then(sessionId => {
+      if (sessionId !== undefined) {
+        return sessionId;
+      } else {
+        const sessionId = uuidv1();
+        saveItem('session_id', sessionId);
+        return sessionId;
+      }
+    })
     .catch(() => {
       const sessionId = uuidv1();
       saveItem('session_id', sessionId);
@@ -67,10 +96,26 @@ export async function getAuthenticatedRequest(route, params) {
   return getRequest(route, params, true);
 }
 
-export async function postRequest(route, data, params, authenticated = false) {
+export async function postActivateLinkRequest(route, data, params) {
   let url = await getApiRoute(route, params);
   return await axios
-    .post(url, data, await getHeaders(authenticated))
+    .post(url, data, await getActivateLinkHeaders())
+    .then(checkStatus)
+    .then(onAPIResponse)
+    .catch(onAPIError);
+}
+
+export async function postRequest(
+  route,
+  data,
+  params,
+  authenticated = false,
+  recaptcha = false
+) {
+  let url = await getApiRoute(route, params);
+  console.log(url);
+  return await axios
+    .post(url, data, await getHeaders(authenticated, recaptcha))
     .then(checkStatus)
     .then(onAPIResponse)
     .catch(onAPIError);

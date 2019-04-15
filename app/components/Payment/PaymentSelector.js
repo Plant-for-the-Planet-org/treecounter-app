@@ -27,11 +27,12 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       this.props.onSuccess({ gateway, accountName, ...response });
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.paymentMethods) {
+  componentDidMount() {
+    let props = this.props;
+    if (props.paymentMethods) {
       // lookup stripe related payment methods for the current country/currency combination
-      const stripeGateways = Object.keys(nextProps.paymentMethods).filter(
-        gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)
+      const stripeGateways = Object.keys(props.paymentMethods).filter(gateway =>
+        ['stripe_cc', 'stripe_sepa'].includes(gateway)
       );
 
       // do not load Stripe if not required
@@ -45,15 +46,44 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         stripeJs.src = 'https://js.stripe.com/v3/';
         stripeJs.async = true;
         stripeJs.onload = () => {
-          // The setTimeout lets us pretend that Stripe.js took a long time to load
-          // Take it out of your production code!
-          setTimeout(() => {
+          this.setState({
+            stripe: window.Stripe(props.stripePublishableKey)
+          });
+        };
+        document.body && document.body.appendChild(stripeJs);
+      }
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.paymentMethods) {
+      if (
+        !this.props.paymentMethods ||
+        JSON.stringify(this.props.paymentMethods) !==
+          JSON.stringify(nextProps.paymentMethods)
+      ) {
+        // lookup stripe related payment methods for the current country/currency combination
+        const stripeGateways = Object.keys(nextProps.paymentMethods).filter(
+          gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)
+        );
+
+        // do not load Stripe if not required
+        if (stripeGateways.length > 0) {
+          // componentDidMount only runs in a browser environment.
+          // In addition to loading asynchronously, this code is safe to server-side render.
+
+          // You can inject script tag manually like this,
+          // or you can use the 'async' attribute on the Stripe.js v3 <script> tag.
+          const stripeJs = document.createElement('script');
+          stripeJs.src = 'https://js.stripe.com/v3/';
+          stripeJs.async = true;
+          stripeJs.onload = () => {
             this.setState({
               stripe: window.Stripe(nextProps.stripePublishableKey)
             });
-          }, 500);
-        };
-        document.body && document.body.appendChild(stripeJs);
+          };
+          document.body && document.body.appendChild(stripeJs);
+        }
       }
     }
   }
@@ -77,14 +107,33 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       onFailure: this.props.onFailure,
       onError: this.props.onError
     };
-
+    let giftToName = null;
+    if (gatewayProps.context.giftTreeCounterName) {
+      giftToName = gatewayProps.context.giftTreeCounterName;
+    }
+    if (gatewayProps.context.supportTreecounter) {
+      giftToName = gatewayProps.context.supportTreecounter.displayName;
+    }
     return paymentMethods ? (
       <StripeProvider stripe={this.state.stripe}>
         <div className="payment_options__wrapper">
-          <div>
-            Amount: {amount} {currency}
+          <div className="payment_option_details">
+            <div>{gatewayProps.context.tpoName}</div>
+            {giftToName && <div>{gatewayProps.context.plantProjectName}</div>}
+            {giftToName && (
+              <div>
+                {gatewayProps.context.treeCount} Trees Gift To {giftToName}
+              </div>
+            )}
+            {!giftToName && (
+              <div>Donate To {gatewayProps.context.plantProjectName}</div>
+            )}
+            <div>
+              {' '}
+              Amount: {amount} {currency}{' '}
+            </div>
+            <div>Trees: {context.treeCount}</div>
           </div>
-          <div>Trees: {context.treeCount}</div>
           {Object.keys(paymentMethods).map(gateway => {
             const accountName = paymentMethods[gateway];
             if ('stripe_cc' === gateway) {
@@ -135,6 +184,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                     amount={amount}
                     currency={currency}
                     account={accounts[accountName]}
+                    mode={accounts[accountName].mode}
                     expanded={this.props.expandedOption === '3'}
                     handleExpandedClicked={this.handleExpandedClicked}
                     {...gatewayProps}

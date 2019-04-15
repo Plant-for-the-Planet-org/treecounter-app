@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { getDrawerNavigator } from '../../components/Navigators/AppDrawerNavigator';
+import { getAppNavigator } from '../../components/Navigators/AppDrawerNavigator';
 import { getAccessToken } from '../../utils/user';
 import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
@@ -11,6 +11,7 @@ import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import ProgressModal from '../../components/Common/ModalDialog/ProgressModal.native';
 import { View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
 EStyleSheet.build({
   // always call EStyleSheet.build() even if you don't use global variables!
   $primary: '#b9d384',
@@ -23,11 +24,15 @@ EStyleSheet.build({
   $borderColor: '#aba2a2',
   $inputBorderColor: '#dad7d7',
   $backgroundScreen: '#f1f1f1',
-  $colorError: '#ff0033'
+  $colorError: '#ff0033',
+  $colorRedeemBorder: '#9fc356',
+  $colorRedeemInside: '#f5fbe8',
+  $cardTextColor: '#686060',
+  $lightTextColor: '#9c9b9b'
 });
 
 class AppDrawerNavigatorContainer extends Component {
-  _AppDrawerNavigator = undefined;
+  _AppNavigator = undefined;
   constructor(props) {
     super(props);
     const { userProfile } = this.props;
@@ -52,7 +57,10 @@ class AppDrawerNavigatorContainer extends Component {
       return false;
     }
     if (this.props.progressModel === nextProps.progressModel) {
-      this._AppDrawerNavigator = getDrawerNavigator(nextState.isLoggedIn);
+      this._AppNavigator = getAppNavigator(
+        nextState.isLoggedIn,
+        nextProps.userProfile
+      );
     }
     return true;
   }
@@ -69,8 +77,8 @@ class AppDrawerNavigatorContainer extends Component {
         this.setState({ loading: false, isLoggedIn: false });
       }
     }
+    this.props.fetchpledgeEventsAction();
   }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.userProfile !== this.props.userProfile) {
       let isLoggedIn = null !== nextProps.userProfile;
@@ -81,13 +89,16 @@ class AppDrawerNavigatorContainer extends Component {
   }
   render() {
     if (!this.state.loading) {
-      if (!this._AppDrawerNavigator) {
-        this._AppDrawerNavigator = getDrawerNavigator(this.state.isLoggedIn);
+      if (!this._AppNavigator) {
+        this._AppNavigator = getAppNavigator(
+          this.state.isLoggedIn,
+          this.props.userProfile
+        );
       }
 
       return (
         <View style={{ flex: 1 }}>
-          <this._AppDrawerNavigator />
+          <this._AppNavigator />
           {this.props.progressModel ? <ProgressModal modalVisible /> : null}
         </View>
       );
@@ -98,12 +109,12 @@ class AppDrawerNavigatorContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     loadUserProfile: PropTypes.func,
-    progressModel: PropTypes.bool
+    progressModel: PropTypes.bool,
+    fetchpledgeEventsAction: PropTypes.func
   };
 }
 
 const mapStateToProps = state => {
-  console.log('state', state);
   return {
     appDrawer: state.appDrawer,
     userProfile: currentUserProfileSelector(state),
@@ -117,7 +128,8 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators(
       {
         loadUserProfile,
-        loadTpos
+        loadTpos,
+        fetchpledgeEventsAction
       },
       dispatch
     )

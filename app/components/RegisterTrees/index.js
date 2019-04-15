@@ -8,65 +8,87 @@ import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card';
 import {
   singleTreeRegisterFormSchema,
-  schemaOptionsSingleTree,
-  multipleTreesRegisterFormSchema,
-  schemaOptionsMultipleTrees
+  multipleTreesRegisterFormSchema
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
-import RegistrationMap from './RegistrationMap';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
-
+import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
+import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
 let TCombForm = t.form.Form;
 
-const formLayoutSingleTree = locals => {
-  return (
-    <div className="register-tree__form">
-      <div className="register-tree__form--row">
-        {locals.inputs.treeCount}
-        {locals.inputs.treeSpecies}
+const getSingleTreeLayout = (
+  props1,
+  _onClickAddClassification,
+  showClassification
+) => {
+  const formLayoutSingleTree = locals => {
+    return (
+      <div className="register-tree__form">
+        <div className="register-tree__form--row">
+          {locals.inputs.treeCount}
+          {locals.inputs.treeSpecies}
+        </div>
+        <div className="register-tree__form--row">
+          {locals.inputs.plantDate}
+        </div>
+        {locals.inputs.geoLocation}
+        <div className="register-tree__form--row">
+          {locals.inputs.contributionImages}
+        </div>
+        {isTpo(props1.currentUserProfile) ? (
+          <div className="register-tree__form--row">
+            {locals.inputs.plantProject}
+          </div>
+        ) : null}
+
+        <div className="pftp-addbutton">
+          <button type="button" onClick={_onClickAddClassification}>
+            +&nbsp;{i18n.t('label.add_classification')}
+          </button>
+        </div>
+        <div
+          className={
+            'register-tree__form--row ' +
+            (!showClassification ? 'register-tree___hide-content' : '')
+          }
+        >
+          {locals.inputs.treeClassification}
+          <div className="register-tree__form--row__spacer" />
+          {locals.inputs.treeScientificName}
+        </div>
+        <div className="register-tree__form--row">
+          {locals.inputs.contributionMeasurements}
+        </div>
       </div>
-      <div className="register-tree__form--row">{locals.inputs.plantDate}</div>
-      {locals.inputs.geoLocation}
-      <div className="register-tree__form--row">
-        {locals.inputs.contributionImages}
-      </div>
-      <div className="register-tree__form--row">
-        {locals.inputs.treeClassification}
-        <div className="register-tree__form--row__spacer" />
-        {locals.inputs.treeScientificName}
-      </div>
-      <div className="register-tree__form--row">
-        {locals.inputs.contributionMeasurements}
-      </div>
-    </div>
-  );
+    );
+  };
+  return formLayoutSingleTree;
 };
 
-const formLayoutMultipleTrees = locals => {
-  return (
-    <div className="register-tree__form">
-      <div className="register-tree__form--row">
-        {locals.inputs.treeCount}
-        <div className="register-tree__form--row__spacer" />
-        {locals.inputs.treeSpecies}
+const getMultipleTreeLayout = props1 => {
+  return locals => {
+    return (
+      <div className="register-tree__form">
+        <div className="register-tree__form--row">
+          {locals.inputs.treeCount}
+          <div className="register-tree__form--row__spacer" />
+          {locals.inputs.treeSpecies}
+        </div>
+        <div className="register-tree__form--row">
+          {locals.inputs.plantDate}
+        </div>
+        {locals.inputs.geoLocation}
+        <div className="register-tree__form--row">
+          {locals.inputs.contributionImages}
+        </div>
+        {isTpo(props1.currentUserProfile) ? (
+          <div className="register-tree__form--row">
+            {locals.inputs.plantProject}
+          </div>
+        ) : null}
       </div>
-      <div className="register-tree__form--row">{locals.inputs.plantDate}</div>
-      {locals.inputs.geoLocation}
-      <div className="register-tree__form--row">
-        {locals.inputs.contributionImages}
-      </div>
-    </div>
-  );
-};
-
-const schemaOptionsSingle = {
-  template: formLayoutSingleTree,
-  ...schemaOptionsSingleTree
-};
-
-const schemaOptionsMultiple = {
-  template: formLayoutMultipleTrees,
-  ...schemaOptionsMultipleTrees
+    );
+  };
 };
 
 export default class RegisterTrees extends Component {
@@ -85,12 +107,12 @@ export default class RegisterTrees extends Component {
 
   constructor() {
     super();
-
     this.state = {
       mode: '',
       individual: {
         treeCount: 1
-      }
+      },
+      showClassification: false
     };
 
     // Bind Local method
@@ -99,8 +121,21 @@ export default class RegisterTrees extends Component {
     this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
   }
 
-  onSubmitClick() {
+  updateTemplate(template, plantProjects, formSchema) {
+    let newFormSchema = Object.assign({}, formSchema);
+    if (plantProjects) {
+      newFormSchema.fields.plantProject.template = getSelectTemplate(
+        plantProjects
+      );
+    }
+    newFormSchema = { template, ...newFormSchema };
+    return newFormSchema;
+  }
+
+  onSubmitClick(event) {
+    console.log('event', event);
     this.props.onSubmit(this.state.mode);
+    event.preventDefault();
   }
 
   handleModeOptionChange(tab) {
@@ -111,7 +146,38 @@ export default class RegisterTrees extends Component {
     console.log(geoLocation);
   }
 
+  toggleClassification = () => {
+    this.setState({
+      showClassification: !this.state.showClassification
+    });
+  };
   render() {
+    const tpoPlantProjects = getPlantProjectEnum(this.props.currentUserProfile);
+    const isSingleTree = this.state.mode === RegisterTrees.data.tabs[0].id;
+
+    const template = isSingleTree
+      ? getSingleTreeLayout(
+          this.props,
+          this.toggleClassification,
+          this.state.showClassification
+        )
+      : getMultipleTreeLayout(this.props);
+
+    let formSchemaOptions = isSingleTree
+      ? this.props.schemaOptionsSingleTree
+      : this.props.schemaOptionsMultipleTrees;
+
+    const plantProject =
+      tpoPlantProjects &&
+      tpoPlantProjects.length > 0 &&
+      tpoPlantProjects[0].value;
+
+    formSchemaOptions = this.updateTemplate(
+      template,
+      tpoPlantProjects,
+      formSchemaOptions
+    );
+
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>
@@ -121,28 +187,31 @@ export default class RegisterTrees extends Component {
           </DescriptionHeading>
         </TextHeading>
         <CardLayout>
-          <Tabs
-            data={RegisterTrees.data.tabs}
-            onTabChange={this.handleModeOptionChange}
-          >
-            {this.state.mode === RegisterTrees.data.tabs[0].id ? (
-              <TCombForm
-                ref="registerTreeForm"
-                type={singleTreeRegisterFormSchema}
-                options={schemaOptionsSingle}
-                value={this.state.individual}
-              />
-            ) : (
-              <TCombForm
-                ref="registerTreeForm"
-                type={multipleTreesRegisterFormSchema}
-                options={schemaOptionsMultiple}
-              />
-            )}
-          </Tabs>
-          <PrimaryButton onClick={this.onSubmitClick}>
-            {i18n.t('label.register')}
-          </PrimaryButton>
+          <form onSubmit={this.onSubmitClick}>
+            <Tabs
+              data={RegisterTrees.data.tabs}
+              onTabChange={this.handleModeOptionChange}
+            >
+              {isSingleTree ? (
+                <TCombForm
+                  ref="registerTreeForm"
+                  type={singleTreeRegisterFormSchema}
+                  options={formSchemaOptions}
+                  value={{ ...this.state.individual, plantProject }}
+                />
+              ) : (
+                <TCombForm
+                  ref="registerTreeForm"
+                  type={multipleTreesRegisterFormSchema}
+                  options={formSchemaOptions}
+                  value={{ plantProject }}
+                />
+              )}
+            </Tabs>
+            <PrimaryButton onClick={this.onSubmitClick}>
+              {i18n.t('label.register')}
+            </PrimaryButton>
+          </form>
         </CardLayout>
       </div>
     );
@@ -150,5 +219,8 @@ export default class RegisterTrees extends Component {
 }
 
 RegisterTrees.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  currentUserProfile: PropTypes.any.isRequired,
+  schemaOptionsSingleTree: PropTypes.object,
+  schemaOptionsMultipleTrees: PropTypes.object
 };

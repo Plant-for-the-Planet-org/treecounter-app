@@ -116,14 +116,17 @@ class SearchAutosuggest extends Component {
   };
 
   render() {
-    const { value, suggestions } = this.state;
+    let { value, suggestions } = this.state;
+    suggestions = suggestions.filter(
+      suggestion => suggestion.category === 'profile'
+    );
     const inputProps = {
       placeholder: i18n.t('label.placeholder_value'),
       value,
       onChange: this.onChange,
       className: 'form-control search_text',
       onKeyDown: event => {
-        console.log(event);
+        // console.log(event);
         if (event.key === 'Enter') {
           event.preventDefault();
         }

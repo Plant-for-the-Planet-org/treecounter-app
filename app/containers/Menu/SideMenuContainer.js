@@ -19,36 +19,40 @@ class SideMenuContainer extends Component {
   constructor() {
     super();
     this.state = {
-      schema: {},
+      schema: [],
       loading: true
     };
   }
-  componentDidMount() {
-    this.props.loggedIn
-      ? AuthenticatedSideMenuSchema.subscribe(
-          success => this.setState({ schema: success, loading: false }),
-          error => console.log(error)
-        )
-      : PublicSideMenuSchema.subscribe(
-          success => {
-            if (success && success instanceof Array) {
-              this.setState({ schema: success, loading: false });
-            } else {
-              console.log('error in fetching side menu');
-            }
-          },
-          error => console.log(error)
-        );
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.loggedIn !== this.props.loggedIn) {
-      nextProps.loggedIn
-        ? AuthenticatedSideMenuSchema.subscribe(
+  componentWillMount() {
+    if (!this.props.navigation) {
+      this.props.loggedIn
+        ? AuthenticatedSideMenuSchema('web.main').subscribe(
             success => this.setState({ schema: success, loading: false }),
             error => console.log(error)
           )
-        : PublicSideMenuSchema.subscribe(
+        : PublicSideMenuSchema('web.main').subscribe(
+            success => {
+              if (success && success instanceof Array) {
+                this.setState({ schema: success, loading: false });
+              } else {
+                console.log('error in fetching side menu');
+              }
+            },
+            error => console.log(error)
+          );
+    } else {
+      this.setState({ loading: false });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.loggedIn !== this.props.loggedIn && !this.props.navigation) {
+      nextProps.loggedIn
+        ? AuthenticatedSideMenuSchema('web.main').subscribe(
+            success => this.setState({ schema: success, loading: false }),
+            error => console.log(error)
+          )
+        : PublicSideMenuSchema('web.main').subscribe(
             success => this.setState({ schema: success, loading: false }),
             error => console.log(error)
           );
@@ -75,6 +79,7 @@ class SideMenuContainer extends Component {
         clearSupport={this.props.clearSupport}
         logoutUser={this.props.logoutUser}
         pathname={pathname}
+        lastRoute={this.props.lastRoute}
       />
     );
   }
@@ -83,7 +88,8 @@ class SideMenuContainer extends Component {
 const mapStateToProps = state => ({
   isOpen: state.sideNav && state.sideNav.open,
   loggedIn: currentUserProfileSelector(state) !== null,
-  userProfile: currentUserProfileSelector(state)
+  userProfile: currentUserProfileSelector(state),
+  lastRoute: state.lastRouteState.lastRoute
 });
 
 const mapDispatchToProps = dispatch => {
@@ -103,5 +109,6 @@ SideMenuContainer.propTypes = {
   location: PropTypes.object,
   toggleSideNavAction: PropTypes.func.isRequired,
   clearSupport: PropTypes.func,
-  userProfile: PropTypes.any
+  userProfile: PropTypes.any,
+  lastRoute: PropTypes.any
 };

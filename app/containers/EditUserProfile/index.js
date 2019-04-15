@@ -7,11 +7,16 @@ import {
   updateUserProfile,
   updatePlantProject,
   deletePlantProject,
-  addPlantProject
+  addPlantProject,
+  deleteUserProfile
 } from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
+import { logoutUser } from '../../actions/authActions';
+import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
+import { getRequest } from '../../utils/api';
+import { unfollowUser } from '../../actions/followActions';
 
 const profileTypeLabel = {
   about_me: i18n.t('label.about_me'),
@@ -23,11 +28,65 @@ class EditUserProfileContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showPasswordDialog: false
+      showPasswordDialog: false,
+      fetchingFolloweeIds: false,
+      followeeInfo: undefined
     };
   }
+
+  fetchFolloweeinfo = () => {
+    const currentUserProfile = this.props.currentUserProfile;
+
+    if (
+      currentUserProfile &&
+      currentUserProfile.treecounter &&
+      currentUserProfile.treecounter.followeeIds
+    ) {
+      const followeeIdsList = currentUserProfile.treecounter.followeeIds.split(
+        ','
+      );
+      let _FolloweeInfo = [];
+      followeeIdsList.forEach(id => {
+        this.props
+          .treecounterLookupAction(id, this.props.navigation)
+          .then(treecounter => {
+            _FolloweeInfo.push(treecounter);
+            if (followeeIdsList.length == _FolloweeInfo.length) {
+              this.setState({ followeeInfo: _FolloweeInfo });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      });
+    } else {
+      this.setState({ followeeInfo: [] });
+    }
+  };
+
+  componentDidMount() {
+    this.fetchFolloweeinfo();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.currentUserProfile.treecounter.followeeIds !==
+      this.props.currentUserProfile.treecounter.followeeIds
+    ) {
+      this.fetchFolloweeinfo();
+    }
+  }
   deleteProfile = () => {
-    console.log('call Profile Deletion API here');
+    console.log(
+      'call Profile Deletion API here',
+      this.props.currentUserProfile
+    );
+    this.props
+      .deleteUserProfile(this.props.currentUserProfile.id)
+      .then(data => {
+        console.log(data);
+        this.props.logoutUser();
+      });
   };
 
   updatePlantProject = plantProject => {
@@ -87,15 +146,24 @@ class EditUserProfileContainer extends React.Component {
       });
   };
 
-  onSave = (usertype, profileType) => {
-    console.log(
-      this.refs.EditUserProfileContainer.refs[profileType].validate()
-    );
-    let value = this.refs.EditUserProfileContainer.refs[profileType].getValue();
-    let imageValue = this.refs.EditUserProfileContainer.refs[
-      'image'
-    ].getValue();
-    if (imageValue) {
+  onSave = (usertype, profileType, formRefs, newImageAvailable) => {
+    const profileForm =
+      (formRefs && formRefs[profileType]) ||
+      this.refs.EditUserProfileContainer.refs[profileType];
+    const imageForm =
+      (formRefs && formRefs['image']) ||
+      this.refs.EditUserProfileContainer.refs['image'];
+    console.log(profileForm.validate());
+    let value = profileForm.getValue();
+
+    let imageValue = undefined;
+    if (!!imageForm && newImageAvailable) {
+      imageValue = imageForm.getValue();
+    }
+    if (
+      !!imageValue &&
+      this.props.currentUserProfile.image !== imageValue.imageFile
+    ) {
       this.props.updateUserProfile(imageValue, 'image');
     }
     if (value) {
@@ -139,6 +207,9 @@ class EditUserProfileContainer extends React.Component {
         updatePlantProject={this.updatePlantProject}
         deletePlantProject={this.deletePlantProject}
         addPlantProject={this.addPlantProject}
+        navigation={this.props.navigation}
+        followeeList={this.state.followeeInfo}
+        unfollowUser={this.props.unfollowUser}
       />
     );
   }
@@ -158,7 +229,11 @@ const mapDispatchToProps = dispatch => {
       updateUserProfile,
       updatePlantProject,
       deletePlantProject,
-      addPlantProject
+      addPlantProject,
+      deleteUserProfile,
+      logoutUser,
+      unfollowUser,
+      treecounterLookupAction
     },
     dispatch
   );
@@ -172,5 +247,10 @@ EditUserProfileContainer.propTypes = {
   updateUserProfile: PropTypes.func,
   updatePlantProject: PropTypes.func,
   deletePlantProject: PropTypes.func,
-  addPlantProject: PropTypes.func
+  addPlantProject: PropTypes.func,
+  deleteUserProfile: PropTypes.func,
+  navigation: PropTypes.any,
+  logoutUser: PropTypes.func,
+  unfollowUser: PropTypes.func,
+  treecounterLookupAction: PropTypes.func
 };

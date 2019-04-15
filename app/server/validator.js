@@ -7,7 +7,7 @@ export const commonValidator = function(value, path, context) {
     console.log('TEST_ERROR', value, path, context);
     return (
       <div className="error-msg">
-        {i18n.t(context.options.label) + i18n.t('label.isRequired')}
+        {i18n.t('label.isRequired', { context: i18n.t(context.options.label) })}
       </div>
     );
   } else if (value && hasConfig) {
@@ -17,16 +17,22 @@ export const commonValidator = function(value, path, context) {
       if (value.length > hasConfig.attr.maxlength) {
         return (
           <div className="error-msg">
-            {i18n.t('label.invalidLength') + hasConfig.attr.maxlength}
+            {i18n.t('label.invalidLength', {
+              length: hasConfig.attr.maxlength
+            })}
           </div>
         );
       }
     }
   } else {
-    return (
-      <div className="error-msg">
-        {i18n.t('label.invalidValueMsg') + i18n.t(context.options.label)}
-      </div>
+    return getErrorView(
+      i18n.t('label.invalidValueMsg', {
+        context: i18n.t(context.options.label)
+      })
     );
   }
+};
+
+export const getErrorView = function(text) {
+  return <div className="error-msg">{text}</div>;
 };

@@ -31,9 +31,7 @@ class Offline extends React.Component {
 
   render() {
     const { account, amount, currency } = this.props;
-    const userMessage = `${i18n.t(
-      'label.confirm'
-    )} ${amount} ${currency} ${i18n.t('label.following_account')}`;
+    const userMessage = i18n.t('label.confirm', { amount, currency });
 
     return (
       <View

@@ -10,6 +10,12 @@ const config = {
   },
   city: {
     style: { marginLeft: 20 }
+  },
+  companyname: {
+    style: { marginLeft: 20 }
+  },
+  country: {
+    style: { marginLeft: 20 }
   }
 };
 

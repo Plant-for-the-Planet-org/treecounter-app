@@ -9,6 +9,7 @@ $trans-time: 300ms;
   margin-bottom: 15px;
   font-size: 12px;
   margin-top: -15px;
+  max-width: 250px;
 }
 .pftp-textfield-container {
   width: 100%;
@@ -23,7 +24,7 @@ $trans-time: 300ms;
   .pftp-textfield__icon {
     width: 20px;
     padding-right: 8px;
-    margin-left: -30px;
+    // margin-left: -30px;
   }
   .pftp-textfield__inputgroup {
     position: relative;
@@ -44,8 +45,7 @@ $trans-time: 300ms;
       &:focus {
         outline: none;
       }
-      &:focus ~ label,
-      &:valid ~ label {
+      &:focus ~ label {
         top: -14px;
         font-size: 12px;
         color: $colorPrimary;
@@ -75,6 +75,11 @@ $trans-time: 300ms;
     .error-label {
       color: $colorError !important;
     }
+    .float-label {
+      top: -14px;
+      font-size: 12px;
+      color: $colorPrimary;
+    }
 
     .pftp-textfield__inputgroup--bar {
       position: relative;
@@ -99,6 +104,30 @@ $trans-time: 300ms;
     }
     .pftp-textfield__inputgroup--highlightr-error {
       background: $colorError;
+    }
+  }
+  .pftp-textfield_redeeminput {
+    @extend .pftp-textfield__inputgroup;
+    position: relative;
+    input,
+    textarea {
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border: 1.5px solid $colorRedeemBorder;
+      background-color: $colorRedeemInside;
+      color: $headerTextColor;
+      margin-top: 30px;
+      text-align: center;
+      padding-right: 30px;
+    }
+    .glyphicon {
+      position: absolute;
+      padding: 10px;
+      pointer-events: auto;
+      right: 0px;
+      height: 20px;
+      width: 20px;
     }
   }
   .pftp-textfield__error-inputgroup {

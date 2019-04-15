@@ -5,6 +5,7 @@
   "pay_via": "Bezahlen per Banküberweisung",
   "pay": "Bezahlen",
   "sepa_debit": "SEPA-Lastschrift",
+  "bank_transfer": "Banküberweisung",
   "stripe_sepa_des1": "Indem du deine IBAN zur Verfügung stellst und bestätigst, wird die Zahlung autorisiert",
   "pay_via_sepa": "Bezahlen mit SEPA",
   "contact_firstname": "Vorname",

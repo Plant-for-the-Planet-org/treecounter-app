@@ -17,7 +17,11 @@ export default class LicenseInfoList extends Component {
     return (
       <View style={styles.header}>
         <Text style={styles.headerText}>{section}</Text>
-        <Image style={styles.imageStyle} source={isActive ? foldin : foldout} />
+        <Image
+          style={styles.imageStyle}
+          resizeMode="contain"
+          source={isActive ? foldin : foldout}
+        />
       </View>
     );
   }
@@ -37,7 +41,7 @@ export default class LicenseInfoList extends Component {
         <TouchableItem
           onPress={() => {
             Linking.openURL(licenseFileUrl).catch(err => {
-              console.log(err);
+              //console.log(err);
             });
           }}
         >
@@ -47,7 +51,7 @@ export default class LicenseInfoList extends Component {
         <TouchableItem
           onPress={() => {
             Linking.openURL(repoPath).catch(err => {
-              console.log(err);
+              // console.log(err);
             });
           }}
         >

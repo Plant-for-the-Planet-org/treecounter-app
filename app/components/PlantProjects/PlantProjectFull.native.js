@@ -1,75 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SeeMoreToggle from '../Common/SeeMoreToggle';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
 import { View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
-import PlantProjectTeaser from './PlantProjectTeaser';
-import PlantProjectSpecs from './PlantProjectSpecs';
 import PlantProjectDetails from './PlantProjectDetails';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { ScrollView } from 'react-native';
+import PlantProjectSnippet from './PlantProjectSnippet.native';
+import scrollStyle from '../../styles/common/scrollStyle';
+import TabContainer from '../../containers/Menu/TabContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
 class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
-    this.toggleExpanded = this.toggleExpanded.bind(this);
-    this.state = { expanded: props.expanded };
-    if (props.callExpanded) {
-      props.callExpanded(!this.state.expanded);
-    }
   }
-
-  toggleExpanded() {
-    if (this.props.callExpanded) {
-      this.props.callExpanded(!this.state.expanded);
-    }
-    this.setState({ expanded: !this.state.expanded });
-  }
-
   render() {
     const {
-      id: id,
-      name: projectName,
-      isCertified: isCertified,
-      plantProjectImages,
-      location,
-      countPlanted: countPlanted,
-      countTarget,
-      currency,
-      treeCost,
-      paymentSetup,
-      survivalRate: survivalRate,
       images,
       description,
       homepageUrl: homepageUrl,
       homepageCaption: homepageCaption,
       videoUrl: videoUrl,
-      geoLocation
+      geoLocation,
+      plantProjectImages,
+      url,
+      linkText,
+      tpo_name
     } = this.props.plantProject;
-    const projectImage =
-      plantProjectImages && plantProjectImages.find(() => true);
 
-    const teaserProps = {
-      tpoName: this.props.tpoName,
-      projectName,
-      isCertified,
-      projectImage
-    };
-    const specsProps = {
-      location,
-      countPlanted,
-      countTarget,
-      survivalRate,
-      currency,
-      treeCost,
-      taxDeduction: paymentSetup.taxDeduction
-    };
     const detailsProps = {
       description,
       images,
@@ -77,81 +40,65 @@ class PlantProjectFull extends React.Component {
       homepageCaption,
       videoUrl,
       mapData: queryParamsToObject(geoLocation),
-      plantProjectImages
+      plantProjectImages,
+      url,
+      linkText
     };
     return (
-      <ScrollView>
-        x
-        <CardLayout style={styles.projectFullContainer}>
-          <View style={styles.projectTeaserContainer}>
-            <PlantProjectTeaser {...teaserProps} />
-          </View>
-          <View style={styles.projectSpecsContainer}>
-            <PlantProjectSpecs {...specsProps} />
-          </View>
-
-          <View style={styles.seeMoreContainer}>
-            <SeeMoreToggle
-              seeMore={!this.state.expanded}
-              onToggle={this.toggleExpanded}
+      <View>
+        <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+          <CardLayout style={styles.projectFullContainer}>
+            <PlantProjectSnippet
+              cardStyle={styles.cardStyle}
+              key={'projectFull' + this.props.plantProject.id}
+              showMoreButton={false}
+              clickable={false}
+              plantProject={this.props.plantProject}
+              onSelectClickedFeaturedProjects={id =>
+                this.props.selectProject(id)
+              }
+              tpoName={tpo_name}
             />
-            {this.props.selectAnotherProject ? (
-              <View style={styles.select_different_project_style}>
-                <Text
-                  onPress={this.props.projectClear}
-                  style={styles.select_different_project_style_text}
-                >
-                  {i18n.t('label.different_project')}
-                </Text>
-              </View>
-            ) : null}
-          </View>
-          {this.state.expanded ? (
+
+            <View style={styles.horizontalRule} />
             <View style={styles.plantProjectDetails}>
               <PlantProjectDetails {...detailsProps} />
             </View>
-          ) : (
-            <View style={styles.plantProjectDetails} />
-          )}
-          <View style={styles.buttonContainer}>
-            {!this.props.selectAnotherProject ? (
-              <PrimaryButton
-                onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
-              >
-                {i18n.t('label.select_project')}
-              </PrimaryButton>
-            ) : // <TouchableHighlight
-            //   onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
-            //   style={styles.button}
-            // >
-            //   <Text style={styles.buttonText}>
-            //     {' '}
-            //     {i18n.t('label.select_project')}
-            //   </Text>
-            // </TouchableHighlight>
-            null}
-            {this.props.showNextButton ? (
-              <PrimaryButton onClick={() => this.props.onNextClick()}>
-                {i18n.t('label.next')}
-              </PrimaryButton>
+            {this.props.plantProject.allowDonations ? (
+              <View style={styles.buttonContainer}>
+                <PrimaryButton
+                  onClick={() =>
+                    this.props.selectProject(this.props.plantProject.id)
+                  }
+                >
+                  {i18n.t('label.donate')}
+                </PrimaryButton>
+              </View>
             ) : null}
-          </View>
-        </CardLayout>
-      </ScrollView>
+          </CardLayout>
+        </ScrollView>
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 0
+          }}
+        >
+          <TabContainer {...this.props} />
+        </View>
+      </View>
     );
   }
+  componentWillUnmount() {}
 }
 
 PlantProjectFull.propTypes = {
   plantProject: PropTypes.object.isRequired,
-  expanded: PropTypes.bool.isRequired,
-  callExpanded: PropTypes.func,
   tpoName: PropTypes.string,
-  selectAnotherProject: PropTypes.bool,
   projectClear: PropTypes.func,
   showNextButton: PropTypes.bool,
   onNextClick: PropTypes.func,
-  onSelectClickedFeaturedProjects: PropTypes.func
+  selectProject: PropTypes.func,
+  onBackClick: PropTypes.func
 };
 
 export default PlantProjectFull;

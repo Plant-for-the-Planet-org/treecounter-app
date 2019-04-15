@@ -12,6 +12,9 @@ import {
 import i18n from '../../locales/i18n.js';
 import { renderFilledTabBar } from '../Common/Tabs';
 import RegisterTreeTab from './RegisterTreeTab.native';
+import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
+import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default class RegisterTrees extends Component {
   constructor() {
@@ -39,7 +42,7 @@ export default class RegisterTrees extends Component {
   _handleIndexChange = index => this.setState({ index });
 
   handleGeoLocationChange(geoLocation) {
-    console.log(geoLocation);
+    //console.log(geoLocation);
   }
 
   _renderTabBar = props => {
@@ -51,9 +54,19 @@ export default class RegisterTrees extends Component {
   };
 
   _renderScene = ({ route }) => {
+    const plantProjects = getSelectTemplate(
+      getPlantProjectEnum(
+        this.props.currentUserProfile,
+        this.props.plantProjects
+      )
+    );
+    schemaOptionsSingleTree.fields.plantProject.template = plantProjects;
+    schemaOptionsMultipleTrees.fields.plantProject.template = plantProjects;
+
     return (
       <RegisterTreeTab
         onRegister={this.props.onSubmit}
+        isTpo={isTpo(this.props.currentUserProfile)}
         mode={route.key}
         schemaType={
           route.key == 'single-tree'
@@ -72,22 +85,21 @@ export default class RegisterTrees extends Component {
 
   render() {
     return (
-      <ScrollView>
-        <CardLayout style={{ flex: 1 }}>
-          <TabView
-            useNativeDriver={true}
-            ref="registerTreeForm"
-            navigationState={this.state}
-            renderScene={this._renderScene}
-            renderTabBar={this._renderTabBar}
-            onIndexChange={this._handleIndexChange}
-          />
-        </CardLayout>
-      </ScrollView>
+      <CardLayout style={{ flex: 1 }}>
+        <TabView
+          useNativeDriver={true}
+          ref="registerTreeForm"
+          navigationState={this.state}
+          renderScene={this._renderScene.bind(this)}
+          renderTabBar={this._renderTabBar}
+          onIndexChange={this._handleIndexChange}
+        />
+      </CardLayout>
     );
   }
 }
 
 RegisterTrees.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  currentUserProfile: PropTypes.any.isRequired
 };

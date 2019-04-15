@@ -37,6 +37,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         <View style={styles.header}>
           <View style={styles.logoContainer}>
             <Image
+              resizeMode="contain"
               style={[styles.logoStyle, { width: 40 }]}
               source={payment_bank}
             />
@@ -46,6 +47,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           </View>
 
           <Image
+            resizeMode="contain"
             style={styles.imageStyle}
             source={isActive ? foldin : foldout}
           />
@@ -57,6 +59,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         <View style={styles.header}>
           <View style={styles.logoContainer}>
             <Image
+              resizeMode="contain"
               style={[styles.logoStyle, { width: 40 }]}
               source={payment_sepa}
             />
@@ -64,6 +67,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           </View>
 
           <Image
+            resizeMode="contain"
             style={styles.imageStyle}
             source={isActive ? foldin : foldout}
           />
@@ -75,6 +79,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         <View style={styles.header}>
           <View style={styles.logoContainer}>
             <Image
+              resizeMode="contain"
               style={[styles.logoStyle, { width: 40 }]}
               source={payment_credit}
             />
@@ -82,6 +87,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           </View>
 
           <Image
+            resizeMode="contain"
             style={styles.imageStyle}
             source={isActive ? foldin : foldout}
           />
@@ -92,10 +98,14 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       return (
         <View style={styles.header}>
           <View style={[styles.logoStyle, { width: 80 }]}>
-            <Image style={styles.logoStyle} source={payment_paypal} />
+            <Image
+              resizeMode="contain"
+              style={styles.logoStyle}
+              source={payment_paypal}
+            />
           </View>
-
           <Image
+            resizeMode="contain"
             style={styles.imageStyle}
             source={isActive ? foldin : foldout}
           />
@@ -105,7 +115,11 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     return (
       <View style={styles.header}>
         <Text style={styles.headerText}>{paymentGateway}</Text>
-        <Image style={styles.imageStyle} source={isActive ? foldin : foldout} />
+        <Image
+          resizeMode="contain"
+          style={styles.imageStyle}
+          source={isActive ? foldin : foldout}
+        />
       </View>
     );
   }
@@ -152,6 +166,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             amount={this.props.amount}
             currency={this.props.currency}
             account={section.value}
+            mode={this.props.accounts[accountName].mode}
             onSuccess={this.donateSuccess(paymentGateway, accountName)}
           />
         </View>
@@ -223,12 +238,12 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         {this.props.paymentStatus && this.props.paymentStatus.status ? (
           <View style={{ flex: 1, alignItems: 'center' }}>
             <Image
+              resizeMode="contain"
               style={[styles.logoStyle, { width: 40 }]}
               source={check_green}
             />
             <Text style={{ padding: 10 }}>
-              {i18n.t('label.thankyou')} {context.treeCount} {'  '}
-              {i18n.t('label.receive_mail')}
+              {i18n.t('label.thankyou_planting', { count: context.treeCount })}
             </Text>
 
             <InlineLink uri={'app_userHome'} caption={'Return Home'} />
@@ -236,6 +251,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
           <View style={{ flex: 1, alignItems: 'center' }}>
             <Image
+              resizeMode="contain"
               style={[styles.logoStyle, { width: 40 }]}
               source={check_green}
             />

@@ -45,13 +45,20 @@ class PlantProjectSpecsItem extends React.Component {
           {rightIcon ? (
             <View>
               <ReactNativeTooltipMenu
+                labelContainerStyle={{
+                  width: 200,
+                  alignItems: 'center'
+                }}
                 buttonComponent={
-                  <Image style={styles.spec_icon} source={rightIcon} />
+                  <Image
+                    style={styles.spec_icon}
+                    resizeMode="contain"
+                    source={rightIcon}
+                  />
                 }
                 items={[
                   {
-                    label: `Percentage of planted trees
-                      that survive the first year after planting.`,
+                    label: `Percentage of planted trees that survive the first year after planting.`,
                     onPress: () => {}
                   }
                 ]}
@@ -65,7 +72,7 @@ class PlantProjectSpecsItem extends React.Component {
           //     this._onPress(this.ref1);
           //   }}
           // >
-          //   <Image style={styles.spec_icon} source={rightIcon} />
+          //   <Image style={styles.spec_icon} resizeMode="contain" source={rightIcon} />
           // </TouchableHighlight>
           null}
           {/* <Tooltips

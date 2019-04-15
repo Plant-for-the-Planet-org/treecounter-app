@@ -24,10 +24,20 @@ export const saveItem = async (key, value) => {
 };
 
 export const fetchItem = async key => {
-  let item = await AsyncStorage.getItem(key);
-  return item;
+  try {
+    const serializedState = await AsyncStorage.getItem(key);
+    if (serializedState === null) {
+      return undefined;
+    }
+    return serializedState;
+  } catch (err) {
+    return undefined;
+  }
 };
 
 export const clearStorage = async () => {
+  const welcomeKey = await fetchItem('welcome');
+  //console.log(welcomeKey);
   await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
+  saveItem('welcome', welcomeKey);
 };

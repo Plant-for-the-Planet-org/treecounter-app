@@ -16,6 +16,8 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 1
           },
@@ -25,6 +27,8 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 2
           },
@@ -34,6 +38,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 3
           },
@@ -43,6 +49,8 @@ export default {
             attr: {
               maxlength: 150
             },
+            icon: null,
+            help: null,
             maxLength: 150,
             propertyOrder: 4
           },
@@ -566,16 +574,22 @@ export default {
             attr: {
               maxlength: 2
             },
+            icon: null,
+            help: null,
             propertyOrder: 5
           },
           mayPublish: {
             type: 'boolean',
             title: 'label.mayPublish',
+            icon: null,
+            help: null,
             propertyOrder: 6
           },
           mayContact: {
             type: 'boolean',
             title: 'label.mayContact',
+            icon: null,
+            help: null,
             propertyOrder: 7
           },
           phone: {
@@ -584,6 +598,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 8
           }
@@ -601,8 +617,10 @@ export default {
         properties: {
           imageFile: {
             type: 'string',
-            title: 'label.avatar',
+            title: 'label.upload_profile_picture',
             widget: 'file',
+            icon: null,
+            help: null,
             propertyOrder: 1
           }
         },
@@ -621,24 +639,32 @@ export default {
             type: 'string',
             title: 'label.url',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           synopsis1: {
             type: 'string',
             title: 'label.synopsis1',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 3
           },
           synopsis2: {
             type: 'string',
             title: 'label.synopsis2',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 4
           }
         },
@@ -657,11 +683,12 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
-            widget: 'password',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           password: {
-            title: 'password',
+            title: null,
             type: 'object',
             properties: {
               first: {
@@ -672,6 +699,7 @@ export default {
                 },
                 widget: 'password',
                 icon: 'key',
+                help: null,
                 propertyOrder: 1
               },
               second: {
@@ -681,9 +709,13 @@ export default {
                   class: 'password-field'
                 },
                 widget: 'password',
+                icon: null,
+                help: null,
                 propertyOrder: 2
               }
             },
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
@@ -710,6 +742,8 @@ export default {
             attr: {
               maxlength: 1
             },
+            icon: null,
+            help: null,
             maxLength: 1,
             propertyOrder: 1
           },
@@ -719,6 +753,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 2
           },
@@ -728,6 +764,8 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 3
           },
@@ -737,6 +775,8 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 4
           },
@@ -746,6 +786,8 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 5
           },
@@ -755,6 +797,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 6
           },
@@ -764,6 +808,8 @@ export default {
             attr: {
               maxlength: 150
             },
+            icon: null,
+            help: null,
             maxLength: 150,
             propertyOrder: 7
           },
@@ -1287,16 +1333,22 @@ export default {
             attr: {
               maxlength: 2
             },
+            icon: null,
+            help: null,
             propertyOrder: 8
           },
           mayPublish: {
             type: 'boolean',
             title: 'label.mayPublish',
+            icon: null,
+            help: null,
             propertyOrder: 9
           },
           mayContact: {
             type: 'boolean',
             title: 'label.mayContact',
+            icon: null,
+            help: null,
             propertyOrder: 10
           },
           phone: {
@@ -1305,6 +1357,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 11
           }
@@ -1314,46 +1368,6 @@ export default {
         submit_method: 'POST'
       }
     },
-    project: {
-      values: [],
-      schema: {
-        title: 'profile_image',
-        type: 'object',
-        properties: {
-          contributionMeasurements: {
-            type: 'array',
-            title: 'label.add_measurements',
-            items: {
-              title: 'prototype',
-              type: 'object',
-              properties: {
-                diameter: {
-                  type: 'integer',
-                  title: 'label.tree_diameter',
-                  propertyOrder: 1
-                },
-                height: {
-                  type: 'integer',
-                  title: 'label.tree_height',
-                  propertyOrder: 2
-                },
-                measurementDate: {
-                  type: 'string',
-                  title: 'label.measurement_date',
-                  widget: 'date',
-                  propertyOrder: 3
-                }
-              },
-              required: ['diameter', 'height', 'measurementDate']
-            },
-            propertyOrder: 8
-          }
-        }
-      },
-      required: ['imageFile'],
-      submit_url: '',
-      submit_method: 'POST'
-    },
     image: {
       values: [],
       schema: {
@@ -1362,8 +1376,10 @@ export default {
         properties: {
           imageFile: {
             type: 'string',
-            title: 'label.avatar',
+            title: 'label.upload_profile_picture',
             widget: 'file',
+            icon: null,
+            help: null,
             propertyOrder: 1
           }
         },
@@ -1382,24 +1398,32 @@ export default {
             type: 'string',
             title: 'label.url',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           synopsis1: {
             type: 'string',
             title: 'label.synopsis1',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 3
           },
           synopsis2: {
             type: 'string',
             title: 'label.synopsis2',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 4
           }
         },
@@ -1418,10 +1442,12 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           password: {
-            title: 'password',
+            title: null,
             type: 'object',
             properties: {
               first: {
@@ -1432,6 +1458,7 @@ export default {
                 },
                 widget: 'password',
                 icon: 'key',
+                help: null,
                 propertyOrder: 1
               },
               second: {
@@ -1441,9 +1468,13 @@ export default {
                   class: 'password-field'
                 },
                 widget: 'password',
+                icon: null,
+                help: null,
                 propertyOrder: 2
               }
             },
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
@@ -1470,14 +1501,18 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 1
           },
           subType: {
-            enum: ['Other'],
-            enum_titles: ['0'],
+            enum: ['company-other'],
+            enum_titles: ['Other'],
             type: 'string',
-            title: 'subType',
+            title: null,
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           address: {
@@ -1486,6 +1521,8 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 3
           },
@@ -1495,6 +1532,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 4
           },
@@ -1504,6 +1543,8 @@ export default {
             attr: {
               maxlength: 150
             },
+            icon: null,
+            help: null,
             maxLength: 150,
             propertyOrder: 5
           },
@@ -2027,16 +2068,22 @@ export default {
             attr: {
               maxlength: 2
             },
+            icon: null,
+            help: null,
             propertyOrder: 6
           },
           mayPublish: {
             type: 'boolean',
             title: 'label.mayPublish',
+            icon: null,
+            help: null,
             propertyOrder: 7
           },
           mayContact: {
             type: 'boolean',
             title: 'label.mayContact',
+            icon: null,
+            help: null,
             propertyOrder: 8
           },
           phone: {
@@ -2045,6 +2092,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 9
           }
@@ -2062,8 +2111,10 @@ export default {
         properties: {
           imageFile: {
             type: 'string',
-            title: 'label.avatar',
+            title: 'label.upload_profile_picture',
             widget: 'file',
+            icon: null,
+            help: null,
             propertyOrder: 1
           }
         },
@@ -2082,24 +2133,32 @@ export default {
             type: 'string',
             title: 'label.url',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           synopsis1: {
             type: 'string',
             title: 'label.synopsis1',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 3
           },
           synopsis2: {
             type: 'string',
             title: 'label.synopsis2',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 4
           }
         },
@@ -2118,10 +2177,12 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           password: {
-            title: 'password',
+            title: null,
             type: 'object',
             properties: {
               first: {
@@ -2132,6 +2193,7 @@ export default {
                 },
                 widget: 'password',
                 icon: 'key',
+                help: null,
                 propertyOrder: 1
               },
               second: {
@@ -2141,9 +2203,13 @@ export default {
                   class: 'password-field'
                 },
                 widget: 'password',
+                icon: null,
+                help: null,
                 propertyOrder: 2
               }
             },
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
@@ -2170,14 +2236,23 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 1
           },
           subType: {
-            enum: ['primary', 'secondary', 'higher', 'other'],
-            enum_titles: ['0', '1', '2', '3'],
+            enum: [
+              'education-primary',
+              'education-secondary',
+              'education-higher',
+              'education-other'
+            ],
+            enum_titles: ['Primary', 'Secondary', 'Higher', 'Other'],
             type: 'string',
-            title: 'subType',
+            title: null,
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           address: {
@@ -2186,6 +2261,8 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 3
           },
@@ -2195,6 +2272,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 4
           },
@@ -2204,6 +2283,8 @@ export default {
             attr: {
               maxlength: 150
             },
+            icon: null,
+            help: null,
             maxLength: 150,
             propertyOrder: 5
           },
@@ -2727,16 +2808,22 @@ export default {
             attr: {
               maxlength: 2
             },
+            icon: null,
+            help: null,
             propertyOrder: 6
           },
           mayPublish: {
             type: 'boolean',
             title: 'label.mayPublish',
+            icon: null,
+            help: null,
             propertyOrder: 7
           },
           mayContact: {
             type: 'boolean',
             title: 'label.mayContact',
+            icon: null,
+            help: null,
             propertyOrder: 8
           },
           phone: {
@@ -2745,6 +2832,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 9
           }
@@ -2762,8 +2851,10 @@ export default {
         properties: {
           imageFile: {
             type: 'string',
-            title: 'label.avatar',
+            title: 'label.upload_profile_picture',
             widget: 'file',
+            icon: null,
+            help: null,
             propertyOrder: 1
           }
         },
@@ -2782,24 +2873,32 @@ export default {
             type: 'string',
             title: 'label.url',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           synopsis1: {
             type: 'string',
             title: 'label.synopsis1',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 3
           },
           synopsis2: {
             type: 'string',
             title: 'label.synopsis2',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 4
           }
         },
@@ -2818,10 +2917,12 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           password: {
-            title: 'password',
+            title: null,
             type: 'object',
             properties: {
               first: {
@@ -2832,6 +2933,7 @@ export default {
                 },
                 widget: 'password',
                 icon: 'key',
+                help: null,
                 propertyOrder: 1
               },
               second: {
@@ -2841,9 +2943,13 @@ export default {
                   class: 'password-field'
                 },
                 widget: 'password',
+                icon: null,
+                help: null,
                 propertyOrder: 2
               }
             },
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
@@ -2870,14 +2976,23 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 1
           },
           subType: {
-            enum: ['Non Profit', 'Service Club', 'Political Party', 'Other'],
-            enum_titles: ['0', '1', '2', '3'],
+            enum: ['0', '1', '2', '3'],
+            enum_titles: [
+              'Non Profit',
+              'Service Club',
+              'Political Party',
+              'Other'
+            ],
             type: 'string',
-            title: 'subType',
+            title: null,
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           address: {
@@ -2886,6 +3001,8 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 3
           },
@@ -2895,6 +3012,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 4
           },
@@ -2904,6 +3023,8 @@ export default {
             attr: {
               maxlength: 150
             },
+            icon: null,
+            help: null,
             maxLength: 150,
             propertyOrder: 5
           },
@@ -3427,16 +3548,22 @@ export default {
             attr: {
               maxlength: 2
             },
+            icon: null,
+            help: null,
             propertyOrder: 6
           },
           mayPublish: {
             type: 'boolean',
             title: 'label.mayPublish',
+            icon: null,
+            help: null,
             propertyOrder: 7
           },
           mayContact: {
             type: 'boolean',
             title: 'label.mayContact',
+            icon: null,
+            help: null,
             propertyOrder: 8
           },
           phone: {
@@ -3445,6 +3572,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 9
           }
@@ -3462,8 +3591,10 @@ export default {
         properties: {
           imageFile: {
             type: 'string',
-            title: 'label.avatar',
+            title: 'label.upload_profile_picture',
             widget: 'file',
+            icon: null,
+            help: null,
             propertyOrder: 1
           }
         },
@@ -3482,24 +3613,32 @@ export default {
             type: 'string',
             title: 'label.url',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           synopsis1: {
             type: 'string',
             title: 'label.synopsis1',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 3
           },
           synopsis2: {
             type: 'string',
             title: 'label.synopsis2',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 4
           }
         },
@@ -3518,10 +3657,12 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           password: {
-            title: 'password',
+            title: null,
             type: 'object',
             properties: {
               first: {
@@ -3532,6 +3673,7 @@ export default {
                 },
                 widget: 'password',
                 icon: 'key',
+                help: null,
                 propertyOrder: 1
               },
               second: {
@@ -3541,9 +3683,13 @@ export default {
                   class: 'password-field'
                 },
                 widget: 'password',
+                icon: null,
+                help: null,
                 propertyOrder: 2
               }
             },
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
@@ -3570,14 +3716,18 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 1
           },
           subType: {
-            enum: ['City', 'State', 'Country'],
-            enum_titles: ['0', '1', '2'],
+            enum: ['government-city', 'government-state', 'government-country'],
+            enum_titles: ['City', 'State', 'Country'],
             type: 'string',
-            title: 'subType',
+            title: null,
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           address: {
@@ -3586,6 +3736,8 @@ export default {
             attr: {
               maxlength: 255
             },
+            icon: null,
+            help: null,
             maxLength: 255,
             propertyOrder: 3
           },
@@ -3595,6 +3747,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 4
           },
@@ -3604,6 +3758,8 @@ export default {
             attr: {
               maxlength: 150
             },
+            icon: null,
+            help: null,
             maxLength: 150,
             propertyOrder: 5
           },
@@ -4127,16 +4283,22 @@ export default {
             attr: {
               maxlength: 2
             },
+            icon: null,
+            help: null,
             propertyOrder: 6
           },
           mayPublish: {
             type: 'boolean',
             title: 'label.mayPublish',
+            icon: null,
+            help: null,
             propertyOrder: 7
           },
           mayContact: {
             type: 'boolean',
             title: 'label.mayContact',
+            icon: null,
+            help: null,
             propertyOrder: 8
           },
           phone: {
@@ -4145,6 +4307,8 @@ export default {
             attr: {
               maxlength: 50
             },
+            icon: null,
+            help: null,
             maxLength: 50,
             propertyOrder: 9
           }
@@ -4162,8 +4326,10 @@ export default {
         properties: {
           imageFile: {
             type: 'string',
-            title: 'label.avatar',
+            title: 'label.upload_profile_picture',
             widget: 'file',
+            icon: null,
+            help: null,
             propertyOrder: 1
           }
         },
@@ -4182,24 +4348,32 @@ export default {
             type: 'string',
             title: 'label.url',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           linkText: {
             type: 'string',
             title: 'label.linkText',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 2
           },
           synopsis1: {
             type: 'string',
             title: 'label.synopsis1',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 3
           },
           synopsis2: {
             type: 'string',
             title: 'label.synopsis2',
             widget: 'textarea',
+            icon: null,
+            help: null,
             propertyOrder: 4
           }
         },
@@ -4218,10 +4392,12 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            icon: null,
+            help: null,
             propertyOrder: 1
           },
           password: {
-            title: 'password',
+            title: null,
             type: 'object',
             properties: {
               first: {
@@ -4232,6 +4408,7 @@ export default {
                 },
                 widget: 'password',
                 icon: 'key',
+                help: null,
                 propertyOrder: 1
               },
               second: {
@@ -4241,9 +4418,13 @@ export default {
                   class: 'password-field'
                 },
                 widget: 'password',
+                icon: null,
+                help: null,
                 propertyOrder: 2
               }
             },
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
@@ -4252,707 +4433,5 @@ export default {
         submit_method: 'POST'
       }
     }
-  }
-};
-
-export const plantProject = {
-  values: {
-    countTarget: '0',
-    plantProjectImages: []
-  },
-  schema: {
-    title: 'plantProject',
-    type: 'object',
-    properties: {
-      name: {
-        type: 'string',
-        title: 'name',
-        attr: {
-          maxlength: 255
-        },
-        maxLength: 255,
-        propertyOrder: 1
-      },
-      countTarget: {
-        type: 'number',
-        title: 'countTarget',
-        propertyOrder: 2
-      },
-      survivalRate: {
-        type: 'integer',
-        title: 'survivalRate',
-        attr: {
-          maxlength: 3,
-          pattern: '.{1,}'
-        },
-        pattern: '.{1,}',
-        propertyOrder: 3
-      },
-      imageFile: {
-        type: 'string',
-        title: 'label.avatar',
-        widget: 'file',
-        propertyOrder: 4
-      },
-      treeCost: {
-        type: 'number',
-        title: 'treeCost',
-        propertyOrder: 5
-      },
-      currency: {
-        enum: [
-          'AFN',
-          'AFA',
-          'ALL',
-          'ALK',
-          'DZD',
-          'ADP',
-          'AOA',
-          'AOK',
-          'AON',
-          'AOR',
-          'ARA',
-          'ARS',
-          'ARM',
-          'ARP',
-          'ARL',
-          'AMD',
-          'AWG',
-          'AUD',
-          'ATS',
-          'AZN',
-          'AZM',
-          'BSD',
-          'BHD',
-          'BDT',
-          'BBD',
-          'BYN',
-          'BYB',
-          'BYR',
-          'BEF',
-          'BEC',
-          'BEL',
-          'BZD',
-          'BMD',
-          'BTN',
-          'BOB',
-          'BOL',
-          'BOV',
-          'BOP',
-          'BAM',
-          'BAD',
-          'BAN',
-          'BWP',
-          'BRC',
-          'BRZ',
-          'BRE',
-          'BRR',
-          'BRN',
-          'BRB',
-          'BRL',
-          'GBP',
-          'BND',
-          'BGL',
-          'BGN',
-          'BGO',
-          'BGM',
-          'BUK',
-          'BIF',
-          'XPF',
-          'KHR',
-          'CAD',
-          'CVE',
-          'KYD',
-          'XAF',
-          'CLE',
-          'CLP',
-          'CLF',
-          'CNX',
-          'CNY',
-          'CNH',
-          'COP',
-          'COU',
-          'KMF',
-          'CDF',
-          'CRC',
-          'HRD',
-          'HRK',
-          'CUC',
-          'CUP',
-          'CYP',
-          'CZK',
-          'CSK',
-          'DKK',
-          'DJF',
-          'DOP',
-          'NLG',
-          'XCD',
-          'DDM',
-          'ECS',
-          'ECV',
-          'EGP',
-          'GQE',
-          'ERN',
-          'EEK',
-          'ETB',
-          'EUR',
-          'XEU',
-          'FKP',
-          'FJD',
-          'FIM',
-          'FRF',
-          'XFO',
-          'XFU',
-          'GMD',
-          'GEK',
-          'GEL',
-          'DEM',
-          'GHS',
-          'GHC',
-          'GIP',
-          'GRD',
-          'GTQ',
-          'GWP',
-          'GNF',
-          'GNS',
-          'GYD',
-          'HTG',
-          'HNL',
-          'HKD',
-          'HUF',
-          'ISK',
-          'ISJ',
-          'INR',
-          'IDR',
-          'IRR',
-          'IQD',
-          'IEP',
-          'ILS',
-          'ILP',
-          'ILR',
-          'ITL',
-          'JMD',
-          'JPY',
-          'JOD',
-          'KZT',
-          'KES',
-          'KWD',
-          'KGS',
-          'LAK',
-          'LVL',
-          'LVR',
-          'LBP',
-          'LSL',
-          'LRD',
-          'LYD',
-          'LTL',
-          'LTT',
-          'LUL',
-          'LUC',
-          'LUF',
-          'MOP',
-          'MKD',
-          'MKN',
-          'MGA',
-          'MGF',
-          'MWK',
-          'MYR',
-          'MVR',
-          'MVP',
-          'MLF',
-          'MTL',
-          'MTP',
-          'MRU',
-          'MRO',
-          'MUR',
-          'MXV',
-          'MXN',
-          'MXP',
-          'MDC',
-          'MDL',
-          'MCF',
-          'MNT',
-          'MAD',
-          'MAF',
-          'MZE',
-          'MZN',
-          'MZM',
-          'MMK',
-          'NAD',
-          'NPR',
-          'ANG',
-          'TWD',
-          'NZD',
-          'NIO',
-          'NIC',
-          'NGN',
-          'KPW',
-          'NOK',
-          'OMR',
-          'PKR',
-          'PAB',
-          'PGK',
-          'PYG',
-          'PEI',
-          'PEN',
-          'PES',
-          'PHP',
-          'PLN',
-          'PLZ',
-          'PTE',
-          'GWE',
-          'QAR',
-          'XRE',
-          'RHD',
-          'RON',
-          'ROL',
-          'RUB',
-          'RUR',
-          'RWF',
-          'SVC',
-          'WST',
-          'SAR',
-          'RSD',
-          'CSD',
-          'SCR',
-          'SLL',
-          'SGD',
-          'SKK',
-          'SIT',
-          'SBD',
-          'SOS',
-          'ZAR',
-          'ZAL',
-          'KRH',
-          'KRW',
-          'KRO',
-          'SSP',
-          'SUR',
-          'ESP',
-          'ESA',
-          'ESB',
-          'LKR',
-          'SHP',
-          'SDD',
-          'SDG',
-          'SDP',
-          'SRD',
-          'SRG',
-          'SZL',
-          'SEK',
-          'CHF',
-          'SYP',
-          'STN',
-          'STD',
-          'TJR',
-          'TJS',
-          'TZS',
-          'THB',
-          'TPE',
-          'TOP',
-          'TTD',
-          'TND',
-          'TRY',
-          'TRL',
-          'TMT',
-          'TMM',
-          'USD',
-          'USN',
-          'USS',
-          'UGX',
-          'UGS',
-          'UAH',
-          'UAK',
-          'AED',
-          'UYU',
-          'UYP',
-          'UYI',
-          'UZS',
-          'VUV',
-          'VEF',
-          'VEB',
-          'VND',
-          'VNN',
-          'CHE',
-          'CHW',
-          'XOF',
-          'YDD',
-          'YER',
-          'YUN',
-          'YUD',
-          'YUM',
-          'YUR',
-          'ZRN',
-          'ZRZ',
-          'ZMW',
-          'ZMK',
-          'ZWD',
-          'ZWR',
-          'ZWL'
-        ],
-        enum_titles: [
-          'Afghan Afghani',
-          'Afghan Afghani (1927–2002)',
-          'Albanian Lek',
-          'Albanian Lek (1946–1965)',
-          'Algerian Dinar',
-          'Andorran Peseta',
-          'Angolan Kwanza',
-          'Angolan Kwanza (1977–1991)',
-          'Angolan New Kwanza (1990–2000)',
-          'Angolan Readjusted Kwanza (1995–1999)',
-          'Argentine Austral',
-          'Argentine Peso',
-          'Argentine Peso (1881–1970)',
-          'Argentine Peso (1983–1985)',
-          'Argentine Peso Ley (1970–1983)',
-          'Armenian Dram',
-          'Aruban Florin',
-          'Australian Dollar',
-          'Austrian Schilling',
-          'Azerbaijani Manat',
-          'Azerbaijani Manat (1993–2006)',
-          'Bahamian Dollar',
-          'Bahraini Dinar',
-          'Bangladeshi Taka',
-          'Barbadian Dollar',
-          'Belarusian Ruble',
-          'Belarusian Ruble (1994–1999)',
-          'Belarusian Ruble (2000–2016)',
-          'Belgian Franc',
-          'Belgian Franc (convertible)',
-          'Belgian Franc (financial)',
-          'Belize Dollar',
-          'Bermudan Dollar',
-          'Bhutanese Ngultrum',
-          'Bolivian Boliviano',
-          'Bolivian Boliviano (1863–1963)',
-          'Bolivian Mvdol',
-          'Bolivian Peso',
-          'Bosnia-Herzegovina Convertible Mark',
-          'Bosnia-Herzegovina Dinar (1992–1994)',
-          'Bosnia-Herzegovina New Dinar (1994–1997)',
-          'Botswanan Pula',
-          'Brazilian Cruzado (1986–1989)',
-          'Brazilian Cruzeiro (1942–1967)',
-          'Brazilian Cruzeiro (1990–1993)',
-          'Brazilian Cruzeiro (1993–1994)',
-          'Brazilian New Cruzado (1989–1990)',
-          'Brazilian New Cruzeiro (1967–1986)',
-          'Brazilian Real',
-          'British Pound',
-          'Brunei Dollar',
-          'Bulgarian Hard Lev',
-          'Bulgarian Lev',
-          'Bulgarian Lev (1879–1952)',
-          'Bulgarian Socialist Lev',
-          'Burmese Kyat',
-          'Burundian Franc',
-          'CFP Franc',
-          'Cambodian Riel',
-          'Canadian Dollar',
-          'Cape Verdean Escudo',
-          'Cayman Islands Dollar',
-          'Central African CFA Franc',
-          'Chilean Escudo',
-          'Chilean Peso',
-          'Chilean Unit of Account (UF)',
-          'Chinese People’s Bank Dollar',
-          'Chinese Yuan',
-          'Chinese Yuan (offshore)',
-          'Colombian Peso',
-          'Colombian Real Value Unit',
-          'Comorian Franc',
-          'Congolese Franc',
-          'Costa Rican Colón',
-          'Croatian Dinar',
-          'Croatian Kuna',
-          'Cuban Convertible Peso',
-          'Cuban Peso',
-          'Cypriot Pound',
-          'Czech Koruna',
-          'Czechoslovak Hard Koruna',
-          'Danish Krone',
-          'Djiboutian Franc',
-          'Dominican Peso',
-          'Dutch Guilder',
-          'East Caribbean Dollar',
-          'East German Mark',
-          'Ecuadorian Sucre',
-          'Ecuadorian Unit of Constant Value',
-          'Egyptian Pound',
-          'Equatorial Guinean Ekwele',
-          'Eritrean Nakfa',
-          'Estonian Kroon',
-          'Ethiopian Birr',
-          'Euro',
-          'European Currency Unit',
-          'Falkland Islands Pound',
-          'Fijian Dollar',
-          'Finnish Markka',
-          'French Franc',
-          'French Gold Franc',
-          'French UIC-Franc',
-          'Gambian Dalasi',
-          'Georgian Kupon Larit',
-          'Georgian Lari',
-          'German Mark',
-          'Ghanaian Cedi',
-          'Ghanaian Cedi (1979–2007)',
-          'Gibraltar Pound',
-          'Greek Drachma',
-          'Guatemalan Quetzal',
-          'Guinea-Bissau Peso',
-          'Guinean Franc',
-          'Guinean Syli',
-          'Guyanaese Dollar',
-          'Haitian Gourde',
-          'Honduran Lempira',
-          'Hong Kong Dollar',
-          'Hungarian Forint',
-          'Icelandic Króna',
-          'Icelandic Króna (1918–1981)',
-          'Indian Rupee',
-          'Indonesian Rupiah',
-          'Iranian Rial',
-          'Iraqi Dinar',
-          'Irish Pound',
-          'Israeli New Shekel',
-          'Israeli Pound',
-          'Israeli Shekel (1980–1985)',
-          'Italian Lira',
-          'Jamaican Dollar',
-          'Japanese Yen',
-          'Jordanian Dinar',
-          'Kazakhstani Tenge',
-          'Kenyan Shilling',
-          'Kuwaiti Dinar',
-          'Kyrgystani Som',
-          'Laotian Kip',
-          'Latvian Lats',
-          'Latvian Ruble',
-          'Lebanese Pound',
-          'Lesotho Loti',
-          'Liberian Dollar',
-          'Libyan Dinar',
-          'Lithuanian Litas',
-          'Lithuanian Talonas',
-          'Luxembourg Financial Franc',
-          'Luxembourgian Convertible Franc',
-          'Luxembourgian Franc',
-          'Macanese Pataca',
-          'Macedonian Denar',
-          'Macedonian Denar (1992–1993)',
-          'Malagasy Ariary',
-          'Malagasy Franc',
-          'Malawian Kwacha',
-          'Malaysian Ringgit',
-          'Maldivian Rufiyaa',
-          'Maldivian Rupee (1947–1981)',
-          'Malian Franc',
-          'Maltese Lira',
-          'Maltese Pound',
-          'Mauritanian Ouguiya',
-          'Mauritanian Ouguiya (1973–2017)',
-          'Mauritian Rupee',
-          'Mexican Investment Unit',
-          'Mexican Peso',
-          'Mexican Silver Peso (1861–1992)',
-          'Moldovan Cupon',
-          'Moldovan Leu',
-          'Monegasque Franc',
-          'Mongolian Tugrik',
-          'Moroccan Dirham',
-          'Moroccan Franc',
-          'Mozambican Escudo',
-          'Mozambican Metical',
-          'Mozambican Metical (1980–2006)',
-          'Myanmar Kyat',
-          'Namibian Dollar',
-          'Nepalese Rupee',
-          'Netherlands Antillean Guilder',
-          'New Taiwan Dollar',
-          'New Zealand Dollar',
-          'Nicaraguan Córdoba',
-          'Nicaraguan Córdoba (1988–1991)',
-          'Nigerian Naira',
-          'North Korean Won',
-          'Norwegian Krone',
-          'Omani Rial',
-          'Pakistani Rupee',
-          'Panamanian Balboa',
-          'Papua New Guinean Kina',
-          'Paraguayan Guarani',
-          'Peruvian Inti',
-          'Peruvian Sol',
-          'Peruvian Sol (1863–1965)',
-          'Philippine Piso',
-          'Polish Zloty',
-          'Polish Zloty (1950–1995)',
-          'Portuguese Escudo',
-          'Portuguese Guinea Escudo',
-          'Qatari Rial',
-          'RINET Funds',
-          'Rhodesian Dollar',
-          'Romanian Leu',
-          'Romanian Leu (1952–2006)',
-          'Russian Ruble',
-          'Russian Ruble (1991–1998)',
-          'Rwandan Franc',
-          'Salvadoran Colón',
-          'Samoan Tala',
-          'Saudi Riyal',
-          'Serbian Dinar',
-          'Serbian Dinar (2002–2006)',
-          'Seychellois Rupee',
-          'Sierra Leonean Leone',
-          'Singapore Dollar',
-          'Slovak Koruna',
-          'Slovenian Tolar',
-          'Solomon Islands Dollar',
-          'Somali Shilling',
-          'South African Rand',
-          'South African Rand (financial)',
-          'South Korean Hwan (1953–1962)',
-          'South Korean Won',
-          'South Korean Won (1945–1953)',
-          'South Sudanese Pound',
-          'Soviet Rouble',
-          'Spanish Peseta',
-          'Spanish Peseta (A account)',
-          'Spanish Peseta (convertible account)',
-          'Sri Lankan Rupee',
-          'St. Helena Pound',
-          'Sudanese Dinar (1992–2007)',
-          'Sudanese Pound',
-          'Sudanese Pound (1957–1998)',
-          'Surinamese Dollar',
-          'Surinamese Guilder',
-          'Swazi Lilangeni',
-          'Swedish Krona',
-          'Swiss Franc',
-          'Syrian Pound',
-          'São Tomé & Príncipe Dobra',
-          'São Tomé & Príncipe Dobra (1977–2017)',
-          'Tajikistani Ruble',
-          'Tajikistani Somoni',
-          'Tanzanian Shilling',
-          'Thai Baht',
-          'Timorese Escudo',
-          'Tongan Paʻanga',
-          'Trinidad & Tobago Dollar',
-          'Tunisian Dinar',
-          'Turkish Lira',
-          'Turkish Lira (1922–2005)',
-          'Turkmenistani Manat',
-          'Turkmenistani Manat (1993–2009)',
-          'US Dollar',
-          'US Dollar (Next day)',
-          'US Dollar (Same day)',
-          'Ugandan Shilling',
-          'Ugandan Shilling (1966–1987)',
-          'Ukrainian Hryvnia',
-          'Ukrainian Karbovanets',
-          'United Arab Emirates Dirham',
-          'Uruguayan Peso',
-          'Uruguayan Peso (1975–1993)',
-          'Uruguayan Peso (Indexed Units)',
-          'Uzbekistani Som',
-          'Vanuatu Vatu',
-          'Venezuelan Bolívar',
-          'Venezuelan Bolívar (1871–2008)',
-          'Vietnamese Dong',
-          'Vietnamese Dong (1978–1985)',
-          'WIR Euro',
-          'WIR Franc',
-          'West African CFA Franc',
-          'Yemeni Dinar',
-          'Yemeni Rial',
-          'Yugoslavian Convertible Dinar (1990–1992)',
-          'Yugoslavian Hard Dinar (1966–1990)',
-          'Yugoslavian New Dinar (1994–2002)',
-          'Yugoslavian Reformed Dinar (1992–1993)',
-          'Zairean New Zaire (1993–1998)',
-          'Zairean Zaire (1971–1993)',
-          'Zambian Kwacha',
-          'Zambian Kwacha (1968–2012)',
-          'Zimbabwean Dollar (1980–2008)',
-          'Zimbabwean Dollar (2008)',
-          'Zimbabwean Dollar (2009)'
-        ],
-        type: 'string',
-        title: 'currency',
-        propertyOrder: 6
-      },
-      location: {
-        type: 'string',
-        title: 'location',
-        widget: 'textarea',
-        propertyOrder: 7
-      },
-      geoLocation: {
-        type: 'string',
-        title: 'label.geo_location',
-        widget: 'map',
-        propertyOrder: 9
-      },
-      description: {
-        type: 'string',
-        title: 'description',
-        widget: 'textarea',
-        propertyOrder: 10
-      },
-      url: {
-        type: 'string',
-        title: 'url',
-        widget: 'textarea',
-        propertyOrder: 11
-      },
-      linkText: {
-        type: 'string',
-        title: 'linkText',
-        widget: 'textarea',
-        propertyOrder: 12
-      },
-      plantProjectImages: {
-        type: 'array',
-        title: 'label.add_images',
-        items: {
-          title: 'prototype',
-          type: 'object',
-          properties: {
-            image: {
-              type: 'string',
-              title: 'imageFile',
-              widget: 'file',
-              propertyOrder: 1
-            },
-            description: {
-              type: 'string',
-              title: 'description',
-              widget: 'textarea',
-              propertyOrder: 2
-            },
-            id: {
-              type: 'number',
-              title: 'id',
-              widget: 'hidden',
-              propertyOrder: 3
-            }
-          },
-          required: ['image']
-        },
-        propertyOrder: 13
-      },
-      videoUrl: {
-        type: 'string',
-        title: 'videoUrl',
-        widget: 'textarea',
-        propertyOrder: 14
-      }
-    },
-    required: ['name', 'treeCost', 'currency', 'country'],
-    submit_url: '',
-    submit_method: 'POST'
   }
 };

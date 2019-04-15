@@ -9,6 +9,8 @@ import UserFootprint from './UserFootprint';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import CardLayout from '../../components/Common/Card';
+import { getDocumentTitle } from '../../helpers/utils';
+import i18n from '../../locales/i18n.js';
 
 import {
   getProfileTypeName,
@@ -16,6 +18,7 @@ import {
   isUserFollower,
   amISupporting
 } from './utils';
+import PrimaryButton from '../Common/Button/PrimaryButton';
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {
@@ -47,8 +50,8 @@ class PublicTreeCounter extends React.Component {
     this.props.route('app_donateTrees');
   }
 
-  onRegisterSupporter() {
-    this.props.supportTreecounterAction(this.props.treecounter);
+  onRegisterSupporter(treecounter) {
+    this.props.supportTreecounterAction(treecounter);
     this.props.route('app_donateTrees');
   }
 
@@ -59,13 +62,42 @@ class PublicTreeCounter extends React.Component {
         id: treecounter.id,
         target: treecounter.countTarget,
         planted: treecounter.countPlanted,
-        community: treecounter.countCommunity,
+        community: treecounter.countReceived,
         personal: treecounter.countPersonal,
         targetComment: treecounter.targetComment,
         targetYear: treecounter.targetYear,
         type: treecounter.userProfile.type
       };
       this.setState({ svgData });
+    }
+  }
+  updateSvg(toggle) {
+    if (toggle) {
+      const treecounter = this.props.treecounter;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countReceived + treecounter.countPersonal, // light color
+        planted: treecounter.countPersonal, //dark color
+        community: treecounter.countReceived,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
+    } else {
+      const treecounter = this.props.treecounter;
+      let svgData = {
+        id: treecounter.id,
+        target: treecounter.countTarget,
+        planted: treecounter.countPlanted,
+        community: treecounter.countReceived,
+        personal: treecounter.countPersonal,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear,
+        type: treecounter.userProfile.type
+      };
+      this.setState({ svgData: Object.assign({}, svgData) });
     }
   }
   render() {
@@ -102,7 +134,7 @@ class PublicTreeCounter extends React.Component {
       defaultPlantProjectId: null,
       tpoName: caption
     };
-
+    document.title = getDocumentTitle(caption);
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <div className="tree-counter-header">
@@ -110,20 +142,43 @@ class PublicTreeCounter extends React.Component {
             {...headerProps}
             followChanged={this.onFollowChanged}
           />
-          {'tpo' !== userProfile.type &&
-            !isMyself(treecounter, currentUserProfile) && (
-              <div className="support-button-container ">
-                <SupportButton
-                  {...supportProps}
-                  onRegisterSupporter={this.onRegisterSupporter}
-                />
-              </div>
-            )}
+
+          {('individual' == userProfile.type ||
+            'plantAmbassador' == userProfile.type) && (
+            <div className="support-button-container ">
+              <SupportButton
+                {...supportProps}
+                buttonLabel={i18n.t('label.gift_trees')}
+                onRegisterSupporter={() =>
+                  this.onRegisterSupporter(treecounter)
+                }
+              />
+            </div>
+          )}
+
+          {('company' == userProfile.type ||
+            'education' == userProfile.type ||
+            'non-profit' == userProfile.type ||
+            'govt' == userProfile.type ||
+            'plantClub' == userProfile.type) && (
+            <div className="support-button-container ">
+              <SupportButton
+                {...supportProps}
+                buttonLabel={
+                  isUserLoggedIn
+                    ? i18n.t('label.support')
+                    : i18n.t('label.plant_trees')
+                }
+                onRegisterSupporter={this.onRegisterSupporter}
+              />
+            </div>
+          )}
         </div>
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />
           <TreecounterGraphicsText
             trillion={false}
+            onToggle={toggleVal => this.updateSvg(toggleVal)}
             treecounterData={this.state.svgData}
           />
         </div>
@@ -139,6 +194,51 @@ class PublicTreeCounter extends React.Component {
             </CardLayout>
           ) : null}
         </div>
+        {treecounter.directChildren ? (
+          <CardLayout className="width_group_footer">
+            <div className="group_user_table">
+              <div className="table-header">
+                <div className="table-header-item contributor">Contributor</div>
+                <div className="table-header-item planted">Planted Trees</div>
+                <div className="table-header-item target">Target</div>
+                <div className="table-header-item support" />
+              </div>
+              <div className="table-body">
+                {Object.keys(treecounter.directChildren).map(childrenId => {
+                  return (
+                    <div className="table-row" key={'tr' + childrenId}>
+                      <div className="table-col contributor">
+                        {treecounter.directChildren[childrenId].displayName}
+                      </div>
+                      <div className="table-col planted">
+                        {parseInt(
+                          treecounter.directChildren[childrenId].countPlanted
+                        ).toLocaleString('en')}
+                      </div>
+                      <div className="table-col target">
+                        {parseInt(
+                          treecounter.directChildren[childrenId].countTarget
+                        ).toLocaleString('en')}
+                      </div>
+                      <div className="table-col support">
+                        <PrimaryButton
+                          className="support-button-group-footer"
+                          onClick={() =>
+                            this.onRegisterSupporter(
+                              treecounter.directChildren[childrenId]
+                            )
+                          }
+                        >
+                          {i18n.t('label.support')}
+                        </PrimaryButton>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </CardLayout>
+        ) : null}
       </div>
     );
   }

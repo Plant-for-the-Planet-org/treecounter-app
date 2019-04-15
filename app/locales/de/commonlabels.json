@@ -9,4 +9,5 @@
   "home_page_redirected": "Sie werden in {{seconds}} Sekunden zur Startseite weitergeleitet",
   "planting_404": "Lasst uns Bäume pflanzen, um diese Situation auf diesem Planeten zu vermeiden.",
   "cancel": "Abbrechen"
+  "invalidLength": "Ungültige Länge: sollte kürzer sein als {length}"
 }

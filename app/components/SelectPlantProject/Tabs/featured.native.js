@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions } from 'react-native';
-import styles from '../../../styles/selectplantproject/selectplantproject';
-import i18n from '../../../locales/i18n.js';
-
-import Slick from 'react-native-slick';
-import PlantProjectFull from '../../PlantProjects/PlantProjectFull';
+import { FlatList, View } from 'react-native';
+import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import styles from '../../../styles/selectplantproject/featured.native';
+import scrollStyle from '../../../styles/common/scrollStyle.native';
 
 export default class FeaturedProjects extends Component {
   constructor(props) {
@@ -29,6 +28,21 @@ export default class FeaturedProjects extends Component {
       featuredProjects: featuredProjects
     });
   }
+  _keyExtractor = (item, index) => item.id.toString();
+
+  _renderItem = ({ item }) => (
+    <PlantProjectSnippet
+      key={'projectFull' + item.id}
+      cardStyle={styles.cardStyle}
+      onMoreClick={id => this.props.onMoreClick(id)}
+      plantProject={item}
+      onSelectClickedFeaturedProjects={id =>
+        this.onSelectClickedFeaturedProjects(id)
+      }
+      showMoreButton={false}
+      tpoName={item.tpo_name}
+    />
+  );
 
   componentWillReceiveProps(nextProps) {
     let { plantProjects } = nextProps;
@@ -45,35 +59,25 @@ export default class FeaturedProjects extends Component {
 
   onSelectClickedFeaturedProjects = id => {
     this.props.selectProject(id);
-  };
-
-  callExpanded = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    });
+    const { navigation } = this.props;
+    updateStaticRoute(
+      'app_donate_detail',
+      navigation,
+      0,
+      navigation.getParam('userForm')
+    );
   };
 
   render() {
     let { featuredProjects } = this.state;
     return (
-      <ScrollView>
-        <Slick style={styles.slickWrapper} showsPagination={false}>
-          {featuredProjects.length !== 0
-            ? featuredProjects.map(project => (
-                <PlantProjectFull
-                  key={'projectFull' + project.id}
-                  callExpanded={() => this.callExpanded()}
-                  expanded={false}
-                  plantProject={project}
-                  onSelectClickedFeaturedProjects={id =>
-                    this.onSelectClickedFeaturedProjects(id)
-                  }
-                  tpoName={project.tpo_name}
-                />
-              ))
-            : null}
-        </Slick>
-      </ScrollView>
+      <View style={styles.flexContainer}>
+        <FlatList
+          data={featuredProjects}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+        />
+      </View>
     );
   }
 }

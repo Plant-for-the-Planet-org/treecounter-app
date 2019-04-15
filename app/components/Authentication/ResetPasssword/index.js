@@ -19,15 +19,22 @@ class ResetPassword extends Component {
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>{i18n.t('label.reset_ur_password')}</TextHeading>
         <CardLayout>
-          <TCombForm
-            ref="resetPasswordForm"
-            type={resetPasswordFormSchema}
-            options={schemaOptions}
-            value={this.props.value}
-          />
-          <PrimaryButton onClick={this.props.onSetPassword}>
-            {i18n.t('label.set')} {i18n.t('label.password')}
-          </PrimaryButton>
+          <form onSubmit={this.props.onSetPassword}>
+            <TCombForm
+              ref="resetPasswordForm"
+              type={resetPasswordFormSchema}
+              options={this.props.schemaProp}
+              value={this.props.formValue}
+            />
+            <PrimaryButton
+              onClick={event => {
+                this.props.onSetPassword();
+                event.preventDefault();
+              }}
+            >
+              {i18n.t('label.set')} {i18n.t('label.password')}
+            </PrimaryButton>
+          </form>
         </CardLayout>
       </div>
     );
@@ -36,7 +43,8 @@ class ResetPassword extends Component {
 
 ResetPassword.propTypes = {
   onSetPassword: PropTypes.func,
-  value: PropTypes.object
+  formValue: PropTypes.object,
+  schemaProp: PropTypes.object
 };
 
 export default ResetPassword;

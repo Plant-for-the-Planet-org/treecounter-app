@@ -24,15 +24,20 @@ export default (buttonStyles = EStyleSheet.create({
     marginBottom: 10
   },
   footerText: {
-    color: '#686060'
+    color: '#686060',
+    padding: 10
+  },
+  linkText: {
+    color: '$colorPrimaryAccent',
+    padding: 10
   },
   circle: {
     borderRadius: 35,
     borderWidth: 5,
     borderColor: '#fff',
     position: 'absolute',
-    height: 70,
-    width: 70
+    height: 60,
+    width: 60
   },
   userInfo: {
     padding: 10,
@@ -48,15 +53,14 @@ export default (buttonStyles = EStyleSheet.create({
     maxHeight: '100%'
   },
   profileImageContainer: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     alignSelf: 'center',
     justifyContent: 'center'
   },
   profileImage: {
-    width: 65,
-    height: 65,
-    resizeMode: 'contain',
+    width: '93%',
+    height: '93%',
     padding: 5,
     borderRadius: 33
   },

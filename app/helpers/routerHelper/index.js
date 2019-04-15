@@ -1,1 +1,1 @@
-export { updateRoute } from './routerHelper';
+export { updateRoute, updateStaticRoute, replaceRoute } from './routerHelper';

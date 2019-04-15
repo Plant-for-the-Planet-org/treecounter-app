@@ -3,8 +3,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default (buttonStyles = EStyleSheet.create({
   primaryButton: {
     height: 50,
-    backgroundColor: '$primary',
-    borderColor: '$primary',
+    backgroundColor: '#a4c65e',
+    borderColor: '#a4c65e',
     borderWidth: 1,
     borderRadius: 6,
     padding: 10,
@@ -15,6 +15,10 @@ export default (buttonStyles = EStyleSheet.create({
   primaryButtonText: {
     fontSize: 25,
     color: 'white'
+  },
+  secondaryButton: {
+    backgroundColor: '$colorPrimaryAccent',
+    borderColor: '$colorPrimaryAccent'
   },
   followingButton: {
     justifyContent: 'center',

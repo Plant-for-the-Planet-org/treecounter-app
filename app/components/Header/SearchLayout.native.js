@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Platform,
-  StyleSheet,
+  ScrollView,
   Text,
   View,
   TouchableOpacity,
@@ -16,6 +16,8 @@ import { getImageUrl } from '../../actions/apiRouting';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import styles from '../../styles/header/search_layout.native';
+import _ from 'lodash';
+import { updateRoute } from '../../helpers/routerHelper';
 
 class SearchLayout extends React.Component {
   static SearchBar = SearchBar;
@@ -30,6 +32,10 @@ class SearchLayout extends React.Component {
   state = {
     q: []
   };
+  constructor(props) {
+    super(props);
+    this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 200);
+  }
 
   _handleSubmit = q => {
     this.props.onSubmit && this.props.onSubmit(q);
@@ -39,16 +45,42 @@ class SearchLayout extends React.Component {
   _handleChangeQuery = q => {
     getSuggestions(q).then(suggestions => {
       this.setState({ q: suggestions });
-      console.log('suggestions', suggestions);
+      //console.log('suggestions', suggestions);
     });
   };
+
+  redirectToResult(suggestion) {
+    // if(suggestion.type === 'treecounter') {
+    //   this.props.navigation.navigate(
+    //     getLocalRoute('app_treecounter'),
+    //     {
+    //       treeCounterId: suggestion.slug || suggestion.id,
+    //       suggestion
+    //     }
+    //   );
+    // } else if (suggestion.type === 'leaderboard') {
+    //   updateRoute('app_leaderboard', null, null, {
+    //     section: suggestion.section
+    //   })
+    // }
+    if (suggestion.category === 'profile') {
+      this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+        treeCounterId: suggestion.slug || suggestion.id,
+        suggestion
+      });
+    } else if (suggestion.category === 'competition') {
+      this.props.navigation.navigate(getLocalRoute('app_competition'), {
+        competition: suggestion.id
+      });
+    }
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Header backButton={Platform.OS === 'android'}>
+        <Header>
           <SearchBar
-            onChangeQuery={this._handleChangeQuery}
+            onChangeQuery={this.onChangeTextDelayed}
             onSubmit={this._handleSubmit}
             placeholderTextColor={this.props.searchInputPlaceholderTextColor}
             textColor={this.props.searchInputTextColor}
@@ -57,6 +89,7 @@ class SearchLayout extends React.Component {
               this.props.searchInputUnderlineColorAndroid ||
               this.props.headerBackgroundColor
             }
+            showCancelSearchButton={true}
             tintColor={
               this.props.searchInputTintColor || this.props.headerTintColor
             }
@@ -64,31 +97,27 @@ class SearchLayout extends React.Component {
         </Header>
 
         {this.state.q ? (
-          <View>
+          <ScrollView>
             {this.state.q.map((suggestion, i) => {
               return (
                 <TouchableOpacity
                   style={styles.searchResult}
                   key={'suggestion' + i}
                   onPress={() => {
-                    setTimeout(() => {
-                      this.props.navigation.navigate(
-                        getLocalRoute('app_treecounter'),
-                        {
-                          treeCounterId: suggestion.slug || suggestion.id,
-                          suggestion
-                        }
-                      );
-                    }, 0);
-
-                    console.log('click suggestions', suggestion);
+                    setTimeout(() => this.redirectToResult(suggestion), 0);
                   }}
                 >
                   <Image
                     style={styles.profileImage}
                     source={
                       suggestion.image
-                        ? getImageUrl('profile', 'avatar', suggestion.image)
+                        ? {
+                            uri: getImageUrl(
+                              suggestion.category,
+                              'avatar',
+                              suggestion.image
+                            )
+                          }
                         : profileTypeToImage[suggestion.type]
                     }
                   />
@@ -96,7 +125,7 @@ class SearchLayout extends React.Component {
                 </TouchableOpacity>
               );
             })}
-          </View>
+          </ScrollView>
         ) : null}
       </View>
     );

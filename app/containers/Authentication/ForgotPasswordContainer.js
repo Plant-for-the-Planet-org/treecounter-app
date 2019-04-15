@@ -6,29 +6,46 @@ import PropTypes from 'prop-types';
 import ForgotPassword from '../../components/Authentication/ForgotPassword';
 import { forgot_password } from '../../actions/authActions';
 import { updateRoute } from '../../helpers/routerHelper';
+import { schemaOptions } from '../../server/parsedSchemas/forgotpassword';
+import { handleServerResponseError } from '../../helpers/utils';
 
 class ForgotPasswordContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.onClick = this.onClick.bind(this);
+    this.state = { schemaOptions: schemaOptions };
   }
 
   onPress = () => {
     let value = this.refs.forgotPasswordContainer.refs.forgotPasswordForm.getValue();
     if (value) {
-      this.onClick(value);
+      this.props
+        .forgot_password(value, this.props.navigation)
+        .then(val => {})
+        .catch(err => {
+          let newSchemaOptions = handleServerResponseError(
+            err,
+            this.state.schemaOptions
+          );
+          this.setState(
+            {
+              schemaOptions: {
+                ...newSchemaOptions
+              }
+            },
+            () => {
+              this.refs.forgotPasswordContainer.refs.forgotPasswordForm.validate();
+            }
+          );
+        });
     }
   };
-
-  onClick(value) {
-    this.props.forgot_password(value);
-  }
 
   render() {
     return (
       <ForgotPassword
         ref="forgotPasswordContainer"
         onResetPassword={this.onPress}
+        schemaOptions={this.state.schemaOptions}
         updateRoute={(routeName, id) =>
           this.props.route(routeName, id, this.props.navigation)
         }
@@ -53,5 +70,5 @@ export default connect(null, mapDispatchToProps)(ForgotPasswordContainer);
 ForgotPasswordContainer.propTypes = {
   forgot_password: PropTypes.func,
   route: PropTypes.func,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.any
 };

@@ -24,7 +24,7 @@ class ArrowButton extends Component {
         className="arrow-button-rotatable"
         onClick={() => this.handleArrowButtonClick()}
       >
-        <img src={chevron_right} style={this.state.toggle ? arrowStyles : {}} />
+        <img src={chevron_right} />
       </button>
     );
   }

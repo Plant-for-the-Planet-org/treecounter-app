@@ -3,17 +3,17 @@ export default {
   type: 'object',
   properties: {
     treeCount: {
-      type: 'integer',
+      type: 'number',
       title: 'label.tree_count',
-      attr: {
-        pattern: '.{1,}'
-      },
-      pattern: '.{1,}',
+      icon: null,
+      help: null,
       propertyOrder: 1
     },
     amount: {
       type: 'number',
       title: 'label.amount',
+      icon: null,
+      help: null,
       propertyOrder: 2
     },
     currency: {
@@ -22,6 +22,8 @@ export default {
       attr: {
         maxlength: 3
       },
+      icon: null,
+      help: null,
       maxLength: 3,
       propertyOrder: 3
     },
@@ -29,15 +31,19 @@ export default {
       type: 'hidden',
       title: 'label.payment_method',
       widget: 'hidden',
+      icon: null,
+      help: null,
       propertyOrder: 4
     },
     recipientType: {
       type: 'string',
-      title: 'recipientType',
+      title: null,
+      icon: null,
+      help: null,
       propertyOrder: 5
     },
     receiptIndividual: {
-      title: 'receiptIndividual',
+      title: null,
       type: 'object',
       properties: {
         firstname: {
@@ -48,10 +54,11 @@ export default {
             pattern: '.{2,}'
           },
           pattern: '.{2,}',
+          icon: 'userAvtar',
+          help: null,
           maxLength: 50,
           minLength: 2,
-          propertyOrder: 1,
-          icon: 'userAvtar'
+          propertyOrder: 1
         },
         lastname: {
           type: 'string',
@@ -61,10 +68,11 @@ export default {
             pattern: '.{2,}'
           },
           pattern: '.{2,}',
+          icon: 'userAvtar',
+          help: null,
           maxLength: 50,
           minLength: 2,
-          propertyOrder: 2,
-          icon: 'userAvtar'
+          propertyOrder: 2
         },
         email: {
           type: 'string',
@@ -73,8 +81,9 @@ export default {
             maxlength: 50
           },
           widget: 'email',
-          maxLength: 50,
           icon: 'email',
+          help: null,
+          maxLength: 50,
           propertyOrder: 3
         },
         address: {
@@ -84,6 +93,7 @@ export default {
             maxlength: 255
           },
           icon: 'home',
+          help: null,
           maxLength: 255,
           propertyOrder: 4
         },
@@ -93,6 +103,8 @@ export default {
           attr: {
             maxlength: 15
           },
+          icon: null,
+          help: null,
           maxLength: 15,
           propertyOrder: 5
         },
@@ -102,6 +114,8 @@ export default {
           attr: {
             maxlength: 255
           },
+          icon: null,
+          help: null,
           maxLength: 255,
           propertyOrder: 6
         },
@@ -365,7 +379,7 @@ export default {
           ],
           enum_titles: [
             'Afghanistan',
-            '\u00c5land Islands',
+            'Åland Islands',
             'Albania',
             'Algeria',
             'American Samoa',
@@ -421,10 +435,10 @@ export default {
             'Congo - Kinshasa',
             'Cook Islands',
             'Costa Rica',
-            'C\u00f4te d\u2019Ivoire',
+            'Côte d’Ivoire',
             'Croatia',
             'Cuba',
-            'Cura\u00e7ao',
+            'Curaçao',
             'Cyprus',
             'Czechia',
             'Denmark',
@@ -547,13 +561,13 @@ export default {
             'Portugal',
             'Puerto Rico',
             'Qatar',
-            'R\u00e9union',
+            'Réunion',
             'Romania',
             'Russia',
             'Rwanda',
             'Samoa',
             'San Marino',
-            'S\u00e3o Tom\u00e9 & Pr\u00edncipe',
+            'São Tomé & Príncipe',
             'Saudi Arabia',
             'Senegal',
             'Serbia',
@@ -571,7 +585,7 @@ export default {
             'South Sudan',
             'Spain',
             'Sri Lanka',
-            'St. Barth\u00e9lemy',
+            'St. Barthélemy',
             'St. Helena',
             'St. Kitts & Nevis',
             'St. Lucia',
@@ -622,7 +636,8 @@ export default {
           ],
           type: 'string',
           title: 'label.country',
-          attr: { maxlength: 2 },
+          icon: null,
+          help: null,
           propertyOrder: 7
         }
       },
@@ -635,10 +650,12 @@ export default {
         'city',
         'country'
       ],
+      icon: null,
+      help: null,
       propertyOrder: 6
     },
     receiptCompany: {
-      title: 'receiptCompany',
+      title: null,
       type: 'object',
       properties: {
         companyname: {
@@ -647,6 +664,8 @@ export default {
           attr: {
             maxlength: 255
           },
+          icon: null,
+          help: null,
           maxLength: 255,
           propertyOrder: 1
         },
@@ -658,10 +677,11 @@ export default {
             pattern: '.{2,}'
           },
           pattern: '.{2,}',
+          icon: 'userAvtar',
+          help: null,
           maxLength: 50,
           minLength: 2,
-          propertyOrder: 2,
-          icon: 'userAvtar'
+          propertyOrder: 2
         },
         lastname: {
           type: 'string',
@@ -671,10 +691,11 @@ export default {
             pattern: '.{2,}'
           },
           pattern: '.{2,}',
+          icon: 'userAvtar',
+          help: null,
           maxLength: 50,
           minLength: 2,
-          propertyOrder: 3,
-          icon: 'userAvtar'
+          propertyOrder: 3
         },
         email: {
           type: 'string',
@@ -684,6 +705,7 @@ export default {
           },
           widget: 'email',
           icon: 'email',
+          help: null,
           maxLength: 50,
           propertyOrder: 4
         },
@@ -693,9 +715,10 @@ export default {
           attr: {
             maxlength: 255
           },
+          icon: 'home',
+          help: null,
           maxLength: 255,
-          propertyOrder: 5,
-          icon: 'home'
+          propertyOrder: 5
         },
         zipCode: {
           type: 'string',
@@ -703,6 +726,8 @@ export default {
           attr: {
             maxlength: 15
           },
+          icon: null,
+          help: null,
           maxLength: 15,
           propertyOrder: 6
         },
@@ -712,6 +737,8 @@ export default {
           attr: {
             maxlength: 255
           },
+          icon: null,
+          help: null,
           maxLength: 255,
           propertyOrder: 7
         },
@@ -1232,6 +1259,8 @@ export default {
           ],
           type: 'string',
           title: 'label.country',
+          icon: null,
+          help: null,
           propertyOrder: 8
         }
       },
@@ -1245,12 +1274,16 @@ export default {
         'city',
         'country'
       ],
+      icon: null,
+      help: null,
       propertyOrder: 7
     },
     communityTreecounter: {
       type: 'integer',
-      title: 'label.supported_treecount...',
+      title: 'label.supported_treecounter',
       widget: 'hidden',
+      icon: null,
+      help: null,
       propertyOrder: 8
     }
   },

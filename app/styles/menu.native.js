@@ -17,9 +17,16 @@ export default (menuStyles = EStyleSheet.create({
     width: '100%',
     marginTop: 10
   },
+  burgerMenuImageStyle: {
+    width: 35,
+    height: 35,
+    borderRadius: 0,
+    borderWidth: 0,
+    marginLeft: 10
+  },
   profileImageStyle: {
-    width: 50,
-    height: 50
+    width: 60,
+    height: 60
   },
   profileTextHeading: {
     fontSize: 13,
@@ -29,5 +36,11 @@ export default (menuStyles = EStyleSheet.create({
   profileText: {
     fontSize: 13,
     color: '$textColor'
+  },
+  centerMenu: {
+    marginTop: 22
+  },
+  sideNavigationActionMenuContainer: {
+    width: '100%'
   }
 }));

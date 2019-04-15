@@ -22,7 +22,7 @@ import pledge_highest from './images/pledge_biggest.png';
 import pledge_latest from './images/pledge_recent.png';
 import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
-import tree from './images/tree.svg';
+import tree from './images/darkTree.png';
 import SideMenuImage from './images/side_menu.png';
 import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
@@ -41,9 +41,12 @@ import QuestionMarkGreen from './images/icons/questionmark_green.png';
 import country from './images/icons/country.png';
 import organization from './images/icons/organization.png';
 import competition from './images/icons/competition.png';
+import competition_outline_red from './images/icons/competition.png';
+import competition_outline from './images/icons/competition_outline.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
 import arrow_right_orange from './images/icons/arrow_right_orange.png';
+import arrow_left_orange_outline from './images/icons/arrow_left_orange_outline.png';
 import arrow_left_orange from './images/icons/arrow_left_orange.png';
 import tick from './images/icons/tick.png';
 import locationIcon from './images/icons/location.png';
@@ -75,6 +78,9 @@ import leaderboards_company_green from './images/icons/leaderboards_company_gree
 import close_green from './images/icons/close_green.png';
 import esriLogo from './images/logo_esri.png';
 import bmzLogo from './images/logo_bmz.jpg';
+import shareIcon from './images/share-sign.png';
+import facebook from './images/facebook.png';
+import twitter from './images/twitter.png';
 import questionmark_orange from './images/icons/questionmark.png';
 import gift_icon from './images/icons/gift_icon.png';
 import iosSearchWhite from './images/icons/ios_icon_search_white.png';
@@ -95,8 +101,33 @@ import iosSearchGrey from './images/icons/search_grey.png';
 import iosLogout from './images/icons/ios_logout.png';
 import iosFaqs from './images/icons/ios_faqs.png';
 import iosInformation from './images/icons/ios_information.png';
+import redeemGreen from './images/icons/redeemGreen.png';
+import redeemRed from './images/icons/redeemRed.png';
+import redeemSignIn from './images/icons/redeem_signin.png';
+import redeem_outline from './images/icons/redeem_outline.png';
+import redeem_outline_red from './images/icons/redeem_outline_red.png';
+import lightTree from './images/lightTree.png';
+import AppStoreLogo from './images/appstore-logo.png';
+import targetPlanted from './images/target.png';
+import infoGrey from './images/icons/info_grey.png';
+import editGrey from './images/icons/edit_grey.png';
+import welcomeLogo from './images/icons/welcomeLogo.png';
+import world_outline from './images/world_outline.png';
+import world_outline_red from './images/world_outline_red.png';
+import selector_menu from './images/icons/selector_menu.png';
+import radio_button from './images/icons/radio_button.png';
+import radio_button_selected from './images/icons/radio_button_selected.png';
+import filter from './images/icons/filter.png';
+import welcomeScreen from './images/welcome-screen.png';
+import flagTarget from './images/flag_target.png';
+import compCalendar from './images/calendar_comp.png';
+import upwardArrow from './images/right-arrow.png';
+import downwardArrow from './images/left-arrow.png';
+import challengeIcon from './images/icons/flag.png';
+import webProgramming from './images/icons/web_programming.png';
 
 export {
+  AppStoreLogo,
   darkTree,
   svgBackground,
   bmzLogo,
@@ -148,6 +179,8 @@ export {
   country,
   organization,
   competition,
+  competition_outline,
+  competition_outline_red,
   education,
   company,
   arrow_left_orange,
@@ -193,5 +226,32 @@ export {
   iosSearchGrey,
   iosLogout,
   iosFaqs,
-  iosInformation
+  iosInformation,
+  redeemGreen,
+  redeemRed,
+  redeemSignIn,
+  redeem_outline,
+  redeem_outline_red,
+  lightTree,
+  targetPlanted,
+  infoGrey,
+  editGrey,
+  welcomeLogo,
+  world_outline,
+  world_outline_red,
+  selector_menu,
+  radio_button_selected,
+  radio_button,
+  filter,
+  shareIcon,
+  facebook,
+  twitter,
+  welcomeScreen,
+  flagTarget,
+  compCalendar,
+  upwardArrow,
+  downwardArrow,
+  arrow_left_orange_outline,
+  challengeIcon,
+  webProgramming
 };

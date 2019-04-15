@@ -26,9 +26,9 @@ export default class ForgotPassword extends Component {
             <Form
               ref={'forgotPasswordForm'}
               type={forgotPasswordFormSchema}
-              options={schemaOptions}
+              options={this.props.schemaOptions}
             />
-            <PrimaryButton onClick={this.onResetPassword}>
+            <PrimaryButton onClick={() => this.props.onResetPassword()}>
               {i18n.t('label.reset_password')}
             </PrimaryButton>
             <View style={styles.bottomRow}>

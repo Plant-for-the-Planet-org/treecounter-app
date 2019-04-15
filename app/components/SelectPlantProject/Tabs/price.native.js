@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, TouchableHighlight, Image, Text } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import styles from '../../../styles/selectplantproject/list';
 import CardLayout from '../../Common/Card';
 
 import Proptypes from 'prop-types';
 import ListViewProjects from './listview';
 import { foldout, foldin } from '../../../assets';
+import TouchableItem from '../../Common/TouchableItem.native';
 
 export default class PriceProjects extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export default class PriceProjects extends Component {
       priceSortedProjects: props.plantProjects
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     let { plantProjects, currencies } = this.props;
     currencies = currencies.currencies;
     let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
@@ -41,13 +42,13 @@ export default class PriceProjects extends Component {
     });
   };
 
-  sortProjects = sortType => {
+  sortProjects(sortType) {
     if (sortType === 'desc') {
       let { plantProjects, currencies } = this.props;
       currencies = currencies.currencies;
-      let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
+      let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
       if (currencies) {
-        priceSortedProjects = priceSortedProjects.sort(function(a, b) {
+        priceSortedProjectsNew = priceSortedProjectsNew.sort(function(a, b) {
           return (
             b.treeCost *
               parseFloat(currencies.currency_rates['EUR'].rates[b.currency]) -
@@ -57,14 +58,14 @@ export default class PriceProjects extends Component {
         });
       }
       this.setState({
-        priceSortedProjects: priceSortedProjects
+        priceSortedProjects: priceSortedProjectsNew
       });
     } else {
       let { plantProjects, currencies } = this.props;
       currencies = currencies.currencies;
-      let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
+      let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
       if (currencies) {
-        priceSortedProjects = priceSortedProjects.sort(function(a, b) {
+        priceSortedProjectsNew = priceSortedProjectsNew.sort(function(a, b) {
           return (
             a.treeCost *
               parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
@@ -74,38 +75,43 @@ export default class PriceProjects extends Component {
         });
       }
       this.setState({
-        priceSortedProjects: priceSortedProjects
+        priceSortedProjects: priceSortedProjectsNew
       });
     }
-  };
+  }
 
   render() {
     let { priceSortedProjects } = this.state;
     return (
-      <CardLayout style={styles.cardStyle}>
+      <View style={styles.flexContainer}>
         <View style={styles.cardHeader}>
           <Text style={styles.headingStyle}>Cost Per Tree</Text>
           <View style={styles.sortContainer}>
-            <TouchableHighlight
+            <TouchableItem
               style={styles.imageStyleContainer}
-              onPress={() => this.sortProjects('desc')}
+              hitSlop={{ left: 50, right: 150 }}
+              onPress={this.sortProjects.bind(this, 'desc')}
             >
               <Image style={styles.imageStyle} source={foldin} />
-            </TouchableHighlight>
-            <TouchableHighlight
+            </TouchableItem>
+            <TouchableItem
               style={styles.imageStyleContainer}
-              onPress={() => this.sortProjects('asc')}
+              hitSlop={{ left: 50, right: 150 }}
+              onPress={this.sortProjects.bind(this, 'asc')}
             >
               <Image style={styles.imageStyle} source={foldout} />
-            </TouchableHighlight>
+            </TouchableItem>
           </View>
         </View>
 
-        <ListViewProjects
-          projects={priceSortedProjects}
-          selectProject={projectId => this.props.selectProject(projectId)}
-        />
-      </CardLayout>
+        <View style={styles.listViewContainer}>
+          <ListViewProjects
+            projects={priceSortedProjects}
+            selectProject={projectId => this.props.selectProject(projectId)}
+            onMoreClick={projectId => this.props.onMoreClick(projectId)}
+          />
+        </View>
+      </View>
     );
   }
 }
@@ -113,5 +119,6 @@ export default class PriceProjects extends Component {
 PriceProjects.propTypes = {
   plantProjects: Proptypes.array.isRequired,
   selectProject: Proptypes.func.isRequired,
-  currencies: Proptypes.array.isRequired
+  currencies: Proptypes.object.isRequired,
+  onMoreClick: Proptypes.func.isRequired
 };

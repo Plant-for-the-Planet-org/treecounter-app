@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Text, View, Image, ScrollView, Keyboard } from 'react-native';
+import scrollStyle from '../../../styles/common/scrollStyle';
+import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 
 import {
   loginFormSchema,
@@ -11,12 +13,19 @@ import {
 import i18n from '../../../locales/i18n.js';
 
 import styles from '../../../styles/login';
-import CardLayout from '../../Common/Card';
+
 import PrimaryButton from '../../Common/Button/PrimaryButton';
+import { SideMenuImage } from '../../../assets';
+import TouchableItem from '../../Common/TouchableItem.native';
 
 let Form = t.form.Form;
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this._recaptchaToken = undefined;
+  }
+
   onForgotPasswordClicked = () => {
     this.props.updateRoute('app_forgotPassword');
   };
@@ -25,42 +34,75 @@ export default class Login extends Component {
     this.props.updateRoute('app_signup');
   };
 
+  verifyCallback = token => {
+    // Here you will get the final token!!!
+    this._recaptchaToken = token;
+  };
+
+  handleLoginClick = () => {
+    if (this.refs.loginForm.getValue()) {
+      Keyboard.dismiss();
+    }
+    this.props.onPress(this._recaptchaToken);
+  };
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
-        <View style={styles.container}>
-          <CardLayout style={styles.inputContainer}>
-            <Form
-              ref={'loginForm'}
-              type={loginFormSchema}
-              options={schemaOptions}
+      <ScrollView
+        contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
+        keyboardShouldPersistTaps={'handled'}
+      >
+        <ReCaptchaV3
+          captchaDomain={'https://www.plant-for-the-planet.org'}
+          siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
+          onReceiveToken={token => this.verifyCallback(token)}
+        />
+        <View style={styles.parentContainer}>
+          <View style={styles.headerContainer}>
+            <Image
+              style={styles.imageStyle}
+              resizeMode={'contain'}
+              source={SideMenuImage}
             />
-            <PrimaryButton onClick={this.props.onPress}>
-              {i18n.t('label.login')}
-            </PrimaryButton>
-            <View style={styles.bottomRow}>
-              <Text style={styles.bottomText}>
-                {i18n.t('label.forgot_ur_password')}
-              </Text>
-              <Text
-                onPress={this.onForgotPasswordClicked}
-                style={styles.bottomTextHighlight}
-              >
-                {i18n.t('label.reset')}
-              </Text>
+            <Text style={styles.loginDescriptionStyle}>
+              {i18n.t('label.login_description')}
+            </Text>
+          </View>
+
+          <View style={styles.container}>
+            <View style={styles.inputContainer}>
+              <Form
+                ref={'loginForm'}
+                type={loginFormSchema}
+                options={this.props.schemaOptions}
+                value={this.props.formValue}
+              />
             </View>
             <View style={styles.bottomRow}>
-              <Text style={styles.bottomText}>
-                {i18n.t('label.dont_have_account')}
-              </Text>
-              <Text
+              <TouchableItem onPress={this.onForgotPasswordClicked}>
+                <Text style={styles.bottomTextHighlight}>
+                  {i18n.t('label.forgot_ur_password')}
+                </Text>
+              </TouchableItem>
+            </View>
+            <View style={styles.bottomRow}>
+              <TouchableItem
+                style={{ paddingRight: 5 }}
                 onPress={this.onSignupClicked}
-                style={styles.bottomTextHighlight}
               >
-                {i18n.t('label.signUp')}.
-              </Text>
+                <Text style={styles.bottomTextHighlight}>
+                  {i18n.t('label.dont_have_account')} {i18n.t('label.signUp')}
+                </Text>
+              </TouchableItem>
+
+              <PrimaryButton
+                onClick={this.handleLoginClick}
+                buttonStyle={styles.loginButtonStyle}
+                textStyle={{ fontSize: 16 }}
+              >
+                {i18n.t('label.login')}
+              </PrimaryButton>
             </View>
-          </CardLayout>
+          </View>
         </View>
       </ScrollView>
     );
@@ -70,5 +112,7 @@ export default class Login extends Component {
 Login.propTypes = {
   onPress: PropTypes.func.isRequired,
   onError: PropTypes.func,
-  updateRoute: PropTypes.func
+  updateRoute: PropTypes.func,
+  formValue: PropTypes.any,
+  schemaOptions: PropTypes.any
 };

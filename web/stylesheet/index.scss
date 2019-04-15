@@ -23,7 +23,7 @@
 @import "./common/_user_profile_image.scss";
 @import "./common/_modal_dialog.scss";
 @import "./common/_slick_carousal.scss";
-
+@import "./common/error";
 // Import components SCSS
 @import "./_normalize.scss";
 @import "./_custom_popover.scss";
@@ -39,6 +39,8 @@
 @import "./_header.scss";
 @import "./pledge.scss";
 @import "./map/_map.scss";
+@import "./redemption/_redemption.scss";
+@import "./widgetShare/widget_share";
 
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
@@ -64,6 +66,9 @@
 
 //import donate trees
 @import "./donateTrees/_donate_trees.scss";
+
+@import "./challenge.scss";
+@import "./manageProjects/manage_project";
 
 /* ESRI Maps CSS*/
 @import url("https://js.arcgis.com/4.7/esri/css/main.css");

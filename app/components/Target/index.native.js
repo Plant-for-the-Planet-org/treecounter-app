@@ -15,6 +15,9 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 let Form = t.form.Form;
 
 export default class Target extends Component {
+  shouldComponentUpdate(nextProps) {
+    return JSON.stringify(nextProps) !== JSON.stringify(this.props);
+  }
   render() {
     return (
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
@@ -24,6 +27,7 @@ export default class Target extends Component {
               ref={'setTargetForm'}
               type={targetFormSchema}
               options={schemaOptions}
+              value={this.props.treecounter}
             />
             <PrimaryButton onClick={this.props.onSubmitTarget}>
               {i18n.t('label.set_target')}
@@ -39,9 +43,3 @@ Target.propTypes = {
   treecounter: PropTypes.object.isRequired,
   onSubmitTarget: PropTypes.func.isRequired
 };
-
-// export const styles = StyleSheet.create({
-//   ...loginStyles,
-//   titleText: { ...loginStyles.titleText, width: 129 },
-//   titleTextUnderline: { ...loginStyles.titleTextUnderline, width: 119 }
-// });

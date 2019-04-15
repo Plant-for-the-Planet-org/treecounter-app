@@ -1,8 +1,9 @@
 import React from 'react';
 import i18n from '../../locales/i18n';
 import { formatDate } from '../../helpers/utils';
-
+import { getLocale } from '../../actions/getLocale';
 export function TextInputTemplate(locals) {
+  const locale = getLocale();
   function onChange($event) {
     let value =
       locals.type === 'number' && $event.target.value
@@ -16,24 +17,27 @@ export function TextInputTemplate(locals) {
     return today;
   }
   let error = locals.hasError;
+  let className;
+
+  if (!error) {
+    className = 'pftp-textfield__inputgroup';
+  } else {
+    className = 'pftp-textfield__error-inputgroup';
+  }
+  const isDate = locals.type === 'date';
   return locals.type !== 'hidden' ? (
     <div className="pftp-textfield-container">
       <div className="pftp-textfield">
         {locals.config.iconUrl ? (
           <img className="pftp-textfield__icon" src={locals.config.iconUrl} />
         ) : null}
-        <div
-          className={
-            !error
-              ? 'pftp-textfield__inputgroup'
-              : 'pftp-textfield__error-inputgroup'
-          }
-        >
-          {locals.type === 'date' ? (
+        <div className={className}>
+          {isDate ? (
             <input
+              date-format="dd/mm/yyyy"
+              lang={locale}
               type={locals.type}
               autoComplete="new-password"
-              required="required"
               max={todayDate()}
               value={locals.value}
               onChange={onChange}
@@ -42,11 +46,11 @@ export function TextInputTemplate(locals) {
             <input
               type={locals.type}
               autoComplete="new-password"
-              required="required"
               value={locals.value}
               onChange={onChange}
             />
           )}
+
           <span
             className={
               !error
@@ -61,7 +65,9 @@ export function TextInputTemplate(locals) {
                 : 'pftp-textfield__inputgroup--error-bar'
             }
           />
-          <label>{i18n.t(locals.label)}</label>
+          <label className={locals.value || isDate ? 'float-label' : ''}>
+            {i18n.t(locals.label)}
+          </label>
         </div>
       </div>
       {error && locals.error ? locals.error : null}

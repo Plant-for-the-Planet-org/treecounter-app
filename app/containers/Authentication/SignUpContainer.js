@@ -6,22 +6,49 @@ import PropTypes from 'prop-types';
 import { updateRoute } from '../../helpers/routerHelper';
 import { SignUp } from '../../components/Authentication';
 import { signUp } from '../../actions/signupActions';
+import { schemaOptions } from '../../server/parsedSchemas/signup';
+import _ from 'lodash';
+import { handleServerResponseError } from '../../helpers/utils';
 
 class SignUpContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.onClick = this.onClick.bind(this);
+    this.state = { formValue: {}, schemaOptions };
   }
 
-  onClick(profileType, value) {
-    this.props.signUp(profileType, value);
+  componentWillUnmount() {
+    if (!this.props.navigation) {
+      let gBatch = document.getElementsByClassName('grecaptcha-badge');
+      gBatch[0].style.visibility = 'hidden';
+    }
   }
 
-  onSignUpClicked = profileType => {
+  onSignUpClicked = (profileType, token) => {
     console.log(this.refs.signupContainer.refs.signupForm.validate());
-    let value = this.refs.signupContainer.refs.signupForm.getValue();
-    if (value) {
-      this.onClick(profileType, value);
+    let formValue = this.refs.signupContainer.refs.signupForm.getValue();
+    if (formValue) {
+      this.props
+        .signUp(profileType, formValue, token, this.props.navigation)
+        .then(success => {})
+        .catch(err => {
+          console.log('err signup data', err);
+          let newSchemaOptions = handleServerResponseError(
+            err,
+            this.state.schemaOptions[profileType]
+          );
+          this.setState(
+            {
+              schemaOptions: {
+                ...this.state.schemaOptions,
+                [profileType]: newSchemaOptions
+              }
+            },
+            () => {
+              this.refs.signupContainer.refs.signupForm.validate();
+            }
+          );
+        });
+      this.setState({ formValue: formValue });
     }
   };
 
@@ -30,9 +57,12 @@ class SignUpContainer extends React.Component {
       <SignUp
         ref="signupContainer"
         onSignUpClicked={this.onSignUpClicked}
+        formValue={this.state.formValue}
         updateRoute={(routeName, id) =>
           this.props.route(routeName, id, this.props.navigation)
         }
+        {...this.props}
+        schemaOptions={this.state.schemaOptions}
       />
     );
   }
@@ -54,5 +84,5 @@ export default connect(null, mapDispatchToProps)(SignUpContainer);
 SignUpContainer.propTypes = {
   signUp: PropTypes.func,
   route: PropTypes.func,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.any
 };

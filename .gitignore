@@ -39,7 +39,6 @@ yarn-error.log
 # BUCK
 buck-out/
 \.buckd/
-*.keystore
 
 # fastlane
 #
@@ -57,4 +56,5 @@ buck-out/
 
 #app build
 web/prod
+web/server
 app/config/index.js

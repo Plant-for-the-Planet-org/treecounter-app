@@ -1,4 +1,8 @@
-import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
+import {
+  createBottomTabNavigator,
+  createDrawerNavigator,
+  createStackNavigator
+} from 'react-navigation';
 import React from 'react';
 import { Animated } from 'react-native';
 import Trillion from '../TreecounterGraphics/Trillion';
@@ -9,115 +13,130 @@ import TargetContainer from '../../containers/TargetContainer';
 import DonationTreesContainer from '../../containers/DonateTrees';
 
 import { getLocalRoute } from '../../actions/apiRouting';
-import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import styles from '../../styles/header.native';
 import BurgerMenu from '../Header/BurgerMenu';
 import HeaderRight from '../Header/HeaderFields';
 
 import i18n from '../../locales/i18n';
-import DonateTrees from '../../containers/DonateTrees';
 import FAQContainer from '../../containers/FAQ';
-import RegisterTrees from '../../containers/RegisterTrees';
 import UserContributions from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
-import SearchLayout from '../Header/SearchLayout.native';
-import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
-import EditUserContributionContainer from '../../containers/EditUserContribution';
+import SearchLayout from '../Header/SearchLayout';
 import AboutUsContainer from '../../containers/AboutUs';
-import LicenseInfoList from '../AboutUs/LicenseInfoList.native';
+import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
+import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
+import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal';
+import LicenseInfoList from '../AboutUs/LicenseInfoList';
+import BottomTabContainer from '../../containers/Menu/TabContainer';
+import GiftTrees from '../../containers/GiftTrees';
+import LeaderBoard from '../Leaderboard';
+import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
+import RegisterTrees from '../../containers/RegisterTrees';
+import EditUserContributionContainer from '../../containers/EditUserContribution';
+import EditUserProfile from '../../containers/EditUserProfile';
+import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
+import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
+import SelectedPlantProject from '../../containers/SelectedPlantProject';
+import SelectedCompetition from '../../containers/SelectedCompetition';
+import RedemptionContainer from '../../containers/RedemptionContainer';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
+import ImprintContainer from '../../containers/Imprint';
+import PrivacyContainer from '../../containers/Privacy';
+import CompetitionContainer from '../../containers/CompetitionContainer';
+import ChallengeContainer from '../../containers/Challenge/createChallenge';
 
-const homeRoutes = [
-  getLocalRoute('app_homepage'),
-  getLocalRoute('app_userHome'),
-  getLocalRoute('app_treecounter')
-];
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_target')]: 'label.set_target',
-  [getLocalRoute('app_donateTrees')]: 'label.donate_trees',
-  [getLocalRoute('app_faq')]: 'label.faqs',
+  [getLocalRoute('app_donateTrees')]: 'label.donate',
+
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
+  [getLocalRoute('app_homepage')]: 'World',
+  [getLocalRoute('app_explore')]: 'label.explore',
+  [getLocalRoute('app_userHome')]: 'Trillion Tree Campaign',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
+  [getLocalRoute('app_editProfile')]: 'label.edit_profile',
+  [getLocalRoute('app_redeem')]: 'label.redeem_trees',
+  [getLocalRoute('app_competitions')]: 'label.competitions',
+  [getLocalRoute('app_claim')]: 'label.claim_trees',
+  [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
+  [getLocalRoute('app_selectProject')]: 'label.donate',
+  [getLocalRoute('app_competition')]: 'label.competitions',
+  [getLocalRoute('app_imprint')]: 'label.imprint',
+  [getLocalRoute('app_privacy')]: 'label.data_protection',
   ['about_us']: 'label.about_us',
-  ['license_info_list']: 'label.open_source_license'
+  ['tab-navigation']: 'Tab Navigation',
+  ['license_info_list']: 'label.open_source_license',
+  ['delete_profile_confirm']: 'label.delete_profile',
+  ['delete_contribution']: 'label.delete_contribution',
+  ['app_donate_detail']: 'label.donate',
+  ['app_gift_projects']: 'label.gift_trees'
 };
 
-export const getDrawerNavigator = function(isLoggedIn) {
+export const getAppNavigator = function(isLoggedIn, userProfile) {
   const baseNavigator = createStackNavigator(
     {
+      [getLocalRoute('app_editProfile')]: {
+        screen: isLoggedIn ? EditUserProfile : LoginContainer
+      },
+      [getLocalRoute('app_userHome')]: {
+        screen: isLoggedIn ? UserHomeContainer : Trillion
+      },
       [getLocalRoute('app_login')]: {
         screen: LoginContainer
       },
-      [getLocalRoute('app_target')]: {
-        screen: isLoggedIn ? TargetContainer : LoginContainer
+      [getLocalRoute('app_passwordSent')]: {
+        screen: EmailSentContainer
       },
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
       },
-      [getLocalRoute('app_donateTrees')]: {
-        screen: DonateTrees
-      },
-      [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer
-      },
-      [getLocalRoute('app_registerTrees')]: {
-        screen: isLoggedIn ? RegisterTrees : LoginContainer
+      [getLocalRoute('app_myTrees')]: {
+        screen: UserContributions
       },
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
       },
-      [getLocalRoute('app_myTrees')]: {
-        screen: isLoggedIn ? UserContributions : LoginContainer
+      [getLocalRoute('app_accountActivation')]: {
+        screen: ActivateAccountContainer
       },
-      [getLocalRoute('app_donateTrees')]: {
-        screen: DonationTreesContainer
-      },
-      [getLocalRoute('app_homepage')]: { screen: Trillion },
       [getLocalRoute('app_faq')]: FAQContainer,
-      [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
-      [getLocalRoute('app_treecounter')]: PublicTreecounterContainer,
-      ['about_us']: { screen: AboutUsContainer },
-      ['license_info_list']: { screen: LicenseInfoList }
+      [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
 
-      // Search: {
-      //   screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />,
-      //   navigationOptions: {
-      //     drawerLockMode: 'locked-closed',
-      //     header: null
-      //   }
-      // }
+      ['about_us']: { screen: AboutUsContainer },
+
+      ['license_info_list']: { screen: LicenseInfoList },
+
+      [getLocalRoute('app_imprint')]: {
+        screen: ImprintContainer
+      },
+      [getLocalRoute('app_privacy')]: {
+        screen: PrivacyContainer
+      },
+      [getLocalRoute('app_redeem')]: {
+        screen: RedemptionContainer
+      },
+      [getLocalRoute('app_claim')]: {
+        screen: RedemptionContainer
+      },
+      [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
+      [getLocalRoute('app_target')]: {
+        screen: isLoggedIn ? TargetContainer : LoginContainer
+      },
+      [getLocalRoute('app_challenge')]: ChallengeContainer,
+      ['app_gift_projects']: {
+        screen: SelectPlantProjectContainer
+      }
     },
     {
-      initialRouteName: isLoggedIn
-        ? getLocalRoute('app_userHome')
-        : getLocalRoute('app_homepage'),
+      headerMode: 'none',
       navigationOptions: ({ navigation }) => {
-        console.log('navigation options', navigation);
-        let title = navigation.getParam('titleParam');
-        let navigationConfig = {
-          headerStyle: styles.container,
-          headerTintColor: '#fff',
-          headerBackTitle: null,
-          title:
-            title != undefined
-              ? title
-              : i18n.t(headerLabels[navigation.state.routeName])
-        };
-        if (homeRoutes.includes(navigation.state.routeName)) {
-          navigationConfig.headerRight = HeaderRight(navigation);
-        }
-        if (
-          navigation.state.routeName === getLocalRoute('app_userHome') ||
-          (navigation.state.routeName === getLocalRoute('app_homepage') &&
-            !isLoggedIn)
-        ) {
-          navigationConfig.headerLeft = BurgerMenu(navigation);
-        }
-        return navigationConfig;
+        header: null;
       }
     }
   );
@@ -140,16 +159,171 @@ export const getDrawerNavigator = function(isLoggedIn) {
       }
     }
   );
-  const AppDrawerNavigator = createDrawerNavigator(
+  const deleteProfileNavigator = createStackNavigator(
     {
-      baseNavigator,
-      searchNavigator: searchNavigator
+      ['delete_profile_confirm']: { screen: ConfirmProfileDeletionModal }
     },
     {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
+  const deleteContributionNavigator = createStackNavigator(
+    {
+      ['delete_contribution']: {
+        screen: ConfirmContributionDeletionModal
+      }
+    },
+    {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
+  const welcomeScreenNavigator = createStackNavigator(
+    {
+      ['welcome_screen']: { screen: WelcomeScreenModal }
+    },
+    {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
+  const getTitle = function(navigation) {
+    let title = navigation.getParam('titleParam');
+    try {
+      if (!title) {
+        title = i18n.t(headerLabels[navigation.state.routeName]);
+      }
+      if (!title) {
+        const index = navigation.state.index;
+        if (
+          index > -1 &&
+          navigation.state.routes &&
+          navigation.state.routes.length > 0
+        ) {
+          title = i18n.t(
+            headerLabels[navigation.state.routes[index].routeName]
+          );
+          if (navigation.state.routes[index].hasOwnProperty('params')) {
+            const childTitle = navigation.state.routes[index].params.titleParam;
+
+            if (childTitle) {
+              title = childTitle;
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
+    return title;
+  };
+  const ApptabNavigator = createBottomTabNavigator(
+    {
+      [getLocalRoute('app_homepage')]: {
+        screen: Trillion
+      },
+      [getLocalRoute('app_userHome')]: {
+        screen: isLoggedIn ? UserHomeContainer : LoginContainer
+      },
+      [getLocalRoute('app_registerTrees')]: {
+        screen: isLoggedIn ? RegisterTrees : LoginContainer
+      },
+      [getLocalRoute('app_competitions')]: {
+        screen: isLoggedIn ? CompetitionContainer : LoginContainer
+      },
+      [getLocalRoute('app_donateTrees')]: {
+        screen: SelectPlantProjectContainer
+      },
+
+      [getLocalRoute('app_giftTrees')]: {
+        screen: GiftTrees
+      }
+    },
+    {
+      tabBarOptions: {
+        tabBarPosition: 'bottom',
+
+        animatedEnable: true,
+        swipeEnable: false
+      },
+      tabBarComponent: BottomTabContainer
+    }
+  );
+
+  const appStackNavigator = createStackNavigator(
+    {
+      Tab: ApptabNavigator,
+      Base: baseNavigator,
+      [getLocalRoute('app_selectProject')]: {
+        screen: SelectedPlantProject
+      },
+      [getLocalRoute('app_competition')]: {
+        screen: SelectedCompetition
+      },
+      ['app_donate_detail']: {
+        screen: DonationTreesContainer
+      }
+    },
+    {
+      navigationOptions: ({ navigation }) => {
+        let navigationConfig = {
+          headerStyle: styles.container,
+          headerTitleStyle: { paddingRight: 12 },
+          headerTintColor: '#fff',
+          headerBackTitle: null,
+          title: getTitle(navigation),
+          headerRight: (
+            <HeaderRight navigation={navigation} userProfile={userProfile} />
+          )
+        };
+
+        if (navigation.state.routeName === 'Tab') {
+          navigationConfig.headerLeft = <BurgerMenu navigation={navigation} />;
+        }
+        return navigationConfig;
+      }
+    }
+  );
+
+  const AppNavigator = createDrawerNavigator(
+    {
+      appStackNavigator,
+      searchNavigator: searchNavigator,
+      deleteProfileNavigator,
+      deleteContributionNavigator,
+      welcomeScreenNavigator
+    },
+    {
+      initialRouteName: 'appStackNavigator',
       gesturesEnabled: false,
       contentComponent: SideMenuContainer
     }
   );
-
-  return AppDrawerNavigator;
+  return AppNavigator;
 };

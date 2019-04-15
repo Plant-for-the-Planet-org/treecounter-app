@@ -16,5 +16,15 @@ export default (datePickerStyle = EStyleSheet.create({
     color: '$textColor',
     fontSize: 17,
     paddingBottom: 1
+  },
+  addIcon: {
+    position: 'absolute',
+    height: 15,
+    left: 50,
+    top: 50,
+    width: 15,
+    backgroundColor: '#fff',
+    borderRadius: 7,
+    transform: [{ rotate: '45deg' }]
   }
 }));

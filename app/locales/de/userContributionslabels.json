@@ -2,10 +2,21 @@
   "tree": " Baum",
   "pictures": "Bilder",
   "planting_day": "Tag der Pflanzung ",
-  "see_less": "- Weniger sehen",
+  "see_less": "- Weniger anzeigen",
   "see_more": "Mehr anzeigen",
   "update": " Aktualisieren",
   "my_trees": "Meine Bäume",
   "donate_trees": "Spende Bäume",
-  "no_contributions": "Bäume, die du registrierst oder spendest, erscheinen hier."
+  "donate": "Spenden",
+  "no_contributions": "Bäume, die du registrierst oder spendest, erscheinen hier.",
+  "singleTree": "Einzelner Baum",
+  "severalTrees": "Mehrere Bäume",
+  "donatedTrees": "Gespendete Bäume",
+  "synopsis1": "Beschreibung",
+  "synopsis2": "Weitere Informationen",
+  "url": "Link zu deinem Profil / deiner Website",
+  "linkText": "Text für deinen Link",
+  "select_file": "Wähle eine Datei von deinem Computer aus",
+  "browse": "Entdecken",
+  "upload_profile_picture": "Neues Profilbild hochladen"
 }

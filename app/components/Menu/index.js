@@ -133,7 +133,7 @@ export default class Menu extends Component {
             </ul>
           </div>
         ))}
-        {this.renderShareButtons()}
+        {this.props.userProfile ? this.renderShareButtons() : null}
       </div>
     );
   }

@@ -21,7 +21,11 @@ export default class FAQ extends Component {
     return (
       <View style={styles.header}>
         <Text style={styles.headerText}>{section.question}</Text>
-        <Image style={styles.imageStyle} source={isActive ? foldin : foldout} />
+        <Image
+          style={styles.imageStyle}
+          resizeMode="contain"
+          source={isActive ? foldin : foldout}
+        />
       </View>
     );
   }

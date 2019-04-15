@@ -59,22 +59,39 @@ class MapLayerView extends React.Component {
       })
       .catch(error => console.error(error));
   }
+  toggleMap() {
+    this.setState({ fullMapView: !this.state.fullMapView });
+  }
 
   render() {
     return (
-      <WebMap
-        loaderOptions={{
-          dojoConfig: {
-            has: {
-              'esri-promise-compatibility': 1,
-              'esri-featurelayer-webgl': 1
-            }
-          }
-        }}
-        id={this.props.webMapId}
-        onLoad={this.handleLoad.bind(this)}
-        onFail={this.handleFail.bind(this)}
-      />
+      <div
+        className={
+          'webmap-container' + (this.state.fullMapView ? ' map-fullView' : '')
+        }
+      >
+        <div className="webmap-content">
+          <WebMap
+            loaderOptions={{
+              dojoConfig: {
+                has: {
+                  'esri-promise-compatibility': 1,
+                  'esri-featurelayer-webgl': 1
+                }
+              }
+            }}
+            id={this.props.webMapId}
+            onLoad={this.handleLoad.bind(this)}
+            onFail={this.handleFail.bind(this)}
+          />
+          <button
+            className="button-container"
+            onClick={this.toggleMap.bind(this)}
+          >
+            {this.state.fullMapView ? 'collapse' : 'expand'}
+          </button>
+        </div>
+      </div>
     );
   }
 

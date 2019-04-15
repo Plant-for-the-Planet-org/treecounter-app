@@ -45,6 +45,7 @@ class ConfirmProfileDeletionModal extends Component {
               returnKeyType={'next'}
               autoCapitalize={true}
               allowFontScaling={true}
+              autoCapitalize={'sentences'}
             />
             <Text style={[styles.textPara, { marginTop: 15 }]}>
               {i18n.t('label.deletion_prerequisite')}

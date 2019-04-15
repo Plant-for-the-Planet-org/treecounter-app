@@ -31,7 +31,7 @@ const PlantedDetails = ({ personal, community, type, onToggle }) => (
           )}
         </div>
         <div>
-          <strong>{personal.toFixed().toLocaleString('en')}</strong>
+          <strong>{personal.toLocaleString('en')}</strong>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@ const PlantedDetails = ({ personal, community, type, onToggle }) => (
           </div>
         </div>
         <div>
-          <strong>{community.toFixed().toLocaleString('en') + ' '}</strong>
+          <strong>{community.toLocaleString('en') + ' '}</strong>
         </div>
       </div>
     </div>
@@ -77,8 +77,8 @@ const PlantedDetails = ({ personal, community, type, onToggle }) => (
 export default PlantedDetails;
 
 PlantedDetails.propTypes = {
-  personal: PropTypes.number.isRequired,
-  community: PropTypes.number.isRequired,
+  personal: PropTypes.string.isRequired,
+  community: PropTypes.string.isRequired,
   type: PropTypes.string,
   onToggle: PropTypes.func
 };

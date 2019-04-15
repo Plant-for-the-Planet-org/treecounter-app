@@ -7,7 +7,6 @@ export default (sloginStyles = EStyleSheet.create({
   imageStyle: {
     width: 50,
     height: 50,
-    resizeMode: 'center',
     alignItems: 'center'
   },
   container: {

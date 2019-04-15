@@ -11,20 +11,14 @@ import { LargeMenuItem } from './MenuItem.native';
 import PropTypes, { func } from 'prop-types';
 import styles from '../../styles/menu.native';
 import { updateRoute } from '../../helpers/routerHelper';
-import {
-  iosLogout,
-  iosFaqs,
-  ProfilePic,
-  infoGrey,
-  editGrey,
-  redeem_outline,
-  target_outline
-} from '../../assets';
+import * as icons from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import { fetchItem, saveItem } from '../../stores/localStorage';
 import UserProfileImage from '../Common/UserProfileImage.native';
+
+//   icons.target_outline;
 
 export default class Menu extends Component {
   static propTypes = {
@@ -77,6 +71,24 @@ export default class Menu extends Component {
     // this handles the use case where the app is running in the background and is activated by the listener...
     // Alert.alert(‘Linking Listener’,‘url  ’ + event.url)
     this.resetStackToProperRoute(event.url);
+    if (event.url.indexOf('signup') > 0) {
+      this.handleOpenURL(event.url);
+    }
+  };
+
+  handleOpenURL = url => {
+    let linkArr = url.split('/');
+    if (linkArr && linkArr.length > 0) {
+      if (linkArr[1] === 'signup') {
+        if (linkArr.length > 2) {
+          this.props.navigation.navigate(getLocalRoute('app_signup'), {
+            profileTypeParam: linkArr[2]
+          });
+        } else {
+          this.props.navigation.navigate(getLocalRoute('app_signup'));
+        }
+      }
+    }
   };
 
   resetStackToProperRoute = url => {
@@ -123,17 +135,17 @@ export default class Menu extends Component {
           </TouchableItem>
         ) : (
           <View style={styles.profileContainer}>
-            <Image style={styles.profileImageStyle} source={ProfilePic} />
+            <Image style={styles.profileImageStyle} source={icons.ProfilePic} />
             <Text style={styles.profileTextHeading}>{'Guest'}</Text>
             <LargeMenuItem
               style={{ paddingLeft: 0 }}
               onPress={this.onPressMenu.bind(this, { uri: 'app_login' })}
               title={i18n.t('label.login')}
-              iconUrl={iosLogout}
+              iconUrl={icons.iosLogout}
             />
           </View>
         )}
-        <ScrollView>
+        <ScrollView style={styles.sideNavigationActionMenuContainer}>
           <View style={styles.centerMenu}>
             {this.props.userProfile ? (
               <LargeMenuItem
@@ -141,7 +153,7 @@ export default class Menu extends Component {
                   uri: 'app_editProfile'
                 })}
                 title={i18n.t('label.edit_profile')}
-                iconUrl={editGrey}
+                iconUrl={icons.editGrey}
               />
             ) : null}
             {this.props.userProfile ? (
@@ -150,7 +162,7 @@ export default class Menu extends Component {
                   uri: 'app_target'
                 })}
                 title={i18n.t('label.set_target')}
-                iconUrl={target_outline}
+                iconUrl={icons.target_outline}
               />
             ) : null}
 
@@ -160,31 +172,41 @@ export default class Menu extends Component {
                 params: { code: null }
               })}
               title={i18n.t('label.redeem_trees')}
-              iconUrl={redeem_outline}
+              iconUrl={icons.redeem_outline}
             />
+            {this.props.userProfile ? (
+              <LargeMenuItem
+                onPress={this.onPressMenu.bind(this, {
+                  uri: 'app_challenge'
+                })}
+                title={i18n.t('label.challenge_heading')}
+                iconUrl={icons.challengeIcon}
+              />
+            ) : null}
             <LargeMenuItem
               onPress={this.onPressMenu.bind(this, {
                 uri: getLocalRoute('app_faq')
               })}
               title={i18n.t('label.faqs')}
-              iconUrl={iosFaqs}
+              iconUrl={icons.iosFaqs}
             />
           </View>
         </ScrollView>
-        {this.props.userProfile ? (
-          <View>
+
+        <View style={styles.sideNavigationActionMenuContainer}>
+          {this.props.userProfile ? (
             <LargeMenuItem
               onPress={this.props.logoutUser}
               title={i18n.t('label.logout')}
-              iconUrl={iosLogout}
+              iconUrl={icons.iosLogout}
             />
-          </View>
-        ) : null}
-        <LargeMenuItem
-          onPress={this.onPressMenu.bind(this, { uri: 'about_us' })}
-          title={i18n.t('label.information')}
-          iconUrl={infoGrey}
-        />
+          ) : null}
+          <LargeMenuItem
+            onPress={this.onPressMenu.bind(this, { uri: 'about_us' })}
+            title={i18n.t('label.information')}
+            iconUrl={icons.infoGrey}
+          />
+        </View>
       </SafeAreaView>
     );
   }

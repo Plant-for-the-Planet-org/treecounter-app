@@ -24,7 +24,6 @@ export default (datePickerStyle = EStyleSheet.create({
     top: 50,
     width: 15,
     backgroundColor: '#fff',
-    resizeMode: 'contain',
     borderRadius: 7,
     transform: [{ rotate: '45deg' }]
   }

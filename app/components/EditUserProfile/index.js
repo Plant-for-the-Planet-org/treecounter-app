@@ -95,8 +95,6 @@ export default class EditUserProfile extends React.Component {
 
   handleSaveProjectClick = (plantProject, index) => {
     let formRef = 'plantProject' + index;
-    console.log(this.refs[formRef].validate());
-
     let value = this.refs[formRef].getValue();
     if (value) {
       //if image file is same dont update it
@@ -198,7 +196,16 @@ export default class EditUserProfile extends React.Component {
       image,
       treecounter: treeCounter
     } = this.props.currentUserProfile;
-
+    //earlier we have synopsis1 and synopsis two fields to manage user intriduction
+    //now we will show only one which is synopsis1, to show both info for old user lets merge them here
+    const updatedUserProfile = {
+      ...this.props.currentUserProfile,
+      synopsis1:
+        this.props.currentUserProfile.synopsis1 +
+        '\n' +
+        this.props.currentUserProfile.synopsis2,
+      synopsis2: ''
+    };
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
         <ConfirmProfileDeletion
@@ -224,7 +231,7 @@ export default class EditUserProfile extends React.Component {
               ref={'image'}
               type={parsedSchema[type].image.transformedSchema}
               options={parsedSchema[type].image.schemaOptions}
-              value={this.props.currentUserProfile}
+              value={updatedUserProfile}
             />
           </div>
 
@@ -232,7 +239,7 @@ export default class EditUserProfile extends React.Component {
             ref={'profile'}
             type={parsedSchema[type].profile.transformedSchema}
             options={this.getFormSchemaOption(type, 'profile')}
-            value={this.props.currentUserProfile}
+            value={updatedUserProfile}
           />
           <PrimaryButton
             onClick={() => {
@@ -243,20 +250,20 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
 
-        {type == 'tpo' ? (
-          <div className="plant-project__container">
-            {this.getPlantProjectList()}
-            <div className="pftp-addbutton">
-              <button
-                onClick={() => {
-                  this.handleAddNewProject();
-                }}
-              >
-                +&nbsp;{i18n.t('label.new_project')}
-              </button>
-            </div>
-          </div>
-        ) : null}
+        {/*{type == 'tpo' ? (*/}
+        {/*<div className="plant-project__container">*/}
+        {/*{this.getPlantProjectList()}*/}
+        {/*<div className="pftp-addbutton">*/}
+        {/*<button*/}
+        {/*onClick={() => {*/}
+        {/*this.handleAddNewProject();*/}
+        {/*}}*/}
+        {/*>*/}
+        {/*+&nbsp;{i18n.t('label.new_project')}*/}
+        {/*</button>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        {/*) : null}*/}
 
         <CardLayout className="user-profile__form-group">
           <div className="form-group__heading">{i18n.t('label.about_me')}</div>
@@ -264,7 +271,7 @@ export default class EditUserProfile extends React.Component {
             ref={'about_me'}
             type={parsedSchema[type].about_me.transformedSchema}
             options={this.getFormSchemaOption(type, 'about_me')}
-            value={this.props.currentUserProfile}
+            value={updatedUserProfile}
           />
           <PrimaryButton
             onClick={() => {
@@ -293,7 +300,6 @@ export default class EditUserProfile extends React.Component {
                 return;
               }
               this.setState({ passwordNotSameError: false });
-              console.log('password', value);
               this.props.onSave(type, 'password');
             }}
           >

@@ -7,28 +7,6 @@ import svgStyles from '../../styles/common/treecounter_svg';
 import { View, Image, Text } from 'react-native';
 
 class PlantedDetails extends Component {
-  convertNumber(n, d) {
-    let x = ('' + n).length;
-    if (x > 5) {
-      let p = Math.pow;
-      d = p(10, d);
-      x -= x % 3;
-      return (
-        Math.round(n * d / p(10, x)) / d +
-        [
-          '',
-          ' Thousand',
-          ' Million',
-          ' Billion',
-          ' Trillion',
-          ' Quadrillion',
-          ' Quintillion'
-        ][x / 3]
-      );
-    } else {
-      return n;
-    }
-  }
   render() {
     const { onToggle, personal, community, type } = this.props;
     return (
@@ -43,7 +21,11 @@ class PlantedDetails extends Component {
         </View>
 
         <View style={svgStyles.svgPlantDetailRow}>
-          <Image style={svgStyles.svgColumn1} source={darkTree} />
+          <Image
+            style={svgStyles.svgColumn1}
+            resizeMode="contain"
+            source={darkTree}
+          />
           <View style={svgStyles.svgColumn2Temp}>
             <View>
               <Text style={{ fontSize: 8, color: '#686060', width: 'auto' }}>
@@ -56,15 +38,17 @@ class PlantedDetails extends Component {
             </View>
 
             <View>
-              <Text style={svgStyles.svgTextValue}>
-                {this.convertNumber(personal, 2)}
-              </Text>
+              <Text style={svgStyles.svgTextValue}>{personal}</Text>
             </View>
           </View>
         </View>
         <View style={svgStyles.divider} />
         <View style={svgStyles.svgTextRow}>
-          <Image style={svgStyles.svgColumn1} source={lightTree} />
+          <Image
+            style={svgStyles.svgColumn1}
+            resizeMode="contain"
+            source={lightTree}
+          />
           <View style={svgStyles.svgColumn2Temp}>
             <View>
               <Text style={{ fontSize: 8, color: '#686060', width: 'auto' }}>
@@ -76,9 +60,7 @@ class PlantedDetails extends Component {
               </Text>
             </View>
             <View>
-              <Text style={svgStyles.svgTextValue}>
-                {this.convertNumber(parseInt(community), 2)}
-              </Text>
+              <Text style={svgStyles.svgTextValue}>{community}</Text>
             </View>
           </View>
         </View>
@@ -89,8 +71,8 @@ class PlantedDetails extends Component {
 export default PlantedDetails;
 
 PlantedDetails.propTypes = {
-  personal: PropTypes.number.isRequired,
-  community: PropTypes.number.isRequired,
+  personal: PropTypes.string.isRequired,
+  community: PropTypes.string.isRequired,
   type: PropTypes.string,
   onToggle: PropTypes.func
 };

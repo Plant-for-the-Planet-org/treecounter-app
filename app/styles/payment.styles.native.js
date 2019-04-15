@@ -6,8 +6,7 @@ const { width } = Dimensions.get('window');
 export default (paymentStyles = EStyleSheet.create({
   imageStyle: {
     width: 17,
-    height: 18,
-    resizeMode: 'contain'
+    height: 18
   },
   header: {
     flexDirection: 'row',
@@ -29,8 +28,7 @@ export default (paymentStyles = EStyleSheet.create({
     height: 30
   },
   logoStyle: {
-    height: 30,
-    resizeMode: 'contain'
+    height: 30
   },
   content: {
     width: width - 60,

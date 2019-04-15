@@ -61,7 +61,11 @@ class TreecounterGraphicsText extends Component {
       dom = !this.state.ifPlantedDetails ? (
         <View style={svgStyles.svgTextContainer}>
           <View style={svgStyles.svgTextRow}>
-            <Image style={svgStyles.svgColumn1} source={pot} />
+            <Image
+              style={svgStyles.svgColumn1}
+              resizeMode="contain"
+              source={pot}
+            />
             <View style={svgStyles.svgColumn2}>
               <Text style={svgStyles.svgTitleText}>
                 {i18n.t('label.target') +
@@ -84,7 +88,11 @@ class TreecounterGraphicsText extends Component {
           </View>
           <View style={svgStyles.divider} />
           <View style={svgStyles.svgTextRow}>
-            <Image style={svgStyles.svgColumn1} source={darkTree} />
+            <Image
+              style={svgStyles.svgColumn1}
+              resizeMode="contain"
+              source={darkTree}
+            />
             <View style={svgStyles.svgColumn2}>
               <Text style={svgStyles.svgTitleText}>
                 {i18n.t('label.planted')}

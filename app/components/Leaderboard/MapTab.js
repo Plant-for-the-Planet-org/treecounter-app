@@ -35,12 +35,10 @@ export default class MapTab extends React.Component {
       mapDescriptionInfoMap
     };
 
-    console.log('%%%%%%%%%% state ', this.state);
     this.onMapLayerSelectUpdate = this.onMapLayerSelectUpdate.bind(this);
   }
 
   onMapLayerSelectUpdate(activeMapLayers) {
-    console.log('%%%%%%%%%% onMapLayerSelectUpdate ', activeMapLayers);
     this.setState({ activeMapLayers });
   }
 

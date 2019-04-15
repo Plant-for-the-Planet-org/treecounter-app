@@ -64,16 +64,17 @@ class PlantProjectFull extends React.Component {
             <View style={styles.plantProjectDetails}>
               <PlantProjectDetails {...detailsProps} />
             </View>
-          {this.props.plantProject.allowDonations ? (
-            <View style={styles.buttonContainer}>
-              <PrimaryButton
-                onClick={() =>
-                  this.props.selectProject(this.props.plantProject.id)
-                }
-              >
-                {i18n.t('label.donate')}
-              </PrimaryButton>
-            </View> ) : null}
+            {this.props.plantProject.allowDonations ? (
+              <View style={styles.buttonContainer}>
+                <PrimaryButton
+                  onClick={() =>
+                    this.props.selectProject(this.props.plantProject.id)
+                  }
+                >
+                  {i18n.t('label.donate')}
+                </PrimaryButton>
+              </View>
+            ) : null}
           </CardLayout>
         </ScrollView>
         <View

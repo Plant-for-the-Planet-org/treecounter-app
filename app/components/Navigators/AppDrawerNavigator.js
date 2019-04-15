@@ -21,11 +21,12 @@ import i18n from '../../locales/i18n';
 import FAQContainer from '../../containers/FAQ';
 import UserContributions from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
-import SearchLayout from '../Header/SearchLayout.native';
+import SearchLayout from '../Header/SearchLayout';
 import AboutUsContainer from '../../containers/AboutUs';
-import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal.native';
-import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal.native';
-import LicenseInfoList from '../AboutUs/LicenseInfoList.native';
+import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
+import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
+import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal';
+import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import BottomTabContainer from '../../containers/Menu/TabContainer';
 import GiftTrees from '../../containers/GiftTrees';
 import LeaderBoard from '../Leaderboard';
@@ -36,11 +37,14 @@ import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
+import SelectedCompetition from '../../containers/SelectedCompetition';
 import RedemptionContainer from '../../containers/RedemptionContainer';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ImprintContainer from '../../containers/Imprint';
 import PrivacyContainer from '../../containers/Privacy';
+import CompetitionContainer from '../../containers/CompetitionContainer';
+import ChallengeContainer from '../../containers/Challenge/createChallenge';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -58,15 +62,18 @@ const headerLabels = {
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   [getLocalRoute('app_editProfile')]: 'label.edit_profile',
   [getLocalRoute('app_redeem')]: 'label.redeem_trees',
+  [getLocalRoute('app_competitions')]: 'label.competitions',
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   [getLocalRoute('app_selectProject')]: 'label.donate',
+  [getLocalRoute('app_competition')]: 'label.competitions',
   [getLocalRoute('app_imprint')]: 'label.imprint',
   [getLocalRoute('app_privacy')]: 'label.data_protection',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license',
   ['delete_profile_confirm']: 'label.delete_profile',
+  ['delete_contribution']: 'label.delete_contribution',
   ['app_donate_detail']: 'label.donate',
   ['app_gift_projects']: 'label.gift_trees'
 };
@@ -88,6 +95,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
+      },
+      [getLocalRoute('app_myTrees')]: {
+        screen: UserContributions
       },
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
@@ -118,6 +128,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
       },
+      [getLocalRoute('app_challenge')]: ChallengeContainer,
       ['app_gift_projects']: {
         screen: SelectPlantProjectContainer
       }
@@ -151,6 +162,25 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
   const deleteProfileNavigator = createStackNavigator(
     {
       ['delete_profile_confirm']: { screen: ConfirmProfileDeletionModal }
+    },
+    {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
+  const deleteContributionNavigator = createStackNavigator(
+    {
+      ['delete_contribution']: {
+        screen: ConfirmContributionDeletionModal
+      }
     },
     {
       headerMode: 'none',
@@ -224,6 +254,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_registerTrees')]: {
         screen: isLoggedIn ? RegisterTrees : LoginContainer
       },
+      [getLocalRoute('app_competitions')]: {
+        screen: isLoggedIn ? CompetitionContainer : LoginContainer
+      },
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
       },
@@ -250,6 +283,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
       },
+      [getLocalRoute('app_competition')]: {
+        screen: SelectedCompetition
+      },
       ['app_donate_detail']: {
         screen: DonationTreesContainer
       }
@@ -258,18 +294,15 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       navigationOptions: ({ navigation }) => {
         let navigationConfig = {
           headerStyle: styles.container,
+          headerTitleStyle: { paddingRight: 12 },
           headerTintColor: '#fff',
           headerBackTitle: null,
-          title: getTitle(navigation)
+          title: getTitle(navigation),
+          headerRight: (
+            <HeaderRight navigation={navigation} userProfile={userProfile} />
+          )
         };
-        // if (homeRoutes.includes(navigation.state.routeName)) {
-        navigationConfig.headerRight = HeaderRight(navigation);
-        // }
-        // if (
-        //   navigation.state.routeName === getLocalRoute('app_userHome') ||
-        //   (navigation.state.routeName === getLocalRoute('app_homepage') &&
-        //     !isLoggedIn)
-        // ) {
+
         if (navigation.state.routeName === 'Tab') {
           navigationConfig.headerLeft = <BurgerMenu navigation={navigation} />;
         }
@@ -283,6 +316,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       appStackNavigator,
       searchNavigator: searchNavigator,
       deleteProfileNavigator,
+      deleteContributionNavigator,
       welcomeScreenNavigator
     },
     {

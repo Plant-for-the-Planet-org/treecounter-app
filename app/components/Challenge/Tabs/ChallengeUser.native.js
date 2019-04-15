@@ -73,6 +73,7 @@ export default class ChallengeUser extends Component {
           <SearchUser
             onSearchResultClick={this.onSearchResultClick}
             currentUserProfile={this.props.currentUserProfile}
+            alreadyInvited={[]}
           />
           <View style={challengeStyles.flexContainerStyle}>
             <Text>Challenge to plant </Text>

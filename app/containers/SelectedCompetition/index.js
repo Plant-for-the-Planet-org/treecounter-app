@@ -75,6 +75,7 @@ class SelectedCompetitionContainer extends Component {
           cancelInvite={id => this.props.cancelInvite(id)}
           supportTreecounterAction={this.props.supportTreecounterAction}
           currentUserProfile={this.props.userProfile}
+          navigation={this.props.navigation}
           invitePart={(competition, competitor) =>
             this.props.invitePart(competition, competitor)
           }

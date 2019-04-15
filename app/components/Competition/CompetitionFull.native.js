@@ -78,15 +78,16 @@ class CompetitionFull extends React.Component {
       competitionDetail &&
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
     ) {
-      button = (
-        <PrimaryButton
-          style={snippetStyles.buttonItem}
-          buttonStyle={snippetStyles.buttonStyle}
-          textStyle={snippetStyles.buttonTextStyle}
-        >
-          <Text> {i18n.t('label.edit')}</Text>
-        </PrimaryButton>
-      );
+      // button = (
+      //   <PrimaryButton
+      //     style={snippetStyles.buttonItem}
+      //     buttonStyle={snippetStyles.buttonStyle}
+      //     textStyle={snippetStyles.buttonTextStyle}
+      //   >
+      //     <Text> {i18n.t('label.edit')}</Text>
+      //   </PrimaryButton>
+      // );
+      button = null;
     } else if (status === '') {
       if (competitionDetail && competitionDetail.access === 'immediate') {
         button = (
@@ -247,6 +248,9 @@ class CompetitionFull extends React.Component {
                               competitor={top}
                               index={index}
                               type="participants"
+                              navigation={this.props.navigation}
+                              treeCounter={this.props.treeCounter}
+                              competitionDetail={competitionDetail}
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               cancelInvite={id => this.props.cancelInvite(id)}
@@ -283,6 +287,9 @@ class CompetitionFull extends React.Component {
                               competitor={top}
                               index={index}
                               type="request_join"
+                              navigation={this.props.navigation}
+                              treeCounter={this.props.treeCounter}
+                              competitionDetail={competitionDetail}
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               cancelInvite={id => this.props.cancelInvite(id)}
@@ -321,6 +328,9 @@ class CompetitionFull extends React.Component {
                               competitor={top}
                               index={index}
                               type="invite"
+                              navigation={this.props.navigation}
+                              treeCounter={this.props.treeCounter}
+                              competitionDetail={competitionDetail}
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               cancelInvite={id => this.props.cancelInvite(id)}
@@ -355,6 +365,9 @@ class CompetitionFull extends React.Component {
                               competitor={top}
                               index={index}
                               type="request_join"
+                              navigation={this.props.navigation}
+                              treeCounter={this.props.treeCounter}
+                              competitionDetail={competitionDetail}
                               confirmPart={id => this.props.confirmPart(id)}
                               declinePart={id => this.props.declinePart(id)}
                               cancelInvite={id => this.props.cancelInvite(id)}

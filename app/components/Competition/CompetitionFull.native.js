@@ -320,6 +320,7 @@ class CompetitionFull extends React.Component {
                         onSearchResultClick={this.onSearchResultClick}
                         currentUserProfile={this.props.currentUserProfile}
                         clearTextOnClick={true}
+                        alreadyInvited={competitionDetail.allEnrollments}
                       />
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>

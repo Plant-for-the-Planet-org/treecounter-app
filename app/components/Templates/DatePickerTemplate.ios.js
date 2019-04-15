@@ -104,7 +104,7 @@ class CollapsibleDatePickerIOS extends React.PureComponent {
             accessibilityLabel={i18n.t(locals.label)}
             date={new Date(locals.value)}
             initialDate={new Date()}
-            maximumDate={locals.maximumDate || new Date()}
+            maximumDate={locals.maximumDate}
             minimumDate={locals.minimumDate}
             minuteInterval={locals.minuteInterval}
             mode={locals.mode || 'date'}

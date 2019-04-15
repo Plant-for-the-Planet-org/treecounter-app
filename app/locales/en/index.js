@@ -29,6 +29,7 @@ import emailSendActivationlabels from './emailSentActivationlabels.json';
 import competitionlabels from './competitionlabels.json';
 import challengelabels from './challengelabels.json';
 import manageProjectlabels from './manageProjectlabels.json';
+import widgetShareLabels from './widgetShareLabels.json';
 
 export default {
   ...loginlabels,
@@ -61,5 +62,6 @@ export default {
   ...emailSendActivationlabels,
   ...competitionlabels,
   ...challengelabels,
-  ...manageProjectlabels
+  ...manageProjectlabels,
+  ...widgetShareLabels
 };

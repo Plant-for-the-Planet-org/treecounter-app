@@ -116,7 +116,10 @@ class SearchAutosuggest extends Component {
   };
 
   render() {
-    const { value, suggestions } = this.state;
+    let { value, suggestions } = this.state;
+    suggestions = suggestions.filter(
+      suggestion => suggestion.category === 'profile'
+    );
     const inputProps = {
       placeholder: i18n.t('label.placeholder_value'),
       value,

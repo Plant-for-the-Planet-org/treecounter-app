@@ -29,7 +29,9 @@ export function login(credentials, recaptchaToken, navigation = undefined) {
           updateActivateToken(credentials._username, token);
         } else {
           updateJWT(token, refresh_token);
+          dispatch(setProgressModelState(false));
           dispatch(loadUserProfile(data));
+          dispatch(setProgressModelState(true));
           dispatch(NotificationAction());
         }
         //On App it is causing crash or undefined behavior

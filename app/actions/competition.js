@@ -175,6 +175,40 @@ export function createCompetition(value, navigation) {
       });
   };
 }
+export function editCompetition(value, param, navigation) {
+  console.log(value);
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    putAuthenticatedRequest('competition_put', value, { competition: param })
+      .then(res => {
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.competition, [competitionSchema])
+          )
+        );
+        dispatch(
+          mergeEntities(
+            normalize(res.data.merge.treecounter, [treecounterSchema])
+          )
+        );
+        updateRoute('app_competition', navigation || dispatch, 1, {
+          competition: res.data.merge.competition[0].id
+        });
+
+        dispatch(setProgressModelState(false));
+        NotificationManager.success(
+          'Competition Edited successfully',
+          'Success',
+          5000
+        );
+        dispatch(fetchMineCompetitions());
+      })
+      .catch(error => {
+        debug(error);
+        dispatch(setProgressModelState(false));
+      });
+  };
+}
 
 export function enrollCompetition(id) {
   return dispatch => {

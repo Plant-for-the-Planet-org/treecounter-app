@@ -37,6 +37,14 @@ class CompetitionContainer extends React.Component {
   enrollCompetition(id) {
     this.props.enrollCompetition(id);
   }
+  editCompetition(id) {
+    const { navigation } = this.props;
+    if (navigation) {
+      updateRoute('app_editCompetition', navigation, 1, {
+        competition: id
+      });
+    }
+  }
   render() {
     return (
       <Competiton
@@ -46,6 +54,7 @@ class CompetitionContainer extends React.Component {
         enrollCompetition={id => this.enrollCompetition(id)}
         onCreateCompetition={this.createCompetition}
         supportTreecounterAction={this.props.supportTreecounterAction}
+        editCompetition={id => this.editCompetition(id)}
       />
     );
   }

@@ -3984,6 +3984,27 @@
       ],
       "schemes": []
     },
+    "app_editCompetition": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "competition"
+        ],
+        [
+          "text",
+          "/editCompetition"
+        ]
+      ],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
     "app_manageProjects": {
       "tokens": [
         [

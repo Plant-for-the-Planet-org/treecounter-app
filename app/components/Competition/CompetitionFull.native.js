@@ -78,16 +78,17 @@ class CompetitionFull extends React.Component {
       competitionDetail &&
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
     ) {
-      // button = (
-      //   <PrimaryButton
-      //     style={snippetStyles.buttonItem}
-      //     buttonStyle={snippetStyles.buttonStyle}
-      //     textStyle={snippetStyles.buttonTextStyle}
-      //   >
-      //     <Text> {i18n.t('label.edit')}</Text>
-      //   </PrimaryButton>
-      // );
-      button = null;
+      button = (
+        <PrimaryButton
+          style={snippetStyles.buttonItem}
+          buttonStyle={snippetStyles.buttonStyle}
+          textStyle={snippetStyles.buttonTextStyle}
+          onClick={() => this.props.editCompetition(competitionDetail.id)}
+        >
+          <Text> {i18n.t('label.edit')}</Text>
+        </PrimaryButton>
+      );
+      // button = null;
     } else if (status === '') {
       if (competitionDetail && competitionDetail.access === 'immediate') {
         button = (
@@ -421,5 +422,6 @@ CompetitionFull.propTypes = {
   confirmPart: PropTypes.any,
   declinePart: PropTypes.any,
   cancelInvite: PropTypes.any,
-  supportTreecounterAction: PropTypes.any
+  supportTreecounterAction: PropTypes.any,
+  editCompetition: PropTypes.any
 };

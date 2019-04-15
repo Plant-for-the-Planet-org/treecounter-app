@@ -75,6 +75,7 @@ export default class AllCompetitions extends Component {
                 onMoreClick={id => this.props.onMoreClick(id)}
                 leaveCompetition={id => this.props.leaveCompetition(id)}
                 enrollCompetition={id => this.props.enrollCompetition(id)}
+                editCompetition={this.props.editCompetition}
                 competition={project}
                 type="all"
               />
@@ -88,5 +89,6 @@ AllCompetitions.propTypes = {
   allCompetitions: PropTypes.any,
   onMoreClick: PropTypes.any,
   leaveCompetition: PropTypes.any,
-  enrollCompetition: PropTypes.any
+  enrollCompetition: PropTypes.any,
+  editCompetition: PropTypes.any
 };

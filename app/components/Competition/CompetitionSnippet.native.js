@@ -53,14 +53,16 @@ class CompetitionSnippet extends React.Component {
       competitionDetail &&
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
     ) {
-      // button = (
-      //   <TouchableItem>
-      //     <Text style={styles.bottomParticipantText}>
-      //       {i18n.t('label.edit')}
-      //     </Text>
-      //   </TouchableItem>
-      // );
-      button = <Text style={{ paddingLeft: 5, paddingRight: 5 }} />;
+      button = (
+        <TouchableItem
+          onPress={() => this.props.editCompetition(this.props.competition.id)}
+        >
+          <Text style={styles.bottomParticipantText}>
+            {i18n.t('label.edit')}
+          </Text>
+        </TouchableItem>
+      );
+      //button = <Text style={{ paddingLeft: 5, paddingRight: 5 }} />;
     } else if (status === '') {
       if (competitionDetail && competitionDetail.access === 'immediate') {
         button = (
@@ -231,5 +233,6 @@ CompetitionSnippet.propTypes = {
   competitionEnrollments: PropTypes.any,
   treeCounter: PropTypes.any,
   leaveCompetition: PropTypes.any,
-  enrollCompetition: PropTypes.any
+  enrollCompetition: PropTypes.any,
+  editCompetition: PropTypes.any
 };

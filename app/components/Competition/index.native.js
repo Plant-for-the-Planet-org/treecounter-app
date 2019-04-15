@@ -21,7 +21,7 @@ class Competiton extends React.Component {
         { key: 'featured', title: 'FEATURED' },
         { key: 'all', title: 'ALL' }
       ],
-      index: 1
+      index: 0
     };
   }
   indexChange(index) {

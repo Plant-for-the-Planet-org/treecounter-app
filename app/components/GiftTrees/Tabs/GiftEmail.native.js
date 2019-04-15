@@ -19,7 +19,7 @@ export default class GiftEmail extends Component {
     this.setGiftInvitation = element => {
       this.giftInvitation = element;
     };
-    this.state = { formValue: null, giftMessage: '' };
+    this.state = { form: null, giftMessage: '' };
     this.onNextClick = this.onNextClick.bind(this);
   }
 
@@ -27,26 +27,20 @@ export default class GiftEmail extends Component {
 
   onNextClick() {
     if (this.giftInvitation.getValue()) {
-      this.setState({ formValue: this.giftInvitation.getValue() });
-      this.props.openProjects(
-        this.giftInvitation.getValue(),
-        'invitation',
-        this.state.giftMessage
+      let value = this.giftInvitation.getValue();
+      this.setState(
+        {
+          form: value
+        },
+        () => {
+          this.props.openProjects(this.state.form, 'invitation');
+        }
       );
-    }
-  }
-  onChangeText(val) {
-    if (!this.giftInvitation.getValue()) {
-      this.giftInvitation.validate();
     } else {
-      this.setState({ formValue: this.giftInvitation.getValue() });
+      this.giftInvitation.validate();
     }
-    this.setState({
-      giftMessage: val
-    });
   }
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('Should component update called');
     let returnValue = false;
     Object.entries(this.props).forEach(
       ([key, val]) =>
@@ -59,7 +53,6 @@ export default class GiftEmail extends Component {
     return returnValue;
   }
   render() {
-    console.log('Render of email called');
     return (
       <KeyboardAwareScrollView enableOnAndroid={true}>
         <View
@@ -89,37 +82,21 @@ export default class GiftEmail extends Component {
               </Text>
             </View>
           </CardLayout>
+
           <CardLayout>
             <TCombForm
               ref={this.setGiftInvitation}
               type={giftInvitationFormSchema}
               options={giftInvitationSchemaOptions}
-              value={this.state.formValue}
+              value={this.state.form}
             />
-            <TextInput
-              multiline={true}
-              style={{
-                height: 100,
-                color: '#686060',
-                borderColor: '#c4bfbf',
-                borderWidth: 1,
-                margin: 10,
-                padding: 5
-              }}
-              underlineColorAndroid={'transparent'}
-              onChangeText={val => this.onChangeText(val)}
-              placeholder={i18n.t('label.gift_message')}
-            />
-            <PrimaryButton onClick={this.onNextClick}>
-              {i18n.t('next')}
-            </PrimaryButton>
+            <PrimaryButton onClick={this.onNextClick}>Next</PrimaryButton>
           </CardLayout>
         </View>
       </KeyboardAwareScrollView>
     );
   }
   componentDidUpdate(prevProps, prevState) {
-    console.log('component did update called');
     Object.entries(this.props).forEach(
       ([key, val]) =>
         prevProps[key] !== val && console.log(`Prop '${key}' changed`)
@@ -128,8 +105,5 @@ export default class GiftEmail extends Component {
       ([key, val]) =>
         prevState[key] !== val && console.log(`State '${key}' changed`)
     );
-  }
-  componentWillUnmount() {
-    // console.log('Gift Email Unmounted');
   }
 }

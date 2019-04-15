@@ -52,8 +52,11 @@ export default class UserHome extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    return JSON.stringify(nextProps) !== JSON.stringify(this.props);
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate =
+      JSON.stringify(nextProps) !== JSON.stringify(this.props) ||
+      nextState.index != this.state.index;
+    return shouldUpdate;
   }
 
   _handleIndexChange = index => {
@@ -189,6 +192,7 @@ export default class UserHome extends Component {
           <ScrollView>
             <ContributionCardList
               contributions={this.props.userContributions}
+              deleteContribution={this.props.deleteContribution}
             />
           </ScrollView>
         );
@@ -225,5 +229,6 @@ UserHome.propTypes = {
   userProfile: PropTypes.object,
   userProfileId: PropTypes.number.isRequired,
   userContributions: PropTypes.array.isRequired,
+  deleteContribution: PropTypes.func,
   navigation: PropTypes.any
 };

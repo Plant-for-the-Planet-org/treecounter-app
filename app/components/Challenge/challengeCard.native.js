@@ -23,7 +23,6 @@ import { upwardArrow, downwardArrow } from '../../assets/index.js';
 export default class ChallengeCard extends React.Component {
   render() {
     let { challenge } = this.props;
-    //console.log(challenge);
     let {
       direction,
       goal,

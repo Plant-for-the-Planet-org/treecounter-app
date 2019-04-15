@@ -113,6 +113,7 @@ export async function postRequest(
   recaptcha = false
 ) {
   let url = await getApiRoute(route, params);
+  console.log(url);
   return await axios
     .post(url, data, await getHeaders(authenticated, recaptcha))
     .then(checkStatus)

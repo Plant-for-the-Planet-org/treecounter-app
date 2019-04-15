@@ -6,7 +6,12 @@ import { updateJWT, updateActivateToken } from '../utils/user';
 import { loadUserProfile } from './loadUserProfileAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 
-export function signUp(profileType, userData, recaptchaToken) {
+export function signUp(
+  profileType,
+  userData,
+  recaptchaToken,
+  navigation = undefined
+) {
   if (userData.password.first === userData.password.second) {
     return dispatch => {
       dispatch(setProgressModelState(true));
@@ -31,12 +36,16 @@ export function signUp(profileType, userData, recaptchaToken) {
             );
           }
 
-          updateRoute(data.routeName, dispatch, null, data.routeParams);
+          updateRoute(
+            data.routeName,
+            navigation || dispatch,
+            null,
+            data.routeParams
+          );
           dispatch(setProgressModelState(false));
           return res;
         })
         .catch(err => {
-          // console.log(err);
           dispatch(setProgressModelState(false));
           throw err;
         });

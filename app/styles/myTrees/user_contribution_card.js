@@ -32,7 +32,6 @@ let myTreesStyle = (color, borderColor) =>
       //       ? '#68aeec'
       //       : '#ec6453',
       justifyContent: 'space-between',
-      minHeight: 60,
       marginBottom: 10,
       margin: 10
     },
@@ -104,11 +103,20 @@ let myTreesStyle = (color, borderColor) =>
       padding: 10,
       paddingLeft: 20
     },
+    minHeight: {
+      minHeight: 80
+    },
     updateTextStyle: {
       color: '$colorPrimaryAccent',
       position: 'absolute',
       right: 10,
       bottom: 10
+    },
+    deleteTextStyle: {
+      color: '$colorPrimaryAccent',
+      position: 'absolute',
+      right: 10,
+      bottom: 25
     },
     labelStyle: {
       position: 'absolute',

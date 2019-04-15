@@ -1,10 +1,21 @@
 import { normalize } from 'normalizr';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
-import { putAuthenticatedRequest } from '../utils/api';
+import {
+  putAuthenticatedRequest,
+  deleteAuthenticatedRequest
+} from '../utils/api';
 
 import { updateRoute } from '../helpers/routerHelper';
-import { mergeEntities } from '../reducers/entitiesReducer';
-import { contributionSchema, treecounterSchema } from '../schemas/index';
+import {
+  deleteEntity,
+  mergeEntities,
+  unlinkEntity
+} from '../reducers/entitiesReducer';
+import {
+  contributionSchema,
+  treecounterSchema,
+  plantProjectSchema
+} from '../schemas/index';
 import { debug } from '../debug/index';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 
@@ -29,5 +40,38 @@ export function editTree(plantContribution, plantId, navigation) {
         dispatch(setProgressModelState(false));
         NotificationManager.error(error.response.data.message, 'Error', 5000);
       });
+  };
+}
+
+export function deleteContribution(plantContributionId) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    return new Promise(function(resolve, reject) {
+      deleteAuthenticatedRequest('plantContribution_delete', {
+        plantContribution: plantContributionId
+      })
+        .then(res => {
+          const { merge, unlink } = res.data;
+          const toBeDeleted = res.data['delete'];
+          dispatch(unlinkEntity(unlink));
+          dispatch(deleteEntity(toBeDeleted));
+          merge &&
+            merge.treecounter &&
+            dispatch(
+              mergeEntities(normalize(merge.treecounter, treecounterSchema))
+            );
+          merge &&
+            merge.plantProject &&
+            dispatch(
+              mergeEntities(normalize(merge.plantProject, plantProjectSchema))
+            );
+          dispatch(setProgressModelState(false));
+        })
+        .catch(err => {
+          debug(err);
+          dispatch(setProgressModelState(false));
+          reject(err);
+        });
+    });
   };
 }

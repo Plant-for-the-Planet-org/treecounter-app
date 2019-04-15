@@ -54,7 +54,7 @@ export default class ListProjects extends Component {
   render() {
     let { filteredProjects } = this.state;
     return (
-      <View key={'listViewProject'}>
+      <View key={'listViewProject'} style={styles.flexContainer}>
         <View style={styles.searchItem}>
           <View style={[styles.searchContainer]}>
             <TextInput
@@ -70,7 +70,8 @@ export default class ListProjects extends Component {
               returnKeyType="search"
               placeholder="Search"
               placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
-              style={[styles.searchInput]}
+              style={[styles.searchInput, { paddingVertical: 0 }]}
+              autoCapitalize={'sentences'}
             />
 
             <View style={styles.searchIconContainer}>
@@ -83,11 +84,13 @@ export default class ListProjects extends Component {
           </View>
         </View>
 
-        <ListViewProjects
-          projects={filteredProjects}
-          selectProject={projectId => this.props.selectProject(projectId)}
-          onMoreClick={projectId => this.props.onMoreClick(projectId)}
-        />
+        <View style={styles.listViewContainer}>
+          <ListViewProjects
+            projects={filteredProjects}
+            selectProject={projectId => this.props.selectProject(projectId)}
+            onMoreClick={projectId => this.props.onMoreClick(projectId)}
+          />
+        </View>
       </View>
     );
   }

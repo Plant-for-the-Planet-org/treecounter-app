@@ -185,6 +185,7 @@ export default class Redemption extends Component {
               value={value}
               maxLength={20}
               onChangeText={evt => this.onChange(evt)}
+              autoCapitalize={'sentences'}
             />
             {right_icon}
           </View>

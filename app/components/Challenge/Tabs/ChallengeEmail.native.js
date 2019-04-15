@@ -41,8 +41,8 @@ export default class ChallengeEmail extends Component {
   }
 
   onNextClick() {
-    if (this.giftInvitation.getValue()) {
-      let value = this.giftInvitation.getValue();
+    if (this.challengeInvitation.getValue()) {
+      let value = this.challengeInvitation.getValue();
       requestData = {
         invitee: { ...value }
       };
@@ -53,7 +53,7 @@ export default class ChallengeEmail extends Component {
       requestData.goal = this.state.treeCount;
       this.props.challengeUser(requestData);
     } else {
-      this.giftInvitation.validate();
+      this.challengeInvitation.validate();
     }
   }
 
@@ -88,6 +88,7 @@ export default class ChallengeEmail extends Component {
               style={challengeStyles.treecount_input}
               onChangeText={evt => this.handleTreeCountChange(evt)}
               value={this.state.treeCount.toLocaleString()}
+              autoCapitalize={'sentences'}
             />
             <Text>Trees</Text>
           </View>
@@ -109,9 +110,10 @@ export default class ChallengeEmail extends Component {
                 width: 70
               }}
               dropdownOffset={{
-                top: 0
+                top: 0,
+                left: 0
               }}
-              selectedItem={item =>
+              onChangeText={item =>
                 this.setState({
                   byYear: item
                 })

@@ -196,5 +196,6 @@ Challenge.propTypes = {
   challengeUser: PropTypes.func,
   challenges: PropTypes.array.isRequired,
   challengeStatus: PropTypes.func,
-  navigation: PropTypes.any
+  navigation: PropTypes.any,
+  currentUserProfile: PropTypes.any
 };

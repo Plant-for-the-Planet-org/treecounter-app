@@ -82,6 +82,7 @@ export default class ChallengeUser extends Component {
               style={challengeStyles.treecount_input}
               onChangeText={evt => this.handleTreeCountChange(evt)}
               value={this.state.treeCount.toLocaleString()}
+              autoCapitalize={'sentences'}
             />
             <Text>Trees</Text>
           </View>
@@ -103,9 +104,10 @@ export default class ChallengeUser extends Component {
                 width: 70
               }}
               dropdownOffset={{
-                top: 0
+                top: 10,
+                left: 0
               }}
-              selectedItem={item =>
+              onChangeText={item =>
                 this.setState({
                   byYear: item
                 })

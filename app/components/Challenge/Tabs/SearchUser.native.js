@@ -9,7 +9,7 @@ import { withNavigation } from 'react-navigation';
 import styles from '../../../styles/header/search_layout.native';
 import _ from 'lodash';
 import searchBarStyles from '../../../styles/header/search_bar.native';
-import { NotificationManager } from 'react-notifications';
+import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;

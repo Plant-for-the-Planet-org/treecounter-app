@@ -21,7 +21,7 @@ import {
 import { normalize } from 'normalizr';
 import { debug } from '../debug';
 import { updateRoute } from '../helpers/routerHelper';
-import { NotificationManager } from 'react-notifications';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 
 export function fetchCompetitions(category) {
   return dispatch => {

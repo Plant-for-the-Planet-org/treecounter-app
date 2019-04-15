@@ -1,5 +1,10 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Platform } from 'react-native';
 
+let lineBreakMargin = -20;
+if (Platform.OS === 'android') {
+  lineBreakMargin = -30;
+}
 export default (faqStyles = EStyleSheet.create({
   container: {
     flex: 1,
@@ -46,5 +51,5 @@ export default (faqStyles = EStyleSheet.create({
     color: '$colorPrimaryAccent'
   },
   p: { color: '#938989' },
-  br: { marginBottom: -30 }
+  br: { marginBottom: lineBreakMargin }
 }));

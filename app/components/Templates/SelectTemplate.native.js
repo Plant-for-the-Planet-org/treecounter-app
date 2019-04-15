@@ -2,6 +2,7 @@ import React from 'react';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/forms/select.native';
 import { Dropdown } from 'react-native-material-dropdown';
+import { foldout, foldin } from '../../assets';
 
 import PropTypes from 'prop-types';
 import {
@@ -11,7 +12,8 @@ import {
   TouchableOpacity,
   Picker,
   Platform,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  Image
 } from 'react-native';
 import datePickerStyle from '../../styles/date_picker.native';
 
@@ -147,11 +149,20 @@ class SelectTemplateIOS extends React.PureComponent {
     return (
       <View style={datePickerStyle.datePickerContainer}>
         <TouchableOpacity
-          style={touchableStyle}
+          style={{
+            ...touchableStyle,
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+          }}
           disabled={locals.disabled}
           onPress={this._onPress}
         >
           <Text style={dateValueStyle}>{formattedValue}</Text>
+          <Image
+            source={this.state.isCollapsed ? foldout : foldin}
+            style={{ height: 18, width: 18 }}
+            resizeMode={'contain'}
+          />
         </TouchableOpacity>
         <Animated.View
           style={{ height: this.state.height, overflow: 'hidden' }}

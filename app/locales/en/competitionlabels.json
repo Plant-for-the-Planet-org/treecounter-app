@@ -12,9 +12,9 @@
   "competition_end_date": "End Date",
   "competition_access": "Who can Join",
   "competition_image": "Add Image",
-  "competition_description": "Type a Description (expands with text)",
+  "competition_description": "Type a description",
   "create_competition": "Create Competition",
-  "competition_access_immediate": "Immediate",
-  "competition_access_request": "Request",
-  "competition_access_invitation": "Invitation"
+  "competition_access_immediate": "Anyone (Join Immediately)",
+  "competition_access_request": "Anyone (Request to Join)",
+  "competition_access_invitation": "People I Invite"
 }

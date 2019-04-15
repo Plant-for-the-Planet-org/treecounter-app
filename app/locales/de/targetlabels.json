@@ -1,5 +1,8 @@
 {
-  "set_target": "Ziel setzten",
+  "set": "Einstellen",
+  "set_target": "Ziel setzen",
   "title": "Titel",
-  "target_year": "Zieljahr"
+  "target_count": "Baumziel",
+  "target_year": "Zieljahr",
+  "target_comment": "Zielkommentar"
 }

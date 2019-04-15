@@ -65,6 +65,7 @@ export function deleteContribution(plantContributionId) {
             dispatch(
               mergeEntities(normalize(merge.plantProject, plantProjectSchema))
             );
+          NotificationManager.success(statusText, 'Success', 5000);
           dispatch(setProgressModelState(false));
         })
         .catch(err => {

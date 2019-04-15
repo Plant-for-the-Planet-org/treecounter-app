@@ -28,11 +28,11 @@ export function registerTree(
         const { statusText } = res;
         const { contribution, treecounter } = res.data;
 
-        NotificationManager.success(statusText, 'Success', 5000);
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         dispatch(setProgressModelState(false));
         updateRoute('app_myTrees', navigation || dispatch);
+        NotificationManager.success(statusText, 'Success', 5000);
         return res;
       })
       .catch(error => {

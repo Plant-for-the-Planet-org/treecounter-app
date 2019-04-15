@@ -124,6 +124,7 @@ import compCalendar from './images/calendar_comp.png';
 import upwardArrow from './images/right-arrow.png';
 import downwardArrow from './images/left-arrow.png';
 import challengeIcon from './images/icons/flag.png';
+import webProgramming from './images/icons/web_programming.png';
 
 export {
   AppStoreLogo,
@@ -251,5 +252,6 @@ export {
   upwardArrow,
   downwardArrow,
   arrow_left_orange_outline,
-  challengeIcon
+  challengeIcon,
+  webProgramming
 };

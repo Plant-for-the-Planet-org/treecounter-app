@@ -54,6 +54,7 @@ import DownloadAppModal from '../DownloadAppStore';
 import AppPaymentContainer from '../../containers/AppPayment';
 import BodyErrorBoundary from '../ErrorBoundry/bodyErrorBoundry';
 import PageNotFound from '../ErrorBoundry/404';
+import WidgetShareContainer from '../../containers/WidgetsShare';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPublicDenyEmail';
 import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
@@ -303,6 +304,10 @@ class TreeCounter extends Component {
             <Route
               path={getLocalRoute('app_manageProjects')}
               component={ManageProjectContainer}
+            />
+            <PrivateRoute
+              path={getLocalRoute('app_widgetBuilder')}
+              component={WidgetShareContainer}
             />
             <Route component={PageNotFound} />
           </Switch>

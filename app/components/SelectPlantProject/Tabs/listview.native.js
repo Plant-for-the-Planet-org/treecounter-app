@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import styles from '../../../styles/selectplantproject/list';
 import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
 import Proptypes from 'prop-types';
-import scrollStyleNative from '../../../styles/common/scrollStyle.native';
 import { FlatList } from 'react-native';
 
 export default class ListViewProjects extends Component {
@@ -32,11 +31,13 @@ export default class ListViewProjects extends Component {
     let { projects } = this.props;
 
     return (
-      <FlatList
-        data={projects}
-        keyExtractor={this._keyExtractor}
-        renderItem={this._renderItem}
-      />
+      <View style={{ height: '100%' }}>
+        <FlatList
+          data={projects}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+        />
+      </View>
     );
   }
 }

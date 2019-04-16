@@ -15,6 +15,7 @@ import tabStyles from '../../styles/common/tabbar';
 
 import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
+import TabContainer from '../../containers/Menu/TabContainer';
 import { getProfileTypeName } from '../PublicTreeCounter/utils';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList';
@@ -213,13 +214,25 @@ export default class UserHome extends Component {
 
   render() {
     return (
-      <TabView
-        useNativeDriver
-        navigationState={this.state}
-        renderScene={this._renderUserHome}
-        renderTabBar={this._renderTabBar}
-        onIndexChange={this._handleIndexChange}
-      />
+      <View style={{ flex: 1 }}>
+        <TabView
+          useNativeDriver
+          navigationState={this.state}
+          renderScene={this._renderUserHome}
+          renderTabBar={this._renderTabBar}
+          onIndexChange={this._handleIndexChange}
+        />
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            flex: 1,
+            width: '100%'
+          }}
+        >
+          <TabContainer {...this.props} />
+        </View>
+      </View>
     );
   }
 }

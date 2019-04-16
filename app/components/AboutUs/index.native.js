@@ -48,7 +48,9 @@ class AboutUs extends Component {
         <View
           style={{
             position: 'absolute',
-            bottom: 0
+            bottom: 0,
+            flex: 1,
+            width: '100%'
           }}
         >
           <TabContainer {...this.props} />

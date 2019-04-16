@@ -11,8 +11,8 @@ import {
   Animated,
   ScrollView
 } from 'react-native';
-import styles from '../../styles/myTrees/my_trees.native';
-import tabBarStyles from '../../styles/common/tabbar.native';
+import styles from '../../styles/myTrees/my_trees';
+import tabBarStyles from '../../styles/common/tabbar';
 
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { plantedTarget } from '../../assets';

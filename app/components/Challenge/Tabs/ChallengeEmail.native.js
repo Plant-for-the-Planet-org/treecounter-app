@@ -8,6 +8,7 @@ import CardLayout from '../../Common/Card';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { TextInput, View, Text } from 'react-native';
 import ChallengeList from '../challengeList';
+import { delimitNumbers } from '../../../utils/utils';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
@@ -87,7 +88,7 @@ export default class ChallengeEmail extends Component {
               keyboardType="numeric"
               style={challengeStyles.treecount_input}
               onChangeText={evt => this.handleTreeCountChange(evt)}
-              value={this.state.treeCount.toLocaleString()}
+              value={delimitNumbers(this.state.treeCount)}
               autoCapitalize={'sentences'}
             />
             <Text>Trees</Text>

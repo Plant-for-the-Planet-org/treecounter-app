@@ -5,6 +5,7 @@ import { close_green, darkTree, lightTree } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import svgStyles from '../../styles/common/treecounter_svg';
 import { View, Image, Text } from 'react-native';
+import { delimitNumbers } from '../../utils/utils';
 
 class PlantedDetails extends Component {
   render() {
@@ -38,7 +39,9 @@ class PlantedDetails extends Component {
             </View>
 
             <View>
-              <Text style={svgStyles.svgTextValue}>{personal}</Text>
+              <Text style={svgStyles.svgTextValue}>
+                {delimitNumbers(personal)}
+              </Text>
             </View>
           </View>
         </View>
@@ -60,7 +63,9 @@ class PlantedDetails extends Component {
               </Text>
             </View>
             <View>
-              <Text style={svgStyles.svgTextValue}>{community}</Text>
+              <Text style={svgStyles.svgTextValue}>
+                {delimitNumbers(community)}
+              </Text>
             </View>
           </View>
         </View>

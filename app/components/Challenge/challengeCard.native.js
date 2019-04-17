@@ -18,6 +18,7 @@ import CardLayout from '../Common/Card';
 import UserProfileImage from '../Common/UserProfileImage';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
+import { delimitNumbers } from '../../utils/utils';
 import { upwardArrow, downwardArrow } from '../../assets/index.js';
 
 export default class ChallengeCard extends React.Component {
@@ -38,7 +39,7 @@ export default class ChallengeCard extends React.Component {
         <View style={challengesStyle.flexStyle}>
           <View style={challengesStyle.limitWidth}>
             <Text style={challengesStyle.goalStyle}>
-              {goal.toLocaleString() +
+              {delimitNumbers(goal) +
                 ' Trees' +
                 (end_date !== null ? ' by ' + end_date : '')}
             </Text>

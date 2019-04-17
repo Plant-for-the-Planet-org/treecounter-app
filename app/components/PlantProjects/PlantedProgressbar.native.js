@@ -5,6 +5,7 @@ import i18n from '../../locales/i18n';
 import { View, Text, Image } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import { targetPlanted } from '../../assets';
+import { delimitNumbers } from '../../utils/utils';
 
 class PlantedProgressBar extends React.Component {
   constructor(props) {
@@ -58,7 +59,9 @@ class PlantedProgressBar extends React.Component {
               alignItems: 'center'
             }}
           >
-            <Text style={styles.treePlantedtextPlanted}>{countPlanted}</Text>
+            <Text style={styles.treePlantedtextPlanted}>
+              {delimitNumbers(countPlanted)}
+            </Text>
             <Text style={styles.treePlantedtextTrees}>
               {i18n.t('label.trees')}
             </Text>
@@ -68,7 +71,7 @@ class PlantedProgressBar extends React.Component {
         {!this.props.hideTargetImage ? (
           <View style={styles.targetContainer}>
             <Text style={styles.treePlantedtext}>
-              {countTarget ? countTarget.toLocaleString('en') : null}
+              {countTarget ? delimitNumbers(countTarget) : null}
             </Text>
 
             <View style={{ paddingLeft: 5, paddingRight: 5 }}>

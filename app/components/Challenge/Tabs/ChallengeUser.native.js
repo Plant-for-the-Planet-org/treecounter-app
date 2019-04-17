@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, View, TextInput, Text } from 'react-native';
 import SearchUser from './SearchUser.native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
+import { delimitNumbers } from '../../../utils/utils';
 import ChallengeList from '../challengeList';
 import CardLayout from '../../Common/Card';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -82,7 +83,7 @@ export default class ChallengeUser extends Component {
               underlineColorAndroid={'transparent'}
               style={challengeStyles.treecount_input}
               onChangeText={evt => this.handleTreeCountChange(evt)}
-              value={this.state.treeCount.toLocaleString()}
+              value={delimitNumbers(this.state.treeCount)}
               autoCapitalize={'sentences'}
             />
             <Text>Trees</Text>

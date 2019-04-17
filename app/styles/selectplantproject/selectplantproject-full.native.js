@@ -60,7 +60,6 @@ export default (selectplantprojectFull = EStyleSheet.create({
       width: 0,
       height: 0
     },
-    width: '100%',
     shadowOpacity: 0,
     elevation: 0,
     paddingBottom: 10

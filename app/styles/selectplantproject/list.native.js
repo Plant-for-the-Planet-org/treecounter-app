@@ -81,7 +81,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   searchItem: {
     // paddingBottom: 10
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    height: 40
     //marginRight: 15
   },
   searchIconContainer: {
@@ -143,7 +144,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
     backgroundColor: 'white'
   },
   listViewContainer: {
-    flex: 1
+    flex: 0.95
   },
   headingStyle: {
     fontSize: 16,

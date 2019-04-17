@@ -214,25 +214,13 @@ export default class UserHome extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <TabView
-          useNativeDriver
-          navigationState={this.state}
-          renderScene={this._renderUserHome}
-          renderTabBar={this._renderTabBar}
-          onIndexChange={this._handleIndexChange}
-        />
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            flex: 1,
-            width: '100%'
-          }}
-        >
-          <TabContainer {...this.props} />
-        </View>
-      </View>
+      <TabView
+        useNativeDriver
+        navigationState={this.state}
+        renderScene={this._renderUserHome}
+        renderTabBar={this._renderTabBar}
+        onIndexChange={this._handleIndexChange}
+      />
     );
   }
 }

@@ -15,6 +15,7 @@ import tabStyles from '../../styles/common/tabbar';
 
 import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
+import TabContainer from '../../containers/Menu/TabContainer';
 import { getProfileTypeName } from '../PublicTreeCounter/utils';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList';

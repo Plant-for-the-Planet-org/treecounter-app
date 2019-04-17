@@ -84,9 +84,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_editProfile')]: {
         screen: isLoggedIn ? EditUserProfile : LoginContainer
       },
-      [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : Trillion
-      },
       [getLocalRoute('app_login')]: {
         screen: LoginContainer
       },

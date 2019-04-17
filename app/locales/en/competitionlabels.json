@@ -16,5 +16,6 @@
   "create_competition": "Create Competition",
   "competition_access_immediate": "Anyone (Join Immediately)",
   "competition_access_request": "Anyone (Request to Join)",
-  "competition_access_invitation": "People I Invite"
+  "competition_access_invitation": "People I Invite",
+  "edit_competition": "Edit Competition"
 }

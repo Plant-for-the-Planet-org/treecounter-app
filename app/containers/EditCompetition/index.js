@@ -21,13 +21,15 @@ import {
   declinePart,
   enrollCompetition,
   invitePart,
-  leaveCompetition
+  leaveCompetition,
+  editCompetition
 } from '../../actions/competition';
 import CompetitionParticipant from '../../components/Competition/CompetitionParticipant.native';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import Challenge from '../../components/Challenge/createChallenge';
+import EditCompetition from '../../components/Competition/EditCompetition.native';
 
-class SelectedCompetitionContainer extends Component {
+class EditCompetitionContainer extends Component {
   constructor(props) {
     super(props);
     const { match } = props;
@@ -40,8 +42,6 @@ class SelectedCompetitionContainer extends Component {
     this.state = {
       competition_id: competition_id
     };
-    this.leaveCompetition = this.leaveCompetition.bind(this);
-    this.enrollCompetition = this.enrollCompetition.bind(this);
     this.editCompetition = this.editCompetition.bind(this);
   }
   componentWillReceiveProps(nextProps) {
@@ -54,41 +54,27 @@ class SelectedCompetitionContainer extends Component {
       }
     }
   }
-  editCompetition(id) {
-    const { navigation } = this.props;
-    if (navigation) {
-      updateRoute('app_editCompetition', navigation, 1, {
-        competition: id
-      });
-    }
-  }
-  leaveCompetition(id) {
-    this.props.leaveCompetition(id);
-  }
-  enrollCompetition(id) {
-    this.props.enrollCompetition(id);
+  editCompetition(value, params) {
+    let json = {
+      name: value.name,
+      goal: value.goal,
+      endDate: value.endDate,
+      access: value.access,
+      description: value.description,
+      contact: value.contact,
+      email: value.email
+    };
+    this.props.editCompetition(json, params, this.props.navigation);
   }
   componentDidMount() {}
 
   render() {
-    console.log(this.state, this.props);
     if (this.state.competition_id) {
       return (
-        <CompetitionFull
+        <EditCompetition
           {...this.props}
           competition_id={this.state.competition_id}
-          leaveCompetition={id => this.leaveCompetition(id)}
-          enrollCompetition={id => this.enrollCompetition(id)}
-          confirmPart={id => this.props.confirmPart(id)}
-          declinePart={id => this.props.declinePart(id)}
-          cancelInvite={id => this.props.cancelInvite(id)}
-          supportTreecounterAction={this.props.supportTreecounterAction}
-          currentUserProfile={this.props.userProfile}
-          navigation={this.props.navigation}
-          editCompetition={id => this.editCompetition(id)}
-          invitePart={(competition, competitor) =>
-            this.props.invitePart(competition, competitor)
-          }
+          editCompetition={this.editCompetition}
         />
       );
     } else {
@@ -97,30 +83,22 @@ class SelectedCompetitionContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  userProfile: currentUserProfileSelector(state)
-});
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      leaveCompetition,
-      enrollCompetition,
-      confirmPart,
-      declinePart,
-      cancelInvite,
-      invitePart,
-      supportTreecounterAction
+      editCompetition
     },
     dispatch
   );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  SelectedCompetitionContainer
+  EditCompetitionContainer
 );
 
-SelectedCompetitionContainer.propTypes = {
+EditCompetitionContainer.propTypes = {
   match: PropTypes.any,
   navigation: PropTypes.any,
   leaveCompetition: PropTypes.any,

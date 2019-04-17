@@ -29,7 +29,6 @@ export async function getRequest(route, params) {
 document.addEventListener('DOMContentLoaded', function() {
   let allBlockQuote = document.getElementsByTagName('blockquote');
   for (let i = allBlockQuote.length - 1; i > -1; i--) {
-    console.log(allBlockQuote[i].attributes);
     let widgetType = allBlockQuote[i].attributes.getNamedItem(
       'data-widget-type'
     );

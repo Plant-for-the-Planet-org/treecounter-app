@@ -9,7 +9,7 @@ export function TextInputTemplate(locals) {
   function onChange(value) {
     value =
       locals.keyboardType === 'numeric' && value
-        ? parseInt(value)
+        ? parseInt(value) > 0
           ? parseInt(value)
           : ''
         : value;

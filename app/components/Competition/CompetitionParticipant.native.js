@@ -26,10 +26,6 @@ class CompetitionParticipant extends React.Component {
   }
   render() {
     let support_button = null;
-    console.log(
-      this.props.competitor.treecounterSlug,
-      this.props.treeCounter.slug
-    );
     if (
       this.props.type === 'participants' &&
       this.props.competitor.treecounterSlug === this.props.treeCounter.slug

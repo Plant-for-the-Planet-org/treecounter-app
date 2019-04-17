@@ -10,6 +10,7 @@ import DescriptionHeading from '../../components/Common/Heading/DescriptionHeadi
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import i18n from '../../locales/i18n';
 import { categoryIcons } from '../../helpers/utils';
+import { delimitNumbers } from '../../utils/utils';
 import BackButton from '../Common/Button/BackButton';
 export default class Leaderboard extends Component {
   constructor(props) {
@@ -92,11 +93,11 @@ export default class Leaderboard extends Component {
                   </div>
                   <div className="table-col other">
                     <div className="table-col-phone-header">Planted</div>
-                    <span>{parseInt(d.planted).toLocaleString('en')}</span>
+                    <span>{delimitNumbers(parseInt(d.planted))}</span>
                   </div>
                   <div className="table-col other">
                     <div className="table-col-phone-header">Target</div>
-                    <span>{parseInt(d.target).toLocaleString('en')}</span>
+                    <span>{delimitNumbers(parseInt(d.target))}</span>
                   </div>
                 </div>
               );

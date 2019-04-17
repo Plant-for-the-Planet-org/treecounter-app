@@ -28,7 +28,11 @@ class PlantProjectFull extends React.Component {
         this.props.plantProject.plantProjectImages &&
         this.props.plantProject.plantProjectImages.find(() => true);
     }
-    this.state = { expanded: props.expanded, projectImage: projectImage };
+    this.state = {
+      expanded: props.expanded,
+      projectImage: projectImage,
+      imageViewMore: false
+    };
     if (props.callExpanded) {
       props.callExpanded(!this.state.expanded);
     }
@@ -167,6 +171,7 @@ class PlantProjectFull extends React.Component {
         {this.state.expanded ? (
           <PlantProjectDetails
             {...detailsProps}
+            onViewMoreClick={this.props.onViewMoreClick.bind(this)}
             onImageClick={this.updateProjectImage.bind(this)}
           />
         ) : null}
@@ -181,7 +186,8 @@ PlantProjectFull.propTypes = {
   callExpanded: PropTypes.func,
   tpoName: PropTypes.string,
   selectAnotherProject: PropTypes.bool,
-  projectClear: PropTypes.func
+  projectClear: PropTypes.func,
+  onViewMoreClick: PropTypes.func
 };
 
 export default PlantProjectFull;

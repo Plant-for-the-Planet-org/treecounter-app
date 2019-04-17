@@ -27,7 +27,6 @@ export default class App extends Component {
     };
   }
   updateSvg(toggle) {
-    console.log(toggle);
     if (toggle) {
       const treecounter = this.props.treecounter;
       let svgData = {

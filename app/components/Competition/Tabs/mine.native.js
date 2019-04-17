@@ -116,7 +116,6 @@ export default class MineCompetitions extends Component {
   }
 
   render() {
-    console.log(this.props, this.state);
     let { featuredProjects, featuredCompetitions } = this.state;
     return !this.state.showCompetitionForm ? (
       <View style={styles.mineContainer}>

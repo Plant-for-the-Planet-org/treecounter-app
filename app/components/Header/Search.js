@@ -29,7 +29,10 @@ class SearchBar extends React.Component {
     return (
       <div>
         <div className="search-bar">
-          <SearchAutosuggest onSuggestionClicked={this.suggestionClicked} />
+          <SearchAutosuggest
+            onSuggestionClicked={this.suggestionClicked}
+            clearSuggestions={true}
+          />
           <i className="material-icons search-icon">{'search'}</i>
         </div>
       </div>

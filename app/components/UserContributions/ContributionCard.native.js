@@ -55,7 +55,6 @@ class ContributionCard extends React.Component {
     </View>
   );
   _renderContent(section) {
-    //console.log('section', section);
     const measurementsAvailable =
       section.contributionMeasurements &&
       section.contributionMeasurements.length > 0;

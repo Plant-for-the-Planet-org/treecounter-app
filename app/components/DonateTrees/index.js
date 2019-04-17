@@ -100,6 +100,7 @@ export default class DonateTrees extends Component {
         ...receipt
       },
       expanded: false,
+      imageViewMore: false,
       expandedOption: '1',
       showSelectProject: false
     };
@@ -451,6 +452,11 @@ export default class DonateTrees extends Component {
                   <div>
                     {this.props.selectedTpo ? (
                       <PlantProjectFull
+                        onViewMoreClick={() =>
+                          this.setState({
+                            imageViewMore: !this.state.imageViewMore
+                          })
+                        }
                         callExpanded={this.callExpanded}
                         expanded={false}
                         plantProject={this.props.selectedProject}

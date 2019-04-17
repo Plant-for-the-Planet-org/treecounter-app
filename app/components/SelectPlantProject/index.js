@@ -38,6 +38,7 @@ export default class SelectPlantProject extends Component {
       featuredProjects: props.plantProjects,
       priceSortedProjects: props.plantProjects,
       searchFieldValue: '',
+      imageViewMore: false,
       mode: 'name',
       isOpen: false,
       modalProject: null
@@ -201,6 +202,9 @@ export default class SelectPlantProject extends Component {
           <div className="project-modal-card-layout">
             {this.state.modalProject ? (
               <PlantProjectFull
+                onViewMoreClick={() =>
+                  this.setState({ imageViewMore: !this.state.imageViewMore })
+                }
                 expanded={false}
                 plantProject={this.state.modalProject}
                 tpoName={this.state.modalProject.tpo_name}
@@ -227,6 +231,11 @@ export default class SelectPlantProject extends Component {
                     key={project.id}
                   >
                     <PlantProjectFull
+                      onViewMoreClick={() =>
+                        this.setState({
+                          imageViewMore: !this.state.imageViewMore
+                        })
+                      }
                       callExpanded={() => this.callExpanded()}
                       expanded={false}
                       plantProject={project}

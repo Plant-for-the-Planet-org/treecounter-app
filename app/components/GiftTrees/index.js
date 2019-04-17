@@ -114,6 +114,7 @@ export default class GiftTrees extends Component {
       },
       giftTreecounterName: null,
       expanded: false,
+      imageViewMore: false,
       expandedOption: '1',
       showNextButton: true,
       showSelectProject: false
@@ -480,6 +481,11 @@ export default class GiftTrees extends Component {
                 {this.props.selectedTpo ? (
                   !plantProject ? null : (
                     <PlantProjectFull
+                      onViewMoreClick={() =>
+                        this.setState({
+                          imageViewMore: !this.state.imageViewMore
+                        })
+                      }
                       callExpanded={this.callExpanded}
                       expanded={false}
                       plantProject={this.props.selectedProject}

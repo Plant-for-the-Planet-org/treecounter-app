@@ -55,7 +55,16 @@ class EditCompetitionContainer extends Component {
     }
   }
   editCompetition(value, params) {
-    this.props.editCompetition(value, params, this.props.navigation);
+    let json = {
+      name: value.name,
+      goal: value.goal,
+      endDate: value.endDate,
+      access: value.access,
+      description: value.description,
+      contact: value.contact,
+      email: value.email
+    };
+    this.props.editCompetition(json, params, this.props.navigation);
   }
   componentDidMount() {}
 

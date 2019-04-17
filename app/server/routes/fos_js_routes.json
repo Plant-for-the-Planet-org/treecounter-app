@@ -3882,6 +3882,27 @@
       ],
       "schemes": []
     },
+    "app_editCompetition": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "competition"
+        ],
+        [
+          "text",
+          "/edit-competition"
+        ]
+      ],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
     "app_signupSuccess": {
       "tokens": [
         [
@@ -3974,27 +3995,6 @@
         [
           "text",
           "/competition"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_editCompetition": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "competition"
-        ],
-        [
-          "text",
-          "/editCompetition"
         ]
       ],
       "defaults": [],

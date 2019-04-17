@@ -176,7 +176,6 @@ export function createCompetition(value, navigation) {
   };
 }
 export function editCompetition(value, param, navigation) {
-  console.log(value);
   return dispatch => {
     dispatch(setProgressModelState(true));
     putAuthenticatedRequest('competition_put', value, { competition: param })
@@ -184,11 +183,6 @@ export function editCompetition(value, param, navigation) {
         dispatch(
           mergeEntities(
             normalize(res.data.merge.competition, [competitionSchema])
-          )
-        );
-        dispatch(
-          mergeEntities(
-            normalize(res.data.merge.treecounter, [treecounterSchema])
           )
         );
         updateRoute('app_competition', navigation || dispatch, 1, {

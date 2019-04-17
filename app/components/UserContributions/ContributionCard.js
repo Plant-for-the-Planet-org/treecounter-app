@@ -10,6 +10,7 @@ import TextSpan from '../Common/Text/TextSpan';
 import ConfirmDeletion from './ConfirmDelete';
 import i18n from '../../locales/i18n.js';
 import { updateRoute } from '../../helpers/routerHelper';
+import { delimitNumbers } from '../../utils/utils';
 
 export default class ContributionCard extends React.Component {
   constructor(props) {
@@ -40,7 +41,7 @@ export default class ContributionCard extends React.Component {
       viewExpanded: !this.state.viewExpanded
     });
   treeCountLine(treeCount, treeSpecies) {
-    return treeCount + ' ' + (treeSpecies ? treeSpecies : '');
+    return delimitNumbers(treeCount) + ' ' + (treeSpecies ? treeSpecies : '');
   }
 
   plantProjectLine(plantProjectName, country) {

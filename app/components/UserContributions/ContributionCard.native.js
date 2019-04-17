@@ -18,6 +18,7 @@ import myTreesStyle from '../../styles/myTrees/user_contribution_card';
 import { foldout, foldin, MapPinRed, EditOrange } from '../../assets';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
+import { delimitNumbers } from '../../utils/utils';
 import Lightbox from 'react-native-lightbox';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
@@ -128,7 +129,7 @@ class ContributionCard extends React.Component {
     });
 
   treeCountLine(treeCount, treeSpecies) {
-    return treeCount + ' ' + (treeSpecies ? treeSpecies : '');
+    return delimitNumbers(treeCount) + ' ' + (treeSpecies ? treeSpecies : '');
   }
 
   plantProjectLine(plantProjectName, country) {

@@ -83,7 +83,7 @@ export default (selectedCompetitionFull = EStyleSheet.create({
   topCompetitorSection: {
     flex: 1,
     flexDirection: 'row',
-    padding: 3,
+    padding: 16,
     width: '100%',
     justifyContent: 'space-between'
   },
@@ -117,7 +117,9 @@ export default (selectedCompetitionFull = EStyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     width: '100%',
-    padding: 10
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: 16
   },
   textHeadingParticipants: {
     fontSize: 16,
@@ -149,9 +151,8 @@ export default (selectedCompetitionFull = EStyleSheet.create({
     height: 30,
     borderWidth: 1,
     borderRadius: 6,
-    paddingLeft: 5,
-    paddingRight: 5,
-    marginRight: 5
+    paddingLeft: 10,
+    paddingRight: 10
   },
   buttonTextStyle: {
     fontSize: 14

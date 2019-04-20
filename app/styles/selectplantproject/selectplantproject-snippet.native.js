@@ -20,17 +20,19 @@ export default (selectplantprojectFull = EStyleSheet.create({
     shadowOpacity: 0.5,
     elevation: 1,
     padding: 0,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4
   },
   projectImageContainer: {
     height: Layout.window.width * 0.5,
     width: '100%',
     borderTopLeftRadius: 4,
-    borderTopRightRadius: 4
+    borderTopRightRadius: 4,
+    overflow: 'hidden'
   },
   teaser__projectImage: {
-    flex: 1
+    flex: 1,
+    overflow: 'hidden'
   },
   projectSpecsContainer: {
     width: '100%',

@@ -215,7 +215,7 @@ class CompetitionFull extends React.Component {
                       </View>
                     </View>
                   ) : null}
-                  <View style={snippetStyles.actionContainer}>
+                  <View style={styles.actionContainer}>
                     <View style={snippetStyles.byOrgContainer}>
                       <Image
                         source={compCalendar}
@@ -226,7 +226,7 @@ class CompetitionFull extends React.Component {
                       </Text>
                     </View>
 
-                    <View style={snippetStyles.buttonContainer}>{button}</View>
+                    <View style={styles.buttonContainer}>{button}</View>
                   </View>
                 </View>
               </View>

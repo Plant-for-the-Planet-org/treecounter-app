@@ -162,6 +162,7 @@ export default (selectCompetitionFull = EStyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     width: '50%',
+    paddingTop: 10,
     justifyContent: 'flex-end'
   },
   buttonItem: {

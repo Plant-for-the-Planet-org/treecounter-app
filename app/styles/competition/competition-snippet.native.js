@@ -126,8 +126,7 @@ export default (selectCompetitionFull = EStyleSheet.create({
   },
   byOrgContainer: {
     width: '50%',
-    flexDirection: 'row',
-    paddingTop: 10,
+    flexDirection: 'column',
     alignItems: 'center'
   },
   emailContainer: {

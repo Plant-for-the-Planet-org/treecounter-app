@@ -94,18 +94,18 @@ export default (selectCompetitionFull = EStyleSheet.create({
   actionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
-    paddingTop: 10
+    width: '100%'
     //height: rowHeight + rowHeight / 2,
   },
   project_teaser__contentText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
     color: '$cardTextColor',
     maxWidth: '90%'
   },
   project_teaser__contentByText: {
-    fontSize: 14,
+    fontSize: 10,
+    paddingBottom: 5,
     color: '$cardTextColor',
     maxWidth: '90%'
   },
@@ -116,7 +116,7 @@ export default (selectCompetitionFull = EStyleSheet.create({
   bottomText: {
     fontSize: 14,
     color: '$cardTextColor',
-    paddingLeft: 5,
+    paddingLeft: 10,
     paddingRight: 5
   },
   bottomParticipantText: {
@@ -127,11 +127,13 @@ export default (selectCompetitionFull = EStyleSheet.create({
   byOrgContainer: {
     width: '50%',
     flexDirection: 'row',
+    paddingTop: 10,
     alignItems: 'center'
   },
   emailContainer: {
     width: '100%',
     flexDirection: 'row',
+    paddingTop: 16,
     alignItems: 'center'
   },
   byOrgText: {
@@ -176,20 +178,23 @@ export default (selectCompetitionFull = EStyleSheet.create({
     // marginRight: 5
     height: 35,
     borderWidth: 1,
-    borderRadius: 6,
-    padding: 5,
-    marginRight: 5
+    borderRadius: 4,
+    padding: 5
   },
   buttonTextStyle: {
     fontSize: 14
   },
   moreButtonStyle: {
     backgroundColor: 'white',
-    borderWidth: 0.5,
-    borderColor: '$primary'
+    height: 35,
+    borderWidth: 1,
+    borderRadius: 4,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderColor: '$borderColor'
   },
   moreButtonTextStyle: {
-    color: '$primary',
+    color: '$textColor',
     fontSize: 12
   },
   projectNameContainer: {

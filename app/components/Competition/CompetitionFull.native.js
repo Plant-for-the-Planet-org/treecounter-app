@@ -122,8 +122,8 @@ class CompetitionFull extends React.Component {
       button = (
         <PrimaryButton
           style={snippetStyles.buttonItem}
-          buttonStyle={snippetStyles.buttonStyle}
-          textStyle={snippetStyles.buttonTextStyle}
+          buttonStyle={snippetStyles.moreButtonStyle}
+          textStyle={snippetStyles.moreButtonTextStyle}
           onClick={() => this.props.leaveCompetition(competitionDetail.id)}
         >
           <Text> {i18n.t('label.leave')}</Text>

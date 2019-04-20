@@ -94,7 +94,8 @@ export default (selectCompetitionFull = EStyleSheet.create({
   actionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%'
+    width: '100%',
+    paddingTop: 10
     //height: rowHeight + rowHeight / 2,
   },
   project_teaser__contentText: {
@@ -126,7 +127,8 @@ export default (selectCompetitionFull = EStyleSheet.create({
   },
   byOrgContainer: {
     width: '50%',
-    flexDirection: 'column',
+    flexDirection: 'row',
+    paddingTop: 10,
     alignItems: 'center'
   },
   emailContainer: {

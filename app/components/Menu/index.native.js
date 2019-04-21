@@ -190,10 +190,11 @@ export default class Menu extends Component {
                 onPress={this.onPressMenu.bind(this, {
                   uri: 'pickup_profile_modal'
                 })}
-                title={'community'}
+                title={'Community'}
                 details={
                   this.props.userProfile.supportedTreecounter.displayName
                 }
+                iconUrl={icons.communityMenu}
               />
             ) : null}
 

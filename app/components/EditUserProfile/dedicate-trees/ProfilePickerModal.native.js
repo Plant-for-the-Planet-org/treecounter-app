@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import styles from '../../../styles/edit_profile.native';
+import styles from '../../../styles/profilepicker.native';
 import { View, ScrollView, Text } from 'react-native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { connect } from 'react-redux';
@@ -9,66 +9,87 @@ import { currentUserProfileSelector } from '../../../selectors';
 
 import { updateProfileDedication } from '../../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
+import CardLayout from '../../Common/Card';
+import TabContainer from '../../../containers/Menu/TabContainer';
 
 class ProfilePickerModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { editMode: null, selectedSuggection: null };
+    this.state = { editMode: null, selectedSuggestion: null };
   }
 
   onSearchResultClick(event) {
-    this.setState({ selectedSuggection: event });
+    this.setState({ selectedSuggestion: event });
   }
   updateProfile() {
     this.setState({ editMode: true });
   }
   onDedicateClick() {
     this.props.updateProfileDedication({
-      supportedTreecounter: this.state.selectedSuggection.id
+      supportedTreecounter: this.state.selectedSuggestion.id
     });
+    this.setState({ editMode: false });
   }
 
   render() {
     const { currentUserProfile } = this.props;
     const pickupProfileView = (
-      <View style={{ flex: 1 }}>
-        <SearchUser
-          onSearchResultClick={this.onSearchResultClick.bind(this)}
-          currentUserProfile={this.props.currentUserProfile}
-        />
-        {this.state.selectedSuggection ? (
-          <View style={{ flexDirection: 'row' }}>
-            <Text>{this.state.selectedSuggection.name}</Text>
-            <PrimaryButton
-              buttonStyle={styles.buttonStyle}
-              onClick={() => {
-                this.onDedicateClick.bind(this);
-              }}
-            >
-              {'Dedicate'}
-            </PrimaryButton>
-          </View>
-        ) : null}
-      </View>
+      <CardLayout>
+        <View>
+          <SearchUser
+            onSearchResultClick={this.onSearchResultClick.bind(this)}
+            currentUserProfile={this.props.currentUserProfile}
+          />
+          {this.state.selectedSuggestion ? (
+            <View style={styles.containerStyle}>
+              <Text style={styles.textStyle}>
+                {this.state.selectedSuggestion.name}
+              </Text>
+              <PrimaryButton
+                buttonStyle={styles.buttonStyle}
+                onClick={this.onDedicateClick.bind(this)}
+              >
+                {'Dedicate'}
+              </PrimaryButton>
+            </View>
+          ) : null}
+        </View>
+      </CardLayout>
     );
 
     return (
-      <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}>
-        {this.state.editMode ? pickupProfileView : null}
-        {currentUserProfile.supportedTreecounter ? (
-          <View style={{ flexDirection: 'row', flex: 1 }}>
-            <Text>{currentUserProfile.supportedTreecounter.displayName}</Text>
-            <PrimaryButton
-              buttonStyle={styles.buttonStyle}
-              onClick={this.updateProfile.bind(this)}
-            >
-              {'Pickup Profile'}
-            </PrimaryButton>
-          </View>
-        ) : (
-          pickupProfileView
-        )}
-      </ScrollView>
+      <View style={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ flex: 1 }}>
+          {this.state.editMode ? pickupProfileView : null}
+          {currentUserProfile.supportedTreecounter ? (
+            <CardLayout>
+              <View style={styles.containerStyle}>
+                <Text style={styles.textStyle}>
+                  {currentUserProfile.supportedTreecounter.displayName}
+                </Text>
+                <PrimaryButton
+                  buttonStyle={styles.buttonStyle}
+                  onClick={this.updateProfile.bind(this)}
+                >
+                  Edit
+                </PrimaryButton>
+              </View>
+            </CardLayout>
+          ) : (
+            pickupProfileView
+          )}
+        </ScrollView>
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            flex: 1,
+            width: '100%'
+          }}
+        >
+          <TabContainer {...this.props} />
+        </View>
+      </View>
     );
   }
 }

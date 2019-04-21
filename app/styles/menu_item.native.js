@@ -21,6 +21,13 @@ export default (menuStyles = EStyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10
   },
+  titleStyle: {
+    height: 25,
+    borderRadius: 3,
+    backgroundColor: '#c7c7c6',
+    padding: 5,
+    fontSize: 12
+  },
   groupMenuContainer: {
     flexDirection: 'column',
     justifyContent: 'center',

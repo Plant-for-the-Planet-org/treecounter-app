@@ -41,10 +41,9 @@ export default (selectedCompetitionFull = EStyleSheet.create({
     alignItems: 'center'
   },
   buttonContainer: {
-    flexGrow: 0,
-    flexShrink: 0,
-    flexBasis: Layout.window.height * 0.15,
-    height: Layout.window.height * 0.15
+    flexDirection: 'row',
+    width: '50%',
+    justifyContent: 'flex-end'
   },
   plantProjectDetails: {
     flexGrow: 1,
@@ -137,6 +136,12 @@ export default (selectedCompetitionFull = EStyleSheet.create({
   },
   buttonItem: {
     padding: 5
+  },
+  actionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%'
+    //height: rowHeight + rowHeight / 2,
   },
   buttonStyle: {
     // height: 20,

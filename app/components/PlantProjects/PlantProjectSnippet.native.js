@@ -104,9 +104,7 @@ class PlantProjectSnippet extends React.Component {
         underlayColor={'transparent'}
         onPress={() => this.containerPress(id)}
       >
-        <CardLayout
-          style={[styles.projectSnippetContainer, this.props.cardStyle]}
-        >
+        <CardLayout style={[styles.projectSnippetContainer]}>
           {projectImage ? (
             <View style={styles.projectImageContainer}>
               <Image
@@ -122,12 +120,11 @@ class PlantProjectSnippet extends React.Component {
               />
             </View>
           ) : null}
-
+          <PlantedProgressBar
+            countPlanted={specsProps.countPlanted}
+            countTarget={specsProps.countTarget}
+          />
           <View style={styles.projectSpecsContainer}>
-            <PlantedProgressBar
-              countPlanted={specsProps.countPlanted}
-              countTarget={specsProps.countTarget}
-            />
             <View style={styles.projectNameContainer}>
               <Text
                 ellipsizeMode="tail"

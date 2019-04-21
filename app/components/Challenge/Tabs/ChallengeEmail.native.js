@@ -8,6 +8,7 @@ import CardLayout from '../../Common/Card';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { TextInput, View, Text } from 'react-native';
 import ChallengeList from '../challengeList';
+import { delimitNumbers } from '../../../utils/utils';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
@@ -41,8 +42,8 @@ export default class ChallengeEmail extends Component {
   }
 
   onNextClick() {
-    if (this.giftInvitation.getValue()) {
-      let value = this.giftInvitation.getValue();
+    if (this.challengeInvitation.getValue()) {
+      let value = this.challengeInvitation.getValue();
       requestData = {
         invitee: { ...value }
       };
@@ -53,7 +54,7 @@ export default class ChallengeEmail extends Component {
       requestData.goal = this.state.treeCount;
       this.props.challengeUser(requestData);
     } else {
-      this.giftInvitation.validate();
+      this.challengeInvitation.validate();
     }
   }
 
@@ -81,17 +82,18 @@ export default class ChallengeEmail extends Component {
             value={this.state.tempForm}
             onChange={this.onFormChange}
           />
-          <View style={challengeStyles.flexStyle}>
+          <View style={challengeStyles.flexContainerStyle}>
             <Text>Challenge to plant </Text>
             <TextInput
               keyboardType="numeric"
               style={challengeStyles.treecount_input}
               onChangeText={evt => this.handleTreeCountChange(evt)}
-              value={this.state.treeCount.toLocaleString()}
+              value={delimitNumbers(this.state.treeCount)}
+              autoCapitalize={'sentences'}
             />
             <Text>Trees</Text>
           </View>
-          <View style={challengeStyles.flexStyle}>
+          <View style={challengeStyles.flexContainerStyle}>
             <CheckBox
               onClick={() => {
                 this.setState({
@@ -109,9 +111,10 @@ export default class ChallengeEmail extends Component {
                 width: 70
               }}
               dropdownOffset={{
-                top: 0
+                top: 0,
+                left: 0
               }}
-              selectedItem={item =>
+              onChangeText={item =>
                 this.setState({
                   byYear: item
                 })

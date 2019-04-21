@@ -80,8 +80,6 @@ class BottomTabContainer extends Component {
   }
 
   render() {
-    console.log('authenticated scheema');
-    console.log(this.state.schema);
     return this.state.loading && this.state.schema.length == 0 ? null : (
       <TabComponent
         userProfile={this.props.userProfile}

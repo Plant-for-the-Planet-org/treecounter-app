@@ -133,7 +133,6 @@ export default class RegisterTrees extends Component {
   }
 
   onSubmitClick(event) {
-    console.log('event', event);
     this.props.onSubmit(this.state.mode);
     event.preventDefault();
   }

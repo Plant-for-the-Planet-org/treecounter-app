@@ -29,10 +29,6 @@
   width: 100%;
   margin-top: 10px;
 
-  .treecount-selector-wrapper {
-    height: 280px;
-  }
-
   .pftp-tabs__type {
     margin-top: 5%;
     @include for-phone-only {
@@ -74,6 +70,40 @@
 
     .slick-list {
       height: auto;
+    }
+  }
+
+  .pftp-tabs {
+    font-size: 15px;
+    .react-autosuggest__container {
+      width: 100%;
+      input {
+        background: none;
+        color: #000000;
+        font-size: 18px;
+        padding: 5px 10px 10px 5px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid mix(white, #424242, 70%);
+      }
+    }
+    .pftp-textarea {
+      margin-top: 20px;
+      width: 100%;
+      height: 200px;
+      textarea {
+        width: 94%;
+        height: 90%;
+        border: 1px solid #c6c6c6;
+        color: #68605f;
+      }
+    }
+
+    .fieldset {
+      width: 100%;
     }
   }
 
@@ -384,6 +414,12 @@
 }
 .payment_options__wrapper {
   min-height: 470px;
+  .payment_option_details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 .payment-option {
   display: flex;
@@ -468,6 +504,13 @@
 
 .payment-success {
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .payment-options-container {

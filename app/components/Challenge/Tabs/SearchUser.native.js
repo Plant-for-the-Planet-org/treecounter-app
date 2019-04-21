@@ -5,10 +5,11 @@ import SearchBar from '../../../components/Header/SearchBar.native';
 import Header from '../../../components/Header/Header.native';
 import { getSuggestions, profileTypeToImage } from '../../../helpers/utils';
 import { getImageUrl } from '../../../actions/apiRouting';
-import { getLocalRoute } from '../../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import styles from '../../../styles/header/search_layout.native';
 import _ from 'lodash';
+import searchBarStyles from '../../../styles/header/search_bar.native';
+import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
@@ -36,7 +37,7 @@ class SearchUser extends React.Component {
 
   // TODO: debounce
   _handleChangeQuery = q => {
-    this.setState({ searchResultClicked: false, selectedSuggestionName: q });
+    this.setState({ selectedSuggestionName: '', searchResultClicked: false });
     getSuggestions(q).then(suggestions => {
       this.setState({ q: suggestions });
     });
@@ -45,22 +46,39 @@ class SearchUser extends React.Component {
   _onNavigationClick(suggestion) {
     if (
       this.props.onSearchResultClick &&
-      !this.isMyself(suggestion, this.props.currentUserProfile)
+      !this.isMyself(suggestion, this.props.currentUserProfile) &&
+      (this.props.alreadyInvited &&
+        !this.alreadyInvitedUser(suggestion, this.props.alreadyInvited))
     ) {
       this.props.onSearchResultClick(suggestion);
       this.setState({
         searchResultClicked: true
       });
       this.setState({
-        selectedSuggestionName: suggestion.name
+        selectedSuggestionName: this.props.clearTextOnClick
+          ? ''
+          : suggestion.name
       });
+    } else {
+      NotificationManager.error('Could not add user', 'Error', 5000);
     }
   }
   isMyself(treecounter, currentUserProfile) {
     return (
-      null !== currentUserProfile &&
+      !!currentUserProfile &&
       currentUserProfile.treecounter.id === treecounter.id
     );
+  }
+  alreadyInvitedUser(treecounter, alreadyInvited) {
+    if (alreadyInvited.length > 0) {
+      for (let i = 0; i < alreadyInvited.length; i++) {
+        if (treecounter.slug === alreadyInvited[i].treecounterSlug) {
+          return true;
+        }
+      }
+    } else {
+      return false;
+    }
   }
   render() {
     return (
@@ -78,11 +96,9 @@ class SearchUser extends React.Component {
           }
           showCancelSearchButton={false}
           style={{
+            ...searchBarStyles.searchContainer,
             width: '100%',
-            height: 30,
-            marginTop: 10,
-            paddingLeft: 27,
-            flexDirection: 'row'
+            backgroundColor: 'transparent'
           }}
           tintColor={
             this.props.searchInputTintColor || this.props.headerTintColor

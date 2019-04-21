@@ -17,8 +17,10 @@ class SignUpContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    let gBatch = document.getElementsByClassName('grecaptcha-badge');
-    gBatch[0].style.visibility = 'hidden';
+    if (!this.props.navigation) {
+      let gBatch = document.getElementsByClassName('grecaptcha-badge');
+      gBatch[0].style.visibility = 'hidden';
+    }
   }
 
   onSignUpClicked = (profileType, token) => {
@@ -26,7 +28,7 @@ class SignUpContainer extends React.Component {
     let formValue = this.refs.signupContainer.refs.signupForm.getValue();
     if (formValue) {
       this.props
-        .signUp(profileType, formValue, token)
+        .signUp(profileType, formValue, token, this.props.navigation)
         .then(success => {})
         .catch(err => {
           console.log('err signup data', err);

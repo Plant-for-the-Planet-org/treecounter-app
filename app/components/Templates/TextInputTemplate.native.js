@@ -1,14 +1,18 @@
 import { Text, View, Image, TextInput, Platform } from 'react-native';
 import React from 'react';
 import i18n from '../../locales/i18n';
-import styles from '../../styles/forms/textinput';
+import styles from '../../styles/forms/textinput.native';
 export function TextInputTemplate(locals) {
   if (locals.hidden) {
     return null;
   }
   function onChange(value) {
     value =
-      locals.keyboardType === 'numeric' && value ? parseInt(value) : value;
+      locals.keyboardType === 'numeric' && value
+        ? parseInt(value) > 0
+          ? parseInt(value)
+          : ''
+        : value;
     locals.onChange(value);
   }
 
@@ -45,7 +49,7 @@ export function TextInputTemplate(locals) {
           onChange={locals.onChangeNative}
           onKeyPress={locals.onKeyPress}
           returnKeyType={locals.returnKeyType}
-          autoCapitalize={locals.autoCapitalize}
+          autoCapitalize={'sentences'}
           allowFontScaling={true}
         />
       </View>

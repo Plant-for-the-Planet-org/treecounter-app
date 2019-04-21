@@ -4,7 +4,7 @@ export default {
     type: 'object',
     properties: {
       treeCount: {
-        type: 'number',
+        type: 'integer',
         title: 'label.tree_count',
         widget: 'hidden',
         icon: null,
@@ -128,7 +128,7 @@ export default {
         propertyOrder: 8
       }
     },
-    required: ['treeCount', 'plantDate'],
+    required: ['treeCount', 'plantDate', 'geoLocation'],
     submit_url: '',
     submit_method: 'POST'
   },
@@ -137,7 +137,7 @@ export default {
     type: 'object',
     properties: {
       treeCount: {
-        type: 'number',
+        type: 'integer',
         title: 'label.tree_count',
         icon: null,
         help: null,
@@ -200,7 +200,7 @@ export default {
         propertyOrder: 5
       }
     },
-    required: ['treeCount', 'plantDate'],
+    required: ['treeCount', 'plantDate', 'geoLocation'],
     submit_url: '',
     submit_method: 'POST'
   }

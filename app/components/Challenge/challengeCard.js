@@ -8,11 +8,11 @@ import CardLayout from '../Common/Card';
 import UserProfileImage from '../Common/UserProfileImage';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
+import { delimitNumbers } from '../../utils/utils';
 
 export default class ChallengeCard extends React.Component {
   render() {
     let { challenge } = this.props;
-    console.log(challenge);
     let {
       direction,
       goal,
@@ -29,7 +29,7 @@ export default class ChallengeCard extends React.Component {
           <div className="flex-row">
             <div className="limit-width">
               <span className="goal-style">
-                {goal.toLocaleString() +
+                {delimitNumbers(goal) +
                   ' Trees' +
                   (end_date !== null ? ' by ' + end_date : '')}
               </span>

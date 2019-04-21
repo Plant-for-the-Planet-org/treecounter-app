@@ -10,6 +10,7 @@ import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import CardLayout from '../../components/Common/Card';
 import { getDocumentTitle } from '../../helpers/utils';
+import { delimitNumbers } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
 
 import {
@@ -211,14 +212,18 @@ class PublicTreeCounter extends React.Component {
                         {treecounter.directChildren[childrenId].displayName}
                       </div>
                       <div className="table-col planted">
-                        {parseInt(
-                          treecounter.directChildren[childrenId].countPlanted
-                        ).toLocaleString('en')}
+                        {delimitNumbers(
+                          parseInt(
+                            treecounter.directChildren[childrenId].countPlanted
+                          )
+                        )}
                       </div>
                       <div className="table-col target">
-                        {parseInt(
-                          treecounter.directChildren[childrenId].countTarget
-                        ).toLocaleString('en')}
+                        {delimitNumbers(
+                          parseInt(
+                            treecounter.directChildren[childrenId].countTarget
+                          )
+                        )}
                       </div>
                       <div className="table-col support">
                         <PrimaryButton

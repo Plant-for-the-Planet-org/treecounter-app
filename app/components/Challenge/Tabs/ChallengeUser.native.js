@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { ScrollView, View, TextInput, Image, Text } from 'react-native';
+import { ScrollView, View, TextInput, Text } from 'react-native';
 import SearchUser from './SearchUser.native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
+import { delimitNumbers } from '../../../utils/utils';
 import ChallengeList from '../challengeList';
 import CardLayout from '../../Common/Card';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
 import challengeStyles from '../../../styles/challenge';
@@ -74,18 +74,21 @@ export default class ChallengeUser extends Component {
           <SearchUser
             onSearchResultClick={this.onSearchResultClick}
             currentUserProfile={this.props.currentUserProfile}
+            alreadyInvited={[]}
           />
-          <View style={challengeStyles.flexStyle}>
+          <View style={challengeStyles.flexContainerStyle}>
             <Text>Challenge to plant </Text>
             <TextInput
               keyboardType="numeric"
+              underlineColorAndroid={'transparent'}
               style={challengeStyles.treecount_input}
               onChangeText={evt => this.handleTreeCountChange(evt)}
-              value={this.state.treeCount.toLocaleString()}
+              value={delimitNumbers(this.state.treeCount)}
+              autoCapitalize={'sentences'}
             />
             <Text>Trees</Text>
           </View>
-          <View style={challengeStyles.flexStyle}>
+          <View style={challengeStyles.flexContainerStyle}>
             <CheckBox
               onClick={() => {
                 this.setState({
@@ -103,9 +106,10 @@ export default class ChallengeUser extends Component {
                 width: 70
               }}
               dropdownOffset={{
-                top: 0
+                top: 10,
+                left: 0
               }}
-              selectedItem={item =>
+              onChangeText={item =>
                 this.setState({
                   byYear: item
                 })

@@ -39,5 +39,8 @@ export default (menuStyles = EStyleSheet.create({
   },
   centerMenu: {
     marginTop: 22
+  },
+  sideNavigationActionMenuContainer: {
+    width: '100%'
   }
 }));

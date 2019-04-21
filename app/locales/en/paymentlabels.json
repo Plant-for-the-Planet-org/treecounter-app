@@ -1,8 +1,7 @@
 {
   "amount": "amount: ",
   "creditCard": "Credit Card",
-  "confirm":
-    "I confirm that I will pay the amount of {{amount}}{{currency}} to the following account.",
+  "confirm": "I confirm that I will pay the amount of {{amount}}{{currency}} to the following account.",
   "bank_transfer": "Bank Transfer",
   "pay_via": "Pay via Bank Transfer",
   "pay": "Pay",

@@ -40,6 +40,7 @@ class PlantProjectDetails extends React.Component {
         <PlantProjectImageCarousel
           projectImages={plantProjectImages}
           carousalImageClick={this.props.onImageClick}
+          onViewMoreClick={this.props.onViewMoreClick.bind(this)}
         />
         <UserSynopsis synopsis1={description} />
         {homepageUrl && (
@@ -71,7 +72,8 @@ PlantProjectDetails.propTypes = {
   videoUrl: PropTypes.string,
   mapData: PropTypes.object,
   plantProjectImages: PropTypes.array,
-  onImageClick: PropTypes.func
+  onImageClick: PropTypes.func,
+  onViewMoreClick: PropTypes.func
 };
 
 export default PlantProjectDetails;

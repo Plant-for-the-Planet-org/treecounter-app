@@ -1,6 +1,10 @@
 {
+  "individual_plant_personal": "von mir",
+  "individual_plant_community": "von meiner Community",
+  "tpo_plant_personal": "von uns",
+  "by": "durch",
   "faqs": "Häufig gestellte Fragen",
   "logged_in": "Eingeloggt",
-  "trillionTreeMessage1": "Das Ziel der \"Trillion Tree Campaign\"-App ist es,  Baumpflanzprojekte auf der ganzen Welt transparenter zu machen und es jedem so einfach wie möglich zu machen, sie zu unterstützen.",
-  "trillionTreeMessage2": " Die globale Wiederaufforstung könnte 25% der globalen jährlichen CO2-Emissionen einfangen und Wohlstand im globalen Süden schaffen."
+  "trillionTreeMessage1": "Das Ziel der Trillion Tree Campaign App ist,  Baumpflanzprojekte aus der ganzen Welt transparent darzustellen und es jedem so einfach wie möglich zu machen, sie zu unterstützen.",
+  "trillionTreeMessage2": "Die globale Aufforstung könnte 25% der jährlich weltweit ausgestoßenen CO2-Emissionen binden und Wohlstand im globalen Süden schaffen."
 }

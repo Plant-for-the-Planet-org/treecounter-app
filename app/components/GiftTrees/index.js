@@ -10,7 +10,7 @@ import CardLayout from '../Common/Card';
 import SearchAutosuggest from '../Header/SearchAutosuggest';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
-import { arrow_left_green } from '../../assets';
+import { arrow_left_green, check_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
@@ -31,6 +31,8 @@ import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import i18n from '../../locales/i18n';
 import PaymentSelector from '../Payment/PaymentSelector';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
+import TextBlock from '../Common/Text/TextBlock';
+import InlineLink from '../Common/InlineLink';
 
 let TCombForm = t.form.Form;
 
@@ -112,6 +114,7 @@ export default class GiftTrees extends Component {
       },
       giftTreecounterName: null,
       expanded: false,
+      imageViewMore: false,
       expandedOption: '1',
       showNextButton: true,
       showSelectProject: false
@@ -178,7 +181,12 @@ export default class GiftTrees extends Component {
     () => {
       if (this.state.modeUser === 'direct') {
         let returnValue;
-        returnValue = this.state.form.giftTreecounter ? true : false;
+        returnValue = this.state.form.directGift.treecounter ? true : false;
+        this.setState({
+          form: {
+            ...this.state.form
+          }
+        });
         return returnValue;
       } else {
         let value = this.refs.giftInvitation.getValue();
@@ -246,6 +254,7 @@ export default class GiftTrees extends Component {
   handleModeUserChange(tab) {
     this.setState({
       modeUser: tab,
+      message: '',
       form: { ...this.state.form, giftMethod: tab }
     });
   }
@@ -264,22 +273,34 @@ export default class GiftTrees extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        giftTreecounter: event.suggestion.id
+        directGift: { treecounter: event.suggestion.id }
       },
       giftTreecounterName: event.suggestion.name
     });
   };
 
   handlePaymentApproved(paymentResponse) {
-    this.props.gift(
-      {
-        ...this.state.form,
-        paymentResponse,
-        amount: this.state.selectedAmount,
-        currency: this.state.selectedCurrency
-      },
-      this.props.selectedProject.id
-    );
+    if (this.state.form.giftMethod === 'direct') {
+      this.props.gift(
+        {
+          paymentResponse,
+          ...this.state.form,
+          amount: this.state.selectedAmount,
+          currency: this.state.selectedCurrency
+        },
+        this.props.selectedProject.id
+      );
+    } else {
+      this.props.gift(
+        {
+          paymentResponse,
+          ...this.state.form,
+          amount: this.state.selectedAmount,
+          currency: this.state.selectedCurrency
+        },
+        this.props.selectedProject.id
+      );
+    }
   }
 
   callExpanded = bool => {
@@ -287,6 +308,19 @@ export default class GiftTrees extends Component {
       expanded: bool
     });
   };
+  handleMessageChange(event) {
+    //set message as part of form only as we are setting treecounter.
+    this.setState({});
+    this.setState({
+      form: {
+        ...this.state.form,
+        directGift: {
+          ...this.state.form.directGift,
+          message: event.target.value
+        }
+      }
+    });
+  }
 
   render() {
     let displayNone = classNames({
@@ -297,7 +331,9 @@ export default class GiftTrees extends Component {
     if (this.refs.slider) {
       setTimeout(() => {
         if (pageIndex === 4) {
-          this.refs.slider.slickGoTo(pageIndex);
+          if (this.refs.slider && this.refs.slider.slickGoTo) {
+            this.refs.slider.slickGoTo(pageIndex);
+          }
         }
       }, 1000);
     }
@@ -333,7 +369,11 @@ export default class GiftTrees extends Component {
       adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation
-          styleName="donate-tree-nav-img__left"
+          styleName={
+            this.state.pageIndex === 0
+              ? 'display-none'
+              : 'donate-tree-nav-img__left'
+          }
           src={arrow_left_green}
         />
       ),
@@ -415,22 +455,37 @@ export default class GiftTrees extends Component {
                     onTabChange={this.handleModeUserChange}
                   >
                     {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
-                      <SearchAutosuggest
-                        onSuggestionClicked={this.suggestionClicked}
-                        clearSuggestions={false}
-                      />
+                      <React.Fragment>
+                        <SearchAutosuggest
+                          onSuggestionClicked={this.suggestionClicked}
+                          clearSuggestions={false}
+                        />
+                        <div className="pftp-textarea">
+                          <textarea
+                            placeholder="Gift Message"
+                            onChange={this.handleMessageChange.bind(this)}
+                          />
+                        </div>
+                      </React.Fragment>
                     ) : (
-                      <TCombForm
-                        ref="giftInvitation"
-                        type={giftInvitationFormSchema}
-                        options={giftInvitationSchemaOptions}
-                      />
+                      <React.Fragment>
+                        <TCombForm
+                          ref="giftInvitation"
+                          type={giftInvitationFormSchema}
+                          options={giftInvitationSchemaOptions}
+                        />
+                      </React.Fragment>
                     )}
                   </Tabs>
                 </div>
                 {this.props.selectedTpo ? (
                   !plantProject ? null : (
                     <PlantProjectFull
+                      onViewMoreClick={() =>
+                        this.setState({
+                          imageViewMore: !this.state.imageViewMore
+                        })
+                      }
                       callExpanded={this.callExpanded}
                       expanded={false}
                       plantProject={this.props.selectedProject}

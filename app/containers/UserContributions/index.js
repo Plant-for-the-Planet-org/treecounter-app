@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
+import { deleteContribution } from '../../actions/EditMyTree';
 import UserContributions from '../../components/UserContributions';
 
 // Actions
@@ -17,6 +19,7 @@ class UserContributionsContainer extends React.Component {
         userProfileId={this.props.userProfileId}
         userContributions={this.props.userContributions}
         navigation={this.props.navigation}
+        deleteContribution={this.props.deleteContribution}
       />
     );
   }
@@ -27,10 +30,22 @@ const mapStateToProps = state => ({
   userProfileId: currentUserProfileIdSelector(state)
 });
 
-export default connect(mapStateToProps)(UserContributionsContainer);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      deleteContribution
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  UserContributionsContainer
+);
 
 UserContributionsContainer.propTypes = {
   userProfileId: PropTypes.number.isRequired,
   userContributions: PropTypes.array.isRequired,
-  navigation: PropTypes.any
+  navigation: PropTypes.any,
+  deleteContribution: PropTypes.func
 };

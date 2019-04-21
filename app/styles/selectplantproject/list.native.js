@@ -7,6 +7,9 @@ const Layout = {
   }
 };
 export default (selectplantprojectFull = EStyleSheet.create({
+  flexContainer: {
+    flex: 1
+  },
   listItemContainer: {
     flexDirection: 'column',
     height: 150
@@ -78,7 +81,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   searchItem: {
     // paddingBottom: 10
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    height: 40
     //marginRight: 15
   },
   searchIconContainer: {
@@ -129,14 +133,18 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   imageStyle: {
     flex: 1,
-    width: undefined,
-    height: undefined
+    width: '100%',
+    height: '100%'
   },
 
   cardHeader: {
     flexDirection: 'row',
     padding: 10,
+
     backgroundColor: 'white'
+  },
+  listViewContainer: {
+    flex: 0.95
   },
   headingStyle: {
     fontSize: 16,

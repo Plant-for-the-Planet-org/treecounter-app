@@ -11,9 +11,17 @@ const Layout = {
 
 export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
-    padding: 0,
     flexDirection: 'column',
-    width: Layout.window.width - 30
+
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowOpacity: 0.5,
+    elevation: 1,
+    padding: 0,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10
   },
   projectTeaserContainer: {
     height: Layout.window.height * 0.5
@@ -60,7 +68,6 @@ export default (selectplantprojectFull = EStyleSheet.create({
       width: 0,
       height: 0
     },
-    width: '100%',
     shadowOpacity: 0,
     elevation: 0,
     paddingBottom: 10

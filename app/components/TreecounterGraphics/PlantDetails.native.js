@@ -5,30 +5,9 @@ import { close_green, darkTree, lightTree } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import svgStyles from '../../styles/common/treecounter_svg';
 import { View, Image, Text } from 'react-native';
+import { delimitNumbers } from '../../utils/utils';
 
 class PlantedDetails extends Component {
-  convertNumber(n, d) {
-    let x = ('' + n).length;
-    if (x > 5) {
-      let p = Math.pow;
-      d = p(10, d);
-      x -= x % 3;
-      return (
-        Math.round(n * d / p(10, x)) / d +
-        [
-          '',
-          ' Thousand',
-          ' Million',
-          ' Billion',
-          ' Trillion',
-          ' Quadrillion',
-          ' Quintillion'
-        ][x / 3]
-      );
-    } else {
-      return n;
-    }
-  }
   render() {
     const { onToggle, personal, community, type } = this.props;
     return (
@@ -61,7 +40,7 @@ class PlantedDetails extends Component {
 
             <View>
               <Text style={svgStyles.svgTextValue}>
-                {this.convertNumber(personal, 2)}
+                {delimitNumbers(personal)}
               </Text>
             </View>
           </View>
@@ -85,7 +64,7 @@ class PlantedDetails extends Component {
             </View>
             <View>
               <Text style={svgStyles.svgTextValue}>
-                {this.convertNumber(parseInt(community), 2)}
+                {delimitNumbers(community)}
               </Text>
             </View>
           </View>
@@ -97,8 +76,8 @@ class PlantedDetails extends Component {
 export default PlantedDetails;
 
 PlantedDetails.propTypes = {
-  personal: PropTypes.number.isRequired,
-  community: PropTypes.number.isRequired,
+  personal: PropTypes.string.isRequired,
+  community: PropTypes.string.isRequired,
   type: PropTypes.string,
   onToggle: PropTypes.func
 };

@@ -10,7 +10,7 @@ import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { ScrollView } from 'react-native';
 import PlantProjectSnippet from './PlantProjectSnippet.native';
-import scrollStyle from '../../styles/common/scrollStyle';
+import scrollStyle from '../../styles/common/scrollStyle.native';
 import TabContainer from '../../containers/Menu/TabContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -47,9 +47,8 @@ class PlantProjectFull extends React.Component {
     return (
       <View>
         <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
-          <CardLayout style={styles.projectFullContainer}>
+          <CardLayout style={[styles.projectFullContainer]}>
             <PlantProjectSnippet
-              cardStyle={styles.cardStyle}
               key={'projectFull' + this.props.plantProject.id}
               showMoreButton={false}
               clickable={false}
@@ -80,7 +79,9 @@ class PlantProjectFull extends React.Component {
         <View
           style={{
             position: 'absolute',
-            bottom: 0
+            bottom: 0,
+            flex: 1,
+            width: '100%'
           }}
         >
           <TabContainer {...this.props} />

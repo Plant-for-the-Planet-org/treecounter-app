@@ -100,6 +100,7 @@ export default class DonateTrees extends Component {
         ...receipt
       },
       expanded: false,
+      imageViewMore: false,
       expandedOption: '1',
       showSelectProject: false
     };
@@ -217,6 +218,44 @@ export default class DonateTrees extends Component {
     }
   ];
 
+  checkValidationPreviousArrow = [
+    () => {
+      return false;
+    },
+    () => {
+      if (this.state.selectedTreeCount) {
+        this.setState({
+          form: {
+            ...this.state.form,
+            treeCount: this.state.selectedTreeCount
+          }
+        });
+        return true;
+      }
+      return false;
+    },
+    () => {
+      // console.log(this.refs.donateReceipt.validate());
+      let value = this.refs.donateReceipt.getValue();
+      let receipt = {};
+      if (value) {
+        if (this.state.modeReceipt === 'individual') {
+          receipt['receiptIndividual'] = value;
+        } else {
+          receipt['receiptCompany'] = value;
+        }
+        this.setState({
+          form: {
+            ...this.state.form,
+            ...receipt
+          }
+        });
+        return true;
+      }
+      return false;
+    }
+  ];
+
   handleModeReceiptChange(tab) {
     this.setState({
       modeReceipt: tab,
@@ -239,6 +278,7 @@ export default class DonateTrees extends Component {
       recipientType = 'receiptCompany';
     }
     if (
+      this.props.currentUserProfile &&
       !this.props.currentUserProfile.address &&
       this.state.form[recipientType].address
     ) {
@@ -304,7 +344,11 @@ export default class DonateTrees extends Component {
       currentSlide: this.state.pageIndex,
       prevArrow: (
         <CarouselNavigation
-          styleName="donate-tree-nav-img__left"
+          styleName={
+            this.state.pageIndex === 0
+              ? 'display-none'
+              : 'donate-tree-nav-img__left'
+          }
           src={arrow_left_green}
         />
       ),
@@ -395,7 +439,12 @@ export default class DonateTrees extends Component {
               </TextBlock>
             </div>
           ) : (
-            <form onSubmit={this.checkValidation[2]}>
+            <form
+              onSubmit={event => {
+                this.checkValidation[2]();
+                event.preventDefault();
+              }}
+            >
               <div className="donate-tress__container">
                 <ContentHeader caption={headings[this.state.pageIndex]} />
 
@@ -403,6 +452,11 @@ export default class DonateTrees extends Component {
                   <div>
                     {this.props.selectedTpo ? (
                       <PlantProjectFull
+                        onViewMoreClick={() =>
+                          this.setState({
+                            imageViewMore: !this.state.imageViewMore
+                          })
+                        }
                         callExpanded={this.callExpanded}
                         expanded={false}
                         plantProject={this.props.selectedProject}

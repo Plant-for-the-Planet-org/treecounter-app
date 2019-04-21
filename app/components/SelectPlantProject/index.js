@@ -13,6 +13,7 @@ import TextHeading from '../Common/Heading/TextHeading';
 import ModalDialog from '../Common/ModalDialog';
 import i18n from '../../locales/i18n';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
+import { delimitNumbers } from '../../utils/utils';
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -37,6 +38,7 @@ export default class SelectPlantProject extends Component {
       featuredProjects: props.plantProjects,
       priceSortedProjects: props.plantProjects,
       searchFieldValue: '',
+      imageViewMore: false,
       mode: 'name',
       isOpen: false,
       modalProject: null
@@ -200,6 +202,9 @@ export default class SelectPlantProject extends Component {
           <div className="project-modal-card-layout">
             {this.state.modalProject ? (
               <PlantProjectFull
+                onViewMoreClick={() =>
+                  this.setState({ imageViewMore: !this.state.imageViewMore })
+                }
                 expanded={false}
                 plantProject={this.state.modalProject}
                 tpoName={this.state.modalProject.tpo_name}
@@ -226,6 +231,11 @@ export default class SelectPlantProject extends Component {
                     key={project.id}
                   >
                     <PlantProjectFull
+                      onViewMoreClick={() =>
+                        this.setState({
+                          imageViewMore: !this.state.imageViewMore
+                        })
+                      }
                       callExpanded={() => this.callExpanded()}
                       expanded={false}
                       plantProject={project}
@@ -300,9 +310,9 @@ export default class SelectPlantProject extends Component {
                                   {project.tpo_name}
                                 </td>
                                 <td className="align-right">
-                                  {parseInt(
-                                    project.countPlanted
-                                  ).toLocaleString('en')}
+                                  {delimitNumbers(
+                                    parseInt(project.countPlanted)
+                                  )}
                                 </td>
                                 <td className="align-right">
                                   {project.currency +
@@ -354,9 +364,9 @@ export default class SelectPlantProject extends Component {
                                   {project.tpo_name}
                                 </td>
                                 <td className="align-right">
-                                  {parseInt(
-                                    project.countPlanted
-                                  ).toLocaleString('en')}
+                                  {delimitNumbers(
+                                    parseInt(project.countPlanted)
+                                  )}
                                 </td>
                                 <td className="align-right">
                                   {project.currency +

@@ -2,7 +2,6 @@
   "edit_trees": "Editar árboles",
   "tree_count": "Recuento de árboles",
   "tree_species": "Especie de árbol",
-  "plant_date": "Fecha de planta",
   "geo_location": "Ubicación geográfica",
   "add_images": "Añadir imágenes",
   "tree_classification": "Clasificación de árbol",
@@ -14,7 +13,5 @@
   "heading_register_trees": "Registre árboles plantados",
   "register_description": "Informa los árboles que has plantado. Estos árboles aparecerán en tu contador de árboles. Luego puedes actualizar, editar o eliminar entradas en \"Mis Árboles\".",
   "register": "Registración",
-  "many_trees": "Muchos árboles",
-  "plant_project": "Proyecto de plantación",
-  "plant_projects": "Proyectos de plantación"
+  "many_trees": "Muchos árboles"
 }

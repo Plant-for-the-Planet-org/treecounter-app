@@ -45,7 +45,6 @@ async function getHeaders(authenticated = false, recaptcha) {
       'X-CAPTCHA-TOKEN': recaptcha
     };
   }
-  console.log(headers);
   if (authenticated) {
     return {
       headers: { ...headers, Authorization: `Bearer ${await getAccessToken()}` }
@@ -137,6 +136,7 @@ export async function postAuthenticatedRequest(route, data, params) {
 
 export async function putRequest(route, data, params, authenticated = false) {
   let url = await getApiRoute(route, params);
+  console.log(url);
   return await axios
     .put(url, data, await getHeaders(authenticated))
     .then(checkStatus)

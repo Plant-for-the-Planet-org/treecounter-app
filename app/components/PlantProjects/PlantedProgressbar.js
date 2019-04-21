@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
 import { targetPlanted } from '../../assets';
+import { delimitNumbers } from '../../utils/utils';
 
 class PlantedProgressBar extends React.Component {
   constructor(props) {
@@ -32,7 +33,9 @@ class PlantedProgressBar extends React.Component {
             style={{ width: treeCountWidth + '%' }}
           />
           <div className="tree-count-container">
-            <div className="treePlantedtextPlanted">{countPlanted}</div>
+            <div className="treePlantedtextPlanted">
+              {delimitNumbers(countPlanted)}
+            </div>
             <div className="treePlantedtextTrees">
               {i18n.t('label.trees')} Planted
             </div>
@@ -42,7 +45,7 @@ class PlantedProgressBar extends React.Component {
         {!this.props.hideTargetImage ? (
           <div className="targetContainer">
             <div className="treePlantedtext">
-              {countTarget ? countTarget.toLocaleString('en') : null}
+              {countTarget ? delimitNumbers(countTarget) : null}
             </div>
 
             <div className="target-icon-container">

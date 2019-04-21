@@ -35,8 +35,8 @@ export default class ChallengeCard extends React.Component {
       token
     } = challenge;
     return (
-      <CardLayout>
-        <View style={challengesStyle.flexStyle}>
+      <CardLayout style={[challengesStyle.challengeContainer]}>
+        <View style={challengesStyle.challengeViewContainer}>
           <View style={challengesStyle.limitWidth}>
             <Text style={challengesStyle.goalStyle}>
               {delimitNumbers(goal) +
@@ -44,20 +44,18 @@ export default class ChallengeCard extends React.Component {
                 (end_date !== null ? ' by ' + end_date : '')}
             </Text>
             <View style={challengesStyle.flexStyle}>
-              <UserProfileImage profileImage={avatar} />
+              <UserProfileImage
+                profileImage={avatar}
+                style={challengesStyle.profileImage}
+                imageStyle={{ borderRadius: 15 }}
+              />
               <View>
-                <View
-                  style={[
-                    challengesStyle.flexStyle,
-                    challengesStyle.textPadding
-                  ]}
-                >
+                <View style={[challengesStyle.textPadding]}>
                   <Text style={challengesStyle.textStyle}>
-                    {direction === 'target' ? 'from ' : 'to '}
+                    {direction === 'target' ? 'from ' : 'to '} {fullname}
                   </Text>
-                  <Text style={challengesStyle.textStyle}>{fullname}</Text>
                 </View>
-                <View style={challengesStyle.flexStyle}>
+                <View style={challengesStyle.challengeDate}>
                   <Image
                     style={challengesStyle.imageStyle}
                     resizeMode="contain"
@@ -68,7 +66,7 @@ export default class ChallengeCard extends React.Component {
                   <Text
                     style={[
                       challengesStyle.textStyle,
-                      challengesStyle.textPadding
+                      challengesStyle.textChallengePadding
                     ]}
                   >
                     {moment(created).format('D MMM, YYYY')}
@@ -78,12 +76,12 @@ export default class ChallengeCard extends React.Component {
             </View>
           </View>
           {direction === 'target' && status === 'pending' ? (
-            <View>
+            <View style={challengesStyle.buttonContainer}>
               <PrimaryButton
                 buttonStyle={challengesStyle.buttonStyle}
                 textStyle={challengesStyle.textStyle}
                 onClick={() =>
-                  this.props.challengeStatus({ status: 'accept' }, token)
+                  this.props.challengeStatus({ status: 'active' }, token)
                 }
               >
                 Accept
@@ -99,7 +97,7 @@ export default class ChallengeCard extends React.Component {
               </SecondaryButton>
             </View>
           ) : (
-            <View>
+            <View style={challengesStyle.buttonContainer}>
               <Text style={challengesStyle.statusLabel}>
                 {status && status.toUpperCase()}
               </Text>

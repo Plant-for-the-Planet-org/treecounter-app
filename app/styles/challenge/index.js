@@ -17,9 +17,27 @@ const buttonStyle = {
   height: 40
 };
 export default (editProfileStyle = EStyleSheet.create({
+  challengeContainer: {
+    flexDirection: 'column',
+
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowOpacity: 0.5,
+    elevation: 1,
+    padding: 0
+  },
+  challengeViewContainer: {
+    flexDirection: 'row',
+    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
   goalStyle: {
-    fontSize: 18,
-    fontWeight: '600'
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '$colorPrimary'
   },
   statusLabel: {
     backgroundColor: '#e0e0e0',
@@ -33,12 +51,17 @@ export default (editProfileStyle = EStyleSheet.create({
     ...buttonStyle
   },
   limitWidth: {
-    width: 190
+    width: '60%',
+    flexDirection: 'column'
+  },
+  buttonContainer: {
+    flexDirection: 'column',
+    width: '40%',
+    justifyContent: 'flex-end'
   },
   profileImage: {
-    height: 30,
-    width: 30,
-    marginRight: 5
+    height: 40,
+    width: 40
   },
   flexContainerStyle: {
     flexDirection: 'row',
@@ -48,9 +71,7 @@ export default (editProfileStyle = EStyleSheet.create({
   },
   flexStyle: {
     flexDirection: 'row',
-    paddingTop: 5,
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    paddingTop: 16
   },
   treecount_input: {
     paddingLeft: 8,
@@ -60,11 +81,20 @@ export default (editProfileStyle = EStyleSheet.create({
     paddingBottom: 2,
     ...centerTextInput
   },
+  challengeDate: {
+    flexDirection: 'row',
+    paddingTop: 2,
+    paddingLeft: 10
+  },
+  textChallengePadding: {
+    paddingLeft: 5
+  },
   textStyle: {
-    fontSize: 16
+    fontSize: 14,
+    color: '$lightTextColor'
   },
   textPadding: {
-    paddingLeft: 5
+    paddingLeft: 10
   },
   imageStyle: {
     height: 15,

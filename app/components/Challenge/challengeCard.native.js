@@ -79,7 +79,7 @@ export default class ChallengeCard extends React.Component {
             <View style={challengesStyle.buttonContainer}>
               <PrimaryButton
                 buttonStyle={challengesStyle.buttonStyle}
-                textStyle={challengesStyle.textStyle}
+                textStyle={challengesStyle.buttonTextStyle}
                 onClick={() =>
                   this.props.challengeStatus({ status: 'active' }, token)
                 }
@@ -88,7 +88,7 @@ export default class ChallengeCard extends React.Component {
               </PrimaryButton>
               <SecondaryButton
                 buttonStyle={challengesStyle.buttonStyle}
-                textStyle={challengesStyle.textStyle}
+                textStyle={challengesStyle.buttonTextStyle}
                 onClick={() =>
                   this.props.challengeStatus({ status: 'declined' }, token)
                 }

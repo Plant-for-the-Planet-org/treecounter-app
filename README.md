@@ -55,3 +55,21 @@ After completion of these steps run following command in VSCode Terminal:
 ```bash
 react-native run-android
 ```
+
+## Versioning
+
+*App Versioning Guide*
+
+eg: Version M.F.B
+V 1.1.10
+
+M = Major Changes
+F = Feature Addition
+B = Critical Bug Fixes and Additions
+
+Release candidate can have the target version number
+V 1.1.`11` RC `1`
+
+Beta and Alpha builds can also have target version number
+V 1.1.`11` B `12`
+V 1.1.`11` A `12` [increment per release]

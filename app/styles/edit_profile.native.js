@@ -61,6 +61,7 @@ export default (editProfileStyle = EStyleSheet.create({
   followerRow: {
     display: 'flex',
     flexDirection: 'row',
+    padding: 6,
     justifyContent: 'space-between',
     alignItems: 'center'
   },

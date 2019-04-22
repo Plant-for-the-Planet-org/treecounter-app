@@ -217,11 +217,11 @@ export default class Redemption extends Component {
       <View style={{ flex: 1 }}>
         <KeyboardAwareScrollView enableOnAndroid={true}>
           <View style={styles.parentContainer}>
-            <View style={styles.headerContainer}>
+            <CardLayout style={styles.cardContainer}>
               <Text style={styles.titleText}>
                 {i18n.t('label.redeem_heading')}
               </Text>
-            </View>
+            </CardLayout>
             <CardLayout style={styles.cardContainer}>
               {icon}
               {content}

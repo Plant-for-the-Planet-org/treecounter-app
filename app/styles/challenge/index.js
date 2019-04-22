@@ -97,6 +97,10 @@ export default (editProfileStyle = EStyleSheet.create({
     fontSize: 14,
     color: '$lightTextColor'
   },
+  buttonTextStyle: {
+    fontSize: 14,
+    color: '#ffffff'
+  },
   textPadding: {
     paddingLeft: 10
   },

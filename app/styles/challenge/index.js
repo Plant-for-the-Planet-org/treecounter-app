@@ -28,6 +28,10 @@ export default (editProfileStyle = EStyleSheet.create({
     elevation: 1,
     padding: 0
   },
+  challengeColumnContainer: {
+    flexDirection: 'column',
+    padding: 16
+  },
   challengeViewContainer: {
     flexDirection: 'row',
     padding: 16,

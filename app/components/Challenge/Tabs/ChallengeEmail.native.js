@@ -74,56 +74,58 @@ export default class ChallengeEmail extends Component {
   render() {
     return (
       <KeyboardAwareScrollView enableOnAndroid={true}>
-        <CardLayout>
-          <TCombForm
-            ref={this.setChallengeInvitation}
-            type={challengeFormSchema}
-            options={challengeFormSchemaOptions}
-            value={this.state.tempForm}
-            onChange={this.onFormChange}
-          />
-          <View style={challengeStyles.flexContainerStyle}>
-            <Text>Challenge to plant </Text>
-            <TextInput
-              keyboardType="numeric"
-              style={challengeStyles.treecount_input}
-              onChangeText={evt => this.handleTreeCountChange(evt)}
-              value={delimitNumbers(this.state.treeCount)}
-              autoCapitalize={'sentences'}
+        <CardLayout style={[challengeStyles.challengeContainer]}>
+          <View style={challengeStyles.challengeColumnContainer}>
+            <TCombForm
+              ref={this.setChallengeInvitation}
+              type={challengeFormSchema}
+              options={challengeFormSchemaOptions}
+              value={this.state.tempForm}
+              onChange={this.onFormChange}
             />
-            <Text>Trees</Text>
+            <View style={challengeStyles.flexContainerStyle}>
+              <Text>Challenge to plant </Text>
+              <TextInput
+                keyboardType="numeric"
+                style={challengeStyles.treecount_input}
+                onChangeText={evt => this.handleTreeCountChange(evt)}
+                value={delimitNumbers(this.state.treeCount)}
+                autoCapitalize={'sentences'}
+              />
+              <Text>Trees</Text>
+            </View>
+            <View style={challengeStyles.flexContainerStyle}>
+              <CheckBox
+                onClick={() => {
+                  this.setState({
+                    isChecked: !this.state.isChecked
+                  });
+                }}
+                style={{
+                  width: 70
+                }}
+                isChecked={this.state.isChecked}
+                rightText={'by'}
+              />
+              <Dropdown
+                containerStyle={{
+                  width: 70
+                }}
+                dropdownOffset={{
+                  top: 0,
+                  left: 0
+                }}
+                onChangeText={item =>
+                  this.setState({
+                    byYear: item
+                  })
+                }
+                label="Year"
+                data={this.years}
+              />
+            </View>
+            <PrimaryButton onClick={this.onNextClick}>Challenge</PrimaryButton>
           </View>
-          <View style={challengeStyles.flexContainerStyle}>
-            <CheckBox
-              onClick={() => {
-                this.setState({
-                  isChecked: !this.state.isChecked
-                });
-              }}
-              style={{
-                width: 70
-              }}
-              isChecked={this.state.isChecked}
-              rightText={'by'}
-            />
-            <Dropdown
-              containerStyle={{
-                width: 70
-              }}
-              dropdownOffset={{
-                top: 0,
-                left: 0
-              }}
-              onChangeText={item =>
-                this.setState({
-                  byYear: item
-                })
-              }
-              label="Year"
-              data={this.years}
-            />
-          </View>
-          <PrimaryButton onClick={this.onNextClick}>Challenge</PrimaryButton>
         </CardLayout>
         <ChallengeList
           challenges={this.props.challenges}

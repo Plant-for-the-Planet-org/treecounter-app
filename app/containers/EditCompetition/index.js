@@ -28,6 +28,8 @@ import CompetitionParticipant from '../../components/Competition/CompetitionPart
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import Challenge from '../../components/Challenge/createChallenge';
 import EditCompetition from '../../components/Competition/EditCompetition.native';
+import { handleServerResponseError } from '../../helpers/utils';
+import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
 
 class EditCompetitionContainer extends Component {
   constructor(props) {
@@ -40,7 +42,8 @@ class EditCompetitionContainer extends Component {
       competition_id = props.navigation.getParam('competition', null);
     }
     this.state = {
-      competition_id: competition_id
+      competition_id: competition_id,
+      competitionFormSchemaOptions
     };
     this.editCompetition = this.editCompetition.bind(this);
   }
@@ -54,7 +57,7 @@ class EditCompetitionContainer extends Component {
       }
     }
   }
-  editCompetition(value, params) {
+  editCompetition(value, params, formRef) {
     let json = {
       name: value.name,
       goal: value.goal,
@@ -64,7 +67,26 @@ class EditCompetitionContainer extends Component {
       contact: value.contact,
       email: value.email
     };
-    this.props.editCompetition(json, params, this.props.navigation);
+    this.props
+      .editCompetition(json, params, this.props.navigation)
+      .then(success => {})
+      .catch(err => {
+        console.log('err signup data', err);
+        let newSchemaOptions = handleServerResponseError(
+          err,
+          this.state.competitionFormSchemaOptions
+        );
+        this.setState(
+          {
+            competitionFormSchemaOptions: {
+              ...newSchemaOptions
+            }
+          },
+          () => {
+            formRef.validate();
+          }
+        );
+      });
   }
   componentDidMount() {}
 
@@ -75,6 +97,7 @@ class EditCompetitionContainer extends Component {
           {...this.props}
           competition_id={this.state.competition_id}
           editCompetition={this.editCompetition}
+          competitionFormSchemaOptions={this.state.competitionFormSchemaOptions}
         />
       );
     } else {

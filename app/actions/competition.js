@@ -145,62 +145,68 @@ export function leaveCompetition(id) {
 export function createCompetition(value, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    postAuthenticatedRequest('competition_post', value)
-      .then(res => {
-        dispatch(
-          mergeEntities(
-            normalize(res.data.merge.competition, [competitionSchema])
-          )
-        );
-        dispatch(
-          mergeEntities(
-            normalize(res.data.merge.treecounter, [treecounterSchema])
-          )
-        );
-        updateRoute('app_competition', navigation || dispatch, 1, {
-          competition: res.data.merge.competition[0].id
+    return new Promise(function(resolve, reject) {
+      postAuthenticatedRequest('competition_post', value)
+        .then(res => {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.competition, [competitionSchema])
+            )
+          );
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.treecounter, [treecounterSchema])
+            )
+          );
+          updateRoute('app_competition', navigation || dispatch, 1, {
+            competition: res.data.merge.competition[0].id
+          });
+          resolve(res.data);
+          dispatch(setProgressModelState(false));
+          NotificationManager.success(
+            'Competition Created successfully',
+            'Success',
+            5000
+          );
+          dispatch(fetchMineCompetitions());
+        })
+        .catch(error => {
+          debug(error);
+          reject(error);
+          dispatch(setProgressModelState(false));
         });
-
-        dispatch(setProgressModelState(false));
-        NotificationManager.success(
-          'Competition Created successfully',
-          'Success',
-          5000
-        );
-        dispatch(fetchMineCompetitions());
-      })
-      .catch(error => {
-        debug(error);
-        dispatch(setProgressModelState(false));
-      });
+    });
   };
 }
 export function editCompetition(value, param, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    putAuthenticatedRequest('competition_put', value, { competition: param })
-      .then(res => {
-        dispatch(
-          mergeEntities(
-            normalize(res.data.merge.competition, [competitionSchema])
-          )
-        );
-        updateRoute('app_competition', navigation || dispatch, 1, {
-          competition: res.data.merge.competition[0].id
+    return new Promise(function(resolve, reject) {
+      putAuthenticatedRequest('competition_put', value, { competition: param })
+        .then(res => {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.competition, [competitionSchema])
+            )
+          );
+          updateRoute('app_competition', navigation || dispatch, 1, {
+            competition: res.data.merge.competition[0].id
+          });
+          resolve(res.data);
+          dispatch(setProgressModelState(false));
+          NotificationManager.success(
+            'Competition Edited successfully',
+            'Success',
+            5000
+          );
+          dispatch(fetchMineCompetitions());
+        })
+        .catch(error => {
+          debug(error);
+          reject(error);
+          dispatch(setProgressModelState(false));
         });
-
-        dispatch(setProgressModelState(false));
-        NotificationManager.success(
-          'Competition Edited successfully',
-          'Success',
-          5000
-        );
-        dispatch(fetchMineCompetitions());
-      })
-      .catch(error => {
-        debug(error);
-        dispatch(setProgressModelState(false));
-      });
+    });
   };
 }
 

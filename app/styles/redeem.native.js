@@ -19,6 +19,10 @@ export default (redeemStyles = EStyleSheet.create({
   cardContainer: {
     flexDirection: 'column',
     flex: 1,
+    paddingLeft: 27,
+    paddingRight: 27,
+    paddingTop: 16,
+    paddingBottom: 16,
     alignItems: 'center'
   },
   headerContainer: {

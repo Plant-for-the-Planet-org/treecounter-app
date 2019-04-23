@@ -183,6 +183,21 @@ export default class Menu extends Component {
                 iconUrl={icons.challengeIcon}
               />
             ) : null}
+
+            {this.props.userProfile &&
+            this.props.userProfile.supportedTreecounter ? (
+              <LargeMenuItem
+                onPress={this.onPressMenu.bind(this, {
+                  uri: 'pickup_profile_modal'
+                })}
+                title={'Community'}
+                details={
+                  this.props.userProfile.supportedTreecounter.displayName
+                }
+                iconUrl={icons.communityMenu}
+              />
+            ) : null}
+
             <LargeMenuItem
               onPress={this.onPressMenu.bind(this, {
                 uri: getLocalRoute('app_faq')

@@ -45,6 +45,7 @@ import ImprintContainer from '../../containers/Imprint';
 import PrivacyContainer from '../../containers/Privacy';
 import CompetitionContainer from '../../containers/CompetitionContainer';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
+import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
 import EditCompetitionContainer from '../../containers/EditCompetition';
 
 const headerLabels = {
@@ -105,6 +106,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: ActivateAccountContainer
       },
       [getLocalRoute('app_faq')]: FAQContainer,
+      ['pickup_profile_modal']: ProfilePickerModal,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
 
       ['about_us']: { screen: AboutUsContainer },

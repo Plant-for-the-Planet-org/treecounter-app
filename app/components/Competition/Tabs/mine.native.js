@@ -110,7 +110,8 @@ export default class MineCompetitions extends Component {
         formValue: this.createCompetition.refs.input.state.value
       });
       this.props.onCreateCompetition(
-        this.createCompetition.refs.input.state.value
+        this.createCompetition.refs.input.state.value,
+        this.createCompetition
       );
     }
   }
@@ -147,7 +148,7 @@ export default class MineCompetitions extends Component {
           <Form
             ref={this.createCompetitionForm}
             type={competitionFormSchema}
-            options={competitionFormSchemaOptions}
+            options={this.props.competitionFormSchemaOptions}
             value={this.state.formValue}
           />
           <PrimaryButton onClick={() => this.onCreateCompetition()}>

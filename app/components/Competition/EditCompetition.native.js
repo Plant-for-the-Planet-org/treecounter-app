@@ -71,7 +71,8 @@ class EditCompetition extends Component {
       });
       this.props.editCompetition(
         this.createCompetition.refs.input.state.value,
-        this.props.competition_id
+        this.props.competition_id,
+        this.createCompetition
       );
     }
   }
@@ -83,7 +84,7 @@ class EditCompetition extends Component {
           <Form
             ref={this.createCompetitionForm}
             type={competitionFormSchema}
-            options={competitionFormSchemaOptions}
+            options={this.props.competitionFormSchemaOptions}
             value={this.state.formValue}
           />
           <PrimaryButton onClick={() => this.onCreateCompetition()}>

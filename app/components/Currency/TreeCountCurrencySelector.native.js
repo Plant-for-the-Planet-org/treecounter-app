@@ -93,7 +93,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
                 <Text style={styles.selectedProjectCol}> Trees</Text> Gift to{' '}
                 {this.props.giftTreeCounterName}
               </Text>
-              <Text>{this.props.giftTreeCounterName}</Text>
+              {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
             </View>
           ) : (
             <View style={styles.selectedProjectRow}>

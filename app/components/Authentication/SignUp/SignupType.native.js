@@ -106,28 +106,28 @@ export class SignupTypes extends Component {
           }}
         >
           <View style={styles.innerContainer}>
-            <SingupType
+            <SignupType
               iconUrl={SignupOrganization}
               profileType="tpo"
               selected={this.state.Profiletype == 'tpo'}
               title={i18n.t('label.tpo_title')}
               onClick={this.changeProfile}
             />
-            <SingupType
+            <SignupType
               profileType="individual"
               iconUrl={SignupJustMe}
               selected={this.state.Profiletype == 'individual'}
               title={i18n.t('label.individual_title')}
               onClick={this.changeProfile}
             />
-            <SingupType
+            <SignupType
               iconUrl={SignupOrganization}
               selected={this.state.Profiletype == 'company'}
               title={i18n.t('label.company_title')}
               profileType="company"
               onClick={this.changeProfile}
             />
-            <SingupType
+            <SignupType
               iconUrl={SignupOrganization}
               selected={this.state.Profiletype == 'education'}
               title={i18n.t('label.education_title')}

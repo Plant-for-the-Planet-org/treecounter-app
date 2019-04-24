@@ -416,8 +416,9 @@ export default class GiftTrees extends Component {
             {pageHeadings[this.state.pageIndex].description}
           </DescriptionHeading>
         </TextHeading>
-        <CardLayout className="tpo-footer-card-layout">
-          {this.props.paymentStatus && this.props.paymentStatus.status ? (
+
+        {this.props.paymentStatus && this.props.paymentStatus.status ? (
+          <CardLayout>
             <div className="payment-success">
               <img src={check_green} />
               <div className={'gap'} />
@@ -431,7 +432,9 @@ export default class GiftTrees extends Component {
                 <InlineLink uri={'app_userHome'} caption={'Return Home'} />
               </TextBlock>
             </div>
-          ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
+          </CardLayout>
+        ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
+          <CardLayout>
             <div className="payment-success">
               <img src={check_green} />
               <div className={'gap'} />
@@ -445,133 +448,126 @@ export default class GiftTrees extends Component {
                 </PrimaryButton>
               </TextBlock>
             </div>
-          ) : (
-            <div className="donate-tress__container">
-              <ContentHeader caption={headings[this.state.pageIndex]} />
-              <Slider {...settings} ref="slider">
-                <div className="treecount-selector-wrapper">
-                  <Tabs
-                    data={GiftTrees.data.tabsUser}
-                    onTabChange={this.handleModeUserChange}
-                  >
-                    {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
-                      <React.Fragment>
-                        <SearchAutosuggest
-                          onSuggestionClicked={this.suggestionClicked}
-                          clearSuggestions={false}
-                        />
-                        <div className="pftp-textarea">
-                          <textarea
-                            placeholder="Gift Message"
-                            onChange={this.handleMessageChange.bind(this)}
-                          />
-                        </div>
-                      </React.Fragment>
-                    ) : (
-                      <React.Fragment>
-                        <TCombForm
-                          ref="giftInvitation"
-                          type={giftInvitationFormSchema}
-                          options={giftInvitationSchemaOptions}
-                        />
-                      </React.Fragment>
-                    )}
-                  </Tabs>
-                </div>
-                {this.props.selectedTpo ? (
-                  !plantProject ? null : (
-                    <PlantProjectFull
-                      onViewMoreClick={() =>
-                        this.setState({
-                          imageViewMore: !this.state.imageViewMore
-                        })
-                      }
-                      callExpanded={this.callExpanded}
-                      expanded={false}
-                      plantProject={this.props.selectedProject}
-                      tpoName={this.props.selectedTpo.name}
-                      selectAnotherProject={true}
-                      projectClear={this.props.plantProjectClear}
-                    />
-                  )
-                ) : null}
-                {this.props.selectedTpo && currencies ? (
-                  <TreeCountCurrencySelector
-                    treeCost={plantProject.treeCost}
-                    rates={
-                      currencies.currency_rates[plantProject.currency].rates
-                    }
-                    fees={paymentFee}
-                    currencies={currencies.currency_names}
-                    selectedCurrency={this.determineDefaultCurrency()}
-                    treeCountOptions={
-                      plantProject.paymentSetup.treeCountOptions
-                    }
-                    selectedTreeCount={this.state.selectedTreeCount}
-                    onChange={this.handleTreeCountCurrencyChange}
-                  />
-                ) : null}
+          </CardLayout>
+        ) : (
+          <div className="donate-tress__container">
+            <ContentHeader caption={headings[this.state.pageIndex]} />
+            <Slider {...settings} ref="slider">
+              <div className="treecount-selector-wrapper">
                 <Tabs
-                  data={GiftTrees.data.tabsReceipt}
-                  onTabChange={this.handleModeReceiptChange}
-                  activeTab={
-                    this.state.modeReceipt !== ''
-                      ? this.state.modeReceipt
-                      : null
-                  }
+                  data={GiftTrees.data.tabsUser}
+                  onTabChange={this.handleModeUserChange}
                 >
-                  {this.state.modeReceipt ===
-                  GiftTrees.data.tabsReceipt[0].id ? (
-                    <TCombForm
-                      ref="donateReceipt"
-                      type={receiptIndividualFormSchema}
-                      options={individualSchemaOptions}
-                      value={this.props.currentUserProfile}
-                    />
+                  {this.state.modeUser === GiftTrees.data.tabsUser[0].id ? (
+                    <React.Fragment>
+                      <SearchAutosuggest
+                        onSuggestionClicked={this.suggestionClicked}
+                        clearSuggestions={false}
+                      />
+                      <div className="pftp-textarea">
+                        <textarea
+                          placeholder="Gift Message"
+                          onChange={this.handleMessageChange.bind(this)}
+                        />
+                      </div>
+                    </React.Fragment>
                   ) : (
-                    <TCombForm
-                      ref="donateReceipt"
-                      type={receiptCompanyFormSchema}
-                      options={companySchemaOptions}
-                      value={this.props.currentUserProfile}
-                    />
+                    <React.Fragment>
+                      <TCombForm
+                        ref="giftInvitation"
+                        type={giftInvitationFormSchema}
+                        options={giftInvitationSchemaOptions}
+                      />
+                    </React.Fragment>
                   )}
                 </Tabs>
-                {this.props.selectedTpo ? (
-                  <PaymentSelector
-                    paymentMethods={paymentMethods}
-                    accounts={plantProject.paymentSetup.accounts}
-                    stripePublishableKey={
-                      plantProject.paymentSetup.stripePublishableKey
+              </div>
+              {this.props.selectedTpo ? (
+                !plantProject ? null : (
+                  <PlantProjectFull
+                    onViewMoreClick={() =>
+                      this.setState({
+                        imageViewMore: !this.state.imageViewMore
+                      })
                     }
-                    amount={this.state.selectedAmount}
-                    currency={this.state.selectedCurrency}
-                    expandedOption={this.state.expandedOption}
-                    handleExpandedClicked={this.handleExpandedClicked}
-                    context={{
-                      tpoName: this.props.selectedTpo.name,
-                      donorEmail: email,
-                      donorName: name,
-                      treeCount: this.state.selectedTreeCount,
-                      plantProjectName: plantProject.name,
-                      giftTreeCounterName: name,
-                      treeCount: this.state.selectedTreeCount
-                    }}
-                    onSuccess={paymentResponse =>
-                      this.handlePaymentApproved(paymentResponse)
-                    }
-                    onFailure={data =>
-                      console.log('/////////////////// payment failure ', data)
-                    }
-                    onError={data =>
-                      console.log('/////////////////// payment error ', data)
-                    }
+                    callExpanded={this.callExpanded}
+                    expanded={false}
+                    plantProject={this.props.selectedProject}
+                    tpoName={this.props.selectedTpo.name}
+                    selectAnotherProject={true}
+                    projectClear={this.props.plantProjectClear}
                   />
-                ) : null}
-              </Slider>
-            </div>
-          )}
-        </CardLayout>
+                )
+              ) : null}
+              {this.props.selectedTpo && currencies ? (
+                <TreeCountCurrencySelector
+                  treeCost={plantProject.treeCost}
+                  rates={currencies.currency_rates[plantProject.currency].rates}
+                  fees={paymentFee}
+                  currencies={currencies.currency_names}
+                  selectedCurrency={this.determineDefaultCurrency()}
+                  treeCountOptions={plantProject.paymentSetup.treeCountOptions}
+                  selectedTreeCount={this.state.selectedTreeCount}
+                  onChange={this.handleTreeCountCurrencyChange}
+                />
+              ) : null}
+              <Tabs
+                data={GiftTrees.data.tabsReceipt}
+                onTabChange={this.handleModeReceiptChange}
+                activeTab={
+                  this.state.modeReceipt !== '' ? this.state.modeReceipt : null
+                }
+              >
+                {this.state.modeReceipt === GiftTrees.data.tabsReceipt[0].id ? (
+                  <TCombForm
+                    ref="donateReceipt"
+                    type={receiptIndividualFormSchema}
+                    options={individualSchemaOptions}
+                    value={this.props.currentUserProfile}
+                  />
+                ) : (
+                  <TCombForm
+                    ref="donateReceipt"
+                    type={receiptCompanyFormSchema}
+                    options={companySchemaOptions}
+                    value={this.props.currentUserProfile}
+                  />
+                )}
+              </Tabs>
+              {this.props.selectedTpo ? (
+                <PaymentSelector
+                  paymentMethods={paymentMethods}
+                  accounts={plantProject.paymentSetup.accounts}
+                  stripePublishableKey={
+                    plantProject.paymentSetup.stripePublishableKey
+                  }
+                  amount={this.state.selectedAmount}
+                  currency={this.state.selectedCurrency}
+                  expandedOption={this.state.expandedOption}
+                  handleExpandedClicked={this.handleExpandedClicked}
+                  context={{
+                    tpoName: this.props.selectedTpo.name,
+                    donorEmail: email,
+                    donorName: name,
+                    treeCount: this.state.selectedTreeCount,
+                    plantProjectName: plantProject.name,
+                    giftTreeCounterName: name,
+                    treeCount: this.state.selectedTreeCount
+                  }}
+                  onSuccess={paymentResponse =>
+                    this.handlePaymentApproved(paymentResponse)
+                  }
+                  onFailure={data =>
+                    console.log('/////////////////// payment failure ', data)
+                  }
+                  onError={data =>
+                    console.log('/////////////////// payment error ', data)
+                  }
+                />
+              ) : null}
+            </Slider>
+          </div>
+        )}
       </div>
     );
   }

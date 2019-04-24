@@ -98,15 +98,6 @@ export default class Login extends Component {
                 </Text>
               </TouchableItem>
 
-              <TouchableItem
-                style={{ paddingRight: 5 }}
-                onPress={this.onProfilePickerClick}
-              >
-                <Text style={styles.bottomTextHighlight}>
-                  {i18n.t('label.dont_have_account')} {i18n.t('label.signUp')}
-                </Text>
-              </TouchableItem>
-
               <PrimaryButton
                 onClick={this.handleLoginClick}
                 buttonStyle={styles.loginButtonStyle}

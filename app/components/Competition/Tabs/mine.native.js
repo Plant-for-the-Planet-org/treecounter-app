@@ -38,7 +38,8 @@ export default class MineCompetitions extends Component {
   }
   onActionButtonPress() {
     this.setState({
-      showCompetitionForm: true
+      showCompetitionForm: true,
+      formValue: null
     });
   }
   componentDidMount() {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
+import { ScrollView, View } from 'react-native';
 import t from 'tcomb-form-native';
 import {
   receiptCompanyFormSchema,
@@ -123,14 +124,16 @@ export default class RecieptTabsView extends React.PureComponent {
 
   render() {
     return (
-      <TabView
-        ref={this.tabView}
-        useNativeDriver={true}
-        navigationState={this.state}
-        renderScene={this._renderSelectPlantScene}
-        renderTabBar={this._renderTabBar}
-        onIndexChange={this._handleIndexChange}
-      />
+      <View style={{ flex: 1, marginBottom: 40 }}>
+        <TabView
+          ref={this.tabView}
+          useNativeDriver={true}
+          navigationState={this.state}
+          renderScene={this._renderSelectPlantScene}
+          renderTabBar={this._renderTabBar}
+          onIndexChange={this._handleIndexChange}
+        />
+      </View>
     );
   }
 }

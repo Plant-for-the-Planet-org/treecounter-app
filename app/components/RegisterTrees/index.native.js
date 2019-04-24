@@ -85,7 +85,7 @@ export default class RegisterTrees extends Component {
 
   render() {
     return (
-      <CardLayout style={{ flex: 1 }}>
+      <CardLayout style={{ flex: 1, marginBottom: 5 }}>
         <TabView
           useNativeDriver={true}
           ref="registerTreeForm"

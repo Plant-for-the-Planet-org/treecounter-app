@@ -47,7 +47,9 @@ class PlantProjectFull extends React.Component {
     return (
       <View>
         <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
-          <CardLayout style={[styles.projectFullContainer]}>
+          <CardLayout
+            style={[styles.projectFullContainer, { marginBottom: 20 }]}
+          >
             <PlantProjectSnippet
               key={'projectFull' + this.props.plantProject.id}
               showMoreButton={false}
@@ -89,7 +91,6 @@ class PlantProjectFull extends React.Component {
       </View>
     );
   }
-  componentWillUnmount() {}
 }
 
 PlantProjectFull.propTypes = {

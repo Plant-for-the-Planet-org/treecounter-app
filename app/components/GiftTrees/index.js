@@ -10,7 +10,7 @@ import CardLayout from '../Common/Card';
 import SearchAutosuggest from '../Header/SearchAutosuggest';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
-import { arrow_left_green } from '../../assets';
+import { arrow_left_green, check_green } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
@@ -31,6 +31,7 @@ import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import i18n from '../../locales/i18n';
 import PaymentSelector from '../Payment/PaymentSelector';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
+import TextBlock from '../Common/Text/TextBlock';
 
 let TCombForm = t.form.Form;
 

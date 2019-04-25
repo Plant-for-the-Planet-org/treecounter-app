@@ -20,8 +20,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     shadowOpacity: 0.5,
     elevation: 1,
     padding: 0,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4
   },
   projectTeaserContainer: {
     height: Layout.window.height * 0.5
@@ -51,12 +51,12 @@ export default (selectplantprojectFull = EStyleSheet.create({
   buttonContainer: {
     flexGrow: 0,
     flexShrink: 0,
-    flexBasis: Layout.window.height * 0.15,
-    height: Layout.window.height * 0.15
+    padding: 16
   },
   plantProjectDetails: {
     flexGrow: 1,
-    flexBasis: 'auto'
+    flexBasis: 'auto',
+    padding: 16
   },
   snippetContainer: {
     width: Layout.window.width - 30

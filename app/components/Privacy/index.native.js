@@ -72,9 +72,11 @@ export default class Privacy extends Component {
     return (
       <View style={styles.content}>
         <HTMLView
-          value={section.description}
+          value={`<div>${section.description.replace(
+            /(\r\n|\n|\r)/gm,
+            ''
+          )}</div>`}
           stylesheet={styles}
-          addLineBreaks={false}
           onLinkPress={url => {
             try {
               url = url.startsWith('/')

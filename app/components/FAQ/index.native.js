@@ -34,8 +34,7 @@ export default class FAQ extends Component {
     return (
       <View style={styles.content}>
         <HTMLView
-          value={section.answer}
-          addLineBreaks={false}
+          value={`<div>${section.answer.replace(/(\r\n|\n|\r)/gm, '')}</div>`}
           stylesheet={styles}
           onLinkPress={url => {
             try {

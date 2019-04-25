@@ -414,18 +414,16 @@ export default class DonateTrees extends Component {
             {pageHeadings[this.state.pageIndex].description}
           </DescriptionHeading>
         </TextHeading>
-        {this.props.paymentStatus &&
-          this.props.paymentStatus.message && (
-            <CardLayout>
-              <div className="payment-success">
-                <div className={'gap'} />
-                <TextBlock strong={true}>
-                  {'Error ' + this.props.paymentStatus.message}
-                </TextBlock>
-              </div>
-            </CardLayout>
-          )}
-        {this.props.paymentStatus && this.props.paymentStatus.status ? (
+        {this.props.paymentStatus && this.props.paymentStatus.message ? (
+          <CardLayout>
+            <div className="payment-success">
+              <div className={'gap'} />
+              <TextBlock strong={true}>
+                {'Error ' + this.props.paymentStatus.message}
+              </TextBlock>
+            </div>
+          </CardLayout>
+        ) : this.props.paymentStatus && this.props.paymentStatus.status ? (
           <CardLayout>
             <div className="payment-success">
               <img src={check_green} />

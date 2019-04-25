@@ -6,5 +6,10 @@
   "in": "in",
   "donate": "Donate",
   "plant_project_full": "PlantProjectFull",
-  "different_project": "Select Different Project"
+  "different_project": "Select Different Project",
+  "project_name": "Project Name",
+  "count_target": "Target",
+  "tree_cost": "Tree Cost",
+  "link_text": "Link Text",
+  "video_url": "Video Url"
 }

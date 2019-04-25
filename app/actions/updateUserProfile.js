@@ -8,7 +8,11 @@ import { NotificationManager } from '../notification/PopupNotificaiton/notificat
 import { userProfileSchema, plantProjectSchema } from '../schemas/index';
 
 import { normalize } from 'normalizr';
-import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
+import {
+  deleteEntity,
+  unlinkEntity,
+  mergeEntities
+} from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 const profileTypeToReq = {
   profile: 'profile_put',
@@ -56,8 +60,8 @@ export function deletePlantProject(plantProjectId) {
       })
         .then(res => {
           const userProfile = res.data;
-          dispatch(deleteEntity({ plantProject: [plantProjectId] }));
-          dispatch(mergeEntities(normalize(userProfile, userProfileSchema)));
+          dispatch(deleteEntity(res.data.delete));
+          dispatch(unlinkEntity(res.data.unlink));
           resolve(userProfile);
         })
         .catch(err => {

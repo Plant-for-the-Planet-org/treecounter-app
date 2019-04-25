@@ -132,6 +132,9 @@ export default (LeaderboardStyle = EStyleSheet.create({
     alignItems: 'center',
     marginBottom: 10
   },
+  numberContainer: {
+    marginBottom: 35
+  },
   itemViewText: {
     marginBottom: 10,
     color: '$lightTextColor'

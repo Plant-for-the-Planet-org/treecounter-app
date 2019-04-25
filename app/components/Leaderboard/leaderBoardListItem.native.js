@@ -14,7 +14,7 @@ export default class LeaderboardItem extends Component {
   render() {
     return (
       <View style={styles.itemView}>
-        <View>
+        <View style={styles.numberContainer}>
           <Text style={styles.itemViewText}>{this.props.index + 1}</Text>
         </View>
         <View style={[{ marginLeft: 10, marginRight: 5, width: '75%' }]}>

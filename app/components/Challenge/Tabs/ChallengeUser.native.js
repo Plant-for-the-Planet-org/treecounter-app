@@ -8,6 +8,7 @@ import CardLayout from '../../Common/Card';
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
 import challengeStyles from '../../../styles/challenge';
+import TabContainer from '../../../containers/Menu/TabContainer';
 
 export default class ChallengeUser extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ export default class ChallengeUser extends Component {
       treeCount = 0;
     }
     this.setState({
-      treeCount: parseInt(treeCount)
+      treeCount: parseInt(treeCount.replace(/,/, ''))
     });
   }
 
@@ -62,72 +63,86 @@ export default class ChallengeUser extends Component {
 
   render() {
     return (
-      <ScrollView
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-          width: '100%',
-          height: '100%'
-        }}
-      >
-        <CardLayout style={[challengeStyles.challengeContainer]}>
-          <View style={challengeStyles.challengeColumnContainer}>
-            <SearchUser
-              onSearchResultClick={this.onSearchResultClick}
-              currentUserProfile={this.props.currentUserProfile}
-              alreadyInvited={[]}
-            />
-            <View style={challengeStyles.flexContainerStyle}>
-              <Text>Challenge to plant </Text>
-              <TextInput
-                keyboardType="numeric"
-                underlineColorAndroid={'transparent'}
-                style={challengeStyles.treecount_input}
-                onChangeText={evt => this.handleTreeCountChange(evt)}
-                value={delimitNumbers(this.state.treeCount)}
-                autoCapitalize={'sentences'}
+      <View style={{ flex: 1, paddingBottom: 50 }}>
+        <ScrollView
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            width: '100%',
+            height: '100%'
+          }}
+        >
+          <CardLayout style={[challengeStyles.challengeContainer]}>
+            <View style={challengeStyles.challengeColumnContainer}>
+              <SearchUser
+                onSearchResultClick={this.onSearchResultClick}
+                currentUserProfile={this.props.currentUserProfile}
+                alreadyInvited={[]}
               />
-              <Text>Trees</Text>
+              <View style={challengeStyles.flexContainerStyle}>
+                <Text>Challenge to plant </Text>
+                <TextInput
+                  keyboardType="numeric"
+                  underlineColorAndroid={'transparent'}
+                  style={challengeStyles.treecount_input}
+                  onChangeText={evt => this.handleTreeCountChange(evt)}
+                  value={delimitNumbers(this.state.treeCount)}
+                  autoCapitalize={'sentences'}
+                />
+                <Text>Trees</Text>
+              </View>
+              <View style={challengeStyles.flexContainerStyle}>
+                <CheckBox
+                  onClick={() => {
+                    this.setState({
+                      isChecked: !this.state.isChecked
+                    });
+                  }}
+                  style={{
+                    width: 70
+                  }}
+                  isChecked={this.state.isChecked}
+                  rightText={'by'}
+                />
+                <Dropdown
+                  containerStyle={{
+                    width: 70
+                  }}
+                  dropdownOffset={{
+                    top: 10,
+                    left: 0
+                  }}
+                  onChangeText={item =>
+                    this.setState({
+                      byYear: item
+                    })
+                  }
+                  label="Year"
+                  data={this.years}
+                />
+              </View>
+              <PrimaryButton onClick={this.onNextClick}>
+                Challenge
+              </PrimaryButton>
             </View>
-            <View style={challengeStyles.flexContainerStyle}>
-              <CheckBox
-                onClick={() => {
-                  this.setState({
-                    isChecked: !this.state.isChecked
-                  });
-                }}
-                style={{
-                  width: 70
-                }}
-                isChecked={this.state.isChecked}
-                rightText={'by'}
-              />
-              <Dropdown
-                containerStyle={{
-                  width: 70
-                }}
-                dropdownOffset={{
-                  top: 10,
-                  left: 0
-                }}
-                onChangeText={item =>
-                  this.setState({
-                    byYear: item
-                  })
-                }
-                label="Year"
-                data={this.years}
-              />
-            </View>
-            <PrimaryButton onClick={this.onNextClick}>Challenge</PrimaryButton>
-          </View>
-        </CardLayout>
-        <ChallengeList
-          challenges={this.props.challenges}
-          navigation={this.props.navigation}
-          challengeStatus={this.props.challengeStatus}
-        />
-      </ScrollView>
+          </CardLayout>
+          <ChallengeList
+            challenges={this.props.challenges}
+            navigation={this.props.navigation}
+            challengeStatus={this.props.challengeStatus}
+          />
+        </ScrollView>
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            flex: 1,
+            width: '100%'
+          }}
+        >
+          <TabContainer {...this.props} />
+        </View>
+      </View>
     );
   }
 }

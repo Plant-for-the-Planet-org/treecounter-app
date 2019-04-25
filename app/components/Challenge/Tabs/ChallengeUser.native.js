@@ -6,11 +6,12 @@ import { delimitNumbers } from '../../../utils/utils';
 import ChallengeList from '../challengeList';
 import CardLayout from '../../Common/Card';
 import { Dropdown } from 'react-native-material-dropdown';
+import { withNavigation } from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import challengeStyles from '../../../styles/challenge';
 import TabContainer from '../../../containers/Menu/TabContainer';
 
-export default class ChallengeUser extends Component {
+class ChallengeUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -146,3 +147,5 @@ export default class ChallengeUser extends Component {
     );
   }
 }
+
+export default withNavigation(ChallengeUser);

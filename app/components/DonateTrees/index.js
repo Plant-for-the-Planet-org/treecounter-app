@@ -422,6 +422,12 @@ export default class DonateTrees extends Component {
               <TextBlock strong={true}>
                 {'Error ' + this.props.paymentStatus.message}
               </TextBlock>
+              <div className={'gap'} />
+              <TextBlock>
+                <PrimaryButton onClick={this.props.paymentClear}>
+                  Try again
+                </PrimaryButton>
+              </TextBlock>
             </div>
           </CardLayout>
         ) : this.props.paymentStatus && this.props.paymentStatus.status ? (

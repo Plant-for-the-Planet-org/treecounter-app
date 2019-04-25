@@ -72,6 +72,7 @@ const headerLabels = {
   [getLocalRoute('app_editCompetition')]: 'label.edit_competition',
   [getLocalRoute('app_imprint')]: 'label.imprint',
   [getLocalRoute('app_privacy')]: 'label.data_protection',
+  [getLocalRoute('app_challenge')]: 'label.challenge_heading',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license',

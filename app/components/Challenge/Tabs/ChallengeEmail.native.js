@@ -12,6 +12,7 @@ import { delimitNumbers } from '../../../utils/utils';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
+import TabContainer from '../../../containers/Menu/TabContainer';
 
 import challengeStyles from '../../../styles/challenge';
 let TCombForm = t.form.Form;
@@ -67,72 +68,86 @@ export default class ChallengeEmail extends Component {
       treeCount = 0;
     }
     this.setState({
-      treeCount: parseInt(treeCount)
+      treeCount: parseInt(treeCount.replace(/,/, ''))
     });
   }
 
   render() {
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
-        <CardLayout style={[challengeStyles.challengeContainer]}>
-          <View style={challengeStyles.challengeColumnContainer}>
-            <TCombForm
-              ref={this.setChallengeInvitation}
-              type={challengeFormSchema}
-              options={challengeFormSchemaOptions}
-              value={this.state.tempForm}
-              onChange={this.onFormChange}
-            />
-            <View style={challengeStyles.flexContainerStyle}>
-              <Text>Challenge to plant </Text>
-              <TextInput
-                keyboardType="numeric"
-                style={challengeStyles.treecount_input}
-                onChangeText={evt => this.handleTreeCountChange(evt)}
-                value={delimitNumbers(this.state.treeCount)}
-                autoCapitalize={'sentences'}
+      <View style={{ flex: 1, paddingBottom: 50 }}>
+        <KeyboardAwareScrollView enableOnAndroid={true}>
+          <CardLayout style={[challengeStyles.challengeContainer]}>
+            <View style={challengeStyles.challengeColumnContainer}>
+              <TCombForm
+                ref={this.setChallengeInvitation}
+                type={challengeFormSchema}
+                options={challengeFormSchemaOptions}
+                value={this.state.tempForm}
+                onChange={this.onFormChange}
               />
-              <Text>Trees</Text>
+              <View style={challengeStyles.flexContainerStyle}>
+                <Text>Challenge to plant </Text>
+                <TextInput
+                  keyboardType="numeric"
+                  style={challengeStyles.treecount_input}
+                  onChangeText={evt => this.handleTreeCountChange(evt)}
+                  value={delimitNumbers(this.state.treeCount)}
+                  autoCapitalize={'sentences'}
+                />
+                <Text>Trees</Text>
+              </View>
+              <View style={challengeStyles.flexContainerStyle}>
+                <CheckBox
+                  onClick={() => {
+                    this.setState({
+                      isChecked: !this.state.isChecked
+                    });
+                  }}
+                  style={{
+                    width: 70
+                  }}
+                  isChecked={this.state.isChecked}
+                  rightText={'by'}
+                />
+                <Dropdown
+                  containerStyle={{
+                    width: 70
+                  }}
+                  dropdownOffset={{
+                    top: 0,
+                    left: 0
+                  }}
+                  onChangeText={item =>
+                    this.setState({
+                      byYear: item
+                    })
+                  }
+                  label="Year"
+                  data={this.years}
+                />
+              </View>
+              <PrimaryButton onClick={this.onNextClick}>
+                Challenge
+              </PrimaryButton>
             </View>
-            <View style={challengeStyles.flexContainerStyle}>
-              <CheckBox
-                onClick={() => {
-                  this.setState({
-                    isChecked: !this.state.isChecked
-                  });
-                }}
-                style={{
-                  width: 70
-                }}
-                isChecked={this.state.isChecked}
-                rightText={'by'}
-              />
-              <Dropdown
-                containerStyle={{
-                  width: 70
-                }}
-                dropdownOffset={{
-                  top: 0,
-                  left: 0
-                }}
-                onChangeText={item =>
-                  this.setState({
-                    byYear: item
-                  })
-                }
-                label="Year"
-                data={this.years}
-              />
-            </View>
-            <PrimaryButton onClick={this.onNextClick}>Challenge</PrimaryButton>
-          </View>
-        </CardLayout>
-        <ChallengeList
-          challenges={this.props.challenges}
-          navigation={this.props.navigation}
-          challengeStatus={this.props.challengeStatus}
-        />
-      </KeyboardAwareScrollView>
+          </CardLayout>
+          <ChallengeList
+            challenges={this.props.challenges}
+            navigation={this.props.navigation}
+            challengeStatus={this.props.challengeStatus}
+          />
+        </KeyboardAwareScrollView>
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            flex: 1,
+            width: '100%'
+          }}
+        >
+          <TabContainer {...this.props} />
+        </View>
+      </View>
     );
   }
 }

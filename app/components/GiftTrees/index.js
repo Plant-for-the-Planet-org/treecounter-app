@@ -10,7 +10,7 @@ import CardLayout from '../Common/Card';
 import SearchAutosuggest from '../Header/SearchAutosuggest';
 import ContentHeader from '../Common/ContentHeader';
 import CarouselNavigation from '../Common/CarouselNavigation';
-import { arrow_left_green, check_green } from '../../assets';
+import { arrow_left_green, check_green, attention } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
@@ -436,7 +436,7 @@ export default class GiftTrees extends Component {
         ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
           <CardLayout>
             <div className="payment-success">
-              <img src={check_green} />
+              <img src={attention} />
               <div className={'gap'} />
               <TextBlock strong={true}>
                 {'Error ' + this.props.paymentStatus.message}

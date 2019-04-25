@@ -10,7 +10,7 @@ import ContentHeader from '../Common/ContentHeader';
 import TextBlock from '../Common/Text/TextBlock';
 import InlineLink from '../Common/InlineLink';
 import CarouselNavigation from '../Common/CarouselNavigation';
-import { arrow_left_green, check_green } from '../../assets';
+import { arrow_left_green, check_green, attention } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import classNames from 'classnames';
@@ -417,6 +417,7 @@ export default class DonateTrees extends Component {
         {this.props.paymentStatus && this.props.paymentStatus.message ? (
           <CardLayout>
             <div className="payment-success">
+              <img src={attention} />
               <div className={'gap'} />
               <TextBlock strong={true}>
                 {'Error ' + this.props.paymentStatus.message}

@@ -38,7 +38,6 @@ export default (faqStyles = EStyleSheet.create({
     marginLeft: 8,
     marginRight: 8,
     padding: 20,
-    marginBottom: 40,
     flex: 1,
     backgroundColor: '#fff'
   },

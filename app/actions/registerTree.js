@@ -31,7 +31,7 @@ export function registerTree(
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         dispatch(setProgressModelState(false));
-        updateRoute('app_myTrees', navigation || dispatch);
+        updateRoute('app_userHome', navigation || dispatch);
         NotificationManager.success(statusText, 'Success', 5000);
         return res;
       })

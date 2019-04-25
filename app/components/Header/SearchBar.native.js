@@ -37,9 +37,11 @@ class SearchBar extends React.PureComponent {
   _textInput;
 
   componentDidMount() {
-    requestAnimationFrame(() => {
-      this._textInput.focus();
-    });
+    if (!this.props.dontFocus) {
+      requestAnimationFrame(() => {
+        this._textInput.focus();
+      });
+    }
     if (this.props.style) {
       if (this.props.style.width) {
         this.setState({ inputWidth: this.props.style.width });
@@ -174,7 +176,8 @@ SearchBar.propTypes = {
   textColor: PropTypes.any,
   inputValue: PropTypes.string,
   navigation: PropTypes.any,
-  showCancelSearchButton: PropTypes.bool
+  showCancelSearchButton: PropTypes.bool,
+  dontFocus: PropTypes.bool
 };
 
 export default withNavigation(SearchBar);

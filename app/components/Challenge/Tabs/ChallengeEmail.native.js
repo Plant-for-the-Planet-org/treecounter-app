@@ -68,7 +68,7 @@ export default class ChallengeEmail extends Component {
       treeCount = 0;
     }
     this.setState({
-      treeCount: parseInt(treeCount.replace(/,/, ''))
+      treeCount: treeCount ? parseInt(treeCount.replace(/,/, '')) : 0
     });
   }
 

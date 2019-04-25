@@ -170,7 +170,9 @@ class PublicTreeCounter extends React.Component {
                     ? i18n.t('label.support')
                     : i18n.t('label.plant_trees')
                 }
-                onRegisterSupporter={this.onRegisterSupporter}
+                onRegisterSupporter={() =>
+                  this.onRegisterSupporter(treecounter)
+                }
               />
             </div>
           )}

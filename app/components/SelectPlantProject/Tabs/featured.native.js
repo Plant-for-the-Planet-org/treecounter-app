@@ -34,7 +34,7 @@ export default class FeaturedProjects extends Component {
     <PlantProjectSnippet
       key={'projectFull' + item.id}
       cardStyle={styles.cardStyle}
-      onMoreClick={id => this.props.onMoreClick(id)}
+      onMoreClick={id => this.props.onMoreClick(id, item.name)}
       plantProject={item}
       onSelectClickedFeaturedProjects={id =>
         this.onSelectClickedFeaturedProjects(id)

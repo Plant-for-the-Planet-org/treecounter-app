@@ -93,12 +93,13 @@ class Trillion extends PureComponent {
       });
   }
 
-  onMoreClick(id) {
+  onMoreClick(id, name) {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     //console.log('OnMore');
-    updateRoute('app_selectProject', navigation);
+    updateRoute('app_selectProject', navigation, null, { titleParam: name });
   }
+
   onSelectClickedFeaturedProjects = id => {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
@@ -191,7 +192,7 @@ class Trillion extends PureComponent {
                   .map(project => (
                     <PlantProjectSnippet
                       key={'trillion' + project.id}
-                      onMoreClick={id => this.onMoreClick(id)}
+                      onMoreClick={id => this.onMoreClick(id, project.name)}
                       plantProject={project}
                       onSelectClickedFeaturedProjects={id =>
                         this.onSelectClickedFeaturedProjects(id)

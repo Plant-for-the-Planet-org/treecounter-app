@@ -19,7 +19,7 @@ export default class ListViewProjects extends Component {
     <PlantProjectSnippet
       cardStyle={styles.cardStyle}
       key={'projectFull' + item.id}
-      onMoreClick={id => this.props.onMoreClick(id)}
+      onMoreClick={id => this.props.onMoreClick(id, item.name)}
       plantProject={item}
       onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
       showMoreButton={false}

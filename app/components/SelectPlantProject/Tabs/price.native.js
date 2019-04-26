@@ -108,7 +108,9 @@ export default class PriceProjects extends Component {
           <ListViewProjects
             projects={priceSortedProjects}
             selectProject={projectId => this.props.selectProject(projectId)}
-            onMoreClick={projectId => this.props.onMoreClick(projectId)}
+            onMoreClick={(projectId, name) =>
+              this.props.onMoreClick(projectId, name)
+            }
           />
         </View>
       </View>

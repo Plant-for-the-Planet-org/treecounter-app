@@ -144,38 +144,38 @@ class PublicTreeCounter extends React.Component {
             followChanged={this.onFollowChanged}
           />
 
-          {('individual' == userProfile.type ||
-            'plantAmbassador' == userProfile.type) && (
-            <div className="support-button-container ">
-              <SupportButton
-                {...supportProps}
-                buttonLabel={i18n.t('label.gift_trees')}
-                onRegisterSupporter={() =>
-                  this.onRegisterSupporter(treecounter)
-                }
-              />
-            </div>
-          )}
+          {'tpo' !== userProfile.type &&
+            !isMyself(treecounter, currentUserProfile) && (
+              <div className="support-button-container ">
+                <SupportButton
+                  {...supportProps}
+                  buttonLabel={i18n.t('label.label.support')}
+                  onRegisterSupporter={() =>
+                    this.onRegisterSupporter(treecounter)
+                  }
+                />
+              </div>
+            )}
 
-          {('company' == userProfile.type ||
+          {/* {('company' == userProfile.type ||
             'education' == userProfile.type ||
             'non-profit' == userProfile.type ||
             'govt' == userProfile.type ||
             'plantClub' == userProfile.type) && (
-            <div className="support-button-container ">
-              <SupportButton
-                {...supportProps}
-                buttonLabel={
-                  isUserLoggedIn
-                    ? i18n.t('label.support')
-                    : i18n.t('label.plant_trees')
-                }
-                onRegisterSupporter={() =>
-                  this.onRegisterSupporter(treecounter)
-                }
-              />
-            </div>
-          )}
+              <div className="support-button-container ">
+                <SupportButton
+                  {...supportProps}
+                  buttonLabel={
+                    isUserLoggedIn
+                      ? i18n.t('label.support')
+                      : i18n.t('label.plant_trees')
+                  }
+                  onRegisterSupporter={() =>
+                    this.onRegisterSupporter(treecounter)
+                  }
+                />
+              </div>
+            )} */}
         </div>
         <div className="canvasContainer flex-column">
           <SvgContainer {...this.state.svgData} />

@@ -9,6 +9,7 @@ import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { TextInput, View, Text } from 'react-native';
 import ChallengeList from '../challengeList';
 import { delimitNumbers } from '../../../utils/utils';
+import { withNavigation } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
@@ -17,7 +18,7 @@ import TabContainer from '../../../containers/Menu/TabContainer';
 import challengeStyles from '../../../styles/challenge';
 let TCombForm = t.form.Form;
 
-export default class ChallengeEmail extends Component {
+class ChallengeEmail extends Component {
   constructor(props) {
     super(props);
     this.setChallengeInvitation = element => {
@@ -68,7 +69,7 @@ export default class ChallengeEmail extends Component {
       treeCount = 0;
     }
     this.setState({
-      treeCount: treeCount ? parseInt(treeCount.replace(/,/, '')) : 0
+      treeCount: treeCount ? parseInt(treeCount.replace(/,/g, '')) : 0
     });
   }
 
@@ -151,3 +152,5 @@ export default class ChallengeEmail extends Component {
     );
   }
 }
+
+export default withNavigation(ChallengeEmail);

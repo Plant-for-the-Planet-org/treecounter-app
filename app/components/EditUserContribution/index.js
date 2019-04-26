@@ -69,7 +69,7 @@ const schemaOptionsMultiple = {
 export default class EditUserContribution extends Component {
   static mode = {
     singleTree: 'single-tree',
-    multipleTrees: 'Many Trees'
+    multipleTrees: 'multiple-trees'
   };
 
   constructor(props) {

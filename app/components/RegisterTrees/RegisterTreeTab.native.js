@@ -42,7 +42,6 @@ getFormLayoutTemplate = (mode, isTpo) => {
 
 export default class RegisterTreeTab extends PureComponent {
   render() {
-    //console.log('locals', this.props);
     const schemaOptionsMultiple = {
       template: getFormLayoutTemplate(this.props.mode, this.props.isTpo),
       ...this.props.schemaOptions

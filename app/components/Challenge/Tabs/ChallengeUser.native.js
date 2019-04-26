@@ -6,12 +6,13 @@ import { delimitNumbers } from '../../../utils/utils';
 import ChallengeList from '../challengeList';
 import CardLayout from '../../Common/Card';
 import { Dropdown } from 'react-native-material-dropdown';
+import { withNavigation } from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import challengeStyles from '../../../styles/challenge';
 import TabContainer from '../../../containers/Menu/TabContainer';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 
-export default class ChallengeUser extends Component {
+class ChallengeUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +44,7 @@ export default class ChallengeUser extends Component {
       treeCount = 0;
     }
     this.setState({
-      treeCount: treeCount ? parseInt(treeCount.replace(/,/, '')) : 0
+      treeCount: treeCount ? parseInt(treeCount.replace(/,/g, '')) : 0
     });
   }
 
@@ -88,7 +89,9 @@ export default class ChallengeUser extends Component {
                   keyboardType="numeric"
                   underlineColorAndroid={'transparent'}
                   style={challengeStyles.treecount_input}
-                  onChangeText={evt => this.handleTreeCountChange(evt)}
+                  onChangeText={evt => {
+                    this.handleTreeCountChange(evt);
+                  }}
                   value={delimitNumbers(this.state.treeCount)}
                   autoCapitalize={'sentences'}
                 />
@@ -149,3 +152,5 @@ export default class ChallengeUser extends Component {
     );
   }
 }
+
+export default withNavigation(ChallengeUser);

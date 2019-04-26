@@ -149,7 +149,7 @@ class PublicTreeCounter extends React.Component {
               <div className="support-button-container ">
                 <SupportButton
                   {...supportProps}
-                  buttonLabel={i18n.t('label.label.support')}
+                  buttonLabel={i18n.t('label.support')}
                   onRegisterSupporter={() =>
                     this.onRegisterSupporter(treecounter)
                   }

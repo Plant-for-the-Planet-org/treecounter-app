@@ -28,12 +28,22 @@ export default (currentSelectorStyles = EStyleSheet.create({
     minWidth: '15%',
     maxWidth: '25%',
     flexDirection: 'row',
-    justifyContent: 'flex-end'
+    alignItems: 'center'
   },
-
+  radioContainer: {
+    height: 60,
+    justifyContent: 'center'
+  },
   treecount_price_conversion_Text: {
     flexDirection: 'row',
     width: '100%',
+    paddingRight: 5
+  },
+  treecount_price_conversion_Text_fixed: {
+    flexDirection: 'row',
+    width: '100%',
+    height: 60,
+    justifyContent: 'center',
     paddingRight: 5
   },
 
@@ -42,17 +52,19 @@ export default (currentSelectorStyles = EStyleSheet.create({
     minWidth: '20%',
     maxWidth: '30%',
     flexDirection: 'row',
-    justifyContent: 'flex-end'
+    alignItems: 'center'
   },
   treecount_price_conversion_Text_currency2: {
     marginTop: 5,
-    minWidth: '20%'
+    minWidth: '20%',
+    marginLeft: 5,
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   treecount_price_conversion_Text_equal: {
     minWidth: '30%',
     maxWidth: '50%',
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
 
     marginVertical: 10,
@@ -67,8 +79,8 @@ export default (currentSelectorStyles = EStyleSheet.create({
 
     minWidth: '20%',
     maxWidth: '30%',
+    paddingLeft: 15,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
 
     marginVertical: 10,
@@ -85,9 +97,9 @@ export default (currentSelectorStyles = EStyleSheet.create({
   },
   treecount_price_conversion_Text_input3Container: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
     minWidth: '14%',
-    maxWidth: '26%'
+    maxWidth: '26%',
+    alignItems: 'center'
   },
   treecount_price_conversion_Text_input3: {
     marginTop: -10,

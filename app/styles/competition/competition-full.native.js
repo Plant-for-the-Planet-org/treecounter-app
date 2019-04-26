@@ -87,13 +87,12 @@ export default (selectedCompetitionFull = EStyleSheet.create({
     justifyContent: 'space-between'
   },
   topCompetitorName: {
-    width: '70%',
+    width: '60%',
     alignItems: 'center',
     flexDirection: 'row'
   },
   topCompetitorScore: {
-    width: '30%',
-    justifyContent: 'flex-end'
+    width: '40%'
   },
   topCompetitorNameText: {
     fontSize: 14,
@@ -153,7 +152,7 @@ export default (selectedCompetitionFull = EStyleSheet.create({
     // borderWidth: 0,
     // borderRadius: 0,
     // marginRight: 5
-    height: 30,
+    width: '100%',
     borderWidth: 1,
     borderRadius: 6,
     paddingLeft: 10,

@@ -5,7 +5,11 @@ import {
 } from '../utils/api';
 import { debug } from '../debug/index';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
-import { userProfileSchema, plantProjectSchema } from '../schemas/index';
+import {
+  userProfileSchema,
+  plantProjectSchema,
+  tpoSchema
+} from '../schemas/index';
 
 import { normalize } from 'normalizr';
 import {
@@ -29,12 +33,13 @@ export function addPlantProject(plantProject) {
         .then(res => {
           debug(res.status);
           debug(res);
-          const plantProject = res.data;
-          if (plantProject && plantProject instanceof Object) {
-            dispatch(
-              mergeEntities(normalize(plantProject, plantProjectSchema))
-            );
-          }
+          const { plantProject, userProfile, tpo } = res.data.merge;
+          dispatch(
+            mergeEntities(normalize(plantProject, [plantProjectSchema]))
+          );
+          dispatch(mergeEntities(normalize(userProfile, [userProfileSchema])));
+          dispatch(mergeEntities(normalize(tpo, [tpoSchema])));
+
           NotificationManager.success(
             `New Project Added Successfully`,
             `Congrats`,
@@ -60,8 +65,8 @@ export function deletePlantProject(plantProjectId) {
       })
         .then(res => {
           const userProfile = res.data;
-          dispatch(deleteEntity(res.data.delete));
           dispatch(unlinkEntity(res.data.unlink));
+          dispatch(deleteEntity(res.data.delete));
           resolve(userProfile);
         })
         .catch(err => {
@@ -82,8 +87,6 @@ export function updatePlantProject(plantProject) {
         plantProject: projectId
       })
         .then(res => {
-          debug(res.status);
-          debug(res);
           const { plantProject, plantProjectImage: deleteIds } = res.data;
           if (plantProject && plantProject instanceof Object) {
             dispatch(

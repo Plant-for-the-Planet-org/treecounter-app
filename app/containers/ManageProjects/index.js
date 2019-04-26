@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ManageProjects from '../../components/ManageProjects';
 import { currentUserProfileSelector } from '../../selectors/index';
+import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
+import i18n from '../../locales/i18n.js';
 import {
   updatePlantProject,
   deletePlantProject,
@@ -68,10 +70,6 @@ class ManageProjectContainer extends Component {
         );
       });
   };
-
-  componentDidMount() {}
-
-  componentWillUnmount() {}
 
   render() {
     return (

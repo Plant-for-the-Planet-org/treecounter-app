@@ -44,7 +44,7 @@ class ChallengeUser extends Component {
       treeCount = 0;
     }
     this.setState({
-      treeCount: treeCount ? parseInt(treeCount.replace(/,/, '')) : 0
+      treeCount: treeCount ? parseInt(treeCount.replace(/,/g, '')) : 0
     });
   }
 
@@ -89,7 +89,9 @@ class ChallengeUser extends Component {
                   keyboardType="numeric"
                   underlineColorAndroid={'transparent'}
                   style={challengeStyles.treecount_input}
-                  onChangeText={evt => this.handleTreeCountChange(evt)}
+                  onChangeText={evt => {
+                    this.handleTreeCountChange(evt);
+                  }}
                   value={delimitNumbers(this.state.treeCount)}
                   autoCapitalize={'sentences'}
                 />

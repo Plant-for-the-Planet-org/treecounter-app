@@ -58,7 +58,7 @@ const headerLabels = {
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
-  [getLocalRoute('app_homepage')]: 'World',
+  [getLocalRoute('app_homepage')]: 'label.trillion_tree_campaign_app_header',
   [getLocalRoute('app_explore')]: 'label.explore',
   [getLocalRoute('app_userHome')]: 'Trillion Tree Campaign',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
@@ -79,7 +79,8 @@ const headerLabels = {
   ['delete_profile_confirm']: 'label.delete_profile',
   ['delete_contribution']: 'label.delete_contribution',
   ['app_donate_detail']: 'label.donate',
-  ['app_gift_projects']: 'label.gift_trees'
+  ['app_gift_projects']: 'label.gift_trees',
+  ['pickup_profile_modal']: 'label.dedicate_trees_to'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -227,14 +228,19 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
           navigation.state.routes &&
           navigation.state.routes.length > 0
         ) {
-          title = i18n.t(
-            headerLabels[navigation.state.routes[index].routeName]
-          );
-          if (navigation.state.routes[index].hasOwnProperty('params')) {
-            const childTitle = navigation.state.routes[index].params.titleParam;
+          if (navigation.state.routes[index].routeName === '/home') {
+            title = userProfile.fullname;
+          } else {
+            title = i18n.t(
+              headerLabels[navigation.state.routes[index].routeName]
+            );
+            if (navigation.state.routes[index].hasOwnProperty('params')) {
+              const childTitle =
+                navigation.state.routes[index].params.titleParam;
 
-            if (childTitle) {
-              title = childTitle;
+              if (childTitle) {
+                title = childTitle;
+              }
             }
           }
         }

@@ -68,10 +68,8 @@ class SelectedCompetitionContainer extends Component {
   enrollCompetition(id) {
     this.props.enrollCompetition(id);
   }
-  componentDidMount() {}
 
   render() {
-    console.log(this.state, this.props);
     if (this.state.competition_id) {
       return (
         <CompetitionFull

@@ -64,21 +64,19 @@ class SelectPlantProjectContainer extends Component {
         plantProjects={plantProjects}
         selectProject={id => this.selectPlantProjectAction(id)}
         currencies={this.props.currencies}
-        onMoreClick={id => this.onMoreClick(id)}
+        onMoreClick={(id, name) => this.onMoreClick(id, name)}
         {...this.props}
       />
     );
   }
-  onMoreClick(id) {
+  onMoreClick(id, name) {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
-      updateRoute(
-        'app_selectProject',
-        navigation,
-        1,
-        navigation.getParam('userForm')
-      );
+      updateRoute('app_selectProject', navigation, 1, {
+        userForm: navigation.getParam('userForm'),
+        titleParam: name
+      });
     }
   }
   selectPlantProjectAction(id) {

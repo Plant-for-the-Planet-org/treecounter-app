@@ -70,7 +70,8 @@ class SearchLayout extends React.Component {
       });
     } else if (suggestion.category === 'competition') {
       this.props.navigation.navigate(getLocalRoute('app_competition'), {
-        competition: suggestion.id
+        competition: suggestion.id,
+        titleParam: suggestion.name
       });
     }
   }

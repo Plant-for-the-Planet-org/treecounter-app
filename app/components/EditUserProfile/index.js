@@ -76,7 +76,7 @@ export default class EditUserProfile extends React.Component {
 
   mergeProjectImages(newPlantProjectImages, oldPlantProjectImages = []) {
     if (!newPlantProjectImages) {
-      return oldPlantProjectImages;
+      return [];
     }
     let uploadPlantProjectImages = [];
     uploadPlantProjectImages = newPlantProjectImages.map(newProjectImage => {

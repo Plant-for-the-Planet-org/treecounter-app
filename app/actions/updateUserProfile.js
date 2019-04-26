@@ -86,12 +86,14 @@ export function updatePlantProject(plantProject) {
         plantProject: projectId
       })
         .then(res => {
-          const { plantProject, plantProjectImage: deleteIds } = res.data;
-          if (plantProject && plantProject instanceof Object) {
-            dispatch(
-              mergeEntities(normalize(plantProject, plantProjectSchema))
-            );
-            dispatch(deleteEntity({ plantProjectImage: deleteIds }));
+          let { plantProject } = res.data.merge;
+          dispatch(
+            mergeEntities(normalize(plantProject, [plantProjectSchema]))
+          );
+          let { unlink, delete: deleteContent } = res.data;
+          if (unlink && deleteContent) {
+            dispatch(unlinkEntity(unlink));
+            dispatch(deleteEntity(deleteContent));
           }
           resolve(res.data);
           dispatch(setProgressModelState(false));

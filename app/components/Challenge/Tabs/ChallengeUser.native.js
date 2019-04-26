@@ -10,6 +10,7 @@ import { withNavigation } from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import challengeStyles from '../../../styles/challenge';
 import TabContainer from '../../../containers/Menu/TabContainer';
+import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 
 class ChallengeUser extends Component {
   constructor(props) {
@@ -59,6 +60,8 @@ class ChallengeUser extends Component {
       requestData.challengeMethod = 'direct';
       requestData.goal = this.state.treeCount;
       this.props.challengeUser(requestData);
+    } else {
+      NotificationManager.error('Please select user', 'Error', 5000);
     }
   }
 

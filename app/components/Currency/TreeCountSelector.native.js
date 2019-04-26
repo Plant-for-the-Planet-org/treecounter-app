@@ -117,7 +117,11 @@ class TreeCountSelector extends React.Component {
               {/* To create radio buttons, loop through your array of options */}
               {radio_props.map((obj, i) => {
                 return (
-                  <RadioButton labelHorizontal={true} key={i}>
+                  <RadioButton
+                    wrapStyle={styles.radioContainer}
+                    labelHorizontal={true}
+                    key={i}
+                  >
                     <RadioButtonInput
                       buttonSize={13}
                       buttonWrapStyle={styles.radio_button}
@@ -148,7 +152,7 @@ class TreeCountSelector extends React.Component {
             {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
               return (
                 <View
-                  style={styles.treecount_price_conversion_Text}
+                  style={styles.treecount_price_conversion_Text_fixed}
                   key={treeCount + 'container'}
                 >
                   <View style={styles.treecount_price_conversion_Text_equal}>
@@ -175,6 +179,7 @@ class TreeCountSelector extends React.Component {
                 return (
                   <RadioButton
                     style={{ padding: 0, width: 30 }}
+                    wrapStyle={styles.radioContainer}
                     labelHorizontal={true}
                     key={i}
                   >
@@ -194,25 +199,26 @@ class TreeCountSelector extends React.Component {
                 );
               })}
             </RadioForm>
-
-            <View style={styles.radio_label}>
-              <TextInput
-                editable={!this.state.isFixed}
-                underlineColorAndroid={'transparent'}
-                style={styles.treecount_price_conversion_Text_input2}
-                keyboardType="numeric"
-                onChangeText={evt => this.handleVariableTreeCountChange(evt)}
-                value={String(this.state.variableTreeCount)}
-                autoCapitalize={'sentences'}
-              />
-              <Text
-                key="variable"
-                ellipsizeMode="tail"
-                numberOfLines={1}
-                style={styles.treecount_price_conversion_lebel}
-              >
-                {i18n.t('label.trees')}
-              </Text>
+            <View style={styles.radioContainer}>
+              <View style={styles.radio_label}>
+                <TextInput
+                  editable={!this.state.isFixed}
+                  underlineColorAndroid={'transparent'}
+                  style={styles.treecount_price_conversion_Text_input2}
+                  keyboardType="numeric"
+                  onChangeText={evt => this.handleVariableTreeCountChange(evt)}
+                  value={String(this.state.variableTreeCount)}
+                  autoCapitalize={'sentences'}
+                />
+                <Text
+                  key="variable"
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={styles.treecount_price_conversion_lebel}
+                >
+                  {i18n.t('label.trees')}
+                </Text>
+              </View>
             </View>
           </View>
           <View style={styles.treecount_price_conversion_Text}>

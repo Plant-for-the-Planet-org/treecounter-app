@@ -33,7 +33,7 @@ export function editTree(plantContribution, plantId, navigation) {
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         dispatch(setProgressModelState(false));
-        updateRoute('app_myTrees', navigation || dispatch);
+        updateRoute('app_userHome', navigation || dispatch);
       })
       .catch(error => {
         debug(error.response);

@@ -37,9 +37,8 @@ export function addPlantProject(plantProject) {
           dispatch(
             mergeEntities(normalize(plantProject, [plantProjectSchema]))
           );
-          dispatch(mergeEntities(normalize(userProfile, [userProfileSchema])));
           dispatch(mergeEntities(normalize(tpo, [tpoSchema])));
-
+          dispatch(mergeEntities(normalize(userProfile, [userProfileSchema])));
           NotificationManager.success(
             `New Project Added Successfully`,
             `Congrats`,

@@ -14,6 +14,8 @@ class PlantProjectCarousel extends React.Component {
   }
 
   render() {
+    const { plantProjects, contentTag, tpoName } = this.props;
+
     const settings = {
       dots: true,
       nextArrow: (
@@ -27,9 +29,9 @@ class PlantProjectCarousel extends React.Component {
           styleName="tpo-footer-nav-img__left"
           src={arrow_left_orange}
         />
-      )
+      ),
+      afterChange: index => this.props.onChange(plantProjects[index].id)
     };
-    const { plantProjects, contentTag, tpoName } = this.props;
 
     // see: https://medium.com/@Carmichaelize/dynamic-tag-names-in-react-and-jsx-17e366a684e9
     const TagName = contentTag;

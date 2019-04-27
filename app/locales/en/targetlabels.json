@@ -1,8 +1,6 @@
 {
-  "set": "Set",
   "set_target": "Set Target",
-  "title": "Title",
+  "save": "Save",
   "target_count": "Total Tree Target",
-  "target_year": "Target Year",
-  "target_comment": "Target Comment"
+  "target_year": "Target Year"
 }

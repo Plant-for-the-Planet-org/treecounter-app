@@ -31,6 +31,7 @@ export default {
         type: 'string',
         title: 'label.plant_date',
         widget: 'date',
+        maxDate: true,
         icon: null,
         help: null,
         propertyOrder: 3
@@ -114,6 +115,7 @@ export default {
               type: 'string',
               title: 'label.measurement_date',
               widget: 'date',
+              maxDate: true,
               icon: null,
               help: null,
               propertyOrder: 3
@@ -163,6 +165,7 @@ export default {
         type: 'string',
         title: 'label.plant_date',
         widget: 'date',
+        maxDate: true,
         icon: null,
         help: null,
         propertyOrder: 3

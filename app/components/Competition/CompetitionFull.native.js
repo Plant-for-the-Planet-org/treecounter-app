@@ -183,7 +183,8 @@ class CompetitionFull extends React.Component {
                       numberOfLines={1}
                       style={snippetStyles.project_teaser__contentByText}
                     >
-                      by {competitionDetail && competitionDetail.ownerName}
+                      {i18n.t('label.by')}{' '}
+                      {competitionDetail && competitionDetail.ownerName}
                     </Text>
                   </View>
                   <View style={snippetStyles.projectDescriptionContainer}>
@@ -222,7 +223,8 @@ class CompetitionFull extends React.Component {
                         style={{ width: 15, height: 15 }}
                       />
                       <Text style={snippetStyles.bottomText}>
-                        Ends {competitionDetail && competitionDetail.endDate}
+                        {i18n.t('label.ends')}{' '}
+                        {competitionDetail && competitionDetail.endDate}
                       </Text>
                     </View>
 
@@ -236,7 +238,7 @@ class CompetitionFull extends React.Component {
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
                     <Text style={styles.textHeadingParticipants}>
-                      PARTICIPANTS ({competitionDetail &&
+                      {i18n.t('label.participants')} ({competitionDetail &&
                         competitionDetail.competitorCount})
                     </Text>
                   </View>
@@ -275,7 +277,7 @@ class CompetitionFull extends React.Component {
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
                     <Text style={styles.textHeadingParticipants}>
-                      REQUESTS TO JOIN ({competitionDetail &&
+                      {i18n.t('label.requests_to_join')} ({competitionDetail &&
                         competitionDetail.competitorCount})
                     </Text>
                   </View>
@@ -313,7 +315,9 @@ class CompetitionFull extends React.Component {
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
-                    <Text style={styles.textHeadingParticipants}>INVITE</Text>
+                    <Text style={styles.textHeadingParticipants}>
+                      {i18n.t('label.invite')}
+                    </Text>
                   </View>
                   <View style={styles.topCompetitorContainer}>
                     <View>
@@ -356,7 +360,9 @@ class CompetitionFull extends React.Component {
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
-                    <Text style={styles.textHeadingParticipants}>INVITED</Text>
+                    <Text style={styles.textHeadingParticipants}>
+                      {i18n.t('label.invited')}
+                    </Text>
                   </View>
                   <View style={styles.topCompetitorContainer}>
                     <View>

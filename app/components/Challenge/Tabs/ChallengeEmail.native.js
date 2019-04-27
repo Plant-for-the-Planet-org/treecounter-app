@@ -13,6 +13,7 @@ import { withNavigation } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
+import i18n from '../../../locales/i18n';
 import TabContainer from '../../../containers/Menu/TabContainer';
 
 import challengeStyles from '../../../styles/challenge';
@@ -114,7 +115,7 @@ class ChallengeEmail extends Component {
                 onChange={this.onFormChange}
               />
               <View style={challengeStyles.flexContainerStyle}>
-                <Text>Challenge to plant </Text>
+                <Text>{i18n.t('label.challenge_to_plant')} </Text>
                 <TextInput
                   keyboardType="numeric"
                   style={challengeStyles.treecount_input}
@@ -122,7 +123,7 @@ class ChallengeEmail extends Component {
                   value={delimitNumbers(this.state.treeCount)}
                   autoCapitalize={'sentences'}
                 />
-                <Text>Trees</Text>
+                <Text>{i18n.t('label.trees')}</Text>
               </View>
               <View style={challengeStyles.flexContainerStyle}>
                 <CheckBox
@@ -155,7 +156,7 @@ class ChallengeEmail extends Component {
                 />
               </View>
               <PrimaryButton onClick={this.onNextClick}>
-                Challenge
+                {i18n.t('label.challenge_heading')}
               </PrimaryButton>
             </View>
           </CardLayout>

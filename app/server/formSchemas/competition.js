@@ -22,6 +22,7 @@ export default {
       type: 'string',
       title: 'label.competition_end_date',
       widget: 'date',
+      minDate: true,
       icon: null,
       help: null,
       propertyOrder: 3

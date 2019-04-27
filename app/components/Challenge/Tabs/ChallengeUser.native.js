@@ -10,6 +10,7 @@ import { withNavigation } from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import challengeStyles from '../../../styles/challenge';
 import TabContainer from '../../../containers/Menu/TabContainer';
+import i18n from '../../../locales/i18n';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 
 class ChallengeUser extends Component {
@@ -117,7 +118,7 @@ class ChallengeUser extends Component {
                   value={delimitNumbers(this.state.treeCount)}
                   autoCapitalize={'sentences'}
                 />
-                <Text>Trees</Text>
+                <Text>{i18n.t('label.trees')}</Text>
               </View>
               <View style={challengeStyles.flexContainerStyle}>
                 <CheckBox
@@ -150,7 +151,7 @@ class ChallengeUser extends Component {
                 />
               </View>
               <PrimaryButton onClick={this.onNextClick}>
-                Challenge
+                {i18n.t('label.challenge_heading')}
               </PrimaryButton>
             </View>
           </CardLayout>

@@ -29,16 +29,17 @@ export default class ChallengeCard extends React.Component {
           <div className="flex-row">
             <div className="limit-width">
               <span className="goal-style">
-                {delimitNumbers(goal) +
-                  ' Trees' +
-                  (end_date !== null ? ' by ' + end_date : '')}
+                {delimitNumbers(goal) + i18n.t('label.trees')} + (end_date !==
+                null ? ' {i18n.t('label.by')} ' + end_date : '')}
               </span>
               <div className="flex-row">
                 <UserProfileImage profileImage={avatar} />
                 <div>
                   <div className="flex-row">
                     <span className="text-style text-padding">
-                      {direction === 'target' ? 'from ' : 'to '}
+                      {direction === 'target'
+                        ? i18n.t('label.from') + ' '
+                        : i18n.t('label.to') + ' '}
                     </span>
                     <span className="text-style text-padding">{fullname}</span>
                   </div>
@@ -56,7 +57,7 @@ export default class ChallengeCard extends React.Component {
                   }
                   className="button-width"
                 >
-                  Accept
+                  {i18n.t('label.accept')}
                 </PrimaryButton>
                 <SecondaryButton
                   onClick={() =>
@@ -64,7 +65,7 @@ export default class ChallengeCard extends React.Component {
                   }
                   className="button-width"
                 >
-                  Reject
+                  {i18n.t('label.reject')}
                 </SecondaryButton>
               </div>
             ) : (

@@ -154,7 +154,10 @@ class DonationTabView extends React.PureComponent {
   render() {
     const { formOption, formValue, formSchema } = this.props;
     return (
-      <KeyboardAwareScrollView enableOnAndroid={false}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ paddingBottom: 35 }}
+        enableOnAndroid={false}
+      >
         <CardLayout>
           <Form
             ref={this._formRef}

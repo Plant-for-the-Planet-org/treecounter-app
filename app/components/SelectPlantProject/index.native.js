@@ -85,16 +85,7 @@ export default class SelectPlantTabView extends Component {
           onIndexChange={this._handleIndexChange}
         />
         {this.props.navigation.getParam('giftMethod') ? (
-          <View
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              flex: 1,
-              width: '100%'
-            }}
-          >
-            <TabContainer {...this.props} />
-          </View>
+          <TabContainer {...this.props} />
         ) : null}
       </View>
     );

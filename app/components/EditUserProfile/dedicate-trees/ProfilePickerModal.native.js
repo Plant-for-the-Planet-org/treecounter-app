@@ -79,16 +79,7 @@ class ProfilePickerModal extends Component {
             pickupProfileView
           )}
         </ScrollView>
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            flex: 1,
-            width: '100%'
-          }}
-        >
-          <TabContainer {...this.props} />
-        </View>
+        <TabContainer {...this.props} />
       </View>
     );
   }

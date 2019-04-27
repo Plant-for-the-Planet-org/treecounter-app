@@ -15,7 +15,6 @@ import tabStyles from '../../styles/common/tabbar';
 
 import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
-import TabContainer from '../../containers/Menu/TabContainer';
 import { getProfileTypeName } from '../PublicTreeCounter/utils';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList';
@@ -123,7 +122,7 @@ export default class UserHome extends Component {
     switch (route.key) {
       case 'home':
         return (
-          <ScrollView style={{ marginBottom: 5 }}>
+          <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
             <View style={styles.header}>
               <View style={styles.userProfileContainer}>
                 <UserProfileImage profileImage={userProfile.image} />
@@ -190,7 +189,7 @@ export default class UserHome extends Component {
         );
       case 'my-trees':
         return (
-          <ScrollView style={{ marginBottom: 5 }}>
+          <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
             <ContributionCardList
               contributions={this.props.userContributions}
               deleteContribution={this.props.deleteContribution}

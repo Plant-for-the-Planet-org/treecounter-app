@@ -38,8 +38,6 @@ import { saveItem, fetchItem } from '../../stores/localStorage.native';
 import Constants from '../../utils/const';
 import { getImageUrl } from '../../actions/apiRouting';
 
-const height = Dimensions.get('window').height;
-let viewheight = height - 50;
 class Trillion extends PureComponent {
   constructor() {
     super();
@@ -47,7 +45,6 @@ class Trillion extends PureComponent {
       svgData: null,
       displayName: '',
       loading: true,
-      offsetY: new Animated.Value(0),
       loadSvg: true,
       routes: [
         { key: 'world', title: 'World' },
@@ -107,7 +104,7 @@ class Trillion extends PureComponent {
   };
 
   _handleIndexChange = index => {
-    this.setState({ index, offsetY: new Animated.Value(0) });
+    this.setState({ index });
   };
 
   _renderTabBar = props => {
@@ -130,15 +127,9 @@ class Trillion extends PureComponent {
           <LoadingIndicator />
         ) : (
           <ScrollView
-            bounces={false}
-            scrollEventThrottle={16}
             contentContainerStyle={{
-              justifyContent: 'flex-start',
-              flexGrow: 3
+              paddingBottom: 72
             }}
-            onScroll={Animated.event([
-              { nativeEvent: { contentOffset: { y: this.state.offsetY } } }
-            ])}
           >
             <View style={styles.parentContainer}>
               <View style={svgStyles.svgContainer}>
@@ -207,14 +198,7 @@ class Trillion extends PureComponent {
         );
       }
       case 'leaderBoard': {
-        return (
-          <Leaderboard
-            navigation={this.props.navigation}
-            handleScrollAnimation={Animated.event([
-              { nativeEvent: { contentOffset: { y: this.state.offsetY } } }
-            ])}
-          />
-        );
+        return <Leaderboard navigation={this.props.navigation} />;
       }
       default:
         return null;
@@ -222,15 +206,6 @@ class Trillion extends PureComponent {
   };
 
   render() {
-    const headerTranslate = Animated.diffClamp(
-      this.state.offsetY,
-      0,
-      120
-    ).interpolate({
-      inputRange: [0, 120],
-      outputRange: [0, -50]
-    });
-
     return [
       this.props.navigation ? (
         <NavigationEvents
@@ -243,26 +218,15 @@ class Trillion extends PureComponent {
           key="navigation-events"
         />
       ) : null,
-      <Animated.View
-        style={[
-          { height: viewheight },
-          {
-            transform: [{ translateY: headerTranslate }],
-            flexGrow: 1
-          }
-        ]}
-        key="world-tab"
-      >
-        {this.state.loadSvg ? (
-          <TabView
-            useNativeDriver
-            navigationState={this.state}
-            renderScene={this._renderScreen}
-            renderTabBar={this._renderTabBar}
-            onIndexChange={this._handleIndexChange}
-          />
-        ) : null}
-      </Animated.View>
+      this.state.loadSvg ? (
+        <TabView
+          useNativeDriver
+          navigationState={this.state}
+          renderScene={this._renderScreen}
+          renderTabBar={this._renderTabBar}
+          onIndexChange={this._handleIndexChange}
+        />
+      ) : null
     ];
   }
 }

@@ -45,8 +45,13 @@ class PlantProjectFull extends React.Component {
       linkText
     };
     return (
-      <View style={{ paddingBottom: 50 }}>
-        <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={[
+            scrollStyle.styleContainer,
+            { paddingBottom: 72 }
+          ]}
+        >
           <CardLayout style={[styles.projectFullContainer]}>
             <PlantProjectSnippet
               key={'projectFull' + this.props.plantProject.id}
@@ -76,16 +81,7 @@ class PlantProjectFull extends React.Component {
             ) : null}
           </CardLayout>
         </ScrollView>
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            flex: 1,
-            width: '100%'
-          }}
-        >
-          <TabContainer {...this.props} />
-        </View>
+        <TabContainer {...this.props} />
       </View>
     );
   }

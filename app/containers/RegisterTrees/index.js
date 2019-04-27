@@ -25,11 +25,14 @@ class RegisterTreesContainer extends PureComponent {
       loadSvg: true
     };
   }
+
   onSubmit = (mode, registerTreeForm) => {
     registerTreeForm =
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
     // console.log(registerTreeForm.validate());
     let value = registerTreeForm.getValue();
+    // value = Object.assign({}, value);
+    // value.geoLocation = 'geoLongitude=-99.80686542968473&geoLatitude=34.55481064260679&country=US';
     value = mergeContributionImages(value);
     if (value) {
       this.props

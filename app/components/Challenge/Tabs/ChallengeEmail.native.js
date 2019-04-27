@@ -55,6 +55,22 @@ class ChallengeEmail extends Component {
       requestData.challengeMethod = 'invitation';
       requestData.goal = this.state.treeCount;
       this.props.challengeUser(requestData);
+      this.setState({
+        treeCount: 1000,
+        isChecked: false,
+        byYear: '',
+        tempForm: {}
+      });
+      let currentYear = new Date().getFullYear(),
+        years = [];
+      let endYear = currentYear + 10;
+
+      while (currentYear <= endYear) {
+        years.push(currentYear++);
+      }
+      this.years = years.map(item => {
+        return { value: item };
+      });
     } else {
       this.challengeInvitation.validate();
     }

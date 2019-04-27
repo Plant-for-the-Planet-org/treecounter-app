@@ -63,6 +63,13 @@ class SearchUser extends React.Component {
       NotificationManager.error('Could not add user', 'Error', 5000);
     }
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.searchSuggestion === '') {
+      this.setState({
+        selectedSuggestionName: ''
+      });
+    }
+  }
   isMyself(treecounter, currentUserProfile) {
     return (
       !!currentUserProfile &&

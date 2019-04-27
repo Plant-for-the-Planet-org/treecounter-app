@@ -215,7 +215,9 @@ export default class Leaderboard extends Component {
         categoryInfo.categoryKeys &&
         categoryInfo.categoryKeys[0]);
     return (
-      <Animated.View style={styles.leaderBoardContainer}>
+      <Animated.View
+        style={[styles.leaderBoardContainer, { paddingBottom: 16 }]}
+      >
         <CategoryTypes
           categoryInfo={this.props.categoryInfo}
           sectionInfo={this.props.sectionInfo}

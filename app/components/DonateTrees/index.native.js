@@ -406,16 +406,7 @@ export default class DonateTrees extends React.PureComponent {
           useNativeDriver={true}
           onIndexChange={this._handleIndexChange}
         />
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            flex: 1,
-            width: '100%'
-          }}
-        >
-          <TabContainer {...this.props} />
-        </View>
+        <TabContainer {...this.props} />
       </View>
     );
   }

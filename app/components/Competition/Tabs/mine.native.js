@@ -8,10 +8,8 @@ import CompetitionSnippet from '../CompetitionSnippet.native';
 import ActionButton from 'react-native-action-button';
 import CardLayout from '../../Common/Card';
 import PropTypes from 'prop-types';
-import FeaturedCompetitions from './featured.native';
 import t from 'tcomb-form-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import {
   competitionFormSchema,
   competitionFormSchemaOptions
@@ -121,7 +119,12 @@ export default class MineCompetitions extends Component {
     let { featuredProjects, featuredCompetitions } = this.state;
     return !this.state.showCompetitionForm ? (
       <View style={styles.mineContainer}>
-        <ScrollView style={styles.mineContainer}>
+        <ScrollView
+          contentContainerStyle={[
+            scrollStyle.styleContainer,
+            { paddingBottom: 72 }
+          ]}
+        >
           {featuredCompetitions.length > 0
             ? featuredCompetitions.map(project => (
                 <CompetitionSnippet
@@ -140,11 +143,15 @@ export default class MineCompetitions extends Component {
         <ActionButton
           buttonColor="rgba(183, 211, 127, 1)"
           buttonTextStyle={styles.action_button}
+          offsetY={72}
           onPress={() => this.onActionButtonPress()}
         />
       </View>
     ) : (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ paddingBottom: 72 }}
+        enableOnAndroid={true}
+      >
         <CardLayout style={{ flex: 1 }}>
           <Form
             ref={this.createCompetitionForm}

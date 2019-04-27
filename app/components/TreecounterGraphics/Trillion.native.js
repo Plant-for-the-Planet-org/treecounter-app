@@ -134,7 +134,8 @@ class Trillion extends PureComponent {
             scrollEventThrottle={16}
             contentContainerStyle={{
               justifyContent: 'flex-start',
-              flexGrow: 3
+              flexGrow: 3,
+              paddingBottom: 16
             }}
             onScroll={Animated.event([
               { nativeEvent: { contentOffset: { y: this.state.offsetY } } }

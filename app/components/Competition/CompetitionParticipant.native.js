@@ -86,7 +86,7 @@ class CompetitionParticipant extends React.Component {
               this.props.competitor && this.props.competitor.treecounterAvatar
             }
             style={styles.profileImageStyle}
-            imageStyle={{ borderRadius: 15 }}
+            imageStyle={{ borderRadius: 16 }}
           />
 
           <View style={styles.participantNameContainer}>

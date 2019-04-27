@@ -1,11 +1,8 @@
 {
-  "menu": "menu",
   "signUp": "Sign Up",
-  "home": "home",
   "search": "search",
   "placeholder_value": "Type a name ...",
-  "welcome_hi": "Hi ",
-  "welcome_symbol": "",
+  "welcome_hi": "Hi {{user}}",
   "edit_profile": "Edit Profile",
   "help": "Help",
   "logout": "Logout",

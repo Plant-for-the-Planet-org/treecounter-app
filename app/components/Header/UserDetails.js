@@ -33,9 +33,9 @@ const UserDetails = ({
           />
           <div>
             <TextSpan strong={true}>
-              {i18n.t('label.welcome_hi') +
-                userProfile.fullname +
-                i18n.t('label.welcome_symbol')}
+              {i18n.t('label.welcome_hi', {
+                user: userProfile.fullname
+              })}
             </TextSpan>
             <TextSpan>{userProfile.email}</TextSpan>
           </div>

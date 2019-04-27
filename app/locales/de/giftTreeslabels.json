@@ -1,13 +1,10 @@
 {
   "currency": "Währung",
-  "treecounter_user_name": "Benutzer",
   "other_email": "E-Mail",
-  "heading_give": "Verschenken an...",
   "heading_donate_details": "Spendendetails",
   "heading_donor_details": "Spenderdetails",
   "heading_project": "Projekt",
   "heading_payment": "Bezahlung",
   "no_of_trees": "Anzahl der Bäume",
-  "trees": "Bäume",
-  "gift_message": "Nachricht zum Geschenk"
+  "trees": "Bäume"
 }

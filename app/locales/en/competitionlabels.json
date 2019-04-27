@@ -2,19 +2,20 @@
   "competitions": "Competitions",
   "leave": "Leave",
   "edit": "Edit",
-  "join": "Join",
+  "join": "Join Competition",
   "request_to_join": "Request to Join",
   "confirm": "Confirm",
   "delete": "Delete",
   "cancel_join_request": "Cancel Join Request",
   "competition_name": "Competition Name",
   "competition_goal": "Tree Target",
-  "competition_end_date": "End Date",
+  "competition_end_date": "Competition End Date",
   "competition_access": "Who can Join",
   "competition_image": "Add Image",
   "competition_description": "Type a description",
   "create_competition": "Create Competition",
   "competition_access_immediate": "Anyone (Join Immediately)",
   "competition_access_request": "Anyone (Request to Join)",
-  "competition_access_invitation": "People I Invite"
+  "competition_access_invitation": "People I Invite",
+  "edit_competition": "Edit Competition"
 }

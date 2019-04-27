@@ -50,7 +50,7 @@ export default class ChallengeCard extends React.Component {
                 imageStyle={{ borderRadius: 15 }}
               />
               <View>
-                <View style={[challengesStyle.textPadding]}>
+                <View style={challengesStyle.textPadding}>
                   <Text style={challengesStyle.textStyle}>
                     {direction === 'target' ? 'from ' : 'to '} {fullname}
                   </Text>
@@ -98,9 +98,13 @@ export default class ChallengeCard extends React.Component {
             </View>
           ) : (
             <View style={challengesStyle.buttonContainer}>
-              <Text style={challengesStyle.statusLabel}>
+              <PrimaryButton
+                buttonStyle={challengesStyle.moreButtonStyle}
+                textStyle={challengesStyle.moreButtonTextStyle}
+                onClick={() => {}}
+              >
                 {status && status.toUpperCase()}
-              </Text>
+              </PrimaryButton>
             </View>
           )}
         </View>

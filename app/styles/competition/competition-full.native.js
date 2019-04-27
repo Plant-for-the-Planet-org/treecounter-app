@@ -73,7 +73,10 @@ export default (selectedCompetitionFull = EStyleSheet.create({
   },
   profileImageStyle: {
     width: 40,
-    height: 40
+    height: 40,
+    borderRadius: 0,
+    borderWidth: 0,
+    marginLeft: 10
   },
   topCompetitorContainer: {
     flex: 1,

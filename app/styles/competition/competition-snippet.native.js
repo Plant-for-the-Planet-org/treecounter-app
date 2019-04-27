@@ -255,6 +255,9 @@ export default (selectCompetitionFull = EStyleSheet.create({
   },
   profileImageStyle: {
     width: 30,
-    height: 30
+    height: 30,
+    borderRadius: 0,
+    borderWidth: 0,
+    marginLeft: 10
   }
 }));

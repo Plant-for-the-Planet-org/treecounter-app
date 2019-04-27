@@ -50,7 +50,8 @@ class CompetitionFull extends React.Component {
     const competitionDetail = this.props.competitionDetail;
     let participantCount = 0,
       requestCount = 0,
-      inviteCount = 0;
+      inviteCount = 0,
+      invitedCount = 0;
     if (competitionDetail && competitionDetail.allEnrollments) {
       for (let i = 0; i < competitionDetail.allEnrollments.length; i++) {
         if (competitionDetail.allEnrollments[i].status === 'enrolled') {
@@ -58,6 +59,12 @@ class CompetitionFull extends React.Component {
         } else if (competitionDetail.allEnrollments[i].status === 'pending') {
           requestCount++;
         } else if (competitionDetail.allEnrollments[i].status === 'invited') {
+          if (
+            competitionDetail.allEnrollments[i].treecounterSlug ===
+            this.props.treeCounter.slug
+          ) {
+            invitedCount++;
+          }
           inviteCount++;
         }
       }
@@ -353,7 +360,7 @@ class CompetitionFull extends React.Component {
               </CardLayout>
             ) : null}
             {competitionDetail &&
-            inviteCount > 0 &&
+            invitedCount > 0 &&
             competitionDetail.ownerTreecounterId !==
               this.props.treeCounter.id &&
             competitionDetail.access === 'invitation' ? (

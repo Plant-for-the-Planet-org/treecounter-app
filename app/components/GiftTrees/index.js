@@ -551,7 +551,7 @@ export default class GiftTrees extends Component {
                     donorName: name,
                     treeCount: this.state.selectedTreeCount,
                     plantProjectName: plantProject.name,
-                    giftTreeCounterName: name,
+                    giftTreeCounterName: this.state.giftTreecounterName,
                     treeCount: this.state.selectedTreeCount
                   }}
                   onSuccess={paymentResponse =>

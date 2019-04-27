@@ -1,8 +1,6 @@
 {
-  "menu": "Menü",
   "signUp": "Registrieren ",
   "home": "Startseite",
-  "search": "suchen",
   "placeholder_value": "Gib einen Namen ein ...",
   "welcome_hi": "Hallo",
   "edit_profile": "Profil bearbeiten",
@@ -23,6 +21,5 @@
   "success_title": "Erfolg",
   "about_us": "Über uns",
   "open_source_license": "Open-Source-Lizenz",
-  "license_credit_info": "Diese Anwendung verwendet Open-Source-Komponenten. Du kannst den Quellcode deiner Open-Source-Projekte zusammen mit den Lizenzinformationen unten finden. Wir danken den Entwicklern für ihre Beiträge zu Open Source.",
   "not_following_anybody": "Du folgst niemandem"
 }

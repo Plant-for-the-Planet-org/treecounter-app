@@ -1,6 +1,8 @@
 {
+  "menu": "Menu",
   "signUp": "Sign Up",
-  "search": "search",
+  "home": "home",
+  "search": "Type a name or Competition",
   "placeholder_value": "Type a name ...",
   "welcome_hi": "Hi {{user}}",
   "edit_profile": "Edit Profile",
@@ -22,6 +24,6 @@
   "dedicate_trees_to": "Dedicate Trees to",
   "about_us": "About",
   "open_source_license": "Open Source License",
-  "license_credit_info": "This Application uses Open source components.you can find the source code of their open source projects along with license information below. we acknowledge and are greatful to these developers for their contributions to open source",
+  "license_credit_info": "This app uses Open Source components. You can find the source code of their Open Source projects along with license information below. We acknowledge and are grateful to these developers for their contributions to Open Source.",
   "not_following_anybody": "You are not following anybody"
 }

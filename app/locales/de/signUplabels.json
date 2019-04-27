@@ -7,8 +7,6 @@
   "subtype": "Kategorie",
   "country": "Land",
   "password_repeat": "Passwort wiederholen",
-  "mayPublish": "Ich bin damit einverstanden, dass mein Name auf der Website der Trillion Tree Campaign veröffentlicht wird.",
-  "mayContact": "Ich stimme zu, dass ich von der Kinder- und Jugendorganisation Plant-for-the-Planet als Teil von Baumpflanz-Herausforderungen kontaktiert werden kann.",
   "firstname": "Vorname",
   "lastname": "Nachname",
   "company_or_orga_name": "Name",
@@ -19,5 +17,6 @@
   "company_title": "Unternehmen",
   "education_title": "Schule",
   "already_have_account": "Hast du schon ein Konto?",
-  "education": "Bildung"
+  "education": "Bildung",
+  "organization": "Organisation"
 }

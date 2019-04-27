@@ -25,13 +25,18 @@ class RegisterTreesContainer extends PureComponent {
       loadSvg: true
     };
   }
-  onSubmit = (mode, registerTreeForm) => {
+
+  onSubmit = (mode, registerTreeForm, plantProject) => {
     registerTreeForm =
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
     // console.log(registerTreeForm.validate());
     let value = registerTreeForm.getValue();
+    value = Object.assign({}, value);
     value = mergeContributionImages(value);
     if (value) {
+      if (plantProject) {
+        value.plantProject = plantProject;
+      }
       this.props
         .registerTree(
           value,

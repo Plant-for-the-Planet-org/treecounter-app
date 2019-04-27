@@ -150,7 +150,7 @@ export default class ManageProjects extends Component {
 
   mergeProjectImages(newPlantProjectImages, oldPlantProjectImages = []) {
     if (!newPlantProjectImages) {
-      return oldPlantProjectImages;
+      return [];
     }
     let uploadPlantProjectImages = [];
     uploadPlantProjectImages = newPlantProjectImages.map(newProjectImage => {
@@ -203,10 +203,6 @@ export default class ManageProjects extends Component {
       this.setState({ plantProjects: newPlantProjects });
     }
   };
-
-  componentDidMount() {}
-
-  componentWillUnmount() {}
 
   getPlantProjectList = () => {
     let plantProjectList = this.state.plantProjects.map(

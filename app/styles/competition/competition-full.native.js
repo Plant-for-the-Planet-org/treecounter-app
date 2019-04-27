@@ -41,10 +41,9 @@ export default (selectedCompetitionFull = EStyleSheet.create({
     alignItems: 'center'
   },
   buttonContainer: {
-    flexGrow: 0,
-    flexShrink: 0,
-    flexBasis: Layout.window.height * 0.15,
-    height: Layout.window.height * 0.15
+    flexDirection: 'row',
+    width: '50%',
+    justifyContent: 'flex-end'
   },
   plantProjectDetails: {
     flexGrow: 1,
@@ -83,18 +82,17 @@ export default (selectedCompetitionFull = EStyleSheet.create({
   topCompetitorSection: {
     flex: 1,
     flexDirection: 'row',
-    padding: 3,
+    padding: 16,
     width: '100%',
     justifyContent: 'space-between'
   },
   topCompetitorName: {
-    width: '70%',
+    width: '60%',
     alignItems: 'center',
     flexDirection: 'row'
   },
   topCompetitorScore: {
-    width: '30%',
-    justifyContent: 'flex-end'
+    width: '40%'
   },
   topCompetitorNameText: {
     fontSize: 14,
@@ -117,7 +115,9 @@ export default (selectedCompetitionFull = EStyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     width: '100%',
-    padding: 10
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: 16
   },
   textHeadingParticipants: {
     fontSize: 16,
@@ -136,6 +136,12 @@ export default (selectedCompetitionFull = EStyleSheet.create({
   buttonItem: {
     padding: 5
   },
+  actionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%'
+    //height: rowHeight + rowHeight / 2,
+  },
   buttonStyle: {
     // height: 20,
     // paddingLeft: 2,
@@ -146,12 +152,11 @@ export default (selectedCompetitionFull = EStyleSheet.create({
     // borderWidth: 0,
     // borderRadius: 0,
     // marginRight: 5
-    height: 30,
+    width: '100%',
     borderWidth: 1,
     borderRadius: 6,
-    paddingLeft: 5,
-    paddingRight: 5,
-    marginRight: 5
+    paddingLeft: 10,
+    paddingRight: 10
   },
   buttonTextStyle: {
     fontSize: 14

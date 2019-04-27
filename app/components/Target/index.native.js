@@ -26,7 +26,7 @@ export default class Target extends Component {
             <Form
               ref={'setTargetForm'}
               type={targetFormSchema}
-              options={schemaOptions}
+              options={this.props.schemaOptions}
               value={this.props.treecounter}
             />
             <PrimaryButton onClick={this.props.onSubmitTarget}>

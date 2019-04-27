@@ -8,10 +8,8 @@ import CompetitionSnippet from '../CompetitionSnippet.native';
 import ActionButton from 'react-native-action-button';
 import CardLayout from '../../Common/Card';
 import PropTypes from 'prop-types';
-import FeaturedCompetitions from './featured.native';
 import t from 'tcomb-form-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import {
   competitionFormSchema,
   competitionFormSchemaOptions
@@ -38,7 +36,8 @@ export default class MineCompetitions extends Component {
   }
   onActionButtonPress() {
     this.setState({
-      showCompetitionForm: true
+      showCompetitionForm: true,
+      formValue: null
     });
   }
   componentDidMount() {
@@ -110,26 +109,32 @@ export default class MineCompetitions extends Component {
         formValue: this.createCompetition.refs.input.state.value
       });
       this.props.onCreateCompetition(
-        this.createCompetition.refs.input.state.value
+        this.createCompetition.refs.input.state.value,
+        this.createCompetition
       );
     }
   }
 
   render() {
-    console.log(this.props, this.state);
     let { featuredProjects, featuredCompetitions } = this.state;
     return !this.state.showCompetitionForm ? (
       <View style={styles.mineContainer}>
-        <ScrollView style={styles.mineContainer}>
+        <ScrollView
+          contentContainerStyle={[
+            scrollStyle.styleContainer,
+            { paddingBottom: 72 }
+          ]}
+        >
           {featuredCompetitions.length > 0
             ? featuredCompetitions.map(project => (
                 <CompetitionSnippet
                   key={'competition' + project.id}
                   cardStyle={styles.cardStyle}
-                  onMoreClick={id => this.props.onMoreClick(id)}
+                  onMoreClick={id => this.props.onMoreClick(id, project.name)}
                   competition={project}
                   leaveCompetition={id => this.props.leaveCompetition(id)}
                   enrollCompetition={id => this.props.enrollCompetition(id)}
+                  editCompetition={this.props.editCompetition}
                   type="mine"
                 />
               ))
@@ -138,16 +143,20 @@ export default class MineCompetitions extends Component {
         <ActionButton
           buttonColor="rgba(183, 211, 127, 1)"
           buttonTextStyle={styles.action_button}
+          offsetY={72}
           onPress={() => this.onActionButtonPress()}
         />
       </View>
     ) : (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ paddingBottom: 72 }}
+        enableOnAndroid={true}
+      >
         <CardLayout style={{ flex: 1 }}>
           <Form
             ref={this.createCompetitionForm}
             type={competitionFormSchema}
-            options={competitionFormSchemaOptions}
+            options={this.props.competitionFormSchemaOptions}
             value={this.state.formValue}
           />
           <PrimaryButton onClick={() => this.onCreateCompetition()}>
@@ -173,5 +182,6 @@ MineCompetitions.propTypes = {
   onMoreClick: PropTypes.any,
   leaveCompetition: PropTypes.any,
   enrollCompetition: PropTypes.any,
-  onCreateCompetition: PropTypes.any
+  onCreateCompetition: PropTypes.any,
+  editCompetition: PropTypes.any
 };

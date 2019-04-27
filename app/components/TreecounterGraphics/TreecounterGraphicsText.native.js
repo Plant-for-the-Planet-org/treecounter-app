@@ -8,6 +8,7 @@ import i18n from '../../locales/i18n';
 
 import svgStyles from '../../styles/common/treecounter_svg';
 import PlantedDetails from './PlantDetails.native';
+import { delimitNumbers } from '../../utils/utils';
 
 class TreecounterGraphicsText extends Component {
   constructor() {
@@ -81,7 +82,7 @@ class TreecounterGraphicsText extends Component {
               </Text>
               {this.props.trillion ? (
                 <Text style={svgStyles.svgTitleText}>
-                  {target.toLocaleString('en')}
+                  {delimitNumbers(target)}
                 </Text>
               ) : null}
             </View>
@@ -111,7 +112,7 @@ class TreecounterGraphicsText extends Component {
 
               {this.props.trillion ? (
                 <Text style={svgStyles.svgTitleText}>
-                  {parseInt(planted).toLocaleString('en')}
+                  {delimitNumbers(parseInt(planted))}
                 </Text>
               ) : null}
             </View>

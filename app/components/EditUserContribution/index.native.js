@@ -8,13 +8,13 @@ import {
   multipleTreesRegisterFormSchema,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
-import RegisterTreeTab from '../RegisterTrees/RegisterTreeTab.native';
+import RegisterTreeTab from '../RegisterTrees/RegisterTreeTab';
 import i18n from '../../locales/i18n.js';
 
 export default class EditUserContribution extends Component {
   static mode = {
     singleTree: 'single-tree',
-    multipleTrees: 'Many Trees'
+    multipleTrees: 'multiple-trees'
   };
 
   constructor(props) {

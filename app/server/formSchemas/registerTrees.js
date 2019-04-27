@@ -50,7 +50,7 @@ export default {
           title: 'prototype',
           type: 'object',
           properties: {
-            imageFile: {
+            image: {
               type: 'string',
               title: 'label.upload_profile_picture',
               widget: 'file',
@@ -182,7 +182,7 @@ export default {
           title: 'prototype',
           type: 'object',
           properties: {
-            imageFile: {
+            image: {
               type: 'string',
               title: 'label.upload_profile_picture',
               widget: 'file',

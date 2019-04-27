@@ -18,6 +18,7 @@ import CardLayout from '../Common/Card';
 import UserProfileImage from '../Common/UserProfileImage';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
+import { delimitNumbers } from '../../utils/utils';
 import { upwardArrow, downwardArrow } from '../../assets/index.js';
 
 export default class ChallengeCard extends React.Component {
@@ -34,29 +35,27 @@ export default class ChallengeCard extends React.Component {
       token
     } = challenge;
     return (
-      <CardLayout>
-        <View style={challengesStyle.flexStyle}>
+      <CardLayout style={[challengesStyle.challengeContainer]}>
+        <View style={challengesStyle.challengeViewContainer}>
           <View style={challengesStyle.limitWidth}>
             <Text style={challengesStyle.goalStyle}>
-              {goal.toLocaleString() +
+              {delimitNumbers(goal) +
                 ' Trees' +
                 (end_date !== null ? ' by ' + end_date : '')}
             </Text>
             <View style={challengesStyle.flexStyle}>
-              <UserProfileImage profileImage={avatar} />
+              <UserProfileImage
+                profileImage={avatar}
+                style={challengesStyle.profileImage}
+                imageStyle={{ borderRadius: 15 }}
+              />
               <View>
-                <View
-                  style={[
-                    challengesStyle.flexStyle,
-                    challengesStyle.textPadding
-                  ]}
-                >
+                <View style={challengesStyle.textPadding}>
                   <Text style={challengesStyle.textStyle}>
-                    {direction === 'target' ? 'from ' : 'to '}
+                    {direction === 'target' ? 'from ' : 'to '} {fullname}
                   </Text>
-                  <Text style={challengesStyle.textStyle}>{fullname}</Text>
                 </View>
-                <View style={challengesStyle.flexStyle}>
+                <View style={challengesStyle.challengeDate}>
                   <Image
                     style={challengesStyle.imageStyle}
                     resizeMode="contain"
@@ -67,7 +66,7 @@ export default class ChallengeCard extends React.Component {
                   <Text
                     style={[
                       challengesStyle.textStyle,
-                      challengesStyle.textPadding
+                      challengesStyle.textChallengePadding
                     ]}
                   >
                     {moment(created).format('D MMM, YYYY')}
@@ -77,19 +76,19 @@ export default class ChallengeCard extends React.Component {
             </View>
           </View>
           {direction === 'target' && status === 'pending' ? (
-            <View>
+            <View style={challengesStyle.buttonContainer}>
               <PrimaryButton
                 buttonStyle={challengesStyle.buttonStyle}
-                textStyle={challengesStyle.textStyle}
+                textStyle={challengesStyle.buttonTextStyle}
                 onClick={() =>
-                  this.props.challengeStatus({ status: 'accept' }, token)
+                  this.props.challengeStatus({ status: 'active' }, token)
                 }
               >
                 Accept
               </PrimaryButton>
               <SecondaryButton
                 buttonStyle={challengesStyle.buttonStyle}
-                textStyle={challengesStyle.textStyle}
+                textStyle={challengesStyle.buttonTextStyle}
                 onClick={() =>
                   this.props.challengeStatus({ status: 'declined' }, token)
                 }
@@ -98,10 +97,14 @@ export default class ChallengeCard extends React.Component {
               </SecondaryButton>
             </View>
           ) : (
-            <View>
-              <Text style={challengesStyle.statusLabel}>
+            <View style={challengesStyle.buttonContainer}>
+              <PrimaryButton
+                buttonStyle={challengesStyle.moreButtonStyle}
+                textStyle={challengesStyle.moreButtonTextStyle}
+                onClick={() => {}}
+              >
                 {status && status.toUpperCase()}
-              </Text>
+              </PrimaryButton>
             </View>
           )}
         </View>

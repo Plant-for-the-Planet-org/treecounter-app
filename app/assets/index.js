@@ -125,6 +125,7 @@ import upwardArrow from './images/right-arrow.png';
 import downwardArrow from './images/left-arrow.png';
 import challengeIcon from './images/icons/flag.png';
 import webProgramming from './images/icons/web_programming.png';
+import communityMenu from './images/icons/community_menu.jpeg';
 
 export {
   AppStoreLogo,
@@ -253,5 +254,6 @@ export {
   downwardArrow,
   arrow_left_orange_outline,
   challengeIcon,
-  webProgramming
+  webProgramming,
+  communityMenu
 };

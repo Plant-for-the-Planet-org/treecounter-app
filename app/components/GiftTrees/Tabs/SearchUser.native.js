@@ -46,7 +46,7 @@ class SearchUser extends React.Component {
 
   // TODO: debounce
   _handleChangeQuery = q => {
-    this.setState({ searchResultClicked: false });
+    this.setState({ searchResultClicked: false, selectedSuggestionName: q });
     getSuggestions(q).then(suggestions => {
       this.setState({ q: suggestions });
     });
@@ -77,6 +77,7 @@ class SearchUser extends React.Component {
     return (
       <View style={{ width: '100%' }}>
         <SearchBar
+          dontFocus
           onChangeQuery={this.onChangeTextDelayed}
           inputValue={this.state.selectedSuggestionName}
           onSubmit={this._handleSubmit}

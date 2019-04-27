@@ -78,16 +78,17 @@ class CompetitionFull extends React.Component {
       competitionDetail &&
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
     ) {
-      // button = (
-      //   <PrimaryButton
-      //     style={snippetStyles.buttonItem}
-      //     buttonStyle={snippetStyles.buttonStyle}
-      //     textStyle={snippetStyles.buttonTextStyle}
-      //   >
-      //     <Text> {i18n.t('label.edit')}</Text>
-      //   </PrimaryButton>
-      // );
-      button = null;
+      button = (
+        <PrimaryButton
+          style={snippetStyles.buttonItem}
+          buttonStyle={snippetStyles.buttonStyle}
+          textStyle={snippetStyles.buttonTextStyle}
+          onClick={() => this.props.editCompetition(competitionDetail.id)}
+        >
+          <Text> {i18n.t('label.edit')}</Text>
+        </PrimaryButton>
+      );
+      // button = null;
     } else if (status === '') {
       if (competitionDetail && competitionDetail.access === 'immediate') {
         button = (
@@ -121,8 +122,8 @@ class CompetitionFull extends React.Component {
       button = (
         <PrimaryButton
           style={snippetStyles.buttonItem}
-          buttonStyle={snippetStyles.buttonStyle}
-          textStyle={snippetStyles.buttonTextStyle}
+          buttonStyle={snippetStyles.moreButtonStyle}
+          textStyle={snippetStyles.moreButtonTextStyle}
           onClick={() => this.props.leaveCompetition(competitionDetail.id)}
         >
           <Text> {i18n.t('label.leave')}</Text>
@@ -214,7 +215,7 @@ class CompetitionFull extends React.Component {
                       </View>
                     </View>
                   ) : null}
-                  <View style={snippetStyles.actionContainer}>
+                  <View style={styles.actionContainer}>
                     <View style={snippetStyles.byOrgContainer}>
                       <Image
                         source={compCalendar}
@@ -225,7 +226,7 @@ class CompetitionFull extends React.Component {
                       </Text>
                     </View>
 
-                    <View style={snippetStyles.buttonContainer}>{button}</View>
+                    <View style={styles.buttonContainer}>{button}</View>
                   </View>
                 </View>
               </View>
@@ -320,6 +321,7 @@ class CompetitionFull extends React.Component {
                         onSearchResultClick={this.onSearchResultClick}
                         currentUserProfile={this.props.currentUserProfile}
                         clearTextOnClick={true}
+                        alreadyInvited={competitionDetail.allEnrollments}
                       />
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>
@@ -360,7 +362,9 @@ class CompetitionFull extends React.Component {
                     <View>
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>
-                          top.status === 'invited' ? (
+                          top.status === 'invited' &&
+                          top.treecounterSlug ===
+                            this.props.treeCounter.slug ? (
                             <CompetitionParticipant
                               competitor={top}
                               index={index}
@@ -418,5 +422,6 @@ CompetitionFull.propTypes = {
   confirmPart: PropTypes.any,
   declinePart: PropTypes.any,
   cancelInvite: PropTypes.any,
-  supportTreecounterAction: PropTypes.any
+  supportTreecounterAction: PropTypes.any,
+  editCompetition: PropTypes.any
 };

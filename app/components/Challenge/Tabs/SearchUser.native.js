@@ -9,6 +9,7 @@ import { withNavigation } from 'react-navigation';
 import styles from '../../../styles/header/search_layout.native';
 import _ from 'lodash';
 import searchBarStyles from '../../../styles/header/search_bar.native';
+import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
@@ -45,7 +46,9 @@ class SearchUser extends React.Component {
   _onNavigationClick(suggestion) {
     if (
       this.props.onSearchResultClick &&
-      !this.isMyself(suggestion, this.props.currentUserProfile)
+      !this.isMyself(suggestion, this.props.currentUserProfile) &&
+      (this.props.alreadyInvited &&
+        !this.alreadyInvitedUser(suggestion, this.props.alreadyInvited))
     ) {
       this.props.onSearchResultClick(suggestion);
       this.setState({
@@ -56,6 +59,15 @@ class SearchUser extends React.Component {
           ? ''
           : suggestion.name
       });
+    } else {
+      NotificationManager.error('Could not add user', 'Error', 5000);
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.searchSuggestion === '') {
+      this.setState({
+        selectedSuggestionName: ''
+      });
     }
   }
   isMyself(treecounter, currentUserProfile) {
@@ -64,10 +76,22 @@ class SearchUser extends React.Component {
       currentUserProfile.treecounter.id === treecounter.id
     );
   }
+  alreadyInvitedUser(treecounter, alreadyInvited) {
+    if (alreadyInvited.length > 0) {
+      for (let i = 0; i < alreadyInvited.length; i++) {
+        if (treecounter.slug === alreadyInvited[i].treecounterSlug) {
+          return true;
+        }
+      }
+    } else {
+      return false;
+    }
+  }
   render() {
     return (
       <View style={{ width: '100%' }}>
         <SearchBar
+          dontFocus
           onChangeQuery={this.onChangeTextDelayed}
           inputValue={this.state.selectedSuggestionName}
           onSubmit={this._handleSubmit}

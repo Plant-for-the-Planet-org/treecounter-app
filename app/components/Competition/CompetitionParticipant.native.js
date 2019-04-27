@@ -26,10 +26,6 @@ class CompetitionParticipant extends React.Component {
   }
   render() {
     let support_button = null;
-    console.log(
-      this.props.competitor.treecounterSlug,
-      this.props.treeCounter.slug
-    );
     if (
       this.props.type === 'participants' &&
       this.props.competitor.treecounterSlug === this.props.treeCounter.slug
@@ -67,8 +63,8 @@ class CompetitionParticipant extends React.Component {
         <View style={styles.topCompetitorScore}>
           <PrimaryButton
             style={snippetStyles.buttonItem}
-            buttonStyle={snippetStyles.buttonStyle}
-            textStyle={snippetStyles.buttonTextStyle}
+            buttonStyle={snippetStyles.moreButtonStyle}
+            textStyle={snippetStyles.moreButtonTextStyle}
             onClick={() => this.props.cancelInvite(this.props.competitor.token)}
           >
             <Text> {i18n.t('label.cancel')}</Text>
@@ -115,8 +111,8 @@ class CompetitionParticipant extends React.Component {
                 </PrimaryButton>
                 <PrimaryButton
                   style={snippetStyles.buttonItem}
-                  buttonStyle={snippetStyles.buttonStyle}
-                  textStyle={snippetStyles.buttonTextStyle}
+                  buttonStyle={snippetStyles.moreButtonStyle}
+                  textStyle={snippetStyles.moreButtonTextStyle}
                   onClick={() =>
                     this.props.declinePart(this.props.competitor.token)
                   }

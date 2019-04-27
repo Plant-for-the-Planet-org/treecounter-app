@@ -34,7 +34,7 @@ export default class FeaturedProjects extends Component {
     <PlantProjectSnippet
       key={'projectFull' + item.id}
       cardStyle={styles.cardStyle}
-      onMoreClick={id => this.props.onMoreClick(id)}
+      onMoreClick={id => this.props.onMoreClick(id, item.name)}
       plantProject={item}
       onSelectClickedFeaturedProjects={id =>
         this.onSelectClickedFeaturedProjects(id)
@@ -73,6 +73,7 @@ export default class FeaturedProjects extends Component {
     return (
       <View style={styles.flexContainer}>
         <FlatList
+          contentContainerStyle={{ paddingBottom: 45 }}
           data={featuredProjects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}

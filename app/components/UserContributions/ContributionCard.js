@@ -10,6 +10,7 @@ import TextSpan from '../Common/Text/TextSpan';
 import ConfirmDeletion from './ConfirmDelete';
 import i18n from '../../locales/i18n.js';
 import { updateRoute } from '../../helpers/routerHelper';
+import { delimitNumbers } from '../../utils/utils';
 
 export default class ContributionCard extends React.Component {
   constructor(props) {
@@ -40,7 +41,7 @@ export default class ContributionCard extends React.Component {
       viewExpanded: !this.state.viewExpanded
     });
   treeCountLine(treeCount, treeSpecies) {
-    return treeCount + ' ' + (treeSpecies ? treeSpecies : '');
+    return delimitNumbers(treeCount) + ' ' + (treeSpecies ? treeSpecies : '');
   }
 
   plantProjectLine(plantProjectName, country) {
@@ -281,7 +282,8 @@ export default class ContributionCard extends React.Component {
                   ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
                   : ''}
               </TextSpan>
-            ) : (
+            ) : null}
+            {mayUpdate ? (
               <Link
                 to={getLocalRoute('app_editTrees', {
                   contribution: contribution.id
@@ -289,7 +291,7 @@ export default class ContributionCard extends React.Component {
               >
                 {i18n.t('label.update')}
               </Link>
-            )}
+            ) : null}
           </div>
         </div>
         <hr className="contribution-container__partition" />
@@ -388,7 +390,8 @@ export default class ContributionCard extends React.Component {
                   ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
                   : ''}
               </TextSpan>
-            ) : (
+            ) : null}
+            {mayUpdate ? (
               <Link
                 to={getLocalRoute('app_editTrees', {
                   contribution: contribution.id
@@ -396,7 +399,7 @@ export default class ContributionCard extends React.Component {
               >
                 {i18n.t('label.update')}
               </Link>
-            )}
+            ) : null}
           </div>
         </div>
         <hr className="contribution-container__partition" />
@@ -473,7 +476,8 @@ export default class ContributionCard extends React.Component {
                   ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
                   : ''}
               </TextSpan>
-            ) : (
+            ) : null}
+            {mayUpdate ? (
               <Link
                 to={getLocalRoute('app_editTrees', {
                   contribution: contribution.id
@@ -481,6 +485,7 @@ export default class ContributionCard extends React.Component {
               >
                 {i18n.t('label.update')}
               </Link>
+            ) : null}
             )}
           </div>
         </div>

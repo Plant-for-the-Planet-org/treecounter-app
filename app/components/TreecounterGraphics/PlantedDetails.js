@@ -4,6 +4,7 @@ import i18n from '../../locales/i18n.js';
 import ReactTooltip from 'react-tooltip';
 import { questionmark_orange, close_green } from '../../assets';
 import { tree, tree_outline } from '../../assets';
+import { delimitNumbers } from '../../utils/utils';
 
 const PlantedDetails = ({ personal, community, type, onToggle }) => (
   <div className="svg-text-container">
@@ -31,7 +32,7 @@ const PlantedDetails = ({ personal, community, type, onToggle }) => (
           )}
         </div>
         <div>
-          <strong>{personal.toLocaleString('en')}</strong>
+          <strong>{delimitNumbers(personal)}</strong>
         </div>
       </div>
     </div>
@@ -67,7 +68,7 @@ const PlantedDetails = ({ personal, community, type, onToggle }) => (
           </div>
         </div>
         <div>
-          <strong>{community.toLocaleString('en') + ' '}</strong>
+          <strong>{delimitNumbers(community)}</strong>
         </div>
       </div>
     </div>

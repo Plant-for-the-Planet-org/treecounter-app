@@ -34,6 +34,10 @@ export default class Login extends Component {
     this.props.updateRoute('app_signup');
   };
 
+  onProfilePickerClick = () => {
+    this.props.updateRoute('pickup_profile_modal');
+  };
+
   verifyCallback = token => {
     // Here you will get the final token!!!
     this._recaptchaToken = token;

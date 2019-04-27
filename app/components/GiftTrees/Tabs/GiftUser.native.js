@@ -43,7 +43,10 @@ export default class GiftUser extends Component {
   }
   render() {
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ paddingBottom: 72 }}
+        enableOnAndroid={true}
+      >
         <View
           style={{
             flex: 1,

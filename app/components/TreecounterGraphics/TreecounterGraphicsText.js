@@ -4,6 +4,7 @@ import TargetComment from './TargetComment';
 import ArrowButton from '../Common/ArrowButton';
 import { pot, tree, tree_outline } from '../../assets';
 import i18n from '../../locales/i18n.js';
+import { delimitNumbers } from '../../utils/utils';
 import PlantedDetails from './PlantedDetails';
 
 class TreecounterGraphicsText extends Component {
@@ -86,7 +87,7 @@ class TreecounterGraphicsText extends Component {
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(target))} */}
-                    {target ? target.toLocaleString('en') : null}
+                    {target ? delimitNumbers(target) : null}
                   </div>
                 ) : null}
               </span>
@@ -106,7 +107,7 @@ class TreecounterGraphicsText extends Component {
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(planted))} */}
-                    {parseInt(planted).toLocaleString('en')}
+                    {delimitNumbers(parseInt(planted))}
                   </div>
                 ) : null}
               </span>

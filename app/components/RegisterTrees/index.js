@@ -35,11 +35,6 @@ const getSingleTreeLayout = (
         <div className="register-tree__form--row">
           {locals.inputs.contributionImages}
         </div>
-        {isTpo(props1.currentUserProfile) ? (
-          <div className="register-tree__form--row">
-            {locals.inputs.plantProject}
-          </div>
-        ) : null}
 
         <div className="pftp-addbutton">
           <button type="button" onClick={_onClickAddClassification}>
@@ -81,11 +76,6 @@ const getMultipleTreeLayout = props1 => {
         <div className="register-tree__form--row">
           {locals.inputs.contributionImages}
         </div>
-        {isTpo(props1.currentUserProfile) ? (
-          <div className="register-tree__form--row">
-            {locals.inputs.plantProject}
-          </div>
-        ) : null}
       </div>
     );
   };
@@ -109,9 +99,11 @@ export default class RegisterTrees extends Component {
     super();
     this.state = {
       mode: '',
-      individual: {
+      formValueSingle: {
         treeCount: 1
       },
+      formValueMultiple: '',
+      plantProject: '',
       showClassification: false
     };
 
@@ -132,9 +124,20 @@ export default class RegisterTrees extends Component {
     return newFormSchema;
   }
 
+  onChange = event => {
+    this.setState({ plantProject: event.target.value });
+  };
+
   onSubmitClick(event) {
-    console.log('event', event);
-    this.props.onSubmit(this.state.mode);
+    let plantProject = null;
+    if (isTpo(this.props.currentUserProfile)) {
+      plantProject =
+        this.state.plantProject !== ''
+          ? this.state.plantProject
+          : getPlantProjectEnum(this.props.currentUserProfile)[0].value;
+    }
+
+    this.props.onSubmit(this.state.mode, null, plantProject);
     event.preventDefault();
   }
 
@@ -145,6 +148,14 @@ export default class RegisterTrees extends Component {
   handleGeoLocationChange(geoLocation) {
     console.log(geoLocation);
   }
+
+  onFormChangeSingle = value => {
+    this.setState({ formValueSingle: value });
+  };
+
+  onFormChangeMultiple = value => {
+    this.setState({ formValueMultiple: value });
+  };
 
   toggleClassification = () => {
     this.setState({
@@ -167,16 +178,7 @@ export default class RegisterTrees extends Component {
       ? this.props.schemaOptionsSingleTree
       : this.props.schemaOptionsMultipleTrees;
 
-    const plantProject =
-      tpoPlantProjects &&
-      tpoPlantProjects.length > 0 &&
-      tpoPlantProjects[0].value;
-
-    formSchemaOptions = this.updateTemplate(
-      template,
-      tpoPlantProjects,
-      formSchemaOptions
-    );
+    formSchemaOptions = this.updateTemplate(template, null, formSchemaOptions);
 
     return (
       <div className="app-container__content--center sidenav-wrapper">
@@ -197,16 +199,39 @@ export default class RegisterTrees extends Component {
                   ref="registerTreeForm"
                   type={singleTreeRegisterFormSchema}
                   options={formSchemaOptions}
-                  value={{ ...this.state.individual, plantProject }}
+                  value={this.state.formValueSingle}
+                  onChange={this.onFormChangeSingle}
                 />
               ) : (
                 <TCombForm
                   ref="registerTreeForm"
                   type={multipleTreesRegisterFormSchema}
                   options={formSchemaOptions}
-                  value={{ plantProject }}
+                  value={this.state.formValueMultiple}
+                  onChange={this.onFormChangeMultiple}
                 />
               )}
+              {isTpo(this.props.currentUserProfile) ? (
+                <div className="pftp-selectfield">
+                  <select
+                    key={'hey'}
+                    className={'pftp-selectfield__select'}
+                    required="required"
+                    onChange={this.onChange}
+                    value={this.state.plantProject}
+                  >
+                    {tpoPlantProjects.map(option => (
+                      <option
+                        key={option.value}
+                        className="pftp-selectfield__option"
+                        value={option.value}
+                      >
+                        {i18n.t(option.text)}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : null}
             </Tabs>
             <PrimaryButton onClick={this.onSubmitClick}>
               {i18n.t('label.register')}

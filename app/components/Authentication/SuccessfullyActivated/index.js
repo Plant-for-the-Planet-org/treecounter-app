@@ -16,7 +16,7 @@ export default class SuccessfullyActivatedAccount extends Component {
     const customizeProfile = (
       <InlineLink uri={'app_userHome'} caption="customize your profile" />
     );
-    const login = <InlineLink caption="log in" uri={'app_login'} />;
+    const login = <InlineLink caption="login" uri={'app_login'} />;
 
     return (
       <div className="app-container__content--center sidenav-wrapper">

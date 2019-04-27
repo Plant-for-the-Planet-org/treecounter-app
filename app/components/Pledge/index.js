@@ -10,6 +10,7 @@ import TextSpan from '../Common/Text/TextBlock';
 import { pledge_highest, pledge_latest } from '../../assets';
 import { getImageUrl } from '../../actions/apiRouting';
 import { getDocumentTitle } from '../../helpers/utils';
+import { delimitNumbers } from '../../utils/utils';
 
 import {
   pledgeFormSchema,
@@ -76,9 +77,7 @@ export default class Pledge extends Component {
         </div>
         <CardLayout className="total_trees">
           <span className="total_number">
-            {parseInt(this.props.pledges.total).toLocaleString('en', {
-              useGrouping: true
-            })}
+            {delimitNumbers(parseInt(this.props.pledges.total))}
           </span>
           <span className="total_text">{i18n.t('label.total_trees')}</span>
         </CardLayout>
@@ -98,9 +97,7 @@ export default class Pledge extends Component {
                   {this.props.pledges.latest.map(pledge => (
                     <div className="row-list-item" key={pledge.id}>
                       <span>{pledge.firstname + ' ' + pledge.lastname}</span>
-                      <span>
-                        {parseInt(pledge.treeCount).toLocaleString('en')}
-                      </span>
+                      <span>{delimitNumbers(parseInt(pledge.treeCount))}</span>
                     </div>
                   ))}
                 </div>
@@ -120,9 +117,7 @@ export default class Pledge extends Component {
                   {this.props.pledges.highest.map(pledge => (
                     <div className="row-list-item" key={pledge.id}>
                       <span>{pledge.firstname + ' ' + pledge.lastname}</span>
-                      <span>
-                        {parseInt(pledge.treeCount).toLocaleString('en')}
-                      </span>
+                      <span>{delimitNumbers(parseInt(pledge.treeCount))}</span>
                     </div>
                   ))}
                 </div>

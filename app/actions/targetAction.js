@@ -11,16 +11,20 @@ import { setProgressModelState } from '../reducers/modelDialogReducer';
 export function SubmitTarget(treecounterData, navigation = undefined) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    putAuthenticatedRequest('target_put', treecounterData)
-      .then(res => {
-        dispatch(mergeEntities(normalize(res.data, treecounterSchema)));
-        updateRoute('app_userHome', navigation || dispatch);
-        dispatch(setProgressModelState(false));
-      })
-      .catch(error => {
-        debug(error);
-        dispatch(setProgressModelState(false));
-        NotificationManager.error(error.response.data.message, 'Error', 5000);
-      });
+    return new Promise(function(resolve, reject) {
+      putAuthenticatedRequest('target_put', treecounterData)
+        .then(res => {
+          dispatch(mergeEntities(normalize(res.data, treecounterSchema)));
+          resolve(res.data);
+          updateRoute('app_userHome', navigation || dispatch);
+          dispatch(setProgressModelState(false));
+        })
+        .catch(error => {
+          debug(error);
+          reject(error);
+          dispatch(setProgressModelState(false));
+          // NotificationManager.error(error.response.data.message, 'Error', 5000);
+        });
+    });
   };
 }

@@ -40,7 +40,11 @@ const getSuggestions = value => {
       }
       const regex = new RegExp('\\b' + escapedValue, 'i');
 
-      resolve(jdata.filter(person => regex.test(getSuggestionValue(person))));
+      resolve(
+        typeof jdata === 'object'
+          ? jdata.filter(person => regex.test(getSuggestionValue(person)))
+          : []
+      );
     });
   });
 };

@@ -19,7 +19,8 @@ class ChallengeUser extends Component {
       selectedSuggestion: null,
       treeCount: 1000,
       isChecked: false,
-      byYear: ''
+      byYear: '',
+      searchSuggestionName: null
     };
     let currentYear = new Date().getFullYear(),
       years = [];
@@ -60,6 +61,23 @@ class ChallengeUser extends Component {
       requestData.challengeMethod = 'direct';
       requestData.goal = this.state.treeCount;
       this.props.challengeUser(requestData);
+      this.setState({
+        selectedSuggestion: null,
+        treeCount: 1000,
+        isChecked: false,
+        byYear: '',
+        searchSuggestionName: ''
+      });
+      let currentYear = new Date().getFullYear(),
+        years = [];
+      let endYear = currentYear + 10;
+
+      while (currentYear <= endYear) {
+        years.push(currentYear++);
+      }
+      this.years = years.map(item => {
+        return { value: item };
+      });
     } else {
       NotificationManager.error('Please select user', 'Error', 5000);
     }
@@ -81,6 +99,7 @@ class ChallengeUser extends Component {
               <SearchUser
                 onSearchResultClick={this.onSearchResultClick}
                 currentUserProfile={this.props.currentUserProfile}
+                searchSuggestion={this.state.searchSuggestionName}
                 alreadyInvited={[]}
               />
               <View style={challengeStyles.flexContainerStyle}>

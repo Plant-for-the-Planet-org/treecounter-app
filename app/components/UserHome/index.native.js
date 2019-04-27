@@ -122,7 +122,7 @@ export default class UserHome extends Component {
     switch (route.key) {
       case 'home':
         return (
-          <ScrollView style={{ marginBottom: 5 }}>
+          <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
             <View style={styles.header}>
               <View style={styles.userProfileContainer}>
                 <UserProfileImage profileImage={userProfile.image} />
@@ -189,7 +189,7 @@ export default class UserHome extends Component {
         );
       case 'my-trees':
         return (
-          <ScrollView style={{ marginBottom: 5 }}>
+          <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
             <ContributionCardList
               contributions={this.props.userContributions}
               deleteContribution={this.props.deleteContribution}

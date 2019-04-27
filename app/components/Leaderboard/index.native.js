@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, ScrollView, Animated } from 'react-native';
+import { Text, View, Image, ScrollView } from 'react-native';
 import { PropTypes } from 'prop-types';
 import CategoryTypes from './categoryTypes';
 import LoadingIndicator from '../Common/LoadingIndicator';
@@ -20,8 +20,7 @@ export default class Leaderboard extends Component {
     super(props);
     this.state = {
       selectedCategory: '',
-      timeSorting: '',
-      scrollY: new Animated.Value(0)
+      timeSorting: ''
     };
     this._handleItemPress = this._handleItemPress.bind(this);
   }
@@ -72,22 +71,12 @@ export default class Leaderboard extends Component {
     if (selectedCategory)
       listItemsUI = (
         <CardLayout style={styles.cardStyle}>
-          <Animated.ScrollView
-            bounces={false}
-            scrollEventThrottle={16}
+          <ScrollView
             contentContainerStyle={{
               justifyContent: 'flex-start',
               flexGrow: 1
             }}
             showsHorizontalScrollIndicator={false}
-            onScroll={Animated.event(
-              [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
-              {
-                listener: event => {
-                  this.props.handleScrollAnimation(event);
-                }
-              }
-            )}
           >
             {this.props.queryResult ? (
               <View style={{ width: '98%', padding: 10, marginTop: 15 }}>
@@ -122,7 +111,7 @@ export default class Leaderboard extends Component {
             ) : (
               <LoadingIndicator />
             )}
-          </Animated.ScrollView>
+          </ScrollView>
         </CardLayout>
       );
 
@@ -203,11 +192,6 @@ export default class Leaderboard extends Component {
     return sortView;
   };
   render() {
-    const headerHeight = this.state.scrollY.interpolate({
-      inputRange: [0, 60],
-      outputRange: [70, 45],
-      extrapolate: 'clamp'
-    });
     const { categoryInfo } = this.props;
     const selectedCategory =
       this.state.selectedCategory ||
@@ -215,9 +199,7 @@ export default class Leaderboard extends Component {
         categoryInfo.categoryKeys &&
         categoryInfo.categoryKeys[0]);
     return (
-      <Animated.View
-        style={[styles.leaderBoardContainer, { paddingBottom: 16 }]}
-      >
+      <View style={[styles.leaderBoardContainer, { paddingBottom: 72 }]}>
         <CategoryTypes
           categoryInfo={this.props.categoryInfo}
           sectionInfo={this.props.sectionInfo}
@@ -227,14 +209,14 @@ export default class Leaderboard extends Component {
 
         {this._getTableView(selectedCategory)}
         {selectedCategory && (
-          <Animated.View style={[styles.cardImageStyle, { top: headerHeight }]}>
-            <Animated.Image
+          <View style={[styles.cardImageStyle, { top: 85 }]}>
+            <Image
               source={categoryIcons[selectedCategory]['selected']}
               style={[{ height: '100%', width: '100%' }]}
             />
-          </Animated.View>
+          </View>
         )}
-      </Animated.View>
+      </View>
     );
   }
 }
@@ -250,6 +232,5 @@ Leaderboard.propTypes = {
   queryResult: PropTypes.array,
   mapInfo: PropTypes.object,
   sortingQuery: PropTypes.object,
-  navigation: PropTypes.any,
-  handleScrollAnimation: PropTypes.func
+  navigation: PropTypes.any
 };

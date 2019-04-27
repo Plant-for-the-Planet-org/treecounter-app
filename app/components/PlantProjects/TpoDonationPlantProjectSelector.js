@@ -43,9 +43,6 @@ class TpoDonationPlantProjectSelector extends React.Component {
         ? i18n.t('label.plant_project')
         : i18n.t('label.plant_projects');
     const TagName = i18n.t('label.plant_project_full');
-    const filteredPlantProjects = plantProjects.filter(
-      project => project.id === state.currentPlantProjectId
-    );
     return (
       <CardLayout className="tpo-footer-card-layout">
         <div className="tpo-footer__container">
@@ -57,8 +54,12 @@ class TpoDonationPlantProjectSelector extends React.Component {
             currentPlantProjectId={this.state.currentPlantProjectId}
             onChange={this.onCarouselChange}
           />
-          {filteredPlantProjects.length > 0 &&
-          filteredPlantProjects[0].allowDonations ? (
+          {plantProjects.filter(
+            project => project.id === state.currentPlantProjectId
+          ).length > 0 &&
+          plantProjects.filter(
+            project => project.id === state.currentPlantProjectId
+          )[0].allowDonations ? (
             <PrimaryButton
               onClick={() => onSelect(this.state.currentPlantProjectId)}
             >

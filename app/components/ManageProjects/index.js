@@ -6,7 +6,7 @@ import t from 'tcomb-form';
 import i18n from '../../locales/i18n.js';
 import { plantProjectSchema } from '../../server/parsedSchemas/editProfile';
 import PlantProjectTemplate from '../EditUserProfile/PlantProjectTemplate';
-import { EditOrange, close_green, MapPinRed } from '../../assets';
+import { MapPinRed, baselineEdit, baselineDelete } from '../../assets';
 import _ from 'lodash';
 import TextHeading from '../Common/Heading/TextHeading';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
@@ -83,14 +83,14 @@ class CollapsiblePlantProject extends Component {
             {!this.state.plantProjectsPickerVisibility && (
               <span>
                 <img
-                  src={EditOrange}
+                  src={baselineEdit}
                   className="icon"
                   onClick={event => {
                     this.togglePicker();
                   }}
                 />
                 <img
-                  src={close_green}
+                  src={baselineDelete}
                   className="icon"
                   onClick={this.props.deleteProject}
                 />

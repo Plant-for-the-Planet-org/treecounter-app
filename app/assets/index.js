@@ -20,6 +20,8 @@ import shovel_outline_red from './images/icons/shovel_outline_red.png';
 import target_outline_red from './images/icons/target_outline_red.png';
 import pledge_highest from './images/pledge_biggest.png';
 import pledge_latest from './images/pledge_recent.png';
+import baselineEdit from './images/baseline-edit.png';
+import baselineDelete from './images/baseline-delete.png';
 import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/darkTree.png';
@@ -150,6 +152,8 @@ export {
   uncheckedIcon,
   RedEmail,
   GreenEmail,
+  baselineEdit,
+  baselineDelete,
   SideMenuImage,
   FooterLogos,
   SignupOrganization,

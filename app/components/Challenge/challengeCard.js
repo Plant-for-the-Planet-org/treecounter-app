@@ -29,8 +29,13 @@ export default class ChallengeCard extends React.Component {
           <div className="flex-row">
             <div className="limit-width">
               <span className="goal-style">
-                {delimitNumbers(goal) + i18n.t('label.trees')} + (end_date !==
-                null ? ' {i18n.t('label.by')} ' + end_date : '')}
+                {delimitNumbers(goal) +
+                  ' ' +
+                  i18n.t('label.trees') +
+                  ' ' +
+                  (end_date !== null
+                    ? ' ' + i18n.t('label.by') + ' ' + end_date
+                    : '')}
               </span>
               <div className="flex-row">
                 <UserProfileImage profileImage={avatar} />

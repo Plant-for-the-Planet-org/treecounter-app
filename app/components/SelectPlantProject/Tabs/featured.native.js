@@ -73,6 +73,7 @@ export default class FeaturedProjects extends Component {
     return (
       <View style={styles.flexContainer}>
         <FlatList
+          contentContainerStyle={{ paddingBottom: 45 }}
           data={featuredProjects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}

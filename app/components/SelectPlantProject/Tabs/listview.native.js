@@ -33,6 +33,7 @@ export default class ListViewProjects extends Component {
     return (
       <View style={{ height: '100%' }}>
         <FlatList
+          contentContainerStyle={{ paddingBottom: 45 }}
           data={projects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}

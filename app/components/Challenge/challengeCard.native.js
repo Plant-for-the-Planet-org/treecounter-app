@@ -39,8 +39,13 @@ export default class ChallengeCard extends React.Component {
         <View style={challengesStyle.challengeViewContainer}>
           <View style={challengesStyle.limitWidth}>
             <Text style={challengesStyle.goalStyle}>
-              {delimitNumbers(goal) + i18n.t('label.trees')} + (end_date !==
-              null ? ' {i18n.t('label.by')} ' + end_date : '')}
+              {delimitNumbers(goal) +
+                ' ' +
+                i18n.t('label.trees') +
+                ' ' +
+                (end_date !== null
+                  ? ' ' + i18n.t('label.by') + ' ' + end_date
+                  : '')}
             </Text>
             <View style={challengesStyle.flexStyle}>
               <UserProfileImage

@@ -85,13 +85,16 @@ class ChallengeUser extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, paddingBottom: 50 }}>
+      <View style={{ flex: 1 }}>
         <ScrollView
           style={{
             flex: 1,
             flexDirection: 'column',
             width: '100%',
             height: '100%'
+          }}
+          contentContainerStyle={{
+            paddingBottom: 72
           }}
         >
           <CardLayout style={[challengeStyles.challengeContainer]}>

@@ -91,8 +91,19 @@ class ChallengeEmail extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, paddingBottom: 50 }}>
-        <KeyboardAwareScrollView enableOnAndroid={true}>
+      <View style={{ flex: 1 }}>
+        <KeyboardAwareScrollView
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            width: '100%',
+            height: '100%'
+          }}
+          contentContainerStyle={{
+            paddingBottom: 72
+          }}
+          enableOnAndroid={true}
+        >
           <CardLayout style={[challengeStyles.challengeContainer]}>
             <View style={challengeStyles.challengeColumnContainer}>
               <TCombForm

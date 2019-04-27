@@ -58,8 +58,8 @@ export default class FAQ extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-      <View style={{ flex: 1, paddingBottom: 50 }}>
-        <ScrollView>
+      <View style={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
           <Accordion
             sections={this.props.faqs}
             renderSectionTitle={this._renderSectionTitle}

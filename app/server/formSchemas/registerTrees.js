@@ -50,7 +50,7 @@ export default {
           title: 'prototype',
           type: 'object',
           properties: {
-            imageFile: {
+            image: {
               type: 'string',
               title: 'label.upload_profile_picture',
               widget: 'file',
@@ -128,7 +128,7 @@ export default {
         propertyOrder: 8
       }
     },
-    required: ['treeCount', 'plantDate', 'geoLocation'],
+    required: ['treeCount', 'plantDate'],
     submit_url: '',
     submit_method: 'POST'
   },
@@ -182,7 +182,7 @@ export default {
           title: 'prototype',
           type: 'object',
           properties: {
-            imageFile: {
+            image: {
               type: 'string',
               title: 'label.upload_profile_picture',
               widget: 'file',

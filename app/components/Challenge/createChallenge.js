@@ -118,11 +118,9 @@ export default class Challenge extends Component {
     return (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>
-          {'Challenge'}
+          {i18n.t('label.challenge_heading')}
           <DescriptionHeading>
-            {
-              'The recipient will be able to choose whether or not to accept your challenge.'
-            }
+            {i18n.t('label.challenge_edit_description')}
           </DescriptionHeading>
         </TextHeading>
         <CardLayout className="tpo-footer-card-layout">
@@ -147,14 +145,14 @@ export default class Challenge extends Component {
               )}
             </Tabs>
             <div className="number_trees">
-              <TextBlock>Challenge to plant</TextBlock>
+              <TextBlock>{i18n.t('label.challenge_to_plant')}</TextBlock>
               <span className="input_trees">
                 <input
                   type="number"
                   value={this.state.form.goal}
                   onChange={evt => this.handleTreesChange(evt.target.value)}
                 />
-                <TextBlock>trees</TextBlock>
+                <TextBlock>{i18n.t('label.trees')}</TextBlock>
               </span>
             </div>
             <div className="trees_by_time">
@@ -164,7 +162,7 @@ export default class Challenge extends Component {
                 value="indefinite"
                 checked={this.state.checked === 'indefinite'}
               />
-              <TextBlock>Indefinite</TextBlock>
+              <TextBlock>{i18n.t('label.indefinite')}</TextBlock>
               <input
                 type="radio"
                 value="custom"
@@ -172,7 +170,7 @@ export default class Challenge extends Component {
                 checked={this.state.checked === 'custom'}
                 className="radio_margin_left"
               />
-              <TextBlock>by </TextBlock>
+              <TextBlock>{i18n.t('label.by')} </TextBlock>
               <input
                 type="number"
                 value={this.state.form.endDate}
@@ -180,7 +178,9 @@ export default class Challenge extends Component {
               />
             </div>
           </div>
-          <PrimaryButton onClick={this.challenge}>Challenge</PrimaryButton>
+          <PrimaryButton onClick={this.challenge}>
+            {i18n.t('label.challenge_heading')}
+          </PrimaryButton>
         </CardLayout>
         <ChallengeList
           challenges={this.props.challenges}

@@ -161,7 +161,7 @@ class CompetitionSnippet extends React.Component {
                   numberOfLines={1}
                   style={styles.project_teaser__contentByText}
                 >
-                  by{' '}
+                  {i18n.t('label.by')}{' '}
                   {this.props.competition && this.props.competition.ownerName}
                 </Text>
               </View>
@@ -192,7 +192,7 @@ class CompetitionSnippet extends React.Component {
                     style={{ width: 15, height: 15 }}
                   />
                   <Text style={styles.bottomText}>
-                    Ends{' '}
+                    {i18n.t('label.ends')}{' '}
                     {this.props.competition && this.props.competition.endDate}
                   </Text>
                 </View>
@@ -201,7 +201,8 @@ class CompetitionSnippet extends React.Component {
                   {this.props.competition &&
                   this.props.competition.competitorCount > 0 ? (
                     <Text style={styles.bottomParticipantText}>
-                      {this.props.competition.competitorCount} participants
+                      {this.props.competition.competitorCount}{' '}
+                      {i18n.t('label.participants')}
                     </Text>
                   ) : (
                     button

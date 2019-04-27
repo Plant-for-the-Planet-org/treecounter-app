@@ -89,7 +89,7 @@ class CompetitionParticipant extends React.Component {
             <Text style={styles.topCompetitorNameText}>
               {this.props.competitor.treecounterSlug ===
               this.props.treeCounter.slug
-                ? 'Me'
+                ? i18n.t('label.me')
                 : this.props.competitor.treecounterDisplayName}
             </Text>
             {this.props.type === 'participants' ||

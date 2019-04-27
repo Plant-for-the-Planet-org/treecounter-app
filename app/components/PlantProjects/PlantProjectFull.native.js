@@ -45,7 +45,7 @@ class PlantProjectFull extends React.Component {
       linkText
     };
     return (
-      <View style={{ paddingBottom: 50 }}>
+      <View style={{ flex: 1, paddingBottom: 50 }}>
         <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
           <CardLayout style={[styles.projectFullContainer]}>
             <PlantProjectSnippet

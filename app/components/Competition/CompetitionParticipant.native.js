@@ -19,11 +19,17 @@ class CompetitionParticipant extends React.Component {
 
   supportButton() {
     let supportObject = {
-      id: this.props.competitor.id,
-      displayName: this.props.competitor.treecounterDisplayName
+      treeCounter: this.props.competitor.treecounterId,
+      name: this.props.competitor.treecounterDisplayName
     };
-    this.props.supportTreecounterAction(supportObject);
-    updateRoute('app_donateTrees', this.props.navigation);
+    // this.props.supportTreecounterAction(supportObject);
+    // updateRoute('app_donateTrees', this.props.navigation);
+    updateRoute('app_gift_projects', this.props.navigation, 0, {
+      userForm: supportObject,
+      giftMethod: 'support',
+      titleParam:
+        'Support Trees To ' + this.props.competitor.treecounterDisplayName
+    });
   }
   plantButton() {
     updateRoute('app_donateTrees', this.props.navigation);

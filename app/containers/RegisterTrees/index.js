@@ -26,15 +26,17 @@ class RegisterTreesContainer extends PureComponent {
     };
   }
 
-  onSubmit = (mode, registerTreeForm) => {
+  onSubmit = (mode, registerTreeForm, plantProject) => {
     registerTreeForm =
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
     // console.log(registerTreeForm.validate());
     let value = registerTreeForm.getValue();
-    // value = Object.assign({}, value);
-    // value.geoLocation = 'geoLongitude=-99.80686542968473&geoLatitude=34.55481064260679&country=US';
+    value = Object.assign({}, value);
     value = mergeContributionImages(value);
     if (value) {
+      if (plantProject) {
+        value.plantProject = plantProject;
+      }
       this.props
         .registerTree(
           value,

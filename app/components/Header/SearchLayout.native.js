@@ -66,7 +66,8 @@ class SearchLayout extends React.Component {
     if (suggestion.category === 'profile') {
       this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
         treeCounterId: suggestion.slug || suggestion.id,
-        suggestion
+        suggestion,
+        titleParam: suggestion.name
       });
     } else if (suggestion.category === 'competition') {
       this.props.navigation.navigate(getLocalRoute('app_competition'), {

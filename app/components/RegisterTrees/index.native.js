@@ -75,7 +75,6 @@ export default class RegisterTrees extends Component {
             : schemaOptionsMultipleTrees
         }
         plantProjects={plantProjects}
-        // value={{ treeCount: 1 }}
       />
     );
   };

@@ -284,6 +284,7 @@ export default class DonateTrees extends React.PureComponent {
             giftTreeCounterName={this.state.giftTreeCounterName}
             selectedProject={selectedProject}
             fees={paymentFee}
+            supportTreecounter={this.props.supportTreecounter}
             showNextButton={true}
             currencies={currencies.currency_names} // TODO: connect to data from API
             selectedCurrency={this.determineDefaultCurrency()}

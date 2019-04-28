@@ -40,11 +40,12 @@ export default class Leaderboard extends Component {
     this.setState({ timeSorting: sortValue });
   };
 
-  _handleItemPress(treeCounterId, uri) {
+  _handleItemPress(treeCounterId, uri, title) {
     //console.log(treeCounterId);
     if (treeCounterId) {
       this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-        treeCounterId
+        treeCounterId,
+        titleParam: title
       });
     } else if (uri) {
       const pathComponent = uri.split('/');

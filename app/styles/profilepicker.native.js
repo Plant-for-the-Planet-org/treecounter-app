@@ -31,11 +31,28 @@ export default (editProfileStyle = EStyleSheet.create({
     color: '$cardTextColor',
     maxWidth: '100%'
   },
+  textDedicateStyle: {
+    fontSize: 14,
+    color: '#ff6666',
+    maxWidth: '100%',
+    textAlign: 'center'
+  },
+  textNotDedicateStyle: {
+    fontSize: 14,
+    color: '#999999',
+    maxWidth: '100%',
+    textAlign: 'center'
+  },
   topCompetitorScore: {
     width: '40%'
   },
   topCompetitorName: {
     width: '60%',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  dedicateTreeName: {
+    width: '100%',
     alignItems: 'center',
     flexDirection: 'row'
   },
@@ -59,6 +76,13 @@ export default (editProfileStyle = EStyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding: 16,
+    width: '100%',
+    justifyContent: 'space-between'
+  },
+  containerDedicateStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 25,
     width: '100%',
     justifyContent: 'space-between'
   }

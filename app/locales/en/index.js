@@ -30,6 +30,7 @@ import competitionlabels from './competitionlabels.json';
 import challengelabels from './challengelabels.json';
 import manageProjectlabels from './manageProjectlabels.json';
 import widgetShareLabels from './widgetShareLabels.json';
+import dedicateTreesLabels from './dedicateTreeslabels';
 
 export default {
   ...loginlabels,
@@ -63,5 +64,6 @@ export default {
   ...competitionlabels,
   ...challengelabels,
   ...manageProjectlabels,
-  ...widgetShareLabels
+  ...widgetShareLabels,
+  ...dedicateTreesLabels
 };

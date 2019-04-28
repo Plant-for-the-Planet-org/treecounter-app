@@ -11,5 +11,7 @@
   "count_target": "Target",
   "tree_cost": "Tree Cost",
   "link_text": "Link Text",
-  "video_url": "Video Url"
+  "video_url": "Video Url",
+  "allow_donations": "Allow Donations",
+  "is_published": "Publish Project"
 }

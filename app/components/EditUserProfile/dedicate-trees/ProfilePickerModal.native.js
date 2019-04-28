@@ -41,32 +41,41 @@ class ProfilePickerModal extends Component {
     const { currentUserProfile } = this.props;
     console.log(currentUserProfile);
     const pickupProfileView = (
-      <CardLayout style={[styles.projectSnippetContainer]}>
-        <View style={styles.searchUserStyle}>
-          <SearchUser
-            onSearchResultClick={this.onSearchResultClick.bind(this)}
-            currentUserProfile={this.props.currentUserProfile}
-          />
-          {this.state.selectedSuggestion ? (
-            <View style={styles.containerStyle}>
-              <View style={styles.topCompetitorName}>
-                <Text style={styles.textStyle}>
-                  {this.state.selectedSuggestion.name}
-                </Text>
-              </View>
-              <View style={styles.topCompetitorScore}>
-                <PrimaryButton
-                  buttonStyle={styles.buttonStyle}
-                  textStyle={styles.primaryButtonText}
-                  onClick={this.onDedicateClick.bind(this)}
-                >
-                  {i18n.t('label.dedicate')}
-                </PrimaryButton>
-              </View>
-            </View>
-          ) : null}
+      <View>
+        <View style={styles.containerDedicateStyle}>
+          <View style={styles.dedicateTreeName}>
+            <Text style={styles.textNotDedicateStyle}>
+              {i18n.t('label.has_not_dedicated')}
+            </Text>
+          </View>
         </View>
-      </CardLayout>
+        <CardLayout style={[styles.projectSnippetContainer]}>
+          <View style={styles.searchUserStyle}>
+            <SearchUser
+              onSearchResultClick={this.onSearchResultClick.bind(this)}
+              currentUserProfile={this.props.currentUserProfile}
+            />
+            {this.state.selectedSuggestion ? (
+              <View style={styles.containerStyle}>
+                <View style={styles.topCompetitorName}>
+                  <Text style={styles.textStyle}>
+                    {this.state.selectedSuggestion.name}
+                  </Text>
+                </View>
+                <View style={styles.topCompetitorScore}>
+                  <PrimaryButton
+                    buttonStyle={styles.buttonStyle}
+                    textStyle={styles.primaryButtonText}
+                    onClick={this.onDedicateClick.bind(this)}
+                  >
+                    {i18n.t('label.dedicate')}
+                  </PrimaryButton>
+                </View>
+              </View>
+            ) : null}
+          </View>
+        </CardLayout>
+      </View>
     );
 
     return (
@@ -75,24 +84,36 @@ class ProfilePickerModal extends Component {
           <View>
             {this.state.editMode ? pickupProfileView : null}
             {currentUserProfile.supportedTreecounter ? (
-              <CardLayout style={[styles.projectSnippetContainer]}>
-                <View style={styles.containerStyle}>
-                  <View style={styles.topCompetitorName}>
-                    <Text style={styles.textStyle}>
-                      {currentUserProfile.supportedTreecounter.displayName}
+              <View>
+                <View style={styles.containerDedicateStyle}>
+                  <View style={styles.dedicateTreeName}>
+                    <Text style={styles.textDedicateStyle}>
+                      {i18n.t('label.has_dedicated', {
+                        user:
+                          currentUserProfile.supportedTreecounter.displayName
+                      })}
                     </Text>
                   </View>
-                  <View style={styles.topCompetitorScore}>
-                    <PrimaryButton
-                      buttonStyle={styles.buttonStyle}
-                      textStyle={styles.primaryButtonText}
-                      onClick={this.updateProfile.bind(this)}
-                    >
-                      {i18n.t('label.edit')}
-                    </PrimaryButton>
-                  </View>
                 </View>
-              </CardLayout>
+                <CardLayout style={[styles.projectSnippetContainer]}>
+                  <View style={styles.containerStyle}>
+                    <View style={styles.topCompetitorName}>
+                      <Text style={styles.textStyle}>
+                        {currentUserProfile.supportedTreecounter.displayName}
+                      </Text>
+                    </View>
+                    <View style={styles.topCompetitorScore}>
+                      <PrimaryButton
+                        buttonStyle={styles.buttonStyle}
+                        textStyle={styles.primaryButtonText}
+                        onClick={this.updateProfile.bind(this)}
+                      >
+                        {i18n.t('label.edit')}
+                      </PrimaryButton>
+                    </View>
+                  </View>
+                </CardLayout>
+              </View>
             ) : (
               pickupProfileView
             )}

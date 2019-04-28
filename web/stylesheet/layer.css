@@ -152,7 +152,6 @@
 }
 .canvasContainer svg {
   width: auto;
-  max-width: 53rem;
   height: auto;
   align-self: center;
 }

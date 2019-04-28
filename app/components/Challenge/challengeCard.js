@@ -39,7 +39,7 @@ export default class ChallengeCard extends React.Component {
               </span>
               <div className="flex-row">
                 <UserProfileImage profileImage={avatar} />
-                <div>
+                <div className="challenge_details">
                   <div className="flex-row">
                     <span className="text-style text-padding">
                       {direction === 'target'
@@ -55,7 +55,7 @@ export default class ChallengeCard extends React.Component {
               </div>
             </div>
             {direction === 'target' && status === 'pending' ? (
-              <div>
+              <div className="button_align">
                 <PrimaryButton
                   onClick={() =>
                     this.props.challengeStatus({ status: 'active' }, token)

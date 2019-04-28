@@ -63,7 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
         uid = isNaN(parseInt(uid.nodeValue))
           ? uid.nodeValue
           : parseInt(uid.nodeValue);
-        getRequest('treecounter_get', { uid })
+        const uidData = isStandardTreecounter ? { uid } : {};
+        getRequest('treecounter_get', uidData)
           .then(result => {
             if (!result.data) {
               return;

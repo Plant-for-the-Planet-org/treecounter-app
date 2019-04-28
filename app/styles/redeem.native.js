@@ -62,6 +62,8 @@ export default (redeemStyles = EStyleSheet.create({
     backgroundColor: '$colorRedeemInside',
     color: '$textColor',
     width: '90%',
+    paddingRight: 0,
+    padding: 10,
     paddingLeft: 25,
     textAlign: 'center'
   },

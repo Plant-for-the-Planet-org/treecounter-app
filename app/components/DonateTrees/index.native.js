@@ -83,9 +83,6 @@ export default class DonateTrees extends React.PureComponent {
     if (params !== undefined && params.giftMethod === 'direct') {
       this.setState({ giftTreeCounterName: params.userForm.name });
     }
-    if (params !== undefined && params.giftMethod === 'support') {
-      this.setState({ giftTreeCounterName: params.userForm.name });
-    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -364,27 +361,6 @@ export default class DonateTrees extends React.PureComponent {
             },
             giftTreecounter: params.userForm.id,
             giftMethod: params.giftMethod,
-            paymentResponse: {
-              gateway: 'offline',
-              accountName: 'offline_US',
-              isConfirmed: true,
-              confirmation: 'iOS referred payment'
-            },
-            amount: this.state.selectedAmount,
-            currency: this.state.selectedCurrency
-          },
-          this.props.selectedProject.id,
-          this.props.currentUserProfile
-        );
-      } else if (params.giftMethod === 'support') {
-        // sendState.communityTreecounter = params.userForm.treeCounter;
-        this.props.gift(
-          {
-            ...this.state.form,
-            directGift: {
-              treecounter: params.userForm.treeCounter
-            },
-            giftMethod: 'direct',
             paymentResponse: {
               gateway: 'offline',
               accountName: 'offline_US',

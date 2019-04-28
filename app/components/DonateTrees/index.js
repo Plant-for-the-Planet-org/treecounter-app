@@ -286,7 +286,7 @@ export default class DonateTrees extends Component {
     }
     this.props.donate(
       {
-        ...this.state.form,
+        ...sendState,
         paymentResponse,
         amount: this.state.selectedAmount,
         currency: this.state.selectedCurrency

@@ -7,6 +7,7 @@ import i18n from '../../locales/i18n.js';
 import { plantProjectSchema } from '../../server/parsedSchemas/editProfile';
 import PlantProjectTemplate from '../EditUserProfile/PlantProjectTemplate';
 import { MapPinRed, baselineEdit, baselineDelete } from '../../assets';
+import ConfirmDeletion from './ConfirmDelete';
 import _ from 'lodash';
 import TextHeading from '../Common/Heading/TextHeading';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
@@ -132,6 +133,7 @@ export default class ManageProjects extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      openDialog: false,
       plantProjects: (props &&
         props.currentUserProfile &&
         props.currentUserProfile.plantProjects) || [emptyProjectInfo]
@@ -207,13 +209,24 @@ export default class ManageProjects extends Component {
   getPlantProjectList = () => {
     let plantProjectList = this.state.plantProjects.map(
       (plantProject, index) => {
-        return (
+        return [
+          <ConfirmDeletion
+            isOpen={this.state.openDialog}
+            handleDeletion={() =>
+              this.handleDeleteProjectCLick(plantProject, index)
+            }
+            onRequestClose={() =>
+              this.setState({
+                openDialog: false
+              })
+            }
+          />,
           <CollapsiblePlantProject
             key={index}
             plantProject={plantProject}
             ref={'CollapsiblePlantProject' + index}
             deleteProject={() => {
-              this.handleDeleteProjectCLick(plantProject, index);
+              this.setState({ openDialog: true });
             }}
             orderPlantProject={(data, params) =>
               this.props.orderPlantProject(data, params)
@@ -262,7 +275,7 @@ export default class ManageProjects extends Component {
               </div>
             </div>
           </CollapsiblePlantProject>
-        );
+        ];
       }
     );
     return plantProjectList;

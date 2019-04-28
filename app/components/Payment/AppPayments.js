@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import PaymentSelector from './PaymentSelector';
 import { payPost } from '../../actions/paymentAction';
-import { check_green } from '../../assets';
+import { check_green, attention } from '../../assets';
 import TextBlock from '../Common/Text/TextBlock';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n';
@@ -80,7 +80,7 @@ export default class AppPayments extends Component {
             </div>
           ) : this.state.paymentStatus === 'failed' ? (
             <div className="payment-success">
-              <img src={check_green} />
+              <img src={attention} />
               <div className={'gap'} />
               <TextBlock strong={true}>{'Payment Failed '}</TextBlock>
               <div className={'gap'} />

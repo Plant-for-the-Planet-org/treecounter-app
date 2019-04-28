@@ -52,6 +52,13 @@ export default class UserHome extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate =
+      JSON.stringify(nextProps) !== JSON.stringify(this.props) ||
+      nextState.index != this.state.index;
+    return shouldUpdate;
+  }
+
   _handleIndexChange = index => {
     this.setState({ index });
   };
@@ -115,7 +122,7 @@ export default class UserHome extends Component {
     switch (route.key) {
       case 'home':
         return (
-          <ScrollView>
+          <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
             <View style={styles.header}>
               <View style={styles.userProfileContainer}>
                 <UserProfileImage profileImage={userProfile.image} />
@@ -182,9 +189,10 @@ export default class UserHome extends Component {
         );
       case 'my-trees':
         return (
-          <ScrollView>
+          <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
             <ContributionCardList
               contributions={this.props.userContributions}
+              deleteContribution={this.props.deleteContribution}
             />
           </ScrollView>
         );
@@ -221,5 +229,6 @@ UserHome.propTypes = {
   userProfile: PropTypes.object,
   userProfileId: PropTypes.number.isRequired,
   userContributions: PropTypes.array.isRequired,
+  deleteContribution: PropTypes.func,
   navigation: PropTypes.any
 };

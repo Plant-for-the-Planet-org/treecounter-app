@@ -1,0 +1,9 @@
+{
+  "redeem_trees": "Bäume einlösen",
+  "redeem_heading": "Du kannst diese Funktion verwenden, um Bäume für deinen persönlichen Baumzähler zu registrieren. Du kannst Bäume mit einem Baumgutschein oder einem Gutscheincode einlösen.",
+  "claim_trees": "Bäume einlösen",
+  "enter_code": "Bitte gib den Code von einem Baumgutschein, einen Gutscheincode oder ein Token ein, um deine Bäume einzulösen",
+  "validate_code": "Code verifizieren",
+  "code": "Code",
+  "redeem_code": "Code einlösen"
+}

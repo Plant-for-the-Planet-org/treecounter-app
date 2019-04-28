@@ -1,5 +1,4 @@
 {
-  "reset": "पुनःसेट गर्नुहोस्।",
-  "dont_have_account": "तपाईंको खाता छैन?",
-  "login": "लग - इन"
+  "password": "पासवर्ड",
+  "current_password": "वर्तमान पासवर्ड"
 }

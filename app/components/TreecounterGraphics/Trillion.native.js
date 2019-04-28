@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   ScrollView,
   Text,
@@ -7,6 +7,8 @@ import {
   Animated,
   Image
 } from 'react-native';
+
+import NavigationEvents from './importNavigationEvents';
 
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
@@ -36,16 +38,14 @@ import { saveItem, fetchItem } from '../../stores/localStorage.native';
 import Constants from '../../utils/const';
 import { getImageUrl } from '../../actions/apiRouting';
 
-const height = Dimensions.get('window').height;
-let viewheight = height - 50;
-class Trillion extends Component {
+class Trillion extends PureComponent {
   constructor() {
     super();
     this.state = {
       svgData: null,
       displayName: '',
       loading: true,
-      offsetY: new Animated.Value(0),
+      loadSvg: true,
       routes: [
         { key: 'world', title: 'World' },
         { key: 'leaderBoard', title: 'LeaderBoard' }
@@ -89,15 +89,14 @@ class Trillion extends Component {
         });
       });
   }
-  shouldComponentUpdate() {
-    return true;
-  }
-  onMoreClick(id) {
+
+  onMoreClick(id, name) {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     //console.log('OnMore');
-    updateRoute('app_selectProject', navigation);
+    updateRoute('app_selectProject', navigation, null, { titleParam: name });
   }
+
   onSelectClickedFeaturedProjects = id => {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
@@ -105,7 +104,7 @@ class Trillion extends Component {
   };
 
   _handleIndexChange = index => {
-    this.setState({ index, offsetY: new Animated.Value(0) });
+    this.setState({ index });
   };
 
   _renderTabBar = props => {
@@ -128,15 +127,9 @@ class Trillion extends Component {
           <LoadingIndicator />
         ) : (
           <ScrollView
-            bounces={false}
-            scrollEventThrottle={16}
             contentContainerStyle={{
-              justifyContent: 'flex-start',
-              flexGrow: 2
+              paddingBottom: 72
             }}
-            onScroll={Animated.event([
-              { nativeEvent: { contentOffset: { y: this.state.offsetY } } }
-            ])}
           >
             <View style={styles.parentContainer}>
               <View style={svgStyles.svgContainer}>
@@ -184,13 +177,13 @@ class Trillion extends Component {
                 </Text>
               </CardLayout>
 
-              <View>
+              <View style={{ flex: 1 }}>
                 {this.props.plantProjects
                   .filter(filterProj => filterProj.allowDonations)
                   .map(project => (
                     <PlantProjectSnippet
                       key={'trillion' + project.id}
-                      onMoreClick={id => this.onMoreClick(id)}
+                      onMoreClick={id => this.onMoreClick(id, project.name)}
                       plantProject={project}
                       onSelectClickedFeaturedProjects={id =>
                         this.onSelectClickedFeaturedProjects(id)
@@ -205,14 +198,7 @@ class Trillion extends Component {
         );
       }
       case 'leaderBoard': {
-        return (
-          <Leaderboard
-            navigation={this.props.navigation}
-            handleScrollAnimation={Animated.event([
-              { nativeEvent: { contentOffset: { y: this.state.offsetY } } }
-            ])}
-          />
-        );
+        return <Leaderboard navigation={this.props.navigation} />;
       }
       default:
         return null;
@@ -220,25 +206,19 @@ class Trillion extends Component {
   };
 
   render() {
-    const headerTranslate = Animated.diffClamp(
-      this.state.offsetY,
-      0,
-      120
-    ).interpolate({
-      inputRange: [0, 120],
-      outputRange: [0, -50]
-    });
-
-    return (
-      <Animated.View
-        style={[
-          { height: viewheight },
-          {
-            transform: [{ translateY: headerTranslate }],
-            flexGrow: 1
-          }
-        ]}
-      >
+    return [
+      this.props.navigation ? (
+        <NavigationEvents
+          onWillFocus={payload => {
+            this.setState({ loadSvg: true });
+          }}
+          onWillBlur={payload => {
+            this.setState({ loadSvg: false });
+          }}
+          key="navigation-events"
+        />
+      ) : null,
+      this.state.loadSvg ? (
         <TabView
           useNativeDriver
           navigationState={this.state}
@@ -246,8 +226,8 @@ class Trillion extends Component {
           renderTabBar={this._renderTabBar}
           onIndexChange={this._handleIndexChange}
         />
-      </Animated.View>
-    );
+      ) : null
+    ];
   }
 }
 
@@ -255,6 +235,7 @@ const mapStateToProps = state => ({
   pledgeEvents: pledgeEventSelector(state),
   plantProjects: getAllPlantProjectsSelector(state)
 });
+
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ selectPlantProjectAction }, dispatch);
 };
@@ -262,5 +243,6 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(Trillion);
 
 Trillion.propTypes = {
-  pledgeEvents: PropTypes.object
+  pledgeEvents: PropTypes.object,
+  navigation: PropTypes.any
 };

@@ -1,11 +1,23 @@
 {
   "sure": "Bist du dir sicher ?",
-  "delete_confirmation": "Sobald du bestätigst, werden alle deine Kontodaten gelöscht. Das kann nicht rückgängig gemacht werden",
+  "delete_confirmation": "Sobald du auf bestätigen klicksst, werden alle deine Nutzerdaten gelöscht. Das kann nicht mehr rückgängig gemacht werden",
   "password_changed": "Dein Passwort wurde erfolgreich geändert",
   "return_to_profile": "Zurück zu meinem Profil",
   "new_project": "Neues Projekt hinzufügen",
-  "Location": "Lage",
+  "Location": "Ort",
   "description": "Beschreibung",
   "gallery": "Bildergalerie",
-  "video": "Video"
+  "video": "Video",
+  "updated_successful": "Erfolgreich aktualisiert",
+  "error_title": "Fehler bei der Profilaktualisierung",
+  "plant_project_update_success": "Pflanzprojekt wurde erfolgreich aktualisiert",
+  "plant_project_delete_success": "Pflanzprojekt wurde erfolgreich gelöscht",
+  "plant_project_added_success": "Pflanzprojekt wurde erfolgreich erstellt",
+  "plant_project_error_title": "Pflanzprojekt Update Fehler",
+  "same_password_error": "Bitte gib das gleiche Passwort ein",
+  "basic_profile": "Basic",
+  "profile_security": "Sicherheit",
+  "deletion_warning_summery": "Alle deine persönlichen Daten werden gelöscht, sofern diese nicht aus rechtlichen und buchhalterischen Gründen erforderlich sind.",
+  "deletion_warning_summery_1": "Bäume, die du gepflanzt hast, werden weiterhin Teil der Trillion Tree Campaign sein.",
+  "deletion_prerequisite": "Bitte gib in Großbuchstaben DELETE ein und klicke auf die Schaltfläche Löschen, um mit der Löschung deines Kontos fortzufahren."
 }

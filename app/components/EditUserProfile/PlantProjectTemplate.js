@@ -72,9 +72,9 @@ const PlantProjectTemplate = function(itemIndex) {
     return (
       <div>
         <div key={'project_item' + itemIndex}>
-          <div className="item-header">
+          {/* <div className="item-header">
             {i18n.t('label.project')} {inWords(itemIndex + 1)}
-          </div>
+          </div> */}
           <div
             className={'project-teaser'}
             key={'project_item_teaser' + itemIndex}
@@ -94,7 +94,7 @@ const PlantProjectTemplate = function(itemIndex) {
           </div>
 
           <div className="project-sub-item">
-            <div className="sub-item-header">{i18n.t('label.Location')}</div>
+            {/* <div className="sub-item-header">{i18n.t('label.Location')}</div> */}
             {/* {locals.inputs.country}  */}
             {locals.inputs.location}
             {locals.inputs.geoLocation}
@@ -102,7 +102,7 @@ const PlantProjectTemplate = function(itemIndex) {
           </div>
 
           <div className="project-sub-item">
-            <div className="sub-item-header">{i18n.t('label.description')}</div>
+            {/* <div className="sub-item-header">{i18n.t('label.description')}</div> */}
             <div className="tComb-template__about-me-form">
               <i>{locals.inputs.description}</i>
               <div>
@@ -114,15 +114,17 @@ const PlantProjectTemplate = function(itemIndex) {
           </div>
 
           <div className="project-sub-item">
-            <div className="sub-item-header">{i18n.t('label.gallery')}</div>
+            {/* <div className="sub-item-header">{i18n.t('label.gallery')}</div> */}
             {locals.inputs.plantProjectImages}
             <div className="separator" />
           </div>
 
           <div className="project-sub-item">
-            <div className="sub-item-header">{i18n.t('label.video')}</div>
+            {/* <div className="sub-item-header">{i18n.t('label.video')}</div> */}
             {locals.inputs.videoUrl}
           </div>
+          <div className="project-sub-item">{locals.inputs.allowDonations}</div>
+          <div className="project-sub-item">{locals.inputs.isPublished}</div>
         </div>
       </div>
     );

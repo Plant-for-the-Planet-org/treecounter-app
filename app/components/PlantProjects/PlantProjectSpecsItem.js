@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 
+import { delimitNumbers } from '../../utils/utils';
+
 const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
   return (
     <div className="project-specs__item">
@@ -22,9 +24,7 @@ const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
         </div>
       ) : null}
       <div className="project-specs__item__value">
-        {typeof value == 'number'
-          ? parseFloat(value).toLocaleString('en')
-          : value}
+        {typeof value == 'number' ? delimitNumbers(parseFloat(value)) : value}
       </div>
     </div>
   );

@@ -20,7 +20,6 @@ class SuccessfullyActivatedContainer extends React.Component {
       this.props
         .accountActivate(this.props.match.params.token)
         .then(res => {
-          console.log('in container');
           this.setState({ success: true });
         })
         .catch(err => {
@@ -32,7 +31,6 @@ class SuccessfullyActivatedContainer extends React.Component {
     }
   }
   render() {
-    console.log(this.state);
     return <SuccessfullyActivatedAccount success={this.state.success} />;
   }
 }

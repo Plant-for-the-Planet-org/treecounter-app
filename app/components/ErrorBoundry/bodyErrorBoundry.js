@@ -18,7 +18,6 @@ class BodyErrorBoundary extends React.Component {
   }
 
   onRouteChanged() {
-    console.log('ROUTE CHANGED');
     clearInterval(this.intervalHandle);
     this.secondsRemaining;
     this.setState({ hasErrorOccurred: false, seconds: 30 });

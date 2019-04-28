@@ -18,6 +18,7 @@ import myTreesStyle from '../../styles/myTrees/user_contribution_card';
 import { foldout, foldin, MapPinRed, EditOrange } from '../../assets';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
+import { delimitNumbers } from '../../utils/utils';
 import Lightbox from 'react-native-lightbox';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
@@ -54,7 +55,6 @@ class ContributionCard extends React.Component {
     </View>
   );
   _renderContent(section) {
-    //console.log('section', section);
     const measurementsAvailable =
       section.contributionMeasurements &&
       section.contributionMeasurements.length > 0;
@@ -100,7 +100,11 @@ class ContributionCard extends React.Component {
   _renderHeader(section, index, isActive) {
     return (
       <View style={styles.header}>
-        <Image style={styles.imageStyle} source={isActive ? foldin : foldout} />
+        <Image
+          resizeMode="center"
+          style={styles.imageStyle}
+          source={isActive ? foldin : foldout}
+        />
         <Text style={styles.headerText}>Details</Text>
       </View>
     );
@@ -124,7 +128,7 @@ class ContributionCard extends React.Component {
     });
 
   treeCountLine(treeCount, treeSpecies) {
-    return treeCount + ' ' + (treeSpecies ? treeSpecies : '');
+    return delimitNumbers(treeCount) + ' ' + (treeSpecies ? treeSpecies : '');
   }
 
   plantProjectLine(plantProjectName, country) {
@@ -138,7 +142,8 @@ class ContributionCard extends React.Component {
           <Text
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
+                treeCounterId: giveeSlug,
+                titleParam: givee
               })
             }
           >
@@ -163,7 +168,8 @@ class ContributionCard extends React.Component {
           <Text
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
+                treeCounterId: giveeSlug,
+                titleParam: givee
               })
             }
           >
@@ -180,7 +186,8 @@ class ContributionCard extends React.Component {
           <Text
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
+                treeCounterId: giveeSlug,
+                titleParam: givee
               })
             }
           >
@@ -199,7 +206,8 @@ class ContributionCard extends React.Component {
                     this.props.navigation.navigate(
                       getLocalRoute('app_treecounter'),
                       {
-                        treeCounterId: giveeSlug
+                        treeCounterId: giveeSlug,
+                        titleParam: givee
                       }
                     )
                   }
@@ -265,7 +273,12 @@ class ContributionCard extends React.Component {
       <CardLayout style={styles.addPadding}>
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
-          <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
+          >
+            {treeCountLine}
+          </Text>
         ) : null}
         {plantProjectLine ? (
           <Text
@@ -303,15 +316,22 @@ class ContributionCard extends React.Component {
         ) : null}
         <View style={styles.labelStyle}>
           <Text style={styles.labelTextStyle}>
-            {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+            {cardType && cardType.length > 0
+              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+              : ''}
           </Text>
         </View>
       </CardLayout>
     ) : contributionType === 'planting' ? (
-      <CardLayout style={styles.addPadding}>
+      <CardLayout style={[styles.addPadding, styles.minHeight]}>
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
-          <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
+          >
+            {treeCountLine}
+          </Text>
         ) : null}
         {plantProjectLine ? (
           <Text
@@ -334,6 +354,17 @@ class ContributionCard extends React.Component {
             {dedicateActionLine}
           </Text>
         ) : null}
+        <Text
+          style={styles.deleteTextStyle}
+          onPress={() => {
+            this.props.navigation.navigate('delete_contribution', {
+              deleteContribution: () =>
+                this.props.deleteContribution(contribution.id)
+            });
+          }}
+        >
+          {i18n.t('label.delete')}
+        </Text>
         {mayUpdate ? (
           <Text
             style={styles.updateTextStyle}
@@ -349,7 +380,9 @@ class ContributionCard extends React.Component {
         ) : null}
         <View style={styles.labelStyle}>
           <Text style={styles.labelTextStyle}>
-            {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+            {cardType && cardType.length > 0
+              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+              : ''}
           </Text>
         </View>
       </CardLayout>
@@ -357,7 +390,12 @@ class ContributionCard extends React.Component {
       <CardLayout style={styles.addPadding}>
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
-          <Text style={[styles.boldText, styles.gap]}>{treeCountLine}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
+          >
+            {treeCountLine}
+          </Text>
         ) : null}
         {plantProjectLine ? (
           <Text
@@ -395,7 +433,9 @@ class ContributionCard extends React.Component {
         ) : null}
         <View style={styles.labelStyle}>
           <Text style={styles.labelTextStyle}>
-            {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+            {cardType && cardType.length > 0
+              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+              : ''}
           </Text>
         </View>
       </CardLayout>
@@ -464,7 +504,9 @@ class ContributionCard extends React.Component {
 }
 
 ContributionCard.propTypes = {
-  contribution: PropTypes.object.isRequired
+  contribution: PropTypes.object.isRequired,
+  deleteContribution: PropTypes.func,
+  navigation: PropTypes.any
 };
 
 class ActionButton extends React.Component {
@@ -479,7 +521,11 @@ class ActionButton extends React.Component {
       >
         <View style={{ flexDirection: 'row' }}>
           {this.props.image != null ? (
-            <Image source={this.props.image} style={styles.imageStyle} />
+            <Image
+              resizeMode="center"
+              source={this.props.image}
+              style={styles.imageStyle}
+            />
           ) : null}
           {this.props.text != null ? (
             <Text style={styles.actionButtonText}>{this.props.text}</Text>

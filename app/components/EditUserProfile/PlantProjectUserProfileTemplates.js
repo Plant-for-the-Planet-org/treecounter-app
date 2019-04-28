@@ -13,9 +13,9 @@ export function UserPasswordUpdateTemplate(locals) {
 export function UserAboutmeTemplate(locals) {
   return (
     <div className="tComb-template__about-me-form">
-      <div>
+      <div className="column">
         {locals.inputs.synopsis1}
-        {locals.inputs.synopsis2}
+        {/* {locals.inputs.synopsis2} */}
       </div>
 
       <div>

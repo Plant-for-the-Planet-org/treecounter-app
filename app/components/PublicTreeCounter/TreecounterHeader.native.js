@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 
-import { getImageUrl } from '../../actions/apiRouting';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import userHomeStyles from '../../styles/user-home.native';
 import UserProfileImage from '../Common/UserProfileImage';

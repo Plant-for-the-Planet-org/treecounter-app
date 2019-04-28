@@ -17,7 +17,8 @@ export default (buttonStyles = EStyleSheet.create({
     color: 'white'
   },
   secondaryButton: {
-    backgroundColor: '$colorPrimaryAccent'
+    backgroundColor: '$colorPrimaryAccent',
+    borderColor: '$colorPrimaryAccent'
   },
   followingButton: {
     justifyContent: 'center',

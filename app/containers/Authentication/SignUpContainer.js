@@ -16,12 +16,19 @@ class SignUpContainer extends React.Component {
     this.state = { formValue: {}, schemaOptions };
   }
 
+  componentWillUnmount() {
+    if (!this.props.navigation) {
+      let gBatch = document.getElementsByClassName('grecaptcha-badge');
+      gBatch[0].style.visibility = 'hidden';
+    }
+  }
+
   onSignUpClicked = (profileType, token) => {
     console.log(this.refs.signupContainer.refs.signupForm.validate());
     let formValue = this.refs.signupContainer.refs.signupForm.getValue();
     if (formValue) {
       this.props
-        .signUp(profileType, formValue, token)
+        .signUp(profileType, formValue, token, this.props.navigation)
         .then(success => {})
         .catch(err => {
           console.log('err signup data', err);
@@ -54,6 +61,7 @@ class SignUpContainer extends React.Component {
         updateRoute={(routeName, id) =>
           this.props.route(routeName, id, this.props.navigation)
         }
+        {...this.props}
         schemaOptions={this.state.schemaOptions}
       />
     );

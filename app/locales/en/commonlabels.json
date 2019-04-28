@@ -2,14 +2,12 @@
   "loading": "loading ...",
   "isRequired": "{{context}} is Required",
   "enterValidEmail": "Enter valid Email",
-  "invalidLength": "Invalid Length: should be less than {length}",
+  "invalidLength": "Invalid Length: should be less than {{length}}",
   "invalidValueMsg": "Please enter valid {{context}}",
   "something_went_x": "Something went wrong.",
   "sorry_inconveniences": "Sorry for the inconveniences.",
-  "error_reported":
-    "We have reported this error to our developers with a cup of coffee.",
-  "home_page_redirected":
-    "You will be redirected to home page in {{seconds}} seconds",
-  "planting_404":
-    "To avoid this situation on this planet lets plant some trees."
+  "error_reported": "We have reported this error to our developers with a cup of coffee.",
+  "home_page_redirected": "You will be redirected to home page in {{seconds}} seconds",
+  "planting_404": "To avoid this situation on this planet lets plant some trees.",
+  "cancel": "Cancel"
 }

@@ -1,4 +1,3 @@
-import { debug } from '../debug/index';
 import { getRequest, postRequest } from '../utils/api';
 
 export function getPaymentInfo(paymentInfoId) {

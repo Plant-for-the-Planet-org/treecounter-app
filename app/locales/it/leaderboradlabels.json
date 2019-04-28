@@ -1,5 +1,4 @@
 {
-  "treecount_leaderboard": "Classifica",
   "treecount_map": "Mappa",
   "sortBy": "Ordina per",
   "timePeriod": "Periodo di tempo",
@@ -9,8 +8,5 @@
   "plantedTrees_description": "Tutti gli alberi registrati su questo sito dal 2006.",
   "existingForest": "Foresta Esistente",
   "existingForest_description": "Attualmente esistono 3.04 trilioni di alberi in tutto il mondo. Giù da sei trilioni di alberi prima che gli umani iniziassero a tagliare le foreste, circa 11.000 anni fa. La mappa mostra il numero di alberi per km2.",
-  "existingForest_source": "Crowther, T. W. et al. (2015) Mappatura della densità dell'albero a scala globale. Nature 525, 201-205.",
-  "restorationOpportunities": "Opportunità di Restauro",
-  "restorationOpportunities_description": "Mezzo miliardo di ettari sono adatti per il restauro su vasta scala di foreste chiuse. Più di un miliardo e mezzo di ettari sono meglio situati per il restauro del mosaico, che combina foreste con altri usi del suolo come l'agroforestazione, l'agricoltura di piccoli proprietari e gli insediamenti.",
-  "restorationOpportunities_source": "Crowther, T. W. et al. (2017) Previsione del potenziale di riforestazione della foresta globale. bioRxiv 210062."
+  "restorationOpportunities": "Opportunità di Restauro"
 }

@@ -1,6 +1,6 @@
 .pftp-button-primary {
- background-color: $colorPrimary;
- 
+  background-color: $colorPrimary;
+
   border: none;
   color: white;
   padding: 10px 20px;
@@ -80,6 +80,18 @@
   }
 }
 
+.pftp-button-back__container {
+  display: flex;
+  align-self: flex-start;
+  margin-top: 20px;
+  margin-left: 20px;
+
+  cursor: pointer;
+  .pftp-button-transparent {
+    color: $colorPrimaryAccentLight !important;
+  }
+}
+
 .pftp-addbutton {
   display: flex;
   align-items: center;
@@ -90,4 +102,12 @@
     border: none;
     cursor: pointer;
   }
+}
+
+.btn-group {
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  margin-left: 10px;
+  justify-content: space-around;
 }

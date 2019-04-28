@@ -16,15 +16,23 @@ export default class SuccessfullyActivatedAccount extends Component {
     const customizeProfile = (
       <InlineLink uri={'app_userHome'} caption="customize your profile" />
     );
-    const login = <InlineLink caption="log in" uri={'app_login'} />;
+    const login = <InlineLink caption="login" uri={'app_login'} />;
 
     return (
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <View style={styles.container}>
           {this.props.success ? (
-            <Image source={check_green} style={styles.imageStyle} />
+            <Image
+              source={check_green}
+              resizeMode="contain"
+              style={styles.imageStyle}
+            />
           ) : (
-            <Image source={redeemSignIn} style={styles.imageStyle} />
+            <Image
+              source={redeemSignIn}
+              resizeMode="contain"
+              style={styles.imageStyle}
+            />
           )}
           {this.props.success ? (
             <Text style={styles.textStyle}>

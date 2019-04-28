@@ -9,7 +9,8 @@ export default (loginStyles = EStyleSheet.create({
 
   parentContainer: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    justifyContent: 'center'
   },
   container: {
     flex: 0.7,

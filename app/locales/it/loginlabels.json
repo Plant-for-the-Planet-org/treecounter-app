@@ -1,7 +1,4 @@
 {
-  "reset": "Ripristina.",
   "dont_have_account": "Non hai un account?",
-  "login": "Accedi",
-  "password": "Password",
-  "current_password": "Password attuale"
+  "password": "Password"
 }

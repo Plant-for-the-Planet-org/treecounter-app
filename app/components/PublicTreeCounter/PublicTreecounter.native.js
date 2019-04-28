@@ -51,7 +51,9 @@ class PublicTreeCounter extends React.Component {
 
   onRegisterSupporter() {
     this.props.supportTreecounterAction(this.props.treecounter);
-    this.props.route('app_donateTrees');
+    updateRoute('app_donateTrees', this.props.navigation, 0, {
+      titleParam: 'Support Trees To ' + this.props.treecounter.displayName
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -99,12 +101,13 @@ class PublicTreeCounter extends React.Component {
       this.setState({ svgData: Object.assign({}, svgData) });
     }
   }
-  onMoreClick(id) {
+  onMoreClick(id, name) {
     this.props.selectPlantProjectIdAction(id);
     const { navigation } = this.props;
     //console.log('OnMore');
-    updateRoute('app_selectProject', navigation);
+    updateRoute('app_selectProject', navigation, null, { titleParam: name });
   }
+
   onSelectClickedFeaturedProjects = id => {
     this.props.selectPlantProjectIdAction(id);
     const { navigation } = this.props;
@@ -158,10 +161,12 @@ class PublicTreeCounter extends React.Component {
           ) : null}
         </View>
         <View style={stylesHome.svgContainer}>
-          <SvgContainer
-            {...this.state.svgData}
-            onToggle={toggleVal => this.updateSvg(toggleVal)}
-          />
+          {Object.keys(this.state.svgData).length !== 0 ? (
+            <SvgContainer
+              {...this.state.svgData}
+              onToggle={toggleVal => this.updateSvg(toggleVal)}
+            />
+          ) : null}
         </View>
         <View>
           {userProfile.synopsis1 ||
@@ -201,7 +206,7 @@ class PublicTreeCounter extends React.Component {
               {tpoProps.plantProjects.map(project => (
                 <PlantProjectSnippet
                   key={'trillion' + project.id}
-                  onMoreClick={id => this.onMoreClick(id)}
+                  onMoreClick={id => this.onMoreClick(id, project.name)}
                   plantProject={project}
                   onSelectClickedFeaturedProjects={id =>
                     this.onSelectClickedFeaturedProjects(id)

@@ -19,6 +19,10 @@ export default (redeemStyles = EStyleSheet.create({
   cardContainer: {
     flexDirection: 'column',
     flex: 1,
+    paddingLeft: 27,
+    paddingRight: 27,
+    paddingTop: 16,
+    paddingBottom: 16,
     alignItems: 'center'
   },
   headerContainer: {
@@ -35,14 +39,12 @@ export default (redeemStyles = EStyleSheet.create({
   imageStyle: {
     width: 59,
     height: 81,
-    margin: 15,
-    resizeMode: 'contain'
+    margin: 15
   },
   imageLoginStyle: {
     width: 50,
     height: 50,
-    margin: 25,
-    resizeMode: 'contain'
+    margin: 25
   },
   descriptionTextStyle: {
     color: '$textColor',
@@ -57,24 +59,18 @@ export default (redeemStyles = EStyleSheet.create({
     textAlign: 'center'
   },
   inputStyle: {
-    borderRadius: 3,
-    borderWidth: 1.5,
-    borderColor: '$colorRedeemBorder',
-    borderStyle: 'solid',
     backgroundColor: '$colorRedeemInside',
     color: '$textColor',
-    margin: 10,
+    width: '90%',
+    paddingRight: 0,
     padding: 10,
-    textAlign: 'center',
-    paddingRight: 10
+    paddingLeft: 25,
+    textAlign: 'center'
   },
-  glyphiconTouch: {},
   glyphiconStyle: {
-    position: 'absolute',
     padding: 10,
-    right: 20,
+    marginTop: 10,
     height: 25,
-    top: -42,
     width: 25
   },
   iconCrossStyle: {
@@ -82,8 +78,17 @@ export default (redeemStyles = EStyleSheet.create({
     height: '100%'
   },
   redeemInputView: {
-    position: 'relative',
-    width: '100%'
+    borderRadius: 3,
+    borderWidth: 1.5,
+    borderColor: '$colorRedeemBorder',
+    borderStyle: 'solid',
+    backgroundColor: '$colorRedeemInside',
+    color: '$textColor',
+    margin: 10,
+    width: '100%',
+    flex: 1,
+    flexDirection: 'row',
+    paddingRight: 10
   },
   loginButtons: {
     flex: 1,

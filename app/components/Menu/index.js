@@ -53,6 +53,12 @@ export default class Menu extends Component {
           <TwitterShareButton url={redirectPath}>
             <img src={images['twitter']} />
           </TwitterShareButton>
+          <Link
+            to={getLocalRoute('app_widgetBuilder')}
+            onClick={() => console.log('redirect_widget_share')}
+          >
+            <img src={images.webProgramming} />
+          </Link>
         </div>
       );
     } else {
@@ -123,9 +129,7 @@ export default class Menu extends Component {
                     </li>
                   ) : (
                     <li key={'' + element.sequence + menuItem.sequence}>
-                      <i className="material-icons">
-                        {i18n.t('label.open_folder')}
-                      </i>
+                      <i className="material-icons">{'folder_open'}</i>
                       <a>{menuItem.caption}</a>
                     </li>
                   )
@@ -133,7 +137,7 @@ export default class Menu extends Component {
             </ul>
           </div>
         ))}
-        {this.renderShareButtons()}
+        {this.props.userProfile ? this.renderShareButtons() : null}
       </div>
     );
   }

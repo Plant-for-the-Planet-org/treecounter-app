@@ -10,6 +10,7 @@ const UserProfileImage = ({ profileImage, style, imageStyle }) => {
     <View style={[styles.profileImageContainer, style]}>
       <Image
         style={[styles.profileImage, imageStyle]}
+        resizeMode="contain"
         source={
           profileImage
             ? {

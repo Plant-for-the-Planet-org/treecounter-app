@@ -28,8 +28,7 @@ export default (LeaderboardStyle = EStyleSheet.create({
   },
   contextMenu: {
     height: 25,
-    width: 25,
-    resizeMode: 'contain'
+    width: 25
   },
   cardStyle: {
     ...boxShadow,
@@ -132,6 +131,9 @@ export default (LeaderboardStyle = EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10
+  },
+  numberContainer: {
+    marginBottom: 35
   },
   itemViewText: {
     marginBottom: 10,

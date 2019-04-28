@@ -20,6 +20,8 @@ import shovel_outline_red from './images/icons/shovel_outline_red.png';
 import target_outline_red from './images/icons/target_outline_red.png';
 import pledge_highest from './images/pledge_biggest.png';
 import pledge_latest from './images/pledge_recent.png';
+import baselineEdit from './images/baseline-edit.png';
+import baselineDelete from './images/baseline-delete.png';
 import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/darkTree.png';
@@ -41,10 +43,12 @@ import QuestionMarkGreen from './images/icons/questionmark_green.png';
 import country from './images/icons/country.png';
 import organization from './images/icons/organization.png';
 import competition from './images/icons/competition.png';
-import competition_outline from './images/icons/competition.png';
+import competition_outline_red from './images/icons/competition.png';
+import competition_outline from './images/icons/competition_outline.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
 import arrow_right_orange from './images/icons/arrow_right_orange.png';
+import arrow_left_orange_outline from './images/icons/arrow_left_orange_outline.png';
 import arrow_left_orange from './images/icons/arrow_left_orange.png';
 import tick from './images/icons/tick.png';
 import locationIcon from './images/icons/location.png';
@@ -117,6 +121,13 @@ import radio_button from './images/icons/radio_button.png';
 import radio_button_selected from './images/icons/radio_button_selected.png';
 import filter from './images/icons/filter.png';
 import welcomeScreen from './images/welcome-screen.png';
+import flagTarget from './images/flag_target.png';
+import compCalendar from './images/calendar_comp.png';
+import upwardArrow from './images/right-arrow.png';
+import downwardArrow from './images/left-arrow.png';
+import challengeIcon from './images/icons/flag.png';
+import webProgramming from './images/icons/web_programming.png';
+import communityMenu from './images/icons/community_menu.jpeg';
 
 export {
   AppStoreLogo,
@@ -141,6 +152,8 @@ export {
   uncheckedIcon,
   RedEmail,
   GreenEmail,
+  baselineEdit,
+  baselineDelete,
   SideMenuImage,
   FooterLogos,
   SignupOrganization,
@@ -172,6 +185,7 @@ export {
   organization,
   competition,
   competition_outline,
+  competition_outline_red,
   education,
   company,
   arrow_left_orange,
@@ -237,5 +251,13 @@ export {
   shareIcon,
   facebook,
   twitter,
-  welcomeScreen
+  welcomeScreen,
+  flagTarget,
+  compCalendar,
+  upwardArrow,
+  downwardArrow,
+  arrow_left_orange_outline,
+  challengeIcon,
+  webProgramming,
+  communityMenu
 };

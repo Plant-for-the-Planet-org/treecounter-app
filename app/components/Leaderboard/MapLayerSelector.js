@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const MapLayerSelector = ({ mapLayers, activeMapLayers, onStateUpdate }) => {
   const HandleInputChange = clickedLayer => {
-    console.log('layer clicked ', clickedLayer);
     onStateUpdate(
       Object.keys(mapLayers).filter(
         layer => !((clickedLayer === layer) ^ !activeMapLayers.includes(layer))

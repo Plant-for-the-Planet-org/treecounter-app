@@ -7,8 +7,10 @@ import { Link } from 'react-router-dom';
 
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import TextSpan from '../Common/Text/TextSpan';
+import ConfirmDeletion from './ConfirmDelete';
 import i18n from '../../locales/i18n.js';
 import { updateRoute } from '../../helpers/routerHelper';
+import { delimitNumbers } from '../../utils/utils';
 
 export default class ContributionCard extends React.Component {
   constructor(props) {
@@ -16,7 +18,8 @@ export default class ContributionCard extends React.Component {
     this.state = {
       lightboxIsOpen: false,
       currentImage: 0,
-      viewExpanded: false
+      viewExpanded: false,
+      openDialog: false
     };
   }
 
@@ -38,7 +41,7 @@ export default class ContributionCard extends React.Component {
       viewExpanded: !this.state.viewExpanded
     });
   treeCountLine(treeCount, treeSpecies) {
-    return treeCount + ' ' + (treeSpecies ? treeSpecies : '');
+    return delimitNumbers(treeCount) + ' ' + (treeSpecies ? treeSpecies : '');
   }
 
   plantProjectLine(plantProjectName, country) {
@@ -120,6 +123,7 @@ export default class ContributionCard extends React.Component {
               ]
             : '');
   }
+
   render() {
     let { contribution } = this.props;
     let imagesArray =
@@ -274,9 +278,12 @@ export default class ContributionCard extends React.Component {
             {!isPending ? (
               <TextSpan>
                 {' '}
-                {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+                {cardType && cardType.length > 0
+                  ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+                  : ''}
               </TextSpan>
-            ) : (
+            ) : null}
+            {mayUpdate ? (
               <Link
                 to={getLocalRoute('app_editTrees', {
                   contribution: contribution.id
@@ -284,7 +291,7 @@ export default class ContributionCard extends React.Component {
               >
                 {i18n.t('label.update')}
               </Link>
-            )}
+            ) : null}
           </div>
         </div>
         <hr className="contribution-container__partition" />
@@ -358,12 +365,33 @@ export default class ContributionCard extends React.Component {
                     </TextSpan>
                   ))
               : null}
+            {contribution.contributionType === 'planting' ? (
+              <div>
+                <ConfirmDeletion
+                  isOpen={this.state.openDialog}
+                  handleDeletion={() =>
+                    this.props.deleteContribution(contribution.id)
+                  }
+                  onRequestClose={() =>
+                    this.setState({
+                      openDialog: false
+                    })
+                  }
+                />
+                <div onClick={() => this.setState({ openDialog: true })}>
+                  <TextSpan>{'' + i18n.t('label.delete')}</TextSpan>
+                </div>
+              </div>
+            ) : null}
             {!isPending ? (
               <TextSpan>
                 {' '}
-                {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+                {cardType && cardType.length > 0
+                  ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+                  : ''}
               </TextSpan>
-            ) : (
+            ) : null}
+            {mayUpdate ? (
               <Link
                 to={getLocalRoute('app_editTrees', {
                   contribution: contribution.id
@@ -371,7 +399,7 @@ export default class ContributionCard extends React.Component {
               >
                 {i18n.t('label.update')}
               </Link>
-            )}
+            ) : null}
           </div>
         </div>
         <hr className="contribution-container__partition" />
@@ -444,9 +472,12 @@ export default class ContributionCard extends React.Component {
             {!isPending ? (
               <TextSpan>
                 {' '}
-                {cardType.charAt(0).toUpperCase() + cardType.slice(1)}
+                {cardType && cardType.length > 0
+                  ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+                  : ''}
               </TextSpan>
-            ) : (
+            ) : null}
+            {mayUpdate ? (
               <Link
                 to={getLocalRoute('app_editTrees', {
                   contribution: contribution.id
@@ -454,6 +485,7 @@ export default class ContributionCard extends React.Component {
               >
                 {i18n.t('label.update')}
               </Link>
+            ) : null}
             )}
           </div>
         </div>
@@ -464,5 +496,6 @@ export default class ContributionCard extends React.Component {
 }
 
 ContributionCard.propTypes = {
-  contribution: PropTypes.object.isRequired
+  contribution: PropTypes.object.isRequired,
+  deleteContribution: PropTypes.func
 };

@@ -21,6 +21,7 @@ class PlantProjectImageCarousel extends React.Component {
     }
   }
   onViewMoreClick() {
+    this.props.onViewMoreClick();
     let newOffset = this.state.offset + this.itemsSize;
     if (newOffset > this.props.projectImages.length) {
       newOffset =
@@ -71,7 +72,8 @@ class PlantProjectImageCarousel extends React.Component {
 
 PlantProjectImageCarousel.propTypes = {
   projectImages: PropTypes.array,
-  carousalImageClick: PropTypes.func
+  carousalImageClick: PropTypes.func,
+  onViewMoreClick: PropTypes.func
 };
 
 export default PlantProjectImageCarousel;

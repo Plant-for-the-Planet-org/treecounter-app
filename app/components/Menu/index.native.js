@@ -161,7 +161,11 @@ export default class Menu extends Component {
                 onPress={this.onPressMenu.bind(this, {
                   uri: 'app_target'
                 })}
-                title={i18n.t('label.set_target')}
+                title={
+                  this.props.treecounter.countTarget > 0
+                    ? i18n.t('label.update_target')
+                    : i18n.t('label.set_target')
+                }
                 iconUrl={icons.target_outline}
               />
             ) : null}

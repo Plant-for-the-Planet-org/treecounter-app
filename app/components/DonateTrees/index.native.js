@@ -331,6 +331,7 @@ export default class DonateTrees extends React.PureComponent {
   handlePaymentApproved() {
     let params = this.props.navigation.state.params;
     let sendState;
+    sendState = { ...this.state.form };
     if (params !== undefined && params.giftMethod != null) {
       if (params.giftMethod === 'invitation') {
         this.props.gift(
@@ -375,7 +376,6 @@ export default class DonateTrees extends React.PureComponent {
       }
       return;
     }
-    sendState = { ...this.state.form };
     if (this.props.supportTreecounter.treecounterId) {
       sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
     }

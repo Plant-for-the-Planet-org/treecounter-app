@@ -9,6 +9,7 @@ import UserProfileImage from '../Common/UserProfileImage';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
 import { delimitNumbers } from '../../utils/utils';
+import { upwardArrow, downwardArrow } from '../../assets/index.js';
 
 export default class ChallengeCard extends React.Component {
   render() {
@@ -39,7 +40,7 @@ export default class ChallengeCard extends React.Component {
               </span>
               <div className="flex-row">
                 <UserProfileImage profileImage={avatar} />
-                <div>
+                <div className="challenge_details">
                   <div className="flex-row">
                     <span className="text-style text-padding">
                       {direction === 'target'
@@ -48,14 +49,20 @@ export default class ChallengeCard extends React.Component {
                     </span>
                     <span className="text-style text-padding">{fullname}</span>
                   </div>
-                  <span className="flex-row text-style text-padding">
-                    {moment(created).format('D MMM, YYYY')}
+                  <span className="flex-row">
+                    <img
+                      className="arrow_image"
+                      src={direction === 'target' ? downwardArrow : upwardArrow}
+                    />
+                    <span className="text-style text-padding">
+                      {moment(created).format('D MMM, YYYY')}
+                    </span>
                   </span>
                 </div>
               </div>
             </div>
             {direction === 'target' && status === 'pending' ? (
-              <div>
+              <div className="button_align">
                 <PrimaryButton
                   onClick={() =>
                     this.props.challengeStatus({ status: 'active' }, token)

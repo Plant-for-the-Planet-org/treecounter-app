@@ -41,8 +41,8 @@
 
 .challenge_card {
   .pftp-card-layout {
-    padding: 10px;
-    width: 400px;
+    padding: 24px;
+    width: 464px;
     margin: 20px;
     margin-bottom: 0;
   }
@@ -52,13 +52,28 @@
   }
 
   .limit-width {
-    width: 250px;
+    width: 310px;
+  }
+
+  .challenge_details {
+    margin: 5px 10px;
+  }
+
+  .arrow_image {
+    height: 15px;
+    padding: 8px 0 0 5px;
+  }
+
+  .button_align {
+    margin: auto;
   }
 
   .goal-style {
     font-size: 18px;
     font-weight: 600;
+    color: #89b53a;
     display: flex;
+    margin-bottom: 18px;
   }
 
   .text-padding {

@@ -59,24 +59,16 @@ export default (redeemStyles = EStyleSheet.create({
     textAlign: 'center'
   },
   inputStyle: {
-    borderRadius: 3,
-    borderWidth: 1.5,
-    borderColor: '$colorRedeemBorder',
-    borderStyle: 'solid',
     backgroundColor: '$colorRedeemInside',
     color: '$textColor',
-    margin: 10,
-    padding: 10,
-    textAlign: 'center',
-    paddingRight: 10
+    width: '90%',
+    paddingLeft: 25,
+    textAlign: 'center'
   },
-  glyphiconTouch: {},
   glyphiconStyle: {
-    position: 'absolute',
     padding: 10,
-    right: 20,
+    marginTop: 10,
     height: 25,
-    top: -42,
     width: 25
   },
   iconCrossStyle: {
@@ -84,8 +76,17 @@ export default (redeemStyles = EStyleSheet.create({
     height: '100%'
   },
   redeemInputView: {
-    position: 'relative',
-    width: '100%'
+    borderRadius: 3,
+    borderWidth: 1.5,
+    borderColor: '$colorRedeemBorder',
+    borderStyle: 'solid',
+    backgroundColor: '$colorRedeemInside',
+    color: '$textColor',
+    margin: 10,
+    width: '100%',
+    flex: 1,
+    flexDirection: 'row',
+    paddingRight: 10
   },
   loginButtons: {
     flex: 1,

@@ -49,6 +49,7 @@ export default class SignUp extends Component {
       Keyboard.dismiss();
     }
     this.props.onSignUpClicked(type, this._recaptchaToken);
+    this._captchaRef.refreshToken();
   }
 
   render() {
@@ -71,7 +72,8 @@ export default class SignUp extends Component {
         keyboardShouldPersistTaps={'handled'}
       >
         <ReCaptchaV3
-          captchaDomain={'https://www.plant-for-the-planet.org'}
+          ref={ref => (this._captchaRef = ref)}
+          captchaDomain={'https://www.trilliontreecampaign.org'}
           siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
           onReceiveToken={token => this.verifyCallback(token)}
         />

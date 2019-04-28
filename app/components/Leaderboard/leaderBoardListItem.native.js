@@ -20,7 +20,11 @@ export default class LeaderboardItem extends Component {
         <View style={[{ marginLeft: 10, marginRight: 5, width: '75%' }]}>
           <TouchableItem
             onPress={() =>
-              this.props.onPress(this.props.treeCounterId, this.props.uri)
+              this.props.onPress(
+                this.props.treeCounterId,
+                this.props.uri,
+                this.props.title
+              )
             }
             style={{ justifyContent: 'center' }}
           >

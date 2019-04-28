@@ -4,6 +4,8 @@
   "password_changed": "Your password has been changed successfully",
   "return_to_profile": "Return to My Profile",
   "new_project": "Add New Project",
+  "delete_plant_Project": "Delete Plant project",
+  "delete_plant_Project_confirm": "Are you sure you want to delete this project",
   "Location": "Location",
   "description": "Description",
   "gallery": "Image Gallery",

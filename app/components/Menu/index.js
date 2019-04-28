@@ -129,9 +129,7 @@ export default class Menu extends Component {
                     </li>
                   ) : (
                     <li key={'' + element.sequence + menuItem.sequence}>
-                      <i className="material-icons">
-                        {i18n.t('label.open_folder')}
-                      </i>
+                      <i className="material-icons">{'folder_open'}</i>
                       <a>{menuItem.caption}</a>
                     </li>
                   )

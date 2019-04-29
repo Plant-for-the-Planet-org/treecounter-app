@@ -316,7 +316,6 @@ class CompetitionFull extends React.Component {
               </CardLayout>
             ) : null}
             {competitionDetail &&
-            competitionDetail.access === 'invitation' &&
             competitionDetail.ownerTreecounterId ===
               this.props.treeCounter.id ? (
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
@@ -362,8 +361,7 @@ class CompetitionFull extends React.Component {
             {competitionDetail &&
             invitedCount > 0 &&
             competitionDetail.ownerTreecounterId !==
-              this.props.treeCounter.id &&
-            competitionDetail.access === 'invitation' ? (
+              this.props.treeCounter.id ? (
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>

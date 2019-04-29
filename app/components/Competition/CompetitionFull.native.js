@@ -150,7 +150,7 @@ class CompetitionFull extends React.Component {
     }
 
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
           <View>
             <CardLayout style={[snippetStyles.projectSnippetContainer]}>

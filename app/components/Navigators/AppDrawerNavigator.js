@@ -292,10 +292,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: SelectedPlantProject
       },
       [getLocalRoute('app_competition')]: {
-        screen: SelectedCompetition
+        screen: isLoggedIn ? SelectedCompetition : LoginContainer
       },
       [getLocalRoute('app_editCompetition')]: {
-        screen: EditCompetitionContainer
+        screen: isLoggedIn ? EditCompetitionContainer : LoginContainer
       },
       ['app_donate_detail']: {
         screen: DonationTreesContainer

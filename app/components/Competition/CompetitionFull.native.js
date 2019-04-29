@@ -156,13 +156,13 @@ class CompetitionFull extends React.Component {
             <CardLayout style={[snippetStyles.projectSnippetContainer]}>
               <View style={snippetStyles.projectSpecsContainer}>
                 {competitionDetail && competitionDetail.image ? (
-                  <View style={styles.projectImageContainer}>
+                  <View style={snippetStyles.projectImageContainer}>
                     <Image
-                      style={styles.teaser__projectImage}
+                      style={snippetStyles.teaser__projectImage}
                       source={{
                         uri: getImageUrl(
-                          'project',
-                          'large',
+                          'competition',
+                          'medium',
                           competitionDetail.image
                         )
                       }}

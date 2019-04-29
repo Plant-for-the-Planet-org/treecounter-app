@@ -51,7 +51,7 @@ export function signUp(
         });
     };
   } else {
-    window.alert('Password do not match');
+    NotificationManager.success('Password do not match', null, 5000);
   }
 }
 

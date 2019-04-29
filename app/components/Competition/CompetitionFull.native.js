@@ -333,6 +333,7 @@ class CompetitionFull extends React.Component {
                         currentUserProfile={this.props.currentUserProfile}
                         clearTextOnClick={true}
                         alreadyInvited={competitionDetail.allEnrollments}
+                        hideCompetitions
                       />
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>

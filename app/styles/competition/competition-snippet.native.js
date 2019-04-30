@@ -30,11 +30,15 @@ export default (selectCompetitionFull = EStyleSheet.create({
     paddingBottom: 16
   },
   projectImageContainer: {
-    height: Layout.window.width * 0.2,
-    width: '100%'
+    height: Layout.window.width * 0.4,
+    width: '100%',
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    overflow: 'hidden'
   },
   teaser__projectImage: {
-    flex: 1
+    flex: 1,
+    overflow: 'hidden'
   },
   treeCounterContainer: {
     flexDirection: 'row',

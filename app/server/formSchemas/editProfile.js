@@ -1506,15 +1506,6 @@ export default {
             maxLength: 255,
             propertyOrder: 1
           },
-          subType: {
-            enum: ['company-other'],
-            enum_titles: ['Other'],
-            type: 'string',
-            title: null,
-            icon: null,
-            help: null,
-            propertyOrder: 2
-          },
           address: {
             type: 'string',
             title: 'label.address',

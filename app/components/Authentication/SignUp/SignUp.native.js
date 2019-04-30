@@ -67,9 +67,9 @@ export default class SignUp extends Component {
       icon = SignupOrganization;
     }
     return (
-      <ScrollView
-        // contentContainerStyle={[{ flex: 1 }]}
-        keyboardShouldPersistTaps={'handled'}
+      <KeyboardAwareScrollView
+      // contentContainerStyle={[{ flex: 1 }]}
+      // keyboardShouldPersistTaps={'handled'}
       >
         <ReCaptchaV3
           ref={ref => (this._captchaRef = ref)}
@@ -118,7 +118,7 @@ export default class SignUp extends Component {
             </View>
           </View>
         </ImageBackground>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }

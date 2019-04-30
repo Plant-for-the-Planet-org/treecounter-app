@@ -188,7 +188,7 @@ export default class Menu extends Component {
               />
             ) : null}
 
-            {this.props.userProfile &&
+            {/* {this.props.userProfile &&
             this.props.userProfile.supportedTreecounter ? (
               <LargeMenuItem
                 onPress={this.onPressMenu.bind(this, {
@@ -200,7 +200,7 @@ export default class Menu extends Component {
                 }
                 iconUrl={icons.communityMenu}
               />
-            ) : null}
+            ) : null} */}
 
             <LargeMenuItem
               onPress={this.onPressMenu.bind(this, {

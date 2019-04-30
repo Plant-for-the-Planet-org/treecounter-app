@@ -105,6 +105,7 @@ class ChallengeUser extends Component {
                 currentUserProfile={this.props.currentUserProfile}
                 searchSuggestion={this.state.searchSuggestionName}
                 alreadyInvited={[]}
+                hideCompetitions
               />
               <View style={challengeStyles.flexContainerStyle}>
                 <Text>Challenge to plant </Text>

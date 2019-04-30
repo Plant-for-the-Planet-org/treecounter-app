@@ -147,44 +147,72 @@ class SelectTemplateIOS extends React.PureComponent {
       );
     }
     return (
-      <View style={datePickerStyle.datePickerContainer}>
-        <TouchableOpacity
-          style={{
-            ...touchableStyle,
-            flexDirection: 'row',
-            justifyContent: 'space-between'
-          }}
-          disabled={locals.disabled}
-          onPress={this._onPress}
-        >
-          <Text style={dateValueStyle}>{formattedValue}</Text>
-          <Image
-            source={this.state.isCollapsed ? foldout : foldin}
-            style={{ height: 18, width: 18 }}
-            resizeMode={'contain'}
-          />
-        </TouchableOpacity>
-        <Animated.View
-          style={{ height: this.state.height, overflow: 'hidden' }}
-        >
-          <Picker
-            mode="dropdown"
-            selectedValue={locals.value}
-            onValueChange={itemValue => locals.onChange(itemValue)}
-            style={[datepickerStyle, { height: height }]}
-          >
-            {this.props.options.map(option => (
-              <Picker.Item
-                itemStyle={styles.itemStyle}
-                key={option.value}
-                label={i18n.t(option.text)}
-                color={'#686060'}
-                value={option.value}
-              />
-            ))}
-          </Picker>
-        </Animated.View>
-      </View>
+      // <View style={datePickerStyle.datePickerContainer}>
+      //   <TouchableOpacity
+      //     style={{
+      //       ...touchableStyle,
+      //       flexDirection: 'row',
+      //       justifyContent: 'space-between'
+      //     }}
+      //     disabled={locals.disabled}
+      //     onPress={this._onPress}
+      //   >
+      //     <Text style={dateValueStyle}>{formattedValue}</Text>
+      //     <Image
+      //       source={this.state.isCollapsed ? foldout : foldin}
+      //       style={{ height: 18, width: 18 }}
+      //       resizeMode={'contain'}
+      //     />
+      //   </TouchableOpacity>
+      //   <Animated.View
+      //     style={{ height: this.state.height, overflow: 'hidden' }}
+      //   >
+      //     <Picker
+      //       mode="dropdown"
+      //       selectedValue={locals.value}
+      //       onValueChange={itemValue => locals.onChange(itemValue)}
+      //       style={[datepickerStyle, { height: height }]}
+      //     >
+      //       {this.props.options.map(option => (
+      //         <Picker.Item
+      //           itemStyle={styles.itemStyle}
+      //           key={option.value}
+      //           label={i18n.t(option.text)}
+      //           color={'#686060'}
+      //           value={option.value}
+      //         />
+      //       ))}
+      //     </Picker>
+      //   </Animated.View>
+      // </View>
+      <Dropdown
+        containerStyle={[
+          {
+            width: '100%',
+            height: 35,
+            marginLeft: 10,
+            marginBottom: 10,
+            paddingRight: 10
+          },
+          locals.config.style
+        ]}
+        dropdownOffset={{
+          top: 10,
+          left: 0
+        }}
+        itemTextStyle={{
+          fontSize: 13,
+          color: '#686060'
+        }}
+        value={i18n.t(locals.value)}
+        textColor="rgba(104,96,96, 0.8)"
+        selectedItemColor="rgba(104,96,96, 0.8)"
+        labelExtractor={item => i18n.t(item.text)}
+        valueExtractor={item => item.value}
+        onChangeText={item => locals.onChange(item)}
+        // label={i18n.t(locals.value.text)}
+        data={this.props.options}
+      />
     );
   }
 }

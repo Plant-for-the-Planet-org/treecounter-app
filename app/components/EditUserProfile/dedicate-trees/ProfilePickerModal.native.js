@@ -54,6 +54,7 @@ class ProfilePickerModal extends Component {
             <SearchUser
               onSearchResultClick={this.onSearchResultClick.bind(this)}
               currentUserProfile={this.props.currentUserProfile}
+              hideCompetitions
             />
             {this.state.selectedSuggestion ? (
               <View style={styles.containerStyle}>

@@ -48,7 +48,6 @@ export default class AppPayments extends Component {
 
   render() {
     let { paymentInfo } = this.props;
-    console.log(paymentInfo);
     let paymentMethods;
     if (paymentInfo) {
       let countryCurrency = `${paymentInfo.country}/${paymentInfo.currency}`;
@@ -107,7 +106,10 @@ export default class AppPayments extends Component {
                     treeCount: paymentInfo.treeCount,
                     tpoName: paymentInfo.tpoName,
                     giftTreeCounterName: paymentInfo.giftRecipient,
-                    plantProjectName: paymentInfo.plantProjectName
+                    plantProjectName: paymentInfo.plantProjectName,
+                    supportTreecounter: paymentInfo.supportedTreecounterName
+                      ? { displayName: paymentInfo.supportedTreecounterName }
+                      : null
                   }}
                   onSuccess={paymentResponse =>
                     this.handlePaymentApproved(paymentResponse)

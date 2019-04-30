@@ -18,8 +18,54 @@ import {
 import { fetchCompetitionDetail } from '../../actions/competition';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import imagestyles from '../../styles/file_picker.native';
+import styles from '../../styles/competition/mine.native';
+import imageUpload from '../../assets/images/icons/upload_image.png';
 let Form = t.form.Form;
+const ImagePicker = require('react-native-image-picker');
+const options = {
+  title: 'Add Image',
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
+const getCompFormImageLayoutTemplate = () => {
+  console.log('formlayout');
+  const formLayoutTreesTemplate = locals => {
+    console.log(locals);
+    return (
+      <View style={imagestyles.filePickerContainer}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.addImageTextStyle}>Add Image</Text>
+        </View>
+        <TouchableOpacity
+          style={{ flex: 1 }}
+          onPress={event => {
+            ImagePicker.showImagePicker(options, response => {
+              // console.log('Response = ', response);
 
+              if (response.didCancel) {
+                //console.log('User cancelled image picker');
+              } else if (response.error) {
+                //console.log('ImagePicker Error: ', response.error);
+              } else if (response.customButton) {
+                // console.log('User tapped custom button: ', response.customButton);
+              } else {
+                let source = { uri: response.uri };
+                locals.onChange('data:image/jpeg;base64,' + response.data);
+              }
+            });
+          }}
+        >
+          <Image source={imageUpload} style={{ height: 40, width: 40 }} />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  return formLayoutTreesTemplate;
+};
 class EditCompetition extends Component {
   constructor(props) {
     super(props);
@@ -78,13 +124,17 @@ class EditCompetition extends Component {
   }
 
   render() {
+    let schemaOptions = this.props.competitionFormSchemaOptions;
+    if (schemaOptions.fields.imageFile) {
+      schemaOptions.fields.imageFile.template = getCompFormImageLayoutTemplate();
+    }
     return (
       <KeyboardAwareScrollView enableOnAndroid={true}>
         <CardLayout style={{ flex: 1 }}>
           <Form
             ref={this.createCompetitionForm}
             type={competitionFormSchema}
-            options={this.props.competitionFormSchemaOptions}
+            options={schemaOptions}
             value={this.state.formValue}
           />
           <PrimaryButton onClick={() => this.onCreateCompetition()}>

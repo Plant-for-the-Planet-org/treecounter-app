@@ -7,6 +7,7 @@ import StripeCC from './Gateways/StripeCC';
 import StripeSepa from './Gateways/StripeSepa';
 import Paypal from './Gateways/Paypal';
 import Offline from './Gateways/Offline';
+import i18n from '../../locales/i18n';
 
 import { StripeProvider, Elements } from './Stripe/stripeDefs';
 
@@ -122,7 +123,15 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             {giftToName && <div>{gatewayProps.context.plantProjectName}</div>}
             {giftToName && (
               <div>
-                {gatewayProps.context.treeCount} Trees Gift To {giftToName}
+                {gatewayProps.context.supportTreecounter
+                  ? i18n.t('label.support_user_trees', {
+                      user: giftToName,
+                      count: gatewayProps.context.treeCount
+                    })
+                  : i18n.t('label.gift_user_trees', {
+                      user: giftToName,
+                      count: gatewayProps.context.treeCount
+                    })}
               </div>
             )}
             {!giftToName && (

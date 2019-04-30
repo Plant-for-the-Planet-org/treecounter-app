@@ -463,6 +463,7 @@ export default class GiftTrees extends Component {
                       <SearchAutosuggest
                         onSuggestionClicked={this.suggestionClicked}
                         clearSuggestions={false}
+                        hideCompetitions
                       />
                       <div className="pftp-textarea">
                         <textarea

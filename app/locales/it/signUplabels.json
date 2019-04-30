@@ -9,12 +9,10 @@
   "password_repeat": "Ripeti la password",
   "firstname": "Nome",
   "lastname": "Cognome",
-  "company_or_orga_name": "Nome",
   "i_am_a": "Sono",
   "i_am": "Sono",
   "tpo_title": "Organizzazione di piantagione di alberi",
   "individual_title": "Solo io",
-  "company_title": "Società",
   "education_title": "Scuola",
   "already_have_account": "Hai già un account?",
   "education": "Educazione"

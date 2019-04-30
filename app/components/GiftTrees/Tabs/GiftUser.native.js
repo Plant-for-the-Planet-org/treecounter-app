@@ -81,6 +81,7 @@ export default class GiftUser extends Component {
             <SearchUser
               onSearchResultClick={this.onSearchResultClick}
               currentUserProfile={this.props.currentUserProfile}
+              hideCompetitions
             />
             <View>
               <Text

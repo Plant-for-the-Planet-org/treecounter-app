@@ -150,19 +150,19 @@ class CompetitionFull extends React.Component {
     }
 
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
           <View>
             <CardLayout style={[snippetStyles.projectSnippetContainer]}>
               <View style={snippetStyles.projectSpecsContainer}>
                 {competitionDetail && competitionDetail.image ? (
-                  <View style={styles.projectImageContainer}>
+                  <View style={snippetStyles.projectImageContainer}>
                     <Image
-                      style={styles.teaser__projectImage}
+                      style={snippetStyles.teaser__projectImage}
                       source={{
                         uri: getImageUrl(
-                          'project',
-                          'large',
+                          'competition',
+                          'medium',
                           competitionDetail.image
                         )
                       }}
@@ -316,7 +316,6 @@ class CompetitionFull extends React.Component {
               </CardLayout>
             ) : null}
             {competitionDetail &&
-            competitionDetail.access === 'invitation' &&
             competitionDetail.ownerTreecounterId ===
               this.props.treeCounter.id ? (
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
@@ -333,6 +332,7 @@ class CompetitionFull extends React.Component {
                         currentUserProfile={this.props.currentUserProfile}
                         clearTextOnClick={true}
                         alreadyInvited={competitionDetail.allEnrollments}
+                        hideCompetitions
                       />
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>
@@ -362,8 +362,7 @@ class CompetitionFull extends React.Component {
             {competitionDetail &&
             invitedCount > 0 &&
             competitionDetail.ownerTreecounterId !==
-              this.props.treeCounter.id &&
-            competitionDetail.access === 'invitation' ? (
+              this.props.treeCounter.id ? (
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>

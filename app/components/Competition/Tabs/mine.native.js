@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/competition/mine.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
+import imagestyles from '../../../styles/file_picker.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import ActionButton from 'react-native-action-button';
 import CardLayout from '../../Common/Card';
@@ -16,7 +17,77 @@ import {
 } from '../../../server/parsedSchemas/competition';
 import i18n from '../../../locales/i18n';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
+import UserProfileImage from '../../Common/UserProfileImage';
+import close_green from '../../../assets/images/icons/close_green.png';
+import imageUpload from '../../../assets/images/icons/upload_image.png';
 let Form = t.form.Form;
+const ImagePicker = require('react-native-image-picker');
+const options = {
+  title: 'Add Image',
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
+const getCompFormLayoutTemplate = () => {
+  const formLayoutTreesTemplate = locals => {
+    return (
+      <View style={styles.competitonCreateMain}>
+        {locals.inputs.name}
+        <View style={styles.competition_create_row}>
+          <View style={{ flex: 1 }}>{locals.inputs.goal}</View>
+          <View style={{ flex: 1 }}>{locals.inputs.endDate}</View>
+        </View>
+        <View style={styles.competition_create_row}>
+          <View style={{ flex: 1 }}>{locals.inputs.access}</View>
+        </View>
+        <View style={styles.competition_image}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.addImageTextStyle}>Add Image</Text>
+          </View>
+          <View style={{ flex: 1 }}>{locals.input.imageFile}</View>
+        </View>
+        {locals.inputs.description}
+      </View>
+    );
+  };
+  return formLayoutTreesTemplate;
+};
+const getCompFormImageLayoutTemplate = () => {
+  console.log('formlayout');
+  const formLayoutTreesTemplate = locals => {
+    console.log(locals);
+    return (
+      <View style={imagestyles.filePickerContainer}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.addImageTextStyle}>Add Image</Text>
+        </View>
+        <TouchableOpacity
+          style={{ flex: 1 }}
+          onPress={event => {
+            ImagePicker.showImagePicker(options, response => {
+              // console.log('Response = ', response);
+
+              if (response.didCancel) {
+                //console.log('User cancelled image picker');
+              } else if (response.error) {
+                //console.log('ImagePicker Error: ', response.error);
+              } else if (response.customButton) {
+                // console.log('User tapped custom button: ', response.customButton);
+              } else {
+                let source = { uri: response.uri };
+                locals.onChange('data:image/jpeg;base64,' + response.data);
+              }
+            });
+          }}
+        >
+          <Image source={imageUpload} style={{ height: 40, width: 40 }} />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  return formLayoutTreesTemplate;
+};
 
 export default class MineCompetitions extends Component {
   constructor(props) {
@@ -117,6 +188,11 @@ export default class MineCompetitions extends Component {
 
   render() {
     let { featuredProjects, featuredCompetitions } = this.state;
+    let schemaOptions = this.props.competitionFormSchemaOptions;
+    if (schemaOptions.fields.imageFile) {
+      schemaOptions.fields.imageFile.template = getCompFormImageLayoutTemplate();
+    }
+
     return !this.state.showCompetitionForm ? (
       <View style={styles.mineContainer}>
         <ScrollView
@@ -156,7 +232,7 @@ export default class MineCompetitions extends Component {
           <Form
             ref={this.createCompetitionForm}
             type={competitionFormSchema}
-            options={this.props.competitionFormSchemaOptions}
+            options={schemaOptions}
             value={this.state.formValue}
           />
           <PrimaryButton onClick={() => this.onCreateCompetition()}>

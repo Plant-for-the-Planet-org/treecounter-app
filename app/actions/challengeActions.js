@@ -9,6 +9,7 @@ import {
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { treecounterSchema, challengeSchema } from '../schemas';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 
 export function challenge(challengeDetails) {
   let route = 'challenge_post';
@@ -18,12 +19,18 @@ export function challenge(challengeDetails) {
     let request = postAuthenticatedRequest(route, challengeDetails);
     request
       .then(response => {
-        dispatch(setProgressModelState(false));
         dispatch(mergeEntities(normalize(response.data, treecounterSchema)));
-      })
-      .catch(response => {
-        debug('error: ', response);
         dispatch(setProgressModelState(false));
+        NotificationManager.success(
+          'Challenge Created successfully',
+          'Success',
+          5000
+        );
+      })
+      .catch(error => {
+        debug('error: ', error);
+        dispatch(setProgressModelState(false));
+        NotificationManager.error(error.response.data.message, 'Error', 5000);
       });
   };
 }

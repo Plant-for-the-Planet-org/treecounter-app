@@ -26,7 +26,6 @@ import {
 } from '../../actions/competition';
 import CompetitionParticipant from '../../components/Competition/CompetitionParticipant.native';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
-import Challenge from '../../components/Challenge/createChallenge';
 import EditCompetition from '../../components/Competition/EditCompetition.native';
 import { handleServerResponseError } from '../../helpers/utils';
 import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
@@ -65,7 +64,8 @@ class EditCompetitionContainer extends Component {
       access: value.access,
       description: value.description,
       contact: value.contact,
-      email: value.email
+      email: value.email,
+      imageFile: value.imageFile
     };
     this.props
       .editCompetition(json, params, this.props.navigation)

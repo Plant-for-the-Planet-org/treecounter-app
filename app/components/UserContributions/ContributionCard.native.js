@@ -142,7 +142,8 @@ class ContributionCard extends React.Component {
           <Text
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
+                treeCounterId: giveeSlug,
+                titleParam: givee
               })
             }
           >
@@ -167,7 +168,8 @@ class ContributionCard extends React.Component {
           <Text
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
+                treeCounterId: giveeSlug,
+                titleParam: givee
               })
             }
           >
@@ -184,7 +186,8 @@ class ContributionCard extends React.Component {
           <Text
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
+                treeCounterId: giveeSlug,
+                titleParam: givee
               })
             }
           >
@@ -203,7 +206,8 @@ class ContributionCard extends React.Component {
                     this.props.navigation.navigate(
                       getLocalRoute('app_treecounter'),
                       {
-                        treeCounterId: giveeSlug
+                        treeCounterId: giveeSlug,
+                        titleParam: givee
                       }
                     )
                   }

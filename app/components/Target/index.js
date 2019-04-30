@@ -38,7 +38,7 @@ export default class Target extends Component {
     let { countTarget, targetYear, targetComment } = this.props.treecounter;
 
     this.state = {
-      label: countTarget !== 0 ? i18n.t('label.update') : i18n.t('label.set'),
+      label: countTarget !== 0 ? i18n.t('label.update') : i18n.t('label.save'),
       initialValues: { countTarget, targetYear, targetComment }
     };
   }

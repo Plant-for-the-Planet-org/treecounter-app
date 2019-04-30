@@ -8,18 +8,82 @@ export default (editProfileStyle = EStyleSheet.create({
     borderRadius: 6,
     padding: 10,
     margin: 0,
-    height: 30
+    height: 40
+  },
+  projectSnippetContainer: {
+    flexDirection: 'column',
+
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowOpacity: 0.5,
+    elevation: 1,
+    padding: 0,
+    borderTopRightRadius: 4,
+    borderTopLeftRadius: 4
   },
   primaryButtonText: {
     fontSize: 15
   },
   textStyle: {
-    fontSize: 15,
-    color: '#666666'
+    fontSize: 14,
+    color: '$cardTextColor',
+    maxWidth: '100%'
+  },
+  textDedicateStyle: {
+    fontSize: 14,
+    color: '#ff6666',
+    maxWidth: '100%',
+    textAlign: 'center'
+  },
+  textNotDedicateStyle: {
+    fontSize: 14,
+    color: '#999999',
+    maxWidth: '100%',
+    textAlign: 'center'
+  },
+  topCompetitorScore: {
+    width: '40%'
+  },
+  topCompetitorName: {
+    width: '60%',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  dedicateTreeName: {
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  profileImageStyle: {
+    width: 40,
+    height: 40,
+    borderRadius: 0,
+    borderWidth: 0,
+    marginLeft: 10
+  },
+  participantNameContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    padding: 5
+  },
+  searchUserStyle: {
+    flex: 1,
+    flexDirection: 'column'
   },
   containerStyle: {
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    padding: 16,
+    width: '100%',
+    justifyContent: 'space-between'
+  },
+  containerDedicateStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 25,
+    width: '100%',
+    justifyContent: 'space-between'
   }
 }));

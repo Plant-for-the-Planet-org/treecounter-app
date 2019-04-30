@@ -51,6 +51,7 @@ export function deleteContribution(plantContributionId) {
         plantContribution: plantContributionId
       })
         .then(res => {
+          const { statusText } = res;
           const { merge, unlink } = res.data;
           const toBeDeleted = res.data['delete'];
           dispatch(unlinkEntity(unlink));
@@ -70,6 +71,7 @@ export function deleteContribution(plantContributionId) {
         })
         .catch(err => {
           debug(err);
+          NotificationManager.error(error.response.data.message, 'Error', 5000);
           dispatch(setProgressModelState(false));
           reject(err);
         });

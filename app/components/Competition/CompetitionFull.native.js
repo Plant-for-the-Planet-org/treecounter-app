@@ -50,7 +50,8 @@ class CompetitionFull extends React.Component {
     const competitionDetail = this.props.competitionDetail;
     let participantCount = 0,
       requestCount = 0,
-      inviteCount = 0;
+      inviteCount = 0,
+      invitedCount = 0;
     if (competitionDetail && competitionDetail.allEnrollments) {
       for (let i = 0; i < competitionDetail.allEnrollments.length; i++) {
         if (competitionDetail.allEnrollments[i].status === 'enrolled') {
@@ -58,6 +59,12 @@ class CompetitionFull extends React.Component {
         } else if (competitionDetail.allEnrollments[i].status === 'pending') {
           requestCount++;
         } else if (competitionDetail.allEnrollments[i].status === 'invited') {
+          if (
+            competitionDetail.allEnrollments[i].treecounterSlug ===
+            this.props.treeCounter.slug
+          ) {
+            invitedCount++;
+          }
           inviteCount++;
         }
       }
@@ -143,19 +150,19 @@ class CompetitionFull extends React.Component {
     }
 
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
           <View>
             <CardLayout style={[snippetStyles.projectSnippetContainer]}>
               <View style={snippetStyles.projectSpecsContainer}>
                 {competitionDetail && competitionDetail.image ? (
-                  <View style={styles.projectImageContainer}>
+                  <View style={snippetStyles.projectImageContainer}>
                     <Image
-                      style={styles.teaser__projectImage}
+                      style={snippetStyles.teaser__projectImage}
                       source={{
                         uri: getImageUrl(
-                          'project',
-                          'large',
+                          'competition',
+                          'medium',
                           competitionDetail.image
                         )
                       }}
@@ -183,7 +190,8 @@ class CompetitionFull extends React.Component {
                       numberOfLines={1}
                       style={snippetStyles.project_teaser__contentByText}
                     >
-                      by {competitionDetail && competitionDetail.ownerName}
+                      {i18n.t('label.by')}{' '}
+                      {competitionDetail && competitionDetail.ownerName}
                     </Text>
                   </View>
                   <View style={snippetStyles.projectDescriptionContainer}>
@@ -222,7 +230,8 @@ class CompetitionFull extends React.Component {
                         style={{ width: 15, height: 15 }}
                       />
                       <Text style={snippetStyles.bottomText}>
-                        Ends {competitionDetail && competitionDetail.endDate}
+                        {i18n.t('label.ends')}{' '}
+                        {competitionDetail && competitionDetail.endDate}
                       </Text>
                     </View>
 
@@ -236,7 +245,7 @@ class CompetitionFull extends React.Component {
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
                     <Text style={styles.textHeadingParticipants}>
-                      PARTICIPANTS ({competitionDetail &&
+                      {i18n.t('label.participants')} ({competitionDetail &&
                         competitionDetail.competitorCount})
                     </Text>
                   </View>
@@ -275,7 +284,7 @@ class CompetitionFull extends React.Component {
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
                     <Text style={styles.textHeadingParticipants}>
-                      REQUESTS TO JOIN ({competitionDetail &&
+                      {i18n.t('label.requests_to_join')} ({competitionDetail &&
                         competitionDetail.competitorCount})
                     </Text>
                   </View>
@@ -307,13 +316,14 @@ class CompetitionFull extends React.Component {
               </CardLayout>
             ) : null}
             {competitionDetail &&
-            competitionDetail.access === 'invitation' &&
             competitionDetail.ownerTreecounterId ===
               this.props.treeCounter.id ? (
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
-                    <Text style={styles.textHeadingParticipants}>INVITE</Text>
+                    <Text style={styles.textHeadingParticipants}>
+                      {i18n.t('label.invite')}
+                    </Text>
                   </View>
                   <View style={styles.topCompetitorContainer}>
                     <View>
@@ -322,6 +332,7 @@ class CompetitionFull extends React.Component {
                         currentUserProfile={this.props.currentUserProfile}
                         clearTextOnClick={true}
                         alreadyInvited={competitionDetail.allEnrollments}
+                        hideCompetitions
                       />
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>
@@ -349,14 +360,15 @@ class CompetitionFull extends React.Component {
               </CardLayout>
             ) : null}
             {competitionDetail &&
-            inviteCount > 0 &&
+            invitedCount > 0 &&
             competitionDetail.ownerTreecounterId !==
-              this.props.treeCounter.id &&
-            competitionDetail.access === 'invitation' ? (
+              this.props.treeCounter.id ? (
               <CardLayout style={[snippetStyles.projectSnippetContainer]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
-                    <Text style={styles.textHeadingParticipants}>INVITED</Text>
+                    <Text style={styles.textHeadingParticipants}>
+                      {i18n.t('label.invited')}
+                    </Text>
                   </View>
                   <View style={styles.topCompetitorContainer}>
                     <View>

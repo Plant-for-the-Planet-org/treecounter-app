@@ -10,6 +10,7 @@ import { withNavigation } from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import challengeStyles from '../../../styles/challenge';
 import TabContainer from '../../../containers/Menu/TabContainer';
+import i18n from '../../../locales/i18n';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 
 class ChallengeUser extends Component {
@@ -61,23 +62,23 @@ class ChallengeUser extends Component {
       requestData.challengeMethod = 'direct';
       requestData.goal = this.state.treeCount;
       this.props.challengeUser(requestData);
-      this.setState({
-        selectedSuggestion: null,
-        treeCount: 1000,
-        isChecked: false,
-        byYear: '',
-        searchSuggestionName: ''
-      });
-      let currentYear = new Date().getFullYear(),
-        years = [];
-      let endYear = currentYear + 10;
-
-      while (currentYear <= endYear) {
-        years.push(currentYear++);
-      }
-      this.years = years.map(item => {
-        return { value: item };
-      });
+      // this.setState({
+      //   selectedSuggestion: null,
+      //   treeCount: 1000,
+      //   isChecked: false,
+      //   byYear: '',
+      //   searchSuggestionName: ''
+      // });
+      // let currentYear = new Date().getFullYear(),
+      //   years = [];
+      // let endYear = currentYear + 10;
+      //
+      // while (currentYear <= endYear) {
+      //   years.push(currentYear++);
+      // }
+      // this.years = years.map(item => {
+      //   return { value: item };
+      // });
     } else {
       NotificationManager.error('Please select user', 'Error', 5000);
     }
@@ -104,6 +105,7 @@ class ChallengeUser extends Component {
                 currentUserProfile={this.props.currentUserProfile}
                 searchSuggestion={this.state.searchSuggestionName}
                 alreadyInvited={[]}
+                hideCompetitions
               />
               <View style={challengeStyles.flexContainerStyle}>
                 <Text>Challenge to plant </Text>
@@ -117,7 +119,7 @@ class ChallengeUser extends Component {
                   value={delimitNumbers(this.state.treeCount)}
                   autoCapitalize={'sentences'}
                 />
-                <Text>Trees</Text>
+                <Text>{i18n.t('label.trees')}</Text>
               </View>
               <View style={challengeStyles.flexContainerStyle}>
                 <CheckBox
@@ -150,7 +152,7 @@ class ChallengeUser extends Component {
                 />
               </View>
               <PrimaryButton onClick={this.onNextClick}>
-                Challenge
+                {i18n.t('label.challenge_heading')}
               </PrimaryButton>
             </View>
           </CardLayout>

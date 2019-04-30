@@ -15,6 +15,7 @@ import { getSuggestions, profileTypeToImage } from '../../helpers/utils';
 import { getImageUrl } from '../../actions/apiRouting';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
+import i18n from '../../locales/i18n';
 import styles from '../../styles/header/search_layout.native';
 import _ from 'lodash';
 import { updateRoute } from '../../helpers/routerHelper';
@@ -66,7 +67,8 @@ class SearchLayout extends React.Component {
     if (suggestion.category === 'profile') {
       this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
         treeCounterId: suggestion.slug || suggestion.id,
-        suggestion
+        suggestion,
+        titleParam: suggestion.name
       });
     } else if (suggestion.category === 'competition') {
       this.props.navigation.navigate(getLocalRoute('app_competition'), {
@@ -85,6 +87,7 @@ class SearchLayout extends React.Component {
             onSubmit={this._handleSubmit}
             placeholderTextColor={this.props.searchInputPlaceholderTextColor}
             textColor={this.props.searchInputTextColor}
+            placeholderValue={i18n.t('label.search')}
             selectionColor={this.props.searchInputSelectionColor}
             underlineColorAndroid={
               this.props.searchInputUnderlineColorAndroid ||

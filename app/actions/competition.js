@@ -170,6 +170,8 @@ export function createCompetition(value, navigation) {
             5000
           );
           dispatch(fetchMineCompetitions());
+          dispatch(fetchCompetitions('all'));
+          dispatch(fetchCompetitions('featured'));
         })
         .catch(error => {
           debug(error);

@@ -18,8 +18,15 @@ class CompetitionParticipant extends React.Component {
   }
 
   supportButton() {
-    this.props.supportTreecounterAction(this.props.competitor.treecounterSlug);
-    updateRoute('app_donateTrees', this.props.navigation);
+    let supportObject = {
+      id: this.props.competitor.treecounterId,
+      displayName: this.props.competitor.treecounterDisplayName
+    };
+    this.props.supportTreecounterAction(supportObject);
+    updateRoute('app_donateTrees', this.props.navigation, 0, {
+      titleParam:
+        'Support Trees To ' + this.props.competitor.treecounterDisplayName
+    });
   }
   plantButton() {
     updateRoute('app_donateTrees', this.props.navigation);
@@ -82,14 +89,14 @@ class CompetitionParticipant extends React.Component {
               this.props.competitor && this.props.competitor.treecounterAvatar
             }
             style={styles.profileImageStyle}
-            imageStyle={{ borderRadius: 15 }}
+            imageStyle={{ borderRadius: 16 }}
           />
 
           <View style={styles.participantNameContainer}>
             <Text style={styles.topCompetitorNameText}>
               {this.props.competitor.treecounterSlug ===
               this.props.treeCounter.slug
-                ? 'Me'
+                ? i18n.t('label.me')
                 : this.props.competitor.treecounterDisplayName}
             </Text>
             {this.props.type === 'participants' ||

@@ -40,8 +40,12 @@ export default class ChallengeCard extends React.Component {
           <View style={challengesStyle.limitWidth}>
             <Text style={challengesStyle.goalStyle}>
               {delimitNumbers(goal) +
-                ' Trees' +
-                (end_date !== null ? ' by ' + end_date : '')}
+                ' ' +
+                i18n.t('label.trees') +
+                ' ' +
+                (end_date !== null
+                  ? ' ' + i18n.t('label.by') + ' ' + end_date
+                  : '')}
             </Text>
             <View style={challengesStyle.flexStyle}>
               <UserProfileImage
@@ -52,7 +56,10 @@ export default class ChallengeCard extends React.Component {
               <View>
                 <View style={challengesStyle.textPadding}>
                   <Text style={challengesStyle.textStyle}>
-                    {direction === 'target' ? 'from ' : 'to '} {fullname}
+                    {direction === 'target'
+                      ? i18n.t('label.from') + ' '
+                      : i18n.t('label.to') + ' '}{' '}
+                    {fullname}
                   </Text>
                 </View>
                 <View style={challengesStyle.challengeDate}>
@@ -84,7 +91,7 @@ export default class ChallengeCard extends React.Component {
                   this.props.challengeStatus({ status: 'active' }, token)
                 }
               >
-                Accept
+                {i18n.t('label.accept')}
               </PrimaryButton>
               <SecondaryButton
                 buttonStyle={challengesStyle.buttonStyle}
@@ -93,7 +100,7 @@ export default class ChallengeCard extends React.Component {
                   this.props.challengeStatus({ status: 'declined' }, token)
                 }
               >
-                Reject
+                {i18n.t('label.reject')}
               </SecondaryButton>
             </View>
           ) : (

@@ -286,7 +286,7 @@ export default class DonateTrees extends Component {
     }
     this.props.donate(
       {
-        ...this.state.form,
+        ...sendState,
         paymentResponse,
         amount: this.state.selectedAmount,
         currency: this.state.selectedCurrency
@@ -414,7 +414,9 @@ export default class DonateTrees extends Component {
             {pageHeadings[this.state.pageIndex].description}
           </DescriptionHeading>
         </TextHeading>
-        {this.props.paymentStatus && this.props.paymentStatus.message ? (
+        {this.props.paymentStatus &&
+        !this.props.paymentStatus.status &&
+        this.props.paymentStatus.message ? (
           <CardLayout>
             <div className="payment-success">
               <img src={attention} />

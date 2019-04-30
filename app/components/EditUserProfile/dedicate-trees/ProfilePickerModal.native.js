@@ -7,10 +7,13 @@ import { connect } from 'react-redux';
 import SearchUser from '../../GiftTrees/Tabs/SearchUser';
 import { currentUserProfileSelector } from '../../../selectors';
 
+import i18n from '../../../locales/i18n';
 import { updateProfileDedication } from '../../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 import CardLayout from '../../Common/Card';
+import scrollStyle from '../../../styles/common/scrollStyle';
 import TabContainer from '../../../containers/Menu/TabContainer';
+import UserProfileImage from '../../Common/UserProfileImage.native';
 
 class ProfilePickerModal extends Component {
   constructor(props) {
@@ -19,11 +22,14 @@ class ProfilePickerModal extends Component {
   }
 
   onSearchResultClick(event) {
+    console.log(event);
     this.setState({ selectedSuggestion: event });
   }
+
   updateProfile() {
     this.setState({ editMode: true });
   }
+
   onDedicateClick() {
     this.props.updateProfileDedication({
       supportedTreecounter: this.state.selectedSuggestion.id
@@ -33,53 +39,87 @@ class ProfilePickerModal extends Component {
 
   render() {
     const { currentUserProfile } = this.props;
+    console.log(currentUserProfile);
     const pickupProfileView = (
-      <CardLayout>
-        <View>
-          <SearchUser
-            onSearchResultClick={this.onSearchResultClick.bind(this)}
-            currentUserProfile={this.props.currentUserProfile}
-          />
-          {this.state.selectedSuggestion ? (
-            <View style={styles.containerStyle}>
-              <Text style={styles.textStyle}>
-                {this.state.selectedSuggestion.name}
-              </Text>
-              <PrimaryButton
-                buttonStyle={styles.buttonStyle}
-                onClick={this.onDedicateClick.bind(this)}
-              >
-                {'Dedicate'}
-              </PrimaryButton>
-            </View>
-          ) : null}
+      <View>
+        <View style={styles.containerDedicateStyle}>
+          <View style={styles.dedicateTreeName}>
+            <Text style={styles.textNotDedicateStyle}>
+              {i18n.t('label.has_not_dedicated')}
+            </Text>
+          </View>
         </View>
-      </CardLayout>
+        <CardLayout style={[styles.projectSnippetContainer]}>
+          <View style={styles.searchUserStyle}>
+            <SearchUser
+              onSearchResultClick={this.onSearchResultClick.bind(this)}
+              currentUserProfile={this.props.currentUserProfile}
+              hideCompetitions
+            />
+            {this.state.selectedSuggestion ? (
+              <View style={styles.containerStyle}>
+                <View style={styles.topCompetitorName}>
+                  <Text style={styles.textStyle}>
+                    {this.state.selectedSuggestion.name}
+                  </Text>
+                </View>
+                <View style={styles.topCompetitorScore}>
+                  <PrimaryButton
+                    buttonStyle={styles.buttonStyle}
+                    textStyle={styles.primaryButtonText}
+                    onClick={this.onDedicateClick.bind(this)}
+                  >
+                    {i18n.t('label.dedicate')}
+                  </PrimaryButton>
+                </View>
+              </View>
+            ) : null}
+          </View>
+        </CardLayout>
+      </View>
     );
 
     return (
-      <View style={{ flex: 1 }}>
-        <ScrollView contentContainerStyle={{ flex: 1 }}>
-          {this.state.editMode ? pickupProfileView : null}
-          {currentUserProfile.supportedTreecounter ? (
-            <CardLayout>
-              <View style={styles.containerStyle}>
-                <Text style={styles.textStyle}>
-                  {currentUserProfile.supportedTreecounter.displayName}
-                </Text>
-                <PrimaryButton
-                  buttonStyle={styles.buttonStyle}
-                  onClick={this.updateProfile.bind(this)}
-                >
-                  Edit
-                </PrimaryButton>
+      <View>
+        <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+          <View>
+            {this.state.editMode ? pickupProfileView : null}
+            {currentUserProfile.supportedTreecounter ? (
+              <View>
+                <View style={styles.containerDedicateStyle}>
+                  <View style={styles.dedicateTreeName}>
+                    <Text style={styles.textDedicateStyle}>
+                      {i18n.t('label.has_dedicated', {
+                        user:
+                          currentUserProfile.supportedTreecounter.displayName
+                      })}
+                    </Text>
+                  </View>
+                </View>
+                <CardLayout style={[styles.projectSnippetContainer]}>
+                  <View style={styles.containerStyle}>
+                    <View style={styles.topCompetitorName}>
+                      <Text style={styles.textStyle}>
+                        {currentUserProfile.supportedTreecounter.displayName}
+                      </Text>
+                    </View>
+                    <View style={styles.topCompetitorScore}>
+                      <PrimaryButton
+                        buttonStyle={styles.buttonStyle}
+                        textStyle={styles.primaryButtonText}
+                        onClick={this.updateProfile.bind(this)}
+                      >
+                        {i18n.t('label.edit')}
+                      </PrimaryButton>
+                    </View>
+                  </View>
+                </CardLayout>
               </View>
-            </CardLayout>
-          ) : (
-            pickupProfileView
-          )}
+            ) : (
+              pickupProfileView
+            )}
+          </View>
         </ScrollView>
-        <TabContainer {...this.props} />
       </View>
     );
   }

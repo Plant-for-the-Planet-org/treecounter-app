@@ -25,21 +25,17 @@ class VideoContainer extends React.Component {
       }
     }
   }
-  _onReady(event) {
+  _onReady = event => {
     // access to player in all event handlers via event.target
+    this.props.onViewMoreClick();
     event.target.pauseVideo();
-  }
+  };
   render() {
     if (this.state.videoId) {
       return (
-        <ModalDialog
-          isOpen={this.props.isOpen}
-          onRequestClose={this.props.onRequestClose}
-        >
-          <div className="youtube-video__container">
-            <YouTube videoId={this.state.videoId} onReady={this._onReady} />
-          </div>
-        </ModalDialog>
+        <div className="youtube-video__container">
+          <YouTube videoId={this.state.videoId} onReady={this._onReady} />
+        </div>
       );
     }
     return null;
@@ -48,8 +44,7 @@ class VideoContainer extends React.Component {
 
 VideoContainer.propTypes = {
   url: PropTypes.string,
-  isOpen: PropTypes.bool,
-  onRequestClose: PropTypes.func
+  onViewMoreClick: PropTypes.func
 };
 
 export default VideoContainer;

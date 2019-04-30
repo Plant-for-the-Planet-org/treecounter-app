@@ -45,10 +45,12 @@ export default class RegisterTreeTab extends PureComponent {
     super(props);
     this.state = {
       plantProject: props.isTpo ? props.plantProjects[0].value : '',
-      formValueSingle: {
-        treeCount: 1
-      },
-      formValueMultiple: ''
+      formValueSingle: props.value
+        ? props.value
+        : {
+            treeCount: 1
+          },
+      formValueMultiple: props.value ? props.value : ''
     };
   }
 

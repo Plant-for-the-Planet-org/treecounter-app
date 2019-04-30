@@ -113,7 +113,7 @@ class SearchBar extends React.PureComponent {
             autoCapitalize="none"
             autoCorrect={false}
             returnKeyType="search"
-            placeholder={i18n.t('label.search')}
+            placeholder={this.props.placeholderValue}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
             onSubmitEditing={this._handleSubmit}

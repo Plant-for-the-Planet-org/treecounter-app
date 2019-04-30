@@ -25,7 +25,6 @@ import {
 } from '../../actions/competition';
 import CompetitionParticipant from '../../components/Competition/CompetitionParticipant.native';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
-import Challenge from '../../components/Challenge/createChallenge';
 
 class SelectedCompetitionContainer extends Component {
   constructor(props) {

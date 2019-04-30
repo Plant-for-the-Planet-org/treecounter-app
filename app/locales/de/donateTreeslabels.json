@@ -12,7 +12,6 @@
   "individual_name": "Einzelperson",
   "next": "Nächster",
   "delete_project": "Projekt löschen",
-  "thankyou_planting": "Vielen Dank für das Pflanzen von {{count}} Bäumen mit uns! Du erhältst rechtzeitig eine E-Mail mit einer Spendenquittung.",
   "donate_trees_description": "Wähle ein Projekt, das die Bäume für dich pflanzt.",
   "donation_contribution": "Spende"
 }

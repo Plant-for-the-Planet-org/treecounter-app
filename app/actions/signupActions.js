@@ -51,7 +51,14 @@ export function signUp(
         });
     };
   } else {
-    NotificationManager.success('Password do not match', null, 5000);
+    NotificationManager.error('Password do not match', 'Error', 5000);
+    return dispatch => {
+      return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+          resolve('foo');
+        }, 300);
+      });
+    };
   }
 }
 

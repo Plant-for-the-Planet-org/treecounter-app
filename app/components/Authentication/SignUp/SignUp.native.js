@@ -44,13 +44,13 @@ export default class SignUp extends Component {
     this._recaptchaToken = token;
     // Here you will get the final token!!!
   };
-  onSignUpClicked(type) {
+  onSignUpClicked = type => {
     if (this.refs.signupForm.getValue()) {
       Keyboard.dismiss();
     }
     this.props.onSignUpClicked(type, this._recaptchaToken);
     this._captchaRef.refreshToken();
-  }
+  };
 
   render() {
     let { Profiletype } = this.state;
@@ -92,11 +92,17 @@ export default class SignUp extends Component {
           <View style={{ flex: 1 }}>
             <Form
               ref={'signupForm'}
-              type={signupFormSchema[type]}
-              options={this.props.schemaOptions[type]}
+              type={signupFormSchema[!ProfileTypeParam ? Profiletype : type]}
+              options={
+                this.props.schemaOptions[!ProfileTypeParam ? Profiletype : type]
+              }
               value={this.props.formValue}
             />
-            <PrimaryButton onClick={this.onSignUpClicked.bind(this, type)}>
+            <PrimaryButton
+              onClick={() =>
+                this.onSignUpClicked(!ProfileTypeParam ? Profiletype : type)
+              }
+            >
               {i18n.t('label.signUp')}
             </PrimaryButton>
             <View style={styles.bottomRow}>

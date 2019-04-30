@@ -337,7 +337,7 @@ export default class DonateTrees extends React.PureComponent {
       if (params.giftMethod === 'invitation') {
         this.props.gift(
           {
-            ...this.state.form,
+            ...sendState,
             giftInvitation: params.userForm,
             giftMethod: params.giftMethod,
             paymentResponse: {
@@ -355,7 +355,7 @@ export default class DonateTrees extends React.PureComponent {
       } else if (params.giftMethod === 'direct') {
         this.props.gift(
           {
-            ...this.state.form,
+            ...sendState,
             directGift: {
               treecounter: params.userForm.treeCounter,
               message: params.userForm.message
@@ -382,7 +382,7 @@ export default class DonateTrees extends React.PureComponent {
     }
     this.props.donate(
       {
-        ...this.state.form,
+        ...sendState,
         paymentResponse: {
           gateway: 'offline',
           accountName: 'offline_US',

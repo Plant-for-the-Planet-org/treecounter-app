@@ -22,6 +22,8 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import imagestyles from '../../styles/file_picker.native';
 import styles from '../../styles/competition/mine.native';
 import imageUpload from '../../assets/images/icons/upload_image.png';
+import UserProfileImage from './Tabs/mine.native';
+import close_green from '../../assets/images/icons/close_green.png';
 let Form = t.form.Form;
 const ImagePicker = require('react-native-image-picker');
 const options = {
@@ -59,7 +61,20 @@ const getCompFormImageLayoutTemplate = () => {
             });
           }}
         >
-          <Image source={imageUpload} style={{ height: 40, width: 40 }} />
+          {!locals.value ? (
+            <Image source={imageUpload} style={{ height: 40, width: 40 }} />
+          ) : (
+            <View>
+              <UserProfileImage profileImage={locals.value} />
+              <View style={imagestyles.profileImageBackground}>
+                <Image
+                  resizeMode="contain"
+                  style={imagestyles.addIcon}
+                  source={close_green}
+                />
+              </View>
+            </View>
+          )}
         </TouchableOpacity>
       </View>
     );

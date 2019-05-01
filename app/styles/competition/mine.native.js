@@ -33,6 +33,16 @@ export default (mine = EStyleSheet.create({
     marginLeft: 10,
     paddingRight: 16
   },
+  profileImageBackground: {
+    position: 'absolute',
+    height: 15,
+    left: 90,
+    top: 40,
+    width: 15,
+    zIndex: 10,
+    borderRadius: 15,
+    backgroundColor: '#ffffff'
+  },
   addImageTextStyle: {
     color: '#686060',
     fontSize: 14

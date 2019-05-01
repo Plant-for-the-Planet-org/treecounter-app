@@ -20,7 +20,7 @@ export default (datePickerStyle = EStyleSheet.create({
   profileImageBackground: {
     position: 'absolute',
     height: 15,
-    left: 90,
+    left: 40,
     top: 40,
     width: 15,
     zIndex: 10,

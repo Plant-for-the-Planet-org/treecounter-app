@@ -10,7 +10,6 @@ const UserProfileImage = ({ profileImage, style, imageStyle }) => {
     <View style={[styles.profileImageContainer, style]}>
       <Image
         style={[styles.profileImage, imageStyle]}
-        resizeMode="contain"
         source={
           profileImage
             ? {
@@ -21,7 +20,7 @@ const UserProfileImage = ({ profileImage, style, imageStyle }) => {
             : ProfilePic
         }
       />
-      <View style={[styles.circle, style]} />
+      {/*<View style={[styles.circle, style]} />*/}
     </View>
   );
 };

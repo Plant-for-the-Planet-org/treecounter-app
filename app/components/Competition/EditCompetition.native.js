@@ -66,7 +66,7 @@ const getCompFormImageLayoutTemplate = () => {
           ) : (
             <View>
               <UserProfileImage profileImage={locals.value} />
-              <View style={imagestyles.profileImageBackground}>
+              <View style={styles.profileImageBackground}>
                 <Image
                   resizeMode="contain"
                   style={imagestyles.addIcon}

@@ -39,11 +39,7 @@ export default class LeaderboardItem extends Component {
             </View>
           </TouchableItem>
         </View>
-        <UserProfileImage
-          profileImage={this.props.image}
-          style={styles.imageContainerStyle}
-          imageStyle={styles.imageStyle}
-        />
+        <UserProfileImage profileImage={this.props.image} />
       </View>
     );
   }

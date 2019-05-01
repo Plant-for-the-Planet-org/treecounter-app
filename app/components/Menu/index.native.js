@@ -115,7 +115,7 @@ export default class Menu extends Component {
       <SafeAreaView style={styles.outerContainer}>
         {this.props.userProfile ? (
           <TouchableItem
-            style={styles.profileContainer}
+            style={styles.topProfileContainer}
             onPress={() => this.onPressUserProfile()}
           >
             <UserProfileImage
@@ -123,7 +123,7 @@ export default class Menu extends Component {
                 this.props.userProfile && this.props.userProfile.image
               }
               style={styles.profileImageStyle}
-              imageStyle={{ borderRadius: 30 }}
+              imageStyle={{ width: 60, height: 60, borderRadius: 60 / 2 }}
             />
 
             <Text style={styles.profileTextHeading}>

@@ -1,1 +1,4 @@
-{ }
+{
+  "has_dedicated": "Alle Bäume, die Sie mit Ausnahme von Geschenkspenden pflanzen, werden {{user}} gewidmet. Während Bäume in beiden Baumzählern erscheinen, zählen sie nur einmal im globalen Baumzähler.",
+  "has_not_dedicated": "Sie können einem Freund, Kollegen oder einer Organisation helfen, ihr Ziel zu erreichen, indem Sie ihnen Bäume widmen."
+}

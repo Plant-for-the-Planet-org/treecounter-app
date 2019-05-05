@@ -97,7 +97,7 @@ export default class App extends Component {
               if (inlineDonation) {
                 this.setState({ showDonationFlow: true });
               } else {
-                const url = `${serverName}/${getLocalRoute(
+                const url = `${serverName}${getLocalRoute(
                   'app_donateTrees'
                 )}?projectId=${ProjectId}`;
                 window.open(url, '_blank');

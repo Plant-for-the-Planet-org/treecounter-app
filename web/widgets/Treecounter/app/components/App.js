@@ -128,7 +128,7 @@ export default class App extends Component {
             {this.props.showDonateButton && (
               <SecondaryButton
                 onClick={event => {
-                  const url = `${serverName}/${getLocalRoute(
+                  const url = `${serverName}${getLocalRoute(
                     'app_registerTrees'
                   )}?uid=${treecounter.id}`;
                   window.open(url, '_blank');

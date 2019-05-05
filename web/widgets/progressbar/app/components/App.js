@@ -66,7 +66,7 @@ export default class App extends Component {
               <div className={'pftp-widget-btn__container'}>
                 <SecondaryButton
                   onClick={event => {
-                    const url = `${serverName}/${getLocalRoute(
+                    const url = `${serverName}${getLocalRoute(
                       'app_registerTrees'
                     )}?uid=${treecounter.id}`;
                     window.open(url, '_blank');

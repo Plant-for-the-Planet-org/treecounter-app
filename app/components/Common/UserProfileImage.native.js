@@ -4,16 +4,19 @@ import { getImageUrl } from '../../actions/apiRouting';
 import { ProfilePic } from '../../assets';
 import { View, Image } from 'react-native';
 import styles from '../../styles/user-home.native';
+import { profileTypeToImage } from '../../helpers/utils';
 
 const UserProfileImage = ({
   profileImage,
   style,
   imageStyle,
   imageCategory,
-  imageType
+  imageType,
+  defaultType
 }) => {
   let imageCat = imageCategory ? imageCategory : 'profile';
   let imageTyp = imageType ? imageType : 'thumb';
+  let defaultImage = defaultType ? profileTypeToImage[defaultType] : ProfilePic;
   return (
     <View style={[styles.profileImageContainer, style]}>
       <Image
@@ -25,7 +28,7 @@ const UserProfileImage = ({
                   ? getImageUrl(imageCat, imageTyp, profileImage)
                   : profileImage
               }
-            : ProfilePic
+            : defaultImage
         }
       />
       {/*<View style={[styles.circle, style]} />*/}

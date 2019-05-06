@@ -112,26 +112,12 @@ class SearchLayout extends React.Component {
                     setTimeout(() => this.redirectToResult(suggestion), 0);
                   }}
                 >
-                  {/*<UserProfileImage*/}
-                  {/*imageStyle={styles.userProfileImage}*/}
-                  {/*profileImage={suggestion.image}*/}
-                  {/*imageCategory={suggestion.category}*/}
-                  {/*imageType="avatar"*/}
-                  {/*imageStyle={{height: 30, width: 30, borderRadius: 30/2}}*/}
-                  {/*/>*/}
-                  <Image
-                    style={styles.profileImage}
-                    source={
-                      suggestion.image
-                        ? {
-                            uri: getImageUrl(
-                              suggestion.category,
-                              'avatar',
-                              suggestion.image
-                            )
-                          }
-                        : profileTypeToImage[suggestion.type]
-                    }
+                  <UserProfileImage
+                    profileImage={suggestion.image}
+                    imageCategory={suggestion.category}
+                    imageType="avatar"
+                    imageStyle={{ height: 30, width: 30, borderRadius: 30 / 2 }}
+                    defaultType={suggestion.type}
                   />
                   <Text style={styles.profileText}>{suggestion.name}</Text>
                 </TouchableOpacity>

@@ -5,7 +5,15 @@ import { ProfilePic } from '../../assets';
 import { View, Image } from 'react-native';
 import styles from '../../styles/user-home.native';
 
-const UserProfileImage = ({ profileImage, style, imageStyle }) => {
+const UserProfileImage = ({
+  profileImage,
+  style,
+  imageStyle,
+  imageCategory,
+  imageType
+}) => {
+  let imageCat = imageCategory ? imageCategory : 'profile';
+  let imageTyp = imageType ? imageType : 'thumb';
   return (
     <View style={[styles.profileImageContainer, style]}>
       <Image
@@ -14,7 +22,7 @@ const UserProfileImage = ({ profileImage, style, imageStyle }) => {
           profileImage
             ? {
                 uri: !profileImage.includes('base64')
-                  ? getImageUrl('profile', 'thumb', profileImage)
+                  ? getImageUrl(imageCat, imageTyp, profileImage)
                   : profileImage
               }
             : ProfilePic

@@ -1,4 +1,4 @@
-package com.treecounterapp;
+package org.pftp;
 
 import android.app.Application;
 

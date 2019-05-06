@@ -1,7 +1,8 @@
 {
   "reset": "Zurücksetzen.",
-  "dont_have_account": "Du hast noch kein Konto?",
+  "dont_have_account": "Sie haben noch kein Konto?",
+  "login": "Einloggen",
   "password": "Passwort",
   "current_password": "Aktuelles Passwort",
-  "login_description": "Melde dich mit deinem Trillion Tree Campaign Konto an, um auf deinen persönlichen Baumzähler zuzugreifen. Du kannst auch ein neues Konto erstellen."
+  "login_description": "Melden Sie sich mit Ihrem Trillion Tree Campaign Konto an, um auf Ihren persönlichen Baumzähler zuzugreifen. Sie können auch ein neues Konto erstellen."
 }

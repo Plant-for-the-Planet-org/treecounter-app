@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   Picker,
   Platform,
+  Dimensions,
   TouchableNativeFeedback,
   Image
 } from 'react-native';
@@ -23,36 +24,10 @@ class SelectTemplateIOS extends React.PureComponent {
   constructor(props) {
     super(props);
     this._onPress = this.onPress.bind(this);
-    this.state = {
-      isCollapsed: true,
-      height: new Animated.Value(0)
-    };
   }
 
   onPress() {
     const locals = this.props.locals;
-    let animation = Animated.timing;
-    let animationConfig = {
-      duration: 200
-    };
-    if (locals.config) {
-      if (locals.config.animation) {
-        animation = locals.config.animation;
-      }
-      if (locals.config.animationConfig) {
-        animationConfig = locals.config.animationConfig;
-      }
-    }
-    animation(
-      this.state.height,
-      Object.assign(
-        {
-          toValue: this.state.isCollapsed ? UIPICKER_HEIGHT : 0
-        },
-        animationConfig
-      )
-    ).start();
-    this.setState({ isCollapsed: !this.state.isCollapsed });
     if (typeof locals.onPress === 'function') {
       locals.onPress();
     }
@@ -86,7 +61,6 @@ class SelectTemplateIOS extends React.PureComponent {
       formattedValue = i18n.t(filteredValue[0].text);
     } else {
     }
-    const height = this.state.isCollapsed ? 0 : UIPICKER_HEIGHT;
     if (Platform.OS === 'android') {
       return (
         //   <View style={datePickerStyle.datePickerContainer}>
@@ -120,17 +94,31 @@ class SelectTemplateIOS extends React.PureComponent {
           containerStyle={[
             {
               width: '100%',
-              height: 35,
               marginLeft: 10,
               marginBottom: 10,
-              paddingRight: 10
+              paddingRight: 10,
+              elevation: 2
             },
             locals.config.style
           ]}
+          pickerStyle={{
+            position: 'absolute',
+            maxHeight: Dimensions.get('window').height - 150,
+            marginTop: 'auto',
+            top:
+              this.props.options.length <= 15
+                ? Dimensions.get('window').height / 2 -
+                  this.props.options.length * 18
+                : Dimensions.get('window').height / 2 - 275,
+            alignSelf: 'center',
+            flex: 1
+          }}
+          itemCount={200}
           dropdownOffset={{
             top: 10,
             left: 0
           }}
+          animationDuration={0}
           itemTextStyle={{
             fontSize: 13,
             color: '#686060'
@@ -189,17 +177,31 @@ class SelectTemplateIOS extends React.PureComponent {
         containerStyle={[
           {
             width: '100%',
-            height: 35,
             marginLeft: 10,
             marginBottom: 10,
-            paddingRight: 10
+            paddingRight: 10,
+            elevation: 2
           },
           locals.config.style
         ]}
+        pickerStyle={{
+          position: 'absolute',
+          maxHeight: Dimensions.get('window').height - 150,
+          marginTop: 'auto',
+          top:
+            this.props.options.length <= 15
+              ? Dimensions.get('window').height / 2 -
+                this.props.options.length * 18
+              : Dimensions.get('window').height / 2 - 275,
+          alignSelf: 'center',
+          flex: 1
+        }}
+        itemCount={200}
         dropdownOffset={{
           top: 10,
           left: 0
         }}
+        animationDuration={0}
         itemTextStyle={{
           fontSize: 13,
           color: '#686060'

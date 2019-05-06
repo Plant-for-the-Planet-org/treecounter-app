@@ -44,7 +44,11 @@ export default class RegisterTreeTab extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      plantProject: props.isTpo ? props.plantProjects[0].value : '',
+      plantProject: props.isTpo
+        ? props.plantProjects.length > 0
+          ? props.plantProjects[0].value
+          : ''
+        : '',
       formValueSingle: props.value
         ? props.value
         : {
@@ -86,18 +90,20 @@ export default class RegisterTreeTab extends PureComponent {
             }
           />
           {this.props.isTpo ? (
-            <Dropdown
-              value={this.state.plantProject}
-              onChangeText={item =>
-                this.setState({
-                  plantProject: item
-                })
-              }
-              label="Plant Project"
-              data={this.props.plantProjects.map(item => {
-                return { value: item.value, label: item.text };
-              })}
-            />
+            this.props.plantProjects.length > 0 ? (
+              <Dropdown
+                value={this.state.plantProject}
+                onChangeText={item =>
+                  this.setState({
+                    plantProject: item
+                  })
+                }
+                label="Plant Project"
+                data={this.props.plantProjects.map(item => {
+                  return { value: item.value, label: item.text };
+                })}
+              />
+            ) : null
           ) : null}
           <PrimaryButton
             onClick={() => {

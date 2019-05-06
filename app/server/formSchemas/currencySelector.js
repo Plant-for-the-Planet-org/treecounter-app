@@ -4,7 +4,7 @@ export default {
   properties: {
     currency: {
       enum: [],
-      enum_title: [],
+      enum_titles: [],
       type: 'string',
       title: 'Currency',
       attr: {

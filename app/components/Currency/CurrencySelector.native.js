@@ -54,6 +54,7 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
         fontSize: 13,
         color: '#686060'
       }}
+      initialNumToRender={currenciesDropdownFormat.length}
       value={i18n.t(selectedCurrency)}
       textColor="rgba(104,96,96, 0.8)"
       selectedItemColor="rgba(104,96,96, 0.8)"

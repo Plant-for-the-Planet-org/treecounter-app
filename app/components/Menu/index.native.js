@@ -135,7 +135,10 @@ export default class Menu extends Component {
           </TouchableItem>
         ) : (
           <View style={styles.profileContainer}>
-            <Image style={styles.profileImageStyle} source={icons.ProfilePic} />
+            <UserProfileImage
+              style={styles.profileLogImageStyle}
+              imageStyle={{ width: 60, height: 60, borderRadius: 60 / 2 }}
+            />
             <Text style={styles.profileTextHeading}>{'Guest'}</Text>
             <LargeMenuItem
               style={{ paddingLeft: 0 }}

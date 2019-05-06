@@ -36,7 +36,7 @@ export default (mine = EStyleSheet.create({
   profileImageBackground: {
     position: 'absolute',
     height: 15,
-    left: 90,
+    left: 98,
     top: 40,
     width: 15,
     zIndex: 10,

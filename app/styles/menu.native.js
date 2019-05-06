@@ -32,6 +32,9 @@ export default (menuStyles = EStyleSheet.create({
     marginBottom: 10,
     flex: 0.6
   },
+  profileLogImageStyle: {
+    marginTop: 40
+  },
   profileTextHeading: {
     fontSize: 13,
     color: '$textColor',

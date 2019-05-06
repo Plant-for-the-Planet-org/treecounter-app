@@ -111,9 +111,10 @@ class SelectTemplateIOS extends React.PureComponent {
                   this.props.options.length * 18
                 : Dimensions.get('window').height / 2 - 275,
             alignSelf: 'center',
-            flex: 1
+            flex: 1,
+            zIndex: 60
           }}
-          itemCount={200}
+          itemCount={20}
           dropdownOffset={{
             top: 10,
             left: 0
@@ -196,7 +197,7 @@ class SelectTemplateIOS extends React.PureComponent {
           alignSelf: 'center',
           flex: 1
         }}
-        itemCount={200}
+        itemCount={20}
         dropdownOffset={{
           top: 10,
           left: 0

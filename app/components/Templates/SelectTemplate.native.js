@@ -114,6 +114,7 @@ class SelectTemplateIOS extends React.PureComponent {
             flex: 1,
             zIndex: 60
           }}
+          initialNumToRender={this.props.options.length}
           itemCount={20}
           dropdownOffset={{
             top: 10,

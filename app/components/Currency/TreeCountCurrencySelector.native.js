@@ -128,6 +128,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
             </Text>
           </View>
         </View>
+
         <CurrencySelector
           currencies={currencies}
           onChange={this.handleCurrencyChange}

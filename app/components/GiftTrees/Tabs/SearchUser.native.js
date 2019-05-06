@@ -117,7 +117,13 @@ class SearchUser extends React.Component {
                         style={styles.profileImage}
                         source={
                           suggestion.image
-                            ? getImageUrl('profile', 'avatar', suggestion.image)
+                            ? {
+                                uri: getImageUrl(
+                                  suggestion.category,
+                                  'avatar',
+                                  suggestion.image
+                                )
+                              }
                             : profileTypeToImage[suggestion.type]
                         }
                       />

@@ -1270,15 +1270,6 @@ export default {
         maxLength: 255,
         propertyOrder: 1
       },
-      subType: {
-        enum: ['company-other'],
-        enum_titles: ['Other'],
-        type: 'string',
-        title: 'subType',
-        icon: null,
-        help: null,
-        propertyOrder: 2
-      },
       country: {
         enum: [
           'AF',

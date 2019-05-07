@@ -4,6 +4,7 @@ import styles from '../../styles/common/tabbar';
 import { Dimensions } from 'react-native';
 import ChallengeUser from './Tabs/ChallengeUser';
 import ChallengeEmail from './Tabs/ChallengeEmail';
+import { challengeFormSchemaOptions } from '../../server/parsedSchemas/challenge';
 
 const Layout = {
   window: {
@@ -70,6 +71,7 @@ export default class ChallengeTabView extends Component {
           <ChallengeEmail
             challengeUser={this.props.challengeUser}
             challenges={this.props.challenges}
+            challengeFormSchemaOptions={challengeFormSchemaOptions}
             challengeStatus={this.props.challengeStatus}
           />
         );

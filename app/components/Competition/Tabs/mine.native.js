@@ -20,6 +20,7 @@ import PrimaryButton from '../../Common/Button/PrimaryButton';
 import UserProfileImage from '../../Common/UserProfileImage';
 import close_green from '../../../assets/images/icons/close_green.png';
 import imageUpload from '../../../assets/images/icons/upload_image.png';
+
 let Form = t.form.Form;
 const ImagePicker = require('react-native-image-picker');
 const options = {
@@ -81,7 +82,20 @@ const getCompFormImageLayoutTemplate = () => {
             });
           }}
         >
-          <Image source={imageUpload} style={{ height: 40, width: 40 }} />
+          {!locals.value ? (
+            <Image source={imageUpload} style={{ height: 40, width: 40 }} />
+          ) : (
+            <View>
+              <UserProfileImage profileImage={locals.value} />
+              <View style={styles.profileImageBackground}>
+                <Image
+                  resizeMode="contain"
+                  style={imagestyles.addIcon}
+                  source={close_green}
+                />
+              </View>
+            </View>
+          )}
         </TouchableOpacity>
       </View>
     );
@@ -105,12 +119,14 @@ export default class MineCompetitions extends Component {
     this.onActionButtonPress = this.onActionButtonPress.bind(this);
     this.onCreateCompetition = this.onCreateCompetition.bind(this);
   }
+
   onActionButtonPress() {
     this.setState({
       showCompetitionForm: true,
       formValue: null
     });
   }
+
   componentDidMount() {
     let { allCompetitions } = this.props;
     let featuredCompetitions = [];
@@ -147,6 +163,7 @@ export default class MineCompetitions extends Component {
       return returnValue;
     }
   }
+
   componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
     if (allCompetitions !== this.props.allCompetitions) {
@@ -174,6 +191,7 @@ export default class MineCompetitions extends Component {
       }
     }
   }
+
   onCreateCompetition() {
     if (this.createCompetition.refs.input.state.value) {
       this.setState({
@@ -242,6 +260,7 @@ export default class MineCompetitions extends Component {
       </KeyboardAwareScrollView>
     );
   }
+
   componentDidUpdate(prevProps, prevState) {
     Object.entries(this.props).forEach(
       ([key, val]) =>

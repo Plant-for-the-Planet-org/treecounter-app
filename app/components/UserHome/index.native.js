@@ -125,7 +125,10 @@ export default class UserHome extends Component {
           <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
             <View style={styles.header}>
               <View style={styles.userProfileContainer}>
-                <UserProfileImage profileImage={userProfile.image} />
+                <UserProfileImage
+                  imageStyle={styles.userProfileImage}
+                  profileImage={userProfile.image}
+                />
 
                 <View style={styles.userInfo}>
                   <View style={styles.userInfoName}>

@@ -36,10 +36,11 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
         maxHeight: Dimensions.get('window').height - 150,
         marginTop: 'auto',
         top:
-          currenciesDropdownFormat.length <= 15
+          Dimensions.get('window').height / 2 >=
+          currenciesDropdownFormat.length * 18
             ? Dimensions.get('window').height / 2 -
               currenciesDropdownFormat.length * 18
-            : Dimensions.get('window').height / 2 - 275,
+            : 75,
         alignSelf: 'center',
         flex: 1,
         zIndex: 60

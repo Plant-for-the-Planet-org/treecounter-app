@@ -106,13 +106,13 @@ class SelectTemplateIOS extends React.PureComponent {
             maxHeight: Dimensions.get('window').height - 150,
             marginTop: 'auto',
             top:
-              this.props.options.length <= 15
+              Dimensions.get('window').height / 2 >=
+              this.props.options.length * 18
                 ? Dimensions.get('window').height / 2 -
                   this.props.options.length * 18
-                : Dimensions.get('window').height / 2 - 275,
+                : 75,
             alignSelf: 'center',
-            flex: 1,
-            zIndex: 60
+            flex: 1
           }}
           initialNumToRender={this.props.options.length}
           itemCount={20}
@@ -191,10 +191,11 @@ class SelectTemplateIOS extends React.PureComponent {
           maxHeight: Dimensions.get('window').height - 150,
           marginTop: 'auto',
           top:
-            this.props.options.length <= 15
+            Dimensions.get('window').height / 2 >=
+            this.props.options.length * 18
               ? Dimensions.get('window').height / 2 -
                 this.props.options.length * 18
-              : Dimensions.get('window').height / 2 - 275,
+              : 75,
           alignSelf: 'center',
           flex: 1
         }}

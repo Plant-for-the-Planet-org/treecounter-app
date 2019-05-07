@@ -17,8 +17,24 @@ import i18n from '../../../locales/i18n';
 import TabContainer from '../../../containers/Menu/TabContainer';
 
 import challengeStyles from '../../../styles/challenge';
+import styles from '../../../styles/register_trees.native';
 let TCombForm = t.form.Form;
-
+const getFormLayoutTemplate = () => {
+  const formLayoutTreesTemplate = locals => {
+    return (
+      <View style={styles.registerTree__form}>
+        <View style={styles.registerTree__form__row}>
+          <View style={{ flex: 1 }}>{locals.inputs.firstname}</View>
+          <View style={{ flex: 1 }}>{locals.inputs.lastname}</View>
+        </View>
+        <View style={styles.registerTree__form__row__split}>
+          {locals.inputs.email}
+        </View>
+      </View>
+    );
+  };
+  return formLayoutTreesTemplate;
+};
 class ChallengeEmail extends Component {
   constructor(props) {
     super(props);
@@ -91,6 +107,10 @@ class ChallengeEmail extends Component {
   }
 
   render() {
+    const schema = {
+      template: getFormLayoutTemplate(),
+      ...this.props.challengeFormSchemaOptions
+    };
     return (
       <View style={{ flex: 1 }}>
         <KeyboardAwareScrollView
@@ -110,7 +130,7 @@ class ChallengeEmail extends Component {
               <TCombForm
                 ref={this.setChallengeInvitation}
                 type={challengeFormSchema}
-                options={challengeFormSchemaOptions}
+                options={schema}
                 value={this.state.tempForm}
                 onChange={this.onFormChange}
               />

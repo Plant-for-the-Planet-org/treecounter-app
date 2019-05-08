@@ -16,22 +16,26 @@ export function challenge(challengeDetails) {
 
   return dispatch => {
     dispatch(setProgressModelState(true));
-    let request = postAuthenticatedRequest(route, challengeDetails);
-    request
-      .then(response => {
-        dispatch(mergeEntities(normalize(response.data, treecounterSchema)));
-        dispatch(setProgressModelState(false));
-        NotificationManager.success(
-          'Challenge Created successfully',
-          'Success',
-          5000
-        );
-      })
-      .catch(error => {
-        debug('error: ', error);
-        dispatch(setProgressModelState(false));
-        NotificationManager.error(error.response.data.message, 'Error', 5000);
-      });
+    return new Promise(function(resolve, reject) {
+      let request = postAuthenticatedRequest(route, challengeDetails);
+      request
+        .then(response => {
+          dispatch(mergeEntities(normalize(response.data, treecounterSchema)));
+          dispatch(setProgressModelState(false));
+          resolve(response.data);
+          NotificationManager.success(
+            'Challenge Created successfully',
+            'Success',
+            5000
+          );
+        })
+        .catch(error => {
+          debug('error: ', error);
+          reject(error);
+          dispatch(setProgressModelState(false));
+          NotificationManager.error(error.response.data.message, 'Error', 5000);
+        });
+    });
   };
 }
 

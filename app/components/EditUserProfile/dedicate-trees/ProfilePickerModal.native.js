@@ -40,7 +40,6 @@ class ProfilePickerModal extends Component {
 
   render() {
     const { currentUserProfile } = this.props;
-    console.log(this.state.selectedSuggestion);
     const pickupProfileView = (
       <View>
         <View style={styles.containerDedicateStyle}>

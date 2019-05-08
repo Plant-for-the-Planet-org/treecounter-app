@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import { Text, View, Image, ScrollView, Keyboard } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import scrollStyle from '../../../styles/common/scrollStyle';
 import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 
@@ -52,9 +53,8 @@ export default class Login extends Component {
   };
   render() {
     return (
-      <ScrollView
+      <KeyboardAwareScrollView
         contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
-        keyboardShouldPersistTaps={'handled'}
       >
         <ReCaptchaV3
           ref={ref => (this._captchaRef = ref)}
@@ -110,7 +110,7 @@ export default class Login extends Component {
             </View>
           </View>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }

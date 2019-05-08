@@ -14,6 +14,7 @@ import CardLayout from '../../Common/Card';
 import scrollStyle from '../../../styles/common/scrollStyle';
 import TabContainer from '../../../containers/Menu/TabContainer';
 import UserProfileImage from '../../Common/UserProfileImage.native';
+import { delimitNumbers } from '../../../utils/utils';
 
 class ProfilePickerModal extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class ProfilePickerModal extends Component {
 
   render() {
     const { currentUserProfile } = this.props;
-    console.log(currentUserProfile);
+    console.log(this.state.selectedSuggestion);
     const pickupProfileView = (
       <View>
         <View style={styles.containerDedicateStyle}>
@@ -59,9 +60,22 @@ class ProfilePickerModal extends Component {
             {this.state.selectedSuggestion ? (
               <View style={styles.containerStyle}>
                 <View style={styles.topCompetitorName}>
-                  <Text style={styles.textStyle}>
-                    {this.state.selectedSuggestion.name}
-                  </Text>
+                  <UserProfileImage
+                    profileImage={this.state.selectedSuggestion.image}
+                    imageCategory={this.state.selectedSuggestion.category}
+                    imageType="avatar"
+                    imageStyle={{
+                      height: 40,
+                      width: 40,
+                      borderRadius: 40 / 2
+                    }}
+                    defaultType={this.state.selectedSuggestion.type}
+                  />
+                  <View style={styles.participantNameContainer}>
+                    <Text style={styles.textStyle}>
+                      {this.state.selectedSuggestion.name}
+                    </Text>
+                  </View>
                 </View>
                 <View style={styles.topCompetitorScore}>
                   <PrimaryButton
@@ -99,9 +113,27 @@ class ProfilePickerModal extends Component {
                 <CardLayout style={[styles.projectSnippetContainer]}>
                   <View style={styles.containerStyle}>
                     <View style={styles.topCompetitorName}>
-                      <Text style={styles.textStyle}>
-                        {currentUserProfile.supportedTreecounter.displayName}
-                      </Text>
+                      <UserProfileImage
+                        profileImage={
+                          currentUserProfile.supportedTreecounter.avatar
+                        }
+                        imageStyle={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: 40 / 2
+                        }}
+                      />
+                      <View style={styles.participantNameContainer}>
+                        <Text style={styles.textStyle}>
+                          {currentUserProfile.supportedTreecounter.displayName}
+                        </Text>
+                        <Text style={styles.topCompetitorScoreText}>
+                          {delimitNumbers(
+                            currentUserProfile.supportedTreecounter.countPlanted
+                          )}{' '}
+                          Planted
+                        </Text>
+                      </View>
                     </View>
                     <View style={styles.topCompetitorScore}>
                       <PrimaryButton

@@ -26,5 +26,6 @@
   "competition_access_immediate": "Anyone (Join Immediately)",
   "competition_access_request": "Anyone (Request to Join)",
   "competition_access_invitation": "People I Invite",
-  "edit_competition": "Edit Competition"
+  "edit_competition": "Edit Competition",
+  "mine_create":"You do not have any Competitions. Any competition you create or join will appear on this page. sort by create date recent"
 }

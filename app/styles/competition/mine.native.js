@@ -71,6 +71,24 @@ export default (mine = EStyleSheet.create({
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10
   },
+  containerDedicateStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 25,
+    width: '100%',
+    justifyContent: 'space-between'
+  },
+  dedicateTreeName: {
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  textDedicateStyle: {
+    fontSize: 14,
+    color: '#ff6666',
+    maxWidth: '100%',
+    textAlign: 'center'
+  },
   mineSpecsContainer: {
     height: Layout.window.height * 0.3,
     width: '100%'

@@ -246,6 +246,13 @@ export default class MineCompetitions extends Component {
         contentContainerStyle={{ paddingBottom: 72 }}
         enableOnAndroid={true}
       >
+        <View style={styles.containerDedicateStyle}>
+          <View style={styles.dedicateTreeName}>
+            <Text style={styles.textDedicateStyle}>
+              {i18n.t('label.mine_create')}
+            </Text>
+          </View>
+        </View>
         <CardLayout style={{ flex: 1 }}>
           <Form
             ref={this.createCompetitionForm}

@@ -102,7 +102,7 @@ class SearchLayout extends React.Component {
         </Header>
 
         {this.state.q ? (
-          <ScrollView>
+          <ScrollView style={{ paddingBottom: 15 }}>
             {this.state.q.map((suggestion, i) => {
               return (
                 <TouchableOpacity

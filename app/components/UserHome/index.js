@@ -88,19 +88,21 @@ export default class UserHome extends Component {
             </div>
           </div>
         </div>
-        <div className="canvasContainer flex-column">
-          <SvgContainer {...svgData} />
-          {treecounterData === null ? (
-            <div className="circle-inside circle-headline">
-              <LoadingIndicator />
-            </div>
-          ) : (
-            <TreecounterGraphicsText
-              trillion={false}
-              treecounterData={svgData}
-              onToggle={toggleVal => this.updateSvg(toggleVal)}
-            />
-          )}
+        <div className="treecounter_container">
+          <div className="canvasContainer flex-column">
+            <SvgContainer {...svgData} />
+            {treecounterData === null ? (
+              <div className="circle-inside circle-headline">
+                <LoadingIndicator />
+              </div>
+            ) : (
+              <TreecounterGraphicsText
+                trillion={false}
+                treecounterData={svgData}
+                onToggle={toggleVal => this.updateSvg(toggleVal)}
+              />
+            )}
+          </div>
         </div>
       </div>
     );

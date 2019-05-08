@@ -18,7 +18,21 @@ import TextBlock from '../Common/Text/TextBlock';
 import ChallengeList from './challengeList';
 
 let TCombForm = t.form.Form;
-
+const getFormLayoutTemplate = () => {
+  const formLayoutTreesTemplate = locals => {
+    return (
+      <div className="register-tree__form">
+        <div className="register-tree__form--row">
+          {locals.inputs.firstname}
+          <div className="register-tree__form--row__spacer" />
+          {locals.inputs.lastname}
+        </div>
+        <div className="register-tree__form--row">{locals.inputs.email}</div>
+      </div>
+    );
+  };
+  return formLayoutTreesTemplate;
+};
 export default class Challenge extends Component {
   static data = {
     tabsUser: [
@@ -115,6 +129,10 @@ export default class Challenge extends Component {
   };
 
   render() {
+    const schema = {
+      template: getFormLayoutTemplate(),
+      ...challengeFormSchemaOptions
+    };
     return (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>
@@ -138,7 +156,7 @@ export default class Challenge extends Component {
                 <TCombForm
                   ref="challengeUser"
                   type={challengeFormSchema}
-                  options={challengeFormSchemaOptions}
+                  options={schema}
                   value={this.state.tempForm}
                   onChange={this.onFormChange}
                 />

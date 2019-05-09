@@ -4,6 +4,11 @@
   justify-content: center;
   align-items: center;
 }
+
+.full_width {
+  width: 100%;
+}
+
 .support-button-container {
   align-self: normal;
   position: absolute;
@@ -140,8 +145,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 500px;
   .pftp-card-layout {
     max-width: 718px;
+    width: 100%;
   }
 }
 .tree-counter-user-synopsis {

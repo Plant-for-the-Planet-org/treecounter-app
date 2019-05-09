@@ -413,6 +413,11 @@ export default class DonateTrees extends Component {
           <DescriptionHeading>
             {pageHeadings[this.state.pageIndex].description}
           </DescriptionHeading>
+          <DescriptionHeading>
+            {this.props.supportTreecounter.treecounterId
+              ? 'Support trees to ' + this.props.supportTreecounter.displayName
+              : null}
+          </DescriptionHeading>
         </TextHeading>
         {this.props.paymentStatus &&
         !this.props.paymentStatus.status &&

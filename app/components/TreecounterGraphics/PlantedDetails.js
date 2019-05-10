@@ -58,11 +58,7 @@ const PlantedDetails = ({ personal, community, type, onToggle }) => (
 
             <ReactTooltip id="community" effect="solid" type="dark">
               <span className="tooltip-text">
-                Trees planted by people who made this tree counter their
-                community. Your community can be any other profile that you want
-                to support towards reaching their tree target, like your school,
-                city or employer. If you plant or donate trees, these will then
-                also appear in your community’s tree-counter.
+                {i18n.t('label.treecounter_tooltip')}
               </span>
             </ReactTooltip>
           </div>

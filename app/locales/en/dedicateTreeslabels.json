@@ -1,8 +1,5 @@
 {
-  "has_dedicated":
-    "All trees you plant, except for gift donations will be dedicated to {{user}}. While trees appear in both tree counters they will only count once in global tree counter.",
-  "has_not_dedicated":
-    "You can help a friend, colleague or an organisation reach their target by dedicating trees to them.",
-  "dedicate_tootltip":
-    "All trees you plant, register or donate from now on will be dedicated to the selected user. You can change the person you would like to dedicate trees at any time. In case of Gift Trees, trees you plant will only be dedicated to the gift recipient."
+  "has_dedicated": "All trees you plant, except for gift donations will be dedicated to {{user}}. While trees appear in both tree counters they will only count once in the global tree counter.",
+  "has_not_dedicated": "You can help a friend, colleague or an organisation reach their target by dedicating trees to them.",
+  "dedicate_tootltip": "All trees you plant, register or donate from now on will be dedicated to the selected user. You can change the person you would like to dedicate trees at any time. In case of Gift Trees, trees you plant will only be dedicated to the gift recipient."
 }

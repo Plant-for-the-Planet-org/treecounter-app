@@ -1,6 +1,6 @@
 {
   "edit_trees": "Bäume bearbeiten",
-  "tree_count": "Baumzähler",
+  "tree_count": "Baumzahl",
   "tree_species": "Baumarten",
   "plant_date": "Datum der Pflanzung",
   "geo_location": "Geo-Standort",
@@ -13,7 +13,7 @@
   "tree_height": "Baumhöhe",
   "measurement_date": "Messdatum",
   "heading_register_trees": "Registrieren Sie gepflanzte Bäume",
-  "register_description": "Berichte über Bäume, die Sie gepflanzt haben. Diese Bäume werden in Ihrem Baumzähler angezeigt. Sie können Einträge bei \"Meine Bäume\" später aktualisieren, bearbeiten oder löschen.",
+  "register_description": "Berichten Sie über Bäume, die Sie gepflanzt haben. Diese Bäume werden in Ihrem Baumzähler angezeigt. Sie können Einträge bei \"Meine Bäume\" später aktualisieren, bearbeiten oder löschen.",
   "register": "Registrieren",
   "many_trees": "Viele Bäume",
   "plant_project": "Pflanzungsprojekt",

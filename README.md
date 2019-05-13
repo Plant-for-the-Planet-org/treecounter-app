@@ -28,6 +28,20 @@ npm start
 
 ### Running into ios simulator
 
+* Uncomment first line in .babelrc.
+To make it look something like this.
+
+```
+{
+  "presets": ["module:metro-react-native-babel-preset"],
+  "env": {
+    "production": {
+      "plugins": ["transform-remove-console"]
+    }
+  }
+}
+```
+
 ```bash
 react-native run-ios
 ```
@@ -48,6 +62,19 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home
+```
+* Uncomment first line in .babelrc.
+To make it look something like this.
+
+```
+{
+  "presets": ["module:metro-react-native-babel-preset"],
+  "env": {
+    "production": {
+      "plugins": ["transform-remove-console"]
+    }
+  }
+}
 ```
 
 After completion of these steps run following command in VSCode Terminal:

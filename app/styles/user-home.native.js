@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 
 //Only take multiple of 10s
 const squareDimension =
@@ -22,6 +22,10 @@ export default (buttonStyles = EStyleSheet.create({
     flexDirection: 'row',
     padding: 10,
     marginBottom: 10
+  },
+  userProfileImage: {
+    borderWidth: 5,
+    borderColor: '#fff'
   },
   footerText: {
     color: '#686060',
@@ -53,16 +57,14 @@ export default (buttonStyles = EStyleSheet.create({
     maxHeight: '100%'
   },
   profileImageContainer: {
-    width: 60,
-    height: 60,
-    alignSelf: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 5
   },
   profileImage: {
-    width: '93%',
-    height: '93%',
-    padding: 5,
-    borderRadius: 33
+    width: 50,
+    height: 50,
+    borderRadius: 50 / 2
   },
   nameStyle: {
     fontSize: 17,

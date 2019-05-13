@@ -143,6 +143,12 @@
   line-height: 2rem;
 }
 
+.treecounter_container {
+  width: 100%;
+  height: 100%;
+  max-width: 650px;
+}
+
 .canvasContainer {
   flex-flow: column nowrap;
   align-items: center;

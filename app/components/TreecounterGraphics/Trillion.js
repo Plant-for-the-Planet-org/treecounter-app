@@ -87,19 +87,20 @@ class Trillion extends Component {
             </div>
           </div>
         ) : null}
-
-        <div className="canvasContainer flex-column">
-          <SvgContainer {...this.state.svgData} />
-          {this.state.svgData === null ? (
-            <div className="circle-inside circle-headline">
-              <LoadingIndicator />
-            </div>
-          ) : (
-            <TreecounterGraphicsText
-              trillion={true}
-              treecounterData={this.state.svgData}
-            />
-          )}
+        <div className="treecounter_container">
+          <div className="canvasContainer flex-column">
+            <SvgContainer {...this.state.svgData} />
+            {this.state.svgData === null ? (
+              <div className="circle-inside circle-headline">
+                <LoadingIndicator />
+              </div>
+            ) : (
+              <TreecounterGraphicsText
+                trillion={true}
+                treecounterData={this.state.svgData}
+              />
+            )}
+          </div>
         </div>
       </div>
     );

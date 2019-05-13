@@ -50,8 +50,8 @@ export default class ChallengeCard extends React.Component {
             <View style={challengesStyle.flexStyle}>
               <UserProfileImage
                 profileImage={avatar}
-                style={challengesStyle.profileImage}
-                imageStyle={{ borderRadius: 15 }}
+                style={styles.profileImage}
+                imageStyle={{ width: 40, height: 40, borderRadius: 40 / 2 }}
               />
               <View>
                 <View style={challengesStyle.textPadding}>

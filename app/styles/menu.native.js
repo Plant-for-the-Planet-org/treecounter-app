@@ -17,16 +17,23 @@ export default (menuStyles = EStyleSheet.create({
     width: '100%',
     marginTop: 10
   },
+  topProfileContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 0.5,
+    width: '100%',
+    marginTop: 10
+  },
   burgerMenuImageStyle: {
-    width: 35,
-    height: 35,
-    borderRadius: 0,
-    borderWidth: 0,
     marginLeft: 10
   },
   profileImageStyle: {
-    width: 60,
-    height: 60
+    marginBottom: 10,
+    flex: 0.6
+  },
+  profileLogImageStyle: {
+    marginTop: 40
   },
   profileTextHeading: {
     fontSize: 13,

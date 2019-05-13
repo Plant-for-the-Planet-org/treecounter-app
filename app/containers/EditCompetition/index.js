@@ -57,6 +57,7 @@ class EditCompetitionContainer extends Component {
     }
   }
   editCompetition(value, params, formRef) {
+    console.log(value);
     let json = {
       name: value.name,
       goal: value.goal,
@@ -66,6 +67,9 @@ class EditCompetitionContainer extends Component {
       contact: value.contact,
       email: value.email
     };
+    if (value.imageFile.includes('base64')) {
+      json.imageFile = value.imageFile;
+    }
     this.props
       .editCompetition(json, params, this.props.navigation)
       .then(success => {})

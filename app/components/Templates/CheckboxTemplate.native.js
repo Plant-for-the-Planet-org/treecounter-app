@@ -24,8 +24,8 @@ export function CheckboxTemplate(locals) {
     locals.onChange(!locals.value);
   }
   return (
-    <View style={containerStyle}>
-      <TouchableOpacity onPress={checkboxClicked}>
+    <TouchableOpacity style={containerStyle} onPress={checkboxClicked}>
+      <View>
         {locals.value ? (
           <Image
             style={imageStyle}
@@ -39,8 +39,8 @@ export function CheckboxTemplate(locals) {
             source={uncheckedIcon}
           />
         )}
-      </TouchableOpacity>
+      </View>
       <Text style={textboxStyle}>{i18n.t(locals.label)}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }

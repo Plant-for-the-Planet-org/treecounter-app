@@ -19,16 +19,18 @@
       grid-column-gap: 5px;
     }
 
-    span, .textLabel {
+    span,
+    .textLabel {
       @extend .pftp-text-span;
       font-size: 13.5px;
-      color: $headerTextColor;
+      color: #ffffff;
     }
     img {
       max-width: 46px;
     }
     .smallImage {
-     width:100%
+      width: 15px;
+      margin-left: 6px;
     }
     strong {
       @extend .pftp-text-basic;
@@ -43,18 +45,17 @@
 
     .svg-text-container__row--col2 {
       // align-self: end;
-      justify-self:end;
+      justify-self: end;
     }
     .closeContainer {
-      max-width:25px;
+      max-width: 25px;
     }
-    .community_row{
+    .community_row {
       display: flex;
       .communtiy_col {
         align-self: center;
       }
     }
-
   }
 
   .svg-text-container__bar {
@@ -76,7 +77,7 @@
     right: 0;
     bottom: -120px;
     padding: 0px;
-   
+
     img {
       height: 15px;
       vertical-align: middle;

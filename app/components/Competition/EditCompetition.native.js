@@ -18,8 +18,72 @@ import {
 import { fetchCompetitionDetail } from '../../actions/competition';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-let Form = t.form.Form;
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import imagestyles from '../../styles/file_picker.native';
+import styles from '../../styles/competition/mine.native';
+import imageUpload from '../../assets/images/icons/upload_image.png';
 
+import close_green from '../../assets/images/icons/close_green.png';
+import UserProfileImage from '../Common/UserProfileImage.native';
+let Form = t.form.Form;
+const ImagePicker = require('react-native-image-picker');
+const options = {
+  title: 'Add Image',
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
+const getCompFormImageLayoutTemplate = () => {
+  const formLayoutTreesTemplate = locals => {
+    return (
+      <View style={imagestyles.filePickerContainer}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.addImageTextStyle}>Add Image</Text>
+        </View>
+        <TouchableOpacity
+          style={{ flex: 1 }}
+          onPress={event => {
+            ImagePicker.showImagePicker(options, response => {
+              // console.log('Response = ', response);
+
+              if (response.didCancel) {
+                //console.log('User cancelled image picker');
+              } else if (response.error) {
+                //console.log('ImagePicker Error: ', response.error);
+              } else if (response.customButton) {
+                // console.log('User tapped custom button: ', response.customButton);
+              } else {
+                let source = { uri: response.uri };
+                locals.onChange('data:image/jpeg;base64,' + response.data);
+              }
+            });
+          }}
+        >
+          {!locals.value ? (
+            <Image source={imageUpload} style={{ height: 40, width: 40 }} />
+          ) : (
+            <View>
+              <UserProfileImage
+                profileImage={locals.value}
+                imageCategory="competition"
+                imageType="avatar"
+              />
+              <View style={styles.profileImageBackground}>
+                <Image
+                  resizeMode="contain"
+                  style={imagestyles.addIcon}
+                  source={close_green}
+                />
+              </View>
+            </View>
+          )}
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  return formLayoutTreesTemplate;
+};
 class EditCompetition extends Component {
   constructor(props) {
     super(props);
@@ -78,14 +142,23 @@ class EditCompetition extends Component {
   }
 
   render() {
+    let schemaOptions = this.props.competitionFormSchemaOptions;
+    if (schemaOptions.fields.imageFile) {
+      schemaOptions.fields.imageFile.template = getCompFormImageLayoutTemplate();
+    }
+    let formValue = this.state.formValue;
+    if (formValue) {
+      formValue.imageFile =
+        formValue && formValue.image ? formValue.image : null;
+    }
     return (
       <KeyboardAwareScrollView enableOnAndroid={true}>
         <CardLayout style={{ flex: 1 }}>
           <Form
             ref={this.createCompetitionForm}
             type={competitionFormSchema}
-            options={this.props.competitionFormSchemaOptions}
-            value={this.state.formValue}
+            options={schemaOptions}
+            value={formValue}
           />
           <PrimaryButton onClick={() => this.onCreateCompetition()}>
             {i18n.t('label.edit_competition')}

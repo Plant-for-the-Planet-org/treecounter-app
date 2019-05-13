@@ -34,7 +34,7 @@ export default {
     },
     imageFile: {
       type: 'string',
-      title: 'label.upload_profile_picture',
+      title: 'label.add_featured_image',
       widget: 'file',
       icon: null,
       help: null,
@@ -319,7 +319,7 @@ export default {
         properties: {
           image: {
             type: 'string',
-            title: 'label.upload_profile_picture',
+            title: 'label.add_image',
             widget: 'file',
             icon: null,
             help: null,

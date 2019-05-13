@@ -19,6 +19,7 @@ import i18n from '../../locales/i18n';
 import styles from '../../styles/header/search_layout.native';
 import _ from 'lodash';
 import { updateRoute } from '../../helpers/routerHelper';
+import UserProfileImage from '../Common/UserProfileImage';
 
 class SearchLayout extends React.Component {
   static SearchBar = SearchBar;
@@ -111,19 +112,12 @@ class SearchLayout extends React.Component {
                     setTimeout(() => this.redirectToResult(suggestion), 0);
                   }}
                 >
-                  <Image
-                    style={styles.profileImage}
-                    source={
-                      suggestion.image
-                        ? {
-                            uri: getImageUrl(
-                              suggestion.category,
-                              'avatar',
-                              suggestion.image
-                            )
-                          }
-                        : profileTypeToImage[suggestion.type]
-                    }
+                  <UserProfileImage
+                    profileImage={suggestion.image}
+                    imageCategory={suggestion.category}
+                    imageType="avatar"
+                    imageStyle={{ height: 30, width: 30, borderRadius: 30 / 2 }}
+                    defaultType={suggestion.type}
                   />
                   <Text style={styles.profileText}>{suggestion.name}</Text>
                 </TouchableOpacity>

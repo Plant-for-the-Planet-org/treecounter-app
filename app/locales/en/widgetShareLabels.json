@@ -1,12 +1,12 @@
 {
   "widget_share": "Widget: Share your Progress",
-  "widget_share_description": "Widgets are a simple way to show the progress of your tree planting goal into the content of your web site or web page. Only public tree counters  from Trillion Tree Campaign can be embedded.",
+  "widget_share_description": "Widget is a simple way to show your tree planting progress on a website or a blog. Only public tree counter from Trillion Tree Campaign can be embedded.",
   "widget_share_choose_widget": "1. Choose the type of Widget",
   "widget_share_copy_paste_html_snippet": "2. Copy & Paste HTML snippet",
-  "widget_basic": "basic(Number)",
+  "widget_basic": "Tree Count",
   "widget_global_tree_counter": "Global Tree counter",
   "widget_standard_tree_counter": "Standard Tree counter",
-  "widget_progress_tree_counter": "Progress Tree counter",
+  "widget_progress_tree_counter": "Tree counter Progress ",
   "widget_donate_trees": "Donate Trees",
   "widget_preview": "Widget Preview",
   "widget_not_public_acct_warning": "Your profile is not publicly visible, to create your Tree Counter widget please set your account to public in Edit Profile."

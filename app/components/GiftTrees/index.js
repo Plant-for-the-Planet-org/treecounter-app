@@ -366,6 +366,7 @@ export default class GiftTrees extends Component {
         <NextArrow checkValidation={this.checkValidation} context={this} />
       ),
       infinite: false,
+      lazyLoad: true,
       adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation

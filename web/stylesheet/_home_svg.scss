@@ -23,8 +23,12 @@
     .textLabel {
       @extend .pftp-text-span;
       font-size: 13.5px;
+    }
+
+    .tooltip-text {
       color: #ffffff;
     }
+
     img {
       max-width: 46px;
     }

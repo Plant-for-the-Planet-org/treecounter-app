@@ -224,28 +224,6 @@ export default class ContributionCard extends React.Component {
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {donateActionLine ? <TextSpan>{donateActionLine}</TextSpan> : null}
             {tpoLine ? <TextSpan>{tpoLine}</TextSpan> : null}
-            {/*<TextSpan strong={true}>*/}
-            {/*{contribution.treeCount + ' '}*/}
-            {/*{contribution.treeSpecies ? contribution.treeSpecies : ''}*/}
-            {/*{i18n.t('label.tree')}*/}
-            {/*</TextSpan>*/}
-            {/*<TextSpan>*/}
-            {/*{contribution.geoLatitude + ', ' + contribution.geoLongitude}*/}
-            {/*</TextSpan>*/}
-            {/*<TextSpan>*/}
-            {/*{moment(new Date(contribution.plantDate)).format('DD MMM YYYY')}*/}
-            {/*</TextSpan>*/}
-            {/*{imagesArray.length ? (*/}
-            {/*<a onClick={this.openLightbox}>{i18n.t('label.pictures')}</a>*/}
-            {/*) : null}*/}
-            {/*<Lightbox*/}
-            {/*currentImage={this.state.currentImage}*/}
-            {/*images={imagesArray}*/}
-            {/*isOpen={this.state.lightboxIsOpen}*/}
-            {/*onClose={this.closeLightbox}*/}
-            {/*onClickNext={this.gotoNext}*/}
-            {/*onClickPrev={this.gotoPrevious}*/}
-            {/*/>*/}
           </div>
           <div className="contribution-container__right-column">
             {contribution.category === 'contributions'
@@ -502,7 +480,6 @@ export default class ContributionCard extends React.Component {
                 {i18n.t('label.update')}
               </Link>
             ) : null}
-            )}
           </div>
         </div>
         <hr className="contribution-container__partition" />

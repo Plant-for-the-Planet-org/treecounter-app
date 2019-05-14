@@ -456,66 +456,6 @@ class ContributionCard extends React.Component {
         </View>
       </CardLayout>
     );
-    {
-      /* <View
-          style={{
-            borderWidth: 1,
-            borderLeftWidth: 4,
-            borderColor: '#e6e6e6',
-            borderLeftColor:
-              contribution.contributionType == 'donation'
-                ? '#95c243'
-                : contribution.treeCount > 1
-                  ? '#68aeec'
-                  : '#ec6453',
-            justifyContent: 'space-between',
-            minHeight: 60,
-            marginBottom: 10,
-            margin: 10
-          }}
-          key={`contribution-${contribution.id}`}
-        >
-          <View style={styles.cardSubContainer}>
-            <Text strong={true}>
-              {contribution.treeCount +
-                ' ' +
-                contribution.treeSpecies +
-                i18n.t('label.tree')}
-            </Text>
-            <Text style={styles.dateStyle}>
-              {moment(new Date(contribution.plantDate)).format('DD MMM YYYY')}
-            </Text>
-            {imagesArray.length ? (
-              <Lightbox
-                backgroundColor={'rgba(52, 52, 52, 0.8)'}
-                underlayColor={'white'}
-                swipeToDismiss={false}
-                renderContent={() => this._renderLightBox(imagesArray)}
-              >
-                <Text style={[styles.pictureText, { padding: 0 }]}>
-                  {i18n.t('label.pictures')}
-                </Text>
-              </Lightbox>
-            ) : null}
-            {contribution.contributionMeasurements.length > 0 ? (
-              <Accordion
-                sections={[contribution]}
-                renderHeader={this._renderHeader}
-                renderContent={this._renderContent}
-                touchableComponent={TouchableOpacity}
-              />
-            ) : null}
-          </View>
-          <View style={styles.actionBar}>
-            <ActionButton
-              onPress={() => null}
-              text={i18n.t('label.map')}
-              image={MapPinRed}
-            />
-          </View>
-        </View>
-      </View> */
-    }
   }
 }
 

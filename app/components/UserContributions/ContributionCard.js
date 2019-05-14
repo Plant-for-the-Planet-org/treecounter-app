@@ -416,7 +416,9 @@ export default class ContributionCard extends React.Component {
           }`}
         >
           <div className="contribution-container__left-column">
-            {treeCountLine ? <TextSpan>{treeCountLine}</TextSpan> : null}
+            {treeCountLine ? (
+              <TextSpan strong={true}>{treeCountLine}</TextSpan>
+            ) : null}
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {redeemActionLine ? <TextSpan>{redeemActionLine}</TextSpan> : null}
             {tpoLine ? <TextSpan>{tpoLine}</TextSpan> : null}

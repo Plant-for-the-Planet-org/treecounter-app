@@ -78,7 +78,9 @@ class ContributionCard extends React.Component {
               return (
                 <View style={styles.actionBar} key={`measurement-${index}`}>
                   <Text>
-                    {new Date(measurement.measurementDate).toLocaleDateString()}
+                    {moment(new Date(measurement.measurementDate)).format(
+                      'DD MMM YYYY'
+                    )}
                   </Text>
                   <Text>
                     {_.padStart(
@@ -138,7 +140,11 @@ class ContributionCard extends React.Component {
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
       ? [
-          <Text>{'Gifted on ' + plantDate + ' to '}</Text>,
+          <Text>
+            {'Gifted on ' +
+              moment(new Date(plantDate)).format('DD MMM YYYY') +
+              ' to '}
+          </Text>,
           <Text
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
@@ -150,7 +156,7 @@ class ContributionCard extends React.Component {
             {givee}
           </Text>
         ]
-      : 'Donated on ' + plantDate;
+      : 'Donated on ' + moment(new Date(plantDate)).format('DD MMM YYYY');
   }
 
   tpoLine(tpoName) {
@@ -158,7 +164,12 @@ class ContributionCard extends React.Component {
   }
 
   plantActionLine(plantDate, registrationDate) {
-    return 'Planted on ' + plantDate + ', Added on ' + registrationDate;
+    return (
+      'Planted on ' +
+      moment(new Date(plantDate)).format('DD MMM YYYY') +
+      ', Added on ' +
+      moment(new Date(registrationDate)).format('DD MMM YYYY')
+    );
   }
 
   dedicateActionLine = (isGift, givee, giveeSlug) => {
@@ -182,7 +193,11 @@ class ContributionCard extends React.Component {
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && giver
       ? [
-          <Text>{'Given on ' + redemptionDate + ' by '}</Text>,
+          <Text>
+            {'Given on ' +
+              moment(new Date(redemptionDate)).format('DD MMM YYYY') +
+              ' by '}
+          </Text>,
           <Text
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
@@ -195,9 +210,10 @@ class ContributionCard extends React.Component {
           </Text>
         ]
       : redemptionCode
-        ? 'Redeemed on ' + redemptionDate
+        ? 'Redeemed on ' +
+          moment(new Date(redemptionDate)).format('DD MMM YYYY')
         : 'Dedicated on ' +
-          redemptionDate +
+          moment(new Date(redemptionDate)).format('DD MMM YYYY') +
           (givee
             ? [
                 <Text>{' by '}</Text>,

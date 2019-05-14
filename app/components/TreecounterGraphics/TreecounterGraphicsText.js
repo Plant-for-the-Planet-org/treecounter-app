@@ -83,7 +83,7 @@ class TreecounterGraphicsText extends Component {
                       : '') +
                   ' '}
                 <br />
-                <strong>{this.convertNumber(target, 2)}</strong>
+                <strong>{delimitNumbers(this.convertNumber(target, 2))}</strong>
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(target))} */}
@@ -103,7 +103,9 @@ class TreecounterGraphicsText extends Component {
               <span>
                 {i18n.t('label.planted')}
                 <br />
-                <strong>{this.convertNumber(parseInt(planted), 2)}</strong>
+                <strong>
+                  {delimitNumbers(this.convertNumber(parseInt(planted), 2))}
+                </strong>
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(planted))} */}
@@ -122,8 +124,8 @@ class TreecounterGraphicsText extends Component {
         </div>
       ) : (
         <PlantedDetails
-          personal={this.convertNumber(parseInt(personal), 2)}
-          community={this.convertNumber(parseInt(community), 2)}
+          personal={delimitNumbers(this.convertNumber(parseInt(personal), 2))}
+          community={delimitNumbers(this.convertNumber(parseInt(community), 2))}
           type={type}
           onToggle={e => this.updateState(false)}
         />

@@ -379,7 +379,9 @@ export default class ContributionCard extends React.Component {
                   }
                 />
                 <div onClick={() => this.setState({ openDialog: true })}>
-                  <TextSpan>{'' + i18n.t('label.delete')}</TextSpan>
+                  <span className="delete_style">
+                    {'' + i18n.t('label.delete')}
+                  </span>
                 </div>
               </div>
             ) : null}

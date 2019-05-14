@@ -18,6 +18,7 @@ import TabContainer from '../../../containers/Menu/TabContainer';
 
 import challengeStyles from '../../../styles/challenge';
 import styles from '../../../styles/register_trees.native';
+import errorStyles from '../../../styles/profilepicker.native';
 let TCombForm = t.form.Form;
 const getFormLayoutTemplate = () => {
   const formLayoutTreesTemplate = locals => {
@@ -125,6 +126,15 @@ class ChallengeEmail extends Component {
           }}
           enableOnAndroid={true}
         >
+          {this.props.error ? (
+            <View style={errorStyles.containerDedicateStyle}>
+              <View style={errorStyles.dedicateTreeName}>
+                <Text style={errorStyles.textDedicateStyle}>
+                  {this.props.error}
+                </Text>
+              </View>
+            </View>
+          ) : null}
           <CardLayout style={[challengeStyles.challengeContainer]}>
             <View style={challengeStyles.challengeColumnContainer}>
               <TCombForm

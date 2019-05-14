@@ -29,8 +29,7 @@ export default (menuStyles = EStyleSheet.create({
     marginLeft: 10
   },
   profileImageStyle: {
-    marginBottom: 10,
-    flex: 0.6
+    marginTop: 40
   },
   profileLogImageStyle: {
     marginTop: 40
@@ -38,7 +37,8 @@ export default (menuStyles = EStyleSheet.create({
   profileTextHeading: {
     fontSize: 13,
     color: '$textColor',
-    fontWeight: '600'
+    fontWeight: '600',
+    marginTop: 5
   },
   profileText: {
     fontSize: 13,

@@ -12,6 +12,7 @@ import challengeStyles from '../../../styles/challenge';
 import TabContainer from '../../../containers/Menu/TabContainer';
 import i18n from '../../../locales/i18n';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
+import styles from '../../../styles/profilepicker.native';
 
 class ChallengeUser extends Component {
   constructor(props) {
@@ -98,6 +99,13 @@ class ChallengeUser extends Component {
             paddingBottom: 72
           }}
         >
+          {this.props.error ? (
+            <View style={styles.containerDedicateStyle}>
+              <View style={styles.dedicateTreeName}>
+                <Text style={styles.textDedicateStyle}>{this.props.error}</Text>
+              </View>
+            </View>
+          ) : null}
           <CardLayout style={[challengeStyles.challengeContainer]}>
             <View style={challengeStyles.challengeColumnContainer}>
               <SearchUser

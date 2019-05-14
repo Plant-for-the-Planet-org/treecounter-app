@@ -51,7 +51,11 @@ export default class ContributionCard extends React.Component {
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
       ? [
-          <TextSpan>{'Gifted on ' + plantDate + ' to '}</TextSpan>,
+          <TextSpan>
+            {'Gifted on ' +
+              moment(new Date(plantDate)).format('DD MMM YYYY') +
+              ' to '}
+          </TextSpan>,
           <TextSpan
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
@@ -62,7 +66,7 @@ export default class ContributionCard extends React.Component {
             {givee}
           </TextSpan>
         ]
-      : 'Donated on ' + plantDate;
+      : 'Donated on ' + moment(new Date(plantDate)).format('DD MMM YYYY');
   }
 
   tpoLine(tpoName) {
@@ -70,7 +74,12 @@ export default class ContributionCard extends React.Component {
   }
 
   plantActionLine(plantDate, registrationDate) {
-    return 'Planted on ' + plantDate + ', Added on ' + registrationDate;
+    return (
+      'Planted on ' +
+      moment(new Date(plantDate)).format('DD MMM YYYY') +
+      ', Added on ' +
+      moment(new Date(registrationDate)).format('DD MMM YYYY')
+    );
   }
 
   dedicateActionLine = (isGift, givee, giveeSlug) => {
@@ -93,7 +102,11 @@ export default class ContributionCard extends React.Component {
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && giver
       ? [
-          <TextSpan>{'Given on ' + redemptionDate + ' by '}</TextSpan>,
+          <TextSpan>
+            {'Given on ' +
+              moment(new Date(redemptionDate)).format('DD MMM YYYY') +
+              ' by '}
+          </TextSpan>,
           <TextSpan
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
@@ -105,9 +118,10 @@ export default class ContributionCard extends React.Component {
           </TextSpan>
         ]
       : redemptionCode
-        ? 'Redeemed on ' + redemptionDate
+        ? 'Redeemed on ' +
+          moment(new Date(redemptionDate)).format('DD MMM YYYY')
         : 'Dedicated on ' +
-          redemptionDate +
+          moment(new Date(redemptionDate)).format('DD MMM YYYY') +
           (givee
             ? [
                 <TextSpan>{' by '}</TextSpan>,
@@ -241,9 +255,9 @@ export default class ContributionCard extends React.Component {
                     <TextSpan key={measurement.id}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
-                        : new Date(
-                            measurement.measurementDate
-                          ).toLocaleDateString() +
+                        : moment(new Date(measurement.measurementDate)).format(
+                            'DD MMM YYYY'
+                          ) +
                           (measurement.diameter + 'cm').padStart(10) +
                           (
                             (measurement.height / 100).toFixed(1) + 'm'
@@ -265,9 +279,9 @@ export default class ContributionCard extends React.Component {
                   .slice(3)
                   .map(measurement => (
                     <TextSpan key={measurement.id}>
-                      {new Date(
-                        measurement.measurementDate
-                      ).toLocaleDateString() +
+                      {moment(new Date(measurement.measurementDate)).format(
+                        'DD MMM YYYY'
+                      ) +
                         (measurement.diameter + 'cm').padStart(10) +
                         ((measurement.height / 100).toFixed(1) + 'm').padStart(
                           10
@@ -331,9 +345,9 @@ export default class ContributionCard extends React.Component {
                     <TextSpan key={measurement.id}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
-                        : new Date(
-                            measurement.measurementDate
-                          ).toLocaleDateString() +
+                        : moment(new Date(measurement.measurementDate)).format(
+                            'DD MMM YYYY'
+                          ) +
                           (measurement.diameter + 'cm').padStart(10) +
                           (
                             (measurement.height / 100).toFixed(1) + 'm'
@@ -355,9 +369,9 @@ export default class ContributionCard extends React.Component {
                   .slice(3)
                   .map(measurement => (
                     <TextSpan key={measurement.id}>
-                      {new Date(
-                        measurement.measurementDate
-                      ).toLocaleDateString() +
+                      {moment(new Date(measurement.measurementDate)).format(
+                        'DD MMM YYYY'
+                      ) +
                         (measurement.diameter + 'cm').padStart(10) +
                         ((measurement.height / 100).toFixed(1) + 'm').padStart(
                           10
@@ -437,9 +451,9 @@ export default class ContributionCard extends React.Component {
                     <TextSpan key={measurement.id}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
-                        : new Date(
-                            measurement.measurementDate
-                          ).toLocaleDateString() +
+                        : moment(new Date(measurement.measurementDate)).format(
+                            'DD MMM YYYY'
+                          ) +
                           (measurement.diameter + 'cm').padStart(10) +
                           (
                             (measurement.height / 100).toFixed(1) + 'm'
@@ -461,9 +475,9 @@ export default class ContributionCard extends React.Component {
                   .slice(3)
                   .map(measurement => (
                     <TextSpan key={measurement.id}>
-                      {new Date(
-                        measurement.measurementDate
-                      ).toLocaleDateString() +
+                      {moment(new Date(measurement.measurementDate)).format(
+                        'DD MMM YYYY'
+                      ) +
                         (measurement.diameter + 'cm').padStart(10) +
                         ((measurement.height / 100).toFixed(1) + 'm').padStart(
                           10

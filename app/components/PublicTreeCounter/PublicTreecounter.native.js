@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, View, Text, Linking } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  Linking,
+  TouchableOpacity
+} from 'react-native';
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
@@ -8,7 +14,10 @@ import PlantProjectCarousel from '../PlantProjects/PlantProjectCarousel';
 import SvgContainer from '../Common/SvgContainer';
 import CardLayout from '../Common/Card';
 import stylesHome from '../../styles/user-home';
-import stylesPublicPage from '../../styles/public-page.native';
+import { delimitNumbers } from '../../utils/utils';
+import stylesPublicPage from '../../styles/public-page';
+import PrimaryButton from '../Common/Button/PrimaryButton';
+import i18n from '../../locales/i18n.js';
 
 import {
   getProfileTypeName,
@@ -16,7 +25,7 @@ import {
   isUserFollower,
   amISupporting
 } from './utils';
-import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet.native';
+import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 
 class PublicTreeCounter extends React.Component {
@@ -216,6 +225,61 @@ class PublicTreeCounter extends React.Component {
                 />
               ))}
             </View>
+          ) : null}
+        </View>
+        <View>
+          {treecounter.directChildren ? (
+            <CardLayout>
+              <View>
+                <View style={stylesPublicPage.tableHeader}>
+                  <Text style={stylesPublicPage.firstColumn}>Contributor</Text>
+                  <Text style={stylesPublicPage.secondColumn}>
+                    Planted Trees
+                  </Text>
+                  <Text style={stylesPublicPage.thirdColumn}>Target</Text>
+                  <View style={stylesPublicPage.fourthColumn} />
+                </View>
+                <View>
+                  {Object.keys(treecounter.directChildren).map(childrenId => {
+                    return (
+                      <View style={stylesPublicPage.tableHeader}>
+                        <Text style={stylesPublicPage.firstColumn}>
+                          {treecounter.directChildren[childrenId].displayName}
+                        </Text>
+                        <Text style={stylesPublicPage.secondColumn}>
+                          {delimitNumbers(
+                            parseInt(
+                              treecounter.directChildren[childrenId]
+                                .countPlanted
+                            )
+                          )}
+                        </Text>
+                        <Text style={stylesPublicPage.thirdColumn}>
+                          {delimitNumbers(
+                            parseInt(
+                              treecounter.directChildren[childrenId].countTarget
+                            )
+                          )}
+                        </Text>
+                        <View style={stylesPublicPage.fourthColumn}>
+                          <TouchableOpacity
+                            onPress={() =>
+                              this.onRegisterSupporter(
+                                treecounter.directChildren[childrenId]
+                              )
+                            }
+                          >
+                            <Text style={stylesPublicPage.supportText}>
+                              {i18n.t('label.support')}
+                            </Text>
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    );
+                  })}
+                </View>
+              </View>
+            </CardLayout>
           ) : null}
         </View>
       </ScrollView>

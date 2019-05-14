@@ -51,7 +51,11 @@ export default class ContributionCard extends React.Component {
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
       ? [
-          <TextSpan>{'Gifted on ' + plantDate + ' to '}</TextSpan>,
+          <TextSpan>
+            {'Gifted on ' +
+              moment(new Date(plantDate)).format('DD MMM YYYY') +
+              ' to '}
+          </TextSpan>,
           <TextSpan
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
@@ -62,7 +66,7 @@ export default class ContributionCard extends React.Component {
             {givee}
           </TextSpan>
         ]
-      : 'Donated on ' + plantDate;
+      : 'Donated on ' + moment(new Date(plantDate)).format('DD MMM YYYY');
   }
 
   tpoLine(tpoName) {
@@ -70,7 +74,12 @@ export default class ContributionCard extends React.Component {
   }
 
   plantActionLine(plantDate, registrationDate) {
-    return 'Planted on ' + plantDate + ', Added on ' + registrationDate;
+    return (
+      'Planted on ' +
+      moment(new Date(plantDate)).format('DD MMM YYYY') +
+      ', Added on ' +
+      moment(new Date(registrationDate)).format('DD MMM YYYY')
+    );
   }
 
   dedicateActionLine = (isGift, givee, giveeSlug) => {
@@ -93,7 +102,11 @@ export default class ContributionCard extends React.Component {
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && giver
       ? [
-          <TextSpan>{'Given on ' + redemptionDate + ' by '}</TextSpan>,
+          <TextSpan>
+            {'Given on ' +
+              moment(new Date(redemptionDate)).format('DD MMM YYYY') +
+              ' by '}
+          </TextSpan>,
           <TextSpan
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
@@ -105,9 +118,10 @@ export default class ContributionCard extends React.Component {
           </TextSpan>
         ]
       : redemptionCode
-        ? 'Redeemed on ' + redemptionDate
+        ? 'Redeemed on ' +
+          moment(new Date(redemptionDate)).format('DD MMM YYYY')
         : 'Dedicated on ' +
-          redemptionDate +
+          moment(new Date(redemptionDate)).format('DD MMM YYYY') +
           (givee
             ? [
                 <TextSpan>{' by '}</TextSpan>,
@@ -210,28 +224,6 @@ export default class ContributionCard extends React.Component {
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {donateActionLine ? <TextSpan>{donateActionLine}</TextSpan> : null}
             {tpoLine ? <TextSpan>{tpoLine}</TextSpan> : null}
-            {/*<TextSpan strong={true}>*/}
-            {/*{contribution.treeCount + ' '}*/}
-            {/*{contribution.treeSpecies ? contribution.treeSpecies : ''}*/}
-            {/*{i18n.t('label.tree')}*/}
-            {/*</TextSpan>*/}
-            {/*<TextSpan>*/}
-            {/*{contribution.geoLatitude + ', ' + contribution.geoLongitude}*/}
-            {/*</TextSpan>*/}
-            {/*<TextSpan>*/}
-            {/*{moment(new Date(contribution.plantDate)).format('DD MMM YYYY')}*/}
-            {/*</TextSpan>*/}
-            {/*{imagesArray.length ? (*/}
-            {/*<a onClick={this.openLightbox}>{i18n.t('label.pictures')}</a>*/}
-            {/*) : null}*/}
-            {/*<Lightbox*/}
-            {/*currentImage={this.state.currentImage}*/}
-            {/*images={imagesArray}*/}
-            {/*isOpen={this.state.lightboxIsOpen}*/}
-            {/*onClose={this.closeLightbox}*/}
-            {/*onClickNext={this.gotoNext}*/}
-            {/*onClickPrev={this.gotoPrevious}*/}
-            {/*/>*/}
           </div>
           <div className="contribution-container__right-column">
             {contribution.category === 'contributions'
@@ -241,9 +233,9 @@ export default class ContributionCard extends React.Component {
                     <TextSpan key={measurement.id}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
-                        : new Date(
-                            measurement.measurementDate
-                          ).toLocaleDateString() +
+                        : moment(new Date(measurement.measurementDate)).format(
+                            'DD MMM YYYY'
+                          ) +
                           (measurement.diameter + 'cm').padStart(10) +
                           (
                             (measurement.height / 100).toFixed(1) + 'm'
@@ -265,9 +257,9 @@ export default class ContributionCard extends React.Component {
                   .slice(3)
                   .map(measurement => (
                     <TextSpan key={measurement.id}>
-                      {new Date(
-                        measurement.measurementDate
-                      ).toLocaleDateString() +
+                      {moment(new Date(measurement.measurementDate)).format(
+                        'DD MMM YYYY'
+                      ) +
                         (measurement.diameter + 'cm').padStart(10) +
                         ((measurement.height / 100).toFixed(1) + 'm').padStart(
                           10
@@ -331,9 +323,9 @@ export default class ContributionCard extends React.Component {
                     <TextSpan key={measurement.id}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
-                        : new Date(
-                            measurement.measurementDate
-                          ).toLocaleDateString() +
+                        : moment(new Date(measurement.measurementDate)).format(
+                            'DD MMM YYYY'
+                          ) +
                           (measurement.diameter + 'cm').padStart(10) +
                           (
                             (measurement.height / 100).toFixed(1) + 'm'
@@ -355,9 +347,9 @@ export default class ContributionCard extends React.Component {
                   .slice(3)
                   .map(measurement => (
                     <TextSpan key={measurement.id}>
-                      {new Date(
-                        measurement.measurementDate
-                      ).toLocaleDateString() +
+                      {moment(new Date(measurement.measurementDate)).format(
+                        'DD MMM YYYY'
+                      ) +
                         (measurement.diameter + 'cm').padStart(10) +
                         ((measurement.height / 100).toFixed(1) + 'm').padStart(
                           10
@@ -424,7 +416,9 @@ export default class ContributionCard extends React.Component {
           }`}
         >
           <div className="contribution-container__left-column">
-            {treeCountLine ? <TextSpan>{treeCountLine}</TextSpan> : null}
+            {treeCountLine ? (
+              <TextSpan strong={true}>{treeCountLine}</TextSpan>
+            ) : null}
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {redeemActionLine ? <TextSpan>{redeemActionLine}</TextSpan> : null}
             {tpoLine ? <TextSpan>{tpoLine}</TextSpan> : null}
@@ -437,9 +431,9 @@ export default class ContributionCard extends React.Component {
                     <TextSpan key={measurement.id}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
-                        : new Date(
-                            measurement.measurementDate
-                          ).toLocaleDateString() +
+                        : moment(new Date(measurement.measurementDate)).format(
+                            'DD MMM YYYY'
+                          ) +
                           (measurement.diameter + 'cm').padStart(10) +
                           (
                             (measurement.height / 100).toFixed(1) + 'm'
@@ -461,9 +455,9 @@ export default class ContributionCard extends React.Component {
                   .slice(3)
                   .map(measurement => (
                     <TextSpan key={measurement.id}>
-                      {new Date(
-                        measurement.measurementDate
-                      ).toLocaleDateString() +
+                      {moment(new Date(measurement.measurementDate)).format(
+                        'DD MMM YYYY'
+                      ) +
                         (measurement.diameter + 'cm').padStart(10) +
                         ((measurement.height / 100).toFixed(1) + 'm').padStart(
                           10
@@ -488,7 +482,6 @@ export default class ContributionCard extends React.Component {
                 {i18n.t('label.update')}
               </Link>
             ) : null}
-            )}
           </div>
         </div>
         <hr className="contribution-container__partition" />

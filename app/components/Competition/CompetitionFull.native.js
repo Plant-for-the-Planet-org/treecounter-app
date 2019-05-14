@@ -23,6 +23,7 @@ import CompetitionTopCompetitor from './CompetitionTopCompetitor.native';
 import CompetitionParticipant from './CompetitionParticipant.native';
 import searchBarStyles from '../../styles/header/search_bar.native';
 import SearchUser from '../Challenge/Tabs/SearchUser.native';
+import moment from 'moment';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -231,7 +232,11 @@ class CompetitionFull extends React.Component {
                       />
                       <Text style={snippetStyles.bottomText}>
                         {i18n.t('label.ends')}{' '}
-                        {competitionDetail && competitionDetail.endDate}
+                        {competitionDetail && competitionDetail.endDate
+                          ? moment(new Date(competitionDetail.endDate)).format(
+                              'MMM DD, YYYY'
+                            )
+                          : ''}
                       </Text>
                     </View>
 

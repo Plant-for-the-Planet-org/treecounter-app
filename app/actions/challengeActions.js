@@ -17,7 +17,9 @@ export function challenge(challengeDetails) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
-      let request = postAuthenticatedRequest(route, challengeDetails);
+      let request = postAuthenticatedRequest(route, challengeDetails, {
+        version: 'v1.1'
+      });
       request
         .then(response => {
           dispatch(mergeEntities(normalize(response.data, treecounterSchema)));

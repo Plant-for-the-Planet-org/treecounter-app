@@ -31,8 +31,9 @@ class ChallengeContainer extends Component {
       .challenge(challengeDetails)
       .then(success => {})
       .catch(err => {
+        console.log(err.response.data);
         this.setState({
-          error: err.response.data.message
+          error: err.response.data.minTarget
         });
       });
   }

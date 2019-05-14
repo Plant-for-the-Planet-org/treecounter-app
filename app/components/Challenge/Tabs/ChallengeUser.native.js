@@ -102,7 +102,12 @@ class ChallengeUser extends Component {
           {this.props.error ? (
             <View style={styles.containerDedicateStyle}>
               <View style={styles.dedicateTreeName}>
-                <Text style={styles.textDedicateStyle}>{this.props.error}</Text>
+                <Text style={styles.textDedicateStyle}>
+                  {i18n.t('label.challenge_error', {
+                    user: this.state.selectedSuggestion.name,
+                    target: delimitNumbers(this.props.error)
+                  })}
+                </Text>
               </View>
             </View>
           ) : null}

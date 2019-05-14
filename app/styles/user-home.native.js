@@ -73,13 +73,10 @@ export default (buttonStyles = EStyleSheet.create({
   userInfoProfileType: {
     flexDirection: 'row'
   },
-  profileTypeContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#c7c7c6',
+  profileTypeImage: {
+    width: 30,
     height: 30,
-    marginRight: 10,
-    padding: 5
+    marginRight: 10
   },
   profileTypeStyle: {
     color: '#ffffff',

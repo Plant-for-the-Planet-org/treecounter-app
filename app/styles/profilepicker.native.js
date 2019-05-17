@@ -44,7 +44,8 @@ export default (editProfileStyle = EStyleSheet.create({
     textAlign: 'center'
   },
   topCompetitorScore: {
-    width: '40%'
+    width: '40%',
+    marginTop: 5
   },
   topCompetitorName: {
     width: '60%',
@@ -68,6 +69,11 @@ export default (editProfileStyle = EStyleSheet.create({
     flexDirection: 'column',
     padding: 5
   },
+  topCompetitorScoreText: {
+    fontSize: 14,
+    color: '$cardTextColor',
+    maxWidth: '100%'
+  },
   searchUserStyle: {
     flex: 1,
     flexDirection: 'column'
@@ -77,7 +83,7 @@ export default (editProfileStyle = EStyleSheet.create({
     flexDirection: 'row',
     padding: 16,
     width: '100%',
-    justifyContent: 'space-between'
+    justifyContent: 'center'
   },
   containerDedicateStyle: {
     flex: 1,

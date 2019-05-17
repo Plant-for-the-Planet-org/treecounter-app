@@ -15,8 +15,27 @@ import {
 import Challenge from '../../components/Challenge/createChallenge';
 
 class ChallengeContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null
+    };
+    this.challenge = this.challenge.bind(this);
+  }
+
   onTabChange(title) {
     this.props.navigation.setParams({ titleParam: title });
+  }
+  challenge(challengeDetails) {
+    this.props
+      .challenge(challengeDetails)
+      .then(success => {})
+      .catch(err => {
+        console.log(err.response.data);
+        this.setState({
+          error: err.response.data.minTarget
+        });
+      });
   }
   render() {
     return (
@@ -26,7 +45,8 @@ class ChallengeContainer extends Component {
         updateRoute={(routeName, id) =>
           this.props.route(routeName, id, this.props.navigation)
         }
-        challengeUser={this.props.challenge}
+        error={this.state.error}
+        challengeUser={this.challenge}
         challenges={this.props.userChallenges}
         navigation={this.props.navigation}
         challengeStatus={this.props.challengeStatus}

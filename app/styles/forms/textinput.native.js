@@ -24,6 +24,7 @@ export default (textInputStyles = EStyleSheet.create({
     flex: 1,
     // flexGrow: 1,
     marginLeft: 10,
+    padding: 10,
     fontSize: 13,
     color: '#686060',
     borderBottomWidth: 1,

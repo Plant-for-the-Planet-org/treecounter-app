@@ -124,7 +124,7 @@ class PublicTreeCounter extends React.Component {
     };
     const headerProps = {
       caption,
-      profileType: getProfileTypeName(profileType),
+      profileType: profileType,
       logo,
       isUserFollowerBool,
       isUserLoggedIn,
@@ -177,13 +177,15 @@ class PublicTreeCounter extends React.Component {
               </div>
             )} */}
         </div>
-        <div className="canvasContainer flex-column">
-          <SvgContainer {...this.state.svgData} />
-          <TreecounterGraphicsText
-            trillion={false}
-            onToggle={toggleVal => this.updateSvg(toggleVal)}
-            treecounterData={this.state.svgData}
-          />
+        <div className="treecounter_container">
+          <div className="canvasContainer flex-column">
+            <SvgContainer {...this.state.svgData} />
+            <TreecounterGraphicsText
+              trillion={false}
+              onToggle={toggleVal => this.updateSvg(toggleVal)}
+              treecounterData={this.state.svgData}
+            />
+          </div>
         </div>
         <div className="tree-counter-footer__container">
           {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (

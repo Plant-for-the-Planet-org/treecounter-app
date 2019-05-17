@@ -11,6 +11,7 @@ import _ from 'lodash';
 import i18n from '../../../locales/i18n';
 import searchBarStyles from '../../../styles/header/search_bar.native';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
+import UserProfileImage from '../../Common/UserProfileImage';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
@@ -116,7 +117,7 @@ class SearchUser extends React.Component {
         />
 
         {this.state.q && !this.state.searchResultClicked ? (
-          <ScrollView>
+          <ScrollView style={{ paddingBottom: 15 }}>
             {this.state.q.map((suggestion, i) => {
               if (this.props.hideCompetitions) {
                 if (suggestion.category !== 'competition') {
@@ -126,13 +127,16 @@ class SearchUser extends React.Component {
                       key={'suggestion' + i}
                       onPress={this._onNavigationClick.bind(this, suggestion)}
                     >
-                      <Image
-                        style={styles.profileImage}
-                        source={
-                          suggestion.image
-                            ? getImageUrl('profile', 'avatar', suggestion.image)
-                            : profileTypeToImage[suggestion.type]
-                        }
+                      <UserProfileImage
+                        profileImage={suggestion.image}
+                        imageCategory={suggestion.category}
+                        imageType="avatar"
+                        imageStyle={{
+                          height: 30,
+                          width: 30,
+                          borderRadius: 30 / 2
+                        }}
+                        defaultType={suggestion.type}
                       />
                       <Text style={styles.profileText}>{suggestion.name}</Text>
                     </TouchableOpacity>
@@ -145,13 +149,16 @@ class SearchUser extends React.Component {
                     key={'suggestion' + i}
                     onPress={this._onNavigationClick.bind(this, suggestion)}
                   >
-                    <Image
-                      style={styles.profileImage}
-                      source={
-                        suggestion.image
-                          ? getImageUrl('profile', 'avatar', suggestion.image)
-                          : profileTypeToImage[suggestion.type]
-                      }
+                    <UserProfileImage
+                      profileImage={suggestion.image}
+                      imageCategory={suggestion.category}
+                      imageType="avatar"
+                      imageStyle={{
+                        height: 30,
+                        width: 30,
+                        borderRadius: 30 / 2
+                      }}
+                      defaultType={suggestion.type}
                     />
                     <Text style={styles.profileText}>{suggestion.name}</Text>
                   </TouchableOpacity>

@@ -90,8 +90,7 @@ export default (editProfileStyle = EStyleSheet.create({
     justifyContent: 'center'
   },
   profileImage: {
-    height: 40,
-    width: 40
+    margin: 0
   },
   flexContainerStyle: {
     flexDirection: 'row',

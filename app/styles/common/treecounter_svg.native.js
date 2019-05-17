@@ -68,7 +68,7 @@ export default (treecounterStyles = EStyleSheet.create({
   },
   svgTextContainer: {
     flexDirection: 'column',
-    width: '40%',
+    width: '45%',
     height: '30%',
     marginTop: 'auto',
     marginBottom: 'auto'

@@ -1,1 +1,5 @@
-{ }
+{
+  "has_dedicated": "Alle Bäume, die Sie pflanzen, mit Ausnahme von Geschenkspenden, werden {{user}} gewidmet. Während Bäume in beiden Baumzählern erscheinen, zählen sie nur einmal im globalen Baumzähler.",
+  "has_not_dedicated": "Sie können einem Freund, Kollegen oder einer Organisation helfen, ihr Ziel zu erreichen, indem Sie ihnen Bäume widmen.",
+  "dedicate_tootltip": "Alle Bäume, die Sie von nun an pflanzen, registrieren oder spenden, werden dem ausgewählten Benutzer gewidmet. Sie können die Person, der Sie die Bäume widmen möchten, jederzeit ändern. Im Falle von geschenkten Bäumen werden die Bäume, die Sie pflanzen, nur dem Beschenkten gewidmet."
+}

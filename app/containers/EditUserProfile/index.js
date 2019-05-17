@@ -157,7 +157,7 @@ class EditUserProfileContainer extends React.Component {
     let value = profileForm.getValue();
 
     let imageValue = undefined;
-    if (!!imageForm && newImageAvailable) {
+    if (!!imageForm) {
       imageValue = imageForm.getValue();
     }
     if (

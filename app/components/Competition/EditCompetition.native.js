@@ -22,6 +22,9 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import imagestyles from '../../styles/file_picker.native';
 import styles from '../../styles/competition/mine.native';
 import imageUpload from '../../assets/images/icons/upload_image.png';
+
+import close_green from '../../assets/images/icons/close_green.png';
+import UserProfileImage from '../Common/UserProfileImage.native';
 let Form = t.form.Form;
 const ImagePicker = require('react-native-image-picker');
 const options = {
@@ -32,9 +35,7 @@ const options = {
   }
 };
 const getCompFormImageLayoutTemplate = () => {
-  console.log('formlayout');
   const formLayoutTreesTemplate = locals => {
-    console.log(locals);
     return (
       <View style={imagestyles.filePickerContainer}>
         <View style={{ flex: 1 }}>
@@ -59,7 +60,24 @@ const getCompFormImageLayoutTemplate = () => {
             });
           }}
         >
-          <Image source={imageUpload} style={{ height: 40, width: 40 }} />
+          {!locals.value ? (
+            <Image source={imageUpload} style={{ height: 40, width: 40 }} />
+          ) : (
+            <View>
+              <UserProfileImage
+                profileImage={locals.value}
+                imageCategory="competition"
+                imageType="avatar"
+              />
+              <View style={styles.profileImageBackground}>
+                <Image
+                  resizeMode="contain"
+                  style={imagestyles.addIcon}
+                  source={close_green}
+                />
+              </View>
+            </View>
+          )}
         </TouchableOpacity>
       </View>
     );
@@ -128,6 +146,11 @@ class EditCompetition extends Component {
     if (schemaOptions.fields.imageFile) {
       schemaOptions.fields.imageFile.template = getCompFormImageLayoutTemplate();
     }
+    let formValue = this.state.formValue;
+    if (formValue) {
+      formValue.imageFile =
+        formValue && formValue.image ? formValue.image : null;
+    }
     return (
       <KeyboardAwareScrollView enableOnAndroid={true}>
         <CardLayout style={{ flex: 1 }}>
@@ -135,7 +158,7 @@ class EditCompetition extends Component {
             ref={this.createCompetitionForm}
             type={competitionFormSchema}
             options={schemaOptions}
-            value={this.state.formValue}
+            value={formValue}
           />
           <PrimaryButton onClick={() => this.onCreateCompetition()}>
             {i18n.t('label.edit_competition')}

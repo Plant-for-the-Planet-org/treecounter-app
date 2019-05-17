@@ -342,6 +342,7 @@ export default class DonateTrees extends Component {
       infinite: false,
       adaptiveHeight: true,
       currentSlide: this.state.pageIndex,
+      lazyLoad: true,
       prevArrow: (
         <CarouselNavigation
           styleName={
@@ -409,7 +410,9 @@ export default class DonateTrees extends Component {
     ) : !plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>
-          {pageHeadings[this.state.pageIndex].heading}
+          {this.props.supportTreecounter.treecounterId
+            ? 'Support trees to ' + this.props.supportTreecounter.displayName
+            : pageHeadings[this.state.pageIndex].heading}
           <DescriptionHeading>
             {pageHeadings[this.state.pageIndex].description}
           </DescriptionHeading>

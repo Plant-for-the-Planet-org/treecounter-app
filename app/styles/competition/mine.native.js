@@ -33,6 +33,16 @@ export default (mine = EStyleSheet.create({
     marginLeft: 10,
     paddingRight: 16
   },
+  profileImageBackground: {
+    position: 'absolute',
+    height: 15,
+    left: 98,
+    top: 40,
+    width: 15,
+    zIndex: 10,
+    borderRadius: 15,
+    backgroundColor: '#ffffff'
+  },
   addImageTextStyle: {
     color: '#686060',
     fontSize: 14
@@ -60,6 +70,24 @@ export default (mine = EStyleSheet.create({
     padding: 0,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10
+  },
+  containerDedicateStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 25,
+    width: '100%',
+    justifyContent: 'space-between'
+  },
+  dedicateTreeName: {
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  textDedicateStyle: {
+    fontSize: 14,
+    color: '#ff6666',
+    maxWidth: '100%',
+    textAlign: 'center'
   },
   mineSpecsContainer: {
     height: Layout.window.height * 0.3,

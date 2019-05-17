@@ -18,11 +18,11 @@
   "linkText": "Text for your Link",
   "select_file": "Select a file from computer",
   "browse": "Browse",
-  "upload_profile_picture": "Upload New Profile Picture",
+  "upload_profile_picture": "Upload New Picture",
   "delete": "Delete",
   "confirm": "Confirm",
   "delete_contribution": "Delete Contribution",
-  "my_tree_delete_confirm": "Are you sure you want to delete this tree",
-  "deletion_warning_summary_contribution": "All your personal information will be deleted unless required for legal and accounting purpose.",
+  "my_tree_delete_confirm": "Are you sure you want to delete this tree?",
+  "deletion_warning_summary_contribution": "You are about to delete some trees you have registered as planted.",
   "delete_my_trees_action": "This action will permanently delete this contribution."
 }

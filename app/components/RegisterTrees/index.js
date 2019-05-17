@@ -134,7 +134,9 @@ export default class RegisterTrees extends Component {
       plantProject =
         this.state.plantProject !== ''
           ? this.state.plantProject
-          : getPlantProjectEnum(this.props.currentUserProfile)[0].value;
+          : getPlantProjectEnum(this.props.currentUserProfile).length > 0
+            ? getPlantProjectEnum(this.props.currentUserProfile)[0].value
+            : null;
     }
 
     this.props.onSubmit(this.state.mode, null, plantProject);
@@ -211,7 +213,8 @@ export default class RegisterTrees extends Component {
                   onChange={this.onFormChangeMultiple}
                 />
               )}
-              {isTpo(this.props.currentUserProfile) ? (
+              {isTpo(this.props.currentUserProfile) &&
+              tpoPlantProjects.length > 0 ? (
                 <div className="pftp-selectfield">
                   <select
                     key={'hey'}

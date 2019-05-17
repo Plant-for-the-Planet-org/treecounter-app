@@ -219,7 +219,7 @@ export default class SelectPlantProject extends Component {
             </div>
           </div>
         </ModalDialog>
-        <div className="select-project__container">
+        <div className="select-project__container remove_shadow">
           <div className="select-project__header">
             {i18n.t('label.featuredProjects')}{' '}
           </div>

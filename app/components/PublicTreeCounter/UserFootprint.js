@@ -12,7 +12,7 @@ import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
  */
 const UserFootprint = ({ userProfile }) => {
   return (
-    <div>
+    <div className="full_width">
       <UserSynopsis
         synopsis1={userProfile.synopsis1}
         synopsis2={userProfile.synopsis2}

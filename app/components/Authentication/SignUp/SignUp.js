@@ -49,9 +49,15 @@ export default class SignUp extends Component {
       recaptchaToken: token
     });
   };
+
+  refreshToken = () => {
+    this.recaptcha.execute();
+  };
+
   componentWillMount() {
     this.setSignupType(this.props);
   }
+
   setSignupType(props) {
     let signupType = null;
     if (props.match) {
@@ -78,6 +84,7 @@ export default class SignUp extends Component {
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <ReCaptcha
+          ref={ref => (this.recaptcha = ref)}
           action="login"
           sitekey="6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF"
           verifyCallback={this.verifyCallback}
@@ -138,7 +145,11 @@ export default class SignUp extends Component {
               />
               <PrimaryButton
                 onClick={event => {
-                  this.props.onSignUpClicked(type, this.state.recaptchaToken);
+                  this.props.onSignUpClicked(
+                    type,
+                    this.state.recaptchaToken,
+                    this.refreshToken
+                  );
                   event.preventDefault();
                 }}
               >

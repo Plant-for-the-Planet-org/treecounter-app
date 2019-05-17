@@ -23,7 +23,7 @@ class SignUpContainer extends React.Component {
     }
   }
 
-  onSignUpClicked = (profileType, token) => {
+  onSignUpClicked = (profileType, token, refreshToken) => {
     console.log(this.refs.signupContainer.refs.signupForm.validate());
     let formValue = this.refs.signupContainer.refs.signupForm.getValue();
     if (formValue) {
@@ -31,6 +31,7 @@ class SignUpContainer extends React.Component {
         .signUp(profileType, formValue, token, this.props.navigation)
         .then(success => {})
         .catch(err => {
+          refreshToken();
           console.log('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
             err,

@@ -13,7 +13,7 @@
     display: grid;
     grid-template-columns: 46px auto auto;
     align-items: center;
-    grid-column-gap: 16px;
+    grid-column-gap: 12px;
     position: relative;
     @include for-phone-only {
       grid-column-gap: 5px;

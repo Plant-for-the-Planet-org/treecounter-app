@@ -22,16 +22,16 @@ class LoginContainer extends React.Component {
     }
   }
 
-  onPress = recaptchaToken => {
+  onPress = (recaptchaToken, refreshToken) => {
     let result = this.refs.loginContainer.refs.loginForm.validate();
     console.log(result);
     let value = this.refs.loginContainer.refs.loginForm.getValue();
     if (value) {
-      this.onClick(value, recaptchaToken);
+      this.onClick(value, recaptchaToken, refreshToken);
     }
   };
 
-  onClick(value, recaptchaToken) {
+  onClick(value, recaptchaToken, refreshToken) {
     console.log(this.refs.loginContainer.refs.loginForm.validate());
     let formValue = this.refs.loginContainer.refs.loginForm.getValue();
     if (formValue) {
@@ -39,6 +39,7 @@ class LoginContainer extends React.Component {
         .login(value, recaptchaToken, this.props.navigation)
         .then(val => val)
         .catch(err => {
+          refreshToken();
           console.log('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
             err,

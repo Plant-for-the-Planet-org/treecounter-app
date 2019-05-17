@@ -39,8 +39,8 @@ function onAPIResponse(response) {
 
 async function getHeaders(authenticated = false, recaptcha) {
   let headers = {
-    'X-SESSION-ID': await getSessionId(),
-    'X-VERSION-KEY': 'd3b7387a-35d8-11e9-b210-d663bd873d93'
+    'X-SESSION-ID': await getSessionId()
+    // 'X-VERSION-KEY': 'd3b7387a-35d8-11e9-b210-d663bd873d93'
   };
   if (recaptcha) {
     headers = {

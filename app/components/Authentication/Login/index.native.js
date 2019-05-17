@@ -44,12 +44,15 @@ export default class Login extends Component {
     this._recaptchaToken = token;
   };
 
+  refreshToken = () => {
+    this._captchaRef.refreshToken();
+  };
+
   handleLoginClick = () => {
     if (this.refs.loginForm.getValue()) {
       Keyboard.dismiss();
     }
-    this.props.onPress(this._recaptchaToken);
-    this._captchaRef.refreshToken();
+    this.props.onPress(this._recaptchaToken, this.refreshToken);
   };
   render() {
     return (

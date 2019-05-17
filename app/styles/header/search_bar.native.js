@@ -20,7 +20,7 @@ export const centerTextInput =
     : {};
 export default (styles = EStyleSheet.create({
   container: {
-    width: '90%',
+    width: '100%',
     flexDirection: 'row',
     marginRight: 5,
     marginTop: 10,
@@ -29,15 +29,15 @@ export default (styles = EStyleSheet.create({
   },
   searchContainer: {
     height: 30,
-    width: '90%',
+    width: '75%',
     backgroundColor: '#f2f2f2',
     borderRadius: 5,
     paddingLeft: 27,
     marginLeft: 10
   },
   button: {
-    paddingRight: 2,
-    paddingLeft: 2
+    width: '100%',
+    marginRight: 5
   },
   searchIconContainer: {
     position: 'absolute',

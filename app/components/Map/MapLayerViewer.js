@@ -2,6 +2,8 @@ import * as React from 'react';
 import { WebMap, loadModules } from 'react-arcgis';
 import PropTypes from 'prop-types';
 
+import { mapCollapse, mapExpand } from '../../assets';
+
 //import { context } from '../../config/index';
 
 class MapLayerView extends React.Component {
@@ -12,10 +14,12 @@ class MapLayerView extends React.Component {
       status: 'loading',
       map: null,
       view: null,
-      layers: []
+      layers: [],
+      fullMapView: false
     };
 
     this.handleFail = this.handleFail.bind(this);
+    this.escFunction = this.escFunction.bind(this);
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -27,7 +31,18 @@ class MapLayerView extends React.Component {
     }
   }
 
+  escFunction(event) {
+    if (event.keyCode === 27) {
+      if (this.state.fullMapView) {
+        this.setState({
+          fullMapView: false
+        });
+      }
+    }
+  }
+
   componentDidMount() {
+    document.addEventListener('keydown', this.escFunction, false);
     loadModules(['esri/core/urlUtils', 'esri/config'])
       .then(([urlUtils, esriConfig]) => {
         // const proxyUrl = `${context.scheme}://${context.host}/esri/proxy.php`;
@@ -59,8 +74,13 @@ class MapLayerView extends React.Component {
       })
       .catch(error => console.error(error));
   }
+
   toggleMap() {
     this.setState({ fullMapView: !this.state.fullMapView });
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.escFunction, false);
   }
 
   render() {
@@ -84,12 +104,13 @@ class MapLayerView extends React.Component {
             onLoad={this.handleLoad.bind(this)}
             onFail={this.handleFail.bind(this)}
           />
-          <button
-            className="button-container"
-            onClick={this.toggleMap.bind(this)}
-          >
-            {this.state.fullMapView ? 'collapse' : 'expand'}
-          </button>
+          <div className="button-container" onClick={this.toggleMap.bind(this)}>
+            {this.state.fullMapView ? (
+              <img src={mapCollapse} />
+            ) : (
+              <img src={mapExpand} />
+            )}
+          </div>
         </div>
       </div>
     );

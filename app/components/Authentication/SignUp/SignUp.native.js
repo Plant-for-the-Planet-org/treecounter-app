@@ -44,12 +44,16 @@ export default class SignUp extends Component {
     this._recaptchaToken = token;
     // Here you will get the final token!!!
   };
+
+  refreshToken = () => {
+    this._captchaRef.refreshToken();
+  };
+
   onSignUpClicked = type => {
     if (this.refs.signupForm.getValue()) {
       Keyboard.dismiss();
     }
-    this.props.onSignUpClicked(type, this._recaptchaToken);
-    this._captchaRef.refreshToken();
+    this.props.onSignUpClicked(type, this._recaptchaToken, this.refreshToken);
   };
 
   render() {

@@ -72,47 +72,37 @@ export default class Leaderboard extends Component {
     if (selectedCategory)
       listItemsUI = (
         <CardLayout style={styles.cardStyle}>
-          <ScrollView
-            contentContainerStyle={{
-              justifyContent: 'flex-start',
-              flexGrow: 1
-            }}
-            showsHorizontalScrollIndicator={false}
-          >
-            {this.props.queryResult ? (
-              <View style={{ width: '98%', padding: 10, marginTop: 15 }}>
-                {this.props.queryResult.map((result, index) => {
-                  const isPrivate =
-                    result.hasOwnProperty('mayPublish') && !result.mayPublish;
-                  return (
-                    <LeaderboardItem
-                      key={'LeaderboardItem' + index}
-                      onPress={
-                        isPrivate
-                          ? () => {
-                              return;
-                            }
-                          : this._handleItemPress
-                      }
-                      image={result.image}
-                      planted={result.planted}
-                      target={maxPlanted}
-                      index={index}
-                      title={
-                        isPrivate
-                          ? i18n.t('label.tree_planter')
-                          : result.caption
-                      }
-                      treeCounterId={result.treecounterId}
-                      uri={result.uri}
-                    />
-                  );
-                })}
-              </View>
-            ) : (
-              <LoadingIndicator />
-            )}
-          </ScrollView>
+          {this.props.queryResult ? (
+            <View style={{ width: '98%', padding: 10, marginTop: 15 }}>
+              {this.props.queryResult.map((result, index) => {
+                const isPrivate =
+                  result.hasOwnProperty('mayPublish') && !result.mayPublish;
+                return (
+                  <LeaderboardItem
+                    key={'LeaderboardItem' + index}
+                    onPress={
+                      isPrivate
+                        ? () => {
+                            return;
+                          }
+                        : this._handleItemPress
+                    }
+                    image={result.image}
+                    planted={result.planted}
+                    target={maxPlanted}
+                    index={index}
+                    title={
+                      isPrivate ? i18n.t('label.tree_planter') : result.caption
+                    }
+                    treeCounterId={result.treecounterId}
+                    uri={result.uri}
+                  />
+                );
+              })}
+            </View>
+          ) : (
+            <LoadingIndicator />
+          )}
         </CardLayout>
       );
 
@@ -206,17 +196,25 @@ export default class Leaderboard extends Component {
           sectionInfo={this.props.sectionInfo}
           handleCategoryChange={this._handleCategoryChange}
         />
-        {this._getSortView()}
+        <ScrollView
+          contentContainerStyle={{
+            justifyContent: 'flex-start',
+            flexGrow: 1
+          }}
+          showsHorizontalScrollIndicator={false}
+        >
+          {this._getSortView()}
 
-        {this._getTableView(selectedCategory)}
-        {selectedCategory && (
-          <View style={[styles.cardImageStyle, { top: 85 }]}>
-            <Image
-              source={categoryIcons[selectedCategory]['selected']}
-              style={[{ height: '100%', width: '100%' }]}
-            />
-          </View>
-        )}
+          {this._getTableView(selectedCategory)}
+          {selectedCategory && (
+            <View style={[styles.cardImageStyle, { top: 45 }]}>
+              <Image
+                source={categoryIcons[selectedCategory]['selected']}
+                style={[{ height: '100%', width: '100%' }]}
+              />
+            </View>
+          )}
+        </ScrollView>
       </View>
     );
   }

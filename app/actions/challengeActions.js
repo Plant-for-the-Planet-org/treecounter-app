@@ -35,7 +35,7 @@ export function challenge(challengeDetails) {
           debug('error: ', error);
           reject(error);
           dispatch(setProgressModelState(false));
-          NotificationManager.error(error.response.data.message, 'Error', 5000);
+          // NotificationManager.error(error.response.data.message, 'Error', 5000);
         });
     });
   };

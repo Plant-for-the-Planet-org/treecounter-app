@@ -16,6 +16,8 @@ import i18n from '../../locales/i18n';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import ChallengeList from './challengeList';
+import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
+import { delimitNumbers } from '../../utils/utils';
 
 let TCombForm = t.form.Form;
 const getFormLayoutTemplate = () => {
@@ -106,6 +108,18 @@ export default class Challenge extends Component {
       checked: event.target.value
     });
   };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.error) {
+      NotificationManager.error(
+        i18n.t('label.challenge_error', {
+          user: this.state.challengedName,
+          target: delimitNumbers(nextProps.error)
+        }),
+        'Error',
+        5000
+      );
+    }
+  }
 
   challenge = () => {
     let requestData;

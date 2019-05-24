@@ -1,129 +1,76 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import i18n from '../../locales/i18n';
+import { loadModules } from '@esri/react-arcgis';
 
-import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
-import SvgContainer from '../Common/SvgContainer';
-import LoadingIndicator from '../Common/LoadingIndicator';
-import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
-import UserProfileImage from '../Common/UserProfileImage';
-import { getDocumentTitle } from '../../helpers/utils';
-import * as images from '../../assets';
+const styles = {
+  container: {
+    height: '100vh',
+    width: '100vw'
+  },
+  mapDiv: {
+    padding: 0,
+    margin: 0,
+    height: '100%',
+    width: '100%'
+  }
+};
 
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
-
-    let svgData = {};
-    const { treecounterData, userProfile } = props;
-    if (userProfile)
-      if (treecounterData) {
-        svgData = { ...treecounterData, type: userProfile.type };
-      }
     this.state = {
-      svgData: svgData
+      map: null,
+      view: null,
+      status: 'loading'
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { treecounterData, userProfile } = nextProps;
-    if (treecounterData) {
-      let svgData = { ...treecounterData, type: userProfile.type };
-      this.setState({ svgData });
-    }
-  }
-  updateSvg(toggle) {
-    if (toggle) {
-      const treecounter = this.props.treecounterData;
-      const profileType = this.props.userProfile.type;
-      if (isNaN(parseInt(treecounter.community))) {
-        treecounter.community = 0;
-      }
-      if (isNaN(parseInt(treecounter.personal))) {
-        treecounter.personal = 0;
-      }
+  componentDidMount() {
+    loadModules([
+      'esri/Map',
+      'esri/views/MapView',
+      'esri/widgets/Sketch',
+      'esri/layers/GraphicsLayer'
+    ]).then(([Map, MapView, Sketch, GraphicsLayer]) => {
+      let graphicsLayer = new GraphicsLayer();
+      const map = new Map({ layers: [graphicsLayer], basemap: 'topo-vector' });
+      const view = new MapView({
+        container: 'viewDiv',
+        map,
+        zoom: 15,
+        center: [78.4867, 17.385]
+      });
 
-      let svgData = {
-        id: treecounter.id,
-        target: treecounter.community + treecounter.personal, // light color
-        planted: treecounter.personal, //dark color
-        community: treecounter.community,
-        personal: treecounter.personal,
-        targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear,
-        type: profileType
-      };
-      this.setState({ svgData: Object.assign({}, svgData) });
-    } else {
-      const treecounter = this.props.treecounterData;
-      const profileType = this.props.userProfile.type;
-      let svgData = {
-        id: treecounter.id,
-        target: treecounter.target,
-        planted: treecounter.planted,
-        community: treecounter.community,
-        personal: treecounter.personal,
-        targetComment: treecounter.targetComment,
-        targetYear: treecounter.targetYear,
-        type: profileType
-      };
-      this.setState({ svgData: Object.assign({}, svgData) });
+      const sketch = new Sketch({
+        view: view,
+        layer: GraphicsLayer
+      });
+
+      view.ui.add(sketch, 'top-right');
+
+      view.then(() => {
+        this.setState({
+          map,
+          view,
+          status: 'loaded'
+        });
+      });
+    });
+  }
+
+  renderMap() {
+    if (this.state.status === 'loading') {
+      return <div>loading</div>;
     }
+    return null;
   }
 
   render() {
-    const { treecounterData, userProfile } = this.props;
-    document.title = getDocumentTitle(userProfile.treecounter.displayName);
-    const profileType = userProfile.type;
-    let { svgData } = this.state;
     return (
-      <div className="app-container__content--center sidenav-wrapper">
-        <div className="tree-counter-profile flex-column user-home-profile">
-          <UserProfileImage profileImage={userProfile.image} />
-          <div className="user-info">
-            <div className="tree-counter-name">
-              {userProfile.treecounter.displayName}
-            </div>
-            <div className="tree-counter-row">
-              {!!profileType && (
-                <img
-                  className="profile-type-image"
-                  src={
-                    profileType === 'education'
-                      ? images['schoolIcon']
-                      : profileType === 'tpo'
-                        ? images['tpoIcon']
-                        : profileType === 'company'
-                          ? images['companyIcon']
-                          : images['individualIcon']
-                  }
-                />
-              )}
-            </div>
-          </div>
-        </div>
-        <div className="treecounter_container">
-          <div className="canvasContainer flex-column">
-            <SvgContainer {...svgData} />
-            {treecounterData === null ? (
-              <div className="circle-inside circle-headline">
-                <LoadingIndicator />
-              </div>
-            ) : (
-              <TreecounterGraphicsText
-                trillion={false}
-                treecounterData={svgData}
-                onToggle={toggleVal => this.updateSvg(toggleVal)}
-              />
-            )}
-          </div>
+      <div style={styles.container}>
+        <div id="viewDiv" style={styles.mapDiv}>
+          {this.renderMap()}
         </div>
       </div>
     );
   }
 }
-
-UserHome.propTypes = {
-  treecounterData: PropTypes.object,
-  userProfile: PropTypes.object
-};

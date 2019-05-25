@@ -74,7 +74,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { serverName, baseUrl, treecounter } = this.props;
+    const { serverName, baseUrl, treecounter, projectId } = this.props;
     const { userProfile, displayName: caption } = treecounter;
     const { type: profileType, image: logo } = userProfile;
     const headerProps = {
@@ -129,8 +129,8 @@ export default class App extends Component {
               <SecondaryButton
                 onClick={event => {
                   const url = `${serverName}${getLocalRoute(
-                    'app_registerTrees'
-                  )}?uid=${treecounter.id}`;
+                    'app_donateTrees'
+                  )}/${projectId}`;
                   window.open(url, '_blank');
                 }}
               >
@@ -159,5 +159,6 @@ App.propTypes = {
   serverName: PropTypes.string,
   baseUrl: PropTypes.string,
   backgroundColor: PropTypes.string,
-  isStandardTreecounter: PropTypes.bool
+  isStandardTreecounter: PropTypes.bool,
+  projectId: PropTypes.string
 };

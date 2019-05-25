@@ -28,7 +28,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { serverName, baseUrl, treecounter } = this.props;
+    const { serverName, baseUrl, treecounter, ProjectId } = this.props;
     const style = `.canvasContainer {
       background-color:${this.props.backgroundColor};
     }`;
@@ -67,8 +67,8 @@ export default class App extends Component {
                 <SecondaryButton
                   onClick={event => {
                     const url = `${serverName}${getLocalRoute(
-                      'app_registerTrees'
-                    )}?uid=${treecounter.id}`;
+                      'app_donateTrees'
+                    )}/${ProjectId}`;
                     window.open(url, '_blank');
                   }}
                 >
@@ -89,5 +89,6 @@ App.propTypes = {
   showDonateButton: PropTypes.bool,
   serverName: PropTypes.string,
   baseUrl: PropTypes.string,
-  backgroundColor: PropTypes.string
+  backgroundColor: PropTypes.string,
+  ProjectId: PropTypes.any
 };

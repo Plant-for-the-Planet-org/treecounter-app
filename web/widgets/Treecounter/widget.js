@@ -50,6 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
         'data-background-color'
       );
 
+      let projectId = allBlockQuote[i].attributes.getNamedItem(
+        'data-projectId'
+      );
+      if (projectId && projectId.nodeValue) {
+        projectId = projectId.nodeValue;
+      }
       if (showGraphics && showGraphics.nodeValue === 'false') {
         showGraphics = false;
       }
@@ -96,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 baseUrl={baseUrl}
                 backgroundColor={backgroundColor}
                 isStandardTreecounter={isStandardTreecounter}
+                projectId={projectId}
               />,
               shadowRoot
             );

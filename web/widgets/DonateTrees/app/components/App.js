@@ -99,7 +99,7 @@ export default class App extends Component {
               } else {
                 const url = `${serverName}${getLocalRoute(
                   'app_donateTrees'
-                )}?projectId=${ProjectId}`;
+                )}/${ProjectId}`;
                 window.open(url, '_blank');
               }
             }}

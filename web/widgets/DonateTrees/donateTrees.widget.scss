@@ -9,11 +9,8 @@
 @import "../../stylesheet/donateTrees/donate_trees";
 @import "../../stylesheet/common/modal_dialog";
 @import "../../stylesheet/treeCounter/tpo_footer";
+@import "../common/widget";
 
-.widget-container {
-  font-family: "Open Sans", -apple-system, system-ui, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
 .row {
   display: flex;
 }

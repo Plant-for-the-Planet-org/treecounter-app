@@ -22,6 +22,7 @@ export default {
       type: 'string',
       title: 'label.competition_end_date',
       widget: 'date',
+      minDate: true,
       icon: null,
       help: null,
       propertyOrder: 3
@@ -39,15 +40,16 @@ export default {
       help: null,
       propertyOrder: 4
     },
-    // image: {
-    //   type: 'string',
-    //   title: 'label.competition_image',
-    //   attr: { maxlength: 255 },
-    //   icon: null,
-    //   help: null,
-    //   maxLength: 255,
-    //   propertyOrder: 5
-    // },
+    imageFile: {
+      type: 'string',
+      title: 'label.competition_image',
+      widget: 'file',
+      attr: { maxlength: 255 },
+      icon: null,
+      help: null,
+      maxLength: 255,
+      propertyOrder: 5
+    },
     description: {
       type: 'string',
       title: 'label.competition_description',

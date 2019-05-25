@@ -66,7 +66,12 @@ export default class AllCompetitions extends Component {
   render() {
     let { featuredCompetitions } = this.state;
     return (
-      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+      <ScrollView
+        contentContainerStyle={[
+          scrollStyle.styleContainer,
+          { paddingBottom: 72 }
+        ]}
+      >
         {featuredCompetitions.length > 0
           ? featuredCompetitions.map(project => (
               <CompetitionSnippet

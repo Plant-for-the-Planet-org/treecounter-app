@@ -20,7 +20,11 @@ export default class LeaderboardItem extends Component {
         <View style={[{ marginLeft: 10, marginRight: 5, width: '75%' }]}>
           <TouchableItem
             onPress={() =>
-              this.props.onPress(this.props.treeCounterId, this.props.uri)
+              this.props.onPress(
+                this.props.treeCounterId,
+                this.props.uri,
+                this.props.title
+              )
             }
             style={{ justifyContent: 'center' }}
           >
@@ -35,11 +39,7 @@ export default class LeaderboardItem extends Component {
             </View>
           </TouchableItem>
         </View>
-        <UserProfileImage
-          profileImage={this.props.image}
-          style={styles.imageContainerStyle}
-          imageStyle={styles.imageStyle}
-        />
+        <UserProfileImage profileImage={this.props.image} />
       </View>
     );
   }

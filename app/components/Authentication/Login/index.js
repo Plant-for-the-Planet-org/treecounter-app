@@ -35,10 +35,16 @@ export default class Login extends Component {
     // Here you will get the final token!!!
     this._recaptchaToken = token;
   };
+
+  refreshToken = () => {
+    this.recaptcha.execute();
+  };
+
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <ReCaptcha
+          ref={ref => (this.recaptcha = ref)}
           action="login"
           sitekey="6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF"
           verifyCallback={this.verifyCallback}
@@ -55,7 +61,7 @@ export default class Login extends Component {
 
             <PrimaryButton
               onClick={event => {
-                this.props.onPress(this._recaptchaToken);
+                this.props.onPress(this._recaptchaToken, this.refreshToken);
                 event.preventDefault();
               }}
             >

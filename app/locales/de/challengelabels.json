@@ -1,1 +1,12 @@
-{ }
+{
+  "challenge_heading": "Wettkampf",
+  "challenge_to_plant": "Herausfordern zum Pflanzen",
+  "challenge_edit_description": "Der Empfänger kann wählen, ob er die Herausforderung annehmen möchte oder nicht.",
+  "from": "von",
+  "indefinite": "Unbestimmt",
+  "to": "bis",
+  "accept": "Akzeptieren",
+  "reject": "Ablehnen",
+  "challenge_accept": "Sie haben die Herausforderung angenommen",
+  "challenge_deny": "Sie haben die Herausforderung abgelehnt"
+}

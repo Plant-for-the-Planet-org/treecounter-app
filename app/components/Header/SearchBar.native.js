@@ -113,7 +113,7 @@ class SearchBar extends React.PureComponent {
             autoCapitalize="none"
             autoCorrect={false}
             returnKeyType="search"
-            placeholder={i18n.t('label.search')}
+            placeholder={this.props.placeholderValue}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
             onSubmitEditing={this._handleSubmit}
@@ -129,7 +129,7 @@ class SearchBar extends React.PureComponent {
               ? 'visible-cancel-button'
               : 'layout-only-cancel-button'
           }
-          style={[{ opacity: showCancelButton ? 1 : 0 }]}
+          style={[{ opacity: showCancelButton ? 1 : 0, width: '25%' }]}
         >
           {this.props.showCancelSearchButton ? (
             <TouchableItem
@@ -141,7 +141,8 @@ class SearchBar extends React.PureComponent {
               <Text
                 style={{
                   fontSize: 17,
-                  color: this.props.tintColor || '#007AFF'
+                  color: this.props.tintColor || '#007AFF',
+                  textAlign: 'center'
                 }}
               >
                 {i18n.t('label.cancel')}

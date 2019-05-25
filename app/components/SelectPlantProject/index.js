@@ -219,7 +219,7 @@ export default class SelectPlantProject extends Component {
             </div>
           </div>
         </ModalDialog>
-        <div className="select-project__container">
+        <div className="select-project__container remove_shadow">
           <div className="select-project__header">
             {i18n.t('label.featuredProjects')}{' '}
           </div>
@@ -276,9 +276,7 @@ export default class SelectPlantProject extends Component {
                     <label>{i18n.t('label.search')}</label>
                   </div>
                   <span className="search-bar__button">
-                    <i className="material-icons header-icons">
-                      {i18n.t('label.search')}
-                    </i>
+                    <i className="material-icons header-icons">{'search'}</i>
                   </span>
                 </div>
                 <div className="table-responsive">

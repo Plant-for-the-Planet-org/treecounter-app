@@ -10,7 +10,9 @@ import { withNavigation } from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import challengeStyles from '../../../styles/challenge';
 import TabContainer from '../../../containers/Menu/TabContainer';
+import i18n from '../../../locales/i18n';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
+import styles from '../../../styles/profilepicker.native';
 
 class ChallengeUser extends Component {
   constructor(props) {
@@ -19,7 +21,8 @@ class ChallengeUser extends Component {
       selectedSuggestion: null,
       treeCount: 1000,
       isChecked: false,
-      byYear: ''
+      byYear: '',
+      searchSuggestionName: null
     };
     let currentYear = new Date().getFullYear(),
       years = [];
@@ -60,6 +63,23 @@ class ChallengeUser extends Component {
       requestData.challengeMethod = 'direct';
       requestData.goal = this.state.treeCount;
       this.props.challengeUser(requestData);
+      // this.setState({
+      //   selectedSuggestion: null,
+      //   treeCount: 1000,
+      //   isChecked: false,
+      //   byYear: '',
+      //   searchSuggestionName: ''
+      // });
+      // let currentYear = new Date().getFullYear(),
+      //   years = [];
+      // let endYear = currentYear + 10;
+      //
+      // while (currentYear <= endYear) {
+      //   years.push(currentYear++);
+      // }
+      // this.years = years.map(item => {
+      //   return { value: item };
+      // });
     } else {
       NotificationManager.error('Please select user', 'Error', 5000);
     }
@@ -67,7 +87,7 @@ class ChallengeUser extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, paddingBottom: 50 }}>
+      <View style={{ flex: 1 }}>
         <ScrollView
           style={{
             flex: 1,
@@ -75,13 +95,30 @@ class ChallengeUser extends Component {
             width: '100%',
             height: '100%'
           }}
+          contentContainerStyle={{
+            paddingBottom: 72
+          }}
         >
+          {this.props.error ? (
+            <View style={styles.containerDedicateStyle}>
+              <View style={styles.dedicateTreeName}>
+                <Text style={styles.textDedicateStyle}>
+                  {i18n.t('label.challenge_error', {
+                    user: this.state.selectedSuggestion.name,
+                    target: delimitNumbers(this.props.error)
+                  })}
+                </Text>
+              </View>
+            </View>
+          ) : null}
           <CardLayout style={[challengeStyles.challengeContainer]}>
             <View style={challengeStyles.challengeColumnContainer}>
               <SearchUser
                 onSearchResultClick={this.onSearchResultClick}
                 currentUserProfile={this.props.currentUserProfile}
+                searchSuggestion={this.state.searchSuggestionName}
                 alreadyInvited={[]}
+                hideCompetitions
               />
               <View style={challengeStyles.flexContainerStyle}>
                 <Text>Challenge to plant </Text>
@@ -95,7 +132,7 @@ class ChallengeUser extends Component {
                   value={delimitNumbers(this.state.treeCount)}
                   autoCapitalize={'sentences'}
                 />
-                <Text>Trees</Text>
+                <Text>{i18n.t('label.trees')}</Text>
               </View>
               <View style={challengeStyles.flexContainerStyle}>
                 <CheckBox
@@ -128,7 +165,7 @@ class ChallengeUser extends Component {
                 />
               </View>
               <PrimaryButton onClick={this.onNextClick}>
-                Challenge
+                {i18n.t('label.challenge_heading')}
               </PrimaryButton>
             </View>
           </CardLayout>
@@ -138,16 +175,7 @@ class ChallengeUser extends Component {
             challengeStatus={this.props.challengeStatus}
           />
         </ScrollView>
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            flex: 1,
-            width: '100%'
-          }}
-        >
-          <TabContainer {...this.props} />
-        </View>
+        <TabContainer {...this.props} />
       </View>
     );
   }

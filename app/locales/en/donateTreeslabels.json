@@ -8,12 +8,16 @@
   "donateTrees": "Donate Trees",
   "individual": "Individual Tree",
   "survival_rate": "Survival Rate",
+  "add_featured_image": "Add Featured Image",
+  "add_image": "Add Image",
   "plantedTrees": "Planted Trees",
   "registerFurther": "Register More Trees",
   "individual_name": "Individual",
   "next": "Next",
   "delete_project": "Delete Project",
-  "thankyou_planting": "Thank you for planting {{count}} trees with us! You will receive an email with a donation receipt in time.",
-  "donate_trees_description": "Pick a project which will plant the trees for you.",
+  "thankyou_planting":
+    "Thank you for planting {{count}} trees with us! We've sent an email confirmation to you. If your donation was to a tax deductible project, you will receive an email with a donation receipt in time.",
+  "donate_trees_description":
+    "Pick a project which will plant the trees for you.",
   "donation_contribution": "Donation"
 }

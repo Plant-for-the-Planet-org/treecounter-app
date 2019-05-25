@@ -143,8 +143,13 @@
   line-height: 2rem;
 }
 
+.treecounter_container {
+  width: 100%;
+  height: 100%;
+  max-width: 650px;
+}
+
 .canvasContainer {
-  display: flex;
   flex-flow: column nowrap;
   align-items: center;
   position: relative;
@@ -153,7 +158,6 @@
 }
 .canvasContainer svg {
   width: auto;
-  max-width: 53rem;
   height: auto;
   align-self: center;
 }

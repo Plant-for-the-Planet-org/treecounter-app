@@ -158,7 +158,8 @@ const mapDispatchToProps = dispatch => {
 
 SearchAutosuggest.propTypes = {
   onSuggestionClicked: PropTypes.func,
-  clearSuggestions: PropTypes.bool
+  clearSuggestions: PropTypes.bool,
+  hideCompetitions: PropTypes.bool
 };
 
 SearchAutosuggest.defaultProps = {

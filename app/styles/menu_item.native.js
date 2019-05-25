@@ -67,7 +67,7 @@ export default (menuStyles = EStyleSheet.create({
 
   ///Bottom Menu Related Styles:
   bottomMenuContainer: {
-    height: 'auto',
+    height: 50,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',

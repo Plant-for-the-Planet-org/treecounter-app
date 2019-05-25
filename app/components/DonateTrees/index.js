@@ -286,7 +286,7 @@ export default class DonateTrees extends Component {
     }
     this.props.donate(
       {
-        ...this.state.form,
+        ...sendState,
         paymentResponse,
         amount: this.state.selectedAmount,
         currency: this.state.selectedCurrency
@@ -342,6 +342,7 @@ export default class DonateTrees extends Component {
       infinite: false,
       adaptiveHeight: true,
       currentSlide: this.state.pageIndex,
+      lazyLoad: true,
       prevArrow: (
         <CarouselNavigation
           styleName={
@@ -409,12 +410,16 @@ export default class DonateTrees extends Component {
     ) : !plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>
-          {pageHeadings[this.state.pageIndex].heading}
+          {this.props.supportTreecounter.treecounterId
+            ? 'Support trees to ' + this.props.supportTreecounter.displayName
+            : pageHeadings[this.state.pageIndex].heading}
           <DescriptionHeading>
             {pageHeadings[this.state.pageIndex].description}
           </DescriptionHeading>
         </TextHeading>
-        {this.props.paymentStatus && this.props.paymentStatus.message ? (
+        {this.props.paymentStatus &&
+        !this.props.paymentStatus.status &&
+        this.props.paymentStatus.message ? (
           <CardLayout>
             <div className="payment-success">
               <img src={attention} />

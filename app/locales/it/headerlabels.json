@@ -1,10 +1,7 @@
 {
-  "menu": "menu",
   "signUp": "Inscriviti",
   "home": "casa",
   "placeholder_value": "Digita un nome ...",
-  "welcome_hi": "Ciao",
-  "welcome_symbol": "",
   "edit_profile": "Modifica Profilo",
   "help": "Aiuto",
   "save_changes": "Salva i Cambiamenti",

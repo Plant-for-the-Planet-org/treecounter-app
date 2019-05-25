@@ -68,7 +68,8 @@ export default (editProfileStyle = EStyleSheet.create({
   followerCol: {
     flexGrow: 1,
     flexBasis: 0,
-    marginLeft: 25
+    marginLeft: 5,
+    marginRight: 5
   },
   imageStyle: {
     height: 50,

@@ -8,8 +8,10 @@ import { getImageUrl } from '../../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import styles from '../../../styles/header/search_layout.native';
 import _ from 'lodash';
+import i18n from '../../../locales/i18n';
 import searchBarStyles from '../../../styles/header/search_bar.native';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
+import UserProfileImage from '../../Common/UserProfileImage';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
@@ -63,6 +65,13 @@ class SearchUser extends React.Component {
       NotificationManager.error('Could not add user', 'Error', 5000);
     }
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.searchSuggestion === '') {
+      this.setState({
+        selectedSuggestionName: ''
+      });
+    }
+  }
   isMyself(treecounter, currentUserProfile) {
     return (
       !!currentUserProfile &&
@@ -89,6 +98,7 @@ class SearchUser extends React.Component {
           inputValue={this.state.selectedSuggestionName}
           onSubmit={this._handleSubmit}
           placeholderTextColor={this.props.searchInputPlaceholderTextColor}
+          placeholderValue={i18n.t('label.search_user')}
           textColor={this.props.searchInputTextColor}
           selectionColor={this.props.searchInputSelectionColor}
           underlineColorAndroid={
@@ -107,25 +117,54 @@ class SearchUser extends React.Component {
         />
 
         {this.state.q && !this.state.searchResultClicked ? (
-          <ScrollView>
+          <ScrollView style={{ paddingBottom: 15 }}>
             {this.state.q.map((suggestion, i) => {
-              return (
-                <TouchableOpacity
-                  style={styles.searchResult}
-                  key={'suggestion' + i}
-                  onPress={this._onNavigationClick.bind(this, suggestion)}
-                >
-                  <Image
-                    style={styles.profileImage}
-                    source={
-                      suggestion.image
-                        ? getImageUrl('profile', 'avatar', suggestion.image)
-                        : profileTypeToImage[suggestion.type]
-                    }
-                  />
-                  <Text style={styles.profileText}>{suggestion.name}</Text>
-                </TouchableOpacity>
-              );
+              if (this.props.hideCompetitions) {
+                if (suggestion.category !== 'competition') {
+                  return (
+                    <TouchableOpacity
+                      style={styles.searchResult}
+                      key={'suggestion' + i}
+                      onPress={this._onNavigationClick.bind(this, suggestion)}
+                    >
+                      <UserProfileImage
+                        profileImage={suggestion.image}
+                        imageCategory={suggestion.category}
+                        imageType="avatar"
+                        imageStyle={{
+                          height: 30,
+                          width: 30,
+                          borderRadius: 30 / 2
+                        }}
+                        defaultType={suggestion.type}
+                      />
+                      <Text style={styles.profileText}>{suggestion.name}</Text>
+                    </TouchableOpacity>
+                  );
+                }
+              } else {
+                return (
+                  <TouchableOpacity
+                    style={styles.searchResult}
+                    key={'suggestion' + i}
+                    onPress={this._onNavigationClick.bind(this, suggestion)}
+                  >
+                    <UserProfileImage
+                      profileImage={suggestion.image}
+                      imageCategory={suggestion.category}
+                      imageType="avatar"
+                      imageStyle={{
+                        height: 30,
+                        width: 30,
+                        borderRadius: 30 / 2
+                      }}
+                      defaultType={suggestion.type}
+                    />
+                    <Text style={styles.profileText}>{suggestion.name}</Text>
+                  </TouchableOpacity>
+                );
+              }
+              return null;
             })}
           </ScrollView>
         ) : null}

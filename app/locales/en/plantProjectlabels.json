@@ -7,9 +7,11 @@
   "donate": "Donate",
   "plant_project_full": "PlantProjectFull",
   "different_project": "Select Different Project",
-  "project_name": "Project Name",
+  "project_name": "Name of Tree Planting Project",
   "count_target": "Target",
   "tree_cost": "Tree Cost",
   "link_text": "Link Text",
-  "video_url": "Video Url"
+  "video_url": "Video Url",
+  "allow_donations": "Allow Donations",
+  "is_published": "Publish Project"
 }

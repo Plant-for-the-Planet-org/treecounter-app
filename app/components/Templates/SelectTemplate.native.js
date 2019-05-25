@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   Picker,
   Platform,
+  Dimensions,
   TouchableNativeFeedback,
   Image
 } from 'react-native';
@@ -23,36 +24,10 @@ class SelectTemplateIOS extends React.PureComponent {
   constructor(props) {
     super(props);
     this._onPress = this.onPress.bind(this);
-    this.state = {
-      isCollapsed: true,
-      height: new Animated.Value(0)
-    };
   }
 
   onPress() {
     const locals = this.props.locals;
-    let animation = Animated.timing;
-    let animationConfig = {
-      duration: 200
-    };
-    if (locals.config) {
-      if (locals.config.animation) {
-        animation = locals.config.animation;
-      }
-      if (locals.config.animationConfig) {
-        animationConfig = locals.config.animationConfig;
-      }
-    }
-    animation(
-      this.state.height,
-      Object.assign(
-        {
-          toValue: this.state.isCollapsed ? UIPICKER_HEIGHT : 0
-        },
-        animationConfig
-      )
-    ).start();
-    this.setState({ isCollapsed: !this.state.isCollapsed });
     if (typeof locals.onPress === 'function') {
       locals.onPress();
     }
@@ -86,7 +61,6 @@ class SelectTemplateIOS extends React.PureComponent {
       formattedValue = i18n.t(filteredValue[0].text);
     } else {
     }
-    const height = this.state.isCollapsed ? 0 : UIPICKER_HEIGHT;
     if (Platform.OS === 'android') {
       return (
         //   <View style={datePickerStyle.datePickerContainer}>
@@ -120,17 +94,33 @@ class SelectTemplateIOS extends React.PureComponent {
           containerStyle={[
             {
               width: '100%',
-              height: 35,
               marginLeft: 10,
               marginBottom: 10,
-              paddingRight: 10
+              paddingRight: 10,
+              elevation: 2
             },
             locals.config.style
           ]}
+          pickerStyle={{
+            position: 'absolute',
+            maxHeight: Dimensions.get('window').height - 150,
+            marginTop: 'auto',
+            top:
+              Dimensions.get('window').height / 2 >=
+              this.props.options.length * 18
+                ? Dimensions.get('window').height / 2 -
+                  this.props.options.length * 18
+                : 75,
+            alignSelf: 'center',
+            flex: 1
+          }}
+          initialNumToRender={this.props.options.length}
+          itemCount={20}
           dropdownOffset={{
             top: 10,
             left: 0
           }}
+          animationDuration={0}
           itemTextStyle={{
             fontSize: 13,
             color: '#686060'
@@ -147,44 +137,87 @@ class SelectTemplateIOS extends React.PureComponent {
       );
     }
     return (
-      <View style={datePickerStyle.datePickerContainer}>
-        <TouchableOpacity
-          style={{
-            ...touchableStyle,
-            flexDirection: 'row',
-            justifyContent: 'space-between'
-          }}
-          disabled={locals.disabled}
-          onPress={this._onPress}
-        >
-          <Text style={dateValueStyle}>{formattedValue}</Text>
-          <Image
-            source={this.state.isCollapsed ? foldout : foldin}
-            style={{ height: 18, width: 18 }}
-            resizeMode={'contain'}
-          />
-        </TouchableOpacity>
-        <Animated.View
-          style={{ height: this.state.height, overflow: 'hidden' }}
-        >
-          <Picker
-            mode="dropdown"
-            selectedValue={locals.value}
-            onValueChange={itemValue => locals.onChange(itemValue)}
-            style={[datepickerStyle, { height: height }]}
-          >
-            {this.props.options.map(option => (
-              <Picker.Item
-                itemStyle={styles.itemStyle}
-                key={option.value}
-                label={i18n.t(option.text)}
-                color={'#686060'}
-                value={option.value}
-              />
-            ))}
-          </Picker>
-        </Animated.View>
-      </View>
+      // <View style={datePickerStyle.datePickerContainer}>
+      //   <TouchableOpacity
+      //     style={{
+      //       ...touchableStyle,
+      //       flexDirection: 'row',
+      //       justifyContent: 'space-between'
+      //     }}
+      //     disabled={locals.disabled}
+      //     onPress={this._onPress}
+      //   >
+      //     <Text style={dateValueStyle}>{formattedValue}</Text>
+      //     <Image
+      //       source={this.state.isCollapsed ? foldout : foldin}
+      //       style={{ height: 18, width: 18 }}
+      //       resizeMode={'contain'}
+      //     />
+      //   </TouchableOpacity>
+      //   <Animated.View
+      //     style={{ height: this.state.height, overflow: 'hidden' }}
+      //   >
+      //     <Picker
+      //       mode="dropdown"
+      //       selectedValue={locals.value}
+      //       onValueChange={itemValue => locals.onChange(itemValue)}
+      //       style={[datepickerStyle, { height: height }]}
+      //     >
+      //       {this.props.options.map(option => (
+      //         <Picker.Item
+      //           itemStyle={styles.itemStyle}
+      //           key={option.value}
+      //           label={i18n.t(option.text)}
+      //           color={'#686060'}
+      //           value={option.value}
+      //         />
+      //       ))}
+      //     </Picker>
+      //   </Animated.View>
+      // </View>
+      <Dropdown
+        containerStyle={[
+          {
+            width: '100%',
+            marginLeft: 10,
+            marginBottom: 10,
+            paddingRight: 10,
+            elevation: 2
+          },
+          locals.config.style
+        ]}
+        pickerStyle={{
+          position: 'absolute',
+          maxHeight: Dimensions.get('window').height - 150,
+          marginTop: 'auto',
+          top:
+            Dimensions.get('window').height / 2 >=
+            this.props.options.length * 18
+              ? Dimensions.get('window').height / 2 -
+                this.props.options.length * 18
+              : 75,
+          alignSelf: 'center',
+          flex: 1
+        }}
+        itemCount={20}
+        dropdownOffset={{
+          top: 10,
+          left: 0
+        }}
+        animationDuration={0}
+        itemTextStyle={{
+          fontSize: 13,
+          color: '#686060'
+        }}
+        value={i18n.t(locals.value)}
+        textColor="rgba(104,96,96, 0.8)"
+        selectedItemColor="rgba(104,96,96, 0.8)"
+        labelExtractor={item => i18n.t(item.text)}
+        valueExtractor={item => item.value}
+        onChangeText={item => locals.onChange(item)}
+        // label={i18n.t(locals.value.text)}
+        data={this.props.options}
+      />
     );
   }
 }

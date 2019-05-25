@@ -34,7 +34,7 @@ export default {
     },
     imageFile: {
       type: 'string',
-      title: 'label.upload_profile_picture',
+      title: 'label.add_featured_image',
       widget: 'file',
       icon: null,
       help: null,
@@ -65,6 +65,7 @@ export default {
         'BBD',
         'BZD',
         'BMD',
+        'BAM',
         'BWP',
         'BND',
         'BGN',
@@ -101,6 +102,7 @@ export default {
         'MWK',
         'MYR',
         'MVR',
+        'MRO',
         'MXN',
         'MDL',
         'MNT',
@@ -133,6 +135,7 @@ export default {
         'SZL',
         'SEK',
         'CHF',
+        'STD',
         'TJS',
         'TZS',
         'THB',
@@ -162,6 +165,7 @@ export default {
         'Barbadian Dollar',
         'Belize Dollar',
         'Bermudan Dollar',
+        'Bosnia-Herzegovina Convertible Mark',
         'Botswanan Pula',
         'Brunei Dollar',
         'Bulgarian Lev',
@@ -198,6 +202,7 @@ export default {
         'Malawian Kwacha',
         'Malaysian Ringgit',
         'Maldivian Rufiyaa',
+        'Mauritanian Ouguiya (1973–2017)',
         'Mexican Peso',
         'Moldovan Leu',
         'Mongolian Tugrik',
@@ -230,6 +235,7 @@ export default {
         'Swazi Lilangeni',
         'Swedish Krona',
         'Swiss Franc',
+        'São Tomé & Príncipe Dobra (1977–2017)',
         'Tajikistani Somoni',
         'Tanzanian Shilling',
         'Thai Baht',
@@ -256,13 +262,29 @@ export default {
       help: null,
       propertyOrder: 7
     },
+    allowDonations: {
+      type: 'boolean',
+      title: 'label.allow_donations',
+      widget: 'checkbox',
+      icon: null,
+      help: null,
+      propertyOrder: 8
+    },
+    isPublished: {
+      type: 'boolean',
+      title: 'label.is_published',
+      widget: 'checkbox',
+      icon: null,
+      help: null,
+      propertyOrder: 9
+    },
     geoLocation: {
       type: 'string',
       title: 'label.geo_location',
       widget: 'map',
       icon: null,
       help: null,
-      propertyOrder: 8
+      propertyOrder: 10
     },
     description: {
       type: 'string',
@@ -270,7 +292,7 @@ export default {
       widget: 'textarea',
       icon: null,
       help: null,
-      propertyOrder: 9
+      propertyOrder: 11
     },
     url: {
       type: 'string',
@@ -278,7 +300,7 @@ export default {
       widget: 'textarea',
       icon: null,
       help: null,
-      propertyOrder: 10
+      propertyOrder: 12
     },
     linkText: {
       type: 'string',
@@ -286,7 +308,7 @@ export default {
       widget: 'textarea',
       icon: null,
       help: null,
-      propertyOrder: 11
+      propertyOrder: 13
     },
     plantProjectImages: {
       type: 'array',
@@ -297,7 +319,7 @@ export default {
         properties: {
           image: {
             type: 'string',
-            title: 'label.upload_profile_picture',
+            title: 'label.add_image',
             widget: 'file',
             icon: null,
             help: null,
@@ -326,7 +348,7 @@ export default {
       },
       icon: null,
       help: null,
-      propertyOrder: 12
+      propertyOrder: 14
     },
     videoUrl: {
       type: 'string',
@@ -334,10 +356,17 @@ export default {
       widget: 'textarea',
       icon: null,
       help: null,
-      propertyOrder: 13
+      propertyOrder: 15
     }
   },
-  required: ['name', 'treeCost', 'currency', 'geoLocation'],
+  required: [
+    'name',
+    'treeCost',
+    'currency',
+    'allowDonations',
+    'isPublished',
+    'geoLocation'
+  ],
   submit_url: '',
   submit_method: 'POST'
 };

@@ -24,8 +24,7 @@ class CompetitionTopCompetitor extends React.Component {
               this.props.topCompetitor &&
               this.props.topCompetitor.treecounterAvatar
             }
-            style={styles.profileImageStyle}
-            imageStyle={{ borderRadius: 15 }}
+            imageStyle={{ width: 30, height: 30, borderRadius: 30 / 2 }}
           />
           <Text style={styles.topCompetitorScoreText}>
             {this.props.topCompetitor.treecounterDisplayName}

@@ -301,7 +301,7 @@ class TreeCounter extends Component {
               path={getLocalRoute('app_treecounter') + '/:treecounterId'}
               component={PublicTreecounterContainer}
             />
-            <Route
+            <PrivateRoute
               path={getLocalRoute('app_manageProjects')}
               component={ManageProjectContainer}
             />

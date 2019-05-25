@@ -44,12 +44,17 @@ export default class SignUp extends Component {
     this._recaptchaToken = token;
     // Here you will get the final token!!!
   };
-  onSignUpClicked(type) {
+
+  refreshToken = () => {
+    this._captchaRef.refreshToken();
+  };
+
+  onSignUpClicked = type => {
     if (this.refs.signupForm.getValue()) {
       Keyboard.dismiss();
     }
-    this.props.onSignUpClicked(type, this._recaptchaToken);
-  }
+    this.props.onSignUpClicked(type, this._recaptchaToken, this.refreshToken);
+  };
 
   render() {
     let { Profiletype } = this.state;
@@ -66,12 +71,13 @@ export default class SignUp extends Component {
       icon = SignupOrganization;
     }
     return (
-      <ScrollView
-        // contentContainerStyle={[{ flex: 1 }]}
-        keyboardShouldPersistTaps={'handled'}
+      <KeyboardAwareScrollView
+      // contentContainerStyle={[{ flex: 1 }]}
+      // keyboardShouldPersistTaps={'handled'}
       >
         <ReCaptchaV3
-          captchaDomain={'https://www.plant-for-the-planet.org'}
+          ref={ref => (this._captchaRef = ref)}
+          captchaDomain={'https://www.trilliontreecampaign.org'}
           siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
           onReceiveToken={token => this.verifyCallback(token)}
         />
@@ -90,11 +96,17 @@ export default class SignUp extends Component {
           <View style={{ flex: 1 }}>
             <Form
               ref={'signupForm'}
-              type={signupFormSchema[type]}
-              options={this.props.schemaOptions[type]}
+              type={signupFormSchema[!ProfileTypeParam ? Profiletype : type]}
+              options={
+                this.props.schemaOptions[!ProfileTypeParam ? Profiletype : type]
+              }
               value={this.props.formValue}
             />
-            <PrimaryButton onClick={this.onSignUpClicked.bind(this, type)}>
+            <PrimaryButton
+              onClick={() =>
+                this.onSignUpClicked(!ProfileTypeParam ? Profiletype : type)
+              }
+            >
               {i18n.t('label.signUp')}
             </PrimaryButton>
             <View style={styles.bottomRow}>
@@ -110,7 +122,7 @@ export default class SignUp extends Component {
             </View>
           </View>
         </ImageBackground>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }

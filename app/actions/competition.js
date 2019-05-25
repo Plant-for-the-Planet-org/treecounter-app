@@ -170,9 +170,16 @@ export function createCompetition(value, navigation) {
             5000
           );
           dispatch(fetchMineCompetitions());
+          dispatch(fetchCompetitions('all'));
+          dispatch(fetchCompetitions('featured'));
         })
         .catch(error => {
           debug(error);
+          NotificationManager.error(
+            'Competition Creation Error',
+            'Error',
+            5000
+          );
           reject(error);
           dispatch(setProgressModelState(false));
         });
@@ -205,6 +212,7 @@ export function editCompetition(value, param, navigation) {
         })
         .catch(error => {
           debug(error);
+          NotificationManager.error('Competition Edit Error', 'Error', 5000);
           reject(error);
           dispatch(setProgressModelState(false));
         });

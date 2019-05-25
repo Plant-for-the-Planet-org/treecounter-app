@@ -15,9 +15,11 @@ import { getSuggestions, profileTypeToImage } from '../../helpers/utils';
 import { getImageUrl } from '../../actions/apiRouting';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
+import i18n from '../../locales/i18n';
 import styles from '../../styles/header/search_layout.native';
 import _ from 'lodash';
 import { updateRoute } from '../../helpers/routerHelper';
+import UserProfileImage from '../Common/UserProfileImage';
 
 class SearchLayout extends React.Component {
   static SearchBar = SearchBar;
@@ -66,7 +68,8 @@ class SearchLayout extends React.Component {
     if (suggestion.category === 'profile') {
       this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
         treeCounterId: suggestion.slug || suggestion.id,
-        suggestion
+        suggestion,
+        titleParam: suggestion.name
       });
     } else if (suggestion.category === 'competition') {
       this.props.navigation.navigate(getLocalRoute('app_competition'), {
@@ -85,6 +88,7 @@ class SearchLayout extends React.Component {
             onSubmit={this._handleSubmit}
             placeholderTextColor={this.props.searchInputPlaceholderTextColor}
             textColor={this.props.searchInputTextColor}
+            placeholderValue={i18n.t('label.search')}
             selectionColor={this.props.searchInputSelectionColor}
             underlineColorAndroid={
               this.props.searchInputUnderlineColorAndroid ||
@@ -98,7 +102,7 @@ class SearchLayout extends React.Component {
         </Header>
 
         {this.state.q ? (
-          <ScrollView>
+          <ScrollView style={{ paddingBottom: 15 }}>
             {this.state.q.map((suggestion, i) => {
               return (
                 <TouchableOpacity
@@ -108,19 +112,12 @@ class SearchLayout extends React.Component {
                     setTimeout(() => this.redirectToResult(suggestion), 0);
                   }}
                 >
-                  <Image
-                    style={styles.profileImage}
-                    source={
-                      suggestion.image
-                        ? {
-                            uri: getImageUrl(
-                              suggestion.category,
-                              'avatar',
-                              suggestion.image
-                            )
-                          }
-                        : profileTypeToImage[suggestion.type]
-                    }
+                  <UserProfileImage
+                    profileImage={suggestion.image}
+                    imageCategory={suggestion.category}
+                    imageType="avatar"
+                    imageStyle={{ height: 30, width: 30, borderRadius: 30 / 2 }}
+                    defaultType={suggestion.type}
                   />
                   <Text style={styles.profileText}>{suggestion.name}</Text>
                 </TouchableOpacity>

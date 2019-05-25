@@ -13,16 +13,6 @@ import VideoContainer from '../Common/VideoContainer';
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectDetails
  */
 class PlantProjectDetails extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { showVideo: false };
-  }
-  handleClick() {
-    this.setState({ showVideo: true });
-  }
-  toggleVideoDialog() {
-    this.setState({ showVideo: false });
-  }
   render() {
     let {
       description,
@@ -49,17 +39,12 @@ class PlantProjectDetails extends React.Component {
             caption={homepageCaption}
           />
         )}
-
         {videoUrl && (
-          <div className="video-link">
-            <a onClick={this.handleClick.bind(this)}>{videoUrl}</a>
-          </div>
+          <VideoContainer
+            onViewMoreClick={this.props.onViewMoreClick.bind(this)}
+            url={videoUrl}
+          />
         )}
-        <VideoContainer
-          isOpen={this.state.showVideo}
-          onRequestClose={this.toggleVideoDialog.bind(this)}
-          url={videoUrl}
-        />
       </div>
     );
   }

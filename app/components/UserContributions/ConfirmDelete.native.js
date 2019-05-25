@@ -19,7 +19,7 @@ class ConfirmDeletionModal extends Component {
           <View style={styles.container}>
             <Text style={styles.textHeader}>Are You Sure?</Text>
             <Text style={styles.textPara}>
-              {i18n.t('label.deletion_warning_summery')}
+              {i18n.t('label.deletion_warning_summary_contribution')}
             </Text>
             <Text style={[styles.textPara, { marginTop: 15 }]}>
               {i18n.t('label.delete_my_trees_action')}

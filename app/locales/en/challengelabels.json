@@ -1,5 +1,13 @@
 {
   "challenge_heading": "Challenge",
+  "challenge_to_plant": "Challenge to plant",
+  "challenge_edit_description": "The recipient will be able to choose whether or not to accept your challenge.",
+  "from": "from",
+  "indefinite": "Indefinite",
+  "to": "to",
+  "accept": "Accept",
+  "reject": "Reject",
   "challenge_accept": "You have accepted the challenge",
-  "challenge_deny": "You have denied the challenge"
+  "challenge_deny": "You have declined the challenge",
+  "challenge_error": "{{user}}'s current target is {{target}} trees. Please enter a higher number."
 }

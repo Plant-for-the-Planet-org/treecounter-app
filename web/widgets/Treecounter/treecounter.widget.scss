@@ -9,6 +9,11 @@ $breakpointTablet: 768px;
 @import "../../stylesheet/layer.css";
 @import "../../stylesheet/common/text";
 
+.widget-container {
+  font-family: "Open Sans", -apple-system, system-ui, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
 .tooltip {
   height: 25px;
   width: 25px;

@@ -23,9 +23,9 @@ function onAPIError(error) {
   if (error.response && error.response.status === 400) {
     throw error;
   }
-  if (error.response) {
-    NotificationManager.error(error.response.data.message, 'Error', 5000);
-  }
+  // if (error.response) {
+  //   NotificationManager.error(error.response.data.message, 'Error', 5000);
+  // }
   if (error.response && error.response.status === 401) {
     getStore().dispatch(logoutUser());
   } else {

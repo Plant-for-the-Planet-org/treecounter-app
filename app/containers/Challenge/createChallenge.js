@@ -29,7 +29,11 @@ class ChallengeContainer extends Component {
   challenge(challengeDetails) {
     this.props
       .challenge(challengeDetails)
-      .then(success => {})
+      .then(success => {
+        this.setState({
+          error: null
+        });
+      })
       .catch(err => {
         console.log(err.response.data);
         this.setState({

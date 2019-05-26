@@ -191,15 +191,17 @@ export default class Menu extends Component {
               />
             ) : null}
 
-            {this.props.userProfile &&
-            this.props.userProfile.supportedTreecounter ? (
+            {this.props.userProfile ? (
               <LargeMenuItem
                 onPress={this.onPressMenu.bind(this, {
                   uri: 'pickup_profile_modal'
                 })}
                 title={'Community'}
                 details={
+                  this.props.userProfile.supportedTreecounter &&
                   this.props.userProfile.supportedTreecounter.displayName
+                    ? this.props.userProfile.supportedTreecounter.displayName
+                    : i18n.t('label.pick_profile')
                 }
                 iconUrl={icons.communityMenu}
               />

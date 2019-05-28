@@ -4,7 +4,7 @@ export async function getLocale() {
   let locale = await getLanguages().then(languages => {
     return languages[0].split('-')[0]; // ['en-US', 'en']
   });
-  if (locale === 'en') {
+  if (locale === 'en' || locale === 'de') {
     return locale;
   } else {
     return 'en';

@@ -97,18 +97,25 @@ export default class Menu extends Component {
     //console.log(urlBreak);
     const { navigation } = this.props;
     if (urlBreak.indexOf('account-activate') !== -1) {
-      updateRoute(
-        '/' + urlBreak[urlBreak.length - 2],
-        // '/' +
-        // urlBreak[urlBreak.length - 1],
-        navigation,
-        0,
-        {
-          token: urlBreak[urlBreak.length - 1]
-        }
+      setTimeout(
+        () =>
+          updateRoute(
+            '/' + urlBreak[urlBreak.length - 2],
+            // '/' +
+            // urlBreak[urlBreak.length - 1],
+            navigation,
+            0,
+            {
+              token: urlBreak[urlBreak.length - 1]
+            }
+          ),
+        0
       );
     } else {
-      updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0);
+      setTimeout(
+        () => updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0),
+        0
+      );
     }
   };
 

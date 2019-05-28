@@ -44,7 +44,12 @@ document.addEventListener('DOMContentLoaded', function() {
       let backgroundColor = allBlockQuote[i].attributes.getNamedItem(
         'data-background-color'
       );
-
+      let ProjectId = allBlockQuote[i].attributes.getNamedItem(
+        'data-projectId'
+      );
+      if (ProjectId && ProjectId.nodeValue) {
+        ProjectId = ProjectId.nodeValue;
+      }
       if (showGraphics && showGraphics.nodeValue === 'false') {
         showGraphics = false;
       }
@@ -86,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 serverName={serverName}
                 baseUrl={baseUrl}
                 backgroundColor={backgroundColor}
+                ProjectId={ProjectId}
               />,
               shadowRoot
             );

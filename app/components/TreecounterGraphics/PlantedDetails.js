@@ -4,6 +4,7 @@ import i18n from '../../locales/i18n.js';
 import ReactTooltip from 'react-tooltip';
 import { questionmark_orange, close_green } from '../../assets';
 import { tree, tree_outline } from '../../assets';
+import { delimitNumbers } from '../../utils/utils';
 
 const PlantedDetails = ({ personal, community, type, onToggle }) => (
   <div className="svg-text-container">
@@ -31,7 +32,7 @@ const PlantedDetails = ({ personal, community, type, onToggle }) => (
           )}
         </div>
         <div>
-          <strong>{personal.toFixed().toLocaleString('en')}</strong>
+          <strong>{delimitNumbers(personal)}</strong>
         </div>
       </div>
     </div>
@@ -57,17 +58,13 @@ const PlantedDetails = ({ personal, community, type, onToggle }) => (
 
             <ReactTooltip id="community" effect="solid" type="dark">
               <span className="tooltip-text">
-                Trees planted by people who made this tree counter their
-                community. Your community can be any other profile that you want
-                to support towards reaching their tree target, like your school,
-                city or employer. If you plant or donate trees, these will then
-                also appear in your community’s tree-counter.
+                {i18n.t('label.treecounter_tooltip')}
               </span>
             </ReactTooltip>
           </div>
         </div>
         <div>
-          <strong>{community.toFixed().toLocaleString('en') + ' '}</strong>
+          <strong>{delimitNumbers(community)}</strong>
         </div>
       </div>
     </div>
@@ -77,8 +74,8 @@ const PlantedDetails = ({ personal, community, type, onToggle }) => (
 export default PlantedDetails;
 
 PlantedDetails.propTypes = {
-  personal: PropTypes.number.isRequired,
-  community: PropTypes.number.isRequired,
+  personal: PropTypes.string.isRequired,
+  community: PropTypes.string.isRequired,
   type: PropTypes.string,
   onToggle: PropTypes.func
 };

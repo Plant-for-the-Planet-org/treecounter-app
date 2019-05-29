@@ -1,5 +1,7 @@
 {
-  "set_target": "Ziel setzten",
-  "title": "Titel",
+  "set_target": "Ziel setzen",
+  "update_target": "Ziel aktualisieren",
+  "save": "Speichern",
+  "target_count": "Baumziel",
   "target_year": "Zieljahr"
 }

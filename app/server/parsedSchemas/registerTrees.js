@@ -1,7 +1,4 @@
-import {
-  singleTreeForm,
-  multipleTreesForm
-} from '../formSchemas/registerTrees';
+import treeForm from '../formSchemas/registerTrees';
 import callParser from '../callParser';
 //import MeasurementListTemplate from '../../components/RegisterTrees/MeasurementListTemplate';
 const config = {
@@ -21,12 +18,12 @@ const config = {
 const {
   transformedSchema: singleTreeRegisterFormSchema,
   schemaOptions: schemaOptionsSingleTree
-} = callParser(singleTreeForm, config);
+} = callParser(treeForm['single_tree'], config);
 
 const {
   transformedSchema: multipleTreesRegisterFormSchema,
   schemaOptions: schemaOptionsMultipleTrees
-} = callParser(multipleTreesForm, config);
+} = callParser(treeForm['multiple_trees'], config);
 
 export {
   singleTreeRegisterFormSchema,

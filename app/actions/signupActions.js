@@ -6,7 +6,12 @@ import { updateJWT, updateActivateToken } from '../utils/user';
 import { loadUserProfile } from './loadUserProfileAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 
-export function signUp(profileType, userData, recaptchaToken) {
+export function signUp(
+  profileType,
+  userData,
+  recaptchaToken,
+  navigation = undefined
+) {
   if (userData.password.first === userData.password.second) {
     return dispatch => {
       dispatch(setProgressModelState(true));
@@ -31,18 +36,29 @@ export function signUp(profileType, userData, recaptchaToken) {
             );
           }
 
-          updateRoute(data.routeName, dispatch, null, data.routeParams);
+          updateRoute(
+            data.routeName,
+            navigation || dispatch,
+            null,
+            data.routeParams
+          );
           dispatch(setProgressModelState(false));
           return res;
         })
         .catch(err => {
-          console.log(err);
           dispatch(setProgressModelState(false));
           throw err;
         });
     };
   } else {
-    window.alert('Password do not match');
+    NotificationManager.error('Password do not match', 'Error', 5000);
+    return dispatch => {
+      return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+          resolve('foo');
+        }, 30);
+      });
+    };
   }
 }
 

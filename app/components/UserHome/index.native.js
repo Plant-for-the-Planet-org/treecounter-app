@@ -12,10 +12,10 @@ import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
 import styles from '../../styles/user-home';
 import tabStyles from '../../styles/common/tabbar';
+import * as images from '../../assets';
 
 import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
-import { getProfileTypeName } from '../PublicTreeCounter/utils';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList';
 
@@ -52,6 +52,13 @@ export default class UserHome extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate =
+      JSON.stringify(nextProps) !== JSON.stringify(this.props) ||
+      nextState.index != this.state.index;
+    return shouldUpdate;
+  }
+
   _handleIndexChange = index => {
     this.setState({ index });
   };
@@ -65,6 +72,9 @@ export default class UserHome extends Component {
         tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={tabStyles.textStyle}
         indicatorStyle={tabStyles.textActive}
+        scrollEnabled
+        bounces
+        useNativeDriver
       />
     );
   };
@@ -106,16 +116,19 @@ export default class UserHome extends Component {
   }
 
   _renderUserHome = ({ route }) => {
-    const { treecounterData, userProfile } = this.props;
-    const profileType = getProfileTypeName(userProfile.type);
+    const { userProfile } = this.props;
+    const profileType = userProfile.type;
     let { svgData } = this.state;
     switch (route.key) {
       case 'home':
         return (
-          <ScrollView>
+          <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
             <View style={styles.header}>
               <View style={styles.userProfileContainer}>
-                <UserProfileImage profileImage={userProfile.image} />
+                <UserProfileImage
+                  imageStyle={styles.userProfileImage}
+                  profileImage={userProfile.image}
+                />
 
                 <View style={styles.userInfo}>
                   <View style={styles.userInfoName}>
@@ -124,9 +137,19 @@ export default class UserHome extends Component {
                     </Text>
                   </View>
                   <View style={styles.userInfoProfileType}>
-                    <View style={styles.profileTypeContainer}>
-                      <Text style={styles.profileTypeStyle}>{profileType}</Text>
-                    </View>
+                    <Image
+                      style={styles.profileTypeImage}
+                      resizeMode="contain"
+                      source={
+                        profileType === 'education'
+                          ? images['schoolIcon']
+                          : profileType === 'tpo'
+                            ? images['tpoIcon']
+                            : profileType === 'company'
+                              ? images['companyIcon']
+                              : images['individualIcon']
+                      }
+                    />
                   </View>
                 </View>
               </View>
@@ -138,7 +161,7 @@ export default class UserHome extends Component {
               />
             </View>
             <View>
-              {userProfile.synopsis1 || // /> //   onSelect={this.onPlantProjectSelected} //   {...tpoProps} // <TpoDonationPlantProjectSelector
+              {userProfile.synopsis1 ||
               userProfile.synopsis2 ||
               userProfile.linkText ||
               userProfile.url ? (
@@ -179,9 +202,10 @@ export default class UserHome extends Component {
         );
       case 'my-trees':
         return (
-          <ScrollView>
+          <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
             <ContributionCardList
               contributions={this.props.userContributions}
+              deleteContribution={this.props.deleteContribution}
             />
           </ScrollView>
         );
@@ -218,5 +242,6 @@ UserHome.propTypes = {
   userProfile: PropTypes.object,
   userProfileId: PropTypes.number.isRequired,
   userContributions: PropTypes.array.isRequired,
+  deleteContribution: PropTypes.func,
   navigation: PropTypes.any
 };

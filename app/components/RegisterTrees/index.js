@@ -16,7 +16,11 @@ import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
 let TCombForm = t.form.Form;
 
-const getSingleTreeLayout = props1 => {
+const getSingleTreeLayout = (
+  props1,
+  _onClickAddClassification,
+  showClassification
+) => {
   const formLayoutSingleTree = locals => {
     return (
       <div className="register-tree__form">
@@ -31,13 +35,18 @@ const getSingleTreeLayout = props1 => {
         <div className="register-tree__form--row">
           {locals.inputs.contributionImages}
         </div>
-        {isTpo(props1.currentUserProfile) ? (
-          <div className="register-tree__form--row">
-            {locals.inputs.plantProject}
-          </div>
-        ) : null}
 
-        <div className="register-tree__form--row">
+        <div className="pftp-addbutton">
+          <button type="button" onClick={_onClickAddClassification}>
+            +&nbsp;{i18n.t('label.add_classification')}
+          </button>
+        </div>
+        <div
+          className={
+            'register-tree__form--row ' +
+            (!showClassification ? 'register-tree___hide-content' : '')
+          }
+        >
           {locals.inputs.treeClassification}
           <div className="register-tree__form--row__spacer" />
           {locals.inputs.treeScientificName}
@@ -67,11 +76,6 @@ const getMultipleTreeLayout = props1 => {
         <div className="register-tree__form--row">
           {locals.inputs.contributionImages}
         </div>
-        {isTpo(props1.currentUserProfile) ? (
-          <div className="register-tree__form--row">
-            {locals.inputs.plantProject}
-          </div>
-        ) : null}
       </div>
     );
   };
@@ -95,9 +99,12 @@ export default class RegisterTrees extends Component {
     super();
     this.state = {
       mode: '',
-      individual: {
+      formValueSingle: {
         treeCount: 1
-      }
+      },
+      formValueMultiple: '',
+      plantProject: '',
+      showClassification: false
     };
 
     // Bind Local method
@@ -117,9 +124,22 @@ export default class RegisterTrees extends Component {
     return newFormSchema;
   }
 
+  onChange = event => {
+    this.setState({ plantProject: event.target.value });
+  };
+
   onSubmitClick(event) {
-    console.log('event', event);
-    this.props.onSubmit(this.state.mode);
+    let plantProject = null;
+    if (isTpo(this.props.currentUserProfile)) {
+      plantProject =
+        this.state.plantProject !== ''
+          ? this.state.plantProject
+          : getPlantProjectEnum(this.props.currentUserProfile).length > 0
+            ? getPlantProjectEnum(this.props.currentUserProfile)[0].value
+            : null;
+    }
+
+    this.props.onSubmit(this.state.mode, null, plantProject);
     event.preventDefault();
   }
 
@@ -131,28 +151,36 @@ export default class RegisterTrees extends Component {
     console.log(geoLocation);
   }
 
+  onFormChangeSingle = value => {
+    this.setState({ formValueSingle: value });
+  };
+
+  onFormChangeMultiple = value => {
+    this.setState({ formValueMultiple: value });
+  };
+
+  toggleClassification = () => {
+    this.setState({
+      showClassification: !this.state.showClassification
+    });
+  };
   render() {
     const tpoPlantProjects = getPlantProjectEnum(this.props.currentUserProfile);
     const isSingleTree = this.state.mode === RegisterTrees.data.tabs[0].id;
 
     const template = isSingleTree
-      ? getSingleTreeLayout(this.props)
+      ? getSingleTreeLayout(
+          this.props,
+          this.toggleClassification,
+          this.state.showClassification
+        )
       : getMultipleTreeLayout(this.props);
 
     let formSchemaOptions = isSingleTree
       ? this.props.schemaOptionsSingleTree
       : this.props.schemaOptionsMultipleTrees;
 
-    const plantProject =
-      tpoPlantProjects &&
-      tpoPlantProjects.length > 0 &&
-      tpoPlantProjects[0].value;
-
-    formSchemaOptions = this.updateTemplate(
-      template,
-      tpoPlantProjects,
-      formSchemaOptions
-    );
+    formSchemaOptions = this.updateTemplate(template, null, formSchemaOptions);
 
     return (
       <div className="app-container__content--center sidenav-wrapper">
@@ -173,16 +201,40 @@ export default class RegisterTrees extends Component {
                   ref="registerTreeForm"
                   type={singleTreeRegisterFormSchema}
                   options={formSchemaOptions}
-                  value={{ ...this.state.individual, plantProject }}
+                  value={this.state.formValueSingle}
+                  onChange={this.onFormChangeSingle}
                 />
               ) : (
                 <TCombForm
                   ref="registerTreeForm"
                   type={multipleTreesRegisterFormSchema}
                   options={formSchemaOptions}
-                  value={{ plantProject }}
+                  value={this.state.formValueMultiple}
+                  onChange={this.onFormChangeMultiple}
                 />
               )}
+              {isTpo(this.props.currentUserProfile) &&
+              tpoPlantProjects.length > 0 ? (
+                <div className="pftp-selectfield">
+                  <select
+                    key={'hey'}
+                    className={'pftp-selectfield__select'}
+                    required="required"
+                    onChange={this.onChange}
+                    value={this.state.plantProject}
+                  >
+                    {tpoPlantProjects.map(option => (
+                      <option
+                        key={option.value}
+                        className="pftp-selectfield__option"
+                        value={option.value}
+                      >
+                        {i18n.t(option.text)}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : null}
             </Tabs>
             <PrimaryButton onClick={this.onSubmitClick}>
               {i18n.t('label.register')}

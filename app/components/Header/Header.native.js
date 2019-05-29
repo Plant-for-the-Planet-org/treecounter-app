@@ -1,11 +1,19 @@
 import React from 'react';
-import { Animated, Dimensions, Platform, StyleSheet, View } from 'react-native';
+import {
+  Animated,
+  Dimensions,
+  Platform,
+  StyleSheet,
+  View,
+  BackHandler
+} from 'react-native';
 import { withNavigation, HeaderBackButton } from 'react-navigation';
 import styles from '../../styles/common/header.native';
 
 class Header extends React.PureComponent {
   _navigateBack = () => {
     this.props.navigation.goBack(null);
+    return true;
   };
 
   _maybeRenderBackButton = () => {
@@ -24,6 +32,13 @@ class Header extends React.PureComponent {
       />
     );
   };
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this._navigateBack);
+  }
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this._navigateBack);
+  }
 
   render() {
     return (

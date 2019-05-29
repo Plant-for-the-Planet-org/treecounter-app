@@ -27,7 +27,7 @@ class PlantProjectDetails extends React.Component {
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>{this.props.description}</Text>
         </View>
-        {this.props.url ? (
+        {this.props.url && this.props.url !== '' ? (
           <TouchableItem
             style={styles.linkTextContainer}
             onPress={() => this._goToURL()}

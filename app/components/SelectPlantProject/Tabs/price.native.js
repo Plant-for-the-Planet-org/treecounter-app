@@ -46,9 +46,9 @@ export default class PriceProjects extends Component {
     if (sortType === 'desc') {
       let { plantProjects, currencies } = this.props;
       currencies = currencies.currencies;
-      let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
+      let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
       if (currencies) {
-        priceSortedProjects = priceSortedProjects.sort(function(a, b) {
+        priceSortedProjectsNew = priceSortedProjectsNew.sort(function(a, b) {
           return (
             b.treeCost *
               parseFloat(currencies.currency_rates['EUR'].rates[b.currency]) -
@@ -58,14 +58,14 @@ export default class PriceProjects extends Component {
         });
       }
       this.setState({
-        priceSortedProjects: priceSortedProjects
+        priceSortedProjects: priceSortedProjectsNew
       });
     } else {
       let { plantProjects, currencies } = this.props;
       currencies = currencies.currencies;
-      let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
+      let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
       if (currencies) {
-        priceSortedProjects = priceSortedProjects.sort(function(a, b) {
+        priceSortedProjectsNew = priceSortedProjectsNew.sort(function(a, b) {
           return (
             a.treeCost *
               parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
@@ -75,7 +75,7 @@ export default class PriceProjects extends Component {
         });
       }
       this.setState({
-        priceSortedProjects: priceSortedProjects
+        priceSortedProjects: priceSortedProjectsNew
       });
     }
   }
@@ -83,18 +83,20 @@ export default class PriceProjects extends Component {
   render() {
     let { priceSortedProjects } = this.state;
     return (
-      <View>
+      <View style={styles.flexContainer}>
         <View style={styles.cardHeader}>
           <Text style={styles.headingStyle}>Cost Per Tree</Text>
           <View style={styles.sortContainer}>
             <TouchableItem
               style={styles.imageStyleContainer}
+              hitSlop={{ left: 50, right: 150 }}
               onPress={this.sortProjects.bind(this, 'desc')}
             >
               <Image style={styles.imageStyle} source={foldin} />
             </TouchableItem>
             <TouchableItem
               style={styles.imageStyleContainer}
+              hitSlop={{ left: 50, right: 150 }}
               onPress={this.sortProjects.bind(this, 'asc')}
             >
               <Image style={styles.imageStyle} source={foldout} />
@@ -102,11 +104,15 @@ export default class PriceProjects extends Component {
           </View>
         </View>
 
-        <ListViewProjects
-          projects={priceSortedProjects}
-          selectProject={projectId => this.props.selectProject(projectId)}
-          onMoreClick={projectId => this.props.onMoreClick(projectId)}
-        />
+        <View style={styles.listViewContainer}>
+          <ListViewProjects
+            projects={priceSortedProjects}
+            selectProject={projectId => this.props.selectProject(projectId)}
+            onMoreClick={(projectId, name) =>
+              this.props.onMoreClick(projectId, name)
+            }
+          />
+        </View>
       </View>
     );
   }

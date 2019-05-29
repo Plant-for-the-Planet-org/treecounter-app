@@ -23,9 +23,9 @@ function onAPIError(error) {
   if (error.response && error.response.status === 400) {
     throw error;
   }
-  if (error.response) {
-    NotificationManager.error(error.response.data.message, 'Error', 5000);
-  }
+  // if (error.response) {
+  //   NotificationManager.error(error.response.data.message, 'Error', 5000);
+  // }
   if (error.response && error.response.status === 401) {
     getStore().dispatch(logoutUser());
   } else {
@@ -38,7 +38,10 @@ function onAPIResponse(response) {
 }
 
 async function getHeaders(authenticated = false, recaptcha) {
-  let headers = { 'X-SESSION-ID': await getSessionId() };
+  let headers = {
+    'X-SESSION-ID': await getSessionId()
+    // 'X-VERSION-KEY': 'd3b7387a-35d8-11e9-b210-d663bd873d93'
+  };
   if (recaptcha) {
     headers = {
       ...headers,
@@ -136,6 +139,7 @@ export async function postAuthenticatedRequest(route, data, params) {
 
 export async function putRequest(route, data, params, authenticated = false) {
   let url = await getApiRoute(route, params);
+  console.log(url);
   return await axios
     .put(url, data, await getHeaders(authenticated))
     .then(checkStatus)

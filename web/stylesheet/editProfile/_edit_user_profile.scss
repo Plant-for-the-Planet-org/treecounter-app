@@ -73,10 +73,78 @@
       textarea {
         height: 75px !important;
       }
+      .column {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
     .tComb-template__password-form {
       @extend .tComb-template-form-group;
       column-gap: 211px;
+    }
+    .follow-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+      font-size: 15.5px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.52;
+      letter-spacing: normal;
+      // text-align: left;
+      color: #9c9b9b;
+
+      & .follow-container-row {
+        display: flex;
+        // flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        margin: 5px 0;
+        width: 45%;
+        @include for-tablet {
+          width: 100%;
+        }
+        & span {
+          // margin-right: 5px;
+        }
+
+        & .col {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          flex-basis: 0;
+          // background: blue;
+          text-align: start;
+          align-items: flex-start;
+        }
+        & .col1 {
+          flex-grow: 0;
+          flex-basis: auto;
+        }
+        & .col2 {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          cursor: pointer;
+        }
+        & .col3 {
+          align-items: flex-end;
+        }
+      }
+      & img {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+      }
+      & button {
+        min-width: auto;
+        margin: 0;
+        padding: 0 15px;
+      }
     }
   }
   .plant-project__container {
@@ -94,12 +162,11 @@
     }
     .user-profile__project-form-group {
       // .fieldset-depth-1 {
-      margin: 30px;
-      width: 100%;
 
       .plant-project__item {
-        @extend .user-profile__form-group;
-        padding: 27px 25px 21px;
+        // @extend .user-profile__form-group;
+        // padding: 27px 25px 21px;
+        // margin: 0 0 30px 0;
         select {
           font-size: 14px !important;
         }
@@ -110,7 +177,7 @@
           height: 75px !important;
           font-size: 16px !important;
         }
-        margin: 0 0 30px 0;
+
         .item-header {
           @extend .form-group__heading;
           content: "Project" counter(div);

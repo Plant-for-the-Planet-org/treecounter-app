@@ -7,7 +7,9 @@ export function TextInputTemplate(locals) {
   function onChange($event) {
     let value =
       locals.type === 'number' && $event.target.value
-        ? parseInt($event.target.value)
+        ? parseInt($event.target.value) > 0
+          ? parseInt($event.target.value)
+          : ''
         : $event.target.value;
     locals.onChange(value);
   }
@@ -65,7 +67,7 @@ export function TextInputTemplate(locals) {
                 : 'pftp-textfield__inputgroup--error-bar'
             }
           />
-          <label className={locals.value || isDate ? 'float-label' : ''}>
+          <label className={locals.value !== '' || isDate ? 'float-label' : ''}>
             {i18n.t(locals.label)}
           </label>
         </div>

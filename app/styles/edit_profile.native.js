@@ -57,5 +57,23 @@ export default (editProfileStyle = EStyleSheet.create({
     padding: 2,
     backgroundColor: '#f0f2f1',
     textAlign: 'center'
+  },
+  followerRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: 6,
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  followerCol: {
+    flexGrow: 1,
+    flexBasis: 0,
+    marginLeft: 5,
+    marginRight: 5
+  },
+  imageStyle: {
+    height: 50,
+    width: 50,
+    resizeMode: 'contain'
   }
 }));

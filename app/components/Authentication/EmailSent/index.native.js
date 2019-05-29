@@ -13,7 +13,11 @@ export default class ActivateAccount extends Component {
     return (
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <View style={styles.container}>
-          <Image source={GreenEmail} style={styles.imageStyle} />
+          <Image
+            source={GreenEmail}
+            resizeMode={'contain'}
+            style={styles.imageStyle}
+          />
           <Text style={styles.boldText}>{i18n.t('label.mail_sent')}</Text>
           <Text style={styles.textStyle}>{i18n.t('label.secure_link')}</Text>
           <InlineLink

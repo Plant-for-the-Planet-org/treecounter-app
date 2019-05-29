@@ -15,6 +15,18 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 let Form = t.form.Form;
 
 export default class Target extends Component {
+  constructor(props) {
+    super(props);
+    let { countTarget, targetYear, targetComment } = this.props.treecounter;
+
+    this.state = {
+      label: countTarget !== 0 ? i18n.t('label.update') : i18n.t('label.save')
+    };
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return JSON.stringify(nextProps) !== JSON.stringify(this.props);
+  }
   render() {
     return (
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
@@ -23,11 +35,11 @@ export default class Target extends Component {
             <Form
               ref={'setTargetForm'}
               type={targetFormSchema}
-              options={schemaOptions}
+              options={this.props.schemaOptions}
               value={this.props.treecounter}
             />
             <PrimaryButton onClick={this.props.onSubmitTarget}>
-              {i18n.t('label.set_target')}
+              {this.state.label}
             </PrimaryButton>
           </CardLayout>
         </View>

@@ -7,6 +7,7 @@ import StripeCC from './Gateways/StripeCC';
 import StripeSepa from './Gateways/StripeSepa';
 import Paypal from './Gateways/Paypal';
 import Offline from './Gateways/Offline';
+import i18n from '../../locales/i18n';
 
 import { StripeProvider, Elements } from './Stripe/stripeDefs';
 
@@ -117,25 +118,31 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     return paymentMethods ? (
       <StripeProvider stripe={this.state.stripe}>
         <div className="payment_options__wrapper">
-          <div>{gatewayProps.context.tpoName}</div>
-          <div>
-            {giftToName ? (
+          <div className="payment_option_details">
+            <div>{gatewayProps.context.tpoName}</div>
+            {giftToName && <div>{gatewayProps.context.plantProjectName}</div>}
+            {giftToName && (
               <div>
-                <div>{gatewayProps.context.plantProjectName}</div>
-                <div>
-                  {gatewayProps.context.treeCount} Trees Gift To {giftToName}
-                </div>
+                {gatewayProps.context.supportTreecounter
+                  ? i18n.t('label.support_user_trees', {
+                      user: giftToName,
+                      count: gatewayProps.context.treeCount
+                    })
+                  : i18n.t('label.gift_user_trees', {
+                      user: giftToName,
+                      count: gatewayProps.context.treeCount
+                    })}
               </div>
-            ) : (
+            )}
+            {!giftToName && (
               <div>Donate To {gatewayProps.context.plantProjectName}</div>
             )}
+            <div>
+              {' '}
+              Amount: {amount} {currency}{' '}
+            </div>
+            <div>Trees: {context.treeCount}</div>
           </div>
-          <div>
-            Amount: {amount} {currency}
-          </div>
-
-          <div>Trees: {context.treeCount}</div>
-
           {Object.keys(paymentMethods).map(gateway => {
             const accountName = paymentMethods[gateway];
             if ('stripe_cc' === gateway) {

@@ -13,6 +13,9 @@ const config = {
   },
   companyname: {
     style: { marginLeft: 20 }
+  },
+  country: {
+    style: { marginLeft: 20 }
   }
 };
 

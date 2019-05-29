@@ -8,6 +8,7 @@ import i18n from '../../locales/i18n';
 
 import svgStyles from '../../styles/common/treecounter_svg';
 import PlantedDetails from './PlantDetails.native';
+import { delimitNumbers } from '../../utils/utils';
 
 class TreecounterGraphicsText extends Component {
   constructor() {
@@ -61,7 +62,11 @@ class TreecounterGraphicsText extends Component {
       dom = !this.state.ifPlantedDetails ? (
         <View style={svgStyles.svgTextContainer}>
           <View style={svgStyles.svgTextRow}>
-            <Image style={svgStyles.svgColumn1} source={pot} />
+            <Image
+              style={svgStyles.svgColumn1}
+              resizeMode="contain"
+              source={pot}
+            />
             <View style={svgStyles.svgColumn2}>
               <Text style={svgStyles.svgTitleText}>
                 {i18n.t('label.target') +
@@ -77,14 +82,18 @@ class TreecounterGraphicsText extends Component {
               </Text>
               {this.props.trillion ? (
                 <Text style={svgStyles.svgTitleText}>
-                  {target.toLocaleString('en')}
+                  {delimitNumbers(target)}
                 </Text>
               ) : null}
             </View>
           </View>
           <View style={svgStyles.divider} />
           <View style={svgStyles.svgTextRow}>
-            <Image style={svgStyles.svgColumn1} source={darkTree} />
+            <Image
+              style={svgStyles.svgColumn1}
+              resizeMode="contain"
+              source={darkTree}
+            />
             <View style={svgStyles.svgColumn2}>
               <Text style={svgStyles.svgTitleText}>
                 {i18n.t('label.planted')}
@@ -103,7 +112,7 @@ class TreecounterGraphicsText extends Component {
 
               {this.props.trillion ? (
                 <Text style={svgStyles.svgTitleText}>
-                  {parseInt(planted).toLocaleString('en')}
+                  {delimitNumbers(parseInt(planted))}
                 </Text>
               ) : null}
             </View>

@@ -5,10 +5,18 @@ import {
 } from '../utils/api';
 import { debug } from '../debug/index';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
-import { userProfileSchema, plantProjectSchema } from '../schemas/index';
+import {
+  userProfileSchema,
+  plantProjectSchema,
+  tpoSchema
+} from '../schemas/index';
 
 import { normalize } from 'normalizr';
-import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
+import {
+  deleteEntity,
+  unlinkEntity,
+  mergeEntities
+} from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 const profileTypeToReq = {
   profile: 'profile_put',
@@ -25,12 +33,12 @@ export function addPlantProject(plantProject) {
         .then(res => {
           debug(res.status);
           debug(res);
-          const plantProject = res.data;
-          if (plantProject && plantProject instanceof Object) {
-            dispatch(
-              mergeEntities(normalize(plantProject, plantProjectSchema))
-            );
-          }
+          const { plantProject, userProfile, tpo } = res.data.merge;
+          dispatch(
+            mergeEntities(normalize(plantProject, [plantProjectSchema]))
+          );
+          dispatch(mergeEntities(normalize(tpo, [tpoSchema])));
+          dispatch(mergeEntities(normalize(userProfile, [userProfileSchema])));
           NotificationManager.success(
             `New Project Added Successfully`,
             `Congrats`,
@@ -56,8 +64,8 @@ export function deletePlantProject(plantProjectId) {
       })
         .then(res => {
           const userProfile = res.data;
-          dispatch(deleteEntity({ plantProject: [plantProjectId] }));
-          dispatch(mergeEntities(normalize(userProfile, userProfileSchema)));
+          dispatch(unlinkEntity(res.data.unlink));
+          dispatch(deleteEntity(res.data.delete));
           resolve(userProfile);
         })
         .catch(err => {
@@ -78,15 +86,37 @@ export function updatePlantProject(plantProject) {
         plantProject: projectId
       })
         .then(res => {
-          debug(res.status);
-          debug(res);
-          const { plantProject, plantProjectImage: deleteIds } = res.data;
-          if (plantProject && plantProject instanceof Object) {
-            dispatch(
-              mergeEntities(normalize(plantProject, plantProjectSchema))
-            );
-            dispatch(deleteEntity({ plantProjectImage: deleteIds }));
+          let { plantProject } = res.data.merge;
+          dispatch(
+            mergeEntities(normalize(plantProject, [plantProjectSchema]))
+          );
+          let { unlink, delete: deleteContent } = res.data;
+          if (unlink && deleteContent) {
+            dispatch(unlinkEntity(unlink));
+            dispatch(deleteEntity(deleteContent));
           }
+          resolve(res.data);
+          dispatch(setProgressModelState(false));
+        })
+        .catch(err => {
+          debug(err);
+          reject(err);
+          dispatch(setProgressModelState(false));
+        });
+    });
+  };
+}
+export function orderPlantProject(data, params) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    return new Promise(function(resolve, reject) {
+      postAuthenticatedRequest('plantProject_position', data, params)
+        .then(res => {
+          const { statusText } = res;
+          const { plantProject } = res.data.merge;
+          dispatch(
+            mergeEntities(normalize(plantProject, [plantProjectSchema]))
+          );
           resolve(res.data);
           dispatch(setProgressModelState(false));
         })
@@ -104,6 +134,29 @@ export function updateUserProfile(data, profileType) {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
       putAuthenticatedRequest(profileTypeToReq[profileType], data)
+        .then(res => {
+          debug(res.status);
+          debug(res);
+          if (res.data && res.data instanceof Object) {
+            dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
+          }
+          resolve(res.data);
+          dispatch(setProgressModelState(false));
+        })
+        .catch(err => {
+          debug(err);
+          reject(err);
+          dispatch(setProgressModelState(false));
+        });
+    });
+  };
+}
+
+export function updateProfileDedication(data) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    return new Promise(function(resolve, reject) {
+      putAuthenticatedRequest('profileDedication_put', data)
         .then(res => {
           debug(res.status);
           debug(res);

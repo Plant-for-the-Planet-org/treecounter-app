@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { Text, View, Image, ScrollView } from 'react-native';
+import { Text, View, Image, ScrollView, Keyboard } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import scrollStyle from '../../../styles/common/scrollStyle';
 import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 
@@ -23,9 +24,7 @@ let Form = t.form.Form;
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      recaptchaToken: null
-    };
+    this._recaptchaToken = undefined;
   }
 
   onForgotPasswordClicked = () => {
@@ -36,22 +35,36 @@ export default class Login extends Component {
     this.props.updateRoute('app_signup');
   };
 
-  verifyCallback = token => {
-    // Here you will get the final token!!!
-    this.setState({
-      recaptchaToken: token
-    });
+  onProfilePickerClick = () => {
+    this.props.updateRoute('pickup_profile_modal');
   };
 
+  verifyCallback = token => {
+    // Here you will get the final token!!!
+    this._recaptchaToken = token;
+  };
+
+  refreshToken = () => {
+    this._captchaRef.refreshToken();
+  };
+
+  handleLoginClick = () => {
+    if (this.refs.loginForm.getValue()) {
+      Keyboard.dismiss();
+    }
+    this.props.onPress(this._recaptchaToken, this.refreshToken);
+  };
   render() {
     return (
-      <ScrollView
+      <KeyboardAwareScrollView
         contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
+        enableOnAndroid={true}
       >
         <ReCaptchaV3
-          captchaDomain={'https://www.plant-for-the-planet.org'}
+          ref={ref => (this._captchaRef = ref)}
+          captchaDomain={'https://www.trilliontreecampaign.org'}
           siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
-          onReceiveToken={token => verifyCallback(token)}
+          onReceiveToken={token => this.verifyCallback(token)}
         />
         <View style={styles.parentContainer}>
           <View style={styles.headerContainer}>
@@ -92,7 +105,7 @@ export default class Login extends Component {
               </TouchableItem>
 
               <PrimaryButton
-                onClick={event => this.props.onPress(this.state.recaptchaToken)}
+                onClick={this.handleLoginClick}
                 buttonStyle={styles.loginButtonStyle}
                 textStyle={{ fontSize: 16 }}
               >
@@ -101,7 +114,7 @@ export default class Login extends Component {
             </View>
           </View>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }

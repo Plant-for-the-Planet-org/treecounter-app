@@ -11,6 +11,8 @@ import {
   moreNotificationAction,
   markSeenNotificationAction
 } from '../../actions/notificationAction';
+
+import { updateProfileDedication } from '../../actions/updateUserProfile';
 import {
   currentUserProfileSelector,
   userFeedsSelector
@@ -27,6 +29,7 @@ class HeaderContainer extends React.Component {
         userFeeds={this.props.userFeeds}
         fetchMoreNotifications={this.props.moreNotificationAction}
         markSeenNotificationAction={this.props.markSeenNotificationAction}
+        updateProfileDedication={this.props.updateProfileDedication}
       />
     );
   }
@@ -38,6 +41,7 @@ const mapDispatchToProps = dispatch => {
       logoutUser,
       moreNotificationAction,
       markSeenNotificationAction,
+      updateProfileDedication,
       route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
     },
     dispatch
@@ -57,5 +61,6 @@ HeaderContainer.propTypes = {
   moreNotificationAction: PropTypes.func,
   markSeenNotificationAction: PropTypes.func,
   userProfile: PropTypes.object,
-  userFeeds: PropTypes.object
+  userFeeds: PropTypes.object,
+  updateProfileDedication: PropTypes.func
 };

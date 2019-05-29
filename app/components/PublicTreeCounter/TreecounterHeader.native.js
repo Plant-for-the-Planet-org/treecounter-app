@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image } from 'react-native';
 
-import { getImageUrl } from '../../actions/apiRouting';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import userHomeStyles from '../../styles/user-home.native';
 import UserProfileImage from '../Common/UserProfileImage';
+
+import * as images from '../../assets';
+
 const TreecounterHeader = ({
   caption,
   profileType,
@@ -24,9 +26,19 @@ const TreecounterHeader = ({
           <Text style={userHomeStyles.nameStyle}>{caption}</Text>
         </View>
         <View style={userHomeStyles.userInfoProfileType}>
-          <View style={userHomeStyles.profileTypeContainer}>
-            <Text style={userHomeStyles.profileTypeStyle}>{profileType}</Text>
-          </View>
+          <Image
+            style={userHomeStyles.profileTypeImage}
+            resizeMode="contain"
+            source={
+              profileType === 'education'
+                ? images['schoolIcon']
+                : profileType === 'tpo'
+                  ? images['tpoIcon']
+                  : profileType === 'company'
+                    ? images['companyIcon']
+                    : images['individualIcon']
+            }
+          />
           {showFollow ? (
             <FollowLabelButton
               isSubscribed={isUserFollowerBool}

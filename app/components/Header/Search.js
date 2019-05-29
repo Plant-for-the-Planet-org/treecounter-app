@@ -7,6 +7,16 @@ import SearchAutosuggest from './SearchAutosuggest';
 
 class SearchBar extends React.Component {
   suggestionClicked = (event, data) => {
+    // if(data.suggestion.type === 'treecounter') {
+    //   this.props.route('app_treecounter', null, {
+    //     treecounter: data.suggestion.slug || data.suggestion.id
+    //   });
+    // } else if (data.suggestion.type === 'leaderboard') {
+    //   this.props.route('app_leaderboard', null, {
+    //     section: data.suggestion.section,
+    //     subSection: data.suggestion.subSection
+    //   });
+    // }
     this.props.route('app_treecounter', null, {
       treecounter: data.suggestion.slug || data.suggestion.id
     });
@@ -19,7 +29,10 @@ class SearchBar extends React.Component {
     return (
       <div>
         <div className="search-bar">
-          <SearchAutosuggest onSuggestionClicked={this.suggestionClicked} />
+          <SearchAutosuggest
+            onSuggestionClicked={this.suggestionClicked}
+            clearSuggestions={true}
+          />
           <i className="material-icons search-icon">{'search'}</i>
         </div>
       </div>

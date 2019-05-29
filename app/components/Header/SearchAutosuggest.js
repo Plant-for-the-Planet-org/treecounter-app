@@ -40,7 +40,11 @@ const getSuggestions = value => {
       }
       const regex = new RegExp('\\b' + escapedValue, 'i');
 
-      resolve(jdata.filter(person => regex.test(getSuggestionValue(person))));
+      resolve(
+        typeof jdata === 'object'
+          ? jdata.filter(person => regex.test(getSuggestionValue(person)))
+          : []
+      );
     });
   });
 };
@@ -116,7 +120,10 @@ class SearchAutosuggest extends Component {
   };
 
   render() {
-    const { value, suggestions } = this.state;
+    let { value, suggestions } = this.state;
+    suggestions = suggestions.filter(
+      suggestion => suggestion.category === 'profile'
+    );
     const inputProps = {
       placeholder: i18n.t('label.placeholder_value'),
       value,
@@ -151,7 +158,8 @@ const mapDispatchToProps = dispatch => {
 
 SearchAutosuggest.propTypes = {
   onSuggestionClicked: PropTypes.func,
-  clearSuggestions: PropTypes.bool
+  clearSuggestions: PropTypes.bool,
+  hideCompetitions: PropTypes.bool
 };
 
 SearchAutosuggest.defaultProps = {

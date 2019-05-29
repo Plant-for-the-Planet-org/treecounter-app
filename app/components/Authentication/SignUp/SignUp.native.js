@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { Text, View, ImageBackground, ScrollView } from 'react-native';
+import {
+  Text,
+  View,
+  ImageBackground,
+  ScrollView,
+  Keyboard
+} from 'react-native';
 
 import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import styles from '../../../styles/login.native';
-import SignupTypes from './SignupType';
+import { SignupTypes, SignUpType } from './SignupType';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
+import { SignupOrganization, SignupJustMe } from '../../../assets';
 
 let Form = t.form.Form;
 
@@ -16,10 +24,10 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Profiletype: 'individual',
-      recaptchaToken: null
+      Profiletype: 'individual'
     };
     this.changeProfile = this.changeProfile.bind(this);
+    this._recaptchaToken = undefined;
   }
 
   onLoginClicked = () => {
@@ -33,37 +41,71 @@ export default class SignUp extends Component {
   }
 
   verifyCallback = token => {
+    this._recaptchaToken = token;
     // Here you will get the final token!!!
-    this.setState({
-      recaptchaToken: token
-    });
+  };
+
+  refreshToken = () => {
+    this._captchaRef.refreshToken();
+  };
+
+  onSignUpClicked = type => {
+    if (this.refs.signupForm.getValue()) {
+      Keyboard.dismiss();
+    }
+    this.props.onSignUpClicked(type, this._recaptchaToken, this.refreshToken);
   };
 
   render() {
     let { Profiletype } = this.state;
+    let ProfileTypeParam = this.props.navigation.getParam('profileTypeParam');
+    let type, icon;
+    if (signupFormSchema[ProfileTypeParam]) {
+      type = ProfileTypeParam;
+    } else {
+      type = Profiletype;
+    }
+    if (type === 'individual') {
+      icon = SignupJustMe;
+    } else {
+      icon = SignupOrganization;
+    }
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
+      <KeyboardAwareScrollView
+      // contentContainerStyle={[{ flex: 1 }]}
+      // keyboardShouldPersistTaps={'handled'}
+      >
         <ReCaptchaV3
-          captchaDomain={'https://www.plant-for-the-planet.org'}
+          ref={ref => (this._captchaRef = ref)}
+          captchaDomain={'https://www.trilliontreecampaign.org'}
           siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
-          onReceiveToken={token => verifyCallback(token)}
+          onReceiveToken={token => this.verifyCallback(token)}
         />
         <ImageBackground style={[styles.container, styles.parentContainer]}>
-          <SignupTypes changeProfile={this.changeProfile} />
-          <View style={styles.inputContainer}>
+          {!ProfileTypeParam ? (
+            <SignupTypes changeProfile={this.changeProfile} />
+          ) : (
+            <View style={{ alignSelf: 'center' }}>
+              <SignUpType
+                iconUrl={icon}
+                title={type.toUpperCase()}
+                profileType={type}
+              />
+            </View>
+          )}
+          <View style={{ flex: 1 }}>
             <Form
               ref={'signupForm'}
-              type={signupFormSchema[Profiletype]}
-              options={this.props.schemaOptions[Profiletype]}
+              type={signupFormSchema[!ProfileTypeParam ? Profiletype : type]}
+              options={
+                this.props.schemaOptions[!ProfileTypeParam ? Profiletype : type]
+              }
               value={this.props.formValue}
             />
             <PrimaryButton
-              onClick={() => {
-                this.props.onSignUpClicked(
-                  Profiletype,
-                  this.state.recaptchaToken
-                );
-              }}
+              onClick={() =>
+                this.onSignUpClicked(!ProfileTypeParam ? Profiletype : type)
+              }
             >
               {i18n.t('label.signUp')}
             </PrimaryButton>

@@ -16,31 +16,45 @@ export default class SuccessfullyActivatedAccount extends Component {
     const customizeProfile = (
       <InlineLink uri={'app_userHome'} caption="customize your profile" />
     );
-    const login = <InlineLink caption="log in" uri={'app_login'} />;
+    const login = <InlineLink caption="login" uri={'app_login'} />;
 
     return (
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <View style={styles.container}>
           {this.props.success ? (
-            <Image source={check_green} style={styles.imageStyle} />
+            <Image
+              source={check_green}
+              resizeMode="contain"
+              style={styles.imageStyle}
+            />
           ) : (
-            <Image source={redeemSignIn} style={styles.imageStyle} />
+            <Image
+              source={redeemSignIn}
+              resizeMode="contain"
+              style={styles.imageStyle}
+            />
           )}
           {this.props.success ? (
             <Text style={styles.textStyle}>
-              You have successfully activated your <br />account.
+              You have successfully activated your account.
             </Text>
           ) : (
             <Text style={styles.textStyle}>
-              Your account has already been activated <br />previously.
+              Your account has already been activated previously.
             </Text>
           )}
           {this.props.success ? (
-            <Text style={styles.textStyle}>
-              You can {customizeProfile} now <br />or {setTarget}
-            </Text>
+            <View>
+              <Text style={styles.textStyle}>You can</Text>
+              {customizeProfile}
+              <Text>now or </Text>
+              {setTarget}
+            </View>
           ) : (
-            <Text style={styles.textStyle}>You can {login}.</Text>
+            <View style={styles.textStyle}>
+              <Text>You can</Text>
+              {login}
+            </View>
           )}
         </View>
       </ScrollView>

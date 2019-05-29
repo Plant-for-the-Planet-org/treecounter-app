@@ -14,13 +14,18 @@ import {
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { context } from '../../config';
 import styles from '../../styles/faq';
+import TabContainer from '../../containers/Menu/TabContainer';
 
 export default class FAQ extends Component {
   _renderHeader(section, index, isActive) {
     return (
       <View style={styles.header}>
         <Text style={styles.headerText}>{section.question}</Text>
-        <Image style={styles.imageStyle} source={isActive ? foldin : foldout} />
+        <Image
+          style={styles.imageStyle}
+          resizeMode="contain"
+          source={isActive ? foldin : foldout}
+        />
       </View>
     );
   }
@@ -29,8 +34,7 @@ export default class FAQ extends Component {
     return (
       <View style={styles.content}>
         <HTMLView
-          value={section.answer}
-          addLineBreaks={false}
+          value={`<div>${section.answer.replace(/(\r\n|\n|\r)/gm, '')}</div>`}
           stylesheet={styles}
           onLinkPress={url => {
             try {
@@ -54,15 +58,18 @@ export default class FAQ extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-      <ScrollView>
-        <Accordion
-          sections={this.props.faqs}
-          renderSectionTitle={this._renderSectionTitle}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-          touchableComponent={TouchableOpacity}
-        />
-      </ScrollView>
+      <View style={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
+          <Accordion
+            sections={this.props.faqs}
+            renderSectionTitle={this._renderSectionTitle}
+            renderHeader={this._renderHeader}
+            renderContent={this._renderContent}
+            touchableComponent={TouchableOpacity}
+          />
+        </ScrollView>
+        <TabContainer {...this.props} />
+      </View>
     );
   }
 }

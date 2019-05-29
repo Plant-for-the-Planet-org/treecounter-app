@@ -18,8 +18,15 @@ export default (menuStyles = EStyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingLeft: 20,
-    paddingTop: 2,
+    paddingTop: 10,
     paddingBottom: 10
+  },
+  titleStyle: {
+    height: 25,
+    borderRadius: 3,
+    backgroundColor: '#c7c7c6',
+    padding: 5,
+    fontSize: 12
   },
   groupMenuContainer: {
     flexDirection: 'column',
@@ -29,13 +36,11 @@ export default (menuStyles = EStyleSheet.create({
   },
   imageStyle: {
     width: 17,
-    height: 18,
-    resizeMode: 'contain'
+    height: 18
   },
   largeImageStyle: {
     width: 25,
-    height: 25,
-    resizeMode: 'contain'
+    height: 25
   },
   textStyle: {
     paddingLeft: 5,
@@ -58,5 +63,35 @@ export default (menuStyles = EStyleSheet.create({
     width: 25,
     backgroundColor: '$primary',
     marginLeft: 2
+  },
+
+  ///Bottom Menu Related Styles:
+  bottomMenuContainer: {
+    height: 50,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    shadowOffset: { width: 0, height: 4 },
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowRadius: 12
+  },
+  bottomMenuItemContainer: {
+    flexDirection: 'column',
+    marginTop: 5,
+    marginBottom: 5,
+    alignItems: 'center'
+  },
+  bottomMenuItemImage: {
+    height: 20,
+    width: 20
+  },
+  bottomMenuItemText: {
+    fontSize: 12,
+    color: '$textColor'
+  },
+  selectedBottomMenuItemText: {
+    color: '$colorPrimaryAccentLight',
+    fontSize: 12
   }
 }));

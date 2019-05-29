@@ -1,5 +1,12 @@
 import React from 'react';
-import { ScrollView, Text, View, TouchableOpacity, Image } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  StyleSheet
+} from 'react-native';
 
 import SearchBar from '../../../components/Header/SearchBar.native';
 import Header from '../../../components/Header/Header.native';
@@ -7,8 +14,12 @@ import { getSuggestions, profileTypeToImage } from '../../../helpers/utils';
 import { getImageUrl } from '../../../actions/apiRouting';
 import { getLocalRoute } from '../../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
+import i18n from '../../../locales/i18n';
 import styles from '../../../styles/header/search_layout.native';
+import searchBarStyles from '../../../styles/header/search_bar.native';
+
 import _ from 'lodash';
+import UserProfileImage from '../../Common/UserProfileImage';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
@@ -21,6 +32,7 @@ class SearchUser extends React.Component {
   };
   constructor(props) {
     super(props);
+
     this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 200);
   }
 
@@ -36,10 +48,11 @@ class SearchUser extends React.Component {
 
   // TODO: debounce
   _handleChangeQuery = q => {
-    this.setState({ searchResultClicked: false });
+    this.setState({ searchResultClicked: false, selectedSuggestionName: q });
     getSuggestions(q).then(suggestions => {
       this.setState({ q: suggestions });
     });
+    this.setState({ selectedSuggestionName: null });
   };
 
   _onNavigationClick(suggestion) {
@@ -66,9 +79,11 @@ class SearchUser extends React.Component {
     return (
       <View style={{ width: '100%' }}>
         <SearchBar
+          dontFocus
           onChangeQuery={this.onChangeTextDelayed}
           inputValue={this.state.selectedSuggestionName}
           onSubmit={this._handleSubmit}
+          placeholderValue={i18n.t('label.search_user')}
           placeholderTextColor={this.props.searchInputPlaceholderTextColor}
           textColor={this.props.searchInputTextColor}
           selectionColor={this.props.searchInputSelectionColor}
@@ -78,11 +93,10 @@ class SearchUser extends React.Component {
           }
           showCancelSearchButton={false}
           style={{
+            ...searchBarStyles.searchContainer,
             width: '100%',
-            height: 30,
-            marginTop: 10,
-            paddingLeft: 27,
-            flexDirection: 'row'
+            backgroundColor: 'transparent',
+            marginTop: 10
           }}
           tintColor={
             this.props.searchInputTintColor || this.props.headerTintColor
@@ -90,25 +104,55 @@ class SearchUser extends React.Component {
         />
 
         {this.state.q && !this.state.searchResultClicked ? (
-          <ScrollView>
+          <ScrollView style={{ paddingBottom: 15 }}>
             {this.state.q.map((suggestion, i) => {
-              return (
-                <TouchableOpacity
-                  style={styles.searchResult}
-                  key={'suggestion' + i}
-                  onPress={this._onNavigationClick.bind(this, suggestion)}
-                >
-                  <Image
-                    style={styles.profileImage}
-                    source={
-                      suggestion.image
-                        ? getImageUrl('profile', 'avatar', suggestion.image)
-                        : profileTypeToImage[suggestion.type]
-                    }
-                  />
-                  <Text style={styles.profileText}>{suggestion.name}</Text>
-                </TouchableOpacity>
-              );
+              if (this.props.hideCompetitions) {
+                if (suggestion.category !== 'competition') {
+                  return (
+                    <TouchableOpacity
+                      style={styles.searchResult}
+                      key={'suggestion' + i}
+                      onPress={this._onNavigationClick.bind(this, suggestion)}
+                    >
+                      <UserProfileImage
+                        profileImage={suggestion.image}
+                        imageCategory={suggestion.category}
+                        imageType="avatar"
+                        imageStyle={{
+                          height: 30,
+                          width: 30,
+                          borderRadius: 30 / 2
+                        }}
+                        defaultType={suggestion.type}
+                      />
+
+                      <Text style={styles.profileText}>{suggestion.name}</Text>
+                    </TouchableOpacity>
+                  );
+                }
+              } else {
+                return (
+                  <TouchableOpacity
+                    style={styles.searchResult}
+                    key={'suggestion' + i}
+                    onPress={this._onNavigationClick.bind(this, suggestion)}
+                  >
+                    <UserProfileImage
+                      profileImage={suggestion.image}
+                      imageCategory={suggestion.category}
+                      imageType="avatar"
+                      imageStyle={{
+                        height: 30,
+                        width: 30,
+                        borderRadius: 30 / 2
+                      }}
+                      defaultType={suggestion.type}
+                    />
+                    <Text style={styles.profileText}>{suggestion.name}</Text>
+                  </TouchableOpacity>
+                );
+              }
+              return null;
             })}
           </ScrollView>
         ) : null}

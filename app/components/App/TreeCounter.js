@@ -42,6 +42,7 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import SuccessfullyActivatedAccount from '../../containers/Authentication/SuccessfullActivatedContainer';
 import DonationTreesContainer from '../../containers/DonateTrees/index';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
+import ManageProjectContainer from '../../containers/ManageProjects';
 
 import EditUserProfileContainer from '../../containers/EditUserProfile';
 import LeaderboardContainer from '../../containers/Leaderboard';
@@ -53,6 +54,10 @@ import DownloadAppModal from '../DownloadAppStore';
 import AppPaymentContainer from '../../containers/AppPayment';
 import BodyErrorBoundary from '../ErrorBoundry/bodyErrorBoundry';
 import PageNotFound from '../ErrorBoundry/404';
+import WidgetShareContainer from '../../containers/WidgetsShare';
+import ChallengeContainer from '../../containers/Challenge/createChallenge';
+import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPublicDenyEmail';
+import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -100,7 +105,12 @@ class TreeCounter extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.userProfile !== this.props.userProfile) {
+    if (
+      nextProps.userProfile !== this.props.userProfile &&
+      (!nextProps.userProfile ||
+        !this.props.userProfile ||
+        nextProps.userProfile.id != this.props.userProfile.id)
+    ) {
       let isLoggedIn = null !== nextProps.userProfile;
       this._appRoutes = undefined;
       this.setState({ loading: false, isLoggedIn: isLoggedIn });
@@ -154,14 +164,16 @@ class TreeCounter extends Component {
               }
               component={Trillion}
             />
-            <PublicRoute
-              path={getLocalRoute('app_signup')}
-              component={SignUpContainer}
-            />
+
             <PublicRoute
               path={getLocalRoute('app_accountActivate') + '/:token'}
               component={SuccessfullyActivatedAccount}
             />
+            <PublicRoute
+              path={getLocalRoute('app_signup') + '/:type?'}
+              component={SignUpContainer}
+            />
+
             <Route
               path={getLocalRoute('app_accountActivated')}
               component={SuccessfullyActivatedAccount}
@@ -194,6 +206,18 @@ class TreeCounter extends Component {
             <PublicRoute
               path={getLocalRoute('app_passwordSent')}
               component={EmailSentContainer}
+            />
+            <PrivateRoute
+              path={
+                getLocalRoute('app_challengeResponse') + '/active' + '/:token'
+              }
+              component={RedirectedPrivateAcceptEmail}
+            />
+            <Route
+              path={
+                getLocalRoute('app_challengeResponse') + '/decline' + '/:token'
+              }
+              component={RedirectedPublicDenyEmail}
             />
             <Route
               path={getLocalRoute('app_payment') + '/:donationContribution'}
@@ -235,6 +259,10 @@ class TreeCounter extends Component {
               path={getLocalRoute('app_editProfile')}
               component={EditUserProfileContainer}
             />
+            <PrivateRoute
+              path={getLocalRoute('app_challenge')}
+              component={ChallengeContainer}
+            />
             <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
             <Route
               path={getLocalRoute('app_privacy')}
@@ -254,7 +282,7 @@ class TreeCounter extends Component {
               component={SelectPlantProjectContainer}
             />
             <Route
-              path={getLocalRoute('app_donateTrees')}
+              path={getLocalRoute('app_donateTrees') + '/:id?'}
               component={DonationTreesContainer}
             />
             <Route
@@ -273,6 +301,14 @@ class TreeCounter extends Component {
               path={getLocalRoute('app_treecounter') + '/:treecounterId'}
               component={PublicTreecounterContainer}
             />
+            <PrivateRoute
+              path={getLocalRoute('app_manageProjects')}
+              component={ManageProjectContainer}
+            />
+            <PrivateRoute
+              path={getLocalRoute('app_widgetBuilder')}
+              component={WidgetShareContainer}
+            />
             <Route component={PageNotFound} />
           </Switch>
         </BodyErrorBoundary>
@@ -284,13 +320,19 @@ class TreeCounter extends Component {
     if (!this._appRoutes) {
       this.initRoutes();
     }
+    if (window.location.pathname.indexOf('signup') > -1 && this.state.isIOS) {
+      this.openApp(window.location.pathname);
+      return null;
+    }
     return !this.state.loading ? (
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
             <ProgressModal isOpen={this.props.progressModel} />
+
             {window.location.pathname.indexOf('donation-payment') > -1 ||
-            window.location.pathname.indexOf('account-activate') > -1 ? null : (
+            window.location.pathname.indexOf('account-activate') > -1 ||
+            window.location.pathname.indexOf('signup') > -1 ? null : (
               <DownloadAppModal
                 isOpen={this.state.isIOS && !this.state.isCancelled}
                 continueOnSite={this.continueOnSite.bind(this)}
@@ -305,6 +347,10 @@ class TreeCounter extends Component {
         <NotificationContainer />
       </div>
     ) : null;
+  }
+
+  openApp(linkUrl) {
+    window.location.href = 'trilliontreecampaign:' + linkUrl;
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,27 +8,35 @@ import { registerTree } from '../../actions/registerTree';
 import { userTreecounterSelector } from '../../selectors/index';
 import { mergeContributionImages } from '../../helpers/utils';
 import { currentUserProfileSelector } from '../../selectors/index';
+import NavigationEvents from './importNavigationEvents';
+
 import {
   schemaOptionsSingleTree,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
 import { handleServerResponseError } from '../../helpers/utils';
 
-class RegisterTreesContainer extends Component {
+class RegisterTreesContainer extends PureComponent {
   constructor() {
     super();
     this.state = {
       schemaOptionsSingleTree: schemaOptionsSingleTree,
-      schemaOptionsMultipleTrees: schemaOptionsMultipleTrees
+      schemaOptionsMultipleTrees: schemaOptionsMultipleTrees,
+      loadSvg: true
     };
   }
-  onSubmit = (mode, registerTreeForm) => {
+
+  onSubmit = (mode, registerTreeForm, plantProject) => {
     registerTreeForm =
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
     // console.log(registerTreeForm.validate());
     let value = registerTreeForm.getValue();
+    value = Object.assign({}, value);
     value = mergeContributionImages(value);
     if (value) {
+      if (plantProject) {
+        value.plantProject = plantProject;
+      }
       this.props
         .registerTree(
           value,
@@ -50,7 +58,11 @@ class RegisterTreesContainer extends Component {
                 }
               },
               () => {
-                this.refs.registerTrees.refs.registerTreeForm.validate();
+                if (registerTreeForm) {
+                  registerTreeForm.validate();
+                } else {
+                  this.refs.registerTrees.refs.registerTreeForm.validate();
+                }
               }
             );
           }
@@ -66,7 +78,11 @@ class RegisterTreesContainer extends Component {
                 }
               },
               () => {
-                this.refs.registerTrees.refs.registerTreeForm.validate();
+                if (registerTreeForm) {
+                  registerTreeForm.validate();
+                } else {
+                  this.refs.registerTrees.refs.registerTreeForm.validate();
+                }
               }
             );
           }
@@ -75,15 +91,29 @@ class RegisterTreesContainer extends Component {
   };
 
   render() {
-    return (
-      <RegisterTrees
-        ref="registerTrees"
-        onSubmit={this.onSubmit}
-        schemaOptionsSingleTree={this.state.schemaOptionsSingleTree}
-        schemaOptionsMultipleTrees={this.state.schemaOptionsMultipleTrees}
-        currentUserProfile={this.props.currentUserProfile}
-      />
-    );
+    return [
+      this.props.navigation ? (
+        <NavigationEvents
+          onWillFocus={payload => {
+            this.setState({ loadSvg: true });
+          }}
+          onWillBlur={payload => {
+            this.setState({ loadSvg: false });
+          }}
+          key="navigation-events"
+        />
+      ) : null,
+      this.state.loadSvg ? (
+        <RegisterTrees
+          key="register-tree"
+          ref="registerTrees"
+          onSubmit={this.onSubmit}
+          schemaOptionsSingleTree={this.state.schemaOptionsSingleTree}
+          schemaOptionsMultipleTrees={this.state.schemaOptionsMultipleTrees}
+          currentUserProfile={this.props.currentUserProfile}
+        />
+      ) : null
+    ];
   }
 }
 

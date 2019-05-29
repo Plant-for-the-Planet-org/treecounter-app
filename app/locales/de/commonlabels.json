@@ -1,5 +1,13 @@
 {
   "loading": "Laden ...",
-  "enterValidEmail": "Gib eine gültige Email-Adresse ein",
-  "invalidLength": "Ungültige Länge: sollte kürzer sein als {length}"
+  "isRequired": "{{context}} wird benötigt",
+  "enterValidEmail": "Geben Sie eine gültige Email-Adresse ein",
+  "invalidLength": "Ungültige Länge: sollte kürzer sein als {{length}}",
+  "invalidValueMsg": "Bitte geben Sie eine gültige {{context}} ein",
+  "something_went_x": "Etwas ist schief gelaufen.",
+  "sorry_inconveniences": "Entschuldigen Sie die Umstände.",
+  "error_reported": "Wir haben diesen Fehler an unsere IT-Profis gemeldet.",
+  "home_page_redirected": "Sie werden in {{seconds}} Sekunden zur Startseite weitergeleitet",
+  "planting_404": "Lasst uns Bäume pflanzen, um diese Situation auf diesem Planeten zu vermeiden.",
+  "cancel": "Abbrechen"
 }

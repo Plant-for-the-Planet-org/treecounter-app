@@ -1,9 +1,7 @@
 {
-  "signup": "सहभागि हुनु",
   "email": "ईमेल",
   "address": "ठेगाना",
   "zipCode": "जिप कोड",
   "city": "शहर",
-  "country": "देश",
-  "password_repeat": "पासवर्ड फेरि दोहोर्याउँनुहोस्"
+  "country": "देश"
 }

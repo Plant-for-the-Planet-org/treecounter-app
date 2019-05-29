@@ -25,7 +25,7 @@ export default class GiftUser extends Component {
       this.setState(
         {
           form: {
-            treeCounter: this.state.selectedSuggestion.id,
+            treeCounter: this.state.selectedSuggestion.treecounterId,
             message: this.state.message,
             name: this.state.selectedSuggestion.name
           }

@@ -58,6 +58,7 @@ export default class Login extends Component {
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
+        enableOnAndroid={true}
       >
         <ReCaptchaV3
           ref={ref => (this._captchaRef = ref)}

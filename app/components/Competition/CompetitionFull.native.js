@@ -43,7 +43,7 @@ class CompetitionFull extends React.Component {
   }
 
   onSearchResultClick(q) {
-    this.props.invitePart(this.props.competitionDetail.id, q.id);
+    this.props.invitePart(this.props.competitionDetail.id, q.treecounterId);
   }
   render() {
     let status = '',

@@ -273,7 +273,7 @@ export default class GiftTrees extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        directGift: { treecounter: event.suggestion.id }
+        directGift: { treecounter: event.suggestion.treecounterId }
       },
       giftTreecounterName: event.suggestion.name
     });

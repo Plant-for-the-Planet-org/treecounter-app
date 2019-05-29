@@ -81,7 +81,13 @@ export default class ChallengeCard extends React.Component {
                 </SecondaryButton>
               </div>
             ) : (
-              <span className="status-label">{status}</span>
+              <span className="status-label">
+                {status === 'pending'
+                  ? i18n.t('label.sent')
+                  : status === 'active'
+                    ? i18n.t('label.accepted')
+                    : i18n.t('label.declined')}
+              </span>
             )}
           </div>
         </CardLayout>

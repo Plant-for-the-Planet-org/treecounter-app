@@ -45,6 +45,9 @@ import ImprintContainer from '../../containers/Imprint';
 import PrivacyContainer from '../../containers/Privacy';
 import CompetitionContainer from '../../containers/CompetitionContainer';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
+import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
+import EditCompetitionContainer from '../../containers/EditCompetition';
+import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -56,7 +59,7 @@ const headerLabels = {
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
-  [getLocalRoute('app_homepage')]: 'World',
+  [getLocalRoute('app_homepage')]: 'label.trillion_tree_campaign_app_header',
   [getLocalRoute('app_explore')]: 'label.explore',
   [getLocalRoute('app_userHome')]: 'Trillion Tree Campaign',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
@@ -67,15 +70,18 @@ const headerLabels = {
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   [getLocalRoute('app_selectProject')]: 'label.donate',
   [getLocalRoute('app_competition')]: 'label.competitions',
+  [getLocalRoute('app_editCompetition')]: 'label.edit_competition',
   [getLocalRoute('app_imprint')]: 'label.imprint',
   [getLocalRoute('app_privacy')]: 'label.data_protection',
+  [getLocalRoute('app_challenge')]: 'label.challenge_heading',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license',
   ['delete_profile_confirm']: 'label.delete_profile',
   ['delete_contribution']: 'label.delete_contribution',
   ['app_donate_detail']: 'label.donate',
-  ['app_gift_projects']: 'label.gift_trees'
+  ['app_gift_projects']: 'label.gift_trees',
+  ['pickup_profile_modal']: 'label.dedicate_trees_to'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -83,9 +89,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     {
       [getLocalRoute('app_editProfile')]: {
         screen: isLoggedIn ? EditUserProfile : LoginContainer
-      },
-      [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : Trillion
       },
       [getLocalRoute('app_login')]: {
         screen: LoginContainer
@@ -106,6 +109,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: ActivateAccountContainer
       },
       [getLocalRoute('app_faq')]: FAQContainer,
+      ['pickup_profile_modal']: ProfilePickerModal,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
 
       ['about_us']: { screen: AboutUsContainer },
@@ -131,6 +135,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_challenge')]: ChallengeContainer,
       ['app_gift_projects']: {
         screen: SelectPlantProjectContainer
+      },
+      [getLocalRoute('app_accountActivate')]: {
+        screen: SuccessfullActivatedContainer,
+        path: getLocalRoute('app_accountActivate') + '/:token'
       }
     },
     {
@@ -225,14 +233,19 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
           navigation.state.routes &&
           navigation.state.routes.length > 0
         ) {
-          title = i18n.t(
-            headerLabels[navigation.state.routes[index].routeName]
-          );
-          if (navigation.state.routes[index].hasOwnProperty('params')) {
-            const childTitle = navigation.state.routes[index].params.titleParam;
+          if (navigation.state.routes[index].routeName === '/home') {
+            title = userProfile.fullname;
+          } else {
+            title = i18n.t(
+              headerLabels[navigation.state.routes[index].routeName]
+            );
+            if (navigation.state.routes[index].hasOwnProperty('params')) {
+              const childTitle =
+                navigation.state.routes[index].params.titleParam;
 
-            if (childTitle) {
-              title = childTitle;
+              if (childTitle) {
+                title = childTitle;
+              }
             }
           }
         }
@@ -284,7 +297,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: SelectedPlantProject
       },
       [getLocalRoute('app_competition')]: {
-        screen: SelectedCompetition
+        screen: isLoggedIn ? SelectedCompetition : LoginContainer
+      },
+      [getLocalRoute('app_editCompetition')]: {
+        screen: isLoggedIn ? EditCompetitionContainer : LoginContainer
       },
       ['app_donate_detail']: {
         screen: DonationTreesContainer
@@ -294,7 +310,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       navigationOptions: ({ navigation }) => {
         let navigationConfig = {
           headerStyle: styles.container,
-          headerTitleStyle: { paddingRight: 12 },
+          headerTitleStyle: { paddingRight: 16 },
           headerTintColor: '#fff',
           headerBackTitle: null,
           title: getTitle(navigation),

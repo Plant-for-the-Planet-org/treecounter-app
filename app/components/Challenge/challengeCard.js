@@ -8,6 +8,8 @@ import CardLayout from '../Common/Card';
 import UserProfileImage from '../Common/UserProfileImage';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
+import { delimitNumbers } from '../../utils/utils';
+import { upwardArrow, downwardArrow } from '../../assets/index.js';
 
 export default class ChallengeCard extends React.Component {
   render() {
@@ -28,34 +30,46 @@ export default class ChallengeCard extends React.Component {
           <div className="flex-row">
             <div className="limit-width">
               <span className="goal-style">
-                {goal.toLocaleString() +
-                  ' Trees' +
-                  (end_date !== null ? ' by ' + end_date : '')}
+                {delimitNumbers(goal) +
+                  ' ' +
+                  i18n.t('label.trees') +
+                  ' ' +
+                  (end_date !== null
+                    ? ' ' + i18n.t('label.by') + ' ' + end_date
+                    : '')}
               </span>
               <div className="flex-row">
                 <UserProfileImage profileImage={avatar} />
-                <div>
+                <div className="challenge_details">
                   <div className="flex-row">
                     <span className="text-style text-padding">
-                      {direction === 'target' ? 'from ' : 'to '}
+                      {direction === 'target'
+                        ? i18n.t('label.from') + ' '
+                        : i18n.t('label.to') + ' '}
                     </span>
                     <span className="text-style text-padding">{fullname}</span>
                   </div>
-                  <span className="flex-row text-style text-padding">
-                    {moment(created).format('D MMM, YYYY')}
+                  <span className="flex-row">
+                    <img
+                      className="arrow_image"
+                      src={direction === 'target' ? downwardArrow : upwardArrow}
+                    />
+                    <span className="text-style text-padding">
+                      {moment(created).format('D MMM, YYYY')}
+                    </span>
                   </span>
                 </div>
               </div>
             </div>
             {direction === 'target' && status === 'pending' ? (
-              <div>
+              <div className="button_align">
                 <PrimaryButton
                   onClick={() =>
                     this.props.challengeStatus({ status: 'active' }, token)
                   }
                   className="button-width"
                 >
-                  Accept
+                  {i18n.t('label.accept')}
                 </PrimaryButton>
                 <SecondaryButton
                   onClick={() =>
@@ -63,7 +77,7 @@ export default class ChallengeCard extends React.Component {
                   }
                   className="button-width"
                 >
-                  Reject
+                  {i18n.t('label.reject')}
                 </SecondaryButton>
               </div>
             ) : (

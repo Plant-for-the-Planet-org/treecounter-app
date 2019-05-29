@@ -23,7 +23,8 @@ export default class App extends Component {
         targetYear: treecounter.targetYear,
         type: treecounter.userProfile.type
       },
-      showDonationFlow: false
+      showDonationFlow: false,
+      imageViewMore: false
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -75,6 +76,9 @@ export default class App extends Component {
         {/* Apply CSS hooks here */}
         <style>{style}</style>
         <PlantProjectFull
+          onViewMoreClick={() =>
+            this.setState({ imageViewMore: !this.state.imageViewMore })
+          }
           expanded={false}
           plantProject={result}
           tpoName={treecounter.userProfile.fullname}
@@ -93,9 +97,9 @@ export default class App extends Component {
               if (inlineDonation) {
                 this.setState({ showDonationFlow: true });
               } else {
-                const url = `${serverName}/${getLocalRoute(
+                const url = `${serverName}${getLocalRoute(
                   'app_donateTrees'
-                )}?projectId=${ProjectId}`;
+                )}/${ProjectId}`;
                 window.open(url, '_blank');
               }
             }}

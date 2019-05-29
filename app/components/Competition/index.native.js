@@ -5,6 +5,7 @@ import styles from '../../styles/common/tabbar';
 import MineCompetitions from './Tabs/mine.native';
 import FeaturedCompetitions from './Tabs/featured.native';
 import AllCompetitions from './Tabs/all.native';
+import i18n from '../../locales/i18n';
 
 const Layout = {
   window: {
@@ -17,9 +18,9 @@ class Competiton extends React.Component {
     super(props);
     this.state = {
       routes: [
-        { key: 'mine', title: 'MINE' },
-        { key: 'featured', title: 'FEATURED' },
-        { key: 'all', title: 'ALL' }
+        { key: 'mine', title: i18n.t('label.mine_competitions') },
+        { key: 'featured', title: i18n.t('label.featured_competitions') },
+        { key: 'all', title: i18n.t('label.all_competitions') }
       ],
       index: 1
     };

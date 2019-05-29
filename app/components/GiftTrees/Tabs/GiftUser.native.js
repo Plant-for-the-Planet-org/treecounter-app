@@ -25,7 +25,7 @@ export default class GiftUser extends Component {
       this.setState(
         {
           form: {
-            treeCounter: this.state.selectedSuggestion.id,
+            treeCounter: this.state.selectedSuggestion.treecounterId,
             message: this.state.message,
             name: this.state.selectedSuggestion.name
           }
@@ -43,7 +43,10 @@ export default class GiftUser extends Component {
   }
   render() {
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ paddingBottom: 72 }}
+        enableOnAndroid={true}
+      >
         <View
           style={{
             flex: 1,
@@ -78,6 +81,7 @@ export default class GiftUser extends Component {
             <SearchUser
               onSearchResultClick={this.onSearchResultClick}
               currentUserProfile={this.props.currentUserProfile}
+              hideCompetitions
             />
             <View>
               <Text

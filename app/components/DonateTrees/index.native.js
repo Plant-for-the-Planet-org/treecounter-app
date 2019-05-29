@@ -284,6 +284,7 @@ export default class DonateTrees extends React.PureComponent {
             giftTreeCounterName={this.state.giftTreeCounterName}
             selectedProject={selectedProject}
             fees={paymentFee}
+            supportTreecounter={this.props.supportTreecounter}
             showNextButton={true}
             currencies={currencies.currency_names} // TODO: connect to data from API
             selectedCurrency={this.determineDefaultCurrency()}
@@ -331,11 +332,12 @@ export default class DonateTrees extends React.PureComponent {
   handlePaymentApproved() {
     let params = this.props.navigation.state.params;
     let sendState;
+    sendState = { ...this.state.form };
     if (params !== undefined && params.giftMethod != null) {
       if (params.giftMethod === 'invitation') {
         this.props.gift(
           {
-            ...this.state.form,
+            ...sendState,
             giftInvitation: params.userForm,
             giftMethod: params.giftMethod,
             paymentResponse: {
@@ -353,7 +355,7 @@ export default class DonateTrees extends React.PureComponent {
       } else if (params.giftMethod === 'direct') {
         this.props.gift(
           {
-            ...this.state.form,
+            ...sendState,
             directGift: {
               treecounter: params.userForm.treeCounter,
               message: params.userForm.message
@@ -375,13 +377,12 @@ export default class DonateTrees extends React.PureComponent {
       }
       return;
     }
-    sendState = { ...this.state.form };
     if (this.props.supportTreecounter.treecounterId) {
       sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
     }
     this.props.donate(
       {
-        ...this.state.form,
+        ...sendState,
         paymentResponse: {
           gateway: 'offline',
           accountName: 'offline_US',
@@ -406,14 +407,7 @@ export default class DonateTrees extends React.PureComponent {
           useNativeDriver={true}
           onIndexChange={this._handleIndexChange}
         />
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0
-          }}
-        >
-          <TabContainer {...this.props} />
-        </View>
+        <TabContainer {...this.props} />
       </View>
     );
   }

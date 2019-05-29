@@ -21,6 +21,13 @@ export default (menuStyles = EStyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10
   },
+  titleStyle: {
+    height: 25,
+    borderRadius: 3,
+    backgroundColor: '#c7c7c6',
+    padding: 5,
+    fontSize: 12
+  },
   groupMenuContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
@@ -60,12 +67,10 @@ export default (menuStyles = EStyleSheet.create({
 
   ///Bottom Menu Related Styles:
   bottomMenuContainer: {
-    height: 'auto',
+    height: 50,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingRight: 10,
-    paddingLeft: 10,
     backgroundColor: 'white',
     shadowOffset: { width: 0, height: 4 },
     shadowColor: 'rgba(0, 0, 0, 0.1)',
@@ -73,7 +78,8 @@ export default (menuStyles = EStyleSheet.create({
   },
   bottomMenuItemContainer: {
     flexDirection: 'column',
-    margin: 5,
+    marginTop: 5,
+    marginBottom: 5,
     alignItems: 'center'
   },
   bottomMenuItemImage: {

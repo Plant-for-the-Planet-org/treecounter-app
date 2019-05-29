@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { View } from 'react-native';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
@@ -80,14 +81,21 @@ class BottomTabContainer extends Component {
   }
 
   render() {
-    console.log('authenticated scheema');
-    console.log(this.state.schema);
     return this.state.loading && this.state.schema.length == 0 ? null : (
-      <TabComponent
-        userProfile={this.props.userProfile}
-        menuData={this.state.schema}
-        navigation={this.props.navigation}
-      />
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          flex: 1,
+          width: '100%'
+        }}
+      >
+        <TabComponent
+          userProfile={this.props.userProfile}
+          menuData={this.state.schema}
+          navigation={this.props.navigation}
+        />
+      </View>
     );
   }
 }

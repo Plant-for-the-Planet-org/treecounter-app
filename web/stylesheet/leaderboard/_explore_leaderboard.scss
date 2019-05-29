@@ -246,6 +246,12 @@
           width: 76px;
           height: 76px;
           margin-bottom: 4px;
+
+          img {
+            height: auto;
+            width: auto;
+          }
+          
           @include for-phone-only {
             width: 66px;
             height: 66px;

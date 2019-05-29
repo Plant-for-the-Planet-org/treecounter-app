@@ -6,7 +6,16 @@ import Slider from 'react-slick';
 import CarouselNavigation from '../Common/CarouselNavigation';
 
 class PlantProjectCarousel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageViewMore: false
+    };
+  }
+
   render() {
+    const { plantProjects, contentTag, tpoName } = this.props;
+
     const settings = {
       dots: true,
       nextArrow: (
@@ -20,9 +29,9 @@ class PlantProjectCarousel extends React.Component {
           styleName="tpo-footer-nav-img__left"
           src={arrow_left_orange}
         />
-      )
+      ),
+      afterChange: index => this.props.onChange(plantProjects[index].id)
     };
-    const { plantProjects, contentTag, tpoName } = this.props;
 
     // see: https://medium.com/@Carmichaelize/dynamic-tag-names-in-react-and-jsx-17e366a684e9
     const TagName = contentTag;
@@ -33,6 +42,9 @@ class PlantProjectCarousel extends React.Component {
         {plantProjects.map(plantProject => (
           <div className="plant_project_carousal__content">
             <PlantProjectFull
+              onViewMoreClick={() =>
+                this.setState({ imageViewMore: !this.state.imageViewMore })
+              }
               key={`plantProject-${plantProject.id}`}
               expanded={false}
               tpoName={tpoName}

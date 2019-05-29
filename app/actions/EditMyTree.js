@@ -33,7 +33,7 @@ export function editTree(plantContribution, plantId, navigation) {
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         dispatch(setProgressModelState(false));
-        updateRoute('app_myTrees', navigation || dispatch);
+        updateRoute('app_userHome', navigation || dispatch);
       })
       .catch(error => {
         debug(error.response);
@@ -51,6 +51,7 @@ export function deleteContribution(plantContributionId) {
         plantContribution: plantContributionId
       })
         .then(res => {
+          const { statusText } = res;
           const { merge, unlink } = res.data;
           const toBeDeleted = res.data['delete'];
           dispatch(unlinkEntity(unlink));
@@ -65,10 +66,12 @@ export function deleteContribution(plantContributionId) {
             dispatch(
               mergeEntities(normalize(merge.plantProject, plantProjectSchema))
             );
+          NotificationManager.success(statusText, 'Success', 5000);
           dispatch(setProgressModelState(false));
         })
         .catch(err => {
           debug(err);
+          NotificationManager.error(error.response.data.message, 'Error', 5000);
           dispatch(setProgressModelState(false));
           reject(err);
         });

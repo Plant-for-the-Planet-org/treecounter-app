@@ -18,6 +18,7 @@ import myTreesStyle from '../../styles/myTrees/user_contribution_card';
 import { foldout, foldin, MapPinRed, EditOrange } from '../../assets';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
+import { delimitNumbers } from '../../utils/utils';
 import Lightbox from 'react-native-lightbox';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
@@ -54,7 +55,6 @@ class ContributionCard extends React.Component {
     </View>
   );
   _renderContent(section) {
-    //console.log('section', section);
     const measurementsAvailable =
       section.contributionMeasurements &&
       section.contributionMeasurements.length > 0;
@@ -78,7 +78,9 @@ class ContributionCard extends React.Component {
               return (
                 <View style={styles.actionBar} key={`measurement-${index}`}>
                   <Text>
-                    {new Date(measurement.measurementDate).toLocaleDateString()}
+                    {moment(new Date(measurement.measurementDate)).format(
+                      'DD MMM YYYY'
+                    )}
                   </Text>
                   <Text>
                     {_.padStart(
@@ -128,7 +130,7 @@ class ContributionCard extends React.Component {
     });
 
   treeCountLine(treeCount, treeSpecies) {
-    return treeCount + ' ' + (treeSpecies ? treeSpecies : '');
+    return delimitNumbers(treeCount) + ' ' + (treeSpecies ? treeSpecies : '');
   }
 
   plantProjectLine(plantProjectName, country) {
@@ -138,18 +140,23 @@ class ContributionCard extends React.Component {
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
       ? [
-          <Text>{'Gifted on ' + plantDate + ' to '}</Text>,
+          <Text>
+            {'Gifted on ' +
+              moment(new Date(plantDate)).format('DD MMM YYYY') +
+              ' to '}
+          </Text>,
           <Text
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
+                treeCounterId: giveeSlug,
+                titleParam: givee
               })
             }
           >
             {givee}
           </Text>
         ]
-      : 'Donated on ' + plantDate;
+      : 'Donated on ' + moment(new Date(plantDate)).format('DD MMM YYYY');
   }
 
   tpoLine(tpoName) {
@@ -157,7 +164,12 @@ class ContributionCard extends React.Component {
   }
 
   plantActionLine(plantDate, registrationDate) {
-    return 'Planted on ' + plantDate + ', Added on ' + registrationDate;
+    return (
+      'Planted on ' +
+      moment(new Date(plantDate)).format('DD MMM YYYY') +
+      ', Added on ' +
+      moment(new Date(registrationDate)).format('DD MMM YYYY')
+    );
   }
 
   dedicateActionLine = (isGift, givee, giveeSlug) => {
@@ -167,7 +179,8 @@ class ContributionCard extends React.Component {
           <Text
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
+                treeCounterId: giveeSlug,
+                titleParam: givee
               })
             }
           >
@@ -180,11 +193,16 @@ class ContributionCard extends React.Component {
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && giver
       ? [
-          <Text>{'Given on ' + redemptionDate + ' by '}</Text>,
+          <Text>
+            {'Given on ' +
+              moment(new Date(redemptionDate)).format('DD MMM YYYY') +
+              ' by '}
+          </Text>,
           <Text
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
+                treeCounterId: giveeSlug,
+                titleParam: givee
               })
             }
           >
@@ -192,9 +210,10 @@ class ContributionCard extends React.Component {
           </Text>
         ]
       : redemptionCode
-        ? 'Redeemed on ' + redemptionDate
+        ? 'Redeemed on ' +
+          moment(new Date(redemptionDate)).format('DD MMM YYYY')
         : 'Dedicated on ' +
-          redemptionDate +
+          moment(new Date(redemptionDate)).format('DD MMM YYYY') +
           (givee
             ? [
                 <Text>{' by '}</Text>,
@@ -203,7 +222,8 @@ class ContributionCard extends React.Component {
                     this.props.navigation.navigate(
                       getLocalRoute('app_treecounter'),
                       {
-                        treeCounterId: giveeSlug
+                        treeCounterId: giveeSlug,
+                        titleParam: givee
                       }
                     )
                   }
@@ -436,66 +456,6 @@ class ContributionCard extends React.Component {
         </View>
       </CardLayout>
     );
-    {
-      /* <View
-          style={{
-            borderWidth: 1,
-            borderLeftWidth: 4,
-            borderColor: '#e6e6e6',
-            borderLeftColor:
-              contribution.contributionType == 'donation'
-                ? '#95c243'
-                : contribution.treeCount > 1
-                  ? '#68aeec'
-                  : '#ec6453',
-            justifyContent: 'space-between',
-            minHeight: 60,
-            marginBottom: 10,
-            margin: 10
-          }}
-          key={`contribution-${contribution.id}`}
-        >
-          <View style={styles.cardSubContainer}>
-            <Text strong={true}>
-              {contribution.treeCount +
-                ' ' +
-                contribution.treeSpecies +
-                i18n.t('label.tree')}
-            </Text>
-            <Text style={styles.dateStyle}>
-              {moment(new Date(contribution.plantDate)).format('DD MMM YYYY')}
-            </Text>
-            {imagesArray.length ? (
-              <Lightbox
-                backgroundColor={'rgba(52, 52, 52, 0.8)'}
-                underlayColor={'white'}
-                swipeToDismiss={false}
-                renderContent={() => this._renderLightBox(imagesArray)}
-              >
-                <Text style={[styles.pictureText, { padding: 0 }]}>
-                  {i18n.t('label.pictures')}
-                </Text>
-              </Lightbox>
-            ) : null}
-            {contribution.contributionMeasurements.length > 0 ? (
-              <Accordion
-                sections={[contribution]}
-                renderHeader={this._renderHeader}
-                renderContent={this._renderContent}
-                touchableComponent={TouchableOpacity}
-              />
-            ) : null}
-          </View>
-          <View style={styles.actionBar}>
-            <ActionButton
-              onPress={() => null}
-              text={i18n.t('label.map')}
-              image={MapPinRed}
-            />
-          </View>
-        </View>
-      </View> */
-    }
   }
 }
 

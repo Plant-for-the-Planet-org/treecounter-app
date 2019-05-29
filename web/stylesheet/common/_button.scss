@@ -103,3 +103,11 @@
     cursor: pointer;
   }
 }
+
+.btn-group {
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  margin-left: 10px;
+  justify-content: space-around;
+}

@@ -93,7 +93,23 @@ class TreeCountCurrencySelector extends React.PureComponent {
                 <Text style={styles.selectedProjectCol}> Trees</Text> Gift to{' '}
                 {this.props.giftTreeCounterName}
               </Text>
-              <Text>{this.props.giftTreeCounterName}</Text>
+              {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
+            </View>
+          ) : this.props.supportTreecounter &&
+          this.props.supportTreecounter.displayName ? (
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                width: '100%'
+              }}
+            >
+              <Text numberOfLines={1} ellipsizeMode={'tail'}>
+                <Text>{this.state.selectedTreeCount}</Text>
+                <Text style={styles.selectedProjectCol}> Trees</Text> Support to{' '}
+                {this.props.supportTreecounter.displayName}
+              </Text>
+              {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
             </View>
           ) : (
             <View style={styles.selectedProjectRow}>
@@ -112,6 +128,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
             </Text>
           </View>
         </View>
+
         <CurrencySelector
           currencies={currencies}
           onChange={this.handleCurrencyChange}

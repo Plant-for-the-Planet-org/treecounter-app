@@ -157,7 +157,8 @@ export default class EditUserProfile extends Component {
                             this.props.navigation.navigate(
                               getLocalRoute('app_treecounter'),
                               {
-                                treeCounterId: follow.id
+                                treeCounterId: follow.id,
+                                titleParam: follow.displayName
                               }
                             );
                           }, 0);

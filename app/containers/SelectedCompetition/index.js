@@ -25,7 +25,6 @@ import {
 } from '../../actions/competition';
 import CompetitionParticipant from '../../components/Competition/CompetitionParticipant.native';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
-import Challenge from '../../components/Challenge/createChallenge';
 
 class SelectedCompetitionContainer extends Component {
   constructor(props) {
@@ -42,6 +41,7 @@ class SelectedCompetitionContainer extends Component {
     };
     this.leaveCompetition = this.leaveCompetition.bind(this);
     this.enrollCompetition = this.enrollCompetition.bind(this);
+    this.editCompetition = this.editCompetition.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.match) {
@@ -53,16 +53,22 @@ class SelectedCompetitionContainer extends Component {
       }
     }
   }
+  editCompetition(id) {
+    const { navigation } = this.props;
+    if (navigation) {
+      updateRoute('app_editCompetition', navigation, 1, {
+        competition: id
+      });
+    }
+  }
   leaveCompetition(id) {
     this.props.leaveCompetition(id);
   }
   enrollCompetition(id) {
     this.props.enrollCompetition(id);
   }
-  componentDidMount() {}
 
   render() {
-    console.log(this.state, this.props);
     if (this.state.competition_id) {
       return (
         <CompetitionFull
@@ -75,6 +81,8 @@ class SelectedCompetitionContainer extends Component {
           cancelInvite={id => this.props.cancelInvite(id)}
           supportTreecounterAction={this.props.supportTreecounterAction}
           currentUserProfile={this.props.userProfile}
+          navigation={this.props.navigation}
+          editCompetition={id => this.editCompetition(id)}
           invitePart={(competition, competitor) =>
             this.props.invitePart(competition, competitor)
           }
@@ -117,5 +125,6 @@ SelectedCompetitionContainer.propTypes = {
   confirmPart: PropTypes.any,
   declinePart: PropTypes.any,
   cancelInvite: PropTypes.any,
-  supportTreecounterAction: PropTypes.any
+  supportTreecounterAction: PropTypes.any,
+  editCompetition: PropTypes.any
 };

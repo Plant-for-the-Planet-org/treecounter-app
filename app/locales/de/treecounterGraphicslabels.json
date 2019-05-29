@@ -1,6 +1,12 @@
 {
-  "faqs": "Häufig gestellte Fragen",
+  "individual_plant_personal": "von mir",
+  "individual_plant_community": "Mir gewidmet",
+  "treecounter_tooltip": "Bäume gepflanzt von Menschen, die diesem Baumzähler Bäume gewidmet haben.\nSie können beispielsweise Ihren Freunden, Ihrer Schule, Ihrer Stadt oder Ihrem Arbeitgeber Bäume widmen und ihnen dabei helfen, ihr Baumziel zu erreichen. Alle Bäume, die Sie pflanzen oder spenden, erscheinen in ihrem Baumzähler.",
+  "tpo_plant_personal": "von uns",
+  "tpo_individual_plant_community": "Uns gewidmet",
+  "by": "durch",
+  "faqs": "FAQs",
   "logged_in": "Eingeloggt",
-  "trillionTreeMessage1": "Das Ziel der \"Trillion Tree Campaign\"-App ist es,  Baumpflanzprojekte auf der ganzen Welt transparenter zu machen und es jedem so einfach wie möglich zu machen, sie zu unterstützen.",
-  "trillionTreeMessage2": " Die globale Wiederaufforstung könnte 25% der globalen jährlichen CO2-Emissionen einfangen und Wohlstand im globalen Süden schaffen."
+  "trillionTreeMessage1": "Das Ziel der Trillion Tree Campaign App ist,  Baumpflanzprojekte aus der ganzen Welt transparent darzustellen und es jedem so einfach wie möglich zu machen, sie zu unterstützen.",
+  "trillionTreeMessage2": "Die globale Aufforstung könnte 25% der jährlich weltweit ausgestoßenen CO2-Emissionen binden und Wohlstand im globalen Süden schaffen."
 }

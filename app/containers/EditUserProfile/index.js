@@ -146,7 +146,7 @@ class EditUserProfileContainer extends React.Component {
       });
   };
 
-  onSave = (usertype, profileType, formRefs) => {
+  onSave = (usertype, profileType, formRefs, newImageAvailable) => {
     const profileForm =
       (formRefs && formRefs[profileType]) ||
       this.refs.EditUserProfileContainer.refs[profileType];

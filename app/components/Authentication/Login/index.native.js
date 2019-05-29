@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import { Text, View, Image, ScrollView, Keyboard } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import scrollStyle from '../../../styles/common/scrollStyle';
 import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 
@@ -34,25 +35,34 @@ export default class Login extends Component {
     this.props.updateRoute('app_signup');
   };
 
+  onProfilePickerClick = () => {
+    this.props.updateRoute('pickup_profile_modal');
+  };
+
   verifyCallback = token => {
     // Here you will get the final token!!!
     this._recaptchaToken = token;
+  };
+
+  refreshToken = () => {
+    this._captchaRef.refreshToken();
   };
 
   handleLoginClick = () => {
     if (this.refs.loginForm.getValue()) {
       Keyboard.dismiss();
     }
-    this.props.onPress(this._recaptchaToken);
+    this.props.onPress(this._recaptchaToken, this.refreshToken);
   };
   render() {
     return (
-      <ScrollView
+      <KeyboardAwareScrollView
         contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
-        keyboardShouldPersistTaps={'handled'}
+        enableOnAndroid={true}
       >
         <ReCaptchaV3
-          captchaDomain={'https://www.plant-for-the-planet.org'}
+          ref={ref => (this._captchaRef = ref)}
+          captchaDomain={'https://www.trilliontreecampaign.org'}
           siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
           onReceiveToken={token => this.verifyCallback(token)}
         />
@@ -104,7 +114,7 @@ export default class Login extends Component {
             </View>
           </View>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }

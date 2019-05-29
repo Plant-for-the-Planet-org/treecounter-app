@@ -13,6 +13,7 @@ import TextHeading from '../Common/Heading/TextHeading';
 import ModalDialog from '../Common/ModalDialog';
 import i18n from '../../locales/i18n';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
+import { delimitNumbers } from '../../utils/utils';
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -37,6 +38,7 @@ export default class SelectPlantProject extends Component {
       featuredProjects: props.plantProjects,
       priceSortedProjects: props.plantProjects,
       searchFieldValue: '',
+      imageViewMore: false,
       mode: 'name',
       isOpen: false,
       modalProject: null
@@ -200,6 +202,9 @@ export default class SelectPlantProject extends Component {
           <div className="project-modal-card-layout">
             {this.state.modalProject ? (
               <PlantProjectFull
+                onViewMoreClick={() =>
+                  this.setState({ imageViewMore: !this.state.imageViewMore })
+                }
                 expanded={false}
                 plantProject={this.state.modalProject}
                 tpoName={this.state.modalProject.tpo_name}
@@ -214,7 +219,7 @@ export default class SelectPlantProject extends Component {
             </div>
           </div>
         </ModalDialog>
-        <div className="select-project__container">
+        <div className="select-project__container remove_shadow">
           <div className="select-project__header">
             {i18n.t('label.featuredProjects')}{' '}
           </div>
@@ -226,6 +231,11 @@ export default class SelectPlantProject extends Component {
                     key={project.id}
                   >
                     <PlantProjectFull
+                      onViewMoreClick={() =>
+                        this.setState({
+                          imageViewMore: !this.state.imageViewMore
+                        })
+                      }
                       callExpanded={() => this.callExpanded()}
                       expanded={false}
                       plantProject={project}
@@ -245,142 +255,130 @@ export default class SelectPlantProject extends Component {
               : null}
           </Slider>
         </div>
-        <CardLayout className="tpo-footer-card-layout">
-          <div className="select-project__container">
-            <Tabs
-              data={SelectPlantProject.data.tabs}
-              onTabChange={this.handleModeChange}
-              activeTab={this.state.mode !== '' ? this.state.mode : null}
-            >
-              {this.state.mode === SelectPlantProject.data.tabs[0].id ? (
-                <div className="all-projects-card">
-                  <div className="pftp-textfield">
-                    <div className="pftp-textfield__inputgroup">
-                      <input
-                        autoComplete="new-password"
-                        required="required"
-                        value={this.state.searchFieldValue}
-                        onChange={this.onInputChange.bind(this)}
-                      />
-                      <span className="pftp-textfield__inputgroup--highlight" />
-                      <span className="pftp-textfield__inputgroup--bar" />
-                      <label>{i18n.t('label.search')}</label>
-                    </div>
-                    <span className="search-bar__button">
-                      <i className="material-icons header-icons">
-                        {i18n.t('label.search')}
-                      </i>
-                    </span>
+        <div className="select-project__container">
+          <Tabs
+            data={SelectPlantProject.data.tabs}
+            onTabChange={this.handleModeChange}
+            activeTab={this.state.mode !== '' ? this.state.mode : null}
+          >
+            {this.state.mode === SelectPlantProject.data.tabs[0].id ? (
+              <div className="all-projects-card">
+                <div className="pftp-textfield">
+                  <div className="pftp-textfield__inputgroup">
+                    <input
+                      autoComplete="new-password"
+                      required="required"
+                      value={this.state.searchFieldValue}
+                      onChange={this.onInputChange.bind(this)}
+                    />
+                    <span className="pftp-textfield__inputgroup--highlight" />
+                    <span className="pftp-textfield__inputgroup--bar" />
+                    <label>{i18n.t('label.search')}</label>
                   </div>
-                  <div className="table-responsive">
-                    <table className="projects-list">
-                      <thead>
-                        <tr>
-                          <th className="align-left">
-                            {i18n.t('label.project')}
-                          </th>
-                          <th className="align-left">
-                            {i18n.t('label.organisation')}
-                          </th>
-                          <th className="align-right">
-                            <span>{i18n.t('label.plantedTrees')}</span>
-                          </th>
-                          <th className="align-right">
-                            <span>{i18n.t('label.Cost')}</span>
-                          </th>
-                          <th />
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {filteredProjects.length !== 0
-                          ? filteredProjects.map(project => (
-                              <tr key={'tr' + project.id}>
-                                <td className="align-left">{project.name}</td>
-                                <td className="align-left">
-                                  {project.tpo_name}
-                                </td>
-                                <td className="align-right">
-                                  {parseInt(
-                                    project.countPlanted
-                                  ).toLocaleString('en')}
-                                </td>
-                                <td className="align-right">
-                                  {project.currency +
-                                    ' ' +
-                                    project.treeCost.toFixed(2)}
-                                </td>
-                                <td>
-                                  <PrimaryButton
-                                    onClick={() => this.openModal(project.id)}
-                                  >
-                                    {i18n.t('label.see_more')}
-                                  </PrimaryButton>
-                                </td>
-                              </tr>
-                            ))
-                          : null}
-                      </tbody>
-                    </table>
-                  </div>
+                  <span className="search-bar__button">
+                    <i className="material-icons header-icons">{'search'}</i>
+                  </span>
                 </div>
-              ) : null}
-              {this.state.mode === SelectPlantProject.data.tabs[1].id ? (
-                <div className="all-projects-card">
-                  <div className="table-responsive">
-                    <table className="projects-list">
-                      <thead>
-                        <tr>
-                          <th className="align-left">
-                            {i18n.t('label.project')}
-                          </th>
-                          <th className="align-left">
-                            {i18n.t('label.organisation')}
-                          </th>
-                          <th className="align-right">
-                            <span>{i18n.t('label.plantedTrees')}s</span>
-                          </th>
-                          <th className="align-right">
-                            <span>{i18n.t('label.Cost')}</span>
-                          </th>
-                          <th />
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {priceSortedProjects.length !== 0
-                          ? priceSortedProjects.map(project => (
-                              <tr key={'tr' + project.id}>
-                                <td className="align-left">{project.name}</td>
-                                <td className="align-left">
-                                  {project.tpo_name}
-                                </td>
-                                <td className="align-right">
-                                  {parseInt(
-                                    project.countPlanted
-                                  ).toLocaleString('en')}
-                                </td>
-                                <td className="align-right">
-                                  {project.currency +
-                                    ' ' +
-                                    project.treeCost.toFixed(2)}
-                                </td>
-                                <td>
-                                  <PrimaryButton
-                                    onClick={() => this.openModal(project.id)}
-                                  >
-                                    {i18n.t('label.see_more')}
-                                  </PrimaryButton>
-                                </td>
-                              </tr>
-                            ))
-                          : null}
-                      </tbody>
-                    </table>
-                  </div>
+                <div className="table-responsive">
+                  <table className="projects-list">
+                    <thead>
+                      <tr>
+                        <th className="align-left">
+                          {i18n.t('label.project')}
+                        </th>
+                        <th className="align-left">
+                          {i18n.t('label.organisation')}
+                        </th>
+                        <th className="align-right">
+                          <span>{i18n.t('label.plantedTrees')}</span>
+                        </th>
+                        <th className="align-right">
+                          <span>{i18n.t('label.Cost')}</span>
+                        </th>
+                        <th />
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredProjects.length !== 0
+                        ? filteredProjects.map(project => (
+                            <tr key={'tr' + project.id}>
+                              <td className="align-left">{project.name}</td>
+                              <td className="align-left">{project.tpo_name}</td>
+                              <td className="align-right">
+                                {delimitNumbers(parseInt(project.countPlanted))}
+                              </td>
+                              <td className="align-right">
+                                {project.currency +
+                                  ' ' +
+                                  project.treeCost.toFixed(2)}
+                              </td>
+                              <td>
+                                <PrimaryButton
+                                  onClick={() => this.openModal(project.id)}
+                                >
+                                  {i18n.t('label.see_more')}
+                                </PrimaryButton>
+                              </td>
+                            </tr>
+                          ))
+                        : null}
+                    </tbody>
+                  </table>
                 </div>
-              ) : null}
-            </Tabs>
-          </div>
-        </CardLayout>
+              </div>
+            ) : null}
+            {this.state.mode === SelectPlantProject.data.tabs[1].id ? (
+              <div className="all-projects-card">
+                <div className="table-responsive">
+                  <table className="projects-list">
+                    <thead>
+                      <tr>
+                        <th className="align-left">
+                          {i18n.t('label.project')}
+                        </th>
+                        <th className="align-left">
+                          {i18n.t('label.organisation')}
+                        </th>
+                        <th className="align-right">
+                          <span>{i18n.t('label.plantedTrees')}s</span>
+                        </th>
+                        <th className="align-right">
+                          <span>{i18n.t('label.Cost')}</span>
+                        </th>
+                        <th />
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {priceSortedProjects.length !== 0
+                        ? priceSortedProjects.map(project => (
+                            <tr key={'tr' + project.id}>
+                              <td className="align-left">{project.name}</td>
+                              <td className="align-left">{project.tpo_name}</td>
+                              <td className="align-right">
+                                {delimitNumbers(parseInt(project.countPlanted))}
+                              </td>
+                              <td className="align-right">
+                                {project.currency +
+                                  ' ' +
+                                  project.treeCost.toFixed(2)}
+                              </td>
+                              <td>
+                                <PrimaryButton
+                                  onClick={() => this.openModal(project.id)}
+                                >
+                                  {i18n.t('label.see_more')}
+                                </PrimaryButton>
+                              </td>
+                            </tr>
+                          ))
+                        : null}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            ) : null}
+          </Tabs>
+        </div>
       </div>
     );
   }

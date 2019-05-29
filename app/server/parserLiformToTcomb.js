@@ -65,6 +65,12 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
               properties[propertyKey].format = 'email';
             }
           }
+          if (properties[propertyKey].hasOwnProperty('maxDate')) {
+            options.config = { ...options.config, maxDate: true };
+          }
+          if (properties[propertyKey].hasOwnProperty('minDate')) {
+            options.config = { ...options.config, minDate: true };
+          }
           if (
             innerConfig[propertyKey] &&
             innerConfig[propertyKey].hasOwnProperty('style')

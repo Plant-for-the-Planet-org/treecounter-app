@@ -29,7 +29,6 @@ export async function getRequest(route, params) {
 document.addEventListener('DOMContentLoaded', function() {
   let allBlockQuote = document.getElementsByTagName('blockquote');
   for (let i = allBlockQuote.length - 1; i > -1; i--) {
-    console.log(allBlockQuote[i].attributes);
     let widgetType = allBlockQuote[i].attributes.getNamedItem(
       'data-widget-type'
     );
@@ -51,6 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
         'data-background-color'
       );
 
+      let projectId = allBlockQuote[i].attributes.getNamedItem(
+        'data-projectId'
+      );
+      if (projectId && projectId.nodeValue) {
+        projectId = projectId.nodeValue;
+      }
       if (showGraphics && showGraphics.nodeValue === 'false') {
         showGraphics = false;
       }
@@ -64,7 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
         uid = isNaN(parseInt(uid.nodeValue))
           ? uid.nodeValue
           : parseInt(uid.nodeValue);
-        getRequest('treecounter_get', { uid })
+        const uidData = isStandardTreecounter ? { uid } : {};
+        getRequest('treecounter_get', uidData)
           .then(result => {
             if (!result.data) {
               return;
@@ -96,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 baseUrl={baseUrl}
                 backgroundColor={backgroundColor}
                 isStandardTreecounter={isStandardTreecounter}
+                projectId={projectId}
               />,
               shadowRoot
             );

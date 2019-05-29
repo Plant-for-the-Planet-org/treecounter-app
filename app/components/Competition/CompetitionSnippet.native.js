@@ -17,19 +17,23 @@ import {
   userTreecounterSelector
 } from '../../selectors';
 import connect from 'react-redux/es/connect/connect';
+import moment from 'moment';
 
 class CompetitionSnippet extends React.Component {
   constructor(props) {
     super(props);
   }
+
   toggleExpanded(id) {
     this.props.onMoreClick(id);
   }
+
   containerPress(id) {
     if (this.props.onMoreClick) {
       this.props.onMoreClick(id);
     }
   }
+
   render() {
     const competitionDetail = this.props.competition;
     let status = '',
@@ -51,30 +55,52 @@ class CompetitionSnippet extends React.Component {
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
     ) {
       button = (
-        <TouchableItem>
-          <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+        <TouchableItem
+          onPress={() => this.props.editCompetition(this.props.competition.id)}
+        >
+          <Text style={styles.bottomParticipantText}>
             {i18n.t('label.edit')}
           </Text>
         </TouchableItem>
       );
+      //button = <Text style={{ paddingLeft: 5, paddingRight: 5 }} />;
     } else if (status === '') {
-      button = (
-        <TouchableItem
-          onPress={() =>
-            this.props.enrollCompetition(this.props.competition.id)
-          }
-        >
-          <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
-            {i18n.t('label.join')}
-          </Text>
-        </TouchableItem>
-      );
+      if (competitionDetail && competitionDetail.access === 'immediate') {
+        button = (
+          <TouchableItem
+            onPress={() =>
+              this.props.enrollCompetition(this.props.competition.id)
+            }
+          >
+            <Text style={styles.bottomParticipantText}>
+              {i18n.t('label.join')}
+            </Text>
+          </TouchableItem>
+        );
+      } else if (competitionDetail && competitionDetail.access === 'request') {
+        button = (
+          <TouchableItem
+            onPress={() =>
+              this.props.enrollCompetition(this.props.competition.id)
+            }
+          >
+            <Text style={styles.bottomParticipantText}>
+              {i18n.t('label.request_to_join')}
+            </Text>
+          </TouchableItem>
+        );
+      } else if (
+        competitionDetail &&
+        competitionDetail.access === 'invitation'
+      ) {
+        button = null;
+      }
     } else if (status === 'enrolled') {
       button = (
         <TouchableItem
           onPress={() => this.props.leaveCompetition(this.props.competition.id)}
         >
-          <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+          <Text style={styles.bottomParticipantText}>
             {i18n.t('label.leave')}
           </Text>
         </TouchableItem>
@@ -84,7 +110,7 @@ class CompetitionSnippet extends React.Component {
         <TouchableItem
           onPress={() => this.props.leaveCompetition(this.props.competition.id)}
         >
-          <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
+          <Text style={styles.bottomParticipantText}>
             {i18n.t('label.cancel_join_request')}
           </Text>
         </TouchableItem>
@@ -97,21 +123,21 @@ class CompetitionSnippet extends React.Component {
       >
         <CardLayout style={[styles.projectSnippetContainer]}>
           <View style={styles.projectSpecsContainer}>
-            {/*{this.props.competition && this.props.competition.image ? (*/}
-            {/*<View style={styles.projectImageContainer}>*/}
-            {/*<Image*/}
-            {/*style={styles.teaser__projectImage}*/}
-            {/*source={{*/}
-            {/*uri: getImageUrl(*/}
-            {/*'project',*/}
-            {/*'large',*/}
-            {/*this.props.competition.image*/}
-            {/*)*/}
-            {/*}}*/}
-            {/*resizeMode={'cover'}*/}
-            {/*/>*/}
-            {/*</View>*/}
-            {/*) : null}*/}
+            {this.props.competition && this.props.competition.image ? (
+              <View style={styles.projectImageContainer}>
+                <Image
+                  style={styles.teaser__projectImage}
+                  source={{
+                    uri: getImageUrl(
+                      'competition',
+                      'medium',
+                      this.props.competition.image
+                    )
+                  }}
+                  resizeMode={'cover'}
+                />
+              </View>
+            ) : null}
             <CompetitionProgressBar
               countPlanted={
                 this.props.competition && this.props.competition.score
@@ -130,13 +156,13 @@ class CompetitionSnippet extends React.Component {
                   {this.props.competition && this.props.competition.name}
                 </Text>
               </View>
-              <View style={styles.projectNameContainer}>
+              <View style={styles.projectByNameContainer}>
                 <Text
                   ellipsizeMode="tail"
                   numberOfLines={1}
                   style={styles.project_teaser__contentByText}
                 >
-                  by{' '}
+                  {i18n.t('label.by')}{' '}
                   {this.props.competition && this.props.competition.ownerName}
                 </Text>
               </View>
@@ -167,16 +193,21 @@ class CompetitionSnippet extends React.Component {
                     style={{ width: 15, height: 15 }}
                   />
                   <Text style={styles.bottomText}>
-                    Ends{' '}
-                    {this.props.competition && this.props.competition.endDate}
+                    {i18n.t('label.ends')}{' '}
+                    {this.props.competition && this.props.competition.endDate
+                      ? moment(new Date(this.props.competition.endDate)).format(
+                          'MMM DD, YYYY'
+                        )
+                      : ''}
                   </Text>
                 </View>
 
                 <View style={styles.buttonContainer}>
                   {this.props.competition &&
                   this.props.competition.competitorCount > 0 ? (
-                    <Text style={{ paddingLeft: 5, paddingRight: 5 }}>
-                      {this.props.competition.competitorCount} participants
+                    <Text style={styles.bottomParticipantText}>
+                      {this.props.competition.competitorCount}{' '}
+                      {i18n.t('label.participants')}
                     </Text>
                   ) : (
                     button
@@ -208,5 +239,6 @@ CompetitionSnippet.propTypes = {
   competitionEnrollments: PropTypes.any,
   treeCounter: PropTypes.any,
   leaveCompetition: PropTypes.any,
-  enrollCompetition: PropTypes.any
+  enrollCompetition: PropTypes.any,
+  editCompetition: PropTypes.any
 };

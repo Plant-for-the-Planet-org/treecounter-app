@@ -1,7 +1,17 @@
 {
-  "location": "Lage",
+  "tax_deductible": "Steuerlich absetzbar",
+  "location": "Ort",
+  "planted": "Gepflanzt",
   "target": "Ziel",
   "in": "im",
   "donate": "Spenden",
-  "different_project": "Anderes Projekt wählen"
+  "plant_project_full": "PlantProjectFull",
+  "different_project": "Anderes Projekt wählen",
+  "project_name": "Name des Baumplanzungsprojektes",
+  "count_target": "Ziel",
+  "tree_cost": "Baumkosten",
+  "link_text": "Link Text",
+  "video_url": "Video-URL",
+  "allow_donations": "Spenden zulassen",
+  "is_published": "Projekt veröffentlichen"
 }

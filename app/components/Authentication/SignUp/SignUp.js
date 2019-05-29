@@ -9,6 +9,8 @@ import SignUpType from './SignUpType';
 import { SignupJustMe, SignupOrganization } from '../../../assets';
 import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
+import { ReCaptcha, loadReCaptcha } from 'recaptcha-v3-react';
+import uuid from 'uuidv4';
 
 let TCombForm = t.form.Form;
 
@@ -47,9 +49,15 @@ export default class SignUp extends Component {
       recaptchaToken: token
     });
   };
+
+  refreshToken = () => {
+    this.recaptcha.execute();
+  };
+
   componentWillMount() {
     this.setSignupType(this.props);
   }
+
   setSignupType(props) {
     let signupType = null;
     if (props.match) {
@@ -62,15 +70,21 @@ export default class SignUp extends Component {
 
   render() {
     let { Profiletype, ProfileTypeParam } = this.state;
-    let type;
+    let type, icon;
     if (signupFormSchema[ProfileTypeParam]) {
       type = ProfileTypeParam;
     } else {
       type = Profiletype;
     }
+    if (type === 'individual') {
+      icon = SignupJustMe;
+    } else {
+      icon = SignupOrganization;
+    }
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <ReCaptcha
+          ref={ref => (this.recaptcha = ref)}
           action="login"
           sitekey="6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF"
           verifyCallback={this.verifyCallback}
@@ -111,7 +125,15 @@ export default class SignUp extends Component {
               onProfileClick={this.ProfileChange}
             />
           </div>
-        ) : null}
+        ) : (
+          <SignUpType
+            imgSrc={icon}
+            salutation={i18n.t('label.i_am_a')}
+            title={type.toUpperCase()}
+            active={false}
+            type={type}
+          />
+        )}
         <div className={'card-width'}>
           <CardLayout>
             <form onSubmit={this.props.onSignUpClicked.bind(this, type)}>
@@ -123,7 +145,11 @@ export default class SignUp extends Component {
               />
               <PrimaryButton
                 onClick={event => {
-                  this.props.onSignUpClicked(type, this.state.recaptchaToken);
+                  this.props.onSignUpClicked(
+                    type,
+                    this.state.recaptchaToken,
+                    this.refreshToken
+                  );
                   event.preventDefault();
                 }}
               >

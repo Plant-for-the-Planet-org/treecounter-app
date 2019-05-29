@@ -96,7 +96,27 @@ export default class Menu extends Component {
     let urlBreak = url.split('/');
     //console.log(urlBreak);
     const { navigation } = this.props;
-    updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0);
+    if (urlBreak.indexOf('account-activate') !== -1) {
+      setTimeout(
+        () =>
+          updateRoute(
+            '/' + urlBreak[urlBreak.length - 2],
+            // '/' +
+            // urlBreak[urlBreak.length - 1],
+            navigation,
+            0,
+            {
+              token: urlBreak[urlBreak.length - 1]
+            }
+          ),
+        0
+      );
+    } else {
+      setTimeout(
+        () => updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0),
+        0
+      );
+    }
   };
 
   //TODO hkurra
@@ -115,7 +135,7 @@ export default class Menu extends Component {
       <SafeAreaView style={styles.outerContainer}>
         {this.props.userProfile ? (
           <TouchableItem
-            style={styles.profileContainer}
+            style={styles.topProfileContainer}
             onPress={() => this.onPressUserProfile()}
           >
             <UserProfileImage
@@ -123,7 +143,7 @@ export default class Menu extends Component {
                 this.props.userProfile && this.props.userProfile.image
               }
               style={styles.profileImageStyle}
-              imageStyle={{ borderRadius: 30 }}
+              imageStyle={{ width: 60, height: 60, borderRadius: 60 / 2 }}
             />
 
             <Text style={styles.profileTextHeading}>
@@ -135,7 +155,10 @@ export default class Menu extends Component {
           </TouchableItem>
         ) : (
           <View style={styles.profileContainer}>
-            <Image style={styles.profileImageStyle} source={icons.ProfilePic} />
+            <UserProfileImage
+              style={styles.profileLogImageStyle}
+              imageStyle={{ width: 60, height: 60, borderRadius: 60 / 2 }}
+            />
             <Text style={styles.profileTextHeading}>{'Guest'}</Text>
             <LargeMenuItem
               style={{ paddingLeft: 0 }}
@@ -161,7 +184,11 @@ export default class Menu extends Component {
                 onPress={this.onPressMenu.bind(this, {
                   uri: 'app_target'
                 })}
-                title={i18n.t('label.set_target')}
+                title={
+                  this.props.treecounter.countTarget > 0
+                    ? i18n.t('label.update_target')
+                    : i18n.t('label.set_target')
+                }
                 iconUrl={icons.target_outline}
               />
             ) : null}
@@ -183,6 +210,23 @@ export default class Menu extends Component {
                 iconUrl={icons.challengeIcon}
               />
             ) : null}
+
+            {this.props.userProfile ? (
+              <LargeMenuItem
+                onPress={this.onPressMenu.bind(this, {
+                  uri: 'pickup_profile_modal'
+                })}
+                title={'Community'}
+                details={
+                  this.props.userProfile.supportedTreecounter &&
+                  this.props.userProfile.supportedTreecounter.displayName
+                    ? this.props.userProfile.supportedTreecounter.displayName
+                    : i18n.t('label.pick_profile')
+                }
+                iconUrl={icons.communityMenu}
+              />
+            ) : null}
+
             <LargeMenuItem
               onPress={this.onPressMenu.bind(this, {
                 uri: getLocalRoute('app_faq')

@@ -37,9 +37,16 @@ class CollapsibleDatePickerAndroid extends React.PureComponent {
 
   openDatePicker() {
     try {
-      DatePickerAndroid.open({
+      let dateObject = {
         date: new Date()
-      }).then(date => {
+      };
+      if (this.props.locals.config.maxDate) {
+        dateObject.maxDate = new Date();
+      }
+      if (this.props.locals.config.minDate) {
+        dateObject.minDate = new Date();
+      }
+      DatePickerAndroid.open(dateObject).then(date => {
         if (date.action !== DatePickerAndroid.dismissedAction) {
           //Please take note that the number of the months is based on
           //the count of an index, let say January is 0, February is 1 and so on...

@@ -76,7 +76,7 @@ export default class EditUserProfile extends React.Component {
 
   mergeProjectImages(newPlantProjectImages, oldPlantProjectImages = []) {
     if (!newPlantProjectImages) {
-      return oldPlantProjectImages;
+      return [];
     }
     let uploadPlantProjectImages = [];
     uploadPlantProjectImages = newPlantProjectImages.map(newProjectImage => {
@@ -241,6 +241,7 @@ export default class EditUserProfile extends React.Component {
               type={parsedSchema[type].image.transformedSchema}
               options={parsedSchema[type].image.schemaOptions}
               value={updatedUserProfile}
+              onChange={value => (this._profileImageValue = value)}
             />
           </div>
 
@@ -252,7 +253,12 @@ export default class EditUserProfile extends React.Component {
           />
           <PrimaryButton
             onClick={() => {
-              this.props.onSave(type, 'profile');
+              this.props.onSave(
+                type,
+                'profile',
+                undefined,
+                !!this._profileImageValue
+              );
             }}
           >
             {i18n.t('label.save_changes')}

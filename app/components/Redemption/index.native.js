@@ -49,7 +49,8 @@ export default class Redemption extends Component {
       successText,
       actionText,
       statusText,
-      form;
+      form,
+      right_icon = null;
     errorText = this.props.errorText ? (
       <View>
         <Text style={styles.errorTextStyle}>{this.props.errorText}</Text>
@@ -168,27 +169,22 @@ export default class Redemption extends Component {
           code: null
         });
       };
-      let right_icon = disabled ? (
-        <TouchableItem
-          style={styles.glyphiconTouch}
-          onPress={() => onCrossClick()}
-        >
+      right_icon = disabled ? (
+        <TouchableItem onPress={() => onCrossClick()}>
           <Image style={styles.glyphiconStyle} source={close_green} />
         </TouchableItem>
       ) : null;
       form = (
         <View style={styles.redeemInputView}>
-          <View>
-            <TextInput
-              style={styles.inputStyle}
-              editable={!disabled}
-              value={value}
-              maxLength={20}
-              onChangeText={evt => this.onChange(evt)}
-              autoCapitalize={'sentences'}
-            />
-            {right_icon}
-          </View>
+          <TextInput
+            style={styles.inputStyle}
+            editable={!disabled}
+            value={value}
+            maxLength={20}
+            onChangeText={evt => this.onChange(evt)}
+            autoCapitalize={'sentences'}
+          />
+          {right_icon}
         </View>
       );
     } else {
@@ -215,13 +211,17 @@ export default class Redemption extends Component {
       </View>
     ) : (
       <View style={{ flex: 1 }}>
-        <KeyboardAwareScrollView enableOnAndroid={true}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={{
+            paddingBottom: 72
+          }}
+        >
           <View style={styles.parentContainer}>
-            <View style={styles.headerContainer}>
+            <CardLayout style={styles.cardContainer}>
               <Text style={styles.titleText}>
                 {i18n.t('label.redeem_heading')}
               </Text>
-            </View>
+            </CardLayout>
             <CardLayout style={styles.cardContainer}>
               {icon}
               {content}
@@ -230,15 +230,7 @@ export default class Redemption extends Component {
             </CardLayout>
           </View>
         </KeyboardAwareScrollView>
-
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0
-          }}
-        >
-          <TabContainer {...this.props} />
-        </View>
+        <TabContainer {...this.props} />
       </View>
     );
   }

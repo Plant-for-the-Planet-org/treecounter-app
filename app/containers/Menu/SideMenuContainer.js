@@ -4,7 +4,10 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import Menu from '../../components/Menu';
-import { currentUserProfileSelector } from '../../selectors/index';
+import {
+  currentUserProfileSelector,
+  userTreecounterSelector
+} from '../../selectors/index';
 import { toggleSideNavAction } from '../../actions/setSideNavAction';
 import { clearSupport } from '../../actions/supportTreecounterAction';
 
@@ -74,6 +77,7 @@ class SideMenuContainer extends Component {
         userProfile={this.props.userProfile}
         menuData={this.state.schema}
         navigation={this.props.navigation}
+        treecounter={this.props.treecounter}
         path={path}
         toggleSideNavAction={this.props.toggleSideNavAction}
         clearSupport={this.props.clearSupport}
@@ -89,7 +93,8 @@ const mapStateToProps = state => ({
   isOpen: state.sideNav && state.sideNav.open,
   loggedIn: currentUserProfileSelector(state) !== null,
   userProfile: currentUserProfileSelector(state),
-  lastRoute: state.lastRouteState.lastRoute
+  lastRoute: state.lastRouteState.lastRoute,
+  treecounter: userTreecounterSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
@@ -109,6 +114,7 @@ SideMenuContainer.propTypes = {
   location: PropTypes.object,
   toggleSideNavAction: PropTypes.func.isRequired,
   clearSupport: PropTypes.func,
+  treecounter: PropTypes.object,
   userProfile: PropTypes.any,
   lastRoute: PropTypes.any
 };

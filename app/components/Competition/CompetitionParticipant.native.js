@@ -14,13 +14,73 @@ class CompetitionParticipant extends React.Component {
   constructor(props) {
     super(props);
     this.supportButton = this.supportButton.bind(this);
+    this.plantButton = this.plantButton.bind(this);
   }
 
   supportButton() {
-    this.props.supportTreecounterAction(this.props.competitor.treecounterSlug);
+    let supportObject = {
+      id: this.props.competitor.treecounterId,
+      displayName: this.props.competitor.treecounterDisplayName
+    };
+    this.props.supportTreecounterAction(supportObject);
+    updateRoute('app_donateTrees', this.props.navigation, 0, {
+      titleParam:
+        'Support Trees To ' + this.props.competitor.treecounterDisplayName
+    });
+  }
+  plantButton() {
     updateRoute('app_donateTrees', this.props.navigation);
   }
   render() {
+    let support_button = null;
+    if (
+      this.props.type === 'participants' &&
+      this.props.competitor.treecounterSlug === this.props.treeCounter.slug
+    ) {
+      support_button = (
+        <View style={styles.topCompetitorScore}>
+          <PrimaryButton
+            style={snippetStyles.buttonItem}
+            buttonStyle={snippetStyles.buttonStyle}
+            textStyle={snippetStyles.buttonTextStyle}
+            onClick={() => this.plantButton()}
+          >
+            <Text> {i18n.t('label.plant_trees')}</Text>
+          </PrimaryButton>
+        </View>
+      );
+    } else if (
+      this.props.type === 'participants' &&
+      this.props.competitor.treecounterSlug !== this.props.treeCounter.slug
+    ) {
+      support_button = (
+        <View style={styles.topCompetitorScore}>
+          <PrimaryButton
+            style={snippetStyles.buttonItem}
+            buttonStyle={snippetStyles.buttonStyle}
+            textStyle={snippetStyles.buttonTextStyle}
+            onClick={() => this.supportButton()}
+          >
+            <Text> {i18n.t('label.support')}</Text>
+          </PrimaryButton>
+        </View>
+      );
+    } else if (this.props.type === 'invite') {
+      support_button = (
+        <View style={styles.topCompetitorScore}>
+          <PrimaryButton
+            style={snippetStyles.buttonItem}
+            buttonStyle={snippetStyles.moreButtonStyle}
+            textStyle={snippetStyles.moreButtonTextStyle}
+            onClick={() => this.props.cancelInvite(this.props.competitor.token)}
+          >
+            <Text> {i18n.t('label.cancel')}</Text>
+          </PrimaryButton>
+        </View>
+      );
+    } else {
+      support_button = null;
+    }
     return (
       <View style={styles.topCompetitorSection}>
         <View style={styles.topCompetitorName}>
@@ -28,13 +88,15 @@ class CompetitionParticipant extends React.Component {
             profileImage={
               this.props.competitor && this.props.competitor.treecounterAvatar
             }
-            style={styles.profileImageStyle}
-            imageStyle={{ borderRadius: 15 }}
+            imageStyle={{ width: 40, height: 40, borderRadius: 40 / 2 }}
           />
 
           <View style={styles.participantNameContainer}>
             <Text style={styles.topCompetitorNameText}>
-              {this.props.competitor.treecounterDisplayName}
+              {this.props.competitor.treecounterSlug ===
+              this.props.treeCounter.slug
+                ? i18n.t('label.me')
+                : this.props.competitor.treecounterDisplayName}
             </Text>
             {this.props.type === 'participants' ||
             this.props.type === 'invite' ? (
@@ -55,8 +117,8 @@ class CompetitionParticipant extends React.Component {
                 </PrimaryButton>
                 <PrimaryButton
                   style={snippetStyles.buttonItem}
-                  buttonStyle={snippetStyles.buttonStyle}
-                  textStyle={snippetStyles.buttonTextStyle}
+                  buttonStyle={snippetStyles.moreButtonStyle}
+                  textStyle={snippetStyles.moreButtonTextStyle}
                   onClick={() =>
                     this.props.declinePart(this.props.competitor.token)
                   }
@@ -67,31 +129,7 @@ class CompetitionParticipant extends React.Component {
             ) : null}
           </View>
         </View>
-        {this.props.type === 'participants' ? (
-          <View style={styles.topCompetitorScore}>
-            <PrimaryButton
-              style={snippetStyles.buttonItem}
-              buttonStyle={snippetStyles.buttonStyle}
-              textStyle={snippetStyles.buttonTextStyle}
-              onClick={() => this.supportButton()}
-            >
-              <Text> {i18n.t('label.support')}</Text>
-            </PrimaryButton>
-          </View>
-        ) : this.props.type === 'invite' ? (
-          <View style={styles.topCompetitorScore}>
-            <PrimaryButton
-              style={snippetStyles.buttonItem}
-              buttonStyle={snippetStyles.buttonStyle}
-              textStyle={snippetStyles.buttonTextStyle}
-              onClick={() =>
-                this.props.cancelInvite(this.props.competitor.token)
-              }
-            >
-              <Text> {i18n.t('label.cancel')}</Text>
-            </PrimaryButton>
-          </View>
-        ) : null}
+        {support_button}
       </View>
     );
   }
@@ -105,5 +143,6 @@ CompetitionParticipant.propTypes = {
   confirmPart: PropTypes.any,
   declinePart: PropTypes.any,
   cancelInvite: PropTypes.any,
-  supportTreecounterAction: PropTypes.any
+  supportTreecounterAction: PropTypes.any,
+  navigation: PropTypes.any
 };

@@ -65,15 +65,21 @@ export default class FeaturedCompetitions extends Component {
   render() {
     let { featuredCompetitions } = this.state;
     return (
-      <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+      <ScrollView
+        contentContainerStyle={[
+          scrollStyle.styleContainer,
+          { paddingBottom: 72 }
+        ]}
+      >
         {featuredCompetitions.length > 0
           ? featuredCompetitions.map(project => (
               <CompetitionSnippet
                 key={'competition' + project.id}
                 cardStyle={styles.cardStyle}
-                onMoreClick={id => this.props.onMoreClick(id)}
+                onMoreClick={id => this.props.onMoreClick(id, project.name)}
                 leaveCompetition={id => this.props.leaveCompetition(id)}
                 enrollCompetition={id => this.props.enrollCompetition(id)}
+                editCompetition={this.props.editCompetition}
                 competition={project}
                 type="featured"
               />
@@ -87,5 +93,6 @@ FeaturedCompetitions.propTypes = {
   allCompetitions: PropTypes.any,
   onMoreClick: PropTypes.any,
   leaveCompetition: PropTypes.any,
-  enrollCompetition: PropTypes.any
+  enrollCompetition: PropTypes.any,
+  editCompetition: PropTypes.any
 };

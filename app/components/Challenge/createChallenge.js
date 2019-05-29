@@ -16,9 +16,25 @@ import i18n from '../../locales/i18n';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import ChallengeList from './challengeList';
+import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
+import { delimitNumbers } from '../../utils/utils';
 
 let TCombForm = t.form.Form;
-
+const getFormLayoutTemplate = () => {
+  const formLayoutTreesTemplate = locals => {
+    return (
+      <div className="register-tree__form">
+        <div className="register-tree__form--row">
+          {locals.inputs.firstname}
+          <div className="register-tree__form--row__spacer" />
+          {locals.inputs.lastname}
+        </div>
+        <div className="register-tree__form--row">{locals.inputs.email}</div>
+      </div>
+    );
+  };
+  return formLayoutTreesTemplate;
+};
 export default class Challenge extends Component {
   static data = {
     tabsUser: [
@@ -64,7 +80,7 @@ export default class Challenge extends Component {
 
   suggestionClicked = (context, event) => {
     this.setState({
-      challenged: event.suggestion.id,
+      challenged: event.suggestion.treecounterId,
       challengedName: event.suggestion.name
     });
   };
@@ -92,6 +108,18 @@ export default class Challenge extends Component {
       checked: event.target.value
     });
   };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.error) {
+      NotificationManager.error(
+        i18n.t('label.challenge_error', {
+          user: this.state.challengedName,
+          target: delimitNumbers(nextProps.error)
+        }),
+        'Error',
+        5000
+      );
+    }
+  }
 
   challenge = () => {
     let requestData;
@@ -115,14 +143,16 @@ export default class Challenge extends Component {
   };
 
   render() {
+    const schema = {
+      template: getFormLayoutTemplate(),
+      ...challengeFormSchemaOptions
+    };
     return (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>
-          {'Challenge'}
+          {i18n.t('label.challenge_heading')}
           <DescriptionHeading>
-            {
-              'The recipient will be able to choose whether or not to accept your challenge.'
-            }
+            {i18n.t('label.challenge_edit_description')}
           </DescriptionHeading>
         </TextHeading>
         <CardLayout className="tpo-footer-card-layout">
@@ -140,21 +170,21 @@ export default class Challenge extends Component {
                 <TCombForm
                   ref="challengeUser"
                   type={challengeFormSchema}
-                  options={challengeFormSchemaOptions}
+                  options={schema}
                   value={this.state.tempForm}
                   onChange={this.onFormChange}
                 />
               )}
             </Tabs>
             <div className="number_trees">
-              <TextBlock>Challenge to plant</TextBlock>
+              <TextBlock>{i18n.t('label.challenge_to_plant')}</TextBlock>
               <span className="input_trees">
                 <input
                   type="number"
                   value={this.state.form.goal}
                   onChange={evt => this.handleTreesChange(evt.target.value)}
                 />
-                <TextBlock>trees</TextBlock>
+                <TextBlock>{i18n.t('label.trees')}</TextBlock>
               </span>
             </div>
             <div className="trees_by_time">
@@ -164,7 +194,7 @@ export default class Challenge extends Component {
                 value="indefinite"
                 checked={this.state.checked === 'indefinite'}
               />
-              <TextBlock>Indefinite</TextBlock>
+              <TextBlock>{i18n.t('label.indefinite')}</TextBlock>
               <input
                 type="radio"
                 value="custom"
@@ -172,7 +202,7 @@ export default class Challenge extends Component {
                 checked={this.state.checked === 'custom'}
                 className="radio_margin_left"
               />
-              <TextBlock>by </TextBlock>
+              <TextBlock>{i18n.t('label.by')} </TextBlock>
               <input
                 type="number"
                 value={this.state.form.endDate}
@@ -180,7 +210,9 @@ export default class Challenge extends Component {
               />
             </div>
           </div>
-          <PrimaryButton onClick={this.challenge}>Challenge</PrimaryButton>
+          <PrimaryButton onClick={this.challenge}>
+            {i18n.t('label.challenge_heading')}
+          </PrimaryButton>
         </CardLayout>
         <ChallengeList
           challenges={this.props.challenges}
@@ -197,5 +229,6 @@ Challenge.propTypes = {
   challenges: PropTypes.array.isRequired,
   challengeStatus: PropTypes.func,
   navigation: PropTypes.any,
-  currentUserProfile: PropTypes.any
+  currentUserProfile: PropTypes.any,
+  error: PropTypes.object
 };

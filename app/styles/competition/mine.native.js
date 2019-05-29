@@ -13,6 +13,40 @@ export default (mine = EStyleSheet.create({
     padding: 0,
     paddingBottom: 10
   },
+  competitonCreateMain: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    paddingRight: 16
+  },
+  competition_create_row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  competition_image: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 40,
+    marginLeft: 10,
+    paddingRight: 16
+  },
+  profileImageBackground: {
+    position: 'absolute',
+    height: 15,
+    left: 98,
+    top: 40,
+    width: 15,
+    zIndex: 10,
+    borderRadius: 15,
+    backgroundColor: '#ffffff'
+  },
+  addImageTextStyle: {
+    color: '#686060',
+    fontSize: 14
+  },
   mineContainer: {
     flex: 1
   },
@@ -36,6 +70,24 @@ export default (mine = EStyleSheet.create({
     padding: 0,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10
+  },
+  containerDedicateStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 25,
+    width: '100%',
+    justifyContent: 'space-between'
+  },
+  dedicateTreeName: {
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  textDedicateStyle: {
+    fontSize: 14,
+    color: '#ff6666',
+    maxWidth: '100%',
+    textAlign: 'center'
   },
   mineSpecsContainer: {
     height: Layout.window.height * 0.3,

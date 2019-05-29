@@ -13,7 +13,6 @@ export default (loginStyles = EStyleSheet.create({
     justifyContent: 'center'
   },
   container: {
-    flex: 0.7,
     width: '100%',
     // justifyContent: 'center',
     padding: 15,
@@ -21,7 +20,6 @@ export default (loginStyles = EStyleSheet.create({
     flexGrow: 1
   },
   headerContainer: {
-    flex: 0.3,
     flexDirection: 'column',
 
     alignItems: 'center',

@@ -33,9 +33,9 @@ const UserDetails = ({
           />
           <div>
             <TextSpan strong={true}>
-              {i18n.t('label.welcome_hi') +
-                userProfile.fullname +
-                i18n.t('label.welcome_symbol')}
+              {i18n.t('label.welcome_hi', {
+                user: userProfile.fullname
+              })}
             </TextSpan>
             <TextSpan>{userProfile.email}</TextSpan>
           </div>
@@ -44,14 +44,15 @@ const UserDetails = ({
       <hr className="divider__light" />
       <div className="popover__list-item">
         <div className="dedicate-trees">
-          <div>Dedicate My Trees to</div>
+          <div>{i18n.t('label.dedicate_trees')}</div>
           <div className="tooltip">
             <a data-tip data-for="dedicate-trees-icon">
               <img src={questionmark_orange} />
             </a>
-
             <ReactTooltip id="dedicate-trees-icon" effect="solid" type="dark">
-              <span className="tooltip-text">Dedicate My Trees to</span>
+              <span className="tooltip-text">
+                {i18n.t('label.dedicate_tootltip')}
+              </span>
             </ReactTooltip>
           </div>
         </div>
@@ -67,7 +68,7 @@ const UserDetails = ({
               className="pick-profile-primary-button"
               onClick={() => openProfilePickerModal()}
             >
-              Edit
+              {i18n.t('label.edit')}
             </PrimaryButton>
           </div>
         ) : (
@@ -76,7 +77,7 @@ const UserDetails = ({
               className="pick-profile-primary-button"
               onClick={() => openProfilePickerModal()}
             >
-              Pick Profile
+              {i18n.t('label.pick_profile')}
             </PrimaryButton>
           </div>
         )}

@@ -34,8 +34,7 @@ export default class FAQ extends Component {
     return (
       <View style={styles.content}>
         <HTMLView
-          value={section.answer}
-          addLineBreaks={false}
+          value={`<div>${section.answer.replace(/(\r\n|\n|\r)/gm, '')}</div>`}
           stylesheet={styles}
           onLinkPress={url => {
             try {
@@ -60,7 +59,7 @@ export default class FAQ extends Component {
       <LoadingIndicator />
     ) : (
       <View style={{ flex: 1 }}>
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
           <Accordion
             sections={this.props.faqs}
             renderSectionTitle={this._renderSectionTitle}
@@ -69,14 +68,7 @@ export default class FAQ extends Component {
             touchableComponent={TouchableOpacity}
           />
         </ScrollView>
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0
-          }}
-        >
-          <TabContainer {...this.props} />
-        </View>
+        <TabContainer {...this.props} />
       </View>
     );
   }

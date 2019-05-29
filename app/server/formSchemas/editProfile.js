@@ -722,6 +722,10 @@ export default {
             type: 'string',
             title: 'label.current_password',
             icon: null,
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
             help: null,
             propertyOrder: 1
           },
@@ -1518,6 +1522,10 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
             icon: null,
             help: null,
             propertyOrder: 1
@@ -1581,15 +1589,6 @@ export default {
             help: null,
             maxLength: 255,
             propertyOrder: 1
-          },
-          subType: {
-            enum: ['company-other'],
-            enum_titles: ['Other'],
-            type: 'string',
-            title: 'label.sub_type',
-            icon: null,
-            help: null,
-            propertyOrder: 2
           },
           address: {
             type: 'string',
@@ -2291,6 +2290,10 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
             icon: null,
             help: null,
             propertyOrder: 1
@@ -3069,6 +3072,10 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
             icon: null,
             help: null,
             propertyOrder: 1
@@ -3847,6 +3854,10 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
             icon: null,
             help: null,
             propertyOrder: 1
@@ -4620,6 +4631,10 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
             icon: null,
             help: null,
             propertyOrder: 1

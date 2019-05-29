@@ -10,6 +10,7 @@ import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import CardLayout from '../../components/Common/Card';
 import { getDocumentTitle } from '../../helpers/utils';
+import { delimitNumbers } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
 
 import {
@@ -123,7 +124,7 @@ class PublicTreeCounter extends React.Component {
     };
     const headerProps = {
       caption,
-      profileType: getProfileTypeName(profileType),
+      profileType: profileType,
       logo,
       isUserFollowerBool,
       isUserLoggedIn,
@@ -143,44 +144,48 @@ class PublicTreeCounter extends React.Component {
             followChanged={this.onFollowChanged}
           />
 
-          {('individual' == userProfile.type ||
-            'plantAmbassador' == userProfile.type) && (
-            <div className="support-button-container ">
-              <SupportButton
-                {...supportProps}
-                buttonLabel={i18n.t('label.gift_trees')}
-                onRegisterSupporter={() =>
-                  this.onRegisterSupporter(treecounter)
-                }
-              />
-            </div>
-          )}
+          {'tpo' !== userProfile.type &&
+            !isMyself(treecounter, currentUserProfile) && (
+              <div className="support-button-container ">
+                <SupportButton
+                  {...supportProps}
+                  buttonLabel={i18n.t('label.support')}
+                  onRegisterSupporter={() =>
+                    this.onRegisterSupporter(treecounter)
+                  }
+                />
+              </div>
+            )}
 
-          {('company' == userProfile.type ||
+          {/* {('company' == userProfile.type ||
             'education' == userProfile.type ||
             'non-profit' == userProfile.type ||
             'govt' == userProfile.type ||
             'plantClub' == userProfile.type) && (
-            <div className="support-button-container ">
-              <SupportButton
-                {...supportProps}
-                buttonLabel={
-                  isUserLoggedIn
-                    ? i18n.t('label.support')
-                    : i18n.t('label.plant_trees')
-                }
-                onRegisterSupporter={this.onRegisterSupporter}
-              />
-            </div>
-          )}
+              <div className="support-button-container ">
+                <SupportButton
+                  {...supportProps}
+                  buttonLabel={
+                    isUserLoggedIn
+                      ? i18n.t('label.support')
+                      : i18n.t('label.plant_trees')
+                  }
+                  onRegisterSupporter={() =>
+                    this.onRegisterSupporter(treecounter)
+                  }
+                />
+              </div>
+            )} */}
         </div>
-        <div className="canvasContainer flex-column">
-          <SvgContainer {...this.state.svgData} />
-          <TreecounterGraphicsText
-            trillion={false}
-            onToggle={toggleVal => this.updateSvg(toggleVal)}
-            treecounterData={this.state.svgData}
-          />
+        <div className="treecounter_container">
+          <div className="canvasContainer flex-column">
+            <SvgContainer {...this.state.svgData} />
+            <TreecounterGraphicsText
+              trillion={false}
+              onToggle={toggleVal => this.updateSvg(toggleVal)}
+              treecounterData={this.state.svgData}
+            />
+          </div>
         </div>
         <div className="tree-counter-footer__container">
           {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
@@ -211,14 +216,18 @@ class PublicTreeCounter extends React.Component {
                         {treecounter.directChildren[childrenId].displayName}
                       </div>
                       <div className="table-col planted">
-                        {parseInt(
-                          treecounter.directChildren[childrenId].countPlanted
-                        ).toLocaleString('en')}
+                        {delimitNumbers(
+                          parseInt(
+                            treecounter.directChildren[childrenId].countPlanted
+                          )
+                        )}
                       </div>
                       <div className="table-col target">
-                        {parseInt(
-                          treecounter.directChildren[childrenId].countTarget
-                        ).toLocaleString('en')}
+                        {delimitNumbers(
+                          parseInt(
+                            treecounter.directChildren[childrenId].countTarget
+                          )
+                        )}
                       </div>
                       <div className="table-col support">
                         <PrimaryButton

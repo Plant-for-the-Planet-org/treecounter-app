@@ -15,9 +15,7 @@
   "individual_name": "Individual",
   "next": "Next",
   "delete_project": "Delete Project",
-  "thankyou_planting":
-    "Thank you for planting {{count}} trees with us! We've sent an email confirmation to you. If your donation was to a tax deductible project, you will receive an email with a donation receipt in time.",
-  "donate_trees_description":
-    "Pick a project which will plant the trees for you.",
+  "thankyou_planting": "Thank you for planting {{count}} trees with us! We've sent an email confirmation to you. If your donation was to a tax deductible project, you will receive an email with a donation receipt in time.",
+  "donate_trees_description": "Pick a project which will plant the trees for you.",
   "donation_contribution": "Donation"
 }

@@ -7,6 +7,10 @@
   "to": "to",
   "accept": "Accept",
   "reject": "Reject",
+  "sent": "Sent",
+  "accepted": "Accepted",
+  "declined": "Declined",
   "challenge_accept": "You have accepted the challenge",
-  "challenge_deny": "You have declined the challenge"
+  "challenge_deny": "You have declined the challenge",
+  "challenge_error": "{{user}}'s current target is {{target}} trees. Please enter a higher number."
 }

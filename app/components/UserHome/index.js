@@ -7,8 +7,9 @@ import SvgContainer from '../Common/SvgContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import UserProfileImage from '../Common/UserProfileImage';
-import { getProfileTypeName } from '../PublicTreeCounter/utils';
 import { getDocumentTitle } from '../../helpers/utils';
+import * as images from '../../assets';
+
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -73,7 +74,7 @@ export default class UserHome extends Component {
   render() {
     const { treecounterData, userProfile } = this.props;
     document.title = getDocumentTitle(userProfile.treecounter.displayName);
-    const profileType = getProfileTypeName(userProfile.type);
+    const profileType = userProfile.type;
     let { svgData } = this.state;
     return (
       <div className="app-container__content--center sidenav-wrapper">
@@ -84,7 +85,20 @@ export default class UserHome extends Component {
               {userProfile.treecounter.displayName}
             </div>
             <div className="tree-counter-row">
-              <UserProfileTypeLabel profileType={profileType} />
+              {!!profileType && (
+                <img
+                  className="profile-type-image"
+                  src={
+                    profileType === 'education'
+                      ? images['schoolIcon']
+                      : profileType === 'tpo'
+                        ? images['tpoIcon']
+                        : profileType === 'company'
+                          ? images['companyIcon']
+                          : images['individualIcon']
+                  }
+                />
+              )}
             </div>
           </div>
         </div>

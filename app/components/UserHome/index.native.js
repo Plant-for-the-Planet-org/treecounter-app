@@ -12,10 +12,10 @@ import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
 import styles from '../../styles/user-home';
 import tabStyles from '../../styles/common/tabbar';
+import * as images from '../../assets';
 
 import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
-import { getProfileTypeName } from '../PublicTreeCounter/utils';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList';
 
@@ -117,7 +117,7 @@ export default class UserHome extends Component {
 
   _renderUserHome = ({ route }) => {
     const { userProfile } = this.props;
-    const profileType = getProfileTypeName(userProfile.type);
+    const profileType = userProfile.type;
     let { svgData } = this.state;
     switch (route.key) {
       case 'home':
@@ -137,9 +137,19 @@ export default class UserHome extends Component {
                     </Text>
                   </View>
                   <View style={styles.userInfoProfileType}>
-                    <View style={styles.profileTypeContainer}>
-                      <Text style={styles.profileTypeStyle}>{profileType}</Text>
-                    </View>
+                    <Image
+                      style={styles.profileTypeImage}
+                      resizeMode="contain"
+                      source={
+                        profileType === 'education'
+                          ? images['schoolIcon']
+                          : profileType === 'tpo'
+                            ? images['tpoIcon']
+                            : profileType === 'company'
+                              ? images['companyIcon']
+                              : images['individualIcon']
+                      }
+                    />
                   </View>
                 </View>
               </View>

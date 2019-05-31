@@ -273,7 +273,7 @@ export default class GiftTrees extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        directGift: { treecounter: event.suggestion.id }
+        directGift: { treecounter: event.suggestion.treecounterId }
       },
       giftTreecounterName: event.suggestion.name
     });
@@ -366,6 +366,7 @@ export default class GiftTrees extends Component {
         <NextArrow checkValidation={this.checkValidation} context={this} />
       ),
       infinite: false,
+      lazyLoad: true,
       adaptiveHeight: true,
       prevArrow: (
         <CarouselNavigation

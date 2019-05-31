@@ -44,7 +44,7 @@ const UserDetails = ({
       <hr className="divider__light" />
       <div className="popover__list-item">
         <div className="dedicate-trees">
-          <div>Dedicate My Trees to</div>
+          <div>{i18n.t('label.dedicate_trees')}</div>
           <div className="tooltip">
             <a data-tip data-for="dedicate-trees-icon">
               <img src={questionmark_orange} />
@@ -68,7 +68,7 @@ const UserDetails = ({
               className="pick-profile-primary-button"
               onClick={() => openProfilePickerModal()}
             >
-              Edit
+              {i18n.t('label.edit')}
             </PrimaryButton>
           </div>
         ) : (
@@ -77,7 +77,7 @@ const UserDetails = ({
               className="pick-profile-primary-button"
               onClick={() => openProfilePickerModal()}
             >
-              Pick Profile
+              {i18n.t('label.pick_profile')}
             </PrimaryButton>
           </div>
         )}

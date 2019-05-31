@@ -53,11 +53,11 @@ export default class HeaderRight extends Component {
         redirectPath = context.scheme + '://' + context.host + pathname;
       }
       return (
-        <TouchableOpacity onPress={() => this.handleShare(redirectPath)}>
-          <Image
-            source={shareIcon}
-            style={{ height: 25, width: 25, marginRight: 20 }}
-          />
+        <TouchableOpacity
+          style={{ height: 35, width: 35, padding: 5, marginRight: 15 }}
+          onPress={() => this.handleShare(redirectPath)}
+        >
+          <Image source={shareIcon} style={{ height: 25, width: 25 }} />
         </TouchableOpacity>
       );
     } else {
@@ -81,11 +81,11 @@ export default class HeaderRight extends Component {
           alignItems: 'center'
         }}
       >
-        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-          <Image
-            source={iosSearchWhite}
-            style={{ height: 25, width: 25, marginRight: 20 }}
-          />
+        <TouchableOpacity
+          style={{ height: 35, width: 35, padding: 5, marginRight: 15 }}
+          onPress={() => navigation.navigate('Search')}
+        >
+          <Image source={iosSearchWhite} style={{ height: 25, width: 25 }} />
         </TouchableOpacity>
         {!!userProfile ? (() => this.renderShareButtons(userProfile))() : null}
         {isLoggedIn ? (

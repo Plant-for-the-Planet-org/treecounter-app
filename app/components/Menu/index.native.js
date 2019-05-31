@@ -96,7 +96,27 @@ export default class Menu extends Component {
     let urlBreak = url.split('/');
     //console.log(urlBreak);
     const { navigation } = this.props;
-    updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0);
+    if (urlBreak.indexOf('account-activate') !== -1) {
+      setTimeout(
+        () =>
+          updateRoute(
+            '/' + urlBreak[urlBreak.length - 2],
+            // '/' +
+            // urlBreak[urlBreak.length - 1],
+            navigation,
+            0,
+            {
+              token: urlBreak[urlBreak.length - 1]
+            }
+          ),
+        0
+      );
+    } else {
+      setTimeout(
+        () => updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0),
+        0
+      );
+    }
   };
 
   //TODO hkurra
@@ -191,19 +211,21 @@ export default class Menu extends Component {
               />
             ) : null}
 
-            {/* {this.props.userProfile &&
-            this.props.userProfile.supportedTreecounter ? (
+            {this.props.userProfile ? (
               <LargeMenuItem
                 onPress={this.onPressMenu.bind(this, {
                   uri: 'pickup_profile_modal'
                 })}
                 title={'Community'}
                 details={
+                  this.props.userProfile.supportedTreecounter &&
                   this.props.userProfile.supportedTreecounter.displayName
+                    ? this.props.userProfile.supportedTreecounter.displayName
+                    : i18n.t('label.pick_profile')
                 }
                 iconUrl={icons.communityMenu}
               />
-            ) : null} */}
+            ) : null}
 
             <LargeMenuItem
               onPress={this.onPressMenu.bind(this, {

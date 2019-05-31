@@ -17,6 +17,7 @@ import {
   userTreecounterSelector
 } from '../../selectors';
 import connect from 'react-redux/es/connect/connect';
+import moment from 'moment';
 
 class CompetitionSnippet extends React.Component {
   constructor(props) {
@@ -193,7 +194,11 @@ class CompetitionSnippet extends React.Component {
                   />
                   <Text style={styles.bottomText}>
                     {i18n.t('label.ends')}{' '}
-                    {this.props.competition && this.props.competition.endDate}
+                    {this.props.competition && this.props.competition.endDate
+                      ? moment(new Date(this.props.competition.endDate)).format(
+                          'MMM DD, YYYY'
+                        )
+                      : ''}
                   </Text>
                 </View>
 

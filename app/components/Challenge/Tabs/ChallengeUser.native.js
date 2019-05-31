@@ -12,6 +12,7 @@ import challengeStyles from '../../../styles/challenge';
 import TabContainer from '../../../containers/Menu/TabContainer';
 import i18n from '../../../locales/i18n';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
+import styles from '../../../styles/profilepicker.native';
 
 class ChallengeUser extends Component {
   constructor(props) {
@@ -54,7 +55,7 @@ class ChallengeUser extends Component {
     if (this.state.selectedSuggestion) {
       let requestData;
       requestData = {
-        challenged: this.state.selectedSuggestion.id
+        challenged: this.state.selectedSuggestion.treecounterId
       };
       if (this.state.isChecked) {
         requestData.endDate = this.state.byYear;
@@ -98,6 +99,18 @@ class ChallengeUser extends Component {
             paddingBottom: 72
           }}
         >
+          {this.props.error ? (
+            <View style={styles.containerDedicateStyle}>
+              <View style={styles.dedicateTreeName}>
+                <Text style={styles.textDedicateStyle}>
+                  {i18n.t('label.challenge_error', {
+                    user: this.state.selectedSuggestion.name,
+                    target: delimitNumbers(this.props.error)
+                  })}
+                </Text>
+              </View>
+            </View>
+          ) : null}
           <CardLayout style={[challengeStyles.challengeContainer]}>
             <View style={challengeStyles.challengeColumnContainer}>
               <SearchUser

@@ -124,7 +124,7 @@ class PublicTreeCounter extends React.Component {
     };
     const headerProps = {
       caption,
-      profileType: getProfileTypeName(profileType),
+      profileType: profileType,
       logo,
       isUserFollowerBool,
       isUserLoggedIn,

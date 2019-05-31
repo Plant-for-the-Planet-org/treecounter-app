@@ -44,17 +44,21 @@ export default class Login extends Component {
     this._recaptchaToken = token;
   };
 
+  refreshToken = () => {
+    this._captchaRef.refreshToken();
+  };
+
   handleLoginClick = () => {
     if (this.refs.loginForm.getValue()) {
       Keyboard.dismiss();
     }
-    this.props.onPress(this._recaptchaToken);
-    this._captchaRef.refreshToken();
+    this.props.onPress(this._recaptchaToken, this.refreshToken);
   };
   render() {
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
+        enableOnAndroid={true}
       >
         <ReCaptchaV3
           ref={ref => (this._captchaRef = ref)}

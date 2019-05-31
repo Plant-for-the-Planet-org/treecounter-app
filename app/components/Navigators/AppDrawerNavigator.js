@@ -47,6 +47,7 @@ import CompetitionContainer from '../../containers/CompetitionContainer';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
 import EditCompetitionContainer from '../../containers/EditCompetition';
+import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -134,6 +135,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_challenge')]: ChallengeContainer,
       ['app_gift_projects']: {
         screen: SelectPlantProjectContainer
+      },
+      [getLocalRoute('app_accountActivate')]: {
+        screen: SuccessfullActivatedContainer,
+        path: getLocalRoute('app_accountActivate') + '/:token'
       }
     },
     {

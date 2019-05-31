@@ -128,8 +128,20 @@ import downwardArrow from './images/left-arrow.png';
 import challengeIcon from './images/icons/flag.png';
 import webProgramming from './images/icons/web_programming.png';
 import communityMenu from './images/icons/community_menu.jpeg';
+import tpoIcon from './images/tpo_icon.png';
+import schoolIcon from './images/school_icon.png';
+import individualIcon from './images/individual_icon.png';
+import companyIcon from './images/company_icon.png';
+import mapCollapse from './images/map_collapse.png';
+import mapExpand from './images/map_expand.png';
 
 export {
+  mapCollapse,
+  mapExpand,
+  tpoIcon,
+  schoolIcon,
+  individualIcon,
+  companyIcon,
   AppStoreLogo,
   darkTree,
   svgBackground,

@@ -27,7 +27,12 @@ import { getPaymentStatus } from '../../reducers/paymentStatus';
 
 class DonationTreesContainer extends Component {
   componentDidMount() {
-    //  this.props.selectPlantProjectAction(1);
+    let selectedProjectId = undefined;
+    if (this.props.match) {
+      selectedProjectId = parseInt(this.props.match.params.id);
+    }
+    typeof selectedProjectId == 'number' &&
+      this.props.selectPlantProjectAction(selectedProjectId);
     this.props.fetchCurrencies();
     // console.log('In donate Tree Route' + this.props.navigation);
     // console.log(this.props.navigation);
@@ -117,5 +122,6 @@ DonationTreesContainer.propTypes = {
   setProgressModelState: PropTypes.func,
   loadUserProfile: PropTypes.func,
   route: PropTypes.func,
-  updateUserProfile: PropTypes.func
+  updateUserProfile: PropTypes.func,
+  match: PropTypes.any
 };

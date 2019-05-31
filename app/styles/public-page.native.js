@@ -11,5 +11,25 @@ export default (publicPageStyles = EStyleSheet.create({
   },
   giftIcon: {
     marginRight: 10
+  },
+  tableHeader: {
+    flexDirection: 'row',
+    height: 40
+  },
+  firstColumn: {
+    flex: 1.5
+  },
+  secondColumn: {
+    flex: 1
+  },
+  thirdColumn: {
+    flex: 1
+  },
+  fourthColumn: {
+    flex: 1,
+    height: 30
+  },
+  supportText: {
+    color: '#ec6453'
   }
 }));

@@ -5,6 +5,8 @@ import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import UserProfileImage from '../Common/UserProfileImage';
 
+import * as images from '../../assets';
+
 const TreecounterHeader = ({
   caption,
   profileType,
@@ -20,7 +22,20 @@ const TreecounterHeader = ({
       <div className="user-info">
         <div className="tree-counter-name">{caption}</div>
         <div className="tree-counter-row">
-          {!!profileType && <UserProfileTypeLabel profileType={profileType} />}
+          {!!profileType && (
+            <img
+              className="profile-type-image"
+              src={
+                profileType === 'education'
+                  ? images['schoolIcon']
+                  : profileType === 'tpo'
+                    ? images['tpoIcon']
+                    : profileType === 'company'
+                      ? images['companyIcon']
+                      : images['individualIcon']
+              }
+            />
+          )}
           {showFollow && (
             <FollowLabelButton
               isSubscribed={isUserFollowerBool}

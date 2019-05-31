@@ -211,7 +211,11 @@ export default class Redemption extends Component {
       </View>
     ) : (
       <View style={{ flex: 1 }}>
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView
+          contentContainerStyle={{
+            paddingBottom: 72
+          }}
+        >
           <View style={styles.parentContainer}>
             <CardLayout style={styles.cardContainer}>
               <Text style={styles.titleText}>

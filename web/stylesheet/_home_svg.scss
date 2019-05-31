@@ -13,7 +13,7 @@
     display: grid;
     grid-template-columns: 46px auto auto;
     align-items: center;
-    grid-column-gap: 16px;
+    grid-column-gap: 12px;
     position: relative;
     @include for-phone-only {
       grid-column-gap: 5px;
@@ -23,8 +23,12 @@
     .textLabel {
       @extend .pftp-text-span;
       font-size: 13.5px;
+    }
+
+    .tooltip-text {
       color: #ffffff;
     }
+
     img {
       max-width: 46px;
     }

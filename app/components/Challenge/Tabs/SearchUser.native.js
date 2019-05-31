@@ -117,7 +117,7 @@ class SearchUser extends React.Component {
         />
 
         {this.state.q && !this.state.searchResultClicked ? (
-          <ScrollView>
+          <ScrollView style={{ paddingBottom: 15 }}>
             {this.state.q.map((suggestion, i) => {
               if (this.props.hideCompetitions) {
                 if (suggestion.category !== 'competition') {

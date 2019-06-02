@@ -25,6 +25,7 @@
   "create_competition": "Wettbewerb erstellen",
   "competition_access_immediate": "Jeder (sofort)",
   "competition_access_request": "Jeder (nach Anfrage)",
+  "mine_create": "Sie haben keine Wettbewerbe. Jeder Wettbewerb, den Sie erstellen oder an dem Sie teilnehmen, wird auf dieser Seite angezeigt. Nach Erstellungsdatum sortiert.",
   "competition_access_invitation": "Nur Leute, die ich einlade",
   "edit_competition": "Wettbewerb bearbeiten"
 }

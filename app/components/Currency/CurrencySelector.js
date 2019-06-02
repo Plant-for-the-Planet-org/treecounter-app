@@ -6,6 +6,9 @@ import { currencySort } from './utils';
 
 const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
   let currenciesArray = currencySort(Object.keys(currencies));
+  if (currenciesArray.indexOf(selectedCurrency) === -1) {
+    onChange(currenciesArray[0]);
+  }
 
   return (
     <div className="pftp-selectfield">

@@ -64,7 +64,9 @@ export default class WidgetShare extends PureComponent {
     </script>
 
     `;
-    const iframeContent = `${widgetCode}<style>.widget-container{height:100%, width:100%} body{height:100vh} html{height:100vh}</style>`;
+    const iframeContent = `${widgetCode}<style>.widget-container{height:100%, width:100%} body{height:100vh; font-family: "Open Sans", -apple-system, system-ui, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}} html{height:100vh}</style>`;
     return (
       <div className="app-container__content--center sidenav-wrapper pftp-widgets-share-container">
         <TextHeading>
@@ -121,7 +123,8 @@ export default class WidgetShare extends PureComponent {
                   {widgetCode}
                 </SyntaxHighlighter>
               </div>
-            </CardLayout>' '<CardLayout className={'pftp-preview-widget-card '}>
+            </CardLayout>
+            <CardLayout className={'pftp-preview-widget-card '}>
               <h6>{i18n.t('label.widget_preview')}</h6>
               <iframe
                 width="200"

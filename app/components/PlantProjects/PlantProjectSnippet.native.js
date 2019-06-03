@@ -99,6 +99,14 @@ class PlantProjectSnippet extends React.Component {
       treeCost,
       taxDeduction: paymentSetup.taxDeduction
     };
+    let deducibleText1 = '';
+    for (let i = 0; i < specsProps.taxDeduction.length; i++) {
+      if (i < 1) {
+        deducibleText1 += specsProps.taxDeduction[i] + ',';
+      } else if (i == 1) {
+        deducibleText1 += specsProps.taxDeduction[i] + '.  ';
+      }
+    }
     return (
       <TouchableHighlight
         underlayColor={'transparent'}
@@ -154,6 +162,14 @@ class PlantProjectSnippet extends React.Component {
                     {specsProps.survivalRate}%
                   </Text>
                 </View>
+                {specsProps.taxDeduction && specsProps.taxDeduction.length ? (
+                  <View>
+                    <Text style={styles.survivalText}>
+                      {i18n.t('label.tax_deductible')} {i18n.t('label.in')}{' '}
+                      {deducibleText1}
+                    </Text>
+                  </View>
+                ) : null}
               </View>
 
               <View style={styles.costContainer}>

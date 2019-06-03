@@ -50,12 +50,7 @@ export default class SuccessfullyActivatedAccount extends Component {
               <Text>now or </Text>
               {setTarget}
             </View>
-          ) : (
-            <View style={styles.textStyle}>
-              <Text>You can</Text>
-              {login}
-            </View>
-          )}
+          ) : null}
         </View>
       </ScrollView>
     );

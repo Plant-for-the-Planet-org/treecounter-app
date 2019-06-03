@@ -20,7 +20,6 @@ export function registerTree(
       'plantContribution_post',
       plantContribution,
       {
-        treecounter: treecounterId,
         mode: mode
       }
     )

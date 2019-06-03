@@ -91,7 +91,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectdetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: rowHeight * 2,
+    height: rowHeight * 3,
     paddingBottom: 10
   },
   locationContainer: {

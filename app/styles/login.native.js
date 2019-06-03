@@ -30,7 +30,9 @@ export default (loginStyles = EStyleSheet.create({
     height: 50
   },
 
-  inputContainer: {},
+  inputContainer: {
+    height: 120
+  },
   button: {
     height: 50,
     backgroundColor: '$primary',

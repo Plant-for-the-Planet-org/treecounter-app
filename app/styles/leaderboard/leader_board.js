@@ -34,6 +34,7 @@ export default (LeaderboardStyle = EStyleSheet.create({
     ...boxShadow,
     flex: 1,
     padding: 0,
+    marginBottom: 72,
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
@@ -70,7 +71,6 @@ export default (LeaderboardStyle = EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
-    marginBottom: 5,
     flexGrow: 1,
     backgroundColor: '#fff'
     // borderBottomLeftRadius: 10,

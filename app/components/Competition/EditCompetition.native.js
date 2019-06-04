@@ -39,7 +39,9 @@ const getCompFormImageLayoutTemplate = () => {
     return (
       <View style={imagestyles.filePickerContainer}>
         <View style={{ flex: 1 }}>
-          <Text style={styles.addImageTextStyle}>Add Image</Text>
+          <Text style={styles.addImageTextStyle}>
+            {i18n.t('label.add_image')}
+          </Text>
         </View>
         <TouchableOpacity
           style={{ flex: 1 }}

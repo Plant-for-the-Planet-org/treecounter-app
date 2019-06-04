@@ -7,6 +7,8 @@ import { iosSearchGrey } from '../../../assets';
 import ListViewProjects from './listview';
 import Proptypes from 'prop-types';
 
+import i18n from '../../../locales/i18n.js';
+
 export default class ListProjects extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +70,7 @@ export default class ListProjects extends Component {
               autoCapitalize="none"
               autoCorrect={false}
               returnKeyType="search"
-              placeholder="Search"
+              placeholder={i18n.t('label.searchshort')}
               placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
               style={[styles.searchInput, { paddingVertical: 0 }]}
               autoCapitalize={'sentences'}

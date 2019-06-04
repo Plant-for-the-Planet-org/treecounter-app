@@ -5,6 +5,8 @@ import { Dimensions } from 'react-native';
 import GiftToUser from './Tabs/GiftUser';
 import GiftEmail from './Tabs/GiftEmail';
 
+import i18n from '../../locales/i18n';
+
 const Layout = {
   window: {
     width: Dimensions.get('window').width
@@ -17,8 +19,8 @@ export default class GiftTabView extends Component {
 
     this.state = {
       routes: [
-        { key: 'user', title: 'User' },
-        { key: 'email', title: 'Email' }
+        { key: 'user', title: i18n.t('label.user') },
+        { key: 'email', title: i18n.t('label.email') }
       ],
       index: 0
     };

@@ -1,5 +1,9 @@
 {
   "name": "Name",
   "price": "Price",
-  "select_project": "Select Project"
+  "select_project": "Select Project",
+  "featured": "Featured",
+  "list": "List",
+  "price": "Price",
+  "country": "Country"
 }

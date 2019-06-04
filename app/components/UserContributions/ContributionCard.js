@@ -52,9 +52,9 @@ export default class ContributionCard extends React.Component {
     return isGift
       ? [
           <TextSpan>
-            {'Gifted on ' +
-              moment(new Date(plantDate)).format('DD MMM YYYY') +
-              ' to '}
+            {i18n.t('label.gifted_on_to', {
+              date: moment(new Date(plantDate)).format('DD MMM YYYY')
+            })}
           </TextSpan>,
           <TextSpan
             onPress={() =>
@@ -66,26 +66,30 @@ export default class ContributionCard extends React.Component {
             {givee}
           </TextSpan>
         ]
-      : 'Donated on ' + moment(new Date(plantDate)).format('DD MMM YYYY');
+      : i18n.t('label.donated_on', {
+          date: moment(new Date(plantDate)).format('DD MMM YYYY')
+        });
   }
 
   tpoLine(tpoName) {
-    return tpoName ? 'Planted by ' + tpoName : '';
+    return tpoName ? i18n.t('label.planted_by', { tpo: tpoName }) : '';
   }
 
   plantActionLine(plantDate, registrationDate) {
     return (
-      'Planted on ' +
-      moment(new Date(plantDate)).format('DD MMM YYYY') +
-      ', Added on ' +
-      moment(new Date(registrationDate)).format('DD MMM YYYY')
+      i18n.t('label.planted_on', {
+        date: moment(new Date(plantDate)).format('DD MMM YYYY')
+      }) +
+      i18n.t('label.added_on', {
+        date: moment(new Date(registrationDate)).format('DD MMM YYYY')
+      })
     );
   }
 
   dedicateActionLine = (isGift, givee, giveeSlug) => {
     return isGift
       ? [
-          <TextSpan>Dedicated to</TextSpan>,
+          <TextSpan>{i18n.t('label.dedicated_to')}</TextSpan>,
           <TextSpan
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
@@ -103,9 +107,9 @@ export default class ContributionCard extends React.Component {
     return redemptionCode && giver
       ? [
           <TextSpan>
-            {'Given on ' +
-              moment(new Date(redemptionDate)).format('DD MMM YYYY') +
-              ' by '}
+            {i18n.t('label.given_on_by', {
+              date: moment(new Date(redemptionDate)).format('DD MMM YYYY')
+            })}
           </TextSpan>,
           <TextSpan
             onPress={() =>
@@ -114,28 +118,33 @@ export default class ContributionCard extends React.Component {
               })
             }
           >
-            {givee}
+            {' ' + givee}
           </TextSpan>
         ]
       : redemptionCode
-        ? 'Redeemed on ' +
-          moment(new Date(redemptionDate)).format('DD MMM YYYY')
-        : 'Dedicated on ' +
-          moment(new Date(redemptionDate)).format('DD MMM YYYY') +
-          (givee
-            ? [
-                <TextSpan>{' by '}</TextSpan>,
-                <TextSpan
-                  onPress={() =>
-                    updateRoute(getLocalRoute('app_treecounter'), {
-                      treeCounterId: giveeSlug
-                    })
-                  }
-                >
-                  {givee}
-                </TextSpan>
-              ]
-            : '');
+        ? i18n.t('label.redeemed_on', {
+            date: moment(new Date(redemptionDate)).format('DD MMM YYYY')
+          })
+        : givee
+          ? [
+              <TextSpan>
+                {i18n.t('label.dedicated_on_by', {
+                  date: moment(new Date(redemptionDate)).format('DD MMM YYYY')
+                })}
+              </TextSpan>,
+              <TextSpan
+                onPress={() =>
+                  updateRoute(getLocalRoute('app_treecounter'), {
+                    treeCounterId: giveeSlug
+                  })
+                }
+              >
+                {' ' + givee}
+              </TextSpan>
+            ]
+          : i18n.t('label.dedicated_on', {
+              date: moment(new Date(redemptionDate)).format('DD MMM YYYY')
+            });
   }
 
   render() {

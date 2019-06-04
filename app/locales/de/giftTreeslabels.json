@@ -13,5 +13,8 @@
   "gift_trees_description": "Wählen Sie eine Person, für die Sie Bäume spenden möchten. Bäume, die Sie dann spenden, erscheinen sowohl im Baumzähler des Empfängers als auch in Ihrem eigenen. Wenn der Empfänger noch keinen Baumzähler hat, erhält er oder sie eine E-Mail-Einladung zum Mitmachen.",
   "gift_message": "Nachricht zum Geschenk (optional)",
   "support_user_trees": "{{user}} wird unterstützt, um {{count}}-Bäume zu pflanzen",
-  "gift_user_trees": "{{count}} Bäume werden {{user}} geschenkt"
+  "gift_user_trees": "{{count}} Bäume werden {{user}} geschenkt",
+  "gift_to": "Schenkung an",
+  "support_to": "Unterstützung für",
+  "gift_trees_to": "Schenke Bäume an {{user}}"
 }

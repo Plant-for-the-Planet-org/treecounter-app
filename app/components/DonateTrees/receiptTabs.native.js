@@ -28,8 +28,8 @@ export default class RecieptTabsView extends React.PureComponent {
 
     this.state = {
       routes: [
-        { key: 'individual', title: 'Individual' },
-        { key: 'company', title: 'Company' }
+        { key: 'individual', title: i18n.t('label.individual_name') },
+        { key: 'company', title: i18n.t('label.company') }
       ],
       index: 0
     };

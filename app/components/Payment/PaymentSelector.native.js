@@ -266,10 +266,10 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         ) : (
           <View style={{ flex: 1, alignItems: 'center' }}>
             <Text style={{ fontWeight: 'bold' }}>
-              Amount: {amount} {currency}
+              {i18n.t('label.amount')}: {amount} {currency}
             </Text>
             <Text style={{ fontWeight: 'bold' }}>
-              Trees: {context.treeCount}
+              {i18n.t('label.trees')}: {context.treeCount}
             </Text>
 
             <ScrollView>

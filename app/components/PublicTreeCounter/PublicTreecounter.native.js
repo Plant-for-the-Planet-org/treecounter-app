@@ -61,7 +61,9 @@ class PublicTreeCounter extends React.Component {
   onRegisterSupporter() {
     this.props.supportTreecounterAction(this.props.treecounter);
     updateRoute('app_donateTrees', this.props.navigation, 0, {
-      titleParam: 'Support Trees To ' + this.props.treecounter.displayName
+      titleParam: i18n.t('label.support_trees_to', {
+        user: this.props.treecounter.displayName
+      })
     });
   }
 
@@ -234,7 +236,7 @@ class PublicTreeCounter extends React.Component {
                 <View style={stylesPublicPage.tableHeader}>
                   <Text style={stylesPublicPage.firstColumn}>Contributor</Text>
                   <Text style={stylesPublicPage.secondColumn}>
-                    Planted Trees
+                    {i18n.t('label.plantedTrees')}
                   </Text>
                   <Text style={stylesPublicPage.thirdColumn}>Target</Text>
                   <View style={stylesPublicPage.fourthColumn} />

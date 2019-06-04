@@ -37,7 +37,7 @@ class PlantedProgressBar extends React.Component {
               {delimitNumbers(countPlanted)}
             </div>
             <div className="treePlantedtextTrees">
-              {i18n.t('label.trees')} Planted
+              {i18n.t('label.trees_planted')}
             </div>
           </div>
         </div>

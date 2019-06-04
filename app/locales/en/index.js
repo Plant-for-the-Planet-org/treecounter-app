@@ -28,6 +28,7 @@ import signUplabels from './signUplabels.json';
 import targetlabels from './targetlabels.json';
 import tpoProjectlabels from './tpoProjectlabels.json';
 import treecounterGraphicslabels from './treecounterGraphicslabels.json';
+import trillionlabels from './trillionlabels.json';
 import userContributionslabels from './userContributionslabels.json';
 import welcomeScreenlabels from './welcomeScreenlabels.json';
 import widgetShareLabels from './widgetShareLabels.json';
@@ -63,6 +64,7 @@ export default {
   ...targetlabels,
   ...tpoProjectlabels,
   ...treecounterGraphicslabels,
+  ...trillionlabels,
   ...userContributionslabels,
   ...welcomeScreenlabels,
   ...widgetShareLabels

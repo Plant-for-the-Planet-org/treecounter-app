@@ -25,7 +25,9 @@ class CompetitionParticipant extends React.Component {
     this.props.supportTreecounterAction(supportObject);
     updateRoute('app_donateTrees', this.props.navigation, 0, {
       titleParam:
-        'Support Trees To ' + this.props.competitor.treecounterDisplayName
+        i18n.t('label.support_to') +
+        ' ' +
+        this.props.competitor.treecounterDisplayName
     });
   }
   plantButton() {
@@ -101,7 +103,7 @@ class CompetitionParticipant extends React.Component {
             {this.props.type === 'participants' ||
             this.props.type === 'invite' ? (
               <Text style={styles.topCompetitorScoreText}>
-                {this.props.competitor.score} Planted
+                {this.props.competitor.score} {i18n.t('label.planted')}
               </Text>
             ) : this.props.type === 'request_join' ? (
               <View style={styles.confirm_delete_button}>

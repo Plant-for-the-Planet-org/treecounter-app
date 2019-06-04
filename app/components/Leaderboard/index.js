@@ -77,8 +77,12 @@ export default class Leaderboard extends Component {
                 ? queryResultSelfData.caption
                 : '   ' + categoryInfo.categoryHeader[sectionInfo.section]}
             </div>
-            <div className="table-header-item planted">Planted</div>
-            <div className="table-header-item other">Target</div>
+            <div className="table-header-item planted">
+              {i18n.t('label.planted')}
+            </div>
+            <div className="table-header-item other">
+              {i18n.t('label.target')}
+            </div>
           </div>
           <div className="table-body">
             {this.props.queryResult.map((d, index) => {
@@ -92,11 +96,15 @@ export default class Leaderboard extends Component {
                     </Link>
                   </div>
                   <div className="table-col other">
-                    <div className="table-col-phone-header">Planted</div>
+                    <div className="table-col-phone-header">
+                      {i18n.t('label.planted')}
+                    </div>
                     <span>{delimitNumbers(parseInt(d.planted))}</span>
                   </div>
                   <div className="table-col other">
-                    <div className="table-col-phone-header">Target</div>
+                    <div className="table-col-phone-header">
+                      {i18n.t('label.target')}
+                    </div>
                     <span>{delimitNumbers(parseInt(d.target))}</span>
                   </div>
                 </div>

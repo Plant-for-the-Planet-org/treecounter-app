@@ -30,7 +30,7 @@ export default class UserContributions extends React.Component {
           key: 'map',
           title: 'Map'
         },
-        { key: 'list', title: 'List' }
+        { key: 'list', title: i18n.t('label.list') }
       ]
     };
   }

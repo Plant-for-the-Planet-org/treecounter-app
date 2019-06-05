@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import { AppStoreLogo } from '../assets';
-import i18n from '../../locales/i18n.js';
+import i18n from '../locales/i18n.js';
 
 export class DownloadAppModal extends Component {
   redirectUser() {

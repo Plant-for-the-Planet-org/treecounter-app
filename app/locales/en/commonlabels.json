@@ -13,5 +13,7 @@
   "searchshort": "Search",
   "user": "User",
   "list": "List",
-  "map": "Map"
+  "map": "Map",
+  "OR": "OR",
+  "continue_on_site": "Continue using the site"
 }

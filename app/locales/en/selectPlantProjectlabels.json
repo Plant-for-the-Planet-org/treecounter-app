@@ -5,5 +5,7 @@
   "featured": "Featured",
   "list": "List",
   "price": "Price",
-  "country": "Country"
+  "country": "Country",
+  "select_by_country": "Sort by Country",
+  "cost_per_tree": "Cost Per Tree"
 }

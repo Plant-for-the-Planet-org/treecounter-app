@@ -1,1 +1,1 @@
-export const allowedUrls = ['t', 'home', 'login'];
+export const allowedUrls = ['t', 'home', 'login', 'competition'];

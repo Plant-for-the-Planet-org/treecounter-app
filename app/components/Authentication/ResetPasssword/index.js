@@ -32,7 +32,7 @@ class ResetPassword extends Component {
                 event.preventDefault();
               }}
             >
-              {i18n.t('label.set')} {i18n.t('label.password')}
+              {i18n.t('label.set_password')}}
             </PrimaryButton>
           </form>
         </CardLayout>

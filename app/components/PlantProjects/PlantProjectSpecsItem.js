@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 
 import { delimitNumbers } from '../../utils/utils';
+import i18n from '../../locales/i18n';
 
 const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
   return (
@@ -17,8 +18,7 @@ const PlantProjectSpecsItem = ({ label, value, icon, rightIcon }) => {
 
           <ReactTooltip id="survival-rate" effect="solid" type="dark">
             <span className="tooltip-text">
-              Percentage of planted trees that survive the first year after
-              planting.
+              {i18n.t('label.survival_explaination')}
             </span>
           </ReactTooltip>
         </div>

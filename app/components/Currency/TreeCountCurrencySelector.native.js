@@ -94,7 +94,9 @@ class TreeCountCurrencySelector extends React.PureComponent {
                   {' '}
                   {i18n.t('label.trees')}
                 </Text>{' '}
-                {i18n.t('label.gift_to')} {this.props.giftTreeCounterName}
+                {i18n.t('label.gift_to', {
+                  name: this.props.giftTreeCounterName
+                })}
               </Text>
               {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
             </View>
@@ -113,8 +115,12 @@ class TreeCountCurrencySelector extends React.PureComponent {
                   {' '}
                   {i18n.t('label.trees')}
                 </Text>{' '}
-                {i18n.t('label.support_to')}{' '}
-                {this.props.supportTreecounter.displayName}
+                {
+                  (i18n.t('label.support_to'),
+                  {
+                    name: this.props.supportTreecounter.displayName
+                  })
+                }
               </Text>
               {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
             </View>

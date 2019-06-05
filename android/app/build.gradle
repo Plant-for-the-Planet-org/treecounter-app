@@ -148,6 +148,7 @@ android {
 }
 
 dependencies {
+    implementation project(':bugsnag-react-native')
     implementation project(':react-native-youtube')
     //compile project(':tipsi-stripe')
     implementation project(':react-native-device-info')

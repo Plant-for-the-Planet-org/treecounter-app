@@ -17,13 +17,15 @@ import {
 } from '../../selectors';
 import CompetitionProgressBar from './CompetitionProgressBar';
 import { compCalendar, email } from '../../assets';
-import i18n from '../../locales/i18n';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import CompetitionTopCompetitor from './CompetitionTopCompetitor.native';
 import CompetitionParticipant from './CompetitionParticipant.native';
 import searchBarStyles from '../../styles/header/search_bar.native';
 import SearchUser from '../Challenge/Tabs/SearchUser.native';
 import moment from 'moment';
+import 'moment/min/locales';
+import i18n from '../../locales/i18n.js';
+import { getDateFromMySQL } from '../../helpers/utils';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -32,6 +34,7 @@ class CompetitionFull extends React.Component {
   constructor(props) {
     super(props);
     this.onSearchResultClick = this.onSearchResultClick.bind(this);
+    moment.locale(i18n.language);
   }
 
   componentWillReceiveProps(nextProps) {}
@@ -233,9 +236,9 @@ class CompetitionFull extends React.Component {
                       <Text style={snippetStyles.bottomText}>
                         {i18n.t('label.ends')}{' '}
                         {competitionDetail && competitionDetail.endDate
-                          ? moment(new Date(competitionDetail.endDate)).format(
-                              'MMM DD, YYYY'
-                            )
+                          ? moment(
+                              getDateFromMySQL(competitionDetail.endDate)
+                            ).format('MMM DD, YYYY')
                           : ''}
                       </Text>
                     </View>

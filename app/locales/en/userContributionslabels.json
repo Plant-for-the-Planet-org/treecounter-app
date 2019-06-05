@@ -34,5 +34,6 @@
   "given_on_by": "Given on {{date}} by",
   "redeemed_on": "Redeemed on {{date}}",
   "dedicated_on": "Dedicated on {{date}}",
-  "dedicated_on_by": "Dedicated on {{date}} by"
+  "dedicated_on_by": "Dedicated on {{date}} by",
+  "register_new_trees": "Register new trees"
 }

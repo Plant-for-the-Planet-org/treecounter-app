@@ -172,14 +172,15 @@ class EditUserProfileContainer extends React.Component {
         .then(data => {
           if (profileType == 'password') {
             this.setState({ showPasswordDialog: true });
+          } else {
+            NotificationManager.success(
+              `${profileTypeLabel[profileType] || profileType} ${i18n.t(
+                'label.updated_successful'
+              )}`,
+              i18n.t('label.success_title'),
+              5000
+            );
           }
-          NotificationManager.success(
-            `${profileTypeLabel[profileType] || profileType} ${i18n.t(
-              'label.updated_successful'
-            )}`,
-            i18n.t('label.success_title'),
-            5000
-          );
         })
         .catch(error => {
           NotificationManager.error(

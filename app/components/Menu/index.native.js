@@ -96,7 +96,27 @@ export default class Menu extends Component {
     let urlBreak = url.split('/');
     //console.log(urlBreak);
     const { navigation } = this.props;
-    updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0);
+    if (urlBreak.indexOf('account-activate') !== -1) {
+      setTimeout(
+        () =>
+          updateRoute(
+            '/' + urlBreak[urlBreak.length - 2],
+            // '/' +
+            // urlBreak[urlBreak.length - 1],
+            navigation,
+            0,
+            {
+              token: urlBreak[urlBreak.length - 1]
+            }
+          ),
+        0
+      );
+    } else {
+      setTimeout(
+        () => updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0),
+        0
+      );
+    }
   };
 
   //TODO hkurra
@@ -139,7 +159,9 @@ export default class Menu extends Component {
               style={styles.profileLogImageStyle}
               imageStyle={{ width: 60, height: 60, borderRadius: 60 / 2 }}
             />
-            <Text style={styles.profileTextHeading}>{'Guest'}</Text>
+            <Text style={styles.profileTextHeading}>
+              {i18n.t('label.guest')}
+            </Text>
             <LargeMenuItem
               style={{ paddingLeft: 0 }}
               onPress={this.onPressMenu.bind(this, { uri: 'app_login' })}

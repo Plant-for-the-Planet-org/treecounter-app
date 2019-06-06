@@ -19,6 +19,8 @@ import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList';
 
+import i18n from '../../locales/i18n';
+
 const Layout = {
   window: {
     width: Dimensions.get('window').width
@@ -37,8 +39,8 @@ export default class UserHome extends Component {
     this.state = {
       svgData: svgData,
       routes: [
-        { key: 'home', title: 'Home' },
-        { key: 'my-trees', title: 'My Trees' }
+        { key: 'home', title: i18n.t('label.home') },
+        { key: 'my-trees', title: i18n.t('label.my_trees') }
       ],
       index: 0
     };

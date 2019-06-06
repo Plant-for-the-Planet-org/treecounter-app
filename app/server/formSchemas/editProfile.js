@@ -684,6 +684,10 @@ export default {
             type: 'string',
             title: 'label.current_password',
             icon: null,
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
             help: null,
             propertyOrder: 1
           },
@@ -1442,6 +1446,10 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
             icon: null,
             help: null,
             propertyOrder: 1
@@ -2168,6 +2176,10 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
             icon: null,
             help: null,
             propertyOrder: 1
@@ -2908,6 +2920,10 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
             icon: null,
             help: null,
             propertyOrder: 1
@@ -3648,6 +3664,10 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
             icon: null,
             help: null,
             propertyOrder: 1
@@ -4383,6 +4403,10 @@ export default {
           currentPassword: {
             type: 'string',
             title: 'label.current_password',
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
             icon: null,
             help: null,
             propertyOrder: 1

@@ -190,7 +190,7 @@ export default class Leaderboard extends Component {
         categoryInfo.categoryKeys &&
         categoryInfo.categoryKeys[0]);
     return (
-      <View style={[styles.leaderBoardContainer, { paddingBottom: 72 }]}>
+      <View style={[styles.leaderBoardContainer]}>
         <CategoryTypes
           categoryInfo={this.props.categoryInfo}
           sectionInfo={this.props.sectionInfo}

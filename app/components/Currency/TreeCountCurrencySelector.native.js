@@ -90,8 +90,11 @@ class TreeCountCurrencySelector extends React.PureComponent {
             >
               <Text numberOfLines={1} ellipsizeMode={'tail'}>
                 <Text>{this.state.selectedTreeCount}</Text>
-                <Text style={styles.selectedProjectCol}> Trees</Text> Gift to{' '}
-                {this.props.giftTreeCounterName}
+                <Text style={styles.selectedProjectCol}>
+                  {' '}
+                  {i18n.t('label.trees')}
+                </Text>{' '}
+                {i18n.t('label.gift_to')} {this.props.giftTreeCounterName}
               </Text>
               {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
             </View>
@@ -106,7 +109,11 @@ class TreeCountCurrencySelector extends React.PureComponent {
             >
               <Text numberOfLines={1} ellipsizeMode={'tail'}>
                 <Text>{this.state.selectedTreeCount}</Text>
-                <Text style={styles.selectedProjectCol}> Trees</Text> Support to{' '}
+                <Text style={styles.selectedProjectCol}>
+                  {' '}
+                  {i18n.t('label.trees')}
+                </Text>{' '}
+                {i18n.t('label.support_to')}{' '}
                 {this.props.supportTreecounter.displayName}
               </Text>
               {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
@@ -114,12 +121,14 @@ class TreeCountCurrencySelector extends React.PureComponent {
           ) : (
             <View style={styles.selectedProjectRow}>
               <Text>{this.state.selectedTreeCount}</Text>
-              <Text style={styles.selectedProjectCol}>Trees</Text>
+              <Text style={styles.selectedProjectCol}>
+                {i18n.t('label.trees')}
+              </Text>
             </View>
           )}
 
           <View style={styles.selectedProjectRow}>
-            <Text>Amount : </Text>
+            <Text>{i18n.t('label.amount')} : </Text>
             <Text style={styles.selectedProjectCol}>
               {this.state.selectedAmount}
             </Text>

@@ -30,7 +30,7 @@ class ProfilePickerModal extends Component {
     );
   }
   suggestionClicked(event, value) {
-    this.setState({ selectedSuggestion: value.suggestion.id });
+    this.setState({ selectedSuggestion: value.suggestion.treecounterId });
   }
 }
 

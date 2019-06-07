@@ -3,7 +3,7 @@
   "signUp": "Registrieren ",
   "home": "Startseite",
   "search": "Geben Sie einen Namen oder Wettbewerb ein",
-  "search_user": "Geben Sie einen Namen ein ...",
+  "enter_a_user": "Geben Sie einen Namen ein ...",
   "placeholder_value": "Gib einen Namen ein ...",
   "welcome_hi": "Hallo {{user}}",
   "edit_profile": "Profil bearbeiten",

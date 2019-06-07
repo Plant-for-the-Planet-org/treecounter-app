@@ -63,7 +63,7 @@ export default class ChallengeCard extends React.Component {
                   <Text style={challengesStyle.textStyle}>
                     {direction === 'target'
                       ? i18n.t('label.from') + ' '
-                      : i18n.t('label.to') + ' '}{' '}
+                      : i18n.t('label.to') + ' '}
                     {fullname}
                   </Text>
                 </View>
@@ -115,7 +115,11 @@ export default class ChallengeCard extends React.Component {
                 textStyle={challengesStyle.moreButtonTextStyle}
                 onClick={() => {}}
               >
-                {status && status.toUpperCase()}
+                {status === 'pending'
+                  ? i18n.t('label.sent')
+                  : status === 'active'
+                    ? i18n.t('label.accepted')
+                    : i18n.t('label.declined')}
               </PrimaryButton>
             </View>
           )}

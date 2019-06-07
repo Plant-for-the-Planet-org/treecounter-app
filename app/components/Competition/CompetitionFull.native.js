@@ -194,7 +194,7 @@ class CompetitionFull extends React.Component {
                       numberOfLines={1}
                       style={snippetStyles.project_teaser__contentByText}
                     >
-                      {i18n.t('label.by')}{' '}
+                      {i18n.t('label.by_a_name')}{' '}
                       {competitionDetail && competitionDetail.ownerName}
                     </Text>
                   </View>

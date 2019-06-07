@@ -165,7 +165,7 @@ class CompetitionSnippet extends React.Component {
                   numberOfLines={1}
                   style={styles.project_teaser__contentByText}
                 >
-                  {i18n.t('label.by')}{' '}
+                  {i18n.t('label.by_a_name')}{' '}
                   {this.props.competition && this.props.competition.ownerName}
                 </Text>
               </View>

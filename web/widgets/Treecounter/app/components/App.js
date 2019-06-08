@@ -74,7 +74,13 @@ export default class App extends Component {
   }
 
   render() {
-    const { serverName, baseUrl, treecounter, projectId } = this.props;
+    const {
+      serverName,
+      baseUrl,
+      treecounter,
+      projectId,
+      isStandardTreecounter
+    } = this.props;
     const { userProfile, displayName: caption } = treecounter;
     const { type: profileType, image: logo } = userProfile;
     const headerProps = {
@@ -102,7 +108,7 @@ export default class App extends Component {
         <style>{`:host {all: initial;}`}</style>
         <div className="widget-container" id={'widget-container'}>
           <link href="treecounterwidget.css" rel="stylesheet" />
-          <link href={`${serverName}/treecounterwidget.css`} rel="stylesheet" />
+          {/* <link href={`${serverName}/treecounterwidget.css`} rel="stylesheet" /> */}
           {/* Apply CSS hooks here */}
           <style>{style}</style>
           {/* Apply React Tooltip Library CSS */}
@@ -115,7 +121,7 @@ export default class App extends Component {
                   className={'pftp-widget-img'}
                 />
               )}
-              {this.props.isStandardTreecounter && (
+              {isStandardTreecounter && (
                 <div className="tree-counter-header">
                   <TreecounterHeader
                     {...headerProps}
@@ -141,7 +147,7 @@ export default class App extends Component {
           <div className="canvasContainer flex-column">
             <SvgContainer {...this.state.svgData} />
             <TreecounterGraphicsText
-              trillion={false}
+              trillion={isStandardTreecounter ? false : true}
               onToggle={toggleVal => this.updateSvg(toggleVal)}
               treecounterData={this.state.svgData}
             />

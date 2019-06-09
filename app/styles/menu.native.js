@@ -17,19 +17,28 @@ export default (menuStyles = EStyleSheet.create({
     width: '100%',
     marginTop: 10
   },
+  topProfileContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 0.5,
+    width: '100%',
+    marginTop: 10
+  },
   burgerMenuImageStyle: {
-    width: 30,
-    height: 30,
-    marginLeft: 20
+    marginLeft: 10
   },
   profileImageStyle: {
-    width: 50,
-    height: 50
+    marginTop: 40
+  },
+  profileLogImageStyle: {
+    marginTop: 40
   },
   profileTextHeading: {
     fontSize: 13,
     color: '$textColor',
-    fontWeight: '600'
+    fontWeight: '600',
+    marginTop: 5
   },
   profileText: {
     fontSize: 13,
@@ -37,5 +46,8 @@ export default (menuStyles = EStyleSheet.create({
   },
   centerMenu: {
     marginTop: 22
+  },
+  sideNavigationActionMenuContainer: {
+    width: '100%'
   }
 }));

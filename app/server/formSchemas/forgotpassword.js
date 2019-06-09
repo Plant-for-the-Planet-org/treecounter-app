@@ -6,6 +6,7 @@ export default {
       type: 'string',
       title: 'label.email',
       icon: 'email',
+      help: null,
       propertyOrder: 1
     }
   },

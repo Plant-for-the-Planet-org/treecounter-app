@@ -6,28 +6,44 @@ export default {
       name: {
         type: 'string',
         title: 'label.company_or_orga_name',
-        attr: { maxlength: 255 },
+        attr: {
+          maxlength: 255
+        },
+        icon: null,
+        help: null,
         maxLength: 255,
         propertyOrder: 1
       },
       address: {
         type: 'string',
         title: 'label.address',
-        attr: { maxlength: 255 },
+        attr: {
+          maxlength: 255
+        },
+        icon: null,
+        help: null,
         maxLength: 255,
         propertyOrder: 2
       },
       zipCode: {
         type: 'string',
         title: 'label.zipCode',
-        attr: { maxlength: 50 },
+        attr: {
+          maxlength: 50
+        },
+        icon: null,
+        help: null,
         maxLength: 50,
         propertyOrder: 3
       },
       city: {
         type: 'string',
         title: 'label.city',
-        attr: { maxlength: 150 },
+        attr: {
+          maxlength: 150
+        },
+        icon: null,
+        help: null,
         maxLength: 150,
         propertyOrder: 4
       },
@@ -291,7 +307,7 @@ export default {
         ],
         enum_titles: [
           'Afghanistan',
-          '\u00c5land Islands',
+          'Åland Islands',
           'Albania',
           'Algeria',
           'American Samoa',
@@ -347,10 +363,10 @@ export default {
           'Congo - Kinshasa',
           'Cook Islands',
           'Costa Rica',
-          'C\u00f4te d\u2019Ivoire',
+          'Côte d’Ivoire',
           'Croatia',
           'Cuba',
-          'Cura\u00e7ao',
+          'Curaçao',
           'Cyprus',
           'Czechia',
           'Denmark',
@@ -473,13 +489,13 @@ export default {
           'Portugal',
           'Puerto Rico',
           'Qatar',
-          'R\u00e9union',
+          'Réunion',
           'Romania',
           'Russia',
           'Rwanda',
           'Samoa',
           'San Marino',
-          'S\u00e3o Tom\u00e9 & Pr\u00edncipe',
+          'São Tomé & Príncipe',
           'Saudi Arabia',
           'Senegal',
           'Serbia',
@@ -497,7 +513,7 @@ export default {
           'South Sudan',
           'Spain',
           'Sri Lanka',
-          'St. Barth\u00e9lemy',
+          'St. Barthélemy',
           'St. Helena',
           'St. Kitts & Nevis',
           'St. Lucia',
@@ -548,49 +564,69 @@ export default {
         ],
         type: 'string',
         title: 'label.country',
-        attr: { maxlength: 2 },
+        attr: {
+          maxlength: 2
+        },
+        icon: null,
+        help: null,
         propertyOrder: 5
       },
       email: {
         type: 'string',
         title: 'label.email',
-        attr: { maxlength: 100 },
+        attr: {
+          maxlength: 100
+        },
         widget: 'email',
         icon: 'email',
+        help: null,
         maxLength: 100,
         propertyOrder: 6
       },
       password: {
-        title: 'password',
+        title: null,
         type: 'object',
         properties: {
           first: {
             type: 'string',
             title: 'label.password',
-            attr: { class: 'password-field' },
+            attr: {
+              class: 'password-field'
+            },
             widget: 'password',
             icon: 'key',
+            help: null,
             propertyOrder: 1
           },
           second: {
             type: 'string',
             title: 'label.password_repeat',
-            attr: { class: 'password-field' },
+            attr: {
+              class: 'password-field'
+            },
             widget: 'password',
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
         required: ['first', 'second'],
+        icon: null,
+        help: null,
         propertyOrder: 7
       },
       mayPublish: {
         type: 'boolean',
         title: 'label.mayPublish',
+        icon: null,
+        help: null,
         propertyOrder: 8
       },
       mayContact: {
         type: 'boolean',
         title: 'label.mayContact',
+        icon: null,
+        help: null,
         propertyOrder: 9
       }
     },
@@ -613,14 +649,22 @@ export default {
       firstname: {
         type: 'string',
         title: 'label.firstname',
-        attr: { maxlength: 255 },
+        attr: {
+          maxlength: 255
+        },
+        icon: null,
+        help: null,
         maxLength: 255,
         propertyOrder: 1
       },
       lastname: {
         type: 'string',
         title: 'label.lastname',
-        attr: { maxlength: 255 },
+        attr: {
+          maxlength: 255
+        },
+        icon: null,
+        help: null,
         maxLength: 255,
         propertyOrder: 2
       },
@@ -884,7 +928,7 @@ export default {
         ],
         enum_titles: [
           'Afghanistan',
-          '\u00c5land Islands',
+          'Åland Islands',
           'Albania',
           'Algeria',
           'American Samoa',
@@ -940,10 +984,10 @@ export default {
           'Congo - Kinshasa',
           'Cook Islands',
           'Costa Rica',
-          'C\u00f4te d\u2019Ivoire',
+          'Côte d’Ivoire',
           'Croatia',
           'Cuba',
-          'Cura\u00e7ao',
+          'Curaçao',
           'Cyprus',
           'Czechia',
           'Denmark',
@@ -1066,13 +1110,13 @@ export default {
           'Portugal',
           'Puerto Rico',
           'Qatar',
-          'R\u00e9union',
+          'Réunion',
           'Romania',
           'Russia',
           'Rwanda',
           'Samoa',
           'San Marino',
-          'S\u00e3o Tom\u00e9 & Pr\u00edncipe',
+          'São Tomé & Príncipe',
           'Saudi Arabia',
           'Senegal',
           'Serbia',
@@ -1090,7 +1134,7 @@ export default {
           'South Sudan',
           'Spain',
           'Sri Lanka',
-          'St. Barth\u00e9lemy',
+          'St. Barthélemy',
           'St. Helena',
           'St. Kitts & Nevis',
           'St. Lucia',
@@ -1141,49 +1185,69 @@ export default {
         ],
         type: 'string',
         title: 'label.country',
-        attr: { maxlength: 2 },
+        attr: {
+          maxlength: 2
+        },
+        icon: null,
+        help: null,
         propertyOrder: 3
       },
       email: {
         type: 'string',
         title: 'label.email',
-        attr: { maxlength: 100 },
+        attr: {
+          maxlength: 100
+        },
         widget: 'email',
         icon: 'email',
+        help: null,
         maxLength: 100,
         propertyOrder: 4
       },
       password: {
-        title: 'password',
+        title: null,
         type: 'object',
         properties: {
           first: {
             type: 'string',
             title: 'label.password',
-            attr: { class: 'password-field' },
+            attr: {
+              class: 'password-field'
+            },
             widget: 'password',
             icon: 'key',
+            help: null,
             propertyOrder: 1
           },
           second: {
             type: 'string',
             title: 'label.password_repeat',
-            attr: { class: 'password-field' },
+            attr: {
+              class: 'password-field'
+            },
             widget: 'password',
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
         required: ['first', 'second'],
+        icon: null,
+        help: null,
         propertyOrder: 5
       },
       mayPublish: {
         type: 'boolean',
         title: 'label.mayPublish',
+        icon: null,
+        help: null,
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
         title: 'label.mayContact',
+        icon: null,
+        help: null,
         propertyOrder: 7
       }
     },
@@ -1198,16 +1262,13 @@ export default {
       name: {
         type: 'string',
         title: 'label.company_or_orga_name',
-        attr: { maxlength: 255 },
+        attr: {
+          maxlength: 255
+        },
+        icon: null,
+        help: null,
         maxLength: 255,
         propertyOrder: 1
-      },
-      subType: {
-        enum: ['Other'],
-        enum_titles: ['0'],
-        type: 'string',
-        title: 'subType',
-        propertyOrder: 2
       },
       country: {
         enum: [
@@ -1469,7 +1530,7 @@ export default {
         ],
         enum_titles: [
           'Afghanistan',
-          '\u00c5land Islands',
+          'Åland Islands',
           'Albania',
           'Algeria',
           'American Samoa',
@@ -1525,10 +1586,10 @@ export default {
           'Congo - Kinshasa',
           'Cook Islands',
           'Costa Rica',
-          'C\u00f4te d\u2019Ivoire',
+          'Côte d’Ivoire',
           'Croatia',
           'Cuba',
-          'Cura\u00e7ao',
+          'Curaçao',
           'Cyprus',
           'Czechia',
           'Denmark',
@@ -1651,13 +1712,13 @@ export default {
           'Portugal',
           'Puerto Rico',
           'Qatar',
-          'R\u00e9union',
+          'Réunion',
           'Romania',
           'Russia',
           'Rwanda',
           'Samoa',
           'San Marino',
-          'S\u00e3o Tom\u00e9 & Pr\u00edncipe',
+          'São Tomé & Príncipe',
           'Saudi Arabia',
           'Senegal',
           'Serbia',
@@ -1675,7 +1736,7 @@ export default {
           'South Sudan',
           'Spain',
           'Sri Lanka',
-          'St. Barth\u00e9lemy',
+          'St. Barthélemy',
           'St. Helena',
           'St. Kitts & Nevis',
           'St. Lucia',
@@ -1726,49 +1787,69 @@ export default {
         ],
         type: 'string',
         title: 'label.country',
-        attr: { maxlength: 2 },
+        attr: {
+          maxlength: 2
+        },
+        icon: null,
+        help: null,
         propertyOrder: 3
       },
       email: {
         type: 'string',
         title: 'label.email',
-        attr: { maxlength: 100 },
+        attr: {
+          maxlength: 100
+        },
         widget: 'email',
         icon: 'email',
+        help: null,
         maxLength: 100,
         propertyOrder: 4
       },
       password: {
-        title: 'password',
+        title: null,
         type: 'object',
         properties: {
           first: {
             type: 'string',
             title: 'label.password',
-            attr: { class: 'password-field' },
+            attr: {
+              class: 'password-field'
+            },
             widget: 'password',
             icon: 'key',
+            help: null,
             propertyOrder: 1
           },
           second: {
             type: 'string',
             title: 'label.password_repeat',
-            attr: { class: 'password-field' },
+            attr: {
+              class: 'password-field'
+            },
             widget: 'password',
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
         required: ['first', 'second'],
+        icon: null,
+        help: null,
         propertyOrder: 5
       },
       mayPublish: {
         type: 'boolean',
         title: 'label.mayPublish',
+        icon: null,
+        help: null,
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
         title: 'label.mayContact',
+        icon: null,
+        help: null,
         propertyOrder: 7
       }
     },
@@ -1783,7 +1864,11 @@ export default {
       name: {
         type: 'string',
         title: 'label.company_or_orga_name',
-        attr: { maxlength: 255 },
+        attr: {
+          maxlength: 255
+        },
+        icon: null,
+        help: null,
         maxLength: 255,
         propertyOrder: 1
       },
@@ -1796,7 +1881,9 @@ export default {
         ],
         enum_titles: ['Primary', 'Secondary', 'Higher', 'Other'],
         type: 'string',
-        title: 'subType',
+        title: null,
+        icon: null,
+        help: null,
         propertyOrder: 2
       },
       country: {
@@ -2059,7 +2146,7 @@ export default {
         ],
         enum_titles: [
           'Afghanistan',
-          '\u00c5land Islands',
+          'Åland Islands',
           'Albania',
           'Algeria',
           'American Samoa',
@@ -2115,10 +2202,10 @@ export default {
           'Congo - Kinshasa',
           'Cook Islands',
           'Costa Rica',
-          'C\u00f4te d\u2019Ivoire',
+          'Côte d’Ivoire',
           'Croatia',
           'Cuba',
-          'Cura\u00e7ao',
+          'Curaçao',
           'Cyprus',
           'Czechia',
           'Denmark',
@@ -2241,13 +2328,13 @@ export default {
           'Portugal',
           'Puerto Rico',
           'Qatar',
-          'R\u00e9union',
+          'Réunion',
           'Romania',
           'Russia',
           'Rwanda',
           'Samoa',
           'San Marino',
-          'S\u00e3o Tom\u00e9 & Pr\u00edncipe',
+          'São Tomé & Príncipe',
           'Saudi Arabia',
           'Senegal',
           'Serbia',
@@ -2265,7 +2352,7 @@ export default {
           'South Sudan',
           'Spain',
           'Sri Lanka',
-          'St. Barth\u00e9lemy',
+          'St. Barthélemy',
           'St. Helena',
           'St. Kitts & Nevis',
           'St. Lucia',
@@ -2316,49 +2403,69 @@ export default {
         ],
         type: 'string',
         title: 'label.country',
-        attr: { maxlength: 2 },
+        attr: {
+          maxlength: 2
+        },
+        icon: null,
+        help: null,
         propertyOrder: 3
       },
       email: {
         type: 'string',
         title: 'label.email',
-        attr: { maxlength: 100 },
+        attr: {
+          maxlength: 100
+        },
         widget: 'email',
         icon: 'email',
+        help: null,
         maxLength: 100,
         propertyOrder: 4
       },
       password: {
-        title: 'password',
+        title: null,
         type: 'object',
         properties: {
           first: {
             type: 'string',
             title: 'label.password',
-            attr: { class: 'password-field' },
+            attr: {
+              class: 'password-field'
+            },
             widget: 'password',
             icon: 'key',
+            help: null,
             propertyOrder: 1
           },
           second: {
             type: 'string',
             title: 'label.password_repeat',
-            attr: { class: 'password-field' },
+            attr: {
+              class: 'password-field'
+            },
             widget: 'password',
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
         required: ['first', 'second'],
+        icon: null,
+        help: null,
         propertyOrder: 5
       },
       mayPublish: {
         type: 'boolean',
         title: 'label.mayPublish',
+        icon: null,
+        help: null,
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
         title: 'label.mayContact',
+        icon: null,
+        help: null,
         propertyOrder: 7
       }
     },
@@ -2373,20 +2480,21 @@ export default {
       name: {
         type: 'string',
         title: 'label.company_or_orga_name',
-        attr: { maxlength: 255 },
+        attr: {
+          maxlength: 255
+        },
+        icon: null,
+        help: null,
         maxLength: 255,
         propertyOrder: 1
       },
       subType: {
-        enum: [
-          'organization-non-profit',
-          'organization-service_club',
-          'organization-non-profit',
-          'organization-other'
-        ],
+        enum: ['0', '1', '2', '3'],
         enum_titles: ['Non Profit', 'Service Club', 'Political Party', 'Other'],
         type: 'string',
-        title: 'subType',
+        title: null,
+        icon: null,
+        help: null,
         propertyOrder: 2
       },
       country: {
@@ -2649,7 +2757,7 @@ export default {
         ],
         enum_titles: [
           'Afghanistan',
-          '\u00c5land Islands',
+          'Åland Islands',
           'Albania',
           'Algeria',
           'American Samoa',
@@ -2705,10 +2813,10 @@ export default {
           'Congo - Kinshasa',
           'Cook Islands',
           'Costa Rica',
-          'C\u00f4te d\u2019Ivoire',
+          'Côte d’Ivoire',
           'Croatia',
           'Cuba',
-          'Cura\u00e7ao',
+          'Curaçao',
           'Cyprus',
           'Czechia',
           'Denmark',
@@ -2831,13 +2939,13 @@ export default {
           'Portugal',
           'Puerto Rico',
           'Qatar',
-          'R\u00e9union',
+          'Réunion',
           'Romania',
           'Russia',
           'Rwanda',
           'Samoa',
           'San Marino',
-          'S\u00e3o Tom\u00e9 & Pr\u00edncipe',
+          'São Tomé & Príncipe',
           'Saudi Arabia',
           'Senegal',
           'Serbia',
@@ -2855,7 +2963,7 @@ export default {
           'South Sudan',
           'Spain',
           'Sri Lanka',
-          'St. Barth\u00e9lemy',
+          'St. Barthélemy',
           'St. Helena',
           'St. Kitts & Nevis',
           'St. Lucia',
@@ -2906,49 +3014,69 @@ export default {
         ],
         type: 'string',
         title: 'label.country',
-        attr: { maxlength: 2 },
+        attr: {
+          maxlength: 2
+        },
+        icon: null,
+        help: null,
         propertyOrder: 3
       },
       email: {
         type: 'string',
         title: 'label.email',
-        attr: { maxlength: 100 },
+        attr: {
+          maxlength: 100
+        },
         widget: 'email',
         icon: 'email',
+        help: null,
         maxLength: 100,
         propertyOrder: 4
       },
       password: {
-        title: 'password',
+        title: null,
         type: 'object',
         properties: {
           first: {
             type: 'string',
             title: 'label.password',
-            attr: { class: 'password-field' },
+            attr: {
+              class: 'password-field'
+            },
             widget: 'password',
             icon: 'key',
+            help: null,
             propertyOrder: 1
           },
           second: {
             type: 'string',
             title: 'label.password_repeat',
-            attr: { class: 'password-field' },
+            attr: {
+              class: 'password-field'
+            },
             widget: 'password',
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
         required: ['first', 'second'],
+        icon: null,
+        help: null,
         propertyOrder: 5
       },
       mayPublish: {
         type: 'boolean',
         title: 'label.mayPublish',
+        icon: null,
+        help: null,
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
         title: 'label.mayContact',
+        icon: null,
+        help: null,
         propertyOrder: 7
       }
     },
@@ -2963,7 +3091,11 @@ export default {
       name: {
         type: 'string',
         title: 'label.company_or_orga_name',
-        attr: { maxlength: 255 },
+        attr: {
+          maxlength: 255
+        },
+        icon: null,
+        help: null,
         maxLength: 255,
         propertyOrder: 1
       },
@@ -2971,7 +3103,9 @@ export default {
         enum: ['government-city', 'government-state', 'government-country'],
         enum_titles: ['City', 'State', 'Country'],
         type: 'string',
-        title: 'subType',
+        title: null,
+        icon: null,
+        help: null,
         propertyOrder: 2
       },
       country: {
@@ -3234,7 +3368,7 @@ export default {
         ],
         enum_titles: [
           'Afghanistan',
-          '\u00c5land Islands',
+          'Åland Islands',
           'Albania',
           'Algeria',
           'American Samoa',
@@ -3290,10 +3424,10 @@ export default {
           'Congo - Kinshasa',
           'Cook Islands',
           'Costa Rica',
-          'C\u00f4te d\u2019Ivoire',
+          'Côte d’Ivoire',
           'Croatia',
           'Cuba',
-          'Cura\u00e7ao',
+          'Curaçao',
           'Cyprus',
           'Czechia',
           'Denmark',
@@ -3416,13 +3550,13 @@ export default {
           'Portugal',
           'Puerto Rico',
           'Qatar',
-          'R\u00e9union',
+          'Réunion',
           'Romania',
           'Russia',
           'Rwanda',
           'Samoa',
           'San Marino',
-          'S\u00e3o Tom\u00e9 & Pr\u00edncipe',
+          'São Tomé & Príncipe',
           'Saudi Arabia',
           'Senegal',
           'Serbia',
@@ -3440,7 +3574,7 @@ export default {
           'South Sudan',
           'Spain',
           'Sri Lanka',
-          'St. Barth\u00e9lemy',
+          'St. Barthélemy',
           'St. Helena',
           'St. Kitts & Nevis',
           'St. Lucia',
@@ -3491,49 +3625,69 @@ export default {
         ],
         type: 'string',
         title: 'label.country',
-        attr: { maxlength: 2 },
+        attr: {
+          maxlength: 2
+        },
+        icon: null,
+        help: null,
         propertyOrder: 3
       },
       email: {
         type: 'string',
         title: 'label.email',
-        attr: { maxlength: 100 },
+        attr: {
+          maxlength: 100
+        },
         widget: 'email',
         icon: 'email',
+        help: null,
         maxLength: 100,
         propertyOrder: 4
       },
       password: {
-        title: 'password',
+        title: null,
         type: 'object',
         properties: {
           first: {
             type: 'string',
             title: 'label.password',
-            attr: { class: 'password-field' },
+            attr: {
+              class: 'password-field'
+            },
             widget: 'password',
             icon: 'key',
+            help: null,
             propertyOrder: 1
           },
           second: {
             type: 'string',
             title: 'label.password_repeat',
-            attr: { class: 'password-field' },
+            attr: {
+              class: 'password-field'
+            },
             widget: 'password',
+            icon: null,
+            help: null,
             propertyOrder: 2
           }
         },
         required: ['first', 'second'],
+        icon: null,
+        help: null,
         propertyOrder: 5
       },
       mayPublish: {
         type: 'boolean',
         title: 'label.mayPublish',
+        icon: null,
+        help: null,
         propertyOrder: 6
       },
       mayContact: {
         type: 'boolean',
         title: 'label.mayContact',
+        icon: null,
+        help: null,
         propertyOrder: 7
       }
     },

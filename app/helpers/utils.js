@@ -7,7 +7,104 @@ import {
   education,
   competition
 } from '../assets';
+import {
+  leaderboards_countries_grey,
+  leaderboards_countries_green,
+  leaderboards_education_green,
+  leaderboards_education_grey,
+  leaderboards_indiv_green,
+  leaderboards_indiv_grey,
+  leaderboards_organisations_green,
+  leaderboards_organisations_grey,
+  leaderboards_tpo_green,
+  leaderboards_tpo_grey,
+  leaderboards_company_grey,
+  leaderboards_company_green
+} from '../assets';
+import _ from 'lodash';
+import { getErrorView } from '../server/validator';
 
+/*
+/* This Will take server's error response and form SchemaOptions
+/* it returns new schema options based on the Server error else same schema options
+/* new options contains error field based on server options
+/* Eg options.field.email.hasError = true;
+*/
+export const handleServerResponseError = function(
+  serverFormError,
+  formSchemaOptions
+) {
+  const data =
+    serverFormError &&
+    serverFormError.response &&
+    serverFormError.response.data;
+  if (data && data.code == 400 && data.hasOwnProperty('errors')) {
+    let newOptions = _.cloneDeep(formSchemaOptions);
+    for (let property in data.errors.children) {
+      updateFormSchema(
+        newOptions.fields[property],
+        data.errors.children[property]
+      );
+    }
+
+    return newOptions;
+  }
+  return formSchemaOptions;
+};
+
+/**
+ * Update Form Schema recursively by iterating over properties under nth depth level.
+ *  */
+export function updateFormSchema(optionSchema, responseData) {
+  if (responseData.children) {
+    for (let property in responseData.children) {
+      updateFormSchema(
+        optionSchema.fields[property],
+        responseData.children[property]
+      );
+    }
+  } else if (responseData.errors && responseData.errors.length > 0) {
+    optionSchema.hasError = true;
+    let oldValidator = optionSchema.error;
+    if (typeof oldValidator === 'function') {
+      optionSchema.error = (value, path, context) => {
+        let errorReturn = oldValidator(value, path, context);
+        if (responseData.errors && responseData.errors.length > 0) {
+          errorReturn = getErrorView(responseData.errors.toString());
+        } else {
+          optionSchema.error = oldValidator;
+        }
+        return errorReturn;
+      };
+    }
+    return;
+  }
+  return;
+}
+
+export const categoryIcons = {
+  country: {
+    normal: leaderboards_countries_grey,
+    selected: leaderboards_countries_green
+  },
+  tpo: { normal: leaderboards_tpo_grey, selected: leaderboards_tpo_green },
+  organization: {
+    normal: leaderboards_organisations_grey,
+    selected: leaderboards_organisations_green
+  },
+  education: {
+    normal: leaderboards_education_grey,
+    selected: leaderboards_education_green
+  },
+  company: {
+    normal: leaderboards_company_grey,
+    selected: leaderboards_company_green
+  },
+  individual: {
+    normal: leaderboards_indiv_grey,
+    selected: leaderboards_indiv_green
+  }
+};
 export function queryParamsToObject(queryParams) {
   let returnObject = {};
   try {
@@ -59,7 +156,7 @@ function escapeRegexCharacters(str) {
 const getSuggestionValue = suggestion => `${suggestion.name}`;
 
 export function getSuggestions(value) {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     postDirectRequest('/suggest', 'q=' + value.trim()).then(result => {
       let jdata = result.data;
       const escapedValue = escapeRegexCharacters(value.trim());
@@ -68,7 +165,11 @@ export function getSuggestions(value) {
       }
       const regex = new RegExp('\\b' + escapedValue, 'i');
 
-      resolve(jdata.filter(person => regex.test(getSuggestionValue(person))));
+      if (jdata) {
+        resolve(jdata.filter(person => regex.test(getSuggestionValue(person))));
+      } else {
+        reject(jdata);
+      }
     });
   });
 }

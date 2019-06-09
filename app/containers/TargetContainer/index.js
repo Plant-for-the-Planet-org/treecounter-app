@@ -2,23 +2,44 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { schemaOptions } from '../../server/parsedSchemas/target';
 import Target from '../../components/Target';
 import { SubmitTarget } from '../../actions/targetAction';
 import { userTreecounterSelector } from '../../selectors/index';
+import { handleServerResponseError } from '../../helpers/utils';
 
 class TargetContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      schemaOptions
+    };
+    this.onSubmitTarget = this.onSubmitTarget.bind(this);
+  }
   onSubmitTarget = () => {
-    // let result = this.refs.loginForm.validate();
-    // if (result.isValid()) {
     console.log(this.refs.targetContainer.refs.setTargetForm.validate());
     let value = this.refs.targetContainer.refs.setTargetForm.getValue();
     if (value) {
-      this.props.SubmitTarget(value);
+      this.props
+        .SubmitTarget(value, this.props.navigation)
+        .then(val => val)
+        .catch(err => {
+          let newSchemaOptions = handleServerResponseError(
+            err,
+            this.state.schemaOptions
+          );
+          this.setState(
+            {
+              schemaOptions: {
+                ...newSchemaOptions
+              }
+            },
+            () => {
+              this.refs.targetContainer.refs.setTargetForm.validate();
+            }
+          );
+        });
     }
-    // } else if (this.props.onError) {
-    //   this.props.onError(result.errors);
-    // }
   };
 
   render() {
@@ -26,6 +47,7 @@ class TargetContainer extends React.Component {
       <Target
         ref={'targetContainer'}
         treecounter={this.props.treecounter}
+        schemaOptions={this.state.schemaOptions}
         onSubmitTarget={this.onSubmitTarget}
       />
     );
@@ -45,5 +67,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(TargetContainer);
 TargetContainer.propTypes = {
   treecounter: PropTypes.object.isRequired,
   dispatch: PropTypes.func,
-  SubmitTarget: PropTypes.func.isRequired
+  SubmitTarget: PropTypes.func.isRequired,
+  navigation: PropTypes.any
 };

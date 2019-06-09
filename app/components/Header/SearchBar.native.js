@@ -13,10 +13,17 @@ import { iosSearchGreen } from '../../assets';
 import styles, {
   SearchContainerWidth
 } from '../../styles/header/search_bar.native';
+import PropTypes from 'prop-types';
+import TouchableItem from '../../components/Common/TouchableItem.native';
+import i18n from '../../locales/i18n.js';
 
 const SearchIcon = () => (
   <View style={styles.searchIconContainer}>
-    <Image source={iosSearchGreen} style={styles.searchIcon} />
+    <Image
+      source={iosSearchGreen}
+      resizeMode="contain"
+      style={styles.searchIcon}
+    />
   </View>
 );
 
@@ -30,9 +37,25 @@ class SearchBar extends React.PureComponent {
   _textInput;
 
   componentDidMount() {
-    requestAnimationFrame(() => {
-      this._textInput.focus();
-    });
+    if (!this.props.dontFocus) {
+      requestAnimationFrame(() => {
+        this._textInput.focus();
+      });
+    }
+    if (this.props.style) {
+      if (this.props.style.width) {
+        this.setState({ inputWidth: this.props.style.width });
+      }
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.inputValue &&
+      nextProps.inputValue.toLowerCase().includes(this.state.text.toLowerCase())
+    ) {
+      this.setState({ text: nextProps.inputValue });
+    }
   }
 
   _handleLayoutCancelButton = e => {
@@ -65,59 +88,67 @@ class SearchBar extends React.PureComponent {
 
   render() {
     let { inputWidth, showCancelButton } = this.state;
+
     let searchInputStyle = {};
     if (this.props.textColor) {
       searchInputStyle.color = this.props.textColor;
     }
+    let inputValue = this.state.text;
 
     return (
       <View style={styles.container}>
-        <View style={[styles.searchContainer, { width: inputWidth }]}>
+        <View
+          style={[
+            this.props.style ? this.props.style : styles.searchContainer,
+            this.props.style ? { width: inputWidth } : null
+          ]}
+        >
           <TextInput
             ref={view => {
               this._textInput = view;
             }}
             clearButtonMode="while-editing"
             onChangeText={this._handleChangeText}
-            value={this.state.text}
+            value={inputValue}
             autoCapitalize="none"
             autoCorrect={false}
             returnKeyType="search"
-            placeholder="Search"
+            placeholder={this.props.placeholderValue}
+            underlineColorAndroid={'transparent'}
             placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
             onSubmitEditing={this._handleSubmit}
             style={[styles.searchInput, searchInputStyle]}
+            autoCapitalize={'sentences'}
           />
 
           <SearchIcon />
         </View>
-
         <View
           key={
             showCancelButton
               ? 'visible-cancel-button'
               : 'layout-only-cancel-button'
           }
-          style={[
-            styles.buttonContainer,
-            { opacity: showCancelButton ? 1 : 0 }
-          ]}
+          style={[{ opacity: showCancelButton ? 1 : 0, width: '25%' }]}
         >
-          <TouchableOpacity
-            style={styles.button}
-            hitSlop={{ top: 15, bottom: 15, left: 15, right: 20 }}
-            onLayout={this._handleLayoutCancelButton}
-            onPress={data => this._handlePressCancelButton()}
-          >
-            <Text
-              style={{
-                fontSize: 17,
-                color: this.props.tintColor || '#007AFF'
-              }}
+          {this.props.showCancelSearchButton ? (
+            <TouchableItem
+              style={styles.button}
+              hitSlop={{ top: 15, bottom: 15, left: 1, right: 20 }}
+              onLayout={this._handleLayoutCancelButton}
+              onPress={this._handlePressCancelButton}
             >
-              Cancel
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={{
+                  fontSize: 17,
+                  color: this.props.tintColor || '#007AFF',
+                  textAlign: 'center'
+                }}
+              >
+                {i18n.t('label.cancel')}
+              </Text>
+            </TouchableItem>
+          ) : null}
         </View>
       </View>
     );
@@ -135,13 +166,19 @@ class SearchBar extends React.PureComponent {
   };
 
   _handlePressCancelButton = () => {
-    //console.log('_handlePressCancelButton', this.props.navigation);
-    if (this.props.onCancelPress) {
-      this.props.onCancelPress(this.props.navigation.goBack);
-    } else {
-      this.props.navigation.navigate('appStackNavigator');
-    }
+    this.props.navigation.navigate('appStackNavigator');
   };
 }
+
+SearchBar.propTypes = {
+  onChangeQuery: PropTypes.func,
+  onSubmit: PropTypes.func,
+  tintColor: PropTypes.any,
+  textColor: PropTypes.any,
+  inputValue: PropTypes.string,
+  navigation: PropTypes.any,
+  showCancelSearchButton: PropTypes.bool,
+  dontFocus: PropTypes.bool
+};
 
 export default withNavigation(SearchBar);

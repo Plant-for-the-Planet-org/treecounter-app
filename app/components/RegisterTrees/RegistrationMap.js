@@ -69,7 +69,6 @@ class RegistrationMap extends React.Component {
   }
 
   onLocationSelected(geoLocation) {
-    console.log(geoLocation);
     this.setState({ geoLocation });
     this.props.onGeoLocationSelected(geoLocation);
   }

@@ -26,7 +26,7 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
       dispatch(
         paymentFailed({
           status: false,
-          message: donationContribution.paymentResponse.error.message
+          message: donationContribution.paymentResponse.error.message || 'error'
         })
       );
     } else {
@@ -44,7 +44,6 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
             donationContribution.paymentResponse.confirmation ===
             'iOS referred payment'
           ) {
-            console.log(contribution.token);
             dispatch(
               paymentSuccess({
                 status: true,
@@ -52,6 +51,7 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
                 message: 'success'
               })
             );
+            dispatch(setProgressModelState(false));
           } else {
             dispatch(
               mergeEntities(normalize(contribution, contributionSchema))
@@ -67,18 +67,21 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
 
             dispatch(paymentSuccess({ status: true, message: 'success' }));
             dispatch(setProgressModelState(false));
-            console.log(`Thank you for planting ${
-              contribution.treeCount
-            } trees with us!
-          Your donation has been registered as: ${contribution.uid}
-          You will receive an email with a donation receipt in time.
-          Green Button: "Return to Profile"`);
+            //   console.log(`Thank you for planting ${
+            //     contribution.treeCount
+            //   } trees with us!
+            // Your donation has been registered as: ${contribution.uid}
+            // You will receive an email with a donation receipt in time.
+            // Green Button: "Return to Profile"`);
           }
         })
         .catch(response => {
           debug('error: ', response);
           dispatch(
-            paymentFailed({ status: false, message: response.response.data })
+            paymentFailed({
+              status: false,
+              message: response.response.data || 'error'
+            })
           );
           dispatch(setProgressModelState(false));
         });
@@ -90,6 +93,7 @@ export function gift(donationContribution, plantProjectId, loggedIn) {
   let route = loggedIn ? 'giftDonationContribution_post' : 'giftDonate_post';
 
   return dispatch => {
+    dispatch(setProgressModelState(true));
     if (
       donationContribution.paymentResponse.type &&
       donationContribution.paymentResponse.type === 'error'
@@ -97,7 +101,7 @@ export function gift(donationContribution, plantProjectId, loggedIn) {
       dispatch(
         paymentFailed({
           status: false,
-          message: donationContribution.paymentResponse.error.message
+          message: donationContribution.paymentResponse.error.message || 'error'
         })
       );
     } else {
@@ -110,21 +114,51 @@ export function gift(donationContribution, plantProjectId, loggedIn) {
           });
       request
         .then(response => {
-          const treecounter = response.data;
-          // a SchemaResponse with a contribution and a treecounter entity should be merged
-          // the response will also include the donationUid, required to redirect to the success page
-          const [contribution] = treecounter.contributions.splice(-1);
-          dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
+          const { contribution, treecounter, plantProject } = response.data;
+          if (
+            donationContribution.paymentResponse.confirmation ===
+            'iOS referred payment'
+          ) {
+            dispatch(
+              paymentSuccess({
+                status: true,
+                token: contribution.token,
+                message: 'success'
+              })
+            );
+            dispatch(setProgressModelState(false));
+          } else {
+            dispatch(
+              mergeEntities(normalize(contribution, contributionSchema))
+            );
+            dispatch(
+              mergeEntities(normalize(plantProject, plantProjectSchema))
+            );
+            if (treecounter) {
+              dispatch(
+                mergeEntities(normalize(treecounter, treecounterSchema))
+              );
+            }
 
-          console.log(`Thank you for planting ${
-            contribution.treeCount
-          } trees with us!
-          Your donation has been registered as: ${contribution.uid}
-          You will receive an email with a donation receipt in time.
-          Green Button: "Return to Profile"`);
+            dispatch(paymentSuccess({ status: true, message: 'success' }));
+            dispatch(setProgressModelState(false));
+            //   console.log(`Thank you for planting ${
+            //     contribution.treeCount
+            //   } trees with us!
+            // Your donation has been registered as: ${contribution.uid}
+            // You will receive an email with a donation receipt in time.
+            // Green Button: "Return to Profile"`);
+          }
         })
         .catch(response => {
           debug('error: ', response);
+          dispatch(
+            paymentFailed({
+              status: false,
+              message: response.response.data || 'error'
+            })
+          );
+          dispatch(setProgressModelState(false));
         });
     }
   };

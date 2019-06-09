@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, View, Text } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  Linking,
+  TouchableOpacity
+} from 'react-native';
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
@@ -8,7 +14,10 @@ import PlantProjectCarousel from '../PlantProjects/PlantProjectCarousel';
 import SvgContainer from '../Common/SvgContainer';
 import CardLayout from '../Common/Card';
 import stylesHome from '../../styles/user-home';
-import stylesPublicPage from '../../styles/public-page.native';
+import { delimitNumbers } from '../../utils/utils';
+import stylesPublicPage from '../../styles/public-page';
+import PrimaryButton from '../Common/Button/PrimaryButton';
+import i18n from '../../locales/i18n.js';
 
 import {
   getProfileTypeName,
@@ -16,6 +25,8 @@ import {
   isUserFollower,
   amISupporting
 } from './utils';
+import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet';
+import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {
@@ -49,7 +60,11 @@ class PublicTreeCounter extends React.Component {
 
   onRegisterSupporter() {
     this.props.supportTreecounterAction(this.props.treecounter);
-    this.props.route('app_donateTrees');
+    updateRoute('app_donateTrees', this.props.navigation, 0, {
+      titleParam: i18n.t('label.support_trees_to', {
+        user: this.props.treecounter.displayName
+      })
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -97,6 +112,18 @@ class PublicTreeCounter extends React.Component {
       this.setState({ svgData: Object.assign({}, svgData) });
     }
   }
+  onMoreClick(id, name) {
+    this.props.selectPlantProjectIdAction(id);
+    const { navigation } = this.props;
+    //console.log('OnMore');
+    updateRoute('app_selectProject', navigation, null, { titleParam: name });
+  }
+
+  onSelectClickedFeaturedProjects = id => {
+    this.props.selectPlantProjectIdAction(id);
+    const { navigation } = this.props;
+    updateStaticRoute('app_donate_detail', navigation);
+  };
   render() {
     const { treecounter, currentUserProfile } = this.props;
     if (null === treecounter) {
@@ -116,7 +143,7 @@ class PublicTreeCounter extends React.Component {
     };
     const headerProps = {
       caption,
-      profileType: getProfileTypeName(profileType),
+      profileType: profileType,
       logo,
       isUserFollowerBool,
       isUserLoggedIn,
@@ -137,33 +164,138 @@ class PublicTreeCounter extends React.Component {
             followChanged={this.onFollowChanged}
           />
           {'tpo' !== userProfile.type &&
-            !isMyself(treecounter, currentUserProfile) && (
-              <SupportButton
-                {...supportProps}
-                onRegisterSupporter={this.onRegisterSupporter}
-              />
-            )}
+          !isMyself(treecounter, currentUserProfile) ? (
+            <SupportButton
+              {...supportProps}
+              onRegisterSupporter={this.onRegisterSupporter}
+            />
+          ) : null}
         </View>
         <View style={stylesHome.svgContainer}>
-          <SvgContainer
-            {...this.state.svgData}
-            onToggle={toggleVal => this.updateSvg(toggleVal)}
-          />
+          {Object.keys(this.state.svgData).length !== 0 ? (
+            <SvgContainer
+              {...this.state.svgData}
+              onToggle={toggleVal => this.updateSvg(toggleVal)}
+            />
+          ) : null}
+        </View>
+        <View>
+          {userProfile.synopsis1 ||
+          userProfile.synopsis2 ||
+          userProfile.linkText ||
+          userProfile.url ? (
+            <CardLayout>
+              {userProfile.synopsis1 ? (
+                <Text style={stylesHome.footerText}>
+                  {userProfile.synopsis1}
+                </Text>
+              ) : null}
+              {userProfile.synopsis2 ? (
+                <Text style={stylesHome.footerText}>
+                  {userProfile.synopsis2}
+                </Text>
+              ) : null}
+              {userProfile.linkText ? (
+                <Text style={stylesHome.footerText}>
+                  {userProfile.linkText}
+                </Text>
+              ) : null}
+              {userProfile.url ? (
+                <Text
+                  style={stylesHome.linkText}
+                  onPress={() => this._goToURL(userProfile.url)}
+                >
+                  {userProfile.url}
+                </Text>
+              ) : null}
+            </CardLayout>
+          ) : null}
         </View>
         <View>
           {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
-            <PlantProjectCarousel
-              {...tpoProps}
-              onSelect={this.onPlantProjectSelected}
-            />
-          ) : userProfile.synopsis1 || userProfile.synopsis2 ? (
+            <View>
+              {tpoProps.plantProjects.map(project => (
+                <PlantProjectSnippet
+                  key={'trillion' + project.id}
+                  onMoreClick={id => this.onMoreClick(id, project.name)}
+                  plantProject={project}
+                  onSelectClickedFeaturedProjects={id =>
+                    this.onSelectClickedFeaturedProjects(id)
+                  }
+                  showMoreButton={false}
+                  tpoName={project.tpo_name}
+                />
+              ))}
+            </View>
+          ) : null}
+        </View>
+        <View>
+          {treecounter.directChildren ? (
             <CardLayout>
-              <Text style={stylesHome.footerText}>{userProfile.synopsis1}</Text>
+              <View>
+                <View style={stylesPublicPage.tableHeader}>
+                  <Text style={stylesPublicPage.firstColumn}>Contributor</Text>
+                  <Text style={stylesPublicPage.secondColumn}>
+                    {i18n.t('label.plantedTrees')}
+                  </Text>
+                  <Text style={stylesPublicPage.thirdColumn}>Target</Text>
+                  <View style={stylesPublicPage.fourthColumn} />
+                </View>
+                <View>
+                  {Object.keys(treecounter.directChildren).map(childrenId => {
+                    return (
+                      <View style={stylesPublicPage.tableHeader}>
+                        <Text style={stylesPublicPage.firstColumn}>
+                          {treecounter.directChildren[childrenId].displayName}
+                        </Text>
+                        <Text style={stylesPublicPage.secondColumn}>
+                          {delimitNumbers(
+                            parseInt(
+                              treecounter.directChildren[childrenId]
+                                .countPlanted
+                            )
+                          )}
+                        </Text>
+                        <Text style={stylesPublicPage.thirdColumn}>
+                          {delimitNumbers(
+                            parseInt(
+                              treecounter.directChildren[childrenId].countTarget
+                            )
+                          )}
+                        </Text>
+                        <View style={stylesPublicPage.fourthColumn}>
+                          <TouchableOpacity
+                            onPress={() =>
+                              this.onRegisterSupporter(
+                                treecounter.directChildren[childrenId]
+                              )
+                            }
+                          >
+                            <Text style={stylesPublicPage.supportText}>
+                              {i18n.t('label.support')}
+                            </Text>
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    );
+                  })}
+                </View>
+              </View>
             </CardLayout>
           ) : null}
         </View>
       </ScrollView>
     );
+  }
+
+  _goToURL(url) {
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log("Don't know how to open URI: " + url);
+      }
+    });
   }
 }
 
@@ -174,7 +306,8 @@ PublicTreeCounter.propTypes = {
   unfollowSubscribeAction: PropTypes.func,
   selectPlantProjectIdAction: PropTypes.func,
   supportTreecounterAction: PropTypes.func,
-  route: PropTypes.func
+  route: PropTypes.func,
+  navigation: PropTypes.any
 };
 
 export default PublicTreeCounter;

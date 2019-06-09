@@ -4,6 +4,8 @@ import { context } from '../../../app/config';
 import { tree_outline } from '../../../app/assets';
 import './basic.widget.scss';
 import i18n from './locales/i18n';
+import { getLocalRoute } from '../../../app/actions/apiRouting';
+
 const widget = require('./basic.widget.html');
 const { scheme, host, base: baseUrl } = context;
 
@@ -27,8 +29,18 @@ document.addEventListener('DOMContentLoaded', function() {
   let allBlockQuote = document.getElementsByTagName('blockquote');
   for (let i = 0; i < allBlockQuote.length; i++) {
     console.log(allBlockQuote[i].attributes);
-    if (allBlockQuote[i].attributes.getNamedItem('pftp')) {
+    if (
+      allBlockQuote[i].attributes.getNamedItem('pftp') &&
+      allBlockQuote[i].attributes.getNamedItem('data-widget-type').nodeValue ===
+        'basic'
+    ) {
       let uid = allBlockQuote[i].attributes.getNamedItem('data-treecounterId');
+      let ProjectId = allBlockQuote[i].attributes.getNamedItem(
+        'data-projectId'
+      );
+      if (ProjectId && ProjectId.nodeValue) {
+        ProjectId = ProjectId.nodeValue;
+      }
       if (uid) {
         uid = isNaN(parseInt(uid.nodeValue))
           ? uid.nodeValue
@@ -60,7 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
               giftTree: event => {
                 console.log(event);
                 const uid = event.target.id;
-                const url = `${serverName}${baseUrl}/giftTrees?uid=${uid}`;
+                const url = `${serverName}${getLocalRoute(
+                  'app_donateTrees'
+                )}/${ProjectId}`;
                 console.log(serverName);
                 window.open(url, '_blank');
               }

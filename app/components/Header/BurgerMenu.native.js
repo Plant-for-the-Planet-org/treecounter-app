@@ -1,27 +1,37 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import TouchableItem from '../../components/Common/TouchableItem';
-import { Image } from 'react-native';
-import { getImageUrl } from '../../actions/apiRouting';
-import { ProfilePic } from '../../assets';
-import styles from '../../styles/menu';
+import styles from '../../styles/menu.native';
+import { currentUserProfileSelector } from '../../selectors';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import UserProfileImage from '../Common/UserProfileImage.native';
 
-export default (BurgerMenu = function(navigation, userProfile) {
-  return (
-    <TouchableItem
-      onPress={() => {
-        navigation.openDrawer();
-      }}
-    >
-      <Image
-        style={styles.burgerMenuImageStyle}
-        source={
-          userProfile && userProfile.image
-            ? {
-                uri: getImageUrl('profile', 'thumb', userProfile.image)
-              }
-            : ProfilePic
-        }
-      />
-    </TouchableItem>
-  );
-});
+class BurgerMenu extends PureComponent {
+  render() {
+    const { userProfile, navigation } = this.props;
+    return (
+      <TouchableItem
+        onPress={() => {
+          navigation.openDrawer();
+        }}
+      >
+        <UserProfileImage
+          style={styles.burgerMenuImageStyle}
+          profileImage={userProfile && userProfile.image}
+          imageStyle={{ width: 36, height: 36, borderRadius: 36 / 2 }}
+        />
+      </TouchableItem>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    userProfile: currentUserProfileSelector(state)
+  };
+};
+export default connect(mapStateToProps, null)(BurgerMenu);
+
+BurgerMenu.propTypes = {
+  userProfile: PropTypes.any
+};

@@ -7,6 +7,8 @@ import { iosSearchGrey } from '../../../assets';
 import ListViewProjects from './listview';
 import Proptypes from 'prop-types';
 
+import i18n from '../../../locales/i18n.js';
+
 export default class ListProjects extends Component {
   constructor(props) {
     super(props);
@@ -54,34 +56,46 @@ export default class ListProjects extends Component {
   render() {
     let { filteredProjects } = this.state;
     return (
-      <CardLayout key={'listViewProject'} style={{ flex: 1, padding: 0 }}>
-        <View style={[styles.searchContainer]}>
-          <TextInput
-            ref={view => {
-              this._textInput = view;
-            }}
-            clearButtonMode="while-editing"
-            onChangeText={this._handleChangeText}
-            value={this.state.text}
-            autoCapitalize="none"
-            autoCorrect={false}
-            returnKeyType="search"
-            placeholder="Search"
-            placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
-            style={[styles.searchInput]}
-          />
+      <View key={'listViewProject'} style={styles.flexContainer}>
+        <View style={styles.searchItem}>
+          <View style={[styles.searchContainer]}>
+            <TextInput
+              ref={view => {
+                this._textInput = view;
+              }}
+              clearButtonMode="while-editing"
+              underlineColorAndroid={'transparent'}
+              onChangeText={this._handleChangeText}
+              value={this.state.text}
+              autoCapitalize="none"
+              autoCorrect={false}
+              returnKeyType="search"
+              placeholder={i18n.t('label.searchshort')}
+              placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
+              style={[styles.searchInput, { paddingVertical: 0 }]}
+              autoCapitalize={'sentences'}
+            />
 
-          <View style={styles.searchIconContainer}>
-            <Image source={iosSearchGrey} style={styles.searchIcon} />
+            <View style={styles.searchIconContainer}>
+              <Image
+                source={iosSearchGrey}
+                resizeMode="contain"
+                style={styles.searchIcon}
+              />
+            </View>
           </View>
         </View>
 
-        <ListViewProjects
-          projects={filteredProjects}
-          selectProject={projectId => this.props.selectProject(projectId)}
-          onMoreClick={projectId => this.props.onMoreClick(projectId)}
-        />
-      </CardLayout>
+        <View style={styles.listViewContainer}>
+          <ListViewProjects
+            projects={filteredProjects}
+            selectProject={projectId => this.props.selectProject(projectId)}
+            onMoreClick={(projectId, name) =>
+              this.props.onMoreClick(projectId, name)
+            }
+          />
+        </View>
+      </View>
     );
   }
 }

@@ -14,19 +14,15 @@ import Svg, { Circle } from 'react-native-svg';
 import { Dimensions } from 'react-native';
 import _ from 'lodash';
 
-//Only take multiple of 10s
-const squareDimension =
-  Math.floor(
-    Math.min(Dimensions.get('window').width, Dimensions.get('window').height) /
-      10
-  ) * 10;
-const totalCount = Array.from({ length: 72 }, (v, k) => k + 1);
 export default class SvgContainer extends Component {
   constructor(props) {
     super(props);
+    let { planted, target } = this.props;
+    let plantedWidth = this.calculatePlantedWidth(planted, target, 112);
+    let TreesWidth = this.calculateTreesWidth(planted, target);
     this.state = {
-      treesWidth: 0,
-      plantedDasharray: '0,1000'
+      plantedDasharray: plantedWidth + ',1000',
+      treesWidth: TreesWidth
     };
     this.RotateBallonsValueHolder = new Animated.Value(0);
     this.RotateClouds1ValueHolder = new Animated.Value(0);
@@ -35,27 +31,24 @@ export default class SvgContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     let { planted, target } = nextProps;
-    let plantedWidth = this.calculatePlantedWidth(planted, target, 112);
-    let TreesWidth = this.calculateTreesWidth(planted, target);
-    this.setState({
-      plantedDasharray: plantedWidth + ',1000',
-      treesWidth: TreesWidth
-    });
+    if (this.props.planted !== planted || this.props.target !== target) {
+      let plantedWidth = this.calculatePlantedWidth(planted, target, 112);
+      let TreesWidth = this.calculateTreesWidth(planted, target);
+      this.setState({
+        plantedDasharray: plantedWidth + ',1000',
+        treesWidth: TreesWidth
+      });
+    }
   }
 
-  componentWillMount() {
-    let { planted, target } = this.props;
-    let plantedWidth = this.calculatePlantedWidth(planted, target, 112);
-    let TreesWidth = this.calculateTreesWidth(planted, target);
-    this.setState({
-      plantedDasharray: plantedWidth + ',1000',
-      treesWidth: TreesWidth
-    });
-  }
   componentDidMount() {
     this.StartBallonsRotateFunction();
     this.StartClouds1RotateFunction();
     this.StartClouds2RotateFunction();
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return JSON.stringify(nextProps) !== JSON.stringify(this.props);
   }
 
   calculatePlantedWidth(planted, target, radius) {
@@ -121,55 +114,58 @@ export default class SvgContainer extends Component {
       outputRange: ['0deg', '360deg']
     });
     let treesWidth = this.state.treesWidth;
+    let treesSvgString =
+      '<svg viewBox="0 0 850 850" xmlns="http://www.w3.org/2000/svg">';
+    for (let i = 1; i <= treesWidth; i++) {
+      treesSvgString =
+        treesSvgString + svgs['darkCrownTree' + _.padStart('' + i, 3, '0')];
+    }
+    treesSvgString = treesSvgString + '</svg>';
+    let potSvgString =
+      '<svg viewBox="0 0 850 850" xmlns="http://www.w3.org/2000/svg">';
+    for (let i = 1; i <= 72; i++) {
+      if (i > treesWidth) {
+        potSvgString = potSvgString + svgs['pot' + _.padStart('' + i, 2, '0')];
+      }
+    }
+    potSvgString = potSvgString + '</svg>';
     return (
       <View style={treecounterStyles.container}>
         <View style={treecounterStyles.svgStyle}>
-          <Image style={treecounterStyles.imageStyle} source={svgBackground} />
+          <Image
+            style={treecounterStyles.imageStyle}
+            resizeMode="contain"
+            source={svgBackground}
+          />
           <View style={treecounterStyles.cloudStyle}>
             <Animated.View
               style={{
                 transform: [{ rotate: RotateClouds1Data }]
               }}
             >
-              <SvgUri width="100%" height="100%" source={svgs['cloud1']} />
+              <SvgUri width="100%" height="100%" svgXmlData={svgs['cloud1']} />
             </Animated.View>
           </View>
           <View style={treecounterStyles.cloudStyle}>
             <Animated.View
               style={{ transform: [{ rotate: RotateClouds2Data }] }}
             >
-              <SvgUri width="100%" height="100%" source={svgs['cloud2']} />
+              <SvgUri width="100%" height="100%" svgXmlData={svgs['cloud2']} />
             </Animated.View>
           </View>
           <View style={treecounterStyles.cloudStyle}>
             <Animated.View
               style={{ transform: [{ rotate: RotateBallonsData }] }}
             >
-              <SvgUri width="100%" height="100%" source={svgs['ballons']} />
+              <SvgUri width="100%" height="100%" svgXmlData={svgs['ballons']} />
             </Animated.View>
           </View>
-          {totalCount.map(i => {
-            return i <= treesWidth ? (
-              <View key={'tree-' + i} style={treecounterStyles.potStyle}>
-                <SvgUri
-                  width="100%"
-                  height="100%"
-                  source={svgs['darkCrownTree' + _.padStart('' + i, 3, '0')]}
-                />
-              </View>
-            ) : null;
-          })}
-          {totalCount.map(i => {
-            return i > treesWidth ? (
-              <View key={'pot-' + i} style={treecounterStyles.potStyle}>
-                <SvgUri
-                  width="100%"
-                  height="100%"
-                  source={svgs['pot' + _.padStart('' + i, 2, '0')]}
-                />
-              </View>
-            ) : null;
-          })}
+          <View key={'tree-'} style={treecounterStyles.potStyle}>
+            <SvgUri width="100%" height="100%" svgXmlData={treesSvgString} />
+          </View>
+          <View key={'pot-'} style={treecounterStyles.potStyle}>
+            <SvgUri width="100%" height="100%" svgXmlData={potSvgString} />
+          </View>
           <View style={treecounterStyles.circleStyle}>
             <Svg height="100%" width="100%" viewBox="0 0 400 400">
               <Circle

@@ -12,28 +12,43 @@ import VideoContainer from '../Common/VideoContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectDetails
  */
-const PlantProjectDetails = ({
-  description,
-  homepageUrl,
-  homepageCaption,
-  plantProjectImages,
-  videoUrl,
-  mapData
-}) => {
-  if (context.debug && !videoUrl) {
-    videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
+class PlantProjectDetails extends React.Component {
+  render() {
+    let {
+      description,
+      homepageUrl,
+      homepageCaption,
+      plantProjectImages,
+      videoUrl,
+      mapData
+    } = this.props;
+    if (!videoUrl) {
+      videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
+    }
+    return (
+      <div className="plant-project-details__container">
+        <PlantProjectImageCarousel
+          projectImages={plantProjectImages}
+          carousalImageClick={this.props.onImageClick}
+          onViewMoreClick={this.props.onViewMoreClick.bind(this)}
+        />
+        <UserSynopsis synopsis1={description} />
+        {homepageUrl && (
+          <UserHomepageLink
+            homepageUrl={homepageUrl}
+            caption={homepageCaption}
+          />
+        )}
+        {videoUrl && (
+          <VideoContainer
+            onViewMoreClick={this.props.onViewMoreClick.bind(this)}
+            url={videoUrl}
+          />
+        )}
+      </div>
+    );
   }
-  return (
-    <div className="plant-project-details__container">
-      <PlantProjectImageCarousel projectImages={plantProjectImages} />
-      <UserSynopsis synopsis1={description} />
-      {homepageUrl && (
-        <UserHomepageLink homepageUrl={homepageUrl} caption={homepageCaption} />
-      )}
-      {videoUrl && <VideoContainer url={videoUrl} />}
-    </div>
-  );
-};
+}
 
 PlantProjectDetails.propTypes = {
   description: PropTypes.string,
@@ -41,7 +56,9 @@ PlantProjectDetails.propTypes = {
   homepageCaption: PropTypes.string,
   videoUrl: PropTypes.string,
   mapData: PropTypes.object,
-  plantProjectImages: PropTypes.array
+  plantProjectImages: PropTypes.array,
+  onImageClick: PropTypes.func,
+  onViewMoreClick: PropTypes.func
 };
 
 export default PlantProjectDetails;

@@ -1,8 +1,9 @@
 {
   "individual_plant_personal": "by me",
-  "individual_plant_community": "by my community",
+  "individual_plant_community": "Dedicated to me",
+  "treecounter_tooltip": "Trees planted by people who dedicated trees to this tree counter. \nFor example, you can dedicate trees to your friend, school, city or employer and help them reach their tree target. All trees you plant or donate will appear in their tree counter.",
   "tpo_plant_personal": "by us",
-  "tpo_individual_plant_community": "by our community",
+  "tpo_individual_plant_community": "Dedicated to us",
   "by": "by",
   "faqs": "FAQs",
   "logged_in": "Logged In",

@@ -54,14 +54,10 @@ export default class RegisterTrees extends Component {
   };
 
   _renderScene = ({ route }) => {
-    const plantProjects = getSelectTemplate(
-      getPlantProjectEnum(
-        this.props.currentUserProfile,
-        this.props.plantProjects
-      )
+    const plantProjects = getPlantProjectEnum(
+      this.props.currentUserProfile,
+      this.props.plantProjects
     );
-    schemaOptionsSingleTree.fields.plantProject.template = plantProjects;
-    schemaOptionsMultipleTrees.fields.plantProject.template = plantProjects;
 
     return (
       <RegisterTreeTab
@@ -78,14 +74,17 @@ export default class RegisterTrees extends Component {
             ? schemaOptionsSingleTree
             : schemaOptionsMultipleTrees
         }
-        // value={{ treeCount: 1 }}
+        plantProjects={plantProjects}
       />
     );
   };
 
   render() {
     return (
-      <KeyboardAwareScrollView>
+      <ScrollView
+        contentContainerStyle={{ flex: 1, paddingBottom: 72 }}
+        enableOnAndroid={true}
+      >
         <CardLayout style={{ flex: 1 }}>
           <TabView
             useNativeDriver={true}
@@ -96,7 +95,7 @@ export default class RegisterTrees extends Component {
             onIndexChange={this._handleIndexChange}
           />
         </CardLayout>
-      </KeyboardAwareScrollView>
+      </ScrollView>
     );
   }
 }

@@ -1,10 +1,18 @@
 {
+  "treecount_leaderboard": "Bestenliste",
+  "trillion_tree_campaign_app_header": "Trillion Tree Campaign",
+  "tree_planter": "Ein Baumpflanzer",
   "treecount_map": "Karte",
   "sortBy": "Sortieren nach",
   "timePeriod": "Zeitraum",
-  "map_description": "Wirf einen Blick auf die Bäume, die im Rahmen der Trillion Tree Campaign gepflanzt wurden, wo es derzeit Wälder gibt und wo wir Wälder wiederherstellen könnten.",
-  "explore": "Erforschen",
+  "map_description": "Werfen Sie einen Blick auf die Bäume, die im Rahmen der Trillion Tree Campaign gepflanzt wurden, wo es derzeit Wälder gibt und wo wir Wälder wieder aufforsten könnten.",
+  "explore": "Entdecken",
   "plantedTrees": "Gepflanzte Bäume",
-  "plantedTrees_description": "Alle Bäume die seit 2006 auf dieser Website registriert wurden.",
-  "existingForest": "Bestehender Wald"
+  "plantedTrees_description": "Alle Bäume, die seit 2006 auf dieser Website registriert wurden.",
+  "existingForest": "Bestehender Wald",
+  "existingForest_description": "3,04 Billionen Bäume existieren derzeit weltweit noch von ursprünglich sechs Billionen Bäumen, bevor Menschen vor etwa 11.000 Jahren mit dem Fällen von Wäldern begannen. Die Karte zeigt die Anzahl der Bäume pro qkm.",
+  "existingForest_source": "Crowther, T. W. et al. (2015) Mapping tree density at a global scale. Nature 525, 201–205.",
+  "restorationOpportunities": "Wiederaufforstungsmöglichkeiten",
+  "restorationOpportunities_description": "Eine halbe Milliarde Hektar eignet sich für die großflächige Wiederherstellung von Wäldern. Weitere anderthalb Milliarden Hektar sind am besten für die Mosaiksanierung geeignet, die Wälder mit anderen Landnutzungsformen wie Agroforstwirtschaft, kleinbäuerlicher Landwirtschaft und Siedlungen kombiniert.",
+  "restorationOpportunities_source": "Crowther, T. W. et al. (2017) Predicting Global Forest Reforestation Potential. bioRxiv 210062."
 }

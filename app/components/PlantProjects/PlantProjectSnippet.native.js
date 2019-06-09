@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableHighlight } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { getImageUrl } from '../../actions/apiRouting';
 import { targetPlanted, tick } from '../../assets';
 import TouchableItem from '../Common/TouchableItem.native';
+import PlantedProgressBar from './PlantedProgressbar.native';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -16,10 +17,32 @@ class PlantProjectSnippet extends React.Component {
   constructor(props) {
     super(props);
     this.toggleExpanded = this.toggleExpanded.bind(this);
+    this.currency_symbols = {
+      USD: '$', // US Dollar
+      EUR: '€', // Euro
+      CRC: '₡', // Costa Rican Colón
+      GBP: '£', // British Pound Sterling
+      ILS: '₪', // Israeli New Sheqel
+      INR: '₹', // Indian Rupee
+      JPY: '¥', // Japanese Yen
+      KRW: '₩', // South Korean Won
+      NGN: '₦', // Nigerian Naira
+      PHP: '₱', // Philippine Peso
+      PLN: 'zł', // Polish Zloty
+      PYG: '₲', // Paraguayan Guarani
+      THB: '฿', // Thai Baht
+      UAH: '₴', // Ukrainian Hryvnia
+      VND: '₫' // Vietnamese Dong
+    };
   }
 
   toggleExpanded(id) {
     this.props.onMoreClick(id);
+  }
+  containerPress(id) {
+    if (this.props.onMoreClick) {
+      this.props.onMoreClick(id);
+    }
   }
 
   render() {
@@ -44,12 +67,16 @@ class PlantProjectSnippet extends React.Component {
       geoLocation
     } = this.props.plantProject;
     let projectImage = null;
-    let treePlantedRatio = countPlanted / countTarget;
-    let treeCountWidth = 100 - treePlantedRatio * 100;
-    if (treeCountWidth < 0) {
+    let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
+    treePlantedRatio = parseFloat(treePlantedRatio);
+    let treeCountWidth;
+    if (treePlantedRatio > 1) {
       treeCountWidth = 100;
+    } else if (treePlantedRatio < 0) {
+      treeCountWidth = 0;
+    } else {
+      treeCountWidth = treePlantedRatio * 100;
     }
-    console.log(name, treeCountWidth);
 
     if (imageFile) {
       projectImage = { image: imageFile };
@@ -72,16 +99,21 @@ class PlantProjectSnippet extends React.Component {
       treeCost,
       taxDeduction: paymentSetup.taxDeduction
     };
+    let deducibleText1 = '';
+    for (let i = 0; i < specsProps.taxDeduction.length; i++) {
+      if (i < 1) {
+        deducibleText1 += specsProps.taxDeduction[i] + ',';
+      } else if (i == 1) {
+        deducibleText1 += specsProps.taxDeduction[i] + '.';
+      }
+    }
     return (
-      <TouchableItem
-        onPress={() =>
-          this.props.onMoreClick ? this.props.onMoreClick(id) : null
-        }
+      <TouchableHighlight
+        underlayColor={'transparent'}
+        onPress={() => this.containerPress(id)}
       >
-        <CardLayout
-          style={[styles.projectSnippetContainer, this.props.cardStyle]}
-        >
-          {projectImage && (
+        <CardLayout style={[styles.projectSnippetContainer]}>
+          {projectImage ? (
             <View style={styles.projectImageContainer}>
               <Image
                 style={styles.teaser__projectImage}
@@ -95,63 +127,29 @@ class PlantProjectSnippet extends React.Component {
                 resizeMode={'cover'}
               />
             </View>
-          )}
-
+          ) : null}
+          <PlantedProgressBar
+            countPlanted={specsProps.countPlanted}
+            countTarget={specsProps.countTarget}
+          />
           <View style={styles.projectSpecsContainer}>
-            <View style={styles.treeCounterContainer}>
-              <View style={[styles.treePlantedContainer]}>
-                <View
-                  style={[styles.treePlantedChildContainer]}
-                  style={
-                    treeCountWidth > 0
-                      ? {
-                          height: '100%',
-                          flexDirection: 'row',
-                          backgroundColor: '#b9d384',
-                          borderColor: '#b9d384',
-                          width: treeCountWidth + '%',
-                          paddingRight: 10,
-                          padding: 5,
-                          borderTopRightRadius: 10,
-                          borderBottomRightRadius: 10,
-                          borderWidth: 0.5
-                        }
-                      : {
-                          height: '100%',
-                          flexDirection: 'row',
-                          padding: 5
-                        }
-                  }
-                >
-                  <View style={{ width: '100%', flexDirection: 'row' }}>
-                    <Text style={styles.treePlantedtextPlanted}>
-                      {specsProps.countPlanted}
-                    </Text>
-                    <Text style={styles.treePlantedtext}>
-                      {i18n.t('label.trees')}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-
-              <View style={[styles.targetContainer]}>
-                <Text style={styles.treePlantedtext}>
-                  {specsProps.countTarget.toLocaleString('en')}
-                </Text>
-                <Image
-                  source={targetPlanted}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
             <View style={styles.projectNameContainer}>
-              <Text style={styles.project_teaser__contentText}>
+              <Text
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={styles.project_teaser__contentText}
+              >
                 {teaserProps.projectName}
               </Text>
               {teaserProps.isCertified ? (
                 <Image
                   source={tick}
-                  style={{ width: 15, height: 15, marginLeft: 5, marginTop: 2 }}
+                  style={{
+                    width: 15,
+                    height: 15,
+                    marginLeft: 5,
+                    maxWidth: '10%'
+                  }}
                 />
               ) : null}
             </View>
@@ -164,46 +162,55 @@ class PlantProjectSnippet extends React.Component {
                     {specsProps.survivalRate}%
                   </Text>
                 </View>
+                {specsProps.taxDeduction && specsProps.taxDeduction.length ? (
+                  <View>
+                    <Text style={styles.survivalText}>
+                      {i18n.t('label.tax_deductible')} {i18n.t('label.in')}{' '}
+                      {deducibleText1}
+                    </Text>
+                  </View>
+                ) : null}
               </View>
 
               <View style={styles.costContainer}>
-                <Text style={styles.costText}>${specsProps.treeCost}</Text>
+                <Text style={styles.costText}>
+                  {this.currency_symbols[currency]
+                    ? this.currency_symbols[currency]
+                    : currency}{' '}
+                  {specsProps.treeCost}
+                </Text>
               </View>
             </View>
 
             <View style={styles.actionContainer}>
               <View style={styles.byOrgContainer}>
-                <Text style={styles.byOrgText}>{teaserProps.tpoName}</Text>
+                <Text
+                  style={styles.byOrgText}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                >
+                  {teaserProps.tpoName}
+                </Text>
               </View>
 
-              <View style={styles.buttonContainer}>
-                {this.props.showMoreButton && (
+              {this.props.plantProject.allowDonations ? (
+                <View style={styles.buttonContainer}>
                   <PrimaryButton
                     style={styles.buttonItem}
-                    buttonStyle={[styles.buttonStyle, styles.moreButtonStyle]}
-                    textStyle={[
-                      styles.moreButtonTextStyle,
-                      styles.buttonTextStyle
-                    ]}
-                    onClick={() => this.toggleExpanded(id)}
+                    buttonStyle={styles.buttonStyle}
+                    textStyle={styles.buttonTextStyle}
+                    onClick={() =>
+                      this.props.onSelectClickedFeaturedProjects(id)
+                    }
                   >
-                    <Text>More</Text>
+                    <Text> {i18n.t('label.donate')}</Text>
                   </PrimaryButton>
-                )}
-
-                <PrimaryButton
-                  style={styles.buttonItem}
-                  buttonStyle={styles.buttonStyle}
-                  textStyle={styles.buttonTextStyle}
-                  onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
-                >
-                  <Text>Donate</Text>
-                </PrimaryButton>
-              </View>
+                </View>
+              ) : null}
             </View>
           </View>
         </CardLayout>
-      </TouchableItem>
+      </TouchableHighlight>
     );
   }
 }

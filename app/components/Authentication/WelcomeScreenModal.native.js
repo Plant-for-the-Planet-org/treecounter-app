@@ -24,11 +24,12 @@ class WelcomeScreenModal extends Component {
           contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
         >
           <View style={styles.container}>
-            <Image style={styles.imageStyle} source={welcomeLogo} />
+            <Image
+              style={styles.imageStyle}
+              resizeMode="contain"
+              source={welcomeLogo}
+            />
             <Text style={styles.textHeader}>
-              {i18n.t('label.welcome_to_ttc')}
-            </Text>
-            <Text style={styles.textPara}>
               {i18n.t('label.welcome_to_ttc')}
             </Text>
             <Text style={styles.textPara}>
@@ -38,10 +39,12 @@ class WelcomeScreenModal extends Component {
               {i18n.t('label.welcome_screen_summery_1')}
             </Text>
             <TouchableItem
-              onPress={() => updateRoute('app_userHome', this.props.navigation)}
+              onPress={() => updateRoute('app_homepage', this.props.navigation)}
             >
-              <Text style={[styles.textPara, { marginTop: 15 }]}>
-                {i18n.t('label.deletion_prerequisite')}
+              <Text
+                style={[styles.textPara, { marginTop: 20, fontWeight: 'bold' }]}
+              >
+                {i18n.t('label.view_global_treecounter')}
               </Text>
             </TouchableItem>
           </View>

@@ -23,8 +23,8 @@ class ResetPassword extends Component {
             <TCombForm
               ref="resetPasswordForm"
               type={resetPasswordFormSchema}
-              options={schemaOptions}
-              value={this.props.value}
+              options={this.props.schemaProp}
+              value={this.props.formValue}
             />
             <PrimaryButton
               onClick={event => {
@@ -32,7 +32,7 @@ class ResetPassword extends Component {
                 event.preventDefault();
               }}
             >
-              {i18n.t('label.set')} {i18n.t('label.password')}
+              {i18n.t('label.set_password')}}
             </PrimaryButton>
           </form>
         </CardLayout>
@@ -43,7 +43,8 @@ class ResetPassword extends Component {
 
 ResetPassword.propTypes = {
   onSetPassword: PropTypes.func,
-  value: PropTypes.object
+  formValue: PropTypes.object,
+  schemaProp: PropTypes.object
 };
 
 export default ResetPassword;

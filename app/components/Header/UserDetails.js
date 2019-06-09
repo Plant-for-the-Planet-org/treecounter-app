@@ -1,13 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 
-import { ProfilePic, EditGreen, QuestionMarkGreen } from '../../assets';
+import {
+  ProfilePic,
+  EditGreen,
+  QuestionMarkGreen,
+  questionmark_orange
+} from '../../assets';
 import TextSpan from '../Common/Text/TextSpan';
 import TransparentButton from '../Common/Button/TransparentButton';
 import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
+import PrimaryButton from '../Common/Button/PrimaryButton';
 
-const UserDetails = ({ updateRoute, userProfile, onLogout }) => {
+const UserDetails = ({
+  updateRoute,
+  userProfile,
+  onLogout,
+  openProfilePickerModal
+}) => {
   return (
     <div>
       <div className="popover__list-item">
@@ -21,9 +33,9 @@ const UserDetails = ({ updateRoute, userProfile, onLogout }) => {
           />
           <div>
             <TextSpan strong={true}>
-              {i18n.t('label.welcome_hi') +
-                userProfile.fullname +
-                i18n.t('label.welcome_symbol')}
+              {i18n.t('label.welcome_hi', {
+                user: userProfile.fullname
+              })}
             </TextSpan>
             <TextSpan>{userProfile.email}</TextSpan>
           </div>
@@ -31,6 +43,45 @@ const UserDetails = ({ updateRoute, userProfile, onLogout }) => {
       </div>
       <hr className="divider__light" />
       <div className="popover__list-item">
+        <div className="dedicate-trees">
+          <div>{i18n.t('label.dedicate_trees')}</div>
+          <div className="tooltip">
+            <a data-tip data-for="dedicate-trees-icon">
+              <img src={questionmark_orange} />
+            </a>
+            <ReactTooltip id="dedicate-trees-icon" effect="solid" type="dark">
+              <span className="tooltip-text">
+                {i18n.t('label.dedicate_tootltip')}
+              </span>
+            </ReactTooltip>
+          </div>
+        </div>
+        {userProfile.supportedTreecounter ? (
+          <div className="pick-profile-container">
+            <div>
+              <img src={ProfilePic} />
+            </div>
+            <div className="pick-profile-username">
+              {userProfile.supportedTreecounter.displayName}
+            </div>
+            <PrimaryButton
+              className="pick-profile-primary-button"
+              onClick={() => openProfilePickerModal()}
+            >
+              {i18n.t('label.edit')}
+            </PrimaryButton>
+          </div>
+        ) : (
+          <div className="pick-profile-container">
+            <PrimaryButton
+              className="pick-profile-primary-button"
+              onClick={() => openProfilePickerModal()}
+            >
+              {i18n.t('label.pick_profile')}
+            </PrimaryButton>
+          </div>
+        )}
+
         <TransparentButton onClick={() => updateRoute('app_editProfile')}>
           <img src={EditGreen} />
           <span>{i18n.t('label.edit_profile')}</span>
@@ -51,7 +102,8 @@ const UserDetails = ({ updateRoute, userProfile, onLogout }) => {
 UserDetails.propTypes = {
   userProfile: PropTypes.object,
   onLogout: PropTypes.func.isRequired,
-  updateRoute: PropTypes.func
+  updateRoute: PropTypes.func,
+  openProfilePickerModal: PropTypes.func
 };
 
 export default UserDetails;

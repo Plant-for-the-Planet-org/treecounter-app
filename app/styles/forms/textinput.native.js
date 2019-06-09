@@ -18,13 +18,13 @@ export default (textInputStyles = EStyleSheet.create({
   },
   imageStyle: {
     width: '100%',
-    height: '100%',
-    resizeMode: 'contain'
+    height: '100%'
   },
   textboxStyle: {
-    height: 35,
-    flexGrow: 1,
+    flex: 1,
+    // flexGrow: 1,
     marginLeft: 10,
+    padding: 10,
     fontSize: 13,
     color: '#686060',
     borderBottomWidth: 1,

@@ -72,7 +72,10 @@ export default class Imprint extends Component {
     return (
       <View style={styles.content}>
         <HTMLView
-          value={section.description}
+          value={`<div>${section.description.replace(
+            /(\r\n|\n|\r)/gm,
+            ''
+          )}</div>`}
           stylesheet={styles}
           onLinkPress={url => {
             try {

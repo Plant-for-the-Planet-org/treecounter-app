@@ -18,35 +18,33 @@ import {
 class SelectedPlantProjectContainer extends Component {
   constructor(props) {
     super(props);
-    this.goBack = this.goBack.bind(this);
     this.selectProject = this.selectProject.bind(this);
   }
   componentDidMount() {
     //  this.props.selectPlantProjectAction(1);
-    console.log(this.props.navigation);
   }
 
   onTabChange(title) {
     // this.props.navigation.setParams({ titleParam: title });
   }
-  goBack() {
-    const { navigation } = this.props;
-    this.props.clearPlantProject();
-    updateRoute('app_donateTrees', navigation, 1);
-  }
   selectProject(id) {
     const { navigation } = this.props;
     this.props.selectPlantProjectAction(id);
-    updateStaticRoute('app_donate_detail', navigation);
+    if (navigation) {
+      updateStaticRoute(
+        'app_donate_detail',
+        navigation,
+        navigation.getParam('userForm')
+      );
+    }
   }
   render() {
     if (this.props.selectedProject) {
       return (
         <PlantProjectFull
+          {...this.props}
           plantProject={this.props.selectedProject}
           tpoName={this.props.selectedTpo ? this.props.selectedTpo.name : null}
-          showGoback={true}
-          onBackClick={this.goBack}
           selectProject={id => this.selectProject(id)}
         />
       );

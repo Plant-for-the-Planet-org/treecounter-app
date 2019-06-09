@@ -11,15 +11,24 @@ const Layout = {
 
 export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
-    padding: 0,
     flexDirection: 'column',
-    width: Layout.window.width - 30
+
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowOpacity: 0.5,
+    elevation: 1,
+    padding: 0,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4
   },
   projectTeaserContainer: {
     height: Layout.window.height * 0.5
   },
   projectSpecsContainer: {
-    height: Layout.window.height * 0.3
+    height: Layout.window.height * 0.3,
+    width: '100%'
   },
   select_different_project_style: {
     height: 40,
@@ -42,12 +51,12 @@ export default (selectplantprojectFull = EStyleSheet.create({
   buttonContainer: {
     flexGrow: 0,
     flexShrink: 0,
-    flexBasis: Layout.window.height * 0.15,
-    height: Layout.window.height * 0.15
+    padding: 16
   },
   plantProjectDetails: {
     flexGrow: 1,
-    flexBasis: 'auto'
+    flexBasis: 'auto',
+    padding: 16
   },
   snippetContainer: {
     width: Layout.window.width - 30
@@ -59,7 +68,6 @@ export default (selectplantprojectFull = EStyleSheet.create({
       width: 0,
       height: 0
     },
-    width: '100%',
     shadowOpacity: 0,
     elevation: 0,
     paddingBottom: 10

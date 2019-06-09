@@ -59,11 +59,6 @@ class Trillion extends Component {
           {this.state.displayName}
           <TextBlock>{i18n.t('label.trillionTreeMessage1')}</TextBlock>
           <TextBlock>{i18n.t('label.trillionTreeMessage2')}</TextBlock>
-          <ButtonHeading>
-            <SecondaryAccentButton onClick={updateRoute.bind(this, 'app_faq')}>
-              {i18n.t('label.faqs')}
-            </SecondaryAccentButton>
-          </ButtonHeading>
         </TextHeading>
         {this.props.pledgeEvents &&
         this.props.pledgeEvents.pledgeEvents.length > 0 ? (
@@ -92,19 +87,20 @@ class Trillion extends Component {
             </div>
           </div>
         ) : null}
-
-        <div className="canvasContainer flex-column">
-          <SvgContainer {...this.state.svgData} />
-          {this.state.svgData === null ? (
-            <div className="circle-inside circle-headline">
-              <LoadingIndicator />
-            </div>
-          ) : (
-            <TreecounterGraphicsText
-              trillion={true}
-              treecounterData={this.state.svgData}
-            />
-          )}
+        <div className="treecounter_container">
+          <div className="canvasContainer flex-column">
+            <SvgContainer {...this.state.svgData} />
+            {this.state.svgData === null ? (
+              <div className="circle-inside circle-headline">
+                <LoadingIndicator />
+              </div>
+            ) : (
+              <TreecounterGraphicsText
+                trillion={true}
+                treecounterData={this.state.svgData}
+              />
+            )}
+          </div>
         </div>
       </div>
     );

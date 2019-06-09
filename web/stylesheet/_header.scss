@@ -50,6 +50,51 @@
     display: flex;
     flex-direction: column;
     padding: 10px 0;
+    font-size: 13.5px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.48;
+    letter-spacing: normal;
+    text-align: left;
+    padding-top: 10px;
+    color: #9c9b9b;
+    .dedicate-trees {
+      display: flex;
+      .tooltip {
+        height: 15px;
+        width: 15px;
+        margin: 0;
+        margin-left: 5px;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .pick-profile-container {
+      padding-top: 10px;
+      display: flex;
+      align-items: center;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+      .pick-profile-username {
+        padding: 0px 10px;
+      }
+    }
+    .pick-profile-primary-button {
+      width: 96px;
+      height: 22px;
+      border-radius: 3px;
+      background-color: #b7d37f;
+
+      font-size: 12px;
+      margin: 0px;
+      padding: 0px;
+    }
 
     .gap-14 {
       margin-bottom: 15px;

@@ -1,8 +1,5 @@
 {
   "edit_trees": "Modifica alberi",
-  "tree_count": "Conteggio degli alberi",
-  "tree_species": "Specie arboree",
-  "plant_date": "Data della pianta",
   "geo_location": "Posizione geografica",
   "add_images": "Aggiungi immagini",
   "tree_classification": "Classificazione dell'albero",
@@ -12,9 +9,6 @@
   "tree_height": "Altezza dell'Albero",
   "measurement_date": "Data di Misurazione",
   "heading_register_trees": "Registrare alberi piantati",
-  "register_description": "Segnala alberi piantati. Questi alberi appariranno nel tuo banco degli alberi. Puoi in seguito aggiornare, modificare o cancellare le voci in \"I miei alberi\".",
   "register": "Registrazione",
-  "many_trees": "Molti alberi",
-  "plant_project": "Progetto di semina",
-  "plant_projects": "Progetti di semina"
+  "many_trees": "Molti alberi"
 }

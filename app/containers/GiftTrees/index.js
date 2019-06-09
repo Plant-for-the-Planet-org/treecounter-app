@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { updateRoute } from '../../helpers/routerHelper';
+import NavigationEvents from './importNavigationEvents';
 
 import {
   selectedPlantProjectSelector,
@@ -19,28 +21,66 @@ import { gift, paymentClear } from '../../actions/donateAction';
 import GiftTrees from '../../components/GiftTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 
+import i18n from '../../locales/i18n';
+
 class GiftTreesContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.openProjects = this.openProjects.bind(this);
+    this.state = { reloadTab: true };
+  }
   componentDidMount() {
-    // this.props.selectPlantProjectAction(1);
     this.props.fetchCurrencies();
+  }
+  openProjects(formValue, type) {
+    //  console.log('in gif tree', formValue);
+    let title = '';
+    if (formValue.firstname) {
+      title = formValue.firstname + ' ' + formValue.lastname;
+    } else {
+      title = formValue.name;
+    }
+    if (this.props.navigation) {
+      updateRoute('app_gift_projects', this.props.navigation, 0, {
+        userForm: formValue,
+        giftMethod: type,
+        titleParam: i18n.t('label.gift_trees_to', {
+          user: title
+        })
+      });
+    }
   }
 
   render() {
     let flag = this.props.currentUserProfile ? true : false;
-    return (
-      <GiftTrees
-        selectedProject={this.props.selectedProject}
-        selectedTpo={this.props.selectedTpo}
-        currentUserProfile={this.props.currentUserProfile}
-        currencies={this.props.currencies}
-        gift={(donationContribution, plantProjectId) =>
-          this.props.gift(donationContribution, plantProjectId, flag)
-        }
-        paymentStatus={this.props.paymentStatus}
-        paymentClear={this.props.paymentClear}
-        plantProjectClear={this.props.clearPlantProject}
-      />
-    );
+    return [
+      this.props.navigation ? (
+        <NavigationEvents
+          onWillFocus={payload => {
+            this.setState({ reloadTab: true });
+          }}
+          onWillBlur={payload => {
+            this.setState({ reloadTab: false });
+          }}
+          key="navigation-events"
+        />
+      ) : null,
+      this.state.reloadTab ? (
+        <GiftTrees
+          selectedProject={this.props.selectedProject}
+          selectedTpo={this.props.selectedTpo}
+          currentUserProfile={this.props.currentUserProfile}
+          currencies={this.props.currencies}
+          gift={(donationContribution, plantProjectId) =>
+            this.props.gift(donationContribution, plantProjectId, flag)
+          }
+          openProjects={this.openProjects}
+          paymentStatus={this.props.paymentStatus}
+          paymentClear={this.props.paymentClear}
+          plantProjectClear={this.props.clearPlantProject}
+        />
+      ) : null
+    ];
   }
 }
 
@@ -77,5 +117,6 @@ GiftTreesContainer.propTypes = {
   gift: PropTypes.func,
   fetchCurrencies: PropTypes.func,
   paymentClear: PropTypes.func,
-  clearPlantProject: PropTypes.func
+  clearPlantProject: PropTypes.func,
+  navigation: PropTypes.any
 };

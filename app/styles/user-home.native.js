@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 
 //Only take multiple of 10s
 const squareDimension =
@@ -23,16 +23,25 @@ export default (buttonStyles = EStyleSheet.create({
     padding: 10,
     marginBottom: 10
   },
+  userProfileImage: {
+    borderWidth: 5,
+    borderColor: '#fff'
+  },
   footerText: {
-    color: '#686060'
+    color: '#686060',
+    padding: 10
+  },
+  linkText: {
+    color: '$colorPrimaryAccent',
+    padding: 10
   },
   circle: {
     borderRadius: 35,
     borderWidth: 5,
     borderColor: '#fff',
     position: 'absolute',
-    height: 70,
-    width: 70
+    height: 60,
+    width: 60
   },
   userInfo: {
     padding: 10,
@@ -48,17 +57,14 @@ export default (buttonStyles = EStyleSheet.create({
     maxHeight: '100%'
   },
   profileImageContainer: {
-    width: 70,
-    height: 70,
-    alignSelf: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 5
   },
   profileImage: {
-    width: 65,
-    height: 65,
-    resizeMode: 'contain',
-    padding: 5,
-    borderRadius: 33
+    width: 50,
+    height: 50,
+    borderRadius: 50 / 2
   },
   nameStyle: {
     fontSize: 17,
@@ -67,13 +73,10 @@ export default (buttonStyles = EStyleSheet.create({
   userInfoProfileType: {
     flexDirection: 'row'
   },
-  profileTypeContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#c7c7c6',
+  profileTypeImage: {
+    width: 30,
     height: 30,
-    marginRight: 10,
-    padding: 5
+    marginRight: 10
   },
   profileTypeStyle: {
     color: '#ffffff',

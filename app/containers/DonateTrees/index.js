@@ -14,20 +14,28 @@ import {
   selectPlantProjectAction,
   clearPlantProject
 } from '../../actions/selectPlantProjectAction';
+
+import { updateUserProfile } from '../../actions/updateUserProfile';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { fetchCurrencies } from '../../actions/currencies';
-import { donate, paymentClear } from '../../actions/donateAction';
+import { donate, paymentClear, gift } from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 
+import { updateRoute } from '../../helpers/routerHelper';
 import DonateTrees from '../../components/DonateTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 
 class DonationTreesContainer extends Component {
   componentDidMount() {
-    //  this.props.selectPlantProjectAction(1);
+    let selectedProjectId = undefined;
+    if (this.props.match) {
+      selectedProjectId = parseInt(this.props.match.params.id);
+    }
+    typeof selectedProjectId == 'number' &&
+      this.props.selectPlantProjectAction(selectedProjectId);
     this.props.fetchCurrencies();
-    console.log('In donate Tree Route' + this.props.navigation);
-    console.log(this.props.navigation);
+    // console.log('In donate Tree Route' + this.props.navigation);
+    // console.log(this.props.navigation);
   }
 
   onTabChange(title) {
@@ -35,7 +43,7 @@ class DonationTreesContainer extends Component {
   }
   render() {
     let flag = this.props.currentUserProfile ? true : false;
-    console.log('donate tree called');
+    // console.log('donate tree called');
     return (
       <DonateTrees
         ref={'donateTreesContainer'}
@@ -46,6 +54,7 @@ class DonationTreesContainer extends Component {
         donate={(donationContribution, plantProjectId, profile) =>
           this.props.donate(donationContribution, plantProjectId, profile)
         }
+        updateUserProfile={this.props.updateUserProfile}
         onTabChange={title => this.onTabChange(title)}
         supportTreecounter={this.props.supportTreecounter}
         paymentStatus={this.props.paymentStatus}
@@ -53,6 +62,9 @@ class DonationTreesContainer extends Component {
         setProgressModelState={this.props.setProgressModelState}
         plantProjectClear={this.props.clearPlantProject}
         loadUserProfile={this.props.loadUserProfile}
+        updateRoute={(routeName, id) =>
+          this.props.route(routeName, id, this.props.navigation)
+        }
         {...this.props}
       />
     );
@@ -76,10 +88,14 @@ const mapDispatchToProps = dispatch => {
       selectPlantProjectAction,
       fetchCurrencies,
       donate,
+      gift,
       paymentClear,
       clearPlantProject,
       setProgressModelState,
-      loadUserProfile
+      loadUserProfile,
+      updateUserProfile,
+      route: (routeName, id, navigation) => dispatch =>
+        updateRoute(routeName, navigation || dispatch, id)
     },
     dispatch
   );
@@ -91,7 +107,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 DonationTreesContainer.propTypes = {
   selectedProject: PropTypes.object,
-  navigation: PropTypes.object,
+  navigation: PropTypes.any,
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
@@ -99,9 +115,13 @@ DonationTreesContainer.propTypes = {
   selectPlantProjectAction: PropTypes.func,
   paymentClear: PropTypes.func,
   donate: PropTypes.func,
+  gift: PropTypes.func,
   fetchCurrencies: PropTypes.func,
   clearPlantProject: PropTypes.func,
   supportTreecounter: PropTypes.object,
   setProgressModelState: PropTypes.func,
-  loadUserProfile: PropTypes.func
+  loadUserProfile: PropTypes.func,
+  route: PropTypes.func,
+  updateUserProfile: PropTypes.func,
+  match: PropTypes.any
 };

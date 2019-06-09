@@ -21,12 +21,13 @@ import i18n from '../../locales/i18n';
 import FAQContainer from '../../containers/FAQ';
 import UserContributions from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
-import SearchLayout from '../Header/SearchLayout.native';
+import SearchLayout from '../Header/SearchLayout';
 import AboutUsContainer from '../../containers/AboutUs';
-import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal.native';
-import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal.native';
-import LicenseInfoList from '../AboutUs/LicenseInfoList.native';
-import TabContainer from '../../containers/Menu/TabContainer';
+import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
+import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
+import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal';
+import LicenseInfoList from '../AboutUs/LicenseInfoList';
+import BottomTabContainer from '../../containers/Menu/TabContainer';
 import GiftTrees from '../../containers/GiftTrees';
 import LeaderBoard from '../Leaderboard';
 import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
@@ -36,11 +37,17 @@ import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
+import SelectedCompetition from '../../containers/SelectedCompetition';
 import RedemptionContainer from '../../containers/RedemptionContainer';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ImprintContainer from '../../containers/Imprint';
 import PrivacyContainer from '../../containers/Privacy';
+import CompetitionContainer from '../../containers/CompetitionContainer';
+import ChallengeContainer from '../../containers/Challenge/createChallenge';
+import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
+import EditCompetitionContainer from '../../containers/EditCompetition';
+import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -52,36 +59,36 @@ const headerLabels = {
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
-  [getLocalRoute('app_homepage')]: 'World',
+  [getLocalRoute('app_homepage')]: 'label.trillion_tree_campaign_app_header',
   [getLocalRoute('app_explore')]: 'label.explore',
   [getLocalRoute('app_userHome')]: 'Trillion Tree Campaign',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   [getLocalRoute('app_editProfile')]: 'label.edit_profile',
   [getLocalRoute('app_redeem')]: 'label.redeem_trees',
+  [getLocalRoute('app_competitions')]: 'label.competitions',
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   [getLocalRoute('app_selectProject')]: 'label.donate',
+  [getLocalRoute('app_competition')]: 'label.competitions',
+  [getLocalRoute('app_editCompetition')]: 'label.edit_competition',
   [getLocalRoute('app_imprint')]: 'label.imprint',
   [getLocalRoute('app_privacy')]: 'label.data_protection',
+  [getLocalRoute('app_challenge')]: 'label.challenge_heading',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license',
   ['delete_profile_confirm']: 'label.delete_profile',
-  ['app_donate_detail']: 'label.donate'
+  ['delete_contribution']: 'label.delete_contribution',
+  ['app_donate_detail']: 'label.donate',
+  ['app_gift_projects']: 'label.gift_trees',
+  ['pickup_profile_modal']: 'label.dedicate_trees_to'
 };
 
-export const getAppNavigator = function(
-  isLoggedIn,
-  userProfile,
-  isWelcomeScreenEnabled = false
-) {
+export const getAppNavigator = function(isLoggedIn, userProfile) {
   const baseNavigator = createStackNavigator(
     {
       [getLocalRoute('app_editProfile')]: {
         screen: isLoggedIn ? EditUserProfile : LoginContainer
-      },
-      [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : Trillion
       },
       [getLocalRoute('app_login')]: {
         screen: LoginContainer
@@ -92,6 +99,9 @@ export const getAppNavigator = function(
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
       },
+      [getLocalRoute('app_myTrees')]: {
+        screen: UserContributions
+      },
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
       },
@@ -99,6 +109,7 @@ export const getAppNavigator = function(
         screen: ActivateAccountContainer
       },
       [getLocalRoute('app_faq')]: FAQContainer,
+      ['pickup_profile_modal']: ProfilePickerModal,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
 
       ['about_us']: { screen: AboutUsContainer },
@@ -118,8 +129,16 @@ export const getAppNavigator = function(
         screen: RedemptionContainer
       },
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
-      ['app_donate_detail']: {
+      [getLocalRoute('app_target')]: {
+        screen: isLoggedIn ? TargetContainer : LoginContainer
+      },
+      [getLocalRoute('app_challenge')]: ChallengeContainer,
+      ['app_gift_projects']: {
         screen: SelectPlantProjectContainer
+      },
+      [getLocalRoute('app_accountActivate')]: {
+        screen: SuccessfullActivatedContainer,
+        path: getLocalRoute('app_accountActivate') + '/:token'
       }
     },
     {
@@ -165,6 +184,25 @@ export const getAppNavigator = function(
       }
     }
   );
+  const deleteContributionNavigator = createStackNavigator(
+    {
+      ['delete_contribution']: {
+        screen: ConfirmContributionDeletionModal
+      }
+    },
+    {
+      headerMode: 'none',
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 0,
+          timing: Animated.timing
+        }
+      }),
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  );
   const welcomeScreenNavigator = createStackNavigator(
     {
       ['welcome_screen']: { screen: WelcomeScreenModal }
@@ -195,14 +233,19 @@ export const getAppNavigator = function(
           navigation.state.routes &&
           navigation.state.routes.length > 0
         ) {
-          title = i18n.t(
-            headerLabels[navigation.state.routes[index].routeName]
-          );
-          if (navigation.state.routes[index].hasOwnProperty('params')) {
-            const childTitle = navigation.state.routes[index].params.titleParam;
+          if (navigation.state.routes[index].routeName === '/home') {
+            title = userProfile.fullname;
+          } else {
+            title = i18n.t(
+              headerLabels[navigation.state.routes[index].routeName]
+            );
+            if (navigation.state.routes[index].hasOwnProperty('params')) {
+              const childTitle =
+                navigation.state.routes[index].params.titleParam;
 
-            if (childTitle) {
-              title = childTitle;
+              if (childTitle) {
+                title = childTitle;
+              }
             }
           }
         }
@@ -215,24 +258,24 @@ export const getAppNavigator = function(
   };
   const ApptabNavigator = createBottomTabNavigator(
     {
+      [getLocalRoute('app_homepage')]: {
+        screen: Trillion
+      },
       [getLocalRoute('app_userHome')]: {
         screen: isLoggedIn ? UserHomeContainer : LoginContainer
       },
       [getLocalRoute('app_registerTrees')]: {
         screen: isLoggedIn ? RegisterTrees : LoginContainer
       },
-      [getLocalRoute('app_target')]: {
-        screen: isLoggedIn ? TargetContainer : LoginContainer
+      [getLocalRoute('app_competitions')]: {
+        screen: isLoggedIn ? CompetitionContainer : LoginContainer
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
       },
 
       [getLocalRoute('app_giftTrees')]: {
-        screen: SelectPlantProjectContainer
-      },
-      [getLocalRoute('app_homepage')]: {
-        screen: Trillion
+        screen: GiftTrees
       }
     },
     {
@@ -242,7 +285,7 @@ export const getAppNavigator = function(
         animatedEnable: true,
         swipeEnable: false
       },
-      tabBarComponent: TabContainer
+      tabBarComponent: BottomTabContainer
     }
   );
 
@@ -253,29 +296,31 @@ export const getAppNavigator = function(
       [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
       },
+      [getLocalRoute('app_competition')]: {
+        screen: isLoggedIn ? SelectedCompetition : LoginContainer
+      },
+      [getLocalRoute('app_editCompetition')]: {
+        screen: isLoggedIn ? EditCompetitionContainer : LoginContainer
+      },
       ['app_donate_detail']: {
         screen: DonationTreesContainer
       }
     },
     {
       navigationOptions: ({ navigation }) => {
-        let title = navigation.getParam('titleParam');
         let navigationConfig = {
           headerStyle: styles.container,
+          headerTitleStyle: { paddingRight: 16 },
           headerTintColor: '#fff',
           headerBackTitle: null,
-          title: getTitle(navigation)
+          title: getTitle(navigation),
+          headerRight: (
+            <HeaderRight navigation={navigation} userProfile={userProfile} />
+          )
         };
-        // if (homeRoutes.includes(navigation.state.routeName)) {
-        navigationConfig.headerRight = HeaderRight(navigation);
-        // }
-        // if (
-        //   navigation.state.routeName === getLocalRoute('app_userHome') ||
-        //   (navigation.state.routeName === getLocalRoute('app_homepage') &&
-        //     !isLoggedIn)
-        // ) {
+
         if (navigation.state.routeName === 'Tab') {
-          navigationConfig.headerLeft = BurgerMenu(navigation, userProfile);
+          navigationConfig.headerLeft = <BurgerMenu navigation={navigation} />;
         }
         return navigationConfig;
       }
@@ -287,12 +332,11 @@ export const getAppNavigator = function(
       appStackNavigator,
       searchNavigator: searchNavigator,
       deleteProfileNavigator,
+      deleteContributionNavigator,
       welcomeScreenNavigator
     },
     {
-      initialRouteName: isWelcomeScreenEnabled
-        ? 'welcomeScreenNavigator'
-        : 'appStackNavigator',
+      initialRouteName: 'appStackNavigator',
       gesturesEnabled: false,
       contentComponent: SideMenuContainer
     }

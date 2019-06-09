@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
 
+import { delimitNumbers } from '../../utils/utils';
+
 const TpoCardText = props => {
   const { name, tponame, cardtext } = props;
 
@@ -16,13 +18,13 @@ const TpoCardText = props => {
       <div className="middle_tag">
         <span className="col-md-8 text-left">{i18n.t('label.planted')}: </span>{' '}
         <span className="col-md-4 text-right">
-          {parseInt(cardtext.countPlanted).toLocaleString('en')}
+          {delimitNumbers(parseInt(cardtext.countPlanted))}
         </span>
       </div>
       <div className="middle_tag">
         <span className="col-md-8 text-left">{i18n.t('label.target')}:</span>{' '}
         <span className="text-right col-md-4">
-          {parseInt(cardtext.countTarget).toLocaleString('en')}
+          {delimitNumbers(parseInt(cardtext.countTarget))}
         </span>
       </div>
       <div className="middle_tag">

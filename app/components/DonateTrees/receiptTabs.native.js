@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
+import { ScrollView, View } from 'react-native';
 import t from 'tcomb-form-native';
 import {
   receiptCompanyFormSchema,
@@ -21,14 +22,14 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 let Form = t.form.Form;
 
-export default class RecieptTabsView extends Component {
+export default class RecieptTabsView extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
       routes: [
-        { key: 'individual', title: 'Individual' },
-        { key: 'company', title: 'Company' }
+        { key: 'individual', title: i18n.t('label.individual_name') },
+        { key: 'company', title: i18n.t('label.company') }
       ],
       index: 0
     };
@@ -40,6 +41,14 @@ export default class RecieptTabsView extends Component {
       this.companyRecipt = element;
     };
   }
+
+  onNextClickIndividual = value => {
+    this.props.goToNextTab(value);
+  };
+
+  onNextClickCompany = value => {
+    this.props.goToNextTab(value);
+  };
 
   indexChange(index) {
     this.setState({
@@ -78,51 +87,35 @@ export default class RecieptTabsView extends Component {
       />
     );
   };
-  onNextClickIndividual = () => {
-    this.props.goToNextTab(this.individualRecipt.getValue());
-  };
-
-  onNextClickCompany = () => {
-    this.props.goToNextTab(this.companyRecipt.getValue());
-  };
 
   _renderSelectPlantScene = ({ route }) => {
+    const { currentUserProfile, showNextButton } = this.props;
     switch (route.key) {
       case 'individual':
         return (
-          <KeyboardAwareScrollView>
-            <CardLayout>
-              <Form
-                ref={this.setIndividualDonateReceipt}
-                type={receiptIndividualFormSchema}
-                options={individualSchemaOptions}
-                value={this.props.currentUserProfile}
-              />
-              {this.props.showNextButton ? (
-                <PrimaryButton onClick={() => this.onNextClickIndividual()}>
-                  {i18n.t('label.next')}
-                </PrimaryButton>
-              ) : null}
-            </CardLayout>
-          </KeyboardAwareScrollView>
+          <DonationTabView
+            currentUserProfile={currentUserProfile}
+            showNextButton={showNextButton}
+            formSchema={receiptIndividualFormSchema}
+            formOption={individualSchemaOptions}
+            formValue={
+              currentUserProfile || this.props.formValue['receiptIndividual']
+            }
+            onNextClick={this.onNextClickIndividual}
+          />
         );
       case 'company':
         return (
-          <KeyboardAwareScrollView>
-            <CardLayout>
-              <Form
-                ref={this.setCompanyDonateReceipt}
-                type={receiptCompanyFormSchema}
-                options={companySchemaOptions}
-                value={this.props.currentUserProfile}
-              />
-              {this.props.showNextButton ? (
-                <PrimaryButton onClick={() => this.onNextClickCompany()}>
-                  {i18n.t('label.next')}
-                </PrimaryButton>
-              ) : null}
-            </CardLayout>
-          </KeyboardAwareScrollView>
+          <DonationTabView
+            currentUserProfile={currentUserProfile}
+            showNextButton={showNextButton}
+            formSchema={receiptCompanyFormSchema}
+            formOption={companySchemaOptions}
+            formValue={
+              currentUserProfile || this.props.formValue['receiptCompany']
+            }
+            onNextClick={this.onNextClickCompany}
+          />
         );
       default:
         return null;
@@ -131,14 +124,16 @@ export default class RecieptTabsView extends Component {
 
   render() {
     return (
-      <TabView
-        ref={this.tabView}
-        useNativeDriver={true}
-        navigationState={this.state}
-        renderScene={this._renderSelectPlantScene}
-        renderTabBar={this._renderTabBar}
-        onIndexChange={this._handleIndexChange}
-      />
+      <View style={{ flex: 1, marginBottom: 40 }}>
+        <TabView
+          ref={this.tabView}
+          useNativeDriver={true}
+          navigationState={this.state}
+          renderScene={this._renderSelectPlantScene}
+          renderTabBar={this._renderTabBar}
+          onIndexChange={this._handleIndexChange}
+        />
+      </View>
     );
   }
 }
@@ -148,4 +143,48 @@ RecieptTabsView.propTypes = {
   goToNextTab: PropTypes.func,
   showNextButton: PropTypes.bool,
   onReciptTabChange: PropTypes.func
+};
+
+class DonationTabView extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this._formRef = React.createRef();
+  }
+
+  render() {
+    const { formOption, formValue, formSchema } = this.props;
+    return (
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ paddingBottom: 35 }}
+        enableOnAndroid={false}
+      >
+        <CardLayout>
+          <Form
+            ref={this._formRef}
+            type={formSchema}
+            options={formOption}
+            value={formValue}
+          />
+          {this.props.showNextButton ? (
+            <PrimaryButton
+              onClick={() =>
+                this.props.onNextClick(this._formRef.current.getValue())
+              }
+            >
+              {i18n.t('label.next')}
+            </PrimaryButton>
+          ) : null}
+        </CardLayout>
+      </KeyboardAwareScrollView>
+    );
+  }
+}
+
+DonationTabView.propTypes = {
+  currentUserProfile: PropTypes.object,
+  onNextClick: PropTypes.func,
+  showNextButton: PropTypes.bool,
+  formOption: PropTypes.any,
+  formValue: PropTypes.any,
+  formSchema: PropTypes.any
 };

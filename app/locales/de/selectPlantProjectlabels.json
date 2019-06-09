@@ -1,4 +1,9 @@
 {
   "name": "Name",
-  "select_project": "Projekt aussuchen"
+  "price": "Preis",
+  "select_project": "Projekt aussuchen",
+  "featured": "Empfohlen",
+  "list": "Liste",
+  "price": "Preis",
+  "country": "Land"
 }

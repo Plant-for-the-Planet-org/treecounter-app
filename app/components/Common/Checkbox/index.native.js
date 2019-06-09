@@ -14,8 +14,7 @@ class CheckBox extends React.Component {
   imageStyle = {
     width: 20,
     height: 20,
-    marginRight: 10,
-    resizeMode: 'contain'
+    marginRight: 10
   };
 
   textboxStyle = {
@@ -29,14 +28,22 @@ class CheckBox extends React.Component {
       <View style={this.containerStyle}>
         <TouchableOpacity onPress={this.onValueChange}>
           {this.props.value ? (
-            <Image style={this.imageStyle} source={checkedIcon} />
+            <Image
+              style={this.imageStyle}
+              resizeMode={'contain'}
+              source={checkedIcon}
+            />
           ) : (
-            <Image style={this.imageStyle} source={uncheckedIcon} />
+            <Image
+              style={this.imageStyle}
+              resizeMode={'contain'}
+              source={uncheckedIcon}
+            />
           )}
         </TouchableOpacity>
-        {this.props.title && (
+        {this.props.title ? (
           <Text style={this.textboxStyle}>{this.props.title}</Text>
-        )}
+        ) : null}
       </View>
     );
   }

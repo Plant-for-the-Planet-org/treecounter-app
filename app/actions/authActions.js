@@ -8,36 +8,54 @@ import { updateJWT, updateActivateToken } from '../utils/user';
 import { NotificationAction } from './notificationAction';
 import { loadTpos } from './loadTposAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
-import _ from 'lodash';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
+import _ from 'lodash';
 export const userLogout = createAction('USER_LOGOUT');
 
-export function login(credentials, navigation = undefined) {
-  const request = postRequest('api_login_check', credentials);
+export function login(credentials, recaptchaToken, navigation = undefined) {
+  const request = postRequest(
+    'api_login_check',
+    credentials,
+    null,
+    false,
+    recaptchaToken
+  );
 
   return dispatch => {
     dispatch(setProgressModelState(true));
-    request
+    return request
       .then(res => {
         const { token, refresh_token, data } = res.data;
         if (!data.isActivated) {
           updateActivateToken(credentials._username, token);
         } else {
           updateJWT(token, refresh_token);
+          dispatch(setProgressModelState(false));
           dispatch(loadUserProfile(data));
+          dispatch(setProgressModelState(true));
           dispatch(NotificationAction());
         }
-        updateRoute(
-          data.routeName,
-          navigation || dispatch,
-          null,
-          data.routeParams
+        //On App it is causing crash or undefined behavior
+        //May be Dispatch load user profile and Update route causing some issue in
+        //App Drawer Navigator , for now putting a 0 sec timeout to delay the this until store gets updated
+        //We require this updateRuute if server sent route name in response like activation screen else we can ignore this
+        setTimeout(
+          () =>
+            updateRoute(
+              data.routeName,
+              navigation || dispatch,
+              null,
+              data.routeParams
+            ),
+          1000
         );
         dispatch(setProgressModelState(false));
-        return token;
+        return res;
       })
       .catch(err => {
         dispatch(setProgressModelState(false));
+        NotificationManager.error(err.response.data.message, 'Error', 5000);
+        throw err;
       });
   };
 }
@@ -53,14 +71,17 @@ export function logoutUser() {
 export function forgot_password(data, navigation = undefined) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    postRequest('auth_forgotPassword_post', data)
+    return postRequest('auth_forgotPassword_post', data)
       .then(res => {
         dispatch(setProgressModelState(false));
         updateRoute('app_passwordSent', navigation || dispatch);
+        return res;
       })
       .catch(err => {
         debug(err);
         dispatch(setProgressModelState(false));
+        NotificationManager.error(err.response.data.message, 'Error', 5000);
+        throw err;
       });
   };
 }
@@ -77,11 +98,14 @@ export function sendEmail(navigation = undefined) {
 
 export function reset_password(data, navigation = undefined) {
   return dispatch => {
-    postRequest('auth_resetPassword_post', data)
+    return postRequest('auth_resetPassword_post', data)
       .then(res => {
         updateRoute('app_login', navigation || dispatch);
       })
-      .catch(err => debug(err));
+      .catch(err => {
+        debug(err);
+        throw err;
+      });
   };
 }
 export function setAccessDenied(data, params, path, navigation = undefined) {

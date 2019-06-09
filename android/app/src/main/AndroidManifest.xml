@@ -1,25 +1,71 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.treecounterapp">
+    package="org.pftp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
       android:icon="@mipmap/ic_launcher"
+      android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="true"
-       android:hardwareAccelerated="false"
-    android:largeHeap="true"
+      android:hardwareAccelerated="false"
+      android:largeHeap="true"
       android:theme="@style/AppTheme">
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
+        android:launchMode="singleTop"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="adjustResize">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="trilliontreecampaign" />
+        </intent-filter>
+        <intent-filter android:autoVerify="true">
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:path="/" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/imprint" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/edit-profile" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/login" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/password-sent" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/signup" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/my-trees" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/forgot-password" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/account-activation" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/faq" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/about_us" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/license_info_list" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/data-protection-policy" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/redeem" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/claim" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/edit-trees" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/target" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/challenge" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/app_gift_projects" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/account-activate" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/home" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/register-trees" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/competitions" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/donate-trees" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/gift-trees" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/competition" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/edit-competition" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/app_donate_detail" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/select-project" />
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />

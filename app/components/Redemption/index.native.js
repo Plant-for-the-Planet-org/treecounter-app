@@ -15,6 +15,7 @@ import styles from '../../styles/redeem';
 import { View, Image, TextInput, Text } from 'react-native';
 import { updateRoute } from '../../helpers/routerHelper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import TabContainer from '../../containers/Menu/TabContainer';
 
 export default class Redemption extends Component {
   constructor(props) {
@@ -48,7 +49,8 @@ export default class Redemption extends Component {
       successText,
       actionText,
       statusText,
-      form;
+      form,
+      right_icon = null;
     errorText = this.props.errorText ? (
       <View>
         <Text style={styles.errorTextStyle}>{this.props.errorText}</Text>
@@ -90,7 +92,13 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </View>
       );
-      icon = <Image style={styles.imageStyle} source={redeemRed} />;
+      icon = (
+        <Image
+          style={styles.imageStyle}
+          resizeMode="contain"
+          source={redeemRed}
+        />
+      );
       // icon = redeemRed;
     } else if (this.props.pageStatus === 'code-unknown') {
       button = (
@@ -100,7 +108,13 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </View>
       );
-      icon = <Image style={styles.imageStyle} source={redeemGreen} />;
+      icon = (
+        <Image
+          style={styles.imageStyle}
+          resizeMode="contain"
+          source={redeemGreen}
+        />
+      );
     } else if (this.props.pageStatus === 'not-logged-in') {
       button = (
         <View style={styles.loginButtons}>
@@ -118,7 +132,13 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </View>
       );
-      icon = <Image style={styles.imageLoginStyle} source={redeemSignIn} />;
+      icon = (
+        <Image
+          style={styles.imageLoginStyle}
+          resizeMode="contain"
+          source={redeemSignIn}
+        />
+      );
     } else {
       button = (
         <View style={styles.buttonStyle}>
@@ -127,7 +147,13 @@ export default class Redemption extends Component {
           </PrimaryButton>
         </View>
       );
-      icon = <Image style={styles.imageStyle} source={redeemGreen} />;
+      icon = (
+        <Image
+          style={styles.imageStyle}
+          resizeMode="contain"
+          source={redeemGreen}
+        />
+      );
     }
 
     let value = this.state.value;
@@ -143,26 +169,22 @@ export default class Redemption extends Component {
           code: null
         });
       };
-      let right_icon = disabled ? (
-        <TouchableItem
-          style={styles.glyphiconTouch}
-          onPress={() => onCrossClick()}
-        >
+      right_icon = disabled ? (
+        <TouchableItem onPress={() => onCrossClick()}>
           <Image style={styles.glyphiconStyle} source={close_green} />
         </TouchableItem>
       ) : null;
       form = (
         <View style={styles.redeemInputView}>
-          <View>
-            <TextInput
-              style={styles.inputStyle}
-              editable={!disabled}
-              value={value}
-              maxLength={20}
-              onChangeText={evt => this.onChange(evt)}
-            />
-            {right_icon}
-          </View>
+          <TextInput
+            style={styles.inputStyle}
+            editable={!disabled}
+            value={value}
+            maxLength={20}
+            onChangeText={evt => this.onChange(evt)}
+            autoCapitalize={'sentences'}
+          />
+          {right_icon}
         </View>
       );
     } else {
@@ -188,21 +210,28 @@ export default class Redemption extends Component {
         <LoadingIndicator />
       </View>
     ) : (
-      <KeyboardAwareScrollView>
-        <View style={styles.parentContainer}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.titleText}>
-              {i18n.t('label.redeem_heading')}
-            </Text>
+      <View style={{ flex: 1 }}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={{
+            paddingBottom: 72
+          }}
+        >
+          <View style={styles.parentContainer}>
+            <CardLayout style={styles.cardContainer}>
+              <Text style={styles.titleText}>
+                {i18n.t('label.redeem_heading')}
+              </Text>
+            </CardLayout>
+            <CardLayout style={styles.cardContainer}>
+              {icon}
+              {content}
+              {form}
+              {button}
+            </CardLayout>
           </View>
-          <CardLayout style={styles.cardContainer}>
-            {icon}
-            {content}
-            {form}
-            {button}
-          </CardLayout>
-        </View>
-      </KeyboardAwareScrollView>
+        </KeyboardAwareScrollView>
+        <TabContainer {...this.props} />
+      </View>
     );
   }
 }

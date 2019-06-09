@@ -17,15 +17,22 @@ export default (datePickerStyle = EStyleSheet.create({
     fontSize: 17,
     paddingBottom: 1
   },
-  addIcon: {
+  profileImageBackground: {
     position: 'absolute',
     height: 15,
-    left: 50,
-    top: 50,
+    left: 40,
+    top: 40,
     width: 15,
-    backgroundColor: '#fff',
-    resizeMode: 'contain',
-    borderRadius: 7,
+    zIndex: 10,
+    borderRadius: 15,
+    backgroundColor: '#ffffff'
+  },
+  addIcon: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width: 15,
+    height: 15,
     transform: [{ rotate: '45deg' }]
   }
 }));

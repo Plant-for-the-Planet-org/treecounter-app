@@ -7,6 +7,9 @@ const Layout = {
   }
 };
 export default (selectplantprojectFull = EStyleSheet.create({
+  flexContainer: {
+    flex: 1
+  },
   listItemContainer: {
     flexDirection: 'column',
     height: 150
@@ -16,16 +19,6 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   evenItemStyle: {
     backgroundColor: '#f0f0f0'
-  },
-  projectNameContainer: {
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 5,
-    borderColor: '#efefef',
-    borderStyle: 'solid',
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
-    flexDirection: 'row'
   },
   projectImageContainer: {
     width: 25,
@@ -40,8 +33,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectImage: {
     flex: 1,
     width: undefined,
-    height: undefined,
-    resizeMode: 'contain'
+    height: undefined
   },
   projectNameTextContainer: {
     flexDirection: 'column'
@@ -87,6 +79,12 @@ export default (selectplantprojectFull = EStyleSheet.create({
     borderBottomWidth: 1,
     padding: 10
   },
+  searchItem: {
+    // paddingBottom: 10
+    backgroundColor: 'white',
+    height: 40
+    //marginRight: 15
+  },
   searchIconContainer: {
     height: 15,
     width: 15,
@@ -94,8 +92,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   searchIcon: {
     height: '100%',
-    width: '100%',
-    resizeMode: 'contain'
+    width: '100%'
   },
   searchInput: {
     flex: 1,
@@ -136,13 +133,18 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   imageStyle: {
     flex: 1,
-    width: undefined,
-    height: undefined
+    width: '100%',
+    height: '100%'
   },
 
   cardHeader: {
     flexDirection: 'row',
-    padding: 10
+    padding: 10,
+
+    backgroundColor: 'white'
+  },
+  listViewContainer: {
+    flex: 0.95
   },
   headingStyle: {
     fontSize: 16,
@@ -152,7 +154,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   cardStyle: {
     width: Layout.window.width - 30,
     padding: 0,
-    margin: 0,
+    //margin: 0,
     paddingBottom: 10
   }
 }));

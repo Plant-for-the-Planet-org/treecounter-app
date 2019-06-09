@@ -19,9 +19,13 @@ function checkStatus(response) {
 }
 
 function onAPIError(error) {
-  if (error.response) {
-    NotificationManager.error(error.response.data.message, 'Error', 5000);
+  //400 : INPUT_VALIDATION_ERROR dont show error balloons
+  if (error.response && error.response.status === 400) {
+    throw error;
   }
+  // if (error.response) {
+  //   NotificationManager.error(error.response.data.message, 'Error', 5000);
+  // }
   if (error.response && error.response.status === 401) {
     getStore().dispatch(logoutUser());
   } else {
@@ -33,8 +37,17 @@ function onAPIResponse(response) {
   return response;
 }
 
-async function getHeaders(authenticated = false) {
-  const headers = { 'X-SESSION-ID': await getSessionId() };
+async function getHeaders(authenticated = false, recaptcha) {
+  let headers = {
+    'X-SESSION-ID': await getSessionId()
+    // 'X-VERSION-KEY': 'd3b7387a-35d8-11e9-b210-d663bd873d93'
+  };
+  if (recaptcha) {
+    headers = {
+      ...headers,
+      'X-CAPTCHA-TOKEN': recaptcha
+    };
+  }
   if (authenticated) {
     return {
       headers: { ...headers, Authorization: `Bearer ${await getAccessToken()}` }
@@ -94,10 +107,16 @@ export async function postActivateLinkRequest(route, data, params) {
     .catch(onAPIError);
 }
 
-export async function postRequest(route, data, params, authenticated = false) {
+export async function postRequest(
+  route,
+  data,
+  params,
+  authenticated = false,
+  recaptcha = false
+) {
   let url = await getApiRoute(route, params);
   return await axios
-    .post(url, data, await getHeaders(authenticated))
+    .post(url, data, await getHeaders(authenticated, recaptcha))
     .then(checkStatus)
     .then(onAPIResponse)
     .catch(onAPIError);
@@ -120,6 +139,7 @@ export async function postAuthenticatedRequest(route, data, params) {
 
 export async function putRequest(route, data, params, authenticated = false) {
   let url = await getApiRoute(route, params);
+  console.log(url);
   return await axios
     .put(url, data, await getHeaders(authenticated))
     .then(checkStatus)

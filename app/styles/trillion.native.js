@@ -21,6 +21,20 @@ export default (trillionStyles = EStyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
+  pledgeContainer: {
+    flexDirection: 'column',
+    flex: 1
+  },
+  pledgeText: {
+    color: '#b7afad',
+    fontSize: 15,
+    marginBottom: 15,
+    margin: 15
+  },
+  pledgeEventContainer: {
+    flexDirection: 'row',
+    flex: 1
+  },
   headerContainer: {
     flexDirection: 'column',
     backgroundColor: 'white',
@@ -36,14 +50,12 @@ export default (trillionStyles = EStyleSheet.create({
   imageStyle: {
     width: 59,
     height: 81,
-    margin: 15,
-    resizeMode: 'contain'
+    margin: 15
   },
   imageLoginStyle: {
     width: 50,
     height: 50,
-    margin: 25,
-    resizeMode: 'contain'
+    margin: 25
   },
   descriptionTextStyle: {
     color: '$textColor',

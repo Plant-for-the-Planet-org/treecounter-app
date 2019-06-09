@@ -14,6 +14,9 @@ export const getProfileTypeName = function(profileType) {
     case 'education': {
       return i18n.t('label.education');
     }
+    case 'organization': {
+      return i18n.t('label.organization');
+    }
   }
 };
 

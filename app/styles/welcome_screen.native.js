@@ -21,24 +21,24 @@ export default (welcomeScreenStyle = EStyleSheet.create({
   },
   textHeader: {
     color: '#fff',
-    fontSize: 24,
-    marginBottom: 25,
+    fontSize: 22,
+    marginBottom: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
     fontWeight: 'bold',
     textAlign: 'center'
   },
   imageStyle: {
-    width: 300,
-    height: 300,
-    margin: 15,
-    resizeMode: 'contain'
+    width: 250,
+    height: 250,
+    margin: 15
   },
   textPara: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 16,
     paddingLeft: 15,
     paddingRight: 15,
-    textAlign: 'center',
-    fontWeight: 'bold'
+    textAlign: 'center'
   },
   bottomRow: {
     backgroundColor: '#85a64d',

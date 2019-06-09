@@ -8,6 +8,7 @@ import { updateJWT, updateActivateToken } from '../utils/user';
 import { NotificationAction } from './notificationAction';
 import { loadTpos } from './loadTposAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import _ from 'lodash';
 export const userLogout = createAction('USER_LOGOUT');
 
@@ -53,6 +54,7 @@ export function login(credentials, recaptchaToken, navigation = undefined) {
       })
       .catch(err => {
         dispatch(setProgressModelState(false));
+        NotificationManager.error(err.response.data.message, 'Error', 5000);
         throw err;
       });
   };
@@ -78,6 +80,7 @@ export function forgot_password(data, navigation = undefined) {
       .catch(err => {
         debug(err);
         dispatch(setProgressModelState(false));
+        NotificationManager.error(err.response.data.message, 'Error', 5000);
         throw err;
       });
   };

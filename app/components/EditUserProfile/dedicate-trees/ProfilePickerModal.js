@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import SearchAutosuggest from '../../Header/SearchAutosuggest';
+import i18n from '../../../locales/i18n.js';
 
 class ProfilePickerModal extends Component {
   constructor() {
@@ -22,7 +23,7 @@ class ProfilePickerModal extends Component {
             <PrimaryButton
               onClick={() => pickupProfile(this.state.selectedSuggestion)}
             >
-              Pick Profile
+              {i18n.t('label.pick_profile')}
             </PrimaryButton>
           ) : null}
         </div>

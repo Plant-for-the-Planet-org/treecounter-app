@@ -61,7 +61,9 @@ class HeaderFields extends Component {
                   </span>
                 </div>
                 <div className="bell-icon">
-                  <i className="material-icons">notifications_none</i>
+                  <i className="material-icons">
+                    {i18n.t('label.no_notifications')}
+                  </i>
                 </div>
               </div>
             }

@@ -246,7 +246,10 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
               {i18n.t('label.thankyou_planting', { count: context.treeCount })}
             </Text>
 
-            <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+            <InlineLink
+              uri={'app_userHome'}
+              caption={i18n.t('label.return_home')}
+            />
           </View>
         ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
           <View style={{ flex: 1, alignItems: 'center' }}>

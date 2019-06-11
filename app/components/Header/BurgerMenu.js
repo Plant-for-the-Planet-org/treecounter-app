@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import i18n from '../../locales/i18n';
 
 import {
   openSideNavAction,
@@ -20,7 +21,7 @@ class BurgerMenu extends Component {
         onClick={this.props.toggleSideNavAction}
         className="material-icons burger-icon"
       >
-        {'menu'}
+        {i18n.t('label.menu')}
       </i>
     );
   }

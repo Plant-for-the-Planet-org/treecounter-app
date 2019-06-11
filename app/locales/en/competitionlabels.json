@@ -27,5 +27,6 @@
   "competition_access_request": "Anyone (Request to Join)",
   "mine_create": "You do not have any competitions. Any competition you create or join will appear on this page. Sorted by Creation Date",
   "competition_access_invitation": "Only people I Invite",
-  "edit_competition": "Edit Competition"
+  "edit_competition": "Edit Competition",
+  "by_a_name": "by"
 }

@@ -84,7 +84,10 @@ document.addEventListener('DOMContentLoaded', function() {
               );
             } catch (err) {}
 
-            const treecounter = result.data;
+            let treecounter = result.data;
+            if (!isStandardTreecounter) {
+              treecounter.id = 1;
+            }
 
             let div = document.createElement('pftp-widget-treecounter');
             const shadowRoot = div.attachShadow({ mode: 'closed' });

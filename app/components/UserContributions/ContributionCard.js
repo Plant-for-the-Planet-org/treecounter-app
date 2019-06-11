@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import classnames from 'classnames';
 import Lightbox from 'react-images';
 import { Link } from 'react-router-dom';
-
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import TextSpan from '../Common/Text/TextSpan';
 import ConfirmDeletion from './ConfirmDelete';
-import i18n from '../../locales/i18n.js';
 import { updateRoute } from '../../helpers/routerHelper';
 import { delimitNumbers } from '../../utils/utils';
+import moment from 'moment';
+import 'moment/min/locales';
+import i18n from '../../locales/i18n.js';
+import { getDateFromMySQL } from '../../helpers/utils';
 
 export default class ContributionCard extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ export default class ContributionCard extends React.Component {
       viewExpanded: false,
       openDialog: false
     };
+    moment.locale(i18n.language);
   }
 
   closeLightbox = () => this.setState({ lightboxIsOpen: false });
@@ -52,9 +54,9 @@ export default class ContributionCard extends React.Component {
     return isGift
       ? [
           <TextSpan>
-            {'Gifted on ' +
-              moment(new Date(plantDate)).format('DD MMM YYYY') +
-              ' to '}
+            {i18n.t('label.gifted_on_to', {
+              date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
+            })}
           </TextSpan>,
           <TextSpan
             onPress={() =>
@@ -66,26 +68,30 @@ export default class ContributionCard extends React.Component {
             {givee}
           </TextSpan>
         ]
-      : 'Donated on ' + moment(new Date(plantDate)).format('DD MMM YYYY');
+      : i18n.t('label.donated_on', {
+          date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
+        });
   }
 
   tpoLine(tpoName) {
-    return tpoName ? 'Planted by ' + tpoName : '';
+    return tpoName ? i18n.t('label.planted_by', { tpo: tpoName }) : '';
   }
 
   plantActionLine(plantDate, registrationDate) {
     return (
-      'Planted on ' +
-      moment(new Date(plantDate)).format('DD MMM YYYY') +
-      ', Added on ' +
-      moment(new Date(registrationDate)).format('DD MMM YYYY')
+      i18n.t('label.planted_on', {
+        date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
+      }) +
+      i18n.t('label.added_on', {
+        date: moment(getDateFromMySQL(registrationDate)).format('DD MMM YYYY')
+      })
     );
   }
 
   dedicateActionLine = (isGift, givee, giveeSlug) => {
     return isGift
       ? [
-          <TextSpan>Dedicated to</TextSpan>,
+          <TextSpan>{i18n.t('label.dedicated_to')}</TextSpan>,
           <TextSpan
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
@@ -103,9 +109,11 @@ export default class ContributionCard extends React.Component {
     return redemptionCode && giver
       ? [
           <TextSpan>
-            {'Given on ' +
-              moment(new Date(redemptionDate)).format('DD MMM YYYY') +
-              ' by '}
+            {i18n.t('label.given_on_by', {
+              date: moment(getDateFromMySQL(redemptionDate)).format(
+                'DD MMM YYYY'
+              )
+            })}
           </TextSpan>,
           <TextSpan
             onPress={() =>
@@ -114,28 +122,37 @@ export default class ContributionCard extends React.Component {
               })
             }
           >
-            {givee}
+            {' ' + givee}
           </TextSpan>
         ]
       : redemptionCode
-        ? 'Redeemed on ' +
-          moment(new Date(redemptionDate)).format('DD MMM YYYY')
-        : 'Dedicated on ' +
-          moment(new Date(redemptionDate)).format('DD MMM YYYY') +
-          (givee
-            ? [
-                <TextSpan>{' by '}</TextSpan>,
-                <TextSpan
-                  onPress={() =>
-                    updateRoute(getLocalRoute('app_treecounter'), {
-                      treeCounterId: giveeSlug
-                    })
-                  }
-                >
-                  {givee}
-                </TextSpan>
-              ]
-            : '');
+        ? i18n.t('label.redeemed_on', {
+            date: moment(getDateFromMySQL(redemptionDate)).format('DD MMM YYYY')
+          })
+        : givee
+          ? [
+              <TextSpan>
+                {i18n.t('label.dedicated_on_by', {
+                  date: moment(getDateFromMySQL(redemptionDate)).format(
+                    'DD MMM YYYY'
+                  )
+                })}
+              </TextSpan>,
+              <TextSpan
+                onPress={() =>
+                  updateRoute(getLocalRoute('app_treecounter'), {
+                    treeCounterId: giveeSlug
+                  })
+                }
+              >
+                {' ' + givee}
+              </TextSpan>
+            ]
+          : i18n.t('label.dedicated_on', {
+              date: moment(getDateFromMySQL(redemptionDate)).format(
+                'DD MMM YYYY'
+              )
+            });
   }
 
   render() {
@@ -233,9 +250,9 @@ export default class ContributionCard extends React.Component {
                     <TextSpan key={measurement.id}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
-                        : moment(new Date(measurement.measurementDate)).format(
-                            'DD MMM YYYY'
-                          ) +
+                        : moment(
+                            getDateFromMySQL(measurement.measurementDate)
+                          ).format('DD MMM YYYY') +
                           (measurement.diameter + 'cm').padStart(10) +
                           (
                             (measurement.height / 100).toFixed(1) + 'm'
@@ -257,9 +274,9 @@ export default class ContributionCard extends React.Component {
                   .slice(3)
                   .map(measurement => (
                     <TextSpan key={measurement.id}>
-                      {moment(new Date(measurement.measurementDate)).format(
-                        'DD MMM YYYY'
-                      ) +
+                      {moment(
+                        getDateFromMySQL(measurement.measurementDate)
+                      ).format('DD MMM YYYY') +
                         (measurement.diameter + 'cm').padStart(10) +
                         ((measurement.height / 100).toFixed(1) + 'm').padStart(
                           10
@@ -323,9 +340,9 @@ export default class ContributionCard extends React.Component {
                     <TextSpan key={measurement.id}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
-                        : moment(new Date(measurement.measurementDate)).format(
-                            'DD MMM YYYY'
-                          ) +
+                        : moment(
+                            getDateFromMySQL(measurement.measurementDate)
+                          ).format('DD MMM YYYY') +
                           (measurement.diameter + 'cm').padStart(10) +
                           (
                             (measurement.height / 100).toFixed(1) + 'm'
@@ -347,9 +364,9 @@ export default class ContributionCard extends React.Component {
                   .slice(3)
                   .map(measurement => (
                     <TextSpan key={measurement.id}>
-                      {moment(new Date(measurement.measurementDate)).format(
-                        'DD MMM YYYY'
-                      ) +
+                      {moment(
+                        getDateFromMySQL(measurement.measurementDate)
+                      ).format('DD MMM YYYY') +
                         (measurement.diameter + 'cm').padStart(10) +
                         ((measurement.height / 100).toFixed(1) + 'm').padStart(
                           10
@@ -431,9 +448,9 @@ export default class ContributionCard extends React.Component {
                     <TextSpan key={measurement.id}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
-                        : moment(new Date(measurement.measurementDate)).format(
-                            'DD MMM YYYY'
-                          ) +
+                        : moment(
+                            getDateFromMySQL(measurement.measurementDate)
+                          ).format('DD MMM YYYY') +
                           (measurement.diameter + 'cm').padStart(10) +
                           (
                             (measurement.height / 100).toFixed(1) + 'm'
@@ -455,9 +472,9 @@ export default class ContributionCard extends React.Component {
                   .slice(3)
                   .map(measurement => (
                     <TextSpan key={measurement.id}>
-                      {moment(new Date(measurement.measurementDate)).format(
-                        'DD MMM YYYY'
-                      ) +
+                      {moment(
+                        getDateFromMySQL(measurement.measurementDate)
+                      ).format('DD MMM YYYY') +
                         (measurement.diameter + 'cm').padStart(10) +
                         ((measurement.height / 100).toFixed(1) + 'm').padStart(
                           10

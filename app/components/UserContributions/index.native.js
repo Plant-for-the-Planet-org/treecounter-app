@@ -26,11 +26,8 @@ export default class UserContributions extends React.Component {
     this.state = {
       index: 0,
       routes: [
-        {
-          key: 'map',
-          title: 'Map'
-        },
-        { key: 'list', title: 'List' }
+        { key: 'map', title: i18n.t('label.map') },
+        { key: 'list', title: i18n.t('label.list') }
       ]
     };
   }
@@ -53,7 +50,7 @@ export default class UserContributions extends React.Component {
       case 'map':
         return (
           <View {...this.props} style={styles.mapContainer}>
-            <Text>Map</Text>
+            <Text>i18n.t('label.map')</Text>
 
             <ContributionsMapLegend />
           </View>
@@ -90,7 +87,7 @@ export default class UserContributions extends React.Component {
             }}
             image={plantedTarget}
           >
-            Register new trees
+            i18n.t('label.register_new_trees')
           </PrimaryButton>
         </View>
         <TabView

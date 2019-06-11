@@ -5,6 +5,7 @@ import { View, Text, Image, TouchableHighlight } from 'react-native';
 // import Tooltips from 'react-native-tooltips';
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import i18n from '../../locales/i18n';
 class PlantProjectSpecsItem extends React.Component {
   _onPress(ref) {
     if (this.state.specTooltipVisible) {
@@ -58,7 +59,7 @@ class PlantProjectSpecsItem extends React.Component {
                 }
                 items={[
                   {
-                    label: `Percentage of planted trees that survive the first year after planting.`,
+                    label: i18n.t('label.survival_explaination'),
                     onPress: () => {}
                   }
                 ]}

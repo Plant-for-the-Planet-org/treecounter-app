@@ -9,5 +9,11 @@
   "error_reported": "Wir haben diesen Fehler an unsere IT-Profis gemeldet.",
   "home_page_redirected": "Sie werden in {{seconds}} Sekunden zur Startseite weitergeleitet",
   "planting_404": "Lasst uns Bäume pflanzen, um diese Situation auf diesem Planeten zu vermeiden.",
-  "cancel": "Abbrechen"
+  "cancel": "Abbrechen",
+  "searchshort": "Suche",
+  "user": "Benutzer",
+  "list": "Liste",
+  "map": "Karte",
+  "OR": "ODER",
+  "continue_on_site": "Weiter auf der Website"
 }

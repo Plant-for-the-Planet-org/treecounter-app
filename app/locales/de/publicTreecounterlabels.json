@@ -1,5 +1,9 @@
 {
   "support": "Unterstützung",
   "plant_trees": "Bäume pflanzen",
-  "read_more": "Weiterlesen"
+  "read_more": "Weiterlesen",
+  "contributor": "Mitwirkender",
+  "planted_trees": "Gepflanzte Bäume",
+  "target": "Ziel",
+  "support_trees_to": "Unterstütze {{user}} mit Bäumen"
 }

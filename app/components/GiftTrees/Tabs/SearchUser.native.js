@@ -83,7 +83,7 @@ class SearchUser extends React.Component {
           onChangeQuery={this.onChangeTextDelayed}
           inputValue={this.state.selectedSuggestionName}
           onSubmit={this._handleSubmit}
-          placeholderValue={i18n.t('label.search_user')}
+          placeholderValue={i18n.t('label.enter_a_user')}
           placeholderTextColor={this.props.searchInputPlaceholderTextColor}
           textColor={this.props.searchInputTextColor}
           selectionColor={this.props.searchInputSelectionColor}

@@ -1,5 +1,10 @@
 {
   "name": "Name",
   "price": "Price",
-  "select_project": "Select Project"
+  "select_project": "Select Project",
+  "featured": "Featured",
+  "list": "List",
+  "country": "Country",
+  "select_by_country": "Sort by Country",
+  "cost_per_tree": "Cost Per Tree"
 }

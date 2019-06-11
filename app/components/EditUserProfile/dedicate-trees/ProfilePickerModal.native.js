@@ -130,7 +130,7 @@ class ProfilePickerModal extends Component {
                           {delimitNumbers(
                             currentUserProfile.supportedTreecounter.countPlanted
                           )}{' '}
-                          Planted
+                          {i18n.t('label.planted')}
                         </Text>
                       </View>
                     </View>

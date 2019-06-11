@@ -3,7 +3,7 @@
   "signUp": "Registrieren ",
   "home": "Startseite",
   "search": "Geben Sie einen Namen oder Wettbewerb ein",
-  "search_user": "Geben Sie einen Namen ein ...",
+  "enter_a_user": "Geben Sie einen Namen ein ...",
   "placeholder_value": "Gib einen Namen ein ...",
   "welcome_hi": "Hallo {{user}}",
   "edit_profile": "Profil bearbeiten",
@@ -14,7 +14,7 @@
   "change_password": "Passwort ändern",
   "delete_profile": "Profil löschen",
   "un_subscribe": "nachfolgend",
-  "un_follow": "Nicht mehr folgen",
+  "un_follow": "Entfolgen",
   "subscribe": "Folgen",
   "profile": "Profil",
   "gender": "Geschlecht",
@@ -22,10 +22,11 @@
   "no_notifications": "Sie haben keine Benachrichtigungen",
   "all_notifications": "Alle Benachrichtigungen anzeigen",
   "success_title": "Erfolg",
-  "dedicate_trees_to": "Bäume widmen für",
+  "dedicate_trees_to": "Bäume widmen an",
   "dedicate": "Widmen",
   "about_us": "Über uns",
   "open_source_license": "Open-Source-Lizenz",
   "license_credit_info": "Diese Anwendung verwendet Open-Source-Komponenten. Du kannst den Quellcode der Open-Source-Projekte zusammen mit den Lizenzinformationen unten finden. Wir danken den Entwicklern für ihre Beiträge zu Open Source.",
-  "not_following_anybody": "Sie folgen niemandem"
+  "not_following_anybody": "Sie folgen niemandem",
+  "guest": "Gast"
 }

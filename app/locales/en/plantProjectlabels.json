@@ -13,5 +13,7 @@
   "link_text": "Link Text",
   "video_url": "Video Url",
   "allow_donations": "I would like to receive Donations (You may be contacted by a Plant-for-the-Planet personnel for verification of your Project Details.)",
-  "is_published": "Publish Project"
+  "is_published": "Publish Project",
+  "survival_explaination": "Percentage of planted trees that survive the first year after planting.",
+  "view_more": "View more"
 }

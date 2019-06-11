@@ -4,6 +4,7 @@
   "featuredProjects": "unterstützte Projekte",
   "project": "Projekt",
   "organisation": "Organisation",
+  "company": "Firma",
   "Cost": "Kosten pro Baum",
   "donateTrees": "Bäume spenden",
   "individual": "Einzelner Baum",
@@ -17,5 +18,7 @@
   "delete_project": "Projekt löschen",
   "thankyou_planting": "Vielen Dank, dass Sie bei uns {{count}} Bäume gepflanzt haben! Wir haben eine E-Mail-Bestätigung an Sie gesendet. Wenn Ihre Spende für ein steuerlich absetzbares Projekt war, erhalten Sie rechtzeitig eine E-Mail mit einer Spendenquittung.",
   "donate_trees_description": "Wählen Sie ein Projekt, das die Bäume für Sie pflanzt.",
-  "donation_contribution": "Spende"
+  "donation_contribution": "Spende",
+  "donation_detail": "Spendeninfo",
+  "donor_detail": "Spenderinfo"
 }

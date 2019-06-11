@@ -4,7 +4,6 @@ import styles from '../../styles/competition/competition-snippet.native';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
 import tick from '../../assets/images/icons/tick.png';
-import i18n from '../../locales/i18n';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import CompetitionProgressBar from './CompetitionProgressBar';
 import TouchableItem from '../../components/Common/TouchableItem';
@@ -18,10 +17,14 @@ import {
 } from '../../selectors';
 import connect from 'react-redux/es/connect/connect';
 import moment from 'moment';
+import 'moment/min/locales';
+import i18n from '../../locales/i18n.js';
+import { getDateFromMySQL } from '../../helpers/utils';
 
 class CompetitionSnippet extends React.Component {
   constructor(props) {
     super(props);
+    moment.locale(i18n.language);
   }
 
   toggleExpanded(id) {
@@ -162,7 +165,7 @@ class CompetitionSnippet extends React.Component {
                   numberOfLines={1}
                   style={styles.project_teaser__contentByText}
                 >
-                  {i18n.t('label.by')}{' '}
+                  {i18n.t('label.by_a_name')}{' '}
                   {this.props.competition && this.props.competition.ownerName}
                 </Text>
               </View>
@@ -195,9 +198,9 @@ class CompetitionSnippet extends React.Component {
                   <Text style={styles.bottomText}>
                     {i18n.t('label.ends')}{' '}
                     {this.props.competition && this.props.competition.endDate
-                      ? moment(new Date(this.props.competition.endDate)).format(
-                          'MMM DD, YYYY'
-                        )
+                      ? moment(
+                          getDateFromMySQL(this.props.competition.endDate)
+                        ).format('MMM DD, YYYY')
                       : ''}
                   </Text>
                 </View>

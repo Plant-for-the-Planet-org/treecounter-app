@@ -21,6 +21,8 @@ import { gift, paymentClear } from '../../actions/donateAction';
 import GiftTrees from '../../components/GiftTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 
+import i18n from '../../locales/i18n';
+
 class GiftTreesContainer extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +44,9 @@ class GiftTreesContainer extends Component {
       updateRoute('app_gift_projects', this.props.navigation, 0, {
         userForm: formValue,
         giftMethod: type,
-        titleParam: 'Gift Trees To ' + title
+        titleParam: i18n.t('label.gift_trees_to', {
+          user: title
+        })
       });
     }
   }

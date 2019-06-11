@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, ScrollView, SafeAreaView } from 'react-native';
 import styles from '../../styles/edit_profile.native';
+import { Client } from 'bugsnag-react-native';
+
+const bugsnag = new Client('6f2971a9b077662912f61ae602716afd');
 
 export default class GlobalErrorBoundary extends React.Component {
   constructor(props) {
@@ -11,6 +14,9 @@ export default class GlobalErrorBoundary extends React.Component {
 
   componentDidCatch(error, info) {
     this.setState({ hasErrorOccurred: true, error, info });
+    bugsnag.notify(error, function(report) {
+      report.metadata = { info: info };
+    });
   }
 
   render() {

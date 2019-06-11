@@ -10,5 +10,6 @@
   "stripe_sepa_des2": "und Stripe, unser Zahlungsdienstleister, Anweisungen an Ihre Bank zu senden, um Ihr Konto zu belasten, und Ihre Bank, Ihr Konto gemäß diesen Anweisungen zu belasten. Sie haben Anspruch auf eine Rückerstattung von Ihrer Bank gemäß den Allgemeinen Geschäftsbedingungen Ihrer Bank. Eine Erstattung muss innerhalb von 8 Wochen ab dem Datum der Belastung Ihres Kontos beantragt werden.",
   "pay_via_sepa": "Bezahlen mit SEPA",
   "contact_firstname": "Vorname",
-  "contact_lastname": "Nachname"
+  "contact_lastname": "Nachname",
+  "donate_to": "Spenden an {{name}}"
 }

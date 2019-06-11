@@ -2,6 +2,7 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getImageUrl } from '../../actions/apiRouting';
+import i18n from '../../locales/i18n';
 
 class PlantProjectImageCarousel extends React.Component {
   itemsSize = 3;
@@ -62,7 +63,7 @@ class PlantProjectImageCarousel extends React.Component {
             className="image__container view-more"
             onClick={this.onViewMoreClick.bind(this)}
           >
-            View More
+            {i18n.t('label.view_more')}
           </div>
         ) : null}
       </div>

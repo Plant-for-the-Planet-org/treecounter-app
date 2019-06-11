@@ -468,7 +468,7 @@ export default class GiftTrees extends Component {
                       />
                       <div className="pftp-textarea">
                         <textarea
-                          placeholder="Gift Message"
+                          placeholder={i18n.t('label.gift_message')}
                           onChange={this.handleMessageChange.bind(this)}
                         />
                       </div>

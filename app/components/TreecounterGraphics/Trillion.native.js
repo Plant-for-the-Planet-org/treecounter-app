@@ -47,8 +47,8 @@ class Trillion extends PureComponent {
       loading: true,
       loadSvg: true,
       routes: [
-        { key: 'world', title: 'World' },
-        { key: 'leaderBoard', title: 'LeaderBoard' }
+        { key: 'world', title: i18n.t('label.world') },
+        { key: 'leaderBoard', title: i18n.t('label.leaderboard') }
       ],
       index: 0
     };

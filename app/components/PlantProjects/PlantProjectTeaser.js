@@ -25,7 +25,7 @@ const PlantProjectTeaser = ({
           </span>
         </span>
         <div className="teaser__tpoName">
-          {i18n.t('label.by') + ' ' + tpoName}
+          {i18n.t('label.by_a_name') + ' ' + tpoName}
         </div>
       </div>
       {projectImage ? (

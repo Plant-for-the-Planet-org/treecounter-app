@@ -166,7 +166,7 @@ class ChallengeEmail extends Component {
                     width: 70
                   }}
                   isChecked={this.state.isChecked}
-                  rightText={'by'}
+                  rightText={i18n.t('label.by')}
                 />
                 <Dropdown
                   containerStyle={{
@@ -181,7 +181,7 @@ class ChallengeEmail extends Component {
                       byYear: item
                     })
                   }
-                  label="Year"
+                  label={i18n.t('label.year')}
                   data={this.years}
                 />
               </View>

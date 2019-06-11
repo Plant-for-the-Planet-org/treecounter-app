@@ -8,6 +8,7 @@ import ListViewProjects from './listview';
 import { foldout, foldin } from '../../../assets';
 import TouchableItem from '../../Common/TouchableItem.native';
 import _ from 'lodash';
+import i18n from '../../../locales/i18n';
 
 export default class CountryProjects extends Component {
   constructor(props) {
@@ -72,7 +73,9 @@ export default class CountryProjects extends Component {
     return (
       <View style={styles.flexContainer}>
         <View style={styles.cardHeader}>
-          <Text style={styles.headingStyle}>Sort by Country</Text>
+          <Text style={styles.headingStyle}>
+            {i18n.t('label.select_by_country')}
+          </Text>
           <View style={styles.sortContainer}>
             <TouchableItem
               style={styles.imageStyleContainer}

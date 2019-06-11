@@ -3,7 +3,7 @@
   "signUp": "Sign Up",
   "home": "home",
   "search": "Type a name or Competition",
-  "search_user": "Type a name ...",
+  "enter_a_user": "Type a name ...",
   "placeholder_value": "Type a name ...",
   "welcome_hi": "Hi {{user}}",
   "edit_profile": "Edit Profile",

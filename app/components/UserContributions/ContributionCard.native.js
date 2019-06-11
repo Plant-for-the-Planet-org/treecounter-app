@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import classnames from 'classnames';
 import Accordion from 'react-native-collapsible/Accordion';
 import { getImageUrl } from '../../actions/apiRouting';
-import i18n from '../../locales/i18n.js';
 import {
   View,
   Text,
@@ -20,6 +18,10 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import { delimitNumbers } from '../../utils/utils';
 import Lightbox from 'react-native-lightbox';
+import moment from 'moment';
+import 'moment/min/locales';
+import i18n from '../../locales/i18n.js';
+import { getDateFromMySQL } from '../../helpers/utils';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
@@ -33,6 +35,7 @@ class ContributionCard extends React.Component {
       currentImage: 0,
       viewExpanded: false
     };
+    moment.locale(i18n.language);
   }
 
   _renderLightBox = imageArray => (
@@ -78,9 +81,9 @@ class ContributionCard extends React.Component {
               return (
                 <View style={styles.actionBar} key={`measurement-${index}`}>
                   <Text>
-                    {moment(new Date(measurement.measurementDate)).format(
-                      'DD MMM YYYY'
-                    )}
+                    {moment(
+                      getDateFromMySQL(measurement.measurementDate)
+                    ).format('DD MMM YYYY')}
                   </Text>
                   <Text>
                     {_.padStart(
@@ -142,7 +145,7 @@ class ContributionCard extends React.Component {
       ? [
           <Text>
             {i18n.t('label.gifted_on_to', {
-              date: moment(new Date(plantDate)).format('DD MMM YYYY')
+              date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
             })}
           </Text>,
           <Text
@@ -157,7 +160,7 @@ class ContributionCard extends React.Component {
           </Text>
         ]
       : i18n.t('label.donated_on', {
-          date: moment(new Date(plantDate)).format('DD MMM YYYY')
+          date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
         });
   }
 
@@ -168,10 +171,10 @@ class ContributionCard extends React.Component {
   plantActionLine(plantDate, registrationDate) {
     return (
       i18n.t('label.planted_on', {
-        date: moment(new Date(plantDate)).format('DD MMM YYYY')
+        date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
       }) +
       i18n.t('label.added_on', {
-        date: moment(new Date(registrationDate)).format('DD MMM YYYY')
+        date: moment(getDateFromMySQL(registrationDate)).format('DD MMM YYYY')
       })
     );
   }
@@ -199,7 +202,9 @@ class ContributionCard extends React.Component {
       ? [
           <Text>
             {i18n.t('label.given_on_by', {
-              date: moment(new Date(redemptionDate)).format('DD MMM YYYY')
+              date: moment(getDateFromMySQL(redemptionDate)).format(
+                'DD MMM YYYY'
+              )
             })}
           </Text>,
           <Text
@@ -215,13 +220,15 @@ class ContributionCard extends React.Component {
         ]
       : redemptionCode
         ? i18n.t('label.redeemed_on', {
-            date: moment(new Date(redemptionDate)).format('DD MMM YYYY')
+            date: moment(getDateFromMySQL(redemptionDate)).format('DD MMM YYYY')
           })
         : givee
           ? [
               <Text>
                 {i18n.t('label.dedicated_on_by', {
-                  date: moment(new Date(redemptionDate)).format('DD MMM YYYY')
+                  date: moment(getDateFromMySQL(redemptionDate)).format(
+                    'DD MMM YYYY'
+                  )
                 })}
               </Text>,
               <Text
@@ -239,7 +246,9 @@ class ContributionCard extends React.Component {
               </Text>
             ]
           : i18n.t('label.dedicated_on', {
-              date: moment(new Date(redemptionDate)).format('DD MMM YYYY')
+              date: moment(getDateFromMySQL(redemptionDate)).format(
+                'DD MMM YYYY'
+              )
             });
   }
 

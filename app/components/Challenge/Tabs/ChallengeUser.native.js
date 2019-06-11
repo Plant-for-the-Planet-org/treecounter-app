@@ -121,7 +121,7 @@ class ChallengeUser extends Component {
                 hideCompetitions
               />
               <View style={challengeStyles.flexContainerStyle}>
-                <Text>Challenge to plant </Text>
+                <Text>{i18n.t('label.challenge_to_plant')} </Text>
                 <TextInput
                   keyboardType="numeric"
                   underlineColorAndroid={'transparent'}
@@ -145,7 +145,7 @@ class ChallengeUser extends Component {
                     width: 70
                   }}
                   isChecked={this.state.isChecked}
-                  rightText={'by'}
+                  rightText={i18n.t('label.by')}
                 />
                 <Dropdown
                   containerStyle={{
@@ -160,7 +160,7 @@ class ChallengeUser extends Component {
                       byYear: item
                     })
                   }
-                  label="Year"
+                  label={i18n.t('label.year')}
                   data={this.years}
                 />
               </View>

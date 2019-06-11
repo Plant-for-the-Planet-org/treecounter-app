@@ -48,6 +48,26 @@ export const handleServerResponseError = function(
     }
 
     return newOptions;
+  } else if (data.hasOwnProperty('message')) {
+    const error = data.message;
+    let newOptions = _.cloneDeep(formSchemaOptions);
+    console.log(newOptions);
+
+    for (let property in newOptions.fields) {
+      const inlineErrorFiled = newOptions.fields[property];
+      inlineErrorFiled.hasError = true;
+      let oldValidator = inlineErrorFiled.error;
+      inlineErrorFiled.error = (value, path, context) => {
+        let errorReturn = oldValidator(value, path, context);
+        if (error) {
+          errorReturn = getErrorView(error);
+        } else {
+          inlineErrorFiled.error = oldValidator;
+        }
+        return errorReturn;
+      };
+    }
+    return newOptions;
   }
   return formSchemaOptions;
 };

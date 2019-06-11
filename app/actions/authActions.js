@@ -54,7 +54,7 @@ export function login(credentials, recaptchaToken, navigation = undefined) {
       })
       .catch(err => {
         dispatch(setProgressModelState(false));
-        NotificationManager.error(err.response.data.message, 'Error', 5000);
+        // NotificationManager.error(err.response.data.message, 'Error', 5000);
         throw err;
       });
   };

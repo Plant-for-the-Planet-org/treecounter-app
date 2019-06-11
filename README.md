@@ -1,4 +1,5 @@
-# TreeCounter-app
+# Plant-for-the-Planet App
+
 
 ## Directory Structure
 

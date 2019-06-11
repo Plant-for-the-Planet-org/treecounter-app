@@ -103,7 +103,7 @@ V 1.1.`11` A `12` [increment per release]
 
 
 
-##License
+## License
 
 Plant-for-the-Planet App is free software, and is released under the terms of the <abbr title="GNU General Public License">GPL</abbr> version 3 or (at your option) any later version. See <a href="license.txt">license.txt</a>.</p>
 

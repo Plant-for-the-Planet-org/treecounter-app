@@ -28,9 +28,8 @@ function onAPIError(error) {
   // }
   if (error.response && error.response.status === 401) {
     getStore().dispatch(logoutUser());
-  } else {
-    throw error;
   }
+  throw error;
 }
 
 function onAPIResponse(response) {

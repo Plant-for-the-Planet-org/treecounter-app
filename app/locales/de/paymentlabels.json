@@ -11,5 +11,5 @@
   "pay_via_sepa": "Bezahlen mit SEPA",
   "contact_firstname": "Vorname",
   "contact_lastname": "Nachname",
-  "donate_to": "Spenden an{{name}}"
+  "donate_to": "Spenden an {{name}}"
 }

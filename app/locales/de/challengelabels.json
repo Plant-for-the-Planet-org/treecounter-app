@@ -13,7 +13,7 @@
   "challenge_accept": "Sie haben die Herausforderung angenommen",
   "challenge_deny": "Sie haben die Herausforderung abgelehnt",
   "challenge_error": "Das aktuelle Ziel von {{user}} sind {{target}} Bäume. Bitte geben Sie eine höhere Zahl ein.",
-  "search_user": "Benutzer suchen",
+  "search_user": "Suche Benutzer",
   "email": "E-Mail",
   "year": "Jahr"
 }

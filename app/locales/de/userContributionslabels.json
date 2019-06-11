@@ -25,7 +25,7 @@
   "my_tree_delete_confirm": "Möchten Sie diesen Baum wirklich löschen?",
   "deletion_warning_summary_contribution": "Sie löschen gerade einige Bäume, die Sie als gepflanzt registriert haben.",
   "delete_my_trees_action": "Diese Aktion löscht diese Anzahl endgültig.",
-  "gifted_on_to": "Schenkung vom {{date}} an",
+  "gifted_on_to": "Schenkung vom {{date}} an ",
   "donated_on": "Gespendet am {{date}}",
   "planted_by": "Gepflanzt von {{tpo}}",
   "planted_on": "Gepflanzt am {{date}}",

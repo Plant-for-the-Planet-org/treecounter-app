@@ -14,7 +14,7 @@
   "gift_message": "Nachricht zum Geschenk (optional)",
   "support_user_trees": "{{user}} wird unterstützt, um {{count}}-Bäume zu pflanzen",
   "gift_user_trees": "{{count}} Bäume werden {{user}} geschenkt",
-  "gift_to": "Schenkung an",
-  "support_to": "Unterstützung für",
-  "gift_trees_to": "Schenke Bäume an {{user}}"
+  "gift_to": "Geschenk an {{name}}",
+  "support_to": "Unterstützung für {{name}}",
+  "gift_trees_to": "Schenke {{user}} Bäume"
 }

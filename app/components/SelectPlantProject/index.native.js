@@ -54,9 +54,12 @@ export default class SelectPlantTabView extends Component {
         {...props}
         indicatorStyle={styles.indicator}
         style={styles.tabBar}
-        tabStyle={{ width: Layout.window.width / 4 }}
+        //tabStyle={{ width: Layout.window.width / 4 }}
         labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
+        scrollEnabled
+        bounces
+        useNativeDriver
       />
     );
   };

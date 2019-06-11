@@ -3,5 +3,13 @@
   "not_yet_activated": "Bitte bestätigen Sie Ihre E-Mail um fortzufahren",
   "received_email": "Sie sollten eine E-Mail erhalten haben, als Sie sich angemeldet haben. Bitte klicken Sie auf den Aktivierungslink in dieser E-Mail, um den Anmeldevorgang abzuschließen.",
   "not_received_email": "Falls Sie die Aktivierungs-E-Mail nicht erhalten haben, klicken Sie auf den folgenden Link, um sie erneut zu senden.",
-  "resent_email": "E-Mail nochmal senden"
+  "resent_email": "E-Mail nochmal senden",
+  "account_activation": "Kontoaktivierung",
+  "successfully_activated": "Sie haben Ihr Konto erfolgreich aktiviert.",
+  "already_activated": "Ihr Konto wurde bereits aktiviert.",
+  "do_profile_or_target": "Sie können jetzt {{customizeProfile}} <br/>oder {{setTarget}}.",
+  "do_login": "Sie können sich jetzt {{login}}.",
+  "set_a_target": "sich ein Ziel setzen",
+  "customize_your_profile": "Ihr Profil anpassen",
+  "login": "einloggen"
 }

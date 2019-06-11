@@ -24,10 +24,9 @@ class CompetitionParticipant extends React.Component {
     };
     this.props.supportTreecounterAction(supportObject);
     updateRoute('app_donateTrees', this.props.navigation, 0, {
-      titleParam:
-        i18n.t('label.support_to') +
-        ' ' +
-        this.props.competitor.treecounterDisplayName
+      titleParam: i18n.t('label.support_to', {
+        name: this.props.competitor.treecounterDisplayName
+      })
     });
   }
   plantButton() {

@@ -12,5 +12,8 @@
   "cancel": "Cancel",
   "searchshort": "Search",
   "user": "User",
-  "list": "List"
+  "list": "List",
+  "map": "Map",
+  "OR": "OR",
+  "continue_on_site": "Continue using the site"
 }

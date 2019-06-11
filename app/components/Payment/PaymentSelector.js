@@ -136,8 +136,12 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             )}
             {!giftToName && (
               <div>
-                {i18n.t('label.donate_to')}{' '}
-                {gatewayProps.context.plantProjectName}
+                {
+                  (i18n.t('label.donate_to'),
+                  {
+                    name: gatewayProps.context.plantProjectName
+                  })
+                }
               </div>
             )}
             <div>

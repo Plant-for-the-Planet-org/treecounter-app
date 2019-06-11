@@ -1,8 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
-
-import i18n from '../../locales/i18n.js';
 import {
   View,
   Text,
@@ -20,8 +17,16 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
 import { delimitNumbers } from '../../utils/utils';
 import { upwardArrow, downwardArrow } from '../../assets/index.js';
+import moment from 'moment';
+import 'moment/min/locales';
+import i18n from '../../locales/i18n.js';
 
 export default class ChallengeCard extends React.Component {
+  constructor(props) {
+    super(props);
+    moment.locale(i18n.language);
+  }
+
   render() {
     let { challenge } = this.props;
     let {
@@ -58,7 +63,7 @@ export default class ChallengeCard extends React.Component {
                   <Text style={challengesStyle.textStyle}>
                     {direction === 'target'
                       ? i18n.t('label.from') + ' '
-                      : i18n.t('label.to') + ' '}{' '}
+                      : i18n.t('label.to') + ' '}
                     {fullname}
                   </Text>
                 </View>
@@ -110,7 +115,11 @@ export default class ChallengeCard extends React.Component {
                 textStyle={challengesStyle.moreButtonTextStyle}
                 onClick={() => {}}
               >
-                {status && status.toUpperCase()}
+                {status === 'pending'
+                  ? i18n.t('label.sent')
+                  : status === 'active'
+                    ? i18n.t('label.accepted')
+                    : i18n.t('label.declined')}
               </PrimaryButton>
             </View>
           )}

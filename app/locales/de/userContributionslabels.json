@@ -30,9 +30,10 @@
   "planted_by": "Gepflanzt von {{tpo}}",
   "planted_on": "Gepflanzt am {{date}}",
   "added_on": "Hinzugefügt am {{date}}",
-  "dedicated_to": "Widmung an ",
+  "dedicated_to": "Widmung an",
   "given_on_by": "Gegeben am {{date}} von",
   "redeemed_on": "Eingelöst am {{date}}",
   "dedicated_on": "Widmung vom {{date}}",
-  "dedicated_on_by": "Widmung vom {{date}} von"
+  "dedicated_on_by": "Widmung vom {{date}} von",
+  "register_new_trees": "Registriere neue Bäume"
 }

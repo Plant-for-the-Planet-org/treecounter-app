@@ -1,10 +1,10 @@
 {
   "challenge_heading": "Wettkampf",
-  "challenge_to_plant": "Herausfordern zum Pflanzen",
+  "challenge_to_plant": "Herausfordern zum Pflanzen von",
   "challenge_edit_description": "Der Empfänger kann wählen, ob er die Herausforderung annehmen möchte oder nicht.",
   "from": "von",
   "indefinite": "Unbestimmt",
-  "to": "bis",
+  "to": "an",
   "accept": "Akzeptieren",
   "reject": "Ablehnen",
   "sent": "Gesendet",
@@ -13,6 +13,7 @@
   "challenge_accept": "Sie haben die Herausforderung angenommen",
   "challenge_deny": "Sie haben die Herausforderung abgelehnt",
   "challenge_error": "Das aktuelle Ziel von {{user}} sind {{target}} Bäume. Bitte geben Sie eine höhere Zahl ein.",
-  "search_user": "Suche Nutzer",
-  "email": "E-Mail"
+  "search_user": "Suche Benutzer",
+  "email": "E-Mail",
+  "year": "Jahr"
 }

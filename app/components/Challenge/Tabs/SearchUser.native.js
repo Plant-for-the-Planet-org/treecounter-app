@@ -98,7 +98,7 @@ class SearchUser extends React.Component {
           inputValue={this.state.selectedSuggestionName}
           onSubmit={this._handleSubmit}
           placeholderTextColor={this.props.searchInputPlaceholderTextColor}
-          placeholderValue={i18n.t('label.search_user')}
+          placeholderValue={i18n.t('label.enter_a_user')}
           textColor={this.props.searchInputTextColor}
           selectionColor={this.props.searchInputSelectionColor}
           underlineColorAndroid={

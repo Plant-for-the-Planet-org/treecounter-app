@@ -14,7 +14,7 @@
   "gift_message": "Gift Message (Optional)",
   "support_user_trees": "Supporting {{user}} to plant {{count}} trees",
   "gift_user_trees": "Gifting {{count}} trees to  {{user}}",
-  "gift_to": "Gift to",
-  "support_to": "Support to",
+  "gift_to": "Gift to {{name}}",
+  "support_to": "Support to {{name}}",
   "gift_trees_to": "Gift Trees To {{user}}"
 }

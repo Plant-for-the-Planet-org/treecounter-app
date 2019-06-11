@@ -6,7 +6,8 @@ import deLabels from './de';
 
 let userLang = undefined;
 getLanguages().then(languages => {
-  i18next.changeLanguage(languages[0].split('-')[0]); // ['en-US', 'en']
+  userLang = languages[0].split('-')[0];
+  i18next.changeLanguage(userLang); // ['en-US', 'en']
 });
 
 i18next.init({

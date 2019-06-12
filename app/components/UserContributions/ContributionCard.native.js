@@ -173,6 +173,7 @@ class ContributionCard extends React.Component {
       i18n.t('label.planted_on', {
         date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
       }) +
+      '\n' +
       i18n.t('label.added_on', {
         date: moment(getDateFromMySQL(registrationDate)).format('DD MMM YYYY')
       })
@@ -377,7 +378,7 @@ class ContributionCard extends React.Component {
         ) : null}
         {plantActionLine ? (
           <Text
-            numberOfLines={1}
+            numberOfLines={2}
             style={[styles.gap, styles.restrictTextLength]}
           >
             {plantActionLine}

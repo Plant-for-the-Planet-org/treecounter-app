@@ -2,6 +2,7 @@ import { Text, View, Image, TextInput } from 'react-native';
 import React from 'react';
 import PrimaryButton from '../../components/Common/Button/PrimaryButton';
 import mapTemplateStyle from '../../styles/mapTemplate.native';
+import i18n from '../../locales/i18n.js';
 
 export function MapTemplate(locals) {
   let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
@@ -29,9 +30,9 @@ export function MapTemplate(locals) {
           });
         }}
       >
-        Get Device Location
+        {i18n.t('label.get_device_location')}
       </PrimaryButton>
-      <Text>Maps under construction</Text>
+      <Text>{i18n.t('label.map_under_construction')}</Text>
       <Text>
         {/* {console.log(locals.value.split('geoLatitude=')[1])}
         {console.log(locals.value.split('&')[0].split('=')[1])} */}

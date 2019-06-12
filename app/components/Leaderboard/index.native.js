@@ -149,7 +149,8 @@ export default class Leaderboard extends Component {
     sortView = (
       <View style={styles.sortView}>
         <Text style={styles.itemViewText}>
-          Sort by{': '}
+          {i18n.t('label.sortBy')}
+          {': '}
           <Text style={styles.plantedTextStyle}>
             {this.props.timePeriodsInfo.timePeriods[selectedSorting]}
           </Text>

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, ScrollView, SafeAreaView } from 'react-native';
 import styles from '../../styles/edit_profile.native';
+import i18n from '../../locales/i18n.js';
 import { Client } from 'bugsnag-react-native';
 
 const bugsnag = new Client('6f2971a9b077662912f61ae602716afd');
@@ -25,20 +26,18 @@ export default class GlobalErrorBoundary extends React.Component {
         <SafeAreaView style={styles.confirmDeleteContainer}>
           <ScrollView contentContainerStyle={{ flex: 1 }}>
             <Text style={[styles.textPara, { marginTop: 15 }]}>
-              We have reported this error to our developers with a cup of
-              coffee.
+              {i18n.t('label.error_reported')}
             </Text>
             <Text style={[styles.textPara, { marginTop: 15 }]}>
-              Please close the app and restart the App
+              {i18n.t('label.close_and_reopen')}
             </Text>
             <Text style={[styles.textPara, { marginTop: 15 }]}>
-              Sorry for the Inconvenience caused.
+              {i18n.t('label.sorry_inconveniences')}
             </Text>
-            <Text
-              style={{ color: '#fff', fontSize: 10, fontStyle: 'italic' }}
-            >{`Fatal Error : ${this.state.error} + \n\n${
-              this.state.info
-            }`}</Text>
+            <Text style={{ color: '#fff', fontSize: 10, fontStyle: 'italic' }}>
+              {i18n.t('label.error') +
+                ` : ${this.state.error} + \n\n${this.state.info}`}
+            </Text>
 
             <Text />
           </ScrollView>

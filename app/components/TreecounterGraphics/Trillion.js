@@ -63,7 +63,7 @@ class Trillion extends Component {
         {this.props.pledgeEvents &&
         this.props.pledgeEvents.pledgeEvents.length > 0 ? (
           <div>
-            <TextBlock>Trillion Tree Events today</TextBlock>
+            <TextBlock>{i18n.t('label.trillionlabel')}</TextBlock>
             <div className="events_row">
               {this.props.pledgeEvents.pledgeEvents
                 .sort((val1, val2) => val1.position > val2.position)

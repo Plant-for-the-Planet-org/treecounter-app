@@ -20,5 +20,7 @@
   "donate_trees_description": "Pick a project which will plant the trees for you.",
   "donation_contribution": "Donation",
   "donation_detail": "Donation Details",
-  "donor_detail": "Donor Details"
+  "donor_detail": "Donor Details",
+  "try_again": "Try again",
+  "return_home": "Return Home"
 }

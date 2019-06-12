@@ -140,7 +140,7 @@ class PlantProjectFull extends React.Component {
             <div className="row">
               <div className="teaser__tpoHeading">
                 <a onClick={() => this.updateRoute(teaserProps.tpoName)}>
-                  By {teaserProps.tpoName}
+                  {i18n.t('label.by_a_name') + ' ' + teaserProps.tpoName}
                 </a>
               </div>
             </div>

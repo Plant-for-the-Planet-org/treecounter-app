@@ -234,11 +234,15 @@ class PublicTreeCounter extends React.Component {
             <CardLayout>
               <View>
                 <View style={stylesPublicPage.tableHeader}>
-                  <Text style={stylesPublicPage.firstColumn}>Contributor</Text>
+                  <Text style={stylesPublicPage.firstColumn}>
+                    {i18n.t('label.contributor')}
+                  </Text>
                   <Text style={stylesPublicPage.secondColumn}>
                     {i18n.t('label.plantedTrees')}
                   </Text>
-                  <Text style={stylesPublicPage.thirdColumn}>Target</Text>
+                  <Text style={stylesPublicPage.thirdColumn}>
+                    {i18n.t('label.target')}
+                  </Text>
                   <View style={stylesPublicPage.fourthColumn} />
                 </View>
                 <View>

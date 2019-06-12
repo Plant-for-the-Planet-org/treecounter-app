@@ -125,7 +125,7 @@ export default class Pledge extends Component {
             </CardLayout>
           </div>
           <CardLayout className="pledge-form">
-            <ContentHeader caption={'Pledge Trees'} />
+            <ContentHeader caption={i18n.t('pledge_trees')} />
             <TCombForm
               ref="pledgeForm"
               type={pledgeFormSchema}

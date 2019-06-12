@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { WebMap, loadModules } from 'react-arcgis';
 import PropTypes from 'prop-types';
-
 import { mapCollapse, mapExpand } from '../../assets';
+import i18n from '../../locales/i18n.js';
 
 //import { context } from '../../config/index';
 
@@ -11,7 +11,7 @@ class MapLayerView extends React.Component {
     console.log('MapLayerView: props ', props);
     super(props);
     this.state = {
-      status: 'loading',
+      status: i18n.t('label.loading'),
       map: null,
       view: null,
       layers: [],

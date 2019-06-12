@@ -23,5 +23,6 @@
   "deletion_warning_heading": " Deleting your account is permanent.",
   "deletion_warning_summery": "All your personal information will be deleted unless required for legal and accounting purposes.",
   "deletion_warning_summery_1": "Trees you have planted will continue to be part of the Trillion Tree Campaign.",
-  "deletion_prerequisite": " Please type DELETE in all capitals letters and click Delete button to continue with your account deletion."
+  "deletion_prerequisite": " Please type DELETE in all capitals letters and click Delete button to continue with your account deletion.",
+  "pick_profile": "Pick Profile"
 }

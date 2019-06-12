@@ -17,5 +17,7 @@
   "register": "Registrieren",
   "many_trees": "Viele Bäume",
   "plant_project": "Pflanzungsprojekt",
-  "plant_projects": "Pflanzungsprojekte"
+  "plant_projects": "Pflanzungsprojekte",
+  "get_device_location": "Position des Geräts ermitteln",
+  "map_under_construction": "Karte in Vorbereitung"
 }

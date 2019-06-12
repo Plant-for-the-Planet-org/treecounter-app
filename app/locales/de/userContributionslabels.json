@@ -22,7 +22,7 @@
   "delete": "Löschen",
   "confirm": "Bestätigen",
   "delete_contribution": "Beitrag löschen",
-  "my_tree_delete_confirm": "Möchten Sie diesen Baum wirklich löschen?",
+  "my_trees_delete_confirm": "Möchten Sie diese Bäume wirklich löschen?",
   "deletion_warning_summary_contribution": "Sie löschen gerade einige Bäume, die Sie als gepflanzt registriert haben.",
   "delete_my_trees_action": "Diese Aktion löscht diese Anzahl endgültig.",
   "gifted_on_to": "Schenkung vom {{date}} an ",

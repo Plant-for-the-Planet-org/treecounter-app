@@ -20,5 +20,7 @@
   "donate_trees_description": "Wählen Sie ein Projekt, das die Bäume für Sie pflanzt.",
   "donation_contribution": "Spende",
   "donation_detail": "Spendeninfo",
-  "donor_detail": "Spenderinfo"
+  "donor_detail": "Spenderinfo",
+  "try_again": "Noch einmal versuchen",
+  "return_home": "Zurück"
 }

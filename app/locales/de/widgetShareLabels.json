@@ -9,5 +9,6 @@
   "widget_progress_tree_counter": "Baumfortschrittszähler",
   "widget_donate_trees": "Bäume spenden",
   "widget_preview": "Widget-Vorschau",
-  "widget_not_public_acct_warning": "Ihr Profil ist nicht öffentlich sichtbar. Um Ihr Baumzähler-Widget zu erstellen, setzen Sie Ihr Konto unter Profil bearbeiten auf öffentlich."
+  "widget_not_public_acct_warning": "Ihr Profil ist nicht öffentlich sichtbar. Um Ihr Baumzähler-Widget zu erstellen, setzen Sie Ihr Konto unter Profil bearbeiten auf öffentlich.",
+  "widget_loading": "-Widget lädt..."
 }

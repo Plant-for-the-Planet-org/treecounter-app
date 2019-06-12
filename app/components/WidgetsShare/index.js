@@ -56,7 +56,7 @@ export default class WidgetShare extends PureComponent {
       data-show-donate-button="true"
       data-background-color="#FFF"
       cite="${this.props.serverName}" >
-        ${this.state.activeWidget.type} widget loading...
+        ${this.state.activeWidget.type}${i18n.t('label.widget_loading')}
     </blockquote>
     <script
       type="text/javascript"

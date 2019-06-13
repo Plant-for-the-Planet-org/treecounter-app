@@ -37,7 +37,7 @@ class ConfirmProfileDeletionModal extends Component {
               onChangeText={username => this.setState({ username })}
               value={this.state.username}
               style={styles.textInputfield}
-              placeholder={'DELETE'}
+              placeholder={i18n.t('label.delete')}
               placeholderTextColor={'#686060'}
               underlineColorAndroid={'transparent'}
               maxLength={6}
@@ -59,7 +59,7 @@ class ConfirmProfileDeletionModal extends Component {
               this.props.navigation.goBack(null);
             }}
           >
-            {'GO BACK'}
+            {i18n.t('label.cancel')}
           </PrimaryButton>
           <PrimaryButton
             buttonStyle={styles.buttonStyle}
@@ -70,7 +70,7 @@ class ConfirmProfileDeletionModal extends Component {
               }
             }}
           >
-            {'DELETE'}
+            {i18n.t('label.delete')}
           </PrimaryButton>
         </View>
       </View>

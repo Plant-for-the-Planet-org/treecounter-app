@@ -330,7 +330,9 @@ export default class DonateTrees extends Component {
             ' '
           )}
         >
-          <PrimaryButton onClick={validated}>Next</PrimaryButton>
+          <PrimaryButton onClick={validated}>
+            {i18n.t('label.next')}
+          </PrimaryButton>
         </div>
       );
     };

@@ -20,7 +20,7 @@ class ConfirmProfileDeletionModal extends Component {
           contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
         >
           <View style={styles.container}>
-            <Text style={styles.textHeader}>Are You Sure?</Text>
+            <Text style={styles.textHeader}>{i18n.t('label.sure')}</Text>
             <Text style={styles.textPara}>
               {i18n.t('label.deletion_warning_heading')}
             </Text>
@@ -37,7 +37,7 @@ class ConfirmProfileDeletionModal extends Component {
               onChangeText={username => this.setState({ username })}
               value={this.state.username}
               style={styles.textInputfield}
-              placeholder={i18n.t('label.delete')}
+              placeholder={'DELETE'}
               placeholderTextColor={'#686060'}
               underlineColorAndroid={'transparent'}
               maxLength={6}

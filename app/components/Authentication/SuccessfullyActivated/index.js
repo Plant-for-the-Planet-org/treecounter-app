@@ -42,7 +42,7 @@ export default class SuccessfullyActivatedAccount extends Component {
           {this.props.success ? (
             <TextBlock>
               {
-                (i18n.t('label.do_profile_or_target'),
+                i18n.t('label.do_profile_or_target',
                 {
                   customizeProfile: customizeProfile,
                   setTarget: setTarget
@@ -52,7 +52,7 @@ export default class SuccessfullyActivatedAccount extends Component {
           ) : (
             <TextBlock>
               {
-                (i18n.t('label.do_login'),
+                i18n.t('label.do_login',
                 {
                   login: login
                 })

@@ -116,7 +116,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
                   {i18n.t('label.trees')}
                 </Text>{' '}
                 {
-                  (i18n.t('label.support_to'),
+                  i18n.t('label.support_to',
                   {
                     name: this.props.supportTreecounter.displayName
                   })

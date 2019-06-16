@@ -67,13 +67,16 @@ export function deleteContribution(plantContributionId) {
               mergeEntities(normalize(merge.plantProject, plantProjectSchema))
             );
           NotificationManager.success(statusText, 'Success', 5000);
-          dispatch(setProgressModelState(false));
         })
         .catch(err => {
           debug(err);
+
           NotificationManager.error(error.response.data.message, 'Error', 5000);
-          dispatch(setProgressModelState(false));
+
           reject(err);
+        })
+        .finally(data => {
+          dispatch(setProgressModelState(false));
         });
     });
   };

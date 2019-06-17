@@ -7,9 +7,10 @@
   "account_activation": "Account Activation",
   "successfully_activated": "You have successfully activated your account.",
   "already_activated": "Your account has already been activated previously.",
-  "do_profile_or_target": "You can {{customizeProfile}} now <br />or {{setTarget}}.",
-  "do_login": "You can {{login}}.",
-  "set_a_target": "set a target",
+  "do_profile_or_target": "You can now",
   "customize_your_profile": "customize your profile",
+  "or": "or",
+  "set_a_target": "set a target",
+  "do_login": "You can now",
   "login": "login"
 }

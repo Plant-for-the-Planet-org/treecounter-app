@@ -129,7 +129,7 @@ class SearchBar extends React.PureComponent {
               ? 'visible-cancel-button'
               : 'layout-only-cancel-button'
           }
-          style={[{ opacity: showCancelButton ? 1 : 0, width: '25%' }]}
+          style={[{ opacity: showCancelButton ? 1 : 0, width: '22%' }]}
         >
           {this.props.showCancelSearchButton ? (
             <TouchableItem
@@ -139,8 +139,9 @@ class SearchBar extends React.PureComponent {
               onPress={this._handlePressCancelButton}
             >
               <Text
+                numberOfLines={1}
                 style={{
-                  fontSize: 17,
+                  fontSize: 14,
                   color: this.props.tintColor || '#007AFF',
                   textAlign: 'center'
                 }}

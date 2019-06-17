@@ -379,9 +379,12 @@ export default class ContributionCard extends React.Component {
               <div>
                 <ConfirmDeletion
                   isOpen={this.state.openDialog}
-                  handleDeletion={() =>
-                    this.props.deleteContribution(contribution.id)
-                  }
+                  handleDeletion={() => {
+                    this.props.deleteContribution(contribution.id);
+                    this.setState({
+                      openDialog: false
+                    });
+                  }}
                   onRequestClose={() =>
                     this.setState({
                       openDialog: false

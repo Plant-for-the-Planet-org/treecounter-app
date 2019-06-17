@@ -8,6 +8,7 @@ import {
   Image,
   Linking
 } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 
 import SearchBar from './SearchBar';
 import Header from './Header.native';
@@ -81,7 +82,7 @@ class SearchLayout extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Header>
           <SearchBar
             onChangeQuery={this.onChangeTextDelayed}
@@ -125,7 +126,7 @@ class SearchLayout extends React.Component {
             })}
           </ScrollView>
         ) : null}
-      </View>
+      </SafeAreaView>
     );
   }
 }

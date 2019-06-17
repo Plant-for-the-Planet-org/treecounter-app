@@ -139,6 +139,7 @@ class SearchBar extends React.PureComponent {
               onPress={this._handlePressCancelButton}
             >
               <Text
+                numberOfLines={1}
                 style={{
                   fontSize: 14,
                   color: this.props.tintColor || '#007AFF',

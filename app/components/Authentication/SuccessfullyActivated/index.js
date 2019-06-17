@@ -41,22 +41,12 @@ export default class SuccessfullyActivatedAccount extends Component {
 
           {this.props.success ? (
             <TextBlock>
-              {
-                i18n.t('label.do_profile_or_target',
-                {
-                  customizeProfile: customizeProfile,
-                  setTarget: setTarget
-                })
-              }
+              {i18n.t('label.do_profile_or_target') + ' '} {customizeProfile}{' '}
+              {' ' + i18n.t('label.or') + ' '} {setTarget} {'.'}
             </TextBlock>
           ) : (
             <TextBlock>
-              {
-                i18n.t('label.do_login',
-                {
-                  login: login
-                })
-              }
+              {i18n.t('label.do_login') + ' '} {login} {'.'}
             </TextBlock>
           )}
         </CardLayout>

@@ -460,12 +460,13 @@ export default class DonateTrees extends Component {
           </CardLayout>
         ) : (
           <form
+            className="donate-tress__container"
             onSubmit={event => {
               this.checkValidation[2]();
               event.preventDefault();
             }}
           >
-            <div className="donate-tress__container">
+            <div>
               <ContentHeader caption={headings[this.state.pageIndex]} />
 
               <Slider {...settings} ref="slider">

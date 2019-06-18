@@ -43,9 +43,15 @@ export default class PriceProjects extends Component {
     });
   };
 
-  sortProjects(sortType) {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currencies !== this.props.currencies) {
+      this.sortProjects('asc', nextProps);
+    }
+  }
+
+  sortProjects(sortType, props = this.props) {
     if (sortType === 'desc') {
-      let { plantProjects, currencies } = this.props;
+      let { plantProjects, currencies } = props;
       currencies = currencies.currencies;
       let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
       if (currencies) {
@@ -62,7 +68,7 @@ export default class PriceProjects extends Component {
         priceSortedProjects: priceSortedProjectsNew
       });
     } else {
-      let { plantProjects, currencies } = this.props;
+      let { plantProjects, currencies } = props;
       currencies = currencies.currencies;
       let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
       if (currencies) {

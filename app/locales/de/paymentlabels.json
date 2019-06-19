@@ -13,5 +13,8 @@
   "contact_lastname": "Nachname",
   "donate_to": "Spenden an {{name}}",
   "payment_failed": "Zahlung fehlgeschlagen",
-  "go_back_to_app": "Zurück zur App"
+  "go_back_to_app": "Zurück zur App",
+  "please_confirm": "Bitte bestätigen",
+  "please_enter_card_details": "Bitte geben Sie Ihre korrekten Kartendaten ein",
+  "please_enter_iban": "Bitte geben Sie Ihre korrekte IBAN ein"
 }

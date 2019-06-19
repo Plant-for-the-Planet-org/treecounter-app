@@ -10,7 +10,6 @@ import {
   plantProjectSchema,
   tpoSchema
 } from '../schemas/index';
-
 import { normalize } from 'normalizr';
 import {
   deleteEntity,
@@ -18,6 +17,7 @@ import {
   mergeEntities
 } from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
+import i18n from '../locales/i18n.js';
 const profileTypeToReq = {
   profile: 'profile_put',
   about_me: 'profileAboutMe_put',
@@ -40,8 +40,8 @@ export function addPlantProject(plantProject) {
           dispatch(mergeEntities(normalize(tpo, [tpoSchema])));
           dispatch(mergeEntities(normalize(userProfile, [userProfileSchema])));
           NotificationManager.success(
-            `New Project Added Successfully`,
-            `Congrats`,
+            i18n.t('label.new_project_added_successfully'),
+            i18n.t('label.congrats'),
             5000
           );
           resolve(plantProject);
@@ -49,7 +49,7 @@ export function addPlantProject(plantProject) {
         })
         .catch(err => {
           debug(err);
-          NotificationManager.error(err.message, 'Profile update Error', 5000);
+          NotificationManager.error(err.message, i18n.t('label.error'), 5000);
           dispatch(setProgressModelState(false));
         });
     });

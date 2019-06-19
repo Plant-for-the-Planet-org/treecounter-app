@@ -5,11 +5,11 @@ import {
   putAuthenticatedRequest,
   putRequest
 } from '../utils/api';
-
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { treecounterSchema, challengeSchema } from '../schemas';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
+import i18n from '../locales/i18n.js';
 
 export function challenge(challengeDetails) {
   let route = 'challenge_post';
@@ -26,8 +26,8 @@ export function challenge(challengeDetails) {
           dispatch(setProgressModelState(false));
           resolve(response.data);
           NotificationManager.success(
-            'Challenge Created successfully',
-            'Success',
+            i18n.t('label.challenge_create_successfully'),
+            i18n.t('label.success'),
             5000
           );
         })
@@ -35,7 +35,11 @@ export function challenge(challengeDetails) {
           debug('error: ', error);
           reject(error);
           dispatch(setProgressModelState(false));
-          NotificationManager.error(error.response.data.message, 'Error', 5000);
+          NotificationManager.error(
+            error.response.data.message,
+            i18n.t('label.error'),
+            5000
+          );
         });
     });
   };

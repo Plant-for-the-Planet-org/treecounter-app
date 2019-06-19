@@ -5,6 +5,7 @@ import {
   clearTimeoutID
 } from '../reducers/pledgeReducer';
 import { NotificationManager } from 'react-notifications';
+import i18n from '../locales/i18n.js';
 
 export function fetchPledgesAction(eventSlug) {
   return dispatch => {
@@ -32,10 +33,14 @@ export function postPledge(data, params) {
       .then(res => {
         const { statusText } = res;
 
-        NotificationManager.success(statusText, 'Success', 5000);
+        NotificationManager.success(statusText, i18n.t('label.success'), 5000);
       })
       .catch(error => {
-        NotificationManager.error(error.response.data.message, 'Error', 5000);
+        NotificationManager.error(
+          error.response.data.message,
+          i18n.t('label.error'),
+          5000
+        );
       });
   };
 }

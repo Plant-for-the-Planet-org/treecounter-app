@@ -17,5 +17,7 @@
   "map": "Map",
   "OR": "OR",
   "continue_on_site": "Continue using the site",
-  "error": "Error"
+  "error": "Error",
+  "success": "Success",
+  "congrats": "Congrats"
 }

@@ -17,5 +17,6 @@
   "survival_explaination": "Percentage of planted trees that survive the first year after planting.",
   "view_more": "View more",
   "link": "Link",
-  "exit": "Exit"
+  "exit": "Exit",
+  "plant_project_update_success": "Plant project updated successful"
 }

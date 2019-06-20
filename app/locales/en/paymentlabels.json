@@ -13,5 +13,8 @@
   "contact_lastname": "Last Name",
   "donate_to": "Spenden an {{name}}",
   "payment_failed": "Payment Failed",
-  "go_back_to_app": "Go Back to App"
+  "go_back_to_app": "Go Back to App",
+  "please_confirm": "Please confirm",
+  "please_enter_card_details": "Please enter correct card details",
+  "please_enter_iban": "Please enter correct IBAN"
 }

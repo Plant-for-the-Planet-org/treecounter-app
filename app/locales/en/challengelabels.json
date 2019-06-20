@@ -15,5 +15,8 @@
   "challenge_error": "{{user}}'s current target is {{target}} trees. Please enter a higher number.",
   "search_user": "Search User",
   "email": "Email",
-  "year": "Year"
+  "year": "Year",
+  "challenge_create_successfully": "Challenge created successfully",
+  "please_select_user": "Please select user",
+  "could_not_add_user": "Could not add user"
 }

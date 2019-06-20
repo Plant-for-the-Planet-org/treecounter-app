@@ -17,5 +17,7 @@
   "map": "Karte",
   "OR": "ODER",
   "continue_on_site": "Weiter auf der Website",
-  "error": "Fehler"
+  "error": "Fehler",
+  "success": "Erfolg",
+  "congrats": "Glückwunsch"
 }

@@ -22,7 +22,10 @@ class Offline extends React.Component {
         isConfirmed: this.state.checkboxState
       });
     } else {
-      NotificationManager.error('Please Confirm', 'Error');
+      NotificationManager.error(
+        i18n.t('label.please_confirm'),
+        i18n.t('label.error')
+      );
     }
   };
   handleArrowClick = () => {

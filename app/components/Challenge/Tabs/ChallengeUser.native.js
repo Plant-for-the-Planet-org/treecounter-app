@@ -81,7 +81,11 @@ class ChallengeUser extends Component {
       //   return { value: item };
       // });
     } else {
-      NotificationManager.error('Please select user', 'Error', 5000);
+      NotificationManager.error(
+        i18n.t('label.please_select_user'),
+        i18n.t('label.error'),
+        5000
+      );
     }
   }
 

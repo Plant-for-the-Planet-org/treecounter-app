@@ -25,5 +25,8 @@
   "deletion_warning_summery_1": "Bäume, die Sie gepflanzt haben, werden weiterhin Teil der Trillion Tree Campaign sein.",
   "deletion_prerequisite": "Bitte geben Sie in Großbuchstaben DELETE ein und klicken auf die Schaltfläche Löschen, um mit der Löschung Ihres Kontos fortzufahren.",
   "pick_profile": "Profil auswählen",
-  "new_project_added_successfully": "Neues Projekt erfolgreich angelegt"
+  "new_project_added_successfully": "Neues Projekt erfolgreich angelegt",
+  "male": "Male",
+  "female": "Female",
+  "other": "Other"
 }

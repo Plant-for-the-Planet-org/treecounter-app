@@ -200,12 +200,15 @@ export default class EditUserProfile extends React.Component {
     //now we will show only one which is synopsis1, to show both info for old user lets merge them here
     const updatedUserProfile = {
       ...this.props.currentUserProfile,
-      synopsis1: `${this.props.currentUserProfile.synopsis1}
-        ${
-          !!this.props.currentUserProfile.synopsis2
-            ? this.props.currentUserProfile.synopsis2
-            : ''
-        }`,
+      synopsis1: `${
+        !!this.props.currentUserProfile.synopsis1
+          ? this.props.currentUserProfile.synopsis1
+          : ''
+      }${
+        !!this.props.currentUserProfile.synopsis2
+          ? ' ' + this.props.currentUserProfile.synopsis2
+          : ''
+      }`,
       synopsis2: ''
     };
     return (

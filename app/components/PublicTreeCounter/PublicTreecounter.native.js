@@ -195,17 +195,12 @@ class PublicTreeCounter extends React.Component {
                   {userProfile.synopsis2}
                 </Text>
               ) : null}
-              {userProfile.linkText ? (
-                <Text style={stylesHome.footerText}>
-                  {userProfile.linkText}
-                </Text>
-              ) : null}
               {userProfile.url ? (
                 <Text
                   style={stylesHome.linkText}
                   onPress={() => this._goToURL(userProfile.url)}
                 >
-                  {userProfile.url}
+                  {userProfile.linkText || i18n.t('label.read_more')}
                 </Text>
               ) : null}
             </CardLayout>
@@ -275,7 +270,10 @@ class PublicTreeCounter extends React.Component {
                               )
                             }
                           >
-                            <Text style={stylesPublicPage.supportText}>
+                            <Text
+                              numberOfLines={1}
+                              style={stylesPublicPage.supportText}
+                            >
                               {i18n.t('label.support')}
                             </Text>
                           </TouchableOpacity>

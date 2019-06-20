@@ -26,7 +26,7 @@
   "deletion_prerequisite": "Bitte geben Sie in Großbuchstaben DELETE ein und klicken auf die Schaltfläche Löschen, um mit der Löschung Ihres Kontos fortzufahren.",
   "pick_profile": "Profil auswählen",
   "new_project_added_successfully": "Neues Projekt erfolgreich angelegt",
-  "male": "Male",
-  "female": "Female",
-  "other": "Other"
+  "male": "Männlich",
+  "female": "Weiblich",
+  "other": "Divers"
 }

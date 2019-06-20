@@ -26,7 +26,7 @@
   "deletion_prerequisite": " Please type DELETE in all capitals letters and click Delete button to continue with your account deletion.",
   "pick_profile": "Pick Profile",
   "new_project_added_successfully": "New project added successfully",
-  "male": "Männlich",
-  "female": "Weiblich",
-  "other": "Divers"
+  "male": "Male",
+  "female": "Female",
+  "other": "Other"
 }

@@ -29,8 +29,8 @@
   "competition_access_invitation": "Nur Leute, die ich einlade",
   "edit_competition": "Wettbewerb bearbeiten",
   "by_a_name": "von",
-  "competition_create_successfully": "Wettbewerb erfolgreich angelegt",
-  "competition_creation_error": "Wettbewerb konnte nicht angelegt werden",
+  "competition_create_successfully": "Wettbewerb erfolgreich erstellt",
+  "competition_creation_error": "Wettbewerb konnte nicht erstellt werden",
   "competition_edited_successfully": "Wettbewerb erfolgreich bearbeitet",
   "competition_editing_error": "Wettbewerb konnte nicht bearbeitet werden"
 }

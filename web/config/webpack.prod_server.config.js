@@ -3,6 +3,11 @@ const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const commonConfig = require('./webpack.common.config.js');
 const path = require('path');
+const {
+  BugsnagBuildReporterPlugin,
+  BugsnagSourceMapUploaderPlugin
+} = require('webpack-bugsnag-plugins');
+const pkg = require('../../package.json');
 
 module.exports = webpackMerge(commonConfig, {
   entry: {
@@ -31,7 +36,19 @@ module.exports = webpackMerge(commonConfig, {
   },
   devtool: 'source-map',
   plugins: [
-    new WebpackCleanupPlugin(),
+    new BugsnagBuildReporterPlugin({
+      apiKey: '6f2971a9b077662912f61ae602716afd',
+      appVersion: pkg.version
+    }),
+    new BugsnagSourceMapUploaderPlugin({
+      apiKey: '6f2971a9b077662912f61ae602716afd',
+      appVersion: pkg.version,
+      overwrite: true,
+      publicPath: '*'
+    }),
+    new WebpackCleanupPlugin({
+      preview: true
+    }),
     new webpack.LoaderOptionsPlugin({
       options: {
         htmlLoader: {

@@ -178,17 +178,12 @@ export default class UserHome extends Component {
                       {userProfile.synopsis2}
                     </Text>
                   ) : null}
-                  {userProfile.linkText ? (
-                    <Text style={styles.footerText}>
-                      {userProfile.linkText}
-                    </Text>
-                  ) : null}
                   {userProfile.url ? (
                     <Text
                       style={styles.linkText}
                       onPress={() => this._goToURL(userProfile.url)}
                     >
-                      {userProfile.url}
+                      {userProfile.linkText || i18n.t('label.read_more')}
                     </Text>
                   ) : null}
                 </CardLayout>

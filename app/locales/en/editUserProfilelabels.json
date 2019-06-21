@@ -25,5 +25,8 @@
   "deletion_warning_summery_1": "Trees you have planted will continue to be part of the Trillion Tree Campaign.",
   "deletion_prerequisite": " Please type DELETE in all capitals letters and click Delete button to continue with your account deletion.",
   "pick_profile": "Pick Profile",
-  "new_project_added_successfully": "New project added successfully"
+  "new_project_added_successfully": "New project added successfully",
+  "male": "Male",
+  "female": "Female",
+  "other": "Other"
 }

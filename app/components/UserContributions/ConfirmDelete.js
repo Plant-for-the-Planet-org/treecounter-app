@@ -12,7 +12,7 @@ const ConfirmDeletion = ({ isOpen, onRequestClose, handleDeletion }) => (
       <div className="confirm-message">
         {i18n.t('label.delete_my_trees_action')}
       </div>
-      <div className="message">{i18n.t('label.my_tree_delete_confirm')}</div>
+      <div className="message">{i18n.t('label.my_trees_delete_confirm')}</div>
       <SecondaryButton
         onClick={() => {
           handleDeletion && handleDeletion();

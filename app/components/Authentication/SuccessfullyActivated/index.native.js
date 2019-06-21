@@ -46,28 +46,25 @@ export default class SuccessfullyActivatedAccount extends Component {
               {i18n.t('label.already_activated')}
             </Text>
           )}
-          <View>
-            {this.props.success ? (
+          {this.props.success ? (
+            <View>
               <Text style={styles.textStyle}>
-                {
-                  (i18n.t('label.do_profile_or_target'),
-                  {
-                    customizeProfile: customizeProfile,
-                    setTarget: setTarget
-                  })
-                }
+                {i18n.t('label.do_profile_or_target') + ' '}
               </Text>
-            ) : (
+              {customizeProfile}
               <Text style={styles.textStyle}>
-                {
-                  (i18n.t('label.do_login'),
-                  {
-                    login: login
-                  })
-                }
+                {' ' + i18n.t('label.or') + ' '}
               </Text>
-            )}
-          </View>
+              {setTarget}
+            </View>
+          ) : (
+            <View>
+              <Text style={styles.textStyle}>
+                {i18n.t('label.do_login') + ' '}
+              </Text>
+              {login}
+            </View>
+          )}
         </View>
       </ScrollView>
     );

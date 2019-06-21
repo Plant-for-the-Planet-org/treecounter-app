@@ -62,7 +62,11 @@ class SearchUser extends React.Component {
           : suggestion.name
       });
     } else {
-      NotificationManager.error('Could not add user', 'Error', 5000);
+      NotificationManager.error(
+        i18n.t('label.could_not_add_user'),
+        i18n.t('label.error'),
+        5000
+      );
     }
   }
   componentWillReceiveProps(nextProps) {

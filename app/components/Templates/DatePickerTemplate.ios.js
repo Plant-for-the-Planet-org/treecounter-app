@@ -100,6 +100,7 @@ class CollapsibleDatePickerIOS extends React.PureComponent {
           style={{ height: this.state.height, overflow: 'hidden' }}
         >
           <DatePickerIOS
+            locale={i18n.language}
             ref="input"
             accessibilityLabel={i18n.t(locals.label)}
             date={new Date(locals.value)}

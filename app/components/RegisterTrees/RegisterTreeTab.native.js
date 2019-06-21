@@ -98,7 +98,7 @@ export default class RegisterTreeTab extends PureComponent {
                     plantProject: item
                   })
                 }
-                label="Plant Project"
+                label={i18n.t('label.plant_project')}
                 data={this.props.plantProjects.map(item => {
                   return { value: item.value, label: item.text };
                 })}

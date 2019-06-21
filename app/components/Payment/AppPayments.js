@@ -73,7 +73,7 @@ export default class AppPayments extends Component {
               <div className={'gap'} />
               <TextBlock>
                 <PrimaryButton onClick={() => this.openApp('success')}>
-                  Go Back to App
+                  {i18n.t('label.go_back_to_app')}
                 </PrimaryButton>
               </TextBlock>
             </div>
@@ -81,11 +81,13 @@ export default class AppPayments extends Component {
             <div className="payment-success">
               <img src={attention} />
               <div className={'gap'} />
-              <TextBlock strong={true}>{'Payment Failed '}</TextBlock>
+              <TextBlock strong={true}>
+                {i18n.t('label.payment_failed')}
+              </TextBlock>
               <div className={'gap'} />
               <TextBlock>
                 <PrimaryButton onClick={() => this.openApp('failed')}>
-                  Go Back to App
+                  {i18n.t('label.go_back_to_app')}
                 </PrimaryButton>
               </TextBlock>
             </div>

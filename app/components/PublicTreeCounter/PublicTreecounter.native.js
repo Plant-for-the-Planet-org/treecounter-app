@@ -195,17 +195,12 @@ class PublicTreeCounter extends React.Component {
                   {userProfile.synopsis2}
                 </Text>
               ) : null}
-              {userProfile.linkText ? (
-                <Text style={stylesHome.footerText}>
-                  {userProfile.linkText}
-                </Text>
-              ) : null}
               {userProfile.url ? (
                 <Text
                   style={stylesHome.linkText}
                   onPress={() => this._goToURL(userProfile.url)}
                 >
-                  {userProfile.url}
+                  {userProfile.linkText || i18n.t('label.read_more')}
                 </Text>
               ) : null}
             </CardLayout>
@@ -234,11 +229,15 @@ class PublicTreeCounter extends React.Component {
             <CardLayout>
               <View>
                 <View style={stylesPublicPage.tableHeader}>
-                  <Text style={stylesPublicPage.firstColumn}>Contributor</Text>
+                  <Text style={stylesPublicPage.firstColumn}>
+                    {i18n.t('label.contributor')}
+                  </Text>
                   <Text style={stylesPublicPage.secondColumn}>
                     {i18n.t('label.plantedTrees')}
                   </Text>
-                  <Text style={stylesPublicPage.thirdColumn}>Target</Text>
+                  <Text style={stylesPublicPage.thirdColumn}>
+                    {i18n.t('label.target')}
+                  </Text>
                   <View style={stylesPublicPage.fourthColumn} />
                 </View>
                 <View>
@@ -271,7 +270,10 @@ class PublicTreeCounter extends React.Component {
                               )
                             }
                           >
-                            <Text style={stylesPublicPage.supportText}>
+                            <Text
+                              numberOfLines={1}
+                              style={stylesPublicPage.supportText}
+                            >
                               {i18n.t('label.support')}
                             </Text>
                           </TouchableOpacity>

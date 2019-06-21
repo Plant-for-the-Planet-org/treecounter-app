@@ -4,6 +4,7 @@ import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
+import _ from 'lodash';
 
 export default class FeaturedProjects extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class FeaturedProjects extends Component {
       }
       return projects;
     }, []);
+    featuredProjects = _.orderBy(featuredProjects, 'id');
     this.setState({
       featuredProjects: featuredProjects
     });
@@ -52,6 +54,7 @@ export default class FeaturedProjects extends Component {
       }
       return projects;
     }, []);
+    featuredProjects = _.orderBy(featuredProjects, 'id');
     this.setState({
       featuredProjects: featuredProjects
     });

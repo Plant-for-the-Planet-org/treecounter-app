@@ -7,7 +7,8 @@
     "build": "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail ",
     "build:server": "webpack --config ./web/config/webpack.server.config.js --profile --bail",
     "build:prod_server": "NODE_ENV='production' webpack --config ./web/config/webpack.server.config.js --profile --bail",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "postinstall": "grep -r --include=*.java -l 'android.support.v7' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v7/androidx.appcompat/' -pi && grep -r --include=*.java -l 'android.support.v4' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v4/androidx.core/' -pi && grep -r --include=*.java -l 'android.support' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi && grep --include=*.java -r -l 'android.support' ./node_modules/react-native-youtube | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi"
   },
   "lint-staged": {
     "*.js": [
@@ -16,6 +17,7 @@
     ]
   },
   "dependencies": {
+    "@bugsnag/js": "^6.3.0",
     "@haskkor/react-native-recaptchav3": "^1.0.3",
     "autosuggest-highlight": "^3.1.1",
     "axios": "^0.17.1",
@@ -30,7 +32,7 @@
     "moment": "^2.22.1",
     "normalizr": "^3.2.4",
     "number-to-words": "^1.2.3",
-    "react": "^16.6.3",
+    "react": "^16.8.3",
     "react-accessible-accordion": "^2.4.1",
     "react-arcgis": "3.3.0",
     "react-async-script-loader": "^0.3.0",
@@ -38,16 +40,16 @@
     "react-i18next": "^7.6.1",
     "react-images": "^0.5.17",
     "react-modal": "^3.4.5",
-    "react-native": "^0.57.8",
+    "react-native": "^0.59.8",
     "react-native-action-button": "^2.8.5",
     "react-native-check-box": "^2.1.7",
     "react-native-collapsible": "^0.12.0",
-    "react-native-device-info": "^0.26.1",
+    "react-native-device-info": "^0.26.5",
     "react-native-extended-stylesheet": "^0.8.1",
     "react-native-htmlview": "^0.12.1",
     "react-native-i18n": "^2.0.15",
     "react-native-image-carousel": "^0.4.4",
-    "react-native-image-picker": "^0.28.0",
+    "react-native-image-picker": "^0.28.1",
     "react-native-keyboard-aware-scroll-view": "^0.7.4",
     "react-native-lightbox": "^0.7.0",
     "react-native-material-dropdown": "https://github.com/niteshgrg/react-native-material-dropdown.git",
@@ -57,7 +59,7 @@
     "react-native-root-toast": "^3.0.1",
     "react-native-simple-radio-button": "^2.7.2",
     "react-native-slick": "^1.0.1",
-    "react-native-svg": "^6.4.1",
+    "react-native-svg": "^6.5.3",
     "react-native-svg-uri": "^1.2.3",
     "react-native-tab-view": "^1.0.2",
     "react-native-youtube": "^1.1.0",

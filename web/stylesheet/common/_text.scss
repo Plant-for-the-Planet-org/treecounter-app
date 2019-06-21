@@ -15,7 +15,12 @@
   margin-top: auto;
   margin-bottom: auto;
 }
-
+.pftp-text-select-none {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
 .reset_password_text {
   margin-bottom: 15px;
 }

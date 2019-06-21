@@ -1,11 +1,8 @@
 import { AppRegistry, Platform } from 'react-native';
 import App from './app/components/App';
-import { Client } from 'bugsnag-react-native';
 
 /* app.js */
 import EStyleSheet from 'react-native-extended-stylesheet';
-
-const bugsnag = new Client('6f2971a9b077662912f61ae602716afd');
 
 // import {
 //   setCustomView,

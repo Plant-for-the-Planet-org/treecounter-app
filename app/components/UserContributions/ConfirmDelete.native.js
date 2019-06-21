@@ -17,7 +17,9 @@ class ConfirmDeletionModal extends Component {
           contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
         >
           <View style={styles.container}>
-            <Text style={styles.textHeader}>Are You Sure?</Text>
+            <Text style={styles.textHeader}>
+              {i18n.t('label.my_trees_delete_confirm')}
+            </Text>
             <Text style={styles.textPara}>
               {i18n.t('label.deletion_warning_summary_contribution')}
             </Text>
@@ -33,7 +35,7 @@ class ConfirmDeletionModal extends Component {
               this.props.navigation.goBack(null);
             }}
           >
-            {'GO BACK'}
+            {i18n.t('label.cancel')}
           </PrimaryButton>
           <PrimaryButton
             buttonStyle={styles.buttonStyle}
@@ -42,7 +44,7 @@ class ConfirmDeletionModal extends Component {
               this.props.navigation.goBack(null);
             }}
           >
-            {'DELETE'}
+            {i18n.t('label.delete')}
           </PrimaryButton>
         </View>
       </View>

@@ -7,6 +7,7 @@ import { mergeEntities } from '../reducers/entitiesReducer';
 import { treecounterSchema } from '../schemas/index';
 import { putAuthenticatedRequest } from '../utils/api';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
+import i18n from '../locales/i18n.js';
 
 export function SubmitTarget(treecounterData, navigation = undefined) {
   return dispatch => {
@@ -23,7 +24,7 @@ export function SubmitTarget(treecounterData, navigation = undefined) {
           debug(error);
           reject(error);
           dispatch(setProgressModelState(false));
-          // NotificationManager.error(error.response.data.message, 'Error', 5000);
+          // NotificationManager.error(error.response.data.message, i18n.t('label.error'), 5000);
         });
     });
   };

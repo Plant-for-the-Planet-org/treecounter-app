@@ -1,4 +1,5 @@
-# TreeCounter-app
+# Plant-for-the-Planet App
+
 
 ## Directory Structure
 
@@ -28,6 +29,20 @@ npm start
 
 ### Running into ios simulator
 
+* Uncomment first line in .babelrc.
+To make it look something like this.
+
+```
+{
+  "presets": ["module:metro-react-native-babel-preset"],
+  "env": {
+    "production": {
+      "plugins": ["transform-remove-console"]
+    }
+  }
+}
+```
+
 ```bash
 react-native run-ios
 ```
@@ -49,9 +64,47 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home
 ```
+* Uncomment first line in .babelrc.
+To make it look something like this.
+
+```
+{
+  "presets": ["module:metro-react-native-babel-preset"],
+  "env": {
+    "production": {
+      "plugins": ["transform-remove-console"]
+    }
+  }
+}
+```
 
 After completion of these steps run following command in VSCode Terminal:
 
 ```bash
 react-native run-android
 ```
+
+## Versioning
+
+*App Versioning Guide*
+
+eg: Version M.F.B
+V 1.1.10
+
+M = Major Changes
+F = Feature Addition
+B = Critical Bug Fixes and Additions
+
+Release candidate can have the target version number
+V 1.1.`11` RC `1`
+
+Beta and Alpha builds can also have target version number
+V 1.1.`11` B `12`
+V 1.1.`11` A `12` [increment per release]
+
+
+
+## License
+
+Plant-for-the-Planet App is free software, and is released under the terms of the <abbr title="GNU General Public License">GPL</abbr> version 3 or (at your option) any later version. See <a href="license.txt">license.txt</a>.</p>
+

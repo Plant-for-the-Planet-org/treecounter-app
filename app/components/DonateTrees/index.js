@@ -330,7 +330,9 @@ export default class DonateTrees extends Component {
             ' '
           )}
         >
-          <PrimaryButton onClick={validated}>Next</PrimaryButton>
+          <PrimaryButton onClick={validated}>
+            {i18n.t('label.next')}
+          </PrimaryButton>
         </div>
       );
     };
@@ -411,7 +413,9 @@ export default class DonateTrees extends Component {
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>
           {this.props.supportTreecounter.treecounterId
-            ? 'Support trees to ' + this.props.supportTreecounter.displayName
+            ? i18n.t('label.support_trees_to', {
+                user: this.props.supportTreecounter.displayName
+              })
             : pageHeadings[this.state.pageIndex].heading}
           <DescriptionHeading>
             {pageHeadings[this.state.pageIndex].description}
@@ -425,12 +429,12 @@ export default class DonateTrees extends Component {
               <img src={attention} />
               <div className={'gap'} />
               <TextBlock strong={true}>
-                {'Error ' + this.props.paymentStatus.message}
+                {i18n.t('label.error') + ' ' + this.props.paymentStatus.message}
               </TextBlock>
               <div className={'gap'} />
               <TextBlock>
                 <PrimaryButton onClick={this.props.paymentClear}>
-                  Try again
+                  {i18n.t('label.try_again')}
                 </PrimaryButton>
               </TextBlock>
             </div>
@@ -447,18 +451,22 @@ export default class DonateTrees extends Component {
               </TextBlock>
               <div className={'gap'} />
               <TextBlock>
-                <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+                <InlineLink
+                  uri={'app_userHome'}
+                  caption={i18n.t('label.return_home')}
+                />
               </TextBlock>
             </div>
           </CardLayout>
         ) : (
           <form
+            className="donate-tress__container"
             onSubmit={event => {
               this.checkValidation[2]();
               event.preventDefault();
             }}
           >
-            <div className="donate-tress__container">
+            <div>
               <ContentHeader caption={headings[this.state.pageIndex]} />
 
               <Slider {...settings} ref="slider">

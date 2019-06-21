@@ -82,6 +82,7 @@ export default class ContributionCard extends React.Component {
       i18n.t('label.planted_on', {
         date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
       }) +
+      ', ' +
       i18n.t('label.added_on', {
         date: moment(getDateFromMySQL(registrationDate)).format('DD MMM YYYY')
       })
@@ -378,9 +379,12 @@ export default class ContributionCard extends React.Component {
               <div>
                 <ConfirmDeletion
                   isOpen={this.state.openDialog}
-                  handleDeletion={() =>
-                    this.props.deleteContribution(contribution.id)
-                  }
+                  handleDeletion={() => {
+                    this.props.deleteContribution(contribution.id);
+                    this.setState({
+                      openDialog: false
+                    });
+                  }}
                   onRequestClose={() =>
                     this.setState({
                       openDialog: false

@@ -87,7 +87,9 @@ export default class GiftEmail extends Component {
             options={giftInvitationSchemaOptions}
             value={this.state.form}
           />
-          <PrimaryButton onClick={this.onNextClick}>Next</PrimaryButton>
+          <PrimaryButton onClick={this.onNextClick}>
+            {i18n.t('label.next')}
+          </PrimaryButton>
         </CardLayout>
       </KeyboardAwareScrollView>
     );

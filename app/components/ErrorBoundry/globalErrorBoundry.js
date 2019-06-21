@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { infoGrey } from '../../assets';
 import i18n from '../../locales/i18n.js';
+import bugsnag from '@bugsnag/js';
+
+const bugsnagClient = bugsnag('6f2971a9b077662912f61ae602716afd');
 
 export default class GlobalErrorBoundary extends React.Component {
   constructor(props) {
@@ -12,8 +15,9 @@ export default class GlobalErrorBoundary extends React.Component {
   componentDidCatch(error, info) {
     this.setState({ hasErrorOccurred: true });
     console.log(error, info);
-    // You can also log the error to an error reporting service
-    // logErrorToMyService(error, info);
+    bugsnag.notify(error, function(report) {
+      report.metadata = { info: info };
+    });
   }
 
   render() {

@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 import { Text, View, ScrollView, SafeAreaView } from 'react-native';
 import styles from '../../styles/edit_profile.native';
 import i18n from '../../locales/i18n.js';
-import { Client } from 'bugsnag-react-native';
+import { Client, Configuration } from 'bugsnag-react-native';
+import {
+  name as app_name,
+  version as app_version
+} from '../../../package.json';
 
-const bugsnag = new Client('6f2971a9b077662912f61ae602716afd');
+const configuration = new Configuration();
+configuration.apiKey = '6f2971a9b077662912f61ae602716afd';
+configuration.codeBundleId = app_version;
+bugsnag = new Client(configuration);
 
 export default class GlobalErrorBoundary extends React.Component {
   constructor(props) {

@@ -7,8 +7,10 @@
   "something_went_x": "Something went wrong.",
   "sorry_inconveniences": "Sorry for the inconveniences.",
   "error_reported": "We have reported this error to our IT Professionals.",
-  "home_page_redirected": "You will be redirected to home page in {{seconds}} seconds",
-  "planting_404": "To avoid this situation on this planet lets plant some trees.",
+  "home_page_redirected":
+    "You will be redirected to home page in {{seconds}} seconds",
+  "planting_404":
+    "To avoid this situation on this planet lets plant some trees.",
   "close_and_reopen": "Please close the app and restart it.",
   "cancel": "Cancel",
   "searchshort": "Search",
@@ -19,5 +21,10 @@
   "continue_on_site": "Continue using the site",
   "error": "Error",
   "success": "Success",
-  "congrats": "Congrats"
+  "congrats": "Congrats",
+
+  "calendar_err_incomplete_date":
+    "Please enter valid value, this field is incomplete or has invalid value",
+  "calendar_err_invalid_date":
+    "Please enter valid value, this field has invalid value"
 }

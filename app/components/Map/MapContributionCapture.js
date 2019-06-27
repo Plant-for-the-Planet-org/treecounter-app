@@ -100,7 +100,7 @@ class MapContributionCapture extends React.Component {
             view.goTo(result.extent).then(() => {
               const geoLocation = {
                 geoLongitude: result.extent.center.longitude,
-                geoLatitude: result.extent.center.longitude,
+                geoLatitude: result.extent.center.latitude,
                 countryCode: result.feature.attributes.CountryCode
               };
               this.setState({ geoLocation });

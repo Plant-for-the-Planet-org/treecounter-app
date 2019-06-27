@@ -115,7 +115,7 @@ export default class Challenge extends Component {
           user: this.state.challengedName,
           target: delimitNumbers(nextProps.error)
         }),
-        'Error',
+        i18n.t('label.error'),
         5000
       );
     }

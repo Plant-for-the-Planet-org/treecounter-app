@@ -11,8 +11,8 @@
   "description": "Description",
   "gallery": "Image Gallery",
   "video": "Video",
-  "updated_successful": "Updated Successful",
-  "error_title": "Profile update Error",
+  "updated_successful": "Updated successful",
+  "error_title": "Profile update failed",
   "plant_project_update_success": "Plant Project updated successfully",
   "plant_project_delete_success": "Plant Project deleted successfully",
   "plant_project_added_success": "Plant Project created successfully",
@@ -24,5 +24,9 @@
   "deletion_warning_summery": "All your personal information will be deleted unless required for legal and accounting purposes.",
   "deletion_warning_summery_1": "Trees you have planted will continue to be part of the Trillion Tree Campaign.",
   "deletion_prerequisite": " Please type DELETE in all capitals letters and click Delete button to continue with your account deletion.",
-  "pick_profile": "Pick Profile"
+  "pick_profile": "Pick Profile",
+  "new_project_added_successfully": "New project added successfully",
+  "male": "Male",
+  "female": "Female",
+  "other": "Other"
 }

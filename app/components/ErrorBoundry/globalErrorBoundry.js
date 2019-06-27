@@ -3,8 +3,15 @@ import PropTypes from 'prop-types';
 import { infoGrey } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import bugsnag from '@bugsnag/js';
+import {
+  name as app_name,
+  version as app_version
+} from '../../../package.json';
 
-const bugsnagClient = bugsnag('6f2971a9b077662912f61ae602716afd');
+const bugsnagClient = bugsnag({
+  apiKey: '6f2971a9b077662912f61ae602716afd',
+  appVersion: app_version
+});
 
 export default class GlobalErrorBoundary extends React.Component {
   constructor(props) {

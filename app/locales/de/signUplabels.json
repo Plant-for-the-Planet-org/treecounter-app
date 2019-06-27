@@ -22,5 +22,7 @@
   "already_have_account": "Haben Sie schon ein Konto?",
   "education": "Bildung",
   "organization": "Organisation",
-  "title": "Titel"
+  "title": "Titel",
+  "registration_successfully": "Registrierung erfolgreich",
+  "passwords_do_not_match": "Passwörter stimmen nicht überein"
 }

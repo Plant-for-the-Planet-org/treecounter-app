@@ -15,5 +15,8 @@
   "challenge_error": "Das aktuelle Ziel von {{user}} sind {{target}} Bäume. Bitte geben Sie eine höhere Zahl ein.",
   "search_user": "Suche Benutzer",
   "email": "E-Mail",
-  "year": "Jahr"
+  "year": "Jahr",
+  "challenge_create_successfully": "Wettkampf erfolgreich angelegt",
+  "please_select_user": "Bitte Benutzer auswählen",
+  "could_not_add_user": "Benutzer konnte nicht hinzugefügt werden"
 }

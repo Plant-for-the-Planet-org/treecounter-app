@@ -1,10 +1,10 @@
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
-
 import { updateRoute } from '../helpers/routerHelper';
 import { postRequest } from '../utils/api';
 import { updateJWT, updateActivateToken } from '../utils/user';
 import { loadUserProfile } from './loadUserProfileAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
+import i18n from '../locales/i18n.js';
 
 export function signUp(
   profileType,
@@ -30,8 +30,8 @@ export function signUp(
             updateJWT(token, refresh_token);
             dispatch(loadUserProfile(data));
             NotificationManager.success(
-              'Registration Successful',
-              'Congrats',
+              i18n.t('label.registration_successfully'),
+              i18n.t('label.congrats'),
               5000
             );
           }
@@ -51,7 +51,11 @@ export function signUp(
         });
     };
   } else {
-    NotificationManager.error('Password do not match', 'Error', 5000);
+    NotificationManager.error(
+      i18n.t('label.passwords_do_not_match'),
+      i18n.t('label.error'),
+      5000
+    );
     return dispatch => {
       return new Promise(function(resolve, reject) {
         setTimeout(function() {

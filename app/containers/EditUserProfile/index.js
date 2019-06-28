@@ -95,7 +95,7 @@ class EditUserProfileContainer extends React.Component {
       .then(data => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_update_success')}`,
-          i18n.t('label.success_title'),
+          i18n.t('label.success'),
           5000
         );
       })
@@ -114,7 +114,7 @@ class EditUserProfileContainer extends React.Component {
       .then(data => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_delete_success')}`,
-          i18n.t('label.success_title'),
+          i18n.t('label.success'),
           5000
         );
       })
@@ -133,7 +133,7 @@ class EditUserProfileContainer extends React.Component {
       .then(data => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_added_success')}`,
-          i18n.t('label.success_title'),
+          i18n.t('label.success'),
           5000
         );
       })
@@ -177,17 +177,13 @@ class EditUserProfileContainer extends React.Component {
               `${profileTypeLabel[profileType] || profileType} ${i18n.t(
                 'label.updated_successful'
               )}`,
-              i18n.t('label.success_title'),
+              i18n.t('label.success'),
               5000
             );
           }
         })
         .catch(error => {
-          NotificationManager.error(
-            error.message,
-            i18n.t('label.error_title'),
-            5000
-          );
+          NotificationManager.error(error.message, i18n.t('label.error'), 5000);
         });
     }
   };

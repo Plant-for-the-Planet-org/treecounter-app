@@ -2,18 +2,18 @@
 
 buildscript {
     ext {
-        buildToolsVersion = "27.0.3"
+        buildToolsVersion = "28.0.3"
         minSdkVersion = 16
-        compileSdkVersion = 27
-        targetSdkVersion = 27
-        supportLibVersion = "27.1.1"
+        compileSdkVersion = 28
+        targetSdkVersion = 28
+        supportLibVersion = "28.0.0"
     }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:3.4.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -34,19 +34,13 @@ allprojects {
     }
 }
 
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.4'
-    distributionUrl = distributionUrl.replace("bin", "all")
-}
-
 subprojects {
     afterEvaluate {project ->
     // force libs to use recent buildtools
         if (project.hasProperty("android")) {
             android {
-                compileSdkVersion = 27  // change to match your desired version
-                buildToolsVersion = "27.0.3" // ....
+                compileSdkVersion = 28 // change to match your desired version
+                buildToolsVersion = "28.0.3" // ....
             }
         }
     }

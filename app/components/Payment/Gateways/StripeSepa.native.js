@@ -33,7 +33,10 @@ export default class StripeSepa extends Component {
     );
 
     if (!this._iban || !ibanPattern.test(this._iban)) {
-      NotificationManager.error('Please enter Correct IBAN', 'Error');
+      NotificationManager.error(
+        i18n.t('label.please_enter_iban'),
+        i18n.t('label.error')
+      );
       return;
     }
     const params = {

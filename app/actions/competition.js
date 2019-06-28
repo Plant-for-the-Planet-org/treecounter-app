@@ -22,6 +22,7 @@ import { normalize } from 'normalizr';
 import { debug } from '../debug';
 import { updateRoute } from '../helpers/routerHelper';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
+import i18n from '../locales/i18n.js';
 
 export function fetchCompetitions(category) {
   return dispatch => {
@@ -165,8 +166,8 @@ export function createCompetition(value, navigation) {
           resolve(res.data);
           dispatch(setProgressModelState(false));
           NotificationManager.success(
-            'Competition Created successfully',
-            'Success',
+            i18n.t('label.competition_create_successfully'),
+            i18n.t('label.success'),
             5000
           );
           dispatch(fetchMineCompetitions());
@@ -176,8 +177,8 @@ export function createCompetition(value, navigation) {
         .catch(error => {
           debug(error);
           NotificationManager.error(
-            'Competition Creation Error',
-            'Error',
+            i18n.t('label.competition_creation_error'),
+            i18n.t('label.error'),
             5000
           );
           reject(error);
@@ -204,15 +205,19 @@ export function editCompetition(value, param, navigation) {
           resolve(res.data);
           dispatch(setProgressModelState(false));
           NotificationManager.success(
-            'Competition Edited successfully',
-            'Success',
+            i18n.t('label.competition_edited_successfully'),
+            i18n.t('label.success'),
             5000
           );
           dispatch(fetchMineCompetitions());
         })
         .catch(error => {
           debug(error);
-          NotificationManager.error('Competition Edit Error', 'Error', 5000);
+          NotificationManager.error(
+            i18n.t('label.competition_editing_error'),
+            i18n.t('label.error'),
+            5000
+          );
           reject(error);
           dispatch(setProgressModelState(false));
         });

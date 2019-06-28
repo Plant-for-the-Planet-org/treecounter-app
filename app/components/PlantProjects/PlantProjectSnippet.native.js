@@ -155,7 +155,9 @@ class PlantProjectSnippet extends React.Component {
             </View>
             <View style={styles.projectdetailsContainer}>
               <View style={styles.locationContainer}>
-                <Text style={styles.locationText}>{specsProps.location}</Text>
+                <Text style={styles.locationText} ellipsizeMode="tail">
+                  {specsProps.location}
+                </Text>
                 <View>
                   <Text style={styles.survivalText}>
                     {i18n.t('label.survival_rate')} {':'}{' '}

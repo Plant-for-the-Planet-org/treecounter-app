@@ -24,5 +24,9 @@
   "deletion_warning_summery": "Alle Ihre persönlichen Daten werden gelöscht, sofern diese nicht aus rechtlichen und buchhalterischen Gründen erforderlich sind.",
   "deletion_warning_summery_1": "Bäume, die Sie gepflanzt haben, werden weiterhin Teil der Trillion Tree Campaign sein.",
   "deletion_prerequisite": "Bitte geben Sie in Großbuchstaben DELETE ein und klicken auf die Schaltfläche Löschen, um mit der Löschung Ihres Kontos fortzufahren.",
-  "pick_profile": "Profil auswählen"
+  "pick_profile": "Profil auswählen",
+  "new_project_added_successfully": "Neues Projekt erfolgreich angelegt",
+  "male": "Männlich",
+  "female": "Weiblich",
+  "other": "Divers"
 }

@@ -1,2 +1,38 @@
 .legend-component {
+  .title {
+    width: 65px;
+    height: 19px;
+    font-family: OpenSans;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.36;
+    letter-spacing: normal;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin-right: 20px;
+    li {
+      margin-right: 7px;
+    }
+    .gradient-description {
+      //   margin-right: 20px;
+      width: 28px;
+      height: 14px;
+      font-family: OpenSans;
+      font-size: 10px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.4;
+      letter-spacing: normal;
+      text-align: left;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
 }

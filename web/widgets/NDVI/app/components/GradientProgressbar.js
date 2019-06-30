@@ -1,4 +1,6 @@
 import React from 'react';
+//style
+import '../styles/gradient-progressbar.scss';
 
 const GradientProgressbar = props => {
   return (

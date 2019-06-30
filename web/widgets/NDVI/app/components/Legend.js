@@ -1,4 +1,6 @@
 import React from 'react';
+//styles
+import '../styles/info.scss';
 
 const Legend = props => {
   return (

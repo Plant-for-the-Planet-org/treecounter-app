@@ -1,4 +1,6 @@
 import React from 'react';
+//styles
+import '../styles/time-series.scss';
 
 const TimeSeries = props => {
   return (

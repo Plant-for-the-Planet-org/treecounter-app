@@ -11,6 +11,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <link href="ndviwidget.css" rel="stylesheet" />
         <NDVIContainer />
       </div>
     );

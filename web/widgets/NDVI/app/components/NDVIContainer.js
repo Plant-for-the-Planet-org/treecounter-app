@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 //components
-import Info from './Info';
-import Legend from './Legend';
-import GradientProgressbar from './GradientProgressbar';
-import TimeSeries from './TimeSeries';
+import Info from '../../../../../app/components/NDVI/Info';
+import Legend from '../../../../../app/components/NDVI/Legend';
+import GradientProgressbar from '../../../../../app/components/NDVI/GradientProgressbar';
+import TimeSeries from '../../../../../app/components/NDVI/TimeSeries';
 //style
-import '../styles/ndvi-container.scss';
+import '../../../../../app/styles/NDVI/ndvi-container.scss';
 
 export default class NDVIContainer extends Component {
   render() {

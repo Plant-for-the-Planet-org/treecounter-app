@@ -3,3 +3,8 @@
 @import "../../../app/styles/NDVI/legend.scss";
 @import "../../../app/styles/NDVI/gradient-progressbar.scss";
 @import "../../../app/styles/NDVI/time-series.scss";
+@import "../../../app/styles/NDVI/circle.scss";
+
+.row {
+  display: flex;
+}

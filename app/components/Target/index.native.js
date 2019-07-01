@@ -9,7 +9,7 @@ import {
   targetFormSchema
 } from '../../server/parsedSchemas/target';
 
-import styles from '../../styles/login';
+import styles from '../../styles/login.native';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 let Form = t.form.Form;
@@ -38,10 +38,13 @@ export default class Target extends Component {
               options={this.props.schemaOptions}
               value={this.props.treecounter}
             />
-            <PrimaryButton onClick={this.props.onSubmitTarget}>
-              {this.state.label}
-            </PrimaryButton>
           </CardLayout>
+          <PrimaryButton
+            onClick={this.props.onSubmitTarget}
+            buttonStyle={{ marginTop: 10 }}
+          >
+            {this.state.label}
+          </PrimaryButton>
         </View>
       </ScrollView>
     );

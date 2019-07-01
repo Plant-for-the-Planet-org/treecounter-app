@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Circle from './Circle';
+import PropTypes from 'prop-types';
 
 const TimeSerie = props => {
   //Temporary array, just for testing UI

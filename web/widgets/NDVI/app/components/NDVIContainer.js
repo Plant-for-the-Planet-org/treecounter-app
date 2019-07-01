@@ -7,6 +7,18 @@ import TimeSeries from '../../../../../app/components/NDVI/TimeSeries';
 
 export default class NDVIContainer extends Component {
   render() {
+    const dummyDataPoints = {
+      monthUid: 201907,
+      month: 7,
+      year: 2019,
+      carbon: 3716,
+      ndviAggregate: {
+        min: -0.24662007507553332,
+        max: 0.7517624439222388,
+        avg: 0.3811577383449884
+      }
+    };
+
     return (
       <div className="ndvi-container">
         <div className="row month-keyword">
@@ -26,7 +38,7 @@ export default class NDVIContainer extends Component {
         <TimeSeries />
         <Legend />
         <GradientProgressbar />
-        <Info />
+        <Info {...dummyDataPoints} />
       </div>
     );
   }

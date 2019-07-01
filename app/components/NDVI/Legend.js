@@ -1,7 +1,6 @@
 import React from 'react';
 import Circle from '../../components/NDVI/Circle';
 //styles
-import '../../styles/NDVI/legend.scss';
 
 const Legend = props => {
   return (

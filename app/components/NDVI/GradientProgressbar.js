@@ -1,6 +1,5 @@
 import React from 'react';
 //style
-import '../../styles/NDVI/gradient-progressbar.scss';
 
 const GradientProgressbar = props => {
   return (

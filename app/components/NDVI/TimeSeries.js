@@ -1,6 +1,5 @@
 import React from 'react';
 //styles
-import '../../styles/NDVI/time-series.scss';
 
 const TimeSeries = props => {
   return (

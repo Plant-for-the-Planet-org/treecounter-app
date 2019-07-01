@@ -59,12 +59,17 @@ export default class HeaderRight extends Component {
               treecounter: state.routes[state.index].params.treeCounterId
             });
         } else if (pathname === '/competition') {
+          const competition = state.hasOwnProperty('params')
+            ? state.params.competition
+            : state.hasOwnProperty('routes')
+              ? state.routes[state.index].params.competition
+              : -1;
           redirectPath =
             context.scheme +
             '://' +
             context.host +
             getLocalRoute('app_competition', {
-              competition: state.routes[state.index].params.competition
+              competition
             });
         } else {
           redirectPath = context.scheme + '://' + context.host + pathname;

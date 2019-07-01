@@ -25,7 +25,7 @@ export default class Login extends Component {
       id: uuid(),
       onSuccess: () => {
         let gBatch = document.getElementsByClassName('grecaptcha-badge');
-        if (gBatch[0]) {
+        if (gBatch.length > 0) {
           gBatch[0].style.visibility = 'visible';
         }
       },

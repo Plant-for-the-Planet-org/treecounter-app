@@ -1,5 +1,6 @@
-@import "../../../app/styles/NDVI/ndvi-container.scss";
-@import "../../../app/styles/NDVI/info.scss";
-@import "../../../app/styles/NDVI/legend.scss";
-@import "../../../app/styles/NDVI/gradient-progressbar.scss";
-@import "../../../app/styles/NDVI/time-series.scss";
+//TODO move all these into index file of style-sheet  when are going to use this in plant project page
+@import "../../stylesheet/NDVI/ndvi-container.scss";
+@import "../../stylesheet/NDVI/info.scss";
+@import "../../stylesheet/NDVI/legend.scss";
+@import "../../stylesheet/NDVI/gradient-progressbar.scss";
+@import "../../stylesheet/NDVI/time-series.scss";

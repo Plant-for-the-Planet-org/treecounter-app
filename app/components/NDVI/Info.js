@@ -1,6 +1,5 @@
 import React from 'react';
 //styles
-import '../../styles/NDVI/info.scss';
 
 const Info = props => {
   return (

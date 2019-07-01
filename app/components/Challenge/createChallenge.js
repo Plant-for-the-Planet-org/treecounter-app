@@ -113,7 +113,7 @@ export default class Challenge extends Component {
       NotificationManager.error(
         i18n.t('label.challenge_error', {
           user: this.state.challengedName,
-          target: delimitNumbers(nextProps.error)
+          target: parseInt(nextProps.error)
         }),
         i18n.t('label.error'),
         5000

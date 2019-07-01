@@ -7,7 +7,7 @@ import styles from '../../styles/selectplantproject/selectplantproject-snippet.n
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { getImageUrl } from '../../actions/apiRouting';
-import { targetPlanted, tick } from '../../assets';
+import { targetPlanted, tick, questionmark_orange } from '../../assets';
 import TouchableItem from '../Common/TouchableItem.native';
 import PlantedProgressBar from './PlantedProgressbar.native';
 /**
@@ -100,11 +100,13 @@ class PlantProjectSnippet extends React.Component {
       taxDeduction: paymentSetup.taxDeduction
     };
     let deducibleText1 = '';
+    let tooltipText1 = '';
     for (let i = 0; i < specsProps.taxDeduction.length; i++) {
-      if (i < 1) {
-        deducibleText1 += specsProps.taxDeduction[i] + ',';
-      } else if (i == 1) {
-        deducibleText1 += specsProps.taxDeduction[i] + '.';
+      deducibleText1 += specsProps.taxDeduction[i];
+      if (i == specsProps.taxDeduction.length - 1) {
+        deducibleText1 += '.';
+      } else {
+        deducibleText1 += ',';
       }
     }
     return (
@@ -165,11 +167,20 @@ class PlantProjectSnippet extends React.Component {
                   </Text>
                 </View>
                 {specsProps.taxDeduction && specsProps.taxDeduction.length ? (
-                  <View>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={styles.survivalText}>
                       {i18n.t('label.tax_deductible')} {i18n.t('label.in')}{' '}
                       {deducibleText1}
                     </Text>
+                    {/* <ReactNativeTooltipMenu
+                      buttonComponent={
+                        <Image
+                          style={styles.project_specs__taxdeductibleIcon}
+                          source={questionmark_orange}
+                        />
+                      }
+                      items={[{ label: tooltipText1, onPress: () => {} }]}
+                    /> */}
                   </View>
                 ) : null}
               </View>

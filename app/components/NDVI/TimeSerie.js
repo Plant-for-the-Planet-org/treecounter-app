@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Circle from './Circle';
 
 const TimeSerie = props => {
   //Temporary array, just for testing UI
   const staticCircles = [
-    { gradientName: 'water' },
-    { gradientName: 'water' },
-    { gradientName: 'water' },
-    { gradientName: 'water' },
-    { gradientName: 'water' },
-    { gradientName: 'water' },
-    { gradientName: 'water' },
-    { gradientName: 'water' },
-    { gradientName: 'water' },
-    { gradientName: 'water' },
-    { gradientName: 'water' },
-    { gradientName: 'water' }
+    { gradientName: 'grasslands' },
+    { gradientName: 'grasslands' },
+    { gradientName: 'grasslands' },
+    { gradientName: 'grasslands' },
+    { gradientName: 'grasslands' },
+    { gradientName: 'grasslands' },
+    { gradientName: 'grasslands' },
+    { gradientName: 'grasslands' },
+    { gradientName: 'grasslands' },
+    { gradientName: 'grasslands' },
+    { gradientName: 'grasslands' },
+    { gradientName: 'grasslands' }
   ];
   return (
     <div className="time-serie-component">

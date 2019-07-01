@@ -1,10 +1,12 @@
 import React from 'react';
-//styles
+import TimeSerie from './TimeSerie';
 
 const TimeSeries = props => {
   return (
     <div className="time-series-component">
-      <h1>TimeSeries</h1>
+      <TimeSerie year={2019} />
+      <TimeSerie year={2018} />
+      <TimeSerie year={2017} />
     </div>
   );
 };

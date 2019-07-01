@@ -9,8 +9,8 @@ const Legend = props => {
       <div className="row">
         <h2 className="title">Indicators</h2>
       </div>
-      <div className="row">
-        <ul>
+      <div className="row gradient-row">
+        <ul className="ul-first-child">
           <li>
             <Circle gradientName="water" />
           </li>
@@ -22,7 +22,7 @@ const Legend = props => {
           </li>
           <li className="gradient-description">Rock/Sand/Snow</li>
         </ul>
-        <ul>
+        <ul className="ul-last-child">
           <li>
             <Circle gradientName="grasslands" />
           </li>
@@ -30,11 +30,13 @@ const Legend = props => {
         </ul>
       </div>
       <div className="row">
-        <ul>
+        <ul className="dense-vegation">
           <li>
             <Circle gradientName="dense-vegetation" />
           </li>
-          <li className="gradient-description">Dense Vegetation</li>
+          <li className="dense-vegation-gradient-description">
+            Dense Vegetation
+          </li>
         </ul>
       </div>
     </div>

@@ -23,6 +23,9 @@ export default class NDVIContainer extends Component {
           <p>N</p>
           <p>D</p>
         </div>
+
+        <TimeSeries />
+        <TimeSeries />
         <TimeSeries />
         <Legend />
         <GradientProgressbar />

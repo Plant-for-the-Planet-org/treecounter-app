@@ -10,7 +10,7 @@ jobs:
         - master
         - staging
         - devel
-        - dev
+        - test
     docker:
       - image: alpine
 
@@ -39,7 +39,7 @@ jobs:
             then
               echo 'export WD_REACT="$PROJ_DIR/ttc-app_devel"' >>  $ENV_VARS
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_devel"' >>  $ENV_VARS
-            elif [[ "${CIRCLE_BRANCH}" == "dev" ]]
+            elif [[ "${CIRCLE_BRANCH}" == "test" ]]
             then
               echo 'export WD_REACT="$PROJ_DIR/ttc-app_test"' >>  $ENV_VARS
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_test"' >>  $ENV_VARS

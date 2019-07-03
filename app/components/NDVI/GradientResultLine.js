@@ -7,13 +7,20 @@ const GradientResultLine = props => {
   return (
     <div className="gradient-result-line-component">
       <h2 className="title">Current</h2>
-      <div className="gradient-result-line">
-        <ul>
-          {props.points &&
-            props.points.map(point => {
-              return <li className="point">{point.value}</li>;
-            })}
-        </ul>
+      <div className="gradient-wrapper">
+        <div className="highlight-line">.</div>
+        <div className="gradient-result-line">
+          <ul>
+            {props.points &&
+              props.points.map((point, index) => {
+                return (
+                  <li key={index} className="point">
+                    {point.value}
+                  </li>
+                );
+              })}
+          </ul>
+        </div>
       </div>
     </div>
   );

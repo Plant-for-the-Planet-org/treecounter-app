@@ -13,15 +13,29 @@
     color: rgba(0, 0, 0, 0.6);
   }
 
-  .gradient-result-line {
-    color: #fff;
-    width: 312px;
-    height: 8px;
-    border-radius: 24px;
-    background-image: linear-gradient(to right, #1d82d8, #e3c357 50%, #8bc78e 67%, #598116);
+  .gradient-wrapper {
+    position: relative;
+    .gradient-result-line {
+      color: #fff;
+      width: 312px;
+      height: 8px;
+      border-radius: 24px;
+      background-image: linear-gradient(to right, #1d82d8, #e3c357 50%, #8bc78e 67%, #598116);
+    }
+
+    .highlight-line {
+      position: absolute;
+      color: #fff;
+      bottom: -3px;
+      height: 16px;
+      width: 14.8px;
+      border-radius: 4px;
+      background-image: linear-gradient(to right, rgba(176, 219, 114, 0.58), rgba(140, 203, 123, 0.78));
+    }
   }
 
   ul {
+    position: relative;
     display: flex;
     list-style: none;
     padding: 0;

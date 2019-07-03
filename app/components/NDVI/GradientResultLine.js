@@ -8,12 +8,15 @@ const GradientResultLine = props => {
     <div className="gradient-result-line-component">
       <h2 className="title">Current</h2>
       <div className="gradient-wrapper">
-        <div className="highlight-line">.</div>
+        <div className="highlight-line" style={{ width: 20 + 'px' }}>
+          .
+        </div>
         <div className="gradient-result-line">
           <ul>
             {props.points &&
               props.points.map((point, index) => {
                 return (
+                  //will be deprecated, using just for measuring right now
                   <li key={index} className="point">
                     {point.value}
                   </li>

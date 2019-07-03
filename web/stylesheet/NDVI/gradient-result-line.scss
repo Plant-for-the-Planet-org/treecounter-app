@@ -15,6 +15,7 @@
 
   .gradient-wrapper {
     position: relative;
+    bottom: 6px;
     .gradient-result-line {
       color: #fff;
       width: 312px;
@@ -28,7 +29,6 @@
       color: #fff;
       bottom: -3px;
       height: 16px;
-      width: 14.8px;
       border-radius: 4px;
       background-image: linear-gradient(to right, rgba(176, 219, 114, 0.58), rgba(140, 203, 123, 0.78));
     }
@@ -42,6 +42,7 @@
     li {
       width: 15px;
       font-size: 8px;
+      color: transparent;
     }
   }
 }

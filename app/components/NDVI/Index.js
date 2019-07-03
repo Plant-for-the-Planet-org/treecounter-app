@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 //components
-import Info from '../../../../../app/components/NDVI/Info';
-import Legend from '../../../../../app/components/NDVI/Legend';
-import GradientProgressbar from '../../../../../app/components/NDVI/GradientProgressbar';
-import TimeSeries from '../../../../../app/components/NDVI/TimeSeries';
+import Info from './Info';
+import Legend from './Legend';
+import GradientProgressbar from './GradientProgressbar';
+import TimeSeries from './TimeSeries';
 
 export default class NDVIContainer extends Component {
   render() {
@@ -38,7 +38,7 @@ export default class NDVIContainer extends Component {
         <TimeSeries />
         <Legend />
         <GradientProgressbar />
-        <Info {...dummyDataPoints} />
+        <Info />
       </div>
     );
   }

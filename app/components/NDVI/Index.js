@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 //components
 import Info from './Info';
 import Legend from './Legend';
@@ -32,7 +33,7 @@ export default class NDVIContainer extends Component {
           <p>N</p>
           <p>D</p>
         </div>
-        <TimeSeries />
+        <TimeSeries dataPoints={this.props.dataPoints} />
         <Legend />
         <GradientProgressbar />
         <Info />
@@ -40,3 +41,7 @@ export default class NDVIContainer extends Component {
     );
   }
 }
+
+NDVIContainer.propTypes = {
+  dataPoints: PropTypes.array
+};

@@ -1,0 +1,33 @@
+.gradient-result-line-component {
+  .title {
+    width: 65px;
+    height: 19px;
+    font-family: OpenSans;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.36;
+    letter-spacing: normal;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .gradient-result-line {
+    color: #fff;
+    width: 312px;
+    height: 8px;
+    border-radius: 24px;
+    background-image: linear-gradient(to right, #1d82d8, #e3c357 50%, #8bc78e 67%, #598116);
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    li {
+      width: 15px;
+      font-size: 8px;
+    }
+  }
+}

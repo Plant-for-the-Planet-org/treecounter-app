@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 //components
 import Info from './Info';
 import Legend from './Legend';
-import GradientProgressbar from './GradientResultLine';
+import GradientResultLine from './GradientResultLine';
 import TimeSeries from './TimeSeries';
 
 export default class NDVIContainer extends Component {
@@ -18,6 +18,7 @@ export default class NDVIContainer extends Component {
 
   render() {
     const dataPoints = this.props.dataPoints;
+    const gradientResultLinePoints = this.props.gradientResultLinePoints;
     return (
       <div className="ndvi-container">
         <div className="row month-keyword">
@@ -36,7 +37,7 @@ export default class NDVIContainer extends Component {
         </div>
         <TimeSeries dataPoints={dataPoints} />
         <Legend />
-        <GradientProgressbar />
+        <GradientResultLine points={gradientResultLinePoints} />
         <Info {...dataPoints[0]} />
       </div>
     );
@@ -44,5 +45,6 @@ export default class NDVIContainer extends Component {
 }
 
 NDVIContainer.propTypes = {
-  dataPoints: PropTypes.array
+  dataPoints: PropTypes.array,
+  gradientResultLinePoints: PropTypes.array
 };

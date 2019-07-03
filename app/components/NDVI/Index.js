@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 //components
 import Info from './Info';
 import Legend from './Legend';
-import GradientProgressbar from './GradientProgressbar';
+import GradientProgressbar from './GradientResultLine';
 import TimeSeries from './TimeSeries';
 
 export default class NDVIContainer extends Component {
@@ -17,6 +17,7 @@ export default class NDVIContainer extends Component {
   }
 
   render() {
+    const dataPoints = this.props.dataPoints;
     return (
       <div className="ndvi-container">
         <div className="row month-keyword">
@@ -33,10 +34,10 @@ export default class NDVIContainer extends Component {
           <p>N</p>
           <p>D</p>
         </div>
-        <TimeSeries dataPoints={this.props.dataPoints} />
+        <TimeSeries dataPoints={dataPoints} />
         <Legend />
         <GradientProgressbar />
-        <Info />
+        <Info {...dataPoints[0]} />
       </div>
     );
   }

@@ -7,35 +7,36 @@ export default class App extends Component {
     this.state = {};
   }
 
-  // const dummyDataPoints = {
-  //   monthUid: 201907,
-  //   month: 7,
-  //   year: 2019,
-  //   carbon: 3716,
-  //   ndviAggregate: {
-  //     min: -0.24662007507553332,
-  //     max: 0.7517624439222388,
-  //     avg: 0.3811577383449884
-  //   }
-  // };
-
   render() {
+    const dummyDataPoints = [
+      {
+        monthUid: 201907,
+        month: 7,
+        year: 2019,
+        carbon: 3716,
+        ndviAggregate: {
+          min: -0.24662007507553332,
+          max: 0.7517624439222388,
+          avg: 0.3811577383449884
+        }
+      },
+      {
+        monthUid: 1254,
+        month: 8,
+        year: 2018,
+        carbon: 3716,
+        ndviAggregate: {
+          min: -2.24662007507553332,
+          max: 2.7517624439222388,
+          avg: 1.3811577383449884
+        }
+      }
+    ];
     return (
       <div>
         <link href="ndviwidget.css" rel="stylesheet" />
-        <NDVIContainer />
+        <NDVIContainer dataPoints={dummyDataPoints} />
       </div>
     );
   }
 }
-
-// App.propTypes = {
-//   showGraphics: PropTypes.bool,
-//   treecounter: PropTypes.object,
-//   showDonateButton: PropTypes.bool,
-//   serverName: PropTypes.string,
-//   baseUrl: PropTypes.string,
-//   backgroundColor: PropTypes.string,
-//   isStandardTreecounter: PropTypes.bool,
-//   projectId: PropTypes.string
-// };

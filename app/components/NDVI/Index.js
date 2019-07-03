@@ -6,19 +6,16 @@ import GradientProgressbar from './GradientProgressbar';
 import TimeSeries from './TimeSeries';
 
 export default class NDVIContainer extends Component {
-  render() {
-    const dummyDataPoints = {
-      monthUid: 201907,
-      month: 7,
-      year: 2019,
-      carbon: 3716,
-      ndviAggregate: {
-        min: -0.24662007507553332,
-        max: 0.7517624439222388,
-        avg: 0.3811577383449884
-      }
-    };
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
+  render() {
     return (
       <div className="ndvi-container">
         <div className="row month-keyword">

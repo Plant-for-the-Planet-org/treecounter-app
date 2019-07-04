@@ -15,7 +15,7 @@ export default class App extends Component {
         year: 2019,
         carbon: 3716,
         ndviAggregate: {
-          min: -0.2,
+          min: -1,
           max: 0.2,
           avg: 0.3811577383449884
         }

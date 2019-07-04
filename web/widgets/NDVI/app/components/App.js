@@ -34,7 +34,7 @@ export default class App extends Component {
     ];
 
     return (
-      <div>
+      <div className="app">
         <link href="ndviwidget.css" rel="stylesheet" />
         <NDVIContainer dataPoints={dummyDataPoints} />
       </div>

@@ -7,7 +7,7 @@ const Info = props => {
     <div className="info-component">
       <ul>
         <li>
-          <p>NDVI Result from {parseDate(props.month, props.year)}</p>
+          <p>NDVI Result from {parseDate(12, props.year)}</p>
           <p>
             Min: <b>{props.ndviAggregate.min}</b> Average:{' '}
             <b>{props.ndviAggregate.avg}</b> Max:<b>

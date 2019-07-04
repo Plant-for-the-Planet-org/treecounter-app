@@ -1,29 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import getMetricsForDisplayingGradientLineHighlight from './gradient-functions/GetMetricsForDisplayingGradientLineHighlight';
 
 const GradientResultLine = props => {
-  console.log('GradientResultLine');
-  console.log(props);
+  //This method returns left and width in pixel for highlight line
+  const hightlightLineMetricts = getMetricsForDisplayingGradientLineHighlight(
+    props.min,
+    props.max
+  );
+
   return (
     <div className="gradient-result-line-component">
       <h2 className="title">Current</h2>
       <div className="gradient-wrapper">
-        <div className="highlight-line" style={{ width: 20 + 'px' }}>
+        <div
+          className="highlight-line"
+          style={{
+            left: hightlightLineMetricts[0] + 'px',
+            width: hightlightLineMetricts[1] + 'px'
+          }}
+        >
           .
         </div>
-        <div className="gradient-result-line">
-          <ul>
-            {props.points &&
-              props.points.map((point, index) => {
-                return (
-                  //will be deprecated, using just for measuring right now
-                  <li key={index} className="point">
-                    {point.value}
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
+        <div className="gradient-result-line">.</div>
       </div>
     </div>
   );
@@ -32,5 +31,6 @@ const GradientResultLine = props => {
 export default GradientResultLine;
 
 GradientResultLine.propTypes = {
-  points: PropTypes.array
+  min: PropTypes.number,
+  max: PropTypes.number
 };

@@ -37,7 +37,7 @@ export default class NDVIContainer extends Component {
         </div>
         <TimeSeries dataPoints={dataPoints} />
         <Legend />
-        <GradientResultLine points={gradientResultLinePoints} />
+        <GradientResultLine {...dataPoints[0].ndviAggregate} />
         <Info {...dataPoints[0]} />
       </div>
     );

@@ -37,9 +37,9 @@ const GetPositionForHighlighting = value => {
     return 18;
   } else if (value <= 0.8 || value <= 0.9) {
     return 19;
-  } else if (value <= 0.9 || value <= 1) {
+  } else if (value <= 0.9 || value < 1) {
     return 20;
-  } else if (value > 1) {
+  } else if (value >= 1) {
     return 21;
   }
 };

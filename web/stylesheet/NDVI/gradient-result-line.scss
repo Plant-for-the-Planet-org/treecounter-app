@@ -26,8 +26,8 @@
 
     .highlight-line {
       position: absolute;
-      color: #fff;
-      bottom: -3px;
+      color: transparent;
+      bottom: -4px;
       height: 16px;
       border-radius: 4px;
       background-image: linear-gradient(to right, rgba(176, 219, 114, 0.58), rgba(140, 203, 123, 0.78));

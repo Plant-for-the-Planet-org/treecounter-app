@@ -12,13 +12,8 @@ export default class NDVIContainer extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
   render() {
     const dataPoints = this.props.dataPoints;
-    const gradientResultLinePoints = this.props.gradientResultLinePoints;
     return (
       <div className="ndvi-container">
         <div className="row month-keyword">
@@ -45,6 +40,5 @@ export default class NDVIContainer extends Component {
 }
 
 NDVIContainer.propTypes = {
-  dataPoints: PropTypes.array,
-  gradientResultLinePoints: PropTypes.array
+  dataPoints: PropTypes.array
 };

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import NDVIContainer from '../../../../../app/components/NDVI/Index';
+//mockData
+import mockDataPoints from '../mockDataPoints';
 
 export default class App extends Component {
   constructor(props) {

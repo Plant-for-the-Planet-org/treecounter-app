@@ -1,4 +1,4 @@
-const GetPositionForHighlighting = value => {
+const getPositionForHighlighting = value => {
   if (value <= -1.0 || value <= -0.9) {
     return 0;
   } else if (value <= -0.9 || value <= -0.8) {
@@ -44,4 +44,4 @@ const GetPositionForHighlighting = value => {
   }
 };
 
-export default GetPositionForHighlighting;
+export default getPositionForHighlighting;

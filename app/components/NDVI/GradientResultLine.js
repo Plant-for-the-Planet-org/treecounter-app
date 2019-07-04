@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import getMetricsForDisplayingGradientLineHighlight from './NDVIfunctions/GetMetricsForDisplayingGradientLineHighlight';
+import getMetricsForDisplayingGradientLineHighlight from './NDVIfunctions/getMetricsForDisplayingGradientLineHighlight';
 
 const GradientResultLine = props => {
   //This method returns left and width in pixel for highlight line

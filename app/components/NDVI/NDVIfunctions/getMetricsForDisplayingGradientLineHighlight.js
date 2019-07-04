@@ -1,6 +1,6 @@
-import getPositionForHighlighting from './GetPositionForHighlighting';
+import getPositionForHighlighting from './getPositionForHighlighting';
 
-const GetMetricsForDisplayingGradientLineHighlight = (min, max) => {
+const getMetricsForDisplayingGradientLineHighlight = (min, max) => {
   const gradientLineWidthPerFraction = 312 / 21; //gradientLine width at all
   const minPosition = getPositionForHighlighting(min); // find the min position in gradient
   const maxPosition = getPositionForHighlighting(max); // find the max position in gradient
@@ -11,4 +11,4 @@ const GetMetricsForDisplayingGradientLineHighlight = (min, max) => {
   return [calculatedLeftMargin, calculatedWidth];
 };
 
-export default GetMetricsForDisplayingGradientLineHighlight;
+export default getMetricsForDisplayingGradientLineHighlight;

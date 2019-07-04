@@ -139,7 +139,7 @@ export default class Menu extends Component {
               treecounter: urlBreak[urlBreak.length - 1]
             }
           ),
-        100
+        0
       );
     } else {
       setTimeout(

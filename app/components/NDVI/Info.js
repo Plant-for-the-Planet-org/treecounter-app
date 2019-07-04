@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import parseDate from './NDVIfunctions/ParseDate';
+import parseDate from './NDVIfunctions/parseDate';
 
 const Info = props => {
   return (

@@ -12,6 +12,11 @@ export default class NDVIContainer extends Component {
     this.state = {};
   }
 
+  onClickCircle = circleDetails => {
+    console.log('Circle Detail From Parent');
+    console.log(circleDetails);
+  };
+
   render() {
     const dataPoints = this.props.dataPoints;
     return (
@@ -30,7 +35,11 @@ export default class NDVIContainer extends Component {
           <p>N</p>
           <p>D</p>
         </div>
-        <TimeSeries dataPoints={dataPoints} />
+        <TimeSeries
+          dataPoints={dataPoints}
+          onClickCircle={this.onClickCircle}
+        />
+
         <Legend />
         <GradientResultLine {...dataPoints[0].ndviAggregate} />
         <Info {...dataPoints[0]} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import Circle from './Circle';
+import TimeSerieCircle from './TimeSerieCircle';
 import PropTypes from 'prop-types';
 
 const TimeSerie = props => {
@@ -27,7 +27,7 @@ const TimeSerie = props => {
             <ul>
               {staticCircles.map((circle, index) => (
                 <li key={index}>
-                  <Circle gradientName={circle.gradientName} />
+                  <TimeSerieCircle gradientName={circle.gradientName} />
                 </li>
               ))}
             </ul>

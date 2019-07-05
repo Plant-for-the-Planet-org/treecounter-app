@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Circle = props => {
+const LegendCircle = props => {
   return (
     <div
       className={props.gradientName ? `circle ${props.gradientName}` : 'circle'}
@@ -11,8 +11,8 @@ const Circle = props => {
   );
 };
 
-export default Circle;
+export default LegendCircle;
 
-Circle.propTypes = {
+LegendCircle.propTypes = {
   gradientName: PropTypes.string
 };

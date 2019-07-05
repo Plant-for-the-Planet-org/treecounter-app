@@ -1,12 +1,37 @@
 import React from 'react';
-//styles
+import PropTypes from 'prop-types';
+import parseDate from './NDVIfunctions/parseDate';
 
 const Info = props => {
   return (
     <div className="info-component">
-      <h1>Info</h1>
+      <ul>
+        <li>
+          <p>NDVI Result from {parseDate(12, props.year)}</p>
+          <p>
+            Min: <b>{props.ndviAggregate.min}</b> Average:{' '}
+            <b>{props.ndviAggregate.avg}</b> Max:<b>
+              {props.ndviAggregate.max}
+            </b>
+          </p>
+        </li>
+        <li>
+          <button>?</button>
+        </li>
+      </ul>
     </div>
   );
 };
 
 export default Info;
+
+Info.propTypes = {
+  year: PropTypes.number,
+  monthUid: PropTypes.number,
+  month: PropTypes.number,
+  carbon: PropTypes.number,
+  ndviAggregate: PropTypes.object,
+  min: PropTypes.number,
+  avg: PropTypes.number,
+  max: PropTypes.number
+};

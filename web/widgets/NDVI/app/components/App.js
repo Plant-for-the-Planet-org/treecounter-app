@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import NDVIContainer from './NDVIContainer';
-// import PropTypes from 'prop-types';
+import NDVIContainer from '../../../../../app/components/NDVI/Index';
+//mockData
+import mockDataPoints from '../mockDataPoints';
 
 export default class App extends Component {
   constructor(props) {
@@ -10,21 +11,10 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         <link href="ndviwidget.css" rel="stylesheet" />
-        <NDVIContainer />
+        <NDVIContainer dataPoints={mockDataPoints} />
       </div>
     );
   }
 }
-
-// App.propTypes = {
-//   showGraphics: PropTypes.bool,
-//   treecounter: PropTypes.object,
-//   showDonateButton: PropTypes.bool,
-//   serverName: PropTypes.string,
-//   baseUrl: PropTypes.string,
-//   backgroundColor: PropTypes.string,
-//   isStandardTreecounter: PropTypes.bool,
-//   projectId: PropTypes.string
-// };

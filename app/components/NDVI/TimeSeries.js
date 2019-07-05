@@ -1,27 +1,15 @@
 import React from 'react';
-// import TimeSerie from './TimeSerie';
+import TimeSerie from './TimeSerie';
 import PropTypes from 'prop-types';
-import Circle from './TimeSerieCircle';
 
 const TimeSeries = props => {
+  const onClick = data => {
+    props.onClickCircle(data);
+  };
+
   return (
     <div className="time-series-component">
-      {props.dataPoints &&
-        props.dataPoints.map((dataPoint, index) => {
-          return (
-            <Circle
-              onClick={() => {
-                props.onClickCircle(dataPoint.monthUid);
-              }}
-              {...dataPoint}
-              key={index}
-            />
-          );
-        })}
-      {/* {props.dataPoints &&
-          props.dataPoints.map(dataPoint => (
-            <TimeSerie key={dataPoint.monthUid} year={dataPoint.year} />
-          ))} */}
+      <TimeSerie onClick={onClick} year={2019} dataPoints={props.dataPoints} />
     </div>
   );
 };

@@ -10,11 +10,17 @@ const TimeSerie = props => {
           <li className="date">{props.year}</li>
           <li className="circles">
             <ul>
-              {/* {staticCircles.map((circle, index) => (
-                <li key={index}>
-                  <TimeSerieCircle gradientName={circle.gradientName} />
-                </li>
-              ))} */}
+              {props.dataPoints &&
+                props.dataPoints.map((dataPoint, index) => (
+                  <li key={index}>
+                    <TimeSerieCircle
+                      onClick={() => {
+                        props.onClick(dataPoint.monthUid);
+                      }}
+                      {...dataPoint}
+                    />
+                  </li>
+                ))}
             </ul>
           </li>
         </ul>
@@ -26,5 +32,7 @@ const TimeSerie = props => {
 export default TimeSerie;
 
 TimeSerie.propTypes = {
-  year: PropTypes.number
+  year: PropTypes.number,
+  dataPoints: PropTypes.array,
+  onClick: PropTypes.func
 };

@@ -136,7 +136,7 @@ export default class Menu extends Component {
             navigation,
             0,
             {
-              treecounter: urlBreak[urlBreak.length - 1]
+              treeCounterId: urlBreak[urlBreak.length - 1]
             }
           ),
         0

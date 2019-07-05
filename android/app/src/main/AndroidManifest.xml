@@ -65,7 +65,7 @@
             <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/edit-competition" />
             <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/app_donate_detail" />
             <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/select-project" />
-            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/t" />
+            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/t/" />
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />

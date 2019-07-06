@@ -106,7 +106,7 @@ class PlantProjectSnippet extends React.Component {
       if (i == specsProps.taxDeduction.length - 1) {
         deducibleText1 += '.';
       } else {
-        deducibleText1 += ',';
+        deducibleText1 += ', ';
       }
     }
     return (

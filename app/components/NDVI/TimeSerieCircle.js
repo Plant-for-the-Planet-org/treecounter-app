@@ -20,11 +20,7 @@ const TimeSerieCircle = props => {
     props.onClick();
   };
 
-  return (
-    <div className="circle" onClick={onClick} style={bgStyle}>
-      .
-    </div>
-  );
+  return <div className="circle" onClick={onClick} style={bgStyle} />;
 };
 
 export default TimeSerieCircle;

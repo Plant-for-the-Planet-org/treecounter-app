@@ -3,17 +3,28 @@ import PropTypes from 'prop-types';
 import parseDate from './NDVIfunctions/parseDate';
 
 const Info = props => {
+  const aggregate = props.selectedDataPoint.ndviAggregate;
+
   return (
     <div className="info-component">
       <ul>
-        {props.ndviAggregate && (
+        {aggregate && (
           <React.Fragment>
             <li>
-              <p>NDVI Result from {parseDate(12, props.year)}</p>
               <p>
-                Min: <b>{props.ndviAggregate.min}</b> Average:{' '}
-                <b>{props.ndviAggregate.avg}</b>
-                Max:<b>{props.ndviAggregate.max}</b>
+                {props.ndviResulFromSpell}{' '}
+                {parseDate(
+                  props.selectedDataPoint.month,
+                  props.selectedDataPoint.year
+                )}
+              </p>
+              <p>
+                {props.minimumSpell}
+                <b>{aggregate.min ? aggregate.min : 'NaN'}</b>
+                {props.averageSpell}
+                <b>{aggregate.avg ? aggregate.avg : 'NaN'}</b>
+                {props.maximumSpell}
+                <b>{aggregate.max ? aggregate.max : 'NaN'}</b>
               </p>
             </li>
             <li>
@@ -29,6 +40,7 @@ const Info = props => {
 export default Info;
 
 Info.propTypes = {
+  selectedDataPoint: PropTypes.object,
   year: PropTypes.number,
   monthUid: PropTypes.number,
   month: PropTypes.number,
@@ -36,5 +48,9 @@ Info.propTypes = {
   ndviAggregate: PropTypes.object,
   min: PropTypes.number,
   avg: PropTypes.number,
-  max: PropTypes.number
+  max: PropTypes.number,
+  minimumSpell: PropTypes.string,
+  averageSpell: PropTypes.string,
+  maximumSpell: PropTypes.string,
+  ndviResulFromSpell: PropTypes.string
 };

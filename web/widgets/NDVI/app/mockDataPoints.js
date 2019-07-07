@@ -11,8 +11,8 @@ const mockDataPoints = [
     }
   },
   {
-    monthUid: 1254,
-    month: 8,
+    monthUid: 201906,
+    month: 6,
     year: 2019,
     carbon: 3717,
     ndviAggregate: {
@@ -22,8 +22,8 @@ const mockDataPoints = [
     }
   },
   {
-    monthUid: 12054,
-    month: 9,
+    monthUid: 201905,
+    month: 5,
     year: 2019,
     carbon: 3716,
     ndviAggregate: {
@@ -33,8 +33,8 @@ const mockDataPoints = [
     }
   },
   {
-    monthUid: 12354,
-    month: 10,
+    monthUid: 201904,
+    month: 4,
     year: 2019,
     carbon: 3716,
     ndviAggregate: {
@@ -44,13 +44,68 @@ const mockDataPoints = [
     }
   },
   {
-    monthUid: 12554,
-    month: 11,
+    monthUid: 201903,
+    month: 3,
     year: 2019,
     carbon: 3716,
     ndviAggregate: {
       min: -0.24662007507553332,
       max: 2.7517624439222388,
+      avg: 0.3811577383449884
+    }
+  },
+  {
+    monthUid: 201902,
+    month: 2,
+    year: 2019,
+    carbon: 3716,
+    ndviAggregate: {
+      min: -2.24662007507553332,
+      max: -0.7517624439222388,
+      avg: 0.3811577383449884
+    }
+  },
+  {
+    monthUid: 201901,
+    month: 1,
+    year: 2019,
+    carbon: 3716,
+    ndviAggregate: {
+      min: 0.24662007507553332,
+      max: 1.7517624439222388,
+      avg: 0.3811577383449884
+    }
+  },
+  {
+    monthUid: 201812,
+    month: 12,
+    year: 2018,
+    carbon: 3716,
+    ndviAggregate: {
+      min: 0.24662007507553332,
+      max: 1.7517624439222388,
+      avg: 0.3811577383449884
+    }
+  },
+  {
+    monthUid: 201811,
+    month: 11,
+    year: 2018,
+    carbon: 3716,
+    ndviAggregate: {
+      min: 0.24662007507553332,
+      max: 1.7517624439222388,
+      avg: 0.3811577383449884
+    }
+  },
+  {
+    monthUid: 201810,
+    month: 10,
+    year: 2018,
+    carbon: 3716,
+    ndviAggregate: {
+      min: 0.24662007507553332,
+      max: 1.7517624439222388,
       avg: 0.3811577383449884
     }
   }

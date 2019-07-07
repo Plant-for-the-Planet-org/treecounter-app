@@ -32,6 +32,7 @@ import trillionlabels from './trillionLabels.json';
 import userContributionslabels from './userContributionslabels.json';
 import welcomeScreenlabels from './welcomeScreenlabels.json';
 import widgetShareLabels from './widgetShareLabels.json';
+import NDVI from './ndvi.json';
 
 export default {
   ...activateAccountlabels,
@@ -67,5 +68,6 @@ export default {
   ...trillionlabels,
   ...userContributionslabels,
   ...welcomeScreenlabels,
-  ...widgetShareLabels
+  ...widgetShareLabels,
+  ...NDVI
 };

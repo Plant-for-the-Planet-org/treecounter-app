@@ -1,39 +1,40 @@
 import React from 'react';
-import LegendCircle from '../../components/NDVI/LegendCircle';
+import Circle from '../../components/NDVI/Circle';
+import PropTypes from 'prop-types';
 
-const Legend = _ => {
+const Legend = props => {
   return (
     <div className="legend-component">
       <div className="row">
-        <h2 className="title">Indicators</h2>
+        <h2 className="title">{props.indicatorsSpell}</h2>
       </div>
       <div className="row gradient-row">
         <ul className="ul-first-child">
           <li>
-            <LegendCircle gradientName="water" />
+            <Circle gradientName="water" />
           </li>
-          <li className="gradient-description">Water</li>
+          <li className="gradient-description">{props.waterSpell}</li>
         </ul>
         <ul>
           <li>
-            <LegendCircle gradientName="rock-sand-snow" />
+            <Circle gradientName="rock-sand-snow" />
           </li>
-          <li className="gradient-description">Rock/Sand/Snow</li>
+          <li className="gradient-description">{props.rockSandSnowSpell}</li>
         </ul>
         <ul className="ul-last-child">
           <li>
-            <LegendCircle gradientName="grasslands" />
+            <Circle gradientName="grasslands" />
           </li>
-          <li className="gradient-description">Grasslands</li>
+          <li className="gradient-description">{props.grasslandsSpell}</li>
         </ul>
       </div>
       <div className="row">
         <ul className="dense-vegation">
           <li>
-            <LegendCircle gradientName="dense-vegetation" />
+            <Circle gradientName="dense-vegetation" />
           </li>
           <li className="dense-vegation-gradient-description">
-            Dense Vegetation
+            {props.denseVegetationSpell}
           </li>
         </ul>
       </div>
@@ -42,3 +43,11 @@ const Legend = _ => {
 };
 
 export default Legend;
+
+Legend.propTypes = {
+  waterSpell: PropTypes.string,
+  rockSandSnowSpell: PropTypes.string,
+  grasslandsSpell: PropTypes.string,
+  denseVegetationSpell: PropTypes.string,
+  indicatorsSpell: PropTypes.string
+};

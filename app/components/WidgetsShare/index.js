@@ -114,7 +114,9 @@ export default class WidgetShare extends PureComponent {
               </div>
               <h6> {i18n.t('label.widget_share_copy_paste_html_snippet')}</h6>
               <div className={'pftp-widget-html-snippet'}>
-                <code>{widgetCode}</code>
+                <pre>
+                  <code>{widgetCode}</code>
+                </pre>
               </div>
             </CardLayout>
             <CardLayout className={'pftp-preview-widget-card '}>

@@ -18,7 +18,8 @@ class ChallengeContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: null
+      error: null,
+      challengeSuccess: false
     };
     this.challenge = this.challenge.bind(this);
   }
@@ -26,12 +27,20 @@ class ChallengeContainer extends Component {
   onTabChange(title) {
     this.props.navigation.setParams({ titleParam: title });
   }
+
+  resetChallengeSuccess = () => {
+    this.setState({
+      challengeSuccess: false
+    });
+  };
+
   challenge(challengeDetails) {
     this.props
       .challenge(challengeDetails)
       .then(success => {
         this.setState({
-          error: null
+          error: null,
+          challengeSuccess: true
         });
       })
       .catch(err => {
@@ -50,6 +59,8 @@ class ChallengeContainer extends Component {
           this.props.route(routeName, id, this.props.navigation)
         }
         error={this.state.error}
+        challengeSuccess={this.state.challengeSuccess}
+        resetChallengeSuccess={this.resetChallengeSuccess}
         challengeUser={this.challenge}
         challenges={this.props.userChallenges}
         navigation={this.props.navigation}

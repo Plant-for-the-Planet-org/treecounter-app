@@ -94,7 +94,7 @@ class SearchUser extends React.Component {
           showCancelSearchButton={false}
           style={{
             ...searchBarStyles.searchContainer,
-            width: '100%',
+            width: '95%',
             backgroundColor: 'transparent',
             marginTop: 10
           }}

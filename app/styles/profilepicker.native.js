@@ -19,7 +19,7 @@ export default (editProfileStyle = EStyleSheet.create({
     },
     shadowOpacity: 0.5,
     elevation: 1,
-    padding: 0,
+    padding: 5,
     borderTopRightRadius: 4,
     borderTopLeftRadius: 4
   },

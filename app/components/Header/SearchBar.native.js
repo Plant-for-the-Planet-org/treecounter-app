@@ -56,6 +56,9 @@ class SearchBar extends React.PureComponent {
     ) {
       this.setState({ text: nextProps.inputValue });
     }
+    if (nextProps.resetState) {
+      this.setState({ text: '' });
+    }
   }
 
   _handleLayoutCancelButton = e => {

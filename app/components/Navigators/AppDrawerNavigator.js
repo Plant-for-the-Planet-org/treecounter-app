@@ -23,6 +23,7 @@ import UserContributions from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout';
 import AboutUsContainer from '../../containers/AboutUs';
+import UserContributionDetails from '../../containers/UserContributionsDetails';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
 import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
 import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal';
@@ -113,6 +114,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
 
       ['about_us']: { screen: AboutUsContainer },
+      ['contribution_details']: { screen: UserContributionDetails },
 
       ['license_info_list']: { screen: LicenseInfoList },
 

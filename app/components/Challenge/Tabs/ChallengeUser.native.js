@@ -109,7 +109,7 @@ class ChallengeUser extends Component {
                 <Text style={styles.textDedicateStyle}>
                   {i18n.t('label.challenge_error', {
                     user: this.state.selectedSuggestion.name,
-                    target: delimitNumbers(this.props.error)
+                    target: parseInt(this.props.error)
                   })}
                 </Text>
               </View>

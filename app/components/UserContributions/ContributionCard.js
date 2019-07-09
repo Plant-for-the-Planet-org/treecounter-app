@@ -240,15 +240,17 @@ export default class ContributionCard extends React.Component {
             ) : null}
 
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
-            {donateActionLine ? <TextSpan>{donateActionLine}</TextSpan> : null}
+            {donateActionLine ? (
+              <TextSpan>{donateActionLine + ''}</TextSpan>
+            ) : null}
             {tpoLine ? <TextSpan>{tpoLine}</TextSpan> : null}
           </div>
           <div className="contribution-container__right-column">
             {contribution.category === 'contributions'
               ? contribution.contributionMeasurements
                   .slice(0, 3)
-                  .map(measurement => (
-                    <TextSpan key={measurement.id}>
+                  .map((measurement, index) => (
+                    <TextSpan key={index}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
                         : moment(

@@ -5,9 +5,9 @@ const mockDataPoints = [
     year: 2019,
     carbon: 3716,
     ndviAggregate: {
-      min: -1,
-      max: 0.2,
-      avg: 0.3811577383449884
+      min: 0.25,
+      max: 0.75,
+      avg: 0.5
     }
   },
   {

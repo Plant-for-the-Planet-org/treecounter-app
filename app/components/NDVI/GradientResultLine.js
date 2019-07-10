@@ -13,15 +13,18 @@ const GradientResultLine = props => {
     <div className="gradient-result-line-component">
       <h2 className="title">Current</h2>
       <div className="gradient-wrapper">
-        <div
-          className="highlight-line"
-          style={{
-            left: hightlightLineMetricts[0] + 'px',
-            width: hightlightLineMetricts[1] + 'px'
-          }}
-        >
-          .
-        </div>
+        {props.min &&
+          props.max && (
+            <div
+              className="highlight-line"
+              style={{
+                left: hightlightLineMetricts[0] + 'px',
+                width: hightlightLineMetricts[1] + 'px'
+              }}
+            >
+              .
+            </div>
+          )}
         <div className="gradient-result-line">.</div>
       </div>
     </div>

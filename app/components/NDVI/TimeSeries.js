@@ -3,14 +3,13 @@ import TimeSerie from './TimeSerie';
 import PropTypes from 'prop-types';
 
 const TimeSeries = props => {
-  console.log('-------TimeSeries---------');
-  console.log(props);
+  const onClick = data => {
+    props.onClickCircle(data);
+  };
+
   return (
     <div className="time-series-component">
-      {props.dataPoints &&
-        props.dataPoints.map(dataPoint => (
-          <TimeSerie key={dataPoint.monthUid} year={dataPoint.year} />
-        ))}
+      <TimeSerie onClick={onClick} year={2019} dataPoints={props.dataPoints} />
     </div>
   );
 };
@@ -27,30 +26,6 @@ TimeSeries.propTypes = {
   ndviAggregate: PropTypes.object,
   min: PropTypes.number,
   avg: PropTypes.number,
-  max: PropTypes.number
+  max: PropTypes.number,
+  onClickCircle: PropTypes.func
 };
-
-// const dummyDataPoints = [
-//   {
-//     monthUid: 201907,
-//     month: 7,
-//     year: 2019,
-//     carbon: 3716,
-//     ndviAggregate: {
-//       min: -0.24662007507553332,
-//       max: 0.7517624439222388,
-//       avg: 0.3811577383449884
-//     }
-//   },
-//   {
-//     monthUid: 1254,
-//     month: 8,
-//     year: 2018,
-//     carbon: 3716,
-//     ndviAggregate: {
-//       min: -2.24662007507553332,
-//       max: 2.7517624439222388,
-//       avg: 1.3811577383449884
-//     }
-//   }
-// ];

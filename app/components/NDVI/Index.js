@@ -9,7 +9,24 @@ import TimeSeries from './TimeSeries';
 export default class NDVIContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { selectedDataPoint: {} };
+  }
+
+  onClickCircle = circleMonthuid => {
+    this.setState({ selectedDataPoint: this.findDataPoint(circleMonthuid) });
+  };
+
+  findDataPoint(monthUid) {
+    //will be deprecated just for testing
+    let result = {};
+    for (let i = 0; i < this.props.dataPoints.length; i++) {
+      if (this.props.dataPoints[i].monthUid === monthUid) {
+        result = this.props.dataPoints[i];
+        break;
+      }
+    }
+
+    return result;
   }
 
   render() {
@@ -30,10 +47,14 @@ export default class NDVIContainer extends Component {
           <p>N</p>
           <p>D</p>
         </div>
-        <TimeSeries dataPoints={dataPoints} />
+        <TimeSeries
+          dataPoints={dataPoints}
+          onClickCircle={this.onClickCircle}
+        />
+
         <Legend />
-        <GradientResultLine {...dataPoints[0].ndviAggregate} />
-        <Info {...dataPoints[0]} />
+        <GradientResultLine {...this.state.selectedDataPoint.ndviAggregate} />
+        <Info {...this.state.selectedDataPoint} />
       </div>
     );
   }

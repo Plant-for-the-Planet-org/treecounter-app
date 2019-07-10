@@ -1,23 +1,8 @@
 import React from 'react';
-import Circle from './Circle';
+import TimeSerieCircle from './TimeSerieCircle';
 import PropTypes from 'prop-types';
 
 const TimeSerie = props => {
-  //Temporary array, just for testing UI
-  const staticCircles = [
-    { gradientName: 'grasslands' },
-    { gradientName: 'grasslands' },
-    { gradientName: 'grasslands' },
-    { gradientName: 'grasslands' },
-    { gradientName: 'grasslands' },
-    { gradientName: 'grasslands' },
-    { gradientName: 'grasslands' },
-    { gradientName: 'grasslands' },
-    { gradientName: 'grasslands' },
-    { gradientName: 'grasslands' },
-    { gradientName: 'grasslands' },
-    { gradientName: 'grasslands' }
-  ];
   return (
     <div className="time-serie-component">
       <div className="row">
@@ -25,11 +10,17 @@ const TimeSerie = props => {
           <li className="date">{props.year}</li>
           <li className="circles">
             <ul>
-              {staticCircles.map((circle, index) => (
-                <li key={index}>
-                  <Circle gradientName={circle.gradientName} />
-                </li>
-              ))}
+              {props.dataPoints &&
+                props.dataPoints.map((dataPoint, index) => (
+                  <li key={index}>
+                    <TimeSerieCircle
+                      onClick={() => {
+                        props.onClick(dataPoint.monthUid);
+                      }}
+                      {...dataPoint}
+                    />
+                  </li>
+                ))}
             </ul>
           </li>
         </ul>
@@ -41,5 +32,7 @@ const TimeSerie = props => {
 export default TimeSerie;
 
 TimeSerie.propTypes = {
-  year: PropTypes.number
+  year: PropTypes.number,
+  dataPoints: PropTypes.array,
+  onClick: PropTypes.func
 };

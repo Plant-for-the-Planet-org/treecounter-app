@@ -6,18 +6,21 @@ const Info = props => {
   return (
     <div className="info-component">
       <ul>
-        <li>
-          <p>NDVI Result from {parseDate(12, props.year)}</p>
-          <p>
-            Min: <b>{props.ndviAggregate.min}</b> Average:{' '}
-            <b>{props.ndviAggregate.avg}</b> Max:<b>
-              {props.ndviAggregate.max}
-            </b>
-          </p>
-        </li>
-        <li>
-          <button>?</button>
-        </li>
+        {props.ndviAggregate && (
+          <React.Fragment>
+            <li>
+              <p>NDVI Result from {parseDate(12, props.year)}</p>
+              <p>
+                Min: <b>{props.ndviAggregate.min}</b> Average:{' '}
+                <b>{props.ndviAggregate.avg}</b>
+                Max:<b>{props.ndviAggregate.max}</b>
+              </p>
+            </li>
+            <li>
+              <button>?</button>
+            </li>
+          </React.Fragment>
+        )}
       </ul>
     </div>
   );

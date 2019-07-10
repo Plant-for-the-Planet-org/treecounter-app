@@ -1,18 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import TimeSerie from './TimeSerie';
 import PropTypes from 'prop-types';
+import filterDataPoints from './NDVIfunctions/filterDataPointForTimeSeries';
 
-const TimeSeries = props => {
-  const onClick = data => {
-    props.onClickCircle(data);
+class TimeSeries extends Component {
+  state = {
+    filteredData: []
   };
 
-  return (
-    <div className="time-series-component">
-      <TimeSerie onClick={onClick} year={2019} dataPoints={props.dataPoints} />
-    </div>
-  );
-};
+  onClick = data => {
+    this.props.onClickCircle(data);
+  };
+
+  componentDidMount() {
+    if (!this.props.dataPoints) return;
+
+    this.mountFilteredData(this.props.dataPoints);
+  }
+
+  mountFilteredData = dataPoints => {
+    this.setState({ filteredData: filterDataPoints(dataPoints) });
+  };
+
+  render() {
+    return (
+      <div className="time-series-component">
+        {this.state.filteredData &&
+          this.state.filteredData.length > 1 &&
+          this.state.filteredData.map((data, index) => (
+            <TimeSerie
+              key={index}
+              onClick={this.onClick}
+              year={data.year}
+              dataPoints={data.dataPoints}
+            />
+          ))}
+      </div>
+    );
+  }
+}
 
 export default TimeSeries;
 

@@ -5,6 +5,8 @@ import Info from './Info';
 import Legend from './Legend';
 import GradientResultLine from './GradientResultLine';
 import TimeSeries from './TimeSeries';
+import _ from 'lodash';
+import i18n from '../../locales/i18n.js';
 
 export default class NDVIContainer extends Component {
   constructor(props) {
@@ -12,21 +14,27 @@ export default class NDVIContainer extends Component {
     this.state = { selectedDataPoint: {} };
   }
 
-  onClickCircle = circleMonthuid => {
-    this.setState({ selectedDataPoint: this.findDataPoint(circleMonthuid) });
+  componentDidMount() {
+    if (!this.props.dataPoints) return;
+    this.mountRecentDataPoint(this.props.dataPoints[0]);
+  }
+
+  mountRecentDataPoint = dataPoint => {
+    this.setState({ selectedDataPoint: dataPoint });
   };
 
-  findDataPoint(monthUid) {
-    //will be deprecated just for testing
-    let result = {};
-    for (let i = 0; i < this.props.dataPoints.length; i++) {
-      if (this.props.dataPoints[i].monthUid === monthUid) {
-        result = this.props.dataPoints[i];
-        break;
-      }
-    }
+  onClickCircle = circleMonthuid => {
+    this.setState({
+      selectedDataPoint: this.props.dataPoints[
+        this.findDataPointIndex(circleMonthuid)
+      ]
+    });
+  };
 
-    return result;
+  findDataPointIndex(monthUid) {
+    return _.findIndex(this.props.dataPoints, function(o) {
+      return o.monthUid == monthUid;
+    });
   }
 
   render() {
@@ -34,27 +42,33 @@ export default class NDVIContainer extends Component {
     return (
       <div className="ndvi-container">
         <div className="row month-keyword">
-          <p>J</p>
-          <p>F</p>
-          <p>M</p>
-          <p>A</p>
-          <p>M</p>
-          <p>J</p>
-          <p>J</p>
-          <p>A</p>
-          <p>S</p>
-          <p>O</p>
-          <p>N</p>
-          <p>D</p>
+          {_.toArray(i18n.t('label.NDVI_container_static_month')).map(
+            (letter, index) => <p key={index}>{letter}</p>
+          )}
         </div>
         <TimeSeries
           dataPoints={dataPoints}
           onClickCircle={this.onClickCircle}
         />
-
-        <Legend />
-        <GradientResultLine {...this.state.selectedDataPoint.ndviAggregate} />
-        <Info {...this.state.selectedDataPoint} />
+        <Legend
+          indicatorsSpell={i18n.t('label.NDVI_legend_indicators')}
+          grasslandsSpell={i18n.t('label.NDVI_legend_grasslands')}
+          rockSandSnowSpell={i18n.t('label.NDVI_legend_rock_sand_snow')}
+          waterSpell={i18n.t('label.NDVI_legend_water')}
+          denseVegetationSpell={i18n.t('label.NDVI_legend_dense_vegetation')}
+        />
+        <GradientResultLine
+          // selectedDataPoint={this.state.selectedDataPoint}
+          {...this.state.selectedDataPoint.ndviAggregate}
+          correctSpell={i18n.t('label.NDVI_gradient_result_line_title')}
+        />
+        <Info
+          ndviResulFromSpell={i18n.t('label.NDVI_info_results')}
+          minimumSpell={i18n.t('label.NDVI_info_minimum')}
+          averageSpell={i18n.t('label.NDVI_info_average')}
+          maximumSpell={i18n.t('label.NDVI_info_maximum')}
+          selectedDataPoint={this.state.selectedDataPoint}
+        />
       </div>
     );
   }

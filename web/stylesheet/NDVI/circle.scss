@@ -7,6 +7,11 @@
   cursor: pointer;
 }
 
+.not-found {
+  //need to change color here
+  background: #049f04;
+  cursor: not-allowed;
+}
 .water {
   background-image: linear-gradient(to right, #3a8adb, #a5dce3);
 }

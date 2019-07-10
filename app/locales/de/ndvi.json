@@ -1,0 +1,14 @@
+{
+  "NDVI_container_static_month": "JFMAMJJASOND",
+  "NDVI_gradient_result_line_title": "Stroom",
+  "NDVI_legend_indicators": "indicatoren",
+  "NDVI_info_results": "NDVI Resultaten van",
+  "NDVI_info": "info",
+  "NDVI_info_average": "Gemiddelde:",
+  "NDVI_info_maximum": "Max:",
+  "NDVI_info_minimum": "Min:",
+  "NDVI_legend_water": "Water",
+  "NDVI_legend_rock_sand_snow": "Rots/Zand/Sneeuw",
+  "NDVI_legend_grasslands": "Grasland",
+  "NDVI_legend_dense_vegetation": "Dichte Begroeiing"
+}

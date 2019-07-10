@@ -1,6 +1,7 @@
 import React from 'react';
-import TimeSerieCircle from './TimeSerieCircle';
+import Circle from './Circle';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 const TimeSerie = props => {
   return (
@@ -10,17 +11,26 @@ const TimeSerie = props => {
           <li className="date">{props.year}</li>
           <li className="circles">
             <ul>
-              {props.dataPoints &&
-                props.dataPoints.map((dataPoint, index) => (
-                  <li key={index}>
-                    <TimeSerieCircle
-                      onClick={() => {
-                        props.onClick(dataPoint.monthUid);
-                      }}
-                      {...dataPoint}
-                    />
-                  </li>
-                ))}
+              {props.dataPoints.map((dataPoint, index) => {
+                if (!_.isEmpty(dataPoint)) {
+                  return (
+                    <li key={index}>
+                      <Circle
+                        onClick={() => {
+                          props.onClick(dataPoint.monthUid);
+                        }}
+                        {...dataPoint}
+                      />
+                    </li>
+                  );
+                } else {
+                  return (
+                    <li key={index}>
+                      <Circle gradientName="not-found" />
+                    </li>
+                  );
+                }
+              })}
             </ul>
           </li>
         </ul>
@@ -34,5 +44,6 @@ export default TimeSerie;
 TimeSerie.propTypes = {
   year: PropTypes.number,
   dataPoints: PropTypes.array,
+  dataPoint: PropTypes.object,
   onClick: PropTypes.func
 };

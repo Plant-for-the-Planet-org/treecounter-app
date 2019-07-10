@@ -43,7 +43,11 @@ export default class NDVIContainer extends Component {
       <div className="ndvi-container">
         <div className="row month-keyword">
           {_.toArray(i18n.t('label.NDVI_container_static_month')).map(
-            (letter, index) => <p key={index}>{letter}</p>
+            (letter, index) => (
+              <div key={index} className="letter-box">
+                <p>{letter}</p>
+              </div>
+            )
           )}
         </div>
         <TimeSeries
@@ -58,7 +62,6 @@ export default class NDVIContainer extends Component {
           denseVegetationSpell={i18n.t('label.NDVI_legend_dense_vegetation')}
         />
         <GradientResultLine
-          // selectedDataPoint={this.state.selectedDataPoint}
           {...this.state.selectedDataPoint.ndviAggregate}
           correctSpell={i18n.t('label.NDVI_gradient_result_line_title')}
         />

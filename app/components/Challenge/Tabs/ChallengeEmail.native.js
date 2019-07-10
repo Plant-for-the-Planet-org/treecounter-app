@@ -90,6 +90,14 @@ class ChallengeEmail extends Component {
         invitee: { ...value }
       };
       if (this.state.isChecked) {
+        if (this.state.byYear === '') {
+          NotificationManager.error(
+            i18n.t('label.please_select_year'),
+            i18n.t('label.error'),
+            5000
+          );
+          return;
+        }
         requestData.endDate = this.state.byYear;
       }
       requestData.challengeMethod = 'invitation';

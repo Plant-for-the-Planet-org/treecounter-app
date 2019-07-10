@@ -8,35 +8,59 @@ const Legend = props => {
       <div className="row">
         <h2 className="title">{props.indicatorsSpell}</h2>
       </div>
-      <div className="row gradient-row">
-        <ul className="ul-first-child">
-          <li>
-            <Circle gradientName="water" />
-          </li>
-          <li className="gradient-description">{props.waterSpell}</li>
-        </ul>
-        <ul>
-          <li>
-            <Circle gradientName="rock-sand-snow" />
-          </li>
-          <li className="gradient-description">{props.rockSandSnowSpell}</li>
-        </ul>
-        <ul className="ul-last-child">
-          <li>
-            <Circle gradientName="grasslands" />
-          </li>
-          <li className="gradient-description">{props.grasslandsSpell}</li>
-        </ul>
-      </div>
-      <div className="row">
-        <ul className="dense-vegation">
-          <li>
-            <Circle gradientName="dense-vegetation" />
-          </li>
-          <li className="dense-vegation-gradient-description">
-            {props.denseVegetationSpell}
-          </li>
-        </ul>
+      <div className="gradient-container">
+        <div className="row">
+          {/* one description */}
+          <div className="fex-1">
+            <div className="row">
+              <div className="pr-1">
+                <Circle gradientName="water" />
+              </div>
+              <div className="flex-1 pr-2">
+                <p className="gradient-description">{props.waterSpell}</p>
+              </div>
+            </div>
+          </div>
+          {/* Two description */}
+          <div className="flex-1">
+            <div className="row">
+              <div className="pr-1">
+                <Circle gradientName="rock-sand-snow" />
+              </div>
+              <div className="flex-1 pr-2">
+                <p className="gradient-description">
+                  {props.rockSandSnowSpell}
+                </p>
+              </div>
+            </div>
+          </div>
+          {/*  Three */}
+          <div className="flex-1">
+            <div className="row">
+              <div className="pr-1">
+                <Circle gradientName="grasslands" />
+              </div>
+              <div className="flex-1">
+                <p className="gradient-description">{props.grasslandsSpell}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/*  */}
+        <div className="row pt-1">
+          <div className="flex-1">
+            <div className="row">
+              <div className="pr-1">
+                <Circle gradientName="dense-vegetation" />
+              </div>
+              <div className="flex-1">
+                <p className="gradient-description">
+                  {props.denseVegetationSpell}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

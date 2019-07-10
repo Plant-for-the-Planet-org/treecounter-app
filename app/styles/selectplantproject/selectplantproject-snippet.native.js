@@ -10,6 +10,10 @@ const Layout = {
 const rowHeight = 20;
 
 export default (selectplantprojectFull = EStyleSheet.create({
+  project_specs__taxdeductibleIcon: {
+    width: 14,
+    height: 14
+  },
   projectSnippetContainer: {
     flexDirection: 'column',
 

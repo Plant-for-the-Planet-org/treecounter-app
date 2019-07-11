@@ -84,6 +84,14 @@ class ChallengeUser extends Component {
         challenged: this.state.selectedSuggestion.treecounterId
       };
       if (this.state.isChecked) {
+        if (this.state.byYear === '') {
+          NotificationManager.error(
+            i18n.t('label.please_select_year'),
+            i18n.t('label.error'),
+            5000
+          );
+          return;
+        }
         requestData.endDate = this.state.byYear;
       }
       requestData.challengeMethod = 'direct';

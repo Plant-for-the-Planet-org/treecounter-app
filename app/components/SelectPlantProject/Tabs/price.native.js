@@ -22,7 +22,11 @@ export default class PriceProjects extends Component {
     let { plantProjects, currencies } = this.props;
     currencies = currencies.currencies;
     let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
-    if (currencies) {
+    if (
+      currencies &&
+      currencies.currency_rates &&
+      currencies.currency_rates.EUR
+    ) {
       priceSortedProjects = priceSortedProjects.sort(function(a, b) {
         return (
           a.treeCost *

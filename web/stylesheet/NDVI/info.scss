@@ -4,6 +4,13 @@
     margin-right: 3px;
   }
 
+  .flex-1 {
+    // width: 80%;
+    margin-right: 10px;
+  }
+  .row {
+    align-items: center;
+  }
   .text-center {
     display: flex;
     align-items: center;
@@ -25,6 +32,7 @@
   }
   .btn-container {
     margin-left: auto;
+    align-self: center;
     button {
       background: transparent;
       border-color: rgba(0, 0, 0, 0.6);

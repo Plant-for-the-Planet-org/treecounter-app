@@ -7,7 +7,7 @@ export const loadState = () => {
       }
       resolve(JSON.parse(serializedState));
     } catch (err) {
-      reject(null);
+      reject(err);
     }
   });
 };
@@ -28,7 +28,7 @@ export const fetchItem = key => {
     if (window.localStorage.getItem(key)) {
       resolve(window.localStorage.getItem(key));
     } else {
-      reject('Key not found');
+      reject(new Error(`${key} not in localStorage`));
     }
   });
 };

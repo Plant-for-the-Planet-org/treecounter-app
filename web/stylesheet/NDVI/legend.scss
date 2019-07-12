@@ -1,6 +1,27 @@
 .legend-component {
-  .gradient-row {
-    margin-top: -23px;
+  .gradient-container {
+    // margin-top: -23px;
+    width: 65%;
+  }
+
+  .flex-1 {
+    flex: 1;
+  }
+
+  .pr-1 {
+    padding-right: 0.5rem;
+  }
+
+  .pt-1 {
+    padding-top: 0.5rem;
+  }
+
+  .pr-2 {
+    padding-right: 1.1rem;
+  }
+
+  .flex-2 {
+    flex: 2;
   }
 
   .title {
@@ -17,46 +38,8 @@
     color: rgba(0, 0, 0, 0.6);
   }
 
-  .ul-first-child {
-    margin-right: 6px;
-  }
-
-  .ul-last-child {
-    margin-left: 31px;
-  }
-
-  ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin-right: 20px;
-
-    li {
-      margin-right: 9px;
-    }
-
-    .gradient-description {
-      //   margin-right: 20px;
-      width: 28px;
-      height: 14px;
-      font-family: OpenSans;
-      font-size: 10px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 1.4;
-      letter-spacing: normal;
-      text-align: left;
-      color: rgba(0, 0, 0, 0.6);
-    }
-  }
-
-  .dense-vegation {
-    margin: -6px 0 0 0;
-  }
-
-  .dense-vegation-gradient-description {
-    width: 100px;
+  .gradient-description {
+    margin: 0;
     height: 14px;
     font-family: OpenSans;
     font-size: 10px;
@@ -67,5 +50,9 @@
     letter-spacing: normal;
     text-align: left;
     color: rgba(0, 0, 0, 0.6);
+  }
+
+  .dense-vegation {
+    margin: -6px 0 0 0;
   }
 }

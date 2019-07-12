@@ -7,10 +7,10 @@ const Info = props => {
 
   return (
     <div className="info-component">
-      <ul>
-        {aggregate && (
-          <React.Fragment>
-            <li>
+      {aggregate && (
+        <React.Fragment>
+          <div className="row">
+            <div className="flex-1">
               <p>
                 {props.ndviResulFromSpell}{' '}
                 {parseDate(
@@ -26,13 +26,13 @@ const Info = props => {
                 {props.maximumSpell}
                 <b>{aggregate.max ? aggregate.max : 'NaN'}</b>
               </p>
-            </li>
-            <li>
+            </div>
+            <div className="flex-1 text-center btn-container">
               <button>?</button>
-            </li>
-          </React.Fragment>
-        )}
-      </ul>
+            </div>
+          </div>
+        </React.Fragment>
+      )}
     </div>
   );
 };

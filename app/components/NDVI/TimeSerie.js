@@ -7,33 +7,29 @@ const TimeSerie = props => {
   return (
     <div className="time-serie-component">
       <div className="row">
-        <ul>
-          <li className="date">{props.year}</li>
-          <li className="circles">
-            <ul>
-              {props.dataPoints.map((dataPoint, index) => {
-                if (!_.isEmpty(dataPoint)) {
-                  return (
-                    <li key={index}>
-                      <Circle
-                        onClick={() => {
-                          props.onClick(dataPoint.monthUid);
-                        }}
-                        {...dataPoint}
-                      />
-                    </li>
-                  );
-                } else {
-                  return (
-                    <li key={index}>
-                      <Circle gradientName="not-found" />
-                    </li>
-                  );
-                }
-              })}
-            </ul>
-          </li>
-        </ul>
+        <div className="flex-2">
+          <p className="date">{props.year}</p>
+        </div>
+        {props.dataPoints.map((dataPoint, index) => {
+          if (!_.isEmpty(dataPoint)) {
+            return (
+              <div key={index} className="flex-1">
+                <Circle
+                  onClick={() => {
+                    props.onClick(dataPoint.monthUid);
+                  }}
+                  {...dataPoint}
+                />
+              </div>
+            );
+          } else {
+            return (
+              <div key={index} className="flex-1" key={index}>
+                <Circle gradientName="not-found" />
+              </div>
+            );
+          }
+        })}
       </div>
     </div>
   );

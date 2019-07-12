@@ -7,6 +7,12 @@
 
 .row {
   display: flex;
+  flex-direction: row;
+  // flex-wrap: wrap;
+}
+
+.letter-box {
+  flex: 1;
 }
 
 .app {

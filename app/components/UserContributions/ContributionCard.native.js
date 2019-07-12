@@ -305,7 +305,15 @@ class ContributionCard extends React.Component {
           : '#ec6453';
     let styles = myTreesStyle(labelColor, borderColor);
     return contributionType === 'donation' ? (
-      <CardLayout style={styles.addPadding}>
+      <CardLayout
+        style={styles.addPadding}
+        onPress={() => {
+          this.props.navigation.navigate('contribution_details', {
+            contribution,
+            titleParam: plantProjectName || tpoName || treeSpecies
+          });
+        }}
+      >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
           <Text
@@ -358,7 +366,15 @@ class ContributionCard extends React.Component {
         </View>
       </CardLayout>
     ) : contributionType === 'planting' ? (
-      <CardLayout style={[styles.addPadding, styles.minHeight]}>
+      <CardLayout
+        style={[styles.addPadding, styles.minHeight]}
+        onPress={() => {
+          this.props.navigation.navigate('contribution_details', {
+            contribution,
+            titleParam: plantProjectName || tpoName || treeSpecies
+          });
+        }}
+      >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
           <Text
@@ -422,7 +438,15 @@ class ContributionCard extends React.Component {
         </View>
       </CardLayout>
     ) : (
-      <CardLayout style={styles.addPadding}>
+      <CardLayout
+        style={styles.addPadding}
+        onPress={() => {
+          this.props.navigation.navigate('contribution_details', {
+            contribution,
+            titleParam: plantProjectName || tpoName || treeSpecies
+          });
+        }}
+      >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
           <Text

@@ -7,6 +7,10 @@
 
 `index.web.js` is the entry point of web platform build, `index.js` is the entry point of both iOS and android platform build process.
 
+## Configuration
+
+Copy `app/config/index.js.dist` to `app/config/index.js`.
+
 ## Web Setup
 
 Run following commands

@@ -35,6 +35,16 @@ export const fetchItem = async key => {
   }
 };
 
+/**
+ * Get a possibly unset localStorage item.
+ * Use this when it is not an error for the item to be unset.
+ *
+ * @returns string | null
+ */
+export const getItem = async key => {
+  return await AsyncStorage.getItem(key);
+};
+
 export const clearStorage = async () => {
   const welcomeKey = await fetchItem('welcome');
   //console.log(welcomeKey);

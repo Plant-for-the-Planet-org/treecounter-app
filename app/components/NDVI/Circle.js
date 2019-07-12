@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import getGradiantPosition from './NDVIfunctions/getGradientPosition';
-import colors from './circle-colors';
 
 const Circle = props => {
   let bgStyle = {};

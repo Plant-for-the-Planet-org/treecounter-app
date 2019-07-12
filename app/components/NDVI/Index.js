@@ -42,7 +42,7 @@ const colorStops = [
 export default class NDVIContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedDataPoint: {} };
+    this.state = { selectedDataPoint: this.props.dataPoints[0] };
   }
 
   componentDidMount() {
@@ -138,7 +138,9 @@ export default class NDVIContainer extends Component {
         <GradientResultLine
           getColorForNDVI={this.getColorForNDVI}
           ref={c => (this.GradientRef = c)}
-          {...this.state.selectedDataPoint.ndviAggregate}
+          max={this.state.selectedDataPoint.ndviAggregate.max}
+          min={this.state.selectedDataPoint.ndviAggregate.min}
+          avg={this.state.selectedDataPoint.ndviAggregate.avg}
           selectedDataPoint={this.state.selectedDataPoint}
         />
         <Info

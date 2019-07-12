@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getMetricsForDisplayingGradientLineHighlight from './NDVIfunctions/getMetricsForDisplayingGradientLineHighlight';
-
+import moment from 'moment';
 const GradientResultLine = props => {
   const hightlightLineMetricts = getMetricsForDisplayingGradientLineHighlight(
     props.min,
     props.max
   );
-
   return (
     <div className="gradient-result-line-component">
-      <h2 className="title">{props.correctSpell}</h2>
+      <div className="title">{`${moment.months(
+        props.selectedDataPoint.month - 1
+      )}, ${props.selectedDataPoint.year}`}</div>
       <div className="gradient-wrapper">
         {props.min &&
           props.max && (
@@ -33,5 +34,5 @@ export default GradientResultLine;
 GradientResultLine.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
-  correctSpell: PropTypes.string
+  selectedDataPoint: PropTypes.object
 };

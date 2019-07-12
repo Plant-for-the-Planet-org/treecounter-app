@@ -63,7 +63,7 @@ export default class NDVIContainer extends Component {
         />
         <GradientResultLine
           {...this.state.selectedDataPoint.ndviAggregate}
-          correctSpell={i18n.t('label.NDVI_gradient_result_line_title')}
+          selectedDataPoint={this.state.selectedDataPoint}
         />
         <Info
           ndviResulFromSpell={i18n.t('label.NDVI_info_results')}

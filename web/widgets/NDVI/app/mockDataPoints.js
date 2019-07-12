@@ -16,9 +16,9 @@ const mockDataPoints = [
     year: 2019,
     carbon: 3717,
     ndviAggregate: {
-      min: -0.24662007507553332,
-      max: 2.7517624439222388,
-      avg: 0.3811577383449884
+      min: -0.14662007507553332,
+      max: 0.1517624439222388,
+      avg: 0
     }
   },
   {
@@ -50,7 +50,7 @@ const mockDataPoints = [
     carbon: 3716,
     ndviAggregate: {
       min: -0.24662007507553332,
-      max: 2.7517624439222388,
+      max: 0.7517624439222388,
       avg: 0.3811577383449884
     }
   },
@@ -72,7 +72,7 @@ const mockDataPoints = [
     carbon: 3716,
     ndviAggregate: {
       min: 0.24662007507553332,
-      max: 1.7517624439222388,
+      max: 0.7517624439222388,
       avg: 0.3811577383449884
     }
   },
@@ -83,7 +83,7 @@ const mockDataPoints = [
     carbon: 3716,
     ndviAggregate: {
       min: 0.24662007507553332,
-      max: 1.7517624439222388,
+      max: 0.7517624439222388,
       avg: 0.3811577383449884
     }
   },
@@ -94,7 +94,7 @@ const mockDataPoints = [
     carbon: 3716,
     ndviAggregate: {
       min: 0.24662007507553332,
-      max: 1.7517624439222388,
+      max: 0.7517624439222388,
       avg: 0.3811577383449884
     }
   },
@@ -105,7 +105,7 @@ const mockDataPoints = [
     carbon: 3716,
     ndviAggregate: {
       min: 0.24662007507553332,
-      max: 1.7517624439222388,
+      max: 0.7517624439222388,
       avg: 0.3811577383449884
     }
   }

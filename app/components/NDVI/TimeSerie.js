@@ -15,6 +15,7 @@ const TimeSerie = props => {
             return (
               <div key={index} className="flex-1">
                 <Circle
+                  getColorForNDVI={props.getColorForNDVI}
                   onClick={() => {
                     props.onClick(dataPoint.monthUid);
                   }}
@@ -41,5 +42,6 @@ TimeSerie.propTypes = {
   year: PropTypes.number,
   dataPoints: PropTypes.array,
   dataPoint: PropTypes.object,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  getColorForNDVI: PropTypes.func
 };

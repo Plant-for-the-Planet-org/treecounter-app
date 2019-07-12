@@ -9,8 +9,9 @@ const Circle = props => {
     if (props.ndviAggregate.min && props.ndviAggregate.max) {
       bgStyle = {
         backgroundImage: `linear-gradient(to right,
-           ${colors[getGradiantPosition(props.ndviAggregate.min)].color} 0%,
-            ${colors[getGradiantPosition(props.ndviAggregate.max)].color} 100%)`
+           ${props.getColorForNDVI(props.ndviAggregate.min)} 0%,
+           ${props.getColorForNDVI(props.ndviAggregate.avg)} 50%,
+            ${props.getColorForNDVI(props.ndviAggregate.max)} 100%)`
       };
     } else {
       bgStyle = { background: 'green' };
@@ -39,6 +40,6 @@ Circle.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   gradientName: PropTypes.string,
-
+  getColorForNDVI: PropTypes.func,
   onClick: PropTypes.func
 };

@@ -29,6 +29,7 @@ class TimeSeries extends Component {
           this.state.filteredData.length > 1 &&
           this.state.filteredData.map((data, index) => (
             <TimeSerie
+              getColorForNDVI={this.props.getColorForNDVI}
               key={index}
               onClick={this.onClick}
               year={data.year}
@@ -53,5 +54,6 @@ TimeSeries.propTypes = {
   min: PropTypes.number,
   avg: PropTypes.number,
   max: PropTypes.number,
-  onClickCircle: PropTypes.func
+  onClickCircle: PropTypes.func,
+  getColorForNDVI: PropTypes.func
 };

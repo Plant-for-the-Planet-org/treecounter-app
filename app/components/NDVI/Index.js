@@ -8,6 +8,37 @@ import TimeSeries from './TimeSeries';
 import _ from 'lodash';
 import i18n from '../../locales/i18n.js';
 
+const colorStops = [
+  {
+    percentage: 0,
+    color: [0, 67, 124]
+  },
+  {
+    percentage: 40,
+    color: [40, 1, 250]
+  },
+  {
+    percentage: 50,
+    color: [250, 67, 31]
+  },
+  {
+    percentage: 55,
+    color: [251, 247, 0]
+  },
+  {
+    percentage: 67,
+    color: [117, 199, 0]
+  },
+  {
+    percentage: 86,
+    color: [4, 196, 0]
+  },
+  {
+    percentage: 100,
+    color: [4, 159, 4]
+  }
+];
+
 export default class NDVIContainer extends Component {
   constructor(props) {
     super(props);
@@ -24,6 +55,7 @@ export default class NDVIContainer extends Component {
   };
 
   onClickCircle = circleMonthuid => {
+    this.getColorForNDVI();
     this.setState({
       selectedDataPoint: this.props.dataPoints[
         this.findDataPointIndex(circleMonthuid)
@@ -37,6 +69,47 @@ export default class NDVIContainer extends Component {
     });
   }
 
+  getStepColor = (colorA, colorB, value) => {
+    return colorA.map(function(color, i) {
+      return (color + value * (colorB[i] - color)) & 255;
+    });
+  };
+
+  getColorForNDVI = (point = 0) => {
+    if (point > 1) {
+      point = 1;
+    }
+    if (point < -1) {
+      point = -1;
+    }
+    let gradient = this.GradientRef;
+    let percentage = 50;
+    if (point > 0) {
+      percentage = point * 100 / 2 + 50;
+    } else {
+      percentage = 100 - (Math.abs(point) * 100 / 2 + 50);
+    }
+
+    for (let i = 0; i < colorStops.length; i++) {
+      if (colorStops[i].percentage > percentage) {
+        break;
+      }
+    }
+
+    let lowerIndex = i == 1 ? 0 : i - 1;
+    let upperIndex = lowerIndex + 1;
+    let percentageWidth = percentage / 100 * gradient.offsetWidth;
+    let value =
+      (percentageWidth / (gradient.offsetWidth / (colorStops.length - 1))) % 1;
+
+    let color = this.getStepColor(
+      colorStops[lowerIndex].color,
+      colorStops[upperIndex].color,
+      value
+    );
+    console.log(color);
+    return `rgb(${color.join(',')})`;
+  };
   render() {
     const dataPoints = this.props.dataPoints;
     return (
@@ -51,6 +124,7 @@ export default class NDVIContainer extends Component {
           )}
         </div>
         <TimeSeries
+          getColorForNDVI={this.getColorForNDVI}
           dataPoints={dataPoints}
           onClickCircle={this.onClickCircle}
         />
@@ -62,6 +136,8 @@ export default class NDVIContainer extends Component {
           denseVegetationSpell={i18n.t('label.NDVI_legend_dense_vegetation')}
         />
         <GradientResultLine
+          getColorForNDVI={this.getColorForNDVI}
+          ref={c => (this.GradientRef = c)}
           {...this.state.selectedDataPoint.ndviAggregate}
           selectedDataPoint={this.state.selectedDataPoint}
         />

@@ -198,7 +198,7 @@ export default class DonateTrees extends Component {
     },
     () => {
       // console.log(this.refs.donateReceipt.validate());
-      let value = this.refs.donateReceipt.getValue();
+      let value = this.refs.donateReceipt && this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
         if (this.state.modeReceipt === 'individual') {
@@ -236,7 +236,7 @@ export default class DonateTrees extends Component {
     },
     () => {
       // console.log(this.refs.donateReceipt.validate());
-      let value = this.refs.donateReceipt.getValue();
+      let value = this.refs.donateReceipt && this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
         if (this.state.modeReceipt === 'individual') {

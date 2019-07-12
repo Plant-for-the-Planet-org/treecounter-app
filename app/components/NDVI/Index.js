@@ -89,8 +89,8 @@ export default class NDVIContainer extends Component {
     } else {
       percentage = 100 - (Math.abs(point) * 100 / 2 + 50);
     }
-
-    for (let i = 0; i < colorStops.length; i++) {
+    let i;
+    for (i = 0; i < colorStops.length; i++) {
       if (colorStops[i].percentage > percentage) {
         break;
       }

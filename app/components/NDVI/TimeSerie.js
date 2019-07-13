@@ -15,7 +15,6 @@ const TimeSerie = props => {
             return (
               <div key={index} className="flex-1">
                 <Circle
-                  getColorForNDVI={props.getColorForNDVI}
                   onClick={() => {
                     props.onClick(dataPoint.monthUid);
                   }}

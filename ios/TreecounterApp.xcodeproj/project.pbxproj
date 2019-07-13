@@ -38,6 +38,7 @@
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		4894CBF8CB604D50BA80EDCD /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE250EEB984FC9AED7DA67 /* libRNImagePicker.a */; };
 		5BE1F54AC606460789D2C52A /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3989C278591C4DE98BFCE554 /* libRNDeviceInfo-tvOS.a */; };
+		61AFB09222DA619400C8AB49 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AFB06122DA615E00C8AB49 /* libBVLinearGradient.a */; };
 		6AFE9E9E21347CD4009D99E7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE9E9521347CD2009D99E7 /* MobileCoreServices.framework */; };
 		6AFE9E9F21347CD4009D99E7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE9E9621347CD2009D99E7 /* AudioToolbox.framework */; };
 		6AFE9EA021347CD4009D99E7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE9E9721347CD2009D99E7 /* AVFoundation.framework */; };
@@ -343,6 +344,20 @@
 			remoteGlobalIDString = 2D2A28201D9B03D100D4039D;
 			remoteInfo = "RCTAnimation-tvOS";
 		};
+		61AFB06022DA615E00C8AB49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 61AFB05A22DA615E00C8AB49 /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = BVLinearGradient;
+		};
+		61AFB06222DA615E00C8AB49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 61AFB05A22DA615E00C8AB49 /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 64AA15081EF7F30100718508;
+			remoteInfo = "BVLinearGradient-tvOS";
+		};
 		61E09B6D213A883D00A88BDE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EB2B8202FEC48FAAC36DFDD /* RNDeviceInfo.xcodeproj */;
@@ -455,6 +470,7 @@
 		4BA37FA7F0664819083CDE0D /* libPods-TreecounterApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TreecounterApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C281D9C6FFB4C18A27F7109 /* libTPSStripe.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTPSStripe.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		61AFB05A22DA615E00C8AB49 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		6566C36D92C74EBEA541DC9C /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; };
 		6AFE9E9521347CD2009D99E7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		6AFE9E9621347CD2009D99E7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -498,6 +514,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61AFB09222DA619400C8AB49 /* libBVLinearGradient.a in Frameworks */,
 				6AFE9E9E21347CD4009D99E7 /* MobileCoreServices.framework in Frameworks */,
 				6AFE9E9F21347CD4009D99E7 /* AudioToolbox.framework in Frameworks */,
 				6AFE9EA021347CD4009D99E7 /* AVFoundation.framework in Frameworks */,
@@ -776,6 +793,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		61AFB05B22DA615E00C8AB49 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				61AFB06122DA615E00C8AB49 /* libBVLinearGradient.a */,
+				61AFB06322DA615E00C8AB49 /* libBVLinearGradient.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		61E09B69213A883D00A88BDE /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -813,6 +839,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				61AFB05A22DA615E00C8AB49 /* BVLinearGradient.xcodeproj */,
 				28348A4E2108EA92000CEC07 /* ToolTipMenu.xcodeproj */,
 				6BBEA32822A8FE4C00C6ADE1 /* BugsnagReactNative.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -1018,6 +1045,10 @@
 				{
 					ProductGroup = 6BBEA32922A8FE4C00C6ADE1 /* Products */;
 					ProjectRef = 6BBEA32822A8FE4C00C6ADE1 /* BugsnagReactNative.xcodeproj */;
+				},
+				{
+					ProductGroup = 61AFB05B22DA615E00C8AB49 /* Products */;
+					ProjectRef = 61AFB05A22DA615E00C8AB49 /* BVLinearGradient.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -1371,6 +1402,20 @@
 			fileType = archive.ar;
 			path = libRCTAnimation.a;
 			remoteRef = 5E9157341DD0AC6500FF2AA8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		61AFB06122DA615E00C8AB49 /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 61AFB06022DA615E00C8AB49 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		61AFB06322DA615E00C8AB49 /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 61AFB06222DA615E00C8AB49 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		61E09B6E213A883D00A88BDE /* libRNDeviceInfo.a */ = {

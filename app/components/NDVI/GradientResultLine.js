@@ -29,7 +29,7 @@ class GradientResultLine extends React.PureComponent {
       ${props.getColorForNDVI(props.avg)} 50%,
        ${props.getColorForNDVI(props.max)} 100%)`;
     backgroundImage = backgroundImage.replace(/(\r\n|\n|\r)/gm, '');
-    console.log('backgroundImage', backgroundImage);
+    // console.log('backgroundImage', backgroundImage);
     return backgroundImage;
   };
 
@@ -80,6 +80,6 @@ GradientResultLine.propTypes = {
   max: PropTypes.number,
   selectedDataPoint: PropTypes.object,
   getColorForNDVI: PropTypes.func,
-  avg: PropTypes.func,
+  avg: PropTypes.number,
   forwardedRef: PropTypes.any
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getMetricsForDisplayingGradientLineHighlight from './NDVIfunctions/getMetricsForDisplayingGradientLineHighlight';
-import { View, Text } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
 import {
@@ -62,7 +62,7 @@ const GradientResultLine = props => {
           height: 16,
           position: 'absolute',
           borderRadius: 4,
-          top: 29,
+          top: Platform.OS === 'android' ? 32 : 29,
           opacity: 0.4,
           left: `${minPercentage}%`
         }}

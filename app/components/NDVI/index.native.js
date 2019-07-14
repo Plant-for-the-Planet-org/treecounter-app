@@ -11,8 +11,9 @@ import _ from 'lodash';
 import i18n from '../../locales/i18n.js';
 
 const monthStyle = {
-  height: 14,
-  width: 14
+  height: 15,
+  width: 15,
+  fontSize: 13
 };
 export default class NDVIContainer extends Component {
   constructor(props) {
@@ -39,8 +40,8 @@ export default class NDVIContainer extends Component {
         <View
           style={{
             flexDirection: 'row',
-            justifyContent: 'space-between'
-            // marginLeft: '14%'
+            justifyContent: 'space-between',
+            marginLeft: 2
           }}
         >
           <Text style={{ opacity: 0 }}>2222</Text>

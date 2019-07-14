@@ -5,9 +5,9 @@ import i18n from '../../locales/i18n.js';
 //styles
 const LegendInfo = props => {
   return (
-    <View style={{ flexDirection: 'row', marginTop: 10 }}>
+    <View style={{ flexDirection: 'row', marginTop: 10, alignItems: 'center' }}>
       <Circle ndviAggregate={{ ...props.ndviAggregate, isColor: true }} />
-      <Text style={{ marginLeft: 6 }}> {props.title}</Text>
+      <Text style={{ marginLeft: 6, fontSize: 10 }}> {props.title}</Text>
     </View>
   );
 };

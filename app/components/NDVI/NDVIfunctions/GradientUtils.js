@@ -29,6 +29,16 @@ const colorStops = [
   }
 ];
 
+export const getPointPercentageOnGradient = (point = 0) => {
+  let percentage = 50;
+  if (point > 0) {
+    percentage = point * 100 / 2 + 50;
+  } else {
+    percentage = 100 - (Math.abs(point) * 100 / 2 + 50);
+  }
+  return percentage;
+};
+
 export const getColorForNDVI = (point = 0, gradientWidth = 350) => {
   if (point > 1) {
     point = 1;
@@ -36,15 +46,10 @@ export const getColorForNDVI = (point = 0, gradientWidth = 350) => {
   if (point < -1) {
     point = -1;
   }
-  let percentage = 50;
-  if (point > 0) {
-    percentage = point * 100 / 2 + 50;
-  } else {
-    percentage = 100 - (Math.abs(point) * 100 / 2 + 50);
-  }
+  let percentage = getPointPercentageOnGradient(point);
   let i;
   for (i = 0; i < colorStops.length; i++) {
-    if (colorStops[i].percentage >= percentage) {
+    if (colorStops[i].percentage > percentage) {
       break;
     }
   }

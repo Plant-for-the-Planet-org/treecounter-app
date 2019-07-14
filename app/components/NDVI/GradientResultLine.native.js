@@ -4,19 +4,43 @@ import getMetricsForDisplayingGradientLineHighlight from './NDVIfunctions/getMet
 import { View, Text } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
+import {
+  getPointPercentageOnGradient,
+  getColorForNDVI
+} from './NDVIfunctions/GradientUtils';
 
 const GradientResultLine = props => {
-  //This method returns left and width in pixel for highlight line
-  const hightlightLineMetricts = getMetricsForDisplayingGradientLineHighlight(
-    props.min,
-    props.max
+  const { selectedDataPoint } = props;
+  if (!selectedDataPoint || !selectedDataPoint.ndviAggregate) {
+    return null;
+  }
+
+  const minPercentage = getPointPercentageOnGradient(
+    selectedDataPoint.ndviAggregate.min
   );
+  const maxPercentage = getPointPercentageOnGradient(
+    selectedDataPoint.ndviAggregate.max
+  );
+  let colors = [];
+  let locations = [];
+  if (!isNaN(selectedDataPoint.ndviAggregate.min)) {
+    colors.push(getColorForNDVI(selectedDataPoint.ndviAggregate.min));
+    locations.push(0);
+  }
+  if (!isNaN(selectedDataPoint.ndviAggregate.avg)) {
+    colors.push(getColorForNDVI(selectedDataPoint.ndviAggregate.avg));
+    locations.push(0.5);
+  }
+  if (!isNaN(selectedDataPoint.ndviAggregate.max)) {
+    colors.push(getColorForNDVI(selectedDataPoint.ndviAggregate.max));
+    locations.push(1);
+  }
 
   return (
-    <View style={{ width: '100%' }}>
+    <View style={{ width: '100%', marginTop: 21 }}>
       <Text style={{ marginBottom: 16 }}>{`${moment.months(
-        props.selectedDataPoint.month - 1
-      )}, ${props.selectedDataPoint.year}`}</Text>
+        selectedDataPoint.month - 1
+      )}, ${selectedDataPoint.year}`}</Text>
       <LinearGradient
         style={{ width: '100%', height: 8, borderRadius: 24 }}
         start={{ x: 0, y: 0 }}
@@ -32,6 +56,21 @@ const GradientResultLine = props => {
           '#049f04'
         ]}
       />
+      <LinearGradient
+        style={{
+          width: `${maxPercentage - minPercentage}%`,
+          height: 16,
+          position: 'absolute',
+          borderRadius: 4,
+          top: 29,
+          opacity: 0.4,
+          left: `${minPercentage}%`
+        }}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        locations={locations}
+        colors={colors}
+      />
     </View>
   );
 };
@@ -40,5 +79,6 @@ export default GradientResultLine;
 
 GradientResultLine.propTypes = {
   min: PropTypes.number,
-  max: PropTypes.number
+  max: PropTypes.number,
+  selectedDataPoint: PropTypes.object
 };

@@ -108,6 +108,28 @@ const mockDataPoints = [
       max: 0.7517624439222388,
       avg: 0.3811577383449884
     }
+  },
+  {
+    monthUid: 201711,
+    month: 1,
+    year: 2017,
+    carbon: 3716,
+    ndviAggregate: {
+      min: 0.24662007507553332,
+      max: 0.7517624439222388,
+      avg: 0.3811577383449884
+    }
+  },
+  {
+    monthUid: 201710,
+    month: 2,
+    year: 2017,
+    carbon: 3716,
+    ndviAggregate: {
+      min: 0.24662007507553332,
+      max: 0.7517624439222388,
+      avg: 0.3811577383449884
+    }
   }
 ];
 

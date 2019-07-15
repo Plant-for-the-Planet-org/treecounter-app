@@ -7,6 +7,8 @@ import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 
 import { context } from '../../../app/config/index';
 import VideoContainer from '../Common/VideoContainer';
+import NDVI from '../../containers/NDVI/NDVI';
+
 // import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 
 /**
@@ -20,7 +22,8 @@ class PlantProjectDetails extends React.Component {
       homepageCaption,
       plantProjectImages,
       videoUrl,
-      mapData
+      mapData,
+      ndviUid
     } = this.props;
     if (!videoUrl) {
       videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
@@ -45,6 +48,7 @@ class PlantProjectDetails extends React.Component {
             url={videoUrl}
           />
         )}
+        {<NDVI ndviUid={ndviUid} />}
       </div>
     );
   }
@@ -58,7 +62,8 @@ PlantProjectDetails.propTypes = {
   mapData: PropTypes.object,
   plantProjectImages: PropTypes.array,
   onImageClick: PropTypes.func,
-  onViewMoreClick: PropTypes.func
+  onViewMoreClick: PropTypes.func,
+  ndviUid: PropTypes.string
 };
 
 export default PlantProjectDetails;

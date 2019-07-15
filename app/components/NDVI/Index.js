@@ -39,7 +39,7 @@ const colorStops = [
   }
 ];
 
-export default class NDVIContainer extends Component {
+export default class NDVI extends Component {
   constructor(props) {
     super(props);
     this.state = { selectedDataPoint: this.props.dataPoints[0] };
@@ -155,6 +155,6 @@ export default class NDVIContainer extends Component {
   }
 }
 
-NDVIContainer.propTypes = {
+NDVI.propTypes = {
   dataPoints: PropTypes.array
 };

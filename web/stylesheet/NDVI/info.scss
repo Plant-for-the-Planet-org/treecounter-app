@@ -18,6 +18,7 @@
   }
 
   p {
+    margin-top: 10px;
     height: 5px;
     font-family: OpenSans;
     font-size: 10px;
@@ -40,4 +41,7 @@
       color: rgba(0, 0, 0, 0.6);
     }
   }
+}
+.letter-box {
+  flex: 1;
 }

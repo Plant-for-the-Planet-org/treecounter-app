@@ -1,15 +1,44 @@
 import React from 'react';
-// import TimeSerie from './TimeSerie';
+import TimeSerie from './TimeSerie';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
+import filterDataPoints from './NDVIfunctions/filterDataPointForTimeSeries';
 
-const TimeSeries = props => {
-  return (
-    <View>
-      <Text>TimeSeries</Text>
-    </View>
-  );
-};
+class TimeSeries extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { filteredData: [] };
+  }
+  onClick = data => {
+    this.props.onClickCircle(data);
+  };
+
+  componentDidMount() {
+    if (!this.props.dataPoints) return;
+
+    this.setState({ filteredData: filterDataPoints(this.props.dataPoints) });
+  }
+
+  render() {
+    return (
+      <View style={{ marginTop: 7 }}>
+        {this.state.filteredData &&
+          this.state.filteredData.length > 0 &&
+          this.state.filteredData.map((data, index) => (
+            <TimeSerie
+              getColorForNDVI={this.props.getColorForNDVI}
+              key={index}
+              onClick={this.onClick}
+              year={data.year}
+              dataPoints={data.dataPoints}
+            />
+          ))}
+
+        {/* <Text>TimeSeries</Text> */}
+      </View>
+    );
+  }
+}
 
 export default TimeSeries;
 

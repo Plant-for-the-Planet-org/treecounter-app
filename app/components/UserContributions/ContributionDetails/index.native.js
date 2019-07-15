@@ -9,7 +9,7 @@ export default class UserContributionsDetails extends React.Component {
     return (
       <View>
         <NDVIContainer dataPoints={mockDataPoints} />
-        <Text>{JSON.stringify(this.props.contribution).toString()}</Text>
+        {/* <Text>{JSON.stringify(this.props.contribution).toString()}</Text> */}
       </View>
     );
   }

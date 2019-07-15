@@ -1,7 +1,13 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-const context = require('../../app/config/index.js');
+const Dotenv = require('dotenv-webpack');
+
+require(`dotenv-defaults`).config({
+  path: path.join(__dirname, '../../.env'),
+  defaults: path.join(__dirname, '../../defaults.env')
+});
+
 const commonConfig = require('./webpack.common.config.js');
 const path = require('path');
 const {
@@ -38,11 +44,11 @@ module.exports = webpackMerge(commonConfig, {
   devtool: 'source-map',
   plugins: [
     new BugsnagBuildReporterPlugin({
-      apiKey: context.bugsnagApiKey,
+      apiKey: process.env.BUGSNAG_API_KEY,
       appVersion: pkg.version
     }),
     new BugsnagSourceMapUploaderPlugin({
-      apiKey: context.bugsnagApiKey,
+      apiKey: process.env.BUGSNAG_API_KEY,
       appVersion: pkg.version,
       overwrite: true,
       publicPath: '*'
@@ -66,6 +72,10 @@ module.exports = webpackMerge(commonConfig, {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new Dotenv({
+      path: path.join(__dirname, '../../.env'),
+      defaults: path.join(__dirname, '../../defaults.env')
     })
   ]
 });

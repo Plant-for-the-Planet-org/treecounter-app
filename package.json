@@ -100,6 +100,8 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-native": "^4.0.1",
     "babel-preset-stage-2": "^6.24.1",
+    "dotenv-defaults": "1.0.2",
+    "dotenv-webpack": "1.7.0",
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-react": "^7.7.0",

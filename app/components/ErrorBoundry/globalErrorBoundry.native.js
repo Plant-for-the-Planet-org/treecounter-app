@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, ScrollView, SafeAreaView } from 'react-native';
-import { context } from '../../config';
 import styles from '../../styles/edit_profile.native';
 import i18n from '../../locales/i18n.js';
 import { Client, Configuration } from 'bugsnag-react-native';
@@ -11,9 +10,9 @@ import {
 } from '../../../package.json';
 
 let bugsnag;
-if (context.bugsnagApiKey) {
+if (process.env.BUGSNAG_API_KEY) {
   const configuration = new Configuration();
-  configuration.apiKey = context.bugsnagApiKey;
+  configuration.apiKey = process.env.BUGSNAG_API_KEY;
   configuration.codeBundleId = app_version;
   bugsnag = new Client(configuration);
 }

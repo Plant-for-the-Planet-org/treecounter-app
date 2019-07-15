@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { context } from '../../config';
 import { infoGrey } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import bugsnag from '@bugsnag/js';
@@ -10,9 +9,9 @@ import {
 } from '../../../package.json';
 
 let bugsnagClient;
-if (context.bugsnagApiKey) {
+if (process.env.BUGSNAG_API_KEY) {
   bugsnagClient = bugsnag({
-    apiKey: context.bugsnagApiKey,
+    apiKey: process.env.BUGSNAG_API_KEY,
     appVersion: app_version
   });
 }

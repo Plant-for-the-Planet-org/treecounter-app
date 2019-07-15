@@ -9,6 +9,8 @@ import styles from '../../styles/selectplantproject/plant-details.native';
 import { link } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import i18n from '../../locales/i18n';
+import NDVI from '../../containers/NDVI/NDVI';
+
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectDetails
  */
@@ -44,6 +46,7 @@ class PlantProjectDetails extends React.Component {
         <View style={styles.videoContainer}>
           <VideoContainer url={vUrl} />
         </View>
+        {<NDVI ndviUid={ndviUid} />}
       </View>
     );
   }
@@ -66,7 +69,8 @@ PlantProjectDetails.propTypes = {
   homepageCaption: PropTypes.string,
   videoUrl: PropTypes.string,
   mapData: PropTypes.object,
-  plantProjectImages: PropTypes.array
+  plantProjectImages: PropTypes.array,
+  ndviUid: PropTypes.string
 };
 
 export default PlantProjectDetails;

@@ -7,6 +7,7 @@ import GradientResultLine from './GradientResultLine';
 import TimeSeries from './TimeSeries';
 import _ from 'lodash';
 import i18n from '../../locales/i18n.js';
+import LoadingNDVI from './LoadingNDVI';
 
 const colorStops = [
   {
@@ -111,46 +112,55 @@ export default class NDVI extends Component {
     return `rgb(${color.join(',')})`;
   };
   render() {
-    const dataPoints = this.props.dataPoints;
+    // const dataPoints = this.props.dataPoints;
+    const dataPoints = [];
     return (
-      <div className="ndvi-container">
-        <div className="row month-keyword">
-          {_.toArray(i18n.t('label.NDVI_container_static_month')).map(
-            (letter, index) => (
-              <div key={index} className="letter-box">
-                <p>{letter}</p>
-              </div>
-            )
-          )}
-        </div>
-        <TimeSeries
-          getColorForNDVI={this.getColorForNDVI}
-          dataPoints={dataPoints}
-          onClickCircle={this.onClickCircle}
-        />
-        <Legend
-          indicatorsSpell={i18n.t('label.NDVI_legend_indicators')}
-          grasslandsSpell={i18n.t('label.NDVI_legend_grasslands')}
-          rockSandSnowSpell={i18n.t('label.NDVI_legend_rock_sand_snow')}
-          waterSpell={i18n.t('label.NDVI_legend_water')}
-          denseVegetationSpell={i18n.t('label.NDVI_legend_dense_vegetation')}
-        />
-        <GradientResultLine
-          getColorForNDVI={this.getColorForNDVI}
-          ref={c => (this.GradientRef = c)}
-          max={this.state.selectedDataPoint.ndviAggregate.max}
-          min={this.state.selectedDataPoint.ndviAggregate.min}
-          avg={this.state.selectedDataPoint.ndviAggregate.avg}
-          selectedDataPoint={this.state.selectedDataPoint}
-        />
-        <Info
-          ndviResulFromSpell={i18n.t('label.NDVI_info_results')}
-          minimumSpell={i18n.t('label.NDVI_info_minimum')}
-          averageSpell={i18n.t('label.NDVI_info_average')}
-          maximumSpell={i18n.t('label.NDVI_info_maximum')}
-          selectedDataPoint={this.state.selectedDataPoint}
-        />
-      </div>
+      <React.Fragment>
+        {!_.isUndefined(dataPoints) && dataPoints.length > 0 ? (
+          <div className="ndvi-container">
+            <div className="row month-keyword">
+              {_.toArray(i18n.t('label.NDVI_container_static_month')).map(
+                (letter, index) => (
+                  <div key={index} className="letter-box">
+                    <p>{letter}</p>
+                  </div>
+                )
+              )}
+            </div>
+            <TimeSeries
+              getColorForNDVI={this.getColorForNDVI}
+              dataPoints={dataPoints}
+              onClickCircle={this.onClickCircle}
+            />
+            <Legend
+              indicatorsSpell={i18n.t('label.NDVI_legend_indicators')}
+              grasslandsSpell={i18n.t('label.NDVI_legend_grasslands')}
+              rockSandSnowSpell={i18n.t('label.NDVI_legend_rock_sand_snow')}
+              waterSpell={i18n.t('label.NDVI_legend_water')}
+              denseVegetationSpell={i18n.t(
+                'label.NDVI_legend_dense_vegetation'
+              )}
+            />
+            <GradientResultLine
+              getColorForNDVI={this.getColorForNDVI}
+              ref={c => (this.GradientRef = c)}
+              max={this.state.selectedDataPoint.ndviAggregate.max}
+              min={this.state.selectedDataPoint.ndviAggregate.min}
+              avg={this.state.selectedDataPoint.ndviAggregate.avg}
+              selectedDataPoint={this.state.selectedDataPoint}
+            />
+            <Info
+              ndviResulFromSpell={i18n.t('label.NDVI_info_results')}
+              minimumSpell={i18n.t('label.NDVI_info_minimum')}
+              averageSpell={i18n.t('label.NDVI_info_average')}
+              maximumSpell={i18n.t('label.NDVI_info_maximum')}
+              selectedDataPoint={this.state.selectedDataPoint}
+            />
+          </div>
+        ) : (
+          <LoadingNDVI />
+        )}
+      </React.Fragment>
     );
   }
 }

@@ -27,3 +27,58 @@
     color: rgba(0, 0, 0, 0.6);
   }
 }
+
+.loading-ndvi-container {
+  width: 344px;
+  height: 118px;
+  border-radius: 4px;
+  padding: 16px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+
+  .fetching-paragraph {
+    width: 93%;
+    height: 40px;
+    font-family: OpenSans;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.36;
+    letter-spacing: normal;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .refresh-box {
+    margin-left: auto;
+    align-self: center;
+    button {
+      width: 123px;
+      height: 30px;
+      border-radius: 20px;
+      background-color: rgba(137, 181, 58, 0.8);
+      border: none;
+      font-family: OpenSans;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.36;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+    }
+  }
+
+  .help-btn {
+    margin-left: auto;
+    align-self: center;
+    button {
+      background: transparent;
+      border-color: rgba(0, 0, 0, 0.6);
+      border-radius: 50px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+}

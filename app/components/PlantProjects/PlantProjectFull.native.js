@@ -30,7 +30,8 @@ class PlantProjectFull extends React.Component {
       plantProjectImages,
       url,
       linkText,
-      tpo_name
+      tpo_name,
+      ndviUid
     } = this.props.plantProject;
 
     const detailsProps = {
@@ -42,7 +43,8 @@ class PlantProjectFull extends React.Component {
       mapData: queryParamsToObject(geoLocation),
       plantProjectImages,
       url,
-      linkText
+      linkText,
+      ndviUid
     };
     return (
       <View style={{ flex: 1 }}>

@@ -111,9 +111,13 @@ export default class NDVI extends Component {
     // console.log(color);
     return `rgb(${color.join(',')})`;
   };
+
+  onRefreshClick = props => {
+    console.log(props);
+  };
+
   render() {
-    // const dataPoints = this.props.dataPoints;
-    const dataPoints = [];
+    const dataPoints = this.props.dataPoints;
     return (
       <React.Fragment>
         {!_.isUndefined(dataPoints) && dataPoints.length > 0 ? (
@@ -158,7 +162,11 @@ export default class NDVI extends Component {
             />
           </div>
         ) : (
-          <LoadingNDVI />
+          <LoadingNDVI
+            onRefreshClick={this.onRefreshClick}
+            paragraphSpell={i18n.t('label.NDVI_on_load_paragraph')}
+            refreshButtonSpell={i18n.t('label.NDVI_on_load_refresh_button')}
+          />
         )}
       </React.Fragment>
     );

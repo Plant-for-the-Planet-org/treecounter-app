@@ -6,6 +6,10 @@ const LoadingNDVI = props => {
     props.onRefreshClick('CLICKED REFRESH');
   };
 
+  const onClickHelp = _ => {
+    props.onClickHelp('help');
+  };
+
   return (
     <div className="loading-ndvi-container">
       <div className="row">
@@ -24,7 +28,9 @@ const LoadingNDVI = props => {
           </button>
         </div>
         <div className="flex-1 text-center help-btn">
-          <button type="button">?</button>
+          <button onClick={onClickHelp} type="button">
+            ?
+          </button>
         </div>
       </div>
     </div>
@@ -34,6 +40,7 @@ const LoadingNDVI = props => {
 export default LoadingNDVI;
 
 LoadingNDVI.propTypes = {
+  onClickHelp: PropTypes.func,
   paragraphSpell: PropTypes.string,
   refreshButtonSpell: PropTypes.string,
   onRefreshClick: PropTypes.func

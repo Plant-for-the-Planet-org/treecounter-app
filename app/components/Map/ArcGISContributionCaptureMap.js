@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 
 import MapContributionCapture from './MapContributionCapture';
 
-import { context } from '../../config';
-
 const ArcGISContributionCaptureMap = ({ geoLocation, onLocationSelected }) => {
-  const webMapId = context.mapIds.inventory;
+  const webMapId = process.env.MAP_INVENTORY;
   console.log('ArcGISContributionCaptureMap: webMapId', webMapId);
   console.log('ArcGISContributionCaptureMap: geoLocation', geoLocation);
   return (

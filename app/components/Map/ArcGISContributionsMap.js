@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 
 import MapContributions from './MapContributions';
 
-import { context } from '../../config';
-
 const ArcGISContributionsMap = ({ userId }) => {
-  const webMapId = context.mapIds.inventory;
+  const webMapId = process.env.MAP_INVENTORY;
   console.log('ArcGISContributionsMap: webMapId', webMapId);
   console.log('ArcGISContributionsMap: userId', userId);
   return (

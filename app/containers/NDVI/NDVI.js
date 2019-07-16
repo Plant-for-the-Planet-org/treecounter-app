@@ -1,9 +1,8 @@
 import React from 'react';
 import { NDVIAction } from '../../actions/NDVIAction';
-import _ from 'lodash';
 import PropTypes from 'prop-types';
-import NDVI from '../../components/NDVI/Index';
-import mockDataPoints from '../../../web/widgets/NDVI/app/mockDataPoints';
+import NDVI from '../../components/NDVI';
+import mockDataPoints from '../../components/NDVI/mockDataPoints';
 
 class NDVIContainer extends React.Component {
   constructor() {

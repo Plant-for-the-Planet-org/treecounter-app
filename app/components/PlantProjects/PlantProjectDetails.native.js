@@ -46,7 +46,7 @@ class PlantProjectDetails extends React.Component {
         <View style={styles.videoContainer}>
           <VideoContainer url={vUrl} />
         </View>
-        {<NDVI ndviUid={ndviUid} />}
+        {<NDVI ndviUid={this.props.ndviUid} />}
       </View>
     );
   }

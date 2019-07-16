@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import { questionmark_orange } from '../../assets';
+import { delimitNumbers } from '../../utils/utils';
 
 const CarbonDetails = props => {
   return (
@@ -9,7 +10,7 @@ const CarbonDetails = props => {
       <div className="carbon-details-container">
         <div className="row">
           <div className="flex-1 carbon-value-box">
-            <h5>{props.carbonValue} Kg</h5>
+            <h5>{delimitNumbers(props.carbonValue)} Kg</h5>
           </div>
           <div className="flex-1 text-center btn-container">
             <div className="tooltip">

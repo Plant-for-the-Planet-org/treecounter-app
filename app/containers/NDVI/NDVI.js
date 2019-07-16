@@ -3,7 +3,7 @@ import { NDVIAction } from '../../actions/NDVIAction';
 import PropTypes from 'prop-types';
 import NDVI from '../../components/NDVI';
 import mockDataPoints from '../../components/NDVI/mockDataPoints';
-import LoadingIndicators from '../../components/Common/LoadingIndicator.native';
+import LoadingIndicators from '../../components/Common/LoadingIndicator';
 
 class NDVIContainer extends React.Component {
   constructor() {
@@ -49,7 +49,7 @@ class NDVIContainer extends React.Component {
     return !this.state.loading ? (
       <NDVI dataPoints={this.state.dataPoints} refresh={this.handleRefresh} />
     ) : (
-      <LoadingIndicators style={{ marginTop: 50 }} />
+      <LoadingIndicators />
     );
   }
 }

@@ -10,5 +10,7 @@
   "NDVI_legend_water": "Wasser",
   "NDVI_legend_rock_sand_snow": "Gestein/Sand/Schnee",
   "NDVI_legend_grasslands": "Wiesen",
-  "NDVI_legend_dense_vegetation": "Dichte Vegetation"
+  "NDVI_legend_dense_vegetation": "Dichte Vegetation",
+  "NDVI_on_load_paragraph": "",
+  "NDVI_on_load_refresh_button": ""
 }

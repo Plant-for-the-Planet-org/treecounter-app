@@ -44,7 +44,9 @@ const colorStops = [
 export default class NDVI extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedDataPoint: this.props.dataPoints[0] };
+    this.state = {
+      selectedDataPoint: !!this.props.dataPoints && this.props.dataPoints[0]
+    };
   }
 
   componentDidMount() {
@@ -114,7 +116,7 @@ export default class NDVI extends Component {
   };
 
   onClickRefresh = props => {
-    console.log(props);
+    this.props.refresh && this.props.refresh();
   };
 
   onClickHelp = props => {
@@ -200,5 +202,6 @@ export default class NDVI extends Component {
 }
 
 NDVI.propTypes = {
-  dataPoints: PropTypes.array
+  dataPoints: PropTypes.array,
+  refresh: PropTypes.func
 };

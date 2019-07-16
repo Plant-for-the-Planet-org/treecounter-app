@@ -13,7 +13,7 @@ class NDVIContainer extends React.Component {
     };
   }
 
-  componentDidMount() {
+  handleRefresh = () => {
     NDVIAction(this.props.ndviUid).then(
       success => {
         try {
@@ -33,11 +33,15 @@ class NDVIContainer extends React.Component {
         });
       }
     );
+  };
+
+  componentDidMount() {
+    this.handleRefresh();
   }
 
   render() {
     return !this.state.loading ? (
-      <NDVI dataPoints={this.state.dataPoints} />
+      <NDVI dataPoints={this.state.dataPoints} refresh={this.handleRefresh} />
     ) : null;
   }
 }

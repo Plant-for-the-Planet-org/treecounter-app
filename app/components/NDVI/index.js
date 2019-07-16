@@ -124,8 +124,8 @@ export default class NDVI extends Component {
   };
 
   render() {
-    const dataPoints = this.props.dataPoints;
-    // const dataPoints = [];
+    // const dataPoints = this.props.dataPoints;
+    const dataPoints = [];
     return (
       <React.Fragment>
         {!_.isUndefined(dataPoints) && dataPoints.length > 0 ? (

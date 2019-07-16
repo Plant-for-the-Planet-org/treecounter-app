@@ -16,12 +16,17 @@ class NDVIContainer extends React.Component {
   handleRefresh = () => {
     NDVIAction(this.props.ndviUid).then(
       success => {
+        // debugger;
         try {
           this.setState({
             loading: false,
             dataPoints: success.data
           });
         } catch (err) {
+          // this.setState({
+          //   loading: false,
+          //   dataPoints: mockDataPoints
+          // });
           console.log(err);
         }
       },

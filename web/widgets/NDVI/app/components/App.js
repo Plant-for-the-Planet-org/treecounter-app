@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NDVIContainer from '../../../../../app/components/NDVI/Index';
+import NDVIContainer from '../../../../../app/components/NDVI';
 //mockData
 import mockDataPoints from '../mockDataPoints';
 

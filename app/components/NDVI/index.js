@@ -125,6 +125,7 @@ export default class NDVI extends Component {
 
   render() {
     const dataPoints = this.props.dataPoints;
+    // const dataPoints = [];
     return (
       <React.Fragment>
         {!_.isUndefined(dataPoints) && dataPoints.length > 0 ? (
@@ -171,7 +172,9 @@ export default class NDVI extends Component {
                     averageSpell={i18n.t('label.NDVI_info_average')}
                     maximumSpell={i18n.t('label.NDVI_info_maximum')}
                     selectedDataPoint={this.state.selectedDataPoint}
-                    onClickHelp={this.onClickHelp}
+                    toolTipHelpButtonSpell={i18n.t(
+                      'label.NDVI_tooltip_for_help_button'
+                    )}
                   />
                 </div>
               </div>
@@ -184,6 +187,9 @@ export default class NDVI extends Component {
                 <CarbonDetails
                   carbonValue={this.state.selectedDataPoint.carbon}
                   onClickHelp={this.onClickHelp}
+                  toolTipHelpButtonSpell={i18n.t(
+                    'label.NDVI_tooltip_for_help_button'
+                  )}
                 />
               </div>
             </div>
@@ -193,7 +199,9 @@ export default class NDVI extends Component {
             onRefreshClick={this.onClickRefresh}
             paragraphSpell={i18n.t('label.NDVI_on_load_paragraph')}
             refreshButtonSpell={i18n.t('label.NDVI_on_load_refresh_button')}
-            onClickHelp={this.onClickHelp}
+            toolTipHelpButtonSpell={i18n.t(
+              'label.NDVI_tooltip_for_help_button'
+            )}
           />
         )}
       </React.Fragment>

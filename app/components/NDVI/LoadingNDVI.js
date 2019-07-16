@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PrimaryButton from '../Common/Button/PrimaryButton';
+import ReactTooltip from 'react-tooltip';
+import { questionmark_orange } from '../../assets';
 
 const LoadingNDVI = props => {
   const onClick = () => {
     props.onRefreshClick('CLICKED REFRESH');
-  };
-
-  const onClickHelp = _ => {
-    props.onClickHelp('help');
   };
 
   return (
@@ -22,15 +21,24 @@ const LoadingNDVI = props => {
         </div>
       </div>
       <div className="row">
-        <div className="flex-1 refresh-box">
-          <button onClick={onClick} type="button" className="refresh-btn">
+        <div className="flex-1 refresh-box select-project_button__container">
+          <PrimaryButton onClick={onClick}>
             {props.refreshButtonSpell ? props.refreshButtonSpell : 'Refresh'}
-          </button>
+          </PrimaryButton>
         </div>
-        <div className="flex-1 text-center help-btn">
-          <button onClick={onClickHelp} type="button">
-            ?
-          </button>
+        <div className="flex-1 text-center help-btn ">
+          <div className="tooltip">
+            <a data-tip data-for="dedicate-trees-icon">
+              <img src={questionmark_orange} />
+            </a>
+            <ReactTooltip id="dedicate-trees-icon" effect="solid" type="dark">
+              <span className="tooltip-text">
+                {props.toolTipHelpButtonSpell
+                  ? props.toolTipHelpButtonSpell
+                  : 'none'}
+              </span>
+            </ReactTooltip>
+          </div>
         </div>
       </div>
     </div>
@@ -40,8 +48,8 @@ const LoadingNDVI = props => {
 export default LoadingNDVI;
 
 LoadingNDVI.propTypes = {
-  onClickHelp: PropTypes.func,
   paragraphSpell: PropTypes.string,
   refreshButtonSpell: PropTypes.string,
-  onRefreshClick: PropTypes.func
+  onRefreshClick: PropTypes.func,
+  toolTipHelpButtonSpell: PropTypes.string
 };

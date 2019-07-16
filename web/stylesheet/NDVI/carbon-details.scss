@@ -14,7 +14,6 @@
     h5 {
       width: 104px;
       height: 27px;
-      font-family: OpenSans;
       font-size: 20px;
       font-weight: bold;
       font-style: normal;
@@ -28,11 +27,8 @@
   .btn-container {
     margin-left: auto;
     align-self: center;
-    button {
-      background: transparent;
-      border-color: rgba(0, 0, 0, 0.6);
-      border-radius: 50px;
-      color: rgba(0, 0, 0, 0.6);
+    img {
+      width: 20px;
     }
   }
 }

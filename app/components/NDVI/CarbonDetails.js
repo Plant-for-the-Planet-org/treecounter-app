@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
+import { questionmark_orange } from '../../assets';
 
 const CarbonDetails = props => {
-  const onClickHelp = _ => {
-    props.onClickHelp('help');
-  };
   return (
     <React.Fragment>
       <div className="carbon-details-container">
@@ -13,7 +12,18 @@ const CarbonDetails = props => {
             <h5>{props.carbonValue} Kg</h5>
           </div>
           <div className="flex-1 text-center btn-container">
-            <button onClick={onClickHelp}>?</button>
+            <div className="tooltip">
+              <a data-tip data-for="dedicate-trees-icon">
+                <img src={questionmark_orange} />
+              </a>
+              <ReactTooltip id="dedicate-trees-icon" effect="solid" type="dark">
+                <span className="tooltip-text">
+                  {props.toolTipHelpButtonSpell
+                    ? props.toolTipHelpButtonSpell
+                    : 'none'}
+                </span>
+              </ReactTooltip>
+            </div>
           </div>
         </div>
       </div>
@@ -25,5 +35,5 @@ export default CarbonDetails;
 
 CarbonDetails.propTypes = {
   carbonValue: PropTypes.number,
-  onClickHelp: PropTypes.func
+  toolTipHelpButtonSpell: PropTypes.string
 };

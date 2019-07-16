@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import parseDate from './NDVIfunctions/parseDate';
+import { questionmark_orange } from '../../assets';
+import ReactTooltip from 'react-tooltip';
 
 const Info = props => {
   const aggregate = props.selectedDataPoint.ndviAggregate;
-  const onClickHelp = _ => {
-    props.onClickHelp('help info');
-  };
+
   return (
     <div className="info-component">
       {aggregate && (
@@ -30,7 +30,22 @@ const Info = props => {
               </p>
             </div>
             <div className="flex-1 text-center btn-container">
-              <button onClick={onClickHelp}>?</button>
+              <div className="tooltip">
+                <a data-tip data-for="dedicate-trees-icon">
+                  <img src={questionmark_orange} />
+                </a>
+                <ReactTooltip
+                  id="dedicate-trees-icon"
+                  effect="solid"
+                  type="dark"
+                >
+                  <span className="tooltip-text">
+                    {props.toolTipHelpButtonSpell
+                      ? props.toolTipHelpButtonSpell
+                      : 'none'}
+                  </span>
+                </ReactTooltip>
+              </div>
             </div>
           </div>
         </React.Fragment>
@@ -43,7 +58,6 @@ export default Info;
 
 Info.propTypes = {
   selectedDataPoint: PropTypes.object,
-  onClickHelp: PropTypes.func,
   year: PropTypes.number,
   monthUid: PropTypes.number,
   month: PropTypes.number,
@@ -55,5 +69,6 @@ Info.propTypes = {
   minimumSpell: PropTypes.string,
   averageSpell: PropTypes.string,
   maximumSpell: PropTypes.string,
-  ndviResulFromSpell: PropTypes.string
+  ndviResulFromSpell: PropTypes.string,
+  toolTipHelpButtonSpell: PropTypes.string
 };

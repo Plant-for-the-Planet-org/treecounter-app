@@ -10,7 +10,7 @@ const TimeSerie = props => {
     <View style={styles.container}>
       <Text>{props.year}</Text>
       {props.dataPoints.map((dataPoint, index) => {
-        if (!_.isEmpty(dataPoint)) {
+        if (!_.isEmpty(dataPoint) && dataPoint.status === 'available') {
           return (
             <View key={index}>
               <Circle

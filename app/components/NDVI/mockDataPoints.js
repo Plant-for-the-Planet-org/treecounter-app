@@ -8,7 +8,8 @@ const mockDataPoints = [
       min: 0.25,
       max: 0.75,
       avg: 0.5
-    }
+    },
+    status: 'available'
   },
   {
     monthUid: 201906,
@@ -19,7 +20,8 @@ const mockDataPoints = [
       min: -0.14662007507553332,
       max: 0.1517624439222388,
       avg: 0
-    }
+    },
+    status: 'available'
   },
   {
     monthUid: 201905,
@@ -30,7 +32,8 @@ const mockDataPoints = [
       min: 0.24662007507553332,
       max: 0.7517624439222388,
       avg: 0.5811577383449884
-    }
+    },
+    status: 'available'
   },
   {
     monthUid: 201904,
@@ -41,7 +44,8 @@ const mockDataPoints = [
       min: -0.54662007507553332,
       max: 0.3517624439222388,
       avg: 0.1811577383449884
-    }
+    },
+    status: 'available'
   },
   {
     monthUid: 201903,
@@ -52,7 +56,8 @@ const mockDataPoints = [
       min: -0.24662007507553332,
       max: 0.7517624439222388,
       avg: 0.2511577383449884
-    }
+    },
+    status: 'available'
   },
   {
     monthUid: 201902,
@@ -63,7 +68,8 @@ const mockDataPoints = [
       min: -0.84662007507553332,
       max: -0.217624439222388,
       avg: -0.411577383449884
-    }
+    },
+    status: 'available'
   },
   {
     monthUid: 201901,
@@ -74,7 +80,8 @@ const mockDataPoints = [
       min: 0.24662007507553332,
       max: 0.7517624439222388,
       avg: 0.3811577383449884
-    }
+    },
+    status: 'available'
   },
   {
     monthUid: 201812,
@@ -85,7 +92,8 @@ const mockDataPoints = [
       min: 0.24662007507553332,
       max: 0.7517624439222388,
       avg: 0.3811577383449884
-    }
+    },
+    status: 'available'
   },
   {
     monthUid: 201811,
@@ -96,7 +104,8 @@ const mockDataPoints = [
       min: 0.24662007507553332,
       max: 0.7517624439222388,
       avg: 0.3811577383449884
-    }
+    },
+    status: 'available'
   },
   {
     monthUid: 201810,
@@ -107,7 +116,8 @@ const mockDataPoints = [
       min: 0.24662007507553332,
       max: 0.7517624439222388,
       avg: 0.3811577383449884
-    }
+    },
+    status: 'available'
   },
   {
     monthUid: 201711,
@@ -118,7 +128,8 @@ const mockDataPoints = [
       min: 0.24662007507553332,
       max: 0.7517624439222388,
       avg: 0.3811577383449884
-    }
+    },
+    status: 'available'
   },
   {
     monthUid: 201710,
@@ -129,7 +140,8 @@ const mockDataPoints = [
       min: 0.24662007507553332,
       max: 0.7517624439222388,
       avg: 0.3811577383449884
-    }
+    },
+    status: 'unavailable'
   }
 ];
 

@@ -11,7 +11,7 @@ const TimeSerie = props => {
           <p className="date">{props.year}</p>
         </div>
         {props.dataPoints.map((dataPoint, index) => {
-          if (!_.isEmpty(dataPoint)) {
+          if (!_.isEmpty(dataPoint) && dataPoint.status === 'available') {
             return (
               <div key={index} className="flex-1">
                 <Circle

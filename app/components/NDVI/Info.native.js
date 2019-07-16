@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import parseDate from './NDVIfunctions/parseDate';
 import { View, Text } from 'react-native';
 import TouchableItem from '../Common/TouchableItem.native';
+import carbonStyle from '../../styles/NDVI/Carbon';
 
 const textCommonStyle = { fontSize: 10, lineHeight: 14 };
 const boldTextStyle = { fontWeight: 'bold' };
@@ -39,12 +40,7 @@ const Info = props => {
             </View>
             <TouchableItem
               style={{
-                height: 20,
-                width: 20,
-                borderRadius: 50,
-                borderWidth: 1,
-                borderColor: '#990000',
-                alignItems: 'center'
+                ...carbonStyle.info
               }}
             >
               <Text>?</Text>

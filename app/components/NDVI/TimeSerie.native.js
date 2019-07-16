@@ -28,7 +28,6 @@ const TimeSerie = props => {
                 onClick={() => {
                   props.onClick(dataPoint.monthUid);
                 }}
-                {...dataPoint}
               />
             </View>
           );

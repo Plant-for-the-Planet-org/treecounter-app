@@ -4,7 +4,9 @@ import parseDate from './NDVIfunctions/parseDate';
 
 const Info = props => {
   const aggregate = props.selectedDataPoint.ndviAggregate;
-
+  const onClickHelp = _ => {
+    props.onClickHelp('help info');
+  };
   return (
     <div className="info-component">
       {aggregate && (
@@ -28,7 +30,7 @@ const Info = props => {
               </p>
             </div>
             <div className="flex-1 text-center btn-container">
-              <button>?</button>
+              <button onClick={onClickHelp}>?</button>
             </div>
           </div>
         </React.Fragment>
@@ -41,6 +43,7 @@ export default Info;
 
 Info.propTypes = {
   selectedDataPoint: PropTypes.object,
+  onClickHelp: PropTypes.func,
   year: PropTypes.number,
   monthUid: PropTypes.number,
   month: PropTypes.number,

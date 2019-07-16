@@ -12,5 +12,6 @@
   "NDVI_legend_grasslands": "Grasslands",
   "NDVI_legend_dense_vegetation": "Dense Vegetation",
   "NDVI_on_load_paragraph": "Currently Fetching NDVI. Please check in a minute or two.",
-  "NDVI_on_load_refresh_button": "Refresh"
+  "NDVI_on_load_refresh_button": "Refresh",
+  "NDVI_carbon_title": "Captured CO2"
 }

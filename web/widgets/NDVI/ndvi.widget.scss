@@ -9,12 +9,12 @@
 .row {
   display: flex;
   flex-direction: row;
-  // flex-wrap: wrap;
 }
 
 .column {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .letter-box {

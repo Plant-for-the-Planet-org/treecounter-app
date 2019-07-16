@@ -1,9 +1,5 @@
-import { initialProps } from '../config';
-
-const { mediaPath } = initialProps;
-
 const initialState = {
-  mediaPath
+  mediaPath: process.env.MEDIA_PATH
 };
 
 export default initialState;

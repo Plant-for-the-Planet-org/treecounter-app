@@ -5,14 +5,12 @@ import App from './app/components/App';
 
 import { getApiRoute } from '../../../app/actions/apiRouting';
 import axios from 'axios';
-import { context } from '../../../app/config';
 import './treecounter.widget.scss';
 // import native Shim to compile ES6 class as it is
 
 import '../common/native-shim';
 import PFTPWidgetTreeCounter from './PFTPNativeTreeCounterWidget';
-const { scheme, host, base: baseUrl } = context;
-const serverName = `${scheme}://${host}`;
+const serverName = `${process.env.SCHEME}://${process.env.HOST}`;
 
 export async function getRequest(route, params) {
   let url = await getApiRoute(route, params);
@@ -102,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 showGraphics={!!showGraphics && !isStandardTreecounter}
                 showDonateButton={!!showDonateButton}
                 serverName={serverName}
-                baseUrl={baseUrl}
+                baseUrl={process.env.BASE_URL}
                 backgroundColor={backgroundColor}
                 isStandardTreecounter={isStandardTreecounter}
                 projectId={projectId}

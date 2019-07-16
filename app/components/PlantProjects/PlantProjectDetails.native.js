@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import { context } from '../../../app/config/index';
 import { View, Text, Linking, Image } from 'react-native';
 import VideoContainer from '../../components/Common/VideoContainer';
 import React from 'react';
@@ -19,7 +18,7 @@ class PlantProjectDetails extends React.Component {
   }
   render() {
     let vUrl = this.props.videoUrl;
-    if (context.debug && !this.props.videoUrl) {
+    if (process.env.DEBUG && !this.props.videoUrl) {
       vUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
     }
     return (

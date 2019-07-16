@@ -12,7 +12,6 @@ import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 import { View, Text, Alert, Linking } from 'react-native';
 import { paymentFee } from '../../helpers/utils';
 import { getLocalRoute } from '../../actions/apiRouting';
-import { context } from '../../config';
 import TabContainer from '../../containers/Menu/TabContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
 
@@ -124,7 +123,7 @@ export default class DonateTrees extends React.PureComponent {
 
   // open your gateway
   openGateWay = async url => {
-    url = context.scheme + '://' + context.host + url;
+    url = process.env.SCHEME + '://' + process.env.HOST + url;
     const canOpen = await Linking.canOpenURL(url);
     if (canOpen) {
       Linking.openURL(url).catch(err =>

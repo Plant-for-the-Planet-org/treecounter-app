@@ -1,5 +1,3 @@
-import { context } from '../config';
-
 /**
  * Possible entityKeys are:
  *  - 'profile'
@@ -11,7 +9,7 @@ import { context } from '../config';
  * @returns {string}
  */
 export const mediaPath = (filename, entityKey, sizeKey) => {
-  return `${context.baseUrl}/${
-    context.mediaPath
+  return `${process.env.BASE_URL}${
+    process.env.MEDIA_PATH
   }/${entityKey}/${sizeKey}/${filename}`;
 };

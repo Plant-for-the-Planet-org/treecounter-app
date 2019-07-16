@@ -7,7 +7,6 @@ import { getAccessToken } from './user';
 import { getApiRoute } from '../actions/apiRouting';
 import { getStore } from '../components/App/index';
 import { logoutUser } from '../actions/authActions';
-import { context } from '../config';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -122,8 +121,7 @@ export async function postRequest(
 }
 
 export async function postDirectRequest(path, data, authenticated = false) {
-  const { scheme, host } = context;
-  const serverName = `${scheme}://${host}`;
+  const serverName = `${process.env.SCHEME}://${process.env.HOST}`;
   const url = `${serverName}${path}`;
   return await axios
     .post(url, data, await getHeaders(authenticated))

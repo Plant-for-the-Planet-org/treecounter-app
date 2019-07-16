@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { mapCollapse, mapExpand } from '../../assets';
 import i18n from '../../locales/i18n.js';
 
-//import { context } from '../../config/index';
-
 class MapLayerView extends React.Component {
   constructor(props) {
     console.log('MapLayerView: props ', props);
@@ -45,10 +43,10 @@ class MapLayerView extends React.Component {
     document.addEventListener('keydown', this.escFunction, false);
     loadModules(['esri/core/urlUtils', 'esri/config'])
       .then(([urlUtils, esriConfig]) => {
-        // const proxyUrl = `${context.scheme}://${context.host}/esri/proxy.php`;
+        // const proxyUrl = `${process.env.SCHEME}://${process.env.HOST}/esri/proxy.php`;
         // console.log('proxyUrl: ', proxyUrl);
         //
-        // //const corsEnabledServer =`${context.host}:80`;
+        // //const corsEnabledServer =`${process.env.HOST}:80`;
         // const corsEnabledServer = `treecounter.plant-for-the-planet.org`;
         // console.log('corsEnabledServer: ', corsEnabledServer);
         //

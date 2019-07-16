@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import * as images from '../../assets';
 import i18n from '../../locales/i18n';
 import { getLocalRoute } from '../../actions/apiRouting';
-import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 
@@ -36,14 +35,14 @@ export default class Menu extends Component {
       let redirectPath = '';
       if (pathname.split('/').includes('home')) {
         redirectPath =
-          context.scheme +
+          process.env.SCHEME +
           '://' +
-          context.host +
+          process.env.HOST +
           getLocalRoute('app_treecounter', {
             treecounter: this.props.userProfile.treecounter.slug
           });
       } else {
-        redirectPath = context.scheme + '://' + context.host + pathname;
+        redirectPath = process.env.SCHEME + '://' + process.env.HOST + pathname;
       }
       return (
         <div className="share_buttons">

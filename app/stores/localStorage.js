@@ -7,7 +7,7 @@ export const loadState = () => {
       }
       resolve(JSON.parse(serializedState));
     } catch (err) {
-      reject(null);
+      reject(err);
     }
   });
 };
@@ -25,12 +25,23 @@ export const saveItem = (key, value) => {
 
 export const fetchItem = key => {
   return new Promise(function(resolve, reject) {
-    if (window.localStorage.getItem(key)) {
-      resolve(window.localStorage.getItem(key));
+    const got = window.localStorage.getItem(key);
+    if (got === null) {
+      reject(new Error(`${key} not in localStorage`));
     } else {
-      reject('Key not found');
+      resolve(got);
     }
   });
+};
+
+/**
+ * Get a possibly unset localStorage item.
+ * Use this when it is not an error for the item to be unset.
+ *
+ * @returns string | null
+ */
+export const getItem = key => {
+  return window.localStorage.getItem(key);
 };
 
 export const clearStorage = () => {

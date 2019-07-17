@@ -177,7 +177,7 @@ export function getSuggestions(value) {
       if (jdata) {
         resolve(jdata.filter(person => regex.test(getSuggestionValue(person))));
       } else {
-        reject(jdata);
+        reject(new Error(`/suggest returned nothing: ${jdata}`));
       }
     });
   });

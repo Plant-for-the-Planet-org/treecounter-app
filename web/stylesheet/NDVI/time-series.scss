@@ -1,7 +1,9 @@
 .time-series-component {
-  margin-bottom: 16px;
+  margin-bottom: 22px;
   .time-serie-component {
     height: 21px;
+    margin-top: 7px;
+    margin-bottom: 7px;
     .flex-1 {
       flex: 1;
       height: 9px;
@@ -13,7 +15,7 @@
       margin: 0;
       width: 32px;
       height: 19px;
-      font-family: OpenSans;
+      // font-family: OpenSans;
       font-size: 14px;
       font-weight: normal;
       font-style: normal;

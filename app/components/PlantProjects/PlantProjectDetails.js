@@ -48,7 +48,11 @@ class PlantProjectDetails extends React.Component {
             url={videoUrl}
           />
         )}
-        {<NDVI ndviUid={ndviUid} />}
+        {
+          <div className={'ndvi-conatiner'}>
+            <NDVI ndviUid={ndviUid} />
+          </div>
+        }
       </div>
     );
   }

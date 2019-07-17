@@ -34,10 +34,9 @@
 .carbon-box {
   h4 {
     padding: 18px 0;
-    width: 94px;
     height: 19px;
     opacity: 0.8;
-    font-family: OpenSans;
+    // font-family: OpenSans;
     font-size: 14px;
     font-weight: 600;
     font-style: normal;
@@ -52,5 +51,5 @@
 .column {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  // width: 100%;
 }

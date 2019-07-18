@@ -1,9 +1,9 @@
 .gradient-result-line-component {
-  margin-top: 16px;
+  margin-top: 20px;
   .title {
     margin-bottom: 16px;
     height: 19px;
-    font-family: OpenSans;
+    // font-family: OpenSans;
     font-size: 14px;
     font-weight: normal;
     font-style: normal;
@@ -16,7 +16,6 @@
 
   .gradient-wrapper {
     position: relative;
-    bottom: 6px;
     .gradient-result-line {
       color: #fff;
       width: 100%;

@@ -3,7 +3,7 @@ const mockDataPoints = [
     monthUid: 201907,
     month: 7,
     year: 2019,
-    carbon: 3716,
+    carbon: 2434,
     ndviAggregate: {
       min: 0.25,
       max: 0.75,
@@ -15,7 +15,7 @@ const mockDataPoints = [
     monthUid: 201906,
     month: 6,
     year: 2019,
-    carbon: 3717,
+    carbon: 4567,
     ndviAggregate: {
       min: -0.14,
       max: 0.15,
@@ -27,7 +27,7 @@ const mockDataPoints = [
     monthUid: 201905,
     month: 5,
     year: 2019,
-    carbon: 3716,
+    carbon: 6784,
     ndviAggregate: {
       min: 0.24,
       max: 0.75,
@@ -39,7 +39,7 @@ const mockDataPoints = [
     monthUid: 201904,
     month: 4,
     year: 2019,
-    carbon: 3716,
+    carbon: 9867,
     ndviAggregate: {
       min: -0.54,
       max: 0.35,
@@ -63,7 +63,7 @@ const mockDataPoints = [
     monthUid: 201902,
     month: 2,
     year: 2019,
-    carbon: 3716,
+    carbon: 3190,
     ndviAggregate: {
       min: -0.84,
       max: -0.21,
@@ -75,7 +75,7 @@ const mockDataPoints = [
     monthUid: 201901,
     month: 1,
     year: 2019,
-    carbon: 3716,
+    carbon: 4100,
     ndviAggregate: {
       min: 0.24,
       max: 0.75,
@@ -87,7 +87,7 @@ const mockDataPoints = [
     monthUid: 201812,
     month: 12,
     year: 2018,
-    carbon: 3716,
+    carbon: 2100,
     ndviAggregate: {
       min: 0.24,
       max: 0.75,
@@ -99,7 +99,7 @@ const mockDataPoints = [
     monthUid: 201811,
     month: 11,
     year: 2018,
-    carbon: 3716,
+    carbon: 2500,
     ndviAggregate: {
       min: 0.24,
       max: 0.75,
@@ -123,7 +123,7 @@ const mockDataPoints = [
     monthUid: 201711,
     month: 1,
     year: 2017,
-    carbon: 3716,
+    carbon: 5324,
     ndviAggregate: {
       min: 0.24,
       max: 0.75,
@@ -135,7 +135,7 @@ const mockDataPoints = [
     monthUid: 201710,
     month: 2,
     year: 2017,
-    carbon: 3716,
+    carbon: 3456,
     ndviAggregate: {
       min: 0.24,
       max: 0.75,

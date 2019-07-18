@@ -1,3 +1,5 @@
+@import "./ndvi-portal.scss";
+
 .info-component {
   margin-top: 21px;
   b {
@@ -11,19 +13,11 @@
   }
 
   p {
-    //---need to be moved in the ndvi portal
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    letter-spacing: normal;
-    // ----
+    @extend .ndvi-default-typography;
     font-size: 10px;
     line-height: 1.4;
     text-align: left;
     color: rgba(0, 0, 0, 0.6);
     word-break: break-word;
   }
-}
-.letter-box {
-  flex: 1;
 }

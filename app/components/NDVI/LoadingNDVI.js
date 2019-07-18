@@ -26,10 +26,10 @@ const LoadingNDVI = props => {
             {props.refreshButtonSpell ? props.refreshButtonSpell : 'Refresh'}
           </PrimaryButton>
         </div>
-        <div className="flex-1 text-center help-btn ">
+        <div className="text-center help-btn ">
           <div className="tooltip">
             <a data-tip data-for="dedicate-trees-icon">
-              <img src={questionmark_orange} />
+              <img className="ndvi-img" src={questionmark_orange} />
             </a>
             <ReactTooltip id="dedicate-trees-icon" effect="solid" type="dark">
               <span className="tooltip-text">

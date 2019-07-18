@@ -10,12 +10,6 @@
     justify-content: space-between;
   }
 
-  .text-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   p {
     // margin-top: 10px;
     // height: 5px;
@@ -29,13 +23,6 @@
     text-align: left;
     color: rgba(0, 0, 0, 0.6);
     word-break: break-word;
-  }
-  .btn-container {
-    margin-left: auto;
-    align-self: center;
-    img {
-      width: 20px;
-    }
   }
 }
 .letter-box {

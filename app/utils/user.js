@@ -1,13 +1,13 @@
 import jwtDecode from 'jwt-decode';
 
-import { fetchItem, getItem, saveItem } from '../stores/localStorage';
+import { fetchItem, saveItem } from '../stores/localStorage';
 import { postRequest } from './api';
 
 /**
  * @returns string | null
  */
 export const getAccessToken = async () => {
-  const token = getItem('token');
+  const token = await fetchItem('token');
   if (token) {
     // This may throw an Error if localStorage is broken
     // or POST requests timeout

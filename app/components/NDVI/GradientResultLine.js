@@ -53,8 +53,8 @@ class GradientResultLine extends React.PureComponent {
               <div
                 className="highlight-line"
                 style={{
-                  left: minPercentage,
-                  width: maxPercentage,
+                  left: minPercentage + '%',
+                  width: `${maxPercentage - minPercentage}%`,
                   backgroundImage: bgStyle.backgroundImage
                 }}
               />

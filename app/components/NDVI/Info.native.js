@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import parseDate from './NDVIfunctions/parseDate';
 import { View, Text } from 'react-native';
 import TouchableItem from '../Common/TouchableItem.native';
-import carbonStyle from '../../styles/NDVI/Carbon';
+import styles from '../../styles/NDVI/Info';
 
 const textCommonStyle = { fontSize: 10, lineHeight: 14 };
 const boldTextStyle = { fontWeight: 'bold' };
@@ -14,13 +14,7 @@ const Info = props => {
     <View style={{ marginTop: 21 }}>
       {aggregate && (
         <React.Fragment>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center'
-            }}
-          >
+          <View style={styles.container}>
             <View>
               <Text style={textCommonStyle}>
                 {`${props.ndviResulFromSpell}  `}
@@ -40,7 +34,7 @@ const Info = props => {
             </View>
             <TouchableItem
               style={{
-                ...carbonStyle.info
+                ...styles.info
               }}
             >
               <Text>?</Text>

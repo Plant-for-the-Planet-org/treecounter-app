@@ -5,7 +5,7 @@ let lineBreakMargin = -20;
 if (Platform.OS === 'android') {
   lineBreakMargin = -30;
 }
-export default (timeSeries = EStyleSheet.create({
+export default (timeSeriesStyle = EStyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',

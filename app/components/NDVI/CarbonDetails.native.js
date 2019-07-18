@@ -8,10 +8,6 @@ import i18n from '../../locales/i18n.js';
 import { delimitNumbers } from '../../utils/utils';
 
 const CarbonDetails = props => {
-  const onClickHelp = _ => {
-    props.onClickHelp && props.onClickHelp('help');
-  };
-
   return (
     <View style={styles.container}>
       <View>
@@ -20,7 +16,7 @@ const CarbonDetails = props => {
         </Text>
       </View>
 
-      <CardLayout style={{ padding: 16 }}>
+      <CardLayout style={styles.cardLayout}>
         <View
           style={{
             ...styles.carbonContainer

@@ -3,16 +3,19 @@
     margin-top: 10px;
   }
 
-  .title {
-    width: 65px;
-    height: 19px;
-    // font-family: OpenSans;
-    font-size: 14px;
+  .title,
+  .gradient-container {
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
-    line-height: 1.36;
     letter-spacing: normal;
+  }
+
+  .title {
+    width: 65px;
+    height: 19px;
+    font-size: 14px;
+    line-height: 1.36;
     text-align: left;
     color: rgba(0, 0, 0, 0.6);
   }
@@ -20,12 +23,7 @@
   .gradient-description {
     margin: 0;
     height: 14px;
-    // font-family: OpenSans;
     font-size: 10px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    letter-spacing: normal;
     line-height: 1.4;
     text-align: left;
     color: rgba(0, 0, 0, 0.6);

@@ -96,7 +96,10 @@ export default class Menu extends Component {
     let urlBreak = url.split('/');
     //console.log(urlBreak);
     const { navigation } = this.props;
-    if (urlBreak.indexOf('account-activate') !== -1) {
+    if (
+      urlBreak.indexOf('account-activate') !== -1 ||
+      urlBreak.indexOf('reset-password') !== -1
+    ) {
       setTimeout(
         () =>
           updateRoute(

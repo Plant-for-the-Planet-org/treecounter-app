@@ -46,7 +46,7 @@ class NDVIContainer extends React.Component {
   }
 
   render() {
-    if (!ENABLED_NDVI) {
+    if (!ENABLED_NDVI || !this.props.ndviUid) {
       return null;
     }
     return !this.state.loading ? (

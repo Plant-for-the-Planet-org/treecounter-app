@@ -12,10 +12,10 @@ const CarbonDetails = props => {
           <div className="flex-1 carbon-value-box">
             <h5>{delimitNumbers(props.carbonValue)} Kg</h5>
           </div>
-          <div className="flex-1 text-center btn-container">
+          <div className="text-center btn-container">
             <div className="tooltip">
               <a data-tip data-for="dedicate-trees-icon">
-                <img src={questionmark_orange} />
+                <img className="ndvi-img" src={questionmark_orange} />
               </a>
               <ReactTooltip id="dedicate-trees-icon" effect="solid" type="dark">
                 <span className="tooltip-text">

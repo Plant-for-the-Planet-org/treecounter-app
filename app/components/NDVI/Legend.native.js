@@ -3,29 +3,22 @@ import Circle from '../../components/NDVI/Circle.native';
 import { View, Text } from 'react-native';
 import i18n from '../../locales/i18n.js';
 //styles
+import styles from '../../styles/NDVI/Legend';
+
 const LegendInfo = props => {
   return (
-    <View style={{ flexDirection: 'row', marginTop: 10, alignItems: 'center' }}>
+    <View style={styles.legendInfoContainer}>
       <Circle ndviAggregate={{ ...props.ndviAggregate, isColor: true }} />
-      <Text style={{ marginLeft: 6, fontSize: 10 }}> {props.title}</Text>
+      <Text style={styles.legendInfoText}> {props.title}</Text>
     </View>
   );
 };
+
 const Legend = props => {
   return (
-    <View
-      style={{
-        marginTop: 22
-      }}
-    >
+    <View style={styles.legendContainer}>
       <Text>{i18n.t('label.NDVI_legend_indicators')}</Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between'
-        }}
-      >
+      <View style={styles.legendWrapper}>
         {/* indicatorsSpell={}
           grasslandsSpell={i18n.t('label.NDVI_legend_grasslands')}
           rockSandSnowSpell={i18n.t('label.NDVI_legend_rock_sand_snow')}

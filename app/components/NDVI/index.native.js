@@ -10,17 +10,14 @@ import CardLayout from '../Common/Card';
 import _ from 'lodash';
 import i18n from '../../locales/i18n.js';
 import CarbonDetails from './CarbonDetails';
+import styles from '../../styles/NDVI/Index';
 
-const monthStyle = {
-  height: 15,
-  width: 15,
-  fontSize: 13
-};
 export default class NDVIContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { selectedDataPoint: this.props.dataPoints[0] };
   }
+
   onClickCircle = circleMonthuid => {
     this.setState({
       selectedDataPoint: this.props.dataPoints[
@@ -28,6 +25,7 @@ export default class NDVIContainer extends Component {
       ]
     });
   };
+
   findDataPointIndex(monthUid) {
     return _.findIndex(this.props.dataPoints, function(o) {
       return o.monthUid == monthUid;
@@ -36,16 +34,11 @@ export default class NDVIContainer extends Component {
 
   render() {
     const dataPoints = this.props.dataPoints;
+    const monthStyle = styles.monthStyle;
     return (
       <React.Fragment>
         <CardLayout>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginLeft: 2
-            }}
-          >
+          <View style={styles.container}>
             <Text style={{ opacity: 0 }}>2222</Text>
             <Text style={monthStyle}>J</Text>
             <Text style={monthStyle}>F</Text>
@@ -77,10 +70,7 @@ export default class NDVIContainer extends Component {
           />
         </CardLayout>
 
-        <CarbonDetails
-          carbonValue={this.state.selectedDataPoint.carbon}
-          onClickHelp={this.onClickHelp}
-        />
+        <CarbonDetails carbonValue={this.state.selectedDataPoint.carbon} />
       </React.Fragment>
     );
   }

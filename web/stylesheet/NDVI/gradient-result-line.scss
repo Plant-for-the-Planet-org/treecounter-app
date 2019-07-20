@@ -1,15 +1,13 @@
+@import "./ndvi-portal.scss";
+
 .gradient-result-line-component {
   margin-top: 20px;
   .title {
+    @extend .ndvi-default-typography;
     margin-bottom: 16px;
     height: 19px;
-    // font-family: OpenSans;
     font-size: 14px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
     line-height: 1.36;
-    letter-spacing: normal;
     text-align: left;
     color: rgba(0, 0, 0, 0.6);
   }
@@ -40,23 +38,7 @@
       height: 16px;
       border-radius: 4px;
       opacity: 0.4;
-      background-image: linear-gradient(
-        to right,
-        rgba(176, 219, 114, 0.58),
-        rgba(140, 203, 123, 0.78)
-      );
-    }
-  }
-
-  ul {
-    position: relative;
-    display: flex;
-    list-style: none;
-    padding: 0;
-    li {
-      width: 15px;
-      font-size: 8px;
-      color: transparent;
+      background-image: linear-gradient(to right, rgba(176, 219, 114, 0.58), rgba(140, 203, 123, 0.78));
     }
   }
 }

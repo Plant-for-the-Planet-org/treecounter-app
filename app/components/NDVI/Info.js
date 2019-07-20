@@ -29,10 +29,10 @@ const Info = props => {
                 <b>{aggregate.max ? aggregate.max : 'NaN'}</b>
               </p>
             </div>
-            <div className="flex-1 text-center btn-container">
+            <div className="text-center btn-container">
               <div className="tooltip">
                 <a data-tip data-for="dedicate-trees-icon">
-                  <img src={questionmark_orange} />
+                  <img className="ndvi-img" src={questionmark_orange} />
                 </a>
                 <ReactTooltip
                   id="dedicate-trees-icon"

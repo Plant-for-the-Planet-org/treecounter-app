@@ -1,0 +1,65 @@
+.ndvi-default-typography {
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+}
+
+.carbon-box {
+  h4 {
+    @extend .ndvi-default-typography;
+    padding: 18px 0;
+    height: 19px;
+    opacity: 0.8;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.36;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.ndvi-img {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.btn-container {
+  margin-left: auto;
+  align-self: center;
+}
+
+.help-btn {
+  margin-top: 4%;
+  align-self: center;
+}
+
+.text-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.pr-1 {
+  padding-right: 0.5rem;
+}
+
+.pt-1 {
+  padding-top: 0.5rem;
+}
+
+.pr-2 {
+  padding-right: 1.1rem;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.letter-box {
+  flex: 1;
+}

@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (timeSeries = EStyleSheet.create({
+export default (circleStyle = EStyleSheet.create({
   circle: {
     borderRadius: 50,
     height: 14,

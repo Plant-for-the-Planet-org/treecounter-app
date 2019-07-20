@@ -17,7 +17,6 @@ class NDVIContainer extends React.Component {
   handleRefresh = () => {
     NDVIAction(this.props.ndviUid).then(
       success => {
-        // debugger;
         try {
           this.setState({
             loading: false,

@@ -33,8 +33,6 @@ class TimeSeries extends React.Component {
               dataPoints={data.dataPoints}
             />
           ))}
-
-        {/* <Text>TimeSeries</Text> */}
       </View>
     );
   }

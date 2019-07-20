@@ -5,6 +5,7 @@ import NDVI from '../../components/NDVI';
 import mockDataPoints from '../../components/NDVI/mockDataPoints';
 import LoadingIndicators from '../../components/Common/LoadingIndicator';
 
+const ENABLED_NDVI = true;
 class NDVIContainer extends React.Component {
   constructor() {
     super();
@@ -45,6 +46,9 @@ class NDVIContainer extends React.Component {
   }
 
   render() {
+    if (!ENABLED_NDVI) {
+      return null;
+    }
     return !this.state.loading ? (
       <NDVI dataPoints={this.state.dataPoints} refresh={this.handleRefresh} />
     ) : (

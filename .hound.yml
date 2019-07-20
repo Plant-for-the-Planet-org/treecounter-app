@@ -1,5 +1,3 @@
 eslint:
   ignore_file: .eslintignore
-
-jshint:
-  config_file: .jshintrc
+  config_file: .eslintrc.json

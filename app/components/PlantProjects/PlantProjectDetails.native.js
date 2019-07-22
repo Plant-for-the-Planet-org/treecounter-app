@@ -9,6 +9,7 @@ import styles from '../../styles/selectplantproject/plant-details.native';
 import { link } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import i18n from '../../locales/i18n';
+import NewUserContributions from '../UserContributions/NewUserContribution.native';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectDetails
  */
@@ -40,7 +41,9 @@ class PlantProjectDetails extends React.Component {
             </Text>
           </TouchableItem>
         ) : null}
-
+        {/* <View> */}
+        <NewUserContributions />
+        {/* </View> */}
         <View style={styles.videoContainer}>
           <VideoContainer url={vUrl} />
         </View>

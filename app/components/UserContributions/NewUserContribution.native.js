@@ -5,7 +5,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  //   Animated,
+  // Button,
+  Animated,
   ScrollView
 } from 'react-native';
 import styles from '../../styles/newUserContributions/newUserContributions';
@@ -22,10 +23,19 @@ export default class NewUserContributions extends React.Component {
 
   render() {
     return (
-      <View contentContainerStyle={{ flex: 1 }}>
-        <View>
-          <Text>500,000</Text>
-          <TouchableOpacity>Planted</TouchableOpacity>
+      <View>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row'
+          }}
+        >
+          <Text style={{ display: 'flex', flex: 1 }}>500,000</Text>
+          <TouchableOpacity>
+            <Text style={{ display: 'flex', flex: 1, color: 'red' }}>
+              Planted
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     );

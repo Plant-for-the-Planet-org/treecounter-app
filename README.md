@@ -77,6 +77,10 @@ If you have problems with a cached version of the bundle, you can stop the Metro
 react-native start --reset-cache
 ```
 
+## Development process
+
+This project uses GitFlow (https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) with Master-Branch `master` and Development-Branch `develop`. The Master-Branch will be automatically released by CircleCI to the production system. There are currently some more protected branches (`staging` with mockup data, `test` and `devel` with test data) also build by CircleCI automatically and mapped to test backends using the branch name as subdomain.
+
 ## Versioning
 
 *App Versioning Guide*

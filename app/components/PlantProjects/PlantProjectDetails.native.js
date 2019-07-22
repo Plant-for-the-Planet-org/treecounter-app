@@ -18,6 +18,15 @@ class PlantProjectDetails extends React.Component {
     super(props);
     this._goToURL = this._goToURL.bind(this);
   }
+
+  onClickDeleteUserContributor = props => {
+    console.log('Clicked Delete ');
+  };
+
+  onClickEditUserContributor = props => {
+    console.log('Clicked Edit ');
+  };
+
   render() {
     let vUrl = this.props.videoUrl;
     if (context.debug && !this.props.videoUrl) {
@@ -42,7 +51,14 @@ class PlantProjectDetails extends React.Component {
           </TouchableItem>
         ) : null}
         {/* <View> */}
-        <NewUserContributions />
+        <NewUserContributions
+          treeCount={500.0}
+          location={'Yucatan, Mexico'}
+          dedicatedTo={'Dedicated to Sagar Aryal'}
+          plantedDate={'March 3,2019'}
+          onClickDelete={this.onClickDeleteUserContributor}
+          onClickEdit={this.onClickEditUserContributor}
+        />
         {/* </View> */}
         <View style={styles.videoContainer}>
           <VideoContainer url={vUrl} />

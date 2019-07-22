@@ -1,20 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 // import i18n from '../../locales/i18n.js';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  // Button,
-  Animated,
-  ScrollView
-} from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import styles from '../../styles/newUserContributions/newUserContributions';
-// import PrimaryButton from '../Common/Button/PrimaryButton';
+
+import EditIcon from '../../assets/images/baseline-edit.png';
+import DeleteIcon from '../../assets/images/baseline-delete.png';
 
 export default class NewUserContributions extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {};
   }
@@ -22,20 +18,51 @@ export default class NewUserContributions extends React.Component {
   _handleIndexChange = index => this.setState({ index });
 
   render() {
+    const props = this.props;
     return (
-      <View>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row'
-          }}
-        >
-          <Text style={{ display: 'flex', flex: 1 }}>500,000</Text>
-          <TouchableOpacity>
-            <Text style={{ display: 'flex', flex: 1, color: 'red' }}>
+      <View style={styles.container}>
+        <View style={{ flex: 2, paddingTop: 10 }}>
+          <Text style={styles.treeCount}>
+            {props.treeCount ? props.treeCount : 0}
+          </Text>
+          <Text style={styles.text}>
+            {props.location ? props.location : 'none'}
+          </Text>
+          <Text style={styles.text}>
+            {props.dedicatedTo
+              ? 'Dedicated to ' + props.dedicatedTo
+              : 'Dedicated to'}
+          </Text>
+          <Text style={styles.text}>
+            {props.plantedDate ? props.plantedDate : 'none'}
+          </Text>
+        </View>
+        <View style={{ flex: 1, justifyContent: 'space-between' }}>
+          <TouchableOpacity
+            style={{
+              alignItems: 'center',
+              backgroundColor: '#F1F6E7',
+              borderBottomLeftRadius: 4
+            }}
+          >
+            <Text style={{ paddingVertical: 10, color: '#89b53a' }}>
               Planted
             </Text>
           </TouchableOpacity>
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity
+              onPress={props.onClickDeleteUserContributor}
+              style={styles.button}
+            >
+              <Image style={styles.image} source={DeleteIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={props.onClickEditUserContributor}
+              style={styles.button}
+            >
+              <Image style={styles.image} source={EditIcon} />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -43,8 +70,8 @@ export default class NewUserContributions extends React.Component {
 }
 
 NewUserContributions.propTypes = {
-  // userProfileId: PropTypes.number.isRequired,
-  // userContributions: PropTypes.array.isRequired,
-  // navigation: PropTypes.any,
-  // deleteContribution: PropTypes.func
+  // treeCount: PropTypes.number,
+  // location: PropTypes.string,
+  // dedicatedTo: PropTypes.string,
+  // plantedDate: propTypes.string
 };

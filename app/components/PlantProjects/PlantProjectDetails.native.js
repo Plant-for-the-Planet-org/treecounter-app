@@ -34,6 +34,14 @@ class PlantProjectDetails extends React.Component {
     }
     return (
       <View style={styles.carousalContainer}>
+        <NewUserContributions
+          treeCount={500.0}
+          location={'Yucatan, Mexico'}
+          dedicatedTo={'Sagar Aryal'}
+          plantedDate={'March 3,2019'}
+          onClickDelete={this.onClickDeleteUserContributor}
+          onClickEdit={this.onClickEditUserContributor}
+        />
         <PlantProjectImageCarousel images={this.props.plantProjectImages} />
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>{this.props.description}</Text>
@@ -50,16 +58,6 @@ class PlantProjectDetails extends React.Component {
             </Text>
           </TouchableItem>
         ) : null}
-        {/* <View> */}
-        <NewUserContributions
-          treeCount={500.0}
-          location={'Yucatan, Mexico'}
-          dedicatedTo={'Dedicated to Sagar Aryal'}
-          plantedDate={'March 3,2019'}
-          onClickDelete={this.onClickDeleteUserContributor}
-          onClickEdit={this.onClickEditUserContributor}
-        />
-        {/* </View> */}
         <View style={styles.videoContainer}>
           <VideoContainer url={vUrl} />
         </View>

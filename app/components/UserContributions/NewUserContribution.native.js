@@ -7,6 +7,7 @@ import styles from '../../styles/newUserContributions/newUserContributions';
 
 import EditIcon from '../../assets/images/baseline-edit.png';
 import DeleteIcon from '../../assets/images/baseline-delete.png';
+import ArrowRight from '../../assets/images/right-arrow.png';
 
 export default class NewUserContributions extends React.Component {
   constructor(props) {
@@ -21,33 +22,28 @@ export default class NewUserContributions extends React.Component {
     const props = this.props;
     return (
       <View style={styles.container}>
-        <View style={{ flex: 2, paddingTop: 10 }}>
+        <View style={{ flex: 2, paddingTop: 20 }}>
           <Text style={styles.treeCount}>
-            {props.treeCount ? props.treeCount : 0}
+            {props.treeCount ? props.treeCount + '  Trees' : 0 + '  Trees'}
           </Text>
           <Text style={styles.text}>
-            {props.location ? props.location : 'none'}
+            <Image source={ArrowRight} style={styles.icon} />
+            {props.location ? '  ' + props.location : '  none'}
           </Text>
           <Text style={styles.text}>
+            <Image source={ArrowRight} style={styles.icon} />
             {props.dedicatedTo
-              ? 'Dedicated to ' + props.dedicatedTo
-              : 'Dedicated to'}
+              ? '  Dedicated to' + props.dedicatedTo
+              : '  Dedicated to none'}
           </Text>
           <Text style={styles.text}>
-            {props.plantedDate ? props.plantedDate : 'none'}
+            <Image source={ArrowRight} style={styles.icon} />
+            {props.plantedDate ? '  ' + props.plantedDate : '  none'}
           </Text>
         </View>
-        <View style={{ flex: 1, justifyContent: 'space-between' }}>
-          <TouchableOpacity
-            style={{
-              alignItems: 'center',
-              backgroundColor: '#F1F6E7',
-              borderBottomLeftRadius: 4
-            }}
-          >
-            <Text style={{ paddingVertical: 10, color: '#89b53a' }}>
-              Planted
-            </Text>
+        <View style={styles.buttonsWrapper}>
+          <TouchableOpacity style={styles.plantedButtonWrapper}>
+            <Text style={styles.plantedText}>Planted</Text>
           </TouchableOpacity>
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity
@@ -69,9 +65,11 @@ export default class NewUserContributions extends React.Component {
   }
 }
 
-NewUserContributions.propTypes = {
-  // treeCount: PropTypes.number,
-  // location: PropTypes.string,
-  // dedicatedTo: PropTypes.string,
-  // plantedDate: propTypes.string
+NewUserContributions.PropTypes = {
+  treeCount: PropTypes.number,
+  location: PropTypes.string,
+  dedicatedTo: PropTypes.string,
+  plantedDate: PropTypes.string,
+  onClickDelete: PropTypes.func,
+  onClickEdit: PropTypes.func
 };

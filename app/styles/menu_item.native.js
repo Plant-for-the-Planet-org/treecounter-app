@@ -83,15 +83,15 @@ export default (menuStyles = EStyleSheet.create({
     alignItems: 'center'
   },
   bottomMenuItemImage: {
-    height: 20,
-    width: 20
+    height: 24,
+    width: 24
   },
   bottomMenuItemText: {
-    fontSize: 12,
+    fontSize: 10,
     color: '$textColor'
   },
   selectedBottomMenuItemText: {
     color: '$colorPrimaryAccentLight',
-    fontSize: 12
+    fontSize: 10
   }
 }));

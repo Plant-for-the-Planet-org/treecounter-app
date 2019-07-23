@@ -9,7 +9,7 @@ import styles from '../../styles/selectplantproject/plant-details.native';
 import { link } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import i18n from '../../locales/i18n';
-import NewUserContributions from '../UserContributions/NewUserContribution.native';
+import UserContributions from '../UserContributions/userContribution.native';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectDetails
  */
@@ -34,7 +34,7 @@ class PlantProjectDetails extends React.Component {
     }
     return (
       <View style={styles.carousalContainer}>
-        <NewUserContributions
+        <UserContributions
           treeCount={500.0}
           location={'Yucatan, Mexico'}
           dedicatedTo={'Sagar Aryal'}

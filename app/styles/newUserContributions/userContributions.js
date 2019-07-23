@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (NewUserContributions = EStyleSheet.create({
+export default (UserContributions = EStyleSheet.create({
   container: {
     marginTop: 16,
     marginBottom: 20,

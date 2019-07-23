@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 // import i18n from '../../locales/i18n.js';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import styles from '../../styles/newUserContributions/newUserContributions';
+import styles from '../../styles/newUserContributions/userContributions';
 
 import EditIcon from '../../assets/images/baseline-edit.png';
 import DeleteIcon from '../../assets/images/baseline-delete.png';
 import ArrowRight from '../../assets/images/right-arrow.png';
 
-export default class NewUserContributions extends React.Component {
+export default class UserContributions extends React.Component {
   constructor(props) {
     super(props);
 
@@ -65,7 +65,7 @@ export default class NewUserContributions extends React.Component {
   }
 }
 
-NewUserContributions.PropTypes = {
+UserContributions.PropTypes = {
   treeCount: PropTypes.number,
   location: PropTypes.string,
   dedicatedTo: PropTypes.string,

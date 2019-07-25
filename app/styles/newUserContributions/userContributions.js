@@ -10,18 +10,15 @@ export default (UserContributions = EStyleSheet.create({
     flexDirection: 'row',
     borderRadius: 5,
     borderWidth: 0.2,
-    borderColor: '#d6d7da'
-    // shadowColor: '#000',
-    // shadowOpacity: 0.46,
-    // shadowRadius: 11.14,
+    borderColor: '#d5d5d5'
   },
   icon: {
-    width: 10,
-    height: 10
+    width: 25,
+    height: 25
   },
   image: {
-    width: 30,
-    height: 30
+    width: 50,
+    height: 50
   },
   treeCount: {
     fontSize: 25,

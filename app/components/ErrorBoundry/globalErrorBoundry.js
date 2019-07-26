@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { infoGrey } from '../../assets';
+import { info } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import bugsnag from '@bugsnag/js';
 import {
@@ -32,7 +32,7 @@ export default class GlobalErrorBoundary extends React.Component {
       // You can render any custom fallback UI
       return (
         <div className={'error-container'}>
-          <img src={infoGrey} />
+          <img src={info} />
           <h1>{i18n.t('label.something_went_x')}</h1>
           <h4>{i18n.t('label.sorry_inconveniences')}</h4>
           <p>{i18n.t('label.error_reported')}</p>

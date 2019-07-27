@@ -1,25 +1,22 @@
-import { fetchItem, saveItem } from '../stores/localStorage';
 import jwtDecode from 'jwt-decode';
-import { postRequest } from './api';
-import { email } from '../assets';
 
-export const getAccessToken = () => {
-  return fetchItem('token')
-    .then(async token => {
-      let expired = await tokenIsExpired();
-      if (expired) {
-        const prev_refresh_token = await fetchItem('refresh_token');
-        const response = await postRequest('gesdinet_jwt_refresh_token', {
-          refresh_token: prev_refresh_token
-        });
-        const { token, refresh_token } = response.data;
-        updateJWT(token, refresh_token);
-        return token;
-      } else {
-        return token;
-      }
-    })
-    .catch(err => console.log(err));
+import { fetchItem, saveItem } from '../stores/localStorage';
+import { postRequest } from './api';
+
+/**
+ * @returns string | null
+ */
+export const getAccessToken = async () => {
+  const token = await fetchItem('token');
+  if (token) {
+    // This may throw an Error if localStorage is broken
+    // or POST requests timeout
+    const newToken = await refreshTokenIfExpired();
+    if (newToken) {
+      return newToken;
+    }
+  }
+  return token;
 };
 
 export const updateJWT = (token, refresh_token) => {
@@ -37,6 +34,22 @@ export const updateActivateToken = (email, activate_token) => {
 const getExpirationTimeStamp = token => {
   const { iat, exp } = jwtDecode(token);
   return getCurrentUnixTimestamp() + exp - iat;
+};
+
+/**
+ * @returns string | void
+ */
+const refreshTokenIfExpired = async () => {
+  if (await tokenIsExpired()) {
+    const prev_refresh_token = await fetchItem('refresh_token');
+    const response = await postRequest('gesdinet_jwt_refresh_token', {
+      refresh_token: prev_refresh_token
+    });
+    const newToken = response.data.token;
+    const refreshToken = response.data.refresh_token;
+    updateJWT(newToken, refreshToken);
+    return newToken;
+  }
 };
 
 const tokenIsExpired = async () => {

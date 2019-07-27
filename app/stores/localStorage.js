@@ -25,10 +25,11 @@ export const saveItem = (key, value) => {
 
 export const fetchItem = key => {
   return new Promise(function(resolve, reject) {
-    if (window.localStorage.getItem(key)) {
-      resolve(window.localStorage.getItem(key));
-    } else {
+    const got = window.localStorage.getItem(key);
+    if (got === null) {
       reject(new Error(`${key} not in localStorage`));
+    } else {
+      resolve(got);
     }
   });
 };

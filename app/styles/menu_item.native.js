@@ -22,11 +22,15 @@ export default (menuStyles = EStyleSheet.create({
     paddingBottom: 10
   },
   titleStyle: {
-    height: 25,
     borderRadius: 3,
-    backgroundColor: '#c7c7c6',
-    padding: 5,
-    fontSize: 12
+    backgroundColor: '#707070',
+    paddingLeft: 5,
+    paddingRight: 5,
+    paddingTop: 1,
+    paddingBottom: 1,
+    marginBottom: 3,
+    fontSize: 12,
+    color: '#FFFFFF'
   },
   groupMenuContainer: {
     flexDirection: 'column',
@@ -34,13 +38,19 @@ export default (menuStyles = EStyleSheet.create({
     alignItems: 'flex-start',
     paddingBottom: 10
   },
+  textGroupContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    paddingLeft: 12,
+    paddingTop: 2
+  },
   imageStyle: {
     width: 17,
     height: 18
   },
   largeImageStyle: {
-    width: 25,
-    height: 25
+    width: 24,
+    height: 24
   },
   textStyle: {
     paddingLeft: 5,
@@ -48,8 +58,7 @@ export default (menuStyles = EStyleSheet.create({
     color: '#6a6161'
   },
   largeTextStyle: {
-    paddingLeft: 5,
-    fontSize: '1 rem',
+    fontSize: 14,
     color: '$textColor'
   },
   gropuTextStyle: {

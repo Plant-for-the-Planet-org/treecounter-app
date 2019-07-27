@@ -9,6 +9,7 @@ import styles from '../../styles/selectplantproject/plant-details.native';
 import { link } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import i18n from '../../locales/i18n';
+import Measurements from '../Measurements/Measurements.native';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectDetails
  */
@@ -25,6 +26,7 @@ class PlantProjectDetails extends React.Component {
     return (
       <View style={styles.carousalContainer}>
         <PlantProjectImageCarousel images={this.props.plantProjectImages} />
+        <Measurements />
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>{this.props.description}</Text>
         </View>

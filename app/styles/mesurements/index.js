@@ -4,12 +4,12 @@ export default (Measurements = EStyleSheet.create({
   title: {
     paddingLeft: 16,
     paddingTop: 25,
-    color: '#99000000',
-    fontSize: 14
-    // lineSpacingExtra: 5
+    // color: "#99000000",
+    fontSize: 14,
+    lineHeight: 5
   },
   container: {
-    marginTop: 16,
+    marginTop: 13,
     marginBottom: 20,
     paddingLeft: 16,
     paddingBottom: 15,

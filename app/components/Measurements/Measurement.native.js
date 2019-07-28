@@ -4,6 +4,7 @@ import { View, Text, Image } from 'react-native';
 import ArrowUpIcon from '../../assets/images/green-arrow-up.png';
 import ArrowRightIcon from '../../assets/images/green-arrow-right.png';
 import CalendarIcon from '../../assets/images/green-calendar.png';
+import styles from '../../styles/mesurements/index';
 
 const Measurement = props => (
   <View style={{ paddingTop: 10 }}>
@@ -14,17 +15,13 @@ const Measurement = props => (
       </Text>
     </View>
     <View style={{ flexDirection: 'row' }}>
-      <View
-        style={{ backgroundColor: 'yellow', flexDirection: 'column', flex: 4 }}
-      >
-        <Text style={{ justifyContent: 'center' }}>
+      <View style={{ flexDirection: 'column', flex: 4 }}>
+        <Text>
           <Image source={ArrowUpIcon} />
           {props.heightOfTree} m tall
         </Text>
       </View>
-      <View
-        style={{ backgroundColor: 'blue', flexDirection: 'column', flex: 8 }}
-      >
+      <View style={{ flexDirection: 'column', flex: 8 }}>
         <Text>
           <Image source={ArrowRightIcon} />
           {props.widthOfTree} cm wide

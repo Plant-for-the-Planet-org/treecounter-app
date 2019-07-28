@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
-import mockData from './mockData';
 import styles from '../../styles/mesurements/index';
 import Measurement from './Measurement.native';
 
@@ -12,24 +11,21 @@ export default class Measurements extends Component {
   }
 
   render() {
-    const props = mockData;
+    const measurements = this.props.measurements;
     return (
-      <React.Fragment>
+      <View>
         <Text style={styles.title}>Measurements (For Single Tree Only)</Text>
         <View style={styles.container}>
-          <Text style={{ backgroundColor: 'green' }}>Measurements</Text>
-          {props &&
-            props.map((measurement, index) => (
-              // <View key={index} style={{ width: 100, flexDirection: 'row' }}>
-              <Measurement {...measurement} />
-              // </View>
+          {measurements &&
+            measurements.map((measurement, index) => (
+              <Measurement key={index} {...measurement} />
             ))}
         </View>
-      </React.Fragment>
+      </View>
     );
   }
 }
 
-// Measurements.propTypes = {
-//     dataPoints: PropTypes.array.isRequired
-// };
+Measurements.propTypes = {
+  measurements: PropTypes.array
+};

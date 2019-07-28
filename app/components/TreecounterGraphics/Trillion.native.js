@@ -138,7 +138,7 @@ class Trillion extends PureComponent {
           >
             <View style={styles.parentContainer}>
               {/* Trillion Tree Events Title */}
-              <View style={{ marginTop: 25, marginLeft: 16 }}>
+              {/* <View style={{ marginTop: 25, marginLeft: 16 }}>
                 <Text
                   style={{
                     fontFamily: 'OpenSans',
@@ -153,11 +153,11 @@ class Trillion extends PureComponent {
                 >
                   {i18n.t('label.trillionTreesEvents')}
                 </Text>
-              </View>
+              </View> */}
               {/* Trillion Tree Events Title Ended */}
 
               {/* Featured events horizontal ScrollView */}
-              <View style={{ marginTop: 16 }}>
+              {/* <View style={{ marginTop: 16 }}>
                 <ScrollView
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
@@ -176,7 +176,7 @@ class Trillion extends PureComponent {
                     date="December 15 - 25, 2019"
                   />
                 </ScrollView>
-              </View>
+              </View> */}
               {/* Featured events horizontal ScrollView Ended */}
 
               {/* Tree Counter SVG */}

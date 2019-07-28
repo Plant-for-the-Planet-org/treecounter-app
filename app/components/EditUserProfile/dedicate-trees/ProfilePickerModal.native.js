@@ -44,6 +44,21 @@ class ProfilePickerModal extends Component {
       <View>
         <View style={styles.containerDedicateStyle}>
           <View style={styles.dedicateTreeName}>
+            <Text
+              style={{
+                fontFamily: 'OpenSans',
+                fontSize: 27,
+                fontWeight: '800',
+                fontStyle: 'normal',
+                lineHeight: 40,
+                letterSpacing: 0,
+                textAlign: 'left',
+                color: '#4d5153',
+                marginBottom: 7
+              }}
+            >
+              {i18n.t('label.dedicate_my_trees')}
+            </Text>
             <Text style={styles.textNotDedicateStyle}>
               {i18n.t('label.has_not_dedicated')}
             </Text>
@@ -70,9 +85,16 @@ class ProfilePickerModal extends Component {
                     }}
                     defaultType={this.state.selectedSuggestion.type}
                   />
+
                   <View style={styles.participantNameContainer}>
                     <Text style={styles.textStyle}>
-                      {this.state.selectedSuggestion.name}
+                      {currentUserProfile.supportedTreecounter.displayName}
+                    </Text>
+                    <Text style={styles.topCompetitorScoreText}>
+                      {delimitNumbers(
+                        currentUserProfile.supportedTreecounter.countPlanted
+                      )}{' '}
+                      {i18n.t('label.planted')}
                     </Text>
                   </View>
                 </View>
@@ -92,63 +114,97 @@ class ProfilePickerModal extends Component {
       </View>
     );
 
-    return (
+    const dedicatedUser = (
       <View>
-        <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
-          <View>
-            {this.state.editMode ? pickupProfileView : null}
-            {currentUserProfile.supportedTreecounter ? (
-              <View>
-                <View style={styles.containerDedicateStyle}>
-                  <View style={styles.dedicateTreeName}>
-                    <Text style={styles.textDedicateStyle}>
-                      {i18n.t('label.has_dedicated', {
-                        user:
-                          currentUserProfile.supportedTreecounter.displayName
-                      })}
-                    </Text>
-                  </View>
-                </View>
-                <CardLayout style={[styles.projectSnippetContainer]}>
-                  <View style={styles.containerStyle}>
-                    <View style={styles.topCompetitorName}>
-                      <UserProfileImage
-                        profileImage={
-                          currentUserProfile.supportedTreecounter.avatar
-                        }
-                        imageStyle={{
-                          width: 40,
-                          height: 40,
-                          borderRadius: 40 / 2
-                        }}
-                      />
-                      <View style={styles.participantNameContainer}>
-                        <Text style={styles.textStyle}>
-                          {currentUserProfile.supportedTreecounter.displayName}
-                        </Text>
-                        <Text style={styles.topCompetitorScoreText}>
-                          {delimitNumbers(
-                            currentUserProfile.supportedTreecounter.countPlanted
-                          )}{' '}
-                          {i18n.t('label.planted')}
-                        </Text>
-                      </View>
-                    </View>
-                    <View style={styles.topCompetitorScore}>
-                      <PrimaryButton
-                        buttonStyle={styles.buttonStyle}
-                        textStyle={styles.primaryButtonText}
-                        onClick={this.updateProfile.bind(this)}
-                      >
-                        {i18n.t('label.edit')}
-                      </PrimaryButton>
-                    </View>
-                  </View>
-                </CardLayout>
+        <View style={styles.containerDedicateStyle}>
+          <View style={styles.dedicateTreeName}>
+            <Text
+              style={{
+                fontFamily: 'OpenSans',
+                fontSize: 27,
+                fontWeight: '800',
+                fontStyle: 'normal',
+                lineHeight: 40,
+                letterSpacing: 0,
+                textAlign: 'left',
+                color: '#4d5153',
+                marginBottom: 7
+              }}
+            >
+              {i18n.t('label.dedicate_my_trees')}
+            </Text>
+            <Text style={styles.textDedicateStyle}>
+              {i18n.t('label.has_dedicated', {
+                user: currentUserProfile.supportedTreecounter.displayName
+              })}
+            </Text>
+            <Text
+              style={{
+                fontFamily: 'OpenSans',
+                fontSize: 17,
+                fontWeight: '600',
+                fontStyle: 'normal',
+                lineHeight: 23,
+                letterSpacing: 0,
+                textAlign: 'left',
+                color: '#4d5153',
+                marginTop: 45
+              }}
+            >
+              {i18n.t('label.currently_dedicated_to')}
+            </Text>
+          </View>
+        </View>
+        <CardLayout style={[styles.projectSnippetContainer]}>
+          <View style={styles.containerStyle}>
+            <View style={styles.topCompetitorName}>
+              <UserProfileImage
+                profileImage={currentUserProfile.supportedTreecounter.avatar}
+                imageStyle={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 40 / 2
+                }}
+              />
+              <View style={styles.participantNameContainer}>
+                <Text style={styles.textStyle}>
+                  {currentUserProfile.supportedTreecounter.displayName}
+                </Text>
+                <Text style={styles.topCompetitorScoreText}>
+                  {delimitNumbers(
+                    currentUserProfile.supportedTreecounter.countPlanted
+                  )}{' '}
+                  {i18n.t('label.planted')}
+                </Text>
               </View>
-            ) : (
-              pickupProfileView
-            )}
+            </View>
+            <View style={styles.topCompetitorScore}>
+              <PrimaryButton
+                buttonStyle={styles.buttonStyle}
+                textStyle={styles.primaryButtonText}
+                onClick={this.updateProfile.bind(this)}
+              >
+                {i18n.t('label.edit')}
+              </PrimaryButton>
+            </View>
+          </View>
+        </CardLayout>
+      </View>
+    );
+
+    return (
+      <View style={{ backgroundColor: 'white' }}>
+        <ScrollView
+          contentContainerStyle={[
+            scrollStyle.styleContainer,
+            { backgroundColor: 'white', marginBottom: 500 }
+          ]}
+        >
+          <View>
+            {this.state.editMode ? pickupProfileView : dedicatedUser}
+            {/* {currentUserProfile.supportedTreecounter
+              ? dedicatedUser
+              : pickupProfileView} */}
           </View>
         </ScrollView>
       </View>

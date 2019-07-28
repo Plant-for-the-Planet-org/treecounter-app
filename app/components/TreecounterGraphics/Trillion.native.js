@@ -5,7 +5,9 @@ import {
   View,
   Dimensions,
   Animated,
-  Image
+  Image,
+  TouchableOpacity,
+  StyleSheet
 } from 'react-native';
 
 import NavigationEvents from './importNavigationEvents';
@@ -21,7 +23,6 @@ import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n';
 import { getAllPlantProjectsSelector } from '../../selectors';
-import PlantProjectSnippet from '../../components/PlantProjects/PlantProjectSnippet.native';
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
@@ -37,6 +38,8 @@ import tabStyles from '../../styles/common/tabbar';
 import { saveItem, fetchItem } from '../../stores/localStorage.native';
 import Constants from '../../utils/const';
 import { getImageUrl } from '../../actions/apiRouting';
+import FeaturedProject from './FeaturedProjectScroll/FeaturedProject';
+// import { plantsforcard } from './plantsforcard.svg';
 
 class Trillion extends PureComponent {
   constructor() {
@@ -121,6 +124,7 @@ class Trillion extends PureComponent {
   };
 
   _renderScreen = ({ route }) => {
+    const { navigation, userProfile, isLoggedIn } = this.props;
     switch (route.key) {
       case 'world': {
         return this.state.loading ? (
@@ -128,71 +132,161 @@ class Trillion extends PureComponent {
         ) : (
           <ScrollView
             contentContainerStyle={{
-              paddingBottom: 72
+              paddingBottom: 72,
+              backgroundColor: 'white'
             }}
           >
             <View style={styles.parentContainer}>
+              {/* Trillion Tree Events Title */}
+              <View style={{ marginTop: 25, marginLeft: 16 }}>
+                <Text
+                  style={{
+                    fontFamily: 'OpenSans',
+                    fontSize: 14,
+                    fontWeight: 'normal',
+                    fontStyle: 'normal',
+                    lineHeight: 19,
+                    letterSpacing: 0,
+                    textAlign: 'left',
+                    color: 'rgba(0, 0, 0, 0.6)'
+                  }}
+                >
+                  {i18n.t('label.trillionTreesEvents')}
+                </Text>
+              </View>
+              {/* Trillion Tree Events Title Ended */}
+
+              {/* Featured events horizontal ScrollView */}
+              <View style={{ marginTop: 16 }}>
+                <ScrollView
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={{ paddingRight: 20 }}
+                >
+                  <FeaturedProject
+                    imageUri={require('../../assets/images/esri_logo.png')}
+                    orgname="Esri User Conference"
+                    treespledged="19,517"
+                    date="March 3, 2019"
+                  />
+                  <FeaturedProject
+                    imageUri={require('../../assets/images/weforest.png')}
+                    orgname="WeForest Conclave"
+                    treespledged="121,951,700"
+                    date="December 15 - 25, 2019"
+                  />
+                </ScrollView>
+              </View>
+              {/* Featured events horizontal ScrollView Ended */}
+
+              {/* Tree Counter SVG */}
               <View style={svgStyles.svgContainer}>
                 <SvgContainer {...this.state.svgData} trillion={true} />
               </View>
-              {/*{this.props.pledgeEvents &&*/}
-              {/*this.props.pledgeEvents.pledgeEvents.length > 0 ? (*/}
-              {/*<View style={styles.pledgeContainer}>*/}
-              {/*<Text style={styles.pledgeText}>*/}
-              {/*Trillion Tree Events today*/}
-              {/*</Text>*/}
-              {/*<View style={styles.pledgeEventContainer}>*/}
-              {/*{this.props.pledgeEvents.pledgeEvents*/}
-              {/*.sort((val1, val2) => val1.position > val2.position)*/}
-              {/*.map(element => (*/}
-              {/*<CardLayout*/}
-              {/*key={element.slug}*/}
-              {/*className="event_item"*/}
-              {/*onClick={() => {*/}
-              {/*updateRoute('app_pledge', null, null, {*/}
-              {/*eventSlug: element.slug*/}
-              {/*});*/}
-              {/*}}*/}
-              {/*>*/}
-              {/*<View className="imgContainer">*/}
-              {/*<Image*/}
-              {/*src={getImageUrl('event', 'thumb', element.image)}*/}
-              {/*/>*/}
-              {/*</View>*/}
+              {/* Tree Counter SVG Ended */}
 
-              {/*<Text style={styles.titleText}>{element.name}</Text>*/}
-              {/*</CardLayout>*/}
-              {/*))}*/}
-              {/*</View>*/}
-              {/*</View>*/}
-              {/*) : null}*/}
-              <CardLayout style={styles.cardContainer}>
-                <Text style={styles.titleText}>
-                  {' '}
+              <CardLayout
+                style={[
+                  styles.cardContainer,
+                  {
+                    borderRadius: 7,
+                    borderStyle: 'solid',
+                    borderWidth: 1,
+                    borderColor: '#d5d5d5'
+                  }
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.titleText,
+                    { textAlign: 'justify', margin: 12 }
+                  ]}
+                >
                   {i18n.t('label.trillionTreeMessage1')}
                 </Text>
-                <Text style={styles.titleText}>
-                  {' '}
+                <Text
+                  style={[
+                    styles.titleText,
+                    { textAlign: 'justify', margin: 12 }
+                  ]}
+                >
                   {i18n.t('label.trillionTreeMessage2')}
                 </Text>
               </CardLayout>
 
-              <View style={{ flex: 1 }}>
-                {this.props.plantProjects
-                  .filter(filterProj => filterProj.allowDonations)
-                  .map(project => (
-                    <PlantProjectSnippet
-                      key={'trillion' + project.id}
-                      onMoreClick={id => this.onMoreClick(id, project.name)}
-                      plantProject={project}
-                      onSelectClickedFeaturedProjects={id =>
-                        this.onSelectClickedFeaturedProjects(id)
-                      }
-                      showMoreButton={false}
-                      tpoName={project.tpo_name}
-                    />
-                  ))}
-              </View>
+              {/* <CardLayout style={{ padding: 16 }}>
+                <Text style={styles2.googleCardTitle}>
+                  Tree Planting Projects
+                </Text>
+                <View
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    marginTop: 14,
+                    marginBottom: 14
+                  }}
+                >
+                  <Text style={styles2.googleCardPara}>
+                    Are you involved in reforestation and would you like to
+                    receive donations to plant trees?
+                  </Text>
+                  <Image
+                    style={{ width: 70, height: 50 }}
+                    source={require('./plantsforcard.svg')}
+                  />
+                </View>
+                <View
+                  style={{
+                    borderColor: '#d5d5d5',
+                    width: '100%',
+                    borderBottomWidth: 1
+                  }}
+                />
+                <TouchableOpacity style={{ width: '100%' }}>
+                  <Text style={styles2.googleCardButton}>Add Your Project</Text>
+                </TouchableOpacity>
+              </CardLayout> */}
+
+              <CardLayout
+                style={{
+                  borderRadius: 7,
+                  borderStyle: 'solid',
+                  borderWidth: 1,
+                  borderColor: '#d5d5d5',
+                  padding: 16
+                }}
+              >
+                <Text style={styles2.googleCardTitle}>
+                  {i18n.t('label.searchProjectTitle')}
+                </Text>
+                <View
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    marginTop: 14,
+                    marginBottom: 14
+                  }}
+                >
+                  <Text style={styles2.googleCardPara}>
+                    {i18n.t('label.searchProjectPara')}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    borderColor: '#d5d5d5',
+                    width: '100%',
+                    borderBottomWidth: 1
+                  }}
+                />
+                <TouchableOpacity
+                  style={{ width: '100%' }}
+                  onPress={() => navigation.navigate('Search')}
+                >
+                  <Text style={styles2.googleCardButton}>
+                    {i18n.t('label.searchProjectButton')}
+                  </Text>
+                </TouchableOpacity>
+              </CardLayout>
             </View>
           </ScrollView>
         );
@@ -246,3 +340,37 @@ Trillion.propTypes = {
   pledgeEvents: PropTypes.object,
   navigation: PropTypes.any
 };
+
+const styles2 = StyleSheet.create({
+  googleCardTitle: {
+    fontFamily: 'OpenSans',
+    fontSize: 17,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 23,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  googleCardPara: {
+    fontFamily: 'OpenSans',
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  googleCardButton: {
+    fontFamily: 'OpenSans',
+    fontSize: 14,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#89b53a',
+    marginTop: 16
+  }
+});

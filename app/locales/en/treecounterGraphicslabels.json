@@ -1,13 +1,21 @@
 {
   "individual_plant_personal": "by me",
   "individual_plant_community": "Dedicated to me",
-  "treecounter_tooltip": "Trees planted by people who dedicated trees to this tree counter. \nFor example, you can dedicate trees to your friend, school, city or employer and help them reach their tree target. All trees you plant or donate will appear in their tree counter.",
+  "treecounter_tooltip":
+    "Trees planted by people who dedicated trees to this tree counter. \nFor example, you can dedicate trees to your friend, school, city or employer and help them reach their tree target. All trees you plant or donate will appear in their tree counter.",
   "tpo_plant_personal": "by us",
   "tpo_individual_plant_community": "Dedicated to us",
   "by": "by",
   "faqs": "FAQs",
   "logged_in": "Logged In",
-  "trillionTreeMessage1": "The Trillion Tree Campaign app aims to bring transparency to tree-planting projects around the world and make it as easy as possible for anyone to support them.",
-  "trillionTreeMessage2": " Global reforestation could capture 25% of global annual carbon emissions and create wealth in the global south.",
-  "trillionlabel": "Trillion Tree Events today"
+  "trillionTreeMessage1":
+    "The Trillion Tree Campaign app aims to bring transparency to tree-planting projects around the world and make it as easy as possible for anyone to support them.",
+  "trillionTreeMessage2":
+    "Global reforestation could capture 25% of global annual carbon emissions and create wealth in the global south.",
+  "trillionlabel": "Trillion Tree Events today",
+  "trillionTreesEvents": "Trillion Tree Events",
+  "searchProjectTitle": "The world needs more trees",
+  "searchProjectPara":
+    "A recent study published in Science says planting a trillion trees can capture 25% of human made CO2",
+  "searchProjectButton": "Search Projects to Donate"
 }

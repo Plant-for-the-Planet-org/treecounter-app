@@ -216,7 +216,7 @@ export function updateEmail(newEmail) {
           if (err.response.data.code === 400) {
             NotificationManager.error(
               err.response.data.errors.children.newEmail.errors[0],
-              'Email update Error',
+              i18n.t('label.error'),
               5000
             );
           }

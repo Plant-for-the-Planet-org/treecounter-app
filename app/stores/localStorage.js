@@ -34,6 +34,16 @@ export const fetchItem = key => {
   });
 };
 
+/**
+ * Get a possibly unset localStorage item.
+ * Use this when it is not an error for the item to be unset.
+ *
+ * @returns string | null
+ */
+export const getItem = key => {
+  return window.localStorage.getItem(key);
+};
+
 export const clearStorage = () => {
   const sessionId = window.localStorage.getItem('session_id');
   window.localStorage.clear();

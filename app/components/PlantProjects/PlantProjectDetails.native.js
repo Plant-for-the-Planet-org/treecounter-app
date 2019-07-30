@@ -29,8 +29,8 @@ class PlantProjectDetails extends React.Component {
     return (
       <View style={styles.carousalContainer}>
         <PlantProjectImageCarousel images={this.props.plantProjectImages} />
-        {/* <Alert /> */}
-        <Measurements measurements={mockMeasurementData} />
+        {/* <Alert deletedTreeCount={100} /> */}
+        {/* <Measurements measurements={mockMeasurementData} /> */}
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>{this.props.description}</Text>
         </View>

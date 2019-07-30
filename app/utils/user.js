@@ -20,6 +20,7 @@ export const getAccessToken = () => {
       }
     })
     .catch(err => console.log(err));
+  return null;
 };
 
 export const updateJWT = (token, refresh_token) => {

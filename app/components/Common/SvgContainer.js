@@ -273,10 +273,14 @@ export default class SvgContainer extends Component {
   }
 
   getTreeIdsFromPercentage(treeIds, percentage) {
-    const countIndexes = treeIds.length - 1;
-    const index = Math.round(percentage * countIndexes);
+    if (treeIds) {
+      const countIndexes = treeIds.length - 1;
+      const index = Math.round(percentage * countIndexes);
 
-    return treeIds.slice(0, index);
+      return treeIds.slice(0, index);
+    } else {
+      return null;
+    }
   }
 
   renderTreesById(treeIds, type, group) {

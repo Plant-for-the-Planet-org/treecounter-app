@@ -2,6 +2,7 @@ import * as React from 'react';
 import { WebMap } from 'react-arcgis';
 import PropTypes from 'prop-types';
 import { loadModules } from 'react-arcgis';
+import i18n from '../../locales/i18n.js';
 
 class MapContributionCapture extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class MapContributionCapture extends React.Component {
 
     console.log('%%%%%%%%%%%%%%% MapContributionCapture props: ', props);
     this.state = {
-      status: 'loading',
+      status: i18n.t('label.loading'),
       map: null,
       view: null,
       graphic: null,
@@ -99,7 +100,7 @@ class MapContributionCapture extends React.Component {
             view.goTo(result.extent).then(() => {
               const geoLocation = {
                 geoLongitude: result.extent.center.longitude,
-                geoLatitude: result.extent.center.longitude,
+                geoLatitude: result.extent.center.latitude,
                 countryCode: result.feature.attributes.CountryCode
               };
               this.setState({ geoLocation });

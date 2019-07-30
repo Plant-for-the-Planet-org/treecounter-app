@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { getImageUrl } from '../../actions/apiRouting';
+import i18n from '../../locales/i18n';
 
 class PlantProjectImageCarousel extends Component {
   imageCarousel;
@@ -25,12 +26,12 @@ class PlantProjectImageCarousel extends Component {
   renderHeader = () => (
     <TouchableWithoutFeedback onPress={this.handleHeaderPress}>
       <View>
-        <Text style={styles.closeText}>Exit</Text>
+        <Text style={styles.closeText}>{i18n.t('label.exit')}</Text>
       </View>
     </TouchableWithoutFeedback>
   );
 
-  renderFooter = () => <Text style={styles.footerText}>Footer!</Text>;
+  renderFooter = () => <Text style={styles.footerText} />;
 
   renderImage = idx => (
     <Image

@@ -8,6 +8,8 @@ import { Dimensions, View } from 'react-native';
 import CountryProjects from './Tabs/country.native';
 import TabContainer from '../../containers/Menu/TabContainer';
 
+import i18n from '../../locales/i18n.js';
+
 const Layout = {
   window: {
     width: Dimensions.get('window').width
@@ -20,10 +22,10 @@ export default class SelectPlantTabView extends Component {
 
     this.state = {
       routes: [
-        { key: 'featured', title: 'Featured' },
-        { key: 'list', title: 'List' },
-        { key: 'price', title: 'Price' },
-        { key: 'country', title: 'Country' }
+        { key: 'featured', title: i18n.t('label.featured') },
+        { key: 'list', title: i18n.t('label.list') },
+        { key: 'price', title: i18n.t('label.price') },
+        { key: 'country', title: i18n.t('label.country') }
       ],
       index: 0
     };
@@ -52,9 +54,12 @@ export default class SelectPlantTabView extends Component {
         {...props}
         indicatorStyle={styles.indicator}
         style={styles.tabBar}
-        tabStyle={{ width: Layout.window.width / 4 }}
+        //tabStyle={{ width: Layout.window.width / 4 }}
         labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
+        scrollEnabled
+        bounces
+        useNativeDriver
       />
     );
   };

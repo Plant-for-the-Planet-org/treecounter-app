@@ -340,7 +340,7 @@ export default class GiftTrees extends Component {
     let heading =
       pageHeadings[pageIndex].heading +
       (this.state.giftTreecounterName !== null
-        ? ' to ' + this.state.giftTreecounterName
+        ? ' ' + i18n.t('label.to') + ' ' + this.state.giftTreecounterName
         : '');
     const NextArrow = function(props) {
       function validated() {
@@ -430,7 +430,10 @@ export default class GiftTrees extends Component {
               </TextBlock>
               <div className={'gap'} />
               <TextBlock>
-                <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+                <InlineLink
+                  uri={'app_userHome'}
+                  caption={i18n.t('label.return_home')}
+                />
               </TextBlock>
             </div>
           </CardLayout>
@@ -440,12 +443,12 @@ export default class GiftTrees extends Component {
               <img src={attention} />
               <div className={'gap'} />
               <TextBlock strong={true}>
-                {'Error ' + this.props.paymentStatus.message}
+                {i18n.t('label.error') + ' ' + this.props.paymentStatus.message}
               </TextBlock>
               <div className={'gap'} />
               <TextBlock>
                 <PrimaryButton onClick={this.props.paymentClear}>
-                  Try again
+                  {i18n.t('label.try_again')}
                 </PrimaryButton>
               </TextBlock>
             </div>
@@ -468,7 +471,7 @@ export default class GiftTrees extends Component {
                       />
                       <div className="pftp-textarea">
                         <textarea
-                          placeholder="Gift Message"
+                          placeholder={i18n.t('label.gift_message')}
                           onChange={this.handleMessageChange.bind(this)}
                         />
                       </div>

@@ -30,7 +30,9 @@ export default class SignUp extends Component {
       id: uuid(),
       onSuccess: () => {
         let gBatch = document.getElementsByClassName('grecaptcha-badge');
-        gBatch[0].style.visibility = 'visible';
+        if (gBatch.length > 0) {
+          gBatch[0].style.visibility = 'visible';
+        }
       },
       onError: e => {}
     });

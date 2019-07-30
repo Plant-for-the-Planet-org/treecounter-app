@@ -18,6 +18,7 @@ import {
 } from '../schemas/index';
 import { debug } from '../debug/index';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
+import i18n from '../locales/i18n.js';
 
 export function editTree(plantContribution, plantId, navigation) {
   return dispatch => {
@@ -29,7 +30,7 @@ export function editTree(plantContribution, plantId, navigation) {
         const { statusText } = res;
         const { contribution, treecounter } = res.data;
 
-        NotificationManager.success(statusText, 'Success', 5000);
+        NotificationManager.success(statusText, i18n.t('label.success'), 5000);
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         dispatch(setProgressModelState(false));
@@ -38,7 +39,11 @@ export function editTree(plantContribution, plantId, navigation) {
       .catch(error => {
         debug(error.response);
         dispatch(setProgressModelState(false));
-        NotificationManager.error(error.response.data.message, 'Error', 5000);
+        NotificationManager.error(
+          error.response.data.message,
+          i18n.t('label.error'),
+          5000
+        );
       });
   };
 }
@@ -66,14 +71,25 @@ export function deleteContribution(plantContributionId) {
             dispatch(
               mergeEntities(normalize(merge.plantProject, plantProjectSchema))
             );
-          NotificationManager.success(statusText, 'Success', 5000);
-          dispatch(setProgressModelState(false));
+          NotificationManager.success(
+            statusText,
+            i18n.t('label.success'),
+            5000
+          );
         })
         .catch(err => {
           debug(err);
-          NotificationManager.error(error.response.data.message, 'Error', 5000);
-          dispatch(setProgressModelState(false));
+
+          NotificationManager.error(
+            error.response.data.message,
+            i18n.t('label.error'),
+            5000
+          );
+
           reject(err);
+        })
+        .finally(data => {
+          dispatch(setProgressModelState(false));
         });
     });
   };

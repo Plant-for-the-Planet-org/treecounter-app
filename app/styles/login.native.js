@@ -30,7 +30,9 @@ export default (loginStyles = EStyleSheet.create({
     height: 50
   },
 
-  inputContainer: {},
+  inputContainer: {
+    height: 120
+  },
   button: {
     height: 50,
     backgroundColor: '$primary',
@@ -62,7 +64,7 @@ export default (loginStyles = EStyleSheet.create({
   },
   bottomRow: {
     flexDirection: 'row',
-    paddingTop: 10,
+    paddingTop: 25,
     paddingBottom: 10,
     flexWrap: 'wrap',
     justifyContent: 'space-between'

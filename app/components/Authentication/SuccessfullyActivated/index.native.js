@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n.js';
 import { Text, View, Image, ScrollView } from 'react-native';
-
 import styles from '../../../styles/accountActivate';
-
 import { check_green, redeemSignIn } from '../../../assets';
 import InlineLink from '../../Common/InlineLink';
 
 export default class SuccessfullyActivatedAccount extends Component {
   render() {
     const setTarget = (
-      <InlineLink uri={'app_userHome'} caption="set a target" />
+      <InlineLink uri={'app_userHome'} caption={i18n.t('label.set_a_target')} />
     );
     const customizeProfile = (
-      <InlineLink uri={'app_userHome'} caption="customize your profile" />
+      <InlineLink
+        uri={'app_userHome'}
+        caption={i18n.t('label.customize_your_profile')}
+      />
     );
-    const login = <InlineLink caption="login" uri={'app_login'} />;
+    const login = (
+      <InlineLink caption={i18n.t('label.login')} uri={'app_login'} />
+    );
 
     return (
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
@@ -36,23 +39,29 @@ export default class SuccessfullyActivatedAccount extends Component {
           )}
           {this.props.success ? (
             <Text style={styles.textStyle}>
-              You have successfully activated your account.
+              {i18n.t('label.successfully_activated')}
             </Text>
           ) : (
             <Text style={styles.textStyle}>
-              Your account has already been activated previously.
+              {i18n.t('label.already_activated')}
             </Text>
           )}
           {this.props.success ? (
             <View>
-              <Text style={styles.textStyle}>You can</Text>
+              <Text style={styles.textStyle}>
+                {i18n.t('label.do_profile_or_target') + ' '}
+              </Text>
               {customizeProfile}
-              <Text>now or </Text>
+              <Text style={styles.textStyle}>
+                {' ' + i18n.t('label.or') + ' '}
+              </Text>
               {setTarget}
             </View>
           ) : (
-            <View style={styles.textStyle}>
-              <Text>You can</Text>
+            <View>
+              <Text style={styles.textStyle}>
+                {i18n.t('label.do_login') + ' '}
+              </Text>
               {login}
             </View>
           )}

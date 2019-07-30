@@ -19,7 +19,9 @@ class SignUpContainer extends React.Component {
   componentWillUnmount() {
     if (!this.props.navigation) {
       let gBatch = document.getElementsByClassName('grecaptcha-badge');
-      gBatch[0].style.visibility = 'hidden';
+      if (gBatch.length > 0) {
+        gBatch[0].style.visibility = 'hidden';
+      }
     }
   }
 

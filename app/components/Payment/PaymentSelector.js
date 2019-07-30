@@ -135,13 +135,14 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
               </div>
             )}
             {!giftToName && (
-              <div>Donate To {gatewayProps.context.plantProjectName}</div>
+              <div>
+                {i18n.t('label.donate_to', {
+                  name: gatewayProps.context.plantProjectName
+                })}
+              </div>
             )}
-            <div>
-              {' '}
-              Amount: {amount} {currency}{' '}
-            </div>
-            <div>Trees: {context.treeCount}</div>
+            <div>{`${i18n.t('label.amount')}: ${amount} ${currency}`}</div>
+            <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
           </div>
           {Object.keys(paymentMethods).map(gateway => {
             const accountName = paymentMethods[gateway];

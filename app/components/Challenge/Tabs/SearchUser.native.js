@@ -39,7 +39,7 @@ class SearchUser extends React.Component {
 
   // TODO: debounce
   _handleChangeQuery = q => {
-    this.setState({ selectedSuggestionName: '', searchResultClicked: false });
+    this.setState({ searchResultClicked: false });
     getSuggestions(q).then(suggestions => {
       this.setState({ q: suggestions });
     });
@@ -62,7 +62,11 @@ class SearchUser extends React.Component {
           : suggestion.name
       });
     } else {
-      NotificationManager.error('Could not add user', 'Error', 5000);
+      NotificationManager.error(
+        i18n.t('label.could_not_add_user'),
+        i18n.t('label.error'),
+        5000
+      );
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -96,9 +100,10 @@ class SearchUser extends React.Component {
           dontFocus
           onChangeQuery={this.onChangeTextDelayed}
           inputValue={this.state.selectedSuggestionName}
+          resetState={this.props.resetState}
           onSubmit={this._handleSubmit}
           placeholderTextColor={this.props.searchInputPlaceholderTextColor}
-          placeholderValue={i18n.t('label.search_user')}
+          placeholderValue={i18n.t('label.enter_a_user')}
           textColor={this.props.searchInputTextColor}
           selectionColor={this.props.searchInputSelectionColor}
           underlineColorAndroid={

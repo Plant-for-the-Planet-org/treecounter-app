@@ -35,7 +35,7 @@ export default class GiftUser extends Component {
         }
       );
     } else {
-      this.setState({ error: 'Select Valid User Profile' });
+      this.setState({ error: i18n.t('label.select_valid_user_profile') });
     }
   }
   onChangeText(val) {

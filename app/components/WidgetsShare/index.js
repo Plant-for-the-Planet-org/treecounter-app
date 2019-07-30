@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import TextHeading from '../../components/Common/Heading/TextHeading';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 import i18n from '../../locales/i18n.js';
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import js from 'react-syntax-highlighter/dist/esm/languages/hljs/xml';
-import dark from 'react-syntax-highlighter/dist/esm/styles/hljs/lightfair';
-
-SyntaxHighlighter.registerLanguage('xml', js);
 import CardLayout from '../Common/Card';
 
 const widgetList = [
@@ -56,7 +51,7 @@ export default class WidgetShare extends PureComponent {
       data-show-donate-button="true"
       data-background-color="#FFF"
       cite="${this.props.serverName}" >
-        ${this.state.activeWidget.type} widget loading...
+        ${this.state.activeWidget.type}${i18n.t('label.widget_loading')}
     </blockquote>
     <script
       type="text/javascript"
@@ -119,9 +114,9 @@ export default class WidgetShare extends PureComponent {
               </div>
               <h6> {i18n.t('label.widget_share_copy_paste_html_snippet')}</h6>
               <div className={'pftp-widget-html-snippet'}>
-                <SyntaxHighlighter language="xml" style={dark}>
-                  {widgetCode}
-                </SyntaxHighlighter>
+                <pre>
+                  <code>{widgetCode}</code>
+                </pre>
               </div>
             </CardLayout>
             <CardLayout className={'pftp-preview-widget-card '}>

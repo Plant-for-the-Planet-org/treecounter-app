@@ -22,6 +22,10 @@ module.exports = webpackMerge(commonConfig, {
     donatetreewidget: [
       'babel-polyfill',
       path.join(__dirname, '../widgets/DonateTrees/widget.js')
+    ],
+    ndviwidget: [
+      'babel-polyfill',
+      path.join(__dirname, '../widgets/NDVI/widget.js')
     ]
   },
   output: {
@@ -29,7 +33,7 @@ module.exports = webpackMerge(commonConfig, {
     filename: '[name].js',
     publicPath: '/'
   },
-
+  devtool: 'source-map',
   plugins: [
     new WebpackCleanupPlugin(),
     new webpack.LoaderOptionsPlugin({
@@ -43,12 +47,12 @@ module.exports = webpackMerge(commonConfig, {
     new webpack.optimize.UglifyJsPlugin({
       mangle: {
         keep_fnames: true
-      }
+      },
+      sourceMap: true
     }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /de|en/),
     new webpack.DefinePlugin({
-      'process.env': {
-        ENV: JSON.stringify('production')
-      }
+      'process.env.NODE_ENV': JSON.stringify('production')
     })
   ]
 });

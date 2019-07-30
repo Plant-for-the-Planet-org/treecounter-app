@@ -7,6 +7,7 @@ import Proptypes from 'prop-types';
 import ListViewProjects from './listview';
 import { foldout, foldin } from '../../../assets';
 import TouchableItem from '../../Common/TouchableItem.native';
+import i18n from '../../../locales/i18n';
 
 export default class PriceProjects extends Component {
   constructor(props) {
@@ -42,9 +43,15 @@ export default class PriceProjects extends Component {
     });
   };
 
-  sortProjects(sortType) {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currencies !== this.props.currencies) {
+      this.sortProjects('asc', nextProps);
+    }
+  }
+
+  sortProjects(sortType, props = this.props) {
     if (sortType === 'desc') {
-      let { plantProjects, currencies } = this.props;
+      let { plantProjects, currencies } = props;
       currencies = currencies.currencies;
       let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
       if (currencies) {
@@ -61,7 +68,7 @@ export default class PriceProjects extends Component {
         priceSortedProjects: priceSortedProjectsNew
       });
     } else {
-      let { plantProjects, currencies } = this.props;
+      let { plantProjects, currencies } = props;
       currencies = currencies.currencies;
       let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
       if (currencies) {
@@ -85,7 +92,9 @@ export default class PriceProjects extends Component {
     return (
       <View style={styles.flexContainer}>
         <View style={styles.cardHeader}>
-          <Text style={styles.headingStyle}>Cost Per Tree</Text>
+          <Text style={styles.headingStyle}>
+            {i18n.t('label.cost_per_tree')}
+          </Text>
           <View style={styles.sortContainer}>
             <TouchableItem
               style={styles.imageStyleContainer}

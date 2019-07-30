@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import stripe, { PaymentCardTextField } from 'tipsi-stripe';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
+import i18n from '../../../locales/i18n';
 
 const styles = StyleSheet.create({
   field: {
@@ -63,7 +64,10 @@ export default class StripeCC extends Component {
 
       //console.log('pay via card');
     } else {
-      NotificationManager.error('Please enter Correct Card Details', 'Error');
+      NotificationManager.error(
+        i18n.t('label.please_enter_card_details'),
+        i18n.t('label.error')
+      );
     }
   }
 

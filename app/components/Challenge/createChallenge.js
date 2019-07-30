@@ -113,9 +113,9 @@ export default class Challenge extends Component {
       NotificationManager.error(
         i18n.t('label.challenge_error', {
           user: this.state.challengedName,
-          target: delimitNumbers(nextProps.error)
+          target: parseInt(nextProps.error)
         }),
-        'Error',
+        i18n.t('label.error'),
         5000
       );
     }
@@ -137,6 +137,13 @@ export default class Challenge extends Component {
     }
     if (this.state.checked === 'indefinite') {
       delete requestData.endDate;
+    } else if (requestData.endDate === '') {
+      NotificationManager.error(
+        i18n.t('label.please_select_year'),
+        i18n.t('label.error'),
+        5000
+      );
+      return;
     }
 
     this.props.challengeUser(requestData);

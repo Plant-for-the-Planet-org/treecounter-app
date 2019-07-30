@@ -20,7 +20,7 @@ class ManageProjectContainer extends Component {
       .then(data => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_update_success')}`,
-          i18n.t('label.success_title'),
+          i18n.t('label.success'),
           5000
         );
       })
@@ -39,7 +39,7 @@ class ManageProjectContainer extends Component {
       .then(data => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_delete_success')}`,
-          i18n.t('label.success_title'),
+          i18n.t('label.success'),
           5000
         );
       })
@@ -58,7 +58,7 @@ class ManageProjectContainer extends Component {
       .then(data => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_added_success')}`,
-          i18n.t('label.success_title'),
+          i18n.t('label.success'),
           5000
         );
       })

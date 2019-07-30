@@ -8,6 +8,7 @@ import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 import styles from '../../styles/selectplantproject/plant-details.native';
 import { link } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
+import i18n from '../../locales/i18n';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectDetails
  */
@@ -19,7 +20,8 @@ class PlantProjectDetails extends React.Component {
   render() {
     let vUrl = this.props.videoUrl;
     if (context.debug && !this.props.videoUrl) {
-      vUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
+      //un-comment this if anybody want to test video playing on App
+      // vUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
     }
     return (
       <View style={styles.carousalContainer}>
@@ -35,7 +37,7 @@ class PlantProjectDetails extends React.Component {
             <Image source={link} style={styles.linkIcon} />
 
             <Text style={styles.linkText}>
-              {this.props.linkText ? this.props.linkText : 'Link'}
+              {this.props.linkText ? this.props.linkText : i18n.t('label.link')}
             </Text>
           </TouchableItem>
         ) : null}

@@ -246,7 +246,10 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
               {i18n.t('label.thankyou_planting', { count: context.treeCount })}
             </Text>
 
-            <InlineLink uri={'app_userHome'} caption={'Return Home'} />
+            <InlineLink
+              uri={'app_userHome'}
+              caption={i18n.t('label.return_home')}
+            />
           </View>
         ) : this.props.paymentStatus && this.props.paymentStatus.message ? (
           <View style={{ flex: 1, alignItems: 'center' }}>
@@ -256,20 +259,20 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
               source={check_green}
             />
             <Text style={{ padding: 10 }}>
-              {'Error ' + this.props.paymentStatus.message}
+              {i18n.t('label.error') + ' ' + this.props.paymentStatus.message}
             </Text>
 
             <PrimaryButton onClick={() => this.props.paymentClear()}>
-              Try Again
+              {i18n.t('label.try_again')}
             </PrimaryButton>
           </View>
         ) : (
           <View style={{ flex: 1, alignItems: 'center' }}>
             <Text style={{ fontWeight: 'bold' }}>
-              Amount: {amount} {currency}
+              {i18n.t('label.amount')}: {amount} {currency}
             </Text>
             <Text style={{ fontWeight: 'bold' }}>
-              Trees: {context.treeCount}
+              {i18n.t('label.trees')}: {context.treeCount}
             </Text>
 
             <ScrollView>

@@ -33,7 +33,7 @@ class ProfilePickerModal extends Component {
 
   onDedicateClick() {
     this.props.updateProfileDedication({
-      supportedTreecounter: this.state.selectedSuggestion.id
+      supportedTreecounter: this.state.selectedSuggestion.treecounterId
     });
     this.setState({ editMode: false });
   }
@@ -130,7 +130,7 @@ class ProfilePickerModal extends Component {
                           {delimitNumbers(
                             currentUserProfile.supportedTreecounter.countPlanted
                           )}{' '}
-                          Planted
+                          {i18n.t('label.planted')}
                         </Text>
                       </View>
                     </View>

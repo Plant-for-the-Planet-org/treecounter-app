@@ -8,6 +8,8 @@ import { updateJWT, updateActivateToken } from '../utils/user';
 import { NotificationAction } from './notificationAction';
 import { loadTpos } from './loadTposAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
+import i18n from '../locales/i18n.js';
 import _ from 'lodash';
 export const userLogout = createAction('USER_LOGOUT');
 
@@ -53,6 +55,11 @@ export function login(credentials, recaptchaToken, navigation = undefined) {
       })
       .catch(err => {
         dispatch(setProgressModelState(false));
+        NotificationManager.error(
+          err.response.data.message,
+          i18n.t('label.error'),
+          5000
+        );
         throw err;
       });
   };
@@ -78,6 +85,11 @@ export function forgot_password(data, navigation = undefined) {
       .catch(err => {
         debug(err);
         dispatch(setProgressModelState(false));
+        NotificationManager.error(
+          err.response.data.message,
+          i18n.t('label.error'),
+          5000
+        );
         throw err;
       });
   };
@@ -111,10 +123,10 @@ export function setAccessDenied(data, params, path, navigation = undefined) {
       .then(res => {
         const { statusText } = res;
         updateRoute(path, navigation || dispatch);
-        // NotificationManager.success(statusText, 'Success', 5000);
+        // NotificationManager.success(statusText, i18n.t('label.success'), 5000);
       })
       .catch(error => {
-        // NotificationManager.error(error.response.data.message, 'Error', 5000);
+        // NotificationManager.error(error.response.data.message, i18n.t('label.error'), 5000);
       });
   };
 }

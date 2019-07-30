@@ -15,12 +15,14 @@
   "company_or_orga_name": "Name der Firma oder Organisation",
   "i_am_a": "Ich bin ein/e",
   "i_am": "Ich bin",
-  "tpo_title": "Baumpflanzorganisation",
+  "tpo_title": "Baumpflanz-Organisation",
   "individual_title": "Für mich",
-  "company_title": "Firmen / Organisation",
+  "company_title": "Firma / Organisation",
   "education_title": "Schule",
   "already_have_account": "Haben Sie schon ein Konto?",
   "education": "Bildung",
   "organization": "Organisation",
-  "title": "Titel"
+  "title": "Titel",
+  "registration_successfully": "Registrierung erfolgreich",
+  "passwords_do_not_match": "Passwörter stimmen nicht überein"
 }

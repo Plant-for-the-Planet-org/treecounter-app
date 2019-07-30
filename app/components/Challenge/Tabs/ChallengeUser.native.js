@@ -38,8 +38,34 @@ class ChallengeUser extends Component {
     this.onSearchResultClick = this.onSearchResultClick.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.challengeSuccess && nextProps.challengeSuccess) {
+      let currentYear = new Date().getFullYear(),
+        years = [];
+      let endYear = currentYear + 10;
+
+      while (currentYear <= endYear) {
+        years.push(currentYear++);
+      }
+      this.years = years.map(item => {
+        return { value: item };
+      });
+      this.setState({
+        selectedSuggestion: null,
+        treeCount: 1000,
+        isChecked: false,
+        byYear: '',
+        searchSuggestionName: ''
+      });
+      this.props.resetChallengeSuccess();
+    }
+  }
+
   onSearchResultClick(suggestion) {
-    this.setState({ selectedSuggestion: suggestion });
+    this.setState({
+      selectedSuggestion: suggestion,
+      searchSuggestionName: suggestion.name
+    });
   }
 
   handleTreeCountChange(treeCount) {
@@ -58,30 +84,25 @@ class ChallengeUser extends Component {
         challenged: this.state.selectedSuggestion.treecounterId
       };
       if (this.state.isChecked) {
+        if (this.state.byYear === '') {
+          NotificationManager.error(
+            i18n.t('label.please_select_year'),
+            i18n.t('label.error'),
+            5000
+          );
+          return;
+        }
         requestData.endDate = this.state.byYear;
       }
       requestData.challengeMethod = 'direct';
       requestData.goal = this.state.treeCount;
       this.props.challengeUser(requestData);
-      // this.setState({
-      //   selectedSuggestion: null,
-      //   treeCount: 1000,
-      //   isChecked: false,
-      //   byYear: '',
-      //   searchSuggestionName: ''
-      // });
-      // let currentYear = new Date().getFullYear(),
-      //   years = [];
-      // let endYear = currentYear + 10;
-      //
-      // while (currentYear <= endYear) {
-      //   years.push(currentYear++);
-      // }
-      // this.years = years.map(item => {
-      //   return { value: item };
-      // });
     } else {
-      NotificationManager.error('Please select user', 'Error', 5000);
+      NotificationManager.error(
+        i18n.t('label.please_select_user'),
+        i18n.t('label.error'),
+        5000
+      );
     }
   }
 
@@ -105,7 +126,7 @@ class ChallengeUser extends Component {
                 <Text style={styles.textDedicateStyle}>
                   {i18n.t('label.challenge_error', {
                     user: this.state.selectedSuggestion.name,
-                    target: delimitNumbers(this.props.error)
+                    target: parseInt(this.props.error)
                   })}
                 </Text>
               </View>
@@ -117,11 +138,12 @@ class ChallengeUser extends Component {
                 onSearchResultClick={this.onSearchResultClick}
                 currentUserProfile={this.props.currentUserProfile}
                 searchSuggestion={this.state.searchSuggestionName}
+                resetState={this.props.challengeSuccess}
                 alreadyInvited={[]}
                 hideCompetitions
               />
               <View style={challengeStyles.flexContainerStyle}>
-                <Text>Challenge to plant </Text>
+                <Text>{i18n.t('label.challenge_to_plant')} </Text>
                 <TextInput
                   keyboardType="numeric"
                   underlineColorAndroid={'transparent'}
@@ -145,7 +167,7 @@ class ChallengeUser extends Component {
                     width: 70
                   }}
                   isChecked={this.state.isChecked}
-                  rightText={'by'}
+                  rightText={i18n.t('label.by')}
                 />
                 <Dropdown
                   containerStyle={{
@@ -160,7 +182,7 @@ class ChallengeUser extends Component {
                       byYear: item
                     })
                   }
-                  label="Year"
+                  label={i18n.t('label.year')}
                   data={this.years}
                 />
               </View>

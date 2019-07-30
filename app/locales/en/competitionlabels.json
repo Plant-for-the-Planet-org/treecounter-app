@@ -25,7 +25,12 @@
   "create_competition": "Create Competition",
   "competition_access_immediate": "Anyone (Join Immediately)",
   "competition_access_request": "Anyone (Request to Join)",
-  "mine_create":"You do not have any Competitions. Any competition you create or join will appear on this page. sort by create date recent",
+  "mine_create": "You do not have any competitions. Any competition you create or join will appear on this page. Sorted by Creation Date",
   "competition_access_invitation": "Only people I Invite",
-  "edit_competition": "Edit Competition"
+  "edit_competition": "Edit Competition",
+  "by_a_name": "by",
+  "competition_create_successfully": "Competition created successfully",
+  "competition_creation_error": "Competition creation failed",
+  "competition_edited_successfully": "Competition edited successfully",
+  "competition_editing_error": "Competition editing failed"
 }

@@ -3,7 +3,7 @@
   "location": "Ort",
   "planted": "Gepflanzt",
   "target": "Ziel",
-  "in": "im",
+  "in": "in",
   "donate": "Spenden",
   "plant_project_full": "PlantProjectFull",
   "different_project": "Anderes Projekt wählen",
@@ -12,6 +12,11 @@
   "tree_cost": "Baumkosten",
   "link_text": "Link Text",
   "video_url": "Video-URL",
-  "allow_donations": "Spenden zulassen",
-  "is_published": "Projekt veröffentlichen"
+  "allow_donations": "Ich möchte Spenden erhalten (Sie werden möglicherweise von einem Plant-for-the-Planet Mitarbeiter kontaktiert, um Ihre Projektangaben zu überprüfen.)",
+  "is_published": "Projekt veröffentlichen",
+  "survival_explaination": "Prozentzahl der gepflanzen Bäume, die das erste Jahr nach der Pflanzung überleben.",
+  "view_more": "Weitere anschauen",
+  "link": "Link",
+  "exit": "Beenden",
+  "plant_project_update_success": "Planzungsprojekt erfolgreich aktualisiert"
 }

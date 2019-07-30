@@ -50,7 +50,30 @@ export default class HeaderRight extends Component {
             treecounter: userProfile.treecounter.slug
           });
       } else {
-        redirectPath = context.scheme + '://' + context.host + pathname;
+        if (pathname === '/t') {
+          redirectPath =
+            context.scheme +
+            '://' +
+            context.host +
+            getLocalRoute('app_treecounter', {
+              treecounter: state.routes[state.index].params.treeCounterId
+            });
+        } else if (pathname === '/competition') {
+          const competition = state.hasOwnProperty('params')
+            ? state.params.competition
+            : state.hasOwnProperty('routes')
+              ? state.routes[state.index].params.competition
+              : -1;
+          redirectPath =
+            context.scheme +
+            '://' +
+            context.host +
+            getLocalRoute('app_competition', {
+              competition
+            });
+        } else {
+          redirectPath = context.scheme + '://' + context.host + pathname;
+        }
       }
       return (
         <TouchableOpacity
@@ -66,9 +89,8 @@ export default class HeaderRight extends Component {
   }
 
   handleShare(redirectPath) {
-    //  console.log(navigation.state);
     Share.share({
-      url: redirectPath
+      message: redirectPath
     });
   }
   render() {

@@ -203,9 +203,15 @@ class PublicTreeCounter extends React.Component {
           <CardLayout className="width_group_footer">
             <div className="group_user_table">
               <div className="table-header">
-                <div className="table-header-item contributor">Contributor</div>
-                <div className="table-header-item planted">Planted Trees</div>
-                <div className="table-header-item target">Target</div>
+                <div className="table-header-item contributor">
+                  {i18n.t('label.contributor')}
+                </div>
+                <div className="table-header-item planted">
+                  {i18n.t('label.planted_trees')}
+                </div>
+                <div className="table-header-item target">
+                  {i18n.t('label.target')}
+                </div>
                 <div className="table-header-item support" />
               </div>
               <div className="table-body">

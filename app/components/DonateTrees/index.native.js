@@ -43,8 +43,8 @@ export default class DonateTrees extends React.PureComponent {
       expandedOption: '1',
       routes: [
         // { key: 'selectPlant', title: 'Select Plant' },
-        { key: 'currency', title: 'Donation Details' },
-        { key: 'recipient', title: 'Donor Details' }
+        { key: 'currency', title: i18n.t('label.donation_detail') },
+        { key: 'recipient', title: i18n.t('label.donor_detail') }
         // { key: 'payments', title: 'Payments' }
       ],
       giftTreeCounterName: null

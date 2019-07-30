@@ -6,6 +6,8 @@ import ChallengeUser from './Tabs/ChallengeUser';
 import ChallengeEmail from './Tabs/ChallengeEmail';
 import { challengeFormSchemaOptions } from '../../server/parsedSchemas/challenge';
 
+import i18n from '../../locales/i18n';
+
 const Layout = {
   window: {
     width: Dimensions.get('window').width
@@ -18,8 +20,8 @@ export default class ChallengeTabView extends Component {
 
     this.state = {
       routes: [
-        { key: 'user', title: 'Search User' },
-        { key: 'email', title: 'Email' }
+        { key: 'user', title: i18n.t('label.search_user') },
+        { key: 'email', title: i18n.t('label.email') }
       ],
       index: 0
     };
@@ -63,6 +65,8 @@ export default class ChallengeTabView extends Component {
             challengeUser={this.props.challengeUser}
             challenges={this.props.challenges}
             error={this.props.error}
+            challengeSuccess={this.props.challengeSuccess}
+            resetChallengeSuccess={this.props.resetChallengeSuccess}
             challengeStatus={this.props.challengeStatus}
             currentUserProfile={this.props.currentUserProfile}
           />
@@ -73,6 +77,8 @@ export default class ChallengeTabView extends Component {
             challengeUser={this.props.challengeUser}
             challenges={this.props.challenges}
             error={this.props.error}
+            challengeSuccess={this.props.challengeSuccess}
+            resetChallengeSuccess={this.props.resetChallengeSuccess}
             challengeFormSchemaOptions={challengeFormSchemaOptions}
             challengeStatus={this.props.challengeStatus}
           />

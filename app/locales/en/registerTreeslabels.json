@@ -17,5 +17,7 @@
   "register": "Register",
   "many_trees": "Many Trees",
   "plant_project": "Plant Project",
-  "plant_projects": "Plant Projects"
+  "plant_projects": "Plant Projects",
+  "get_device_location": "Get Device Location",
+  "map_under_construction": "Maps under construction"
 }

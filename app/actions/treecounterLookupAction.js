@@ -11,7 +11,7 @@ export function treecounterLookupAction(treecounterId, navigation = undefined) {
     // if so we de-normalize and just return it
     if (!treecounterId) {
       updateRoute('app_homepage', navigation || dispatch);
-      return Promise.reject('user not available');
+      return Promise.reject(new Error('user not available'));
     }
     return new Promise(function(resolve) {
       const entities = getState().entities;

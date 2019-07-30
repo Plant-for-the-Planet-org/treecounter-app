@@ -779,6 +779,8 @@ export default {
         type: 'object',
         properties: {
           gender: {
+            enum: ['m', 'f'],
+            enum_titles: ['label.male', 'label.female'],
             type: 'string',
             title: 'label.gender',
             attr: {

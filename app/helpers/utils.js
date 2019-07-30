@@ -133,6 +133,15 @@ export function objectToQueryParams(objectValue) {
   return valueString;
 }
 
+// credits to https://itnext.io/create-date-from-mysql-datetime-format-in-javascript-912111d57599
+export function getDateFromMySQL(dateTime) {
+  if (dateTime) {
+    let dateTimeParts = dateTime.split(/[- :]/);
+    dateTimeParts[1]--; // monthIndex begins with 0 for January and ends with 11 for December so we need to decrement by one
+    return new Date(...dateTimeParts);
+  }
+}
+
 export function formatDate(date) {
   console.log('formatDate', date);
 
@@ -168,7 +177,7 @@ export function getSuggestions(value) {
       if (jdata) {
         resolve(jdata.filter(person => regex.test(getSuggestionValue(person))));
       } else {
-        reject(jdata);
+        reject(new Error(`/suggest returned nothing: ${jdata}`));
       }
     });
   });

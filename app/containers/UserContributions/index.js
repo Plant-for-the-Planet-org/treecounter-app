@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { deleteContribution } from '../../actions/EditMyTree';
 import UserContributions from '../../components/UserContributions';
+import _ from 'lodash';
 
 // Actions
 import {
@@ -14,10 +15,17 @@ import {
 
 class UserContributionsContainer extends React.Component {
   render() {
+    const userContributions = _.orderBy(
+      this.props.userContributions,
+      function(contribution) {
+        return new Date(contribution.plantDate);
+      },
+      'desc'
+    );
     return (
       <UserContributions
         userProfileId={this.props.userProfileId}
-        userContributions={this.props.userContributions}
+        userContributions={userContributions}
         navigation={this.props.navigation}
         deleteContribution={this.props.deleteContribution}
       />

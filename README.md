@@ -7,6 +7,10 @@
 
 `index.web.js` is the entry point of web platform build, `index.js` is the entry point of both iOS and android platform build process.
 
+## Configuration
+
+Copy `app/config/index.js.dist` to `app/config/index.js`.
+
 ## Web Setup
 
 Run following commands
@@ -27,24 +31,18 @@ npm start
   npm install
   ```
 
-### Running into ios simulator
+### Running into iOS simulator
 
-* Uncomment first line in .babelrc.
-To make it look something like this.
-
-```
-{
-  "presets": ["module:metro-react-native-babel-preset"],
-  "env": {
-    "production": {
-      "plugins": ["transform-remove-console"]
-    }
-  }
-}
-```
+Build and run the app in development mode deployed from Metro Bundler in an iOS simulator (starts Metro Bundler automatically if not already running, also starts iOS simulator):
 
 ```bash
 react-native run-ios
+```
+
+If you have problems with a cached version of the bundle, you can stop the Metro Bundler and manually start it with the reset cache option:
+
+```
+react-native start --reset-cache
 ```
 
 ## Android Setup
@@ -64,25 +62,24 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home
 ```
-* Uncomment first line in .babelrc.
-To make it look something like this.
 
-```
-{
-  "presets": ["module:metro-react-native-babel-preset"],
-  "env": {
-    "production": {
-      "plugins": ["transform-remove-console"]
-    }
-  }
-}
-```
+### Running into Android emulator
 
-After completion of these steps run following command in VSCode Terminal:
+Build and run the app in development mode deployed from Metro Bundler (starts Metro Bundler automatically if not already running) on an emulator or device. You need to start an Android emulator or attach a device manually before:
 
 ```bash
 react-native run-android
 ```
+
+If you have problems with a cached version of the bundle, you can stop the Metro Bundler and manually start it with the reset cache option:
+
+```
+react-native start --reset-cache
+```
+
+## Development process
+
+This project uses GitFlow (https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) with Master-Branch `master` and Development-Branch `develop`. The Master-Branch will be automatically released by CircleCI to the production system. There are currently some more protected branches (`staging` with mockup data, `test` and `devel` with test data) also build by CircleCI automatically and mapped to test backends using the branch name as subdomain.
 
 ## Versioning
 
@@ -101,7 +98,6 @@ V 1.1.`11` RC `1`
 Beta and Alpha builds can also have target version number
 V 1.1.`11` B `12`
 V 1.1.`11` A `12` [increment per release]
-
 
 
 ## License

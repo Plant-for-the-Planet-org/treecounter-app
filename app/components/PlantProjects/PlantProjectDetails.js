@@ -22,9 +22,7 @@ class PlantProjectDetails extends React.Component {
       videoUrl,
       mapData
     } = this.props;
-    if (!videoUrl) {
-      videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
-    }
+
     return (
       <div className="plant-project-details__container">
         <PlantProjectImageCarousel

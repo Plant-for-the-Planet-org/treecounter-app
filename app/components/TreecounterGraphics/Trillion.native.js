@@ -28,6 +28,7 @@ import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import Leaderboard from '../../containers/Leaderboard';
 import { TabView, TabBar } from 'react-native-tab-view';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 const Layout = {
   window: {
@@ -228,7 +229,9 @@ class Trillion extends PureComponent {
                 <View style={styles.horizontalLine} />
                 <TouchableOpacity
                   style={{ width: '100%' }}
-                  onPress={() => navigation.navigate('app_donateTrees')}
+                  onPress={() =>
+                    navigation.navigate(getLocalRoute('app_donateTrees'))
+                  }
                 >
                   <Text style={styles.googleCardButton}>
                     {i18n.t('label.searchProjectButton')}

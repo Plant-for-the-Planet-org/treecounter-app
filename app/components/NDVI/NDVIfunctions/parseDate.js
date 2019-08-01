@@ -15,11 +15,13 @@ const parseDate = (month, year) => {
       returnDate[0].substr(0, returnDate[0].length - 1) +
       ' ' +
       returnDate[1] +
-      ', ' +
+      `, ` +
       year
     );
   } else {
-    return returnDate[0] + ' 1 - ' + returnDate[0] + ' ' + returnDate[1] + year;
+    return (
+      returnDate[0] + ' 1 - ' + returnDate[0] + ' ' + returnDate[1] + ` ` + year
+    );
   }
 };
 

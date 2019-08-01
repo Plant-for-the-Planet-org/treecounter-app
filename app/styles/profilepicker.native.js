@@ -95,5 +95,27 @@ export default (editProfileStyle = EStyleSheet.create({
     paddingHorizontal: 20,
     width: '100%',
     justifyContent: 'space-between'
+  },
+  dedicateMyTree: {
+    fontFamily: 'OpenSans',
+    fontSize: 27,
+    fontWeight: '800',
+    fontStyle: 'normal',
+    lineHeight: 40,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    marginBottom: 7
+  },
+  currentlyDedicatedTo: {
+    fontFamily: 'OpenSans',
+    fontSize: 17,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 23,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    marginTop: 45
   }
 }));

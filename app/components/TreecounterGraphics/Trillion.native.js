@@ -140,16 +140,7 @@ class Trillion extends PureComponent {
               {/* Trillion Tree Events Title */}
               {/* <View style={{ marginTop: 25, marginLeft: 16 }}>
                 <Text
-                  style={{
-                    fontFamily: 'OpenSans',
-                    fontSize: 14,
-                    fontWeight: 'normal',
-                    fontStyle: 'normal',
-                    lineHeight: 19,
-                    letterSpacing: 0,
-                    textAlign: 'left',
-                    color: 'rgba(0, 0, 0, 0.6)'
-                  }}
+                  style={styles.trillionTreeEventTitle}
                 >
                   {i18n.t('label.trillionTreesEvents')}
                 </Text>
@@ -185,48 +176,23 @@ class Trillion extends PureComponent {
               </View>
               {/* Tree Counter SVG Ended */}
 
-              <CardLayout
-                style={[
-                  styles.cardContainer,
-                  {
-                    borderRadius: 7,
-                    borderStyle: 'solid',
-                    borderWidth: 1,
-                    borderColor: '#d5d5d5'
-                  }
-                ]}
-              >
-                <Text
-                  style={[
-                    styles.titleText,
-                    { textAlign: 'justify', margin: 12 }
-                  ]}
-                >
+              <CardLayout style={styles.cardContainer}>
+                <Text style={styles.titleText}>
                   {i18n.t('label.trillionTreeMessage1')}
                 </Text>
-                <Text
-                  style={[
-                    styles.titleText,
-                    { textAlign: 'justify', margin: 12 }
-                  ]}
-                >
+                <Text style={styles.titleText}>
                   {i18n.t('label.trillionTreeMessage2')}
                 </Text>
               </CardLayout>
 
               {/* <CardLayout style={{ padding: 16 }}>
-                <Text style={styles2.googleCardTitle}>
+                <Text style={styles.googleCardTitle}>
                   Tree Planting Projects
                 </Text>
                 <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    marginTop: 14,
-                    marginBottom: 14
-                  }}
+                  style={styles.tpoCardText}
                 >
-                  <Text style={styles2.googleCardPara}>
+                  <Text style={styles.googleCardPara}>
                     Are you involved in reforestation and would you like to
                     receive donations to plant trees?
                   </Text>
@@ -236,53 +202,35 @@ class Trillion extends PureComponent {
                   />
                 </View>
                 <View
-                  style={{
-                    borderColor: '#d5d5d5',
-                    width: '100%',
-                    borderBottomWidth: 1
-                  }}
+                  style={styles.tpoCardButton}
                 />
                 <TouchableOpacity style={{ width: '100%' }}>
-                  <Text style={styles2.googleCardButton}>Add Your Project</Text>
+                  <Text style={styles.googleCardButton}>Add Your Project</Text>
                 </TouchableOpacity>
               </CardLayout> */}
 
               <CardLayout
-                style={{
-                  borderRadius: 7,
-                  borderStyle: 'solid',
-                  borderWidth: 1,
-                  borderColor: '#d5d5d5',
-                  padding: 16
-                }}
+                style={[
+                  styles.cardContainer,
+                  {
+                    padding: 16
+                  }
+                ]}
               >
-                <Text style={styles2.googleCardTitle}>
+                <Text style={styles.googleCardTitle}>
                   {i18n.t('label.searchProjectTitle')}
                 </Text>
-                <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    marginTop: 14,
-                    marginBottom: 14
-                  }}
-                >
-                  <Text style={styles2.googleCardPara}>
+                <View style={styles.googleCardParaContainer}>
+                  <Text style={styles.googleCardPara}>
                     {i18n.t('label.searchProjectPara')}
                   </Text>
                 </View>
-                <View
-                  style={{
-                    borderColor: '#d5d5d5',
-                    width: '100%',
-                    borderBottomWidth: 1
-                  }}
-                />
+                <View style={styles.horizontalLine} />
                 <TouchableOpacity
                   style={{ width: '100%' }}
-                  onPress={() => navigation.navigate('Search')}
+                  onPress={() => navigation.navigate('app_donateTrees')}
                 >
-                  <Text style={styles2.googleCardButton}>
+                  <Text style={styles.googleCardButton}>
                     {i18n.t('label.searchProjectButton')}
                   </Text>
                 </TouchableOpacity>
@@ -340,37 +288,3 @@ Trillion.propTypes = {
   pledgeEvents: PropTypes.object,
   navigation: PropTypes.any
 };
-
-const styles2 = StyleSheet.create({
-  googleCardTitle: {
-    fontFamily: 'OpenSans',
-    fontSize: 17,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 23,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#4d5153'
-  },
-  googleCardPara: {
-    fontFamily: 'OpenSans',
-    fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 21,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#4d5153'
-  },
-  googleCardButton: {
-    fontFamily: 'OpenSans',
-    fontSize: 14,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 21,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#89b53a',
-    marginTop: 16
-  }
-});

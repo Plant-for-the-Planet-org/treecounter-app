@@ -44,19 +44,7 @@ class ProfilePickerModal extends Component {
       <View>
         <View style={styles.containerDedicateStyle}>
           <View style={styles.dedicateTreeName}>
-            <Text
-              style={{
-                fontFamily: 'OpenSans',
-                fontSize: 27,
-                fontWeight: '800',
-                fontStyle: 'normal',
-                lineHeight: 40,
-                letterSpacing: 0,
-                textAlign: 'left',
-                color: '#4d5153',
-                marginBottom: 7
-              }}
-            >
+            <Text style={styles.dedicateMyTree}>
               {i18n.t('label.dedicate_my_trees')}
             </Text>
             <Text style={styles.textNotDedicateStyle}>
@@ -118,19 +106,7 @@ class ProfilePickerModal extends Component {
       <View>
         <View style={styles.containerDedicateStyle}>
           <View style={styles.dedicateTreeName}>
-            <Text
-              style={{
-                fontFamily: 'OpenSans',
-                fontSize: 27,
-                fontWeight: '800',
-                fontStyle: 'normal',
-                lineHeight: 40,
-                letterSpacing: 0,
-                textAlign: 'left',
-                color: '#4d5153',
-                marginBottom: 7
-              }}
-            >
+            <Text style={styles.dedicateMyTree}>
               {i18n.t('label.dedicate_my_trees')}
             </Text>
             <Text style={styles.textDedicateStyle}>
@@ -138,19 +114,7 @@ class ProfilePickerModal extends Component {
                 user: currentUserProfile.supportedTreecounter.displayName
               })}
             </Text>
-            <Text
-              style={{
-                fontFamily: 'OpenSans',
-                fontSize: 17,
-                fontWeight: '600',
-                fontStyle: 'normal',
-                lineHeight: 23,
-                letterSpacing: 0,
-                textAlign: 'left',
-                color: '#4d5153',
-                marginTop: 45
-              }}
-            >
+            <Text style={styles.currentlyDedicatedTo}>
               {i18n.t('label.currently_dedicated_to')}
             </Text>
           </View>

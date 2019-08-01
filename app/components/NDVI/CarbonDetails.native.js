@@ -18,11 +18,7 @@ const CarbonDetails = props => {
       </View>
 
       <CardLayout style={styles.cardLayout}>
-        <View
-          style={{
-            ...styles.carbonContainer
-          }}
-        >
+        <View style={styles.carbonContainer}>
           <Text style={{ ...styles.carbonText }}>
             {delimitNumbers(props.carbonValue)} Kg
           </Text>

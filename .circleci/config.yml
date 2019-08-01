@@ -5,12 +5,6 @@
 version: 2
 jobs:
   build:
-    branches:
-      only:
-        - master
-        - staging
-        - devel
-        - test
     docker:
       - image: alpine
 
@@ -83,3 +77,16 @@ jobs:
           command: |
             source $ENV_VARS
             ssh $HOST "cd $WD_SYMFONY; sh .circleci/integrate-app.sh $CIRCLE_BRANCH"
+
+workflows:
+  version: 2
+  tagged-build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - test
+                - staging
+                - devel

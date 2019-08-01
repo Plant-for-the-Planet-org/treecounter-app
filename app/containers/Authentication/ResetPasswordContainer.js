@@ -48,7 +48,11 @@ class ResetPassswordContainer extends React.Component {
   }
 
   render() {
-    let value = { token: this.props.match.params.token };
+    let value = {
+      token: this.props.navigation
+        ? this.props.navigation.getParam('token')
+        : this.props.match.params.token
+    };
     return (
       <ResetPassword
         ref="resetPasswordContainer"

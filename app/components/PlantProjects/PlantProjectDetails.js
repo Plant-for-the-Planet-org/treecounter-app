@@ -25,9 +25,7 @@ class PlantProjectDetails extends React.Component {
       mapData,
       ndviUid
     } = this.props;
-    if (!videoUrl) {
-      videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
-    }
+
     return (
       <div className="plant-project-details__container">
         <PlantProjectImageCarousel

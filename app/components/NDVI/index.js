@@ -186,10 +186,7 @@ export default class NDVI extends Component {
               <div className="row">
                 <CarbonDetails
                   carbonValue={this.state.selectedDataPoint.carbon}
-                  onClickHelp={this.onClickHelp}
-                  toolTipHelpButtonSpell={i18n.t(
-                    'label.NDVI_tooltip_for_help_button'
-                  )}
+                  toolTipHelpButtonSpell={i18n.t('label.NDVI_carbon_tooltip')}
                 />
               </div>
             </div>

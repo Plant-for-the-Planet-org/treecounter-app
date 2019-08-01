@@ -67,10 +67,16 @@ export default class NDVIContainer extends Component {
             averageSpell={i18n.t('label.NDVI_info_average')}
             maximumSpell={i18n.t('label.NDVI_info_maximum')}
             selectedDataPoint={this.state.selectedDataPoint}
+            toolTipHelpButtonSpell={i18n.t(
+              'label.NDVI_tooltip_for_help_button'
+            )}
           />
         </CardLayout>
 
-        <CarbonDetails carbonValue={this.state.selectedDataPoint.carbon} />
+        <CarbonDetails
+          carbonValue={this.state.selectedDataPoint.carbon}
+          toolTipHelpButtonSpell={i18n.t('label.NDVI_carbon_tooltip')}
+        />
       </React.Fragment>
     );
   }

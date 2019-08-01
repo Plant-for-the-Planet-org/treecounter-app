@@ -4,6 +4,7 @@ import parseDate from './NDVIfunctions/parseDate';
 import { View, Text } from 'react-native';
 import TouchableItem from '../Common/TouchableItem.native';
 import styles from '../../styles/NDVI/Info';
+import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 
 const textCommonStyle = { fontSize: 10, lineHeight: 14 };
 const boldTextStyle = { fontWeight: 'bold' };
@@ -32,13 +33,29 @@ const Info = props => {
                 <Text style={boldTextStyle}>{parseFloat(aggregate.max)}</Text>
               </Text>
             </View>
-            <TouchableItem
-              style={{
-                ...styles.info
+            <ReactNativeTooltipMenu
+              labelContainerStyle={{
+                width: 200,
+                alignItems: 'center'
               }}
-            >
-              <Text>?</Text>
-            </TouchableItem>
+              buttonComponent={
+                <TouchableItem
+                  style={{
+                    ...styles.info
+                  }}
+                >
+                  <Text>?</Text>
+                </TouchableItem>
+              }
+              items={[
+                {
+                  label: props.toolTipHelpButtonSpell
+                    ? props.toolTipHelpButtonSpell
+                    : 'None',
+                  onPress: () => {}
+                }
+              ]}
+            />
           </View>
         </React.Fragment>
       )}

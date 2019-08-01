@@ -119,10 +119,6 @@ export default class NDVI extends Component {
     this.props.refresh && this.props.refresh();
   };
 
-  onClickHelp = props => {
-    console.log(props);
-  };
-
   render() {
     const dataPoints = this.props.dataPoints;
     // const dataPoints = [];

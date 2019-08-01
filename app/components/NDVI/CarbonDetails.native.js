@@ -6,6 +6,7 @@ import TouchableItem from '../Common/TouchableItem.native';
 import styles from '../../styles/NDVI/Carbon';
 import i18n from '../../locales/i18n.js';
 import { delimitNumbers } from '../../utils/utils';
+import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 
 const CarbonDetails = props => {
   return (
@@ -25,9 +26,29 @@ const CarbonDetails = props => {
           <Text style={{ ...styles.carbonText }}>
             {delimitNumbers(props.carbonValue)} Kg
           </Text>
-          <TouchableItem style={styles.info}>
-            <Text>?</Text>
-          </TouchableItem>
+          <ReactNativeTooltipMenu
+            labelContainerStyle={{
+              width: 200,
+              alignItems: 'center'
+            }}
+            buttonComponent={
+              <TouchableItem
+                style={{
+                  ...styles.info
+                }}
+              >
+                <Text>?</Text>
+              </TouchableItem>
+            }
+            items={[
+              {
+                label: props.toolTipHelpButtonSpell
+                  ? props.toolTipHelpButtonSpell
+                  : 'None',
+                onPress: () => {}
+              }
+            ]}
+          />
         </View>
       </CardLayout>
     </View>

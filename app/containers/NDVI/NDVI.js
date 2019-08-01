@@ -50,7 +50,10 @@ class NDVIContainer extends React.Component {
       return null;
     }
     return !this.state.loading ? (
-      <NDVI dataPoints={this.state.dataPoints} refresh={this.handleRefresh} />
+      <NDVI
+        dataPoints={this.state.dataPoints.dataPoints}
+        refresh={this.handleRefresh}
+      />
     ) : (
       <LoadingIndicators />
     );

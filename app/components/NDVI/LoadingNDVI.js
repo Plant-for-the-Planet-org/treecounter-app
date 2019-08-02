@@ -28,10 +28,10 @@ const LoadingNDVI = props => {
         </div>
         <div className="text-center help-btn ">
           <div className="tooltip">
-            <a data-tip data-for="dedicate-trees-icon">
+            <a data-tip data-for="loading-ndvi-icon">
               <img className="ndvi-img" src={questionmark_orange} />
             </a>
-            <ReactTooltip id="dedicate-trees-icon" effect="solid" type="dark">
+            <ReactTooltip id="loading-ndvi-icon" effect="solid" type="dark">
               <span className="tooltip-text">
                 {props.toolTipHelpButtonSpell
                   ? props.toolTipHelpButtonSpell

@@ -48,7 +48,10 @@ class PlantProjectDetails extends React.Component {
         )}
         {
           <div className={'ndvi-conatiner'}>
-            <NDVI ndviUid={ndviUid} />
+            <NDVI
+              ndviUid={ndviUid}
+              onViewMoreClick={this.props.onViewMoreClick.bind(this)}
+            />
           </div>
         }
       </div>

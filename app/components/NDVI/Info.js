@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import parseDate from './NDVIfunctions/parseDate';
+import { questionmark_orange } from '../../assets';
+import ReactTooltip from 'react-tooltip';
 
 const Info = props => {
   const aggregate = props.selectedDataPoint.ndviAggregate;
@@ -27,8 +29,19 @@ const Info = props => {
                 <b>{aggregate.max ? aggregate.max : 'NaN'}</b>
               </p>
             </div>
-            <div className="flex-1 text-center btn-container">
-              <button>?</button>
+            <div className="text-center btn-container">
+              <div className="tooltip">
+                <a data-tip data-for="info-icon">
+                  <img className="ndvi-img" src={questionmark_orange} />
+                </a>
+                <ReactTooltip id="info-icon" effect="solid" type="dark">
+                  <span className="tooltip-text">
+                    {props.toolTipHelpButtonSpell
+                      ? props.toolTipHelpButtonSpell
+                      : 'none'}
+                  </span>
+                </ReactTooltip>
+              </div>
             </div>
           </div>
         </React.Fragment>
@@ -52,5 +65,6 @@ Info.propTypes = {
   minimumSpell: PropTypes.string,
   averageSpell: PropTypes.string,
   maximumSpell: PropTypes.string,
-  ndviResulFromSpell: PropTypes.string
+  ndviResulFromSpell: PropTypes.string,
+  toolTipHelpButtonSpell: PropTypes.string
 };

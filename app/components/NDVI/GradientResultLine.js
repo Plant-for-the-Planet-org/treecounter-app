@@ -1,13 +1,12 @@
 /* eslint-disable */
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import getMetricsForDisplayingGradientLineHighlight from './NDVIfunctions/getMetricsForDisplayingGradientLineHighlight';
+import { getPointPercentageOnGradient } from './NDVIfunctions/GradientUtils';
 import moment from 'moment';
 
 class GradientResultLine extends React.PureComponent {
   constructor(props) {
-    super();
+    super(props);
     this.state = { bgStyle: {} };
     this.hasMounted = false;
   }
@@ -29,7 +28,6 @@ class GradientResultLine extends React.PureComponent {
       ${props.getColorForNDVI(props.avg)} 50%,
        ${props.getColorForNDVI(props.max)} 100%)`;
     backgroundImage = backgroundImage.replace(/(\r\n|\n|\r)/gm, '');
-    console.log('backgroundImage', backgroundImage);
     return backgroundImage;
   };
 
@@ -40,11 +38,8 @@ class GradientResultLine extends React.PureComponent {
       bgStyle = { backgroundImage: this.calculateHighlightLineColor() };
     }
 
-    this.state;
-    const hightlightLineMetricts = getMetricsForDisplayingGradientLineHighlight(
-      props.min,
-      props.max
-    );
+    const minPercentage = getPointPercentageOnGradient(props.min);
+    const maxPercentage = getPointPercentageOnGradient(props.max);
 
     return (
       <div className="gradient-result-line-component">
@@ -58,8 +53,8 @@ class GradientResultLine extends React.PureComponent {
               <div
                 className="highlight-line"
                 style={{
-                  left: hightlightLineMetricts[0],
-                  width: hightlightLineMetricts[1],
+                  left: minPercentage + '%',
+                  width: `${maxPercentage - minPercentage}%`,
                   backgroundImage: bgStyle.backgroundImage
                 }}
               />
@@ -80,6 +75,6 @@ GradientResultLine.propTypes = {
   max: PropTypes.number,
   selectedDataPoint: PropTypes.object,
   getColorForNDVI: PropTypes.func,
-  avg: PropTypes.func,
+  avg: PropTypes.number,
   forwardedRef: PropTypes.any
 };

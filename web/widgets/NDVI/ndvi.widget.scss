@@ -4,11 +4,17 @@
 @import "../../../web/stylesheet/NDVI/gradient-result-line.scss";
 @import "../../../web/stylesheet/NDVI/time-series.scss";
 @import "../../../web/stylesheet/NDVI/circle.scss";
+@import "../../../web/stylesheet/NDVI/carbon-details.scss";
 
 .row {
   display: flex;
   flex-direction: row;
-  // flex-wrap: wrap;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .letter-box {

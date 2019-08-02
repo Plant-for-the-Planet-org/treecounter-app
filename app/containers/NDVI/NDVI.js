@@ -36,7 +36,7 @@ class NDVIContainer extends React.Component {
         console.log(error);
         this.setState({
           loading: false,
-          dataPoints: mockDataPoints
+          dataPoints: { dataPoints: mockDataPoints }
         });
       }
     );

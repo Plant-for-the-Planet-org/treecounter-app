@@ -21,8 +21,8 @@ const Circle = props => {
   if (props.ndviAggregate) {
     if (
       ndviAggregate.min == undefined &&
-      !!ndviAggregate.avg == undefined &&
-      !!ndviAggregate.max == undefined
+      ndviAggregate.avg == undefined &&
+      ndviAggregate.max == undefined
     ) {
       colors = ['rgb(142, 142, 142)', 'rgb(142, 142, 142)'];
       locations = [0, 1];
@@ -56,7 +56,7 @@ const Circle = props => {
     }
 
     return (
-      <TouchableItem onPress={props.handleOnclick}>
+      <TouchableItem onPress={handleOnclick}>
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}

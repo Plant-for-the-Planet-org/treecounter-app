@@ -1,16 +1,1 @@
-{
-    "NDVI_container_static_month": "",
-    "NDVI_gradient_result_line_title": "",
-    "NDVI_legend_indicators": "",
-    "NDVI_info_results": "",
-    "NDVI_info": "",
-    "NDVI_info_average": "",
-    "NDVI_info_maximum": "",
-    "NDVI_info_minimum": "",
-    "NDVI_legend_water": "",
-    "NDVI_legend_rock_sand_snow": "",
-    "NDVI_legend_grasslands": "",
-    "NDVI_legend_dense_vegetation": "",
-    "NDVI_on_load_paragraph": "",
-    "NDVI_on_load_refresh_button": ""
-}
+{ }

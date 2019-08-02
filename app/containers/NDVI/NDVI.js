@@ -47,9 +47,9 @@ class NDVIContainer extends React.Component {
   }
 
   render() {
-    // if (!ENABLED_NDVI || !this.props.ndviUid) {
-    //   return null;
-    // }
+    if (!ENABLED_NDVI || !this.props.ndviUid) {
+      return null;
+    }
     return !this.state.loading ? (
       <NDVI
         dataPoints={this.state.dataPoints.dataPoints}

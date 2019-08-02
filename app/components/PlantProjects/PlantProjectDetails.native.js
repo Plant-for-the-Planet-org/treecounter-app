@@ -22,7 +22,8 @@ class PlantProjectDetails extends React.Component {
   render() {
     let vUrl = this.props.videoUrl;
     if (context.debug && !this.props.videoUrl) {
-      vUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
+      //un-comment this if anybody want to test video playing on App
+      // vUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
     }
     return (
       <View style={styles.carousalContainer}>

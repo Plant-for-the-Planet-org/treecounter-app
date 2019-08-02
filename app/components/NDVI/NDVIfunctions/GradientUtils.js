@@ -39,7 +39,10 @@ export const getPointPercentageOnGradient = (point = 0) => {
   return percentage;
 };
 
-export const getColorForNDVI = (point = 0, gradientWidth = 350) => {
+export const getColorForNDVI = (point, gradientWidth = 350) => {
+  if (!point) {
+    return `rgb(142, 142, 142)`;
+  }
   if (point > 1) {
     point = 1;
   }

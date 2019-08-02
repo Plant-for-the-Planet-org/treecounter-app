@@ -42,8 +42,7 @@ import EditOrange from './images/icons/edit_orange.png';
 import QuestionMarkGreen from './images/icons/questionmark_green.png';
 import country from './images/icons/country.png';
 import organization from './images/icons/organization.png';
-import competition from './images/icons/competition.png';
-import competition_outline_red from './images/icons/competition.png';
+import competition_outline_red from './images/icons/competition_outline_red.png';
 import competition_outline from './images/icons/competition_outline.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
@@ -100,8 +99,8 @@ import svgBackground from './svgAssets/svg_background.png';
 import darkTree from './images/darkTree.png';
 import imageUpload from './images/icons/upload_image.png';
 import iosSearchGrey from './images/icons/search_grey.png';
-import iosLogout from './images/icons/ios_logout.png';
-import iosFaqs from './images/icons/ios_faqs.png';
+import logout from './images/icons/logout.png';
+import faqs from './images/icons/faqs.png';
 import iosInformation from './images/icons/ios_information.png';
 import redeemGreen from './images/icons/redeemGreen.png';
 import redeemRed from './images/icons/redeemRed.png';
@@ -111,11 +110,11 @@ import redeem_outline_red from './images/icons/redeem_outline_red.png';
 import lightTree from './images/lightTree.png';
 import AppStoreLogo from './images/appstore-logo.png';
 import targetPlanted from './images/target.png';
-import infoGrey from './images/icons/info_grey.png';
-import editGrey from './images/icons/edit_grey.png';
+import info from './images/icons/info.png';
+import editProfile from './images/icons/edit_profile.png';
 import welcomeLogo from './images/icons/welcomeLogo.png';
-import world_outline from './images/world_outline.png';
-import world_outline_red from './images/world_outline_red.png';
+import world_outline from './images/icons/world_outline.png';
+import world_outline_red from './images/icons/world_outline_red.png';
 import selector_menu from './images/icons/selector_menu.png';
 import radio_button from './images/icons/radio_button.png';
 import radio_button_selected from './images/icons/radio_button_selected.png';
@@ -125,9 +124,8 @@ import flagTarget from './images/flag_target.png';
 import compCalendar from './images/calendar_comp.png';
 import upwardArrow from './images/right-arrow.png';
 import downwardArrow from './images/left-arrow.png';
-import challengeIcon from './images/icons/flag.png';
 import webProgramming from './images/icons/web_programming.png';
-import communityMenu from './images/icons/community_menu.jpeg';
+import communityMenu from './images/icons/community_menu.png';
 import tpoIcon from './images/tpo_icon.png';
 import schoolIcon from './images/school_icon.png';
 import individualIcon from './images/individual_icon.png';
@@ -195,7 +193,6 @@ export {
   link,
   country,
   organization,
-  competition,
   competition_outline,
   competition_outline_red,
   education,
@@ -241,8 +238,8 @@ export {
   imageUpload,
   iosSearchGreen,
   iosSearchGrey,
-  iosLogout,
-  iosFaqs,
+  logout,
+  faqs,
   iosInformation,
   redeemGreen,
   redeemRed,
@@ -251,8 +248,8 @@ export {
   redeem_outline_red,
   lightTree,
   targetPlanted,
-  infoGrey,
-  editGrey,
+  info,
+  editProfile,
   welcomeLogo,
   world_outline,
   world_outline_red,
@@ -269,7 +266,6 @@ export {
   upwardArrow,
   downwardArrow,
   arrow_left_orange_outline,
-  challengeIcon,
   webProgramming,
   communityMenu
 };

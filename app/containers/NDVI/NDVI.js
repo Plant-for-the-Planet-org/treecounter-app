@@ -23,6 +23,7 @@ class NDVIContainer extends React.Component {
             loading: false,
             dataPoints: success.data
           });
+          this.props.onViewMoreClick && this.props.onViewMoreClick();
         } catch (err) {
           // this.setState({
           //   loading: false,
@@ -46,11 +47,14 @@ class NDVIContainer extends React.Component {
   }
 
   render() {
-    if (!ENABLED_NDVI) {
+    if (!ENABLED_NDVI || !this.props.ndviUid) {
       return null;
     }
     return !this.state.loading ? (
-      <NDVI dataPoints={this.state.dataPoints} refresh={this.handleRefresh} />
+      <NDVI
+        dataPoints={this.state.dataPoints.dataPoints}
+        refresh={this.handleRefresh}
+      />
     ) : (
       <LoadingIndicators />
     );
@@ -60,5 +64,6 @@ class NDVIContainer extends React.Component {
 export default NDVIContainer;
 
 NDVIContainer.propTypes = {
-  ndviUid: PropTypes.string
+  ndviUid: PropTypes.string,
+  onViewMoreClick: PropTypes.func
 };

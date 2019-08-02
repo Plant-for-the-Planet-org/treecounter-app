@@ -25,9 +25,7 @@ class PlantProjectDetails extends React.Component {
       mapData,
       ndviUid
     } = this.props;
-    if (!videoUrl) {
-      videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
-    }
+
     return (
       <div className="plant-project-details__container">
         <PlantProjectImageCarousel
@@ -50,7 +48,10 @@ class PlantProjectDetails extends React.Component {
         )}
         {
           <div className={'ndvi-conatiner'}>
-            <NDVI ndviUid={ndviUid} />
+            <NDVI
+              ndviUid={ndviUid}
+              onViewMoreClick={this.props.onViewMoreClick.bind(this)}
+            />
           </div>
         }
       </div>

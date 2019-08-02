@@ -83,7 +83,7 @@ export class LargeMenuItem extends Component {
               style={styles.largeImageStyle}
               source={this.props.iconUrl}
             />
-            <View style={{ flexDirection: 'column' }}>
+            <View style={styles.textGroupContainer}>
               <Text style={styles.titleStyle}>
                 {this.props.titleId ? i18n.t('label.load') : this.props.title}
               </Text>
@@ -97,12 +97,11 @@ export class LargeMenuItem extends Component {
               style={styles.largeImageStyle}
               source={this.props.iconUrl}
             />
-            <Text style={styles.largeTextStyle}>
-              {this.props.titleId ? i18n.t('label.load') : this.props.title}
-            </Text>
-            {this.props.details ? (
-              <Text style={styles.largeTextStyle}>{this.props.details}</Text>
-            ) : null}
+            <View style={styles.textGroupContainer}>
+              <Text style={styles.largeTextStyle}>
+                {this.props.titleId ? i18n.t('label.load') : this.props.title}
+              </Text>
+            </View>
           </View>
         )}
       </TouchableItem>

@@ -90,7 +90,7 @@ export default class PageNotFound extends React.Component {
             </g>
           </svg>
         </div>
-        {/* <img src={infoGrey} /> */}
+        {/* <img src={info} /> */}
         {/* <h1>404</h1>
         <h4>Page not found.</h4> */}
 

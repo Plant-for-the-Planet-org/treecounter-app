@@ -5,7 +5,9 @@ export default (coarbonStyle = EStyleSheet.create({
     marginTop: 24
   },
   cardLayout: {
-    padding: 16
+    paddingLeft: 16,
+    paddingTop: 16,
+    paddingBottom: 16
   },
   carbonContainer: {
     flexDirection: 'row',

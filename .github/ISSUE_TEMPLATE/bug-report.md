@@ -31,7 +31,7 @@ Steps to reproduce the behavior:
 *If applicable, add screenshots to help explain your problem.*
 
 **Desktop (please complete the following information):**
-- OS: [e.g. iOS]
+- OS: [e.g. MacOS]
  - Browser [e.g. chrome, safari]
  - Plant-for-the-Planet App Version [e.g. 1.0.3]
 

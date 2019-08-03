@@ -2,6 +2,9 @@
 
 .time-series-component {
   margin-bottom: 22px;
+  .row {
+    flex-direction: row;
+  }
   .time-serie-component {
     height: 21px;
     margin-top: 7px;

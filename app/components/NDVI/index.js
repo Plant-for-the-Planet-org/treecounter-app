@@ -174,17 +174,24 @@ export default class NDVI extends Component {
                   />
                 </div>
               </div>
-              <div className="carbon-box">
-                <div className="row">
-                  <h4>{i18n.t('label.NDVI_carbon_title')}</h4>
-                </div>
-              </div>
-              <div className="row">
-                <CarbonDetails
-                  carbonValue={this.state.selectedDataPoint.carbon}
-                  toolTipHelpButtonSpell={i18n.t('label.NDVI_carbon_tooltip')}
-                />
-              </div>
+
+              {this.state.selectedDataPoint.carbon != undefined && (
+                <React.Fragment>
+                  <div className="carbon-box">
+                    <div className="row">
+                      <h4>{i18n.t('label.NDVI_carbon_title')}</h4>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <CarbonDetails
+                      carbonValue={this.state.selectedDataPoint.carbon}
+                      toolTipHelpButtonSpell={i18n.t(
+                        'label.NDVI_carbon_tooltip'
+                      )}
+                    />
+                  </div>
+                </React.Fragment>
+              )}
             </div>
           </React.Fragment>
         ) : (

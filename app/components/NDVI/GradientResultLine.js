@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getPointPercentageOnGradient } from './NDVIfunctions/GradientUtils';
-import moment from 'moment';
+import parseMonth from './NDVIfunctions/parseMonth';
 
 class GradientResultLine extends React.PureComponent {
   constructor(props) {
@@ -43,7 +43,7 @@ class GradientResultLine extends React.PureComponent {
 
     return (
       <div className="gradient-result-line-component">
-        <div className="title">{`${moment.months(
+        <div className="title">{`${parseMonth(
           props.selectedDataPoint.month - 1
         )}, ${props.selectedDataPoint.year}`}</div>
         <div className="gradient-wrapper">

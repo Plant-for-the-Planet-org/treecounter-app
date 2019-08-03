@@ -10,7 +10,7 @@ import {
 import { LargeMenuItem } from './MenuItem.native';
 import PropTypes, { func } from 'prop-types';
 import styles from '../../styles/menu.native';
-import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
+import { updateRoute } from '../../helpers/routerHelper';
 import * as icons from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -147,10 +147,7 @@ export default class Menu extends Component {
       );
     } else if (urlBreak[urlBreak.length - 2] === 'donate-trees') {
       this.props.selectPlantProjectAction(urlBreak[urlBreak.length - 1]);
-      setTimeout(
-        () => updateStaticRoute('app_donate_detail', navigation, 0),
-        0
-      );
+      setTimeout(() => updateRoute('app_selectProject', navigation, 0, {}), 0);
     } else {
       setTimeout(
         () => updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0),

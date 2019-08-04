@@ -23,7 +23,7 @@ import pledge_latest from './images/pledge_recent.png';
 import baselineEdit from './images/baseline-edit.png';
 import baselineDelete from './images/baseline-delete.png';
 import pot from './images/pot.png';
-import loadingBar from './images/loading-bar.gif';
+import loadingBar from './images/loading-bar.svg';
 import tree from './images/darkTree.png';
 import SideMenuImage from './images/side_menu.png';
 import GreenEmail from './images/email-green.png';

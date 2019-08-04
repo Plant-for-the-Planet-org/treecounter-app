@@ -1,11 +1,12 @@
 import React from 'react';
-import { Image, View } from 'react-native';
-import { loadingBar } from '../../assets';
+import SvgUri from 'react-native-svg-uri';
+import { View } from 'react-native';
+import { loadingBar } from '../../assets/svgAssets';
 import i18n from '../../locales/i18n.js';
 
 const LoadingIndicator = style => (
   <View style={[loadingIndicatorStyle, style]}>
-    <Image source={loadingBar} alt={i18n.t('label.loading')} />
+    <SvgUri width="100" height="100" svgXmlData={loadingBar} />
   </View>
 );
 

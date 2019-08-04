@@ -1,6 +1,7 @@
 import cloud1 from './cloud1';
 import cloud2 from './cloud2';
 import ballons from './ballons';
+import loadingBar from './loading-bar';
 
 import darkCrownTree001 from './darkCrownTree001';
 import darkCrownTree002 from './darkCrownTree002';
@@ -151,6 +152,7 @@ export {
   cloud1,
   cloud2,
   ballons,
+  loadingBar,
   darkCrownTree001,
   darkCrownTree002,
   darkCrownTree003,

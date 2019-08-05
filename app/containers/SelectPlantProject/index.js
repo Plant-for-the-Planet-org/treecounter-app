@@ -11,7 +11,7 @@ import {
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import SelectPlantProject from '../../components/SelectPlantProject';
-import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper.native';
+import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper';
 import { fetchCurrencies } from '../../actions/currencies';
 
 class SelectPlantProjectContainer extends Component {

@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const Dotenv = require('dotenv-webpack');
+
 const commonConfig = require('./webpack.common.config.js');
 const path = require('path');
 
@@ -51,6 +53,10 @@ module.exports = webpackMerge(commonConfig, {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new Dotenv({
+      path: path.join(__dirname, '../../.env'),
+      defaults: path.join(__dirname, '../../defaults.env')
     })
   ]
 });

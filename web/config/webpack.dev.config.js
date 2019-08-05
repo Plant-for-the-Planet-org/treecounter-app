@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+const Dotenv = require('dotenv-webpack');
 const commonConfig = require('./webpack.common.config.js');
 const path = require('path');
 
@@ -45,6 +46,10 @@ module.exports = webpackMerge(commonConfig, {
       'process.env': {
         ENV: JSON.stringify('development')
       }
+    }),
+    new Dotenv({
+      path: path.join(__dirname, '../../.env'),
+      defaults: path.join(__dirname, '../../defaults.env')
     })
   ]
 });

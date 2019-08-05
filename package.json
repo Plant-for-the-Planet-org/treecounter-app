@@ -8,6 +8,8 @@
     "build": "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail ",
     "build:server": "webpack --config ./web/config/webpack.server.config.js --profile --bail",
     "build:prod_server": "NODE_ENV='production' webpack --config ./web/config/webpack.prod_server.config.js --profile --bail; rm web/server/*.map",
+    "ios": "./with-env react-native run-ios",
+    "android": "./with-env react-native run-android",
     "precommit": "lint-staged",
     "postinstall": "grep -r --include=*.java -l 'android.support.v7' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v7/androidx.appcompat/' -pi && grep -r --include=*.java -l 'android.support.v4' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v4/androidx.core/' -pi && grep -r --include=*.java -l 'android.support' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi && grep --include=*.java -r -l 'android.support' ./node_modules/react-native-youtube | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi"
   },
@@ -94,6 +96,7 @@
     "babel-jest": "22.4.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-inline-environment-variables": "0.4.3",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",

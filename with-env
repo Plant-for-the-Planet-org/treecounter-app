@@ -1,0 +1,11 @@
+#/bin/bash
+
+# Load env vars
+source ./defaults.env
+if test -f "./.env"; then
+  source ./.env
+fi
+
+echo $HOST
+
+eval "$@"

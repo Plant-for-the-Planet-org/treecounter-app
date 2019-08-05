@@ -1,6 +1,16 @@
 #/bin/bash
 
-BUGSNAG_API_KEY=6f2971a9b077662912f61ae602716afd
+# Load env vars
+source ./defaults.env
+if test -f "./.env"; then
+  source ./.env
+fi
+
+if [[ -z "$BUGSNAG_API_KEY" ]]; then
+  echo "env var BUGSNAG_API_KEY is required"
+  exit 1
+fi
+
 PACKAGE_VERSION=$(cat package.json \
   | grep version \
   | head -1 \

@@ -10,7 +10,9 @@ class StripePayment extends Component {
   }
 
   set = () => {
-    this.setState({ stripe: window.Stripe(this.props.apiKey) });
+    this.setState({
+      stripe: window.Stripe('pk_test_0ahH0yMukgNzOEd0UppzUfsc')
+    });
   };
 
   componentDidMount() {
@@ -19,7 +21,9 @@ class StripePayment extends Component {
     } else {
       document.querySelector('#stripe-js').addEventListener('load', () => {
         // Create Stripe instance once Stripe.js loads
-        this.setState({ stripe: window.Stripe(this.props.apiKey) });
+        this.setState({
+          stripe: window.Stripe('pk_test_0ahH0yMukgNzOEd0UppzUfsc')
+        });
       });
     }
   }

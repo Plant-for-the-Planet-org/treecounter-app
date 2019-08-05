@@ -26,7 +26,7 @@ export default class SignUp extends Component {
 
   componentDidMount() {
     loadReCaptcha({
-      key: '6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF',
+      key: process.env.RECAPCHA_SITE_KEY,
       id: uuid(),
       onSuccess: () => {
         let gBatch = document.getElementsByClassName('grecaptcha-badge');
@@ -88,7 +88,7 @@ export default class SignUp extends Component {
         <ReCaptcha
           ref={ref => (this.recaptcha = ref)}
           action="login"
-          sitekey="6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF"
+          sitekey={process.env.RECAPCHA_SITE_KEY}
           verifyCallback={this.verifyCallback}
         />
         <TextHeading>{i18n.t('label.signUp')}</TextHeading>

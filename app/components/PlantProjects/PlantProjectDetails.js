@@ -5,7 +5,6 @@ import UserSynopsis from '../Common/UserSynopsis';
 import UserHomepageLink from '../Common/UserHomepageLink';
 import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 
-import { context } from '../../../app/config/index';
 import VideoContainer from '../Common/VideoContainer';
 import NDVI from '../../containers/NDVI/NDVI';
 

@@ -1,15 +1,13 @@
 import { getApiRoute } from '../../../app/actions/apiRouting';
 import axios from 'axios';
-import { context } from '../../../app/config';
 import { tree_outline } from '../../../app/assets';
 import './basic.widget.scss';
 import i18n from './locales/i18n';
 import { getLocalRoute } from '../../../app/actions/apiRouting';
 
 const widget = require('./basic.widget.html');
-const { scheme, host, base: baseUrl } = context;
 
-const serverName = `${scheme}://${host}`;
+const serverName = `${process.env.SCHEME}://${process.env.HOST}`;
 const cssStyle = `<link href="widget.css" rel="stylesheet"/>
   <link href="${serverName}/widget.css" rel="stylesheet"/>`;
 

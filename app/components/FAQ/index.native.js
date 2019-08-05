@@ -12,7 +12,6 @@ import {
   Linking
 } from 'react-native';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
-import { context } from '../../config';
 import styles from '../../styles/faq';
 import TabContainer from '../../containers/Menu/TabContainer';
 
@@ -39,7 +38,7 @@ export default class FAQ extends Component {
           onLinkPress={url => {
             try {
               url = url.startsWith('/')
-                ? `${context.scheme}://${context.host}${url}`
+                ? `${process.env.SCHEME}://${process.env.HOST}${url}`
                 : url;
             } catch (err) {
               // console.log(err);

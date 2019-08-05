@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import { getLocalRoute } from '../../actions/apiRouting';
-import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';
 import { iosSearchWhite, iosNotificationWhite, shareIcon } from '../../assets';
 import { Share } from 'react-native';
@@ -43,18 +42,18 @@ export default class HeaderRight extends Component {
       let redirectPath = '';
       if (pathname.split('/').includes('home')) {
         redirectPath =
-          context.scheme +
+          process.env.SCHEME +
           '://' +
-          context.host +
+          process.env.HOST +
           getLocalRoute('app_treecounter', {
             treecounter: userProfile.treecounter.slug
           });
       } else {
         if (pathname === '/t') {
           redirectPath =
-            context.scheme +
+            process.env.SCHEME +
             '://' +
-            context.host +
+            process.env.HOST +
             getLocalRoute('app_treecounter', {
               treecounter: state.routes[state.index].params.treeCounterId
             });
@@ -65,14 +64,15 @@ export default class HeaderRight extends Component {
               ? state.routes[state.index].params.competition
               : -1;
           redirectPath =
-            context.scheme +
+            process.env.SCHEME +
             '://' +
-            context.host +
+            process.env.HOST +
             getLocalRoute('app_competition', {
               competition
             });
         } else {
-          redirectPath = context.scheme + '://' + context.host + pathname;
+          redirectPath =
+            process.env.SCHEME + '://' + process.env.HOST + pathname;
         }
       }
       return (

@@ -3,10 +3,8 @@ import WidgetShare from '../../components/WidgetsShare';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { currentUserProfileSelector } from '../../selectors';
-import { context } from '../../config';
 
-const { scheme, host, base: baseUrl } = context;
-const serverName = `${scheme}://${host}`;
+const serverName = `${process.env.SCHEME}://${process.env.HOST}`;
 
 class WidgetShareContainer extends React.PureComponent {
   constructor() {

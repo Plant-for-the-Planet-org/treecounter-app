@@ -9,10 +9,13 @@ import {
   version as app_version
 } from '../../../package.json';
 
-const configuration = new Configuration();
-configuration.apiKey = '6f2971a9b077662912f61ae602716afd';
-configuration.codeBundleId = app_version;
-bugsnag = new Client(configuration);
+let bugsnag;
+if (process.env.BUGSNAG_API_KEY) {
+  const configuration = new Configuration();
+  configuration.apiKey = process.env.BUGSNAG_API_KEY;
+  configuration.codeBundleId = app_version;
+  bugsnag = new Client(configuration);
+}
 
 export default class GlobalErrorBoundary extends React.Component {
   constructor(props) {
@@ -22,9 +25,11 @@ export default class GlobalErrorBoundary extends React.Component {
 
   componentDidCatch(error, info) {
     this.setState({ hasErrorOccurred: true, error, info });
-    bugsnag.notify(error, function(report) {
-      report.metadata = { info: info };
-    });
+    if (bugsnag) {
+      bugsnag.notify(error, function(report) {
+        report.metadata = { info: info };
+      });
+    }
   }
 
   render() {

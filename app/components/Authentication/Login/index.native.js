@@ -63,7 +63,7 @@ export default class Login extends Component {
         <ReCaptchaV3
           ref={ref => (this._captchaRef = ref)}
           captchaDomain={'https://www.trilliontreecampaign.org'}
-          siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
+          siteKey={process.env.RECAPCHA_SITE_KEY}
           onReceiveToken={token => this.verifyCallback(token)}
         />
         <View style={styles.parentContainer}>

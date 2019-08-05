@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import { context } from '../../../app/config/index';
 import { View, Text, Linking, Image } from 'react-native';
 import VideoContainer from '../../components/Common/VideoContainer';
 import React from 'react';

@@ -5,7 +5,6 @@ import App from './app/components/App';
 
 import { getApiRoute } from '../../../app/actions/apiRouting';
 import axios from 'axios';
-import { context } from '../../../app/config';
 import './donateTrees.widget.scss';
 //dont forgot to include this file to remove following error from console
 // Failed to construct 'HTMLElement': Please use the 'new' operator, this DOM object constructor cannot be called as a function.
@@ -16,9 +15,8 @@ import PFTPNativeDonationWidget, {
 } from './PFTPNativeDonationWidget';
 
 // import retargetEvents from 'react-shadow-dom-retarget-events';
-const { scheme, host, base: baseUrl } = context;
 
-const serverName = `${scheme}://${host}`;
+const serverName = `${process.env.SCHEME}://${process.env.HOST}`;
 
 export async function getRequest(route, params) {
   let url = await getApiRoute(route, params);
@@ -105,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 inlineDonation={!!inlineDonation}
                 showDonateButton={!!showDonateButton}
                 serverName={serverName}
-                baseUrl={baseUrl}
+                baseUrl={process.env.BASE_URL}
                 backgroundColor={backgroundColor}
                 ProjectId={ProjectId}
               />,

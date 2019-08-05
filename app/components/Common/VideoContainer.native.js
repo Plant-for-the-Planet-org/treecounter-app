@@ -47,7 +47,7 @@ class VideoContainer extends React.Component {
     if (this.state.videoId) {
       return (
         <YouTube
-          apiKey="AIzaSyC0sO3FQX-DYNRsBW1-Hc8BBnhwnwvZQ2Y"
+          apiKey={process.env.YOUTUBE_API_KEY}
           ref={component => {
             this._youTubeRef = component;
           }}

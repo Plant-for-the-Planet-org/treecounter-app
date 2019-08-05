@@ -6,7 +6,6 @@ import Accordion from 'react-native-collapsible/Accordion';
 import HTMLView from 'react-native-htmlview';
 import { foldin, foldout } from '../../assets';
 import { Text, View, ScrollView, Image, Linking } from 'react-native';
-import { context } from '../../config';
 import styles from '../../styles/faq';
 import DeviceInfo from 'react-native-device-info';
 import i18n from '../../locales/i18n';

@@ -9,7 +9,9 @@
 
 ## Configuration
 
-Copy `app/config/index.js.dist` to `app/config/index.js`.
+Configuration variables are loaded from `defaults.env`. You may add a local `.env` file to override these.
+
+In React source code you can use these as: `process.env.BUGSNAG_API_KEY` which will then be replaced by their values at build time by a webpack plugin. For react-native (which does not use webpack) these are replaced by "babel-plugin-transform-inline-environment-variables"
 
 ## Web Setup
 
@@ -36,14 +38,10 @@ npm start
 Build and run the app in development mode deployed from Metro Bundler in an iOS simulator (starts Metro Bundler automatically if not already running, also starts iOS simulator):
 
 ```bash
-react-native run-ios
+./with-env react-native run-ios
 ```
 
-If you have problems with a cached version of the bundle, you can stop the Metro Bundler and manually start it with the reset cache option:
-
-```
-react-native start --reset-cache
-```
+This loads variables from ./defaults.env and .env (if you have created one)
 
 ## Android Setup
 
@@ -68,14 +66,18 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Hom
 Build and run the app in development mode deployed from Metro Bundler (starts Metro Bundler automatically if not already running) on an emulator or device. You need to start an Android emulator or attach a device manually before:
 
 ```bash
-react-native run-android
+./with-env react-native run-android
 ```
 
-If you have problems with a cached version of the bundle, you can stop the Metro Bundler and manually start it with the reset cache option:
+### Resetting Metro cache
+
+If you have problems with a cached version of the bundle or you make any changes to the env files, then you can stop the Metro Bundler and manually start it with the reset cache option:
 
 ```
 react-native start --reset-cache
 ```
+
+Let it build, then stop it, and then restart metro and the simulator with `npm run ios` or `npm run android`
 
 ## Development process
 

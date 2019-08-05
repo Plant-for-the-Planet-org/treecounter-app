@@ -25,6 +25,10 @@ module.exports = webpackMerge(commonConfig, {
     ndviwidget: [
       'babel-polyfill',
       path.join(__dirname, '../widgets/NDVI/widget.js')
+    ],
+    stripePaymentWidget: [
+      'babel-polyfill',
+      path.join(__dirname, '../widgets/StripePayment/widget.js')
     ]
   },
   output: {

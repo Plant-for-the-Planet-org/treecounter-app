@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StripeProvider } from 'react-stripe-elements';
-import MyStoreCheckout from '../../components/StripePayment/MyStoreCheckout';
+// import { StripeProvider, Elements } from 'react-stripe-elements';
+// import CheckoutForm from '../../components/StripePayment/CheckoutForm';
+import Test from '../../components/StripePayment/test';
 import PropTypes from 'prop-types';
 
 class StripePayment extends Component {
@@ -9,30 +10,36 @@ class StripePayment extends Component {
     this.state = { stripe: null };
   }
 
-  set = () => {
-    this.setState({
-      stripe: window.Stripe('pk_test_0ahH0yMukgNzOEd0UppzUfsc')
-    });
-  };
+  // set = () => {
+  //   this.setState({
+  //     stripe: window.Stripe('pk_test_0ahH0yMukgNzOEd0UppzUfsc')
+  //   });
+  // };
 
-  componentDidMount() {
-    if (window.Stripe) {
-      this.set();
-    } else {
-      document.querySelector('#stripe-js').addEventListener('load', () => {
-        // Create Stripe instance once Stripe.js loads
-        this.setState({
-          stripe: window.Stripe('pk_test_0ahH0yMukgNzOEd0UppzUfsc')
-        });
-      });
-    }
-  }
+  // componentDidMount() {
+  //   if (window.Stripe) {
+  //     this.set();
+  //   } else {
+  //     document.querySelector('#stripe-js').addEventListener('load', () => {
+  //       // Create Stripe instance once Stripe.js loads
+  //       this.setState({
+  //         stripe: window.Stripe('pk_test_0ahH0yMukgNzOEd0UppzUfsc')
+  //       });
+  //     });
+  //   }
+  // }
 
   render() {
     return (
-      <StripeProvider apiKey={this.props.apiKey} stripe={this.state.stripe}>
-        <MyStoreCheckout />
-      </StripeProvider>
+      // <StripeProvider apiKey={this.props.apiKey}>
+      //   <div className="example">
+      //     <h1>React Stripe Elements Example</h1>
+      //     <Elements>
+      //       <CheckoutForm />
+      //     </Elements>
+      //   </div>
+      // </StripeProvider>
+      <Test />
     );
   }
 }

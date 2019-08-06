@@ -23,23 +23,32 @@ class GradientResultLine extends React.PureComponent {
 
   calculateHighlightLineColor = () => {
     const props = this.props;
+    const { selectedDataPoint } = props;
     let backgroundImage = `linear-gradient(to right,
-      ${props.getColorForNDVI(props.min)} 0%,
-      ${props.getColorForNDVI(props.avg)} 50%,
-       ${props.getColorForNDVI(props.max)} 100%)`;
+      ${props.getColorForNDVI(selectedDataPoint.ndviAggregate.min)} 0%,
+      ${props.getColorForNDVI(selectedDataPoint.ndviAggregate.avg)} 50%,
+       ${props.getColorForNDVI(selectedDataPoint.ndviAggregate.max)} 100%)`;
     backgroundImage = backgroundImage.replace(/(\r\n|\n|\r)/gm, '');
     return backgroundImage;
   };
 
   render() {
     const props = this.props;
+    const { selectedDataPoint } = props;
+    if (!selectedDataPoint || !selectedDataPoint.ndviAggregate) {
+      return null;
+    }
     let bgStyle = undefined;
     if (this.hasMounted) {
       bgStyle = { backgroundImage: this.calculateHighlightLineColor() };
     }
 
-    const minPercentage = getPointPercentageOnGradient(props.min);
-    const maxPercentage = getPointPercentageOnGradient(props.max);
+    const minPercentage = getPointPercentageOnGradient(
+      selectedDataPoint.ndviAggregate.min
+    );
+    const maxPercentage = getPointPercentageOnGradient(
+      selectedDataPoint.ndviAggregate.max
+    );
 
     return (
       <div className="gradient-result-line-component">
@@ -48,8 +57,8 @@ class GradientResultLine extends React.PureComponent {
         )}, ${props.selectedDataPoint.year}`}</div>
         <div className="gradient-wrapper">
           {bgStyle &&
-            props.min &&
-            props.max && (
+            selectedDataPoint.ndviAggregate.min &&
+            selectedDataPoint.ndviAggregate.max && (
               <div
                 className="highlight-line"
                 style={{
@@ -71,10 +80,7 @@ export default React.forwardRef((props, ref) => {
   return <GradientResultLine {...props} forwardedRef={ref} />;
 });
 GradientResultLine.propTypes = {
-  min: PropTypes.number,
-  max: PropTypes.number,
   selectedDataPoint: PropTypes.object,
   getColorForNDVI: PropTypes.func,
-  avg: PropTypes.number,
   forwardedRef: PropTypes.any
 };

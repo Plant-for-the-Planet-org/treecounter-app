@@ -15,7 +15,12 @@ import styles from '../../styles/NDVI/Index';
 export default class NDVIContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedDataPoint: this.props.dataPoints[0] };
+    this.state = {
+      selectedDataPoint: !!this.props.dataPoints && {
+        ...this.props.dataPoints[0],
+        carbon: undefined
+      }
+    };
   }
 
   onClickCircle = circleMonthuid => {

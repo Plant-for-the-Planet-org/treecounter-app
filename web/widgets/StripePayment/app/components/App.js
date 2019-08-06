@@ -10,7 +10,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="app">
-        <link href="ndviwidget.css" rel="stylesheet" />
+        <link href="stripewidget.css" rel="stylesheet" />
         <StripePaymentContainer apiKey="pk_test_0ahH0yMukgNzOEd0UppzUfsc" />
       </div>
     );

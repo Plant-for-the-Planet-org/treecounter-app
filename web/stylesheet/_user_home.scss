@@ -1,55 +1,67 @@
 // VARIABLES // ============================== //
 $avocado: #89b53a;
-.m-t-2{
+$border: #d5d5d563;
+$white: #fff;
+
+.m-t-2 {
   margin-top: 20px;
 }
-.m-b-20{
+
+.m-b-20 {
   margin-bottom: 20px;
 }
+
 .row.home {
-  background: white;
-  margin: 5px 20px;
+  background: $white;
+  border-radius: 10px;
   display: flex;
   padding-bottom: 0;
-  border-radius: 10px;
+  margin: 5px 20px;
   width: 96%;
-  max-width: 96%;
+	max-width: 96%;
+	
   @include for-phone-only {
     width: 100%;
   }
- .column{
-   padding: 10px;
- }
- .left{
-   padding-top: 0px;
-   flex: 2;
- }
- .right{
-  flex: 1;
- }
- .heading{
+ 
+  .column {
+    padding: 10px;
+  }
+
+ .left {
+    flex: 2;
+    padding-top: 0;
+  }
+ 
+.right {
+    flex: 1;
+}
+
+ .heading {
    font-weight: bold;
  }
- .card{
+
+ .card {
+    background-color: $white;
+    border: solid 1px $border;
     display: flex;
     flex-direction: column;
-    // width: 344px;
-    // height: 150px;
     font-size: 16px;
     border-radius: 4px;
     margin-top: 20px;
-    padding: 0px 0px 10px 20px;
-    border: solid 1px #d5d5d5;
-    background-color: #ffffff;
-    .icon{
+    padding: 0 0 10px 20px;
+    
+    .icon {
       color: $avocado;
       margin-bottom: -3px;
     }
-    .card-text{
+
+    .card-text {
       font-size: 15px;
       padding-bottom: 5px;
     }
-    .currency{
+
+    .currency {
         // flex: 1;
         padding: 5px 15px;
         align-self: flex-end;
@@ -63,18 +75,20 @@ $avocado: #89b53a;
         font-stretch: normal;
         letter-spacing: normal;
         text-align: right;
-        background-color: #d5d5d563;
+        background-color: $border;
     }
-    .bottom-with-button{
+
+    .bottom-with-button {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      span{
+      span {
         cursor: pointer;
         padding: 10px;
       }
     }
-    .headline{
+
+    .headline {
         font-family: OpenSans;
         line-height: 1.13;
         color: $avocado;

@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
-
+import UserContributionsContainer from '../../containers/UserContributions';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import SvgContainer from '../Common/SvgContainer';
+import TextHeading from '../Common/Heading/TextHeading';
+import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import UserProfileImage from '../Common/UserProfileImage';
 import { getDocumentTitle } from '../../helpers/utils';
+import InlineLink from '../Common/InlineLink';
 import * as images from '../../assets';
+import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
+import RecurringCard from '../UserContributions/RecurringCard';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -78,44 +83,62 @@ export default class UserHome extends Component {
     let { svgData } = this.state;
     return (
       <div className="app-container__content--center sidenav-wrapper">
-        <div className="tree-counter-profile flex-column user-home-profile">
-          <UserProfileImage profileImage={userProfile.image} />
-          <div className="user-info">
-            <div className="tree-counter-name">
-              {userProfile.treecounter.displayName}
+        <div className="">
+          <TextHeading>
+            {i18n.t('label.my_trees')}
+            <DescriptionHeading>
+              {i18n.t('label.my_trees_description')}
+            </DescriptionHeading>
+          </TextHeading>
+        </div>
+        <div className="home row">
+          <div className="column left">
+            <div>
+              <div className="treecounter_container">
+                <div className="canvasContainer flex-column">
+                  <SvgContainer {...svgData} />
+                  {treecounterData === null ? (
+                    <div className="circle-inside circle-headline">
+                      <LoadingIndicator />
+                    </div>
+                  ) : (
+                    <TreecounterGraphicsText
+                      trillion={false}
+                      treecounterData={svgData}
+                      onToggle={toggleVal => this.updateSvg(toggleVal)}
+                    />
+                  )}
+                </div>
+              </div>
             </div>
-            <div className="tree-counter-row">
-              {!!profileType && (
-                <img
-                  className="profile-type-image"
-                  src={
-                    profileType === 'education'
-                      ? images['schoolIcon']
-                      : profileType === 'tpo'
-                        ? images['tpoIcon']
-                        : profileType === 'company'
-                          ? images['companyIcon']
-                          : images['individualIcon']
-                  }
+            <DescriptionHeading>
+              {userProfile.synopsis1 || userProfile.synopsis2}
+            </DescriptionHeading>
+            <ArcGISContributionsMap userId={userProfile.id} />
+            <div className="m-t-2">
+              <div className="contribution-buttons">
+                <InlineLink
+                  caption={i18n.t('label.registerFurther')}
+                  uri={'app_registerTrees'}
                 />
-              )}
+                <InlineLink
+                  caption={i18n.t('label.donate_trees')}
+                  uri={'app_donateTrees'}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="treecounter_container">
-          <div className="canvasContainer flex-column">
-            <SvgContainer {...svgData} />
-            {treecounterData === null ? (
-              <div className="circle-inside circle-headline">
-                <LoadingIndicator />
-              </div>
-            ) : (
-              <TreecounterGraphicsText
-                trillion={false}
-                treecounterData={svgData}
-                onToggle={toggleVal => this.updateSvg(toggleVal)}
-              />
-            )}
+          <div className="column right app-container__sidenav--heading">
+            <div className="heading">Recurring Tree Donations</div>
+            <div className="m-b-20">
+              {[{ id: 1 }, { id: 2 }].map(cardData => (
+                <RecurringCard cardData={cardData} key={cardData.id} />
+              ))}
+            </div>
+            <div className="heading">All Tree Contributions</div>
+            <div>
+              <UserContributionsContainer />
+            </div>
           </div>
         </div>
       </div>

@@ -11,6 +11,10 @@ import heart_outline from './images/icons/heart_outline.png';
 import rocket_outline from './images/icons/rocket_outline.png';
 import shovel_outline from './images/icons/shovel_outline.png';
 import target_outline from './images/icons/target_outline.png';
+import calender_green from './images/icons/calender_green.png';
+import tree_outline_green from './images/icons/tree_outline_green.png';
+import gift_green from './images/icons/gift_green.png';
+import gift_green_from from './images/icons/gift_green_from.png';
 import tree_outline_red from './images/icons/tree_outline_red.png';
 import gift_outline_red from './images/icons/gift_outline_red.png';
 import challenge_outline_red from './images/icons/challenge_outline_red.png';
@@ -179,6 +183,10 @@ export {
   shovel_outline_red,
   target_outline_red,
   tree_outline,
+  gift_green,
+  gift_green_from,
+  calender_green,
+  tree_outline_green,
   gift_outline,
   challenge_outline,
   heart_outline,

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ContributionCardList from './ContributionCardList';
 import ContributionsMapLegend from './ContributionsMapLegend';
 import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card';
+import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n.js';
 import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
@@ -12,39 +12,27 @@ import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 const UserContributions = ({
   userProfileId,
   userContributions,
-  deleteContribution
+  deleteContribution,
+  isPublic
 }) => {
   return (
-    <div className="app-container__content--center sidenav-wrapper">
-      <TextHeading>{i18n.t('label.my_trees')}</TextHeading>
-      <CardLayout>
-        {Object.keys(userContributions).length > 0 ? (
-          <div>
-            <ArcGISContributionsMap userId={userProfileId} />
-            <ContributionsMapLegend />
-            <div className="contribution-container">
-              <ContributionCardList
-                contributions={userContributions}
-                deleteContribution={deleteContribution}
-              />
-            </div>
-            <div className="contribution-buttons">
-              <InlineLink
-                caption={i18n.t('label.registerFurther')}
-                uri={'app_registerTrees'}
-              />
-              <InlineLink
-                caption={i18n.t('label.donate_trees')}
-                uri={'app_donateTrees'}
-              />
-            </div>
+    <div className="">
+      {Object.keys(userContributions).length > 0 ? (
+        <div>
+          <div className="contribution-container-">
+            <ContributionCardList
+              contributions={userContributions}
+              deleteContribution={deleteContribution}
+            />
           </div>
-        ) : (
-          <div className="no-contribution-wrapper">
-            {i18n.t('label.no_contributions')}
-          </div>
-        )}
-      </CardLayout>
+        </div>
+      ) : (
+        <div className="no-contribution-wrapper">
+          {isPublic
+            ? i18n.t('label.no_contributions_public')
+            : i18n.t('label.no_contributions')}
+        </div>
+      )}
     </div>
   );
 };
@@ -52,7 +40,8 @@ const UserContributions = ({
 UserContributions.propTypes = {
   userProfileId: PropTypes.number.isRequired,
   userContributions: PropTypes.array.isRequired,
-  deleteContribution: PropTypes.func
+  deleteContribution: PropTypes.func,
+  isPublic: PropTypes.bool
 };
 
 export default UserContributions;

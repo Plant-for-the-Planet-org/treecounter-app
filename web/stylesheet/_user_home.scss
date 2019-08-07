@@ -1,0 +1,89 @@
+// VARIABLES // ============================== //
+$avocado: #89b53a;
+.m-t-2{
+  margin-top: 20px;
+}
+.m-b-20{
+  margin-bottom: 20px;
+}
+.row.home {
+  background: white;
+  margin: 5px 20px;
+  display: flex;
+  padding-bottom: 0;
+  border-radius: 10px;
+  width: 96%;
+  max-width: 96%;
+  @include for-phone-only {
+    width: 100%;
+  }
+ .column{
+   padding: 10px;
+ }
+ .left{
+   padding-top: 0px;
+   flex: 2;
+ }
+ .right{
+  flex: 1;
+ }
+ .heading{
+   font-weight: bold;
+ }
+ .card{
+    display: flex;
+    flex-direction: column;
+    // width: 344px;
+    // height: 150px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-top: 20px;
+    padding: 0px 0px 10px 20px;
+    border: solid 1px #d5d5d5;
+    background-color: #ffffff;
+    .icon{
+      color: $avocado;
+      margin-bottom: -3px;
+    }
+    .card-text{
+      font-size: 15px;
+      padding-bottom: 5px;
+    }
+    .currency{
+        // flex: 1;
+        padding: 5px 15px;
+        align-self: flex-end;
+        // width: 56px;
+        // height: 19px;
+        font-family: OpenSans;
+        border-radius: 2px;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        text-align: right;
+        background-color: #d5d5d563;
+    }
+    .bottom-with-button{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span{
+        cursor: pointer;
+        padding: 10px;
+      }
+    }
+    .headline{
+        font-family: OpenSans;
+        line-height: 1.13;
+        color: $avocado;
+        font-weight: bold;
+        padding-bottom: 5px;
+        span {
+          padding-right: 5px;
+          font-size: normal;
+        }
+    }
+  }
+}

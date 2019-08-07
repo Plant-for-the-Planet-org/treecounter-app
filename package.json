@@ -5,18 +5,17 @@
   "scripts": {
     "analyze": "source-map-explorer ./web/server/bundle.*",
     "start": "webpack-dev-server --hot --config ./web/webpack.config.js",
-    "build":
-      "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail ",
-    "build:server":
-      "webpack --config ./web/config/webpack.server.config.js --profile --bail",
-    "build:prod_server":
-      "NODE_ENV='production' webpack --config ./web/config/webpack.prod_server.config.js --profile --bail; rm web/server/*.map",
+    "build": "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail ",
+    "build:server": "webpack --config ./web/config/webpack.server.config.js --profile --bail",
+    "build:prod_server": "NODE_ENV='production' webpack --config ./web/config/webpack.prod_server.config.js --profile --bail; rm web/server/*.map",
     "precommit": "lint-staged",
-    "postinstall":
-      "grep -r --include=*.java -l 'android.support.v7' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v7/androidx.appcompat/' -pi && grep -r --include=*.java -l 'android.support.v4' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v4/androidx.core/' -pi && grep -r --include=*.java -l 'android.support' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi && grep --include=*.java -r -l 'android.support' ./node_modules/react-native-youtube | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi"
+    "postinstall": "grep -r --include=*.java -l 'android.support.v7' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v7/androidx.appcompat/' -pi && grep -r --include=*.java -l 'android.support.v4' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v4/androidx.core/' -pi && grep -r --include=*.java -l 'android.support' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi && grep --include=*.java -r -l 'android.support' ./node_modules/react-native-youtube | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi"
   },
   "lint-staged": {
-    "*.js": ["prettier --single-quote --write", "git add"]
+    "*.js": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "@bugsnag/js": "^6.3.0",

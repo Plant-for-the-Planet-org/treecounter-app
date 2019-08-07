@@ -16,11 +16,16 @@ const TreecounterHeader = ({
   showFollow,
   followChanged
 }) => {
+  const onlyFirstName = text => {
+    let c = text.split(' ');
+    if (c.length > 1) c.length--;
+    return c.join(' ');
+  };
   return (
     <div className="tree-counter-profile flex-column">
       <UserProfileImage profileImage={logo} />
       <div className="user-info">
-        <div className="tree-counter-name">{caption}</div>
+        <div className="tree-counter-name">{onlyFirstName(caption)}</div>
         <div className="tree-counter-row">
           {!!profileType && (
             <img

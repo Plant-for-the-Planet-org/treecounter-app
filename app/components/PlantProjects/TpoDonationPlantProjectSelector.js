@@ -44,30 +44,30 @@ class TpoDonationPlantProjectSelector extends React.Component {
         : i18n.t('label.plant_projects');
     const TagName = i18n.t('label.plant_project_full');
     return (
-      <CardLayout className="tpo-footer-card-layout">
-        <div className="tpo-footer__container">
-          <ContentHeader caption={caption} />
-          <PlantProjectCarousel
-            contentTag={TagName}
-            plantProjects={plantProjects}
-            tpoName={tpoName}
-            currentPlantProjectId={this.state.currentPlantProjectId}
-            onChange={this.onCarouselChange}
-          />
-          {plantProjects.filter(
-            project => project.id === state.currentPlantProjectId
-          ).length > 0 &&
-          plantProjects.filter(
-            project => project.id === state.currentPlantProjectId
-          )[0].allowDonations ? (
-            <PrimaryButton
-              onClick={() => onSelect(this.state.currentPlantProjectId)}
-            >
-              {i18n.t('label.donate')}
-            </PrimaryButton>
-          ) : null}
-        </div>
-      </CardLayout>
+      // <CardLayout className="tpo-footer-card-layout">
+      <div className="">
+        <ContentHeader caption={caption} />
+        <PlantProjectCarousel
+          contentTag={TagName}
+          plantProjects={plantProjects}
+          tpoName={tpoName}
+          currentPlantProjectId={this.state.currentPlantProjectId}
+          onChange={this.onCarouselChange}
+        />
+        {plantProjects.filter(
+          project => project.id === state.currentPlantProjectId
+        ).length > 0 &&
+        plantProjects.filter(
+          project => project.id === state.currentPlantProjectId
+        )[0].allowDonations ? (
+          <PrimaryButton
+            onClick={() => onSelect(this.state.currentPlantProjectId)}
+          >
+            {i18n.t('label.donate')}
+          </PrimaryButton>
+        ) : null}
+      </div>
+      // </CardLayout>
     );
   }
 }

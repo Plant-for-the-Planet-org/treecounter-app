@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Lightbox from 'react-images';
 import { Link } from 'react-router-dom';
+import * as images from '../../assets';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import TextSpan from '../Common/Text/TextSpan';
 import ConfirmDeletion from './ConfirmDelete';
@@ -13,7 +14,7 @@ import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
 import { getDateFromMySQL } from '../../helpers/utils';
 
-export default class ContributionCard extends React.Component {
+export default class ContributionCardHome extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,28 +50,29 @@ export default class ContributionCard extends React.Component {
   plantProjectLine(plantProjectName, country) {
     return (plantProjectName ? plantProjectName + ', ' : '') + country;
   }
-
-  donateActionLine(isGift, plantDate, givee, giveeSlug) {
-    return isGift
-      ? [
-          <TextSpan>
-            {i18n.t('label.gifted_on_to', {
-              date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
-            })}
-          </TextSpan>,
-          <TextSpan
-            onPress={() =>
-              updateRoute(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
-              })
-            }
-          >
-            {givee}
-          </TextSpan>
-        ]
-      : i18n.t('label.donated_on', {
-          date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
-        });
+  cap(text) {
+    return text[0].toUpperCase() + text.substr(1);
+  }
+  donateActionLine(isGift, plantDate, givee, giveeSlug, giftRecipient) {
+    return isGift && giftRecipient ? (
+      <div
+        onClick={() =>
+          updateRoute(getLocalRoute('app_treecounter'), {
+            treeCounterId: giveeSlug
+          })
+        }
+      >
+        <img className="menu-icon icon" src={images.gift_green} />
+        {i18n.t('label.gifted_to')} {giftRecipient}
+      </div>
+    ) : givee ? (
+      <div>
+        <img className="menu-icon icon" src={images.gift_green_from} />
+        {i18n.t('label.dedicated_by')} {givee}
+      </div>
+    ) : (
+      ''
+    );
   }
 
   tpoLine(tpoName) {
@@ -78,32 +80,25 @@ export default class ContributionCard extends React.Component {
   }
 
   plantActionLine(plantDate, registrationDate) {
-    return (
-      i18n.t('label.planted_on', {
-        date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
-      }) +
-      ', ' +
-      i18n.t('label.added_on', {
-        date: moment(getDateFromMySQL(registrationDate)).format('DD MMM YYYY')
-      })
-    );
+    return i18n.t('label.renews_on', {
+      date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
+    });
   }
 
   dedicateActionLine = (isGift, givee, giveeSlug) => {
-    return isGift
-      ? [
-          <TextSpan>{i18n.t('label.dedicated_to')}</TextSpan>,
-          <TextSpan
-            onPress={() =>
-              updateRoute(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
-              })
-            }
-          >
-            {' ' + givee}
-          </TextSpan>
-        ]
-      : '';
+    return isGift ? (
+      <div
+        onClick={() =>
+          updateRoute(getLocalRoute('app_treecounter'), {
+            treeCounterId: giveeSlug
+          })
+        }
+      >
+        {i18n.t('label.dedicated_to') + ' ' + givee}
+      </div>
+    ) : (
+      ''
+    );
   };
 
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
@@ -117,7 +112,7 @@ export default class ContributionCard extends React.Component {
             })}
           </TextSpan>,
           <TextSpan
-            onPress={() =>
+            onClick={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug
               })
@@ -140,7 +135,7 @@ export default class ContributionCard extends React.Component {
                 })}
               </TextSpan>,
               <TextSpan
-                onPress={() =>
+                onClick={() =>
                   updateRoute(getLocalRoute('app_treecounter'), {
                     treeCounterId: giveeSlug
                   })
@@ -176,6 +171,7 @@ export default class ContributionCard extends React.Component {
       plantDate,
       givee,
       giveeSlug,
+      giftRecipient,
       tpoName,
       isPending,
       mayUpdate,
@@ -199,321 +195,109 @@ export default class ContributionCard extends React.Component {
       isGift,
       plantDate,
       givee,
-      giveeSlug
+      giveeSlug,
+      giftRecipient
     );
-    let tpoLine = this.tpoLine(tpoName);
+    // let tpoLine = this.tpoLine(tpoName);
     let plantActionLine = this.plantActionLine(plantDate, registrationDate);
     let dedicateActionLine = this.dedicateActionLine(givee, giveeSlug);
-    let redeemActionLine = this.redeemActionLine(
-      redemptionCode,
-      redemptionDate,
-      givee,
-      giveeSlug
-    );
-    let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
-    let borderColor =
-      contributionType == 'donation'
-        ? '#95c243'
-        : treeCount > 1
-          ? '#68aeec'
-          : '#ec6453';
-    return category === 'contributions' && contributionType === 'donation' ? (
-      <div>
-        <div
-          style={{
-            borderLeft:
-              '5px solid ' +
-              (contribution.contributionType == 'donation'
-                ? '#95c243'
-                : contribution.treeCount > 1
-                  ? '#68aeec'
-                  : '#ec6453')
-          }}
-          key={`contribution-${contribution.id}`}
-          className={`contribution-container__card ${
-            contribution.contributionType
-          }`}
-        >
+    // let redeemActionLine = this.redeemActionLine(
+    //   redemptionCode,
+    //   redemptionDate,
+    //   givee,
+    //   giveeSlug
+    // );
+    return category === 'contributions' ? (
+      <div key={`contrib-${contribution.id}`}>
+        <div className={`card ${contribution.contributionType}`}>
+          <div className="currency">
+            {this.cap(contribution.contributionType)}
+          </div>
           <div className="contribution-container__left-column">
             {treeCountLine ? (
-              <TextSpan strong={true}>{treeCountLine}</TextSpan>
-            ) : null}
-
-            {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
-            {donateActionLine ? (
-              <TextSpan>{donateActionLine + ''}</TextSpan>
-            ) : null}
-            {tpoLine ? <TextSpan>{tpoLine}</TextSpan> : null}
-          </div>
-          <div className="contribution-container__right-column">
-            {contribution.category === 'contributions'
-              ? contribution.contributionMeasurements
-                  .slice(0, 3)
-                  .map((measurement, index) => (
-                    <TextSpan key={index}>
-                      {contribution.plantDate === measurement.measurementDate
-                        ? i18n.t('label.planting_day')
-                        : moment(
-                            getDateFromMySQL(measurement.measurementDate)
-                          ).format('DD MMM YYYY') +
-                          (measurement.diameter + 'cm').padStart(10) +
-                          (
-                            (measurement.height / 100).toFixed(1) + 'm'
-                          ).padStart(10)}
-                    </TextSpan>
-                  ))
-              : null}
-            {contribution.category === 'contributions' &&
-            contribution.contributionMeasurements.length > 3 ? (
-              <div className={seeLabel} onClick={this.onViewExpanded}>
-                {this.state.viewExpanded
-                  ? i18n.t('label.see_less')
-                  : '+ ' + i18n.t('label.see_more')}
+              <div className="headline">
+                {treeCountLine} Tree{contribution.treeCount > 1 ? 's' : ''}
               </div>
-            ) : null}
-            {this.state.viewExpanded &&
-            contribution.category === 'contributions'
-              ? contribution.contributionMeasurements
-                  .slice(3)
-                  .map(measurement => (
-                    <TextSpan key={measurement.id}>
-                      {moment(
-                        getDateFromMySQL(measurement.measurementDate)
-                      ).format('DD MMM YYYY') +
-                        (measurement.diameter + 'cm').padStart(10) +
-                        ((measurement.height / 100).toFixed(1) + 'm').padStart(
-                          10
-                        )}
-                    </TextSpan>
-                  ))
-              : null}
-            {!isPending ? (
-              <TextSpan>
-                {' '}
-                {cardType && cardType.length > 0
-                  ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-                  : ''}
-              </TextSpan>
-            ) : null}
-            {mayUpdate ? (
-              <Link
-                to={getLocalRoute('app_editTrees', {
-                  contribution: contribution.id
-                })}
-              >
-                {i18n.t('label.update')}
-              </Link>
-            ) : null}
-          </div>
-        </div>
-        <hr className="contribution-container__partition" />
-      </div>
-    ) : category === 'contributions' && contributionType === 'planting' ? (
-      <div>
-        <div
-          style={{
-            borderLeft:
-              '5px solid ' +
-              (contribution.contributionType == 'donation'
-                ? '#95c243'
-                : contribution.treeCount > 1
-                  ? '#68aeec'
-                  : '#ec6453')
-          }}
-          key={`contribution-${contribution.id}`}
-          className={`contribution-container__card ${
-            contribution.contributionType
-          }`}
-        >
-          <div className="contribution-container__left-column">
-            {treeCountLine ? (
-              <TextSpan strong={true}>{treeCountLine}</TextSpan>
-            ) : null}
-            {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
-            {plantActionLine ? <TextSpan>{plantActionLine}</TextSpan> : null}
-            {dedicateActionLine ? (
-              <TextSpan>{dedicateActionLine}</TextSpan>
-            ) : null}
-          </div>
-          <div className="contribution-container__right-column">
-            {contribution.category === 'contributions'
-              ? contribution.contributionMeasurements
-                  .slice(0, 3)
-                  .map(measurement => (
-                    <TextSpan key={measurement.id}>
-                      {contribution.plantDate === measurement.measurementDate
-                        ? i18n.t('label.planting_day')
-                        : moment(
-                            getDateFromMySQL(measurement.measurementDate)
-                          ).format('DD MMM YYYY') +
-                          (measurement.diameter + 'cm').padStart(10) +
-                          (
-                            (measurement.height / 100).toFixed(1) + 'm'
-                          ).padStart(10)}
-                    </TextSpan>
-                  ))
-              : null}
-            {contribution.category === 'contributions' &&
-            contribution.contributionMeasurements.length > 3 ? (
-              <div className={seeLabel} onClick={this.onViewExpanded}>
-                {this.state.viewExpanded
-                  ? i18n.t('label.see_less')
-                  : '+ ' + i18n.t('label.see_more')}
-              </div>
-            ) : null}
-            {this.state.viewExpanded &&
-            contribution.category === 'contributions'
-              ? contribution.contributionMeasurements
-                  .slice(3)
-                  .map(measurement => (
-                    <TextSpan key={measurement.id}>
-                      {moment(
-                        getDateFromMySQL(measurement.measurementDate)
-                      ).format('DD MMM YYYY') +
-                        (measurement.diameter + 'cm').padStart(10) +
-                        ((measurement.height / 100).toFixed(1) + 'm').padStart(
-                          10
-                        )}
-                    </TextSpan>
-                  ))
-              : null}
-            {contribution.contributionType === 'planting' ? (
-              <div>
-                <ConfirmDeletion
-                  isOpen={this.state.openDialog}
-                  handleDeletion={() => {
-                    this.props.deleteContribution(contribution.id);
-                    this.setState({
-                      openDialog: false
-                    });
-                  }}
-                  onRequestClose={() =>
-                    this.setState({
-                      openDialog: false
-                    })
-                  }
+            ) : (
+              ''
+            )}
+            {plantProjectLine ? (
+              <div className="card-text">
+                <img
+                  className="menu-icon icon"
+                  src={images.tree_outline_green}
                 />
-                <div onClick={() => this.setState({ openDialog: true })}>
-                  <span className="delete_style">
-                    {'' + i18n.t('label.delete')}
-                  </span>
-                </div>
+                {plantProjectLine}
               </div>
-            ) : null}
-            {!isPending ? (
-              <TextSpan>
-                {' '}
-                {cardType && cardType.length > 0
-                  ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-                  : ''}
-              </TextSpan>
-            ) : null}
-            {mayUpdate ? (
-              <Link
-                to={getLocalRoute('app_editTrees', {
-                  contribution: contribution.id
-                })}
-              >
-                {i18n.t('label.update')}
-              </Link>
-            ) : null}
+            ) : (
+              ''
+            )}
+            <div className="bottom-with-button">
+              <div className="card-text">
+                {donateActionLine ? (
+                  donateActionLine
+                ) : dedicateActionLine ? (
+                  <div>
+                    {' '}
+                    <img className="menu-icon icon" src={images.gift_green} />
+                    {dedicateActionLine}
+                  </div>
+                ) : null}
+                {plantActionLine ? (
+                  <div>
+                    <img
+                      className="menu-icon icon"
+                      src={images.calender_green}
+                    />
+                    {plantActionLine}
+                  </div>
+                ) : (
+                  ''
+                )}
+              </div>
+              <div>
+                {contribution.contributionType === 'planting' ? (
+                  <div>
+                    <ConfirmDeletion
+                      isOpen={this.state.openDialog}
+                      handleDeletion={() => {
+                        this.props.deleteContribution(contribution.id);
+                        this.setState({
+                          openDialog: false
+                        });
+                      }}
+                      onRequestClose={() =>
+                        this.setState({
+                          openDialog: false
+                        })
+                      }
+                    />
+                    <span onClick={() => this.setState({ openDialog: true })}>
+                      <i className="material-icons">delete_outline</i>
+                    </span>
+                  </div>
+                ) : null}
+                {mayUpdate ? (
+                  <Link
+                    to={getLocalRoute('app_editTrees', {
+                      contribution: contribution.id
+                    })}
+                  >
+                    <span>
+                      <i className="material-icons">edit</i>
+                    </span>
+                  </Link>
+                ) : null}
+              </div>
+            </div>
           </div>
         </div>
-        <hr className="contribution-container__partition" />
-      </div>
-    ) : category === 'gifts' ? (
-      <div>
-        <div
-          style={{
-            borderLeft:
-              '5px solid ' +
-              (contribution.contributionType == 'donation'
-                ? '#95c243'
-                : contribution.treeCount > 1
-                  ? '#68aeec'
-                  : '#ec6453')
-          }}
-          key={`contribution-${contribution.id}`}
-          className={`contribution-container__card ${
-            contribution.contributionType
-          }`}
-        >
-          <div className="contribution-container__left-column">
-            {treeCountLine ? (
-              <TextSpan strong={true}>{treeCountLine}</TextSpan>
-            ) : null}
-            {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
-            {redeemActionLine ? <TextSpan>{redeemActionLine}</TextSpan> : null}
-            {tpoLine ? <TextSpan>{tpoLine}</TextSpan> : null}
-          </div>
-          <div className="contribution-container__right-column">
-            {contribution.category === 'contributions'
-              ? contribution.contributionMeasurements
-                  .slice(0, 3)
-                  .map(measurement => (
-                    <TextSpan key={measurement.id}>
-                      {contribution.plantDate === measurement.measurementDate
-                        ? i18n.t('label.planting_day')
-                        : moment(
-                            getDateFromMySQL(measurement.measurementDate)
-                          ).format('DD MMM YYYY') +
-                          (measurement.diameter + 'cm').padStart(10) +
-                          (
-                            (measurement.height / 100).toFixed(1) + 'm'
-                          ).padStart(10)}
-                    </TextSpan>
-                  ))
-              : null}
-            {contribution.category === 'contributions' &&
-            contribution.contributionMeasurements.length > 3 ? (
-              <div className={seeLabel} onClick={this.onViewExpanded}>
-                {this.state.viewExpanded
-                  ? i18n.t('label.see_less')
-                  : '+ ' + i18n.t('label.see_more')}
-              </div>
-            ) : null}
-            {this.state.viewExpanded &&
-            contribution.category === 'contributions'
-              ? contribution.contributionMeasurements
-                  .slice(3)
-                  .map(measurement => (
-                    <TextSpan key={measurement.id}>
-                      {moment(
-                        getDateFromMySQL(measurement.measurementDate)
-                      ).format('DD MMM YYYY') +
-                        (measurement.diameter + 'cm').padStart(10) +
-                        ((measurement.height / 100).toFixed(1) + 'm').padStart(
-                          10
-                        )}
-                    </TextSpan>
-                  ))
-              : null}
-            {!isPending ? (
-              <TextSpan>
-                {' '}
-                {cardType && cardType.length > 0
-                  ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-                  : ''}
-              </TextSpan>
-            ) : null}
-            {mayUpdate ? (
-              <Link
-                to={getLocalRoute('app_editTrees', {
-                  contribution: contribution.id
-                })}
-              >
-                {i18n.t('label.update')}
-              </Link>
-            ) : null}
-          </div>
-        </div>
-        <hr className="contribution-container__partition" />
       </div>
     ) : null;
   }
 }
 
-ContributionCard.propTypes = {
+ContributionCardHome.propTypes = {
   contribution: PropTypes.object.isRequired,
   deleteContribution: PropTypes.func
 };

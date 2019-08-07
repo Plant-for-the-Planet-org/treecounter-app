@@ -7,16 +7,20 @@ import { postRequest } from './api';
  * @returns string | null
  */
 export const getAccessToken = async () => {
-  const token = await fetchItem('token');
-  if (token) {
-    // This may throw an Error if localStorage is broken
-    // or POST requests timeout
-    const newToken = await refreshTokenIfExpired();
-    if (newToken) {
-      return newToken;
+  try {
+    const token = await fetchItem('token');
+    if (token) {
+      // This may throw an Error if localStorage is broken
+      // or POST requests timeout
+      const newToken = await refreshTokenIfExpired();
+      if (newToken) {
+        return newToken;
+      }
     }
+    return token;
+  } catch (err) {
+    return null;
   }
-  return token;
 };
 
 export const updateJWT = (token, refresh_token) => {

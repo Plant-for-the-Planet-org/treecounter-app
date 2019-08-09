@@ -115,7 +115,6 @@ export default (trillionStyles = EStyleSheet.create({
     margin: 20
   },
   googleCardTitle: {
-    fontFamily: 'OpenSans',
     fontSize: 17,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -125,7 +124,6 @@ export default (trillionStyles = EStyleSheet.create({
     color: '#4d5153'
   },
   googleCardPara: {
-    fontFamily: 'OpenSans',
     fontSize: 14,
     fontWeight: 'normal',
     fontStyle: 'normal',
@@ -135,7 +133,6 @@ export default (trillionStyles = EStyleSheet.create({
     color: '#4d5153'
   },
   googleCardButton: {
-    fontFamily: 'OpenSans',
     fontSize: 14,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -157,7 +154,6 @@ export default (trillionStyles = EStyleSheet.create({
     borderBottomWidth: 1
   },
   trillionTreeEventTitle: {
-    fontFamily: 'OpenSans',
     fontSize: 14,
     fontWeight: 'normal',
     fontStyle: 'normal',

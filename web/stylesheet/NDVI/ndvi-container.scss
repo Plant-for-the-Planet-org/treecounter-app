@@ -1,10 +1,42 @@
+@import "./ndvi-portal.scss";
+
 .ndvi-container {
   width: 344px;
-  height: 331px;
   border-radius: 4px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
   padding: 16px;
+  .row {
+    flex-direction: row;
+  }
+  .text-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flex-1 {
+    flex: 1;
+  }
+
+  .pr-1 {
+    padding-right: 0.5rem;
+  }
+
+  .pt-1 {
+    padding-top: 0.5rem;
+  }
+
+  .pr-2 {
+    padding-right: 1.1rem;
+  }
+
+  .flex-2 {
+    flex: 2;
+  }
+
+  .letter-box {
+    flex: 1;
+  }
 }
 
 .month-keyword {
@@ -12,18 +44,37 @@
   width: 86.5%;
   margin-left: 14%;
   p {
+    @extend .ndvi-default-typography;
     margin: 0;
-    // margin-left: 10px;
     width: 13px;
     height: 19px;
-    font-family: OpenSans;
     font-size: 14px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
     line-height: 1.36;
-    letter-spacing: normal;
     text-align: center;
     color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.loading-ndvi-container {
+  width: 344px;
+  height: 118px;
+  border-radius: 4px;
+  padding: 16px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+
+  .fetching-paragraph {
+    @extend .ndvi-default-typography;
+    width: 93%;
+    height: 40px;
+    font-size: 14px;
+    line-height: 1.36;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .refresh-box {
+    margin-left: auto;
+    align-self: center;
   }
 }

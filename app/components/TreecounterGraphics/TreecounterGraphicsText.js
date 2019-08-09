@@ -34,19 +34,19 @@ class TreecounterGraphicsText extends Component {
       d = p(10, d);
       x -= x % 3;
       return (
-        Math.round(n * d / p(10, x)) / d +
+        delimitNumbers(Math.round(n * d / p(10, x)) / d) +
         [
           '',
-          ' Thousand',
-          ' Million',
-          ' Billion',
-          ' Trillion',
-          ' Quadrillion',
-          ' Quintillion'
+          ' ' + i18n.t('label.Thousand'),
+          ' ' + i18n.t('label.Million'),
+          ' ' + i18n.t('label.Billion'),
+          ' ' + i18n.t('label.Trillion'),
+          ' ' + i18n.t('label.Quadrillion'),
+          ' ' + i18n.t('label.Quintillion')
         ][x / 3]
       );
     } else {
-      return n;
+      return delimitNumbers(n);
     }
   }
   updateState(stateVal) {
@@ -83,7 +83,7 @@ class TreecounterGraphicsText extends Component {
                       : '') +
                   ' '}
                 <br />
-                <strong>{delimitNumbers(this.convertNumber(target, 2))}</strong>
+                <strong>{this.convertNumber(target, 2)}</strong>
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(target))} */}
@@ -103,9 +103,7 @@ class TreecounterGraphicsText extends Component {
               <span>
                 {i18n.t('label.planted')}
                 <br />
-                <strong>
-                  {delimitNumbers(this.convertNumber(parseInt(planted), 2))}
-                </strong>
+                <strong>{this.convertNumber(parseInt(planted), 2)}</strong>
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(planted))} */}
@@ -124,8 +122,8 @@ class TreecounterGraphicsText extends Component {
         </div>
       ) : (
         <PlantedDetails
-          personal={delimitNumbers(this.convertNumber(parseInt(personal), 2))}
-          community={delimitNumbers(this.convertNumber(parseInt(community), 2))}
+          personal={this.convertNumber(parseInt(personal), 2)}
+          community={this.convertNumber(parseInt(community), 2)}
           type={type}
           onToggle={e => this.updateState(false)}
         />

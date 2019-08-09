@@ -19,5 +19,11 @@
   "continue_on_site": "Continue using the site",
   "error": "Error",
   "success": "Success",
-  "congrats": "Congrats"
+  "congrats": "Congrats",
+  "Thousand": "Thousand",
+  "Million": "Million",
+  "Billion": "Billion",
+  "Trillion": "Trillion",
+  "Quadrillion": "Quadrillion",
+  "Quintillion": "Quintillion"
 }

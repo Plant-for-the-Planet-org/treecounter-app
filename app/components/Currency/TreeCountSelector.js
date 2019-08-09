@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n';
 import { tree } from '../../assets';
-
+import NumberFormat from '../Common/NumberFormat';
+import { formatNumber } from '../../utils/utils';
 class TreeCountSelector extends React.Component {
   constructor(props) {
     super(props);
@@ -115,7 +116,10 @@ class TreeCountSelector extends React.Component {
               </label>
               <span className="price-conversion__equal">=</span>
               <span className="price-conversion__radio">
-                {treeCountToAmount(treeCount)} {currency}
+                <NumberFormat
+                  data={treeCountToAmount(treeCount)}
+                  currency={currency}
+                />
               </span>
             </div>
           );
@@ -157,7 +161,7 @@ class TreeCountSelector extends React.Component {
                 this.handleVariableAmountChange(evt.target.value)
               }
             />{' '}
-            {currency}
+            {formatNumber(1, null, currency).replace(/[\d.,]/g, '')}
           </span>
         </div>
       </div>

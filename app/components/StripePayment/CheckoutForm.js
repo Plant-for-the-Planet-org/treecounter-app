@@ -3,6 +3,8 @@ import React from 'react';
 import { injectStripe } from 'react-stripe-elements';
 import CardSection from './CardSection';
 import PropTypes from 'prop-types';
+import Axios from 'axios';
+// import console = require('console');
 
 class CheckoutForm extends React.Component {
   handleSubmit = async ev => {
@@ -23,18 +25,48 @@ class CheckoutForm extends React.Component {
     // with which to create tokens
     // this.props.stripe.createToken({name: 'Jenny Rosen'});
 
+    // stripe.handleCardPayment(
+    //   '{PAYMENT_INTENT_CLIENT_SECRET}',
+    //   element,
+    //   {
+    //     payment_method_data: {
+    //       billing_details: {
+    //         name: 'Jenny Rosen'
+    //       }
+    //     }
+    //   }
+    // ).then(function(result) {
+    //   // Handle result.error or result.paymentIntent
+    // });
+
     // You can also use createSource to create Sources.
     // See our Sources documentation for more:
     // https://stripe.com/docs/stripe-js/reference#stripe-create-source
     try {
-      const source = await this.props.stripe.createSource({
-        type: 'card',
-        owner: {
-          name: 'Jenny Rosen'
-        }
-      });
+      const {
+        data: { clientSecret, intentId }
+      } = await Axios.post(
+        'https://devel.trilliontreecampaign.org/app_dev.php/stripe/paymentIntentTest',
+        { amount: 1500, cardType: 'card' }
+      ); // We pay 15€ with a credit card
+      console.log(data);
+      const {
+        paymentIntent,
+        error
+      } = await this.props.stripe.handleCardPayment(
+        clientSecret,
+        this.state.cardElement
+      );
 
-      console.log(source);
+      if (error) {
+        // Handle payment error
+      } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+        // Handle payment success
+      }
+
+      handleReady = element => {
+        this.setState({ cardElement: element });
+      };
     } catch (e) {
       throw e;
     }

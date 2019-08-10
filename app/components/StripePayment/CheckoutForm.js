@@ -1,40 +1,51 @@
-import React, { Component } from 'react';
-import { CardElement, injectStripe } from 'react-stripe-elements';
+// CheckoutForm.js
+import React from 'react';
+import { injectStripe } from 'react-stripe-elements';
+import CardSection from './CardSection';
 import PropTypes from 'prop-types';
 
-class CheckoutForm extends Component {
-  constructor(props) {
-    super(props);
-    this.submit = this.submit.bind(this);
-  }
-
-  componentDidMount() {
-    console.log('Component Did Mount!!!!');
-    console.log(this.props.stripe);
-  }
-
-  async submit(ev) {
+class CheckoutForm extends React.Component {
+  handleSubmit = async ev => {
+    // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault();
+
+    // You can also use createToken to create tokens.
+    // See our tokens documentation for more:
+    // https://stripe.com/docs/stripe-js/reference#stripe-create-token
+    // try {
+    //   const token = await this.props.stripe.createToken({ type: 'card', name: 'Jenny Rosen' });
+    //   console.log(token);
+    // } catch (e) {
+    //   throw e;
+    // }
+
+    // token type can optionally be inferred if there is only one Element
+    // with which to create tokens
+    // this.props.stripe.createToken({name: 'Jenny Rosen'});
+
+    // You can also use createSource to create Sources.
+    // See our Sources documentation for more:
+    // https://stripe.com/docs/stripe-js/reference#stripe-create-source
     try {
-      debugger;
-      const token = await this.props.stripe.createToken({
-        name: 'Jenny Rosen'
+      const source = await this.props.stripe.createSource({
+        type: 'card',
+        owner: {
+          name: 'Jenny Rosen'
+        }
       });
-      console.log('token');
-      console.log(token);
+
+      console.log(source);
     } catch (e) {
       throw e;
     }
-    // User clicked submit
-  }
+  };
 
   render() {
     return (
-      <div className="checkout">
-        <p>Would you like to complete the purchase?</p>
-        <CardElement />
-        <button onClick={this.submit}>Send</button>
-      </div>
+      <form onSubmit={this.handleSubmit}>
+        <CardSection />
+        <button>Confirm order</button>
+      </form>
     );
   }
 }

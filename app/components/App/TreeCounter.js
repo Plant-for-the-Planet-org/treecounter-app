@@ -58,6 +58,8 @@ import WidgetShareContainer from '../../containers/WidgetsShare';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPublicDenyEmail';
 import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
+//test stripe payments
+import StripePaymentContainer from '../../containers/StripePayment';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -195,6 +197,7 @@ class TreeCounter extends Component {
               path={getLocalRoute('app_login')}
               component={LoginContainer}
             />
+            <PublicRoute path={'/stripe'} component={StripePaymentContainer} />
             <PublicRoute
               path={getLocalRoute('app_forgotPassword')}
               component={ForgotPasswordContainer}

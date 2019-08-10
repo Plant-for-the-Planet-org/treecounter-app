@@ -1,11 +1,16 @@
 import React from 'react';
 import { Elements } from 'react-stripe-elements';
+// import PropTypes from 'prop-types';
 import InjectedCheckoutForm from './CheckoutForm';
 
-const MyStoreCheckout = () => (
-  <Elements>
-    <InjectedCheckoutForm />
-  </Elements>
-);
+class MyStoreCheckout extends React.Component {
+  render() {
+    return (
+      <Elements>
+        <InjectedCheckoutForm />
+      </Elements>
+    );
+  }
+}
 
 export default MyStoreCheckout;

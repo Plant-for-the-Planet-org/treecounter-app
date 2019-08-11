@@ -106,13 +106,17 @@ class PlantProjectSnippet extends React.Component {
       if (i == specsProps.taxDeduction.length - 1) {
         deducibleText1 += '.';
       } else {
-        deducibleText1 += ',';
+        deducibleText1 += ', ';
       }
+    }
+    let onPressHandler = undefined;
+    if (this.props.clickable) {
+      onPressHandler = () => this.containerPress(id);
     }
     return (
       <TouchableHighlight
         underlayColor={'transparent'}
-        onPress={() => this.containerPress(id)}
+        onPress={onPressHandler}
       >
         <CardLayout style={[styles.projectSnippetContainer]}>
           {projectImage ? (
@@ -227,7 +231,7 @@ class PlantProjectSnippet extends React.Component {
     );
   }
 }
-
+PlantProjectSnippet.defaultProps = { clickable: true };
 PlantProjectSnippet.propTypes = {
   plantProject: PropTypes.object.isRequired,
   callExpanded: PropTypes.func,
@@ -236,7 +240,8 @@ PlantProjectSnippet.propTypes = {
   projectClear: PropTypes.func,
   showNextButton: PropTypes.bool,
   onNextClick: PropTypes.func,
-  onSelectClickedFeaturedProjects: PropTypes.func
+  onSelectClickedFeaturedProjects: PropTypes.func,
+  clickable: PropTypes.bool
 };
 
 export default PlantProjectSnippet;

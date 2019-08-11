@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { deleteContribution } from '../../actions/EditMyTree';
 import UserContributions from '../../components/UserContributions';
+import _ from 'lodash';
 
 // Actions
 import {

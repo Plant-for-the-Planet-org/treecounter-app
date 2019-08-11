@@ -64,7 +64,7 @@ export default (loginStyles = EStyleSheet.create({
   },
   bottomRow: {
     flexDirection: 'row',
-    paddingTop: 10,
+    paddingTop: 25,
     paddingBottom: 10,
     flexWrap: 'wrap',
     justifyContent: 'space-between'

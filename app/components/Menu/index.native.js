@@ -24,6 +24,7 @@ export default class Menu extends Component {
   static propTypes = {
     menuData: PropTypes.array.isRequired,
     onPress: PropTypes.func,
+    selectPlantProjectAction: PropTypes.func,
     userProfile: PropTypes.any,
     navigation: PropTypes.any,
     lastRoute: PropTypes.any
@@ -96,7 +97,10 @@ export default class Menu extends Component {
     let urlBreak = url.split('/');
     //console.log(urlBreak);
     const { navigation } = this.props;
-    if (urlBreak.indexOf('account-activate') !== -1) {
+    if (
+      urlBreak.indexOf('account-activate') !== -1 ||
+      urlBreak.indexOf('reset-password') !== -1
+    ) {
       setTimeout(
         () =>
           updateRoute(
@@ -111,6 +115,39 @@ export default class Menu extends Component {
           ),
         0
       );
+    } else if (urlBreak.indexOf('competition') !== -1) {
+      setTimeout(
+        () =>
+          updateRoute(
+            '/' + urlBreak[urlBreak.length - 2],
+            // '/' +
+            // urlBreak[urlBreak.length - 1],
+            navigation,
+            0,
+            {
+              competition: urlBreak[urlBreak.length - 1]
+            }
+          ),
+        0
+      );
+    } else if (urlBreak.indexOf('t') !== -1) {
+      setTimeout(
+        () =>
+          updateRoute(
+            '/' + urlBreak[urlBreak.length - 2],
+            // '/' +
+            // urlBreak[urlBreak.length - 1],
+            navigation,
+            0,
+            {
+              treeCounterId: urlBreak[urlBreak.length - 1]
+            }
+          ),
+        0
+      );
+    } else if (urlBreak[urlBreak.length - 2] === 'donate-trees') {
+      this.props.selectPlantProjectAction(urlBreak[urlBreak.length - 1]);
+      setTimeout(() => updateRoute('app_selectProject', navigation, 0, {}), 0);
     } else {
       setTimeout(
         () => updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0),
@@ -166,7 +203,7 @@ export default class Menu extends Component {
               style={{ paddingLeft: 0 }}
               onPress={this.onPressMenu.bind(this, { uri: 'app_login' })}
               title={i18n.t('label.login')}
-              iconUrl={icons.iosLogout}
+              iconUrl={icons.logout}
             />
           </View>
         )}
@@ -178,7 +215,7 @@ export default class Menu extends Component {
                   uri: 'app_editProfile'
                 })}
                 title={i18n.t('label.edit_profile')}
-                iconUrl={icons.editGrey}
+                iconUrl={icons.editProfile}
               />
             ) : null}
             {this.props.userProfile ? (
@@ -209,7 +246,7 @@ export default class Menu extends Component {
                   uri: 'app_challenge'
                 })}
                 title={i18n.t('label.challenge_heading')}
-                iconUrl={icons.challengeIcon}
+                iconUrl={icons.challenge_outline}
               />
             ) : null}
 
@@ -234,7 +271,7 @@ export default class Menu extends Component {
                 uri: getLocalRoute('app_faq')
               })}
               title={i18n.t('label.faqs')}
-              iconUrl={icons.iosFaqs}
+              iconUrl={icons.faqs}
             />
           </View>
         </ScrollView>
@@ -244,13 +281,13 @@ export default class Menu extends Component {
             <LargeMenuItem
               onPress={this.props.logoutUser}
               title={i18n.t('label.logout')}
-              iconUrl={icons.iosLogout}
+              iconUrl={icons.logout}
             />
           ) : null}
           <LargeMenuItem
             onPress={this.onPressMenu.bind(this, { uri: 'about_us' })}
             title={i18n.t('label.information')}
-            iconUrl={icons.infoGrey}
+            iconUrl={icons.info}
           />
         </View>
       </SafeAreaView>

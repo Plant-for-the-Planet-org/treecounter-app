@@ -23,6 +23,7 @@ import UserContributions from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout';
 import AboutUsContainer from '../../containers/AboutUs';
+import UserContributionDetails from '../../containers/UserContributionsDetails';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
 import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
 import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal';
@@ -41,6 +42,7 @@ import SelectedCompetition from '../../containers/SelectedCompetition';
 import RedemptionContainer from '../../containers/RedemptionContainer';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
+import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
 import ImprintContainer from '../../containers/Imprint';
 import PrivacyContainer from '../../containers/Privacy';
 import CompetitionContainer from '../../containers/CompetitionContainer';
@@ -74,6 +76,7 @@ const headerLabels = {
   [getLocalRoute('app_imprint')]: 'label.imprint',
   [getLocalRoute('app_privacy')]: 'label.data_protection',
   [getLocalRoute('app_challenge')]: 'label.challenge_heading',
+  [getLocalRoute('app_resetPassword')]: 'label.reset_ur_password',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
   ['license_info_list']: 'label.open_source_license',
@@ -113,6 +116,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
 
       ['about_us']: { screen: AboutUsContainer },
+      ['contribution_details']: { screen: UserContributionDetails },
 
       ['license_info_list']: { screen: LicenseInfoList },
 
@@ -139,6 +143,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_accountActivate')]: {
         screen: SuccessfullActivatedContainer,
         path: getLocalRoute('app_accountActivate') + '/:token'
+      },
+      [getLocalRoute('app_resetPassword')]: {
+        screen: ResetPasswordContainer,
+        path: getLocalRoute('app_resetPassword') + '/:token'
       }
     },
     {

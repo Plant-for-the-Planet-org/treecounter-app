@@ -5,12 +5,6 @@
 version: 2
 jobs:
   build:
-    branches:
-      only:
-        - master
-        - staging
-        - devel
-        - dev
     docker:
       - image: alpine
 
@@ -39,7 +33,7 @@ jobs:
             then
               echo 'export WD_REACT="$PROJ_DIR/ttc-app_devel"' >>  $ENV_VARS
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_devel"' >>  $ENV_VARS
-            elif [[ "${CIRCLE_BRANCH}" == "dev" ]]
+            elif [[ "${CIRCLE_BRANCH}" == "test" ]]
             then
               echo 'export WD_REACT="$PROJ_DIR/ttc-app_test"' >>  $ENV_VARS
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_test"' >>  $ENV_VARS
@@ -83,3 +77,16 @@ jobs:
           command: |
             source $ENV_VARS
             ssh $HOST "cd $WD_SYMFONY; sh .circleci/integrate-app.sh $CIRCLE_BRANCH"
+
+workflows:
+  version: 2
+  tagged-build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - test
+                - staging
+                - devel

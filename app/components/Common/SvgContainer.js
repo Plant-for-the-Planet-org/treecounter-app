@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import { svgBackground } from '../../assets';
+
 import PropTypes from 'prop-types';
 // import TargetComment from '../TreecounterGraphics/TargetComment';
 // import PlantDetails from '../TreecounterGraphics/PlantDetails';
@@ -273,10 +275,14 @@ export default class SvgContainer extends Component {
   }
 
   getTreeIdsFromPercentage(treeIds, percentage) {
-    const countIndexes = treeIds.length - 1;
-    const index = Math.round(percentage * countIndexes);
+    if (treeIds) {
+      const countIndexes = treeIds.length - 1;
+      const index = Math.round(percentage * countIndexes);
 
-    return treeIds.slice(0, index);
+      return treeIds.slice(0, index);
+    } else {
+      return null;
+    }
   }
 
   renderTreesById(treeIds, type, group) {
@@ -447,7 +453,7 @@ export default class SvgContainer extends Component {
           style={visibleOverflowStyle}
           width="1100"
           height="1100"
-          xlinkHref="https://www.plant-for-the-planet.org/bundles/pftpbilliontree/images/zaehler-bg-himmel.png"
+          xlinkHref={svgBackground}
           transform="matrix(0.7776 0 0 0.7733 0 0)"
         />
         <g ref="Cloud1">

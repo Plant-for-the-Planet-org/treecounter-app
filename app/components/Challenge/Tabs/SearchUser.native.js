@@ -39,7 +39,7 @@ class SearchUser extends React.Component {
 
   // TODO: debounce
   _handleChangeQuery = q => {
-    this.setState({ selectedSuggestionName: '', searchResultClicked: false });
+    this.setState({ searchResultClicked: false });
     getSuggestions(q).then(suggestions => {
       this.setState({ q: suggestions });
     });
@@ -100,6 +100,7 @@ class SearchUser extends React.Component {
           dontFocus
           onChangeQuery={this.onChangeTextDelayed}
           inputValue={this.state.selectedSuggestionName}
+          resetState={this.props.resetState}
           onSubmit={this._handleSubmit}
           placeholderTextColor={this.props.searchInputPlaceholderTextColor}
           placeholderValue={i18n.t('label.enter_a_user')}

@@ -24,6 +24,7 @@ import i18n from '../../locales/i18n.js';
 import { getDateFromMySQL } from '../../helpers/utils';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
+export const ENABLED_NDVI = false;
 
 import _ from 'lodash';
 import CardLayout from '../Common/Card';
@@ -270,7 +271,8 @@ class ContributionCard extends React.Component {
       contributionType,
       registrationDate,
       redemptionCode,
-      redemptionDate
+      redemptionDate,
+      ndviUid
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {
     //   return { src: getImageUrl('contribution', 'medium', image.image) };
@@ -305,7 +307,16 @@ class ContributionCard extends React.Component {
           : '#ec6453';
     let styles = myTreesStyle(labelColor, borderColor);
     return contributionType === 'donation' ? (
-      <CardLayout style={styles.addPadding}>
+      <CardLayout
+        style={styles.addPadding}
+        onPress={() => {
+          ndviUid &&
+            this.props.navigation.navigate('contribution_details', {
+              contribution,
+              titleParam: plantProjectName || tpoName || treeSpecies
+            });
+        }}
+      >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
           <Text
@@ -358,7 +369,16 @@ class ContributionCard extends React.Component {
         </View>
       </CardLayout>
     ) : contributionType === 'planting' ? (
-      <CardLayout style={[styles.addPadding, styles.minHeight]}>
+      <CardLayout
+        style={[styles.addPadding, styles.minHeight]}
+        onPress={() => {
+          ndviUid &&
+            this.props.navigation.navigate('contribution_details', {
+              contribution,
+              titleParam: plantProjectName || tpoName || treeSpecies
+            });
+        }}
+      >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
           <Text
@@ -422,7 +442,16 @@ class ContributionCard extends React.Component {
         </View>
       </CardLayout>
     ) : (
-      <CardLayout style={styles.addPadding}>
+      <CardLayout
+        style={styles.addPadding}
+        onPress={() => {
+          ndviUid &&
+            this.props.navigation.navigate('contribution_details', {
+              contribution,
+              titleParam: plantProjectName || tpoName || treeSpecies
+            });
+        }}
+      >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
           <Text

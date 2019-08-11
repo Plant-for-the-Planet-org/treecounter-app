@@ -8,15 +8,15 @@ import {
   StyleSheet
 } from 'react-native';
 
-import SearchBar from '../../../components/Header/SearchBar.native';
-import Header from '../../../components/Header/Header.native';
+import SearchBar from '../../../components/Header/SearchBar';
+import Header from '../../../components/Header/Header';
 import { getSuggestions, profileTypeToImage } from '../../../helpers/utils';
 import { getImageUrl } from '../../../actions/apiRouting';
 import { getLocalRoute } from '../../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import i18n from '../../../locales/i18n';
-import styles from '../../../styles/header/search_layout.native';
-import searchBarStyles from '../../../styles/header/search_bar.native';
+import styles from '../../../styles/header/search_layout';
+import searchBarStyles from '../../../styles/header/search_bar';
 
 import _ from 'lodash';
 import UserProfileImage from '../../Common/UserProfileImage';
@@ -94,7 +94,7 @@ class SearchUser extends React.Component {
           showCancelSearchButton={false}
           style={{
             ...searchBarStyles.searchContainer,
-            width: '100%',
+            width: '95%',
             backgroundColor: 'transparent',
             marginTop: 10
           }}

@@ -20,14 +20,18 @@ export default class PriceProjects extends Component {
   }
   componentDidMount() {
     let { plantProjects, currencies } = this.props;
-    currencies = currencies.currencies;
+    currencies = currencies ? currencies.currencies : null;
     let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
-    if (currencies) {
+    if (
+      currencies &&
+      currencies.currency_rates &&
+      currencies.currency_rates.EUR
+    ) {
       priceSortedProjects = priceSortedProjects.sort(function(a, b) {
         return (
-          a.treeCost *
+          a.treeCost /
             parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
-          b.treeCost *
+          b.treeCost /
             parseFloat(currencies.currency_rates['EUR'].rates[b.currency])
         );
       });
@@ -49,17 +53,21 @@ export default class PriceProjects extends Component {
     }
   }
 
-  sortProjects(sortType, props = this.props) {
+  sortProjects(sortType, props) {
     if (sortType === 'desc') {
       let { plantProjects, currencies } = props;
-      currencies = currencies.currencies;
+      currencies = currencies ? currencies.currencies : null;
       let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
-      if (currencies) {
+      if (
+        currencies &&
+        currencies.currency_rates &&
+        currencies.currency_rates.EUR
+      ) {
         priceSortedProjectsNew = priceSortedProjectsNew.sort(function(a, b) {
           return (
-            b.treeCost *
+            b.treeCost /
               parseFloat(currencies.currency_rates['EUR'].rates[b.currency]) -
-            a.treeCost *
+            a.treeCost /
               parseFloat(currencies.currency_rates['EUR'].rates[a.currency])
           );
         });
@@ -69,14 +77,18 @@ export default class PriceProjects extends Component {
       });
     } else {
       let { plantProjects, currencies } = props;
-      currencies = currencies.currencies;
+      currencies = currencies ? currencies.currencies : null;
       let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
-      if (currencies) {
+      if (
+        currencies &&
+        currencies.currency_rates &&
+        currencies.currency_rates.EUR
+      ) {
         priceSortedProjectsNew = priceSortedProjectsNew.sort(function(a, b) {
           return (
-            a.treeCost *
+            a.treeCost /
               parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
-            b.treeCost *
+            b.treeCost /
               parseFloat(currencies.currency_rates['EUR'].rates[b.currency])
           );
         });
@@ -99,14 +111,14 @@ export default class PriceProjects extends Component {
             <TouchableItem
               style={styles.imageStyleContainer}
               hitSlop={{ left: 50, right: 150 }}
-              onPress={this.sortProjects.bind(this, 'desc')}
+              onPress={this.sortProjects.bind(this, 'desc', this.props)}
             >
               <Image style={styles.imageStyle} source={foldin} />
             </TouchableItem>
             <TouchableItem
               style={styles.imageStyleContainer}
               hitSlop={{ left: 50, right: 150 }}
-              onPress={this.sortProjects.bind(this, 'asc')}
+              onPress={this.sortProjects.bind(this, 'asc', this.props)}
             >
               <Image style={styles.imageStyle} source={foldout} />
             </TouchableItem>

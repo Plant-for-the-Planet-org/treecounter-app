@@ -65,6 +65,8 @@ export default class ChallengeTabView extends Component {
             challengeUser={this.props.challengeUser}
             challenges={this.props.challenges}
             error={this.props.error}
+            challengeSuccess={this.props.challengeSuccess}
+            resetChallengeSuccess={this.props.resetChallengeSuccess}
             challengeStatus={this.props.challengeStatus}
             currentUserProfile={this.props.currentUserProfile}
           />
@@ -75,6 +77,8 @@ export default class ChallengeTabView extends Component {
             challengeUser={this.props.challengeUser}
             challenges={this.props.challenges}
             error={this.props.error}
+            challengeSuccess={this.props.challengeSuccess}
+            resetChallengeSuccess={this.props.resetChallengeSuccess}
             challengeFormSchemaOptions={challengeFormSchemaOptions}
             challengeStatus={this.props.challengeStatus}
           />

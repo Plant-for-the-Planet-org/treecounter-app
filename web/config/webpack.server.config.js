@@ -22,6 +22,10 @@ module.exports = webpackMerge(commonConfig, {
     donatetreewidget: [
       'babel-polyfill',
       path.join(__dirname, '../widgets/DonateTrees/widget.js')
+    ],
+    ndviwidget: [
+      'babel-polyfill',
+      path.join(__dirname, '../widgets/NDVI/widget.js')
     ]
   },
   output: {
@@ -46,6 +50,7 @@ module.exports = webpackMerge(commonConfig, {
       },
       sourceMap: true
     }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /de|en/),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     })

@@ -198,7 +198,7 @@ export default class DonateTrees extends Component {
     },
     () => {
       // console.log(this.refs.donateReceipt.validate());
-      let value = this.refs.donateReceipt.getValue();
+      let value = this.refs.donateReceipt && this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
         if (this.state.modeReceipt === 'individual') {
@@ -236,7 +236,7 @@ export default class DonateTrees extends Component {
     },
     () => {
       // console.log(this.refs.donateReceipt.validate());
-      let value = this.refs.donateReceipt.getValue();
+      let value = this.refs.donateReceipt && this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
         if (this.state.modeReceipt === 'individual') {
@@ -307,12 +307,14 @@ export default class DonateTrees extends Component {
   }
 
   render() {
+    // this is just for NextArrow displayNone
     let displayNone = classNames({
       'display-none': this.state.pageIndex === 3
     });
+
     if (this.refs.slider) {
       setTimeout(() => {
-        if (this.state.pageIndex === 3) {
+        if (this.refs.slider && this.state.pageIndex === 3) {
           this.refs.slider.slickGoTo(this.state.pageIndex);
         }
       }, 1000);
@@ -369,9 +371,11 @@ export default class DonateTrees extends Component {
           } else {
             if (this.refs.slider) {
               setTimeout(() => {
-                this.refs.slider.slickGoTo(
-                  !oldIndexCheck ? oldIndex : index - 1
-                );
+                if (this.refs.slider) {
+                  this.refs.slider.slickGoTo(
+                    !oldIndexCheck ? oldIndex : index - 1
+                  );
+                }
               }, 1000);
             }
           }

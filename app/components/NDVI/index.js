@@ -47,6 +47,7 @@ export default class NDVI extends Component {
     this.state = {
       selectedDataPoint: !!this.props.dataPoints && this.props.dataPoints[0]
     };
+    this;
   }
 
   componentDidMount() {
@@ -157,9 +158,6 @@ export default class NDVI extends Component {
                   <GradientResultLine
                     getColorForNDVI={this.getColorForNDVI}
                     ref={c => (this.GradientRef = c)}
-                    max={this.state.selectedDataPoint.ndviAggregate.max}
-                    min={this.state.selectedDataPoint.ndviAggregate.min}
-                    avg={this.state.selectedDataPoint.ndviAggregate.avg}
                     selectedDataPoint={this.state.selectedDataPoint}
                   />
                   <Info
@@ -174,17 +172,24 @@ export default class NDVI extends Component {
                   />
                 </div>
               </div>
-              <div className="carbon-box">
-                <div className="row">
-                  <h4>{i18n.t('label.NDVI_carbon_title')}</h4>
-                </div>
-              </div>
-              <div className="row">
-                <CarbonDetails
-                  carbonValue={this.state.selectedDataPoint.carbon}
-                  toolTipHelpButtonSpell={i18n.t('label.NDVI_carbon_tooltip')}
-                />
-              </div>
+
+              {this.state.selectedDataPoint.carbon != undefined && (
+                <React.Fragment>
+                  <div className="carbon-box">
+                    <div className="row">
+                      <h4>{i18n.t('label.NDVI_carbon_title')}</h4>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <CarbonDetails
+                      carbonValue={this.state.selectedDataPoint.carbon}
+                      toolTipHelpButtonSpell={i18n.t(
+                        'label.NDVI_carbon_tooltip'
+                      )}
+                    />
+                  </div>
+                </React.Fragment>
+              )}
             </div>
           </React.Fragment>
         ) : (

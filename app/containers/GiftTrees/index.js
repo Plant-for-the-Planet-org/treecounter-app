@@ -78,6 +78,7 @@ class GiftTreesContainer extends Component {
           paymentStatus={this.props.paymentStatus}
           paymentClear={this.props.paymentClear}
           plantProjectClear={this.props.clearPlantProject}
+          key="gift-trees"
         />
       ) : null
     ];

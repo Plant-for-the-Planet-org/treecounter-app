@@ -121,6 +121,13 @@ class Trillion extends PureComponent {
   };
 
   _renderScreen = ({ route }) => {
+    // called 5 times on first render
+    // also called 4 times on Leaderboard tab
+    // const ids = this.props.plantProjects
+    //   .filter(filterProj => filterProj.allowDonations)
+    //   .map((project, i) => project.id);
+    // console.log(ids.sort());
+
     switch (route.key) {
       case 'world': {
         return this.state.loading ? (
@@ -132,7 +139,7 @@ class Trillion extends PureComponent {
             }}
           >
             <View style={styles.parentContainer}>
-              <View style={svgStyles.svgContainer}>
+              <View style={svgStyles.svgContainer} key="svg">
                 <SvgContainer {...this.state.svgData} trillion={true} />
               </View>
               {/*{this.props.pledgeEvents &&*/}
@@ -166,23 +173,21 @@ class Trillion extends PureComponent {
               {/*</View>*/}
               {/*</View>*/}
               {/*) : null}*/}
-              <CardLayout style={styles.cardContainer}>
-                <Text style={styles.titleText}>
-                  {' '}
+              <CardLayout style={styles.cardContainer} key="msg">
+                <Text style={styles.titleText} key="m1">
                   {i18n.t('label.trillionTreeMessage1')}
                 </Text>
-                <Text style={styles.titleText}>
-                  {' '}
+                <Text style={styles.titleText} key="m2">
                   {i18n.t('label.trillionTreeMessage2')}
                 </Text>
               </CardLayout>
 
-              <View style={{ flex: 1 }}>
+              <View style={{ flex: 1 }} key="prj">
                 {this.props.plantProjects
                   .filter(filterProj => filterProj.allowDonations)
-                  .map(project => (
+                  .map((project, i) => (
                     <PlantProjectSnippet
-                      key={'trillion' + project.id}
+                      key={`p-${project.id}`}
                       onMoreClick={id => this.onMoreClick(id, project.name)}
                       plantProject={project}
                       onSelectClickedFeaturedProjects={id =>
@@ -207,8 +212,9 @@ class Trillion extends PureComponent {
 
   render() {
     return [
-      this.props.navigation ? (
+      this.props.navigation && (
         <NavigationEvents
+          key="nav"
           onWillFocus={payload => {
             this.setState({ loadSvg: true });
           }}
@@ -217,16 +223,17 @@ class Trillion extends PureComponent {
           }}
           key="navigation-events"
         />
-      ) : null,
-      this.state.loadSvg ? (
+      ),
+      this.state.loadSvg && (
         <TabView
+          key="tabs"
           useNativeDriver
           navigationState={this.state}
           renderScene={this._renderScreen}
           renderTabBar={this._renderTabBar}
           onIndexChange={this._handleIndexChange}
         />
-      ) : null
+      )
     ];
   }
 }

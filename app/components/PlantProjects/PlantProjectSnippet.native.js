@@ -139,7 +139,7 @@ class PlantProjectSnippet extends React.Component {
             countTarget={specsProps.countTarget}
           />
           <View style={styles.projectSpecsContainer}>
-            <View style={styles.projectNameContainer}>
+            <View key="a" style={styles.projectNameContainer}>
               <Text
                 ellipsizeMode="tail"
                 numberOfLines={1}
@@ -159,7 +159,7 @@ class PlantProjectSnippet extends React.Component {
                 />
               ) : null}
             </View>
-            <View style={styles.projectdetailsContainer}>
+            <View key="b" style={styles.projectdetailsContainer}>
               <View style={styles.locationContainer}>
                 <Text style={styles.locationText} ellipsizeMode="tail">
                   {specsProps.location}
@@ -199,8 +199,8 @@ class PlantProjectSnippet extends React.Component {
               </View>
             </View>
 
-            <View style={styles.actionContainer}>
-              <View style={styles.byOrgContainer}>
+            <View key="c" style={styles.actionContainer}>
+              <View key="a" style={styles.byOrgContainer}>
                 <Text
                   style={styles.byOrgText}
                   ellipsizeMode="tail"
@@ -211,7 +211,7 @@ class PlantProjectSnippet extends React.Component {
               </View>
 
               {this.props.plantProject.allowDonations ? (
-                <View style={styles.buttonContainer}>
+                <View key="b" style={styles.buttonContainer}>
                   <PrimaryButton
                     style={styles.buttonItem}
                     buttonStyle={styles.buttonStyle}

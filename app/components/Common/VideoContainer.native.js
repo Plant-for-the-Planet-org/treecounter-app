@@ -43,6 +43,9 @@ class VideoContainer extends React.Component {
     // native module that is very sensitive to being covered or even touching its containing view.
     setTimeout(() => {
       this.setState({ moduleMargin: StyleSheet.hairlineWidth });
+    }, 2000);
+    setTimeout(() => {
+      this.setState({ moduleMargin: StyleSheet.hairlineWidth });
     }, 250);
     if (this.props.onReady) this.props.onReady(event.nativeEvent);
   };

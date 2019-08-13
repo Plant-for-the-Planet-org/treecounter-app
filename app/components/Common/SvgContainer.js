@@ -286,17 +286,19 @@ export default class SvgContainer extends Component {
   }
 
   renderTreesById(treeIds, type, group) {
-    // filter out already rendered trees
-    let newTreeIds = treeIds.filter(
-      treeId => !this.renderedTreeIds.includes(treeId)
-    );
+    if (treeIds) {
+      // filter out already rendered trees
+      let newTreeIds = treeIds.filter(
+        treeId => !this.renderedTreeIds.includes(treeId)
+      );
 
-    newTreeIds.map(function(treeId) {
-      this.renderedTreeIds.push(treeId); // mark tree as rendered
-      this.setTreeStatus(treeId, type, group); // update tree state
-    }, this);
+      newTreeIds.map(function(treeId) {
+        this.renderedTreeIds.push(treeId); // mark tree as rendered
+        this.setTreeStatus(treeId, type, group); // update tree state
+      }, this);
 
-    this.forceUpdate();
+      this.forceUpdate();
+    }
   }
 
   convertTreesToAngle(trees, total, maxAngle) {

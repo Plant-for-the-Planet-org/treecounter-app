@@ -78,6 +78,30 @@ jobs:
             source $ENV_VARS
             ssh $HOST "cd $WD_SYMFONY; sh .circleci/integrate-app.sh $CIRCLE_BRANCH"
 
+  build_gitflow:
+    docker:
+      - image: circleci/node:10.11-jessie
+    working_directory: ~/ttc-app
+    steps:
+      - checkout
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install npm
+          command: npm install
+      - run:
+          name: Build Application
+          command: |
+            cp app/config/index.js.dist app/config/index.js
+            npm run build:server
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+
 workflows:
   version: 2
   tagged-build:
@@ -90,3 +114,11 @@ workflows:
                 - test
                 - staging
                 - devel
+      - build_gitflow:
+          filters:
+            branches:
+              only:
+                - develop
+                - /^feature\/.*/
+                - /^hotfix\/.*/
+                - /^release\/.*/

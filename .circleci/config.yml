@@ -93,10 +93,29 @@ jobs:
           name: Install npm
           command: npm install
       - run:
-          name: Build Application
+          name: Setup local configuration
+          command: cp app/config/index.js.dist app/config/index.js
+      - run:
+          name: Build web client
+          command: npm run build:server
+      - run:
+          name: Build Android app
           command: |
-            cp app/config/index.js.dist app/config/index.js
-            npm run build:server
+            react-native bundle \
+                --platform android \
+                --dev false \
+                --entry-file index.js \
+                --bundle-output android-release.bundle \
+                --sourcemap-output android-release.bundle.map
+      - run:
+          name: Build iOS app
+          command: |
+            react-native bundle \
+                --platform ios \
+                --dev false \
+                --entry-file index.js \
+                --bundle-output ios-release.bundle \
+                --sourcemap-output ios-release.bundle.map
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:

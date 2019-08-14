@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
 import CardLayout from '../Common/Card';
-import ContentHeader from '../Common/ContentHeader';
+// import ContentHeader from '../Common/ContentHeader';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import Tabs from '../Common/Tabs';
@@ -46,65 +46,50 @@ export default class SelectPlantProject extends Component {
   }
 
   componentWillMount() {
-    let { plantProjects, currencies } = this.props;
-    currencies = currencies.currencies;
-    let featuredProjects = plantProjects.reduce((projects, project) => {
-      if (project.isFeatured) {
-        projects.push(project);
-      }
-      return projects;
-    }, []);
-    let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
-    if (
-      currencies &&
-      currencies.currency_rates &&
-      currencies.currency_rates.EUR
-    ) {
-      priceSortedProjects = priceSortedProjects.sort(function(a, b) {
-        return (
-          a.treeCost /
-            parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
-          b.treeCost /
-            parseFloat(currencies.currency_rates['EUR'].rates[b.currency])
-        );
-      });
-    }
-    this.setState({
-      filteredProjects: plantProjects,
-      featuredProjects: featuredProjects,
-      priceSortedProjects: priceSortedProjects
-    });
+    this.setState(this.initialStateFromProps(this.props));
   }
 
-  componentWillReceiveProps(nextProps) {
-    let { plantProjects, currencies } = nextProps;
-    currencies = currencies ? currencies.currencies : null;
-    let featuredProjects = plantProjects.reduce((projects, project) => {
-      if (project.isFeatured) {
-        projects.push(project);
-      }
-      return projects;
-    }, []);
-    let priceSortedProjects = plantProjects;
+  componentWillReceiveProps(props) {
+    this.setState(this.initialStateFromProps(props));
+  }
+
+  initialStateFromProps(props) {
+    const {
+      plantProjects,
+      currencies: { currencies }
+    } = props;
+
+    const featuredProjects = plantProjects.filter(
+      project => project.isFeatured
+    );
+
+    // TODO Move this so it can be used everywhere
+    // and a sort trees by price
+    function convertCurrency(price, fromCurrency, toCurrency) {
+      return (
+        price /
+        parseFloat(currencies.currency_rates[toCurrency].rates[fromCurrency])
+      );
+    }
+
+    let priceSortedProjects = Array.from(plantProjects);
     if (
       currencies &&
       currencies.currency_rates &&
       currencies.currency_rates.EUR
     ) {
-      priceSortedProjects = plantProjects.sort(function(a, b) {
-        return (
-          a.treeCost /
-            parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
-          b.treeCost /
-            parseFloat(currencies.currency_rates['EUR'].rates[b.currency])
-        );
-      });
+      priceSortedProjects = priceSortedProjects.sort(
+        (a, b) =>
+          convertCurrency(a.treeCost, a.currency, 'EUR') -
+          convertCurrency(b.treeCost, b.currency, 'EUR')
+      );
     }
-    this.setState({
+
+    return {
       filteredProjects: plantProjects,
-      featuredProjects: featuredProjects,
-      priceSortedProjects: priceSortedProjects
-    });
+      featuredProjects,
+      priceSortedProjects
+    };
   }
 
   onInputChange = event => {

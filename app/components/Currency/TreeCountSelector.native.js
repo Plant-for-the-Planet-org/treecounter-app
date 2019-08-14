@@ -129,6 +129,9 @@ class TreeCountSelector extends React.Component {
                       index={i}
                       labelWrapStyle={styles.radio_label}
                       labelHorizontal={true}
+                      onPress={(value, index) => {
+                        this.handleFixedTreeCountChange(value);
+                      }}
                     />
                   </RadioButton>
                 );

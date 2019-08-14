@@ -87,6 +87,9 @@ jobs:
       - run:
           name: Update npm
           command: 'sudo npm install -g npm@latest'
+      - run:
+          name: Install react-native CLI
+          command: 'sudo npm install -g react-native-cli'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:

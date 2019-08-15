@@ -151,6 +151,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-paypal-wrapper')
+    implementation project(':react-native-vector-icons')
     implementation project(':bugsnag-react-native')
     implementation project(':react-native-youtube')
     //compile project(':tipsi-stripe')

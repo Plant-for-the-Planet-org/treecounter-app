@@ -19,7 +19,7 @@ import {
 } from '../reducers/entitiesReducer';
 import { getSupportedTreecounter } from '../reducers/supportedTreecounterReducer';
 import { getSelectedPlantProjectId } from '../reducers/selectedPlantProjectIdReducer';
-import { getPledges } from '../reducers/pledgeReducer';
+import { getPledges, getPostedPledges } from '../reducers/pledgeReducer';
 import { getPledgeEvents } from '../reducers/pledgeEventReducer';
 import { getPaymentStatus } from '../reducers/paymentStatus';
 import { getCurrencies } from '../reducers/currenciesReducer';
@@ -41,6 +41,7 @@ export const competitionEnrollmentSelector = state =>
 export const entitiesSelector = state => state.entities;
 export const userFeedsSelector = state => getUserFeeds(state);
 export const pledgesSelector = state => getPledges(state);
+export const postedPledgeSelector = state => getPostedPledges(state);
 export const currenciesSelector = state => getCurrencies(state);
 export const paymentStatusSelector = state => getPaymentStatus(state);
 export const pledgeEventSelector = state => getPledgeEvents(state);

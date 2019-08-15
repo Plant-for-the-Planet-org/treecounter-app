@@ -2,6 +2,8 @@ import { Text, View, Image, TextInput, Platform } from 'react-native';
 import React from 'react';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/forms/textinput.native';
+import { TextField } from 'react-native-material-textfield';
+
 export function TextInputTemplate(locals) {
   if (locals.hidden) {
     return null;
@@ -35,7 +37,7 @@ export function TextInputTemplate(locals) {
             />
           </View>
         ) : null}
-        <TextInput
+        <TextField
           style={[styles.textboxStyle]}
           secureTextEntry={locals.secureTextEntry}
           placeholder={i18n.t(locals.placeholder)}

@@ -134,8 +134,14 @@ import individualIcon from './images/individual_icon.png';
 import companyIcon from './images/company_icon.png';
 import mapCollapse from './images/map_collapse.png';
 import mapExpand from './images/map_expand.png';
-import smalltreewhite from './images/smalltreewhite.png';
+import smalltree from './images/smalltree.png';
 import calendarwhite from './images/calendarwhite.png';
+import greencalendar from './images/greencalendar.png';
+import eventCover from './images/eventCover.png';
+import forward from './images/forward.png';
+import successAnimated from './images/successAnimated.gif';
+import trees from './images/trees.png';
+
 export {
   mapCollapse,
   mapExpand,
@@ -273,6 +279,11 @@ export {
   challengeIcon,
   webProgramming,
   communityMenu,
-  smalltreewhite,
-  calendarwhite
+  smalltree,
+  calendarwhite,
+  greencalendar,
+  eventCover,
+  forward,
+  successAnimated,
+  trees
 };

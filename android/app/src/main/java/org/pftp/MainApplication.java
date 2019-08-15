@@ -3,6 +3,8 @@ package org.pftp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.taessina.paypal.RNPaypalWrapperPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.bugsnag.BugsnagReactNative;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 //import com.gettipsi.stripe.StripeReactPackage;
@@ -32,6 +34,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNPaypalWrapperPackage(),
+            new VectorIconsPackage(),
             BugsnagReactNative.getPackage(),
             new ReactNativeYouTube(),
            // new StripeReactPackage(),

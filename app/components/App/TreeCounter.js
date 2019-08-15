@@ -58,6 +58,7 @@ import WidgetShareContainer from '../../containers/WidgetsShare';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPublicDenyEmail';
 import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
+import PledgeEvents from '../PledgeEvents/PledgeEvents.native';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -293,9 +294,13 @@ class TreeCounter extends Component {
               path={getLocalRoute('app_redeem') + '/:type?' + '/:code?'}
               component={RedemptionContainer}
             />
-            <Route
+            {/* <Route
               path={getLocalRoute('app_pledge') + '/:eventSlug'}
               component={PledgeContainer}
+            /> */}
+            <Route
+              path={getLocalRoute('app_pledge') + '/:eventSlug'}
+              component={PledgeEvents}
             />
             <Route
               path={getLocalRoute('app_treecounter') + '/:treecounterId'}

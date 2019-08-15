@@ -13,6 +13,7 @@ import {
 import NavigationEvents from './importNavigationEvents';
 
 import { trillionCampaign } from '../../actions/trillionAction';
+
 import SvgContainer from '../Common/SvgContainer';
 import svgStyles from '../../styles/common/treecounter_svg';
 import styles from '../../styles/trillion.native';
@@ -29,6 +30,11 @@ import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction
 import Leaderboard from '../../containers/Leaderboard';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { getLocalRoute } from '../../actions/apiRouting';
+import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
+import { loadUserProfile } from './../../actions/loadUserProfileAction';
+import { currentUserProfileSelector } from './../../selectors';
+
+import { trees } from './../../assets';
 
 const Layout = {
   window: {
@@ -40,7 +46,6 @@ import { saveItem, fetchItem } from '../../stores/localStorage.native';
 import Constants from '../../utils/const';
 import { getImageUrl } from '../../actions/apiRouting';
 import FeaturedProject from './FeaturedProjectScroll/FeaturedProject';
-// import { plantsforcard } from './plantsforcard.svg';
 
 class Trillion extends PureComponent {
   constructor() {
@@ -48,6 +53,8 @@ class Trillion extends PureComponent {
     this.state = {
       svgData: null,
       displayName: '',
+      pledgedEvents2: [],
+      allPledgeEvents: [],
       loading: true,
       loadSvg: true,
       routes: [
@@ -58,6 +65,10 @@ class Trillion extends PureComponent {
     };
   }
   componentDidMount() {
+    // this.props.fetchpledgeEventsAction();
+    // pledgedEvents2 = this.props.pledgeEvents;
+    // console.log(pledgedEvents2);
+
     trillionCampaign()
       .then(({ data }) => {
         const svgData = {
@@ -92,6 +103,11 @@ class Trillion extends PureComponent {
           }
         });
       });
+
+    // this.setFeaturedEvents();
+
+    this.props.fetchpledgeEventsAction();
+    pledgedEvents2 = this.props.pledgeEvents;
   }
 
   onMoreClick(id, name) {
@@ -126,6 +142,9 @@ class Trillion extends PureComponent {
 
   _renderScreen = ({ route }) => {
     const { navigation, userProfile, isLoggedIn } = this.props;
+
+    //console.log(userProfile);
+
     switch (route.key) {
       case 'world': {
         return this.state.loading ? (
@@ -139,36 +158,57 @@ class Trillion extends PureComponent {
           >
             <View style={styles.parentContainer}>
               {/* Trillion Tree Events Title */}
-              {/* <View style={{ marginTop: 25, marginLeft: 16 }}>
-                <Text
-                  style={styles.trillionTreeEventTitle}
-                >
+              <View style={{ marginTop: 25, marginLeft: 16 }}>
+                <Text style={styles.trillionTreeEventTitle}>
                   {i18n.t('label.trillionTreesEvents')}
                 </Text>
-              </View> */}
+              </View>
               {/* Trillion Tree Events Title Ended */}
 
               {/* Featured events horizontal ScrollView */}
-              {/* <View style={{ marginTop: 16 }}>
+              <View style={{ marginTop: 16 }}>
                 <ScrollView
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={{ paddingRight: 20 }}
                 >
-                  <FeaturedProject
-                    imageUri={require('../../assets/images/esri_logo.png')}
-                    orgname="Esri User Conference"
-                    treespledged="19,517"
-                    date="March 3, 2019"
-                  />
-                  <FeaturedProject
-                    imageUri={require('../../assets/images/weforest.png')}
-                    orgname="WeForest Conclave"
-                    treespledged="121,951,700"
-                    date="December 15 - 25, 2019"
-                  />
+                  {this.props.pledgeEvents &&
+                  this.props.pledgeEvents.pledgeEvents
+                    ? this.props.pledgeEvents.pledgeEvents.map(
+                        featuredEvents => (
+                          <TouchableOpacity
+                            key={featuredEvents.slug}
+                            onPress={() => {
+                              updateStaticRoute(
+                                'app_pledge_events',
+                                navigation,
+                                {
+                                  slug: featuredEvents.slug,
+                                  eventName: featuredEvents.name,
+                                  eventDate: featuredEvents.eventDate,
+                                  totalTrees: featuredEvents.total,
+                                  eventImage: featuredEvents.image,
+                                  description: featuredEvents.description
+                                }
+                              );
+                            }}
+                          >
+                            <FeaturedProject
+                              imageUri={getImageUrl(
+                                'event',
+                                'thumb',
+                                featuredEvents.image
+                              )}
+                              orgname={featuredEvents.name}
+                              treespledged={featuredEvents.total}
+                              date={featuredEvents.eventDate}
+                            />
+                          </TouchableOpacity>
+                        )
+                      )
+                    : null}
                 </ScrollView>
-              </View> */}
+              </View>
               {/* Featured events horizontal ScrollView Ended */}
 
               {/* Tree Counter SVG */}
@@ -185,30 +225,37 @@ class Trillion extends PureComponent {
                   {i18n.t('label.trillionTreeMessage2')}
                 </Text>
               </CardLayout>
-
-              {/* <CardLayout style={{ padding: 16 }}>
-                <Text style={styles.googleCardTitle}>
-                  Tree Planting Projects
-                </Text>
-                <View
-                  style={styles.tpoCardText}
+              {userProfile && userProfile.type === 'tpo' ? (
+                <CardLayout
+                  style={[
+                    styles.cardContainer,
+                    {
+                      padding: 16
+                    }
+                  ]}
                 >
-                  <Text style={styles.googleCardPara}>
-                    Are you involved in reforestation and would you like to
-                    receive donations to plant trees?
+                  <Text style={styles.googleCardTitle}>
+                    Tree Planting Projects
                   </Text>
-                  <Image
-                    style={{ width: 70, height: 50 }}
-                    source={require('./plantsforcard.svg')}
-                  />
-                </View>
-                <View
-                  style={styles.tpoCardButton}
-                />
-                <TouchableOpacity style={{ width: '100%' }}>
-                  <Text style={styles.googleCardButton}>Add Your Project</Text>
-                </TouchableOpacity>
-              </CardLayout> */}
+                  <View style={styles.tpoCardText}>
+                    <Text style={styles.googleCardPara}>
+                      Are you involved in reforestation and would you like to
+                      receive donations to plant trees?
+                    </Text>
+                    <Image
+                      source={trees}
+                      style={{ width: 72, height: 56, flex: 1 }}
+                      resizeMode="cover"
+                    />
+                  </View>
+                  <View style={styles.tpoCardButton} />
+                  <TouchableOpacity style={{ width: '100%' }}>
+                    <Text style={styles.googleCardButton}>
+                      Add Your Project
+                    </Text>
+                  </TouchableOpacity>
+                </CardLayout>
+              ) : null}
 
               <CardLayout
                 style={[
@@ -218,13 +265,18 @@ class Trillion extends PureComponent {
                   }
                 ]}
               >
-                <Text style={styles.googleCardTitle}>
+                <Text style={[styles.googleCardTitle, { textAlign: 'left' }]}>
                   {i18n.t('label.searchProjectTitle')}
                 </Text>
                 <View style={styles.googleCardParaContainer}>
                   <Text style={styles.googleCardPara}>
                     {i18n.t('label.searchProjectPara')}
                   </Text>
+                  <Image
+                    source={trees}
+                    style={{ width: 72, height: 56, flex: 1 }}
+                    resizeMode="cover"
+                  />
                 </View>
                 <View style={styles.horizontalLine} />
                 <TouchableOpacity
@@ -278,16 +330,19 @@ class Trillion extends PureComponent {
 
 const mapStateToProps = state => ({
   pledgeEvents: pledgeEventSelector(state),
-  plantProjects: getAllPlantProjectsSelector(state)
+  userProfile: currentUserProfileSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ selectPlantProjectAction }, dispatch);
+  return bindActionCreators(
+    { fetchpledgeEventsAction, loadUserProfile },
+    dispatch
+  );
+};
+
+Trillion.propTypes = {
+  pledgeEvents: PropTypes.object.isRequired,
+  navigation: PropTypes.any
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trillion);
-
-Trillion.propTypes = {
-  pledgeEvents: PropTypes.object,
-  navigation: PropTypes.any
-};

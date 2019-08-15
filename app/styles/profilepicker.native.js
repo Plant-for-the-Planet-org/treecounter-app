@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-
+import { Fonts } from './../utils/fonts';
 export default (editProfileStyle = EStyleSheet.create({
   buttonStyle: {
     borderColor: '#89b53a',
@@ -31,7 +31,7 @@ export default (editProfileStyle = EStyleSheet.create({
     maxWidth: '100%'
   },
   textDedicateStyle: {
-    fontFamily: 'OpenSans',
+    fontFamily: Fonts.OpenSans,
     fontSize: 18,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -41,7 +41,7 @@ export default (editProfileStyle = EStyleSheet.create({
     color: '#4d5153'
   },
   textNotDedicateStyle: {
-    fontFamily: 'OpenSans',
+    fontFamily: Fonts.OpenSans,
     fontSize: 18,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -97,7 +97,7 @@ export default (editProfileStyle = EStyleSheet.create({
     justifyContent: 'space-between'
   },
   dedicateMyTree: {
-    fontFamily: 'OpenSans',
+    fontFamily: Fonts.OpenSans,
     fontSize: 27,
     fontWeight: '800',
     fontStyle: 'normal',
@@ -108,7 +108,7 @@ export default (editProfileStyle = EStyleSheet.create({
     marginBottom: 7
   },
   currentlyDedicatedTo: {
-    fontFamily: 'OpenSans',
+    fontFamily: Fonts.OpenSans,
     fontSize: 17,
     fontWeight: '600',
     fontStyle: 'normal',

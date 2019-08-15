@@ -35,17 +35,17 @@ export default (menuStyles = EStyleSheet.create({
     marginTop: 40
   },
   profileTextHeading: {
-    fontSize: 13,
+    fontSize: 16,
     color: '$textColor',
     fontWeight: '600',
     marginTop: 5
   },
   profileText: {
-    fontSize: 13,
+    fontSize: 10,
     color: '$textColor'
   },
   centerMenu: {
-    marginTop: 22
+    marginTop: 36
   },
   sideNavigationActionMenuContainer: {
     width: '100%'

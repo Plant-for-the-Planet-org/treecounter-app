@@ -88,7 +88,7 @@ export const getAllPlantProjectsSelector = createSelector(
       []
     );
     let tpoNameExpandedProjects = normalisedProjects.map(project => {
-      project.tpo_name = tpos[project.tpoId].name;
+      project.tpo_name = tpos[project.tpoId] ? tpos[project.tpoId].name : '-';
       return project;
     });
     tpoNameExpandedProjects.sort(function(a, b) {

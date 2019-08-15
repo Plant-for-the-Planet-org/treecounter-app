@@ -78,6 +78,52 @@ jobs:
             source $ENV_VARS
             ssh $HOST "cd $WD_SYMFONY; sh .circleci/integrate-app.sh $CIRCLE_BRANCH"
 
+  build_gitflow:
+    docker:
+      - image: circleci/node:10.11-jessie
+    working_directory: ~/ttc-app
+    steps:
+      - checkout
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
+      - run:
+          name: Install react-native CLI
+          command: 'sudo npm install -g react-native-cli'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install npm
+          command: npm install
+      - run:
+          name: Setup local configuration
+          command: cp app/config/index.js.dist app/config/index.js
+      - run:
+          name: Build web client
+          command: npm run build:server
+      - run:
+          name: Build Android app
+          command: |
+            react-native bundle \
+                --platform android \
+                --dev false \
+                --entry-file index.js \
+                --bundle-output android-release.bundle \
+                --sourcemap-output android-release.bundle.map
+      - run:
+          name: Build iOS app
+          command: |
+            react-native bundle \
+                --platform ios \
+                --dev false \
+                --entry-file index.js \
+                --bundle-output ios-release.bundle \
+                --sourcemap-output ios-release.bundle.map
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+
 workflows:
   version: 2
   tagged-build:
@@ -90,3 +136,11 @@ workflows:
                 - test
                 - staging
                 - devel
+      - build_gitflow:
+          filters:
+            branches:
+              only:
+                - develop
+                - /^feature\/.*/
+                - /^hotfix\/.*/
+                - /^release\/.*/

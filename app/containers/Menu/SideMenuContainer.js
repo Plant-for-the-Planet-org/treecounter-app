@@ -9,6 +9,7 @@ import {
   userTreecounterSelector
 } from '../../selectors/index';
 import { toggleSideNavAction } from '../../actions/setSideNavAction';
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { clearSupport } from '../../actions/supportTreecounterAction';
 
 // Actions
@@ -79,6 +80,7 @@ class SideMenuContainer extends Component {
         navigation={this.props.navigation}
         treecounter={this.props.treecounter}
         path={path}
+        selectPlantProjectAction={this.props.selectPlantProjectAction}
         toggleSideNavAction={this.props.toggleSideNavAction}
         clearSupport={this.props.clearSupport}
         logoutUser={this.props.logoutUser}
@@ -99,7 +101,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { logoutUser, toggleSideNavAction, clearSupport },
+    { logoutUser, toggleSideNavAction, clearSupport, selectPlantProjectAction },
     dispatch
   );
 };
@@ -113,6 +115,7 @@ SideMenuContainer.propTypes = {
   navigation: PropTypes.any,
   location: PropTypes.object,
   toggleSideNavAction: PropTypes.func.isRequired,
+  selectPlantProjectAction: PropTypes.func,
   clearSupport: PropTypes.func,
   treecounter: PropTypes.object,
   userProfile: PropTypes.any,

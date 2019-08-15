@@ -3,56 +3,145 @@ const mockDataPoints = [
     monthUid: 201907,
     month: 7,
     year: 2019,
-    carbon: 3716,
+    carbon: 2434,
     ndviAggregate: {
       min: 0.25,
       max: 0.75,
       avg: 0.5
-    }
+    },
+    status: 'available'
   },
   {
-    monthUid: 1254,
-    month: 8,
+    monthUid: 201906,
+    month: 6,
     year: 2019,
-    carbon: 3717,
+    carbon: 4567,
     ndviAggregate: {
-      min: -0.24662007507553332,
-      max: 2.7517624439222388,
-      avg: 0.3811577383449884
-    }
+      min: -0.14,
+      max: 0.15,
+      avg: 0
+    },
+    status: 'available'
   },
   {
-    monthUid: 12054,
-    month: 9,
+    monthUid: 201905,
+    month: 5,
+    year: 2019,
+    carbon: 6784,
+    ndviAggregate: {
+      min: 0.24,
+      max: 0.75,
+      avg: 0.58
+    },
+    status: 'available'
+  },
+  {
+    monthUid: 201904,
+    month: 4,
+    year: 2019,
+    carbon: 9867,
+    ndviAggregate: {
+      min: -0.54,
+      max: 0.35,
+      avg: 0.18
+    },
+    status: 'available'
+  },
+  {
+    monthUid: 201903,
+    month: 3,
     year: 2019,
     carbon: 3716,
     ndviAggregate: {
-      min: 0.24662007507553332,
-      max: 0.7517624439222388,
-      avg: 0.5811577383449884
-    }
+      min: -0.24,
+      max: 0.75,
+      avg: 0.25
+    },
+    status: 'available'
   },
   {
-    monthUid: 12354,
-    month: 10,
+    monthUid: 201902,
+    month: 2,
     year: 2019,
-    carbon: 3716,
+    carbon: 3190,
     ndviAggregate: {
-      min: -0.54662007507553332,
-      max: 0.3517624439222388,
-      avg: 0.1811577383449884
-    }
+      min: -0.84,
+      max: -0.21,
+      avg: -0.41
+    },
+    status: 'available'
   },
   {
-    monthUid: 12554,
+    monthUid: 201901,
+    month: 1,
+    year: 2019,
+    carbon: 4100,
+    ndviAggregate: {
+      min: 0.24,
+      max: 0.75,
+      avg: 0.38
+    },
+    status: 'available'
+  },
+  {
+    monthUid: 201812,
+    month: 12,
+    year: 2018,
+    carbon: 2100,
+    ndviAggregate: {
+      min: 0.24,
+      max: 0.75,
+      avg: 0.38
+    },
+    status: 'available'
+  },
+  {
+    monthUid: 201811,
     month: 11,
-    year: 2019,
+    year: 2018,
+    carbon: 2500,
+    ndviAggregate: {
+      min: 0.24,
+      max: 0.75,
+      avg: 0.38
+    },
+    status: 'available'
+  },
+  {
+    monthUid: 201810,
+    month: 10,
+    year: 2018,
     carbon: 3716,
     ndviAggregate: {
-      min: -0.24662007507553332,
-      max: 2.7517624439222388,
-      avg: 0.3811577383449884
-    }
+      min: 0.24,
+      max: 0.75,
+      avg: 0.38
+    },
+    status: 'available'
+  },
+  {
+    monthUid: 201711,
+    month: 1,
+    year: 2017,
+    carbon: 5324,
+    ndviAggregate: {
+      min: 0.24,
+      max: 0.75,
+      avg: 0.38
+    },
+    status: 'available'
+  },
+  {
+    monthUid: 201710,
+    month: 2,
+    year: 2017,
+    carbon: 3456,
+    ndviAggregate: {
+      min: 0.24,
+      max: 0.75,
+      avg: 0.38
+    },
+    status: 'unavailable'
   }
 ];
 

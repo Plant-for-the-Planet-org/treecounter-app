@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { infoGrey } from '../../assets';
+import { info } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
 import i18n from '../../locales/i18n.js';
 
@@ -58,7 +58,7 @@ class BodyErrorBoundary extends React.Component {
       // You can render any custom fallback UI
       return (
         <div className={'error-container sidenav-wrapper'}>
-          <img src={infoGrey} />
+          <img src={info} />
           <h1>{i18n.t('label.something_went_x')}</h1>
           <h4>{i18n.t('label.sorry_inconveniences')}</h4>
           <p>{i18n.t('label.error_reported')}</p>

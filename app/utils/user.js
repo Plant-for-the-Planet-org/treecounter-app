@@ -6,20 +6,28 @@ import { email } from '../assets';
 export const getAccessToken = () => {
   return fetchItem('token')
     .then(async token => {
-      let expired = await tokenIsExpired();
-      if (expired) {
-        const prev_refresh_token = await fetchItem('refresh_token');
-        const response = await postRequest('gesdinet_jwt_refresh_token', {
-          refresh_token: prev_refresh_token
-        });
-        const { token, refresh_token } = response.data;
-        updateJWT(token, refresh_token);
-        return token;
-      } else {
-        return token;
+      try {
+        let expired = await tokenIsExpired();
+        if (expired) {
+          const prev_refresh_token = await fetchItem('refresh_token');
+          const response = await postRequest('gesdinet_jwt_refresh_token', {
+            refresh_token: prev_refresh_token
+          });
+          const { token, refresh_token } = response.data;
+          updateJWT(token, refresh_token);
+          return token;
+        } else {
+          return token;
+        }
+      } catch (err) {
+        console.log(err);
+        return null;
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      return null;
+    });
 };
 
 export const updateJWT = (token, refresh_token) => {

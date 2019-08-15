@@ -161,29 +161,6 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     color: '#4d5153',
     marginTop: 7
   },
-  makePledgeButton: {
-    width: '88%',
-    marginLeft: '7%',
-    position: 'absolute',
-    top: '90%',
-    alignSelf: 'center'
-  },
-  makePledgeButtonView: {
-    borderRadius: 100,
-    backgroundColor: '#89b53a',
-    height: 52,
-    justifyContent: 'center'
-  },
-  makePledgeButtonText: {
-    fontFamily: Fonts.OpenSans,
-    fontSize: 16,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 22,
-    letterSpacing: 0.21,
-    textAlign: 'center',
-    color: '#ffffff'
-  },
   formScrollView: {
     backgroundColor: 'white',
     flexGrow: 1,

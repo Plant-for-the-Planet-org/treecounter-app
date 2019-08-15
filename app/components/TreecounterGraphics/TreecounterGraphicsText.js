@@ -67,7 +67,8 @@ class TreecounterGraphicsText extends Component {
       }
     } = this.props;
     let dom;
-
+    const targetCount = this.convertNumber(target, 2);
+    const plantedCount = this.convertNumber(parseInt(planted), 2);
     {
       dom = !this.state.ifPlantedDetails ? (
         <div className="svg-text-container">
@@ -83,7 +84,9 @@ class TreecounterGraphicsText extends Component {
                       : '') +
                   ' '}
                 <br />
-                <strong>{this.convertNumber(target, 2)}</strong>
+                <strong className={targetCount.length > 12 ? 'small' : ''}>
+                  {targetCount}
+                </strong>
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(target))} */}
@@ -103,7 +106,9 @@ class TreecounterGraphicsText extends Component {
               <span>
                 {i18n.t('label.planted')}
                 <br />
-                <strong>{this.convertNumber(parseInt(planted), 2)}</strong>
+                <strong className={plantedCount.length > 12 ? 'small' : ''}>
+                  {plantedCount}
+                </strong>
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(planted))} */}

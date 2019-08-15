@@ -26,11 +26,17 @@ const Info = props => {
               </Text>
               <Text style={textCommonStyle}>
                 {`${props.minimumSpell} `}
-                <Text style={boldTextStyle}>{parseFloat(aggregate.min)}</Text>
+                <Text style={boldTextStyle}>
+                  {Math.round(aggregate.min * 100) / 100}
+                </Text>
                 {` ${props.averageSpell} `}
-                <Text style={boldTextStyle}>{parseFloat(aggregate.avg)}</Text>
+                <Text style={boldTextStyle}>
+                  {Math.round(aggregate.avg * 100) / 100}
+                </Text>
                 {` ${props.maximumSpell} `}
-                <Text style={boldTextStyle}>{parseFloat(aggregate.max)}</Text>
+                <Text style={boldTextStyle}>
+                  {Math.round(aggregate.max * 100) / 100}
+                </Text>
               </Text>
             </View>
             <ReactNativeTooltipMenu

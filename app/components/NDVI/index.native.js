@@ -15,7 +15,12 @@ import styles from '../../styles/NDVI/Index';
 export default class NDVIContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedDataPoint: this.props.dataPoints[0] };
+    this.state = {
+      selectedDataPoint: !!this.props.dataPoints && {
+        ...this.props.dataPoints[0],
+        carbon: undefined
+      }
+    };
   }
 
   onClickCircle = circleMonthuid => {
@@ -72,11 +77,12 @@ export default class NDVIContainer extends Component {
             )}
           />
         </CardLayout>
-
-        <CarbonDetails
-          carbonValue={this.state.selectedDataPoint.carbon}
-          toolTipHelpButtonSpell={i18n.t('label.NDVI_carbon_tooltip')}
-        />
+        {this.state.selectedDataPoint.carbon != undefined ? (
+          <CarbonDetails
+            carbonValue={this.state.selectedDataPoint.carbon}
+            toolTipHelpButtonSpell={i18n.t('label.NDVI_carbon_tooltip')}
+          />
+        ) : null}
       </React.Fragment>
     );
   }

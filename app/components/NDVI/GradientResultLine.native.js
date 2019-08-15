@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Platform } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import moment from 'moment';
 import {
   getPointPercentageOnGradient,
   getColorForNDVI
 } from './NDVIfunctions/GradientUtils';
+import 'moment/min/locales';
+import parseMonth from './NDVIfunctions/parseMonth';
 
 const GradientResultLine = props => {
   const { selectedDataPoint } = props;
@@ -37,7 +38,7 @@ const GradientResultLine = props => {
 
   return (
     <View style={{ width: '100%', marginTop: 21 }}>
-      <Text style={{ marginBottom: 16 }}>{`${moment.months(
+      <Text style={{ marginBottom: 16 }}>{`${parseMonth(
         selectedDataPoint.month - 1
       )}, ${selectedDataPoint.year}`}</Text>
       <LinearGradient

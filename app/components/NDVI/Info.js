@@ -22,11 +22,23 @@ const Info = props => {
               </p>
               <p>
                 {props.minimumSpell}
-                <b>{aggregate.min ? aggregate.min : 'NaN'}</b>
+                <b>
+                  {aggregate.min
+                    ? Math.round(aggregate.min * 100) / 100
+                    : 'NaN'}
+                </b>
                 {props.averageSpell}
-                <b>{aggregate.avg ? aggregate.avg : 'NaN'}</b>
+                <b>
+                  {aggregate.avg
+                    ? Math.round(aggregate.avg * 100) / 100
+                    : 'NaN'}
+                </b>
                 {props.maximumSpell}
-                <b>{aggregate.max ? aggregate.max : 'NaN'}</b>
+                <b>
+                  {aggregate.max
+                    ? Math.round(aggregate.max * 100) / 100
+                    : 'NaN'}
+                </b>
               </p>
             </div>
             <div className="text-center btn-container">

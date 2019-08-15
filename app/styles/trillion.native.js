@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
+import { Fonts } from './../utils/fonts';
 
 export default (trillionStyles = EStyleSheet.create({
   scrollContainer: {},
@@ -19,7 +20,6 @@ export default (trillionStyles = EStyleSheet.create({
   cardContainer: {
     flexDirection: 'column',
     flex: 1,
-    alignItems: 'center',
     borderRadius: 7,
     borderStyle: 'solid',
     borderWidth: 1,
@@ -48,7 +48,6 @@ export default (trillionStyles = EStyleSheet.create({
   titleText: {
     color: '#575756',
     fontSize: 15,
-    textAlign: 'center',
     marginBottom: 15,
     textAlign: 'justify',
     margin: 12
@@ -115,7 +114,7 @@ export default (trillionStyles = EStyleSheet.create({
     margin: 20
   },
   googleCardTitle: {
-    fontFamily: 'OpenSans',
+    fontFamily: Fonts.OpenSans,
     fontSize: 17,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -125,17 +124,19 @@ export default (trillionStyles = EStyleSheet.create({
     color: '#4d5153'
   },
   googleCardPara: {
-    fontFamily: 'OpenSans',
+    fontFamily: Fonts.OpenSans,
     fontSize: 14,
     fontWeight: 'normal',
     fontStyle: 'normal',
     lineHeight: 21,
     letterSpacing: 0,
     textAlign: 'left',
-    color: '#4d5153'
+    color: '#4d5153',
+    flex: 3,
+    marginRight: 20
   },
   googleCardButton: {
-    fontFamily: 'OpenSans',
+    fontFamily: Fonts.OpenSans,
     fontSize: 14,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -157,7 +158,7 @@ export default (trillionStyles = EStyleSheet.create({
     borderBottomWidth: 1
   },
   trillionTreeEventTitle: {
-    fontFamily: 'OpenSans',
+    fontFamily: Fonts.OpenSans,
     fontSize: 14,
     fontWeight: 'normal',
     fontStyle: 'normal',
@@ -180,14 +181,20 @@ export default (trillionStyles = EStyleSheet.create({
   featuredProjectCard: {
     marginLeft: 20,
     borderRadius: 7,
-    backgroundColor: '#3498db'
+    backgroundColor: 'white',
+    borderWidth: 0.5
   },
   featuredProjectCardRow: {
     display: 'flex',
     flexDirection: 'row',
     padding: 20
   },
-  featuredProjectCardImage: { width: 64, height: 64, resizeMode: 'cover' },
+  featuredProjectCardImage: {
+    width: 64,
+    height: 64,
+    resizeMode: 'cover',
+    borderRadius: 64
+  },
   featuredProjectCardIcon: {
     width: 19,
     height: 19,
@@ -199,5 +206,5 @@ export default (trillionStyles = EStyleSheet.create({
     flexDirection: 'row',
     marginTop: 5
   },
-  featuredProjectCardIconText: { color: 'white', fontWeight: '300' }
+  featuredProjectCardIconText: { fontWeight: '300' }
 }));

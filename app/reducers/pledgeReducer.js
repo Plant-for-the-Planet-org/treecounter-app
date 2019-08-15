@@ -6,12 +6,12 @@ export const clearTimeoutID = createAction('CLEAR_TIMEOUT_ID');
 
 export const getPledges = state => state.pledges;
 
-export const initialState = null;
+export const initialState = { pledges: {} };
 
 const fetchPledgesReducer = handleActions(
   {
     [fetchPledges]: (state, action) => {
-      return { ...state, ...action.payload };
+      return { ...state, pledges: action.payload };
     },
     [saveTimeoutID]: (state, action) => {
       return { ...state, timeoutID: action.payload };

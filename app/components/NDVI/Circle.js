@@ -12,7 +12,7 @@ const Circle = props => {
             ${props.getColorForNDVI(props.ndviAggregate.max)} 100%)`
       };
     } else {
-      bgStyle = { background: 'green' };
+      bgStyle = { background: 'grey', pointerEvents: 'none' };
     }
   }
 

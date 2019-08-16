@@ -51,7 +51,7 @@ jobs:
             source $ENV_VARS
             echo $SERVER_URL
             cp app/config/index.js.dist app/config/index.js
-            sed -i "s/www.trilliontreecampaign.org/$SERVER_URL/" app/config/index.js
+            sed -i "s/test.trilliontreecampaign.org/$SERVER_URL/" app/config/index.js
       - run:
           name: Build web client
           command: |

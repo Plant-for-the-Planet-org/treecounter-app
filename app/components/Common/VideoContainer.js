@@ -19,9 +19,6 @@ class VideoContainer extends React.Component {
         ID = url[2].split(/[^0-9a-z_\-]/i);
         ID = ID[0];
         this.setState({ videoId: ID });
-      } else {
-        ID = url;
-        this.setState({ videoId: ID });
       }
     }
   }

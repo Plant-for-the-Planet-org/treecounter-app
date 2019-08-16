@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { info } from '../../assets';
+import { context } from '../../config';
 import i18n from '../../locales/i18n.js';
 import bugsnag from '@bugsnag/js';
 import {
@@ -8,10 +9,13 @@ import {
   version as app_version
 } from '../../../package.json';
 
-const bugsnagClient = bugsnag({
-  apiKey: '6f2971a9b077662912f61ae602716afd',
-  appVersion: app_version
-});
+let bugsnagClient;
+if (context.bugsnagApiKey) {
+  bugsnagClient = bugsnag({
+    apiKey: context.bugsnagApiKey,
+    appVersion: app_version
+  });
+}
 
 export default class GlobalErrorBoundary extends React.Component {
   constructor(props) {
@@ -21,10 +25,13 @@ export default class GlobalErrorBoundary extends React.Component {
 
   componentDidCatch(error, info) {
     this.setState({ hasErrorOccurred: true });
-    console.log(error, info);
-    bugsnag.notify(error, function(report) {
-      report.metadata = { info: info };
-    });
+    console.error(error, info);
+
+    if (bugsnagClient) {
+      bugsnag.notify(error, function(report) {
+        report.metadata = { info: info };
+      });
+    }
   }
 
   render() {

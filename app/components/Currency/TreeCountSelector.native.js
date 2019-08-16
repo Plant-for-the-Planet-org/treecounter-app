@@ -32,19 +32,6 @@ class TreeCountSelector extends React.Component {
       treeCount: fixedDefaultTreeCount,
       amount: this.props.treeCountToAmount(fixedDefaultTreeCount)
     });
-
-    this.handleFixedTreeCountChange = this.handleFixedTreeCountChange.bind(
-      this
-    );
-    this.handleVariableTreeCountChange = this.handleVariableTreeCountChange.bind(
-      this
-    );
-    this.handleVariableAmountChange = this.handleVariableAmountChange.bind(
-      this
-    );
-    this.handleVariableTreeCountSelected = this.handleVariableTreeCountSelected.bind(
-      this
-    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -52,14 +39,14 @@ class TreeCountSelector extends React.Component {
       this.handleVariableTreeCountChange(this.state.variableTreeCount);
     }
   }
-  handleFixedTreeCountChange(treeCount) {
+  handleFixedTreeCountChange = treeCount => {
     this.updateStateAndParent({
       fixedTreeCount: parseInt(treeCount),
       isFixed: true
     });
-  }
+  };
 
-  handleVariableTreeCountChange(treeCount) {
+  handleVariableTreeCountChange = treeCount => {
     if (treeCount === '') {
       treeCount = 0;
     }
@@ -67,9 +54,9 @@ class TreeCountSelector extends React.Component {
       variableTreeCount: parseInt(treeCount),
       variableAmount: this.props.treeCountToAmount(treeCount)
     });
-  }
+  };
 
-  handleVariableAmountChange(amount) {
+  handleVariableAmountChange = amount => {
     if (amount === '') {
       amount = 0;
     }
@@ -78,11 +65,11 @@ class TreeCountSelector extends React.Component {
       variableAmount: parseInt(amount),
       variableTreeCount: treeCount
     });
-  }
+  };
 
-  handleVariableTreeCountSelected() {
+  handleVariableTreeCountSelected = () => {
     this.updateStateAndParent({ isFixed: false });
-  }
+  };
 
   updateStateAndParent(updates) {
     const newState = { ...this.state, ...updates };
@@ -142,6 +129,9 @@ class TreeCountSelector extends React.Component {
                       index={i}
                       labelWrapStyle={styles.radio_label}
                       labelHorizontal={true}
+                      onPress={(value, index) => {
+                        this.handleFixedTreeCountChange(value);
+                      }}
                     />
                   </RadioButton>
                 );

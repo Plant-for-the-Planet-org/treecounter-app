@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NDVIContainer from '../../../../../app/components/NDVI/Index';
+import NDVIContainer from '../../../../../app/components/NDVI';
 //mockData
 import mockDataPoints from '../mockDataPoints';
 
@@ -13,7 +13,7 @@ export default class App extends Component {
     return (
       <div className="app">
         <link href="ndviwidget.css" rel="stylesheet" />
-        <NDVIContainer dataPoints={mockDataPoints} />
+        <NDVIContainer dataPoints={mockDataPoints} loading={true} />
       </div>
     );
   }

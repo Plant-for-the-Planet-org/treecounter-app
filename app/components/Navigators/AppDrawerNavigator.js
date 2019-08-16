@@ -250,16 +250,13 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
           navigation.state.routes &&
           navigation.state.routes.length > 0
         ) {
-          if (navigation.state.routes[index].routeName === '/home') {
+          const route = navigation.state.routes[index];
+          if (route.routeName === '/home') {
             title = userProfile.fullname;
           } else {
-            title = i18n.t(
-              headerLabels[navigation.state.routes[index].routeName]
-            );
-            if (navigation.state.routes[index].hasOwnProperty('params')) {
-              const childTitle =
-                navigation.state.routes[index].params.titleParam;
-
+            title = i18n.t(headerLabels[route.routeName]);
+            if (route.params) {
+              const childTitle = route.params.titleParam;
               if (childTitle) {
                 title = childTitle;
               }

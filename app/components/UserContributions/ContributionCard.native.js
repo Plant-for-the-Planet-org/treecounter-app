@@ -24,6 +24,7 @@ import i18n from '../../locales/i18n.js';
 import { getDateFromMySQL } from '../../helpers/utils';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
+export const ENABLED_NDVI = false;
 
 import _ from 'lodash';
 import CardLayout from '../Common/Card';
@@ -270,7 +271,8 @@ class ContributionCard extends React.Component {
       contributionType,
       registrationDate,
       redemptionCode,
-      redemptionDate
+      redemptionDate,
+      ndviUid
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {
     //   return { src: getImageUrl('contribution', 'medium', image.image) };
@@ -308,10 +310,11 @@ class ContributionCard extends React.Component {
       <CardLayout
         style={styles.addPadding}
         onPress={() => {
-          this.props.navigation.navigate('contribution_details', {
-            contribution,
-            titleParam: plantProjectName || tpoName || treeSpecies
-          });
+          ndviUid &&
+            this.props.navigation.navigate('contribution_details', {
+              contribution,
+              titleParam: plantProjectName || tpoName || treeSpecies
+            });
         }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
@@ -369,10 +372,11 @@ class ContributionCard extends React.Component {
       <CardLayout
         style={[styles.addPadding, styles.minHeight]}
         onPress={() => {
-          this.props.navigation.navigate('contribution_details', {
-            contribution,
-            titleParam: plantProjectName || tpoName || treeSpecies
-          });
+          ndviUid &&
+            this.props.navigation.navigate('contribution_details', {
+              contribution,
+              titleParam: plantProjectName || tpoName || treeSpecies
+            });
         }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
@@ -441,10 +445,11 @@ class ContributionCard extends React.Component {
       <CardLayout
         style={styles.addPadding}
         onPress={() => {
-          this.props.navigation.navigate('contribution_details', {
-            contribution,
-            titleParam: plantProjectName || tpoName || treeSpecies
-          });
+          ndviUid &&
+            this.props.navigation.navigate('contribution_details', {
+              contribution,
+              titleParam: plantProjectName || tpoName || treeSpecies
+            });
         }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />

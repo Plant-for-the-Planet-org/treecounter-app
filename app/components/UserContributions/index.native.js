@@ -50,7 +50,7 @@ export default class UserContributions extends React.Component {
       case 'map':
         return (
           <View {...this.props} style={styles.mapContainer}>
-            <Text>i18n.t('label.map')</Text>
+            <Text>{i18n.t('label.map')}</Text>
 
             <ContributionsMapLegend />
           </View>
@@ -87,7 +87,7 @@ export default class UserContributions extends React.Component {
             }}
             image={plantedTarget}
           >
-            i18n.t('label.register_new_trees')
+            {i18n.t('label.register_new_trees')}
           </PrimaryButton>
         </View>
         <TabView

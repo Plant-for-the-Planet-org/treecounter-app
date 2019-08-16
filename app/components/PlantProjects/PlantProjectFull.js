@@ -71,7 +71,8 @@ class PlantProjectFull extends React.Component {
       homepageUrl: homepageUrl,
       homepageCaption: homepageCaption,
       videoUrl: videoUrl,
-      geoLocation
+      geoLocation,
+      ndviUid
     } = this.props.plantProject;
     let projectImage = null;
 
@@ -103,7 +104,8 @@ class PlantProjectFull extends React.Component {
       homepageCaption,
       videoUrl,
       mapData: queryParamsToObject(geoLocation),
-      plantProjectImages
+      plantProjectImages,
+      ndviUid
     };
     return (
       <React.Fragment>

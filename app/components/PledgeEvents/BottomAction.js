@@ -4,10 +4,12 @@ import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { successAnimated } from '../../assets';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
+import i18n from '../../locales/i18n';
 
 export default class BottomAction extends Component {
   render() {
     const route = 'app_donateTrees';
+    treeCount = this.props.treeCount.toLocaleString();
     return (
       <View>
         <View
@@ -22,8 +24,9 @@ export default class BottomAction extends Component {
             resizeMode="cover"
           />
           <Text style={styles.baMessage}>
-            You’ve pledged to plant {this.props.treeCount} Trees. You can tap
-            continue to fulfill your pledge right now.
+            {i18n.t('label.pledgeAddedMessage', {
+              treeCount: treeCount
+            })}
           </Text>
 
           <View
@@ -43,7 +46,9 @@ export default class BottomAction extends Component {
                 updateStaticRoute(getLocalRoute(route), this.props.navigation);
               }}
             >
-              <Text style={styles.baContinueText}>CONTINUE</Text>
+              <Text style={styles.baContinueText}>
+                {i18n.t('label.pledgeAddedContinueButton')}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

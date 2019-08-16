@@ -74,7 +74,11 @@ class PledgeEvents extends Component {
             // If there are Pledges
             <View>
               <Text style={[styles.eventSubTitle, { marginHorizontal: 20 }]}>
-                {this.props.navigation.getParam('totalTrees')}
+                {i18n.t('label.treesPledgedAllPledges', {
+                  treeCount: this.props.navigation
+                    .getParam('totalTrees')
+                    .toLocaleString()
+                })}
               </Text>
               <PledgeTabView pledges={this.state.pledges} />
             </View>

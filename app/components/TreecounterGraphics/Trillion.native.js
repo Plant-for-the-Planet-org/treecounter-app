@@ -160,7 +160,10 @@ class Trillion extends PureComponent {
               {/* Trillion Tree Events Title */}
               <View style={{ marginTop: 25, marginLeft: 16 }}>
                 <Text style={styles.trillionTreeEventTitle}>
-                  {i18n.t('label.trillionTreesEvents')}
+                  {this.props.pledgeEvents &&
+                  this.props.pledgeEvents.pledgeEvents
+                    ? i18n.t('label.trillionTreesEvents')
+                    : null}
                 </Text>
               </View>
               {/* Trillion Tree Events Title Ended */}
@@ -225,7 +228,7 @@ class Trillion extends PureComponent {
                   {i18n.t('label.trillionTreeMessage2')}
                 </Text>
               </CardLayout>
-              {userProfile && userProfile.type === 'tpo' ? (
+              {/* {userProfile && userProfile.type === 'tpo' ? (
                 <CardLayout
                   style={[
                     styles.cardContainer,
@@ -255,7 +258,7 @@ class Trillion extends PureComponent {
                     </Text>
                   </TouchableOpacity>
                 </CardLayout>
-              ) : null}
+              ) : null} */}
 
               <CardLayout
                 style={[

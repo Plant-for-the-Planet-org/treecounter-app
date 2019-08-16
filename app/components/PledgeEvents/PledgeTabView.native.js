@@ -38,7 +38,7 @@ export default class PledgeTabView extends Component {
         </View>
         <View style={{ flex: 1 }}>
           <Text style={styles.tabViewContentText}>
-            {highestPledges.treeCount}
+            {i18n.t(highestPledges.treeCount.toLocaleString())}
           </Text>
         </View>
       </View>
@@ -55,7 +55,7 @@ export default class PledgeTabView extends Component {
         </View>
         <View style={{ flex: 1 }}>
           <Text style={styles.tabViewContentText}>
-            {latestPledges.treeCount}
+            {i18n.t(latestPledges.treeCount.toLocaleString())}
           </Text>
         </View>
       </View>

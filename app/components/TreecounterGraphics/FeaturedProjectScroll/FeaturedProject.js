@@ -23,17 +23,25 @@ export default class FeaturedProject extends Component {
                 source={smalltree}
               />
               <Text style={styles.featuredProjectCardIconText}>
-                {this.props.treespledged} Trees Pledged
+                {this.props.treespledged.toLocaleString()} Trees Pledged
                 {/* {i18n.t('label.treespledged')} */}
               </Text>
             </View>
             <View style={styles.featuredProjectCardIconContainer}>
-              <Image
-                style={styles.featuredProjectCardIcon}
-                source={greencalendar}
-              />
+              {this.props.date ? (
+                <Image
+                  style={styles.featuredProjectCardIcon}
+                  source={greencalendar}
+                />
+              ) : null}
               <Text style={styles.featuredProjectCardIconText}>
-                {this.props.date}
+                {this.props.date
+                  ? new Date(this.props.date)
+                      .toDateString()
+                      .split(' ')
+                      .slice(1)
+                      .join(' ')
+                  : null}
               </Text>
             </View>
           </View>

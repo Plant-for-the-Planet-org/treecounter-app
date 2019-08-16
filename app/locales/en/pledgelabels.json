@@ -17,5 +17,9 @@
   "pledgeFormFName": "First Name",
   "pledgeFormLName": "Last Name",
   "pledgeFormEmail": "Email",
-  "pledgeFormTreecount": "Tree Count"
+  "pledgeFormTreecount": "Tree Count",
+  "pledgeAddedMessage":
+    "You’ve pledged to plant {{treeCount}} Trees. You can tap continue to fulfill your pledge right now.",
+  "pledgeAddedContinueButton": "CONTINUE",
+  "treesPledgedAllPledges": "{{treeCount}} trees pledged"
 }

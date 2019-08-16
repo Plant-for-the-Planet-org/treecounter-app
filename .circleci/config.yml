@@ -65,7 +65,7 @@ jobs:
             fi
             echo "Copying new files to web server"
             ssh $HOST "cd $WD_SYMFONY; git clean -f web"
-            scp -r web/server $HOST:$WD_SYMFONY/web
+            scp -r web/server/* $HOST:$WD_SYMFONY/web/.
             scp -r .well-known $HOST:$WD_SYMFONY/web/.
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}

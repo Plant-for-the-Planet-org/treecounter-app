@@ -5,7 +5,7 @@ import TreeCounter from './TreeCounter';
 import configureStore from '../../stores/TreecounterStore';
 import GlobalErrorBoundary from '../ErrorBoundry/globalErrorBoundry';
 import SmartBanner from 'react-smartbanner';
-
+import i18n from '../../locales/i18n.js';
 let store;
 
 export default class App extends Component {
@@ -18,7 +18,11 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <GlobalErrorBoundary>
-          {/* <SmartBanner title={'Plant-for-the-planet App'} author={'A  solution for Climate Crisis'} button={'GET'} daysHidden={0} /> */}
+          <SmartBanner
+            title={i18n.t('label.Plant_for_the_planet_App')}
+            author={i18n.t('label.A_solution_for_Climate_Crisis')}
+            button={i18n.t('label.getAppButtonText')}
+          />
           <TreeCounter />
         </GlobalErrorBoundary>
       </Provider>

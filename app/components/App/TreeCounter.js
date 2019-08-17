@@ -58,7 +58,7 @@ import WidgetShareContainer from '../../containers/WidgetsShare';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPublicDenyEmail';
 import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
-
+import SmartBanner from 'react-smartbanner';
 // Class implementation
 class TreeCounter extends Component {
   constructor(props) {
@@ -338,6 +338,12 @@ class TreeCounter extends Component {
                 continueOnSite={this.continueOnSite.bind(this)}
               />
             )}
+            <SmartBanner
+              title={'Plant-for-the-planet App'}
+              author={'A  solution for Climate Crisis'}
+              button={'GET'}
+              daysHidden={0}
+            />
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             {this._appRoutes}

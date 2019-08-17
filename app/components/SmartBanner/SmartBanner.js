@@ -232,7 +232,7 @@ class SmartBanner extends Component {
     }
   };
 
-  close = () => {
+  close = e => {
     this.hide();
     cookie.set('smartbanner-closed', 'true', {
       path: '/',
@@ -242,6 +242,7 @@ class SmartBanner extends Component {
     if (this.props.onClose && typeof this.props.onClose === 'function') {
       this.props.onClose();
     }
+    e.stopPropagation();
   };
 
   install = () => {

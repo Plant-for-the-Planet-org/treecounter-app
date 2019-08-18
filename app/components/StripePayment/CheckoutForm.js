@@ -1,12 +1,12 @@
 // CheckoutForm.js
 import React from 'react';
 import { injectStripe } from 'react-stripe-elements';
-import CardSection from './CardSection';
+// import CardSection from './CardSection';
 import PropTypes from 'prop-types';
 import Axios from 'axios';
 import './stripe.scss';
 import LoadingIndicators from '../../components/Common/LoadingIndicator';
-import { repeat } from 'rxjs/operator/repeat';
+import { CardElement } from 'react-stripe-elements';
 
 class CheckoutForm extends React.Component {
   state = {
@@ -44,16 +44,23 @@ class CheckoutForm extends React.Component {
       //   },
       // })
 
+      // console.log(response)
+
       //test case
+      // let requestData = {
+      //   customer: 'cus_FcYGDg4Fxm4SZQ',
+      //   amount: 2000,
+      //   currency: 'EUR',
+      //   payment_method_id: 'src_1F7J9bGhHD5xN1Uq4vJlChre'
+      // };
+
       let requestData = {
         customer: 'cus_FcYGDg4Fxm4SZQ',
         amount: 2000,
         currency: 'EUR',
-        payment_method_id: 'src_1F7J9bGhHD5xN1Uq4vJlChre'
+        payment_method_id: 'pm_1F8kwMGhHD5xN1Uqj8HdpetR'
       };
 
-      // const requestPaymentIntentUrl =
-      // 'https://devel.trilliontreecampaign.org/app_dev.php/public/v1.3/stripe/paymentIntent/request';
       let config = {
         headers: {
           Authorization: 'Bearer ' + this.state.token
@@ -66,45 +73,71 @@ class CheckoutForm extends React.Component {
         config
       );
 
-      if (response.status === 200 && response.data.success) {
-        console.log(response.data.payment_intent.client_secret);
+      console.log(response);
+
+      if (response.status === 200) {
+        console.log(response.data);
         this.setState({ costumerData: response.data, loading: false });
       }
 
-      // const {
-      //   data: { clientSecret, intentId }
-      // } = await Axios.post(
-      //   'https://devel.trilliontreecampaign.org/app_dev.php/stripe/paymentIntentTest',
-      //   { amount: 1500, cardType: 'card' }
-      // ); // We pay 15€ with a credit card
-      // console.log(data);
-      // const {
-      //   paymentIntent,
-      //   error
-      // } = await this.props.stripe.handleCardPayment(
-      //   clientSecret,
-      //   this.state.cardElement
-      // );
+      // // console.log('---------CostumerData-------------')
+      const handleCardPayment = await this.props.stripe.handleCardPayment(
+        this.state.costumerData.payment_intent_client_secret,
+        this.state.cardElement
+      );
+
+      console.log('-----------HANDLE CARD PAYMENT-------------');
+      console.log(handleCardPayment);
 
       // if (error) {
       //   // Handle payment error
       // } else if (paymentIntent && paymentIntent.status === 'succeeded') {
       //   // Handle payment success
       // }
-
-      // handleReady = element => {
-      //   debugger;
-      //   this.setState({ cardElement: element, loading: false });
-      // };
     } catch (e) {
       throw e;
     }
   };
 
+  handleReady = element => {
+    this.setState({ cardElement: element, loading: false });
+  };
+
+  onInputChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    this.setState({ [name]: value });
+    // this.setState({ [name]: value }, (callback) => {
+    //   console.log(name + ':' + this.state[name]);
+    // });
+  };
+
   render() {
     return !this.state.loading ? (
       <form className="form-wrapper" onSubmit={this.handleSubmit}>
-        <CardSection />
+        <label>Currency</label>
+        <input
+          value={this.state.currency}
+          name="currency"
+          onChange={this.onInputChange}
+          placeholder=""
+        />
+        <label>Amount</label>
+        <input
+          value={this.state.amount}
+          name="amount"
+          onChange={this.onInputChange}
+          placeholder=""
+        />
+        <label>
+          Card details
+          <CardElement
+            onReady={this.handleReady}
+            style={{ base: { fontSize: '18px' } }}
+          />
+        </label>
+        {/* <CardSection /> */}
         <button>Confirm order</button>
       </form>
     ) : (

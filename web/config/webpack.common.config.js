@@ -73,13 +73,6 @@ const config = {
     //   template: './web/widget.index.html'
     // }),
     new HtmlWebPackPlugin({
-      inject: true,
-      chunks: ['stripePaymentWidget'],
-      filename: './stripepayment.html',
-      template: './web/widget.index.html'
-    }),
-
-    new HtmlWebPackPlugin({
       chunks: ['bundle'],
       template: './web/index.html',
       filename: './index.html'

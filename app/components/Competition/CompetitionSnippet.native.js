@@ -15,7 +15,7 @@ import {
   userCompetitionEnrolledSelector,
   userTreecounterSelector
 } from '../../selectors';
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';

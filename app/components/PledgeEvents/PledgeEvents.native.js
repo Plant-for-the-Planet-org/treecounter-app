@@ -70,7 +70,9 @@ class PledgeEvents extends Component {
             </Text>
           </View>
 
-          {this.state.pledges && this.state.pledges.highestPledgeEvents ? (
+          {this.state.pledges &&
+          this.state.pledges.highestPledgeEvents &&
+          this.state.pledges.highestPledgeEvents.length > 0 ? (
             // If there are Pledges
             <View>
               <Text style={[styles.eventSubTitle, { marginHorizontal: 20 }]}>

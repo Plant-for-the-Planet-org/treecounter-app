@@ -1,13 +1,16 @@
 $bannerBackground: #f7f7f7;
 $bannerCloseButtonColor: #707070;
 $bannerAuthorColor: #202125;
+
 .smartbanner-android{
   background: none;
   box-shadow: none;
 }
+
 .smartbanner-ios .smartbanner-button {
   padding: 0;
 }
+
 .smartbanner {
   height: 90px;
   .smartbanner-container {
@@ -56,6 +59,7 @@ $bannerAuthorColor: #202125;
       line-height: 1rem;
     }
   }
+
   .smartbanner-ios .smartbanner-button {
     padding: 0 1px;
   }

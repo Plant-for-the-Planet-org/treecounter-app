@@ -14,7 +14,7 @@ export default (pledgeeventsStyle = EStyleSheet.create({
   peHeaderLogo: {
     height: 70,
     width: 70,
-    borderRadius: 50,
+    borderRadius: 35,
     marginBottom: 10
   },
   peSliderScrollView: { paddingRight: 20, height: 180, marginTop: 30 },
@@ -29,7 +29,6 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     borderColor: '#d5d5d5'
   },
   peDescriptionText: {
-    fontFamily: 'OpenSans',
     fontSize: 14,
     fontWeight: 'normal',
     fontStyle: 'normal',
@@ -45,7 +44,6 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     marginLeft: 20
   },
   eventTitle: {
-    fontFamily: Fonts.OpenSans,
     fontSize: 27,
     fontWeight: '800',
     fontStyle: 'normal',
@@ -55,7 +53,6 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     color: '#4d5153'
   },
   eventSubTitle: {
-    fontFamily: Fonts.OpenSans,
     fontSize: 18,
     fontWeight: '400',
     fontStyle: 'normal',
@@ -69,7 +66,13 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     width: '88%',
     marginLeft: '7%',
     position: 'absolute',
-    top: '86%'
+    top: '90%'
+  },
+  makePledgeButton2: {
+    width: '100%',
+    marginLeft: '6%',
+    position: 'absolute',
+    top: '90%'
   },
   makePledgeButtonView: {
     borderRadius: 100,
@@ -78,7 +81,6 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     justifyContent: 'center'
   },
   makePledgeButtonText: {
-    fontFamily: Fonts.OpenSans,
     fontSize: 16,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -96,7 +98,6 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     justifyContent: 'space-around'
   },
   tabViewButtonText: {
-    fontFamily: Fonts.OpenSans,
     fontSize: 13,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -112,10 +113,10 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     color: '#89b53a'
   },
   selectedTabButtonView: {
-    borderBottomWidth: 2
+    borderBottomWidth: 2,
+    borderBottomColor: '#89b53a'
   },
   tabViewTitleText: {
-    fontFamily: Fonts.OpenSansBold,
     fontSize: 18,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -127,7 +128,6 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     marginBottom: 20
   },
   tabViewContentText: {
-    fontFamily: Fonts.OpenSans,
     fontSize: 16,
     fontWeight: 'normal',
     fontStyle: 'normal',
@@ -140,7 +140,6 @@ export default (pledgeeventsStyle = EStyleSheet.create({
 
   // Make Pledge Form Styles
   titleText: {
-    fontFamily: Fonts.OpenSans,
     fontSize: 27,
     fontWeight: '800',
     fontStyle: 'normal',
@@ -151,7 +150,6 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     marginTop: 30
   },
   subtitleText: {
-    fontFamily: Fonts.OpenSans,
     fontSize: 18,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -194,7 +192,6 @@ export default (pledgeeventsStyle = EStyleSheet.create({
   },
 
   baMessage: {
-    fontFamily: 'OpenSans',
     fontSize: 20,
     fontWeight: 'normal',
     fontStyle: 'normal',
@@ -208,7 +205,6 @@ export default (pledgeeventsStyle = EStyleSheet.create({
   baSuccessImage: { height: 100, width: 100, alignSelf: 'center' },
   baContinueText: {
     textAlign: 'center',
-    fontFamily: 'OpenSans',
     fontSize: 20,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -224,7 +220,6 @@ export default (pledgeeventsStyle = EStyleSheet.create({
   },
   baLaterText: {
     textAlign: 'center',
-    fontFamily: 'OpenSans',
     fontSize: 20,
     fontWeight: '600',
     fontStyle: 'normal',

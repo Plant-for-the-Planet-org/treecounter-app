@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Linking } from 'react-native';
 import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { successAnimated } from '../../assets';
@@ -18,11 +18,11 @@ export default class BottomAction extends Component {
             paddingVertical: 30
           }}
         >
-          <Image
+          {/* <Image
             source={successAnimated}
             style={styles.baSuccessImage}
             resizeMode="cover"
-          />
+          /> */}
           <Text style={styles.baMessage}>
             {i18n.t('label.pledgeAddedMessage', {
               treeCount: treeCount
@@ -42,9 +42,14 @@ export default class BottomAction extends Component {
 
             <TouchableOpacity
               style={styles.baContinueButton}
-              onPress={() => {
-                updateStaticRoute(getLocalRoute(route), this.props.navigation);
-              }}
+              // onPress={() => {
+              //   updateStaticRoute(getLocalRoute(route), this.props.navigation);
+              // }}
+              onPress={() =>
+                Linking.openURL(
+                  'https://www.trilliontreecampaign.org/donate-trees/1'
+                )
+              }
             >
               <Text style={styles.baContinueText}>
                 {i18n.t('label.pledgeAddedContinueButton')}

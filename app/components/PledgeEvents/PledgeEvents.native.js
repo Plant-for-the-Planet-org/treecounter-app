@@ -90,29 +90,30 @@ class PledgeEvents extends Component {
               </Text>
             </View>
           )}
-
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.peSliderScrollView}
-          >
-            {/* {pledgeImages} */}
-            {this.state.pledges && this.state.pledges.pledgeEventImages
-              ? this.state.pledges.pledgeEventImages.map(pledgeImage => (
-                  <Image
-                    style={styles.peSliderImage}
-                    source={{
-                      uri: getImageUrl(
-                        'eventGallery',
-                        'default',
-                        pledgeImage.image
-                      )
-                    }}
-                    resizeMode="contain"
-                  />
-                ))
-              : null}
-          </ScrollView>
+          {this.state.pledges &&
+          this.state.pledges.pledgeEventImages &&
+          this.state.pledges.pledgeEventImages.length > 0 ? (
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.peSliderScrollView}
+            >
+              {/* {pledgeImages} */}
+              {this.state.pledges.pledgeEventImages.map(pledgeImage => (
+                <Image
+                  style={styles.peSliderImage}
+                  source={{
+                    uri: getImageUrl(
+                      'eventGallery',
+                      'default',
+                      pledgeImage.image
+                    )
+                  }}
+                  resizeMode="contain"
+                />
+              ))}
+            </ScrollView>
+          ) : null}
           <CardLayout style={styles.peDescriptionView}>
             <Text style={styles.peDescriptionText}>
               {this.props.navigation.getParam('description')}

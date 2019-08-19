@@ -252,7 +252,7 @@ class MakePledgeForm extends Component {
         </View>
         {this.state.buttonType === 'pledge' ? (
           <TouchableOpacity
-            style={styles.makePledgeButton}
+            style={styles.makePledgeButton2}
             onPress={() => {
               this.onFormSubmit();
             }}

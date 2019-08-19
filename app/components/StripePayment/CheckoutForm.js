@@ -70,17 +70,9 @@ class CheckoutForm extends React.Component {
       console.log(requestResponse);
       console.log(requestResponse.data.payment_intent_client_secret);
       if (requestResponse.data.requires_action) {
-        // const confirmPaymentIntentResponse = await this.props.stripe.handleCardPayment(
-        //   requestResponse.data.payment_intent_client_secret,
-        //   {
-        //     payment_method_data: {
-        //       billing_details: {
-        //         name: 'Jenny Rosen'
-        //       }
-        //     },
-        //     return_url: 'http://localhost:8080/stripe'
-        //   }
-        // )
+        const confirmPaymentIntentResponse = await this.props.stripe.handleCardAction(
+          requestResponse.data.payment_intent_client_secret
+        );
         // console.log(confirmPaymentIntentResponse);
         // this.props.stripe.handleCardPayment(requestResponse.data.payment_intent.client_secret,
         //   {

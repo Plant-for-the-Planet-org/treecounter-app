@@ -1,5 +1,5 @@
 {
-  "amount": "amount: ",
+  "amount": "Donation Amount: ",
   "creditCard": "Credit Card",
   "confirm": "I confirm that I will pay the amount of {{amount}}{{currency}} to the following account.",
   "bank_transfer": "Bank Transfer",
@@ -13,7 +13,7 @@
   "contact_lastname": "Last Name",
   "donate_to": "Spenden an {{name}}",
   "payment_failed": "Payment Failed",
-  "go_back_to_app": "Go Back to App",
+  "go_back_to_app": "Go Back to Plant-for-the-Planet App",
   "please_confirm": "Please confirm",
   "please_enter_card_details": "Please enter correct card details",
   "please_enter_iban": "Please enter correct IBAN"

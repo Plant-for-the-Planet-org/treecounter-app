@@ -11,13 +11,13 @@ class CardSection extends React.Component {
   };
   render() {
     return (
-      <label>
-        Card details
+      <div>
+        <label>Card details</label>
         <CardElement
           onReady={this.handleReady}
           style={{ base: { fontSize: '18px' } }}
         />
-      </label>
+      </div>
     );
   }
 }

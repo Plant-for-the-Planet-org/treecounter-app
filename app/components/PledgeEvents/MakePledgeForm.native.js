@@ -6,7 +6,8 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  Keyboard
+  Keyboard,
+  KeyboardAvoidingView
 } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -15,6 +16,7 @@ import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { forward } from './../../assets';
 import t from 'tcomb-form-native';
 import { postPledge } from './../../actions/pledgeAction';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import i18n from '../../locales/i18n';
 import { connect } from 'react-redux';
@@ -154,7 +156,14 @@ class MakePledgeForm extends Component {
     const currency = this.props.navigation.getParam('plantProject').currency;
 
     return (
-      <ScrollView contentContainerStyle={styles.formScrollView}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.formScrollView}
+        keyboardDismissMode="on-drag"
+        //keyboardShouldPersistTaps="always"
+        style={{ backgroundColor: 'white' }}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        scrollEnabled={false}
+      >
         <View>
           <Text style={styles.titleText}>{i18n.t('label.pledgeToPlant')}</Text>
           <Text style={styles.subtitleText}>
@@ -297,7 +306,7 @@ class MakePledgeForm extends Component {
             projectID={this.props.navigation.getParam('plantProject').id}
           />
         </RBSheet>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }

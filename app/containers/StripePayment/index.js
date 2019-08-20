@@ -8,6 +8,10 @@ class StripePayment extends Component {
     this.props.handleExpandedClicked('1');
   };
 
+  onError = err => {
+    this.props.onError(err);
+  };
+
   render() {
     let props = this.props;
     return (
@@ -19,6 +23,7 @@ class StripePayment extends Component {
             expanded={props.expanded}
             handleExpandedClicked={this.handleExpandedClicked}
             paymentDetails={props.paymentDetails}
+            onError={props.onError}
           />
         </Elements>
       </StripeProvider>

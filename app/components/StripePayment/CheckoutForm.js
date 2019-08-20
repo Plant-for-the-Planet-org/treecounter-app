@@ -118,10 +118,9 @@ class CheckoutForm extends React.Component {
         console.log('===Confirm payment  Intent 3d secure Response===');
         console.log(confirmPaymentIntentResponse);
 
+        this.setState({ loading: false });
         if (confirmPaymentIntentResponse.error) {
           this.props.onError(confirmPaymentIntentResponse.error.message);
-        } else {
-          this.setState({ loading: false });
         }
       } else {
         this.setState({ loading: false });
@@ -141,14 +140,7 @@ class CheckoutForm extends React.Component {
       'display-none': !this.props.expanded
     });
     return !this.state.loading ? (
-      <form
-        className="payment-option"
-        onSubmit={
-          this.state.submitClicked
-            ? ev => ev.preventDefault()
-            : this.handleSubmit
-        }
-      >
+      <form className="payment-option" onSubmit={this.handleSubmit}>
         <div onClick={this.handleArrowClick} className="payment-option-header">
           <span>
             <img className="logo" src={payment_credit} />

@@ -3,13 +3,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import StripeCC from './Gateways/StripeCC';
-import StripeSepa from './Gateways/StripeSepa';
-import Paypal from './Gateways/Paypal';
-import Offline from './Gateways/Offline';
+// import StripeCC from './Gateways/StripeCC';
+// import StripeSepa from './Gateways/StripeSepa';
+// import Paypal from './Gateways/Paypal';
+// import Offline from './Gateways/Offline';
 import i18n from '../../locales/i18n';
 
-import { StripeProvider, Elements } from './Stripe/stripeDefs';
+// import { StripeProvider, Elements } from './Stripe/stripeDefs';
 
 import StripeContainer from '../../containers/StripePayment';
 
@@ -19,7 +19,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
 
     this.state = {
       stripe: null,
-      errorMessage: null
+      errorMessage: null,
+      paymentDetails: {}
     };
 
     this.decorateSuccess = this.decorateSuccess.bind(this);
@@ -29,9 +30,16 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     return response =>
       this.props.onSuccess({ gateway, accountName, ...response });
   }
+  setPaymentDetails = paymentDetails => {
+    console.log('SET PAYMENT METHOD DETAILS');
+    console.log(paymentDetails);
+    this.setState({ paymentDetails: paymentDetails });
+  };
 
   componentDidMount() {
-    let props = this.props;
+    const props = this.props;
+    const context = props.context;
+
     if (props.paymentMethods) {
       // lookup stripe related payment methods for the current country/currency combination
       const stripeGateways = Object.keys(props.paymentMethods).filter(gateway =>
@@ -106,6 +114,13 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
 
   render() {
     const { accounts, paymentMethods, amount, currency, context } = this.props;
+    const paymentDetails = {
+      name: context.donorName,
+      email: context.donorEmail,
+      treeCount: context.treeCount,
+      currency: this.props.currency,
+      amount: this.props.amount * 100
+    };
     const gatewayProps = {
       context: context,
       currency: currency,
@@ -160,6 +175,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                 <StripeContainer
                   stripe={this.state.stripe}
                   // onSuccess={this.decorateSuccess(gateway, accountName)}
+                  paymentDetails={paymentDetails}
                   account={accounts[accountName]}
                   expanded={this.props.expandedOption === '1'}
                   handleExpandedClicked={this.handleExpandedClicked}

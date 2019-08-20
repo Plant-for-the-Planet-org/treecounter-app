@@ -18,6 +18,7 @@ class StripePayment extends Component {
             account={props.account}
             expanded={props.expanded}
             handleExpandedClicked={this.handleExpandedClicked}
+            paymentDetails={props.paymentDetails}
           />
         </Elements>
       </StripeProvider>
@@ -28,6 +29,7 @@ class StripePayment extends Component {
 export default StripePayment;
 
 StripePayment.propTypes = {
+  paymentDetails: PropTypes.object.isRequired,
   stripe: PropTypes.object,
   currency: PropTypes.string.isRequired,
   account: PropTypes.object.isRequired,

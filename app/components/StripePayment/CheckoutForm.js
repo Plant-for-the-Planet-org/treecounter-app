@@ -82,12 +82,13 @@ class CheckoutForm extends React.Component {
       //payment method exists
       this.handleAPIPayment(paymentMethodId);
     } catch (e) {
-      throw e;
+      this.props.onError(e);
     }
   };
 
   handleAPIPayment = async paymentMethodId => {
     const state = this.state;
+    const paymentDetails = this.props.paymentDetails;
     let config = {
       headers: {
         Authorization: 'Bearer ' + state.token
@@ -96,8 +97,8 @@ class CheckoutForm extends React.Component {
 
     if (paymentMethodId !== undefined) {
       let requestData = {
-        amount: parseInt(this.state.amount * 100),
-        currency: this.state.currency,
+        amount: paymentDetails.amount,
+        currency: paymentDetails.currency,
         payment_method_id: paymentMethodId
       };
 
@@ -113,15 +114,7 @@ class CheckoutForm extends React.Component {
         const confirmPaymentIntentResponse = await this.props.stripe.handleCardAction(
           requestResponse.data.payment_intent_client_secret
         );
-        // console.log(confirmPaymentIntentResponse);
-        // this.props.stripe.handleCardPayment(requestResponse.data.payment_intent.client_secret,
-        //   {
-        //     payment_method_data: {
-        //       billing_details: {
-        //         name: 'Jenny Rosen'
-        //       }
-        //     }
-        //   });
+        console.log(confirmPaymentIntentResponse);
       }
       // this.setState({ loading: false });
     }
@@ -176,6 +169,7 @@ class CheckoutForm extends React.Component {
 export default injectStripe(CheckoutForm);
 
 CheckoutForm.propTypes = {
+  paymentDetails: PropTypes.object,
   stripe: PropTypes.object,
   createToken: PropTypes.func,
   createPaymentMethod: PropTypes.func,

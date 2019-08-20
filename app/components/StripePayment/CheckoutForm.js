@@ -75,6 +75,8 @@ class CheckoutForm extends React.Component {
         }
       );
 
+      this.setState({ loading: true });
+
       // this.setState({ loading: true })
       const paymentMethodId = paymentMethodResponse.paymentMethod.id;
       console.log('---------Payment Method Response--------');
@@ -108,15 +110,22 @@ class CheckoutForm extends React.Component {
         config
       );
 
-      console.log(requestResponse);
-      console.log(requestResponse.data.payment_intent_client_secret);
       if (requestResponse.data.requires_action) {
         const confirmPaymentIntentResponse = await this.props.stripe.handleCardAction(
           requestResponse.data.payment_intent_client_secret
         );
+
+        console.log('===Confirm payment  Intent 3d secure Response===');
         console.log(confirmPaymentIntentResponse);
+
+        if (confirmPaymentIntentResponse.error) {
+          this.props.onError(confirmPaymentIntentResponse.error.message);
+        } else {
+          this.setState({ loading: false });
+        }
+      } else {
+        this.setState({ loading: false });
       }
-      // this.setState({ loading: false });
     }
   };
 

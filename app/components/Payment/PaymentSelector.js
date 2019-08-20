@@ -179,6 +179,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                   account={accounts[accountName]}
                   expanded={this.props.expandedOption === '1'}
                   handleExpandedClicked={this.handleExpandedClicked}
+                  onError={this.onError}
                   {...gatewayProps}
                 />
                 {/* <Elements key={gateway}>

@@ -58,6 +58,7 @@ import WidgetShareContainer from '../../containers/WidgetsShare';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPublicDenyEmail';
 import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
+import { initLocale } from '../../actions/getLocale';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -79,6 +80,7 @@ class TreeCounter extends Component {
       isAndroid: IS_ANDROID,
       isCancelled: false
     };
+    initLocale();
   }
 
   _appRoutes = undefined;

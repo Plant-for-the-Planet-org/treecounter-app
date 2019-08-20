@@ -4,8 +4,8 @@ import { currentUserProfileSelector } from '../../selectors';
 import { connect } from 'react-redux';
 import { formatNumber } from '../../utils/utils';
 
-const NumberFormat = ({ data, locale, currency, userProfile }) => {
-  return formatNumber(data, locale, currency, userProfile);
+const NumberFormat = ({ data, locale, currency }) => {
+  return formatNumber(data, locale, currency);
 };
 
 const mapStateToProps = state => ({

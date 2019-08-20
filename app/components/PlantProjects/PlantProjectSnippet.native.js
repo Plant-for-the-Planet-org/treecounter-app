@@ -10,6 +10,7 @@ import { getImageUrl } from '../../actions/apiRouting';
 import { targetPlanted, tick, questionmark_orange } from '../../assets';
 import TouchableItem from '../Common/TouchableItem.native';
 import PlantedProgressBar from './PlantedProgressbar.native';
+import NumberFormat from '../Common/NumberFormat';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -17,23 +18,6 @@ class PlantProjectSnippet extends React.Component {
   constructor(props) {
     super(props);
     this.toggleExpanded = this.toggleExpanded.bind(this);
-    this.currency_symbols = {
-      USD: '$', // US Dollar
-      EUR: '€', // Euro
-      CRC: '₡', // Costa Rican Colón
-      GBP: '£', // British Pound Sterling
-      ILS: '₪', // Israeli New Sheqel
-      INR: '₹', // Indian Rupee
-      JPY: '¥', // Japanese Yen
-      KRW: '₩', // South Korean Won
-      NGN: '₦', // Nigerian Naira
-      PHP: '₱', // Philippine Peso
-      PLN: 'zł', // Polish Zloty
-      PYG: '₲', // Paraguayan Guarani
-      THB: '฿', // Thai Baht
-      UAH: '₴', // Ukrainian Hryvnia
-      VND: '₫' // Vietnamese Dong
-    };
   }
 
   toggleExpanded(id) {
@@ -191,10 +175,10 @@ class PlantProjectSnippet extends React.Component {
 
               <View style={styles.costContainer}>
                 <Text style={styles.costText}>
-                  {this.currency_symbols[currency]
-                    ? this.currency_symbols[currency]
-                    : currency}{' '}
-                  {specsProps.treeCost}
+                  <NumberFormat
+                    currency={currency}
+                    data={specsProps.treeCost}
+                  />
                 </Text>
               </View>
             </View>

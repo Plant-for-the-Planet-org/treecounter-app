@@ -33,11 +33,12 @@ $bannerAuthorColor: #202125;
       color: white;
     }
     .smartbanner-info {
-      width: calc(99% - 160px);
+      width: calc(99% - 190px);
     }
     .smartbanner-wrapper {
-      max-width: 50px;
+      max-width: 90px;
       float: right;
+      margin-right: 5px;
     }
     .smartbanner-button-text {
       background: none;

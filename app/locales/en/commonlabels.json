@@ -20,7 +20,7 @@
   "error": "Error",
   "success": "Success",
   "congrats": "Congrats",
-  "Plant_for_the_planet_App": "Plant-for-the-planet App",
-  "A_solution_for_Climate_Crisis": "A solution for Climate Crisis",
-  "getAppButtonText": "GET"
+  "plant_for_the_planet_app": "Plant-for-the-planet App",
+  "a_solution_for_climate_crisis": "A solution for Climate Crisis",
+  "get_app_button_text": "GET"
 }

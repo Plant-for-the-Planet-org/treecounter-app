@@ -1,5 +1,5 @@
 {
-  "amount": "Menge:",
+  "amount": "Spendenbetrag",
   "creditCard": "Kreditkarte",
   "confirm": "Ich bestätige, dass ich den Betrag über{{amount}}{{currency}} an folgendes Konto bezahle.",
   "bank_transfer": "Banküberweisung",

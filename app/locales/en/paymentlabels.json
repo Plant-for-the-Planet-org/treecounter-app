@@ -1,5 +1,5 @@
 {
-  "amount": "Donation Amount: ",
+  "amount": "Donation Amount",
   "creditCard": "Credit Card",
   "confirm": "I confirm that I will pay the amount of {{amount}}{{currency}} to the following account.",
   "bank_transfer": "Bank Transfer",

@@ -164,7 +164,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                   expanded={this.props.expandedOption === '1'}
                   handleExpandedClicked={this.handleExpandedClicked}
                   {...gatewayProps}
-                  apiKey="pk_test_0ahH0yMukgNzOEd0UppzUfsc"
                 />
                 {/* <Elements key={gateway}>
                   <StripeCC

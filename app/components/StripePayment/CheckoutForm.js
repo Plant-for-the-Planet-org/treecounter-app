@@ -47,8 +47,7 @@ const createOptions = (fontSize: string, padding: ?string) => {
 
 class CheckoutForm extends React.Component {
   state = {
-    amount: '',
-    tree_count: '',
+    submitClicked: false,
     loading: false,
     baseURL: 'https://devel.trilliontreecampaign.org',
     paymentIntentConfirm:
@@ -62,6 +61,9 @@ class CheckoutForm extends React.Component {
   handleSubmit = async ev => {
     // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault();
+    this.setState({
+      submitClicked: true
+    });
     try {
       //Create a payment method id for making request to the API
       const paymentMethodResponse = await this.props.stripe.createPaymentMethod(
@@ -137,7 +139,14 @@ class CheckoutForm extends React.Component {
       'display-none': !this.props.expanded
     });
     return !this.state.loading ? (
-      <form className="payment-option" onSubmit={this.handleSubmit}>
+      <form
+        className="payment-option"
+        onSubmit={
+          this.state.submitClicked
+            ? ev => ev.preventDefault()
+            : this.handleSubmit
+        }
+      >
         <div onClick={this.handleArrowClick} className="payment-option-header">
           <span>
             <img className="logo" src={payment_credit} />
@@ -145,7 +154,7 @@ class CheckoutForm extends React.Component {
           </span>
           <img className={arrow} src={payment_arrow} />
         </div>
-        <div>
+        <div className={displayNone}>
           <CardElement
             onReady={this.handleReady}
             onBlur={handleBlur}

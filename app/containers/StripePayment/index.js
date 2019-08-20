@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import InjectedCheckoutForm from '../../components/StripePayment/CheckoutForm';
 
 class StripePayment extends Component {
+  handleExpandedClicked = () => {
+    this.props.handleExpandedClicked('1');
+  };
+
   render() {
     let props = this.props;
     return (
@@ -13,6 +17,7 @@ class StripePayment extends Component {
             currency={props.currency}
             account={props.account}
             expanded={props.expanded}
+            handleExpandedClicked={this.handleExpandedClicked}
           />
         </Elements>
       </StripeProvider>
@@ -24,7 +29,6 @@ export default StripePayment;
 
 StripePayment.propTypes = {
   stripe: PropTypes.object,
-  apiKey: PropTypes.string,
   currency: PropTypes.string.isRequired,
   account: PropTypes.object.isRequired,
   expanded: PropTypes.bool,

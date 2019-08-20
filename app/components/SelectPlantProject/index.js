@@ -14,6 +14,7 @@ import ModalDialog from '../Common/ModalDialog';
 import i18n from '../../locales/i18n';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import { delimitNumbers } from '../../utils/utils';
+import NumberFormat from '../Common/NumberFormat';
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -316,9 +317,10 @@ export default class SelectPlantProject extends Component {
                                 {delimitNumbers(parseInt(project.countPlanted))}
                               </td>
                               <td className="align-right">
-                                {project.currency +
-                                  ' ' +
-                                  project.treeCost.toFixed(2)}
+                                <NumberFormat
+                                  currency={project.currency}
+                                  data={project.treeCost.toFixed(2)}
+                                />
                               </td>
                               <td>
                                 <PrimaryButton
@@ -366,9 +368,10 @@ export default class SelectPlantProject extends Component {
                                 {delimitNumbers(parseInt(project.countPlanted))}
                               </td>
                               <td className="align-right">
-                                {project.currency +
-                                  ' ' +
-                                  project.treeCost.toFixed(2)}
+                                <NumberFormat
+                                  currency={project.currency}
+                                  data={project.treeCost.toFixed(2)}
+                                />
                               </td>
                               <td>
                                 <PrimaryButton

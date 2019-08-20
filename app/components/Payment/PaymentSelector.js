@@ -11,6 +11,8 @@ import i18n from '../../locales/i18n';
 
 import { StripeProvider, Elements } from './Stripe/stripeDefs';
 
+import StripeContainer from '../../containers/StripePayment';
+
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
     super(props);
@@ -109,6 +111,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       onError: this.props.onError
     };
     let giftToName = null;
+    console.log('-----gatewayProps----');
+    console.log(gatewayProps);
     if (gatewayProps.context.giftTreeCounterName) {
       giftToName = gatewayProps.context.giftTreeCounterName;
     }
@@ -116,114 +120,103 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       giftToName = gatewayProps.context.supportTreecounter.displayName;
     }
     return paymentMethods ? (
-      <StripeProvider stripe={this.state.stripe}>
-        <div className="payment_options__wrapper">
-          <div className="payment_option_details">
-            <div>{gatewayProps.context.tpoName}</div>
-            {giftToName && <div>{gatewayProps.context.plantProjectName}</div>}
-            {giftToName && (
-              <div>
-                {gatewayProps.context.supportTreecounter
-                  ? i18n.t('label.support_user_trees', {
-                      user: giftToName,
-                      count: gatewayProps.context.treeCount
-                    })
-                  : i18n.t('label.gift_user_trees', {
-                      user: giftToName,
-                      count: gatewayProps.context.treeCount
-                    })}
-              </div>
-            )}
-            {!giftToName && (
-              <div>
-                {i18n.t('label.donate_to', {
-                  name: gatewayProps.context.plantProjectName
-                })}
-              </div>
-            )}
-            <div>{`${i18n.t('label.amount')}: ${amount} ${currency}`}</div>
-            <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
-          </div>
-          {Object.keys(paymentMethods).map(gateway => {
-            const accountName = paymentMethods[gateway];
-            if ('stripe_cc' === gateway) {
-              return (
-                <div key={gateway}>
-                  {this.state.errorMessage ? (
-                    <div>this.state.errorMessage</div>
-                  ) : null}
-                  <Elements key={gateway}>
-                    <StripeCC
-                      onSuccess={this.decorateSuccess(gateway, accountName)}
-                      account={accounts[accountName]}
-                      expanded={this.props.expandedOption === '1'}
-                      handleExpandedClicked={this.handleExpandedClicked}
-                      {...gatewayProps}
-                    />
-                  </Elements>
-                </div>
-              );
-            }
-            if ('stripe_sepa' === gateway) {
-              return (
-                <div key={gateway}>
-                  {this.state.errorMessage ? (
-                    <div>this.state.errorMessage</div>
-                  ) : null}
-                  <Elements key={gateway}>
-                    <StripeSepa
-                      onSuccess={this.decorateSuccess(gateway, accountName)}
-                      account={accounts[accountName]}
-                      expanded={this.props.expandedOption === '2'}
-                      handleExpandedClicked={this.handleExpandedClicked}
-                      {...gatewayProps}
-                    />
-                  </Elements>
-                </div>
-              );
-            }
-            if ('paypal' === gateway) {
-              return (
-                <div key={gateway}>
-                  {this.state.errorMessage ? (
-                    <div>this.state.errorMessage</div>
-                  ) : null}
-                  <Paypal
-                    key={gateway}
-                    onSuccess={this.decorateSuccess(gateway, accountName)}
-                    amount={amount}
-                    currency={currency}
-                    account={accounts[accountName]}
-                    mode={accounts[accountName].mode}
-                    expanded={this.props.expandedOption === '3'}
-                    handleExpandedClicked={this.handleExpandedClicked}
-                    {...gatewayProps}
-                  />
-                </div>
-              );
-            }
-            if ('offline' === gateway) {
-              return (
-                <div key={gateway}>
-                  {this.state.errorMessage ? (
-                    <div>this.state.errorMessage</div>
-                  ) : null}
-                  <Offline
-                    key={gateway}
-                    onSuccess={this.decorateSuccess(gateway, accountName)}
-                    amount={amount}
-                    currency={currency}
-                    account={accounts[accountName]}
-                    expanded={this.props.expandedOption === '4'}
-                    handleExpandedClicked={this.handleExpandedClicked}
-                    {...gatewayProps}
-                  />
-                </div>
-              );
-            }
-          })}
+      <div className="payment_options__wrapper">
+        <div className="payment_option_details">
+          <div>{gatewayProps.context.tpoName}</div>
+          {giftToName && <div>{gatewayProps.context.plantProjectName}</div>}
+          {giftToName && (
+            <div>
+              {gatewayProps.context.supportTreecounter
+                ? i18n.t('label.support_user_trees', {
+                    user: giftToName,
+                    count: gatewayProps.context.treeCount
+                  })
+                : i18n.t('label.gift_user_trees', {
+                    user: giftToName,
+                    count: gatewayProps.context.treeCount
+                  })}
+            </div>
+          )}
+          {!giftToName && (
+            <div>
+              {i18n.t('label.donate_to', {
+                name: gatewayProps.context.plantProjectName
+              })}
+            </div>
+          )}
+          <div>{`${i18n.t('label.amount')}: ${amount} ${currency}`}</div>
+          <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
         </div>
-      </StripeProvider>
+        {Object.keys(paymentMethods).map(gateway => {
+          const accountName = paymentMethods[gateway];
+          if ('stripe_cc' === gateway) {
+            return (
+              <div key={gateway}>
+                {this.state.errorMessage ? (
+                  <div>this.state.errorMessage</div>
+                ) : null}
+                <StripeContainer
+                  // onSuccess={this.decorateSuccess(gateway, accountName)}
+                  account={accounts[accountName]}
+                  expanded={this.props.expandedOption === '1'}
+                  handleExpandedClicked={this.handleExpandedClicked}
+                  {...gatewayProps}
+                  apiKey="pk_test_0ahH0yMukgNzOEd0UppzUfsc"
+                />
+                {/* <Elements key={gateway}>
+                  <StripeCC
+                    onSuccess={this.decorateSuccess(gateway, accountName)}
+                    account={accounts[accountName]}
+                    expanded={this.props.expandedOption === '1'}
+                    handleExpandedClicked={this.handleExpandedClicked}
+                    {...gatewayProps}
+                  />
+                </Elements> */}
+              </div>
+            );
+          }
+          // if ('stripe_sepa' === gateway) {
+          //   return (
+          //     <div key={gateway}>
+          //       {this.state.errorMessage ? (
+          //         <div>this.state.errorMessage</div>
+          //       ) : null}
+          //       <Elements key={gateway}>
+          //         <StripeSepa
+          //           onSuccess={this.decorateSuccess(gateway, accountName)}
+          //           account={accounts[accountName]}
+          //           expanded={this.props.expandedOption === '2'}
+          //           handleExpandedClicked={this.handleExpandedClicked}
+          //           {...gatewayProps}
+          //         />
+          //       </Elements>
+          //     </div>
+          //   );
+          // }
+          // if ('paypal' === gateway) {
+          //   return (
+          //     <div key={gateway}>
+          //       {this.state.errorMessage ? (
+          //         <div>this.state.errorMessage</div>
+          //       ) : null}
+          //       <StripeProvider stripe={this.state.stripe}>
+          //         <Paypal
+          //           key={gateway}
+          //           onSuccess={this.decorateSuccess(gateway, accountName)}
+          //           amount={amount}
+          //           currency={currency}
+          //           account={accounts[accountName]}
+          //           mode={accounts[accountName].mode}
+          //           expanded={this.props.expandedOption === '3'}
+          //           handleExpandedClicked={this.handleExpandedClicked}
+          //           {...gatewayProps}
+          //         />
+          //       </StripeProvider>
+          //     </div>
+          //   );
+          // }
+        })}
+      </div>
     ) : null;
   }
 }

@@ -1,11 +1,49 @@
 // CheckoutForm.js
 import React from 'react';
-import { injectStripe } from 'react-stripe-elements';
-import CardSection from './CardSection';
+import { injectStripe, CardElement } from 'react-stripe-elements';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import { payment_credit, payment_arrow } from '../../assets';
 import Axios from 'axios';
-import './stripe.scss';
 import LoadingIndicators from '../../components/Common/LoadingIndicator';
+import PrimaryButton from '../Common/Button/PrimaryButton';
+import i18n from '../../locales/i18n';
+
+const handleBlur = () => {
+  console.log('[blur]');
+};
+const handleChange = change => {
+  console.log('[change]', change);
+};
+const handleFocus = () => {
+  console.log('[focus]');
+};
+const handleReady = () => {
+  console.log('[ready]');
+};
+const createOptions = (fontSize: string, padding: ?string) => {
+  return {
+    style: {
+      base: {
+        fontSize,
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        height: '100px',
+        borderColor: '#FFCC00',
+        color: '#FFCC00',
+        letterSpacing: '0.025em',
+        fontFamily: 'Verdana',
+        '::placeholder': {
+          color: '#aab7c4'
+        },
+        ...(padding ? { padding } : {})
+      },
+      invalid: {
+        color: '#9e2146'
+      }
+    }
+  };
+};
 
 class CheckoutForm extends React.Component {
   state = {
@@ -83,45 +121,42 @@ class CheckoutForm extends React.Component {
         //     }
         //   });
       }
-
       // this.setState({ loading: false });
     }
   };
 
-  onInputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
-
-    this.setState({ [name]: value });
-    // this.setState({ [name]: value }, (callback) => {
-    //   console.log(name + ':' + this.state[name]);
-    // });
+  handleArrowClick = () => {
+    this.props.handleExpandedClicked('1');
   };
 
   render() {
+    let arrow = classnames({
+      arrow: !this.props.expanded
+    });
+    let displayNone = classnames({
+      'display-none': !this.props.expanded
+    });
     return !this.state.loading ? (
-      <form className="form-wrapper" onSubmit={this.handleSubmit}>
-        <label>Amount</label>
-        <input
-          value={this.state.amount}
-          name="amount"
-          onChange={this.onInputChange}
-          placeholder=""
-        />
-        <label>Tree Count</label>
-        <input
-          value={this.state.tree_count}
-          name="tree_count"
-          onChange={this.onInputChange}
-          placeholder=""
-        />
-        <label>Currency</label>
-        <select name="currency" onChange={this.onInputChange}>
-          <option value="none">Unselected</option>
-          <option value="EUR">Euro</option>
-        </select>
-        <CardSection />
-        <button>Confirm order</button>
+      <form className="payment-option" onSubmit={this.handleSubmit}>
+        <div onClick={this.handleArrowClick} className="payment-option-header">
+          <span>
+            <img className="logo" src={payment_credit} />
+            {i18n.t('label.creditCard')}
+          </span>
+          <img className={arrow} src={payment_arrow} />
+        </div>
+        <div>
+          <CardElement
+            onReady={this.handleReady}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onReady={handleReady}
+            hidePostalCode={true}
+            {...createOptions(this.props.fontSize)}
+          />
+          <PrimaryButton>{i18n.t('label.pay')}</PrimaryButton>
+        </div>
       </form>
     ) : (
       <LoadingIndicators />
@@ -135,5 +170,14 @@ CheckoutForm.propTypes = {
   stripe: PropTypes.object,
   createToken: PropTypes.func,
   createPaymentMethod: PropTypes.func,
-  createSource: PropTypes.func
+  createSource: PropTypes.func,
+  //new
+  fontSize: PropTypes.string,
+  currency: PropTypes.string.isRequired,
+  account: PropTypes.object.isRequired,
+  expanded: PropTypes.bool,
+  handleExpandedClicked: PropTypes.func,
+  onSuccess: PropTypes.func,
+  onError: PropTypes.func,
+  onFailure: PropTypes.func
 };

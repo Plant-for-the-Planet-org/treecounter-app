@@ -7,7 +7,7 @@ class StripePayment extends Component {
   render() {
     let props = this.props;
     return (
-      <StripeProvider apiKey={props.apiKey}>
+      <StripeProvider stripe={this.props.stripe}>
         <Elements>
           <InjectedCheckoutForm
             currency={props.currency}
@@ -23,6 +23,7 @@ class StripePayment extends Component {
 export default StripePayment;
 
 StripePayment.propTypes = {
+  stripe: PropTypes.object,
   apiKey: PropTypes.string,
   currency: PropTypes.string.isRequired,
   account: PropTypes.object.isRequired,

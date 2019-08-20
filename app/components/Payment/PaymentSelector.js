@@ -50,7 +50,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         stripeJs.async = true;
         stripeJs.onload = () => {
           this.setState({
-            stripe: window.Stripe(props.stripePublishableKey)
+            // stripe: window.Stripe(nextProps.stripePublishableKey)
+            stripe: window.Stripe('pk_test_0ahH0yMukgNzOEd0UppzUfsc')
           });
         };
         document.body && document.body.appendChild(stripeJs);
@@ -82,7 +83,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           stripeJs.async = true;
           stripeJs.onload = () => {
             this.setState({
-              stripe: window.Stripe(nextProps.stripePublishableKey)
+              // stripe: window.Stripe(nextProps.stripePublishableKey)
+              stripe: window.Stripe('pk_test_0ahH0yMukgNzOEd0UppzUfsc')
             });
           };
           document.body && document.body.appendChild(stripeJs);
@@ -156,6 +158,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                   <div>this.state.errorMessage</div>
                 ) : null}
                 <StripeContainer
+                  stripe={this.state.stripe}
                   // onSuccess={this.decorateSuccess(gateway, accountName)}
                   account={accounts[accountName]}
                   expanded={this.props.expandedOption === '1'}

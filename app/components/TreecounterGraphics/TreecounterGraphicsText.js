@@ -29,7 +29,7 @@ class TreecounterGraphicsText extends Component {
       return 0;
     }
     let x = ('' + n).length;
-    if (x > 5) {
+    if (x > 6) {
       let p = Math.pow;
       d = p(10, d);
       x -= x % 3;
@@ -45,6 +45,8 @@ class TreecounterGraphicsText extends Component {
           ' ' + i18n.t('label.Quintillion')
         ][x / 3]
       );
+    } else if (x > 3) {
+      return delimitNumbers(n / 1000) + ' ' + i18n.t('label.Thousand');
     } else {
       return delimitNumbers(n);
     }

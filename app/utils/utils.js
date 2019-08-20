@@ -1,4 +1,5 @@
 import { getLocale } from '../actions/getLocale';
+import { Intl } from '../locales/Intl';
 
 export function delimitNumbers(str) {
   if (!isNaN(parseInt(str))) return formatNumber(str);
@@ -25,7 +26,7 @@ export function formatNumber(data, locale, currency) {
     // console.log('got numberformat', data, locale, currency, style)
     return new Intl.NumberFormat(locale, style).format(data);
   } catch (error) {
-    console.error('Numberformat error occured in utisl:', error);
+    console.error(error);
     return data;
   }
 }

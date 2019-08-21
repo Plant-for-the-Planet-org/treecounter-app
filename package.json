@@ -89,7 +89,8 @@
     "tcomb-form-native": "^0.6.11",
     "tcomb-json-schema": "^0.3.2",
     "tipsi-stripe": "^5.6.0",
-    "uuidv4": "^2.0.0"
+    "uuidv4": "^2.0.0",
+    "why-did-you-update": "1.0.6"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",

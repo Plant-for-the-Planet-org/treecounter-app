@@ -58,4 +58,4 @@ export function isIOS() {
 
 export function isAndroid() {
   return getMobileOperatingSystem() == 'Android';
-
+}

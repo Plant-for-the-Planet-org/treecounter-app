@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StripeProvider, Elements } from 'react-stripe-elements';
 import PropTypes from 'prop-types';
 import InjectedCheckoutForm from '../../components/StripePayment/CheckoutForm';
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
 
 class StripePayment extends Component {
   handleExpandedClicked = () => {
@@ -9,7 +11,13 @@ class StripePayment extends Component {
   };
 
   onError = err => {
-    this.props.onError(err);
+    console.log('error happend:');
+    console.log(err);
+  };
+
+  onSuccess = success => {
+    console.log('success happend:');
+    console.log(success);
   };
 
   render() {
@@ -23,7 +31,8 @@ class StripePayment extends Component {
             expanded={props.expanded}
             handleExpandedClicked={this.handleExpandedClicked}
             paymentDetails={props.paymentDetails}
-            onError={props.onError}
+            onError={this.onError}
+            onSuccess={this.onSuccess}
           />
         </Elements>
       </StripeProvider>
@@ -32,6 +41,21 @@ class StripePayment extends Component {
 }
 
 export default StripePayment;
+
+// const mapDispatchToProps = dispatch => {
+//   return bindActionCreators(
+//     {
+
+//       route: (routeName, id, navigation) => dispatch =>
+//         updateRoute(routeName, navigation || dispatch, id)
+//     },
+//     dispatch
+//   );
+// };
+
+// export default connect(mapDispatchToProps)(
+//   StripePayment
+// );
 
 StripePayment.propTypes = {
   paymentDetails: PropTypes.object.isRequired,

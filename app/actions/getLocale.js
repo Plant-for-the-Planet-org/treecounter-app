@@ -11,6 +11,9 @@ export function initLocale() {
 
 export function getLocale() {
   // console.log('getLocale', cache.locale);
+  if (!cache.locale) {
+    initLocale();
+  }
   return cache.locale;
 }
 

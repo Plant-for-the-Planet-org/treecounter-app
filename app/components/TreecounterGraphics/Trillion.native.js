@@ -121,13 +121,6 @@ class Trillion extends PureComponent {
   };
 
   _renderScreen = ({ route }) => {
-    // called 5 times on first render
-    // also called 4 times on Leaderboard tab
-    // const ids = this.props.plantProjects
-    //   .filter(filterProj => filterProj.allowDonations)
-    //   .map((project, i) => project.id);
-    // console.log(ids.sort());
-
     switch (route.key) {
       case 'world': {
         return this.state.loading ? (
@@ -212,7 +205,7 @@ class Trillion extends PureComponent {
 
   render() {
     return [
-      this.props.navigation && (
+      this.props.navigation ? (
         <NavigationEvents
           key="nav"
           onWillFocus={payload => {
@@ -223,8 +216,8 @@ class Trillion extends PureComponent {
           }}
           key="navigation-events"
         />
-      ),
-      this.state.loadSvg && (
+      ) : null,
+      this.state.loadSvg ? (
         <TabView
           key="tabs"
           useNativeDriver
@@ -233,7 +226,7 @@ class Trillion extends PureComponent {
           renderTabBar={this._renderTabBar}
           onIndexChange={this._handleIndexChange}
         />
-      )
+      ) : null
     ];
   }
 }

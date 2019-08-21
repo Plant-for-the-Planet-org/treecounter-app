@@ -33,12 +33,12 @@ $bannerAuthorColor: #202125;
       color: white;
     }
     .smartbanner-info {
-      width: calc(99% - 190px);
+      width: calc(99% - 152px);
     }
     .smartbanner-wrapper {
-      max-width: 90px;
+      max-width: 58px;
       float: right;
-      margin-right: 5px;
+      margin-right: 3px;
     }
     .smartbanner-button-text {
       background: none;
@@ -50,7 +50,7 @@ $bannerAuthorColor: #202125;
       color: black;
       text-shadow: none;
       line-height: 1rem;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       letter-spacing: 1px;
     }
     .smartbanner-author, .smartbanner-description {

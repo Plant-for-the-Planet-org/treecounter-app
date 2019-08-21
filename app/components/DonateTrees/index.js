@@ -302,6 +302,12 @@ export default class DonateTrees extends Component {
     });
   };
 
+  componentDidMount() {
+    console.log('===Tree Donate State!===');
+    console.log(this.state.form);
+    console.log('========================');
+  }
+
   componentWillUnmount() {
     this.props.paymentClear();
   }
@@ -397,8 +403,13 @@ export default class DonateTrees extends Component {
         ? this.state.form['receiptCompany']
         : '';
     }
-    let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
+    let name = receipt !== '' ? receipt.firstname + ' ' + receipt.lastname : '';
     let email = receipt !== '' ? receipt.email : '';
+    let address = receipt !== '' ? receipt.address : '';
+    let zipCode = receipt !== '' ? receipt.zipCode : '';
+    let city = receipt !== '' ? receipt.city : '';
+    let country = receipt !== '' ? receipt.country : '';
+
     let paymentMethods;
 
     if (receipt && plantProject) {
@@ -547,16 +558,24 @@ export default class DonateTrees extends Component {
                       stripePublishableKey={
                         plantProject.paymentSetup.stripePublishableKey
                       }
-                      amount={this.state.selectedAmount}
                       currency={this.state.selectedCurrency}
                       expandedOption={this.state.expandedOption}
                       handleExpandedClicked={this.handleExpandedClicked}
-                      context={{
-                        tpoName: this.props.selectedTpo.name,
+                      donorDetails={{
+                        amount: this.state.selectedAmount * 100,
+                        currency: this.state.selectedCurrency,
+                        donorAddress: address,
+                        donorZipCode: zipCode,
+                        donorCity: city,
+                        donorCountry: country,
                         donorEmail: email,
                         donorName: name,
-                        supportTreecounter: this.props.supportTreecounter,
+                        treeCount: this.state.selectedTreeCount
+                      }}
+                      context={{
                         treeCount: this.state.selectedTreeCount,
+                        tpoName: this.props.selectedTpo.name,
+                        supportTreecounter: this.props.supportTreecounter,
                         plantProjectName: plantProject.name
                       }}
                       onSuccess={paymentResponse =>

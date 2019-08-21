@@ -1,20 +1,13 @@
-import * as React from 'react';
+import React, { PureComponent } from 'react';
 import { WebMap } from 'react-arcgis';
 import PropTypes from 'prop-types';
 
-class MapContributions extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log('%%%%%%%%%%%%%%% MapContributions props: ', props);
-    this.state = {
-      status: 'loading',
-      map: null,
-      view: null,
-      userId: ''
-    };
-
-    this.handleFail = this.handleFail.bind(this);
-  }
+class MapContributions extends PureComponent {
+  // state = {
+  //   status: 'loading',
+  //   map: null,
+  //   view: null
+  // };
 
   render() {
     return (
@@ -28,13 +21,22 @@ class MapContributions extends React.Component {
             }
           }
         }}
-        onLoad={this.handleLoad.bind(this)}
-        onFail={this.handleFail.bind(this)}
+        onLoad={this.handleLoad}
+        onFail={this.handleFail}
       />
     );
   }
 
-  handleLoad(map, view) {
+  componentDidMount() {
+    this._mounted = true;
+  }
+
+  componentWillUnmount() {
+    this._mounted = false;
+  }
+
+  handleLoad = (map, view) => {
+    if (!this._mounted) return;
     const user_id = this.props.userId;
     // // FIND TREE LAYER //
     // const tree_inventory_layer = map.layers.find(layer => {
@@ -58,6 +60,7 @@ class MapContributions extends React.Component {
       tree_inventory_layer
         .queryFeatures(query)
         .then(featureSet => {
+          if (!this._mounted) return;
           console.log(
             '############ MapContributions featureSet: ',
             featureSet.features
@@ -69,13 +72,14 @@ class MapContributions extends React.Component {
         })
         .catch(error => console.log(error.message));
     }
-    this.setState({ map, view, status: 'loaded' });
-  }
+    // this.setState({ map, view, status: 'loaded' });
+  };
 
-  handleFail(e) {
+  handleFail = e => {
+    if (!this._mounted) return;
     console.error(e);
-    this.setState({ status: 'failed' });
-  }
+    // this.setState({ status: 'failed' });
+  };
 }
 
 MapContributions.propTypes = {

@@ -1,5 +1,5 @@
 {
-  "amount": "Menge:",
+  "amount": "Spendenbetrag",
   "creditCard": "Kreditkarte",
   "confirm": "Ich bestätige, dass ich den Betrag über{{amount}}{{currency}} an folgendes Konto bezahle.",
   "bank_transfer": "Banküberweisung",
@@ -13,7 +13,7 @@
   "contact_lastname": "Nachname",
   "donate_to": "Spenden an {{name}}",
   "payment_failed": "Zahlung fehlgeschlagen",
-  "go_back_to_app": "Zurück zur App",
+  "go_back_to_app": "Zurück zur Plant-for-the-Planet App",
   "please_confirm": "Bitte bestätigen",
   "please_enter_card_details": "Bitte geben Sie Ihre korrekten Kartendaten ein",
   "please_enter_iban": "Bitte geben Sie Ihre korrekte IBAN ein"

@@ -8,6 +8,7 @@ import StripeSepa from './Gateways/StripeSepa';
 import Paypal from './Gateways/Paypal';
 import Offline from './Gateways/Offline';
 import i18n from '../../locales/i18n';
+import { formatNumber } from '../../utils/utils';
 
 import { StripeProvider, Elements } from './Stripe/stripeDefs';
 
@@ -141,7 +142,11 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                 })}
               </div>
             )}
-            <div>{`${i18n.t('label.amount')}: ${amount} ${currency}`}</div>
+            <div>{`${i18n.t('label.amount')}: ${formatNumber(
+              amount,
+              null,
+              currency
+            )}`}</div>
             <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
           </div>
           {Object.keys(paymentMethods).map(gateway => {

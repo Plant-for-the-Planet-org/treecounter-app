@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n';
 import { tree } from '../../assets';
-
+import NumberFormat from '../Common/NumberFormat';
+import { formatNumber, delimitNumbers } from '../../utils/utils';
 class TreeCountSelector extends React.Component {
   constructor(props) {
     super(props);
@@ -65,7 +66,11 @@ class TreeCountSelector extends React.Component {
     if (amount === '') {
       amount = 0;
     }
+
     const treeCount = this.props.amountToTreeCount(amount);
+    if (isNaN(treeCount)) {
+      return;
+    }
     this.updateStateAndParent({
       variableAmount: parseInt(amount),
       variableTreeCount: treeCount
@@ -115,7 +120,10 @@ class TreeCountSelector extends React.Component {
               </label>
               <span className="price-conversion__equal">=</span>
               <span className="price-conversion__radio">
-                {treeCountToAmount(treeCount)} {currency}
+                <NumberFormat
+                  data={treeCountToAmount(treeCount)}
+                  currency={currency}
+                />
               </span>
             </div>
           );
@@ -152,12 +160,12 @@ class TreeCountSelector extends React.Component {
             <input
               type="text"
               disabled={this.state.isFixed}
-              value={this.state.variableAmount}
+              value={delimitNumbers(this.state.variableAmount)}
               onChange={evt =>
                 this.handleVariableAmountChange(evt.target.value)
               }
             />{' '}
-            {currency}
+            {formatNumber(1, null, currency).replace(/[\d.,]/g, '')}
           </span>
         </div>
       </div>

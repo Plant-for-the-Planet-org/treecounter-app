@@ -46,7 +46,12 @@
         font-size: 15.5px;
       }
     }
-
+    strong.small {
+      font-size: 26.5px;
+      @include for-phone-only {
+        font-size: 15.5px;
+      }
+    }
     .svg-text-container__row--col2 {
       // align-self: end;
       justify-self: end;

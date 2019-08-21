@@ -9,19 +9,7 @@ import LoadingIndicators from '../../components/Common/LoadingIndicator';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n';
 
-const handleBlur = () => {
-  console.log('[blur]');
-};
-const handleChange = change => {
-  console.log('[change]', change);
-};
-const handleFocus = () => {
-  console.log('[focus]');
-};
-const handleReady = () => {
-  console.log('[ready]');
-};
-const createOptions = (fontSize: string, padding: ?string) => {
+const createOptions = (fontSize, padding) => {
   return {
     style: {
       base: {
@@ -58,39 +46,45 @@ class CheckoutForm extends React.Component {
       'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NjU3NzM1MDIsImV4cCI6MTU2NTc3NzEwMiwicm9sZXMiOlsiUk9MRV9UUkVFRE9OT1IiLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJ0ZXN0UHJvZEBvbmV6ZXJvZWlnaHQuY28ifQ.qQARDy6FJoW1b9qmhsjJjMmYzUwcfa48-vpfRQxCc2dyTj8yKCdHuJlMlVanwLkMRxfi2i9orS4Jk10oyVpn01kfwnlNtNmKt815x5u9LWYUOMrYW7Vm_zB6J0HGpQYSm3ikbA_5N4D9in8gXZYIYoCFjeZnSRhgmbnBOtDrkcOHKUb52pshsxIJfzSUz3j0d8mhcaQb31gQahIKn7rPJUWyfJm6rVqdQCA2g5zYRUJLZgtNcukIBle-HkgW7jhlFDrHw_b-K8rFcr_Oy6yTXfV6Fh9ZhVMq4NpqYpeufEbab3cu9abo7vXrFPJ-iTXbzDXQgTnmCGKGs2IL6GNINcOMXZgXk1WMXra4_PcSnXvHjku9iM4jplqo1W_u_DGmWWMVs1lhJL16nzhJH5yC9eBF67mkYYtwTglyYLiTpV7V9yuf86bGBgqEj3pZuD49hr2lc0Qq2n7domCGLU6-d8_hJtjN8fuFUgMJnFr9QPuAsTbM0ip7Ehw4qLeic1Be01LG8d9nHqW1wk5czMabtPOwM78dl32wALP-siwgt4hV1niPu0zbC6EKCOm5RNnt2J7UxxF0cxezNRgwexUtkEAuVbD16Uor6iqcPhosrAnwZdebMMBkViPJrqEoOHwINgAHJ123oqfBCXLviFT5Z-Aq093grQG6-iAWS6efXJI'
   };
 
+  componentDidMount() {
+    console.log('PAYMENTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
+    console.log(this.props.paymentDetails);
+  }
+
   handleSubmit = async ev => {
+    //available attributes
+    // currency, donorAddress, donorZipCode, donorCity, donorCountry, donorEmail, donorName, treeCount: this.state.selectedTreeCount,
+
     // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault();
-    this.setState({
-      submitClicked: true
-    });
+    const paymentDetails = this.props.paymentDetails;
     try {
       //Create a payment method id for making request to the API
       const paymentMethodResponse = await this.props.stripe.createPaymentMethod(
         'card',
         {
           billing_details: {
-            name: 'Jenny Rosen'
+            name: paymentDetails.donorName
+            // amount: paymentDetails.amount * 100,
+            // currency: paymentDetails.currency,
+            // email: paymentDetails.donorEmail
           }
         }
       );
 
       this.setState({ loading: true });
-
-      // this.setState({ loading: true })
       const paymentMethodId = paymentMethodResponse.paymentMethod.id;
-      console.log('---------Payment Method Response--------');
-      console.log(paymentMethodResponse);
-      //payment method exists
-      this.handleAPIPayment(paymentMethodId);
+
+      this.handlePayment(paymentMethodId);
     } catch (e) {
       this.props.onError(e);
     }
   };
 
-  handleAPIPayment = async paymentMethodId => {
+  handlePayment = async paymentMethodId => {
     const state = this.state;
     const paymentDetails = this.props.paymentDetails;
+
     let config = {
       headers: {
         Authorization: 'Bearer ' + state.token
@@ -99,7 +93,7 @@ class CheckoutForm extends React.Component {
 
     if (paymentMethodId !== undefined) {
       let requestData = {
-        amount: paymentDetails.amount,
+        amount: paymentDetails.amount * 100,
         currency: paymentDetails.currency,
         payment_method_id: paymentMethodId
       };
@@ -110,21 +104,26 @@ class CheckoutForm extends React.Component {
         config
       );
 
-      if (requestResponse.data.requires_action) {
-        const confirmPaymentIntentResponse = await this.props.stripe.handleCardAction(
-          requestResponse.data.payment_intent_client_secret
-        );
-
-        console.log('===Confirm payment  Intent 3d secure Response===');
-        console.log(confirmPaymentIntentResponse);
-
+      if (requestResponse.data.success) {
+        this.props.onSuccess('success');
         this.setState({ loading: false });
-        if (confirmPaymentIntentResponse.error) {
-          this.props.onError(confirmPaymentIntentResponse.error.message);
-        }
+      } else if (requestResponse.data.requires_action) {
+        this.handle3DSecure(requestResponse.data.payment_intent_client_secret);
       } else {
+        this.props.onSuccess('success');
         this.setState({ loading: false });
       }
+    }
+  };
+
+  handle3DSecure = async paymentIntentClientSecret => {
+    const confirmPaymentIntentResponse = await this.props.stripe.handleCardAction(
+      paymentIntentClientSecret
+    );
+    if (confirmPaymentIntentResponse.error) {
+      this.props.onError(confirmPaymentIntentResponse.error.message);
+    } else {
+      this.setState({ loading: false });
     }
   };
 
@@ -150,11 +149,6 @@ class CheckoutForm extends React.Component {
         </div>
         <div className={displayNone}>
           <CardElement
-            onReady={this.handleReady}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
             hidePostalCode={true}
             {...createOptions(this.props.fontSize)}
           />
@@ -172,16 +166,13 @@ export default injectStripe(CheckoutForm);
 CheckoutForm.propTypes = {
   paymentDetails: PropTypes.object,
   stripe: PropTypes.object,
-  createToken: PropTypes.func,
   createPaymentMethod: PropTypes.func,
   createSource: PropTypes.func,
-  //new
   fontSize: PropTypes.string,
   currency: PropTypes.string.isRequired,
   account: PropTypes.object.isRequired,
   expanded: PropTypes.bool,
   handleExpandedClicked: PropTypes.func,
   onSuccess: PropTypes.func,
-  onError: PropTypes.func,
-  onFailure: PropTypes.func
+  onError: PropTypes.func
 };

@@ -2,16 +2,13 @@
 /* eslint-disable no-console, react/no-multi-comp */
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from '../../locales/i18n';
+import StripeContainer from '../../containers/StripePayment';
 
 // import StripeCC from './Gateways/StripeCC';
 // import StripeSepa from './Gateways/StripeSepa';
 // import Paypal from './Gateways/Paypal';
 // import Offline from './Gateways/Offline';
-import i18n from '../../locales/i18n';
-
-// import { StripeProvider, Elements } from './Stripe/stripeDefs';
-
-import StripeContainer from '../../containers/StripePayment';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
@@ -22,23 +19,10 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       errorMessage: null,
       paymentDetails: {}
     };
-
-    this.decorateSuccess = this.decorateSuccess.bind(this);
   }
-
-  decorateSuccess(gateway, accountName) {
-    return response =>
-      this.props.onSuccess({ gateway, accountName, ...response });
-  }
-  setPaymentDetails = paymentDetails => {
-    console.log('SET PAYMENT METHOD DETAILS');
-    console.log(paymentDetails);
-    this.setState({ paymentDetails: paymentDetails });
-  };
 
   componentDidMount() {
     const props = this.props;
-    const context = props.context;
 
     if (props.paymentMethods) {
       // lookup stripe related payment methods for the current country/currency combination
@@ -105,31 +89,25 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     this.props.handleExpandedClicked(optionNumber);
   };
 
-  onError = err => {
-    this.props.onError(err);
-    this.setState({
-      errorMessage: err
-    });
-  };
-
   render() {
-    const { accounts, paymentMethods, amount, currency, context } = this.props;
-    const paymentDetails = {
-      name: context.donorName,
-      email: context.donorEmail,
-      treeCount: context.treeCount,
-      currency: this.props.currency,
-      amount: this.props.amount * 100
-    };
+    const {
+      accounts,
+      paymentMethods,
+      amount,
+      currency,
+      context,
+      donorDetails
+    } = this.props;
+
     const gatewayProps = {
       context: context,
+      donorDetails: donorDetails,
       currency: currency,
       onFailure: this.props.onFailure,
       onError: this.props.onError
     };
     let giftToName = null;
-    console.log('-----gatewayProps----');
-    console.log(gatewayProps);
+
     if (gatewayProps.context.giftTreeCounterName) {
       giftToName = gatewayProps.context.giftTreeCounterName;
     }
@@ -174,12 +152,10 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                 ) : null}
                 <StripeContainer
                   stripe={this.state.stripe}
-                  // onSuccess={this.decorateSuccess(gateway, accountName)}
-                  paymentDetails={paymentDetails}
+                  paymentDetails={this.props.donorDetails}
                   account={accounts[accountName]}
                   expanded={this.props.expandedOption === '1'}
                   handleExpandedClicked={this.handleExpandedClicked}
-                  onError={this.onError}
                   {...gatewayProps}
                 />
                 {/* <Elements key={gateway}>
@@ -241,6 +217,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
 }
 
 PaymentSelector.propTypes = {
+  donorDetails: PropTypes.object,
   accounts: PropTypes.object,
   paymentMethods: PropTypes.object,
   stripePublishableKey: PropTypes.string,

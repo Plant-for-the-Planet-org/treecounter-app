@@ -24,6 +24,7 @@ import i18n from '../../locales/i18n';
 import Offline from './Gateways/Offline';
 import InlineLink from '../Common/InlineLink.native';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import { formatNumber } from '../../utils/utils';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
@@ -269,7 +270,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         ) : (
           <View style={{ flex: 1, alignItems: 'center' }}>
             <Text style={{ fontWeight: 'bold' }}>
-              {i18n.t('label.amount')}: {amount} {currency}
+              {i18n.t('label.amount')}: {formatNumber(amount, null, currency)}
             </Text>
             <Text style={{ fontWeight: 'bold' }}>
               {i18n.t('label.trees')}: {context.treeCount}

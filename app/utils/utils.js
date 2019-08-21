@@ -1,5 +1,6 @@
 import { getLocale } from '../actions/getLocale';
 import { Intl } from '../locales/Intl';
+import i18n from '../locales/i18n.js';
 
 export function delimitNumbers(str) {
   if (!isNaN(parseInt(str))) return formatNumber(str);
@@ -58,4 +59,36 @@ export function isIOS() {
 
 export function isAndroid() {
   return getMobileOperatingSystem() == 'Android';
+}
+
+export function convertNumber(n, d) {
+  if (isNaN(n) || undefined) {
+    return 0;
+  }
+  let x = ('' + n).length;
+  if (x > 12) {
+    let p = Math.pow;
+    d = p(10, d);
+    x -= x % 3;
+    return (
+      delimitNumbers(Math.round(n * d / p(10, x)) / d) +
+      [
+        '',
+        ' ' + i18n.t('label.Thousand'),
+        ' ' + i18n.t('label.Million'),
+        ' ' + i18n.t('label.Billion'),
+        ' ' + i18n.t('label.Trillion'),
+        ' ' + i18n.t('label.Quadrillion'),
+        ' ' + i18n.t('label.Quintillion')
+      ][x / 3]
+    );
+  } else if (x > 9) {
+    return delimitNumbers(n / 1000000000) + ' ' + i18n.t('label.Billion');
+  } else if (x > 6) {
+    return delimitNumbers(n / 1000000) + ' ' + i18n.t('label.Million');
+  } else if (x > 3) {
+    return delimitNumbers(n / 1000) + ' ' + i18n.t('label.Thousand');
+  } else {
+    return delimitNumbers(n);
+  }
 }

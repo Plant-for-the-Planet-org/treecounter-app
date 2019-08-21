@@ -49,6 +49,7 @@
     "react-arcgis": "3.3.0",
     "react-async-script-loader": "^0.3.0",
     "react-autosuggest": "^9.3.4",
+    "react-datepicker": "^2.8.0",
     "react-i18next": "^7.6.1",
     "react-images": "^0.5.17",
     "react-modal": "^3.4.5",

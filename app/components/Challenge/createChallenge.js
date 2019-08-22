@@ -55,7 +55,7 @@ export default class Challenge extends Component {
     this.state = {
       form: {
         challengeMethod: 'direct',
-        goal: 100,
+        goal: 1000,
         endDate: 2020
       },
       tempForm: {},

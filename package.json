@@ -34,6 +34,7 @@
     "moment": "^2.22.1",
     "normalizr": "^3.2.4",
     "number-to-words": "^1.2.3",
+    "numeral": "^2.0.6",
     "react": "^16.8.3",
     "react-accessible-accordion": "^2.4.1",
     "react-arcgis": "3.3.0",

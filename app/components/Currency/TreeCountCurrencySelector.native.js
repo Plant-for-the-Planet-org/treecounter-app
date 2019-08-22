@@ -9,6 +9,7 @@ import i18n from '../../locales/i18n';
 import { Dimensions, View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject.native';
 import NumberFormat from '../Common/NumberFormat';
+import { delimitNumbers } from '../../utils/utils';
 
 class TreeCountCurrencySelector extends React.PureComponent {
   constructor(props) {
@@ -91,7 +92,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
               }}
             >
               <Text numberOfLines={1} ellipsizeMode={'tail'}>
-                <Text>{this.state.selectedTreeCount}</Text>
+                <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
                 <Text style={styles.selectedProjectCol}>
                   {' '}
                   {i18n.t('label.trees')}
@@ -112,7 +113,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
               }}
             >
               <Text numberOfLines={1} ellipsizeMode={'tail'}>
-                <Text>{this.state.selectedTreeCount}</Text>
+                <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
                 <Text style={styles.selectedProjectCol}>
                   {' '}
                   {i18n.t('label.trees')}
@@ -125,7 +126,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
             </View>
           ) : (
             <View style={styles.selectedProjectRow}>
-              <Text>{this.state.selectedTreeCount}</Text>
+              <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
               <Text style={styles.selectedProjectCol}>
                 {i18n.t('label.trees')}
               </Text>

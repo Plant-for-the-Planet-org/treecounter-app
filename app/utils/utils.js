@@ -86,6 +86,7 @@ export function convertNumber(n, d) {
     return delimitNumbers(n / 1000000000) + ' ' + i18n.t('label.Billion');
   } else if (x > 6) {
     return delimitNumbers(n / 1000000) + ' ' + i18n.t('label.Million');
+    // TODO: think about using the label "thousend" - under 1 Mio it's uncommon to use it
   } else if (x > 3) {
     return delimitNumbers(n / 1000) + ' ' + i18n.t('label.Thousand');
   } else {

@@ -29,26 +29,33 @@ class TreecounterGraphicsText extends Component {
       return 0;
     }
     let x = ('' + n).length;
-    if (x > 5) {
+    if (x > 12) {
       let p = Math.pow;
       d = p(10, d);
       x -= x % 3;
       return (
-        Math.round(n * d / p(10, x)) / d +
+        delimitNumbers(Math.round(n * d / p(10, x)) / d) +
         [
           '',
-          ' Thousand',
-          ' Million',
-          ' Billion',
-          ' Trillion',
-          ' Quadrillion',
-          ' Quintillion'
+          ' ' + i18n.t('label.Thousand'),
+          ' ' + i18n.t('label.Million'),
+          ' ' + i18n.t('label.Billion'),
+          ' ' + i18n.t('label.Trillion'),
+          ' ' + i18n.t('label.Quadrillion'),
+          ' ' + i18n.t('label.Quintillion')
         ][x / 3]
       );
+    } else if (x > 9) {
+      return delimitNumbers(n / 1000000000) + ' ' + i18n.t('label.Billion');
+    } else if (x > 6) {
+      return delimitNumbers(n / 1000000) + ' ' + i18n.t('label.Million');
+    } else if (x > 3) {
+      return delimitNumbers(n / 1000) + ' ' + i18n.t('label.Thousand');
     } else {
-      return n;
+      return delimitNumbers(n);
     }
   }
+
   updateState(stateVal) {
     this.setState({ ifPlantedDetails: stateVal });
     this.props.onToggle(stateVal);
@@ -67,7 +74,8 @@ class TreecounterGraphicsText extends Component {
       }
     } = this.props;
     let dom;
-
+    const targetCount = this.convertNumber(target, 2);
+    const plantedCount = this.convertNumber(parseInt(planted), 2);
     {
       dom = !this.state.ifPlantedDetails ? (
         <div className="svg-text-container">
@@ -83,7 +91,9 @@ class TreecounterGraphicsText extends Component {
                       : '') +
                   ' '}
                 <br />
-                <strong>{delimitNumbers(this.convertNumber(target, 2))}</strong>
+                <strong className={targetCount.length > 12 ? 'small' : ''}>
+                  {targetCount}
+                </strong>
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(target))} */}
@@ -103,8 +113,8 @@ class TreecounterGraphicsText extends Component {
               <span>
                 {i18n.t('label.planted')}
                 <br />
-                <strong>
-                  {delimitNumbers(this.convertNumber(parseInt(planted), 2))}
+                <strong className={plantedCount.length > 12 ? 'small' : ''}>
+                  {plantedCount}
                 </strong>
                 {this.props.trillion ? (
                   <div>
@@ -124,8 +134,8 @@ class TreecounterGraphicsText extends Component {
         </div>
       ) : (
         <PlantedDetails
-          personal={delimitNumbers(this.convertNumber(parseInt(personal), 2))}
-          community={delimitNumbers(this.convertNumber(parseInt(community), 2))}
+          personal={this.convertNumber(parseInt(personal), 2)}
+          community={this.convertNumber(parseInt(community), 2)}
           type={type}
           onToggle={e => this.updateState(false)}
         />

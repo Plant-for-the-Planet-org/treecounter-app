@@ -7,20 +7,13 @@ import i18n from '../../locales/i18n.js';
 //import { context } from '../../config/index';
 
 class MapLayerView extends React.Component {
-  constructor(props) {
-    console.log('MapLayerView: props ', props);
-    super(props);
-    this.state = {
-      status: i18n.t('label.loading'),
-      map: null,
-      view: null,
-      layers: [],
-      fullMapView: false
-    };
-
-    this.handleFail = this.handleFail.bind(this);
-    this.escFunction = this.escFunction.bind(this);
-  }
+  state = {
+    status: i18n.t('label.loading'),
+    map: null,
+    view: null,
+    layers: [],
+    fullMapView: false
+  };
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { layers } = nextProps;
@@ -31,7 +24,7 @@ class MapLayerView extends React.Component {
     }
   }
 
-  escFunction(event) {
+  escFunction = event => {
     if (event.keyCode === 27) {
       if (this.state.fullMapView) {
         this.setState({
@@ -39,9 +32,10 @@ class MapLayerView extends React.Component {
         });
       }
     }
-  }
+  };
 
   componentDidMount() {
+    this._mounted = true;
     document.addEventListener('keydown', this.escFunction, false);
     loadModules(['esri/core/urlUtils', 'esri/config'])
       .then(([urlUtils, esriConfig]) => {
@@ -75,13 +69,14 @@ class MapLayerView extends React.Component {
       .catch(error => console.error(error));
   }
 
-  toggleMap() {
-    this.setState({ fullMapView: !this.state.fullMapView });
-  }
-
   componentWillUnmount() {
+    this._mounted = false;
     document.removeEventListener('keydown', this.escFunction, false);
   }
+
+  toggleMap = () => {
+    this.setState({ fullMapView: !this.state.fullMapView });
+  };
 
   render() {
     return (
@@ -101,10 +96,10 @@ class MapLayerView extends React.Component {
               }
             }}
             id={this.props.webMapId}
-            onLoad={this.handleLoad.bind(this)}
-            onFail={this.handleFail.bind(this)}
+            onLoad={this.handleLoad}
+            onFail={this.handleFail}
           />
-          <div className="button-container" onClick={this.toggleMap.bind(this)}>
+          <div className="button-container" onClick={this.toggleMap}>
             {this.state.fullMapView ? (
               <img src={mapCollapse} />
             ) : (
@@ -116,18 +111,22 @@ class MapLayerView extends React.Component {
     );
   }
 
-  handleLoad(map, view) {
-    console.log('handleLoad: map', map);
-    map.layers.forEach(layer => {
-      layer.visible = this.props.layers.includes(layer.title);
-    });
-    this.setState({ map, view, status: 'loaded' });
-  }
+  handleLoad = (map, view) => {
+    console.debug('WebMap.onLoad', this._mounted, map);
+    if (this._mounted) {
+      map.layers.forEach(layer => {
+        layer.visible = this.props.layers.includes(layer.title);
+      });
+      this.setState({ map, view, status: 'loaded' });
+    }
+  };
 
-  handleFail(e) {
-    console.error(e);
-    this.setState({ status: 'failed' });
-  }
+  handleFail = e => {
+    console.debug('WebMap.onFail', this._mounted, e);
+    if (this._mounted) {
+      this.setState({ status: 'failed' });
+    }
+  };
 }
 
 MapLayerView.propTypes = {

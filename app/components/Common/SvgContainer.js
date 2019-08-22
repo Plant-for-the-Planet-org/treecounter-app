@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 
 import { svgBackground } from '../../assets';
@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // import TargetComment from '../TreecounterGraphics/TargetComment';
 // import PlantDetails from '../TreecounterGraphics/PlantDetails';
 
-export default class SvgContainer extends Component {
+export default class SvgContainer extends PureComponent {
   constructor(props) {
     super(props);
     const { exposeMissing } = this.props;
@@ -296,8 +296,6 @@ export default class SvgContainer extends Component {
         this.renderedTreeIds.push(treeId); // mark tree as rendered
         this.setTreeStatus(treeId, type, group); // update tree state
       }, this);
-
-      this.forceUpdate();
     }
   }
 

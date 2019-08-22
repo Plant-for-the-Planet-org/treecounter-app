@@ -309,6 +309,7 @@ class Trillion extends PureComponent {
     return [
       this.props.navigation ? (
         <NavigationEvents
+          key="nav"
           onWillFocus={payload => {
             this.setState({ loadSvg: true });
           }}
@@ -320,6 +321,7 @@ class Trillion extends PureComponent {
       ) : null,
       this.state.loadSvg ? (
         <TabView
+          key="tabs"
           useNativeDriver
           navigationState={this.state}
           renderScene={this._renderScreen}

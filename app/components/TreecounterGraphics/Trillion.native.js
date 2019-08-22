@@ -143,7 +143,7 @@ class Trillion extends PureComponent {
   _renderScreen = ({ route }) => {
     const { navigation, userProfile, isLoggedIn } = this.props;
 
-    //console.log(userProfile);
+    // console.log(this.props.pledgeEvents);
 
     switch (route.key) {
       case 'world': {
@@ -161,7 +161,8 @@ class Trillion extends PureComponent {
               <View style={{ marginTop: 25, marginLeft: 16 }}>
                 <Text style={styles.trillionTreeEventTitle}>
                   {this.props.pledgeEvents &&
-                  this.props.pledgeEvents.pledgeEvents
+                  this.props.pledgeEvents.pledgeEvents &&
+                  this.props.pledgeEvents.pledgeEvents.length > 0
                     ? i18n.t('label.trillionTreesEvents')
                     : null}
                 </Text>

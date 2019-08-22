@@ -29,19 +29,32 @@ class PlantedProgressBar extends React.Component {
             style={styles.treePlantedChildContainer}
             style={
               treeCountWidth > 0
-                ? {
-                    height: '100%',
-                    flexDirection: 'row',
-                    backgroundColor: '#89B53A',
-                    borderColor: '#89B53A',
-                    width: treeCountWidth + '%',
-                    paddingRight: 10,
-                    padding: 5,
-                    borderTopRightRadius: 20,
-                    borderBottomRightRadius: 20,
-                    borderWidth: 0.5,
-                    borderBottomLeftRadius: 7
-                  }
+                ? (treeCountWidth = 100
+                    ? {
+                        height: '100%',
+                        flexDirection: 'row',
+                        backgroundColor: '#89B53A',
+                        borderColor: '#89B53A',
+                        width: treeCountWidth + '%',
+                        paddingRight: 10,
+                        padding: 5,
+                        borderWidth: 0.5,
+                        borderBottomLeftRadius: 7,
+                        borderBottomRightRadius: 7
+                      }
+                    : {
+                        height: '100%',
+                        flexDirection: 'row',
+                        backgroundColor: '#89B53A',
+                        borderColor: '#89B53A',
+                        width: treeCountWidth + '%',
+                        paddingRight: 10,
+                        padding: 5,
+                        borderTopRightRadius: 20,
+                        borderBottomRightRadius: 20,
+                        borderWidth: 0.5,
+                        borderBottomLeftRadius: 7
+                      })
                 : {
                     height: '100%',
                     flexDirection: 'row',

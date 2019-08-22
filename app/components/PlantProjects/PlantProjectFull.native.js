@@ -66,7 +66,7 @@ class PlantProjectFull extends React.Component {
               tpoName={tpo_name}
             />
 
-            <View style={styles.horizontalRule} />
+            {/* <View style={styles.horizontalRule} /> */}
             <View style={styles.plantProjectDetails}>
               <PlantProjectDetails {...detailsProps} />
             </View>

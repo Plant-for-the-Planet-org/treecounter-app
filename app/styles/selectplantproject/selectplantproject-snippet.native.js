@@ -21,10 +21,13 @@ export default (selectplantprojectFull = EStyleSheet.create({
     shadowOpacity: 0.5,
     elevation: 1,
     padding: 0,
-    borderRadius: 7
+    borderRadius: 7,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#d5d5d5'
   },
   projectImageContainer: {
-    height: Layout.window.width * 0.5,
+    height: Layout.window.width * 0.4,
     width: '100%',
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
@@ -47,7 +50,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
       width: 0,
       height: -3
     },
-    height: rowHeight * 1.7,
+    // height: rowHeight * 1.7,
+    height: 35,
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
@@ -69,7 +73,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     // padding: 5,
     paddingLeft: 5,
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: '600',
+    fontSize: 14
   },
   treePlantedtextTrees: {
     color: 'white',
@@ -77,7 +82,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   treePlantedtextPlanted: {
     color: 'white',
-    fontWeight: 'bold',
+    fontWeight: '600',
+    fontSize: 14,
     paddingLeft: 16
   },
   targetContainer: {
@@ -96,7 +102,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   locationContainer: {
     flexDirection: 'column',
-    maxWidth: '65%'
+    width: '65%'
   },
   costContainer: {
     flexDirection: 'column',
@@ -117,7 +123,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: '#4D5153',
-    maxWidth: '90%'
+    maxWidth: '90%',
+    lineHeight: 27
   },
   byOrgContainer: {
     width: '70%',
@@ -147,30 +154,45 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    width: '30%',
-    justifyContent: 'flex-end'
+    justifyContent: 'space-between'
   },
   buttonItem: {
     padding: 0
   },
   buttonStyle: {
-    // height: 20,
-    // paddingLeft: 2,
-    // paddingRight: 2,
-    // paddingTop: 0,
-    // paddingBottom: 0,
-    // margin: 0,
-    // borderWidth: 0,
-    // borderRadius: 0,
-    // marginRight: 5
-    width: 80,
-    height: 25,
+    width: Layout.window.width * 0.36,
+    height: 36,
+    borderRadius: 7,
+    backgroundColor: '#ffffff',
+    borderStyle: 'solid',
     borderWidth: 1,
-    borderRadius: 4,
+    borderColor: '#d5d5d5',
     padding: 0
   },
   buttonTextStyle: {
-    fontSize: 12
+    fontSize: 11,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 15,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: '#4d5153'
+  },
+  buttonStyle2: {
+    width: Layout.window.width * 0.36,
+    height: 36,
+    borderRadius: 7,
+    backgroundColor: '#89b53a',
+    padding: 0
+  },
+  buttonTextStyle2: {
+    fontSize: 11,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 15,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: '#ffffff'
   },
   moreButtonStyle: {
     backgroundColor: 'white',

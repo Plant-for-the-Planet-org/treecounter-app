@@ -9,7 +9,10 @@ export default (plantProjectDetail = EStyleSheet.create({
     paddingLeft: 5
   },
   descriptionText: {
-    color: '#686060'
+    color: 'rgba(0, 0, 0, 0.6)',
+    fontSize: 14,
+    lineHeight: 21,
+    textAlign: 'justify'
   },
   linkTextContainer: {
     flexDirection: 'row',

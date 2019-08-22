@@ -12,7 +12,6 @@ const Layout = {
 export default (selectplantprojectFull = EStyleSheet.create({
   projectFullContainer: {
     flexDirection: 'column',
-
     shadowOffset: {
       width: 0,
       height: 3

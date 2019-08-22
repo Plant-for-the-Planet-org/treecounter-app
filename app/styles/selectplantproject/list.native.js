@@ -144,7 +144,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     backgroundColor: 'white'
   },
   listViewContainer: {
-    flex: 0.95
+    flex: 0.95,
+    backgroundColor: 'white'
   },
   headingStyle: {
     fontSize: 16,

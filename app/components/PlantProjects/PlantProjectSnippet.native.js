@@ -131,10 +131,11 @@ class PlantProjectSnippet extends React.Component {
             >
               <Text
                 ellipsizeMode="tail"
-                numberOfLines={1}
+                numberOfLines={2}
                 style={styles.project_teaser__contentText}
               >
                 {teaserProps.projectName}
+                {/* by {teaserProps.tpoName} */}
               </Text>
               {teaserProps.isCertified ? (
                 <Image
@@ -143,7 +144,9 @@ class PlantProjectSnippet extends React.Component {
                     width: 15,
                     height: 15,
                     marginLeft: 5,
-                    maxWidth: '10%'
+                    maxWidth: '10%',
+                    alignSelf: 'flex-start',
+                    marginTop: 6
                   }}
                 />
               ) : null}
@@ -153,26 +156,29 @@ class PlantProjectSnippet extends React.Component {
               style={styles.projectdetailsContainer}
             >
               <View style={styles.locationContainer}>
-                <View style={styles.projectTextRowWithImage}>
-                  <Image
-                    source={locationMarker}
-                    style={{ height: 16, marginRight: 10 }}
-                  />
-                  <Text style={styles.locationText} ellipsizeMode="tail">
-                    {specsProps.location}
-                  </Text>
-                </View>
-
-                <View style={styles.projectTextRowWithImage}>
-                  <Image
-                    source={survivalRateIcon}
-                    style={{ height: 16, marginRight: 8 }}
-                  />
-                  <Text style={styles.survivalText}>
-                    {i18n.t('label.survival_rate')} {':'}{' '}
-                    {specsProps.survivalRate}%
-                  </Text>
-                </View>
+                {specsProps.location && specsProps.location !== 'undefined' ? (
+                  <View style={styles.projectTextRowWithImage}>
+                    <Image
+                      source={locationMarker}
+                      style={{ height: 16, marginRight: 10 }}
+                    />
+                    <Text style={styles.locationText} ellipsizeMode="tail">
+                      {specsProps.location}
+                    </Text>
+                  </View>
+                ) : null}
+                {specsProps.survivalRate ? (
+                  <View style={styles.projectTextRowWithImage}>
+                    <Image
+                      source={survivalRateIcon}
+                      style={{ height: 16, marginRight: 8 }}
+                    />
+                    <Text style={styles.survivalText}>
+                      {i18n.t('label.survival_rate')} {':'}{' '}
+                      {specsProps.survivalRate}%
+                    </Text>
+                  </View>
+                ) : null}
                 {specsProps.taxDeduction && specsProps.taxDeduction.length ? (
                   <View style={styles.projectTextRowWithImage}>
                     <Image
@@ -183,17 +189,18 @@ class PlantProjectSnippet extends React.Component {
                       {i18n.t('label.tax_deductible')} {i18n.t('label.in')}{' '}
                       {deducibleText1}
                     </Text>
-                    {/* <ReactNativeTooltipMenu
-                      buttonComponent={
-                        <Image
-                          style={styles.project_specs__taxdeductibleIcon}
-                          source={questionmark_orange}
-                        />
-                      }
-                      items={[{ label: tooltipText1, onPress: () => {} }]}
-                    /> */}
                   </View>
-                ) : null}
+                ) : (
+                  <View style={styles.projectTextRowWithImage}>
+                    <Image
+                      source={taxIcon}
+                      style={{ height: 16, marginRight: 8 }}
+                    />
+                    <Text style={styles.survivalText}>
+                      {i18n.t('label.no_tax_deductible')}
+                    </Text>
+                  </View>
+                )}
               </View>
 
               <View style={styles.costContainer}>
@@ -215,19 +222,24 @@ class PlantProjectSnippet extends React.Component {
               </View>
             </View>
 
-            {/* <View key="actionContainer" style={styles.actionContainer}>
-							<View key="byOrgContainer" style={styles.byOrgContainer}>
-								<Text style={styles.byOrgText} ellipsizeMode="tail" numberOfLines={1}>
-									{teaserProps.tpoName}
-								</Text>
-							</View>
+            <View key="actionContainer" style={styles.actionContainer}>
+              <View key="buttonContainer" style={styles.buttonContainer}>
+                <PrimaryButton
+                  style={styles.buttonItem}
+                  buttonStyle={styles.buttonStyle}
+                  textStyle={styles.buttonTextStyle}
+                  onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
+                >
+                  <Text> {i18n.t('label.share')}</Text>
+                </PrimaryButton>
+              </View>
 
-							{this.props.plantProject.allowDonations ? (
+              {this.props.plantProject.allowDonations ? (
                 <View key="buttonContainer" style={styles.buttonContainer}>
                   <PrimaryButton
                     style={styles.buttonItem}
-                    buttonStyle={styles.buttonStyle}
-                    textStyle={styles.buttonTextStyle}
+                    buttonStyle={styles.buttonStyle2}
+                    textStyle={styles.buttonTextStyle2}
                     onClick={() =>
                       this.props.onSelectClickedFeaturedProjects(id)
                     }
@@ -236,7 +248,7 @@ class PlantProjectSnippet extends React.Component {
                   </PrimaryButton>
                 </View>
               ) : null}
-            </View> */}
+            </View>
           </View>
         </CardLayout>
       </TouchableHighlight>

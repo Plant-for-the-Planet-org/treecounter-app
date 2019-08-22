@@ -1,147 +1,68 @@
-import React, { Component } from 'react';
-import { View, Image, Text } from 'react-native';
-import styles from '../../../styles/selectplantproject/list';
-import CardLayout from '../../Common/Card';
+import PropTypes from 'prop-types';
+import React, { useMemo, useState } from 'react';
+import { Image, Text, View } from 'react-native';
 
-import Proptypes from 'prop-types';
-import ListViewProjects from './listview';
-import { foldout, foldin } from '../../../assets';
-import TouchableItem from '../../Common/TouchableItem.native';
+import { foldin, foldout } from '../../../assets';
 import i18n from '../../../locales/i18n';
+import styles from '../../../styles/selectplantproject/list';
+import { sortProjectsByPrice } from '../../../utils/currency';
+import TouchableItem from '../../Common/TouchableItem.native';
+import ListViewProjects from './listview';
 
-export default class PriceProjects extends Component {
-  constructor(props) {
-    super(props);
+const PriceProjects = ({
+  plantProjects,
+  currencies,
+  selectProject,
+  onMoreClick
+}) => {
+  currencies = currencies ? currencies.currencies : null;
 
-    this.state = {
-      expanded: false,
-      priceSortedProjects: props.plantProjects
-    };
-  }
-  componentDidMount() {
-    let { plantProjects, currencies } = this.props;
-    currencies = currencies ? currencies.currencies : null;
-    let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
-    if (
-      currencies &&
-      currencies.currency_rates &&
-      currencies.currency_rates.EUR
-    ) {
-      priceSortedProjects = priceSortedProjects.sort(function(a, b) {
-        return (
-          a.treeCost /
-            parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
-          b.treeCost /
-            parseFloat(currencies.currency_rates['EUR'].rates[b.currency])
-        );
-      });
-    }
-    this.setState({
-      priceSortedProjects: priceSortedProjects
-    });
-  }
+  const [sortType, setSortType] = useState('asc');
 
-  callExpanded = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    });
-  };
+  // memoized: rebuilds if plantProjects, sortType or currencies changes
+  const sortedProjects = useMemo(
+    () => sortProjectsByPrice(plantProjects, sortType === 'asc', currencies),
+    [plantProjects, sortType, currencies]
+  );
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.currencies !== this.props.currencies) {
-      this.sortProjects('asc', nextProps);
-    }
-  }
-
-  sortProjects(sortType, props) {
-    if (sortType === 'desc') {
-      let { plantProjects, currencies } = props;
-      currencies = currencies ? currencies.currencies : null;
-      let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
-      if (
-        currencies &&
-        currencies.currency_rates &&
-        currencies.currency_rates.EUR
-      ) {
-        priceSortedProjectsNew = priceSortedProjectsNew.sort(function(a, b) {
-          return (
-            b.treeCost /
-              parseFloat(currencies.currency_rates['EUR'].rates[b.currency]) -
-            a.treeCost /
-              parseFloat(currencies.currency_rates['EUR'].rates[a.currency])
-          );
-        });
-      }
-      this.setState({
-        priceSortedProjects: priceSortedProjectsNew
-      });
-    } else {
-      let { plantProjects, currencies } = props;
-      currencies = currencies ? currencies.currencies : null;
-      let priceSortedProjectsNew = JSON.parse(JSON.stringify(plantProjects));
-      if (
-        currencies &&
-        currencies.currency_rates &&
-        currencies.currency_rates.EUR
-      ) {
-        priceSortedProjectsNew = priceSortedProjectsNew.sort(function(a, b) {
-          return (
-            a.treeCost /
-              parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
-            b.treeCost /
-              parseFloat(currencies.currency_rates['EUR'].rates[b.currency])
-          );
-        });
-      }
-      this.setState({
-        priceSortedProjects: priceSortedProjectsNew
-      });
-    }
-  }
-
-  render() {
-    let { priceSortedProjects } = this.state;
-    return (
-      <View style={styles.flexContainer}>
-        <View style={styles.cardHeader}>
-          <Text style={styles.headingStyle}>
-            {i18n.t('label.cost_per_tree')}
-          </Text>
-          <View style={styles.sortContainer}>
-            <TouchableItem
-              style={styles.imageStyleContainer}
-              hitSlop={{ left: 50, right: 150 }}
-              onPress={this.sortProjects.bind(this, 'desc', this.props)}
-            >
-              <Image style={styles.imageStyle} source={foldin} />
-            </TouchableItem>
-            <TouchableItem
-              style={styles.imageStyleContainer}
-              hitSlop={{ left: 50, right: 150 }}
-              onPress={this.sortProjects.bind(this, 'asc', this.props)}
-            >
-              <Image style={styles.imageStyle} source={foldout} />
-            </TouchableItem>
-          </View>
-        </View>
-
-        <View style={styles.listViewContainer}>
-          <ListViewProjects
-            projects={priceSortedProjects}
-            selectProject={projectId => this.props.selectProject(projectId)}
-            onMoreClick={(projectId, name) =>
-              this.props.onMoreClick(projectId, name)
-            }
-          />
+  return (
+    <View style={styles.flexContainer}>
+      <View style={styles.cardHeader}>
+        <Text style={styles.headingStyle}>{i18n.t('label.cost_per_tree')}</Text>
+        <View style={styles.sortContainer}>
+          <TouchableItem
+            style={styles.imageStyleContainer}
+            hitSlop={{ left: 50, right: 150 }}
+            onPress={() => setSortType('desc')}
+          >
+            <Image style={styles.imageStyle} source={foldin} />
+          </TouchableItem>
+          <TouchableItem
+            style={styles.imageStyleContainer}
+            hitSlop={{ left: 50, right: 150 }}
+            onPress={() => setSortType('asc')}
+          >
+            <Image style={styles.imageStyle} source={foldout} />
+          </TouchableItem>
         </View>
       </View>
-    );
-  }
-}
+
+      <View style={styles.listViewContainer}>
+        <ListViewProjects
+          projects={sortedProjects}
+          selectProject={selectProject}
+          onMoreClick={onMoreClick}
+        />
+      </View>
+    </View>
+  );
+};
 
 PriceProjects.propTypes = {
-  plantProjects: Proptypes.array.isRequired,
-  selectProject: Proptypes.func.isRequired,
-  currencies: Proptypes.object.isRequired,
-  onMoreClick: Proptypes.func.isRequired
+  plantProjects: PropTypes.array.isRequired,
+  selectProject: PropTypes.func.isRequired,
+  currencies: PropTypes.object.isRequired,
+  onMoreClick: PropTypes.func.isRequired
 };
+
+export default PriceProjects;

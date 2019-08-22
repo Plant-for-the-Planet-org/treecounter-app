@@ -63,18 +63,28 @@ class PlantedProgressBar extends React.Component {
             }}
           >
             <Text style={styles.treePlantedtextPlanted}>
-              {numeral(countPlanted).format('0.0 a')}
+              {i18n.t(numeral(countPlanted).format('0.0 a'))}
             </Text>
-            <Text style={styles.treePlantedtextTrees}>
-              {i18n.t('label.treesPlanted')}
-            </Text>
+            {treeCountWidth > 25 ? (
+              treeCountWidth > 40 ? (
+                <Text style={styles.treePlantedtextTrees}>
+                  {i18n.t('label.treesPlanted')}
+                </Text>
+              ) : (
+                <Text style={styles.treePlantedtextTrees}>
+                  {i18n.t('label.trees')}
+                </Text>
+              )
+            ) : null}
           </View>
         </View>
 
         {!this.props.hideTargetImage ? (
           <View style={styles.targetContainer}>
             <Text style={styles.treePlantedtext}>
-              {countTarget ? numeral(countTarget).format('0.0 a') : null}
+              {countTarget
+                ? i18n.t(numeral(countTarget).format('0.0 a'))
+                : null}
             </Text>
 
             <View style={{ paddingLeft: 5, paddingRight: 16 }}>

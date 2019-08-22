@@ -138,7 +138,9 @@ import forward from './images/forward.png';
 import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
-
+import taxIcon from './images/taxIcon.png';
+import survivalRateIcon from './images/survivalRate.png';
+import locationMarker from './images/locationMarker.png';
 export {
   mapCollapse,
   mapExpand,
@@ -279,5 +281,8 @@ export {
   forward,
   successAnimated,
   trees,
-  greencalendar
+  greencalendar,
+  taxIcon,
+  locationMarker,
+  survivalRateIcon
 };

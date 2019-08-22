@@ -16,7 +16,6 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   projectSnippetContainer: {
     flexDirection: 'column',
-
     shadowOffset: {
       width: 0,
       height: 3
@@ -24,8 +23,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
     shadowOpacity: 0.5,
     elevation: 1,
     padding: 0,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4
+    borderRadius: 7
   },
   projectImageContainer: {
     height: Layout.window.width * 0.5,
@@ -78,8 +76,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   treePlantedtextTrees: {
     color: 'white',
-    paddingLeft: 5,
-    fontWeight: 'bold'
+    paddingLeft: 5
   },
   treePlantedtextPlanted: {
     color: 'white',
@@ -102,9 +99,17 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   locationContainer: {
     flexDirection: 'column',
-    maxWidth: '85%'
+    maxWidth: '65%'
   },
-  costContainer: { flexDirection: 'row' },
+  costContainer: {
+    flexDirection: 'column',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    alignSelf: 'center',
+    flexGrow: 1
+  },
   actionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -112,9 +117,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
     //height: rowHeight + rowHeight / 2,
   },
   project_teaser__contentText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '$cardTextColor',
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#4D5153',
     maxWidth: '90%'
   },
   byOrgContainer: {
@@ -128,21 +133,20 @@ export default (selectplantprojectFull = EStyleSheet.create({
     color: '$cardTextColor'
   },
   locationText: {
-    fontSize: 10,
-    color: '$textColor',
-    fontStyle: 'italic',
-    paddingBottom: 2,
-    color: '$cardTextColor'
+    fontSize: 12,
+    color: '#4D5153',
+    lineHeight: 18
   },
   survivalText: {
     fontSize: 12,
-    paddingTop: 3,
-    paddingBottom: 8,
-    color: '$cardTextColor'
+    color: '#4D5153',
+    lineHeight: 18
   },
   costText: {
-    fontSize: 18,
-    color: '$cardTextColor'
+    fontSize: 20,
+    fontWeight: '600',
+    color: 'rgba(0, 0, 0, 0.6)',
+    textAlign: 'center'
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -183,7 +187,12 @@ export default (selectplantprojectFull = EStyleSheet.create({
   projectNameContainer: {
     flexDirection: 'row',
     width: '100%',
-    paddingBottom: 5,
+    paddingBottom: 16,
     alignItems: 'center'
+  },
+  projectTextRowWithImage: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: 10
   }
 }));

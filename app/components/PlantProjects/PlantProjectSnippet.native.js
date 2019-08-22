@@ -11,6 +11,8 @@ import { targetPlanted, tick, questionmark_orange } from '../../assets';
 import TouchableItem from '../Common/TouchableItem.native';
 import PlantedProgressBar from './PlantedProgressbar.native';
 import NumberFormat from '../Common/NumberFormat';
+import { survivalRateIcon, taxIcon, locationMarker } from '../../assets';
+
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -151,17 +153,32 @@ class PlantProjectSnippet extends React.Component {
               style={styles.projectdetailsContainer}
             >
               <View style={styles.locationContainer}>
-                <Text style={styles.locationText} ellipsizeMode="tail">
-                  {specsProps.location}
-                </Text>
-                <View>
+                <View style={styles.projectTextRowWithImage}>
+                  <Image
+                    source={locationMarker}
+                    style={{ height: 16, marginRight: 10 }}
+                  />
+                  <Text style={styles.locationText} ellipsizeMode="tail">
+                    {specsProps.location}
+                  </Text>
+                </View>
+
+                <View style={styles.projectTextRowWithImage}>
+                  <Image
+                    source={survivalRateIcon}
+                    style={{ height: 16, marginRight: 8 }}
+                  />
                   <Text style={styles.survivalText}>
                     {i18n.t('label.survival_rate')} {':'}{' '}
                     {specsProps.survivalRate}%
                   </Text>
                 </View>
                 {specsProps.taxDeduction && specsProps.taxDeduction.length ? (
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View style={styles.projectTextRowWithImage}>
+                    <Image
+                      source={taxIcon}
+                      style={{ height: 16, marginRight: 8 }}
+                    />
                     <Text style={styles.survivalText}>
                       {i18n.t('label.tax_deductible')} {i18n.t('label.in')}{' '}
                       {deducibleText1}
@@ -186,21 +203,26 @@ class PlantProjectSnippet extends React.Component {
                     data={specsProps.treeCost}
                   />
                 </Text>
+                <Text
+                  style={{
+                    color: 'rgba(0, 0, 0, 0.6)',
+                    fontSize: 12,
+                    textAlign: 'center'
+                  }}
+                >
+                  {i18n.t('label.perTree')}
+                </Text>
               </View>
             </View>
 
-            <View key="actionContainer" style={styles.actionContainer}>
-              <View key="byOrgContainer" style={styles.byOrgContainer}>
-                <Text
-                  style={styles.byOrgText}
-                  ellipsizeMode="tail"
-                  numberOfLines={1}
-                >
-                  {teaserProps.tpoName}
-                </Text>
-              </View>
+            {/* <View key="actionContainer" style={styles.actionContainer}>
+							<View key="byOrgContainer" style={styles.byOrgContainer}>
+								<Text style={styles.byOrgText} ellipsizeMode="tail" numberOfLines={1}>
+									{teaserProps.tpoName}
+								</Text>
+							</View>
 
-              {this.props.plantProject.allowDonations ? (
+							{this.props.plantProject.allowDonations ? (
                 <View key="buttonContainer" style={styles.buttonContainer}>
                   <PrimaryButton
                     style={styles.buttonItem}
@@ -214,7 +236,7 @@ class PlantProjectSnippet extends React.Component {
                   </PrimaryButton>
                 </View>
               ) : null}
-            </View>
+            </View> */}
           </View>
         </CardLayout>
       </TouchableHighlight>

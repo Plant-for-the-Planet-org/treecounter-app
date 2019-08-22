@@ -180,12 +180,13 @@ export default (trillionStyles = EStyleSheet.create({
     borderRadius: 7,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: '#d5d5d5'
+    borderColor: '#d5d5d5',
+    maxWidth: 340,
+    padding: 20
   },
   featuredProjectCardRow: {
     display: 'flex',
-    flexDirection: 'row',
-    padding: 20
+    flexDirection: 'row'
   },
   featuredProjectCardImage: {
     width: 64,

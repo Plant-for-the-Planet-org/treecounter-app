@@ -15,16 +15,26 @@ export default class FeaturedProject extends Component {
             style={styles.featuredProjectCardImage}
             resizeMode="contain"
           />
-          <View style={{ paddingLeft: 16 }}>
-            <Text style={{ fontWeight: 'bold' }}>{this.props.orgname}</Text>
+          <View
+            style={{
+              paddingLeft: 16,
+              paddingRight: 16,
+              flexWrap: 'wrap',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+          >
+            <Text style={{ fontWeight: 'bold', flex: 1, flexWrap: 'wrap' }}>
+              {this.props.orgname}
+            </Text>
             <View style={styles.featuredProjectCardIconContainer}>
               <Image
                 style={styles.featuredProjectCardIcon}
                 source={smalltree}
               />
               <Text style={styles.featuredProjectCardIconText}>
-                {this.props.treespledged.toLocaleString()} Trees Pledged
-                {/* {i18n.t('label.treespledged')} */}
+                {this.props.treespledged.toLocaleString()}
+                {/* Trees Pledged */} {i18n.t('label.treesPledged')}
               </Text>
             </View>
             <View style={styles.featuredProjectCardIconContainer}>

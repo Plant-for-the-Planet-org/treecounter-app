@@ -11,8 +11,6 @@ import {
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
-import { fetchPledgesAction } from './../../actions/pledgeAction';
-import { pledgesSelector } from './../../selectors';
 import PledgeTabView from './PledgeTabView.native';
 import { getImageUrl } from '../../actions/apiRouting';
 import { bindActionCreators } from 'redux';
@@ -21,35 +19,28 @@ import { eventCover } from './../../assets';
 import CardLayout from '../Common/Card';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 
+import {
+  fetchPledgesAction,
+  postPledge,
+  clearTimeoutAction
+} from '../../actions/pledgeAction';
+import { pledgesSelector, pledgeEventSelector } from '../../selectors';
+
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 
 class PledgeEvents extends Component {
-  state = {
-    allPledgeImagesNew: [],
-    pledges: {}
-  };
-
   componentDidMount() {
     const eventSlug = this.props.navigation.getParam('slug');
     this.props.fetchPledgesAction(eventSlug);
   }
 
-  componentDidUpdate() {
-    if (
-      Object.keys(this.state.pledges).length === 0 &&
-      this.state.pledges.constructor === Object
-    ) {
-      this.setState({
-        pledges: this.props.pledges.pledges
-      });
-    }
+  componentWillUnmount() {
+    this.props.clearTimeoutAction(this.props.pledges.timeoutID);
   }
+
   render() {
     const { navigation, userProfile, isLoggedIn } = this.props;
-    //console.log(this.state.pledges.description);
-    console.log(this.state.pledges.pledgeEventImages);
-
     return (
       <View style={styles.peRootView}>
         <ScrollView contentContainerStyle={styles.peRootScrollView}>
@@ -70,9 +61,9 @@ class PledgeEvents extends Component {
             </Text>
           </View>
 
-          {this.state.pledges &&
-          this.state.pledges.highestPledgeEvents &&
-          this.state.pledges.highestPledgeEvents.length > 0 ? (
+          {this.props.pledges &&
+          this.props.pledges.highestPledgeEvents &&
+          this.props.pledges.highestPledgeEvents.length > 0 ? (
             // If there are Pledges
             <View>
               <Text style={[styles.eventSubTitle, { marginHorizontal: 20 }]}>
@@ -82,7 +73,7 @@ class PledgeEvents extends Component {
                     .toLocaleString()
                 })}
               </Text>
-              <PledgeTabView pledges={this.state.pledges} />
+              <PledgeTabView pledges={this.props.pledges} />
             </View>
           ) : (
             // If there are no Pledges
@@ -92,16 +83,16 @@ class PledgeEvents extends Component {
               </Text>
             </View>
           )}
-          {this.state.pledges &&
-          this.state.pledges.pledgeEventImages &&
-          this.state.pledges.pledgeEventImages.length > 0 ? (
+          {this.props.pledges &&
+          this.props.pledges.pledgeEventImages &&
+          this.props.pledges.pledgeEventImages.length > 0 ? (
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.peSliderScrollView}
             >
               {/* {pledgeImages} */}
-              {this.state.pledges.pledgeEventImages.map(pledgeImage => (
+              {this.props.pledges.pledgeEventImages.map(pledgeImage => (
                 <Image
                   style={styles.peSliderImage}
                   source={{
@@ -127,8 +118,8 @@ class PledgeEvents extends Component {
           style={styles.makePledgeButton}
           onPress={() => {
             updateStaticRoute('app_pledge_form', navigation, {
-              slug: this.state.pledges.slug,
-              plantProject: this.state.pledges.plantProject
+              slug: this.props.pledges.slug,
+              plantProject: this.props.pledges.plantProject
             });
           }}
         >
@@ -145,11 +136,15 @@ class PledgeEvents extends Component {
 }
 
 const mapStateToProps = state => ({
-  pledges: state.pledges
+  pledges: pledgesSelector(state),
+  pledgeEvents: pledgeEventSelector(state)
 });
 
-PledgeEvents.propTypes = {
-  pledges: PropTypes.object.isRequired,
-  navigation: PropTypes.any
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    { fetchPledgesAction, postPledge, clearTimeoutAction },
+    dispatch
+  );
 };
-export default connect(mapStateToProps, { fetchPledgesAction })(PledgeEvents);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PledgeEvents);

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import numeral from 'numeral';
 import i18n from '../../locales/i18n';
 import { View, Text, Image } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
-import { targetPlanted } from '../../assets';
+import { flagTarget } from '../../assets';
 import { delimitNumbers } from '../../utils/utils';
 
 class PlantedProgressBar extends React.Component {
@@ -35,14 +35,15 @@ class PlantedProgressBar extends React.Component {
                 ? {
                     height: '100%',
                     flexDirection: 'row',
-                    backgroundColor: '#b9d384',
-                    borderColor: '#b9d384',
+                    backgroundColor: '#89B53A',
+                    borderColor: '#89B53A',
                     width: treeCountWidth + '%',
                     paddingRight: 10,
                     padding: 5,
                     borderTopRightRadius: 20,
                     borderBottomRightRadius: 20,
-                    borderWidth: 0.5
+                    borderWidth: 0.5,
+                    borderBottomLeftRadius: 7
                   }
                 : {
                     height: '100%',
@@ -62,10 +63,10 @@ class PlantedProgressBar extends React.Component {
             }}
           >
             <Text style={styles.treePlantedtextPlanted}>
-              {delimitNumbers(countPlanted)}
+              {numeral(countPlanted).format('0.0 a')}
             </Text>
             <Text style={styles.treePlantedtextTrees}>
-              {i18n.t('label.trees')}
+              {i18n.t('label.treesPlanted')}
             </Text>
           </View>
         </View>
@@ -73,11 +74,11 @@ class PlantedProgressBar extends React.Component {
         {!this.props.hideTargetImage ? (
           <View style={styles.targetContainer}>
             <Text style={styles.treePlantedtext}>
-              {countTarget ? delimitNumbers(countTarget) : null}
+              {countTarget ? numeral(countTarget).format('0.0 a') : null}
             </Text>
 
             <View style={{ paddingLeft: 5, paddingRight: 16 }}>
-              <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
+              <Image source={flagTarget} style={{ width: 15, height: 15 }} />
             </View>
           </View>
         ) : null}

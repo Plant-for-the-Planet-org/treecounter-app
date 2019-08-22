@@ -24,7 +24,7 @@ import i18n from '../../locales/i18n';
 import Offline from './Gateways/Offline';
 import InlineLink from '../Common/InlineLink.native';
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import { formatNumber } from '../../utils/utils';
+import { formatNumber, delimitNumbers } from '../../utils/utils';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
@@ -244,7 +244,9 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
               source={check_green}
             />
             <Text style={{ padding: 10 }}>
-              {i18n.t('label.thankyou_planting', { count: context.treeCount })}
+              {i18n.t('label.thankyou_planting', {
+                count: delimitNumbers(context.treeCount)
+              })}
             </Text>
 
             <InlineLink
@@ -273,7 +275,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
               {i18n.t('label.amount')}: {formatNumber(amount, null, currency)}
             </Text>
             <Text style={{ fontWeight: 'bold' }}>
-              {i18n.t('label.trees')}: {context.treeCount}
+              {i18n.t('label.trees')}: {delimitNumbers(context.treeCount)}
             </Text>
 
             <ScrollView>

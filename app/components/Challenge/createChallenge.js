@@ -17,7 +17,6 @@ import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import ChallengeList from './challengeList';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
-import { delimitNumbers } from '../../utils/utils';
 
 let TCombForm = t.form.Form;
 const getFormLayoutTemplate = () => {

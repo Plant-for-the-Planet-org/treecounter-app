@@ -31,7 +31,12 @@ const createOptions = (fontSize, padding) => {
 
 const SEPAForm = props => (
   <form className="payment-option" onSubmit={props.onSubmitSEPAForm}>
-    <div onClick={props.handleArrowClick} className="payment-option-header">
+    <div
+      onClick={() => {
+        props.handleArrowClick('2');
+      }}
+      className="payment-option-header"
+    >
       <span>
         <img className="logo" src={payment_sepa} />
         {i18n.t('label.sepa_debit')}

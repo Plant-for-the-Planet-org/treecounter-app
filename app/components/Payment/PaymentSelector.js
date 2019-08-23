@@ -84,8 +84,12 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     }
   }
 
-  handleExpandedClicked = optionNumber => {
-    this.props.handleExpandedClicked(optionNumber);
+  handleExpandedClickedCC = () => {
+    this.props.handleExpandedClicked('1');
+  };
+
+  handleExpandedClickedSEPA = () => {
+    this.props.handleExpandedClicked('2');
   };
 
   render() {
@@ -156,7 +160,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                   paymentDetails={this.props.donorDetails}
                   account={accounts[accountName]}
                   expanded={this.props.expandedOption === '1'}
-                  handleExpandedClicked={this.handleExpandedClicked}
+                  handleExpandedClicked={this.handleExpandedClickedCC}
                   {...gatewayProps}
                 />
               </div>
@@ -176,8 +180,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                     topName: this.props.context.tpoName
                   }}
                   account={accounts[accountName]}
-                  expanded={this.props.expandedOption === '1'}
-                  handleExpandedClicked={this.handleExpandedClicked}
+                  expanded={this.props.expandedOption === '2'}
+                  handleExpandedClicked={this.handleExpandedClickedSEPA}
                   {...gatewayProps}
                 />
               </div>

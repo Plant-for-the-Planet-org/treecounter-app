@@ -95,8 +95,8 @@ class CheckoutForm extends React.Component {
     }
   };
 
-  handleArrowClick = () => {
-    this.props.handleExpandedClicked('1');
+  handleArrowClick = number => {
+    this.props.handleExpandedClicked(number);
   };
 
   render() {

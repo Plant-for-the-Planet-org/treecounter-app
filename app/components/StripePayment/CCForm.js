@@ -31,7 +31,12 @@ const createOptions = (fontSize, padding) => {
 
 const CCForm = props => (
   <form className="payment-option" onSubmit={props.onSubmitCCForm}>
-    <div onClick={props.handleArrowClick} className="payment-option-header">
+    <div
+      onClick={() => {
+        props.handleArrowClick('1');
+      }}
+      className="payment-option-header"
+    >
       <span>
         <img className="logo" src={payment_credit} />
         {i18n.t('label.creditCard')}

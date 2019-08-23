@@ -92,7 +92,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     const {
       accounts,
       paymentMethods,
-      amount,
       currency,
       context,
       donorDetails
@@ -138,11 +137,12 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
               })}
             </div>
           )}
-          <div>{`${i18n.t('label.amount')}: ${amount} ${currency}`}</div>
+          <div>{`${i18n.t('label.amount')}: ${
+            donorDetails.amount
+          } ${currency}`}</div>
           <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
         </div>
         {Object.keys(paymentMethods).map(gateway => {
-          console.log(gateway);
           const accountName = paymentMethods[gateway];
           if ('stripe_cc' === gateway) {
             return (

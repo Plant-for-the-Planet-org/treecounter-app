@@ -1,9 +1,9 @@
 // CheckoutForm.js
 import React from 'react';
-import { injectStripe, CardElement } from 'react-stripe-elements';
+import { injectStripe, CardElement, IbanElement } from 'react-stripe-elements';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { payment_credit, payment_arrow } from '../../assets';
+import { payment_credit, payment_arrow, payment_sepa } from '../../assets';
 import Axios from 'axios';
 import LoadingIndicators from '../../components/Common/LoadingIndicator';
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -47,8 +47,8 @@ class CheckoutForm extends React.Component {
   };
 
   componentDidMount() {
-    console.log('PAYMENTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
-    console.log(this.props.paymentDetails);
+    console.log('HEJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
+    console.log(this.props);
   }
 
   handleSubmit = async ev => {
@@ -138,20 +138,41 @@ class CheckoutForm extends React.Component {
     let displayNone = classnames({
       'display-none': !this.props.expanded
     });
+    const paymentType = this.props.paymentType;
     return !this.state.loading ? (
       <form className="payment-option" onSubmit={this.handleSubmit}>
         <div onClick={this.handleArrowClick} className="payment-option-header">
           <span>
-            <img className="logo" src={payment_credit} />
-            {i18n.t('label.creditCard')}
+            <img
+              className="logo"
+              src={paymentType === 'stripe_cc' ? payment_credit : payment_sepa}
+            />
+            {paymentType === 'stripe_cc'
+              ? i18n.t('label.creditCard')
+              : i18n.t('label.sepa_debit')}
           </span>
           <img className={arrow} src={payment_arrow} />
         </div>
         <div className={displayNone}>
-          <CardElement
-            hidePostalCode={true}
-            {...createOptions(this.props.fontSize)}
-          />
+          {paymentType === 'stripe_cc' ? (
+            <CardElement
+              hidePostalCode={true}
+              {...createOptions(this.props.fontSize)}
+            />
+          ) : (
+            <IbanElement
+              supportedCountries={['SEPA']}
+              onChange={this.handleChange}
+              {...createOptions()}
+            />
+          )}
+          {paymentType === 'stripe_sepa' && (
+            <div className="mandate-acceptance">
+              {i18n.t('label.stripe_sepa_des1')}{' '}
+              {this.props.paymentDetails.tpoName}{' '}
+              {i18n.t('label.stripe_sepa_des2')}
+            </div>
+          )}
           <PrimaryButton>{i18n.t('label.pay')}</PrimaryButton>
         </div>
       </form>
@@ -164,6 +185,9 @@ class CheckoutForm extends React.Component {
 export default injectStripe(CheckoutForm);
 
 CheckoutForm.propTypes = {
+  context: PropTypes.object,
+  tpoName: PropTypes.string,
+  paymentType: PropTypes.func,
   paymentDetails: PropTypes.object,
   stripe: PropTypes.object,
   createPaymentMethod: PropTypes.func,

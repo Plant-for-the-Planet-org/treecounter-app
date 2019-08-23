@@ -22,8 +22,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
 
   componentDidMount() {
-    const props = this.props;
-
     if (props.paymentMethods) {
       // lookup stripe related payment methods for the current country/currency combination
       const stripeGateways = Object.keys(props.paymentMethods).filter(gateway =>
@@ -143,14 +141,16 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
         </div>
         {Object.keys(paymentMethods).map(gateway => {
+          console.log(gateway);
           const accountName = paymentMethods[gateway];
           if ('stripe_cc' === gateway) {
             return (
               <div key={gateway}>
-                {this.state.errorMessage ? (
-                  <div>this.state.errorMessage</div>
-                ) : null}
+                {/* {this.state.errorMessage ? (
+                  <div>{this.state.errorMessage}</div>
+                ) : null} */}
                 <StripeContainer
+                  paymentType="stripe_cc"
                   stripe={this.state.stripe}
                   paymentDetails={this.props.donorDetails}
                   account={accounts[accountName]}
@@ -158,36 +158,30 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                   handleExpandedClicked={this.handleExpandedClicked}
                   {...gatewayProps}
                 />
-                {/* <Elements key={gateway}>
-                  <StripeCC
-                    onSuccess={this.decorateSuccess(gateway, accountName)}
-                    account={accounts[accountName]}
-                    expanded={this.props.expandedOption === '1'}
-                    handleExpandedClicked={this.handleExpandedClicked}
-                    {...gatewayProps}
-                  />
-                </Elements> */}
               </div>
             );
           }
-          // if ('stripe_sepa' === gateway) {
-          //   return (
-          //     <div key={gateway}>
-          //       {this.state.errorMessage ? (
-          //         <div>this.state.errorMessage</div>
-          //       ) : null}
-          //       <Elements key={gateway}>
-          //         <StripeSepa
-          //           onSuccess={this.decorateSuccess(gateway, accountName)}
-          //           account={accounts[accountName]}
-          //           expanded={this.props.expandedOption === '2'}
-          //           handleExpandedClicked={this.handleExpandedClicked}
-          //           {...gatewayProps}
-          //         />
-          //       </Elements>
-          //     </div>
-          //   );
-          // }
+          if ('stripe_sepa' === gateway) {
+            return (
+              <div key={gateway}>
+                {/* {this.state.errorMessage ? (
+                  <div>{this.state.errorMessage}</div>
+                ) : null} */}
+                <StripeContainer
+                  paymentType="stripe_sepa"
+                  stripe={this.state.stripe}
+                  paymentDetails={{
+                    ...this.props.donorDetails,
+                    topName: this.props.context.tpoName
+                  }}
+                  account={accounts[accountName]}
+                  expanded={this.props.expandedOption === '1'}
+                  handleExpandedClicked={this.handleExpandedClicked}
+                  {...gatewayProps}
+                />
+              </div>
+            );
+          }
           // if ('paypal' === gateway) {
           //   return (
           //     <div key={gateway}>

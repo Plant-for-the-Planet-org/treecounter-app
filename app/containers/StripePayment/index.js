@@ -23,9 +23,10 @@ class StripePayment extends Component {
   render() {
     let props = this.props;
     return (
-      <StripeProvider stripe={this.props.stripe}>
+      <StripeProvider stripe={props.stripe}>
         <Elements>
           <InjectedCheckoutForm
+            paymentType={props.paymentType}
             currency={props.currency}
             account={props.account}
             expanded={props.expanded}

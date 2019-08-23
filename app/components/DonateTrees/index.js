@@ -302,12 +302,6 @@ export default class DonateTrees extends Component {
     });
   };
 
-  componentDidMount() {
-    console.log('===Tree Donate State!===');
-    console.log(this.state.form);
-    console.log('========================');
-  }
-
   componentWillUnmount() {
     this.props.paymentClear();
   }

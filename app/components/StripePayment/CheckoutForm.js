@@ -135,16 +135,14 @@ class CheckoutForm extends React.Component {
 export default injectStripe(CheckoutForm);
 
 CheckoutForm.propTypes = {
-  context: PropTypes.object,
-  tpoName: PropTypes.string,
   paymentType: PropTypes.func,
   paymentDetails: PropTypes.object,
   stripe: PropTypes.object,
   createPaymentMethod: PropTypes.func,
   createSource: PropTypes.func,
-  fontSize: PropTypes.string,
   account: PropTypes.object.isRequired,
   expanded: PropTypes.bool,
+  fontSize: PropTypes.object,
   handleExpandedClicked: PropTypes.func,
   onSuccess: PropTypes.func,
   onError: PropTypes.func

@@ -12,6 +12,7 @@ import TouchableItem from '../Common/TouchableItem.native';
 import PlantedProgressBar from './PlantedProgressbar.native';
 import NumberFormat from '../Common/NumberFormat';
 import { survivalRateIcon, taxIcon, locationMarker } from '../../assets';
+import { formatNumber } from '../../utils/utils';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -65,7 +66,9 @@ class PlantProjectSnippet extends React.Component {
     }
 
     if (imageFile) {
-      projectImage = { image: imageFile };
+      projectImage = {
+        image: imageFile
+      };
     } else {
       projectImage = plantProjectImages && plantProjectImages.find(() => true);
     }
@@ -105,6 +108,7 @@ class PlantProjectSnippet extends React.Component {
         onPress={onPressHandler}
       >
         <CardLayout style={[styles.projectSnippetContainer]}>
+          {' '}
           {projectImage ? (
             <View style={styles.projectImageContainer}>
               <Image
@@ -117,13 +121,13 @@ class PlantProjectSnippet extends React.Component {
                   )
                 }}
                 resizeMode={'cover'}
-              />
+              />{' '}
             </View>
-          ) : null}
+          ) : null}{' '}
           <PlantedProgressBar
             countPlanted={specsProps.countPlanted}
             countTarget={specsProps.countTarget}
-          />
+          />{' '}
           <View style={styles.projectSpecsContainer}>
             <View
               key="projectNameContainer"
@@ -134,9 +138,9 @@ class PlantProjectSnippet extends React.Component {
                 numberOfLines={2}
                 style={styles.project_teaser__contentText}
               >
-                {teaserProps.projectName}
-                {/* by {teaserProps.tpoName} */}
-              </Text>
+                {' '}
+                {teaserProps.projectName} {/* by {teaserProps.tpoName} */}{' '}
+              </Text>{' '}
               {teaserProps.isCertified ? (
                 <Image
                   source={tick}
@@ -149,67 +153,81 @@ class PlantProjectSnippet extends React.Component {
                     marginTop: 6
                   }}
                 />
-              ) : null}
-            </View>
+              ) : null}{' '}
+            </View>{' '}
             <View
               key="projectdetailsContainer"
               style={styles.projectdetailsContainer}
             >
               <View style={styles.locationContainer}>
+                {' '}
                 {specsProps.location && specsProps.location !== 'undefined' ? (
                   <View style={styles.projectTextRowWithImage}>
                     <Image
                       source={locationMarker}
-                      style={{ height: 16, marginRight: 10 }}
-                    />
+                      style={{
+                        height: 16,
+                        marginRight: 10
+                      }}
+                    />{' '}
                     <Text style={styles.locationText} ellipsizeMode="tail">
-                      {specsProps.location}
-                    </Text>
+                      {' '}
+                      {specsProps.location}{' '}
+                    </Text>{' '}
                   </View>
-                ) : null}
+                ) : null}{' '}
                 {specsProps.survivalRate ? (
                   <View style={styles.projectTextRowWithImage}>
                     <Image
                       source={survivalRateIcon}
-                      style={{ height: 16, marginRight: 8 }}
-                    />
+                      style={{
+                        height: 16,
+                        marginRight: 8
+                      }}
+                    />{' '}
                     <Text style={styles.survivalText}>
+                      {' '}
                       {i18n.t('label.survival_rate')} {':'}{' '}
-                      {specsProps.survivalRate}%
-                    </Text>
+                      {specsProps.survivalRate} %
+                    </Text>{' '}
                   </View>
-                ) : null}
+                ) : null}{' '}
                 {specsProps.taxDeduction && specsProps.taxDeduction.length ? (
                   <View style={styles.projectTextRowWithImage}>
                     <Image
                       source={taxIcon}
-                      style={{ height: 16, marginRight: 8 }}
-                    />
+                      style={{
+                        height: 16,
+                        marginRight: 8
+                      }}
+                    />{' '}
                     <Text style={styles.survivalText}>
+                      {' '}
                       {i18n.t('label.tax_deductible')} {i18n.t('label.in')}{' '}
-                      {deducibleText1}
-                    </Text>
+                      {deducibleText1}{' '}
+                    </Text>{' '}
                   </View>
                 ) : (
                   <View style={styles.projectTextRowWithImage}>
                     <Image
                       source={taxIcon}
-                      style={{ height: 16, marginRight: 8 }}
-                    />
+                      style={{
+                        height: 16,
+                        marginRight: 8
+                      }}
+                    />{' '}
                     <Text style={styles.survivalText}>
-                      {i18n.t('label.no_tax_deductible')}
-                    </Text>
+                      {' '}
+                      {i18n.t('label.no_tax_deductible')}{' '}
+                    </Text>{' '}
                   </View>
-                )}
+                )}{' '}
               </View>
-
               <View style={styles.costContainer}>
                 <Text style={styles.costText}>
-                  <NumberFormat
-                    currency={currency}
-                    data={specsProps.treeCost}
-                  />
-                </Text>
+                  {' '}
+                  {formatNumber(specsProps.treeCost, null, currency)}{' '}
+                </Text>{' '}
                 <Text
                   style={{
                     color: 'rgba(0, 0, 0, 0.6)',
@@ -217,11 +235,11 @@ class PlantProjectSnippet extends React.Component {
                     textAlign: 'center'
                   }}
                 >
-                  {i18n.t('label.perTree')}
-                </Text>
-              </View>
+                  {' '}
+                  {i18n.t('label.perTree')}{' '}
+                </Text>{' '}
+              </View>{' '}
             </View>
-
             <View key="actionContainer" style={styles.actionContainer}>
               <View key="buttonContainer" style={styles.buttonContainer}>
                 <PrimaryButton
@@ -230,10 +248,9 @@ class PlantProjectSnippet extends React.Component {
                   textStyle={styles.buttonTextStyle}
                   onClick={() => this.props.onSelectClickedFeaturedProjects(id)}
                 >
-                  <Text> {i18n.t('label.share')}</Text>
-                </PrimaryButton>
+                  <Text> {i18n.t('label.share')} </Text>{' '}
+                </PrimaryButton>{' '}
               </View>
-
               {this.props.plantProject.allowDonations ? (
                 <View key="buttonContainer" style={styles.buttonContainer}>
                   <PrimaryButton
@@ -244,18 +261,20 @@ class PlantProjectSnippet extends React.Component {
                       this.props.onSelectClickedFeaturedProjects(id)
                     }
                   >
-                    <Text> {i18n.t('label.donate')}</Text>
-                  </PrimaryButton>
+                    <Text> {i18n.t('label.donate')} </Text>{' '}
+                  </PrimaryButton>{' '}
                 </View>
-              ) : null}
-            </View>
-          </View>
-        </CardLayout>
+              ) : null}{' '}
+            </View>{' '}
+          </View>{' '}
+        </CardLayout>{' '}
       </TouchableHighlight>
     );
   }
 }
-PlantProjectSnippet.defaultProps = { clickable: true };
+PlantProjectSnippet.defaultProps = {
+  clickable: true
+};
 PlantProjectSnippet.propTypes = {
   plantProject: PropTypes.object.isRequired,
   callExpanded: PropTypes.func,

@@ -4,7 +4,7 @@ import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n';
 import { tree } from '../../assets';
 import NumberFormat from '../Common/NumberFormat';
-import { formatNumber, delimitNumbers } from '../../utils/utils';
+import { formatNumber } from '../../utils/utils';
 class TreeCountSelector extends React.Component {
   constructor(props) {
     super(props);
@@ -160,7 +160,7 @@ class TreeCountSelector extends React.Component {
             <input
               type="text"
               disabled={this.state.isFixed}
-              value={delimitNumbers(this.state.variableAmount)}
+              value={String(this.state.variableAmount)}
               onChange={evt =>
                 this.handleVariableAmountChange(evt.target.value)
               }

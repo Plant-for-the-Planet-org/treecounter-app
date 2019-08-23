@@ -8,7 +8,7 @@ import StripeSepa from './Gateways/StripeSepa';
 import Paypal from './Gateways/Paypal';
 import Offline from './Gateways/Offline';
 import i18n from '../../locales/i18n';
-import { formatNumber } from '../../utils/utils';
+import { formatNumber, delimitNumbers } from '../../utils/utils';
 
 import { StripeProvider, Elements } from './Stripe/stripeDefs';
 
@@ -127,11 +127,11 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                 {gatewayProps.context.supportTreecounter
                   ? i18n.t('label.support_user_trees', {
                       user: giftToName,
-                      count: gatewayProps.context.treeCount
+                      count: delimitNumbers(gatewayProps.context.treeCount)
                     })
                   : i18n.t('label.gift_user_trees', {
                       user: giftToName,
-                      count: gatewayProps.context.treeCount
+                      count: delimitNumbers(gatewayProps.context.treeCount)
                     })}
               </div>
             )}
@@ -147,7 +147,9 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
               null,
               currency
             )}`}</div>
-            <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
+            <div>{`${i18n.t('label.trees')}: ${delimitNumbers(
+              context.treeCount
+            )}`}</div>
           </div>
           {Object.keys(paymentMethods).map(gateway => {
             const accountName = paymentMethods[gateway];

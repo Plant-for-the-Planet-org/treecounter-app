@@ -42,6 +42,7 @@ class TreecounterGraphicsText extends Component {
       }
     } = this.props;
     let dom;
+    console.log(this.props, planted, personal, community);
     const targetCount = convertNumber(target, 2);
     const plantedCount = convertNumber(parseInt(planted), 2);
     {

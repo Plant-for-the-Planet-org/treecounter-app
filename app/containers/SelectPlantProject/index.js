@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -6,73 +6,73 @@ import { updateRoute } from '../../helpers/routerHelper';
 
 import {
   getAllPlantProjectsSelector,
-  currenciesSelector,
-  sortedUserContributionsSelector
+  currenciesSelector
+  // sortedUserContributionsSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import SelectPlantProject from '../../components/SelectPlantProject';
 import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper';
 import { fetchCurrencies } from '../../actions/currencies';
 
-class SelectPlantProjectContainer extends Component {
-  // selectFirstProject
-  componentWillMount() {
-    let plantProjects = this.props.plantProjects.filter(
-      project => project.allowDonations
-    );
-    let userPreviousDonations = this.props.userSortedContributions.filter(
-      project => project.contributionType === 'donation'
-    );
-    if (userPreviousDonations.length > 0) {
-      let selectedProject = plantProjects.filter(
-        project => project.id === userPreviousDonations[0].plantProjectId
-      );
-      if (selectedProject.length > 0) {
-        //TODO hkurra commenting this to fix donation on APP
-        // this.selectPlantProjectAction(selectedProject[0].id);
-      }
-    }
-  }
+class SelectPlantProjectContainer extends PureComponent {
+  // componentWillMount() {
+  //   let plantProjects = this.props.plantProjects.filter(
+  //     project => project.allowDonations
+  //   );
+  //   let userPreviousDonations = this.props.userSortedContributions.filter(
+  //     project => project.contributionType === 'donation'
+  //   );
+  //   if (userPreviousDonations.length > 0) {
+  //     let selectedProject = plantProjects.filter(
+  //       project => project.id === userPreviousDonations[0].plantProjectId
+  //     );
+  //     if (selectedProject.length > 0) {
+  //       //TODO hkurra commenting this to fix donation on APP
+  //       // this.selectPlantProjectAction(selectedProject[0].id);
+  //     }
+  //   }
+  // }
 
-  componentWillReceiveProps(nextProps) {
-    let plantProjects = nextProps.plantProjects.filter(
-      project => project.allowDonations
-    );
-    let userPreviousDonations = nextProps.userSortedContributions.filter(
-      project => project.contributionType === 'donation'
-    );
-    if (userPreviousDonations.length > 0) {
-      let selectedProject = plantProjects.filter(
-        project => project.id === userPreviousDonations[0].plantProjectId
-      );
-      if (selectedProject.length > 0) {
-        //TODO hkurra commenting this to fix donation on APP
-        // this.selectPlantProjectAction(selectedProject[0].id);
-      }
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   let plantProjects = nextProps.plantProjects.filter(
+  //     project => project.allowDonations
+  //   );
+  //   let userPreviousDonations = nextProps.userSortedContributions.filter(
+  //     project => project.contributionType === 'donation'
+  //   );
+  //   if (userPreviousDonations.length > 0) {
+  //     let selectedProject = plantProjects.filter(
+  //       project => project.id === userPreviousDonations[0].plantProjectId
+  //     );
+  //     if (selectedProject.length > 0) {
+  //       //TODO hkurra commenting this to fix donation on APP
+  //       // this.selectPlantProjectAction(selectedProject[0].id);
+  //     }
+  //   }
+  // }
 
   componentDidMount() {
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
   }
+
   render() {
-    let props = { ...this.props };
-    //filter project only donatable
+    // filter project only donatable
     let plantProjects = this.props.plantProjects.filter(
       project => project.allowDonations
     );
-    props.plantProjects = plantProjects;
     return (
       <SelectPlantProject
         selectProject={this.selectPlantProjectAction}
         currencies={this.props.currencies}
         onMoreClick={this.onMoreClick}
-        {...props}
+        plantProjects={plantProjects}
+        navigation={this.props.navigation}
       />
     );
   }
+
   onMoreClick = (id, name) => {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
@@ -97,7 +97,7 @@ class SelectPlantProjectContainer extends Component {
 
 const mapStateToProps = state => ({
   plantProjects: getAllPlantProjectsSelector(state),
-  userSortedContributions: sortedUserContributionsSelector(state),
+  // userSortedContributions: sortedUserContributionsSelector(state),
   currencies: currenciesSelector(state)
 });
 
@@ -114,7 +114,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 SelectPlantProjectContainer.propTypes = {
   plantProjects: PropTypes.array,
-  userSortedContributions: PropTypes.array,
+  // userSortedContributions: PropTypes.array,
   currencies: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
   navigation: PropTypes.any,

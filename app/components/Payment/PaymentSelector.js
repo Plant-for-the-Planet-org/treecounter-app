@@ -22,6 +22,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
 
   componentDidMount() {
+    const props = this.props;
     if (props.paymentMethods) {
       // lookup stripe related payment methods for the current country/currency combination
       const stripeGateways = Object.keys(props.paymentMethods).filter(gateway =>
@@ -146,9 +147,9 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           if ('stripe_cc' === gateway) {
             return (
               <div key={gateway}>
-                {/* {this.state.errorMessage ? (
+                {this.state.errorMessage ? (
                   <div>{this.state.errorMessage}</div>
-                ) : null} */}
+                ) : null}
                 <StripeContainer
                   paymentType="stripe_cc"
                   stripe={this.state.stripe}

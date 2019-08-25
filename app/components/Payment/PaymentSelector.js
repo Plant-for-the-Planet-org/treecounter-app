@@ -95,11 +95,13 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   render() {
     const {
       accounts,
-      paymentMethods,
+      // paymentMethods,
       currency,
       context,
       donorDetails
     } = this.props;
+
+    const paymentMethods = { stripe_cc: {}, stripe_sepa: {} };
 
     const gatewayProps = {
       context: context,

@@ -127,7 +127,9 @@ class CheckoutForm extends React.Component {
         )}
       </div>
     ) : (
-      <LoadingIndicators />
+      <div className="card-center">
+        <LoadingIndicators />
+      </div>
     );
   }
 }

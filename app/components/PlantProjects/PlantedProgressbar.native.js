@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import { View, Text, Image } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
-import { targetPlanted } from '../../assets';
+import { challenge_outline as targetPlanted } from '../../assets';
 import { delimitNumbers } from '../../utils/utils';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class PlantedProgressBar extends React.Component {
   constructor(props) {
@@ -33,9 +34,7 @@ class PlantedProgressBar extends React.Component {
             style={
               treeCountWidth > 0
                 ? {
-                    height: '100%',
-                    flexDirection: 'row',
-                    backgroundColor: '#b9d384',
+                    backgroundColor: EStyleSheet.value('$newPrimary'),
                     borderColor: '#b9d384',
                     width: treeCountWidth + '%',
                     paddingRight: 10,
@@ -45,8 +44,6 @@ class PlantedProgressBar extends React.Component {
                     borderWidth: 0.5
                   }
                 : {
-                    height: '100%',
-                    flexDirection: 'row',
                     padding: 5
                   }
             }
@@ -76,7 +73,7 @@ class PlantedProgressBar extends React.Component {
               {countTarget ? delimitNumbers(countTarget) : null}
             </Text>
 
-            <View style={{ paddingLeft: 5, paddingRight: 16 }}>
+            <View style={{ paddingLeft: 5.5, paddingRight: 12 }}>
               <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
             </View>
           </View>

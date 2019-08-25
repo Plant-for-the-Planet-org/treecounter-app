@@ -46,15 +46,16 @@ export default (selectplantprojectFull = EStyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    backgroundColor: '#d2e3af',
+    backgroundColor: '$greyColor',
     shadowOffset: {
       width: 0,
       height: -3
     },
-    height: rowHeight * 1.7,
+    height: rowHeight * 1.75,
     shadowOpacity: 0.1,
     shadowRadius: 2,
-    elevation: 1
+    elevation: 1,
+    lineHeight: 19
   },
   treePlantedContainer: {
     flexDirection: 'row',
@@ -81,7 +82,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   treePlantedtextPlanted: {
     color: 'white',
     fontWeight: 'bold',
-    paddingLeft: 16
+    paddingLeft: 16,
+    fontSize: 14
   },
   targetContainer: {
     width: '100%',

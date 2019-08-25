@@ -7,7 +7,13 @@ import styles from '../../styles/selectplantproject/selectplantproject-snippet.n
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { getImageUrl } from '../../actions/apiRouting';
-import { targetPlanted, tick, questionmark_orange } from '../../assets';
+import {
+  targetPlanted,
+  tick,
+  location_grey,
+  survival_grey,
+  tax_grey
+} from '../../assets';
 import TouchableItem from '../Common/TouchableItem.native';
 import PlantedProgressBar from './PlantedProgressbar.native';
 import { formatNumber } from '../../utils/utils';
@@ -52,6 +58,7 @@ class PlantProjectSnippet extends React.Component {
       geoLocation
     } = this.props.plantProject;
     let projectImage = null;
+    let plantProjectRating = 4.2;
     let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
     treePlantedRatio = parseFloat(treePlantedRatio);
     let treeCountWidth;
@@ -117,6 +124,40 @@ class PlantProjectSnippet extends React.Component {
                 }}
                 resizeMode={'cover'}
               />
+              {teaserProps.isCertified ? (
+                <View style={[styles.certifiedAndRatingContainer]}>
+                  <Image
+                    source={tick}
+                    style={{
+                      width: 15,
+                      height: 15,
+                      marginLeft: 5
+                    }}
+                  />
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text
+                      style={[
+                        {
+                          fontSize: 14,
+                          // lineHeight: 19,
+                          color: '#4d5153',
+                          textAlign: 'center'
+                        }
+                      ]}
+                    >
+                      {plantProjectRating}
+                    </Text>
+                    <Image
+                      source={tick}
+                      style={{
+                        width: 12,
+                        height: 12,
+                        marginLeft: 5
+                      }}
+                    />
+                  </View>
+                </View>
+              ) : null}
             </View>
           ) : null}
           <PlantedProgressBar
@@ -130,44 +171,66 @@ class PlantProjectSnippet extends React.Component {
             >
               <Text
                 ellipsizeMode="tail"
-                numberOfLines={1}
+                numberOfLines={2}
                 style={styles.project_teaser__contentText}
               >
                 {teaserProps.projectName}
               </Text>
-              {teaserProps.isCertified ? (
-                <Image
-                  source={tick}
-                  style={{
-                    width: 15,
-                    height: 15,
-                    marginLeft: 5,
-                    maxWidth: '10%'
-                  }}
-                />
-              ) : null}
             </View>
             <View
               key="projectdetailsContainer"
               style={styles.projectdetailsContainer}
             >
               <View style={styles.locationContainer}>
-                <Text style={styles.locationText} ellipsizeMode="tail">
-                  {specsProps.location}
-                </Text>
-                <View>
+                <View style={{ flexDirection: 'row' }}>
+                  <Image
+                    source={location_grey}
+                    style={{
+                      width: 17,
+                      height: 17,
+                      marginRight: 15
+                    }}
+                  />
+                  <Text style={styles.survivalText} ellipsizeMode="tail">
+                    {specsProps.location}
+                  </Text>
+                </View>
+
+                <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                  <Image
+                    source={survival_grey}
+                    style={{
+                      width: 17,
+                      height: 17,
+                      marginRight: 15
+                    }}
+                  />
                   <Text style={styles.survivalText}>
                     {i18n.t('label.survival_rate')} {':'}{' '}
                     {specsProps.survivalRate}%
                   </Text>
                 </View>
-                {specsProps.taxDeduction && specsProps.taxDeduction.length ? (
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                    <Image
+                      source={tax_grey}
+                      style={{
+                        width: 17,
+                        height: 17,
+                        marginRight: 15
+                      }}
+                    />
                     <Text style={styles.survivalText}>
-                      {i18n.t('label.tax_deductible')} {i18n.t('label.in')}{' '}
-                      {deducibleText1}
+                      {specsProps.taxDeduction && specsProps.taxDeduction.length
+                        ? `${i18n.t('label.tax_deductible')} ${i18n.t(
+                            'label.in'
+                          )} ${deducibleText1}`
+                        : 'No tax deduction available'}
                     </Text>
-                    {/* <ReactNativeTooltipMenu
+                  </View>
+
+                  {/* <ReactNativeTooltipMenu
                       buttonComponent={
                         <Image
                           style={styles.project_specs__taxdeductibleIcon}
@@ -176,19 +239,21 @@ class PlantProjectSnippet extends React.Component {
                       }
                       items={[{ label: tooltipText1, onPress: () => {} }]}
                     /> */}
-                  </View>
-                ) : null}
+                </View>
               </View>
 
               <View style={styles.costContainer}>
                 <Text style={styles.costText}>
                   {formatNumber(specsProps.treeCost, null, currency)}
                 </Text>
+                <Text style={[styles.costText, { fontSize: 14 }]}>
+                  {'per tree'}
+                </Text>
               </View>
             </View>
 
             <View key="actionContainer" style={styles.actionContainer}>
-              <View key="byOrgContainer" style={styles.byOrgContainer}>
+              {/* <View key="byOrgContainer" style={styles.byOrgContainer}>
                 <Text
                   style={styles.byOrgText}
                   ellipsizeMode="tail"
@@ -196,9 +261,9 @@ class PlantProjectSnippet extends React.Component {
                 >
                   {teaserProps.tpoName}
                 </Text>
-              </View>
+              </View> */}
 
-              {this.props.plantProject.allowDonations ? (
+              {/* {this.props.plantProject.allowDonations ? (
                 <View key="buttonContainer" style={styles.buttonContainer}>
                   <PrimaryButton
                     style={styles.buttonItem}
@@ -211,7 +276,7 @@ class PlantProjectSnippet extends React.Component {
                     <Text> {i18n.t('label.donate')}</Text>
                   </PrimaryButton>
                 </View>
-              ) : null}
+              ) : null} */}
             </View>
           </View>
         </CardLayout>
@@ -219,7 +284,7 @@ class PlantProjectSnippet extends React.Component {
     );
   }
 }
-PlantProjectSnippet.defaultProps = { clickable: true };
+PlantProjectSnippet.defaultProps = { clickable: true, showCertifiedTag: true };
 PlantProjectSnippet.propTypes = {
   plantProject: PropTypes.object.isRequired,
   callExpanded: PropTypes.func,
@@ -229,7 +294,8 @@ PlantProjectSnippet.propTypes = {
   showNextButton: PropTypes.bool,
   onNextClick: PropTypes.func,
   onSelectClickedFeaturedProjects: PropTypes.func,
-  clickable: PropTypes.bool
+  clickable: PropTypes.bool,
+  showCertifiedTag: PropTypes.bool
 };
 
 export default PlantProjectSnippet;

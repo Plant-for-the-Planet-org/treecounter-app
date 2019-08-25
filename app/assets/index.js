@@ -132,6 +132,9 @@ import individualIcon from './images/individual_icon.png';
 import companyIcon from './images/company_icon.png';
 import mapCollapse from './images/map_collapse.png';
 import mapExpand from './images/map_expand.png';
+import location_grey from './images/icons/location_grey.png';
+import survival_grey from './images/icons/survival_grey.png';
+import tax_grey from './images/icons/tax_grey.png';
 
 export {
   mapCollapse,
@@ -267,5 +270,8 @@ export {
   downwardArrow,
   arrow_left_orange_outline,
   webProgramming,
-  communityMenu
+  communityMenu,
+  location_grey,
+  survival_grey,
+  tax_grey
 };

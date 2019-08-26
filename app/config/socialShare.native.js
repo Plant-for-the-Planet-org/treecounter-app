@@ -3,5 +3,6 @@ export const allowedUrls = [
   'home',
   'login',
   'competition',
-  'donate-trees'
+  'donate-trees',
+  'select-project'
 ];

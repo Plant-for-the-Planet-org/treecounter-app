@@ -53,6 +53,16 @@ const CCForm = props => (
         hidePostalCode={true}
         {...createOptions(props.style.fontSize)}
       />{' '}
+      <input
+        type="checkbox"
+        className="payment-save-later-checkbox"
+        name="save-for-later"
+        checked={props.saveForLater}
+        onChange={() => {
+          props.onClickSaveForLater('saveForLaterCC');
+        }}
+      />
+      Save for later
       <PrimaryButton>{i18n.t('label.pay')}</PrimaryButton>
     </div>
   </form>

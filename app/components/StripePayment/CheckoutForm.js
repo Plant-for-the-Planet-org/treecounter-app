@@ -69,10 +69,8 @@ class CheckoutForm extends React.Component {
     console.log(index);
   };
 
-  onClickSaveForLater = event => {
-    console.log('On Click Save For Later Clicked!!!:  ' + event);
-    console.log('name:' + event.target.name);
-    console.log('value:' + event.target.value);
+  onClickSaveForLater = name => {
+    this.setState({ [name]: !this.state[name] });
   };
 
   handleSubmitCCPayment = async ev => {
@@ -166,21 +164,6 @@ class CheckoutForm extends React.Component {
       'display-none': !props.expanded
     });
     const paymentType = props.paymentType;
-    //just for testing
-    const testCards = [
-      {
-        id: 'pm_1FAdm3GhHD5xN1Uqyk2tJWQ5',
-        type: 'card',
-        last4: '4242',
-        brand: 'visa'
-      },
-      {
-        id: 'pm_1FAdm3GhHD5xN1Uqyk2tJWQ5',
-        type: 'card',
-        last4: '4242',
-        brand: 'visa'
-      }
-    ];
 
     return !this.state.loading ? (
       <div>

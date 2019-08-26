@@ -39,9 +39,7 @@ class PlantedDetails extends Component {
             </View>
 
             <View>
-              <Text style={svgStyles.svgTextValue}>
-                {delimitNumbers(personal)}
-              </Text>
+              <Text style={svgStyles.svgTextValue}>{personal}</Text>
             </View>
           </View>
         </View>
@@ -63,9 +61,7 @@ class PlantedDetails extends Component {
               </Text>
             </View>
             <View>
-              <Text style={svgStyles.svgTextValue}>
-                {delimitNumbers(community)}
-              </Text>
+              <Text style={svgStyles.svgTextValue}>{community}</Text>
             </View>
           </View>
         </View>

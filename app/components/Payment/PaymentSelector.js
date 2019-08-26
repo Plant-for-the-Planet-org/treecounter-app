@@ -4,7 +4,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import StripeContainer from '../../containers/StripePayment';
-import SavedCard from '../../components/SavedPaymentCard';
 // import { getAuthenticatedRequest } from '../../utils/api';
 
 // import StripeCC from './Gateways/StripeCC';
@@ -101,10 +100,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     this.props.handleExpandedClicked('2');
   };
 
-  onChangeSavedCard = number => {
-    console.log('changed card number to:' + number);
-  };
-
   render() {
     const {
       accounts,
@@ -115,21 +110,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     } = this.props;
 
     // const paymentMethods = { stripe_cc: {}, stripe_sepa: {} };
-    //just for testing
-    const testCards = [
-      // {
-      //   id: 'pm_1FAdm3GhHD5xN1Uqyk2tJWQ5',
-      //   type: 'card',
-      //   last4: '4242',
-      //   brand: 'visa'
-      // },
-      // {
-      //   id: 'pm_1FAdm3GhHD5xN1Uqyk2tJWQ5',
-      //   type: 'card',
-      //   last4: '4242',
-      //   brand: 'visa'
-      // }
-    ];
 
     const gatewayProps = {
       context: context,
@@ -176,10 +156,6 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           } ${currency}`}</div>
           <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
         </div>
-        <SavedCard
-          cards={testCards}
-          onChangeSelectedCard={this.onChangeSavedCard}
-        />
         {Object.keys(paymentMethods).map(gateway => {
           const accountName = paymentMethods[gateway];
           if ('stripe_cc' === gateway) {

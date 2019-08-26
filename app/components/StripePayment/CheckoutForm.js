@@ -21,15 +21,39 @@ class CheckoutForm extends React.Component {
     console.log('SEPA PAYMENT SUBMITED');
   };
 
-  attachCardToCostumer = () => {
+  attachCardToCostumer = async paymentMethod => {
+    console.log('===========================');
     console.log('attach card to costumer has been called!');
+
+    let headerConfig = {
+      headers: {
+        Authorization: 'Bearer ' + Config.token
+      }
+    };
+    try {
+      const requestResponse = await Axios.post(
+        Config.baseURL + '' + Config.requestPaymentIntentUrl,
+        { paymentMethod: paymentMethod },
+        headerConfig
+      );
+
+      console.log(requestResponse);
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  onChangeSelectedCard = index => {
+    console.log(index);
+  };
+
+  onClickSaveForLater = event => {
+    console.log('On Click Save For Later Clicked!!!:  ' + event);
+    console.log('name:' + event.target.name);
+    console.log('value:' + event.target.value);
   };
 
   handleSubmitCCPayment = async ev => {
-    //available attributes
-    // currency, donorAddress, donorZipCode, donorCity, donorCountry, donorEmail, donorName, treeCount: this.state.selectedTreeCount,
-
-    // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault();
     const paymentDetails = this.props.paymentDetails;
     try {
@@ -49,14 +73,13 @@ class CheckoutForm extends React.Component {
       this.setState({ loading: true });
       const paymentMethodId = paymentMethodResponse.paymentMethod.id;
 
+      if (this.state.saveForLaterCC) {
+        this.attachCardToCostumer(paymentMethodId);
+      }
       this.handlePayment(paymentMethodId);
     } catch (e) {
       this.props.onError(e);
     }
-  };
-
-  onClickSaveForLater = name => {
-    this.setState({ [name]: !this.state[name] });
   };
 
   handlePayment = async paymentMethodId => {
@@ -121,6 +144,21 @@ class CheckoutForm extends React.Component {
       'display-none': !props.expanded
     });
     const paymentType = props.paymentType;
+    //just for testing
+    const testCards = [
+      {
+        id: 'pm_1FAdm3GhHD5xN1Uqyk2tJWQ5',
+        type: 'card',
+        last4: '4242',
+        brand: 'visa'
+      },
+      {
+        id: 'pm_1FAdm3GhHD5xN1Uqyk2tJWQ5',
+        type: 'card',
+        last4: '4242',
+        brand: 'visa'
+      }
+    ];
 
     return !this.state.loading ? (
       <div>
@@ -131,6 +169,8 @@ class CheckoutForm extends React.Component {
             style={{ arrow, displayNone, fontSize: this.props.fontSize }}
             onClickSaveForLater={this.onClickSaveForLater}
             saveForLater={state.saveForLaterCC}
+            cards={testCards}
+            onChangeSelectedCard={this.onChangeSelectedCard}
           />
         ) : (
           <SEPAForm

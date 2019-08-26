@@ -53,6 +53,16 @@ const SEPAForm = props => (
         {i18n.t('label.stripe_sepa_des1')} {props.tpoName}{' '}
         {i18n.t('label.stripe_sepa_des2')}
       </div>
+      <input
+        type="checkbox"
+        className="payment-save-later-checkbox"
+        name="save-for-later"
+        checked={props.saveForLater}
+        onChange={() => {
+          props.onClickSaveForLater('saveForLaterSEPA');
+        }}
+      />{' '}
+      Save for later
       <PrimaryButton>{i18n.t('label.pay')}</PrimaryButton>
     </div>
   </form>
@@ -66,5 +76,7 @@ SEPAForm.propTypes = {
   tpoName: PropTypes.string,
   style: PropTypes.object,
   displayNone: PropTypes.object,
-  fontSize: PropTypes.object
+  fontSize: PropTypes.object,
+  onClickSaveForLater: PropTypes.func,
+  saveForLater: PropTypes.bool
 };

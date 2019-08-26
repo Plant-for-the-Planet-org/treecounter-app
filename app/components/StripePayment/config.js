@@ -1,5 +1,7 @@
+import { context } from '../../config/index';
+
 const config = {
-  baseURL: 'https://devel.trilliontreecampaign.org',
+  baseURL: 'https://' + context.host,
   paymentIntentConfirm: '/app_dev.php/public/v1.3/stripe/paymentIntent/confirm',
   requestPaymentIntentUrl:
     '/app_dev.php/public/v1.3/stripe/paymentIntent/request',

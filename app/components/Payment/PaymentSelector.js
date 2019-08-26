@@ -4,6 +4,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import StripeContainer from '../../containers/StripePayment';
+import SavedCard from '../../components/SavedPaymentCard';
+// import { getAuthenticatedRequest } from '../../utils/api';
 
 // import StripeCC from './Gateways/StripeCC';
 // import StripeSepa from './Gateways/StripeSepa';
@@ -22,6 +24,13 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
 
   componentDidMount() {
+    // console.log('Component Did Mount Payment Selector');
+    // getAuthenticatedRequest('stripe_customer')
+    //   .then(response => {
+    //     console.log('INTO AUTHENTICATED REQUEST');
+    //     console.log(response);
+    //   })
+
     const props = this.props;
     if (props.paymentMethods) {
       // lookup stripe related payment methods for the current country/currency combination
@@ -92,16 +101,35 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     this.props.handleExpandedClicked('2');
   };
 
+  onChangeSavedCard = number => {
+    console.log('changed card number to:' + number);
+  };
+
   render() {
     const {
       accounts,
-      // paymentMethods,
+      paymentMethods,
       currency,
       context,
       donorDetails
     } = this.props;
 
-    const paymentMethods = { stripe_cc: {}, stripe_sepa: {} };
+    // const paymentMethods = { stripe_cc: {}, stripe_sepa: {} };
+    //just for testing
+    const testCards = [
+      // {
+      //   id: 'pm_1FAdm3GhHD5xN1Uqyk2tJWQ5',
+      //   type: 'card',
+      //   last4: '4242',
+      //   brand: 'visa'
+      // },
+      // {
+      //   id: 'pm_1FAdm3GhHD5xN1Uqyk2tJWQ5',
+      //   type: 'card',
+      //   last4: '4242',
+      //   brand: 'visa'
+      // }
+    ];
 
     const gatewayProps = {
       context: context,
@@ -148,6 +176,10 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           } ${currency}`}</div>
           <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
         </div>
+        <SavedCard
+          cards={testCards}
+          onChangeSelectedCard={this.onChangeSavedCard}
+        />
         {Object.keys(paymentMethods).map(gateway => {
           const accountName = paymentMethods[gateway];
           if ('stripe_cc' === gateway) {

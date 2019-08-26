@@ -12,11 +12,17 @@ import SEPAForm from './SEPAForm';
 
 class CheckoutForm extends React.Component {
   state = {
-    loading: false
+    loading: false,
+    saveForLaterCC: true,
+    saveForLaterSEPA: false
   };
 
   handleSubmitSEPAPayment = async ev => {
     console.log('SEPA PAYMENT SUBMITED');
+  };
+
+  attachCardToCostumer = () => {
+    console.log('attach card to costumer has been called!');
   };
 
   handleSubmitCCPayment = async ev => {
@@ -49,6 +55,10 @@ class CheckoutForm extends React.Component {
     }
   };
 
+  onClickSaveForLater = name => {
+    this.setState({ [name]: !this.state[name] });
+  };
+
   handlePayment = async paymentMethodId => {
     const paymentDetails = this.props.paymentDetails;
 
@@ -63,6 +73,7 @@ class CheckoutForm extends React.Component {
         amount: paymentDetails.amount * 100,
         currency: paymentDetails.currency,
         payment_method_id: paymentMethodId
+        // saved_payment_method: true
       };
 
       const requestResponse = await Axios.post(
@@ -101,6 +112,8 @@ class CheckoutForm extends React.Component {
 
   render() {
     const props = this.props;
+    const state = this.state;
+
     let arrow = classnames({
       arrow: !props.expanded
     });
@@ -116,6 +129,8 @@ class CheckoutForm extends React.Component {
             handleArrowClick={this.handleArrowClick}
             onSubmitCCForm={this.handleSubmitCCPayment}
             style={{ arrow, displayNone, fontSize: this.props.fontSize }}
+            onClickSaveForLater={this.onClickSaveForLater}
+            saveForLater={state.saveForLaterCC}
           />
         ) : (
           <SEPAForm
@@ -123,6 +138,8 @@ class CheckoutForm extends React.Component {
             onSubmitCCForm={this.handleSubmitSEPAPayment}
             style={{ arrow, displayNone, fontSize: this.props.fontSize }}
             tpoName={this.props.paymentDetails.tpoName}
+            onClickSaveForLater={this.onClickSaveForLater}
+            saveForLater={state.saveForLaterSEPA}
           />
         )}
       </div>

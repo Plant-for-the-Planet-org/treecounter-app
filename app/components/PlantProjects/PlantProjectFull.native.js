@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { ScrollView } from 'react-native';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import PlantProjectSnippet from './PlantProjectSnippet.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
 import TabContainer from '../../containers/Menu/TabContainer';
@@ -46,6 +47,7 @@ class PlantProjectFull extends React.Component {
       linkText,
       ndviUid
     };
+    const navigation = this.props.navigation;
     return (
       <View style={{ flex: 1 }}>
         <ScrollView
@@ -65,6 +67,17 @@ class PlantProjectFull extends React.Component {
               }
               tpoName={tpo_name}
             />
+
+            <TouchableOpacity
+              style={styles.makePledgeButton}
+              onPress={() => {
+                updateStaticRoute('app_reviews', navigation);
+              }}
+            >
+              <View style={styles.makePledgeButtonView}>
+                <Text style={styles.makePledgeButtonText}>Reviews</Text>
+              </View>
+            </TouchableOpacity>
 
             <View style={styles.horizontalRule} />
             <View style={styles.plantProjectDetails}>

@@ -50,6 +50,8 @@ import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
 import EditCompetitionContainer from '../../containers/EditCompetition';
 import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
+import Reviews from './../Reviews/Reviews';
+import AddReview from './../Reviews/AddReview/AddReview';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -84,7 +86,9 @@ const headerLabels = {
   ['delete_contribution']: 'label.delete_contribution',
   ['app_donate_detail']: 'label.donate',
   ['app_gift_projects']: 'label.gift_trees',
-  ['pickup_profile_modal']: 'label.dedicate_trees_to'
+  ['pickup_profile_modal']: 'label.dedicate_trees_to',
+  ['app_reviews']: 'Reviews',
+  ['app_add_review']: 'Add Review'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -147,6 +151,12 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_resetPassword')]: {
         screen: ResetPasswordContainer,
         path: getLocalRoute('app_resetPassword') + '/:token'
+      },
+      ['app_reviews']: {
+        screen: Reviews
+      },
+      ['app_add_review']: {
+        screen: AddReview
       }
     },
     {

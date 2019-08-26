@@ -132,7 +132,8 @@ import individualIcon from './images/individual_icon.png';
 import companyIcon from './images/company_icon.png';
 import mapCollapse from './images/map_collapse.png';
 import mapExpand from './images/map_expand.png';
-
+import attach from './images/attach.png';
+import forward from './images/forward.png';
 export {
   mapCollapse,
   mapExpand,
@@ -267,5 +268,7 @@ export {
   downwardArrow,
   arrow_left_orange_outline,
   webProgramming,
-  communityMenu
+  communityMenu,
+  attach,
+  forward
 };

@@ -49,7 +49,7 @@ export default (trillionStyles = EStyleSheet.create({
     color: '#575756',
     fontSize: 15,
     marginBottom: 15,
-    textAlign: 'justify',
+    textAlign: 'left',
     margin: 12
   },
   imageStyle: {

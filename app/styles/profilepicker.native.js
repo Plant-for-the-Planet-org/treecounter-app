@@ -36,7 +36,7 @@ export default (editProfileStyle = EStyleSheet.create({
     fontStyle: 'normal',
     lineHeight: 27,
     letterSpacing: 0,
-    textAlign: 'justify',
+    textAlign: 'left',
     color: '#4d5153'
   },
   textNotDedicateStyle: {
@@ -45,7 +45,7 @@ export default (editProfileStyle = EStyleSheet.create({
     fontStyle: 'normal',
     lineHeight: 27,
     letterSpacing: 0,
-    textAlign: 'justify',
+    textAlign: 'left',
     color: '#4d5153',
     marginTop: 7,
     marginBottom: 5

@@ -132,7 +132,9 @@ class MakePledgeForm extends Component {
           };
           console.log(data);
           const params = this.props.navigation.getParam('slug');
-          this.props.postPledge(data, params);
+          this.props.postPledge(data, {
+            pledgeEventSlug: params
+          });
           // console.log(this.props.postedPledge);
           this.RBSheet.open();
         } else {

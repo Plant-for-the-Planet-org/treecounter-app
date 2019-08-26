@@ -14,7 +14,32 @@ class CheckoutForm extends React.Component {
   state = {
     loading: false,
     saveForLaterCC: true,
-    saveForLaterSEPA: false
+    saveForLaterSEPA: false,
+    cards: []
+  };
+
+  async componentDidMount() {
+    let headerConfig = {
+      headers: {
+        Authorization: 'Bearer ' + Config.token
+      }
+    };
+
+    try {
+      const requestResponse = await Axios.get(
+        Config.baseURL + Config.fetchCardUrl,
+        headerConfig
+      );
+      if (requestResponse.status === 200) {
+        this.fillCard(requestResponse.data.paymentMethods);
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  fillCard = cards => {
+    this.setState({ cards });
   };
 
   handleSubmitSEPAPayment = async ev => {
@@ -22,9 +47,6 @@ class CheckoutForm extends React.Component {
   };
 
   attachCardToCostumer = async paymentMethod => {
-    console.log('===========================');
-    console.log('attach card to costumer has been called!');
-
     let headerConfig = {
       headers: {
         Authorization: 'Bearer ' + Config.token
@@ -169,7 +191,7 @@ class CheckoutForm extends React.Component {
             style={{ arrow, displayNone, fontSize: this.props.fontSize }}
             onClickSaveForLater={this.onClickSaveForLater}
             saveForLater={state.saveForLaterCC}
-            cards={testCards}
+            cards={this.state.cards}
             onChangeSelectedCard={this.onChangeSelectedCard}
           />
         ) : (

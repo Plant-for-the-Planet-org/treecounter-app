@@ -55,7 +55,7 @@ export default class SelectPlantProject extends Component {
       }
       return projects;
     }, []);
-    featuredProjects = _.orderBy(featuredProjects, 'id');
+    featuredProjects = _.orderBy(featuredProjects, 'created');
     let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
     if (
       currencies &&
@@ -87,7 +87,7 @@ export default class SelectPlantProject extends Component {
       }
       return projects;
     }, []);
-    featuredProjects = _.orderBy(featuredProjects, 'id');
+    featuredProjects = _.orderBy(featuredProjects, 'created');
     let priceSortedProjects = plantProjects;
     if (
       currencies &&

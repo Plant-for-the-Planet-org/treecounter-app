@@ -13,22 +13,17 @@ import SEPAForm from './SEPAForm';
 class CheckoutForm extends React.Component {
   state = {
     loading: false,
-    saveForLaterCC: true,
+    saveForLaterCC: false,
     saveForLaterSEPA: false,
+    chosenCard: '',
     cards: []
   };
 
   async componentDidMount() {
-    let headerConfig = {
-      headers: {
-        Authorization: 'Bearer ' + Config.token
-      }
-    };
-
     try {
       const requestResponse = await Axios.get(
         Config.baseURL + Config.fetchCardUrl,
-        headerConfig
+        Config.headerConfig
       );
       if (requestResponse.status === 200) {
         this.fillCard(requestResponse.data.paymentMethods);
@@ -47,16 +42,11 @@ class CheckoutForm extends React.Component {
   };
 
   attachCardToCostumer = async paymentMethod => {
-    let headerConfig = {
-      headers: {
-        Authorization: 'Bearer ' + Config.token
-      }
-    };
     try {
       const requestResponse = await Axios.post(
-        Config.baseURL + '' + Config.requestPaymentIntentUrl,
+        Config.baseURL + Config.requestPaymentIntentUrl,
         { paymentMethod: paymentMethod },
-        headerConfig
+        Config.headerConfig
       );
 
       console.log(requestResponse);
@@ -65,17 +55,15 @@ class CheckoutForm extends React.Component {
     }
   };
 
-  onChangeSelectedCard = index => {
-    console.log(index);
+  onChangeSelectedCard = choose => {
+    this.setState({ chosenCard: choose });
   };
 
   onClickSaveForLater = name => {
     this.setState({ [name]: !this.state[name] });
   };
 
-  handleSubmitCCPayment = async ev => {
-    ev.preventDefault();
-    const paymentDetails = this.props.paymentDetails;
+  createPaymentMethod = async paymentDetails => {
     try {
       //Create a payment method id for making request to the API
       const paymentMethodResponse = await this.props.stripe.createPaymentMethod(
@@ -83,9 +71,6 @@ class CheckoutForm extends React.Component {
         {
           billing_details: {
             name: paymentDetails.donorName
-            // amount: paymentDetails.amount * 100,
-            // currency: paymentDetails.currency,
-            // email: paymentDetails.donorEmail
           }
         }
       );
@@ -93,47 +78,63 @@ class CheckoutForm extends React.Component {
       this.setState({ loading: true });
       const paymentMethodId = paymentMethodResponse.paymentMethod.id;
 
-      if (this.state.saveForLaterCC) {
-        this.attachCardToCostumer(paymentMethodId);
-      }
-      this.handlePayment(paymentMethodId);
+      // if (this.state.saveForLaterCC) {
+      //   this.attachCardToCostumer(paymentMethodId);
+      // }
+
+      return paymentMethodId;
     } catch (e) {
       this.props.onError(e);
     }
   };
 
-  handlePayment = async paymentMethodId => {
+  handleSubmitCCPayment = async ev => {
+    ev.preventDefault();
+
     const paymentDetails = this.props.paymentDetails;
+    let paymentMethodId = 0;
 
-    let headerConfig = {
-      headers: {
-        Authorization: 'Bearer ' + Config.token
+    if (
+      this.state.chosenCard.length === 0 ||
+      this.state.chosenCard === 'new-card'
+    ) {
+      paymentMethodId = await this.createPaymentMethod(paymentDetails);
+    } else {
+      paymentMethodId = this.state.cards[this.state.chosenCard].id;
+    }
+
+    this.handlePayment(paymentMethodId, paymentDetails);
+  };
+
+  handlePayment = async (paymentMethodId, paymentDetails) => {
+    try {
+      if (paymentMethodId !== undefined || paymentMethodId != 0) {
+        let requestData = {
+          amount: paymentDetails.amount * 100,
+          currency: paymentDetails.currency,
+          payment_method_id: paymentMethodId
+        };
+
+        const requestResponse = await Axios.post(
+          Config.baseURL + '' + Config.requestPaymentIntentUrl,
+          requestData,
+          Config.headerConfig
+        );
+
+        if (requestResponse.data.success) {
+          this.props.onSuccess('success');
+          this.setState({ loading: false });
+        } else if (requestResponse.data.requires_action) {
+          this.handle3DSecure(
+            requestResponse.data.payment_intent_client_secret
+          );
+        } else {
+          this.props.onSuccess('success');
+          this.setState({ loading: false });
+        }
       }
-    };
-
-    if (paymentMethodId !== undefined) {
-      let requestData = {
-        amount: paymentDetails.amount * 100,
-        currency: paymentDetails.currency,
-        payment_method_id: paymentMethodId
-        // saved_payment_method: true
-      };
-
-      const requestResponse = await Axios.post(
-        Config.baseURL + '' + Config.requestPaymentIntentUrl,
-        requestData,
-        headerConfig
-      );
-
-      if (requestResponse.data.success) {
-        this.props.onSuccess('success');
-        this.setState({ loading: false });
-      } else if (requestResponse.data.requires_action) {
-        this.handle3DSecure(requestResponse.data.payment_intent_client_secret);
-      } else {
-        this.props.onSuccess('success');
-        this.setState({ loading: false });
-      }
+    } catch (e) {
+      this.props.onError(e);
     }
   };
 
@@ -167,26 +168,24 @@ class CheckoutForm extends React.Component {
 
     return !this.state.loading ? (
       <div>
-        {paymentType === 'stripe_cc' ? (
-          <CCForm
-            handleArrowClick={this.handleArrowClick}
-            onSubmitCCForm={this.handleSubmitCCPayment}
-            style={{ arrow, displayNone, fontSize: this.props.fontSize }}
-            onClickSaveForLater={this.onClickSaveForLater}
-            saveForLater={state.saveForLaterCC}
-            cards={this.state.cards}
-            onChangeSelectedCard={this.onChangeSelectedCard}
-          />
+        <CCForm
+          handleArrowClick={this.handleArrowClick}
+          onSubmitCCForm={this.handleSubmitCCPayment}
+          style={{ arrow, displayNone, fontSize: this.props.fontSize }}
+          onClickSaveForLater={this.onClickSaveForLater}
+          saveForLater={state.saveForLaterCC}
+          cards={this.state.cards}
+          onChangeSelectedCard={this.onChangeSelectedCard}
+        />
+        {/* {paymentType === 'stripe_cc' ? (<div />
         ) : (
-          <SEPAForm
-            handleArrowClick={this.handleArrowClick}
-            onSubmitCCForm={this.handleSubmitSEPAPayment}
-            style={{ arrow, displayNone, fontSize: this.props.fontSize }}
-            tpoName={this.props.paymentDetails.tpoName}
-            onClickSaveForLater={this.onClickSaveForLater}
-            saveForLater={state.saveForLaterSEPA}
-          />
-        )}
+            <SEPAForm
+              handleArrowClick={this.handleArrowClick}
+              onSubmitCCForm={this.handleSubmitSEPAPayment}
+              style={{ arrow, displayNone, fontSize: this.props.fontSize }}
+              tpoName={this.props.paymentDetails.tpoName}
+            />
+          )} */}
       </div>
     ) : (
       <div className="card-center">
@@ -199,7 +198,7 @@ class CheckoutForm extends React.Component {
 export default injectStripe(CheckoutForm);
 
 CheckoutForm.propTypes = {
-  paymentType: PropTypes.func,
+  paymentType: PropTypes.string,
   paymentDetails: PropTypes.object,
   stripe: PropTypes.object,
   createPaymentMethod: PropTypes.func,

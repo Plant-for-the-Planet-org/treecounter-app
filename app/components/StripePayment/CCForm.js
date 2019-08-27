@@ -11,10 +11,6 @@ const createOptions = (fontSize, padding) => {
     style: {
       base: {
         fontSize,
-        borderWidth: '1px',
-        borderStyle: 'solid',
-        height: '100px',
-        borderColor: '#FFCC00',
         color: '#FFCC00',
         letterSpacing: '0.025em',
         fontFamily: 'Verdana',
@@ -31,7 +27,7 @@ const createOptions = (fontSize, padding) => {
 };
 
 const CCForm = props => (
-  <form className="payment-option" onSubmit={props.onSubmitCCForm}>
+  <div className="payment-option">
     <div
       onClick={() => {
         props.handleArrowClick('1');
@@ -63,9 +59,11 @@ const CCForm = props => (
         }}
       />
       Save for later
-      <PrimaryButton>{i18n.t('label.pay')}</PrimaryButton>
+      <PrimaryButton onClick={props.onSubmitCCForm}>
+        {i18n.t('label.pay')}
+      </PrimaryButton>
     </div>
-  </form>
+  </div>
 );
 
 export default CCForm;

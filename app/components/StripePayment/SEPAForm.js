@@ -10,10 +10,7 @@ const createOptions = (fontSize, padding) => {
     style: {
       base: {
         fontSize,
-        borderWidth: '1px',
         borderStyle: 'solid',
-        height: '100px',
-        borderColor: '#FFCC00',
         color: '#FFCC00',
         letterSpacing: '0.025em',
         fontFamily: 'Verdana',
@@ -30,7 +27,7 @@ const createOptions = (fontSize, padding) => {
 };
 
 const SEPAForm = props => (
-  <form className="payment-option" onSubmit={props.onSubmitSEPAForm}>
+  <div className="payment-option">
     <div
       onClick={() => {
         props.handleArrowClick('2');
@@ -44,28 +41,17 @@ const SEPAForm = props => (
       <img className={props.style.arrow} src={payment_arrow} />
     </div>
     <div className={props.style.displayNone}>
-      <IbanElement
-        supportedCountries={['SEPA']}
-        // onChange={props.handleChange}
-        {...createOptions()}
-      />
+      <IbanElement supportedCountries={['SEPA']} {...createOptions()} />
+
       <div className="mandate-acceptance">
         {i18n.t('label.stripe_sepa_des1')} {props.tpoName}{' '}
         {i18n.t('label.stripe_sepa_des2')}
       </div>
-      <input
-        type="checkbox"
-        className="payment-save-later-checkbox"
-        name="save-for-later"
-        checked={props.saveForLater}
-        onChange={() => {
-          props.onClickSaveForLater('saveForLaterSEPA');
-        }}
-      />{' '}
-      Save for later
-      <PrimaryButton>{i18n.t('label.pay')}</PrimaryButton>
+      <PrimaryButton onClick={props.onSubmitSEPAForm}>
+        {i18n.t('label.pay')}
+      </PrimaryButton>
     </div>
-  </form>
+  </div>
 );
 
 export default SEPAForm;
@@ -76,7 +62,5 @@ SEPAForm.propTypes = {
   tpoName: PropTypes.string,
   style: PropTypes.object,
   displayNone: PropTypes.object,
-  fontSize: PropTypes.object,
-  onClickSaveForLater: PropTypes.func,
-  saveForLater: PropTypes.bool
+  fontSize: PropTypes.object
 };

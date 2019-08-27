@@ -17,7 +17,7 @@ const SavedPaymentCard = props => {
             <tbody>
               {props.cards ? (
                 props.cards.map((card, index) => (
-                  <tr>
+                  <tr key={index}>
                     <td>
                       <input
                         type="radio"
@@ -35,19 +35,19 @@ const SavedPaymentCard = props => {
               ) : (
                 <tr />
               )}
-              {/* <tr>
+              <tr>
                 <td>
                   <input
                     type="radio"
-                    className="payment-save-later-checkbox"
                     name="choose-card"
                     onChange={() => {
-                      props.onChangeSelectedCard('save-for-later');
+                      props.onChangeSelectedCard('new-card');
                     }}
                   />
-                  Save for later
-                  </td>
-              </tr> */}
+                </td>
+                <td>New</td>
+                <td />
+              </tr>
             </tbody>
           </table>
         </div>

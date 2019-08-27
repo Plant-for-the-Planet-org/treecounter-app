@@ -59,7 +59,7 @@ class TreecounterGraphicsText extends Component {
               </Text>
               {this.props.trillion ? (
                 <Text style={svgStyles.svgTitleText}>
-                  {delimitNumbers(target)}
+                  {target ? delimitNumbers(target) : 0}
                 </Text>
               ) : null}
             </View>
@@ -89,7 +89,7 @@ class TreecounterGraphicsText extends Component {
 
               {this.props.trillion ? (
                 <Text style={svgStyles.svgTitleText}>
-                  {delimitNumbers(parseInt(planted))}
+                  {planted ? delimitNumbers(planted) : 0}
                 </Text>
               ) : null}
             </View>

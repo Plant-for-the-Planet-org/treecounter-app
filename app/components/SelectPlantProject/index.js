@@ -14,6 +14,7 @@ import ModalDialog from '../Common/ModalDialog';
 import i18n from '../../locales/i18n';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import { delimitNumbers } from '../../utils/utils';
+import _ from 'lodash';
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -54,6 +55,7 @@ export default class SelectPlantProject extends Component {
       }
       return projects;
     }, []);
+    featuredProjects = _.orderBy(featuredProjects, 'id');
     let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
     if (
       currencies &&
@@ -85,6 +87,7 @@ export default class SelectPlantProject extends Component {
       }
       return projects;
     }, []);
+    featuredProjects = _.orderBy(featuredProjects, 'id');
     let priceSortedProjects = plantProjects;
     if (
       currencies &&

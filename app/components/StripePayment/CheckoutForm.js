@@ -43,13 +43,11 @@ class CheckoutForm extends React.Component {
 
   attachCardToCostumer = async paymentMethod => {
     try {
-      const requestResponse = await Axios.post(
-        Config.baseURL + Config.requestPaymentIntentUrl,
-        { paymentMethod: paymentMethod },
+      await Axios.post(
+        Config.baseURL + Config.attachPaymentUrl,
+        { paymentMethod },
         Config.headerConfig
       );
-
-      console.log(requestResponse);
     } catch (e) {
       throw e;
     }
@@ -78,9 +76,9 @@ class CheckoutForm extends React.Component {
       this.setState({ loading: true });
       const paymentMethodId = paymentMethodResponse.paymentMethod.id;
 
-      // if (this.state.saveForLaterCC) {
-      //   this.attachCardToCostumer(paymentMethodId);
-      // }
+      if (this.state.saveForLaterCC) {
+        this.attachCardToCostumer(paymentMethodId);
+      }
 
       return paymentMethodId;
     } catch (e) {
@@ -168,24 +166,24 @@ class CheckoutForm extends React.Component {
 
     return !this.state.loading ? (
       <div>
-        <CCForm
-          handleArrowClick={this.handleArrowClick}
-          onSubmitCCForm={this.handleSubmitCCPayment}
-          style={{ arrow, displayNone, fontSize: this.props.fontSize }}
-          onClickSaveForLater={this.onClickSaveForLater}
-          saveForLater={state.saveForLaterCC}
-          cards={this.state.cards}
-          onChangeSelectedCard={this.onChangeSelectedCard}
-        />
-        {/* {paymentType === 'stripe_cc' ? (<div />
+        {paymentType === 'stripe_cc' ? (
+          <CCForm
+            handleArrowClick={this.handleArrowClick}
+            onSubmitCCForm={this.handleSubmitCCPayment}
+            style={{ arrow, displayNone, fontSize: this.props.fontSize }}
+            onClickSaveForLater={this.onClickSaveForLater}
+            saveForLater={state.saveForLaterCC}
+            cards={this.state.cards}
+            onChangeSelectedCard={this.onChangeSelectedCard}
+          />
         ) : (
-            <SEPAForm
-              handleArrowClick={this.handleArrowClick}
-              onSubmitCCForm={this.handleSubmitSEPAPayment}
-              style={{ arrow, displayNone, fontSize: this.props.fontSize }}
-              tpoName={this.props.paymentDetails.tpoName}
-            />
-          )} */}
+          <SEPAForm
+            handleArrowClick={this.handleArrowClick}
+            onSubmitCCForm={this.handleSubmitSEPAPayment}
+            style={{ arrow, displayNone, fontSize: this.props.fontSize }}
+            tpoName={this.props.paymentDetails.tpoName}
+          />
+        )}
       </div>
     ) : (
       <div className="card-center">

@@ -151,8 +151,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     },
     {
       headerMode: 'none',
-      navigationOptions: ({ navigation }) => {
-        header: null;
+      navigationOptions: (/*{ navigation }*/) => {
+        return {
+          header: null
+        };
       }
     }
   );

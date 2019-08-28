@@ -36,7 +36,7 @@ class RegistrationMap extends React.Component {
   // WIRE UP A REGISTER BUTTON FOR THIS METHOD
   register() {
     //    loadModules(['esri/Graphic']).then(([Graphic]) => {
-    loadModules(['esri/Graphic']).then(([]) => {
+    loadModules(['esri/Graphic']).then((/*[]*/) => {
       // const geometry = {
       //   spatialReference: {wkid: 4326},
       //   x: this.state.geoLocation.geoLongitude,

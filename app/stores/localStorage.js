@@ -26,12 +26,22 @@ export const saveItem = (key, value) => {
 export const fetchItem = key => {
   return new Promise(function(resolve, reject) {
     const got = window.localStorage.getItem(key);
-    if (got) {
-      resolve(got);
-    } else {
+    if (got === null) {
       reject(new Error(`${key} not in localStorage`));
+    } else {
+      resolve(got);
     }
   });
+};
+
+/**
+ * Get a possibly unset localStorage item.
+ * Use this when it is not an error for the item to be unset.
+ *
+ * @returns string | null
+ */
+export const getItem = async key => {
+  return window.localStorage.getItem(key);
 };
 
 export const clearStorage = () => {

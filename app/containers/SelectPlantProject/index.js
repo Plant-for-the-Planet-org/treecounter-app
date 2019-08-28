@@ -15,6 +15,7 @@ import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper';
 import { fetchCurrencies } from '../../actions/currencies';
 
 class SelectPlantProjectContainer extends Component {
+  // selectFirstProject
   componentWillMount() {
     let plantProjects = this.props.plantProjects.filter(
       project => project.allowDonations
@@ -52,7 +53,9 @@ class SelectPlantProjectContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchCurrencies();
+    if (!this.props.currencies.currencies) {
+      this.props.fetchCurrencies();
+    }
   }
   render() {
     let props = { ...this.props };
@@ -63,14 +66,14 @@ class SelectPlantProjectContainer extends Component {
     props.plantProjects = plantProjects;
     return (
       <SelectPlantProject
-        selectProject={id => this.selectPlantProjectAction(id)}
+        selectProject={this.selectPlantProjectAction}
         currencies={this.props.currencies}
-        onMoreClick={(id, name) => this.onMoreClick(id, name)}
+        onMoreClick={this.onMoreClick}
         {...props}
       />
     );
   }
-  onMoreClick(id, name) {
+  onMoreClick = (id, name) => {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
@@ -79,8 +82,8 @@ class SelectPlantProjectContainer extends Component {
         titleParam: name
       });
     }
-  }
-  selectPlantProjectAction(id) {
+  };
+  selectPlantProjectAction = id => {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
@@ -89,7 +92,7 @@ class SelectPlantProjectContainer extends Component {
         giftMethod: navigation.getParam('giftMethod')
       });
     }
-  }
+  };
 }
 
 const mapStateToProps = state => ({

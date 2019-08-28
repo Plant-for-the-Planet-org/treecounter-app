@@ -19,5 +19,14 @@
   "continue_on_site": "Continue using the site",
   "error": "Error",
   "success": "Success",
-  "congrats": "Congrats"
+  "congrats": "Congrats",
+  "plant_for_the_planet_app": "Plant-for-the-planet App",
+  "a_solution_for_climate_crisis": "A solution for Climate Crisis",
+  "get_app_button_text": "GET",
+  "Thousand": "Thousand",
+  "Million": "Million",
+  "Billion": "Billion",
+  "Trillion": "Trillion",
+  "Quadrillion": "Quadrillion",
+  "Quintillion": "Quintillion"
 }

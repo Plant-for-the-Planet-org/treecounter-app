@@ -132,7 +132,7 @@ class Trillion extends PureComponent {
             }}
           >
             <View style={styles.parentContainer}>
-              <View style={svgStyles.svgContainer}>
+              <View style={svgStyles.svgContainer} key="svg">
                 <SvgContainer {...this.state.svgData} trillion={true} />
               </View>
               {/*{this.props.pledgeEvents &&*/}
@@ -166,23 +166,21 @@ class Trillion extends PureComponent {
               {/*</View>*/}
               {/*</View>*/}
               {/*) : null}*/}
-              <CardLayout style={styles.cardContainer}>
-                <Text style={styles.titleText}>
-                  {' '}
+              <CardLayout style={styles.cardContainer} key="msg">
+                <Text style={styles.titleText} key="m1">
                   {i18n.t('label.trillionTreeMessage1')}
                 </Text>
-                <Text style={styles.titleText}>
-                  {' '}
+                <Text style={styles.titleText} key="m2">
                   {i18n.t('label.trillionTreeMessage2')}
                 </Text>
               </CardLayout>
 
-              <View style={{ flex: 1 }}>
+              <View style={{ flex: 1 }} key="prj">
                 {this.props.plantProjects
                   .filter(filterProj => filterProj.allowDonations)
-                  .map(project => (
+                  .map((project, i) => (
                     <PlantProjectSnippet
-                      key={'trillion' + project.id}
+                      key={`p-${project.id}`}
                       onMoreClick={id => this.onMoreClick(id, project.name)}
                       plantProject={project}
                       onSelectClickedFeaturedProjects={id =>
@@ -209,6 +207,7 @@ class Trillion extends PureComponent {
     return [
       this.props.navigation ? (
         <NavigationEvents
+          key="nav"
           onWillFocus={payload => {
             this.setState({ loadSvg: true });
           }}
@@ -220,6 +219,7 @@ class Trillion extends PureComponent {
       ) : null,
       this.state.loadSvg ? (
         <TabView
+          key="tabs"
           useNativeDriver
           navigationState={this.state}
           renderScene={this._renderScreen}

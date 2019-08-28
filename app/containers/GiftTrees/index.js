@@ -30,7 +30,9 @@ class GiftTreesContainer extends Component {
     this.state = { reloadTab: true };
   }
   componentDidMount() {
-    this.props.fetchCurrencies();
+    if (!this.props.currencies.currencies) {
+      this.props.fetchCurrencies();
+    }
   }
   openProjects(formValue, type) {
     //  console.log('in gif tree', formValue);
@@ -78,6 +80,7 @@ class GiftTreesContainer extends Component {
           paymentStatus={this.props.paymentStatus}
           paymentClear={this.props.paymentClear}
           plantProjectClear={this.props.clearPlantProject}
+          key="gift-trees"
         />
       ) : null
     ];

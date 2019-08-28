@@ -1,3 +1,4 @@
+import isEqual from 'lodash/isEqual';
 import { createAction, handleActions } from 'redux-actions';
 
 export const setCurrenciesConversions = createAction('CURRENCY_CONVERSION_SET');
@@ -10,7 +11,9 @@ export const initialState = {
 const currenciesReducer = handleActions(
   {
     [setCurrenciesConversions]: (state, action) => ({
-      currencies: action.payload
+      currencies: isEqual(state.currencies, action.payload)
+        ? state.currencies
+        : action.payload
     })
   },
   initialState

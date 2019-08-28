@@ -102,7 +102,7 @@ export default class DonateTrees extends Component {
       expanded: false,
       imageViewMore: false,
       expandedOption: '1',
-      showSelectProject: false
+      showSelectProject: !props.selectedProject
     };
 
     this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
@@ -114,10 +114,11 @@ export default class DonateTrees extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    let state = {
+      showSelectProject: !nextProps.selectedProject
+    };
+
     if (nextProps.selectedProject) {
-      this.setState({
-        showSelectProject: false
-      });
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
           .fixedDefaultTreeCount;
@@ -127,13 +128,10 @@ export default class DonateTrees extends Component {
         : null;
 
       if (nextTreeCount !== currentTreeCount) {
-        this.setState({ selectedTreeCount: nextTreeCount });
+        state.selectedTreeCount = nextTreeCount;
       }
-    } else {
-      this.setState({
-        showSelectProject: true
-      });
     }
+    this.setState(state);
   }
 
   getFees() {
@@ -313,6 +311,7 @@ export default class DonateTrees extends Component {
     });
 
     if (this.refs.slider) {
+      // make this into a method that can unload
       setTimeout(() => {
         if (this.refs.slider && this.state.pageIndex === 3) {
           this.refs.slider.slickGoTo(this.state.pageIndex);

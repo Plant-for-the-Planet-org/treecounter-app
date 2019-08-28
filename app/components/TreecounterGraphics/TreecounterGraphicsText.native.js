@@ -8,7 +8,7 @@ import i18n from '../../locales/i18n';
 
 import svgStyles from '../../styles/common/treecounter_svg';
 import PlantedDetails from './PlantDetails.native';
-import { delimitNumbers } from '../../utils/utils';
+import { delimitNumbers, convertNumber } from '../../utils/utils';
 
 class TreecounterGraphicsText extends Component {
   constructor() {
@@ -21,29 +21,6 @@ class TreecounterGraphicsText extends Component {
   updateState(stateVal) {
     this.setState({ ifPlantedDetails: stateVal });
     this.props.onToggle(stateVal);
-  }
-
-  convertNumber(n, d) {
-    let x = ('' + n).length;
-    if (x > 5) {
-      let p = Math.pow;
-      d = p(10, d);
-      x -= x % 3;
-      return (
-        Math.round(n * d / p(10, x)) / d +
-        [
-          '',
-          ' Thousand',
-          ' Million',
-          ' Billion',
-          ' Trillion',
-          ' Quadrillion',
-          ' Quintillion'
-        ][x / 3]
-      );
-    } else {
-      return n;
-    }
   }
 
   render() {
@@ -78,7 +55,7 @@ class TreecounterGraphicsText extends Component {
                   ' '}
               </Text>
               <Text style={svgStyles.svgTextValue}>
-                {this.convertNumber(parseInt(target), 2)}
+                {convertNumber(parseInt(target), 2)}
               </Text>
               {this.props.trillion ? (
                 <Text style={svgStyles.svgTitleText}>
@@ -100,10 +77,10 @@ class TreecounterGraphicsText extends Component {
               </Text>
               <View style={{ flexDirection: 'row' }}>
                 <Text style={svgStyles.svgTextValue}>
-                  {this.convertNumber(parseInt(planted), 2)}
+                  {convertNumber(parseInt(planted), 2)}
                 </Text>
                 {this.props.trillion ||
-                this.convertNumber(parseInt(community)) === 0 ? null : (
+                convertNumber(parseInt(community)) === 0 ? null : (
                   <View style={svgStyles.svgArrow}>
                     <ArrowButton onToggle={e => this.updateState(e)} />
                   </View>
@@ -120,8 +97,8 @@ class TreecounterGraphicsText extends Component {
         </View>
       ) : (
         <PlantedDetails
-          personal={this.convertNumber(parseInt(personal), 2)}
-          community={this.convertNumber(parseInt(community), 2)}
+          personal={convertNumber(parseInt(personal), 2)}
+          community={convertNumber(parseInt(community), 2)}
           type={type}
           onToggle={e => this.updateState(e)}
         />

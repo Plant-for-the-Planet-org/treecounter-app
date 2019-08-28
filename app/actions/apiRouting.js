@@ -12,7 +12,7 @@ export const getApiRoute = async (routeName, params) => {
   params =
     'api_login_check' === routeName
       ? params
-      : { version: 'v1.3', _locale: locale, ...params };
+      : { version: 'v1.1', _locale: locale, ...params };
 
   const url = `${serverName}${baseUrl}${Routing.generate(routeName, {
     ...params

@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-const context = require('../../app/config/index.js');
 const commonConfig = require('./webpack.common.config.js');
 const path = require('path');
 const {
@@ -28,6 +27,10 @@ module.exports = webpackMerge(commonConfig, {
     donatetreewidget: [
       'babel-polyfill',
       path.join(__dirname, '../widgets/DonateTrees/widget.js')
+    ],
+    ndviwidget: [
+      'babel-polyfill',
+      path.join(__dirname, '../widgets/NDVI/widget.js')
     ]
   },
   output: {
@@ -38,18 +41,16 @@ module.exports = webpackMerge(commonConfig, {
   devtool: 'source-map',
   plugins: [
     new BugsnagBuildReporterPlugin({
-      apiKey: context.bugsnagApiKey,
+      apiKey: '6f2971a9b077662912f61ae602716afd',
       appVersion: pkg.version
     }),
     new BugsnagSourceMapUploaderPlugin({
-      apiKey: context.bugsnagApiKey,
+      apiKey: '6f2971a9b077662912f61ae602716afd',
       appVersion: pkg.version,
       overwrite: true,
       publicPath: '*'
     }),
-    new WebpackCleanupPlugin({
-      preview: true
-    }),
+    new WebpackCleanupPlugin(),
     new webpack.LoaderOptionsPlugin({
       options: {
         htmlLoader: {

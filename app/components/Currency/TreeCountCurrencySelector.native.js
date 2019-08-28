@@ -8,6 +8,9 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n';
 import { Dimensions, View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject.native';
+import NumberFormat from '../Common/NumberFormat';
+import { delimitNumbers } from '../../utils/utils';
+
 class TreeCountCurrencySelector extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -89,7 +92,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
               }}
             >
               <Text numberOfLines={1} ellipsizeMode={'tail'}>
-                <Text>{this.state.selectedTreeCount}</Text>
+                <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
                 <Text style={styles.selectedProjectCol}>
                   {' '}
                   {i18n.t('label.trees')}
@@ -110,23 +113,20 @@ class TreeCountCurrencySelector extends React.PureComponent {
               }}
             >
               <Text numberOfLines={1} ellipsizeMode={'tail'}>
-                <Text>{this.state.selectedTreeCount}</Text>
+                <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
                 <Text style={styles.selectedProjectCol}>
                   {' '}
                   {i18n.t('label.trees')}
                 </Text>{' '}
-                {
-                  i18n.t('label.support_to',
-                  {
-                    name: this.props.supportTreecounter.displayName
-                  })
-                }
+                {i18n.t('label.support_to', {
+                  name: this.props.supportTreecounter.displayName
+                })}
               </Text>
               {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
             </View>
           ) : (
             <View style={styles.selectedProjectRow}>
-              <Text>{this.state.selectedTreeCount}</Text>
+              <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
               <Text style={styles.selectedProjectCol}>
                 {i18n.t('label.trees')}
               </Text>
@@ -134,12 +134,13 @@ class TreeCountCurrencySelector extends React.PureComponent {
           )}
 
           <View style={styles.selectedProjectRow}>
-            <Text>{i18n.t('label.amount')} : </Text>
-            <Text style={styles.selectedProjectCol}>
-              {this.state.selectedAmount}
-            </Text>
-            <Text style={styles.selectedProjectCol}>
-              {this.state.selectedCurrency}
+            <Text>
+              {i18n.t('label.amount')}
+              {' : '}
+              <NumberFormat
+                data={this.state.selectedAmount}
+                currency={this.state.selectedCurrency}
+              />
             </Text>
           </View>
         </View>

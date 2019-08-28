@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const context = require('../../app/config/index.js');
 const commonConfig = require('./webpack.common.config.js');
 const path = require('path');
 const {
@@ -37,11 +38,11 @@ module.exports = webpackMerge(commonConfig, {
   devtool: 'source-map',
   plugins: [
     new BugsnagBuildReporterPlugin({
-      apiKey: '6f2971a9b077662912f61ae602716afd',
+      apiKey: context.bugsnagApiKey,
       appVersion: pkg.version
     }),
     new BugsnagSourceMapUploaderPlugin({
-      apiKey: '6f2971a9b077662912f61ae602716afd',
+      apiKey: context.bugsnagApiKey,
       appVersion: pkg.version,
       overwrite: true,
       publicPath: '*'
@@ -63,6 +64,7 @@ module.exports = webpackMerge(commonConfig, {
       },
       sourceMap: true
     }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /de|en|zh/),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     })

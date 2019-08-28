@@ -32,7 +32,9 @@ const PlantedDetails = ({ personal, community, type, onToggle }) => (
           )}
         </div>
         <div>
-          <strong>{delimitNumbers(personal)}</strong>
+          <strong className={personal.length > 12 ? 'small' : ''}>
+            {personal}
+          </strong>
         </div>
       </div>
     </div>
@@ -64,7 +66,9 @@ const PlantedDetails = ({ personal, community, type, onToggle }) => (
           </div>
         </div>
         <div>
-          <strong>{delimitNumbers(community)}</strong>
+          <strong className={community.length > 12 ? 'small' : ''}>
+            {community}
+          </strong>
         </div>
       </div>
     </div>

@@ -10,6 +10,8 @@ import { getImageUrl } from '../../actions/apiRouting';
 import { targetPlanted, tick, questionmark_orange } from '../../assets';
 import TouchableItem from '../Common/TouchableItem.native';
 import PlantedProgressBar from './PlantedProgressbar.native';
+import { formatNumber } from '../../utils/utils';
+
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -17,23 +19,6 @@ class PlantProjectSnippet extends React.Component {
   constructor(props) {
     super(props);
     this.toggleExpanded = this.toggleExpanded.bind(this);
-    this.currency_symbols = {
-      USD: '$', // US Dollar
-      EUR: '€', // Euro
-      CRC: '₡', // Costa Rican Colón
-      GBP: '£', // British Pound Sterling
-      ILS: '₪', // Israeli New Sheqel
-      INR: '₹', // Indian Rupee
-      JPY: '¥', // Japanese Yen
-      KRW: '₩', // South Korean Won
-      NGN: '₦', // Nigerian Naira
-      PHP: '₱', // Philippine Peso
-      PLN: 'zł', // Polish Zloty
-      PYG: '₲', // Paraguayan Guarani
-      THB: '฿', // Thai Baht
-      UAH: '₴', // Ukrainian Hryvnia
-      VND: '₫' // Vietnamese Dong
-    };
   }
 
   toggleExpanded(id) {
@@ -139,7 +124,10 @@ class PlantProjectSnippet extends React.Component {
             countTarget={specsProps.countTarget}
           />
           <View style={styles.projectSpecsContainer}>
-            <View style={styles.projectNameContainer}>
+            <View
+              key="projectNameContainer"
+              style={styles.projectNameContainer}
+            >
               <Text
                 ellipsizeMode="tail"
                 numberOfLines={1}
@@ -159,7 +147,10 @@ class PlantProjectSnippet extends React.Component {
                 />
               ) : null}
             </View>
-            <View style={styles.projectdetailsContainer}>
+            <View
+              key="projectdetailsContainer"
+              style={styles.projectdetailsContainer}
+            >
               <View style={styles.locationContainer}>
                 <Text style={styles.locationText} ellipsizeMode="tail">
                   {specsProps.location}
@@ -191,16 +182,13 @@ class PlantProjectSnippet extends React.Component {
 
               <View style={styles.costContainer}>
                 <Text style={styles.costText}>
-                  {this.currency_symbols[currency]
-                    ? this.currency_symbols[currency]
-                    : currency}{' '}
-                  {specsProps.treeCost}
+                  {formatNumber(specsProps.treeCost, null, currency)}
                 </Text>
               </View>
             </View>
 
-            <View style={styles.actionContainer}>
-              <View style={styles.byOrgContainer}>
+            <View key="actionContainer" style={styles.actionContainer}>
+              <View key="byOrgContainer" style={styles.byOrgContainer}>
                 <Text
                   style={styles.byOrgText}
                   ellipsizeMode="tail"
@@ -211,7 +199,7 @@ class PlantProjectSnippet extends React.Component {
               </View>
 
               {this.props.plantProject.allowDonations ? (
-                <View style={styles.buttonContainer}>
+                <View key="buttonContainer" style={styles.buttonContainer}>
                   <PrimaryButton
                     style={styles.buttonItem}
                     buttonStyle={styles.buttonStyle}

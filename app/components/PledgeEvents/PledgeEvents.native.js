@@ -11,11 +11,11 @@ import {
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
+import LoadingIndicator from '../Common/LoadingIndicator';
 import PledgeTabView from './PledgeTabView.native';
 import { getImageUrl } from '../../actions/apiRouting';
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
-import { eventCover } from './../../assets';
 import CardLayout from '../Common/Card';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 
@@ -26,10 +26,10 @@ import {
 } from '../../actions/pledgeAction';
 import { pledgesSelector, pledgeEventSelector } from '../../selectors';
 
-const height = Dimensions.get('window').height;
-const width = Dimensions.get('window').width;
-
 class PledgeEvents extends Component {
+  state = {
+    loading: true
+  };
   componentDidMount() {
     const eventSlug = this.props.navigation.getParam('slug');
     this.props.fetchPledgesAction(eventSlug);
@@ -41,6 +41,7 @@ class PledgeEvents extends Component {
 
   render() {
     const { navigation, userProfile, isLoggedIn } = this.props;
+
     return (
       <View style={styles.peRootView}>
         <ScrollView contentContainerStyle={styles.peRootScrollView}>
@@ -66,7 +67,7 @@ class PledgeEvents extends Component {
           this.props.pledges.highestPledgeEvents.length > 0 ? (
             // If there are Pledges
             <View>
-              <Text style={[styles.eventSubTitle, { marginHorizontal: 20 }]}>
+              <Text style={styles.eventSubTitle}>
                 {i18n.t('label.treesPledgedAllPledges', {
                   treeCount: this.props.navigation
                     .getParam('totalTrees')
@@ -77,7 +78,7 @@ class PledgeEvents extends Component {
             </View>
           ) : (
             // If there are no Pledges
-            <View style={{ marginHorizontal: 20 }}>
+            <View>
               <Text style={styles.eventSubTitle}>
                 {i18n.t('label.noPledges')}
               </Text>

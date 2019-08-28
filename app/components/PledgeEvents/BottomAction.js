@@ -12,12 +12,7 @@ export default class BottomAction extends Component {
     treeCount = this.props.treeCount.toLocaleString();
     return (
       <View>
-        <View
-          style={{
-            padding: 20,
-            paddingVertical: 30
-          }}
-        >
+        <View style={styles.baContainer}>
           {/* <Image
             source={successAnimated}
             style={styles.baSuccessImage}
@@ -29,27 +24,13 @@ export default class BottomAction extends Component {
             })}
           </Text>
 
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center'
-            }}
-          >
+          <View style={styles.baButtonContainer}>
             {/* <TouchableOpacity style={styles.baLaterButton}>
               <Text style={styles.baLaterText}>LATER</Text>
             </TouchableOpacity> */}
 
             <TouchableOpacity
               style={styles.baContinueButton}
-              // onPress={() => {
-              // 	updateStaticRoute(
-              // 		getLocalRoute('app_donateTrees_support', this.props.navigation, {
-              // 			treecounterId: this.props.projectID
-              // 		}),
-              // 		this.props.navigation
-              // 	);
-              // }}
               onPress={() => {
                 updateStaticRoute(
                   getLocalRoute('app_donateTrees'),

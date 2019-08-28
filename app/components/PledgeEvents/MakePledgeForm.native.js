@@ -26,27 +26,27 @@ import {
   pledgeSchemaOptions
 } from './../../server/parsedSchemas/pledge';
 
-let TCombForm = t.form.Form;
+// let TCombForm = t.form.Form;
 
-const formLayout = locals => {
-  return (
-    <View>
-      <View style={styles.formView}>
-        <View style={{ width: '45%' }}>{locals.inputs.firstname}</View>
-        <View style={{ width: '45%' }}>{locals.inputs.lastname}</View>
-      </View>
-      <View>{locals.inputs.email}</View>
-      <View style={styles.formtreecountView}>
-        <View style={{ width: '40%' }}>{locals.inputs.treeCount}</View>
-      </View>
-    </View>
-  );
-};
+// const formLayout = locals => {
+//   return (
+//     <View>
+//       <View style={styles.formView}>
+//         <View style={{ width: '45%' }}>{locals.inputs.firstname}</View>
+//         <View style={{ width: '45%' }}>{locals.inputs.lastname}</View>
+//       </View>
+//       <View>{locals.inputs.email}</View>
+//       <View style={styles.formtreecountView}>
+//         <View style={{ width: '40%' }}>{locals.inputs.treeCount}</View>
+//       </View>
+//     </View>
+//   );
+// };
 
-const allSchemaOptions = {
-  template: formLayout,
-  ...pledgeSchemaOptions
-};
+// const allSchemaOptions = {
+//   template: formLayout,
+//   ...pledgeSchemaOptions
+// };
 
 let _ = require('lodash');
 
@@ -135,7 +135,6 @@ class MakePledgeForm extends Component {
           this.props.postPledge(data, {
             pledgeEventSlug: params
           });
-          // console.log(this.props.postedPledge);
           this.RBSheet.open();
         } else {
           alert('Incorrect Email Entered');
@@ -161,8 +160,8 @@ class MakePledgeForm extends Component {
       <KeyboardAwareScrollView
         contentContainerStyle={styles.formScrollView}
         keyboardDismissMode="on-drag"
-        //keyboardShouldPersistTaps="always"
-        style={{ backgroundColor: 'white' }}
+        keyboardShouldPersistTaps="always"
+        style={styles.keyboardScrollView}
         resetScrollToCoords={{ x: 0, y: 0 }}
         scrollEnabled={false}
       >
@@ -180,7 +179,6 @@ class MakePledgeForm extends Component {
           {/* <View
             style={styles.formView}
           >
-
             <TCombForm
               ref="pledgeForm"
               type={pledgeFormSchema}
@@ -190,7 +188,7 @@ class MakePledgeForm extends Component {
             />
           </View> */}
           <View style={styles.formView}>
-            <View style={{ width: '45%' }}>
+            <View style={styles.formHalfTextField}>
               <TextField
                 label={i18n.t('label.pledgeFormFName')}
                 value={firstname}
@@ -206,7 +204,7 @@ class MakePledgeForm extends Component {
               />
             </View>
 
-            <View style={{ width: '45%' }}>
+            <View style={styles.formHalfTextField}>
               <TextField
                 label={i18n.t('label.pledgeFormLName')}
                 value={lastname}
@@ -244,7 +242,7 @@ class MakePledgeForm extends Component {
             />
           </View>
           <View style={styles.formtreecountView}>
-            <View style={{ width: '40%' }}>
+            <View style={styles.formHalfTextField}>
               <TextField
                 label={i18n.t('label.pledgeFormTreecount')}
                 tintColor={'#89b53a'}
@@ -286,7 +284,7 @@ class MakePledgeForm extends Component {
             <Image
               source={forward}
               resizeMode="cover"
-              style={{ height: 32, width: 32 }}
+              style={styles.pledgeSmallButtonIcon}
             />
           </TouchableOpacity>
         ) : null}
@@ -318,3 +316,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { postPledge })(MakePledgeForm);
+
+// To Do - Replace form with Tcomb Form

@@ -14,6 +14,7 @@
     "precommit": "lint-staged",
     "lint": "eslint app",
     "lint:errors": "eslint app --quiet",
+    "lint:json": "eslint . --ext .json",
     "postinstall":
       "grep -r --include=*.java -l 'android.support.v7' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v7/androidx.appcompat/' -pi && grep -r --include=*.java -l 'android.support.v4' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v4/androidx.core/' -pi && grep -r --include=*.java -l 'android.support' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi && grep --include=*.java -r -l 'android.support' ./node_modules/react-native-youtube | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi"
   },
@@ -110,6 +111,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^6.2.2",
     "eslint-loader": "^2.2.1",
+    "eslint-plugin-json": "1.4.0",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-native": "^3.7.0",
     "extract-text-webpack-plugin": "^3.0.2",

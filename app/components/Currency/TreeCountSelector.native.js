@@ -9,6 +9,8 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel
 } from 'react-native-simple-radio-button';
+import NumberFormat from '../Common/NumberFormat';
+import { formatNumber, delimitNumbers } from '../../utils/utils';
 
 class TreeCountSelector extends React.Component {
   constructor(props) {
@@ -60,7 +62,11 @@ class TreeCountSelector extends React.Component {
     if (amount === '') {
       amount = 0;
     }
+
     const treeCount = this.props.amountToTreeCount(amount);
+    if (isNaN(treeCount)) {
+      return;
+    }
     this.updateStateAndParent({
       variableAmount: parseInt(amount),
       variableTreeCount: treeCount
@@ -89,7 +95,7 @@ class TreeCountSelector extends React.Component {
     const { treeCountOptions, currency, treeCountToAmount } = this.props;
     let radio_props = [];
     treeCountOptions.fixedTreeCountOptions.map(treeCount => {
-      let label = treeCount + '          ' + i18n.t('label.trees');
+      let label = treeCount + ' ' + i18n.t('label.trees');
       radio_props.push({ label: label, value: treeCount });
     });
 
@@ -138,23 +144,23 @@ class TreeCountSelector extends React.Component {
               })}
             </RadioForm>
           </View>
-          <View style={styles.treecount_price_conversion_Column}>
+          <View style={styles.treecount_price_conversion_column}>
             {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
               return (
                 <View
-                  style={styles.treecount_price_conversion_Text_fixed}
+                  style={styles.treecount_price_conversion_text}
                   key={treeCount + 'container'}
                 >
-                  <View style={styles.treecount_price_conversion_Text_equal}>
+                  <View style={styles.treecount_price_conversion_text_equal}>
                     <Text>=</Text>
                   </View>
-                  <View style={styles.treecount_price_conversion_Text_input}>
+                  <View style={styles.treecount_price_conversion_text_input}>
                     <Text style={{ width: '100%' }} key={treeCount}>
-                      {treeCountToAmount(treeCount)}
+                      <NumberFormat
+                        data={treeCountToAmount(treeCount)}
+                        currency={currency}
+                      />
                     </Text>
-                  </View>
-                  <View style={styles.treecount_price_conversion_Text_currency}>
-                    <Text style={{ width: '100%' }}> {currency}</Text>
                   </View>
                 </View>
               );
@@ -194,7 +200,7 @@ class TreeCountSelector extends React.Component {
                 <TextInput
                   editable={!this.state.isFixed}
                   underlineColorAndroid={'transparent'}
-                  style={styles.treecount_price_conversion_Text_input2}
+                  style={styles.treecount_price_conversion_text_input2}
                   keyboardType="numeric"
                   onChangeText={evt => this.handleVariableTreeCountChange(evt)}
                   value={String(this.state.variableTreeCount)}
@@ -204,33 +210,35 @@ class TreeCountSelector extends React.Component {
                   key="variable"
                   ellipsizeMode="tail"
                   numberOfLines={1}
-                  style={styles.treecount_price_conversion_lebel}
+                  style={styles.treecount_price_conversion_label}
                 >
-                  {i18n.t('label.trees')}
+                  {' ' + i18n.t('label.trees')}
                 </Text>
               </View>
             </View>
           </View>
-          <View style={styles.treecount_price_conversion_Text}>
-            <View style={styles.treecount_price_conversion_Text_equal2}>
+          <View style={styles.treecount_price_conversion_text}>
+            <View style={styles.treecount_price_conversion_text_equal}>
               <Text>=</Text>
             </View>
-            <View
-              style={styles.treecount_price_conversion_Text_input3Container}
-            >
+            <View style={styles.radio_label}>
               <TextInput
                 editable={!this.state.isFixed}
                 underlineColorAndroid={'transparent'}
-                style={styles.treecount_price_conversion_Text_input3}
+                style={styles.treecount_price_conversion_text_input2}
                 keyboardType="numeric"
                 onChangeText={evt => this.handleVariableAmountChange(evt)}
-                value={String(this.state.variableAmount)}
+                value={delimitNumbers(this.state.variableAmount)}
                 autoCapitalize={'sentences'}
               />
-            </View>
-
-            <View style={styles.treecount_price_conversion_Text_currency2}>
-              <Text style={{ width: '100%' }}>{currency}</Text>
+              <Text
+                key="variable"
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={styles.treecount_price_conversion_label}
+              >
+                {' ' + formatNumber(1, null, currency).replace(/[\d.,]/g, '')}
+              </Text>
             </View>
           </View>
         </View>

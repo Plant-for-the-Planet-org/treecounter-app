@@ -108,7 +108,7 @@ export default class App extends Component {
         <style>{`:host {all: initial;}`}</style>
         <div className="widget-container" id={'widget-container'}>
           <link href="treecounterwidget.css" rel="stylesheet" />
-          {/* <link href={`${serverName}/treecounterwidget.css`} rel="stylesheet" /> */}
+          <link href={`${serverName}/treecounterwidget.css`} rel="stylesheet" />
           {/* Apply CSS hooks here */}
           <style>{style}</style>
           {/* Apply React Tooltip Library CSS */}
@@ -136,7 +136,7 @@ export default class App extends Component {
                 onClick={event => {
                   const url = `${serverName}${getLocalRoute(
                     'app_donateTrees'
-                  )}/${projectId}`;
+                  )}${projectId ? '/' + projectId : ''}`;
                   window.open(url, '_blank');
                 }}
               >

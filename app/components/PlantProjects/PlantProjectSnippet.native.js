@@ -10,7 +10,8 @@ import { getImageUrl } from '../../actions/apiRouting';
 import { targetPlanted, tick, questionmark_orange } from '../../assets';
 import TouchableItem from '../Common/TouchableItem.native';
 import PlantedProgressBar from './PlantedProgressbar.native';
-import NumberFormat from '../Common/NumberFormat';
+import { formatNumber } from '../../utils/utils';
+
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -181,10 +182,7 @@ class PlantProjectSnippet extends React.Component {
 
               <View style={styles.costContainer}>
                 <Text style={styles.costText}>
-                  <NumberFormat
-                    currency={currency}
-                    data={specsProps.treeCost}
-                  />
+                  {formatNumber(specsProps.treeCost, null, currency)}
                 </Text>
               </View>
             </View>

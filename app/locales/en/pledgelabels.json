@@ -1,8 +1,25 @@
 {
   "total_trees": "Total Trees",
-  "most_recent": "Most Recent Pledges",
+  "most_recent": "Recent Pledges",
   "biggest_pledges": "Biggest Pledges",
   "pledge": "Pledge",
   "pledge_trees": "Pledge Trees",
-  "pledge_des": "After pledging, you will receive an email that tells you how to donate the trees pledged."
+  "pledge_des":
+    "After pledging, you will receive an email that tells you how to donate the trees pledged.",
+  "noPledges":
+    "It seems no trees have been pledged yet. Please make a pledge and Come back later to check the biggest pledges.",
+  "makePledgeButton": "Make a Pledge",
+  "pledgeTitleName": "Name",
+  "pledgeTitleTrees": "Trees",
+  "pledgeToPlant": "Pledge to Plant Trees",
+  "pledgeToPlantDesc":
+    "A tree costs {{treeCost}} {{currency}} and are planted in {{projectName}}. You will receive an email with a link to fulfill your pledge.",
+  "pledgeFormFName": "First Name",
+  "pledgeFormLName": "Last Name",
+  "pledgeFormEmail": "Email",
+  "pledgeFormTreecount": "Tree Count",
+  "pledgeAddedMessage":
+    "You’ve pledged to plant {{treeCount}} Trees. You can tap continue to fulfill your pledge right now.",
+  "pledgeAddedContinueButton": "CONTINUE",
+  "treesPledgedAllPledges": "{{treeCount}} trees pledged"
 }

@@ -132,6 +132,12 @@ import individualIcon from './images/individual_icon.png';
 import companyIcon from './images/company_icon.png';
 import mapCollapse from './images/map_collapse.png';
 import mapExpand from './images/map_expand.png';
+import smalltree from './images/smalltree.png';
+import calendarwhite from './images/calendarwhite.png';
+import forward from './images/forward.png';
+import successAnimated from './images/successAnimated.gif';
+import trees from './images/trees.png';
+import greencalendar from './images/greencalendar.png';
 
 export {
   mapCollapse,
@@ -267,5 +273,11 @@ export {
   downwardArrow,
   arrow_left_orange_outline,
   webProgramming,
-  communityMenu
+  communityMenu,
+  smalltree,
+  calendarwhite,
+  forward,
+  successAnimated,
+  trees,
+  greencalendar
 };

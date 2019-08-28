@@ -44,9 +44,6 @@ class ProfilePickerModal extends Component {
       <View>
         <View style={styles.containerDedicateStyle}>
           <View style={styles.dedicateTreeName}>
-            <Text style={styles.dedicateMyTree}>
-              {i18n.t('label.dedicate_my_trees')}
-            </Text>
             <Text style={styles.textNotDedicateStyle}>
               {i18n.t('label.has_not_dedicated')}
             </Text>
@@ -73,16 +70,9 @@ class ProfilePickerModal extends Component {
                     }}
                     defaultType={this.state.selectedSuggestion.type}
                   />
-
                   <View style={styles.participantNameContainer}>
                     <Text style={styles.textStyle}>
-                      {currentUserProfile.supportedTreecounter.displayName}
-                    </Text>
-                    <Text style={styles.topCompetitorScoreText}>
-                      {delimitNumbers(
-                        currentUserProfile.supportedTreecounter.countPlanted
-                      )}{' '}
-                      {i18n.t('label.planted')}
+                      {this.state.selectedSuggestion.name}
                     </Text>
                   </View>
                 </View>
@@ -102,73 +92,63 @@ class ProfilePickerModal extends Component {
       </View>
     );
 
-    const dedicatedUser = (
-      <View>
-        <View style={styles.containerDedicateStyle}>
-          <View style={styles.dedicateTreeName}>
-            <Text style={styles.dedicateMyTree}>
-              {i18n.t('label.dedicate_my_trees')}
-            </Text>
-            <Text style={styles.textDedicateStyle}>
-              {i18n.t('label.has_dedicated', {
-                user: currentUserProfile.supportedTreecounter.displayName
-              })}
-            </Text>
-            <Text style={styles.currentlyDedicatedTo}>
-              {i18n.t('label.currently_dedicated_to')}
-            </Text>
-          </View>
-        </View>
-        <CardLayout style={[styles.projectSnippetContainer]}>
-          <View style={styles.containerStyle}>
-            <View style={styles.topCompetitorName}>
-              <UserProfileImage
-                profileImage={currentUserProfile.supportedTreecounter.avatar}
-                imageStyle={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 40 / 2
-                }}
-              />
-              <View style={styles.participantNameContainer}>
-                <Text style={styles.textStyle}>
-                  {currentUserProfile.supportedTreecounter.displayName}
-                </Text>
-                <Text style={styles.topCompetitorScoreText}>
-                  {delimitNumbers(
-                    currentUserProfile.supportedTreecounter.countPlanted
-                  )}{' '}
-                  {i18n.t('label.planted')}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.topCompetitorScore}>
-              <PrimaryButton
-                buttonStyle={styles.buttonStyle}
-                textStyle={styles.primaryButtonText}
-                onClick={this.updateProfile.bind(this)}
-              >
-                {i18n.t('label.edit')}
-              </PrimaryButton>
-            </View>
-          </View>
-        </CardLayout>
-      </View>
-    );
-
     return (
-      <View style={{ backgroundColor: 'white' }}>
-        <ScrollView
-          contentContainerStyle={[
-            scrollStyle.styleContainer,
-            { backgroundColor: 'white', marginBottom: 500 }
-          ]}
-        >
+      <View>
+        <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
           <View>
-            {this.state.editMode ? pickupProfileView : dedicatedUser}
-            {/* {currentUserProfile.supportedTreecounter
-              ? dedicatedUser
-              : pickupProfileView} */}
+            {this.state.editMode ? pickupProfileView : null}
+            {currentUserProfile.supportedTreecounter ? (
+              <View>
+                <View style={styles.containerDedicateStyle}>
+                  <View style={styles.dedicateTreeName}>
+                    <Text style={styles.textDedicateStyle}>
+                      {i18n.t('label.has_dedicated', {
+                        user:
+                          currentUserProfile.supportedTreecounter.displayName
+                      })}
+                    </Text>
+                  </View>
+                </View>
+                <CardLayout style={[styles.projectSnippetContainer]}>
+                  <View style={styles.containerStyle}>
+                    <View style={styles.topCompetitorName}>
+                      <UserProfileImage
+                        profileImage={
+                          currentUserProfile.supportedTreecounter.avatar
+                        }
+                        imageStyle={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: 40 / 2
+                        }}
+                      />
+                      <View style={styles.participantNameContainer}>
+                        <Text style={styles.textStyle}>
+                          {currentUserProfile.supportedTreecounter.displayName}
+                        </Text>
+                        <Text style={styles.topCompetitorScoreText}>
+                          {delimitNumbers(
+                            currentUserProfile.supportedTreecounter.countPlanted
+                          )}{' '}
+                          {i18n.t('label.planted')}
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={styles.topCompetitorScore}>
+                      <PrimaryButton
+                        buttonStyle={styles.buttonStyle}
+                        textStyle={styles.primaryButtonText}
+                        onClick={this.updateProfile.bind(this)}
+                      >
+                        {i18n.t('label.edit')}
+                      </PrimaryButton>
+                    </View>
+                  </View>
+                </CardLayout>
+              </View>
+            ) : (
+              pickupProfileView
+            )}
           </View>
         </ScrollView>
       </View>

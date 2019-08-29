@@ -60,7 +60,7 @@
     "react-native-htmlview": "^0.12.1",
     "react-native-i18n": "^2.0.15",
     "react-native-image-carousel": "^0.4.4",
-    "react-native-image-picker": "^0.28.1",
+    "react-native-image-picker": "^1.0.2",
     "react-native-keyboard-aware-scroll-view": "^0.7.4",
     "react-native-lightbox": "^0.7.0",
     "react-native-linear-gradient": "^2.5.4",

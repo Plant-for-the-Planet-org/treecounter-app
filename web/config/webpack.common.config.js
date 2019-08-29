@@ -1,5 +1,6 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const config = {
   module: {
@@ -77,7 +78,7 @@ const config = {
       template: './web/index.html',
       filename: './index.html'
     }),
-
+    new FaviconsWebpackPlugin('./app/assets/images/Planet-Logo.png'),
     new ExtractTextPlugin('[name].css')
   ]
 };

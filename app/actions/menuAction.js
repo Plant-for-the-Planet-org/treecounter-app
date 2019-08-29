@@ -1,5 +1,6 @@
 import { getRequest, getAuthenticatedRequest } from '../utils/api';
 import { debug } from '../debug';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import i18n from '../locales/i18n.js';
 
 export function MenuAction(isAuthenticated = false) {

@@ -5,6 +5,10 @@ import TreeCounter from './TreeCounter';
 import configureStore from '../../stores/TreecounterStore';
 import GlobalErrorBoundary from '../ErrorBoundry/globalErrorBoundry';
 import { isIOS, isAndroid } from '../../utils/utils';
+import { Auth0Provider } from '../auth0/react-auth0';
+import { context } from '../../config';
+import AuthenticateUser from '../auth0/AuthenticateUser';
+
 import SmartBannerClickable from '../SmartBanner';
 import i18n from '../../locales/i18n.js';
 let store;
@@ -19,7 +23,15 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <GlobalErrorBoundary>
-          <TreeCounter />
+          <Auth0Provider
+            domain={context.auth0domain}
+            client_id={context.auth0clientId}
+            redirect_uri={window.location.origin}
+          >
+            <AuthenticateUser>
+              <TreeCounter />
+            </AuthenticateUser>
+          </Auth0Provider>
           <SmartBannerClickable
             daysHidden={1}
             title={i18n.t('label.plant_for_the_planet_app')}

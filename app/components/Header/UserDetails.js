@@ -11,33 +11,36 @@ import {
 import TextSpan from '../Common/Text/TextSpan';
 import TransparentButton from '../Common/Button/TransparentButton';
 import i18n from '../../locales/i18n.js';
-import { getImageUrl } from '../../actions/apiRouting';
+// import { getImageUrl } from '../../actions/apiRouting';
+import UserProfileImage from '../Common/UserProfileImage';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 
 const UserDetails = ({
   updateRoute,
   userProfile,
-  onLogout,
+  logoutUser,
   openProfilePickerModal
 }) => {
+  const profile = userProfile || {};
   return (
     <div>
       <div className="popover__list-item">
         <div className="list-item__wrapper">
-          <img
+          <UserProfileImage profileImage={profile.image} />
+          {/* <img
             src={
               userProfile.image
                 ? getImageUrl('profile', 'thumb', userProfile.image)
                 : ProfilePic
             }
-          />
+          /> */}
           <div>
             <TextSpan strong>
               {i18n.t('label.welcome_hi', {
-                user: userProfile.fullname
+                user: profile.fullname || ''
               })}
             </TextSpan>
-            <TextSpan>{userProfile.email}</TextSpan>
+            <TextSpan>{profile.email || ''}</TextSpan>
           </div>
         </div>
       </div>
@@ -56,13 +59,13 @@ const UserDetails = ({
             </ReactTooltip>
           </div>
         </div>
-        {userProfile.supportedTreecounter ? (
+        {profile.supportedTreecounter ? (
           <div className="pick-profile-container">
             <div>
               <img src={ProfilePic} />
             </div>
             <div className="pick-profile-username">
-              {userProfile.supportedTreecounter.displayName}
+              {profile.supportedTreecounter.displayName}
             </div>
             <PrimaryButton
               className="pick-profile-primary-button"
@@ -93,7 +96,7 @@ const UserDetails = ({
       </div>
       <hr className="divider__light" />
       <div className="popover__action-link">
-        <a onClick={onLogout}>{i18n.t('label.logout')}</a>
+        <a onClick={logoutUser}>{i18n.t('label.logout')}</a>
       </div>
     </div>
   );
@@ -101,7 +104,7 @@ const UserDetails = ({
 
 UserDetails.propTypes = {
   userProfile: PropTypes.object,
-  onLogout: PropTypes.func.isRequired,
+  logoutUser: PropTypes.func.isRequired,
   updateRoute: PropTypes.func,
   openProfilePickerModal: PropTypes.func
 };

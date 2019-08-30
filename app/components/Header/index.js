@@ -1,51 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-// Components
-import SearchBar from './Search';
-import HeaderFields from './HeaderFields';
+import { useAuth0 } from '../auth0/react-auth0';
+import AnonHeader from './AnonHeader';
 import BurgerMenu from './BurgerMenu';
 import HomeButton from './HomeButton';
+import SearchBar from './Search';
+import UserHeader from './UserHeader';
 
-const Header = ({
-  userFeeds,
-  updateRoute,
-  logoutUser,
-  userProfile,
-  fetchMoreNotifications,
-  markSeenNotificationAction,
-  updateProfileDedication
-}) => {
-  let isLoggedIn = null != userProfile;
+const Header = () => {
+  const { isAuthenticated } = useAuth0();
+
   return (
     <header className="app-header">
       <div className="app-header__home">
         <BurgerMenu />
-        {isLoggedIn ? <HomeButton /> : null}
+        {isAuthenticated ? <HomeButton /> : null}
       </div>
       <SearchBar />
-      <HeaderFields
-        isLoggedIn={isLoggedIn}
-        userProfile={userProfile}
-        onLogout={logoutUser}
-        updateRoute={updateRoute}
-        userFeeds={userFeeds}
-        fetchMoreNotifications={fetchMoreNotifications}
-        markSeenNotificationAction={markSeenNotificationAction}
-        updateProfileDedication={updateProfileDedication}
-      />
+      {isAuthenticated ? <UserHeader /> : <AnonHeader />}
     </header>
   );
 };
 
 export default Header;
-
-Header.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  userProfile: PropTypes.object,
-  fetchMoreNotifications: PropTypes.func,
-  markSeenNotificationAction: PropTypes.func,
-  updateRoute: PropTypes.func,
-  userFeeds: PropTypes.object,
-  updateProfileDedication: PropTypes.func
-};

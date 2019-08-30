@@ -16,6 +16,7 @@ import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import { delimitNumbers } from '../../utils/utils';
 import NumberFormat from '../Common/NumberFormat';
 import { sortProjectsByPrice } from '../../utils/currency';
+import _ from 'lodash';
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -61,9 +62,8 @@ export default class SelectPlantProject extends Component {
       currencies: { currencies }
     } = props;
 
-    const featuredProjects = plantProjects.filter(
-      project => project.isFeatured
-    );
+    let featuredProjects = plantProjects.filter(project => project.isFeatured);
+    featuredProjects = _.orderBy(featuredProjects, 'created');
 
     let priceSortedProjects = sortProjectsByPrice(
       plantProjects,

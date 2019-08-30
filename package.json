@@ -26,6 +26,7 @@
     ]
   },
   "dependencies": {
+    "@auth0/auth0-spa-js": "1.2.1",
     "@bugsnag/js": "^6.3.0",
     "@haskkor/react-native-recaptchav3": "^1.0.3",
     "@react-native-community/async-storage": "^1.6.1",

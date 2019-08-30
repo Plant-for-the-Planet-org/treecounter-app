@@ -45,7 +45,7 @@ export default class GiftUser extends Component {
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 72 }}
-        enableOnAndroid={true}
+        enableOnAndroid
       >
         <View
           style={{
@@ -95,7 +95,7 @@ export default class GiftUser extends Component {
             </View>
 
             <TextInput
-              multiline={true}
+              multiline
               style={{
                 height: 100,
                 margin: 10,

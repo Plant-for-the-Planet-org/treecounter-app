@@ -41,9 +41,7 @@ export default class ActivateAccount extends Component {
           <CardLayout>
             <img src={RedEmail} />
             <div className={'gap'} />
-            <TextBlock strong={true}>
-              {i18n.t('label.not_yet_activated')}
-            </TextBlock>
+            <TextBlock strong>{i18n.t('label.not_yet_activated')}</TextBlock>
             <div className={'gap'} />
             <TextBlock>{i18n.t('label.received_email')}</TextBlock>
             <div className={'gap'} />

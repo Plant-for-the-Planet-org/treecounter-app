@@ -56,7 +56,7 @@ export default class GiftEmail extends Component {
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 72 }}
-        enableOnAndroid={true}
+        enableOnAndroid
       >
         <CardLayout>
           <View style={{ flexDirection: 'row' }}>

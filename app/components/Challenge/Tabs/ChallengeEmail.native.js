@@ -138,7 +138,7 @@ class ChallengeEmail extends Component {
           contentContainerStyle={{
             paddingBottom: 72
           }}
-          enableOnAndroid={true}
+          enableOnAndroid
         >
           {this.props.error ? (
             <View style={errorStyles.containerDedicateStyle}>

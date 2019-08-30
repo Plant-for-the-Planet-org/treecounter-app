@@ -201,11 +201,11 @@ export default class EditUserProfile extends React.Component {
     const updatedUserProfile = {
       ...this.props.currentUserProfile,
       synopsis1: `${
-        !!this.props.currentUserProfile.synopsis1
+        this.props.currentUserProfile.synopsis1
           ? this.props.currentUserProfile.synopsis1
           : ''
       }${
-        !!this.props.currentUserProfile.synopsis2
+        this.props.currentUserProfile.synopsis2
           ? ' ' + this.props.currentUserProfile.synopsis2
           : ''
       }`,
@@ -355,7 +355,7 @@ export default class EditUserProfile extends React.Component {
                       <div className="col col3">
                         <FollowLabelButton
                           label={i18n.t('label.un_follow')}
-                          isSubscribed={true}
+                          isSubscribed
                           isLoggedIn={false}
                           onClick={() => this.props.unfollowUser(follow.id)}
                         />

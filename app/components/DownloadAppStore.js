@@ -19,7 +19,7 @@ export class DownloadAppModal extends Component {
         portalClassName="ModalPortal"
         ariaHideApp={false}
         onRequestClose={onRequestClose}
-        shouldFocusAfterRender={true}
+        shouldFocusAfterRender
       >
         <div>
           <img

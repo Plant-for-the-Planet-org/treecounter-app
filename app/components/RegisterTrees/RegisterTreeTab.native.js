@@ -72,7 +72,7 @@ export default class RegisterTreeTab extends PureComponent {
       ...this.props.schemaOptions
     };
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
+      <KeyboardAwareScrollView enableOnAndroid>
         <View style={{ backgroundColor: '#ffffff' }}>
           <Form
             ref="multipleTreesForm"

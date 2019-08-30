@@ -235,9 +235,7 @@ export default class ContributionCard extends React.Component {
           }`}
         >
           <div className="contribution-container__left-column">
-            {treeCountLine ? (
-              <TextSpan strong={true}>{treeCountLine}</TextSpan>
-            ) : null}
+            {treeCountLine ? <TextSpan strong>{treeCountLine}</TextSpan> : null}
 
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {donateActionLine ? (
@@ -326,9 +324,7 @@ export default class ContributionCard extends React.Component {
           }`}
         >
           <div className="contribution-container__left-column">
-            {treeCountLine ? (
-              <TextSpan strong={true}>{treeCountLine}</TextSpan>
-            ) : null}
+            {treeCountLine ? <TextSpan strong>{treeCountLine}</TextSpan> : null}
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {plantActionLine ? <TextSpan>{plantActionLine}</TextSpan> : null}
             {dedicateActionLine ? (
@@ -439,9 +435,7 @@ export default class ContributionCard extends React.Component {
           }`}
         >
           <div className="contribution-container__left-column">
-            {treeCountLine ? (
-              <TextSpan strong={true}>{treeCountLine}</TextSpan>
-            ) : null}
+            {treeCountLine ? <TextSpan strong>{treeCountLine}</TextSpan> : null}
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {redeemActionLine ? <TextSpan>{redeemActionLine}</TextSpan> : null}
             {tpoLine ? <TextSpan>{tpoLine}</TextSpan> : null}

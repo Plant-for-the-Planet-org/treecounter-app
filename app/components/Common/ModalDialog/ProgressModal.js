@@ -11,7 +11,7 @@ const ProgressModal = ({ isOpen, onRequestClose }) => (
     portalClassName="ModalPortal"
     ariaHideApp={false}
     onRequestClose={onRequestClose}
-    shouldFocusAfterRender={true}
+    shouldFocusAfterRender
   >
     <div>
       <LoadingIndicator />

@@ -164,7 +164,7 @@ export default class EditUserProfile extends Component {
 
                       <FollowLabelButton
                         label={i18n.t('label.un_follow')}
-                        isSubscribed={true}
+                        isSubscribed
                         isLoggedIn={false}
                         onClick={() => {
                           this.props.unfollowUser(follow.id);
@@ -204,7 +204,7 @@ export default class EditUserProfile extends Component {
         <View />
         <TabView
           ref={'tabView'}
-          useNativeDriver={true}
+          useNativeDriver
           navigationState={this.state}
           renderScene={this._renderScene.bind(this)}
           renderTabBar={this._renderTabBar}
@@ -236,7 +236,7 @@ class BasicTabView extends React.PureComponent {
   render() {
     const { type } = this.props.currentUserProfile;
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
+      <KeyboardAwareScrollView enableOnAndroid>
         <CardLayout style={{ flex: 1 }}>
           <Form
             ref={'image'}
@@ -279,7 +279,7 @@ class DescriptionTabView extends React.PureComponent {
   render() {
     const { type } = this.props.currentUserProfile;
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
+      <KeyboardAwareScrollView enableOnAndroid>
         <CardLayout style={{ flex: 1 }}>
           <View {...this.props}>
             <Form
@@ -316,7 +316,7 @@ class SecurityTabView extends React.PureComponent {
   render() {
     const { type } = this.props.currentUserProfile;
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
+      <KeyboardAwareScrollView enableOnAndroid>
         <CardLayout style={{ flex: 1 }}>
           <View {...this.props}>
             <Form

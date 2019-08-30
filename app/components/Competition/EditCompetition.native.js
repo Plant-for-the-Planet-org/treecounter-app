@@ -154,7 +154,7 @@ class EditCompetition extends Component {
         formValue && formValue.image ? formValue.image : null;
     }
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
+      <KeyboardAwareScrollView enableOnAndroid>
         <CardLayout style={{ flex: 1 }}>
           <Form
             ref={this.createCompetitionForm}

@@ -21,12 +21,12 @@ class VideoContainer extends React.Component {
         ID = ID[0];
         videoId = ID;
       } //Don't set URl into ID because it s causing crash on android
-    } else if (!!this.props.videoId) {
+    } else if (this.props.videoId) {
       videoId = this.props.videoId;
     }
     // Periodically triggeting a forced unnoticable layout rendering until onReady to make sure the
     // native loading progress is shown
-    if (!!videoId) {
+    if (videoId) {
       this.setState({ videoId });
       this._interval = setInterval(() => {
         this.setState({ moduleMargin: Math.random() / 2 });

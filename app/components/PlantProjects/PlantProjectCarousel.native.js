@@ -32,7 +32,7 @@ class PlantProjectCarousel extends Component {
     return (
       <Slick
         style={styles.slickWrapper}
-        showsPagination={true}
+        showsPagination
         paginationStyle={{
           position: 'absolute',
           top: 0,

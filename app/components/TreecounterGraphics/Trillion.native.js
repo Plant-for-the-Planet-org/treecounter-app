@@ -172,7 +172,7 @@ class Trillion extends PureComponent {
               {/* Featured events horizontal ScrollView */}
               <View style={{ marginTop: 16 }}>
                 <ScrollView
-                  horizontal={true}
+                  horizontal
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={{ paddingRight: 20 }}
                 >
@@ -217,7 +217,7 @@ class Trillion extends PureComponent {
 
               {/* Tree Counter SVG */}
               <View style={svgStyles.svgContainer}>
-                <SvgContainer {...this.state.svgData} trillion={true} />
+                <SvgContainer {...this.state.svgData} trillion />
               </View>
               {/* Tree Counter SVG Ended */}
 

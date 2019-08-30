@@ -65,7 +65,7 @@ export default class AppPayments extends Component {
             <div className="payment-success">
               <img src={check_green} />
               <div className={'gap'} />
-              <TextBlock strong={true}>
+              <TextBlock strong>
                 {i18n.t('label.thankyou_planting', {
                   count: paymentInfo.treeCount
                 })}
@@ -81,9 +81,7 @@ export default class AppPayments extends Component {
             <div className="payment-success">
               <img src={attention} />
               <div className={'gap'} />
-              <TextBlock strong={true}>
-                {i18n.t('label.payment_failed')}
-              </TextBlock>
+              <TextBlock strong>{i18n.t('label.payment_failed')}</TextBlock>
               <div className={'gap'} />
               <TextBlock>
                 <PrimaryButton onClick={() => this.openApp('failed')}>

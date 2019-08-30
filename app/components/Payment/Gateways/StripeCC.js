@@ -107,7 +107,7 @@ class _StripeCC extends React.Component<InjectedProps & { fontSize: string }> {
             onChange={handleChange}
             onFocus={handleFocus}
             onReady={handleReady}
-            hidePostalCode={true}
+            hidePostalCode
             {...createOptions(this.props.fontSize)}
           />
           <PrimaryButton>{i18n.t('label.pay')}</PrimaryButton>

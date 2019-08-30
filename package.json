@@ -14,6 +14,7 @@
     "precommit": "lint-staged",
     "lint": "eslint app",
     "lint:errors": "eslint app --quiet",
+    "lint:fix": "eslint app --fix",
     "lint:json": "eslint . --ext .json",
     "postinstall":
       "grep -r --include=*.java -l 'android.support.v7' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v7/androidx.appcompat/' -pi && grep -r --include=*.java -l 'android.support.v4' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v4/androidx.core/' -pi && grep -r --include=*.java -l 'android.support' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi && grep --include=*.java -r -l 'android.support' ./node_modules/react-native-youtube | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi"

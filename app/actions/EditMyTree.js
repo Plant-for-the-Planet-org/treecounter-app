@@ -36,11 +36,11 @@ export function editTree(plantContribution, plantId, navigation) {
         dispatch(setProgressModelState(false));
         updateRoute('app_userHome', navigation || dispatch);
       })
-      .catch(error => {
-        debug(error.response);
+      .catch(response => {
+        debug(response);
         dispatch(setProgressModelState(false));
         NotificationManager.error(
-          error.response.data.message,
+          response.data.message,
           i18n.t('label.error'),
           5000
         );
@@ -77,16 +77,16 @@ export function deleteContribution(plantContributionId) {
             5000
           );
         })
-        .catch(err => {
-          debug(err);
+        .catch(response => {
+          debug(response);
 
           NotificationManager.error(
-            error.response.data.message,
+            response.data.message,
             i18n.t('label.error'),
             5000
           );
 
-          reject(err);
+          reject(response);
         })
         .finally(data => {
           dispatch(setProgressModelState(false));

@@ -4,6 +4,9 @@ import { fetchItem, getItem, saveItem } from '../stores/localStorage';
 import { postRequest } from './api';
 
 /**
+ * Get the JWT token that the backend API issued.
+ *
+ * When using Auth0
  * @returns string | null
  */
 export const getAccessToken = async () => {
@@ -72,3 +75,17 @@ const getTokenExpires = async () => {
 };
 
 const getCurrentUnixTimestamp = () => Math.floor(Date.now() / 1000);
+
+/**
+ * Save the JWT token that Auth0 supplies.
+ *
+ * This can be used for authentication against our own backend API.
+ * When decoded it contains user profile and a unique identifier: "sub"
+ *
+ * @param {str} token JWT token that Auth0 supplied
+ */
+export const setAuth0Token = async token => {
+  saveItem('auth0token', token);
+};
+
+export const getAuth0Token = async () => getItem('auth0token');

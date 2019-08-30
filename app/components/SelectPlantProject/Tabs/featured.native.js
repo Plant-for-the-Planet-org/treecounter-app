@@ -36,7 +36,7 @@ export default class FeaturedProjects extends PureComponent {
   render() {
     let featuredProjects = orderBy(
       this.props.plantProjects.filter(project => project.isFeatured),
-      'id'
+      'created'
     );
 
     return (

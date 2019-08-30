@@ -25,7 +25,7 @@ export default class FeaturedProjects extends Component {
       }
       return projects;
     }, []);
-    featuredProjects = _.orderBy(featuredProjects, 'id');
+    featuredProjects = _.orderBy(featuredProjects, 'created');
     this.setState({
       featuredProjects: featuredProjects
     });
@@ -54,7 +54,7 @@ export default class FeaturedProjects extends Component {
       }
       return projects;
     }, []);
-    featuredProjects = _.orderBy(featuredProjects, 'id');
+    featuredProjects = _.orderBy(featuredProjects, 'created');
     this.setState({
       featuredProjects: featuredProjects
     });

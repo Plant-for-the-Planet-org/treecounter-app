@@ -43,10 +43,10 @@ class ChallengeContainer extends Component {
           challengeSuccess: true
         });
       })
-      .catch(err => {
-        console.log(err.response.data);
+      .catch(response => {
+        console.log(response.data);
         this.setState({
-          error: err.response.data.minTarget
+          error: response.data.minTarget
         });
       });
   }

@@ -31,12 +31,12 @@ export function challenge(challengeDetails) {
             5000
           );
         })
-        .catch(error => {
-          debug('error: ', error);
-          reject(error);
+        .catch(response => {
+          debug('error: ', response);
+          reject(response);
           dispatch(setProgressModelState(false));
           NotificationManager.error(
-            error.response.data.message,
+            response.data.message,
             i18n.t('label.error'),
             5000
           );

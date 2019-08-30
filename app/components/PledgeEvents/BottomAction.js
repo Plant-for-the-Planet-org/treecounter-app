@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { successAnimated } from '../../assets';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
@@ -8,7 +8,6 @@ import i18n from '../../locales/i18n';
 
 export default class BottomAction extends Component {
   render() {
-    const route = 'app_donateTrees_support' + this.props.projectID;
     treeCount = this.props.treeCount.toLocaleString();
     return (
       <View>
@@ -25,9 +24,21 @@ export default class BottomAction extends Component {
           </Text>
 
           <View style={styles.baButtonContainer}>
-            {/* <TouchableOpacity style={styles.baLaterButton}>
+            <TouchableOpacity
+              style={styles.baLaterButton}
+              onPress={() => {
+                updateStaticRoute('app_pledge_events', this.props.navigation, {
+                  slug: this.props.navigation.getParam('slug'),
+                  eventName: this.props.navigation.getParam('eventName'),
+                  eventDate: this.props.navigation.getParam('eventDate'),
+                  totalTrees: this.props.navigation.getParam('totalTrees'),
+                  eventImage: this.props.navigation.getParam('eventImage'),
+                  description: this.props.navigation.getParam('description')
+                });
+              }}
+            >
               <Text style={styles.baLaterText}>LATER</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.baContinueButton}

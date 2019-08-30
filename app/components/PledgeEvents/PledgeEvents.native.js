@@ -18,7 +18,6 @@ import { bindActionCreators } from 'redux';
 import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import CardLayout from '../Common/Card';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
-
 import {
   fetchPledgesAction,
   postPledge,
@@ -28,7 +27,8 @@ import { pledgesSelector, pledgeEventSelector } from '../../selectors';
 
 class PledgeEvents extends Component {
   state = {
-    loading: true
+    loading: true,
+    openSheet: true
   };
   componentDidMount() {
     const eventSlug = this.props.navigation.getParam('slug');
@@ -40,8 +40,7 @@ class PledgeEvents extends Component {
   }
 
   render() {
-    const { navigation, userProfile, isLoggedIn } = this.props;
-
+    const { navigation } = this.props;
     return (
       <View style={styles.peRootView}>
         <ScrollView contentContainerStyle={styles.peRootScrollView}>
@@ -120,7 +119,12 @@ class PledgeEvents extends Component {
           onPress={() => {
             updateStaticRoute('app_pledge_form', navigation, {
               slug: this.props.pledges.slug,
-              plantProject: this.props.pledges.plantProject
+              plantProject: this.props.pledges.plantProject,
+              eventName: this.props.navigation.getParam('eventName'),
+              eventDate: this.props.navigation.getParam('eventDate'),
+              totalTrees: this.props.navigation.getParam('totalTrees'),
+              eventImage: this.props.navigation.getParam('eventImage'),
+              description: this.props.navigation.getParam('description')
             });
           }}
         >

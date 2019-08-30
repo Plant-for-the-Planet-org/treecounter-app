@@ -6,8 +6,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  Keyboard,
-  KeyboardAvoidingView
+  Keyboard
 } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -17,6 +16,7 @@ import { forward } from './../../assets';
 import t from 'tcomb-form-native';
 import { postPledge } from './../../actions/pledgeAction';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 
 import i18n from '../../locales/i18n';
 import { connect } from 'react-redux';
@@ -104,6 +104,7 @@ class MakePledgeForm extends Component {
 
   onFormSubmit = () => {
     const { firstname, lastname, email, treeCount } = this.state;
+    const { navigation } = this.props;
     let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
       firstname === '' ||

@@ -6,6 +6,7 @@ import Config from './config';
 import classnames from 'classnames';
 import Axios from 'axios';
 import LoadingIndicators from '../../components/Common/LoadingIndicator';
+import { getAccessToken } from '../../utils/user';
 
 import CCForm from './CCForm';
 import SEPAForm from './SEPAForm';
@@ -19,11 +20,26 @@ class CheckoutForm extends React.Component {
     cards: []
   };
 
+  configHeader = async () => {
+    try {
+      const token = await getAccessToken();
+      return {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      };
+    } catch (e) {
+      throw e;
+    }
+  };
+
   async componentDidMount() {
     try {
+      const header = await this.configHeader();
+
       const requestResponse = await Axios.get(
         Config.baseURL + Config.fetchCardUrl,
-        Config.headerConfig
+        header
       );
       if (requestResponse.status === 200) {
         this.fillCard(requestResponse.data.paymentMethods);
@@ -43,10 +59,11 @@ class CheckoutForm extends React.Component {
 
   attachCardToCostumer = async paymentMethod => {
     try {
+      const header = await this.configHeader();
       await Axios.post(
         Config.baseURL + Config.attachPaymentUrl,
         { paymentMethod },
-        Config.headerConfig
+        header
       );
     } catch (e) {
       throw e;
@@ -107,6 +124,7 @@ class CheckoutForm extends React.Component {
   handlePayment = async (paymentMethodId, paymentDetails) => {
     try {
       if (paymentMethodId !== undefined || paymentMethodId != 0) {
+        const header = await this.configHeader();
         let requestData = {
           amount: paymentDetails.amount * 100,
           currency: paymentDetails.currency,
@@ -116,7 +134,7 @@ class CheckoutForm extends React.Component {
         const requestResponse = await Axios.post(
           Config.baseURL + '' + Config.requestPaymentIntentUrl,
           requestData,
-          Config.headerConfig
+          header
         );
 
         if (requestResponse.data.success) {

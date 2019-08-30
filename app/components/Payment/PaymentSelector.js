@@ -4,7 +4,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import StripeContainer from '../../containers/StripePayment';
-// import { getAuthenticatedRequest } from '../../utils/api';
 
 // import StripeCC from './Gateways/StripeCC';
 // import StripeSepa from './Gateways/StripeSepa';
@@ -22,14 +21,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     };
   }
 
-  componentDidMount() {
-    // console.log('Component Did Mount Payment Selector');
-    // getAuthenticatedRequest('stripe_customer')
-    //   .then(response => {
-    //     console.log('INTO AUTHENTICATED REQUEST');
-    //     console.log(response);
-    //   })
-
+  async componentDidMount() {
     const props = this.props;
     if (props.paymentMethods) {
       // lookup stripe related payment methods for the current country/currency combination

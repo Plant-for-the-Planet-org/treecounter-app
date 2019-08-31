@@ -23,6 +23,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
 
   async componentDidMount() {
     const props = this.props;
+
     if (props.paymentMethods) {
       // lookup stripe related payment methods for the current country/currency combination
       const stripeGateways = Object.keys(props.paymentMethods).filter(gateway =>
@@ -98,14 +99,14 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       paymentMethods,
       currency,
       context,
-      donorDetails
+      paymentDetails
     } = this.props;
 
     // const paymentMethods = { stripe_cc: {}, stripe_sepa: {} };
 
     const gatewayProps = {
       context: context,
-      donorDetails: donorDetails,
+      paymentDetails: paymentDetails,
       currency: currency,
       onFailure: this.props.onFailure,
       onError: this.props.onError
@@ -144,7 +145,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             </div>
           )}
           <div>{`${i18n.t('label.amount')}: ${
-            donorDetails.amount
+            paymentDetails.amount
           } ${currency}`}</div>
           <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
         </div>
@@ -159,7 +160,9 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                 <StripeContainer
                   paymentType="stripe_cc"
                   stripe={this.state.stripe}
-                  paymentDetails={this.props.donorDetails}
+                  receipt={this.props.receipt}
+                  plantProjectName={this.props.context.plantProjectName}
+                  paymentDetails={this.props.paymentDetails}
                   account={accounts[accountName]}
                   expanded={this.props.expandedOption === '1'}
                   handleExpandedClicked={this.handleExpandedClickedCC}
@@ -178,9 +181,10 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                   paymentType="stripe_sepa"
                   stripe={this.state.stripe}
                   paymentDetails={{
-                    ...this.props.donorDetails,
+                    ...this.props.paymentDetails,
                     topName: this.props.context.tpoName
                   }}
+                  receipt={this.props.receipt}
                   account={accounts[accountName]}
                   expanded={this.props.expandedOption === '2'}
                   handleExpandedClicked={this.handleExpandedClickedSEPA}
@@ -218,7 +222,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
 }
 
 PaymentSelector.propTypes = {
-  donorDetails: PropTypes.object,
+  paymentDetails: PropTypes.object,
   accounts: PropTypes.object,
   paymentMethods: PropTypes.object,
   stripePublishableKey: PropTypes.string,
@@ -229,7 +233,8 @@ PaymentSelector.propTypes = {
   context: PropTypes.object.isRequired,
   onSuccess: PropTypes.func.isRequired,
   onFailure: PropTypes.func.isRequired,
-  onError: PropTypes.func.isRequired
+  onError: PropTypes.func.isRequired,
+  receipt: PropTypes.object
 };
 
 export default PaymentSelector;

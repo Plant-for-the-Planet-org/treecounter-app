@@ -555,15 +555,13 @@ export default class DonateTrees extends Component {
                       currency={this.state.selectedCurrency}
                       expandedOption={this.state.expandedOption}
                       handleExpandedClicked={this.handleExpandedClicked}
-                      donorDetails={{
+                      receipt={{
+                        ...receipt,
+                        modeReceipt: this.state.modeReceipt
+                      }}
+                      paymentDetails={{
                         amount: this.state.selectedAmount * 100,
                         currency: this.state.selectedCurrency,
-                        donorAddress: address,
-                        donorZipCode: zipCode,
-                        donorCity: city,
-                        donorCountry: country,
-                        donorEmail: email,
-                        donorName: name,
                         treeCount: this.state.selectedTreeCount
                       }}
                       context={{

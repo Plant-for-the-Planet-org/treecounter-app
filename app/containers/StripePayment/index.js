@@ -6,6 +6,10 @@ import InjectedCheckoutForm from '../../components/StripePayment/CheckoutForm';
 // import { connect } from 'react-redux';
 
 class StripePayment extends Component {
+  componentDidMount() {
+    console.log('===Component Did Mount Stripe Container===');
+    console.log(this.props);
+  }
   handleExpandedClicked = () => {
     this.props.handleExpandedClicked('1');
   };
@@ -26,8 +30,11 @@ class StripePayment extends Component {
       <StripeProvider stripe={props.stripe}>
         <Elements>
           <InjectedCheckoutForm
+            plantProjectName={props.plantProjectName}
             paymentType={props.paymentType}
             currency={props.currency}
+            receipt={props.receipt}
+            tpoName={props.context.tpoName}
             account={props.account}
             expanded={props.expanded}
             handleExpandedClicked={this.handleExpandedClicked}

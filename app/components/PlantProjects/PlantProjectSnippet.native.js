@@ -1,74 +1,64 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { Image, Text, TouchableHighlight, View } from 'react-native';
 
-import i18n from '../../locales/i18n';
-import { View, Text, Image, TouchableHighlight } from 'react-native';
-import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
-import CardLayout from '../Common/Card';
-import PrimaryButton from '../Common/Button/PrimaryButton';
 import { getImageUrl } from '../../actions/apiRouting';
-import {
-  targetPlanted,
-  tick,
-  location_grey,
-  survival_grey,
-  tax_grey
-} from '../../assets';
+import { tick, location_grey, survival_grey, tax_grey } from '../../assets';
+import i18n from '../../locales/i18n';
+import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
+import { formatNumber } from '../../utils/utils';
+import PrimaryButton from '../Common/Button/PrimaryButton';
+import CardLayout from '../Common/Card';
 import TouchableItem from '../Common/TouchableItem.native';
 import PlantedProgressBar from './PlantedProgressbar.native';
-import { formatNumber } from '../../utils/utils';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
-class PlantProjectSnippet extends React.Component {
-  constructor(props) {
-    super(props);
-    this.toggleExpanded = this.toggleExpanded.bind(this);
-  }
-
-  toggleExpanded(id) {
-    this.props.onMoreClick(id);
-  }
-  containerPress(id) {
+class PlantProjectSnippet extends PureComponent {
+  // toggleExpanded(id) {
+  //   this.props.onMoreClick(id);
+  // }
+  containerPress = () => {
     if (this.props.onMoreClick) {
-      this.props.onMoreClick(id);
+      const { id, name } = this.props.plantProject;
+      this.props.onMoreClick(id, name);
     }
-  }
+  };
 
   render() {
     const {
-      id: id,
+      id,
       name: projectName,
-      isCertified: isCertified,
+      isCertified,
       plantProjectImages,
       location,
-      countPlanted: countPlanted,
+      countPlanted,
       countTarget,
       currency,
       treeCost,
       paymentSetup,
-      survivalRate: survivalRate,
-      images,
-      imageFile,
-      description,
-      homepageUrl: homepageUrl,
-      homepageCaption: homepageCaption,
-      videoUrl: videoUrl,
-      geoLocation
+      survivalRate,
+      // images,
+      imageFile
+      // description,
+      // homepageUrl: homepageUrl,
+      // homepageCaption: homepageCaption,
+      // videoUrl: videoUrl,
+      // geoLocation
     } = this.props.plantProject;
     let projectImage = null;
     let plantProjectRating = 4.2;
     let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
     treePlantedRatio = parseFloat(treePlantedRatio);
-    let treeCountWidth;
-    if (treePlantedRatio > 1) {
-      treeCountWidth = 100;
-    } else if (treePlantedRatio < 0) {
-      treeCountWidth = 0;
-    } else {
-      treeCountWidth = treePlantedRatio * 100;
-    }
+    // let treeCountWidth;
+    // if (treePlantedRatio > 1) {
+    //   treeCountWidth = 100;
+    // } else if (treePlantedRatio < 0) {
+    //   treeCountWidth = 0;
+    // } else {
+    //   treeCountWidth = treePlantedRatio * 100;
+    // }
 
     if (imageFile) {
       projectImage = { image: imageFile };
@@ -92,7 +82,7 @@ class PlantProjectSnippet extends React.Component {
       taxDeduction: paymentSetup.taxDeduction
     };
     let deducibleText1 = '';
-    let tooltipText1 = '';
+    // let tooltipText1 = '';
     for (let i = 0; i < specsProps.taxDeduction.length; i++) {
       deducibleText1 += specsProps.taxDeduction[i];
       if (i == specsProps.taxDeduction.length - 1) {
@@ -101,10 +91,7 @@ class PlantProjectSnippet extends React.Component {
         deducibleText1 += ', ';
       }
     }
-    let onPressHandler = undefined;
-    if (this.props.clickable) {
-      onPressHandler = () => this.containerPress(id);
-    }
+    let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     return (
       <TouchableHighlight
         underlayColor={'transparent'}
@@ -293,6 +280,7 @@ PlantProjectSnippet.propTypes = {
   projectClear: PropTypes.func,
   showNextButton: PropTypes.bool,
   onNextClick: PropTypes.func,
+  onMoreClick: PropTypes.func,
   onSelectClickedFeaturedProjects: PropTypes.func,
   clickable: PropTypes.bool,
   showCertifiedTag: PropTypes.bool

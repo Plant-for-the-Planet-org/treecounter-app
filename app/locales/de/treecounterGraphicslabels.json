@@ -9,5 +9,10 @@
   "logged_in": "Eingeloggt",
   "trillionTreeMessage1": "Das Ziel der Plant-for-the-Planet App ist,  Baumpflanzprojekte aus der ganzen Welt transparent darzustellen und es jedem so einfach wie möglich zu machen, sie zu unterstützen.",
   "trillionTreeMessage2": "Die globale Aufforstung könnte 25% der jährlich weltweit ausgestoßenen CO2-Emissionen binden und Wohlstand im globalen Süden schaffen.",
-  "trillionlabel": "Heutige Trillion Tree Veranstaltung"
+  "trillionlabel": "Heutige Trillion Tree Veranstaltung",
+  "trillionTreesEvents": "Trillion Tree Ereignisse",
+  "searchProjectTitle": "Die Welt braucht mehr Bäume",
+  "searchProjectPara": "Eine kürzlich in Science veröffentlichte Studie besagt, dass das Pflanzen von einer Billion Bäumen 25% des vom Menschen erzeugten CO2 binden kann",
+  "searchProjectButton": "Finden Sie Projekte zum Spenden",
+  "treesPledged": "Versprochene Bäume"
 }

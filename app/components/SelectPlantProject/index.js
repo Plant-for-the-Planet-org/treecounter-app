@@ -15,6 +15,8 @@ import i18n from '../../locales/i18n';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import { delimitNumbers } from '../../utils/utils';
 import NumberFormat from '../Common/NumberFormat';
+import { sortProjectsByPrice } from '../../utils/currency';
+import _ from 'lodash';
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -60,31 +62,14 @@ export default class SelectPlantProject extends Component {
       currencies: { currencies }
     } = props;
 
-    const featuredProjects = plantProjects.filter(
-      project => project.isFeatured
+    let featuredProjects = plantProjects.filter(project => project.isFeatured);
+    featuredProjects = _.orderBy(featuredProjects, 'created');
+
+    let priceSortedProjects = sortProjectsByPrice(
+      plantProjects,
+      true,
+      currencies
     );
-
-    // TODO Move this so it can be used everywhere
-    // and a sort trees by price
-    function convertCurrency(price, fromCurrency, toCurrency) {
-      return (
-        price /
-        parseFloat(currencies.currency_rates[toCurrency].rates[fromCurrency])
-      );
-    }
-
-    let priceSortedProjects = Array.from(plantProjects);
-    if (
-      currencies &&
-      currencies.currency_rates &&
-      currencies.currency_rates.EUR
-    ) {
-      priceSortedProjects = priceSortedProjects.sort(
-        (a, b) =>
-          convertCurrency(a.treeCost, a.currency, 'EUR') -
-          convertCurrency(b.treeCost, b.currency, 'EUR')
-      );
-    }
 
     return {
       filteredProjects: plantProjects,
@@ -383,5 +368,6 @@ export default class SelectPlantProject extends Component {
 SelectPlantProject.propTypes = {
   plantProjects: PropTypes.array,
   currencies: PropTypes.object,
-  selectProject: PropTypes.func
+  selectProject: PropTypes.func,
+  navigation: PropTypes.object
 };

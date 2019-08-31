@@ -296,7 +296,6 @@ export default class SvgContainer extends PureComponent {
         this.renderedTreeIds.push(treeId); // mark tree as rendered
         this.setTreeStatus(treeId, type, group); // update tree state
       }, this);
-
     }
   }
 

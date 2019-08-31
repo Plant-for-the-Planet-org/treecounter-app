@@ -109,7 +109,7 @@ export default class HeaderRight extends Component {
         >
           <Image source={iosSearchWhite} style={{ height: 25, width: 25 }} />
         </TouchableOpacity>
-        {!!userProfile ? (() => this.renderShareButtons(userProfile))() : null}
+        {userProfile ? (() => this.renderShareButtons(userProfile))() : null}
         {isLoggedIn ? (
           <TouchableOpacity>
             <Image

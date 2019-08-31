@@ -6,7 +6,7 @@ const parseDate = (month, year) => {
   const saveBrowserLanguage = moment.locale(i18n.language);
 
   let simulatedDate = simulateDate(year, month); // simulate a date
-  let returnDate = returnLastDayOfTheMonth(simulatedDate); // output:  ["month", "day,", "year"]
+  let returnDate = returnLastDayOfTheMonth(simulatedDate); // output: ["month", "day,", "year"]
 
   if (saveBrowserLanguage === 'de') {
     return (

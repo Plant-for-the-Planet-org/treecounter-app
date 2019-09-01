@@ -6,5 +6,6 @@
   "list": "List",
   "country": "Country",
   "select_by_country": "Sort by Country",
-  "cost_per_tree": "Cost Per Tree"
+  "cost_per_tree": "Cost Per Tree",
+  "no_tax_deduction": "No tax deduction available"
 }

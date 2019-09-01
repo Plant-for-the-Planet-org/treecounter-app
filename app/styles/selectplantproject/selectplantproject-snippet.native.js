@@ -118,13 +118,20 @@ export default (selectplantprojectFull = EStyleSheet.create({
     justifyContent: 'space-between',
     paddingBottom: 15,
     marginTop: 16,
+    // marginRight: 5,
     alignItems: 'center'
   },
   locationContainer: {
     flexDirection: 'column',
-    maxWidth: '85%'
+    maxWidth: '70%'
   },
-  costContainer: { flexDirection: 'column' },
+  costContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'flex-end'
+    // marginRight: 17
+  },
   actionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -161,10 +168,19 @@ export default (selectplantprojectFull = EStyleSheet.create({
     // paddingBottom: 8,
     color: '$cardTextColor'
   },
+  costTextContainer: {
+    backgroundColor: '#f2f2f7',
+    borderRadius: 15,
+    paddingLeft: 15,
+    paddingRight: 15
+    // marginRight: 20
+  },
   costText: {
     fontSize: 20,
-    color: '$cardTextColor'
+    color: '$newPrimary',
+    fontWeight: 'bold'
   },
+  costPerTreeText: { fontSize: 9, marginTop: 6, color: '$cardTextColor' },
   buttonContainer: {
     flexDirection: 'row',
     width: '30%',

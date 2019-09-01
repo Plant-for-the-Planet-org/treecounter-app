@@ -213,7 +213,7 @@ class PlantProjectSnippet extends PureComponent {
                         ? `${i18n.t('label.tax_deductible')} ${i18n.t(
                             'label.in'
                           )} ${deducibleText1}`
-                        : 'No tax deduction available'}
+                        : i18n.t('label.no_tax_deduction')}
                     </Text>
                   </View>
 
@@ -230,11 +230,14 @@ class PlantProjectSnippet extends PureComponent {
               </View>
 
               <View style={styles.costContainer}>
-                <Text style={styles.costText}>
-                  {formatNumber(specsProps.treeCost, null, currency)}
-                </Text>
-                <Text style={[styles.costText, { fontSize: 14 }]}>
-                  {'per tree'}
+                <View style={styles.costTextContainer}>
+                  <Text style={[styles.costText]}>
+                    {formatNumber(specsProps.treeCost, null, currency)}
+                  </Text>
+                </View>
+
+                <Text style={[styles.costPerTreeText]}>
+                  {i18n.t('label.cost_per_tree')}
                 </Text>
               </View>
             </View>

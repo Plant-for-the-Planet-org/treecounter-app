@@ -80,7 +80,7 @@ export function donate(donationContribution, plantProjectId, loggedIn) {
           dispatch(
             paymentFailed({
               status: false,
-              message: response.response.data || 'error'
+              message: response.data || 'error'
             })
           );
           dispatch(setProgressModelState(false));
@@ -155,7 +155,7 @@ export function gift(donationContribution, plantProjectId, loggedIn) {
           dispatch(
             paymentFailed({
               status: false,
-              message: response.response.data || 'error'
+              message: response.data || 'error'
             })
           );
           dispatch(setProgressModelState(false));

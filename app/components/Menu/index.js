@@ -138,6 +138,20 @@ export default class Menu extends Component {
           </div>
         ))}
         {this.props.userProfile ? this.renderShareButtons() : null}
+        <div className="bottom-banner">
+          <a
+            target="_blank"
+            href="https://apps.apple.com/us/app/plant-for-the-planet/id1444740626"
+          >
+            <img src={images.appStoreIcon} />
+          </a>
+          <a
+            target="_blank"
+            href="https://play.google.com/store/apps/details?id=org.pftp"
+          >
+            <img src={images.playStoreIcon} />
+          </a>
+        </div>
       </div>
     );
   }

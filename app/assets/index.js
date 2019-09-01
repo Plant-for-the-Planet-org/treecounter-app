@@ -138,7 +138,8 @@ import forward from './images/forward.png';
 import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
-
+import playStoreIcon from './images/playstore@2x.jpg';
+import appStoreIcon from './images/appstore@2x.jpg';
 export {
   mapCollapse,
   mapExpand,
@@ -279,5 +280,7 @@ export {
   forward,
   successAnimated,
   trees,
-  greencalendar
+  greencalendar,
+  playStoreIcon,
+  appStoreIcon
 };

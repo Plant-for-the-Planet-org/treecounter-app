@@ -7,6 +7,8 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
+import LocalStorage from '../../stores/localStorage';
+import WorldImg from '../../assets/images/icons/world.png';
 
 export default class Menu extends Component {
   sideNavImage() {
@@ -66,8 +68,18 @@ export default class Menu extends Component {
     }
   }
 
+  onSelectLanguageChange = ev => {
+    const value = ev.target.value;
+    if (value != 'language') {
+      // location.href = '/';
+      location.reload();
+      localStorage.setItem('language', value);
+    }
+  };
+
   render() {
     let { path, pathname } = this.props;
+
     return (
       <div
         className={
@@ -88,7 +100,7 @@ export default class Menu extends Component {
             </span>
             <ul className="app-container__sidenav--list" key={element.sequence}>
               {element.menuItems.map(
-                menuItem =>
+                (menuItem, index) =>
                   menuItem.enabled ? (
                     <li
                       className={
@@ -102,7 +114,7 @@ export default class Menu extends Component {
                           ? 'menu_item_selected'
                           : 'menu_item_unselected'
                       }
-                      key={'' + element.sequence + menuItem.sequence}
+                      key={index + ' ' + element.sequence + menuItem.sequence}
                     >
                       <img
                         src={
@@ -137,6 +149,20 @@ export default class Menu extends Component {
             </ul>
           </div>
         ))}
+        <ul>
+          <li className="li-select">
+            <img src={WorldImg} className="menu-icon" alt="world" />
+            <select
+              className="select-language"
+              onChange={this.onSelectLanguageChange}
+              name="language"
+            >
+              <option value="language">Language</option>
+              <option value="en">English</option>
+              <option value="de">Deutch</option>
+            </select>
+          </li>
+        </ul>
         {this.props.userProfile ? this.renderShareButtons() : null}
       </div>
     );

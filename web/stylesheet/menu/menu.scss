@@ -1,0 +1,15 @@
+.li-select{
+   padding-left: 7%;
+   position:relative;
+   top:30px;
+    .select-language{
+        position: absolute;
+        color: rgba(0,0,0,0.54);
+        padding:0;
+        padding-left: 3px;
+        font-size: 17px;
+        height: 24px;
+        border:none;
+        bottom:5px;
+    }
+}

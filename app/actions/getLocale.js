@@ -1,3 +1,4 @@
+import LocalStorage from '../stores/localStorage';
 let cache = { locale: undefined };
 
 /**
@@ -18,11 +19,23 @@ export function getLocale() {
 }
 
 function guessLocale() {
-  let userLang = navigator.language || navigator.userLanguage;
-  let locale = userLang.split('-')[0];
-  if (locale === 'en' || locale === 'de') {
-    return locale;
-  } else {
+  const location = window.location.href.split('/');
+  const _locale = location[location.length - 1];
+  const languageCached = localStorage.getItem('language');
+
+  if (_locale.includes('_locale')) {
+    return _locale.split('=')[1];
+  } else if (_locale.includes('?noredirect')) {
     return 'en';
+  } else if (languageCached !== null) {
+    return languageCached;
+  } else {
+    let userLang = navigator.language || navigator.userLanguage;
+    let locale = userLang.split('-')[0];
+    if (locale === 'en' || locale === 'de') {
+      return locale;
+    } else {
+      return 'en';
+    }
   }
 }

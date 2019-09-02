@@ -24,7 +24,11 @@ import { getDateFromMySQL } from '../../helpers/utils';
 class CompetitionSnippet extends React.Component {
   constructor(props) {
     super(props);
-    moment.locale(i18n.language);
+    moment.locale(
+      i18n.language.indexOf('-') === -1
+        ? i18n.language
+        : i18n.language.substr(0, i18n.language.indexOf('-'))
+    );
   }
 
   toggleExpanded(id) {

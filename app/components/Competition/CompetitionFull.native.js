@@ -34,7 +34,11 @@ class CompetitionFull extends React.Component {
   constructor(props) {
     super(props);
     this.onSearchResultClick = this.onSearchResultClick.bind(this);
-    moment.locale(i18n.language);
+    moment.locale(
+      i18n.language.indexOf('-') === -1
+        ? i18n.language
+        : i18n.language.substr(0, i18n.language.indexOf('-'))
+    );
   }
 
   componentWillReceiveProps(nextProps) {}

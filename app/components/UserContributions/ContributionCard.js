@@ -22,7 +22,11 @@ export default class ContributionCard extends React.Component {
       viewExpanded: false,
       openDialog: false
     };
-    moment.locale(i18n.language);
+    moment.locale(
+      i18n.language.indexOf('-') === -1
+        ? i18n.language
+        : i18n.language.substr(0, i18n.language.indexOf('-'))
+    );
   }
 
   closeLightbox = () => this.setState({ lightboxIsOpen: false });

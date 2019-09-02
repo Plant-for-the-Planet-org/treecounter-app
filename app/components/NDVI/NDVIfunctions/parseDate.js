@@ -3,7 +3,11 @@ import 'moment/min/locales';
 import i18n from '../../../locales/i18n.js';
 
 const parseDate = (month, year) => {
-  const saveBrowserLanguage = moment.locale(i18n.language);
+  const saveBrowserLanguage = moment.locale(
+    i18n.language.indexOf('-') === -1
+      ? i18n.language
+      : i18n.language.substr(0, i18n.language.indexOf('-'))
+  );
 
   let simulatedDate = simulateDate(year, month); // simulate a date
   let returnDate = returnLastDayOfTheMonth(simulatedDate); // output: ["month", "day,", "year"]

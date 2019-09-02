@@ -36,7 +36,11 @@ class ContributionCard extends React.Component {
       currentImage: 0,
       viewExpanded: false
     };
-    moment.locale(i18n.language);
+    moment.locale(
+      i18n.language.indexOf('-') === -1
+        ? i18n.language
+        : i18n.language.substr(0, i18n.language.indexOf('-'))
+    );
   }
 
   _renderLightBox = imageArray => (

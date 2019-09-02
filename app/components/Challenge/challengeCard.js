@@ -13,7 +13,11 @@ import i18n from '../../locales/i18n.js';
 export default class ChallengeCard extends React.Component {
   constructor(props) {
     super(props);
-    moment.locale(i18n.language);
+    moment.locale(
+      i18n.language.indexOf('-') === -1
+        ? i18n.language
+        : i18n.language.substr(0, i18n.language.indexOf('-'))
+    );
   }
 
   render() {

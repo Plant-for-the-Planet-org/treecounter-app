@@ -5,7 +5,7 @@ import i18n from '../../locales/i18n';
 import { View, Text, Image } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import { challenge_outline as targetPlanted } from '../../assets';
-import { delimitNumbers } from '../../utils/utils';
+import { delimitNumbers, convertNumber } from '../../utils/utils';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 class PlantedProgressBar extends React.Component {
@@ -59,7 +59,7 @@ class PlantedProgressBar extends React.Component {
             }}
           >
             <Text style={styles.treePlantedtextPlanted}>
-              {delimitNumbers(countPlanted)}
+              {convertNumber(parseInt(countPlanted), 2)}
             </Text>
             <Text style={styles.treePlantedtextTrees}>
               {i18n.t('label.trees')}

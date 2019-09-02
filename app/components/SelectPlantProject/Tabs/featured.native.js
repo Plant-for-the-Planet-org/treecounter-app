@@ -42,7 +42,10 @@ export default class FeaturedProjects extends PureComponent {
     return (
       <View style={styles.flexContainer}>
         <FlatList
-          contentContainerStyle={{ paddingBottom: 45 }}
+          contentContainerStyle={{
+            paddingBottom: 45,
+            backgroundColor: '#ffffff'
+          }}
           data={featuredProjects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}

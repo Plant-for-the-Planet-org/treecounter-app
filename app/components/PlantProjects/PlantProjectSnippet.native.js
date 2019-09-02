@@ -161,7 +161,7 @@ class PlantProjectSnippet extends PureComponent {
                 numberOfLines={2}
                 style={styles.project_teaser__contentText}
               >
-                {teaserProps.projectName}
+                {`${teaserProps.projectName} by ${teaserProps.tpoName}`}
               </Text>
             </View>
             <View
@@ -193,8 +193,7 @@ class PlantProjectSnippet extends PureComponent {
                     }}
                   />
                   <Text style={styles.survivalText}>
-                    {i18n.t('label.survival_rate')} {':'}{' '}
-                    {specsProps.survivalRate}%
+                    {specsProps.survivalRate}% {i18n.t('label.survival_rate')}
                   </Text>
                 </View>
 

@@ -15,17 +15,17 @@ export default (selectplantprojectFull = EStyleSheet.create({
     height: 14
   },
   projectSnippetContainer: {
-    flexDirection: 'column',
+    flexDirection: 'column'
 
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowOpacity: 0.5,
-    elevation: 1,
-    padding: 0,
-    borderRadius: 7,
-    borderRadius: 7
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 3
+    // },
+    // shadowOpacity: 0.5,
+    // elevation: 1,
+    // padding: 0,
+    // borderRadius: 7,
+    // borderRadius: 7
   },
   projectImageContainer: {
     height: Layout.window.width * 0.5,
@@ -59,7 +59,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   projectSpecsContainer: {
     width: '100%',
-    padding: 16
+    padding: 16,
+    paddingLeft: 0
   },
   treeCounterContainer: {
     flexDirection: 'row',
@@ -123,7 +124,10 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   locationContainer: {
     flexDirection: 'column',
-    maxWidth: '70%'
+    maxWidth: '70%',
+    '@media (max-width: 350)': {
+      maxWidth: '45%'
+    }
   },
   costContainer: {
     flexDirection: 'column',
@@ -164,6 +168,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   survivalText: {
     fontSize: 12,
+    flexWrap: 'wrap',
     // paddingTop: 3,
     // paddingBottom: 8,
     color: '$cardTextColor'

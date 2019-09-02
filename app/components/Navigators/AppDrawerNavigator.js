@@ -325,9 +325,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     {
       navigationOptions: ({ navigation }) => {
         let navigationConfig = {
-          headerStyle: styles.container,
+          headerStyle: styles.container2,
           headerTitleStyle: { paddingRight: 16 },
-          headerTintColor: '#fff',
+          headerTintColor: '#000',
           headerBackTitle: null,
           title: getTitle(navigation),
           headerRight: (

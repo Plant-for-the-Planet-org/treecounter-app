@@ -21,94 +21,96 @@ export default class DonationStep1 extends Component {
   };
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.pageScrollView}>
-        <View style={styles.pageView}>
-          <Text style={styles.pageTitle}> Tree Donation</Text>
+      <View>
+        <ScrollView contentContainerStyle={styles.pageScrollView}>
+          <View style={styles.pageView}>
+            <Text style={styles.pageTitle}> Tree Donation</Text>
 
-          {/* Project Information Card */}
-          <View style={styles.projectCardView}>
-            <View style={styles.projectImageView}>
-              <Image style={styles.projectImage} source={darkTree} />
-            </View>
-            <View style={styles.projectInfoView}>
-              <Text style={styles.projectName}>
-                Yucatan Reforestation by Plant-for-the-Planet
-              </Text>
-              <View style={styles.projectInfo}>
-                <Icon name="map-marker-alt" size={12} color="#707070" />
-                <Text style={styles.projectSubInfo}>Yucatan, Mexico</Text>
+            {/* Project Information Card */}
+            <View style={styles.projectCardView}>
+              <View style={styles.projectImageView}>
+                <Image style={styles.projectImage} source={darkTree} />
               </View>
-              <View style={styles.projectInfo}>
-                <Icon name="money-bill" size={12} color="#707070" />
-                <Text style={styles.projectSubInfo}>1 Euro per Tree</Text>
+              <View style={styles.projectInfoView}>
+                <Text style={styles.projectName}>
+                  Yucatan Reforestation by Plant-for-the-Planet
+                </Text>
+                <View style={styles.projectInfo}>
+                  <Icon name="map-marker-alt" size={12} color="#707070" />
+                  <Text style={styles.projectSubInfo}>Yucatan, Mexico</Text>
+                </View>
+                <View style={styles.projectInfo}>
+                  <Icon name="money-bill" size={12} color="#707070" />
+                  <Text style={styles.projectSubInfo}>1 Euro per Tree</Text>
+                </View>
               </View>
             </View>
-          </View>
-          {/* Project Information Card Ended */}
+            {/* Project Information Card Ended */}
 
-          {/* Tree Count Information */}
-          <Text style={styles.treeCountTitle}>HOW MANY TREES?</Text>
-          <View style={styles.treeCountView}>
-            <TouchableOpacity style={styles.treeCountNumberButton}>
-              <Text style={styles.treeCountNumber}>10</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.treeCountNumberButton}>
-              <Text style={styles.treeCountNumber}>50</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.treeCountNumberButton}>
-              <Text style={styles.treeCountNumber}>150</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.treeCountNumberButton}>
-              {/* <TextInput
+            {/* Tree Count Information */}
+            <Text style={styles.treeCountTitle}>HOW MANY TREES?</Text>
+            <View style={styles.treeCountView}>
+              <TouchableOpacity style={styles.treeCountNumberButton}>
+                <Text style={styles.treeCountNumber}>10</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.treeCountNumberButton}>
+                <Text style={styles.treeCountNumber}>50</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.treeCountNumberButton}>
+                <Text style={styles.treeCountNumber}>150</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.treeCountNumberButton}>
+                {/* <TextInput
                                 style={{ borderColor: 'gray', borderWidth: 0, borderBottomWidth: 1 }}
                                 onChangeText={(treeCount) => this.setState({ treeCount })}
                                 value={this.state.treeCount}
                             /> */}
-              <Text style={styles.treeCountNumber}>Trees</Text>
-            </TouchableOpacity>
-          </View>
-          {/* Tree Count Information Ended */}
-
-          {/* Donation Frequency Information */}
-          <Text style={styles.treeCountTitle}>HOW OFTEN?</Text>
-          <View
-            style={{
-              borderBottomWidth: 2,
-              borderBottomColor: '#d5d5d5',
-              width: '70%',
-              paddingBottom: 8
-            }}
-          >
-            <RNPickerSelect
-              onValueChange={value => console.log(value)}
-              items={[
-                { label: 'One Time Donation', value: '1' },
-                { label: 'Every 3 Months', value: '3' },
-                { label: 'Every 6 Months', value: '6' },
-                { label: 'Every Year', value: '12' }
-              ]}
-              placeholder={{}}
-            />
-          </View>
-
-          {/* Donation Frequency Information Ended */}
-
-          {/* Tree Dedicated to Section */}
-          <Text style={styles.treeDedicatedTitle}>
-            Tree Gift to / Dedicated To / Pledged on
-          </Text>
-          <View style={styles.treeDedicatedContainer}>
-            <View style={styles.treeDedicatedProfile} />
-            <View style={styles.treeDedicatedInfo}>
-              <Text style={styles.treeDedicatedName}>Christina Figurees</Text>
-              <Text style={styles.treeDedicatedEmail}>c.fig@unfcccc.int</Text>
+                <Text style={styles.treeCountNumber}>Trees</Text>
+              </TouchableOpacity>
             </View>
-            <View>
-              <Icon name="times" size={18} color="#707070" />
+            {/* Tree Count Information Ended */}
+
+            {/* Donation Frequency Information */}
+            <Text style={styles.treeCountTitle}>HOW OFTEN?</Text>
+            <View
+              style={{
+                borderBottomWidth: 2,
+                borderBottomColor: '#d5d5d5',
+                width: '70%',
+                paddingBottom: 8
+              }}
+            >
+              <RNPickerSelect
+                onValueChange={value => console.log(value)}
+                items={[
+                  { label: 'One Time Donation', value: '1' },
+                  { label: 'Every 3 Months', value: '3' },
+                  { label: 'Every 6 Months', value: '6' },
+                  { label: 'Every Year', value: '12' }
+                ]}
+                placeholder={{}}
+              />
             </View>
+
+            {/* Donation Frequency Information Ended */}
+
+            {/* Tree Dedicated to Section */}
+            <Text style={styles.treeDedicatedTitle}>
+              Tree Gift to / Dedicated To / Pledged on
+            </Text>
+            <View style={styles.treeDedicatedContainer}>
+              <View style={styles.treeDedicatedProfile} />
+              <View style={styles.treeDedicatedInfo}>
+                <Text style={styles.treeDedicatedName}>Christina Figurees</Text>
+                <Text style={styles.treeDedicatedEmail}>c.fig@unfcccc.int</Text>
+              </View>
+              <View>
+                <Icon name="times" size={18} color="#707070" />
+              </View>
+            </View>
+            {/* Tree Dedicated to Section Ended */}
           </View>
-          {/* Tree Dedicated to Section Ended */}
-        </View>
+        </ScrollView>
 
         {/* Continue Button Section  */}
         <View style={styles.buttonSectionView}>
@@ -131,14 +133,15 @@ export default class DonationStep1 extends Component {
           </TouchableOpacity>
         </View>
         {/* Continue Button Section Ended */}
-      </ScrollView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   pageScrollView: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    paddingBottom: 140
   },
   pageView: {
     padding: 20
@@ -294,12 +297,12 @@ const styles = StyleSheet.create({
   },
   buttonSectionView: {
     width: '100%',
-    marginTop: 40,
     backgroundColor: '#f7f7f7',
-    marginBottom: 20,
     height: 88,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    position: 'absolute',
+    top: '80%'
   },
   donationSummary: {
     padding: 20

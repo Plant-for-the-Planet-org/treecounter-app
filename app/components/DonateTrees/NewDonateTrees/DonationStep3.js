@@ -22,133 +22,134 @@ import {
 export default class DonationStep3 extends Component {
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.pageScrollView}>
-        <View style={styles.pageView}>
-          <Text style={styles.pageTitle}>Payment</Text>
-          <Text style={styles.pageSubTitle}>
-            Please review your payment and donation details.
-          </Text>
+      <View>
+        <ScrollView contentContainerStyle={styles.pageScrollView}>
+          <View style={styles.pageView}>
+            <Text style={styles.pageTitle}>Payment</Text>
+            <Text style={styles.pageSubTitle}>
+              Please review your payment and donation details.
+            </Text>
 
-          {/* Payment Information Card */}
-          <View style={styles.paymentCardView}>
-            <View style={styles.paymentModeView}>
-              <Text style={styles.paymentModeTitle}>CREDIT CARD</Text>
-              <Image
-                source={visa}
-                style={{ height: 20, width: 32, marginRight: 6 }}
-              />
-              <Image
-                source={masterCard}
-                style={{ height: 20, width: 32, marginRight: 6 }}
-              />
-              <Image
-                source={americanExpress}
-                style={{ height: 20, width: 32, marginRight: 6 }}
-              />
-              <TouchableOpacity>
-                <Icon
-                  name="chevron-up"
-                  size={14}
-                  color="rgba(0, 0, 0, 0.38)"
-                  style={{ marginLeft: 10 }}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          {/* Payment Information Card Ended */}
-
-          {/* Payment Information Card */}
-          <View style={styles.paymentCardView}>
-            <View style={styles.paymentModeView}>
-              <Image
-                source={paypal}
-                style={{ height: 20, width: 32, marginRight: 6 }}
-              />
-              <Text style={styles.paymentModeTitle}>PayPal</Text>
-              <TouchableOpacity>
-                <Icon
-                  name="chevron-up"
-                  size={14}
-                  color="rgba(0, 0, 0, 0.38)"
-                  style={{ marginLeft: 10 }}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.expandedPaymentModePaypal}>
-              <Text style={styles.paypalMessage}>
-                Click the PayPal icon below to sign into your PayPal account and
-                pay securely.
-              </Text>
-              <TouchableOpacity style={styles.paypalButton}>
-                <Text style={styles.paypalButtonText}>Pay with</Text>
+            {/* Payment Information Card */}
+            <View style={styles.paymentCardView}>
+              <View style={styles.paymentModeView}>
+                <Text style={styles.paymentModeTitle}>CREDIT CARD</Text>
                 <Image
-                  source={paypalLogo}
-                  style={{ height: 26, marginLeft: 14, maxWidth: 100 }}
+                  source={visa}
+                  style={{ height: 20, width: 32, marginRight: 6 }}
                 />
-              </TouchableOpacity>
+                <Image
+                  source={masterCard}
+                  style={{ height: 20, width: 32, marginRight: 6 }}
+                />
+                <Image
+                  source={americanExpress}
+                  style={{ height: 20, width: 32, marginRight: 6 }}
+                />
+                <TouchableOpacity>
+                  <Icon
+                    name="chevron-up"
+                    size={14}
+                    color="rgba(0, 0, 0, 0.38)"
+                    style={{ marginLeft: 10 }}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-          {/* Payment Information Card Ended */}
+            {/* Payment Information Card Ended */}
 
-          {/* Payment Information Card */}
-          <View style={styles.paymentCardView}>
-            <View style={styles.paymentModeView}>
-              <Image
-                source={sepa}
-                style={{ height: 20, width: 32, marginRight: 6 }}
-              />
-              <Text style={styles.paymentModeTitle}>SEPA Direct Debit</Text>
-              <TouchableOpacity>
-                <Icon
-                  name="chevron-up"
-                  size={14}
-                  color="rgba(0, 0, 0, 0.38)"
-                  style={{ marginLeft: 10 }}
+            {/* Payment Information Card */}
+            <View style={styles.paymentCardView}>
+              <View style={styles.paymentModeView}>
+                <Image
+                  source={paypal}
+                  style={{ height: 20, width: 32, marginRight: 6 }}
                 />
-              </TouchableOpacity>
+                <Text style={styles.paymentModeTitle}>PayPal</Text>
+                <TouchableOpacity>
+                  <Icon
+                    name="chevron-up"
+                    size={14}
+                    color="rgba(0, 0, 0, 0.38)"
+                    style={{ marginLeft: 10 }}
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.expandedPaymentModePaypal}>
+                <Text style={styles.paypalMessage}>
+                  Click the PayPal icon below to sign into your PayPal account
+                  and pay securely.
+                </Text>
+                <TouchableOpacity style={styles.paypalButton}>
+                  <Text style={styles.paypalButtonText}>Pay with</Text>
+                  <Image
+                    source={paypalLogo}
+                    style={{ height: 26, marginLeft: 14, maxWidth: 100 }}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-          {/* Payment Information Card Ended */}
-          {/* Payment Information Card */}
-          <View style={styles.paymentCardView}>
-            <View style={styles.paymentModeView}>
-              <Image
-                source={applePay}
-                style={{ height: 20, width: 32, marginRight: 6 }}
-              />
-              <Text style={styles.paymentModeTitle}>Apple Pay</Text>
-              <TouchableOpacity>
-                <Icon
-                  name="chevron-up"
-                  size={14}
-                  color="rgba(0, 0, 0, 0.38)"
-                  style={{ marginLeft: 10 }}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          {/* Payment Information Card Ended */}
-          {/* Payment Information Card */}
-          <View style={styles.paymentCardView}>
-            <View style={styles.paymentModeView}>
-              <Image
-                source={googlePay}
-                style={{ height: 20, width: 32, marginRight: 6 }}
-              />
-              <Text style={styles.paymentModeTitle}>Google Pay</Text>
-              <TouchableOpacity>
-                <Icon
-                  name="chevron-up"
-                  size={14}
-                  color="rgba(0, 0, 0, 0.38)"
-                  style={{ marginLeft: 10 }}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          {/* Payment Information Card Ended */}
-        </View>
+            {/* Payment Information Card Ended */}
 
+            {/* Payment Information Card */}
+            <View style={styles.paymentCardView}>
+              <View style={styles.paymentModeView}>
+                <Image
+                  source={sepa}
+                  style={{ height: 20, width: 32, marginRight: 6 }}
+                />
+                <Text style={styles.paymentModeTitle}>SEPA Direct Debit</Text>
+                <TouchableOpacity>
+                  <Icon
+                    name="chevron-up"
+                    size={14}
+                    color="rgba(0, 0, 0, 0.38)"
+                    style={{ marginLeft: 10 }}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+            {/* Payment Information Card Ended */}
+            {/* Payment Information Card */}
+            <View style={styles.paymentCardView}>
+              <View style={styles.paymentModeView}>
+                <Image
+                  source={applePay}
+                  style={{ height: 20, width: 32, marginRight: 6 }}
+                />
+                <Text style={styles.paymentModeTitle}>Apple Pay</Text>
+                <TouchableOpacity>
+                  <Icon
+                    name="chevron-up"
+                    size={14}
+                    color="rgba(0, 0, 0, 0.38)"
+                    style={{ marginLeft: 10 }}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+            {/* Payment Information Card Ended */}
+            {/* Payment Information Card */}
+            <View style={styles.paymentCardView}>
+              <View style={styles.paymentModeView}>
+                <Image
+                  source={googlePay}
+                  style={{ height: 20, width: 32, marginRight: 6 }}
+                />
+                <Text style={styles.paymentModeTitle}>Google Pay</Text>
+                <TouchableOpacity>
+                  <Icon
+                    name="chevron-up"
+                    size={14}
+                    color="rgba(0, 0, 0, 0.38)"
+                    style={{ marginLeft: 10 }}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+            {/* Payment Information Card Ended */}
+          </View>
+        </ScrollView>
         {/* Pay Button Section  */}
         <View style={styles.buttonSectionView}>
           <View style={styles.donationSummary}>
@@ -173,14 +174,15 @@ export default class DonationStep3 extends Component {
           </TouchableOpacity>
         </View>
         {/* Pay Button Section Ended */}
-      </ScrollView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   pageScrollView: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    paddingBottom: 140
   },
   pageView: {
     padding: 20
@@ -206,12 +208,12 @@ const styles = StyleSheet.create({
   },
   buttonSectionView: {
     width: '100%',
-    marginTop: 40,
     backgroundColor: '#f7f7f7',
-    marginBottom: 20,
     height: 88,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    position: 'absolute',
+    top: '80%'
   },
   donationSummary: {
     padding: 20

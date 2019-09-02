@@ -16,16 +16,17 @@ export default class DonationStep2 extends Component {
   state = {};
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.pageScrollView}>
-        <View style={styles.pageView}>
-          <Text style={styles.pageTitle}>Donation Details</Text>
-          <Text style={styles.pageSubTitle}>
-            Please add your billing details.
-          </Text>
-        </View>
+      <View>
+        <ScrollView contentContainerStyle={styles.pageScrollView}>
+          <View style={styles.pageView}>
+            <Text style={styles.pageTitle}>Donation Details</Text>
+            <Text style={styles.pageSubTitle}>
+              Please add your billing details.
+            </Text>
+          </View>
 
-        <Step2Tabs />
-
+          <Step2Tabs />
+        </ScrollView>
         {/* Continue Button Section  */}
         <View style={styles.buttonSectionView}>
           <View style={styles.donationSummary}>
@@ -47,14 +48,15 @@ export default class DonationStep2 extends Component {
           </TouchableOpacity>
         </View>
         {/* Continue Button Section Ended */}
-      </ScrollView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   pageScrollView: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    paddingBottom: 140
   },
   pageView: {
     padding: 20
@@ -80,12 +82,12 @@ const styles = StyleSheet.create({
   },
   buttonSectionView: {
     width: '100%',
-    marginTop: 40,
     backgroundColor: '#f7f7f7',
-    marginBottom: 20,
     height: 88,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    position: 'absolute',
+    top: '80%'
   },
   donationSummary: {
     padding: 20

@@ -1,5 +1,7 @@
 import { normalize } from 'normalizr';
 import { debug } from '../debug/index';
+import Axios from 'axios';
+
 import { postAuthenticatedRequest, postRequest } from '../utils/api';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
@@ -11,8 +13,27 @@ import {
 import {
   paymentSuccess,
   paymentFailed,
-  paymentCleared
+  paymentCleared,
+  donationCreation
 } from '../reducers/paymentStatus';
+
+export function createPaymentDonation(plantProjectId, requestData, token) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    let request = token
+      ? postAuthenticatedRequest('donationCreate_post', requestData, {
+          plantProject: plantProjectId
+        })
+      : postRequest('donationCreatePublic_post', requestData, {
+          plantProject: plantProjectId
+        });
+
+    request.then(response => {
+      dispatch(donationCreation(response.data.merge));
+      dispatch(setProgressModelState(false));
+    });
+  };
+}
 
 export function donate(donationContribution, plantProjectId, loggedIn) {
   let route = loggedIn ? 'donationContribution_post' : 'donate_post';

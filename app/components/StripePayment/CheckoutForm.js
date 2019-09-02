@@ -10,7 +10,6 @@ import { context } from '../../config/index';
 
 import CCForm from './CCForm';
 import SEPAForm from './SEPAForm';
-import ProjectNameIds from './projectNameIds';
 
 class CheckoutForm extends React.Component {
   state = {
@@ -19,7 +18,6 @@ class CheckoutForm extends React.Component {
     saveForLaterSEPA: false,
     chosenCard: '',
     cards: [],
-    plantProjectId: 0, // in case for testing
     configureAPI: {
       version: 'v1.3',
       baseURL: 'https://' + context.host,
@@ -134,57 +132,9 @@ class CheckoutForm extends React.Component {
 
   handlePayment = async (paymentMethodId, paymentDetails) => {
     const apiFirstParameter = this.state.token ? 'api' : 'public';
-    const plantProjectName = this.props.plantProjectName;
     const config = this.state.configureAPI;
-    const findIndexProjectNameIds = _.findIndex(ProjectNameIds, function(pn) {
-      return pn.name == plantProjectName;
-    });
     try {
       if (paymentMethodId !== undefined || paymentMethodId != 0) {
-        const {
-          address,
-          city,
-          country,
-          email,
-          firstname,
-          lastname,
-          modeReceipt,
-          zipCode
-        } = this.props.receipt;
-        let recepientType =
-          modeReceipt === 'individual' ? 'receiptIndividual' : 'receiptCompany';
-
-        let requestData = {
-          amount: paymentDetails.amount * 100,
-          currency: paymentDetails.currency,
-          treeCount: paymentDetails.treeCount,
-          isRecurrent: true, //static
-          recurrencyMnemonic: '', //static
-          recipientType: modeReceipt,
-          [recepientType]: {
-            firstname,
-            lastname,
-            email,
-            address,
-            city,
-            zipCode,
-            country
-          }
-        };
-
-        const requestResponse = await Axios.post(
-          config.baseURL +
-            `/${apiFirstParameter}/${config.version}/${
-              config._locale
-            }/donation/${ProjectNameIds[findIndexProjectNameIds].value}/create`,
-          requestData,
-          this.state.token
-            ? {
-                headers: { Authorization: 'Bearer ' + this.state.token }
-              }
-            : {}
-        );
-
         const donationId = requestResponse.data.merge.contribution[0].id;
 
         const payResponse = await Axios.post(
@@ -289,6 +239,5 @@ CheckoutForm.propTypes = {
   onSuccess: PropTypes.func,
   onError: PropTypes.func,
   tpoName: PropTypes.string,
-  plantProjectName: PropTypes.string,
   receipt: PropTypes.object
 };

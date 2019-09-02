@@ -212,6 +212,18 @@ export default class DonateTrees extends Component {
             ...receipt
           }
         });
+
+        let requestData = {
+          amount: this.state.selectedAmount,
+          currency: this.state.selectedCurrency,
+          ...this.state.form,
+          ...receipt
+        };
+        this.props.createPaymentDonation(
+          this.props.selectedProject.id,
+          requestData,
+          this.props.currentUserProfile
+        );
         return true;
       }
       return false;
@@ -604,5 +616,6 @@ DonateTrees.propTypes = {
   supportTreecounter: PropTypes.object,
   paymentStatus: PropTypes.object,
   plantProjectClear: PropTypes.func,
-  updateUserProfile: PropTypes.func
+  updateUserProfile: PropTypes.func,
+  createPaymentDonation: PropTypes.func
 };

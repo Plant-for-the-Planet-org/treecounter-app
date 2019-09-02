@@ -215,6 +215,25 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
           //     </div>
           //   );
           // }
+          if ('offline' === gateway) {
+            return (
+              <div key={gateway}>
+                {this.state.errorMessage ? (
+                  <div>this.state.errorMessage</div>
+                ) : null}
+                <Offline
+                  key={gateway}
+                  onSuccess={this.decorateSuccess(gateway, accountName)}
+                  amount={amount}
+                  currency={currency}
+                  account={accounts[accountName]}
+                  expanded={this.props.expandedOption === '4'}
+                  handleExpandedClicked={this.handleExpandedClicked}
+                  {...gatewayProps}
+                />
+              </div>
+            );
+          }
         })}
       </div>
     ) : null;

@@ -6,10 +6,6 @@ import InjectedCheckoutForm from '../../components/StripePayment/CheckoutForm';
 // import { connect } from 'react-redux';
 
 class StripePayment extends Component {
-  componentDidMount() {
-    console.log('===Component Did Mount Stripe Container===');
-    console.log(this.props);
-  }
   handleExpandedClicked = () => {
     this.props.handleExpandedClicked('1');
   };

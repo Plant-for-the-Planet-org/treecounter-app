@@ -171,7 +171,7 @@ export default class Menu extends Component {
             <select
               className="select-language"
               onChange={this.onSelectLanguageChange}
-              name={i18n.t('language')}
+              name="language"
               value={this.state.selectedLanguage}
             >
               <option value="en">English</option>

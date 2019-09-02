@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { v1 as uuidv1 } from 'uuid';
 
-import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
+// import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { fetchItem, saveItem } from '../stores/localStorage';
-import { getAccessToken } from './user';
+import { getAuth0Token } from './user';
 import { getApiRoute } from '../actions/apiRouting';
-import { getStore } from '../components/App/index';
-import { logoutUser } from '../actions/authActions';
+// import { getStore } from '../components/App/index';
+// import { logoutUser } from '../actions/authActions';
 import { context } from '../config';
 
 function checkStatus(response) {
@@ -27,7 +27,8 @@ function onAPIError(error) {
   //   NotificationManager.error(error.response.data.message, 'Error', 5000);
   // }
   if (error.response && error.response.status === 401) {
-    getStore().dispatch(logoutUser());
+    console.error(`401`, error.response);
+    // getStore().dispatch(logoutUser());
   }
   throw error;
 }
@@ -49,7 +50,7 @@ async function getHeaders(authenticated = false, recaptcha) {
   }
   if (authenticated) {
     return {
-      headers: { ...headers, Authorization: `Bearer ${await getAccessToken()}` }
+      headers: { ...headers, Authorization: `Bearer ${await getAuth0Token()}` }
     };
   } else {
     return { headers };

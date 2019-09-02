@@ -6,7 +6,6 @@ import { postRequest } from './api';
 /**
  * Get the JWT token that the backend API issued.
  *
- * When using Auth0
  * @returns string | null
  */
 export const getAccessToken = async () => {

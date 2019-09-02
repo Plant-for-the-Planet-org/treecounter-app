@@ -9,8 +9,6 @@ import {
   Keyboard
 } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import BottomAction from './BottomAction';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { forward } from './../../assets';
 import t from 'tcomb-form-native';
@@ -136,7 +134,17 @@ class MakePledgeForm extends Component {
           this.props.postPledge(data, {
             pledgeEventSlug: params
           });
-          this.RBSheet.open();
+          //this.RBSheet.open();
+          updateStaticRoute('app_pledge_events', this.props.navigation, {
+            slug: this.props.navigation.getParam('slug'),
+            plantProject: this.props.navigation.getParam('plantProject'),
+            eventName: this.props.navigation.getParam('eventName'),
+            eventDate: this.props.navigation.getParam('eventDate'),
+            totalTrees: this.props.navigation.getParam('totalTrees'),
+            eventImage: this.props.navigation.getParam('eventImage'),
+            description: this.props.navigation.getParam('description'),
+            treeCount: treeCount
+          });
         } else {
           alert('Incorrect Email Entered');
         }
@@ -164,7 +172,7 @@ class MakePledgeForm extends Component {
         keyboardShouldPersistTaps="always"
         style={styles.keyboardScrollView}
         resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled={false}
+        scrollEnabled={true}
       >
         <View>
           <Text style={styles.titleText}>{i18n.t('label.pledgeToPlant')}</Text>
@@ -289,24 +297,6 @@ class MakePledgeForm extends Component {
             />
           </TouchableOpacity>
         ) : null}
-        <RBSheet
-          ref={ref => {
-            this.RBSheet = ref;
-          }}
-          height={354}
-          duration={250}
-          customStyles={{
-            container: {
-              justifyContent: 'center'
-            }
-          }}
-        >
-          <BottomAction
-            navigation={navigation}
-            treeCount={treeCount}
-            projectID={this.props.navigation.getParam('plantProject').id}
-          />
-        </RBSheet>
       </KeyboardAwareScrollView>
     );
   }

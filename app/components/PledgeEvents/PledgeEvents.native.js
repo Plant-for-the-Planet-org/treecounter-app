@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Image
 } from 'react-native';
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import LoadingIndicator from '../Common/LoadingIndicator';
@@ -24,6 +24,7 @@ import {
   clearTimeoutAction
 } from '../../actions/pledgeAction';
 import { pledgesSelector, pledgeEventSelector } from '../../selectors';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
 class PledgeEvents extends Component {
   state = {
@@ -33,6 +34,13 @@ class PledgeEvents extends Component {
   componentDidMount() {
     const eventSlug = this.props.navigation.getParam('slug');
     this.props.fetchPledgesAction(eventSlug);
+  }
+
+  componentDidUpdate() {
+    if (this.props.navigation.getParam('plantProject').id !== -1) {
+      this.RBSheet.open();
+      this.props.navigation.getParam('plantProject').id = -1;
+    }
   }
 
   componentWillUnmount() {
@@ -135,6 +143,56 @@ class PledgeEvents extends Component {
             </Text>
           </View>
         </TouchableOpacity>
+        <RBSheet
+          ref={ref => {
+            this.RBSheet = ref;
+          }}
+          height={354}
+          duration={250}
+          customStyles={{
+            container: {
+              justifyContent: 'center'
+            }
+          }}
+        >
+          <View style={styles.baContainer}>
+            {/* <Image
+            source={successAnimated}
+            style={styles.baSuccessImage}
+            resizeMode="cover"
+          /> */}
+            <Text style={styles.baMessage}>
+              {i18n.t('label.pledgeAddedMessage', {
+                treeCount: this.props.navigation.getParam('treeCount')
+              })}
+            </Text>
+
+            <View style={styles.baButtonContainer}>
+              <TouchableOpacity
+                style={styles.baLaterButton}
+                onPress={() => {
+                  this.RBSheet.close();
+                }}
+              >
+                <Text style={styles.baLaterText}>LATER</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.baContinueButton}
+                onPress={() => {
+                  updateStaticRoute(
+                    getLocalRoute('app_donateTrees'),
+                    this.props.navigation
+                  );
+                }}
+              >
+                <Text style={styles.baContinueText}>
+                  {i18n.t('label.pledgeAddedContinueButton')}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </RBSheet>
       </View>
     );
   }

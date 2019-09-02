@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -25,6 +25,29 @@ import {
 import { updateRoute } from '../../helpers/routerHelper';
 
 /**
+ * Get fully qualified url for profile image
+ */
+const profileImageUrl = (userProfile, user) => {
+  let img;
+
+  // ttc userProfile
+  if (userProfile && userProfile.image) {
+    // URL may be external or on our servers.
+    img = userProfile.image;
+    if (!img.startsWith('http')) {
+      img = getImageUrl('profile', 'thumb', img);
+    }
+  }
+
+  // auth0 user profile
+  if (!img && user) {
+    img = user.picture;
+  }
+
+  return img || ProfilePic;
+};
+
+/**
  * The header that an authenticated user sees
  */
 const UserHeader = ({
@@ -38,14 +61,10 @@ const UserHeader = ({
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { user, logout } = useAuth0();
 
-  // myProfileImage(userProfile, user)
-  let profileImage;
-  if (userProfile && userProfile.image) {
-    profileImage = getImageUrl('profile', 'thumb', userProfile.image);
-  }
-  if (!profileImage && user) {
-    profileImage = user.picture;
-  }
+  const profileUrl = useMemo(() => profileImageUrl(userProfile, user), [
+    userProfile,
+    user
+  ]);
 
   const pickupProfile = value => {
     updateProfileDedication({ supportedTreecounter: value });
@@ -91,12 +110,7 @@ const UserHeader = ({
         </Popover>
       </div>
       <Popover
-        button={
-          <img
-            src={profileImage || ProfilePic}
-            className="image-rounded-border"
-          />
-        }
+        button={<img src={profileUrl} className="image-rounded-border" />}
       >
         <UserDetails
           updateRoute={updateRoute}

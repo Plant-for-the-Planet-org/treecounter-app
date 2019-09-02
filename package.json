@@ -131,6 +131,7 @@
     "jest": "22.4.3",
     "license-checker": "^20.2.0",
     "lint-staged": "^7.0.5",
+    "moment-locales-webpack-plugin": "^1.1.0",
     "node-sass": "^4.7.2",
     "prettier": "1.12.1",
     "prettier-eslint": "^9.0.0",

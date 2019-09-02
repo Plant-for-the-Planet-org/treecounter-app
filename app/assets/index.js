@@ -138,8 +138,10 @@ import forward from './images/forward.png';
 import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
+import worldImg from './images/icons/world.png';
 
 export {
+  worldImg,
   mapCollapse,
   mapExpand,
   tpoIcon,

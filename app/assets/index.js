@@ -138,7 +138,15 @@ import forward from './images/forward.png';
 import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
-
+import visa from './images/visa.png';
+import googlePay from './images/googlePay.png';
+import sepa from './images/sepa.png';
+import applePay from './images/applePay.png';
+import paypal from './images/paypal.png';
+import masterCard from './images/masterCard.png';
+import americanExpress from './images/americanExpress.png';
+import discover from './images/discover.png';
+import paypalLogo from './images/paypalLogo.png';
 export {
   mapCollapse,
   mapExpand,
@@ -279,5 +287,14 @@ export {
   forward,
   successAnimated,
   trees,
-  greencalendar
+  greencalendar,
+  visa,
+  googlePay,
+  applePay,
+  sepa,
+  masterCard,
+  paypal,
+  americanExpress,
+  discover,
+  paypalLogo
 };

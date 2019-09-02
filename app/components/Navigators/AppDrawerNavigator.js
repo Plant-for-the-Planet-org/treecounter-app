@@ -55,7 +55,6 @@ import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
 import DonationStep1 from '../DonateTrees/NewDonateTrees/DonationStep1';
 import DonationStep2 from '../DonateTrees/NewDonateTrees/DonationStep2';
 import DonationStep3 from '../DonateTrees/NewDonateTrees/DonationStep3';
-import DonationStep4 from '../DonateTrees/NewDonateTrees/DonationStep4';
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -90,7 +89,6 @@ const headerLabels = {
   ['app_donate_detail']: 'label.donate',
   ['app_donate_detail2']: 'label.donate',
   ['app_donate_detail3']: 'label.donate',
-  ['app_donate_detail4']: 'label.donate',
   ['app_gift_projects']: 'label.gift_trees',
   ['pickup_profile_modal']: 'label.dedicate_trees_to',
   ['app_pledge_events']: 'Pledges',
@@ -163,6 +161,15 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_pledge_form']: {
         screen: MakePledgeForm
+      },
+      ['app_donate_detail2']: {
+        screen: DonationStep2
+      },
+      ['app_donate_detail3']: {
+        screen: DonationStep3
+      },
+      ['app_donate_detail']: {
+        screen: DonationStep1
       }
     },
     {
@@ -174,6 +181,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
+
   const searchNavigator = createStackNavigator(
     {
       Search: {
@@ -325,16 +333,13 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: isLoggedIn ? EditCompetitionContainer : LoginContainer
       },
       ['app_donate_detail']: {
-        screen: DonationStep2
+        screen: DonationStep1
       },
       ['app_donate_detail2']: {
         screen: DonationStep2
       },
       ['app_donate_detail3']: {
         screen: DonationStep3
-      },
-      ['app_donate_detail4']: {
-        screen: DonationStep4
       }
     },
     {

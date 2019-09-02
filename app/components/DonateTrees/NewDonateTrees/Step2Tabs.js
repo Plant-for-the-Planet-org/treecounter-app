@@ -10,6 +10,7 @@ import {
 import styles from './../../../styles/pledgeevents/pledgeevents.native';
 import i18n from '../../../locales/i18n';
 import { TextField } from 'react-native-material-textfield';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default class Step2Tabs extends Component {
   state = {
@@ -39,7 +40,7 @@ export default class Step2Tabs extends Component {
     let { firstname, lastname, address1, city, zipcode, email } = this.state;
 
     const individual = (
-      <View style={{ padding: 20 }}>
+      <View style={{ padding: 20, paddingTop: 0 }}>
         <View
           style={{
             display: 'flex',
@@ -58,7 +59,6 @@ export default class Step2Tabs extends Component {
               lineWidth={1}
               blurOnSubmit={false}
               onChangeText={firstname => this.setState({ firstname })}
-              containerStyle={{ marginTop: 5 }}
             />
           </View>
 
@@ -125,23 +125,23 @@ export default class Step2Tabs extends Component {
           style={{
             borderBottomWidth: 2,
             borderBottomColor: '#d5d5d5',
-            marginTop: 20
+            marginTop: 20,
+            paddingBottom: 8
           }}
         >
-          <Picker
-            selectedValue={this.state.country}
-            style={{ height: 50, width: '100%', padding: 0 }}
-            onValueChange={(itemValue, itemIndex) =>
-              this.setState({ country: itemValue })
-            }
-          >
-            <Picker.Item label="Germany" value="germany" />
-            <Picker.Item label="India" value="India" />
-            <Picker.Item label="China" value="China" />
-            <Picker.Item label="USA" value="USA" />
-            <Picker.Item label="France" value="France" />
-            <Picker.Item label="Sweden" value="Sweden" />
-          </Picker>
+          <RNPickerSelect
+            onValueChange={value => console.log(value)}
+            items={[
+              { label: 'Germany', value: '1' },
+              { label: 'India', value: '2' },
+              { label: 'China', value: '3' },
+              { label: 'USA', value: '4' },
+              { label: 'Pakistan', value: '5' },
+              { label: 'France', value: '6' },
+              { label: 'Sweden', value: '7' }
+            ]}
+            placeholder={{}}
+          />
         </View>
 
         <View>
@@ -159,40 +159,19 @@ export default class Step2Tabs extends Component {
     );
 
     const company = (
-      <View style={styles.tabViewTitleContainer}>
-        <View style={{ width: '45%' }}>
+      <View>
+        <View style={{ padding: 20, paddingBottom: 0 }}>
           <TextField
-            label={i18n.t('label.pledgeFormFName')}
-            value={firstname}
+            label={i18n.t('NAME OF COMPANY OR ORGANIZATION')}
+            value={email}
             tintColor={'#89b53a'}
             titleFontSize={12}
-            returnKeyType="next"
             lineWidth={1}
-            blurOnSubmit={false}
-            onSubmitEditing={() => {
-              this.lastnameTextInput.focus();
-            }}
-            onChangeText={firstname => this.setState({ firstname })}
+            returnKeyType="next"
+            onChangeText={email => this.setState({ email })}
           />
         </View>
-
-        <View style={{ width: '45%' }}>
-          <TextField
-            label={i18n.t('label.pledgeFormLName')}
-            value={lastname}
-            tintColor={'#89b53a'}
-            titleFontSize={12}
-            returnKeyType="next"
-            lineWidth={1}
-            ref={input => {
-              this.lastnameTextInput = input;
-            }}
-            // onSubmitEditing={() => {
-            //     this.emailTextInput.focus();
-            // }}
-            onChangeText={lastname => this.setState({ lastname })}
-          />
-        </View>
+        {individual}
       </View>
     );
 

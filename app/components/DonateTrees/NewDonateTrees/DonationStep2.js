@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Step2Tabs from './Step2Tabs';
+import { updateStaticRoute } from './../../../helpers/routerHelper';
 
 export default class DonationStep2 extends Component {
   state = {};
@@ -34,10 +35,16 @@ export default class DonationStep2 extends Component {
             </View>
             <Text style={styles.donationFrequency}>One Time Donation</Text>
           </View>
-          <View style={styles.continueButtonView}>
-            <Icon name="arrow-right" size={30} color="#fff" />
-            <Text style={styles.continueText}>Continue</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => {
+              updateStaticRoute('app_donate_detail3', this.props.navigation);
+            }}
+          >
+            <View style={styles.continueButtonView}>
+              <Icon name="arrow-right" size={30} color="#fff" />
+              <Text style={styles.continueText}>Continue</Text>
+            </View>
+          </TouchableOpacity>
         </View>
         {/* Continue Button Section Ended */}
       </ScrollView>

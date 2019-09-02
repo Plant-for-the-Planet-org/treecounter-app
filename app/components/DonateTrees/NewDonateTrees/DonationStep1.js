@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 import { darkTree } from './../../../assets';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { getLocalRoute } from './../../../actions/apiRouting';
 import { updateStaticRoute } from './../../../helpers/routerHelper';
+import RNPickerSelect from 'react-native-picker-select';
+
 export default class DonationStep1 extends Component {
   state = {
     treeCount: '',
@@ -74,21 +75,20 @@ export default class DonationStep1 extends Component {
             style={{
               borderBottomWidth: 2,
               borderBottomColor: '#d5d5d5',
-              width: '70%'
+              width: '70%',
+              paddingBottom: 8
             }}
           >
-            <Picker
-              selectedValue={this.state.frequency}
-              style={{ height: 50, width: '100%' }}
-              onValueChange={(itemValue, itemIndex) =>
-                this.setState({ frequency: itemValue })
-              }
-            >
-              <Picker.Item label="One Time Donation" value="java" />
-              <Picker.Item label="Every 3 months" value="js" />
-              <Picker.Item label="Ever 6 months" value="java" />
-              <Picker.Item label="Every Year" value="java" />
-            </Picker>
+            <RNPickerSelect
+              onValueChange={value => console.log(value)}
+              items={[
+                { label: 'One Time Donation', value: '1' },
+                { label: 'Every 3 Months', value: '3' },
+                { label: 'Every 6 Months', value: '6' },
+                { label: 'Every Year', value: '12' }
+              ]}
+              placeholder={{}}
+            />
           </View>
 
           {/* Donation Frequency Information Ended */}
@@ -121,10 +121,7 @@ export default class DonationStep1 extends Component {
           </View>
           <TouchableOpacity
             onPress={() => {
-              updateStaticRoute(
-                getLocalRoute('app_donate_detail2'),
-                this.props.navigation
-              );
+              updateStaticRoute('app_donate_detail2', this.props.navigation);
             }}
           >
             <View style={styles.continueButtonView}>

@@ -5,7 +5,7 @@ import set from 'lodash/set';
 import { debug } from '../debug/index';
 
 export const initialState = {
-  userProfile: null,
+  userProfile: {},
   contribution: {},
   tpo: {},
   plantProject: {},

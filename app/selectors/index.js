@@ -136,18 +136,21 @@ export const getAllCompetitionsSelector = createSelector(
   }
 );
 
+/**
+ * Returns userProfile {object | null}
+ */
 export const currentUserProfileSelector = createSelector(
   currentUserProfileIdSelector,
   entitiesSelector,
   (currentUserProfileId, entities) => {
     logSelectorUpdate('currentUserProfileSelector');
-    return null === currentUserProfileId
-      ? null
-      : denormalize(
-          entities.userProfile[currentUserProfileId],
-          userProfileSchema,
-          entities
-        );
+    if (currentUserProfileId) {
+      let userProfile = entities.userProfile[currentUserProfileId];
+      if (userProfile) {
+        return denormalize(userProfile, userProfileSchema, entities);
+      }
+    }
+    return null;
   }
 );
 
@@ -158,7 +161,7 @@ export const userTreecounterSelector = createSelector(
   currentUserProfileSelector,
   currentUserProfile => {
     logSelectorUpdate('userTreecounterSelector');
-    return null === currentUserProfile ? null : currentUserProfile.treecounter;
+    return currentUserProfile ? currentUserProfile.treecounter : null;
   }
 );
 
@@ -166,38 +169,34 @@ export const userChallengesSelector = createSelector(
   userTreecounterSelector,
   userTreecounter => {
     logSelectorUpdate('userChallengesSelector');
-    return null === userTreecounter ? null : userTreecounter.challenges;
+    return userTreecounter ? userTreecounter.challenges : [];
   }
 );
 
 /**
  * Returns the current user's de-normalized contributions or null
- * TODO: analyze whether return value null should be replace by empty array
  */
 export const userContributionsSelector = createSelector(
   userTreecounterSelector,
   userTreecounter => {
     logSelectorUpdate('userContributionsSelector');
-    return null === userTreecounter ? null : userTreecounter.contributions;
+    return userTreecounter ? userTreecounter.contributions : [];
   }
 );
 
 /**
  * Returns the current user's de-normalized gifts or null
- * TODO: analyze whether return value null should be replace by empty array
  */
 export const userGiftsSelector = createSelector(
   userTreecounterSelector,
   userTreecounter => {
-    return null === userTreecounter ? null : userTreecounter.gifts;
+    return userTreecounter ? userTreecounter.gifts : [];
   }
 );
 export const userCompetitionEnrolledSelector = createSelector(
   userTreecounterSelector,
   userTreecounter => {
-    return null === userTreecounter
-      ? null
-      : userTreecounter.competitionEnrollments;
+    return userTreecounter ? null : userTreecounter.competitionEnrollments;
   }
 );
 /**

@@ -138,8 +138,10 @@ import forward from './images/forward.png';
 import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
-import playStoreIcon from './images/playstore@2x.jpg';
-import appStoreIcon from './images/appstore@2x.jpg';
+import googlePlayBadge_en from './images/en/google-play-badge.jpg';
+import googlePlayBadge_de from './images/de/google-play-badge.jpg';
+import appleStoreBadge_en from './images/en/apple-store-badge.svg';
+import appleStoreBadge_de from './images/de/apple-store-badge.svg';
 export {
   mapCollapse,
   mapExpand,
@@ -281,6 +283,8 @@ export {
   successAnimated,
   trees,
   greencalendar,
-  playStoreIcon,
-  appStoreIcon
+  googlePlayBadge_en,
+  googlePlayBadge_de,
+  appleStoreBadge_en,
+  appleStoreBadge_de
 };

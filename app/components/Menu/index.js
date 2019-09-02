@@ -7,7 +7,10 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
+import { getLocale } from '../../actions/getLocale';
 
+let userLang = getLocale() || 'en'; // en|de
+userLang = userLang.split('_')[0];
 export default class Menu extends Component {
   sideNavImage() {
     const route = this.props.userProfile
@@ -141,15 +144,15 @@ export default class Menu extends Component {
         <div className="bottom-banner">
           <a
             target="_blank"
-            href="https://apps.apple.com/us/app/plant-for-the-planet/id1444740626"
+            href="https://apps.apple.com/app/plant-for-the-planet/id1444740626"
           >
-            <img src={images.appStoreIcon} />
+            <img src={images['appleStoreBadge_' + userLang]} />
           </a>
           <a
             target="_blank"
             href="https://play.google.com/store/apps/details?id=org.pftp"
           >
-            <img src={images.playStoreIcon} />
+            <img src={images['googlePlayBadge_' + userLang]} />
           </a>
         </div>
       </div>

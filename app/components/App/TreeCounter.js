@@ -35,19 +35,21 @@ const TreeCounter = () => {
 
   return (
     <div className="app">
-      <BrowserRouter history={history}>
-        <div className="app-container">
-          <ProgressModal />
-          <HeaderContainer />
-          <Route component={SideMenuContainer} />
-          <div className="app-container__content">
-            <BodyErrorBoundary>
-              <Routes />
-            </BodyErrorBoundary>
-          </div>
-          <Footer />
-        </div>
-      </BrowserRouter>
+      <div className="app-container">
+        <ProgressModal />
+        <BrowserRouter history={history}>
+          <React.Fragment>
+            <HeaderContainer />
+            <Route component={SideMenuContainer} />
+            <div className="app-container__content">
+              <BodyErrorBoundary>
+                <Routes />
+              </BodyErrorBoundary>
+            </div>
+            <Footer />
+          </React.Fragment>
+        </BrowserRouter>
+      </div>
       <NotificationContainer />
     </div>
   );

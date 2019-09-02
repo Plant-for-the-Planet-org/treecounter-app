@@ -205,6 +205,9 @@
     .btn {
       color: white;
     }
+    &.hidden {
+      visibility: hidden;
+    }
   }
   .no-login {
     padding: 0 20px;

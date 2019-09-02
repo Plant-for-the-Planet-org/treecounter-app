@@ -12,7 +12,6 @@ import { getImageUrl } from '../../actions/apiRouting';
 import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
 
 // Actions
-import { logoutUser } from '../../actions/authActions';
 import {
   moreNotificationAction,
   markSeenNotificationAction
@@ -32,13 +31,12 @@ const UserHeader = ({
   userFeeds,
   updateRoute,
   userProfile,
-  logoutUser,
   fetchMoreNotifications,
   markSeenNotificationAction,
   updateProfileDedication
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { user } = useAuth0();
+  const { user, logout } = useAuth0();
 
   // myProfileImage(userProfile, user)
   let profileImage;
@@ -59,6 +57,8 @@ const UserHeader = ({
       markSeenNotificationAction(userFeeds.userFeeds[0].id);
     }
   };
+
+  const logoutUser = () => logout({ redirect: window.location.origin });
 
   return (
     <div className="header-icons">
@@ -118,7 +118,6 @@ UserHeader.propTypes = {
   fetchMoreNotifications: PropTypes.func,
   markSeenNotificationAction: PropTypes.func,
   userProfile: PropTypes.object,
-  logoutUser: PropTypes.func.isRequired,
   updateRoute: PropTypes.func,
   userFeeds: PropTypes.object,
   updateProfileDedication: PropTypes.func
@@ -127,7 +126,6 @@ UserHeader.propTypes = {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      logoutUser,
       moreNotificationAction,
       markSeenNotificationAction,
       updateProfileDedication,

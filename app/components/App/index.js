@@ -11,7 +11,21 @@ import AuthenticateUser from '../auth0/AuthenticateUser';
 
 import SmartBannerClickable from '../SmartBanner';
 import i18n from '../../locales/i18n.js';
+import { history } from '../Common/BrowserRouter';
+
 let store;
+
+const onRedirectCallback = appState => {
+  const aa = appState || {};
+  const next = aa.targetUrl || window.location.pathname;
+  // Need to wait a second until the app has processed and set logged in state
+  const current = window.location.pathname;
+  setTimeout(() => {
+    if (current !== next) {
+      history.push(next);
+    }
+  }, 500);
+};
 
 export default class App extends Component {
   constructor() {
@@ -26,7 +40,8 @@ export default class App extends Component {
           <Auth0Provider
             domain={context.auth0domain}
             client_id={context.auth0clientId}
-            redirect_uri={window.location.origin}
+            redirect_uri={`${window.location.origin}/auth0-callback`}
+            onRedirectCallback={onRedirectCallback}
           >
             <AuthenticateUser>
               <TreeCounter />

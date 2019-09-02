@@ -21,6 +21,8 @@ import SignupSuccessPage from '../Authentication/SignupSuccessPage';
 import FAQContainer from '../../containers/FAQ';
 import PledgeContainer from '../../containers/Pledge';
 import RedemptionContainer from '../../containers/RedemptionContainer';
+import Auth0Authorize from '../auth0/Auth0Authorize';
+import Auth0Callback from '../auth0/Auth0Callback';
 
 // Components which use SVG
 import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
@@ -43,7 +45,6 @@ import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPublicDenyEmail';
 import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
 
-// Components which use SVG
 const Routes = () => {
   return (
     <Switch>
@@ -84,6 +85,12 @@ const Routes = () => {
         path={getLocalRoute('app_userHome')}
         component={UserHomeContainer}
       />
+      <Route
+        // TODO: no named route yet defined in fos_js_routes.json
+        path="/auth0-callback"
+        component={Auth0Callback}
+      />
+      <PublicRoute path="/authorize" component={Auth0Authorize} />
       <PublicRoute
         path={getLocalRoute('app_login')}
         component={LoginContainer}

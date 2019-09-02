@@ -10,6 +10,9 @@ import UserHeader from './UserHeader';
 const Header = () => {
   const { isAuthenticated } = useAuth0();
 
+  // Hide the the header while authenticating / relocating
+  const auth0callback = window.location.pathname === '/auth0-callback';
+
   return (
     <header className="app-header">
       <div className="app-header__home">
@@ -17,7 +20,7 @@ const Header = () => {
         {isAuthenticated ? <HomeButton /> : null}
       </div>
       <SearchBar />
-      {isAuthenticated ? <UserHeader /> : <AnonHeader />}
+      {isAuthenticated ? <UserHeader /> : <AnonHeader hidden={auth0callback} />}
     </header>
   );
 };

@@ -1,25 +1,10 @@
 import createAuth0Client from '@auth0/auth0-spa-js';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
-import history from '../../utils/history';
 
-// const DEFAULT_REDIRECT_CALLBACK = () =>
-//   window.history.replaceState({}, document.title, window.location.pathname);
-
-/**
- * On authentication (login/logout), redirect to a targetUrl
- * or reload the current page.
- * This does not use the router because the app should be forced to reload.
- */
-const DEFAULT_REDIRECT_CALLBACK = appState => {
-  // TODO if a PrivateRoute forces authorization
-  // then it should return to that URL, but instead it goes
-  // to the URL you were on before you clicked on the private one.
-  history.push(
-    appState && appState.targetUrl
-      ? appState.targetUrl
-      : window.location.pathname
-  );
+const DEFAULT_REDIRECT_CALLBACK = args => {
+  const next = (args || {}).targetUrl || window.location.pathname;
+  window.history.pushState({}, document.title, next);
 };
 
 export const Auth0Context = React.createContext();
@@ -96,11 +81,12 @@ export const Auth0Provider = ({
 
   const handleRedirectCallback = async () => {
     setLoading(true);
-    await auth0Client.handleRedirectCallback();
     const user = await auth0Client.getUser();
     setLoading(false);
     setIsAuthenticated(true);
     setUser(user);
+    // does history push
+    await auth0Client.handleRedirectCallback();
   };
   return (
     <Auth0Context.Provider

@@ -6,6 +6,7 @@ import { mergeEntities } from '../../reducers/entitiesReducer';
 import { currentUserProfileSelector } from '../../selectors';
 import { setAuth0Token } from '../../utils/user';
 import { useAuth0 } from './react-auth0';
+import { logoutUser } from '../../actions/authActions';
 
 /**
  * Authenticate or logout the user with the backend API whenever Auth0 authentication changes.
@@ -81,7 +82,7 @@ const userDidChange = async (
     // not authenticated -> logout
     if (userProfile) {
       console.log('call authActions logoutUser');
-      // dispatch(logoutUser())
+      dispatch(logoutUser());
     }
   }
 };

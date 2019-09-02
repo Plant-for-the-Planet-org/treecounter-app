@@ -9,11 +9,12 @@ import { upwardArrow, downwardArrow } from '../../assets/index.js';
 import moment from 'moment';
 import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
+import { getLocale } from '../../actions/getLocale';
 
 export default class ChallengeCard extends React.Component {
   constructor(props) {
     super(props);
-    moment.locale(i18n.language);
+    moment.locale(getLocale());
   }
 
   render() {

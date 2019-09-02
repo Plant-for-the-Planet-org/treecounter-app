@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 // import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n';
 
-class PlantProjectImageCarousel extends React.Component {
+class PlantProjectImageCarousel extends PureComponent {
   itemsSize = 3;
 
   constructor(props) {
@@ -21,7 +21,7 @@ class PlantProjectImageCarousel extends React.Component {
       }
     }
   }
-  onViewMoreClick() {
+  onViewMoreClick = () => {
     this.props.onViewMoreClick();
     let newOffset = this.state.offset + this.itemsSize;
     if (newOffset > this.props.projectImages.length) {
@@ -30,7 +30,7 @@ class PlantProjectImageCarousel extends React.Component {
         (this.props.projectImages.length - this.state.offset);
     }
     this.updateViewItems(newOffset);
-  }
+  };
   updateViewItems(offset) {
     let tempViewItems = [];
     for (let i = 0; i < offset; i++) {
@@ -61,7 +61,8 @@ class PlantProjectImageCarousel extends React.Component {
         {this.state.showViewMore ? (
           <div
             className="image__container view-more"
-            onClick={this.onViewMoreClick.bind(this)}
+            key={`view-more`}
+            onClick={this.onViewMoreClick}
           >
             {i18n.t('label.view_more')}
           </div>

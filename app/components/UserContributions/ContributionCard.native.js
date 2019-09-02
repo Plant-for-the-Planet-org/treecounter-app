@@ -21,6 +21,7 @@ import Lightbox from 'react-native-lightbox';
 import moment from 'moment';
 import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
+import { getLocale } from '../../actions/getLocale';
 import { getDateFromMySQL } from '../../helpers/utils';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
@@ -36,11 +37,7 @@ class ContributionCard extends React.Component {
       currentImage: 0,
       viewExpanded: false
     };
-    moment.locale(
-      i18n.language.indexOf('-') === -1
-        ? i18n.language
-        : i18n.language.substr(0, i18n.language.indexOf('-'))
-    );
+    moment.locale(getLocale());
   }
 
   _renderLightBox = imageArray => (

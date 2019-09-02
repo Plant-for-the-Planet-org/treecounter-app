@@ -19,16 +19,13 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
+import { getLocale } from '../../actions/getLocale';
 import { getDateFromMySQL } from '../../helpers/utils';
 
 class CompetitionSnippet extends React.Component {
   constructor(props) {
     super(props);
-    moment.locale(
-      i18n.language.indexOf('-') === -1
-        ? i18n.language
-        : i18n.language.substr(0, i18n.language.indexOf('-'))
-    );
+    moment.locale(getLocale());
   }
 
   toggleExpanded(id) {

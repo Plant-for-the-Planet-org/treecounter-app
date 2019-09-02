@@ -20,15 +20,12 @@ import { upwardArrow, downwardArrow } from '../../assets/index.js';
 import moment from 'moment';
 import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
+import { getLocale } from '../../actions/getLocale';
 
 export default class ChallengeCard extends React.Component {
   constructor(props) {
     super(props);
-    moment.locale(
-      i18n.language.indexOf('-') === -1
-        ? i18n.language
-        : i18n.language.substr(0, i18n.language.indexOf('-'))
-    );
+    moment.locale(getLocale());
   }
 
   render() {

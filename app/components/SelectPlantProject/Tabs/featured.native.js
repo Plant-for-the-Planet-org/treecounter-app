@@ -6,6 +6,7 @@ import { FlatList, View } from 'react-native';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
+import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
 
 export default class FeaturedProjects extends PureComponent {
   _keyExtractor = (item, index) => item.id.toString();
@@ -43,8 +44,7 @@ export default class FeaturedProjects extends PureComponent {
       <View style={styles.flexContainer}>
         <FlatList
           contentContainerStyle={{
-            paddingBottom: 45,
-            backgroundColor: '#ffffff'
+            ...flatListContainerStyle
           }}
           data={featuredProjects}
           keyExtractor={this._keyExtractor}

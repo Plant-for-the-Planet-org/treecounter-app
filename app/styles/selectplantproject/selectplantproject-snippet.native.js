@@ -8,7 +8,10 @@ const Layout = {
   }
 };
 const rowHeight = 20;
-
+export const flatListContainerStyle = {
+  paddingBottom: 45,
+  backgroundColor: '#ffffff'
+};
 export default (selectplantprojectFull = EStyleSheet.create({
   project_specs__taxdeductibleIcon: {
     width: 14,

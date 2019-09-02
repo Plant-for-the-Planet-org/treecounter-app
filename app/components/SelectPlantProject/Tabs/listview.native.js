@@ -3,7 +3,9 @@ import React, { PureComponent } from 'react';
 import { FlatList, View } from 'react-native';
 
 import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
-import styles from '../../../styles/selectplantproject/list';
+import styles from '../../../styles/selectplantproject/list.native';
+
+import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
 
 export default class ListViewProjects extends PureComponent {
   _keyExtractor = (item, index) => item.id.toString();
@@ -24,7 +26,9 @@ export default class ListViewProjects extends PureComponent {
     return (
       <View style={{ height: '100%' }}>
         <FlatList
-          contentContainerStyle={{ paddingBottom: 45 }}
+          contentContainerStyle={{
+            ...flatListContainerStyle
+          }}
           data={this.props.projects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}

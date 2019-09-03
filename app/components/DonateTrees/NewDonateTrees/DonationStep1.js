@@ -7,22 +7,67 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  Picker
+  Picker,
+  Platform,
+  Keyboard
 } from 'react-native';
 import { darkTree } from './../../../assets';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { updateStaticRoute } from './../../../helpers/routerHelper';
 import RNPickerSelect from 'react-native-picker-select';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default class DonationStep1 extends Component {
   state = {
     treeCount: '',
-    frequency: ''
+    frequency: '',
+    treeNumberSelected: 50,
+    showContinue: true
+  };
+
+  componentWillMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this._keyboardDidShow
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this._keyboardDidHide
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow = () => {
+    this.setState({
+      showContinue: false
+    });
+  };
+
+  _keyboardDidHide = () => {
+    this.setState({
+      showContinue: true
+    });
+  };
+
+  changeSelectedState = number => {
+    this.setState({
+      treeNumberSelected: number
+    });
   };
   render() {
     return (
       <View>
-        <ScrollView contentContainerStyle={styles.pageScrollView}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.pageScrollView}
+          keyboardDismissMode="on-drag"
+          style={{ backgroundColor: 'white' }}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled={true}
+        >
           <View style={styles.pageView}>
             <Text style={styles.pageTitle}> Tree Donation</Text>
 
@@ -50,22 +95,96 @@ export default class DonationStep1 extends Component {
             {/* Tree Count Information */}
             <Text style={styles.treeCountTitle}>HOW MANY TREES?</Text>
             <View style={styles.treeCountView}>
-              <TouchableOpacity style={styles.treeCountNumberButton}>
-                <Text style={styles.treeCountNumber}>10</Text>
+              <TouchableOpacity
+                style={
+                  this.state.treeNumberSelected === 10
+                    ? styles.treeCountNumberButtonSelected
+                    : styles.treeCountNumberButton
+                }
+                onPress={() => {
+                  this.changeSelectedState(10);
+                }}
+              >
+                <Text
+                  style={
+                    this.state.treeNumberSelected == 10
+                      ? styles.treeCountNumberSelected
+                      : styles.treeCountNumber
+                  }
+                >
+                  10
+                </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.treeCountNumberButton}>
-                <Text style={styles.treeCountNumber}>50</Text>
+              <TouchableOpacity
+                style={
+                  this.state.treeNumberSelected == 50
+                    ? styles.treeCountNumberButtonSelected
+                    : styles.treeCountNumberButton
+                }
+                onPress={() => {
+                  this.changeSelectedState(50);
+                }}
+              >
+                <Text
+                  style={
+                    this.state.treeNumberSelected == 50
+                      ? styles.treeCountNumberSelected
+                      : styles.treeCountNumber
+                  }
+                >
+                  50
+                </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.treeCountNumberButton}>
-                <Text style={styles.treeCountNumber}>150</Text>
+              <TouchableOpacity
+                style={
+                  this.state.treeNumberSelected == 150
+                    ? styles.treeCountNumberButtonSelected
+                    : styles.treeCountNumberButton
+                }
+                onPress={() => {
+                  this.changeSelectedState(150);
+                }}
+              >
+                <Text
+                  style={
+                    this.state.treeNumberSelected == 150
+                      ? styles.treeCountNumberSelected
+                      : styles.treeCountNumber
+                  }
+                >
+                  150
+                </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.treeCountNumberButton}>
-                {/* <TextInput
-                                style={{ borderColor: 'gray', borderWidth: 0, borderBottomWidth: 1 }}
-                                onChangeText={(treeCount) => this.setState({ treeCount })}
-                                value={this.state.treeCount}
-                            /> */}
-                <Text style={styles.treeCountNumber}>Trees</Text>
+              {/* If the treeCountNumberSelected has value of 0 which means none from above, use the treeCount from state for setting value */}
+              <TouchableOpacity
+                style={
+                  this.state.treeNumberSelected == 0
+                    ? styles.treeCountNumberButtonSelected
+                    : styles.treeCountNumberButton
+                }
+                onPress={() => {
+                  this.changeSelectedState(0);
+                }}
+              >
+                <TextInput
+                  style={
+                    this.state.treeNumberSelected == 0
+                      ? styles.treeCountTextInputSelected
+                      : styles.treeCountTextInput
+                  }
+                  onChangeText={treeCount => this.setState({ treeCount })}
+                  value={this.state.treeCount}
+                  keyboardType={'number-pad'}
+                />
+                <Text
+                  style={
+                    this.state.treeNumberSelected == 0
+                      ? styles.treeCountNumberSelected
+                      : styles.treeCountNumber
+                  }
+                >
+                  Trees
+                </Text>
               </TouchableOpacity>
             </View>
             {/* Tree Count Information Ended */}
@@ -77,7 +196,7 @@ export default class DonationStep1 extends Component {
                 borderBottomWidth: 2,
                 borderBottomColor: '#d5d5d5',
                 width: '70%',
-                paddingBottom: 8
+                paddingBottom: Platform.OS === 'ios' ? 8 : 0
               }}
             >
               <RNPickerSelect
@@ -110,28 +229,31 @@ export default class DonationStep1 extends Component {
             </View>
             {/* Tree Dedicated to Section Ended */}
           </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
 
         {/* Continue Button Section  */}
-        <View style={styles.buttonSectionView}>
-          <View style={styles.donationSummary}>
-            <View style={styles.donationCost}>
-              <Text style={styles.donationAmount}>€ 50</Text>
-              <Text style={styles.donationTree}>for 50 Trees</Text>
+        {this.state.showContinue ? (
+          <View style={styles.buttonSectionView}>
+            <View style={styles.donationSummary}>
+              <View style={styles.donationCost}>
+                <Text style={styles.donationAmount}>€ 50</Text>
+                <Text style={styles.donationTree}>for 50 Trees</Text>
+              </View>
+              <Text style={styles.donationFrequency}>One Time Donation</Text>
             </View>
-            <Text style={styles.donationFrequency}>One Time Donation</Text>
+            <TouchableOpacity
+              onPress={() => {
+                updateStaticRoute('app_donate_detail2', this.props.navigation);
+              }}
+            >
+              <View style={styles.continueButtonView}>
+                <Icon name="arrow-right" size={30} color="#fff" />
+                <Text style={styles.continueText}>Continue</Text>
+              </View>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              updateStaticRoute('app_donate_detail2', this.props.navigation);
-            }}
-          >
-            <View style={styles.continueButtonView}>
-              <Icon name="arrow-right" size={30} color="#fff" />
-              <Text style={styles.continueText}>Continue</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+        ) : null}
+
         {/* Continue Button Section Ended */}
       </View>
     );
@@ -231,6 +353,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#4d5153'
   },
+  treeCountNumberSelected: {
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: '#ffffff'
+  },
   treeCountNumberButton: {
     borderRadius: 30,
     backgroundColor: '#ffffff',
@@ -239,8 +370,41 @@ const styles = StyleSheet.create({
     borderColor: '#d5d5d5',
     padding: 12,
     marginRight: 20,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 60,
+    minWidth: 60
   },
+  treeCountNumberButtonSelected: {
+    borderRadius: 30,
+    backgroundColor: '#89b53a',
+    padding: 12,
+    marginRight: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 60,
+    minWidth: 60
+  },
+
+  treeCountTextInput: {
+    borderColor: 'gray',
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    padding: 0,
+    width: 50,
+    color: '#fff'
+  },
+  treeCountTextInputSelected: {
+    borderColor: 'white',
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    padding: 0,
+    width: 50,
+    color: '#fff'
+  },
+
   donationFrequencyTitle: {
     fontSize: 14,
     fontWeight: '600',

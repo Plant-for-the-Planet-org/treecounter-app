@@ -5,12 +5,14 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Picker
+  Picker,
+  Platform
 } from 'react-native';
 import styles from './../../../styles/pledgeevents/pledgeevents.native';
 import i18n from '../../../locales/i18n';
 import { TextField } from 'react-native-material-textfield';
 import RNPickerSelect from 'react-native-picker-select';
+import CheckBox from 'react-native-check-box';
 
 export default class Step2Tabs extends Component {
   state = {
@@ -116,6 +118,7 @@ export default class Step2Tabs extends Component {
               titleFontSize={12}
               returnKeyType="next"
               lineWidth={1}
+              keyboardType={'number-pad'}
               onChangeText={zipcode => this.setState({ zipcode })}
             />
           </View>
@@ -125,8 +128,8 @@ export default class Step2Tabs extends Component {
           style={{
             borderBottomWidth: 2,
             borderBottomColor: '#d5d5d5',
-            marginTop: 20,
-            paddingBottom: 8
+            marginTop: 18,
+            paddingBottom: Platform.OS === 'ios' ? 8 : 0
           }}
         >
           <RNPickerSelect
@@ -155,6 +158,18 @@ export default class Step2Tabs extends Component {
             onChangeText={email => this.setState({ email })}
           />
         </View>
+        <CheckBox
+          style={{ flex: 1, marginTop: 20 }}
+          onClick={() => {
+            this.setState({
+              isChecked: !this.state.isChecked
+            });
+          }}
+          rightText={'Share my details with Project name by TPO Name.'}
+          rightTextStyle={styles.checkBoxText}
+          isChecked={this.state.isChecked}
+          checkBoxColor={'#89b53a'}
+        />
       </View>
     );
 

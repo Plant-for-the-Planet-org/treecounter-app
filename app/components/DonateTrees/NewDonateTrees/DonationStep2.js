@@ -6,18 +6,56 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
-  ScrollView
+  ScrollView,
+  Keyboard
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Step2Tabs from './Step2Tabs';
 import { updateStaticRoute } from './../../../helpers/routerHelper';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default class DonationStep2 extends Component {
-  state = {};
+  state = { isChecked: false, showContinue: true };
+
+  componentWillMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this._keyboardDidShow
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this._keyboardDidHide
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow = () => {
+    this.setState({
+      showContinue: false
+    });
+  };
+
+  _keyboardDidHide = () => {
+    this.setState({
+      showContinue: true
+    });
+  };
+
   render() {
     return (
       <View>
-        <ScrollView contentContainerStyle={styles.pageScrollView}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.pageScrollView}
+          keyboardDismissMode="on-drag"
+          //keyboardShouldPersistTaps="always"
+          style={{ backgroundColor: 'white' }}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled={true}
+        >
           <View style={styles.pageView}>
             <Text style={styles.pageTitle}>Donation Details</Text>
             <Text style={styles.pageSubTitle}>
@@ -26,27 +64,29 @@ export default class DonationStep2 extends Component {
           </View>
 
           <Step2Tabs />
-        </ScrollView>
+        </KeyboardAwareScrollView>
         {/* Continue Button Section  */}
-        <View style={styles.buttonSectionView}>
-          <View style={styles.donationSummary}>
-            <View style={styles.donationCost}>
-              <Text style={styles.donationAmount}>€ 50</Text>
-              <Text style={styles.donationTree}>for 50 Trees</Text>
+        {this.state.showContinue ? (
+          <View style={styles.buttonSectionView}>
+            <View style={styles.donationSummary}>
+              <View style={styles.donationCost}>
+                <Text style={styles.donationAmount}>€ 50</Text>
+                <Text style={styles.donationTree}>for 50 Trees</Text>
+              </View>
+              <Text style={styles.donationFrequency}>One Time Donation</Text>
             </View>
-            <Text style={styles.donationFrequency}>One Time Donation</Text>
+            <TouchableOpacity
+              onPress={() => {
+                updateStaticRoute('app_donate_detail3', this.props.navigation);
+              }}
+            >
+              <View style={styles.continueButtonView}>
+                <Icon name="arrow-right" size={30} color="#fff" />
+                <Text style={styles.continueText}>Continue</Text>
+              </View>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              updateStaticRoute('app_donate_detail3', this.props.navigation);
-            }}
-          >
-            <View style={styles.continueButtonView}>
-              <Icon name="arrow-right" size={30} color="#fff" />
-              <Text style={styles.continueText}>Continue</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+        ) : null}
         {/* Continue Button Section Ended */}
       </View>
     );

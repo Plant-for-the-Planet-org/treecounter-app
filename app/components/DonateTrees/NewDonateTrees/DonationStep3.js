@@ -20,6 +20,27 @@ import {
   paypalLogo
 } from './../../../assets';
 export default class DonationStep3 extends Component {
+  state = {
+    creditCardInfo: false,
+    payPalInfo: false,
+    sepaInfo: false
+  };
+
+  togglecreditCardInfo = () => {
+    this.setState({
+      creditCardInfo: !this.state.creditCardInfo
+    });
+  };
+  togglePaypalInfo = () => {
+    this.setState({
+      payPalInfo: !this.state.payPalInfo
+    });
+  };
+  toggleSepaInfo = () => {
+    this.setState({
+      sepaInfo: !this.state.sepaInfo
+    });
+  };
   render() {
     return (
       <View>
@@ -32,122 +53,153 @@ export default class DonationStep3 extends Component {
 
             {/* Payment Information Card */}
             <View style={styles.paymentCardView}>
-              <View style={styles.paymentModeView}>
+              <TouchableOpacity
+                style={styles.paymentModeView}
+                onPress={() => {
+                  this.togglecreditCardInfo();
+                }}
+              >
                 <Text style={styles.paymentModeTitle}>CREDIT CARD</Text>
-                <Image
-                  source={visa}
-                  style={{ height: 20, width: 32, marginRight: 6 }}
-                />
-                <Image
-                  source={masterCard}
-                  style={{ height: 20, width: 32, marginRight: 6 }}
-                />
+                <Image source={visa} style={styles.creditCardsDesign} />
+                <Image source={masterCard} style={styles.creditCardsDesign} />
                 <Image
                   source={americanExpress}
-                  style={{ height: 20, width: 32, marginRight: 6 }}
+                  style={styles.creditCardsDesign}
                 />
-                <TouchableOpacity>
+
+                {this.state.creditCardInfo ? (
                   <Icon
                     name="chevron-up"
                     size={14}
                     color="rgba(0, 0, 0, 0.38)"
                     style={{ marginLeft: 10 }}
                   />
-                </TouchableOpacity>
-              </View>
+                ) : (
+                  <Icon
+                    name="chevron-down"
+                    size={14}
+                    color="rgba(0, 0, 0, 0.38)"
+                    style={{ marginLeft: 10 }}
+                  />
+                )}
+              </TouchableOpacity>
             </View>
             {/* Payment Information Card Ended */}
 
-            {/* Payment Information Card */}
+            {/* PayPal Information Card */}
             <View style={styles.paymentCardView}>
-              <View style={styles.paymentModeView}>
-                <Image
-                  source={paypal}
-                  style={{ height: 20, width: 32, marginRight: 6 }}
-                />
+              <TouchableOpacity
+                style={styles.paymentModeView}
+                onPress={() => {
+                  this.togglePaypalInfo();
+                }}
+              >
+                <Image source={paypal} style={styles.creditCardsDesign} />
                 <Text style={styles.paymentModeTitle}>PayPal</Text>
-                <TouchableOpacity>
-                  <Icon
-                    name="chevron-up"
-                    size={14}
-                    color="rgba(0, 0, 0, 0.38)"
-                    style={{ marginLeft: 10 }}
-                  />
-                </TouchableOpacity>
-              </View>
-              <View style={styles.expandedPaymentModePaypal}>
-                <Text style={styles.paypalMessage}>
-                  Click the PayPal icon below to sign into your PayPal account
-                  and pay securely.
-                </Text>
-                <TouchableOpacity style={styles.paypalButton}>
-                  <Text style={styles.paypalButtonText}>Pay with</Text>
-                  <Image
-                    source={paypalLogo}
-                    style={{ height: 26, marginLeft: 14, maxWidth: 100 }}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-            {/* Payment Information Card Ended */}
 
-            {/* Payment Information Card */}
+                {this.state.payPalInfo ? (
+                  <Icon
+                    name="chevron-up"
+                    size={14}
+                    color="rgba(0, 0, 0, 0.38)"
+                    style={{ marginLeft: 10 }}
+                  />
+                ) : (
+                  <Icon
+                    name="chevron-down"
+                    size={14}
+                    color="rgba(0, 0, 0, 0.38)"
+                    style={{ marginLeft: 10 }}
+                  />
+                )}
+              </TouchableOpacity>
+
+              {/* Hidden until expanded by User */}
+              {this.state.payPalInfo ? (
+                <View style={styles.expandedPaymentModePaypal}>
+                  <Text style={styles.paypalMessage}>
+                    Click the PayPal icon below to sign into your PayPal account
+                    and pay securely.
+                  </Text>
+                  <TouchableOpacity style={styles.paypalButton}>
+                    <Text style={styles.paypalButtonText}>Pay with</Text>
+                    <Image
+                      source={paypalLogo}
+                      style={{ height: 26, marginLeft: 14, maxWidth: 100 }}
+                    />
+                  </TouchableOpacity>
+                </View>
+              ) : null}
+              {/* Hidden until expanded by User */}
+            </View>
+            {/* PayPal Information Card Ended */}
+
+            {/* SEPA Information Card */}
             <View style={styles.paymentCardView}>
-              <View style={styles.paymentModeView}>
-                <Image
-                  source={sepa}
-                  style={{ height: 20, width: 32, marginRight: 6 }}
-                />
+              <TouchableOpacity
+                style={styles.paymentModeView}
+                onPress={() => {
+                  this.toggleSepaInfo();
+                }}
+              >
+                <Image source={sepa} style={styles.creditCardsDesign} />
                 <Text style={styles.paymentModeTitle}>SEPA Direct Debit</Text>
-                <TouchableOpacity>
+                {this.state.sepaInfo ? (
                   <Icon
                     name="chevron-up"
                     size={14}
                     color="rgba(0, 0, 0, 0.38)"
                     style={{ marginLeft: 10 }}
                   />
-                </TouchableOpacity>
-              </View>
-            </View>
-            {/* Payment Information Card Ended */}
-            {/* Payment Information Card */}
-            <View style={styles.paymentCardView}>
-              <View style={styles.paymentModeView}>
-                <Image
-                  source={applePay}
-                  style={{ height: 20, width: 32, marginRight: 6 }}
-                />
-                <Text style={styles.paymentModeTitle}>Apple Pay</Text>
-                <TouchableOpacity>
+                ) : (
                   <Icon
-                    name="chevron-up"
+                    name="chevron-down"
                     size={14}
                     color="rgba(0, 0, 0, 0.38)"
                     style={{ marginLeft: 10 }}
                   />
-                </TouchableOpacity>
-              </View>
+                )}
+              </TouchableOpacity>
             </View>
-            {/* Payment Information Card Ended */}
-            {/* Payment Information Card */}
-            <View style={styles.paymentCardView}>
-              <View style={styles.paymentModeView}>
-                <Image
-                  source={googlePay}
-                  style={{ height: 20, width: 32, marginRight: 6 }}
-                />
-                <Text style={styles.paymentModeTitle}>Google Pay</Text>
-                <TouchableOpacity>
-                  <Icon
-                    name="chevron-up"
-                    size={14}
-                    color="rgba(0, 0, 0, 0.38)"
-                    style={{ marginLeft: 10 }}
-                  />
-                </TouchableOpacity>
+            {/* SEPA Information Card Ended */}
+
+            {/* Apple Pay Information Card */}
+            <TouchableOpacity>
+              <View style={styles.paymentCardView}>
+                <View style={styles.paymentModeView}>
+                  <Image source={applePay} style={styles.creditCardsDesign} />
+                  <Text style={styles.paymentModeTitle}>Apple Pay</Text>
+                  <TouchableOpacity>
+                    <Icon
+                      name="chevron-right"
+                      size={14}
+                      color="rgba(0, 0, 0, 0.38)"
+                      style={{ marginLeft: 10 }}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-            {/* Payment Information Card Ended */}
+            </TouchableOpacity>
+            {/* Apple Pay Information Card Ended */}
+
+            {/* Google Pay Information Card */}
+            <TouchableOpacity>
+              <View style={styles.paymentCardView}>
+                <View style={styles.paymentModeView}>
+                  <Image source={googlePay} style={styles.creditCardsDesign} />
+                  <Text style={styles.paymentModeTitle}>Google Pay</Text>
+                  <TouchableOpacity>
+                    <Icon
+                      name="chevron-right"
+                      size={14}
+                      color="rgba(0, 0, 0, 0.38)"
+                      style={{ marginLeft: 10 }}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </TouchableOpacity>
+            {/* Google Pay Information Card Ended */}
           </View>
         </ScrollView>
         {/* Pay Button Section  */}
@@ -195,6 +247,11 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153'
+  },
+  creditCardsDesign: {
+    height: 20,
+    width: 32,
+    marginRight: 6
   },
   pageSubTitle: {
     fontSize: 18,

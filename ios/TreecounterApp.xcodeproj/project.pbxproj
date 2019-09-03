@@ -51,8 +51,8 @@
 		6AFE9EA421347CD4009D99E7 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE9E9B21347CD3009D99E7 /* SafariServices.framework */; };
 		6AFE9EA521347CD4009D99E7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE9E9C21347CD3009D99E7 /* Accelerate.framework */; };
 		6AFE9EA621347CD4009D99E7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE9E9D21347CD4009D99E7 /* SystemConfiguration.framework */; };
-		6BBEA35F22A8FE8E00C6ADE1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BBEA35E22A8FE8E00C6ADE1 /* libz.tbd */; };
-		6BBEA36022A8FEA100C6ADE1 /* libBugsnagReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BBEA32F22A8FE4C00C6ADE1 /* libBugsnagReactNative.a */; };
+		6BEA4B95231EAA2500EC7B40 /* libBugsnagReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BBEA32F22A8FE4C00C6ADE1 /* libBugsnagReactNative.a */; };
+		6BEA4B96231EAA4100EC7B40 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BBEA35E22A8FE8E00C6ADE1 /* libz.tbd */; };
 		724534A7B5EA49BBB9F04CFC /* libTPSStripe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C281D9C6FFB4C18A27F7109 /* libTPSStripe.a */; };
 		7838DB9134FD434F873C2514 /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0D9295844346DF8D1F218B /* libRCTYouTube.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -544,6 +544,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BEA4B96231EAA4100EC7B40 /* libz.tbd in Frameworks */,
+				6BEA4B95231EAA2500EC7B40 /* libBugsnagReactNative.a in Frameworks */,
 				61AFB09222DA619400C8AB49 /* libBVLinearGradient.a in Frameworks */,
 				6AFE9E9E21347CD4009D99E7 /* MobileCoreServices.framework in Frameworks */,
 				6AFE9E9F21347CD4009D99E7 /* AudioToolbox.framework in Frameworks */,
@@ -554,8 +556,6 @@
 				6AFE9EA421347CD4009D99E7 /* SafariServices.framework in Frameworks */,
 				6AFE9EA521347CD4009D99E7 /* Accelerate.framework in Frameworks */,
 				6AFE9EA621347CD4009D99E7 /* SystemConfiguration.framework in Frameworks */,
-				6BBEA36022A8FEA100C6ADE1 /* libBugsnagReactNative.a in Frameworks */,
-				6BBEA35F22A8FE8E00C6ADE1 /* libz.tbd in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,

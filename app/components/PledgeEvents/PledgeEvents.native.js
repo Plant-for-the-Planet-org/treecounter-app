@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Image
 } from 'react-native';
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import PledgeTabView from './PledgeTabView.native';
@@ -87,7 +87,7 @@ class PledgeEvents extends Component {
           this.props.pledges.pledgeEventImages &&
           this.props.pledges.pledgeEventImages.length > 0 ? (
             <ScrollView
-              horizontal={true}
+              horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.peSliderScrollView}
             >

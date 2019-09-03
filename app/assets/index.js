@@ -138,8 +138,8 @@ import forward from './images/forward.png';
 import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
-import googlePlayBadge_en from './images/en/google-play-badge.jpg';
-import googlePlayBadge_de from './images/de/google-play-badge.jpg';
+import googlePlayBadge_en from './images/en/google-play-badge.png';
+import googlePlayBadge_de from './images/de/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.svg';
 import appleStoreBadge_de from './images/de/apple-store-badge.svg';
 export {

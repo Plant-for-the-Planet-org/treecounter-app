@@ -18,7 +18,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
     height: 14
   },
   projectSnippetContainer: {
-    flexDirection: 'column'
+    flexDirection: 'column',
 
     // shadowOffset: {
     //   width: 0,
@@ -27,11 +27,11 @@ export default (selectplantprojectFull = EStyleSheet.create({
     // shadowOpacity: 0.5,
     // elevation: 1,
     // padding: 0,
-    // borderRadius: 7,
-    // borderRadius: 7
+    borderRadius: 7,
+    borderRadius: 7
   },
   projectImageContainer: {
-    height: Layout.window.width * 0.5,
+    height: Layout.window.width * 0.4,
     width: '100%',
     borderTopLeftRadius: 7,
     borderTopRightRadius: 7,
@@ -89,7 +89,8 @@ export default (selectplantprojectFull = EStyleSheet.create({
     height: '100%',
     flexDirection: 'row',
     backgroundColor: '#b9d384',
-    borderRightColor: '#b9d384'
+    borderRightColor: '#b9d384',
+    borderBottomLeftRadius: 7
   },
   treePlantedtext: {
     // padding: 5,
@@ -180,7 +181,9 @@ export default (selectplantprojectFull = EStyleSheet.create({
     backgroundColor: '#f2f2f7',
     borderRadius: 15,
     paddingLeft: 15,
-    paddingRight: 15
+    paddingRight: 15,
+    paddingTop: 2,
+    paddingBottom: 2
     // marginRight: 20
   },
   costText: {

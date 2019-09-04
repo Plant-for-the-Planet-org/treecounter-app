@@ -150,6 +150,8 @@ class PlantProjectSnippet extends PureComponent {
           <PlantedProgressBar
             countPlanted={specsProps.countPlanted}
             countTarget={specsProps.countTarget}
+            style={{ borderBottomLeftRadius: 7, borderBottomRightRadius: 7 }}
+            treePlantedChildContainerStyle={{ borderBottomLeftRadius: 7 }}
           />
           <View style={styles.projectSpecsContainer}>
             <View

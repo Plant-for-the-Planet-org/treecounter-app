@@ -14,7 +14,12 @@ class PlantedProgressBar extends React.Component {
   }
 
   render() {
-    const { countPlanted, countTarget } = this.props;
+    const {
+      countPlanted,
+      countTarget,
+      style,
+      treePlantedChildContainerStyle
+    } = this.props;
     let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
     treePlantedRatio = parseFloat(treePlantedRatio);
     let treeCountWidth;
@@ -27,7 +32,7 @@ class PlantedProgressBar extends React.Component {
     }
 
     return (
-      <View style={styles.treeCounterContainer}>
+      <View style={[styles.treeCounterContainer, style]}>
         <View style={styles.treePlantedContainer}>
           <View
             style={styles.treePlantedChildContainer}
@@ -41,7 +46,8 @@ class PlantedProgressBar extends React.Component {
                     padding: 5,
                     borderTopRightRadius: 20,
                     borderBottomRightRadius: 20,
-                    borderWidth: 0.5
+                    borderWidth: 0.5,
+                    ...treePlantedChildContainerStyle
                   }
                 : {
                     padding: 5
@@ -62,7 +68,7 @@ class PlantedProgressBar extends React.Component {
               {convertNumber(parseInt(countPlanted), 2)}
             </Text>
             <Text style={styles.treePlantedtextTrees}>
-              {i18n.t('label.trees')}
+              {i18n.t('label.planted')}
             </Text>
           </View>
         </View>
@@ -86,7 +92,9 @@ class PlantedProgressBar extends React.Component {
 PlantedProgressBar.propTypes = {
   countPlanted: PropTypes.number,
   countTarget: PropTypes.number,
-  hideTargetImage: PropTypes.bool
+  hideTargetImage: PropTypes.bool,
+  style: PropTypes.object,
+  treePlantedChildContainerStyle: PropTypes.object
 };
 
 export default PlantedProgressBar;

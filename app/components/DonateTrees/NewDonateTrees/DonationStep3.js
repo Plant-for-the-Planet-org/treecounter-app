@@ -5,7 +5,8 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  Image
+  Image,
+  Keyboard
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
@@ -19,11 +20,43 @@ import {
   discover,
   paypalLogo
 } from './../../../assets';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import CheckBox from 'react-native-check-box';
+import {
+  CreditCardInput,
+  LiteCreditCardInput
+} from 'react-native-credit-card-input';
+
+import { TextField } from 'react-native-material-textfield';
+import i18n from '../../../locales/i18n';
+
 export default class DonationStep3 extends Component {
   state = {
     creditCardInfo: false,
     payPalInfo: false,
-    sepaInfo: false
+    sepaInfo: false,
+    creditCardsList: [
+      {
+        id: 0,
+        selected: false,
+        image: discover,
+        cardNumber: '*** 5997',
+        expiryDate: 'Expired',
+        cvv: '453'
+      },
+      {
+        id: 1,
+        selected: true,
+        image: americanExpress,
+        cardNumber: '*** 5997',
+        expiryDate: '10/20',
+        cvv: '234'
+      }
+    ],
+    newCreditCard: {
+      selected: false
+    },
+    showPay: true
   };
 
   togglecreditCardInfo = () => {
@@ -41,10 +74,76 @@ export default class DonationStep3 extends Component {
       sepaInfo: !this.state.sepaInfo
     });
   };
+
+  selectCreditCard = id => {
+    let creditCardsList = this.state.creditCardsList;
+
+    // Setting all the other cards as unselected
+    creditCardsList.map(creditCard => {
+      creditCard.selected = false;
+    });
+
+    // Setting all the other cards as unselected
+    creditCard = this.state.newCreditCard;
+    creditCard.selected = false;
+    this.setState({ newCreditCard: creditCard });
+
+    //Getting card with this id to select it
+    let creditCard = { ...creditCardsList[id] };
+    creditCard.selected = !creditCard.selected;
+    creditCardsList[id] = creditCard;
+    this.setState({ creditCardsList });
+  };
+  selectNewCreditCard = () => {
+    let creditCardsList = this.state.creditCardsList;
+    creditCardsList.map(creditCard => {
+      creditCard.selected = false;
+    });
+    creditCard = this.state.newCreditCard;
+    creditCard.selected = !creditCard.selected;
+    this.setState({ newCreditCard: creditCard });
+  };
+
+  componentWillMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this._keyboardDidShow
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this._keyboardDidHide
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow = () => {
+    this.setState({
+      showPay: false
+    });
+  };
+
+  _keyboardDidHide = () => {
+    this.setState({
+      showPay: true
+    });
+  };
+
+  _onChange = form => console.log(form);
+
   render() {
+    let { newCreditCard } = this.state;
     return (
       <View>
-        <ScrollView contentContainerStyle={styles.pageScrollView}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.pageScrollView}
+          keyboardDismissMode="on-drag"
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled={true}
+        >
           <View style={styles.pageView}>
             <Text style={styles.pageTitle}>Payment</Text>
             <Text style={styles.pageSubTitle}>
@@ -83,6 +182,110 @@ export default class DonationStep3 extends Component {
                   />
                 )}
               </TouchableOpacity>
+              {/* Hidden until expanded by User */}
+              {this.state.creditCardInfo ? (
+                <View>
+                  {this.state.creditCardsList.map(creditCardsList => (
+                    <TouchableOpacity
+                      style={{ flexDirection: 'row', marginTop: 28 }}
+                      onPress={() => {
+                        this.selectCreditCard(creditCardsList.id);
+                      }}
+                    >
+                      <View
+                        style={
+                          creditCardsList.selected
+                            ? styles.selectedRadioButton
+                            : styles.unselectedRadioButton
+                        }
+                      >
+                        <View
+                          style={
+                            creditCardsList.selected
+                              ? styles.selectedRadioButtonCircle
+                              : null
+                          }
+                        />
+                      </View>
+                      <Image
+                        source={creditCardsList.image}
+                        style={[styles.creditCardsDesign, { marginRight: 20 }]}
+                      />
+                      <Text style={{ fontWeight: 'bold', marginRight: 10 }}>
+                        {creditCardsList.cardNumber}
+                      </Text>
+
+                      <Text
+                        style={
+                          creditCardsList.expiryDate == 'Expired'
+                            ? { color: 'red' }
+                            : null
+                        }
+                      >
+                        {creditCardsList.expiryDate}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+
+                  {/* View for New Credit Card  */}
+                  <View>
+                    <TouchableOpacity
+                      style={{ flexDirection: 'row', marginTop: 28 }}
+                      onPress={() => {
+                        this.selectNewCreditCard();
+                      }}
+                    >
+                      <View
+                        style={
+                          newCreditCard.selected
+                            ? styles.selectedRadioButton
+                            : styles.unselectedRadioButton
+                        }
+                      >
+                        <View
+                          style={
+                            newCreditCard.selected
+                              ? styles.selectedRadioButtonCircle
+                              : null
+                          }
+                        />
+                      </View>
+                      <Text
+                        style={{
+                          fontSize: 14,
+                          fontWeight: 'bold',
+                          fontStyle: 'normal',
+                          lineHeight: 19,
+                          letterSpacing: 0,
+                          textAlign: 'left',
+                          color: 'rgba(0, 0, 0, 0.6)'
+                        }}
+                      >
+                        Add New Payment method
+                      </Text>
+                    </TouchableOpacity>
+                    <View style={{ marginLeft: 36, marginTop: 18 }}>
+                      <CreditCardInput onChange={this._onChange} />
+                      <CheckBox
+                        style={{ flex: 1, marginTop: 20 }}
+                        onClick={() => {
+                          this.setState({
+                            isChecked: !this.state.isChecked
+                          });
+                        }}
+                        rightText={
+                          'Save this payment method in my account for future donations'
+                        }
+                        rightTextStyle={styles.checkBoxText}
+                        isChecked={this.state.isChecked}
+                        checkBoxColor={'#89b53a'}
+                      />
+                    </View>
+                  </View>
+                  {/* View for New Credit Card Ended  */}
+                </View>
+              ) : null}
+              {/* Hidden until expanded by User */}
             </View>
             {/* Payment Information Card Ended */}
 
@@ -201,30 +404,33 @@ export default class DonationStep3 extends Component {
             </TouchableOpacity>
             {/* Google Pay Information Card Ended */}
           </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
         {/* Pay Button Section  */}
-        <View style={styles.buttonSectionView}>
-          <View style={styles.donationSummary}>
-            <View style={styles.donationCost}>
-              <Text style={styles.donationAmount}>€ 50</Text>
-              <Text style={styles.donationTree}>for 50 Trees</Text>
+
+        {this.state.showPay ? (
+          <View style={styles.buttonSectionView}>
+            <View style={styles.donationSummary}>
+              <View style={styles.donationCost}>
+                <Text style={styles.donationAmount}>€ 50</Text>
+                <Text style={styles.donationTree}>for 50 Trees</Text>
+              </View>
+              <Text style={styles.donationFrequency}>One Time Donation</Text>
             </View>
-            <Text style={styles.donationFrequency}>One Time Donation</Text>
+            <TouchableOpacity
+              onPress={() => {
+                updateStaticRoute(
+                  getLocalRoute('app_donate_detail2'),
+                  this.props.navigation
+                );
+              }}
+            >
+              <View style={styles.continueButtonView}>
+                <Icon name="heart" size={30} color="#fff" />
+                <Text style={styles.payText}>Pay</Text>
+              </View>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              updateStaticRoute(
-                getLocalRoute('app_donate_detail2'),
-                this.props.navigation
-              );
-            }}
-          >
-            <View style={styles.continueButtonView}>
-              <Icon name="heart" size={30} color="#fff" />
-              <Text style={styles.payText}>Pay</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+        ) : null}
         {/* Pay Button Section Ended */}
       </View>
     );
@@ -384,5 +590,31 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     textAlign: 'center',
     color: 'rgba(0, 0, 0, 0.6)'
+  },
+  unselectedRadioButton: {
+    borderColor: '#d5d5d5',
+    borderWidth: 2,
+    height: 20,
+    width: 20,
+    marginRight: 14,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  selectedRadioButton: {
+    borderColor: '#89b53a',
+    borderWidth: 2,
+    height: 20,
+    width: 20,
+    marginRight: 14,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  selectedRadioButtonCircle: {
+    height: 12,
+    width: 12,
+    borderRadius: 6,
+    backgroundColor: '#89b53a'
   }
 });

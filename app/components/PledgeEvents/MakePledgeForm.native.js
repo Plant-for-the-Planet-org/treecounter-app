@@ -6,17 +6,15 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  Keyboard,
-  KeyboardAvoidingView
+  Keyboard
 } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import BottomAction from './BottomAction';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { forward } from './../../assets';
 import t from 'tcomb-form-native';
 import { postPledge } from './../../actions/pledgeAction';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 
 import i18n from '../../locales/i18n';
 import { connect } from 'react-redux';
@@ -26,27 +24,27 @@ import {
   pledgeSchemaOptions
 } from './../../server/parsedSchemas/pledge';
 
-let TCombForm = t.form.Form;
+// let TCombForm = t.form.Form;
 
-const formLayout = locals => {
-  return (
-    <View>
-      <View style={styles.formView}>
-        <View style={{ width: '45%' }}>{locals.inputs.firstname}</View>
-        <View style={{ width: '45%' }}>{locals.inputs.lastname}</View>
-      </View>
-      <View>{locals.inputs.email}</View>
-      <View style={styles.formtreecountView}>
-        <View style={{ width: '40%' }}>{locals.inputs.treeCount}</View>
-      </View>
-    </View>
-  );
-};
+// const formLayout = locals => {
+//   return (
+//     <View>
+//       <View style={styles.formView}>
+//         <View style={{ width: '45%' }}>{locals.inputs.firstname}</View>
+//         <View style={{ width: '45%' }}>{locals.inputs.lastname}</View>
+//       </View>
+//       <View>{locals.inputs.email}</View>
+//       <View style={styles.formtreecountView}>
+//         <View style={{ width: '40%' }}>{locals.inputs.treeCount}</View>
+//       </View>
+//     </View>
+//   );
+// };
 
-const allSchemaOptions = {
-  template: formLayout,
-  ...pledgeSchemaOptions
-};
+// const allSchemaOptions = {
+//   template: formLayout,
+//   ...pledgeSchemaOptions
+// };
 
 let _ = require('lodash');
 
@@ -104,6 +102,7 @@ class MakePledgeForm extends Component {
 
   onFormSubmit = () => {
     const { firstname, lastname, email, treeCount } = this.state;
+    const { navigation } = this.props;
     let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
       firstname === '' ||
@@ -135,8 +134,17 @@ class MakePledgeForm extends Component {
           this.props.postPledge(data, {
             pledgeEventSlug: params
           });
-          // console.log(this.props.postedPledge);
-          this.RBSheet.open();
+          //this.RBSheet.open();
+          updateStaticRoute('app_pledge_events', this.props.navigation, {
+            slug: this.props.navigation.getParam('slug'),
+            plantProject: this.props.navigation.getParam('plantProject'),
+            eventName: this.props.navigation.getParam('eventName'),
+            eventDate: this.props.navigation.getParam('eventDate'),
+            totalTrees: this.props.navigation.getParam('totalTrees'),
+            eventImage: this.props.navigation.getParam('eventImage'),
+            description: this.props.navigation.getParam('description'),
+            treeCount: treeCount
+          });
         } else {
           alert('Incorrect Email Entered');
         }
@@ -161,10 +169,10 @@ class MakePledgeForm extends Component {
       <KeyboardAwareScrollView
         contentContainerStyle={styles.formScrollView}
         keyboardDismissMode="on-drag"
-        //keyboardShouldPersistTaps="always"
-        style={{ backgroundColor: 'white' }}
+        keyboardShouldPersistTaps="always"
+        style={styles.keyboardScrollView}
         resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled={false}
+        scrollEnabled={true}
       >
         <View>
           <Text style={styles.titleText}>{i18n.t('label.pledgeToPlant')}</Text>
@@ -180,7 +188,6 @@ class MakePledgeForm extends Component {
           {/* <View
             style={styles.formView}
           >
-
             <TCombForm
               ref="pledgeForm"
               type={pledgeFormSchema}
@@ -190,7 +197,7 @@ class MakePledgeForm extends Component {
             />
           </View> */}
           <View style={styles.formView}>
-            <View style={{ width: '45%' }}>
+            <View style={styles.formHalfTextField}>
               <TextField
                 label={i18n.t('label.pledgeFormFName')}
                 value={firstname}
@@ -206,7 +213,7 @@ class MakePledgeForm extends Component {
               />
             </View>
 
-            <View style={{ width: '45%' }}>
+            <View style={styles.formHalfTextField}>
               <TextField
                 label={i18n.t('label.pledgeFormLName')}
                 value={lastname}
@@ -244,7 +251,7 @@ class MakePledgeForm extends Component {
             />
           </View>
           <View style={styles.formtreecountView}>
-            <View style={{ width: '40%' }}>
+            <View style={styles.formHalfTextField}>
               <TextField
                 label={i18n.t('label.pledgeFormTreecount')}
                 tintColor={'#89b53a'}
@@ -286,28 +293,10 @@ class MakePledgeForm extends Component {
             <Image
               source={forward}
               resizeMode="cover"
-              style={{ height: 32, width: 32 }}
+              style={styles.pledgeSmallButtonIcon}
             />
           </TouchableOpacity>
         ) : null}
-        <RBSheet
-          ref={ref => {
-            this.RBSheet = ref;
-          }}
-          height={354}
-          duration={250}
-          customStyles={{
-            container: {
-              justifyContent: 'center'
-            }
-          }}
-        >
-          <BottomAction
-            navigation={navigation}
-            treeCount={treeCount}
-            projectID={this.props.navigation.getParam('plantProject').id}
-          />
-        </RBSheet>
       </KeyboardAwareScrollView>
     );
   }
@@ -318,3 +307,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { postPledge })(MakePledgeForm);
+
+// To Do - Replace form with Tcomb Form

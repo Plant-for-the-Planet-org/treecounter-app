@@ -58,12 +58,12 @@ class TreeCountCurrencySelector extends React.Component {
 
   updateStateAndParent(updates) {
     const newState = { ...this.state, ...updates };
-    this.setState(newState);
-
-    this.props.onChange({
-      currency: newState.selectedCurrency,
-      amount: newState.selectedAmount,
-      treeCount: newState.selectedTreeCount
+    this.setState(newState, () => {
+      this.props.onChange({
+        currency: newState.selectedCurrency,
+        amount: newState.selectedAmount,
+        treeCount: newState.selectedTreeCount
+      });
     });
   }
 

@@ -1,18 +1,11 @@
-import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
-import styles from '../../../styles/selectplantproject/list';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { FlatList, View } from 'react-native';
+
 import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
-import Proptypes from 'prop-types';
-import { FlatList } from 'react-native';
+import styles from '../../../styles/selectplantproject/list';
 
-export default class ListViewProjects extends Component {
-  constructor(props) {
-    super(props);
-  }
-  selectProject(id) {
-    this.props.selectProject(id);
-  }
-
+export default class ListViewProjects extends PureComponent {
   _keyExtractor = (item, index) => item.id.toString();
 
   _renderItem = ({ item }) => (
@@ -21,20 +14,18 @@ export default class ListViewProjects extends Component {
       key={'projectFull' + item.id}
       onMoreClick={id => this.props.onMoreClick(id, item.name)}
       plantProject={item}
-      onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
+      onSelectClickedFeaturedProjects={this.props.selectProject}
       showMoreButton={false}
       tpoName={item.tpo_name}
     />
   );
 
   render() {
-    let { projects } = this.props;
-
     return (
       <View style={{ height: '100%' }}>
         <FlatList
           contentContainerStyle={{ paddingBottom: 45 }}
-          data={projects}
+          data={this.props.projects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
         />
@@ -44,5 +35,7 @@ export default class ListViewProjects extends Component {
 }
 
 ListViewProjects.propTypes = {
-  projects: Proptypes.array.isRequired
+  projects: PropTypes.array.isRequired,
+  selectProject: PropTypes.func.isRequired,
+  onMoreClick: PropTypes.func.isRequired
 };

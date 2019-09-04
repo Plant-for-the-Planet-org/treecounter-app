@@ -105,7 +105,7 @@ export default (editProfileStyle = EStyleSheet.create({
   },
   treecount_input: {
     paddingLeft: 8,
-    width: 50,
+    width: 80,
     borderBottomWidth: 1,
     borderColor: '#686060',
     paddingBottom: 2,

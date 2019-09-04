@@ -44,6 +44,11 @@
 
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
+// load smarbanner style from package
+@import "~react-smartbanner/dist/main.css";
+// we overwrite default app banner style
+@import "./app_banner.scss";
+
 // Import Signup SCSS
 @import "./signup/_signup_type.scss";
 
@@ -72,3 +77,13 @@
 
 /* ESRI Maps CSS*/
 @import url("https://js.arcgis.com/4.7/esri/css/main.css");
+
+//NDVI
+@import "./NDVI/ndvi-portal.scss";
+@import "./NDVI/ndvi-container.scss";
+@import "./NDVI/info.scss";
+@import "./NDVI/legend.scss";
+@import "./NDVI/gradient-result-line.scss";
+@import "./NDVI/time-series.scss";
+@import "./NDVI/circle.scss";
+@import "./NDVI/carbon-details.scss";

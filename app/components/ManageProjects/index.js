@@ -12,6 +12,7 @@ import _ from 'lodash';
 import TextHeading from '../Common/Heading/TextHeading';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import CardLayout from '../Common/Card';
+import { delimitNumbers } from '../../utils/utils';
 
 let TCombForm = t.form.Form;
 const emptyProjectInfo = {
@@ -108,7 +109,7 @@ class CollapsiblePlantProject extends Component {
               )}
               <span className="row">
                 <span className="margin-item light-text">
-                  {plantProject.countPlanted}
+                  {delimitNumbers(plantProject.countPlanted)}
                 </span>
                 <span>{i18n.t('label.trees_planted')}</span>
               </span>

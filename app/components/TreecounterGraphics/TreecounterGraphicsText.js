@@ -4,7 +4,7 @@ import TargetComment from './TargetComment';
 import ArrowButton from '../Common/ArrowButton';
 import { pot, tree, tree_outline } from '../../assets';
 import i18n from '../../locales/i18n.js';
-import { delimitNumbers } from '../../utils/utils';
+import { delimitNumbers, convertNumber } from '../../utils/utils';
 import PlantedDetails from './PlantedDetails';
 
 class TreecounterGraphicsText extends Component {
@@ -24,31 +24,6 @@ class TreecounterGraphicsText extends Component {
   //     .replace(/,/g, '');
   // }
 
-  convertNumber(n, d) {
-    if (isNaN(n) || undefined) {
-      return 0;
-    }
-    let x = ('' + n).length;
-    if (x > 5) {
-      let p = Math.pow;
-      d = p(10, d);
-      x -= x % 3;
-      return (
-        Math.round(n * d / p(10, x)) / d +
-        [
-          '',
-          ' Thousand',
-          ' Million',
-          ' Billion',
-          ' Trillion',
-          ' Quadrillion',
-          ' Quintillion'
-        ][x / 3]
-      );
-    } else {
-      return n;
-    }
-  }
   updateState(stateVal) {
     this.setState({ ifPlantedDetails: stateVal });
     this.props.onToggle(stateVal);
@@ -67,7 +42,8 @@ class TreecounterGraphicsText extends Component {
       }
     } = this.props;
     let dom;
-
+    const targetCount = convertNumber(target, 2);
+    const plantedCount = convertNumber(parseInt(planted), 2);
     {
       dom = !this.state.ifPlantedDetails ? (
         <div className="svg-text-container">
@@ -83,11 +59,13 @@ class TreecounterGraphicsText extends Component {
                       : '') +
                   ' '}
                 <br />
-                <strong>{delimitNumbers(this.convertNumber(target, 2))}</strong>
+                <strong className={targetCount.length > 12 ? 'small' : ''}>
+                  {targetCount}
+                </strong>
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(target))} */}
-                    {target ? delimitNumbers(target) : null}
+                    {target ? delimitNumbers(target) : 0}
                   </div>
                 ) : null}
               </span>
@@ -103,19 +81,19 @@ class TreecounterGraphicsText extends Component {
               <span>
                 {i18n.t('label.planted')}
                 <br />
-                <strong>
-                  {delimitNumbers(this.convertNumber(parseInt(planted), 2))}
+                <strong className={plantedCount.length > 12 ? 'small' : ''}>
+                  {plantedCount}
                 </strong>
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(planted))} */}
-                    {delimitNumbers(parseInt(planted))}
+                    {planted ? delimitNumbers(planted) : 0}
                   </div>
                 ) : null}
               </span>
             </div>
             {this.props.trillion ||
-            this.convertNumber(parseInt(community), 2) == 0 ? null : (
+            convertNumber(parseInt(community), 2) === 0 ? null : (
               <div className="svg-text-container__row--col2">
                 <ArrowButton onToggle={e => this.updateState(e)} />
               </div>
@@ -124,8 +102,8 @@ class TreecounterGraphicsText extends Component {
         </div>
       ) : (
         <PlantedDetails
-          personal={delimitNumbers(this.convertNumber(parseInt(personal), 2))}
-          community={delimitNumbers(this.convertNumber(parseInt(community), 2))}
+          personal={convertNumber(parseInt(personal), 2)}
+          community={convertNumber(parseInt(community), 2)}
           type={type}
           onToggle={e => this.updateState(false)}
         />

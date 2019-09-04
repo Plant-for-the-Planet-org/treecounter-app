@@ -8,6 +8,10 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n';
 import { Dimensions, View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject.native';
+import NumberFormat from '../Common/NumberFormat';
+import { delimitNumbers } from '../../utils/utils';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 class TreeCountCurrencySelector extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -62,12 +66,12 @@ class TreeCountCurrencySelector extends React.PureComponent {
 
   updateStateAndParent(updates) {
     const newState = { ...this.state, ...updates };
-    this.setState(newState);
-
-    this.props.onChange({
-      currency: newState.selectedCurrency,
-      amount: newState.selectedAmount,
-      treeCount: newState.selectedTreeCount
+    this.setState(newState, () => {
+      this.props.onChange({
+        currency: newState.selectedCurrency,
+        amount: newState.selectedAmount,
+        treeCount: newState.selectedTreeCount
+      });
     });
   }
 
@@ -75,98 +79,101 @@ class TreeCountCurrencySelector extends React.PureComponent {
     const { currencies, treeCountOptions } = this.props;
     // console.log('Tree Count currency selector called up');
     return (
-      <CardLayout>
-        <View style={{ flexDirection: 'column' }}>
-          <View style={styles.selectedProjectRow}>
-            <Text>{this.props.selectedProject.name}</Text>
-          </View>
-          {this.props.giftTreeCounterName ? (
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                width: '100%'
-              }}
-            >
-              <Text numberOfLines={1} ellipsizeMode={'tail'}>
-                <Text>{this.state.selectedTreeCount}</Text>
-                <Text style={styles.selectedProjectCol}>
-                  {' '}
-                  {i18n.t('label.trees')}
-                </Text>{' '}
-                {i18n.t('label.gift_to', {
-                  name: this.props.giftTreeCounterName
-                })}
-              </Text>
-              {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
-            </View>
-          ) : this.props.supportTreecounter &&
-          this.props.supportTreecounter.displayName ? (
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                width: '100%'
-              }}
-            >
-              <Text numberOfLines={1} ellipsizeMode={'tail'}>
-                <Text>{this.state.selectedTreeCount}</Text>
-                <Text style={styles.selectedProjectCol}>
-                  {' '}
-                  {i18n.t('label.trees')}
-                </Text>{' '}
-                {
-                  i18n.t('label.support_to',
-                  {
-                    name: this.props.supportTreecounter.displayName
-                  })
-                }
-              </Text>
-              {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
-            </View>
-          ) : (
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ paddingBottom: 35 }}
+        enableOnAndroid={true}
+      >
+        <CardLayout>
+          <View style={{ flexDirection: 'column' }}>
             <View style={styles.selectedProjectRow}>
-              <Text>{this.state.selectedTreeCount}</Text>
-              <Text style={styles.selectedProjectCol}>
-                {i18n.t('label.trees')}
+              <Text>{this.props.selectedProject.name}</Text>
+            </View>
+            {this.props.giftTreeCounterName ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  width: '100%'
+                }}
+              >
+                <Text numberOfLines={1} ellipsizeMode={'tail'}>
+                  <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
+                  <Text style={styles.selectedProjectCol}>
+                    {' '}
+                    {i18n.t('label.trees')}
+                  </Text>{' '}
+                  {i18n.t('label.gift_to', {
+                    name: this.props.giftTreeCounterName
+                  })}
+                </Text>
+                {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
+              </View>
+            ) : this.props.supportTreecounter &&
+            this.props.supportTreecounter.displayName ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  width: '100%'
+                }}
+              >
+                <Text numberOfLines={1} ellipsizeMode={'tail'}>
+                  <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
+                  <Text style={styles.selectedProjectCol}>
+                    {' '}
+                    {i18n.t('label.trees')}
+                  </Text>{' '}
+                  {i18n.t('label.support_to', {
+                    name: this.props.supportTreecounter.displayName
+                  })}
+                </Text>
+                {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
+              </View>
+            ) : (
+              <View style={styles.selectedProjectRow}>
+                <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
+                <Text style={styles.selectedProjectCol}>
+                  {i18n.t('label.trees')}
+                </Text>
+              </View>
+            )}
+
+            <View style={styles.selectedProjectRow}>
+              <Text>
+                {i18n.t('label.amount')}
+                {' : '}
+                <NumberFormat
+                  data={this.state.selectedAmount}
+                  currency={this.state.selectedCurrency}
+                />
               </Text>
             </View>
-          )}
-
-          <View style={styles.selectedProjectRow}>
-            <Text>{i18n.t('label.amount')} : </Text>
-            <Text style={styles.selectedProjectCol}>
-              {this.state.selectedAmount}
-            </Text>
-            <Text style={styles.selectedProjectCol}>
-              {this.state.selectedCurrency}
-            </Text>
           </View>
-        </View>
 
-        <CurrencySelector
-          currencies={currencies}
-          onChange={this.handleCurrencyChange}
-          selectedCurrency={this.state.selectedCurrency}
-        />
-
-        <View style={{ width: Dimensions.get('window').width - 30 }}>
-          <TreeCountSelector
-            currency={this.state.selectedCurrency}
-            amountToTreeCount={this.calculateTreeCount}
-            treeCountToAmount={this.calculateAmount}
-            onChange={this.handleTreeCountChange}
-            treeCountOptions={treeCountOptions}
-            defaultTreeCount={this.state.selectedTreeCount}
+          <CurrencySelector
+            currencies={currencies}
+            onChange={this.handleCurrencyChange}
+            selectedCurrency={this.state.selectedCurrency}
           />
-        </View>
 
-        {this.props.showNextButton ? (
-          <PrimaryButton onClick={() => this.props.onNextClick()}>
-            {i18n.t('label.next')}
-          </PrimaryButton>
-        ) : null}
-      </CardLayout>
+          <View style={{ width: Dimensions.get('window').width - 30 }}>
+            <TreeCountSelector
+              currency={this.state.selectedCurrency}
+              amountToTreeCount={this.calculateTreeCount}
+              treeCountToAmount={this.calculateAmount}
+              onChange={this.handleTreeCountChange}
+              treeCountOptions={treeCountOptions}
+              defaultTreeCount={this.state.selectedTreeCount}
+            />
+          </View>
+
+          {this.props.showNextButton ? (
+            <PrimaryButton onClick={() => this.props.onNextClick()}>
+              {i18n.t('label.next')}
+            </PrimaryButton>
+          ) : null}
+        </CardLayout>
+      </KeyboardAwareScrollView>
     );
   }
 }

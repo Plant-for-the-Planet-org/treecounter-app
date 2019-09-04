@@ -4,6 +4,7 @@ import { getLanguages } from 'react-native-i18n';
 import enlabels from './en';
 import deLabels from './de';
 
+// TO-DO: consider changing this the same way as i18n.js using getLocale()
 let userLang = undefined;
 getLanguages().then(languages => {
   userLang = languages[0].split('-')[0];

@@ -1,43 +1,23 @@
+@import "./ndvi-portal.scss";
+
 .info-component {
+  margin-top: 21px;
   b {
     margin-left: 3px;
     margin-right: 3px;
   }
 
-  .flex-1 {
-    // width: 80%;
-    margin-right: 10px;
-  }
   .row {
     align-items: center;
-  }
-  .text-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   p {
-    height: 5px;
-    font-family: OpenSans;
+    @extend .ndvi-default-typography;
     font-size: 10px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
     line-height: 1.4;
-    letter-spacing: normal;
     text-align: left;
     color: rgba(0, 0, 0, 0.6);
     word-break: break-word;
-  }
-  .btn-container {
-    margin-left: auto;
-    align-self: center;
-    button {
-      background: transparent;
-      border-color: rgba(0, 0, 0, 0.6);
-      border-radius: 50px;
-      color: rgba(0, 0, 0, 0.6);
-    }
   }
 }

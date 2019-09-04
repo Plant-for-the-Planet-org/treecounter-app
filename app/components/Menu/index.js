@@ -9,8 +9,7 @@ import { allowedUrls } from '../../config/socialShare';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import { getLocale } from '../../actions/getLocale';
 
-let userLang = getLocale() || 'en'; // en|de
-userLang = userLang.split('_')[0];
+let userLang = getLocale(); // en|de
 export default class Menu extends Component {
   sideNavImage() {
     const route = this.props.userProfile

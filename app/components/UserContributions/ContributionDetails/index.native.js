@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import NDVI from '../../../containers/NDVI/NDVI';
 import mockDataPoints from '../../NDVI/mockDataPoints';
 import UserContributions from '../../UserContributions/userContribution.native';
+import Measurements from '../../Measurements/Measurements.native';
+import Alert from '../../Measurements/Alert.native';
+import mockMeasurementData from '../../Measurements/mockData';
 
 export default class UserContributionsDetails extends React.Component {
   render() {
@@ -16,6 +19,8 @@ export default class UserContributionsDetails extends React.Component {
           dedicatedTo={'Sagar Aryal'}
           plantedDate={'March 3,2019'}
         />
+        <Alert deletedTreeCount={100} />
+        <Measurements measurements={mockMeasurementData} />
         {!!ndviUid ? <NDVI ndviUid={ndviUid} /> : null}
       </View>
     );

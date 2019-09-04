@@ -52,6 +52,10 @@ import EditCompetitionContainer from '../../containers/EditCompetition';
 import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
 import PledgeEvents from './../PledgeEvents/PledgeEvents.native';
 import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
+import SplashScreen from './../TreecounterGraphics/SplashScreen';
+import { version } from './../../../package.json';
+
+const AppVersion = '1.0.7';
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -87,7 +91,8 @@ const headerLabels = {
   ['app_gift_projects']: 'label.gift_trees',
   ['pickup_profile_modal']: 'label.dedicate_trees_to',
   ['app_pledge_events']: 'Pledges',
-  ['app_pledge_form']: 'Pledge to plant a tree'
+  ['app_pledge_form']: 'Pledge to plant a tree',
+  ['app_splash_screen']: ''
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -239,6 +244,18 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
+
+  const splashScreenNavigator = createStackNavigator(
+    {
+      ['app_splash_screen']: {
+        screen: SplashScreen
+      }
+    },
+    {
+      headerMode: 'none'
+    }
+  );
+
   const getTitle = function(navigation) {
     let title = navigation.getParam('titleParam');
     try {
@@ -351,6 +368,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
 
   const AppNavigator = createDrawerNavigator(
     {
+      splashScreenNavigator,
       appStackNavigator,
       searchNavigator: searchNavigator,
       deleteProfileNavigator,

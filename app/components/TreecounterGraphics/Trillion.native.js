@@ -296,6 +296,30 @@ class Trillion extends PureComponent {
                   </Text>
                 </TouchableOpacity>
               </CardLayout>
+
+              <CardLayout
+                style={[
+                  styles.cardContainer,
+                  {
+                    padding: 16
+                  }
+                ]}
+              >
+                <Text style={[styles.googleCardTitle, { textAlign: 'left' }]}>
+                  {i18n.t('Update your app')}
+                </Text>
+
+                <TouchableOpacity
+                  style={{ width: '100%' }}
+                  onPress={() =>
+                    updateStaticRoute('app_splash_screen', navigation)
+                  }
+                >
+                  <Text style={styles.googleCardButton}>
+                    {i18n.t('Update App')}
+                  </Text>
+                </TouchableOpacity>
+              </CardLayout>
             </View>
           </ScrollView>
         );

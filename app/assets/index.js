@@ -138,6 +138,7 @@ import forward from './images/forward.png';
 import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
+import avatar from './images/avatar.png';
 
 export {
   mapCollapse,
@@ -279,5 +280,6 @@ export {
   forward,
   successAnimated,
   trees,
-  greencalendar
+  greencalendar,
+  avatar
 };

@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     position: 'absolute',
-    top: '80%'
+    bottom: '0%'
   },
   donationSummary: {
     padding: 20

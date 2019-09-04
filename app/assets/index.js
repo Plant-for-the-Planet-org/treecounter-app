@@ -147,6 +147,8 @@ import masterCard from './images/masterCard.png';
 import americanExpress from './images/americanExpress.png';
 import discover from './images/discover.png';
 import paypalLogo from './images/paypalLogo.png';
+import creditCard from './images/creditCard.png';
+import creditCardBack from './images/creditCardBack.png';
 export {
   mapCollapse,
   mapExpand,
@@ -296,5 +298,7 @@ export {
   paypal,
   americanExpress,
   discover,
-  paypalLogo
+  paypalLogo,
+  creditCard,
+  creditCardBack
 };

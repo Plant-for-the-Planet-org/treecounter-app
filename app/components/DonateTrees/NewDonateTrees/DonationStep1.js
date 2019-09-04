@@ -19,12 +19,18 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 export default class DonationStep1 extends Component {
   state = {
-    treeCount: '',
+    treeCount: 0,
     frequency: '',
     treeNumberSelected: 50,
-    showContinue: true
+    showContinue: true,
+    donationType: ''
   };
 
+  componentDidMount() {
+    this.setState({
+      donationType: 'other'
+    });
+  }
   componentWillMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -69,7 +75,11 @@ export default class DonationStep1 extends Component {
           scrollEnabled={true}
         >
           <View style={styles.pageView}>
-            <Text style={styles.pageTitle}> Tree Donation</Text>
+            <Text style={styles.pageTitle}>
+              {this.state.donationType == 'gift'
+                ? 'Tree Gift'
+                : 'Tree Donation'}
+            </Text>
 
             {/* Project Information Card */}
             <View style={styles.projectCardView}>
@@ -172,6 +182,9 @@ export default class DonationStep1 extends Component {
                       ? styles.treeCountTextInputSelected
                       : styles.treeCountTextInput
                   }
+                  onFocus={() => {
+                    this.changeSelectedState(0);
+                  }}
                   onChangeText={treeCount => this.setState({ treeCount })}
                   value={this.state.treeCount}
                   keyboardType={'number-pad'}
@@ -215,7 +228,7 @@ export default class DonationStep1 extends Component {
 
             {/* Tree Dedicated to Section */}
             <Text style={styles.treeDedicatedTitle}>
-              Tree Gift to / Dedicated To / Pledged on
+              Tree Gift to / Dedicated To
             </Text>
             <View style={styles.treeDedicatedContainer}>
               <View style={styles.treeDedicatedProfile} />
@@ -228,6 +241,21 @@ export default class DonationStep1 extends Component {
               </View>
             </View>
             {/* Tree Dedicated to Section Ended */}
+
+            {/* Tree Pledged on */}
+            <Text style={styles.treeDedicatedTitle}>Pledged on</Text>
+            <View style={styles.treeDedicatedContainer}>
+              <View style={styles.treeDedicatedProfile} />
+              <View style={styles.treeDedicatedInfo}>
+                <Text style={styles.treeDedicatedName}>
+                  Esri User Conference
+                </Text>
+              </View>
+              <View>
+                <Icon name="times" size={18} color="#707070" />
+              </View>
+            </View>
+            {/* Tree Pledged on */}
           </View>
         </KeyboardAwareScrollView>
 
@@ -237,7 +265,13 @@ export default class DonationStep1 extends Component {
             <View style={styles.donationSummary}>
               <View style={styles.donationCost}>
                 <Text style={styles.donationAmount}>€ 50</Text>
-                <Text style={styles.donationTree}>for 50 Trees</Text>
+                <Text style={styles.donationTree}>
+                  for{' '}
+                  {this.state.treeNumberSelected == 0
+                    ? this.state.treeCount
+                    : this.state.treeNumberSelected}{' '}
+                  Trees
+                </Text>
               </View>
               <Text style={styles.donationFrequency}>One Time Donation</Text>
             </View>
@@ -466,7 +500,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     position: 'absolute',
-    top: '80%'
+    bottom: '0%'
   },
   donationSummary: {
     padding: 20

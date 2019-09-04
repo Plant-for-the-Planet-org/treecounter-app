@@ -8,7 +8,7 @@ import {
   Picker,
   Platform
 } from 'react-native';
-import styles from './../../../styles/pledgeevents/pledgeevents.native';
+import styles from './../../../styles/donation/donation.native';
 import i18n from '../../../locales/i18n';
 import { TextField } from 'react-native-material-textfield';
 import RNPickerSelect from 'react-native-picker-select';
@@ -53,7 +53,7 @@ export default class Step2Tabs extends Component {
         >
           <View style={{ width: '45%' }}>
             <TextField
-              label={i18n.t('FIRST NAME')}
+              label={i18n.t('First Name')}
               value={firstname}
               tintColor={'#89b53a'}
               titleFontSize={12}
@@ -66,7 +66,7 @@ export default class Step2Tabs extends Component {
 
           <View style={{ width: '45%' }}>
             <TextField
-              label={i18n.t('LAST NAME')}
+              label={i18n.t('Last Name')}
               value={lastname}
               tintColor={'#89b53a'}
               titleFontSize={12}
@@ -79,7 +79,7 @@ export default class Step2Tabs extends Component {
 
         <View>
           <TextField
-            label={i18n.t('ADDRESS LINE 1')}
+            label={i18n.t('Address Line 1')}
             value={address1}
             tintColor={'#89b53a'}
             titleFontSize={12}
@@ -99,7 +99,7 @@ export default class Step2Tabs extends Component {
         >
           <View style={{ width: '45%' }}>
             <TextField
-              label={i18n.t('CITY')}
+              label={i18n.t('City')}
               value={city}
               tintColor={'#89b53a'}
               titleFontSize={12}
@@ -112,7 +112,7 @@ export default class Step2Tabs extends Component {
 
           <View style={{ width: '45%' }}>
             <TextField
-              label={i18n.t('ZIP CODE')}
+              label={i18n.t('Zip Code')}
               value={zipcode}
               tintColor={'#89b53a'}
               titleFontSize={12}
@@ -149,7 +149,7 @@ export default class Step2Tabs extends Component {
 
         <View>
           <TextField
-            label={i18n.t('EMAIL ADDRESS')}
+            label={i18n.t('Email Address')}
             value={email}
             tintColor={'#89b53a'}
             titleFontSize={12}
@@ -177,7 +177,7 @@ export default class Step2Tabs extends Component {
       <View>
         <View style={{ padding: 20, paddingBottom: 0 }}>
           <TextField
-            label={i18n.t('NAME OF COMPANY OR ORGANIZATION')}
+            label={i18n.t('Name of Company or Organization')}
             value={email}
             tintColor={'#89b53a'}
             titleFontSize={12}
@@ -194,12 +194,7 @@ export default class Step2Tabs extends Component {
       <ScrollView>
         <View style={styles.tabViewButtonContainer}>
           <TouchableOpacity
-            style={[
-              { padding: 16 },
-              this.state.tabselected === 'individual'
-                ? styles.selectedTabButtonView
-                : null
-            ]}
+            style={{ marginRight: 24 }}
             onPress={this.onTabChangeToIndividual}
           >
             <Text
@@ -212,17 +207,16 @@ export default class Step2Tabs extends Component {
             >
               Individual
             </Text>
+            <View
+              style={
+                this.state.tabselected === 'individual'
+                  ? styles.selectedTabButtonView
+                  : null
+              }
+            />
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[
-              { padding: 16 },
-              this.state.tabselected === 'company'
-                ? styles.selectedTabButtonView
-                : null
-            ]}
-            onPress={this.onTabChangeToCompany}
-          >
+          <TouchableOpacity onPress={this.onTabChangeToCompany}>
             <Text
               style={[
                 styles.tabViewButtonText,
@@ -233,6 +227,13 @@ export default class Step2Tabs extends Component {
             >
               Company
             </Text>
+            <View
+              style={
+                this.state.tabselected === 'company'
+                  ? styles.selectedTabButtonView
+                  : null
+              }
+            />
           </TouchableOpacity>
         </View>
 

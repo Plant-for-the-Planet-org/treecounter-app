@@ -94,6 +94,7 @@ export default class App extends Component {
     const style = `.canvasContainer {
       background-color:${this.props.backgroundColor};
     }`;
+    const inheritedStyleBody = ':host {all: initial;}';
     return (
       <React.Fragment>
         {/* Scoped CSS: CSS defined inside shadow DOM is scoped
@@ -105,10 +106,10 @@ export default class App extends Component {
 
         {/*Inherited properties will be inherited as usual. It's better to think of the shadow
           boundary as affecting the cascade, namely the scope of selectors and the importance of rules. */}
-        <style>{`:host {all: initial;}`}</style>
+        <style>{inheritedStyleBody}</style>
         <div className="widget-container" id={'widget-container'}>
           <link href="treecounterwidget.css" rel="stylesheet" />
-          {/* <link href={`${serverName}/treecounterwidget.css`} rel="stylesheet" /> */}
+          <link href={`${serverName}/treecounterwidget.css`} rel="stylesheet" />
           {/* Apply CSS hooks here */}
           <style>{style}</style>
           {/* Apply React Tooltip Library CSS */}
@@ -136,7 +137,7 @@ export default class App extends Component {
                 onClick={event => {
                   const url = `${serverName}${getLocalRoute(
                     'app_donateTrees'
-                  )}/${projectId}`;
+                  )}${projectId ? '/' + projectId : ''}`;
                   window.open(url, '_blank');
                 }}
               >

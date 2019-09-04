@@ -50,7 +50,8 @@ import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
 import EditCompetitionContainer from '../../containers/EditCompetition';
 import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
-
+import PledgeEvents from './../PledgeEvents/PledgeEvents.native';
+import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -84,7 +85,9 @@ const headerLabels = {
   ['delete_contribution']: 'label.delete_contribution',
   ['app_donate_detail']: 'label.donate',
   ['app_gift_projects']: 'label.gift_trees',
-  ['pickup_profile_modal']: 'label.dedicate_trees_to'
+  ['pickup_profile_modal']: 'label.dedicate_trees_to',
+  ['app_pledge_events']: 'Pledges',
+  ['app_pledge_form']: 'Pledge to plant a tree'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -147,12 +150,20 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_resetPassword')]: {
         screen: ResetPasswordContainer,
         path: getLocalRoute('app_resetPassword') + '/:token'
+      },
+      ['app_pledge_events']: {
+        screen: PledgeEvents
+      },
+      ['app_pledge_form']: {
+        screen: MakePledgeForm
       }
     },
     {
       headerMode: 'none',
-      navigationOptions: ({ navigation }) => {
-        header: null;
+      navigationOptions: (/*{ navigation }*/) => {
+        return {
+          header: null
+        };
       }
     }
   );
@@ -241,16 +252,13 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
           navigation.state.routes &&
           navigation.state.routes.length > 0
         ) {
-          if (navigation.state.routes[index].routeName === '/home') {
+          const route = navigation.state.routes[index];
+          if (route.routeName === '/home') {
             title = userProfile.fullname;
           } else {
-            title = i18n.t(
-              headerLabels[navigation.state.routes[index].routeName]
-            );
-            if (navigation.state.routes[index].hasOwnProperty('params')) {
-              const childTitle =
-                navigation.state.routes[index].params.titleParam;
-
+            title = i18n.t(headerLabels[route.routeName]);
+            if (route.params) {
+              const childTitle = route.params.titleParam;
               if (childTitle) {
                 title = childTitle;
               }
@@ -264,6 +272,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
 
     return title;
   };
+
   const ApptabNavigator = createBottomTabNavigator(
     {
       [getLocalRoute('app_homepage')]: {
@@ -289,7 +298,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     {
       tabBarOptions: {
         tabBarPosition: 'bottom',
-
         animatedEnable: true,
         swipeEnable: false
       },
@@ -312,6 +320,12 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_donate_detail']: {
         screen: DonationTreesContainer
+      },
+      ['app_pledge_events']: {
+        screen: PledgeEvents
+      },
+      ['app_pledge_form']: {
+        screen: MakePledgeForm
       }
     },
     {

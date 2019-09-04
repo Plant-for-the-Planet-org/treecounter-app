@@ -85,6 +85,11 @@
 //   }
 
 .plant-project-details__container {
+  .ndvi-conatiner {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
   padding: 5px;
   .tpo-footer-nav-img__left {
     max-height: 30px;

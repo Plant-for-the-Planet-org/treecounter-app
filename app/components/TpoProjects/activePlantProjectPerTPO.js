@@ -15,11 +15,7 @@ const activePlantProjectPerTPO = (userTpos, plantProjects, treeCountid) => {
   let cnt = 0;
   result.map((value, index) => {
     if (value && value[Featured]) {
-      if (cnt === 0) {
-        name = 'item_active';
-      } else {
-        name = 'item';
-      }
+      let name = cnt === 0 ? 'item_active' : 'item';
       cnt = cnt + 1;
       projects.push(
         <TpoCardText

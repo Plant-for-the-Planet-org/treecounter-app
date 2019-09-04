@@ -1,26 +1,19 @@
-import * as React from 'react';
+import React, { PureComponent } from 'react';
 import { WebMap } from 'react-arcgis';
 import PropTypes from 'prop-types';
 import { loadModules } from 'react-arcgis';
 import i18n from '../../locales/i18n.js';
 
-class MapContributionCapture extends React.Component {
-  constructor(props) {
-    super(props);
-
-    console.log('%%%%%%%%%%%%%%% MapContributionCapture props: ', props);
-    this.state = {
-      status: i18n.t('label.loading'),
-      map: null,
-      view: null,
-      graphic: null,
-      search: null,
-      webMercatorUtils: null,
-      geoLocation: null
-    };
-
-    this.handleFail = this.handleFail.bind(this);
-  }
+class MapContributionCapture extends PureComponent {
+  state = {
+    status: i18n.t('label.loading'),
+    map: null,
+    view: null,
+    graphic: null,
+    search: null,
+    webMercatorUtils: null,
+    geoLocation: null
+  };
 
   render() {
     return (
@@ -34,13 +27,23 @@ class MapContributionCapture extends React.Component {
             }
           }
         }}
-        onLoad={this.handleLoad.bind(this)}
-        onFail={this.handleFail.bind(this)}
+        onLoad={this.handleLoad}
+        onFail={this.handleFail}
       />
     );
   }
 
-  handleLoad(map, view) {
+  componentDidMount() {
+    this._mounted = true;
+  }
+
+  componentWillUnmount() {
+    this._mounted = false;
+  }
+
+  handleLoad = (map, view) => {
+    if (!this._mounted) return;
+
     loadModules([
       'esri/widgets/Search',
       'esri/geometry/support/webMercatorUtils',
@@ -48,6 +51,8 @@ class MapContributionCapture extends React.Component {
       'esri/geometry/Point'
     ])
       .then(([Search, webMercatorUtils, Graphic, Point]) => {
+        if (!this._mounted) return;
+
         // GET THE FIRST LAYER
         const tree_inventory_layer = map.layers.getItemAt(0);
         //        tree_inventory_layer.definitionExpression = `user_id = ${user_id}`;
@@ -84,13 +89,21 @@ class MapContributionCapture extends React.Component {
         location_search.resultGraphicEnabled = false;
 
         // UPDATE DEFAULT LOCATOR (Esri World Geocoding Service) TO INCLUDE COUNTRY IN THE RESULTS //
-        const locator_source = location_search.sources.getItemAt(0);
+        // const locator_source = location_search.sources.getItemAt(0);
+        // if (locator_source) {
+        //   // RETURN COUNTRY CODE //
+        //   locator_source.outFields.push('CountryCode');
 
-        // RETURN COUNTRY CODE //
-        locator_source.outFields.push('CountryCode');
+        //   // RESET DEFAULT LOCATOR //
+        //   location_search.sources = [locator_source];
+        // } else {
+        //   // It does however work
+        //   console.error(
+        //     'No locator_source found on location_search',
+        //     location_search
+        //   );
+        // }
 
-        // RESET DEFAULT LOCATOR //
-        location_search.sources = [locator_source];
         view.ui.add(location_search, 'top-right');
 
         // USER SELECTS SEARCH RESULT //
@@ -148,12 +161,13 @@ class MapContributionCapture extends React.Component {
         });
       })
       .catch(err => console.error(err));
-  }
+  };
 
-  handleFail(e) {
+  handleFail = e => {
+    if (!this._mounted) return;
     console.error(e);
     this.setState({ status: 'failed' });
-  }
+  };
 }
 
 MapContributionCapture.propTypes = {

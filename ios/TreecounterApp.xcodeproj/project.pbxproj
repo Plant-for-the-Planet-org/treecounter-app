@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -38,6 +37,7 @@
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		4894CBF8CB604D50BA80EDCD /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE250EEB984FC9AED7DA67 /* libRNImagePicker.a */; };
 		5BE1F54AC606460789D2C52A /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3989C278591C4DE98BFCE554 /* libRNDeviceInfo-tvOS.a */; };
+		61AFB09222DA619400C8AB49 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AFB06122DA615E00C8AB49 /* libBVLinearGradient.a */; };
 		6AFE9E9E21347CD4009D99E7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE9E9521347CD2009D99E7 /* MobileCoreServices.framework */; };
 		6AFE9E9F21347CD4009D99E7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE9E9621347CD2009D99E7 /* AudioToolbox.framework */; };
 		6AFE9EA021347CD4009D99E7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE9E9721347CD2009D99E7 /* AVFoundation.framework */; };
@@ -60,6 +60,17 @@
 		C19644D8455B4A9A94138E58 /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6566C36D92C74EBEA541DC9C /* libRNSVG-tvOS.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
+		96E3C6F17CE24BD5AFF45E7B /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B0362431F9D24179A7E9175E /* OpenSans-Bold.ttf */; };
+		62E8C1EDE2C741239E916FB9 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3837E42AA9BD4A6A8B5261EA /* OpenSans-BoldItalic.ttf */; };
+		8E91A3D298D54668A81191C0 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16506A78B0404858BF1334D1 /* OpenSans-ExtraBold.ttf */; };
+		6120BA1189D14C56A8E8CF65 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79829B7B4E914185BF3BE7C5 /* OpenSans-ExtraBoldItalic.ttf */; };
+		891FA4A6378545F783E5B6A9 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F0548F411A546C79D230135 /* OpenSans-Light.ttf */; };
+		CC4F7F7D75BC4732BFC48125 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27297A9DCCBB490BBB63C022 /* OpenSans-LightItalic.ttf */; };
+		FE9B30FE88034D31A30B7F1E /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CED59F86B5B44DAAB29EF987 /* OpenSans-Regular.ttf */; };
+		FA70D9E8C5764BEE8D9A91FF /* OpenSans-RegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C297B0E8F9D447E9921BBBEC /* OpenSans-RegularItalic.ttf */; };
+		EAE8BDB618174F13BB7DD398 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F6DFC7E814546FD8D7A8276 /* OpenSans-SemiBold.ttf */; };
+		5756BAFD954E4B71ADBE04D0 /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E6219CAB4CD4570A7C98EB4 /* OpenSans-SemiBoldItalic.ttf */; };
+		B301B55660CA47B386749894 /* libRNPaypalWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DFFF4FE40B48CB829E9FBA /* libRNPaypalWrapper.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -343,6 +354,20 @@
 			remoteGlobalIDString = 2D2A28201D9B03D100D4039D;
 			remoteInfo = "RCTAnimation-tvOS";
 		};
+		61AFB06022DA615E00C8AB49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 61AFB05A22DA615E00C8AB49 /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = BVLinearGradient;
+		};
+		61AFB06222DA615E00C8AB49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 61AFB05A22DA615E00C8AB49 /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 64AA15081EF7F30100718508;
+			remoteInfo = "BVLinearGradient-tvOS";
+		};
 		61E09B6D213A883D00A88BDE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EB2B8202FEC48FAAC36DFDD /* RNDeviceInfo.xcodeproj */;
@@ -455,6 +480,7 @@
 		4BA37FA7F0664819083CDE0D /* libPods-TreecounterApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TreecounterApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C281D9C6FFB4C18A27F7109 /* libTPSStripe.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTPSStripe.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		61AFB05A22DA615E00C8AB49 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		6566C36D92C74EBEA541DC9C /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; };
 		6AFE9E9521347CD2009D99E7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		6AFE9E9621347CD2009D99E7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -483,6 +509,18 @@
 		E4D7143072CD49B163C98319 /* Pods-TreecounterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TreecounterApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TreecounterApp/Pods-TreecounterApp.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		B0362431F9D24179A7E9175E /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; name = "OpenSans-Bold.ttf"; path = "../app/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3837E42AA9BD4A6A8B5261EA /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-BoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		16506A78B0404858BF1334D1 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "OpenSans-ExtraBold.ttf"; path = "../app/assets/fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		79829B7B4E914185BF3BE7C5 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4F0548F411A546C79D230135 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; name = "OpenSans-Light.ttf"; path = "../app/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		27297A9DCCBB490BBB63C022 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-LightItalic.ttf"; path = "../app/assets/fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CED59F86B5B44DAAB29EF987 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; name = "OpenSans-Regular.ttf"; path = "../app/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C297B0E8F9D447E9921BBBEC /* OpenSans-RegularItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-RegularItalic.ttf"; path = "../app/assets/fonts/OpenSans-RegularItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4F6DFC7E814546FD8D7A8276 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "OpenSans-SemiBold.ttf"; path = "../app/assets/fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7E6219CAB4CD4570A7C98EB4 /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-SemiBoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		15C1F027EB404817BC501492 /* RNPaypalWrapper.xcodeproj */ = {isa = PBXFileReference; name = "RNPaypalWrapper.xcodeproj"; path = "../node_modules/react-native-paypal-wrapper/ios/RNPaypalWrapper.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		08DFFF4FE40B48CB829E9FBA /* libRNPaypalWrapper.a */ = {isa = PBXFileReference; name = "libRNPaypalWrapper.a"; path = "libRNPaypalWrapper.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -498,6 +536,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61AFB09222DA619400C8AB49 /* libBVLinearGradient.a in Frameworks */,
 				6AFE9E9E21347CD4009D99E7 /* MobileCoreServices.framework in Frameworks */,
 				6AFE9E9F21347CD4009D99E7 /* AudioToolbox.framework in Frameworks */,
 				6AFE9EA021347CD4009D99E7 /* AVFoundation.framework in Frameworks */,
@@ -529,6 +568,7 @@
 				724534A7B5EA49BBB9F04CFC /* libTPSStripe.a in Frameworks */,
 				BB1F6859F338DE5E37037F0D /* libPods-TreecounterApp.a in Frameworks */,
 				7838DB9134FD434F873C2514 /* libRCTYouTube.a in Frameworks */,
+				B301B55660CA47B386749894 /* libRNPaypalWrapper.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +803,16 @@
 			isa = PBXGroup;
 			children = (
 				A2246746742C4D96B07F9DED /* YTPlayerView-iframe-player.html */,
+				B0362431F9D24179A7E9175E /* OpenSans-Bold.ttf */,
+				3837E42AA9BD4A6A8B5261EA /* OpenSans-BoldItalic.ttf */,
+				16506A78B0404858BF1334D1 /* OpenSans-ExtraBold.ttf */,
+				79829B7B4E914185BF3BE7C5 /* OpenSans-ExtraBoldItalic.ttf */,
+				4F0548F411A546C79D230135 /* OpenSans-Light.ttf */,
+				27297A9DCCBB490BBB63C022 /* OpenSans-LightItalic.ttf */,
+				CED59F86B5B44DAAB29EF987 /* OpenSans-Regular.ttf */,
+				C297B0E8F9D447E9921BBBEC /* OpenSans-RegularItalic.ttf */,
+				4F6DFC7E814546FD8D7A8276 /* OpenSans-SemiBold.ttf */,
+				7E6219CAB4CD4570A7C98EB4 /* OpenSans-SemiBoldItalic.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -772,6 +822,15 @@
 			children = (
 				5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */,
 				5E9157351DD0AC6500FF2AA8 /* libRCTAnimation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		61AFB05B22DA615E00C8AB49 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				61AFB06122DA615E00C8AB49 /* libBVLinearGradient.a */,
+				61AFB06322DA615E00C8AB49 /* libBVLinearGradient.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -813,6 +872,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				61AFB05A22DA615E00C8AB49 /* BVLinearGradient.xcodeproj */,
 				28348A4E2108EA92000CEC07 /* ToolTipMenu.xcodeproj */,
 				6BBEA32822A8FE4C00C6ADE1 /* BugsnagReactNative.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -833,6 +893,7 @@
 				9EB2B8202FEC48FAAC36DFDD /* RNDeviceInfo.xcodeproj */,
 				15B9AA5C302E41C5BCC22A0C /* TPSStripe.xcodeproj */,
 				285911AE056F46B5A0B5B321 /* RCTYouTube.xcodeproj */,
+				15C1F027EB404817BC501492 /* RNPaypalWrapper.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -975,7 +1036,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -1018,6 +1079,10 @@
 				{
 					ProductGroup = 6BBEA32922A8FE4C00C6ADE1 /* Products */;
 					ProjectRef = 6BBEA32822A8FE4C00C6ADE1 /* BugsnagReactNative.xcodeproj */;
+				},
+				{
+					ProductGroup = 61AFB05B22DA615E00C8AB49 /* Products */;
+					ProjectRef = 61AFB05A22DA615E00C8AB49 /* BVLinearGradient.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -1373,6 +1438,20 @@
 			remoteRef = 5E9157341DD0AC6500FF2AA8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		61AFB06122DA615E00C8AB49 /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 61AFB06022DA615E00C8AB49 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		61AFB06322DA615E00C8AB49 /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 61AFB06222DA615E00C8AB49 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		61E09B6E213A883D00A88BDE /* libRNDeviceInfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1467,6 +1546,16 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				975FF01AB89D4407832726D4 /* YTPlayerView-iframe-player.html in Resources */,
+				96E3C6F17CE24BD5AFF45E7B /* OpenSans-Bold.ttf in Resources */,
+				62E8C1EDE2C741239E916FB9 /* OpenSans-BoldItalic.ttf in Resources */,
+				8E91A3D298D54668A81191C0 /* OpenSans-ExtraBold.ttf in Resources */,
+				6120BA1189D14C56A8E8CF65 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				891FA4A6378545F783E5B6A9 /* OpenSans-Light.ttf in Resources */,
+				CC4F7F7D75BC4732BFC48125 /* OpenSans-LightItalic.ttf in Resources */,
+				FE9B30FE88034D31A30B7F1E /* OpenSans-Regular.ttf in Resources */,
+				FA70D9E8C5764BEE8D9A91FF /* OpenSans-RegularItalic.ttf in Resources */,
+				EAE8BDB618174F13BB7DD398 /* OpenSans-SemiBold.ttf in Resources */,
+				5756BAFD954E4B71ADBE04D0 /* OpenSans-SemiBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1631,11 +1720,15 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-paypal-wrapper/ios/**",
 				);
 				INFOPLIST_FILE = TreecounterAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1659,11 +1752,15 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-paypal-wrapper/ios/**",
 				);
 				INFOPLIST_FILE = TreecounterAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1697,6 +1794,7 @@
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS/**",
 					"$(SRCROOT)/../node_modules/bugsnag-react-native/cocoa/**",
+					"$(SRCROOT)/../node_modules/react-native-paypal-wrapper/ios/**",
 				);
 				INFOPLIST_FILE = TreecounterApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1739,6 +1837,7 @@
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS/**",
 					"$(SRCROOT)/../node_modules/bugsnag-react-native/cocoa/**",
+					"$(SRCROOT)/../node_modules/react-native-paypal-wrapper/ios/**",
 				);
 				INFOPLIST_FILE = TreecounterApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1775,10 +1874,14 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-paypal-wrapper/ios/**",
 				);
 				INFOPLIST_FILE = "TreecounterApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1811,10 +1914,14 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-paypal-wrapper/ios/**",
 				);
 				INFOPLIST_FILE = "TreecounterApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1846,10 +1953,14 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-paypal-wrapper/ios/**",
 				);
 				INFOPLIST_FILE = "TreecounterApp-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1881,10 +1992,14 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-paypal-wrapper/ios/**",
 				);
 				INFOPLIST_FILE = "TreecounterApp-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",

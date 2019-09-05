@@ -4,5 +4,18 @@
   "biggest_pledges": "Größte Baumversprechen",
   "pledge": "Versprechen",
   "pledge_trees": "Baumversprechen",
-  "pledge_des": "Nach Ihrem Baumversprechen erhalten Sie eine E-Mail, die Ihnen mitteilt, wie Sie die versprochenen Bäume spenden können."
+  "pledge_des": "Nach Ihrem Baumversprechen erhalten Sie eine E-Mail, die Ihnen mitteilt, wie Sie die versprochenen Bäume spenden können.",
+  "noPledges": "Es scheint, dass noch keine Bäume versprochen wurden. Bitte machen Sie eine Zusage. Später können Sie sich die größten Versprechen noch mal anschauen.",
+  "makePledgeButton": "Ein Versprechen machen",
+  "pledgeTitleName": "Name",
+  "pledgeTitleTrees": "Bäume",
+  "pledgeToPlant": "Verspreche Bäume zu pflanzen",
+  "pledgeToPlantDesc": "Ein Baum kostet {{treeCost}} {{currency}} und wird in {{projectName}} gepflanzt. Sie erhalten eine E-Mail mit einem Link, um Ihr Versprechen zu erfüllen.",
+  "pledgeFormFName": "Vorname",
+  "pledgeFormLName": "Nachname",
+  "pledgeFormEmail": "E-Mail",
+  "pledgeFormTreecount": "Baumzahl",
+  "pledgeAddedMessage": "Sie haben zugesagt, {{treeCount}} Bäume zu pflanzen. Sie können jetzt auf Weiter tippen, um Ihr Versprechen zu erfüllen.",
+  "pledgeAddedContinueButton": "WEITER",
+  "treesPledgedAllPledges": "{{treeCount}} Bäume versprochen"
 }

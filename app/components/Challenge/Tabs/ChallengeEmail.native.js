@@ -13,6 +13,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
 import i18n from '../../../locales/i18n';
+import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import TabContainer from '../../../containers/Menu/TabContainer';
 
 import challengeStyles from '../../../styles/challenge';

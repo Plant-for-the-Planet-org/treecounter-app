@@ -65,7 +65,7 @@ class TreecounterGraphicsText extends Component {
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(target))} */}
-                    {target ? delimitNumbers(target) : null}
+                    {target ? delimitNumbers(target) : 0}
                   </div>
                 ) : null}
               </span>
@@ -87,13 +87,13 @@ class TreecounterGraphicsText extends Component {
                 {this.props.trillion ? (
                   <div>
                     {/* {this.getTwoWordString(NumberToWords.toWords(planted))} */}
-                    {delimitNumbers(parseInt(planted))}
+                    {planted ? delimitNumbers(planted) : 0}
                   </div>
                 ) : null}
               </span>
             </div>
             {this.props.trillion ||
-            convertNumber(parseInt(community), 2) == 0 ? null : (
+            convertNumber(parseInt(community), 2) === 0 ? null : (
               <div className="svg-text-container__row--col2">
                 <ArrowButton onToggle={e => this.updateState(e)} />
               </div>

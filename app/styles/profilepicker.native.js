@@ -2,8 +2,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default (editProfileStyle = EStyleSheet.create({
   buttonStyle: {
-    borderColor: '#b8da8d',
-    backgroundColor: '#b8da8d',
+    borderColor: '#89b53a',
+    backgroundColor: '#89b53a',
     borderWidth: 0,
     borderRadius: 6,
     padding: 10,
@@ -12,7 +12,6 @@ export default (editProfileStyle = EStyleSheet.create({
   },
   projectSnippetContainer: {
     flexDirection: 'column',
-
     shadowOffset: {
       width: 0,
       height: 3
@@ -32,16 +31,24 @@ export default (editProfileStyle = EStyleSheet.create({
     maxWidth: '100%'
   },
   textDedicateStyle: {
-    fontSize: 14,
-    color: '#ff6666',
-    maxWidth: '100%',
-    textAlign: 'center'
+    fontSize: 18,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 27,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
   },
   textNotDedicateStyle: {
-    fontSize: 14,
-    color: '#999999',
-    maxWidth: '100%',
-    textAlign: 'center'
+    fontSize: 18,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 27,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    marginTop: 7,
+    marginBottom: 5
   },
   topCompetitorScore: {
     width: '40%',
@@ -53,9 +60,7 @@ export default (editProfileStyle = EStyleSheet.create({
     flexDirection: 'row'
   },
   dedicateTreeName: {
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'row'
+    width: '100%'
   },
   profileImageStyle: {
     width: 40,
@@ -74,10 +79,6 @@ export default (editProfileStyle = EStyleSheet.create({
     color: '$cardTextColor',
     maxWidth: '100%'
   },
-  searchUserStyle: {
-    flex: 1,
-    flexDirection: 'column'
-  },
   containerStyle: {
     flex: 1,
     flexDirection: 'row',
@@ -88,8 +89,29 @@ export default (editProfileStyle = EStyleSheet.create({
   containerDedicateStyle: {
     flex: 1,
     flexDirection: 'row',
-    padding: 25,
+    paddingTop: 25,
+    paddingHorizontal: 20,
     width: '100%',
     justifyContent: 'space-between'
+  },
+  dedicateMyTree: {
+    fontSize: 27,
+    fontWeight: '800',
+    fontStyle: 'normal',
+    lineHeight: 40,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    marginBottom: 7
+  },
+  currentlyDedicatedTo: {
+    fontSize: 17,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 23,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    marginTop: 45
   }
 }));

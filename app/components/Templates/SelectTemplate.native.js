@@ -59,7 +59,6 @@ class SelectTemplateIOS extends React.PureComponent {
 
     if (filteredValue && filteredValue.length > 0) {
       formattedValue = i18n.t(filteredValue[0].text);
-    } else {
     }
     if (Platform.OS === 'android') {
       return (

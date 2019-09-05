@@ -11,6 +11,7 @@ import { delimitNumbers } from '../../utils/utils';
 import moment from 'moment';
 import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
+import { getLocale } from '../../actions/getLocale';
 import { getDateFromMySQL } from '../../helpers/utils';
 
 export default class ContributionCard extends React.Component {
@@ -22,7 +23,7 @@ export default class ContributionCard extends React.Component {
       viewExpanded: false,
       openDialog: false
     };
-    moment.locale(i18n.language);
+    moment.locale(getLocale());
   }
 
   closeLightbox = () => this.setState({ lightboxIsOpen: false });

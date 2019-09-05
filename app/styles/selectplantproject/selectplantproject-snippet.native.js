@@ -128,7 +128,7 @@ export default (selectplantprojectFull = EStyleSheet.create({
   },
   locationContainer: {
     flexDirection: 'column',
-    maxWidth: '70%',
+    maxWidth: '60%',
     '@media (max-width: 350)': {
       maxWidth: '45%'
     }

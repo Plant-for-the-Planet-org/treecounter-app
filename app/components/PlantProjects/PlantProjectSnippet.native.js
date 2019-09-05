@@ -163,7 +163,9 @@ class PlantProjectSnippet extends PureComponent {
                 numberOfLines={2}
                 style={styles.project_teaser__contentText}
               >
-                {`${teaserProps.projectName} by ${teaserProps.tpoName}`}
+                {`${teaserProps.projectName}  ${
+                  !!teaserProps.tpoName ? 'by ' + teaserProps.tpoName : ''
+                }`}
               </Text>
             </View>
             <View

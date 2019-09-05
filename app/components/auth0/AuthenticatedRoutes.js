@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
 import { getLocalRoute } from '../../actions/apiRouting';
-import { useAuth0 } from './react-auth0';
+import { useAuth0 } from './Auth0Provider';
 
 /**
  * A Route that is only visible to authenticated users.

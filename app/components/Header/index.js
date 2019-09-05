@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useAuth0 } from '../auth0/react-auth0';
+import { useAuth0 } from '../auth0/Auth0Provider';
 import AnonHeader from './AnonHeader';
 import BurgerMenu from './BurgerMenu';
 import HomeButton from './HomeButton';

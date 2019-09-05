@@ -5,7 +5,7 @@ import TreeCounter from './TreeCounter';
 import configureStore from '../../stores/TreecounterStore';
 import GlobalErrorBoundary from '../ErrorBoundry/globalErrorBoundry';
 import { isIOS, isAndroid } from '../../utils/utils';
-import { Auth0Provider } from '../auth0/react-auth0';
+import { Auth0Provider } from '../auth0/Auth0Provider';
 import { context } from '../../config';
 import AuthenticateUser from '../auth0/AuthenticateUser';
 

@@ -10,7 +10,7 @@ import {
 } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { profileImageUrl } from '../../utils/profileImage';
-import { useAuth0 } from '../auth0/react-auth0';
+import { useAuth0 } from '../auth0/Auth0Provider';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TransparentButton from '../Common/Button/TransparentButton';
 import TextSpan from '../Common/Text/TextSpan';

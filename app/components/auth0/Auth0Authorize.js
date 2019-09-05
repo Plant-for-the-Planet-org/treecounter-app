@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAuth0 } from './react-auth0';
+import { useAuth0 } from './Auth0Provider';
 
 /**
  * Route handler for /authorize

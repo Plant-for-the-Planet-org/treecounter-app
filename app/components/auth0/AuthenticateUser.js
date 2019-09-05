@@ -5,7 +5,7 @@ import { setCurrentUserProfileId } from '../../reducers/currentUserProfileIdRedu
 import { mergeEntities } from '../../reducers/entitiesReducer';
 import { currentUserProfileSelector } from '../../selectors';
 import { setAuth0Token } from '../../utils/user';
-import { useAuth0 } from './react-auth0';
+import { useAuth0 } from './Auth0Provider';
 import { logoutUser } from '../../actions/authActions';
 
 /**

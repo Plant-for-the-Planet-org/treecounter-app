@@ -3,7 +3,7 @@ import React from 'react';
 import i18n from '../../locales/i18n.js';
 import RoundedButton from '../Common/Button/RoundedButton';
 // import { updateRoute } from '../../helpers/routerHelper/routerHelper';
-import { useAuth0 } from '../auth0/react-auth0';
+import { useAuth0 } from '../auth0/Auth0Provider';
 
 const AnonHeader = ({ hidden = false }) => {
   // Temporarily inserting a direct action to login here until

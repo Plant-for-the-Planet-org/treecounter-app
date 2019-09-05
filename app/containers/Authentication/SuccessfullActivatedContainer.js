@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import SuccessfullyActivatedAccount from '../../components/Authentication/SuccessfullyActivated';
 import { accountActivate } from '../../actions/signupActions';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 
 class SuccessfullyActivatedContainer extends React.Component {
   constructor(props) {

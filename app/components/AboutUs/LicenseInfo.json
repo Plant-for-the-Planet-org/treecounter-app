@@ -362,6 +362,13 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-popover-tooltip",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-popover-tooltip/LICENSE"
       },
+      "react-native-raw-bottom-sheet@2.0.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/nysamnang/react-native-raw-bottom-sheet",
+        "publisher": "NY Samnang",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-raw-bottom-sheet",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-raw-bottom-sheet/LICENSE"
+      },
       "react-native-recaptcha-v3@0.0.16": {
         "licenses": "ISC",
         "repository": "https://github.com/acsant/react-native-recaptcha",
@@ -471,7 +478,7 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-notifications",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-notifications/README.md"
       },
-      "react-redux@5.1.1": {
+      "react-redux@7.1.1": {
         "licenses": "MIT",
         "repository": "https://github.com/reduxjs/react-redux",
         "publisher": "Dan Abramov",
@@ -571,9 +578,9 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-thunk",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-thunk/LICENSE.md"
       },
-      "reselect@3.0.1": {
+      "reselect@4.0.0": {
         "licenses": "MIT",
-        "repository": "https://github.com/reactjs/reselect",
+        "repository": "https://github.com/reduxjs/reselect",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/reselect",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/reselect/LICENSE"
       },

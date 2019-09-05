@@ -19,7 +19,7 @@ import svgStyles from '../../styles/common/treecounter_svg';
 import styles from '../../styles/trillion.native';
 import { pledgeEventSelector } from '../../selectors';
 import LoadingIndicator from '../Common/LoadingIndicator';
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n';
@@ -192,7 +192,9 @@ class Trillion extends PureComponent {
                                   eventDate: featuredEvents.eventDate,
                                   totalTrees: featuredEvents.total,
                                   eventImage: featuredEvents.image,
-                                  description: featuredEvents.description
+                                  description: featuredEvents.description,
+                                  plantProject: { id: -1 },
+                                  treeCount: -1
                                 }
                               );
                             }}

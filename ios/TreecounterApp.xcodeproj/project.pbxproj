@@ -51,6 +51,7 @@
 		6AFE9EA421347CD4009D99E7 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE9E9B21347CD3009D99E7 /* SafariServices.framework */; };
 		6AFE9EA521347CD4009D99E7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE9E9C21347CD3009D99E7 /* Accelerate.framework */; };
 		6AFE9EA621347CD4009D99E7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE9E9D21347CD4009D99E7 /* SystemConfiguration.framework */; };
+		6BBD3E7C2320F6D7006D4AF9 /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD3AED2219DDA7400A3C284 /* libRCTYouTube.a */; };
 		6BEA4B95231EAA2500EC7B40 /* libBugsnagReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BBEA32F22A8FE4C00C6ADE1 /* libBugsnagReactNative.a */; };
 		6BEA4B96231EAA4100EC7B40 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BBEA35E22A8FE8E00C6ADE1 /* libz.tbd */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -524,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BEA4B96231EAA4100EC7B40 /* libz.tbd in Frameworks */,
+				6BBD3E7C2320F6D7006D4AF9 /* libRCTYouTube.a in Frameworks */,
 				6BEA4B95231EAA2500EC7B40 /* libBugsnagReactNative.a in Frameworks */,
 				61AFB09222DA619400C8AB49 /* libBVLinearGradient.a in Frameworks */,
 				6AFE9E9E21347CD4009D99E7 /* MobileCoreServices.framework in Frameworks */,

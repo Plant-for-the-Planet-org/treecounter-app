@@ -1,51 +1,21 @@
-import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { useAuth0 } from '../auth0/react-auth0';
 
-import { ProfilePic } from '../../assets';
-import Notification from './Notification';
-import Popover from '../Common/Popover';
-import UserDetails from './UserDetails';
-import { getImageUrl } from '../../actions/apiRouting';
-import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
-
-// Actions
 import {
-  moreNotificationAction,
-  markSeenNotificationAction
+  markSeenNotificationAction,
+  moreNotificationAction
 } from '../../actions/notificationAction';
-
 import { updateProfileDedication } from '../../actions/updateUserProfile';
-import {
-  currentUserProfileSelector,
-  userFeedsSelector
-} from '../../selectors/index';
 import { updateRoute } from '../../helpers/routerHelper';
-
-/**
- * Get fully qualified url for profile image
- */
-const profileImageUrl = (userProfile, user) => {
-  let img;
-
-  // ttc userProfile
-  if (userProfile && userProfile.image) {
-    // URL may be external or on our servers.
-    img = userProfile.image;
-    if (!img.startsWith('http')) {
-      img = getImageUrl('profile', 'thumb', img);
-    }
-  }
-
-  // auth0 user profile
-  if (!img && user) {
-    img = user.picture;
-  }
-
-  return img || ProfilePic;
-};
+import { currentUserProfileSelector, userFeedsSelector } from '../../selectors';
+import { profileImageUrl } from '../../utils/profileImage';
+import { useAuth0 } from '../auth0/react-auth0';
+import Popover from '../Common/Popover';
+import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
+import Notification from './Notification';
+import UserDetails from './UserDetails';
 
 /**
  * The header that an authenticated user sees
@@ -59,9 +29,9 @@ const UserHeader = ({
   updateProfileDedication
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { user, logout } = useAuth0();
+  const { user } = useAuth0();
 
-  const profileUrl = useMemo(() => profileImageUrl(userProfile, user), [
+  const profileImage = useMemo(() => profileImageUrl(userProfile, user), [
     userProfile,
     user
   ]);
@@ -76,8 +46,6 @@ const UserHeader = ({
       markSeenNotificationAction(userFeeds.userFeeds[0].id);
     }
   };
-
-  const logoutUser = () => logout({ redirect: window.location.origin });
 
   return (
     <div className="header-icons">
@@ -110,12 +78,11 @@ const UserHeader = ({
         </Popover>
       </div>
       <Popover
-        button={<img src={profileUrl} className="image-rounded-border" />}
+        button={<img src={profileImage} className="image-rounded-border" />}
       >
         <UserDetails
           updateRoute={updateRoute}
           userProfile={userProfile}
-          logoutUser={logoutUser}
           openProfilePickerModal={() => setModalIsOpen(true)}
         />
       </Popover>
@@ -143,7 +110,8 @@ const mapDispatchToProps = dispatch => {
       moreNotificationAction,
       markSeenNotificationAction,
       updateProfileDedication,
-      route: (routeName, id) => dispatch => updateRoute(routeName, dispatch, id)
+      updateRoute: (routeName, id) => dispatch =>
+        updateRoute(routeName, dispatch, id)
     },
     dispatch
   );

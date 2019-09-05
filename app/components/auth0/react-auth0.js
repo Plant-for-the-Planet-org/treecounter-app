@@ -41,14 +41,22 @@ export const Auth0Provider = ({
   const [loading, setLoading] = useState(true);
   const [popupOpen, setPopupOpen] = useState(false);
 
+  // onMount
   useEffect(() => {
     const initAuth0 = async () => {
       const auth0FromHook = await createAuth0Client(initOptions);
       setAuth0(auth0FromHook);
 
       if (window.location.search.includes('code=')) {
-        const { appState } = await auth0FromHook.handleRedirectCallback();
-        onRedirectCallback(appState);
+        try {
+          const { appState } = await auth0FromHook.handleRedirectCallback();
+          onRedirectCallback(appState);
+        } catch (error) {
+          // sometimes there is Invalid state
+          // I think just during development work when there is a lot of fast reloading
+          console.error(error);
+          onRedirectCallback({ targetUrl: '/' });
+        }
       }
 
       const isAuthenticated = await auth0FromHook.isAuthenticated();

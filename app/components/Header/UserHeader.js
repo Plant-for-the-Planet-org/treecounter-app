@@ -11,7 +11,6 @@ import { updateProfileDedication } from '../../actions/updateUserProfile';
 import { updateRoute } from '../../helpers/routerHelper';
 import { currentUserProfileSelector, userFeedsSelector } from '../../selectors';
 import { profileImageUrl } from '../../utils/profileImage';
-import { useAuth0 } from '../auth0/Auth0Provider';
 import Popover from '../Common/Popover';
 import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
 import Notification from './Notification';
@@ -29,11 +28,9 @@ const UserHeader = ({
   updateProfileDedication
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { user } = useAuth0();
 
-  const profileImage = useMemo(() => profileImageUrl(userProfile, user), [
-    userProfile,
-    user
+  const profileImage = useMemo(() => profileImageUrl(userProfile), [
+    userProfile
   ]);
 
   const pickupProfile = value => {

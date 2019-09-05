@@ -17,13 +17,12 @@ import TextSpan from '../Common/Text/TextSpan';
 
 const UserDetails = ({ updateRoute, userProfile, openProfilePickerModal }) => {
   const profile = userProfile || {};
-  const { user, logout } = useAuth0();
+  const { logout } = useAuth0();
 
   const logoutUser = () => logout({ redirect: window.location.origin });
 
-  const profileImage = useMemo(() => profileImageUrl(userProfile, user), [
-    userProfile,
-    user
+  const profileImage = useMemo(() => profileImageUrl(userProfile), [
+    userProfile
   ]);
 
   return (

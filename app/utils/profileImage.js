@@ -8,7 +8,7 @@ import { ProfilePic } from '../assets';
  * The image may be from an identity provider (facebook, google, auth0, gravatar)
  * or hosted on TTC servers (legacy accounts)
  */
-export const profileImageUrl = (userProfile, user) => {
+export const profileImageUrl = userProfile => {
   let img;
 
   // ttc userProfile
@@ -18,11 +18,6 @@ export const profileImageUrl = (userProfile, user) => {
     if (!img.startsWith('http')) {
       img = getImageUrl('profile', 'thumb', img);
     }
-  }
-
-  // auth0 user profile
-  if (user && !img) {
-    img = user.picture;
   }
 
   if (img) {

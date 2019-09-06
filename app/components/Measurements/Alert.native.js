@@ -10,7 +10,7 @@ const Alert = props => (
         {props.deletedTreeCount ? props.deletedTreeCount : 'None'} Tree
         contribution has been deleted
       </Text>
-      <Text style={styles.text}>Successfully. -> redirect to Me page.</Text>
+      <Text style={styles.text}>Successfully. redirect to Me page.</Text>
     </View>
   </View>
 );

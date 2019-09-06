@@ -10,6 +10,10 @@ import mockMeasurementData from '../../Measurements/mockData';
 
 export default class UserContributionsDetails extends React.Component {
   render() {
+    console.log(this.props.contribution, 'contribution');
+    if (!this.props.contribution) {
+      return null;
+    }
     const ndviUid = this.props.contribution && this.props.contribution.ndviUid;
     return (
       <View>
@@ -20,7 +24,9 @@ export default class UserContributionsDetails extends React.Component {
           plantedDate={'March 3,2019'}
         />
         <Alert deletedTreeCount={100} />
-        <Measurements measurements={mockMeasurementData} />
+        {this.props.contribution.contributionMeasurements ? (
+          <Measurements measurements={mockMeasurementData} />
+        ) : null}
         {!!ndviUid ? <NDVI ndviUid={ndviUid} /> : null}
       </View>
     );

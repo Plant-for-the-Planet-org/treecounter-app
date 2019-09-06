@@ -19,7 +19,6 @@ export const context = {
   currency: 'USD',
   mapIds: { inventory: 'dee6acf9de774fe6878813f707b4ab88'},
   bugsnagApiKey: '',
-  auth0domain: 'https://accounts.plant-for-the-planet.org',
+  auth0domain: 'planetapp.eu.auth0.com',
   auth0clientId: ''
-}
 };

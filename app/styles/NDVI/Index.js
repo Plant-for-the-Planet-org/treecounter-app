@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (indexStyle = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -11,4 +11,4 @@ export default (indexStyle = EStyleSheet.create({
     width: 15,
     fontSize: 13
   }
-}));
+});

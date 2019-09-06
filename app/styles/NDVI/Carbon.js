@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (coarbonStyle = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     marginTop: 24
   },
@@ -29,4 +29,4 @@ export default (coarbonStyle = EStyleSheet.create({
     borderColor: '$textColor',
     alignItems: 'center'
   }
-}));
+});

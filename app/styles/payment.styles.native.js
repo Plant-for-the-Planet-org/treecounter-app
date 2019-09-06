@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
-export default (paymentStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   imageStyle: {
     width: 17,
     height: 18
@@ -43,4 +43,4 @@ export default (paymentStyles = EStyleSheet.create({
   headerText: {
     color: '#fff'
   }
-}));
+});

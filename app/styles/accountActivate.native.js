@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (saccountActivateStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   scrollViewStyle: {
     flexGrow: 1
   },
@@ -25,4 +25,4 @@ export default (saccountActivateStyles = EStyleSheet.create({
     marginBottom: 20,
     textAlign: 'center'
   }
-}));
+});

@@ -6,7 +6,7 @@ const Layout = {
     width: Dimensions.get('window').width
   }
 };
-export default (selectplantprojectFull = EStyleSheet.create({
+export default EStyleSheet.create({
   flexContainer: {
     flex: 1
   },
@@ -157,4 +157,4 @@ export default (selectplantprojectFull = EStyleSheet.create({
     //margin: 0,
     paddingBottom: 10
   }
-}));
+});

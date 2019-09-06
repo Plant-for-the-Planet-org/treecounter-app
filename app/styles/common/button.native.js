@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (buttonStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   primaryButton: {
     height: 50,
     backgroundColor: '#a4c65e',
@@ -52,4 +52,4 @@ export default (buttonStyles = EStyleSheet.create({
     height: 30,
     width: 30
   }
-}));
+});

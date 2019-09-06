@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (textInputStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     // flexDirection: 'column',
     //flex: 1
@@ -39,4 +39,4 @@ export default (textInputStyles = EStyleSheet.create({
     fontSize: 11,
     marginTop: -12
   }
-}));
+});

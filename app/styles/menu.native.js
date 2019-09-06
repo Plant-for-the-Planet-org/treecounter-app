@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (menuStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   outerContainer: {
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
@@ -50,4 +50,4 @@ export default (menuStyles = EStyleSheet.create({
   sideNavigationActionMenuContainer: {
     width: '100%'
   }
-}));
+});

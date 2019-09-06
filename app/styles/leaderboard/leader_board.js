@@ -8,7 +8,7 @@ const boxShadow = {
   shadowRadius: 12,
   elevation: 4
 };
-export default (LeaderboardStyle = EStyleSheet.create({
+export default EStyleSheet.create({
   leaderBoardContainer: {
     flex: 1,
     backgroundColor: Platform.OS === 'android' ? 'transparent' : '#fff',
@@ -144,4 +144,4 @@ export default (LeaderboardStyle = EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   }
-}));
+});

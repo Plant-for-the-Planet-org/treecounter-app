@@ -1,13 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-  FlatList
-} from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 import challengesStyle from '../../styles/challenge';
 
@@ -56,7 +49,7 @@ export default class ChallengeCard extends React.Component {
             <View style={challengesStyle.flexStyle}>
               <UserProfileImage
                 profileImage={avatar}
-                style={styles.profileImage}
+                style={challengesStyle.profileImage}
                 imageStyle={{ width: 40, height: 40, borderRadius: 40 / 2 }}
               />
               <View>

@@ -5,27 +5,46 @@ import ArrowUpIcon from '../../assets/images/green-arrow-up.png';
 import ArrowRightIcon from '../../assets/images/green-arrow-right.png';
 import CalendarIcon from '../../assets/images/green-calendar.png';
 import styles from '../../styles/mesurements/index';
+import i18n from '../../locales/i18n.js';
 
 const Measurement = props => (
-  <View style={{ paddingTop: 10 }}>
-    <View>
-      <Text>
-        <Image source={CalendarIcon} />
-        {props.plantedDate}
-      </Text>
+  <View style={{ paddingTop: 20 }}>
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+      }}
+    >
+      <Image source={CalendarIcon} style={styles.icon} />
+      <Text>{props.measurementDate}</Text>
     </View>
-    <View style={{ flexDirection: 'row' }}>
-      <View style={{ flexDirection: 'column', flex: 4 }}>
+    <View style={{ flexDirection: 'row', paddingTop: 5 }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          alignItems: 'center'
+        }}
+      >
+        <Image source={ArrowUpIcon} style={styles.icon} />
         <Text>
-          <Image source={ArrowUpIcon} />
-          {props.heightOfTree} m tall
+          {props.height} {i18n.t('label.m_tall')}
         </Text>
       </View>
-      <View style={{ flexDirection: 'column', flex: 8 }}>
-        <Text>
-          <Image source={ArrowRightIcon} />
-          {props.widthOfTree} cm wide
-        </Text>
+      <View style={{ flexDirection: 'column', flex: 8, marginLeft: 16 }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'center'
+          }}
+        >
+          <Image source={ArrowRightIcon} style={styles.icon} />
+          <Text>
+            {props.diameter} {i18n.t('label.cm_wide')}
+          </Text>
+        </View>
       </View>
     </View>
   </View>

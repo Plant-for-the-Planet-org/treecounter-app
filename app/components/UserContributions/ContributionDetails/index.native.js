@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import NDVI from '../../../containers/NDVI/NDVI';
-import mockDataPoints from '../../NDVI/mockDataPoints';
 import UserContributions from '../../UserContributions/userContribution.native';
 import Measurements from '../../Measurements/Measurements.native';
 import Alert from '../../Measurements/Alert.native';
-import mockMeasurementData from '../../Measurements/mockData';
 
 export default class UserContributionsDetails extends React.Component {
   render() {
@@ -14,21 +12,27 @@ export default class UserContributionsDetails extends React.Component {
     if (!this.props.contribution) {
       return null;
     }
+    const hasMeasurements =
+      this.props.contribution.contributionMeasurements &&
+      Object.keys(this.props.contribution.contributionMeasurements).length > 0;
     const ndviUid = this.props.contribution && this.props.contribution.ndviUid;
     return (
-      <View>
+      <ScrollView style={{ backgroundColor: '#fff', flex: 1 }}>
         <UserContributions
           treeCount={500.0}
           location={'Yucatan, Mexico'}
           dedicatedTo={'Sagar Aryal'}
           plantedDate={'March 3,2019'}
         />
-        <Alert deletedTreeCount={100} />
-        {this.props.contribution.contributionMeasurements ? (
-          <Measurements measurements={mockMeasurementData} />
+        {/* <Alert deletedTreeCount={100} /> */}
+        {hasMeasurements ? (
+          <Measurements
+            measurements={this.props.contribution.contributionMeasurements}
+          />
         ) : null}
+
         {!!ndviUid ? <NDVI ndviUid={ndviUid} /> : null}
-      </View>
+      </ScrollView>
     );
   }
 }

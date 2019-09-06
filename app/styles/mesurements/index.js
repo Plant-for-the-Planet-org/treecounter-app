@@ -18,7 +18,8 @@ export default (Measurements = EStyleSheet.create({
     borderColor: '#d5d5d5'
   },
   icon: {
-    width: 25,
-    height: 25
+    height: 19,
+    width: 19,
+    marginRight: 4
   }
 }));

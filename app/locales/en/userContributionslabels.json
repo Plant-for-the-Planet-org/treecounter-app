@@ -23,8 +23,10 @@
   "confirm": "Confirm",
   "delete_contribution": "Delete Contribution",
   "my_trees_delete_confirm": "Are you sure you want to delete these trees?",
-  "deletion_warning_summary_contribution": "You are about to delete some trees you have registered as planted.",
-  "delete_my_trees_action": "This action will permanently delete this contribution.",
+  "deletion_warning_summary_contribution":
+    "You are about to delete some trees you have registered as planted.",
+  "delete_my_trees_action":
+    "This action will permanently delete this contribution.",
   "gifted_on_to": "Gifted on {{date}} to ",
   "donated_on": "Donated on {{date}}",
   "planted_by": "Planted by {{tpo}}",
@@ -35,5 +37,8 @@
   "redeemed_on": "Redeemed on {{date}}",
   "dedicated_on": "Dedicated on {{date}}",
   "dedicated_on_by": "Dedicated on {{date}} by",
-  "register_new_trees": "Register new trees"
+  "register_new_trees": "Register new trees",
+  "measurement": "Measurements (For Single Tree Only)",
+  "m_tall": "m tall",
+  "cm_wide": "cm wide"
 }

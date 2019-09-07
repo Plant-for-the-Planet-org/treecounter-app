@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Select, { components } from 'react-select';
+
 import * as images from '../../assets';
 import i18n from '../../locales/i18n';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -9,6 +11,54 @@ import { allowedUrls } from '../../config/socialShare';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import { saveItem } from '../../stores/localStorage';
 import { getLocale } from '../../actions/getLocale';
+
+const { Option, SingleValue } = components;
+const IconOption = props => (
+  <Option {...props}>
+    {props.data.icon && <img className="menu-icon" src={props.data.icon} />}
+    <span className="dropdown-label">{props.data.label}</span>
+  </Option>
+);
+const singleValue = props => (
+  <SingleValue {...props}>
+    {props.data.icon && <img className="menu-icon" src={props.data.icon} />}
+    <span className="dropdown-label">{props.data.label}</span>
+  </SingleValue>
+);
+
+const customStyles = {
+  control: () => ({
+    // none of react-select's styles are passed to <Control />
+    display: 'flex',
+    width: '100%',
+    cursor: 'pointer'
+  }),
+  container: () => ({
+    width: '150px',
+    display: 'flex',
+    cursor: 'pointer'
+  }),
+  indicatorSeparator: () => ({
+    display: 'none'
+  }),
+  option: () => ({
+    display: 'flex',
+    padding: '10px',
+    width: '100px'
+  }),
+  menu: provided => ({
+    ...provided,
+    width: '150px'
+  }),
+  singleValue: (provided, state) => {
+    return { ...provided, border: 0, width: '150px', display: 'flex' };
+  }
+};
+
+const statusOptions = [
+  { value: 'en', label: 'English', icon: images.worldImg },
+  { value: 'de', label: 'Deutsch', icon: images.germanyFlag }
+];
 
 export default class Menu extends Component {
   constructor(props) {
@@ -33,7 +83,8 @@ export default class Menu extends Component {
 
   async componentWillMount() {
     let language = await getLocale();
-    this.setState({ selectedLanguage: language });
+    let option = statusOptions.filter(option => option.value === language)[0];
+    this.setState({ selectedLanguage: option });
   }
 
   linkClicked() {
@@ -79,16 +130,12 @@ export default class Menu extends Component {
     }
   }
 
-  onSelectLanguageChange = ev => {
-    const value = ev.target.value;
+  onSelectLanguageChange = selectedOption => {
     this.setState({
-      selectedLanguage: value
+      selectedLanguage: selectedOption
     });
-    if (value != 'language') {
-      // location.href = '/';
-      location.reload();
-      saveItem('language', value);
-    }
+    saveItem('language', selectedOption.value);
+    location.reload();
   };
 
   render() {
@@ -167,7 +214,16 @@ export default class Menu extends Component {
         {this.props.userProfile ? this.renderShareButtons() : null}
         <ul>
           <li className="li-select">
-            <img src={images.worldImg} className="menu-icon" alt="world" />
+            <Select
+              defaultValue={this.state.selectedLanguage}
+              value={this.state.selectedLanguage}
+              options={statusOptions}
+              styles={customStyles}
+              onChange={this.onSelectLanguageChange}
+              isSearchable={false}
+              components={{ Option: IconOption, SingleValue: singleValue }}
+            />
+            {/* <img src={images.worldImg} className="menu-icon" alt="world" />
             <select
               className="select-language"
               onChange={this.onSelectLanguageChange}
@@ -176,7 +232,7 @@ export default class Menu extends Component {
             >
               <option value="en">English</option>
               <option value="de">Deutsch</option>
-            </select>
+            </select> */}
           </li>
         </ul>
       </div>

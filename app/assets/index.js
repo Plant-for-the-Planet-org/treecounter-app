@@ -139,8 +139,10 @@ import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
 import worldImg from './images/icons/world.png';
+import germanyFlag from './images/germanyFlag.jpeg';
 
 export {
+  germanyFlag,
   worldImg,
   mapCollapse,
   mapExpand,

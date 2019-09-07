@@ -33,7 +33,8 @@ const customStyles = {
     width: '100%',
     cursor: 'pointer'
   }),
-  container: () => ({
+  container: provided => ({
+    ...provided,
     width: '150px',
     display: 'flex',
     cursor: 'pointer'
@@ -213,19 +214,18 @@ export default class Menu extends Component {
         ))}
 
         {this.props.userProfile ? this.renderShareButtons() : null}
-        <ul>
-          <li className="li-select">
-            <Select
-              defaultValue={this.state.selectedLanguage}
-              value={this.state.selectedLanguage}
-              options={statusOptions}
-              styles={customStyles}
-              onChange={this.onSelectLanguageChange}
-              isSearchable={false}
-              components={{ Option: IconOption, SingleValue: singleValue }}
-            />
-          </li>
-        </ul>
+
+        <div className="li-select">
+          <Select
+            defaultValue={this.state.selectedLanguage}
+            value={this.state.selectedLanguage}
+            options={statusOptions}
+            styles={customStyles}
+            onChange={this.onSelectLanguageChange}
+            isSearchable={false}
+            components={{ Option: IconOption, SingleValue: singleValue }}
+          />
+        </div>
         <div className="bottom-banner">
           <a
             target="_blank"

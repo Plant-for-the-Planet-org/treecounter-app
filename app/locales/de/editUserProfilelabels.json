@@ -32,9 +32,9 @@
   "add_image_title": "Bild hinzufügen",
   "cancel": "Abbrechen",
   "take_photo": "Foto machen...",
-  "choose_from_library": "Aus Album wählen...",
+  "choose_from_library": "Aus der Bibliothek auswählen...",
   "permission_denied_title": "Zugriff verweigert",
-  "permission_denied_text": "Kein Zugriff auf Ihre Kamera oder Fotoalbum möglich.",
-  "permission_denied_retry_title": "Noch einmal",
-  "permission_denied_ok_title": "Sicher"
+  "permission_denied_text": "Keine Zugriffsberechtigung für Ihre Kamera oder Fotobibliothek.",
+  "permission_denied_retry_title": "Wiederholen",
+  "permission_denied_ok_title": "Ich bin sicher"
 }

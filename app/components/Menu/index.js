@@ -60,6 +60,7 @@ const statusOptions = [
   { value: 'de', label: 'Deutsch', icon: images.germanyFlag }
 ];
 
+let userLang = getLocale(); // en|de
 export default class Menu extends Component {
   constructor(props) {
     super(props);
@@ -223,18 +224,22 @@ export default class Menu extends Component {
               isSearchable={false}
               components={{ Option: IconOption, SingleValue: singleValue }}
             />
-            {/* <img src={images.worldImg} className="menu-icon" alt="world" />
-            <select
-              className="select-language"
-              onChange={this.onSelectLanguageChange}
-              name="language"
-              value={this.state.selectedLanguage}
-            >
-              <option value="en">English</option>
-              <option value="de">Deutsch</option>
-            </select> */}
           </li>
         </ul>
+        <div className="bottom-banner">
+          <a
+            target="_blank"
+            href="https://apps.apple.com/app/plant-for-the-planet/id1444740626"
+          >
+            <img src={images['appleStoreBadge_' + userLang]} />
+          </a>
+          <a
+            target="_blank"
+            href="https://play.google.com/store/apps/details?id=org.pftp"
+          >
+            <img src={images['googlePlayBadge_' + userLang]} />
+          </a>
+        </div>
       </div>
     );
   }

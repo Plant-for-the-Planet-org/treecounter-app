@@ -28,5 +28,13 @@
   "new_project_added_successfully": "Neues Projekt erfolgreich angelegt",
   "male": "Männlich",
   "female": "Weiblich",
-  "other": "Divers"
+  "other": "Divers",
+  "add_image_title": "Bild hinzufügen",
+  "cancel": "Abbrechen",
+  "take_photo": "Foto machen...",
+  "choose_from_library": "Aus Album wählen...",
+  "permission_denied_title": "Zugriff verweigert",
+  "permission_denied_text": "Kein Zugriff auf Ihre Kamera oder Fotoalbum möglich.",
+  "permission_denied_retry_title": "Noch einmal",
+  "permission_denied_ok_title": "Sicher"
 }

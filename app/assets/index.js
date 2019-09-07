@@ -140,6 +140,10 @@ import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
 import worldImg from './images/icons/world.png';
 import germanyFlag from './images/germanyFlag.jpeg';
+import googlePlayBadge_en from './images/en/google-play-badge.png';
+import googlePlayBadge_de from './images/de/google-play-badge.png';
+import appleStoreBadge_en from './images/en/apple-store-badge.png';
+import appleStoreBadge_de from './images/de/apple-store-badge.png';
 
 export {
   germanyFlag,
@@ -283,5 +287,9 @@ export {
   forward,
   successAnimated,
   trees,
-  greencalendar
+  greencalendar,
+  googlePlayBadge_en,
+  googlePlayBadge_de,
+  appleStoreBadge_en,
+  appleStoreBadge_de
 };

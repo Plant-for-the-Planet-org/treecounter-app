@@ -101,6 +101,7 @@ export default class DonateTrees extends Component {
       },
       expanded: false,
       imageViewMore: false,
+      donationCreated: false,
       expandedOption: '1',
       showSelectProject: false
     };
@@ -113,7 +114,7 @@ export default class DonateTrees extends Component {
     this.determineDefaultCurrency = this.determineDefaultCurrency.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps, nextState) {
     if (nextProps.selectedProject) {
       this.setState({
         showSelectProject: false
@@ -133,6 +134,21 @@ export default class DonateTrees extends Component {
       this.setState({
         showSelectProject: true
       });
+    }
+  }
+
+  componentDidUpdate(nextProps, nextState) {
+    if (nextState.donationCreated !== this.state.donationCreated) {
+      let requestData = {
+        amount: nextState.selectedAmount * 100,
+        currency: nextState.selectedCurrency,
+        ...nextState.form
+      };
+      nextProps.createPaymentDonation(
+        nextProps.selectedProject.id,
+        requestData,
+        nextProps.currentUserProfile
+      );
     }
   }
 
@@ -206,24 +222,14 @@ export default class DonateTrees extends Component {
         } else {
           receipt['receiptCompany'] = value;
         }
+
         this.setState({
           form: {
             ...this.state.form,
             ...receipt
-          }
+          },
+          donationCreated: true
         });
-
-        let requestData = {
-          amount: this.state.selectedAmount,
-          currency: this.state.selectedCurrency,
-          ...this.state.form,
-          ...receipt
-        };
-        this.props.createPaymentDonation(
-          this.props.selectedProject.id,
-          requestData,
-          this.props.currentUserProfile
-        );
         return true;
       }
       return false;
@@ -483,7 +489,6 @@ export default class DonateTrees extends Component {
           <form
             className="donate-tress__container"
             onSubmit={event => {
-              this.checkValidation[2]();
               event.preventDefault();
             }}
           >
@@ -564,6 +569,8 @@ export default class DonateTrees extends Component {
                       stripePublishableKey={
                         plantProject.paymentSetup.stripePublishableKey
                       }
+                      currentUserProfile={this.props.currentUserProfile}
+                      paymentStatus={this.props.paymentStatus}
                       currency={this.state.selectedCurrency}
                       expandedOption={this.state.expandedOption}
                       handleExpandedClicked={this.handleExpandedClicked}
@@ -572,7 +579,7 @@ export default class DonateTrees extends Component {
                         modeReceipt: this.state.modeReceipt
                       }}
                       paymentDetails={{
-                        amount: this.state.selectedAmount * 100,
+                        amount: this.state.selectedAmount,
                         currency: this.state.selectedCurrency,
                         treeCount: this.state.selectedTreeCount
                       }}

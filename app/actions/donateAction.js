@@ -1,8 +1,11 @@
 import { normalize } from 'normalizr';
 import { debug } from '../debug/index';
-import Axios from 'axios';
 
-import { postAuthenticatedRequest, postRequest } from '../utils/api';
+import {
+  postAuthenticatedRequest,
+  postRequest,
+  getAuthenticatedRequest
+} from '../utils/api';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import {
@@ -17,10 +20,28 @@ import {
   donationCreation
 } from '../reducers/paymentStatus';
 
-export function createPaymentDonation(plantProjectId, requestData, token) {
+export function fillCard() {
+  return dispatch => {
+    let request = getAuthenticatedRequest('stripe_customer');
+    return request;
+  };
+}
+
+export function attachCardToCostumer(paymentMethod) {
+  return dispatch => {
+    let request = getAuthenticatedRequest('stripe_paymentMethod_attach', {
+      paymentMethod
+    });
+    request.then(response => {
+      console.log('method attached');
+    });
+  };
+}
+
+export function createPaymentDonation(plantProjectId, requestData, loggedIn) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    let request = token
+    let request = loggedIn
       ? postAuthenticatedRequest('donationCreate_post', requestData, {
           plantProject: plantProjectId
         })
@@ -32,6 +53,19 @@ export function createPaymentDonation(plantProjectId, requestData, token) {
       dispatch(donationCreation(response.data.merge));
       dispatch(setProgressModelState(false));
     });
+  };
+}
+
+export function handlePay(donationId, requestData, loggedIn) {
+  return dispatch => {
+    let request = loggedIn
+      ? postAuthenticatedRequest('donationPay_post', requestData, {
+          donation: donationId
+        })
+      : postRequest('donationPayPublic_post', requestData, {
+          donation: donationId
+        });
+    return request;
   };
 }
 

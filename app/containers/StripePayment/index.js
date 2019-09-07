@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { StripeProvider, Elements } from 'react-stripe-elements';
 import PropTypes from 'prop-types';
 import InjectedCheckoutForm from '../../components/StripePayment/CheckoutForm';
-// import { bindActionCreators } from 'redux';
-// import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import {
+  fillCard,
+  attachCardToCostumer,
+  handlePay
+} from '../../actions/donateAction';
 
 class StripePayment extends Component {
   handleExpandedClicked = () => {
@@ -29,14 +34,20 @@ class StripePayment extends Component {
             plantProjectName={props.plantProjectName}
             paymentType={props.paymentType}
             currency={props.currency}
-            receipt={props.receipt}
             tpoName={props.context.tpoName}
             account={props.account}
+            handlePay={props.handlePay}
+            currentUserProfile={props.currentUserProfile}
             expanded={props.expanded}
             handleExpandedClicked={this.handleExpandedClicked}
+            fillCard={props.fillCard}
+            attachCardToCostumer={props.attachCardToCostumer}
+            paymentStatus={props.paymentStatus}
             paymentDetails={props.paymentDetails}
             onError={this.onError}
             onSuccess={this.onSuccess}
+            accountName={props.accountName}
+            gateway={props.gateway}
           />
         </Elements>
       </StripeProvider>
@@ -44,31 +55,37 @@ class StripePayment extends Component {
   }
 }
 
-export default StripePayment;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      fillCard,
+      attachCardToCostumer,
+      handlePay
+    },
+    dispatch
+  );
+};
 
-// const mapDispatchToProps = dispatch => {
-//   return bindActionCreators(
-//     {
-
-//       route: (routeName, id, navigation) => dispatch =>
-//         updateRoute(routeName, navigation || dispatch, id)
-//     },
-//     dispatch
-//   );
-// };
-
-// export default connect(mapDispatchToProps)(
-//   StripePayment
-// );
+export default connect(null, mapDispatchToProps)(StripePayment);
 
 StripePayment.propTypes = {
   paymentDetails: PropTypes.object.isRequired,
+  currentUserProfile: PropTypes.object,
   stripe: PropTypes.object,
+  context: PropTypes.object,
+  plantProjectName: PropTypes.string,
+  paymentType: PropTypes.string,
   currency: PropTypes.string.isRequired,
   account: PropTypes.object.isRequired,
   expanded: PropTypes.bool,
   handleExpandedClicked: PropTypes.func,
   onSuccess: PropTypes.func,
   onError: PropTypes.func,
-  onFailure: PropTypes.func
+  onFailure: PropTypes.func,
+  fillCard: PropTypes.func,
+  attachCardToCostumer: PropTypes.func,
+  accountName: PropTypes.string,
+  gateway: PropTypes.string,
+  paymentStatus: PropTypes.object,
+  handlePay: PropTypes.func
 };

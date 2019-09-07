@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import StripeContainer from '../../containers/StripePayment';
 
-// import StripeCC from './Gateways/StripeCC';
-// import StripeSepa from './Gateways/StripeSepa';
-// import Paypal from './Gateways/Paypal';
-// import Offline from './Gateways/Offline';
+import Paypal from './Gateways/Paypal';
+import Offline from './Gateways/Offline';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   constructor(props) {
@@ -51,6 +49,11 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     }
   }
 
+  decorateSuccess(gateway, accountName) {
+    return response =>
+      this.props.onSuccess({ gateway, accountName, ...response });
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.paymentMethods) {
       if (
@@ -85,12 +88,8 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     }
   }
 
-  handleExpandedClickedCC = () => {
-    this.props.handleExpandedClicked('1');
-  };
-
-  handleExpandedClickedSEPA = () => {
-    this.props.handleExpandedClicked('2');
+  handleExpandedClicked = option => {
+    this.props.handleExpandedClicked(option);
   };
 
   render() {
@@ -161,11 +160,15 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                   paymentType="stripe_cc"
                   stripe={this.state.stripe}
                   receipt={this.props.receipt}
+                  currentUserProfile={this.props.currentUserProfile}
                   plantProjectName={this.props.context.plantProjectName}
                   paymentDetails={this.props.paymentDetails}
                   account={accounts[accountName]}
+                  accountName={accountName}
+                  gateway={'stripe'}
+                  paymentStatus={this.props.paymentStatus}
                   expanded={this.props.expandedOption === '1'}
-                  handleExpandedClicked={this.handleExpandedClickedCC}
+                  handleExpandedClicked={() => this.handleExpandedClicked('1')}
                   {...gatewayProps}
                 />
               </div>
@@ -180,6 +183,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                 <StripeContainer
                   paymentType="stripe_sepa"
                   stripe={this.state.stripe}
+                  currentUserProfile={this.props.currentUserProfile}
                   paymentDetails={{
                     ...this.props.paymentDetails,
                     topName: this.props.context.tpoName
@@ -187,34 +191,34 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                   receipt={this.props.receipt}
                   account={accounts[accountName]}
                   expanded={this.props.expandedOption === '2'}
-                  handleExpandedClicked={this.handleExpandedClickedSEPA}
+                  handleExpandedClicked={() => this.handleExpandedClicked('2')}
                   {...gatewayProps}
                 />
               </div>
             );
           }
-          // if ('paypal' === gateway) {
-          //   return (
-          //     <div key={gateway}>
-          //       {this.state.errorMessage ? (
-          //         <div>this.state.errorMessage</div>
-          //       ) : null}
-          //       <StripeProvider stripe={this.state.stripe}>
-          //         <Paypal
-          //           key={gateway}
-          //           onSuccess={this.decorateSuccess(gateway, accountName)}
-          //           amount={amount}
-          //           currency={currency}
-          //           account={accounts[accountName]}
-          //           mode={accounts[accountName].mode}
-          //           expanded={this.props.expandedOption === '3'}
-          //           handleExpandedClicked={this.handleExpandedClicked}
-          //           {...gatewayProps}
-          //         />
-          //       </StripeProvider>
-          //     </div>
-          //   );
-          // }
+          if ('paypal' === gateway) {
+            return (
+              <div key={gateway}>
+                {this.state.errorMessage ? (
+                  <div>this.state.errorMessage</div>
+                ) : null}
+                <Paypal
+                  key={gateway}
+                  onSuccess={data =>
+                    this.decorateSuccess(gateway, accountName, data)
+                  }
+                  amount={paymentDetails.amount}
+                  currency={currency}
+                  account={accounts[accountName]}
+                  mode={accounts[accountName].mode}
+                  expanded={this.props.expandedOption === '3'}
+                  handleExpandedClicked={() => this.handleExpandedClicked('3')}
+                  {...gatewayProps}
+                />
+              </div>
+            );
+          }
           if ('offline' === gateway) {
             return (
               <div key={gateway}>
@@ -224,11 +228,11 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                 <Offline
                   key={gateway}
                   onSuccess={this.decorateSuccess(gateway, accountName)}
-                  amount={amount}
+                  amount={paymentDetails.amount}
                   currency={currency}
                   account={accounts[accountName]}
                   expanded={this.props.expandedOption === '4'}
-                  handleExpandedClicked={this.handleExpandedClicked}
+                  handleExpandedClicked={() => this.handleExpandedClicked('4')}
                   {...gatewayProps}
                 />
               </div>
@@ -244,10 +248,11 @@ PaymentSelector.propTypes = {
   paymentDetails: PropTypes.object,
   accounts: PropTypes.object,
   paymentMethods: PropTypes.object,
+  paymentStatus: PropTypes.object,
+  currentUserProfile: PropTypes.object,
   stripePublishableKey: PropTypes.string,
   expandedOption: PropTypes.string,
   handleExpandedClicked: PropTypes.func,
-  amount: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
   context: PropTypes.object.isRequired,
   onSuccess: PropTypes.func.isRequired,

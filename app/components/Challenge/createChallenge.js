@@ -79,7 +79,7 @@ export default class Challenge extends Component {
 
   suggestionClicked = (context, event) => {
     this.setState({
-      challenged: event.suggestion.treecounterId,
+      challenged: event.suggestion.id,
       challengedName: event.suggestion.name
     });
   };

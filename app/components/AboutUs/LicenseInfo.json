@@ -487,14 +487,6 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-redux",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-redux/LICENSE.md"
       },
-      "react-render-html@0.6.0": {
-        "licenses": "MIT",
-        "repository": "https://github.com/utatti/react-render-html",
-        "publisher": "Hyunje Jun",
-        "email": "me@noraesae.net",
-        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-render-html",
-        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-render-html/LICENSE"
-      },
       "react-router-dom@4.3.1": {
         "licenses": "MIT",
         "repository": "https://github.com/ReactTraining/react-router",

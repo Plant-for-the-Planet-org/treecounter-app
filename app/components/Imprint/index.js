@@ -6,7 +6,6 @@ import {
   AccordionItemTitle,
   AccordionItemBody
 } from 'react-accessible-accordion';
-import renderHTML from 'react-render-html';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import TextHeading from '../../components/Common/Heading/TextHeading';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
@@ -21,7 +20,11 @@ export default class Imprint extends Component {
         <AccordionItemTitle>
           <div className="u-position-relative">{imprint.title}</div>
         </AccordionItemTitle>
-        <AccordionItemBody>{renderHTML(imprint.description)}</AccordionItemBody>
+        <AccordionItemBody>
+          <div dangerouslySetInnerHTML={{
+            __html: imprint.description
+          }} />
+        </AccordionItemBody>
       </AccordionItem>
     ));
   }

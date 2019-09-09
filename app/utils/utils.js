@@ -65,31 +65,40 @@ export function convertNumber(n, d) {
   if (isNaN(n) || undefined) {
     return 0;
   }
-  let x = ('' + n).length;
-  if (x > 12) {
-    let p = Math.pow;
-    d = p(10, d);
-    x -= x % 3;
-    return (
-      delimitNumbers(Math.round(n * d / p(10, x)) / d) +
-      [
-        '',
-        ' ' + i18n.t('label.Thousand'),
-        ' ' + i18n.t('label.Million'),
-        ' ' + i18n.t('label.Billion'),
-        ' ' + i18n.t('label.Trillion'),
-        ' ' + i18n.t('label.Quadrillion'),
-        ' ' + i18n.t('label.Quintillion')
-      ][x / 3]
-    );
-  } else if (x > 9) {
-    return delimitNumbers(n / 1000000000) + ' ' + i18n.t('label.Billion');
-  } else if (x > 6) {
-    return delimitNumbers(n / 1000000) + ' ' + i18n.t('label.Million');
-    // TODO: think about using the label "thousend" - under 1 Mio it's uncommon to use it
-  } else if (x > 3) {
-    return delimitNumbers(n / 1000) + ' ' + i18n.t('label.Thousand');
-  } else {
-    return delimitNumbers(n);
-  }
+  let x = ('' + n).length - 1;
+  x -= x % 3;
+  let p = Math.pow;
+  d = p(10, d);
+  let rounded = Math.round(n * d / p(10, x)) / d;
+  let singular = rounded == 1 ? 1 : 0;
+  return (
+    delimitNumbers(rounded) +
+    [
+      '',
+      ' ' +
+        (singular
+          ? i18n.t('label.thousand_singular')
+          : i18n.t('label.thousand_plural')),
+      ' ' +
+        (singular
+          ? i18n.t('label.million_singular')
+          : i18n.t('label.million_plural')),
+      ' ' +
+        (singular
+          ? i18n.t('label.billion_singular')
+          : i18n.t('label.billion_plural')),
+      ' ' +
+        (singular
+          ? i18n.t('label.trillion_singular')
+          : i18n.t('label.trillion_plural')),
+      ' ' +
+        (singular
+          ? i18n.t('label.quadrillion_singular')
+          : i18n.t('label.quadrillion_plural')),
+      ' ' +
+        (singular
+          ? i18n.t('label.quintillion_singular')
+          : i18n.t('label.quintillion_plural'))
+    ][x / 3]
+  );
 }

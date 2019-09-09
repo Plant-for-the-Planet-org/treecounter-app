@@ -139,7 +139,7 @@ import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
 import avatar from './images/avatar.png';
-
+import update from './images/update.png';
 export {
   mapCollapse,
   mapExpand,
@@ -281,5 +281,6 @@ export {
   successAnimated,
   trees,
   greencalendar,
-  avatar
+  avatar,
+  update
 };

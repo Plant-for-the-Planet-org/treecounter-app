@@ -33,9 +33,7 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
 import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import { currentUserProfileSelector } from './../../selectors';
-
 import { trees } from './../../assets';
-
 const Layout = {
   window: {
     width: Dimensions.get('window').width
@@ -65,9 +63,7 @@ class Trillion extends PureComponent {
     };
   }
   componentDidMount() {
-    // this.props.fetchpledgeEventsAction();
-    // pledgedEvents2 = this.props.pledgeEvents;
-    // console.log(pledgedEvents2);
+    console.log('Requesting update');
 
     trillionCampaign()
       .then(({ data }) => {

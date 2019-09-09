@@ -7,9 +7,8 @@ import {
   Image,
   Platform
 } from 'react-native';
-import { avatar } from './../../assets';
+import { avatar, update } from './../../assets';
 import i18n from '../../locales/i18n';
-
 export default class SplashScreen extends Component {
   static navigationOptions = {
     header: null
@@ -17,7 +16,7 @@ export default class SplashScreen extends Component {
   render() {
     return (
       <View style={styles.updateMainView}>
-        <Image source={avatar} style={styles.updateImage} />
+        <Image source={update} style={styles.updateImage} />
         <Text style={styles.updateTitle}>
           {' '}
           {i18n.t('label.updateRequired')}{' '}
@@ -54,7 +53,8 @@ const styles = StyleSheet.create({
   },
   updateImage: {
     width: 150,
-    height: 150
+    height: 150,
+    marginTop: 10
   },
   updatePara: {
     fontSize: 18,
@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#89b53a',
     width: '86%',
     justifyContent: 'center',
-    marginTop: 132
+    position: 'absolute',
+    bottom: '7%'
   },
   updateButtonText: {
     fontSize: 16,

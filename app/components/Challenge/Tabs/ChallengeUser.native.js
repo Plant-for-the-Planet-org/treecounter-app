@@ -80,7 +80,7 @@ class ChallengeUser extends Component {
     if (this.state.selectedSuggestion) {
       let requestData;
       requestData = {
-        challenged: this.state.selectedSuggestion.treecounterId
+        challenged: this.state.selectedSuggestion.id
       };
       if (this.state.isChecked) {
         if (this.state.byYear === '') {

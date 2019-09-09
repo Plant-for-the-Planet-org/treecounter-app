@@ -33,7 +33,7 @@ class ProfilePickerModal extends Component {
 
   onDedicateClick() {
     this.props.updateProfileDedication({
-      supportedTreecounter: this.state.selectedSuggestion.treecounterId
+      supportedTreecounter: this.state.selectedSuggestion.id
     });
     this.setState({ editMode: false });
   }

@@ -30,7 +30,7 @@ export default (styles = EStyleSheet.create({
   searchContainer: {
     height: 56,
     width: '75%',
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#fff',
     padding: 17,
     paddingLeft: 27,
     marginLeft: 10,

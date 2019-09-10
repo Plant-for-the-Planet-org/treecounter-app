@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import renderHTML from 'react-render-html';
 import { getImageUrl } from '../../actions/apiRouting';
 import { SignupJustMe } from '../../assets';
 import i18n from '../../locales/i18n';
@@ -19,9 +18,9 @@ export default class Notification extends Component {
                   : SignupJustMe
               }
             />
-            <div className="item-html__wrapper">
-              {renderHTML(notification.message)}
-            </div>
+            <div className="item-html__wrapper" dangerouslySetInnerHTML={{
+              __html: notification.message
+            }} />
           </div>
         </li>
         <hr className="divider__light" />

@@ -6,7 +6,6 @@ import {
   AccordionItemTitle,
   AccordionItemBody
 } from 'react-accessible-accordion';
-import renderHTML from 'react-render-html';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import TextHeading from '../../components/Common/Heading/TextHeading';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
@@ -24,7 +23,11 @@ export default class FAQ extends Component {
             <div className="accordion__arrow" role="presentation" />
           </div>
         </AccordionItemTitle>
-        <AccordionItemBody>{renderHTML(faq.answer)}</AccordionItemBody>
+        <AccordionItemBody>
+          <div dangerouslySetInnerHTML={{
+            __html: faq.answer
+          }} />
+        </AccordionItemBody>
       </AccordionItem>
     ));
   }

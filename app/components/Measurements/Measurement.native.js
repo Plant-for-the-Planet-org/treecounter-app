@@ -11,13 +11,11 @@ const Measurement = props => (
   <View style={{ paddingTop: 20 }}>
     <View
       style={{
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center'
+        ...styles.itemContainer
       }}
     >
       <Image source={CalendarIcon} style={styles.icon} />
-      <Text>{props.measurementDate}</Text>
+      <Text style={{ ...styles.text }}>{props.measurementDate}</Text>
     </View>
     <View style={{ flexDirection: 'row', paddingTop: 5 }}>
       <View
@@ -26,7 +24,7 @@ const Measurement = props => (
         }}
       >
         <Image source={ArrowUpIcon} style={styles.icon} />
-        <Text>
+        <Text style={{ ...styles.text }}>
           {props.height} {i18n.t('label.m_tall')}
         </Text>
       </View>
@@ -37,7 +35,7 @@ const Measurement = props => (
           }}
         >
           <Image source={ArrowRightIcon} style={styles.icon} />
-          <Text>
+          <Text style={{ ...styles.text }}>
             {props.diameter} {i18n.t('label.cm_wide')}
           </Text>
         </View>

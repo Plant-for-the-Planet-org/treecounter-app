@@ -28,5 +28,10 @@ export default (Measurements = EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center'
+  },
+  text: {
+    fontSize: 14,
+    color: '#666666',
+    marginLeft: 5
   }
 }));

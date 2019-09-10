@@ -5,6 +5,8 @@ export default (UserContributions = EStyleSheet.create({
     marginTop: 16,
     marginBottom: 20,
     paddingLeft: 16,
+    marginLeft: 8,
+    marginRight: 8,
     paddingBottom: 15,
     display: 'flex',
     flexDirection: 'row',

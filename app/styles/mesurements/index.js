@@ -15,7 +15,9 @@ export default (Measurements = EStyleSheet.create({
     paddingBottom: 15,
     borderRadius: 5,
     borderWidth: 0.2,
-    borderColor: '#d5d5d5'
+    borderColor: '#d5d5d5',
+    marginLeft: 8,
+    marginRight: 8
   },
   icon: {
     height: 19,

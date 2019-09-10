@@ -33,6 +33,7 @@
   "planted_on": "Planted on {{date}}",
   "added_on": "Added on {{date}}",
   "dedicated_to": "Dedicated to",
+  "dedicated_to_person": "Dedicated to {{person}}",
   "given_on_by": "Given on {{date}} by",
   "redeemed_on": "Redeemed on {{date}}",
   "dedicated_on": "Dedicated on {{date}}",
@@ -40,5 +41,12 @@
   "register_new_trees": "Register new trees",
   "measurement": "Measurements (For Single Tree Only)",
   "m_tall": "m tall",
-  "cm_wide": "cm wide"
+  "cm_wide": "cm wide",
+  "usr_contribution_tree": "Trees",
+  "usr_contribution_dedicated_to": " Dedicated to",
+  "usr_contribution_planted": "Planted",
+  "usr_contribution_redeemed": "Redeemed",
+  "usr_contribution_dedicate": "Dedicated",
+  "gifted_from_person": "Gifted from {{person}} to ",
+  "gifted_to_person": "Gifted to {{person}} to "
 }

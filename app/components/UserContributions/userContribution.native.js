@@ -9,6 +9,7 @@ import DeleteIcon from '../../assets/images/baseline_delete_outline.png';
 import ArrowRight from '../../assets/images/arrow-right.png';
 import CalendarIcon from '../../assets/images/green-calendar.png';
 import TreeIcon from '../../assets/images/green-tree.png';
+import i18n from '../../locales/i18n.js';
 
 export default class UserContributions extends React.Component {
   constructor(props) {
@@ -21,32 +22,53 @@ export default class UserContributions extends React.Component {
 
   render() {
     const props = this.props;
+    const {
+      treeCount,
+      location,
+      dedicatedTo,
+      plantedDate,
+      contributionTypeText
+    } = props;
+
     return (
       <View style={styles.container}>
         <View style={{ flex: 2, paddingTop: 20 }}>
-          <Text style={styles.treeCount}>
-            {props.treeCount ? props.treeCount + '  Trees' : 0 + '  Trees'}
-          </Text>
-          <Text style={styles.text}>
-            <Image source={TreeIcon} style={styles.icon} />
-            {props.location ? '  ' + props.location : '  none'}
-          </Text>
-          <Text style={styles.text}>
-            <Image source={ArrowRight} style={styles.icon} />
-            {props.dedicatedTo
-              ? '  Dedicated to ' + props.dedicatedTo
-              : '  Dedicated to none'}
-          </Text>
-          <Text style={styles.text}>
-            <Image source={CalendarIcon} style={styles.icon} />
-            {props.plantedDate ? '  ' + props.plantedDate : '  none'}
-          </Text>
+          {treeCount && treeCount > 0 ? (
+            <Text style={styles.treeCount}>
+              {treeCount
+                ? `${treeCount} ${i18n.t('label.usr_contribution_tree')}`
+                : 0 + i18n.t('label.usr_contribution_tree')}
+            </Text>
+          ) : null}
+          {!!location ? (
+            <View style={styles.itemContainer}>
+              <Image source={TreeIcon} style={styles.icon} />
+              <Text style={{ ...styles.text }}>{location}</Text>
+            </View>
+          ) : null}
+
+          {!!dedicatedTo ? (
+            <View style={styles.itemContainer}>
+              <Image source={ArrowRight} style={styles.icon} />
+              <Text style={{ ...styles.text }}>{dedicatedTo}</Text>
+            </View>
+          ) : null}
+
+          {!!plantedDate ? (
+            <View style={styles.itemContainer}>
+              <Image source={CalendarIcon} style={styles.icon} />
+              <Text style={{ ...styles.text }}>{plantedDate}</Text>
+            </View>
+          ) : null}
         </View>
         <View style={styles.buttonsWrapper}>
           <TouchableOpacity style={styles.plantedButtonWrapper}>
-            <Text style={styles.plantedText}>Planted</Text>
+            {!!contributionTypeText && (
+              <Text style={styles.plantedText}>{contributionTypeText}</Text>
+            )}
           </TouchableOpacity>
-          <View style={{ flexDirection: 'row' }}>
+
+          <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
             <TouchableOpacity
               onPress={props.onClickDeleteUserContributor}
               style={styles.button}
@@ -72,5 +94,6 @@ UserContributions.PropTypes = {
   dedicatedTo: PropTypes.string,
   plantedDate: PropTypes.string,
   onClickDelete: PropTypes.func,
-  onClickEdit: PropTypes.func
+  onClickEdit: PropTypes.func,
+  contributionTypeText: PropTypes.string
 };

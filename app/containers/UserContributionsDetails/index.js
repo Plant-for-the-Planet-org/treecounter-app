@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-
+import { supportedTreecounterSelector } from '../../selectors';
 import UserContributionsDetails from '../../components/UserContributions/ContributionDetails/index.native';
 import _ from 'lodash';
 // Actions
@@ -25,13 +25,15 @@ class UserContributionsDetailsContainer extends React.Component {
         navigation={this.props.navigation}
         userProfileId={this.props.userProfileId}
         contribution={this.getContribution()}
+        supportTreecounter={this.props.supportTreecounter}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  userProfileId: currentUserProfileIdSelector(state)
+  userProfileId: currentUserProfileIdSelector(state),
+  supportTreecounter: supportedTreecounterSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {

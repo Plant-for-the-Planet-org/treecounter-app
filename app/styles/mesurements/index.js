@@ -21,5 +21,10 @@ export default (Measurements = EStyleSheet.create({
     height: 19,
     width: 19,
     marginRight: 4
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   }
 }));

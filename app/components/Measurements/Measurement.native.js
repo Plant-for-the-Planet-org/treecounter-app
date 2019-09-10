@@ -22,9 +22,7 @@ const Measurement = props => (
     <View style={{ flexDirection: 'row', paddingTop: 5 }}>
       <View
         style={{
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-          alignItems: 'center'
+          ...styles.itemContainer
         }}
       >
         <Image source={ArrowUpIcon} style={styles.icon} />
@@ -35,9 +33,7 @@ const Measurement = props => (
       <View style={{ flexDirection: 'column', flex: 8, marginLeft: 16 }}>
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-            alignItems: 'center'
+            ...styles.itemContainer
           }}
         >
           <Image source={ArrowRightIcon} style={styles.icon} />

@@ -26,9 +26,9 @@ export default (UserContributions = EStyleSheet.create({
     fontWeight: '700'
   },
   text: {
-    marginTop: 4,
     fontSize: 14,
-    color: '#666666'
+    color: '#666666',
+    marginLeft: 5
   },
   buttonsWrapper: {
     flex: 1,
@@ -40,11 +40,17 @@ export default (UserContributions = EStyleSheet.create({
   },
   plantedButtonWrapper: {
     alignItems: 'center',
-    backgroundColor: '#F1F6E7',
+    backgroundColor: '#d5d5d5',
     borderBottomLeftRadius: 4
   },
   plantedText: {
     paddingVertical: 10,
-    color: '#89b53a'
+    color: '#4d5153'
+  },
+  itemContainer: {
+    marginTop: 5,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   }
 }));

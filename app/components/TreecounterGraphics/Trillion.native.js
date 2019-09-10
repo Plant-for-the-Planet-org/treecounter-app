@@ -191,7 +191,9 @@ class Trillion extends PureComponent {
                                   eventDate: featuredEvents.eventDate,
                                   totalTrees: featuredEvents.total,
                                   eventImage: featuredEvents.image,
-                                  description: featuredEvents.description
+                                  description: featuredEvents.description,
+                                  plantProject: { id: -1 },
+                                  treeCount: -1
                                 }
                               );
                             }}

@@ -4,8 +4,15 @@ import styles from './../../../styles/trillion.native';
 import i18n from '../../../locales/i18n';
 import { greencalendar } from './../../../assets/';
 import { smalltree } from './../../../assets/';
+import moment from 'moment';
+import { getLocale } from '../../../actions/getLocale';
 
 export default class FeaturedProject extends Component {
+  constructor(props) {
+    super(props);
+    moment.locale(getLocale());
+  }
+
   render() {
     return (
       <View style={styles.featuredProjectCard}>
@@ -44,13 +51,10 @@ export default class FeaturedProject extends Component {
                   source={greencalendar}
                 />
               ) : null}
+
               <Text style={styles.featuredProjectCardIconText}>
                 {this.props.date
-                  ? new Date(this.props.date)
-                      .toDateString()
-                      .split(' ')
-                      .slice(1)
-                      .join(' ')
+                  ? moment(this.props.date).format('D MMM, YYYY')
                   : null}
               </Text>
             </View>

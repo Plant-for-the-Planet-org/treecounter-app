@@ -60,7 +60,8 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153',
-    marginTop: 7
+    marginTop: 7,
+    marginHorizontal: 20
   },
   makePledgeButton: {
     width: '88%',
@@ -139,6 +140,7 @@ export default (pledgeeventsStyle = EStyleSheet.create({
   },
 
   // Make Pledge Form Styles
+  keyboardScrollView: { backgroundColor: 'white' },
   titleText: {
     fontSize: 27,
     fontWeight: '800',
@@ -165,6 +167,7 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     padding: 24,
     paddingTop: 0
   },
+  formHalfTextField: { width: '45%' },
 
   formView: {
     display: 'flex',
@@ -191,7 +194,19 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     top: '90%',
     left: '88%'
   },
+  pledgeSmallButtonIcon: { height: 32, width: 32 },
 
+  // Bottom action
+
+  baContainer: {
+    padding: 20,
+    paddingVertical: 30
+  },
+  baButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
   baMessage: {
     fontSize: 20,
     fontWeight: 'normal',
@@ -234,6 +249,7 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     borderColor: '#707070',
     width: 150,
     paddingVertical: 14,
-    marginTop: 24
+    marginTop: 36,
+    marginRight: 12
   }
 }));

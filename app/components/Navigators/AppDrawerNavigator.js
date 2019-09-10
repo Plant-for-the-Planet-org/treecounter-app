@@ -272,6 +272,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
 
     return title;
   };
+
   const ApptabNavigator = createBottomTabNavigator(
     {
       [getLocalRoute('app_homepage')]: {
@@ -297,7 +298,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     {
       tabBarOptions: {
         tabBarPosition: 'bottom',
-
         animatedEnable: true,
         swipeEnable: false
       },
@@ -320,6 +320,12 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_donate_detail']: {
         screen: DonationTreesContainer
+      },
+      ['app_pledge_events']: {
+        screen: PledgeEvents
+      },
+      ['app_pledge_form']: {
+        screen: MakePledgeForm
       }
     },
     {

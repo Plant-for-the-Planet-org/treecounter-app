@@ -3,8 +3,8 @@ import { Dimensions } from 'react-native';
 
 export default (styles = EStyleSheet.create({
   container: {
-    // flex: 1,
-    backgroundColor: '$primary'
+    backgroundColor: '#fff',
+    padding: 12
   },
   searchResult: {
     backgroundColor: '#fff',
@@ -21,8 +21,9 @@ export default (styles = EStyleSheet.create({
     marginRight: 5
   },
   profileText: {
-    fontSize: 20,
-    color: '#b9d384',
-    width: '97%'
+    fontSize: 18,
+    color: '#333',
+    width: '97%',
+    marginLeft: 12
   }
 }));

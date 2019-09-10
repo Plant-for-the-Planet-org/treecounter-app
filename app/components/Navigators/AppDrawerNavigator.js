@@ -57,7 +57,7 @@ const headerLabels = {
   [getLocalRoute('app_signup')]: 'label.signUp',
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_target')]: 'label.set_target',
-  [getLocalRoute('app_donateTrees')]: 'label.donate',
+  [getLocalRoute('app_donateTrees')]: 'label.projects',
 
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
@@ -86,8 +86,8 @@ const headerLabels = {
   ['app_donate_detail']: 'label.donate',
   ['app_gift_projects']: 'label.gift_trees',
   ['pickup_profile_modal']: 'label.dedicate_trees_to',
-  ['app_pledge_events']: 'Pledges',
-  ['app_pledge_form']: 'Pledge to plant a tree'
+  ['app_pledge_events']: '',
+  ['app_pledge_form']: ''
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -326,7 +326,13 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       navigationOptions: ({ navigation }) => {
         let navigationConfig = {
           headerStyle: styles.container2,
-          headerTitleStyle: { paddingRight: 16 },
+          headerTitleStyle: {
+            width: '100%',
+            alignItems: 'center',
+            textAlign: 'center',
+            fontSize: 20,
+            paddingRight: 24
+          },
           headerTintColor: '#000',
           headerBackTitle: null,
           title: getTitle(navigation),

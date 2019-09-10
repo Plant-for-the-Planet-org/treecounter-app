@@ -138,7 +138,9 @@ import forward from './images/forward.png';
 import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
-
+import blackSearchIcon from './images/black_search_icon.png';
+import blackShareIcon from './images/black_share_icon.png';
+import notificationBlack from './images/notificationBlack.png';
 export {
   mapCollapse,
   mapExpand,
@@ -279,5 +281,8 @@ export {
   forward,
   successAnimated,
   trees,
-  greencalendar
+  greencalendar,
+  blackSearchIcon,
+  blackShareIcon,
+  notificationBlack
 };

@@ -28,8 +28,8 @@ class SearchLayout extends React.Component {
 
   static defaultProps = {
     debounce: 500,
-    headerBackgroundColor: '#b9d384',
-    headerTintColor: '#fff'
+    headerBackgroundColor: '#fff',
+    headerTintColor: '#000'
   };
 
   state = {

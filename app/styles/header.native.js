@@ -9,6 +9,8 @@ export default (headerStyle = EStyleSheet.create({
   container2: {
     backgroundColor: '#ffffff',
     borderBottomWidth: 0,
-    shadowColor: 'transparent'
+    shadowColor: 'transparent',
+    height: 80,
+    display: 'flex'
   }
 }));

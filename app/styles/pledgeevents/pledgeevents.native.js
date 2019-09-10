@@ -147,7 +147,7 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153',
-    marginTop: 30
+    marginTop: 2
   },
   subtitleText: {
     fontSize: 18,
@@ -162,7 +162,8 @@ export default (pledgeeventsStyle = EStyleSheet.create({
   formScrollView: {
     backgroundColor: 'white',
     flexGrow: 1,
-    padding: 24
+    padding: 24,
+    paddingTop: 0
   },
 
   formView: {

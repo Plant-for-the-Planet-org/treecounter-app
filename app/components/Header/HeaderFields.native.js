@@ -11,7 +11,11 @@ import {
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';
-import { iosSearchWhite, iosNotificationWhite, shareIcon } from '../../assets';
+import {
+  notificationBlack,
+  blackSearchIcon,
+  blackShareIcon
+} from '../../assets';
 import { Share } from 'react-native';
 
 export default class HeaderRight extends Component {
@@ -77,10 +81,10 @@ export default class HeaderRight extends Component {
       }
       return (
         <TouchableOpacity
-          style={{ height: 35, width: 35, padding: 5, marginRight: 15 }}
+          style={{ height: 35, width: 35, padding: 5 }}
           onPress={() => this.handleShare(redirectPath)}
         >
-          <Image source={shareIcon} style={{ height: 25, width: 25 }} />
+          <Image source={blackShareIcon} style={{ height: 24, width: 24 }} />
         </TouchableOpacity>
       );
     } else {
@@ -100,21 +104,23 @@ export default class HeaderRight extends Component {
         style={{
           flexDirection: 'row',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          marginRight: 24
         }}
       >
+        {userProfile ? (() => this.renderShareButtons(userProfile))() : null}
         <TouchableOpacity
-          style={{ height: 35, width: 35, padding: 5, marginRight: 15 }}
+          style={{ height: 35, width: 35, padding: 5, marginLeft: 24 }}
           onPress={() => navigation.navigate('Search')}
         >
-          <Image source={iosSearchWhite} style={{ height: 25, width: 25 }} />
+          <Image source={blackSearchIcon} style={{ height: 24, width: 24 }} />
         </TouchableOpacity>
-        {userProfile ? (() => this.renderShareButtons(userProfile))() : null}
+
         {isLoggedIn ? (
           <TouchableOpacity>
             <Image
-              source={iosNotificationWhite}
-              style={{ height: 25, width: 25, marginRight: 20 }}
+              source={notificationBlack}
+              style={{ height: 24, width: 24 }}
             />
           </TouchableOpacity>
         ) : null}

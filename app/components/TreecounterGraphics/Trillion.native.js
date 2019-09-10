@@ -131,9 +131,8 @@ class Trillion extends PureComponent {
     return (
       <TabBar
         {...props}
-        indicatorStyle={tabStyles.indicator}
         style={tabStyles.tabBar}
-        tabStyle={{ width: Layout.window.width / 2 }}
+        tabStyle={{ marginHorizontal: 12 }}
         labelStyle={tabStyles.textStyle}
         indicatorStyle={tabStyles.textActive}
       />

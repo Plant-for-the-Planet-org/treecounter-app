@@ -18,7 +18,7 @@ class BurgerMenu extends PureComponent {
         <UserProfileImage
           style={styles.burgerMenuImageStyle}
           profileImage={userProfile && userProfile.image}
-          imageStyle={{ width: 36, height: 36, borderRadius: 36 / 2 }}
+          imageStyle={{ width: 32, height: 32, borderRadius: 32 / 2 }}
         />
       </TouchableItem>
     );

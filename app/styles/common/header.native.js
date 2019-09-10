@@ -34,10 +34,12 @@ if (Platform.OS === 'ios') {
 
 export default (styles = EStyleSheet.create({
   container: {
-    backgroundColor: '$primary',
+    backgroundColor: '#fff',
     paddingTop: STATUSBAR_HEIGHT,
     height: STATUSBAR_HEIGHT + getAppBarHeight(width > height),
-    ...platformContainerStyles
+    ...platformContainerStyles,
+    padding: 12,
+    height: 80
   },
   appBar: {
     flex: 1

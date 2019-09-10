@@ -24,7 +24,7 @@ class Header extends React.PureComponent {
     return (
       <HeaderBackButton
         onPress={this._navigateBack}
-        pressColorAndroid={this.props.tintColor || '#fff'}
+        pressColorAndroid={this.props.tintColor || '#000'}
         tintColor={this.props.tintColor}
         title={this.props.backButtonTitle || null}
         truncatedTitle={this.props.backButtonTruncatedTitle || null}

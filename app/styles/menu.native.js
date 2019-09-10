@@ -26,7 +26,7 @@ export default (menuStyles = EStyleSheet.create({
     marginTop: 10
   },
   burgerMenuImageStyle: {
-    marginLeft: 10
+    marginLeft: 20
   },
   profileImageStyle: {
     marginTop: 40

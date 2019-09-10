@@ -37,12 +37,14 @@ export default class UserContributionsDetails extends React.Component {
     let dedicatedTo = undefined;
     let contributionTypeText = undefined;
     let location = undefined;
+    let isSinglePlanted = false;
 
     if (plantDate) {
       plantedDate = moment(getDateFromMySQL(plantDate)).format('MMMM DD, YYYY');
     }
     if (contributionType === 'planting') {
       contributionTypeText = i18n.t('label.usr_contribution_planted');
+      isSinglePlanted = treeCount > 1 ? false : true;
     } else if (contributionType === 'donation') {
       contributionTypeText = i18n.t('label.donation_contribution');
       if (plantProjectName) {
@@ -75,14 +77,15 @@ export default class UserContributionsDetails extends React.Component {
 
     return (
       <ScrollView style={{ backgroundColor: '#fff', flex: 1 }}>
-        <UserContributions
-          treeCount={treeCount}
-          location={location}
-          dedicatedTo={dedicatedTo}
-          plantedDate={plantedDate}
-          contributionTypeText={contributionTypeText}
-        />
-        {/* <Alert deletedTreeCount={100} /> */}
+        {!isSinglePlanted ? (
+          <UserContributions
+            treeCount={treeCount}
+            location={location}
+            dedicatedTo={dedicatedTo}
+            plantedDate={plantedDate}
+            contributionTypeText={contributionTypeText}
+          />
+        ) : null}
         {hasMeasurements ? (
           <Measurements
             measurements={this.props.contribution.contributionMeasurements}

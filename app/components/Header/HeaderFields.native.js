@@ -105,12 +105,12 @@ export default class HeaderRight extends Component {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          marginRight: 24
+          marginRight: 12
         }}
       >
         {userProfile ? (() => this.renderShareButtons(userProfile))() : null}
         <TouchableOpacity
-          style={{ height: 35, width: 35, padding: 5, marginLeft: 24 }}
+          style={{ height: 35, width: 35, padding: 5 }}
           onPress={() => navigation.navigate('Search')}
         >
           <Image source={blackSearchIcon} style={{ height: 24, width: 24 }} />

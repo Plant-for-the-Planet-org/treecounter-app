@@ -142,6 +142,10 @@ import location_grey from './images/icons/location_grey.png';
 import survival_grey from './images/icons/survival_grey.png';
 import tax_grey from './images/icons/tax_grey.png';
 
+import googlePlayBadge_en from './images/en/google-play-badge.png';
+import googlePlayBadge_de from './images/de/google-play-badge.png';
+import appleStoreBadge_en from './images/en/apple-store-badge.png';
+import appleStoreBadge_de from './images/de/apple-store-badge.png';
 export {
   mapCollapse,
   mapExpand,
@@ -276,14 +280,18 @@ export {
   downwardArrow,
   arrow_left_orange_outline,
   webProgramming,
+  communityMenu,
   smalltree,
   calendarwhite,
   forward,
   successAnimated,
   trees,
   greencalendar,
-  communityMenu,
   location_grey,
   survival_grey,
-  tax_grey
+  tax_grey,
+  googlePlayBadge_en,
+  googlePlayBadge_de,
+  appleStoreBadge_en,
+  appleStoreBadge_de
 };

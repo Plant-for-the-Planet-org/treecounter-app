@@ -33,3 +33,26 @@ $breakpointTablet: 768px;
     margin-left: 0 !important;
   }
 }
+
+.bottom-banner {
+  display: flex;
+  padding: 3px;
+  align-self: flex-end;
+  flex-grow: 1;
+  margin-top: auto;
+  position: relative;
+  bottom: 0;
+  max-width: 100%;
+  a {
+    max-width: 50%;
+    img {
+      max-width: 99%;
+      height: 36px;
+    }
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .bottom-banner {
+    position: absolute;
+  }
+}

@@ -65,8 +65,14 @@ export function convertNumber(n, d) {
   if (isNaN(n) || undefined) {
     return 0;
   }
-  let x = ('' + n).length - 1;
-  x -= x % 3;
+  let x = ('' + n).length;
+  // use number name starting at millions with 7 digits
+  if (x > 6) {
+    x -= 1;
+    x -= x % 3;
+  } else {
+    x = 0;
+  }
   let p = Math.pow;
   d = p(10, d);
   let rounded = Math.round(n * d / p(10, x)) / d;

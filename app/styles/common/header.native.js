@@ -32,7 +32,7 @@ if (Platform.OS === 'ios') {
   };
 }
 
-export default (styles = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     backgroundColor: '$primary',
     paddingTop: STATUSBAR_HEIGHT,
@@ -70,4 +70,4 @@ export default (styles = EStyleSheet.create({
     top: 0,
     position: 'absolute'
   }
-}));
+});

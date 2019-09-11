@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (donateTreesStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   see_more_toggle__container: {},
   expandedText: {
     color: '$primary',
@@ -27,4 +27,4 @@ export default (donateTreesStyles = EStyleSheet.create({
     alignItems: 'center',
     width: 100
   }
-}));
+});

@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (mapTemplateStyle = EStyleSheet.create({
+export default EStyleSheet.create({
   mapContainer: {
     backgroundColor: '$placeholderColor',
     height: 200,
@@ -8,4 +8,4 @@ export default (mapTemplateStyle = EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   }
-}));
+});

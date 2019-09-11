@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (welcomeScreenStyle = EStyleSheet.create({
+export default EStyleSheet.create({
   deleteProfileButton: {
     backgroundColor: '$colorPrimaryAccent',
     borderColor: '$colorPrimaryAccent'
@@ -65,4 +65,4 @@ export default (welcomeScreenStyle = EStyleSheet.create({
     backgroundColor: '#f0f2f1',
     textAlign: 'center'
   }
-}));
+});

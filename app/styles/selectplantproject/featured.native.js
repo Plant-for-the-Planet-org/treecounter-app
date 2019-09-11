@@ -7,10 +7,10 @@ const Layout = {
     width: Dimensions.get('window').width
   }
 };
-export default (featured = EStyleSheet.create({
+export default EStyleSheet.create({
   cardStyle: {
     width: Layout.window.width - 30,
     padding: 0,
     paddingBottom: 10
   }
-}));
+});

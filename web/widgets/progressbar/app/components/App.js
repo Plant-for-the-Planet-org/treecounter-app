@@ -69,7 +69,7 @@ export default class App extends Component {
                   onClick={event => {
                     const url = `${serverName}${getLocalRoute(
                       'app_donateTrees'
-                    )}${projectId ? '/' + projectId : ''}`;
+                    )}${ProjectId ? '/' + ProjectId : ''}`;
                     window.open(url, '_blank');
                   }}
                 >

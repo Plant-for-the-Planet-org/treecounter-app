@@ -27,9 +27,9 @@ export default class PledgeTabView extends Component {
     });
   };
   render() {
-    allpledgeshigh = this.props.pledges.highestPledgeEvents;
+    const allpledgeshigh = this.props.pledges.highestPledgeEvents;
 
-    highestPledges = allpledgeshigh.map(highestPledges => (
+    const highestPledges = allpledgeshigh.map(highestPledges => (
       <View style={styles.tabViewTitleContainer}>
         <View style={{ flex: 1, marginLeft: 26 }}>
           <Text style={styles.tabViewContentText}>
@@ -44,9 +44,9 @@ export default class PledgeTabView extends Component {
       </View>
     ));
 
-    allpledgesrecent = this.props.pledges.latestPledgeEvents;
+    const allpledgesrecent = this.props.pledges.latestPledgeEvents;
 
-    latestPledges = allpledgesrecent.map(latestPledges => (
+    const latestPledges = allpledgesrecent.map(latestPledges => (
       <View style={styles.tabViewTitleContainer}>
         <View style={{ flex: 1, marginLeft: 26 }}>
           <Text style={styles.tabViewContentText}>

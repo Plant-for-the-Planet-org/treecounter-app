@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (currentSelectorStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   treecount_container: {
     marginTop: 30,
     width: '100%'
@@ -57,4 +57,4 @@ export default (currentSelectorStyles = EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start'
   }
-}));
+});

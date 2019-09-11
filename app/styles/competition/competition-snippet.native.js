@@ -9,7 +9,7 @@ const Layout = {
 };
 const rowHeight = 20;
 
-export default (selectCompetitionFull = EStyleSheet.create({
+export default EStyleSheet.create({
   projectSnippetContainer: {
     flexDirection: 'column',
 
@@ -264,4 +264,4 @@ export default (selectCompetitionFull = EStyleSheet.create({
     borderWidth: 0,
     marginLeft: 10
   }
-}));
+});

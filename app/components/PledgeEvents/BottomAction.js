@@ -8,7 +8,7 @@ import i18n from '../../locales/i18n';
 
 export default class BottomAction extends Component {
   render() {
-    treeCount = this.props.treeCount.toLocaleString();
+    const treeCount = this.props.treeCount.toLocaleString();
     return (
       <View>
         <View style={styles.baContainer}>

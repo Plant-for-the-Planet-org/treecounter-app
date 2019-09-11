@@ -19,9 +19,8 @@ import { updateUserProfile } from '../../actions/updateUserProfile';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { fetchCurrencies } from '../../actions/currencies';
 import {
-  donate,
   paymentClear,
-  gift,
+  createPaymentGift,
   createPaymentDonation
 } from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
@@ -60,6 +59,7 @@ class DonationTreesContainer extends Component {
           this.props.donate(donationContribution, plantProjectId, profile)
         }
         createPaymentDonation={this.props.createPaymentDonation}
+        createPaymentGift={this.props.createPaymentGift}
         updateUserProfile={this.props.updateUserProfile}
         onTabChange={title => this.onTabChange(title)}
         supportTreecounter={this.props.supportTreecounter}
@@ -93,14 +93,13 @@ const mapDispatchToProps = dispatch => {
     {
       selectPlantProjectAction,
       fetchCurrencies,
-      donate,
-      gift,
       paymentClear,
       clearPlantProject,
       setProgressModelState,
       loadUserProfile,
       updateUserProfile,
       createPaymentDonation,
+      createPaymentGift,
       route: (routeName, id, navigation) => dispatch =>
         updateRoute(routeName, navigation || dispatch, id)
     },
@@ -131,5 +130,6 @@ DonationTreesContainer.propTypes = {
   route: PropTypes.func,
   updateUserProfile: PropTypes.func,
   match: PropTypes.any,
-  createPaymentDonation: PropTypes.func
+  createPaymentDonation: PropTypes.func,
+  createPaymentGift: PropTypes.func
 };

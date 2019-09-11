@@ -106,7 +106,6 @@ export default class DonateTrees extends Component {
       showSelectProject: false
     };
 
-    this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
     this.handleTreeCountCurrencyChange = this.handleTreeCountCurrencyChange.bind(
       this
@@ -140,7 +139,7 @@ export default class DonateTrees extends Component {
   componentDidUpdate(nextProps, nextState) {
     if (nextState.donationCreated !== this.state.donationCreated) {
       let requestData = {
-        amount: nextState.selectedAmount * 100,
+        amount: nextState.selectedAmount,
         currency: nextState.selectedCurrency,
         ...nextState.form
       };
@@ -282,36 +281,6 @@ export default class DonateTrees extends Component {
         recipientType: tab
       }
     });
-  }
-
-  handlePaymentApproved(paymentResponse) {
-    let sendState = { ...this.state.form };
-    if (this.props.supportTreecounter.treecounterId) {
-      sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
-    }
-    let recipientType;
-    if (this.state.modeReceipt === 'individual') {
-      recipientType = 'receiptIndividual';
-    } else {
-      recipientType = 'receiptCompany';
-    }
-    if (
-      this.props.currentUserProfile &&
-      !this.props.currentUserProfile.address &&
-      this.state.form[recipientType].address
-    ) {
-      this.props.updateUserProfile(this.state.form[recipientType], 'profile');
-    }
-    this.props.donate(
-      {
-        ...sendState,
-        paymentResponse,
-        amount: this.state.selectedAmount,
-        currency: this.state.selectedCurrency
-      },
-      this.props.selectedProject.id,
-      this.props.currentUserProfile
-    );
   }
 
   callExpanded = bool => {
@@ -589,9 +558,6 @@ export default class DonateTrees extends Component {
                         supportTreecounter: this.props.supportTreecounter,
                         plantProjectName: plantProject.name
                       }}
-                      onSuccess={paymentResponse =>
-                        this.handlePaymentApproved(paymentResponse)
-                      }
                       onFailure={data =>
                         console.log(
                           '/////////////////// payment failure ',
@@ -618,7 +584,6 @@ DonateTrees.propTypes = {
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
-  donate: PropTypes.func,
   paymentClear: PropTypes.func,
   supportTreecounter: PropTypes.object,
   paymentStatus: PropTypes.object,

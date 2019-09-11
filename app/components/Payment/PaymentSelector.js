@@ -1,14 +1,19 @@
 // @flow
 /* eslint-disable no-console, react/no-multi-comp */
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import i18n from '../../locales/i18n';
 import StripeContainer from '../../containers/StripePayment';
 
 import Paypal from './Gateways/Paypal';
 import Offline from './Gateways/Offline';
+import { handlePay, finalizeDonation } from '../../actions/donateAction';
+import { setProgressModelState } from '../../reducers/modelDialogReducer';
+import { paymentFailed } from '../../reducers/paymentStatus';
 
-class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
+class PaymentSelector extends Component {
   constructor(props) {
     super(props);
 
@@ -40,8 +45,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
         stripeJs.async = true;
         stripeJs.onload = () => {
           this.setState({
-            // stripe: window.Stripe(nextProps.stripePublishableKey)
-            stripe: window.Stripe('pk_test_0ahH0yMukgNzOEd0UppzUfsc')
+            stripe: window.Stripe(props.stripePublishableKey)
           });
         };
         document.body && document.body.appendChild(stripeJs);
@@ -49,44 +53,73 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     }
   }
 
-  decorateSuccess(gateway, accountName) {
-    return response =>
-      this.props.onSuccess({ gateway, accountName, ...response });
-  }
+  reinitiateStripe = account => {
+    this.setState({
+      stripe: window.Stripe(this.props.stripePublishableKey, account)
+    });
+  };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.paymentMethods) {
-      if (
-        !this.props.paymentMethods ||
-        JSON.stringify(this.props.paymentMethods) !==
-          JSON.stringify(nextProps.paymentMethods)
-      ) {
-        // lookup stripe related payment methods for the current country/currency combination
-        const stripeGateways = Object.keys(nextProps.paymentMethods).filter(
-          gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)
-        );
-
-        // do not load Stripe if not required
-        if (stripeGateways.length > 0) {
-          // componentDidMount only runs in a browser environment.
-          // In addition to loading asynchronously, this code is safe to server-side render.
-
-          // You can inject script tag manually like this,
-          // or you can use the 'async' attribute on the Stripe.js v3 <script> tag.
-          const stripeJs = document.createElement('script');
-          stripeJs.src = 'https://js.stripe.com/v3/';
-          stripeJs.async = true;
-          stripeJs.onload = () => {
-            this.setState({
-              // stripe: window.Stripe(nextProps.stripePublishableKey)
-              stripe: window.Stripe('pk_test_0ahH0yMukgNzOEd0UppzUfsc')
-            });
-          };
-          document.body && document.body.appendChild(stripeJs);
+  decorateSuccess(gateway, accountName, data) {
+    const donationId = this.props.paymentStatus.contribution[0].id;
+    setProgressModelState(true);
+    this.props
+      .handlePay(
+        donationId,
+        {
+          gateway,
+          account: accountName,
+          source: { ...data }
+        },
+        this.props.currentUserProfile
+      )
+      .then(response => {
+        if (response.data.status == 'failed') {
+          this.props.paymentFailed({
+            status: false,
+            message: response.data.message || 'error'
+          });
+        } else {
+          this.props.finalizeDonation(
+            donationId,
+            this.props.currentUserProfile
+          );
         }
-      }
-    }
+        setProgressModelState(false);
+      });
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.paymentMethods) {
+  //     if (
+  //       !this.props.paymentMethods ||
+  //       JSON.stringify(this.props.paymentMethods) !==
+  //         JSON.stringify(nextProps.paymentMethods)
+  //     ) {
+  //       // lookup stripe related payment methods for the current country/currency combination
+  //       const stripeGateways = Object.keys(nextProps.paymentMethods).filter(
+  //         gateway => ['stripe_cc', 'stripe_sepa'].includes(gateway)
+  //       );
+
+  //       // do not load Stripe if not required
+  //       if (stripeGateways.length > 0) {
+  //         // componentDidMount only runs in a browser environment.
+  //         // In addition to loading asynchronously, this code is safe to server-side render.
+
+  //         // You can inject script tag manually like this,
+  //         // or you can use the 'async' attribute on the Stripe.js v3 <script> tag.
+  //         const stripeJs = document.createElement('script');
+  //         stripeJs.src = 'https://js.stripe.com/v3/';
+  //         stripeJs.async = true;
+  //         stripeJs.onload = () => {
+  //           this.setState({
+  //             stripe: window.Stripe(nextProps.stripePublishableKey)
+  //           });
+  //         };
+  //         document.body && document.body.appendChild(stripeJs);
+  //       }
+  //     }
+  //   }
+  // }
 
   handleExpandedClicked = option => {
     this.props.handleExpandedClicked(option);
@@ -165,6 +198,9 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                   paymentDetails={this.props.paymentDetails}
                   account={accounts[accountName]}
                   accountName={accountName}
+                  reinitiateStripe={this.reinitiateStripe}
+                  stripePublishableKey={this.props.stripePublishableKey}
+                  paymentFailed={this.props.paymentFailed}
                   gateway={'stripe'}
                   paymentStatus={this.props.paymentStatus}
                   expanded={this.props.expandedOption === '1'}
@@ -175,27 +211,28 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             );
           }
           if ('stripe_sepa' === gateway) {
-            return (
-              <div key={gateway}>
-                {/* {this.state.errorMessage ? (
-                  <div>{this.state.errorMessage}</div>
-                ) : null} */}
-                <StripeContainer
-                  paymentType="stripe_sepa"
-                  stripe={this.state.stripe}
-                  currentUserProfile={this.props.currentUserProfile}
-                  paymentDetails={{
-                    ...this.props.paymentDetails,
-                    topName: this.props.context.tpoName
-                  }}
-                  receipt={this.props.receipt}
-                  account={accounts[accountName]}
-                  expanded={this.props.expandedOption === '2'}
-                  handleExpandedClicked={() => this.handleExpandedClicked('2')}
-                  {...gatewayProps}
-                />
-              </div>
-            );
+            return null;
+            // return (
+            //   <div key={gateway}>
+            //     {/* {this.state.errorMessage ? (
+            //       <div>{this.state.errorMessage}</div>
+            //     ) : null} */}
+            //     <StripeContainer
+            //       paymentType="stripe_sepa"
+            //       stripe={this.state.stripe}
+            //       currentUserProfile={this.props.currentUserProfile}
+            //       paymentDetails={{
+            //         ...this.props.paymentDetails,
+            //         topName: this.props.context.tpoName
+            //       }}
+            //       receipt={this.props.receipt}
+            //       account={accounts[accountName]}
+            //       expanded={this.props.expandedOption === '2'}
+            //       handleExpandedClicked={() => this.handleExpandedClicked('2')}
+            //       {...gatewayProps}
+            //     />
+            //   </div>
+            // );
           }
           if ('paypal' === gateway) {
             return (
@@ -227,7 +264,10 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
                 ) : null}
                 <Offline
                   key={gateway}
-                  onSuccess={this.decorateSuccess(gateway, accountName)}
+                  onSuccess={this.decorateSuccess(gateway, accountName, {
+                    userMessage: 'Success',
+                    isConfirmed: true
+                  })}
                   amount={paymentDetails.amount}
                   currency={currency}
                   account={accounts[accountName]}
@@ -244,6 +284,20 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      handlePay,
+      setProgressModelState,
+      paymentFailed,
+      finalizeDonation
+    },
+    dispatch
+  );
+};
+
+export default connect(null, mapDispatchToProps)(PaymentSelector);
+
 PaymentSelector.propTypes = {
   paymentDetails: PropTypes.object,
   accounts: PropTypes.object,
@@ -255,10 +309,10 @@ PaymentSelector.propTypes = {
   handleExpandedClicked: PropTypes.func,
   currency: PropTypes.string.isRequired,
   context: PropTypes.object.isRequired,
-  onSuccess: PropTypes.func.isRequired,
   onFailure: PropTypes.func.isRequired,
   onError: PropTypes.func.isRequired,
-  receipt: PropTypes.object
+  receipt: PropTypes.object,
+  paymentFailed: PropTypes.func,
+  handlePay: PropTypes.func,
+  finalizeDonation: PropTypes.func
 };
-
-export default PaymentSelector;

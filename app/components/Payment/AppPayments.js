@@ -23,20 +23,20 @@ export default class AppPayments extends Component {
     });
   };
 
-  handlePaymentApproved = paymentResponse => {
-    payPost(paymentResponse, this.props.paymentInfo.token)
-      .then(res => {
-        console.log(res);
-        this.setState({
-          paymentStatus: 'success'
-        });
-      })
-      .catch(err =>
-        this.setState({
-          paymentStatus: 'failed'
-        })
-      );
-  };
+  // handlePaymentApproved = paymentResponse => {
+  //   payPost(paymentResponse, this.props.paymentInfo.token)
+  //     .then(res => {
+  //       console.log(res);
+  //       this.setState({
+  //         paymentStatus: 'success'
+  //       });
+  //     })
+  //     .catch(err =>
+  //       this.setState({
+  //         paymentStatus: 'failed'
+  //       })
+  //     );
+  // };
 
   openApp(status) {
     if (status === 'success') {
@@ -113,8 +113,8 @@ export default class AppPayments extends Component {
                       ? { displayName: paymentInfo.supportedTreecounterName }
                       : null
                   }}
-                  onSuccess={paymentResponse =>
-                    this.handlePaymentApproved(paymentResponse)
+                  onSuccess={(gateway, accountName, data) =>
+                    this.handlePaymentApproved(gateway, accountName, data)
                   }
                   onFailure={data =>
                     console.log('/////////////////// payment failure ', data)

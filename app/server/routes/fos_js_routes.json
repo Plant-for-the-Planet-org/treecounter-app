@@ -1703,7 +1703,7 @@
 			],
 			"schemes": []
 		},
-		"donationInfo_get": {
+		"donationFinalize_get": {
 			"tokens": [
 				[
 					"text",
@@ -1746,7 +1746,7 @@
 			],
 			"schemes": []
 		},
-		"donationInfoPublic_get": {
+		"donationFinalizePublic_get": {
 			"tokens": [
 				[
 					"text",
@@ -1761,6 +1761,45 @@
 				[
 					"text",
 					"/donation"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/public"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"GET"
+			],
+			"schemes": []
+		},
+		"paymentInfo_get": {
+			"tokens": [
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"token"
+				],
+				[
+					"text",
+					"/paymentInfo"
 				],
 				[
 					"variable",
@@ -2444,6 +2483,166 @@
 			],
 			"schemes": []
 		},
+		"donate_post": {
+			"tokens": [
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"plantProject"
+				],
+				[
+					"text",
+					"/donationContributions"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/public"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"POST"
+			],
+			"schemes": []
+		},
+		"giftDonate_post": {
+			"tokens": [
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"plantProject"
+				],
+				[
+					"text",
+					"/giftDonationContributions"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/public"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"POST"
+			],
+			"schemes": []
+		},
+		"pay_post": {
+			"tokens": [
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"token"
+				],
+				[
+					"text",
+					"/pay"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/public"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"POST"
+			],
+			"schemes": []
+		},
+		"paymentInfoResponse_get": {
+			"tokens": [
+				[
+					"text",
+					"/response"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"token"
+				],
+				[
+					"text",
+					"/paymentInfo"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/public"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"GET"
+			],
+			"schemes": []
+		},
 		"public_exploreData_get": {
 			"tokens": [
 				[
@@ -2668,6 +2867,45 @@
 			"hosttokens": [],
 			"methods": [
 				"POST"
+			],
+			"schemes": []
+		},
+		"eventPledge_put": {
+			"tokens": [
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"token"
+				],
+				[
+					"text",
+					"/eventPledge"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/public"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"PUT"
 			],
 			"schemes": []
 		},
@@ -4458,13 +4696,13 @@
 			],
 			"schemes": []
 		},
-		"app_donateTrees_support": {
+		"app_donateTrees_project": {
 			"tokens": [
 				[
 					"variable",
 					"/",
 					"[^/]++",
-					"treecounterId"
+					"plantProject"
 				],
 				[
 					"text",

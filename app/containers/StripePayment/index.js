@@ -7,8 +7,11 @@ import { connect } from 'react-redux';
 import {
   fillCard,
   attachCardToCostumer,
-  handlePay
+  handlePay,
+  finalizeDonation
 } from '../../actions/donateAction';
+
+import { setProgressModelState } from '../../reducers/modelDialogReducer';
 
 class StripePayment extends Component {
   handleExpandedClicked = () => {
@@ -41,13 +44,18 @@ class StripePayment extends Component {
             expanded={props.expanded}
             handleExpandedClicked={this.handleExpandedClicked}
             fillCard={props.fillCard}
+            reinitiateStripe={props.reinitiateStripe}
+            stripePublishableKey={props.stripePublishableKey}
             attachCardToCostumer={props.attachCardToCostumer}
             paymentStatus={props.paymentStatus}
             paymentDetails={props.paymentDetails}
+            paymentFailed={props.paymentFailed}
             onError={this.onError}
             onSuccess={this.onSuccess}
             accountName={props.accountName}
             gateway={props.gateway}
+            setProgressModelState={props.setProgressModelState}
+            finalizeDonation={props.finalizeDonation}
           />
         </Elements>
       </StripeProvider>
@@ -60,7 +68,9 @@ const mapDispatchToProps = dispatch => {
     {
       fillCard,
       attachCardToCostumer,
-      handlePay
+      handlePay,
+      setProgressModelState,
+      finalizeDonation
     },
     dispatch
   );
@@ -87,5 +97,10 @@ StripePayment.propTypes = {
   accountName: PropTypes.string,
   gateway: PropTypes.string,
   paymentStatus: PropTypes.object,
-  handlePay: PropTypes.func
+  handlePay: PropTypes.func,
+  paymentFailed: PropTypes.func,
+  setProgressModelState: PropTypes.func,
+  stripePublishableKey: PropTypes.string,
+  reinitiateStripe: PropTypes.func,
+  finalizeDonation: PropTypes.func
 };

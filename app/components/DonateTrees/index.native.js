@@ -100,10 +100,15 @@ export default class DonateTrees extends React.PureComponent {
         this.setState({ selectedTreeCount: nextTreeCount });
       }
     }
-    if (nextProps.paymentStatus && nextProps.paymentStatus.token) {
+    if (
+      nextProps.paymentStatus &&
+      nextProps.paymentStatus.contribution &&
+      nextProps.paymentStatus.contribution[0] &&
+      nextProps.paymentStatus.contribution[0].id
+    ) {
       this.openGateWay(
         getLocalRoute('app_payment', {
-          donationContribution: nextProps.paymentStatus.token
+          donationContribution: nextProps.paymentStatus.contribution[0].id
         })
       );
     }
@@ -335,25 +340,20 @@ export default class DonateTrees extends React.PureComponent {
     sendState = { ...this.state.form };
     if (params !== undefined && params.giftMethod != null) {
       if (params.giftMethod === 'invitation') {
-        this.props.gift(
+        this.props.createPaymentGift(
+          this.props.selectedProject.id,
           {
             ...sendState,
             giftInvitation: params.userForm,
             giftMethod: params.giftMethod,
-            paymentResponse: {
-              gateway: 'offline',
-              accountName: 'offline_US',
-              isConfirmed: true,
-              confirmation: 'iOS referred payment'
-            },
             amount: this.state.selectedAmount,
             currency: this.state.selectedCurrency
           },
-          this.props.selectedProject.id,
           this.props.currentUserProfile
         );
       } else if (params.giftMethod === 'direct') {
-        this.props.gift(
+        this.props.createPaymentGift(
+          this.props.selectedProject.id,
           {
             ...sendState,
             directGift: {
@@ -362,16 +362,9 @@ export default class DonateTrees extends React.PureComponent {
             },
             giftTreecounter: params.userForm.id,
             giftMethod: params.giftMethod,
-            paymentResponse: {
-              gateway: 'offline',
-              accountName: 'offline_US',
-              isConfirmed: true,
-              confirmation: 'iOS referred payment'
-            },
             amount: this.state.selectedAmount,
             currency: this.state.selectedCurrency
           },
-          this.props.selectedProject.id,
           this.props.currentUserProfile
         );
       }
@@ -380,19 +373,13 @@ export default class DonateTrees extends React.PureComponent {
     if (this.props.supportTreecounter.treecounterId) {
       sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
     }
-    this.props.donate(
+    this.props.createPaymentDonation(
+      this.props.selectedProject.id,
       {
         ...sendState,
-        paymentResponse: {
-          gateway: 'offline',
-          accountName: 'offline_US',
-          isConfirmed: true,
-          confirmation: 'iOS referred payment'
-        },
         amount: this.state.selectedAmount,
         currency: this.state.selectedCurrency
       },
-      this.props.selectedProject.id,
       this.props.currentUserProfile
     );
   }
@@ -418,7 +405,6 @@ DonateTrees.propTypes = {
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
-  donate: PropTypes.func,
   paymentClear: PropTypes.func,
   supportTreecounter: PropTypes.object,
   paymentStatus: PropTypes.object,
@@ -426,5 +412,7 @@ DonateTrees.propTypes = {
   onTabChange: PropTypes.func,
   setProgressModelState: PropTypes.func,
   loadUserProfile: PropTypes.func,
-  updateRoute: PropTypes.func
+  updateRoute: PropTypes.func,
+  createPaymentGift: PropTypes.func,
+  createPaymentDonation: PropTypes.func
 };

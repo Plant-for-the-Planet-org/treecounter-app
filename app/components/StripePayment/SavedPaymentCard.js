@@ -35,19 +35,6 @@ const SavedPaymentCard = props => {
               ) : (
                 <tr />
               )}
-              <tr>
-                <td>
-                  <input
-                    type="radio"
-                    name="choose-card"
-                    onChange={() => {
-                      props.onChangeSelectedCard('new-card');
-                    }}
-                  />
-                </td>
-                <td>New</td>
-                <td />
-              </tr>
             </tbody>
           </table>
         </div>

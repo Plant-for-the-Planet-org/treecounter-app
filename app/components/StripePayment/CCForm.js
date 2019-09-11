@@ -45,10 +45,21 @@ const CCForm = props => (
       onChangeSelectedCard={props.onChangeSelectedCard}
     />
     <div className={props.style.displayNone}>
-      <CardElement
-        hidePostalCode={true}
-        {...createOptions(props.style.fontSize)}
-      />{' '}
+      <div className="flex">
+        <input
+          type="radio"
+          name="choose-card"
+          className="margin_radio"
+          defaultChecked
+          onChange={() => {
+            props.onChangeSelectedCard('new-card');
+          }}
+        />
+        <CardElement
+          hidePostalCode={true}
+          {...createOptions(props.style.fontSize)}
+        />
+      </div>
       <input
         type="checkbox"
         className="payment-save-later-checkbox"

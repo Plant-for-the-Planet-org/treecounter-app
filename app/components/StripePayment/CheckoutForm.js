@@ -44,6 +44,7 @@ class CheckoutForm extends React.Component {
   };
 
   createPaymentMethod = async paymentDetails => {
+    this.props.setProgressModelState(true);
     try {
       //Create a payment method id for making request to the API
       const paymentMethodResponse = await this.props.stripe.createPaymentMethod(
@@ -54,8 +55,6 @@ class CheckoutForm extends React.Component {
           }
         }
       );
-
-      this.setState({ loading: true });
       const paymentMethodId = paymentMethodResponse.paymentMethod.id;
 
       if (this.state.saveForLaterCC) {
@@ -64,6 +63,7 @@ class CheckoutForm extends React.Component {
 
       return paymentMethodId;
     } catch (e) {
+      this.props.setProgressModelState(false);
       this.props.onError(e.message);
     }
   };
@@ -102,35 +102,37 @@ class CheckoutForm extends React.Component {
       this.props
         .handlePay(donationId, requestData, this.props.currentUserProfile)
         .then(response => {
-          if (response.data.status == 'requires_action') {
-            this.handle3DSecure(response.data.payment_intent_client_secret);
+          this.props.setProgressModelState(false);
+          if (response.data.status == 'failed') {
+            this.props.paymentFailed({
+              status: false,
+              message: response.data.message || 'error'
+            });
+          } else {
+            if (response.data.status == 'action_required') {
+              this.handle3DSecure(
+                response.data.response.payment_intent_client_secret,
+                window.Stripe(this.props.stripePublishableKey, {
+                  stripeAccount: response.data.response.account
+                }),
+                donationId
+              );
+            } else {
+              this.props.finalizeDonation(
+                donationId,
+                this.props.currentUserProfile
+              );
+            }
           }
         });
-
-      // if (payResponse.status === 200) {
-      //   this.props.onSuccess('success');
-      //   this.setState({ loading: false });
-      // } else if (requestResponse.data.requires_action) {
-      //   this.handle3DSecure(
-      //     requestResponse.data.payment_intent_client_secret
-      //   );
-      // } else {
-      //   this.props.onSuccess('success');
-      //   this.setState({ loading: false });
-      // }
     }
   };
 
-  handle3DSecure = async paymentIntentClientSecret => {
-    const confirmPaymentIntentResponse = await this.props.stripe.handleCardAction(
+  handle3DSecure = async (paymentIntentClientSecret, stripe, donationId) => {
+    const confirmPaymentIntentResponse = await stripe.handleCardAction(
       paymentIntentClientSecret
     );
-
-    if (confirmPaymentIntentResponse.error) {
-      this.props.onError(confirmPaymentIntentResponse.error.message);
-    } else {
-      this.setState({ loading: false });
-    }
+    this.props.finalizeDonation(donationId, this.props.currentUserProfile);
   };
 
   handleArrowClick = number => {
@@ -200,5 +202,10 @@ CheckoutForm.propTypes = {
   accountName: PropTypes.string,
   gateway: PropTypes.string,
   paymentStatus: PropTypes.object,
-  handlePay: PropTypes.func
+  handlePay: PropTypes.func,
+  paymentFailed: PropTypes.func,
+  stripePublishableKey: PropTypes.string,
+  setProgressModelState: PropTypes.func,
+  reinitiateStripe: PropTypes.func,
+  finalizeDonation: PropTypes.func
 };

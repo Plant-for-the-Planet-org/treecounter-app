@@ -61,44 +61,53 @@ export function isAndroid() {
   return getMobileOperatingSystem() == 'Android';
 }
 
-export function convertNumber(n, d) {
-  if (isNaN(n) || undefined) {
+export function convertNumber(number, useDigits) {
+  if (isNaN(number) || undefined) {
     return 0;
   }
-  let x = ('' + n).length - 1;
-  x -= x % 3;
-  let p = Math.pow;
-  d = p(10, d);
-  let rounded = Math.round(n * d / p(10, x)) / d;
-  let singular = rounded == 1 ? 1 : 0;
+
+  const numDigits = ('' + number).length;
+  // use number name starting at millions with 7 digits
+  let digitsInGroup = 0;
+  if (numDigits > 6) {
+    digitsInGroup = numDigits - 1;
+    digitsInGroup -= digitsInGroup % 3;
+  }
+
+  let pow = Math.pow;
+  let powerOfUsedDigits = pow(10, useDigits);
+  let roundedNumber =
+    Math.round(number * powerOfUsedDigits / pow(10, digitsInGroup)) /
+    powerOfUsedDigits;
+  let isSingular = roundedNumber == 1 ? 1 : 0;
   return (
-    delimitNumbers(rounded) +
+    delimitNumbers(roundedNumber) +
     [
       '',
       ' ' +
-        (singular
+        (isSingular
           ? i18n.t('label.thousand_singular')
           : i18n.t('label.thousand_plural')),
       ' ' +
-        (singular
+        (isSingular
           ? i18n.t('label.million_singular')
           : i18n.t('label.million_plural')),
       ' ' +
-        (singular
+        (isSingular
           ? i18n.t('label.billion_singular')
           : i18n.t('label.billion_plural')),
       ' ' +
-        (singular
+        (isSingular
           ? i18n.t('label.trillion_singular')
           : i18n.t('label.trillion_plural')),
       ' ' +
-        (singular
+        (isSingular
           ? i18n.t('label.quadrillion_singular')
           : i18n.t('label.quadrillion_plural')),
       ' ' +
-        (singular
+        (isSingular
           ? i18n.t('label.quintillion_singular')
           : i18n.t('label.quintillion_plural'))
-    ][x / 3]
+    ][digitsInGroup / 3]
   );
 }

@@ -133,17 +133,17 @@ export default class DonateTrees extends Component {
     this.setState(state);
   }
 
-  componentDidUpdate(nextProps, nextState) {
-    if (nextState.donationCreated !== this.state.donationCreated) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.donationCreated !== this.state.donationCreated) {
       let requestData = {
-        amount: nextState.selectedAmount,
-        currency: nextState.selectedCurrency,
-        ...nextState.form
+        amount: this.state.selectedAmount,
+        currency: this.state.selectedCurrency,
+        ...this.state.form
       };
-      nextProps.createPaymentDonation(
-        nextProps.selectedProject.id,
+      this.props.createPaymentDonation(
+        this.props.selectedProject.id,
         requestData,
-        nextProps.currentUserProfile
+        this.props.currentUserProfile
       );
     }
   }
@@ -382,12 +382,6 @@ export default class DonateTrees extends Component {
         ? this.state.form['receiptCompany']
         : '';
     }
-    let name = receipt !== '' ? receipt.firstname + ' ' + receipt.lastname : '';
-    let email = receipt !== '' ? receipt.email : '';
-    let address = receipt !== '' ? receipt.address : '';
-    let zipCode = receipt !== '' ? receipt.zipCode : '';
-    let city = receipt !== '' ? receipt.city : '';
-    let country = receipt !== '' ? receipt.country : '';
 
     let paymentMethods;
 

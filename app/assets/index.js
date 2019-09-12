@@ -108,7 +108,6 @@ import redeemSignIn from './images/icons/redeem_signin.png';
 import redeem_outline from './images/icons/redeem_outline.png';
 import redeem_outline_red from './images/icons/redeem_outline_red.png';
 import lightTree from './images/lightTree.png';
-import AppStoreLogo from './images/appstore-logo.png';
 import targetPlanted from './images/target.png';
 import info from './images/icons/info.png';
 import editProfile from './images/icons/edit_profile.png';
@@ -140,6 +139,10 @@ import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
 import avatar from './images/avatar.png';
 import update from './images/update.png';
+import googlePlayBadge_en from './images/en/google-play-badge.png';
+import googlePlayBadge_de from './images/de/google-play-badge.png';
+import appleStoreBadge_en from './images/en/apple-store-badge.png';
+import appleStoreBadge_de from './images/de/apple-store-badge.png';
 export {
   mapCollapse,
   mapExpand,
@@ -147,7 +150,6 @@ export {
   schoolIcon,
   individualIcon,
   companyIcon,
-  AppStoreLogo,
   darkTree,
   svgBackground,
   bmzLogo,
@@ -282,5 +284,9 @@ export {
   trees,
   greencalendar,
   avatar,
-  update
+  update,
+  googlePlayBadge_en,
+  googlePlayBadge_de,
+  appleStoreBadge_en,
+  appleStoreBadge_de
 };

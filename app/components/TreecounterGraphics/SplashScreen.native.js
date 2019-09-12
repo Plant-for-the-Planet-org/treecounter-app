@@ -5,8 +5,10 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Platform
+  Platform,
+  Linking
 } from 'react-native';
+import TouchableItem from './../Common/TouchableItem.native';
 import { avatar, update } from './../../assets';
 import i18n from '../../locales/i18n';
 export default class SplashScreen extends Component {
@@ -22,13 +24,20 @@ export default class SplashScreen extends Component {
           {i18n.t('label.updateRequired')}{' '}
         </Text>
         <Text style={styles.updatePara}> {i18n.t('label.updatePara')} </Text>
-        <TouchableOpacity style={styles.updateButtonStyle}>
-          <Text style={styles.updateButtonText}>
-            {Platform.OS === 'ios'
-              ? i18n.t('label.openAppStore')
-              : i18n.t('label.openPlayStore')}
-          </Text>
-        </TouchableOpacity>
+
+        {Platform.OS === 'ios' ? (
+          <TouchableItem style={styles.updateButtonStyle}>
+            <Text style={styles.updateButtonText}>
+              {i18n.t('label.openAppStore')}
+            </Text>
+          </TouchableItem>
+        ) : (
+          <TouchableItem style={styles.updateButtonStyle}>
+            <Text style={styles.updateButtonText}>
+              {i18n.t('label.openPlayStore')}
+            </Text>
+          </TouchableItem>
+        )}
       </View>
     );
   }

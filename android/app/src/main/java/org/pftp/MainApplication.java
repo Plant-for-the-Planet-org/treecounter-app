@@ -3,7 +3,7 @@ package org.pftp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.taessina.paypal.RNPaypalWrapperPackage;
+//import com.taessina.paypal.RNPaypalWrapperPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.bugsnag.BugsnagReactNative;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
@@ -34,7 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNPaypalWrapperPackage(),
+            //new RNPaypalWrapperPackage(),
             new LinearGradientPackage(),
             BugsnagReactNative.getPackage(),
             new ReactNativeYouTube(),

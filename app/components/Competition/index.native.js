@@ -18,11 +18,11 @@ class Competiton extends React.Component {
     super(props);
     this.state = {
       routes: [
-        { key: 'mine', title: i18n.t('label.mine_competitions') },
         { key: 'featured', title: i18n.t('label.featured_competitions') },
-        { key: 'all', title: i18n.t('label.all_competitions') }
+        { key: 'all', title: i18n.t('label.all_competitions') },
+        { key: 'mine', title: i18n.t('Closed') }
       ],
-      index: 1
+      index: 0
     };
   }
   indexChange(index) {
@@ -69,7 +69,7 @@ class Competiton extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <TabView
           useNativeDriver
           navigationState={this.state}

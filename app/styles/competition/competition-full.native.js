@@ -94,9 +94,6 @@ export default (selectedCompetitionFull = EStyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row'
   },
-  topCompetitorScore: {
-    width: '40%'
-  },
   topCompetitorNameText: {
     fontSize: 14,
     color: '$cardTextColor',
@@ -143,18 +140,8 @@ export default (selectedCompetitionFull = EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%'
-    //height: rowHeight + rowHeight / 2,
   },
   buttonStyle: {
-    // height: 20,
-    // paddingLeft: 2,
-    // paddingRight: 2,
-    // paddingTop: 0,
-    // paddingBottom: 0,
-    // margin: 0,
-    // borderWidth: 0,
-    // borderRadius: 0,
-    // marginRight: 5
     width: '100%',
     borderWidth: 1,
     borderRadius: 6,

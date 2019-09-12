@@ -32,18 +32,27 @@ class CompetitionProgressBar extends React.Component {
             style={styles.treePlantedChildContainer}
             style={
               treeCountWidth > 0
-                ? {
-                    height: '100%',
-                    flexDirection: 'row',
-                    backgroundColor: '#b9d384',
-                    borderColor: '#b9d384',
-                    width: treeCountWidth + '%',
-                    paddingRight: 10,
-                    padding: 5,
-                    borderTopRightRadius: 20,
-                    borderBottomRightRadius: 20,
-                    borderWidth: 0.5
-                  }
+                ? treeCountWidth != 100
+                  ? {
+                      height: '100%',
+                      flexDirection: 'row',
+                      backgroundColor: '#89b53a',
+                      borderColor: '#89b53a',
+                      width: treeCountWidth + '%',
+                      paddingRight: 12,
+                      padding: 5,
+                      borderTopRightRadius: 20,
+                      borderBottomRightRadius: 20
+                    }
+                  : {
+                      height: '100%',
+                      flexDirection: 'row',
+                      backgroundColor: '#89b53a',
+                      borderColor: '#89b53a',
+                      width: treeCountWidth + '%',
+                      paddingRight: 12,
+                      padding: 5
+                    }
                 : {
                     height: '100%',
                     flexDirection: 'row',

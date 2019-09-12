@@ -13,15 +13,17 @@ export default (selectCompetitionFull = EStyleSheet.create({
   projectSnippetContainer: {
     flexDirection: 'column',
 
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowOpacity: 0.5,
-    elevation: 1,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 3
+    // },
+    // shadowOpacity: 0.5,
+    // elevation: 1,
     padding: 0,
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10
+    borderRadius: 7,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#d5d5d5'
   },
   competitionContent: {
     paddingTop: 10,
@@ -32,8 +34,8 @@ export default (selectCompetitionFull = EStyleSheet.create({
   projectImageContainer: {
     height: Layout.window.width * 0.4,
     width: '100%',
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
     overflow: 'hidden'
   },
   teaser__projectImage: {
@@ -44,9 +46,9 @@ export default (selectCompetitionFull = EStyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    backgroundColor: '#d2e3af',
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
+    backgroundColor: '#d3d3d3',
+    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
     height: rowHeight * 1.7
   },
   treePlantedContainer: {
@@ -57,13 +59,14 @@ export default (selectCompetitionFull = EStyleSheet.create({
   treePlantedChildContainer: {
     height: '100%',
     flexDirection: 'row',
-    backgroundColor: '#b9d384',
-    borderRightColor: '#b9d384'
+    backgroundColor: '#89b53a',
+    borderRightColor: '#89b53a'
   },
   treePlantedtext: {
     // padding: 5,
     paddingLeft: 5,
     color: 'white',
+    fontSize: 14,
     fontWeight: 'bold'
   },
   treePlantedtextTrees: {
@@ -103,10 +106,14 @@ export default (selectCompetitionFull = EStyleSheet.create({
     //height: rowHeight + rowHeight / 2,
   },
   project_teaser__contentText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '$cardTextColor',
-    maxWidth: '90%'
+    maxWidth: '90%',
+    fontSize: 18,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 27,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
   },
   project_teaser__contentByText: {
     fontSize: 10,
@@ -119,15 +126,23 @@ export default (selectCompetitionFull = EStyleSheet.create({
     color: '$cardTextColor'
   },
   bottomText: {
-    fontSize: 14,
-    color: '$cardTextColor',
-    paddingLeft: 10,
-    paddingRight: 5
+    marginLeft: 8,
+    fontSize: 11,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 15,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: 'rgba(0, 0, 0, 0.6)'
   },
   bottomParticipantText: {
-    fontSize: 14,
-    color: 'rgba(0, 0, 0, 0.6)',
-    paddingLeft: 5
+    fontSize: 11,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 15,
+    letterSpacing: 0,
+    textAlign: 'right',
+    color: 'rgba(0, 0, 0, 0.6)'
   },
   byOrgContainer: {
     width: '50%',
@@ -233,18 +248,32 @@ export default (selectCompetitionFull = EStyleSheet.create({
     justifyContent: 'space-between'
   },
   topCompetitorName: {
-    width: '90%',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    width: '100%'
   },
   topCompetitorScore: {
     width: '10%',
     alignItems: 'flex-end'
   },
   topCompetitorScoreText: {
-    fontSize: 14,
-    color: '$cardTextColor',
-    maxWidth: '100%'
+    fontSize: 11,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 16,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: 'rgba(0, 0, 0, 0.6)',
+    marginLeft: 10
+  },
+  topCompetitorRank: {
+    fontSize: 12,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 17,
+    letterSpacing: 1.2,
+    textAlign: 'left',
+    color: 'rgba(0, 0, 0, 0.6)'
   },
   topCompetitorDiv: {
     width: '100%',

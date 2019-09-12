@@ -154,22 +154,15 @@ class CompetitionSnippet extends React.Component {
               <View style={styles.projectNameContainer}>
                 <Text
                   ellipsizeMode="tail"
-                  numberOfLines={1}
+                  numberOfLines={3}
                   style={styles.project_teaser__contentText}
                 >
-                  {this.props.competition && this.props.competition.name}
-                </Text>
-              </View>
-              <View style={styles.projectByNameContainer}>
-                <Text
-                  ellipsizeMode="tail"
-                  numberOfLines={1}
-                  style={styles.project_teaser__contentByText}
-                >
+                  {this.props.competition && this.props.competition.name}{' '}
                   {i18n.t('label.by_a_name')}{' '}
                   {this.props.competition && this.props.competition.ownerName}
                 </Text>
               </View>
+
               {/*<View style={styles.projectdetailsContainer}>*/}
               {/**/}
               {/*</View>*/}
@@ -194,7 +187,7 @@ class CompetitionSnippet extends React.Component {
                 <View style={styles.byOrgContainer}>
                   <Image
                     source={compCalendar}
-                    style={{ width: 15, height: 15 }}
+                    style={{ width: 14, height: 14 }}
                   />
                   <Text style={styles.bottomText}>
                     {i18n.t('label.ends')}{' '}

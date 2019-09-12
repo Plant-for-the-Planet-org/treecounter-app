@@ -43,36 +43,36 @@ const config = {
     ]
   },
   plugins: [
-    // new HtmlWebPackPlugin({
-    //   inject: true,
-    //   chunks: ['widget'],
-    //   filename: './testwidget.html',
-    //   template: './web/widget.index.html'
-    // }),
-    // new HtmlWebPackPlugin({
-    //   inject: true,
-    //   chunks: ['progressbarwidget'],
-    //   filename: './progressbarwidget.html',
-    //   template: './web/widget.index.html'
-    // }),
-    // new HtmlWebPackPlugin({
-    //   inject: true,
-    //   chunks: ['treecounterwidget'],
-    //   filename: './treecounterwidget.html',
-    //   template: './web/widget.index.html'
-    // }),
-    // new HtmlWebPackPlugin({
-    //   inject: true,
-    //   chunks: ['donatetreewidget'],
-    //   filename: './donatetreewidget.html',
-    //   template: './web/widget.index.html'
-    // }),
-    // new HtmlWebPackPlugin({
-    //   inject: true,
-    //   chunks: ['ndviwidget'],
-    //   filename: './ndviwidget.html',
-    //   template: './web/widget.index.html'
-    // }),
+    new HtmlWebPackPlugin({
+      inject: true,
+      chunks: ['widget'],
+      filename: './testwidget.html',
+      template: './web/widget.index.html'
+    }),
+    new HtmlWebPackPlugin({
+      inject: true,
+      chunks: ['progressbarwidget'],
+      filename: './progressbarwidget.html',
+      template: './web/widget.index.html'
+    }),
+    new HtmlWebPackPlugin({
+      inject: true,
+      chunks: ['treecounterwidget'],
+      filename: './treecounterwidget.html',
+      template: './web/widget.index.html'
+    }),
+    new HtmlWebPackPlugin({
+      inject: true,
+      chunks: ['donatetreewidget'],
+      filename: './donatetreewidget.html',
+      template: './web/widget.index.html'
+    }),
+    new HtmlWebPackPlugin({
+      inject: true,
+      chunks: ['ndviwidget'],
+      filename: './ndviwidget.html',
+      template: './web/widget.index.html'
+    }),
     new HtmlWebPackPlugin({
       chunks: ['bundle'],
       template: './web/index.html',

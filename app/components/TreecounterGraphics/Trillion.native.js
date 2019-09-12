@@ -63,8 +63,6 @@ class Trillion extends PureComponent {
     };
   }
   componentDidMount() {
-    console.log('Requesting update');
-
     trillionCampaign()
       .then(({ data }) => {
         const svgData = {

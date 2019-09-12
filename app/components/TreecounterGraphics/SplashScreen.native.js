@@ -18,7 +18,7 @@ export default class SplashScreen extends Component {
   render() {
     return (
       <View style={styles.updateMainView}>
-        <Image source={update} style={styles.updateImage} />
+        <Image source={avatar} style={styles.updateImage} />
         <Text style={styles.updateTitle}>
           {' '}
           {i18n.t('label.updateRequired')}{' '}
@@ -26,17 +26,29 @@ export default class SplashScreen extends Component {
         <Text style={styles.updatePara}> {i18n.t('label.updatePara')} </Text>
 
         {Platform.OS === 'ios' ? (
-          <TouchableItem style={styles.updateButtonStyle}>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL('https://itunes.apple.com/app/id1444740626&mt=8')
+            }
+            style={styles.updateButtonStyle}
+          >
             <Text style={styles.updateButtonText}>
               {i18n.t('label.openAppStore')}
             </Text>
-          </TouchableItem>
+          </TouchableOpacity>
         ) : (
-          <TouchableItem style={styles.updateButtonStyle}>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL(
+                'https://play.app.goo.gl/?link=https://play.google.com/store/apps/details?id=org.pftp'
+              )
+            }
+            style={styles.updateButtonStyle}
+          >
             <Text style={styles.updateButtonText}>
               {i18n.t('label.openPlayStore')}
             </Text>
-          </TouchableItem>
+          </TouchableOpacity>
         )}
       </View>
     );
@@ -62,8 +74,7 @@ const styles = StyleSheet.create({
   },
   updateImage: {
     width: 150,
-    height: 150,
-    marginTop: 10
+    height: 150
   },
   updatePara: {
     fontSize: 18,

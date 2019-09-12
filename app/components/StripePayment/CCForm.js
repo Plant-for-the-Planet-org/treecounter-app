@@ -55,21 +55,22 @@ const CCForm = props => (
             props.onChangeSelectedCard('new-card');
           }}
         />
-        <CardElement
-          hidePostalCode={true}
-          {...createOptions(props.style.fontSize)}
-        />
+        <CardElement hidePostalCode {...createOptions(props.style.fontSize)} />
       </div>
-      <input
-        type="checkbox"
-        className="payment-save-later-checkbox"
-        name="save-for-later"
-        checked={props.saveForLater}
-        onChange={() => {
-          props.onClickSaveForLater('saveForLaterCC');
-        }}
-      />
-      Save for later
+      {props.currentUserProfile && props.chosenCard === 'new-card' ? (
+        <div>
+          <input
+            type="checkbox"
+            className="payment-save-later-checkbox"
+            name="save-for-later"
+            checked={props.saveForLater}
+            onChange={() => {
+              props.onClickSaveForLater('saveForLaterCC');
+            }}
+          />
+          Save for later
+        </div>
+      ) : null}
       <PrimaryButton onClick={props.onSubmitCCForm}>
         {i18n.t('label.pay')}
       </PrimaryButton>
@@ -88,5 +89,7 @@ CCForm.propTypes = {
   onClickSaveForLater: PropTypes.func,
   saveForLater: PropTypes.bool,
   cards: PropTypes.array,
+  chosenCard: PropTypes.string,
+  currentUserProfile: PropTypes.object,
   onChangeSelectedCard: PropTypes.func
 };

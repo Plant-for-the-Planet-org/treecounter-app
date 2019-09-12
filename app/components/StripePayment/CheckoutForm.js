@@ -13,7 +13,7 @@ class CheckoutForm extends React.Component {
     loading: false,
     saveForLaterCC: false,
     saveForLaterSEPA: false,
-    chosenCard: '',
+    chosenCard: 'new-card',
     cards: []
   };
 
@@ -161,6 +161,8 @@ class CheckoutForm extends React.Component {
             onClickSaveForLater={this.onClickSaveForLater}
             saveForLater={state.saveForLaterCC}
             cards={this.state.cards}
+            chosenCard={this.state.chosenCard}
+            currentUserProfile={this.props.currentUserProfile}
             onChangeSelectedCard={this.onChangeSelectedCard}
           />
         ) : (

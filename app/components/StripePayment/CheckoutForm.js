@@ -44,7 +44,6 @@ class CheckoutForm extends React.Component {
   };
 
   createPaymentMethod = async paymentDetails => {
-    this.props.setProgressModelState(true);
     try {
       //Create a payment method id for making request to the API
       const paymentMethodResponse = await this.props.stripe.createPaymentMethod(
@@ -69,6 +68,7 @@ class CheckoutForm extends React.Component {
   };
 
   handleSubmitCCPayment = async ev => {
+    this.props.setProgressModelState(true);
     ev.preventDefault();
 
     const paymentDetails = this.props.paymentDetails;

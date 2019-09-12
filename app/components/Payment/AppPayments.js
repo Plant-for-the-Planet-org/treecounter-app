@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import PaymentSelector from './PaymentSelector';
-import { payPost } from '../../actions/paymentAction';
 import { check_green, attention } from '../../assets';
 import TextBlock from '../Common/Text/TextBlock';
 import PrimaryButton from '../Common/Button/PrimaryButton';

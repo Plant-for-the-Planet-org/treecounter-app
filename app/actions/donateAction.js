@@ -23,7 +23,9 @@ import {
 
 export function fillCard() {
   return dispatch => {
-    let request = getAuthenticatedRequest('stripe_customer');
+    let request = getAuthenticatedRequest('stripe_customer', {
+      version: 'v1.3'
+    });
     return request;
   };
 }
@@ -31,7 +33,8 @@ export function fillCard() {
 export function attachCardToCostumer(paymentMethod) {
   return dispatch => {
     let request = postAuthenticatedRequest('stripe_paymentMethod_attach', {
-      paymentMethod
+      paymentMethod,
+      version: 'v1.3'
     });
     request.then(response => {
       console.log('method attached');
@@ -44,10 +47,12 @@ export function createPaymentDonation(plantProjectId, requestData, loggedIn) {
     dispatch(setProgressModelState(true));
     let request = loggedIn
       ? postAuthenticatedRequest('donationCreate_post', requestData, {
-          plantProject: plantProjectId
+          plantProject: plantProjectId,
+          version: 'v1.3'
         })
       : postRequest('donationCreatePublic_post', requestData, {
-          plantProject: plantProjectId
+          plantProject: plantProjectId,
+          version: 'v1.3'
         });
 
     request.then(response => {
@@ -62,10 +67,12 @@ export function createPaymentGift(plantProjectId, requestData, loggedIn) {
     dispatch(setProgressModelState(true));
     let request = loggedIn
       ? postAuthenticatedRequest('giftDonationCreate_post', requestData, {
-          plantProject: plantProjectId
+          plantProject: plantProjectId,
+          version: 'v1.3'
         })
       : postRequest('giftDonationCreatePublic_post', requestData, {
-          plantProject: plantProjectId
+          plantProject: plantProjectId,
+          version: 'v1.3'
         });
 
     request.then(response => {
@@ -79,10 +86,12 @@ export function handlePay(donationId, requestData, loggedIn) {
   return dispatch => {
     let request = loggedIn
       ? postAuthenticatedRequest('donationPay_post', requestData, {
-          donation: donationId
+          donation: donationId,
+          version: 'v1.3'
         })
       : postRequest('donationPayPublic_post', requestData, {
-          donation: donationId
+          donation: donationId,
+          version: 'v1.3'
         });
     return request;
   };
@@ -93,10 +102,12 @@ export function finalizeDonation(donationId, loggedIn) {
     dispatch(setProgressModelState(true));
     let request = loggedIn
       ? getAuthenticatedRequest('donationFinalize_get', {
-          donation: donationId
+          donation: donationId,
+          version: 'v1.3'
         })
       : getRequest('donationFinalizePublic_get', {
-          donation: donationId
+          donation: donationId,
+          version: 'v1.3'
         });
 
     request.then(response => {

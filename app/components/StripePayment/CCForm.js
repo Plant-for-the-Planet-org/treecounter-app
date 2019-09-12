@@ -40,10 +40,12 @@ const CCForm = props => (
       </span>
       <img className={props.style.arrow} src={payment_arrow} />
     </div>
-    <SavedPaymentCard
-      cards={props.cards}
-      onChangeSelectedCard={props.onChangeSelectedCard}
-    />
+    <div className={props.style.displayNone}>
+      <SavedPaymentCard
+        cards={props.cards}
+        onChangeSelectedCard={props.onChangeSelectedCard}
+      />
+    </div>
     <div className={props.style.displayNone}>
       <div className="flex">
         <input

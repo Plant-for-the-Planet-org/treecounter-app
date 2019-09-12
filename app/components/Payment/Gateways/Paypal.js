@@ -52,7 +52,7 @@ class Paypal extends React.Component {
     };
 
     const payment = () => {
-      paypal.rest.payment.create(mode, CLIENT, {
+      return paypal.rest.payment.create(mode, CLIENT, {
         transactions: [
           {
             amount: {
@@ -71,6 +71,19 @@ class Paypal extends React.Component {
       label: 'pay', // checkout | credit | pay | buynow | paypal | installment
       size: 'large' // small | medium | large | responsive
     };
+
+    // const onAuthorize = (data, actions) =>
+    //   actions.payment.execute().then(() => {
+    //     const payment = Object.assign({}, this.props.payment);
+    //     payment.paid = true;
+    //     payment.cancelled = false;
+    //     payment.payerID = data.payerID;
+    //     payment.paymentID = data.paymentID;
+    //     payment.paymentToken = data.paymentToken;
+    //     payment.returnUrl = data.returnUrl;
+    //     onSuccess(payment);
+    //   });
+
     const onAuthorize = data => {
       onSuccess(data);
     };

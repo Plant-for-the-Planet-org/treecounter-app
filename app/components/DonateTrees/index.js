@@ -114,6 +114,9 @@ export default class DonateTrees extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    let state = {
+      showSelectProject: !nextProps.selectedProject
+    };
     if (nextProps.selectedProject) {
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
@@ -419,7 +422,7 @@ export default class DonateTrees extends Component {
             <div className="payment-success">
               <img src={attention} />
               <div className={'gap'} />
-              <TextBlock strong={true}>
+              <TextBlock strong>
                 {i18n.t('label.error') + ' ' + this.props.paymentStatus.message}
               </TextBlock>
               <div className={'gap'} />
@@ -435,7 +438,7 @@ export default class DonateTrees extends Component {
             <div className="payment-success">
               <img src={check_green} />
               <div className={'gap'} />
-              <TextBlock strong={true}>
+              <TextBlock strong>
                 {i18n.t('label.thankyou_planting', {
                   count: this.state.treeCount
                 })}
@@ -472,7 +475,7 @@ export default class DonateTrees extends Component {
                       expanded={false}
                       plantProject={this.props.selectedProject}
                       tpoName={this.props.selectedTpo.name}
-                      selectAnotherProject={true}
+                      selectAnotherProject
                       projectClear={this.props.plantProjectClear}
                     />
                   ) : null}

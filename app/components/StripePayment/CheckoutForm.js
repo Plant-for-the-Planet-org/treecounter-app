@@ -82,8 +82,9 @@ class CheckoutForm extends React.Component {
     } else {
       paymentMethodId = this.state.cards[this.state.chosenCard].id;
     }
-
-    this.handlePayment(paymentMethodId);
+    if (paymentMethodId) {
+      this.handlePayment(paymentMethodId);
+    }
   };
 
   handlePayment = paymentMethodId => {

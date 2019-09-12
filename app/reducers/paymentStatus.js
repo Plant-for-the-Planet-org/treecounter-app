@@ -21,7 +21,7 @@ const paymentStatusReducer = handleActions(
       return { ...state, ...action.payload };
     },
     [paymentCleared]: (state, action) => {
-      return initialState;
+      return { ...initialState, contribution: state.contribution };
     }
   },
   initialState

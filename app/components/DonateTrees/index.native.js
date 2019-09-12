@@ -104,11 +104,11 @@ export default class DonateTrees extends React.PureComponent {
       nextProps.paymentStatus &&
       nextProps.paymentStatus.contribution &&
       nextProps.paymentStatus.contribution[0] &&
-      nextProps.paymentStatus.contribution[0].id
+      nextProps.paymentStatus.contribution[0].token
     ) {
       this.openGateWay(
         getLocalRoute('app_payment', {
-          donationContribution: nextProps.paymentStatus.contribution[0].id
+          donationContribution: nextProps.paymentStatus.contribution[0].token
         })
       );
     }

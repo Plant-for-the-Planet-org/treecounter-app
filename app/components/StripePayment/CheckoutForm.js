@@ -132,7 +132,14 @@ class CheckoutForm extends React.Component {
     const confirmPaymentIntentResponse = await stripe.handleCardAction(
       paymentIntentClientSecret
     );
-    this.props.finalizeDonation(donationId, this.props.currentUserProfile);
+    if (confirmPaymentIntentResponse.error) {
+      this.props.paymentFailed({
+        status: false,
+        message: confirmPaymentIntentResponse.error.message || 'Error'
+      });
+    } else {
+      this.props.finalizeDonation(donationId, this.props.currentUserProfile);
+    }
   };
 
   handleArrowClick = number => {

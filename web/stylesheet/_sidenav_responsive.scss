@@ -33,26 +33,42 @@ $breakpointTablet: 768px;
     margin-left: 0 !important;
   }
 }
-
-.bottom-banner {
+.badge-wrapper {
+  max-height: 100px;
+  max-width: 98%;
   display: flex;
-  padding: 3px;
-  align-self: flex-end;
-  flex-grow: 1;
-  margin-top: auto;
+  flex-wrap: wrap;
   position: relative;
   bottom: 0;
-  max-width: 100%;
+  flex-direction: row;
   a {
-    max-width: 50%;
+    max-width: 100%;
     img {
       max-width: 99%;
       height: 36px;
     }
   }
+  .global-selector {
+    display: flex; 
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+  }
+  .global-selector > div {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      padding: 2px;
+      select{
+        height: 2.3rem
+      }
+  }
+.language { width: 60%;}
+.currency {  width: 40%; }
+
 }
 @media only screen and (min-width: 1400px) {
-  .bottom-banner {
+  .badge-wrapper {
     position: absolute;
   }
 }

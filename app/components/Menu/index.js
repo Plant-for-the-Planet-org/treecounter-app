@@ -8,6 +8,7 @@ import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import { getLocale } from '../../actions/getLocale';
+import GlobalCurrencySelector from '../Currency/GlobalCurrencySelector';
 
 let userLang = getLocale(); // en|de
 export default class Menu extends Component {
@@ -140,19 +141,37 @@ export default class Menu extends Component {
           </div>
         ))}
         {this.props.userProfile ? this.renderShareButtons() : null}
-        <div className="bottom-banner">
-          <a
-            target="_blank"
-            href="https://apps.apple.com/app/plant-for-the-planet/id1444740626"
-          >
-            <img src={images['appleStoreBadge_' + userLang]} />
-          </a>
-          <a
-            target="_blank"
-            href="https://play.google.com/store/apps/details?id=org.pftp"
-          >
-            <img src={images['googlePlayBadge_' + userLang]} />
-          </a>
+
+        <div className="badge-wrapper">
+          <div className="global-selector language">
+            <div>
+              <select>
+                <option>English</option>
+                <option>German</option>
+              </select>
+            </div>
+          </div>
+          <GlobalCurrencySelector />
+          <div className="global-selector">
+            <div>
+              <a
+                target="_blank"
+                href="https://apps.apple.com/app/plant-for-the-planet/id1444740626"
+              >
+                <img src={images['appleStoreBadge_' + userLang]} />
+              </a>
+            </div>
+          </div>
+          <div className="global-selector">
+            <div>
+              <a
+                target="_blank"
+                href="https://play.google.com/store/apps/details?id=org.pftp"
+              >
+                <img src={images['googlePlayBadge_' + userLang]} />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     );

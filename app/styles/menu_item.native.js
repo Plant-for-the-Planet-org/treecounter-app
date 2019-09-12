@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-export default (menuStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'flex-start',
@@ -103,4 +103,4 @@ export default (menuStyles = EStyleSheet.create({
     color: '$colorPrimaryAccentLight',
     fontSize: 10
   }
-}));
+});

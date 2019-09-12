@@ -50,7 +50,6 @@ import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
 import PrivacyContainer from '../../containers/Privacy';
 import ImprintContainer from '../../containers/Imprint';
-import DownloadAppModal from '../DownloadAppStore';
 import AppPaymentContainer from '../../containers/AppPayment';
 import BodyErrorBoundary from '../ErrorBoundry/bodyErrorBoundry';
 import PageNotFound from '../ErrorBoundry/404';
@@ -58,8 +57,7 @@ import WidgetShareContainer from '../../containers/WidgetsShare';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPublicDenyEmail';
 import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
-//test stripe payments
-import StripePaymentContainer from '../../containers/StripePayment';
+import { initLocale } from '../../actions/getLocale';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -81,6 +79,7 @@ class TreeCounter extends Component {
       isAndroid: IS_ANDROID,
       isCancelled: false
     };
+    initLocale();
   }
 
   _appRoutes = undefined;
@@ -197,7 +196,6 @@ class TreeCounter extends Component {
               path={getLocalRoute('app_login')}
               component={LoginContainer}
             />
-            <PublicRoute path={'/stripe'} component={StripePaymentContainer} />
             <PublicRoute
               path={getLocalRoute('app_forgotPassword')}
               component={ForgotPasswordContainer}
@@ -333,14 +331,6 @@ class TreeCounter extends Component {
           <div className="app-container">
             <ProgressModal isOpen={this.props.progressModel} />
 
-            {window.location.pathname.indexOf('donation-payment') > -1 ||
-            window.location.pathname.indexOf('account-activate') > -1 ||
-            window.location.pathname.indexOf('signup') > -1 ? null : (
-              <DownloadAppModal
-                isOpen={this.state.isIOS && !this.state.isCancelled}
-                continueOnSite={this.continueOnSite.bind(this)}
-              />
-            )}
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             {this._appRoutes}

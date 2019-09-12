@@ -1,7 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 
-export default (publicPageStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -32,4 +32,4 @@ export default (publicPageStyles = EStyleSheet.create({
   supportText: {
     color: '#ec6453'
   }
-}));
+});

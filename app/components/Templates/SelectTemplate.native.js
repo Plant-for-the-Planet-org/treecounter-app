@@ -59,7 +59,6 @@ class SelectTemplateIOS extends React.PureComponent {
 
     if (filteredValue && filteredValue.length > 0) {
       formattedValue = i18n.t(filteredValue[0].text);
-    } else {
     }
     if (Platform.OS === 'android') {
       return (
@@ -232,7 +231,7 @@ export function getSelectTemplate(enumOption) {
     const stylesheet = locals.stylesheet;
     // let formGroupStyle = stylesheet.formGroup.normal;
     // let controlLabelStyle = stylesheet.controlLabel.normal;
-    // let helpBlockStyle = stylesheet.helpBlock.normal;
+    let helpBlockStyle = stylesheet.helpBlock.normal;
     const errorBlockStyle = stylesheet && stylesheet.errorBlock;
 
     // if (locals.hasError) {

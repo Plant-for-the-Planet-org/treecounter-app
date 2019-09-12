@@ -11,6 +11,7 @@ import { delimitNumbers } from '../../utils/utils';
 import moment from 'moment';
 import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
+import { getLocale } from '../../actions/getLocale';
 import { getDateFromMySQL } from '../../helpers/utils';
 
 export default class ContributionCard extends React.Component {
@@ -22,7 +23,7 @@ export default class ContributionCard extends React.Component {
       viewExpanded: false,
       openDialog: false
     };
-    moment.locale(i18n.language);
+    moment.locale(getLocale());
   }
 
   closeLightbox = () => this.setState({ lightboxIsOpen: false });
@@ -107,7 +108,7 @@ export default class ContributionCard extends React.Component {
   };
 
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
-    return redemptionCode && giver
+    return redemptionCode && givee
       ? [
           <TextSpan>
             {i18n.t('label.given_on_by', {
@@ -235,9 +236,7 @@ export default class ContributionCard extends React.Component {
           }`}
         >
           <div className="contribution-container__left-column">
-            {treeCountLine ? (
-              <TextSpan strong={true}>{treeCountLine}</TextSpan>
-            ) : null}
+            {treeCountLine ? <TextSpan strong>{treeCountLine}</TextSpan> : null}
 
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {donateActionLine ? (
@@ -326,9 +325,7 @@ export default class ContributionCard extends React.Component {
           }`}
         >
           <div className="contribution-container__left-column">
-            {treeCountLine ? (
-              <TextSpan strong={true}>{treeCountLine}</TextSpan>
-            ) : null}
+            {treeCountLine ? <TextSpan strong>{treeCountLine}</TextSpan> : null}
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {plantActionLine ? <TextSpan>{plantActionLine}</TextSpan> : null}
             {dedicateActionLine ? (
@@ -439,9 +436,7 @@ export default class ContributionCard extends React.Component {
           }`}
         >
           <div className="contribution-container__left-column">
-            {treeCountLine ? (
-              <TextSpan strong={true}>{treeCountLine}</TextSpan>
-            ) : null}
+            {treeCountLine ? <TextSpan strong>{treeCountLine}</TextSpan> : null}
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {redeemActionLine ? <TextSpan>{redeemActionLine}</TextSpan> : null}
             {tpoLine ? <TextSpan>{tpoLine}</TextSpan> : null}

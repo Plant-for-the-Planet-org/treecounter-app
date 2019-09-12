@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (filledTabBar = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     flex: 1
   },
@@ -38,4 +38,4 @@ export default (filledTabBar = EStyleSheet.create({
       fontSize: '.8rem'
     }
   }
-}));
+});

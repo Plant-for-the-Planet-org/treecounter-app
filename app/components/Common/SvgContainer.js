@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 
 import { svgBackground } from '../../assets';
@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // import TargetComment from '../TreecounterGraphics/TargetComment';
 // import PlantDetails from '../TreecounterGraphics/PlantDetails';
 
-export default class SvgContainer extends Component {
+export default class SvgContainer extends PureComponent {
   constructor(props) {
     super(props);
     const { exposeMissing } = this.props;
@@ -286,17 +286,17 @@ export default class SvgContainer extends Component {
   }
 
   renderTreesById(treeIds, type, group) {
-    // filter out already rendered trees
-    let newTreeIds = treeIds.filter(
-      treeId => !this.renderedTreeIds.includes(treeId)
-    );
+    if (treeIds) {
+      // filter out already rendered trees
+      let newTreeIds = treeIds.filter(
+        treeId => !this.renderedTreeIds.includes(treeId)
+      );
 
-    newTreeIds.map(function(treeId) {
-      this.renderedTreeIds.push(treeId); // mark tree as rendered
-      this.setTreeStatus(treeId, type, group); // update tree state
-    }, this);
-
-    this.forceUpdate();
+      newTreeIds.map(function(treeId) {
+        this.renderedTreeIds.push(treeId); // mark tree as rendered
+        this.setTreeStatus(treeId, type, group); // update tree state
+      }, this);
+    }
   }
 
   convertTreesToAngle(trees, total, maxAngle) {

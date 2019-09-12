@@ -19,5 +19,20 @@
   "continue_on_site": "Weiter auf der Website",
   "error": "Fehler",
   "success": "Erfolg",
-  "congrats": "Glückwunsch"
+  "congrats": "Glückwunsch",
+  "plant_for_the_planet_app": "Plant-for-the-Planet App",
+  "a_solution_for_climate_crisis": "Eine Lösung für die Klimakrise",
+  "get_app_button_text": "LOS",
+  "thousand_singular": "Tausend",
+  "thousand_plural": "Tausend",
+  "million_singular": "Million",
+  "million_plural": "Millionen",
+  "billion_singular": "Milliarde",
+  "billion_plural": "Milliarden",
+  "trillion_singular": "Billion",
+  "trillion_plural": "Billionen",
+  "quadrillion_singular": "Billiarde",
+  "quadrillion_plural": "Billiarden",
+  "quintillion_singular": "Trillion",
+  "quintillion_plural": "Trillionen"
 }

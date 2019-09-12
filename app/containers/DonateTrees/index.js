@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -29,31 +29,35 @@ import { updateRoute } from '../../helpers/routerHelper';
 import DonateTrees from '../../components/DonateTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 
-class DonationTreesContainer extends Component {
+class DonationTreesContainer extends PureComponent {
   componentDidMount() {
     let selectedProjectId = undefined;
     if (this.props.match) {
       selectedProjectId = parseInt(this.props.match.params.id);
     }
+    // this causes a redraw
     typeof selectedProjectId == 'number' &&
       this.props.selectPlantProjectAction(selectedProjectId);
-    this.props.fetchCurrencies();
+
+    if (!this.props.currencies.currencies) {
+      this.props.fetchCurrencies();
+    }
     // console.log('In donate Tree Route' + this.props.navigation);
     // console.log(this.props.navigation);
   }
 
-  onTabChange(title) {
-    this.props.navigation.setParams({ titleParam: title });
-  }
+  onTabChange = title => this.props.navigation.setParams({ titleParam: title });
+
+  updateRoute = (routeName, id) =>
+    this.props.route(routeName, id, this.props.navigation);
+
+  donate = (donationContribution, plantProjectId, profile) =>
+    this.props.donate(donationContribution, plantProjectId, profile);
+
   render() {
-    let flag = this.props.currentUserProfile ? true : false;
-    // console.log('donate tree called');
     return (
       <DonateTrees
         ref={'donateTreesContainer'}
-        selectedProject={this.props.selectedProject}
-        selectedTpo={this.props.selectedTpo}
-        currentUserProfile={this.props.currentUserProfile}
         currencies={this.props.currencies}
         donate={(donationContribution, plantProjectId, profile) =>
           this.props.donate(donationContribution, plantProjectId, profile)
@@ -65,12 +69,14 @@ class DonationTreesContainer extends Component {
         supportTreecounter={this.props.supportTreecounter}
         paymentStatus={this.props.paymentStatus}
         paymentClear={this.props.paymentClear}
-        setProgressModelState={this.props.setProgressModelState}
+        paymentStatus={this.props.paymentStatus}
         plantProjectClear={this.props.clearPlantProject}
-        loadUserProfile={this.props.loadUserProfile}
-        updateRoute={(routeName, id) =>
-          this.props.route(routeName, id, this.props.navigation)
-        }
+        selectedProject={this.props.selectedProject}
+        selectedTpo={this.props.selectedTpo}
+        setProgressModelState={this.props.setProgressModelState}
+        supportTreecounter={this.props.supportTreecounter}
+        updateRoute={this.updateRoute}
+        updateUserProfile={this.props.updateUserProfile}
         {...this.props}
       />
     );

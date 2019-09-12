@@ -1,9 +1,28 @@
 import { getLanguages } from 'react-native-i18n';
 
-export async function getLocale() {
-  let locale = await getLanguages().then(languages => {
-    return languages[0].split('-')[0]; // ['en-US', 'en']
-  });
+let cache = { locale: undefined };
+
+/**
+ * Call this when the app starts up
+ * so that locale is cached. Most important
+ * on react-native where getting languages is slower.
+ */
+export async function initLocale() {
+  cache.locale = await guessLocale();
+}
+
+export function getLocale() {
+  // console.log('getLocale', cache.locale);
+  if (!cache.locale) {
+    initLocale();
+  }
+  return cache.locale;
+}
+
+async function guessLocale() {
+  let languages = await getLanguages();
+
+  let locale = languages[0].split('-')[0]; // ['en-US', 'en']
   if (locale === 'en' || locale === 'de') {
     return locale;
   } else {

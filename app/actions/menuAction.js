@@ -1,6 +1,15 @@
-import { getRequest, getAuthenticatedRequest } from '../utils/api';
+import { normalize } from 'normalizr';
+
 import { debug } from '../debug';
 import i18n from '../locales/i18n.js';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
+import { mergeEntities } from '../reducers/entitiesReducer';
+import { plantProjectSchema } from '../schemas';
+import {
+  getAuthenticatedRequest,
+  getRequest,
+  putAuthenticatedRequest
+} from '../utils/api';
 
 export function MenuAction(isAuthenticated = false) {
   return isAuthenticated

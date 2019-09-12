@@ -1,13 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-  FlatList
-} from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 import challengesStyle from '../../styles/challenge';
 
@@ -20,11 +13,12 @@ import { upwardArrow, downwardArrow } from '../../assets/index.js';
 import moment from 'moment';
 import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
+import { getLocale } from '../../actions/getLocale';
 
 export default class ChallengeCard extends React.Component {
   constructor(props) {
     super(props);
-    moment.locale(i18n.language);
+    moment.locale(getLocale());
   }
 
   render() {
@@ -55,7 +49,7 @@ export default class ChallengeCard extends React.Component {
             <View style={challengesStyle.flexStyle}>
               <UserProfileImage
                 profileImage={avatar}
-                style={styles.profileImage}
+                style={challengesStyle.profileImage}
                 imageStyle={{ width: 40, height: 40, borderRadius: 40 / 2 }}
               />
               <View>

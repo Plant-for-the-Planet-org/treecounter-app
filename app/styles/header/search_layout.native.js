@@ -1,7 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 
-export default (styles = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     // flex: 1,
     backgroundColor: '$primary'
@@ -25,4 +25,4 @@ export default (styles = EStyleSheet.create({
     color: '#b9d384',
     width: '97%'
   }
-}));
+});

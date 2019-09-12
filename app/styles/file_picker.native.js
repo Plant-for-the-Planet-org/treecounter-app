@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (datePickerStyle = EStyleSheet.create({
+export default EStyleSheet.create({
   filePickerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -35,4 +35,4 @@ export default (datePickerStyle = EStyleSheet.create({
     height: 15,
     transform: [{ rotate: '45deg' }]
   }
-}));
+});

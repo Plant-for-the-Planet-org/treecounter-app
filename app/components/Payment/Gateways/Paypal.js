@@ -50,18 +50,20 @@ class Paypal extends React.Component {
       [mode]: account.authorization.client_id
     };
 
-    const payment = () =>
+    const payment = () => {
       // eslint-disable-next-line react/prop-types
-      paypal.rest.payment.create(mode, CLIENT, {
-        transactions: [
-          {
-            amount: {
-              total: Math.round(amount * 100) / 100,
-              currency
-            }
-          }
-        ]
-      });
+      throw new Error('paypal library missing import');
+      // paypal.rest.payment.create(mode, CLIENT, {
+      //   transactions: [
+      //     {
+      //       amount: {
+      //         total: Math.round(amount * 100) / 100,
+      //         currency
+      //       }
+      //     }
+      //   ]
+      // });
+    };
 
     // see https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4/customize-button/
     const buttonStyle = {

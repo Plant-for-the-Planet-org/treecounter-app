@@ -12,6 +12,8 @@ import Offline from './Gateways/Offline';
 import { handlePay, finalizeDonation } from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 import { paymentFailed } from '../../reducers/paymentStatus';
+import i18n from '../../locales/i18n';
+import { formatNumber, delimitNumbers } from '../../utils/utils';
 
 class PaymentSelector extends Component {
   constructor(props) {

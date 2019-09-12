@@ -12,6 +12,7 @@ import { getImageUrl } from '../../actions/apiRouting';
 import PlantedProgressBar from './PlantedProgressbar';
 import { tick } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
+import { formatNumber } from '../../utils/utils';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -153,7 +154,7 @@ class PlantProjectFull extends React.Component {
             <PlantProjectSpecs {...specsProps} />
           </div>
           <div className="project-specs__cost">
-            {specsProps.currency} {specsProps.treeCost}
+            {formatNumber(specsProps.treeCost, null, specsProps.currency)}
           </div>
         </div>
         <div className="project-action-links">

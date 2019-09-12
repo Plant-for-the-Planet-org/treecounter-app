@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (currentSelectorStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   containerStyle: {
     paddingBottom: 20
   },
@@ -16,4 +16,4 @@ export default (currentSelectorStyles = EStyleSheet.create({
     textAlign: 'left',
     fontSize: 16
   }
-}));
+});

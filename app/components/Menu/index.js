@@ -35,7 +35,7 @@ const customStyles = {
   }),
   container: provided => ({
     ...provided,
-    width: '150px',
+    width: '135px',
     display: 'flex',
     cursor: 'pointer'
   }),
@@ -52,13 +52,24 @@ const customStyles = {
     width: '150px'
   }),
   singleValue: (provided, state) => {
-    return { ...provided, border: 0, width: '150px', display: 'flex' };
+    return {
+      ...provided,
+      border: 0,
+      width: '150px',
+      display: 'flex',
+      marginLeft: 0,
+      color: 'rgba(0, 0, 0, 0.54)',
+      fontSize: '17px'
+    };
+  },
+  valueContainer: provided => {
+    return { ...provided, padding: 0 };
   }
 };
 
 const statusOptions = [
   { value: 'en', label: 'English', icon: images.worldImg },
-  { value: 'de', label: 'Deutsch', icon: images.germanyFlag }
+  { value: 'de', label: 'Deutsch', icon: images.germany }
 ];
 
 let userLang = getLocale(); // en|de

@@ -23,7 +23,7 @@ class Paypal extends React.Component {
     const { isScriptLoaded, isScriptLoadSucceed } = this.props;
 
     if (isScriptLoaded && isScriptLoadSucceed) {
-      //this.setState({ showButton: true });
+      this.setState({ showButton: true });
     }
   }
 

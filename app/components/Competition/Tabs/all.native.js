@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View, Image } from 'react-native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
@@ -7,6 +7,7 @@ import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
 import FeaturedCompetitions from './featured.native';
+import { trees } from './../../../assets';
 
 export default class AllCompetitions extends Component {
   constructor(props) {
@@ -72,6 +73,34 @@ export default class AllCompetitions extends Component {
           { paddingBottom: 72 }
         ]}
       >
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            margin: 20,
+            marginBottom: 0
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 14,
+              fontWeight: 'normal',
+              fontStyle: 'normal',
+              lineHeight: 21,
+              letterSpacing: 0,
+              textAlign: 'left',
+              color: '#4d5153',
+              maxWidth: '70%'
+            }}
+          >
+            Select a competition to join and start planting trees
+          </Text>
+          <Image
+            source={trees}
+            style={{ height: 60, flex: 1 }}
+            resizeMode="contain"
+          />
+        </View>
         {featuredCompetitions.length > 0
           ? featuredCompetitions.map(project => (
               <CompetitionSnippet

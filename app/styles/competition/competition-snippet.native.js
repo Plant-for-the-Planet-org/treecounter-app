@@ -12,13 +12,6 @@ const rowHeight = 20;
 export default (selectCompetitionFull = EStyleSheet.create({
   projectSnippetContainer: {
     flexDirection: 'column',
-
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 3
-    // },
-    // shadowOpacity: 0.5,
-    // elevation: 1,
     padding: 0,
     borderRadius: 7,
     borderStyle: 'solid',

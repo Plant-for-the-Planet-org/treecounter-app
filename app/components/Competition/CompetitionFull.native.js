@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
 import styles from '../../styles/competition/competition-full.native';
-//import snippetStyles from '../../styles/competition/competition-snippet.native';
+// import snippetStyles from '../../styles/competition/competition-snippet.native';
 import CardLayout from '../Common/Card';
 import { ScrollView } from 'react-native';
 import scrollStyle from '../../styles/common/scrollStyle';
@@ -28,6 +28,9 @@ import i18n from '../../locales/i18n.js';
 import { getLocale } from '../../actions/getLocale';
 import { getDateFromMySQL } from '../../helpers/utils';
 import { Dimensions } from 'react-native';
+import { trees } from './../../assets';
+import { getLocalRoute } from '../../actions/apiRouting';
+
 const Layout = {
   window: {
     height: Dimensions.get('window').height - (56 + 70 + 20),
@@ -60,6 +63,7 @@ class CompetitionFull extends React.Component {
     let status = '',
       button = null;
     const competitionDetail = this.props.competitionDetail;
+    console.log(competitionDetail);
     let participantCount = 0,
       requestCount = 0,
       inviteCount = 0,
@@ -273,6 +277,39 @@ class CompetitionFull extends React.Component {
                   {/* Compeition Buttons Ends */}
                 </View>
               </View>
+
+              {/* Donate Card */}
+              <CardLayout style={[snippetStyles.cardContainer]}>
+                <Text
+                  style={[snippetStyles.googleCardTitle, { textAlign: 'left' }]}
+                >
+                  {i18n.t('label.plant_trees')}
+                </Text>
+                <View style={snippetStyles.googleCardParaContainer}>
+                  <Text style={snippetStyles.googleCardPara}>
+                    {i18n.t(
+                      'This competition supports Yucatation Reforestation by Plant -for-the-Planet'
+                    )}
+                  </Text>
+                  <Image
+                    source={trees}
+                    style={{ height: 60, flex: 1 }}
+                    resizeMode="contain"
+                  />
+                </View>
+                <View style={snippetStyles.horizontalLine} />
+                <TouchableOpacity
+                  style={{ width: '100%' }}
+                  onPress={() =>
+                    navigation.navigate(getLocalRoute('app_donateTrees'))
+                  }
+                >
+                  <Text style={snippetStyles.googleCardButton}>
+                    {i18n.t('Donate Now')}
+                  </Text>
+                </TouchableOpacity>
+              </CardLayout>
+              {/* Donate Card Ends */}
             </View>
             {/* Compeition Information Ended  */}
 
@@ -288,7 +325,7 @@ class CompetitionFull extends React.Component {
                     </Text>
                     {/* Participant Total Count Ends */}
                   </View>
-                  <View style={styles.topCompetitorContainer}>
+                  <View style={snippetStyles.topCompetitorContainer}>
                     <View>
                       {/* Participant Details */}
                       {competitionDetail.allEnrollments.map(
@@ -494,13 +531,6 @@ CompetitionFull.propTypes = {
 };
 
 const snippetStyles = StyleSheet.create({
-  projectSnippetContainer: {
-    flexDirection: 'column',
-    padding: 0,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#d5d5d5'
-  },
   projectSnippetContainerN: {
     flexDirection: 'column',
     padding: 0
@@ -573,10 +603,6 @@ const snippetStyles = StyleSheet.create({
     height: rowHeight * 2,
     padding: 5
   },
-  locationContainer: {
-    flexDirection: 'column'
-  },
-  costContainer: { flexDirection: 'row' },
   actionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -715,59 +741,57 @@ const snippetStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   },
-  topCompetitorSection: {
+
+  // Card Styles
+  cardContainer: {
+    flexDirection: 'column',
     flex: 1,
-    flexDirection: 'row',
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 10,
-    width: '100%',
-    justifyContent: 'space-between'
+    borderRadius: 7,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#d5d5d5',
+    padding: 16,
+    marginBottom: 40
   },
-  topCompetitorName: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    width: '100%'
-  },
-  topCompetitorScore: {
-    width: '10%',
-    alignItems: 'flex-end'
-  },
-  topCompetitorScoreText: {
-    fontSize: 11,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 16,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: 'rgba(0, 0, 0, 0.6)',
-    marginLeft: 10
-  },
-  topCompetitorRank: {
-    fontSize: 12,
+  googleCardTitle: {
+    fontSize: 17,
     fontWeight: '600',
     fontStyle: 'normal',
-    lineHeight: 17,
-    letterSpacing: 1.2,
+    lineHeight: 23,
+    letterSpacing: 0,
     textAlign: 'left',
-    color: 'rgba(0, 0, 0, 0.6)'
+    color: '#4d5153'
   },
-  topCompetitorDiv: {
+  googleCardPara: {
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    flex: 3,
+    marginRight: 20
+  },
+  googleCardButton: {
+    fontSize: 14,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#89b53a',
+    marginTop: 16
+  },
+  googleCardParaContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 14,
+    marginBottom: 14
+  },
+  horizontalLine: {
+    borderColor: '#d5d5d5',
     width: '100%',
-    paddingLeft: 10,
-    paddingRight: 10,
-    height: 3
-  },
-  horizontalRule: {
-    borderBottomColor: '#f1f1f1',
-    borderBottomWidth: 2,
-    marginTop: 10
-  },
-  profileImageStyle: {
-    width: 30,
-    height: 30,
-    borderRadius: 0,
-    borderWidth: 0,
-    marginLeft: 10
+    borderBottomWidth: 1
   }
 });

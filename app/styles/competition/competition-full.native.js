@@ -82,13 +82,6 @@ export default (selectedCompetitionFull = EStyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   },
-  topCompetitorSection: {
-    flex: 1,
-    flexDirection: 'row',
-    padding: 16,
-    width: '100%',
-    justifyContent: 'space-between'
-  },
   topCompetitorName: {
     width: '60%',
     alignItems: 'center',

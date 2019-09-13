@@ -1,111 +1,13 @@
 import React, { Component } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/competition/mine.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
-import imagestyles from '../../../styles/file_picker.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import ActionButton from 'react-native-action-button';
-import CardLayout from '../../Common/Card';
 import PropTypes from 'prop-types';
-import t from 'tcomb-form-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {
-  competitionFormSchema,
-  competitionFormSchemaOptions
-} from '../../../server/parsedSchemas/competition';
 import i18n from '../../../locales/i18n';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
-import UserProfileImage from '../../Common/UserProfileImage';
 import close_green from '../../../assets/images/icons/close_green.png';
-import imageUpload from '../../../assets/images/icons/upload_image.png';
-
-let Form = t.form.Form;
-const ImagePicker = require('react-native-image-picker');
-const options = {
-  title: 'Add Image',
-  storageOptions: {
-    skipBackup: true,
-    path: 'images'
-  }
-};
-const getCompFormLayoutTemplate = () => {
-  const formLayoutTreesTemplate = locals => {
-    return (
-      <View style={styles.competitonCreateMain}>
-        {locals.inputs.name}
-        <View style={styles.competition_create_row}>
-          <View style={{ flex: 1 }}>{locals.inputs.goal}</View>
-          <View style={{ flex: 1 }}>{locals.inputs.endDate}</View>
-        </View>
-        <View style={styles.competition_create_row}>
-          <View style={{ flex: 1 }}>{locals.inputs.access}</View>
-        </View>
-        <View style={styles.competition_image}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.addImageTextStyle}>
-              {i18n.t('label.add_image')}
-            </Text>
-          </View>
-          <View style={{ flex: 1 }}>{locals.input.imageFile}</View>
-        </View>
-        {locals.inputs.description}
-      </View>
-    );
-  };
-  return formLayoutTreesTemplate;
-};
-const getCompFormImageLayoutTemplate = () => {
-  console.log('formlayout');
-  const formLayoutTreesTemplate = locals => {
-    console.log(locals);
-    return (
-      <View style={imagestyles.filePickerContainer}>
-        <View style={{ flex: 1 }}>
-          <Text style={styles.addImageTextStyle}>
-            {i18n.t('label.add_image')}
-          </Text>
-        </View>
-        <TouchableOpacity
-          style={{ flex: 1 }}
-          onPress={event => {
-            ImagePicker.showImagePicker(options, response => {
-              // console.log('Response = ', response);
-
-              if (response.didCancel) {
-                //console.log('User cancelled image picker');
-              } else if (response.error) {
-                //console.log('ImagePicker Error: ', response.error);
-              } else if (response.customButton) {
-                // console.log('User tapped custom button: ', response.customButton);
-              } else {
-                let source = { uri: response.uri };
-                locals.onChange('data:image/jpeg;base64,' + response.data);
-              }
-            });
-          }}
-        >
-          {!locals.value ? (
-            <Image source={imageUpload} style={{ height: 40, width: 40 }} />
-          ) : (
-            <View>
-              <UserProfileImage profileImage={locals.value} />
-              <View style={styles.profileImageBackground}>
-                <Image
-                  resizeMode="contain"
-                  style={imagestyles.addIcon}
-                  source={close_green}
-                />
-              </View>
-            </View>
-          )}
-        </TouchableOpacity>
-      </View>
-    );
-  };
-  return formLayoutTreesTemplate;
-};
+import { trees } from './../../../assets';
 
 export default class MineCompetitions extends Component {
   constructor(props) {
@@ -116,12 +18,11 @@ export default class MineCompetitions extends Component {
     this.state = {
       expanded: false,
       pageIndex: 0,
-      showCompetitionForm: true,
+      showCompetitionForm: false,
       featuredCompetitions: [],
       formValue: null
     };
     this.onActionButtonPress = this.onActionButtonPress.bind(this);
-    this.onCreateCompetition = this.onCreateCompetition.bind(this);
   }
 
   onActionButtonPress() {
@@ -184,38 +85,13 @@ export default class MineCompetitions extends Component {
       this.setState({
         featuredCompetitions: featuredCompetitions
       });
-      if (featuredCompetitions.length === 0) {
-        this.setState({
-          showCompetitionForm: true
-        });
-      } else {
-        this.setState({
-          showCompetitionForm: false
-        });
-      }
-    }
-  }
-
-  onCreateCompetition() {
-    if (this.createCompetition.refs.input.state.value) {
-      this.setState({
-        formValue: this.createCompetition.refs.input.state.value
-      });
-      this.props.onCreateCompetition(
-        this.createCompetition.refs.input.state.value,
-        this.createCompetition
-      );
     }
   }
 
   render() {
     let { featuredProjects, featuredCompetitions } = this.state;
-    let schemaOptions = this.props.competitionFormSchemaOptions;
-    if (schemaOptions.fields.imageFile) {
-      schemaOptions.fields.imageFile.template = getCompFormImageLayoutTemplate();
-    }
 
-    return !this.state.showCompetitionForm ? (
+    return (
       <View style={styles.mineContainer}>
         <ScrollView
           contentContainerStyle={[
@@ -223,6 +99,34 @@ export default class MineCompetitions extends Component {
             { paddingBottom: 72 }
           ]}
         >
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              margin: 20,
+              marginBottom: 0
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                fontWeight: 'normal',
+                fontStyle: 'normal',
+                lineHeight: 21,
+                letterSpacing: 0,
+                textAlign: 'left',
+                color: '#4d5153',
+                maxWidth: '70%'
+              }}
+            >
+              Select a competition to join and start planting trees
+            </Text>
+            <Image
+              source={trees}
+              style={{ height: 60, flex: 1 }}
+              resizeMode="contain"
+            />
+          </View>
           {featuredCompetitions.length > 0
             ? featuredCompetitions.map(project => (
                 <CompetitionSnippet
@@ -238,37 +142,13 @@ export default class MineCompetitions extends Component {
               ))
             : null}
         </ScrollView>
-        <ActionButton
+        {/* <ActionButton
           buttonColor="rgba(183, 211, 127, 1)"
           buttonTextStyle={styles.action_button}
           offsetY={72}
           onPress={() => this.onActionButtonPress()}
-        />
+        /> */}
       </View>
-    ) : (
-      <KeyboardAwareScrollView
-        contentContainerStyle={{ paddingBottom: 72 }}
-        enableOnAndroid={true}
-      >
-        <View style={styles.containerDedicateStyle}>
-          <View style={styles.dedicateTreeName}>
-            <Text style={styles.textDedicateStyle}>
-              {i18n.t('label.mine_create')}
-            </Text>
-          </View>
-        </View>
-        <CardLayout style={{ flex: 1 }}>
-          <Form
-            ref={this.createCompetitionForm}
-            type={competitionFormSchema}
-            options={schemaOptions}
-            value={this.state.formValue}
-          />
-          <PrimaryButton onClick={() => this.onCreateCompetition()}>
-            {i18n.t('label.create_competition')}
-          </PrimaryButton>
-        </CardLayout>
-      </KeyboardAwareScrollView>
     );
   }
 

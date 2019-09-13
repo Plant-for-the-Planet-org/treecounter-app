@@ -82,6 +82,7 @@ class CompetitionContainer extends React.Component {
         competitionFormSchemaOptions={this.state.competitionFormSchemaOptions}
         supportTreecounterAction={this.props.supportTreecounterAction}
         editCompetition={id => this.editCompetition(id)}
+        navigation={this.props.navigation}
       />
     );
   }

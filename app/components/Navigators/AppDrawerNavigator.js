@@ -52,6 +52,7 @@ import EditCompetitionContainer from '../../containers/EditCompetition';
 import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
 import PledgeEvents from './../PledgeEvents/PledgeEvents.native';
 import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
+import createCompeition from './../Competition/Tabs/createCompetition.native';
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -87,7 +88,8 @@ const headerLabels = {
   ['app_gift_projects']: 'label.gift_trees',
   ['pickup_profile_modal']: 'label.dedicate_trees_to',
   ['app_pledge_events']: 'Pledges',
-  ['app_pledge_form']: 'Pledge to plant a tree'
+  ['app_pledge_form']: 'Pledge to plant a tree',
+  ['app_create_competition']: 'Create Competition'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -156,6 +158,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_pledge_form']: {
         screen: MakePledgeForm
+      },
+      ['app_create_competition']: {
+        screen: createCompeition
       }
     },
     {

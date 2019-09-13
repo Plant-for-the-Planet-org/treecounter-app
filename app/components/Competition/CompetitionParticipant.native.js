@@ -87,7 +87,7 @@ class CompetitionParticipant extends React.Component {
       support_button = null;
     }
     return (
-      <View style={styles.topCompetitorSection}>
+      <View style={styles2.topCompetitorSection}>
         <View style={styles.topCompetitorName}>
           {/* User Profile Image */}
           <UserProfileImage
@@ -201,5 +201,13 @@ const styles2 = StyleSheet.create({
   },
   topCompetitorScore: {
     width: '40%'
+  },
+  topCompetitorSection: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 16,
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   }
 });

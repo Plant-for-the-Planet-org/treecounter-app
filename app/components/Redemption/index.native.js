@@ -6,16 +6,18 @@ import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n.js';
 import TouchableItem from '../../components/Common/TouchableItem';
 import {
-  redeemSignIn,
+  redeemSignIn, // Need to delete images from assets
   redeemRed,
   redeemGreen,
-  close_green
+  close_green,
+  redeemImage
 } from '../../assets';
 import styles from '../../styles/redeem';
-import { View, Image, TextInput, Text } from 'react-native';
+import { View, Image, TextInput, Text, TouchableOpacity } from 'react-native';
 import { updateRoute } from '../../helpers/routerHelper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import TabContainer from '../../containers/Menu/TabContainer';
+import { TextField } from 'react-native-material-textfield';
 
 export default class Redemption extends Component {
   constructor(props) {
@@ -44,7 +46,6 @@ export default class Redemption extends Component {
   render() {
     let content,
       button,
-      icon,
       errorText,
       successText,
       actionText,
@@ -86,73 +87,67 @@ export default class Redemption extends Component {
       this.props.codeStatus === 'error'
     ) {
       button = (
-        <View style={styles.buttonStyle}>
-          <PrimaryButton onClick={() => this.onValidationCode()}>
-            {i18n.t('label.validate_code')}
-          </PrimaryButton>
-        </View>
+        <TouchableOpacity
+          style={styles.validateCodeButton}
+          onClick={() => this.onValidationCode()}
+        >
+          <View style={styles.validateCodeButtonView}>
+            <Text style={styles.validateCodeButtonText}>
+              {i18n.t('label.validate_code')}
+            </Text>
+          </View>
+        </TouchableOpacity>
       );
-      icon = (
-        <Image
-          style={styles.imageStyle}
-          resizeMode="contain"
-          source={redeemRed}
-        />
-      );
-      // icon = redeemRed;
     } else if (this.props.pageStatus === 'code-unknown') {
       button = (
-        <View style={styles.buttonStyle}>
-          <PrimaryButton onClick={() => this.onValidationCode()}>
-            {i18n.t('label.validate_code')}
-          </PrimaryButton>
-        </View>
-      );
-      icon = (
-        <Image
-          style={styles.imageStyle}
-          resizeMode="contain"
-          source={redeemGreen}
-        />
+        <TouchableOpacity
+          style={styles.validateCodeButton}
+          onClick={() => this.onValidationCode()}
+        >
+          <View style={styles.validateCodeButtonView}>
+            <Text style={styles.validateCodeButtonText}>
+              {i18n.t('label.validate_code')}
+            </Text>
+          </View>
+        </TouchableOpacity>
       );
     } else if (this.props.pageStatus === 'not-logged-in') {
       button = (
         <View style={styles.loginButtons}>
-          <PrimaryButton
-            style={styles.loginButton1}
+          <TouchableOpacity
+            style={styles.validateCodeButton}
             onClick={this.props.loginButton}
           >
-            {i18n.t('label.login')}
-          </PrimaryButton>
-          <PrimaryButton
-            style={styles.loginButton1}
+            <View style={styles.validateCodeButtonView}>
+              <Text style={styles.validateCodeButtonText}>
+                {i18n.t('label.login')}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.validateCodeButton}
             onClick={this.props.signupButton}
           >
-            {i18n.t('label.signUp')}
-          </PrimaryButton>
+            <View style={styles.validateCodeButtonView}>
+              <Text style={styles.validateCodeButtonText}>
+                {i18n.t('label.signUp')}
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
-      );
-      icon = (
-        <Image
-          style={styles.imageLoginStyle}
-          resizeMode="contain"
-          source={redeemSignIn}
-        />
       );
     } else {
       button = (
-        <View style={styles.buttonStyle}>
-          <PrimaryButton onClick={() => this.onSetRedemption()}>
-            {this.props.buttonText}
-          </PrimaryButton>
-        </View>
-      );
-      icon = (
-        <Image
-          style={styles.imageStyle}
-          resizeMode="contain"
-          source={redeemGreen}
-        />
+        <TouchableOpacity
+          style={styles.validateCodeButton}
+          onClick={() => this.onSetRedemption()}
+        >
+          <View style={styles.validateCodeButtonView}>
+            <Text style={styles.validateCodeButtonText}>
+              {this.props.buttonText}
+            </Text>
+          </View>
+        </TouchableOpacity>
       );
     }
 
@@ -190,13 +185,16 @@ export default class Redemption extends Component {
     } else {
       form = null;
       button = (
-        <View className="row">
-          <PrimaryButton
-            onClick={() => updateRoute('app_myTrees', this.props.navigation)}
-          >
-            {this.props.buttonText}
-          </PrimaryButton>
-        </View>
+        <TouchableOpacity
+          style={styles.validateCodeButton}
+          onClick={() => updateRoute('app_myTrees', this.props.navigation)}
+        >
+          <View style={styles.validateCodeButtonView}>
+            <Text style={styles.validateCodeButtonText}>
+              {this.props.buttonText}
+            </Text>
+          </View>
+        </TouchableOpacity>
       );
     }
     let heading;
@@ -213,21 +211,41 @@ export default class Redemption extends Component {
       <View style={{ flex: 1 }}>
         <KeyboardAwareScrollView
           contentContainerStyle={{
-            paddingBottom: 72
+            paddingBottom: 72,
+            backgroundColor: '#fff'
           }}
         >
           <View style={styles.parentContainer}>
-            <CardLayout style={styles.cardContainer}>
+            <View style={styles.cardContainer}>
+              <Text style={styles.mainTitle}>Redeem Trees</Text>
               <Text style={styles.titleText}>
                 {i18n.t('label.redeem_heading')}
               </Text>
-            </CardLayout>
-            <CardLayout style={styles.cardContainer}>
-              {icon}
-              {content}
-              {form}
+            </View>
+            <View style={styles.cardContainer}>
+              <Image
+                style={styles.imageStyle}
+                resizeMode="contain"
+                source={redeemImage}
+              />
+              <View style={{ marginTop: 40 }}>
+                <TextField
+                  label={i18n.t('Please type Code to Redeem')}
+                  value={value}
+                  tintColor={'#89b53a'}
+                  titleFontSize={12}
+                  returnKeyType="next"
+                  lineWidth={1}
+                  blurOnSubmit={false}
+                  labelPadding={12}
+                  inputContainerPadding={12}
+                  onChangeText={value => this.setState({ value })}
+                />
+              </View>
+              {/* {form} */}
+
               {button}
-            </CardLayout>
+            </View>
           </View>
         </KeyboardAwareScrollView>
         <TabContainer {...this.props} />

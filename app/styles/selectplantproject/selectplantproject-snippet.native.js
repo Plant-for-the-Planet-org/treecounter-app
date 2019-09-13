@@ -11,6 +11,7 @@ const rowHeight = 20;
 
 export const flatListContainerStyle = {
   paddingBottom: 45,
+  flexGrow: 1,
   backgroundColor: '#ffffff'
 };
 export default EStyleSheet.create({

@@ -8,6 +8,10 @@ import { challenge_outline as targetPlanted } from '../../assets';
 import { delimitNumbers, convertNumber } from '../../utils/utils';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const flagIcon = <Icon name="flag" size={18} color="#ffffff" />;
+
 class PlantedProgressBar extends React.Component {
   constructor(props) {
     super(props);
@@ -80,7 +84,7 @@ class PlantedProgressBar extends React.Component {
             </Text>
 
             <View style={{ paddingLeft: 5.5, paddingRight: 12 }}>
-              <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
+              {flagIcon}
             </View>
           </View>
         ) : null}

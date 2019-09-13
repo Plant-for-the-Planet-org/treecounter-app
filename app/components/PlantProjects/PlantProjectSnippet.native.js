@@ -12,6 +12,10 @@ import CardLayout from '../Common/Card';
 import TouchableItem from '../Common/TouchableItem.native';
 import PlantedProgressBar from './PlantedProgressbar.native';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+//keeping Icon here instead of in assets
+const starIcon = <Icon name="star" size={14} color="#4d5153" />;
+
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -128,20 +132,14 @@ class PlantProjectSnippet extends PureComponent {
                           fontSize: 14,
                           // lineHeight: 19,
                           color: '#4d5153',
-                          textAlign: 'center'
+                          textAlign: 'center',
+                          marginRight: 5
                         }
                       ]}
                     >
                       {plantProjectRating}
                     </Text>
-                    <Image
-                      source={tick}
-                      style={{
-                        width: 12,
-                        height: 12,
-                        marginLeft: 5
-                      }}
-                    />
+                    {starIcon}
                   </View>
                 </View>
               ) : null}

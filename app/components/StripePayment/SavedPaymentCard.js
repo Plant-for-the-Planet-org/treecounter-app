@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from '../../locales/i18n';
 
 const SavedPaymentCard = props => {
   return (
@@ -9,9 +10,9 @@ const SavedPaymentCard = props => {
           <table className="projects-list">
             <thead>
               <tr>
-                <th className="align-left">Choose</th>
-                <th className="align-left">Card</th>
-                <th className="align-left">Last 4 digits</th>
+                <th className="align-left">{i18n.t('label.choose')}</th>
+                <th className="align-left">{i18n.t('label.card')}</th>
+                <th className="align-left">{i18n.t('label.last4')}</th>
               </tr>
             </thead>
             <tbody>

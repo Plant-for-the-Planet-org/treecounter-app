@@ -61,32 +61,39 @@ class PaymentSelector extends Component {
   };
 
   decorateSuccess(gateway, accountName, data) {
-    const donationId = this.props.paymentStatus.contribution[0].id;
-    setProgressModelState(true);
-    this.props
-      .handlePay(
-        donationId,
-        {
-          gateway,
-          account: accountName,
-          source: { ...data }
-        },
-        this.props.currentUserProfile
-      )
-      .then(response => {
-        if (response.data.status == 'failed') {
-          this.props.paymentFailed({
-            status: false,
-            message: response.data.message || 'error'
-          });
-        } else {
-          this.props.finalizeDonation(
-            donationId,
-            this.props.currentUserProfile
-          );
-        }
-        setProgressModelState(false);
+    if (data.error) {
+      this.props.paymentFailed({
+        status: false,
+        message: data.error.message || 'error'
       });
+    } else {
+      const donationId = this.props.paymentStatus.contribution[0].id;
+      setProgressModelState(true);
+      this.props
+        .handlePay(
+          donationId,
+          {
+            gateway,
+            account: accountName,
+            source: { ...data }
+          },
+          this.props.currentUserProfile
+        )
+        .then(response => {
+          if (response.data.status == 'failed') {
+            this.props.paymentFailed({
+              status: false,
+              message: response.data.message || 'error'
+            });
+          } else {
+            this.props.finalizeDonation(
+              donationId,
+              this.props.currentUserProfile
+            );
+          }
+          setProgressModelState(false);
+        });
+    }
   }
 
   // componentWillReceiveProps(nextProps) {

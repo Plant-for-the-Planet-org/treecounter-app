@@ -57,7 +57,6 @@ export default class FeaturedCompetitions extends Component {
     // updateStaticRoute(
     //   'app_donate_detail',
     //   navigation,
-    //   0,
     //   navigation.getParam('userForm')
     // );
   };

@@ -8,7 +8,6 @@ import {
   selectedPlantProjectSelector,
   selectedTpoSelector
 } from '../../selectors';
-import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import CompetitionFull from '../../components/Competition/CompetitionFull';
 
 import {

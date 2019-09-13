@@ -25,13 +25,11 @@ export default class FeaturedProjects extends PureComponent {
   onSelectClickedFeaturedProjects = id => {
     this.props.selectProject(id);
     const { navigation } = this.props;
-    if (navigation) {
-      updateStaticRoute(
-        'app_donate_detail',
-        navigation,
-        navigation.getParam('userForm')
-      );
-    }
+    updateStaticRoute(
+      'app_donate_detail',
+      navigation,
+      navigation.getParam('userForm')
+    );
   };
 
   render() {

@@ -9,7 +9,7 @@ const Layout = {
   }
 };
 
-export default (selectedCompetitionFull = EStyleSheet.create({
+export default EStyleSheet.create({
   projectFullContainer: {
     padding: 0,
     flexDirection: 'column',
@@ -164,4 +164,4 @@ export default (selectedCompetitionFull = EStyleSheet.create({
   buttonTextStyle: {
     fontSize: 14
   }
-}));
+});

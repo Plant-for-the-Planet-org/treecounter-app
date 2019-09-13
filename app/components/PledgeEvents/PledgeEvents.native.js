@@ -13,9 +13,9 @@ import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import PledgeTabView from './PledgeTabView.native';
-import { getImageUrl } from '../../actions/apiRouting';
+import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import { bindActionCreators } from 'redux';
-import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import CardLayout from '../Common/Card';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import {

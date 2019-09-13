@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (editProfileStyle = EStyleSheet.create({
+export default EStyleSheet.create({
   buttonStyle: {
     borderColor: '#89b53a',
     backgroundColor: '#89b53a',
@@ -114,4 +114,4 @@ export default (editProfileStyle = EStyleSheet.create({
     color: '#4d5153',
     marginTop: 45
   }
-}));
+});

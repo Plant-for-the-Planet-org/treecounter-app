@@ -146,7 +146,7 @@ export default class Leaderboard extends Component {
       this.state.timeSorting ||
       (this.props.timePeriodsInfo &&
         this.props.timePeriodsInfo.timePeriodsKeys[0]);
-    sortView = (
+    const sortView = (
       <View style={styles.sortView}>
         <Text style={styles.itemViewText}>
           {i18n.t('label.sortBy')}

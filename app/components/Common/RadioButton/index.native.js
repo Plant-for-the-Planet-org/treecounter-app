@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-const PrimaryButton = ({ onClick, children, buttonStyle, textStyle }) => (
+
+const PrimaryButton = ({
+  // onClick,
+  // children,
+  // buttonStyle,
+  // textStyle,
+  selected,
+  style
+}) => (
   <View
     style={[
       {
@@ -12,10 +20,10 @@ const PrimaryButton = ({ onClick, children, buttonStyle, textStyle }) => (
         alignItems: 'center',
         justifyContent: 'center'
       },
-      props.style
+      style
     ]}
   >
-    {props.selected ? (
+    {selected ? (
       <View
         style={{
           height: 12,

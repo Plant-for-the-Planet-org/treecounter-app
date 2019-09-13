@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (tabbarStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     flex: 1
   },
@@ -17,4 +17,4 @@ export default (tabbarStyles = EStyleSheet.create({
     color: '#aba2a2',
     fontSize: 12
   }
-}));
+});

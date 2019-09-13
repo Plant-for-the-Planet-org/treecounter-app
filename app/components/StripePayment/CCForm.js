@@ -70,7 +70,7 @@ const CCForm = props => (
               props.onClickSaveForLater('saveForLaterCC');
             }}
           />
-          Save for later
+          {i18n.t('label.save_for_later')}
         </div>
       ) : null}
       <PrimaryButton onClick={props.onSubmitCCForm}>

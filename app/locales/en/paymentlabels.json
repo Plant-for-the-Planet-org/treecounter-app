@@ -9,6 +9,7 @@
   "choose": "Choose",
   "card": "Card",
   "last4": "Last 4 digits",
+  "save_for_later": "Save for later",
   "sepa_debit": "SEPA Direct Debit",
   "stripe_sepa_des1":
     "By providing your IBAN and confirming this payment, you are authorizing",

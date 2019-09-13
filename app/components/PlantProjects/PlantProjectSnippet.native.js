@@ -9,7 +9,6 @@ import styles from '../../styles/selectplantproject/selectplantproject-snippet.n
 import { formatNumber } from '../../utils/utils';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import CardLayout from '../Common/Card';
-import TouchableItem from '../Common/TouchableItem.native';
 import PlantedProgressBar from './PlantedProgressbar.native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';

@@ -4,9 +4,16 @@ import _ from 'lodash';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Dimensions, FlatList, Image, Text, View } from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  Text,
+  View,
+  TouchableOpacity,
+  TouchableHighlight
+} from 'react-native';
 import { withNavigation } from 'react-navigation';
-
 import { getLocalRoute } from '../../actions/apiRouting';
 import { getLocale } from '../../actions/getLocale';
 import { foldin, foldout } from '../../assets';
@@ -364,8 +371,8 @@ class ContributionCard extends React.Component {
         </View>
       </CardLayout>
     ) : contributionType === 'planting' ? (
-      <CardLayout
-        style={[styles.addPadding, styles.minHeight]}
+      <TouchableHighlight
+        underlayColor={'transparent'}
         onPress={() => {
           contribution.contributionMeasurements &&
             contribution.contributionMeasurements.length > 0 &&
@@ -375,68 +382,70 @@ class ContributionCard extends React.Component {
             });
         }}
       >
-        <View style={[styles.leftBorder, styles.leftColorBorder]} />
-        {treeCountLine ? (
+        <CardLayout style={[styles.addPadding, styles.minHeight]}>
+          <View style={[styles.leftBorder, styles.leftColorBorder]} />
+          {treeCountLine ? (
+            <Text
+              numberOfLines={1}
+              style={[styles.boldText, styles.gap, styles.restrictTextLength]}
+            >
+              {treeCountLine}
+            </Text>
+          ) : null}
+          {plantProjectLine ? (
+            <Text
+              numberOfLines={1}
+              style={[styles.gap, styles.restrictTextLength]}
+            >
+              {plantProjectLine}
+            </Text>
+          ) : null}
+          {plantActionLine ? (
+            <Text
+              numberOfLines={2}
+              style={[styles.gap, styles.restrictTextLength]}
+            >
+              {plantActionLine}
+            </Text>
+          ) : null}
+          {dedicateActionLine ? (
+            <Text numberOfLines={1} style={styles.restrictTextLength}>
+              {dedicateActionLine}
+            </Text>
+          ) : null}
           <Text
-            numberOfLines={1}
-            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
-          >
-            {treeCountLine}
-          </Text>
-        ) : null}
-        {plantProjectLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {plantProjectLine}
-          </Text>
-        ) : null}
-        {plantActionLine ? (
-          <Text
-            numberOfLines={2}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {plantActionLine}
-          </Text>
-        ) : null}
-        {dedicateActionLine ? (
-          <Text numberOfLines={1} style={styles.restrictTextLength}>
-            {dedicateActionLine}
-          </Text>
-        ) : null}
-        <Text
-          style={styles.deleteTextStyle}
-          onPress={() => {
-            this.props.navigation.navigate('delete_contribution', {
-              deleteContribution: () =>
-                this.props.deleteContribution(contribution.id)
-            });
-          }}
-        >
-          {i18n.t('label.delete')}
-        </Text>
-        {mayUpdate ? (
-          <Text
-            style={styles.updateTextStyle}
+            style={styles.deleteTextStyle}
             onPress={() => {
-              this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-                selectedTreeId: contribution.id,
-                contribution
+              this.props.navigation.navigate('delete_contribution', {
+                deleteContribution: () =>
+                  this.props.deleteContribution(contribution.id)
               });
             }}
           >
-            {i18n.t('label.update')}
+            {i18n.t('label.delete')}
           </Text>
-        ) : null}
-        <View style={styles.labelStyle}>
-          <Text style={styles.labelTextStyle}>
-            {cardType && cardType.length > 0
-              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-              : ''}
-          </Text>
-        </View>
-      </CardLayout>
+          {mayUpdate ? (
+            <Text
+              style={styles.updateTextStyle}
+              onPress={() => {
+                this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
+                  selectedTreeId: contribution.id,
+                  contribution
+                });
+              }}
+            >
+              {i18n.t('label.update')}
+            </Text>
+          ) : null}
+          <View style={styles.labelStyle}>
+            <Text style={styles.labelTextStyle}>
+              {cardType && cardType.length > 0
+                ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+                : ''}
+            </Text>
+          </View>
+        </CardLayout>
+      </TouchableHighlight>
     ) : (
       <CardLayout
         style={styles.addPadding}

@@ -21,9 +21,11 @@ export default class Privacy extends Component {
           <div className="u-position-relative">{privacy.heading}</div>
         </AccordionItemTitle>
         <AccordionItemBody>
-          <div dangerouslySetInnerHTML={{
-            __html: privacy.description
-          }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: privacy.description
+            }}
+          />
         </AccordionItemBody>
       </AccordionItem>
     ));

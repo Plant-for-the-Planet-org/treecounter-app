@@ -1,13 +1,20 @@
 {
   "amount": "Donation Amount",
   "creditCard": "Credit Card",
-  "confirm": "I confirm that I will pay the amount of {{amount}}{{currency}} to the following account.",
+  "confirm":
+    "I confirm that I will pay the amount of {{amount}}{{currency}} to the following account.",
   "bank_transfer": "Bank Transfer",
   "pay_via": "Pay via Bank Transfer",
   "pay": "Pay",
+  "choose": "Choose",
+  "card": "Card",
+  "last4": "Last 4 digits",
+  "save_for_later": "Save for later",
   "sepa_debit": "SEPA Direct Debit",
-  "stripe_sepa_des1": "By providing your IBAN and confirming this payment, you are authorizing",
-  "stripe_sepa_des2": "and Stripe, our payment service provider, to send instructions to your bank to debit your account and your bank to debit your account in accordance with those instructions. You are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited.",
+  "stripe_sepa_des1":
+    "By providing your IBAN and confirming this payment, you are authorizing",
+  "stripe_sepa_des2":
+    "and Stripe, our payment service provider, to send instructions to your bank to debit your account and your bank to debit your account in accordance with those instructions. You are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited.",
   "pay_via_sepa": "Pay with SEPA",
   "contact_firstname": "First Name",
   "contact_lastname": "Last Name",

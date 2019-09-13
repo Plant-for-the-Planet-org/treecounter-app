@@ -367,10 +367,12 @@ class ContributionCard extends React.Component {
       <CardLayout
         style={[styles.addPadding, styles.minHeight]}
         onPress={() => {
-          this.props.navigation.navigate('contribution_details', {
-            contribution,
-            titleParam: plantProjectName || tpoName || treeSpecies
-          });
+          contribution.contributionMeasurements &&
+            contribution.contributionMeasurements.length > 0 &&
+            this.props.navigation.navigate('contribution_details', {
+              contribution,
+              titleParam: plantProjectName || tpoName || treeSpecies
+            });
         }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />

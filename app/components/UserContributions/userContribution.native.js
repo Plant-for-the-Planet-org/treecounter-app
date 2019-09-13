@@ -27,7 +27,9 @@ export default class UserContributions extends React.Component {
       location,
       dedicatedTo,
       plantedDate,
-      contributionTypeText
+      contributionTypeText,
+      showDelete,
+      mayUpdate
     } = props;
 
     return (
@@ -43,7 +45,14 @@ export default class UserContributions extends React.Component {
           {!!location ? (
             <View style={styles.itemContainer}>
               <Image source={TreeIcon} style={styles.icon} />
-              <Text style={{ ...styles.text }}>{location}</Text>
+              <Text
+                style={{
+                  ...styles.text,
+                  maxWidth: showDelete ? '50%' : '100%'
+                }}
+              >
+                {location}
+              </Text>
             </View>
           ) : null}
 
@@ -61,6 +70,7 @@ export default class UserContributions extends React.Component {
             </View>
           ) : null}
         </View>
+
         <View style={styles.buttonsWrapper}>
           <TouchableOpacity style={styles.plantedButtonWrapper}>
             {!!contributionTypeText && (
@@ -69,18 +79,22 @@ export default class UserContributions extends React.Component {
           </TouchableOpacity>
 
           <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
-            <TouchableOpacity
-              onPress={props.onClickDeleteUserContributor}
-              style={styles.button}
-            >
-              <Image style={styles.image} source={DeleteIcon} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={props.onClickEditUserContributor}
-              style={styles.button}
-            >
-              <Image style={styles.image} source={EditIcon} />
-            </TouchableOpacity>
+            {showDelete ? (
+              <TouchableOpacity
+                onPress={props.onClickDelete}
+                style={styles.button}
+              >
+                <Image style={styles.image} source={DeleteIcon} />
+              </TouchableOpacity>
+            ) : null}
+            {mayUpdate ? (
+              <TouchableOpacity
+                onPress={props.onClickEdit}
+                style={styles.button}
+              >
+                <Image style={styles.image} source={EditIcon} />
+              </TouchableOpacity>
+            ) : null}
           </View>
         </View>
       </View>
@@ -95,5 +109,7 @@ UserContributions.PropTypes = {
   plantedDate: PropTypes.string,
   onClickDelete: PropTypes.func,
   onClickEdit: PropTypes.func,
-  contributionTypeText: PropTypes.string
+  contributionTypeText: PropTypes.string,
+  showDelete: PropTypes.bool,
+  mayUpdate: PropTypes.bool
 };

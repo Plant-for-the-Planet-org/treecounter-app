@@ -7,6 +7,7 @@ import UserContributionsDetails from '../../components/UserContributions/Contrib
 import _ from 'lodash';
 // Actions
 import { currentUserProfileIdSelector } from '../../selectors/index';
+import { deleteContribution } from '../../actions/EditMyTree';
 
 class UserContributionsDetailsContainer extends React.Component {
   getContribution(props = this.props) {
@@ -26,6 +27,7 @@ class UserContributionsDetailsContainer extends React.Component {
         userProfileId={this.props.userProfileId}
         contribution={this.getContribution()}
         supportTreecounter={this.props.supportTreecounter}
+        deleteContribution={this.props.deleteContribution}
       />
     );
   }
@@ -37,7 +39,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return bindActionCreators(
+    {
+      deleteContribution
+    },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -46,5 +53,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 UserContributionsDetailsContainer.propTypes = {
   userProfileId: PropTypes.number.isRequired,
-  navigation: PropTypes.any
+  navigation: PropTypes.any,
+  deleteContribution: PropTypes.func
 };

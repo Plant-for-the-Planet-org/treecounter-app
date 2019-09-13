@@ -8,8 +8,11 @@ import Alert from '../../Measurements/Alert.native';
 import moment from 'moment';
 import { getDateFromMySQL } from '../../../helpers/utils';
 import i18n from '../../../locales/i18n.js';
+import { withNavigation } from 'react-navigation';
 
-export default class UserContributionsDetails extends React.Component {
+import { getLocalRoute } from '../../../actions/apiRouting';
+
+class UserContributionsDetails extends React.Component {
   render() {
     console.log(this.props.contribution, 'contribution');
     if (!this.props.contribution) {
@@ -31,7 +34,8 @@ export default class UserContributionsDetails extends React.Component {
       redemptionDate,
       plantProjectName,
       tpoName,
-      giver
+      giver,
+      mayUpdate
     } = this.props.contribution;
     let plantedDate = undefined;
     let dedicatedTo = undefined;
@@ -79,11 +83,25 @@ export default class UserContributionsDetails extends React.Component {
       <ScrollView style={{ backgroundColor: '#fff', flex: 1 }}>
         {!isSinglePlanted ? (
           <UserContributions
+            mayUpdate={mayUpdate}
             treeCount={treeCount}
             location={location}
             dedicatedTo={dedicatedTo}
             plantedDate={plantedDate}
+            showDelete={contributionType == 'planting'}
             contributionTypeText={contributionTypeText}
+            onClickDelete={() => {
+              this.props.navigation.navigate('delete_contribution', {
+                deleteContribution: () =>
+                  this.props.deleteContribution(this.props.contribution.id)
+              });
+            }}
+            onClickEdit={() => {
+              this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
+                selectedTreeId: this.props.contribution.id,
+                contribution: this.props.contribution
+              });
+            }}
           />
         ) : null}
         {hasMeasurements ? (
@@ -102,5 +120,8 @@ UserContributionsDetails.propTypes = {
   userProfileId: PropTypes.number.isRequired,
   navigation: PropTypes.any,
   contribution: PropTypes.object.isRequired,
-  supportTreecounter: PropTypes.object
+  supportTreecounter: PropTypes.object,
+  deleteContribution: PropTypes.func
 };
+
+export default withNavigation(UserContributionsDetails);

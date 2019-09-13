@@ -8,7 +8,7 @@ const squareDimension =
       10
   ) * 10;
 
-export default (treecounterStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -142,4 +142,4 @@ export default (treecounterStyles = EStyleSheet.create({
   },
   closeIcon: { width: 20, height: 20 },
   closeIconImg: { width: '100%', height: '100%' }
-}));
+});

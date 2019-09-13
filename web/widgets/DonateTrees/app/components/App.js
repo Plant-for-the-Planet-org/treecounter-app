@@ -98,7 +98,7 @@ export default class App extends Component {
                 this.setState({ showDonationFlow: true });
               } else {
                 const url = `${serverName}${getLocalRoute('app_donateTrees')}${
-                  projectId ? '/' + projectId : ''
+                  ProjectId ? '/' + ProjectId : ''
                 }`;
                 window.open(url, '_blank');
               }

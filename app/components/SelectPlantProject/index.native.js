@@ -49,7 +49,9 @@ export default class SelectPlantTabView extends PureComponent {
   };
 
   renderSelectPlantScene = ({ route }) => {
-    const props = ({ plantProjects, onMoreClick, selectProject } = this.props);
+    const { plantProjects, onMoreClick, selectProject } = this.props;
+    // props for children
+    const props = { plantProjects, onMoreClick, selectProject };
     const { index } = this.state;
 
     // Only render a tab if it is focused

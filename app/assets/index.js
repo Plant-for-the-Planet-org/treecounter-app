@@ -108,7 +108,6 @@ import redeemSignIn from './images/icons/redeem_signin.png';
 import redeem_outline from './images/icons/redeem_outline.png';
 import redeem_outline_red from './images/icons/redeem_outline_red.png';
 import lightTree from './images/lightTree.png';
-import AppStoreLogo from './images/appstore-logo.png';
 import targetPlanted from './images/target.png';
 import info from './images/icons/info.png';
 import editProfile from './images/icons/edit_profile.png';
@@ -153,7 +152,6 @@ export {
   schoolIcon,
   individualIcon,
   companyIcon,
-  AppStoreLogo,
   darkTree,
   svgBackground,
   bmzLogo,

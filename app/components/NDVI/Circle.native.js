@@ -6,7 +6,7 @@ import styles from '../../styles/NDVI/Circle';
 import { getColorForNDVI } from './NDVIfunctions/GradientUtils';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 
-getNDVIColor = (point, isColor = false) => {
+const getNDVIColor = (point, isColor = false) => {
   if (!isColor) {
     return getColorForNDVI(point, Dimensions.get('window').width - 40);
   }

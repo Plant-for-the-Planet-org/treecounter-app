@@ -91,13 +91,11 @@ class CheckoutForm extends React.Component {
     if (paymentMethodId !== undefined || paymentMethodId != 0) {
       const donationId = this.props.paymentStatus.contribution[0].id;
       let requestData = {
-        paymentProviderRequest: {
-          account: this.props.accountName,
-          gateway: this.props.gateway,
-          source: {
-            id: paymentMethodId,
-            object: 'payment_method'
-          }
+        account: this.props.accountName,
+        gateway: this.props.gateway,
+        source: {
+          id: paymentMethodId,
+          object: 'payment_method'
         }
       };
       this.props

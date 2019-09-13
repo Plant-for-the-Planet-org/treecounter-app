@@ -84,6 +84,7 @@ export function createPaymentGift(plantProjectId, requestData, loggedIn) {
 
 export function handlePay(donationId, requestData, loggedIn) {
   return dispatch => {
+    requestData = { paymentProviderRequest: { ...requestData } };
     let request = loggedIn
       ? postAuthenticatedRequest('donationPay_post', requestData, {
           donation: donationId,

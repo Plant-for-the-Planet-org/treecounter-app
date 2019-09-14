@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import AppPayment from '../../components/Payment/AppPayments';
 import { getPaymentInfo } from '../../actions/paymentAction';
+import { getPaymentStatus } from '../../reducers/paymentStatus';
 
-export default class AppPaymentContainer extends Component {
+class AppPaymentContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,14 +24,28 @@ export default class AppPaymentContainer extends Component {
     );
   }
   render() {
-    return <AppPayment paymentInfo={this.state.paymentInfo} />;
+    return (
+      <AppPayment
+        paymentStatus={this.props.paymentStatus}
+        paymentInfo={this.state.paymentInfo}
+      />
+    );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    paymentStatus: getPaymentStatus(state)
+  };
+};
+
+export default connect(mapStateToProps, null)(AppPaymentContainer);
 
 AppPaymentContainer.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       donationContribution: PropTypes.string
     })
-  }).isRequired
+  }).isRequired,
+  paymentStatus: PropTypes.object
 };

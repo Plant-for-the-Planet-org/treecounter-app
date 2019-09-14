@@ -89,7 +89,9 @@ class CheckoutForm extends React.Component {
 
   handlePayment = paymentMethodId => {
     if (paymentMethodId !== undefined || paymentMethodId != 0) {
-      const donationId = this.props.paymentStatus.contribution[0].id;
+      const donationId = this.props.donationId
+        ? this.props.donationId
+        : this.props.paymentStatus.contribution[0].id;
       let requestData = {
         account: this.props.accountName,
         gateway: this.props.gateway,
@@ -211,6 +213,7 @@ CheckoutForm.propTypes = {
   gateway: PropTypes.string,
   paymentStatus: PropTypes.object,
   handlePay: PropTypes.func,
+  donationId: PropTypes.number,
   paymentFailed: PropTypes.func,
   stripePublishableKey: PropTypes.string,
   setProgressModelState: PropTypes.func,

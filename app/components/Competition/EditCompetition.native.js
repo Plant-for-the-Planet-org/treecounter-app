@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { updateStaticRoute } from '../../helpers/routerHelper';
 import CardLayout from '../Common/Card';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form-native';

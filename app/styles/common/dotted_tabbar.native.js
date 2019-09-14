@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (dottedtabbar = EStyleSheet.create({
+export default EStyleSheet.create({
   tabBar: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -22,4 +22,4 @@ export default (dottedtabbar = EStyleSheet.create({
     borderColor: '#ffffff',
     marginRight: 5
   }
-}));
+});

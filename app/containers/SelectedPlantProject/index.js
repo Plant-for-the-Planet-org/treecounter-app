@@ -7,7 +7,7 @@ import {
   selectedPlantProjectSelector,
   selectedTpoSelector
 } from '../../selectors';
-import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
 
 import {

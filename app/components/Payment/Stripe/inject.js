@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @flow
 import React, { type ComponentType } from 'react';
 

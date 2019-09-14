@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import PaymentSelector from './PaymentSelector';
-import { payPost } from '../../actions/paymentAction';
 import { check_green, attention } from '../../assets';
 import TextBlock from '../Common/Text/TextBlock';
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -21,21 +20,6 @@ export default class AppPayments extends Component {
     this.setState({
       expandedOption: optionNumber
     });
-  };
-
-  handlePaymentApproved = paymentResponse => {
-    payPost(paymentResponse, this.props.paymentInfo.token)
-      .then(res => {
-        console.log(res);
-        this.setState({
-          paymentStatus: 'success'
-        });
-      })
-      .catch(err =>
-        this.setState({
-          paymentStatus: 'failed'
-        })
-      );
   };
 
   openApp(status) {
@@ -65,7 +49,7 @@ export default class AppPayments extends Component {
             <div className="payment-success">
               <img src={check_green} />
               <div className={'gap'} />
-              <TextBlock strong={true}>
+              <TextBlock strong>
                 {i18n.t('label.thankyou_planting', {
                   count: paymentInfo.treeCount
                 })}
@@ -81,9 +65,7 @@ export default class AppPayments extends Component {
             <div className="payment-success">
               <img src={attention} />
               <div className={'gap'} />
-              <TextBlock strong={true}>
-                {i18n.t('label.payment_failed')}
-              </TextBlock>
+              <TextBlock strong>{i18n.t('label.payment_failed')}</TextBlock>
               <div className={'gap'} />
               <TextBlock>
                 <PrimaryButton onClick={() => this.openApp('failed')}>
@@ -113,9 +95,6 @@ export default class AppPayments extends Component {
                       ? { displayName: paymentInfo.supportedTreecounterName }
                       : null
                   }}
-                  onSuccess={paymentResponse =>
-                    this.handlePaymentApproved(paymentResponse)
-                  }
                   onFailure={data =>
                     console.log('/////////////////// payment failure ', data)
                   }

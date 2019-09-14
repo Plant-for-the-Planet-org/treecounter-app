@@ -61,35 +61,53 @@ export function isAndroid() {
   return getMobileOperatingSystem() == 'Android';
 }
 
-export function convertNumber(n, d) {
-  if (isNaN(n) || undefined) {
+export function convertNumber(number, useDigits) {
+  if (isNaN(number) || undefined) {
     return 0;
   }
-  let x = ('' + n).length;
-  if (x > 12) {
-    let p = Math.pow;
-    d = p(10, d);
-    x -= x % 3;
-    return (
-      delimitNumbers(Math.round(n * d / p(10, x)) / d) +
-      [
-        '',
-        ' ' + i18n.t('label.Thousand'),
-        ' ' + i18n.t('label.Million'),
-        ' ' + i18n.t('label.Billion'),
-        ' ' + i18n.t('label.Trillion'),
-        ' ' + i18n.t('label.Quadrillion'),
-        ' ' + i18n.t('label.Quintillion')
-      ][x / 3]
-    );
-  } else if (x > 9) {
-    return delimitNumbers(n / 1000000000) + ' ' + i18n.t('label.Billion');
-  } else if (x > 6) {
-    return delimitNumbers(n / 1000000) + ' ' + i18n.t('label.Million');
-    // TODO: think about using the label "thousend" - under 1 Mio it's uncommon to use it
-  } else if (x > 3) {
-    return delimitNumbers(n / 1000) + ' ' + i18n.t('label.Thousand');
-  } else {
-    return delimitNumbers(n);
+
+  const numDigits = ('' + number).length;
+  // use number name starting at millions with 7 digits
+  let digitsInGroup = 0;
+  if (numDigits > 6) {
+    digitsInGroup = numDigits - 1;
+    digitsInGroup -= digitsInGroup % 3;
   }
+
+  let pow = Math.pow;
+  let powerOfUsedDigits = pow(10, useDigits);
+  let roundedNumber =
+    Math.round(number * powerOfUsedDigits / pow(10, digitsInGroup)) /
+    powerOfUsedDigits;
+  let isSingular = roundedNumber == 1 ? 1 : 0;
+  return (
+    delimitNumbers(roundedNumber) +
+    [
+      '',
+      ' ' +
+        (isSingular
+          ? i18n.t('label.thousand_singular')
+          : i18n.t('label.thousand_plural')),
+      ' ' +
+        (isSingular
+          ? i18n.t('label.million_singular')
+          : i18n.t('label.million_plural')),
+      ' ' +
+        (isSingular
+          ? i18n.t('label.billion_singular')
+          : i18n.t('label.billion_plural')),
+      ' ' +
+        (isSingular
+          ? i18n.t('label.trillion_singular')
+          : i18n.t('label.trillion_plural')),
+      ' ' +
+        (isSingular
+          ? i18n.t('label.quadrillion_singular')
+          : i18n.t('label.quadrillion_plural')),
+      ' ' +
+        (isSingular
+          ? i18n.t('label.quintillion_singular')
+          : i18n.t('label.quintillion_plural'))
+    ][digitsInGroup / 3]
+  );
 }

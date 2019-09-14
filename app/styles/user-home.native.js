@@ -8,7 +8,7 @@ const squareDimension =
       10
   ) * 10;
 
-export default (buttonStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   homeContainer: {
     flex: 1,
     flexDirection: 'column'
@@ -82,4 +82,4 @@ export default (buttonStyles = EStyleSheet.create({
     color: '#ffffff',
     fontSize: 15
   }
-}));
+});

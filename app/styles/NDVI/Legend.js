@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (legendStyle = EStyleSheet.create({
+export default EStyleSheet.create({
   legendInfoContainer: {
     flexDirection: 'row',
     marginTop: 10,
@@ -18,4 +18,4 @@ export default (legendStyle = EStyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between'
   }
-}));
+});

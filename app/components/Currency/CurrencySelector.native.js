@@ -1,25 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 import i18n from '../../locales/i18n';
-import styles from '../../styles/currencies/currencyselector';
-import t from 'tcomb-form-native';
+// import styles from '../../styles/currencies/currencyselector';
+// import t from 'tcomb-form-native';
 import { Dropdown } from 'react-native-material-dropdown';
-import { getFormSchema } from '../../server/parsedSchemas/currencySelector';
+// import { getFormSchema } from '../../server/parsedSchemas/currencySelector';
 
-let Form = t.form.Form;
+// let Form = t.form.Form;
 
 const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
   // const {
   //   schemaOptions,
   //   transformedSchema: currencySelectorFormSchema
   // } = getFormSchema(currencies);
-  let currenciesArray = Object.keys(currencies);
-  let currenciesTitles = Object.values(currencies);
+  const currenciesArray = Object.keys(currencies);
+  const currenciesTitles = Object.values(currencies);
 
-  currenciesDropdownFormat = currenciesArray.map((item, index) => {
+  const currenciesDropdownFormat = currenciesArray.map((item, index) => {
     return { value: item, text: currenciesTitles[index] };
   });
+
   return (
     <Dropdown
       containerStyle={[

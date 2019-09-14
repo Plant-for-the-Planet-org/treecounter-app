@@ -50,6 +50,7 @@ class StripePayment extends Component {
             paymentStatus={props.paymentStatus}
             paymentDetails={props.paymentDetails}
             paymentFailed={props.paymentFailed}
+            donationId={props.donationId}
             onError={this.onError}
             onSuccess={this.onSuccess}
             accountName={props.accountName}
@@ -97,6 +98,7 @@ StripePayment.propTypes = {
   accountName: PropTypes.string,
   gateway: PropTypes.string,
   paymentStatus: PropTypes.object,
+  donationId: PropTypes.number,
   handlePay: PropTypes.func,
   paymentFailed: PropTypes.func,
   setProgressModelState: PropTypes.func,

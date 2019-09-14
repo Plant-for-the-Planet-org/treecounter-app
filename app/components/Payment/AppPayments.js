@@ -45,8 +45,7 @@ export default class AppPayments extends Component {
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <CardLayout>
-          {this.props.paymentStatus &&
-          this.props.paymentStatus.message === 'success' ? (
+          {this.props.paymentStatus && this.props.paymentStatus.status ? (
             <div className="payment-success">
               <img src={check_green} />
               <div className={'gap'} />
@@ -63,11 +62,14 @@ export default class AppPayments extends Component {
               </TextBlock>
             </div>
           ) : this.props.paymentStatus &&
-          this.props.paymentStatus.message === 'failed' ? (
+          !this.props.paymentStatus.status &&
+          this.props.paymentStatus.message ? (
             <div className="payment-success">
               <img src={attention} />
               <div className={'gap'} />
-              <TextBlock strong>{i18n.t('label.payment_failed')}</TextBlock>
+              <TextBlock strong>
+                {i18n.t('label.error') + ' ' + this.props.paymentStatus.message}
+              </TextBlock>
               <div className={'gap'} />
               <TextBlock>
                 <PrimaryButton onClick={() => this.openApp('failed')}>

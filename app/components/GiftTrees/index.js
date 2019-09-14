@@ -184,7 +184,7 @@ export default class GiftTrees extends Component {
         currency: this.state.selectedCurrency,
         ...this.state.form
       };
-      this.props.createPaymentDonation(
+      this.props.createPaymentGift(
         this.props.selectedProject.id,
         requestData,
         this.props.currentUserProfile

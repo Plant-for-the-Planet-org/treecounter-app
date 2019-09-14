@@ -67,7 +67,9 @@ class PaymentSelector extends Component {
         message: data.error.message || 'error'
       });
     } else {
-      const donationId = this.props.paymentStatus.contribution[0].id;
+      const donationId = this.props.donationId
+        ? this.props.donationId
+        : this.props.paymentStatus.contribution[0].id;
       setProgressModelState(true);
       this.props
         .handlePay(
@@ -206,6 +208,7 @@ class PaymentSelector extends Component {
                   paymentDetails={this.props.paymentDetails}
                   account={accounts[accountName]}
                   accountName={accountName}
+                  donationId={this.props.donationId}
                   reinitiateStripe={this.reinitiateStripe}
                   stripePublishableKey={this.props.stripePublishableKey}
                   paymentFailed={this.props.paymentFailed}
@@ -315,6 +318,7 @@ PaymentSelector.propTypes = {
   stripePublishableKey: PropTypes.string,
   expandedOption: PropTypes.string,
   handleExpandedClicked: PropTypes.func,
+  donationId: PropTypes.number,
   currency: PropTypes.string.isRequired,
   context: PropTypes.object.isRequired,
   onFailure: PropTypes.func.isRequired,

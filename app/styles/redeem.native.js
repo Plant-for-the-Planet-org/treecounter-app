@@ -121,7 +121,6 @@ export default EStyleSheet.create({
 
   validateCodeButtonView: {
     width: '88%',
-
     borderRadius: 100,
     backgroundColor: '#89b53a',
     height: 52,

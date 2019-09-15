@@ -6,18 +6,18 @@ import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n.js';
 import TouchableItem from '../../components/Common/TouchableItem';
 import {
-  redeemSignIn, // Need to delete images from assets
-  redeemRed,
-  redeemGreen,
-  close_green,
+  redeemSignIn, // Need to delete image from assets if not needed anywhere else
+  redeemRed, // Need to delete image from assets if not needed anywhere else
+  redeemGreen, // Need to delete image from assets if not needed anywhere else
+  close_green, // Need to delete image from assets if not needed anywhere else
   redeemImage
 } from '../../assets';
 import styles from '../../styles/redeem';
 import { View, Image, TextInput, Text, TouchableOpacity } from 'react-native';
 import { updateRoute } from '../../helpers/routerHelper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import TabContainer from '../../containers/Menu/TabContainer';
 import { TextField } from 'react-native-material-textfield';
+import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet.native';
 
 export default class Redemption extends Component {
   constructor(props) {
@@ -39,6 +39,7 @@ export default class Redemption extends Component {
     if (this.state.value) {
       this.props.validateCode(this.state.value);
     }
+    console.log(this.props.tpos);
   }
   onChange(value) {
     this.setState({ value: value });
@@ -46,37 +47,28 @@ export default class Redemption extends Component {
   render() {
     let content,
       button,
+      icon,
       errorText,
       successText,
       actionText,
       statusText,
-      form,
-      right_icon = null;
+      subheading,
+      plantprojectSnippet,
+      form = null;
     errorText = this.props.errorText ? (
-      <View>
-        <Text style={styles.errorTextStyle}>{this.props.errorText}</Text>
-      </View>
+      <Text style={styles.errorTextStyle}>{this.props.errorText}</Text>
     ) : null;
     successText = this.props.successText ? (
-      <View>
-        <Text style={styles.descriptionTextStyle}>
-          {this.props.successText}
-        </Text>
-      </View>
+      <Text style={styles.descriptionTextStyle}>{this.props.successText}</Text>
     ) : null;
     actionText = this.props.actionText ? (
-      <View>
-        <Text style={styles.descriptionTextStyle}>{this.props.actionText}</Text>
-      </View>
+      <Text style={styles.descriptionTextStyle}>{this.props.actionText}</Text>
     ) : null;
     statusText = this.props.statusText ? (
-      <View>
-        <Text style={styles.descriptionTextStyle}>{this.props.statusText}</Text>
-      </View>
+      <Text style={styles.descriptionTextStyle}>{this.props.statusText}</Text>
     ) : null;
     content = (
       <View>
-        {errorText}
         {statusText}
         {successText}
         {actionText}
@@ -89,7 +81,7 @@ export default class Redemption extends Component {
       button = (
         <TouchableOpacity
           style={styles.validateCodeButton}
-          onClick={() => this.onValidationCode()}
+          onPress={() => this.onValidationCode()}
         >
           <View style={styles.validateCodeButtonView}>
             <Text style={styles.validateCodeButtonText}>
@@ -98,11 +90,19 @@ export default class Redemption extends Component {
           </View>
         </TouchableOpacity>
       );
+      icon = (
+        <Image
+          style={styles.imageStyle}
+          resizeMode="contain"
+          source={redeemImage}
+        />
+      );
+      subheading = i18n.t('label.redeem_heading');
     } else if (this.props.pageStatus === 'code-unknown') {
       button = (
         <TouchableOpacity
           style={styles.validateCodeButton}
-          onClick={() => this.onValidationCode()}
+          onPress={() => this.onValidationCode()}
         >
           <View style={styles.validateCodeButtonView}>
             <Text style={styles.validateCodeButtonText}>
@@ -111,12 +111,20 @@ export default class Redemption extends Component {
           </View>
         </TouchableOpacity>
       );
+      icon = (
+        <Image
+          style={styles.imageStyle}
+          resizeMode="contain"
+          source={redeemImage}
+        />
+      );
+      subheading = i18n.t('label.redeem_heading');
     } else if (this.props.pageStatus === 'not-logged-in') {
       button = (
         <View style={styles.loginButtons}>
           <TouchableOpacity
             style={styles.validateCodeButton}
-            onClick={this.props.loginButton}
+            onPress={this.props.loginButton}
           >
             <View style={styles.validateCodeButtonView}>
               <Text style={styles.validateCodeButtonText}>
@@ -126,7 +134,7 @@ export default class Redemption extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.validateCodeButton}
-            onClick={this.props.signupButton}
+            onPress={this.props.signupButton}
           >
             <View style={styles.validateCodeButtonView}>
               <Text style={styles.validateCodeButtonText}>
@@ -140,15 +148,28 @@ export default class Redemption extends Component {
       button = (
         <TouchableOpacity
           style={styles.validateCodeButton}
-          onClick={() => this.onSetRedemption()}
+          onPress={() => this.onSetRedemption()}
         >
           <View style={styles.validateCodeButtonView}>
-            <Text style={styles.validateCodeButtonText}>
-              {this.props.buttonText}
-            </Text>
+            <Text style={styles.validateCodeButtonText}>Add to My Trees</Text>
           </View>
         </TouchableOpacity>
       );
+      subheading = i18n.t(
+        'Planted at Yucatan Reforestation by Plant-for-the-Planet'
+      );
+      // plantprojectSnippet = (
+      //   <PlantProjectSnippet
+      //   key={'projectFull' + this.props.plantProject.id}
+      //   showMoreButton={false}
+      //   clickable={false}
+      //   plantProject={this.props.plantProject}
+      //   onSelectClickedFeaturedProjects={id =>
+      //     this.props.selectProject(id)
+      //   }
+      //   tpoName={tpo_name}
+      // />
+      // )
     }
 
     let value = this.state.value;
@@ -164,22 +185,23 @@ export default class Redemption extends Component {
           code: null
         });
       };
-      right_icon = disabled ? (
-        <TouchableItem onPress={() => onCrossClick()}>
-          <Image style={styles.glyphiconStyle} source={close_green} />
-        </TouchableItem>
-      ) : null;
+
       form = (
-        <View style={styles.redeemInputView}>
-          <TextInput
-            style={styles.inputStyle}
-            editable={!disabled}
+        <View>
+          <TextField
+            label={i18n.t('Please type Code to Redeem')}
             value={value}
-            maxLength={20}
-            onChangeText={evt => this.onChange(evt)}
-            autoCapitalize={'sentences'}
+            tintColor={'#89b53a'}
+            titleFontSize={12}
+            returnKeyType="next"
+            lineWidth={1}
+            blurOnSubmit={false}
+            labelPadding={12}
+            inputContainerPadding={12}
+            onChangeText={value => this.onChange(value)}
+            error={errorText}
+            disabled={disabled}
           />
-          {right_icon}
         </View>
       );
     } else {
@@ -187,12 +209,10 @@ export default class Redemption extends Component {
       button = (
         <TouchableOpacity
           style={styles.validateCodeButton}
-          onClick={() => updateRoute('app_myTrees', this.props.navigation)}
+          onPress={() => updateRoute('app_myTrees', this.props.navigation)}
         >
           <View style={styles.validateCodeButtonView}>
-            <Text style={styles.validateCodeButtonText}>
-              {this.props.buttonText}
-            </Text>
+            <Text style={styles.validateCodeButtonText}>Add to My Trees</Text>
           </View>
         </TouchableOpacity>
       );
@@ -208,47 +228,32 @@ export default class Redemption extends Component {
         <LoadingIndicator />
       </View>
     ) : (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <KeyboardAwareScrollView
           contentContainerStyle={{
             paddingBottom: 72,
             backgroundColor: '#fff'
           }}
+          keyboardDismissMode="on-drag"
+          keyboardShouldPersistTaps="always"
+          style={styles.keyboardScrollView}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled={true}
         >
           <View style={styles.parentContainer}>
             <View style={styles.cardContainer}>
-              <Text style={styles.mainTitle}>Redeem Trees</Text>
-              <Text style={styles.titleText}>
-                {i18n.t('label.redeem_heading')}
-              </Text>
+              <Text style={styles.mainTitle}>{heading}</Text>
+              <Text style={styles.titleText}>{subheading}</Text>
+              {plantprojectSnippet}
             </View>
             <View style={styles.cardContainer}>
-              <Image
-                style={styles.imageStyle}
-                resizeMode="contain"
-                source={redeemImage}
-              />
-              <View style={{ marginTop: 40 }}>
-                <TextField
-                  label={i18n.t('Please type Code to Redeem')}
-                  value={value}
-                  tintColor={'#89b53a'}
-                  titleFontSize={12}
-                  returnKeyType="next"
-                  lineWidth={1}
-                  blurOnSubmit={false}
-                  labelPadding={12}
-                  inputContainerPadding={12}
-                  onChangeText={value => this.setState({ value })}
-                />
-              </View>
-              {/* {form} */}
-
+              {icon}
+              <View style={{ marginTop: 40 }}>{form}</View>
+              {/* {content} */}
               {button}
             </View>
           </View>
         </KeyboardAwareScrollView>
-        <TabContainer {...this.props} />
       </View>
     );
   }

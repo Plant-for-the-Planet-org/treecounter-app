@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (Measurements = EStyleSheet.create({
+export default EStyleSheet.create({
   title: {
     paddingLeft: 16,
     paddingTop: 25,
@@ -34,4 +34,4 @@ export default (Measurements = EStyleSheet.create({
     color: '#666666',
     marginLeft: 5
   }
-}));
+});

@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (Alert = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     position: 'relative',
     top: 90,
@@ -19,4 +19,4 @@ export default (Alert = EStyleSheet.create({
     fontSize: 12,
     color: '#ffffff'
   }
-}));
+});

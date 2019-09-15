@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (UserContributions = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     marginTop: 16,
     marginBottom: 20,
@@ -55,4 +55,4 @@ export default (UserContributions = EStyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center'
   }
-}));
+});

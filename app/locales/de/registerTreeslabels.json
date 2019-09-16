@@ -19,5 +19,6 @@
   "plant_project": "Pflanzungsprojekt",
   "plant_projects": "Pflanzungsprojekte",
   "get_device_location": "Position des Geräts ermitteln",
-  "map_under_construction": "Karte in Vorbereitung"
+  "map_under_construction": "Karte in Vorbereitung",
+  "location_permission_denied": "Zugriff auf den Standort ist nicht erlaubt. Bitte öffnen Sie die Einstellungen und erlauben den Standortzugriff für diese App"
 }

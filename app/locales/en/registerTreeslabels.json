@@ -19,5 +19,6 @@
   "plant_project": "Plant Project",
   "plant_projects": "Plant Projects",
   "get_device_location": "Get Device Location",
-  "map_under_construction": "Maps under construction"
+  "map_under_construction": "Maps under construction",
+  "location_permission_denied": "Permission denied to access location. Please open the settings and allow this app access to the current location."
 }

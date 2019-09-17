@@ -86,7 +86,7 @@ export default class StripeSepa extends Component {
             //console.log(value);
           }}
           autoCapitalize={'sentences'}
-          allowFontScaling={true}
+          allowFontScaling
         />
         <Text style={{ textAlign: 'justify', color: 'black', marginTop: 5 }}>
           {i18n.t('label.stripe_sepa_des1')} {context.tpoName}{' '}

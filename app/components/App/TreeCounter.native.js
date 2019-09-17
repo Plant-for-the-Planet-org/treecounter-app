@@ -20,10 +20,11 @@ class App extends Component {
     this.props.loadTpos();
   }
   render() {
+    const colorLiteralWhite = 'white';
     return (
       <SafeAreaView
         forceInset={{ top: 'never' }}
-        style={{ flex: 1, backgroundColor: '#fff' }}
+        style={{ flex: 1, backgroundColor: colorLiteralWhite }}
       >
         <AppDrawerNavigatorContainer />
       </SafeAreaView>

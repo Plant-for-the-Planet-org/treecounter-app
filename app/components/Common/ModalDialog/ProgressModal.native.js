@@ -8,7 +8,7 @@ export default class ProgressModal extends Component {
     return (
       <Modal
         animationType={'slide'}
-        transparent={true}
+        transparent
         visible={this.props.modalVisible}
         elevation="10"
         onRequestClose={() => {

@@ -127,7 +127,7 @@ export default class RecieptTabsView extends React.PureComponent {
       <View style={{ flex: 1, marginBottom: 40 }}>
         <TabView
           ref={this.tabView}
-          useNativeDriver={true}
+          useNativeDriver
           navigationState={this.state}
           renderScene={this._renderSelectPlantScene}
           renderTabBar={this._renderTabBar}

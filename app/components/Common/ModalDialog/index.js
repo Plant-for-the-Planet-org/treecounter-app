@@ -11,7 +11,7 @@ const ModalDialog = ({ children, isOpen, onRequestClose }) => (
     portalClassName="ModalPortal"
     ariaHideApp={false}
     onRequestClose={onRequestClose}
-    shouldFocusAfterRender={true}
+    shouldFocusAfterRender
   >
     <img
       className="closeIcon"

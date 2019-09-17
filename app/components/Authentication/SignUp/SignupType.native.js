@@ -100,7 +100,7 @@ export class SignupTypes extends Component {
     return (
       <View style={styles.outerContainer}>
         <ScrollView
-          horizontal={true}
+          horizontal
           ref={ref => {
             this.scrollView = ref;
           }}

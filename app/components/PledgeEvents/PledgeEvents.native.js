@@ -95,7 +95,7 @@ class PledgeEvents extends Component {
           this.props.pledges.pledgeEventImages &&
           this.props.pledges.pledgeEventImages.length > 0 ? (
             <ScrollView
-              horizontal={true}
+              horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.peSliderScrollView}
             >

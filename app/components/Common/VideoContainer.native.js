@@ -57,7 +57,15 @@ class VideoContainer extends React.Component {
           ref={component => {
             this._youTubeRef = component;
           }}
-          style={[{ height: 300 }, { margin: this.state.moduleMargin }]}
+          style={[
+            {
+              height: 300,
+              borderRadius: 5,
+              borderWidth: 1,
+              borderColor: '#d5d5d5'
+            },
+            { margin: this.state.moduleMargin }
+          ]}
           onReady={this._onReady}
           videoId={this.state.videoId}
           play={false}

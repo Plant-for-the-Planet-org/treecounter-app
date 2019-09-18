@@ -11,9 +11,13 @@
   "NDVI_legend_rock_sand_snow": "Rock/Sand/Snow",
   "NDVI_legend_grasslands": "Grasslands",
   "NDVI_legend_dense_vegetation": "Dense Vegetation",
-  "NDVI_on_load_paragraph": "Currently Fetching NDVI. Please check in a minute or two.",
+  "NDVI_on_load_paragraph":
+    "Currently Fetching NDVI. Please check in a minute or two.",
   "NDVI_on_load_refresh_button": "Refresh",
   "NDVI_carbon_title": "Captured CO2",
-  "NDVI_carbon_tooltip": "Captured Biomass is an estimated amount calculated using the NDVI from the project location. We are working to improve our calculation algorithm to improve the accuracy.",
-  "NDVI_tooltip_for_help_button": "(NDVI) is calculated from the Satellite Imagery by analyzing the reflection of near-infrared light by plants. Calibrated NDVI results allows us to estimate vegetation growth and overall biomass, as more vegetation growth will affect the ratio of visible light absorbed and near-infrared light reflected."
+  "NDVI_time_series": "NDVI Time Series",
+  "NDVI_carbon_tooltip":
+    "Captured Biomass is an estimated amount calculated using the NDVI from the project location. We are working to improve our calculation algorithm to improve the accuracy.",
+  "NDVI_tooltip_for_help_button":
+    "(NDVI) is calculated from the Satellite Imagery by analyzing the reflection of near-infrared light by plants. Calibrated NDVI results allows us to estimate vegetation growth and overall biomass, as more vegetation growth will affect the ratio of visible light absorbed and near-infrared light reflected."
 }

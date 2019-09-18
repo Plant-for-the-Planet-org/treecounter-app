@@ -6,7 +6,16 @@ export default EStyleSheet.create({
   carousalContainer: { flexDirection: 'column' },
   descriptionContainer: {
     paddingTop: 20,
-    paddingLeft: 5
+    paddingLeft: 5,
+    paddingRight: 5,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#d5d5d5',
+    marginLeft: 0,
+    marginTop: 12,
+    width: '100%',
+    marginBottom: 20,
+    paddingBottom: 20
   },
   descriptionText: {
     color: '#686060'
@@ -22,5 +31,9 @@ export default EStyleSheet.create({
     marginRight: 5
   },
   linkText: { alignSelf: 'flex-end', color: '$colorPrimaryAccent' },
-  videoContainer: { paddingTop: 20 }
+  videoContainer: {
+    borderRadius: 5,
+    borderWidth: 0.2,
+    borderColor: '#d5d5d5'
+  }
 });

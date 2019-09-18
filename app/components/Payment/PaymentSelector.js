@@ -13,7 +13,8 @@ import { handlePay, finalizeDonation } from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 import { paymentFailed } from '../../reducers/paymentStatus';
 import { formatNumber, delimitNumbers } from '../../utils/utils';
-
+const colon = ':';
+const space = ' ';
 class PaymentSelector extends Component {
   constructor(props) {
     super(props);
@@ -186,10 +187,20 @@ class PaymentSelector extends Component {
               })}
             </div>
           )}
-          <div>{`${i18n.t('label.amount')}: ${
-            paymentDetails.amount
-          } ${currency}`}</div>
-          <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
+          <div>
+            {i18n.t('label.amount')}
+            {colon}
+            {space}
+            {paymentDetails.amount}
+            {space}
+            {currency}
+          </div>
+          <div>
+            {i18n.t('label.trees')}
+            {colon}
+            {space}
+            {context.treeCount}
+          </div>
         </div>
         {Object.keys(paymentMethods).map(gateway => {
           const accountName = paymentMethods[gateway];
@@ -249,7 +260,7 @@ class PaymentSelector extends Component {
             return (
               <div key={gateway}>
                 {this.state.errorMessage ? (
-                  <div>this.state.errorMessage</div>
+                  <div>{this.state.errorMessage}</div>
                 ) : null}
                 <Paypal
                   key={gateway}
@@ -271,7 +282,7 @@ class PaymentSelector extends Component {
             return (
               <div key={gateway}>
                 {this.state.errorMessage ? (
-                  <div>this.state.errorMessage</div>
+                  <div>{this.state.errorMessage}</div>
                 ) : null}
                 <Offline
                   key={gateway}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Modal, Alert } from 'react-native';
 
 import LoadingIndicator from '../LoadingIndicator';
-
+const colorLiteralrgba255 = 'rgba(255,255,255,0.5)';
 export default class ProgressModal extends Component {
   render = () => {
     return (
@@ -22,7 +22,7 @@ export default class ProgressModal extends Component {
             alignItems: 'center',
             justifyContent: 'center',
             elevation: 10,
-            backgroundColor: 'rgba(255,255,255,0.5)'
+            backgroundColor: colorLiteralrgba255
           }}
         >
           <LoadingIndicator />

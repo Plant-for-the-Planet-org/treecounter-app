@@ -40,7 +40,6 @@ const ListProjects = ({
             underlineColorAndroid={'transparent'}
             onChangeText={setSearch}
             value={search}
-            autoCapitalize="none"
             autoCorrect={false}
             returnKeyType="search"
             placeholder={i18n.t('label.searchshort')}

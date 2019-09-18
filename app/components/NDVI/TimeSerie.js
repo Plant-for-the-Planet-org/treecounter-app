@@ -25,7 +25,7 @@ const TimeSerie = props => {
             );
           } else {
             return (
-              <div key={index} className="flex-1" key={index}>
+              <div className="flex-1" key={index}>
                 <Circle
                   gradientName="not-found"
                   getColorForNDVI={props.getColorForNDVI}

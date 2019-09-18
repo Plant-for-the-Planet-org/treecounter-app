@@ -9,6 +9,7 @@ import { delimitNumbers } from '../../utils/utils';
 
 class PlantedDetails extends Component {
   render() {
+    const colorLiteral686060 = '#686060';
     const { onToggle, personal, community, type } = this.props;
     return (
       <View style={svgStyles.svgTextContainer}>
@@ -29,7 +30,13 @@ class PlantedDetails extends Component {
           />
           <View style={svgStyles.svgColumn2Temp}>
             <View>
-              <Text style={{ fontSize: 8, color: '#686060', width: 'auto' }}>
+              <Text
+                style={{
+                  fontSize: 8,
+                  color: colorLiteral686060,
+                  width: 'auto'
+                }}
+              >
                 {i18n.t(
                   'individual' === type
                     ? 'label.individual_plant_personal'
@@ -52,7 +59,13 @@ class PlantedDetails extends Component {
           />
           <View style={svgStyles.svgColumn2Temp}>
             <View>
-              <Text style={{ fontSize: 8, color: '#686060', width: 'auto' }}>
+              <Text
+                style={{
+                  fontSize: 8,
+                  color: colorLiteral686060,
+                  width: 'auto'
+                }}
+              >
                 {i18n.t(
                   'individual' === type
                     ? 'label.individual_plant_community'

@@ -165,7 +165,9 @@ export default class SelectPlantProject extends Component {
         />
       )
     };
-
+    const spaceChar = ' ';
+    const stringSearch = 'search';
+    const stringS = 's';
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>
@@ -200,7 +202,8 @@ export default class SelectPlantProject extends Component {
         </ModalDialog>
         <div className="select-project__container remove_shadow">
           <div className="select-project__header">
-            {i18n.t('label.featuredProjects')}{' '}
+            {i18n.t('label.featuredProjects')}
+            {spaceChar}
           </div>
           <Slider {...settings}>
             {featuredProjects.length !== 0
@@ -255,7 +258,9 @@ export default class SelectPlantProject extends Component {
                     <label>{i18n.t('label.search')}</label>
                   </div>
                   <span className="search-bar__button">
-                    <i className="material-icons header-icons">{'search'}</i>
+                    <i className="material-icons header-icons">
+                      {stringSearch}
+                    </i>
                   </span>
                 </div>
                 <div className="table-responsive">
@@ -320,7 +325,10 @@ export default class SelectPlantProject extends Component {
                           {i18n.t('label.organisation')}
                         </th>
                         <th className="align-right">
-                          <span>{i18n.t('label.plantedTrees')}s</span>
+                          <span>
+                            {i18n.t('label.plantedTrees')}
+                            {stringS}
+                          </span>
                         </th>
                         <th className="align-right">
                           <span>{i18n.t('label.Cost')}</span>

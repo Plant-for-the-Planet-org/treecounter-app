@@ -71,9 +71,10 @@ export default class RegisterTreeTab extends PureComponent {
       template: getFormLayoutTemplate(this.props.mode, this.props.isTpo),
       ...this.props.schemaOptions
     };
+    const colorLiteralWhite = 'white';
     return (
       <KeyboardAwareScrollView enableOnAndroid>
-        <View style={{ backgroundColor: '#ffffff' }}>
+        <View style={{ backgroundColor: colorLiteralWhite }}>
           <Form
             ref="multipleTreesForm"
             type={this.props.schemaType}

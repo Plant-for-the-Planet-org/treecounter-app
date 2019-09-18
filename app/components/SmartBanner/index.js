@@ -68,7 +68,7 @@ class SmartBannerClickable extends SmartBanner {
     const iconStyle = {
       backgroundImage: `url(${icon})`
     };
-
+    const timesChar = '&times;';
     return (
       <div className={wrapperClassName}>
         <div
@@ -85,7 +85,7 @@ class SmartBannerClickable extends SmartBanner {
             aria-label="close"
             onClick={this.close}
           >
-            &times;
+            {timesChar}
           </button>
           <span className="smartbanner-icon" style={iconStyle} />
           <div className="smartbanner-info">

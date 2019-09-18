@@ -102,6 +102,7 @@ class PledgeEvents extends Component {
               {/* {pledgeImages} */}
               {this.props.pledges.pledgeEventImages.map(pledgeImage => (
                 <Image
+                  key={Math.random()}
                   style={styles.peSliderImage}
                   source={{
                     uri: getImageUrl(

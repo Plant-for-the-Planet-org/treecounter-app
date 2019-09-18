@@ -20,7 +20,7 @@ import searchBarStyles from '../../../styles/header/search_bar';
 
 import _ from 'lodash';
 import UserProfileImage from '../../Common/UserProfileImage';
-
+const colorLiteralTransparent = 'transparent';
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
   static Header = Header;
@@ -95,7 +95,7 @@ class SearchUser extends React.Component {
           style={{
             ...searchBarStyles.searchContainer,
             width: '95%',
-            backgroundColor: 'transparent',
+            backgroundColor: colorLiteralTransparent,
             marginTop: 10
           }}
           tintColor={

@@ -9,6 +9,7 @@ import {
   toggleSideNavAction
 } from '../../actions/setSideNavAction';
 
+const stringMenu = 'menu';
 class BurgerMenu extends Component {
   constructor() {
     super();
@@ -20,7 +21,7 @@ class BurgerMenu extends Component {
         onClick={this.props.toggleSideNavAction}
         className="material-icons burger-icon"
       >
-        {'menu'}
+        {stringMenu}
       </i>
     );
   }

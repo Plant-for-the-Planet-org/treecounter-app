@@ -13,7 +13,7 @@ import TextHeading from '../Common/Heading/TextHeading';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import CardLayout from '../Common/Card';
 import { delimitNumbers } from '../../utils/utils';
-
+const nbsp = '&nbsp;';
 let TCombForm = t.form.Form;
 const emptyProjectInfo = {
   name: ''
@@ -21,7 +21,7 @@ const emptyProjectInfo = {
   // country: 'MX',
   // geoLocation: 'geoLongitude=-146.31011&geoLatitude=79.074456&country=MX'
 };
-
+const plus = '+';
 export const firstLetterUppercase = string => {
   if (typeof string == 'string') {
     let returnString = string.split(' ');
@@ -212,6 +212,7 @@ export default class ManageProjects extends Component {
       (plantProject, index) => {
         return [
           <ConfirmDeletion
+            key={Math.random()}
             isOpen={this.state.openDialog}
             handleDeletion={() =>
               this.handleDeleteProjectCLick(plantProject, index)
@@ -310,7 +311,9 @@ export default class ManageProjects extends Component {
                       this.handleAddNewProject();
                     }}
                   >
-                    +&nbsp;{i18n.t('label.new_project')}
+                    {plus}
+                    {nbsp}
+                    {i18n.t('label.new_project')}
                   </button>
                 </div>
               </div>

@@ -13,6 +13,7 @@ const ActivePlantProject = props => {
     selectPlantProjectAction(id);
   };
   let route = `/payment/project/${props.id}`;
+  const spaceChar = ' ';
   return (
     <div className="row">
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -25,7 +26,8 @@ const ActivePlantProject = props => {
       <div className="bottomBtn col-md-12">
         <a className="col-md-6 leftBtn" href="#">
           {i18n.t('label.seeMore')}
-        </a>{' '}
+        </a>
+        {spaceChar}
         <Link
           className="col-md-6 rightBtn"
           to={route}

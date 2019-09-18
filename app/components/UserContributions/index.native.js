@@ -36,7 +36,6 @@ export default class UserContributions extends React.Component {
     return (
       <TabBar
         {...props}
-        indicatorStyle={tabBarStyles.indicator}
         style={[tabBarStyles.tabBar]}
         labelStyle={tabBarStyles.textStyle}
         indicatorStyle={tabBarStyles.textActive}

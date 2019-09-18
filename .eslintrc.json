@@ -79,4 +79,14 @@
     "react/react-in-jsx-scope": 2,
     "react/self-closing-comp": 2
   }
+  // "overrides": [
+  //   {
+  //     "files": [
+  //       "*.native.js"
+  //     ],
+  //     "rules": {
+  //       "react-native/no-raw-text": 1
+  //     }
+  //   }
+  // ]
 }

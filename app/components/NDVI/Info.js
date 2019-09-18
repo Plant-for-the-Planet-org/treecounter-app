@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import parseDate from './NDVIfunctions/parseDate';
 import { questionmark_orange } from '../../assets';
 import ReactTooltip from 'react-tooltip';
-
+const space = ' ';
 const Info = props => {
   const aggregate = props.selectedDataPoint.ndviAggregate;
 
@@ -14,7 +14,8 @@ const Info = props => {
           <div className="row">
             <div className="flex-1">
               <p>
-                {props.ndviResulFromSpell}{' '}
+                {props.ndviResulFromSpell}
+                {space}
                 {parseDate(
                   props.selectedDataPoint.month,
                   props.selectedDataPoint.year

@@ -41,12 +41,13 @@ class Offline extends React.Component {
 
     const { account, amount, currency } = this.props;
     const userMessage = i18n.t('label.confirm', { amount, currency });
-
+    const space = ' ';
     return (
       <div className="payment-option">
         <div onClick={this.handleArrowClick} className="payment-option-header">
           <span>
-            <img className="logo" src={payment_bank} />{' '}
+            <img className="logo" src={payment_bank} />
+            {space}
             {i18n.t('label.bank_transfer')}
           </span>
           <img className={arrow} src={payment_arrow} />

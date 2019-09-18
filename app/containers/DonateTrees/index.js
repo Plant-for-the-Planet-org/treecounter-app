@@ -69,14 +69,11 @@ class DonationTreesContainer extends PureComponent {
         supportTreecounter={this.props.supportTreecounter}
         paymentStatus={this.props.paymentStatus}
         paymentClear={this.props.paymentClear}
-        paymentStatus={this.props.paymentStatus}
         plantProjectClear={this.props.clearPlantProject}
         selectedProject={this.props.selectedProject}
         selectedTpo={this.props.selectedTpo}
         setProgressModelState={this.props.setProgressModelState}
-        supportTreecounter={this.props.supportTreecounter}
         updateRoute={this.updateRoute}
-        updateUserProfile={this.props.updateUserProfile}
         {...this.props}
       />
     );

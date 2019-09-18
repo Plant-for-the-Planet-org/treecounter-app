@@ -79,7 +79,6 @@ export default class RecieptTabsView extends React.PureComponent {
     return (
       <TabBar
         {...props}
-        indicatorStyle={styles.indicator}
         style={styles.tabBar}
         tabStyle={{ width: 200 }}
         labelStyle={styles.textStyle}

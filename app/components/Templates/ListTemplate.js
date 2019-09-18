@@ -5,13 +5,17 @@ export const renderAddButtonConfig = {};
 
 // Create CUSTOM list with custom add and remove buttons
 export function ListTemplateGenerator(config) {
+  const plusChar = '+';
+  const nbsp = '&nbsp;';
   return function ListTemplate(title) {
     const template = t.form.Form.templates.list.clone({
       renderAddButton: locals => {
         return (
           <div className="pftp-addbutton">
             <button type="button" onClick={locals.add.click}>
-              +&nbsp;{i18n.t(title)}
+              {plusChar}
+              {nbsp}
+              {i18n.t(title)}
             </button>
           </div>
         );

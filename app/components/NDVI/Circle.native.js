@@ -12,7 +12,7 @@ const getNDVIColor = (point, isColor = false) => {
   }
   return point;
 };
-
+const colorLiteralTransparent = 'transparent';
 const Circle = props => {
   let colors = [];
   let locations = [];
@@ -67,7 +67,11 @@ const Circle = props => {
       </TouchableItem>
     );
   } else {
-    return <View style={[styles.circle, { backgroundColor: 'transparent' }]} />;
+    return (
+      <View
+        style={[styles.circle, { backgroundColor: colorLiteralTransparent }]}
+      />
+    );
   }
 };
 

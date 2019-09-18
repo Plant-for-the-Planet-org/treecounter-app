@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { updateRoute } from '../../helpers/routerHelper';
 import SearchAutosuggest from './SearchAutosuggest';
-
+const search = 'search';
 class SearchBar extends React.Component {
   suggestionClicked = (event, data) => {
     // if(data.suggestion.type === 'treecounter') {
@@ -33,7 +33,7 @@ class SearchBar extends React.Component {
             onSuggestionClicked={this.suggestionClicked}
             clearSuggestions
           />
-          <i className="material-icons search-icon">{'search'}</i>
+          <i className="material-icons search-icon">{search}</i>
         </div>
       </div>
     );

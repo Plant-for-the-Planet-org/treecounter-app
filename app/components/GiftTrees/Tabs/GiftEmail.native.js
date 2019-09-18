@@ -12,7 +12,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import i18n from '../../../locales/i18n';
 
 let TCombForm = t.form.Form;
-
+const colorLiteralc4bfbf = '#c4bfbf';
 export default class GiftEmail extends Component {
   constructor(props) {
     super(props);
@@ -70,7 +70,7 @@ export default class GiftEmail extends Component {
             <Text
               style={{
                 padding: 5,
-                color: '#c4bfbf',
+                color: colorLiteralc4bfbf,
                 marginRight: 10,
                 width: '90%'
               }}

@@ -54,12 +54,13 @@ export default class ContributionCard extends React.Component {
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
       ? [
-          <TextSpan>
+          <TextSpan key={Math.random()}>
             {i18n.t('label.gifted_on_to', {
               date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
             })}
           </TextSpan>,
           <TextSpan
+            key={Math.random()}
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug
@@ -93,8 +94,11 @@ export default class ContributionCard extends React.Component {
   dedicateActionLine = (isGift, givee, giveeSlug) => {
     return isGift
       ? [
-          <TextSpan>{i18n.t('label.dedicated_to')}</TextSpan>,
+          <TextSpan key={Math.random()}>
+            {i18n.t('label.dedicated_to')}
+          </TextSpan>,
           <TextSpan
+            key={Math.random()}
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug
@@ -110,7 +114,7 @@ export default class ContributionCard extends React.Component {
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && givee
       ? [
-          <TextSpan>
+          <TextSpan key={Math.random()}>
             {i18n.t('label.given_on_by', {
               date: moment(getDateFromMySQL(redemptionDate)).format(
                 'DD MMM YYYY'
@@ -118,6 +122,7 @@ export default class ContributionCard extends React.Component {
             })}
           </TextSpan>,
           <TextSpan
+            key={Math.random()}
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug
@@ -133,7 +138,7 @@ export default class ContributionCard extends React.Component {
           })
         : givee
           ? [
-              <TextSpan>
+              <TextSpan key={Math.random()}>
                 {i18n.t('label.dedicated_on_by', {
                   date: moment(getDateFromMySQL(redemptionDate)).format(
                     'DD MMM YYYY'
@@ -141,6 +146,7 @@ export default class ContributionCard extends React.Component {
                 })}
               </TextSpan>,
               <TextSpan
+                key={Math.random()}
                 onPress={() =>
                   updateRoute(getLocalRoute('app_treecounter'), {
                     treeCounterId: giveeSlug
@@ -211,6 +217,7 @@ export default class ContributionCard extends React.Component {
       givee,
       giveeSlug
     );
+    const spaceChar = ' ';
     let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
     let borderColor =
       contributionType == 'donation'
@@ -288,7 +295,7 @@ export default class ContributionCard extends React.Component {
               : null}
             {!isPending ? (
               <TextSpan>
-                {' '}
+                {spaceChar}
                 {cardType && cardType.length > 0
                   ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
                   : ''}
@@ -399,7 +406,7 @@ export default class ContributionCard extends React.Component {
             ) : null}
             {!isPending ? (
               <TextSpan>
-                {' '}
+                {spaceChar}
                 {cardType && cardType.length > 0
                   ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
                   : ''}
@@ -485,7 +492,7 @@ export default class ContributionCard extends React.Component {
               : null}
             {!isPending ? (
               <TextSpan>
-                {' '}
+                {spaceChar}
                 {cardType && cardType.length > 0
                   ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
                   : ''}

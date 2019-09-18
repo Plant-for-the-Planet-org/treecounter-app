@@ -40,7 +40,7 @@ class PlantProjectCarousel extends React.Component {
     return (
       <Slider {...settings}>
         {plantProjects.map(plantProject => (
-          <div className="plant_project_carousal__content">
+          <div key={Math.random()} className="plant_project_carousal__content">
             <PlantProjectFull
               onViewMoreClick={() =>
                 this.setState({ imageViewMore: !this.state.imageViewMore })

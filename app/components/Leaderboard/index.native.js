@@ -15,6 +15,7 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n';
 import _ from 'lodash';
 
+const colorLiteralTransparent = 'transparent';
 export default class Leaderboard extends Component {
   constructor(props) {
     super(props);
@@ -163,7 +164,7 @@ export default class Leaderboard extends Component {
           tooltipContainerStyle={styles.tooltipContainerStyle}
           setBelow
           labelSeparatorColor="transparent"
-          overlayStyle={{ backgroundColor: 'transparent' }} // set the overlay invisible
+          overlayStyle={{ backgroundColor: colorLiteralTransparent }} // set the overlay invisible
           buttonComponent={
             <TouchableItem
               onPress={event => {

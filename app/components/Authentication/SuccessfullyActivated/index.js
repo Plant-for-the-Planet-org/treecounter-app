@@ -7,6 +7,8 @@ import i18n from '../../../locales/i18n.js';
 import { check_green, redeemSignIn } from '../../../assets';
 import InlineLink from '../../../components/Common/InlineLink';
 
+const spaceChar = ' ';
+const dotChar = '.';
 export default class SuccessfullyActivatedAccount extends Component {
   render() {
     const setTarget = (
@@ -41,12 +43,18 @@ export default class SuccessfullyActivatedAccount extends Component {
 
           {this.props.success ? (
             <TextBlock>
-              {i18n.t('label.do_profile_or_target') + ' '} {customizeProfile}{' '}
-              {' ' + i18n.t('label.or') + ' '} {setTarget} {'.'}
+              {i18n.t('label.do_profile_or_target') + spaceChar}
+              {customizeProfile}
+              {spaceChar}
+              {spaceChar + i18n.t('label.or') + spaceChar}
+              {setTarget}
+              {dotChar}
             </TextBlock>
           ) : (
             <TextBlock>
-              {i18n.t('label.do_login') + ' '} {login} {'.'}
+              {i18n.t('label.do_login') + spaceChar}
+              {login}
+              {dotChar}
             </TextBlock>
           )}
         </CardLayout>

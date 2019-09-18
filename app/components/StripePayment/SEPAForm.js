@@ -5,6 +5,7 @@ import { payment_sepa, payment_arrow } from '../../assets';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n';
 
+const spaceChar = ' ';
 const createOptions = (fontSize, padding) => {
   return {
     style: {
@@ -44,7 +45,10 @@ const SEPAForm = props => (
       <IbanElement supportedCountries={['SEPA']} {...createOptions()} />
 
       <div className="mandate-acceptance">
-        {i18n.t('label.stripe_sepa_des1')} {props.tpoName}{' '}
+        {i18n.t('label.stripe_sepa_des1')}
+        {spaceChar}
+        {props.tpoName}
+        {spaceChar}
         {i18n.t('label.stripe_sepa_des2')}
       </div>
       <PrimaryButton onClick={props.onSubmitSEPAForm}>

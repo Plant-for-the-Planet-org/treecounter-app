@@ -9,7 +9,7 @@ import RoundedButton from '../Common/Button/RoundedButton';
 import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
 import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
-
+const notifications_none = 'notifications_none';
 class HeaderFields extends Component {
   constructor() {
     super();
@@ -61,7 +61,7 @@ class HeaderFields extends Component {
                   </span>
                 </div>
                 <div className="bell-icon">
-                  <i className="material-icons">notifications_none</i>
+                  <i className="material-icons">{notifications_none}</i>
                 </div>
               </div>
             }

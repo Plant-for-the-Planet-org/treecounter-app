@@ -6,6 +6,7 @@ import { withNavigation } from 'react-navigation';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
 
+const colorLiteralWhite = 'white';
 class ConfirmProfileDeletionModal extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +18,10 @@ class ConfirmProfileDeletionModal extends Component {
     return (
       <View style={styles.confirmDeleteContainer}>
         <ScrollView
-          contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
+          contentContainerStyle={{
+            flex: 1,
+            backgroundColor: colorLiteralWhite
+          }}
         >
           <View style={styles.container}>
             <Text style={styles.textHeader}>{i18n.t('label.sure')}</Text>
@@ -43,7 +47,6 @@ class ConfirmProfileDeletionModal extends Component {
               maxLength={6}
               multiline={false}
               returnKeyType={'next'}
-              autoCapitalize
               allowFontScaling
               autoCapitalize={'sentences'}
             />

@@ -79,7 +79,7 @@ export default class WidgetShare extends PureComponent {
         ) : (
           <React.Fragment>
             <CardLayout className={'pftp-widget-card'}>
-              <h6> {i18n.t('label.widget_share_choose_widget')}</h6>
+              <h6>{i18n.t('label.widget_share_choose_widget')}</h6>
               <div className={'pftp-widgets'}>
                 <div className="pftp-widgets__type">
                   {widgetList.map(widget => {
@@ -112,7 +112,7 @@ export default class WidgetShare extends PureComponent {
                   })}
                 </div>
               </div>
-              <h6> {i18n.t('label.widget_share_copy_paste_html_snippet')}</h6>
+              <h6>{i18n.t('label.widget_share_copy_paste_html_snippet')}</h6>
               <div className={'pftp-widget-html-snippet'}>
                 <pre>
                   <code>{widgetCode}</code>

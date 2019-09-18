@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n.js';
 import { currencySort } from './utils';
-
+function encloseWithBraket(str) {
+  return ' [' + str + ']';
+}
 const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
   let currenciesArray = currencySort(Object.keys(currencies));
   if (currenciesArray.indexOf(selectedCurrency) === -1) {
@@ -26,7 +28,8 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
               value={value}
               key={value}
             >
-              {currencies[value]} [{value}]
+              {currencies[value]}
+              {encloseWithBraket(value)}
             </option>
           );
         })}

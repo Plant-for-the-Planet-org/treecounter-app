@@ -8,7 +8,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 // import { getFormSchema } from '../../server/parsedSchemas/currencySelector';
 
 // let Form = t.form.Form;
-
+const colorLiteral686060 = '#686060';
 const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
   // const {
   //   schemaOptions,
@@ -54,7 +54,7 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
       animationDuration={0}
       itemTextStyle={{
         fontSize: 13,
-        color: '#686060'
+        color: colorLiteral686060
       }}
       initialNumToRender={currenciesDropdownFormat.length}
       value={i18n.t(selectedCurrency)}

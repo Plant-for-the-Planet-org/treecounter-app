@@ -15,7 +15,8 @@ import DescriptionHeading from '../../components/Common/Heading/DescriptionHeadi
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
 let TCombForm = t.form.Form;
-
+const plusChar = '+';
+const nbsp = '&nbsp;';
 const getSingleTreeLayout = (
   props1,
   _onClickAddClassification,
@@ -38,7 +39,9 @@ const getSingleTreeLayout = (
 
         <div className="pftp-addbutton">
           <button type="button" onClick={_onClickAddClassification}>
-            +&nbsp;{i18n.t('label.add_classification')}
+            {plusChar}
+            {nbsp}
+            {i18n.t('label.add_classification')}
           </button>
         </div>
         <div

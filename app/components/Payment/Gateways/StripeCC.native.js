@@ -4,12 +4,14 @@ import stripe, { PaymentCardTextField } from 'tipsi-stripe';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import i18n from '../../../locales/i18n';
-
+const colorLiteralBlack = 'black';
+const colorLiteral449aeb = '#449aeb';
+const stringPay = 'Pay';
 const styles = StyleSheet.create({
   field: {
     width: 300,
-    color: '#449aeb',
-    borderColor: '#000',
+    color: colorLiteral449aeb,
+    borderColor: colorLiteralBlack,
     borderWidth: 1,
     borderRadius: 5
   }
@@ -88,7 +90,7 @@ export default class StripeCC extends Component {
             this.state.submitClicked ? () => null : () => this.payviaCard()
           }
         >
-          Pay
+          {stringPay}
         </PrimaryButton>
       </View>
     );

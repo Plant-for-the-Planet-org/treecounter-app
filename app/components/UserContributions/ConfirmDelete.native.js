@@ -8,13 +8,17 @@ import i18n from '../../locales/i18n.js';
 
 class ConfirmDeletionModal extends Component {
   render() {
+    const colorLeteralWhite = 'white';
     const deleteContribution = this.props.navigation.getParam(
       'deleteContribution'
     );
     return (
       <View style={styles.confirmDeleteContainer}>
         <ScrollView
-          contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
+          contentContainerStyle={{
+            flex: 1,
+            backgroundColor: colorLeteralWhite
+          }}
         >
           <View style={styles.container}>
             <Text style={styles.textHeader}>

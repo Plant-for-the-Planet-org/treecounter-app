@@ -3,14 +3,19 @@ import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import { questionmark_orange } from '../../assets';
 import { delimitNumbers } from '../../utils/utils';
-
+const Kg = 'Kg';
+const space = ' ';
 const CarbonDetails = props => {
   return (
     <React.Fragment>
       <div className="carbon-details-container">
         <div className="row">
           <div className="flex-1 carbon-value-box">
-            <h5>{delimitNumbers(props.carbonValue)} Kg</h5>
+            <h5>
+              {delimitNumbers(props.carbonValue)}
+              {space}
+              {Kg}
+            </h5>
           </div>
           <div className="text-center btn-container">
             <div className="tooltip">

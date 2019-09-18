@@ -12,7 +12,7 @@ import i18n from '../../../locales/i18n';
 import searchBarStyles from '../../../styles/header/search_bar.native';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import UserProfileImage from '../../Common/UserProfileImage';
-
+const colorLiteralTransparent = 'transparent';
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
   static Header = Header;
@@ -114,7 +114,7 @@ class SearchUser extends React.Component {
           style={{
             ...searchBarStyles.searchContainer,
             width: '100%',
-            backgroundColor: 'transparent'
+            backgroundColor: colorLiteralTransparent
           }}
           tintColor={
             this.props.searchInputTintColor || this.props.headerTintColor

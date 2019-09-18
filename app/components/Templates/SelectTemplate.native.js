@@ -40,7 +40,7 @@ class SelectTemplateIOS extends React.PureComponent {
     let datepickerStyle = stylesheet.datepicker.normal;
     let dateValueStyle =
       datePickerStyle.dateValueStyle || stylesheet.dateValue.normal;
-
+    const colorLiteral686060 = '#686060';
     if (locals.hasError) {
       touchableStyle = stylesheet.dateTouchable.error;
       datepickerStyle = stylesheet.datepicker.error;
@@ -122,7 +122,7 @@ class SelectTemplateIOS extends React.PureComponent {
           animationDuration={0}
           itemTextStyle={{
             fontSize: 13,
-            color: '#686060'
+            color: colorLiteral686060
           }}
           value={i18n.t(locals.value)}
           textColor="rgba(104,96,96, 0.8)"
@@ -206,7 +206,7 @@ class SelectTemplateIOS extends React.PureComponent {
         animationDuration={0}
         itemTextStyle={{
           fontSize: 13,
-          color: '#686060'
+          color: colorLiteral686060
         }}
         value={i18n.t(locals.value)}
         textColor="rgba(104,96,96, 0.8)"

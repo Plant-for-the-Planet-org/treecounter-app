@@ -6,7 +6,7 @@ import { View, Text, Image } from 'react-native';
 import styles from '../../styles/competition/competition-snippet.native';
 import { flagTarget } from '../../assets';
 import { delimitNumbers } from '../../utils/utils';
-
+const colorLiteralb9d384 = '#b9d384';
 class CompetitionProgressBar extends React.Component {
   constructor(props) {
     super(props);
@@ -29,14 +29,13 @@ class CompetitionProgressBar extends React.Component {
       <View style={styles.treeCounterContainer}>
         <View style={styles.treePlantedContainer}>
           <View
-            style={styles.treePlantedChildContainer}
             style={
               treeCountWidth > 0
                 ? {
                     height: '100%',
                     flexDirection: 'row',
-                    backgroundColor: '#b9d384',
-                    borderColor: '#b9d384',
+                    backgroundColor: colorLiteralb9d384,
+                    borderColor: colorLiteralb9d384,
                     width: treeCountWidth + '%',
                     paddingRight: 10,
                     padding: 5,

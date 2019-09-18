@@ -8,7 +8,8 @@ import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import { getLocale } from '../../actions/getLocale';
-
+const space = ' ';
+const folder_open = 'folder_open';
 let userLang = getLocale(); // en|de
 export default class Menu extends Component {
   sideNavImage() {
@@ -18,7 +19,7 @@ export default class Menu extends Component {
     return (
       <div className="app-container__sidenav--image">
         <Link to={route} onClick={() => this.linkClicked()}>
-          {' '}
+          {space}
           <img src={images['SideMenuImage']} />
         </Link>
       </div>
@@ -131,7 +132,7 @@ export default class Menu extends Component {
                     </li>
                   ) : (
                     <li key={'' + element.sequence + menuItem.sequence}>
-                      <i className="material-icons">{'folder_open'}</i>
+                      <i className="material-icons">{folder_open}</i>
                       <a>{menuItem.caption}</a>
                     </li>
                   )
@@ -143,12 +144,14 @@ export default class Menu extends Component {
         <div className="bottom-banner">
           <a
             target="_blank"
+            rel="noopener noreferrer"
             href="https://apps.apple.com/app/plant-for-the-planet/id1444740626"
           >
             <img src={images['appleStoreBadge_' + userLang]} />
           </a>
           <a
             target="_blank"
+            rel="noopener noreferrer"
             href="https://play.google.com/store/apps/details?id=org.pftp"
           >
             <img src={images['googlePlayBadge_' + userLang]} />

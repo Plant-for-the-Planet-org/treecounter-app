@@ -52,7 +52,7 @@ class PlantProjectImageCarousel extends Component {
             renderContent={this.renderImage}
           >
             {this.props.images.map(url => (
-              <View style={styles.imageContainer}>
+              <View key={Math.random()} style={styles.imageContainer}>
                 <Image
                   style={styles.image}
                   key={url}
@@ -70,18 +70,18 @@ class PlantProjectImageCarousel extends Component {
 }
 
 PlantProjectImageCarousel.propTypes = {};
-
+const colorLiteralWhite = 'white';
 const styles = StyleSheet.create({
   container: {
     flex: 1
   },
   closeText: {
-    color: 'white',
+    color: colorLiteralWhite,
     textAlign: 'right',
     padding: 10
   },
   footerText: {
-    color: 'white',
+    color: colorLiteralWhite,
     textAlign: 'center'
   },
   imageContainer: {

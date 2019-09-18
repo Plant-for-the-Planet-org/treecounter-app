@@ -5,6 +5,8 @@ import i18n from '../../locales/i18n';
 import { tree } from '../../assets';
 import NumberFormat from '../Common/NumberFormat';
 import { formatNumber } from '../../utils/utils';
+const spaceChar = ' ';
+const equalChar = '=';
 class TreeCountSelector extends React.Component {
   constructor(props) {
     super(props);
@@ -116,9 +118,11 @@ class TreeCountSelector extends React.Component {
                     this.handleFixedTreeCountChange(evt.target.value)
                   }
                 />
-                {treeCount} {i18n.t('label.trees')}
+                {treeCount}
+                {spaceChar}
+                {i18n.t('label.trees')}
               </label>
-              <span className="price-conversion__equal">=</span>
+              <span className="price-conversion__equal">{equalChar}</span>
               <span className="price-conversion__radio">
                 <NumberFormat
                   data={treeCountToAmount(treeCount)}
@@ -151,11 +155,12 @@ class TreeCountSelector extends React.Component {
                 onChange={evt =>
                   this.handleVariableTreeCountChange(evt.target.value)
                 }
-              />{' '}
+              />
+              {spaceChar}
               {i18n.t('label.trees')}
             </div>
           </label>
-          <span className="price-conversion__equal">=</span>
+          <span className="price-conversion__equal">{equalChar}</span>
           <span className="price-conversion__radio">
             <input
               type="text"
@@ -164,7 +169,8 @@ class TreeCountSelector extends React.Component {
               onChange={evt =>
                 this.handleVariableAmountChange(evt.target.value)
               }
-            />{' '}
+            />
+            {spaceChar}
             {formatNumber(1, null, currency).replace(/[\d.,]/g, '')}
           </span>
         </div>

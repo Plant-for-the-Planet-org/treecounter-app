@@ -6,6 +6,7 @@ import { View, Text } from 'react-native';
 import CheckBox from '../../Common/Checkbox';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 
+const colorLiteralb7d37f = '#b7d37f';
 class Offline extends React.Component {
   constructor(props) {
     super(props);
@@ -61,7 +62,7 @@ class Offline extends React.Component {
         <Text
           style={{
             textAlign: 'justify',
-            color: '#b7d37f',
+            color: colorLiteralb7d37f,
             marginTop: 15,
             marginLeft: 5,
             alignSelf: 'flex-start'

@@ -12,7 +12,7 @@ import DescriptionHeading from '../../components/Common/Heading/DescriptionHeadi
 import i18n from '../../locales/i18n.js';
 
 import CardLayout from '../Common/Card';
-
+const spaceChar = ' ';
 export default class FAQ extends Component {
   GetFAQList() {
     return this.props.faqs.map((faq, i) => (
@@ -44,9 +44,14 @@ export default class FAQ extends Component {
           {i18n.t('label.faqs')}
           <DescriptionHeading>
             {i18n.t('label.description1')}
-            <a href={'https://' + i18n.t('label.description2')} target="_blank">
+            <a
+              href={'https://' + i18n.t('label.description2')}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {i18n.t('label.description2')}
-            </a>{' '}
+            </a>
+            {spaceChar}
             {i18n.t('label.description3')}
           </DescriptionHeading>
         </TextHeading>

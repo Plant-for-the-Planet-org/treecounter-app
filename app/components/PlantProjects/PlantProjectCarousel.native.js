@@ -28,7 +28,7 @@ class PlantProjectCarousel extends Component {
 
   render() {
     const { plantProjects, tpoName } = this.props;
-
+    const colorLiteralb9d384 = '#b9d384';
     return (
       <Slick
         style={styles.slickWrapper}
@@ -40,7 +40,7 @@ class PlantProjectCarousel extends Component {
           elevation: 9
         }}
         activeDotStyle={{
-          backgroundColor: '#b9d384'
+          backgroundColor: colorLiteralb9d384
         }}
       >
         {plantProjects.length !== 0

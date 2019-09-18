@@ -11,6 +11,9 @@ import {
 
 import { SignupOrganization, SignupJustMe } from '../../../assets';
 import i18n from '../../../locales/i18n.js';
+const colorLiteral9c9b9b = '#9c9b9b';
+const colorLiteral96c04c = '#96c04c';
+const colorLiteral95c243 = '#95c243';
 
 export class SignUpType extends Component {
   constructor(props) {
@@ -165,43 +168,37 @@ export const styles = StyleSheet.create({
   circle: {
     borderRadius: 35,
     borderWidth: 10,
-    borderColor: '#9c9b9b',
+    borderColor: colorLiteral9c9b9b,
     height: 70
   },
   selectedCircle: {
     borderRadius: 50,
     borderWidth: 10,
-    borderColor: '#96c04c',
+    borderColor: colorLiteral96c04c,
     height: 99
   },
   selectedBottomTypeLabel: {
-    color: '#95c243',
+    color: colorLiteral95c243,
     fontSize: 13,
     maxWidth: 99
   },
   bottomTypeLabel: {
-    color: '#9c9b9b',
+    color: colorLiteral9c9b9b,
     fontSize: 13,
     maxWidth: 90
   },
   selectedSeprater: {
-    backgroundColor: '#95c243',
+    backgroundColor: colorLiteral95c243,
     width: '100%',
     height: 2,
     marginTop: 3,
     marginBottom: 3
   },
   seprater: {
-    backgroundColor: '#9c9b9b',
+    backgroundColor: colorLiteral9c9b9b,
     width: '100%',
     height: 2,
     marginTop: 3,
     marginBottom: 3
-  },
-  bottomContainer: {
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    flex: 1,
-    marginBottom: 10
   }
 });

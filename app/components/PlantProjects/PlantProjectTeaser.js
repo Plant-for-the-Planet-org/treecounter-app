@@ -4,6 +4,7 @@ import { tick } from '../../assets';
 import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
 
+const spaceChar = ' ';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectTeaser
  */
@@ -17,7 +18,8 @@ const PlantProjectTeaser = ({
     <div className="project-teaser__container">
       <div className="column">
         <span className="teaser__tpoHeading">
-          {projectName}{' '}
+          {projectName}
+          {spaceChar}
           <span>
             {isCertified ? (
               <img className="teaser__certified" src={tick} />

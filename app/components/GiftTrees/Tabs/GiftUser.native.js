@@ -7,6 +7,8 @@ import { iosInformation } from '../../../assets';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import i18n from '../../../locales/i18n';
 
+const colorLiteralff0033 = '#ff0033';
+const colorLiteral686060 = '#686060';
 export default class GiftUser extends Component {
   constructor(props) {
     super(props);
@@ -67,10 +69,9 @@ export default class GiftUser extends Component {
               <Text
                 style={{
                   padding: 5,
-                  color: '#c4bfbf',
                   marginRight: 10,
                   width: '90%',
-                  color: '#686060'
+                  color: colorLiteral686060
                 }}
               >
                 {i18n.t('label.gift_trees_description')}
@@ -86,7 +87,7 @@ export default class GiftUser extends Component {
             <View>
               <Text
                 style={{
-                  color: '#ff0033',
+                  color: colorLiteralff0033,
                   fontSize: 11
                 }}
               >

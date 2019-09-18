@@ -8,7 +8,7 @@ import i18n from '../../locales/i18n.js';
 import welcomeLogo from '../../assets/images/icons/welcomeLogo.png';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 import TouchableItem from '../Common/TouchableItem.native';
-
+const colorLiteralWhite = 'white';
 class WelcomeScreenModal extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +21,10 @@ class WelcomeScreenModal extends Component {
     return (
       <View style={styles.confirmDeleteContainer}>
         <ScrollView
-          contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
+          contentContainerStyle={{
+            flex: 1,
+            backgroundColor: colorLiteralWhite
+          }}
         >
           <View style={styles.container}>
             <Image

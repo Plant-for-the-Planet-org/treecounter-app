@@ -1,7 +1,8 @@
 import React from 'react';
 import i18n from '../../locales/i18n.js';
 import { close_green } from '../../assets';
-
+const plusChar = '+';
+const nbsp = '&nbsp;';
 const PlantProjectImageListTemplate = function(title) {
   return function(locals) {
     return (
@@ -31,7 +32,11 @@ const PlantProjectImageListTemplate = function(title) {
           })}
         </div>
         <div className="pftp-addbutton">
-          <button onClick={locals.add.click}>+&nbsp;{i18n.t(title)}</button>
+          <button onClick={locals.add.click}>
+            {plusChar}
+            {nbsp}
+            {i18n.t(title)}
+          </button>
         </div>
       </div>
     );

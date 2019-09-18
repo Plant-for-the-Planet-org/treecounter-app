@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import PropTypes from 'prop-types';
 import NDVI from '../../../containers/NDVI/NDVI';
 import UserContributions from '../../UserContributions/userContribution.native';
@@ -110,7 +110,11 @@ class UserContributionsDetails extends React.Component {
           />
         ) : null}
 
-        {!!ndviUid ? <NDVI ndviUid={ndviUid} /> : null}
+        {!!ndviUid ? (
+          <View style={{ marginLeft: 8, marginRight: 8, marginTop: 20 }}>
+            <NDVI ndviUid={ndviUid} />
+          </View>
+        ) : null}
       </ScrollView>
     );
   }

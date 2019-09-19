@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { supportedTreecounterSelector } from '../../selectors';
+import { getAllPlantProjectsSelector } from '../../selectors';
 import UserContributionsDetails from '../../components/UserContributions/ContributionDetails/index.native';
 import _ from 'lodash';
 // Actions
@@ -26,17 +26,19 @@ class UserContributionsDetailsContainer extends React.Component {
         navigation={this.props.navigation}
         userProfileId={this.props.userProfileId}
         contribution={this.getContribution()}
-        supportTreecounter={this.props.supportTreecounter}
+        plantProjects={this.props.plantProjects}
         deleteContribution={this.props.deleteContribution}
       />
     );
   }
 }
 
-const mapStateToProps = state => ({
-  userProfileId: currentUserProfileIdSelector(state),
-  supportTreecounter: supportedTreecounterSelector(state)
-});
+const mapStateToProps = state => {
+  return {
+    userProfileId: currentUserProfileIdSelector(state),
+    plantProjects: getAllPlantProjectsSelector(state)
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
@@ -54,5 +56,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 UserContributionsDetailsContainer.propTypes = {
   userProfileId: PropTypes.number.isRequired,
   navigation: PropTypes.any,
-  deleteContribution: PropTypes.func
+  deleteContribution: PropTypes.func,
+  plantProjects: PropTypes.object
 };

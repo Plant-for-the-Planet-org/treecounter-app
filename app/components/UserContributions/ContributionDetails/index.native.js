@@ -9,19 +9,18 @@ import moment from 'moment';
 import { getDateFromMySQL } from '../../../helpers/utils';
 import i18n from '../../../locales/i18n.js';
 import { withNavigation } from 'react-navigation';
-
+import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCarousel';
 import { getLocalRoute } from '../../../actions/apiRouting';
 
 class UserContributionsDetails extends React.Component {
   render() {
-    console.log(this.props.contribution, 'contribution');
     if (!this.props.contribution) {
       return null;
     }
     const hasMeasurements =
       this.props.contribution.contributionMeasurements &&
       Object.keys(this.props.contribution.contributionMeasurements).length > 0;
-    const ndviUid = this.props.contribution && this.props.contribution.ndviUid;
+    let ndviUid = this.props.contribution && this.props.contribution.ndviUid;
     const {
       treeCount,
       plantDate,
@@ -35,13 +34,18 @@ class UserContributionsDetails extends React.Component {
       plantProjectName,
       tpoName,
       giver,
-      mayUpdate
+      mayUpdate,
+      contributionImages
     } = this.props.contribution;
+    const plantProjects = this.props.plantProjects || [];
+
     let plantedDate = undefined;
     let dedicatedTo = undefined;
     let contributionTypeText = undefined;
     let location = undefined;
     let isSinglePlanted = false;
+    let contributionOrPlantedImages = contributionImages;
+    let selectedPlantProjectDetails = undefined;
 
     if (plantDate) {
       plantedDate = moment(getDateFromMySQL(plantDate)).format('MMMM DD, YYYY');
@@ -50,6 +54,18 @@ class UserContributionsDetails extends React.Component {
       contributionTypeText = i18n.t('label.usr_contribution_planted');
       isSinglePlanted = treeCount > 1 ? false : true;
     } else if (contributionType === 'donation') {
+      if (plantProjects.length > 0) {
+        selectedPlantProjectDetails = plantProjects.filter(
+          project => project.id === plantProjectId
+        );
+        if (selectedPlantProjectDetails.length > 0) {
+          selectedPlantProjectDetails = selectedPlantProjectDetails[0];
+          contributionOrPlantedImages =
+            selectedPlantProjectDetails.plantProjectImages;
+          ndviUid = selectedPlantProjectDetails.ndviUid;
+        }
+      }
+
       contributionTypeText = i18n.t('label.donation_contribution');
       if (plantProjectName) {
         location = `${plantProjectName} by ${tpoName ? tpoName : ''}`;
@@ -104,6 +120,15 @@ class UserContributionsDetails extends React.Component {
             }}
           />
         ) : null}
+        {contributionOrPlantedImages &&
+          contributionOrPlantedImages.length > 0 && (
+            <PlantProjectImageCarousel
+              images={contributionOrPlantedImages}
+              pictureType={
+                contributionType == 'planting' ? 'contribution' : undefined
+              }
+            />
+          )}
         {hasMeasurements ? (
           <Measurements
             measurements={this.props.contribution.contributionMeasurements}
@@ -124,7 +149,7 @@ UserContributionsDetails.propTypes = {
   userProfileId: PropTypes.number.isRequired,
   navigation: PropTypes.any,
   contribution: PropTypes.object.isRequired,
-  supportTreecounter: PropTypes.object,
+  plantProjects: PropTypes.object,
   deleteContribution: PropTypes.func
 };
 

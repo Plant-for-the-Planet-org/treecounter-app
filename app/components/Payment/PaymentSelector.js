@@ -69,32 +69,41 @@ class PaymentSelector extends Component {
     } else {
       const donationId = this.props.donationId
         ? this.props.donationId
-        : this.props.paymentStatus.contribution[0].id;
-      setProgressModelState(true);
-      this.props
-        .handlePay(
-          donationId,
-          {
-            gateway,
-            account: accountName,
-            source: { ...data }
-          },
-          this.props.currentUserProfile
-        )
-        .then(response => {
-          if (response.data.status == 'failed') {
-            this.props.paymentFailed({
-              status: false,
-              message: response.data.message || 'error'
-            });
-          } else {
-            this.props.finalizeDonation(
-              donationId,
-              this.props.currentUserProfile
-            );
-          }
-          setProgressModelState(false);
+        : this.props.paymentStatus
+          ? this.props.paymentStatus.contribution[0].id
+          : undefined;
+      if (donationId) {
+        setProgressModelState(true);
+        this.props
+          .handlePay(
+            donationId,
+            {
+              gateway,
+              account: accountName,
+              source: { ...data }
+            },
+            this.props.currentUserProfile
+          )
+          .then(response => {
+            if (response.data.status == 'failed') {
+              this.props.paymentFailed({
+                status: false,
+                message: response.data.message || 'error'
+              });
+            } else {
+              this.props.finalizeDonation(
+                donationId,
+                this.props.currentUserProfile
+              );
+            }
+            setProgressModelState(false);
+          });
+      } else {
+        this.props.paymentFailed({
+          status: false,
+          message: 'donation id missing error'
         });
+      }
     }
   }
 
@@ -249,7 +258,7 @@ class PaymentSelector extends Component {
             return (
               <div key={gateway}>
                 {this.state.errorMessage ? (
-                  <div>this.state.errorMessage</div>
+                  <div>{this.state.errorMessage}</div>
                 ) : null}
                 <Paypal
                   key={gateway}
@@ -271,7 +280,7 @@ class PaymentSelector extends Component {
             return (
               <div key={gateway}>
                 {this.state.errorMessage ? (
-                  <div>this.state.errorMessage</div>
+                  <div>{this.state.errorMessage}</div>
                 ) : null}
                 <Offline
                   key={gateway}

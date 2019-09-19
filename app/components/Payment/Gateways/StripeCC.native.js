@@ -6,7 +6,7 @@ import { NotificationManager } from '../../../notification/PopupNotificaiton/not
 import i18n from '../../../locales/i18n';
 const colorLiteralBlack = 'black';
 const colorLiteral449aeb = '#449aeb';
-const stringPay = 'Pay';
+const stringPay = i18n.t('label.Pay');
 const styles = StyleSheet.create({
   field: {
     width: 300,

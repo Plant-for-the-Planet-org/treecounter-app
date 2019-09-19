@@ -17,7 +17,7 @@ import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import ChallengeList from './challengeList';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
-
+const space = ' ';
 let TCombForm = t.form.Form;
 const getFormLayoutTemplate = () => {
   const formLayoutTreesTemplate = locals => {
@@ -208,7 +208,10 @@ export default class Challenge extends Component {
                 checked={this.state.checked === 'custom'}
                 className="radio_margin_left"
               />
-              <TextBlock>{i18n.t('label.by')}</TextBlock>
+              <TextBlock>
+                {i18n.t('label.by')}
+                {space}
+              </TextBlock>
               <input
                 type="number"
                 value={this.state.form.endDate}

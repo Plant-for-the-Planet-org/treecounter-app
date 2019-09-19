@@ -12,6 +12,7 @@ import i18n from '../../locales/i18n';
 import { categoryIcons } from '../../helpers/utils';
 import { delimitNumbers } from '../../utils/utils';
 import BackButton from '../Common/Button/BackButton';
+const space = ' ';
 export default class Leaderboard extends Component {
   constructor(props) {
     super(props);
@@ -168,7 +169,10 @@ export default class Leaderboard extends Component {
                 </div>
                 <div className="leaderboard-list__sort">
                   <div className="sort-container">
-                    <span>{i18n.t('label.sortBy')}</span>
+                    <span>
+                      {i18n.t('label.sortBy')}
+                      {space}
+                    </span>
                     <div className="pftp-selectfield">
                       <select
                         defaultValue={sortingQuery && sortingQuery.orderBy}
@@ -189,7 +193,10 @@ export default class Leaderboard extends Component {
                     </div>
                   </div>
                   <div className="sort-container">
-                    <span>{i18n.t('label.timePeriod')}</span>
+                    <span>
+                      {i18n.t('label.timePeriod')}
+                      {space}
+                    </span>
                     <div className="pftp-selectfield">
                       <select
                         defaultValue={sortingQuery && sortingQuery.period}

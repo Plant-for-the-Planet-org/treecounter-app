@@ -167,7 +167,6 @@ export default class SelectPlantProject extends Component {
     };
     const spaceChar = ' ';
     const stringSearch = 'search';
-    const stringS = 's';
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>
@@ -325,10 +324,7 @@ export default class SelectPlantProject extends Component {
                           {i18n.t('label.organisation')}
                         </th>
                         <th className="align-right">
-                          <span>
-                            {i18n.t('label.plantedTrees')}
-                            {stringS}
-                          </span>
+                          <span>{i18n.t('label.plantedTrees')}</span>
                         </th>
                         <th className="align-right">
                           <span>{i18n.t('label.Cost')}</span>

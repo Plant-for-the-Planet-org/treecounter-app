@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import { questionmark_orange } from '../../assets';
 import { delimitNumbers } from '../../utils/utils';
-const Kg = 'Kg';
+import i18n from '../../locales/i18n.js';
 const space = ' ';
 const CarbonDetails = props => {
   return (
@@ -14,7 +14,7 @@ const CarbonDetails = props => {
             <h5>
               {delimitNumbers(props.carbonValue)}
               {space}
-              {Kg}
+              {i18n.t('label.Kg')}
             </h5>
           </div>
           <div className="text-center btn-container">

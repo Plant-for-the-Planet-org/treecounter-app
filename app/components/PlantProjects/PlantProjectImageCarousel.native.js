@@ -51,8 +51,11 @@ class PlantProjectImageCarousel extends Component {
             ref={this.captureImageCarousel}
             renderContent={this.renderImage}
           >
-            {this.props.images.map(url => (
-              <View key={Math.random()} style={styles.imageContainer}>
+            {this.props.images.map((url, index) => (
+              <View
+                key={`ViewOf-${url}_${index}`}
+                style={styles.imageContainer}
+              >
                 <Image
                   style={styles.image}
                   key={url}

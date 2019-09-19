@@ -100,20 +100,22 @@ class PledgeEvents extends Component {
               contentContainerStyle={styles.peSliderScrollView}
             >
               {/* {pledgeImages} */}
-              {this.props.pledges.pledgeEventImages.map(pledgeImage => (
-                <Image
-                  key={Math.random()}
-                  style={styles.peSliderImage}
-                  source={{
-                    uri: getImageUrl(
-                      'eventGallery',
-                      'default',
-                      pledgeImage.image
-                    )
-                  }}
-                  resizeMode="contain"
-                />
-              ))}
+              {this.props.pledges.pledgeEventImages.map(
+                (pledgeImage, index) => (
+                  <Image
+                    key={`pledgeEventImages-${index}`}
+                    style={styles.peSliderImage}
+                    source={{
+                      uri: getImageUrl(
+                        'eventGallery',
+                        'default',
+                        pledgeImage.image
+                      )
+                    }}
+                    resizeMode="contain"
+                  />
+                )
+              )}
             </ScrollView>
           ) : null}
           <CardLayout style={styles.peDescriptionView}>

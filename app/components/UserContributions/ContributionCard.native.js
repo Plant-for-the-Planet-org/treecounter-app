@@ -138,13 +138,13 @@ class ContributionCard extends React.Component {
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
       ? [
-          <Text key={Math.random()}>
+          <Text key={`gifted_on_to--${plantDate}${giveeSlug}`}>
             {i18n.t('label.gifted_on_to', {
               date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
             })}
           </Text>,
           <Text
-            key={Math.random()}
+            key={`app_treecounter---${plantDate}_${givee}`}
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug,
@@ -179,9 +179,11 @@ class ContributionCard extends React.Component {
   dedicateActionLine = (isGift, givee, giveeSlug) => {
     return isGift
       ? [
-          <Text key={Math.random()}>{i18n.t('label.dedicated_to')}</Text>,
+          <Text key={'dedicated_to__' + Math.random()}>
+            {i18n.t('label.dedicated_to')}
+          </Text>,
           <Text
-            key={Math.random()}
+            key={'app_treecounter__' + Math.random()}
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug,
@@ -198,7 +200,7 @@ class ContributionCard extends React.Component {
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && givee
       ? [
-          <Text key={Math.random()}>
+          <Text key={`given_on_by_${redemptionDate}_${redemptionCode}`}>
             {i18n.t('label.given_on_by', {
               date: moment(getDateFromMySQL(redemptionDate)).format(
                 'DD MMM YYYY'
@@ -206,7 +208,7 @@ class ContributionCard extends React.Component {
             })}
           </Text>,
           <Text
-            key={Math.random()}
+            key={`app_treecounter_${redemptionDate}_${redemptionCode}`}
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug,
@@ -223,7 +225,7 @@ class ContributionCard extends React.Component {
           })
         : givee
           ? [
-              <Text key={Math.random()}>
+              <Text key={`dedicated_on_by__${redemptionDate}_${givee}`}>
                 {i18n.t('label.dedicated_on_by', {
                   date: moment(getDateFromMySQL(redemptionDate)).format(
                     'DD MMM YYYY'
@@ -231,7 +233,7 @@ class ContributionCard extends React.Component {
                 })}
               </Text>,
               <Text
-                key={Math.random()}
+                key={`app_treecounter__${givee}_${redemptionDate}`}
                 onPress={() =>
                   this.props.navigation.navigate(
                     getLocalRoute('app_treecounter'),

@@ -51,37 +51,36 @@ class PlantProjectFull extends React.Component {
         <ScrollView
           contentContainerStyle={[
             scrollStyle.styleContainer,
-            { paddingBottom: 72 }
+            {
+              paddingBottom: 72,
+              backgroundColor: 'white'
+            }
           ]}
         >
-          <CardLayout style={[styles.projectFullContainer]}>
-            <PlantProjectSnippet
-              key={'projectFull' + this.props.plantProject.id}
-              showMoreButton={false}
-              clickable={false}
-              plantProject={this.props.plantProject}
-              onSelectClickedFeaturedProjects={id =>
-                this.props.selectProject(id)
-              }
-              tpoName={tpo_name}
-            />
+          <PlantProjectSnippet
+            key={'projectFull' + this.props.plantProject.id}
+            showMoreButton={false}
+            clickable={false}
+            plantProject={this.props.plantProject}
+            onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
+            tpoName={tpo_name}
+          />
 
-            <View style={styles.horizontalRule} />
-            <View style={styles.plantProjectDetails}>
-              <PlantProjectDetails {...detailsProps} />
+          <View style={styles.horizontalRule} />
+          <View style={styles.plantProjectDetails}>
+            <PlantProjectDetails {...detailsProps} />
+          </View>
+          {this.props.plantProject.allowDonations ? (
+            <View style={styles.buttonContainer}>
+              <PrimaryButton
+                onClick={() =>
+                  this.props.selectProject(this.props.plantProject.id)
+                }
+              >
+                {i18n.t('label.donate')}
+              </PrimaryButton>
             </View>
-            {this.props.plantProject.allowDonations ? (
-              <View style={styles.buttonContainer}>
-                <PrimaryButton
-                  onClick={() =>
-                    this.props.selectProject(this.props.plantProject.id)
-                  }
-                >
-                  {i18n.t('label.donate')}
-                </PrimaryButton>
-              </View>
-            ) : null}
-          </CardLayout>
+          ) : null}
         </ScrollView>
         <TabContainer {...this.props} />
       </View>

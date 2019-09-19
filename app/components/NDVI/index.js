@@ -128,6 +128,9 @@ export default class NDVI extends Component {
         {!_.isUndefined(dataPoints) && dataPoints.length > 0 ? (
           <React.Fragment>
             <div className="column">
+              <div className={'ndvi-title'}>
+                {i18n.t('label.NDVI_time_series')}
+              </div>
               <div className="row">
                 <div className="ndvi-container">
                   <div className="row month-keyword">

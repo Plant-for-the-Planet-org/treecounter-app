@@ -52,7 +52,7 @@ class PlantProjectImageCarousel extends Component {
             renderContent={this.renderImage}
           >
             {this.props.images.map(url => (
-              <View style={styles.imageContainer}>
+              <View key={`viewof-${url}`} style={styles.imageContainer}>
                 <Image
                   style={styles.image}
                   key={url}

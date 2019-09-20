@@ -56,17 +56,17 @@
       2,
       "global"
     ],
-    "react-native/no-color-literals": 2,
+    "react-native/no-color-literals": 1, //
     "react-native/no-inline-styles": 1,
-    "react-native/no-raw-text": 2,
-    "react-native/no-unused-styles": 2,
-    "react-native/split-platform-components": 2,
+    "react-native/no-raw-text": 1, //
+    "react-native/no-unused-styles": 1, //
+    "react-native/split-platform-components": 1,
     "react/display-name": 0,
-    "react/jsx-boolean-value": 2,
-    "react/jsx-key": 2,
-    "react/jsx-no-duplicate-props": 2,
-    "react/jsx-no-target-blank": 2,
-    "react/jsx-no-undef": 2,
+    "react/jsx-boolean-value": 2, //
+    "react/jsx-key": 2, //
+    "react/jsx-no-duplicate-props": 1, //
+    "react/jsx-no-target-blank": 1, //
+    "react/jsx-no-undef": 1, //
     "react/jsx-sort-props": 0,
     "react/jsx-wrap-multilines": 2,
     "react/no-deprecated": 1,
@@ -78,5 +78,19 @@
     "react/prop-types": 1,
     "react/react-in-jsx-scope": 2,
     "react/self-closing-comp": 2
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.native.js"
+      ],
+      "rules": {
+        "react-native/no-color-literals": 1,
+        "react-native/no-inline-styles": 1,
+        "react-native/no-raw-text": 1,
+        "react-native/no-unused-styles": 1,
+        "react-native/split-platform-components": 1
+      }
+    }
+  ]
 }

@@ -131,7 +131,6 @@ class Trillion extends PureComponent {
     return (
       <TabBar
         {...props}
-        indicatorStyle={tabStyles.indicator}
         style={tabStyles.tabBar}
         tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={tabStyles.textStyle}
@@ -312,7 +311,6 @@ class Trillion extends PureComponent {
     return [
       this.props.navigation ? (
         <NavigationEvents
-          key="nav"
           onWillFocus={payload => {
             this.setState({ loadSvg: true });
           }}

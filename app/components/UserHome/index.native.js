@@ -69,7 +69,6 @@ export default class UserHome extends Component {
     return (
       <TabBar
         {...props}
-        indicatorStyle={tabStyles.indicator}
         style={tabStyles.tabBar}
         tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={tabStyles.textStyle}

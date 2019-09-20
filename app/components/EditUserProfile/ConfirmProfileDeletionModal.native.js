@@ -43,7 +43,6 @@ class ConfirmProfileDeletionModal extends Component {
               maxLength={6}
               multiline={false}
               returnKeyType={'next'}
-              autoCapitalize
               allowFontScaling
               autoCapitalize={'sentences'}
             />

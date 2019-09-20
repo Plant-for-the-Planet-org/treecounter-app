@@ -29,7 +29,6 @@ class PlantedProgressBar extends React.Component {
       <View style={styles.treeCounterContainer}>
         <View style={styles.treePlantedContainer}>
           <View
-            style={styles.treePlantedChildContainer}
             style={
               treeCountWidth > 0
                 ? {

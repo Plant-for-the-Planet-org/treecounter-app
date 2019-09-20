@@ -64,7 +64,7 @@
     "react/display-name": 0,
     "react/jsx-boolean-value": 2, //
     "react/jsx-key": 2, //
-    "react/jsx-no-duplicate-props": 1, //
+    "react/jsx-no-duplicate-props": 2, //
     "react/jsx-no-target-blank": 1, //
     "react/jsx-no-undef": 1, //
     "react/jsx-sort-props": 0,

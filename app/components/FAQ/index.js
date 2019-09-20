@@ -44,7 +44,11 @@ export default class FAQ extends Component {
           {i18n.t('label.faqs')}
           <DescriptionHeading>
             {i18n.t('label.description1')}
-            <a href={'https://' + i18n.t('label.description2')} target="_blank">
+            <a
+              href={'https://' + i18n.t('label.description2')}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {i18n.t('label.description2')}
             </a>{' '}
             {i18n.t('label.description3')}

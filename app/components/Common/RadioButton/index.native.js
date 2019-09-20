@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { View } from 'react-native';
 const PrimaryButton = ({
   // onClick,
   // children,

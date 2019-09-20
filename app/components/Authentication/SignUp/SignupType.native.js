@@ -202,11 +202,5 @@ export const styles = StyleSheet.create({
     height: 2,
     marginTop: 3,
     marginBottom: 3
-  },
-  bottomContainer: {
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    flex: 1,
-    marginBottom: 10
   }
 });

@@ -70,18 +70,18 @@ class PlantProjectImageCarousel extends Component {
 }
 
 PlantProjectImageCarousel.propTypes = {};
-
+const textColor = 'white';
 const styles = StyleSheet.create({
   container: {
     flex: 1
   },
   closeText: {
-    color: 'white',
+    color: textColor,
     textAlign: 'right',
     padding: 10
   },
   footerText: {
-    color: 'white',
+    color: textColor,
     textAlign: 'center'
   },
   imageContainer: {

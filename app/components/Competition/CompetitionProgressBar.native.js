@@ -24,7 +24,7 @@ class CompetitionProgressBar extends React.Component {
     } else {
       treeCountWidth = treePlantedRatio * 100;
     }
-
+    const backgroundColor = '#b9d384';
     return (
       <View style={styles.treeCounterContainer}>
         <View style={styles.treePlantedContainer}>
@@ -34,8 +34,8 @@ class CompetitionProgressBar extends React.Component {
                 ? {
                     height: '100%',
                     flexDirection: 'row',
-                    backgroundColor: '#b9d384',
-                    borderColor: '#b9d384',
+                    backgroundColor: backgroundColor,
+                    borderColor: backgroundColor,
                     width: treeCountWidth + '%',
                     paddingRight: 10,
                     padding: 5,

@@ -4,13 +4,16 @@ import i18n from '../../../locales/i18n';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import stripe from 'tipsi-stripe';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
-
+const colors = {
+  color: '#449aeb',
+  borderColor: '#000'
+};
 const styles = StyleSheet.create({
   field: {
     height: 30,
     width: 300,
-    color: '#449aeb',
-    borderColor: '#000',
+    color: colors.color,
+    borderColor: colors.borderColor,
     borderWidth: 1,
     padding: 2
   }
@@ -88,7 +91,13 @@ export default class StripeSepa extends Component {
           autoCapitalize={'sentences'}
           allowFontScaling
         />
-        <Text style={{ textAlign: 'justify', color: 'black', marginTop: 5 }}>
+        <Text
+          style={{
+            textAlign: 'justify',
+            color: colors.borderColor,
+            marginTop: 5
+          }}
+        >
           {i18n.t('label.stripe_sepa_des1')} {context.tpoName}{' '}
           {i18n.t('label.stripe_sepa_des2')}
         </Text>

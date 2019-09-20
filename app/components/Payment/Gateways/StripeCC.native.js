@@ -4,12 +4,15 @@ import stripe, { PaymentCardTextField } from 'tipsi-stripe';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import i18n from '../../../locales/i18n';
-
+const colors = {
+  color: '#449aeb',
+  borderColor: '#000'
+};
 const styles = StyleSheet.create({
   field: {
     width: 300,
-    color: '#449aeb',
-    borderColor: '#000',
+    color: colors.color,
+    borderColor: colors.borderColor,
     borderWidth: 1,
     borderRadius: 5
   }

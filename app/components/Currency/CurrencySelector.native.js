@@ -20,7 +20,7 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
   const currenciesDropdownFormat = currenciesArray.map((item, index) => {
     return { value: item, text: currenciesTitles[index] };
   });
-
+  const textColor = '#686060';
   return (
     <Dropdown
       containerStyle={[
@@ -54,7 +54,7 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
       animationDuration={0}
       itemTextStyle={{
         fontSize: 13,
-        color: '#686060'
+        color: textColor
       }}
       initialNumToRender={currenciesDropdownFormat.length}
       value={i18n.t(selectedCurrency)}

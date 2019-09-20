@@ -75,6 +75,7 @@ export default class StripeCC extends Component {
   }
 
   render() {
+    const PayButtonText = 'Pay';
     const { valid, params } = this.state;
     return (
       <View style={{ flexDirection: 'column', padding: 10 }}>
@@ -91,7 +92,7 @@ export default class StripeCC extends Component {
             this.state.submitClicked ? () => null : () => this.payviaCard()
           }
         >
-          Pay
+          {PayButtonText}
         </PrimaryButton>
       </View>
     );

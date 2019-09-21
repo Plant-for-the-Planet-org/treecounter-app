@@ -97,29 +97,28 @@ class UserContributionsDetails extends React.Component {
 
     return (
       <ScrollView style={{ backgroundColor: '#fff', flex: 1 }}>
-        {!isSinglePlanted ? (
-          <UserContributions
-            mayUpdate={mayUpdate}
-            treeCount={treeCount}
-            location={location}
-            dedicatedTo={dedicatedTo}
-            plantedDate={plantedDate}
-            showDelete={contributionType == 'planting'}
-            contributionTypeText={contributionTypeText}
-            onClickDelete={() => {
-              this.props.navigation.navigate('delete_contribution', {
-                deleteContribution: () =>
-                  this.props.deleteContribution(this.props.contribution.id)
-              });
-            }}
-            onClickEdit={() => {
-              this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-                selectedTreeId: this.props.contribution.id,
-                contribution: this.props.contribution
-              });
-            }}
-          />
-        ) : null}
+        <UserContributions
+          mayUpdate={mayUpdate}
+          treeCount={treeCount}
+          location={location}
+          dedicatedTo={dedicatedTo}
+          plantedDate={plantedDate}
+          showDelete={contributionType == 'planting'}
+          contributionTypeText={contributionTypeText}
+          onClickDelete={() => {
+            this.props.navigation.navigate('delete_contribution', {
+              deleteContribution: () =>
+                this.props.deleteContribution(this.props.contribution.id)
+            });
+          }}
+          onClickEdit={() => {
+            this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
+              selectedTreeId: this.props.contribution.id,
+              contribution: this.props.contribution
+            });
+          }}
+        />
+
         {contributionOrPlantedImages &&
           contributionOrPlantedImages.length > 0 && (
             <PlantProjectImageCarousel

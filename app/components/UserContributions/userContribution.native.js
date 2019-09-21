@@ -37,9 +37,11 @@ export default class UserContributions extends React.Component {
         <View style={{ flex: 2, paddingTop: 20 }}>
           {treeCount && treeCount > 0 ? (
             <Text style={styles.treeCount}>
-              {treeCount
+              {treeCount > 1
                 ? `${treeCount} ${i18n.t('label.usr_contribution_tree')}`
-                : 0 + i18n.t('label.usr_contribution_tree')}
+                : `${treeCount} ${i18n.t(
+                    'label.usr_contribution_single_tree'
+                  )}`}
             </Text>
           ) : null}
           {!!location ? (

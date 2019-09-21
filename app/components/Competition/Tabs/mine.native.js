@@ -19,16 +19,26 @@ import PrimaryButton from '../../Common/Button/PrimaryButton';
 import UserProfileImage from '../../Common/UserProfileImage';
 import close_green from '../../../assets/images/icons/close_green.png';
 import imageUpload from '../../../assets/images/icons/upload_image.png';
+import ImagePicker from 'react-native-image-picker';
 
-let Form = t.form.Form;
-const ImagePicker = require('react-native-image-picker');
 const options = {
-  title: 'Add Image',
+  title: i18n.t('label.add_image_title'),
+  cancelButtonTitle: i18n.t('label.cancel'),
+  takePhotoButtonTitle: i18n.t('label.take_photo'),
+  chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
+  'permissionDenied.title': i18n.t('label.permission_denied_title'),
+  'permissionDenied.text': i18n.t('label.permission_denied_text'),
+  'permissionDenied.reTryTitle': i18n.t(
+    'label.permission_denied_retry_title'
+  ),
+  'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
   storageOptions: {
     skipBackup: true,
     path: 'images'
   }
 };
+
+let Form = t.form.Form;
 const getCompFormLayoutTemplate = () => {
   const formLayoutTreesTemplate = locals => {
     return (

@@ -375,16 +375,10 @@ class ContributionCard extends React.Component {
       <TouchableHighlight
         underlayColor={'transparent'}
         onPress={() => {
-          console.log('contribution', contribution);
-          (treeCount > 1 ||
-            (contribution.contributionMeasurements &&
-              contribution.contributionMeasurements.length > 0) ||
-            !!ndviUid ||
-            (contributionImages && contributionImages.length > 0)) &&
-            this.props.navigation.navigate('contribution_details', {
-              contribution,
-              titleParam: plantProjectName || tpoName || treeSpecies
-            });
+          this.props.navigation.navigate('contribution_details', {
+            contribution,
+            titleParam: plantProjectName || tpoName || treeSpecies
+          });
         }}
       >
         <CardLayout style={[styles.addPadding, styles.minHeight]}>

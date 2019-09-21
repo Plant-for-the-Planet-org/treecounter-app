@@ -157,7 +157,6 @@ class PlantProjectSnippet extends PureComponent {
             >
               <Text
                 ellipsizeMode="tail"
-                numberOfLines={2}
                 style={styles.project_teaser__contentText}
               >
                 {`${teaserProps.projectName}  ${

@@ -48,8 +48,8 @@ class PlantedProgressBar extends React.Component {
                     width: treeCountWidth + '%',
                     paddingRight: 10,
                     padding: 5,
-                    borderTopRightRadius: 20,
-                    borderBottomRightRadius: 20,
+                    borderTopRightRadius: treeCountWidth < 100 ? 20 : 0,
+                    borderBottomRightRadius: treeCountWidth < 100 ? 20 : 0,
                     borderWidth: 0.5,
                     ...treePlantedChildContainerStyle
                   }

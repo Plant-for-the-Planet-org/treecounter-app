@@ -46,8 +46,6 @@ import {
 //   ...pledgeSchemaOptions
 // };
 
-let _ = require('lodash');
-
 class MakePledgeForm extends Component {
   state = {
     firstname: '',

@@ -1,3 +1,4 @@
+/* global paypal */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -22,7 +23,7 @@ class Paypal extends React.Component {
     const { isScriptLoaded, isScriptLoadSucceed } = this.props;
 
     if (isScriptLoaded && isScriptLoadSucceed) {
-      //this.setState({ showButton: true });
+      this.setState({ showButton: true });
     }
   }
 
@@ -51,18 +52,16 @@ class Paypal extends React.Component {
     };
 
     const payment = () => {
-      // eslint-disable-next-line react/prop-types
-      throw new Error('paypal library missing import');
-      // paypal.rest.payment.create(mode, CLIENT, {
-      //   transactions: [
-      //     {
-      //       amount: {
-      //         total: Math.round(amount * 100) / 100,
-      //         currency
-      //       }
-      //     }
-      //   ]
-      // });
+      return paypal.rest.payment.create(mode, CLIENT, {
+        transactions: [
+          {
+            amount: {
+              total: Math.round(amount * 100) / 100,
+              currency
+            }
+          }
+        ]
+      });
     };
 
     // see https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4/customize-button/
@@ -72,6 +71,19 @@ class Paypal extends React.Component {
       label: 'pay', // checkout | credit | pay | buynow | paypal | installment
       size: 'large' // small | medium | large | responsive
     };
+
+    // const onAuthorize = (data, actions) =>
+    //   actions.payment.execute().then(() => {
+    //     const payment = Object.assign({}, this.props.payment);
+    //     payment.paid = true;
+    //     payment.cancelled = false;
+    //     payment.payerID = data.payerID;
+    //     payment.paymentID = data.paymentID;
+    //     payment.paymentToken = data.paymentToken;
+    //     payment.returnUrl = data.returnUrl;
+    //     onSuccess(payment);
+    //   });
+
     const onAuthorize = data => {
       onSuccess(data);
     };

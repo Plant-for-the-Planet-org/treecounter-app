@@ -29,7 +29,6 @@ export default class FeaturedProjects extends PureComponent {
     updateStaticRoute(
       'app_donate_detail',
       navigation,
-      0,
       navigation.getParam('userForm')
     );
   };

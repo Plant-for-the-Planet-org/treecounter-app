@@ -80,7 +80,10 @@ export default class NDVI extends Component {
     });
   };
 
-  getColorForNDVI = (point = 0) => {
+  getColorForNDVI = point => {
+    if (!point) {
+      return `rgb(142, 142, 142)`;
+    }
     if (point > 1) {
       point = 1;
     }

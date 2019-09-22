@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import NDVI from '../../../containers/NDVI/NDVI';
 import UserContributions from '../../UserContributions/userContribution.native';
 import Measurements from '../../Measurements/Measurements.native';
-import Alert from '../../Measurements/Alert.native';
 import moment from 'moment';
 import { getDateFromMySQL } from '../../../helpers/utils';
 import i18n from '../../../locales/i18n.js';

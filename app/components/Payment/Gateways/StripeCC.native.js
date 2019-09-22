@@ -91,7 +91,7 @@ export default class StripeCC extends Component {
             this.state.submitClicked ? () => null : () => this.payviaCard()
           }
         >
-          {i18n.t('label.Pay')}
+          {i18n.t('label.pay')}
         </PrimaryButton>
       </View>
     );

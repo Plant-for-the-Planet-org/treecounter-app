@@ -9,7 +9,7 @@ import {
   name as app_name,
   version as app_version
 } from '../../../package.json';
-
+const textColor = 'white';
 let bugsnag;
 if (context.bugsnagApiKey) {
   const configuration = new Configuration();
@@ -47,7 +47,9 @@ export default class GlobalErrorBoundary extends React.Component {
             <Text style={[styles.textPara, { marginTop: 15 }]}>
               {i18n.t('label.sorry_inconveniences')}
             </Text>
-            <Text style={{ color: '#fff', fontSize: 10, fontStyle: 'italic' }}>
+            <Text
+              style={{ color: textColor, fontSize: 10, fontStyle: 'italic' }}
+            >
               {i18n.t('label.error') +
                 ` : ${this.state.error} + \n\n${this.state.info}`}
             </Text>

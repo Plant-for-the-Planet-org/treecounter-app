@@ -18,10 +18,11 @@ class WelcomeScreenModal extends Component {
     const welcomeScreenProfile = this.props.navigation.getParam(
       'welcomeScreenProfile'
     );
+    const backgroundColor = 'white';
     return (
       <View style={styles.confirmDeleteContainer}>
         <ScrollView
-          contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
+          contentContainerStyle={{ flex: 1, backgroundColor: backgroundColor }}
         >
           <View style={styles.container}>
             <Image

@@ -131,7 +131,6 @@ class Trillion extends PureComponent {
     return (
       <TabBar
         {...props}
-        indicatorStyle={tabStyles.indicator}
         style={tabStyles.tabBar}
         tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={tabStyles.textStyle}
@@ -142,7 +141,7 @@ class Trillion extends PureComponent {
 
   _renderScreen = ({ route }) => {
     const { navigation, userProfile, isLoggedIn } = this.props;
-
+    const backgroundColor = 'white';
     // console.log(this.props.pledgeEvents);
 
     switch (route.key) {
@@ -153,7 +152,7 @@ class Trillion extends PureComponent {
           <ScrollView
             contentContainerStyle={{
               paddingBottom: 72,
-              backgroundColor: 'white'
+              backgroundColor: backgroundColor
             }}
           >
             <View style={styles.parentContainer}>
@@ -312,7 +311,6 @@ class Trillion extends PureComponent {
     return [
       this.props.navigation ? (
         <NavigationEvents
-          key="nav"
           onWillFocus={payload => {
             this.setState({ loadSvg: true });
           }}

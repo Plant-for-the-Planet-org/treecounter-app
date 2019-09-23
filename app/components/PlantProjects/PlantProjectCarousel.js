@@ -39,8 +39,11 @@ class PlantProjectCarousel extends React.Component {
     // add navigation buttons that will trigger calls to 'onChange' callback
     return (
       <Slider {...settings}>
-        {plantProjects.map(plantProject => (
-          <div className="plant_project_carousal__content">
+        {plantProjects.map((plantProject, index) => (
+          <div
+            className="plant_project_carousal__content"
+            key={`plantProject-${index}`}
+          >
             <PlantProjectFull
               onViewMoreClick={() =>
                 this.setState({ imageViewMore: !this.state.imageViewMore })

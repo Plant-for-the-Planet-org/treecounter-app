@@ -339,7 +339,7 @@ class CompetitionFull extends React.Component {
                       <SearchUser
                         onSearchResultClick={this.onSearchResultClick}
                         currentUserProfile={this.props.currentUserProfile}
-                        clearTextOnClick={true}
+                        clearTextOnClick
                         alreadyInvited={competitionDetail.allEnrollments}
                         hideCompetitions
                       />

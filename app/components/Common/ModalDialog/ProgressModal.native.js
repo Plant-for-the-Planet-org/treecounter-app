@@ -5,10 +5,11 @@ import LoadingIndicator from '../LoadingIndicator';
 
 export default class ProgressModal extends Component {
   render = () => {
+    const backgroundColor = 'rgba(255,255,255,0.5)';
     return (
       <Modal
         animationType={'slide'}
-        transparent={true}
+        transparent
         visible={this.props.modalVisible}
         elevation="10"
         onRequestClose={() => {
@@ -22,7 +23,7 @@ export default class ProgressModal extends Component {
             alignItems: 'center',
             justifyContent: 'center',
             elevation: 10,
-            backgroundColor: 'rgba(255,255,255,0.5)'
+            backgroundColor: backgroundColor
           }}
         >
           <LoadingIndicator />

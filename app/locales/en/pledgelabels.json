@@ -17,5 +17,6 @@
   "pledgeFormTreecount": "Tree Count",
   "pledgeAddedMessage": "You’ve pledged to plant {{treeCount}} Trees. You can tap continue to fulfill your pledge right now.",
   "pledgeAddedContinueButton": "CONTINUE",
-  "treesPledgedAllPledges": "{{treeCount}} trees pledged"
+  "treesPledgedAllPledges": "{{treeCount}} trees pledged",
+  "unfulfilledPledgesTitle": "Unfulfilled Pledges"
 }

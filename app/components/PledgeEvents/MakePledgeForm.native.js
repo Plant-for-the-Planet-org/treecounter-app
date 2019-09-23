@@ -11,40 +11,13 @@ import {
 import { TextField } from 'react-native-material-textfield';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { forward } from './../../assets';
-import t from 'tcomb-form-native';
 import { postPledge } from './../../actions/pledgeAction';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 
 import i18n from '../../locales/i18n';
 import { connect } from 'react-redux';
-
-import {
-  pledgeFormSchema,
-  pledgeSchemaOptions
-} from './../../server/parsedSchemas/pledge';
-
-// let TCombForm = t.form.Form;
-
-// const formLayout = locals => {
-//   return (
-//     <View>
-//       <View style={styles.formView}>
-//         <View style={{ width: '45%' }}>{locals.inputs.firstname}</View>
-//         <View style={{ width: '45%' }}>{locals.inputs.lastname}</View>
-//       </View>
-//       <View>{locals.inputs.email}</View>
-//       <View style={styles.formtreecountView}>
-//         <View style={{ width: '40%' }}>{locals.inputs.treeCount}</View>
-//       </View>
-//     </View>
-//   );
-// };
-
-// const allSchemaOptions = {
-//   template: formLayout,
-//   ...pledgeSchemaOptions
-// };
+import CheckBox from 'react-native-check-box';
 
 let _ = require('lodash');
 
@@ -58,7 +31,8 @@ class MakePledgeForm extends Component {
     firstnameValidator: 'Please enter First Name',
     lastnameValidator: 'Please enter Last Name',
     emailValidator: 'Please enter Email',
-    treeCountValidator: 'Please enter Tree Count'
+    treeCountValidator: 'Please enter Tree Count',
+    isChecked: false
   };
   componentWillMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
@@ -166,108 +140,117 @@ class MakePledgeForm extends Component {
     const currency = this.props.navigation.getParam('plantProject').currency;
 
     return (
-      <KeyboardAwareScrollView
-        contentContainerStyle={styles.formScrollView}
-        keyboardDismissMode="on-drag"
-        keyboardShouldPersistTaps="always"
-        style={styles.keyboardScrollView}
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled={true}
-      >
-        <View>
-          <Text style={styles.titleText}>{i18n.t('label.pledgeToPlant')}</Text>
-          <Text style={styles.subtitleText}>
-            {i18n.t('label.pledgeToPlantDesc', {
-              treeCost: treeCost,
-              currency: currency,
-              projectName: projectName
-            })}
-          </Text>
-        </View>
-        <View>
-          {/* <View
-            style={styles.formView}
-          >
-            <TCombForm
-              ref="pledgeForm"
-              type={pledgeFormSchema}
-              options={allSchemaOptions}
-              value={this.state.value}
-              onChange={value => this.onFormChange(value)}
-            />
-          </View> */}
-          <View style={styles.formView}>
-            <View style={styles.formHalfTextField}>
-              <TextField
-                label={i18n.t('label.pledgeFormFName')}
-                value={firstname}
-                tintColor={'#89b53a'}
-                titleFontSize={12}
-                returnKeyType="next"
-                lineWidth={1}
-                blurOnSubmit={false}
-                onSubmitEditing={() => {
-                  this.lastnameTextInput.focus();
-                }}
-                onChangeText={firstname => this.setState({ firstname })}
-              />
-            </View>
-
-            <View style={styles.formHalfTextField}>
-              <TextField
-                label={i18n.t('label.pledgeFormLName')}
-                value={lastname}
-                tintColor={'#89b53a'}
-                titleFontSize={12}
-                returnKeyType="next"
-                lineWidth={1}
-                ref={input => {
-                  this.lastnameTextInput = input;
-                }}
-                onSubmitEditing={() => {
-                  this.emailTextInput.focus();
-                }}
-                onChangeText={lastname => this.setState({ lastname })}
-              />
-            </View>
-          </View>
-
+      <View>
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.formScrollView}
+          keyboardDismissMode="on-drag"
+          keyboardShouldPersistTaps="always"
+          style={styles.keyboardScrollView}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled={true}
+        >
           <View>
-            <TextField
-              label={i18n.t('label.pledgeFormEmail')}
-              value={email}
-              tintColor={'#89b53a'}
-              titleFontSize={12}
-              lineWidth={1}
-              keyboardType="email-address"
-              ref={input => {
-                this.emailTextInput = input;
-              }}
-              onSubmitEditing={() => {
-                this.treecountTextInput.focus();
-              }}
-              returnKeyType="next"
-              onChangeText={email => this.setState({ email })}
-            />
+            <Text style={styles.titleText}>
+              {i18n.t('label.pledgeToPlant')}
+            </Text>
+            <Text style={styles.subtitleText}>
+              {i18n.t('label.pledgeToPlantDesc', {
+                treeCost: treeCost,
+                currency: currency,
+                projectName: projectName
+              })}
+            </Text>
           </View>
-          <View style={styles.formtreecountView}>
-            <View style={styles.formHalfTextField}>
+          <View>
+            <View style={styles.formView}>
+              <View style={styles.formHalfTextField}>
+                <TextField
+                  label={i18n.t('label.pledgeFormFName')}
+                  value={firstname}
+                  tintColor={'#89b53a'}
+                  titleFontSize={12}
+                  returnKeyType="next"
+                  lineWidth={1}
+                  blurOnSubmit={false}
+                  onSubmitEditing={() => {
+                    this.lastnameTextInput.focus();
+                  }}
+                  onChangeText={firstname => this.setState({ firstname })}
+                />
+              </View>
+
+              <View style={styles.formHalfTextField}>
+                <TextField
+                  label={i18n.t('label.pledgeFormLName')}
+                  value={lastname}
+                  tintColor={'#89b53a'}
+                  titleFontSize={12}
+                  returnKeyType="next"
+                  lineWidth={1}
+                  ref={input => {
+                    this.lastnameTextInput = input;
+                  }}
+                  onSubmitEditing={() => {
+                    this.emailTextInput.focus();
+                  }}
+                  onChangeText={lastname => this.setState({ lastname })}
+                />
+              </View>
+            </View>
+
+            <View>
               <TextField
-                label={i18n.t('label.pledgeFormTreecount')}
+                label={i18n.t('label.pledgeFormEmail')}
+                value={email}
                 tintColor={'#89b53a'}
-                value={treeCount}
                 titleFontSize={12}
                 lineWidth={1}
-                keyboardType="numeric"
+                keyboardType="email-address"
                 ref={input => {
-                  this.treecountTextInput = input;
+                  this.emailTextInput = input;
                 }}
-                returnKeyType="done"
-                onChangeText={treeCount => this.setState({ treeCount })}
+                onSubmitEditing={() => {
+                  this.treecountTextInput.focus();
+                }}
+                returnKeyType="next"
+                onChangeText={email => this.setState({ email })}
+              />
+            </View>
+            <View style={styles.formtreecountView}>
+              <View style={styles.formHalfTextField}>
+                <TextField
+                  label={i18n.t('label.pledgeFormTreecount')}
+                  tintColor={'#89b53a'}
+                  value={treeCount}
+                  titleFontSize={12}
+                  lineWidth={1}
+                  keyboardType="numeric"
+                  ref={input => {
+                    this.treecountTextInput = input;
+                  }}
+                  returnKeyType="done"
+                  onChangeText={treeCount => this.setState({ treeCount })}
+                />
+              </View>
+            </View>
+            <View style={{ width: '100%', marginTop: 30 }}>
+              <CheckBox
+                onClick={() => {
+                  this.setState({
+                    isChecked: !this.state.isChecked
+                  });
+                }}
+                // style={{
+                //   width: 70
+                // }}
+                checkedCheckBoxColor="#89b53a"
+                isChecked={this.state.isChecked}
+                rightText="Hide my Name from the list (Anonymous Pledge)"
               />
             </View>
           </View>
-        </View>
+        </KeyboardAwareScrollView>
+
         {this.state.buttonType === 'pledge' ? (
           <TouchableOpacity
             style={styles.makePledgeButton2}
@@ -297,7 +280,7 @@ class MakePledgeForm extends Component {
             />
           </TouchableOpacity>
         ) : null}
-      </KeyboardAwareScrollView>
+      </View>
     );
   }
 }

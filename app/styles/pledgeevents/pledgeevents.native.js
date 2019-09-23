@@ -70,10 +70,10 @@ export default EStyleSheet.create({
     top: '90%'
   },
   makePledgeButton2: {
-    width: '100%',
-    marginLeft: '6%',
+    width: '80%',
+    marginLeft: '10%',
     position: 'absolute',
-    top: '90%'
+    bottom: '5%'
   },
   makePledgeButtonView: {
     borderRadius: 100,
@@ -164,7 +164,9 @@ export default EStyleSheet.create({
   formScrollView: {
     backgroundColor: 'white',
     flexGrow: 1,
-    padding: 24
+    padding: 24,
+    paddingBottom: 100,
+    minHeight: '120%'
   },
   formHalfTextField: { width: '45%' },
 
@@ -190,8 +192,8 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    top: '90%',
-    left: '88%'
+    bottom: '5%',
+    right: '10%'
   },
   pledgeSmallButtonIcon: { height: 32, width: 32 },
 

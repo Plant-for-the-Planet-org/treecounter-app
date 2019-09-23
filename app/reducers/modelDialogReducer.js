@@ -1,7 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
 
 export const setProgressModelState = createAction('PROGRESS_MODEL_STATE');
-export const getProgressModelState = state => state.progressModel;
+export const getProgressModelState = state =>
+  state.modelDialogState.progressModel;
 
 export const initialState = {
   progressModel: false,

@@ -22,10 +22,6 @@ module.exports = webpackMerge(commonConfig, {
     progressbarwidget: [
       'babel-polyfill',
       path.join(__dirname, '../widgets/progressbar/widget.js')
-    ],
-    ndviwidget: [
-      'babel-polyfill',
-      path.join(__dirname, '../widgets/NDVI/widget.js')
     ]
   },
   output: {

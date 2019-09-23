@@ -57,8 +57,16 @@ export default class Login extends Component {
   render() {
     return (
       <KeyboardAwareScrollView
-        contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
+        contentContainerStyle={[
+          scrollStyle.styleContainer,
+          { backgroundColor: 'white', marginBottom: 300 }
+        ]}
         enableOnAndroid
+        keyboardDismissMode="on-drag"
+        keyboardShouldPersistTaps="always"
+        style={styles.keyboardScrollView}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        scrollEnabled
       >
         <ReCaptchaV3
           ref={ref => (this._captchaRef = ref)}

@@ -25,26 +25,26 @@ import close_green from '../../assets/images/icons/close_green.png';
 import UserProfileImage from '../Common/UserProfileImage.native';
 import ImagePicker from 'react-native-image-picker';
 
-const options = {
-  title: i18n.t('label.add_image_title'),
-  cancelButtonTitle: i18n.t('label.cancel'),
-  takePhotoButtonTitle: i18n.t('label.take_photo'),
-  chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
-  'permissionDenied.title': i18n.t('label.permission_denied_title'),
-  'permissionDenied.text': i18n.t('label.permission_denied_text'),
-  'permissionDenied.reTryTitle': i18n.t(
-    'label.permission_denied_retry_title'
-  ),
-  'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
-  storageOptions: {
-    skipBackup: true,
-    path: 'images'
-  }
-};
-
 let Form = t.form.Form;
 const getCompFormImageLayoutTemplate = () => {
   const formLayoutTreesTemplate = locals => {
+    const options = {
+      title: i18n.t('label.add_image_title'),
+      cancelButtonTitle: i18n.t('label.cancel'),
+      takePhotoButtonTitle: i18n.t('label.take_photo'),
+      chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
+      'permissionDenied.title': i18n.t('label.permission_denied_title'),
+      'permissionDenied.text': i18n.t('label.permission_denied_text'),
+      'permissionDenied.reTryTitle': i18n.t(
+        'label.permission_denied_retry_title'
+      ),
+      'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
+      storageOptions: {
+        skipBackup: true,
+        path: 'images'
+      }
+    };
+
     return (
       <View style={imagestyles.filePickerContainer}>
         <View style={{ flex: 1 }}>

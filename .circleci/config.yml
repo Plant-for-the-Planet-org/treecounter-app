@@ -93,10 +93,8 @@ jobs:
           name: Setup local configuration
           command: cp app/config/index.js.dist app/config/index.js
       - run:
-          name: lint
-          command: |
-            mkdir -p ~/reports
-            npx eslint ./app/ --format junit --output-file ~/reports/eslint.xml
+          name: Linting
+          command: npm run lint:errors
       - run:
           name: Build web client
           command: mkdir -p ./web/server && npm run build:server
@@ -118,10 +116,6 @@ jobs:
                 --entry-file index.js \
                 --bundle-output ios-release.bundle \
                 --sourcemap-output ios-release.bundle.map
-      - store_test_results:
-          path: ~/reports
-      - store_artifacts:
-          path: ~/reports
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:

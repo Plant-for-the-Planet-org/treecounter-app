@@ -55,11 +55,12 @@ export default class Login extends Component {
     this.props.onPress(this._recaptchaToken, this.refreshToken);
   };
   render() {
+    const backgroundColor = 'white';
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={[
           scrollStyle.styleContainer,
-          { backgroundColor: 'white', marginBottom: 300 }
+          { backgroundColor: backgroundColor, marginBottom: 300 }
         ]}
         enableOnAndroid
         keyboardDismissMode="on-drag"

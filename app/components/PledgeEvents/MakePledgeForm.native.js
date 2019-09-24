@@ -1,32 +1,15 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  Keyboard,
-  TextInput,
-  Button
-} from 'react-native';
+import { Text, View, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { forward } from './../../assets';
-import t from 'tcomb-form-native';
 import { postPledge } from './../../actions/pledgeAction';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 
 import i18n from '../../locales/i18n';
 import { connect } from 'react-redux';
-
-// import {
-//   pledgeFormSchema,
-//   pledgeSchemaOptions
-// } from './../../server/parsedSchemas/pledge';
 
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';

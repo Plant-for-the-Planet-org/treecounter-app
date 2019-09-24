@@ -94,7 +94,7 @@ export default class Pledge extends Component {
                   <span>{i18n.t('label.trees')}</span>
                 </div>
                 <div className="pledges-list">
-                  {this.props.pledges.latestPledgeEvents.map(pledge => (
+                  {this.props.pledges.latestEventPledges.map(pledge => (
                     <div className="row-list-item" key={pledge.id}>
                       <span>{pledge.firstname + ' ' + pledge.lastname}</span>
                       <span>{delimitNumbers(parseInt(pledge.treeCount))}</span>
@@ -114,7 +114,7 @@ export default class Pledge extends Component {
                   <span>{i18n.t('label.trees')}</span>
                 </div>
                 <div className="pledges-list">
-                  {this.props.pledges.highestPledgeEvents.map(pledge => (
+                  {this.props.pledges.highestEventPledges.map(pledge => (
                     <div className="row-list-item" key={pledge.id}>
                       <span>{pledge.firstname + ' ' + pledge.lastname}</span>
                       <span>{delimitNumbers(parseInt(pledge.treeCount))}</span>

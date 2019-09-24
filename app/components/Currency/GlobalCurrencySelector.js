@@ -12,6 +12,7 @@ import {
 } from '../../actions/globalCurrency';
 
 import { updateUserProfile } from '../../actions/updateUserProfile';
+import { ProfilePic } from '../../assets';
 
 class GlobalCurrencySelector extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class GlobalCurrencySelector extends Component {
     this.updateState = this.updateState.bind(this);
   }
   async componentWillMount() {
-    this.setState({ preferredCurrency: await getPreferredCurrency() });
+    this.setState({ preferredCurrency: getPreferredCurrency() });
   }
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
@@ -43,7 +44,8 @@ class GlobalCurrencySelector extends Component {
   handleCurrencyChange({ target: { value } } = event) {
     this.updateState({ preferredCurrency: value });
     setPreferredCurrency(value);
-    this.props.updateUserProfile({ currency: value }, 'currency');
+    this.props.userProfile &&
+      this.props.updateUserProfile({ currency: value }, 'currency');
   }
   render() {
     const currenciesArray = this.getCurrencyNames();
@@ -89,5 +91,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 );
 GlobalCurrencySelector.propTypes = {
   currencies: PropTypes.object,
-  fetchCurrencies: PropTypes.func
+  updateUserProfile: PropTypes.func,
+  fetchCurrencies: PropTypes.func,
+  userProfile: PropTypes.object
 };

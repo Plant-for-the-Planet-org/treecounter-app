@@ -151,7 +151,7 @@ export default class Menu extends Component {
               </select>
             </div>
           </div>
-          <GlobalCurrencySelector />
+          <GlobalCurrencySelector userProfile={this.props.userProfile} />
           <div className="global-selector">
             <div>
               <a

@@ -1,4 +1,4 @@
-import { saveItem, getItem } from '../stores/localStorage';
+import { saveItem, getItemSync } from '../stores/localStorage';
 let cache = { currency: '' };
 export function init() {
   cache.currency = guess();
@@ -14,7 +14,7 @@ export function getPreferredCurrency() {
 function guess() {
   // will implement default currency or initialization here
   try {
-    cache.currency = getItem('preferredCurrency');
+    cache.currency = getItemSync('preferredCurrency');
     return cache.currency;
   } catch (error) {
     return cache.currency || 'EUR';

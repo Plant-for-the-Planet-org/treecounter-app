@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { currentUserProfileSelector } from '../../selectors';
 import { connect } from 'react-redux';
 import { currenciesSelector } from '../../selectors';
-import { fetchCurrencies } from '../../actions/currencies';
-
+import { getPreferredCurrency } from '../../actions/globalCurrency';
 import { formatNumber } from '../../utils/utils';
 const NumberFormat = ({ data, locale, currency, userProfile, currencies }) => {
+  if (!userProfile) {
+    userProfile = { currency: getPreferredCurrency() };
+  }
   return formatNumber(data, locale, currency, userProfile, currencies);
 };
 

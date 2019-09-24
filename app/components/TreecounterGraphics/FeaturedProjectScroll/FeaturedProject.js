@@ -31,7 +31,9 @@ export default class FeaturedProject extends Component {
               flexDirection: 'column'
             }}
           >
-            <Text style={{ fontWeight: 'bold', flex: 1, flexWrap: 'wrap' }}>
+            <Text
+              style={{ flex: 1, flexWrap: 'wrap', fontFamily: 'OpenSans-Bold' }}
+            >
               {this.props.orgname}
             </Text>
             <View style={styles.featuredProjectCardIconContainer}>

@@ -25,6 +25,7 @@ import {
 } from '../../actions/pledgeAction';
 import { pledgesSelector, pledgeEventSelector } from '../../selectors';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 class PledgeEvents extends Component {
   state = {
@@ -193,6 +194,40 @@ class PledgeEvents extends Component {
             </View>
           </View>
         </RBSheet>
+
+        {/* <View style={styles.bottomButtonView}>
+          <View style={styles.leftSection}>
+            <Text style={styles.pledgeTreesAmount}>500 Trees Planted</Text>
+            <Text style={styles.pledgeTreesAction}>View my trees</Text>
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              updateStaticRoute('app_donate_detail2', this.props.navigation);
+            }}
+          >
+            <View style={styles.continueButtonView}>
+              <Icon name="arrow-right" size={30} color="#fff" />
+              <Text style={styles.continueText}>Plant More</Text>
+            </View>
+          </TouchableOpacity>
+        </View> */}
+
+        {/* <View style={styles.bottomButtonView}>
+          <View style={styles.leftSection}>
+            <Text style={styles.pledgeTreesAmount}>500 Trees Pledged</Text>
+            <Text style={styles.pledgeTreesAction}>+ INCREASE MY PLEDGE</Text>
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              updateStaticRoute('app_donate_detail2', this.props.navigation);
+            }}
+          >
+            <View style={styles.continueButtonView}>
+              <Icon name="arrow-right" size={30} color="#fff" />
+              <Text style={styles.continueText}>Donate</Text>
+            </View>
+          </TouchableOpacity>
+        </View> */}
       </View>
     );
   }

@@ -33,7 +33,9 @@ export default class PledgeTabView extends Component {
       <View style={styles.tabViewTitleContainer}>
         <View style={{ flex: 1, marginLeft: 26 }}>
           <Text style={styles.tabViewContentText}>
-            {highestPledges.firstname} {highestPledges.lastname}
+            {highestPledges.isAnonymous
+              ? 'Anonymous'
+              : highestPledges.firstname + ' ' + highestPledges.lastname}
           </Text>
         </View>
         <View style={{ flex: 1 }}>
@@ -50,7 +52,9 @@ export default class PledgeTabView extends Component {
       <View style={styles.tabViewTitleContainer}>
         <View style={{ flex: 1, marginLeft: 26 }}>
           <Text style={styles.tabViewContentText}>
-            {latestPledges.firstname} {latestPledges.lastname}
+            {latestPledges.isAnonymous
+              ? 'Anonymous'
+              : latestPledges.firstname + ' ' + latestPledges.lastname}
           </Text>
         </View>
         <View style={{ flex: 1 }}>

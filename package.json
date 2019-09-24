@@ -28,6 +28,7 @@
   "dependencies": {
     "@bugsnag/js": "^6.3.0",
     "@haskkor/react-native-recaptchav3": "^1.0.3",
+    "@react-native-community/async-storage": "^1.6.1",
     "autosuggest-highlight": "^3.1.1",
     "axios": "^0.18.1",
     "bugsnag-react-native": "^2.20.0",
@@ -75,6 +76,7 @@
     "react-native-svg": "^6.5.3",
     "react-native-svg-uri": "^1.2.3",
     "react-native-tab-view": "^1.0.2",
+    "react-native-vector-icons": "^6.6.0",
     "react-native-youtube": "^1.1.0",
     "react-navigation": "^2.11.2",
     "react-navigation-redux-helpers": "^1.1.2",

@@ -50,7 +50,8 @@ export default EStyleSheet.create({
     fontSize: 15,
     marginBottom: 15,
     textAlign: 'left',
-    margin: 12
+    margin: 12,
+    fontFamily: 'OpenSans-Regular'
   },
   imageStyle: {
     width: 59,
@@ -115,33 +116,32 @@ export default EStyleSheet.create({
   },
   googleCardTitle: {
     fontSize: 17,
-    fontWeight: '600',
-    fontStyle: 'normal',
+    // fontWeight: '600',
+    // fontStyle: 'normal',
     lineHeight: 23,
     letterSpacing: 0,
     textAlign: 'left',
-    color: '#4d5153'
+    color: '#4d5153',
+    fontFamily: 'OpenSans-SemiBold'
   },
   googleCardPara: {
     fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
     lineHeight: 21,
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153',
     flex: 3,
-    marginRight: 20
+    marginRight: 20,
+    fontFamily: 'OpenSans-Regular'
   },
   googleCardButton: {
     fontSize: 14,
-    fontWeight: '600',
-    fontStyle: 'normal',
     lineHeight: 21,
     letterSpacing: 0,
     textAlign: 'left',
     color: '#89b53a',
-    marginTop: 16
+    marginTop: 16,
+    fontFamily: 'OpenSans-SemiBold'
   },
   googleCardParaContainer: {
     display: 'flex',
@@ -156,12 +156,11 @@ export default EStyleSheet.create({
   },
   trillionTreeEventTitle: {
     fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
     lineHeight: 19,
     letterSpacing: 0,
     textAlign: 'left',
-    color: 'rgba(0, 0, 0, 0.6)'
+    color: 'rgba(0, 0, 0, 0.6)',
+    fontFamily: 'OpenSans-Regular'
   },
   tpoCardText: {
     display: 'flex',
@@ -204,5 +203,46 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     marginTop: 5
   },
-  featuredProjectCardIconText: { fontWeight: '300' }
+  featuredProjectCardIconText: { fontFamily: 'OpenSans-Regular' },
+
+  // Unfulfilled Pledge
+
+  ufpColumn: {
+    paddingRight: 16,
+    flexWrap: 'wrap',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  ufpTrees: {
+    fontSize: 20,
+    lineHeight: 27,
+    letterSpacing: 0,
+    textAlign: 'left',
+    marginBottom: 14,
+    fontFamily: 'OpenSans-Bold'
+  },
+  ufpLeftSection: { flexDirection: 'row', flexGrow: 1, width: '100%' },
+  ufpCostView: {
+    width: 72,
+    height: 26,
+    borderRadius: 100,
+    backgroundColor: '#f2f2f7'
+  },
+  ufpCostText: {
+    fontSize: 16,
+    lineHeight: 22,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: '#89b53a',
+    fontFamily: 'OpenSans-Bold'
+  },
+  ufpPlantNow: {
+    fontSize: 11,
+    lineHeight: 13,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: '#707070',
+    marginTop: 4,
+    fontFamily: 'OpenSans-Regular'
+  }
 });

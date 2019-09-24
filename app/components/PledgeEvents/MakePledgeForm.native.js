@@ -14,10 +14,15 @@ import { forward } from './../../assets';
 import { postPledge } from './../../actions/pledgeAction';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { updateStaticRoute } from '../../helpers/routerHelper';
+import { loadUserProfile } from './../../actions/loadUserProfileAction';
 
 import i18n from '../../locales/i18n';
 import { connect } from 'react-redux';
 import CheckBox from 'react-native-check-box';
+// import AsyncStorage from '@react-native-community/async-storage';
+import { fetchItem, saveItem } from '../../stores/localStorage';
+import { currentUserProfileSelector } from './../../selectors';
+import { bindActionCreators } from 'redux';
 
 let _ = require('lodash');
 
@@ -32,7 +37,7 @@ class MakePledgeForm extends Component {
     lastnameValidator: 'Please enter Last Name',
     emailValidator: 'Please enter Email',
     treeCountValidator: 'Please enter Tree Count',
-    isChecked: false
+    isAnonymous: false
   };
   componentWillMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
@@ -50,6 +55,16 @@ class MakePledgeForm extends Component {
     this.keyboardDidHideListener.remove();
   }
 
+  componentDidMount() {
+    if (this.props.userProfile) {
+      const userProfile = this.props.userProfile;
+      this.setState({
+        firstname: userProfile.firstname,
+        lastname: userProfile.lastname,
+        email: userProfile.email
+      });
+    }
+  }
   _keyboardDidShow = () => {
     this.setState({
       buttonType: '>'
@@ -62,20 +77,8 @@ class MakePledgeForm extends Component {
     });
   };
 
-  stringValidator = (firstname, lastname) => {
-    if (
-      typeof firstname === 'string' ||
-      (firstname instanceof String && typeof lastname === 'string') ||
-      lastname instanceof String
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  onFormSubmit = () => {
-    const { firstname, lastname, email, treeCount } = this.state;
+  onFormSubmit = async () => {
+    const { firstname, lastname, email, treeCount, isAnonymous } = this.state;
     const { navigation } = this.props;
     let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
@@ -101,14 +104,15 @@ class MakePledgeForm extends Component {
             firstname,
             lastname,
             email,
-            treeCount
+            treeCount,
+            isAnonymous
           };
           console.log(data);
           const params = this.props.navigation.getParam('slug');
           this.props.postPledge(data, {
             pledgeEventSlug: params
           });
-          //this.RBSheet.open();
+
           updateStaticRoute('app_pledge_events', this.props.navigation, {
             slug: this.props.navigation.getParam('slug'),
             plantProject: this.props.navigation.getParam('plantProject'),
@@ -171,6 +175,9 @@ class MakePledgeForm extends Component {
                   titleFontSize={12}
                   returnKeyType="next"
                   lineWidth={1}
+                  labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                  affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                   blurOnSubmit={false}
                   onSubmitEditing={() => {
                     this.lastnameTextInput.focus();
@@ -190,6 +197,9 @@ class MakePledgeForm extends Component {
                   ref={input => {
                     this.lastnameTextInput = input;
                   }}
+                  labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                  affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                   onSubmitEditing={() => {
                     this.emailTextInput.focus();
                   }}
@@ -212,6 +222,9 @@ class MakePledgeForm extends Component {
                 onSubmitEditing={() => {
                   this.treecountTextInput.focus();
                 }}
+                labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                 returnKeyType="next"
                 onChangeText={email => this.setState({ email })}
               />
@@ -228,6 +241,9 @@ class MakePledgeForm extends Component {
                   ref={input => {
                     this.treecountTextInput = input;
                   }}
+                  labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                  affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                   returnKeyType="done"
                   onChangeText={treeCount => this.setState({ treeCount })}
                 />
@@ -237,14 +253,15 @@ class MakePledgeForm extends Component {
               <CheckBox
                 onClick={() => {
                   this.setState({
-                    isChecked: !this.state.isChecked
+                    isAnonymous: !this.state.isAnonymous
                   });
                 }}
-                // style={{
-                //   width: 70
-                // }}
                 checkedCheckBoxColor="#89b53a"
-                isChecked={this.state.isChecked}
+                isChecked={this.state.isAnonymous}
+                rightTextStyle={{
+                  fontFamily: 'OpenSans-Regular',
+                  color: '#4d5153'
+                }}
                 rightText="Hide my Name from the list (Anonymous Pledge)"
               />
             </View>
@@ -285,10 +302,14 @@ class MakePledgeForm extends Component {
   }
 }
 
+// To Do - Replace form with Tcomb Form
+
 const mapStateToProps = state => ({
-  // postedPledge: postedPledgeSelector(state)
+  userProfile: currentUserProfileSelector(state)
 });
 
-export default connect(mapStateToProps, { postPledge })(MakePledgeForm);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ postPledge, loadUserProfile }, dispatch);
+};
 
-// To Do - Replace form with Tcomb Form
+export default connect(mapStateToProps, mapDispatchToProps)(MakePledgeForm);

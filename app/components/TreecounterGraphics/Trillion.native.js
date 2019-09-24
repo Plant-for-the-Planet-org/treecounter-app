@@ -236,112 +236,43 @@ class Trillion extends PureComponent {
               {/*  Unfulfilled Pledge Events Title Ended */}
 
               {/*  Unfulfilled Pledge Events horizontal ScrollView */}
-              <View style={{ marginTop: 16 }}>
-                <ScrollView
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={{ paddingRight: 20 }}
-                >
-                  <View style={[styles.featuredProjectCard]}>
-                    <View style={[styles.featuredProjectCardRow]}>
-                      <View
-                        style={{
-                          paddingRight: 16,
-                          flexWrap: 'wrap',
-                          display: 'flex',
-                          flexDirection: 'column'
-                        }}
-                      >
-                        <View
-                          style={{
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            marginBottom: 14
-                          }}
-                        >
-                          <Text
-                            style={{
-                              fontSize: 20,
-                              fontWeight: 'bold',
-                              fontStyle: 'normal',
-                              lineHeight: 27,
-                              letterSpacing: 0,
-                              textAlign: 'left'
-                            }}
-                          >
-                            500,000 Trees
-                          </Text>
-                          <View
-                            style={{
-                              width: 72,
-                              height: 26,
-                              borderRadius: 100,
-                              backgroundColor: '#f2f2f7',
-                              alignSelf: 'flex-end'
-                            }}
-                          >
-                            <Text
-                              style={{
-                                fontSize: 16,
-                                fontWeight: 'bold',
-                                fontStyle: 'normal',
-                                lineHeight: 22,
-                                letterSpacing: 0,
-                                textAlign: 'center',
-                                color: '#89b53a'
-                              }}
-                            >
-                              $200
-                            </Text>
+              {/* <View style={{ marginTop: 16 }}>
+                  <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={{ paddingRight: 20 }}
+                  >
+                    <View style={[styles.featuredProjectCard]}>
+                      <View style={styles.ufpColumn}>
+                        <Text style={styles.ufpTrees}>500,000 Trees</Text>
+                        <View style={styles.ufpLeftSection}>
+                          <View>
+                            <View style={styles.featuredProjectCardIconContainer}>
+                              <Image
+                                style={styles.featuredProjectCardIcon}
+                                source={smalltree}
+                              />
+                              <Text style={styles.featuredProjectCardIconText}>Pledged on GSA Forum</Text>
+                            </View>
+                            <View style={styles.featuredProjectCardIconContainer}>
+                              <Image
+                                style={styles.featuredProjectCardIcon}
+                                source={greencalendar}
+                              />
+                              <Text style={styles.featuredProjectCardIconText}>March 3, 2019</Text>
+                            </View>
                           </View>
-                        </View>
-
-                        <View style={styles.featuredProjectCardIconContainer}>
-                          <Image
-                            style={styles.featuredProjectCardIcon}
-                            source={smalltree}
-                          />
-                          <Text style={styles.featuredProjectCardIconText}>
-                            Pledged on GSA Forum
-                          </Text>
-                        </View>
-                        <View style={styles.featuredProjectCardIconContainer}>
-                          <Image
-                            style={styles.featuredProjectCardIcon}
-                            source={greencalendar}
-                          />
-
-                          <Text style={styles.featuredProjectCardIconText}>
-                            March 3, 2019
-                          </Text>
+                          <View style={{ marginLeft: 40 }}>
+                            <View style={styles.ufpCostView}>
+                              <Text style={styles.ufpCostText}>$200</Text>
+                            </View>
+                            <Text style={styles.ufpPlantNow}>Plant Now</Text>
+                          </View>
                         </View>
                       </View>
                     </View>
-                    <View style={[styles.horizontalLine, { marginTop: 24 }]} />
-                    <TouchableOpacity
-                      style={{ width: '100%' }}
-                      onPress={() => {
-                        updateStaticRoute('app_pledge_events', navigation, {
-                          slug: featuredEvents.slug,
-                          eventName: featuredEvents.name,
-                          eventDate: featuredEvents.eventDate,
-                          totalTrees: featuredEvents.total,
-                          eventImage: featuredEvents.image,
-                          description: featuredEvents.description,
-                          plantProject: { id: -1 },
-                          treeCount: -1
-                        });
-                      }}
-                    >
-                      <Text
-                        style={[styles.googleCardButton, { marginTop: 12 }]}
-                      >
-                        Plant Now
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </ScrollView>
-              </View>
+                  </ScrollView>
+                </View> */}
               {/* Unfulfilled Pledge Events horizontal ScrollView Ended */}
 
               {/* Tree Counter SVG */}

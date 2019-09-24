@@ -74,24 +74,20 @@ export default class Pledge extends Component {
             <img src={getImageUrl('event', 'thumb', selectedPledge.image)} />
           </div>
           {selectedPledge.name}
-        </div>
-        <CardLayout className="total_trees">
+          <br />
           <span className="total_number">
-            {delimitNumbers(parseInt(this.props.pledges.total))}
+            {delimitNumbers(parseInt(this.props.pledges.total))}{' '}
+            {i18n.t('label.treesPledged')}
           </span>
-          <span className="total_text">{i18n.t('label.total_trees')}</span>
-        </CardLayout>
+        </div>
+
         <div className="pledge_content--center">
           <div className="row">
-            <CardLayout className="recent-pledges">
-              <div className="before_table_header">
-                <img src={pledge_latest} />
-                <span>{i18n.t('label.most_recent')}</span>
-              </div>
+            <div className="recent-pledges">
               <div className="recent-pledges-table">
                 <div className="pledges-header row-list-item">
-                  <span>{i18n.t('label.name')}</span>
-                  <span>{i18n.t('label.trees')}</span>
+                  <img src={pledge_latest} />
+                  <span>{i18n.t('label.most_recent')}</span>
                 </div>
                 <div className="pledges-list">
                   {this.props.pledges.latestPledgeEvents.map(pledge => (
@@ -102,16 +98,13 @@ export default class Pledge extends Component {
                   ))}
                 </div>
               </div>
-            </CardLayout>
-            <CardLayout className="recent-pledges">
-              <div className="before_table_header">
-                <img src={pledge_highest} />
-                <span>{i18n.t('label.biggest_pledges')}</span>
-              </div>
+            </div>
+
+            <div className="recent-pledges">
               <div className="recent-pledges-table">
                 <div className="pledges-header row-list-item">
-                  <span>{i18n.t('label.name')}</span>
-                  <span>{i18n.t('label.trees')}</span>
+                  <img src={pledge_highest} />
+                  <span>{i18n.t('label.biggest_pledges')}</span>
                 </div>
                 <div className="pledges-list">
                   {this.props.pledges.highestPledgeEvents.map(pledge => (
@@ -122,7 +115,7 @@ export default class Pledge extends Component {
                   ))}
                 </div>
               </div>
-            </CardLayout>
+            </div>
           </div>
           <CardLayout className="pledge-form">
             <ContentHeader caption={i18n.t('label.pledge_trees')} />

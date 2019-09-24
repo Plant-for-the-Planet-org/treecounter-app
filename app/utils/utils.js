@@ -17,13 +17,26 @@ export function delimitNumbersStr(str) {
   });
 }
 
-export function formatNumber(data, locale, currency) {
+export function formatNumber(data, locale, currency, userProfile, currencies) {
   locale = locale || getLocale();
   try {
     let style = { maximumFractionDigits: 2 };
     if (currency) {
       style.style = 'currency';
       style.currency = currency;
+      if (userProfile && userProfile.currency) {
+        style.currency = userProfile.currency;
+        if (
+          currencies &&
+          currencies.currencies &&
+          currencies.currencies.currency_rates[currency]
+        ) {
+          data =
+            currencies.currencies.currency_rates[currency].rates[
+              userProfile.currency
+            ] * data;
+        }
+      }
     }
     // console.log('got numberformat', data, locale, currency, style)
     return new Intl.NumberFormat(locale, style).format(data);

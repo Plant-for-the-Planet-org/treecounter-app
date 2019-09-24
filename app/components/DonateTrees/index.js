@@ -305,6 +305,7 @@ export default class DonateTrees extends Component {
   }
 
   render() {
+    console.log(this.props.currentUserProfile);
     // this is just for NextArrow displayNone
     let displayNone = classNames({
       'display-none': this.state.pageIndex === 3

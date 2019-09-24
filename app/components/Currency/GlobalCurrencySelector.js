@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import i18n from '../../locales/i18n.js';
+// import i18n from '../../locales/i18n.js';
 import { currencySort } from './utils';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -10,6 +10,8 @@ import {
   getPreferredCurrency,
   setPreferredCurrency
 } from '../../actions/globalCurrency';
+
+import { updateUserProfile } from '../../actions/updateUserProfile';
 
 class GlobalCurrencySelector extends Component {
   constructor(props) {
@@ -38,9 +40,10 @@ class GlobalCurrencySelector extends Component {
         )
       : [];
   }
-  handleCurrencyChange({ target: { value } } = evt) {
+  handleCurrencyChange({ target: { value } } = event) {
     this.updateState({ preferredCurrency: value });
     setPreferredCurrency(value);
+    this.props.updateUserProfile({ currency: value }, 'currency');
   }
   render() {
     const currenciesArray = this.getCurrencyNames();
@@ -74,7 +77,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      fetchCurrencies
+      fetchCurrencies,
+      updateUserProfile
     },
     dispatch
   );

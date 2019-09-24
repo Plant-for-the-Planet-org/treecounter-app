@@ -22,6 +22,8 @@ import {
   leaderboards_company_green
 } from '../assets';
 import _ from 'lodash';
+import * as Yup from 'yup';
+import i18n from '../locales/i18n';
 import { getErrorView } from '../server/validator';
 
 /*
@@ -569,3 +571,64 @@ export function isTpo(currentUserProfile) {
 }
 
 export const paymentFee = 0;
+
+export function generateFormikSchemaFromFormSchema(
+  schemaObj = { properties: {}, required: [] }
+) {
+  let validationSchemaGenerated = {};
+  Object.keys(schemaObj.properties).map(key => {
+    const property = schemaObj.properties[key];
+
+    if (['hidden', 'file'].indexOf(property.type) < 0) {
+      // Not accepted in native
+
+      let prepareSchema = Yup;
+      const title = i18n.t(property.title);
+
+      if (property.type === 'object') {
+        prepareSchema = generateFormikSchemaFromFormSchema(property);
+      } else {
+        if (property.type === 'string') {
+          prepareSchema = prepareSchema.string();
+        } else if (property.type === 'integer') {
+          prepareSchema = prepareSchema
+            .number()
+            .positive(i18n.t('label.positive_number'))
+            .typeError(i18n.t('label.invalid_number'));
+        } else if (property.type === 'number') {
+          prepareSchema = prepareSchema
+            .number()
+            .typeError(i18n.t('label.invalid_number'));
+        }
+
+        if (schemaObj.required && schemaObj.required.indexOf(key) >= 0) {
+          prepareSchema = prepareSchema.required(
+            i18n.t('label.required_field', { field: title })
+          );
+        }
+
+        if (property.enum && property.enum.length > 0) {
+          prepareSchema = prepareSchema.oneOf(
+            property.enum,
+            i18n.t('label.selection_invalid')
+          );
+        }
+
+        if (key === 'email') {
+          prepareSchema = prepareSchema.email(i18n.t('label.email_invalid'));
+        }
+
+        if (property.attr && property.attr.maxlength) {
+          prepareSchema = prepareSchema.max(
+            property.attr.maxlength,
+            i18n.t('label.chat_limit', { field: property.attr.maxlength })
+          );
+        }
+      }
+
+      validationSchemaGenerated[key] = prepareSchema;
+    }
+  });
+
+  return Yup.object().shape(validationSchemaGenerated);
+}

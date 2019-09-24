@@ -247,7 +247,7 @@ export default class MineCompetitions extends Component {
     ) : (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 72 }}
-        enableOnAndroid={true}
+        enableOnAndroid
       >
         <View style={styles.containerDedicateStyle}>
           <View style={styles.dedicateTreeName}>

@@ -55,10 +55,19 @@ export default class Login extends Component {
     this.props.onPress(this._recaptchaToken, this.refreshToken);
   };
   render() {
+    const backgroundColor = 'white';
     return (
       <KeyboardAwareScrollView
-        contentContainerStyle={[scrollStyle.styleContainer, { flex: 1 }]}
-        enableOnAndroid={true}
+        contentContainerStyle={[
+          scrollStyle.styleContainer,
+          { backgroundColor: backgroundColor, marginBottom: 300 }
+        ]}
+        enableOnAndroid
+        keyboardDismissMode="on-drag"
+        keyboardShouldPersistTaps="always"
+        style={styles.keyboardScrollView}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        scrollEnabled
       >
         <ReCaptchaV3
           ref={ref => (this._captchaRef = ref)}

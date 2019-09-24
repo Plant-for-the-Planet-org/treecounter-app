@@ -13,11 +13,12 @@ class ConfirmProfileDeletionModal extends Component {
   }
 
   render() {
+    const backgroundColor = 'white';
     const deleteProfile = this.props.navigation.getParam('deleteProfile');
     return (
       <View style={styles.confirmDeleteContainer}>
         <ScrollView
-          contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
+          contentContainerStyle={{ flex: 1, backgroundColor: backgroundColor }}
         >
           <View style={styles.container}>
             <Text style={styles.textHeader}>{i18n.t('label.sure')}</Text>
@@ -43,8 +44,7 @@ class ConfirmProfileDeletionModal extends Component {
               maxLength={6}
               multiline={false}
               returnKeyType={'next'}
-              autoCapitalize={true}
-              allowFontScaling={true}
+              allowFontScaling
               autoCapitalize={'sentences'}
             />
             <Text style={[styles.textPara, { marginTop: 15 }]}>

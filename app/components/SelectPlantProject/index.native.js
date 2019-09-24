@@ -36,7 +36,6 @@ export default class SelectPlantTabView extends PureComponent {
     return (
       <TabBar
         {...props}
-        indicatorStyle={styles.indicator}
         style={styles.tabBar}
         //tabStyle={{ width: Layout.window.width / 4 }}
         labelStyle={styles.textStyle}

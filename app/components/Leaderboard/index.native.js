@@ -142,6 +142,7 @@ export default class Leaderboard extends Component {
     if (!this.props.categoryInfo) {
       return null;
     }
+    const backgroundColor = 'transparent';
     const selectedSorting =
       this.state.timeSorting ||
       (this.props.timePeriodsInfo &&
@@ -163,7 +164,7 @@ export default class Leaderboard extends Component {
           tooltipContainerStyle={styles.tooltipContainerStyle}
           setBelow
           labelSeparatorColor="transparent"
-          overlayStyle={{ backgroundColor: 'transparent' }} // set the overlay invisible
+          overlayStyle={{ backgroundColor: backgroundColor }} // set the overlay invisible
           buttonComponent={
             <TouchableItem
               onPress={event => {

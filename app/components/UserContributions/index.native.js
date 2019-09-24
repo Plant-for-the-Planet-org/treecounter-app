@@ -36,7 +36,6 @@ export default class UserContributions extends React.Component {
     return (
       <TabBar
         {...props}
-        indicatorStyle={tabBarStyles.indicator}
         style={[tabBarStyles.tabBar]}
         labelStyle={tabBarStyles.textStyle}
         indicatorStyle={tabBarStyles.textActive}
@@ -91,7 +90,7 @@ export default class UserContributions extends React.Component {
           </PrimaryButton>
         </View>
         <TabView
-          useNativeDriver={true}
+          useNativeDriver
           navigationState={this.state}
           renderScene={this._renderScene}
           renderTabBar={this._renderTabBar}

@@ -29,8 +29,11 @@ export default class PledgeTabView extends Component {
   render() {
     const allpledgeshigh = this.props.pledges.highestEventPledges;
 
-    const highestPledges = allpledgeshigh.map(highestPledges => (
-      <View style={styles.tabViewTitleContainer}>
+    const highestPledges = allpledgeshigh.map((highestPledges, index) => (
+      <View
+        key={`highestPledges-${index}`}
+        style={styles.tabViewTitleContainer}
+      >
         <View style={{ flex: 1, marginLeft: 26 }}>
           <Text style={styles.tabViewContentText}>
             {highestPledges.firstname} {highestPledges.lastname}
@@ -46,8 +49,8 @@ export default class PledgeTabView extends Component {
 
     const allpledgesrecent = this.props.pledges.latestEventPledges;
 
-    const latestPledges = allpledgesrecent.map(latestPledges => (
-      <View style={styles.tabViewTitleContainer}>
+    const latestPledges = allpledgesrecent.map((latestPledges, index) => (
+      <View key={`latestPledges-${index}`} style={styles.tabViewTitleContainer}>
         <View style={{ flex: 1, marginLeft: 26 }}>
           <Text style={styles.tabViewContentText}>
             {latestPledges.firstname} {latestPledges.lastname}

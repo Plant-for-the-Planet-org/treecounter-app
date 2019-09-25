@@ -8,11 +8,12 @@ import { currenciesSelector } from '../../selectors';
 import { fetchCurrencies } from '../../actions/currencies';
 import {
   getPreferredCurrency,
-  setPreferredCurrency
+  setCurrencyAction
 } from '../../actions/globalCurrency';
 
 import { updateUserProfile } from '../../actions/updateUserProfile';
 import { ProfilePic } from '../../assets';
+import currenciesReducer from '../../reducers/currenciesReducer';
 
 class GlobalCurrencySelector extends Component {
   constructor(props) {
@@ -23,13 +24,31 @@ class GlobalCurrencySelector extends Component {
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.updateState = this.updateState.bind(this);
   }
+  async componentWillReceiveProps(nextProps) {
+    console.log('next props', nextProps);
+    if (!nextProps.userProfile) {
+      // this.setState({ preferredCurrency: getPreferredCurrency() });
+      console.log('next after change', this.state);
+      this.props.setCurrencyAction(this.state.preferredCurrency);
+    } else {
+      this.setState({ preferredCurrency: nextProps.userProfile.currency });
+      this.props.setCurrencyAction(nextProps.userProfile.currency);
+    }
+
+    if (!nextProps.currencies.currencies) {
+      this.props.fetchCurrencies();
+    }
+  }
   async componentWillMount() {
     this.setState({ preferredCurrency: getPreferredCurrency() });
   }
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
-      this.props.fetchCurrencies();
+      let curreniesData = await this.props.fetchCurrencies();
+      console.log('got fron fetch', curreniesData);
     }
+    console.log('setting', this.state);
+    this.props.setCurrencyAction(this.state.preferredCurrency);
   }
   updateState(data) {
     this.setState(data);
@@ -43,7 +62,7 @@ class GlobalCurrencySelector extends Component {
   }
   handleCurrencyChange({ target: { value } } = event) {
     this.updateState({ preferredCurrency: value });
-    setPreferredCurrency(value);
+    this.props.setCurrencyAction(value);
     this.props.userProfile &&
       this.props.updateUserProfile({ currency: value }, 'currency');
   }
@@ -80,7 +99,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       fetchCurrencies,
-      updateUserProfile
+      updateUserProfile,
+      setCurrencyAction
     },
     dispatch
   );
@@ -93,5 +113,6 @@ GlobalCurrencySelector.propTypes = {
   currencies: PropTypes.object,
   updateUserProfile: PropTypes.func,
   fetchCurrencies: PropTypes.func,
-  userProfile: PropTypes.object
+  userProfile: PropTypes.object,
+  setCurrencyAction: PropTypes.func
 };

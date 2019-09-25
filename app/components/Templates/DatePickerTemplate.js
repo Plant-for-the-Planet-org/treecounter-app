@@ -24,7 +24,7 @@ export function DatePickerTemplate(locals) {
       <DatePicker
         placeholderText={i18n.t(locals.label)}
         style={calendarStyle}
-        openDatePickerOnClick={true}
+        openDatePickerOnClick
         selected={!!locals.value ? getDateFromMySQL(locals.value) : undefined}
         // startDate={!!locals.value ? getDateFromMySQL(locals.value) : undefined}
         // startLimit={new Date(1700, 0)}
@@ -32,8 +32,6 @@ export function DatePickerTemplate(locals) {
         locale={locale}
         key={101}
         onChange={newDate => {
-          console.log('___onChangeDate___', newDate);
-
           locals.onChange(formatDate(newDate));
         }}
       />

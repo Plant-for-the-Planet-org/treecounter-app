@@ -149,12 +149,14 @@ class Menu extends Component {
     this.setState({
       selectedLanguage: selectedOption
     });
+    console.log('change');
     saveItem('language', selectedOption.value);
-    this.props.userProfile &&
-      this.props
-        .updateUserProfile({ locale: selectedOption.value }, 'locale', true)
-        .then(this.reload)
-        .catch(this.reload);
+    this.props.userProfile
+      ? this.props
+          .updateUserProfile({ locale: selectedOption.value }, 'locale', true)
+          .then(this.reload)
+          .catch(this.reload)
+      : this.reload();
   };
   reload = () => {
     location.reload();

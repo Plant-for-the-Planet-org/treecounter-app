@@ -10,7 +10,7 @@
   "sent": "Gesendet",
   "accepted": "Akzeptiert",
   "declined": "Abgelehnt",
-  "challenge_accept": "Sie haben die Herausforderung angenommen",
+  "challenge_accept": "Du hast die Herausforderung angenommen",
   "challenge_deny": "Du hast die Herausforderung abgelehnt.",
   "challenge_error": "Das aktuelle Ziel von {{user}} sind {{target}} Bäume. Bitte gib eine höhere Zahl ein.",
   "search_user": "Suche Benutzer",

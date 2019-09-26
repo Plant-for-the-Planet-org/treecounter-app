@@ -5,13 +5,13 @@
   "bank_transfer": "Banküberweisung",
   "pay_via": "Bezahlen per Banküberweisung",
   "pay": "Bezahlen",
-  "choose": "Auswahl",
+  "choose": "Auswählen",
   "card": "Karte",
   "last4": "Letzte 4 Ziffern",
   "save_for_later": "Diese Zahlungsmethode für zukünftige Spenden speichern",
   "sepa_debit": "SEPA-Lastschrift",
-  "stripe_sepa_des1": "Indem Sie Ihre IBAN angeben und die Zahlung bestätigen, autorisieren Sie  ",
-  "stripe_sepa_des2": "und Stripe, unser Zahlungsdienstleister, Anweisungen an Ihre Bank zu senden, um Ihr Konto zu belasten, und Ihre Bank, Ihr Konto gemäß diesen Anweisungen zu belasten. Sie haben Anspruch auf eine Rückerstattung von Ihrer Bank gemäß den Allgemeinen Geschäftsbedingungen Ihrer Bank. Eine Erstattung muss innerhalb von 8 Wochen ab dem Datum der Belastung Ihres Kontos beantragt werden.",
+  "stripe_sepa_des1": "Indem du deine IBAN angibst und die Zahlung bestätigst, autorisierst du  ",
+  "stripe_sepa_des2": "und Stripe, unserem Zahlungsdienstleister, Anweisungen an deine Bank zu senden, um dein Konto zu belasten, und deiner Bank, dein Konto gemäß diesen Anweisungen zu belasten. Du hast Anspruch auf eine Rückerstattung von deiner Bank gemäß den Allgemeinen Geschäftsbedingungen deiner Bank. Eine Erstattung muss innerhalb von 8 Wochen ab dem Datum der Belastung deines Kontos beantragt werden.",
   "pay_via_sepa": "Bezahlen mit SEPA",
   "contact_firstname": "Vorname",
   "contact_lastname": "Nachname",
@@ -19,6 +19,6 @@
   "payment_failed": "Zahlung fehlgeschlagen",
   "go_back_to_app": "Zurück zur Plant-for-the-Planet App",
   "please_confirm": "Bitte bestätigen",
-  "please_enter_card_details": "Bitte geben Sie Ihre korrekten Kartendaten ein",
-  "please_enter_iban": "Bitte geben Sie Ihre korrekte IBAN ein"
+  "please_enter_card_details": "Bitte gib deine korrekten Kartendaten ein",
+  "please_enter_iban": "Bitte gib deine korrekte IBAN ein"
 }

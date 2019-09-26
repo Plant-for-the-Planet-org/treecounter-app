@@ -1,6 +1,5 @@
 {
   "sure": "Sei sicuro?",
-  "delete_confirmation": "Dopo aver confermato, tutti i dati del tuo account saranno cancellati. Questo non può essere annullato",
   "return_to_profile": "Ritorna al mio profilo",
   "new_project": "Aggiungi nuovo progetto",
   "Location": "Posizione",
@@ -8,6 +7,5 @@
   "gallery": "Galleria",
   "video": "Video",
   "plant_project_update_success": "Progetto di impianto aggiornato con successo",
-  "plant_project_delete_success": "Progetto di Impianto cancellato con successo",
-  "same_password_error": "Si prega di inserire la stessa password"
+  "plant_project_delete_success": "Progetto di Impianto cancellato con successo"
 }

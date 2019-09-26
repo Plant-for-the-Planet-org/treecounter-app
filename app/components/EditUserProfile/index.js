@@ -322,7 +322,7 @@ export default class EditUserProfile extends React.Component {
           treeCounter.followeeIds && (
             <CardLayout className="user-profile__form-group">
               <div className="form-group__heading">
-                {i18n.t('label.un_subscribe')}
+                {i18n.t('label.subscribed')}
               </div>
               {this.props.followeeList && this.props.followeeList.length > 0 ? (
                 <div className="follow-container">
@@ -354,7 +354,7 @@ export default class EditUserProfile extends React.Component {
                       </div>
                       <div className="col col3">
                         <FollowLabelButton
-                          label={i18n.t('label.un_follow')}
+                          label={i18n.t('label.unsubscribe')}
                           isSubscribed
                           isLoggedIn={false}
                           onClick={() => this.props.unfollowUser(follow.id)}

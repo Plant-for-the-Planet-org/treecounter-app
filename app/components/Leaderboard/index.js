@@ -66,7 +66,11 @@ export default class Leaderboard extends Component {
   };
 
   getTableView = hasSubSection => {
-    let listItemsUI = <LoadingIndicator />;
+    let listItemsUI = (
+      <div className="imageContainer">
+        <LoadingIndicator />
+      </div>
+    );
     const { categoryInfo, sectionInfo, queryResultSelfData } = this.props;
     if (this.props.queryResult)
       listItemsUI = (

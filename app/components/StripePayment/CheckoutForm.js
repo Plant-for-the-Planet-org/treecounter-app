@@ -14,7 +14,8 @@ class CheckoutForm extends React.Component {
     saveForLaterCC: false,
     saveForLaterSEPA: false,
     chosenCard: 'new-card',
-    cards: []
+    cards: [],
+    isPayEnable: true
   };
 
   componentDidMount() {
@@ -74,6 +75,7 @@ class CheckoutForm extends React.Component {
 
   handleSubmitCCPayment = async ev => {
     this.props.setProgressModelState(true);
+    this.setState({ isPayEnable: false });
     ev.preventDefault();
 
     const paymentDetails = this.props.paymentDetails;
@@ -110,6 +112,7 @@ class CheckoutForm extends React.Component {
         .then(response => {
           this.props.setProgressModelState(false);
           if (response.data.status == 'failed') {
+            this.setState({ isPayEnable: true });
             this.props.paymentFailed({
               status: false,
               message: response.data.message || 'error'
@@ -177,6 +180,7 @@ class CheckoutForm extends React.Component {
             chosenCard={this.state.chosenCard}
             currentUserProfile={this.props.currentUserProfile}
             onChangeSelectedCard={this.onChangeSelectedCard}
+            isPayEnable={state.isPayEnable}
           />
         ) : (
           <SEPAForm

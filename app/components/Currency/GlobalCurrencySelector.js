@@ -29,7 +29,7 @@ class GlobalCurrencySelector extends Component {
     }
 
     if (!nextProps.currencies.currencies) {
-      this.props.fetchCurrencies();
+      await this.props.fetchCurrencies();
     }
   }
   async componentWillMount() {
@@ -51,7 +51,7 @@ class GlobalCurrencySelector extends Component {
       ? currencySort(
           Object.keys(this.props.currencies.currencies.currency_names)
         )
-      : [];
+      : [this.state.preferredCurrency];
   }
   handleCurrencyChange({ target: { value } } = event) {
     this.updateState({ preferredCurrency: value });

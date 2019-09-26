@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { logoutUser } from '../../actions/authActions';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { setCurrentUserProfileId } from '../../reducers/currentUserProfileIdReducer';
 import { mergeEntities } from '../../reducers/entitiesReducer';
 import { currentUserProfileSelector } from '../../selectors';
-import { setAuth0Token } from '../../utils/user';
+import { setAuth0Token } from '../../utils/auth0-tokens';
 import { useAuth0 } from './Auth0Provider';
-import { logoutUser } from '../../actions/authActions';
 
 /**
  * Authenticate or logout the user with the backend API whenever Auth0 authentication changes.
@@ -17,7 +18,12 @@ import { logoutUser } from '../../actions/authActions';
  * and fetches userProfile accordingly.
  */
 const AuthenticateUser = ({ children }) => {
-  const { isAuthenticated, user, getIdTokenClaims } = useAuth0();
+  const {
+    isAuthenticated,
+    user,
+    getIdTokenClaims,
+    getTokenSilently
+  } = useAuth0();
   const userProfile = useSelector(currentUserProfileSelector);
   const dispatch = useDispatch();
 
@@ -27,6 +33,7 @@ const AuthenticateUser = ({ children }) => {
       userDidChange(
         isAuthenticated,
         getIdTokenClaims,
+        getTokenSilently,
         user,
         userProfile,
         dispatch
@@ -43,45 +50,46 @@ export default AuthenticateUser;
 const userDidChange = async (
   isAuthenticated,
   getIdTokenClaims,
+  getTokenSilently,
   user,
   userProfile,
   dispatch
 ) => {
   if (isAuthenticated) {
-    // authenticated -> login
     if (!userProfile) {
-      // Could merge userProfile into redux now
+      // Auth0 user is authenticated but our redux userProfile is not yet set.
+
       const claims = await getIdTokenClaims();
       const authUser = user || claims;
 
-      // unique identifier for user
-      // TODO on fetch of userProfile it will need to be merged to sub not id
+      // Set a temporary profile
       const userId = authUser.sub;
-
       dispatch(setCurrentUserProfileId(userId));
       dispatch(mergeEntities(asUserProfileEntity(userId, authUser)));
 
       // claims.__raw is a JWT token with the full userProfile and unique id: sub
       // eslint-disable-next-line no-underscore-dangle
-      const jwt = claims.__raw;
+      let jwt = claims.__raw;
+      if (!jwt) {
+        // This attribute may get removed, so fall back to fetching token
+        // in an iframe.
+        console.warn(`No JWT at claims.__raw, fetching ... `);
+        jwt = await getTokenSilently();
+      }
 
       if (jwt) {
         // Set the token to be used for making authenticated requests to API backend
         await setAuth0Token(jwt);
       } else {
-        throw new Error(
-          `No JWT claims.__raw supplied from getIdTokenClaims: ${JSON.stringify(
-            claims,
-            null,
-            2
-          )}`
-        );
+        throw new Error(`No JWT: ${JSON.stringify(claims, null, 2)}`);
       }
+
+      // User profile on server may or may not be different
+      dispatch(loadUserProfile());
     }
   } else {
-    // not authenticated -> logout
+    // User is no longer authenticated so log them out
     if (userProfile) {
-      console.log('call authActions logoutUser');
       dispatch(logoutUser());
     }
   }

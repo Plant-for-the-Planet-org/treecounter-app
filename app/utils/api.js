@@ -1,13 +1,10 @@
 import axios from 'axios';
 import { v1 as uuidv1 } from 'uuid';
 
-// import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
-import { fetchItem, saveItem } from '../stores/localStorage';
-import { getAuth0Token } from './user';
 import { getApiRoute } from '../actions/apiRouting';
-// import { getStore } from '../components/App/index';
-// import { logoutUser } from '../actions/authActions';
 import { context } from '../config';
+import { fetchItem, saveItem } from '../stores/localStorage';
+import { getAuth0Token } from './auth0-tokens';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {

@@ -10,7 +10,7 @@
   "pledgeTitleName": "Name",
   "pledgeTitleTrees": "Bäume",
   "pledgeToPlant": "Verspreche Bäume zu pflanzen",
-  "pledgeToPlantDesc": "Ein Baum kostet {{treeCost}} {{currency}} und wird in {{projectName}} gepflanzt. Sie erhalten eine E-Mail mit einem Link, um Ihr Versprechen zu erfüllen.",
+  "pledgeToPlantDesc": "Ein Baum kostet {{treeCost}} {{currency}} und wird in {{projectName}} gepflanzt. Du erhältst eine E-Mail mit einem Link, um dein Versprechen zu erfüllen.",
   "pledgeFormFName": "Vorname",
   "pledgeFormLName": "Nachname",
   "pledgeFormEmail": "E-Mail",

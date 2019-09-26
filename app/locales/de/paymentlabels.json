@@ -10,7 +10,7 @@
   "last4": "Letzte 4 Ziffern",
   "save_for_later": "Diese Zahlungsmethode für zukünftige Spenden speichern",
   "sepa_debit": "SEPA-Lastschrift",
-  "stripe_sepa_des1": "Indem Sie Ihre IBAN angeben und die Zahlung bestätigen, autorisieren Sie  ",
+  "stripe_sepa_des1": "Indem du deine IBAN angibst und die Zahlung bestätigst, autorisierst du  ",
   "stripe_sepa_des2": "und Stripe, unserem Zahlungsdienstleister, Anweisungen an deine Bank zu senden, um dein Konto zu belasten, und deiner Bank, dein Konto gemäß diesen Anweisungen zu belasten. Du hast Anspruch auf eine Rückerstattung von deiner Bank gemäß den Allgemeinen Geschäftsbedingungen deiner Bank. Eine Erstattung muss innerhalb von 8 Wochen ab dem Datum der Belastung deines Kontos beantragt werden.",
   "pay_via_sepa": "Bezahlen mit SEPA",
   "contact_firstname": "Vorname",

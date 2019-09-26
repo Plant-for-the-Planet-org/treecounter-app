@@ -31,13 +31,19 @@ const {
   schemaOptions: schemaOptionsOrganization
 } = callParser(schemaLiform.organization);
 
+const {
+  transformedSchema: signupSchemaVodafone,
+  schemaOptions: schemaOptionsVodafone
+} = callParser(schemaLiform.vodafone);
+
 const signupFormSchema = {
   tpo: signupSchemaTpo,
   company: signupSchemaCompany,
   organization: signupSchemaOrganization,
   individual: signupSchemaIndividual,
   government: signupSchemaGovernment,
-  education: signupSchemaEducation
+  education: signupSchemaEducation,
+  vodafone: signupSchemaVodafone
 };
 
 const schemaOptions = {
@@ -46,7 +52,8 @@ const schemaOptions = {
   organization: schemaOptionsOrganization,
   individual: schemaOptionsIndividual,
   government: schemaOptionsGovernment,
-  education: schemaOptionsEducation
+  education: schemaOptionsEducation,
+  vodafone: schemaOptionsVodafone
 };
 
 export { schemaOptions, signupFormSchema };

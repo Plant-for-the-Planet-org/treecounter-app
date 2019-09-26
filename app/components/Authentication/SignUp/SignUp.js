@@ -64,6 +64,7 @@ export default class SignUp extends Component {
     let signupType = null;
     if (props.match) {
       signupType = props.match.params.type;
+      console.log(signupType);
       this.setState({
         ProfileTypeParam: signupType
       });
@@ -83,6 +84,7 @@ export default class SignUp extends Component {
     } else {
       icon = SignupOrganization;
     }
+
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <ReCaptcha
@@ -127,6 +129,14 @@ export default class SignUp extends Component {
               onProfileClick={this.ProfileChange}
             />
           </div>
+        ) : this.state.ProfileTypeParam === 'vodafone' ? (
+          <SignUpType
+            imgSrc={icon}
+            salutation={i18n.t('label.i_am_a')}
+            title={'Vodafone Employee'}
+            active={false}
+            type={type}
+          />
         ) : (
           <SignUpType
             imgSrc={icon}
@@ -138,7 +148,13 @@ export default class SignUp extends Component {
         )}
         <div className={'card-width'}>
           <CardLayout>
-            <form onSubmit={this.props.onSignUpClicked.bind(this, type)}>
+            <form
+              onSubmit={this.props.onSignUpClicked.bind(
+                this,
+                type === 'vodafone' ? (type = 'individual') : type
+              )}
+            >
+              {ProfileTypeParam === 'vodafone' ? (type = 'vodafone') : type}
               <TCombForm
                 ref={'signupForm'}
                 type={signupFormSchema[type]}
@@ -148,7 +164,7 @@ export default class SignUp extends Component {
               <PrimaryButton
                 onClick={event => {
                   this.props.onSignUpClicked(
-                    type,
+                    type === 'vodafone' ? (type = 'individual') : type,
                     this.state.recaptchaToken,
                     this.refreshToken
                   );

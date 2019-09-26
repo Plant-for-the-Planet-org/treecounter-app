@@ -1255,6 +1255,107 @@ export default {
     submit_url: '',
     submit_method: 'POST'
   },
+  vodafone: {
+    title: 'vodafone_treedonor',
+    type: 'object',
+    properties: {
+      firstname: {
+        type: 'string',
+        title: 'label.firstname',
+        attr: {
+          maxlength: 255
+        },
+        icon: null,
+        help: null,
+        maxLength: 255,
+        propertyOrder: 1
+      },
+      lastname: {
+        type: 'string',
+        title: 'label.lastname',
+        attr: {
+          maxlength: 255
+        },
+        icon: null,
+        help: null,
+        maxLength: 255,
+        propertyOrder: 2
+      },
+      country: {
+        enum: ['DE'],
+        enum_titles: ['Germany'],
+        type: 'string',
+        title: 'label.country',
+        attr: {
+          maxlength: 2
+        },
+        icon: null,
+        help: null,
+        propertyOrder: 3
+      },
+      email: {
+        type: 'string',
+        title: 'Vodafone Email ID',
+        attr: {
+          maxlength: 100
+        },
+        widget: 'email',
+        icon: 'email',
+        help: null,
+        maxLength: 100,
+        propertyOrder: 4
+      },
+      password: {
+        title: null,
+        type: 'object',
+        properties: {
+          first: {
+            type: 'string',
+            title: 'label.password',
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
+            icon: 'key',
+            help: null,
+            propertyOrder: 1
+          },
+          second: {
+            type: 'string',
+            title: 'label.password_repeat',
+            attr: {
+              class: 'password-field'
+            },
+            widget: 'password',
+            icon: null,
+            help: null,
+            propertyOrder: 2
+          }
+        },
+        required: ['first', 'second'],
+        icon: null,
+        help: null,
+        propertyOrder: 5
+      },
+      mayPublish: {
+        type: 'boolean',
+        title: 'label.mayPublish',
+        icon: null,
+        help: null,
+        propertyOrder: 6
+      },
+      mayContact: {
+        type: 'boolean',
+        title: 'label.mayContact',
+        icon: null,
+        help: null,
+        propertyOrder: 7
+      }
+    },
+    required: ['firstname', 'lastname', 'country', 'email', 'password'],
+    submit_url: '',
+    submit_method: 'POST'
+  },
   company: {
     title: 'treedonor',
     type: 'object',

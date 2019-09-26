@@ -71,8 +71,8 @@ class PledgeEvents extends Component {
           </View>
 
           {this.props.pledges &&
-          this.props.pledges.highestPledgeEvents &&
-          this.props.pledges.highestPledgeEvents.length > 0 ? (
+          this.props.pledges.highestEventPledges &&
+          this.props.pledges.highestEventPledges.length > 0 ? (
             // If there are Pledges
             <View>
               <Text style={styles.eventSubTitle}>

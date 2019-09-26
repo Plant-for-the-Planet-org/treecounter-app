@@ -47,16 +47,17 @@
   .esri_logo_background {
     background-color: #fff;
     width:76px;
-    //border: 6px solid #fff;
-    //box-shadow: inset 1px 1px 6px rgba(0, 0, 0, 0.2),0 2px 5px rgba(0, 0, 0, 0.2);
-    //padding: 22px 5px;
     border-radius: 38px;
     height: 76px;
     display: flex;
+    border:1px solid rgb(85, 84, 84);
+    justify-content:center;
+    margin-bottom: 18px;
   }
   img {
-    height: 60px;
+    max-height: 76px;
     border-radius: 38px;
+    object-fit: contain;
   }
 }
 
@@ -80,28 +81,49 @@
 
 .recent-pledges {
   width: 320px;
-  margin: 24px;
+  margin: 36px;
   .recent-pledges-table {
-    border-radius: 6px;
-    border-spacing: 0;
-    border: solid 1px #d5d5d5;
+    border-radius: 6px;    
     color: #686060;
     width: 100%;
+    border: solid 1px #89b53a;
 
+    
     .row-list-item {
       display: flex;
       justify-content: space-between;
-      padding: 5px;
+      font-family: "OpenSans";
+      font-size: 16px;
+      color: #4d5153;
+      padding: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+
+      .row-list-item-rank{
+        font-size: 12px 
+      }
+
+      .row-list-item-name{ font-size: 12px; margin-left: 12px; font-weight: 600 }
+
+      .row-list-item-treeCount{ color: #89b53a; font-weight: bold }
     }
+    .row-list-item:nth-of-type(odd) {background-color: #f2f2f2;}
+
+    .row-gold{background-color: #2ecc71!important; span{color: #fff!important;}}
+    .row-silver{background-color: #3498db!important; span{color: #fff!important;}}
+    .row-bronze{background-color: #f1c40f!important; span{color: #fff!important;}}
   }
   .pledges-header {
-    border-bottom: solid 1px #d5d5d5;
+    //background-color: #89b53a;
+    padding: 16px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
 
   .pledges-list {
     overflow: auto;
-    height: 200px;
-    flex-direction: column;
+    flex-direction: column;    
+    border-top:0px
   }
 
   .pledges-list::-webkit-scrollbar {
@@ -126,6 +148,14 @@
   @include for-phone-only {
     flex-direction: column;
   }
+}
+
+.event-description{
+  border-radius: 7px;
+  border: solid 1px #d5d5d5;
+  text-align: left;
+  padding:16px;
+  width:100%;
 }
 
 .events_row {

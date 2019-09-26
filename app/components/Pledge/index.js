@@ -11,6 +11,7 @@ import { pledge_highest, pledge_latest } from '../../assets';
 import { getImageUrl } from '../../actions/apiRouting';
 import { getDocumentTitle } from '../../helpers/utils';
 import { delimitNumbers } from '../../utils/utils';
+import Pulse from 'react-reveal/Pulse';
 
 import {
   pledgeFormSchema,
@@ -67,6 +68,7 @@ export default class Pledge extends Component {
       )[0];
     }
     document.title = getDocumentTitle(selectedPledge.name);
+    let i;
     return this.props.pledges && this.props.pledges.total !== undefined ? (
       <div className="sidenav-wrapper app-container__content--center">
         <div className="conference_heading">
@@ -85,37 +87,108 @@ export default class Pledge extends Component {
           <div className="row">
             <div className="recent-pledges">
               <div className="recent-pledges-table">
-                <div className="pledges-header row-list-item">
-                  <img src={pledge_latest} />
-                  <span>{i18n.t('label.most_recent')}</span>
+                <div className="pledges-header">
+                  {/* <img src={pledge_latest} /> */}
+                  <span style={{ fontWeight: 'bold' }}>
+                    {i18n.t('label.most_recent')}
+                  </span>
                 </div>
                 <div className="pledges-list">
-                  {this.props.pledges.latestPledgeEvents.map(pledge => (
-                    <div className="row-list-item" key={pledge.id}>
-                      <span>{pledge.firstname + ' ' + pledge.lastname}</span>
-                      <span>{delimitNumbers(parseInt(pledge.treeCount))}</span>
-                    </div>
-                  ))}
+                  {
+                    ((i = 1),
+                    this.props.pledges.latestEventPledges.map(pledge => (
+                      <Pulse>
+                        <div className={'row-list-item '} key={pledge.id}>
+                          <span>
+                            <span className="row-list-item-rank">{i++}</span>
+                            <span className="row-list-item-name">
+                              {pledge.isAnonymous
+                                ? 'Anonymous'
+                                : pledge.firstname + ' ' + pledge.lastname}
+                            </span>
+                          </span>
+                          <span className="row-list-item-treeCount">
+                            {delimitNumbers(parseInt(pledge.treeCount))}{' '}
+                            <span
+                              style={{
+                                fontSize: 10,
+                                color: 'rgba(0, 0, 0, 0.6)',
+                                fontWeight: 'normal',
+                                marginLeft: 4
+                              }}
+                            >
+                              trees
+                            </span>
+                          </span>
+                        </div>
+                      </Pulse>
+                    )))
+                  }
                 </div>
               </div>
             </div>
 
             <div className="recent-pledges">
               <div className="recent-pledges-table">
-                <div className="pledges-header row-list-item">
-                  <img src={pledge_highest} />
-                  <span>{i18n.t('label.biggest_pledges')}</span>
+                <div className="pledges-header">
+                  {/* <img src={pledge_highest} /> */}
+                  <span style={{ fontWeight: 'bold' }}>
+                    {i18n.t('label.biggest_pledges')}
+                  </span>
                 </div>
                 <div className="pledges-list">
-                  {this.props.pledges.highestPledgeEvents.map(pledge => (
-                    <div className="row-list-item" key={pledge.id}>
-                      <span>{pledge.firstname + ' ' + pledge.lastname}</span>
-                      <span>{delimitNumbers(parseInt(pledge.treeCount))}</span>
-                    </div>
-                  ))}
+                  {
+                    ((i = 1),
+                    this.props.pledges.highestEventPledges.map(pledge => (
+                      <Pulse>
+                        <div
+                          className={
+                            i == 1
+                              ? 'row-list-item row-gold'
+                              : 'row-list-item ' && i == 2
+                                ? 'row-list-item row-silver'
+                                : 'row-list-item ' && i == 3
+                                  ? 'row-list-item row-bronze'
+                                  : 'row-list-item '
+                          }
+                          key={pledge.id}
+                        >
+                          <span>
+                            <span className="row-list-item-rank">{i++}</span>
+                            <span className="row-list-item-name">
+                              {pledge.isAnonymous
+                                ? 'Anonymous'
+                                : pledge.firstname + ' ' + pledge.lastname}
+                            </span>
+                          </span>
+                          <span className="row-list-item-treeCount">
+                            {delimitNumbers(parseInt(pledge.treeCount))}{' '}
+                            <span
+                              style={{
+                                fontSize: 10,
+                                color: 'rgba(0, 0, 0, 0.6)',
+                                fontWeight: 'normal',
+                                marginLeft: 4
+                              }}
+                            >
+                              trees
+                            </span>
+                          </span>
+                        </div>
+                      </Pulse>
+                    )))
+                  }
                 </div>
               </div>
             </div>
+          </div>
+          <div className="row">
+            {this.props.pledges.description ? (
+              <div className="event-description">
+                <span style={{ fontWeight: 'bold' }}>Event Description - </span>
+                {this.props.pledges.description}
+              </div>
+            ) : null}
           </div>
           <CardLayout className="pledge-form">
             <ContentHeader caption={i18n.t('label.pledge_trees')} />

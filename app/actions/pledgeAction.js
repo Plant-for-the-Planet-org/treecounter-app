@@ -2,7 +2,8 @@ import { getRequest, postRequest } from '../utils/api';
 import {
   fetchPledges,
   saveTimeoutID,
-  clearTimeoutID
+  clearTimeoutID,
+  postedPledge
 } from '../reducers/pledgeReducer';
 import { NotificationManager } from 'react-notifications';
 import i18n from '../locales/i18n.js';
@@ -34,7 +35,8 @@ export function postPledge(data, params) {
     postRequest('eventPledge_post', data, params)
       .then(res => {
         const { statusText } = res;
-
+        dispatch(postedPledge(res.data));
+        console.log(res.data);
         NotificationManager.success(statusText, i18n.t('label.success'), 5000);
       })
       .catch(error => {

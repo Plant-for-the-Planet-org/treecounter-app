@@ -19,7 +19,7 @@ import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import i18n from '../../locales/i18n';
 import { connect } from 'react-redux';
 import CheckBox from 'react-native-check-box';
-// import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import { fetchItem, saveItem } from '../../stores/localStorage';
 import { currentUserProfileSelector } from './../../selectors';
 import { bindActionCreators } from 'redux';
@@ -113,16 +113,20 @@ class MakePledgeForm extends Component {
             pledgeEventSlug: params
           });
 
-          updateStaticRoute('app_pledge_events', this.props.navigation, {
-            slug: this.props.navigation.getParam('slug'),
-            plantProject: this.props.navigation.getParam('plantProject'),
-            eventName: this.props.navigation.getParam('eventName'),
-            eventDate: this.props.navigation.getParam('eventDate'),
-            totalTrees: this.props.navigation.getParam('totalTrees'),
-            eventImage: this.props.navigation.getParam('eventImage'),
-            description: this.props.navigation.getParam('description'),
-            treeCount: treeCount
-          });
+          //saveItem('pledgedEvent', JSON.stringify(date));
+
+          console.log(showAsyncStorageContentInDev());
+
+          // updateStaticRoute('app_pledge_events', this.props.navigation, {
+          //   slug: this.props.navigation.getParam('slug'),
+          //   plantProject: this.props.navigation.getParam('plantProject'),
+          //   eventName: this.props.navigation.getParam('eventName'),
+          //   eventDate: this.props.navigation.getParam('eventDate'),
+          //   totalTrees: this.props.navigation.getParam('totalTrees'),
+          //   eventImage: this.props.navigation.getParam('eventImage'),
+          //   description: this.props.navigation.getParam('description'),
+          //   treeCount: treeCount
+          // });
         } else {
           alert('Incorrect Email Entered');
         }

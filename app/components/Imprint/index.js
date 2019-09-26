@@ -21,9 +21,11 @@ export default class Imprint extends Component {
           <div className="u-position-relative">{imprint.title}</div>
         </AccordionItemTitle>
         <AccordionItemBody>
-          <div dangerouslySetInnerHTML={{
-            __html: imprint.description
-          }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: imprint.description
+            }}
+          />
         </AccordionItemBody>
       </AccordionItem>
     ));

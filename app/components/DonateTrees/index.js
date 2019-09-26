@@ -102,11 +102,11 @@ export default class DonateTrees extends Component {
       },
       expanded: false,
       imageViewMore: false,
+      donationCreated: false,
       expandedOption: '1',
       showSelectProject: !props.selectedProject
     };
 
-    this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
     this.handleTreeCountCurrencyChange = this.handleTreeCountCurrencyChange.bind(
       this
@@ -118,7 +118,6 @@ export default class DonateTrees extends Component {
     let state = {
       showSelectProject: !nextProps.selectedProject
     };
-
     if (nextProps.selectedProject) {
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
@@ -133,6 +132,21 @@ export default class DonateTrees extends Component {
       }
     }
     this.setState(state);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.donationCreated !== this.state.donationCreated) {
+      let requestData = {
+        amount: this.state.selectedAmount,
+        currency: this.state.selectedCurrency,
+        ...this.state.form
+      };
+      this.props.createPaymentDonation(
+        this.props.selectedProject.id,
+        requestData,
+        this.props.currentUserProfile
+      );
+    }
   }
 
   getFees() {
@@ -205,11 +219,13 @@ export default class DonateTrees extends Component {
         } else {
           receipt['receiptCompany'] = value;
         }
+
         this.setState({
           form: {
             ...this.state.form,
             ...receipt
-          }
+          },
+          donationCreated: true
         });
         return true;
       }
@@ -263,36 +279,6 @@ export default class DonateTrees extends Component {
         recipientType: tab
       }
     });
-  }
-
-  handlePaymentApproved(paymentResponse) {
-    let sendState = { ...this.state.form };
-    if (this.props.supportTreecounter.treecounterId) {
-      sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
-    }
-    let recipientType;
-    if (this.state.modeReceipt === 'individual') {
-      recipientType = 'receiptIndividual';
-    } else {
-      recipientType = 'receiptCompany';
-    }
-    if (
-      this.props.currentUserProfile &&
-      !this.props.currentUserProfile.address &&
-      this.state.form[recipientType].address
-    ) {
-      this.props.updateUserProfile(this.state.form[recipientType], 'profile');
-    }
-    this.props.donate(
-      {
-        ...sendState,
-        paymentResponse,
-        amount: this.state.selectedAmount,
-        currency: this.state.selectedCurrency
-      },
-      this.props.selectedProject.id,
-      this.props.currentUserProfile
-    );
   }
 
   callExpanded = bool => {
@@ -398,8 +384,7 @@ export default class DonateTrees extends Component {
         ? this.state.form['receiptCompany']
         : '';
     }
-    let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
-    let email = receipt !== '' ? receipt.email : '';
+
     let paymentMethods;
 
     if (receipt && plantProject) {
@@ -433,7 +418,7 @@ export default class DonateTrees extends Component {
             <div className="payment-success">
               <img src={attention} />
               <div className={'gap'} />
-              <TextBlock strong={true}>
+              <TextBlock strong>
                 {i18n.t('label.error') + ' ' + this.props.paymentStatus.message}
               </TextBlock>
               <div className={'gap'} />
@@ -449,7 +434,7 @@ export default class DonateTrees extends Component {
             <div className="payment-success">
               <img src={check_green} />
               <div className={'gap'} />
-              <TextBlock strong={true}>
+              <TextBlock strong>
                 {i18n.t('label.thankyou_planting', {
                   count: this.state.treeCount
                 })}
@@ -467,7 +452,6 @@ export default class DonateTrees extends Component {
           <form
             className="donate-tress__container"
             onSubmit={event => {
-              this.checkValidation[2]();
               event.preventDefault();
             }}
           >
@@ -487,7 +471,7 @@ export default class DonateTrees extends Component {
                       expanded={false}
                       plantProject={this.props.selectedProject}
                       tpoName={this.props.selectedTpo.name}
-                      selectAnotherProject={true}
+                      selectAnotherProject
                       projectClear={this.props.plantProjectClear}
                     />
                   ) : null}
@@ -548,21 +532,26 @@ export default class DonateTrees extends Component {
                       stripePublishableKey={
                         plantProject.paymentSetup.stripePublishableKey
                       }
-                      amount={this.state.selectedAmount}
+                      currentUserProfile={this.props.currentUserProfile}
+                      paymentStatus={this.props.paymentStatus}
                       currency={this.state.selectedCurrency}
                       expandedOption={this.state.expandedOption}
                       handleExpandedClicked={this.handleExpandedClicked}
+                      receipt={{
+                        ...receipt,
+                        modeReceipt: this.state.modeReceipt
+                      }}
+                      paymentDetails={{
+                        amount: this.state.selectedAmount,
+                        currency: this.state.selectedCurrency,
+                        treeCount: this.state.selectedTreeCount
+                      }}
                       context={{
-                        tpoName: this.props.selectedTpo.name,
-                        donorEmail: email,
-                        donorName: name,
-                        supportTreecounter: this.props.supportTreecounter,
                         treeCount: this.state.selectedTreeCount,
+                        tpoName: this.props.selectedTpo.name,
+                        supportTreecounter: this.props.supportTreecounter,
                         plantProjectName: plantProject.name
                       }}
-                      onSuccess={paymentResponse =>
-                        this.handlePaymentApproved(paymentResponse)
-                      }
                       onFailure={data =>
                         console.log(
                           '/////////////////// payment failure ',
@@ -589,10 +578,10 @@ DonateTrees.propTypes = {
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
-  donate: PropTypes.func,
   paymentClear: PropTypes.func,
   supportTreecounter: PropTypes.object,
   paymentStatus: PropTypes.object,
   plantProjectClear: PropTypes.func,
-  updateUserProfile: PropTypes.func
+  updateUserProfile: PropTypes.func,
+  createPaymentDonation: PropTypes.func
 };

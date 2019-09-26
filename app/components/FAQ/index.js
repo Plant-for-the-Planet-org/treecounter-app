@@ -24,9 +24,11 @@ export default class FAQ extends Component {
           </div>
         </AccordionItemTitle>
         <AccordionItemBody>
-          <div dangerouslySetInnerHTML={{
-            __html: faq.answer
-          }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: faq.answer
+            }}
+          />
         </AccordionItemBody>
       </AccordionItem>
     ));

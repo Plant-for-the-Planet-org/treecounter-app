@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/competition/mine.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import imagestyles from '../../../styles/file_picker.native';

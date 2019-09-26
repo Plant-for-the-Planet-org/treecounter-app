@@ -15,7 +15,7 @@ import LoadingIndicator from '../Common/LoadingIndicator';
 import PledgeTabView from './PledgeTabView.native';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import { bindActionCreators } from 'redux';
-import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import CardLayout from '../Common/Card';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import {

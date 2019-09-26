@@ -40,6 +40,7 @@ $breakpointTablet: 768px;
   flex-wrap: wrap;
   position: relative;
   bottom: 0;
+  margin-left:3px;
   flex-direction: row;
   a {
     max-width: 100%;
@@ -63,8 +64,17 @@ $breakpointTablet: 768px;
         height: 2.3rem
       }
   }
-.language { width: 60%;}
-.currency {  width: 40%; }
+.language { 
+  max-height: 40px;
+  width: 60%; 
+  border: 1px solid #686060;
+  border-radius: 4px;
+  box-sizing: border-box;
+  & > div{
+    margin:0px
+  }
+}
+.currency {height:40px;  width: 40%; }
 
 }
 @media only screen and (min-width: 1400px) {

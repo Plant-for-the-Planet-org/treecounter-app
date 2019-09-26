@@ -73,7 +73,10 @@ const CCForm = props => (
           {i18n.t('label.save_for_later')}
         </div>
       ) : null}
-      <PrimaryButton onClick={props.onSubmitCCForm}>
+      <PrimaryButton
+        onClick={props.onSubmitCCForm}
+        disabled={!props.isPayEnable}
+      >
         {i18n.t('label.pay')}
       </PrimaryButton>
     </div>
@@ -93,5 +96,6 @@ CCForm.propTypes = {
   cards: PropTypes.array,
   chosenCard: PropTypes.string,
   currentUserProfile: PropTypes.object,
-  onChangeSelectedCard: PropTypes.func
+  onChangeSelectedCard: PropTypes.func,
+  isPayEnable: PropTypes.bool
 };

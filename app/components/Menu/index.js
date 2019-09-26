@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Select, { components } from 'react-select';
-
+import { connect } from 'react-redux';
 import * as images from '../../assets';
 import i18n from '../../locales/i18n';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -12,7 +12,8 @@ import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import { saveItem } from '../../stores/localStorage';
 import { getLocale } from '../../actions/getLocale';
 import GlobalCurrencySelector from '../Currency/GlobalCurrencySelector';
-
+import { updateUserProfile } from '../../actions/updateUserProfile';
+import { bindActionCreators } from 'redux';
 const { Option, SingleValue } = components;
 const IconOption = props => (
   <Option {...props}>
@@ -74,7 +75,7 @@ const statusOptions = [
 ];
 
 let userLang = getLocale(); // en|de
-export default class Menu extends Component {
+class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -149,9 +150,15 @@ export default class Menu extends Component {
       selectedLanguage: selectedOption
     });
     saveItem('language', selectedOption.value);
+    this.props.userProfile &&
+      this.props
+        .updateUserProfile({ locale: selectedOption.value }, 'locale', true)
+        .then(this.reload)
+        .catch(this.reload);
+  };
+  reload = () => {
     location.reload();
   };
-
   render() {
     let { path, pathname } = this.props;
 
@@ -241,7 +248,10 @@ export default class Menu extends Component {
               />
             </div>
           </div>
-          <GlobalCurrencySelector userProfile={this.props.userProfile} />
+          <GlobalCurrencySelector
+            userProfile={this.props.userProfile}
+            updateUserProfile={this.props.updateUserProfile}
+          />
           <div className="global-selector">
             <div>
               <a
@@ -267,7 +277,15 @@ export default class Menu extends Component {
     );
   }
 }
-
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      updateUserProfile
+    },
+    dispatch
+  );
+};
+export default connect(null, mapDispatchToProps)(Menu);
 Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   menuData: PropTypes.array.isRequired,
@@ -275,5 +293,6 @@ Menu.propTypes = {
   toggleSideNavAction: PropTypes.func.isRequired,
   clearSupport: PropTypes.func,
   pathname: PropTypes.string,
-  userProfile: PropTypes.any
+  userProfile: PropTypes.any,
+  updateUserProfile: PropTypes.func
 };

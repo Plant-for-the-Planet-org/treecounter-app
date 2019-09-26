@@ -131,7 +131,7 @@ export function orderPlantProject(data, params) {
   };
 }
 
-export function updateUserProfile(data, profileType) {
+export function updateUserProfile(data, profileType, forcePromisify) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
@@ -153,6 +153,7 @@ export function updateUserProfile(data, profileType) {
             }
           }
           if (res.data.merge) resolve(res.data);
+          forcePromisify && resolve(res.data);
           dispatch(setProgressModelState(false));
         })
         .catch(err => {

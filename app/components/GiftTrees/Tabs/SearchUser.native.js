@@ -76,6 +76,7 @@ class SearchUser extends React.Component {
     );
   }
   render() {
+    const backgroundColor = 'transparent';
     return (
       <View style={{ width: '100%' }}>
         <SearchBar
@@ -95,7 +96,7 @@ class SearchUser extends React.Component {
           style={{
             ...searchBarStyles.searchContainer,
             width: '95%',
-            backgroundColor: 'transparent',
+            backgroundColor: backgroundColor,
             marginTop: 10
           }}
           tintColor={

@@ -95,24 +95,27 @@ class PledgeEvents extends Component {
           this.props.pledges.pledgeEventImages &&
           this.props.pledges.pledgeEventImages.length > 0 ? (
             <ScrollView
-              horizontal={true}
+              horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.peSliderScrollView}
             >
               {/* {pledgeImages} */}
-              {this.props.pledges.pledgeEventImages.map(pledgeImage => (
-                <Image
-                  style={styles.peSliderImage}
-                  source={{
-                    uri: getImageUrl(
-                      'eventGallery',
-                      'default',
-                      pledgeImage.image
-                    )
-                  }}
-                  resizeMode="contain"
-                />
-              ))}
+              {this.props.pledges.pledgeEventImages.map(
+                (pledgeImage, index) => (
+                  <Image
+                    key={`pledgeImage-${index}`}
+                    style={styles.peSliderImage}
+                    source={{
+                      uri: getImageUrl(
+                        'eventGallery',
+                        'default',
+                        pledgeImage.image
+                      )
+                    }}
+                    resizeMode="contain"
+                  />
+                )
+              )}
             </ScrollView>
           ) : null}
           <CardLayout style={styles.peDescriptionView}>

@@ -172,7 +172,7 @@ class MakePledgeForm extends Component {
         keyboardShouldPersistTaps="always"
         style={styles.keyboardScrollView}
         resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled={true}
+        scrollEnabled
       >
         <View>
           <Text style={styles.titleText}>{i18n.t('label.pledgeToPlant')}</Text>

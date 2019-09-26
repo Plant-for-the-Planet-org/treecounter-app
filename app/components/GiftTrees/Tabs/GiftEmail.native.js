@@ -53,10 +53,11 @@ export default class GiftEmail extends Component {
     return returnValue;
   }
   render() {
+    const textColor = '#c4bfbf';
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 72 }}
-        enableOnAndroid={true}
+        enableOnAndroid
       >
         <CardLayout>
           <View style={{ flexDirection: 'row' }}>
@@ -70,7 +71,7 @@ export default class GiftEmail extends Component {
             <Text
               style={{
                 padding: 5,
-                color: '#c4bfbf',
+                color: textColor,
                 marginRight: 10,
                 width: '90%'
               }}

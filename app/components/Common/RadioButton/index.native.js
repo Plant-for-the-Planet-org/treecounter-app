@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { View } from 'react-native';
+const borderColor = 'black';
 const PrimaryButton = ({
   // onClick,
   // children,
@@ -16,7 +17,7 @@ const PrimaryButton = ({
         width: 24,
         borderRadius: 12,
         borderWidth: 2,
-        borderColor: '#000',
+        borderColor: borderColor,
         alignItems: 'center',
         justifyContent: 'center'
       },
@@ -29,7 +30,7 @@ const PrimaryButton = ({
           height: 12,
           width: 12,
           borderRadius: 6,
-          backgroundColor: '#000'
+          backgroundColor: borderColor
         }}
       />
     ) : null}

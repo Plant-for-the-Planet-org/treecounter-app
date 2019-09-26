@@ -113,7 +113,6 @@ class SearchBar extends React.PureComponent {
             clearButtonMode="while-editing"
             onChangeText={this._handleChangeText}
             value={inputValue}
-            autoCapitalize="none"
             autoCorrect={false}
             returnKeyType="search"
             placeholder={this.props.placeholderValue}

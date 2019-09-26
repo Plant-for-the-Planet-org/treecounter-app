@@ -44,9 +44,10 @@ class CheckoutForm extends React.Component {
   };
 
   createPaymentMethod = async paymentDetails => {
+    let paymentMethodResponse;
     try {
       //Create a payment method id for making request to the API
-      const paymentMethodResponse = await this.props.stripe.createPaymentMethod(
+      paymentMethodResponse = await this.props.stripe.createPaymentMethod(
         'card',
         {
           billing_details: {
@@ -63,6 +64,10 @@ class CheckoutForm extends React.Component {
       return paymentMethodId;
     } catch (e) {
       this.props.setProgressModelState(false);
+      this.props.paymentFailed({
+        status: false,
+        message: paymentMethodResponse.error.message || 'error'
+      });
       this.props.onError(e.message);
     }
   };
@@ -89,7 +94,9 @@ class CheckoutForm extends React.Component {
 
   handlePayment = paymentMethodId => {
     if (paymentMethodId !== undefined || paymentMethodId != 0) {
-      const donationId = this.props.paymentStatus.contribution[0].id;
+      const donationId = this.props.donationId
+        ? this.props.donationId
+        : this.props.paymentStatus.contribution[0].id;
       let requestData = {
         account: this.props.accountName,
         gateway: this.props.gateway,
@@ -211,6 +218,7 @@ CheckoutForm.propTypes = {
   gateway: PropTypes.string,
   paymentStatus: PropTypes.object,
   handlePay: PropTypes.func,
+  donationId: PropTypes.number,
   paymentFailed: PropTypes.func,
   stripePublishableKey: PropTypes.string,
   setProgressModelState: PropTypes.func,

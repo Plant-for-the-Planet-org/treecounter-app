@@ -99,7 +99,7 @@ class TreeCountSelector extends React.Component {
 
     return (
       <div className={'treecount-container'}>
-        <TextBlock strong={true}>{i18n.t('label.no_of_trees')}</TextBlock>
+        <TextBlock strong>{i18n.t('label.no_of_trees')}</TextBlock>
         {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
           return (
             <div className="treecount-price-conversion" key={treeCount}>

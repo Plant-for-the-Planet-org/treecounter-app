@@ -138,12 +138,13 @@ class ContributionCard extends React.Component {
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
       ? [
-          <Text>
+          <Text key={`donateActionLine_10`}>
             {i18n.t('label.gifted_on_to', {
               date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
             })}
           </Text>,
           <Text
+            key={`donateActionLine_11`}
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug,
@@ -178,8 +179,11 @@ class ContributionCard extends React.Component {
   dedicateActionLine = (isGift, givee, giveeSlug) => {
     return isGift
       ? [
-          <Text>{i18n.t('label.dedicated_to')}</Text>,
+          <Text key={`dedicateActionLine_11`}>
+            {i18n.t('label.dedicated_to')}
+          </Text>,
           <Text
+            key={`dedicateActionLine_12`}
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug,
@@ -196,7 +200,7 @@ class ContributionCard extends React.Component {
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && givee
       ? [
-          <Text>
+          <Text key={`redeemActionLine_11`}>
             {i18n.t('label.given_on_by', {
               date: moment(getDateFromMySQL(redemptionDate)).format(
                 'DD MMM YYYY'
@@ -204,6 +208,7 @@ class ContributionCard extends React.Component {
             })}
           </Text>,
           <Text
+            key={`redeemActionLine_12`}
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug,
@@ -220,7 +225,7 @@ class ContributionCard extends React.Component {
           })
         : givee
           ? [
-              <Text>
+              <Text key={`dedicated_on_by_11`}>
                 {i18n.t('label.dedicated_on_by', {
                   date: moment(getDateFromMySQL(redemptionDate)).format(
                     'DD MMM YYYY'
@@ -228,6 +233,7 @@ class ContributionCard extends React.Component {
                 })}
               </Text>,
               <Text
+                key={`dedicated_on_by_12`}
                 onPress={() =>
                   this.props.navigation.navigate(
                     getLocalRoute('app_treecounter'),

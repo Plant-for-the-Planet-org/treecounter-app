@@ -95,7 +95,7 @@ class SearchLayout extends React.Component {
               this.props.searchInputUnderlineColorAndroid ||
               this.props.headerBackgroundColor
             }
-            showCancelSearchButton={true}
+            showCancelSearchButton
             tintColor={
               this.props.searchInputTintColor || this.props.headerTintColor
             }

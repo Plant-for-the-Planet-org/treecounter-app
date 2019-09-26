@@ -16,14 +16,16 @@ import CardLayout from '../Common/Card';
 export default class Privacy extends Component {
   GetPrivacyList() {
     return this.props.privacies.map((privacy, i) => (
-      <AccordionItem expanded={true} key={'privacy' + i}>
+      <AccordionItem expanded key={'privacy' + i}>
         <AccordionItemTitle>
           <div className="u-position-relative">{privacy.heading}</div>
         </AccordionItemTitle>
         <AccordionItemBody>
-          <div dangerouslySetInnerHTML={{
-            __html: privacy.description
-          }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: privacy.description
+            }}
+          />
         </AccordionItemBody>
       </AccordionItem>
     ));

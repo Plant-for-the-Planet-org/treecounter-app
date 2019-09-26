@@ -16,14 +16,16 @@ import CardLayout from '../Common/Card';
 export default class Imprint extends Component {
   GetImprintList() {
     return this.props.imprints.map((imprint, i) => (
-      <AccordionItem expanded={true} key={'imprint' + i}>
+      <AccordionItem expanded key={'imprint' + i}>
         <AccordionItemTitle>
           <div className="u-position-relative">{imprint.title}</div>
         </AccordionItemTitle>
         <AccordionItemBody>
-          <div dangerouslySetInnerHTML={{
-            __html: imprint.description
-          }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: imprint.description
+            }}
+          />
         </AccordionItemBody>
       </AccordionItem>
     ));

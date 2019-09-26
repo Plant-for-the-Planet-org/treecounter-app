@@ -18,7 +18,11 @@ import {
 import { updateUserProfile } from '../../actions/updateUserProfile';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { fetchCurrencies } from '../../actions/currencies';
-import { donate, paymentClear, gift } from '../../actions/donateAction';
+import {
+  paymentClear,
+  createPaymentGift,
+  createPaymentDonation
+} from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 
 import { updateRoute } from '../../helpers/routerHelper';
@@ -55,10 +59,12 @@ class DonationTreesContainer extends PureComponent {
       <DonateTrees
         ref={'donateTreesContainer'}
         currencies={this.props.currencies}
-        currentUserProfile={this.props.currentUserProfile}
-        donate={this.donate}
-        loadUserProfile={this.props.loadUserProfile}
-        onTabChange={this.onTabChange}
+        donate={(donationContribution, plantProjectId, profile) =>
+          this.props.donate(donationContribution, plantProjectId, profile)
+        }
+        createPaymentDonation={this.props.createPaymentDonation}
+        createPaymentGift={this.props.createPaymentGift}
+        onTabChange={title => this.onTabChange(title)}
         paymentClear={this.props.paymentClear}
         paymentStatus={this.props.paymentStatus}
         plantProjectClear={this.props.clearPlantProject}
@@ -90,13 +96,13 @@ const mapDispatchToProps = dispatch => {
     {
       selectPlantProjectAction,
       fetchCurrencies,
-      donate,
-      gift,
       paymentClear,
       clearPlantProject,
       setProgressModelState,
       loadUserProfile,
       updateUserProfile,
+      createPaymentDonation,
+      createPaymentGift,
       route: (routeName, id, navigation) => dispatch =>
         updateRoute(routeName, navigation || dispatch, id)
     },
@@ -126,5 +132,7 @@ DonationTreesContainer.propTypes = {
   loadUserProfile: PropTypes.func,
   route: PropTypes.func,
   updateUserProfile: PropTypes.func,
-  match: PropTypes.any
+  match: PropTypes.any,
+  createPaymentDonation: PropTypes.func,
+  createPaymentGift: PropTypes.func
 };

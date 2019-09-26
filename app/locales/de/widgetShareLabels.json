@@ -1,14 +1,14 @@
 {
-  "widget_share": "Widget: Teilen Sie Ihren Fortschritt",
-  "widget_share_description": "Widgets sind eine einfache Methode, um den Fortschritt Ihrer Baumpflanzung auf Ihrer Website anzuzeigen. Es können nur öffentliche Baumzähler der Trillion Tree Campaign eingebettet werden.",
-  "widget_share_choose_widget": "1. Wählen Sie den Widget-Typ",
-  "widget_share_copy_paste_html_snippet": "2. Kopieren Sie das HTML-Code",
+  "widget_share": "Widget: Teile deinen Fortschritt",
+  "widget_share_description": "Widgets sind eine einfache Methode, um den Fortschritt deiner Baumpflanzung auf deiner Website anzuzeigen. Es können nur öffentliche Baumzähler der Trillion Tree Campaign eingebettet werden.",
+  "widget_share_choose_widget": "1. Wähle ein Widget",
+  "widget_share_copy_paste_html_snippet": "2. Kopieren Sie den HTML-Code",
   "widget_basic": "Baumzahl",
   "widget_global_tree_counter": "Globaler Baumzähler",
   "widget_standard_tree_counter": "Standard-Baumzähler",
-  "widget_progress_tree_counter": "Baumfortschrittszähler",
+  "widget_progress_tree_counter": "Fortschritt des Baumzählers",
   "widget_donate_trees": "Bäume spenden",
   "widget_preview": "Widget-Vorschau",
-  "widget_not_public_acct_warning": "Ihr Profil ist nicht öffentlich sichtbar. Um Ihr Baumzähler-Widget zu erstellen, setzen Sie Ihr Konto unter Profil bearbeiten auf öffentlich.",
+  "widget_not_public_acct_warning": "Dein Profil ist nicht öffentlich sichtbar. Um dein Baumzähler-Widget zu erstellen, setze dein Konto unter Profil bearbeiten auf öffentlich.",
   "widget_loading": "-Widget lädt..."
 }

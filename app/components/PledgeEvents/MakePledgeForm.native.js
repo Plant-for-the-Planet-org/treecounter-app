@@ -14,7 +14,7 @@ import { forward } from './../../assets';
 import t from 'tcomb-form-native';
 import { postPledge } from './../../actions/pledgeAction';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 
 import i18n from '../../locales/i18n';
 import { connect } from 'react-redux';
@@ -172,7 +172,7 @@ class MakePledgeForm extends Component {
         keyboardShouldPersistTaps="always"
         style={styles.keyboardScrollView}
         resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled={true}
+        scrollEnabled
       >
         <View>
           <Text style={styles.titleText}>{i18n.t('label.pledgeToPlant')}</Text>

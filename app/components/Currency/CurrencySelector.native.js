@@ -20,41 +20,30 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
   const currenciesDropdownFormat = currenciesArray.map((item, index) => {
     return { value: item, text: currenciesTitles[index] };
   });
-
+  const textColor = '#686060';
   return (
     <Dropdown
-      containerStyle={[
-        {
-          width: '100%',
-          marginLeft: 10,
-          marginBottom: 10,
-          paddingRight: 10,
-          elevation: 2
-        }
-      ]}
+      containerStyle={{
+        width: '100%',
+        marginLeft: 10,
+        marginBottom: 10,
+        paddingRight: 10,
+        elevation: 2
+      }}
       pickerStyle={{
         position: 'absolute',
-        maxHeight: Dimensions.get('window').height - 150,
-        marginTop: 'auto',
-        top:
-          Dimensions.get('window').height / 2 >=
-          currenciesDropdownFormat.length * 18
-            ? Dimensions.get('window').height / 2 -
-              currenciesDropdownFormat.length * 18
-            : 75,
-        alignSelf: 'center',
-        flex: 1,
+        maxHeight: Dimensions.get('window').height
+          ? Dimensions.get('window').height - 160
+          : 400,
+        top: 160,
         zIndex: 60
       }}
-      itemCount={20}
-      dropdownOffset={{
-        top: 10,
-        left: 0
-      }}
+      itemCount={10}
+      dropdownPosition={1}
       animationDuration={0}
       itemTextStyle={{
         fontSize: 13,
-        color: '#686060'
+        color: textColor
       }}
       initialNumToRender={currenciesDropdownFormat.length}
       value={i18n.t(selectedCurrency)}

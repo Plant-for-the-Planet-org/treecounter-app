@@ -243,7 +243,10 @@ class PublicTreeCounter extends React.Component {
                 <View>
                   {Object.keys(treecounter.directChildren).map(childrenId => {
                     return (
-                      <View style={stylesPublicPage.tableHeader}>
+                      <View
+                        key={childrenId}
+                        style={stylesPublicPage.tableHeader}
+                      >
                         <Text style={stylesPublicPage.firstColumn}>
                           {treecounter.directChildren[childrenId].displayName}
                         </Text>

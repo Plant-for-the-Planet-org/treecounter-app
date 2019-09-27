@@ -17,14 +17,14 @@ const SupportButton = ({
           {buttonLabel}
         </SecondaryButton>
       </div>
-      {/* <div className="display-icon">
+      <div className="display-icon">
         <img
           src={gift_icon}
           onClick={() =>
             isUserLoggedIn && active ? onRegisterSupporter() : null
           }
         />
-      </div> */}
+      </div>
     </div>
   );
 };

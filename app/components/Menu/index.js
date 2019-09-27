@@ -244,6 +244,7 @@ class Menu extends Component {
                 value={this.state.selectedLanguage}
                 options={statusOptions}
                 styles={customStyles}
+                menuPlacement="top"
                 onChange={this.onSelectLanguageChange}
                 isSearchable={false}
                 components={{ Option: IconOption, SingleValue: singleValue }}

@@ -14,6 +14,8 @@
       flex: 1;
 
       .app-container__sidenav {
+        display: flex;
+        flex-direction: column;
         width: 250px;
         background: white;
         opacity: 0.95;

@@ -258,6 +258,7 @@ class Menu extends Component {
             <div>
               <a
                 target="_blank"
+                rel="noopener noreferrer"
                 href="https://apps.apple.com/app/plant-for-the-planet/id1444740626"
               >
                 <img src={images['appleStoreBadge_' + userLang]} />
@@ -268,6 +269,7 @@ class Menu extends Component {
             <div>
               <a
                 target="_blank"
+                rel="noopener noreferrer"
                 href="https://play.google.com/store/apps/details?id=org.pftp"
               >
                 <img src={images['googlePlayBadge_' + userLang]} />

@@ -60,7 +60,7 @@ export default class CategoryTypes extends Component {
       <Animated.View style={[styles.outerContainer, this.props.style]}>
         <ScrollView
           contentContainerStyle={[styles.innerContainer]}
-          horizontal={true}
+          horizontal
           ref={ref => {
             this.scrollView = ref;
           }}

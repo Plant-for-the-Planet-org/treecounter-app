@@ -112,7 +112,7 @@ class TreeCountSelector extends React.Component {
                 return (
                   <RadioButton
                     wrapStyle={styles.radioContainer}
-                    labelHorizontal={true}
+                    labelHorizontal
                     key={i}
                   >
                     <RadioButtonInput
@@ -134,7 +134,7 @@ class TreeCountSelector extends React.Component {
                       obj={obj}
                       index={i}
                       labelWrapStyle={styles.radio_label}
-                      labelHorizontal={true}
+                      labelHorizontal
                       onPress={(value, index) => {
                         this.handleFixedTreeCountChange(value);
                       }}
@@ -176,7 +176,7 @@ class TreeCountSelector extends React.Component {
                   <RadioButton
                     style={{ padding: 0, width: 30 }}
                     wrapStyle={styles.radioContainer}
-                    labelHorizontal={true}
+                    labelHorizontal
                     key={i}
                   >
                     <RadioButtonInput

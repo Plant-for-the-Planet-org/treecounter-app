@@ -26,7 +26,7 @@ export default class SignUpType extends Component {
         <div className="signup-type__text">
           <TextSpan>{salutation}</TextSpan>
           <hr />
-          <TextSpan strong={true}>{title}</TextSpan>
+          <TextSpan strong>{title}</TextSpan>
         </div>
       </div>
     );

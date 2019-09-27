@@ -10,7 +10,8 @@ export default EStyleSheet.create({
   parentContainer: {
     flex: 1,
     backgroundColor: 'white',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingBottom: 300
   },
   container: {
     width: '100%',

@@ -81,7 +81,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 35 }}
-        enableOnAndroid={true}
+        enableOnAndroid
       >
         <CardLayout>
           <View style={{ flexDirection: 'column' }}>

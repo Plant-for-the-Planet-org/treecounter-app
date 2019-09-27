@@ -64,10 +64,7 @@ class DonationTreesContainer extends PureComponent {
         }
         createPaymentDonation={this.props.createPaymentDonation}
         createPaymentGift={this.props.createPaymentGift}
-        updateUserProfile={this.props.updateUserProfile}
         onTabChange={title => this.onTabChange(title)}
-        supportTreecounter={this.props.supportTreecounter}
-        paymentStatus={this.props.paymentStatus}
         paymentClear={this.props.paymentClear}
         paymentStatus={this.props.paymentStatus}
         plantProjectClear={this.props.clearPlantProject}

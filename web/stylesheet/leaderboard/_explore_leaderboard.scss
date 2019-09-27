@@ -115,6 +115,14 @@
       margin-top: 8px;
       box-sizing: border-box;
       overflow-x: hidden;
+
+      .imageContainer {
+        img {
+          height: auto;
+          width: auto;
+        }
+      }
+
       .leaderboard-table {
         display: flex;
         flex-direction: column;

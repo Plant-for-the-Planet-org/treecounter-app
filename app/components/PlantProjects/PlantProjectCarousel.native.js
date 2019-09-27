@@ -28,11 +28,11 @@ class PlantProjectCarousel extends Component {
 
   render() {
     const { plantProjects, tpoName } = this.props;
-
+    const backgroundColor = '#b9d384';
     return (
       <Slick
         style={styles.slickWrapper}
-        showsPagination={true}
+        showsPagination
         paginationStyle={{
           position: 'absolute',
           top: 0,
@@ -40,7 +40,7 @@ class PlantProjectCarousel extends Component {
           elevation: 9
         }}
         activeDotStyle={{
-          backgroundColor: '#b9d384'
+          backgroundColor: backgroundColor
         }}
       >
         {plantProjects.length !== 0

@@ -290,7 +290,7 @@ export default class DonateTrees extends React.PureComponent {
             selectedProject={selectedProject}
             fees={paymentFee}
             supportTreecounter={this.props.supportTreecounter}
-            showNextButton={true}
+            showNextButton
             currencies={currencies.currency_names} // TODO: connect to data from API
             selectedCurrency={this.determineDefaultCurrency()}
             treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
@@ -307,7 +307,7 @@ export default class DonateTrees extends React.PureComponent {
         return (
           <RecieptTabsView
             ref={this.setRecipientTabRef}
-            showNextButton={true}
+            showNextButton
             currentUserProfile={this.props.currentUserProfile}
             formValue={this.state.form}
             goToNextTab={value => this.goToNextTab(value)}
@@ -391,7 +391,7 @@ export default class DonateTrees extends React.PureComponent {
           navigationState={this.state}
           renderScene={this._renderScene}
           renderTabBar={this._renderTabBar}
-          useNativeDriver={true}
+          useNativeDriver
           onIndexChange={this._handleIndexChange}
         />
         <TabContainer {...this.props} />

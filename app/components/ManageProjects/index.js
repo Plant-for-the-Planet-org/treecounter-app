@@ -212,6 +212,7 @@ export default class ManageProjects extends Component {
       (plantProject, index) => {
         return [
           <ConfirmDeletion
+            key={`ConfirmDeletion-${index}`}
             isOpen={this.state.openDialog}
             handleDeletion={() =>
               this.handleDeleteProjectCLick(plantProject, index)

@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from '../../styles/NDVI/Circle';
 import { getColorForNDVI } from './NDVIfunctions/GradientUtils';
 import TouchableItem from '../../components/Common/TouchableItem.native';
-
+const backgroundColor = 'transparent';
 const getNDVIColor = (point, isColor = false) => {
   if (!isColor) {
     return getColorForNDVI(point, Dimensions.get('window').width - 40);
@@ -67,7 +67,9 @@ const Circle = props => {
       </TouchableItem>
     );
   } else {
-    return <View style={[styles.circle, { backgroundColor: 'transparent' }]} />;
+    return (
+      <View style={[styles.circle, { backgroundColor: backgroundColor }]} />
+    );
   }
 };
 

@@ -18,12 +18,7 @@ const SupportButton = ({
         </SecondaryButton>
       </div>
       <div className="display-icon">
-        <img
-          src={gift_icon}
-          onClick={() =>
-            isUserLoggedIn && active ? onRegisterSupporter() : null
-          }
-        />
+        <img src={gift_icon} onClick={() => onRegisterSupporter()} />
       </div>
     </div>
   );

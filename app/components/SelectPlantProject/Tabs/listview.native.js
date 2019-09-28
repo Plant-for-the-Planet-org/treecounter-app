@@ -6,6 +6,7 @@ import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectS
 import styles from '../../../styles/selectplantproject/list';
 
 export default class ListViewProjects extends PureComponent {
+  // eslint-disable-next-line no-unused-vars
   _keyExtractor = (item, index) => item.id.toString();
 
   _renderItem = ({ item }) => (

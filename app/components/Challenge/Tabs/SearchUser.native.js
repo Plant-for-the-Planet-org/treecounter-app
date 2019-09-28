@@ -1,10 +1,9 @@
 import React from 'react';
-import { ScrollView, Text, View, TouchableOpacity, Image } from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 
 import SearchBar from '../../../components/Header/SearchBar.native';
 import Header from '../../../components/Header/Header.native';
-import { getSuggestions, profileTypeToImage } from '../../../helpers/utils';
-import { getImageUrl } from '../../../actions/apiRouting';
+import { getSuggestions } from '../../../helpers/utils';
 import { withNavigation } from 'react-navigation';
 import styles from '../../../styles/header/search_layout.native';
 import _ from 'lodash';

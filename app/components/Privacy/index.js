@@ -8,7 +8,6 @@ import {
 } from 'react-accessible-accordion';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import TextHeading from '../../components/Common/Heading/TextHeading';
-import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 import i18n from '../../locales/i18n.js';
 
 import CardLayout from '../Common/Card';

@@ -29,6 +29,7 @@ export default class Login extends Component {
           gBatch[0].style.visibility = 'visible';
         }
       },
+      // eslint-disable-next-line no-unused-vars
       onError: e => {}
     });
   }

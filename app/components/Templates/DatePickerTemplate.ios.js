@@ -130,6 +130,7 @@ export function DatePickerTemplate(locals) {
 
   const stylesheet = locals.stylesheet;
   let formGroupStyle = stylesheet.formGroup.normal;
+  // eslint-disable-next-line no-unused-vars
   let controlLabelStyle = stylesheet.controlLabel.normal;
   let helpBlockStyle = stylesheet.helpBlock.normal;
   const errorBlockStyle = stylesheet.errorBlock;

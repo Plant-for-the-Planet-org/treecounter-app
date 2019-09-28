@@ -1,8 +1,8 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
-const { height, width } = Dimensions.get('window');
+// eslint-disable-next-line no-unused-vars
+const { width } = Dimensions.get('window');
 
-const cardWidth = width - 40;
 import { row, margin_top10 } from './common/common_styles';
 export default EStyleSheet.create({
   container: {

@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import { View, ScrollView } from 'react-native';
 import i18n from '../../locales/i18n.js';
 
-import {
-  schemaOptions,
-  targetFormSchema
-} from '../../server/parsedSchemas/target';
+import { targetFormSchema } from '../../server/parsedSchemas/target';
 
 import styles from '../../styles/login.native';
 import CardLayout from '../Common/Card';
@@ -17,6 +14,7 @@ let Form = t.form.Form;
 export default class Target extends Component {
   constructor(props) {
     super(props);
+    // eslint-disable-next-line no-unused-vars
     let { countTarget, targetYear, targetComment } = this.props.treecounter;
 
     this.state = {

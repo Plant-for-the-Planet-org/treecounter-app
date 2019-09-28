@@ -37,6 +37,7 @@ class ChallengeContainer extends Component {
   challenge(challengeDetails) {
     this.props
       .challenge(challengeDetails)
+      // eslint-disable-next-line no-unused-vars
       .then(success => {
         this.setState({
           error: null,

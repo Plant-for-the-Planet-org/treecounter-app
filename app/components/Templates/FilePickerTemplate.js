@@ -49,6 +49,7 @@ export function FilePickerTemplate(locals) {
         <button
           type="button"
           className="browse-button"
+          // eslint-disable-next-line no-unused-vars
           onClick={e => {
             console.log('clicked Browse', this && this.refs);
           }}

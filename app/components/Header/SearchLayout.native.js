@@ -1,25 +1,15 @@
 import React from 'react';
-import {
-  Platform,
-  ScrollView,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Linking
-} from 'react-native';
+import { ScrollView, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import SearchBar from './SearchBar';
 import Header from './Header.native';
-import { getSuggestions, profileTypeToImage } from '../../helpers/utils';
-import { getImageUrl } from '../../actions/apiRouting';
+import { getSuggestions } from '../../helpers/utils';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/header/search_layout.native';
 import _ from 'lodash';
-import { updateRoute } from '../../helpers/routerHelper';
 import UserProfileImage from '../Common/UserProfileImage';
 
 class SearchLayout extends React.Component {

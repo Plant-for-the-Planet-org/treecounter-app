@@ -1,23 +1,12 @@
 import React from 'react';
 import i18n from '../../locales/i18n';
-import styles from '../../styles/forms/select.native';
 import { Dropdown } from 'react-native-material-dropdown';
-import { foldout, foldin } from '../../assets';
 
 import PropTypes from 'prop-types';
-import {
-  Text,
-  View,
-  Animated,
-  TouchableOpacity,
-  Picker,
-  Platform,
-  Dimensions,
-  TouchableNativeFeedback,
-  Image
-} from 'react-native';
+import { Text, View, Platform, Dimensions } from 'react-native';
 import datePickerStyle from '../../styles/date_picker.native';
 
+// eslint-disable-next-line no-unused-vars
 const UIPICKER_HEIGHT = 216;
 
 class SelectTemplateIOS extends React.PureComponent {
@@ -36,8 +25,11 @@ class SelectTemplateIOS extends React.PureComponent {
   render() {
     const locals = this.props.locals;
     const stylesheet = locals.stylesheet;
+    // eslint-disable-next-line no-unused-vars
     let touchableStyle = stylesheet.dateTouchable.normal;
+    // eslint-disable-next-line no-unused-vars
     let datepickerStyle = stylesheet.datepicker.normal;
+    // eslint-disable-next-line no-unused-vars
     let dateValueStyle =
       datePickerStyle.dateValueStyle || stylesheet.dateValue.normal;
 
@@ -51,6 +43,7 @@ class SelectTemplateIOS extends React.PureComponent {
       touchableStyle = stylesheet.dateTouchable.notEditable;
     }
 
+    // eslint-disable-next-line no-unused-vars
     let formattedValue = locals.value ? locals.value : '';
 
     let filteredValue = this.props.options.filter(

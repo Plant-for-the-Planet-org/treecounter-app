@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import { TabView } from 'react-native-tab-view';
@@ -9,7 +9,7 @@ import RecieptTabsView from './receiptTabs';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 // import PaymentSelector from '../Payment/PaymentSelector';
-import { View, Text, Alert, Linking } from 'react-native';
+import { View, Linking } from 'react-native';
 import { paymentFee } from '../../helpers/utils';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
@@ -63,6 +63,7 @@ export default class DonateTrees extends React.PureComponent {
   }
 
   componentDidMount() {
+    // eslint-disable-next-line no-unused-vars
     const { navigation } = this.props;
     this.props.onTabChange(this.state.routes[0].title);
     Linking.getInitialURL()
@@ -71,6 +72,7 @@ export default class DonateTrees extends React.PureComponent {
           this.handleOpenURL(url);
         }
       })
+      // eslint-disable-next-line no-unused-vars
       .catch(err => {});
     Linking.addEventListener('url', this.handleOpenURL);
     let params = this.props.navigation.state.params;
@@ -86,6 +88,7 @@ export default class DonateTrees extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line no-unused-vars
     const { navigation } = this.props;
     if (nextProps.selectedProject) {
       const nextTreeCount =
@@ -264,8 +267,11 @@ export default class DonateTrees extends React.PureComponent {
         ? this.state.form['receiptCompany']
         : '';
     }
+    // eslint-disable-next-line no-unused-vars
     let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
+    // eslint-disable-next-line no-unused-vars
     let email = receipt !== '' ? receipt.email : '';
+    // eslint-disable-next-line no-unused-vars
     let paymentMethods;
     if (receipt && selectedProject) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;

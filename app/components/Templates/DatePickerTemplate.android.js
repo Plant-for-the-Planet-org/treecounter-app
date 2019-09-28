@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import i18n from '../../locales/i18n.js';
 import datePickerStyle from '../../styles/date_picker.native';
-import { formatDate } from '../../helpers/utils';
 
 const UIPICKER_HEIGHT = 216;
 
@@ -71,6 +70,7 @@ class CollapsibleDatePickerAndroid extends React.PureComponent {
     const locals = this.props.locals;
     const stylesheet = locals.stylesheet;
     let touchableStyle = stylesheet.dateTouchable.normal;
+    // eslint-disable-next-line no-unused-vars
     let datepickerStyle = stylesheet.datepicker.normal;
     let dateValueStyle =
       datePickerStyle.dateValueStyle || stylesheet.dateValue.normal;
@@ -93,6 +93,7 @@ class CollapsibleDatePickerAndroid extends React.PureComponent {
           : i18n.t(locals.label);
       }
     }
+    // eslint-disable-next-line no-unused-vars
     const height = this.state.isCollapsed ? 0 : UIPICKER_HEIGHT;
     return (
       <View style={datePickerStyle.datePickerContainer}>
@@ -126,6 +127,7 @@ export function DatePickerTemplate(locals) {
 
   const stylesheet = locals.stylesheet;
   let formGroupStyle = stylesheet.formGroup.normal;
+  // eslint-disable-next-line no-unused-vars
   let controlLabelStyle = stylesheet.controlLabel.normal;
   let helpBlockStyle = stylesheet.helpBlock.normal;
   const errorBlockStyle = stylesheet.errorBlock;

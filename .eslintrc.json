@@ -41,7 +41,7 @@
     "no-undef": 2,
     "no-underscore-dangle": 1,
     "no-unreachable": 1,
-    "no-unused-vars": 1,
+    "no-unused-vars": 2,
     "no-useless-escape": 1,
     "no-var": 2,
     "quotes": [

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import YouTube from 'react-native-youtube';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 class VideoContainer extends React.Component {
   constructor(props) {

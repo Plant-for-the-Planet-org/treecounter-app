@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {
-  challengeFormSchema,
-  challengeFormSchemaOptions
-} from '../../../server/parsedSchemas/challenge';
+import { challengeFormSchema } from '../../../server/parsedSchemas/challenge';
 import t from 'tcomb-form-native';
 import CardLayout from '../../Common/Card';
 import PrimaryButton from '../../Common/Button/PrimaryButton';

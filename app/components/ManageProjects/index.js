@@ -1,4 +1,4 @@
-import React, { Component, Children } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
@@ -11,7 +11,6 @@ import ConfirmDeletion from './ConfirmDelete';
 import _ from 'lodash';
 import TextHeading from '../Common/Heading/TextHeading';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
-import CardLayout from '../Common/Card';
 import { delimitNumbers } from '../../utils/utils';
 
 let TCombForm = t.form.Form;
@@ -68,6 +67,7 @@ class CollapsiblePlantProject extends Component {
         onDrop={event => {
           event.preventDefault();
           // Get the id of the target and add the moved element to the target's DOM
+          // eslint-disable-next-line no-unused-vars
           let data = event.dataTransfer.getData('text/plain');
           this.dropProject(event, plantProject.position);
         }}
@@ -87,6 +87,7 @@ class CollapsiblePlantProject extends Component {
                 <img
                   src={baselineEdit}
                   className="icon"
+                  // eslint-disable-next-line no-unused-vars
                   onClick={event => {
                     this.togglePicker();
                   }}
@@ -151,6 +152,7 @@ export default class ManageProjects extends Component {
     });
   }
 
+  // eslint-disable-next-line no-unused-vars
   mergeProjectImages(newPlantProjectImages, oldPlantProjectImages = []) {
     if (!newPlantProjectImages) {
       return [];
@@ -290,6 +292,7 @@ export default class ManageProjects extends Component {
   };
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const { type, image } = this.props.currentUserProfile;
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">

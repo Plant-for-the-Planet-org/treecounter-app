@@ -18,9 +18,7 @@ import {
 import CompetitionProgressBar from './CompetitionProgressBar';
 import { compCalendar, email } from '../../assets';
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import CompetitionTopCompetitor from './CompetitionTopCompetitor.native';
 import CompetitionParticipant from './CompetitionParticipant.native';
-import searchBarStyles from '../../styles/header/search_bar.native';
 import SearchUser from '../Challenge/Tabs/SearchUser.native';
 import moment from 'moment';
 import 'moment/min/locales';
@@ -38,6 +36,7 @@ class CompetitionFull extends React.Component {
     moment.locale(getLocale());
   }
 
+  // eslint-disable-next-line no-unused-vars
   componentWillReceiveProps(nextProps) {}
 
   componentDidMount() {
@@ -55,6 +54,7 @@ class CompetitionFull extends React.Component {
     const competitionDetail = this.props.competitionDetail;
     let participantCount = 0,
       requestCount = 0,
+      // eslint-disable-next-line no-unused-vars
       inviteCount = 0,
       invitedCount = 0;
     if (competitionDetail && competitionDetail.allEnrollments) {

@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n.js';
-import {
-  forgotPasswordFormSchema,
-  schemaOptions
-} from '../../../server/parsedSchemas/forgotpassword';
+import { forgotPasswordFormSchema } from '../../../server/parsedSchemas/forgotpassword';
 
 import styles from '../../../styles/forgetpassword';
 

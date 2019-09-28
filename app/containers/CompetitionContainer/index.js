@@ -11,12 +11,8 @@ import {
   fetchMineCompetitions,
   leaveCompetition
 } from '../../actions/competition';
-import {
-  competitionsSelector,
-  getAllCompetitionsSelector
-} from '../../selectors';
+import { getAllCompetitionsSelector } from '../../selectors';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
-import PublicTreecounter from '../../components/PublicTreeCounter/PublicTreecounter';
 import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
 import { handleServerResponseError } from '../../helpers/utils';
 
@@ -32,6 +28,7 @@ class CompetitionContainer extends React.Component {
     if (value) {
       this.props
         .createCompetition(value, this.props.navigation)
+        // eslint-disable-next-line no-unused-vars
         .then(success => {})
         .catch(err => {
           console.log('err signup data', err);

@@ -1,6 +1,5 @@
 import moment from 'moment';
 import 'moment/min/locales';
-import i18n from '../../../locales/i18n.js';
 import { getLocale } from '../../../actions/getLocale';
 
 const parseDate = (month, year) => {

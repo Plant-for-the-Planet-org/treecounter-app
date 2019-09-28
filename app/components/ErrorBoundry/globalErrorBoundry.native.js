@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, ScrollView, SafeAreaView } from 'react-native';
+import { Text, ScrollView, SafeAreaView } from 'react-native';
 import { context } from '../../config';
 import styles from '../../styles/edit_profile.native';
 import i18n from '../../locales/i18n.js';
 import { Client, Configuration } from 'bugsnag-react-native';
-import {
-  name as app_name,
-  version as app_version
-} from '../../../package.json';
+import { version as app_version } from '../../../package.json';
 const textColor = 'white';
 let bugsnag;
 if (context.bugsnagApiKey) {

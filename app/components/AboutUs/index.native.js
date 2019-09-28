@@ -13,6 +13,7 @@ const LicenseInfo = require('./LicenseInfo.json');
 class AboutUs extends Component {
   render() {
     const version = DeviceInfo.getReadableVersion();
+    // eslint-disable-next-line no-unused-vars
     const buildNumber = DeviceInfo.getBuildNumber();
     return (
       <View style={{ flex: 1 }}>

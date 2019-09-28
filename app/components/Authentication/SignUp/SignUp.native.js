@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import {
-  Text,
-  View,
-  ImageBackground,
-  ScrollView,
-  Keyboard
-} from 'react-native';
+import { Text, View, ImageBackground, Keyboard } from 'react-native';
 
 import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';

@@ -28,6 +28,7 @@ class ResetPassswordContainer extends React.Component {
   onClick(value) {
     this.props
       .reset_password(value, this.props.navigation)
+      // eslint-disable-next-line no-unused-vars
       .then(val => {})
       .catch(err => {
         let newSchemaOptions = handleServerResponseError(

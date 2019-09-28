@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n';
-import { tree } from '../../assets';
 import { formatNumber } from '../../utils/utils';
 class TreeCountSelector extends React.Component {
   constructor(props) {

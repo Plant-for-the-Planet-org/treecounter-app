@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  LayoutAnimation,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  Image
-} from 'react-native';
+import { LayoutAnimation, Text, TextInput, View, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import { iosSearchGreen } from '../../assets';

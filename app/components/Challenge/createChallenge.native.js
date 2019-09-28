@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TabView, TabBar, SceneMap, View } from 'react-native-tab-view';
+import { TabView, TabBar } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar';
 import { Dimensions } from 'react-native';
 import ChallengeUser from './Tabs/ChallengeUser';

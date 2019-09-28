@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import UserProfileImage from '../Common/UserProfileImage';
 

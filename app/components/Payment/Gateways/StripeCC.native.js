@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import stripe, { PaymentCardTextField } from 'tipsi-stripe';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
@@ -51,6 +51,7 @@ export default class StripeCC extends Component {
         cvc: this.state.params.cvc
       };
       this.props.setLoading(true);
+      // eslint-disable-next-line no-unused-vars
       const token = stripe
         .createTokenWithCard(params)
         .then(token => {
@@ -60,6 +61,7 @@ export default class StripeCC extends Component {
           this.props.onSuccess(token);
           //console.log(token);
         })
+        // eslint-disable-next-line no-unused-vars
         .catch(err => {
           this.props.setLoading(false);
           this.props.onError();
@@ -75,6 +77,7 @@ export default class StripeCC extends Component {
   }
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const { valid, params } = this.state;
     return (
       <View style={{ flexDirection: 'column', padding: 10 }}>

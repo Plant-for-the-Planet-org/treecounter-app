@@ -12,9 +12,7 @@ import {
 import i18n from '../../locales/i18n.js';
 import { renderFilledTabBar } from '../Common/Tabs';
 import RegisterTreeTab from './RegisterTreeTab.native';
-import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default class RegisterTrees extends Component {
   constructor() {
@@ -41,6 +39,7 @@ export default class RegisterTrees extends Component {
 
   _handleIndexChange = index => this.setState({ index });
 
+  // eslint-disable-next-line no-unused-vars
   handleGeoLocationChange(geoLocation) {
     //console.log(geoLocation);
   }

@@ -26,10 +26,6 @@ import { getImageUrl } from '../../actions/apiRouting';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import { updateRoute } from '../../helpers/routerHelper';
 
-const plantProjectFormOptions = {
-  template: PlantProjectTemplate(),
-  ...plantProjectSchema.schemaOptions
-};
 let TCombForm = t.form.Form;
 const emptyProjectInfo = { name: '' };
 
@@ -74,7 +70,7 @@ export default class EditUserProfile extends React.Component {
     }
   };
 
-  mergeProjectImages(newPlantProjectImages, oldPlantProjectImages = []) {
+  mergeProjectImages(newPlantProjectImages) {
     if (!newPlantProjectImages) {
       return [];
     }
@@ -104,8 +100,7 @@ export default class EditUserProfile extends React.Component {
         delete value.imageFile;
       }
       let plantProjectImages = this.mergeProjectImages(
-        value.plantProjectImages,
-        plantProject.plantProjectImages
+        value.plantProjectImages
       );
       if (plantProject.id) {
         this.props.updatePlantProject({

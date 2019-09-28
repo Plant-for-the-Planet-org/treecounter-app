@@ -129,6 +129,7 @@ export default class Leaderboard extends Component {
       timePeriodsInfo,
       sortingQuery,
       sectionInfo,
+      // eslint-disable-next-line no-unused-vars
       handleBackButton
     } = this.props;
     if (!categoryInfo) {

@@ -26,10 +26,12 @@ export default class StripeSepa extends Component {
       submitClicked: false
     };
   }
+  // eslint-disable-next-line no-unused-vars
   handleSubmit = ev => {
     this.setState({
       submitClicked: true
     });
+    // eslint-disable-next-line no-unused-vars
     const { currency, context, account } = this.props;
     let ibanPattern = new RegExp(
       /^DE\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|DE\d{20}$/i
@@ -63,12 +65,14 @@ export default class StripeSepa extends Component {
         // tokenObj.id = token.tokenId;
         this.props.onSuccess(token);
       })
+      // eslint-disable-next-line no-unused-vars
       .catch(err => {
         // console.log(err);
       });
   };
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const { currency, context } = this.props;
 
     return (

@@ -116,6 +116,7 @@ export default class NDVI extends Component {
     return `rgb(${color.join(',')})`;
   };
 
+  // eslint-disable-next-line no-unused-vars
   onClickRefresh = props => {
     this.props.refresh && this.props.refresh();
   };

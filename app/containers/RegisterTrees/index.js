@@ -94,9 +94,11 @@ class RegisterTreesContainer extends PureComponent {
     return [
       this.props.navigation ? (
         <NavigationEvents
+          // eslint-disable-next-line no-unused-vars
           onWillFocus={payload => {
             this.setState({ loadSvg: true });
           }}
+          // eslint-disable-next-line no-unused-vars
           onWillBlur={payload => {
             this.setState({ loadSvg: false });
           }}

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import YouTube from 'react-youtube';
-import ModalDialog from './ModalDialog';
 
 class VideoContainer extends React.Component {
   constructor(props) {

@@ -3,18 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import {
-  currentUserProfileSelector,
-  selectedPlantProjectSelector,
-  selectedTpoSelector
-} from '../../selectors';
+import { currentUserProfileSelector } from '../../selectors';
 import { updateRoute } from '../../helpers/routerHelper';
 import CompetitionFull from '../../components/Competition/CompetitionFull';
 
-import {
-  clearPlantProject,
-  selectPlantProjectAction
-} from '../../actions/selectPlantProjectAction';
 import {
   confirmPart,
   cancelInvite,
@@ -23,7 +15,6 @@ import {
   invitePart,
   leaveCompetition
 } from '../../actions/competition';
-import CompetitionParticipant from '../../components/Competition/CompetitionParticipant.native';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 
 class SelectedCompetitionContainer extends Component {

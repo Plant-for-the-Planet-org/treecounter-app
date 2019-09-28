@@ -3,17 +3,10 @@ import CardLayout from '../Common/Card';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {
-  competitionFormSchema,
-  competitionFormSchemaOptions
-} from '../../server/parsedSchemas/competition';
+import { competitionFormSchema } from '../../server/parsedSchemas/competition';
 import i18n from '../../locales/i18n';
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import {
-  competitionDetailSelector,
-  userCompetitionEnrolledSelector,
-  userTreecounterSelector
-} from '../../selectors';
+import { competitionDetailSelector } from '../../selectors';
 import { fetchCompetitionDetail } from '../../actions/competition';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -54,6 +47,7 @@ const getCompFormImageLayoutTemplate = () => {
         </View>
         <TouchableOpacity
           style={{ flex: 1 }}
+          // eslint-disable-next-line no-unused-vars
           onPress={event => {
             ImagePicker.showImagePicker(options, response => {
               // console.log('Response = ', response);
@@ -65,6 +59,7 @@ const getCompFormImageLayoutTemplate = () => {
               } else if (response.customButton) {
                 // console.log('User tapped custom button: ', response.customButton);
               } else {
+                // eslint-disable-next-line no-unused-vars
                 let source = { uri: response.uri };
                 locals.onChange('data:image/jpeg;base64,' + response.data);
               }

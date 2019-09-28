@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-  Image,
-  View,
-  TouchableOpacity,
-  BackHandler,
-  NavigationActions
-} from 'react-native';
+import { Image, View, TouchableOpacity, BackHandler } from 'react-native';
 
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';

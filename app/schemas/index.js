@@ -1,5 +1,4 @@
 import { schema } from 'normalizr';
-import { tree } from '../assets';
 
 export const challengeSchema = new schema.Entity('challenge');
 export const competitionSchema = new schema.Entity('competition');

@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { Text, View, ScrollView } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import scrollStyle from '../../../styles/common/scrollStyle';
+import { View, ScrollView } from 'react-native';
 
-import {
-  resetPasswordFormSchema,
-  schemaOptions
-} from '../../../server/parsedSchemas/resetPassword';
+import { resetPasswordFormSchema } from '../../../server/parsedSchemas/resetPassword';
 
 import i18n from '../../../locales/i18n.js';
 

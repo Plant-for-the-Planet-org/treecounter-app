@@ -1,5 +1,4 @@
 import { normalize } from 'normalizr';
-import { debug } from '../debug/index';
 
 import {
   postAuthenticatedRequest,
@@ -16,12 +15,12 @@ import {
 } from '../schemas/index';
 import {
   paymentSuccess,
-  paymentFailed,
   paymentCleared,
   donationCreation
 } from '../reducers/paymentStatus';
 
 export function fillCard() {
+  // eslint-disable-next-line no-unused-vars
   return dispatch => {
     let request = getAuthenticatedRequest('stripe_customer', {
       version: 'v1.3'
@@ -31,11 +30,13 @@ export function fillCard() {
 }
 
 export function attachCardToCostumer(paymentMethod) {
+  // eslint-disable-next-line no-unused-vars
   return dispatch => {
     let request = postAuthenticatedRequest('stripe_paymentMethod_attach', {
       paymentMethod,
       version: 'v1.3'
     });
+    // eslint-disable-next-line no-unused-vars
     request.then(response => {
       console.log('method attached');
     });
@@ -83,6 +84,7 @@ export function createPaymentGift(plantProjectId, requestData, loggedIn) {
 }
 
 export function handlePay(donationId, requestData, loggedIn) {
+  // eslint-disable-next-line no-unused-vars
   return dispatch => {
     requestData = { paymentProviderRequest: { ...requestData } };
     let request = loggedIn

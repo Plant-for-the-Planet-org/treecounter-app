@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as images from '../../assets';
-import i18n from '../../locales/i18n';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';

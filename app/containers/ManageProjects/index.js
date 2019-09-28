@@ -17,6 +17,7 @@ class ManageProjectContainer extends Component {
   updatePlantProject = plantProject => {
     this.props
       .updatePlantProject(plantProject)
+      // eslint-disable-next-line no-unused-vars
       .then(data => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_update_success')}`,
@@ -36,6 +37,7 @@ class ManageProjectContainer extends Component {
   deletePlantProject = plantProjectId => {
     this.props
       .deletePlantProject(plantProjectId)
+      // eslint-disable-next-line no-unused-vars
       .then(data => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_delete_success')}`,
@@ -55,6 +57,7 @@ class ManageProjectContainer extends Component {
   addPlantProject = newProject => {
     this.props
       .addPlantProject(newProject)
+      // eslint-disable-next-line no-unused-vars
       .then(data => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_added_success')}`,

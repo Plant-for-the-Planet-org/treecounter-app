@@ -14,6 +14,7 @@ const LegendInfo = props => {
   );
 };
 
+// eslint-disable-next-line no-unused-vars
 const Legend = props => {
   return (
     <View style={styles.legendContainer}>

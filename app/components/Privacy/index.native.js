@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Accordion from 'react-native-collapsible/Accordion';
 import HTMLView from 'react-native-htmlview';
-import { foldin, foldout } from '../../assets';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  ListView,
-  Image,
-  Linking
-} from 'react-native';
+import { Text, View, ListView, Linking } from 'react-native';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { context } from '../../config';
 import styles from '../../styles/faq';
@@ -87,6 +77,7 @@ export default class Privacy extends Component {
             }
 
             // console.log('clicked link: ', url);
+            // eslint-disable-next-line no-unused-vars
             Linking.openURL(url).catch(err => {
               //console.log(err);
             });

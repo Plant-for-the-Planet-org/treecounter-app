@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { Text, View, Image, ScrollView, Keyboard } from 'react-native';
+import { Text, View, Image, Keyboard } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import scrollStyle from '../../../styles/common/scrollStyle';
 import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 
-import {
-  loginFormSchema,
-  schemaOptions
-} from '../../../server/parsedSchemas/login';
+import { loginFormSchema } from '../../../server/parsedSchemas/login';
 
 import i18n from '../../../locales/i18n.js';
 

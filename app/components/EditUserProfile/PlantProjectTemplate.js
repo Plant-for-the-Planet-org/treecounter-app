@@ -1,5 +1,4 @@
 import React from 'react';
-import i18n from '../../locales/i18n';
 
 const a = [
   '',
@@ -36,6 +35,7 @@ const b = [
   'ninety'
 ];
 
+// eslint-disable-next-line no-unused-vars
 const inWords = function(num) {
   if ((num = num.toString()).length > 9) return 'overflow';
   let n = ('000000000' + num)

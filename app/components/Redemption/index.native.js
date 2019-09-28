@@ -199,6 +199,7 @@ export default class Redemption extends Component {
         </View>
       );
     }
+    // eslint-disable-next-line no-unused-vars
     let heading;
     if (this.props.path === 'redeem') {
       heading = i18n.t('label.redeem_trees');

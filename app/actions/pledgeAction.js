@@ -30,6 +30,7 @@ export function fetchPledgesAction(eventSlug) {
 }
 
 export function postPledge(data, params) {
+  // eslint-disable-next-line no-unused-vars
   return dispatch => {
     postRequest('eventPledge_post', data, params)
       .then(res => {

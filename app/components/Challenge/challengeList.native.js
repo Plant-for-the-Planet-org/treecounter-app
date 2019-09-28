@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 
 import ChallengeCard from './challengeCard';
@@ -15,6 +15,7 @@ class ChallengeList extends Component {
       />
     );
   }
+  // eslint-disable-next-line no-unused-vars
   _keyExtractor = (item, index) => item.id.toString();
 
   _renderItem = ({ item }) => (

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import SuccessfullyActivatedAccount from '../../components/Authentication/SuccessfullyActivated';
 import { accountActivate } from '../../actions/signupActions';
+// eslint-disable-next-line no-unused-vars
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { connect } from 'react-redux';
 
@@ -27,6 +28,7 @@ class SuccessfullyActivatedContainer extends React.Component {
             ? this.props.navigation.getParam('token')
             : this.props.match.params.token
         )
+        // eslint-disable-next-line no-unused-vars
         .then(res => {
           this.setState({ success: true });
         })

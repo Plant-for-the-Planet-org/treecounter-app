@@ -8,6 +8,7 @@ import styles from '../../../styles/selectplantproject/featured.native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 
 export default class FeaturedProjects extends PureComponent {
+  // eslint-disable-next-line no-unused-vars
   _keyExtractor = (item, index) => item.id.toString();
 
   _renderItem = ({ item }) => (

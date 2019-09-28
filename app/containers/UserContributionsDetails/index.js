@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import UserContributionsDetails from '../../components/UserContributions/ContributionDetails/index.native';
-import _ from 'lodash';
 // Actions
 import { currentUserProfileIdSelector } from '../../selectors/index';
 
@@ -34,6 +32,7 @@ const mapStateToProps = state => ({
   userProfileId: currentUserProfileIdSelector(state)
 });
 
+// eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = dispatch => {
   return {};
 };

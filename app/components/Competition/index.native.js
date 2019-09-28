@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Text, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar';
 import MineCompetitions from './Tabs/mine.native';

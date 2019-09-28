@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Animated } from 'react-native';
+import { ScrollView, Animated } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { categoryIcons } from '../../../helpers/utils';
 import styles from '../../../styles/leaderboard/leader_board';
@@ -32,6 +32,7 @@ export default class CategoryTypes extends Component {
   }
 
   getCategoryView = () => {
+    // eslint-disable-next-line no-unused-vars
     const { categoryInfo, sectionInfo } = this.props;
     let categoryUI = null;
     if (categoryInfo && categoryInfo.categoryKeys) {

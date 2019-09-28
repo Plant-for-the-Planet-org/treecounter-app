@@ -4,13 +4,7 @@ import PropTypes from 'prop-types';
 import ContributionCardList from './ContributionCardList';
 import ContributionsMapLegend from './ContributionsMapLegend';
 import i18n from '../../locales/i18n.js';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Animated,
-  ScrollView
-} from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import styles from '../../styles/myTrees/my_trees';
 import tabBarStyles from '../../styles/common/tabbar';
 
@@ -72,11 +66,13 @@ export default class UserContributions extends React.Component {
   };
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const { userProfileId, userContributions } = this.props;
     return (
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.headContainer}>
           <PrimaryButton
+            // eslint-disable-next-line no-unused-vars
             onClick={event => {
               setTimeout(() => {
                 this.props.navigation.navigate(

@@ -15,7 +15,6 @@ import i18n from '../../locales/i18n.js';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
 import { logoutUser } from '../../actions/authActions';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
-import { getRequest } from '../../utils/api';
 import { unfollowUser } from '../../actions/followActions';
 
 const profileTypeLabel = {
@@ -92,6 +91,7 @@ class EditUserProfileContainer extends React.Component {
   updatePlantProject = plantProject => {
     this.props
       .updatePlantProject(plantProject)
+      // eslint-disable-next-line no-unused-vars
       .then(data => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_update_success')}`,
@@ -111,6 +111,7 @@ class EditUserProfileContainer extends React.Component {
   deletePlantProject = plantProjectId => {
     this.props
       .deletePlantProject(plantProjectId)
+      // eslint-disable-next-line no-unused-vars
       .then(data => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_delete_success')}`,
@@ -130,6 +131,7 @@ class EditUserProfileContainer extends React.Component {
   addPlantProject = newProject => {
     this.props
       .addPlantProject(newProject)
+      // eslint-disable-next-line no-unused-vars
       .then(data => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_added_success')}`,
@@ -146,6 +148,7 @@ class EditUserProfileContainer extends React.Component {
       });
   };
 
+  // eslint-disable-next-line no-unused-vars
   onSave = (usertype, profileType, formRefs, newImageAvailable) => {
     const profileForm =
       (formRefs && formRefs[profileType]) ||
@@ -169,6 +172,7 @@ class EditUserProfileContainer extends React.Component {
     if (value) {
       this.props
         .updateUserProfile(value, profileType)
+        // eslint-disable-next-line no-unused-vars
         .then(data => {
           if (profileType == 'password') {
             this.setState({ showPasswordDialog: true });

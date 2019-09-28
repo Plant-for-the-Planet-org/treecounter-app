@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import styles from '../../styles/welcome_screen.native';
-import { Text, View, ScrollView, TextInput, Image } from 'react-native';
+import { Text, View, ScrollView, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
@@ -15,6 +15,7 @@ class WelcomeScreenModal extends Component {
   }
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const welcomeScreenProfile = this.props.navigation.getParam(
       'welcomeScreenProfile'
     );

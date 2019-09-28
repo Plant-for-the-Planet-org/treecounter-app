@@ -7,6 +7,7 @@ import ImagePicker from 'react-native-image-picker';
 import i18n from '../../locales/i18n';
 
 export function ProfileImagePickerTemplate(locals) {
+  // eslint-disable-next-line no-unused-vars
   let { category, variant } = locals.config || {};
 
   const options = {
@@ -30,6 +31,7 @@ export function ProfileImagePickerTemplate(locals) {
   return (
     <View style={styles.filePickerContainer}>
       <TouchableOpacity
+        // eslint-disable-next-line no-unused-vars
         onPress={event => {
           ImagePicker.showImagePicker(options, response => {
             // console.log('Response = ', response);
@@ -41,6 +43,7 @@ export function ProfileImagePickerTemplate(locals) {
             } else if (response.customButton) {
               // console.log('User tapped custom button: ', response.customButton);
             } else {
+              // eslint-disable-next-line no-unused-vars
               let source = { uri: response.uri };
               locals.onChange('data:image/jpeg;base64,' + response.data);
             }

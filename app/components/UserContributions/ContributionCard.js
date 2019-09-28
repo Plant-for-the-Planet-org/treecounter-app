@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import Lightbox from 'react-images';
 import { Link } from 'react-router-dom';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import TextSpan from '../Common/Text/TextSpan';
@@ -165,6 +164,7 @@ export default class ContributionCard extends React.Component {
 
   render() {
     let { contribution } = this.props;
+    // eslint-disable-next-line no-unused-vars
     let imagesArray =
       contribution.category === 'contributions'
         ? contribution.contributionImages.map(image => {
@@ -217,7 +217,9 @@ export default class ContributionCard extends React.Component {
       givee,
       giveeSlug
     );
+    // eslint-disable-next-line no-unused-vars
     let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
+    // eslint-disable-next-line no-unused-vars
     let borderColor =
       contributionType == 'donation'
         ? '#95c243'

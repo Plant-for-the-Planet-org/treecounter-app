@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import styles from '../../../styles/competition/mine.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import imagestyles from '../../../styles/file_picker.native';
@@ -10,10 +9,7 @@ import CardLayout from '../../Common/Card';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {
-  competitionFormSchema,
-  competitionFormSchemaOptions
-} from '../../../server/parsedSchemas/competition';
+import { competitionFormSchema } from '../../../server/parsedSchemas/competition';
 import i18n from '../../../locales/i18n';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import UserProfileImage from '../../Common/UserProfileImage';
@@ -22,6 +18,7 @@ import imageUpload from '../../../assets/images/icons/upload_image.png';
 import ImagePicker from 'react-native-image-picker';
 
 let Form = t.form.Form;
+// eslint-disable-next-line no-unused-vars
 const getCompFormLayoutTemplate = () => {
   const formLayoutTreesTemplate = locals => {
     return (
@@ -79,6 +76,7 @@ const getCompFormImageLayoutTemplate = () => {
         </View>
         <TouchableOpacity
           style={{ flex: 1 }}
+          // eslint-disable-next-line no-unused-vars
           onPress={event => {
             ImagePicker.showImagePicker(options, response => {
               // console.log('Response = ', response);
@@ -90,6 +88,7 @@ const getCompFormImageLayoutTemplate = () => {
               } else if (response.customButton) {
                 // console.log('User tapped custom button: ', response.customButton);
               } else {
+                // eslint-disable-next-line no-unused-vars
                 let source = { uri: response.uri };
                 locals.onChange('data:image/jpeg;base64,' + response.data);
               }
@@ -219,6 +218,7 @@ export default class MineCompetitions extends Component {
   }
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     let { featuredProjects, featuredCompetitions } = this.state;
     let schemaOptions = this.props.competitionFormSchemaOptions;
     if (schemaOptions.fields.imageFile) {

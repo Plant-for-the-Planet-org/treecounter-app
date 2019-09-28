@@ -20,6 +20,7 @@ class ForgotPasswordContainer extends React.Component {
     if (value) {
       this.props
         .forgot_password(value, this.props.navigation)
+        // eslint-disable-next-line no-unused-vars
         .then(val => {})
         .catch(err => {
           let newSchemaOptions = handleServerResponseError(

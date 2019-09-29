@@ -16,7 +16,7 @@
   "contact_firstname": "First Name",
   "contact_lastname": "Last Name",
   "donate_to": "Spenden an {{name}}",
-  "payment_failed": "Payment Failed",
+  "payment_failed": "Payment failed",
   "go_back_to_app": "Go Back to Plant-for-the-Planet App",
   "please_confirm": "Please confirm",
   "please_enter_card_details": "Please enter correct card details",

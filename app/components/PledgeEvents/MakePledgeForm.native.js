@@ -37,7 +37,8 @@ class MakePledgeForm extends Component {
     lastnameValidator: 'Please enter Last Name',
     emailValidator: 'Please enter Email',
     treeCountValidator: 'Please enter Tree Count',
-    isAnonymous: false
+    isAnonymous: false,
+    loggedIn: false
   };
   componentWillMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
@@ -61,7 +62,8 @@ class MakePledgeForm extends Component {
       this.setState({
         firstname: userProfile.firstname,
         lastname: userProfile.lastname,
-        email: userProfile.email
+        email: userProfile.email,
+        loggedIn: true
       });
     }
   }
@@ -109,9 +111,14 @@ class MakePledgeForm extends Component {
           };
           console.log(data);
           const params = this.props.navigation.getParam('slug');
-          this.props.postPledge(data, {
-            pledgeEventSlug: params
-          });
+          this.props.postPledge(
+            data,
+            {
+              pledgeEventSlug: params,
+              version: 'v1.3'
+            },
+            this.state.loggedIn
+          );
 
           //saveItem('pledgedEvent', JSON.stringify(date));
 

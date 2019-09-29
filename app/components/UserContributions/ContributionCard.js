@@ -54,12 +54,13 @@ export default class ContributionCard extends React.Component {
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
       ? [
-          <TextSpan>
+          <TextSpan key={`donateActionLine_0`}>
             {i18n.t('label.gifted_on_to', {
               date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
             })}
           </TextSpan>,
           <TextSpan
+            key={`donateActionLine_1`}
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug
@@ -93,8 +94,11 @@ export default class ContributionCard extends React.Component {
   dedicateActionLine = (isGift, givee, giveeSlug) => {
     return isGift
       ? [
-          <TextSpan>{i18n.t('label.dedicated_to')}</TextSpan>,
+          <TextSpan key={`dedicateActionLine_0`}>
+            {i18n.t('label.dedicated_to')}
+          </TextSpan>,
           <TextSpan
+            key={`dedicateActionLine_1`}
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug
@@ -110,7 +114,7 @@ export default class ContributionCard extends React.Component {
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && givee
       ? [
-          <TextSpan>
+          <TextSpan key={`redeemActionLine_0`}>
             {i18n.t('label.given_on_by', {
               date: moment(getDateFromMySQL(redemptionDate)).format(
                 'DD MMM YYYY'
@@ -118,6 +122,7 @@ export default class ContributionCard extends React.Component {
             })}
           </TextSpan>,
           <TextSpan
+            key={`redeemActionLine_1`}
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug
@@ -133,7 +138,7 @@ export default class ContributionCard extends React.Component {
           })
         : givee
           ? [
-              <TextSpan>
+              <TextSpan key={`redeemActionLine_2`}>
                 {i18n.t('label.dedicated_on_by', {
                   date: moment(getDateFromMySQL(redemptionDate)).format(
                     'DD MMM YYYY'
@@ -141,6 +146,7 @@ export default class ContributionCard extends React.Component {
                 })}
               </TextSpan>,
               <TextSpan
+                key={`redeemActionLine_3`}
                 onPress={() =>
                   updateRoute(getLocalRoute('app_treecounter'), {
                     treeCounterId: giveeSlug

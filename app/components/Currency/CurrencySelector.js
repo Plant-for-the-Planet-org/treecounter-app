@@ -12,7 +12,7 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
 
   return (
     <div className="pftp-selectfield">
-      <TextBlock strong={true}>{i18n.t('label.currency')}</TextBlock>
+      <TextBlock strong>{i18n.t('label.currency')}</TextBlock>
       <select
         className="pftp-selectfield__select"
         required="required"

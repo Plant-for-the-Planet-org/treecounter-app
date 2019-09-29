@@ -45,7 +45,6 @@ class Competiton extends React.Component {
     return (
       <TabBar
         {...props}
-        indicatorStyle={styles.indicator}
         style={styles.tabBar}
         tabStyle={{ width: Layout.window.width / 3 }}
         labelStyle={styles.textStyle}

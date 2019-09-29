@@ -56,7 +56,7 @@ class SelectTemplateIOS extends React.PureComponent {
     let filteredValue = this.props.options.filter(
       item => item.value === locals.value
     );
-
+    const textColor = '#686060';
     if (filteredValue && filteredValue.length > 0) {
       formattedValue = i18n.t(filteredValue[0].text);
     }
@@ -122,7 +122,7 @@ class SelectTemplateIOS extends React.PureComponent {
           animationDuration={0}
           itemTextStyle={{
             fontSize: 13,
-            color: '#686060'
+            color: textColor
           }}
           value={i18n.t(locals.value)}
           textColor="rgba(104,96,96, 0.8)"
@@ -206,7 +206,7 @@ class SelectTemplateIOS extends React.PureComponent {
         animationDuration={0}
         itemTextStyle={{
           fontSize: 13,
-          color: '#686060'
+          color: textColor
         }}
         value={i18n.t(locals.value)}
         textColor="rgba(104,96,96, 0.8)"

@@ -17,6 +17,14 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@haskkor/react-native-recaptchav3",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@haskkor/react-native-recaptchav3/LICENSE"
       },
+      "@react-native-community/async-storage@1.6.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-community/react-native-async-storage",
+        "publisher": "Krzysztof Borowy",
+        "email": "krizzu.dev@gmail.com",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@react-native-community/async-storage",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@react-native-community/async-storage/LICENSE"
+      },
       "autosuggest-highlight@3.1.1": {
         "licenses": "MIT",
         "repository": "https://github.com/moroshko/autosuggest-highlight",
@@ -125,6 +133,12 @@
         "url": "https://github.com/marlun78",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/number-to-words",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/number-to-words/LICENSE"
+      },
+      "prop-types@15.7.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/prop-types",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/prop-types",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/prop-types/LICENSE"
       },
       "react-accessible-accordion@2.4.5": {
         "licenses": "MIT",
@@ -355,6 +369,14 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-paypal-wrapper",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-paypal-wrapper/LICENSE"
       },
+      "react-native-permissions@1.2.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-community/react-native-permissions",
+        "publisher": "Yonah Forst",
+        "email": "yonaforst@hotmail.com",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-permissions",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-permissions/LICENSE"
+      },
       "react-native-popover-tooltip@1.1.4": {
         "licenses": "MIT",
         "repository": "https://github.com/wookoinc/react-native-popover-tooltip",
@@ -518,6 +540,14 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-smartbanner",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-smartbanner/LICENSE"
       },
+      "react-stripe-elements@5.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/stripe/react-stripe-elements",
+        "publisher": "Stripe",
+        "url": "https://www.stripe.com",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-stripe-elements",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-stripe-elements/LICENSE"
+      },
       "react-tooltip@3.10.0": {
         "licenses": "MIT",
         "repository": "https://github.com/wwayne/react-tooltip",
@@ -553,6 +583,15 @@
         "email": "acdlite@me.com",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-actions",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-actions/LICENSE"
+      },
+      "redux-form@8.2.6": {
+        "licenses": "MIT",
+        "repository": "https://github.com/erikras/redux-form",
+        "publisher": "Erik Rasmussen",
+        "email": "rasmussenerik@gmail.com",
+        "url": "http://github.com/erikras",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-form",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-form/LICENSE"
       },
       "redux-logger@3.0.6": {
         "licenses": "MIT",

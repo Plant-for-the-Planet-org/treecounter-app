@@ -99,7 +99,7 @@ class Trillion extends Component {
               </div>
             ) : (
               <TreecounterGraphicsText
-                trillion={true}
+                trillion
                 treecounterData={this.state.svgData}
               />
             )}

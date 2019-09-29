@@ -2722,6 +2722,39 @@
 			],
 			"schemes": []
 		},
+		"eventPledgeAuthed_form": {
+			"tokens": [
+				[
+					"text",
+					"/eventPledgeForm"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/api"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"GET"
+			],
+			"schemes": []
+		},
 		"eventPledge_form": {
 			"tokens": [
 				[
@@ -2788,6 +2821,45 @@
 			],
 			"schemes": []
 		},
+		"pledgeEventAuthed_get": {
+			"tokens": [
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"eventSlug"
+				],
+				[
+					"text",
+					"/pledgeEvent"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/api"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"GET"
+			],
+			"schemes": []
+		},
 		"pledgeEvent_get": {
 			"tokens": [
 				[
@@ -2824,6 +2896,127 @@
 			"hosttokens": [],
 			"methods": [
 				"GET"
+			],
+			"schemes": []
+		},
+		"eventPledgesByTokenPublic_get": {
+			"tokens": [
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"pledgeTokens"
+				],
+				[
+					"text",
+					"/eventPledge/byToken"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/public"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"GET"
+			],
+			"schemes": []
+		},
+		"eventPledgesByToken_get": {
+			"tokens": [
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"pledgeTokens"
+				],
+				[
+					"text",
+					"/eventPledge/byToken"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/api"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"GET"
+			],
+			"schemes": []
+		},
+		"eventPledgeAuthed_post": {
+			"tokens": [
+				[
+					"text",
+					"/eventPledge"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"pledgeEventSlug"
+				],
+				[
+					"text",
+					"/pledgeEvent"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/api"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"POST"
 			],
 			"schemes": []
 		},
@@ -2867,6 +3060,45 @@
 			"hosttokens": [],
 			"methods": [
 				"POST"
+			],
+			"schemes": []
+		},
+		"eventPledgeAuthed_put": {
+			"tokens": [
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"token"
+				],
+				[
+					"text",
+					"/eventPledge"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/api"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"PUT"
 			],
 			"schemes": []
 		},
@@ -3526,6 +3758,39 @@
 				[
 					"text",
 					"/profileLocale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"_locale"
+				],
+				[
+					"variable",
+					"/",
+					"[^/]++",
+					"version"
+				],
+				[
+					"text",
+					"/api"
+				]
+			],
+			"defaults": {
+				"_locale": []
+			},
+			"requirements": [],
+			"hosttokens": [],
+			"methods": [
+				"PUT"
+			],
+			"schemes": []
+		},
+		"profileCurrency_put": {
+			"tokens": [
+				[
+					"text",
+					"/profileCurrency"
 				],
 				[
 					"variable",

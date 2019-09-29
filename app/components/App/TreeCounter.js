@@ -329,8 +329,7 @@ class TreeCounter extends Component {
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
-            <ProgressModal isOpen={this.props.progressModel} />
-
+            <ProgressModal />
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             {this._appRoutes}
@@ -348,8 +347,7 @@ class TreeCounter extends Component {
 }
 
 const mapStateToProps = state => ({
-  userProfile: currentUserProfileSelector(state),
-  progressModel: state.modelDialogState.progressModel
+  userProfile: currentUserProfileSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
@@ -372,6 +370,5 @@ TreeCounter.propTypes = {
   NotificationAction: PropTypes.func,
   loadTpos: PropTypes.func,
   dispatch: PropTypes.func,
-  progressModel: PropTypes.bool,
   fetchpledgeEventsAction: PropTypes.func
 };

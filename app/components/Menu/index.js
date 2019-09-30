@@ -90,7 +90,7 @@ class Menu extends Component {
       <div className="app-container__sidenav--image">
         <Link to={route} onClick={() => this.linkClicked()}>
           {' '}
-          <img src={images['SideMenuImage']} />
+          <img src={images['SideMenuImageNew']} />
         </Link>
       </div>
     );

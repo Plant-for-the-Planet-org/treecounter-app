@@ -2,6 +2,5 @@
 # platform :ios, '9.0'
 
 target 'TreecounterApp' do
-  pod 'Stripe', '~> 11.2.0'
   inherit! :search_paths
 end

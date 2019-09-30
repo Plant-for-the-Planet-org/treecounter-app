@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { ScrollView, View, TextInput, Text } from 'react-native';
 import SearchUser from './SearchUser.native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import { delimitNumbers } from '../../../utils/utils';
 import ChallengeList from '../challengeList';
 import CardLayout from '../../Common/Card';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -144,6 +143,8 @@ class ChallengeUser extends Component {
               />
               <View style={challengeStyles.flexContainerStyle}>
                 <Text>{i18n.t('label.challenge_to_plant')} </Text>
+              </View>
+              <View style={challengeStyles.flexContainerStyle}>
                 <TextInput
                   keyboardType="numeric"
                   underlineColorAndroid={'transparent'}
@@ -151,10 +152,10 @@ class ChallengeUser extends Component {
                   onChangeText={evt => {
                     this.handleTreeCountChange(evt);
                   }}
-                  value={delimitNumbers(this.state.treeCount)}
+                  value={String(this.state.treeCount)}
                   autoCapitalize={'sentences'}
                 />
-                <Text>{i18n.t('label.trees')}</Text>
+                <Text>{' ' + i18n.t('label.trees')}</Text>
               </View>
               <View style={challengeStyles.flexContainerStyle}>
                 <CheckBox

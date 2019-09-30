@@ -6,7 +6,6 @@ import {
   AccordionItemTitle,
   AccordionItemBody
 } from 'react-accessible-accordion';
-import renderHTML from 'react-render-html';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import TextHeading from '../../components/Common/Heading/TextHeading';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
@@ -17,11 +16,17 @@ import CardLayout from '../Common/Card';
 export default class Privacy extends Component {
   GetPrivacyList() {
     return this.props.privacies.map((privacy, i) => (
-      <AccordionItem expanded={true} key={'privacy' + i}>
+      <AccordionItem expanded key={'privacy' + i}>
         <AccordionItemTitle>
           <div className="u-position-relative">{privacy.heading}</div>
         </AccordionItemTitle>
-        <AccordionItemBody>{renderHTML(privacy.description)}</AccordionItemBody>
+        <AccordionItemBody>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: privacy.description
+            }}
+          />
+        </AccordionItemBody>
       </AccordionItem>
     ));
   }

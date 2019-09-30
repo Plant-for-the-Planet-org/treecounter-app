@@ -8,12 +8,12 @@ import CardLayout from '../../Common/Card';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { TextInput, View, Text } from 'react-native';
 import ChallengeList from '../challengeList';
-import { delimitNumbers } from '../../../utils/utils';
 import { withNavigation } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
 import i18n from '../../../locales/i18n';
+import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import TabContainer from '../../../containers/Menu/TabContainer';
 
 import challengeStyles from '../../../styles/challenge';
@@ -86,7 +86,7 @@ class ChallengeEmail extends Component {
   onNextClick() {
     if (this.challengeInvitation.getValue()) {
       let value = this.challengeInvitation.getValue();
-      requestData = {
+      let requestData = {
         invitee: { ...value }
       };
       if (this.state.isChecked) {
@@ -138,7 +138,7 @@ class ChallengeEmail extends Component {
           contentContainerStyle={{
             paddingBottom: 72
           }}
-          enableOnAndroid={true}
+          enableOnAndroid
         >
           {this.props.error ? (
             <View style={errorStyles.containerDedicateStyle}>
@@ -160,14 +160,16 @@ class ChallengeEmail extends Component {
               />
               <View style={challengeStyles.flexContainerStyle}>
                 <Text>{i18n.t('label.challenge_to_plant')} </Text>
+              </View>
+              <View style={challengeStyles.flexContainerStyle}>
                 <TextInput
                   keyboardType="numeric"
                   style={challengeStyles.treecount_input}
                   onChangeText={evt => this.handleTreeCountChange(evt)}
-                  value={delimitNumbers(this.state.treeCount)}
+                  value={String(this.state.treeCount)}
                   autoCapitalize={'sentences'}
                 />
-                <Text>{i18n.t('label.trees')}</Text>
+                <Text>{' ' + i18n.t('label.trees')}</Text>
               </View>
               <View style={challengeStyles.flexContainerStyle}>
                 <CheckBox

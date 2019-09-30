@@ -142,8 +142,9 @@
         border: none;
         border-radius: 0;
         padding: 0;
-        width: 40px;
+        width: 60px;
         border-bottom: 1px solid mix(white, #424242, 70%);
+        font-size: 1rem;
       }
     }
   }
@@ -335,9 +336,6 @@
 }
 
 .projects-list {
-  border-radius: 6px;
-  border-spacing: 0;
-  border: solid 2px #efefef;
   padding: 10px;
   color: #686060;
   width: 99%;
@@ -371,6 +369,15 @@
   td {
     padding: 5px;
   }
+}
+
+.flex {
+  display: flex;
+}
+
+.margin_radio {
+  margin: auto;
+  margin-left: 20px;
 }
 
 .all-projects-card {
@@ -450,7 +457,7 @@
 
   .StripeElement {
     padding: 20px;
-    width: auto;
+    width: 100%;
   }
 
   .pftp-button-primary {

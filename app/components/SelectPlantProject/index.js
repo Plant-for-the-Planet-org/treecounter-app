@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
 import CardLayout from '../Common/Card';
-import ContentHeader from '../Common/ContentHeader';
+// import ContentHeader from '../Common/ContentHeader';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import Tabs from '../Common/Tabs';
@@ -14,6 +14,9 @@ import ModalDialog from '../Common/ModalDialog';
 import i18n from '../../locales/i18n';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import { delimitNumbers } from '../../utils/utils';
+import NumberFormat from '../Common/NumberFormat';
+import { sortProjectsByPrice } from '../../utils/currency';
+import _ from 'lodash';
 
 export default class SelectPlantProject extends Component {
   static data = {
@@ -46,57 +49,33 @@ export default class SelectPlantProject extends Component {
   }
 
   componentWillMount() {
-    let { plantProjects, currencies } = this.props;
-    currencies = currencies.currencies;
-    let featuredProjects = plantProjects.reduce((projects, project) => {
-      if (project.isFeatured) {
-        projects.push(project);
-      }
-      return projects;
-    }, []);
-    let priceSortedProjects = JSON.parse(JSON.stringify(plantProjects));
-    if (currencies) {
-      priceSortedProjects = priceSortedProjects.sort(function(a, b) {
-        return (
-          a.treeCost *
-            parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
-          b.treeCost *
-            parseFloat(currencies.currency_rates['EUR'].rates[b.currency])
-        );
-      });
-    }
-    this.setState({
-      filteredProjects: plantProjects,
-      featuredProjects: featuredProjects,
-      priceSortedProjects: priceSortedProjects
-    });
+    this.setState(this.initialStateFromProps(this.props));
   }
 
-  componentWillReceiveProps(nextProps) {
-    let { plantProjects, currencies } = nextProps;
-    currencies = currencies.currencies;
-    let featuredProjects = plantProjects.reduce((projects, project) => {
-      if (project.isFeatured) {
-        projects.push(project);
-      }
-      return projects;
-    }, []);
-    let priceSortedProjects = plantProjects;
-    if (currencies) {
-      priceSortedProjects = plantProjects.sort(function(a, b) {
-        return (
-          a.treeCost *
-            parseFloat(currencies.currency_rates['EUR'].rates[a.currency]) -
-          b.treeCost *
-            parseFloat(currencies.currency_rates['EUR'].rates[b.currency])
-        );
-      });
-    }
-    this.setState({
+  componentWillReceiveProps(props) {
+    this.setState(this.initialStateFromProps(props));
+  }
+
+  initialStateFromProps(props) {
+    const {
+      plantProjects,
+      currencies: { currencies }
+    } = props;
+
+    let featuredProjects = plantProjects.filter(project => project.isFeatured);
+    featuredProjects = _.orderBy(featuredProjects, 'created');
+
+    let priceSortedProjects = sortProjectsByPrice(
+      plantProjects,
+      true,
+      currencies
+    );
+
+    return {
       filteredProjects: plantProjects,
-      featuredProjects: featuredProjects,
-      priceSortedProjects: priceSortedProjects
-    });
+      featuredProjects,
+      priceSortedProjects
+    };
   }
 
   onInputChange = event => {
@@ -308,9 +287,10 @@ export default class SelectPlantProject extends Component {
                                 {delimitNumbers(parseInt(project.countPlanted))}
                               </td>
                               <td className="align-right">
-                                {project.currency +
-                                  ' ' +
-                                  project.treeCost.toFixed(2)}
+                                <NumberFormat
+                                  currency={project.currency}
+                                  data={project.treeCost.toFixed(2)}
+                                />
                               </td>
                               <td>
                                 <PrimaryButton
@@ -340,7 +320,7 @@ export default class SelectPlantProject extends Component {
                           {i18n.t('label.organisation')}
                         </th>
                         <th className="align-right">
-                          <span>{i18n.t('label.plantedTrees')}s</span>
+                          <span>{i18n.t('label.plantedTrees')}</span>
                         </th>
                         <th className="align-right">
                           <span>{i18n.t('label.Cost')}</span>
@@ -358,9 +338,10 @@ export default class SelectPlantProject extends Component {
                                 {delimitNumbers(parseInt(project.countPlanted))}
                               </td>
                               <td className="align-right">
-                                {project.currency +
-                                  ' ' +
-                                  project.treeCost.toFixed(2)}
+                                <NumberFormat
+                                  currency={project.currency}
+                                  data={project.treeCost.toFixed(2)}
+                                />
                               </td>
                               <td>
                                 <PrimaryButton
@@ -387,5 +368,6 @@ export default class SelectPlantProject extends Component {
 SelectPlantProject.propTypes = {
   plantProjects: PropTypes.array,
   currencies: PropTypes.object,
-  selectProject: PropTypes.func
+  selectProject: PropTypes.func,
+  navigation: PropTypes.object
 };

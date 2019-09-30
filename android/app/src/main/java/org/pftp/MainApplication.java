@@ -3,6 +3,9 @@ package org.pftp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+//import com.taessina.paypal.RNPaypalWrapperPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.bugsnag.BugsnagReactNative;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 //import com.gettipsi.stripe.StripeReactPackage;
@@ -31,7 +34,10 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
+            new MainReactPackage(),
+            new AsyncStoragePackage(),
+            //new RNPaypalWrapperPackage(),
+            new LinearGradientPackage(),
             BugsnagReactNative.getPackage(),
             new ReactNativeYouTube(),
            // new StripeReactPackage(),

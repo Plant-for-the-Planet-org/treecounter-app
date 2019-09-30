@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/competition/mine.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import imagestyles from '../../../styles/file_picker.native';
@@ -20,16 +19,9 @@ import PrimaryButton from '../../Common/Button/PrimaryButton';
 import UserProfileImage from '../../Common/UserProfileImage';
 import close_green from '../../../assets/images/icons/close_green.png';
 import imageUpload from '../../../assets/images/icons/upload_image.png';
+import ImagePicker from 'react-native-image-picker';
 
 let Form = t.form.Form;
-const ImagePicker = require('react-native-image-picker');
-const options = {
-  title: 'Add Image',
-  storageOptions: {
-    skipBackup: true,
-    path: 'images'
-  }
-};
 const getCompFormLayoutTemplate = () => {
   const formLayoutTreesTemplate = locals => {
     return (
@@ -60,6 +52,24 @@ const getCompFormImageLayoutTemplate = () => {
   console.log('formlayout');
   const formLayoutTreesTemplate = locals => {
     console.log(locals);
+
+    const options = {
+      title: i18n.t('label.add_image_title'),
+      cancelButtonTitle: i18n.t('label.cancel'),
+      takePhotoButtonTitle: i18n.t('label.take_photo'),
+      chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
+      'permissionDenied.title': i18n.t('label.permission_denied_title'),
+      'permissionDenied.text': i18n.t('label.permission_denied_text'),
+      'permissionDenied.reTryTitle': i18n.t(
+        'label.permission_denied_retry_title'
+      ),
+      'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
+      storageOptions: {
+        skipBackup: true,
+        path: 'images'
+      }
+    };
+
     return (
       <View style={imagestyles.filePickerContainer}>
         <View style={{ flex: 1 }}>
@@ -248,7 +258,7 @@ export default class MineCompetitions extends Component {
     ) : (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 72 }}
-        enableOnAndroid={true}
+        enableOnAndroid
       >
         <View style={styles.containerDedicateStyle}>
           <View style={styles.dedicateTreeName}>

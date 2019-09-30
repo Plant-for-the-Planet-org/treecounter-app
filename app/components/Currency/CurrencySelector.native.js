@@ -1,59 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 import i18n from '../../locales/i18n';
-import styles from '../../styles/currencies/currencyselector';
-import t from 'tcomb-form-native';
+// import styles from '../../styles/currencies/currencyselector';
+// import t from 'tcomb-form-native';
 import { Dropdown } from 'react-native-material-dropdown';
-import { getFormSchema } from '../../server/parsedSchemas/currencySelector';
+// import { getFormSchema } from '../../server/parsedSchemas/currencySelector';
 
-let Form = t.form.Form;
+// let Form = t.form.Form;
 
 const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
   // const {
   //   schemaOptions,
   //   transformedSchema: currencySelectorFormSchema
   // } = getFormSchema(currencies);
-  let currenciesArray = Object.keys(currencies);
-  let currenciesTitles = Object.values(currencies);
+  const currenciesArray = Object.keys(currencies);
+  const currenciesTitles = Object.values(currencies);
 
-  currenciesDropdownFormat = currenciesArray.map((item, index) => {
+  const currenciesDropdownFormat = currenciesArray.map((item, index) => {
     return { value: item, text: currenciesTitles[index] };
   });
+  const textColor = '#686060';
   return (
     <Dropdown
-      containerStyle={[
-        {
-          width: '100%',
-          marginLeft: 10,
-          marginBottom: 10,
-          paddingRight: 10,
-          elevation: 2
-        }
-      ]}
+      containerStyle={{
+        width: '100%',
+        marginLeft: 10,
+        marginBottom: 10,
+        paddingRight: 10,
+        elevation: 2
+      }}
       pickerStyle={{
         position: 'absolute',
-        maxHeight: Dimensions.get('window').height - 150,
-        marginTop: 'auto',
-        top:
-          Dimensions.get('window').height / 2 >=
-          currenciesDropdownFormat.length * 18
-            ? Dimensions.get('window').height / 2 -
-              currenciesDropdownFormat.length * 18
-            : 75,
-        alignSelf: 'center',
-        flex: 1,
+        maxHeight: Dimensions.get('window').height
+          ? Dimensions.get('window').height - 160
+          : 400,
+        top: 160,
         zIndex: 60
       }}
-      itemCount={20}
-      dropdownOffset={{
-        top: 10,
-        left: 0
-      }}
+      itemCount={10}
+      dropdownPosition={1}
       animationDuration={0}
       itemTextStyle={{
         fontSize: 13,
-        color: '#686060'
+        color: textColor
       }}
       initialNumToRender={currenciesDropdownFormat.length}
       value={i18n.t(selectedCurrency)}

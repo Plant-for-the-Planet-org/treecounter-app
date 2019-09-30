@@ -16,7 +16,7 @@ import {
   clearPlantProject
 } from '../../actions/selectPlantProjectAction';
 import { fetchCurrencies } from '../../actions/currencies';
-import { gift, paymentClear } from '../../actions/donateAction';
+import { createPaymentGift, paymentClear } from '../../actions/donateAction';
 
 import GiftTrees from '../../components/GiftTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
@@ -30,7 +30,9 @@ class GiftTreesContainer extends Component {
     this.state = { reloadTab: true };
   }
   componentDidMount() {
-    this.props.fetchCurrencies();
+    if (!this.props.currencies.currencies) {
+      this.props.fetchCurrencies();
+    }
   }
   openProjects(formValue, type) {
     //  console.log('in gif tree', formValue);
@@ -71,13 +73,12 @@ class GiftTreesContainer extends Component {
           selectedTpo={this.props.selectedTpo}
           currentUserProfile={this.props.currentUserProfile}
           currencies={this.props.currencies}
-          gift={(donationContribution, plantProjectId) =>
-            this.props.gift(donationContribution, plantProjectId, flag)
-          }
+          createPaymentGift={this.props.createPaymentGift}
           openProjects={this.openProjects}
           paymentStatus={this.props.paymentStatus}
           paymentClear={this.props.paymentClear}
           plantProjectClear={this.props.clearPlantProject}
+          key="gift-trees"
         />
       ) : null
     ];
@@ -97,7 +98,7 @@ const mapDispatchToProps = dispatch => {
     {
       selectPlantProjectAction,
       fetchCurrencies,
-      gift,
+      createPaymentGift,
       paymentClear,
       clearPlantProject
     },
@@ -114,7 +115,7 @@ GiftTreesContainer.propTypes = {
   currencies: PropTypes.object,
   paymentStatus: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
-  gift: PropTypes.func,
+  createPaymentGift: PropTypes.func,
   fetchCurrencies: PropTypes.func,
   paymentClear: PropTypes.func,
   clearPlantProject: PropTypes.func,

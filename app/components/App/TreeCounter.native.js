@@ -12,16 +12,19 @@ import { loadTpos } from '../../actions/loadTposAction';
 import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
+import { initLocale } from '../../actions/getLocale.native.js';
 
 class App extends Component {
   componentDidMount() {
+    initLocale();
     this.props.loadTpos();
   }
   render() {
+    const backgroundColor = 'white';
     return (
       <SafeAreaView
         forceInset={{ top: 'never' }}
-        style={{ flex: 1, backgroundColor: '#fff' }}
+        style={{ flex: 1, backgroundColor: backgroundColor }}
       >
         <AppDrawerNavigatorContainer />
       </SafeAreaView>

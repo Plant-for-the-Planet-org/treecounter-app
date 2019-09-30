@@ -1,3 +1,4 @@
+/* global paypal */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -22,7 +23,7 @@ class Paypal extends React.Component {
     const { isScriptLoaded, isScriptLoadSucceed } = this.props;
 
     if (isScriptLoaded && isScriptLoadSucceed) {
-      //this.setState({ showButton: true });
+      this.setState({ showButton: true });
     }
   }
 
@@ -42,6 +43,7 @@ class Paypal extends React.Component {
   };
 
   render() {
+    let paypal = window.paypal;
     const { amount, mode, currency, account, onSuccess } = this.props;
 
     const { showButton } = this.state;
@@ -50,9 +52,8 @@ class Paypal extends React.Component {
       [mode]: account.authorization.client_id
     };
 
-    const payment = () =>
-      // eslint-disable-next-line react/prop-types
-      paypal.rest.payment.create(mode, CLIENT, {
+    const payment = () => {
+      return paypal.rest.payment.create(mode, CLIENT, {
         transactions: [
           {
             amount: {
@@ -62,6 +63,7 @@ class Paypal extends React.Component {
           }
         ]
       });
+    };
 
     // see https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4/customize-button/
     const buttonStyle = {
@@ -70,6 +72,19 @@ class Paypal extends React.Component {
       label: 'pay', // checkout | credit | pay | buynow | paypal | installment
       size: 'large' // small | medium | large | responsive
     };
+
+    // const onAuthorize = (data, actions) =>
+    //   actions.payment.execute().then(() => {
+    //     const payment = Object.assign({}, this.props.payment);
+    //     payment.paid = true;
+    //     payment.cancelled = false;
+    //     payment.payerID = data.payerID;
+    //     payment.paymentID = data.paymentID;
+    //     payment.paymentToken = data.paymentToken;
+    //     payment.returnUrl = data.returnUrl;
+    //     onSuccess(payment);
+    //   });
+
     const onAuthorize = data => {
       onSuccess(data);
     };
@@ -93,7 +108,6 @@ class Paypal extends React.Component {
     let displayNone = classnames('centerize-paypal', {
       'display-none': !this.props.expanded
     });
-
     return (
       <form className="payment-option">
         <div onClick={this.handleArrowClick} className="payment-option-header">

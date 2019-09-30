@@ -24,6 +24,7 @@ export default class Menu extends Component {
   static propTypes = {
     menuData: PropTypes.array.isRequired,
     onPress: PropTypes.func,
+    selectPlantProjectAction: PropTypes.func,
     userProfile: PropTypes.any,
     navigation: PropTypes.any,
     lastRoute: PropTypes.any
@@ -144,6 +145,9 @@ export default class Menu extends Component {
           ),
         0
       );
+    } else if (urlBreak[urlBreak.length - 2] === 'donate-trees') {
+      this.props.selectPlantProjectAction(urlBreak[urlBreak.length - 1]);
+      setTimeout(() => updateRoute('app_selectProject', navigation, 0, {}), 0);
     } else {
       setTimeout(
         () => updateRoute('/' + urlBreak[urlBreak.length - 1], navigation, 0),

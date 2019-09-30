@@ -9,7 +9,7 @@ const Layout = {
 };
 const rowHeight = 20;
 
-export default (selectplantprojectFull = EStyleSheet.create({
+export default EStyleSheet.create({
   project_specs__taxdeductibleIcon: {
     width: 14,
     height: 14
@@ -183,4 +183,4 @@ export default (selectplantprojectFull = EStyleSheet.create({
     paddingBottom: 5,
     alignItems: 'center'
   }
-}));
+});

@@ -1,6 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-const PrimaryButton = ({ onClick, children, buttonStyle, textStyle }) => (
+import { View } from 'react-native';
+const borderColor = 'black';
+const PrimaryButton = ({
+  // onClick,
+  // children,
+  // buttonStyle,
+  // textStyle,
+  selected,
+  style
+}) => (
   <View
     style={[
       {
@@ -8,20 +17,20 @@ const PrimaryButton = ({ onClick, children, buttonStyle, textStyle }) => (
         width: 24,
         borderRadius: 12,
         borderWidth: 2,
-        borderColor: '#000',
+        borderColor: borderColor,
         alignItems: 'center',
         justifyContent: 'center'
       },
-      props.style
+      style
     ]}
   >
-    {props.selected ? (
+    {selected ? (
       <View
         style={{
           height: 12,
           width: 12,
           borderRadius: 6,
-          backgroundColor: '#000'
+          backgroundColor: borderColor
         }}
       />
     ) : null}

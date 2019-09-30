@@ -8,8 +8,8 @@ import styles from '../../styles/register_trees.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 const Form = t.form.Form;
-
-getFormLayoutTemplate = (mode, isTpo) => {
+const backgroundColor = 'white';
+const getFormLayoutTemplate = (mode, isTpo) => {
   const formLayoutTreesTemplate = locals => {
     return (
       <View style={styles.registerTree__form}>
@@ -71,9 +71,10 @@ export default class RegisterTreeTab extends PureComponent {
       template: getFormLayoutTemplate(this.props.mode, this.props.isTpo),
       ...this.props.schemaOptions
     };
+
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}>
-        <View style={{ backgroundColor: '#ffffff' }}>
+      <KeyboardAwareScrollView enableOnAndroid>
+        <View style={{ backgroundColor: backgroundColor }}>
           <Form
             ref="multipleTreesForm"
             type={this.props.schemaType}

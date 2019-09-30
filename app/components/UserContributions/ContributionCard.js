@@ -11,6 +11,7 @@ import { delimitNumbers } from '../../utils/utils';
 import moment from 'moment';
 import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
+import { getLocale } from '../../actions/getLocale';
 import { getDateFromMySQL } from '../../helpers/utils';
 
 export default class ContributionCard extends React.Component {
@@ -22,7 +23,7 @@ export default class ContributionCard extends React.Component {
       viewExpanded: false,
       openDialog: false
     };
-    moment.locale(i18n.language);
+    moment.locale(getLocale());
   }
 
   closeLightbox = () => this.setState({ lightboxIsOpen: false });
@@ -53,12 +54,13 @@ export default class ContributionCard extends React.Component {
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
       ? [
-          <TextSpan>
+          <TextSpan key={`donateActionLine_0`}>
             {i18n.t('label.gifted_on_to', {
               date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
             })}
           </TextSpan>,
           <TextSpan
+            key={`donateActionLine_1`}
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug
@@ -92,8 +94,11 @@ export default class ContributionCard extends React.Component {
   dedicateActionLine = (isGift, givee, giveeSlug) => {
     return isGift
       ? [
-          <TextSpan>{i18n.t('label.dedicated_to')}</TextSpan>,
+          <TextSpan key={`dedicateActionLine_0`}>
+            {i18n.t('label.dedicated_to')}
+          </TextSpan>,
           <TextSpan
+            key={`dedicateActionLine_1`}
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug
@@ -107,9 +112,9 @@ export default class ContributionCard extends React.Component {
   };
 
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
-    return redemptionCode && giver
+    return redemptionCode && givee
       ? [
-          <TextSpan>
+          <TextSpan key={`redeemActionLine_0`}>
             {i18n.t('label.given_on_by', {
               date: moment(getDateFromMySQL(redemptionDate)).format(
                 'DD MMM YYYY'
@@ -117,6 +122,7 @@ export default class ContributionCard extends React.Component {
             })}
           </TextSpan>,
           <TextSpan
+            key={`redeemActionLine_1`}
             onPress={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug
@@ -132,7 +138,7 @@ export default class ContributionCard extends React.Component {
           })
         : givee
           ? [
-              <TextSpan>
+              <TextSpan key={`redeemActionLine_2`}>
                 {i18n.t('label.dedicated_on_by', {
                   date: moment(getDateFromMySQL(redemptionDate)).format(
                     'DD MMM YYYY'
@@ -140,6 +146,7 @@ export default class ContributionCard extends React.Component {
                 })}
               </TextSpan>,
               <TextSpan
+                key={`redeemActionLine_3`}
                 onPress={() =>
                   updateRoute(getLocalRoute('app_treecounter'), {
                     treeCounterId: giveeSlug
@@ -235,9 +242,7 @@ export default class ContributionCard extends React.Component {
           }`}
         >
           <div className="contribution-container__left-column">
-            {treeCountLine ? (
-              <TextSpan strong={true}>{treeCountLine}</TextSpan>
-            ) : null}
+            {treeCountLine ? <TextSpan strong>{treeCountLine}</TextSpan> : null}
 
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {donateActionLine ? (
@@ -326,9 +331,7 @@ export default class ContributionCard extends React.Component {
           }`}
         >
           <div className="contribution-container__left-column">
-            {treeCountLine ? (
-              <TextSpan strong={true}>{treeCountLine}</TextSpan>
-            ) : null}
+            {treeCountLine ? <TextSpan strong>{treeCountLine}</TextSpan> : null}
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {plantActionLine ? <TextSpan>{plantActionLine}</TextSpan> : null}
             {dedicateActionLine ? (
@@ -439,9 +442,7 @@ export default class ContributionCard extends React.Component {
           }`}
         >
           <div className="contribution-container__left-column">
-            {treeCountLine ? (
-              <TextSpan strong={true}>{treeCountLine}</TextSpan>
-            ) : null}
+            {treeCountLine ? <TextSpan strong>{treeCountLine}</TextSpan> : null}
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {redeemActionLine ? <TextSpan>{redeemActionLine}</TextSpan> : null}
             {tpoLine ? <TextSpan>{tpoLine}</TextSpan> : null}

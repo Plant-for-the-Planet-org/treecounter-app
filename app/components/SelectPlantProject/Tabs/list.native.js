@@ -1,107 +1,79 @@
-import React, { Component } from 'react';
-import { View, Dimensions, TextInput, Image } from 'react-native';
+import PropTypes from 'prop-types';
+import React, { useMemo, useState } from 'react';
+import { Image, TextInput, View } from 'react-native';
 
-import styles from '../../../styles/selectplantproject/list';
-import CardLayout from '../../Common/Card';
 import { iosSearchGrey } from '../../../assets';
-import ListViewProjects from './listview';
-import Proptypes from 'prop-types';
-
 import i18n from '../../../locales/i18n.js';
+import styles from '../../../styles/selectplantproject/list';
+import ListViewProjects from './listview';
 
-export default class ListProjects extends Component {
-  constructor(props) {
-    super(props);
+const ListProjects = ({
+  plantProjects,
+  selectProject,
+  onMoreClick,
+  placeholderTextColor
+}) => {
+  const [search, setSearch] = useState('');
 
-    this.state = {
-      expanded: false,
-      filteredProjects: props.plantProjects,
-      priceSortedProjects: props.plantProjects,
-      searchFieldValue: '',
-      mode: 'name',
-      isOpen: false,
-      modalProject: null
-    };
-  }
-  componentWillMount() {
-    this.setState({
-      filteredProjects: this.props.plantProjects
-    });
-  }
-
-  callExpanded = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    });
-  };
-
-  _handleChangeText = event => {
-    let value = event.toLowerCase();
-    let { plantProjects } = this.props;
-    let filteredProjects = plantProjects.reduce((projects, project) => {
-      if (
-        project.name.toLowerCase().includes(value) ||
-        project.tpo_name.toLowerCase().includes(value)
-      ) {
-        projects.push(project);
+  // memoized: refilters if plantProjects or search string changes
+  const filteredProjects = useMemo(
+    () => {
+      if (!search) {
+        return plantProjects;
       }
-      return projects;
-    }, []);
-    this.setState({
-      filteredProjects: filteredProjects,
-      searchFieldValue: value
-    });
-  };
+      const s = search.toLocaleLowerCase();
+      return plantProjects.filter(
+        project =>
+          project.name.toLowerCase().includes(s) ||
+          project.tpo_name.toLowerCase().includes(s)
+      );
+    },
+    [plantProjects, search]
+  );
 
-  render() {
-    let { filteredProjects } = this.state;
-    return (
-      <View key={'listViewProject'} style={styles.flexContainer}>
-        <View style={styles.searchItem}>
-          <View style={[styles.searchContainer]}>
-            <TextInput
-              ref={view => {
-                this._textInput = view;
-              }}
-              clearButtonMode="while-editing"
-              underlineColorAndroid={'transparent'}
-              onChangeText={this._handleChangeText}
-              value={this.state.text}
-              autoCapitalize="none"
-              autoCorrect={false}
-              returnKeyType="search"
-              placeholder={i18n.t('label.searchshort')}
-              placeholderTextColor={this.props.placeholderTextColor || '#ccc'}
-              style={[styles.searchInput, { paddingVertical: 0 }]}
-              autoCapitalize={'sentences'}
+  return (
+    <View key={'listViewProject'} style={styles.flexContainer}>
+      <View style={styles.searchItem}>
+        <View style={[styles.searchContainer]}>
+          <TextInput
+            clearButtonMode="while-editing"
+            underlineColorAndroid={'transparent'}
+            onChangeText={setSearch}
+            value={search}
+            autoCorrect={false}
+            returnKeyType="search"
+            placeholder={i18n.t('label.searchshort')}
+            placeholderTextColor={placeholderTextColor || '#ccc'}
+            style={[styles.searchInput, { paddingVertical: 0 }]}
+            autoCapitalize={'sentences'}
+          />
+
+          <View style={styles.searchIconContainer}>
+            <Image
+              source={iosSearchGrey}
+              resizeMode="contain"
+              style={styles.searchIcon}
             />
-
-            <View style={styles.searchIconContainer}>
-              <Image
-                source={iosSearchGrey}
-                resizeMode="contain"
-                style={styles.searchIcon}
-              />
-            </View>
           </View>
         </View>
-
-        <View style={styles.listViewContainer}>
-          <ListViewProjects
-            projects={filteredProjects}
-            selectProject={projectId => this.props.selectProject(projectId)}
-            onMoreClick={(projectId, name) =>
-              this.props.onMoreClick(projectId, name)
-            }
-          />
-        </View>
       </View>
-    );
-  }
-}
+
+      <View style={styles.listViewContainer}>
+        <ListViewProjects
+          projects={filteredProjects}
+          selectProject={selectProject}
+          onMoreClick={onMoreClick}
+        />
+      </View>
+    </View>
+  );
+};
 
 ListProjects.propTypes = {
-  plantProjects: Proptypes.array.isRequired,
-  selectProject: Proptypes.func.isRequired,
-  onMoreClick: Proptypes.func.isRequired
+  plantProjects: PropTypes.array.isRequired,
+  selectProject: PropTypes.func.isRequired,
+  onMoreClick: PropTypes.func.isRequired,
+  placeholderTextColor: PropTypes.string
 };
+
+export default ListProjects;

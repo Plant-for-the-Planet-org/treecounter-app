@@ -11,7 +11,12 @@ import {
 
 import { SignupOrganization, SignupJustMe } from '../../../assets';
 import i18n from '../../../locales/i18n.js';
-
+const colors = {
+  borderColor: '#9c9b9b',
+  color: '#9c9b9b',
+  backgroundColor: '#95c243',
+  borderColor2: '#96c04c'
+};
 export class SignUpType extends Component {
   constructor(props) {
     super(props);
@@ -100,7 +105,7 @@ export class SignupTypes extends Component {
     return (
       <View style={styles.outerContainer}>
         <ScrollView
-          horizontal={true}
+          horizontal
           ref={ref => {
             this.scrollView = ref;
           }}
@@ -165,43 +170,37 @@ export const styles = StyleSheet.create({
   circle: {
     borderRadius: 35,
     borderWidth: 10,
-    borderColor: '#9c9b9b',
+    borderColor: colors.borderColor,
     height: 70
   },
   selectedCircle: {
     borderRadius: 50,
     borderWidth: 10,
-    borderColor: '#96c04c',
+    borderColor: colors.borderColor2,
     height: 99
   },
   selectedBottomTypeLabel: {
-    color: '#95c243',
+    color: colors.color,
     fontSize: 13,
     maxWidth: 99
   },
   bottomTypeLabel: {
-    color: '#9c9b9b',
+    color: colors.color,
     fontSize: 13,
     maxWidth: 90
   },
   selectedSeprater: {
-    backgroundColor: '#95c243',
+    backgroundColor: colors.backgroundColor,
     width: '100%',
     height: 2,
     marginTop: 3,
     marginBottom: 3
   },
   seprater: {
-    backgroundColor: '#9c9b9b',
+    backgroundColor: colors.borderColor,
     width: '100%',
     height: 2,
     marginTop: 3,
     marginBottom: 3
-  },
-  bottomContainer: {
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    flex: 1,
-    marginBottom: 10
   }
 });

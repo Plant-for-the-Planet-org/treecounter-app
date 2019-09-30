@@ -17,7 +17,6 @@ import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import ChallengeList from './challengeList';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
-import { delimitNumbers } from '../../utils/utils';
 
 let TCombForm = t.form.Form;
 const getFormLayoutTemplate = () => {
@@ -55,7 +54,7 @@ export default class Challenge extends Component {
     this.state = {
       form: {
         challengeMethod: 'direct',
-        goal: 100,
+        goal: 1000,
         endDate: 2020
       },
       tempForm: {},

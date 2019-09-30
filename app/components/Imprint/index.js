@@ -6,7 +6,6 @@ import {
   AccordionItemTitle,
   AccordionItemBody
 } from 'react-accessible-accordion';
-import renderHTML from 'react-render-html';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import TextHeading from '../../components/Common/Heading/TextHeading';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
@@ -17,11 +16,17 @@ import CardLayout from '../Common/Card';
 export default class Imprint extends Component {
   GetImprintList() {
     return this.props.imprints.map((imprint, i) => (
-      <AccordionItem expanded={true} key={'imprint' + i}>
+      <AccordionItem expanded key={'imprint' + i}>
         <AccordionItemTitle>
           <div className="u-position-relative">{imprint.title}</div>
         </AccordionItemTitle>
-        <AccordionItemBody>{renderHTML(imprint.description)}</AccordionItemBody>
+        <AccordionItemBody>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: imprint.description
+            }}
+          />
+        </AccordionItemBody>
       </AccordionItem>
     ));
   }

@@ -1,7 +1,7 @@
 {
   "sure": "Are you sure? ",
-  "delete_confirmation": "Once you confirm, all of your account data will be deleted. This can not be undone",
-  "password_changed": "Your password has been changed successfully",
+  "delete_confirmation": "Once you confirm, all of your account data will be deleted. This can not be undone.",
+  "password_changed": "Your password has been changed successfully.",
   "return_to_profile": "Return to My Profile",
   "set_password": "Set Password",
   "new_project": "Add New Project",
@@ -17,7 +17,7 @@
   "plant_project_delete_success": "Plant Project deleted successfully",
   "plant_project_added_success": "Plant Project created successfully",
   "plant_project_error_title": "Plant Project update error",
-  "same_password_error": "Please enter same password",
+  "same_password_error": "Please enter same password.",
   "basic_profile": "Basic",
   "profile_security": "Security",
   "deletion_warning_heading": " Deleting your account is permanent.",
@@ -28,5 +28,13 @@
   "new_project_added_successfully": "New project added successfully",
   "male": "Male",
   "female": "Female",
-  "other": "Other"
+  "other": "Other",
+  "add_image_title": "Add Image",
+  "cancel": "Cancel",
+  "take_photo": "Take photo...",
+  "choose_from_library": "Choose from Library...",
+  "permission_denied_title": "Permission denied",
+  "permission_denied_text": "No access grant to your camera or photo library.",
+  "permission_denied_retry_title": "Retry",
+  "permission_denied_ok_title": "I'm sure"
 }

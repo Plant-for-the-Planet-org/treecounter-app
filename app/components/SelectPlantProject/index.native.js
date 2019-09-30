@@ -1,42 +1,26 @@
-import React, { Component } from 'react';
-import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { View } from 'react-native';
+import { TabBar, TabView } from 'react-native-tab-view';
+
+import TabContainer from '../../containers/Menu/TabContainer';
+import i18n from '../../locales/i18n.js';
+import styles from '../../styles/common/tabbar';
+import CountryProjects from './Tabs/country.native';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 import PriceProjects from './Tabs/price';
-import styles from '../../styles/common/tabbar';
-import { Dimensions, View } from 'react-native';
-import CountryProjects from './Tabs/country.native';
-import TabContainer from '../../containers/Menu/TabContainer';
 
-import i18n from '../../locales/i18n.js';
-
-const Layout = {
-  window: {
-    width: Dimensions.get('window').width
-  }
-};
-
-export default class SelectPlantTabView extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      routes: [
-        { key: 'featured', title: i18n.t('label.featured') },
-        { key: 'list', title: i18n.t('label.list') },
-        { key: 'price', title: i18n.t('label.price') },
-        { key: 'country', title: i18n.t('label.country') }
-      ],
-      index: 0
-    };
-  }
-  componentDidMount() {}
-
-  indexChange(index) {
-    this.setState({
-      index: index
-    });
-  }
+export default class SelectPlantTabView extends PureComponent {
+  state = {
+    routes: [
+      { key: 'featured', title: i18n.t('label.featured') },
+      { key: 'list', title: i18n.t('label.list') },
+      { key: 'price', title: i18n.t('label.price') },
+      { key: 'country', title: i18n.t('label.country') }
+    ],
+    index: 0
+  };
 
   handleExpandedClicked = optionNumber => {
     this.setState({
@@ -44,15 +28,14 @@ export default class SelectPlantTabView extends Component {
     });
   };
 
-  _handleIndexChange = index => {
+  handleIndexChange = index => {
     this.setState({ index });
   };
 
-  _renderTabBar = props => {
+  renderTabBar = props => {
     return (
       <TabBar
         {...props}
-        indicatorStyle={styles.indicator}
         style={styles.tabBar}
         //tabStyle={{ width: Layout.window.width / 4 }}
         labelStyle={styles.textStyle}
@@ -64,16 +47,27 @@ export default class SelectPlantTabView extends Component {
     );
   };
 
-  _renderSelectPlantScene = ({ route }) => {
+  renderSelectPlantScene = ({ route }) => {
+    const {
+      plantProjects,
+      onMoreClick,
+      selectProject,
+      navigation
+    } = this.props;
+    // props for children
+    const props = { plantProjects, onMoreClick, selectProject, navigation };
+    const { index } = this.state;
+
+    // Only render a tab if it is focused
     switch (route.key) {
       case 'featured':
-        return <FeaturedProjects {...this.props} />;
+        return index === 0 && <FeaturedProjects {...props} />;
       case 'list':
-        return <ListProjects {...this.props} />;
+        return index === 1 && <ListProjects {...props} />;
       case 'price':
-        return <PriceProjects {...this.props} />;
+        return index === 2 && <PriceProjects {...props} />;
       case 'country':
-        return <CountryProjects {...this.props} />;
+        return index === 3 && <CountryProjects {...props} />;
       default:
         return null;
     }
@@ -85,9 +79,9 @@ export default class SelectPlantTabView extends Component {
         <TabView
           useNativeDriver
           navigationState={this.state}
-          renderScene={this._renderSelectPlantScene}
-          renderTabBar={this._renderTabBar}
-          onIndexChange={this._handleIndexChange}
+          renderScene={this.renderSelectPlantScene}
+          renderTabBar={this.renderTabBar}
+          onIndexChange={this.handleIndexChange}
         />
         {this.props.navigation.getParam('giftMethod') ? (
           <TabContainer {...this.props} />
@@ -96,3 +90,11 @@ export default class SelectPlantTabView extends Component {
     );
   }
 }
+
+SelectPlantTabView.propTypes = {
+  plantProjects: PropTypes.array,
+  currencies: PropTypes.object,
+  selectProject: PropTypes.func,
+  onMoreClick: PropTypes.func,
+  navigation: PropTypes.object
+};

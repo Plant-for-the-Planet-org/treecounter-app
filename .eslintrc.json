@@ -1,6 +1,14 @@
 {
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "parser": "babel-eslint",
-  "plugins": ["react", "react-native"],
+  "plugins": [
+    "react",
+    "react-native",
+    "json"
+  ],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -17,31 +25,25 @@
     "react-native/react-native": true,
     "node": true
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
     "eol-last": 2,
     "jsx-quotes": 2,
-    "no-underscore-dangle": [0],
-    "no-unused-vars": 0,
-    "no-undef": 0,
+    "no-constant-condition": 1,
+    "no-dupe-keys": 1,
+    "no-empty": 1,
+    "no-extra-boolean-cast": 1,
+    "no-prototype-builtins": 1,
+    "no-undef": 2,
+    "no-underscore-dangle": 1,
+    "no-unreachable": 1,
+    "no-unused-vars": 1,
+    "no-useless-escape": 1,
     "no-var": 2,
-    "react-native/no-unused-styles": 2,
-    "react-native/split-platform-components": 2,
-    "react-native/no-inline-styles": 2,
-    "react-native/no-color-literals": 0,
-    "react/display-name": 0,
-    "react/jsx-boolean-value": 0,
-    "react/jsx-no-undef": 0,
-    "react/jsx-sort-props": 0,
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/no-did-mount-set-state": 2,
-    "react/no-did-update-set-state": 2,
-    "react/no-multi-comp": 0,
-    "react/no-unknown-property": 2,
-    "react/prop-types": 2,
-    "react/react-in-jsx-scope": 2,
-    "react/self-closing-comp": 2,
-    "react/jsx-wrap-multilines": 2,
     "quotes": [
       2,
       "single",
@@ -50,6 +52,45 @@
         "allowTemplateLiterals": true
       }
     ],
-    "strict": [2, "global"]
-  }
+    "strict": [
+      2,
+      "global"
+    ],
+    "react-native/no-color-literals": 1, //
+    "react-native/no-inline-styles": 1,
+    "react-native/no-raw-text": 1, //
+    "react-native/no-unused-styles": 1, //
+    "react-native/split-platform-components": 1,
+    "react/display-name": 0,
+    "react/jsx-boolean-value": 2, //
+    "react/jsx-key": 2, //
+    "react/jsx-no-duplicate-props": 2, //
+    "react/jsx-no-target-blank": 2, //
+    "react/jsx-no-undef": 2, //
+    "react/jsx-sort-props": 0,
+    "react/jsx-wrap-multilines": 2,
+    "react/no-deprecated": 1,
+    "react/no-did-mount-set-state": 1,
+    "react/no-did-update-set-state": 1,
+    "react/no-find-dom-node": 1,
+    "react/no-multi-comp": 0,
+    "react/no-string-refs": 1,
+    "react/prop-types": 1,
+    "react/react-in-jsx-scope": 2,
+    "react/self-closing-comp": 2
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.native.js"
+      ],
+      "rules": {
+        "react-native/no-color-literals": 2,
+        "react-native/no-inline-styles": 1,
+        "react-native/no-raw-text": 2,
+        "react-native/no-unused-styles": 2,
+        "react-native/split-platform-components": 1
+      }
+    }
+  ]
 }

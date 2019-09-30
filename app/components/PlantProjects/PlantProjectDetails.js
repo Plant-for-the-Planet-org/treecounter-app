@@ -7,6 +7,8 @@ import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 
 import { context } from '../../../app/config/index';
 import VideoContainer from '../Common/VideoContainer';
+import NDVI from '../../containers/NDVI/NDVI';
+
 // import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 
 /**
@@ -20,7 +22,8 @@ class PlantProjectDetails extends React.Component {
       homepageCaption,
       plantProjectImages,
       videoUrl,
-      mapData
+      mapData,
+      ndviUid
     } = this.props;
 
     return (
@@ -43,6 +46,14 @@ class PlantProjectDetails extends React.Component {
             url={videoUrl}
           />
         )}
+        {
+          <div className={'ndvi-conatiner'}>
+            <NDVI
+              ndviUid={ndviUid}
+              onViewMoreClick={this.props.onViewMoreClick.bind(this)}
+            />
+          </div>
+        }
       </div>
     );
   }
@@ -56,7 +67,8 @@ PlantProjectDetails.propTypes = {
   mapData: PropTypes.object,
   plantProjectImages: PropTypes.array,
   onImageClick: PropTypes.func,
-  onViewMoreClick: PropTypes.func
+  onViewMoreClick: PropTypes.func,
+  ndviUid: PropTypes.string
 };
 
 export default PlantProjectDetails;

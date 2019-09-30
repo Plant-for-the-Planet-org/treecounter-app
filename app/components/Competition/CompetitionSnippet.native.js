@@ -15,16 +15,17 @@ import {
   userCompetitionEnrolledSelector,
   userTreecounterSelector
 } from '../../selectors';
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
+import { getLocale } from '../../actions/getLocale';
 import { getDateFromMySQL } from '../../helpers/utils';
 
 class CompetitionSnippet extends React.Component {
   constructor(props) {
     super(props);
-    moment.locale(i18n.language);
+    moment.locale(getLocale());
   }
 
   toggleExpanded(id) {

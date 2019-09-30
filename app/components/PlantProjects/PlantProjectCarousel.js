@@ -51,6 +51,7 @@ class PlantProjectCarousel extends React.Component {
               key={`plantProject-${plantProject.id}`}
               expanded={false}
               tpoName={tpoName}
+              tpoSlug={plantProject.tpoSlug}
               plantProject={plantProject}
             />
           </div>

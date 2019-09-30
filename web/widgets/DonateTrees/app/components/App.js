@@ -81,6 +81,7 @@ export default class App extends Component {
           }
           expanded={false}
           plantProject={result}
+          tpoSlug={result.tpoSlug}
           tpoName={treecounter.userProfile.fullname}
           selectAnotherProject={false}
           projectClear={undefined}

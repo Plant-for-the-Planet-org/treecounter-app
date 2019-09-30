@@ -45,6 +45,7 @@ class SelectedPlantProjectContainer extends Component {
           {...this.props}
           plantProject={this.props.selectedProject}
           tpoName={this.props.selectedTpo ? this.props.selectedTpo.name : null}
+          tpoSlug={this.props.selectedProject.tpoSlug}
           selectProject={id => this.selectProject(id)}
         />
       );

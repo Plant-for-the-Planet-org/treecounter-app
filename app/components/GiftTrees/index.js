@@ -494,6 +494,7 @@ export default class GiftTrees extends Component {
                     tpoName={this.props.selectedTpo.name}
                     selectAnotherProject
                     projectClear={this.props.plantProjectClear}
+                    tpoSlug={this.props.selectedProject.tpoSlug}
                   />
                 )
               ) : null}

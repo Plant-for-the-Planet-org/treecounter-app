@@ -207,6 +207,11 @@ export function updateEmail(newEmail) {
           if (res.data && res.data instanceof Object) {
             dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
           }
+          NotificationManager.success(
+            i18n.t('label.confirmation_email_will_be_send'),
+            i18n.t('label.success'),
+            5000
+          );
           resolve(res.data);
           dispatch(setProgressModelState(false));
         })
@@ -215,7 +220,15 @@ export function updateEmail(newEmail) {
           reject(err);
           if (err.response.data.code === 400) {
             NotificationManager.error(
-              err.response.data.errors.children.newEmail.errors[0],
+              err.response.data.errors.children.newEmail.errors
+                ? err.response.data.errors.children.newEmail.errors[0]
+                : err.response.data.errors.children.newEmail.children.first
+                  ? err.response.data.errors.children.newEmail.children.first
+                      .errors[0]
+                  : err.response.data.errors.children.newEmail.children.second
+                    ? err.response.data.errors.children.newEmail.children.second
+                        .errors[0]
+                    : 'label.error',
               i18n.t('label.error'),
               5000
             );

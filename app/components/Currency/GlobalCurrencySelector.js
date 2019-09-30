@@ -41,7 +41,8 @@ class GlobalCurrencySelector extends Component {
       console.log('got fron fetch', curreniesData);
     }
     console.log('setting', this.state);
-    this.props.setCurrencyAction(this.state.preferredCurrency);
+    this.state.preferredCurrency &&
+      this.props.setCurrencyAction(this.state.preferredCurrency);
   }
   updateState(data) {
     this.setState(data);

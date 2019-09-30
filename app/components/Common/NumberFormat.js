@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { currenciesSelector, getCurrency } from '../../selectors';
 import { getPreferredCurrency } from '../../actions/globalCurrency';
 import { formatNumber } from '../../utils/utils';
+
 const NumberFormat = ({
   data,
   locale,
@@ -13,7 +14,6 @@ const NumberFormat = ({
   currencies,
   globalCurrency
 }) => {
-  // console.group('gloabl currency in numberformat', globalCurrency.currency)
   if (!userProfile) {
     userProfile = {
       currency: globalCurrency.currency || getPreferredCurrency()

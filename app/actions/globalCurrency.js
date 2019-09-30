@@ -1,9 +1,7 @@
 import { saveItem, getItemSync } from '../stores/localStorage';
 import { setCurrency } from '../reducers/currencyReducer';
+import { context } from '../config';
 let cache = { currency: '' };
-export function init() {
-  cache.currency = guess();
-}
 
 export function getPreferredCurrency() {
   if (!cache.currency) {
@@ -13,14 +11,9 @@ export function getPreferredCurrency() {
 }
 
 function guess() {
-  // will implement default currency or initialization here
-  try {
-    cache.currency = getItemSync('preferredCurrency');
-    saveItem('preferredCurrency', cache.currency || 'EUR');
-    return cache.currency;
-  } catch (error) {
-    return cache.currency || 'EUR';
-  }
+  cache.currency = getItemSync('preferredCurrency') || context.currency;
+  !cache.currency && saveItem('preferredCurrency', cache.currency);
+  return cache.currency;
 }
 
 export function setCurrencyAction(data) {

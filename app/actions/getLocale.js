@@ -24,13 +24,14 @@ function guessLocale() {
   const languageCached = localStorage.getItem('language');
 
   // order of language detection
-  // 1. use language from URL if specified as _locale=de
+  // 1. use language from URL if specified as _locale=de // if not in ['en','de'] we set as 'en'
   // 2. use default language English if URL contains ?noredirect
   // 3. use user chosen language from local storage if available
   // 4. use browser language if possible, but currently only de and en
   // 5. use English as default language
   if (_locale.includes('_locale')) {
-    return _locale.split('=')[1];
+    const tempLocale = _locale.split('=')[1];
+    return tempLocale.includes(['en', 'de']) ? tempLocale : 'en';
   } else if (_locale.includes('?noredirect')) {
     return 'en';
   } else if (languageCached !== null) {

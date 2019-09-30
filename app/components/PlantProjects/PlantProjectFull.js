@@ -158,7 +158,7 @@ class PlantProjectFull extends React.Component {
               {console.log(
                 'specprops',
                 specsProps.treeCost,
-                specsProps.currency
+                JSON.stringify(specsProps.currency)
               )}
               <NumberFormat
                 data={specsProps.treeCost}

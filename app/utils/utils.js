@@ -1,6 +1,7 @@
 import { getLocale } from '../actions/getLocale';
 import { Intl } from '../locales/Intl';
 import i18n from '../locales/i18n.js';
+import { getPreferredCurrency } from '../actions/globalCurrency';
 
 export function delimitNumbers(str) {
   if (!isNaN(parseInt(str))) return formatNumber(str);
@@ -23,7 +24,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
     let style = { maximumFractionDigits: 2 };
     if (currency) {
       style.style = 'currency';
-      style.currency = currency;
+      style.currency = getPreferredCurrency();
       if (userProfile && userProfile.currency) {
         style.currency = userProfile.currency;
         if (
@@ -38,7 +39,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
         }
       }
     }
-    // console.log('got numberformat', data, locale, currency, style)
+    console.log('got numberformat', data, locale, currency, style, userProfile);
     return new Intl.NumberFormat(locale, style).format(data);
   } catch (error) {
     console.error(error);

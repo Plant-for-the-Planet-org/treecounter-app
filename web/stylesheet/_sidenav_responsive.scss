@@ -35,13 +35,12 @@ $breakpointTablet: 768px;
 }
 .badge-wrapper {
   max-height: 100px;
-  max-width: 98%;
+  max-width: 96%;
   display: flex;
   flex-wrap: wrap;
   position: relative;
   bottom: 0;
-  margin-left:3px;
-  margin-top: auto;
+  margin:15px auto;
   flex-direction: row;
   a {
     max-width: 100%;
@@ -55,31 +54,43 @@ $breakpointTablet: 768px;
     justify-content: center;
     flex-direction: column;
     width: 50%;
+    margin-top: 4px;
+    // margin:8px;
+    margin-bottom: 4px;
+    box-sizing: border-box;
   }
   .global-selector > div {
       display: flex;
       justify-content: center;
       flex-direction: row;
       padding: 2px;
+      box-sizing: border-box;
       select{
-        height: 2.3rem
+        height: 2.3rem;
+        width: 100%;
+        padding: 10px;
       }
   }
 .language { 
   max-height: 40px;
-  width: 60%; 
+  width: 62%; 
   border: 1px solid #686060;
-  border-radius: 4px;
+  border-radius: 9px;
   box-sizing: border-box;
   & > div{
     margin:0px
   }
 }
-.currency {height:40px;  width: 40%; }
-
-}
-@media only screen and (min-width: 1400px) {
-  .badge-wrapper {
-    position: absolute;
+  .currency {
+    height:40px;  width: 38%; 
+    & > div{
+      margin-right: 0px;
+      box-sizing: border-box;
+      margin-left: 4px;
+    }
+    select {
+        border-radius: 9px;
+      }
   }
+
 }

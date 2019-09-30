@@ -1,4 +1,4 @@
-import LocalStorage from '../stores/localStorage';
+import { getItemSync } from '../stores/localStorage';
 let cache = { locale: undefined };
 
 /**
@@ -21,7 +21,7 @@ export function getLocale() {
 function guessLocale() {
   const location = window.location.href.split('/');
   const _locale = location[location.length - 1];
-  const languageCached = localStorage.getItem('language');
+  const languageCached = getItemSync('language');
 
   // order of language detection
   // 1. use language from URL if specified as _locale=de // if not in ['en','de'] we set as 'en'
@@ -31,7 +31,7 @@ function guessLocale() {
   // 5. use English as default language
   if (_locale.includes('_locale')) {
     const tempLocale = _locale.split('=')[1];
-    return tempLocale.includes(['en', 'de']) ? tempLocale : 'en';
+    return ['en', 'de'].includes(tempLocale) ? tempLocale : 'en';
   } else if (_locale.includes('?noredirect')) {
     return 'en';
   } else if (languageCached !== null) {

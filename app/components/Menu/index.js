@@ -41,12 +41,16 @@ const customStyles = {
     display: 'flex',
     cursor: 'pointer'
   }),
+
   indicatorSeparator: () => ({
     display: 'none'
   }),
+  indicatorContainer: () => ({
+    padding: '5px'
+  }),
   option: () => ({
     display: 'flex',
-    padding: '10px',
+    padding: '5px',
     width: '100px'
   }),
   menu: provided => ({
@@ -256,26 +260,22 @@ class Menu extends Component {
             updateUserProfile={this.props.updateUserProfile}
           />
           <div className="global-selector">
-            <div>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://apps.apple.com/app/plant-for-the-planet/id1444740626"
-              >
-                <img src={images['appleStoreBadge_' + userLang]} />
-              </a>
-            </div>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://apps.apple.com/app/plant-for-the-planet/id1444740626"
+            >
+              <img src={images['appleStoreBadge_' + userLang]} />
+            </a>
           </div>
           <div className="global-selector">
-            <div>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://play.google.com/store/apps/details?id=org.pftp"
-              >
-                <img src={images['googlePlayBadge_' + userLang]} />
-              </a>
-            </div>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://play.google.com/store/apps/details?id=org.pftp"
+            >
+              <img src={images['googlePlayBadge_' + userLang]} />
+            </a>
           </div>
         </div>
       </div>

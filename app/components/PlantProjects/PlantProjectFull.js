@@ -85,6 +85,7 @@ class PlantProjectFull extends React.Component {
 
     const teaserProps = {
       tpoName: this.props.tpoName,
+      tpoSlug: this.props.tpoSlug,
       projectName,
       isCertified,
       projectImage
@@ -142,7 +143,7 @@ class PlantProjectFull extends React.Component {
           {teaserProps.tpoName && (
             <div className="row">
               <div className="teaser__tpoHeading">
-                <a onClick={() => this.updateRoute(teaserProps.tpoName)}>
+                <a onClick={() => this.updateRoute(teaserProps.tpoSlug)}>
                   {i18n.t('label.by_a_name') + ' ' + teaserProps.tpoName}
                 </a>
               </div>

@@ -187,6 +187,7 @@ export default class SelectPlantProject extends Component {
                 expanded={false}
                 plantProject={this.state.modalProject}
                 tpoName={this.state.modalProject.tpo_name}
+                tpoSlug={this.state.modalProject.tpoSlug}
               />
             ) : null}
             <div className="select-project_button__container">
@@ -219,6 +220,7 @@ export default class SelectPlantProject extends Component {
                       expanded={false}
                       plantProject={project}
                       tpoName={project.tpo_name}
+                      tpoSlug={project.tpoSlug}
                     />
                     <div className="select-project_button__container">
                       <PrimaryButton

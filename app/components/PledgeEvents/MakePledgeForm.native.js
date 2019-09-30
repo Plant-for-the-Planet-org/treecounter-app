@@ -122,8 +122,6 @@ class MakePledgeForm extends Component {
 
           //saveItem('pledgedEvent', JSON.stringify(date));
 
-          console.log(showAsyncStorageContentInDev());
-
           // updateStaticRoute('app_pledge_events', this.props.navigation, {
           //   slug: this.props.navigation.getParam('slug'),
           //   plantProject: this.props.navigation.getParam('plantProject'),

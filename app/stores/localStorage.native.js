@@ -44,7 +44,9 @@ export const fetchItem = async key => {
 export const getItem = async key => {
   return await AsyncStorage.getItem(key);
 };
-
+export const getItemSync = key => {
+  return window.localStorage.getItem(key);
+};
 export const clearStorage = async () => {
   const welcomeKey = await fetchItem('welcome');
   //console.log(welcomeKey);

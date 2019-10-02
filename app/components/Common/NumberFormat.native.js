@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { currentUserProfileSelector } from '../../selectors';
 import { connect } from 'react-redux';
 import { currenciesSelector, getCurrency } from '../../selectors';
-import { getPreferredCurrency } from '../../actions/globalCurrency.native';
 import { formatNumber } from '../../utils/utils';
 
-const NumberFormat = async ({
+const NumberFormat = ({
   data,
   locale,
   currency,

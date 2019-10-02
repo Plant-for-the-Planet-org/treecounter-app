@@ -1,7 +1,6 @@
 import { getLocale } from '../actions/getLocale';
 import { Intl } from '../locales/Intl';
 import i18n from '../locales/i18n.js';
-import { getPreferredCurrency } from '../actions/globalCurrency';
 
 export function delimitNumbers(str) {
   if (!isNaN(parseInt(str))) return formatNumber(str);

@@ -8,7 +8,7 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n';
 import { Dimensions, View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject.native';
-import NumberFormat from '../Common/NumberFormat';
+import NumberFormat from '../Common/NumberFormat.native';
 import { delimitNumbers } from '../../utils/utils';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 

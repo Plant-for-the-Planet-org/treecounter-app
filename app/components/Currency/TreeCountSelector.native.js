@@ -9,7 +9,7 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel
 } from 'react-native-simple-radio-button';
-import NumberFormat from '../Common/NumberFormat';
+import NumberFormat from '../Common/NumberFormat.native';
 import { formatNumber, delimitNumbers } from '../../utils/utils';
 
 class TreeCountSelector extends React.Component {

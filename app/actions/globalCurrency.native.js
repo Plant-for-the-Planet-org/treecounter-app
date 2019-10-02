@@ -1,24 +1,25 @@
-import { saveItem, getItemSync } from '../stores/localStorage';
+import { saveItem, getItem } from '../stores/localStorage.native';
 import { setCurrency } from '../reducers/currencyReducer';
 import { context } from '../config';
 let cache = { currency: '' };
 
-export function getPreferredCurrency() {
+export async function getPreferredCurrency() {
   if (!cache.currency) {
-    guess();
+    await guess();
   }
   return cache.currency;
 }
 
-function guess() {
-  cache.currency = getItemSync('preferredCurrency') || context.currency;
-  !cache.currency && saveItem('preferredCurrency', cache.currency);
+async function guess() {
+  cache.currency = await getItem('preferredCurrency');
+  cache.currency = cache.currency || context.currency;
+  cache.currency && (await saveItem('preferredCurrency', cache.currency));
   return cache.currency;
 }
 
 export function setCurrencyAction(data) {
   return dispatch => {
-    saveItem('preferredCurrency', data);
     dispatch(setCurrency(data));
+    saveItem('preferredCurrency', data);
   };
 }

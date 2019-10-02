@@ -24,7 +24,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
     let style = { maximumFractionDigits: 2 };
     if (currency) {
       style.style = 'currency';
-      style.currency = getPreferredCurrency();
+      style.currency = currency;
       if (userProfile && userProfile.currency) {
         style.currency = userProfile.currency;
         if (
@@ -39,7 +39,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
         }
       }
     }
-    console.log('got numberformat', data, locale, currency, style, userProfile);
+    // console.log('got numberformat', data, locale, currency, style, userProfile);
     return new Intl.NumberFormat(locale, style).format(data);
   } catch (error) {
     console.error(error);

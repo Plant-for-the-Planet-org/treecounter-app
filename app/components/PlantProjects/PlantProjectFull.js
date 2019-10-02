@@ -155,11 +155,6 @@ class PlantProjectFull extends React.Component {
           </div>
           <div className="project-specs__cost">
             <span>
-              {console.log(
-                'specprops',
-                specsProps.treeCost,
-                JSON.stringify(specsProps.currency)
-              )}
               <NumberFormat
                 data={specsProps.treeCost}
                 currency={specsProps.currency}

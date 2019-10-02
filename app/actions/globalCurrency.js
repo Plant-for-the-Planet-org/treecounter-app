@@ -12,7 +12,7 @@ export function getPreferredCurrency() {
 
 function guess() {
   cache.currency = getItemSync('preferredCurrency') || context.currency;
-  !cache.currency && saveItem('preferredCurrency', cache.currency);
+  cache.currency && saveItem('preferredCurrency', cache.currency);
   return cache.currency;
 }
 

@@ -9,7 +9,6 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel
 } from 'react-native-simple-radio-button';
-import NumberFormat from '../Common/NumberFormat.native';
 import { formatNumber, delimitNumbers } from '../../utils/utils';
 
 class TreeCountSelector extends React.Component {
@@ -156,10 +155,11 @@ class TreeCountSelector extends React.Component {
                   </View>
                   <View style={styles.treecount_price_conversion_text_input}>
                     <Text style={{ width: '100%' }} key={treeCount}>
-                      <NumberFormat
-                        data={treeCountToAmount(treeCount)}
-                        currency={currency}
-                      />
+                      {formatNumber(
+                        treeCountToAmount(treeCount),
+                        null,
+                        currency
+                      )}
                     </Text>
                   </View>
                 </View>

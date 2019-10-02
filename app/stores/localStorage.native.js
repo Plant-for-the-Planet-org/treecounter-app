@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export const loadState = async () => {
   try {
@@ -44,7 +44,9 @@ export const fetchItem = async key => {
 export const getItem = async key => {
   return await AsyncStorage.getItem(key);
 };
-
+export const getItemSync = async key => {
+  return await AsyncStorage.getItem(key);
+};
 export const clearStorage = async () => {
   const welcomeKey = await fetchItem('welcome');
   //console.log(welcomeKey);

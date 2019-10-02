@@ -43,7 +43,9 @@ export const fetchItem = key => {
 export const getItem = async key => {
   return window.localStorage.getItem(key);
 };
-
+export const getItemSync = key => {
+  return window.localStorage.getItem(key);
+};
 export const clearStorage = () => {
   const sessionId = window.localStorage.getItem('session_id');
   window.localStorage.clear();

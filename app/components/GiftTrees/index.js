@@ -541,6 +541,11 @@ export default class GiftTrees extends Component {
                   }
                   amount={this.state.selectedAmount}
                   currency={this.state.selectedCurrency}
+                  paymentDetails={{
+                    amount: this.state.selectedAmount,
+                    currency: this.state.selectedCurrency,
+                    treeCount: this.state.selectedTreeCount
+                  }}
                   expandedOption={this.state.expandedOption}
                   handleExpandedClicked={this.handleExpandedClicked}
                   context={{

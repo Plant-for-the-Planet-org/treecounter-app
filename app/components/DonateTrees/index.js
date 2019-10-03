@@ -525,6 +525,7 @@ export default class DonateTrees extends Component {
                 </div>
 
                 <div>
+                  {/* {console.log('PaymentStatus', this.props.paymentStatus)} */}
                   {this.props.selectedTpo ? (
                     <PaymentSelector
                       paymentMethods={paymentMethods}

@@ -34,6 +34,9 @@ class GiftTreesContainer extends Component {
       this.props.fetchCurrencies();
     }
   }
+  componentWillReceiveProps(nextProps) {
+    // console.log('changed props in gift container', nextProps)
+  }
   openProjects(formValue, type) {
     //  console.log('in gif tree', formValue);
     let title = '';

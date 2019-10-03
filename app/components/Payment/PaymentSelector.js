@@ -99,6 +99,7 @@ class PaymentSelector extends Component {
             setProgressModelState(false);
           });
       } else {
+        setProgressModelState(false);
         this.props.paymentFailed({
           status: false,
           message: 'donation id missing error'
@@ -170,6 +171,7 @@ class PaymentSelector extends Component {
     if (gatewayProps.context.supportTreecounter) {
       giftToName = gatewayProps.context.supportTreecounter.displayName;
     }
+    // console.log(paymentDetails, paymentMethods)
     return paymentMethods ? (
       <div className="payment_options__wrapper">
         <div className="payment_option_details">
@@ -203,6 +205,11 @@ class PaymentSelector extends Component {
         {Object.keys(paymentMethods).map(gateway => {
           const accountName = paymentMethods[gateway];
           if ('stripe_cc' === gateway) {
+            const donationId = this.props.donationId
+              ? this.props.donationId
+              : this.props.paymentStatus
+                ? this.props.paymentStatus.contribution[0].id
+                : undefined;
             return (
               <div key={gateway}>
                 {this.state.errorMessage ? (
@@ -217,7 +224,7 @@ class PaymentSelector extends Component {
                   paymentDetails={this.props.paymentDetails}
                   account={accounts[accountName]}
                   accountName={accountName}
-                  donationId={this.props.donationId}
+                  donationId={donationId}
                   reinitiateStripe={this.reinitiateStripe}
                   stripePublishableKey={this.props.stripePublishableKey}
                   paymentFailed={this.props.paymentFailed}

@@ -541,6 +541,7 @@ export default class GiftTrees extends Component {
                   }
                   amount={this.state.selectedAmount}
                   currency={this.state.selectedCurrency}
+                  paymentStatus={this.props.paymentStatus}
                   paymentDetails={{
                     amount: this.state.selectedAmount,
                     currency: this.state.selectedCurrency,

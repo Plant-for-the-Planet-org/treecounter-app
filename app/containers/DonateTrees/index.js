@@ -45,7 +45,9 @@ class DonationTreesContainer extends PureComponent {
     // console.log('In donate Tree Route' + this.props.navigation);
     // console.log(this.props.navigation);
   }
-
+  componentWillReceiveProps(nextProps) {
+    // console.log('changed props in donate container', nextProps)
+  }
   onTabChange = title => this.props.navigation.setParams({ titleParam: title });
 
   updateRoute = (routeName, id) =>

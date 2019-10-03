@@ -15,6 +15,7 @@ import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import { paymentFee } from '../../helpers/utils';
+import { getPreferredCurrency } from '../../actions/globalCurrency';
 
 import {
   individualSchemaOptions,
@@ -264,9 +265,8 @@ export default class GiftTrees extends Component {
     const userCurrency =
       null === currentUserProfile ? null : currentUserProfile.currency;
 
-    return null === userCurrency ? selectedProject.currency : userCurrency;
+    return null === userCurrency ? getPreferredCurrency() : userCurrency;
   }
-
   handleModeUserChange(tab) {
     this.setState({
       modeUser: tab,

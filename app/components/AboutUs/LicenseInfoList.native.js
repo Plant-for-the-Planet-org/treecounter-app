@@ -5,7 +5,6 @@ import Accordion from 'react-native-collapsible/Accordion';
 import { foldin, foldout } from '../../assets';
 import { Text, View, ScrollView, Image, Linking } from 'react-native';
 import styles from '../../styles/faq';
-import DeviceInfo from 'react-native-device-info';
 import i18n from '../../locales/i18n';
 import TouchableItem from '../../components/Common/TouchableItem';
 
@@ -37,9 +36,8 @@ export default class LicenseInfoList extends Component {
       <View style={styles.content}>
         <TouchableItem
           onPress={() => {
-            // eslint-disable-next-line no-unused-vars
             Linking.openURL(licenseFileUrl).catch(err => {
-              //console.log(err);
+              console.log(err);
             });
           }}
         >
@@ -48,9 +46,8 @@ export default class LicenseInfoList extends Component {
         {publisher ? <Text>{'Publisher : ' + publisher}</Text> : null}
         <TouchableItem
           onPress={() => {
-            // eslint-disable-next-line no-unused-vars
             Linking.openURL(repoPath).catch(err => {
-              // console.log(err);
+              console.log(err);
             });
           }}
         >
@@ -60,8 +57,7 @@ export default class LicenseInfoList extends Component {
     );
   };
   render() {
-    // eslint-disable-next-line no-unused-vars
-    const version = DeviceInfo.getReadableVersion();
+    // const version = DeviceInfo.getReadableVersion();
     const { appLicenses } = this.props.navigation.getParam('licenseList', {
       appLicenses: {}
     });

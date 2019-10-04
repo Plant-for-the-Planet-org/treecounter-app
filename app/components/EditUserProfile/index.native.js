@@ -159,7 +159,6 @@ export default class EditUserProfile extends Component {
                       <FollowLabelButton
                         label={i18n.t('label.unsubscribe')}
                         isSubscribed
-                        isLoggedIn={false}
                         onClick={() => {
                           this.props.unfollowUser(follow.id);
                         }}

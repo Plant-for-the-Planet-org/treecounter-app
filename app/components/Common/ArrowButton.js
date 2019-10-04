@@ -16,10 +16,9 @@ class ArrowButton extends Component {
   }
 
   render() {
-    // eslint-disable-next-line no-unused-vars
-    let arrowStyles = {
+    /* let arrowStyles = {
       transform: 'rotate(90deg)'
-    };
+    }; */
     return (
       <button
         className="arrow-button-rotatable"

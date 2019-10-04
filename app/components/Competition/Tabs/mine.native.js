@@ -18,33 +18,32 @@ import imageUpload from '../../../assets/images/icons/upload_image.png';
 import ImagePicker from 'react-native-image-picker';
 
 let Form = t.form.Form;
-// eslint-disable-next-line no-unused-vars
-const getCompFormLayoutTemplate = () => {
-  const formLayoutTreesTemplate = locals => {
-    return (
-      <View style={styles.competitonCreateMain}>
-        {locals.inputs.name}
-        <View style={styles.competition_create_row}>
-          <View style={{ flex: 1 }}>{locals.inputs.goal}</View>
-          <View style={{ flex: 1 }}>{locals.inputs.endDate}</View>
-        </View>
-        <View style={styles.competition_create_row}>
-          <View style={{ flex: 1 }}>{locals.inputs.access}</View>
-        </View>
-        <View style={styles.competition_image}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.addImageTextStyle}>
-              {i18n.t('label.add_image')}
-            </Text>
-          </View>
-          <View style={{ flex: 1 }}>{locals.input.imageFile}</View>
-        </View>
-        {locals.inputs.description}
-      </View>
-    );
-  };
-  return formLayoutTreesTemplate;
-};
+// const getCompFormLayoutTemplate = () => {
+//   const formLayoutTreesTemplate = locals => {
+//     return (
+//       <View style={styles.competitonCreateMain}>
+//         {locals.inputs.name}
+//         <View style={styles.competition_create_row}>
+//           <View style={{ flex: 1 }}>{locals.inputs.goal}</View>
+//           <View style={{ flex: 1 }}>{locals.inputs.endDate}</View>
+//         </View>
+//         <View style={styles.competition_create_row}>
+//           <View style={{ flex: 1 }}>{locals.inputs.access}</View>
+//         </View>
+//         <View style={styles.competition_image}>
+//           <View style={{ flex: 1 }}>
+//             <Text style={styles.addImageTextStyle}>
+//               {i18n.t('label.add_image')}
+//             </Text>
+//           </View>
+//           <View style={{ flex: 1 }}>{locals.input.imageFile}</View>
+//         </View>
+//         {locals.inputs.description}
+//       </View>
+//     );
+//   };
+//   return formLayoutTreesTemplate;
+// };
 const getCompFormImageLayoutTemplate = () => {
   console.log('formlayout');
   const formLayoutTreesTemplate = locals => {

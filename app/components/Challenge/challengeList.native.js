@@ -15,8 +15,7 @@ class ChallengeList extends Component {
       />
     );
   }
-  // eslint-disable-next-line no-unused-vars
-  _keyExtractor = (item, index) => item.id.toString();
+  _keyExtractor = item => item.id.toString();
 
   _renderItem = ({ item }) => (
     <ChallengeCard

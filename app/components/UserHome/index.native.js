@@ -8,8 +8,7 @@ import {
   Image,
   Linking
 } from 'react-native';
-// eslint-disable-next-line no-unused-vars
-import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import { TabView, TabBar } from 'react-native-tab-view';
 
 import styles from '../../styles/user-home';
 import tabStyles from '../../styles/common/tabbar';

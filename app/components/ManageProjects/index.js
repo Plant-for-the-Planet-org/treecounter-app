@@ -87,10 +87,11 @@ class CollapsiblePlantProject extends Component {
                 <img
                   src={baselineEdit}
                   className="icon"
-                  // eslint-disable-next-line no-unused-vars
-                  onClick={event => {
-                    this.togglePicker();
-                  }}
+                  onClick={
+                    (/* event */) => {
+                      this.togglePicker();
+                    }
+                  }
                 />
                 <img
                   src={baselineDelete}
@@ -293,7 +294,7 @@ export default class ManageProjects extends Component {
 
   render() {
     // eslint-disable-next-line no-unused-vars
-    const { type, image } = this.props.currentUserProfile;
+    const { type /* , image */ } = this.props.currentUserProfile;
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
         {type == 'tpo' ? (

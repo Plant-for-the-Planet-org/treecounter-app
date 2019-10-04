@@ -66,20 +66,20 @@ export default class UserContributions extends React.Component {
   };
 
   render() {
-    // eslint-disable-next-line no-unused-vars
-    const { userProfileId, userContributions } = this.props;
+    // const { userProfileId, userContributions } = this.props;
     return (
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.headContainer}>
           <PrimaryButton
-            // eslint-disable-next-line no-unused-vars
-            onClick={event => {
-              setTimeout(() => {
-                this.props.navigation.navigate(
-                  getLocalRoute('app_registerTrees')
-                );
-              }, 0);
-            }}
+            onClick={
+              (/* event */) => {
+                setTimeout(() => {
+                  this.props.navigation.navigate(
+                    getLocalRoute('app_registerTrees')
+                  );
+                }, 0);
+              }
+            }
             image={plantedTarget}
           >
             {i18n.t('label.register_new_trees')}

@@ -41,8 +41,9 @@ export default class Menu extends Component {
           this.resetStackToProperRoute(url);
         }
       })
-      // eslint-disable-next-line no-unused-vars
-      .catch(e => {});
+      .catch(e => {
+        console.log(e);
+      });
 
     // This listener handles the case where the app is woken up from the Universal or Deep Linking
     Linking.addEventListener('url', this.appWokeUp);

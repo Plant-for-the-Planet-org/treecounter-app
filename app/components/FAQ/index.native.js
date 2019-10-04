@@ -46,9 +46,8 @@ export default class FAQ extends Component {
             }
 
             //console.log('clicked link: ', url);
-            // eslint-disable-next-line no-unused-vars
             Linking.openURL(url).catch(err => {
-              // console.log(err);
+              console.log(err);
             });
           }}
         />

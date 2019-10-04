@@ -32,8 +32,7 @@ class CheckoutForm extends React.Component {
     });
   };
 
-  // eslint-disable-next-line no-unused-vars
-  handleSubmitSEPAPayment = async ev => {
+  handleSubmitSEPAPayment = async (/* ev */) => {
     console.log('SEPA PAYMENT SUBMITED');
   };
 

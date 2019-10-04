@@ -24,8 +24,7 @@ class SelectedPlantProjectContainer extends Component {
     //  this.props.selectPlantProjectAction(1);
   }
 
-  // eslint-disable-next-line no-unused-vars
-  onTabChange(title) {
+  onTabChange(/* title */) {
     // this.props.navigation.setParams({ titleParam: title });
   }
   selectProject(id) {

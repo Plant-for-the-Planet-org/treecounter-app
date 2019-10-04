@@ -60,8 +60,7 @@ const getSingleTreeLayout = (
   return formLayoutSingleTree;
 };
 
-// eslint-disable-next-line no-unused-vars
-const getMultipleTreeLayout = props1 => {
+const getMultipleTreeLayout = () => {
   return locals => {
     return (
       <div className="register-tree__form">

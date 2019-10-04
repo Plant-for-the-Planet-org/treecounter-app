@@ -39,8 +39,7 @@ export default class RegisterTrees extends Component {
 
   _handleIndexChange = index => this.setState({ index });
 
-  // eslint-disable-next-line no-unused-vars
-  handleGeoLocationChange(geoLocation) {
+  handleGeoLocationChange(/* geoLocation */) {
     //console.log(geoLocation);
   }
 

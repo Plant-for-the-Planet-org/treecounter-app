@@ -60,8 +60,8 @@ export default class StripeCC extends Component {
           this.props.onSuccess(token);
           //console.log(token);
         })
-        // eslint-disable-next-line no-unused-vars
         .catch(err => {
+          console.log(err);
           this.props.setLoading(false);
           this.props.onError();
         });

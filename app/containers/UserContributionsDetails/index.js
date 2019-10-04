@@ -32,8 +32,7 @@ const mapStateToProps = state => ({
   userProfileId: currentUserProfileIdSelector(state)
 });
 
-// eslint-disable-next-line no-unused-vars
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (/* dispatch */) => {
   return {};
 };
 

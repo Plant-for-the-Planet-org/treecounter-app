@@ -59,14 +59,16 @@ class GiftTreesContainer extends Component {
     return [
       this.props.navigation ? (
         <NavigationEvents
-          // eslint-disable-next-line no-unused-vars
-          onWillFocus={payload => {
-            this.setState({ reloadTab: true });
-          }}
-          // eslint-disable-next-line no-unused-vars
-          onWillBlur={payload => {
-            this.setState({ reloadTab: false });
-          }}
+          onWillFocus={
+            (/* payload */) => {
+              this.setState({ reloadTab: true });
+            }
+          }
+          onWillBlur={
+            (/* payload */) => {
+              this.setState({ reloadTab: false });
+            }
+          }
           key="navigation-events"
         />
       ) : null,

@@ -167,10 +167,11 @@ export default class Leaderboard extends Component {
           overlayStyle={{ backgroundColor: backgroundColor }} // set the overlay invisible
           buttonComponent={
             <TouchableItem
-              // eslint-disable-next-line no-unused-vars
-              onPress={event => {
-                this.refs['tooltip'].toggle();
-              }}
+              onPress={
+                (/* event */) => {
+                  this.refs['tooltip'].toggle();
+                }
+              }
             >
               <Image
                 resizeMode="contain"

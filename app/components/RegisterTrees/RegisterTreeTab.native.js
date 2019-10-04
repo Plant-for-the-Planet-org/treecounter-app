@@ -9,8 +9,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Dropdown } from 'react-native-material-dropdown';
 const Form = t.form.Form;
 const backgroundColor = 'white';
-// eslint-disable-next-line no-unused-vars
-const getFormLayoutTemplate = (mode, isTpo) => {
+const getFormLayoutTemplate = (mode /* , isTpo */) => {
   const formLayoutTreesTemplate = locals => {
     return (
       <View style={styles.registerTree__form}>

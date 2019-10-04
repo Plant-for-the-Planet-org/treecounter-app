@@ -50,8 +50,7 @@ class EditCompetitionContainer extends Component {
     }
     this.props
       .editCompetition(json, params, this.props.navigation)
-      // eslint-disable-next-line no-unused-vars
-      .then(success => {})
+      .then((/* success */) => {})
       .catch(err => {
         console.log('err signup data', err);
         let newSchemaOptions = handleServerResponseError(
@@ -88,8 +87,7 @@ class EditCompetitionContainer extends Component {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(

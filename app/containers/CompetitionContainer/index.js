@@ -28,8 +28,7 @@ class CompetitionContainer extends React.Component {
     if (value) {
       this.props
         .createCompetition(value, this.props.navigation)
-        // eslint-disable-next-line no-unused-vars
-        .then(success => {})
+        .then((/* success */) => {})
         .catch(err => {
           console.log('err signup data', err);
           let newSchemaOptions = handleServerResponseError(

@@ -72,8 +72,9 @@ export default class DonateTrees extends React.PureComponent {
           this.handleOpenURL(url);
         }
       })
-      // eslint-disable-next-line no-unused-vars
-      .catch(err => {});
+      .catch(err => {
+        console.log(err);
+      });
     Linking.addEventListener('url', this.handleOpenURL);
     let params = this.props.navigation.state.params;
     if (params !== undefined && params.giftMethod === 'invitation') {

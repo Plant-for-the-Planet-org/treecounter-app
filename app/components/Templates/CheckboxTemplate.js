@@ -16,10 +16,11 @@ export function CheckboxTemplate(locals) {
       />
       <label
         className={'pftp-text-span pftp-text-select-none'}
-        // eslint-disable-next-line no-unused-vars
-        onClick={event => {
-          locals.onChange(!locals.value);
-        }}
+        onClick={
+          (/* event */) => {
+            locals.onChange(!locals.value);
+          }
+        }
       >
         {i18n.t(locals.label)}
       </label>

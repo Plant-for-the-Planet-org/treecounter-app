@@ -15,10 +15,9 @@ class WelcomeScreenModal extends Component {
   }
 
   render() {
-    // eslint-disable-next-line no-unused-vars
-    const welcomeScreenProfile = this.props.navigation.getParam(
+    /* const welcomeScreenProfile = this.props.navigation.getParam(
       'welcomeScreenProfile'
-    );
+    ); */
     const backgroundColor = 'white';
     return (
       <View style={styles.confirmDeleteContainer}>

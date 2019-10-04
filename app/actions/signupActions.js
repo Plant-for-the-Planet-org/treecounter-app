@@ -56,8 +56,7 @@ export function signUp(
       i18n.t('label.error'),
       5000
     );
-    // eslint-disable-next-line no-unused-vars
-    return dispatch => {
+    return (/* dispatch */) => {
       return new Promise(function(resolve) {
         setTimeout(function() {
           resolve('foo');

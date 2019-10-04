@@ -30,8 +30,7 @@ class SignUpContainer extends React.Component {
     if (formValue) {
       this.props
         .signUp(profileType, formValue, token, this.props.navigation)
-        // eslint-disable-next-line no-unused-vars
-        .then(success => {})
+        .then((/* success */) => {})
         .catch(err => {
           refreshToken();
           console.log('err signup data', err);

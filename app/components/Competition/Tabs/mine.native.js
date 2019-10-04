@@ -75,24 +75,25 @@ const getCompFormImageLayoutTemplate = () => {
         </View>
         <TouchableOpacity
           style={{ flex: 1 }}
-          // eslint-disable-next-line no-unused-vars
-          onPress={event => {
-            ImagePicker.showImagePicker(options, response => {
-              // console.log('Response = ', response);
+          onPress={
+            (/* event */) => {
+              ImagePicker.showImagePicker(options, response => {
+                // console.log('Response = ', response);
 
-              if (response.didCancel) {
-                //console.log('User cancelled image picker');
-              } else if (response.error) {
-                //console.log('ImagePicker Error: ', response.error);
-              } else if (response.customButton) {
-                // console.log('User tapped custom button: ', response.customButton);
-              } else {
-                // eslint-disable-next-line no-unused-vars
-                let source = { uri: response.uri };
-                locals.onChange('data:image/jpeg;base64,' + response.data);
-              }
-            });
-          }}
+                if (response.didCancel) {
+                  //console.log('User cancelled image picker');
+                } else if (response.error) {
+                  //console.log('ImagePicker Error: ', response.error);
+                } else if (response.customButton) {
+                  // console.log('User tapped custom button: ', response.customButton);
+                } else {
+                  // eslint-disable-next-line no-unused-vars
+                  let source = { uri: response.uri };
+                  locals.onChange('data:image/jpeg;base64,' + response.data);
+                }
+              });
+            }
+          }
         >
           {!locals.value ? (
             <Image source={imageUpload} style={{ height: 40, width: 40 }} />

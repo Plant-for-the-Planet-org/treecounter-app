@@ -266,8 +266,7 @@ class MakePledgeForm extends Component {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
   // postedPledge: postedPledgeSelector(state)
 });
 

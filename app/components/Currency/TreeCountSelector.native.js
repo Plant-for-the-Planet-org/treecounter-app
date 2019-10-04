@@ -124,8 +124,7 @@ class TreeCountSelector extends React.Component {
                         obj.value === this.state.fixedTreeCount &&
                         this.state.isFixed
                       }
-                      // eslint-disable-next-line no-unused-vars
-                      onPress={(value, index) => {
+                      onPress={(value /* , index */) => {
                         this.handleFixedTreeCountChange(value);
                       }}
                     />
@@ -134,8 +133,7 @@ class TreeCountSelector extends React.Component {
                       index={i}
                       labelWrapStyle={styles.radio_label}
                       labelHorizontal
-                      // eslint-disable-next-line no-unused-vars
-                      onPress={(value, index) => {
+                      onPress={(value /* , index */) => {
                         this.handleFixedTreeCountChange(value);
                       }}
                     />
@@ -188,8 +186,7 @@ class TreeCountSelector extends React.Component {
                       buttonInnerColor={'#ec6453'}
                       buttonOuterColor={'#ec6453'}
                       isSelected={!this.state.isFixed}
-                      // eslint-disable-next-line no-unused-vars
-                      onPress={(value, index) => {
+                      onPress={(value /* , index */) => {
                         this.handleVariableTreeCountSelected(value);
                       }}
                     />

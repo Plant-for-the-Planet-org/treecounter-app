@@ -125,14 +125,14 @@ export function reset_password(data, navigation = undefined) {
 export function setAccessDenied(data, params, path, navigation = undefined) {
   return dispatch => {
     postRequest('public_accessDenied', data, params)
+      // eslint-disable-next-line no-unused-vars
       .then(res => {
-        // eslint-disable-next-line no-unused-vars
-        const { statusText } = res;
+        // const { statusText } = res;
         updateRoute(path, navigation || dispatch);
         // NotificationManager.success(statusText, i18n.t('label.success'), 5000);
       })
-      // eslint-disable-next-line no-unused-vars
       .catch(error => {
+        console.log(error);
         // NotificationManager.error(error.response.data.message, i18n.t('label.error'), 5000);
       });
   };

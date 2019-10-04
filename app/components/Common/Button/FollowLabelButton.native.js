@@ -6,8 +6,7 @@ import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n';
 
 const FollowLabelButton = ({
-  // eslint-disable-next-line no-unused-vars
-  isLoggedIn,
+  /* isLoggedIn, */
   isSubscribed,
   onClick,
   label = undefined

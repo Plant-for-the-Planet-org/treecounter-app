@@ -112,8 +112,6 @@ export function orderPlantProject(data, params) {
     return new Promise(function(resolve, reject) {
       postAuthenticatedRequest('plantProject_position', data, params)
         .then(res => {
-          // eslint-disable-next-line no-unused-vars
-          const { statusText } = res;
           const { plantProject } = res.data.merge;
           dispatch(
             mergeEntities(normalize(plantProject, [plantProjectSchema]))

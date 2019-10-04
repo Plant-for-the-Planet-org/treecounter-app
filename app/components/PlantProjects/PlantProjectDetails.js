@@ -21,8 +21,7 @@ class PlantProjectDetails extends React.Component {
       homepageCaption,
       plantProjectImages,
       videoUrl,
-      // eslint-disable-next-line no-unused-vars
-      mapData,
+      /* mapData, */
       ndviUid
     } = this.props;
 

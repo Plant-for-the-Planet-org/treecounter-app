@@ -51,8 +51,7 @@ export default class StripeCC extends Component {
         cvc: this.state.params.cvc
       };
       this.props.setLoading(true);
-      // eslint-disable-next-line no-unused-vars
-      const token = stripe
+      stripe
         .createTokenWithCard(params)
         .then(token => {
           token.id = token.tokenId;

@@ -8,18 +8,12 @@ const noop = () => {};
 
 const _extractOptions = props => {
   const {
-    // eslint-disable-next-line no-unused-vars
-    id,
-    // eslint-disable-next-line no-unused-vars
-    className,
-    // eslint-disable-next-line no-unused-vars
-    onChange,
-    // eslint-disable-next-line no-unused-vars
-    onFocus,
-    // eslint-disable-next-line no-unused-vars
-    onBlur,
-    // eslint-disable-next-line no-unused-vars
-    onReady,
+    /* id, */
+    /* className, */
+    /* onChange, */
+    /* onFocus, */
+    /* onBlur, */
+    /* onReady, */
     ...options
   } = props;
   return options;

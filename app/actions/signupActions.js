@@ -58,8 +58,7 @@ export function signUp(
     );
     // eslint-disable-next-line no-unused-vars
     return dispatch => {
-      // eslint-disable-next-line no-unused-vars
-      return new Promise(function(resolve, reject) {
+      return new Promise(function(resolve) {
         setTimeout(function() {
           resolve('foo');
         }, 30);

@@ -36,8 +36,7 @@ export function attachCardToCostumer(paymentMethod) {
       paymentMethod,
       version: 'v1.3'
     });
-    // eslint-disable-next-line no-unused-vars
-    request.then(response => {
+    request.then(() => {
       console.log('method attached');
     });
   };

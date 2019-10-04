@@ -127,13 +127,11 @@ async function getLocalStorageItem(key, res) {
       let newPledgesArray = JSON.parse(pledgesArray);
       newPledgesArray.push(token);
       saveItem(key, JSON.stringify(newPledgesArray));
-      console.log(showAsyncStorageContentInDev());
     } else {
       pledgesArray = [];
       let newPledgesArray = pledgesArray;
       newPledgesArray.push(token);
       saveItem(key, JSON.stringify(newPledgesArray));
-      console.log(showAsyncStorageContentInDev());
     }
   } catch (error) {
     console.log(error);

@@ -119,7 +119,7 @@ class Trillion extends PureComponent {
     } else {
       fetchItem('pledgedEvent').then(data => {
         if (typeof data !== 'undefined' && data.length > 0) {
-          var stringPledges = JSON.parse(data);
+          let stringPledges = JSON.parse(data);
           stringPledges = stringPledges.toString();
           this.props.fetchPublicPledgesAction(stringPledges);
           this.setState({

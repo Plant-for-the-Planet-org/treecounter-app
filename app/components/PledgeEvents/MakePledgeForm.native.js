@@ -160,7 +160,7 @@ class MakePledgeForm extends Component {
           keyboardShouldPersistTaps="always"
           style={styles.keyboardScrollView}
           resetScrollToCoords={{ x: 0, y: 0 }}
-          scrollEnabled={true}
+          scrollEnabled
         >
           <View>
             <Text style={styles.titleText}>
@@ -268,8 +268,7 @@ class MakePledgeForm extends Component {
                 checkedCheckBoxColor="#89b53a"
                 isChecked={this.state.isAnonymous}
                 rightTextStyle={{
-                  fontFamily: 'OpenSans-Regular',
-                  color: '#4d5153'
+                  fontFamily: 'OpenSans-Regular'
                 }}
                 rightText="Hide my Name from the list (Anonymous Pledge)"
               />

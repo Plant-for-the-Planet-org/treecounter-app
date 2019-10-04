@@ -210,7 +210,6 @@ export default class DonateTrees extends Component {
       return false;
     },
     () => {
-      // console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt && this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
@@ -250,7 +249,6 @@ export default class DonateTrees extends Component {
       return false;
     },
     () => {
-      // console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt && this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
@@ -525,7 +523,6 @@ export default class DonateTrees extends Component {
                 </div>
 
                 <div>
-                  {/* {console.log('PaymentStatus', this.props.paymentStatus)} */}
                   {this.props.selectedTpo ? (
                     <PaymentSelector
                       paymentMethods={paymentMethods}

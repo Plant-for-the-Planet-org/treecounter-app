@@ -34,11 +34,8 @@ class GiftTreesContainer extends Component {
       this.props.fetchCurrencies();
     }
   }
-  componentWillReceiveProps(nextProps) {
-    // console.log('changed props in gift container', nextProps)
-  }
+  componentWillReceiveProps(nextProps) {}
   openProjects(formValue, type) {
-    //  console.log('in gif tree', formValue);
     let title = '';
     if (formValue.firstname) {
       title = formValue.firstname + ' ' + formValue.lastname;

@@ -7,6 +7,7 @@ import LoadingIndicators from '../../components/Common/LoadingIndicator';
 
 import CCForm from './CCForm';
 import SEPAForm from './SEPAForm';
+import i18n from '../../locales/i18n';
 
 class CheckoutForm extends React.Component {
   state = {
@@ -139,7 +140,7 @@ class CheckoutForm extends React.Component {
       } else {
         this.props.paymentFailed({
           status: false,
-          message: 'donation id missing error'
+          message: i18n.t('label.donation_id_missing_error')
         });
       }
     }

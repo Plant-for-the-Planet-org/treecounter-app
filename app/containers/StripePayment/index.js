@@ -35,7 +35,6 @@ class StripePayment extends Component {
       : props.paymentStatus
         ? props.paymentStatus.contribution[0].id
         : null;
-    // console.log('donationId', donationId, props.paymentStatus);
     return (
       <StripeProvider stripe={props.stripe}>
         <Elements>

@@ -207,21 +207,28 @@ export default EStyleSheet.create({
 
   // Unfulfilled Pledge
 
+  unfulfilledEventCard: {
+    marginLeft: 20,
+    backgroundColor: 'white',
+    borderRadius: 7,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#d5d5d5',
+    padding: 20
+  },
   ufpColumn: {
     paddingRight: 16,
-    flexWrap: 'wrap',
     display: 'flex',
     flexDirection: 'column'
   },
   ufpTrees: {
-    fontSize: 20,
-    lineHeight: 27,
+    lineHeight: 24,
     letterSpacing: 0,
     textAlign: 'left',
     marginBottom: 14,
     fontFamily: 'OpenSans-Bold'
   },
-  ufpLeftSection: { flexDirection: 'row', flexGrow: 1, width: '100%' },
+  ufpLeftSection: { flexDirection: 'row', justifyContent: 'space-between' },
   ufpCostView: {
     width: 72,
     height: 26,
@@ -242,7 +249,7 @@ export default EStyleSheet.create({
     letterSpacing: 0,
     textAlign: 'center',
     color: '#707070',
-    marginTop: 4,
+    marginTop: 8,
     fontFamily: 'OpenSans-Regular'
   }
 });

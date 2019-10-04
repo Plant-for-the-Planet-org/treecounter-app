@@ -42,6 +42,11 @@ class PledgeEvents extends Component {
       this.RBSheet.open();
       this.props.navigation.getParam('plantProject').id = -1;
     }
+    if (this.props.pledges && this.props.pledges.image && this.state.loading) {
+      this.setState({
+        loading: false
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -50,7 +55,9 @@ class PledgeEvents extends Component {
 
   render() {
     const { navigation } = this.props;
-    return (
+    return this.state.loading ? (
+      <LoadingIndicator />
+    ) : (
       <View style={styles.peRootView}>
         <ScrollView contentContainerStyle={styles.peRootScrollView}>
           <View style={styles.peHeader}>
@@ -211,23 +218,6 @@ class PledgeEvents extends Component {
             <View style={styles.continueButtonView}>
               <Icon name="arrow-right" size={30} color="#fff" />
               <Text style={styles.continueText}>Plant More</Text>
-            </View>
-          </TouchableOpacity>
-        </View> */}
-
-        {/* <View style={styles.bottomButtonView}>
-          <View style={styles.leftSection}>
-            <Text style={styles.pledgeTreesAmount}>500 Trees Pledged</Text>
-            <Text style={styles.pledgeTreesAction}>+ INCREASE MY PLEDGE</Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              updateStaticRoute('app_donate_detail2', this.props.navigation);
-            }}
-          >
-            <View style={styles.continueButtonView}>
-              <Icon name="arrow-right" size={30} color="#fff" />
-              <Text style={styles.continueText}>Donate</Text>
             </View>
           </TouchableOpacity>
         </View> */}

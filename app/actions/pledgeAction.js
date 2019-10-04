@@ -1,7 +1,9 @@
 import {
   getRequest,
   postRequest,
-  postAuthenticatedRequest
+  postAuthenticatedRequest,
+  putAuthenticatedRequest,
+  putRequest
 } from '../utils/api';
 import {
   fetchPledges,
@@ -23,7 +25,6 @@ import {
 } from '../schemas';
 import { normalize } from 'normalizr';
 import { fetchItem, saveItem } from './../stores/localStorage';
-import { AsyncStorage } from 'react-native';
 
 export function fetchPledgesAction(eventSlug) {
   return dispatch => {
@@ -103,24 +104,42 @@ export function postPledge(data, params, loggedIn) {
   };
 }
 
-async function getLocalStorageItem(key, res) {
-  try {
-    var pledgesArray = await fetchItem(key);
+export function updatePledge(data, params, loggedIn) {
+  return dispatch => {
+    loggedIn
+      ? putAuthenticatedRequest('eventPledgeAuthed_put', data, params).then(
+          res => {
+            console.log(res.data);
+          }
+        )
+      : putRequest('eventPledge_put', data, params).then(res => {
+          console.log(res.data);
+        });
+  };
+}
 
+async function getLocalStorageItem(key, res) {
+  const token = res.data.token;
+  console.log(token);
+  try {
+    let pledgesArray = await fetchItem(key);
     if (typeof pledgesArray !== 'undefined' && pledgesArray.length > 0) {
-      console.log(pledgesArray);
-      pledgesArray.push(res.data.token);
-      saveItem('pledgedEvent', JSON.stringify(pledgesArray));
+      let newPledgesArray = JSON.parse(pledgesArray);
+      newPledgesArray.push(token);
+      saveItem(key, JSON.stringify(newPledgesArray));
       console.log(showAsyncStorageContentInDev());
     } else {
-      pledgesArray.push(res.data.token);
-      saveItem('pledgedEvent', JSON.stringify(pledgesArray));
+      pledgesArray = [];
+      let newPledgesArray = pledgesArray;
+      newPledgesArray.push(token);
+      saveItem(key, JSON.stringify(newPledgesArray));
       console.log(showAsyncStorageContentInDev());
     }
   } catch (error) {
     console.log(error);
   }
 }
+
 export function clearTimeoutAction(id) {
   return dispatch => {
     clearInterval(id);

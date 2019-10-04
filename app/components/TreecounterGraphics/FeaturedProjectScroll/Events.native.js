@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, Image } from 'react-native';
-import styles from './../../../styles/trillion.native';
+import styles from '../../../styles/trillion.native';
 import i18n from '../../../locales/i18n';
-import { greencalendar } from './../../../assets/';
-import { smalltree } from './../../../assets/';
+import { greencalendar } from '../../../assets';
+import { smalltree } from '../../../assets';
 import moment from 'moment';
 import { getLocale } from '../../../actions/getLocale';
 

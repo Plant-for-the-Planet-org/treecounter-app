@@ -94,13 +94,10 @@ export function forgot_password(data, navigation = undefined) {
   };
 }
 
-// eslint-disable-next-line no-unused-vars
-export function sendEmail(navigation = undefined) {
-  // eslint-disable-next-line no-unused-vars
-  return dispatch => {
+export function sendEmail(/* navigation = undefined */) {
+  return (/* dispatch */) => {
     postActivateLinkRequest('auth_sendActivationLink_post')
-      // eslint-disable-next-line no-unused-vars
-      .then(res => {
+      .then((/* res */) => {
         // console.log(res);
       })
       .catch(err => debug(err));
@@ -109,24 +106,20 @@ export function sendEmail(navigation = undefined) {
 
 export function reset_password(data, navigation = undefined) {
   return dispatch => {
-    return (
-      postRequest('auth_resetPassword_post', data)
-        // eslint-disable-next-line no-unused-vars
-        .then(res => {
-          updateRoute('app_login', navigation || dispatch);
-        })
-        .catch(err => {
-          debug(err);
-          throw err;
-        })
-    );
+    return postRequest('auth_resetPassword_post', data)
+      .then((/* res */) => {
+        updateRoute('app_login', navigation || dispatch);
+      })
+      .catch(err => {
+        debug(err);
+        throw err;
+      });
   };
 }
 export function setAccessDenied(data, params, path, navigation = undefined) {
   return dispatch => {
     postRequest('public_accessDenied', data, params)
-      // eslint-disable-next-line no-unused-vars
-      .then(res => {
+      .then((/* res */) => {
         // const { statusText } = res;
         updateRoute(path, navigation || dispatch);
         // NotificationManager.success(statusText, i18n.t('label.success'), 5000);

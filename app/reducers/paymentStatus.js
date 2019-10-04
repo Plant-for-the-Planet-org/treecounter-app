@@ -20,8 +20,7 @@ const paymentStatusReducer = handleActions(
     [donationCreation]: (state, action) => {
       return { ...state, ...action.payload };
     },
-    // eslint-disable-next-line no-unused-vars
-    [paymentCleared]: (state, action) => {
+    [paymentCleared]: (state /* , action */) => {
       let returnState = { ...initialState };
       if (state && state.contribution) {
         returnState['contribution'] = state.contribution;

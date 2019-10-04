@@ -14,8 +14,9 @@ let Form = t.form.Form;
 export default class Target extends Component {
   constructor(props) {
     super(props);
-    // eslint-disable-next-line no-unused-vars
-    let { countTarget, targetYear, targetComment } = this.props.treecounter;
+    let {
+      countTarget /* , targetYear, targetComment */
+    } = this.props.treecounter;
 
     this.state = {
       label: countTarget !== 0 ? i18n.t('label.update') : i18n.t('label.save')

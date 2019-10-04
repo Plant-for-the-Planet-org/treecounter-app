@@ -82,9 +82,8 @@ class Trillion extends PureComponent {
         });
         saveItem(Constants.storageKeys.svgData, JSON.stringify(svgData));
       })
-      // eslint-disable-next-line no-unused-vars
       .catch(error => {
-        //console.log(error);
+        console.log(error);
         fetchItem(Constants.storageKeys.svgData).then(svgData => {
           try {
             svgData = JSON.parse(svgData);
@@ -137,8 +136,7 @@ class Trillion extends PureComponent {
   };
 
   _renderScreen = ({ route }) => {
-    // eslint-disable-next-line no-unused-vars
-    const { navigation, userProfile, isLoggedIn } = this.props;
+    const { navigation /* , userProfile, isLoggedIn */ } = this.props;
     const backgroundColor = 'white';
     // console.log(this.props.pledgeEvents);
 
@@ -309,14 +307,16 @@ class Trillion extends PureComponent {
     return [
       this.props.navigation ? (
         <NavigationEvents
-          // eslint-disable-next-line no-unused-vars
-          onWillFocus={payload => {
-            this.setState({ loadSvg: true });
-          }}
-          // eslint-disable-next-line no-unused-vars
-          onWillBlur={payload => {
-            this.setState({ loadSvg: false });
-          }}
+          onWillFocus={
+            (/* payload */) => {
+              this.setState({ loadSvg: true });
+            }
+          }
+          onWillBlur={
+            (/* payload */) => {
+              this.setState({ loadSvg: false });
+            }
+          }
           key="navigation-events"
         />
       ) : null,

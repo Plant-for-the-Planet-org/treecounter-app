@@ -105,8 +105,7 @@ class TreecounterGraphicsText extends Component {
           personal={convertNumber(parseInt(personal), 2)}
           community={convertNumber(parseInt(community), 2)}
           type={type}
-          // eslint-disable-next-line no-unused-vars
-          onToggle={e => this.updateState(false)}
+          onToggle={() => /* e */ this.updateState(false)}
         />
       );
     }

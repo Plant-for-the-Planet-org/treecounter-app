@@ -20,8 +20,7 @@ class CheckBox extends React.Component {
   textboxStyle = {
     flex: 1
   };
-  // eslint-disable-next-line no-unused-vars
-  onValueChange = data => {
+  onValueChange = (/* data */) => {
     this.props.onValueChange(this.props.checkBoxState);
   };
   render() {

@@ -67,8 +67,9 @@ class RedemptionContainer extends Component {
             tpos: success.data.tpos
           });
         },
-        // eslint-disable-next-line no-unused-vars
-        error => {}
+        error => {
+          console.log(error);
+        }
       );
     } else if (isCode && !isLoggedIn) {
       this.setState({
@@ -172,8 +173,9 @@ class RedemptionContainer extends Component {
             this.setState({ pageStatus: 'code-validated' });
           }
         },
-        // eslint-disable-next-line no-unused-vars
-        error => {}
+        error => {
+          console.log(error);
+        }
       );
     }
   }

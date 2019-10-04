@@ -16,8 +16,7 @@ const fetchPledgesReducer = handleActions(
     [saveTimeoutID]: (state, action) => {
       return { ...state, timeoutID: action.payload };
     },
-    // eslint-disable-next-line no-unused-vars
-    [clearTimeoutID]: (state, action) => {
+    [clearTimeoutID]: (state /* , action */) => {
       return { ...state, timeoutID: null };
     }
   },

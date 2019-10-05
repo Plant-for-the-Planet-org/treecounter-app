@@ -67,8 +67,7 @@ class CollapsiblePlantProject extends Component {
         onDrop={event => {
           event.preventDefault();
           // Get the id of the target and add the moved element to the target's DOM
-          // eslint-disable-next-line no-unused-vars
-          let data = event.dataTransfer.getData('text/plain');
+          // let data = event.dataTransfer.getData('text/plain');
           this.dropProject(event, plantProject.position);
         }}
         onDragOver={event => {
@@ -293,7 +292,6 @@ export default class ManageProjects extends Component {
   };
 
   render() {
-    // eslint-disable-next-line no-unused-vars
     const { type /* , image */ } = this.props.currentUserProfile;
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">

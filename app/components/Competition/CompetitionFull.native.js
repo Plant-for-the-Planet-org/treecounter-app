@@ -36,9 +36,6 @@ class CompetitionFull extends React.Component {
     moment.locale(getLocale());
   }
 
-  // eslint-disable-next-line no-unused-vars
-  componentWillReceiveProps(nextProps) {}
-
   componentDidMount() {
     if (this.props.competition_id) {
       this.props.fetchCompetitionDetail(this.props.competition_id);

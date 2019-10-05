@@ -87,8 +87,7 @@ const getCompFormImageLayoutTemplate = () => {
                 } else if (response.customButton) {
                   // console.log('User tapped custom button: ', response.customButton);
                 } else {
-                  // eslint-disable-next-line no-unused-vars
-                  let source = { uri: response.uri };
+                  // let source = { uri: response.uri };
                   locals.onChange('data:image/jpeg;base64,' + response.data);
                 }
               });
@@ -218,8 +217,7 @@ export default class MineCompetitions extends Component {
   }
 
   render() {
-    // eslint-disable-next-line no-unused-vars
-    let { featuredProjects, featuredCompetitions } = this.state;
+    let { featuredCompetitions } = this.state;
     let schemaOptions = this.props.competitionFormSchemaOptions;
     if (schemaOptions.fields.imageFile) {
       schemaOptions.fields.imageFile.template = getCompFormImageLayoutTemplate();

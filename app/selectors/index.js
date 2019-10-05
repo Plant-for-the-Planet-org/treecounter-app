@@ -78,8 +78,6 @@ export const getAllPlantProjectsSelector = createSelector(
   (plantProjects, entities, tpos) => {
     let normalisedProjects = Object.keys(plantProjects).reduce(
       (projects, id) => {
-        // eslint-disable-next-line no-unused-vars
-        let projectsArray = [];
         projects.push(
           denormalize(plantProjects[id], plantProjectSchema, entities)
         );

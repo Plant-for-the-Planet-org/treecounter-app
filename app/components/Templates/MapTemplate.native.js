@@ -28,8 +28,7 @@ export function MapTemplate(locals) {
             skipPermissionRequests: true
           });
           Permissions.request('location', { type: 'whenInUse' }).then(
-            // eslint-disable-next-line no-unused-vars
-            response => {
+            (/*response*/) => {
               navigator.geolocation.getCurrentPosition(
                 location => {
                   let { latitude, longitude } = location.coords;
@@ -37,8 +36,7 @@ export function MapTemplate(locals) {
                     'geoLongitude=' + longitude + '&geoLatitude=' + latitude
                   );
                 },
-                // eslint-disable-next-line no-unused-vars
-                location => {
+                (/*location*/) => {
                   NotificationManager.error(
                     i18n.t('label.location_permission_denied'),
                     i18n.t('label.error'),

@@ -64,8 +64,7 @@ class MakePledgeForm extends Component {
 
   onFormSubmit = () => {
     const { firstname, lastname, email, treeCount } = this.state;
-    // eslint-disable-next-line no-unused-vars
-    const { navigation } = this.props;
+    // const { navigation } = this.props;
     let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
       firstname === '' ||
@@ -123,8 +122,7 @@ class MakePledgeForm extends Component {
 
   render() {
     let { firstname, lastname, email, treeCount } = this.state;
-    // eslint-disable-next-line no-unused-vars
-    const { navigation } = this.props;
+    // const { navigation } = this.props;
     const treeCost = this.props.navigation.getParam('plantProject').treeCost;
     const projectName = this.props.navigation.getParam('plantProject').name;
     const currency = this.props.navigation.getParam('plantProject').currency;

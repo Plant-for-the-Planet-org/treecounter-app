@@ -49,8 +49,7 @@ export default class AllCompetitions extends Component {
     });
   }
 
-  // eslint-disable-next-line no-unused-vars
-  onSelectClickedFeaturedProjects = id => {
+  onSelectClickedFeaturedProjects = (/*id*/) => {
     // this.props.selectProject(id);
     // const { navigation } = this.props;
     // updateStaticRoute(

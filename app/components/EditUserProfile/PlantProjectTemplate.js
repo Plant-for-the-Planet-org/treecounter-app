@@ -1,5 +1,7 @@
 import React from 'react';
 
+/**
+
 const a = [
   '',
   'one ',
@@ -35,7 +37,6 @@ const b = [
   'ninety'
 ];
 
-// eslint-disable-next-line no-unused-vars
 const inWords = function(num) {
   if ((num = num.toString()).length > 9) return 'overflow';
   let n = ('000000000' + num)
@@ -66,6 +67,7 @@ const inWords = function(num) {
       : '';
   return str;
 };
+ */
 
 const PlantProjectTemplate = function(itemIndex) {
   return function(locals) {

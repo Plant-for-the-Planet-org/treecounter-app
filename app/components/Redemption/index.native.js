@@ -199,13 +199,12 @@ export default class Redemption extends Component {
         </View>
       );
     }
-    // eslint-disable-next-line no-unused-vars
-    let heading;
-    if (this.props.path === 'redeem') {
-      heading = i18n.t('label.redeem_trees');
-    } else if (this.props.path === 'claim') {
-      heading = i18n.t('label.claim_trees');
-    }
+    // let heading;
+    // if (this.props.path === 'redeem') {
+    //   heading = i18n.t('label.redeem_trees');
+    // } else if (this.props.path === 'claim') {
+    //   heading = i18n.t('label.claim_trees');
+    // }
     return this.props.loading ? (
       <View style={styles.loadingContainer}>
         <LoadingIndicator />

@@ -7,9 +7,6 @@ import ImagePicker from 'react-native-image-picker';
 import i18n from '../../locales/i18n';
 
 export function ProfileImagePickerTemplate(locals) {
-  // eslint-disable-next-line no-unused-vars
-  let { category, variant } = locals.config || {};
-
   const options = {
     title: i18n.t('label.add_image_title'),
     cancelButtonTitle: i18n.t('label.cancel'),
@@ -43,8 +40,7 @@ export function ProfileImagePickerTemplate(locals) {
               } else if (response.customButton) {
                 // console.log('User tapped custom button: ', response.customButton);
               } else {
-                // eslint-disable-next-line no-unused-vars
-                let source = { uri: response.uri };
+                // let source = { uri: response.uri };
                 locals.onChange('data:image/jpeg;base64,' + response.data);
               }
             });

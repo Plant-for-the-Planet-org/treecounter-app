@@ -38,35 +38,34 @@ class MapLayerView extends React.Component {
     this._mounted = true;
     document.addEventListener('keydown', this.escFunction, false);
     loadModules(['esri/core/urlUtils', 'esri/config'])
-      // eslint-disable-next-line no-unused-vars
-      .then(([urlUtils, esriConfig]) => {
-        // const proxyUrl = `${context.scheme}://${context.host}/esri/proxy.php`;
-        // console.log('proxyUrl: ', proxyUrl);
-        //
-        // //const corsEnabledServer =`${context.host}:80`;
-        // const corsEnabledServer = `treecounter.plant-for-the-planet.org`;
-        // console.log('corsEnabledServer: ', corsEnabledServer);
-        //
-        // esriConfig.request.corsEnabledServers.push(corsEnabledServer);
-        // esriConfig.request.proxyUrl = '/esri/proxy.php';
-        //
-        // urlUtils.addProxyRule({
-        //   urlPrefix: 'arcgis.com',
-        //   proxyUrl: proxyUrl
-        // });
-        // urlUtils.addProxyRule({
-        //   urlPrefix: 'landscape6.arcgis.com',
-        //   proxyUrl: proxyUrl
-        // });
-        // urlUtils.addProxyRule({
-        //   urlPrefix: 'services7.arcgis.com',
-        //   proxyUrl: proxyUrl
-        // });
-        // urlUtils.addProxyRule({
-        //   urlPrefix: 'services.arcgisonline.com',
-        //   proxyUrl: proxyUrl
-        // });
-      })
+      // .then(([urlUtils, esriConfig]) => {
+      // const proxyUrl = `${context.scheme}://${context.host}/esri/proxy.php`;
+      // console.log('proxyUrl: ', proxyUrl);
+      //
+      // //const corsEnabledServer =`${context.host}:80`;
+      // const corsEnabledServer = `treecounter.plant-for-the-planet.org`;
+      // console.log('corsEnabledServer: ', corsEnabledServer);
+      //
+      // esriConfig.request.corsEnabledServers.push(corsEnabledServer);
+      // esriConfig.request.proxyUrl = '/esri/proxy.php';
+      //
+      // urlUtils.addProxyRule({
+      //   urlPrefix: 'arcgis.com',
+      //   proxyUrl: proxyUrl
+      // });
+      // urlUtils.addProxyRule({
+      //   urlPrefix: 'landscape6.arcgis.com',
+      //   proxyUrl: proxyUrl
+      // });
+      // urlUtils.addProxyRule({
+      //   urlPrefix: 'services7.arcgis.com',
+      //   proxyUrl: proxyUrl
+      // });
+      // urlUtils.addProxyRule({
+      //   urlPrefix: 'services.arcgisonline.com',
+      //   proxyUrl: proxyUrl
+      // });
+      // })
       .catch(error => console.error(error));
   }
 

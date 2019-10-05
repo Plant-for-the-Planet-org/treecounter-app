@@ -41,8 +41,7 @@ export function FilePickerTemplate(locals) {
               } else if (response.customButton) {
                 // console.log('User tapped custom button: ', response.customButton);
               } else {
-                // eslint-disable-next-line no-unused-vars
-                let source = { uri: response.uri };
+                // let source = { uri: response.uri };
                 locals.onChange('data:image/jpeg;base64,' + response.data);
               }
             });

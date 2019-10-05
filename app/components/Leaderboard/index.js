@@ -129,7 +129,6 @@ export default class Leaderboard extends Component {
       timePeriodsInfo,
       sortingQuery,
       sectionInfo,
-      // eslint-disable-next-line no-unused-vars
       handleBackButton
     } = this.props;
     if (!categoryInfo) {
@@ -146,7 +145,7 @@ export default class Leaderboard extends Component {
           <BackButton
             onClick={() => {
               // this.handleCategoryChange(sectionInfo.section);
-              this.props.handleBackButton();
+              handleBackButton();
             }}
           >
             {categoryInfo.categoryHeader[sectionInfo.section]}

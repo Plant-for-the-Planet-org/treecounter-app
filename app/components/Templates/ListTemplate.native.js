@@ -18,8 +18,7 @@ const styles = {
   }
 };
 
-// eslint-disable-next-line no-unused-vars
-export function ListTemplateGenerator(config) {
+export function ListTemplateGenerator(/*config*/) {
   return function listTemplateNative(title) {
     return function ListTemplate(locals) {
       if (locals.hidden) {

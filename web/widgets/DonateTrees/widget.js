@@ -93,10 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let div = document.createElement('pftp-widget-donation');
             // div.className = 'pftp-widget-tree-counter-container';
             const shadowRoot = div.attachShadow({ mode: 'closed' });
-            const newDivNode = allBlockQuote[i].parentNode.insertBefore(
-              div,
-              allBlockQuote[i]
-            );
+            allBlockQuote[i].parentNode.insertBefore(div, allBlockQuote[i]);
 
             ReactDOM.render(
               <App

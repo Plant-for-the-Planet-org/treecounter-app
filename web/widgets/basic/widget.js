@@ -7,7 +7,7 @@ import i18n from './locales/i18n';
 import { getLocalRoute } from '../../../app/actions/apiRouting';
 
 const widget = require('./basic.widget.html');
-const { scheme, host, base: baseUrl } = context;
+const { scheme, host } = context;
 
 const serverName = `${scheme}://${host}`;
 const cssStyle = `<link href="widget.css" rel="stylesheet"/>
@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
           : parseInt(uid.nodeValue);
         getRequest('treecounter_get', { uid })
           .then(result => {
-            const { data } = result;
-            const header = document.createElement('header');
+            // const { data } = result;
+            document.createElement('header');
 
             let div = document.createElement('div');
             const shadowRoot = div.attachShadow({ mode: 'closed' });
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.pftp = {
               giftTree: event => {
                 console.log(event);
-                const uid = event.target.id;
+                // const uid = event.target.id;
                 const url = `${serverName}${getLocalRoute(
                   'app_donateTrees'
                 )}/${ProjectId}`;

@@ -54,8 +54,7 @@ class GiftTreesContainer extends Component {
   }
 
   render() {
-    // eslint-disable-next-line no-unused-vars
-    let flag = this.props.currentUserProfile ? true : false;
+    // let flag = this.props.currentUserProfile ? true : false;
     return [
       this.props.navigation ? (
         <NavigationEvents

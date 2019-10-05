@@ -76,8 +76,7 @@ export default class StripeCC extends Component {
   }
 
   render() {
-    // eslint-disable-next-line no-unused-vars
-    const { valid, params } = this.state;
+    // const { valid, params } = this.state;
     return (
       <View style={{ flexDirection: 'column', padding: 10 }}>
         <PaymentCardTextField

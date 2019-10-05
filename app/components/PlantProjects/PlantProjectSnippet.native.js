@@ -47,9 +47,8 @@ class PlantProjectSnippet extends PureComponent {
       // geoLocation
     } = this.props.plantProject;
     let projectImage = null;
-    // eslint-disable-next-line no-unused-vars
-    let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
-    treePlantedRatio = parseFloat(treePlantedRatio);
+    // let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
+    // treePlantedRatio = parseFloat(treePlantedRatio);
     // let treeCountWidth;
     // if (treePlantedRatio > 1) {
     //   treeCountWidth = 100;

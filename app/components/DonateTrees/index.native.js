@@ -63,8 +63,7 @@ export default class DonateTrees extends React.PureComponent {
   }
 
   componentDidMount() {
-    // eslint-disable-next-line no-unused-vars
-    const { navigation } = this.props;
+    // const { navigation } = this.props;
     this.props.onTabChange(this.state.routes[0].title);
     Linking.getInitialURL()
       .then(url => {
@@ -89,8 +88,7 @@ export default class DonateTrees extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    // eslint-disable-next-line no-unused-vars
-    const { navigation } = this.props;
+    // const { navigation } = this.props;
     if (nextProps.selectedProject) {
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
@@ -268,20 +266,17 @@ export default class DonateTrees extends React.PureComponent {
         ? this.state.form['receiptCompany']
         : '';
     }
-    // eslint-disable-next-line no-unused-vars
-    let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
-    // eslint-disable-next-line no-unused-vars
-    let email = receipt !== '' ? receipt.email : '';
-    // eslint-disable-next-line no-unused-vars
-    let paymentMethods;
+    // let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
+    // let email = receipt !== '' ? receipt.email : '';
+    // let paymentMethods;
     if (receipt && selectedProject) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
       const countryCurrencies = selectedProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
         countryCurrency = selectedProject.paymentSetup.defaultCountryKey;
       }
-      paymentMethods =
-        selectedProject.paymentSetup.countries[countryCurrency].paymentMethods;
+      // paymentMethods =
+      //   selectedProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
     let currencies = this.props.currencies.currencies;
 

@@ -4,10 +4,9 @@ import { Dropdown } from 'react-native-material-dropdown';
 
 import PropTypes from 'prop-types';
 import { Text, View, Platform, Dimensions } from 'react-native';
-import datePickerStyle from '../../styles/date_picker.native';
+// import datePickerStyle from '../../styles/date_picker.native';
 
-// eslint-disable-next-line no-unused-vars
-const UIPICKER_HEIGHT = 216;
+// const UIPICKER_HEIGHT = 216;
 
 class SelectTemplateIOS extends React.PureComponent {
   constructor(props) {
@@ -24,35 +23,31 @@ class SelectTemplateIOS extends React.PureComponent {
 
   render() {
     const locals = this.props.locals;
-    const stylesheet = locals.stylesheet;
-    // eslint-disable-next-line no-unused-vars
-    let touchableStyle = stylesheet.dateTouchable.normal;
-    // eslint-disable-next-line no-unused-vars
-    let datepickerStyle = stylesheet.datepicker.normal;
-    // eslint-disable-next-line no-unused-vars
-    let dateValueStyle =
-      datePickerStyle.dateValueStyle || stylesheet.dateValue.normal;
+    // const stylesheet = locals.stylesheet;
+    // let touchableStyle = stylesheet.dateTouchable.normal;
+    // let datepickerStyle = stylesheet.datepicker.normal;
+    // let dateValueStyle =
+    //   datePickerStyle.dateValueStyle || stylesheet.dateValue.normal;
 
-    if (locals.hasError) {
-      touchableStyle = stylesheet.dateTouchable.error;
-      datepickerStyle = stylesheet.datepicker.error;
-      dateValueStyle = stylesheet.dateValue.error;
-    }
+    // if (locals.hasError) {
+    //   touchableStyle = stylesheet.dateTouchable.error;
+    //   datepickerStyle = stylesheet.datepicker.error;
+    //   dateValueStyle = stylesheet.dateValue.error;
+    // }
 
-    if (locals.disabled) {
-      touchableStyle = stylesheet.dateTouchable.notEditable;
-    }
+    // if (locals.disabled) {
+    //   touchableStyle = stylesheet.dateTouchable.notEditable;
+    // }
 
-    // eslint-disable-next-line no-unused-vars
-    let formattedValue = locals.value ? locals.value : '';
+    // let formattedValue = locals.value ? locals.value : '';
 
-    let filteredValue = this.props.options.filter(
-      item => item.value === locals.value
-    );
+    // let filteredValue = this.props.options.filter(
+    //   item => item.value === locals.value
+    // );
     const textColor = '#686060';
-    if (filteredValue && filteredValue.length > 0) {
-      formattedValue = i18n.t(filteredValue[0].text);
-    }
+    // if (filteredValue && filteredValue.length > 0) {
+    // formattedValue = i18n.t(filteredValue[0].text);
+    // }
     if (Platform.OS === 'android') {
       return (
         //   <View style={datePickerStyle.datePickerContainer}>

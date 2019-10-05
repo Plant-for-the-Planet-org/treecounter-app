@@ -86,9 +86,8 @@ class LeaderBoardContainer extends React.Component {
   handleBackButton = (
     section = this.state.sectionInfo.section,
     orderBy = this.state.sortingQueryParam.orderBy,
-    period = this.state.sortingQueryParam.period,
-    // eslint-disable-next-line no-unused-vars
-    subSection = this.state.sectionInfo.subSection
+    period = this.state.sortingQueryParam.period
+    // subSection = this.state.sectionInfo.subSection
   ) => {
     if (!this.props.navigation) {
       replaceRoute(
@@ -137,8 +136,7 @@ class LeaderBoardContainer extends React.Component {
     }
   };
 
-  // eslint-disable-next-line no-unused-vars
-  componentWillReceiveProps(nextProps, nextState) {
+  componentWillReceiveProps(nextProps /*, nextState*/) {
     console.log('__componentWillReceiveProps__');
 
     if (!this.props.navigation) {

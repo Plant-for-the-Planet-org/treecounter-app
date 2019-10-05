@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
-import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
+import { getLocalRoute } from '../../actions/apiRouting';
 import TextSpan from '../Common/Text/TextSpan';
 import ConfirmDeletion from './ConfirmDelete';
 import { updateRoute } from '../../helpers/routerHelper';
@@ -164,13 +164,12 @@ export default class ContributionCard extends React.Component {
 
   render() {
     let { contribution } = this.props;
-    // eslint-disable-next-line no-unused-vars
-    let imagesArray =
-      contribution.category === 'contributions'
-        ? contribution.contributionImages.map(image => {
-            return { src: getImageUrl('contribution', 'medium', image.image) };
-          })
-        : '';
+    // let imagesArray =
+    //   contribution.category === 'contributions'
+    //     ? contribution.contributionImages.map(image => {
+    //         return { src: getImageUrl('contribution', 'medium', image.image) };
+    //       })
+    //     : '';
     let seeLabel = classnames('see-more-label-style', {
       'see-more__active': this.state.viewExpanded
     });
@@ -217,15 +216,13 @@ export default class ContributionCard extends React.Component {
       givee,
       giveeSlug
     );
-    // eslint-disable-next-line no-unused-vars
-    let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
-    // eslint-disable-next-line no-unused-vars
-    let borderColor =
-      contributionType == 'donation'
-        ? '#95c243'
-        : treeCount > 1
-          ? '#68aeec'
-          : '#ec6453';
+    // let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
+    // let borderColor =
+    //   contributionType == 'donation'
+    //     ? '#95c243'
+    //     : treeCount > 1
+    //       ? '#68aeec'
+    //       : '#ec6453';
     return category === 'contributions' && contributionType === 'donation' ? (
       <div>
         <div

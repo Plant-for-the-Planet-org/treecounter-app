@@ -32,8 +32,7 @@ export default class CategoryTypes extends Component {
   }
 
   getCategoryView = () => {
-    // eslint-disable-next-line no-unused-vars
-    const { categoryInfo, sectionInfo } = this.props;
+    const { categoryInfo } = this.props;
     let categoryUI = null;
     if (categoryInfo && categoryInfo.categoryKeys) {
       categoryUI = categoryInfo.categoryKeys.map((category, index) => {

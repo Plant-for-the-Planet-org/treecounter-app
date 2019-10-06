@@ -148,7 +148,6 @@ export default EStyleSheet.create({
   },
   locationText: {
     fontSize: 10,
-    color: '$textColor',
     fontStyle: 'italic',
     paddingBottom: 2,
     color: '$cardTextColor'

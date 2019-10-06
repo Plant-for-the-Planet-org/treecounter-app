@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import i18n from '../../../locales/i18n';

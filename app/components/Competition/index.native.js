@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { Dimensions, View } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';

@@ -16,6 +16,7 @@ let TCombForm = t.form.Form;
 export default class Login extends Component {
   constructor(props) {
     super(props);
+    // eslint-disable-next-line no-underscore-dangle
     this._recaptchaToken = undefined;
   }
 
@@ -37,6 +38,7 @@ export default class Login extends Component {
 
   verifyCallback = token => {
     // Here you will get the final token!!!
+    // eslint-disable-next-line no-underscore-dangle
     this._recaptchaToken = token;
   };
 
@@ -65,6 +67,7 @@ export default class Login extends Component {
 
             <PrimaryButton
               onClick={event => {
+                // eslint-disable-next-line no-underscore-dangle
                 this.props.onPress(this._recaptchaToken, this.refreshToken);
                 event.preventDefault();
               }}

@@ -36,6 +36,7 @@ class SelectedCompetitionContainer extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.match) {
+      // empty
     } else if (nextProps.navigation && this.props.navigation) {
       if (nextProps.navigation !== this.props.navigation) {
         this.setState({

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { Text, View, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
@@ -65,6 +66,7 @@ class MakePledgeForm extends Component {
   onFormSubmit = () => {
     const { firstname, lastname, email, treeCount } = this.state;
     // const { navigation } = this.props;
+    // eslint-disable-next-line no-useless-escape
     let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
       firstname === '' ||

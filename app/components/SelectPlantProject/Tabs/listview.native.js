@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { FlatList, View } from 'react-native';

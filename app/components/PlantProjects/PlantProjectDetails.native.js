@@ -16,6 +16,7 @@ const cleanUrl = url => {
     // It's a URL
     if (
       url.match(
+        // eslint-disable-next-line no-useless-escape
         /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/i
       )
     ) {
@@ -24,6 +25,7 @@ const cleanUrl = url => {
     // URL with no domain
     if (
       url.match(
+        // eslint-disable-next-line no-useless-escape
         /^(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/i
       )
     ) {
@@ -78,6 +80,7 @@ const PlantProjectDetails = ({
   );
 };
 
+// eslint-disable-next-line no-underscore-dangle
 const _goToURL = url => {
   Linking.canOpenURL(url).then(supported => {
     if (supported) {

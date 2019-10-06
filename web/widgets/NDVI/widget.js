@@ -30,7 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
       //Register New Custom element in DOM
       try {
         customElementRegistry.define('pftp-widget-ndvi', PFTPWidgetNDVI);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
 
       let div = document.createElement('pftp-widget-ndvi');
       const shadowRoot = div.attachShadow({ mode: 'closed' });

@@ -56,7 +56,7 @@ const customStyles = {
     ...provided,
     width: '150px'
   }),
-  singleValue: (provided, state) => {
+  singleValue: (provided /* , state */) => {
     return {
       ...provided,
       border: 0,

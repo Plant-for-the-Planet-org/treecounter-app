@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -48,7 +49,7 @@ export default class UserContributions extends React.Component {
             <ContributionsMapLegend />
           </View>
         );
-        break;
+      // break;
       case 'list':
         return (
           <View {...this.props} style={styles.listContainer}>
@@ -60,8 +61,7 @@ export default class UserContributions extends React.Component {
             </ScrollView>
           </View>
         );
-        break;
-        return null;
+      // break;
     }
   };
 

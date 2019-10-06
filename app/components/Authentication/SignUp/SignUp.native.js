@@ -21,6 +21,7 @@ export default class SignUp extends Component {
       Profiletype: 'individual'
     };
     this.changeProfile = this.changeProfile.bind(this);
+    // eslint-disable-next-line no-underscore-dangle
     this._recaptchaToken = undefined;
   }
 
@@ -35,11 +36,13 @@ export default class SignUp extends Component {
   }
 
   verifyCallback = token => {
+    // eslint-disable-next-line no-underscore-dangle
     this._recaptchaToken = token;
     // Here you will get the final token!!!
   };
 
   refreshToken = () => {
+    // eslint-disable-next-line no-underscore-dangle
     this._captchaRef.refreshToken();
   };
 
@@ -47,6 +50,7 @@ export default class SignUp extends Component {
     if (this.refs.signupForm.getValue()) {
       Keyboard.dismiss();
     }
+    // eslint-disable-next-line no-underscore-dangle
     this.props.onSignUpClicked(type, this._recaptchaToken, this.refreshToken);
   };
 
@@ -70,6 +74,7 @@ export default class SignUp extends Component {
       // keyboardShouldPersistTaps={'handled'}
       >
         <ReCaptchaV3
+          // eslint-disable-next-line no-underscore-dangle
           ref={ref => (this._captchaRef = ref)}
           captchaDomain={'https://www.trilliontreecampaign.org'}
           siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}

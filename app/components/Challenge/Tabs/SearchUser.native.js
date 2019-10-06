@@ -23,6 +23,7 @@ class SearchUser extends React.Component {
   };
   constructor(props) {
     super(props);
+    // eslint-disable-next-line no-underscore-dangle
     this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 200);
   }
 
@@ -101,6 +102,7 @@ class SearchUser extends React.Component {
           onChangeQuery={this.onChangeTextDelayed}
           inputValue={this.state.selectedSuggestionName}
           resetState={this.props.resetState}
+          // eslint-disable-next-line no-underscore-dangle
           onSubmit={this._handleSubmit}
           placeholderTextColor={this.props.searchInputPlaceholderTextColor}
           placeholderValue={i18n.t('label.enter_a_user')}
@@ -130,6 +132,7 @@ class SearchUser extends React.Component {
                     <TouchableOpacity
                       style={styles.searchResult}
                       key={'suggestion' + i}
+                      // eslint-disable-next-line no-underscore-dangle
                       onPress={this._onNavigationClick.bind(this, suggestion)}
                     >
                       <UserProfileImage
@@ -152,6 +155,7 @@ class SearchUser extends React.Component {
                   <TouchableOpacity
                     style={styles.searchResult}
                     key={'suggestion' + i}
+                    // eslint-disable-next-line no-underscore-dangle
                     onPress={this._onNavigationClick.bind(this, suggestion)}
                   >
                     <UserProfileImage

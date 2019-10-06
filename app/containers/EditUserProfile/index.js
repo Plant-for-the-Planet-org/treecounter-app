@@ -44,6 +44,7 @@ class EditUserProfileContainer extends React.Component {
       const followeeIdsList = currentUserProfile.treecounter.followeeIds.split(
         ','
       );
+      // eslint-disable-next-line no-underscore-dangle
       let _FolloweeInfo = [];
       followeeIdsList.forEach(id => {
         this.props
@@ -157,7 +158,7 @@ class EditUserProfileContainer extends React.Component {
     let value = profileForm.getValue();
 
     let imageValue = undefined;
-    if (!!imageForm) {
+    if (imageForm) {
       imageValue = imageForm.getValue();
     }
     if (

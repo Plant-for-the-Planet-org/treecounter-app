@@ -554,8 +554,7 @@ export default class GiftTrees extends Component {
                     donorName: name,
                     treeCount: this.state.selectedTreeCount,
                     plantProjectName: plantProject.name,
-                    giftTreeCounterName: this.state.giftTreecounterName,
-                    treeCount: this.state.selectedTreeCount
+                    giftTreeCounterName: this.state.giftTreecounterName
                   }}
                   onFailure={data =>
                     console.log('/////////////////// payment failure ', data)

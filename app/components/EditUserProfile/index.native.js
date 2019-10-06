@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { TabView, TabBar } from 'react-native-tab-view';
@@ -91,7 +92,9 @@ export default class EditUserProfile extends Component {
         schemaOptions.fields.password.fields.first.error = schemaOptions.fields.password.fields.second.error = (
           <Text>{i18n.t('label.same_password_error')}</Text>
         );
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     } else if (profileType == 'image') {
       schemaOptions.fields.imageFile.template = ProfileImagePickerTemplate;
     } else if (profileType == 'profile') {
@@ -116,7 +119,7 @@ export default class EditUserProfile extends Component {
             getFormSchemaOption={this.getFormSchemaOption}
           />
         );
-        break;
+      // break;
       case 'desc':
         return (
           <DescriptionTabView
@@ -186,8 +189,7 @@ export default class EditUserProfile extends Component {
             onSamePasswordErrorState={this.changePasswordErrorState}
           />
         );
-        break;
-        return null;
+      // break;
     }
   };
 

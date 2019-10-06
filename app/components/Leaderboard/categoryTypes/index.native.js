@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { ScrollView, Animated } from 'react-native';
 import { PropTypes } from 'prop-types';

@@ -82,7 +82,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 'pftp-widget-treecounter',
                 PFTPWidgetTreeCounter
               );
-            } catch (err) {}
+            } catch (err) {
+              console.log(err);
+            }
 
             let treecounter = result.data;
             if (!isStandardTreecounter) {

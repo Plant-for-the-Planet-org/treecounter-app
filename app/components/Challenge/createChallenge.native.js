@@ -92,8 +92,11 @@ export default class ChallengeTabView extends Component {
       <TabView
         useNativeDriver
         navigationState={this.state}
+        // eslint-disable-next-line no-underscore-dangle
         renderScene={this._renderSelectionScene}
+        // eslint-disable-next-line no-underscore-dangle
         renderTabBar={this._renderTabBar}
+        // eslint-disable-next-line no-underscore-dangle
         onIndexChange={this._handleIndexChange}
       />
     );

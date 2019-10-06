@@ -16,7 +16,9 @@ export const saveState = async state => {
   try {
     const serializedState = JSON.stringify(state);
     await AsyncStorage.setItem('state', serializedState);
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const saveItem = async (key, value) => {

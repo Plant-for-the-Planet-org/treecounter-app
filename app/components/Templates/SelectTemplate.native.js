@@ -11,6 +11,7 @@ import { Text, View, Platform, Dimensions } from 'react-native';
 class SelectTemplateIOS extends React.PureComponent {
   constructor(props) {
     super(props);
+    // eslint-disable-next-line no-underscore-dangle
     this._onPress = this.onPress.bind(this);
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { PureComponent } from 'react';
 import {
   ScrollView,

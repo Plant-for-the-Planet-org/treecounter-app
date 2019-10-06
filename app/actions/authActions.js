@@ -27,6 +27,7 @@ export function login(credentials, recaptchaToken, navigation = undefined) {
       .then(res => {
         const { token, refresh_token, data } = res.data;
         if (!data.isActivated) {
+          // eslint-disable-next-line no-underscore-dangle
           updateActivateToken(credentials._username, token);
         } else {
           updateJWT(token, refresh_token);

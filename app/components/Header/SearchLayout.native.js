@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-navigation';

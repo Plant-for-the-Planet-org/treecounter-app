@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
@@ -155,7 +156,7 @@ export default class DonateTrees extends React.PureComponent {
 
   Tab1validated() {
     if (this.props.selectedProject) {
-      this._handleIndexChange(0);
+      this.function_handleIndexChange(0);
     }
   }
 
@@ -167,7 +168,7 @@ export default class DonateTrees extends React.PureComponent {
           treeCount: this.state.selectedTreeCount
         }
       });
-      this._handleIndexChange(1);
+      this.function_handleIndexChange(1);
     }
   };
   goToNextTab(value) {
@@ -239,7 +240,7 @@ export default class DonateTrees extends React.PureComponent {
       props.navigationState.routes,
       this.state.index,
       index => {
-        this._handleIndexChange(index);
+        this.function_handleIndexChange(index);
       }
     );
   };
@@ -303,7 +304,7 @@ export default class DonateTrees extends React.PureComponent {
         ) : (
           <LoadingIndicator />
         );
-        break;
+      // break;
 
       case 'recipient': {
         return (
@@ -319,14 +320,14 @@ export default class DonateTrees extends React.PureComponent {
       }
     }
   };
-  _handleIndexChange = index => {
-    if (this._canJumpToTab(index)) {
+  function_handleIndexChange = index => {
+    if (this.function_canJumpToTab(index)) {
       this.setState({ index });
       this.props.onTabChange(this.state.routes[index].title);
     }
   };
 
-  _canJumpToTab = index => {
+  function_canJumpToTab = index => {
     if (index === 2) {
       if (this.getRecieptFormState() != null) {
         return true;
@@ -394,7 +395,7 @@ export default class DonateTrees extends React.PureComponent {
           renderScene={this._renderScene}
           renderTabBar={this._renderTabBar}
           useNativeDriver
-          onIndexChange={this._handleIndexChange}
+          onIndexChange={this.function_handleIndexChange}
         />
         <TabContainer {...this.props} />
       </View>

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { LayoutAnimation, Text, TextInput, View, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';

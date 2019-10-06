@@ -196,11 +196,11 @@ export default class EditUserProfile extends React.Component {
     const updatedUserProfile = {
       ...this.props.currentUserProfile,
       synopsis1: `${
-        !!this.props.currentUserProfile.synopsis1
+        this.props.currentUserProfile.synopsis1
           ? this.props.currentUserProfile.synopsis1
           : ''
       }${
-        !!this.props.currentUserProfile.synopsis2
+        this.props.currentUserProfile.synopsis2
           ? ' ' + this.props.currentUserProfile.synopsis2
           : ''
       }`,
@@ -232,6 +232,7 @@ export default class EditUserProfile extends React.Component {
               type={parsedSchema[type].image.transformedSchema}
               options={parsedSchema[type].image.schemaOptions}
               value={updatedUserProfile}
+              // eslint-disable-next-line no-underscore-dangle
               onChange={value => (this._profileImageValue = value)}
             />
           </div>
@@ -248,7 +249,8 @@ export default class EditUserProfile extends React.Component {
                 type,
                 'profile',
                 undefined,
-                !!this._profileImageValue
+                // eslint-disable-next-line no-underscore-dangle
+                this._profileImageValue
               );
             }}
           >

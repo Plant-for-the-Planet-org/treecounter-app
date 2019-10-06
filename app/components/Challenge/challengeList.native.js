@@ -10,7 +10,9 @@ class ChallengeList extends Component {
     return (
       <FlatList
         data={challenges}
+        // eslint-disable-next-line no-underscore-dangle
         keyExtractor={this._keyExtractor}
+        // eslint-disable-next-line no-underscore-dangle
         renderItem={this._renderItem}
       />
     );

@@ -1299,6 +1299,8 @@ export default {
         attr: {
           maxlength: 100
         },
+        pattern:
+          '^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+.)?[a-zA-Z]+.)?(vodafone).de$',
         widget: 'email',
         icon: 'email',
         help: null,

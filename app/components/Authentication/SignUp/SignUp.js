@@ -154,13 +154,21 @@ export default class SignUp extends Component {
                 type === 'vodafone' ? (type = 'individual') : type
               )}
             >
-              {ProfileTypeParam === 'vodafone' ? (type = 'vodafone') : type}
-              <TCombForm
-                ref={'signupForm'}
-                type={signupFormSchema[type]}
-                options={this.props.schemaOptions[type]}
-                value={this.props.formValue}
-              />
+              {ProfileTypeParam === 'vodafone' ? (
+                <TCombForm
+                  ref={'signupForm'}
+                  type={signupFormSchema[ProfileTypeParam]}
+                  options={this.props.schemaOptions[ProfileTypeParam]}
+                  value={this.props.formValue}
+                />
+              ) : (
+                <TCombForm
+                  ref={'signupForm'}
+                  type={signupFormSchema[type]}
+                  options={this.props.schemaOptions[type]}
+                  value={this.props.formValue}
+                />
+              )}
               <PrimaryButton
                 onClick={event => {
                   this.props.onSignUpClicked(

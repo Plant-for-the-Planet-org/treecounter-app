@@ -43,6 +43,7 @@
     "no-unreachable": 2,
     "no-unused-vars": 2,
     "no-useless-escape": 2,
+    "no-console": 1,
     "no-var": 2,
     "quotes": [
       2,

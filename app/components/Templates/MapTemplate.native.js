@@ -7,6 +7,7 @@ import PrimaryButton from '../../components/Common/Button/PrimaryButton';
 import mapTemplateStyle from '../../styles/mapTemplate.native';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
 import i18n from '../../locales/i18n.js';
+import MapboxMap from '../Map/MapboxMap.native';
 
 export function MapTemplate(locals) {
   let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
@@ -24,6 +25,12 @@ export function MapTemplate(locals) {
     : {};
   return (
     <View style={[mapTemplateStyle.mapContainer, borderStyle]}>
+      <MapboxMap
+        mapStyle={{
+          height: 200
+          // borderRedius: 5
+        }}
+      />
       <PrimaryButton
         onClick={() => {
           request(
@@ -52,7 +59,7 @@ export function MapTemplate(locals) {
       >
         {i18n.t('label.get_device_location')}
       </PrimaryButton>
-      <Text>{i18n.t('label.map_under_construction')}</Text>
+      {/* <Text>{i18n.t('label.map_under_construction')}</Text> */}
       <Text>
         {/* {console.log(locals.value.split('geoLatitude=')[1])}
         {console.log(locals.value.split('&')[0].split('=')[1])} */}

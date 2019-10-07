@@ -47,3 +47,8 @@ web/prod
 web/server
 app/config/index.js
 app/config/index.js.env.*
+ios/._TreecounterApp.xcodeproj
+ios/._TreecounterApp.xcworkspace
+ios/Pods/._Pods.xcodeproj
+ios/Podfile.lock
+ios/Pods/*

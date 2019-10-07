@@ -28,7 +28,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
 
     for (let propertyKey in properties) {
       let newEnum = {};
-      if (properties.propertyKey) {
+      if (properties[propertyKey]) {
         if (properties[propertyKey]['enum']) {
           for (let enumKeys in properties[propertyKey].enum) {
             newEnum[properties[propertyKey].enum[enumKeys]] =

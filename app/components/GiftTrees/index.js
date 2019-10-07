@@ -119,7 +119,7 @@ export default class GiftTrees extends Component {
       expandedOption: '1',
       showNextButton: true,
       donationCreated: false,
-      showSelectProject: false
+      showSelectProject: true
     };
 
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);

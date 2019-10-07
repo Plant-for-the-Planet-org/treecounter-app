@@ -99,7 +99,7 @@ class CheckoutForm extends React.Component {
     if (paymentMethodId !== undefined || paymentMethodId != 0) {
       const donationId = this.props.donationId
         ? this.props.donationId
-        : this.props.paymentStatus
+        : this.props.paymentStatus && this.props.paymentStatus.contribution
           ? this.props.paymentStatus.contribution[0].id
           : undefined;
       if (donationId) {

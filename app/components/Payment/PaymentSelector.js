@@ -69,7 +69,7 @@ class PaymentSelector extends Component {
     } else {
       const donationId = this.props.donationId
         ? this.props.donationId
-        : this.props.paymentStatus
+        : this.props.paymentStatus && this.props.paymentStatus.contribution
           ? this.props.paymentStatus.contribution[0].id
           : undefined;
       if (donationId) {

@@ -12,7 +12,7 @@ import Offline from './Gateways/Offline';
 import { handlePay, finalizeDonation } from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 import { paymentFailed } from '../../reducers/paymentStatus';
-import { formatNumber, delimitNumbers } from '../../utils/utils';
+import NumberFormat from '../Common/NumberFormat';
 
 class PaymentSelector extends Component {
   constructor(props) {
@@ -196,9 +196,14 @@ class PaymentSelector extends Component {
               })}
             </div>
           )}
-          <div>{`${i18n.t('label.amount')}: ${
-            paymentDetails.amount
-          } ${currency}`}</div>
+          <div>
+            {`${i18n.t('label.amount')}: `}
+            <NumberFormat
+              data={paymentDetails.amount}
+              currency={currency}
+              force="true"
+            />
+          </div>
           <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
         </div>
         {Object.keys(paymentMethods).map(gateway => {

@@ -11,12 +11,18 @@ const NumberFormat = ({
   currency,
   userProfile,
   currencies,
-  globalCurrency
+  globalCurrency,
+  force
 }) => {
   if (!userProfile) {
     userProfile = {
+      // we use redux currency or if not found use localstorage currency
       currency: globalCurrency.currency || getPreferredCurrency()
     };
+  }
+  if (force && currency) {
+    // force use provided currency
+    userProfile.currency = currency;
   }
   return formatNumber(data, locale, currency, userProfile, currencies);
 };
@@ -33,7 +39,8 @@ NumberFormat.propTypes = {
   currency: PropTypes.any,
   userProfile: PropTypes.any,
   currencies: PropTypes.any,
-  globalCurrency: PropTypes.any
+  globalCurrency: PropTypes.any,
+  force: PropTypes.any
 };
 
 export default connect(mapStateToProps)(NumberFormat);

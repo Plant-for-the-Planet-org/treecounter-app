@@ -554,7 +554,6 @@ export default class GiftTrees extends Component {
                     tpoName: this.props.selectedTpo.name,
                     donorEmail: email,
                     donorName: name,
-                    treeCount: this.state.selectedTreeCount,
                     plantProjectName: plantProject.name,
                     giftTreeCounterName: this.state.giftTreecounterName,
                     treeCount: this.state.selectedTreeCount

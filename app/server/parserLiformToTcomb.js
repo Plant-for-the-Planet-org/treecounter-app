@@ -48,7 +48,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
       fields: {}
     };
     for (let propertyKey in properties) {
-      if (properties.propertyKey) {
+      if (properties[propertyKey]) {
         let options = {};
         if (
           properties[propertyKey].type &&

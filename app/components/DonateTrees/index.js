@@ -384,15 +384,16 @@ export default class DonateTrees extends Component {
     }
 
     let paymentMethods;
-
-    if (receipt && plantProject) {
+    if (receipt) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
-      const countryCurrencies = plantProject.paymentSetup.countries;
-      if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
-        countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+      if (plantProject && plantProject.paymentSetup) {
+        const countryCurrencies = plantProject.paymentSetup.countries;
+        if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
+          countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+        }
+        paymentMethods =
+          plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
       }
-      paymentMethods =
-        plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
 
     return this.state.showSelectProject ? (

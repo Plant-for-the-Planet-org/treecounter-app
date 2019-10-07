@@ -69,32 +69,42 @@ class PaymentSelector extends Component {
     } else {
       const donationId = this.props.donationId
         ? this.props.donationId
-        : this.props.paymentStatus.contribution[0].id;
-      setProgressModelState(true);
-      this.props
-        .handlePay(
-          donationId,
-          {
-            gateway,
-            account: accountName,
-            source: { ...data }
-          },
-          this.props.currentUserProfile
-        )
-        .then(response => {
-          if (response.data.status == 'failed') {
-            this.props.paymentFailed({
-              status: false,
-              message: response.data.message || 'error'
-            });
-          } else {
-            this.props.finalizeDonation(
-              donationId,
-              this.props.currentUserProfile
-            );
-          }
-          setProgressModelState(false);
+        : this.props.paymentStatus && this.props.paymentStatus.contribution
+          ? this.props.paymentStatus.contribution[0].id
+          : undefined;
+      if (donationId) {
+        setProgressModelState(true);
+        this.props
+          .handlePay(
+            donationId,
+            {
+              gateway,
+              account: accountName,
+              source: { ...data }
+            },
+            this.props.currentUserProfile
+          )
+          .then(response => {
+            if (response.data.status == 'failed') {
+              this.props.paymentFailed({
+                status: false,
+                message: response.data.message || 'error'
+              });
+            } else {
+              this.props.finalizeDonation(
+                donationId,
+                this.props.currentUserProfile
+              );
+            }
+            setProgressModelState(false);
+          });
+      } else {
+        setProgressModelState(false);
+        this.props.paymentFailed({
+          status: false,
+          message: i18n.t('label.donation_id_missing_error')
         });
+      }
     }
   }
 
@@ -194,6 +204,12 @@ class PaymentSelector extends Component {
         {Object.keys(paymentMethods).map(gateway => {
           const accountName = paymentMethods[gateway];
           if ('stripe_cc' === gateway) {
+            const donationId = this.props.donationId
+              ? this.props.donationId
+              : this.props.paymentStatus &&
+                this.props.paymentStatus.contribution
+                ? this.props.paymentStatus.contribution[0].id
+                : undefined;
             return (
               <div key={gateway}>
                 {this.state.errorMessage ? (
@@ -208,7 +224,7 @@ class PaymentSelector extends Component {
                   paymentDetails={this.props.paymentDetails}
                   account={accounts[accountName]}
                   accountName={accountName}
-                  donationId={this.props.donationId}
+                  donationId={donationId}
                   reinitiateStripe={this.reinitiateStripe}
                   stripePublishableKey={this.props.stripePublishableKey}
                   paymentFailed={this.props.paymentFailed}
@@ -249,7 +265,7 @@ class PaymentSelector extends Component {
             return (
               <div key={gateway}>
                 {this.state.errorMessage ? (
-                  <div>this.state.errorMessage</div>
+                  <div>{this.state.errorMessage}</div>
                 ) : null}
                 <Paypal
                   key={gateway}
@@ -271,7 +287,7 @@ class PaymentSelector extends Component {
             return (
               <div key={gateway}>
                 {this.state.errorMessage ? (
-                  <div>this.state.errorMessage</div>
+                  <div>{this.state.errorMessage}</div>
                 ) : null}
                 <Offline
                   key={gateway}

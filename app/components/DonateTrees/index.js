@@ -210,7 +210,6 @@ export default class DonateTrees extends Component {
       return false;
     },
     () => {
-      // console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt && this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
@@ -250,7 +249,6 @@ export default class DonateTrees extends Component {
       return false;
     },
     () => {
-      // console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt && this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
@@ -386,15 +384,16 @@ export default class DonateTrees extends Component {
     }
 
     let paymentMethods;
-
-    if (receipt && plantProject) {
+    if (receipt) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
-      const countryCurrencies = plantProject.paymentSetup.countries;
-      if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
-        countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+      if (plantProject && plantProject.paymentSetup) {
+        const countryCurrencies = plantProject.paymentSetup.countries;
+        if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
+          countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+        }
+        paymentMethods =
+          plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
       }
-      paymentMethods =
-        plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
 
     return this.state.showSelectProject ? (

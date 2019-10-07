@@ -32,7 +32,7 @@ class StripePayment extends Component {
     let props = this.props;
     const donationId = props.donationId
       ? props.donationId
-      : props.paymentStatus
+      : props.paymentStatus && props.paymentStatus.contribution
         ? props.paymentStatus.contribution[0].id
         : null;
     return (

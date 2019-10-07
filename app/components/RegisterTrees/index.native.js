@@ -1,36 +1,33 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import { TabView } from 'react-native-tab-view';
+import { TabBar, TabView } from 'react-native-tab-view';
 import CardLayout from '../Common/Card';
-import {
-  singleTreeRegisterFormSchema,
-  schemaOptionsSingleTree,
-  multipleTreesRegisterFormSchema,
-  schemaOptionsMultipleTrees
-} from '../../server/parsedSchemas/registerTrees';
+
 import i18n from '../../locales/i18n.js';
-import { renderFilledTabBar } from '../Common/Tabs';
+// import { renderFilledTabBar } from '../Common/Tabs';
 import RegisterTreeTab from './RegisterTreeTab.native';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
+import tabBarStyles from '../../styles/common/tabbar.native';
+import styles from '../../styles/trillion.native';
 
+const routes = [
+  {
+    key: 'single-tree',
+    title: i18n.t('label.individual')
+  },
+  { key: 'multiple-trees', title: i18n.t('label.many_trees') }
+];
 export default class RegisterTrees extends Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
     this.state = {
       individual: {
         treeCount: 1
       },
       index: 0,
-      routes: [
-        {
-          key: 'single-tree',
-          title: i18n.t('label.individual')
-        },
-        { key: 'multiple-trees', title: i18n.t('label.many_trees') }
-      ]
+      routes: routes
     };
 
     // Bind Local method
@@ -45,10 +42,14 @@ export default class RegisterTrees extends Component {
   }
 
   _renderTabBar = props => {
-    return renderFilledTabBar(
-      props.navigationState.routes,
-      this.state.index,
-      index => this.setState({ index })
+    return (
+      <TabBar
+        {...props}
+        style={[tabBarStyles.tabBar, { justifyContent: 'center' }]}
+        labelStyle={tabBarStyles.textStyle}
+        indicatorStyle={tabBarStyles.textActive}
+        useNativeDriver
+      />
     );
   };
 
@@ -60,19 +61,12 @@ export default class RegisterTrees extends Component {
 
     return (
       <RegisterTreeTab
-        onRegister={this.props.onSubmit}
+        onRegister={(mode, value, plantProject)=>{
+          console.log('Data in index register',value)
+          return this.props.onSubmit(mode, value, plantProject)
+        }}
         isTpo={isTpo(this.props.currentUserProfile)}
         mode={route.key}
-        schemaType={
-          route.key == 'single-tree'
-            ? singleTreeRegisterFormSchema
-            : multipleTreesRegisterFormSchema
-        }
-        schemaOptions={
-          route.key == 'single-tree'
-            ? schemaOptionsSingleTree
-            : schemaOptionsMultipleTrees
-        }
         plantProjects={plantProjects}
       />
     );
@@ -83,8 +77,14 @@ export default class RegisterTrees extends Component {
       <ScrollView
         contentContainerStyle={{ flex: 1, paddingBottom: 72 }}
         enableOnAndroid
+        keyboardShouldPersistTaps
       >
         <CardLayout style={{ flex: 1 }}>
+          <Text style={styles.ufpTrees}>Register Trees</Text>
+          <Text style={styles.textStyle}>
+            Please use this form to register the trees you have planted
+            personally
+          </Text>
           <TabView
             useNativeDriver
             ref="registerTreeForm"
@@ -93,6 +93,7 @@ export default class RegisterTrees extends Component {
             renderTabBar={this._renderTabBar}
             onIndexChange={this._handleIndexChange}
           />
+
         </CardLayout>
       </ScrollView>
     );
@@ -101,5 +102,6 @@ export default class RegisterTrees extends Component {
 
 RegisterTrees.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  currentUserProfile: PropTypes.any.isRequired
+  currentUserProfile: PropTypes.any.isRequired,
+  navigation: PropTypes.any.isRequired
 };

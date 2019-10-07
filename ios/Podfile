@@ -10,20 +10,6 @@ target 'TreecounterApp' do
     Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
   end
 
-  post_install do |installer|
-    installer.pods_project.targets.each do |target|
-      if target.name == 'react-native-config'
-        phase = target.project.new(Xcodeproj::Project::Object::PBXShellScriptBuildPhase)
-        phase.shell_script = "cd ../../"\
-            " && RNC_ROOT=./node_modules/react-native-config/"\
-            " && export SYMROOT=$RNC_ROOT/ios/ReactNativeConfig"\
-            " && ruby $RNC_ROOT/ios/ReactNativeConfig/BuildDotenvConfig.ruby"
-
-        target.build_phases << phase
-        target.build_phases.move(phase,0)
-      end
-    end
-  end
 
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
@@ -74,7 +60,8 @@ target 'TreecounterApp' do
   pod 'Permission-Siri', :path => "#{permissions_path}/Siri.podspec"
   pod 'Permission-SpeechRecognition', :path => "#{permissions_path}/SpeechRecognition.podspec"
   pod 'Permission-StoreKit', :path => "#{permissions_path}/StoreKit.podspec"
-
+pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+pod 'react-native-google-maps', :path => '../node_modules/react-native-maps'
   target 'TreecounterAppTests' do
     inherit! :search_paths
     # Pods for testing

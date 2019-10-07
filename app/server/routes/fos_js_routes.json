@@ -5070,6 +5070,27 @@
       ],
       "schemes": []
     },
+    "app_mapTrees": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "type"
+        ],
+        [
+          "text",
+          "/map-trees"
+        ]
+      ],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
     "app_signup": {
       "tokens": [
         [

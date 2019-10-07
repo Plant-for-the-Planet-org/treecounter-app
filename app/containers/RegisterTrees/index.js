@@ -10,25 +10,15 @@ import { mergeContributionImages } from '../../helpers/utils';
 import { currentUserProfileSelector } from '../../selectors/index';
 import NavigationEvents from './importNavigationEvents';
 
-import {
-  schemaOptionsSingleTree,
-  schemaOptionsMultipleTrees
-} from '../../server/parsedSchemas/registerTrees';
-
 class RegisterTreesContainer extends PureComponent {
   constructor() {
     super();
     this.state = {
-      schemaOptionsSingleTree: schemaOptionsSingleTree,
-      schemaOptionsMultipleTrees: schemaOptionsMultipleTrees,
       loadSvg: true
     };
   }
 
-  onSubmit = (mode, registerTreeForm, plantProject) => {
-    registerTreeForm =
-      registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
-    let value = registerTreeForm.getValue();
+  onSubmit = (mode, value, plantProject) => {
     console.log('got the form value:register form:', value);
 
     if (value) {
@@ -37,7 +27,7 @@ class RegisterTreesContainer extends PureComponent {
       if (plantProject) {
         value.plantProject = plantProject;
       }
-      this.props
+      return this.props
         .registerTree(
           value,
           this.props.treecounter.id,
@@ -73,8 +63,6 @@ class RegisterTreesContainer extends PureComponent {
           key="register-tree"
           ref="registerTrees"
           onSubmit={this.onSubmit}
-          schemaOptionsSingleTree={this.state.schemaOptionsSingleTree}
-          schemaOptionsMultipleTrees={this.state.schemaOptionsMultipleTrees}
           currentUserProfile={this.props.currentUserProfile}
         />
       ) : null

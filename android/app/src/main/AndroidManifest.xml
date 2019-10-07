@@ -70,6 +70,9 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-    </application>
+      <meta-data
+           android:name="com.google.android.geo.API_KEY"
+           android:value="${google_maps_api_key}"/>
+      </application>
 
 </manifest>

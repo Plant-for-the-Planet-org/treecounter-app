@@ -260,7 +260,7 @@ export default class GiftTrees extends Component {
   ];
 
   determineDefaultCurrency() {
-    const { currentUserProfile, selectedProject } = this.props;
+    const { currentUserProfile /* , selectedProject */ } = this.props;
     const userCurrency =
       null === currentUserProfile ? null : currentUserProfile.currency;
 

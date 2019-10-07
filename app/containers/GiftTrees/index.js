@@ -34,7 +34,6 @@ class GiftTreesContainer extends Component {
       this.props.fetchCurrencies();
     }
   }
-  componentWillReceiveProps(nextProps) {}
   openProjects(formValue, type) {
     let title = '';
     if (formValue.firstname) {

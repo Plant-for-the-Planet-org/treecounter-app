@@ -1,7 +1,7 @@
 {
   "edit_trees": "Bäume bearbeiten",
   "tree_count": "Baumzahl",
-  "tree_species": "Baumarten",
+  "tree_species": "Baumart",
   "plant_date": "Datum der Pflanzung",
   "geo_location": "Geo-Standort",
   "add_images": "Bilder hinzufügen",
@@ -12,13 +12,13 @@
   "tree_diameter": "Baumdurchmesser",
   "tree_height": "Baumhöhe",
   "measurement_date": "Messdatum",
-  "heading_register_trees": "Registrieren Sie gepflanzte Bäume",
-  "register_description": "Berichten Sie über Bäume, die Sie gepflanzt haben. Diese Bäume werden in Ihrem Baumzähler angezeigt. Sie können Einträge bei \"Meine Bäume\" später aktualisieren, bearbeiten oder löschen.",
+  "heading_register_trees": "Registriere gepflanzte Bäume",
+  "register_description": "Hast du mit deinen eigenen Händen neue Bäume gepflanzt? Dann verewige sie hier. Die Bäume erscheinen in deinem Wald und zählen in unseren Welt-Baumzähler. Unter \"Mein Wald\" kannst du deine Einträge später auch noch bearbeiten oder löschen",
   "register": "Registrieren",
-  "many_trees": "Viele Bäume",
-  "plant_project": "Pflanzungsprojekt",
-  "plant_projects": "Pflanzungsprojekte",
+  "many_trees": "Mehrere Bäume",
+  "plant_project": "Pflanzprojekt",
+  "plant_projects": "Pflanzprojekte",
   "get_device_location": "Position des Geräts ermitteln",
-  "map_under_construction": "Karte in Vorbereitung",
-  "location_permission_denied": "Zugriff auf den Standort ist nicht erlaubt. Bitte öffnen Sie die Einstellungen und erlauben den Standortzugriff für diese App"
+  "map_under_construction": "Wir arbeiten an einer Kartendarstellung.",
+  "location_permission_denied": "Zugriff auf Standort verweigert. Bitte öffne die Einstellungen und erlaube dieser App den Zugriff auf den aktuellen Standort."
 }

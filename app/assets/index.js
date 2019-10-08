@@ -26,6 +26,7 @@ import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/darkTree.png';
 import SideMenuImage from './images/side_menu.png';
+import SideMenuImageNew from './images/Planet-Logo.svg';
 import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
 import MapPinRed from './images/map_pin_red.png';
@@ -137,11 +138,16 @@ import forward from './images/forward.png';
 import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
+import worldImg from './images/icons/world.png';
+import germany from './images/germany.png';
 import googlePlayBadge_en from './images/en/google-play-badge.png';
 import googlePlayBadge_de from './images/de/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
+
 export {
+  germany,
+  worldImg,
   mapCollapse,
   mapExpand,
   tpoIcon,
@@ -284,5 +290,6 @@ export {
   googlePlayBadge_en,
   googlePlayBadge_de,
   appleStoreBadge_en,
-  appleStoreBadge_de
+  appleStoreBadge_de,
+  SideMenuImageNew
 };

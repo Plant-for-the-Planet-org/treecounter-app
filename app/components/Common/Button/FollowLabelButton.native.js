@@ -13,7 +13,7 @@ const FollowLabelButton = ({
 }) => {
   label =
     label ||
-    (isSubscribed ? i18n.t('label.un_subscribe') : i18n.t('label.subscribe'));
+    (isSubscribed ? i18n.t('label.unsubscribe') : i18n.t('label.subscribe'));
 
   return (
     <TouchableItem

@@ -66,7 +66,7 @@ export default class EditUserProfile extends Component {
         },
         {
           key: 'following',
-          title: i18n.t('label.un_subscribe')
+          title: i18n.t('label.subscribed')
         }
       ]
     };
@@ -162,7 +162,7 @@ export default class EditUserProfile extends Component {
                       </TouchableItem>
 
                       <FollowLabelButton
-                        label={i18n.t('label.un_follow')}
+                        label={i18n.t('label.unsubscribe')}
                         isSubscribed
                         isLoggedIn={false}
                         onClick={() => {

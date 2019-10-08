@@ -19,7 +19,12 @@ class TreeCountCurrencySelector extends React.Component {
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.handleTreeCountChange = this.handleTreeCountChange.bind(this);
   }
-
+  componentDidMount() {
+    this.handleTreeCountChange({
+      treeCount: this.state.selectedTreeCount,
+      amount: this.calculateAmount(this.state.selectedTreeCount)
+    });
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTreeCount !== this.state.selectedTreeCount) {
       this.setState({

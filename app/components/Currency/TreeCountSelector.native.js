@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
-import { tree } from '../../assets';
 import { Text, TextInput, View } from 'react-native';
 import styles from '../../styles/currencies/treeCounterSelector';
 import RadioForm, {
@@ -125,7 +124,7 @@ class TreeCountSelector extends React.Component {
                         obj.value === this.state.fixedTreeCount &&
                         this.state.isFixed
                       }
-                      onPress={(value, index) => {
+                      onPress={(value /* , index */) => {
                         this.handleFixedTreeCountChange(value);
                       }}
                     />
@@ -134,7 +133,7 @@ class TreeCountSelector extends React.Component {
                       index={i}
                       labelWrapStyle={styles.radio_label}
                       labelHorizontal
-                      onPress={(value, index) => {
+                      onPress={(value /* , index */) => {
                         this.handleFixedTreeCountChange(value);
                       }}
                     />
@@ -187,7 +186,7 @@ class TreeCountSelector extends React.Component {
                       buttonInnerColor={'#ec6453'}
                       buttonOuterColor={'#ec6453'}
                       isSelected={!this.state.isFixed}
-                      onPress={(value, index) => {
+                      onPress={(value /* , index */) => {
                         this.handleVariableTreeCountSelected(value);
                       }}
                     />

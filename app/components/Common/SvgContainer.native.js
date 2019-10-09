@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Animated, Easing, Image } from 'react-native';
-import i18n from '../../locales/i18n';
+import { View, Animated, Easing, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 import * as svgs from '../../assets/svgAssets';
@@ -11,7 +10,6 @@ import SvgUri from 'react-native-svg-uri';
 import treecounterStyles from '../../styles/common/treecounter_svg';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import Svg, { Circle } from 'react-native-svg';
-import { Dimensions } from 'react-native';
 import _ from 'lodash';
 
 export default class SvgContainer extends Component {

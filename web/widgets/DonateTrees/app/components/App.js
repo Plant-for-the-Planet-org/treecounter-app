@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import i18n from '../../../../../app/locales/i18n.js';
 import PlantProjectFull from '../../../../../app/components/PlantProjects/PlantProjectFull';
 import PrimaryButton from '../../../../../app/components/Common/Button/PrimaryButton';
-import ReactDOM from 'react-dom';
 import DonationFlow from './DonationFLow';
 import { getLocalRoute } from '../../../../../app/actions/apiRouting';
 
@@ -45,13 +44,7 @@ export default class App extends Component {
   }
 
   render() {
-    const {
-      serverName,
-      baseUrl,
-      treecounter,
-      ProjectId,
-      inlineDonation
-    } = this.props;
+    const { serverName, treecounter, ProjectId, inlineDonation } = this.props;
     const style = `.canvasContainer {
       background-color:${this.props.backgroundColor};
     }`;
@@ -87,7 +80,7 @@ export default class App extends Component {
         />
         <div className="select-project_button__container">
           <PrimaryButton
-            onClick={event => {
+            onClick={() => {
               // console.log(event);
               // const body = document.body;
               // let div = document.createElement('div');

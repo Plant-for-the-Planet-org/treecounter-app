@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import CardLayout from '../Common/Card';

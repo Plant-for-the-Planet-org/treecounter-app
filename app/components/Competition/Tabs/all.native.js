@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
-import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
+import { ScrollView } from 'react-native';
 import styles from '../../../styles/selectplantproject/featured.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
-import FeaturedCompetitions from './featured.native';
 
 export default class AllCompetitions extends Component {
   constructor(props) {
@@ -52,7 +49,7 @@ export default class AllCompetitions extends Component {
     });
   }
 
-  onSelectClickedFeaturedProjects = id => {
+  onSelectClickedFeaturedProjects = (/*id*/) => {
     // this.props.selectProject(id);
     // const { navigation } = this.props;
     // updateStaticRoute(

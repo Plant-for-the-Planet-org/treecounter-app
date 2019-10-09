@@ -37,7 +37,6 @@ Circle.propTypes = {
   ndviAggregate: PropTypes.object,
   min: PropTypes.number,
   max: PropTypes.number,
-  gradientName: PropTypes.string,
   getColorForNDVI: PropTypes.func,
   onClick: PropTypes.func
 };

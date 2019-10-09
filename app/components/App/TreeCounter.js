@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 // Library imports
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
@@ -113,6 +114,7 @@ class TreeCounter extends Component {
         nextProps.userProfile.id != this.props.userProfile.id)
     ) {
       let isLoggedIn = null !== nextProps.userProfile;
+      // eslint-disable-next-line no-underscore-dangle
       this._appRoutes = undefined;
       this.setState({ loading: false, isLoggedIn: isLoggedIn });
     }
@@ -151,6 +153,7 @@ class TreeCounter extends Component {
         }
       />
     );
+    // eslint-disable-next-line no-underscore-dangle
     this._appRoutes = (
       <div className="app-container__content">
         <BodyErrorBoundary>

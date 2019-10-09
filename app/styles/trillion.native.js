@@ -1,6 +1,4 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions } from 'react-native';
-import { Fonts } from './../utils/fonts';
 
 export default EStyleSheet.create({
   scrollContainer: {},

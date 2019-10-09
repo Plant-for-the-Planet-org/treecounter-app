@@ -5,12 +5,10 @@
 
 import React, { Component } from 'react';
 //TODO import this first to avoid any init issue of i18n
-import i18n from '../../locales/i18n.js';
 import AppDrawerNavigatorContainer from '../../containers/Navigators/AppDrawerNavigatorContainer';
 import { connect } from 'react-redux';
 import { loadTpos } from '../../actions/loadTposAction';
 import { bindActionCreators } from 'redux';
-import { View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { initLocale } from '../../actions/getLocale.native.js';
 
@@ -32,7 +30,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (/* state */) => ({
   // userProfile: currentUserProfileSelector(state)
 });
 

@@ -28,8 +28,8 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
 
     for (let propertyKey in properties) {
       let newEnum = {};
-      if (properties.hasOwnProperty(propertyKey)) {
-        if (properties[propertyKey].hasOwnProperty('enum')) {
+      if (properties[propertyKey]) {
+        if (properties[propertyKey]['enum']) {
           for (let enumKeys in properties[propertyKey].enum) {
             newEnum[properties[propertyKey].enum[enumKeys]] =
               properties[propertyKey].enum_titles[enumKeys];
@@ -48,7 +48,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
       fields: {}
     };
     for (let propertyKey in properties) {
-      if (properties.hasOwnProperty(propertyKey)) {
+      if (properties[propertyKey]) {
         let options = {};
         if (
           properties[propertyKey].type &&
@@ -56,7 +56,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
             properties[propertyKey].type === 'integer' ||
             properties[propertyKey].type === 'number')
         ) {
-          if (properties[propertyKey].hasOwnProperty('icon')) {
+          if (properties[propertyKey]['icon']) {
             options.config = {
               iconUrl: images[properties[propertyKey].icon]
             };
@@ -65,16 +65,13 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
               properties[propertyKey].format = 'email';
             }
           }
-          if (properties[propertyKey].hasOwnProperty('maxDate')) {
+          if (properties[propertyKey]['maxDate']) {
             options.config = { ...options.config, maxDate: true };
           }
-          if (properties[propertyKey].hasOwnProperty('minDate')) {
+          if (properties[propertyKey]['minDate']) {
             options.config = { ...options.config, minDate: true };
           }
-          if (
-            innerConfig[propertyKey] &&
-            innerConfig[propertyKey].hasOwnProperty('style')
-          ) {
+          if (innerConfig[propertyKey] && innerConfig[propertyKey]['style']) {
             options.config = {
               style: innerConfig[propertyKey].style
             };
@@ -83,7 +80,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
             options.config = { ...options.config, email: true };
             properties[propertyKey].format = 'email';
           }
-          if (!properties[propertyKey].hasOwnProperty('enum')) {
+          if (!properties[propertyKey]['enum']) {
             options.placeholder = properties[propertyKey].title;
             options.label = properties[propertyKey].title;
             options.auto = 'none';

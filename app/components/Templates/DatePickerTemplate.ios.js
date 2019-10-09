@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -130,13 +131,13 @@ export function DatePickerTemplate(locals) {
 
   const stylesheet = locals.stylesheet;
   let formGroupStyle = stylesheet.formGroup.normal;
-  let controlLabelStyle = stylesheet.controlLabel.normal;
+  // let controlLabelStyle = stylesheet.controlLabel.normal;
   let helpBlockStyle = stylesheet.helpBlock.normal;
   const errorBlockStyle = stylesheet.errorBlock;
 
   if (locals.hasError) {
     formGroupStyle = stylesheet.formGroup.error;
-    controlLabelStyle = stylesheet.controlLabel.error;
+    // controlLabelStyle = stylesheet.controlLabel.error;
     helpBlockStyle = stylesheet.helpBlock.error;
   }
 

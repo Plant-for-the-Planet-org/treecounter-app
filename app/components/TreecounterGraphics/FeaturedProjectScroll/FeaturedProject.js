@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, Image } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import styles from './../../../styles/trillion.native';
 import i18n from '../../../locales/i18n';
 import { greencalendar } from './../../../assets/';

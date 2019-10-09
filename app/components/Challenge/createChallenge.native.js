@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TabView, TabBar, SceneMap, View } from 'react-native-tab-view';
+import { TabView, TabBar } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar';
 import { Dimensions } from 'react-native';
 import ChallengeUser from './Tabs/ChallengeUser';
@@ -92,8 +92,11 @@ export default class ChallengeTabView extends Component {
       <TabView
         useNativeDriver
         navigationState={this.state}
+        // eslint-disable-next-line no-underscore-dangle
         renderScene={this._renderSelectionScene}
+        // eslint-disable-next-line no-underscore-dangle
         renderTabBar={this._renderTabBar}
+        // eslint-disable-next-line no-underscore-dangle
         onIndexChange={this._handleIndexChange}
       />
     );

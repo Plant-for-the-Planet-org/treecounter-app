@@ -13,7 +13,7 @@ export const initialState = null;
 const selectedPlantProjectIdReducer = handleActions(
   {
     [setSelectedPlantProjectId]: (state, action) => action.payload,
-    [clearSelectedPlantProjectId]: (state, action) => initialState
+    [clearSelectedPlantProjectId]: (/* state, action */) => initialState
   },
   initialState
 );

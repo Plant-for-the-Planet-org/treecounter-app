@@ -20,7 +20,7 @@ class CheckBox extends React.Component {
   textboxStyle = {
     flex: 1
   };
-  onValueChange = data => {
+  onValueChange = (/* data */) => {
     this.props.onValueChange(this.props.checkBoxState);
   };
   render() {

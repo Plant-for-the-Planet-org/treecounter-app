@@ -30,7 +30,7 @@ export function getLocale() {
 
 function guessLocale() {
   const location = window.location.href.split('/');
-  const _locale = location[location.length - 1];
+  const location_locale = location[location.length - 1];
   const languageCached = getItemSync('language');
 
   // order of language detection
@@ -39,10 +39,10 @@ function guessLocale() {
   // 3. use user chosen language from local storage if available
   // 4. use browser language if possible, but currently only de and en
   // 5. use English as default language
-  if (_locale.includes('_locale')) {
-    const tempLocale = _locale.split('=')[1];
-    return supportedLocales.includes(tempLocale) ? tempLocale : defaultLocale;
-  } else if (_locale.includes('?noredirect')) {
+  if (location_locale.includes('_locale')) {
+    const tempLocale = location_locale.split('=')[1];
+    return supportedLocales.includes(tempLocale) ? tempLocale : 'en';
+  } else if (location_locale.includes('?noredirect')) {
     return defaultLocale;
   } else if (languageCached !== null) {
     return languageCached;

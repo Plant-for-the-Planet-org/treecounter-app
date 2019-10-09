@@ -12,7 +12,6 @@ import { updateProfileDedication } from '../../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 import CardLayout from '../../Common/Card';
 import scrollStyle from '../../../styles/common/scrollStyle';
-import TabContainer from '../../../containers/Menu/TabContainer';
 import UserProfileImage from '../../Common/UserProfileImage.native';
 import { delimitNumbers } from '../../../utils/utils';
 

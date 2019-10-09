@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';

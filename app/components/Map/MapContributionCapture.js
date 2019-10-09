@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { PureComponent } from 'react';
 import { WebMap } from 'react-arcgis';
 import PropTypes from 'prop-types';

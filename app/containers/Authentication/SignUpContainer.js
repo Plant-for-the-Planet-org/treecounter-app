@@ -7,7 +7,6 @@ import { updateRoute } from '../../helpers/routerHelper';
 import { SignUp } from '../../components/Authentication';
 import { signUp } from '../../actions/signupActions';
 import { schemaOptions } from '../../server/parsedSchemas/signup';
-import _ from 'lodash';
 import { handleServerResponseError } from '../../helpers/utils';
 
 class SignUpContainer extends React.Component {
@@ -31,7 +30,7 @@ class SignUpContainer extends React.Component {
     if (formValue) {
       this.props
         .signUp(profileType, formValue, token, this.props.navigation)
-        .then(success => {})
+        .then((/* success */) => {})
         .catch(err => {
           refreshToken();
           console.log('err signup data', err);

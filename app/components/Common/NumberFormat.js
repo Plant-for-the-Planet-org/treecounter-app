@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { currentUserProfileSelector } from '../../selectors';
 import { connect } from 'react-redux';

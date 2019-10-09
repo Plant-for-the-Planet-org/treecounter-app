@@ -1,52 +1,15 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  Keyboard
-} from 'react-native';
+import { Text, View, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { forward } from './../../assets';
-import t from 'tcomb-form-native';
 import { postPledge } from './../../actions/pledgeAction';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 
 import i18n from '../../locales/i18n';
 import { connect } from 'react-redux';
-
-import {
-  pledgeFormSchema,
-  pledgeSchemaOptions
-} from './../../server/parsedSchemas/pledge';
-
-// let TCombForm = t.form.Form;
-
-// const formLayout = locals => {
-//   return (
-//     <View>
-//       <View style={styles.formView}>
-//         <View style={{ width: '45%' }}>{locals.inputs.firstname}</View>
-//         <View style={{ width: '45%' }}>{locals.inputs.lastname}</View>
-//       </View>
-//       <View>{locals.inputs.email}</View>
-//       <View style={styles.formtreecountView}>
-//         <View style={{ width: '40%' }}>{locals.inputs.treeCount}</View>
-//       </View>
-//     </View>
-//   );
-// };
-
-// const allSchemaOptions = {
-//   template: formLayout,
-//   ...pledgeSchemaOptions
-// };
-
-let _ = require('lodash');
 
 class MakePledgeForm extends Component {
   state = {
@@ -102,7 +65,8 @@ class MakePledgeForm extends Component {
 
   onFormSubmit = () => {
     const { firstname, lastname, email, treeCount } = this.state;
-    const { navigation } = this.props;
+    // const { navigation } = this.props;
+    // eslint-disable-next-line no-useless-escape
     let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
       firstname === '' ||
@@ -160,7 +124,7 @@ class MakePledgeForm extends Component {
 
   render() {
     let { firstname, lastname, email, treeCount } = this.state;
-    const { navigation } = this.props;
+    // const { navigation } = this.props;
     const treeCost = this.props.navigation.getParam('plantProject').treeCost;
     const projectName = this.props.navigation.getParam('plantProject').name;
     const currency = this.props.navigation.getParam('plantProject').currency;
@@ -302,7 +266,7 @@ class MakePledgeForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
   // postedPledge: postedPledgeSelector(state)
 });
 

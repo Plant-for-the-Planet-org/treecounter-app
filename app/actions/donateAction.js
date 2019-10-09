@@ -1,5 +1,4 @@
 import { normalize } from 'normalizr';
-import { debug } from '../debug/index';
 
 import {
   postAuthenticatedRequest,
@@ -16,13 +15,12 @@ import {
 } from '../schemas/index';
 import {
   paymentSuccess,
-  paymentFailed,
   paymentCleared,
   donationCreation
 } from '../reducers/paymentStatus';
 
 export function fillCard() {
-  return dispatch => {
+  return (/* dispatch */) => {
     let request = getAuthenticatedRequest('stripe_customer', {
       version: 'v1.3'
     });
@@ -31,12 +29,12 @@ export function fillCard() {
 }
 
 export function attachCardToCostumer(paymentMethod) {
-  return dispatch => {
+  return (/* dispatch */) => {
     let request = postAuthenticatedRequest('stripe_paymentMethod_attach', {
       paymentMethod,
       version: 'v1.3'
     });
-    request.then(response => {
+    request.then(() => {
       console.log('method attached');
     });
   };
@@ -83,7 +81,7 @@ export function createPaymentGift(plantProjectId, requestData, loggedIn) {
 }
 
 export function handlePay(donationId, requestData, loggedIn) {
-  return dispatch => {
+  return (/* dispatch */) => {
     requestData = { paymentProviderRequest: { ...requestData } };
     let request = loggedIn
       ? postAuthenticatedRequest('donationPay_post', requestData, {

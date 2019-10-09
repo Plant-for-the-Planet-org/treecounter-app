@@ -80,7 +80,6 @@ export const getAllPlantProjectsSelector = createSelector(
   (plantProjects, entities, tpos) => {
     let normalisedProjects = Object.keys(plantProjects).reduce(
       (projects, id) => {
-        let projectsArray = [];
         projects.push(
           denormalize(plantProjects[id], plantProjectSchema, entities)
         );

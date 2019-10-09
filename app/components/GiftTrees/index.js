@@ -119,7 +119,7 @@ export default class GiftTrees extends Component {
       expandedOption: '1',
       showNextButton: true,
       donationCreated: false,
-      showSelectProject: false
+      showSelectProject: true
     };
 
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
@@ -260,7 +260,7 @@ export default class GiftTrees extends Component {
   ];
 
   determineDefaultCurrency() {
-    const { currentUserProfile, selectedProject } = this.props;
+    const { currentUserProfile /* , selectedProject */ } = this.props;
     const userCurrency =
       null === currentUserProfile ? null : currentUserProfile.currency;
 
@@ -554,10 +554,8 @@ export default class GiftTrees extends Component {
                     tpoName: this.props.selectedTpo.name,
                     donorEmail: email,
                     donorName: name,
-                    treeCount: this.state.selectedTreeCount,
                     plantProjectName: plantProject.name,
-                    giftTreeCounterName: this.state.giftTreecounterName,
-                    treeCount: this.state.selectedTreeCount
+                    giftTreeCounterName: this.state.giftTreecounterName
                   }}
                   onFailure={data =>
                     console.log('/////////////////// payment failure ', data)

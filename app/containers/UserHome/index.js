@@ -29,12 +29,16 @@ class UserHomeContainer extends React.Component {
     return [
       navigation ? (
         <NavigationEvents
-          onWillFocus={payload => {
-            this.setState({ loadSvg: true });
-          }}
-          onWillBlur={payload => {
-            this.setState({ loadSvg: false });
-          }}
+          onWillFocus={
+            (/* payload */) => {
+              this.setState({ loadSvg: true });
+            }
+          }
+          onWillBlur={
+            (/* payload */) => {
+              this.setState({ loadSvg: false });
+            }
+          }
           key="navigation-events"
         />
       ) : null,

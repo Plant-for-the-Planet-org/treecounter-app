@@ -10,7 +10,6 @@ import { loadTpos } from './loadTposAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import i18n from '../locales/i18n.js';
-import _ from 'lodash';
 export const userLogout = createAction('USER_LOGOUT');
 
 export function login(credentials, recaptchaToken, navigation = undefined) {
@@ -28,6 +27,7 @@ export function login(credentials, recaptchaToken, navigation = undefined) {
       .then(res => {
         const { token, refresh_token, data } = res.data;
         if (!data.isActivated) {
+          // eslint-disable-next-line no-underscore-dangle
           updateActivateToken(credentials._username, token);
         } else {
           updateJWT(token, refresh_token);
@@ -95,10 +95,10 @@ export function forgot_password(data, navigation = undefined) {
   };
 }
 
-export function sendEmail(navigation = undefined) {
-  return dispatch => {
+export function sendEmail(/* navigation = undefined */) {
+  return (/* dispatch */) => {
     postActivateLinkRequest('auth_sendActivationLink_post')
-      .then(res => {
+      .then((/* res */) => {
         // console.log(res);
       })
       .catch(err => debug(err));
@@ -108,7 +108,7 @@ export function sendEmail(navigation = undefined) {
 export function reset_password(data, navigation = undefined) {
   return dispatch => {
     return postRequest('auth_resetPassword_post', data)
-      .then(res => {
+      .then((/* res */) => {
         updateRoute('app_login', navigation || dispatch);
       })
       .catch(err => {
@@ -120,12 +120,13 @@ export function reset_password(data, navigation = undefined) {
 export function setAccessDenied(data, params, path, navigation = undefined) {
   return dispatch => {
     postRequest('public_accessDenied', data, params)
-      .then(res => {
-        const { statusText } = res;
+      .then((/* res */) => {
+        // const { statusText } = res;
         updateRoute(path, navigation || dispatch);
         // NotificationManager.success(statusText, i18n.t('label.success'), 5000);
       })
       .catch(error => {
+        console.log(error);
         // NotificationManager.error(error.response.data.message, i18n.t('label.error'), 5000);
       });
   };

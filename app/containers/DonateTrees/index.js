@@ -43,7 +43,6 @@ class DonationTreesContainer extends PureComponent {
       this.props.fetchCurrencies();
     }
   }
-  componentWillReceiveProps(nextProps) {}
   onTabChange = title => this.props.navigation.setParams({ titleParam: title });
 
   updateRoute = (routeName, id) =>

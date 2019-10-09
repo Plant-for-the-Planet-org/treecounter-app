@@ -5,7 +5,6 @@ import { close_green, darkTree, lightTree } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import svgStyles from '../../styles/common/treecounter_svg';
 import { View, Image, Text } from 'react-native';
-import { delimitNumbers } from '../../utils/utils';
 const textColor = '#686060';
 class PlantedDetails extends Component {
   render() {

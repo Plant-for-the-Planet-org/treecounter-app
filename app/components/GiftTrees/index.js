@@ -260,7 +260,7 @@ export default class GiftTrees extends Component {
   ];
 
   determineDefaultCurrency() {
-    const { currentUserProfile, selectedProject } = this.props;
+    const { currentUserProfile /* , selectedProject */ } = this.props;
     const userCurrency =
       null === currentUserProfile ? null : currentUserProfile.currency;
 
@@ -555,8 +555,7 @@ export default class GiftTrees extends Component {
                     donorEmail: email,
                     donorName: name,
                     plantProjectName: plantProject.name,
-                    giftTreeCounterName: this.state.giftTreecounterName,
-                    treeCount: this.state.selectedTreeCount
+                    giftTreeCounterName: this.state.giftTreecounterName
                   }}
                   onFailure={data =>
                     console.log('/////////////////// payment failure ', data)

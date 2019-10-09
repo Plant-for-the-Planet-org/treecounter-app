@@ -1,5 +1,6 @@
 import React from 'react';
-import i18n from '../../locales/i18n';
+
+/**
 
 const a = [
   '',
@@ -66,6 +67,7 @@ const inWords = function(num) {
       : '';
   return str;
 };
+ */
 
 const PlantProjectTemplate = function(itemIndex) {
   return function(locals) {

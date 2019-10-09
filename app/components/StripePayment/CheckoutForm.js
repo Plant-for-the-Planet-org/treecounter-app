@@ -33,7 +33,7 @@ class CheckoutForm extends React.Component {
     });
   };
 
-  handleSubmitSEPAPayment = async ev => {
+  handleSubmitSEPAPayment = async (/* ev */) => {
     console.log('SEPA PAYMENT SUBMITED');
   };
 

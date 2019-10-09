@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -10,21 +11,14 @@ import {
 import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
-import PlantProjectCarousel from '../PlantProjects/PlantProjectCarousel';
 import SvgContainer from '../Common/SvgContainer';
 import CardLayout from '../Common/Card';
 import stylesHome from '../../styles/user-home';
 import { delimitNumbers } from '../../utils/utils';
 import stylesPublicPage from '../../styles/public-page';
-import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
 
-import {
-  getProfileTypeName,
-  isMyself,
-  isUserFollower,
-  amISupporting
-} from './utils';
+import { isMyself, isUserFollower, amISupporting } from './utils';
 import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 

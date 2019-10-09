@@ -1,4 +1,4 @@
-import { Text, View, Image, TextInput } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
 import Permissions from 'react-native-permissions';
 import PrimaryButton from '../../components/Common/Button/PrimaryButton';
@@ -28,7 +28,7 @@ export function MapTemplate(locals) {
             skipPermissionRequests: true
           });
           Permissions.request('location', { type: 'whenInUse' }).then(
-            response => {
+            (/*response*/) => {
               navigator.geolocation.getCurrentPosition(
                 location => {
                   let { latitude, longitude } = location.coords;
@@ -36,7 +36,7 @@ export function MapTemplate(locals) {
                     'geoLongitude=' + longitude + '&geoLatitude=' + latitude
                   );
                 },
-                location => {
+                (/*location*/) => {
                   NotificationManager.error(
                     i18n.t('label.location_permission_denied'),
                     i18n.t('label.error'),

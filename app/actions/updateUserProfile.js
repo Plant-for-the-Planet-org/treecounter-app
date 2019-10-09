@@ -114,7 +114,6 @@ export function orderPlantProject(data, params) {
     return new Promise(function(resolve, reject) {
       postAuthenticatedRequest('plantProject_position', data, params)
         .then(res => {
-          const { statusText } = res;
           const { plantProject } = res.data.merge;
           dispatch(
             mergeEntities(normalize(plantProject, [plantProjectSchema]))

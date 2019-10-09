@@ -20,7 +20,7 @@ const paymentStatusReducer = handleActions(
     [donationCreation]: (state, action) => {
       return { ...state, ...action.payload };
     },
-    [paymentCleared]: (state, action) => {
+    [paymentCleared]: (state /* , action */) => {
       let returnState = { ...initialState };
       if (state && state.contribution) {
         returnState['contribution'] = state.contribution;

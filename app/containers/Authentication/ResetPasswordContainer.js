@@ -28,7 +28,7 @@ class ResetPassswordContainer extends React.Component {
   onClick(value) {
     this.props
       .reset_password(value, this.props.navigation)
-      .then(val => {})
+      .then((/* val */) => {})
       .catch(err => {
         let newSchemaOptions = handleServerResponseError(
           err,

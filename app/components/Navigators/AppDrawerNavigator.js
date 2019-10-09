@@ -30,7 +30,6 @@ import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenMod
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import BottomTabContainer from '../../containers/Menu/TabContainer';
 import GiftTrees from '../../containers/GiftTrees';
-import LeaderBoard from '../Leaderboard';
 import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
 import RegisterTrees from '../../containers/RegisterTrees';
 import EditUserContributionContainer from '../../containers/EditUserContribution';

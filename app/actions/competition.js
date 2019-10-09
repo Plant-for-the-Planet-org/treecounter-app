@@ -1,7 +1,6 @@
 import {
   deleteAuthenticatedRequest,
   getAuthenticatedRequest,
-  getRequest,
   postAuthenticatedRequest,
   putAuthenticatedRequest
 } from '../utils/api';

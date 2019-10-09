@@ -3,26 +3,11 @@ import PropTypes from 'prop-types';
 import PlantProjectSpecsItem from './PlantProjectSpecsItem';
 import i18n from '../../locales/i18n.js';
 
-import {
-  locationIcon,
-  plantedTarget,
-  target,
-  tree_survival,
-  dollar,
-  questionmark_orange
-} from '../../assets';
+import { locationIcon, tree_survival } from '../../assets';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectSpecs
  */
-const PlantProjectSpecs = ({
-  location,
-  countPlanted,
-  countTarget,
-  survivalRate,
-  currency,
-  treeCost,
-  taxDeduction
-}) => {
+const PlantProjectSpecs = ({ location, survivalRate, taxDeduction }) => {
   return (
     <div className="project-specs-left__container">
       <PlantProjectSpecsItem icon={locationIcon} label={location} />

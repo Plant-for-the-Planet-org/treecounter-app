@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { currentUserProfileSelector } from '../../selectors';
 import { context } from '../../config';
 
-const { scheme, host, base: baseUrl } = context;
+const { scheme, host } = context;
 const serverName = `${scheme}://${host}`;
 
 class WidgetShareContainer extends React.PureComponent {

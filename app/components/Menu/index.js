@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Select, { components } from 'react-select';
 import { connect } from 'react-redux';
 import * as images from '../../assets';
-import i18n from '../../locales/i18n';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';
@@ -57,7 +56,7 @@ const customStyles = {
     ...provided,
     width: '150px'
   }),
-  singleValue: (provided, state) => {
+  singleValue: (provided /* , state */) => {
     return {
       ...provided,
       border: 0,

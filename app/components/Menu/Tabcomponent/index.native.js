@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, Text } from 'react-native';
-import PropTypes, { func } from 'prop-types';
+import PropTypes from 'prop-types';
 import { updateRoute } from '../../../helpers/routerHelper/tabrouteHelper.native';
 import TouchableItem from '../../../components/Common/TouchableItem.native';
 import * as images from '../../../assets';

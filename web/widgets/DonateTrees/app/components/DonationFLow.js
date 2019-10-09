@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PrimaryButton from '../../../../../app/components/Common/Button/PrimaryButton';
 import ModalDialog from '../../../../../app/components/Common/ModalDialog';
-import { check_green } from '../../../../../app/assets';
-import i18n from '../../../../../app/locales/i18n';
+// import { check_green } from '../../../../../app/assets';
+// import i18n from '../../../../../app/locales/i18n';
 
 class DonationFlow extends React.Component {
   render() {

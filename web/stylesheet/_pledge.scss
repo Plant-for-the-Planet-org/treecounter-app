@@ -156,10 +156,12 @@
   text-align: left;
   padding:16px;
   width:100%;
+
+}
+.event-description > p {
   font-size: 18px;
   line-height: 27px;
 }
-
 .events_row {
   display: flex;
   justify-content: center;

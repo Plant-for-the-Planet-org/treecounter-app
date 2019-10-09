@@ -185,9 +185,9 @@ export default class Pledge extends Component {
             {this.props.pledges.description ? (
               <div
                 className="event-description"
-                style={{ maxWidth: '70%', margin: 'auto' }}
+                style={{ width: '85%', maxWidth: '778px', margin: 'auto' }}
               >
-                {this.props.pledges.description}
+                <p>{i18n.t(this.props.pledges.description)}</p>
               </div>
             ) : null}
           </div>

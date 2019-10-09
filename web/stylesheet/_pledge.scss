@@ -103,9 +103,9 @@
         font-size: 12px 
       }
 
-      .row-list-item-name{ font-size: 12px; margin-left: 12px; font-weight: 600 }
+      .row-list-item-name{ font-size: 12px; margin-left: 12px; font-weight: 600;font-family: 'Open Sans', 'Helvetica Neue', sans-serif }
 
-      .row-list-item-treeCount{ color: #89b53a; font-weight: bold }
+      .row-list-item-treeCount{ color: #89b53a; font-weight: bold;font-family: 'Open Sans', 'Helvetica Neue', sans-serif }
     }
     .row-list-item:nth-of-type(odd) {background-color: #f2f2f2;}
 
@@ -156,6 +156,8 @@
   text-align: left;
   padding:16px;
   width:100%;
+  font-size: 18px;
+  line-height: 27px;
 }
 
 .events_row {

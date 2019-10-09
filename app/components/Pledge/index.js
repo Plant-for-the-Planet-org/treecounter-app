@@ -183,8 +183,10 @@ export default class Pledge extends Component {
           </div>
           <div className="row">
             {this.props.pledges.description ? (
-              <div className="event-description">
-                <span style={{ fontWeight: 'bold' }}>Event Description - </span>
+              <div
+                className="event-description"
+                style={{ maxWidth: '70%', margin: 'auto' }}
+              >
                 {this.props.pledges.description}
               </div>
             ) : null}

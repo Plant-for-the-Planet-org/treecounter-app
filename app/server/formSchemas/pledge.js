@@ -45,7 +45,8 @@ export default {
       pattern: '.{1,}',
       icon: null,
       help: null,
-      propertyOrder: 4
+      propertyOrder: 4,
+      minimum: 1
     }
   },
   required: ['firstname', 'lastname', 'email', 'treeCount'],

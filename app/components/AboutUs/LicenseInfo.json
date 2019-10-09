@@ -60,6 +60,12 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/css-loader",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/css-loader/LICENSE"
       },
+      "date-fns@2.4.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/date-fns/date-fns",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/date-fns",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/date-fns/LICENSE.md"
+      },
       "esri-loader@2.9.2": {
         "licenses": "Apache-2.0",
         "repository": "https://github.com/Esri/esri-loader",
@@ -158,6 +164,13 @@
         "email": "michael.moroshko@gmail.com",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-autosuggest",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-autosuggest/LICENSE"
+      },
+      "react-datepicker@2.9.6": {
+        "licenses": "MIT",
+        "repository": "https://github.com/Hacker0x01/react-datepicker",
+        "publisher": "HackerOne",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-datepicker",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-datepicker/LICENSE"
       },
       "react-i18next@7.13.0": {
         "licenses": "MIT",

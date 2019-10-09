@@ -324,10 +324,10 @@ class TreeCounter extends Component {
     if (!this._appRoutes) {
       this.initRoutes();
     }
-    if (window.location.pathname.indexOf('signup') > -1 && this.state.isIOS) {
-      this.openApp(window.location.pathname);
-      return null;
-    }
+    // if (window.location.pathname.indexOf('signup') > -1 && this.state.isIOS) {
+    //   this.openApp(window.location.pathname);
+    //   return null;
+    // }
     return !this.state.loading ? (
       <div className="app">
         <BrowserRouter history={history}>

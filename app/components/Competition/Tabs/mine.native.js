@@ -119,7 +119,9 @@ export default class MineCompetitions extends Component {
                 maxWidth: '70%'
               }}
             >
-              Select a competition to join and start planting trees
+              {featuredCompetitions.length > 0
+                ? "List of all competitions you've joined or created."
+                : "It seems you don't have any competitions yet. Please join or create one, and they will appear here."}
             </Text>
             <Image
               source={trees}

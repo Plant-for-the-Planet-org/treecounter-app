@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, Text, View, Image } from 'react-native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
-import styles from '../../../styles/selectplantproject/featured.native';
+import styles from '../../../styles/competition/competition-master.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
@@ -21,11 +21,17 @@ export default class FeaturedCompetitions extends Component {
   componentWillMount() {
     let { allCompetitions } = this.props;
     let featuredCompetitions = [];
+    let CurrentDate = new Date();
+
     if (allCompetitions.length > 0) {
       allCompetitions.forEach(val => {
         if (val.category === 'featured') {
           val.competitions.forEach(comp => {
-            featuredCompetitions.push(comp);
+            let endDate = comp.endDate;
+            endDate = new Date(endDate);
+            if (endDate > CurrentDate) {
+              featuredCompetitions.push(comp);
+            }
           });
         }
       });
@@ -38,11 +44,16 @@ export default class FeaturedCompetitions extends Component {
   componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
     let featuredCompetitions = [];
+    let CurrentDate = new Date();
     if (allCompetitions.length > 0) {
       allCompetitions.forEach(val => {
         if (val.category === 'featured') {
           val.competitions.forEach(comp => {
-            featuredCompetitions.push(comp);
+            let endDate = comp.endDate;
+            endDate = new Date(endDate);
+            if (endDate > CurrentDate) {
+              featuredCompetitions.push(comp);
+            }
           });
         }
       });
@@ -51,17 +62,6 @@ export default class FeaturedCompetitions extends Component {
       featuredCompetitions: featuredCompetitions
     });
   }
-
-  onSelectClickedFeaturedProjects = id => {
-    // this.props.selectProject(id);
-    // const { navigation } = this.props;
-    // updateStaticRoute(
-    //   'app_donate_detail',
-    //   navigation,
-    //   0,
-    //   navigation.getParam('userForm')
-    // );
-  };
 
   render() {
     let { featuredCompetitions } = this.state;
@@ -72,31 +72,13 @@ export default class FeaturedCompetitions extends Component {
           { paddingBottom: 72 }
         ]}
       >
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            margin: 20,
-            marginBottom: 0
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 14,
-              fontWeight: 'normal',
-              fontStyle: 'normal',
-              lineHeight: 21,
-              letterSpacing: 0,
-              textAlign: 'left',
-              color: '#4d5153',
-              maxWidth: '70%'
-            }}
-          >
+        <View style={styles.headerView}>
+          <Text style={styles.headerTitle}>
             Select a competition to join and start planting trees
           </Text>
           <Image
             source={trees}
-            style={{ height: 60, flex: 1 }}
+            style={styles.headerImage}
             resizeMode="contain"
           />
         </View>

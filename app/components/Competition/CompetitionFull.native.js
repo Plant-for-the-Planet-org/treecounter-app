@@ -145,11 +145,14 @@ class CompetitionFull extends React.Component {
       button = (
         <PrimaryButton
           style={snippetStyles.buttonItem}
-          buttonStyle={snippetStyles.moreButtonStyle}
+          buttonStyle={[
+            snippetStyles.moreButtonStyle,
+            { borderColor: '#e74c3c' }
+          ]}
           textStyle={snippetStyles.moreButtonTextStyle}
           onClick={() => this.props.leaveCompetition(competitionDetail.id)}
         >
-          <Text> {i18n.t('label.leave')}</Text>
+          <Text style={{ color: '#e74c3c' }}> {i18n.t('label.leave')}</Text>
         </PrimaryButton>
       );
     } else if (status === 'pending') {
@@ -163,6 +166,16 @@ class CompetitionFull extends React.Component {
           <Text> {i18n.t('label.cancel_join_request')}</Text>
         </PrimaryButton>
       );
+    }
+
+    let CurrentDate = new Date();
+
+    if (competitionDetail) {
+      let endDate = competitionDetail.endDate;
+      endDate = new Date(endDate);
+      if (CurrentDate > endDate) {
+        button = <Text>This competition is now over</Text>;
+      }
     }
 
     return (
@@ -279,7 +292,7 @@ class CompetitionFull extends React.Component {
               </View>
 
               {/* Donate Card */}
-              <CardLayout style={[snippetStyles.cardContainer]}>
+              {/* <CardLayout style={[snippetStyles.cardContainer]}>
                 <Text
                   style={[snippetStyles.googleCardTitle, { textAlign: 'left' }]}
                 >
@@ -308,7 +321,7 @@ class CompetitionFull extends React.Component {
                     {i18n.t('Donate Now')}
                   </Text>
                 </TouchableOpacity>
-              </CardLayout>
+              </CardLayout> */}
               {/* Donate Card Ends */}
             </View>
             {/* Compeition Information Ended  */}

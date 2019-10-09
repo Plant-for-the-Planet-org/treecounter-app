@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import styles from '../../styles/competition/competition-full.native';
 import { flagTarget } from '../../assets';
 import UserProfileImage from '../Common/UserProfileImage.native';
@@ -10,6 +10,7 @@ import snippetStyles from '../../styles/competition/competition-snippet.native';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 import TouchableItem from '../../components/Common/TouchableItem.native';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 class CompetitionParticipant extends React.Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class CompetitionParticipant extends React.Component {
       id: this.props.competitor.treecounterId,
       displayName: this.props.competitor.treecounterDisplayName
     };
+    console.log('support button pressed');
     this.props.supportTreecounterAction(supportObject);
     updateRoute('app_donateTrees', this.props.navigation, 0, {
       titleParam: i18n.t('label.support_to', {
@@ -41,15 +43,15 @@ class CompetitionParticipant extends React.Component {
     ) {
       support_button = (
         <View style={styles2.topCompetitorScore}>
-          <TouchableItem
+          <TouchableOpacity
             style={styles2.secondaryButton}
-            onClick={() => this.plantButton()}
+            onPress={() => this.plantButton()}
           >
             <Text style={styles2.secondaryButtonText}>
               {' '}
               {i18n.t('label.plant_trees')}
             </Text>
-          </TouchableItem>
+          </TouchableOpacity>
         </View>
       );
     } else if (
@@ -58,29 +60,28 @@ class CompetitionParticipant extends React.Component {
     ) {
       support_button = (
         <View style={styles2.topCompetitorScore}>
-          <TouchableItem
+          <TouchableOpacity
             style={styles2.secondaryButton}
-            onClick={() => this.supportButton()}
+            onPress={() => this.supportButton()}
           >
             <Text style={styles2.secondaryButtonText}>
-              {' '}
               {i18n.t('label.support')}
             </Text>
-          </TouchableItem>
+          </TouchableOpacity>
         </View>
       );
     } else if (this.props.type === 'invite') {
       support_button = (
         <View style={styles2.topCompetitorScore}>
-          <TouchableItem
+          <TouchableOpacity
             style={styles2.cancelButton}
-            onClick={() => this.props.cancelInvite(this.props.competitor.token)}
+            onPress={() => this.props.cancelInvite(this.props.competitor.token)}
           >
             <Text style={styles2.cancelButtonText}>
               {' '}
               {i18n.t('label.cancel')}
             </Text>
-          </TouchableItem>
+          </TouchableOpacity>
         </View>
       );
     } else {
@@ -99,7 +100,17 @@ class CompetitionParticipant extends React.Component {
           {/* User Profile Image ends */}
 
           <View style={styles.participantNameContainer}>
-            <Text style={styles.topCompetitorNameText}>
+            <Text
+              style={styles.topCompetitorNameText}
+              onPress={() =>
+                this.props.navigation.navigate(
+                  getLocalRoute('app_treecounter'),
+                  {
+                    treeCounterId: this.props.competitor.treecounterSlug
+                  }
+                )
+              }
+            >
               {this.props.competitor.treecounterSlug ===
               this.props.treeCounter.slug
                 ? i18n.t('label.me')

@@ -22,11 +22,17 @@ export default class AllCompetitions extends Component {
   componentWillMount() {
     let { allCompetitions } = this.props;
     let featuredCompetitions = [];
+    let CurrentDate = new Date();
+
     if (allCompetitions.length > 0) {
       allCompetitions.forEach(val => {
         if (val.category === 'all') {
           val.competitions.forEach(comp => {
-            featuredCompetitions.push(comp);
+            let endDate = comp.endDate;
+            endDate = new Date(endDate);
+            if (endDate > CurrentDate) {
+              featuredCompetitions.push(comp);
+            }
           });
         }
       });
@@ -39,11 +45,17 @@ export default class AllCompetitions extends Component {
   componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
     let featuredCompetitions = [];
+    let CurrentDate = new Date();
+
     if (allCompetitions.length > 0) {
       allCompetitions.forEach(val => {
         if (val.category === 'all') {
           val.competitions.forEach(comp => {
-            featuredCompetitions.push(comp);
+            let endDate = comp.endDate;
+            endDate = new Date(endDate);
+            if (endDate > CurrentDate) {
+              featuredCompetitions.push(comp);
+            }
           });
         }
       });
@@ -93,7 +105,7 @@ export default class AllCompetitions extends Component {
               maxWidth: '70%'
             }}
           >
-            Select a competition to join and start planting trees
+            List of all competitions competitions. Join one, and start planting.
           </Text>
           <Image
             source={trees}

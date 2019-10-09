@@ -3,8 +3,6 @@ import CardLayout from '../Common/Card';
 import styles from '../../styles/competition/competition-snippet.native';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
-import tick from '../../assets/images/icons/tick.png';
-import PrimaryButton from '../Common/Button/PrimaryButton';
 import CompetitionProgressBar from './CompetitionProgressBar';
 import TouchableItem from '../../components/Common/TouchableItem';
 import PropTypes from 'prop-types';

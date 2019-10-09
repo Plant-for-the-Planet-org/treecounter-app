@@ -34,5 +34,6 @@
   "quadrillion_singular": "Billiarde",
   "quadrillion_plural": "Billiarden",
   "quintillion_singular": "Trillion",
-  "quintillion_plural": "Trillionen"
+  "quintillion_plural": "Trillionen",
+  "donation_id_missing_error": "donation id missing error"
 }

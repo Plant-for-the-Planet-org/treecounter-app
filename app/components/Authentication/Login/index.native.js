@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { Text, View, Image, ScrollView, Keyboard } from 'react-native';
+import { Text, View, Image, Keyboard } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import scrollStyle from '../../../styles/common/scrollStyle';
 import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 
-import {
-  loginFormSchema,
-  schemaOptions
-} from '../../../server/parsedSchemas/login';
+import { loginFormSchema } from '../../../server/parsedSchemas/login';
 
 import i18n from '../../../locales/i18n.js';
 
@@ -24,6 +21,7 @@ let Form = t.form.Form;
 export default class Login extends Component {
   constructor(props) {
     super(props);
+    // eslint-disable-next-line no-underscore-dangle
     this._recaptchaToken = undefined;
   }
 
@@ -41,10 +39,12 @@ export default class Login extends Component {
 
   verifyCallback = token => {
     // Here you will get the final token!!!
+    // eslint-disable-next-line no-underscore-dangle
     this._recaptchaToken = token;
   };
 
   refreshToken = () => {
+    // eslint-disable-next-line no-underscore-dangle
     this._captchaRef.refreshToken();
   };
 
@@ -52,6 +52,7 @@ export default class Login extends Component {
     if (this.refs.loginForm.getValue()) {
       Keyboard.dismiss();
     }
+    // eslint-disable-next-line no-underscore-dangle
     this.props.onPress(this._recaptchaToken, this.refreshToken);
   };
   render() {
@@ -70,6 +71,7 @@ export default class Login extends Component {
         scrollEnabled
       >
         <ReCaptchaV3
+          // eslint-disable-next-line no-underscore-dangle
           ref={ref => (this._captchaRef = ref)}
           captchaDomain={'https://www.trilliontreecampaign.org'}
           siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}

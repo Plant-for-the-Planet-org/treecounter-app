@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import SuccessfullyActivatedAccount from '../../components/Authentication/SuccessfullyActivated';
 import { accountActivate } from '../../actions/signupActions';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { connect } from 'react-redux';
 
 class SuccessfullyActivatedContainer extends React.Component {
@@ -27,7 +26,7 @@ class SuccessfullyActivatedContainer extends React.Component {
             ? this.props.navigation.getParam('token')
             : this.props.match.params.token
         )
-        .then(res => {
+        .then((/* res */) => {
           this.setState({ success: true });
         })
         .catch(err => {

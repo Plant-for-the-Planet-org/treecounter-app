@@ -38,7 +38,7 @@ export const handleServerResponseError = function(
     serverFormError &&
     serverFormError.response &&
     serverFormError.response.data;
-  if (data && data.code == 400 && data.hasOwnProperty('errors')) {
+  if (data && data.code == 400 && data['errors']) {
     let newOptions = _.cloneDeep(formSchemaOptions);
     for (let property in data.errors.children) {
       updateFormSchema(

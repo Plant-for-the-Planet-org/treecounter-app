@@ -15,6 +15,7 @@ import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import { paymentFee } from '../../helpers/utils';
+import { getPreferredCurrency } from '../../actions/globalCurrency';
 
 import {
   individualSchemaOptions,
@@ -118,7 +119,7 @@ export default class GiftTrees extends Component {
       expandedOption: '1',
       showNextButton: true,
       donationCreated: false,
-      showSelectProject: false
+      showSelectProject: true
     };
 
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
@@ -237,7 +238,6 @@ export default class GiftTrees extends Component {
       return false;
     },
     () => {
-      //console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
@@ -260,13 +260,12 @@ export default class GiftTrees extends Component {
   ];
 
   determineDefaultCurrency() {
-    const { currentUserProfile, selectedProject } = this.props;
+    const { currentUserProfile /* , selectedProject */ } = this.props;
     const userCurrency =
       null === currentUserProfile ? null : currentUserProfile.currency;
 
-    return null === userCurrency ? selectedProject.currency : userCurrency;
+    return null === userCurrency ? getPreferredCurrency() : userCurrency;
   }
-
   handleModeUserChange(tab) {
     this.setState({
       modeUser: tab,
@@ -392,12 +391,14 @@ export default class GiftTrees extends Component {
     let paymentMethods;
     if (receipt) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
-      const countryCurrencies = plantProject.paymentSetup.countries;
-      if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
-        countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+      if (plantProject && plantProject.paymentSetup) {
+        const countryCurrencies = plantProject.paymentSetup.countries;
+        if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
+          countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+        }
+        paymentMethods =
+          plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
       }
-      paymentMethods =
-        plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
 
     return this.state.showSelectProject && this.state.pageIndex === 1 ? (
@@ -541,16 +542,20 @@ export default class GiftTrees extends Component {
                   }
                   amount={this.state.selectedAmount}
                   currency={this.state.selectedCurrency}
+                  paymentStatus={this.props.paymentStatus}
+                  paymentDetails={{
+                    amount: this.state.selectedAmount,
+                    currency: this.state.selectedCurrency,
+                    treeCount: this.state.selectedTreeCount
+                  }}
                   expandedOption={this.state.expandedOption}
                   handleExpandedClicked={this.handleExpandedClicked}
                   context={{
                     tpoName: this.props.selectedTpo.name,
                     donorEmail: email,
                     donorName: name,
-                    treeCount: this.state.selectedTreeCount,
                     plantProjectName: plantProject.name,
-                    giftTreeCounterName: this.state.giftTreecounterName,
-                    treeCount: this.state.selectedTreeCount
+                    giftTreeCounterName: this.state.giftTreecounterName
                   }}
                   onFailure={data =>
                     console.log('/////////////////// payment failure ', data)

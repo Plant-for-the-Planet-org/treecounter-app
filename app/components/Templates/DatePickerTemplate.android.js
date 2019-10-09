@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -9,9 +10,8 @@ import {
 } from 'react-native';
 import i18n from '../../locales/i18n.js';
 import datePickerStyle from '../../styles/date_picker.native';
-import { formatDate } from '../../helpers/utils';
 
-const UIPICKER_HEIGHT = 216;
+// const UIPICKER_HEIGHT = 216;
 
 class CollapsibleDatePickerAndroid extends React.PureComponent {
   constructor(props) {
@@ -71,13 +71,13 @@ class CollapsibleDatePickerAndroid extends React.PureComponent {
     const locals = this.props.locals;
     const stylesheet = locals.stylesheet;
     let touchableStyle = stylesheet.dateTouchable.normal;
-    let datepickerStyle = stylesheet.datepicker.normal;
+    // let datepickerStyle = stylesheet.datepicker.normal;
     let dateValueStyle =
       datePickerStyle.dateValueStyle || stylesheet.dateValue.normal;
 
     if (locals.hasError) {
       touchableStyle = stylesheet.dateTouchable.error;
-      datepickerStyle = stylesheet.datepicker.error;
+      // datepickerStyle = stylesheet.datepicker.error;
       dateValueStyle = stylesheet.dateValue.error;
     }
 
@@ -93,7 +93,7 @@ class CollapsibleDatePickerAndroid extends React.PureComponent {
           : i18n.t(locals.label);
       }
     }
-    const height = this.state.isCollapsed ? 0 : UIPICKER_HEIGHT;
+    // const height = this.state.isCollapsed ? 0 : UIPICKER_HEIGHT;
     return (
       <View style={datePickerStyle.datePickerContainer}>
         <TouchableNativeFeedback
@@ -126,13 +126,13 @@ export function DatePickerTemplate(locals) {
 
   const stylesheet = locals.stylesheet;
   let formGroupStyle = stylesheet.formGroup.normal;
-  let controlLabelStyle = stylesheet.controlLabel.normal;
+  // let controlLabelStyle = stylesheet.controlLabel.normal;
   let helpBlockStyle = stylesheet.helpBlock.normal;
   const errorBlockStyle = stylesheet.errorBlock;
 
   if (locals.hasError) {
     formGroupStyle = stylesheet.formGroup.error;
-    controlLabelStyle = stylesheet.controlLabel.error;
+    // controlLabelStyle = stylesheet.controlLabel.error;
     helpBlockStyle = stylesheet.helpBlock.error;
   }
 

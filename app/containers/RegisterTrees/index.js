@@ -94,12 +94,16 @@ class RegisterTreesContainer extends PureComponent {
     return [
       this.props.navigation ? (
         <NavigationEvents
-          onWillFocus={payload => {
-            this.setState({ loadSvg: true });
-          }}
-          onWillBlur={payload => {
-            this.setState({ loadSvg: false });
-          }}
+          onWillFocus={
+            (/* payload */) => {
+              this.setState({ loadSvg: true });
+            }
+          }
+          onWillBlur={
+            (/* payload */) => {
+              this.setState({ loadSvg: false });
+            }
+          }
           key="navigation-events"
         />
       ) : null,

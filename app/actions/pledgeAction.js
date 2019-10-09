@@ -30,7 +30,7 @@ export function fetchPledgesAction(eventSlug) {
 }
 
 export function postPledge(data, params) {
-  return dispatch => {
+  return (/* dispatch */) => {
     postRequest('eventPledge_post', data, params)
       .then(res => {
         const { statusText } = res;

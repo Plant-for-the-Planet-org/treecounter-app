@@ -20,7 +20,7 @@ class ForgotPasswordContainer extends React.Component {
     if (value) {
       this.props
         .forgot_password(value, this.props.navigation)
-        .then(val => {})
+        .then((/* val */) => {})
         .catch(err => {
           let newSchemaOptions = handleServerResponseError(
             err,

@@ -7,7 +7,7 @@ import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import { setLastRoute } from '../reducers/updateLastRouteReducer';
 
-export function loadUserProfile(returnData, navigation) {
+export function loadUserProfile(returnData) {
   const request = getAuthenticatedRequest('data_userProfile_get');
 
   return dispatch => {

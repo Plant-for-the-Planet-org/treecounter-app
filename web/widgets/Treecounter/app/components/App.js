@@ -76,7 +76,6 @@ export default class App extends Component {
   render() {
     const {
       serverName,
-      baseUrl,
       treecounter,
       projectId,
       isStandardTreecounter
@@ -85,7 +84,7 @@ export default class App extends Component {
     const { type: profileType, image: logo } = userProfile;
     const headerProps = {
       caption,
-      profileType: undefined,
+      profileType,
       logo,
       isUserFollowerBool: false,
       isUserLoggedIn: false,
@@ -134,7 +133,7 @@ export default class App extends Component {
 
             {this.props.showDonateButton && (
               <SecondaryButton
-                onClick={event => {
+                onClick={() => {
                   const url = `${serverName}${getLocalRoute(
                     'app_donateTrees'
                   )}${projectId ? '/' + projectId : ''}`;

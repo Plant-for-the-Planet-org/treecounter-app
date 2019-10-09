@@ -324,6 +324,8 @@ class TreeCounter extends Component {
     if (!this._appRoutes) {
       this.initRoutes();
     }
+    // Turned off deeplink to app as it does not work if user has not installed the app.
+    // TODO: either delete this code or implement a solution which solves the problem
     // if (window.location.pathname.indexOf('signup') > -1 && this.state.isIOS) {
     //   this.openApp(window.location.pathname);
     //   return null;
@@ -344,9 +346,9 @@ class TreeCounter extends Component {
     ) : null;
   }
 
-  openApp(linkUrl) {
-    window.location.href = 'trilliontreecampaign:' + linkUrl;
-  }
+  // openApp(linkUrl) {
+  //    window.location.href = 'trilliontreecampaign:' + linkUrl;
+  // }
 }
 
 const mapStateToProps = state => ({

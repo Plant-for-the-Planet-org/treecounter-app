@@ -183,13 +183,28 @@ export default class Pledge extends Component {
           </div>
           <div className="row">
             {this.props.pledges.description ? (
-              <div
-                className="event-description"
-                style={{ width: '85%', maxWidth: '778px', margin: 'auto' }}
-              >
+              <div className="event-description">
                 <p>{i18n.t(this.props.pledges.description)}</p>
               </div>
             ) : null}
+          </div>
+          <div className="row event-gallery">
+            {this.props.pledges &&
+            this.props.pledges.pledgeEventImages &&
+            this.props.pledges.pledgeEventImages.length > 0
+              ? this.props.pledges.pledgeEventImages.map(
+                  (pledgeImage, index) => (
+                    <img
+                      key={`pledgeImage-${index}`}
+                      src={getImageUrl(
+                        'eventGallery',
+                        'default',
+                        pledgeImage.image
+                      )}
+                    />
+                  )
+                )
+              : null}
           </div>
           <CardLayout className="pledge-form">
             <ContentHeader caption={i18n.t('label.pledge_trees')} />

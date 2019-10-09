@@ -8,7 +8,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export function DatePickerTemplate(locals) {
   const locale = getLocale();
-  let error = locals.hasError;
   const containerStyle = { width: '100%' };
   const calendarStyle = { marginBottom: 20 };
   return locals.type !== 'hidden' ? (
@@ -24,7 +23,7 @@ export function DatePickerTemplate(locals) {
         placeholderText={i18n.t(locals.label)}
         style={calendarStyle}
         openDatePickerOnClick
-        selected={!!locals.value ? getDateFromMySQL(locals.value) : undefined}
+        selected={locals.value ? getDateFromMySQL(locals.value) : undefined}
         // startDate={!!locals.value ? getDateFromMySQL(locals.value) : undefined}
         // startLimit={new Date(1700, 0)}
         // endLimit={new Date()}

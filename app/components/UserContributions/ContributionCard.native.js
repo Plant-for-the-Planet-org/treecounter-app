@@ -5,7 +5,6 @@ import { Dimensions, FlatList, Image, Text, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import { getLocalRoute } from '../../actions/apiRouting';
-import { getLocale } from '../../actions/getLocale';
 import { foldin, foldout } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import i18n from '../../locales/i18n.js';

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import i18n from '../../locales/i18n.js';
 import datePickerStyle from '../../styles/date_picker.native';
-import { formatDate } from '../../helpers/utils';
+import { formatDateToMySQL } from '../../helpers/utils';
 
 const UIPICKER_HEIGHT = 216;
 

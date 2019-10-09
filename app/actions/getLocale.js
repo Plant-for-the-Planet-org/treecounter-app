@@ -1,5 +1,14 @@
 import { getItemSync } from '../stores/localStorage';
+import en from 'date-fns/locale/en-US';
+import de from 'date-fns/locale/de';
+// import and register all locales used for 'react-datepicker'
+import { registerLocale } from 'react-datepicker';
+
 let cache = { locale: undefined };
+
+export const supportedLocales = ['en', 'de'];
+export const defaultLocale = 'en';
+export const localeObjects = { en: en, de: de };
 
 /**
  * Call this when the app starts up
@@ -8,6 +17,7 @@ let cache = { locale: undefined };
  */
 export function initLocale() {
   cache.locale = guessLocale();
+  registerLocale(cache.locale, localeObjects[cache.locale]);
 }
 
 export function getLocale() {
@@ -31,18 +41,18 @@ function guessLocale() {
   // 5. use English as default language
   if (_locale.includes('_locale')) {
     const tempLocale = _locale.split('=')[1];
-    return ['en', 'de'].includes(tempLocale) ? tempLocale : 'en';
+    return supportedLocales.includes(tempLocale) ? tempLocale : defaultLocale;
   } else if (_locale.includes('?noredirect')) {
-    return 'en';
+    return defaultLocale;
   } else if (languageCached !== null) {
     return languageCached;
   } else {
     let userLang = navigator.language || navigator.userLanguage;
     let locale = userLang.split('-')[0];
-    if (locale === 'en' || locale === 'de') {
+    if (supportedLocales.includes(locale)) {
       return locale;
     } else {
-      return 'en';
+      return defaultLocale;
     }
   }
 }

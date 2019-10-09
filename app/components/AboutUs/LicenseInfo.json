@@ -110,15 +110,6 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/lodash",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/lodash/LICENSE"
       },
-      "moment@2.24.0": {
-        "licenses": "MIT",
-        "repository": "https://github.com/moment/moment",
-        "publisher": "Iskren Ivov Chernev",
-        "email": "iskren.chernev@gmail.com",
-        "url": "https://github.com/ichernev",
-        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/moment",
-        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/moment/LICENSE"
-      },
       "normalizr@3.4.0": {
         "licenses": "MIT",
         "repository": "https://github.com/paularmstrong/normalizr",

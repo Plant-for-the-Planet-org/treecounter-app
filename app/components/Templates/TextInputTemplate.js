@@ -1,6 +1,6 @@
 import React from 'react';
 import i18n from '../../locales/i18n';
-import { formatDate } from '../../helpers/utils';
+import { formatDateToMySQL } from '../../helpers/utils';
 import { getLocale } from '../../actions/getLocale';
 export function TextInputTemplate(locals) {
   const locale = getLocale();
@@ -15,7 +15,7 @@ export function TextInputTemplate(locals) {
   }
   function todayDate() {
     let today = new Date();
-    today = formatDate(today);
+    today = formatDateToMySQL(today);
     return today;
   }
   let error = locals.hasError;

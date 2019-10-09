@@ -16,16 +16,12 @@ import {
   userTreecounterSelector
 } from '../../selectors';
 import { connect } from 'react-redux';
-import moment from 'moment';
-import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
-import { getLocale } from '../../actions/getLocale';
-import { getDateFromMySQL } from '../../helpers/utils';
+import { formatDate } from '../../utils/utils';
 
 class CompetitionSnippet extends React.Component {
   constructor(props) {
     super(props);
-    moment.locale(getLocale());
   }
 
   toggleExpanded(id) {
@@ -199,9 +195,10 @@ class CompetitionSnippet extends React.Component {
                   <Text style={styles.bottomText}>
                     {i18n.t('label.ends')}{' '}
                     {this.props.competition && this.props.competition.endDate
-                      ? moment(
-                          getDateFromMySQL(this.props.competition.endDate)
-                        ).format('MMM DD, YYYY')
+                      ? formatDate(
+                          this.props.competition.endDate,
+                          'dd MMM yyyy'
+                        )
                       : ''}
                   </Text>
                 </View>

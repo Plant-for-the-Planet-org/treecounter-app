@@ -1,10 +1,9 @@
 import React from 'react';
 import i18n from '../../locales/i18n';
-import { formatDate, getDateFromMySQL } from '../../helpers/utils';
+import { formatDateToMySQL, getDateFromMySQL } from '../../helpers/utils';
 import { getLocale } from '../../actions/getLocale';
 // import { compCalendar } from '../../assets';
 import DatePicker from 'react-datepicker';
-
 import 'react-datepicker/dist/react-datepicker.css';
 
 export function DatePickerTemplate(locals) {
@@ -32,7 +31,7 @@ export function DatePickerTemplate(locals) {
         locale={locale}
         key={101}
         onChange={newDate => {
-          locals.onChange(formatDate(newDate));
+          locals.onChange(formatDateToMySQL(newDate));
         }}
       />
 

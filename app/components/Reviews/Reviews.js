@@ -11,8 +11,16 @@ import SingleReview from './SingleReview';
 import { ScrollView } from 'react-native-gesture-handler';
 const { width, height } = Dimensions.get('window');
 import { updateStaticRoute } from './../../helpers/routerHelper';
-export default class Reviews extends Component {
+import { selectedPlantProjectSelector } from '../../selectors';
+import { connect } from 'react-redux';
+
+class Reviews extends Component {
+  constructor(props) {
+    super(props);
+    console.log('in reviews', props);
+  }
   render() {
+    let { name, reviewScore, reviews } = this.props.project;
     return (
       <ScrollView
         contentContainerStyle={{
@@ -35,9 +43,7 @@ export default class Reviews extends Component {
               backgroundColor: 'white'
             }}
           >
-            <Text style={styles.reviewPageTitle}>
-              20 Million Trees for Kenya's Forests ...
-            </Text>
+            <Text style={styles.reviewPageTitle}>{name}</Text>
             <Text style={styles.reviewPageSubTitle}>Community Reviews</Text>
             <View
               style={{
@@ -47,7 +53,9 @@ export default class Reviews extends Component {
                 alignItems: 'center'
               }}
             >
-              <Text style={styles.totalRating}>4.2</Text>
+              <Text style={styles.totalRating}>
+                {(reviewScore / 100).toFixed(2)}
+              </Text>
               <Icon name="star" solid size={12} style={{ color: '#4d5153' }} />
             </View>
           </View>
@@ -55,9 +63,9 @@ export default class Reviews extends Component {
 
         {/*All Reviews*/}
         <View style={{ paddingTop: 20, backgroundColor: '#ecf0f1' }}>
-          <SingleReview />
-          <SingleReview />
-          <SingleReview />
+          {reviews.map(review => {
+            return <SingleReview key={review.id} review={review} />;
+          })}
         </View>
 
         {/* All Reviews Ended */}
@@ -127,3 +135,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+const mapStateToProps = state => {
+  return {
+    project: selectedPlantProjectSelector(state)
+  };
+};
+
+export default connect(mapStateToProps)(Reviews);

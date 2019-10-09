@@ -94,16 +94,13 @@ class MakePledgeForm extends Component {
 
       //saveItem('pledgedEvent', JSON.stringify(date));
 
-      // updateStaticRoute('app_pledge_events', this.props.navigation, {
-      //   slug: this.props.navigation.getParam('slug'),
-      //   plantProject: this.props.navigation.getParam('plantProject'),
-      //   eventName: this.props.navigation.getParam('eventName'),
-      //   eventDate: this.props.navigation.getParam('eventDate'),
-      //   totalTrees: this.props.navigation.getParam('totalTrees'),
-      //   eventImage: this.props.navigation.getParam('eventImage'),
-      //   description: this.props.navigation.getParam('description'),
-      //   treeCount: treeCount
-      // });
+      updateStaticRoute(
+        'app_unfulfilled_pledge_events',
+        this.props.navigation,
+        {
+          unfulfilledEvent: this.props.unfulfilledEvent
+        }
+      );
     }
   };
 

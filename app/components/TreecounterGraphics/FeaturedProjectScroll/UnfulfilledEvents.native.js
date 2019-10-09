@@ -27,7 +27,7 @@ export default class UnfulfilledEvents extends Component {
                       { maxWidth: 200, flexWrap: 'wrap' }
                     ]}
                   >
-                    {this.props.event.treeCount} Trees
+                    {this.props.event.treeCount.toLocaleString()} Trees
                   </Text>
                 </View>
                 <View style={styles.featuredProjectCardIconContainer}>
@@ -46,8 +46,10 @@ export default class UnfulfilledEvents extends Component {
                 <View style={styles.ufpCostView}>
                   <Text style={styles.ufpCostText}>
                     {this.props.event.plantProjectCurrency}{' '}
-                    {this.props.event.treeCount *
-                      this.props.event.plantProjectTreeCost}
+                    {(
+                      this.props.event.treeCount *
+                      this.props.event.plantProjectTreeCost
+                    ).toLocaleString()}
                   </Text>
                 </View>
                 <Text style={styles.ufpPlantNow}>Plant Now</Text>

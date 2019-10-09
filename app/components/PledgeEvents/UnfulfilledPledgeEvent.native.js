@@ -13,7 +13,7 @@ import i18n from '../../locales/i18n';
 import PledgeTabView from './PledgeTabView.native';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import { bindActionCreators } from 'redux';
-import { updateStaticRoute } from '../../helpers/routerHelper';
+import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import CardLayout from '../Common/Card';
 import styles from '../../styles/pledgeevents/pledgeevents.native';
 import {
@@ -134,7 +134,8 @@ class UnfulfilledPledgeEvents extends Component {
         <View style={styles.bottomButtonView}>
           <View style={styles.leftSection}>
             <Text style={styles.pledgeTreesAmount}>
-              {unfulfilledEvent.treeCount} Trees Pledged
+              {unfulfilledEvent ? unfulfilledEvent.treeCount : null} Trees
+              Pledged
             </Text>
             <TouchableOpacity
               onPress={() => {
@@ -152,7 +153,7 @@ class UnfulfilledPledgeEvents extends Component {
           </View>
           <TouchableOpacity
             onPress={() => {
-              updateStaticRoute('app_donate_detail', this.props.navigation);
+              updateRoute('app_donateTrees', this.props.navigation);
             }}
           >
             <View style={styles.continueButtonView}>

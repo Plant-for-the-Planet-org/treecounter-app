@@ -96,7 +96,7 @@ export default class Pledge extends Component {
                 <div className="pledges-list">
                   {
                     ((i = 1),
-                    this.props.pledges.latestEventPledges.map(pledge => (
+                    this.props.pledges.latestPledgeEvents.map(pledge => (
                       <Pulse key={pledge.id}>
                         <div className={'row-list-item '}>
                           <span>
@@ -139,7 +139,7 @@ export default class Pledge extends Component {
                 <div className="pledges-list">
                   {
                     ((i = 1),
-                    this.props.pledges.highestEventPledges.map(pledge => (
+                    this.props.pledges.highestPledgeEvents.map(pledge => (
                       <Pulse key={pledge.id}>
                         <div
                           className={

@@ -182,6 +182,17 @@ class PledgeEvents extends Component {
               <TouchableOpacity
                 style={styles.baLaterButton}
                 onPress={() => {
+                  let unfulfilledEvent = {
+                    eventSlug: this.props.pledges.slug,
+                    treeCount: this.props.navigation.getParam('treeCount')
+                  };
+                  updateStaticRoute(
+                    'app_unfulfilled_pledge_events',
+                    this.props.navigation,
+                    {
+                      unfulfilledEvent: unfulfilledEvent
+                    }
+                  );
                   this.RBSheet.close();
                 }}
               >

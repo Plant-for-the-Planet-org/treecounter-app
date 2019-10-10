@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Select, { components } from 'react-select';
 import { connect } from 'react-redux';
 import * as images from '../../assets';
+import planetLogo from '../../assets/svgAssets/Planet-Logo.svg';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';
@@ -93,7 +94,7 @@ class Menu extends Component {
       <div className="app-container__sidenav--image">
         <Link to={route} onClick={() => this.linkClicked()}>
           {' '}
-          <img src={images['SideMenuImageNew']} />
+          <img src={planetLogo} />
         </Link>
       </div>
     );

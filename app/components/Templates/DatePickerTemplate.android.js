@@ -47,6 +47,7 @@ class CollapsibleDatePickerAndroid extends React.PureComponent {
       if (this.props.locals.config.minDate) {
         dateObject.minDate = new Date();
       }
+
       DatePickerAndroid.open(dateObject).then(date => {
         if (date.action !== DatePickerAndroid.dismissedAction) {
           //Please take note that the number of the months is based on
@@ -83,7 +84,9 @@ class CollapsibleDatePickerAndroid extends React.PureComponent {
 
     let formattedValue = locals.value ? locals.value : '';
     if (locals.config) {
-      if (!formattedValue) {
+      if (locals.config.format && formattedValue) {
+        formattedValue = locals.config.format(locals.value);
+      } else if (!formattedValue) {
         formattedValue = locals.config.defaultValueText
           ? locals.config.defaultValueText
           : i18n.t(locals.label);

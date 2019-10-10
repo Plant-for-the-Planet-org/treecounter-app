@@ -13,6 +13,7 @@ import { DatePickerTemplate } from '../components/Templates/DatePickerTemplate';
 
 // Import assets
 import * as images from '../assets';
+import { formatDate } from '../utils/utils';
 
 function isEmail(x) {
   return /(.)+@(.)+/.test(x);
@@ -129,6 +130,11 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
           case 'date':
             options.template = DatePickerTemplate;
             options.type = properties[propertyKey].widget;
+            options.config = {
+              ...options.config,
+              format: date => formatDate(date, 'dd MMM yyyy'),
+              dateFormat: date => formatDate(date, 'dd MMM yyyy')
+            };
             break;
           case 'hidden':
             options.type = properties[propertyKey].widget;

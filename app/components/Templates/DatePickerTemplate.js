@@ -10,24 +10,23 @@ export function DatePickerTemplate(locals) {
   const locale = getLocale();
   const containerStyle = { width: '100%' };
   const calendarStyle = { marginBottom: 20 };
+
   return locals.type !== 'hidden' ? (
     <div
       style={containerStyle}
       className={'pftp-date-picker__container'}
       tabIndex="0"
     >
-      {/* <label className={locals.value !== '' ? 'float-label' : ''}>
-        {i18n.t(locals.label)}
-      </label> */}
       <DatePicker
         placeholderText={i18n.t(locals.label)}
         style={calendarStyle}
+        disabled={locals.disabled}
         openDatePickerOnClick
         selected={locals.value ? getDateFromMySQL(locals.value) : undefined}
-        // startDate={!!locals.value ? getDateFromMySQL(locals.value) : undefined}
-        // startLimit={new Date(1700, 0)}
-        // endLimit={new Date()}
+        maxDate={locals.config.maxDate ? new Date() : null}
+        minDate={locals.config.minDate ? new Date() : null}
         locale={locale}
+        dateFormat="dd MMM yyyy"
         key={101}
         onChange={newDate => {
           locals.onChange(formatDateToMySQL(newDate));

@@ -271,8 +271,8 @@ class ContributionCard extends React.Component {
       contributionType,
       registrationDate,
       redemptionCode,
-      redemptionDate,
-      ndviUid
+      redemptionDate
+      // ndviUid
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {
     //   return { src: getImageUrl('contribution', 'medium', image.image) };

@@ -311,13 +311,14 @@ class ContributionCard extends React.Component {
     return contributionType === 'donation' ? (
       <CardLayout
         style={styles.addPadding}
-        onPress={() => {
-          ndviUid &&
-            this.props.navigation.navigate('contribution_details', {
-              contribution,
-              titleParam: plantProjectName || tpoName || treeSpecies
-            });
-        }}
+        // TODO: uncomment this if the contribution cards are ready to get merged
+        // onPress={() => {
+        //   ndviUid &&
+        //     this.props.navigation.navigate('contribution_details', {
+        //       contribution,
+        //       titleParam: plantProjectName || tpoName || treeSpecies
+        //     });
+        // }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
@@ -373,13 +374,14 @@ class ContributionCard extends React.Component {
     ) : contributionType === 'planting' ? (
       <CardLayout
         style={[styles.addPadding, styles.minHeight]}
-        onPress={() => {
-          ndviUid &&
-            this.props.navigation.navigate('contribution_details', {
-              contribution,
-              titleParam: plantProjectName || tpoName || treeSpecies
-            });
-        }}
+        // TODO: uncomment this if the contribution cards are ready to get merged
+        // onPress={() => {
+        //   ndviUid &&
+        //     this.props.navigation.navigate('contribution_details', {
+        //       contribution,
+        //       titleParam: plantProjectName || tpoName || treeSpecies
+        //     });
+        // }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
@@ -446,13 +448,14 @@ class ContributionCard extends React.Component {
     ) : (
       <CardLayout
         style={styles.addPadding}
-        onPress={() => {
-          ndviUid &&
-            this.props.navigation.navigate('contribution_details', {
-              contribution,
-              titleParam: plantProjectName || tpoName || treeSpecies
-            });
-        }}
+        // TODO: uncomment this if the contribution cards are ready to get merged
+        // onPress={() => {
+        //   ndviUid &&
+        //     this.props.navigation.navigate('contribution_details', {
+        //       contribution,
+        //       titleParam: plantProjectName || tpoName || treeSpecies
+        //     });
+        // }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (

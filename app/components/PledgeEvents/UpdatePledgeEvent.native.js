@@ -21,17 +21,35 @@ import { connect } from 'react-redux';
 import CheckBox from 'react-native-check-box';
 import { currentUserProfileSelector } from './../../selectors';
 import { bindActionCreators } from 'redux';
+import { Formik } from 'formik';
 
 let _ = require('lodash');
+
+import pledgeFormSchema from './../../server/formSchemas/pledge';
+import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
+
+const validationSchema = generateFormikSchemaFromFormSchema(pledgeFormSchema, [
+  'treeCount'
+]);
 
 class MakePledgeForm extends Component {
   state = {
     treeCount: '',
     buttonType: 'pledge',
-    treeCountValidator: 'Please enter Tree Count',
     loggedIn: false
   };
+
   componentWillMount() {
+    const unfulfilledEvent = this.props.navigation.getParam('unfulfilledEvent');
+    this.setState({
+      treeCount: unfulfilledEvent.treeCount.toString()
+    });
+    if (this.props.userProfile) {
+      this.setState({
+        loggedIn: true
+      });
+    }
+
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       this._keyboardDidShow
@@ -47,17 +65,6 @@ class MakePledgeForm extends Component {
     this.keyboardDidHideListener.remove();
   }
 
-  componentDidMount() {
-    const unfulfilledEvent = this.props.navigation.getParam('unfulfilledEvent');
-    this.setState({
-      treeCount: unfulfilledEvent.treeCount
-    });
-    if (this.props.userProfile) {
-      this.setState({
-        loggedIn: true
-      });
-    }
-  }
   _keyboardDidShow = () => {
     this.setState({
       buttonType: '>'
@@ -68,40 +75,6 @@ class MakePledgeForm extends Component {
     this.setState({
       buttonType: 'pledge'
     });
-  };
-
-  onFormSubmit = async () => {
-    const { treeCount } = this.state;
-    const { navigation } = this.props;
-    if (treeCount === '') {
-      alert('Please Enter Tree Count');
-    } else {
-      // Create data object
-      const data = {
-        treeCount
-      };
-      console.log(data);
-      // Update pledge using token
-      const token = this.props.navigation.getParam('unfulfilledEvent').token;
-      this.props.updatePledge(
-        data,
-        {
-          token: token,
-          version: 'v1.3'
-        },
-        this.state.loggedIn
-      );
-
-      //saveItem('pledgedEvent', JSON.stringify(date));
-
-      updateStaticRoute(
-        'app_unfulfilled_pledge_events',
-        this.props.navigation,
-        {
-          unfulfilledEvent: this.props.unfulfilledEvent
-        }
-      );
-    }
   };
 
   onFormChange(value) {
@@ -138,59 +111,94 @@ class MakePledgeForm extends Component {
               })}
             </Text>
           </View>
-          <View>
-            <View style={styles.formtreecountView}>
-              <View style={styles.formHalfTextField}>
-                <TextField
-                  label={i18n.t('label.pledgeFormTreecount')}
-                  tintColor={'#89b53a'}
-                  value={treeCount}
-                  titleFontSize={12}
-                  lineWidth={1}
-                  keyboardType="numeric"
-                  ref={input => {
-                    this.treecountTextInput = input;
-                  }}
-                  labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                  titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                  affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                  returnKeyType="done"
-                  onChangeText={treeCount => this.setState({ treeCount })}
-                />
-              </View>
-            </View>
-          </View>
+          <Formik
+            initialValues={{
+              treeCount
+            }}
+            onSubmit={values => {
+              const data = {
+                treeCount: values.treeCount
+              };
+              console.log(data);
+              // Update pledge using token
+              const token = this.props.navigation.getParam('unfulfilledEvent')
+                .token;
+              this.props.updatePledge(
+                data,
+                {
+                  token: token,
+                  version: 'v1.3'
+                },
+                this.state.loggedIn
+              );
+
+              //saveItem('pledgedEvent', JSON.stringify(date));
+
+              updateStaticRoute(
+                'app_unfulfilled_pledge_events',
+                this.props.navigation,
+                {
+                  unfulfilledEvent: this.props.unfulfilledEvent
+                }
+              );
+            }}
+            validationSchema={validationSchema}
+          >
+            {props => (
+              <>
+                <View>
+                  <View style={styles.formtreecountView}>
+                    <View style={styles.formHalfTextField}>
+                      <TextField
+                        label={i18n.t('label.pledgeFormTreecount')}
+                        tintColor={'#89b53a'}
+                        value={props.values.treeCount}
+                        titleFontSize={12}
+                        lineWidth={1}
+                        keyboardType="numeric"
+                        error={
+                          props.touched.treeCount && props.errors.treeCount
+                        }
+                        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                        titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                        affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                        returnKeyType="done"
+                        onChangeText={props.handleChange('treeCount')}
+                        onBlur={props.handleBlur('treeCount')}
+                      />
+                    </View>
+                  </View>
+                </View>
+
+                {this.state.buttonType === 'pledge' ? (
+                  <TouchableOpacity
+                    style={styles.makePledgeButton2}
+                    onPress={props.handleSubmit}
+                  >
+                    <View style={styles.makePledgeButtonView}>
+                      <Text style={styles.makePledgeButtonText}>
+                        {i18n.t('Update Pledge')}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                ) : null}
+
+                {this.state.buttonType === '>' ? (
+                  <TouchableOpacity
+                    style={styles.pledgeSmallButton}
+                    onPress={props.handleSubmit}
+                  >
+                    <Image
+                      source={forward}
+                      resizeMode="cover"
+                      style={styles.pledgeSmallButtonIcon}
+                    />
+                  </TouchableOpacity>
+                ) : null}
+              </>
+            )}
+          </Formik>
         </KeyboardAwareScrollView>
-
-        {this.state.buttonType === 'pledge' ? (
-          <TouchableOpacity
-            style={styles.makePledgeButton2}
-            onPress={() => {
-              this.onFormSubmit();
-            }}
-          >
-            <View style={styles.makePledgeButtonView}>
-              <Text style={styles.makePledgeButtonText}>
-                {i18n.t('Update Pledge')}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ) : null}
-
-        {this.state.buttonType === '>' ? (
-          <TouchableOpacity
-            style={styles.pledgeSmallButton}
-            onPress={() => {
-              this.onFormSubmit();
-            }}
-          >
-            <Image
-              source={forward}
-              resizeMode="cover"
-              style={styles.pledgeSmallButtonIcon}
-            />
-          </TouchableOpacity>
-        ) : null}
       </View>
     );
   }

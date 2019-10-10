@@ -157,7 +157,7 @@ export default EStyleSheet.create({
     flexGrow: 1,
     padding: 24,
     paddingBottom: 100,
-    minHeight: '120%'
+    minHeight: '100%'
   },
   formHalfTextField: { width: '45%' },
 

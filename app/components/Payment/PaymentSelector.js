@@ -204,7 +204,7 @@ class PaymentSelector extends Component {
               force="true"
             />
           </div>
-          <div>{`${i18n.t('label.trees')}: ${context.treeCount}`}</div>
+          <div>{`${i18n.t('label.trees')}: ${paymentDetails.treeCount}`}</div>
         </div>
         {Object.keys(paymentMethods).map(gateway => {
           const accountName = paymentMethods[gateway];

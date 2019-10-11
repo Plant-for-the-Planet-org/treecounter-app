@@ -330,9 +330,7 @@ export default class ContributionCard extends React.Component {
             {treeCountLine ? <TextSpan strong>{treeCountLine}</TextSpan> : null}
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {plantActionLine ? <TextSpan>{plantActionLine}</TextSpan> : null}
-            {dedicateActionLine ? (
-              <TextSpan>{dedicateActionLine}</TextSpan>
-            ) : null}
+            {dedicateActionLine ? <TextSpan>{dedicateActionLine}</TextSpan> : null}
           </div>
           <div className="contribution-container__right-column">
             {contribution.category === 'contributions'

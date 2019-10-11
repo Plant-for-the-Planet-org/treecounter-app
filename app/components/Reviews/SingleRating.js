@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import i18n from '../../locales/i18n.js';
 const { width, height } = Dimensions.get('window');
 export default class SingleRating extends Component {
   generateStar(fill, score = 0) {
@@ -10,7 +11,7 @@ export default class SingleRating extends Component {
       <Icon
         name="star"
         size={12}
-        solid={fill ? true : false}
+        solid={fill}
         style={{ color: '#89b53a', marginLeft: 5 }}
       />
     ));
@@ -26,7 +27,9 @@ export default class SingleRating extends Component {
             marginBottom: 5
           }}
         >
-          <Text style={styles.ratingsText}>{this.props.name}</Text>
+          <Text style={styles.ratingsText}>
+            {i18n.t(`label.${this.props.name}`)}
+          </Text>
           {this.props.indexScore
             ? this.generateStar(true, this.props.indexScore.score)
             : null}

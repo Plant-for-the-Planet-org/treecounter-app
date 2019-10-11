@@ -10,7 +10,6 @@ import SingleRating from './SingleRating';
 import BottomAction from './BottomAction';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { reverse } from 'dns';
 
 const { width, height } = Dimensions.get('window');
 
@@ -82,8 +81,8 @@ export default class SingleReview extends Component {
             indexScore={review.reviewIndexScores['land-quality']}
           />
           <SingleRating
-            name={'servival-rate'}
-            indexScore={review.reviewIndexScores['servival-rate']}
+            name={'survival-rate'}
+            indexScore={review.reviewIndexScores['survival-rate']}
           />
         </View>
         {/* Review Rating Ended */}

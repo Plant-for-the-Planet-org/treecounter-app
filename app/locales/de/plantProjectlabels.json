@@ -18,5 +18,8 @@
   "view_more": "Weitere anschauen",
   "link": "Link",
   "exit": "Beenden",
-  "plant_project_update_success": "Planzungsprojekt erfolgreich aktualisiert"
+  "plant_project_update_success": "Planzungsprojekt erfolgreich aktualisiert",
+  "land-quality": "Land Quality",
+  "co-benefits": "Co Benefits",
+  "survival-rate": "Survival Rate"
 }

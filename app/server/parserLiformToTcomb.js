@@ -132,8 +132,8 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
             options.type = properties[propertyKey].widget;
             options.config = {
               ...options.config,
-              format: date => formatDate(date, 'dd MMM yyyy'),
-              dateFormat: date => formatDate(date, 'dd MMM yyyy')
+              format: date => formatDate(date),
+              dateFormat: date => formatDate(date)
             };
             break;
           case 'hidden':

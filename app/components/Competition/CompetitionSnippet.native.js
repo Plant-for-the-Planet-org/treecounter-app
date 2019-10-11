@@ -193,10 +193,7 @@ class CompetitionSnippet extends React.Component {
                   <Text style={styles.bottomText}>
                     {i18n.t('label.ends')}{' '}
                     {this.props.competition && this.props.competition.endDate
-                      ? formatDate(
-                          this.props.competition.endDate,
-                          'dd MMM yyyy'
-                        )
+                      ? formatDate(this.props.competition.endDate)
                       : ''}
                   </Text>
                 </View>

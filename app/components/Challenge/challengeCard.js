@@ -56,7 +56,7 @@ export default class ChallengeCard extends React.Component {
                       src={direction === 'target' ? downwardArrow : upwardArrow}
                     />
                     <span className="text-style text-padding">
-                      {formatDate(created, 'dd MMM yyyy')}
+                      {formatDate(created)}
                     </span>
                   </span>
                 </div>

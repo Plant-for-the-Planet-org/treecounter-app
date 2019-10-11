@@ -51,9 +51,7 @@ export default class FeaturedProject extends Component {
               ) : null}
 
               <Text style={styles.featuredProjectCardIconText}>
-                {this.props.date
-                  ? formatDate(this.props.date, 'dd MMM yyyy')
-                  : null}
+                {this.props.date ? formatDate(this.props.date) : null}
               </Text>
             </View>
           </View>

@@ -69,9 +69,7 @@ class ContributionCard extends React.Component {
           ? section.contributionMeasurements.map((measurement, index) => {
               return (
                 <View style={styles.actionBar} key={`measurement-${index}`}>
-                  <Text>
-                    {formatDate(measurement.measurementDate, 'dd MMM yyyy')}
-                  </Text>
+                  <Text>{formatDate(measurement.measurementDate)}</Text>
                   <Text>
                     {_.padStart(
                       (measurement.height * 10).toFixed(1) + ' ' + 'mm',
@@ -132,7 +130,7 @@ class ContributionCard extends React.Component {
       ? [
           <Text key={`donateActionLine_10`}>
             {i18n.t('label.gifted_on_to', {
-              date: formatDate(plantDate, 'dd MMM yyyy')
+              date: formatDate(plantDate)
             })}
           </Text>,
           <Text
@@ -148,7 +146,7 @@ class ContributionCard extends React.Component {
           </Text>
         ]
       : i18n.t('label.donated_on', {
-          date: formatDate(plantDate, 'dd MMM yyyy')
+          date: formatDate(plantDate)
         });
   }
 
@@ -159,11 +157,11 @@ class ContributionCard extends React.Component {
   plantActionLine(plantDate, registrationDate) {
     return (
       i18n.t('label.planted_on', {
-        date: formatDate(plantDate, 'dd MMM yyyy')
+        date: formatDate(plantDate)
       }) +
       '\n' +
       i18n.t('label.added_on', {
-        date: formatDate(registrationDate, 'dd MMM yyyy')
+        date: formatDate(registrationDate)
       })
     );
   }
@@ -194,7 +192,7 @@ class ContributionCard extends React.Component {
       ? [
           <Text key={`redeemActionLine_11`}>
             {i18n.t('label.given_on_by', {
-              date: formatDate(redemptionDate, 'dd MMM yyyy')
+              date: formatDate(redemptionDate)
             })}
           </Text>,
           <Text
@@ -211,13 +209,13 @@ class ContributionCard extends React.Component {
         ]
       : redemptionCode
         ? i18n.t('label.redeemed_on', {
-            date: formatDate(redemptionDate, 'dd MMM yyyy')
+            date: formatDate(redemptionDate)
           })
         : givee
           ? [
               <Text key={`dedicated_on_by_11`}>
                 {i18n.t('label.dedicated_on_by', {
-                  date: formatDate(redemptionDate, 'dd MMM yyyy')
+                  date: formatDate(redemptionDate)
                 })}
               </Text>,
               <Text
@@ -236,7 +234,7 @@ class ContributionCard extends React.Component {
               </Text>
             ]
           : i18n.t('label.dedicated_on', {
-              date: formatDate(redemptionDate, 'dd MMM yyyy')
+              date: formatDate(redemptionDate)
             });
   }
 

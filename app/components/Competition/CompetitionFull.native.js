@@ -230,7 +230,7 @@ class CompetitionFull extends React.Component {
                       <Text style={snippetStyles.bottomText}>
                         {i18n.t('label.ends')}{' '}
                         {competitionDetail && competitionDetail.endDate
-                          ? formatDate(competitionDetail.endDate, 'dd MMM yyyy')
+                          ? formatDate(competitionDetail.endDate)
                           : ''}
                       </Text>
                     </View>

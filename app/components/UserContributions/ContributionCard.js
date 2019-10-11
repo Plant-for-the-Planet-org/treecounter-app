@@ -50,7 +50,7 @@ export default class ContributionCard extends React.Component {
       ? [
           <TextSpan key={`donateActionLine_0`}>
             {i18n.t('label.gifted_on_to', {
-              date: formatDate(plantDate, 'dd MMM yyyy')
+              date: formatDate(plantDate)
             })}
           </TextSpan>,
           <TextSpan
@@ -65,7 +65,7 @@ export default class ContributionCard extends React.Component {
           </TextSpan>
         ]
       : i18n.t('label.donated_on', {
-          date: formatDate(plantDate, 'dd MMM yyyy')
+          date: formatDate(plantDate)
         });
   }
 
@@ -76,11 +76,11 @@ export default class ContributionCard extends React.Component {
   plantActionLine(plantDate, registrationDate) {
     return (
       i18n.t('label.planted_on', {
-        date: formatDate(plantDate, 'dd MMM yyyy')
+        date: formatDate(plantDate)
       }) +
       ', ' +
       i18n.t('label.added_on', {
-        date: formatDate(registrationDate, 'dd MMM yyyy')
+        date: formatDate(registrationDate)
       })
     );
   }
@@ -110,7 +110,7 @@ export default class ContributionCard extends React.Component {
       ? [
           <TextSpan key={`redeemActionLine_0`}>
             {i18n.t('label.given_on_by', {
-              date: formatDate(redemptionDate, 'dd MMM yyyy')
+              date: formatDate(redemptionDate)
             })}
           </TextSpan>,
           <TextSpan
@@ -126,13 +126,13 @@ export default class ContributionCard extends React.Component {
         ]
       : redemptionCode
         ? i18n.t('label.redeemed_on', {
-            date: formatDate(redemptionDate, 'dd MMM yyyy')
+            date: formatDate(redemptionDate)
           })
         : givee
           ? [
               <TextSpan key={`redeemActionLine_2`}>
                 {i18n.t('label.dedicated_on_by', {
-                  date: formatDate(redemptionDate, 'dd MMM yyyy')
+                  date: formatDate(redemptionDate)
                 })}
               </TextSpan>,
               <TextSpan
@@ -147,7 +147,7 @@ export default class ContributionCard extends React.Component {
               </TextSpan>
             ]
           : i18n.t('label.dedicated_on', {
-              date: formatDate(redemptionDate, 'dd MMM yyyy')
+              date: formatDate(redemptionDate)
             });
   }
 
@@ -246,10 +246,7 @@ export default class ContributionCard extends React.Component {
                     <TextSpan key={index}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
-                        : formatDate(
-                            measurement.measurementDate,
-                            'dd MMM yyyy'
-                          ) +
+                        : formatDate(measurement.measurementDate) +
                           (measurement.diameter + 'cm').padStart(10) +
                           (
                             (measurement.height / 100).toFixed(1) + 'm'
@@ -271,7 +268,7 @@ export default class ContributionCard extends React.Component {
                   .slice(3)
                   .map(measurement => (
                     <TextSpan key={measurement.id}>
-                      {formatDate(measurement.measurementDate, 'dd MMM yyyy') +
+                      {formatDate(measurement.measurementDate) +
                         (measurement.diameter + 'cm').padStart(10) +
                         ((measurement.height / 100).toFixed(1) + 'm').padStart(
                           10
@@ -333,10 +330,7 @@ export default class ContributionCard extends React.Component {
                     <TextSpan key={measurement.id}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
-                        : formatDate(
-                            measurement.measurementDate,
-                            'dd MMM yyyy'
-                          ) +
+                        : formatDate(measurement.measurementDate) +
                           (measurement.diameter + 'cm').padStart(10) +
                           (
                             (measurement.height / 100).toFixed(1) + 'm'
@@ -358,7 +352,7 @@ export default class ContributionCard extends React.Component {
                   .slice(3)
                   .map(measurement => (
                     <TextSpan key={measurement.id}>
-                      {formatDate(measurement.measurementDate, 'dd MMM yyyy') +
+                      {formatDate(measurement.measurementDate) +
                         (measurement.diameter + 'cm').padStart(10) +
                         ((measurement.height / 100).toFixed(1) + 'm').padStart(
                           10
@@ -441,10 +435,7 @@ export default class ContributionCard extends React.Component {
                     <TextSpan key={measurement.id}>
                       {contribution.plantDate === measurement.measurementDate
                         ? i18n.t('label.planting_day')
-                        : formatDate(
-                            measurement.measurementDate,
-                            'dd MMM yyyy'
-                          ) +
+                        : formatDate(measurement.measurementDate) +
                           (measurement.diameter + 'cm').padStart(10) +
                           (
                             (measurement.height / 100).toFixed(1) + 'm'
@@ -466,7 +457,7 @@ export default class ContributionCard extends React.Component {
                   .slice(3)
                   .map(measurement => (
                     <TextSpan key={measurement.id}>
-                      {formatDate(measurement.measurementDate, 'dd MMM yyyy') +
+                      {formatDate(measurement.measurementDate) +
                         (measurement.diameter + 'cm').padStart(10) +
                         ((measurement.height / 100).toFixed(1) + 'm').padStart(
                           10

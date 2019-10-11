@@ -71,7 +71,7 @@ export default class ChallengeCard extends React.Component {
                       challengesStyle.textChallengePadding
                     ]}
                   >
-                    {formatDate(created, 'dd MMM yyyy')}
+                    {formatDate(created)}
                   </Text>
                 </View>
               </View>

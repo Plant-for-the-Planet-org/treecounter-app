@@ -25,7 +25,7 @@ import {
 } from '../schemas';
 import { normalize } from 'normalizr';
 import { fetchItem, saveItem } from './../stores/localStorage';
-
+import { fetchPublicPledgesAction } from './pledgeEventsAction';
 export function fetchPledgesAction(eventSlug) {
   return dispatch => {
     getRequest('pledgeEvent_get', {
@@ -83,9 +83,6 @@ export function postPledge(data, params, loggedIn) {
             const { statusText } = res;
             dispatch(postedPledge(res.data));
 
-            //var pledgesArray = [res.data.token, res.data.token];
-            //console.log(showAsyncStorageContentInDev());
-
             getLocalStorageItem('pledgedEvent', res);
 
             NotificationManager.success(
@@ -122,17 +119,32 @@ async function getLocalStorageItem(key, res) {
   const token = res.data.token;
   console.log(token);
   try {
-    let pledgesArray = await fetchItem(key);
+    let pledgesArray = await fetchItem(key).catch(() => {
+      saveItem(key, []);
+      return [];
+    });
+
     if (typeof pledgesArray !== 'undefined' && pledgesArray.length > 0) {
+      // Already existing pledges
       let newPledgesArray = JSON.parse(pledgesArray);
       newPledgesArray.push(token);
       saveItem(key, JSON.stringify(newPledgesArray));
-    } else {
+    } // No existing pledges
+    else {
+      console.log('No existing pledges found');
       pledgesArray = [];
       let newPledgesArray = pledgesArray;
       newPledgesArray.push(token);
       saveItem(key, JSON.stringify(newPledgesArray));
     }
+    //console.log(showAsyncStorageContentInDev());
+    fetchItem('pledgedEvent').then(data => {
+      if (typeof data !== 'undefined' && data.length > 0) {
+        let stringPledges = JSON.parse(data);
+        stringPledges = stringPledges.toString();
+        fetchPublicPledgesAction(stringPledges);
+      }
+    });
   } catch (error) {
     console.log(error);
   }

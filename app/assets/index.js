@@ -141,6 +141,9 @@ import googlePlayBadge_en from './images/en/google-play-badge.png';
 import googlePlayBadge_de from './images/de/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
+import nextArrow from './images/icons/nextArrow.png';
+import nextArrowWhite from './images/icons/nextArrowWhite.png';
+
 export {
   mapCollapse,
   mapExpand,
@@ -284,5 +287,7 @@ export {
   googlePlayBadge_en,
   googlePlayBadge_de,
   appleStoreBadge_en,
-  appleStoreBadge_de
+  appleStoreBadge_de,
+  nextArrow,
+  nextArrowWhite
 };

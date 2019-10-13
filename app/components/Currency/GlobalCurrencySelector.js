@@ -139,20 +139,7 @@ class GlobalCurrencySelector extends Component {
           isSearchable={false}
           options={currenciesArray}
         />
-        {/* <div>
-          <select
-            onChange={this.handleCurrencyChange}
-            value={this.state.preferredCurrency}
-          >
-            {currenciesArray.map(value => {
-              return (
-                <option value={value} key={value}>
-                  {value}
-                </option>
-              );
-            })}
-          </select>
-        </div> */}
+        
       </div>
     );
   }

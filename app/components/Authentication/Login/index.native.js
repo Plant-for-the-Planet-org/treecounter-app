@@ -45,7 +45,9 @@ export default class Login extends Component {
 
   refreshToken = () => {
     // eslint-disable-next-line no-underscore-dangle
-    this._captchaRef.refreshToken();
+    if (this._captchaRef) {
+      this._captchaRef.refreshToken();
+    }
   };
 
   handleLoginClick = () => {

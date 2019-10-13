@@ -71,9 +71,9 @@ $breakpointTablet: 768px;
         padding: 10px;
       }
   }
-.language { 
+.language, .currency { 
   max-height: 40px;
-  width: 62%; 
+  width: 60%; 
   border: 1px solid #686060;
   border-radius: 9px;
   box-sizing: border-box;
@@ -82,15 +82,8 @@ $breakpointTablet: 768px;
   }
 }
   .currency {
-    height:40px;  width: 38%; 
-    & > div{
-      margin-right: 0px;
-      box-sizing: border-box;
-      margin-left: 4px;
-    }
-    select {
-        border-radius: 9px;
-      }
+    margin-left: 8px;
+   width: 36%;
   }
 
 }

@@ -20,11 +20,8 @@ import { compCalendar, email } from '../../assets';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import CompetitionParticipant from './CompetitionParticipant.native';
 import SearchUser from '../Challenge/Tabs/SearchUser.native';
-import moment from 'moment';
-import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
-import { getLocale } from '../../actions/getLocale';
-import { getDateFromMySQL } from '../../helpers/utils';
+import { formatDate } from '../../utils/utils';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -33,7 +30,6 @@ class CompetitionFull extends React.Component {
   constructor(props) {
     super(props);
     this.onSearchResultClick = this.onSearchResultClick.bind(this);
-    moment.locale(getLocale());
   }
 
   componentDidMount() {
@@ -234,9 +230,7 @@ class CompetitionFull extends React.Component {
                       <Text style={snippetStyles.bottomText}>
                         {i18n.t('label.ends')}{' '}
                         {competitionDetail && competitionDetail.endDate
-                          ? moment(
-                              getDateFromMySQL(competitionDetail.endDate)
-                            ).format('MMM DD, YYYY')
+                          ? formatDate(competitionDetail.endDate)
                           : ''}
                       </Text>
                     </View>

@@ -85,7 +85,7 @@ export default class ContributionCard extends React.Component {
     );
   }
 
-  dedicateActionLine = (isGift, givee, giveeSlug) => {
+  dedicateActionLine(isGift, givee, giveeSlug) {
     return isGift
       ? [
           <TextSpan key={`dedicateActionLine_0`}>
@@ -103,7 +103,7 @@ export default class ContributionCard extends React.Component {
           </TextSpan>
         ]
       : '';
-  };
+  }
 
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && givee
@@ -231,11 +231,8 @@ export default class ContributionCard extends React.Component {
         >
           <div className="contribution-container__left-column">
             {treeCountLine ? <TextSpan strong>{treeCountLine}</TextSpan> : null}
-
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
-            {donateActionLine ? (
-              <TextSpan>{donateActionLine + ''}</TextSpan>
-            ) : null}
+            {donateActionLine ? <TextSpan>{donateActionLine}</TextSpan> : null}
             {tpoLine ? <TextSpan>{tpoLine}</TextSpan> : null}
           </div>
           <div className="contribution-container__right-column">
@@ -318,9 +315,7 @@ export default class ContributionCard extends React.Component {
             {treeCountLine ? <TextSpan strong>{treeCountLine}</TextSpan> : null}
             {plantProjectLine ? <TextSpan>{plantProjectLine}</TextSpan> : null}
             {plantActionLine ? <TextSpan>{plantActionLine}</TextSpan> : null}
-            {dedicateActionLine ? (
-              <TextSpan>{dedicateActionLine}</TextSpan>
-            ) : null}
+            {dedicateActionLine ? <TextSpan>{dedicateActionLine}</TextSpan> : null}
           </div>
           <div className="contribution-container__right-column">
             {contribution.category === 'contributions'

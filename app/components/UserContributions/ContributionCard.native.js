@@ -166,7 +166,7 @@ class ContributionCard extends React.Component {
     );
   }
 
-  dedicateActionLine = (isGift, givee, giveeSlug) => {
+  dedicateActionLine(isGift, givee, giveeSlug) {
     return isGift
       ? [
           <Text key={`dedicateActionLine_11`}>
@@ -185,7 +185,7 @@ class ContributionCard extends React.Component {
           </Text>
         ]
       : '';
-  };
+  }
 
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && givee

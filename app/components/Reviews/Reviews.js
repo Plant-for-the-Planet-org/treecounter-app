@@ -11,16 +11,34 @@ import SingleReview from './SingleReview';
 import { ScrollView } from 'react-native-gesture-handler';
 const { width, height } = Dimensions.get('window');
 import { updateStaticRoute } from './../../helpers/routerHelper';
-import { selectedPlantProjectSelector } from '../../selectors';
+import {
+  selectedPlantProjectSelector,
+  selectedReviewsSelector,
+  currentUserProfileSelector
+} from '../../selectors';
 import { connect } from 'react-redux';
+import { deleteReview } from '../../actions/reviews';
+import { bindActionCreators } from 'redux';
 
 class Reviews extends Component {
   constructor(props) {
     super(props);
-    console.log('in reviews', props);
+    console.log('reviews props:', props);
+
+    this.state = {};
+    this.deleteReview = this.deleteReview.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log('nextprops', nextProps);
+    if (nextProps.project) {
+    }
+  }
+  async deleteReview(id) {
+    await this.props.deleteReview(id);
   }
   render() {
-    let { name, reviewScore, reviews } = this.props.project;
+    let { name, reviewScore } = this.props.project;
+    let { reviews } = this.props;
     return (
       <ScrollView
         contentContainerStyle={{
@@ -61,11 +79,34 @@ class Reviews extends Component {
           </View>
         </View>
 
+        {/* <TouchableOpacity
+          onPress={() => {
+            updateStaticRoute('app_add_review', this.props.navigation);
+          }}
+          style={styles.writeReviewButton}
+        >
+          <Text style={{ fontWeight: 'bold', color: 'white' }}>
+            Write a Review
+            </Text>
+        </TouchableOpacity> */}
+
         {/*All Reviews*/}
         <View style={{ paddingTop: 20, backgroundColor: '#ecf0f1' }}>
-          {reviews.map(review => {
-            return <SingleReview key={review.id} review={review} />;
-          })}
+          {reviews
+            .sort((a, b) => {
+              return b.id - a.id;
+            })
+            .map(review => {
+              return (
+                <SingleReview
+                  currentUserProfile={this.props.currentUserProfile}
+                  deleteReview={this.deleteReview}
+                  navigation={this.props.navigation}
+                  key={review.id}
+                  review={review}
+                />
+              );
+            })}
         </View>
 
         {/* All Reviews Ended */}
@@ -138,8 +179,17 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    project: selectedPlantProjectSelector(state)
+    reviews: selectedReviewsSelector(state),
+    project: selectedPlantProjectSelector(state),
+    currentUserProfile: currentUserProfileSelector(state)
   };
 };
-
-export default connect(mapStateToProps)(Reviews);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      deleteReview
+    },
+    dispatch
+  );
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Reviews);

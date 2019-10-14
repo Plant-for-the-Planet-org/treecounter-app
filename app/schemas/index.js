@@ -1,5 +1,6 @@
 import { schema } from 'normalizr';
 import { tree } from '../assets';
+import plantProject from '../server/formSchemas/plantProject';
 
 export const challengeSchema = new schema.Entity('challenge');
 export const competitionSchema = new schema.Entity('competition');
@@ -12,6 +13,7 @@ export const contributionSchema = new schema.Entity('contribution');
 export const contributionImageSchema = new schema.Entity('contributionImage');
 export const plantProjectSchema = new schema.Entity('plantProject');
 export const plantProjectImageSchema = new schema.Entity('plantProjectImage');
+export const reviewsSchema = new schema.Entity('reviews');
 export const tpoSchema = new schema.Entity('tpo');
 export const treecounterSchema = new schema.Entity('treecounter');
 export const userProfileSchema = new schema.Entity('userProfile');
@@ -40,9 +42,13 @@ contributionImageSchema.define({
 
 plantProjectSchema.define({
   tpo: tpoSchema,
-  plantProjectImages: [plantProjectImageSchema]
+  plantProjectImages: [plantProjectImageSchema],
+  reviews: [reviewsSchema]
 });
-
+reviewsSchema.define({
+  plantProject: plantProjectSchema,
+  userProfile: userProfileSchema
+});
 plantProjectImageSchema.define({
   plantProject: plantProjectSchema
 });
@@ -62,5 +68,6 @@ treecounterSchema.define({
 
 userProfileSchema.define({
   treecounter: treecounterSchema,
-  plantProjects: [plantProjectSchema]
+  plantProjects: [plantProjectSchema],
+  reviews: [reviewsSchema]
 });

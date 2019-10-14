@@ -15,7 +15,8 @@ export const initialState = {
   plantContributionImage: {},
   competitionPager: {},
   competition: {},
-  competitionEnrollment: {}
+  competitionEnrollment: {},
+  reviews: {}
 };
 
 export const getUserProfiles = state => state.entities.userProfile;
@@ -43,7 +44,7 @@ export default handleActions(
       return state;
     },
     ENTITY_DELETE: (state, action) => {
-      debug('Deleting entity');
+      debug('Deleting entity', action, state);
       state = { ...state };
 
       Object.keys(action.payload).forEach(entity => {

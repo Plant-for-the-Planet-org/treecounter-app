@@ -18,14 +18,40 @@ import { attach } from './../../../assets';
 const { width, height } = Dimensions.get('window');
 
 export default class AddRatingSection extends Component {
-  state = {
-    images: null,
-    image: null,
-    fileUri: '',
-    fileType: '',
-    fileName: '',
-    fileSize: ''
-  };
+  constructor(props) {
+    super(props);
+    console.log('props got:', props);
+    this.state = {
+      // images: null,
+      // image: null,
+      // fileUri: '',
+      // fileType: '',
+      // fileName: '',
+      // fileSize: '',
+      plantProject: props.selectedPlantProject.id,
+      summary: '',
+      reviewIndexScores: {
+        'co-benefits': {
+          score: 0
+        },
+        'land-quality': {
+          score: 0
+        },
+        'survival-rate': {
+          score: 0
+        }
+      },
+      pdfFile: '',
+      ...props.review
+    };
+  }
+  setStateAndUpdateParent(data) {
+    this.setState(data, () => {
+      this.props.onUpdate({ ...this.state });
+      console.log('setting', this.state);
+    });
+  }
+  componentDidMount() {}
   // Image Uploading
   pickMultiple() {
     ImagePicker.openPicker({
@@ -94,14 +120,16 @@ export default class AddRatingSection extends Component {
     // Pick a single file
     try {
       const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.images]
+        type: [DocumentPicker.types.images],
+        readContent: true
       });
-      console.log(
-        res.uri,
-        res.type, // mime type
-        res.name,
-        res.size
-      );
+      // console.log(
+      //   res.uri,
+      //   res.type, // mime type
+      //   res.name,
+      //   res.size
+      // );
+      this.setStateAndUpdateParent({ pdfFile: res.content });
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // User cancelled the picker, exit any dialogs or menus and move on
@@ -113,7 +141,16 @@ export default class AddRatingSection extends Component {
 
   // Document picker ended
 
+  // rating completed
+  ratingCompleted(rating, type) {
+    let reviewIndexScores = { ...this.state.reviewIndexScores };
+    reviewIndexScores[type] = { score: rating };
+    this.setStateAndUpdateParent({ reviewIndexScores });
+    console.log('rating', rating, type);
+  }
+
   render() {
+    console.log('add', this.state);
     return (
       <View>
         <View
@@ -128,14 +165,17 @@ export default class AddRatingSection extends Component {
             <Text style={styles.ratingsText}>Land Quality</Text>
 
             <AirbnbRating
-              defaultRating={0}
+              defaultRating={this.state.reviewIndexScores['land-quality'].score}
               size={20}
               showRating={false}
+              onFinishRating={rating => {
+                this.ratingCompleted(rating, 'land-quality');
+              }}
               style={{ color: '#2ecc71' }}
             />
           </View>
 
-          <View style={styles.singleRatingBox}>
+          {/* <View style={styles.singleRatingBox}>
             <Text style={styles.ratingsText}>Tree Type</Text>
 
             <AirbnbRating
@@ -144,15 +184,18 @@ export default class AddRatingSection extends Component {
               showRating={false}
               style={{ color: '#2ecc71' }}
             />
-          </View>
+          </View> */}
 
           <View style={styles.singleRatingBox}>
-            <Text style={styles.ratingsText}>Co benefits</Text>
+            <Text style={styles.ratingsText}>Co Benefits</Text>
 
             <AirbnbRating
-              defaultRating={0}
+              defaultRating={this.state.reviewIndexScores['co-benefits'].score}
               size={20}
               showRating={false}
+              onFinishRating={rating => {
+                this.ratingCompleted(rating, 'co-benefits');
+              }}
               style={{ color: '#2ecc71' }}
             />
           </View>
@@ -161,9 +204,14 @@ export default class AddRatingSection extends Component {
             <Text style={styles.ratingsText}>Survival Rate</Text>
 
             <AirbnbRating
-              defaultRating={0}
+              defaultRating={
+                this.state.reviewIndexScores['survival-rate'].score
+              }
               size={20}
               showRating={false}
+              onFinishRating={rating => {
+                this.ratingCompleted(rating, 'survival-rate');
+              }}
               style={{ color: '#2ecc71' }}
             />
           </View>
@@ -180,8 +228,11 @@ export default class AddRatingSection extends Component {
             returnKeyType="next"
             lineWidth={1}
             blurOnSubmit={false}
-            onChangeText={briefReview => this.setState({ briefReview })}
-            value={this.state.briefReview}
+            onChangeText={summary => {
+              console.log('summary', summary);
+              this.setStateAndUpdateParent({ summary: summary });
+            }}
+            value={this.state.summary}
             multiline={true}
             label="BRIEF REVIEW OF PROJECT"
           />
@@ -205,7 +256,7 @@ export default class AddRatingSection extends Component {
               <View
                 style={{ flexGrow: 1, width: '100%', justifyContent: 'center' }}
               >
-                <TextField
+                {/* <TextField
                   tintColor={'#89b53a'}
                   titleFontSize={12}
                   lineWidth={1}
@@ -215,7 +266,7 @@ export default class AddRatingSection extends Component {
                   multiline={true}
                   editable={false}
                   label="Select File"
-                />
+                /> */}
               </View>
               <Image
                 source={attach}
@@ -231,8 +282,8 @@ export default class AddRatingSection extends Component {
           {/* Document Picking ends */}
 
           {/* Image Picking Part */}
-          <Text style={{ marginTop: 40, fontSize: 12 }}>ADD PICTURES</Text>
-          <View
+          {/* <Text style={{ marginTop: 40, fontSize: 12 }}>ADD PICTURES</Text> */}
+          {/* <View
             style={{
               display: 'flex',
               flexDirection: 'row',
@@ -240,8 +291,8 @@ export default class AddRatingSection extends Component {
               alignItems: 'center',
               justifyContent: 'flex-start'
             }}
-          >
-            {/* <ScrollView
+          > */}
+          {/* <ScrollView
 							contentContainerStyle={{
 								display: 'flex',
 								flexDirection: 'row',
@@ -250,52 +301,51 @@ export default class AddRatingSection extends Component {
 								alignItems: 'flex-start'
 							}}
 						> */}
-            {this.state.image ? this.renderAsset(this.state.image) : null}
+          {/* {this.state.image ? this.renderAsset(this.state.image) : null}
             {this.state.images
               ? this.state.images.map(i => (
-                  <View
-                    key={i.uri}
-                    style={{ display: 'flex', flexDirection: 'row' }}
-                  >
-                    {this.renderAsset(i)}
-                  </View>
-                ))
-              : null}
-            {/* </ScrollView> */}
-            <TouchableOpacity
-              style={{
-                justifyContent: 'center',
-                height: 27,
-                width: 27,
-                marginLeft: 2
-              }}
-              onPress={this.pickMultiple.bind(this)}
-            >
-              <Text style={styles.pickImageButtonText}>+</Text>
-            </TouchableOpacity>
+                <View
+                  key={i.uri}
+                  style={{ display: 'flex', flexDirection: 'row' }}
+                >
+                  {this.renderAsset(i)}
+                </View>
+              ))
+              : null} */}
+          {/* </ScrollView> */}
+          {/* <TouchableOpacity
+            style={{
+              justifyContent: 'center',
+              height: 27,
+              width: 27,
+              marginLeft: 2
+            }}
+            onPress={this.pickMultiple.bind(this)}
+          >
+            <Text style={styles.pickImageButtonText}>+</Text>
+          </TouchableOpacity> */}
 
-            {/* <TouchableOpacity
+          {/* <TouchableOpacity
               onPress={() => this.clickImage(true)}
               style={styles.pickImageButton2}
             >
               <Text style={styles.pickImageButtonText}>Click Image</Text>
             </TouchableOpacity> */}
-          </View>
-
-          {/* Image Picking Part Ends */}
-
-          <Text
-            style={{
-              marginTop: 30,
-              marginBottom: 40,
-              fontSize: 13,
-              lineHeight: 20
-            }}
-          >
-            Please check the guidelines & only rate indexes you are most
-            familiar with. All Indexes are optional.
-          </Text>
         </View>
+
+        {/* Image Picking Part Ends */}
+
+        <Text
+          style={{
+            marginTop: 30,
+            marginBottom: 40,
+            fontSize: 13,
+            lineHeight: 20
+          }}
+        >
+          Please check the guidelines & only rate indexes you are most familiar
+          with. All Indexes are optional.
+        </Text>
       </View>
     );
   }

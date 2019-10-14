@@ -5,10 +5,11 @@ import i18n from '../../locales/i18n.js';
 const { width, height } = Dimensions.get('window');
 export default class SingleRating extends Component {
   generateStar(fill, score = 0) {
-    let repeater = Array(fill ? score : 5 - score).fill(1);
-    console.log('repeater', repeater);
-    return repeater.map(() => (
+    let repeater = Array(fill ? Number(score) : 5 - Number(score)).fill(1);
+    // console.log('repeater', repeater);
+    return repeater.map((data, index) => (
       <Icon
+        key={index}
         name="star"
         size={12}
         solid={fill}

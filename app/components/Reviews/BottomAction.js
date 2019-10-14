@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-
+import { updateStaticRoute } from './../../helpers/routerHelper';
 export default class BottomAction extends Component {
+  constructor(props) {
+    super(props);
+    console.log('in con', props);
+  }
   render() {
+    console.log(this.props.navigation, this.props.review, this.props.close);
     return (
       <View>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            this.props.close && this.props.close();
+            console.log(this.props.review, this.props.navigation);
+            updateStaticRoute('app_add_review', this.props.navigation, {
+              review: this.props.review
+            });
+          }}
+        >
           <View
             style={{
               display: 'flex',
@@ -37,7 +50,11 @@ export default class BottomAction extends Component {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            this.props.delete();
+          }}
+        >
           <View
             style={{
               display: 'flex',

@@ -10,17 +10,27 @@ import SingleRating from './SingleRating';
 import BottomAction from './BottomAction';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import { updateStaticRoute } from './../../helpers/routerHelper';
 
 const { width, height } = Dimensions.get('window');
 
 export default class SingleReview extends Component {
   constructor(props) {
     super(props);
-    console.log('sinle', props.review);
+    console.log('single props', props);
+    this.close = this.close.bind(this);
+    this.delete = this.delete.bind(this);
+  }
+  close() {
+    this.RBSheet.close();
+  }
+  delete() {
+    this.props.deleteReview(this.props.review.id);
+    this.close();
   }
   render() {
-    let { review } = this.props;
-    console.log('review', review);
+    let { review, navigation, currentUserProfile } = this.props;
+    console.log('in single props in render', this.props);
 
     return (
       <View
@@ -51,15 +61,17 @@ export default class SingleReview extends Component {
           </View>
           <TouchableOpacity
             onPress={() => {
-              this.RBSheet.open();
+              currentUserProfile && this.RBSheet.open();
             }}
           >
-            <Icon
-              name="ellipsis-v"
-              solid
-              size={20}
-              style={{ color: '#9E9E9E' }}
-            />
+            {currentUserProfile && (
+              <Icon
+                name="ellipsis-v"
+                solid
+                size={20}
+                style={{ color: '#9E9E9E' }}
+              />
+            )}
           </TouchableOpacity>
         </View>
         {/* Review Header Ended */}
@@ -73,12 +85,12 @@ export default class SingleReview extends Component {
         <View style={styles.ratingsParent}>
           {/*  {console.log('scores', review.reviewIndexScores, review.reviewIndexScores['co-benefits'], review.reviewIndexScores['land-quality'], review.reviewIndexScores['servival-rate'])} */}
           <SingleRating
-            name={'co-benefits'}
-            indexScore={review.reviewIndexScores['co-benefits']}
-          />
-          <SingleRating
             name={'land-quality'}
             indexScore={review.reviewIndexScores['land-quality']}
+          />
+          <SingleRating
+            name={'co-benefits'}
+            indexScore={review.reviewIndexScores['co-benefits']}
           />
           <SingleRating
             name={'survival-rate'}
@@ -93,7 +105,9 @@ export default class SingleReview extends Component {
           }}
         >
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('AddReview')}
+            onPress={() =>
+              updateStaticRoute('app_add_review', this.props.navigation)
+            }
             style={styles.pdfButton}
           >
             <Text style={styles.pdfButtonText}>View PDF</Text>
@@ -111,7 +125,12 @@ export default class SingleReview extends Component {
             }
           }}
         >
-          <BottomAction />
+          <BottomAction
+            delete={this.delete}
+            close={this.close}
+            review={review}
+            navigation={navigation}
+          />
         </RBSheet>
       </View>
     );

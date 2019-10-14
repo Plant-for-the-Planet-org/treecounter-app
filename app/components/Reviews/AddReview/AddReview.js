@@ -12,8 +12,48 @@ import { ScrollView } from 'react-native-gesture-handler';
 import AddRatingSection from './AddRatingSection';
 const { width, height } = Dimensions.get('window');
 import { forward } from './../../../assets';
-
-export default class AddReview extends Component {
+import { connect } from 'react-redux';
+import { addReview, updateReview } from '../../../actions/reviews';
+import { bindActionCreators } from 'redux';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import { selectedPlantProjectSelector } from '../../../selectors';
+class AddReview extends Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+    this.state = {
+      review: {}
+    };
+    this.create = this.create.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
+  }
+  onUpdate(data) {
+    this.setState({ review: data });
+  }
+  componentDidMount() {
+    if (
+      this.props.navigation &&
+      this.props.navigation.state &&
+      this.props.navigation.state.params
+    ) {
+      this.setState({ review: this.props.navigation.state.params.review });
+    }
+  }
+  async create() {
+    console.log('creating', this.props.selectedPlantProject);
+    if (this.state.review.id) {
+      await this.props.updateReview(
+        this.state.review,
+        this.props.selectedPlantProject
+      );
+    } else {
+      await this.props.addReview(
+        this.state.review,
+        this.props.selectedPlantProject
+      );
+    }
+    this.props.navigation.navigate('app_reviews');
+  }
   render() {
     return (
       <ScrollView
@@ -46,13 +86,23 @@ export default class AddReview extends Component {
 
         {/*All Reviews*/}
         <View>
-          <AddRatingSection />
+          <AddRatingSection
+            review={this.state.review}
+            selectedPlantProject={this.props.selectedPlantProject}
+            onUpdate={this.onUpdate}
+          />
         </View>
 
         {/* All Reviews Ended */}
 
         {/*Write Review*/}
-        <TouchableOpacity style={styles.pledgeSmallButton}>
+        <TouchableOpacity
+          style={styles.pledgeSmallButton}
+          onPress={() => {
+            console.log('plant project', this.props.selectedPlantProject);
+            this.create();
+          }}
+        >
           <Image
             source={forward}
             resizeMode="cover"
@@ -117,3 +167,20 @@ const styles = StyleSheet.create({
     marginLeft: '80%'
   }
 });
+
+const mapStateToProps = state => {
+  return {
+    selectedPlantProject: selectedPlantProjectSelector(state)
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      addReview,
+      updateReview
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddReview);

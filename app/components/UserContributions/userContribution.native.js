@@ -44,7 +44,7 @@ export default class UserContributions extends React.Component {
                   )}`}
             </Text>
           ) : null}
-          {!!location ? (
+          {location ? (
             <View style={styles.itemContainer}>
               <Image source={TreeIcon} style={styles.icon} />
               <Text
@@ -58,14 +58,14 @@ export default class UserContributions extends React.Component {
             </View>
           ) : null}
 
-          {!!dedicatedTo ? (
+          {dedicatedTo ? (
             <View style={styles.itemContainer}>
               <Image source={ArrowRight} style={styles.icon} />
               <Text style={{ ...styles.text }}>{dedicatedTo}</Text>
             </View>
           ) : null}
 
-          {!!plantedDate ? (
+          {plantedDate ? (
             <View style={styles.itemContainer}>
               <Image source={CalendarIcon} style={styles.icon} />
               <Text style={{ ...styles.text }}>{plantedDate}</Text>

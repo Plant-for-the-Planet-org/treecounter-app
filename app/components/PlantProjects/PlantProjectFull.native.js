@@ -6,7 +6,6 @@ import { queryParamsToObject } from '../../helpers/utils';
 import { View } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
-import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { ScrollView } from 'react-native';
 import PlantProjectSnippet from './PlantProjectSnippet.native';
@@ -46,6 +45,8 @@ class PlantProjectFull extends React.Component {
       linkText,
       ndviUid
     };
+
+    const backgroundColor = 'white';
     return (
       <View style={{ flex: 1 }}>
         <ScrollView
@@ -53,7 +54,7 @@ class PlantProjectFull extends React.Component {
             scrollStyle.styleContainer,
             {
               paddingBottom: 72,
-              backgroundColor: 'white'
+              backgroundColor: backgroundColor
             }
           ]}
         >

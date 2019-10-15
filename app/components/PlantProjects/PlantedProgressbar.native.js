@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
-import { challenge_outline as targetPlanted } from '../../assets';
 import { delimitNumbers, convertNumber } from '../../utils/utils';
-import EStyleSheet from 'react-native-extended-stylesheet';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 

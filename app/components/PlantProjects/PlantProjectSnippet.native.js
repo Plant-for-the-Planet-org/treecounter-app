@@ -7,7 +7,6 @@ import { tick, location_grey, survival_grey, tax_grey } from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import { formatNumber } from '../../utils/utils';
-import PrimaryButton from '../Common/Button/PrimaryButton';
 import CardLayout from '../Common/Card';
 import PlantedProgressBar from './PlantedProgressbar.native';
 
@@ -31,6 +30,7 @@ class PlantProjectSnippet extends PureComponent {
 
   render() {
     const {
+      // eslint-disable-next-line no-unused-vars
       id,
       name: projectName,
       isCertified,
@@ -95,6 +95,7 @@ class PlantProjectSnippet extends PureComponent {
       }
     }
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
+    const textColor = '#4d5153';
     return (
       <TouchableHighlight
         underlayColor={'transparent'}
@@ -130,7 +131,7 @@ class PlantProjectSnippet extends PureComponent {
                         {
                           fontSize: 14,
                           // lineHeight: 19,
-                          color: '#4d5153',
+                          color: {textColor},
                           textAlign: 'center',
                           marginRight: 5
                         }
@@ -160,7 +161,7 @@ class PlantProjectSnippet extends PureComponent {
                 style={styles.project_teaser__contentText}
               >
                 {`${teaserProps.projectName}  ${
-                  !!teaserProps.tpoName ? 'by ' + teaserProps.tpoName : ''
+                  teaserProps.tpoName ? 'by ' + teaserProps.tpoName : ''
                 }`}
               </Text>
             </View>

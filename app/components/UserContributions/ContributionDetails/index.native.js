@@ -24,6 +24,7 @@ class UserContributionsDetails extends React.Component {
       treeCount,
       plantDate,
       givee,
+      // eslint-disable-next-line no-unused-vars
       giveeSlug,
       contributionType,
       plantProjectId,
@@ -42,7 +43,7 @@ class UserContributionsDetails extends React.Component {
     let dedicatedTo = undefined;
     let contributionTypeText = undefined;
     let location = undefined;
-    let isSinglePlanted = false;
+    // let isSinglePlanted = false;
     let contributionOrPlantedImages = contributionImages;
     let selectedPlantProjectDetails = undefined;
 
@@ -51,7 +52,8 @@ class UserContributionsDetails extends React.Component {
     }
     if (contributionType === 'planting') {
       contributionTypeText = i18n.t('label.usr_contribution_planted');
-      isSinglePlanted = treeCount > 1 ? false : true;
+      // TODO: check if this is a logic error, as this var is never used!
+      // isSinglePlanted = treeCount > 1 ? false : true;
     } else if (contributionType === 'donation') {
       if (plantProjects.length > 0) {
         selectedPlantProjectDetails = plantProjects.filter(
@@ -93,9 +95,11 @@ class UserContributionsDetails extends React.Component {
       }
       contributionTypeText = i18n.t('label.usr_contribution_redeemed');
     }
+    
+    const backgroundColor = '#fff';
 
     return (
-      <ScrollView style={{ backgroundColor: '#fff', flex: 1 }}>
+      <ScrollView style={{ backgroundColor: {backgroundColor}, flex: 1 }}>
         <UserContributions
           mayUpdate={mayUpdate}
           treeCount={treeCount}
@@ -133,7 +137,7 @@ class UserContributionsDetails extends React.Component {
           />
         ) : null}
 
-        {!!ndviUid ? (
+        {ndviUid ? (
           <View style={{ marginLeft: 8, marginRight: 8, marginTop: 20 }}>
             <NDVI ndviUid={ndviUid} />
           </View>

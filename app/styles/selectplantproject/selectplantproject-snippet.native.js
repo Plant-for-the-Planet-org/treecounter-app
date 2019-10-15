@@ -29,7 +29,6 @@ export default EStyleSheet.create({
     // shadowOpacity: 0.5,
     // elevation: 1,
     // padding: 0,
-    borderRadius: 7,
     borderRadius: 7
   },
   projectImageContainer: {

@@ -33,7 +33,9 @@ class SearchBar extends React.PureComponent {
   componentDidMount() {
     if (!this.props.dontFocus) {
       requestAnimationFrame(() => {
-        this._textInput.focus();
+        if (this._textInput) {
+          this._textInput.focus();          
+        }
       });
     }
     if (this.props.style) {

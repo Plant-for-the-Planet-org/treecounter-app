@@ -37,10 +37,12 @@ class SearchLayout extends React.Component {
 
   // TODO: debounce
   _handleChangeQuery = q => {
-    getSuggestions(q).then(suggestions => {
-      this.setState({ q: suggestions });
-      //console.log('suggestions', suggestions);
-    });
+    getSuggestions(q)
+      .then(suggestions => {
+        this.setState({ q: suggestions });
+        //console.log('suggestions', suggestions);
+      })
+      .catch(error => console.log(error));
   };
 
   redirectToResult(suggestion) {

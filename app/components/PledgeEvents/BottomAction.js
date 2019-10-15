@@ -37,7 +37,9 @@ export default class BottomAction extends Component {
                 });
               }}
             >
-              <Text style={styles.baLaterText}>LATER</Text>
+              <Text style={styles.baLaterText}>
+                {i18n.t('label.pledgeAddedLaterButton')}
+              </Text>
             </TouchableOpacity>
 
             <TouchableOpacity

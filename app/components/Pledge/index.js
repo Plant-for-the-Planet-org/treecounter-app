@@ -7,12 +7,13 @@ import {
   pledge_highest,
   pledge_latest,
   nextArrow,
-  nextArrowWhite
+  nextArrowWhite,
+  closeBlack
 } from '../../assets';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import { getDocumentTitle } from '../../helpers/utils';
 import { delimitNumbers } from '../../utils/utils';
-import Pulse from 'react-reveal/Pulse';
+import Pulse from 'react-reveal/Pulse'; // Not being used currently
 import Modal from 'react-modal';
 import { fetchItem } from './../../stores/localStorage';
 import {
@@ -52,10 +53,9 @@ export default class Pledge extends Component {
       IncreasePledgesModalIsOpen: false, // Increase pledge Modal
       SubmitPledgeModalIsOpen: false, // Submit pledge Modal
       loggedIn: false,
-      userPledges: [],
       loadUserPledges: true,
-      updatingTreeCount: 0,
-      myPledge: {}
+      myPledge: {},
+      updatingTreeCount: ''
     };
   }
 
@@ -79,10 +79,24 @@ export default class Pledge extends Component {
     if (this.state.loadUserPledges) {
       if (this.props.entities) {
         if (this.props.entities.eventPledge) {
-          this.setState({
-            userPledges: this.props.entities.eventPledge,
-            loadUserPledges: false
-          });
+          if (
+            this.props.pledges &&
+            this.props.pledges.allEventPledges &&
+            this.props.pledges.allEventPledges.length > 0
+          ) {
+            if (typeof this.props.entities.eventPledge !== 'undefined') {
+              let userPledges = Object.values(this.props.entities.eventPledge); // convert object to array
+              let myPledge = userPledges.filter(pledge => {
+                return this.props.pledges.allEventPledges.some(f => {
+                  return f.token === pledge.token && f.email === pledge.email;
+                });
+              });
+              this.setState({
+                myPledge: myPledge,
+                loadUserPledges: false
+              });
+            }
+          }
         }
       }
     }
@@ -110,7 +124,6 @@ export default class Pledge extends Component {
   };
   closeIncreasePledgesModal = () => {
     this.setState({ IncreasePledgesModalIsOpen: false });
-    setTimeout(window.location.reload.bind(window.location), 3000);
   };
 
   // Functions for Submit Pledge Modal
@@ -119,7 +132,7 @@ export default class Pledge extends Component {
   };
   closeSubmitPledgeModal = () => {
     this.setState({ SubmitPledgeModalIsOpen: false });
-    setTimeout(window.location.reload.bind(window.location), 5000);
+    setTimeout(window.location.reload.bind(window.location), 3000);
   };
 
   onFormChange(value) {
@@ -130,8 +143,8 @@ export default class Pledge extends Component {
     let value = this.refs.pledgeForm.getValue();
     if (value) {
       this.props.postPledge(value);
-      this.openSubmitPledgeModal();
       this.closePledgeModal();
+      setTimeout(this.openSubmitPledgeModal(), 1000);
     }
   }
 
@@ -141,7 +154,8 @@ export default class Pledge extends Component {
     });
   };
 
-  onUpdatePledgeSubmit = token => {
+  onUpdatePledgeSubmit = event => {
+    event.preventDefault();
     const treeCount = this.state.updatingTreeCount;
     const data = {
       treeCount: treeCount
@@ -149,12 +163,13 @@ export default class Pledge extends Component {
     this.props.updatePledge(
       data,
       {
-        token: token,
+        token: this.state.myPledge[0].token,
         version: 'v1.3'
       },
       this.state.loggedIn
     );
     this.closeIncreasePledgesModal();
+    setTimeout(window.location.reload.bind(window.location), 3000);
   };
 
   render() {
@@ -170,21 +185,7 @@ export default class Pledge extends Component {
     document.title = getDocumentTitle(selectedPledge.name);
     let i;
 
-    let myPledge = {};
-    if (
-      this.props.pledges &&
-      this.props.pledges.allEventPledges &&
-      this.props.pledges.allEventPledges.length > 0
-    ) {
-      if (typeof this.state.userPledges !== 'undefined') {
-        let userPledges = Object.values(this.state.userPledges); // convert object to array
-        myPledge = userPledges.filter(pledge => {
-          return this.props.pledges.allEventPledges.some(f => {
-            return f.token === pledge.token && f.email === pledge.email;
-          });
-        });
-      }
-    }
+    const { myPledge } = this.state;
 
     return this.props.pledges && this.props.pledges.total !== undefined ? (
       <div className="sidenav-wrapper app-container__content--center">
@@ -219,21 +220,19 @@ export default class Pledge extends Component {
                   {
                     ((i = 1),
                     this.props.pledges.latestPledgeEvents.map(pledge => (
-                      <Pulse key={pledge.id}>
-                        <div className={'row-list-item '}>
-                          <span>
-                            <span className="row-list-item-rank">{i++}</span>
-                            <span className="row-list-item-name">
-                              {pledge.isAnonymous
-                                ? i18n.t('label.anonymous')
-                                : pledge.firstname + ' ' + pledge.lastname}
-                            </span>
+                      <div className={'row-list-item '} key={pledge.id}>
+                        <span>
+                          <span className="row-list-item-rank">{i++}</span>
+                          <span className="row-list-item-name">
+                            {pledge.isAnonymous
+                              ? i18n.t('label.anonymous')
+                              : pledge.firstname + ' ' + pledge.lastname}
                           </span>
-                          <span className="row-list-item-treeCount">
-                            {i18n.t(pledge.treeCount.toLocaleString())}
-                          </span>
-                        </div>
-                      </Pulse>
+                        </span>
+                        <span className="row-list-item-treeCount">
+                          {i18n.t(pledge.treeCount.toLocaleString())}
+                        </span>
+                      </div>
                     )))
                   }
                 </div>
@@ -257,32 +256,31 @@ export default class Pledge extends Component {
                   {
                     ((i = 1),
                     this.props.pledges.highestPledgeEvents.map(pledge => (
-                      <Pulse key={pledge.id}>
-                        <div
-                          className={
-                            i == 1
-                              ? 'row-list-item row-gold'
-                              : 'row-list-item ' && i == 2
-                                ? 'row-list-item row-silver'
-                                : 'row-list-item ' && i == 3
-                                  ? 'row-list-item row-bronze'
-                                  : 'row-list-item '
-                          }
-                        >
-                          <span>
-                            <span className="row-list-item-rank">{i++}</span>
-                            <span className="row-list-item-name">
-                              {pledge.isAnonymous
-                                ? i18n.t('label.anonymous')
-                                : pledge.firstname + ' ' + pledge.lastname}
-                            </span>
+                      <div
+                        key={pledge.id}
+                        className={
+                          i == 1
+                            ? 'row-list-item row-gold'
+                            : 'row-list-item ' && i == 2
+                              ? 'row-list-item row-silver'
+                              : 'row-list-item ' && i == 3
+                                ? 'row-list-item row-bronze'
+                                : 'row-list-item '
+                        }
+                      >
+                        <span>
+                          <span className="row-list-item-rank">{i++}</span>
+                          <span className="row-list-item-name">
+                            {pledge.isAnonymous
+                              ? i18n.t('label.anonymous')
+                              : pledge.firstname + ' ' + pledge.lastname}
                           </span>
-                          <span className="row-list-item-treeCount">
-                            {/*delimitNumbers(parseInt(pledge.treeCount)) */}
-                            {i18n.t(pledge.treeCount.toLocaleString())}
-                          </span>
-                        </div>
-                      </Pulse>
+                        </span>
+                        <span className="row-list-item-treeCount">
+                          {/*delimitNumbers(parseInt(pledge.treeCount)) */}
+                          {i18n.t(pledge.treeCount.toLocaleString())}
+                        </span>
+                      </div>
                     )))
                   }
                 </div>
@@ -329,7 +327,9 @@ export default class Pledge extends Component {
                   className="donate-pledge-button"
                   to={getLocalRoute('app_donateTrees')}
                 >
-                  Donate {myPledge[0].treeCount} trees
+                  {i18n.t('label.donateXTrees', {
+                    treeCount: delimitNumbers(parseInt(myPledge[0].treeCount))
+                  })}
                 </Link>
                 <p
                   className="increase-pledge-button"
@@ -369,6 +369,7 @@ export default class Pledge extends Component {
             </p>
           )}
 
+          {/* Modal for Making a pledge */}
           <Modal
             isOpen={this.state.pledgeModalIsOpen}
             onRequestClose={this.closePledgeModal}
@@ -377,21 +378,23 @@ export default class Pledge extends Component {
             className="pledge-content"
           >
             <div className="make-pledge-form-x">
-              <span onClick={this.closePledgeModal}>x</span>
+              <span onClick={this.closePledgeModal}>
+                <img src={closeBlack} className="close-button" />
+              </span>
             </div>
             <div className="make-pledge-form-header">
               <p>{i18n.t('label.pledgeToPlant')}</p>
             </div>
             <div className="make-pledge-form-para">
-              <p>
-                A tree costs 1 EUR and are planted in Yucatan Reforestation. You
-                will receive an email with a link to fulfill your pledge.
-                {/* {i18n.t('label.pledgeToPlantDesc', {
-                treeCost: selectedPledge.treeCost,
-                currency: selectedPledge.treeCost,
-                projectName: projectName
-              })} */}
-              </p>
+              {this.props.pledges && this.props.pledges.allEventPledges ? (
+                <p>
+                  {i18n.t('label.pledgeToPlantDesc', {
+                    treeCost: this.props.pledges.plantProject.treeCost,
+                    currency: this.props.pledges.plantProject.currency,
+                    projectName: this.props.pledges.plantProject.name
+                  })}
+                </p>
+              ) : null}
             </div>
             <TCombForm
               ref="pledgeForm"
@@ -408,6 +411,7 @@ export default class Pledge extends Component {
             </div>
           </Modal>
 
+          {/* Modal for showing all the pledges  */}
           <Modal
             isOpen={this.state.AllPledgesModalIsOpen}
             onRequestClose={this.closeAllPledgesModal}
@@ -417,80 +421,96 @@ export default class Pledge extends Component {
           >
             <div className="all-pledges">
               <div className="make-pledge-form-x">
-                <span onClick={this.closeAllPledgesModal}>x</span>
+                <span onClick={this.closeAllPledgesModal}>
+                  <img src={closeBlack} className="close-button" />
+                </span>
               </div>
               <div className="all-pledges-table">
-                <p className="all-pledges-title">All Pledges</p>
+                <p className="all-pledges-title">
+                  {i18n.t('label.allPledges')}
+                </p>
                 <p className="all-pledges-subtitle">
-                  List of Trees Pledged on {selectedPledge.name}
+                  {i18n.t('label.treesPledgedOn')} {selectedPledge.name}
                 </p>
                 <div className="pledges-list">
                   {
                     ((i = 1),
+                    // sort by value
+                    this.props.pledges.allEventPledges.sort(function(a, b) {
+                      return b.treeCount - a.treeCount;
+                    }),
                     this.props.pledges.allEventPledges.map(pledge => (
-                      <Pulse key={pledge.id}>
-                        <div className={'row-list-item '}>
-                          <span>
-                            <span className="row-list-item-rank">{i++}</span>
-                            <span className="row-list-item-name">
-                              {pledge.isAnonymous
-                                ? 'Anonymous'
-                                : pledge.firstname + ' ' + pledge.lastname}
-                            </span>
+                      <div className={'row-list-item '} key={pledge.id}>
+                        <span>
+                          <span className="row-list-item-rank">{i++}</span>
+                          <span className="row-list-item-name">
+                            {pledge.isAnonymous
+                              ? i18n.t('label.anonymous')
+                              : pledge.firstname + ' ' + pledge.lastname}
                           </span>
-                          <span className="row-list-item-treeCount">
-                            {delimitNumbers(parseInt(pledge.treeCount))}{' '}
-                          </span>
-                        </div>
-                      </Pulse>
+                        </span>
+                        <span className="row-list-item-treeCount">
+                          {delimitNumbers(parseInt(pledge.treeCount))}{' '}
+                        </span>
+                      </div>
                     )))
                   }
                 </div>
               </div>
             </div>
           </Modal>
+          {/* Modal for showing all the pledges ended */}
 
-          <Modal
-            isOpen={this.state.IncreasePledgesModalIsOpen}
-            onRequestClose={this.closeIncreasePledgesModal}
-            contentLabel="Pledge Modal"
-            overlayClassName="pledge-overlay"
-            className="pledge-content"
-          >
-            <div className="make-pledge-form-x">
-              <span onClick={this.closeIncreasePledgesModal}>x</span>
-            </div>
-            <div className="make-pledge-form-header">
-              <p>Increase Pledge</p>
-            </div>
-            <div className="make-pledge-form-para">
-              <p>
-                {typeof myPledge !== 'undefined' && myPledge.length > 0
-                  ? 'To increase your pledge, please enter an amount higher than ' +
+          {/* Modal for showing increase pledge form  */}
+          {typeof myPledge !== 'undefined' && myPledge.length > 0 ? (
+            <Modal
+              isOpen={this.state.IncreasePledgesModalIsOpen}
+              onRequestClose={this.closeIncreasePledgesModal}
+              contentLabel="Pledge Modal"
+              overlayClassName="pledge-overlay"
+              className="pledge-content"
+            >
+              <div className="make-pledge-form-x">
+                <span onClick={this.closeIncreasePledgesModal}>
+                  <img src={closeBlack} className="close-button" />
+                </span>
+              </div>
+              <div className="make-pledge-form-header">
+                <p>{i18n.t('label.increasePledge')}</p>
+              </div>
+              <div className="make-pledge-form-para">
+                <p>
+                  {'To increase your pledge, please enter an amount higher than ' +
                     myPledge[0].treeCount +
                     ' trees. A tree costs ' +
                     myPledge[0].plantProjectTreeCost +
                     ' ' +
                     myPledge[0].plantProjectCurrency +
                     ' and are planted in ' +
-                    myPledge[0].plantProjectName
-                  : null}
-              </p>
-            </div>
-            <input
-              value={this.state.updatingTreeCount}
-              onChange={this.changeTreeCount}
-              type="text"
-              placeholder="Tree Count"
-            />
-            <div
-              onClick={() => this.onUpdatePledgeSubmit(myPledge[0].token)}
-              className="make-pledge-button-form"
-            >
-              Update Pledge
-            </div>
-          </Modal>
+                    myPledge[0].plantProjectName}
+                </p>
+              </div>
 
+              <form onSubmit={this.onUpdatePledgeSubmit}>
+                <input
+                  value={this.state.updatingTreeCount}
+                  onChange={this.changeTreeCount}
+                  type="number"
+                  placeholder="Tree Count"
+                  min={myPledge[0].treeCount}
+                />
+                <input
+                  type="submit"
+                  //onClick={() => this.onUpdatePledgeSubmit(myPledge[0].token)}
+                  className="make-pledge-button-form"
+                  value="Update Pledge"
+                />
+              </form>
+            </Modal>
+          ) : null}
+          {/* Modal for showing increase pledge form  */}
+
+          {/* Modal for showing Later Continue option  */}
           <Modal
             isOpen={this.state.SubmitPledgeModalIsOpen}
             onRequestClose={this.closeSubmitPledgeModal}
@@ -501,8 +521,9 @@ export default class Pledge extends Component {
             <div className="submit-pledge-container">
               <div className="submit-pledge-form-para">
                 <p>
-                  You’ve pledged to plant {this.state.value.treeCount} Trees.
-                  You can tap continue to fulfill your pledge right now.
+                  {i18n.t('label.pledgeAddedMessage', {
+                    treeCount: this.state.value.treeCount
+                  })}
                 </p>
               </div>
               <div className="submit-pledge-buttons">
@@ -510,17 +531,18 @@ export default class Pledge extends Component {
                   onClick={this.closeSubmitPledgeModal}
                   className="submit-pledge-later-button"
                 >
-                  LATER
+                  {i18n.t('label.pledgeAddedLaterButton')}
                 </div>
                 <Link
                   to={getLocalRoute('app_donateTrees')}
                   className="submit-pledge-donate-button"
                 >
-                  CONTINUE
+                  {i18n.t('label.pledgeAddedContinueButton')}
                 </Link>
               </div>
             </div>
           </Modal>
+          {/* Modal for showing Later Continue option ended  */}
         </div>
       </div>
     ) : null;

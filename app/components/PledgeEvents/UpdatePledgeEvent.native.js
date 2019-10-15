@@ -101,7 +101,7 @@ class MakePledgeForm extends Component {
         >
           <View>
             <Text style={styles.titleText}>
-              {i18n.t('label.pledgeToPlant')}
+              {i18n.t('label.increasePledge')}
             </Text>
             <Text style={styles.subtitleText}>
               {i18n.t('label.pledgeToPlantDesc', {

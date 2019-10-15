@@ -16,10 +16,15 @@
   "pledgeFormEmail": "Email",
   "pledgeFormTreecount": "Tree Count",
   "pledgeAddedMessage": "You’ve pledged to plant {{treeCount}} Trees. You can tap continue to fulfill your pledge right now.",
+  "pledgeAddedLaterButton": "LATER",
   "pledgeAddedContinueButton": "CONTINUE",
   "treesPledgedAllPledges": "{{treeCount}} trees pledged",
   "unfulfilledPledgesTitle": "Unfulfilled Pledges",
   "anonymous": "Anonymous",
   "eventDescriptionAbout": "About",
-  "increaseMyPledge": "+ INCREASE MY PLEDGE"
+  "increaseMyPledge": "+ INCREASE MY PLEDGE",
+  "increasePledge": "Increase Pledge",
+  "allPledges": "All Pledges",
+  "treesPledgedOn": "List of Trees Pledged on",
+  "donateXTrees": "Donate {{treeCount}} Trees"
 }

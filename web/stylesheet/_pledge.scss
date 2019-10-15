@@ -258,6 +258,12 @@
   }
 }
 
+.make-pledge-button:hover{
+  border: solid 3px #89b53a;
+  background-color: #fff ;
+  color: #89b53a;
+}
+
 .make-pledge-button-form{
   margin-top: 54px;
   border-radius: 100px;
@@ -404,21 +410,25 @@
   }
 }
 
+// This overlay is for all the Modals being used
 .pledge-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(70, 70, 70, 0.33);
+  background-color: rgba(70, 70, 70, 0.4);
+  z-index: 1000;
 }
 
 .pledge-content{
   position: absolute;
-  top: 80px;
+  top: 50%;
+  max-height: 75vh;
+  transform: translate(0, -50%);
   left: 40px;
   right: 40px;
-  bottom: 40px;
+  bottom: auto;
   margin: auto;
   width: 360px;
   background: #fff;
@@ -429,10 +439,11 @@
   @include for-phone-only{
     width: auto;
     top: 70px;
-    left: 20px;
-    right: 20px;
+    left: 10px;
+    right: 10px;
     bottom: 20px;
     padding: 24px;
+    transform: translate(0,0);
   }
 }
 .submit-pledge-container{
@@ -550,6 +561,10 @@
 }
 }
 
+.close-button{
+  height: 18px;
+}
+
 .donate-pledge-button{
   border-radius: 100px;
   border: solid 3px #ffffff;
@@ -565,6 +580,15 @@
 }
 
 
+.donate-pledge-button:hover{
+  border: solid 3px #89b53a;
+  background-color: #fff ;
+  color: #89b53a;
+  cursor: pointer;
+}
+
+
+
 .increase-pledge-button{
   border-radius: 100px;
   border: solid 3px #ffffff;
@@ -578,7 +602,7 @@
   text-align: center;
 }
 
-.increase-pledge-button:hover, .donate-pledge-button:hover {
+.increase-pledge-button:hover{
   cursor: pointer;
 }
 

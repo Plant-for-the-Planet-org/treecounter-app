@@ -1,19 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import Lightbox from 'react-images';
-import { Link } from 'react-router-dom';
 import * as images from '../../assets';
-import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
-import TextSpan from '../Common/Text/TextSpan';
-import ConfirmDeletion from './ConfirmDelete';
-import { updateRoute } from '../../helpers/routerHelper';
-import { delimitNumbers } from '../../utils/utils';
-import moment from 'moment';
-import 'moment/min/locales';
-import i18n from '../../locales/i18n.js';
-import { getDateFromMySQL } from '../../helpers/utils';
 
+// eslint-disable-next-line no-unused-vars
 const RecurringCard = ({ cardData, deleteContribution }) => {
   return (
     <div className="card" key={cardData.id}>

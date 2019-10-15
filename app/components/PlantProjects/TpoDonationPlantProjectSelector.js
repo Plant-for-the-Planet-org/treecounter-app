@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import CardLayout from '../Common/Card';
+// import CardLayout from '../Common/Card';
 import ContentHeader from '../Common/ContentHeader';
 import PlantProjectCarousel from './PlantProjectCarousel';
 import i18n from '../../locales/i18n';

@@ -2,13 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ContributionCardList from './ContributionCardList';
-import ContributionsMapLegend from './ContributionsMapLegend';
-import TextHeading from '../Common/Heading/TextHeading';
-import DescriptionHeading from '../Common/Heading/DescriptionHeading';
-import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n.js';
-import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 
+// eslint-disable-next-line no-unused-vars
 const UserContributions = ({
   userProfileId,
   userContributions,

@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import * as images from '../../assets';
-import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
+// import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
+import { getLocalRoute } from '../../actions/apiRouting';
 import TextSpan from '../Common/Text/TextSpan';
 import ConfirmDeletion from './ConfirmDelete';
 import { updateRoute } from '../../helpers/routerHelper';
@@ -74,9 +75,10 @@ export default class ContributionCardHome extends React.Component {
     return tpoName ? i18n.t('label.planted_by', { tpo: tpoName }) : '';
   }
 
+  // eslint-disable-next-line no-unused-vars
   plantActionLine(plantDate, registrationDate) {
     return i18n.t('label.renews_on', {
-      date: format(plantDate)
+      date: formatDate(plantDate)
     });
   }
 
@@ -150,9 +152,9 @@ export default class ContributionCardHome extends React.Component {
     //         return { src: getImageUrl('contribution', 'medium', image.image) };
     //       })
     //     : '';
-    let seeLabel = classnames('see-more-label-style', {
-      'see-more__active': this.state.viewExpanded
-    });
+    // let seeLabel = classnames('see-more-label-style', {
+    //   'see-more__active': this.state.viewExpanded
+    // });
     let {
       treeCount,
       treeSpecies,
@@ -163,14 +165,20 @@ export default class ContributionCardHome extends React.Component {
       givee,
       giveeSlug,
       giftRecipient,
+      // eslint-disable-next-line no-unused-vars
       tpoName,
+      // eslint-disable-next-line no-unused-vars
       isPending,
       mayUpdate,
+      // eslint-disable-next-line no-unused-vars
       cardType,
+      // eslint-disable-next-line no-unused-vars
       contributionType,
       category,
       registrationDate,
+      // eslint-disable-next-line no-unused-vars
       redemptionCode,
+      // eslint-disable-next-line no-unused-vars
       redemptionDate
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {

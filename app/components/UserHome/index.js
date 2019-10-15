@@ -7,10 +7,8 @@ import SvgContainer from '../Common/SvgContainer';
 import TextHeading from '../Common/Heading/TextHeading';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import LoadingIndicator from '../Common/LoadingIndicator';
-import UserProfileImage from '../Common/UserProfileImage';
 import { getDocumentTitle } from '../../helpers/utils';
 import InlineLink from '../Common/InlineLink';
-import * as images from '../../assets';
 import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 import RecurringCard from '../UserContributions/RecurringCard';
 
@@ -78,7 +76,8 @@ export default class UserHome extends Component {
   render() {
     const { treecounterData, userProfile } = this.props;
     document.title = getDocumentTitle(userProfile.treecounter.displayName);
-    const profileType = userProfile.type;
+    // TODO check if this is an error
+    // const profileType = userProfile.type;
     let { svgData } = this.state;
     return (
       <div className="app-container__content--center sidenav-wrapper">

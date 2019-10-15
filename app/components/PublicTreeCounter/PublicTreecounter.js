@@ -7,10 +7,9 @@ import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantProjectSelector';
 import UserFootprint from './UserFootprint';
 import UserContributions from '../../components/UserContributions';
-import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
-import CardLayout from '../../components/Common/Card';
+// import CardLayout from '../../components/Common/Card';
 import { getDocumentTitle } from '../../helpers/utils';
 import { delimitNumbers } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
@@ -276,7 +275,7 @@ class PublicTreeCounter extends React.Component {
                   c.category = 'contributions';
                   return c;
                 })}
-                isPublic={true}
+                isPublic
               />
             </div>
           </div>

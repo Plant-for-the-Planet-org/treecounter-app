@@ -37,7 +37,7 @@ export default class PledgeTabView extends Component {
         <View style={{ flex: 1, marginLeft: 26 }}>
           <Text style={styles.tabViewContentText}>
             {highestPledges.isAnonymous
-              ? 'Anonymous'
+              ? i18n.t('label.anonymous')
               : highestPledges.firstname + ' ' + highestPledges.lastname}
           </Text>
         </View>
@@ -56,7 +56,7 @@ export default class PledgeTabView extends Component {
         <View style={{ flex: 1, marginLeft: 26 }}>
           <Text style={styles.tabViewContentText}>
             {latestPledges.isAnonymous
-              ? 'Anonymous'
+              ? i18n.t('label.anonymous')
               : latestPledges.firstname + ' ' + latestPledges.lastname}
           </Text>
         </View>

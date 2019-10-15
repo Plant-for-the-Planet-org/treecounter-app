@@ -134,8 +134,11 @@ class UnfulfilledPledgeEvents extends Component {
         <View style={styles.bottomButtonView}>
           <View style={styles.leftSection}>
             <Text style={styles.pledgeTreesAmount}>
-              {unfulfilledEvent ? unfulfilledEvent.treeCount : null} Trees
-              Pledged
+              {unfulfilledEvent
+                ? i18n.t('label.treesPledgedAllPledges', {
+                    treeCount: unfulfilledEvent.treeCount.toLocaleString()
+                  })
+                : null}
             </Text>
             <TouchableOpacity
               onPress={() => {
@@ -148,7 +151,9 @@ class UnfulfilledPledgeEvents extends Component {
                 );
               }}
             >
-              <Text style={styles.pledgeTreesAction}>+ INCREASE MY PLEDGE</Text>
+              <Text style={styles.pledgeTreesAction}>
+                {i18n.t('label.increaseMyPledge')}
+              </Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity

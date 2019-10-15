@@ -104,12 +104,13 @@ export default class Pledge extends Component {
     this.setState({ AllPledgesModalIsOpen: false });
   };
 
-  // Functions for Increase Pledge Modal
+  // Functions for Increase/Update Pledge Modal
   openIncreasePledgesModal = () => {
     this.setState({ IncreasePledgesModalIsOpen: true });
   };
   closeIncreasePledgesModal = () => {
     this.setState({ IncreasePledgesModalIsOpen: false });
+    setTimeout(window.location.reload.bind(window.location), 3000);
   };
 
   // Functions for Submit Pledge Modal
@@ -118,7 +119,7 @@ export default class Pledge extends Component {
   };
   closeSubmitPledgeModal = () => {
     this.setState({ SubmitPledgeModalIsOpen: false });
-    window.location.reload();
+    setTimeout(window.location.reload.bind(window.location), 5000);
   };
 
   onFormChange(value) {
@@ -224,22 +225,12 @@ export default class Pledge extends Component {
                             <span className="row-list-item-rank">{i++}</span>
                             <span className="row-list-item-name">
                               {pledge.isAnonymous
-                                ? 'Anonymous'
+                                ? i18n.t('label.anonymous')
                                 : pledge.firstname + ' ' + pledge.lastname}
                             </span>
                           </span>
                           <span className="row-list-item-treeCount">
-                            {delimitNumbers(parseInt(pledge.treeCount))}{' '}
-                            {/* <span
-                              style={{
-                                fontSize: 10,
-                                color: 'rgba(0, 0, 0, 0.6)',
-                                fontWeight: 'normal',
-                                marginLeft: 4
-                              }}
-                            >
-                              trees
-                            </span> */}
+                            {i18n.t(pledge.treeCount.toLocaleString())}
                           </span>
                         </div>
                       </Pulse>
@@ -282,22 +273,13 @@ export default class Pledge extends Component {
                             <span className="row-list-item-rank">{i++}</span>
                             <span className="row-list-item-name">
                               {pledge.isAnonymous
-                                ? 'Anonymous'
+                                ? i18n.t('label.anonymous')
                                 : pledge.firstname + ' ' + pledge.lastname}
                             </span>
                           </span>
                           <span className="row-list-item-treeCount">
-                            {delimitNumbers(parseInt(pledge.treeCount))}{' '}
-                            {/* <span
-                              style={{
-                                fontSize: 10,
-                                color: 'rgba(0, 0, 0, 0.6)',
-                                fontWeight: 'normal',
-                                marginLeft: 4
-                              }}
-                            >
-                              trees
-                            </span> */}
+                            {/*delimitNumbers(parseInt(pledge.treeCount)) */}
+                            {i18n.t(pledge.treeCount.toLocaleString())}
                           </span>
                         </div>
                       </Pulse>
@@ -311,7 +293,9 @@ export default class Pledge extends Component {
             <div className="event-description-col">
               {this.props.pledges.description ? (
                 <div className="event-description">
-                  <p className="event-description-header">About</p>
+                  <p className="event-description-header">
+                    {i18n.t('label.eventDescriptionAbout')}
+                  </p>
                   <p>{i18n.t(this.props.pledges.description)}</p>
                 </div>
               ) : null}
@@ -351,20 +335,22 @@ export default class Pledge extends Component {
                   className="increase-pledge-button"
                   onClick={this.openIncreasePledgesModal}
                 >
-                  + Increase my Pledge
+                  {i18n.t('label.increaseMyPledge')}
                 </p>
               </div>
               <div className="buttons-mobileview">
                 <div className="buttons-mobileview-container">
                   <div className="left-buttons">
                     <div className="trees-pledged">
-                      {myPledge[0].treeCount} trees Pledges
+                      {i18n.t('label.treesPledgedAllPledges', {
+                        treeCount: myPledge[0].treeCount.toLocaleString()
+                      })}
                     </div>
                     <div
                       className="increase-button"
                       onClick={this.openIncreasePledgesModal}
                     >
-                      + Increase my Pledge{' '}
+                      {i18n.t('label.increaseMyPledge')}
                     </div>
                   </div>
                   <Link
@@ -372,14 +358,14 @@ export default class Pledge extends Component {
                     to={getLocalRoute('app_donateTrees')}
                   >
                     <img src={nextArrowWhite} className="forward-arrow" />
-                    <div className="donate-text">Donate</div>
+                    <div className="donate-text">{i18n.t('label.donate')}</div>
                   </Link>
                 </div>
               </div>
             </div>
           ) : (
             <p className="make-pledge-button" onClick={this.openPledgeModal}>
-              Make a pledge
+              {i18n.t('label.makePledgeButton')}
             </p>
           )}
 
@@ -394,12 +380,17 @@ export default class Pledge extends Component {
               <span onClick={this.closePledgeModal}>x</span>
             </div>
             <div className="make-pledge-form-header">
-              <p>Pledge to Plant Trees</p>
+              <p>{i18n.t('label.pledgeToPlant')}</p>
             </div>
             <div className="make-pledge-form-para">
               <p>
                 A tree costs 1 EUR and are planted in Yucatan Reforestation. You
                 will receive an email with a link to fulfill your pledge.
+                {/* {i18n.t('label.pledgeToPlantDesc', {
+                treeCost: selectedPledge.treeCost,
+                currency: selectedPledge.treeCost,
+                projectName: projectName
+              })} */}
               </p>
             </div>
             <TCombForm

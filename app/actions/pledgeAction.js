@@ -65,11 +65,6 @@ export function postPledge(data, params, loggedIn) {
               mergeEntities(normalize(userProfile[0], userProfileSchema))
             );
             console.log(res.data);
-            NotificationManager.success(
-              statusText,
-              i18n.t('label.success'),
-              5000
-            );
           })
           .catch(error => {
             NotificationManager.error(
@@ -84,12 +79,6 @@ export function postPledge(data, params, loggedIn) {
             dispatch(postedPledge(res.data));
 
             getLocalStorageItem('pledgedEvent', res);
-
-            NotificationManager.success(
-              statusText,
-              i18n.t('label.success'),
-              5000
-            );
           })
           .catch(error => {
             NotificationManager.error(

@@ -46,7 +46,7 @@ class EditCompetitionContainer extends Component {
       contact: value.contact,
       email: value.email
     };
-    if (value.imageFile.includes('base64')) {
+    if (value.imageFile && value.imageFile.includes('base64')) {
       json.imageFile = value.imageFile;
     }
     this.props

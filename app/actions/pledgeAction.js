@@ -106,11 +106,11 @@ export function updatePledge(data, params, loggedIn) {
     loggedIn
       ? putAuthenticatedRequest('eventPledgeAuthed_put', data, params).then(
           res => {
-            console.log(res.data);
+            return res.data;
           }
         )
       : putRequest('eventPledge_put', data, params).then(res => {
-          console.log(res.data);
+          return res.data;
         });
   };
 }

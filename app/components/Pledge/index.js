@@ -53,7 +53,9 @@ export default class Pledge extends Component {
       SubmitPledgeModalIsOpen: false, // Submit pledge Modal
       loggedIn: false,
       userPledges: [],
-      loadUserPledges: true
+      loadUserPledges: true,
+      updatingTreeCount: 0,
+      myPledge: {}
     };
   }
 
@@ -116,6 +118,7 @@ export default class Pledge extends Component {
   };
   closeSubmitPledgeModal = () => {
     this.setState({ SubmitPledgeModalIsOpen: false });
+    window.location.reload();
   };
 
   onFormChange(value) {
@@ -130,6 +133,28 @@ export default class Pledge extends Component {
       this.closePledgeModal();
     }
   }
+
+  changeTreeCount = e => {
+    this.setState({
+      updatingTreeCount: e.target.value
+    });
+  };
+
+  onUpdatePledgeSubmit = token => {
+    const treeCount = this.state.updatingTreeCount;
+    const data = {
+      treeCount: treeCount
+    };
+    this.props.updatePledge(
+      data,
+      {
+        token: token,
+        version: 'v1.3'
+      },
+      this.state.loggedIn
+    );
+    this.closeIncreasePledgesModal();
+  };
 
   render() {
     let selectedPledge = {};
@@ -449,20 +474,26 @@ export default class Pledge extends Component {
             </div>
             <div className="make-pledge-form-para">
               <p>
-                To increase your pledge, please enter an amount higher than 150
-                trees. A tree costs 1 EUR and are planted in Yucatan
-                Reforestation.
+                {typeof myPledge !== 'undefined' && myPledge.length > 0
+                  ? 'To increase your pledge, please enter an amount higher than ' +
+                    myPledge[0].treeCount +
+                    ' trees. A tree costs ' +
+                    myPledge[0].plantProjectTreeCost +
+                    ' ' +
+                    myPledge[0].plantProjectCurrency +
+                    ' and are planted in ' +
+                    myPledge[0].plantProjectName
+                  : null}
               </p>
             </div>
-            <TCombForm
-              ref="pledgeForm"
-              type={pledgeFormSchema}
-              options={allSchemaOptions}
-              value={this.state.value}
-              onChange={value => this.onFormChange(value)}
+            <input
+              value={this.state.updatingTreeCount}
+              onChange={this.changeTreeCount}
+              type="text"
+              placeholder="Tree Count"
             />
             <div
-              onClick={() => this.onFormSubmit()}
+              onClick={() => this.onUpdatePledgeSubmit(myPledge[0].token)}
               className="make-pledge-button-form"
             >
               Update Pledge

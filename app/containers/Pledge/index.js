@@ -6,7 +6,8 @@ import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import {
   fetchPledgesAction,
   postPledge,
-  clearTimeoutAction
+  clearTimeoutAction,
+  updatePledge
 } from '../../actions/pledgeAction';
 import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
 import {
@@ -28,6 +29,12 @@ class PledgeContainer extends Component {
       this.setState({
         loggedIn: true
       });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.pledges !== this.props.pledges) {
+      console.log(this.props.pledges);
     }
   }
 
@@ -55,6 +62,7 @@ class PledgeContainer extends Component {
         currentUserProfile={this.props.currentUserProfile}
         fetchPublicPledgesAction={this.props.fetchPublicPledgesAction}
         entities={this.props.entities}
+        updatePledge={this.props.updatePledge}
       />
     );
   }
@@ -74,7 +82,8 @@ const mapDispatchToProps = dispatch => {
       postPledge,
       clearTimeoutAction,
       loadUserProfile,
-      fetchPublicPledgesAction
+      fetchPublicPledgesAction,
+      updatePledge
     },
     dispatch
   );
@@ -90,6 +99,7 @@ PledgeContainer.propTypes = {
   clearTimeoutAction: PropTypes.func,
   currentUserProfile: PropTypes.any,
   fetchPublicPledgesAction: PropTypes.func,
+  updatePledge: PropTypes.func,
   match: PropTypes.shape({
     params: PropTypes.shape({
       eventSlug: PropTypes.string

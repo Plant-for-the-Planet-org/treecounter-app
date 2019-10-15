@@ -46,7 +46,10 @@ const customStyles = {
     width: '150px',
     cursor: 'pointer'
   }),
-
+  menuList: provided => ({
+    ...provided,
+    cursor: 'pointer'
+  }),
   indicatorSeparator: () => ({
     display: 'none'
   }),
@@ -62,7 +65,8 @@ const customStyles = {
     ...provided,
     // display: 'flex',
     padding: '4px',
-    width: '150px'
+    width: '150px',
+    cursor: 'pointer'
   }),
 
   singleValue: (provided /* , state */) => {

@@ -44,7 +44,10 @@ const customStyles = {
     ...provided,
     'padding-left': '0px'
   }),
-
+  option: provided => ({
+    ...provided,
+    cursor: 'pointer'
+  }),
   singleValue: (provided /* , state */) => {
     return {
       ...provided,

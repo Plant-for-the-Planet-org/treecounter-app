@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import i18n from '../../locales/i18n.js';
 import datePickerStyle from '../../styles/date_picker.native';
-import { formatDate } from '../../helpers/utils';
+import { formatDateToMySQL } from '../../helpers/utils';
 
 const UIPICKER_HEIGHT = 216;
 
@@ -26,7 +26,7 @@ class CollapsibleDatePickerIOS extends React.PureComponent {
   }
 
   onDateChange(value) {
-    this.props.locals.onChange(formatDate(value));
+    this.props.locals.onChange(formatDateToMySQL(value));
   }
 
   onPress() {

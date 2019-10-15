@@ -8,17 +8,13 @@ import CardLayout from '../Common/Card';
 import UserProfileImage from '../Common/UserProfileImage';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
-import { delimitNumbers } from '../../utils/utils';
+import { formatDate, delimitNumbers } from '../../utils/utils';
 import { upwardArrow, downwardArrow } from '../../assets/index.js';
-import moment from 'moment';
-import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
-import { getLocale } from '../../actions/getLocale';
 
 export default class ChallengeCard extends React.Component {
   constructor(props) {
     super(props);
-    moment.locale(getLocale());
   }
 
   render() {
@@ -75,7 +71,7 @@ export default class ChallengeCard extends React.Component {
                       challengesStyle.textChallengePadding
                     ]}
                   >
-                    {moment(created).format('D MMM, YYYY')}
+                    {formatDate(created)}
                   </Text>
                 </View>
               </View>

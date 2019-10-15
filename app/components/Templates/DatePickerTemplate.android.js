@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import i18n from '../../locales/i18n.js';
 import datePickerStyle from '../../styles/date_picker.native';
+import { formatDateToMySQL } from '../../helpers/utils';
 
 // const UIPICKER_HEIGHT = 216;
 
@@ -46,20 +47,16 @@ class CollapsibleDatePickerAndroid extends React.PureComponent {
       if (this.props.locals.config.minDate) {
         dateObject.minDate = new Date();
       }
+
       DatePickerAndroid.open(dateObject).then(date => {
         if (date.action !== DatePickerAndroid.dismissedAction) {
           //Please take note that the number of the months is based on
           //the count of an index, let say January is 0, February is 1 and so on...
           //if you want the count to be  1 to 12 for months, then add 1
-          const finalDate = `${date.year} - ${date.month + 1} - ${date.day} `;
+          const finalDate = formatDateToMySQL(
+            new Date(date.year, date.month, date.day)
+          );
           this.onDateChange(finalDate);
-
-          //Let say i pick February 10 2019, the output will be 2 10 2019
-          //You can use moment to format the date as you like
-
-          //Here's an example:
-          //console.log(moment(finalDate, 'MM DD YYYY').format('LL'))
-          //Output: February 10, 2019
         }
       });
     } catch ({ code, message }) {
@@ -87,7 +84,9 @@ class CollapsibleDatePickerAndroid extends React.PureComponent {
 
     let formattedValue = locals.value ? locals.value : '';
     if (locals.config) {
-      if (!formattedValue) {
+      if (locals.config.format && formattedValue) {
+        formattedValue = locals.config.format(locals.value);
+      } else if (!formattedValue) {
         formattedValue = locals.config.defaultValueText
           ? locals.config.defaultValueText
           : i18n.t(locals.label);

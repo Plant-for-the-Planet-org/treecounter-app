@@ -1,6 +1,8 @@
-import { getLocale } from '../actions/getLocale';
+import { getLocale, localeObjects } from '../actions/getLocale';
 import { Intl } from '../locales/Intl';
 import i18n from '../locales/i18n.js';
+import format from 'date-fns/format';
+import parseISO from 'date-fns/parseISO';
 
 export function delimitNumbers(str) {
   if (!isNaN(parseInt(str))) return formatNumber(str);
@@ -43,6 +45,19 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
   } catch (error) {
     console.error(error);
     return data;
+  }
+}
+
+export function formatDate(date, style = 'dd MMM yyyy', locale) {
+  locale = locale || getLocale();
+  console.log('formatDate', date, style, locale);
+
+  if (date) {
+    return format(parseISO(date), style, {
+      locale: localeObjects[locale]
+    });
+  } else {
+    return '';
   }
 }
 

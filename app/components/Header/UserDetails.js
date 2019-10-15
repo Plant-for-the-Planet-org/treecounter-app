@@ -32,7 +32,7 @@ const UserDetails = ({
             }
           />
           <div>
-            <TextSpan strong={true}>
+            <TextSpan strong>
               {i18n.t('label.welcome_hi', {
                 user: userProfile.fullname
               })}

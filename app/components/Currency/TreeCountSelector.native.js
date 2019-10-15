@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
-import { tree } from '../../assets';
 import { Text, TextInput, View } from 'react-native';
 import styles from '../../styles/currencies/treeCounterSelector';
 import RadioForm, {
@@ -9,6 +8,7 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel
 } from 'react-native-simple-radio-button';
+import { formatNumber, delimitNumbers } from '../../utils/utils';
 
 class TreeCountSelector extends React.Component {
   constructor(props) {
@@ -32,19 +32,6 @@ class TreeCountSelector extends React.Component {
       treeCount: fixedDefaultTreeCount,
       amount: this.props.treeCountToAmount(fixedDefaultTreeCount)
     });
-
-    this.handleFixedTreeCountChange = this.handleFixedTreeCountChange.bind(
-      this
-    );
-    this.handleVariableTreeCountChange = this.handleVariableTreeCountChange.bind(
-      this
-    );
-    this.handleVariableAmountChange = this.handleVariableAmountChange.bind(
-      this
-    );
-    this.handleVariableTreeCountSelected = this.handleVariableTreeCountSelected.bind(
-      this
-    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -52,14 +39,14 @@ class TreeCountSelector extends React.Component {
       this.handleVariableTreeCountChange(this.state.variableTreeCount);
     }
   }
-  handleFixedTreeCountChange(treeCount) {
+  handleFixedTreeCountChange = treeCount => {
     this.updateStateAndParent({
       fixedTreeCount: parseInt(treeCount),
       isFixed: true
     });
-  }
+  };
 
-  handleVariableTreeCountChange(treeCount) {
+  handleVariableTreeCountChange = treeCount => {
     if (treeCount === '') {
       treeCount = 0;
     }
@@ -67,22 +54,26 @@ class TreeCountSelector extends React.Component {
       variableTreeCount: parseInt(treeCount),
       variableAmount: this.props.treeCountToAmount(treeCount)
     });
-  }
+  };
 
-  handleVariableAmountChange(amount) {
+  handleVariableAmountChange = amount => {
     if (amount === '') {
       amount = 0;
     }
+
     const treeCount = this.props.amountToTreeCount(amount);
+    if (isNaN(treeCount)) {
+      return;
+    }
     this.updateStateAndParent({
       variableAmount: parseInt(amount),
       variableTreeCount: treeCount
     });
-  }
+  };
 
-  handleVariableTreeCountSelected() {
+  handleVariableTreeCountSelected = () => {
     this.updateStateAndParent({ isFixed: false });
-  }
+  };
 
   updateStateAndParent(updates) {
     const newState = { ...this.state, ...updates };
@@ -102,7 +93,7 @@ class TreeCountSelector extends React.Component {
     const { treeCountOptions, currency, treeCountToAmount } = this.props;
     let radio_props = [];
     treeCountOptions.fixedTreeCountOptions.map(treeCount => {
-      let label = treeCount + '          ' + i18n.t('label.trees');
+      let label = treeCount + ' ' + i18n.t('label.trees');
       radio_props.push({ label: label, value: treeCount });
     });
 
@@ -119,7 +110,7 @@ class TreeCountSelector extends React.Component {
                 return (
                   <RadioButton
                     wrapStyle={styles.radioContainer}
-                    labelHorizontal={true}
+                    labelHorizontal
                     key={i}
                   >
                     <RadioButtonInput
@@ -133,7 +124,7 @@ class TreeCountSelector extends React.Component {
                         obj.value === this.state.fixedTreeCount &&
                         this.state.isFixed
                       }
-                      onPress={(value, index) => {
+                      onPress={(value /* , index */) => {
                         this.handleFixedTreeCountChange(value);
                       }}
                     />
@@ -141,30 +132,34 @@ class TreeCountSelector extends React.Component {
                       obj={obj}
                       index={i}
                       labelWrapStyle={styles.radio_label}
-                      labelHorizontal={true}
+                      labelHorizontal
+                      onPress={(value /* , index */) => {
+                        this.handleFixedTreeCountChange(value);
+                      }}
                     />
                   </RadioButton>
                 );
               })}
             </RadioForm>
           </View>
-          <View style={styles.treecount_price_conversion_Column}>
+          <View style={styles.treecount_price_conversion_column}>
             {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
               return (
                 <View
-                  style={styles.treecount_price_conversion_Text_fixed}
+                  style={styles.treecount_price_conversion_text}
                   key={treeCount + 'container'}
                 >
-                  <View style={styles.treecount_price_conversion_Text_equal}>
+                  <View style={styles.treecount_price_conversion_text_equal}>
                     <Text>=</Text>
                   </View>
-                  <View style={styles.treecount_price_conversion_Text_input}>
+                  <View style={styles.treecount_price_conversion_text_input}>
                     <Text style={{ width: '100%' }} key={treeCount}>
-                      {treeCountToAmount(treeCount)}
+                      {formatNumber(
+                        treeCountToAmount(treeCount),
+                        null,
+                        currency
+                      )}
                     </Text>
-                  </View>
-                  <View style={styles.treecount_price_conversion_Text_currency}>
-                    <Text style={{ width: '100%' }}> {currency}</Text>
                   </View>
                 </View>
               );
@@ -180,7 +175,7 @@ class TreeCountSelector extends React.Component {
                   <RadioButton
                     style={{ padding: 0, width: 30 }}
                     wrapStyle={styles.radioContainer}
-                    labelHorizontal={true}
+                    labelHorizontal
                     key={i}
                   >
                     <RadioButtonInput
@@ -191,7 +186,7 @@ class TreeCountSelector extends React.Component {
                       buttonInnerColor={'#ec6453'}
                       buttonOuterColor={'#ec6453'}
                       isSelected={!this.state.isFixed}
-                      onPress={(value, index) => {
+                      onPress={(value /* , index */) => {
                         this.handleVariableTreeCountSelected(value);
                       }}
                     />
@@ -204,7 +199,7 @@ class TreeCountSelector extends React.Component {
                 <TextInput
                   editable={!this.state.isFixed}
                   underlineColorAndroid={'transparent'}
-                  style={styles.treecount_price_conversion_Text_input2}
+                  style={styles.treecount_price_conversion_text_input2}
                   keyboardType="numeric"
                   onChangeText={evt => this.handleVariableTreeCountChange(evt)}
                   value={String(this.state.variableTreeCount)}
@@ -214,33 +209,35 @@ class TreeCountSelector extends React.Component {
                   key="variable"
                   ellipsizeMode="tail"
                   numberOfLines={1}
-                  style={styles.treecount_price_conversion_lebel}
+                  style={styles.treecount_price_conversion_label}
                 >
-                  {i18n.t('label.trees')}
+                  {' ' + i18n.t('label.trees')}
                 </Text>
               </View>
             </View>
           </View>
-          <View style={styles.treecount_price_conversion_Text}>
-            <View style={styles.treecount_price_conversion_Text_equal2}>
+          <View style={styles.treecount_price_conversion_text}>
+            <View style={styles.treecount_price_conversion_text_equal}>
               <Text>=</Text>
             </View>
-            <View
-              style={styles.treecount_price_conversion_Text_input3Container}
-            >
+            <View style={styles.radio_label}>
               <TextInput
                 editable={!this.state.isFixed}
                 underlineColorAndroid={'transparent'}
-                style={styles.treecount_price_conversion_Text_input3}
+                style={styles.treecount_price_conversion_text_input2}
                 keyboardType="numeric"
                 onChangeText={evt => this.handleVariableAmountChange(evt)}
-                value={String(this.state.variableAmount)}
+                value={delimitNumbers(this.state.variableAmount)}
                 autoCapitalize={'sentences'}
               />
-            </View>
-
-            <View style={styles.treecount_price_conversion_Text_currency2}>
-              <Text style={{ width: '100%' }}>{currency}</Text>
+              <Text
+                key="variable"
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={styles.treecount_price_conversion_label}
+              >
+                {' ' + formatNumber(1, null, currency).replace(/[\d.,]/g, '')}
+              </Text>
             </View>
           </View>
         </View>

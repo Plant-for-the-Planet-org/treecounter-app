@@ -6,6 +6,37 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
   padding: 16px;
+  .row {
+    flex-direction: row;
+  }
+  .text-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flex-1 {
+    flex: 1;
+  }
+
+  .pr-1 {
+    padding-right: 0.5rem;
+  }
+
+  .pt-1 {
+    padding-top: 0.5rem;
+  }
+
+  .pr-2 {
+    padding-right: 1.1rem;
+  }
+
+  .flex-2 {
+    flex: 2;
+  }
+
+  .letter-box {
+    flex: 1;
+  }
 }
 
 .month-keyword {

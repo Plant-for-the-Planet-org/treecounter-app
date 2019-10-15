@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions } from 'react-native';
+import { ScrollView } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject';
-import i18n from '../../locales/i18n.js';
 import PropTypes from 'prop-types';
 import Slick from 'react-native-slick';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
-import PrimaryButton from '../Common/Button/PrimaryButton.native';
 
 class PlantProjectCarousel extends Component {
   constructor(props) {
@@ -28,11 +26,11 @@ class PlantProjectCarousel extends Component {
 
   render() {
     const { plantProjects, tpoName } = this.props;
-
+    const backgroundColor = '#b9d384';
     return (
       <Slick
         style={styles.slickWrapper}
-        showsPagination={true}
+        showsPagination
         paginationStyle={{
           position: 'absolute',
           top: 0,
@@ -40,7 +38,7 @@ class PlantProjectCarousel extends Component {
           elevation: 9
         }}
         activeDotStyle={{
-          backgroundColor: '#b9d384'
+          backgroundColor: backgroundColor
         }}
       >
         {plantProjects.length !== 0

@@ -10,6 +10,7 @@ import i18n from '../locales/i18n.js';
 export function fetchPledgesAction(eventSlug) {
   return dispatch => {
     getRequest('pledgeEvent_get', {
+      version: 'v1.3',
       eventSlug: eventSlug
     }).then(res => {
       dispatch(fetchPledges(res.data));
@@ -17,6 +18,7 @@ export function fetchPledgesAction(eventSlug) {
     let timeoutID = setInterval(
       () =>
         getRequest('pledgeEvent_get', {
+          version: 'v1.3',
           eventSlug: eventSlug
         }).then(res => {
           dispatch(fetchPledges(res.data));
@@ -28,7 +30,7 @@ export function fetchPledgesAction(eventSlug) {
 }
 
 export function postPledge(data, params) {
-  return dispatch => {
+  return (/* dispatch */) => {
     postRequest('eventPledge_post', data, params)
       .then(res => {
         const { statusText } = res;

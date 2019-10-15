@@ -1,7 +1,9 @@
-import { Text, View, Image, TextInput } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
+import Permissions from 'react-native-permissions';
 import PrimaryButton from '../../components/Common/Button/PrimaryButton';
 import mapTemplateStyle from '../../styles/mapTemplate.native';
+import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
 import i18n from '../../locales/i18n.js';
 
 export function MapTemplate(locals) {
@@ -22,12 +24,28 @@ export function MapTemplate(locals) {
     <View style={[mapTemplateStyle.mapContainer, borderStyle]}>
       <PrimaryButton
         onClick={() => {
-          navigator.geolocation.getCurrentPosition(location => {
-            let { latitude, longitude } = location.coords;
-            locals.onChange(
-              'geoLongitude=' + longitude + '&geoLatitude=' + latitude
-            );
+          navigator.geolocation.setRNConfiguration({
+            skipPermissionRequests: true
           });
+          Permissions.request('location', { type: 'whenInUse' }).then(
+            (/*response*/) => {
+              navigator.geolocation.getCurrentPosition(
+                location => {
+                  let { latitude, longitude } = location.coords;
+                  locals.onChange(
+                    'geoLongitude=' + longitude + '&geoLatitude=' + latitude
+                  );
+                },
+                (/*location*/) => {
+                  NotificationManager.error(
+                    i18n.t('label.location_permission_denied'),
+                    i18n.t('label.error'),
+                    5000
+                  );
+                }
+              );
+            }
+          );
         }}
       >
         {i18n.t('label.get_device_location')}

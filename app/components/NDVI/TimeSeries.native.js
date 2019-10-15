@@ -1,7 +1,7 @@
 import React from 'react';
 import TimeSerie from './TimeSerie';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import filterDataPoints from './NDVIfunctions/filterDataPointForTimeSeries';
 
 class TimeSeries extends React.Component {

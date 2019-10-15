@@ -5,8 +5,7 @@ import { close_green, darkTree, lightTree } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import svgStyles from '../../styles/common/treecounter_svg';
 import { View, Image, Text } from 'react-native';
-import { delimitNumbers } from '../../utils/utils';
-
+const textColor = '#686060';
 class PlantedDetails extends Component {
   render() {
     const { onToggle, personal, community, type } = this.props;
@@ -29,7 +28,7 @@ class PlantedDetails extends Component {
           />
           <View style={svgStyles.svgColumn2Temp}>
             <View>
-              <Text style={{ fontSize: 8, color: '#686060', width: 'auto' }}>
+              <Text style={{ fontSize: 8, color: textColor, width: 'auto' }}>
                 {i18n.t(
                   'individual' === type
                     ? 'label.individual_plant_personal'
@@ -39,9 +38,7 @@ class PlantedDetails extends Component {
             </View>
 
             <View>
-              <Text style={svgStyles.svgTextValue}>
-                {delimitNumbers(personal)}
-              </Text>
+              <Text style={svgStyles.svgTextValue}>{personal}</Text>
             </View>
           </View>
         </View>
@@ -54,7 +51,7 @@ class PlantedDetails extends Component {
           />
           <View style={svgStyles.svgColumn2Temp}>
             <View>
-              <Text style={{ fontSize: 8, color: '#686060', width: 'auto' }}>
+              <Text style={{ fontSize: 8, color: textColor, width: 'auto' }}>
                 {i18n.t(
                   'individual' === type
                     ? 'label.individual_plant_community'
@@ -63,9 +60,7 @@ class PlantedDetails extends Component {
               </Text>
             </View>
             <View>
-              <Text style={svgStyles.svgTextValue}>
-                {delimitNumbers(community)}
-              </Text>
+              <Text style={svgStyles.svgTextValue}>{community}</Text>
             </View>
           </View>
         </View>

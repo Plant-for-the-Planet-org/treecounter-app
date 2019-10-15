@@ -4,16 +4,13 @@ import CardLayout from '../Common/Card';
 import UserProfileImage from '../Common/UserProfileImage';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
-import { delimitNumbers } from '../../utils/utils';
+import { formatDate, delimitNumbers } from '../../utils/utils';
 import { upwardArrow, downwardArrow } from '../../assets/index.js';
-import moment from 'moment';
-import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
 
 export default class ChallengeCard extends React.Component {
   constructor(props) {
     super(props);
-    moment.locale(i18n.language);
   }
 
   render() {
@@ -59,7 +56,7 @@ export default class ChallengeCard extends React.Component {
                       src={direction === 'target' ? downwardArrow : upwardArrow}
                     />
                     <span className="text-style text-padding">
-                      {moment(created).format('D MMM, YYYY')}
+                      {formatDate(created)}
                     </span>
                   </span>
                 </div>

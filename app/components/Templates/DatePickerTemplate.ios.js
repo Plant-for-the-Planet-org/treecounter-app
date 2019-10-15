@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -9,7 +10,7 @@ import {
 } from 'react-native';
 import i18n from '../../locales/i18n.js';
 import datePickerStyle from '../../styles/date_picker.native';
-import { formatDate } from '../../helpers/utils';
+import { formatDateToMySQL } from '../../helpers/utils';
 
 const UIPICKER_HEIGHT = 216;
 
@@ -25,7 +26,7 @@ class CollapsibleDatePickerIOS extends React.PureComponent {
   }
 
   onDateChange(value) {
-    this.props.locals.onChange(formatDate(value));
+    this.props.locals.onChange(formatDateToMySQL(value));
   }
 
   onPress() {
@@ -130,13 +131,13 @@ export function DatePickerTemplate(locals) {
 
   const stylesheet = locals.stylesheet;
   let formGroupStyle = stylesheet.formGroup.normal;
-  let controlLabelStyle = stylesheet.controlLabel.normal;
+  // let controlLabelStyle = stylesheet.controlLabel.normal;
   let helpBlockStyle = stylesheet.helpBlock.normal;
   const errorBlockStyle = stylesheet.errorBlock;
 
   if (locals.hasError) {
     formGroupStyle = stylesheet.formGroup.error;
-    controlLabelStyle = stylesheet.controlLabel.error;
+    // controlLabelStyle = stylesheet.controlLabel.error;
     helpBlockStyle = stylesheet.helpBlock.error;
   }
 

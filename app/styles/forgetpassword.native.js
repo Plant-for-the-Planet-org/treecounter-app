@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (sloginStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   scrollViewStyle: {
     flexGrow: 1
   },
@@ -69,4 +69,4 @@ export default (sloginStyles = EStyleSheet.create({
   header: {
     marginBottom: 60
   }
-}));
+});

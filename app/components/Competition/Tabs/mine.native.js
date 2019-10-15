@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/competition/mine.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import imagestyles from '../../../styles/file_picker.native';
@@ -11,55 +9,63 @@ import CardLayout from '../../Common/Card';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {
-  competitionFormSchema,
-  competitionFormSchemaOptions
-} from '../../../server/parsedSchemas/competition';
+import { competitionFormSchema } from '../../../server/parsedSchemas/competition';
 import i18n from '../../../locales/i18n';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import UserProfileImage from '../../Common/UserProfileImage';
 import close_green from '../../../assets/images/icons/close_green.png';
 import imageUpload from '../../../assets/images/icons/upload_image.png';
+import ImagePicker from 'react-native-image-picker';
 
 let Form = t.form.Form;
-const ImagePicker = require('react-native-image-picker');
-const options = {
-  title: 'Add Image',
-  storageOptions: {
-    skipBackup: true,
-    path: 'images'
-  }
-};
-const getCompFormLayoutTemplate = () => {
-  const formLayoutTreesTemplate = locals => {
-    return (
-      <View style={styles.competitonCreateMain}>
-        {locals.inputs.name}
-        <View style={styles.competition_create_row}>
-          <View style={{ flex: 1 }}>{locals.inputs.goal}</View>
-          <View style={{ flex: 1 }}>{locals.inputs.endDate}</View>
-        </View>
-        <View style={styles.competition_create_row}>
-          <View style={{ flex: 1 }}>{locals.inputs.access}</View>
-        </View>
-        <View style={styles.competition_image}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.addImageTextStyle}>
-              {i18n.t('label.add_image')}
-            </Text>
-          </View>
-          <View style={{ flex: 1 }}>{locals.input.imageFile}</View>
-        </View>
-        {locals.inputs.description}
-      </View>
-    );
-  };
-  return formLayoutTreesTemplate;
-};
+// const getCompFormLayoutTemplate = () => {
+//   const formLayoutTreesTemplate = locals => {
+//     return (
+//       <View style={styles.competitonCreateMain}>
+//         {locals.inputs.name}
+//         <View style={styles.competition_create_row}>
+//           <View style={{ flex: 1 }}>{locals.inputs.goal}</View>
+//           <View style={{ flex: 1 }}>{locals.inputs.endDate}</View>
+//         </View>
+//         <View style={styles.competition_create_row}>
+//           <View style={{ flex: 1 }}>{locals.inputs.access}</View>
+//         </View>
+//         <View style={styles.competition_image}>
+//           <View style={{ flex: 1 }}>
+//             <Text style={styles.addImageTextStyle}>
+//               {i18n.t('label.add_image')}
+//             </Text>
+//           </View>
+//           <View style={{ flex: 1 }}>{locals.input.imageFile}</View>
+//         </View>
+//         {locals.inputs.description}
+//       </View>
+//     );
+//   };
+//   return formLayoutTreesTemplate;
+// };
 const getCompFormImageLayoutTemplate = () => {
   console.log('formlayout');
   const formLayoutTreesTemplate = locals => {
     console.log(locals);
+
+    const options = {
+      title: i18n.t('label.add_image_title'),
+      cancelButtonTitle: i18n.t('label.cancel'),
+      takePhotoButtonTitle: i18n.t('label.take_photo'),
+      chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
+      'permissionDenied.title': i18n.t('label.permission_denied_title'),
+      'permissionDenied.text': i18n.t('label.permission_denied_text'),
+      'permissionDenied.reTryTitle': i18n.t(
+        'label.permission_denied_retry_title'
+      ),
+      'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
+      storageOptions: {
+        skipBackup: true,
+        path: 'images'
+      }
+    };
+
     return (
       <View style={imagestyles.filePickerContainer}>
         <View style={{ flex: 1 }}>
@@ -69,22 +75,24 @@ const getCompFormImageLayoutTemplate = () => {
         </View>
         <TouchableOpacity
           style={{ flex: 1 }}
-          onPress={event => {
-            ImagePicker.showImagePicker(options, response => {
-              // console.log('Response = ', response);
+          onPress={
+            (/* event */) => {
+              ImagePicker.showImagePicker(options, response => {
+                // console.log('Response = ', response);
 
-              if (response.didCancel) {
-                //console.log('User cancelled image picker');
-              } else if (response.error) {
-                //console.log('ImagePicker Error: ', response.error);
-              } else if (response.customButton) {
-                // console.log('User tapped custom button: ', response.customButton);
-              } else {
-                let source = { uri: response.uri };
-                locals.onChange('data:image/jpeg;base64,' + response.data);
-              }
-            });
-          }}
+                if (response.didCancel) {
+                  //console.log('User cancelled image picker');
+                } else if (response.error) {
+                  //console.log('ImagePicker Error: ', response.error);
+                } else if (response.customButton) {
+                  // console.log('User tapped custom button: ', response.customButton);
+                } else {
+                  // let source = { uri: response.uri };
+                  locals.onChange('data:image/jpeg;base64,' + response.data);
+                }
+              });
+            }
+          }
         >
           {!locals.value ? (
             <Image source={imageUpload} style={{ height: 40, width: 40 }} />
@@ -209,7 +217,7 @@ export default class MineCompetitions extends Component {
   }
 
   render() {
-    let { featuredProjects, featuredCompetitions } = this.state;
+    let { featuredCompetitions } = this.state;
     let schemaOptions = this.props.competitionFormSchemaOptions;
     if (schemaOptions.fields.imageFile) {
       schemaOptions.fields.imageFile.template = getCompFormImageLayoutTemplate();
@@ -248,7 +256,7 @@ export default class MineCompetitions extends Component {
     ) : (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 72 }}
-        enableOnAndroid={true}
+        enableOnAndroid
       >
         <View style={styles.containerDedicateStyle}>
           <View style={styles.dedicateTreeName}>

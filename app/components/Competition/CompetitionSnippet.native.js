@@ -3,8 +3,6 @@ import CardLayout from '../Common/Card';
 import styles from '../../styles/competition/competition-snippet.native';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
-import tick from '../../assets/images/icons/tick.png';
-import PrimaryButton from '../Common/Button/PrimaryButton';
 import CompetitionProgressBar from './CompetitionProgressBar';
 import TouchableItem from '../../components/Common/TouchableItem';
 import PropTypes from 'prop-types';
@@ -15,16 +13,13 @@ import {
   userCompetitionEnrolledSelector,
   userTreecounterSelector
 } from '../../selectors';
-import connect from 'react-redux/es/connect/connect';
-import moment from 'moment';
-import 'moment/min/locales';
+import { connect } from 'react-redux';
 import i18n from '../../locales/i18n.js';
-import { getDateFromMySQL } from '../../helpers/utils';
+import { formatDate } from '../../utils/utils';
 
 class CompetitionSnippet extends React.Component {
   constructor(props) {
     super(props);
-    moment.locale(i18n.language);
   }
 
   toggleExpanded(id) {
@@ -198,9 +193,7 @@ class CompetitionSnippet extends React.Component {
                   <Text style={styles.bottomText}>
                     {i18n.t('label.ends')}{' '}
                     {this.props.competition && this.props.competition.endDate
-                      ? moment(
-                          getDateFromMySQL(this.props.competition.endDate)
-                        ).format('MMM DD, YYYY')
+                      ? formatDate(this.props.competition.endDate)
                       : ''}
                   </Text>
                 </View>

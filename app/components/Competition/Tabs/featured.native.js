@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
-import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
+import { ScrollView } from 'react-native';
 import styles from '../../../styles/selectplantproject/featured.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
@@ -51,13 +49,12 @@ export default class FeaturedCompetitions extends Component {
     });
   }
 
-  onSelectClickedFeaturedProjects = id => {
+  onSelectClickedFeaturedProjects = (/*id*/) => {
     // this.props.selectProject(id);
     // const { navigation } = this.props;
     // updateStaticRoute(
     //   'app_donate_detail',
     //   navigation,
-    //   0,
     //   navigation.getParam('userForm')
     // );
   };

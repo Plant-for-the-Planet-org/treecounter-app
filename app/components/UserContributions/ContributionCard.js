@@ -1,18 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import Lightbox from 'react-images';
 import { Link } from 'react-router-dom';
 import * as images from '../../assets';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import TextSpan from '../Common/Text/TextSpan';
 import ConfirmDeletion from './ConfirmDelete';
 import { updateRoute } from '../../helpers/routerHelper';
-import { delimitNumbers } from '../../utils/utils';
-import moment from 'moment';
-import 'moment/min/locales';
+import { formatDate, delimitNumbers } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
-import { getDateFromMySQL } from '../../helpers/utils';
 
 export default class ContributionCardHome extends React.Component {
   constructor(props) {
@@ -23,7 +19,6 @@ export default class ContributionCardHome extends React.Component {
       viewExpanded: false,
       openDialog: false
     };
-    moment.locale(i18n.language);
   }
 
   closeLightbox = () => this.setState({ lightboxIsOpen: false });
@@ -81,7 +76,7 @@ export default class ContributionCardHome extends React.Component {
 
   plantActionLine(plantDate, registrationDate) {
     return i18n.t('label.renews_on', {
-      date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
+      date: format(plantDate)
     });
   }
 
@@ -102,16 +97,15 @@ export default class ContributionCardHome extends React.Component {
   };
 
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
-    return redemptionCode && giver
+    return redemptionCode && givee
       ? [
-          <TextSpan>
+          <TextSpan key={`redeemActionLine_0`}>
             {i18n.t('label.given_on_by', {
-              date: moment(getDateFromMySQL(redemptionDate)).format(
-                'DD MMM YYYY'
-              )
+              date: formatDate(redemptionDate)
             })}
           </TextSpan>,
           <TextSpan
+            key={`redeemActionLine_1`}
             onClick={() =>
               updateRoute(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug
@@ -123,18 +117,17 @@ export default class ContributionCardHome extends React.Component {
         ]
       : redemptionCode
         ? i18n.t('label.redeemed_on', {
-            date: moment(getDateFromMySQL(redemptionDate)).format('DD MMM YYYY')
+            date: formatDate(redemptionDate)
           })
         : givee
           ? [
-              <TextSpan>
+              <TextSpan key={`redeemActionLine_2`}>
                 {i18n.t('label.dedicated_on_by', {
-                  date: moment(getDateFromMySQL(redemptionDate)).format(
-                    'DD MMM YYYY'
-                  )
+                  date: formatDate(redemptionDate)
                 })}
               </TextSpan>,
               <TextSpan
+                key={`redeemActionLine_3`}
                 onClick={() =>
                   updateRoute(getLocalRoute('app_treecounter'), {
                     treeCounterId: giveeSlug
@@ -145,20 +138,18 @@ export default class ContributionCardHome extends React.Component {
               </TextSpan>
             ]
           : i18n.t('label.dedicated_on', {
-              date: moment(getDateFromMySQL(redemptionDate)).format(
-                'DD MMM YYYY'
-              )
+              date: formatDate(redemptionDate)
             });
   }
 
   render() {
     let { contribution } = this.props;
-    let imagesArray =
-      contribution.category === 'contributions'
-        ? contribution.contributionImages.map(image => {
-            return { src: getImageUrl('contribution', 'medium', image.image) };
-          })
-        : '';
+    // let imagesArray =
+    //   contribution.category === 'contributions'
+    //     ? contribution.contributionImages.map(image => {
+    //         return { src: getImageUrl('contribution', 'medium', image.image) };
+    //       })
+    //     : '';
     let seeLabel = classnames('see-more-label-style', {
       'see-more__active': this.state.viewExpanded
     });

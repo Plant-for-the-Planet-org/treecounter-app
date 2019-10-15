@@ -1,7 +1,9 @@
 {
-  "has_dedicated": "Alle Bäume, die Sie pflanzen, mit Ausnahme von Geschenkspenden, werden {{user}} gewidmet. Während Bäume in beiden Baumzählern erscheinen, zählen sie nur einmal im globalen Baumzähler.",
-  "has_not_dedicated": "Sie können einem Freund, Kollegen oder einer Organisation helfen, ihr Ziel zu erreichen, indem Sie ihnen Bäume widmen.",
-  "dedicate_tootltip": "Alle Bäume, die Sie von nun an pflanzen, registrieren oder spenden, werden dem ausgewählten Benutzer gewidmet. Sie können die Person, der Sie die Bäume widmen möchten, jederzeit ändern. Im Falle von geschenkten Bäumen werden die Bäume, die Sie pflanzen, nur dem Beschenkten gewidmet.",
+  "has_dedicated": "Alle Bäume, die du pflanzt, bis auf Bäume, die du verschenkst, werden {{user}} gewidmet. Gewidmete Bäume erscheinen in beiden persönlichen Baumzählern, werden aber nur einmal im Welt-Baumzähler registriert.",
+  "has_not_dedicated": "Indem du Bäume an Freunde, Kollegen oder Organisationen verschenkst, hilfst du ihnen, ihr Baumziel zu erreichen.",
+  "dedicate_tootltip": "Alle Bäume, die du von nun an pflanzt, registrierst oder spendest, werden dem ausgewählten Nutzer gewidmet.  Du kannst die Person, der du die Bäume widmen möchtest, jederzeit ändern. Falls du Bäume verschenkst, werden diese nur dem Beschenkten gewidmet.",
   "pick_profile": "Profil auswählen",
-  "dedicate_trees": "Widme meine Bäume"
+  "dedicate_trees": "Widme meine Bäume",
+  "dedicate_my_trees": "Widme meine Bäume",
+  "currently_dedicated_to": "Derzeit gewidmet an"
 }

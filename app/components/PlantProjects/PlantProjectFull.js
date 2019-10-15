@@ -4,14 +4,13 @@ import PropTypes from 'prop-types';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import SeeMoreToggle from '../Common/SeeMoreToggle';
 import PlantProjectDetails from './PlantProjectDetails';
-import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
-import CardLayout from '../Common/Card';
 import { getImageUrl } from '../../actions/apiRouting';
 import PlantedProgressBar from './PlantedProgressbar';
 import { tick } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
+import NumberFormat from '../Common/NumberFormat';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -153,7 +152,12 @@ class PlantProjectFull extends React.Component {
             <PlantProjectSpecs {...specsProps} />
           </div>
           <div className="project-specs__cost">
-            {specsProps.currency} {specsProps.treeCost}
+            <span>
+              <NumberFormat
+                data={specsProps.treeCost}
+                currency={specsProps.currency}
+              />
+            </span>
           </div>
         </div>
         <div className="project-action-links">

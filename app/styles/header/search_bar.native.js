@@ -18,7 +18,7 @@ export const centerTextInput =
         paddingBottom: 0
       }
     : {};
-export default (styles = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     width: '100%',
     flexDirection: 'row',
@@ -28,12 +28,18 @@ export default (styles = EStyleSheet.create({
     alignItems: 'center'
   },
   searchContainer: {
-    height: 30,
+    height: 56,
     width: '75%',
     backgroundColor: '#f2f2f2',
-    borderRadius: 5,
+    padding: 17,
     paddingLeft: 27,
-    marginLeft: 10
+    marginLeft: 10,
+    borderTopRightRadius: 6,
+    borderTopLeftRadius: 6,
+
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#d5d5d5'
   },
   button: {
     width: '100%',
@@ -41,19 +47,19 @@ export default (styles = EStyleSheet.create({
   },
   searchIconContainer: {
     position: 'absolute',
-    left: 7,
-    top: 6,
+    left: 15,
+    top: 19,
     bottom: 0
   },
   searchIcon: {
-    height: 15,
-    width: 15,
+    height: 18,
+    width: 18,
     resizeMode: 'contain'
   },
   searchInput: {
-    fontSize: 14,
-    paddingTop: 5,
+    fontSize: 16,
+    marginLeft: 14,
     color: '$primary',
     ...centerTextInput
   }
-}));
+});

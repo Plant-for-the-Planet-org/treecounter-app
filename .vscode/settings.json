@@ -3,5 +3,6 @@
   "editor.formatOnSave": true,
   "javascript.format.enable": true,
   "prettier.eslintIntegration": true,
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "eslint.workingDirectories": ["./"]
 }

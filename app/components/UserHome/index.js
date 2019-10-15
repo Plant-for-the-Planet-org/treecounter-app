@@ -7,7 +7,6 @@ import SvgContainer from '../Common/SvgContainer';
 import TextHeading from '../Common/Heading/TextHeading';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import LoadingIndicator from '../Common/LoadingIndicator';
-import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import UserProfileImage from '../Common/UserProfileImage';
 import { getDocumentTitle } from '../../helpers/utils';
 import InlineLink from '../Common/InlineLink';

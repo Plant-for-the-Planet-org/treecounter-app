@@ -1,5 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
-import { View, ScrollView, Animated } from 'react-native';
+import { ScrollView, Animated } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { categoryIcons } from '../../../helpers/utils';
 import styles from '../../../styles/leaderboard/leader_board';
@@ -32,7 +33,7 @@ export default class CategoryTypes extends Component {
   }
 
   getCategoryView = () => {
-    const { categoryInfo, sectionInfo } = this.props;
+    const { categoryInfo } = this.props;
     let categoryUI = null;
     if (categoryInfo && categoryInfo.categoryKeys) {
       categoryUI = categoryInfo.categoryKeys.map((category, index) => {
@@ -60,7 +61,7 @@ export default class CategoryTypes extends Component {
       <Animated.View style={[styles.outerContainer, this.props.style]}>
         <ScrollView
           contentContainerStyle={[styles.innerContainer]}
-          horizontal={true}
+          horizontal
           ref={ref => {
             this.scrollView = ref;
           }}

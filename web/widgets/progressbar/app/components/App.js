@@ -28,10 +28,11 @@ export default class App extends Component {
   }
 
   render() {
-    const { serverName, baseUrl, treecounter, ProjectId } = this.props;
+    const { serverName, ProjectId } = this.props;
     const style = `.canvasContainer {
       background-color:${this.props.backgroundColor};
     }`;
+    const inheritedStyleBody = ':host {all: initial;}';
     return (
       <React.Fragment>
         {/* Scoped CSS: CSS defined inside shadow DOM is scoped
@@ -43,7 +44,7 @@ export default class App extends Component {
 
         {/*Inherited properties will be inherited as usual. It's better to think of the shadow
           boundary as affecting the cascade, namely the scope of selectors and the importance of rules. */}
-        <style>{`:host {all: initial;}`}</style>
+        <style>{inheritedStyleBody}</style>
         <div>
           <link href="progressbarwidget.css" rel="stylesheet" />
           <link href={`${serverName}/progressbarwidget.css`} rel="stylesheet" />
@@ -65,10 +66,10 @@ export default class App extends Component {
             {this.props.showDonateButton && (
               <div className={'pftp-widget-btn__container'}>
                 <SecondaryButton
-                  onClick={event => {
+                  onClick={() => {
                     const url = `${serverName}${getLocalRoute(
                       'app_donateTrees'
-                    )}/${ProjectId}`;
+                    )}${ProjectId ? '/' + ProjectId : ''}`;
                     window.open(url, '_blank');
                   }}
                 >

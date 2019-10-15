@@ -5,7 +5,7 @@ let lineBreakMargin = -20;
 if (Platform.OS === 'android') {
   lineBreakMargin = -30;
 }
-export default (faqStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -24,7 +24,6 @@ export default (faqStyles = EStyleSheet.create({
     justifyContent: 'space-between'
   },
   headerText: {
-    textAlign: 'center',
     fontSize: 16,
     fontWeight: '500',
     textAlign: 'left',
@@ -52,4 +51,4 @@ export default (faqStyles = EStyleSheet.create({
   },
   p: { color: '#938989' },
   br: { marginBottom: lineBreakMargin }
-}));
+});

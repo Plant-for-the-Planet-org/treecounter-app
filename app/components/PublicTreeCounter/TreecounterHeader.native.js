@@ -13,7 +13,7 @@ const TreecounterHeader = ({
   profileType,
   logo,
   isUserFollowerBool,
-  isUserLoggedIn,
+  /* isUserLoggedIn, */
   showFollow,
   followChanged,
   containerStyle
@@ -42,7 +42,6 @@ const TreecounterHeader = ({
           {showFollow ? (
             <FollowLabelButton
               isSubscribed={isUserFollowerBool}
-              isLoggedIn={isUserLoggedIn}
               onClick={() => followChanged()}
             />
           ) : null}

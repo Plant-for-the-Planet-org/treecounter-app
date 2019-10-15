@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import stripe, { PaymentCardTextField } from 'tipsi-stripe';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import i18n from '../../../locales/i18n';
-
+const colors = {
+  color: '#449aeb',
+  borderColor: '#000'
+};
 const styles = StyleSheet.create({
   field: {
     width: 300,
-    color: '#449aeb',
-    borderColor: '#000',
+    color: colors.color,
+    borderColor: colors.borderColor,
     borderWidth: 1,
     borderRadius: 5
   }
@@ -48,7 +51,7 @@ export default class StripeCC extends Component {
         cvc: this.state.params.cvc
       };
       this.props.setLoading(true);
-      const token = stripe
+      stripe
         .createTokenWithCard(params)
         .then(token => {
           token.id = token.tokenId;
@@ -58,6 +61,7 @@ export default class StripeCC extends Component {
           //console.log(token);
         })
         .catch(err => {
+          console.log(err);
           this.props.setLoading(false);
           this.props.onError();
         });
@@ -72,7 +76,7 @@ export default class StripeCC extends Component {
   }
 
   render() {
-    const { valid, params } = this.state;
+    // const { valid, params } = this.state;
     return (
       <View style={{ flexDirection: 'column', padding: 10 }}>
         <PaymentCardTextField
@@ -88,7 +92,7 @@ export default class StripeCC extends Component {
             this.state.submitClicked ? () => null : () => this.payviaCard()
           }
         >
-          Pay
+          {i18n.t('label.pay')}
         </PrimaryButton>
       </View>
     );

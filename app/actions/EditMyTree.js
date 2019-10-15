@@ -81,14 +81,14 @@ export function deleteContribution(plantContributionId) {
           debug(err);
 
           NotificationManager.error(
-            error.response.data.message,
+            err.response.data.message,
             i18n.t('label.error'),
             5000
           );
 
           reject(err);
         })
-        .finally(data => {
+        .finally(() => {
           dispatch(setProgressModelState(false));
         });
     });

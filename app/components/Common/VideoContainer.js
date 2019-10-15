@@ -1,7 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 import YouTube from 'react-youtube';
-import ModalDialog from './ModalDialog';
 
 class VideoContainer extends React.Component {
   constructor(props) {
@@ -16,11 +16,9 @@ class VideoContainer extends React.Component {
         .replace(/(>|<)/gi, '')
         .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
       if (url[2] !== undefined) {
+        // eslint-disable-next-line no-useless-escape
         ID = url[2].split(/[^0-9a-z_\-]/i);
         ID = ID[0];
-        this.setState({ videoId: ID });
-      } else {
-        ID = url;
         this.setState({ videoId: ID });
       }
     }

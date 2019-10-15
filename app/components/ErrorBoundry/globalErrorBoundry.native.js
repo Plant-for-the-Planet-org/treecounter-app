@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, ScrollView, SafeAreaView } from 'react-native';
+import { Text, ScrollView, SafeAreaView } from 'react-native';
+import { context } from '../../config';
 import styles from '../../styles/edit_profile.native';
 import i18n from '../../locales/i18n.js';
 import { Client, Configuration } from 'bugsnag-react-native';
-import {
-  name as app_name,
-  version as app_version
-} from '../../../package.json';
-
-const configuration = new Configuration();
-configuration.apiKey = '6f2971a9b077662912f61ae602716afd';
-configuration.codeBundleId = app_version;
-bugsnag = new Client(configuration);
+import { version as app_version } from '../../../package.json';
+const textColor = 'white';
+let bugsnag;
+if (context.bugsnagApiKey) {
+  const configuration = new Configuration();
+  configuration.apiKey = context.bugsnagApiKey;
+  configuration.codeBundleId = app_version;
+  bugsnag = new Client(configuration);
+}
 
 export default class GlobalErrorBoundary extends React.Component {
   constructor(props) {
@@ -22,9 +23,11 @@ export default class GlobalErrorBoundary extends React.Component {
 
   componentDidCatch(error, info) {
     this.setState({ hasErrorOccurred: true, error, info });
-    bugsnag.notify(error, function(report) {
-      report.metadata = { info: info };
-    });
+    if (bugsnag) {
+      bugsnag.notify(error, function(report) {
+        report.metadata = { info: info };
+      });
+    }
   }
 
   render() {
@@ -41,7 +44,9 @@ export default class GlobalErrorBoundary extends React.Component {
             <Text style={[styles.textPara, { marginTop: 15 }]}>
               {i18n.t('label.sorry_inconveniences')}
             </Text>
-            <Text style={{ color: '#fff', fontSize: 10, fontStyle: 'italic' }}>
+            <Text
+              style={{ color: textColor, fontSize: 10, fontStyle: 'italic' }}
+            >
               {i18n.t('label.error') +
                 ` : ${this.state.error} + \n\n${this.state.info}`}
             </Text>

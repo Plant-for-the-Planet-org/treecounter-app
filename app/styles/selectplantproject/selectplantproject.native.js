@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (selectPlantTreeStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   slickWrapper: {
     height: '100%'
   },
@@ -29,4 +29,4 @@ export default (selectPlantTreeStyles = EStyleSheet.create({
   selectedProjectCol: {
     paddingLeft: 5
   }
-}));
+});

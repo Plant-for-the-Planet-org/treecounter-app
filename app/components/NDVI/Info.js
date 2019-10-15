@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import parseDate from './NDVIfunctions/parseDate';
 import { questionmark_orange } from '../../assets';
 import ReactTooltip from 'react-tooltip';
+import { formatDate } from '../../utils/utils';
+import { formatDateToMySQL } from '../../helpers/utils';
 
 const Info = props => {
   const aggregate = props.selectedDataPoint.ndviAggregate;
@@ -15,18 +16,36 @@ const Info = props => {
             <div className="flex-1">
               <p>
                 {props.ndviResulFromSpell}{' '}
-                {parseDate(
-                  props.selectedDataPoint.month,
-                  props.selectedDataPoint.year
+                {formatDate(
+                  formatDateToMySQL(
+                    new Date(
+                      props.selectedDataPoint.year,
+                      props.selectedDataPoint.month - 1,
+                      1
+                    )
+                  ),
+                  'LLLL yyyy'
                 )}
               </p>
               <p>
                 {props.minimumSpell}
-                <b>{aggregate.min ? aggregate.min : 'NaN'}</b>
+                <b>
+                  {aggregate.min
+                    ? Math.round(aggregate.min * 100) / 100
+                    : 'NaN'}
+                </b>
                 {props.averageSpell}
-                <b>{aggregate.avg ? aggregate.avg : 'NaN'}</b>
+                <b>
+                  {aggregate.avg
+                    ? Math.round(aggregate.avg * 100) / 100
+                    : 'NaN'}
+                </b>
                 {props.maximumSpell}
-                <b>{aggregate.max ? aggregate.max : 'NaN'}</b>
+                <b>
+                  {aggregate.max
+                    ? Math.round(aggregate.max * 100) / 100
+                    : 'NaN'}
+                </b>
               </p>
             </div>
             <div className="text-center btn-container">

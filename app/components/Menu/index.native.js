@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Image,
-  ScrollView,
-  SafeAreaView,
-  Text,
-  Linking
-} from 'react-native';
+import { View, ScrollView, SafeAreaView, Text, Linking } from 'react-native';
 import { LargeMenuItem } from './MenuItem.native';
-import PropTypes, { func } from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from '../../styles/menu.native';
 import { updateRoute } from '../../helpers/routerHelper';
 import * as icons from '../../assets';
@@ -48,7 +41,9 @@ export default class Menu extends Component {
           this.resetStackToProperRoute(url);
         }
       })
-      .catch(e => {});
+      .catch(e => {
+        console.log(e);
+      });
 
     // This listener handles the case where the app is woken up from the Universal or Deep Linking
     Linking.addEventListener('url', this.appWokeUp);

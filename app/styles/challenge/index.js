@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions, Platform } from 'react-native';
+import { Platform } from 'react-native';
 
 export const centerTextInput =
   Platform.OS === 'android'
@@ -16,14 +16,14 @@ const buttonStyle = {
   height: 35,
   width: '100%'
 };
-const Layout = {
-  window: {
-    height: Dimensions.get('window').height - (56 + 70 + 20),
-    width: Dimensions.get('window').width
-  }
-};
+// const Layout = {
+//   window: {
+//     height: Dimensions.get('window').height - (56 + 70 + 20),
+//     width: Dimensions.get('window').width
+//   }
+// };
 
-export default (editProfileStyle = EStyleSheet.create({
+const editProfileStyle = EStyleSheet.create({
   challengeContainer: {
     flexDirection: 'column',
 
@@ -105,7 +105,7 @@ export default (editProfileStyle = EStyleSheet.create({
   },
   treecount_input: {
     paddingLeft: 8,
-    width: 50,
+    width: 80,
     borderBottomWidth: 1,
     borderColor: '#686060',
     paddingBottom: 2,
@@ -138,4 +138,6 @@ export default (editProfileStyle = EStyleSheet.create({
     height: 15,
     width: 15
   }
-}));
+});
+
+export default editProfileStyle;

@@ -22,7 +22,9 @@ const profileTypeToReq = {
   profile: 'profile_put',
   about_me: 'profileAboutMe_put',
   password: 'profilePassword_put',
-  image: 'profileImage_put'
+  image: 'profileImage_put',
+  currency: 'profileCurrency_put',
+  locale: 'profileLocale_put'
 };
 
 export function addPlantProject(plantProject) {
@@ -112,7 +114,6 @@ export function orderPlantProject(data, params) {
     return new Promise(function(resolve, reject) {
       postAuthenticatedRequest('plantProject_position', data, params)
         .then(res => {
-          const { statusText } = res;
           const { plantProject } = res.data.merge;
           dispatch(
             mergeEntities(normalize(plantProject, [plantProjectSchema]))
@@ -129,7 +130,7 @@ export function orderPlantProject(data, params) {
   };
 }
 
-export function updateUserProfile(data, profileType) {
+export function updateUserProfile(data, profileType, forcePromisify) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
@@ -137,10 +138,21 @@ export function updateUserProfile(data, profileType) {
         .then(res => {
           debug(res.status);
           debug(res);
+          debug(userProfileSchema);
+
           if (res.data && res.data instanceof Object) {
-            dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
+            if (res.data.merge) {
+              dispatch(
+                mergeEntities(
+                  normalize(res.data.merge.userProfile, [userProfileSchema])
+                )
+              );
+            } else {
+              dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
+            }
           }
-          resolve(res.data);
+          if (res.data.merge) resolve(res.data);
+          forcePromisify && resolve(res.data);
           dispatch(setProgressModelState(false));
         })
         .catch(err => {

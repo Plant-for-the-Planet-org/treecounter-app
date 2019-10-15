@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import { PropTypes } from 'prop-types';
@@ -76,6 +77,7 @@ export default class Leaderboard extends Component {
             <View style={{ width: '98%', padding: 10, marginTop: 15 }}>
               {this.props.queryResult.map((result, index) => {
                 const isPrivate =
+                  // eslint-disable-next-line no-prototype-builtins
                   result.hasOwnProperty('mayPublish') && !result.mayPublish;
                 return (
                   <LeaderboardItem
@@ -142,11 +144,12 @@ export default class Leaderboard extends Component {
     if (!this.props.categoryInfo) {
       return null;
     }
+    const backgroundColor = 'transparent';
     const selectedSorting =
       this.state.timeSorting ||
       (this.props.timePeriodsInfo &&
         this.props.timePeriodsInfo.timePeriodsKeys[0]);
-    sortView = (
+    const sortView = (
       <View style={styles.sortView}>
         <Text style={styles.itemViewText}>
           {i18n.t('label.sortBy')}
@@ -163,12 +166,14 @@ export default class Leaderboard extends Component {
           tooltipContainerStyle={styles.tooltipContainerStyle}
           setBelow
           labelSeparatorColor="transparent"
-          overlayStyle={{ backgroundColor: 'transparent' }} // set the overlay invisible
+          overlayStyle={{ backgroundColor: backgroundColor }} // set the overlay invisible
           buttonComponent={
             <TouchableItem
-              onPress={event => {
-                this.refs['tooltip'].toggle();
-              }}
+              onPress={
+                (/* event */) => {
+                  this.refs['tooltip'].toggle();
+                }
+              }
             >
               <Image
                 resizeMode="contain"

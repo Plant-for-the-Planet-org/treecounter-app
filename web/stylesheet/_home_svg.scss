@@ -38,7 +38,7 @@
     }
     strong {
       @extend .pftp-text-basic;
-      font-size: 32.5px;
+      font-size: 28.5px;
       font-weight: 600;
       text-align: left;
       color: $headerTextColor;
@@ -46,7 +46,12 @@
         font-size: 15.5px;
       }
     }
-
+    strong.small {
+      font-size: 22.5px;
+      @include for-phone-only {
+        font-size: 15.5px;
+      }
+    }
     .svg-text-container__row--col2 {
       // align-self: end;
       justify-self: end;

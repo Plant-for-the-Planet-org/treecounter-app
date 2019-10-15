@@ -49,9 +49,11 @@ export function FilePickerTemplate(locals) {
         <button
           type="button"
           className="browse-button"
-          onClick={e => {
-            console.log('clicked Browse', this && this.refs);
-          }}
+          onClick={
+            (/* e */) => {
+              console.log('clicked Browse', this && this.refs);
+            }
+          }
         >
           {i18n.t(locals.label)}
         </button>

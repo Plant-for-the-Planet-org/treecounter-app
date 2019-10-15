@@ -17,6 +17,14 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@haskkor/react-native-recaptchav3",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@haskkor/react-native-recaptchav3/LICENSE"
       },
+      "@react-native-community/async-storage@1.6.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-community/react-native-async-storage",
+        "publisher": "Krzysztof Borowy",
+        "email": "krizzu.dev@gmail.com",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@react-native-community/async-storage",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@react-native-community/async-storage/LICENSE"
+      },
       "autosuggest-highlight@3.1.1": {
         "licenses": "MIT",
         "repository": "https://github.com/moroshko/autosuggest-highlight",
@@ -25,7 +33,7 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/autosuggest-highlight",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/autosuggest-highlight/LICENSE"
       },
-      "axios@0.17.1": {
+      "axios@0.18.1": {
         "licenses": "MIT",
         "repository": "https://github.com/axios/axios",
         "publisher": "Matt Zabriskie",
@@ -52,6 +60,12 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/css-loader",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/css-loader/LICENSE"
       },
+      "date-fns@2.4.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/date-fns/date-fns",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/date-fns",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/date-fns/LICENSE.md"
+      },
       "esri-loader@2.9.2": {
         "licenses": "Apache-2.0",
         "repository": "https://github.com/Esri/esri-loader",
@@ -69,6 +83,13 @@
         "url": "https://github.com/jamuhl",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/i18next",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/i18next/LICENSE"
+      },
+      "intl@1.2.5": {
+        "licenses": "MIT",
+        "repository": "https://github.com/andyearnshaw/Intl.js",
+        "publisher": "Andy Earnshaw",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/intl",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/intl/LICENSE.txt"
       },
       "jwt-decode@2.2.0": {
         "licenses": "MIT",
@@ -95,15 +116,6 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/lodash",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/lodash/LICENSE"
       },
-      "moment@2.24.0": {
-        "licenses": "MIT",
-        "repository": "https://github.com/moment/moment",
-        "publisher": "Iskren Ivov Chernev",
-        "email": "iskren.chernev@gmail.com",
-        "url": "https://github.com/ichernev",
-        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/moment",
-        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/moment/LICENSE"
-      },
       "normalizr@3.4.0": {
         "licenses": "MIT",
         "repository": "https://github.com/paularmstrong/normalizr",
@@ -118,6 +130,12 @@
         "url": "https://github.com/marlun78",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/number-to-words",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/number-to-words/LICENSE"
+      },
+      "prop-types@15.7.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/prop-types",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/prop-types",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/prop-types/LICENSE"
       },
       "react-accessible-accordion@2.4.5": {
         "licenses": "MIT",
@@ -146,6 +164,13 @@
         "email": "michael.moroshko@gmail.com",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-autosuggest",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-autosuggest/LICENSE"
+      },
+      "react-datepicker@2.9.6": {
+        "licenses": "MIT",
+        "repository": "https://github.com/Hacker0x01/react-datepicker",
+        "publisher": "HackerOne",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-datepicker",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-datepicker/LICENSE"
       },
       "react-i18next@7.13.0": {
         "licenses": "MIT",
@@ -290,6 +315,15 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-lightbox",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-lightbox/LICENSE"
       },
+      "react-native-linear-gradient@2.5.6": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-community/react-native-linear-gradient",
+        "publisher": "Brent Vatne",
+        "email": "brentvatne@gmail.com",
+        "url": "https://github.com/brentvatne",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-linear-gradient",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-linear-gradient/LICENSE"
+      },
       "react-native-material-buttons@0.5.0": {
         "licenses": "BSD-3-Clause",
         "repository": "https://github.com/n4kz/react-native-material-buttons",
@@ -339,12 +373,27 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-paypal-wrapper",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-paypal-wrapper/LICENSE"
       },
+      "react-native-permissions@1.2.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-community/react-native-permissions",
+        "publisher": "Yonah Forst",
+        "email": "yonaforst@hotmail.com",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-permissions",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-permissions/LICENSE"
+      },
       "react-native-popover-tooltip@1.1.4": {
         "licenses": "MIT",
         "repository": "https://github.com/wookoinc/react-native-popover-tooltip",
         "publisher": "Lu Sun",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-popover-tooltip",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-popover-tooltip/LICENSE"
+      },
+      "react-native-raw-bottom-sheet@2.0.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/nysamnang/react-native-raw-bottom-sheet",
+        "publisher": "NY Samnang",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-raw-bottom-sheet",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-raw-bottom-sheet/LICENSE"
       },
       "react-native-recaptcha-v3@0.0.16": {
         "licenses": "ISC",
@@ -455,7 +504,7 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-notifications",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-notifications/README.md"
       },
-      "react-redux@5.1.1": {
+      "react-redux@7.1.1": {
         "licenses": "MIT",
         "repository": "https://github.com/reduxjs/react-redux",
         "publisher": "Dan Abramov",
@@ -463,14 +512,6 @@
         "url": "https://github.com/gaearon",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-redux",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-redux/LICENSE.md"
-      },
-      "react-render-html@0.6.0": {
-        "licenses": "MIT",
-        "repository": "https://github.com/utatti/react-render-html",
-        "publisher": "Hyunje Jun",
-        "email": "me@noraesae.net",
-        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-render-html",
-        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-render-html/LICENSE"
       },
       "react-router-dom@4.3.1": {
         "licenses": "MIT",
@@ -493,6 +534,23 @@
         "publisher": "Kiran Abburi",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-slick",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-slick/LICENSE"
+      },
+      "react-smartbanner@5.1.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/patw0929/react-smartbanner",
+        "publisher": "patw",
+        "email": "patw.hi@gmail.com",
+        "url": "http://patw.me/",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-smartbanner",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-smartbanner/LICENSE"
+      },
+      "react-stripe-elements@5.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/stripe/react-stripe-elements",
+        "publisher": "Stripe",
+        "url": "https://www.stripe.com",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-stripe-elements",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-stripe-elements/LICENSE"
       },
       "react-tooltip@3.10.0": {
         "licenses": "MIT",
@@ -530,6 +588,15 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-actions",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-actions/LICENSE"
       },
+      "redux-form@8.2.6": {
+        "licenses": "MIT",
+        "repository": "https://github.com/erikras/redux-form",
+        "publisher": "Erik Rasmussen",
+        "email": "rasmussenerik@gmail.com",
+        "url": "http://github.com/erikras",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-form",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-form/LICENSE"
+      },
       "redux-logger@3.0.6": {
         "licenses": "MIT",
         "repository": "https://github.com/theaqua/redux-logger",
@@ -546,9 +613,9 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-thunk",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-thunk/LICENSE.md"
       },
-      "reselect@3.0.1": {
+      "reselect@4.0.0": {
         "licenses": "MIT",
-        "repository": "https://github.com/reactjs/reselect",
+        "repository": "https://github.com/reduxjs/reselect",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/reselect",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/reselect/LICENSE"
       },
@@ -612,6 +679,12 @@
         "repository": "https://github.com/thenativeweb/uuidv4",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/uuidv4",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/uuidv4/README.md"
+      },
+      "why-did-you-update@1.0.6": {
+        "licenses": "MIT",
+        "repository": "https://github.com/maicki/why-did-you-update",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/why-did-you-update",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/why-did-you-update/LICENSE"
       }
   },
   "webLicenses": {}

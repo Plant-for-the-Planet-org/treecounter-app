@@ -7,7 +7,7 @@ import {
   selectedPlantProjectSelector,
   selectedTpoSelector
 } from '../../selectors';
-import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
 
 import {
@@ -24,7 +24,7 @@ class SelectedPlantProjectContainer extends Component {
     //  this.props.selectPlantProjectAction(1);
   }
 
-  onTabChange(title) {
+  onTabChange(/* title */) {
     // this.props.navigation.setParams({ titleParam: title });
   }
   selectProject(id) {

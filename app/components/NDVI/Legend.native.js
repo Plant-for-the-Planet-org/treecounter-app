@@ -14,7 +14,7 @@ const LegendInfo = props => {
   );
 };
 
-const Legend = props => {
+const Legend = () => {
   return (
     <View style={styles.legendContainer}>
       <Text>{i18n.t('label.NDVI_legend_indicators')}</Text>

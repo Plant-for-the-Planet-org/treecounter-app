@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (textInputStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   // pickerViewStyle: {
   //   flex: 1,
   //   marginLeft: 28,
@@ -35,4 +35,4 @@ export default (textInputStyles = EStyleSheet.create({
     textAlign: 'left',
     fontSize: 16
   }
-}));
+});

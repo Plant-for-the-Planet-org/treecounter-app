@@ -60,7 +60,7 @@ const getSingleTreeLayout = (
   return formLayoutSingleTree;
 };
 
-const getMultipleTreeLayout = props1 => {
+const getMultipleTreeLayout = () => {
   return locals => {
     return (
       <div className="register-tree__form">

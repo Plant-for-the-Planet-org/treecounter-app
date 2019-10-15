@@ -28,7 +28,8 @@ const customStyles = {
   menu: provided => ({
     ...provided,
     width: '100%',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    fontSize: '17px'
   }),
   indicatorSeparator: () => ({
     display: 'none'
@@ -124,22 +125,23 @@ class GlobalCurrencySelector extends Component {
     const currenciesArray = this.getCurrencyNames();
     return (
       <div className="global-selector currency">
-        <Select
-          defaultValue={{
-            value: this.state.preferredCurrency,
-            label: this.state.preferredCurrency
-          }}
-          value={{
-            value: this.state.preferredCurrency,
-            label: this.state.preferredCurrency
-          }}
-          menuPlacement="top"
-          styles={customStyles}
-          onChange={this.handleCurrencyChange}
-          isSearchable={false}
-          options={currenciesArray}
-        />
-        
+        <div className="li-select">
+          <Select
+            defaultValue={{
+              value: this.state.preferredCurrency,
+              label: this.state.preferredCurrency
+            }}
+            value={{
+              value: this.state.preferredCurrency,
+              label: this.state.preferredCurrency
+            }}
+            menuPlacement="top"
+            styles={customStyles}
+            onChange={this.handleCurrencyChange}
+            isSearchable={false}
+            options={currenciesArray}
+          />
+        </div>
       </div>
     );
   }

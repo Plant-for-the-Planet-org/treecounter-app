@@ -41,11 +41,11 @@ const customStyles = {
     display: 'flex',
     cursor: 'pointer'
   }),
-  // menu: provided => ({
-  //   ...provided,
-  //   width: '110px',
-  //   cursor: 'pointer'
-  // }),
+  menu: provided => ({
+    ...provided,
+    width: '150px',
+    cursor: 'pointer'
+  }),
 
   indicatorSeparator: () => ({
     display: 'none'
@@ -60,9 +60,9 @@ const customStyles = {
   }),
   option: provided => ({
     ...provided,
-    display: 'flex',
+    // display: 'flex',
     padding: '4px',
-    width: '100px'
+    width: '150px'
   }),
 
   singleValue: (provided /* , state */) => {

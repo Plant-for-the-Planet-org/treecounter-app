@@ -7,7 +7,6 @@ import {
   Image,
   Text,
   View,
-  TouchableOpacity,
   TouchableHighlight
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
@@ -263,7 +262,7 @@ class ContributionCard extends React.Component {
       registrationDate,
       redemptionCode,
       redemptionDate,
-      contributionImages
+      // contributionImages,
       // ndviUid
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {

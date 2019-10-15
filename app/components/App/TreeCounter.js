@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 // Library imports
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
@@ -113,6 +114,7 @@ class TreeCounter extends Component {
         nextProps.userProfile.id != this.props.userProfile.id)
     ) {
       let isLoggedIn = null !== nextProps.userProfile;
+      // eslint-disable-next-line no-underscore-dangle
       this._appRoutes = undefined;
       this.setState({ loading: false, isLoggedIn: isLoggedIn });
     }
@@ -151,6 +153,7 @@ class TreeCounter extends Component {
         }
       />
     );
+    // eslint-disable-next-line no-underscore-dangle
     this._appRoutes = (
       <div className="app-container__content">
         <BodyErrorBoundary>
@@ -321,16 +324,17 @@ class TreeCounter extends Component {
     if (!this._appRoutes) {
       this.initRoutes();
     }
-    if (window.location.pathname.indexOf('signup') > -1 && this.state.isIOS) {
-      this.openApp(window.location.pathname);
-      return null;
-    }
+    // Turned off deeplink to app as it does not work if user has not installed the app.
+    // TODO: either delete this code or implement a solution which solves the problem
+    // if (window.location.pathname.indexOf('signup') > -1 && this.state.isIOS) {
+    //   this.openApp(window.location.pathname);
+    //   return null;
+    // }
     return !this.state.loading ? (
       <div className="app">
         <BrowserRouter history={history}>
           <div className="app-container">
-            <ProgressModal isOpen={this.props.progressModel} />
-
+            <ProgressModal />
             <HeaderContainer />
             <Route component={SideMenuContainer} />
             {this._appRoutes}
@@ -342,14 +346,13 @@ class TreeCounter extends Component {
     ) : null;
   }
 
-  openApp(linkUrl) {
-    window.location.href = 'trilliontreecampaign:' + linkUrl;
-  }
+  // openApp(linkUrl) {
+  //    window.location.href = 'trilliontreecampaign:' + linkUrl;
+  // }
 }
 
 const mapStateToProps = state => ({
-  userProfile: currentUserProfileSelector(state),
-  progressModel: state.modelDialogState.progressModel
+  userProfile: currentUserProfileSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
@@ -372,6 +375,5 @@ TreeCounter.propTypes = {
   NotificationAction: PropTypes.func,
   loadTpos: PropTypes.func,
   dispatch: PropTypes.func,
-  progressModel: PropTypes.bool,
   fetchpledgeEventsAction: PropTypes.func
 };

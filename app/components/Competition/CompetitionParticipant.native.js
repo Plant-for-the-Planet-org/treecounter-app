@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from '../../styles/competition/competition-full.native';
-import { flagTarget } from '../../assets';
 import UserProfileImage from '../Common/UserProfileImage.native';
 import snippetStyles from '../../styles/competition/competition-snippet.native';
 import PrimaryButton from '../Common/Button/PrimaryButton';

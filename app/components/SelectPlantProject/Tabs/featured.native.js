@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
@@ -9,7 +10,7 @@ import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
 
 export default class FeaturedProjects extends PureComponent {
-  _keyExtractor = (item, index) => item.id.toString();
+  _keyExtractor = item => item.id.toString();
 
   _renderItem = ({ item }) => (
     <PlantProjectSnippet

@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions } from 'react-native';
 
 //Only take multiple of 10s
 const squareDimension =

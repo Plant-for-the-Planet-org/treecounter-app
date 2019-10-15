@@ -24,7 +24,7 @@ class SelectedPlantProjectContainer extends Component {
     //  this.props.selectPlantProjectAction(1);
   }
 
-  onTabChange(title) {
+  onTabChange(/* title */) {
     // this.props.navigation.setParams({ titleParam: title });
   }
   selectProject(id) {

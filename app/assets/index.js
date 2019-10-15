@@ -140,12 +140,16 @@ import greencalendar from './images/greencalendar.png';
 import location_grey from './images/icons/location_grey.png';
 import survival_grey from './images/icons/survival_grey.png';
 import tax_grey from './images/icons/tax_grey.png';
-
+import worldImg from './images/icons/world.png';
+import germany from './images/germany.png';
 import googlePlayBadge_en from './images/en/google-play-badge.png';
 import googlePlayBadge_de from './images/de/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
+
 export {
+  germany,
+  worldImg,
   mapCollapse,
   mapExpand,
   tpoIcon,

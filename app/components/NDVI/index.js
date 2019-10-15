@@ -119,7 +119,7 @@ export default class NDVI extends Component {
     return `rgb(${color.join(',')})`;
   };
 
-  onClickRefresh = props => {
+  onClickRefresh = () => {
     this.props.refresh && this.props.refresh();
   };
 

@@ -10,8 +10,7 @@
   "heading_payment": "Payment",
   "no_of_trees": "Number of Trees",
   "trees": "Trees",
-  "gift_trees_description":
-    "Select a person for whom you want to donate trees. Trees you then donate will appear in the recipients tree-counter as well as your own. If the recipient does not yet have a tree-counter, (s)he will receive an email-invitation to join in.",
+  "gift_trees_description": "Gift trees to friends or other contacts! Each tree you give appears in both your own and the recipient's tree counter. If they don't have a tree counter yet, we will invite them to plant with us via e-mail!",
   "gift_message": "Gift Message (Optional)",
   "support_user_trees": "Supporting {{user}} to plant {{count}} trees",
   "gift_user_trees": "Gifting {{count}} trees to  {{user}}",

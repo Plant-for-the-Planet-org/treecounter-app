@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Image } from 'react-native';
+import { Image } from 'react-native';
 import { gift_icon } from '../../assets';
 import TouchableItem from '../Common/TouchableItem.native';
 import styles from '../../styles/public-page';
 
-const SupportButton = ({ active, isUserLoggedIn, onRegisterSupporter }) => {
+const SupportButton = ({ onRegisterSupporter }) => {
   return (
     <TouchableItem
       activeOpacity={0.6}

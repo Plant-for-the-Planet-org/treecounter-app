@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { getAllPlantProjectsSelector } from '../../selectors';
 import UserContributionsDetails from '../../components/UserContributions/ContributionDetails/index.native';
-import _ from 'lodash';
 // Actions
 import { currentUserProfileIdSelector } from '../../selectors/index';
 import { deleteContribution } from '../../actions/EditMyTree';

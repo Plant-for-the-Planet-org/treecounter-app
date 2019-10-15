@@ -15,7 +15,7 @@ export default class EmailSent extends Component {
         <CardLayout>
           <img src={GreenEmail} />
           <div className={'gap'} />
-          <TextBlock strong={true}>{i18n.t('label.mail_sent')}</TextBlock>
+          <TextBlock strong>{i18n.t('label.mail_sent')}</TextBlock>
           <div className={'gap'} />
           <TextBlock>{i18n.t('label.secure_link')}</TextBlock>
           <div className={'gap'} />

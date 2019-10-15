@@ -34,7 +34,9 @@ export default class SignUp extends Component {
           gBatch[0].style.visibility = 'visible';
         }
       },
-      onError: e => {}
+      onError: e => {
+        console.log(e);
+      }
     });
   }
 

@@ -7,8 +7,6 @@ import ImagePicker from 'react-native-image-picker';
 import i18n from '../../locales/i18n';
 
 export function ProfileImagePickerTemplate(locals) {
-  let { category, variant } = locals.config || {};
-
   const options = {
     title: i18n.t('label.add_image_title'),
     cancelButtonTitle: i18n.t('label.cancel'),
@@ -30,22 +28,24 @@ export function ProfileImagePickerTemplate(locals) {
   return (
     <View style={styles.filePickerContainer}>
       <TouchableOpacity
-        onPress={event => {
-          ImagePicker.showImagePicker(options, response => {
-            // console.log('Response = ', response);
+        onPress={
+          (/* event */) => {
+            ImagePicker.showImagePicker(options, response => {
+              // console.log('Response = ', response);
 
-            if (response.didCancel) {
-              //console.log('User cancelled image picker');
-            } else if (response.error) {
-              //console.log('ImagePicker Error: ', response.error);
-            } else if (response.customButton) {
-              // console.log('User tapped custom button: ', response.customButton);
-            } else {
-              let source = { uri: response.uri };
-              locals.onChange('data:image/jpeg;base64,' + response.data);
-            }
-          });
-        }}
+              if (response.didCancel) {
+                //console.log('User cancelled image picker');
+              } else if (response.error) {
+                //console.log('ImagePicker Error: ', response.error);
+              } else if (response.customButton) {
+                // console.log('User tapped custom button: ', response.customButton);
+              } else {
+                // let source = { uri: response.uri };
+                locals.onChange('data:image/jpeg;base64,' + response.data);
+              }
+            });
+          }
+        }
       >
         <UserProfileImage profileImage={locals.value} />
         <View style={styles.profileImageBackground}>

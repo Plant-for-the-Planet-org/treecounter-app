@@ -7,7 +7,7 @@ const UserHomepageLink = ({ caption, homepageUrl }) => {
   return homepageUrl ? (
     <div className="tree-counter-home-page-link">
       <img src={link} className="material-icons" />
-      <a href={homepageUrl} target="_blank">
+      <a href={homepageUrl} target="_blank" rel="noopener noreferrer">
         {caption || i18n.t('label.read_more')}
       </a>
     </div>

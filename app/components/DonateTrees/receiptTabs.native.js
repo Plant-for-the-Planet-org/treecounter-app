@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+/* eslint-disable no-underscore-dangle */
+import React from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import t from 'tcomb-form-native';
 import {
   receiptCompanyFormSchema,
@@ -79,7 +80,6 @@ export default class RecieptTabsView extends React.PureComponent {
     return (
       <TabBar
         {...props}
-        indicatorStyle={styles.indicator}
         style={styles.tabBar}
         tabStyle={{ width: 200 }}
         labelStyle={styles.textStyle}
@@ -127,7 +127,7 @@ export default class RecieptTabsView extends React.PureComponent {
       <View style={{ flex: 1, marginBottom: 40 }}>
         <TabView
           ref={this.tabView}
-          useNativeDriver={true}
+          useNativeDriver
           navigationState={this.state}
           renderScene={this._renderSelectPlantScene}
           renderTabBar={this._renderTabBar}

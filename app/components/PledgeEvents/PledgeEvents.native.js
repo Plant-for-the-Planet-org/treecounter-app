@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Dimensions,
-  StyleSheet,
-  Image
-} from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
-import LoadingIndicator from '../Common/LoadingIndicator';
 import PledgeTabView from './PledgeTabView.native';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import { bindActionCreators } from 'redux';
@@ -95,24 +85,27 @@ class PledgeEvents extends Component {
           this.props.pledges.pledgeEventImages &&
           this.props.pledges.pledgeEventImages.length > 0 ? (
             <ScrollView
-              horizontal={true}
+              horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.peSliderScrollView}
             >
               {/* {pledgeImages} */}
-              {this.props.pledges.pledgeEventImages.map(pledgeImage => (
-                <Image
-                  style={styles.peSliderImage}
-                  source={{
-                    uri: getImageUrl(
-                      'eventGallery',
-                      'default',
-                      pledgeImage.image
-                    )
-                  }}
-                  resizeMode="contain"
-                />
-              ))}
+              {this.props.pledges.pledgeEventImages.map(
+                (pledgeImage, index) => (
+                  <Image
+                    key={`pledgeImage-${index}`}
+                    style={styles.peSliderImage}
+                    source={{
+                      uri: getImageUrl(
+                        'eventGallery',
+                        'default',
+                        pledgeImage.image
+                      )
+                    }}
+                    resizeMode="contain"
+                  />
+                )
+              )}
             </ScrollView>
           ) : null}
           <CardLayout style={styles.peDescriptionView}>

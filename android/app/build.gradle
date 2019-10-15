@@ -104,8 +104,8 @@ android {
         applicationId "org.pftp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 15
-        versionName "1.0.8"
+        versionCode 17
+        versionName "1.1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
@@ -153,6 +153,7 @@ android {
 dependencies {
     implementation project(':react-native-vector-icons')
     //implementation project(':react-native-paypal-wrapper')
+    implementation project(':@react-native-community_async-storage')
     implementation project(':react-native-linear-gradient')
     implementation project(':bugsnag-react-native')
     implementation project(':react-native-youtube')

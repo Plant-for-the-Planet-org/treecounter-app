@@ -34,17 +34,18 @@ class PlantedProgressBar extends React.Component {
     } else {
       treeCountWidth = treePlantedRatio * 100;
     }
-
+    const colors = { backgroundColor: '#b9d384', borderColor: '#b9d384' };
     return (
       <View style={[styles.treeCounterContainer, style]}>
         <View style={styles.treePlantedContainer}>
           <View
-            style={styles.treePlantedChildContainer}
             style={
               treeCountWidth > 0
                 ? {
-                    backgroundColor: EStyleSheet.value('$newPrimary'),
-                    borderColor: '#b9d384',
+                    height: '100%',
+                    flexDirection: 'row',
+                    backgroundColor: colors.backgroundColor,
+                    borderColor: colors.borderColor,
                     width: treeCountWidth + '%',
                     paddingRight: 10,
                     padding: 5,

@@ -31,7 +31,7 @@ class SearchBar extends React.Component {
         <div className="search-bar">
           <SearchAutosuggest
             onSuggestionClicked={this.suggestionClicked}
-            clearSuggestions={true}
+            clearSuggestions
           />
           <i className="material-icons search-icon">{'search'}</i>
         </div>

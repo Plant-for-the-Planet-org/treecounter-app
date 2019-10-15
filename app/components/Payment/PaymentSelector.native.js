@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 // @flow
 /* eslint-disable no-console, react/no-multi-comp */
 import React from 'react';
@@ -228,6 +229,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
     let arr = [];
     for (let key in paymentMethods) {
       let obj = {};
+      // eslint-disable-next-line no-prototype-builtins
       if (accounts.hasOwnProperty(paymentMethods[key])) {
         obj.key = key;
         obj.value = accounts[paymentMethods[key]];

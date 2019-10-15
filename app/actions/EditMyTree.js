@@ -88,7 +88,7 @@ export function deleteContribution(plantContributionId) {
 
           reject(err);
         })
-        .finally(data => {
+        .finally(() => {
           dispatch(setProgressModelState(false));
         });
     });

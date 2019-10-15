@@ -52,8 +52,8 @@ class PlantProjectSnippet extends PureComponent {
     } = this.props.plantProject;
     let projectImage = null;
     let plantProjectRating = 4.2;
-    let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
-    treePlantedRatio = parseFloat(treePlantedRatio);
+    // let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
+    // treePlantedRatio = parseFloat(treePlantedRatio);
     // let treeCountWidth;
     // if (treePlantedRatio > 1) {
     //   treeCountWidth = 100;

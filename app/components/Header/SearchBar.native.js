@@ -1,12 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
-import {
-  LayoutAnimation,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  Image
-} from 'react-native';
+import { LayoutAnimation, Text, TextInput, View, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import { iosSearchGreen } from '../../assets';
@@ -39,7 +33,9 @@ class SearchBar extends React.PureComponent {
   componentDidMount() {
     if (!this.props.dontFocus) {
       requestAnimationFrame(() => {
-        this._textInput.focus();
+        if (this._textInput) {
+          this._textInput.focus();          
+        }
       });
     }
     if (this.props.style) {
@@ -113,7 +109,6 @@ class SearchBar extends React.PureComponent {
             clearButtonMode="while-editing"
             onChangeText={this._handleChangeText}
             value={inputValue}
-            autoCapitalize="none"
             autoCorrect={false}
             returnKeyType="search"
             placeholder={this.props.placeholderValue}

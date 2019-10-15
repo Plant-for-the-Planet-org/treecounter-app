@@ -60,7 +60,7 @@ class PlantProjectImageCarousel extends Component {
             renderContent={this.renderImage}
           >
             {this.props.images.map(url => (
-              <View style={styles.imageContainer}>
+              <View key={`viewof-${url}`} style={styles.imageContainer}>
                 <Image
                   style={styles.image}
                   key={url.image}
@@ -83,17 +83,18 @@ PlantProjectImageCarousel.propTypes = {
 PlantProjectImageCarousel.defaultProps = {
   pictureType: 'project'
 };
+const textColor = 'white';
 const styles = StyleSheet.create({
   container: {
     flex: 1
   },
   closeText: {
-    color: 'white',
+    color: textColor,
     textAlign: 'right',
     padding: 10
   },
   footerText: {
-    color: 'white',
+    color: textColor,
     textAlign: 'center'
   },
   imageContainer: {

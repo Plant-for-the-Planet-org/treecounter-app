@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -49,22 +50,20 @@ class AppDrawerNavigatorContainer extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     //If there is no change in the user login state then don't re-render the component
     if (
-      this.props.progressModel === nextProps.progressModel &&
-      ((nextState.loading === this.state.loading &&
+      (nextState.loading === this.state.loading &&
         nextState.isLoggedIn === this.state.isLoggedIn &&
         (!nextProps.userProfile && !this.props.userProfile)) ||
-        (nextProps.userProfile &&
-          this.props.userProfile &&
-          nextProps.userProfile.id === this.props.userProfile.id))
+      (nextProps.userProfile &&
+        this.props.userProfile &&
+        nextProps.userProfile.id === this.props.userProfile.id)
     ) {
       return false;
     }
-    if (this.props.progressModel === nextProps.progressModel) {
-      this._AppNavigator = getAppNavigator(
-        nextState.isLoggedIn,
-        nextProps.userProfile
-      );
-    }
+    // shouldComponentUpdate should be pure !!
+    this._AppNavigator = getAppNavigator(
+      nextState.isLoggedIn,
+      nextProps.userProfile
+    );
     return true;
   }
   async componentWillMount() {
@@ -102,7 +101,7 @@ class AppDrawerNavigatorContainer extends Component {
       return (
         <View style={{ flex: 1 }}>
           <this._AppNavigator />
-          {this.props.progressModel ? <ProgressModal modalVisible /> : null}
+          <ProgressModal />
         </View>
       );
     }
@@ -112,7 +111,6 @@ class AppDrawerNavigatorContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     loadUserProfile: PropTypes.func,
-    progressModel: PropTypes.bool,
     fetchpledgeEventsAction: PropTypes.func
   };
 }
@@ -120,8 +118,7 @@ class AppDrawerNavigatorContainer extends Component {
 const mapStateToProps = state => {
   return {
     appDrawer: state.appDrawer,
-    userProfile: currentUserProfileSelector(state),
-    progressModel: state.modelDialogState.progressModel
+    userProfile: currentUserProfileSelector(state)
   };
 };
 

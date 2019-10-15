@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+// import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import * as images from '../../assets';
 // import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';

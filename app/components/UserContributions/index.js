@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import ContributionCardList from './ContributionCardList';
 import i18n from '../../locales/i18n.js';
 
-// eslint-disable-next-line no-unused-vars
 const UserContributions = ({
+  // eslint-disable-next-line no-unused-vars
   userProfileId,
   userContributions,
   deleteContribution,

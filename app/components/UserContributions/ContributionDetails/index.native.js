@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import NDVI from '../../../containers/NDVI/NDVI';
 import UserContributions from '../../UserContributions/userContribution.native';
 import Measurements from '../../Measurements/Measurements.native';
-import moment from 'moment';
-import { getDateFromMySQL } from '../../../helpers/utils';
+import { formatDate } from '../../../utils/utils';
 import i18n from '../../../locales/i18n.js';
 import { withNavigation } from 'react-navigation';
 import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCarousel';
@@ -48,7 +47,7 @@ class UserContributionsDetails extends React.Component {
     let selectedPlantProjectDetails = undefined;
 
     if (plantDate) {
-      plantedDate = moment(getDateFromMySQL(plantDate)).format('MMMM DD, YYYY');
+      plantedDate = formatDate(plantDate);
     }
     if (contributionType === 'planting') {
       contributionTypeText = i18n.t('label.usr_contribution_planted');
@@ -87,9 +86,7 @@ class UserContributionsDetails extends React.Component {
       dedicatedTo = i18n.t('label.label.gifted_from_person', { person: givee });
     }
     if (redemptionCode && givee) {
-      plantedDate = moment(getDateFromMySQL(redemptionDate)).format(
-        'MMMM DD, YYYY'
-      );
+      plantedDate = formatDate(redemptionDate);
       if (plantProjectName) {
         location = `${plantProjectName} by ${tpoName ? tpoName : ''}`;
       }

@@ -3,8 +3,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default EStyleSheet.create({
   carousalContainer: { flexDirection: 'column' },
   descriptionContainer: {
-    paddingTop: 20,
-    paddingLeft: 5,
+    paddingTop: 15,
+    paddingLeft: 15,
     paddingRight: 5,
     borderRadius: 5,
     borderWidth: 1,
@@ -31,7 +31,8 @@ export default EStyleSheet.create({
   linkText: { alignSelf: 'flex-end', color: '$colorPrimaryAccent' },
   videoContainer: {
     borderRadius: 5,
-    borderWidth: 0.2,
-    borderColor: '#d5d5d5'
+    borderWidth: 1,
+    borderColor: '#d5d5d5',
+    padding: 5
   }
 });

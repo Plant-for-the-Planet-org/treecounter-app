@@ -43,7 +43,8 @@ class PlantProjectSnippet extends PureComponent {
       paymentSetup,
       survivalRate,
       // images,
-      imageFile
+      imageFile,
+      reviewScore: plantProjectRating
       // description,
       // homepageUrl: homepageUrl,
       // homepageCaption: homepageCaption,
@@ -51,7 +52,6 @@ class PlantProjectSnippet extends PureComponent {
       // geoLocation
     } = this.props.plantProject;
     let projectImage = null;
-    let plantProjectRating = 4.2;
     // let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
     // treePlantedRatio = parseFloat(treePlantedRatio);
     // let treeCountWidth;
@@ -122,7 +122,8 @@ class PlantProjectSnippet extends PureComponent {
                     style={{
                       width: 15,
                       height: 15,
-                      marginLeft: 5
+                      marginLeft: 2,
+                      marginRight: 3
                     }}
                   />
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -131,13 +132,14 @@ class PlantProjectSnippet extends PureComponent {
                         {
                           fontSize: 14,
                           // lineHeight: 19,
-                          color: {textColor},
+                          color: { textColor },
                           textAlign: 'center',
-                          marginRight: 5
+                          marginRight: 5,
+                          marginLeft: 2
                         }
                       ]}
                     >
-                      {plantProjectRating}
+                      {(plantProjectRating / 100).toFixed(2) || '0.0'}
                     </Text>
                     {starIcon}
                   </View>
@@ -145,6 +147,7 @@ class PlantProjectSnippet extends PureComponent {
               ) : null}
             </View>
           ) : null}
+
           <PlantedProgressBar
             countPlanted={specsProps.countPlanted}
             countTarget={specsProps.countTarget}

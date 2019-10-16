@@ -22,14 +22,13 @@ export default EStyleSheet.create({
   projectSnippetContainer: {
     flexDirection: 'column',
 
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 3
-    // },
-    // shadowOpacity: 0.5,
-    // elevation: 1,
-    // padding: 0,
-    borderRadius: 7
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 0,
+    borderWidth: 0,
+    borderColor: 'red'
   },
   projectImageContainer: {
     height: Layout.window.width * 0.4,
@@ -64,7 +63,14 @@ export default EStyleSheet.create({
   projectSpecsContainer: {
     width: '100%',
     padding: 16,
-    paddingLeft: 0
+    paddingLeft: 15,
+    borderWidth: 1,
+    borderColor: '#d5d5d5',
+    borderTopWidth: 0,
+    position: 'relative',
+    top: -3,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5
   },
   treeCounterContainer: {
     flexDirection: 'row',
@@ -89,9 +95,9 @@ export default EStyleSheet.create({
   treePlantedChildContainer: {
     height: '100%',
     flexDirection: 'row',
-    backgroundColor: '#b9d384',
-    borderRightColor: '#b9d384',
-    borderBottomLeftRadius: 7
+    backgroundColor: '#79b805', //b9d384',
+    borderRightColor: '#79b805',
+    borderBottomLeftRadius: 4
   },
   treePlantedtext: {
     // padding: 5,

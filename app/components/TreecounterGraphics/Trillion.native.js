@@ -8,26 +8,26 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
-
 import NavigationEvents from './importNavigationEvents';
-
 import { trillionCampaign } from '../../actions/trillionAction';
-
 import SvgContainer from '../Common/SvgContainer';
 import svgStyles from '../../styles/common/treecounter_svg';
 import styles from '../../styles/trillion.native';
-import { pledgeEventSelector } from '../../selectors';
+import { pledgeEventSelector, entitiesSelector } from '../../selectors';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n';
 import { bindActionCreators } from 'redux';
-import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import Leaderboard from '../../containers/Leaderboard';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { getLocalRoute } from '../../actions/apiRouting';
-import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
+import {
+  fetchpledgeEventsAction,
+  fetchPublicPledgesAction
+} from '../../actions/pledgeEventsAction';
 import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import { currentUserProfileSelector } from './../../selectors';
 
@@ -42,30 +42,38 @@ import tabStyles from '../../styles/common/tabbar';
 import { saveItem, fetchItem } from '../../stores/localStorage.native';
 import Constants from '../../utils/const';
 import { getImageUrl } from '../../actions/apiRouting';
-import FeaturedProject from './FeaturedProjectScroll/FeaturedProject';
+import FeaturedProject from './FeaturedProjectScroll/Events.native';
+import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
+
+import moment from 'moment';
+import { getLocale } from './../../actions/getLocale';
+
+// async function getLocalStorageItem() {
+//   let pledgesArray = await fetchItem('pledgedEvent');
+//   console.log('getting pledges array');
+//   //console.log(pledgesArray);
+//   return pledgesArray;
+// }
 
 class Trillion extends PureComponent {
   constructor() {
     super();
+    moment.locale(getLocale());
+
     this.state = {
       svgData: null,
       displayName: '',
-      pledgedEvents2: [],
-      allPledgeEvents: [],
       loading: true,
       loadSvg: true,
       routes: [
         { key: 'world', title: i18n.t('label.world') },
         { key: 'leaderBoard', title: i18n.t('label.leaderboard') }
       ],
-      index: 0
+      index: 0,
+      userPledges: {}
     };
   }
   componentDidMount() {
-    // this.props.fetchpledgeEventsAction();
-    // pledgedEvents2 = this.props.pledgeEvents;
-    // console.log(pledgedEvents2);
-
     trillionCampaign()
       .then(({ data }) => {
         const svgData = {
@@ -101,24 +109,23 @@ class Trillion extends PureComponent {
         });
       });
 
-    // this.setFeaturedEvents();
-
     this.props.fetchpledgeEventsAction();
-    // pledgedEvents2 = this.props.pledgeEvents;
-  }
 
-  onMoreClick(id, name) {
-    this.props.selectPlantProjectAction(id);
-    const { navigation } = this.props;
-    //console.log('OnMore');
-    updateRoute('app_selectProject', navigation, null, { titleParam: name });
+    if (this.props.userProfile) {
+      console.log('User Logged in');
+    } else {
+      fetchItem('pledgedEvent').then(data => {
+        if (typeof data !== 'undefined' && data.length > 0) {
+          let stringPledges = JSON.parse(data);
+          stringPledges = stringPledges.toString();
+          this.props.fetchPublicPledgesAction(stringPledges);
+          this.setState({
+            userPledges: this.props.entities.eventPledge
+          });
+        }
+      });
+    }
   }
-
-  onSelectClickedFeaturedProjects = id => {
-    this.props.selectPlantProjectAction(id);
-    const { navigation } = this.props;
-    updateStaticRoute('app_donate_detail', navigation);
-  };
 
   _handleIndexChange = index => {
     this.setState({ index });
@@ -139,8 +146,8 @@ class Trillion extends PureComponent {
   _renderScreen = ({ route }) => {
     const { navigation /* , userProfile, isLoggedIn */ } = this.props;
     const backgroundColor = 'white';
-    // console.log(this.props.pledgeEvents);
 
+    // console.log(this.props.pledgeEvents);
     switch (route.key) {
       case 'world': {
         return this.state.loading ? (
@@ -213,6 +220,46 @@ class Trillion extends PureComponent {
               </View>
               {/* Featured events horizontal ScrollView Ended */}
 
+              {/*  Unfulfilled Pledge Events horizontal ScrollView */}
+              {this.props.entities.eventPledge ? (
+                <View>
+                  <View style={{ marginTop: 25, marginLeft: 16 }}>
+                    <Text style={styles.trillionTreeEventTitle}>
+                      {i18n.t('label.unfulfilledPledgesTitle')}
+                    </Text>
+                  </View>
+                  <View style={{ marginTop: 16 }}>
+                    <ScrollView
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                      contentContainerStyle={{ paddingRight: 20 }}
+                    >
+                      {console.log(this.props.entities.eventPledge)}
+                      {Object.values(this.props.entities.eventPledge).map(
+                        unfulfilledEvent =>
+                          unfulfilledEvent.status === 'pending' ? (
+                            <TouchableOpacity
+                              key={unfulfilledEvent.token}
+                              onPress={() => {
+                                updateStaticRoute(
+                                  'app_unfulfilled_pledge_events',
+                                  navigation,
+                                  {
+                                    unfulfilledEvent: unfulfilledEvent
+                                  }
+                                );
+                              }}
+                            >
+                              <UnfulfilledEvents event={unfulfilledEvent} />
+                            </TouchableOpacity>
+                          ) : null
+                      )}
+                    </ScrollView>
+                  </View>
+                </View>
+              ) : null}
+              {/* Unfulfilled Pledge Events horizontal ScrollView Ended */}
+
               {/* Tree Counter SVG */}
               <View style={svgStyles.svgContainer}>
                 <SvgContainer {...this.state.svgData} trillion />
@@ -227,6 +274,7 @@ class Trillion extends PureComponent {
                   {i18n.t('label.trillionTreeMessage2')}
                 </Text>
               </CardLayout>
+
               {/* {userProfile && userProfile.type === 'tpo' ? (
                 <CardLayout
                   style={[
@@ -337,19 +385,22 @@ class Trillion extends PureComponent {
 
 const mapStateToProps = state => ({
   pledgeEvents: pledgeEventSelector(state),
-  userProfile: currentUserProfileSelector(state)
+  userProfile: currentUserProfileSelector(state),
+  entities: entitiesSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { fetchpledgeEventsAction, loadUserProfile },
+    { fetchpledgeEventsAction, loadUserProfile, fetchPublicPledgesAction },
     dispatch
   );
 };
 
 Trillion.propTypes = {
   pledgeEvents: PropTypes.object.isRequired,
-  navigation: PropTypes.any
+  navigation: PropTypes.any,
+  fetchpledgeEventsAction: PropTypes.func,
+  fetchPublicPledgesAction: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trillion);

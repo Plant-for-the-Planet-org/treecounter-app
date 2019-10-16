@@ -15,7 +15,7 @@ import {
 } from '../../actions/pledgeAction';
 import { pledgesSelector, pledgeEventSelector } from '../../selectors';
 import RBSheet from 'react-native-raw-bottom-sheet';
-
+import LoadingIndicator from './../Common/LoadingIndicator';
 class PledgeEvents extends Component {
   state = {
     loading: true,
@@ -31,6 +31,11 @@ class PledgeEvents extends Component {
       this.RBSheet.open();
       this.props.navigation.getParam('plantProject').id = -1;
     }
+    if (this.props.pledges && this.props.pledges.image && this.state.loading) {
+      this.setState({
+        loading: false
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -39,7 +44,9 @@ class PledgeEvents extends Component {
 
   render() {
     const { navigation } = this.props;
-    return (
+    return this.state.loading ? (
+      <LoadingIndicator />
+    ) : (
       <View style={styles.peRootView}>
         <ScrollView contentContainerStyle={styles.peRootScrollView}>
           <View style={styles.peHeader}>
@@ -164,6 +171,17 @@ class PledgeEvents extends Component {
               <TouchableOpacity
                 style={styles.baLaterButton}
                 onPress={() => {
+                  let unfulfilledEvent = {
+                    eventSlug: this.props.pledges.slug,
+                    treeCount: this.props.navigation.getParam('treeCount')
+                  };
+                  updateStaticRoute(
+                    'app_unfulfilled_pledge_events',
+                    this.props.navigation,
+                    {
+                      unfulfilledEvent: unfulfilledEvent
+                    }
+                  );
                   this.RBSheet.close();
                 }}
               >
@@ -186,6 +204,23 @@ class PledgeEvents extends Component {
             </View>
           </View>
         </RBSheet>
+
+        {/* <View style={styles.bottomButtonView}>
+          <View style={styles.leftSection}>
+            <Text style={styles.pledgeTreesAmount}>500 Trees Planted</Text>
+            <Text style={styles.pledgeTreesAction}>View my trees</Text>
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              updateStaticRoute('app_donate_detail2', this.props.navigation);
+            }}
+          >
+            <View style={styles.continueButtonView}>
+              <Icon name="arrow-right" size={30} color="#fff" />
+              <Text style={styles.continueText}>Plant More</Text>
+            </View>
+          </TouchableOpacity>
+        </View> */}
       </View>
     );
   }

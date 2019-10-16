@@ -83,9 +83,20 @@ class EditUserProfileContainer extends React.Component {
     );
     this.props
       .deleteUserProfile(this.props.currentUserProfile.id)
-      .then(data => {
-        console.log(data);
+      .then((/* data */) => {
+        NotificationManager.success(
+          `${i18n.t('label.deleted_success')}`,
+          i18n.t('label.success'),
+          5000
+        );
         this.props.logoutUser();
+      })
+      .catch(error => {
+        NotificationManager.error(
+          error.message,
+          i18n.t('label.error_title'),
+          5000
+        );
       });
   };
 

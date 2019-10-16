@@ -12,6 +12,7 @@
   "gallery": "Image Gallery",
   "video": "Video",
   "updated_successful": "Updated successful",
+  "deleted_success": "User profile deleted successfully",
   "error_title": "Profile update failed",
   "plant_project_update_success": "Plant Project updated successfully",
   "plant_project_delete_success": "Plant Project deleted successfully",

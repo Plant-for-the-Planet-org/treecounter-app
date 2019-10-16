@@ -3,7 +3,7 @@ import { Text, View, Image } from 'react-native';
 import styles from '../../../styles/trillion.native';
 import { greencalendar } from './../../../assets/';
 import { smalltree } from './../../../assets/';
-import moment from 'moment';
+import { formatDate } from '../../../utils/utils';
 
 export default class UnfulfilledEvents extends Component {
   render() {
@@ -37,7 +37,7 @@ export default class UnfulfilledEvents extends Component {
                   />
                   <Text style={styles.featuredProjectCardIconText}>
                     {this.props.event.lastIncremented
-                      ? moment(this.props.date).format('D MMM, YYYY')
+                      ? formatDate(this.props.date)
                       : null}
                   </Text>
                 </View>

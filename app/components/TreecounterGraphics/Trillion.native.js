@@ -45,9 +45,6 @@ import { getImageUrl } from '../../actions/apiRouting';
 import FeaturedProject from './FeaturedProjectScroll/Events.native';
 import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
 
-import moment from 'moment';
-import { getLocale } from './../../actions/getLocale';
-
 // async function getLocalStorageItem() {
 //   let pledgesArray = await fetchItem('pledgedEvent');
 //   console.log('getting pledges array');
@@ -58,7 +55,6 @@ import { getLocale } from './../../actions/getLocale';
 class Trillion extends PureComponent {
   constructor() {
     super();
-    moment.locale(getLocale());
 
     this.state = {
       svgData: null,

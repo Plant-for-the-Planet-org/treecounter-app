@@ -513,7 +513,7 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-redux",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-redux/LICENSE.md"
       },
-      "react-router-dom@4.3.1": {
+      "react-router-dom@5.1.2": {
         "licenses": "MIT",
         "repository": "https://github.com/ReactTraining/react-router",
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-router-dom",

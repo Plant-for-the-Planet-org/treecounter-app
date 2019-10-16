@@ -42,7 +42,7 @@ const customStyles = {
   },
   dropdownIndicator: provided => ({
     ...provided,
-    'padding-left': '0px'
+    paddingLeft: '0px'
   }),
   option: provided => ({
     ...provided,
@@ -60,7 +60,7 @@ const customStyles = {
     };
   },
   valueContainer: provided => {
-    return { ...provided, 'padding-left': '4px' };
+    return { ...provided, paddingLeft: '4px' };
   }
 };
 

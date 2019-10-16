@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { getLocalRoute } from '../../actions/apiRouting';
-import { successAnimated } from '../../assets';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import i18n from '../../locales/i18n';
 

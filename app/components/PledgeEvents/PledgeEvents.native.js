@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Dimensions,
-  StyleSheet,
-  Image
-} from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
-import LoadingIndicator from '../Common/LoadingIndicator';
 import PledgeTabView from './PledgeTabView.native';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import { bindActionCreators } from 'redux';

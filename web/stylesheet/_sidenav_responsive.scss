@@ -33,26 +33,57 @@ $breakpointTablet: 768px;
     margin-left: 0 !important;
   }
 }
-
-.bottom-banner {
+.badge-wrapper {
+  max-height: 100px;
+  max-width: 96%;
   display: flex;
-  padding: 3px;
-  align-self: flex-end;
-  flex-grow: 1;
-  margin-top: auto;
+  flex-wrap: wrap;
   position: relative;
   bottom: 0;
-  max-width: 100%;
+  margin:15px auto;
+  flex-direction: row;
   a {
-    max-width: 50%;
+    max-width: 100%;
     img {
       max-width: 99%;
       height: 36px;
     }
   }
-}
-@media only screen and (min-width: 1400px) {
-  .bottom-banner {
-    position: absolute;
+  .global-selector {
+    display: flex; 
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    margin-top: 4px;
+    // margin:8px;
+    margin-bottom: 4px;
+    box-sizing: border-box;
   }
+  .global-selector > div {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      padding: 2px;
+      box-sizing: border-box;
+      select{
+        height: 2.3rem;
+        width: 100%;
+        padding: 10px;
+      }
+  }
+.language, .currency { 
+  max-height: 40px;
+  width: 60%; 
+  border: 1px solid #686060;
+  border-radius: 9px;
+  box-sizing: border-box;
+  & > div{
+    margin:0px
+  }
+}
+  .currency {
+    margin-left: 8px;
+   width: 36%;
+  }
+
 }

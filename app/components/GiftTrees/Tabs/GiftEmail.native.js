@@ -6,7 +6,7 @@ import {
 import t from 'tcomb-form-native';
 import CardLayout from '../../Common/Card';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import { TextInput, View, Image, Text } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import { iosInformation } from '../../../assets';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import i18n from '../../../locales/i18n';

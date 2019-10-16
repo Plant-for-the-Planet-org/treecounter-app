@@ -1,5 +1,4 @@
 import { normalize } from 'normalizr';
-import { debug } from '../debug/index';
 
 import {
   postAuthenticatedRequest,
@@ -16,13 +15,12 @@ import {
 } from '../schemas/index';
 import {
   paymentSuccess,
-  paymentFailed,
   paymentCleared,
   donationCreation
 } from '../reducers/paymentStatus';
 
 export function fillCard() {
-  return dispatch => {
+  return (/* dispatch */) => {
     let request = getAuthenticatedRequest('stripe_customer', {
       version: 'v1.3'
     });
@@ -31,14 +29,16 @@ export function fillCard() {
 }
 
 export function attachCardToCostumer(paymentMethod) {
-  return dispatch => {
+  return (/* dispatch */) => {
     let request = postAuthenticatedRequest('stripe_paymentMethod_attach', {
       paymentMethod,
       version: 'v1.3'
     });
-    request.then(response => {
-      console.log('method attached');
-    });
+    request
+      .then(() => {
+        console.log('method attached');
+      })
+      .catch(error => console.log(error));
   };
 }
 
@@ -55,10 +55,15 @@ export function createPaymentDonation(plantProjectId, requestData, loggedIn) {
           version: 'v1.3'
         });
 
-    request.then(response => {
-      dispatch(donationCreation(response.data.merge));
-      dispatch(setProgressModelState(false));
-    });
+    request
+      .then(response => {
+        dispatch(donationCreation(response.data.merge));
+        dispatch(setProgressModelState(false));
+      })
+      .catch(error => {
+        console.log(error);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 
@@ -75,15 +80,20 @@ export function createPaymentGift(plantProjectId, requestData, loggedIn) {
           version: 'v1.3'
         });
 
-    request.then(response => {
-      dispatch(donationCreation(response.data.merge));
-      dispatch(setProgressModelState(false));
-    });
+    request
+      .then(response => {
+        dispatch(donationCreation(response.data.merge));
+        dispatch(setProgressModelState(false));
+      })
+      .catch(error => {
+        console.log(error);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 
 export function handlePay(donationId, requestData, loggedIn) {
-  return dispatch => {
+  return (/* dispatch */) => {
     requestData = { paymentProviderRequest: { ...requestData } };
     let request = loggedIn
       ? postAuthenticatedRequest('donationPay_post', requestData, {
@@ -111,17 +121,22 @@ export function finalizeDonation(donationId, loggedIn) {
           version: 'v1.3'
         });
 
-    request.then(response => {
-      const { contribution, treecounter, plantProject } = response.data.merge;
-      dispatch(mergeEntities(normalize(contribution, [contributionSchema])));
-      dispatch(mergeEntities(normalize(plantProject, [plantProjectSchema])));
-      if (treecounter) {
-        dispatch(mergeEntities(normalize(treecounter, [treecounterSchema])));
-      }
-      dispatch(paymentSuccess({ status: true, message: 'success' }));
+    request
+      .then(response => {
+        const { contribution, treecounter, plantProject } = response.data.merge;
+        dispatch(mergeEntities(normalize(contribution, [contributionSchema])));
+        dispatch(mergeEntities(normalize(plantProject, [plantProjectSchema])));
+        if (treecounter) {
+          dispatch(mergeEntities(normalize(treecounter, [treecounterSchema])));
+        }
+        dispatch(paymentSuccess({ status: true, message: 'success' }));
 
-      dispatch(setProgressModelState(false));
-    });
+        dispatch(setProgressModelState(false));
+      })
+      .catch(error => {
+        console.log(error);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 export function paymentClear() {

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
@@ -12,9 +13,7 @@ import {
 import i18n from '../../locales/i18n.js';
 import { renderFilledTabBar } from '../Common/Tabs';
 import RegisterTreeTab from './RegisterTreeTab.native';
-import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default class RegisterTrees extends Component {
   constructor() {
@@ -41,7 +40,7 @@ export default class RegisterTrees extends Component {
 
   _handleIndexChange = index => this.setState({ index });
 
-  handleGeoLocationChange(geoLocation) {
+  handleGeoLocationChange(/* geoLocation */) {
     //console.log(geoLocation);
   }
 

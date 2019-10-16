@@ -14,7 +14,7 @@ class PlantProjectCarousel extends React.Component {
   }
 
   render() {
-    const { plantProjects, contentTag, tpoName } = this.props;
+    const { plantProjects, tpoName } = this.props;
 
     const settings = {
       dots: true,
@@ -34,7 +34,7 @@ class PlantProjectCarousel extends React.Component {
     };
 
     // see: https://medium.com/@Carmichaelize/dynamic-tag-names-in-react-and-jsx-17e366a684e9
-    const TagName = contentTag;
+    // const TagName = contentTag;
 
     // add navigation buttons that will trigger calls to 'onChange' callback
     return (

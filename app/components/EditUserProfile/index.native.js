@@ -1,17 +1,14 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { TabView, TabBar } from 'react-native-tab-view';
-import { Text, View, ScrollView, Image } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import tabBarStyles from '../../styles/common/tabbar.native';
 import t from 'tcomb-form-native';
-import {
-  parsedSchema,
-  plantProjectSchema
-} from '../../server/parsedSchemas/editProfile';
+import { parsedSchema } from '../../server/parsedSchemas/editProfile';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
-import _ from 'lodash';
 import { ProfileImagePickerTemplate } from './ProfileImagePickerTemplate.native';
 import styles from '../../styles/edit_profile.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -19,7 +16,6 @@ import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import UserProfileImage from '../Common/UserProfileImage';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import TouchableItem from '../Common/TouchableItem.native';
-import { updateRoute } from '../../helpers/routerHelper';
 import { getLocalRoute } from '../../actions/apiRouting';
 
 const Form = t.form.Form;
@@ -96,7 +92,9 @@ export default class EditUserProfile extends Component {
         schemaOptions.fields.password.fields.first.error = schemaOptions.fields.password.fields.second.error = (
           <Text>{i18n.t('label.same_password_error')}</Text>
         );
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     } else if (profileType == 'image') {
       schemaOptions.fields.imageFile.template = ProfileImagePickerTemplate;
     } else if (profileType == 'profile') {
@@ -111,7 +109,7 @@ export default class EditUserProfile extends Component {
 
   _renderScene = ({ route }) => {
     const { onSave, currentUserProfile } = this.props;
-    const { type, treecounter: treeCounter } = currentUserProfile;
+    const { treecounter: treeCounter } = currentUserProfile;
     switch (route.key) {
       case 'basic':
         return (
@@ -121,7 +119,7 @@ export default class EditUserProfile extends Component {
             getFormSchemaOption={this.getFormSchemaOption}
           />
         );
-        break;
+      // break;
       case 'desc':
         return (
           <DescriptionTabView
@@ -164,7 +162,6 @@ export default class EditUserProfile extends Component {
                       <FollowLabelButton
                         label={i18n.t('label.unsubscribe')}
                         isSubscribed
-                        isLoggedIn={false}
                         onClick={() => {
                           this.props.unfollowUser(follow.id);
                         }}
@@ -192,8 +189,7 @@ export default class EditUserProfile extends Component {
             onSamePasswordErrorState={this.changePasswordErrorState}
           />
         );
-        break;
-        return null;
+      // break;
     }
   };
 

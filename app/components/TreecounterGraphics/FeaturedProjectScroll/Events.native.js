@@ -10,7 +10,6 @@ import { getLocale } from '../../../actions/getLocale';
 export default class FeaturedProject extends Component {
   constructor(props) {
     super(props);
-    moment.locale(getLocale());
   }
 
   render() {
@@ -55,9 +54,7 @@ export default class FeaturedProject extends Component {
               ) : null}
 
               <Text style={styles.featuredProjectCardIconText}>
-                {this.props.date
-                  ? moment(this.props.date).format('D MMM, YYYY')
-                  : null}
+                {this.props.date ? formatDate(this.props.date) : null}
               </Text>
             </View>
           </View>

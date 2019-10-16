@@ -1,13 +1,12 @@
+/* eslint-disable no-underscore-dangle */
 import React, { PureComponent } from 'react';
 import {
   ScrollView,
   Text,
   View,
   Dimensions,
-  Animated,
   Image,
-  TouchableOpacity,
-  StyleSheet
+  TouchableOpacity
 } from 'react-native';
 import NavigationEvents from './importNavigationEvents';
 import { trillionCampaign } from '../../actions/trillionAction';
@@ -20,10 +19,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n';
-import { getAllPlantProjectsSelector } from '../../selectors';
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
-import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import Leaderboard from '../../containers/Leaderboard';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -95,7 +92,7 @@ class Trillion extends PureComponent {
         saveItem(Constants.storageKeys.svgData, JSON.stringify(svgData));
       })
       .catch(error => {
-        //console.log(error);
+        console.log(error);
         fetchItem(Constants.storageKeys.svgData).then(svgData => {
           try {
             svgData = JSON.parse(svgData);
@@ -147,7 +144,7 @@ class Trillion extends PureComponent {
   };
 
   _renderScreen = ({ route }) => {
-    const { navigation, userProfile, isLoggedIn } = this.props;
+    const { navigation /* , userProfile, isLoggedIn */ } = this.props;
     const backgroundColor = 'white';
 
     // console.log(this.props.pledgeEvents);
@@ -359,12 +356,16 @@ class Trillion extends PureComponent {
     return [
       this.props.navigation ? (
         <NavigationEvents
-          onWillFocus={payload => {
-            this.setState({ loadSvg: true });
-          }}
-          onWillBlur={payload => {
-            this.setState({ loadSvg: false });
-          }}
+          onWillFocus={
+            (/* payload */) => {
+              this.setState({ loadSvg: true });
+            }
+          }
+          onWillBlur={
+            (/* payload */) => {
+              this.setState({ loadSvg: false });
+            }
+          }
           key="navigation-events"
         />
       ) : null,

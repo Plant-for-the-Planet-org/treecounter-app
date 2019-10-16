@@ -13,12 +13,7 @@ import { getDocumentTitle } from '../../helpers/utils';
 import { delimitNumbers } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
 
-import {
-  getProfileTypeName,
-  isMyself,
-  isUserFollower,
-  amISupporting
-} from './utils';
+import { isMyself, isUserFollower, amISupporting } from './utils';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 
 class PublicTreeCounter extends React.Component {

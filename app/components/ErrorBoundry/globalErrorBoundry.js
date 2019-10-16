@@ -4,10 +4,7 @@ import { info } from '../../assets';
 import { context } from '../../config';
 import i18n from '../../locales/i18n.js';
 import bugsnag from '@bugsnag/js';
-import {
-  name as app_name,
-  version as app_version
-} from '../../../package.json';
+import { version as app_version } from '../../../package.json';
 
 let bugsnagClient;
 if (context.bugsnagApiKey) {

@@ -2,7 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getPointPercentageOnGradient } from './NDVIfunctions/GradientUtils';
-import parseMonth from './NDVIfunctions/parseMonth';
+import { formatDate } from '../../utils/utils';
+import { formatDateToMySQL } from '../../helpers/utils';
 
 class GradientResultLine extends React.PureComponent {
   constructor(props) {
@@ -52,9 +53,16 @@ class GradientResultLine extends React.PureComponent {
 
     return (
       <div className="gradient-result-line-component">
-        <div className="title">{`${parseMonth(
-          props.selectedDataPoint.month - 1
-        )}, ${props.selectedDataPoint.year}`}</div>
+        <div className="title">{`${formatDate(
+          formatDateToMySQL(
+            new Date(
+              props.selectedDataPoint.year,
+              props.selectedDataPoint.month - 1,
+              1
+            )
+          ),
+          'LLLL yyyy'
+        )}`}</div>
         <div className="gradient-wrapper">
           {bgStyle &&
             selectedDataPoint.ndviAggregate.min &&

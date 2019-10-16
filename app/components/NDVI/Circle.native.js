@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../../styles/NDVI/Circle';
 import { getColorForNDVI } from './NDVIfunctions/GradientUtils';

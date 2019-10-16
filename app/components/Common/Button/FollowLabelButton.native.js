@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n';
 
 const FollowLabelButton = ({
-  isLoggedIn,
+  /* isLoggedIn, */
   isSubscribed,
   onClick,
   label = undefined

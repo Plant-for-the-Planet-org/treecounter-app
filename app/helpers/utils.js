@@ -40,7 +40,7 @@ export const handleServerResponseError = function(
     serverFormError &&
     serverFormError.response &&
     serverFormError.response.data;
-  if (data && data.code == 400 && data.hasOwnProperty('errors')) {
+  if (data && data.code == 400 && data['errors']) {
     let newOptions = _.cloneDeep(formSchemaOptions);
     for (let property in data.errors.children) {
       updateFormSchema(
@@ -137,15 +137,18 @@ export function objectToQueryParams(objectValue) {
 
 // credits to https://itnext.io/create-date-from-mysql-datetime-format-in-javascript-912111d57599
 export function getDateFromMySQL(dateTime) {
+  console.log('getDateFromMySQL', dateTime);
   if (dateTime) {
     let dateTimeParts = dateTime.split(/[- :]/);
     dateTimeParts[1]--; // monthIndex begins with 0 for January and ends with 11 for December so we need to decrement by one
     return new Date(...dateTimeParts);
+  } else {
+    return new Date();
   }
 }
 
-export function formatDate(date) {
-  console.log('formatDate', date);
+export function formatDateToMySQL(date) {
+  console.log('formatDateToMySQL', date);
 
   let dd = date.getDate();
   let mm = date.getMonth() + 1; //January is 0!

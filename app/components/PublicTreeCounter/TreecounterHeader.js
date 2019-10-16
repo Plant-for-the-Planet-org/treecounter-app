@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import UserProfileImage from '../Common/UserProfileImage';
 
@@ -12,7 +11,7 @@ const TreecounterHeader = ({
   profileType,
   logo,
   isUserFollowerBool,
-  isUserLoggedIn,
+  /* isUserLoggedIn, */
   showFollow,
   followChanged
 }) => {
@@ -39,7 +38,6 @@ const TreecounterHeader = ({
           {showFollow && (
             <FollowLabelButton
               isSubscribed={isUserFollowerBool}
-              isLoggedIn={isUserLoggedIn}
               onClick={() => followChanged()}
             />
           )}

@@ -24,6 +24,7 @@ import { getPostedPledges } from '../reducers/pledgeReducer';
 import { getPledgeEvents } from '../reducers/pledgeEventReducer';
 import { getPaymentStatus } from '../reducers/paymentStatus';
 import { getCurrencies } from '../reducers/currenciesReducer';
+import { getGlobalCurrency } from '../reducers/currencyReducer';
 import { getCompetitionDetail } from '../reducers/competitionDetailReducer';
 
 export const supportedTreecounterSelector = state =>
@@ -44,6 +45,7 @@ export const userFeedsSelector = state => getUserFeeds(state);
 export const pledgesSelector = state => getPledges(state);
 export const postedPledgesSelector = state => getPostedPledges(state);
 export const currenciesSelector = state => getCurrencies(state);
+export const getCurrency = state => getGlobalCurrency(state);
 export const paymentStatusSelector = state => getPaymentStatus(state);
 export const pledgeEventSelector = state => getPledgeEvents(state);
 export const selectedCompetitionIdSelector = state =>
@@ -80,7 +82,6 @@ export const getAllPlantProjectsSelector = createSelector(
   (plantProjects, entities, tpos) => {
     let normalisedProjects = Object.keys(plantProjects).reduce(
       (projects, id) => {
-        let projectsArray = [];
         projects.push(
           denormalize(plantProjects[id], plantProjectSchema, entities)
         );

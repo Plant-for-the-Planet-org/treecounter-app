@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
-import { tree } from '../../assets';
 import { Text, TextInput, View } from 'react-native';
 import styles from '../../styles/currencies/treeCounterSelector';
 import RadioForm, {
@@ -9,7 +8,6 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel
 } from 'react-native-simple-radio-button';
-import NumberFormat from '../Common/NumberFormat';
 import { formatNumber, delimitNumbers } from '../../utils/utils';
 
 class TreeCountSelector extends React.Component {
@@ -126,7 +124,7 @@ class TreeCountSelector extends React.Component {
                         obj.value === this.state.fixedTreeCount &&
                         this.state.isFixed
                       }
-                      onPress={(value, index) => {
+                      onPress={(value /* , index */) => {
                         this.handleFixedTreeCountChange(value);
                       }}
                     />
@@ -135,7 +133,7 @@ class TreeCountSelector extends React.Component {
                       index={i}
                       labelWrapStyle={styles.radio_label}
                       labelHorizontal
-                      onPress={(value, index) => {
+                      onPress={(value /* , index */) => {
                         this.handleFixedTreeCountChange(value);
                       }}
                     />
@@ -156,10 +154,11 @@ class TreeCountSelector extends React.Component {
                   </View>
                   <View style={styles.treecount_price_conversion_text_input}>
                     <Text style={{ width: '100%' }} key={treeCount}>
-                      <NumberFormat
-                        data={treeCountToAmount(treeCount)}
-                        currency={currency}
-                      />
+                      {formatNumber(
+                        treeCountToAmount(treeCount),
+                        null,
+                        currency
+                      )}
                     </Text>
                   </View>
                 </View>
@@ -187,7 +186,7 @@ class TreeCountSelector extends React.Component {
                       buttonInnerColor={'#ec6453'}
                       buttonOuterColor={'#ec6453'}
                       isSelected={!this.state.isFixed}
-                      onPress={(value, index) => {
+                      onPress={(value /* , index */) => {
                         this.handleVariableTreeCountSelected(value);
                       }}
                     />

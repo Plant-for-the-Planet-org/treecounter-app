@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../styles/selectplantproject/selectplantproject-spec';
-import { View, Text, Image, TouchableHighlight } from 'react-native';
+import { View, Text, Image } from 'react-native';
 // import Tooltips from 'react-native-tooltips';
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import i18n from '../../locales/i18n';
 class PlantProjectSpecsItem extends React.Component {
   _onPress(ref) {

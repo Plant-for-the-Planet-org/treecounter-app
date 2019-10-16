@@ -1,13 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  Keyboard
-} from 'react-native';
+import { Text, View, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
@@ -306,8 +299,6 @@ class MakePledgeForm extends Component {
     );
   }
 }
-
-// To Do - Replace form with Tcomb Form
 
 const mapStateToProps = state => ({
   userProfile: currentUserProfileSelector(state)

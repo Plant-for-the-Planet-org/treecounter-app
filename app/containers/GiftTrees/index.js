@@ -35,7 +35,6 @@ class GiftTreesContainer extends Component {
     }
   }
   openProjects(formValue, type) {
-    //  console.log('in gif tree', formValue);
     let title = '';
     if (formValue.firstname) {
       title = formValue.firstname + ' ' + formValue.lastname;
@@ -54,16 +53,20 @@ class GiftTreesContainer extends Component {
   }
 
   render() {
-    let flag = this.props.currentUserProfile ? true : false;
+    // let flag = this.props.currentUserProfile ? true : false;
     return [
       this.props.navigation ? (
         <NavigationEvents
-          onWillFocus={payload => {
-            this.setState({ reloadTab: true });
-          }}
-          onWillBlur={payload => {
-            this.setState({ reloadTab: false });
-          }}
+          onWillFocus={
+            (/* payload */) => {
+              this.setState({ reloadTab: true });
+            }
+          }
+          onWillBlur={
+            (/* payload */) => {
+              this.setState({ reloadTab: false });
+            }
+          }
           key="navigation-events"
         />
       ) : null,

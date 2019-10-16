@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { FlatList, View } from 'react-native';
@@ -6,7 +7,7 @@ import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectS
 import styles from '../../../styles/selectplantproject/list';
 
 export default class ListViewProjects extends PureComponent {
-  _keyExtractor = (item, index) => item.id.toString();
+  _keyExtractor = item => item.id.toString();
 
   _renderItem = ({ item }) => (
     <PlantProjectSnippet

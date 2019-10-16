@@ -26,10 +26,6 @@ import { getImageUrl } from '../../actions/apiRouting';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import { updateRoute } from '../../helpers/routerHelper';
 
-const plantProjectFormOptions = {
-  template: PlantProjectTemplate(),
-  ...plantProjectSchema.schemaOptions
-};
 let TCombForm = t.form.Form;
 const emptyProjectInfo = { name: '' };
 
@@ -74,7 +70,7 @@ export default class EditUserProfile extends React.Component {
     }
   };
 
-  mergeProjectImages(newPlantProjectImages, oldPlantProjectImages = []) {
+  mergeProjectImages(newPlantProjectImages) {
     if (!newPlantProjectImages) {
       return [];
     }
@@ -104,8 +100,7 @@ export default class EditUserProfile extends React.Component {
         delete value.imageFile;
       }
       let plantProjectImages = this.mergeProjectImages(
-        value.plantProjectImages,
-        plantProject.plantProjectImages
+        value.plantProjectImages
       );
       if (plantProject.id) {
         this.props.updatePlantProject({
@@ -201,11 +196,11 @@ export default class EditUserProfile extends React.Component {
     const updatedUserProfile = {
       ...this.props.currentUserProfile,
       synopsis1: `${
-        !!this.props.currentUserProfile.synopsis1
+        this.props.currentUserProfile.synopsis1
           ? this.props.currentUserProfile.synopsis1
           : ''
       }${
-        !!this.props.currentUserProfile.synopsis2
+        this.props.currentUserProfile.synopsis2
           ? ' ' + this.props.currentUserProfile.synopsis2
           : ''
       }`,
@@ -237,6 +232,7 @@ export default class EditUserProfile extends React.Component {
               type={parsedSchema[type].image.transformedSchema}
               options={parsedSchema[type].image.schemaOptions}
               value={updatedUserProfile}
+              // eslint-disable-next-line no-underscore-dangle
               onChange={value => (this._profileImageValue = value)}
             />
           </div>
@@ -253,7 +249,8 @@ export default class EditUserProfile extends React.Component {
                 type,
                 'profile',
                 undefined,
-                !!this._profileImageValue
+                // eslint-disable-next-line no-underscore-dangle
+                this._profileImageValue
               );
             }}
           >
@@ -356,7 +353,6 @@ export default class EditUserProfile extends React.Component {
                         <FollowLabelButton
                           label={i18n.t('label.unsubscribe')}
                           isSubscribed
-                          isLoggedIn={false}
                           onClick={() => this.props.unfollowUser(follow.id)}
                         />
                       </div>

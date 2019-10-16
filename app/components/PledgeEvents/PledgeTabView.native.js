@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView
-} from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import i18n from '../../locales/i18n';
 

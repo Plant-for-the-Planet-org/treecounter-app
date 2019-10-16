@@ -165,8 +165,9 @@
     .row-bronze{background-color: #f1c40f!important; span{color: #fff!important;}}
   }
   .pledges-header {
-    //background-color: #89b53a;
     padding: 16px;
+    padding-left: 0px;
+    padding-right: 0px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     flex-direction: row;
@@ -314,14 +315,8 @@
 .make-pledge-form-x{
   text-align: right;
   margin-bottom: 16px;
-  span{
-    font-size: 18px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.48;
-    letter-spacing: normal;
-    color: #4d5153;
-    font-weight: 400;
+  @include for-phone-only{
+    margin-top: 8px;
   }
   span:hover{
     cursor: pointer;
@@ -439,10 +434,10 @@
   @include for-phone-only{
     width: auto;
     top: 70px;
-    left: 10px;
-    right: 10px;
+    left: 0px;
+    right: 0px;
     bottom: 20px;
-    padding: 24px;
+    padding: 16px;
     transform: translate(0,0);
   }
 }
@@ -562,7 +557,10 @@
 }
 
 .close-button{
-  height: 18px;
+  height: 24px;
+  @include for-phone-only{
+    height: 16px;
+  }
 }
 
 .donate-pledge-button{

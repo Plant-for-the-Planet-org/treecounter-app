@@ -51,7 +51,8 @@ export default class Pledge extends Component {
       pledgeModalIsOpen: false, // Make a pledge Modal
       AllPledgesModalIsOpen: false, // All pledge modal
       IncreasePledgesModalIsOpen: false, // Increase pledge Modal
-      SubmitPledgeModalIsOpen: false, // Submit pledge Modal
+      SubmitPledgeModalIsOpen: false, // Later/continue after pledge Modal
+      SubmitUpdateModalIsOpen: false, //Later/continue after update pledge Modal
       loggedIn: false,
       loadUserPledges: true,
       myPledge: {},
@@ -126,12 +127,21 @@ export default class Pledge extends Component {
     this.setState({ IncreasePledgesModalIsOpen: false });
   };
 
-  // Functions for Submit Pledge Modal
+  // Functions for Later/Continue after Pledge Modal
   openSubmitPledgeModal = () => {
     this.setState({ SubmitPledgeModalIsOpen: true });
   };
   closeSubmitPledgeModal = () => {
     this.setState({ SubmitPledgeModalIsOpen: false });
+    setTimeout(window.location.reload.bind(window.location), 3000);
+  };
+
+  // Functions for Later/Continue after Update Modal
+  openSubmitUpdateModal = () => {
+    this.setState({ SubmitUpdateModalIsOpen: true });
+  };
+  closeSubmitUpdateModal = () => {
+    this.setState({ SubmitUpdateModalIsOpen: false });
     setTimeout(window.location.reload.bind(window.location), 3000);
   };
 
@@ -169,7 +179,7 @@ export default class Pledge extends Component {
       this.state.loggedIn
     );
     this.closeIncreasePledgesModal();
-    setTimeout(window.location.reload.bind(window.location), 3000);
+    this.openSubmitUpdateModal();
   };
 
   render() {
@@ -480,18 +490,19 @@ export default class Pledge extends Component {
               </div>
               <div className="make-pledge-form-para">
                 <p>
-                  {'To increase your pledge, please enter an amount higher than ' +
-                    myPledge[0].treeCount +
-                    ' trees. A tree costs ' +
-                    myPledge[0].plantProjectTreeCost +
-                    ' ' +
-                    myPledge[0].plantProjectCurrency +
-                    ' and are planted in ' +
-                    myPledge[0].plantProjectName}
+                  {i18n.t('label.increasePledgeMessage', {
+                    treeCount: delimitNumbers(parseInt(myPledge[0].treeCount)),
+                    treeCost: myPledge[0].plantProjectTreeCost,
+                    currency: myPledge[0].plantProjectCurrency,
+                    projectName: myPledge[0].plantProjectName
+                  })}
                 </p>
               </div>
 
-              <form onSubmit={this.onUpdatePledgeSubmit}>
+              <form
+                onSubmit={this.onUpdatePledgeSubmit}
+                style={{ display: 'flex', flexDirection: 'column' }}
+              >
                 <input
                   value={this.state.updatingTreeCount}
                   onChange={this.changeTreeCount}
@@ -501,9 +512,9 @@ export default class Pledge extends Component {
                 />
                 <input
                   type="submit"
-                  //onClick={() => this.onUpdatePledgeSubmit(myPledge[0].token)}
                   className="make-pledge-button-form"
                   value="Update Pledge"
+                  style={{ margin: 'auto', marginTop: '54px' }}
                 />
               </form>
             </Modal>
@@ -543,6 +554,40 @@ export default class Pledge extends Component {
             </div>
           </Modal>
           {/* Modal for showing Later Continue option ended  */}
+
+          {/* Modal for showing Later Continue option after Update */}
+          <Modal
+            isOpen={this.state.SubmitUpdateModalIsOpen}
+            onRequestClose={this.closeSubmitUpdateModal}
+            contentLabel="Pledge Modal"
+            overlayClassName="pledge-overlay"
+            className="submit-pledge-buttons-modal"
+          >
+            <div className="submit-pledge-container">
+              <div className="submit-pledge-form-para">
+                <p>
+                  {i18n.t('label.pledgeAddedMessage', {
+                    treeCount: this.state.updatingTreeCount
+                  })}
+                </p>
+              </div>
+              <div className="submit-pledge-buttons">
+                <div
+                  onClick={this.closeSubmitUpdateModal}
+                  className="submit-pledge-later-button"
+                >
+                  {i18n.t('label.pledgeAddedLaterButton')}
+                </div>
+                <Link
+                  to={getLocalRoute('app_donateTrees')}
+                  className="submit-pledge-donate-button"
+                >
+                  {i18n.t('label.pledgeAddedContinueButton')}
+                </Link>
+              </div>
+            </div>
+          </Modal>
+          {/* Modal for showing Later Continue option after Update ended  */}
         </div>
       </div>
     ) : null;

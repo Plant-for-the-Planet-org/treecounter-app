@@ -15,8 +15,7 @@ import {
 } from '../../actions/pledgeAction';
 import { pledgesSelector, pledgeEventSelector } from '../../selectors';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-
+import LoadingIndicator from './../Common/LoadingIndicator';
 class PledgeEvents extends Component {
   state = {
     loading: true,

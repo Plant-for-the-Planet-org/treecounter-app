@@ -2,18 +2,10 @@ import React, { Component } from 'react';
 import t from 'tcomb-form';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
-import {
-  pledge_highest,
-  pledge_latest,
-  nextArrow,
-  nextArrowWhite,
-  closeBlack
-} from '../../assets';
+import { nextArrow, nextArrowWhite, closeBlack } from '../../assets';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import { getDocumentTitle } from '../../helpers/utils';
 import { delimitNumbers } from '../../utils/utils';
-import Pulse from 'react-reveal/Pulse'; // Not being used currently
 import Modal from 'react-modal';
 import { fetchItem } from './../../stores/localStorage';
 import {
@@ -76,7 +68,7 @@ export default class Pledge extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     if (this.state.loadUserPledges) {
       if (this.props.entities) {
         if (this.props.entities.eventPledge) {

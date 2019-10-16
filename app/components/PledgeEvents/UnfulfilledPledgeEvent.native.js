@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Dimensions,
-  StyleSheet,
-  Image
-} from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { connect } from 'react-redux';
 import i18n from '../../locales/i18n';
 import PledgeTabView from './PledgeTabView.native';
-import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
+import { getImageUrl } from '../../actions/apiRouting';
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import CardLayout from '../Common/Card';
@@ -50,7 +42,6 @@ class UnfulfilledPledgeEvents extends Component {
   }
 
   render() {
-    const { navigation } = this.props;
     const unfulfilledEvent = this.props.navigation.getParam('unfulfilledEvent');
     return this.state.loading ? (
       <LoadingIndicator />

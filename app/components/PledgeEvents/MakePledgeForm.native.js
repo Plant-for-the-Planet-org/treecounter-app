@@ -31,7 +31,7 @@ const validationSchema = generateFormikSchemaFromFormSchema(pledgeFormSchema, [
   'treeCount'
 ]);
 
-let _ = require('lodash');
+// let _ = require('lodash');
 
 class MakePledgeForm extends Component {
   state = {

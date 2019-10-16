@@ -13,11 +13,7 @@ import {
 } from '../reducers/pledgeReducer';
 import { NotificationManager } from 'react-notifications';
 import i18n from '../locales/i18n.js';
-import {
-  deleteEntity,
-  mergeEntities,
-  unlinkEntity
-} from '../reducers/entitiesReducer';
+import { mergeEntities } from '../reducers/entitiesReducer';
 import {
   userProfileSchema,
   eventPledgeSchema,
@@ -57,7 +53,6 @@ export function postPledge(data, params, loggedIn) {
     loggedIn
       ? postAuthenticatedRequest('eventPledgeAuthed_post', data, params)
           .then(res => {
-            const { statusText } = res;
             const { userProfile, eventPledge, pledgeEvent } = res.data.merge;
             dispatch(
               mergeEntities(normalize(pledgeEvent, [pledgeEventSchema]))
@@ -79,7 +74,6 @@ export function postPledge(data, params, loggedIn) {
           })
       : postRequest('eventPledge_post', data, params)
           .then(res => {
-            const { statusText } = res;
             dispatch(postedPledge(res.data));
 
             getLocalStorageItem('pledgedEvent', res);
@@ -95,7 +89,7 @@ export function postPledge(data, params, loggedIn) {
 }
 
 export function updatePledge(data, params, loggedIn) {
-  return dispatch => {
+  return () => {
     loggedIn
       ? putAuthenticatedRequest('eventPledgeAuthed_put', data, params).then(
           res => {

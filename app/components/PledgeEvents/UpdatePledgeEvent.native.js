@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  Keyboard
-} from 'react-native';
+import { Text, View, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { forward } from './../../assets';
@@ -18,12 +10,9 @@ import { loadUserProfile } from './../../actions/loadUserProfileAction';
 
 import i18n from '../../locales/i18n';
 import { connect } from 'react-redux';
-import CheckBox from 'react-native-check-box';
 import { currentUserProfileSelector } from './../../selectors';
 import { bindActionCreators } from 'redux';
 import { Formik } from 'formik';
-
-let _ = require('lodash');
 
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
@@ -52,11 +41,11 @@ class MakePledgeForm extends Component {
 
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
-      this._keyboardDidShow
+      this.keyboardDidShow
     );
     this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
-      this._keyboardDidHide
+      this.keyboardDidHide
     );
   }
 
@@ -65,13 +54,13 @@ class MakePledgeForm extends Component {
     this.keyboardDidHideListener.remove();
   }
 
-  _keyboardDidShow = () => {
+  keyboardDidShow = () => {
     this.setState({
       buttonType: '>'
     });
   };
 
-  _keyboardDidHide = () => {
+  keyboardDidHide = () => {
     this.setState({
       buttonType: 'pledge'
     });
@@ -83,7 +72,6 @@ class MakePledgeForm extends Component {
 
   render() {
     let { treeCount } = this.state;
-    const { navigation } = this.props;
     const unfulfilledEvent = this.props.navigation.getParam('unfulfilledEvent');
     const treeCost = unfulfilledEvent.plantProjectTreeCost;
     const projectName = unfulfilledEvent.plantProjectName;

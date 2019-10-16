@@ -91,14 +91,16 @@ export function postPledge(data, params, loggedIn) {
 export function updatePledge(data, params, loggedIn) {
   return () => {
     loggedIn
-      ? putAuthenticatedRequest('eventPledgeAuthed_put', data, params).then(
-          res => {
+      ? putAuthenticatedRequest('eventPledgeAuthed_put', data, params)
+          .then(res => {
             return res.data;
-          }
-        )
-      : putRequest('eventPledge_put', data, params).then(res => {
-          return res.data;
-        });
+          })
+          .catch(error => console.log(error))
+      : putRequest('eventPledge_put', data, params)
+          .then(res => {
+            return res.data;
+          })
+          .catch(error => console.log(error));
   };
 }
 
@@ -125,13 +127,15 @@ async function getLocalStorageItem(key, res) {
       saveItem(key, JSON.stringify(newPledgesArray));
     }
     //console.log(showAsyncStorageContentInDev());
-    fetchItem('pledgedEvent').then(data => {
-      if (typeof data !== 'undefined' && data.length > 0) {
-        let stringPledges = JSON.parse(data);
-        stringPledges = stringPledges.toString();
-        fetchPublicPledgesAction(stringPledges);
-      }
-    });
+    fetchItem('pledgedEvent')
+      .then(data => {
+        if (typeof data !== 'undefined' && data.length > 0) {
+          let stringPledges = JSON.parse(data);
+          stringPledges = stringPledges.toString();
+          fetchPublicPledgesAction(stringPledges);
+        }
+      })
+      .catch(error => console.log(error));
   } catch (error) {
     console.log(error);
   }

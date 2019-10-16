@@ -6,10 +6,63 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { currenciesSelector } from '../../selectors';
 import { fetchCurrencies } from '../../actions/currencies';
+import Select from 'react-select';
 import {
   getPreferredCurrency,
   setCurrencyAction
 } from '../../actions/globalCurrency';
+
+const customStyles = {
+  control: () => ({
+    // none of react-select's styles are passed to <Control />
+    display: 'flex',
+    width: '100%',
+    cursor: 'pointer'
+  }),
+  container: provided => ({
+    ...provided,
+    width: '100%',
+    display: 'flex',
+    cursor: 'pointer'
+  }),
+  menu: provided => ({
+    ...provided,
+    width: '100%',
+    cursor: 'pointer',
+    fontSize: '17px'
+  }),
+  indicatorSeparator: () => ({
+    display: 'none'
+  }),
+  indicatorsContainer: provided => {
+    return {
+      ...provided,
+      padding: '0px'
+    };
+  },
+  dropdownIndicator: provided => ({
+    ...provided,
+    'padding-left': '0px'
+  }),
+  option: provided => ({
+    ...provided,
+    cursor: 'pointer'
+  }),
+  singleValue: (provided /* , state */) => {
+    return {
+      ...provided,
+      border: 0,
+      width: '100%',
+      display: 'flex',
+      marginLeft: 0,
+      color: 'rgba(0, 0, 0, 0.54)',
+      fontSize: '17px'
+    };
+  },
+  valueContainer: provided => {
+    return { ...provided, 'padding-left': '4px' };
+  }
+};
 
 class GlobalCurrencySelector extends Component {
   constructor(props) {
@@ -51,32 +104,46 @@ class GlobalCurrencySelector extends Component {
     return this.props.currencies.currencies
       ? currencySort(
           Object.keys(this.props.currencies.currencies.currency_names)
-        )
-      : [this.state.preferredCurrency];
+        ).map(currency => {
+          return { value: currency, label: currency };
+        })
+      : [
+          {
+            value: this.state.preferredCurrency,
+            label: this.state.preferredCurrency
+          }
+        ];
   }
-  handleCurrencyChange({ target: { value } } = event) {
-    this.updateState({ preferredCurrency: value });
-    this.props.setCurrencyAction(value);
+  handleCurrencyChange(selectedOption) {
+    console.log(selectedOption);
+    this.updateState({ preferredCurrency: selectedOption.value });
+    this.props.setCurrencyAction(selectedOption.value);
     this.props.userProfile &&
-      this.props.updateUserProfile({ currency: value }, 'currency');
+      this.props.updateUserProfile(
+        { currency: selectedOption.value },
+        'currency'
+      );
   }
   render() {
     const currenciesArray = this.getCurrencyNames();
     return (
       <div className="global-selector currency">
-        <div>
-          <select
+        <div className="li-select">
+          <Select
+            defaultValue={{
+              value: this.state.preferredCurrency,
+              label: this.state.preferredCurrency
+            }}
+            value={{
+              value: this.state.preferredCurrency,
+              label: this.state.preferredCurrency
+            }}
+            menuPlacement="top"
+            styles={customStyles}
             onChange={this.handleCurrencyChange}
-            value={this.state.preferredCurrency}
-          >
-            {currenciesArray.map(value => {
-              return (
-                <option value={value} key={value}>
-                  {value}
-                </option>
-              );
-            })}
-          </select>
+            isSearchable={false}
+            options={currenciesArray}
+          />
         </div>
       </div>
     );

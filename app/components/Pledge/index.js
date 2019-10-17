@@ -48,7 +48,8 @@ export default class Pledge extends Component {
       loggedIn: false,
       loadUserPledges: true,
       myPledge: {},
-      updatingTreeCount: ''
+      updatingTreeCount: '',
+      pledgeButtonDisabled: false
     };
   }
 
@@ -125,7 +126,10 @@ export default class Pledge extends Component {
   };
   closeSubmitPledgeModal = () => {
     this.setState({ SubmitPledgeModalIsOpen: false });
-    setTimeout(window.location.reload.bind(window.location), 3000);
+    this.setState({
+      pledgeButtonDisabled: false
+    });
+    setTimeout(window.location.reload.bind(window.location), 2500);
   };
 
   // Functions for Later/Continue after Update Modal
@@ -142,6 +146,9 @@ export default class Pledge extends Component {
   }
 
   onFormSubmit() {
+    this.setState({
+      pledgeButtonDisabled: true
+    });
     let value = this.refs.pledgeForm.getValue();
     if (value) {
       this.props.postPledge(value);
@@ -366,9 +373,13 @@ export default class Pledge extends Component {
               </div>
             </div>
           ) : (
-            <p className="make-pledge-button" onClick={this.openPledgeModal}>
-              {i18n.t('label.makePledgeButton')}
-            </p>
+            <input
+              type="button"
+              className="make-pledge-button"
+              onClick={this.openPledgeModal}
+              value={i18n.t('label.makePledgeButton')}
+              disabled={this.state.pledgeButtonDisabled}
+            />
           )}
 
           {/* Modal for Making a pledge */}

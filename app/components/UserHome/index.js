@@ -10,7 +10,7 @@ import LoadingIndicator from '../Common/LoadingIndicator';
 import { getDocumentTitle } from '../../helpers/utils';
 import InlineLink from '../Common/InlineLink';
 import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
-import RecurringCard from '../UserContributions/RecurringCard';
+// import RecurringCard from '../UserContributions/RecurringCard';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -89,51 +89,51 @@ export default class UserHome extends Component {
             </DescriptionHeading>
           </TextHeading>
         </div>
-        <div className="home row">
-          <div className="column left">
-            <div>
-              <div className="treecounter_container">
-                <div className="canvasContainer flex-column">
-                  <SvgContainer {...svgData} />
-                  {treecounterData === null ? (
-                    <div className="circle-inside circle-headline">
-                      <LoadingIndicator />
-                    </div>
-                  ) : (
-                    <TreecounterGraphicsText
-                      trillion={false}
-                      treecounterData={svgData}
-                      onToggle={toggleVal => this.updateSvg(toggleVal)}
-                    />
-                  )}
+        <div className="home">
+          <div className="treecounter_container" style={{ margin: '0 auto' }}>
+            <div className="canvasContainer flex-column">
+              <SvgContainer {...svgData} />
+              {treecounterData === null ? (
+                <div className="circle-inside circle-headline">
+                  <LoadingIndicator />
                 </div>
-              </div>
-            </div>
-            <DescriptionHeading>
-              {userProfile.synopsis1 || userProfile.synopsis2}
-            </DescriptionHeading>
-            <ArcGISContributionsMap userId={userProfile.id} />
-            <div className="m-t-2">
-              <div className="contribution-buttons">
-                <InlineLink
-                  caption={i18n.t('label.registerFurther')}
-                  uri={'app_registerTrees'}
+              ) : (
+                <TreecounterGraphicsText
+                  trillion={false}
+                  treecounterData={svgData}
+                  onToggle={toggleVal => this.updateSvg(toggleVal)}
                 />
-                <InlineLink
-                  caption={i18n.t('label.donate_trees')}
-                  uri={'app_donateTrees'}
-                />
-              </div>
+              )}
             </div>
           </div>
-          <div className="column right app-container__sidenav--heading">
-            <div className="heading">Recurring Tree Donations</div>
-            <div className="m-b-20">
+
+          <DescriptionHeading>
+            {userProfile.synopsis1 || userProfile.synopsis2}
+          </DescriptionHeading>
+          <ArcGISContributionsMap userId={userProfile.id} />
+          <div className="m-t-2">
+            <div className="contribution-buttons">
+              <InlineLink
+                caption={i18n.t('label.registerFurther')}
+                uri={'app_registerTrees'}
+              />
+              <InlineLink
+                caption={i18n.t('label.donate_trees')}
+                uri={'app_donateTrees'}
+              />
+            </div>
+          </div>
+
+          <div className="app-container__sidenav--heading">
+            {/* <div className="heading">Recurring Tree Donations</div> */}
+            {/* <div className="m-b-20" style={{ display: 'flex' }}>
               {[{ id: 1 }, { id: 2 }].map(cardData => (
                 <RecurringCard cardData={cardData} key={cardData.id} />
               ))}
+            </div> */}
+            <div className="heading" style={{ 'margin-top': '20px' }}>
+              All Tree Contributions
             </div>
-            <div className="heading">All Tree Contributions</div>
             <div>
               <UserContributionsContainer />
             </div>

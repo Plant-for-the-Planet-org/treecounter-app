@@ -10,15 +10,92 @@ $white: #fff;
 .m-b-20 {
   margin-bottom: 20px;
 }
+.grid2x2 {
+  min-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.grid2x2 .box {
+  display: flex; 
+  flex-basis: calc(50% - 7px);  
+  background-color: $white;
+  border: solid 1px $border;
+  margin: 5px;
+  border-radius: 4px;
+  flex-direction: column;
+  .icon {
+    color: $avocado;
+    margin-bottom: -3px;
+  }
 
-.row.home {
+  .card-text {
+    font-size: 15px;
+    padding-bottom: 5px;
+  }
+
+  .currency {
+    // flex: 1;
+    float: right;
+    padding: 5px 15px;
+    align-self: flex-end;
+    width: 56px;
+    height: 19px;
+    font-family: OpenSans;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: right;
+    background-color: $border;
+  }
+
+  .bottom-with-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      cursor: pointer;
+      padding: 10px;
+    }
+  }
+
+  .headline {
+    padding-top: 10px;
+      font-family: OpenSans;
+      line-height: 1.13;
+      color: $avocado;
+      font-weight: bold;
+      padding-bottom: 5px;
+      span {
+        padding-right: 5px;
+        font-size: normal;
+      }
+  }
+}
+.box > div{
+  padding: 0 0 10px 15px;
+  width: 100%;
+  box-sizing: border-box;;
+}
+
+
+.box:nth-child(odd){
+  margin-left: 0;
+}
+.box:nth-child(even){
+  margin-right: 0;
+}
+.home {
   background: $white;
   border-radius: 10px;
-  display: flex;
   padding-bottom: 0;
-  margin: 5px 20px;
-  width: 96%;
-  max-width: 96%;
+  margin: 5px auto;
+  width: 80%;
+  clear: both;
+  max-width: 80%;
   
   @include for-phone-only {
     width: 100%;
@@ -50,7 +127,8 @@ $white: #fff;
     border-radius: 4px;
     margin-top: 20px;
     padding: 0 0 10px 20px;
-    
+    margin-left: 5px;
+    flex: 50%;
     .icon {
       color: $avocado;
       margin-bottom: -3px;
@@ -100,4 +178,8 @@ $white: #fff;
         }
     }
   }
+  .card:first-child{
+    margin-left: 0;
+  }
+
 }

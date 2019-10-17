@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ContributionCardList from './ContributionCardList';
+import ContributionCard from './ContributionCard';
 import i18n from '../../locales/i18n.js';
 
 const UserContributions = ({
@@ -12,16 +12,20 @@ const UserContributions = ({
   isPublic
 }) => {
   return (
-    <div className="">
+    <div className="grid2x2">
       {Object.keys(userContributions).length > 0 ? (
-        <div>
-          <div className="contribution-container-">
-            <ContributionCardList
-              contributions={userContributions}
+        userContributions
+          .sort(
+            (a, b) =>
+              new Date(b.registrationDate) - new Date(a.registrationDate)
+          )
+          .map(contribution => (
+            <ContributionCard
+              contribution={contribution}
               deleteContribution={deleteContribution}
+              key={contribution.id}
             />
-          </div>
-        </div>
+          ))
       ) : (
         <div className="no-contribution-wrapper">
           {isPublic

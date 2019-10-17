@@ -207,8 +207,8 @@ export default class ContributionCardHome extends React.Component {
     //   giveeSlug
     // );
     return category === 'contributions' ? (
-      <div key={`contrib-${contribution.id}`}>
-        <div className={`card ${contribution.contributionType}`}>
+      <div className="box">
+        <div className={`${contribution.contributionType}`}>
           <div className="currency">
             {this.cap(contribution.contributionType)}
           </div>

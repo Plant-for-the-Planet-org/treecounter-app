@@ -23,6 +23,10 @@ class UnfulfilledPledgeEvents extends Component {
     loading: true
   };
 
+  imageStyle = {
+    height: 30
+  };
+
   componentDidMount() {
     const eventSlug = this.props.navigation.getParam('unfulfilledEvent')
       .eventSlug;
@@ -154,7 +158,7 @@ class UnfulfilledPledgeEvents extends Component {
           >
             <View style={styles.continueButtonView}>
               <Image
-                style={{ height: '30px' }}
+                style={this.imageStyle}
                 source={nextArrowWhite}
                 resizeMode="contain"
               />

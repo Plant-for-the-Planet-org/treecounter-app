@@ -32,12 +32,6 @@ class PledgeContainer extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.pledges !== this.props.pledges) {
-      console.log(this.props.pledges);
-    }
-  }
-
   componentWillUnmount() {
     this.props.clearTimeoutAction(this.props.pledges.timeoutID);
   }

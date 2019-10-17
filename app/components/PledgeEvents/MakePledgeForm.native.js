@@ -125,7 +125,8 @@ class MakePledgeForm extends Component {
                 firstname: values.firstname,
                 lastname: values.lastname,
                 email: values.email,
-                treeCount: values.treeCount
+                treeCount: values.treeCount,
+                isAnonymous: this.state.isAnonymous
               };
               console.log(data);
               const params = this.props.navigation.getParam('slug');

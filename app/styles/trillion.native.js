@@ -228,10 +228,9 @@ export default EStyleSheet.create({
   },
   ufpLeftSection: { flexDirection: 'row', justifyContent: 'space-between' },
   ufpCostView: {
-    width: 72,
-    height: 26,
     borderRadius: 100,
-    backgroundColor: '#f2f2f7'
+    backgroundColor: '#f2f2f7',
+    padding: 4
   },
   ufpCostText: {
     fontSize: 16,

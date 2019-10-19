@@ -24,4 +24,3 @@ export const context = {
     appId: '1444740626'
   }
 };
- 

@@ -1,0 +1,59 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+
+import { deleteContribution } from '../../actions/EditMyTree';
+import UserContributions from '../../components/UserContributions';
+import _ from 'lodash';
+
+// Actions
+import {
+  currentUserProfileIdSelector,
+  sortedUserContributionsSelector
+} from '../../selectors/index';
+
+class ContributorsContainer extends React.Component {
+  render() {
+    const userContributions = _.orderBy(
+      this.props.userContributions,
+      function(contribution) {
+        return new Date(contribution.registrationDate);
+      },
+      'desc'
+    );
+    return (
+      <UserContributions
+        userProfileId={this.props.userProfileId}
+        userContributions={userContributions}
+        navigation={this.props.navigation}
+        deleteContribution={this.props.deleteContribution}
+      />
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  userContributions: sortedUserContributionsSelector(state),
+  userProfileId: currentUserProfileIdSelector(state)
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      deleteContribution
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ContributorsContainer
+);
+
+ContributorsContainer.propTypes = {
+  userProfileId: PropTypes.number.isRequired,
+  userContributions: PropTypes.array.isRequired,
+  navigation: PropTypes.any,
+  deleteContribution: PropTypes.func
+};

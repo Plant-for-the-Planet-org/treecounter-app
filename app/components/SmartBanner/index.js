@@ -35,11 +35,20 @@ SOFTWARE.
 import React from 'react';
 import SmartBanner from 'react-smartbanner';
 import cookie from 'cookie-cutter';
-
+import { context } from '../../config';
 class SmartBannerClickable extends SmartBanner {
   constructor(props) {
     super(props);
   }
+  parseAppId() {
+    context[this.state.type] &&
+      this.setState({ appId: context[this.state.type].appId });
+    return context[this.state.type];
+  }
+  componentDidMount() {
+    this.parseAppId();
+  }
+
   render() {
     // Don't show banner when:
     // 1) if device isn't iOS or Android

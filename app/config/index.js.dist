@@ -16,5 +16,12 @@ export const context = {
   debug: true, // local console debugging switch
   currency: 'USD',
   mapIds: { inventory: 'dee6acf9de774fe6878813f707b4ab88'},
-  bugsnagApiKey: ''
+  bugsnagApiKey: '',
+  android:{
+    appId: 'org.pftp'
+  },
+  ios:{
+    appId: '1444740626'
+  }
 };
+ 

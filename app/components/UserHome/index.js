@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import UserContributionsContainer from '../../containers/UserContributions';
+import ContributorsContainer from '../../containers/UserContributions/Contributors';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import SvgContainer from '../Common/SvgContainer';
 import TextHeading from '../Common/Heading/TextHeading';
@@ -106,12 +107,27 @@ export default class UserHome extends Component {
               )}
             </div>
           </div>
+          <div className="rounded-border-heading">
+            <DescriptionHeading align={'left-align'}>
+              {userProfile.synopsis1 || userProfile.synopsis2}
+            </DescriptionHeading>
 
-          <DescriptionHeading>
-            {userProfile.synopsis1 || userProfile.synopsis2}
-          </DescriptionHeading>
+            {userProfile.url ? (
+              <div className="p-t-10">
+                <br />
+                <InlineLink
+                  caption={i18n.t('label.link_to_my_website')}
+                  uri={userProfile.url}
+                />
+              </div>
+            ) : null}
+          </div>
+          <div className="heading">My Trees Map</div>
+          <div className="left-align">
+            Here’s list of trees {userProfile.firstname} has planted.
+          </div>
           <ArcGISContributionsMap userId={userProfile.id} />
-          <div className="m-t-2">
+          {/* <div className="m-t-2">
             <div className="contribution-buttons">
               <InlineLink
                 caption={i18n.t('label.registerFurther')}
@@ -122,7 +138,7 @@ export default class UserHome extends Component {
                 uri={'app_donateTrees'}
               />
             </div>
-          </div>
+          </div> */}
 
           <div className="app-container__sidenav--heading">
             {/* <div className="heading">Recurring Tree Donations</div> */}
@@ -131,13 +147,13 @@ export default class UserHome extends Component {
                 <RecurringCard cardData={cardData} key={cardData.id} />
               ))}
             </div> */}
-            <div className="heading" style={{ 'margin-top': '20px' }}>
-              All Tree Contributions
-            </div>
+            <div className="heading">All Tree Contributions</div>
             <div>
               <UserContributionsContainer />
             </div>
           </div>
+
+          <ContributorsContainer />
         </div>
       </div>
     );

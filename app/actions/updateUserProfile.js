@@ -18,7 +18,6 @@ import {
 } from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import i18n from '../locales/i18n.js';
-import { logoutUser } from './authActions';
 
 const profileTypeToReq = {
   profile: 'profile_put',
@@ -212,7 +211,7 @@ export function deleteUserProfile(userProfile) {
   };
 }
 
-export function updateEmail(newEmail) {
+export function updateUserEmail(newEmail) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
@@ -221,33 +220,12 @@ export function updateEmail(newEmail) {
           if (res.data && res.data instanceof Object) {
             dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
           }
-          NotificationManager.success(
-            i18n.t('label.confirmation_email_will_be_send'),
-            i18n.t('label.success'),
-            5000
-          );
           resolve(res.data);
-          dispatch(logoutUser());
           dispatch(setProgressModelState(false));
         })
         .catch(err => {
           debug(err);
           reject(err);
-          if (err.response.data.code === 400) {
-            NotificationManager.error(
-              err.response.data.errors.children.newEmail.errors
-                ? err.response.data.errors.children.newEmail.errors[0]
-                : err.response.data.errors.children.newEmail.children.first
-                  ? err.response.data.errors.children.newEmail.children.first
-                      .errors[0]
-                  : err.response.data.errors.children.newEmail.children.second
-                    ? err.response.data.errors.children.newEmail.children.second
-                        .errors[0]
-                    : 'label.error',
-              i18n.t('label.error'),
-              5000
-            );
-          }
           dispatch(setProgressModelState(false));
         });
     });

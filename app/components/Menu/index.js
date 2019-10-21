@@ -41,22 +41,34 @@ const customStyles = {
     display: 'flex',
     cursor: 'pointer'
   }),
-
+  menu: provided => ({
+    ...provided,
+    width: '150px',
+    cursor: 'pointer'
+  }),
+  menuList: provided => ({
+    ...provided,
+    cursor: 'pointer'
+  }),
   indicatorSeparator: () => ({
     display: 'none'
   }),
-  indicatorContainer: () => ({
-    padding: '5px'
-  }),
-  option: () => ({
-    display: 'flex',
-    padding: '5px',
-    width: '100px'
-  }),
-  menu: provided => ({
+  indicatorsContainer: provided => ({
     ...provided,
-    width: '150px'
+    padding: '0px'
   }),
+  dropdownIndicator: provided => ({
+    ...provided,
+    paddingLeft: '0px'
+  }),
+  option: provided => ({
+    ...provided,
+    // display: 'flex',
+    padding: '4px',
+    width: '150px',
+    cursor: 'pointer'
+  }),
+
   singleValue: (provided /* , state */) => {
     return {
       ...provided,

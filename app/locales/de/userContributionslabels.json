@@ -8,6 +8,7 @@
   "my_trees": "Mein Wald",
   "donate_trees": "Spende Bäume",
   "donate": "Spenden",
+  "my_trees_description": "Dies ist eine Liste Ihrer Beiträge zur Billionen-Baum-Kampagne. Sie enthält Bäume, die Sie gepflanzt, gespendet oder beansprucht haben.",
   "no_contributions": "Willkommen in deinem Wald. Hier siehst du alle Bäume, die du mit deinen Händen gepflanzt und registriert hast, und alle, die du gespendet hast. Zeig der Welt deinen Wald!",
   "singleTree": "Einzelner Baum",
   "severalTrees": "Mehrere Bäume",
@@ -35,5 +36,6 @@
   "redeemed_on": "Eingelöst am {{date}}",
   "dedicated_on": "Gewidmet am {{date}}",
   "dedicated_on_by": "Gewidmet am {{date}} von",
-  "register_new_trees": "Registriere neue Bäume"
+  "register_new_trees": "Registriere neue Bäume",
+  "link_to_my_website": "Link zu meiner Website"
 }

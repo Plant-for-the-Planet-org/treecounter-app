@@ -40,5 +40,8 @@
   "redeemed_on": "Redeemed on {{date}}",
   "dedicated_on": "Dedicated on {{date}}",
   "dedicated_on_by": "Dedicated on {{date}} by",
-  "register_new_trees": "Register new trees"
+  "register_new_trees": "Register new trees",
+  "link_to_my_website": "Link to my website",
+  "my_trees_map": "My Trees Map",
+  "here_list_of_trees_planted": "Here’s list of trees {{firstname}} has planted"
 }

@@ -19,6 +19,9 @@ $white: #fff;
 .grid2x2 .box {
   display: flex; 
   flex-basis: calc(50% - 7px);  
+  @include for-phone-only {
+    flex-basis: calc(100% - 7px);  
+  }
   background-color: $white;
   border: solid 1px $border;
   margin: 5px;

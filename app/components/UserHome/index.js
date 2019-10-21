@@ -9,7 +9,6 @@ import TextHeading from '../Common/Heading/TextHeading';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import { getDocumentTitle } from '../../helpers/utils';
-import InlineLink from '../Common/InlineLink';
 import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 // import RecurringCard from '../UserContributions/RecurringCard';
 
@@ -113,18 +112,22 @@ export default class UserHome extends Component {
             </DescriptionHeading>
 
             {userProfile.url ? (
-              <div className="p-t-10">
-                <br />
-                <InlineLink
-                  caption={i18n.t('label.link_to_my_website')}
-                  uri={userProfile.url}
-                />
-              </div>
+              <p className="pftp-description-heading left-align">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={userProfile.url}
+                >
+                  {i18n.t('label.link_to_my_website')}
+                </a>
+              </p>
             ) : null}
           </div>
-          <div className="heading">My Trees Map</div>
+          <div className="heading">{i18n.t('label.my_trees_map')}</div>
           <div className="left-align">
-            Here’s list of trees {userProfile.firstname} has planted.
+            {i18n.t('label.here_list_of_trees_planted', {
+              firstname: userProfile.firstname
+            })}
           </div>
           <ArcGISContributionsMap userId={userProfile.id} />
           {/* <div className="m-t-2">
@@ -151,9 +154,11 @@ export default class UserHome extends Component {
             <div>
               <UserContributionsContainer />
             </div>
+            <div className="heading">Contributors</div>
+            <div>
+              <ContributorsContainer />
+            </div>
           </div>
-
-          <ContributorsContainer />
         </div>
       </div>
     );

@@ -18,6 +18,8 @@ import {
 } from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import i18n from '../locales/i18n.js';
+import { logoutUser } from './authActions';
+
 const profileTypeToReq = {
   profile: 'profile_put',
   about_me: 'profileAboutMe_put',
@@ -225,6 +227,7 @@ export function updateEmail(newEmail) {
             5000
           );
           resolve(res.data);
+          dispatch(logoutUser());
           dispatch(setProgressModelState(false));
         })
         .catch(err => {

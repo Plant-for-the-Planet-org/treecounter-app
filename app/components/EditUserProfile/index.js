@@ -130,7 +130,6 @@ export default class EditUserProfile extends React.Component {
     console.log(this.refs[formRef].validate());
 
     let value = this.refs[formRef].getValue();
-
     this.props.updateEmail(value);
   };
 

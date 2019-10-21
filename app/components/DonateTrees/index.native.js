@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+/* eslint-disable no-underscore-dangle */
+import React from 'react';
 import PropTypes from 'prop-types';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import { TabView } from 'react-native-tab-view';
@@ -9,7 +10,7 @@ import RecieptTabsView from './receiptTabs';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 // import PaymentSelector from '../Payment/PaymentSelector';
-import { View, Text, Alert, Linking } from 'react-native';
+import { View, Linking } from 'react-native';
 import { paymentFee } from '../../helpers/utils';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
@@ -63,7 +64,7 @@ export default class DonateTrees extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { navigation } = this.props;
+    // const { navigation } = this.props;
     this.props.onTabChange(this.state.routes[0].title);
     Linking.getInitialURL()
       .then(url => {
@@ -71,7 +72,9 @@ export default class DonateTrees extends React.PureComponent {
           this.handleOpenURL(url);
         }
       })
-      .catch(err => {});
+      .catch(err => {
+        console.log(err);
+      });
     Linking.addEventListener('url', this.handleOpenURL);
     let params = this.props.navigation.state.params;
     if (params !== undefined && params.giftMethod === 'invitation') {
@@ -86,7 +89,7 @@ export default class DonateTrees extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { navigation } = this.props;
+    // const { navigation } = this.props;
     if (nextProps.selectedProject) {
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
@@ -153,7 +156,7 @@ export default class DonateTrees extends React.PureComponent {
 
   Tab1validated() {
     if (this.props.selectedProject) {
-      this._handleIndexChange(0);
+      this.function_handleIndexChange(0);
     }
   }
 
@@ -165,7 +168,7 @@ export default class DonateTrees extends React.PureComponent {
           treeCount: this.state.selectedTreeCount
         }
       });
-      this._handleIndexChange(1);
+      this.function_handleIndexChange(1);
     }
   };
   goToNextTab(value) {
@@ -237,7 +240,7 @@ export default class DonateTrees extends React.PureComponent {
       props.navigationState.routes,
       this.state.index,
       index => {
-        this._handleIndexChange(index);
+        this.function_handleIndexChange(index);
       }
     );
   };
@@ -264,17 +267,17 @@ export default class DonateTrees extends React.PureComponent {
         ? this.state.form['receiptCompany']
         : '';
     }
-    let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
-    let email = receipt !== '' ? receipt.email : '';
-    let paymentMethods;
+    // let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
+    // let email = receipt !== '' ? receipt.email : '';
+    // let paymentMethods;
     if (receipt && selectedProject) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
       const countryCurrencies = selectedProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
         countryCurrency = selectedProject.paymentSetup.defaultCountryKey;
       }
-      paymentMethods =
-        selectedProject.paymentSetup.countries[countryCurrency].paymentMethods;
+      // paymentMethods =
+      //   selectedProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
     let currencies = this.props.currencies.currencies;
 
@@ -301,7 +304,7 @@ export default class DonateTrees extends React.PureComponent {
         ) : (
           <LoadingIndicator />
         );
-        break;
+      // break;
 
       case 'recipient': {
         return (
@@ -317,14 +320,14 @@ export default class DonateTrees extends React.PureComponent {
       }
     }
   };
-  _handleIndexChange = index => {
-    if (this._canJumpToTab(index)) {
+  function_handleIndexChange = index => {
+    if (this.function_canJumpToTab(index)) {
       this.setState({ index });
       this.props.onTabChange(this.state.routes[index].title);
     }
   };
 
-  _canJumpToTab = index => {
+  function_canJumpToTab = index => {
     if (index === 2) {
       if (this.getRecieptFormState() != null) {
         return true;
@@ -392,7 +395,7 @@ export default class DonateTrees extends React.PureComponent {
           renderScene={this._renderScene}
           renderTabBar={this._renderTabBar}
           useNativeDriver
-          onIndexChange={this._handleIndexChange}
+          onIndexChange={this.function_handleIndexChange}
         />
         <TabContainer {...this.props} />
       </View>

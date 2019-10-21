@@ -1,28 +1,17 @@
 import React from 'react';
 import i18n from '../../locales/i18n';
-import styles from '../../styles/forms/select.native';
 import { Dropdown } from 'react-native-material-dropdown';
-import { foldout, foldin } from '../../assets';
 
 import PropTypes from 'prop-types';
-import {
-  Text,
-  View,
-  Animated,
-  TouchableOpacity,
-  Picker,
-  Platform,
-  Dimensions,
-  TouchableNativeFeedback,
-  Image
-} from 'react-native';
-import datePickerStyle from '../../styles/date_picker.native';
+import { Text, View, Platform, Dimensions } from 'react-native';
+// import datePickerStyle from '../../styles/date_picker.native';
 
-const UIPICKER_HEIGHT = 216;
+// const UIPICKER_HEIGHT = 216;
 
 class SelectTemplateIOS extends React.PureComponent {
   constructor(props) {
     super(props);
+    // eslint-disable-next-line no-underscore-dangle
     this._onPress = this.onPress.bind(this);
   }
 
@@ -35,31 +24,31 @@ class SelectTemplateIOS extends React.PureComponent {
 
   render() {
     const locals = this.props.locals;
-    const stylesheet = locals.stylesheet;
-    let touchableStyle = stylesheet.dateTouchable.normal;
-    let datepickerStyle = stylesheet.datepicker.normal;
-    let dateValueStyle =
-      datePickerStyle.dateValueStyle || stylesheet.dateValue.normal;
+    // const stylesheet = locals.stylesheet;
+    // let touchableStyle = stylesheet.dateTouchable.normal;
+    // let datepickerStyle = stylesheet.datepicker.normal;
+    // let dateValueStyle =
+    //   datePickerStyle.dateValueStyle || stylesheet.dateValue.normal;
 
-    if (locals.hasError) {
-      touchableStyle = stylesheet.dateTouchable.error;
-      datepickerStyle = stylesheet.datepicker.error;
-      dateValueStyle = stylesheet.dateValue.error;
-    }
+    // if (locals.hasError) {
+    //   touchableStyle = stylesheet.dateTouchable.error;
+    //   datepickerStyle = stylesheet.datepicker.error;
+    //   dateValueStyle = stylesheet.dateValue.error;
+    // }
 
-    if (locals.disabled) {
-      touchableStyle = stylesheet.dateTouchable.notEditable;
-    }
+    // if (locals.disabled) {
+    //   touchableStyle = stylesheet.dateTouchable.notEditable;
+    // }
 
-    let formattedValue = locals.value ? locals.value : '';
+    // let formattedValue = locals.value ? locals.value : '';
 
-    let filteredValue = this.props.options.filter(
-      item => item.value === locals.value
-    );
+    // let filteredValue = this.props.options.filter(
+    //   item => item.value === locals.value
+    // );
     const textColor = '#686060';
-    if (filteredValue && filteredValue.length > 0) {
-      formattedValue = i18n.t(filteredValue[0].text);
-    }
+    // if (filteredValue && filteredValue.length > 0) {
+    // formattedValue = i18n.t(filteredValue[0].text);
+    // }
     if (Platform.OS === 'android') {
       return (
         //   <View style={datePickerStyle.datePickerContainer}>

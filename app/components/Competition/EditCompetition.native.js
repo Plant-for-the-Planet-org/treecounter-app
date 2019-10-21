@@ -3,17 +3,10 @@ import CardLayout from '../Common/Card';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {
-  competitionFormSchema,
-  competitionFormSchemaOptions
-} from '../../server/parsedSchemas/competition';
+import { competitionFormSchema } from '../../server/parsedSchemas/competition';
 import i18n from '../../locales/i18n';
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import {
-  competitionDetailSelector,
-  userCompetitionEnrolledSelector,
-  userTreecounterSelector
-} from '../../selectors';
+import { competitionDetailSelector } from '../../selectors';
 import { fetchCompetitionDetail } from '../../actions/competition';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -54,22 +47,24 @@ const getCompFormImageLayoutTemplate = () => {
         </View>
         <TouchableOpacity
           style={{ flex: 1 }}
-          onPress={event => {
-            ImagePicker.showImagePicker(options, response => {
-              // console.log('Response = ', response);
+          onPress={
+            (/* event */) => {
+              ImagePicker.showImagePicker(options, response => {
+                // console.log('Response = ', response);
 
-              if (response.didCancel) {
-                //console.log('User cancelled image picker');
-              } else if (response.error) {
-                //console.log('ImagePicker Error: ', response.error);
-              } else if (response.customButton) {
-                // console.log('User tapped custom button: ', response.customButton);
-              } else {
-                let source = { uri: response.uri };
-                locals.onChange('data:image/jpeg;base64,' + response.data);
-              }
-            });
-          }}
+                if (response.didCancel) {
+                  //console.log('User cancelled image picker');
+                } else if (response.error) {
+                  //console.log('ImagePicker Error: ', response.error);
+                } else if (response.customButton) {
+                  // console.log('User tapped custom button: ', response.customButton);
+                } else {
+                  // let source = { uri: response.uri };
+                  locals.onChange('data:image/jpeg;base64,' + response.data);
+                }
+              });
+            }
+          }
         >
           {!locals.value ? (
             <Image source={imageUpload} style={{ height: 40, width: 40 }} />

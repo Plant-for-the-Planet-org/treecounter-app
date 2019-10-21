@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, Image } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import styles from './../../../styles/trillion.native';
 import i18n from '../../../locales/i18n';
 import { greencalendar } from './../../../assets/';
 import { smalltree } from './../../../assets/';
-import moment from 'moment';
-import { getLocale } from '../../../actions/getLocale';
+import { formatDate } from '../../../utils/utils';
 
 export default class FeaturedProject extends Component {
   constructor(props) {
     super(props);
-    moment.locale(getLocale());
   }
 
   render() {
@@ -53,9 +51,7 @@ export default class FeaturedProject extends Component {
               ) : null}
 
               <Text style={styles.featuredProjectCardIconText}>
-                {this.props.date
-                  ? moment(this.props.date).format('D MMM, YYYY')
-                  : null}
+                {this.props.date ? formatDate(this.props.date) : null}
               </Text>
             </View>
           </View>

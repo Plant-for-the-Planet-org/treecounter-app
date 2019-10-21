@@ -16,7 +16,9 @@ export const saveState = state => {
   try {
     const serializedState = JSON.stringify(state);
     window.localStorage.setItem('state', serializedState);
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const saveItem = (key, value) => {
@@ -43,7 +45,9 @@ export const fetchItem = key => {
 export const getItem = async key => {
   return window.localStorage.getItem(key);
 };
-
+export const getItemSync = key => {
+  return window.localStorage.getItem(key);
+};
 export const clearStorage = () => {
   const sessionId = window.localStorage.getItem('session_id');
   window.localStorage.clear();

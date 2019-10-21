@@ -1,10 +1,9 @@
 import React from 'react';
-import { ScrollView, Text, View, TouchableOpacity, Image } from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 
 import SearchBar from '../../../components/Header/SearchBar.native';
 import Header from '../../../components/Header/Header.native';
-import { getSuggestions, profileTypeToImage } from '../../../helpers/utils';
-import { getImageUrl } from '../../../actions/apiRouting';
+import { getSuggestions } from '../../../helpers/utils';
 import { withNavigation } from 'react-navigation';
 import styles from '../../../styles/header/search_layout.native';
 import _ from 'lodash';
@@ -24,6 +23,7 @@ class SearchUser extends React.Component {
   };
   constructor(props) {
     super(props);
+    // eslint-disable-next-line no-underscore-dangle
     this.onChangeTextDelayed = _.debounce(this._handleChangeQuery, 200);
   }
 
@@ -40,9 +40,11 @@ class SearchUser extends React.Component {
   // TODO: debounce
   _handleChangeQuery = q => {
     this.setState({ searchResultClicked: false });
-    getSuggestions(q).then(suggestions => {
-      this.setState({ q: suggestions });
-    });
+    getSuggestions(q)
+      .then(suggestions => {
+        this.setState({ q: suggestions });
+      })
+      .catch(error => console.log(error));
   };
 
   _onNavigationClick(suggestion) {
@@ -102,6 +104,7 @@ class SearchUser extends React.Component {
           onChangeQuery={this.onChangeTextDelayed}
           inputValue={this.state.selectedSuggestionName}
           resetState={this.props.resetState}
+          // eslint-disable-next-line no-underscore-dangle
           onSubmit={this._handleSubmit}
           placeholderTextColor={this.props.searchInputPlaceholderTextColor}
           placeholderValue={i18n.t('label.enter_a_user')}
@@ -131,6 +134,7 @@ class SearchUser extends React.Component {
                     <TouchableOpacity
                       style={styles.searchResult}
                       key={'suggestion' + i}
+                      // eslint-disable-next-line no-underscore-dangle
                       onPress={this._onNavigationClick.bind(this, suggestion)}
                     >
                       <UserProfileImage
@@ -153,6 +157,7 @@ class SearchUser extends React.Component {
                   <TouchableOpacity
                     style={styles.searchResult}
                     key={'suggestion' + i}
+                    // eslint-disable-next-line no-underscore-dangle
                     onPress={this._onNavigationClick.bind(this, suggestion)}
                   >
                     <UserProfileImage

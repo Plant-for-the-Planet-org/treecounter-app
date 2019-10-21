@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-  Image,
-  View,
-  TouchableOpacity,
-  BackHandler,
-  NavigationActions
-} from 'react-native';
+import { Image, View, TouchableOpacity, BackHandler } from 'react-native';
 
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
@@ -34,7 +28,7 @@ export default class HeaderRight extends Component {
   }
   renderShareButtons(userProfile) {
     let { state } = this.props.navigation;
-    let pathname = state.hasOwnProperty('index')
+    let pathname = state['index']
       ? state.routes[state.index].routeName
       : state.routeName;
     if (
@@ -59,9 +53,11 @@ export default class HeaderRight extends Component {
               treecounter: state.routes[state.index].params.treeCounterId
             });
         } else if (pathname === '/competition') {
+          // eslint-disable-next-line no-prototype-builtins
           const competition = state.hasOwnProperty('params')
             ? state.params.competition
-            : state.hasOwnProperty('routes')
+            : // eslint-disable-next-line no-prototype-builtins
+              state.hasOwnProperty('routes')
               ? state.routes[state.index].params.competition
               : -1;
           redirectPath =

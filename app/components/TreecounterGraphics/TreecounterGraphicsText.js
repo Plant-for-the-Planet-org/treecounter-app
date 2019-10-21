@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TargetComment from './TargetComment';
 import ArrowButton from '../Common/ArrowButton';
-import { pot, tree, tree_outline } from '../../assets';
+import { pot, tree } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { delimitNumbers, convertNumber } from '../../utils/utils';
 import PlantedDetails from './PlantedDetails';
@@ -105,7 +105,7 @@ class TreecounterGraphicsText extends Component {
           personal={convertNumber(parseInt(personal), 2)}
           community={convertNumber(parseInt(community), 2)}
           type={type}
-          onToggle={e => this.updateState(false)}
+          onToggle={() => /* e */ this.updateState(false)}
         />
       );
     }

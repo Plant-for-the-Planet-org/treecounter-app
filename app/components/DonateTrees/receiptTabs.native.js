@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+/* eslint-disable no-underscore-dangle */
+import React from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import t from 'tcomb-form-native';
 import {
   receiptCompanyFormSchema,

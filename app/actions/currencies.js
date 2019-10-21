@@ -16,9 +16,9 @@ export function fetchCurrencies() {
       last = now;
 
       console.log('fetchCurrencies...');
-      getRequest('public_currencies_get').then(response =>
-        dispatch(setCurrenciesConversions(response.data))
-      );
+      getRequest('public_currencies_get')
+        .then(response => dispatch(setCurrenciesConversions(response.data)))
+        .catch(error => console.log(error));
     } else {
       console.log('fetchCurrencies already called, throttling.');
     }

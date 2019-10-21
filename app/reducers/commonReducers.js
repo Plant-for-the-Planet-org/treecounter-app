@@ -5,6 +5,7 @@ import supportedTreecounterReducer from './supportedTreecounterReducer';
 import userFeedReducer from './userFeedReducer';
 import fetchPledgesReducer from './pledgeReducer';
 import currenciesReducer from './currenciesReducer';
+import currencyReducer from './currencyReducer';
 import paymentStatusReducer from './paymentStatus';
 import modelDialogReducer from './modelDialogReducer';
 import pledgeEventReducer from './pledgeEventReducer';
@@ -19,6 +20,7 @@ const commonReducers = {
   userFeeds: userFeedReducer,
   pledges: fetchPledgesReducer,
   currencies: currenciesReducer,
+  currency: currencyReducer,
   paymentStatus: paymentStatusReducer,
   modelDialogState: modelDialogReducer,
   pledgeEvents: pledgeEventReducer,

@@ -24,7 +24,6 @@ export default EStyleSheet.create({
     justifyContent: 'space-between'
   },
   headerText: {
-    textAlign: 'center',
     fontSize: 16,
     fontWeight: '500',
     textAlign: 'left',

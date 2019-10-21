@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import YouTube from 'react-native-youtube';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 class VideoContainer extends React.Component {
   constructor(props) {
@@ -17,23 +17,26 @@ class VideoContainer extends React.Component {
         .replace(/(>|<)/gi, '')
         .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
       if (url[2] !== undefined) {
+        // eslint-disable-next-line no-useless-escape
         ID = url[2].split(/[^0-9a-z_\-]/i);
         ID = ID[0];
         videoId = ID;
       } //Don't set URl into ID because it s causing crash on android
-    } else if (!!this.props.videoId) {
+    } else if (this.props.videoId) {
       videoId = this.props.videoId;
     }
     // Periodically triggeting a forced unnoticable layout rendering until onReady to make sure the
     // native loading progress is shown
-    if (!!videoId) {
+    if (videoId) {
       this.setState({ videoId });
+      // eslint-disable-next-line no-underscore-dangle
       this._interval = setInterval(() => {
         this.setState({ moduleMargin: Math.random() / 2 });
       }, 250);
     }
   }
   _onReady = event => {
+    // eslint-disable-next-line no-underscore-dangle
     clearInterval(this._interval);
 
     // The Android YouTube native module is pretty problematic when it comes to mounting correctly
@@ -55,9 +58,11 @@ class VideoContainer extends React.Component {
         <YouTube
           apiKey="AIzaSyC0sO3FQX-DYNRsBW1-Hc8BBnhwnwvZQ2Y"
           ref={component => {
+            // eslint-disable-next-line no-underscore-dangle
             this._youTubeRef = component;
           }}
           style={[{ height: 300 }, { margin: this.state.moduleMargin }]}
+          // eslint-disable-next-line no-underscore-dangle
           onReady={this._onReady}
           videoId={this.state.videoId}
           play={false}

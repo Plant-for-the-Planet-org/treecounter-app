@@ -88,7 +88,6 @@ export default EStyleSheet.create({
   svgColumn1: {
     width: '30%',
     maxHeight: 30,
-    marginRight: 10,
     marginLeft: 'auto',
     marginRight: 'auto'
   },

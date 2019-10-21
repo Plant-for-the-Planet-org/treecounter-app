@@ -22,6 +22,7 @@
     window.customElements === undefined ||
     // The webcomponentsjs custom elements polyfill doesn't require
     // ES2015-compatible construction (`super()` or `Reflect.construct`).
+    // eslint-disable-next-line no-prototype-builtins
     window.customElements.hasOwnProperty('polyfillWrapFlushCallback')
   ) {
     return;

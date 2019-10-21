@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import {
   StyleSheet,
   Text,
@@ -86,8 +85,8 @@ export class SignupTypes extends Component {
   }
 
   componentDidMount() {
-    const _scrollView = this.scrollView;
-    _scrollView.scrollToEnd({ animated: true });
+    const object_scrollView = this.scrollView;
+    object_scrollView.scrollToEnd({ animated: true });
   }
 
   changeProfile(type) {

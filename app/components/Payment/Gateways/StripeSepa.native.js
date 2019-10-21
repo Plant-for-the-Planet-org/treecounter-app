@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import i18n from '../../../locales/i18n';
@@ -26,11 +27,11 @@ export default class StripeSepa extends Component {
       submitClicked: false
     };
   }
-  handleSubmit = ev => {
+  handleSubmit = (/* ev */) => {
     this.setState({
       submitClicked: true
     });
-    const { currency, context, account } = this.props;
+    const { currency, context /* , account */ } = this.props;
     let ibanPattern = new RegExp(
       /^DE\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|DE\d{20}$/i
     );
@@ -64,12 +65,12 @@ export default class StripeSepa extends Component {
         this.props.onSuccess(token);
       })
       .catch(err => {
-        // console.log(err);
+        console.log(err);
       });
   };
 
   render() {
-    const { currency, context } = this.props;
+    const { /*  currency, */ context } = this.props;
 
     return (
       <View

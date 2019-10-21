@@ -16,9 +16,11 @@ export function CheckboxTemplate(locals) {
       />
       <label
         className={'pftp-text-span pftp-text-select-none'}
-        onClick={event => {
-          locals.onChange(!locals.value);
-        }}
+        onClick={
+          (/* event */) => {
+            locals.onChange(!locals.value);
+          }
+        }
       >
         {i18n.t(locals.label)}
       </label>

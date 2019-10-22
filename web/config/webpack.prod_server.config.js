@@ -27,6 +27,10 @@ module.exports = webpackMerge(commonConfig, {
     donatetreewidget: [
       'babel-polyfill',
       path.join(__dirname, '../widgets/DonateTrees/widget.js')
+      // ],
+      // ndviwidget: [
+      //   'babel-polyfill',
+      //   path.join(__dirname, '../widgets/NDVI/widget.js')
     ]
   },
   output: {

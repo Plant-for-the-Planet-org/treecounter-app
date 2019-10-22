@@ -332,6 +332,9 @@ export default class EditUserProfile extends React.Component {
             type={parsedSchema[type].email.transformedSchema}
             options={this.getFormSchemaOption(type, 'email')}
           />
+          <div className="form-group__heading">
+            {i18n.t('label.change_email_warning')}
+          </div>
           <PrimaryButton
             onClick={() => {
               this.changeEmail();

@@ -12,6 +12,7 @@
   "save_changes": "Save Changes",
   "about_me": "About me",
   "change_email": "Change Email",
+  "change_email_warning": "After changing your email you will get logged out and need to confirm your account with the link send to your new address.",
   "new_email": "New Email",
   "new_email_repeat": "Confirm New Email",
   "change_password": "Change password",

@@ -17,6 +17,8 @@ export const firstLetterUppercase = string => {
   return string && string.replace(/^\w/, c => c.toLocaleUpperCase());
 };
 
+// date-fns does not seem to have a one-letter format for a month name
+// so we are using Intl.DateTimeFormat here to format the month
 export const getMonthsForLocale = (locale, options = { month: 'short' }) => {
   let format = new Intl.DateTimeFormat(locale, options);
   let months = [];

@@ -17,7 +17,12 @@ const CarbonDetails = props => {
               <a data-tip data-for="carbon-details-icon">
                 <img className="ndvi-img" src={questionmark_orange} />
               </a>
-              <ReactTooltip id="carbon-details-icon" effect="solid" type="dark">
+              <ReactTooltip
+                id="carbon-details-icon"
+                place="left"
+                effect="solid"
+                type="dark"
+              >
                 <span className="tooltip-text">
                   {props.toolTipHelpButtonSpell
                     ? props.toolTipHelpButtonSpell

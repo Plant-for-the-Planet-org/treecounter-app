@@ -1,13 +1,13 @@
 @import "./ndvi-portal.scss";
 
 .carbon-details-container {
-  padding: 0 16px;
   width: 100%;
   height: 59px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
 
   .row {
+    padding: 0 16px;
     height: 61px;
     flex-direction: row;
   }

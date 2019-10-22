@@ -2,7 +2,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 const getHeaderText = function(padding, margin) {
   return {
-    textAlign: 'left',
     fontSize: 16,
     fontWeight: '500',
     textAlign: 'left',

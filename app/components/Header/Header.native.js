@@ -1,12 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
-import {
-  Animated,
-  Dimensions,
-  Platform,
-  StyleSheet,
-  View,
-  BackHandler
-} from 'react-native';
+import { Animated, StyleSheet, View, BackHandler } from 'react-native';
 import { withNavigation, HeaderBackButton } from 'react-navigation';
 import styles from '../../styles/common/header.native';
 

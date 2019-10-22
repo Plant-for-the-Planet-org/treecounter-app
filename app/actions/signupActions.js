@@ -56,8 +56,8 @@ export function signUp(
       i18n.t('label.error'),
       5000
     );
-    return dispatch => {
-      return new Promise(function(resolve, reject) {
+    return (/* dispatch */) => {
+      return new Promise(function(resolve) {
         setTimeout(function() {
           resolve('foo');
         }, 30);

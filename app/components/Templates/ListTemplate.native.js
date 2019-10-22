@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import React from 'react';
 import i18n from '../../locales/i18n';
 import { close_green } from '../../assets';
@@ -18,7 +18,7 @@ const styles = {
   }
 };
 
-export function ListTemplateGenerator(config) {
+export function ListTemplateGenerator(/*config*/) {
   return function listTemplateNative(title) {
     return function ListTemplate(locals) {
       if (locals.hidden) {

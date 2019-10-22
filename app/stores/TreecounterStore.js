@@ -28,6 +28,7 @@ export default function configureStore() {
   // use devtools if we are in a browser and the extension is enabled
   const composeEnhancers =
     typeof window !== 'undefined' &&
+    // eslint-disable-next-line no-underscore-dangle
     (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose);
 
   let middleware = [...middlewares, thunkMiddleware];

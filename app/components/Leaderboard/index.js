@@ -66,7 +66,11 @@ export default class Leaderboard extends Component {
   };
 
   getTableView = hasSubSection => {
-    let listItemsUI = <LoadingIndicator />;
+    let listItemsUI = (
+      <div className="imageContainer">
+        <LoadingIndicator />
+      </div>
+    );
     const { categoryInfo, sectionInfo, queryResultSelfData } = this.props;
     if (this.props.queryResult)
       listItemsUI = (
@@ -86,6 +90,7 @@ export default class Leaderboard extends Component {
           </div>
           <div className="table-body">
             {this.props.queryResult.map((d, index) => {
+              // eslint-disable-next-line no-prototype-builtins
               const isPrivate = d.hasOwnProperty('mayPublish') && !d.mayPublish;
               return (
                 <div className="table-row" key={'tr' + index}>
@@ -141,7 +146,7 @@ export default class Leaderboard extends Component {
           <BackButton
             onClick={() => {
               // this.handleCategoryChange(sectionInfo.section);
-              this.props.handleBackButton();
+              handleBackButton();
             }}
           >
             {categoryInfo.categoryHeader[sectionInfo.section]}

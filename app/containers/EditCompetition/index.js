@@ -3,28 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import {
-  currentUserProfileSelector,
-  selectedPlantProjectSelector,
-  selectedTpoSelector
-} from '../../selectors';
-import CompetitionFull from '../../components/Competition/CompetitionFull';
-
-import {
-  clearPlantProject,
-  selectPlantProjectAction
-} from '../../actions/selectPlantProjectAction';
-import {
-  confirmPart,
-  cancelInvite,
-  declinePart,
-  enrollCompetition,
-  invitePart,
-  leaveCompetition,
-  editCompetition
-} from '../../actions/competition';
-import CompetitionParticipant from '../../components/Competition/CompetitionParticipant.native';
-import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+import { editCompetition } from '../../actions/competition';
 import EditCompetition from '../../components/Competition/EditCompetition.native';
 import { handleServerResponseError } from '../../helpers/utils';
 import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
@@ -47,6 +26,7 @@ class EditCompetitionContainer extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.match) {
+      // empty
     } else if (nextProps.navigation && this.props.navigation) {
       if (nextProps.navigation !== this.props.navigation) {
         this.setState({
@@ -66,12 +46,12 @@ class EditCompetitionContainer extends Component {
       contact: value.contact,
       email: value.email
     };
-    if (value.imageFile.includes('base64')) {
+    if (value.imageFile && value.imageFile.includes('base64')) {
       json.imageFile = value.imageFile;
     }
     this.props
       .editCompetition(json, params, this.props.navigation)
-      .then(success => {})
+      .then((/* success */) => {})
       .catch(err => {
         console.log('err signup data', err);
         let newSchemaOptions = handleServerResponseError(
@@ -108,7 +88,7 @@ class EditCompetitionContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(

@@ -11,10 +11,10 @@
   "NDVI_legend_rock_sand_snow": "Gestein/Sand/Schnee",
   "NDVI_legend_grasslands": "Wiesen",
   "NDVI_legend_dense_vegetation": "Dichte Vegetation",
-  "NDVI_on_load_paragraph": "NDVI wird geladen. Bitte versuchen Sie es in ein oder zwei Minuten erneut.",
+  "NDVI_on_load_paragraph": "NDVI wird geladen. Bitte versuche es in ein bis zwei Minuten erneut.",
   "NDVI_on_load_refresh_button": "Neu laden",
   "NDVI_carbon_title": "Gebundenes CO2",
   "NDVI_time_series": "NDVI Zeitreihen",
   "NDVI_carbon_tooltip": "Die gebundene Biomasse ist eine geschätzte Menge, die anhand des NDVI vom Projektstandort berechnet wird. Wir arbeiten daran, unseren Berechnungsalgorithmus zu verbessern, um die Genauigkeit zu verbessern.",
-  "NDVI_tooltip_for_help_button": "(NDVI) wird aus den Satellitenbildern berechnet, indem die Reflexion von Licht im nahen Infrarot durch Pflanzen analysiert wird. Mit kalibrierten NDVI-Ergebnissen können wir das Vegetationswachstum und die Gesamtbiomasse abschätzen, da mehr Vegetationswachstum das Verhältnis von absorbiertem sichtbarem Licht und reflektiertem Licht im nahen Infrarot beeinflusst."
+  "NDVI_tooltip_for_help_button": "(NDVI) wird aus den Satellitenbildern berechnet, indem die Reflexion von Licht im Infrarotlicht bei Pflanzen analysiert wird. Mit kalibrierten NDVI-Ergebnissen können wir das Vegetationswachstum und die Gesamtbiomasse abschätzen, da mehr Vegetationswachstum das Verhältnis von absorbiertem sichtbarem Licht und reflektiertem Licht im nahen Infrarot beeinflusst."
 }

@@ -16,9 +16,9 @@ class ArrowButton extends Component {
   }
 
   render() {
-    let arrowStyles = {
+    /* let arrowStyles = {
       transform: 'rotate(90deg)'
-    };
+    }; */
     return (
       <button
         className="arrow-button-rotatable"

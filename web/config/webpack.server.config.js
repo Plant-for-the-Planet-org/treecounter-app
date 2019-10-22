@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const commonConfig = require('./webpack.common.config.js');
 const path = require('path');
 
@@ -46,9 +45,6 @@ module.exports = webpackMerge(commonConfig, {
         keep_fnames: true
       },
       sourceMap: true
-    }),
-    new MomentLocalesPlugin({
-      localesToKeep: ['de', 'en']
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')

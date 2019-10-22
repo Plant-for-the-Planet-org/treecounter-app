@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import i18n from '../../locales/i18n';
 
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import SvgContainer from '../Common/SvgContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
-import UserProfileTypeLabel from '../Common/UserProfileTypeLabel';
 import UserProfileImage from '../Common/UserProfileImage';
 import { getDocumentTitle } from '../../helpers/utils';
 import * as images from '../../assets';

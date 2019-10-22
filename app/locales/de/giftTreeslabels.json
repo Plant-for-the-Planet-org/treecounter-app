@@ -1,7 +1,7 @@
 {
   "currency": "Währung",
-  "gift_trees": "Bäume schenken",
-  "treecounter_user_name": "Vorhandener Benutzer",
+  "gift_trees": "Ich verschenke Bäume",
+  "treecounter_user_name": "Vorhandener Nutzer",
   "other_email": "E-Mail",
   "heading_give": "Verschenken an...",
   "heading_donate_details": "Spendendetails",
@@ -10,12 +10,12 @@
   "heading_payment": "Bezahlung",
   "no_of_trees": "Anzahl der Bäume",
   "trees": "Bäume",
-  "gift_trees_description": "Wählen Sie eine Person, für die Sie Bäume spenden möchten. Bäume, die Sie dann spenden, erscheinen sowohl im Baumzähler des Empfängers als auch in Ihrem eigenen. Wenn der Empfänger noch keinen Baumzähler hat, erhält er oder sie eine E-Mail-Einladung zum Mitmachen.",
+  "gift_trees_description": "Verschenke Bäume an Freunde oder Bekannte! Jeder Baum, den du verschenkst, erscheint sowohl in deinem eigenen als auch im Baumzähler der Beschenkten. Falls diese noch keinen Baumzähler haben, laden wir sie via E-Mail zum Mitpflanzen ein!",
   "gift_message": "Nachricht zum Geschenk (optional)",
   "support_user_trees": "{{user}} wird unterstützt, um {{count}}-Bäume zu pflanzen",
   "gift_user_trees": "{{count}} Bäume werden {{user}} geschenkt",
   "gift_to": "Geschenk an {{name}}",
   "support_to": "Unterstützung für {{name}}",
   "gift_trees_to": "Schenke {{user}} Bäume",
-  "select_valid_user_profile": "Wählen Sie ein gültiges Benutzerprofil aus"
+  "select_valid_user_profile": "Wähle ein gültiges Benutzerprofil aus"
 }

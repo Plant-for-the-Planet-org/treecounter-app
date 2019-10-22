@@ -4,8 +4,6 @@ import { trillionCampaign } from '../../actions/trillionAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from './TreecounterGraphicsText';
-import SecondaryAccentButton from '../Common/Button/SecondaryAccentButton';
-import ButtonHeading from '../Common/Heading/ButtonHeading';
 import { updateRoute } from '../../helpers/routerHelper';
 import TextHeading from '../Common/Heading/TextHeading';
 import TextBlock from '../Common/Text/TextBlock';
@@ -96,7 +94,7 @@ class Trillion extends Component {
               </div>
             ) : (
               <TreecounterGraphicsText
-                trillion={true}
+                trillion
                 treecounterData={this.state.svgData}
               />
             )}

@@ -12,17 +12,21 @@ export function fetchPledgesAction(eventSlug) {
     getRequest('pledgeEvent_get', {
       version: 'v1.3',
       eventSlug: eventSlug
-    }).then(res => {
-      dispatch(fetchPledges(res.data));
-    });
+    })
+      .then(res => {
+        dispatch(fetchPledges(res.data));
+      })
+      .catch(error => console.log(error));
     let timeoutID = setInterval(
       () =>
         getRequest('pledgeEvent_get', {
           version: 'v1.3',
           eventSlug: eventSlug
-        }).then(res => {
-          dispatch(fetchPledges(res.data));
-        }),
+        })
+          .then(res => {
+            dispatch(fetchPledges(res.data));
+          })
+          .catch(error => console.log(error)),
       10000
     );
     dispatch(saveTimeoutID(timeoutID));
@@ -30,7 +34,7 @@ export function fetchPledgesAction(eventSlug) {
 }
 
 export function postPledge(data, params) {
-  return dispatch => {
+  return (/* dispatch */) => {
     postRequest('eventPledge_post', data, params)
       .then(res => {
         const { statusText } = res;

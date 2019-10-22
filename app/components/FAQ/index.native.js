@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Accordion from 'react-native-collapsible/Accordion';
@@ -47,7 +48,7 @@ export default class FAQ extends Component {
 
             //console.log('clicked link: ', url);
             Linking.openURL(url).catch(err => {
-              // console.log(err);
+              console.log(err);
             });
           }}
         />

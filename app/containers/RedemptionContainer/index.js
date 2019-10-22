@@ -67,7 +67,9 @@ class RedemptionContainer extends Component {
             tpos: success.data.tpos
           });
         },
-        error => {}
+        error => {
+          console.log(error);
+        }
       );
     } else if (isCode && !isLoggedIn) {
       this.setState({
@@ -171,7 +173,9 @@ class RedemptionContainer extends Component {
             this.setState({ pageStatus: 'code-validated' });
           }
         },
-        error => {}
+        error => {
+          console.log(error);
+        }
       );
     }
   }

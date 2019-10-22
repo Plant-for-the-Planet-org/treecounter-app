@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground } from 'react-native';
+import { Text, View } from 'react-native';
 import TouchableItem from '../../Common/TouchableItem.native';
 import { PropTypes } from 'prop-types';
 import styles from '../../../styles/leaderboard/leader_board';

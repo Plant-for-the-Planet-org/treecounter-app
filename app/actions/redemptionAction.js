@@ -1,8 +1,4 @@
-import {
-  getRequest,
-  postAuthenticatedRequest,
-  postRequest
-} from '../utils/api';
+import { postAuthenticatedRequest } from '../utils/api';
 
 export function validateCodeAction(data, params) {
   return postAuthenticatedRequest('validateCode_post', data, params);

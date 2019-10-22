@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 
-import {
-  resetPasswordFormSchema,
-  schemaOptions
-} from '../../../server/parsedSchemas/resetPassword';
+import { resetPasswordFormSchema } from '../../../server/parsedSchemas/resetPassword';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import TextHeading from '../../Common/Heading/TextHeading';
 import CardLayout from '../../Common/Card';

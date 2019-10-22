@@ -326,6 +326,9 @@ class SecurityTabView extends React.PureComponent {
               type={parsedSchema[type].email.transformedSchema}
               options={this.props.getFormSchemaOption(type, 'email')}
             />
+            <Text style={styles.textStyle}>
+              {i18n.t('label.change_email_warning')}
+            </Text>
           </View>
           <PrimaryButton
             onClick={() => {

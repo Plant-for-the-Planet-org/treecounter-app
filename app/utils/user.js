@@ -11,9 +11,15 @@ export const getAccessToken = async () => {
   if (token) {
     // This may throw an Error if localStorage is broken
     // or POST requests timeout
-    const newToken = await refreshTokenIfExpired();
-    if (newToken) {
-      return newToken;
+    try {
+      const newToken = await refreshTokenIfExpired();
+      if (newToken) {
+        return newToken;
+      }
+    } catch (error) {
+      // 400
+      console.log(`Failed to refresh token: ${error}`);
+      return;
     }
   }
   return token;
@@ -42,21 +48,16 @@ const getExpirationTimeStamp = token => {
 const refreshTokenIfExpired = async () => {
   if (await tokenIsExpired()) {
     const prev_refresh_token = await fetchItem('refresh_token');
-    let response;
-    try {
-      response = await postRequest('gesdinet_jwt_refresh_token', {
-        refresh_token: prev_refresh_token
-      });
-    } catch (error) {
-      // 400
-      console.log(`Failed to refresh token: ${error}`);
-      return;
-    }
+    let response = await postRequest('gesdinet_jwt_refresh_token', {
+      refresh_token: prev_refresh_token
+    });
 
     const newToken = response.data.token;
     const refreshToken = response.data.refresh_token;
     updateJWT(newToken, refreshToken);
     return newToken;
+  } else {
+    return;
   }
 };
 

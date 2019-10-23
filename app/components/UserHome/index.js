@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import UserContributionsContainer from '../../containers/UserContributions';
-import ContributorsContainer from '../../containers/UserContributions/Contributors';
+import Contributors from './Contributors';
+import ProjectLists from './ProjectLists';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import SvgContainer from '../Common/SvgContainer';
 import TextHeading from '../Common/Heading/TextHeading';
@@ -74,6 +75,7 @@ export default class UserHome extends Component {
   }
 
   render() {
+    console.log(this.props.userContributions);
     const { treecounterData, userProfile } = this.props;
     document.title = getDocumentTitle(userProfile.treecounter.displayName);
     // TODO check if this is an error
@@ -118,7 +120,7 @@ export default class UserHome extends Component {
                   rel="noopener noreferrer"
                   href={userProfile.url}
                 >
-                  {i18n.t('label.link_to_my_website')}
+                  <i>{i18n.t('label.link_to_my_website')}</i>
                 </a>
               </p>
             ) : null}
@@ -150,13 +152,28 @@ export default class UserHome extends Component {
                 <RecurringCard cardData={cardData} key={cardData.id} />
               ))}
             </div> */}
-            <div className="heading">All Tree Contributions</div>
+            <div className="heading">All Contributions</div>
             <div>
               <UserContributionsContainer />
             </div>
             <div className="heading">Contributors</div>
+            <DescriptionHeading align={'left-align'}>
+              This tree counter is supported by following members. Tress planted
+              by contributors are aggregate to this total Tree Count of this
+              user.
+            </DescriptionHeading>
             <div>
-              <ContributorsContainer />
+              <Contributors contributions={this.props.userContributions} />
+            </div>
+
+            <div className="heading">Tree Planting Projects</div>
+            <DescriptionHeading align={'left-align'}>
+              This tree counter is supported by following members. Tress planted
+              by contributors are aggregate to this total Tree Count of this
+              user.
+            </DescriptionHeading>
+            <div>
+              <ProjectLists contributions={this.props.userContributions} />
             </div>
           </div>
         </div>
@@ -167,5 +184,6 @@ export default class UserHome extends Component {
 
 UserHome.propTypes = {
   treecounterData: PropTypes.object,
-  userProfile: PropTypes.object
+  userProfile: PropTypes.object,
+  userContributions: PropTypes.array
 };

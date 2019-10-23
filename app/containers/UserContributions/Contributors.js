@@ -22,6 +22,7 @@ class ContributorsContainer extends React.Component {
       },
       'desc'
     );
+    console.log('contributions', userContributions);
     return (
       <UserContributions
         userProfileId={this.props.userProfileId}

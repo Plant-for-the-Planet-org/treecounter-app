@@ -206,6 +206,7 @@ export const sortedUserContributionsSelector = createSelector(
   userContributionsSelector,
   userGiftsSelector,
   (contributions, gifts) => {
+    console.log('in selector', contributions, gifts);
     let newContributions = [];
     if (contributions !== null && gifts !== null) {
       for (let i = 0; i < contributions.length; i++) {
@@ -230,6 +231,8 @@ export const sortedUserContributionsSelector = createSelector(
         );
       }
     }
+    console.log('contributors, gifts', returnContributions);
+
     return returnContributions;
   }
 );

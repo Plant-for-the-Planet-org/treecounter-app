@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import UserContributionsContainer from '../../containers/UserContributions';
-import Contributors from './Contributors';
+import ContributorsList from './ContributorsList';
 import ProjectLists from './ProjectLists';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import SvgContainer from '../Common/SvgContainer';
@@ -163,7 +163,7 @@ export default class UserHome extends Component {
               user.
             </DescriptionHeading>
             <div>
-              <Contributors contributions={this.props.userContributions} />
+              <ContributorsList contributions={this.props.userContributions} />
             </div>
 
             <div className="heading">Tree Planting Projects</div>

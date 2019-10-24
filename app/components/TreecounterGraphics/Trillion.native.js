@@ -110,16 +110,18 @@ class Trillion extends PureComponent {
     if (this.props.userProfile) {
       console.log('User Logged in');
     } else {
-      fetchItem('pledgedEvent').then(data => {
-        if (typeof data !== 'undefined' && data.length > 0) {
-          let stringPledges = JSON.parse(data);
-          stringPledges = stringPledges.toString();
-          this.props.fetchPublicPledgesAction(stringPledges);
-          this.setState({
-            userPledges: this.props.entities.eventPledge
-          });
-        }
-      });
+      fetchItem('pledgedEvent')
+        .then(data => {
+          if (typeof data !== 'undefined' && data.length > 0) {
+            let stringPledges = JSON.parse(data);
+            stringPledges = stringPledges.toString();
+            this.props.fetchPublicPledgesAction(stringPledges);
+            this.setState({
+              userPledges: this.props.entities.eventPledge
+            });
+          }
+        })
+        .catch(error => console.log(error));
     }
   }
 

@@ -81,6 +81,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
             options.config = { ...options.config, email: true };
             properties[propertyKey].format = 'email';
           }
+
           if (!properties[propertyKey]['enum']) {
             options.placeholder = properties[propertyKey].title;
             options.label = properties[propertyKey].title;

@@ -266,7 +266,7 @@
 }
 
 .make-pledge-button-form{
-  margin-top: 54px;
+  margin-top: 20px;
   border-radius: 100px;
   border: solid 3px #ffffff;
   background-color: #89b53a ;
@@ -282,6 +282,7 @@
     min-width: 180px;
     padding: 12px;
     font-size: 12px;
+    margin-bottom: 30px;
   }
 }
 
@@ -436,9 +437,12 @@
     top: 70px;
     left: 0px;
     right: 0px;
-    bottom: 20px;
+    bottom: 0px;
     padding: 16px;
     transform: translate(0,0);
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin-bottom: 0px;
   }
 }
 .submit-pledge-container{
@@ -557,7 +561,7 @@
 }
 
 .close-button{
-  height: 24px;
+  height: 20px;
   @include for-phone-only{
     height: 16px;
   }
@@ -584,8 +588,6 @@
   color: #89b53a;
   cursor: pointer;
 }
-
-
 
 .increase-pledge-button{
   border-radius: 100px;

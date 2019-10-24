@@ -12,7 +12,6 @@ export function fetchpledgeEventsAction() {
 }
 
 export function fetchPublicPledgesAction(pledgeTokens) {
-  console.log('Function Called');
   return dispatch => {
     getRequest('eventPledgesByTokenPublic_get', {
       version: 'v1.3',
@@ -20,7 +19,6 @@ export function fetchPublicPledgesAction(pledgeTokens) {
     })
       .then(res => {
         dispatch(mergeEntities(normalize(res.data, [eventPledgeSchema])));
-        console.log('Got event by token');
       })
       .catch(error => console.log(error));
   };

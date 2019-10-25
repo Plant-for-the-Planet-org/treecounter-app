@@ -59,6 +59,13 @@
   border-radius: 10px;
 }
 
+.default-btn{
+  @extend .pftp-button-secondary;
+  background-color: transparent;
+  border: 1px solid #cdcdcd;
+  border-radius: 23px;
+  color: #0000008a;
+}
 .pftp-button-transparent {
   color: $colorPrimary;
   text-align: left;

@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CardLayout from '../Common/Card';
 import UserProfileImage from '../Common/UserProfileImage';
-import SupportButton from '../PublicTreeCounter/SupportButton';
+import SecondaryButton from '../Common/Button/SecondaryButton';
 import i18n from '../../locales/i18n.js';
 
 export default class ContributorCard extends React.Component {
@@ -12,33 +11,28 @@ export default class ContributorCard extends React.Component {
 
   render() {
     let { contributor } = this.props;
-    let { avatar, fullname, treeCount } = contributor;
-    console.log('vaatar', avatar, fullname, treeCount);
+    let { avatar, treeCount, giver, giver_slug } = contributor;
+    console.log('vaatar', avatar, treeCount, giver, giver_slug);
     return (
-      <div className="challenge_card">
-        <CardLayout>
-          <div className="flex-row">
-            <div className="limit-width">
-              <div className="flex-row">
-                <UserProfileImage profileImage={avatar} />
-                <div className="challenge_details">
-                  <div className="flex-row">
-                    <span className="text-style text-padding">{fullname}</span>
-                  </div>
-                  <div>{treeCount}</div>
+      <div className="challenge_card p-t-10">
+        <div className="flex-row">
+          <div className="limit-width">
+            <div className="flex-row">
+              <UserProfileImage profileImage={avatar} />
+              <div className="challenge_details">
+                <div>{giver}</div>
+                <div className="light">
+                  {treeCount} {i18n.t('label.trees')}
                 </div>
               </div>
             </div>
-            <div className="button_align">
-              <div className="support-button-container ">
-                <SupportButton
-                  buttonLabel={i18n.t('label.support')}
-                  onSupport={() => this.onSupport()}
-                />
-              </div>
-            </div>
           </div>
-        </CardLayout>
+          <div className="button_align">
+            <SecondaryButton className="default-btn" onClick={this.onSupport}>
+              {i18n.t('label.support')}
+            </SecondaryButton>
+          </div>
+        </div>
       </div>
     );
   }

@@ -53,7 +53,12 @@ const Info = props => {
                 <a data-tip data-for="info-icon">
                   <img className="ndvi-img" src={questionmark_orange} />
                 </a>
-                <ReactTooltip id="info-icon" effect="solid" type="dark">
+                <ReactTooltip
+                  id="info-icon"
+                  place="left"
+                  effect="solid"
+                  type="dark"
+                >
                   <span className="tooltip-text">
                     {props.toolTipHelpButtonSpell
                       ? props.toolTipHelpButtonSpell

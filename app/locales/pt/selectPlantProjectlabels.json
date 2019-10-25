@@ -1,1 +1,5 @@
-{ }
+{
+  "name": "Nome",
+  "price": "Preço",
+  "select_project": "Selecione o projeto"
+}

@@ -1,1 +1,5 @@
-{ }
+{
+  "amount": "Valor da doação",
+  "creditCard": "Cartão de crédito",
+  "confirm": "Confirmo que pagarei o valor de {{amount}}{{currency}} na conta a seguir."
+}

@@ -33,7 +33,15 @@ module.exports = webpackMerge(commonConfig, {
     filename: '[name].js',
     publicPath: '/'
   },
-
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['eslint-loader']
+      }
+    ]
+  },
   plugins: [
     new WebpackCleanupPlugin(),
     new webpack.LoaderOptionsPlugin({

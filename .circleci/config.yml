@@ -135,11 +135,12 @@ jobs:
             if [[ "${CIRCLE_BRANCH}" ]]
             then
               ssh $HOST "cd $WD_REACT; git checkout ${CIRCLE_BRANCH}"
+              ssh $HOST "cd $WD_REACT; git pull"
             else
               # 'devel' tagged version
               ssh $HOST "cd $WD_REACT; git checkout devel"
+              ssh $HOST "cd $WD_REACT; git merge devel"
             fi
-            ssh $HOST "cd $WD_REACT; git pull"
       - run:
           name: Setup local configuration
           command: |

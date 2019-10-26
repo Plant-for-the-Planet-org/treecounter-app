@@ -39,6 +39,15 @@ module.exports = webpackMerge(commonConfig, {
     publicPath: '/'
   },
   devtool: 'source-map',
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['eslint-loader']
+      }
+    ]
+  },
   plugins: [
     new BugsnagBuildReporterPlugin({
       apiKey: '6f2971a9b077662912f61ae602716afd',

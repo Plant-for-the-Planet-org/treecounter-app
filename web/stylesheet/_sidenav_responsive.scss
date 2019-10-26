@@ -35,12 +35,13 @@ $breakpointTablet: 768px;
 }
 .badge-wrapper {
   max-height: 100px;
-  max-width: 96%;
+  max-width: 240px;
   display: flex;
   flex-wrap: wrap;
-  position: relative;
+  background: white;
+  position: fixed;
   bottom: 0;
-  margin:15px auto;
+  margin:2px 5px;
   flex-direction: row;
   a {
     max-width: 100%;

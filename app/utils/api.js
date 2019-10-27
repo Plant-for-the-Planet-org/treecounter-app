@@ -130,7 +130,17 @@ export async function postDirectRequest(path, data, authenticated = false) {
     .then(onAPIResponse)
     .catch(onAPIError);
 }
-
+export async function getExternalRequest() {
+  return await axios
+    .get(
+      `http://api.ipstack.com/check?access_key=${
+        context.ipStackKey
+      }&fields=location,country_code,currency`
+    )
+    .then(checkStatus)
+    .then(onAPIResponse)
+    .catch(onAPIError);
+}
 export async function postAuthenticatedRequest(route, data, params) {
   return postRequest(route, data, params, true);
 }

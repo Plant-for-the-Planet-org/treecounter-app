@@ -22,10 +22,10 @@ module.exports = webpackMerge(commonConfig, {
     donatetreewidget: [
       'babel-polyfill',
       path.join(__dirname, '../widgets/DonateTrees/widget.js')
-    ],
-    ndviwidget: [
-      'babel-polyfill',
-      path.join(__dirname, '../widgets/NDVI/widget.js')
+      // ],
+      // ndviwidget: [
+      //   'babel-polyfill',
+      //   path.join(__dirname, '../widgets/NDVI/widget.js')
     ]
   },
   output: {
@@ -34,6 +34,15 @@ module.exports = webpackMerge(commonConfig, {
     publicPath: '/'
   },
   devtool: 'source-map',
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['eslint-loader']
+      }
+    ]
+  },
   plugins: [
     new WebpackCleanupPlugin(),
     new webpack.LoaderOptionsPlugin({

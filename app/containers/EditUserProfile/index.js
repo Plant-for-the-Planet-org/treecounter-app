@@ -8,7 +8,8 @@ import {
   updatePlantProject,
   deletePlantProject,
   addPlantProject,
-  deleteUserProfile
+  deleteUserProfile,
+  updateUserEmail
 } from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
@@ -76,6 +77,7 @@ class EditUserProfileContainer extends React.Component {
       this.fetchFolloweeinfo();
     }
   }
+
   deleteProfile = () => {
     console.log(
       'call Profile Deletion API here',
@@ -97,6 +99,36 @@ class EditUserProfileContainer extends React.Component {
           i18n.t('label.error_title'),
           5000
         );
+      });
+  };
+
+  updateEmail = email => {
+    this.props
+      .updateUserEmail(email)
+      .then((/* data */) => {
+        NotificationManager.success(
+          i18n.t('label.confirmation_email_will_be_send'),
+          i18n.t('label.success'),
+          5000
+        );
+        this.props.logoutUser();
+      })
+      .catch(err => {
+        if (err.response.data.code === 400) {
+          NotificationManager.error(
+            err.response.data.errors.children.newEmail.errors
+              ? err.response.data.errors.children.newEmail.errors[0]
+              : err.response.data.errors.children.newEmail.children.first
+                ? err.response.data.errors.children.newEmail.children.first
+                    .errors[0]
+                : err.response.data.errors.children.newEmail.children.second
+                  ? err.response.data.errors.children.newEmail.children.second
+                      .errors[0]
+                  : 'label.error',
+            i18n.t('label.error'),
+            5000
+          );
+        }
       });
   };
 
@@ -213,6 +245,7 @@ class EditUserProfileContainer extends React.Component {
         openPasswordUpdatedDialog={this.state.showPasswordDialog}
         handlePaswordUpdatedClose={this.handleCloseModal}
         deleteProfile={this.deleteProfile}
+        updateEmail={this.updateEmail}
         updatePlantProject={this.updatePlantProject}
         deletePlantProject={this.deletePlantProject}
         addPlantProject={this.addPlantProject}
@@ -240,6 +273,7 @@ const mapDispatchToProps = dispatch => {
       deletePlantProject,
       addPlantProject,
       deleteUserProfile,
+      updateUserEmail,
       logoutUser,
       unfollowUser,
       treecounterLookupAction
@@ -258,6 +292,7 @@ EditUserProfileContainer.propTypes = {
   deletePlantProject: PropTypes.func,
   addPlantProject: PropTypes.func,
   deleteUserProfile: PropTypes.func,
+  updateEmail: PropTypes.func,
   navigation: PropTypes.any,
   logoutUser: PropTypes.func,
   unfollowUser: PropTypes.func,

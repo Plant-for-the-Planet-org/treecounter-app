@@ -1,1 +1,5 @@
-{ }
+{
+  "mail_sent": "Acabamos de lhe enviar um email.",
+  "secure_link": "Clique no link seguro que lhe enviamos para redefinir sua senha. Se você não recebeu um e-mail, verifique sua pasta de spam.",
+  "try_again_login": "Tente fazer o login novamente"
+}

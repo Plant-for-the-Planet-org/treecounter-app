@@ -275,7 +275,9 @@ class Menu extends Component {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://apps.apple.com/app/plant-for-the-planet/id1444740626"
+              href={`https://apps.apple.com/app/plant-for-the-planet/id${
+                context['ios'].appId
+              }`}
             >
               <img src={images['appleStoreBadge_' + userLang]} />
             </a>
@@ -284,7 +286,9 @@ class Menu extends Component {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://play.google.com/store/apps/details?id=org.pftp"
+              href={`https://play.google.com/store/apps/details?id=${
+                context['android'].appId
+              }`}
             >
               <img src={images['googlePlayBadge_' + userLang]} />
             </a>

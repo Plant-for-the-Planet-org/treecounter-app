@@ -15,6 +15,8 @@ import { initLocale } from '../../actions/getLocale.native.js';
 class App extends Component {
   componentDidMount() {
     initLocale();
+    // TODO: at this time the locale isn't yet defined, so this API call is currently done with locale = undefined
+    // Is there any way to wait with this API call until the locale is defined?
     this.props.loadTpos();
   }
   render() {

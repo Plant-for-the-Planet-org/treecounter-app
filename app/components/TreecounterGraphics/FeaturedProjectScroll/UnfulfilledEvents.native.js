@@ -37,7 +37,7 @@ export default class UnfulfilledEvents extends Component {
                   />
                   <Text style={styles.featuredProjectCardIconText}>
                     {this.props.event.lastIncremented
-                      ? formatDate(this.props.date)
+                      ? formatDate(this.props.event.lastIncremented)
                       : null}
                   </Text>
                 </View>

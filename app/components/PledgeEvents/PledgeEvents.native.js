@@ -5,28 +5,78 @@ import i18n from '../../locales/i18n';
 import PledgeTabView from './PledgeTabView.native';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import { bindActionCreators } from 'redux';
-import { updateStaticRoute } from '../../helpers/routerHelper';
+import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import CardLayout from '../Common/Card';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
+import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
+import { loadUserProfile } from './../../actions/loadUserProfileAction';
+import { fetchItem } from './../../stores/localStorage';
+
 import {
   fetchPledgesAction,
   postPledge,
   clearTimeoutAction
 } from '../../actions/pledgeAction';
-import { pledgesSelector, pledgeEventSelector } from '../../selectors';
+import {
+  pledgesSelector,
+  pledgeEventSelector,
+  entitiesSelector,
+  currentUserProfileSelector
+} from '../../selectors';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import LoadingIndicator from './../Common/LoadingIndicator';
+import { nextArrowWhite } from '../../assets';
+
 class PledgeEvents extends Component {
   state = {
     loading: true,
-    openSheet: true
+    openSheet: true,
+    myPledge: {}
+  };
+
+  imageStyle = {
+    height: 30
   };
   componentDidMount() {
-    const eventSlug = this.props.navigation.getParam('slug');
-    this.props.fetchPledgesAction(eventSlug);
+    this.props.fetchPledgesAction(this.props.navigation.getParam('slug'));
+    this.getMyPledge();
+    if (this.props.currentUserProfile) {
+      this.setState({
+        loggedIn: true
+      });
+    } else {
+      fetchItem('pledgedEvent')
+        .then(data => {
+          if (typeof data !== 'undefined' && data.length > 0) {
+            let stringPledges = JSON.parse(data);
+            stringPledges = stringPledges.toString();
+            this.props.fetchPublicPledgesAction(stringPledges);
+          }
+        })
+        .catch(error => console.log(error));
+    }
+    this.getMyPledge();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    if (prevProps.pledges !== this.props.pledges) {
+      if (this.props.currentUserProfile) {
+        this.setState({
+          loggedIn: true
+        });
+      } else {
+        fetchItem('pledgedEvent')
+          .then(data => {
+            if (typeof data !== 'undefined' && data.length > 0) {
+              let stringPledges = JSON.parse(data);
+              stringPledges = stringPledges.toString();
+              this.props.fetchPublicPledgesAction(stringPledges);
+            }
+          })
+          .catch(error => console.log(error));
+      }
+      this.getMyPledge();
+    }
     if (this.props.navigation.getParam('plantProject').id !== -1) {
       this.RBSheet.open();
       this.props.navigation.getParam('plantProject').id = -1;
@@ -38,47 +88,73 @@ class PledgeEvents extends Component {
     }
   }
 
+  getMyPledge = () => {
+    let userPledges =
+      this.props.entities && this.props.entities.eventPledge
+        ? this.props.pledges &&
+          this.props.pledges.allEventPledges &&
+          this.props.pledges.allEventPledges.length > 0 // Checking if we have all the pledges
+          ? typeof this.props.entities.eventPledge !== 'undefined'
+            ? ((userPledges = Object.values(this.props.entities.eventPledge)), // convert object to array
+              userPledges.filter(pledge => {
+                return this.props.pledges.allEventPledges.some(f => {
+                  return f.token === pledge.token && f.email === pledge.email;
+                });
+              }))
+            : null
+          : null
+        : null;
+    this.setState({
+      myPledge: userPledges
+    });
+  };
+
   componentWillUnmount() {
     this.props.clearTimeoutAction(this.props.pledges.timeoutID);
   }
 
   render() {
-    const { navigation } = this.props;
+    let myPledge = this.state.myPledge;
+    let pledges =
+      this.props.pledges && this.props.pledges.total !== undefined
+        ? this.props.pledges
+        : null;
+    const navigation = this.props.navigation;
     return this.state.loading ? (
       <LoadingIndicator />
     ) : (
       <View style={styles.peRootView}>
         <ScrollView contentContainerStyle={styles.peRootScrollView}>
           <View style={styles.peHeader}>
+            {/* Show Event Logo */}
             <Image
               style={styles.peHeaderLogo}
               source={{
                 uri: getImageUrl(
                   'event',
                   'thumb',
-                  this.props.navigation.getParam('eventImage')
+                  navigation.getParam('eventImage')
                 )
               }}
               resizeMode="contain"
             />
+            {/* Shows Event Name */}
             <Text style={styles.eventTitle}>
-              {this.props.navigation.getParam('eventName')}
+              {navigation.getParam('eventName')}
             </Text>
           </View>
 
-          {this.props.pledges &&
-          this.props.pledges.highestPledgeEvents &&
-          this.props.pledges.highestPledgeEvents.length > 0 ? (
+          {pledges &&
+          pledges.highestPledgeEvents &&
+          pledges.highestPledgeEvents.length > 0 ? (
             // If there are Pledges
             <View>
               <Text style={styles.eventSubTitle}>
                 {i18n.t('label.treesPledgedAllPledges', {
-                  treeCount: this.props.navigation
-                    .getParam('totalTrees')
-                    .toLocaleString()
+                  treeCount: navigation.getParam('totalTrees').toLocaleString()
                 })}
               </Text>
-              <PledgeTabView pledges={this.props.pledges} />
+              <PledgeTabView pledges={pledges} />
             </View>
           ) : (
             // If there are no Pledges
@@ -88,61 +164,22 @@ class PledgeEvents extends Component {
               </Text>
             </View>
           )}
-          {this.props.pledges &&
-          this.props.pledges.pledgeEventImages &&
-          this.props.pledges.pledgeEventImages.length > 0 ? (
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.peSliderScrollView}
-            >
-              {/* {pledgeImages} */}
-              {this.props.pledges.pledgeEventImages.map(
-                (pledgeImage, index) => (
-                  <Image
-                    key={`pledgeImage-${index}`}
-                    style={styles.peSliderImage}
-                    source={{
-                      uri: getImageUrl(
-                        'eventGallery',
-                        'default',
-                        pledgeImage.image
-                      )
-                    }}
-                    resizeMode="contain"
-                  />
-                )
-              )}
-            </ScrollView>
+
+          {/* Show Event Images */}
+          {pledges &&
+          pledges.pledgeEventImages &&
+          pledges.pledgeEventImages.length > 0 ? (
+            <EventImages pledgeEventImages={pledges.pledgeEventImages} />
           ) : null}
+
+          {/* Show Event description */}
           <CardLayout style={styles.peDescriptionView}>
             <Text style={styles.peDescriptionText}>
-              {this.props.navigation.getParam('description')}
+              {navigation.getParam('description')}
             </Text>
           </CardLayout>
         </ScrollView>
 
-        <TouchableOpacity
-          style={styles.makePledgeButton}
-          onPress={() => {
-            updateStaticRoute('app_pledge_form', navigation, {
-              slug: this.props.pledges.slug,
-              plantProject: this.props.pledges.plantProject,
-              eventName: this.props.navigation.getParam('eventName'),
-              eventDate: this.props.navigation.getParam('eventDate'),
-              totalTrees: this.props.navigation.getParam('totalTrees'),
-              eventImage: this.props.navigation.getParam('eventImage'),
-              description: this.props.navigation.getParam('description')
-            });
-          }}
-        >
-          <View style={styles.makePledgeButtonView}>
-            <Text style={styles.makePledgeButtonText}>
-              {' '}
-              {i18n.t('label.makePledgeButton')}
-            </Text>
-          </View>
-        </TouchableOpacity>
         <RBSheet
           ref={ref => {
             this.RBSheet = ref;
@@ -163,7 +200,7 @@ class PledgeEvents extends Component {
           /> */}
             <Text style={styles.baMessage}>
               {i18n.t('label.pledgeAddedMessage', {
-                treeCount: this.props.navigation.getParam('treeCount')
+                treeCount: navigation.getParam('treeCount')
               })}
             </Text>
 
@@ -172,12 +209,12 @@ class PledgeEvents extends Component {
                 style={styles.baLaterButton}
                 onPress={() => {
                   let unfulfilledEvent = {
-                    eventSlug: this.props.pledges.slug,
-                    treeCount: this.props.navigation.getParam('treeCount')
+                    eventSlug: pledges.slug,
+                    treeCount: navigation.getParam('treeCount')
                   };
                   updateStaticRoute(
                     'app_unfulfilled_pledge_events',
-                    this.props.navigation,
+                    navigation,
                     {
                       unfulfilledEvent: unfulfilledEvent
                     }
@@ -193,7 +230,7 @@ class PledgeEvents extends Component {
                 onPress={() => {
                   updateStaticRoute(
                     getLocalRoute('app_donateTrees'),
-                    this.props.navigation
+                    navigation
                   );
                 }}
               >
@@ -212,7 +249,7 @@ class PledgeEvents extends Component {
           </View>
           <TouchableOpacity
             onPress={() => {
-              updateStaticRoute('app_donate_detail2', this.props.navigation);
+              updateStaticRoute('app_donate_detail2', navigation);
             }}
           >
             <View style={styles.continueButtonView}>
@@ -221,6 +258,91 @@ class PledgeEvents extends Component {
             </View>
           </TouchableOpacity>
         </View> */}
+
+        {typeof myPledge !== 'undefined' && myPledge !== null ? (
+          myPledge.length > 0 ? (
+            <View style={styles.bottomButtonView}>
+              <View style={styles.leftSection}>
+                <Text style={styles.pledgeTreesAmount}>
+                  {i18n.t('label.treesPledgedAllPledges', {
+                    treeCount: myPledge[0].treeCount.toLocaleString()
+                  })}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    updateStaticRoute('app_pledge_update_form', navigation, {
+                      unfulfilledEvent: myPledge[0]
+                    });
+                  }}
+                >
+                  <Text style={styles.pledgeTreesAction}>
+                    {i18n.t('label.increaseMyPledge')}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  updateRoute('app_donateTrees', navigation);
+                }}
+              >
+                <View style={styles.continueButtonView}>
+                  <Image
+                    style={this.imageStyle}
+                    source={nextArrowWhite}
+                    resizeMode="contain"
+                  />
+                  <Text style={styles.continueText}>
+                    {i18n.t('label.donate')}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={styles.makePledgeButton}
+              onPress={() => {
+                updateStaticRoute('app_pledge_form', navigation, {
+                  slug: pledges.slug,
+                  plantProject: pledges.plantProject,
+                  eventName: navigation.getParam('eventName'),
+                  eventDate: navigation.getParam('eventDate'),
+                  totalTrees: navigation.getParam('totalTrees'),
+                  eventImage: navigation.getParam('eventImage'),
+                  description: navigation.getParam('description')
+                });
+              }}
+            >
+              <View style={styles.makePledgeButtonView}>
+                <Text style={styles.makePledgeButtonText}>
+                  {' '}
+                  {i18n.t('label.makePledgeButton')}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          )
+        ) : (
+          <TouchableOpacity
+            style={styles.makePledgeButton}
+            onPress={() => {
+              updateStaticRoute('app_pledge_form', navigation, {
+                slug: pledges.slug,
+                plantProject: pledges.plantProject,
+                eventName: navigation.getParam('eventName'),
+                eventDate: navigation.getParam('eventDate'),
+                totalTrees: navigation.getParam('totalTrees'),
+                eventImage: navigation.getParam('eventImage'),
+                description: navigation.getParam('description')
+              });
+            }}
+          >
+            <View style={styles.makePledgeButtonView}>
+              <Text style={styles.makePledgeButtonText}>
+                {' '}
+                {i18n.t('label.makePledgeButton')}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}
       </View>
     );
   }
@@ -228,14 +350,56 @@ class PledgeEvents extends Component {
 
 const mapStateToProps = state => ({
   pledges: pledgesSelector(state),
-  pledgeEvents: pledgeEventSelector(state)
+  pledgeEvents: pledgeEventSelector(state),
+  entities: entitiesSelector(state),
+  currentUserProfile: currentUserProfileSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { fetchPledgesAction, postPledge, clearTimeoutAction },
+    {
+      fetchPledgesAction,
+      postPledge,
+      clearTimeoutAction,
+      fetchPublicPledgesAction,
+      loadUserProfile
+    },
     dispatch
   );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PledgeEvents);
+
+// What this page Does
+/*
+1. Display Event Details - Event name, event image, event description and Total Trees
+2. Recent and Highest Pledges
+3. Buttons -
+3.1 If there is no pledge made from this event by the user - Show Make a pledge button
+3.2 If the user has pledged but not fulfilled show Donate/Increase pledge button
+3.3 If the user has pledges and fulfilled show Plant More button
+
+4. Show all Pledges (Not Added)
+*/
+
+function EventImages(props) {
+  const pledgeImages = props.pledgeEventImages;
+  return (
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.peSliderScrollView}
+    >
+      {pledgeImages.map((pledgeImage, index) => (
+        <Image
+          key={`pledgeImage-${index}`}
+          style={styles.peSliderImage}
+          source={{
+            uri: getImageUrl('eventGallery', 'default', pledgeImage.image)
+          }}
+          resizeMode="contain"
+        />
+      ))}
+    </ScrollView>
+  );
+}

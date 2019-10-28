@@ -13,7 +13,11 @@ import {
   postPledge,
   clearTimeoutAction
 } from '../../actions/pledgeAction';
-import { pledgesSelector, pledgeEventSelector } from '../../selectors';
+import {
+  pledgesSelector,
+  pledgeEventSelector,
+  entitiesSelector
+} from '../../selectors';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import PropTypes from 'prop-types';
 import { nextArrowWhite } from '../../assets';
@@ -173,7 +177,8 @@ class UnfulfilledPledgeEvents extends Component {
 
 const mapStateToProps = state => ({
   pledges: pledgesSelector(state),
-  pledgeEvents: pledgeEventSelector(state)
+  pledgeEvents: pledgeEventSelector(state),
+  entities: entitiesSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {

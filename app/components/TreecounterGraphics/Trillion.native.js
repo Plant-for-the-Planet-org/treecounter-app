@@ -125,6 +125,29 @@ class Trillion extends PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.entities.eventPledge !== this.props.entities.eventPledge) {
+      if (this.props.userProfile) {
+        this.setState({
+          userPledges: this.props.entities.eventPledge
+        });
+      } else {
+        fetchItem('pledgedEvent')
+          .then(data => {
+            if (typeof data !== 'undefined' && data.length > 0) {
+              let stringPledges = JSON.parse(data);
+              stringPledges = stringPledges.toString();
+              this.props.fetchPublicPledgesAction(stringPledges);
+              this.setState({
+                userPledges: this.props.entities.eventPledge
+              });
+            }
+          })
+          .catch(error => console.log(error));
+      }
+    }
+  }
+
   _handleIndexChange = index => {
     this.setState({ index });
   };
@@ -232,7 +255,6 @@ class Trillion extends PureComponent {
                       showsHorizontalScrollIndicator={false}
                       contentContainerStyle={{ paddingRight: 20 }}
                     >
-                      {console.log(this.props.entities.eventPledge)}
                       {Object.values(this.props.entities.eventPledge).map(
                         unfulfilledEvent =>
                           unfulfilledEvent.status === 'pending' ? (

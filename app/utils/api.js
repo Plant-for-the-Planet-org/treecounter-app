@@ -131,6 +131,7 @@ export async function postDirectRequest(path, data, authenticated = false) {
     .catch(onAPIError);
 }
 export async function getExternalRequest(params) {
+  console.log('calling getexternal', params);
   return await axios
     .get(params.endPoint)
     .then(checkStatus)

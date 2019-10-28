@@ -32,7 +32,7 @@ export function fetchLocation() {
 }
 
 export function fetchCurrency() {
-  return dispatch => {
+  return (/*dispatch*/) => {
     getExternalRequest({
       endPoint: `hhttps://openexchangerates.org/api/latest.json?app_id=${
         context.currencyApiKey

@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlantProjectSpecsItem from './PlantProjectSpecsItem';
 import i18n from '../../locales/i18n.js';
-import { View, Text, Image, TouchableHighlight } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-spec';
 // import ToolTip from 'react-native-tooltip';
 //import Tooltips from 'react-native-tooltips';
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
-/* app.js */
-import EStyleSheet from 'react-native-extended-stylesheet';
 
 import {
   locationIcon,

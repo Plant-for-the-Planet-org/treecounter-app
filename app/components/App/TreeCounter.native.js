@@ -5,25 +5,26 @@
 
 import React, { Component } from 'react';
 //TODO import this first to avoid any init issue of i18n
-import i18n from '../../locales/i18n.js';
 import AppDrawerNavigatorContainer from '../../containers/Navigators/AppDrawerNavigatorContainer';
 import { connect } from 'react-redux';
 import { loadTpos } from '../../actions/loadTposAction';
 import { bindActionCreators } from 'redux';
-import { View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { initLocale } from '../../actions/getLocale.native.js';
 
 class App extends Component {
   componentDidMount() {
     initLocale();
+    // TODO: at this time the locale isn't yet defined, so this API call is currently done with locale = undefined
+    // Is there any way to wait with this API call until the locale is defined?
     this.props.loadTpos();
   }
   render() {
+    const backgroundColor = 'white';
     return (
       <SafeAreaView
         forceInset={{ top: 'never' }}
-        style={{ flex: 1, backgroundColor: '#fff' }}
+        style={{ flex: 1, backgroundColor: backgroundColor }}
       >
         <AppDrawerNavigatorContainer />
       </SafeAreaView>
@@ -31,7 +32,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (/* state */) => ({
   // userProfile: currentUserProfileSelector(state)
 });
 

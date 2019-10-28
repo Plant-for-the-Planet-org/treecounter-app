@@ -14,11 +14,6 @@ const config = {
         }
       },
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: ['eslint-loader']
-      },
-      {
         test: /\.html$/,
         use: [
           {
@@ -67,12 +62,12 @@ const config = {
       filename: './donatetreewidget.html',
       template: './web/widget.index.html'
     }),
-    new HtmlWebPackPlugin({
-      inject: true,
-      chunks: ['ndviwidget'],
-      filename: './ndviwidget.html',
-      template: './web/widget.index.html'
-    }),
+    // new HtmlWebPackPlugin({
+    //   inject: true,
+    //   chunks: ['ndviwidget'],
+    //   filename: './ndviwidget.html',
+    //   template: './web/widget.index.html'
+    // }),
     new HtmlWebPackPlugin({
       chunks: ['bundle'],
       template: './web/index.html',

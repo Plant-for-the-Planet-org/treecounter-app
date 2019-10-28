@@ -9,7 +9,7 @@ const Layout = {
 };
 const rowHeight = 20;
 
-export default (selectCompetitionFull = EStyleSheet.create({
+export default EStyleSheet.create({
   projectSnippetContainer: {
     flexDirection: 'column',
     padding: 0,
@@ -156,7 +156,6 @@ export default (selectCompetitionFull = EStyleSheet.create({
   },
   locationText: {
     fontSize: 10,
-    color: '$textColor',
     fontStyle: 'italic',
     paddingBottom: 2,
     color: '$cardTextColor'
@@ -286,4 +285,4 @@ export default (selectCompetitionFull = EStyleSheet.create({
     borderWidth: 0,
     marginLeft: 10
   }
-}));
+});

@@ -1,4 +1,4 @@
-import { Text, View, Image, TextInput } from 'react-native';
+import { Text, View, TextInput } from 'react-native';
 import React from 'react';
 import i18n from '../../locales/i18n';
 
@@ -33,7 +33,7 @@ export function TextAreaTemplate(locals) {
           placeholder={i18n.t(locals.placeholder)}
           keyboardType={locals.keyboardType}
           maxLength={locals.maxLength}
-          multiline={true}
+          multiline
           value={locals.value}
           onChangeText={value => locals.onChange(value)}
           onChange={locals.onChangeNative}

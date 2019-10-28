@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {
-  challengeFormSchema,
-  challengeFormSchemaOptions
-} from '../../../server/parsedSchemas/challenge';
+import { challengeFormSchema } from '../../../server/parsedSchemas/challenge';
 import t from 'tcomb-form-native';
 import CardLayout from '../../Common/Card';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
@@ -86,7 +83,7 @@ class ChallengeEmail extends Component {
   onNextClick() {
     if (this.challengeInvitation.getValue()) {
       let value = this.challengeInvitation.getValue();
-      requestData = {
+      let requestData = {
         invitee: { ...value }
       };
       if (this.state.isChecked) {
@@ -138,7 +135,7 @@ class ChallengeEmail extends Component {
           contentContainerStyle={{
             paddingBottom: 72
           }}
-          enableOnAndroid={true}
+          enableOnAndroid
         >
           {this.props.error ? (
             <View style={errorStyles.containerDedicateStyle}>

@@ -1,10 +1,9 @@
 import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Fonts } from './../../utils/fonts';
 
 const width = Dimensions.get('window').width;
 
-export default (pledgeeventsStyle = EStyleSheet.create({
+export default EStyleSheet.create({
   peRootView: { flex: 1, height: '100%' },
   peRootScrollView: {
     backgroundColor: 'white',
@@ -251,4 +250,4 @@ export default (pledgeeventsStyle = EStyleSheet.create({
     marginTop: 36,
     marginRight: 12
   }
-}));
+});

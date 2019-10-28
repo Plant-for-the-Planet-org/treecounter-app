@@ -18,18 +18,15 @@ import {
 import CompetitionProgressBar from './CompetitionProgressBar';
 import { compCalendar, email } from '../../assets';
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import CompetitionTopCompetitor from './CompetitionTopCompetitor.native';
 import CompetitionParticipant from './CompetitionParticipant.native';
-import searchBarStyles from '../../styles/header/search_bar.native';
 import SearchUser from '../Challenge/Tabs/SearchUser.native';
-import moment from 'moment';
-import 'moment/min/locales';
 import i18n from '../../locales/i18n.js';
 import { getLocale } from '../../actions/getLocale';
 import { getDateFromMySQL } from '../../helpers/utils';
 import { Dimensions } from 'react-native';
 import { trees } from './../../assets';
 import { getLocalRoute } from '../../actions/apiRouting';
+import { formatDate } from '../../utils/utils';
 
 const Layout = {
   window: {
@@ -45,10 +42,7 @@ class CompetitionFull extends React.Component {
   constructor(props) {
     super(props);
     this.onSearchResultClick = this.onSearchResultClick.bind(this);
-    moment.locale(getLocale());
   }
-
-  componentWillReceiveProps(nextProps) {}
 
   componentDidMount() {
     if (this.props.competition_id) {
@@ -66,6 +60,7 @@ class CompetitionFull extends React.Component {
     console.log(competitionDetail);
     let participantCount = 0,
       requestCount = 0,
+      // eslint-disable-next-line no-unused-vars
       inviteCount = 0,
       invitedCount = 0;
     if (competitionDetail && competitionDetail.allEnrollments) {
@@ -267,9 +262,7 @@ class CompetitionFull extends React.Component {
                       <Text style={snippetStyles.bottomText}>
                         {i18n.t('label.ends')}{' '}
                         {competitionDetail && competitionDetail.endDate
-                          ? moment(
-                              getDateFromMySQL(competitionDetail.endDate)
-                            ).format('MMM DD, YYYY')
+                          ? formatDate(competitionDetail.endDate)
                           : ''}
                       </Text>
                     </View>
@@ -431,7 +424,7 @@ class CompetitionFull extends React.Component {
                       <SearchUser
                         onSearchResultClick={this.onSearchResultClick}
                         currentUserProfile={this.props.currentUserProfile}
-                        clearTextOnClick={true}
+                        clearTextOnClick
                         alreadyInvited={competitionDetail.allEnrollments}
                         hideCompetitions
                       />

@@ -42,7 +42,10 @@ export default class NDVIContainer extends Component {
     const monthStyle = styles.monthStyle;
     return (
       <React.Fragment>
-        <CardLayout>
+        <Text style={styles.headerText}>
+          {i18n.t('label.NDVI_time_series')}
+        </Text>
+        <CardLayout style={styles.cardLayout}>
           <View style={styles.container}>
             <Text style={{ opacity: 0 }}>2222</Text>
             <Text style={monthStyle}>J</Text>

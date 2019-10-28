@@ -1,8 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-import { Dimensions } from 'react-native';
-
-export default (plantProjectDetail = EStyleSheet.create({
+export default EStyleSheet.create({
   carousalContainer: { flexDirection: 'column' },
   descriptionContainer: {
     paddingTop: 20,
@@ -23,4 +21,4 @@ export default (plantProjectDetail = EStyleSheet.create({
   },
   linkText: { alignSelf: 'flex-end', color: '$colorPrimaryAccent' },
   videoContainer: { paddingTop: 20 }
-}));
+});

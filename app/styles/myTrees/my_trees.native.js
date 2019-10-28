@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (myTreesStyle = EStyleSheet.create({
+export default EStyleSheet.create({
   contentContainer: {
     flex: 1,
     paddingVertical: 20
@@ -42,4 +42,4 @@ export default (myTreesStyle = EStyleSheet.create({
       fontSize: '.7rem'
     }
   }
-}));
+});

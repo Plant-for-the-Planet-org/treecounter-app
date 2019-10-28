@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions } from 'react-native';
 
 //Only take multiple of 10s
 const squareDimension =
@@ -8,7 +8,7 @@ const squareDimension =
       10
   ) * 10;
 
-export default (buttonStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   homeContainer: {
     flex: 1,
     flexDirection: 'column'
@@ -82,4 +82,4 @@ export default (buttonStyles = EStyleSheet.create({
     color: '#ffffff',
     fontSize: 15
   }
-}));
+});

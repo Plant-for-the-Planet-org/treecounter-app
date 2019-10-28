@@ -1,7 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions } from 'react-native';
 
-export default (redeemStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   scrollContainer: {},
   loadingContainer: {
     flex: 1,
@@ -100,4 +99,4 @@ export default (redeemStyles = EStyleSheet.create({
   buttonStyle: {
     margin: 20
   }
-}));
+});

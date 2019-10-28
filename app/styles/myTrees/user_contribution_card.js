@@ -2,7 +2,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 const getHeaderText = function(padding, margin) {
   return {
-    textAlign: 'left',
     fontSize: 16,
     fontWeight: '500',
     textAlign: 'left',
@@ -13,7 +12,7 @@ const getHeaderText = function(padding, margin) {
   };
 };
 
-let myTreesStyle = (color, borderColor) =>
+export const myTreesStyle = (color, borderColor) =>
   EStyleSheet.create({
     $color: color,
     $borderColor: borderColor,
@@ -155,4 +154,5 @@ let myTreesStyle = (color, borderColor) =>
     }
   });
 
-export default myTreesStyle;
+const style = myTreesStyle('#95c243', '#68aeec');
+export default style;

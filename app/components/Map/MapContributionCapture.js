@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { PureComponent } from 'react';
 import { WebMap } from 'react-arcgis';
 import PropTypes from 'prop-types';
@@ -89,20 +90,25 @@ class MapContributionCapture extends PureComponent {
         location_search.resultGraphicEnabled = false;
 
         // UPDATE DEFAULT LOCATOR (Esri World Geocoding Service) TO INCLUDE COUNTRY IN THE RESULTS //
-        // const locator_source = location_search.sources.getItemAt(0);
-        // if (locator_source) {
-        //   // RETURN COUNTRY CODE //
-        //   locator_source.outFields.push('CountryCode');
+        let locator_source;
+        try {
+          locator_source = location_search.sources.getItemAt(0);
+          if (locator_source) {
+            // RETURN COUNTRY CODE //
+            locator_source.outFields.push('CountryCode');
 
-        //   // RESET DEFAULT LOCATOR //
-        //   location_search.sources = [locator_source];
-        // } else {
-        //   // It does however work
-        //   console.error(
-        //     'No locator_source found on location_search',
-        //     location_search
-        //   );
-        // }
+            // RESET DEFAULT LOCATOR //
+            location_search.sources = [locator_source];
+          } else {
+            // It does however work
+            console.error(
+              'No locator_source found on location_search',
+              location_search
+            );
+          }
+        } catch (error) {
+          console.error('locator_source not found', error);
+        }
 
         view.ui.add(location_search, 'top-right');
 
@@ -127,6 +133,10 @@ class MapContributionCapture extends PureComponent {
         view.on('click', evt => {
           location_search.searchTerm = '';
           view.goTo(evt.mapPoint).then(() => {
+            if (!locator_source) {
+              console.error('locator_source was not set');
+              return;
+            }
             locator_source.locator
               .locationToAddress(evt.mapPoint)
               .then(address_candidate => {

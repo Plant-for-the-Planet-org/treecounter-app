@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import parseDate from './NDVIfunctions/parseDate';
 import { View, Text } from 'react-native';
 import TouchableItem from '../Common/TouchableItem.native';
 import styles from '../../styles/NDVI/Info';
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
+import { formatDate } from '../../utils/utils';
+import { formatDateToMySQL } from '../../helpers/utils';
 
 const textCommonStyle = { fontSize: 10, lineHeight: 14 };
 const boldTextStyle = { fontWeight: 'bold' };
@@ -19,9 +20,15 @@ const Info = props => {
             <View>
               <Text style={textCommonStyle}>
                 {`${props.ndviResulFromSpell}  `}
-                {parseDate(
-                  props.selectedDataPoint.month,
-                  props.selectedDataPoint.year
+                {formatDate(
+                  formatDateToMySQL(
+                    new Date(
+                      props.selectedDataPoint.year,
+                      props.selectedDataPoint.month - 1,
+                      1
+                    )
+                  ),
+                  'LLLL yyyy'
                 )}
               </Text>
               <Text style={textCommonStyle}>

@@ -16,7 +16,7 @@ const fetchPledgesReducer = handleActions(
     [saveTimeoutID]: (state, action) => {
       return { ...state, timeoutID: action.payload };
     },
-    [clearTimeoutID]: (state, action) => {
+    [clearTimeoutID]: (state /* , action */) => {
       return { ...state, timeoutID: null };
     }
   },

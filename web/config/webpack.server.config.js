@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const commonConfig = require('./webpack.common.config.js');
 const path = require('path');
 
@@ -23,10 +22,10 @@ module.exports = webpackMerge(commonConfig, {
     donatetreewidget: [
       'babel-polyfill',
       path.join(__dirname, '../widgets/DonateTrees/widget.js')
-    ],
-    ndviwidget: [
-      'babel-polyfill',
-      path.join(__dirname, '../widgets/NDVI/widget.js')
+      // ],
+      // ndviwidget: [
+      //   'babel-polyfill',
+      //   path.join(__dirname, '../widgets/NDVI/widget.js')
     ]
   },
   output: {
@@ -35,6 +34,15 @@ module.exports = webpackMerge(commonConfig, {
     publicPath: '/'
   },
   devtool: 'source-map',
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['eslint-loader']
+      }
+    ]
+  },
   plugins: [
     new WebpackCleanupPlugin(),
     new webpack.LoaderOptionsPlugin({
@@ -50,9 +58,6 @@ module.exports = webpackMerge(commonConfig, {
         keep_fnames: true
       },
       sourceMap: true
-    }),
-    new MomentLocalesPlugin({
-      localesToKeep: ['de', 'en']
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')

@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView
-} from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import i18n from '../../locales/i18n';
 
@@ -27,10 +21,13 @@ export default class PledgeTabView extends Component {
     });
   };
   render() {
-    allpledgeshigh = this.props.pledges.highestPledgeEvents;
+    const allpledgeshigh = this.props.pledges.highestPledgeEvents;
 
-    highestPledges = allpledgeshigh.map(highestPledges => (
-      <View style={styles.tabViewTitleContainer}>
+    const highestPledges = allpledgeshigh.map((highestPledges, index) => (
+      <View
+        key={`highestPledges-${index}`}
+        style={styles.tabViewTitleContainer}
+      >
         <View style={{ flex: 1, marginLeft: 26 }}>
           <Text style={styles.tabViewContentText}>
             {highestPledges.firstname} {highestPledges.lastname}
@@ -44,10 +41,10 @@ export default class PledgeTabView extends Component {
       </View>
     ));
 
-    allpledgesrecent = this.props.pledges.latestPledgeEvents;
+    const allpledgesrecent = this.props.pledges.latestPledgeEvents;
 
-    latestPledges = allpledgesrecent.map(latestPledges => (
-      <View style={styles.tabViewTitleContainer}>
+    const latestPledges = allpledgesrecent.map((latestPledges, index) => (
+      <View key={`latestPledges-${index}`} style={styles.tabViewTitleContainer}>
         <View style={{ flex: 1, marginLeft: 26 }}>
           <Text style={styles.tabViewContentText}>
             {latestPledges.firstname} {latestPledges.lastname}

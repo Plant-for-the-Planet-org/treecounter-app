@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import styles from '../../styles/welcome_screen.native';
-import { Text, View, ScrollView, TextInput, Image } from 'react-native';
+import { Text, View, ScrollView, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
@@ -15,13 +15,14 @@ class WelcomeScreenModal extends Component {
   }
 
   render() {
-    const welcomeScreenProfile = this.props.navigation.getParam(
+    /* const welcomeScreenProfile = this.props.navigation.getParam(
       'welcomeScreenProfile'
-    );
+    ); */
+    const backgroundColor = 'white';
     return (
       <View style={styles.confirmDeleteContainer}>
         <ScrollView
-          contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
+          contentContainerStyle={{ flex: 1, backgroundColor: backgroundColor }}
         >
           <View style={styles.container}>
             <Image

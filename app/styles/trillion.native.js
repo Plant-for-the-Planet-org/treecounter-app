@@ -1,8 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions } from 'react-native';
-import { Fonts } from './../utils/fonts';
 
-export default (trillionStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   scrollContainer: {},
   loadingContainer: {
     flex: 1,
@@ -205,4 +203,4 @@ export default (trillionStyles = EStyleSheet.create({
     marginTop: 5
   },
   featuredProjectCardIconText: { fontWeight: '300' }
-}));
+});

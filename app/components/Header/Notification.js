@@ -18,9 +18,12 @@ export default class Notification extends Component {
                   : SignupJustMe
               }
             />
-            <div className="item-html__wrapper" dangerouslySetInnerHTML={{
-              __html: notification.message
-            }} />
+            <div
+              className="item-html__wrapper"
+              dangerouslySetInnerHTML={{
+                __html: notification.message
+              }}
+            />
           </div>
         </li>
         <hr className="divider__light" />

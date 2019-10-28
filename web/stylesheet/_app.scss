@@ -14,6 +14,8 @@
       flex: 1;
 
       .app-container__sidenav {
+        display: flex;
+        flex-direction: column;
         width: 250px;
         background: white;
         opacity: 0.95;
@@ -28,9 +30,16 @@
         overflow: auto;
 
         .app-container__sidenav--image {
+          height: 124px;
+          width: 124px;
+          margin:1px auto;
+          border-radius: 50%;
+          margin-top: 24px;
+          text-align: center;
+
           img {
-            height: 130px;
-            width: 100%;
+            height: 100px;
+            width: 100x;
             box-sizing: border-box;
             padding: 10px;
           }

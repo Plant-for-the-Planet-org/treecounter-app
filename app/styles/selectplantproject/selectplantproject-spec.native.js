@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (selectplantprojectSpecs = EStyleSheet.create({
+export default EStyleSheet.create({
   project_specs__container: {
     width: '100%',
     height: '100%'
@@ -64,4 +64,4 @@ export default (selectplantprojectSpecs = EStyleSheet.create({
     height: 14,
     width: 14
   }
-}));
+});

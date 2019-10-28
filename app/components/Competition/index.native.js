@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import {
   Dimensions,
@@ -48,7 +49,6 @@ class Competiton extends React.Component {
     return (
       <TabBar
         {...props}
-        indicatorStyle={styles.indicator}
         style={styles.tabBar}
         tabStyle={{ width: Layout.window.width / 4 }}
         labelStyle={styles.textStyle}

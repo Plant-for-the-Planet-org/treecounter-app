@@ -1,6 +1,8 @@
-import { getLocale } from '../actions/getLocale';
+import { getLocale, localeObjects } from '../actions/getLocale';
 import { Intl } from '../locales/Intl';
 import i18n from '../locales/i18n.js';
+import format from 'date-fns/format';
+import parseISO from 'date-fns/parseISO';
 
 export function delimitNumbers(str) {
   if (!isNaN(parseInt(str))) return formatNumber(str);
@@ -17,19 +19,45 @@ export function delimitNumbersStr(str) {
   });
 }
 
-export function formatNumber(data, locale, currency) {
+export function formatNumber(data, locale, currency, userProfile, currencies) {
   locale = locale || getLocale();
   try {
     let style = { maximumFractionDigits: 2 };
     if (currency) {
       style.style = 'currency';
       style.currency = currency;
+      if (userProfile && userProfile.currency) {
+        style.currency = userProfile.currency;
+        if (
+          currencies &&
+          currencies.currencies &&
+          currencies.currencies.currency_rates[currency]
+        ) {
+          data =
+            currencies.currencies.currency_rates[currency].rates[
+              userProfile.currency
+            ] * data;
+        }
+      }
     }
-    // console.log('got numberformat', data, locale, currency, style)
+    // console.log('got numberformat', data, locale, currency, style, userProfile);
     return new Intl.NumberFormat(locale, style).format(data);
   } catch (error) {
     console.error(error);
     return data;
+  }
+}
+
+export function formatDate(date, style = 'dd MMM yyyy', locale) {
+  locale = locale || getLocale();
+  console.log('formatDate', date, style, locale);
+
+  if (date) {
+    return format(parseISO(date), style, {
+      locale: localeObjects[locale]
+    });
+  } else {
+    return '';
   }
 }
 
@@ -61,44 +89,53 @@ export function isAndroid() {
   return getMobileOperatingSystem() == 'Android';
 }
 
-export function convertNumber(n, d) {
-  if (isNaN(n) || undefined) {
+export function convertNumber(number, useDigits) {
+  if (isNaN(number) || undefined) {
     return 0;
   }
-  let x = ('' + n).length - 1;
-  x -= x % 3;
-  let p = Math.pow;
-  d = p(10, d);
-  let rounded = Math.round(n * d / p(10, x)) / d;
-  let singular = rounded == 1 ? 1 : 0;
+
+  const numDigits = ('' + number).length;
+  // use number name starting at millions with 7 digits
+  let digitsInGroup = 0;
+  if (numDigits > 6) {
+    digitsInGroup = numDigits - 1;
+    digitsInGroup -= digitsInGroup % 3;
+  }
+
+  let pow = Math.pow;
+  let powerOfUsedDigits = pow(10, useDigits);
+  let roundedNumber =
+    Math.round(number * powerOfUsedDigits / pow(10, digitsInGroup)) /
+    powerOfUsedDigits;
+  let isSingular = roundedNumber == 1 ? 1 : 0;
   return (
-    delimitNumbers(rounded) +
+    delimitNumbers(roundedNumber) +
     [
       '',
       ' ' +
-        (singular
+        (isSingular
           ? i18n.t('label.thousand_singular')
           : i18n.t('label.thousand_plural')),
       ' ' +
-        (singular
+        (isSingular
           ? i18n.t('label.million_singular')
           : i18n.t('label.million_plural')),
       ' ' +
-        (singular
+        (isSingular
           ? i18n.t('label.billion_singular')
           : i18n.t('label.billion_plural')),
       ' ' +
-        (singular
+        (isSingular
           ? i18n.t('label.trillion_singular')
           : i18n.t('label.trillion_plural')),
       ' ' +
-        (singular
+        (isSingular
           ? i18n.t('label.quadrillion_singular')
           : i18n.t('label.quadrillion_plural')),
       ' ' +
-        (singular
+        (isSingular
           ? i18n.t('label.quintillion_singular')
           : i18n.t('label.quintillion_plural'))
-    ][x / 3]
+    ][digitsInGroup / 3]
   );
 }

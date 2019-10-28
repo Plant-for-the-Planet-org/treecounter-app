@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (editProfileStyle = EStyleSheet.create({
+export default EStyleSheet.create({
   deleteProfileButton: {
     backgroundColor: '$colorPrimaryAccent',
     borderColor: '$colorPrimaryAccent'
@@ -32,6 +32,11 @@ export default (editProfileStyle = EStyleSheet.create({
     paddingRight: 15,
     textAlign: 'center',
     fontWeight: '100'
+  },
+  textStyle: {
+    fontSize: 14,
+    paddingLeft: 15,
+    paddingRight: 15
   },
   bottomRow: {
     backgroundColor: '#85a64d',
@@ -76,4 +81,4 @@ export default (editProfileStyle = EStyleSheet.create({
     width: 50,
     resizeMode: 'contain'
   }
-}));
+});

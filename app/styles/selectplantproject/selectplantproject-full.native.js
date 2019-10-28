@@ -9,7 +9,7 @@ const Layout = {
   }
 };
 
-export default (selectplantprojectFull = EStyleSheet.create({
+export default EStyleSheet.create({
   projectFullContainer: {
     flexDirection: 'column',
 
@@ -79,4 +79,4 @@ export default (selectplantprojectFull = EStyleSheet.create({
     marginLeft: 10,
     marginRight: 10
   }
-}));
+});

@@ -28,7 +28,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { serverName, baseUrl, treecounter, ProjectId } = this.props;
+    const { serverName, ProjectId } = this.props;
     const style = `.canvasContainer {
       background-color:${this.props.backgroundColor};
     }`;
@@ -66,10 +66,10 @@ export default class App extends Component {
             {this.props.showDonateButton && (
               <div className={'pftp-widget-btn__container'}>
                 <SecondaryButton
-                  onClick={event => {
+                  onClick={() => {
                     const url = `${serverName}${getLocalRoute(
                       'app_donateTrees'
-                    )}${projectId ? '/' + projectId : ''}`;
+                    )}${ProjectId ? '/' + ProjectId : ''}`;
                     window.open(url, '_blank');
                   }}
                 >

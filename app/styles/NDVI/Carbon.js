@@ -1,13 +1,18 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (coarbonStyle = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     marginTop: 24
   },
   cardLayout: {
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#d5d5d5',
     paddingLeft: 16,
     paddingTop: 16,
-    paddingBottom: 16
+    paddingBottom: 16,
+    marginLeft: 0,
+    marginRight: 0
   },
   carbonContainer: {
     flexDirection: 'row',
@@ -16,9 +21,7 @@ export default (coarbonStyle = EStyleSheet.create({
   },
   carbonLabel: {
     fontSize: 14,
-    color: '$textColor',
-    marginLeft: 8,
-    marginRight: 8
+    color: '$textColor'
   },
   carbonText: { fontSize: 24, color: '$primary', fontWeight: 'bold' },
   info: {
@@ -29,4 +32,4 @@ export default (coarbonStyle = EStyleSheet.create({
     borderColor: '$textColor',
     alignItems: 'center'
   }
-}));
+});

@@ -13,7 +13,7 @@ const LicenseInfo = require('./LicenseInfo.json');
 class AboutUs extends Component {
   render() {
     const version = DeviceInfo.getReadableVersion();
-    const buildNumber = DeviceInfo.getBuildNumber();
+    // const buildNumber = DeviceInfo.getBuildNumber();
     return (
       <View style={{ flex: 1 }}>
         <ScrollView>

@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default (buttonStyles = EStyleSheet.create({
+export default EStyleSheet.create({
   cardContainer: {
     // alignItems: 'center',
     // justifyContent: 'center',
@@ -14,4 +14,4 @@ export default (buttonStyles = EStyleSheet.create({
     marginTop: 20,
     padding: 10
   }
-}));
+});

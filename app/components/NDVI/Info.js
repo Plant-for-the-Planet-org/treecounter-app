@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import parseDate from './NDVIfunctions/parseDate';
 import { questionmark_orange } from '../../assets';
 import ReactTooltip from 'react-tooltip';
+import { formatDate } from '../../utils/utils';
+import { formatDateToMySQL } from '../../helpers/utils';
 
 const Info = props => {
   const aggregate = props.selectedDataPoint.ndviAggregate;
@@ -15,9 +16,15 @@ const Info = props => {
             <div className="flex-1">
               <p>
                 {props.ndviResulFromSpell}{' '}
-                {parseDate(
-                  props.selectedDataPoint.month,
-                  props.selectedDataPoint.year
+                {formatDate(
+                  formatDateToMySQL(
+                    new Date(
+                      props.selectedDataPoint.year,
+                      props.selectedDataPoint.month - 1,
+                      1
+                    )
+                  ),
+                  'LLLL yyyy'
                 )}
               </p>
               <p>
@@ -46,7 +53,12 @@ const Info = props => {
                 <a data-tip data-for="info-icon">
                   <img className="ndvi-img" src={questionmark_orange} />
                 </a>
-                <ReactTooltip id="info-icon" effect="solid" type="dark">
+                <ReactTooltip
+                  id="info-icon"
+                  place="left"
+                  effect="solid"
+                  type="dark"
+                >
                   <span className="tooltip-text">
                     {props.toolTipHelpButtonSpell
                       ? props.toolTipHelpButtonSpell

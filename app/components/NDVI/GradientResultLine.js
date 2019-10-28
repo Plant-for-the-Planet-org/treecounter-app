@@ -2,7 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getPointPercentageOnGradient } from './NDVIfunctions/GradientUtils';
-import parseMonth from './NDVIfunctions/parseMonth';
+import { formatDate } from '../../utils/utils';
+import { formatDateToMySQL } from '../../helpers/utils';
 
 class GradientResultLine extends React.PureComponent {
   constructor(props) {
@@ -25,9 +26,15 @@ class GradientResultLine extends React.PureComponent {
     const props = this.props;
     const { selectedDataPoint } = props;
     let backgroundImage = `linear-gradient(to right,
-      ${props.getColorForNDVI(selectedDataPoint.ndviAggregate.min)} 0%,
-      ${props.getColorForNDVI(selectedDataPoint.ndviAggregate.avg)} 50%,
-       ${props.getColorForNDVI(selectedDataPoint.ndviAggregate.max)} 100%)`;
+      ${props.getColorForNDVI(
+        selectedDataPoint.ndviAggregate && selectedDataPoint.ndviAggregate.min
+      )} 0%,
+      ${props.getColorForNDVI(
+        selectedDataPoint.ndviAggregate && selectedDataPoint.ndviAggregate.avg
+      )} 50%,
+       ${props.getColorForNDVI(
+         selectedDataPoint.ndviAggregate && selectedDataPoint.ndviAggregate.max
+       )} 100%)`;
     backgroundImage = backgroundImage.replace(/(\r\n|\n|\r)/gm, '');
     return backgroundImage;
   };
@@ -52,9 +59,16 @@ class GradientResultLine extends React.PureComponent {
 
     return (
       <div className="gradient-result-line-component">
-        <div className="title">{`${parseMonth(
-          props.selectedDataPoint.month - 1
-        )}, ${props.selectedDataPoint.year}`}</div>
+        <div className="title">{`${formatDate(
+          formatDateToMySQL(
+            new Date(
+              props.selectedDataPoint.year,
+              props.selectedDataPoint.month - 1,
+              1
+            )
+          ),
+          'LLLL yyyy'
+        )}`}</div>
         <div className="gradient-wrapper">
           {bgStyle &&
             selectedDataPoint.ndviAggregate.min &&

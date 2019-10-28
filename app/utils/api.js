@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { v1 as uuidv1 } from 'uuid';
 
-import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { fetchItem, saveItem } from '../stores/localStorage';
 import { getAccessToken } from './user';
 import { getApiRoute } from '../actions/apiRouting';

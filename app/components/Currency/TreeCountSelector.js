@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n';
-import { tree } from '../../assets';
-import NumberFormat from '../Common/NumberFormat';
 import { formatNumber } from '../../utils/utils';
 class TreeCountSelector extends React.Component {
   constructor(props) {
@@ -100,7 +98,7 @@ class TreeCountSelector extends React.Component {
 
     return (
       <div className={'treecount-container'}>
-        <TextBlock strong={true}>{i18n.t('label.no_of_trees')}</TextBlock>
+        <TextBlock strong>{i18n.t('label.no_of_trees')}</TextBlock>
         {treeCountOptions.fixedTreeCountOptions.map(treeCount => {
           return (
             <div className="treecount-price-conversion" key={treeCount}>
@@ -120,10 +118,7 @@ class TreeCountSelector extends React.Component {
               </label>
               <span className="price-conversion__equal">=</span>
               <span className="price-conversion__radio">
-                <NumberFormat
-                  data={treeCountToAmount(treeCount)}
-                  currency={currency}
-                />
+                {formatNumber(treeCountToAmount(treeCount), null, currency)}
               </span>
             </div>
           );

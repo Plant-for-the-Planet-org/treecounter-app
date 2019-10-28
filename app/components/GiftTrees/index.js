@@ -15,6 +15,7 @@ import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import { paymentFee } from '../../helpers/utils';
+import { getPreferredCurrency } from '../../actions/globalCurrency';
 
 import {
   individualSchemaOptions,
@@ -117,10 +118,10 @@ export default class GiftTrees extends Component {
       imageViewMore: false,
       expandedOption: '1',
       showNextButton: true,
-      showSelectProject: false
+      donationCreated: false,
+      showSelectProject: true
     };
 
-    this.handlePaymentApproved = this.handlePaymentApproved.bind(this);
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
     this.handleTreeCountCurrencyChange = this.handleTreeCountCurrencyChange.bind(
       this
@@ -177,6 +178,21 @@ export default class GiftTrees extends Component {
     this.props.paymentClear();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.donationCreated !== this.state.donationCreated) {
+      let requestData = {
+        amount: this.state.selectedAmount,
+        currency: this.state.selectedCurrency,
+        ...this.state.form
+      };
+      this.props.createPaymentGift(
+        this.props.selectedProject.id,
+        requestData,
+        this.props.currentUserProfile
+      );
+    }
+  }
+
   checkValidation = [
     () => {
       if (this.state.modeUser === 'direct') {
@@ -222,7 +238,6 @@ export default class GiftTrees extends Component {
       return false;
     },
     () => {
-      //console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
@@ -235,7 +250,8 @@ export default class GiftTrees extends Component {
           form: {
             ...this.state.form,
             ...receipt
-          }
+          },
+          donationCreated: true
         });
         return true;
       }
@@ -244,13 +260,12 @@ export default class GiftTrees extends Component {
   ];
 
   determineDefaultCurrency() {
-    const { currentUserProfile, selectedProject } = this.props;
+    const { currentUserProfile /* , selectedProject */ } = this.props;
     const userCurrency =
       null === currentUserProfile ? null : currentUserProfile.currency;
 
-    return null === userCurrency ? selectedProject.currency : userCurrency;
+    return null === userCurrency ? getPreferredCurrency() : userCurrency;
   }
-
   handleModeUserChange(tab) {
     this.setState({
       modeUser: tab,
@@ -279,35 +294,12 @@ export default class GiftTrees extends Component {
     });
   };
 
-  handlePaymentApproved(paymentResponse) {
-    if (this.state.form.giftMethod === 'direct') {
-      this.props.gift(
-        {
-          paymentResponse,
-          ...this.state.form,
-          amount: this.state.selectedAmount,
-          currency: this.state.selectedCurrency
-        },
-        this.props.selectedProject.id
-      );
-    } else {
-      this.props.gift(
-        {
-          paymentResponse,
-          ...this.state.form,
-          amount: this.state.selectedAmount,
-          currency: this.state.selectedCurrency
-        },
-        this.props.selectedProject.id
-      );
-    }
-  }
-
   callExpanded = bool => {
     this.setState({
       expanded: bool
     });
   };
+
   handleMessageChange(event) {
     //set message as part of form only as we are setting treecounter.
     this.setState({});
@@ -399,12 +391,14 @@ export default class GiftTrees extends Component {
     let paymentMethods;
     if (receipt) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
-      const countryCurrencies = plantProject.paymentSetup.countries;
-      if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
-        countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+      if (plantProject && plantProject.paymentSetup) {
+        const countryCurrencies = plantProject.paymentSetup.countries;
+        if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
+          countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+        }
+        paymentMethods =
+          plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
       }
-      paymentMethods =
-        plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
 
     return this.state.showSelectProject && this.state.pageIndex === 1 ? (
@@ -423,7 +417,7 @@ export default class GiftTrees extends Component {
             <div className="payment-success">
               <img src={check_green} />
               <div className={'gap'} />
-              <TextBlock strong={true}>
+              <TextBlock strong>
                 {i18n.t('label.thankyou_planting', {
                   count: this.state.treeCount
                 })}
@@ -442,7 +436,7 @@ export default class GiftTrees extends Component {
             <div className="payment-success">
               <img src={attention} />
               <div className={'gap'} />
-              <TextBlock strong={true}>
+              <TextBlock strong>
                 {i18n.t('label.error') + ' ' + this.props.paymentStatus.message}
               </TextBlock>
               <div className={'gap'} />
@@ -499,7 +493,7 @@ export default class GiftTrees extends Component {
                     expanded={false}
                     plantProject={this.props.selectedProject}
                     tpoName={this.props.selectedTpo.name}
-                    selectAnotherProject={true}
+                    selectAnotherProject
                     projectClear={this.props.plantProjectClear}
                   />
                 )
@@ -548,20 +542,22 @@ export default class GiftTrees extends Component {
                   }
                   amount={this.state.selectedAmount}
                   currency={this.state.selectedCurrency}
+                  paymentStatus={this.props.paymentStatus}
+                  paymentDetails={{
+                    amount: this.state.selectedAmount,
+                    currency: this.state.selectedCurrency,
+                    treeCount: this.state.selectedTreeCount
+                  }}
                   expandedOption={this.state.expandedOption}
                   handleExpandedClicked={this.handleExpandedClicked}
                   context={{
                     tpoName: this.props.selectedTpo.name,
                     donorEmail: email,
                     donorName: name,
-                    treeCount: this.state.selectedTreeCount,
                     plantProjectName: plantProject.name,
                     giftTreeCounterName: this.state.giftTreecounterName,
                     treeCount: this.state.selectedTreeCount
                   }}
-                  onSuccess={paymentResponse =>
-                    this.handlePaymentApproved(paymentResponse)
-                  }
                   onFailure={data =>
                     console.log('/////////////////// payment failure ', data)
                   }
@@ -583,7 +579,7 @@ GiftTrees.propTypes = {
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
-  gift: PropTypes.func,
+  createPaymentGift: PropTypes.func,
   paymentStatus: PropTypes.object,
   paymentClear: PropTypes.func,
   plantProjectClear: PropTypes.func

@@ -30,14 +30,13 @@ document.addEventListener('DOMContentLoaded', function() {
       //Register New Custom element in DOM
       try {
         customElementRegistry.define('pftp-widget-ndvi', PFTPWidgetNDVI);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
 
       let div = document.createElement('pftp-widget-ndvi');
       const shadowRoot = div.attachShadow({ mode: 'closed' });
-      const newDivNode = allBlockQuote[i].parentNode.insertBefore(
-        div,
-        allBlockQuote[i]
-      );
+      allBlockQuote[i].parentNode.insertBefore(div, allBlockQuote[i]);
       ReactDOM.render(<App key={'test_app'} />, shadowRoot);
       allBlockQuote[i].parentNode.removeChild(allBlockQuote[i]);
     }

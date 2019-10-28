@@ -1,34 +1,22 @@
-import React from 'react';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import Accordion from 'react-native-collapsible/Accordion';
-import { getImageUrl } from '../../actions/apiRouting';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-  FlatList
-} from 'react-native';
-import TouchableItem from '../../components/Common/TouchableItem';
-import myTreesStyle from '../../styles/myTrees/user_contribution_card';
-import { foldout, foldin, MapPinRed, EditOrange } from '../../assets';
-import { getLocalRoute } from '../../actions/apiRouting';
+import React from 'react';
+import { Dimensions, FlatList, Image, Text, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { delimitNumbers } from '../../utils/utils';
-import Lightbox from 'react-native-lightbox';
-import moment from 'moment';
-import 'moment/min/locales';
+
+import { getLocalRoute } from '../../actions/apiRouting';
+import { foldin, foldout } from '../../assets';
+import TouchableItem from '../../components/Common/TouchableItem';
 import i18n from '../../locales/i18n.js';
-import { getLocale } from '../../actions/getLocale';
-import { getDateFromMySQL } from '../../helpers/utils';
+import styles, {
+  myTreesStyle
+} from '../../styles/myTrees/user_contribution_card';
+import { formatDate, delimitNumbers } from '../../utils/utils';
+import CardLayout from '../Common/Card';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
 
-import _ from 'lodash';
-import CardLayout from '../Common/Card';
 class ContributionCard extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +25,6 @@ class ContributionCard extends React.Component {
       currentImage: 0,
       viewExpanded: false
     };
-    moment.locale(getLocale());
   }
 
   _renderLightBox = imageArray => (
@@ -82,11 +69,7 @@ class ContributionCard extends React.Component {
           ? section.contributionMeasurements.map((measurement, index) => {
               return (
                 <View style={styles.actionBar} key={`measurement-${index}`}>
-                  <Text>
-                    {moment(
-                      getDateFromMySQL(measurement.measurementDate)
-                    ).format('DD MMM YYYY')}
-                  </Text>
+                  <Text>{formatDate(measurement.measurementDate)}</Text>
                   <Text>
                     {_.padStart(
                       (measurement.height * 10).toFixed(1) + ' ' + 'mm',
@@ -145,12 +128,13 @@ class ContributionCard extends React.Component {
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
       ? [
-          <Text>
+          <Text key={`donateActionLine_10`}>
             {i18n.t('label.gifted_on_to', {
-              date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
+              date: formatDate(plantDate)
             })}
           </Text>,
           <Text
+            key={`donateActionLine_11`}
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug,
@@ -162,7 +146,7 @@ class ContributionCard extends React.Component {
           </Text>
         ]
       : i18n.t('label.donated_on', {
-          date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
+          date: formatDate(plantDate)
         });
   }
 
@@ -173,20 +157,23 @@ class ContributionCard extends React.Component {
   plantActionLine(plantDate, registrationDate) {
     return (
       i18n.t('label.planted_on', {
-        date: moment(getDateFromMySQL(plantDate)).format('DD MMM YYYY')
+        date: formatDate(plantDate)
       }) +
       '\n' +
       i18n.t('label.added_on', {
-        date: moment(getDateFromMySQL(registrationDate)).format('DD MMM YYYY')
+        date: formatDate(registrationDate)
       })
     );
   }
 
-  dedicateActionLine = (isGift, givee, giveeSlug) => {
+  dedicateActionLine(isGift, givee, giveeSlug) {
     return isGift
       ? [
-          <Text>{i18n.t('label.dedicated_to')}</Text>,
+          <Text key={`dedicateActionLine_11`}>
+            {i18n.t('label.dedicated_to')}
+          </Text>,
           <Text
+            key={`dedicateActionLine_12`}
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug,
@@ -198,19 +185,18 @@ class ContributionCard extends React.Component {
           </Text>
         ]
       : '';
-  };
+  }
 
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
-    return redemptionCode && giver
+    return redemptionCode && givee
       ? [
-          <Text>
+          <Text key={`redeemActionLine_11`}>
             {i18n.t('label.given_on_by', {
-              date: moment(getDateFromMySQL(redemptionDate)).format(
-                'DD MMM YYYY'
-              )
+              date: formatDate(redemptionDate)
             })}
           </Text>,
           <Text
+            key={`redeemActionLine_12`}
             onPress={() =>
               this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
                 treeCounterId: giveeSlug,
@@ -223,18 +209,17 @@ class ContributionCard extends React.Component {
         ]
       : redemptionCode
         ? i18n.t('label.redeemed_on', {
-            date: moment(getDateFromMySQL(redemptionDate)).format('DD MMM YYYY')
+            date: formatDate(redemptionDate)
           })
         : givee
           ? [
-              <Text>
+              <Text key={`dedicated_on_by_11`}>
                 {i18n.t('label.dedicated_on_by', {
-                  date: moment(getDateFromMySQL(redemptionDate)).format(
-                    'DD MMM YYYY'
-                  )
+                  date: formatDate(redemptionDate)
                 })}
               </Text>,
               <Text
+                key={`dedicated_on_by_12`}
                 onPress={() =>
                   this.props.navigation.navigate(
                     getLocalRoute('app_treecounter'),
@@ -249,9 +234,7 @@ class ContributionCard extends React.Component {
               </Text>
             ]
           : i18n.t('label.dedicated_on', {
-              date: moment(getDateFromMySQL(redemptionDate)).format(
-                'DD MMM YYYY'
-              )
+              date: formatDate(redemptionDate)
             });
   }
 
@@ -272,8 +255,8 @@ class ContributionCard extends React.Component {
       contributionType,
       registrationDate,
       redemptionCode,
-      redemptionDate,
-      ndviUid
+      redemptionDate
+      // ndviUid
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {
     //   return { src: getImageUrl('contribution', 'medium', image.image) };
@@ -306,17 +289,20 @@ class ContributionCard extends React.Component {
         : treeCount > 1
           ? '#68aeec'
           : '#ec6453';
+
     let styles = myTreesStyle(labelColor, borderColor);
+
     return contributionType === 'donation' ? (
       <CardLayout
         style={styles.addPadding}
-        onPress={() => {
-          ndviUid &&
-            this.props.navigation.navigate('contribution_details', {
-              contribution,
-              titleParam: plantProjectName || tpoName || treeSpecies
-            });
-        }}
+        // TODO: uncomment this if the contribution cards are ready to get merged
+        // onPress={() => {
+        //   ndviUid &&
+        //     this.props.navigation.navigate('contribution_details', {
+        //       contribution,
+        //       titleParam: plantProjectName || tpoName || treeSpecies
+        //     });
+        // }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
@@ -372,13 +358,14 @@ class ContributionCard extends React.Component {
     ) : contributionType === 'planting' ? (
       <CardLayout
         style={[styles.addPadding, styles.minHeight]}
-        onPress={() => {
-          ndviUid &&
-            this.props.navigation.navigate('contribution_details', {
-              contribution,
-              titleParam: plantProjectName || tpoName || treeSpecies
-            });
-        }}
+        // TODO: uncomment this if the contribution cards are ready to get merged
+        // onPress={() => {
+        //   ndviUid &&
+        //     this.props.navigation.navigate('contribution_details', {
+        //       contribution,
+        //       titleParam: plantProjectName || tpoName || treeSpecies
+        //     });
+        // }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
@@ -445,13 +432,14 @@ class ContributionCard extends React.Component {
     ) : (
       <CardLayout
         style={styles.addPadding}
-        onPress={() => {
-          ndviUid &&
-            this.props.navigation.navigate('contribution_details', {
-              contribution,
-              titleParam: plantProjectName || tpoName || treeSpecies
-            });
-        }}
+        // TODO: uncomment this if the contribution cards are ready to get merged
+        // onPress={() => {
+        //   ndviUid &&
+        //     this.props.navigation.navigate('contribution_details', {
+        //       contribution,
+        //       titleParam: plantProjectName || tpoName || treeSpecies
+        //     });
+        // }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (

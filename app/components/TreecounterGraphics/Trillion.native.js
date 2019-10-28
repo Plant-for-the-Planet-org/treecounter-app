@@ -1,13 +1,12 @@
+/* eslint-disable no-underscore-dangle */
 import React, { PureComponent } from 'react';
 import {
   ScrollView,
   Text,
   View,
   Dimensions,
-  Animated,
   Image,
-  TouchableOpacity,
-  StyleSheet
+  TouchableOpacity
 } from 'react-native';
 
 import NavigationEvents from './importNavigationEvents';
@@ -23,10 +22,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n';
-import { getAllPlantProjectsSelector } from '../../selectors';
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
-import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import Leaderboard from '../../containers/Leaderboard';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -87,7 +84,7 @@ class Trillion extends PureComponent {
         saveItem(Constants.storageKeys.svgData, JSON.stringify(svgData));
       })
       .catch(error => {
-        //console.log(error);
+        console.log(error);
         fetchItem(Constants.storageKeys.svgData).then(svgData => {
           try {
             svgData = JSON.parse(svgData);
@@ -107,7 +104,7 @@ class Trillion extends PureComponent {
     // this.setFeaturedEvents();
 
     this.props.fetchpledgeEventsAction();
-    pledgedEvents2 = this.props.pledgeEvents;
+    // pledgedEvents2 = this.props.pledgeEvents;
   }
 
   onMoreClick(id, name) {
@@ -131,7 +128,6 @@ class Trillion extends PureComponent {
     return (
       <TabBar
         {...props}
-        indicatorStyle={tabStyles.indicator}
         style={tabStyles.tabBar}
         tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={tabStyles.textStyle}
@@ -141,8 +137,8 @@ class Trillion extends PureComponent {
   };
 
   _renderScreen = ({ route }) => {
-    const { navigation, userProfile, isLoggedIn } = this.props;
-
+    const { navigation /* , userProfile, isLoggedIn */ } = this.props;
+    const backgroundColor = 'white';
     // console.log(this.props.pledgeEvents);
 
     switch (route.key) {
@@ -153,7 +149,7 @@ class Trillion extends PureComponent {
           <ScrollView
             contentContainerStyle={{
               paddingBottom: 72,
-              backgroundColor: 'white'
+              backgroundColor: backgroundColor
             }}
           >
             <View style={styles.parentContainer}>
@@ -172,7 +168,7 @@ class Trillion extends PureComponent {
               {/* Featured events horizontal ScrollView */}
               <View style={{ marginTop: 16 }}>
                 <ScrollView
-                  horizontal={true}
+                  horizontal
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={{ paddingRight: 20 }}
                 >
@@ -219,7 +215,7 @@ class Trillion extends PureComponent {
 
               {/* Tree Counter SVG */}
               <View style={svgStyles.svgContainer}>
-                <SvgContainer {...this.state.svgData} trillion={true} />
+                <SvgContainer {...this.state.svgData} trillion />
               </View>
               {/* Tree Counter SVG Ended */}
 
@@ -312,13 +308,16 @@ class Trillion extends PureComponent {
     return [
       this.props.navigation ? (
         <NavigationEvents
-          key="nav"
-          onWillFocus={payload => {
-            this.setState({ loadSvg: true });
-          }}
-          onWillBlur={payload => {
-            this.setState({ loadSvg: false });
-          }}
+          onWillFocus={
+            (/* payload */) => {
+              this.setState({ loadSvg: true });
+            }
+          }
+          onWillBlur={
+            (/* payload */) => {
+              this.setState({ loadSvg: false });
+            }
+          }
           key="navigation-events"
         />
       ) : null,

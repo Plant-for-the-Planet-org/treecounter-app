@@ -130,14 +130,7 @@ export async function postDirectRequest(path, data, authenticated = false) {
     .then(onAPIResponse)
     .catch(onAPIError);
 }
-export async function getExternalRequest(params) {
-  console.log('calling getexternal', params);
-  return await axios
-    .get(params.endPoint)
-    .then(checkStatus)
-    .then(onAPIResponse)
-    .catch(onAPIError);
-}
+
 export async function postAuthenticatedRequest(route, data, params) {
   return postRequest(route, data, params, true);
 }
@@ -167,4 +160,18 @@ export async function deleteRequest(route, params, authenticated = false) {
 
 export async function deleteAuthenticatedRequest(route, params) {
   return deleteRequest(route, params, true);
+}
+
+/**
+ * Call external API from app like ipstack, openexchanage api etc
+ * build the get url and pass as endPoint
+ * @param {endPoint} params
+ */
+export async function getExternalRequest(params) {
+  console.log('calling getexternal', params);
+  return await axios
+    .get(params.endPoint)
+    .then(checkStatus)
+    .then(onAPIResponse)
+    .catch(onAPIError);
 }

@@ -10,11 +10,11 @@ export const initialState = {
 
 const currenciesReducer = handleActions(
   {
-    [setCurrenciesConversions]: (state, action) => ({
-      currencies: isEqual(state.currencies, action.payload)
+    [setCurrenciesConversions]: (state, action) => {
+      return isEqual(state.currencies, action.payload)
         ? state.currencies
-        : action.payload
-    })
+        : action.payload;
+    }
   },
   initialState
 );

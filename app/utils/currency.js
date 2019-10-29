@@ -14,7 +14,8 @@ export const convertCurrency = (
 ) => {
   return (
     price /
-    parseFloat(currencies.currency_rates[toCurrency].rates[fromCurrency])
+    parseFloat(currencies.rates[fromCurrency]) *
+    parseFloat(currencies.rates[toCurrency])
   );
 };
 
@@ -28,22 +29,18 @@ export const convertCurrency = (
 export const sortProjectsByPrice = (plantProjects, asc, currencies) => {
   let sorted = Array.from(plantProjects);
 
-  if (
-    currencies &&
-    currencies.currency_rates &&
-    currencies.currency_rates.EUR
-  ) {
+  if (currencies) {
     if (asc) {
       sorted = sorted.sort(
         (a, b) =>
-          convertCurrency(a.treeCost, a.currency, 'EUR', currencies) -
-          convertCurrency(b.treeCost, b.currency, 'EUR', currencies)
+          convertCurrency(a.treeCost, a.currency, 'USD', currencies) -
+          convertCurrency(b.treeCost, b.currency, 'USD', currencies)
       );
     } else {
       sorted = sorted.sort(
         (a, b) =>
-          convertCurrency(b.treeCost, b.currency, 'EUR', currencies) -
-          convertCurrency(a.treeCost, a.currency, 'EUR', currencies)
+          convertCurrency(b.treeCost, b.currency, 'USD', currencies) -
+          convertCurrency(a.treeCost, a.currency, 'USD', currencies)
       );
     }
   }

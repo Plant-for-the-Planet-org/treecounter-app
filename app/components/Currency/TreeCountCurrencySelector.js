@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import CurrencySelector from './CurrencySelector';
 import TreeCountSelector from './TreeCountSelector';
+import { convertCurrency } from '../../utils/currency';
 
 class TreeCountCurrencySelector extends React.Component {
   constructor(props) {
@@ -46,19 +47,22 @@ class TreeCountCurrencySelector extends React.Component {
 
   calculateAmount(treeCount) {
     return (
-      Math.round(treeCount * this.props.treeCost * this.getRate() * 100) / 100 +
+      Math.round(treeCount * this.getSingleTreeRate() * 100) / 100 +
       this.props.fees
     );
   }
 
   calculateTreeCount(amount) {
-    return Math.floor(
-      (amount - this.props.fees) / (this.props.treeCost * this.getRate())
-    );
+    return Math.floor((amount - this.props.fees) / this.getSingleTreeRate());
   }
 
-  getRate() {
-    return parseFloat(this.props.rates[this.state.selectedCurrency]);
+  getSingleTreeRate() {
+    return convertCurrency(
+      this.props.treeCost,
+      this.props.projectCurrency,
+      this.state.selectedCurrency,
+      this.props.currencies
+    );
   }
 
   updateStateAndParent(updates) {
@@ -100,8 +104,8 @@ TreeCountCurrencySelector.propTypes = {
   treeCountOptions: PropTypes.object.isRequired,
   selectedTreeCount: PropTypes.number.isRequired,
   treeCost: PropTypes.any.isRequired,
-  rates: PropTypes.object.isRequired,
   fees: PropTypes.number.isRequired,
+  projectCurrency: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 };
 

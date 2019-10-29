@@ -52,7 +52,7 @@ class SelectPlantProjectContainer extends PureComponent {
   // }
 
   componentDidMount() {
-    if (!this.props.currencies.currencies) {
+    if (!this.props.currencies) {
       this.props.fetchCurrencies();
     }
     this.props.selectPlantProjectAction(null);

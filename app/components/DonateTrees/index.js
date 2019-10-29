@@ -371,7 +371,7 @@ export default class DonateTrees extends Component {
     };
 
     let plantProject = this.props.selectedProject;
-    let currencies = this.props.currencies.currencies;
+    let currencies = this.props.currencies;
     let receipt;
     if (this.state.modeReceipt === 'individual') {
       receipt = this.state.form['receiptIndividual']
@@ -479,11 +479,9 @@ export default class DonateTrees extends Component {
                   {this.props.selectedTpo && currencies ? (
                     <TreeCountCurrencySelector
                       treeCost={plantProject.treeCost.toFixed(2)}
-                      rates={
-                        currencies.currency_rates[plantProject.currency].rates
-                      }
+                      currencies={currencies}
+                      projectCurrency={plantProject.currency}
                       fees={paymentFee}
-                      currencies={currencies.currency_names} // TODO: connect to data from API
                       selectedCurrency={this.determineDefaultCurrency()}
                       treeCountOptions={
                         plantProject.paymentSetup.treeCountOptions

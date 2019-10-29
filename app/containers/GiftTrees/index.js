@@ -30,7 +30,7 @@ class GiftTreesContainer extends Component {
     this.state = { reloadTab: true };
   }
   componentDidMount() {
-    if (!this.props.currencies.currencies) {
+    if (!this.props.currencies) {
       this.props.fetchCurrencies();
     }
   }

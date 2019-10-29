@@ -279,7 +279,7 @@ export default class DonateTrees extends React.PureComponent {
       // paymentMethods =
       //   selectedProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
-    let currencies = this.props.currencies.currencies;
+    let currencies = this.props.currencies;
 
     switch (route.key) {
       case 'currency':
@@ -288,13 +288,13 @@ export default class DonateTrees extends React.PureComponent {
           this.props.selectedProject ? (
           <TreeCountCurrencySelector
             treeCost={selectedProject.treeCost}
-            rates={currencies.currency_rates[selectedProject.currency].rates}
+            projectCurrency={selectedProject.currency}
+            currencies={currencies}
             giftTreeCounterName={this.state.giftTreeCounterName}
             selectedProject={selectedProject}
             fees={paymentFee}
             supportTreecounter={this.props.supportTreecounter}
             showNextButton
-            currencies={currencies.currency_names} // TODO: connect to data from API
             selectedCurrency={this.determineDefaultCurrency()}
             treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
             onNextClick={this.Tab2validated}

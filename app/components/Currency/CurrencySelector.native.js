@@ -5,20 +5,14 @@ import i18n from '../../locales/i18n';
 // import styles from '../../styles/currencies/currencyselector';
 // import t from 'tcomb-form-native';
 import { Dropdown } from 'react-native-material-dropdown';
+import supportedCurrency from '../../assets/supportedCurrency.json';
 // import { getFormSchema } from '../../server/parsedSchemas/currencySelector';
 
 // let Form = t.form.Form;
 
-const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
-  // const {
-  //   schemaOptions,
-  //   transformedSchema: currencySelectorFormSchema
-  // } = getFormSchema(currencies);
-  const currenciesArray = Object.keys(currencies);
-  const currenciesTitles = Object.values(currencies);
-
-  const currenciesDropdownFormat = currenciesArray.map((item, index) => {
-    return { value: item, text: currenciesTitles[index] };
+const CurrencySelector = ({ selectedCurrency, onChange }) => {
+  const currenciesDropdownFormat = supportedCurrency.map(currency => {
+    return { value: currency.Symbol, text: currency.Name };
   });
   const textColor = '#686060';
   return (
@@ -68,7 +62,6 @@ const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
 
 CurrencySelector.propTypes = {
   selectedCurrency: PropTypes.string,
-  currencies: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired
 };
 

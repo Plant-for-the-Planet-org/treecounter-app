@@ -3,6 +3,7 @@ import { Intl } from '../locales/Intl';
 import i18n from '../locales/i18n.js';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
+import { convertCurrency } from './currency';
 
 export function delimitNumbers(str) {
   if (!isNaN(parseInt(str))) return formatNumber(str);
@@ -26,19 +27,17 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
     if (currency) {
       style.style = 'currency';
       style.currency = currency;
-      //console.log('cu', currency, userProfile);
       if (userProfile && userProfile.currency) {
         style.currency = userProfile.currency;
-        if (
-          currencies &&
-          currencies.currencies &&
-          currencies.currencies.currency_rates[currency]
-        ) {
-          data =
-            currencies.currencies.currency_rates[currency].rates[
-              userProfile.currency
-            ] * data;
+        if (currencies && currencies.rates && currencies.rates[currency]) {
+          data = convertCurrency(
+            data,
+            currency,
+            userProfile.currency,
+            currencies
+          );
         } else {
+          // if currency not supported fallback to fromCurrency(could be project currency)
           style.currency = currency;
         }
       }
@@ -53,7 +52,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
 
 export function formatDate(date, style = 'dd MMM yyyy', locale) {
   locale = locale || getLocale();
-  console.log('formatDate', date, style, locale);
+  // console.log('formatDate', date, style, locale);
 
   if (date) {
     return format(parseISO(date), style, {

@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { currenciesSelector } from '../../selectors';
 import { fetchCurrencies } from '../../actions/currencies';
 import Select from 'react-select';
+import supportedCurrency from '../../assets/supportedCurrency.json';
 import {
   getPreferredCurrency,
   setCurrencyAction
@@ -81,7 +82,7 @@ class GlobalCurrencySelector extends Component {
       this.props.setCurrencyAction(nextProps.userProfile.currency);
     }
 
-    if (!nextProps.currencies.currencies) {
+    if (!nextProps.currencies) {
       await this.props.fetchCurrencies();
     }
   }
@@ -89,11 +90,9 @@ class GlobalCurrencySelector extends Component {
     this.setState({ preferredCurrency: getPreferredCurrency() });
   }
   async componentDidMount() {
-    if (!this.props.currencies.currencies) {
-      let curreniesData = await this.props.fetchCurrencies();
-      console.log('got fron fetch', curreniesData);
+    if (!this.props.currencies) {
+      await this.props.fetchCurrencies();
     }
-    console.log('setting', this.state);
     this.state.preferredCurrency &&
       this.props.setCurrencyAction(this.state.preferredCurrency);
   }
@@ -101,18 +100,9 @@ class GlobalCurrencySelector extends Component {
     this.setState(data);
   }
   getCurrencyNames() {
-    return this.props.currencies.currencies
-      ? currencySort(
-          Object.keys(this.props.currencies.currencies.currency_names)
-        ).map(currency => {
-          return { value: currency, label: currency };
-        })
-      : [
-          {
-            value: this.state.preferredCurrency,
-            label: this.state.preferredCurrency
-          }
-        ];
+    return supportedCurrency.map(currency => {
+      return { value: currency.Symbol, label: currency.Symbol };
+    });
   }
   handleCurrencyChange(selectedOption) {
     console.log(selectedOption);

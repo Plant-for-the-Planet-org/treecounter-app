@@ -60,7 +60,7 @@ import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPubl
 import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
 import { initLocale } from '../../actions/getLocale';
 import { fetchLocation } from '../../actions/fetchLocation';
-
+import { fetchCurrencies } from '../../actions/currencies';
 // Class implementation
 class TreeCounter extends Component {
   constructor(props) {
@@ -81,6 +81,7 @@ class TreeCounter extends Component {
       isAndroid: IS_ANDROID,
       isCancelled: false
     };
+    this.props.fetchCurrencies();
     this.props.fetchLocation();
     initLocale();
   }
@@ -360,6 +361,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      fetchCurrencies,
       fetchLocation,
       loadUserProfile,
       NotificationAction,

@@ -57,10 +57,7 @@ export default class SelectPlantProject extends Component {
   }
 
   initialStateFromProps(props) {
-    const {
-      plantProjects,
-      currencies: { currencies }
-    } = props;
+    const { plantProjects, currencies } = props;
 
     let featuredProjects = plantProjects.filter(project => project.isFeatured);
     featuredProjects = _.orderBy(featuredProjects, 'created');

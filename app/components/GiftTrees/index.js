@@ -16,6 +16,7 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import { paymentFee } from '../../helpers/utils';
 import { getPreferredCurrency } from '../../actions/globalCurrency';
+import supportedCurrency from '../../assets/supportedCurrency.json';
 
 import {
   individualSchemaOptions,
@@ -374,7 +375,7 @@ export default class GiftTrees extends Component {
     };
 
     let plantProject = this.props.selectedProject;
-    let currencies = this.props.currencies.currencies;
+    let currencies = this.props.currencies;
     let receipt;
     if (this.state.modeReceipt === 'individual') {
       receipt = this.state.form['receiptIndividual']
@@ -501,9 +502,10 @@ export default class GiftTrees extends Component {
               {this.props.selectedTpo && currencies ? (
                 <TreeCountCurrencySelector
                   treeCost={plantProject.treeCost}
-                  rates={currencies.currency_rates[plantProject.currency].rates}
+                  projectCurrency={plantProject.currency}
+                  currencies={currencies}
                   fees={paymentFee}
-                  currencies={currencies.currency_names}
+                  supportedCurrency={supportedCurrency}
                   selectedCurrency={this.determineDefaultCurrency()}
                   treeCountOptions={plantProject.paymentSetup.treeCountOptions}
                   selectedTreeCount={this.state.selectedTreeCount}

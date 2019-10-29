@@ -3,15 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n.js';
-import { currencySort } from './utils';
 import { getCurrency } from '../../selectors';
+import supportedCurrency from '../../assets/supportedCurrency.json';
 
 class CurrencySelector extends React.Component {
   constructor(props) {
     super(props);
     let { selectedCurrency, globalCurrency } = props;
     this.state = {
-      currenciesArray: [],
       selectedCurrency:
         (globalCurrency && globalCurrency.currency) || selectedCurrency
     };
@@ -23,11 +22,8 @@ class CurrencySelector extends React.Component {
       this.setState({ selectedCurrency: this.props.globalCurrency.currency });
       this.props.onChange(this.state.selectedCurrency);
     }
-    let { currencies } = this.props;
-    this.setState({ currenciesArray: currencySort(Object.keys(currencies)) });
   }
   componentWillReceiveProps(nextProps) {
-    // console.log('next props currency', nextProps);
     if (
       nextProps.globalCurrency &&
       nextProps.globalCurrency.currency !== this.state.selectedCurrency
@@ -36,10 +32,8 @@ class CurrencySelector extends React.Component {
     }
   }
   handleChange(value) {
-    // console.log('changed locally', value);
     this.setState({ selectedCurrency: value });
     this.props.onChange(value);
-    // console.log('changed locally', this.state.selectedCurrency);
   }
   render() {
     return (
@@ -51,14 +45,14 @@ class CurrencySelector extends React.Component {
           value={this.state.selectedCurrency}
           onChange={evt => this.handleChange(evt.target.value)}
         >
-          {this.state.currenciesArray.map(value => {
+          {supportedCurrency.map(currency => {
             return (
               <option
                 className="pftp-selectfield__option"
-                value={value}
-                key={value}
+                value={currency.Symbol}
+                key={currency.Symbol}
               >
-                {this.props.currencies[value]} [{value}]
+                {currency.Name} [{currency.Symbol}]
               </option>
             );
           })}
@@ -70,7 +64,6 @@ class CurrencySelector extends React.Component {
 
 CurrencySelector.propTypes = {
   selectedCurrency: PropTypes.string,
-  currencies: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   globalCurrency: PropTypes.any
 };

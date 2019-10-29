@@ -15,8 +15,6 @@ const PriceProjects = ({
   selectProject,
   onMoreClick
 }) => {
-  currencies = currencies ? currencies.currencies : null;
-
   const [sortType, setSortType] = useState('asc');
 
   // memoized: rebuilds if plantProjects, sortType or currencies changes

@@ -10,6 +10,7 @@ import { Dimensions, View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject.native';
 import { formatNumber, delimitNumbers } from '../../utils/utils';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { convertCurrency } from '../../utils/currency';
 
 class TreeCountCurrencySelector extends React.PureComponent {
   constructor(props) {
@@ -48,21 +49,23 @@ class TreeCountCurrencySelector extends React.PureComponent {
 
   calculateAmount(treeCount) {
     return (
-      Math.round(treeCount * this.props.treeCost * this.getRate() * 100) / 100 +
+      Math.round(treeCount * this.getSingleTreeRate() * 100) / 100 +
       this.props.fees
     );
   }
 
   calculateTreeCount(amount) {
-    return Math.floor(
-      (amount - this.props.fees) / (this.props.treeCost * this.getRate())
+    return Math.floor((amount - this.props.fees) / this.getSingleTreeRate());
+  }
+
+  getSingleTreeRate() {
+    return convertCurrency(
+      this.props.treeCost,
+      this.props.projectCurrency,
+      this.state.selectedCurrency,
+      this.props.currencies
     );
   }
-
-  getRate() {
-    return parseFloat(this.props.rates[this.state.selectedCurrency]);
-  }
-
   updateStateAndParent(updates) {
     const newState = { ...this.state, ...updates };
     this.setState(newState, () => {
@@ -184,7 +187,7 @@ TreeCountCurrencySelector.propTypes = {
   treeCountOptions: PropTypes.object.isRequired,
   selectedTreeCount: PropTypes.number.isRequired,
   treeCost: PropTypes.number.isRequired,
-  rates: PropTypes.object.isRequired,
+  projectCurrency: PropTypes.string.isRequired,
   fees: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   showNextButton: PropTypes.bool,

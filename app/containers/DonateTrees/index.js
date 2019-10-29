@@ -39,7 +39,7 @@ class DonationTreesContainer extends PureComponent {
     typeof selectedProjectId == 'number' &&
       this.props.selectPlantProjectAction(selectedProjectId);
 
-    if (!this.props.currencies.currencies) {
+    if (!this.props.currencies) {
       this.props.fetchCurrencies();
     }
   }

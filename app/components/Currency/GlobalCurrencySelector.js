@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import i18n from '../../locales/i18n.js';
-import { currencySort } from './utils';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { currenciesSelector } from '../../selectors';

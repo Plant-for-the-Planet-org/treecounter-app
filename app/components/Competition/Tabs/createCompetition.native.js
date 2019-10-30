@@ -248,16 +248,12 @@ export default class createCompetition extends Component {
 
           <Formik
             initialValues={{
-              competition_name: '',
-              competition_goal: '',
-              competition_end_date: new Date('2020-06-12T14:42:42'),
-              competition_description: '',
-              competition_access: ''
+              ...validationSchema.initials
             }}
             onSubmit={values => {
               console.log(values);
             }}
-            validationSchema={validationSchema}
+            validationSchema={validationSchema.schema}
           >
             {props => (
               <>

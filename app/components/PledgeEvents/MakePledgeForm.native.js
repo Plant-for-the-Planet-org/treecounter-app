@@ -92,10 +92,7 @@ class MakePledgeForm extends Component {
         </View>
         <Formik
           initialValues={{
-            firstname: '',
-            lastname: '',
-            email: '',
-            treeCount: ''
+            ...validationSchema.initials
           }}
           onSubmit={values => {
             const data = {
@@ -121,7 +118,7 @@ class MakePledgeForm extends Component {
               treeCount: data.treeCount
             });
           }}
-          validationSchema={validationSchema}
+          validationSchema={validationSchema.schema}
         >
           {props => (
             <>

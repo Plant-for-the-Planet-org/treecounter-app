@@ -51,5 +51,38 @@ export default EStyleSheet.create({
   image: {
     height: 30,
     width: 30
-  }
+  },
+  actionButtonTouchable: {
+    width: '88%',
+    marginLeft: '6%',
+    position: 'absolute',
+    top: '86%'
+  },
+  actionButtonView: {
+    borderRadius: 100,
+    backgroundColor: '#89b53a',
+    height: 52,
+    justifyContent: 'center'
+  },
+  actionButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#ffffff'
+  },
+  actionButtonSmallTouchable: {
+    backgroundColor: '#89b53a',
+    height: 54,
+    width: 54,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: '82%',
+    left: '82%'
+  },
+  actionButtonSmallImage: { height: 32, width: 32 }
 });

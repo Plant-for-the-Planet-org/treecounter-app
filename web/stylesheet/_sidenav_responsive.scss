@@ -32,6 +32,12 @@ $breakpointTablet: 768px;
   .sidenav-wrapper {
     margin-left: 0 !important;
   }
+  .badge-wrapper{
+    left: -250px !important;
+    &.open{
+      left:0 !important;
+    } 
+  }
 }
 .badge-wrapper {
   max-height: 100px;

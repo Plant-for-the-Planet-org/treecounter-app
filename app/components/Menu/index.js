@@ -253,7 +253,10 @@ class Menu extends Component {
 
         {this.props.userProfile ? this.renderShareButtons() : null}
       </div>,
-      <div className="badge-wrapper" key="1">
+      <div
+        className={'badge-wrapper ' + (this.props.isOpen ? 'open' : '')}
+        key="1"
+      >
         <div className="global-selector language">
           <div className="li-select">
             <Select

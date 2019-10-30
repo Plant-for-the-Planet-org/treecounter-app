@@ -182,6 +182,7 @@ class Menu extends Component {
 
     return [
       <div
+        key="0"
         className={
           'app-container__sidenav ' + (this.props.isOpen ? 'open' : '')
         }
@@ -252,7 +253,7 @@ class Menu extends Component {
 
         {this.props.userProfile ? this.renderShareButtons() : null}
       </div>,
-      <div className="badge-wrapper">
+      <div className="badge-wrapper" key="1">
         <div className="global-selector language">
           <div className="li-select">
             <Select

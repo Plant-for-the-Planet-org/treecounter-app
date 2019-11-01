@@ -96,9 +96,9 @@ class AppDrawerNavigatorContainer extends Component {
       }
 
       return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: 'red' }}>
           <this._AppNavigator />
-          <ProgressModal />
+          {/* <ProgressModal /> */}
         </View>
       );
     }

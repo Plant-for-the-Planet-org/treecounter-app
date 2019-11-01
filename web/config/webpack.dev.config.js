@@ -37,10 +37,10 @@ module.exports = webpackMerge(commonConfig, {
   devtool: 'source-map',
   devServer: {
     inline: true,
-    port: 8080,
+    port: 8081,
     historyApiFallback: true,
     disableHostCheck: true,
-    host: '0.0.0.0'
+    host: '192.168.100.23'
   },
   plugins: [
     new webpack.DefinePlugin({

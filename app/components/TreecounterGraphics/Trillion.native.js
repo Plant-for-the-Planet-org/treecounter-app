@@ -144,7 +144,7 @@ class Trillion extends PureComponent {
     switch (route.key) {
       case 'world': {
         return this.state.loading ? (
-          <LoadingIndicator />
+          <LoadingIndicator contentLoader={true} />
         ) : (
           <ScrollView
             contentContainerStyle={{

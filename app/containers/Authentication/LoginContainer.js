@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Text } from 'react-native';
+
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
@@ -64,6 +66,9 @@ class LoginContainer extends React.Component {
 
   render() {
     return (
+      // <Text>\
+      //   asss
+      // </Text>
       <Login
         ref={'loginContainer'}
         onPress={this.onPress}

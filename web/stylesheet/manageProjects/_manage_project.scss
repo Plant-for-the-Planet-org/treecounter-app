@@ -1,6 +1,22 @@
+$breakpointTablet: 769px;
+$breakpointDesktop: 1130px;
+
+@include for-tablet {
+  .app-container__content {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: $breakpointTablet) and (max-width: $breakpointDesktop) {
+  .app-container__content {
+    width: 53%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .app-container__content {
   // align-items: unset !important;
-
   .manage-project-container {
     .pftp-button-primary {
       margin-top: 10px;

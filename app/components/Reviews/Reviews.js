@@ -4,11 +4,12 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
-  StyleSheet
+  StyleSheet,
+  ScrollView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import SingleReview from './SingleReview';
-import { ScrollView } from 'react-native-gesture-handler';
+// import { ScrollView } from 'react-native-gesture-handler';
 const { width, height } = Dimensions.get('window');
 import { pushStaticRoute } from './../../helpers/routerHelper';
 import {

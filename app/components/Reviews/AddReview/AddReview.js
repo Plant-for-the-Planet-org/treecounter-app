@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  ScrollView,
   Text,
   View,
   TouchableOpacity,
@@ -8,7 +9,7 @@ import {
   Image
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { ScrollView } from 'react-native-gesture-handler';
+// import { ScrollView } from 'react-native-gesture-handler';
 import AddRatingSection from './AddRatingSection';
 const { width, height } = Dimensions.get('window');
 import { forward } from './../../../assets';

@@ -19,7 +19,7 @@ import {
 } from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import i18n from '../locales/i18n.js';
-import { ScrollView } from 'react-native-gesture-handler';
+// import { ScrollView } from 'react-native-gesture-handler';
 
 export function addReview(review, plantProject) {
   return dispatch => {

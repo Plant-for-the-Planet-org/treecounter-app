@@ -22,7 +22,10 @@ class AddReview extends Component {
     super(props);
     console.log(props);
     this.state = {
-      review: {}
+      review:
+        (props.navigation.state.params &&
+          props.navigation.state.params.review) ||
+        {}
     };
     this.create = this.create.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
@@ -30,31 +33,36 @@ class AddReview extends Component {
   onUpdate(data) {
     this.setState({ review: data });
   }
-  componentDidMount() {
-    if (
-      this.props.navigation &&
-      this.props.navigation.state &&
-      this.props.navigation.state.params
-    ) {
-      this.setState({ review: this.props.navigation.state.params.review });
-    }
-  }
+
   async create() {
-    console.log('creating', this.props.selectedPlantProject);
-    if (this.state.review.id) {
-      await this.props.updateReview(
-        this.state.review,
-        this.props.selectedPlantProject
-      );
-    } else {
-      await this.props.addReview(
-        this.state.review,
-        this.props.selectedPlantProject
-      );
+    console.log('creating', this.props.selectedPlantProject, this.state.review);
+    try {
+      if (this.state.review.id) {
+        let { id, reviewIndexScores, summary, pdfFile } = this.state.review;
+        const plantProject = this.props.selectedPlantProject.id;
+        await this.props.updateReview(
+          {
+            id,
+            plantProject,
+            summary,
+            reviewIndexScores,
+            pdfFile
+          },
+          this.props.selectedPlantProject
+        );
+      } else {
+        await this.props.addReview(
+          this.state.review,
+          this.props.selectedPlantProject
+        );
+      }
+      this.props.navigation.navigate('app_reviews');
+    } catch (err) {
+      console.error(err);
     }
-    this.props.navigation.navigate('app_reviews');
   }
   render() {
+    console.log('state', this.state);
     return (
       <ScrollView
         contentContainerStyle={{

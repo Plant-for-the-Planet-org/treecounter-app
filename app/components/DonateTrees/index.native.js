@@ -15,7 +15,6 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
 import TabContainer from '../../containers/Menu/TabContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
-
 export default class DonateTrees extends React.PureComponent {
   constructor(props) {
     super(props);

@@ -98,21 +98,25 @@ export default class SingleReview extends Component {
           />
         </View>
         {/* Review Rating Ended */}
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <TouchableOpacity
-            onPress={() =>
-              updateStaticRoute('app_add_review', this.props.navigation)
-            }
-            style={styles.pdfButton}
+        {review.pdf && (
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
           >
-            <Text style={styles.pdfButtonText}>View PDF</Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              onPress={() =>
+                updateStaticRoute('app_view_pdf', this.props.navigation, {
+                  url: review.pdf
+                })
+              }
+              style={styles.pdfButton}
+            >
+              <Text style={styles.pdfButtonText}>View PDF</Text>
+            </TouchableOpacity>
+          </View>
+        )}
         <RBSheet
           ref={ref => {
             this.RBSheet = ref;

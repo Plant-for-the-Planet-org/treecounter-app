@@ -8,12 +8,13 @@ let userLang = navigator.language || navigator.userLanguage;
  */
 export const initialProps = {
   locale: userLang === 'en-US' || 'en-UK' || 'en-GB' ? 'en' : null,
-  mediaPath: '/media/cache' // relative URI on server, where images are located (further sub-paths must be specified in application)
+  mediaPath: '/media/cache', // relative URI on server, where images are located (further sub-paths must be specified in application)
+  reviewPDF: '/uploads/pdfs/review'
 };
 
 export const context = {
   scheme: 'https', // API server protocol
-  host: 'test.trilliontreecampaign.org', // API server domain
+  host: 'staging.trilliontreecampaign.org', // API server domain
   base: '',  // API base url. Debug mode off: "" on: "/app_dev.php" (requires login)
   debug: true, // local console debugging switch
   currency: 'USD',

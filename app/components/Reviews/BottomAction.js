@@ -8,13 +8,17 @@ export default class BottomAction extends Component {
     console.log('in con', props);
   }
   render() {
-    console.log(this.props.navigation, this.props.review, this.props.close);
+    console.log('got props review:', this.props.review, this.props.close);
     return (
       <View>
         <TouchableOpacity
           onPress={() => {
             this.props.close && this.props.close();
-            console.log(this.props.review, this.props.navigation);
+            console.log(
+              'got review props in bottom action:',
+              this.props.review,
+              this.props.navigation
+            );
             updateStaticRoute('app_add_review', this.props.navigation, {
               review: this.props.review
             });

@@ -52,6 +52,7 @@ import EditCompetitionContainer from '../../containers/EditCompetition';
 import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
 import Reviews from './../Reviews/Reviews';
 import AddReview from './../Reviews/AddReview/AddReview';
+import PDFViewer from '../PDFViewer';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -88,7 +89,8 @@ const headerLabels = {
   ['app_gift_projects']: 'label.gift_trees',
   ['pickup_profile_modal']: 'label.dedicate_trees_to',
   ['app_reviews']: 'Reviews',
-  ['app_add_review']: 'Add Review'
+  ['app_add_review']: 'Add Review',
+  ['app_view_pdf']: 'View PDF'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -157,6 +159,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_add_review']: {
         screen: AddReview
+      },
+      ['app_view_pdf']: {
+        screen: PDFViewer
       }
     },
     {

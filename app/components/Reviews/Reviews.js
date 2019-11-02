@@ -38,7 +38,7 @@ class Reviews extends Component {
   }
   render() {
     let { name, reviewScore } = this.props.project;
-    let { reviews } = this.props;
+    let { reviews, currentUserProfile } = this.props;
     return (
       <ScrollView
         contentContainerStyle={{
@@ -119,16 +119,18 @@ class Reviews extends Component {
             backgroundColor: '#ecf0f1'
           }}
         >
-          <TouchableOpacity
-            onPress={() => {
-              updateStaticRoute('app_add_review', this.props.navigation);
-            }}
-            style={styles.writeReviewButton}
-          >
-            <Text style={{ fontWeight: 'bold', color: 'white' }}>
-              Write a Review
-            </Text>
-          </TouchableOpacity>
+          {currentUserProfile && (
+            <TouchableOpacity
+              onPress={() => {
+                updateStaticRoute('app_add_review', this.props.navigation);
+              }}
+              style={styles.writeReviewButton}
+            >
+              <Text style={{ fontWeight: 'bold', color: 'white' }}>
+                Write a Review
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </ScrollView>
     );

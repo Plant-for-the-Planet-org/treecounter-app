@@ -103,11 +103,8 @@ export function updateReview(review, plantProject) {
     return new Promise(function(resolve, reject) {
       let reviewId = review.id;
       delete review.id;
-      delete review.reviewer;
-      delete review.reviewImages;
-      delete review.pdf;
-      delete review.plantProjectId;
-      delete review.score;
+      console.log('putting', review);
+
       putAuthenticatedRequest('review_put', review, {
         review: reviewId
       })

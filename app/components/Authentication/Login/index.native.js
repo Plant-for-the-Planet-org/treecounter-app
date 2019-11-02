@@ -73,13 +73,13 @@ export default class Login extends Component {
         resetScrollToCoords={{ x: 0, y: 0 }}
         scrollEnabled
       >
-        {/* <ReCaptchaV3
+        <ReCaptchaV3
           // eslint-disable-next-line no-underscore-dangle
           ref={ref => (this._captchaRef = ref)}
           captchaDomain={'https://www.trilliontreecampaign.org'}
           siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
           onReceiveToken={token => this.verifyCallback(token)}
-        /> */}
+        />
         <View style={styles.parentContainer}>
           <View style={styles.headerContainer}>
             <Image

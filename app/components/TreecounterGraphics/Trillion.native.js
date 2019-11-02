@@ -49,6 +49,7 @@ class Trillion extends PureComponent {
     super();
     this.state = {
       svgData: null,
+      contentLoader: false,
       displayName: '',
       pledgedEvents2: [],
       allPledgeEvents: [],
@@ -65,7 +66,7 @@ class Trillion extends PureComponent {
     // this.props.fetchpledgeEventsAction();
     // pledgedEvents2 = this.props.pledgeEvents;
     // console.log(pledgedEvents2);
-
+    this.setState({ contentLoader: true });
     trillionCampaign()
       .then(({ data }) => {
         const svgData = {
@@ -79,7 +80,8 @@ class Trillion extends PureComponent {
         this.setState({
           svgData,
           displayName: svgData.displayName,
-          loading: false
+          loading: false,
+          contentLoader: false
         });
         saveItem(Constants.storageKeys.svgData, JSON.stringify(svgData));
       })
@@ -138,13 +140,14 @@ class Trillion extends PureComponent {
 
   _renderScreen = ({ route }) => {
     const { navigation /* , userProfile, isLoggedIn */ } = this.props;
+    const { contentLoader } = this.state;
     const backgroundColor = 'white';
     // console.log(this.props.pledgeEvents);
 
     switch (route.key) {
       case 'world': {
         return this.state.loading ? (
-          <LoadingIndicator contentLoader={true} />
+          <LoadingIndicator contentLoader={contentLoader} screen="AppHome" />
         ) : (
           <ScrollView
             contentContainerStyle={{

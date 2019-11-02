@@ -10,7 +10,7 @@ import SingleRating from './SingleRating';
 import BottomAction from './BottomAction';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { updateStaticRoute } from './../../helpers/routerHelper';
+import { pushStaticRoute } from './../../helpers/routerHelper';
 
 const { width, height } = Dimensions.get('window');
 
@@ -107,7 +107,7 @@ export default class SingleReview extends Component {
           >
             <TouchableOpacity
               onPress={() =>
-                updateStaticRoute('app_view_pdf', this.props.navigation, {
+                pushStaticRoute('app_view_pdf', this.props.navigation, {
                   url: review.pdf
                 })
               }

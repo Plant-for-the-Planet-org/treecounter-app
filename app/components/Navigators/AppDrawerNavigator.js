@@ -153,15 +153,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_resetPassword')]: {
         screen: ResetPasswordContainer,
         path: getLocalRoute('app_resetPassword') + '/:token'
-      },
-      ['app_reviews']: {
-        screen: Reviews
-      },
-      ['app_add_review']: {
-        screen: AddReview
-      },
-      ['app_view_pdf']: {
-        screen: PDFViewer
       }
     },
     {
@@ -324,6 +315,15 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_donate_detail']: {
         screen: DonationTreesContainer
+      },
+      ['app_reviews']: {
+        screen: Reviews
+      },
+      ['app_add_review']: {
+        screen: AddReview
+      },
+      ['app_view_pdf']: {
+        screen: PDFViewer
       }
     },
     {

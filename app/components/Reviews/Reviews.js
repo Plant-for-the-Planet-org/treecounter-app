@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import SingleReview from './SingleReview';
 import { ScrollView } from 'react-native-gesture-handler';
 const { width, height } = Dimensions.get('window');
-import { updateStaticRoute } from './../../helpers/routerHelper';
+import { pushStaticRoute } from './../../helpers/routerHelper';
 import {
   selectedPlantProjectSelector,
   selectedReviewsSelector,
@@ -122,7 +122,7 @@ class Reviews extends Component {
           {currentUserProfile && (
             <TouchableOpacity
               onPress={() => {
-                updateStaticRoute('app_add_review', this.props.navigation);
+                pushStaticRoute('app_add_review', this.props.navigation);
               }}
               style={styles.writeReviewButton}
             >

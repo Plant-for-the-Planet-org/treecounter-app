@@ -8,7 +8,6 @@ target 'TreecounterApp' do
 
   pod 'react-native-document-picker', :path => '../node_modules/react-native-document-picker'
 
-  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
   pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 

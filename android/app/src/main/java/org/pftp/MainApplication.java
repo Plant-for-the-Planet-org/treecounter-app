@@ -9,7 +9,6 @@ import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.taessina.paypal.RNPaypalWrapperPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import io.github.elyx0.reactnativedocumentpicker.DocumentPickerPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.bugsnag.BugsnagReactNative;
@@ -47,7 +46,6 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new RNPaypalWrapperPackage(),
             new PickerPackage(),
-            new RNGestureHandlerPackage(),
             new DocumentPickerPackage(),
             new LinearGradientPackage(),
             BugsnagReactNative.getPackage(),

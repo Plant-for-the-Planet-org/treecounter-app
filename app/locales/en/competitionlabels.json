@@ -20,7 +20,8 @@
   "competition_goal": "Tree Target",
   "competition_end_date": "End Date",
   "competition_access": "Who can join",
-  "competition_image": "Add Image",
+  "competition_pick_image": "Pick Image",
+  "competition_click_image": "Click Image",
   "competition_description": "Description",
   "create_competition": "Create Competition",
   "competition_access_immediate": "Anyone (Join Immediately)",
@@ -32,5 +33,10 @@
   "competition_create_successfully": "Competition created successfully",
   "competition_creation_error": "Competition creation failed",
   "competition_edited_successfully": "Competition edited successfully",
-  "competition_editing_error": "Competition editing failed"
+  "competition_editing_error": "Competition editing failed",
+  "mine_compeition_tab_header": "List of all competitions you've joined or created.",
+  "mine_compeition_tab_header_null": "It seems you don't have any competitions yet. Please join or create one, and they will appear here.",
+  "archived_compeition_tab_header": "List of competitions from the past.",
+  "featured_compeition_tab_header": "Select a competition to join and start planting trees",
+  "all_compeition_tab_header": "List of all competitions competitions. Join one, and start planting."
 }

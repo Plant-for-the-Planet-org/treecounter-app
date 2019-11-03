@@ -35,16 +35,14 @@ class EditCompetitionContainer extends Component {
       }
     }
   }
-  editCompetition(value, params, formRef) {
+  editCompetition(value, params) {
     console.log(value);
     let json = {
       name: value.name,
       goal: value.goal,
       endDate: value.endDate,
       access: value.access,
-      description: value.description,
-      contact: value.contact,
-      email: value.email
+      description: value.description
     };
     if (value.imageFile && value.imageFile.includes('base64')) {
       json.imageFile = value.imageFile;
@@ -63,10 +61,10 @@ class EditCompetitionContainer extends Component {
             competitionFormSchemaOptions: {
               ...newSchemaOptions
             }
-          },
-          () => {
-            formRef.validate();
           }
+          // () => {
+          //   formRef.validate();
+          // }
         );
       });
   }

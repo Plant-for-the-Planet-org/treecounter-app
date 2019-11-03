@@ -1,23 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import {
-  Dimensions,
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Image
-} from 'react-native';
+import { Dimensions, Text, View, TouchableOpacity } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
-import styles from '../../styles/common/tabbar';
+import styles from '../../styles/common/tabbar.native';
+import buttonStyles from '../../styles/common/button.native';
+import { fullPageWhite } from '../../styles/common/common_styles';
+import i18n from '../../locales/i18n';
+import { updateStaticRoute } from '../../helpers/routerHelper';
+import ClosedCompetitions from './Tabs/closed.native'; // Shows all Archived competitions
 import MineCompetitions from './Tabs/mine.native'; // Shows my competitions
 import FeaturedCompetitions from './Tabs/featured.native'; // Shows featured competitions
 import AllCompetitions from './Tabs/all.native'; // Shows all competitions
-import i18n from '../../locales/i18n';
-import { forward } from './../../assets';
-import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
-import ClosedCompetitions from './Tabs/closed.native';
-
 const Layout = {
   window: {
     width: Dimensions.get('window').width
@@ -75,7 +68,7 @@ class Competiton extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <View style={fullPageWhite}>
         <TabView
           useNativeDriver
           navigationState={this.state}
@@ -86,30 +79,17 @@ class Competiton extends React.Component {
 
         {/* Button to add new competitions(On each page) */}
         <TouchableOpacity
-          style={styles2.competitionButton}
+          style={buttonStyles.plusButton}
           onPress={() => {
-            updateStaticRoute('app_create_competition', this.props.navigation);
+            updateStaticRoute('app_create_competition', this.props.navigation, {
+              onCreateCompetition: this.props.onCreateCompetition
+            });
           }}
         >
-          <Text style={styles2.competitionButtonIcon}>+</Text>
+          <Text style={buttonStyles.plusButtonIcon}>+</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
 export default Competiton;
-
-const styles2 = StyleSheet.create({
-  competitionButton: {
-    backgroundColor: '#89b53a',
-    height: 54,
-    width: 54,
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    top: '80%',
-    left: '80%'
-  },
-  competitionButtonIcon: { fontSize: 30, color: '#fff' }
-});

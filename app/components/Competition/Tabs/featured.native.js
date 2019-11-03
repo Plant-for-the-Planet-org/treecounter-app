@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, Image } from 'react-native';
-import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/competition/competition-master.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
 import { trees } from './../../../assets';
+import i18n from '../../../locales/i18n';
 
 export default class FeaturedCompetitions extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      expanded: false,
-      pageIndex: 1,
       featuredCompetitions: []
     };
   }
@@ -69,12 +66,12 @@ export default class FeaturedCompetitions extends Component {
       <ScrollView
         contentContainerStyle={[
           scrollStyle.styleContainer,
-          { paddingBottom: 72 }
+          { paddingBottom: 164 }
         ]}
       >
         <View style={styles.headerView}>
           <Text style={styles.headerTitle}>
-            Select a competition to join and start planting trees
+            {i18n.t('label.featured_compeition_tab_header')}
           </Text>
           <Image
             source={trees}
@@ -83,15 +80,15 @@ export default class FeaturedCompetitions extends Component {
           />
         </View>
         {featuredCompetitions.length > 0
-          ? featuredCompetitions.map(project => (
+          ? featuredCompetitions.map(competition => (
               <CompetitionSnippet
-                key={'competition' + project.id}
+                key={'competition' + competition.id}
                 cardStyle={styles.cardStyle}
-                onMoreClick={id => this.props.onMoreClick(id, project.name)}
+                onMoreClick={id => this.props.onMoreClick(id, competition.name)}
                 leaveCompetition={id => this.props.leaveCompetition(id)}
                 enrollCompetition={id => this.props.enrollCompetition(id)}
                 editCompetition={this.props.editCompetition}
-                competition={project}
+                competition={competition}
                 type="featured"
               />
             ))
@@ -100,6 +97,7 @@ export default class FeaturedCompetitions extends Component {
     );
   }
 }
+
 FeaturedCompetitions.propTypes = {
   allCompetitions: PropTypes.any,
   onMoreClick: PropTypes.any,

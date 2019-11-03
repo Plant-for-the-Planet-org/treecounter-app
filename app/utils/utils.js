@@ -50,7 +50,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
 
 export function formatDate(date, style = 'dd MMM yyyy', locale) {
   locale = locale || getLocale();
-  console.log('formatDate', date, style, locale);
+  //console.log('formatDate', date, style, locale);
 
   if (date) {
     return format(parseISO(date), style, {

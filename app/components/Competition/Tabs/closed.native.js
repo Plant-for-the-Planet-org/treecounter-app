@@ -1,26 +1,22 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, Image } from 'react-native';
-import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/competition/competition-master.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
 import { trees } from './../../../assets';
+import i18n from '../../../locales/i18n';
 
 export default class ClosedCompetitions extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      expanded: false,
-      pageIndex: 1,
-      featuredCompetitions: []
+      archivedCompetitions: []
     };
   }
   componentWillMount() {
     let { allCompetitions } = this.props;
-    let featuredCompetitions = [];
+    let archivedCompetitions = [];
     let CurrentDate = new Date();
 
     if (allCompetitions.length > 0) {
@@ -29,19 +25,19 @@ export default class ClosedCompetitions extends Component {
           let endDate = comp.endDate;
           endDate = new Date(endDate);
           if (CurrentDate > endDate) {
-            featuredCompetitions.push(comp);
+            archivedCompetitions.push(comp);
           }
         });
       });
     }
     this.setState({
-      featuredCompetitions: featuredCompetitions
+      archivedCompetitions: archivedCompetitions
     });
   }
 
   componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
-    let featuredCompetitions = [];
+    let archivedCompetitions = [];
     let CurrentDate = new Date();
     if (allCompetitions.length > 0) {
       allCompetitions.forEach(val => {
@@ -49,18 +45,18 @@ export default class ClosedCompetitions extends Component {
           let endDate = comp.endDate;
           endDate = new Date(endDate);
           if (CurrentDate > endDate) {
-            featuredCompetitions.push(comp);
+            archivedCompetitions.push(comp);
           }
         });
       });
     }
     this.setState({
-      featuredCompetitions: featuredCompetitions
+      archivedCompetitions: archivedCompetitions
     });
   }
 
   render() {
-    let { featuredCompetitions } = this.state;
+    let { archivedCompetitions } = this.state;
     return (
       <ScrollView
         contentContainerStyle={[
@@ -70,7 +66,7 @@ export default class ClosedCompetitions extends Component {
       >
         <View style={styles.headerView}>
           <Text style={styles.headerTitle}>
-            List of competitions from the past.
+            {i18n.t('label.archived_compeition_tab_header')}
           </Text>
           <Image
             source={trees}
@@ -78,16 +74,16 @@ export default class ClosedCompetitions extends Component {
             resizeMode="contain"
           />
         </View>
-        {featuredCompetitions.length > 0
-          ? featuredCompetitions.map(project => (
+        {archivedCompetitions.length > 0
+          ? archivedCompetitions.map(competition => (
               <CompetitionSnippet
-                key={'competition' + project.id}
+                key={'competition' + competition.id}
                 cardStyle={styles.cardStyle}
-                onMoreClick={id => this.props.onMoreClick(id, project.name)}
+                onMoreClick={id => this.props.onMoreClick(id, competition.name)}
                 leaveCompetition={id => this.props.leaveCompetition(id)}
                 enrollCompetition={id => this.props.enrollCompetition(id)}
                 editCompetition={this.props.editCompetition}
-                competition={project}
+                competition={competition}
                 type="featured"
               />
             ))

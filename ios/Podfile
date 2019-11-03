@@ -3,8 +3,11 @@
 
 target 'TreecounterApp' do
   inherit! :search_paths
-  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
-  pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker'
+
+  pod 'tipsi-stripe', :path => '../node_modules/tipsi-stripe'
+
+
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
 end

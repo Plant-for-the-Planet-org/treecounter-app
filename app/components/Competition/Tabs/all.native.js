@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, Image } from 'react-native';
-import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
-import styles from '../../../styles/selectplantproject/featured.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
-import FeaturedCompetitions from './featured.native';
 import { trees } from './../../../assets';
+import styles from '../../../styles/competition/competition-master.native';
+import i18n from '../../../locales/i18n';
 
 export default class AllCompetitions extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      expanded: false,
-      pageIndex: 2,
-      featuredCompetitions: []
+      showAllCompetitions: []
     };
   }
   componentWillMount() {
     let { allCompetitions } = this.props;
-    let featuredCompetitions = [];
+    let showAllCompetitions = [];
     let CurrentDate = new Date();
 
     if (allCompetitions.length > 0) {
@@ -31,20 +26,20 @@ export default class AllCompetitions extends Component {
             let endDate = comp.endDate;
             endDate = new Date(endDate);
             if (endDate > CurrentDate) {
-              featuredCompetitions.push(comp);
+              showAllCompetitions.push(comp);
             }
           });
         }
       });
     }
     this.setState({
-      featuredCompetitions: featuredCompetitions
+      showAllCompetitions: showAllCompetitions
     });
   }
 
   componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
-    let featuredCompetitions = [];
+    let showAllCompetitions = [];
     let CurrentDate = new Date();
 
     if (allCompetitions.length > 0) {
@@ -54,29 +49,19 @@ export default class AllCompetitions extends Component {
             let endDate = comp.endDate;
             endDate = new Date(endDate);
             if (endDate > CurrentDate) {
-              featuredCompetitions.push(comp);
+              showAllCompetitions.push(comp);
             }
           });
         }
       });
     }
     this.setState({
-      featuredCompetitions: featuredCompetitions
+      showAllCompetitions: showAllCompetitions
     });
   }
 
-  onSelectClickedFeaturedProjects = (/*id*/) => {
-    // this.props.selectProject(id);
-    // const { navigation } = this.props;
-    // updateStaticRoute(
-    //   'app_donate_detail',
-    //   navigation,
-    //   navigation.getParam('userForm')
-    // );
-  };
-
   render() {
-    let { featuredCompetitions } = this.state;
+    let { showAllCompetitions } = this.state;
     return (
       <ScrollView
         contentContainerStyle={[
@@ -84,27 +69,9 @@ export default class AllCompetitions extends Component {
           { paddingBottom: 72 }
         ]}
       >
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            margin: 20,
-            marginBottom: 0
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 14,
-              fontWeight: 'normal',
-              fontStyle: 'normal',
-              lineHeight: 21,
-              letterSpacing: 0,
-              textAlign: 'left',
-              color: '#4d5153',
-              maxWidth: '70%'
-            }}
-          >
-            List of all competitions competitions. Join one, and start planting.
+        <View style={styles.headerView}>
+          <Text style={styles.headerTitle}>
+            {i18n.t('label.all_compeition_tab_header')}
           </Text>
           <Image
             source={trees}
@@ -112,16 +79,16 @@ export default class AllCompetitions extends Component {
             resizeMode="contain"
           />
         </View>
-        {featuredCompetitions.length > 0
-          ? featuredCompetitions.map(project => (
+        {showAllCompetitions.length > 0
+          ? showAllCompetitions.map(competition => (
               <CompetitionSnippet
-                key={'competition' + project.id}
+                key={'competition' + competition.id}
                 cardStyle={styles.cardStyle}
-                onMoreClick={id => this.props.onMoreClick(id, project.name)}
+                onMoreClick={id => this.props.onMoreClick(id, competition.name)}
                 leaveCompetition={id => this.props.leaveCompetition(id)}
                 enrollCompetition={id => this.props.enrollCompetition(id)}
                 editCompetition={this.props.editCompetition}
-                competition={project}
+                competition={competition}
                 type="all"
               />
             ))

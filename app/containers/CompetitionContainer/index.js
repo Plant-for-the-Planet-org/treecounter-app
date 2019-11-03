@@ -24,7 +24,7 @@ class CompetitionContainer extends React.Component {
     };
   }
 
-  createCompetition = (value, formRef) => {
+  createCompetition = value => {
     if (value) {
       this.props
         .createCompetition(value, this.props.navigation)
@@ -40,10 +40,10 @@ class CompetitionContainer extends React.Component {
               competitionFormSchemaOptions: {
                 ...newSchemaOptions
               }
-            },
-            () => {
-              formRef.validate();
             }
+            // () => {
+            //   formRef.validate();
+            // }
           );
         });
     }

@@ -3,7 +3,6 @@ package org.pftp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 //import com.taessina.paypal.RNPaypalWrapperPackage;
@@ -37,7 +36,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
-            new RNDateTimePickerPackage(),
             new PickerPackage(),
             new AsyncStoragePackage(),
             //new RNPaypalWrapperPackage(),

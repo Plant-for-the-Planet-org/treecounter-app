@@ -84,5 +84,17 @@ export default EStyleSheet.create({
     top: '82%',
     left: '82%'
   },
-  actionButtonSmallImage: { height: 32, width: 32 }
+  actionButtonSmallImage: { height: 32, width: 32 },
+  plusButton: {
+    backgroundColor: '#89b53a',
+    height: 54,
+    width: 54,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: '13%',
+    left: '80%'
+  },
+  plusButtonIcon: { fontSize: 30, color: '#fff' }
 });

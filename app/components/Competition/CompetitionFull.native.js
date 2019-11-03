@@ -55,7 +55,8 @@ class CompetitionFull extends React.Component {
   }
   render() {
     let status = '',
-      button = null;
+      button = null,
+      button2 = null;
     const competitionDetail = this.props.competitionDetail;
     console.log(competitionDetail);
     let participantCount = 0,
@@ -106,6 +107,32 @@ class CompetitionFull extends React.Component {
           <Text> {i18n.t('label.edit')}</Text>
         </PrimaryButton>
       );
+      if (status === '') {
+        button2 = (
+          <PrimaryButton
+            style={snippetStyles.buttonItem}
+            buttonStyle={snippetStyles.buttonStyle}
+            textStyle={snippetStyles.buttonTextStyle}
+            onClick={() => this.props.enrollCompetition(competitionDetail.id)}
+          >
+            <Text> {i18n.t('label.join')}</Text>
+          </PrimaryButton>
+        );
+      } else if (status === 'enrolled') {
+        button2 = (
+          <PrimaryButton
+            style={snippetStyles.buttonItem}
+            buttonStyle={[
+              snippetStyles.buttonStyle,
+              { borderColor: '#e74c3c', backgroundColor: 'white' }
+            ]}
+            textStyle={snippetStyles.moreButtonTextStyle}
+            onClick={() => this.props.leaveCompetition(competitionDetail.id)}
+          >
+            <Text style={{ color: '#e74c3c' }}> {i18n.t('label.leave')}</Text>
+          </PrimaryButton>
+        );
+      }
       // button = null;
     } else if (status === '') {
       if (competitionDetail && competitionDetail.access === 'immediate') {
@@ -279,6 +306,7 @@ class CompetitionFull extends React.Component {
                     }}
                   >
                     {button}
+                    {button2}
                   </View>
                   {/* Compeition Buttons Ends */}
                 </View>
@@ -705,7 +733,7 @@ const snippetStyles = StyleSheet.create({
     height: 36,
     borderRadius: 4,
     backgroundColor: '#89b53a',
-    width: '50%'
+    width: '45%'
   },
   buttonTextStyle: {
     fontSize: 13,

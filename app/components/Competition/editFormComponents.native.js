@@ -15,7 +15,7 @@ import buttonStyles from '../../styles/common/button.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { getImageUrl } from '../../actions/apiRouting';
 import { Dropdown } from 'react-native-material-dropdown';
-import { updateRoute } from '../../helpers/routerHelper';
+// import { updateRoute } from '../../helpers/routerHelper';
 
 const validationSchema = generateFormikSchemaFromFormSchema(
   competitionFormSchema

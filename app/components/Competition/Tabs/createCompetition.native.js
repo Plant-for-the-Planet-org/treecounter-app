@@ -5,11 +5,11 @@ import { FormikForm } from './formComponents.native';
 export default function createCompetition(props) {
   const [buttonType, setButtonType] = useState('competition');
 
-  keyboardDidShow = () => {
+  const keyboardDidShow = () => {
     setButtonType('>');
   };
 
-  keyboardDidHide = () => {
+  const keyboardDidHide = () => {
     setButtonType('competition');
   };
 

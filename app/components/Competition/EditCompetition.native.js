@@ -50,6 +50,7 @@ function EditCompetition(props) {
       <FormikForm
         buttonType={buttonType}
         onEditCompetition={props.editCompetition}
+        onDeleteCompetition={props.deleteCompetition}
         initialValues={{
           name: formValue.name,
           goal: formValue.goal,
@@ -59,6 +60,7 @@ function EditCompetition(props) {
           imageFile: formValue.image
         }}
         competition_id={props.competition_id}
+        navigation={props.navigation}
       />
     </View>
   );

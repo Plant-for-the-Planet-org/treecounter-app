@@ -15,6 +15,7 @@ import buttonStyles from '../../styles/common/button.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { getImageUrl } from '../../actions/apiRouting';
 import { Dropdown } from 'react-native-material-dropdown';
+import { updateRoute } from '../../helpers/routerHelper';
 
 const validationSchema = generateFormikSchemaFromFormSchema(
   competitionFormSchema
@@ -22,6 +23,16 @@ const validationSchema = generateFormikSchemaFromFormSchema(
 
 export const FormikForm = props => {
   const buttonType = props.buttonType;
+
+  const handleDelete = () => {
+    props
+      .onDeleteCompetition(props.competition_id)
+      .then((/* success */) => {})
+      .catch(err => {
+        console.log('Error', err);
+      });
+    //updateRoute('app_competitions', props.navigation);
+  };
   return (
     <Formik
       initialValues={props.initialValues}
@@ -124,16 +135,28 @@ export const FormikForm = props => {
             </KeyboardAwareScrollView>
 
             {buttonType === 'competition' ? (
-              <TouchableOpacity
-                style={buttonStyles.actionButtonTouchable}
-                onPress={props.handleSubmit}
-              >
-                <View style={buttonStyles.actionButtonView}>
-                  <Text style={buttonStyles.actionButtonText}>
-                    {i18n.t('label.edit_competition')}
-                  </Text>
-                </View>
-              </TouchableOpacity>
+              <>
+                <TouchableOpacity
+                  style={buttonStyles.dualActionButtonTouchable1}
+                  onPress={props.handleSubmit}
+                >
+                  <View style={buttonStyles.dualActionButtonView1}>
+                    <Text style={buttonStyles.dualActionButtonText1}>
+                      {i18n.t('label.save_competition')}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={buttonStyles.dualActionButtonTouchable2}
+                  onPress={handleDelete}
+                >
+                  <View style={buttonStyles.dualActionButtonView2}>
+                    <Text style={buttonStyles.dualActionButtonText2}>
+                      {i18n.t('label.delete_competition')}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </>
             ) : null}
 
             {buttonType === '>' ? (

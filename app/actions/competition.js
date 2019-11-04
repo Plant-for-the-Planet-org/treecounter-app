@@ -224,6 +224,40 @@ export function editCompetition(value, param, navigation) {
   };
 }
 
+export function deleteCompetition(param) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    return new Promise(function(resolve, reject) {
+      deleteAuthenticatedRequest('competition_delete', { competition: param })
+        .then(res => {
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.competition, [competitionSchema])
+            )
+          );
+          resolve(res.data);
+          dispatch(setProgressModelState(false));
+          NotificationManager.success(
+            i18n.t('label.competition_deleted_successfully'),
+            i18n.t('label.success'),
+            5000
+          );
+          dispatch(fetchMineCompetitions());
+        })
+        .catch(error => {
+          debug(error);
+          NotificationManager.error(
+            i18n.t('label.competition_delete_error'),
+            i18n.t('label.error'),
+            5000
+          );
+          reject(error);
+          dispatch(setProgressModelState(false));
+        });
+    });
+  };
+}
+
 export function enrollCompetition(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));

@@ -1,5 +1,14 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
+import { Dimensions } from 'react-native';
+
+const Layout = {
+  window: {
+    height: Dimensions.get('window').height - (56 + 70 + 20),
+    width: Dimensions.get('window').width
+  }
+};
+
 export default EStyleSheet.create({
   primaryButton: {
     height: 50,
@@ -96,5 +105,47 @@ export default EStyleSheet.create({
     bottom: '13%',
     left: '80%'
   },
-  plusButtonIcon: { fontSize: 30, color: '#fff' }
+  plusButtonIcon: { fontSize: 30, color: '#fff' },
+  dualActionButtonTouchable1: {
+    width: Layout.window.width * 0.4,
+    position: 'absolute',
+    top: '86%',
+    left: '6%'
+  },
+  dualActionButtonTouchable2: {
+    width: Layout.window.width * 0.4,
+    right: '6%',
+    position: 'absolute',
+    top: '86%'
+  },
+  dualActionButtonView1: {
+    borderRadius: 6,
+    backgroundColor: '#3498db',
+    height: 52,
+    justifyContent: 'center'
+  },
+  dualActionButtonText1: {
+    fontSize: 16,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#ffffff'
+  },
+  dualActionButtonView2: {
+    borderRadius: 6,
+    backgroundColor: '#ecf0f1',
+    height: 52,
+    justifyContent: 'center'
+  },
+  dualActionButtonText2: {
+    fontSize: 16,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#e74c3c'
+  }
 });

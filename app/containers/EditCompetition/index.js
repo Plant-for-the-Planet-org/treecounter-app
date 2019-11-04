@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import { editCompetition } from '../../actions/competition';
+import { editCompetition, deleteCompetition } from '../../actions/competition';
 import EditCompetition from '../../components/Competition/EditCompetition.native';
 import { handleServerResponseError } from '../../helpers/utils';
 import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
@@ -56,18 +56,20 @@ class EditCompetitionContainer extends Component {
           err,
           this.state.competitionFormSchemaOptions
         );
-        this.setState(
-          {
-            competitionFormSchemaOptions: {
-              ...newSchemaOptions
-            }
+        this.setState({
+          competitionFormSchemaOptions: {
+            ...newSchemaOptions
           }
-          // () => {
-          //   formRef.validate();
-          // }
-        );
+        });
       });
   }
+  // deleteCompetition(params) {
+  //   this.props.deleteCompetition(params, this.props.navigation)
+  //     .then((/* success */) => { })
+  //     .catch(err => {
+  //       console.log('err signup data', err);
+  //     });
+  // }
   componentDidMount() {}
 
   render() {
@@ -77,7 +79,9 @@ class EditCompetitionContainer extends Component {
           {...this.props}
           competition_id={this.state.competition_id}
           editCompetition={this.editCompetition}
+          deleteCompetition={this.props.deleteCompetition}
           competitionFormSchemaOptions={this.state.competitionFormSchemaOptions}
+          navigation={this.props.navigation}
         />
       );
     } else {
@@ -91,7 +95,8 @@ const mapStateToProps = () => ({});
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      editCompetition
+      editCompetition,
+      deleteCompetition
     },
     dispatch
   );
@@ -110,5 +115,6 @@ EditCompetitionContainer.propTypes = {
   declinePart: PropTypes.any,
   cancelInvite: PropTypes.any,
   supportTreecounterAction: PropTypes.any,
-  editCompetition: PropTypes.any
+  editCompetition: PropTypes.any,
+  deleteCompetition: PropTypes.any
 };

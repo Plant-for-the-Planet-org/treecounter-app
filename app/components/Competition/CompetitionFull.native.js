@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
 import styles from '../../styles/competition/competition-full.native';
-// import snippetStyles from '../../styles/competition/competition-snippet.native';
 import CardLayout from '../Common/Card';
 import { ScrollView } from 'react-native';
-import scrollStyle from '../../styles/common/scrollStyle';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchCompetitionDetail } from '../../actions/competition';
@@ -21,20 +19,9 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import CompetitionParticipant from './CompetitionParticipant.native';
 import SearchUser from '../Challenge/Tabs/SearchUser.native';
 import i18n from '../../locales/i18n.js';
-import { getLocale } from '../../actions/getLocale';
-import { getDateFromMySQL } from '../../helpers/utils';
-import { Dimensions } from 'react-native';
-import { trees } from './../../assets';
-import { getLocalRoute } from '../../actions/apiRouting';
 import { formatDate } from '../../utils/utils';
+import snippetStyles from './../../styles/competition/competition-fullNew.native';
 
-const Layout = {
-  window: {
-    height: Dimensions.get('window').height - (56 + 70 + 20),
-    width: Dimensions.get('window').width
-  }
-};
-const rowHeight = 20;
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -122,14 +109,14 @@ class CompetitionFull extends React.Component {
         button2 = (
           <PrimaryButton
             style={snippetStyles.buttonItem}
-            buttonStyle={[
-              snippetStyles.buttonStyle,
-              { borderColor: '#e74c3c', backgroundColor: 'white' }
-            ]}
+            buttonStyle={snippetStyles.moreButtonStyleCancel}
             textStyle={snippetStyles.moreButtonTextStyle}
             onClick={() => this.props.leaveCompetition(competitionDetail.id)}
           >
-            <Text style={{ color: '#e74c3c' }}> {i18n.t('label.leave')}</Text>
+            <Text style={snippetStyles.moreButtonStyleCancelText}>
+              {' '}
+              {i18n.t('label.leave')}
+            </Text>
           </PrimaryButton>
         );
       }
@@ -167,14 +154,14 @@ class CompetitionFull extends React.Component {
       button = (
         <PrimaryButton
           style={snippetStyles.buttonItem}
-          buttonStyle={[
-            snippetStyles.moreButtonStyle,
-            { borderColor: '#e74c3c' }
-          ]}
+          buttonStyle={snippetStyles.moreButtonStyleCancel}
           textStyle={snippetStyles.moreButtonTextStyle}
           onClick={() => this.props.leaveCompetition(competitionDetail.id)}
         >
-          <Text style={{ color: '#e74c3c' }}> {i18n.t('label.leave')}</Text>
+          <Text style={snippetStyles.moreButtonStyleCancelText}>
+            {' '}
+            {i18n.t('label.leave')}
+          </Text>
         </PrimaryButton>
       );
     } else if (status === 'pending') {
@@ -201,13 +188,13 @@ class CompetitionFull extends React.Component {
     }
 
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <View style={snippetStyles.flexView}>
         <ScrollView>
           <View>
-            {/* Compeition Information  */}
+            {/* Competition Information  */}
             <View style={[snippetStyles.projectSnippetContainerN]}>
               <View style={snippetStyles.projectSpecsContainer}>
-                {/* Compeition Cover Image */}
+                {/* Competition Cover Image */}
                 {competitionDetail && competitionDetail.image ? (
                   <View style={snippetStyles.projectImageContainer}>
                     <Image
@@ -223,31 +210,36 @@ class CompetitionFull extends React.Component {
                     />
                   </View>
                 ) : null}
-                {/* Compeition Cover Image Ends */}
+                {/* Competition Cover Image Ends */}
 
-                {/* Compeition Progress Bar */}
+                {/* Competition Progress Bar */}
                 <CompetitionProgressBar
                   countPlanted={competitionDetail && competitionDetail.score}
                   countTarget={competitionDetail && competitionDetail.goal}
                 />
-                {/* Compeition Progress Bar Ends */}
+                {/* Competition Progress Bar Ends */}
 
                 <View style={snippetStyles.competitionContent}>
-                  {/* Compeition Name */}
+                  {/* Competition Name */}
                   <View style={snippetStyles.projectNameContainer}>
                     <Text
                       ellipsizeMode="tail"
                       numberOfLines={3}
                       style={snippetStyles.project_teaser__contentText}
                     >
-                      {competitionDetail && competitionDetail.name}{' '}
-                      {i18n.t('label.by_a_name')}{' '}
-                      {competitionDetail && competitionDetail.ownerName}
+                      {competitionDetail
+                        ? i18n.t('label.comp_by_name', {
+                            compname:
+                              competitionDetail && competitionDetail.name,
+                            ownername:
+                              competitionDetail && competitionDetail.ownerName
+                          })
+                        : null}
                     </Text>
                   </View>
-                  {/* Compeition Name Ends */}
+                  {/* Competition Name Ends */}
 
-                  {/* Compeition Description */}
+                  {/* Competition Description */}
                   <View style={snippetStyles.projectDescriptionContainer}>
                     <Text
                       style={
@@ -257,9 +249,9 @@ class CompetitionFull extends React.Component {
                       {competitionDetail && competitionDetail.description}
                     </Text>
                   </View>
-                  {/* Compeition Description Ends */}
+                  {/* Competition Description Ends */}
 
-                  {/* Compeition Owner Email */}
+                  {/* Competition Owner Email */}
                   {competitionDetail && competitionDetail.email ? (
                     <View style={snippetStyles.actionContainer}>
                       <View style={snippetStyles.emailContainer}>
@@ -277,26 +269,27 @@ class CompetitionFull extends React.Component {
                       </View>
                     </View>
                   ) : null}
-                  {/* Compeition Owner Email Ends */}
+                  {/* Competition Owner Email Ends */}
 
-                  {/* Compeition Date */}
-                  <View style={styles.actionContainer}>
-                    <View style={snippetStyles.byOrgContainer}>
-                      <Image
-                        source={compCalendar}
-                        style={{ width: 15, height: 15 }}
-                      />
-                      <Text style={snippetStyles.bottomText}>
-                        {i18n.t('label.ends')}{' '}
-                        {competitionDetail && competitionDetail.endDate
-                          ? formatDate(competitionDetail.endDate)
-                          : ''}
-                      </Text>
+                  {/* Competition Date */}
+                  {competitionDetail && competitionDetail.endDate ? (
+                    <View style={styles.actionContainer}>
+                      <View style={snippetStyles.byOrgContainer}>
+                        <Image
+                          source={compCalendar}
+                          style={{ width: 15, height: 15 }}
+                        />
+                        <Text style={snippetStyles.bottomText}>
+                          {i18n.t('label.ends')}{' '}
+                          {formatDate(competitionDetail.endDate)}
+                        </Text>
+                      </View>
                     </View>
-                  </View>
-                  {/* Compeition Date Ends */}
+                  ) : null}
 
-                  {/* Compeition Buttons */}
+                  {/* Competition Date Ends */}
+
+                  {/* Competition Buttons */}
                   <View
                     style={{
                       marginTop: 20,
@@ -308,7 +301,7 @@ class CompetitionFull extends React.Component {
                     {button}
                     {button2}
                   </View>
-                  {/* Compeition Buttons Ends */}
+                  {/* Competition Buttons Ends */}
                 </View>
               </View>
 
@@ -345,9 +338,9 @@ class CompetitionFull extends React.Component {
               </CardLayout> */}
               {/* Donate Card Ends */}
             </View>
-            {/* Compeition Information Ended  */}
+            {/* Competition Information Ended  */}
 
-            {/* Compeition Participant Details */}
+            {/* Competition Participant Details */}
             {participantCount > 0 ? (
               <View style={[snippetStyles.projectSnippetContainerN]}>
                 <View style={snippetStyles.projectSpecsContainer}>
@@ -388,7 +381,7 @@ class CompetitionFull extends React.Component {
                 </View>
               </View>
             ) : null}
-            {/* Compeition Participant Details Ends */}
+            {/* Competition Participant Details Ends */}
 
             {/* Participant Requests */}
             {requestCount > 0 &&
@@ -455,6 +448,7 @@ class CompetitionFull extends React.Component {
                         clearTextOnClick
                         alreadyInvited={competitionDetail.allEnrollments}
                         hideCompetitions
+                        addstyles={{ width: '90%' }}
                       />
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>
@@ -563,269 +557,3 @@ CompetitionFull.propTypes = {
   supportTreecounterAction: PropTypes.any,
   editCompetition: PropTypes.any
 };
-
-const snippetStyles = StyleSheet.create({
-  projectSnippetContainerN: {
-    flexDirection: 'column',
-    padding: 0
-  },
-  competitionContent: {
-    paddingTop: 20,
-    paddingLeft: 20,
-    paddingRight: 16,
-    paddingBottom: 16
-  },
-  projectImageContainer: {
-    height: Layout.window.width * 0.4,
-    width: '100%',
-
-    overflow: 'hidden'
-  },
-  teaser__projectImage: {
-    flex: 1,
-    overflow: 'hidden'
-  },
-  treeCounterContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
-    backgroundColor: '#d3d3d3',
-    borderBottomLeftRadius: 7,
-    borderBottomRightRadius: 7,
-    height: rowHeight * 1.7
-  },
-  treePlantedContainer: {
-    flexDirection: 'row',
-    height: '100%',
-    width: '100%'
-  },
-  treePlantedChildContainer: {
-    height: '100%',
-    flexDirection: 'row',
-    backgroundColor: '#89b53a',
-    borderRightColor: '#89b53a'
-  },
-  treePlantedtext: {
-    // padding: 5,
-    paddingLeft: 5,
-    color: 'white',
-    fontSize: 14,
-    fontWeight: 'bold'
-  },
-  treePlantedtextTrees: {
-    color: 'white',
-    paddingLeft: 5,
-    fontWeight: 'bold'
-  },
-  treePlantedtextPlanted: {
-    color: 'white',
-    fontWeight: 'bold',
-    paddingLeft: 16
-  },
-  targetContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    position: 'absolute',
-    alignItems: 'center',
-    paddingTop: 8,
-    paddingBottom: 8,
-    justifyContent: 'flex-end'
-  },
-  projectdetailsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: rowHeight * 2,
-    padding: 5
-  },
-  actionContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    paddingTop: 10
-    //height: rowHeight + rowHeight / 2,
-  },
-  project_teaser__contentText: {
-    fontSize: 18,
-    fontWeight: '500',
-    fontStyle: 'normal',
-    lineHeight: 27,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#4d5153'
-  },
-  textHeadingParticipants: {
-    fontSize: 16,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 22,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: 'rgba(0, 0, 0, 0.6)'
-  },
-  project_teaser__contentByText: {
-    fontSize: 10,
-    paddingBottom: 16,
-    maxWidth: '90%'
-  },
-  project_teaser__contentDescriptionText: {
-    fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 21,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: 'rgba(0, 0, 0, 0.6)'
-  },
-  bottomText: {
-    marginLeft: 8,
-    fontSize: 12,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 17,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#4d5153'
-  },
-  bottomParticipantText: {
-    fontSize: 11,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 15,
-    letterSpacing: 0,
-    textAlign: 'right',
-    color: 'rgba(0, 0, 0, 0.6)'
-  },
-  byOrgContainer: {
-    width: '50%',
-    flexDirection: 'row',
-    paddingTop: 10,
-    alignItems: 'center'
-  },
-  emailContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    paddingTop: 16,
-    alignItems: 'center'
-  },
-  byOrgText: {
-    fontSize: 16,
-    width: '100%'
-  },
-  locationText: {
-    fontSize: 10,
-    fontStyle: 'italic',
-    paddingBottom: 2
-  },
-  survivalText: {
-    fontSize: 12,
-    paddingTop: 3,
-    paddingBottom: 8
-  },
-  costText: {
-    fontSize: 18
-  },
-
-  buttonItem: {
-    padding: 5,
-    backgroundColor: '#89b53a'
-  },
-  buttonStyle: {
-    height: 36,
-    borderRadius: 4,
-    backgroundColor: '#89b53a',
-    width: '45%'
-  },
-  buttonTextStyle: {
-    fontSize: 13,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 18,
-    letterSpacing: 0,
-    textAlign: 'center',
-    color: '#ffffff'
-  },
-  moreButtonStyle: {
-    backgroundColor: 'white',
-    height: 35,
-    borderWidth: 1,
-    borderRadius: 4,
-    paddingLeft: 10,
-    paddingRight: 10
-  },
-  moreButtonTextStyle: {
-    fontSize: 12
-  },
-  projectNameContainer: {
-    flexDirection: 'row',
-    paddingBottom: 16,
-    width: '100%',
-    alignItems: 'center'
-  },
-  projectByNameContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    alignItems: 'center'
-  },
-  projectDescriptionContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    alignItems: 'center'
-  },
-  topCompetitorContainer: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-
-  // Card Styles
-  cardContainer: {
-    flexDirection: 'column',
-    flex: 1,
-    borderRadius: 7,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#d5d5d5',
-    padding: 16,
-    marginBottom: 40
-  },
-  googleCardTitle: {
-    fontSize: 17,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 23,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#4d5153'
-  },
-  googleCardPara: {
-    fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 21,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#4d5153',
-    flex: 3,
-    marginRight: 20
-  },
-  googleCardButton: {
-    fontSize: 14,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 21,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#89b53a',
-    marginTop: 16
-  },
-  googleCardParaContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginTop: 14,
-    marginBottom: 14
-  },
-  horizontalLine: {
-    borderColor: '#d5d5d5',
-    width: '100%',
-    borderBottomWidth: 1
-  }
-});

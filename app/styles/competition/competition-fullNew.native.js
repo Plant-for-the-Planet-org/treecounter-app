@@ -1,6 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import { Dimensions } from 'react-native';
+
 const Layout = {
   window: {
     height: Dimensions.get('window').height - (56 + 70 + 20),
@@ -10,25 +11,24 @@ const Layout = {
 const rowHeight = 20;
 
 export default EStyleSheet.create({
-  projectSnippetContainer: {
+  flexView: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  projectSnippetContainerN: {
     flexDirection: 'column',
-    padding: 0,
-    borderRadius: 7,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#d5d5d5'
+    padding: 0
   },
   competitionContent: {
-    paddingTop: 10,
-    paddingLeft: 16,
+    paddingTop: 20,
+    paddingLeft: 20,
     paddingRight: 16,
     paddingBottom: 16
   },
   projectImageContainer: {
     height: Layout.window.width * 0.4,
     width: '100%',
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
+
     overflow: 'hidden'
   },
   teaser__projectImage: {
@@ -87,10 +87,6 @@ export default EStyleSheet.create({
     height: rowHeight * 2,
     padding: 5
   },
-  locationContainer: {
-    flexDirection: 'column'
-  },
-  costContainer: { flexDirection: 'row' },
   actionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -99,34 +95,46 @@ export default EStyleSheet.create({
     //height: rowHeight + rowHeight / 2,
   },
   project_teaser__contentText: {
-    maxWidth: '90%',
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: '500',
     fontStyle: 'normal',
     lineHeight: 27,
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153'
   },
+  textHeadingParticipants: {
+    fontSize: 16,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 22,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: 'rgba(0, 0, 0, 0.6)'
+  },
   project_teaser__contentByText: {
     fontSize: 10,
-    paddingBottom: 5,
-    color: '$cardTextColor',
+    paddingBottom: 16,
     maxWidth: '90%'
   },
   project_teaser__contentDescriptionText: {
     fontSize: 14,
-    color: '$cardTextColor'
-  },
-  bottomText: {
-    marginLeft: 8,
-    fontSize: 11,
     fontWeight: 'normal',
     fontStyle: 'normal',
-    lineHeight: 15,
+    lineHeight: 21,
     letterSpacing: 0,
     textAlign: 'left',
     color: 'rgba(0, 0, 0, 0.6)'
+  },
+  bottomText: {
+    marginLeft: 8,
+    fontSize: 12,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 17,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
   },
   bottomParticipantText: {
     fontSize: 11,
@@ -151,51 +159,40 @@ export default EStyleSheet.create({
   },
   byOrgText: {
     fontSize: 16,
-    width: '100%',
-    color: '$cardTextColor'
+    width: '100%'
   },
   locationText: {
     fontSize: 10,
     fontStyle: 'italic',
-    paddingBottom: 2,
-    color: '$cardTextColor'
+    paddingBottom: 2
   },
   survivalText: {
     fontSize: 12,
     paddingTop: 3,
-    paddingBottom: 8,
-    color: '$cardTextColor'
+    paddingBottom: 8
   },
   costText: {
-    fontSize: 18,
-    color: '$cardTextColor'
+    fontSize: 18
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    width: '50%',
-    paddingTop: 10,
-    justifyContent: 'flex-end'
-  },
+
   buttonItem: {
-    padding: 5
+    padding: 5,
+    backgroundColor: '#89b53a'
   },
   buttonStyle: {
-    // height: 20,
-    // paddingLeft: 2,
-    // paddingRight: 2,
-    // paddingTop: 0,
-    // paddingBottom: 0,
-    // margin: 0,
-    // borderWidth: 0,
-    // borderRadius: 0,
-    // marginRight: 5
-    height: 35,
-    borderWidth: 1,
+    height: 36,
     borderRadius: 4,
-    padding: 5
+    backgroundColor: '#89b53a',
+    width: '45%'
   },
   buttonTextStyle: {
-    fontSize: 14
+    fontSize: 13,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 18,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: '#ffffff'
   },
   moreButtonStyle: {
     backgroundColor: 'white',
@@ -203,16 +200,25 @@ export default EStyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     paddingLeft: 10,
-    paddingRight: 10,
-    borderColor: '$borderColor'
+    paddingRight: 10
   },
   moreButtonTextStyle: {
-    color: '$textColor',
     fontSize: 12
   },
+  moreButtonStyleCancel: {
+    backgroundColor: 'white',
+    height: 35,
+    borderWidth: 1,
+    borderRadius: 4,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderColor: '#e74c3c',
+    width: '45%'
+  },
+  moreButtonStyleCancelText: { color: '#e74c3c' },
   projectNameContainer: {
     flexDirection: 'row',
-    paddingBottom: 5,
+    paddingBottom: 16,
     width: '100%',
     alignItems: 'center'
   },
@@ -230,94 +236,114 @@ export default EStyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   },
+
+  // Card Styles
+  cardContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    borderRadius: 7,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#d5d5d5',
+    padding: 16,
+    marginBottom: 40
+  },
+  googleCardTitle: {
+    fontSize: 17,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 23,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  googleCardPara: {
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    flex: 3,
+    marginRight: 20
+  },
+  googleCardButton: {
+    fontSize: 14,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#89b53a',
+    marginTop: 16
+  },
+  googleCardParaContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 14,
+    marginBottom: 14
+  },
+  horizontalLine: {
+    borderColor: '#d5d5d5',
+    width: '100%',
+    borderBottomWidth: 1
+  },
+
+  secondaryButton: {
+    borderRadius: 4,
+    backgroundColor: '#ffffff',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    height: 30,
+    borderColor: '#d5d5d5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 93,
+    alignSelf: 'flex-end',
+    marginTop: 8
+  },
+  secondaryButtonText: {
+    fontSize: 14,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: '#4d5153'
+  },
+  cancelButton: {
+    borderRadius: 4,
+    backgroundColor: '#ffffff',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    height: 30,
+    borderColor: '#e74c3c',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 93,
+    alignSelf: 'flex-end',
+    marginLeft: 12,
+    marginTop: 8
+  },
+  cancelButtonText: {
+    fontSize: 14,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: '#e74c3c'
+  },
+  topCompetitorScore: {
+    width: '40%'
+  },
   topCompetitorSection: {
     flex: 1,
     flexDirection: 'row',
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 10,
+    padding: 16,
     width: '100%',
-    justifyContent: 'space-between'
-  },
-  topCompetitorName: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    width: '100%'
-  },
-  topCompetitorScore: {
-    width: '10%',
-    alignItems: 'flex-end'
-  },
-  topCompetitorScoreText: {
-    fontSize: 11,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 16,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: 'rgba(0, 0, 0, 0.6)',
-    marginLeft: 10
-  },
-  topCompetitorRank: {
-    fontSize: 12,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 17,
-    letterSpacing: 1.2,
-    textAlign: 'left',
-    color: 'rgba(0, 0, 0, 0.6)'
-  },
-  topCompetitorDiv: {
-    width: '100%',
-    paddingLeft: 10,
-    paddingRight: 10,
-    height: 3
-  },
-  horizontalRule: {
-    borderBottomColor: '#f1f1f1',
-    borderBottomWidth: 2,
-    marginTop: 10
-  },
-  profileImageStyle: {
-    width: 30,
-    height: 30,
-    borderRadius: 0,
-    borderWidth: 0,
-    marginLeft: 10
-  },
-
-  progressbar: {
-    height: '100%',
-    flexDirection: 'row',
-    backgroundColor: '#89b53a',
-    borderColor: '#89b53a',
-    paddingRight: 12,
-    padding: 5,
-    borderTopRightRadius: 20,
-    borderBottomRightRadius: 20
-  },
-  progressbarw100: {
-    height: '100%',
-    flexDirection: 'row',
-    backgroundColor: '#89b53a',
-    borderColor: '#89b53a',
-
-    paddingRight: 12,
-    padding: 5
-  },
-  progressbarw0: {
-    height: '100%',
-    flexDirection: 'row',
-    padding: 5
-  },
-  treeCountViewPB: {
-    width: '100%',
-    flexDirection: 'row',
-    position: 'absolute',
-    alignItems: 'center',
-    paddingTop: 8,
-    paddingBottom: 8
-  },
-  targetflagview: { paddingLeft: 5, paddingRight: 16 },
-  targetflagimage: { width: 15, height: 15 }
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }
 });

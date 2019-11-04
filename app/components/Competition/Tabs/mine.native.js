@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import styles from '../../../styles/competition/competition-master.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';

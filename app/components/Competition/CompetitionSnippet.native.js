@@ -151,9 +151,12 @@ class CompetitionSnippet extends React.Component {
                   numberOfLines={3}
                   style={styles.project_teaser__contentText}
                 >
-                  {this.props.competition && this.props.competition.name}{' '}
-                  {i18n.t('label.by_a_name')}{' '}
-                  {this.props.competition && this.props.competition.ownerName}
+                  {i18n.t('label.comp_by_name', {
+                    compname:
+                      this.props.competition && this.props.competition.name,
+                    ownername:
+                      this.props.competition && this.props.competition.ownerName
+                  })}
                 </Text>
               </View>
 

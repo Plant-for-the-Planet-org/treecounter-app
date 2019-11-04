@@ -25,8 +25,8 @@ export const FormikForm = props => {
     <Formik
       initialValues={props.initialValues}
       onSubmit={values => {
-        imageFileData = 'data:image/jpeg;base64,' + values.imageFile.data;
-        newValues = {
+        let imageFileData = 'data:image/jpeg;base64,' + values.imageFile.data;
+        let newValues = {
           ...values
         };
         newValues.imageFile = imageFileData;
@@ -40,7 +40,7 @@ export const FormikForm = props => {
           <View style={styles.view_container}>
             <KeyboardAwareScrollView
               contentContainerStyle={styles.formScrollView}
-              enableOnAndroid={true}
+              enableOnAndroid
               keyboardDismissMode="on-drag"
               keyboardShouldPersistTaps="always"
               resetScrollToCoords={{ x: 0, y: 0 }}
@@ -102,7 +102,7 @@ export const FormikForm = props => {
                   returnKeyType="next"
                   lineWidth={1}
                   blurOnSubmit={false}
-                  multiline={true}
+                  multiline
                   error={props.touched.description && props.errors.description}
                   onChangeText={props.handleChange('description')}
                   onBlur={props.handleBlur('description')}
@@ -177,7 +177,7 @@ export function AccessPicker(props) {
 export function AddImage(props) {
   const image = props.image;
 
-  pickImage = () => {
+  const pickImage = () => {
     ImagePicker.openPicker({
       waitAnimationEnd: false,
       includeExif: true,
@@ -196,7 +196,7 @@ export function AddImage(props) {
       .catch(e => alert(e));
   };
 
-  clickImage = (cropping, mediaType = 'photo') => {
+  const clickImage = (cropping, mediaType = 'photo') => {
     ImagePicker.openCamera({
       includeExif: true,
       mediaType
@@ -213,7 +213,7 @@ export function AddImage(props) {
       .catch(e => alert(e));
   };
 
-  renderAsset = image => {
+  const renderAsset = image => {
     return (
       <View style={styles.projectImageContainer}>
         <Image
@@ -227,19 +227,17 @@ export function AddImage(props) {
   return (
     <View>
       <Text style={styles.addImageTitle}>Add Image</Text>
-      <View style={styles.showImage}>
-        {image ? this.renderAsset(image) : null}
-      </View>
+      <View style={styles.showImage}>{image ? renderAsset(image) : null}</View>
       <View style={styles.addImageButtonContainer}>
         <TouchableOpacity
           style={styles.addImageButton1}
-          onPress={this.pickImage.bind(this)}
+          onPress={pickImage.bind(this)}
         >
           <Image style={styles.addImageButtonIcon} source={imageGallery} />
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => this.clickImage(true)}
+          onPress={() => clickImage(true)}
           style={styles.addImageButton2}
         >
           <Image style={styles.addImageButtonIcon} source={cameraSolid} />

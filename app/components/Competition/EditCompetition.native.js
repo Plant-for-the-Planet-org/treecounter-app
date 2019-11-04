@@ -12,22 +12,22 @@ import { FormikForm } from './editFormComponents.native';
 function EditCompetition(props) {
   const [buttonType, setButtonType] = useState('competition');
 
-  keyboardDidShow = () => {
+  const keyboardDidShow = () => {
     setButtonType('>');
   };
 
-  keyboardDidHide = () => {
+  const keyboardDidHide = () => {
     setButtonType('competition');
   };
 
   useEffect(() => {
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
-      this.keyboardDidShow
+      keyboardDidShow
     );
     this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
-      this.keyboardDidHide
+      keyboardDidHide
     );
 
     if (props.competition_id) {
@@ -44,8 +44,9 @@ function EditCompetition(props) {
   if (props.competitionDetail) {
     formValue = props.competitionDetail;
   }
+  const style = { backgroundColor: 'white', flex: 1 };
   return (
-    <View style={{ backgroundColor: 'white', flex: 1 }}>
+    <View style={style}>
       <FormikForm
         buttonType={buttonType}
         onEditCompetition={props.editCompetition}

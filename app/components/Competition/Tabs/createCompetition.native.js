@@ -5,22 +5,22 @@ import { FormikForm } from './formComponents.native';
 export default function createCompetition(props) {
   const [buttonType, setButtonType] = useState('competition');
 
-  _keyboardDidShow = () => {
+  keyboardDidShow = () => {
     setButtonType('>');
   };
 
-  _keyboardDidHide = () => {
+  keyboardDidHide = () => {
     setButtonType('competition');
   };
 
   useEffect(() => {
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
-      this._keyboardDidShow
+      keyboardDidShow
     );
     this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
-      this._keyboardDidHide
+      keyboardDidHide
     );
     // clean up
     return () => {
@@ -28,9 +28,10 @@ export default function createCompetition(props) {
       this.keyboardDidHideListener.remove();
     };
   }, []);
+  const style = { backgroundColor: 'white', flex: 1 };
 
   return (
-    <View style={{ backgroundColor: 'white', flex: 1 }}>
+    <View style={style}>
       <FormikForm
         buttonType={buttonType}
         onCreateCompetition={props.navigation.getParam('onCreateCompetition')}

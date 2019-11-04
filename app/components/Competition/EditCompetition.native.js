@@ -9,16 +9,16 @@ import { getDateFromMySQL } from './../../helpers/utils';
 import { View, Keyboard } from 'react-native';
 import { FormikForm } from './editFormComponents.native';
 
-keyboardDidShow = () => {
-  setButtonType('>');
-};
-
-keyboardDidHide = () => {
-  setButtonType('competition');
-};
-
 function EditCompetition(props) {
   const [buttonType, setButtonType] = useState('competition');
+
+  keyboardDidShow = () => {
+    setButtonType('>');
+  };
+
+  keyboardDidHide = () => {
+    setButtonType('competition');
+  };
 
   useEffect(() => {
     this.keyboardDidShowListener = Keyboard.addListener(

@@ -120,18 +120,19 @@ class Reviews extends Component {
             backgroundColor: '#ecf0f1'
           }}
         >
-          {currentUserProfile && (
-            <TouchableOpacity
-              onPress={() => {
-                pushStaticRoute('app_add_review', this.props.navigation);
-              }}
-              style={styles.writeReviewButton}
-            >
-              <Text style={{ fontWeight: 'bold', color: 'white' }}>
-                Write a Review
-              </Text>
-            </TouchableOpacity>
-          )}
+          {currentUserProfile &&
+            currentUserProfile.isReviewer && (
+              <TouchableOpacity
+                onPress={() => {
+                  pushStaticRoute('app_add_review', this.props.navigation);
+                }}
+                style={styles.writeReviewButton}
+              >
+                <Text style={{ fontWeight: 'bold', color: 'white' }}>
+                  Write a Review
+                </Text>
+              </TouchableOpacity>
+            )}
         </View>
       </ScrollView>
     );

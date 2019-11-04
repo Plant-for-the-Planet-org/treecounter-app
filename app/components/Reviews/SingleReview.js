@@ -11,7 +11,7 @@ import BottomAction from './BottomAction';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { pushStaticRoute } from './../../helpers/routerHelper';
-
+import moment from 'moment';
 const { width, height } = Dimensions.get('window');
 
 export default class SingleReview extends Component {
@@ -27,6 +27,18 @@ export default class SingleReview extends Component {
   delete() {
     this.props.deleteReview(this.props.review.id);
     this.close();
+  }
+  isReviewer() {
+    let { review, currentUserProfile } = this.props;
+    return currentUserProfile.isReviewer;
+  }
+  canModify() {
+    let { review, currentUserProfile } = this.props;
+    return (
+      review.reviewer &&
+      currentUserProfile &&
+      currentUserProfile.id == review.reviewer.userProfileId
+    );
   }
   render() {
     let { review, navigation, currentUserProfile } = this.props;
@@ -57,22 +69,26 @@ export default class SingleReview extends Component {
             <Text style={styles.reviewUser}>
               {review.reviewer && review.reviewer.name}
             </Text>
-            {/* <Text style={styles.reviewDate}>15 April 2019</Text> */}
+            {review.created && (
+              <Text style={styles.reviewDate}>
+                {moment(review.created).format('D MMM, YYYY')}
+              </Text>
+            )}
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              currentUserProfile && this.RBSheet.open();
-            }}
-          >
-            {currentUserProfile && (
+          {this.canModify() && (
+            <TouchableOpacity
+              onPress={() => {
+                this.RBSheet.open();
+              }}
+            >
               <Icon
                 name="ellipsis-v"
                 solid
-                size={20}
+                size={24}
                 style={{ color: '#9E9E9E' }}
               />
-            )}
-          </TouchableOpacity>
+            </TouchableOpacity>
+          )}
         </View>
         {/* Review Header Ended */}
         {/* Review Content */}

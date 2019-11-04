@@ -4,12 +4,15 @@ import ContentLoader from 'react-native-content-loader';
 import { Circle, Rect } from 'react-native-svg';
 
 const AppHomeLoader = () => (
-  <ContentLoader height={300} duration={1000}>
-    <Rect x="0" y="0" rx="0" ry="0" width="100" height="13" />
-    <Circle cx="30" cy="60" r="30" />
-    <Rect x="75" y="40" rx="4" ry="4" width="100" height="13" />
-    <Rect x="75" y="70" rx="4" ry="4" width="50" height="8" />
-    <Rect x="0" y="100" rx="5" ry="5" width="400" height="200" />
+  <ContentLoader height={740} duration={1000}>
+    <Circle cx="59" cy="75" r="35" />
+    <Rect x="110" y="45" rx="0" ry="0" width="160" height="15" />
+    <Rect x="110" y="70" rx="0" ry="0" width="130" height="15" />
+    <Rect x="110" y="95" rx="0" ry="0" width="130" height="15" />
+    <Circle cx="185" cy="325" r="110" />
+    <Rect x="24" y="525" rx="0" ry="0" width="320" height="13" />
+    <Rect x="24" y="545" rx="0" ry="0" width="290" height="13" />
+    <Rect x="24" y="565" rx="0" ry="0" width="320" height="13" />
   </ContentLoader>
 );
 const LeaderBoardLoader = () => (

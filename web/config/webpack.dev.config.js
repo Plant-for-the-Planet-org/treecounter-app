@@ -40,7 +40,7 @@ module.exports = webpackMerge(commonConfig, {
     port: 8081,
     historyApiFallback: true,
     disableHostCheck: true,
-    host: '192.168.10.15'
+    host: '192.168.100.23'
   },
   plugins: [
     new webpack.DefinePlugin({

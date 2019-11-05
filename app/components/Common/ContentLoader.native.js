@@ -15,6 +15,15 @@ const AppHomeLoader = () => (
     <Rect x="24" y="565" rx="0" ry="0" width="320" height="13" />
   </ContentLoader>
 );
+const CompetitionLoader = () => (
+  <ContentLoader height={740} duration={1000}>
+    <Rect x="0" y="10" rx="0" ry="0" width="300" height="160" />
+    <Rect x="0" y="190" rx="0" ry="0" width="80" height="10" />
+    <Rect x="0" y="220" rx="0" ry="0" width="120" height="7" />
+    <Rect x="0" y="250" rx="0" ry="0" width="120" height="10" />
+    <Rect x="150" y="250" rx="0" ry="0" width="120" height="10" />
+  </ContentLoader>
+);
 const LeaderBoardLoader = () => (
   <ContentLoader height={300} duration={1000}>
     <Rect x="0" y="30" rx="0" ry="0" width="100" height="13" />
@@ -29,6 +38,7 @@ const ContentLoading = props => {
     <View style={[loadingIndicatorStyle]}>
       {screen === 'AppHome' && <AppHomeLoader />}
       {screen === 'LeaderBoard' && <LeaderBoardLoader />}
+      {screen === 'Competition' && <CompetitionLoader />}
     </View>
   );
 };

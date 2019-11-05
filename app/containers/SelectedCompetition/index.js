@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { currentUserProfileSelector } from '../../selectors';
 import { updateRoute } from '../../helpers/routerHelper';
-import CompetitionFull from '../../components/Competition/CompetitionFull';
+import CompetitionFull from '../../components/Competition/CompetitionFull.native';
 
 import {
   confirmPart,

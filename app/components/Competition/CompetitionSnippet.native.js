@@ -28,6 +28,7 @@ class CompetitionSnippet extends React.Component {
 
   containerPress(id) {
     if (this.props.onMoreClick) {
+      console.log(this.props.onMoreClick, 'this.props.onMoreClick');
       this.props.onMoreClick(id);
     }
   }

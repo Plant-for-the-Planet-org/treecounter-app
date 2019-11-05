@@ -308,7 +308,13 @@ export default class AddRatingSection extends Component {
                 }}
               />
             </TouchableOpacity>
+            {this.state.pdfFile ? (
+              <View style={{ marginTop: 15 }}>
+                <Text>{i18n.t('label.file_selected')}</Text>
+              </View>
+            ) : null}
           </View>
+
           {/* Document Picking ends */}
 
           {/* Image Picking Part */}

@@ -67,7 +67,7 @@ class PlantProjectFull extends React.Component {
               }
               tpoName={tpo_name}
             />
-            {this.props.plantProject.reviews.length && (
+            {this.props.plantProject.reviews.length ? (
               <TouchableOpacity
                 style={styles.makePledgeButton}
                 onPress={() => {
@@ -80,7 +80,7 @@ class PlantProjectFull extends React.Component {
                   </Text>
                 </View>
               </TouchableOpacity>
-            )}
+            ) : null}
             <View style={styles.horizontalRule} />
             <View style={styles.plantProjectDetails}>
               <PlantProjectDetails {...detailsProps} />

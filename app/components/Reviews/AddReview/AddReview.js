@@ -19,6 +19,8 @@ import { bindActionCreators } from 'redux';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import { selectedPlantProjectSelector } from '../../../selectors';
 import i18n from '../../../locales/i18n.js';
+import { from } from 'rxjs/observable/from';
+import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager.native';
 class AddReview extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +40,14 @@ class AddReview extends Component {
 
   async create() {
     console.log('creating', this.props.selectedPlantProject, this.state.review);
+    const { review } = this.state;
+    if (!review.summary) {
+      return NotificationManager.error(
+        i18n.t('label.summary_missing'),
+        i18n.t('label.error'),
+        5000
+      );
+    }
     try {
       if (this.state.review.id) {
         let { id, reviewIndexScores, summary, pdfFile } = this.state.review;

@@ -72,7 +72,7 @@ export default class SingleReview extends Component {
             </Text>
             {review.created && (
               <Text style={styles.reviewDate}>
-                {moment(review.created).format('D MMM, YYYY')}
+                {moment(review.updated).format('D MMM, YYYY')}
               </Text>
             )}
           </View>

@@ -22,6 +22,7 @@ import { deleteReview } from '../../actions/reviews';
 import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import NumberFormat from '../Common/NumberFormat';
+import moment from 'moment';
 
 class Reviews extends Component {
   constructor(props) {
@@ -75,10 +76,15 @@ class Reviews extends Component {
                 alignItems: 'center'
               }}
             >
+              <Icon
+                name="star"
+                solid
+                size={12}
+                style={{ color: '#4d5153', marginRight: 3 }}
+              />
               <Text style={styles.totalRating}>
                 <NumberFormat data={(reviewScore / 100).toFixed(2)} />
               </Text>
-              <Icon name="star" solid size={12} style={{ color: '#4d5153' }} />
             </View>
           </View>
         </View>
@@ -98,7 +104,7 @@ class Reviews extends Component {
         <View style={{ paddingTop: 20, backgroundColor: '#ecf0f1' }}>
           {reviews
             .sort((a, b) => {
-              return b.updated - a.updated;
+              return moment(b.updated) - moment(a.updated);
             })
             .map(review => {
               return (

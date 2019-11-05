@@ -22,6 +22,13 @@ npm install
 npm start
 ```
 
+To run the app as prod, useful for testing features like (hashed js/css):
+
+  ```
+  npm run start-prod-server
+  ```
+
+
 ## iOS Setup
 
 * Install xcode greater then 9.0.
@@ -34,11 +41,6 @@ npm start
   npm install
   ```
 
-If you would like to test functions like hashed js files build using:
-
-  ```
-  npm run start-prod-server
-  ```
 
 ### Running into iOS simulator
 

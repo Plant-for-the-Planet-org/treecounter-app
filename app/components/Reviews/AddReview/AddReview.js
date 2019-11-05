@@ -18,6 +18,7 @@ import { addReview, updateReview } from '../../../actions/reviews';
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import { selectedPlantProjectSelector } from '../../../selectors';
+import i18n from '../../../locales/i18n.js';
 class AddReview extends Component {
   constructor(props) {
     super(props);
@@ -87,9 +88,12 @@ class AddReview extends Component {
             }}
           >
             <Text style={styles.reviewPageTitle}>
-              20 Million Trees for Kenya's Forests ...
+              {this.props.selectedPlantProject.name}
             </Text>
-            <Text style={styles.reviewPageSubTitle}>Add Project Review</Text>
+            <Text style={styles.reviewPageSubTitle}>
+              {' '}
+              {i18n.t('label.add_project_review')}
+            </Text>
           </View>
         </View>
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { updateStaticRoute } from './../../helpers/routerHelper';
+import i18n from '../../locales/i18n.js';
 export default class BottomAction extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +50,7 @@ export default class BottomAction extends Component {
                 letterSpacing: 0
               }}
             >
-              Edit Review
+              {i18n.t('label.edit_review')}
             </Text>
           </View>
         </TouchableOpacity>
@@ -84,7 +85,7 @@ export default class BottomAction extends Component {
                 letterSpacing: 0
               }}
             >
-              Delete Review
+              {i18n.t('label.delete_review')}
             </Text>
           </View>
         </TouchableOpacity>

@@ -17,6 +17,7 @@ import { TextField } from 'react-native-material-textfield';
 import { attach } from './../../../assets';
 import RNFS from 'react-native-fs';
 import debounce from 'lodash/debounce';
+import i18n from '../../../locales/i18n.js';
 const { width, height } = Dimensions.get('window');
 
 export default class AddRatingSection extends Component {
@@ -180,11 +181,14 @@ export default class AddRatingSection extends Component {
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
-            justifyContent: 'space-around'
+            justifyContent: 'space-around',
+            alignItems: 'flex-start'
           }}
         >
           <View style={styles.singleRatingBox}>
-            <Text style={styles.ratingsText}>Land Quality</Text>
+            <Text style={styles.ratingsText}>
+              {i18n.t('label.land_quality')}
+            </Text>
 
             <AirbnbRating
               defaultRating={this.state.reviewIndexScores['land-quality'].score}
@@ -209,7 +213,9 @@ export default class AddRatingSection extends Component {
           </View> */}
 
           <View style={styles.singleRatingBox}>
-            <Text style={styles.ratingsText}>Co Benefits</Text>
+            <Text style={styles.ratingsText}>
+              {i18n.t('label.co_benefits')}
+            </Text>
 
             <AirbnbRating
               defaultRating={this.state.reviewIndexScores['co-benefits'].score}
@@ -223,7 +229,9 @@ export default class AddRatingSection extends Component {
           </View>
 
           <View style={styles.singleRatingBox}>
-            <Text style={styles.ratingsText}>Survival Rate</Text>
+            <Text style={styles.ratingsText}>
+              {i18n.t('label.survival_rate')}
+            </Text>
 
             <AirbnbRating
               defaultRating={
@@ -256,13 +264,13 @@ export default class AddRatingSection extends Component {
             }}
             value={this.state.summary}
             multiline={true}
-            label="BRIEF REVIEW OF PROJECT"
+            label={i18n.t('label.brief_review')}
           />
 
           {/* Document Picking */}
           <View style={{ marginTop: 40 }}>
             <Text style={{ textTransform: 'uppercase', fontSize: 12 }}>
-              Upload Report (PDF)
+              {i18n.t('label.upload_report')}
             </Text>
             <TouchableOpacity
               style={{
@@ -365,8 +373,7 @@ export default class AddRatingSection extends Component {
             lineHeight: 20
           }}
         >
-          Please check the guidelines & only rate indexes you are most familiar
-          with. All Indexes are optional.
+          {i18n.t('label.guide_line')}
         </Text>
       </View>
     );

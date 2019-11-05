@@ -67,18 +67,20 @@ class PlantProjectFull extends React.Component {
               }
               tpoName={tpo_name}
             />
-
-            <TouchableOpacity
-              style={styles.makePledgeButton}
-              onPress={() => {
-                updateStaticRoute('app_reviews', navigation);
-              }}
-            >
-              <View style={styles.makePledgeButtonView}>
-                <Text style={styles.makePledgeButtonText}>Reviews</Text>
-              </View>
-            </TouchableOpacity>
-
+            {this.props.plantProject.reviews.length && (
+              <TouchableOpacity
+                style={styles.makePledgeButton}
+                onPress={() => {
+                  updateStaticRoute('app_reviews', navigation);
+                }}
+              >
+                <View style={styles.makePledgeButtonView}>
+                  <Text style={styles.makePledgeButtonText}>
+                    {i18n.t('label.reviews')}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            )}
             <View style={styles.horizontalRule} />
             <View style={styles.plantProjectDetails}>
               <PlantProjectDetails {...detailsProps} />

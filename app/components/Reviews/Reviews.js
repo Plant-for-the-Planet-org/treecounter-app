@@ -20,6 +20,8 @@ import {
 import { connect } from 'react-redux';
 import { deleteReview } from '../../actions/reviews';
 import { bindActionCreators } from 'redux';
+import i18n from '../../locales/i18n.js';
+import NumberFormat from '../Common/NumberFormat';
 
 class Reviews extends Component {
   constructor(props) {
@@ -27,12 +29,11 @@ class Reviews extends Component {
     console.log('reviews props:', props);
 
     this.state = {};
-    this.deleteReview = this.deleteReview.bind(this);
   }
-  componentWillReceiveProps(nextProps) {
-    console.log('nextprops', nextProps);
-    if (nextProps.project) {
-    }
+  isReviewer() {
+    return (
+      this.props.currentUserProfile && this.props.currentUserProfile.isReviewer
+    );
   }
   async deleteReview(id) {
     await this.props.deleteReview(id);
@@ -63,7 +64,9 @@ class Reviews extends Component {
             }}
           >
             <Text style={styles.reviewPageTitle}>{name}</Text>
-            <Text style={styles.reviewPageSubTitle}>Community Reviews</Text>
+            <Text style={styles.reviewPageSubTitle}>
+              {i18n.t('label.community_reviews')}
+            </Text>
             <View
               style={{
                 display: 'flex',
@@ -73,7 +76,7 @@ class Reviews extends Component {
               }}
             >
               <Text style={styles.totalRating}>
-                {(reviewScore / 100).toFixed(2)}
+                <NumberFormat data={(reviewScore / 100).toFixed(2)} />
               </Text>
               <Icon name="star" solid size={12} style={{ color: '#4d5153' }} />
             </View>
@@ -95,7 +98,7 @@ class Reviews extends Component {
         <View style={{ paddingTop: 20, backgroundColor: '#ecf0f1' }}>
           {reviews
             .sort((a, b) => {
-              return b.id - a.id;
+              return b.updated - a.updated;
             })
             .map(review => {
               return (
@@ -113,27 +116,26 @@ class Reviews extends Component {
         {/* All Reviews Ended */}
 
         {/*Write Review*/}
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#ecf0f1'
-          }}
-        >
-          {currentUserProfile &&
-            currentUserProfile.isReviewer && (
-              <TouchableOpacity
-                onPress={() => {
-                  pushStaticRoute('app_add_review', this.props.navigation);
-                }}
-                style={styles.writeReviewButton}
-              >
-                <Text style={{ fontWeight: 'bold', color: 'white' }}>
-                  Write a Review
-                </Text>
-              </TouchableOpacity>
-            )}
-        </View>
+        {this.isReviewer() && (
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#ecf0f1'
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => {
+                pushStaticRoute('app_add_review', this.props.navigation);
+              }}
+              style={styles.writeReviewButton}
+            >
+              <Text style={{ fontWeight: 'bold', color: 'white' }}>
+                {i18n.t('label.write_review')}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </ScrollView>
     );
   }

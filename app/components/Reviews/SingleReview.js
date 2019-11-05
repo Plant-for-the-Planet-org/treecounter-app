@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { pushStaticRoute } from './../../helpers/routerHelper';
 import moment from 'moment';
+import i18n from '../../locales/i18n.js';
 const { width, height } = Dimensions.get('window');
 
 export default class SingleReview extends Component {
@@ -129,7 +130,9 @@ export default class SingleReview extends Component {
               }
               style={styles.pdfButton}
             >
-              <Text style={styles.pdfButtonText}>View PDF</Text>
+              <Text style={styles.pdfButtonText}>
+                {i18n.t('label.view_pdf')}
+              </Text>
             </TouchableOpacity>
           </View>
         )}

@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Dimensions, View, Text } from 'react-native';
 import { getPDFUrl } from '../../actions/apiRouting';
 import Pdf from 'react-native-pdf';
+import i18n from '../../locales/i18n.js';
 
 export default class PDFViewer extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export default class PDFViewer extends React.Component {
     return (
       <View style={styles.container}>
         {!this.state.uri ? (
-          <Text>No valid pdf found!</Text>
+          <Text>{I18n.t('label.no_pdf_found')}</Text>
         ) : (
           <Pdf
             enablePaging

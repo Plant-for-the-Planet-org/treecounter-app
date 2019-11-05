@@ -218,8 +218,10 @@ class LeaderBoardContainer extends React.Component {
           mapInfo,
           sortingQueryParam: this.getDefaultQuery(
             this.props && this.props.location && this.props.location.search,
-            orderByOptionsInfo.orderByOptionsKeys[0],
-            timePeriodsInfo.timePeriodsKeys[0]
+            orderByOptionsInfo.orderByOptionsKeys
+              ? orderByOptionsInfo.orderByOptionsKeys[0]
+              : null,
+            timePeriodsInfo ? timePeriodsInfo.timePeriodsKeys[0] : null
           )
         });
         this.sendSearchQuery();

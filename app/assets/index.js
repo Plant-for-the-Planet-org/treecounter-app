@@ -26,7 +26,6 @@ import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/darkTree.png';
 import SideMenuImage from './images/side_menu.png';
-import SideMenuImageNew from './images/Planet-Logo.svg';
 import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
 import MapPinRed from './images/map_pin_red.png';
@@ -290,6 +289,5 @@ export {
   googlePlayBadge_en,
   googlePlayBadge_de,
   appleStoreBadge_en,
-  appleStoreBadge_de,
-  SideMenuImageNew
+  appleStoreBadge_de
 };

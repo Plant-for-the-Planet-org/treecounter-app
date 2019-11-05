@@ -22,10 +22,10 @@ module.exports = webpackMerge(commonConfig, {
     progressbarwidget: [
       'babel-polyfill',
       path.join(__dirname, '../widgets/progressbar/widget.js')
-    ],
-    ndviwidget: [
-      'babel-polyfill',
-      path.join(__dirname, '../widgets/NDVI/widget.js')
+      // ],
+      // ndviwidget: [
+      //   'babel-polyfill',
+      //   path.join(__dirname, '../widgets/NDVI/widget.js')
     ]
   },
   output: {
@@ -33,7 +33,15 @@ module.exports = webpackMerge(commonConfig, {
     filename: '[name].js',
     publicPath: '/'
   },
-
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['eslint-loader']
+      }
+    ]
+  },
   plugins: [
     new WebpackCleanupPlugin(),
     new webpack.LoaderOptionsPlugin({

@@ -5,27 +5,29 @@ const path = require('path');
 
 module.exports = webpackMerge(commonConfig, {
   entry: {
-    bundle: ['babel-polyfill', path.join(__dirname, '../../index.web.js')],
-    widget: [
-      'babel-polyfill',
-      path.join(__dirname, '../widgets/basic/widget.js')
-    ],
-    treecounterwidget: [
-      'babel-polyfill',
-      path.join(__dirname, '../widgets/Treecounter/widget.js')
-    ],
-    donatetreewidget: [
-      'babel-polyfill',
-      path.join(__dirname, '../widgets/DonateTrees/widget.js')
-    ],
-    progressbarwidget: [
-      'babel-polyfill',
-      path.join(__dirname, '../widgets/progressbar/widget.js')
-    ],
-    ndviwidget: [
-      'babel-polyfill',
-      path.join(__dirname, '../widgets/NDVI/widget.js')
-    ]
+    bundle: ['babel-polyfill', path.join(__dirname, '../../index.web.js')]
+    /* uncomment these widgets if you want to work on them */
+    // widget: [
+    //   'babel-polyfill',
+    //   path.join(__dirname, '../widgets/basic/widget.js')
+    // ],
+    // treecounterwidget: [
+    //   'babel-polyfill',
+    //   path.join(__dirname, '../widgets/Treecounter/widget.js')
+    // ],
+    // donatetreewidget: [
+    //   'babel-polyfill',
+    //   path.join(__dirname, '../widgets/DonateTrees/widget.js')
+    // ],
+    // progressbarwidget: [
+    //   'babel-polyfill',
+    //   path.join(__dirname, '../widgets/progressbar/widget.js')
+    // ],
+    /* The following widget currently does not compile! */
+    // ndviwidget: [
+    //   'babel-polyfill',
+    //   path.join(__dirname, '../widgets/NDVI/widget.js')
+    // ]
   },
   output: {
     path: path.join(__dirname, '../dist'),

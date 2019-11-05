@@ -1,1 +1,5 @@
-{ }
+{
+  "mail_sent_activation": "Enviamos um email com um link de ativação para o seu endereço de email.",
+  "complete_sigup_process": "Para concluir o processo de registro, por favor, clique no link de ativação.",
+  "resend_email_text": "Se você não recebeu o e-mail de ativação, clique no link abaixo para reenviá-lo."
+}

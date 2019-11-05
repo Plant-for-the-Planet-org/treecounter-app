@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { gift_icon } from '../../assets';

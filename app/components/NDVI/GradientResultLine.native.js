@@ -6,8 +6,8 @@ import {
   getPointPercentageOnGradient,
   getColorForNDVI
 } from './NDVIfunctions/GradientUtils';
-import 'moment/min/locales';
-import parseMonth from './NDVIfunctions/parseMonth';
+import { formatDate } from '../../utils/utils';
+import { formatDateToMySQL } from '../../helpers/utils';
 
 const GradientResultLine = props => {
   const { selectedDataPoint } = props;
@@ -38,9 +38,12 @@ const GradientResultLine = props => {
 
   return (
     <View style={{ width: '100%', marginTop: 21 }}>
-      <Text style={{ marginBottom: 16 }}>{`${parseMonth(
-        selectedDataPoint.month - 1
-      )}, ${selectedDataPoint.year}`}</Text>
+      <Text style={{ marginBottom: 16 }}>{`${formatDate(
+        formatDateToMySQL(
+          new Date(selectedDataPoint.year, selectedDataPoint.month - 1, 1)
+        ),
+        'LLLL yyyy'
+      )}`}</Text>
       <LinearGradient
         style={{ width: '100%', height: 8, borderRadius: 24 }}
         start={{ x: 0, y: 0 }}

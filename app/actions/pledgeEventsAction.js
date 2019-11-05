@@ -13,8 +13,8 @@ export function fetchpledgeEventsAction() {
     //   )
     // );
 
-    getRequest('public_pledgeEvents_get').then(val =>
-      dispatch(setPledgeEvents(val.data))
-    );
+    getRequest('public_pledgeEvents_get')
+      .then(val => dispatch(setPledgeEvents(val.data)))
+      .catch(error => console.log(error));
   };
 }

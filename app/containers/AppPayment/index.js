@@ -15,13 +15,13 @@ class AppPaymentContainer extends Component {
   }
 
   componentWillMount() {
-    getPaymentInfo(this.props.match.params.donationContribution).then(
-      ({ data }) => {
+    getPaymentInfo(this.props.match.params.donationContribution)
+      .then(({ data }) => {
         this.setState({
           paymentInfo: data
         });
-      }
-    );
+      })
+      .catch(error => console.log(error));
   }
   render() {
     return (

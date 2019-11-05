@@ -35,5 +35,5 @@
   "quadrillion_plural": "Quadrillion",
   "quintillion_singular": "Quintillion",
   "quintillion_plural": "Quintillion",
-  "donation_id_missing_error": "donation id missing error"
+  "donation_id_missing_error": "donation id is missing"
 }

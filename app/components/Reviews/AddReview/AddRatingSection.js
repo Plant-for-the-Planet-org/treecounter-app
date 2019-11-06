@@ -18,6 +18,7 @@ import { attach } from './../../../assets';
 import RNFS from 'react-native-fs';
 import debounce from 'lodash/debounce';
 import i18n from '../../../locales/i18n.js';
+import { getImageUrl } from '../../../actions/apiRouting';
 const { width, height } = Dimensions.get('window');
 
 export default class AddRatingSection extends Component {
@@ -39,7 +40,8 @@ export default class AddRatingSection extends Component {
           score: 0
         }
       },
-      pdfFile: ''
+      pdfFile: '',
+      reviewImages: props.review.reviewImages || []
     };
 
     console.log('after merging got props in addrating', this.state);
@@ -68,49 +70,49 @@ export default class AddRatingSection extends Component {
       multiple: true,
       waitAnimationEnd: false,
       includeExif: true,
+      includeBase64: true,
       forceJpg: true
     })
       .then(images => {
-        this.setState({
-          image: null,
-          images: images.map(i => {
-            console.log('received image', i);
-            return {
-              uri: i.path,
-              width: i.width,
-              height: i.height,
-              mime: i.mime
-            };
-          })
-        });
+        console.log('received image', images, images[0].data);
+        this.updateImages(images);
       })
       .catch(e => alert(e));
   }
-
+  updateImages(images) {
+    let { reviewImages } = this.state;
+    images.map(image => {
+      return reviewImages.push({
+        imageFile: 'data:application/jpeg;base64,' + image.data
+      });
+    });
+    console.log('data', reviewImages);
+    this.setStateAndUpdateParent({
+      reviewImages: reviewImages
+    });
+  }
   clickImage(cropping, mediaType = 'photo') {
     ImagePicker.openCamera({
       width: 500,
       height: 500,
       includeExif: true,
-      mediaType
+      mediaType,
+      includeBase64: true
     })
       .then(image => {
-        console.log('received image', image);
-        this.setState({
-          image: {
-            uri: image.path,
-            width: image.width,
-            height: image.height,
-            mime: image.mime
-          },
-          images: null
-        });
+        console.log('received image', image, image.data);
+        this.updateImages([image]);
       })
+
       .catch(e => alert(e));
   }
 
   renderAsset(image) {
-    return this.renderImage(image);
+    return this.renderImage(
+      image.imageFile
+        ? { uri: image.imageFile }
+        : getImageUrl(image.image, 'review', 'thumb')
+    );
   }
 
   renderImage(image) {
@@ -125,7 +127,7 @@ export default class AddRatingSection extends Component {
   // Image Uploading Ends
 
   // Document picker
-  async readContent(path) {
+  async readContent(path, which) {
     RNFS.readFile(path, 'base64')
       .then(encoded => {
         console.log('data', encoded);
@@ -318,8 +320,10 @@ export default class AddRatingSection extends Component {
           {/* Document Picking ends */}
 
           {/* Image Picking Part */}
-          {/* <Text style={{ marginTop: 40, fontSize: 12 }}>ADD PICTURES</Text> */}
-          {/* <View
+          <Text style={{ marginTop: 40, fontSize: 12 }}>
+            {i18n.t('label.add_pictures')}
+          </Text>
+          <View
             style={{
               display: 'flex',
               flexDirection: 'row',
@@ -327,50 +331,61 @@ export default class AddRatingSection extends Component {
               alignItems: 'center',
               justifyContent: 'flex-start'
             }}
-          > */}
-          {/* <ScrollView
-							contentContainerStyle={{
-								display: 'flex',
-								flexDirection: 'row',
-								flexWrap: 'wrap',
-								justifyContent: 'flex-start',
-								alignItems: 'flex-start'
-							}}
-						> */}
-          {/* {this.state.image ? this.renderAsset(this.state.image) : null}
-            {this.state.images
-              ? this.state.images.map(i => (
-                <View
-                  key={i.uri}
-                  style={{ display: 'flex', flexDirection: 'row' }}
-                >
-                  {this.renderAsset(i)}
-                </View>
-              ))
-              : null} */}
-          {/* </ScrollView> */}
-          {/* <TouchableOpacity
-            style={{
-              justifyContent: 'center',
-              height: 27,
-              width: 27,
-              marginLeft: 2
-            }}
-            onPress={this.pickMultiple.bind(this)}
           >
-            <Text style={styles.pickImageButtonText}>+</Text>
-          </TouchableOpacity> */}
-
-          {/* <TouchableOpacity
-              onPress={() => this.clickImage(true)}
-              style={styles.pickImageButton2}
+            <ScrollView
+              contentContainerStyle={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                justifyContent: 'flex-start',
+                alignItems: 'flex-start'
+              }}
             >
-              <Text style={styles.pickImageButtonText}>Click Image</Text>
-            </TouchableOpacity> */}
+              {this.state.reviewImages
+                ? this.state.reviewImages.map(i => (
+                    <View
+                      key={i.id}
+                      style={{ display: 'flex', flexDirection: 'row' }}
+                    >
+                      {this.renderAsset(i)}
+                    </View>
+                  ))
+                : null}
+              <TouchableOpacity
+                style={{
+                  justifyContent: 'center',
+                  height: 37,
+                  width: 37,
+                  marginLeft: 2
+                }}
+                onPress={this.pickMultiple.bind(this)}
+              >
+                <Text style={{ margin: 10, borderColor: '#cdcdcd' }}>
+                  {' '}
+                  <Icon name={'plus'} solid />
+                </Text>
+              </TouchableOpacity>
+            </ScrollView>
+            {/* <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
+
+
+              <TouchableOpacity
+                style={{
+                  justifyContent: 'center',
+                  height: 37,
+                  width: 37,
+                  marginLeft: 2
+                }}
+                onPress={() => this.clickImage(true)}
+
+              >
+                <Text style={{ margin: 10, borderColor: '#cdcdcd' }}><Icon name={'camera'} solid /></Text>
+              </TouchableOpacity>
+            </View> */}
+          </View>
+
+          {/* Image Picking Part Ends */}
         </View>
-
-        {/* Image Picking Part Ends */}
-
         <Text
           style={{
             margin: 30,
@@ -425,7 +440,7 @@ const styles = StyleSheet.create({
     marginTop: 12
   },
   pickImageButtonText: {
-    fontSize: 24
+    fontSize: 37
   },
   briefReview: {
     backgroundColor: '#ecf0f1',

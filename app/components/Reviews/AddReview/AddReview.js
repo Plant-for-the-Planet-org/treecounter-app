@@ -24,7 +24,7 @@ import { NotificationManager } from '../../../notification/PopupNotificaiton/not
 class AddReview extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    console.log(props, Icon);
     this.state = {
       review:
         (props.navigation.state.params &&

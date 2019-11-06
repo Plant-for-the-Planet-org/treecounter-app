@@ -310,6 +310,64 @@ export default {
       help: null,
       propertyOrder: 13
     },
+    reviews: {
+      type: 'array',
+      title: 'label.add_reviews',
+      items: {
+        title: 'prototype',
+        type: 'object',
+        properties: {
+          summary: {
+            type: 'string',
+            title: 'label.review_summary',
+            attr: {
+              maxlength: 255
+            },
+            icon: null,
+            help: null,
+            maxLength: 255,
+            propertyOrder: 2
+          },
+          pdfFile: {
+            type: 'string',
+            title: 'label.upload_review_pdf',
+            widget: 'file',
+            icon: null,
+            help: null,
+            propertyOrder: 3
+          },
+          reviewIndexScores: {
+            type: 'array',
+            title: null,
+            items: {
+              title: 'label.review_index.survival_rate',
+              type: 'object',
+              properties: {
+                score: {
+                  enum: ['1', '2', '3', '4', '5', '0'],
+                  enum_titles: ['1', '2', '3', '4', '5', 'not rated'],
+                  type: 'number',
+                  widget: 'choice-expanded',
+                  title: false,
+                  attr: {
+                    class: 'radio-inline'
+                  },
+                  icon: null,
+                  help: null,
+                  propertyOrder: 1
+                }
+              },
+              required: ['score'],
+              icon: null,
+              help: null
+            },
+            icon: null,
+            help: null,
+            propertyOrder: 4
+          }
+        }
+      }
+    },
     plantProjectImages: {
       type: 'array',
       title: 'label.add_images',

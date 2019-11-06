@@ -33,7 +33,7 @@ import userContributionslabels from './userContributionslabels.json';
 import welcomeScreenlabels from './welcomeScreenlabels.json';
 import widgetShareLabels from './widgetShareLabels.json';
 import NDVI from './ndvi.json';
-
+import reviews from './reviews.json';
 export default {
   ...activateAccountlabels,
   ...challengelabels,
@@ -69,5 +69,6 @@ export default {
   ...userContributionslabels,
   ...welcomeScreenlabels,
   ...widgetShareLabels,
-  ...NDVI
+  ...NDVI,
+  ...reviews
 };

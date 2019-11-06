@@ -51,6 +51,10 @@ import EditCompetitionContainer from '../../containers/EditCompetition';
 import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
 import PledgeEvents from './../PledgeEvents/PledgeEvents.native';
 import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
+import Reviews from './../Reviews/Reviews';
+import AddReview from './../Reviews/AddReview/AddReview';
+import PDFViewer from '../PDFViewer';
+
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -325,6 +329,15 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_pledge_form']: {
         screen: MakePledgeForm
+      },
+      ['app_reviews']: {
+        screen: Reviews
+      },
+      ['app_add_review']: {
+        screen: AddReview
+      },
+      ['app_view_pdf']: {
+        screen: PDFViewer
       }
     },
     {

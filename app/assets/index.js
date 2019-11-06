@@ -144,6 +144,7 @@ import googlePlayBadge_de from './images/de/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
 
+import attach from './images/attach.png';
 export {
   germany,
   worldImg,
@@ -289,5 +290,6 @@ export {
   googlePlayBadge_en,
   googlePlayBadge_de,
   appleStoreBadge_en,
-  appleStoreBadge_de
+  appleStoreBadge_de,
+  attach
 };

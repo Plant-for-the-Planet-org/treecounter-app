@@ -42,7 +42,7 @@ export function fetchPledgesAction(eventSlug) {
             dispatch(fetchPledges(res.data));
           })
           .catch(error => console.log(error)),
-      10000
+      30000
     );
     dispatch(saveTimeoutID(timeoutID));
   };

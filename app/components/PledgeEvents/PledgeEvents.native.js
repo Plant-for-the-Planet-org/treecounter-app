@@ -75,6 +75,7 @@ class PledgeEvents extends Component {
       this.getMyPledge();
     }
     if (this.props.navigation.getParam('plantProject').id !== -1) {
+      this.props.fetchPledgesAction(this.props.navigation.getParam('slug'));
       this.RBSheet.open();
       this.props.navigation.getParam('plantProject').id = -1;
     }

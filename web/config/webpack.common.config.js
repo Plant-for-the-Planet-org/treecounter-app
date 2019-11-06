@@ -1,6 +1,7 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const webpack = require('webpack');
 
 const config = {
   module: {
@@ -38,6 +39,19 @@ const config = {
     ]
   },
   plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: {
+        keep_fnames: true
+      },
+      sourceMap: true
+    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.NewWatchingPlugin(),
+
     new HtmlWebPackPlugin({
       inject: true,
       chunks: ['widget'],

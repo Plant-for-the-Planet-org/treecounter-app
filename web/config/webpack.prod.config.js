@@ -5,6 +5,13 @@ const commonConfig = require('./webpack.common.config.js');
 const path = require('path');
 
 module.exports = webpackMerge(commonConfig, {
+  mode: 'production',
+  rules: [
+    {
+      test: /\.json$/,
+      loader: 'json-loader'
+    }
+  ],
   entry: {
     bundle: ['babel-polyfill', path.join(__dirname, '../../index.web.js')],
     widget: [
@@ -43,6 +50,11 @@ module.exports = webpackMerge(commonConfig, {
     ]
   },
   plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.NewWatchingPlugin(),
+
     new WebpackCleanupPlugin(),
     new webpack.LoaderOptionsPlugin({
       options: {

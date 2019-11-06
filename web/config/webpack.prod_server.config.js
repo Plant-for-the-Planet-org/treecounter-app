@@ -10,6 +10,13 @@ const {
 const pkg = require('../../package.json');
 
 module.exports = webpackMerge(commonConfig, {
+  mode: 'production',
+  rules: [
+    {
+      test: /\.json$/,
+      loader: 'json-loader'
+    }
+  ],
   entry: {
     bundle: ['babel-polyfill', path.join(__dirname, '../../index.web.js')],
     widget: [
@@ -49,6 +56,11 @@ module.exports = webpackMerge(commonConfig, {
     ]
   },
   plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.NewWatchingPlugin(),
+
     new BugsnagBuildReporterPlugin({
       apiKey: '6f2971a9b077662912f61ae602716afd',
       appVersion: pkg.version

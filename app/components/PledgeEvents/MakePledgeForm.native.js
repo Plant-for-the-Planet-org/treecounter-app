@@ -16,11 +16,6 @@ import CheckBox from 'react-native-check-box';
 import { currentUserProfileSelector } from './../../selectors';
 import { bindActionCreators } from 'redux';
 
-// import {
-//   pledgeFormSchema,
-//   pledgeSchemaOptions
-// } from './../../server/parsedSchemas/pledge';
-
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 
@@ -87,6 +82,7 @@ class MakePledgeForm extends Component {
 
   render() {
     let { firstname, lastname, email, treeCount } = this.state;
+
     const treeCost = this.props.navigation.getParam('plantProject').treeCost;
     const projectName = this.props.navigation.getParam('plantProject').name;
     const currency = this.props.navigation.getParam('plantProject').currency;
@@ -142,11 +138,6 @@ class MakePledgeForm extends Component {
               updateStaticRoute('app_pledge_events', this.props.navigation, {
                 slug: this.props.navigation.getParam('slug'),
                 plantProject: this.props.navigation.getParam('plantProject'),
-                eventName: this.props.navigation.getParam('eventName'),
-                eventDate: this.props.navigation.getParam('eventDate'),
-                totalTrees: this.props.navigation.getParam('totalTrees'),
-                eventImage: this.props.navigation.getParam('eventImage'),
-                description: this.props.navigation.getParam('description'),
                 treeCount: data.treeCount
               });
             }}

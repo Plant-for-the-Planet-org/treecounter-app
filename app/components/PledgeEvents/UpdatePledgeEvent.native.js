@@ -122,13 +122,11 @@ class MakePledgeForm extends Component {
 
               //saveItem('pledgedEvent', JSON.stringify(date));
 
-              updateStaticRoute(
-                'app_unfulfilled_pledge_events',
-                this.props.navigation,
-                {
-                  unfulfilledEvent: this.props.unfulfilledEvent
-                }
-              );
+              updateStaticRoute('app_pledge_events', this.props.navigation, {
+                slug: this.props.slug,
+                plantProject: this.props.navigation.getParam('plantProject'),
+                treeCount: data.treeCount
+              });
             }}
             validationSchema={validationSchema}
           >
@@ -191,8 +189,6 @@ class MakePledgeForm extends Component {
     );
   }
 }
-
-// To Do - Replace form with Tcomb Form
 
 const mapStateToProps = state => ({
   userProfile: currentUserProfileSelector(state)

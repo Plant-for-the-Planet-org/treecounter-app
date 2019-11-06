@@ -45,13 +45,6 @@ import { getImageUrl } from '../../actions/apiRouting';
 import FeaturedProject from './FeaturedProjectScroll/Events.native';
 import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
 
-// async function getLocalStorageItem() {
-//   let pledgesArray = await fetchItem('pledgedEvent');
-//   console.log('getting pledges array');
-//   //console.log(pledgesArray);
-//   return pledgesArray;
-// }
-
 class Trillion extends PureComponent {
   constructor() {
     super();
@@ -212,11 +205,6 @@ class Trillion extends PureComponent {
                                 navigation,
                                 {
                                   slug: featuredEvents.slug,
-                                  eventName: featuredEvents.name,
-                                  eventDate: featuredEvents.eventDate,
-                                  totalTrees: featuredEvents.total,
-                                  eventImage: featuredEvents.image,
-                                  description: featuredEvents.description,
                                   plantProject: { id: -1 },
                                   treeCount: -1
                                 }
@@ -262,10 +250,12 @@ class Trillion extends PureComponent {
                               key={unfulfilledEvent.token}
                               onPress={() => {
                                 updateStaticRoute(
-                                  'app_unfulfilled_pledge_events',
+                                  'app_pledge_events',
                                   navigation,
                                   {
-                                    unfulfilledEvent: unfulfilledEvent
+                                    slug: unfulfilledEvent.slug,
+                                    plantProject: { id: -1 },
+                                    treeCount: -1
                                   }
                                 );
                               }}

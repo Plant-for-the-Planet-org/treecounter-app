@@ -33,9 +33,6 @@ class PledgeEvents extends Component {
     myPledge: {}
   };
 
-  imageStyle = {
-    height: 30
-  };
   componentDidMount() {
     this.props.fetchPledgesAction(this.props.navigation.getParam('slug'));
     this.getMyPledge();
@@ -210,7 +207,7 @@ function MakePledgeButton(props) {
 }
 
 function FulfillPledgeButton(props) {
-  imageStyle = {
+  const imageStyle = {
     height: 30
   };
   return (
@@ -254,7 +251,7 @@ function FulfillPledgeButton(props) {
 }
 
 function EventDetails(props) {
-  pledges = props.pledges;
+  let pledges = props.pledges;
   return (
     <ScrollView contentContainerStyle={styles.peRootScrollView}>
       <View style={styles.peHeader}>

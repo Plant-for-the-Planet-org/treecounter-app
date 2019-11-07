@@ -4,12 +4,7 @@ export default EStyleSheet.create({
   carousalContainer: { flexDirection: 'column' },
   descriptionContainer: {
     paddingTop: 15,
-    paddingLeft: 15,
-    paddingRight: 5,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#d5d5d5',
-    marginLeft: 0,
+
     marginTop: 12,
     width: '100%',
     marginBottom: 20,

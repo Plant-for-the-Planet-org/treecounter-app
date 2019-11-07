@@ -6,10 +6,8 @@ import { TabBar, TabView } from 'react-native-tab-view';
 import TabContainer from '../../containers/Menu/TabContainer';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
-import CountryProjects from './Tabs/country.native';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
-import PriceProjects from './Tabs/price';
 
 export default class SelectPlantTabView extends PureComponent {
   constructor(props) {
@@ -17,9 +15,7 @@ export default class SelectPlantTabView extends PureComponent {
     this.state = {
       routes: [
         { key: 'featured', title: i18n.t('label.featured') },
-        { key: 'list', title: i18n.t('label.list') },
-        { key: 'price', title: i18n.t('label.price') },
-        { key: 'country', title: i18n.t('label.country') }
+        { key: 'list', title: i18n.t('label.list') }
       ],
       index: 0
     };
@@ -74,10 +70,6 @@ export default class SelectPlantTabView extends PureComponent {
         return index === 0 && <FeaturedProjects {...props} />;
       case 'list':
         return index === 1 && <ListProjects {...props} />;
-      case 'price':
-        return index === 2 && <PriceProjects {...props} />;
-      case 'country':
-        return index === 3 && <CountryProjects {...props} />;
       default:
         return null;
     }

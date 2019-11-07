@@ -8,6 +8,5 @@ target 'TreecounterApp' do
   pod 'tipsi-stripe', :path => '../node_modules/tipsi-stripe'
 
 
-  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
 end

@@ -106,6 +106,8 @@ export default EStyleSheet.create({
     left: '80%'
   },
   plusButtonIcon: { fontSize: 30, color: '#fff' },
+
+  // Styles for Dual action on a normal page, for example check edit competition page with delete and save button
   dualActionButtonTouchable1: {
     width: Layout.window.width * 0.4,
     position: 'absolute',
@@ -123,6 +125,7 @@ export default EStyleSheet.create({
     borderColor: '#e74c3c',
     borderWidth: 1,
     height: 52,
+    backgroundColor: 'white',
     justifyContent: 'center'
   },
   dualActionButtonText1: {
@@ -148,5 +151,60 @@ export default EStyleSheet.create({
     letterSpacing: 0.21,
     textAlign: 'center',
     color: '#fff'
+  },
+
+  // Bottom action container and buttons
+  baContainer: {
+    padding: 20,
+    paddingVertical: 30
+  },
+  baButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  baMessage: {
+    fontSize: 20,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 30,
+    letterSpacing: 0.28,
+    textAlign: 'left',
+    color: 'rgba(0, 0, 0, 0.87)'
+  },
+  baContinueText: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 27,
+    letterSpacing: 0.26,
+    color: 'white'
+  },
+  baContinueButton: {
+    backgroundColor: '#e74c3c',
+    width: 150,
+    paddingVertical: 14,
+    marginTop: 36,
+    borderRadius: 40
+  },
+  baLaterText: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 27,
+    letterSpacing: 0.26,
+    color: '#89b53a'
+  },
+  baLaterButton: {
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#89b53a',
+    borderRadius: 40,
+    width: 150,
+    paddingVertical: 14,
+    marginTop: 36,
+    marginRight: 12
   }
 });

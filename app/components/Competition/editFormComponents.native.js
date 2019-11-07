@@ -10,12 +10,13 @@ import { Formik } from 'formik';
 import { TextField } from 'react-native-material-textfield';
 import competitionFormSchema from '../../server/formSchemas/competition';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
-import ImagePicker from 'react-native-image-crop-picker';
 import buttonStyles from '../../styles/common/button.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { getImageUrl } from '../../actions/apiRouting';
 import { Dropdown } from 'react-native-material-dropdown';
 // import { updateRoute } from '../../helpers/routerHelper';
+import ImagePicker from 'react-native-image-picker';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
 const validationSchema = generateFormikSchemaFromFormSchema(
   competitionFormSchema
@@ -25,6 +26,7 @@ export const FormikForm = props => {
   const buttonType = props.buttonType;
 
   const handleDelete = () => {
+    RBSheetRef.close();
     props
       .onDeleteCompetition(props.competition_id)
       .then((/* success */) => {})
@@ -37,20 +39,7 @@ export const FormikForm = props => {
     <Formik
       initialValues={props.initialValues}
       onSubmit={values => {
-        let newValues = {
-          name: values.name,
-          goal: values.goal,
-          description: values.description,
-          access: values.access,
-          endDate: values.endDate
-        };
-        if (values.imageFile.data) {
-          let imageFileData = 'data:image/jpeg;base64,' + values.imageFile.data;
-          newValues.imageFile = imageFileData;
-        }
-
-        props.onEditCompetition(newValues, props.competition_id);
-        console.log(newValues);
+        props.onEditCompetition(values, props.competition_id);
       }}
       validationSchema={validationSchema}
     >
@@ -86,6 +75,7 @@ export const FormikForm = props => {
                 touched={props.touched}
                 errors={props.errors}
                 handleChange={props.handleChange}
+                setFieldValue={props.setFieldValue}
               />
 
               <View style={styles.formView}>
@@ -138,7 +128,9 @@ export const FormikForm = props => {
               <>
                 <TouchableOpacity
                   style={buttonStyles.dualActionButtonTouchable1}
-                  onPress={handleDelete}
+                  onPress={() => {
+                    RBSheetRef.open();
+                  }}
                 >
                   <View style={buttonStyles.dualActionButtonView1}>
                     <Text style={buttonStyles.dualActionButtonText1}>
@@ -171,6 +163,44 @@ export const FormikForm = props => {
                 />
               </TouchableOpacity>
             ) : null}
+
+            <RBSheet
+              ref={ref => {
+                RBSheetRef = ref;
+              }}
+              height={300}
+              duration={250}
+              customStyles={{
+                container: {
+                  justifyContent: 'center'
+                }
+              }}
+            >
+              <View style={buttonStyles.baContainer}>
+                <Text style={buttonStyles.baMessage}>
+                  Are you sure you want to delete this Competition ? There's no
+                  undo button.
+                </Text>
+
+                <View style={buttonStyles.baButtonContainer}>
+                  <TouchableOpacity
+                    style={buttonStyles.baLaterButton}
+                    onPress={() => {
+                      RBSheetRef.close();
+                    }}
+                  >
+                    <Text style={buttonStyles.baLaterText}>Cancel</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={buttonStyles.baContinueButton}
+                    onPress={handleDelete}
+                  >
+                    <Text style={buttonStyles.baContinueText}>Delete</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </RBSheet>
           </View>
         </>
       )}
@@ -193,12 +223,16 @@ export function AccessPicker(props) {
       value: 'invitation'
     }
   ];
+  onChange = value => {
+    props.setFieldValue('access', value);
+  };
   return (
     <View>
       <Dropdown
+        ref={ref => (this.dropdown = ref)}
         label="Who can Join"
         data={data}
-        onChangeText={props.handleChange('access')}
+        onChangeText={onChange}
         lineWidth={1}
       />
     </View>
@@ -208,52 +242,26 @@ export function AccessPicker(props) {
 export function AddImage(props) {
   let image = props.image;
 
-  const pickImage = () => {
-    ImagePicker.openPicker({
-      waitAnimationEnd: false,
-      includeExif: true,
-      forceJpg: true,
-      includeBase64: true
-    })
-      .then(image => {
-        props.setFieldValue('imageFile', {
-          uri: image.path,
-          width: image.width,
-          height: image.height,
-          mime: image.mime,
-          data: image.data
-        });
-      })
-      .catch(e => alert(e));
+  const options = {
+    title: 'Add Image',
+    storageOptions: {
+      skipBackup: true,
+      path: 'images'
+    }
   };
-
-  const clickImage = (cropping, mediaType = 'photo') => {
-    ImagePicker.openCamera({
-      includeExif: true,
-      mediaType
-    })
-      .then(image => {
-        props.setFieldValue('imageFile', {
-          uri: image.path,
-          width: image.width,
-          height: image.height,
-          mime: image.mime,
-          data: image.data
-        });
-      })
-      .catch(e => alert(e));
-  };
-
-  console.log('Image', getImageUrl('competition', 'medium', image));
 
   return (
     <View>
       <Text style={styles.addImageTitle}>Add Image</Text>
       <View style={styles.showImage}>
         {image ? (
-          image.data ? (
+          image.includes('base64') ? (
             <View style={styles.projectImageContainer}>
-              <Image style={styles.teaser__projectImage} source={image} />
+              <Image
+                style={styles.teaser__projectImage}
+                source={{ uri: image }}
+                resizeMode={'cover'}
+              />
             </View>
           ) : (
             <View style={styles.projectImageContainer}>
@@ -271,13 +279,39 @@ export function AddImage(props) {
       <View style={styles.addImageButtonContainer}>
         <TouchableOpacity
           style={styles.addImageButton1}
-          onPress={pickImage.bind(this)}
+          onPress={() => {
+            ImagePicker.launchImageLibrary(options, response => {
+              if (response.didCancel) {
+                console.log('User cancelled image picker');
+              } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+              } else {
+                props.setFieldValue(
+                  'imageFile',
+                  'data:image/jpeg;base64,' + response.data
+                );
+              }
+            });
+          }}
         >
           <Image style={styles.addImageButtonIcon} source={imageGallery} />
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => clickImage(true)}
+          onPress={() => {
+            ImagePicker.launchCamera(options, response => {
+              if (response.didCancel) {
+                console.log('User cancelled image picker');
+              } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+              } else {
+                props.setFieldValue(
+                  'imageFile',
+                  'data:image/jpeg;base64,' + response.data
+                );
+              }
+            });
+          }}
           style={styles.addImageButton2}
         >
           <Image style={styles.addImageButtonIcon} source={cameraSolid} />

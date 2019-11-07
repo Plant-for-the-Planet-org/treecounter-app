@@ -39,9 +39,9 @@ export default function createCompetition(props) {
           name: '',
           goal: '',
           description: '',
-          access: '',
+          access: null,
           endDate: new Date(),
-          imageFile: null
+          imageFile: ''
         }}
       />
     </View>

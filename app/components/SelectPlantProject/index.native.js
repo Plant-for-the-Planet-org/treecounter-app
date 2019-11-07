@@ -2,13 +2,18 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
-
+import { Dimensions } from 'react-native';
 import TabContainer from '../../containers/Menu/TabContainer';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 
+const Layout = {
+  window: {
+    width: Dimensions.get('window').width
+  }
+};
 export default class SelectPlantTabView extends PureComponent {
   constructor(props) {
     super(props);
@@ -21,32 +26,34 @@ export default class SelectPlantTabView extends PureComponent {
     };
   }
 
+  indexChange(index) {
+    this.setState({
+      index: index
+    });
+  }
   handleExpandedClicked = optionNumber => {
     this.setState({
       expandedOption: optionNumber
     });
   };
 
-  handleIndexChange = index => {
-    this.setState({ index });
+  _handleIndexChange = index => {
+    this.setState({ index: index });
   };
 
-  renderTabBar = props => {
-    return (
+  _renderTabBar = props => {
+    return [
       <TabBar
         {...props}
         style={styles.tabBar}
-        //tabStyle={{ width: Layout.window.width / 4 }}
+        tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
-        scrollEnabled
-        bounces
-        useNativeDriver
       />
-    );
+    ];
   };
 
-  renderSelectPlantScene = ({ route }) => {
+  _renderSelectPlantScene = ({ route }) => {
     const {
       plantProjects,
       onMoreClick,
@@ -67,9 +74,9 @@ export default class SelectPlantTabView extends PureComponent {
     // Only render a tab if it is focused
     switch (route.key) {
       case 'featured':
-        return index === 0 && <FeaturedProjects {...props} />;
+        return <FeaturedProjects {...props} />;
       case 'list':
-        return index === 1 && <ListProjects {...props} />;
+        return <ListProjects {...props} />;
       default:
         return null;
     }
@@ -77,18 +84,13 @@ export default class SelectPlantTabView extends PureComponent {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <TabView
-          useNativeDriver
-          navigationState={this.state}
-          renderScene={this.renderSelectPlantScene}
-          renderTabBar={this.renderTabBar}
-          onIndexChange={this.handleIndexChange}
-        />
-        {this.props.navigation.getParam('giftMethod') ? (
-          <TabContainer {...this.props} />
-        ) : null}
-      </View>
+      <TabView
+        useNativeDriver
+        navigationState={this.state}
+        renderScene={this._renderSelectPlantScene}
+        renderTabBar={this._renderTabBar}
+        onIndexChange={this._handleIndexChange}
+      />
     );
   }
 }

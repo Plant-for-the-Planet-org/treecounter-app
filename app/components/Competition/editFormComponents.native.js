@@ -138,21 +138,21 @@ export const FormikForm = props => {
               <>
                 <TouchableOpacity
                   style={buttonStyles.dualActionButtonTouchable1}
-                  onPress={props.handleSubmit}
+                  onPress={handleDelete}
                 >
                   <View style={buttonStyles.dualActionButtonView1}>
                     <Text style={buttonStyles.dualActionButtonText1}>
-                      {i18n.t('label.save_competition')}
+                      {i18n.t('label.delete_competition')}
                     </Text>
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={buttonStyles.dualActionButtonTouchable2}
-                  onPress={handleDelete}
+                  onPress={props.handleSubmit}
                 >
                   <View style={buttonStyles.dualActionButtonView2}>
                     <Text style={buttonStyles.dualActionButtonText2}>
-                      {i18n.t('label.delete_competition')}
+                      {i18n.t('label.save_competition')}
                     </Text>
                   </View>
                 </TouchableOpacity>

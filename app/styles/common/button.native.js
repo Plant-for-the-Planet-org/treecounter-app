@@ -119,8 +119,9 @@ export default EStyleSheet.create({
     top: '86%'
   },
   dualActionButtonView1: {
-    borderRadius: 6,
-    backgroundColor: '#3498db',
+    borderRadius: 26,
+    borderColor: '#e74c3c',
+    borderWidth: 1,
     height: 52,
     justifyContent: 'center'
   },
@@ -131,11 +132,11 @@ export default EStyleSheet.create({
     lineHeight: 22,
     letterSpacing: 0.21,
     textAlign: 'center',
-    color: '#ffffff'
+    color: '#e74c3c'
   },
   dualActionButtonView2: {
-    borderRadius: 6,
-    backgroundColor: '#ecf0f1',
+    borderRadius: 26,
+    backgroundColor: '#89b53a',
     height: 52,
     justifyContent: 'center'
   },
@@ -146,6 +147,6 @@ export default EStyleSheet.create({
     lineHeight: 22,
     letterSpacing: 0.21,
     textAlign: 'center',
-    color: '#e74c3c'
+    color: '#fff'
   }
 });

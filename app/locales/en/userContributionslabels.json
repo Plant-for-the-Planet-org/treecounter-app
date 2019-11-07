@@ -7,7 +7,7 @@
   "update": " Update",
   "my_trees": "My Forest",
   "donate_trees": "Donate trees",
-  "donate": "Donate",
+  "donate": "Projects",
   "no_contributions": "Welcome to your forest. Here you can see all the trees you have planted and registered with your hands and all the trees you have donated. Show the world your forest!",
   "singleTree": "Single Tree",
   "severalTrees": "Several Trees",
@@ -23,10 +23,8 @@
   "confirm": "Confirm",
   "delete_contribution": "Delete contribution",
   "my_trees_delete_confirm": "Are you sure you want to delete these trees?",
-  "deletion_warning_summary_contribution":
-    "You are about to delete some trees you have registered as planted.",
-  "delete_my_trees_action":
-    "This action will permanently delete this contribution.",
+  "deletion_warning_summary_contribution": "You are about to delete some trees you have registered as planted.",
+  "delete_my_trees_action": "This action will permanently delete this contribution.",
   "gifted_on_to": "Gifted on {{date}} to ",
   "donated_on": "Donated on {{date}}",
   "planted_by": "Planted by {{tpo}}",

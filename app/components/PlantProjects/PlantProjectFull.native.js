@@ -65,6 +65,7 @@ class PlantProjectFull extends React.Component {
             plantProject={this.props.plantProject}
             onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
             tpoName={tpo_name}
+            selectProject={this.props.selectProject}
           />
 
           {/* <View style={styles.horizontalRule} /> */}

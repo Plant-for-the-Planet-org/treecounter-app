@@ -20,6 +20,7 @@ export default class ListViewProjects extends PureComponent {
       onSelectClickedFeaturedProjects={this.props.selectProject}
       showMoreButton={false}
       tpoName={item.tpo_name}
+      selectProject={this.props.selectProject}
     />
   );
 

@@ -21,6 +21,7 @@ export default class FeaturedProjects extends PureComponent {
       onSelectClickedFeaturedProjects={this.onSelectClickedFeaturedProjects}
       showMoreButton={false}
       tpoName={item.tpo_name}
+      selectProject={this.props.onSelectClickedFeaturedProjects}
     />
   );
 

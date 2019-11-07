@@ -234,7 +234,10 @@ class PlantProjectSnippet extends PureComponent {
 
               <View style={styles.costContainer}>
                 <View style={styles.costTextContainer}>
-                  <Text style={[styles.costText]}>
+                  <Text
+                    style={[styles.costText]}
+                    onClick={() => this.props.selectProject(id)}
+                  >
                     {formatNumber(specsProps.treeCost, null, currency)}
                   </Text>
                 </View>
@@ -289,7 +292,8 @@ PlantProjectSnippet.propTypes = {
   onMoreClick: PropTypes.func,
   onSelectClickedFeaturedProjects: PropTypes.func,
   clickable: PropTypes.bool,
-  showCertifiedTag: PropTypes.bool
+  showCertifiedTag: PropTypes.bool,
+  selectProject: PropTypes.func
 };
 
 export default PlantProjectSnippet;

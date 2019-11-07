@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import { View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
-import { delimitNumbers, convertNumber } from '../../utils/utils';
+import { delimitNumbers, convertNumber, formatNumber } from '../../utils/utils';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -68,7 +68,7 @@ class PlantedProgressBar extends React.Component {
             }}
           >
             <Text style={styles.treePlantedtextPlanted}>
-              {convertNumber(parseInt(countPlanted), 2)}
+              {formatNumber(parseInt(countPlanted))}
             </Text>
             <Text style={styles.treePlantedtextTrees}>
               {i18n.t('label.planted')}
@@ -79,7 +79,11 @@ class PlantedProgressBar extends React.Component {
         {!this.props.hideTargetImage ? (
           <View style={styles.targetContainer}>
             <Text style={styles.treePlantedtext}>
-              {countTarget ? delimitNumbers(countTarget) : null}
+              {countTarget
+                ? countTarget > 100000
+                  ? delimitNumbers(countTarget)
+                  : countTarget
+                : null}
             </Text>
 
             <View style={{ paddingLeft: 5.5, paddingRight: 12 }}>

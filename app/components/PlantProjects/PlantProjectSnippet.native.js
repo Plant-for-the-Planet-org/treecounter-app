@@ -7,6 +7,7 @@ import { tick, location_grey, survival_grey, tax_grey } from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import { formatNumber } from '../../utils/utils';
+import { getISOToCountryName } from '../../helpers/utils';
 import CardLayout from '../Common/Card';
 import PlantedProgressBar from './PlantedProgressbar.native';
 
@@ -36,6 +37,7 @@ class PlantProjectSnippet extends PureComponent {
       isCertified,
       plantProjectImages,
       location,
+      country,
       countPlanted,
       countTarget,
       currency,
@@ -44,7 +46,8 @@ class PlantProjectSnippet extends PureComponent {
       survivalRate,
       // images,
       imageFile,
-      reviewScore: plantProjectRating
+      reviewScore: plantProjectRating,
+      reviews
       // description,
       // homepageUrl: homepageUrl,
       // homepageCaption: homepageCaption,
@@ -115,17 +118,19 @@ class PlantProjectSnippet extends PureComponent {
                 }}
                 resizeMode={'cover'}
               />
-              {teaserProps.isCertified ? (
+              {reviews && reviews.length ? (
                 <View style={[styles.certifiedAndRatingContainer]}>
-                  <Image
-                    source={tick}
-                    style={{
-                      width: 15,
-                      height: 15,
-                      marginLeft: 2,
-                      marginRight: 3
-                    }}
-                  />
+                  {teaserProps.isCertified ? (
+                    <Image
+                      source={tick}
+                      style={{
+                        width: 15,
+                        height: 15,
+                        marginLeft: 2,
+                        marginRight: 3
+                      }}
+                    />
+                  ) : null}
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text
                       style={[
@@ -147,7 +152,6 @@ class PlantProjectSnippet extends PureComponent {
               ) : null}
             </View>
           ) : null}
-
           <PlantedProgressBar
             countPlanted={specsProps.countPlanted}
             countTarget={specsProps.countTarget}
@@ -179,11 +183,11 @@ class PlantProjectSnippet extends PureComponent {
                     style={{
                       width: 17,
                       height: 17,
-                      marginRight: 15
+                      marginRight: 10
                     }}
                   />
                   <Text style={styles.survivalText} ellipsizeMode="tail">
-                    {specsProps.location}
+                    {getISOToCountryName(country).country}
                   </Text>
                 </View>
 
@@ -193,7 +197,7 @@ class PlantProjectSnippet extends PureComponent {
                     style={{
                       width: 17,
                       height: 17,
-                      marginRight: 15
+                      marginRight: 10
                     }}
                   />
                   <Text style={styles.survivalText}>
@@ -208,7 +212,7 @@ class PlantProjectSnippet extends PureComponent {
                       style={{
                         width: 17,
                         height: 17,
-                        marginRight: 15
+                        marginRight: 10
                       }}
                     />
                     <Text style={styles.survivalText}>

@@ -62,15 +62,8 @@ export default EStyleSheet.create({
   },
   projectSpecsContainer: {
     width: '100%',
-    padding: 16,
-    paddingLeft: 15,
-    borderWidth: 1,
-    borderColor: '#d5d5d5',
-    borderTopWidth: 0,
-    position: 'relative',
-    top: -3,
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5
+    padding: 4,
+    paddingTop: 7
   },
   treeCounterContainer: {
     flexDirection: 'row',

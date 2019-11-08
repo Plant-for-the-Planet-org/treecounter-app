@@ -230,12 +230,9 @@ export function deleteCompetition(param) {
     return new Promise(function(resolve, reject) {
       deleteAuthenticatedRequest('competition_delete', { competition: param })
         .then(res => {
-          dispatch(
-            mergeEntities(
-              normalize(res.data.merge.competition, [competitionSchema])
-            )
-          );
-          resolve(res.data);
+          // dispatch(unlinkEntity(res.data.unlink));
+          // dispatch(deleteEntity(res.data.delete));
+          // resolve(res.data);
           dispatch(setProgressModelState(false));
           NotificationManager.success(
             i18n.t('label.competition_deleted_successfully'),

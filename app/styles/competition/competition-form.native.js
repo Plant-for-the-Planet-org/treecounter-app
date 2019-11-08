@@ -79,12 +79,12 @@ export default EStyleSheet.create({
   },
   datePickerUnderline: {
     width: '100%',
-    marginTop: 6,
+    marginTop: 8,
     borderBottomWidth: 1,
     borderBottomColor: '#909090'
   },
   labelEndDate: { fontSize: 12, marginTop: 2, fontFamily: 'OpenSans-Regular' },
-  EndDate: { fontFamily: 'OpenSans-Regular' },
+  EndDate: { fontFamily: 'OpenSans-Regular', color: '#000000' },
   form_error_text: {
     fontSize: 12,
     color: 'red',

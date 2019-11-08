@@ -39,7 +39,7 @@ export default function createCompetition(props) {
           name: '',
           goal: '',
           description: '',
-          access: null,
+          access: '',
           endDate: new Date(),
           imageFile: ''
         }}

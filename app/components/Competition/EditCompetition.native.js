@@ -54,10 +54,10 @@ function EditCompetition(props) {
         initialValues={{
           name: formValue.name,
           goal: formValue.goal,
-          description: formValue.description,
+          description: formValue.description ? formValue.description : '',
           access: formValue.access,
           endDate: new Date(getDateFromMySQL(formValue.endDate)),
-          imageFile: formValue.image
+          imageFile: formValue.image ? formValue.image : ''
         }}
         competition_id={props.competition_id}
         navigation={props.navigation}

@@ -178,10 +178,11 @@ export function AccessPicker(props) {
     <View>
       <Dropdown
         ref={ref => (this.dropdown = ref)}
-        label="Who can Join"
+        label={i18n.t('label.competition_access')}
         data={data}
         onChangeText={onChange}
         lineWidth={1}
+        error={props.touched.access && props.errors.access}
         itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
         labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
       />
@@ -272,6 +273,9 @@ export function CompetitionDatePicker(props) {
           <Text style={styles.EndDate}>
             {formatDate(formatDateToMySQL(props.endDate))}
           </Text>
+          {props.errors && props.errors.endDate ? (
+            <Text>{props.errors.endDate}</Text>
+          ) : null}
         </View>
         <View style={styles.datePickerUnderline} />
       </TouchableOpacity>
@@ -284,6 +288,7 @@ export function CompetitionDatePicker(props) {
             props.setFieldValue('endDate', date);
         }}
         onCancel={() => setShowDatePicker(false)}
+        minimumDate={new Date()}
       />
     </View>
   );

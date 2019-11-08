@@ -312,14 +312,15 @@ export default EStyleSheet.create({
     backgroundColor: '#ffffff',
     borderStyle: 'solid',
     borderWidth: 1,
-    height: 30,
+    height: 36,
     borderColor: '#e74c3c',
     justifyContent: 'center',
     alignItems: 'center',
     width: 93,
     alignSelf: 'flex-end',
     marginLeft: 12,
-    marginTop: 8
+    marginTop: 8,
+    padding: 12
   },
   cancelButtonText: {
     fontSize: 14,

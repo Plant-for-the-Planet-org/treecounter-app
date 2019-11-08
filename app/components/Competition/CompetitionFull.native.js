@@ -105,7 +105,8 @@ class CompetitionFull extends React.Component {
             <Text> {i18n.t('label.join')}</Text>
           </PrimaryButton>
         );
-      } else if (status === 'enrolled') {
+      }
+      if (status === 'enrolled') {
         button2 = (
           <PrimaryButton
             style={snippetStyles.buttonItem}

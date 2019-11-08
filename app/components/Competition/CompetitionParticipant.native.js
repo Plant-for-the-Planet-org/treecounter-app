@@ -86,18 +86,20 @@ class CompetitionParticipant extends React.Component {
     }
     return (
       <View style={snippetStyles.topCompetitorSection}>
-        <View style={styles.topCompetitorName}>
+        <View
+          style={styles.topCompetitorName}
+          onPress={() =>
+            this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+              treeCounterId: this.props.competitor.treecounterSlug
+            })
+          }
+        >
           {/* User Profile Image */}
           <UserProfileImage
             profileImage={
               this.props.competitor && this.props.competitor.treecounterAvatar
             }
             imageStyle={{ width: 40, height: 40, borderRadius: 40 / 2 }}
-            onPress={() =>
-              this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: this.props.competitor.treecounterSlug
-              })
-            }
           />
           {/* User Profile Image ends */}
 

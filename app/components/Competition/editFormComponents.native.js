@@ -14,7 +14,7 @@ import buttonStyles from '../../styles/common/button.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { getImageUrl } from '../../actions/apiRouting';
 import { Dropdown } from 'react-native-material-dropdown';
-// import { updateRoute } from '../../helpers/routerHelper';
+import { updateRoute } from '../../helpers/routerHelper';
 import ImagePicker from 'react-native-image-picker';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
@@ -33,7 +33,7 @@ export const FormikForm = props => {
       .catch(err => {
         console.log('Error', err);
       });
-    //updateRoute('app_competitions', props.navigation);
+    updateRoute('app_competitions', props.navigation);
   };
   let RBSheetRef = null;
   return (
@@ -243,12 +243,14 @@ export function AccessPicker(props) {
     <View>
       <Dropdown
         ref={ref => (this.dropdown = ref)}
-        label="Who can Join"
+        label={i18n.t('label.competition_access')}
         data={data}
         onChangeText={onChange}
         lineWidth={1}
         itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
         labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+        error={props.touched.access && props.errors.access}
+        value={props.values.access}
       />
     </View>
   );
@@ -358,6 +360,7 @@ export function CompetitionDatePicker(props) {
             props.setFieldValue('endDate', date);
         }}
         onCancel={() => setShowDatePicker(false)}
+        minimumDate={new Date()}
       />
     </View>
   );

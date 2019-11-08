@@ -233,6 +233,7 @@ export function deleteCompetition(param) {
           // dispatch(unlinkEntity(res.data.unlink));
           // dispatch(deleteEntity(res.data.delete));
           // resolve(res.data);
+          console.log(res.data);
           dispatch(setProgressModelState(false));
           NotificationManager.success(
             i18n.t('label.competition_deleted_successfully'),

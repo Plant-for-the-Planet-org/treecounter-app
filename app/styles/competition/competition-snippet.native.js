@@ -60,17 +60,17 @@ export default EStyleSheet.create({
     paddingLeft: 5,
     color: 'white',
     fontSize: 14,
-    fontWeight: 'bold'
+    fontFamily: 'OpenSans-Bold'
   },
   treePlantedtextTrees: {
     color: 'white',
     paddingLeft: 5,
-    fontWeight: 'bold'
+    fontFamily: 'OpenSans-Bold'
   },
   treePlantedtextPlanted: {
     color: 'white',
-    fontWeight: 'bold',
-    paddingLeft: 16
+    paddingLeft: 16,
+    fontFamily: 'OpenSans-Bold'
   },
   targetContainer: {
     width: '100%',
@@ -100,13 +100,12 @@ export default EStyleSheet.create({
   },
   project_teaser__contentText: {
     maxWidth: '90%',
-    fontSize: 18,
-    fontWeight: '600',
-    fontStyle: 'normal',
+    fontSize: 16,
     lineHeight: 27,
     letterSpacing: 0,
     textAlign: 'left',
-    color: '#4d5153'
+    color: '#4d5153',
+    fontFamily: 'OpenSans-SemiBold'
   },
   project_teaser__contentByText: {
     fontSize: 10,
@@ -121,17 +120,15 @@ export default EStyleSheet.create({
   bottomText: {
     marginLeft: 8,
     fontSize: 11,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
     lineHeight: 15,
     letterSpacing: 0,
     textAlign: 'left',
-    color: 'rgba(0, 0, 0, 0.6)'
+    color: 'rgba(0, 0, 0, 0.6)',
+    fontFamily: 'OpenSans-Regular'
   },
   bottomParticipantText: {
     fontSize: 11,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-Regular',
     lineHeight: 15,
     letterSpacing: 0,
     textAlign: 'right',
@@ -250,22 +247,20 @@ export default EStyleSheet.create({
   },
   topCompetitorScoreText: {
     fontSize: 11,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
     lineHeight: 16,
     letterSpacing: 0,
     textAlign: 'left',
     color: 'rgba(0, 0, 0, 0.6)',
-    marginLeft: 10
+    marginLeft: 10,
+    fontFamily: 'OpenSans-Regular'
   },
   topCompetitorRank: {
     fontSize: 12,
-    fontWeight: '600',
-    fontStyle: 'normal',
     lineHeight: 17,
     letterSpacing: 1.2,
     textAlign: 'left',
-    color: 'rgba(0, 0, 0, 0.6)'
+    color: 'rgba(0, 0, 0, 0.6)',
+    fontFamily: 'OpenSans-SemiBold'
   },
   topCompetitorDiv: {
     width: '100%',

@@ -160,9 +160,6 @@ class CompetitionSnippet extends React.Component {
                 </Text>
               </View>
 
-              {/*<View style={styles.projectdetailsContainer}>*/}
-              {/**/}
-              {/*</View>*/}
               <View style={styles.topCompetitorContainer}>
                 {this.props.competition &&
                 this.props.competition.topEnrollments &&

@@ -95,22 +95,20 @@ export default EStyleSheet.create({
     //height: rowHeight + rowHeight / 2,
   },
   project_teaser__contentText: {
-    fontSize: 18,
-    fontWeight: '500',
-    fontStyle: 'normal',
+    fontSize: 16,
     lineHeight: 27,
     letterSpacing: 0,
     textAlign: 'left',
-    color: '#4d5153'
+    color: '#4d5153',
+    fontFamily: 'OpenSans-SemiBold'
   },
   textHeadingParticipants: {
     fontSize: 16,
-    fontWeight: '600',
-    fontStyle: 'normal',
     lineHeight: 22,
     letterSpacing: 0,
     textAlign: 'left',
-    color: 'rgba(0, 0, 0, 0.6)'
+    color: 'rgba(0, 0, 0, 0.6)',
+    fontFamily: 'OpenSans-SemiBold'
   },
   project_teaser__contentByText: {
     fontSize: 10,
@@ -119,8 +117,7 @@ export default EStyleSheet.create({
   },
   project_teaser__contentDescriptionText: {
     fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-Regular',
     lineHeight: 21,
     letterSpacing: 0,
     textAlign: 'left',
@@ -129,8 +126,7 @@ export default EStyleSheet.create({
   bottomText: {
     marginLeft: 8,
     fontSize: 12,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-Regular',
     lineHeight: 17,
     letterSpacing: 0,
     textAlign: 'left',
@@ -187,12 +183,11 @@ export default EStyleSheet.create({
   },
   buttonTextStyle: {
     fontSize: 13,
-    fontWeight: '600',
-    fontStyle: 'normal',
     lineHeight: 18,
     letterSpacing: 0,
     textAlign: 'center',
-    color: '#ffffff'
+    color: '#ffffff',
+    fontFamily: 'OpenSans-SemiBold'
   },
   moreButtonStyle: {
     backgroundColor: 'white',
@@ -203,7 +198,8 @@ export default EStyleSheet.create({
     paddingRight: 10
   },
   moreButtonTextStyle: {
-    fontSize: 12
+    fontSize: 12,
+    fontFamily: 'OpenSans-Regular'
   },
   moreButtonStyleCancel: {
     backgroundColor: 'white',
@@ -295,22 +291,21 @@ export default EStyleSheet.create({
     backgroundColor: '#ffffff',
     borderStyle: 'solid',
     borderWidth: 1,
-    height: 30,
+    height: 36,
     borderColor: '#d5d5d5',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 93,
     alignSelf: 'flex-end',
-    marginTop: 8
+    marginTop: 8,
+    padding: 12
   },
   secondaryButtonText: {
     fontSize: 14,
-    fontWeight: '600',
-    fontStyle: 'normal',
     lineHeight: 19,
     letterSpacing: 0,
     textAlign: 'center',
-    color: '#4d5153'
+    color: '#4d5153',
+    fontFamily: 'OpenSans-SemiBold'
   },
   cancelButton: {
     borderRadius: 4,
@@ -328,8 +323,7 @@ export default EStyleSheet.create({
   },
   cancelButtonText: {
     fontSize: 14,
-    fontWeight: '600',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-SemiBold',
     lineHeight: 19,
     letterSpacing: 0,
     textAlign: 'center',
@@ -345,5 +339,10 @@ export default EStyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  competitionOver: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 12,
+    width: 160
   }
 });

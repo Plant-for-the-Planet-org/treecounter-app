@@ -141,7 +141,8 @@ class SearchBar extends React.PureComponent {
                 style={{
                   fontSize: 14,
                   color: this.props.tintColor || '#007AFF',
-                  textAlign: 'center'
+                  textAlign: 'center',
+                  fontFamily: 'OpenSans-Regular'
                 }}
               >
                 {i18n.t('label.cancel')}

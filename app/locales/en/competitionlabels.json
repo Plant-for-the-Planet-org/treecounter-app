@@ -42,5 +42,6 @@
   "featured_compeition_tab_header": "Select a competition to join and start planting trees",
   "all_compeition_tab_header": "List of all competitions competitions. Join one, and start planting.",
   "competition_deleted_successfully": "Competition Deleted successfully",
-  "competition_delete_error": "Competition Deleting Failed"
+  "competition_delete_error": "Competition Deleting Failed",
+  "competition_over": "This competition is now over"
 }

@@ -21,8 +21,7 @@ export default EStyleSheet.create({
   },
   headerTitle: {
     fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-Regular',
     lineHeight: 21,
     letterSpacing: 0,
     textAlign: 'left',

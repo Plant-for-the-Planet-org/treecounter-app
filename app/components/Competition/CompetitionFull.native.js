@@ -114,7 +114,6 @@ class CompetitionFull extends React.Component {
             onClick={() => this.props.leaveCompetition(competitionDetail.id)}
           >
             <Text style={snippetStyles.moreButtonStyleCancelText}>
-              {' '}
               {i18n.t('label.leave')}
             </Text>
           </PrimaryButton>
@@ -159,7 +158,6 @@ class CompetitionFull extends React.Component {
           onClick={() => this.props.leaveCompetition(competitionDetail.id)}
         >
           <Text style={snippetStyles.moreButtonStyleCancelText}>
-            {' '}
             {i18n.t('label.leave')}
           </Text>
         </PrimaryButton>
@@ -183,7 +181,11 @@ class CompetitionFull extends React.Component {
       let endDate = competitionDetail.endDate;
       endDate = new Date(endDate);
       if (CurrentDate > endDate) {
-        button = <Text>This competition is now over</Text>;
+        button = (
+          <Text style={snippetStyles.competitionOver}>
+            {i18n.t('label.competition_over')}
+          </Text>
+        );
       }
     }
 
@@ -346,7 +348,7 @@ class CompetitionFull extends React.Component {
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
                     {/* Participant Total Count */}
-                    <Text style={styles.textHeadingParticipants}>
+                    <Text style={snippetStyles.textHeadingParticipants}>
                       {i18n.t('label.participants')} ({competitionDetail &&
                         competitionDetail.competitorCount})
                     </Text>
@@ -392,7 +394,7 @@ class CompetitionFull extends React.Component {
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
                     {/* Total Requests  */}
-                    <Text style={styles.textHeadingParticipants}>
+                    <Text style={snippetStyles.textHeadingParticipants}>
                       {i18n.t('label.requests_to_join')} ({competitionDetail &&
                         competitionDetail.competitorCount})
                     </Text>
@@ -436,7 +438,7 @@ class CompetitionFull extends React.Component {
               <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
-                    <Text style={styles.textHeadingParticipants}>
+                    <Text style={snippetStyles.textHeadingParticipants}>
                       {i18n.t('label.invite')}
                     </Text>
                   </View>
@@ -485,7 +487,7 @@ class CompetitionFull extends React.Component {
               <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
-                    <Text style={styles.textHeadingParticipants}>
+                    <Text style={snippetStyles.textHeadingParticipants}>
                       {i18n.t('label.invited')}
                     </Text>
                   </View>

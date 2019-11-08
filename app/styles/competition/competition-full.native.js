@@ -91,12 +91,13 @@ export default EStyleSheet.create({
     fontSize: 14,
     color: '$cardTextColor',
     maxWidth: '100%',
-    fontWeight: 'bold'
+    fontFamily: 'OpenSans-Bold'
   },
   topCompetitorScoreText: {
     fontSize: 14,
     color: '$cardTextColor',
-    maxWidth: '100%'
+    maxWidth: '100%',
+    fontFamily: 'OpenSans-Regular'
   },
   topCompetitorDiv: {
     width: '100%',

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import { View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
-import { delimitNumbers, convertNumber, formatNumber } from '../../utils/utils';
+import { convertNumber, formatNumber } from '../../utils/utils';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+// import { View } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { Dimensions } from 'react-native';
-import TabContainer from '../../containers/Menu/TabContainer';
+// import TabContainer from '../../containers/Menu/TabContainer';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
 import FeaturedProjects from './Tabs/featured';
@@ -37,13 +37,14 @@ export default class SelectPlantTabView extends PureComponent {
     });
   };
 
-  _handleIndexChange = index => {
+  handleIndexChange = index => {
     this.setState({ index: index });
   };
 
-  _renderTabBar = props => {
+  renderTabBar = props => {
     return [
       <TabBar
+        key="1"
         {...props}
         style={styles.tabBar}
         tabStyle={{ width: Layout.window.width / 2 }}
@@ -53,7 +54,7 @@ export default class SelectPlantTabView extends PureComponent {
     ];
   };
 
-  _renderSelectPlantScene = ({ route }) => {
+  renderSelectPlantScene = ({ route }) => {
     const {
       plantProjects,
       onMoreClick,
@@ -69,7 +70,7 @@ export default class SelectPlantTabView extends PureComponent {
       navigation,
       currencies
     };
-    const { index } = this.state;
+    // const { index } = this.state;
 
     // Only render a tab if it is focused
     switch (route.key) {
@@ -87,9 +88,9 @@ export default class SelectPlantTabView extends PureComponent {
       <TabView
         useNativeDriver
         navigationState={this.state}
-        renderScene={this._renderSelectPlantScene}
-        renderTabBar={this._renderTabBar}
-        onIndexChange={this._handleIndexChange}
+        renderScene={this.renderSelectPlantScene}
+        renderTabBar={this.renderTabBar}
+        onIndexChange={this.handleIndexChange}
       />
     );
   }

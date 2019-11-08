@@ -56,7 +56,6 @@ class PledgeEvents extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.pledges !== this.props.pledges) {
-      this.props.fetchPledgesAction(this.props.navigation.getParam('slug'));
       if (this.props.currentUserProfile) {
         this.setState({
           loggedIn: true
@@ -75,7 +74,6 @@ class PledgeEvents extends Component {
       this.getMyPledge();
     }
     if (this.props.navigation.getParam('plantProject').id !== -1) {
-      this.props.fetchPledgesAction(this.props.navigation.getParam('slug'));
       this.RBSheet.open();
       this.props.navigation.getParam('plantProject').id = -1;
     }

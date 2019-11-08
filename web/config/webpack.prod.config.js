@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-const commonConfig = require('./webpack.common.config.js');
+const commonConfig = require('./webpack.common.config.js')(true);
 const path = require('path');
 
 module.exports = webpackMerge(commonConfig, {
@@ -22,18 +22,26 @@ module.exports = webpackMerge(commonConfig, {
     progressbarwidget: [
       'babel-polyfill',
       path.join(__dirname, '../widgets/progressbar/widget.js')
-    ],
-    ndviwidget: [
-      'babel-polyfill',
-      path.join(__dirname, '../widgets/NDVI/widget.js')
+      // ],
+      // ndviwidget: [
+      //   'babel-polyfill',
+      //   path.join(__dirname, '../widgets/NDVI/widget.js')
     ]
   },
   output: {
     path: path.join(__dirname, '../prod'),
-    filename: '[name].js',
+    filename: '[name].[hash].js',
     publicPath: '/'
   },
-
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['eslint-loader']
+      }
+    ]
+  },
   plugins: [
     new WebpackCleanupPlugin(),
     new webpack.LoaderOptionsPlugin({

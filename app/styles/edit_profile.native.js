@@ -33,6 +33,11 @@ export default EStyleSheet.create({
     textAlign: 'center',
     fontWeight: '100'
   },
+  textStyle: {
+    fontSize: 14,
+    paddingLeft: 15,
+    paddingRight: 15
+  },
   bottomRow: {
     backgroundColor: '#85a64d',
     flexDirection: 'row',

@@ -1,1 +1,4 @@
-{ }
+{
+  "sure": "Você tem certeza?",
+  "password_changed": "Sua senha foi alterada com sucesso."
+}

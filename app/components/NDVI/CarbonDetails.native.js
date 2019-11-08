@@ -11,11 +11,9 @@ import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 const CarbonDetails = props => {
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.carbonLabel}>
-          {i18n.t('label.NDVI_carbon_title')}
-        </Text>
-      </View>
+      <Text style={styles.carbonLabel}>
+        {i18n.t('label.NDVI_carbon_title')}
+      </Text>
 
       <CardLayout style={styles.cardLayout}>
         <View style={styles.carbonContainer}>

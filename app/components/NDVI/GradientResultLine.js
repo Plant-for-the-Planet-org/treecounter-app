@@ -26,9 +26,15 @@ class GradientResultLine extends React.PureComponent {
     const props = this.props;
     const { selectedDataPoint } = props;
     let backgroundImage = `linear-gradient(to right,
-      ${props.getColorForNDVI(selectedDataPoint.ndviAggregate.min)} 0%,
-      ${props.getColorForNDVI(selectedDataPoint.ndviAggregate.avg)} 50%,
-       ${props.getColorForNDVI(selectedDataPoint.ndviAggregate.max)} 100%)`;
+      ${props.getColorForNDVI(
+        selectedDataPoint.ndviAggregate && selectedDataPoint.ndviAggregate.min
+      )} 0%,
+      ${props.getColorForNDVI(
+        selectedDataPoint.ndviAggregate && selectedDataPoint.ndviAggregate.avg
+      )} 50%,
+       ${props.getColorForNDVI(
+         selectedDataPoint.ndviAggregate && selectedDataPoint.ndviAggregate.max
+       )} 100%)`;
     backgroundImage = backgroundImage.replace(/(\r\n|\n|\r)/gm, '');
     return backgroundImage;
   };

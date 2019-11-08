@@ -1,1 +1,5 @@
-{ }
+{
+  "tax_deductible": "Dedutível do imposto",
+  "location": "Localização",
+  "planted": "Plantado"
+}

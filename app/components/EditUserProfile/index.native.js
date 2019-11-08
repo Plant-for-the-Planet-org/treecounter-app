@@ -68,6 +68,11 @@ export default class EditUserProfile extends Component {
     };
   }
 
+  changeEmail = () => {
+    let value = this.refs.tabView.refs.securityTabView.refs.change_email.getValue();
+    this.props.updateEmail(value);
+  };
+
   _renderTabBar = props => {
     return (
       <TabBar
@@ -181,11 +186,13 @@ export default class EditUserProfile extends Component {
       case 'security':
         return (
           <SecurityTabView
+            ref="securityTabView"
             onSave={onSave}
             currentUserProfile={currentUserProfile}
             getFormSchemaOption={this.getFormSchemaOption}
             navigation={this.props.navigation}
             deleteProfile={this.props.deleteProfile}
+            changeEmail={this.changeEmail}
             onSamePasswordErrorState={this.changePasswordErrorState}
           />
         );
@@ -312,6 +319,25 @@ class SecurityTabView extends React.PureComponent {
     const { type } = this.props.currentUserProfile;
     return (
       <KeyboardAwareScrollView enableOnAndroid>
+        <CardLayout style={{ flex: 1 }}>
+          <View {...this.props}>
+            <Form
+              ref={'change_email'}
+              type={parsedSchema[type].email.transformedSchema}
+              options={this.props.getFormSchemaOption(type, 'email')}
+            />
+            <Text style={styles.textStyle}>
+              {i18n.t('label.change_email_warning')}
+            </Text>
+          </View>
+          <PrimaryButton
+            onClick={() => {
+              this.props.changeEmail();
+            }}
+          >
+            {i18n.t('label.save_changes')}
+          </PrimaryButton>
+        </CardLayout>
         <CardLayout style={{ flex: 1 }}>
           <View {...this.props}>
             <Form

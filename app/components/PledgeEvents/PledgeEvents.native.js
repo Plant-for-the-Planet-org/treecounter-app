@@ -30,7 +30,8 @@ import { nextArrowWhite } from '../../assets';
 class PledgeEvents extends Component {
   state = {
     loading: true,
-    myPledge: {}
+    myPledge: {},
+    slug: null
   };
 
   componentDidMount() {
@@ -56,6 +57,9 @@ class PledgeEvents extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.pledges !== this.props.pledges) {
+      this.setState({
+        slug: this.props.navigation.getParam('slug')
+      });
       if (this.props.currentUserProfile) {
         this.setState({
           loggedIn: true
@@ -116,6 +120,8 @@ class PledgeEvents extends Component {
         ? this.props.pledges
         : null;
     const navigation = this.props.navigation;
+
+    let slug = this.state.slug;
     return this.state.loading ? (
       <LoadingIndicator />
     ) : (
@@ -137,7 +143,9 @@ class PledgeEvents extends Component {
           <View style={styles.baContainer}>
             <Text style={styles.baMessage}>
               {i18n.t('label.pledgeAddedMessage', {
-                treeCount: this.props.navigation.getParam('treeCount')
+                treeCount: this.props.navigation
+                  .getParam('treeCount')
+                  .toLocaleString()
               })}
             </Text>
 
@@ -145,10 +153,13 @@ class PledgeEvents extends Component {
               <TouchableOpacity
                 style={styles.baLaterButton}
                 onPress={() => {
+                  this.props.fetchPledgesAction(slug);
                   this.RBSheet.close();
                 }}
               >
-                <Text style={styles.baLaterText}>LATER</Text>
+                <Text style={styles.baLaterText}>
+                  {i18n.t('label.pledgeAddedLaterButton')}
+                </Text>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -274,7 +285,7 @@ function EventDetails(props) {
         <View>
           <Text style={styles.eventSubTitle}>
             {i18n.t('label.treesPledgedAllPledges', {
-              treeCount: pledges.total
+              treeCount: pledges.total.toLocaleString()
             })}
           </Text>
           {/* All the pledges are here */}

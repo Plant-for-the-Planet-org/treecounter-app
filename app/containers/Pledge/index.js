@@ -45,6 +45,18 @@ class PledgeContainer extends Component {
       },
       this.state.loggedIn
     );
+    this.props.fetchPledgesAction(this.props.match.params.eventSlug);
+  }
+  updatePledge(data, token, loggedIn) {
+    this.props.updatePledge(
+      data,
+      {
+        token: token,
+        version: 'v1.3'
+      },
+      loggedIn
+    );
+    this.props.fetchPledgesAction(this.props.match.params.eventSlug);
   }
   render() {
     return (
@@ -56,7 +68,7 @@ class PledgeContainer extends Component {
         currentUserProfile={this.props.currentUserProfile}
         fetchPublicPledgesAction={this.props.fetchPublicPledgesAction}
         entities={this.props.entities}
-        updatePledge={this.props.updatePledge}
+        updatePledge={() => this.updatePledge()}
       />
     );
   }

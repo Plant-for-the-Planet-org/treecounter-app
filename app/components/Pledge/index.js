@@ -169,14 +169,15 @@ export default class Pledge extends Component {
     const data = {
       treeCount: this.state.updatingTreeCount
     };
-    this.props.updatePledge(
-      data,
-      {
-        token: token,
-        version: 'v1.3'
-      },
-      this.state.loggedIn
-    );
+    // this.props.updatePledge(
+    //   data,
+    //   {
+    //     token: token,
+    //     version: 'v1.3'
+    //   },
+    //   this.state.loggedIn
+    // );
+    this.props.updatePledge(data, token, this.state.loggedIn);
     this.closeIncreasePledgesModal();
     this.openSubmitUpdateModal();
   };

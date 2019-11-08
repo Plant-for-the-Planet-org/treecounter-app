@@ -10,6 +10,7 @@ import ConfirmDeletion from './ConfirmDelete';
 import { updateRoute } from '../../helpers/routerHelper';
 import { formatDate, delimitNumbers } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
+import { getISOToCountryName } from '../../helpers/utils';
 
 export default class ContributionCardHome extends React.Component {
   constructor(props) {
@@ -44,10 +45,19 @@ export default class ContributionCardHome extends React.Component {
   }
 
   plantProjectLine(plantProjectName, country) {
-    return (plantProjectName ? plantProjectName + ', ' : '') + country;
+    return getISOToCountryName(country).country;
   }
-  cap(text) {
-    return text[0].toUpperCase() + text.substr(1);
+  getCardType(contribution) {
+    if (
+      contribution.category == 'gifts' &&
+      contribution.type &&
+      contribution.type == 'tpo-coupon'
+    ) {
+      return 'Redemption';
+    }
+    return contribution.cardType == 'planting'
+      ? 'Donation'
+      : contribution.cardType[0].toUpperCase() + contribution.cardType.slice(1);
   }
   donateActionLine(isGift, plantDate, givee, giveeSlug, giftRecipient) {
     return isGift && giftRecipient ? (
@@ -76,9 +86,13 @@ export default class ContributionCardHome extends React.Component {
   }
 
   // eslint-disable-next-line no-unused-vars
-  plantActionLine(plantDate, registrationDate) {
+  plantActionLine(contribution) {
     return i18n.t('label.renews_on', {
-      date: formatDate(plantDate)
+      date: formatDate(
+        contribution.plantDate ||
+          contribution.redemptionDate ||
+          contribution.registrationDate
+      )
     });
   }
 
@@ -198,7 +212,7 @@ export default class ContributionCardHome extends React.Component {
       giftRecipient
     );
     // let tpoLine = this.tpoLine(tpoName);
-    let plantActionLine = this.plantActionLine(plantDate, registrationDate);
+    let plantActionLine = this.plantActionLine(contribution);
     let dedicateActionLine = this.dedicateActionLine(givee, giveeSlug);
     // let redeemActionLine = this.redeemActionLine(
     //   redemptionCode,
@@ -206,12 +220,10 @@ export default class ContributionCardHome extends React.Component {
     //   givee,
     //   giveeSlug
     // );
-    return category === 'contributions' ? (
+    return category == 'contributions' || category == 'gifts' ? (
       <div className="box">
         <div className={`${contribution.contributionType}`}>
-          <div className="currency">
-            {this.cap(contribution.contributionType)}
-          </div>
+          <div className="currency">{this.getCardType(contribution)}</div>
           <div className="contribution-container__left-column">
             {treeCountLine ? (
               <div className="headline">

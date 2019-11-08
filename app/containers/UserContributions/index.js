@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { deleteContribution } from '../../actions/EditMyTree';
 import UserContributions from '../../components/UserContributions';
 import _ from 'lodash';
+import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 
 // Actions
 import {
@@ -28,6 +29,7 @@ class UserContributionsContainer extends React.Component {
         userContributions={userContributions}
         navigation={this.props.navigation}
         deleteContribution={this.props.deleteContribution}
+        supportTreeCounterAction={this.props.supportTreecounterAction}
       />
     );
   }
@@ -41,7 +43,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      deleteContribution
+      deleteContribution,
+      supportTreecounterAction
     },
     dispatch
   );

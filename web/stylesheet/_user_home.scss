@@ -40,9 +40,9 @@ $white: #fff;
   .currency {
     // flex: 1;
     float: right;
-    padding: 5px 15px;
+    padding: 5px 12px;
     align-self: flex-end;
-    width: 56px;
+    width: 62px;
     height: 19px;
     font-family: OpenSans;
     border-radius: 2px;
@@ -51,7 +51,7 @@ $white: #fff;
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
-    text-align: right;
+    text-align: center;
     background-color: $border;
   }
 
@@ -187,4 +187,8 @@ $white: #fff;
     margin-left: 0;
   }
 
+}
+
+.pftp-description-heading.left-align {
+  padding-left: 0;
 }

@@ -11,8 +11,16 @@ export default class ContributorCard extends React.Component {
 
   render() {
     let { contributor } = this.props;
-    let { avatar, treeCount, giver, giver_slug } = contributor;
-    console.log('vaatar', avatar, treeCount, giver, giver_slug);
+    let {
+      avatar,
+      treeCount,
+      giverTreecounterId,
+      giverSlug,
+      giverName
+    } = contributor;
+    console.log('avatar:', avatar, treeCount, giverTreecounterId, giverSlug);
+    // remove this line
+    giverTreecounterId = giverSlug;
     return (
       <div className="challenge_card p-t-10">
         <div className="flex-row">
@@ -20,7 +28,7 @@ export default class ContributorCard extends React.Component {
             <div className="flex-row">
               <UserProfileImage profileImage={avatar} />
               <div className="challenge_details">
-                <div>{giver}</div>
+                <div>{giverName}</div>
                 <div className="light">
                   {treeCount} {i18n.t('label.trees')}
                 </div>
@@ -28,7 +36,15 @@ export default class ContributorCard extends React.Component {
             </div>
           </div>
           <div className="button_align">
-            <SecondaryButton className="default-btn" onClick={this.onSupport}>
+            <SecondaryButton
+              className="default-btn"
+              onClick={() => {
+                this.props.onSupport({
+                  id: giverTreecounterId,
+                  displayName: giverName
+                });
+              }}
+            >
               {i18n.t('label.support')}
             </SecondaryButton>
           </div>

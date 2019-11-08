@@ -41,7 +41,7 @@
     "no-undef": 2,
     "no-underscore-dangle": 2,
     "no-unreachable": 2,
-    "no-unused-vars": 2,
+    "no-unused-vars": 1,
     "no-useless-escape": 2,
     "no-console": 0,
     "no-var": 2,
@@ -67,7 +67,7 @@
     "react/jsx-key": 2, //
     "react/jsx-no-duplicate-props": 2, //
     "react/jsx-no-target-blank": 2, //
-    "react/jsx-no-undef": 2, //
+    "react/jsx-no-undef": 1, //
     "react/jsx-sort-props": 0,
     "react/jsx-wrap-multilines": 2,
     "react/no-deprecated": 1,
@@ -89,7 +89,7 @@
         "react-native/no-color-literals": 2,
         "react-native/no-inline-styles": 1,
         "react-native/no-raw-text": 2,
-        "react-native/no-unused-styles": 2,
+        "react-native/no-unused-styles": 1,
         "react-native/split-platform-components": 1
       }
     }

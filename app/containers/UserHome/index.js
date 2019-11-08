@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import NavigationEvents from './importNavigationEvents';
 import { deleteContribution } from '../../actions/EditMyTree';
-
+import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import {
   userTreecounterDataSelector,
   currentUserProfileSelector,
@@ -24,7 +24,7 @@ class UserHomeContainer extends React.Component {
   }
   render() {
     const { treecounterData, currentUserProfile, navigation } = this.props;
-    console.log(this.state.loadSvg);
+    console.log('user cotributions', this.props.userContributions);
 
     return [
       navigation ? (
@@ -51,6 +51,7 @@ class UserHomeContainer extends React.Component {
           userContributions={this.props.userContributions}
           navigation={this.props.navigation}
           deleteContribution={this.props.deleteContribution}
+          supportTreeCounterAction={this.props.supportTreecounterAction}
         />
       ) : null
     ];
@@ -67,7 +68,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      deleteContribution
+      deleteContribution,
+      supportTreecounterAction
     },
     dispatch
   );

@@ -9,21 +9,26 @@ const UserContributions = ({
   userProfileId,
   userContributions,
   deleteContribution,
-  isPublic
+  isPublic,
+  supportTreeCounterAction
 }) => {
   return (
     <div className="grid2x2">
       {Object.keys(userContributions).length > 0 ? (
         userContributions
+
           .sort(
             (a, b) =>
-              new Date(b.registrationDate) - new Date(a.registrationDate)
+              new Date(b.plantDate || b.redemptionDate) -
+              new Date(a.plantDate || a.redemptionDate)
           )
+
           .map(contribution => (
             <ContributionCard
               contribution={contribution}
               deleteContribution={deleteContribution}
               key={contribution.id}
+              supportTreeCounterAction={supportTreeCounterAction}
             />
           ))
       ) : (
@@ -41,7 +46,8 @@ UserContributions.propTypes = {
   userProfileId: PropTypes.number.isRequired,
   userContributions: PropTypes.array.isRequired,
   deleteContribution: PropTypes.func,
-  isPublic: PropTypes.bool
+  isPublic: PropTypes.bool,
+  supportTreeCounterAction: PropTypes.func
 };
 
 export default UserContributions;

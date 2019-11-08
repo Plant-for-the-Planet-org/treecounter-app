@@ -8,26 +8,33 @@ import ContributorCard from './ContributorCard';
 // import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 // import { getLocalRoute } from '../../actions/apiRouting';
 // import TextSpan from '../Common/Text/TextSpan';
-// import { updateRoute } from '../../helpers/routerHelper';
+import { updateRoute } from '../../helpers/routerHelper';
 // import { formatDate, delimitNumbers } from '../../utils/utils';
 // import i18n from '../../locales/i18n.js';
 
 const ContributorsList = props => {
   const getContributors = () => {
-    return props.contributions.filter(contribution => {
-      return contribution.giver;
+    let contribution = {};
+    props.contributions.map(contributor => {
+      if (contributor.giver) {
+        if (!contribution[contributor.giverSlug])
+          contribution[contributor.giverSlug] = contributor;
+        contribution[contributor.giverSlug].treeCount += contributor.treeCount;
+      }
     });
+    return contribution;
   };
-  const onSupport = () => {
-    // this.props.supportTreecounterAction(treecounter);
-    // this.props.route('app_donateTrees');
+  const onSupport = treecounter => {
+    console.log('rops', props, treecounter);
+    props.supportTreeCounterAction(treecounter);
+    updateRoute('app_donateTrees');
   };
 
   // let { contributions } = this.props;
 
   const contributors = getContributors();
   console.log('contributors:...', contributors);
-  return contributors.map(contributor => (
+  return Object.values(contributors).map(contributor => (
     <ContributorCard
       key={contributor.id}
       contributor={contributor}

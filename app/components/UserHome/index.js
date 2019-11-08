@@ -163,10 +163,13 @@ export default class UserHome extends Component {
               user.
             </DescriptionHeading>
             <div>
-              <ContributorsList contributions={this.props.userContributions} />
+              <ContributorsList
+                contributions={this.props.userContributions}
+                supportTreeCounterAction={this.props.supportTreeCounterAction}
+              />
             </div>
 
-            <div className="heading">Tree Planting Projects</div>
+            {/* <div className="heading">Tree Planting Projects</div>
             <DescriptionHeading align={'left-align'}>
               This tree counter is supported by following members. Tress planted
               by contributors are aggregate to this total Tree Count of this
@@ -174,7 +177,7 @@ export default class UserHome extends Component {
             </DescriptionHeading>
             <div>
               <ProjectLists contributions={this.props.userContributions} />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -185,5 +188,6 @@ export default class UserHome extends Component {
 UserHome.propTypes = {
   treecounterData: PropTypes.object,
   userProfile: PropTypes.object,
-  userContributions: PropTypes.array
+  userContributions: PropTypes.array,
+  supportTreeCounterAction: PropTypes.func
 };

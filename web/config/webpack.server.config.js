@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-const commonConfig = require('./webpack.common.config.js');
+const commonConfig = require('./webpack.common.config.js')(true);
 const path = require('path');
 
 module.exports = webpackMerge(commonConfig, {
@@ -37,7 +37,7 @@ module.exports = webpackMerge(commonConfig, {
   },
   output: {
     path: path.join(__dirname, '../server'),
-    filename: '[name].js',
+    filename: '[name].[hash].js',
     publicPath: '/'
   },
   devtool: 'source-map',

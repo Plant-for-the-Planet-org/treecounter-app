@@ -10,12 +10,11 @@ const Layout = {
 export default EStyleSheet.create({
   add_competition_title: {
     fontSize: 27,
-    fontWeight: '800',
-    fontStyle: 'normal',
     lineHeight: 40,
     letterSpacing: 0,
     textAlign: 'left',
-    color: '#4d5153'
+    color: '#4d5153',
+    fontFamily: 'OpenSans-Bold'
   },
 
   formScrollView: {
@@ -84,8 +83,14 @@ export default EStyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#909090'
   },
-  labelEndDate: { fontSize: 12, marginTop: 2 },
-  form_error_text: { fontSize: 12, color: 'red', marginTop: 4 },
+  labelEndDate: { fontSize: 12, marginTop: 2, fontFamily: 'OpenSans-Regular' },
+  EndDate: { fontFamily: 'OpenSans-Regular' },
+  form_error_text: {
+    fontSize: 12,
+    color: 'red',
+    marginTop: 4,
+    fontFamily: 'OpenSans-Regular'
+  },
   view_container: { backgroundColor: 'white', flex: 1 },
   picker_container: {
     height: 50,

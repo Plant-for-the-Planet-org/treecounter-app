@@ -35,6 +35,7 @@ export const FormikForm = props => {
       });
     //updateRoute('app_competitions', props.navigation);
   };
+  let RBSheetRef = null;
   return (
     <Formik
       initialValues={props.initialValues}
@@ -63,6 +64,9 @@ export const FormikForm = props => {
                   titleFontSize={12}
                   returnKeyType="next"
                   lineWidth={1}
+                  labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                   blurOnSubmit={false}
                   error={props.touched.name && props.errors.name}
                   onChangeText={props.handleChange('name')}
@@ -87,6 +91,9 @@ export const FormikForm = props => {
                     titleFontSize={12}
                     returnKeyType="next"
                     lineWidth={1}
+                    labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                    titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                    affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     blurOnSubmit={false}
                     keyboardType="numeric"
                     error={props.touched.goal && props.errors.goal}
@@ -112,6 +119,9 @@ export const FormikForm = props => {
                   lineWidth={1}
                   blurOnSubmit={false}
                   multiline
+                  labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                   error={props.touched.description && props.errors.description}
                   onChangeText={props.handleChange('description')}
                   onBlur={props.handleBlur('description')}
@@ -178,8 +188,7 @@ export const FormikForm = props => {
             >
               <View style={buttonStyles.baContainer}>
                 <Text style={buttonStyles.baMessage}>
-                  Are you sure you want to delete this Competition ? There's no
-                  undo button.
+                  {i18n.t('label.confirm_delete_message')}
                 </Text>
 
                 <View style={buttonStyles.baButtonContainer}>
@@ -189,14 +198,18 @@ export const FormikForm = props => {
                       RBSheetRef.close();
                     }}
                   >
-                    <Text style={buttonStyles.baLaterText}>Cancel</Text>
+                    <Text style={buttonStyles.baLaterText}>
+                      {i18n.t('label.cancel')}
+                    </Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity
                     style={buttonStyles.baContinueButton}
                     onPress={handleDelete}
                   >
-                    <Text style={buttonStyles.baContinueText}>Delete</Text>
+                    <Text style={buttonStyles.baContinueText}>
+                      {i18n.t('label.delete')}
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -223,7 +236,7 @@ export function AccessPicker(props) {
       value: 'invitation'
     }
   ];
-  onChange = value => {
+  const onChange = value => {
     props.setFieldValue('access', value);
   };
   return (
@@ -234,6 +247,8 @@ export function AccessPicker(props) {
         data={data}
         onChangeText={onChange}
         lineWidth={1}
+        itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
       />
     </View>
   );
@@ -252,7 +267,7 @@ export function AddImage(props) {
 
   return (
     <View>
-      <Text style={styles.addImageTitle}>Add Image</Text>
+      <Text style={styles.addImageTitle}>{i18n.t('label.add_image')}</Text>
       <View style={styles.showImage}>
         {image ? (
           image.includes('base64') ? (

@@ -21,6 +21,7 @@ const validationSchema = generateFormikSchemaFromFormSchema(
 
 export const FormikForm = props => {
   const buttonType = props.buttonType;
+
   return (
     <Formik
       initialValues={props.initialValues}
@@ -40,7 +41,9 @@ export const FormikForm = props => {
               resetScrollToCoords={{ x: 0, y: 0 }}
               scrollEnabled
             >
-              <Text style={styles.add_competition_title}>Add Competition</Text>
+              <Text style={styles.add_competition_title}>
+                {i18n.t('label.add_competition')}
+              </Text>
               <View>
                 <TextField
                   label={i18n.t('label.competition_name')}
@@ -49,6 +52,9 @@ export const FormikForm = props => {
                   titleFontSize={12}
                   returnKeyType="next"
                   lineWidth={1}
+                  labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                   blurOnSubmit={false}
                   error={props.touched.name && props.errors.name}
                   onChangeText={props.handleChange('name')}
@@ -74,6 +80,9 @@ export const FormikForm = props => {
                     returnKeyType="next"
                     lineWidth={1}
                     blurOnSubmit={false}
+                    labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                    titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                    affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     keyboardType="numeric"
                     error={props.touched.goal && props.errors.goal}
                     onChangeText={props.handleChange('goal')}
@@ -97,6 +106,9 @@ export const FormikForm = props => {
                   returnKeyType="next"
                   lineWidth={1}
                   blurOnSubmit={false}
+                  labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                   multiline
                   error={props.touched.description && props.errors.description}
                   onChangeText={props.handleChange('description')}
@@ -158,7 +170,7 @@ export function AccessPicker(props) {
     }
   ];
 
-  onChange = value => {
+  const onChange = value => {
     props.setFieldValue('access', value);
   };
 
@@ -170,6 +182,8 @@ export function AccessPicker(props) {
         data={data}
         onChangeText={onChange}
         lineWidth={1}
+        itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
       />
     </View>
   );
@@ -199,7 +213,7 @@ export function AddImage(props) {
   };
   return (
     <View>
-      <Text style={styles.addImageTitle}>Add Image</Text>
+      <Text style={styles.addImageTitle}>{i18n.t('label.add_image')}</Text>
       <View style={styles.showImage}>{image ? renderAsset(image) : null}</View>
       <View style={styles.addImageButtonContainer}>
         <TouchableOpacity
@@ -255,7 +269,9 @@ export function CompetitionDatePicker(props) {
           <Text style={styles.labelEndDate}>
             {i18n.t('label.competition_end_date')}
           </Text>
-          <Text>{formatDate(formatDateToMySQL(props.endDate))}</Text>
+          <Text style={styles.EndDate}>
+            {formatDate(formatDateToMySQL(props.endDate))}
+          </Text>
         </View>
         <View style={styles.datePickerUnderline} />
       </TouchableOpacity>

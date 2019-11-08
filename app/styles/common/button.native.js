@@ -75,12 +75,11 @@ export default EStyleSheet.create({
   },
   actionButtonText: {
     fontSize: 16,
-    fontWeight: '600',
-    fontStyle: 'normal',
     lineHeight: 22,
     letterSpacing: 0.21,
     textAlign: 'center',
-    color: '#ffffff'
+    color: '#ffffff',
+    fontFamily: 'OpenSans-Bold'
   },
   actionButtonSmallTouchable: {
     backgroundColor: '#89b53a',
@@ -130,8 +129,7 @@ export default EStyleSheet.create({
   },
   dualActionButtonText1: {
     fontSize: 16,
-    fontWeight: '600',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-Bold',
     lineHeight: 22,
     letterSpacing: 0.21,
     textAlign: 'center',
@@ -145,8 +143,7 @@ export default EStyleSheet.create({
   },
   dualActionButtonText2: {
     fontSize: 16,
-    fontWeight: '600',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-Bold',
     lineHeight: 22,
     letterSpacing: 0.21,
     textAlign: 'center',
@@ -165,8 +162,7 @@ export default EStyleSheet.create({
   },
   baMessage: {
     fontSize: 20,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-Regular',
     lineHeight: 30,
     letterSpacing: 0.28,
     textAlign: 'left',
@@ -174,9 +170,8 @@ export default EStyleSheet.create({
   },
   baContinueText: {
     textAlign: 'center',
-    fontSize: 20,
-    fontWeight: '600',
-    fontStyle: 'normal',
+    fontSize: 16,
+    fontFamily: 'OpenSans-Bold',
     lineHeight: 27,
     letterSpacing: 0.26,
     color: 'white'
@@ -184,15 +179,16 @@ export default EStyleSheet.create({
   baContinueButton: {
     backgroundColor: '#e74c3c',
     width: 150,
-    paddingVertical: 14,
+    paddingVertical: 12,
     marginTop: 36,
-    borderRadius: 40
+    borderRadius: 40,
+    height: 52,
+    justifyContent: 'center'
   },
   baLaterText: {
     textAlign: 'center',
-    fontSize: 20,
-    fontWeight: '600',
-    fontStyle: 'normal',
+    fontSize: 16,
+    fontFamily: 'OpenSans-Bold',
     lineHeight: 27,
     letterSpacing: 0.26,
     color: '#89b53a'
@@ -203,8 +199,10 @@ export default EStyleSheet.create({
     borderColor: '#89b53a',
     borderRadius: 40,
     width: 150,
-    paddingVertical: 14,
+    paddingVertical: 12,
     marginTop: 36,
-    marginRight: 12
+    marginRight: 12,
+    height: 52,
+    justifyContent: 'center'
   }
 });

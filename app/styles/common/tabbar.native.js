@@ -16,6 +16,7 @@ export default EStyleSheet.create({
   },
   textStyle: {
     color: '#aba2a2',
-    fontSize: 12
+    fontSize: 12,
+    fontFamily: 'OpenSans-Regular'
   }
 });

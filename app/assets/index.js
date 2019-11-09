@@ -145,6 +145,9 @@ import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
 import cameraSolid from './images/icons/camera-solid.png';
 import imageGallery from './images/icons/images-gallery.png';
+import nextArrow from './images/icons/nextArrow.png';
+import nextArrowWhite from './images/icons/nextArrowWhite.png';
+import closeBlack from './images/icons/closeblack.png';
 export {
   germany,
   worldImg,
@@ -292,5 +295,8 @@ export {
   appleStoreBadge_en,
   appleStoreBadge_de,
   cameraSolid,
-  imageGallery
+  imageGallery,
+  nextArrow,
+  nextArrowWhite,
+  closeBlack
 };

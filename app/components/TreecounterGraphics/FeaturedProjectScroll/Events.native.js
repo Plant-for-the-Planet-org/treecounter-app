@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
-import styles from './../../../styles/trillion.native';
+import styles from '../../../styles/trillion.native';
 import i18n from '../../../locales/i18n';
-import { greencalendar } from './../../../assets/';
-import { smalltree } from './../../../assets/';
+import { greencalendar } from '../../../assets';
+import { smalltree } from '../../../assets';
 import { formatDate } from '../../../utils/utils';
-
 export default class FeaturedProject extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +28,9 @@ export default class FeaturedProject extends Component {
               flexDirection: 'column'
             }}
           >
-            <Text style={{ fontWeight: 'bold', flex: 1, flexWrap: 'wrap' }}>
+            <Text
+              style={{ flex: 1, flexWrap: 'wrap', fontFamily: 'OpenSans-Bold' }}
+            >
               {this.props.orgname}
             </Text>
             <View style={styles.featuredProjectCardIconContainer}>

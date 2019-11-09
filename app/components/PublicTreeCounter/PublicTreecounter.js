@@ -271,7 +271,9 @@ class PublicTreeCounter extends React.Component {
             null}
           </div>
           <div className="app-container__sidenav--heading m-t-2">
-            <div className="heading m-t-2">All Tree Contributions</div>
+            <div className="heading m-t-2">
+              {i18n.t('label.all_tree_contributions')}
+            </div>
             <div>
               <UserContributions
                 userProfileId={treecounter.userProfile.id}

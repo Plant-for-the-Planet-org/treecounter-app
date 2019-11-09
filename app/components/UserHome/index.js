@@ -152,15 +152,15 @@ export default class UserHome extends Component {
                 <RecurringCard cardData={cardData} key={cardData.id} />
               ))}
             </div> */}
-            <div className="heading">All Contributions</div>
+            <div className="heading">
+              {i18n.t('label.all_tree_contributions')}
+            </div>
             <div>
               <UserContributionsContainer />
             </div>
-            <div className="heading">Contributors</div>
+            <div className="heading">{i18n.t('label.contributors')}</div>
             <DescriptionHeading align={'left-align'}>
-              This tree counter is supported by following members. Tress planted
-              by contributors are aggregate to this total Tree Count of this
-              user.
+              {i18n.t('label.contributors_description')}
             </DescriptionHeading>
             <div>
               <ContributorsList
@@ -168,16 +168,6 @@ export default class UserHome extends Component {
                 supportTreeCounterAction={this.props.supportTreeCounterAction}
               />
             </div>
-
-            {/* <div className="heading">Tree Planting Projects</div>
-            <DescriptionHeading align={'left-align'}>
-              This tree counter is supported by following members. Tress planted
-              by contributors are aggregate to this total Tree Count of this
-              user.
-            </DescriptionHeading>
-            <div>
-              <ProjectLists contributions={this.props.userContributions} />
-            </div> */}
           </div>
         </div>
       </div>

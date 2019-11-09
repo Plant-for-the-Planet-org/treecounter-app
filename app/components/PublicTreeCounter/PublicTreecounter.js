@@ -13,7 +13,8 @@ import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsT
 import { getDocumentTitle } from '../../helpers/utils';
 import { delimitNumbers } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
-
+import ProjectLists from './ProjectLists';
+import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import { isMyself, isUserFollower, amISupporting } from './utils';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 
@@ -181,8 +182,8 @@ class PublicTreeCounter extends React.Component {
             )} */}
         </div>
 
-        <div className="home row m-t-2">
-          <div className="column left">
+        <div className="home  m-t-2">
+          <div className="">
             <div>
               <div className="treecounter_container">
                 <div className="canvasContainer flex-column">
@@ -266,17 +267,33 @@ class PublicTreeCounter extends React.Component {
             ) : // </CardLayout>
             null}
           </div>
-          <div className="column right app-container__sidenav--heading m-t-2">
+          <div className="app-container__sidenav--heading m-t-2">
             <div className="heading m-t-2">All Tree Contributions</div>
             <div>
               <UserContributions
                 userProfileId={treecounter.userProfile.id}
-                userContributions={treecounter.contributions.map(c => {
-                  c.category = 'contributions';
-                  return c;
-                })}
+                userContributions={[
+                  ...treecounter.contributions.map(c => {
+                    c.category = 'contributions';
+                    return c;
+                  }),
+                  ...treecounter.gifts.map(c => {
+                    return c;
+                  })
+                ]}
                 isPublic
               />
+            </div>
+          </div>
+          <div className="app-container__sidenav--heading m-t-2">
+            <div className="heading">Tree Planting Projects</div>
+            <DescriptionHeading align={'left-align'}>
+              This tree counter is supported by following members. Tress planted
+              by contributors are aggregate to this total Tree Count of this
+              user.
+            </DescriptionHeading>
+            <div>
+              <ProjectLists projects={treecounter} isPublic />
             </div>
           </div>
         </div>

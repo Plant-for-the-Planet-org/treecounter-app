@@ -12,12 +12,12 @@ import PropTypes from 'prop-types';
 
 export default class ProjectLists extends React.Component {
   render() {
-    let { contributions } = this.props;
-    console.log(contributions);
-    return <div>Contributors </div>;
+    let { projects } = this.props;
+    console.log(projects);
+    return <div>Projects </div>;
   }
 }
 
 ProjectLists.propTypes = {
-  contributions: PropTypes.any
+  projects: PropTypes.any
 };

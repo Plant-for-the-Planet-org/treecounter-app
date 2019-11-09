@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import UserContributionsContainer from '../../containers/UserContributions';
 import ContributorsList from './ContributorsList';
-import ProjectLists from './ProjectLists';
+// import ProjectLists from './ProjectLists';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import SvgContainer from '../Common/SvgContainer';
 import TextHeading from '../Common/Heading/TextHeading';

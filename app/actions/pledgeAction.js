@@ -89,10 +89,18 @@ export function postPledge(data, params, loggedIn) {
 }
 
 export function updatePledge(data, params, loggedIn) {
-  return () => {
+  return dispatch => {
     loggedIn
       ? putAuthenticatedRequest('eventPledgeAuthed_put', data, params)
           .then(res => {
+            console.log(res.data);
+            const { eventPledge, pledgeEvent } = res.data.merge;
+            dispatch(
+              mergeEntities(normalize(pledgeEvent, [pledgeEventSchema]))
+            );
+            dispatch(
+              mergeEntities(normalize(eventPledge[0], eventPledgeSchema))
+            );
             return res.data;
           })
           .catch(error => console.log(error))

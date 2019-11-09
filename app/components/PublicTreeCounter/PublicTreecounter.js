@@ -185,7 +185,10 @@ class PublicTreeCounter extends React.Component {
         <div className="home  m-t-2">
           <div className="">
             <div>
-              <div className="treecounter_container">
+              <div
+                className="treecounter_container"
+                style={{ margin: '0 auto' }}
+              >
                 <div className="canvasContainer flex-column">
                   <SvgContainer {...this.state.svgData} />
                   <TreecounterGraphicsText
@@ -197,7 +200,7 @@ class PublicTreeCounter extends React.Component {
               </div>
             </div>
 
-            <div className="treecounter_container">
+            <div className="treecounter_container" style={{ margin: '0 auto' }}>
               {'tpo' === userProfile.type &&
               1 <= tpoProps.plantProjects.length ? (
                 <TpoDonationPlantProjectSelector
@@ -283,17 +286,6 @@ class PublicTreeCounter extends React.Component {
                 ]}
                 isPublic
               />
-            </div>
-          </div>
-          <div className="app-container__sidenav--heading m-t-2">
-            <div className="heading">Tree Planting Projects</div>
-            <DescriptionHeading align={'left-align'}>
-              This tree counter is supported by following members. Tress planted
-              by contributors are aggregate to this total Tree Count of this
-              user.
-            </DescriptionHeading>
-            <div>
-              <ProjectLists projects={treecounter} isPublic />
             </div>
           </div>
         </div>

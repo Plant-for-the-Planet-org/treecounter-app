@@ -5,12 +5,25 @@ import { FlatList, View } from 'react-native';
 
 import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
 import styles from '../../../styles/selectplantproject/list.native';
-
+import { updateStaticRoute } from '../../../helpers/routerHelper';
 import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
-
-export default class ListViewProjects extends PureComponent {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
+class ListViewProjects extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
   _keyExtractor = item => item.id.toString();
-
+  onSelectClickedFeaturedProjects(id) {
+    this.props.selectPlantProjectAction(id);
+    const { navigation } = this.props;
+    updateStaticRoute(
+      'app_donate_detail',
+      navigation,
+      navigation.getParam('userForm')
+    );
+  }
   _renderItem = ({ item }) => (
     <PlantProjectSnippet
       cardStyle={styles.cardStyle}
@@ -20,7 +33,7 @@ export default class ListViewProjects extends PureComponent {
       onSelectClickedFeaturedProjects={this.props.selectProject}
       showMoreButton={false}
       tpoName={item.tpo_name}
-      selectProject={this.props.selectProject}
+      selectProject={this.onSelectClickedFeaturedProjects}
     />
   );
 
@@ -39,7 +52,15 @@ export default class ListViewProjects extends PureComponent {
     );
   }
 }
-
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      selectPlantProjectAction
+    },
+    dispatch
+  );
+};
+export default connect(null, mapDispatchToProps)(ListViewProjects);
 ListViewProjects.propTypes = {
   projects: PropTypes.array.isRequired,
   selectProject: PropTypes.func.isRequired,

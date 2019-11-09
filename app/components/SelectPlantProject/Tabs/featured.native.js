@@ -10,7 +10,22 @@ import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
 
 export default class FeaturedProjects extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.onSelectClickedFeaturedProjects = this.onSelectClickedFeaturedProjects.bind(
+      this
+    );
+  }
   _keyExtractor = item => item.id.toString();
+  onSelectClickedFeaturedProjects(id) {
+    this.props.selectProject(id);
+    const { navigation } = this.props;
+    updateStaticRoute(
+      'app_donate_detail',
+      navigation,
+      navigation.getParam('userForm')
+    );
+  }
 
   _renderItem = ({ item }) => (
     <PlantProjectSnippet
@@ -21,19 +36,9 @@ export default class FeaturedProjects extends PureComponent {
       onSelectClickedFeaturedProjects={this.onSelectClickedFeaturedProjects}
       showMoreButton={false}
       tpoName={item.tpo_name}
-      selectProject={this.props.onSelectClickedFeaturedProjects}
+      selectProject={this.props.onSelectProjects}
     />
   );
-
-  onSelectClickedFeaturedProjects = id => {
-    this.props.selectProject(id);
-    const { navigation } = this.props;
-    updateStaticRoute(
-      'app_donate_detail',
-      navigation,
-      navigation.getParam('userForm')
-    );
-  };
 
   render() {
     let featuredProjects = orderBy(

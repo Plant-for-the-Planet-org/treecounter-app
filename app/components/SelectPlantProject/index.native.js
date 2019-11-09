@@ -8,7 +8,7 @@ import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
-
+import { updateStaticRoute } from '../../helpers/routerHelper';
 const Layout = {
   window: {
     width: Dimensions.get('window').width
@@ -24,12 +24,23 @@ export default class SelectPlantTabView extends PureComponent {
       ],
       index: 0
     };
+    this.onSelectProjects = this.onSelectProjects.bind(this);
   }
 
   indexChange(index) {
     this.setState({
       index: index
     });
+  }
+  onSelectProjects(id) {
+    console.log('porps---', this.props);
+    this.props.selectProject(id);
+    const { navigation } = this.props;
+    updateStaticRoute(
+      'app_donate_detail',
+      navigation,
+      navigation.getParam('userForm')
+    );
   }
   handleExpandedClicked = optionNumber => {
     this.setState({
@@ -75,9 +86,16 @@ export default class SelectPlantTabView extends PureComponent {
     // Only render a tab if it is focused
     switch (route.key) {
       case 'featured':
-        return <FeaturedProjects {...props} />;
+        return (
+          <FeaturedProjects
+            onSelectProjects={this.onSelectProjects}
+            {...props}
+          />
+        );
       case 'list':
-        return <ListProjects {...props} />;
+        return (
+          <ListProjects onSelectProjects={this.onSelectProjects} {...props} />
+        );
       default:
         return null;
     }

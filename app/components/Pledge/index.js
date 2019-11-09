@@ -60,13 +60,12 @@ export default class Pledge extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     if (this.props.pledges && this.props.pledges.image && this.state.loading) {
       this.setState({
         loading: false
       });
     }
-    // if (prevProps.pledges !== this.props.pledges) {}
   }
 
   // Functions for Make a Pledge Form Modal

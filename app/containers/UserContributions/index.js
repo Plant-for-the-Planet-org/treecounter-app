@@ -19,7 +19,11 @@ class UserContributionsContainer extends React.Component {
     const userContributions = _.orderBy(
       this.props.userContributions,
       function(contribution) {
-        return new Date(contribution.registrationDate);
+        return new Date(
+          contribution.plantDate ||
+            contribution.redemptionDate ||
+            contribution.registrationDate
+        );
       },
       'desc'
     );

@@ -19,7 +19,7 @@ import styles, {
 } from '../../styles/myTrees/user_contribution_card';
 import { formatDate, delimitNumbers } from '../../utils/utils';
 import CardLayout from '../Common/Card';
-
+import { getISOToCountryName } from '../../helpers/utils';
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
 
@@ -128,7 +128,7 @@ class ContributionCard extends React.Component {
   }
 
   plantProjectLine(plantProjectName, country) {
-    return (plantProjectName ? plantProjectName + ', ' : '') + country;
+    return country && getISOToCountryName(country).country;
   }
 
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
@@ -261,7 +261,7 @@ class ContributionCard extends React.Component {
       contributionType,
       registrationDate,
       redemptionCode,
-      redemptionDate,
+      redemptionDate
       // contributionImages,
       // ndviUid
     } = contribution;

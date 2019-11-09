@@ -82,7 +82,7 @@ class PledgeContainer extends Component {
           this.props.pledges.allEventPledges &&
           this.props.pledges.allEventPledges.length > 0
           ? typeof this.props.entities.eventPledge !== 'undefined'
-            ? ((userPledges = Object.values(this.props.entities.eventPledge)), // convert object to array
+            ? ((userPledges = Object.values(this.props.entities.eventPledge)),
               userPledges.filter(pledge => {
                 return this.props.pledges.allEventPledges.some(f => {
                   return f.token === pledge.token && f.email === pledge.email;

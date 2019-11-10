@@ -27,8 +27,8 @@ export default EStyleSheet.create({
     margin: 20
   },
   imageStyle: {
-    width: 100,
-    height: 50
+    width: 124,
+    height: 124
   },
 
   inputContainer: {

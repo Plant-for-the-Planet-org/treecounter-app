@@ -177,11 +177,14 @@ export default class DonateTrees extends Component {
   }
 
   determineDefaultCurrency() {
-    const { currentUserProfile /* , selectedProject */ } = this.props;
+    const {
+      currentUserProfile /* , selectedProject */,
+      globalCurrency
+    } = this.props;
     const userCurrency =
       null === currentUserProfile ? null : currentUserProfile.currency;
 
-    return null === userCurrency ? getPreferredCurrency() : userCurrency;
+    return null === userCurrency ? globalCurrency.currency : userCurrency;
   }
 
   indexChange(index) {

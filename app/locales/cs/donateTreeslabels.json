@@ -1,1 +1,26 @@
-{ }
+{
+  "certified": "Certifikováno",
+  "nonCertified": "Necertifikované",
+  "featuredProjects": "Vybrané projekty",
+  "project": "Projekt",
+  "organisation": "Organizace",
+  "company": "Společnost",
+  "Cost": "Cena za strom",
+  "donateTrees": "Darovat stromy",
+  "individual": "Jednotlivý strom",
+  "survival_rate": "Míra přežití",
+  "add_featured_image": "Přidat doporučený obrázek",
+  "add_image": "Přidat obrázek",
+  "plantedTrees": "Zasazené stromy",
+  "registerFurther": "Registrovat více stromů",
+  "individual_name": "Individuální",
+  "next": "Další",
+  "delete_project": "Smazat projekt",
+  "thankyou_planting": "Děkujeme vám za vysázení {{count}} stromů s námi! Odeslali jsme vám e-mail s potvrzením. Pokud byl váš dar pro daňově uznatelný projekt, obdržíte zavčasu e-mail s potvrzenkou.",
+  "donate_trees_description": "Saďte stromy pro budoucnost dětí! Prozkoumejte zalesňovací projekty ve světě a pomožte zasadit více stromů jen s několika kliknutími. Společně jsme na cestě za bilionem stromů.",
+  "donation_contribution": "Dar",
+  "donation_detail": "Podrobnosti o darování",
+  "donor_detail": "Podrobnosti o dárci",
+  "try_again": "Zkuste znovu",
+  "return_home": "Vrátit se domů"
+}

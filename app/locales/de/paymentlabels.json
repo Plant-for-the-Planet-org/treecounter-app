@@ -15,6 +15,7 @@
   "pay_via_sepa": "Bezahlen mit SEPA",
   "contact_firstname": "Vorname",
   "contact_lastname": "Nachname",
+  "donate_to": "Spenden an {{name}}",
   "payment_failed": "Zahlung fehlgeschlagen",
   "go_back_to_app": "Zurück zur Plant-for-the-Planet App",
   "please_confirm": "Bitte bestätigen",

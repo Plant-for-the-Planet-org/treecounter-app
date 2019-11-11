@@ -40,7 +40,7 @@ module.exports = webpackMerge(commonConfig, {
   },
   devtool: 'source-map',
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,

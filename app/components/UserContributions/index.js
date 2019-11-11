@@ -19,12 +19,8 @@ const UserContributions = ({
 
           .sort(
             (a, b) =>
-              new Date(
-                b.plantDate || b.redemptionDate || contribution.registrationDate
-              ) -
-              new Date(
-                a.plantDate || a.redemptionDate || contribution.registrationDate
-              )
+              new Date(b.plantDate || b.redemptionDate || a.registrationDate) -
+              new Date(a.plantDate || a.redemptionDate || a.registrationDate)
           )
 
           .map(contribution => (

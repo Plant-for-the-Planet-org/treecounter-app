@@ -32,7 +32,7 @@
   "donated_on": "Donated on {{date}}",
   "planted_by": "Planted by {{tpo}}",
   "planted_on": "Planted on {{date}}",
-  "renews_on": "{{date}}",
+  "date_on": "{{date}}",
   "added_on": "Added on {{date}}",
   "dedicated_to": "Dedicated to",
   "dedicated_by": "Dedicated by",

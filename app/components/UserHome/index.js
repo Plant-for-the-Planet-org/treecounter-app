@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import UserContributionsContainer from '../../containers/UserContributions';
 import ContributorsList from './ContributorsList';
-// import ProjectLists from './ProjectLists';
 import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
 import SvgContainer from '../Common/SvgContainer';
 import TextHeading from '../Common/Heading/TextHeading';
@@ -11,7 +10,6 @@ import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import { getDocumentTitle } from '../../helpers/utils';
 import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
-// import RecurringCard from '../UserContributions/RecurringCard';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -132,26 +130,7 @@ export default class UserHome extends Component {
             })}
           </div>
           <ArcGISContributionsMap userId={userProfile.id} />
-          {/* <div className="m-t-2">
-            <div className="contribution-buttons">
-              <InlineLink
-                caption={i18n.t('label.registerFurther')}
-                uri={'app_registerTrees'}
-              />
-              <InlineLink
-                caption={i18n.t('label.donate_trees')}
-                uri={'app_donateTrees'}
-              />
-            </div>
-          </div> */}
-
           <div className="app-container__sidenav--heading">
-            {/* <div className="heading">Recurring Tree Donations</div> */}
-            {/* <div className="m-b-20" style={{ display: 'flex' }}>
-              {[{ id: 1 }, { id: 2 }].map(cardData => (
-                <RecurringCard cardData={cardData} key={cardData.id} />
-              ))}
-            </div> */}
             <div className="heading">
               {i18n.t('label.all_tree_contributions')}
             </div>

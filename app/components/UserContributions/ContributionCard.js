@@ -87,7 +87,7 @@ export default class ContributionCardHome extends React.Component {
 
   // eslint-disable-next-line no-unused-vars
   plantActionLine(contribution) {
-    return i18n.t('label.renews_on', {
+    return i18n.t('label.date_on', {
       date: formatDate(
         contribution.plantDate ||
           contribution.redemptionDate ||

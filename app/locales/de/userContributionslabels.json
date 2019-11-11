@@ -21,6 +21,7 @@
   "browse": "Entdecken",
   "upload_profile_picture": "Neues Bild hochladen",
   "delete": "Löschen",
+  "date_on": "{{date}}",
   "confirm": "Bestätigen",
   "delete_contribution": "Beitrag löschen",
   "my_trees_delete_confirm": "Möchtest du diese Bäume wirklich löschen?",

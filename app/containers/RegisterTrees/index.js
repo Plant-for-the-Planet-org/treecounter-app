@@ -27,12 +27,18 @@ class RegisterTreesContainer extends PureComponent {
   }
 
   onSubmit = (mode, registerTreeForm, plantProject) => {
-    registerTreeForm =
+    /*registerTreeForm =
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
     // console.log(registerTreeForm.validate());
     let value = registerTreeForm.getValue();
     value = Object.assign({}, value);
+    value = mergeContributionImages(value);*/
+
+    let result = this.refs.registerTrees.refs.registerTreeForm.validate();
+
+    let value = Object.assign({}, registerTreeForm);
     value = mergeContributionImages(value);
+
     if (value) {
       if (plantProject) {
         value.plantProject = plantProject;
@@ -46,7 +52,7 @@ class RegisterTreesContainer extends PureComponent {
         )
         .then(val => val)
         .catch(err => {
-          if (mode === 'single-tree') {
+          /* if (mode === 'single-tree') {
             let newSchemaOptions = handleServerResponseError(
               err,
               this.state.schemaOptionsSingleTree
@@ -85,7 +91,7 @@ class RegisterTreesContainer extends PureComponent {
                 }
               }
             );
-          }
+          }   */
         });
     }
   };

@@ -289,6 +289,9 @@ export function CompetitionDatePicker(props) {
         }}
         onCancel={() => setShowDatePicker(false)}
         minimumDate={new Date()}
+        titleIOS={i18n.t('label.datePickerTitle')}
+        cancelTextIOS={i18n.t('label.datePickerCancel')}
+        confirmTextIOS={i18n.t('label.datePickerConfirm')}
       />
     </View>
   );

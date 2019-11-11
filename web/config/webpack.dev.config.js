@@ -31,6 +31,7 @@ module.exports = webpackMerge(commonConfig, {
     //   path.join(__dirname, '../widgets/NDVI/widget.js')
     // ]
   },
+
   output: {
     path: path.join(__dirname, '../dist'),
     filename: '[name].js',

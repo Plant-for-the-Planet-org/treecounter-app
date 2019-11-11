@@ -29,7 +29,6 @@ import baselineDelete from './images/baseline-delete.png';
 import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/darkTree.png';
-import SideMenuImage from './images/side_menu.png';
 import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
 import MapPinRed from './images/map_pin_red.png';
@@ -147,7 +146,10 @@ import googlePlayBadge_en from './images/en/google-play-badge.png';
 import googlePlayBadge_de from './images/de/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
-
+import nextArrow from './images/icons/nextArrow.png';
+import nextArrowWhite from './images/icons/nextArrowWhite.png';
+import closeBlack from './images/icons/closeblack.png';
+import planetLogo from './images/Planet-Logo.png';
 export {
   germany,
   worldImg,
@@ -180,7 +182,6 @@ export {
   GreenEmail,
   baselineEdit,
   baselineDelete,
-  SideMenuImage,
   FooterLogos,
   SignupOrganization,
   SignupJustMe,
@@ -297,5 +298,9 @@ export {
   googlePlayBadge_en,
   googlePlayBadge_de,
   appleStoreBadge_en,
-  appleStoreBadge_de
+  appleStoreBadge_de,
+  nextArrow,
+  nextArrowWhite,
+  closeBlack,
+  planetLogo
 };

@@ -61,7 +61,7 @@
     "react-native-device-info": "^0.26.5",
     "react-native-document-picker": "^3.2.4",
     "react-native-extended-stylesheet": "^0.8.1",
-    "react-native-fs": "^2.16.1",
+    "react-native-fs": "2.14.1",
     "react-native-htmlview": "^0.12.1",
     "react-native-i18n": "^2.0.15",
     "react-native-image-carousel": "^0.4.4",

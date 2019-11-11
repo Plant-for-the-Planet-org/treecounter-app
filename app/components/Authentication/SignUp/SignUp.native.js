@@ -45,7 +45,7 @@ export default class SignUp extends Component {
     // eslint-disable-next-line no-underscore-dangle
     if (this._captchaRef) {
       // eslint-disable-next-line no-underscore-dangle
-      this._captchaRef.refreshToken();      
+      this._captchaRef.refreshToken();
     }
   };
 

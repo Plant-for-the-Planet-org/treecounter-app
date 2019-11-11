@@ -60,7 +60,7 @@ class Trillion extends Component {
         </TextHeading>
         {this.props.pledgeEvents &&
         this.props.pledgeEvents.pledgeEvents.length > 0 ? (
-          <div>
+          <div style={{ marginTop: 48 }}>
             <TextBlock>{i18n.t('label.trillionlabel')}</TextBlock>
             <div className="events_row">
               {this.props.pledgeEvents.pledgeEvents
@@ -76,7 +76,10 @@ class Trillion extends Component {
                     }}
                   >
                     <div className="imgContainer">
-                      <img src={getImageUrl('event', 'thumb', element.image)} />
+                      <img
+                        style={{ borderRadius: '25px' }}
+                        src={getImageUrl('event', 'thumb', element.image)}
+                      />
                     </div>
 
                     <TextBlock>{element.name}</TextBlock>

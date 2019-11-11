@@ -19,19 +19,17 @@ const LoadingNDVI = props => {
               : 'Currently Fetching NDVI. Please check in a minute or two.'}
           </h5>
         </div>
-      </div>
-      <div className="row">
-        <div className="flex-1 refresh-box select-project_button__container">
-          <PrimaryButton onClick={onClick}>
-            {props.refreshButtonSpell ? props.refreshButtonSpell : 'Refresh'}
-          </PrimaryButton>
-        </div>
-        <div className="text-center help-btn ">
+        <div className="text-center btn-container">
           <div className="tooltip">
             <a data-tip data-for="loading-ndvi-icon">
               <img className="ndvi-img" src={questionmark_orange} />
             </a>
-            <ReactTooltip id="loading-ndvi-icon" effect="solid" type="dark">
+            <ReactTooltip
+              id="loading-ndvi-icon"
+              place="left"
+              effect="solid"
+              type="dark"
+            >
               <span className="tooltip-text">
                 {props.toolTipHelpButtonSpell
                   ? props.toolTipHelpButtonSpell
@@ -39,6 +37,13 @@ const LoadingNDVI = props => {
               </span>
             </ReactTooltip>
           </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="flex-1 refresh-box select-project_button__container">
+          <PrimaryButton onClick={onClick}>
+            {props.refreshButtonSpell ? props.refreshButtonSpell : 'Refresh'}
+          </PrimaryButton>
         </div>
       </div>
     </div>

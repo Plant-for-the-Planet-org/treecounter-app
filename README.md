@@ -1,5 +1,6 @@
 # Plant-for-the-Planet App
 
+Welcome to this repository which contains the code of the web clients and the native iOS and Android apps of the Trillion Tree Campaign at https://www.trilliontreecampaign.org/ written with React-Native.
 
 ## Directory Structure
 
@@ -15,27 +16,38 @@ Copy `app/config/index.js.dist` to `app/config/index.js`.
 
 Run following commands
 
-```bash
+```
+bash
 npm install
 npm start
 ```
+
+To run the app as prod, useful for testing features like (hashed js/css):
+
+  ```
+  npm run start-prod-server
+  ```
+
 
 ## iOS Setup
 
 * Install xcode greater then 9.0.
 * Run following commands
-  ```bash
+  ```
+  bash
   brew install node
   brew install watchman
   npm install -g react-native-cli
   npm install
   ```
 
+
 ### Running into iOS simulator
 
 Build and run the app in development mode deployed from Metro Bundler in an iOS simulator (starts Metro Bundler automatically if not already running, also starts iOS simulator):
 
-```bash
+```
+bash
 react-native run-ios
 ```
 
@@ -67,7 +79,8 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Hom
 
 Build and run the app in development mode deployed from Metro Bundler (starts Metro Bundler automatically if not already running) on an emulator or device. You need to start an Android emulator or attach a device manually before:
 
-```bash
+```
+bash
 react-native run-android
 ```
 
@@ -103,4 +116,3 @@ V 1.1.`11` A `12` [increment per release]
 ## License
 
 Plant-for-the-Planet App is free software, and is released under the terms of the <abbr title="GNU General Public License">GPL</abbr> version 3 or (at your option) any later version. See <a href="license.txt">license.txt</a>.</p>
-

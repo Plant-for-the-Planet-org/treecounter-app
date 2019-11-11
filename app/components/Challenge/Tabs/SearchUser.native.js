@@ -40,9 +40,11 @@ class SearchUser extends React.Component {
   // TODO: debounce
   _handleChangeQuery = q => {
     this.setState({ searchResultClicked: false });
-    getSuggestions(q).then(suggestions => {
-      this.setState({ q: suggestions });
-    });
+    getSuggestions(q)
+      .then(suggestions => {
+        this.setState({ q: suggestions });
+      })
+      .catch(error => console.log(error));
   };
 
   _onNavigationClick(suggestion) {

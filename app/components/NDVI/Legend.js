@@ -3,63 +3,39 @@ import Circle from '../../components/NDVI/Circle';
 import PropTypes from 'prop-types';
 
 const Legend = props => {
+  const Legends = [
+    { gradientName: 'water', description: props.waterSpell },
+    { gradientName: 'rock-sand-snow', description: props.rockSandSnowSpell },
+    { gradientName: 'grasslands', description: props.grasslandsSpell },
+    {
+      gradientName: 'dense-vegetation',
+      description: props.denseVegetationSpell
+    }
+  ];
   return (
     <div className="legend-component">
       <div className="row">
         <h2 className="title">{props.indicatorsSpell}</h2>
       </div>
       <div className="gradient-container">
-        <div className="row">
+        <div className="row" style={{ flexWrap: 'wrap' }}>
           {/* one description */}
-          <div className="fex-1">
-            <div className="row">
-              <div className="pr-1">
-                <Circle gradientName="water" />
+          {Legends.map((legend, index) => {
+            return (
+              <div
+                className="row"
+                key={'legend-' + index}
+                style={{ marginTop: 5 }}
+              >
+                <div className="pr-1">
+                  <Circle gradientName={legend.gradientName} />
+                </div>
+                <div className="pr-2">
+                  <p className="gradient-description">{legend.description}</p>
+                </div>
               </div>
-              <div className="flex-1 pr-2">
-                <p className="gradient-description">{props.waterSpell}</p>
-              </div>
-            </div>
-          </div>
-          {/* Two description */}
-          <div className="flex-1">
-            <div className="row">
-              <div className="pr-1">
-                <Circle gradientName="rock-sand-snow" />
-              </div>
-              <div className="flex-1 pr-2">
-                <p className="gradient-description">
-                  {props.rockSandSnowSpell}
-                </p>
-              </div>
-            </div>
-          </div>
-          {/*  Three */}
-          <div className="flex-1">
-            <div className="row">
-              <div className="pr-1">
-                <Circle gradientName="grasslands" />
-              </div>
-              <div className="flex-1">
-                <p className="gradient-description">{props.grasslandsSpell}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/*  */}
-        <div className="row pt-1">
-          <div className="flex-1">
-            <div className="row">
-              <div className="pr-1">
-                <Circle gradientName="dense-vegetation" />
-              </div>
-              <div className="flex-1">
-                <p className="gradient-description">
-                  {props.denseVegetationSpell}
-                </p>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>

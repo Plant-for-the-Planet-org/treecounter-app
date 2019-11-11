@@ -9,6 +9,28 @@ import _ from 'lodash';
 import i18n from '../../locales/i18n.js';
 import LoadingNDVI from './LoadingNDVI';
 import CarbonDetails from './CarbonDetails';
+import { getLocale } from '../../actions/getLocale';
+
+const userLang = getLocale(); // en|de
+
+export const firstLetterUppercase = string => {
+  return string && string.replace(/^\w/, c => c.toLocaleUpperCase());
+};
+
+// date-fns does not seem to have a one-letter format for a month name
+// so we are using Intl.DateTimeFormat here to format the month
+export const getMonthsForLocale = (locale, options = { month: 'short' }) => {
+  let format = new Intl.DateTimeFormat(locale, options);
+  let months = [];
+  for (let month = 0; month < 12; month++) {
+    let testDate = new Date(Date.UTC(2000, month, 1, 0, 0, 0));
+    months.push(firstLetterUppercase(format.format(testDate)));
+  }
+  return months;
+};
+
+const shortMonths = getMonthsForLocale(userLang);
+const narrowMonths = getMonthsForLocale(userLang, { month: 'narrow' });
 
 const colorStops = [
   {
@@ -130,20 +152,25 @@ export default class NDVI extends Component {
       <React.Fragment>
         {!_.isUndefined(dataPoints) && dataPoints.length > 0 ? (
           <React.Fragment>
-            <div className="column">
+            <div className="column" style={{ width: '100%' }}>
               <div className={'ndvi-title'}>
                 {i18n.t('label.NDVI_time_series')}
               </div>
               <div className="row">
                 <div className="ndvi-container">
-                  <div className="row month-keyword">
-                    {_.toArray(i18n.t('label.NDVI_container_static_month')).map(
-                      (letter, index) => (
-                        <div key={index} className="letter-box">
-                          <p>{letter}</p>
-                        </div>
-                      )
-                    )}
+                  <div className="row  short-month-keyword">
+                    {shortMonths.map((letter, index) => (
+                      <div key={index} className="letter-box">
+                        <p>{letter}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="row  narrow-month-keyword">
+                    {narrowMonths.map((letter, index) => (
+                      <div key={index} className="letter-box">
+                        <p>{letter}</p>
+                      </div>
+                    ))}
                   </div>
                   <TimeSeries
                     getColorForNDVI={this.getColorForNDVI}

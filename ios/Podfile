@@ -3,6 +3,4 @@
 
 target 'TreecounterApp' do
   inherit! :search_paths
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
 end

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n';
 import { formatNumber } from '../../utils/utils';
-import NumberFormat from '../Common/NumberFormat';
 class TreeCountSelector extends React.Component {
   constructor(props) {
     super(props);
@@ -114,7 +113,7 @@ class TreeCountSelector extends React.Component {
                   onChange={evt =>
                     this.handleFixedTreeCountChange(evt.target.value)
                   }
-                />>
+                />
                 {treeCount} {i18n.t('label.trees')}
               </label>
               <span className="price-conversion__equal">=</span>

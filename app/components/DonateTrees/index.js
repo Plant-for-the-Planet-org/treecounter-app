@@ -14,7 +14,6 @@ import { arrow_left_green, check_green, attention } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import classNames from 'classnames';
-import { getPreferredCurrency } from '../../actions/globalCurrency';
 import {
   individualSchemaOptions,
   receiptIndividualFormSchema,

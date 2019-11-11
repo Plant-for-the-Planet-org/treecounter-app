@@ -2,8 +2,10 @@ const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.common.config.js')();
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = webpackMerge(commonConfig, {
+  mode: 'development',
   entry: {
     bundle: ['babel-polyfill', path.join(__dirname, '../../index.web.js')]
     /* uncomment these widgets if you want to work on them */
@@ -37,12 +39,13 @@ module.exports = webpackMerge(commonConfig, {
   devtool: 'source-map',
   devServer: {
     inline: true,
-    port: 8080,
+    port: 8081,
     historyApiFallback: true,
     disableHostCheck: true,
-    host: '0.0.0.0'
+    host: '192.168.100.208'
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         ENV: JSON.stringify('development')

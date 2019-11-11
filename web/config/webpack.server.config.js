@@ -3,6 +3,7 @@ const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const commonConfig = require('./webpack.common.config.js')(true);
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = webpackMerge(commonConfig, {
   entry: {
@@ -35,7 +36,7 @@ module.exports = webpackMerge(commonConfig, {
   },
   devtool: 'source-map',
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -44,6 +45,7 @@ module.exports = webpackMerge(commonConfig, {
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new WebpackCleanupPlugin(),
     new webpack.LoaderOptionsPlugin({
       options: {

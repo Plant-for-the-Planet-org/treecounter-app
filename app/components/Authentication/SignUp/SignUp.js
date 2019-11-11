@@ -55,7 +55,9 @@ export default class SignUp extends Component {
   };
 
   refreshToken = () => {
-    this.recaptcha.execute();
+    if (this.recaptcha) {
+      this.recaptcha.execute();
+    }
   };
 
   componentWillMount() {

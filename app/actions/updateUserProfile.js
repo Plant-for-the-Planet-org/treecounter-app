@@ -18,6 +18,7 @@ import {
 } from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import i18n from '../locales/i18n.js';
+
 const profileTypeToReq = {
   profile: 'profile_put',
   about_me: 'profileAboutMe_put',
@@ -195,6 +196,27 @@ export function deleteUserProfile(userProfile) {
         .then(res => {
           debug(res.status);
           debug(res);
+          if (res.data && res.data instanceof Object) {
+            dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
+          }
+          resolve(res.data);
+          dispatch(setProgressModelState(false));
+        })
+        .catch(err => {
+          debug(err);
+          reject(err);
+          dispatch(setProgressModelState(false));
+        });
+    });
+  };
+}
+
+export function updateUserEmail(newEmail) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    return new Promise(function(resolve, reject) {
+      putAuthenticatedRequest('profileEmail_put', { ...newEmail })
+        .then(res => {
           if (res.data && res.data instanceof Object) {
             dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
           }

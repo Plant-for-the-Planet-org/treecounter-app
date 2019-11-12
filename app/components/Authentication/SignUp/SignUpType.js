@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
-import TextSpan from '../../Common/Text/TextSpan';
+
+const TextSpan = lazy(() => import('../../Common/Text/TextSpan'));
 
 export default class SignUpType extends Component {
   constructor() {

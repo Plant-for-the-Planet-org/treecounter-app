@@ -50,11 +50,12 @@ import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerM
 import EditCompetitionContainer from '../../containers/EditCompetition';
 import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
 import PledgeEvents from './../PledgeEvents/PledgeEvents.native';
+import UnfulfilledPledgeEvents from './../PledgeEvents/UnfulfilledPledgeEvent';
 import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
 import Reviews from './../Reviews/Reviews';
 import AddReview from './../Reviews/AddReview/AddReview';
 import PDFViewer from '../PDFViewer';
-
+import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -90,7 +91,9 @@ const headerLabels = {
   ['app_gift_projects']: 'label.gift_trees',
   ['pickup_profile_modal']: 'label.dedicate_trees_to',
   ['app_pledge_events']: 'Pledges',
-  ['app_pledge_form']: 'Pledge to plant a tree'
+  ['app_unfulfilled_pledge_events']: 'Pledges',
+  ['app_pledge_form']: 'Pledge to plant a tree',
+  ['app_pledge_update_form']: 'Update your pledge'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -338,6 +341,12 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_view_pdf']: {
         screen: PDFViewer
+      },
+      ['app_pledge_update_form']: {
+        screen: UpdatePledgeEvent
+      },
+      ['app_unfulfilled_pledge_events']: {
+        screen: UnfulfilledPledgeEvents
       }
     },
     {

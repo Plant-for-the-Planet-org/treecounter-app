@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import TextHeading from '../../Common/Heading/TextHeading';
-import CardLayout from '../../Common/Card';
-import TextBlock from '../../Common/Text/TextBlock';
 import { RedEmail } from '../../../assets';
-import SecondaryButton from '../../Common/Button/SecondaryButton';
 import i18n from '../../../locales/i18n.js';
+
+const TextHeading = lazy(() => import('../../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../../Common/Card'));
+const TextBlock = lazy(() => import('../../Common/Text/TextBlock'));
+const SecondaryButton = lazy(() =>
+  import('../../Common/Button/SecondaryButton')
+);
 
 export default class ActivateAccount extends Component {
   constructor(props) {

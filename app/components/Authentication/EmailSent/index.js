@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 
-import TextHeading from '../../Common/Heading/TextHeading';
-import CardLayout from '../../Common/Card';
-import InlineLink from '../../Common/InlineLink';
-import TextBlock from '../../Common/Text/TextBlock';
+const TextHeading = lazy(() => import('../../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../../Common/Card'));
+const InlineLink = lazy(() => import('../../Common/InlineLink'));
+const TextBlock = lazy(() => import('../../Common/Text/TextBlock'));
+
 import { GreenEmail } from '../../../assets';
 import i18n from '../../../locales/i18n.js';
 

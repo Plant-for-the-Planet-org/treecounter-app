@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import { ReCaptcha, loadReCaptcha } from 'recaptcha-v3-react';
 import uuid from 'uuidv4';
 
 import { loginFormSchema } from '../../../server/parsedSchemas/login';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
-import TextHeading from '../../Common/Heading/TextHeading';
-import CardLayout from '../../Common/Card';
-import LoginFooter from './LoginFooter';
+
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
+const TextHeading = lazy(() => import('../../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../../Common/Card'));
+const LoginFooter = lazy(() => import('./LoginFooter'));
+
 import i18n from '../../../locales/i18n.js';
 
 let TCombForm = t.form.Form;

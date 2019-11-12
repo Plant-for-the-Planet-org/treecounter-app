@@ -315,6 +315,11 @@ export default class AddRatingSection extends Component {
                 <Text>{i18n.t('label.file_selected')}</Text>
               </View>
             ) : null}
+            {this.props.review && this.props.review.pdf ? (
+              <View style={{ marginTop: 15 }}>
+                <Text>{i18n.t('label.file_already_upload')}</Text>
+              </View>
+            ) : null}
           </View>
 
           {/* Document Picking ends */}

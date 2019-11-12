@@ -15,5 +15,6 @@
   "reviews": "Reviews",
   "summary_missing": "Brief text missing",
   "file_selected": "1 File selected",
-  "add_pictures": "ADD PICTURES"
+  "add_pictures": "ADD PICTURES",
+  "file_already_upload": "1 PDF file already there"
 }

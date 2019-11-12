@@ -227,7 +227,8 @@ export default class ContributionCardHome extends React.Component {
           <div className="contribution-container__left-column">
             {treeCountLine ? (
               <div className="headline">
-                {treeCountLine} Tree{contribution.treeCount > 1 ? 's' : ''}
+                {treeCountLine}{' '}
+                {i18n.t(treeCount > 1 ? 'label.trees' : 'label.tree')}
               </div>
             ) : (
               ''

@@ -13,6 +13,7 @@ import styles, {
 } from '../../styles/myTrees/user_contribution_card';
 import { formatDate, delimitNumbers } from '../../utils/utils';
 import CardLayout from '../Common/Card';
+import { getISOToCountryName } from '../../helpers/utils';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
@@ -118,11 +119,15 @@ class ContributionCard extends React.Component {
     });
 
   treeCountLine(treeCount, treeSpecies) {
-    return delimitNumbers(treeCount) + ' ' + (treeSpecies ? treeSpecies : '');
+    return (
+      delimitNumbers(treeCount) +
+      ' ' +
+      i18n.t(treeCount > 1 ? 'label.trees' : 'label.tree')
+    );
   }
 
   plantProjectLine(plantProjectName, country) {
-    return (plantProjectName ? plantProjectName + ', ' : '') + country;
+    return getISOToCountryName(country).country;
   }
 
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
@@ -155,15 +160,9 @@ class ContributionCard extends React.Component {
   }
 
   plantActionLine(plantDate, registrationDate) {
-    return (
-      i18n.t('label.planted_on', {
-        date: formatDate(plantDate)
-      }) +
-      '\n' +
-      i18n.t('label.added_on', {
-        date: formatDate(registrationDate)
-      })
-    );
+    return i18n.t('label.planted_on', {
+      date: formatDate(plantDate)
+    });
   }
 
   dedicateActionLine(isGift, givee, giveeSlug) {
@@ -406,6 +405,8 @@ class ContributionCard extends React.Component {
             });
           }}
         >
+          {/* <Icon name={'delete_outline'} /> */}
+
           {i18n.t('label.delete')}
         </Text>
         {mayUpdate ? (

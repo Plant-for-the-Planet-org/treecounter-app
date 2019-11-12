@@ -6,7 +6,11 @@ import ContributionCard from './ContributionCard';
 const ContributionCardList = props => {
   const { contributions, deleteContribution } = props;
   return contributions
-    .sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate))
+    .sort(
+      (a, b) =>
+        new Date(b.plantDate || b.redemptionDate || b.registrationDate) -
+        new Date(a.plantDate || a.redemptionDate || a.registrationDate)
+    )
     .map(
       contribution =>
         contribution && (

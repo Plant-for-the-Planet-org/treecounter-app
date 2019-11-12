@@ -5,7 +5,7 @@ import { Dimensions, FlatList, Image, Text, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import { getLocalRoute } from '../../actions/apiRouting';
-import { foldin, foldout } from '../../assets';
+import { foldin, foldout, baselineDelete } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import i18n from '../../locales/i18n.js';
 import styles, {
@@ -122,7 +122,7 @@ class ContributionCard extends React.Component {
     return (
       delimitNumbers(treeCount) +
       ' ' +
-      i18n.t(treeCount > 1 ? 'label.trees' : 'label.tree')
+      i18n.t(treeCount > 1 ? 'label.trees' : 'label.Tree')
     );
   }
 
@@ -405,9 +405,11 @@ class ContributionCard extends React.Component {
             });
           }}
         >
-          {/* <Icon name={'delete_outline'} /> */}
-
-          {i18n.t('label.delete')}
+          <Image
+            source={baselineDelete}
+            resizeMode="center"
+            style={styles.imageStyle}
+          />
         </Text>
         {mayUpdate ? (
           <Text

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 
-import InlineLink from '../../Common/InlineLink';
-import TextBlock from '../../Common/Text/TextBlock';
+const InlineLink = lazy(() => import('../../Common/InlineLink'));
+const TextBlock = lazy(() => import('../../Common/Text/TextBlock'));
+
 import i18n from '../../../locales/i18n.js';
 
 const ForgotPassword = () => (

@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 
-import PrimaryButton from '../../Common/Button/PrimaryButton';
-import TextHeading from '../../Common/Heading/TextHeading';
-import CardLayout from '../../Common/Card';
-import SignUpType from './SignUpType';
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
+const TextHeading = lazy(() => import('../../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../../Common/Card'));
+const SignUpType = lazy(() => import('./SignUpType'));
+
 import { SignupJustMe, SignupOrganization } from '../../../assets';
 import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';

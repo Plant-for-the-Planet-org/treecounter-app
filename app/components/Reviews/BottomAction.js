@@ -42,7 +42,6 @@ export default class BottomAction extends Component {
             />
             <Text
               style={{
-                fontFamily: 'OpenSans',
                 fontSize: 14,
                 fontWeight: 'normal',
                 fontStyle: 'normal',
@@ -77,7 +76,6 @@ export default class BottomAction extends Component {
             />
             <Text
               style={{
-                fontFamily: 'OpenSans',
                 fontSize: 14,
                 fontWeight: 'normal',
                 fontStyle: 'normal',

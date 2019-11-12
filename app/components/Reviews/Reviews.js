@@ -151,12 +151,10 @@ const styles = StyleSheet.create({
     fontSize: 27,
     lineHeight: 40,
     color: '#4d5153',
-    fontFamily: 'OpenSans',
     fontWeight: '800',
     fontStyle: 'normal'
   },
   reviewPageSubTitle: {
-    fontFamily: 'OpenSans',
     fontSize: 18,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -167,7 +165,6 @@ const styles = StyleSheet.create({
   },
   totalRating: {
     opacity: 0.8,
-    fontFamily: 'OpenSans',
     fontSize: 14,
     fontWeight: '600',
     fontStyle: 'normal',

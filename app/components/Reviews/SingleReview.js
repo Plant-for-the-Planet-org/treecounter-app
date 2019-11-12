@@ -162,7 +162,6 @@ export default class SingleReview extends Component {
 
 const styles = StyleSheet.create({
   reviewDate: {
-    fontFamily: 'OpenSans',
     fontSize: 12,
     fontWeight: 'normal',
     fontStyle: 'normal',
@@ -172,7 +171,6 @@ const styles = StyleSheet.create({
     color: 'rgba(0, 0, 0, 0.6)'
   },
   reviewUser: {
-    fontFamily: 'OpenSans',
     fontSize: 14,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -194,7 +192,6 @@ const styles = StyleSheet.create({
     marginTop: 16
   },
   reviewText: {
-    fontFamily: 'OpenSans',
     fontSize: 12,
     fontWeight: 'normal',
     fontStyle: 'normal',
@@ -213,7 +210,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   pdfButtonText: {
-    fontFamily: 'OpenSans',
     fontSize: 14,
     fontWeight: '600',
     fontStyle: 'normal',

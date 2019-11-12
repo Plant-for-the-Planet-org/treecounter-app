@@ -403,7 +403,6 @@ export default class AddRatingSection extends Component {
 
 const styles = StyleSheet.create({
   ratingsText: {
-    fontFamily: 'OpenSans',
     fontSize: 12,
     fontWeight: '400',
     fontStyle: 'normal',

@@ -47,7 +47,6 @@ export default class SingleRating extends Component {
 
 const styles = StyleSheet.create({
   ratingsText: {
-    fontFamily: 'OpenSans',
     fontSize: 10,
     fontWeight: 'normal',
     fontStyle: 'normal',

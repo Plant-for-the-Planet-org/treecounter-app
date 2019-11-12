@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import { PropTypes } from 'prop-types';
 import styles from '../../styles/welcome_screen.native';
+import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 import { Text, View, ScrollView, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
-import welcomeLogo from '../../assets/images/icons/welcomeLogo.png';
-import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
-import TouchableItem from '../Common/TouchableItem.native';
+
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+const welcomeLogo = lazy(() =>
+  import('../../assets/images/icons/welcomeLogo.png')
+);
+const TouchableItem = lazy(() => import('../Common/TouchableItem.native'));
 
 class WelcomeScreenModal extends Component {
   constructor(props) {

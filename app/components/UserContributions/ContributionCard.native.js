@@ -1,11 +1,18 @@
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Dimensions, FlatList, Image, Text, View } from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  Text,
+  View,
+  TouchableOpacity
+} from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import { getLocalRoute } from '../../actions/apiRouting';
-import { foldin, foldout, baselineDelete } from '../../assets';
+import { foldin, foldout, baselineDelete, editProfile } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import i18n from '../../locales/i18n.js';
 import styles, {
@@ -334,7 +341,7 @@ class ContributionCard extends React.Component {
           </Text>
         ) : null}
         {mayUpdate ? (
-          <Text
+          <TouchableOpacity
             style={styles.updateTextStyle}
             onPress={() => {
               this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
@@ -343,8 +350,12 @@ class ContributionCard extends React.Component {
               });
             }}
           >
-            {i18n.t('label.update')}
-          </Text>
+            <Image
+              source={editProfile}
+              resizeMode="center"
+              style={styles.imageStyle}
+            />
+          </TouchableOpacity>
         ) : null}
         <View style={styles.labelStyle}>
           <Text style={styles.labelTextStyle}>
@@ -396,7 +407,7 @@ class ContributionCard extends React.Component {
             {dedicateActionLine}
           </Text>
         ) : null}
-        <Text
+        <TouchableOpacity
           style={styles.deleteTextStyle}
           onPress={() => {
             this.props.navigation.navigate('delete_contribution', {
@@ -408,11 +419,11 @@ class ContributionCard extends React.Component {
           <Image
             source={baselineDelete}
             resizeMode="center"
-            style={styles.imageStyle}
+            style={{ height: 20, width: 20 }}
           />
-        </Text>
+        </TouchableOpacity>
         {mayUpdate ? (
-          <Text
+          <TouchableOpacity
             style={styles.updateTextStyle}
             onPress={() => {
               this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
@@ -421,8 +432,12 @@ class ContributionCard extends React.Component {
               });
             }}
           >
-            {i18n.t('label.update')}
-          </Text>
+            <Image
+              source={editProfile}
+              resizeMode="center"
+              style={styles.imageStyle}
+            />
+          </TouchableOpacity>
         ) : null}
         <View style={styles.labelStyle}>
           <Text style={styles.labelTextStyle}>
@@ -475,7 +490,7 @@ class ContributionCard extends React.Component {
           </Text>
         ) : null}
         {mayUpdate ? (
-          <Text
+          <TouchableOpacity
             style={styles.updateTextStyle}
             onPress={() => {
               this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
@@ -484,8 +499,12 @@ class ContributionCard extends React.Component {
               });
             }}
           >
-            {i18n.t('label.update')}
-          </Text>
+            <Image
+              source={editProfile}
+              resizeMode="center"
+              style={styles.imageStyle}
+            />
+          </TouchableOpacity>
         ) : null}
         <View style={styles.labelStyle}>
           <Text style={styles.labelTextStyle}>

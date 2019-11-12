@@ -103,13 +103,13 @@ export const myTreesStyle = (color, borderColor) =>
       paddingLeft: 20
     },
     minHeight: {
-      minHeight: 80
+      minHeight: 90
     },
     updateTextStyle: {
       color: '$colorPrimaryAccent',
       position: 'absolute',
       right: 10,
-      bottom: 10
+      bottom: 5
     },
     deleteTextStyle: {
       color: '$colorPrimaryAccent',

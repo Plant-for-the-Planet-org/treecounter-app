@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import TextHeading from '../../Common/Heading/TextHeading';
-import CardLayout from '../../Common/Card';
-import TextBlock from '../../Common/Text/TextBlock';
+import React, { Component, Suspense, lazy } from 'react';
+
+const TextHeading = lazy(() => import('../../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../../Common/Card'));
+const TextBlock = lazy(() => import('../../Common/Text/TextBlock'));
+const InlineLink = lazy(() => import('../../../components/Common/InlineLink'));
+
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n.js';
 import { check_green, redeemSignIn } from '../../../assets';
-import InlineLink from '../../../components/Common/InlineLink';
 
 export default class SuccessfullyActivatedAccount extends Component {
   render() {

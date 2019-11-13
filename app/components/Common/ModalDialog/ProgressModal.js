@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
 
 import { getProgressModelState } from '../../../reducers/modelDialogReducer';
-import LoadingIndicator from '../LoadingIndicator';
+const LoadingIndicator = lazy(() => import('../LoadingIndicator'));
 
 const ProgressModal = ({ onRequestClose }) => {
   // This component will re-render anytime progressModalState is updated in redux:

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { updateRoute } from '../../helpers/routerHelper';
-import SearchAutosuggest from './SearchAutosuggest';
+
+const SearchAutosuggest = lazy(() => import('./SearchAutosuggest'));
 
 class SearchBar extends React.Component {
   suggestionClicked = (event, data) => {

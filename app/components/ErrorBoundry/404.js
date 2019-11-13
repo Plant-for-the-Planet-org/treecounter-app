@@ -1,5 +1,7 @@
-import React from 'react';
-import SecondaryButton from '../Common/Button/SecondaryButton';
+import React, { lazy } from 'react';
+
+const SecondaryButton = lazy(() => import('../Common/Button/SecondaryButton'));
+
 import i18n from '../../locales/i18n.js';
 import { updateRoute } from '../../helpers/routerHelper';
 

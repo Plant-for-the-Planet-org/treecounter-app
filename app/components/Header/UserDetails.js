@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 
@@ -8,11 +8,14 @@ import {
   QuestionMarkGreen,
   questionmark_orange
 } from '../../assets';
-import TextSpan from '../Common/Text/TextSpan';
-import TransparentButton from '../Common/Button/TransparentButton';
+
 import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+const TextSpan = lazy(() => import('../Common/Text/TextSpan'));
+const TransparentButton = lazy(() =>
+  import('../Common/Button/TransparentButton')
+);
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
 
 const UserDetails = ({
   updateRoute,

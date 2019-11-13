@@ -1,4 +1,5 @@
-import Login from './Login/index';
-import SignUp from './SignUp/SignUp';
+import { lazy } from 'react';
+const Login = lazy(() => import('./Login/index'));
+const SignUp = lazy(() => import('./SignUp/SignUp'));
 
 export { Login, SignUp };

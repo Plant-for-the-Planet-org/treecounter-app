@@ -1,8 +1,10 @@
 import ModalDialog from '../../Common/ModalDialog';
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
-import SearchAutosuggest from '../../Header/SearchAutosuggest';
+
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
+const SearchAutosuggest = lazy(() => import('../../Header/SearchAutosuggest'));
+
 import i18n from '../../../locales/i18n.js';
 
 class ProfilePickerModal extends Component {

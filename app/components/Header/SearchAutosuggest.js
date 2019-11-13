@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

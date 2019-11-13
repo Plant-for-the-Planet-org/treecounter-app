@@ -1,18 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import Slider from 'react-slick';
 
-import Tabs from '../Common/Tabs';
-import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card';
-import ContentHeader from '../Common/ContentHeader';
-import TextBlock from '../Common/Text/TextBlock';
-import InlineLink from '../Common/InlineLink';
-import CarouselNavigation from '../Common/CarouselNavigation';
+const Tabs = lazy(() => import('../Common/Tabs'));
+const TextHeading = lazy(() => import('../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../Common/Card'));
+const ContentHeader = lazy(() => import('../Common/ContentHeader'));
+const TextBlock = lazy(() => import('../Common/Text/TextBlock'));
+const InlineLink = lazy(() => import('../Common/InlineLink'));
+const CarouselNavigation = lazy(() => import('../Common/CarouselNavigation'));
+
 import { arrow_left_green, check_green, attention } from '../../assets';
-import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+
+const TreeCountCurrencySelector = lazy(() =>
+  import('../Currency/TreeCountCurrencySelector')
+);
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+
 import classNames from 'classnames';
 import { getPreferredCurrency } from '../../actions/globalCurrency';
 import {
@@ -21,12 +26,21 @@ import {
   receiptCompanyFormSchema,
   companySchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
-import PlantProjectFull from '../PlantProjects/PlantProjectFull';
-import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+
+const PlantProjectFull = lazy(() =>
+  import('../PlantProjects/PlantProjectFull')
+);
+const SelectPlantProjectContainer = lazy(() =>
+  import('../../containers/SelectPlantProject')
+);
 
 import i18n from '../../locales/i18n.js';
-import PaymentSelector from '../Payment/PaymentSelector';
-import DescriptionHeading from '../Common/Heading/DescriptionHeading';
+
+const PaymentSelector = lazy(() => import('../Payment/PaymentSelector'));
+const DescriptionHeading = lazy(() =>
+  import('../Common/Heading/DescriptionHeading')
+);
+
 import { paymentFee } from '../../helpers/utils';
 
 let TCombForm = t.form.Form;

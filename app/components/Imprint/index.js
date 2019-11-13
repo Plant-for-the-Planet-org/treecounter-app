@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import {
   Accordion,
@@ -6,11 +6,15 @@ import {
   AccordionItemTitle,
   AccordionItemBody
 } from 'react-accessible-accordion';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
-import TextHeading from '../../components/Common/Heading/TextHeading';
 import i18n from '../../locales/i18n.js';
 
-import CardLayout from '../Common/Card';
+const LoadingIndicator = lazy(() =>
+  import('../../components/Common/LoadingIndicator')
+);
+const TextHeading = lazy(() =>
+  import('../../components/Common/Heading/TextHeading')
+);
+const CardLayout = lazy(() => import('../Common/Card'));
 
 export default class Imprint extends Component {
   GetImprintList() {

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import SearchBar from './Search';
-import HeaderFields from './HeaderFields';
-import BurgerMenu from './BurgerMenu';
-import HomeButton from './HomeButton';
+const SearchBar = lazy(() => import('./Search'));
+const HeaderFields = lazy(() => import('./HeaderFields'));
+const BurgerMenu = lazy(() => import('./BurgerMenu'));
+const HomeButton = lazy(() => import('./HomeButton'));
 
 const Header = ({
   userFeeds,

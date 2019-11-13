@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
-import TransparentButton from './TransparentButton';
+
+const TransparentButton = lazy(() => import('./TransparentButton'));
+
 import { arrow_left_orange_outline } from '../../../assets';
 
 const BackButton = ({ onClick, children, className }) => (

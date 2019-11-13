@@ -1,19 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import Slider from 'react-slick';
 import classNames from 'classnames';
 
-import Tabs from '../Common/Tabs';
-import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card';
-import SearchAutosuggest from '../Header/SearchAutosuggest';
-import ContentHeader from '../Common/ContentHeader';
-import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_left_green, check_green, attention } from '../../assets';
-import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+import Tabs from '../Common/Tabs';
+
+const TextHeading = lazy(() => import('../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../Common/Card'));
+const SearchAutosuggest = lazy(() => import('../Header/SearchAutosuggest'));
+const ContentHeader = lazy(() => import('../Common/ContentHeader'));
+const CarouselNavigation = lazy(() => import('../Common/CarouselNavigation'));
+const TreeCountCurrencySelector = lazy(() =>
+  import('../Currency/TreeCountCurrencySelector')
+);
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+const SelectPlantProjectContainer = lazy(() =>
+  import('../../containers/SelectPlantProject')
+);
+
 import { paymentFee } from '../../helpers/utils';
 import { getPreferredCurrency } from '../../actions/globalCurrency';
 
@@ -30,10 +36,13 @@ import {
 } from '../../server/parsedSchemas/giftTrees';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import i18n from '../../locales/i18n';
-import PaymentSelector from '../Payment/PaymentSelector';
-import DescriptionHeading from '../Common/Heading/DescriptionHeading';
-import TextBlock from '../Common/Text/TextBlock';
-import InlineLink from '../Common/InlineLink';
+
+const PaymentSelector = lazy(() => import('../Payment/PaymentSelector'));
+const DescriptionHeading = lazy(() =>
+  import('../Common/Heading/DescriptionHeading')
+);
+const TextBlock = lazy(() => import('../Common/Text/TextBlock'));
+const InlineLink = lazy(() => import('../Common/InlineLink'));
 
 let TCombForm = t.form.Form;
 

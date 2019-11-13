@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 
 import { FooterLogos } from '../../assets';
-import TransparentButton from '../Common/Button/TransparentButton';
+
+const TransparentButton = lazy(() =>
+  import('../Common/Button/TransparentButton')
+);
+
 import i18n from '../../locales/i18n.js';
 import { updateRoute } from '../../helpers/routerHelper';
 import { bindActionCreators } from 'redux';

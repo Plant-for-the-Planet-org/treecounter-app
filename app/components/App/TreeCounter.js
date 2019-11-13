@@ -51,8 +51,6 @@ const RedemptionContainer = lazy(() =>
   import('../../containers/RedemptionContainer')
 );
 
-// const Name = lazy(() => import(''));
-
 // import Footer from '../Footer';
 const Footer = lazy(() => import('../Footer'));
 // Components which use SVG

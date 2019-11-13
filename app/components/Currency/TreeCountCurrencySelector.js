@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import CurrencySelector from './CurrencySelector';
-import TreeCountSelector from './TreeCountSelector';
+const CurrencySelector = lazy(() => import('./CurrencySelector'));
+const TreeCountSelector = lazy(() => import('./TreeCountSelector'));
 
 class TreeCountCurrencySelector extends React.Component {
   constructor(props) {

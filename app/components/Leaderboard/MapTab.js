@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
-import MapLayerSelector from './MapLayerSelector';
-import ArcGISExploreMap from '../Map/ArcGISExploreMap';
+
+const MapLayerSelector = lazy(() => import('./MapLayerSelector'));
+const ArcGISExploreMap = lazy(() => import('../Map/ArcGISExploreMap'));
+
 import i18n from '../../locales/i18n';
 import { map_legend_TreeDensity } from '../../assets';
 import { map_legend_Trees } from '../../assets';

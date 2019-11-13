@@ -1,17 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import SecondaryButton from '../Common/Button/SecondaryButton';
 import t from 'tcomb-form';
 import i18n from '../../locales/i18n.js';
 import { plantProjectSchema } from '../../server/parsedSchemas/editProfile';
-import PlantProjectTemplate from '../EditUserProfile/PlantProjectTemplate';
 import { MapPinRed, baselineEdit, baselineDelete } from '../../assets';
-import ConfirmDeletion from './ConfirmDelete';
 import _ from 'lodash';
-import TextHeading from '../Common/Heading/TextHeading';
-import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import { delimitNumbers } from '../../utils/utils';
+
+const PlantProjectTemplate = lazy(() =>
+  import('../EditUserProfile/PlantProjectTemplate')
+);
+const ConfirmDeletion = lazy(() => import('./ConfirmDelete'));
+const TextHeading = lazy(() => import('../Common/Heading/TextHeading'));
+const DescriptionHeading = lazy(() =>
+  import('../Common/Heading/DescriptionHeading')
+);
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+const SecondaryButton = lazy(() => import('../Common/Button/SecondaryButton'));
 
 let TCombForm = t.form.Form;
 const emptyProjectInfo = {

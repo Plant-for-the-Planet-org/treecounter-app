@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import TextBlock from '../Common/Text/TextBlock';
+
+const TextBlock = lazy(() => import('../Common/Text/TextBlock'));
+
 import i18n from '../../locales/i18n.js';
 import { currencySort } from './utils';
 import { getCurrency } from '../../selectors';

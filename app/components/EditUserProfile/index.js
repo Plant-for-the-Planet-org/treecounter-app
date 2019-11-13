@@ -1,31 +1,38 @@
-import React from 'react';
-import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card';
-import t from 'tcomb-form';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import SecondaryButton from '../Common/Button/SecondaryButton';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
-import UserProfileImage from '../Common/UserProfileImage';
+import t from 'tcomb-form';
+
+const TextHeading = lazy(() => import('../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../Common/Card'));
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+const SecondaryButton = lazy(() => import('../Common/Button/SecondaryButton'));
+const UserProfileImage = lazy(() => import('../Common/UserProfileImage'));
+
 import {
   parsedSchema,
   plantProjectSchema
 } from '../../server/parsedSchemas/editProfile';
-import PaswordUpdatedDialog from './PaswordUpdateModal';
-import ConfirmProfileDeletion from './ConfirmProfileDeletionModal';
 import i18n from '../../locales/i18n.js';
-import PlantProjectTemplate from './PlantProjectTemplate';
+
+const PaswordUpdatedDialog = lazy(() => import('./PaswordUpdateModal'));
+const ConfirmProfileDeletion = lazy(() =>
+  import('./ConfirmProfileDeletionModal')
+);
+const PlantProjectTemplate = lazy(() => import('./PlantProjectTemplate'));
+
 import {
   UserProfileTemplate,
   UserAboutmeTemplate,
   UserPasswordUpdateTemplate
 } from './PlantProjectUserProfileTemplates';
-import LoadingIndicator from '../Common/LoadingIndicator';
-
 import { ProfilePic } from '../../assets';
-import { getImageUrl } from '../../actions/apiRouting';
-import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import { updateRoute } from '../../helpers/routerHelper';
+import { getImageUrl } from '../../actions/apiRouting';
 
+const LoadingIndicator = lazy(() => import('../Common/LoadingIndicator'));
+const FollowLabelButton = lazy(() =>
+  import('../Common/Button/FollowLabelButton')
+);
 let TCombForm = t.form.Form;
 const emptyProjectInfo = { name: '' };
 

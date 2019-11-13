@@ -1,17 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
-import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card';
-import MapTab from './MapTab';
-import Tabs from '../Common/Tabs';
 import { Link } from 'react-router-dom';
-import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
-
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import i18n from '../../locales/i18n';
+
+const TextHeading = lazy(() => import('../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../Common/Card'));
+const MapTab = lazy(() => import('./MapTab'));
+const Tabs = lazy(() => import('../Common/Tabs'));
+const DescriptionHeading = lazy(() =>
+  import('../../components/Common/Heading/DescriptionHeading')
+);
+const BackButton = lazy(() => import('../Common/Button/BackButton'));
+const LoadingIndicator = lazy(() =>
+  import('../../components/Common/LoadingIndicator')
+);
+
 import { categoryIcons } from '../../helpers/utils';
 import { delimitNumbers } from '../../utils/utils';
-import BackButton from '../Common/Button/BackButton';
 export default class Leaderboard extends Component {
   constructor(props) {
     super(props);

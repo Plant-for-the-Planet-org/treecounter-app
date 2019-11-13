@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import ChallengeCard from './challengeCard';
+const ChallengeCard = lazy(() => import('./challengeCard'));
 
 const ChallengeList = props => {
   const { challenges } = props;

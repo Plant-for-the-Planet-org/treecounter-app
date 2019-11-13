@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 
 import { ProfilePic } from '../../assets';
-import Notification from './Notification';
-import Popover from '../Common/Popover';
-import UserDetails from './UserDetails';
-import RoundedButton from '../Common/Button/RoundedButton';
+
+const Notification = lazy(() => import('./Notification'));
+const Popover = lazy(() => import('../Common/Popover'));
+const UserDetails = lazy(() => import('./UserDetails'));
+const RoundedButton = lazy(() => import('../Common/Button/RoundedButton'));
+
 import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
-import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
+
+const ProfilePickerModal = lazy(() =>
+  import('../EditUserProfile/dedicate-trees/ProfilePickerModal')
+);
 
 class HeaderFields extends Component {
   constructor() {

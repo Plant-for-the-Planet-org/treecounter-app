@@ -1,8 +1,10 @@
 import ModalDialog from '../../components/Common/ModalDialog';
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { check_green } from '../../assets';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+
 import i18n from '../../locales/i18n';
 
 const PaswordUpdatedDialog = ({ isOpen, onRequestClose }) => (

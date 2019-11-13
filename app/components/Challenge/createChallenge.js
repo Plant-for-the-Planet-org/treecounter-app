@@ -1,21 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 
-import Tabs from '../Common/Tabs';
-import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card';
-import SearchAutosuggest from '../Header/SearchAutosuggest';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+const Tabs = lazy(() => import('../Common/Tabs'));
+const TextHeading = lazy(() => import('../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../Common/Card'));
+const SearchAutosuggest = lazy(() => import('../Header/SearchAutosuggest'));
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
 
 import {
   challengeFormSchema,
   challengeFormSchemaOptions
 } from '../../server/parsedSchemas/challenge';
 import i18n from '../../locales/i18n';
-import DescriptionHeading from '../Common/Heading/DescriptionHeading';
-import TextBlock from '../Common/Text/TextBlock';
-import ChallengeList from './challengeList';
+
+const DescriptionHeading = lazy(() =>
+  import('../Common/Heading/DescriptionHeading')
+);
+const TextBlock = lazy(() => import('../Common/Text/TextBlock'));
+const ChallengeList = lazy(() => import('./challengeList'));
+
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
 
 let TCombForm = t.form.Form;

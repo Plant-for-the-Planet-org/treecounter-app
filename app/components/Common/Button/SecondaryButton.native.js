@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
-import TouchableItem from '../TouchableItem';
+
+const TouchableItem = lazy(() => import('../TouchableItem'));
+
 import styles from '../../../styles/common/button';
 import { Text, Image, View } from 'react-native';
+
 const SecondaryButton = ({
   onClick,
   children,

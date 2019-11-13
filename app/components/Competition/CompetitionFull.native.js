@@ -21,6 +21,7 @@ import SearchUser from '../Challenge/Tabs/SearchUser.native';
 import i18n from '../../locales/i18n.js';
 import { formatDate } from '../../utils/utils';
 import snippetStyles from './../../styles/competition/competition-fullNew.native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -193,7 +194,13 @@ class CompetitionFull extends React.Component {
 
     return (
       <View style={snippetStyles.flexView}>
-        <ScrollView>
+        <KeyboardAwareScrollView
+          keyboardDismissMode="on-drag"
+          keyboardShouldPersistTaps="always"
+          style={styles.keyboardScrollView}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled
+        >
           <View>
             {/* Competition Information  */}
             <View style={[snippetStyles.projectSnippetContainerN]}>
@@ -524,7 +531,7 @@ class CompetitionFull extends React.Component {
             ) : null}
             {/* Invited Users Ends */}
           </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </View>
     );
   }

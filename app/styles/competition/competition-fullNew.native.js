@@ -171,19 +171,15 @@ export default EStyleSheet.create({
     fontSize: 18
   },
 
-  buttonItem: {
-    padding: 5,
-    backgroundColor: '#89b53a'
-  },
   buttonStyle: {
-    height: 36,
     borderRadius: 4,
     backgroundColor: '#89b53a',
-    width: '45%'
+    width: '45%',
+    height: 36,
+    padding: 6
   },
   buttonTextStyle: {
-    fontSize: 13,
-    lineHeight: 18,
+    fontSize: 12,
     letterSpacing: 0,
     textAlign: 'center',
     color: '#ffffff',
@@ -297,7 +293,7 @@ export default EStyleSheet.create({
     alignItems: 'center',
     alignSelf: 'flex-end',
     marginTop: 8,
-    padding: 12
+    padding: 6
   },
   secondaryButtonText: {
     fontSize: 14,
@@ -320,7 +316,7 @@ export default EStyleSheet.create({
     alignSelf: 'flex-end',
     marginLeft: 12,
     marginTop: 8,
-    padding: 12
+    padding: 6
   },
   cancelButtonText: {
     fontSize: 14,

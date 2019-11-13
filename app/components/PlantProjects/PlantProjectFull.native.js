@@ -6,7 +6,6 @@ import { queryParamsToObject } from '../../helpers/utils';
 import { View } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
-import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { ScrollView } from 'react-native';
 import PlantProjectSnippet from './PlantProjectSnippet.native';
@@ -46,42 +45,44 @@ class PlantProjectFull extends React.Component {
       linkText,
       ndviUid
     };
+
+    const backgroundColor = 'white';
     return (
       <View style={{ flex: 1 }}>
         <ScrollView
           contentContainerStyle={[
             scrollStyle.styleContainer,
-            { paddingBottom: 72 }
+            {
+              paddingBottom: 72,
+              backgroundColor: backgroundColor
+            }
           ]}
         >
-          <CardLayout style={[styles.projectFullContainer]}>
-            <PlantProjectSnippet
-              key={'projectFull' + this.props.plantProject.id}
-              showMoreButton={false}
-              clickable={false}
-              plantProject={this.props.plantProject}
-              onSelectClickedFeaturedProjects={id =>
-                this.props.selectProject(id)
-              }
-              tpoName={tpo_name}
-            />
+          <PlantProjectSnippet
+            key={'projectFull' + this.props.plantProject.id}
+            showMoreButton={false}
+            clickable={false}
+            plantProject={this.props.plantProject}
+            onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
+            tpoName={tpo_name}
+            selectProject={this.props.selectProject}
+          />
 
-            <View style={styles.horizontalRule} />
-            <View style={styles.plantProjectDetails}>
-              <PlantProjectDetails {...detailsProps} />
+          {/* <View style={styles.horizontalRule} /> */}
+          <View style={styles.plantProjectDetails}>
+            <PlantProjectDetails {...detailsProps} />
+          </View>
+          {this.props.plantProject.allowDonations ? (
+            <View style={styles.buttonContainer}>
+              <PrimaryButton
+                onClick={() =>
+                  this.props.selectProject(this.props.plantProject.id)
+                }
+              >
+                {i18n.t('label.donate_txt')}
+              </PrimaryButton>
             </View>
-            {this.props.plantProject.allowDonations ? (
-              <View style={styles.buttonContainer}>
-                <PrimaryButton
-                  onClick={() =>
-                    this.props.selectProject(this.props.plantProject.id)
-                  }
-                >
-                  {i18n.t('label.donate')}
-                </PrimaryButton>
-              </View>
-            ) : null}
-          </CardLayout>
+          ) : null}
         </ScrollView>
         <TabContainer {...this.props} />
       </View>

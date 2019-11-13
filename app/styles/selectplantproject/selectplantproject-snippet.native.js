@@ -9,6 +9,11 @@ const Layout = {
 };
 const rowHeight = 20;
 
+export const flatListContainerStyle = {
+  paddingBottom: 45,
+  flexGrow: 1,
+  backgroundColor: '#ffffff'
+};
 export default EStyleSheet.create({
   project_specs__taxdeductibleIcon: {
     width: 14,
@@ -17,22 +22,39 @@ export default EStyleSheet.create({
   projectSnippetContainer: {
     flexDirection: 'column',
 
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
-    elevation: 1,
-    padding: 0,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4
+    shadowRadius: 2,
+    elevation: 0,
+    borderWidth: 0,
+    borderColor: 'red'
   },
   projectImageContainer: {
-    height: Layout.window.width * 0.5,
+    height: Layout.window.width * 0.4,
     width: '100%',
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    overflow: 'hidden'
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
+    overflow: 'hidden',
+    position: 'relative'
+  },
+  certifiedAndRatingContainer: {
+    position: 'absolute',
+    backgroundColor: '#ffffff',
+    height: 27,
+    width: 86,
+    right: 12,
+    borderRadius: 9,
+    top: 10,
+    borderColor: '#707070',
+    borderWidth: 0.1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingTop: 5.6,
+    paddingBottom: 5.6,
+    paddingRight: 10,
+    paddingLeft: 10
   },
   teaser__projectImage: {
     flex: 1,
@@ -40,21 +62,23 @@ export default EStyleSheet.create({
   },
   projectSpecsContainer: {
     width: '100%',
-    padding: 16
+    padding: 4,
+    paddingTop: 7
   },
   treeCounterContainer: {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    backgroundColor: '#d2e3af',
+    backgroundColor: '$greyColor',
     shadowOffset: {
       width: 0,
       height: -3
     },
-    height: rowHeight * 1.7,
+    height: rowHeight * 1.75,
     shadowOpacity: 0.1,
     shadowRadius: 2,
-    elevation: 1
+    elevation: 1,
+    lineHeight: 19
   },
   treePlantedContainer: {
     flexDirection: 'row',
@@ -64,8 +88,9 @@ export default EStyleSheet.create({
   treePlantedChildContainer: {
     height: '100%',
     flexDirection: 'row',
-    backgroundColor: '#b9d384',
-    borderRightColor: '#b9d384'
+    backgroundColor: '#79b805', //b9d384',
+    borderRightColor: '#79b805',
+    borderBottomLeftRadius: 4
   },
   treePlantedtext: {
     // padding: 5,
@@ -81,7 +106,8 @@ export default EStyleSheet.create({
   treePlantedtextPlanted: {
     color: 'white',
     fontWeight: 'bold',
-    paddingLeft: 16
+    paddingLeft: 16,
+    fontSize: 14
   },
   targetContainer: {
     width: '100%',
@@ -95,13 +121,25 @@ export default EStyleSheet.create({
   projectdetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingBottom: 10
+    paddingBottom: 15,
+    marginTop: 16,
+    // marginRight: 5,
+    alignItems: 'center'
   },
   locationContainer: {
     flexDirection: 'column',
-    maxWidth: '85%'
+    maxWidth: '60%',
+    '@media (max-width: 350)': {
+      maxWidth: '45%'
+    }
   },
-  costContainer: { flexDirection: 'row' },
+  costContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'flex-end'
+    // marginRight: 17
+  },
   actionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -109,10 +147,11 @@ export default EStyleSheet.create({
     //height: rowHeight + rowHeight / 2,
   },
   project_teaser__contentText: {
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '$cardTextColor',
-    maxWidth: '90%'
+    maxWidth: '90%',
+    lineHeight: 24
   },
   byOrgContainer: {
     width: '70%',
@@ -132,14 +171,26 @@ export default EStyleSheet.create({
   },
   survivalText: {
     fontSize: 12,
-    paddingTop: 3,
-    paddingBottom: 8,
+    flexWrap: 'wrap',
+    // paddingTop: 3,
+    // paddingBottom: 8,
     color: '$cardTextColor'
+  },
+  costTextContainer: {
+    backgroundColor: '#f2f2f7',
+    borderRadius: 15,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 2,
+    paddingBottom: 2
+    // marginRight: 20
   },
   costText: {
-    fontSize: 18,
-    color: '$cardTextColor'
+    fontSize: 20,
+    color: '$newPrimary',
+    fontWeight: 'bold'
   },
+  costPerTreeText: { fontSize: 9, marginTop: 6, color: '$cardTextColor' },
   buttonContainer: {
     flexDirection: 'row',
     width: '30%',
@@ -180,6 +231,8 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     paddingBottom: 5,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginRight: 10,
+    justifyContent: 'space-between'
   }
 });

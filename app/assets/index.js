@@ -25,7 +25,6 @@ import baselineDelete from './images/baseline-delete.png';
 import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/darkTree.png';
-import SideMenuImage from './images/side_menu.png';
 import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
 import MapPinRed from './images/map_pin_red.png';
@@ -137,6 +136,9 @@ import forward from './images/forward.png';
 import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
+import location_grey from './images/icons/location_grey.png';
+import survival_grey from './images/icons/survival_grey.png';
+import tax_grey from './images/icons/tax_grey.png';
 import worldImg from './images/icons/world.png';
 import germany from './images/germany.png';
 import googlePlayBadge_en from './images/en/google-play-badge.png';
@@ -148,6 +150,7 @@ import imageGallery from './images/icons/images-gallery.png';
 import nextArrow from './images/icons/nextArrow.png';
 import nextArrowWhite from './images/icons/nextArrowWhite.png';
 import closeBlack from './images/icons/closeblack.png';
+import planetLogo from './images/Planet-Logo.png';
 export {
   germany,
   worldImg,
@@ -180,7 +183,6 @@ export {
   GreenEmail,
   baselineEdit,
   baselineDelete,
-  SideMenuImage,
   FooterLogos,
   SignupOrganization,
   SignupJustMe,
@@ -290,6 +292,9 @@ export {
   successAnimated,
   trees,
   greencalendar,
+  location_grey,
+  survival_grey,
+  tax_grey,
   googlePlayBadge_en,
   googlePlayBadge_de,
   appleStoreBadge_en,
@@ -298,5 +303,6 @@ export {
   imageGallery,
   nextArrow,
   nextArrowWhite,
-  closeBlack
+  closeBlack,
+  planetLogo
 };

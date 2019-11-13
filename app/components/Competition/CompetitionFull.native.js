@@ -4,7 +4,6 @@ import { View, Text, Image } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
 import styles from '../../styles/competition/competition-full.native';
 import CardLayout from '../Common/Card';
-import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchCompetitionDetail } from '../../actions/competition';

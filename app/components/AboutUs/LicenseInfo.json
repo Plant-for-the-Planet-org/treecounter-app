@@ -519,6 +519,13 @@
         "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-router-dom",
         "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-router-dom/README.md"
       },
+      "react-select@3.0.8": {
+        "licenses": "MIT",
+        "repository": "https://github.com/JedWatson/react-select",
+        "publisher": "Jed Watson",
+        "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-select",
+        "licenseFile": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-select/README.md"
+      },
       "react-share@2.4.0": {
         "licenses": "MIT",
         "repository": "https://github.com/nygardk/react-share",

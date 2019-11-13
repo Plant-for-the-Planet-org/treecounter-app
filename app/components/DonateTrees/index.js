@@ -141,6 +141,12 @@ export default class DonateTrees extends Component {
         currency: this.state.selectedCurrency,
         ...this.state.form
       };
+      if (
+        this.props.supportTreecounter &&
+        this.props.supportTreecounter.treecounterId
+      ) {
+        requestData.communityTreecounter = this.props.supportTreecounter.treecounterId;
+      }
       this.props.createPaymentDonation(
         this.props.selectedProject.id,
         requestData,

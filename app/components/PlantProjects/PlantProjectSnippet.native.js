@@ -104,7 +104,7 @@ class PlantProjectSnippet extends PureComponent {
         underlayColor={'transparent'}
         onPress={onPressHandler}
       >
-        <CardLayout style={[styles.projectSnippetContainer]}>
+        <CardLayout style={[styles.projectSnippetContainer]} withoutShadow>
           {projectImage ? (
             <View style={styles.projectImageContainer}>
               <Image

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import YouTube from 'react-native-youtube';
 import { StyleSheet } from 'react-native';
 
+const borderColor = '#d5d5d5';
+
 class VideoContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -61,7 +63,15 @@ class VideoContainer extends React.Component {
             // eslint-disable-next-line no-underscore-dangle
             this._youTubeRef = component;
           }}
-          style={[{ height: 300 }, { margin: this.state.moduleMargin }]}
+          style={[
+            {
+              height: 300,
+              borderRadius: 5,
+              borderWidth: 1,
+              borderColor: borderColor
+            },
+            { margin: this.state.moduleMargin }
+          ]}
           // eslint-disable-next-line no-underscore-dangle
           onReady={this._onReady}
           videoId={this.state.videoId}

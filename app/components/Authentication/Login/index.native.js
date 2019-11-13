@@ -5,15 +5,11 @@ import { Text, View, Image, Keyboard } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import scrollStyle from '../../../styles/common/scrollStyle';
 import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
-
 import { loginFormSchema } from '../../../server/parsedSchemas/login';
-
 import i18n from '../../../locales/i18n.js';
-
 import styles from '../../../styles/login';
-
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import { SideMenuImage } from '../../../assets';
+import { planetLogo } from '../../../assets';
 import TouchableItem from '../../Common/TouchableItem.native';
 
 let Form = t.form.Form;
@@ -85,7 +81,7 @@ export default class Login extends Component {
             <Image
               style={styles.imageStyle}
               resizeMode={'contain'}
-              source={SideMenuImage}
+              source={planetLogo}
             />
             <Text style={styles.loginDescriptionStyle}>
               {i18n.t('label.login_description')}

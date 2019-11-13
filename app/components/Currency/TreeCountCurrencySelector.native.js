@@ -59,6 +59,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
   }
 
   getSingleTreeRate() {
+    console.log('===', this.props);
     return convertCurrency(
       this.props.treeCost,
       this.props.projectCurrency,

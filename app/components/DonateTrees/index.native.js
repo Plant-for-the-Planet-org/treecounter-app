@@ -407,7 +407,7 @@ DonateTrees.propTypes = {
   selectedProject: PropTypes.object,
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
-  currencies: PropTypes.object,
+  currencies: PropTypes.array,
   paymentClear: PropTypes.func,
   supportTreecounter: PropTypes.object,
   paymentStatus: PropTypes.object,

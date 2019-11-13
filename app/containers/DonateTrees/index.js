@@ -116,7 +116,7 @@ DonationTreesContainer.propTypes = {
   navigation: PropTypes.any,
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
-  currencies: PropTypes.object,
+  currencies: PropTypes.array,
   paymentStatus: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
   paymentClear: PropTypes.func,

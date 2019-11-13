@@ -3,6 +3,59 @@ $bg-color: #424242;
 $muted-color: mix(white, $bg-color, 70%);
 $trans-time: 300ms;
 
+.pftp-date-picker__container {
+  position: relative;
+  &:focus > label {
+    top: -14px;
+    font-size: 12px;
+    color: $colorPrimary;
+  }
+  label {
+    color: $muted-color;
+    font-size: 16px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: $trans-time ease all;
+  }
+  .react-datepicker-wrapper {
+    &:focus ~ label {
+      top: -14px;
+      font-size: 12px;
+      color: $colorPrimary;
+    }
+    width: 100%;
+    .react-datepicker__input-container {
+      width: 100%;
+      input {
+        background: none;
+        color: mix(white, $bg-color, 70%);
+        font-size: 18px;
+        padding: 5px 10px 10px 5px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid mix(white, $bg-color, 70%);
+        &:focus {
+          outline: none;
+        }
+        &:focus ~ label {
+          top: -14px;
+          font-size: 12px;
+          color: $colorPrimary;
+        }
+        &:focus ~ .pftp-textfield__inputgroup--bar:before {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
 .error-msg {
   color: $colorError;
   text-align: left;

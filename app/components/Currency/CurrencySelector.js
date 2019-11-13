@@ -1,44 +1,82 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n.js';
 import { currencySort } from './utils';
+import { getCurrency } from '../../selectors';
 
-const CurrencySelector = ({ currencies, selectedCurrency, onChange }) => {
-  let currenciesArray = currencySort(Object.keys(currencies));
-  if (currenciesArray.indexOf(selectedCurrency) === -1) {
-    onChange(currenciesArray[0]);
+class CurrencySelector extends React.Component {
+  constructor(props) {
+    super(props);
+    let { selectedCurrency, globalCurrency } = props;
+    this.state = {
+      currenciesArray: [],
+      selectedCurrency:
+        (globalCurrency && globalCurrency.currency) || selectedCurrency
+    };
+
+    this.handleChange = this.handleChange.bind(this);
   }
-
-  return (
-    <div className="pftp-selectfield">
-      <TextBlock strong={true}>{i18n.t('label.currency')}</TextBlock>
-      <select
-        className="pftp-selectfield__select"
-        required="required"
-        value={selectedCurrency}
-        onChange={evt => onChange(evt.target.value)}
-      >
-        {currenciesArray.map(value => {
-          return (
-            <option
-              className="pftp-selectfield__option"
-              value={value}
-              key={value}
-            >
-              {currencies[value]} [{value}]
-            </option>
-          );
-        })}
-      </select>
-    </div>
-  );
-};
+  componentDidMount() {
+    if (this.props.globalCurrency) {
+      this.setState({ selectedCurrency: this.props.globalCurrency.currency });
+      this.props.onChange(this.state.selectedCurrency);
+    }
+    let { currencies } = this.props;
+    this.setState({ currenciesArray: currencySort(Object.keys(currencies)) });
+  }
+  componentWillReceiveProps(nextProps) {
+    // console.log('next props currency', nextProps);
+    if (
+      nextProps.globalCurrency &&
+      nextProps.globalCurrency.currency !== this.state.selectedCurrency
+    ) {
+      this.handleChange(nextProps.globalCurrency.currency);
+    }
+  }
+  handleChange(value) {
+    // console.log('changed locally', value);
+    this.setState({ selectedCurrency: value });
+    this.props.onChange(value);
+    // console.log('changed locally', this.state.selectedCurrency);
+  }
+  render() {
+    return (
+      <div className="pftp-selectfield">
+        <TextBlock strong>{i18n.t('label.currency')}</TextBlock>
+        <select
+          className="pftp-selectfield__select"
+          required="required"
+          value={this.state.selectedCurrency}
+          onChange={evt => this.handleChange(evt.target.value)}
+        >
+          {this.state.currenciesArray.map(value => {
+            return (
+              <option
+                className="pftp-selectfield__option"
+                value={value}
+                key={value}
+              >
+                {this.props.currencies[value]} [{value}]
+              </option>
+            );
+          })}
+        </select>
+      </div>
+    );
+  }
+}
 
 CurrencySelector.propTypes = {
   selectedCurrency: PropTypes.string,
   currencies: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  globalCurrency: PropTypes.any
 };
 
-export default CurrencySelector;
+const mapStateToProps = state => ({
+  globalCurrency: getCurrency(state)
+});
+
+export default connect(mapStateToProps)(CurrencySelector);

@@ -7,6 +7,7 @@ import LoadingIndicators from '../../components/Common/LoadingIndicator';
 
 import CCForm from './CCForm';
 import SEPAForm from './SEPAForm';
+import i18n from '../../locales/i18n';
 
 class CheckoutForm extends React.Component {
   state = {
@@ -14,7 +15,8 @@ class CheckoutForm extends React.Component {
     saveForLaterCC: false,
     saveForLaterSEPA: false,
     chosenCard: 'new-card',
-    cards: []
+    cards: [],
+    isPayEnable: true
   };
 
   componentDidMount() {
@@ -31,7 +33,7 @@ class CheckoutForm extends React.Component {
     });
   };
 
-  handleSubmitSEPAPayment = async ev => {
+  handleSubmitSEPAPayment = async (/* ev */) => {
     console.log('SEPA PAYMENT SUBMITED');
   };
 
@@ -44,9 +46,10 @@ class CheckoutForm extends React.Component {
   };
 
   createPaymentMethod = async paymentDetails => {
+    let paymentMethodResponse;
     try {
       //Create a payment method id for making request to the API
-      const paymentMethodResponse = await this.props.stripe.createPaymentMethod(
+      paymentMethodResponse = await this.props.stripe.createPaymentMethod(
         'card',
         {
           billing_details: {
@@ -63,12 +66,17 @@ class CheckoutForm extends React.Component {
       return paymentMethodId;
     } catch (e) {
       this.props.setProgressModelState(false);
+      this.props.paymentFailed({
+        status: false,
+        message: paymentMethodResponse.error.message || 'error'
+      });
       this.props.onError(e.message);
     }
   };
 
   handleSubmitCCPayment = async ev => {
     this.props.setProgressModelState(true);
+    this.setState({ isPayEnable: false });
     ev.preventDefault();
 
     const paymentDetails = this.props.paymentDetails;
@@ -89,41 +97,52 @@ class CheckoutForm extends React.Component {
 
   handlePayment = paymentMethodId => {
     if (paymentMethodId !== undefined || paymentMethodId != 0) {
-      const donationId = this.props.paymentStatus.contribution[0].id;
-      let requestData = {
-        account: this.props.accountName,
-        gateway: this.props.gateway,
-        source: {
-          id: paymentMethodId,
-          object: 'payment_method'
-        }
-      };
-      this.props
-        .handlePay(donationId, requestData, this.props.currentUserProfile)
-        .then(response => {
-          this.props.setProgressModelState(false);
-          if (response.data.status == 'failed') {
-            this.props.paymentFailed({
-              status: false,
-              message: response.data.message || 'error'
-            });
-          } else {
-            if (response.data.status == 'action_required') {
-              this.handle3DSecure(
-                response.data.response.payment_intent_client_secret,
-                window.Stripe(this.props.stripePublishableKey, {
-                  stripeAccount: response.data.response.account
-                }),
-                donationId
-              );
-            } else {
-              this.props.finalizeDonation(
-                donationId,
-                this.props.currentUserProfile
-              );
-            }
+      const donationId = this.props.donationId
+        ? this.props.donationId
+        : this.props.paymentStatus && this.props.paymentStatus.contribution
+          ? this.props.paymentStatus.contribution[0].id
+          : undefined;
+      if (donationId) {
+        let requestData = {
+          account: this.props.accountName,
+          gateway: this.props.gateway,
+          source: {
+            id: paymentMethodId,
+            object: 'payment_method'
           }
+        };
+        this.props
+          .handlePay(donationId, requestData, this.props.currentUserProfile)
+          .then(response => {
+            this.props.setProgressModelState(false);
+            if (response.data.status == 'failed') {
+              this.props.paymentFailed({
+                status: false,
+                message: response.data.message || 'error'
+              });
+            } else {
+              if (response.data.status == 'action_required') {
+                this.handle3DSecure(
+                  response.data.response.payment_intent_client_secret,
+                  window.Stripe(this.props.stripePublishableKey, {
+                    stripeAccount: response.data.response.account
+                  }),
+                  donationId
+                );
+              } else {
+                this.props.finalizeDonation(
+                  donationId,
+                  this.props.currentUserProfile
+                );
+              }
+            }
+          });
+      } else {
+        this.props.paymentFailed({
+          status: false,
+          message: i18n.t('label.donation_id_missing_error')
         });
+      }
     }
   };
 
@@ -170,6 +189,7 @@ class CheckoutForm extends React.Component {
             chosenCard={this.state.chosenCard}
             currentUserProfile={this.props.currentUserProfile}
             onChangeSelectedCard={this.onChangeSelectedCard}
+            isPayEnable={state.isPayEnable}
           />
         ) : (
           <SEPAForm
@@ -211,6 +231,7 @@ CheckoutForm.propTypes = {
   gateway: PropTypes.string,
   paymentStatus: PropTypes.object,
   handlePay: PropTypes.func,
+  donationId: PropTypes.number,
   paymentFailed: PropTypes.func,
   stripePublishableKey: PropTypes.string,
   setProgressModelState: PropTypes.func,

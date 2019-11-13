@@ -8,8 +8,7 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n';
 import { Dimensions, View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject.native';
-import NumberFormat from '../Common/NumberFormat';
-import { delimitNumbers } from '../../utils/utils';
+import { formatNumber, delimitNumbers } from '../../utils/utils';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class TreeCountCurrencySelector extends React.PureComponent {
@@ -81,7 +80,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 35 }}
-        enableOnAndroid={true}
+        enableOnAndroid
       >
         <CardLayout>
           <View style={{ flexDirection: 'column' }}>
@@ -142,10 +141,11 @@ class TreeCountCurrencySelector extends React.PureComponent {
               <Text>
                 {i18n.t('label.amount')}
                 {' : '}
-                <NumberFormat
-                  data={this.state.selectedAmount}
-                  currency={this.state.selectedCurrency}
-                />
+                {formatNumber(
+                  this.state.selectedAmount,
+                  null,
+                  this.state.selectedCurrency
+                )}
               </Text>
             </View>
           </View>

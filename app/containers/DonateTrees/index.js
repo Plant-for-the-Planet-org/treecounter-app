@@ -42,10 +42,7 @@ class DonationTreesContainer extends PureComponent {
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
-    // console.log('In donate Tree Route' + this.props.navigation);
-    // console.log(this.props.navigation);
   }
-
   onTabChange = title => this.props.navigation.setParams({ titleParam: title });
 
   updateRoute = (routeName, id) =>
@@ -64,10 +61,7 @@ class DonationTreesContainer extends PureComponent {
         }
         createPaymentDonation={this.props.createPaymentDonation}
         createPaymentGift={this.props.createPaymentGift}
-        updateUserProfile={this.props.updateUserProfile}
         onTabChange={title => this.onTabChange(title)}
-        supportTreecounter={this.props.supportTreecounter}
-        paymentStatus={this.props.paymentStatus}
         paymentClear={this.props.paymentClear}
         paymentStatus={this.props.paymentStatus}
         plantProjectClear={this.props.clearPlantProject}

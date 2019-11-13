@@ -4,8 +4,6 @@ import { trillionCampaign } from '../../actions/trillionAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
 import TreecounterGraphicsText from './TreecounterGraphicsText';
-import SecondaryAccentButton from '../Common/Button/SecondaryAccentButton';
-import ButtonHeading from '../Common/Heading/ButtonHeading';
 import { updateRoute } from '../../helpers/routerHelper';
 import TextHeading from '../Common/Heading/TextHeading';
 import TextBlock from '../Common/Text/TextBlock';
@@ -62,7 +60,7 @@ class Trillion extends Component {
         </TextHeading>
         {this.props.pledgeEvents &&
         this.props.pledgeEvents.pledgeEvents.length > 0 ? (
-          <div>
+          <div style={{ marginTop: 48 }}>
             <TextBlock>{i18n.t('label.trillionlabel')}</TextBlock>
             <div className="events_row">
               {this.props.pledgeEvents.pledgeEvents
@@ -78,7 +76,10 @@ class Trillion extends Component {
                     }}
                   >
                     <div className="imgContainer">
-                      <img src={getImageUrl('event', 'thumb', element.image)} />
+                      <img
+                        style={{ borderRadius: '25px' }}
+                        src={getImageUrl('event', 'thumb', element.image)}
+                      />
                     </div>
 
                     <TextBlock>{element.name}</TextBlock>
@@ -96,7 +97,7 @@ class Trillion extends Component {
               </div>
             ) : (
               <TreecounterGraphicsText
-                trillion={true}
+                trillion
                 treecounterData={this.state.svgData}
               />
             )}

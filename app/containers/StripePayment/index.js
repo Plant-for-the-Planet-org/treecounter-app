@@ -30,6 +30,11 @@ class StripePayment extends Component {
 
   render() {
     let props = this.props;
+    const donationId = props.donationId
+      ? props.donationId
+      : props.paymentStatus && props.paymentStatus.contribution
+        ? props.paymentStatus.contribution[0].id
+        : null;
     return (
       <StripeProvider stripe={props.stripe}>
         <Elements>
@@ -50,6 +55,7 @@ class StripePayment extends Component {
             paymentStatus={props.paymentStatus}
             paymentDetails={props.paymentDetails}
             paymentFailed={props.paymentFailed}
+            donationId={donationId}
             onError={this.onError}
             onSuccess={this.onSuccess}
             accountName={props.accountName}
@@ -97,6 +103,7 @@ StripePayment.propTypes = {
   accountName: PropTypes.string,
   gateway: PropTypes.string,
   paymentStatus: PropTypes.object,
+  donationId: PropTypes.number,
   handlePay: PropTypes.func,
   paymentFailed: PropTypes.func,
   setProgressModelState: PropTypes.func,

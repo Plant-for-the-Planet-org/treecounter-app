@@ -82,7 +82,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 'pftp-widget-treecounter',
                 PFTPWidgetTreeCounter
               );
-            } catch (err) {}
+            } catch (err) {
+              console.log(err);
+            }
 
             let treecounter = result.data;
             if (!isStandardTreecounter) {
@@ -91,10 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let div = document.createElement('pftp-widget-treecounter');
             const shadowRoot = div.attachShadow({ mode: 'closed' });
-            const newDivNode = allBlockQuote[i].parentNode.insertBefore(
-              div,
-              allBlockQuote[i]
-            );
+            allBlockQuote[i].parentNode.insertBefore(div, allBlockQuote[i]);
             ReactDOM.render(
               <App
                 key={'test_app'}

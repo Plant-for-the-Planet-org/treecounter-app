@@ -86,8 +86,8 @@ class LeaderBoardContainer extends React.Component {
   handleBackButton = (
     section = this.state.sectionInfo.section,
     orderBy = this.state.sortingQueryParam.orderBy,
-    period = this.state.sortingQueryParam.period,
-    subSection = this.state.sectionInfo.subSection
+    period = this.state.sortingQueryParam.period
+    // subSection = this.state.sectionInfo.subSection
   ) => {
     if (!this.props.navigation) {
       replaceRoute(
@@ -136,7 +136,7 @@ class LeaderBoardContainer extends React.Component {
     }
   };
 
-  componentWillReceiveProps(nextProps, nextState) {
+  componentWillReceiveProps(nextProps /*, nextState*/) {
     console.log('__componentWillReceiveProps__');
 
     if (!this.props.navigation) {
@@ -218,8 +218,10 @@ class LeaderBoardContainer extends React.Component {
           mapInfo,
           sortingQueryParam: this.getDefaultQuery(
             this.props && this.props.location && this.props.location.search,
-            orderByOptionsInfo.orderByOptionsKeys[0],
-            timePeriodsInfo.timePeriodsKeys[0]
+            orderByOptionsInfo.orderByOptionsKeys
+              ? orderByOptionsInfo.orderByOptionsKeys[0]
+              : null,
+            timePeriodsInfo ? timePeriodsInfo.timePeriodsKeys[0] : null
           )
         });
         this.sendSearchQuery();

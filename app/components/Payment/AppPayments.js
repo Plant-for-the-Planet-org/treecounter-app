@@ -45,7 +45,7 @@ export default class AppPayments extends Component {
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <CardLayout>
-          {this.state.paymentStatus === 'success' ? (
+          {this.props.paymentStatus && this.props.paymentStatus.status ? (
             <div className="payment-success">
               <img src={check_green} />
               <div className={'gap'} />
@@ -61,11 +61,15 @@ export default class AppPayments extends Component {
                 </PrimaryButton>
               </TextBlock>
             </div>
-          ) : this.state.paymentStatus === 'failed' ? (
+          ) : this.props.paymentStatus &&
+          !this.props.paymentStatus.status &&
+          this.props.paymentStatus.message ? (
             <div className="payment-success">
               <img src={attention} />
               <div className={'gap'} />
-              <TextBlock strong>{i18n.t('label.payment_failed')}</TextBlock>
+              <TextBlock strong>
+                {i18n.t('label.error') + ' ' + this.props.paymentStatus.message}
+              </TextBlock>
               <div className={'gap'} />
               <TextBlock>
                 <PrimaryButton onClick={() => this.openApp('failed')}>
@@ -86,6 +90,11 @@ export default class AppPayments extends Component {
                   currency={paymentInfo.currency}
                   expandedOption={this.state.expandedOption}
                   handleExpandedClicked={this.handleExpandedClicked}
+                  paymentDetails={{
+                    amount: paymentInfo.amount,
+                    currency: paymentInfo.currency,
+                    treeCount: paymentInfo.treeCount
+                  }}
                   context={{
                     treeCount: paymentInfo.treeCount,
                     tpoName: paymentInfo.tpoName,
@@ -95,6 +104,7 @@ export default class AppPayments extends Component {
                       ? { displayName: paymentInfo.supportedTreecounterName }
                       : null
                   }}
+                  donationId={paymentInfo.id}
                   onFailure={data =>
                     console.log('/////////////////// payment failure ', data)
                   }
@@ -112,5 +122,6 @@ export default class AppPayments extends Component {
 }
 
 AppPayments.propTypes = {
-  paymentInfo: PropTypes.object
+  paymentInfo: PropTypes.object,
+  paymentStatus: PropTypes.object
 };

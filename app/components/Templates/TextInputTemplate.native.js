@@ -1,4 +1,4 @@
-import { Text, View, Image, TextInput, Platform } from 'react-native';
+import { Text, View, Image, TextInput } from 'react-native';
 import React from 'react';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/forms/textinput.native';
@@ -50,7 +50,7 @@ export function TextInputTemplate(locals) {
           onKeyPress={locals.onKeyPress}
           returnKeyType={locals.returnKeyType}
           autoCapitalize={'sentences'}
-          allowFontScaling={true}
+          allowFontScaling
         />
       </View>
       <View style={styles.errorStyle}>{error}</View>

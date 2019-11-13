@@ -35,7 +35,7 @@ class Offline extends React.Component {
   render() {
     const { account, amount, currency } = this.props;
     const userMessage = i18n.t('label.confirm', { amount, currency });
-
+    const textColor = '#b7d37f';
     return (
       <View
         style={{
@@ -61,7 +61,7 @@ class Offline extends React.Component {
         <Text
           style={{
             textAlign: 'justify',
-            color: '#b7d37f',
+            color: textColor,
             marginTop: 15,
             marginLeft: 5,
             alignSelf: 'flex-start'

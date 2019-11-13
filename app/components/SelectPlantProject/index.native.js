@@ -12,15 +12,18 @@ import ListProjects from './Tabs/list';
 import PriceProjects from './Tabs/price';
 
 export default class SelectPlantTabView extends PureComponent {
-  state = {
-    routes: [
-      { key: 'featured', title: i18n.t('label.featured') },
-      { key: 'list', title: i18n.t('label.list') },
-      { key: 'price', title: i18n.t('label.price') },
-      { key: 'country', title: i18n.t('label.country') }
-    ],
-    index: 0
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      routes: [
+        { key: 'featured', title: i18n.t('label.featured') },
+        { key: 'list', title: i18n.t('label.list') },
+        { key: 'price', title: i18n.t('label.price') },
+        { key: 'country', title: i18n.t('label.country') }
+      ],
+      index: 0
+    };
+  }
 
   handleExpandedClicked = optionNumber => {
     this.setState({
@@ -36,7 +39,6 @@ export default class SelectPlantTabView extends PureComponent {
     return (
       <TabBar
         {...props}
-        indicatorStyle={styles.indicator}
         style={styles.tabBar}
         //tabStyle={{ width: Layout.window.width / 4 }}
         labelStyle={styles.textStyle}
@@ -53,10 +55,17 @@ export default class SelectPlantTabView extends PureComponent {
       plantProjects,
       onMoreClick,
       selectProject,
-      navigation
+      navigation,
+      currencies
     } = this.props;
     // props for children
-    const props = { plantProjects, onMoreClick, selectProject, navigation };
+    const props = {
+      plantProjects,
+      onMoreClick,
+      selectProject,
+      navigation,
+      currencies
+    };
     const { index } = this.state;
 
     // Only render a tab if it is focused

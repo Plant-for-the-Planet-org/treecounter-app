@@ -1,5 +1,7 @@
 rootProject.name = 'TreecounterApp'
 include ':app'
+include ':@react-native-community_async-storage'
+project(':@react-native-community_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/async-storage/android')
 include ':react-native-youtube'
 project(':react-native-youtube').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-youtube/android')
 //include ':react-native-paypal-wrapper'

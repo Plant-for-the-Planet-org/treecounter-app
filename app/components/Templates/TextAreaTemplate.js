@@ -28,7 +28,6 @@ export function TextAreaTemplate(locals) {
                 ? 'pftp-textfield__inputgroup--highlight'
                 : 'pftp-textfield__inputgroup--highlightr-error'
             }
-            className=""
           />
           <span
             className={

@@ -13,7 +13,7 @@ export default class App extends Component {
     return (
       <div className="app">
         <link href="ndviwidget.css" rel="stylesheet" />
-        <NDVIContainer dataPoints={mockDataPoints} loading={true} />
+        <NDVIContainer dataPoints={mockDataPoints} loading />
       </div>
     );
   }

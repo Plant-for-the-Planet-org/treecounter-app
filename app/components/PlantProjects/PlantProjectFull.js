@@ -4,15 +4,13 @@ import PropTypes from 'prop-types';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import SeeMoreToggle from '../Common/SeeMoreToggle';
 import PlantProjectDetails from './PlantProjectDetails';
-import InlineLink from '../Common/InlineLink';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
-import CardLayout from '../Common/Card';
 import { getImageUrl } from '../../actions/apiRouting';
 import PlantedProgressBar from './PlantedProgressbar';
 import { tick } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
-import { formatNumber } from '../../utils/utils';
+import NumberFormat from '../Common/NumberFormat';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -73,7 +71,8 @@ class PlantProjectFull extends React.Component {
       homepageCaption: homepageCaption,
       videoUrl: videoUrl,
       geoLocation,
-      ndviUid
+      ndviUid,
+      tpoSlug
     } = this.props.plantProject;
     let projectImage = null;
 
@@ -85,6 +84,7 @@ class PlantProjectFull extends React.Component {
 
     const teaserProps = {
       tpoName: this.props.tpoName,
+      tpoSlug: tpoSlug,
       projectName,
       isCertified,
       projectImage
@@ -139,10 +139,10 @@ class PlantProjectFull extends React.Component {
               ) : null}
             </div>
           </div>
-          {teaserProps.tpoName && (
+          {teaserProps.tpoSlug && (
             <div className="row">
               <div className="teaser__tpoHeading">
-                <a onClick={() => this.updateRoute(teaserProps.tpoName)}>
+                <a onClick={() => this.updateRoute(teaserProps.tpoSlug)}>
                   {i18n.t('label.by_a_name') + ' ' + teaserProps.tpoName}
                 </a>
               </div>
@@ -154,7 +154,12 @@ class PlantProjectFull extends React.Component {
             <PlantProjectSpecs {...specsProps} />
           </div>
           <div className="project-specs__cost">
-            {formatNumber(specsProps.treeCost, null, specsProps.currency)}
+            <span>
+              <NumberFormat
+                data={specsProps.treeCost}
+                currency={specsProps.currency}
+              />
+            </span>
           </div>
         </div>
         <div className="project-action-links">

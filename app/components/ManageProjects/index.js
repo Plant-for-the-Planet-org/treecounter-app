@@ -1,4 +1,4 @@
-import React, { Component, Children } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
@@ -11,7 +11,6 @@ import ConfirmDeletion from './ConfirmDelete';
 import _ from 'lodash';
 import TextHeading from '../Common/Heading/TextHeading';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
-import CardLayout from '../Common/Card';
 import { delimitNumbers } from '../../utils/utils';
 
 let TCombForm = t.form.Form;
@@ -68,7 +67,7 @@ class CollapsiblePlantProject extends Component {
         onDrop={event => {
           event.preventDefault();
           // Get the id of the target and add the moved element to the target's DOM
-          let data = event.dataTransfer.getData('text/plain');
+          // let data = event.dataTransfer.getData('text/plain');
           this.dropProject(event, plantProject.position);
         }}
         onDragOver={event => {
@@ -87,9 +86,11 @@ class CollapsiblePlantProject extends Component {
                 <img
                   src={baselineEdit}
                   className="icon"
-                  onClick={event => {
-                    this.togglePicker();
-                  }}
+                  onClick={
+                    (/* event */) => {
+                      this.togglePicker();
+                    }
+                  }
                 />
                 <img
                   src={baselineDelete}
@@ -151,6 +152,7 @@ export default class ManageProjects extends Component {
     });
   }
 
+  // eslint-disable-next-line no-unused-vars
   mergeProjectImages(newPlantProjectImages, oldPlantProjectImages = []) {
     if (!newPlantProjectImages) {
       return [];
@@ -212,6 +214,7 @@ export default class ManageProjects extends Component {
       (plantProject, index) => {
         return [
           <ConfirmDeletion
+            key={`ConfirmDeletion-${index}`}
             isOpen={this.state.openDialog}
             handleDeletion={() =>
               this.handleDeleteProjectCLick(plantProject, index)
@@ -289,7 +292,7 @@ export default class ManageProjects extends Component {
   };
 
   render() {
-    const { type, image } = this.props.currentUserProfile;
+    const { type /* , image */ } = this.props.currentUserProfile;
     return (
       <div className="app-container__content--center sidenav-wrapper edit-user-profile__container ">
         {type == 'tpo' ? (

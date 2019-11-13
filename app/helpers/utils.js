@@ -23,6 +23,8 @@ import {
 } from '../assets';
 import _ from 'lodash';
 import { getErrorView } from '../server/validator';
+import * as Yup from 'yup';
+import i18n from '../locales/i18n';
 
 /*
 /* This Will take server's error response and form SchemaOptions
@@ -38,7 +40,7 @@ export const handleServerResponseError = function(
     serverFormError &&
     serverFormError.response &&
     serverFormError.response.data;
-  if (data && data.code == 400 && data.hasOwnProperty('errors')) {
+  if (data && data.code == 400 && data['errors']) {
     let newOptions = _.cloneDeep(formSchemaOptions);
     for (let property in data.errors.children) {
       updateFormSchema(
@@ -135,15 +137,18 @@ export function objectToQueryParams(objectValue) {
 
 // credits to https://itnext.io/create-date-from-mysql-datetime-format-in-javascript-912111d57599
 export function getDateFromMySQL(dateTime) {
+  console.log('getDateFromMySQL', dateTime);
   if (dateTime) {
     let dateTimeParts = dateTime.split(/[- :]/);
     dateTimeParts[1]--; // monthIndex begins with 0 for January and ends with 11 for December so we need to decrement by one
     return new Date(...dateTimeParts);
+  } else {
+    return new Date();
   }
 }
 
-export function formatDate(date) {
-  console.log('formatDate', date);
+export function formatDateToMySQL(date) {
+  console.log('formatDateToMySQL', date);
 
   let dd = date.getDate();
   let mm = date.getMonth() + 1; //January is 0!
@@ -569,3 +574,67 @@ export function isTpo(currentUserProfile) {
 }
 
 export const paymentFee = 0;
+
+export function generateFormikSchemaFromFormSchema(
+  schemaObj = { properties: {}, required: [] },
+  fields
+) {
+  let validationSchemaGenerated = {};
+  Object.keys(schemaObj.properties).map(key => {
+    if (fields.indexOf(key) !== -1) {
+      const property = schemaObj.properties[key];
+
+      if (['hidden', 'file'].indexOf(property.type) < 0) {
+        // Not accepted in native
+
+        let prepareSchema = Yup;
+        const title = i18n.t(property.title);
+
+        if (property.type === 'object') {
+          prepareSchema = generateFormikSchemaFromFormSchema(property);
+        } else {
+          if (property.type === 'string') {
+            prepareSchema = prepareSchema.string();
+          } else if (property.type === 'integer') {
+            prepareSchema = prepareSchema
+              .number()
+              .positive(i18n.t('label.positive_number'))
+              .typeError(i18n.t('label.invalid_number'));
+          } else if (property.type === 'number') {
+            prepareSchema = prepareSchema
+              .number()
+              .typeError(i18n.t('label.invalid_number'));
+          }
+
+          if (schemaObj.required && schemaObj.required.indexOf(key) >= 0) {
+            prepareSchema = prepareSchema.required(
+              i18n.t('label.required_field', { field: title })
+            );
+          }
+
+          if (property.enum && property.enum.length > 0) {
+            prepareSchema = prepareSchema.oneOf(
+              property.enum,
+              i18n.t('label.selection_invalid')
+            );
+          }
+
+          if (key === 'email') {
+            prepareSchema = prepareSchema.email(i18n.t('label.email_invalid'));
+          }
+
+          if (property.attr && property.attr.maxlength) {
+            prepareSchema = prepareSchema.max(
+              property.attr.maxlength,
+              i18n.t('label.char_limit', { field: property.attr.maxlength })
+            );
+          }
+        }
+
+        validationSchemaGenerated[key] = prepareSchema;
+      }
+    }
+  });
+
+  return Yup.object().shape(validationSchemaGenerated);
+}

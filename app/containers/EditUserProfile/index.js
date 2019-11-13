@@ -8,14 +8,14 @@ import {
   updatePlantProject,
   deletePlantProject,
   addPlantProject,
-  deleteUserProfile
+  deleteUserProfile,
+  updateUserEmail
 } from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
 import { logoutUser } from '../../actions/authActions';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
-import { getRequest } from '../../utils/api';
 import { unfollowUser } from '../../actions/followActions';
 
 const profileTypeLabel = {
@@ -45,6 +45,7 @@ class EditUserProfileContainer extends React.Component {
       const followeeIdsList = currentUserProfile.treecounter.followeeIds.split(
         ','
       );
+      // eslint-disable-next-line no-underscore-dangle
       let _FolloweeInfo = [];
       followeeIdsList.forEach(id => {
         this.props
@@ -76,6 +77,7 @@ class EditUserProfileContainer extends React.Component {
       this.fetchFolloweeinfo();
     }
   }
+
   deleteProfile = () => {
     console.log(
       'call Profile Deletion API here',
@@ -83,16 +85,57 @@ class EditUserProfileContainer extends React.Component {
     );
     this.props
       .deleteUserProfile(this.props.currentUserProfile.id)
-      .then(data => {
-        console.log(data);
+      .then((/* data */) => {
+        NotificationManager.success(
+          `${i18n.t('label.deleted_success')}`,
+          i18n.t('label.success'),
+          5000
+        );
         this.props.logoutUser();
+      })
+      .catch(error => {
+        NotificationManager.error(
+          error.message,
+          i18n.t('label.error_title'),
+          5000
+        );
+      });
+  };
+
+  updateEmail = email => {
+    this.props
+      .updateUserEmail(email)
+      .then((/* data */) => {
+        NotificationManager.success(
+          i18n.t('label.confirmation_email_will_be_send'),
+          i18n.t('label.success'),
+          5000
+        );
+        this.props.logoutUser();
+      })
+      .catch(err => {
+        if (err.response.data.code === 400) {
+          NotificationManager.error(
+            err.response.data.errors.children.newEmail.errors
+              ? err.response.data.errors.children.newEmail.errors[0]
+              : err.response.data.errors.children.newEmail.children.first
+                ? err.response.data.errors.children.newEmail.children.first
+                    .errors[0]
+                : err.response.data.errors.children.newEmail.children.second
+                  ? err.response.data.errors.children.newEmail.children.second
+                      .errors[0]
+                  : 'label.error',
+            i18n.t('label.error'),
+            5000
+          );
+        }
       });
   };
 
   updatePlantProject = plantProject => {
     this.props
       .updatePlantProject(plantProject)
-      .then(data => {
+      .then((/* data */) => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_update_success')}`,
           i18n.t('label.success'),
@@ -111,7 +154,7 @@ class EditUserProfileContainer extends React.Component {
   deletePlantProject = plantProjectId => {
     this.props
       .deletePlantProject(plantProjectId)
-      .then(data => {
+      .then((/* data */) => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_delete_success')}`,
           i18n.t('label.success'),
@@ -130,7 +173,7 @@ class EditUserProfileContainer extends React.Component {
   addPlantProject = newProject => {
     this.props
       .addPlantProject(newProject)
-      .then(data => {
+      .then((/* data */) => {
         NotificationManager.success(
           `${i18n.t('label.plant_project_added_success')}`,
           i18n.t('label.success'),
@@ -146,6 +189,7 @@ class EditUserProfileContainer extends React.Component {
       });
   };
 
+  // eslint-disable-next-line no-unused-vars
   onSave = (usertype, profileType, formRefs, newImageAvailable) => {
     const profileForm =
       (formRefs && formRefs[profileType]) ||
@@ -157,7 +201,7 @@ class EditUserProfileContainer extends React.Component {
     let value = profileForm.getValue();
 
     let imageValue = undefined;
-    if (!!imageForm) {
+    if (imageForm) {
       imageValue = imageForm.getValue();
     }
     if (
@@ -169,7 +213,7 @@ class EditUserProfileContainer extends React.Component {
     if (value) {
       this.props
         .updateUserProfile(value, profileType)
-        .then(data => {
+        .then((/* data */) => {
           if (profileType == 'password') {
             this.setState({ showPasswordDialog: true });
           } else {
@@ -201,6 +245,7 @@ class EditUserProfileContainer extends React.Component {
         openPasswordUpdatedDialog={this.state.showPasswordDialog}
         handlePaswordUpdatedClose={this.handleCloseModal}
         deleteProfile={this.deleteProfile}
+        updateEmail={this.updateEmail}
         updatePlantProject={this.updatePlantProject}
         deletePlantProject={this.deletePlantProject}
         addPlantProject={this.addPlantProject}
@@ -228,6 +273,7 @@ const mapDispatchToProps = dispatch => {
       deletePlantProject,
       addPlantProject,
       deleteUserProfile,
+      updateUserEmail,
       logoutUser,
       unfollowUser,
       treecounterLookupAction
@@ -246,6 +292,7 @@ EditUserProfileContainer.propTypes = {
   deletePlantProject: PropTypes.func,
   addPlantProject: PropTypes.func,
   deleteUserProfile: PropTypes.func,
+  updateEmail: PropTypes.func,
   navigation: PropTypes.any,
   logoutUser: PropTypes.func,
   unfollowUser: PropTypes.func,

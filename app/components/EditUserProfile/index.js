@@ -26,10 +26,6 @@ import { getImageUrl } from '../../actions/apiRouting';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import { updateRoute } from '../../helpers/routerHelper';
 
-const plantProjectFormOptions = {
-  template: PlantProjectTemplate(),
-  ...plantProjectSchema.schemaOptions
-};
 let TCombForm = t.form.Form;
 const emptyProjectInfo = { name: '' };
 
@@ -74,7 +70,7 @@ export default class EditUserProfile extends React.Component {
     }
   };
 
-  mergeProjectImages(newPlantProjectImages, oldPlantProjectImages = []) {
+  mergeProjectImages(newPlantProjectImages) {
     if (!newPlantProjectImages) {
       return [];
     }
@@ -104,8 +100,7 @@ export default class EditUserProfile extends React.Component {
         delete value.imageFile;
       }
       let plantProjectImages = this.mergeProjectImages(
-        value.plantProjectImages,
-        plantProject.plantProjectImages
+        value.plantProjectImages
       );
       if (plantProject.id) {
         this.props.updatePlantProject({
@@ -128,6 +123,14 @@ export default class EditUserProfile extends React.Component {
       case 'password':
         return UserPasswordUpdateTemplate;
     }
+  };
+
+  changeEmail = () => {
+    let formRef = 'change_email';
+    console.log(this.refs[formRef].validate());
+
+    let value = this.refs[formRef].getValue();
+    this.props.updateEmail(value);
   };
 
   getFormSchemaOption = (userType, profileType) => {
@@ -201,11 +204,11 @@ export default class EditUserProfile extends React.Component {
     const updatedUserProfile = {
       ...this.props.currentUserProfile,
       synopsis1: `${
-        !!this.props.currentUserProfile.synopsis1
+        this.props.currentUserProfile.synopsis1
           ? this.props.currentUserProfile.synopsis1
           : ''
       }${
-        !!this.props.currentUserProfile.synopsis2
+        this.props.currentUserProfile.synopsis2
           ? ' ' + this.props.currentUserProfile.synopsis2
           : ''
       }`,
@@ -237,6 +240,7 @@ export default class EditUserProfile extends React.Component {
               type={parsedSchema[type].image.transformedSchema}
               options={parsedSchema[type].image.schemaOptions}
               value={updatedUserProfile}
+              // eslint-disable-next-line no-underscore-dangle
               onChange={value => (this._profileImageValue = value)}
             />
           </div>
@@ -253,7 +257,8 @@ export default class EditUserProfile extends React.Component {
                 type,
                 'profile',
                 undefined,
-                !!this._profileImageValue
+                // eslint-disable-next-line no-underscore-dangle
+                this._profileImageValue
               );
             }}
           >
@@ -318,11 +323,32 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
 
+        <CardLayout className="user-profile__form-group">
+          <div className="form-group__heading">
+            {i18n.t('label.change_email')}
+          </div>
+          <TCombForm
+            ref={'change_email'}
+            type={parsedSchema[type].email.transformedSchema}
+            options={this.getFormSchemaOption(type, 'email')}
+          />
+          <div className="form-group__heading">
+            {i18n.t('label.change_email_warning')}
+          </div>
+          <PrimaryButton
+            onClick={() => {
+              this.changeEmail();
+            }}
+          >
+            {i18n.t('label.save_changes')}
+          </PrimaryButton>
+        </CardLayout>
+
         {treeCounter &&
           treeCounter.followeeIds && (
             <CardLayout className="user-profile__form-group">
               <div className="form-group__heading">
-                {i18n.t('label.un_subscribe')}
+                {i18n.t('label.subscribed')}
               </div>
               {this.props.followeeList && this.props.followeeList.length > 0 ? (
                 <div className="follow-container">
@@ -354,9 +380,8 @@ export default class EditUserProfile extends React.Component {
                       </div>
                       <div className="col col3">
                         <FollowLabelButton
-                          label={i18n.t('label.un_follow')}
-                          isSubscribed={true}
-                          isLoggedIn={false}
+                          label={i18n.t('label.unsubscribe')}
+                          isSubscribed
                           onClick={() => this.props.unfollowUser(follow.id)}
                         />
                       </div>
@@ -388,6 +413,7 @@ EditUserProfile.propTypes = {
   openPasswordUpdatedDialog: PropTypes.bool,
   handlePaswordUpdatedClose: PropTypes.func,
   deleteProfile: PropTypes.func.isRequired,
+  updateEmail: PropTypes.func,
   updatePlantProject: PropTypes.func.isRequired,
   deletePlantProject: PropTypes.func.isRequired,
   addPlantProject: PropTypes.func.isRequired,

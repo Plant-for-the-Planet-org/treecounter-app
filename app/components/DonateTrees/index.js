@@ -14,6 +14,7 @@ import { arrow_left_green, check_green, attention } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import classNames from 'classnames';
+import { getPreferredCurrency } from '../../actions/globalCurrency';
 import {
   individualSchemaOptions,
   receiptIndividualFormSchema,
@@ -140,6 +141,12 @@ export default class DonateTrees extends Component {
         currency: this.state.selectedCurrency,
         ...this.state.form
       };
+      if (
+        this.props.supportTreecounter &&
+        this.props.supportTreecounter.treecounterId
+      ) {
+        requestData.communityTreecounter = this.props.supportTreecounter.treecounterId;
+      }
       this.props.createPaymentDonation(
         this.props.selectedProject.id,
         requestData,
@@ -170,11 +177,11 @@ export default class DonateTrees extends Component {
   }
 
   determineDefaultCurrency() {
-    const { currentUserProfile, selectedProject } = this.props;
+    const { currentUserProfile /* , selectedProject */ } = this.props;
     const userCurrency =
       null === currentUserProfile ? null : currentUserProfile.currency;
 
-    return null === userCurrency ? selectedProject.currency : userCurrency;
+    return null === userCurrency ? getPreferredCurrency() : userCurrency;
   }
 
   indexChange(index) {
@@ -209,7 +216,6 @@ export default class DonateTrees extends Component {
       return false;
     },
     () => {
-      // console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt && this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
@@ -249,7 +255,6 @@ export default class DonateTrees extends Component {
       return false;
     },
     () => {
-      // console.log(this.refs.donateReceipt.validate());
       let value = this.refs.donateReceipt && this.refs.donateReceipt.getValue();
       let receipt = {};
       if (value) {
@@ -291,6 +296,7 @@ export default class DonateTrees extends Component {
   }
 
   render() {
+    console.log(this.props.currentUserProfile);
     // this is just for NextArrow displayNone
     let displayNone = classNames({
       'display-none': this.state.pageIndex === 3
@@ -384,15 +390,16 @@ export default class DonateTrees extends Component {
     }
 
     let paymentMethods;
-
-    if (receipt && plantProject) {
+    if (receipt) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
-      const countryCurrencies = plantProject.paymentSetup.countries;
-      if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
-        countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+      if (plantProject && plantProject.paymentSetup) {
+        const countryCurrencies = plantProject.paymentSetup.countries;
+        if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
+          countryCurrency = plantProject.paymentSetup.defaultCountryKey;
+        }
+        paymentMethods =
+          plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
       }
-      paymentMethods =
-        plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
     }
 
     return this.state.showSelectProject ? (

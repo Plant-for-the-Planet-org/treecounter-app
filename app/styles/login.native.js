@@ -10,7 +10,8 @@ export default EStyleSheet.create({
   parentContainer: {
     flex: 1,
     backgroundColor: 'white',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingBottom: 300
   },
   container: {
     width: '100%',
@@ -26,8 +27,8 @@ export default EStyleSheet.create({
     margin: 20
   },
   imageStyle: {
-    width: 100,
-    height: 50
+    width: 64,
+    height: 64
   },
 
   inputContainer: {

@@ -35,11 +35,20 @@ SOFTWARE.
 import React from 'react';
 import SmartBanner from 'react-smartbanner';
 import cookie from 'cookie-cutter';
-
+import { context } from '../../config';
 class SmartBannerClickable extends SmartBanner {
   constructor(props) {
     super(props);
   }
+  parseAppId() {
+    context[this.state.type] &&
+      this.setState({ appId: context[this.state.type].appId });
+    return context[this.state.type];
+  }
+  componentDidMount() {
+    this.parseAppId();
+  }
+
   render() {
     // Don't show banner when:
     // 1) if device isn't iOS or Android
@@ -71,14 +80,7 @@ class SmartBannerClickable extends SmartBanner {
 
     return (
       <div className={wrapperClassName}>
-        <div
-          className="smartbanner-container"
-          onClick={evt => {
-            window.location.href =
-              this.props.url[this.state.type] ||
-              this.state.settings.getStoreLink() + this.state.appId;
-          }}
-        >
+        <div className="smartbanner-container">
           <button
             type="button"
             className="smartbanner-close"
@@ -87,23 +89,21 @@ class SmartBannerClickable extends SmartBanner {
           >
             &times;
           </button>
-          <span className="smartbanner-icon" style={iconStyle} />
-          <div className="smartbanner-info">
-            <div className="smartbanner-title">{this.props.title}</div>
-            <div className="smartbanner-author">{this.props.author}</div>
-            <div className="smartbanner-description">{inStore}</div>
-          </div>
-          <div className="smartbanner-wrapper">
-            <a
-              href={link}
-              onClick={this.install}
-              className="smartbanner-button"
-            >
-              <span className="smartbanner-button-text">
-                {this.props.button}
+          <a href={link} onClick={this.install}>
+            <span className="smartbanner-icon" style={iconStyle} />
+            <div className="smartbanner-info">
+              <div className="smartbanner-title">{this.props.title}</div>
+              <div className="smartbanner-author">{this.props.author}</div>
+              <div className="smartbanner-description">{inStore}</div>
+            </div>
+            <div className="smartbanner-wrapper">
+              <span className="smartbanner-button">
+                <span className="smartbanner-button-text">
+                  {this.props.button}
+                </span>
               </span>
-            </a>
-          </div>
+            </div>
+          </a>
         </div>
       </div>
     );

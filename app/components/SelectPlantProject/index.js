@@ -320,7 +320,7 @@ export default class SelectPlantProject extends Component {
                           {i18n.t('label.organisation')}
                         </th>
                         <th className="align-right">
-                          <span>{i18n.t('label.plantedTrees')}s</span>
+                          <span>{i18n.t('label.plantedTrees')}</span>
                         </th>
                         <th className="align-right">
                           <span>{i18n.t('label.Cost')}</span>

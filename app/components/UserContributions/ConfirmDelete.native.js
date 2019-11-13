@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import styles from '../../styles/edit_profile.native';
-import { Text, View, ScrollView, TextInput } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
@@ -11,10 +11,11 @@ class ConfirmDeletionModal extends Component {
     const deleteContribution = this.props.navigation.getParam(
       'deleteContribution'
     );
+    const backgroundColor = 'white';
     return (
       <View style={styles.confirmDeleteContainer}>
         <ScrollView
-          contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
+          contentContainerStyle={{ flex: 1, backgroundColor: backgroundColor }}
         >
           <View style={styles.container}>
             <Text style={styles.textHeader}>

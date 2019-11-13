@@ -104,11 +104,13 @@ class SearchAutosuggest extends Component {
   onSuggestionsFetchRequested = ({ value }) => {
     setTimeout(() => {
       if (value === this.state.value) {
-        getSuggestions(value).then(_suggestions => {
-          this.setState({
-            suggestions: _suggestions
-          });
-        });
+        getSuggestions(value)
+          .then(_suggestions => {
+            this.setState({
+              suggestions: _suggestions
+            });
+          })
+          .catch(error => console.log(error));
       }
     }, 500);
   };

@@ -1,16 +1,11 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import ContributionCardList from './ContributionCardList';
 import ContributionsMapLegend from './ContributionsMapLegend';
 import i18n from '../../locales/i18n.js';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Animated,
-  ScrollView
-} from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import styles from '../../styles/myTrees/my_trees';
 import tabBarStyles from '../../styles/common/tabbar';
 
@@ -36,7 +31,6 @@ export default class UserContributions extends React.Component {
     return (
       <TabBar
         {...props}
-        indicatorStyle={tabBarStyles.indicator}
         style={[tabBarStyles.tabBar]}
         labelStyle={tabBarStyles.textStyle}
         indicatorStyle={tabBarStyles.textActive}
@@ -55,7 +49,7 @@ export default class UserContributions extends React.Component {
             <ContributionsMapLegend />
           </View>
         );
-        break;
+      // break;
       case 'list':
         return (
           <View {...this.props} style={styles.listContainer}>
@@ -67,31 +61,32 @@ export default class UserContributions extends React.Component {
             </ScrollView>
           </View>
         );
-        break;
-        return null;
+      // break;
     }
   };
 
   render() {
-    const { userProfileId, userContributions } = this.props;
+    // const { userProfileId, userContributions } = this.props;
     return (
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.headContainer}>
           <PrimaryButton
-            onClick={event => {
-              setTimeout(() => {
-                this.props.navigation.navigate(
-                  getLocalRoute('app_registerTrees')
-                );
-              }, 0);
-            }}
+            onClick={
+              (/* event */) => {
+                setTimeout(() => {
+                  this.props.navigation.navigate(
+                    getLocalRoute('app_registerTrees')
+                  );
+                }, 0);
+              }
+            }
             image={plantedTarget}
           >
             {i18n.t('label.register_new_trees')}
           </PrimaryButton>
         </View>
         <TabView
-          useNativeDriver={true}
+          useNativeDriver
           navigationState={this.state}
           renderScene={this._renderScene}
           renderTabBar={this._renderTabBar}

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 /* global paypal */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -43,6 +44,7 @@ class Paypal extends React.Component {
   };
 
   render() {
+    let paypal = window.paypal;
     const { amount, mode, currency, account, onSuccess } = this.props;
 
     const { showButton } = this.state;
@@ -107,7 +109,6 @@ class Paypal extends React.Component {
     let displayNone = classnames('centerize-paypal', {
       'display-none': !this.props.expanded
     });
-
     return (
       <form className="payment-option">
         <div onClick={this.handleArrowClick} className="payment-option-header">

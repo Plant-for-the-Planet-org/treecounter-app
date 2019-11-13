@@ -45,6 +45,7 @@ class CompetitionFull extends React.Component {
       button = null,
       button2 = null;
     const competitionDetail = this.props.competitionDetail;
+
     console.log(competitionDetail);
     let participantCount = 0,
       requestCount = 0,
@@ -80,6 +81,7 @@ class CompetitionFull extends React.Component {
         }
       }
     }
+
     if (
       competitionDetail &&
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
@@ -120,7 +122,6 @@ class CompetitionFull extends React.Component {
           </PrimaryButton>
         );
       }
-      // button = null;
     } else if (status === '') {
       if (competitionDetail && competitionDetail.access === 'immediate') {
         button = (

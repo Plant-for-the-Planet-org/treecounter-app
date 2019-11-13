@@ -3,10 +3,4 @@
 
 target 'TreecounterApp' do
   inherit! :search_paths
-
-
-  pod 'tipsi-stripe', :path => '../node_modules/tipsi-stripe'
-
-
-
 end

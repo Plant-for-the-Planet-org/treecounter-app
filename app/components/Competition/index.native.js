@@ -25,8 +25,8 @@ class Competiton extends React.Component {
       routes: [
         { key: 'featured', title: i18n.t('label.featured_competitions') },
         { key: 'all', title: i18n.t('label.all_competitions') },
-        { key: 'mine', title: i18n.t('Mine') },
-        { key: 'closed', title: i18n.t('Archived') }
+        { key: 'mine', title: i18n.t('label.mine_competitions') },
+        { key: 'closed', title: i18n.t('label.archived_competitions') }
       ],
       index: 0 // It refers to the selected tab, 0 goes for featured
     };

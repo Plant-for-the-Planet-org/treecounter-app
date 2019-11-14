@@ -174,7 +174,7 @@ export default EStyleSheet.create({
   buttonStyle: {
     borderRadius: 4,
     backgroundColor: '#89b53a',
-    width: '45%',
+    minWidth: '45%',
     height: 36,
     padding: 6
   },
@@ -205,7 +205,7 @@ export default EStyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     borderColor: '#e74c3c',
-    width: '45%'
+    minWidth: '45%'
   },
   moreButtonStyleCancelText: { color: '#e74c3c' },
   projectNameContainer: {

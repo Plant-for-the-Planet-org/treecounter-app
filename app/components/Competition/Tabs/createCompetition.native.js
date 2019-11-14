@@ -40,7 +40,7 @@ export default function createCompetition(props) {
           goal: '',
           description: '',
           access: '',
-          endDate: new Date(),
+          endDate: new Date(new Date().valueOf() + 1000 * 3600 * 24),
           imageFile: ''
         }}
       />

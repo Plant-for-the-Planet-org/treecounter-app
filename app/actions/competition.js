@@ -19,7 +19,7 @@ import {
 } from '../schemas';
 import { normalize } from 'normalizr';
 import { debug } from '../debug';
-import { updateRoute } from '../helpers/routerHelper';
+import { updateRoute, updateStaticRoute } from '../helpers/routerHelper';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import i18n from '../locales/i18n.js';
 
@@ -158,10 +158,12 @@ export function createCompetition(value, navigation) {
               normalize(res.data.merge.treecounter, [treecounterSchema])
             )
           );
-          updateRoute('app_competition', navigation || dispatch, 1, {
-            competition: res.data.merge.competition[0].id,
-            titleParam: res.data.merge.competition[0].name
-          });
+          // updateRoute('app_competition', navigation || dispatch, 1, {
+          //   competition: res.data.merge.competition[0].id,
+          //   titleParam: res.data.merge.competition[0].name
+          // });
+          console.log(updateRoute('app_competitions', navigation || dispatch));
+          updateRoute('app_competitions', navigation || dispatch);
           resolve(res.data);
           dispatch(setProgressModelState(false));
           NotificationManager.success(

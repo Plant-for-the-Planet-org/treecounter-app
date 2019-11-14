@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import i18n from '../../../locales/i18n';
 import { payment_bank, payment_arrow } from '../../../assets';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
+
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
 
 class Offline extends React.Component {
   constructor(props) {

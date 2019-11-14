@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
-import CardLayout from '../Common/Card';
-import PaymentSelector from './PaymentSelector';
+
 import { check_green, attention } from '../../assets';
 import TextBlock from '../Common/Text/TextBlock';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+
+const CardLayout = lazy(() => import('../Common/Card'));
+const PaymentSelector = lazy(() => import('./PaymentSelector'));
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+
 import i18n from '../../locales/i18n';
 
 export default class AppPayments extends Component {

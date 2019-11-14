@@ -1,14 +1,16 @@
 // @flow
 /* eslint-disable no-console, react/no-multi-comp */
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import i18n from '../../locales/i18n';
-import StripeContainer from '../../containers/StripePayment';
 
-import Paypal from './Gateways/Paypal';
-import Offline from './Gateways/Offline';
+const StripeContainer = lazy(() => import('../../containers/StripePayment'));
+
+const Paypal = lazy(() => import('./Gateways/Paypal'));
+const Offline = lazy(() => import('./Gateways/Offline'));
+
 import { handlePay, finalizeDonation } from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 import { paymentFailed } from '../../reducers/paymentStatus';

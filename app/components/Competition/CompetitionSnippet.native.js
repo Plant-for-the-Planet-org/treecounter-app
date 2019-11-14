@@ -1,5 +1,5 @@
 import React from 'react';
-import CardLayout from '../Common/Card';
+import { CardLayoutCompetition } from '../Common/Card';
 import styles from '../../styles/competition/competition-snippet.native';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
@@ -119,7 +119,7 @@ class CompetitionSnippet extends React.Component {
         underlayColor={'transparent'}
         onPress={() => this.containerPress(this.props.competition.id)}
       >
-        <CardLayout style={[styles.projectSnippetContainer]}>
+        <CardLayoutCompetition>
           <View style={styles.projectSpecsContainer}>
             {this.props.competition && this.props.competition.image ? (
               <View style={styles.projectImageContainer}>
@@ -205,7 +205,7 @@ class CompetitionSnippet extends React.Component {
               </View>
             </View>
           </View>
-        </CardLayout>
+        </CardLayoutCompetition>
       </TouchableHighlight>
     );
   }

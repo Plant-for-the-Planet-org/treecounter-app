@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
-//components
-import Info from './Info';
-import Legend from './Legend';
-import GradientResultLine from './GradientResultLine';
-import TimeSeries from './TimeSeries';
 import _ from 'lodash';
 import i18n from '../../locales/i18n.js';
 import LoadingNDVI from './LoadingNDVI';
-import CarbonDetails from './CarbonDetails';
 import { getLocale } from '../../actions/getLocale';
+
+//components
+
+const Info = lazy(() => import('./Info'));
+const Legend = lazy(() => import('./Legend'));
+const GradientResultLine = lazy(() => import('./GradientResultLine'));
+const TimeSeries = lazy(() => import('./TimeSeries'));
+const CarbonDetails = lazy(() => import('./CarbonDetails'));
 
 const userLang = getLocale(); // en|de
 

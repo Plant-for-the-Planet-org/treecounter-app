@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { questionmark_orange } from '../../assets';
 import ReactTooltip from 'react-tooltip';

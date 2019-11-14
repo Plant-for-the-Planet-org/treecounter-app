@@ -1,7 +1,8 @@
-import React from 'react';
-import Circle from './Circle';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+
+const Circle = lazy(() => import('./Circle'));
 
 const TimeSerie = props => {
   return (

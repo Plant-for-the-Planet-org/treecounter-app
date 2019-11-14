@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+
 import ReactTooltip from 'react-tooltip';
 import { questionmark_orange } from '../../assets';
 

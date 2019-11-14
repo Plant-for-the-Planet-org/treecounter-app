@@ -78,19 +78,19 @@
   @extend .pftp-text-normal;
   max-width: 292px;
   font-size: 26.5px;
-  text-align: center;
-  text-overflow: ellipsis;
+  text-align: left;
+  // text-overflow: ellipsis;
   color: $headerTextColor;
-  overflow: hidden;
-  white-space: nowrap;
+  // overflow: hidden;
+  // white-space: nowrap;
   @include for-phone-only {
     white-space: initial;
     text-align: left;
     margin-top: 0;
-    font-size: 25.5px;
+    font-size: 20px;
   }
   @include for-xs-phone-only {
-    font-size: 20.5px;
+    font-size: 18px;
   }
 }
 

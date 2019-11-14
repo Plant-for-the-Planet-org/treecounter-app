@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import MapContributions from './MapContributions';
+const MapContributions = lazy(() => import('./MapContributions'));
 
 import { context } from '../../config';
 

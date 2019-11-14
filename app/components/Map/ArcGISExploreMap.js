@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import MapLayerViewer from './MapLayerViewer';
+const MapLayerViewer = lazy(() => import('./MapLayerViewer'));
 
 const ArcGISExploreMap = ({ webMapId, layers }) => {
   console.log('ArcGISExploreMap: webMapId', webMapId);

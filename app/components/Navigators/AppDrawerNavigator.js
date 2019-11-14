@@ -3,56 +3,118 @@ import {
   createDrawerNavigator,
   createStackNavigator
 } from 'react-navigation';
-import React from 'react';
+import React, { lazy } from 'react';
 import { Animated } from 'react-native';
-import Trillion from '../TreecounterGraphics/Trillion';
-import LoginContainer from '../../containers/Authentication/LoginContainer';
-import SignUpContainer from '../../containers/Authentication/SignUpContainer';
-import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
-import TargetContainer from '../../containers/TargetContainer';
-import DonationTreesContainer from '../../containers/DonateTrees';
+
+const Trillion = lazy(() => import('../TreecounterGraphics/Trillion'));
+const LoginContainer = lazy(() =>
+  import('../../containers/Authentication/LoginContainer')
+);
+const SignUpContainer = lazy(() =>
+  import('../../containers/Authentication/SignUpContainer')
+);
+const ForgotPasswordContainer = lazy(() =>
+  import('../../containers/Authentication/ForgotPasswordContainer')
+);
+const TargetContainer = lazy(() => import('../../containers/TargetContainer'));
+const DonationTreesContainer = lazy(() =>
+  import('../../containers/DonateTrees')
+);
 
 import { getLocalRoute } from '../../actions/apiRouting';
 import styles from '../../styles/header.native';
+
 import BurgerMenu from '../Header/BurgerMenu';
 import HeaderRight from '../Header/HeaderFields';
 
 import i18n from '../../locales/i18n';
-import FAQContainer from '../../containers/FAQ';
-import UserContributions from '../../containers/UserContributions';
-import UserHomeContainer from '../../containers/UserHome';
-import SearchLayout from '../Header/SearchLayout';
-import AboutUsContainer from '../../containers/AboutUs';
-import UserContributionDetails from '../../containers/UserContributionsDetails';
-import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
-import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
-import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal';
-import LicenseInfoList from '../AboutUs/LicenseInfoList';
-import BottomTabContainer from '../../containers/Menu/TabContainer';
-import GiftTrees from '../../containers/GiftTrees';
-import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
-import RegisterTrees from '../../containers/RegisterTrees';
-import EditUserContributionContainer from '../../containers/EditUserContribution';
-import EditUserProfile from '../../containers/EditUserProfile';
-import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
-import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
-import SelectedPlantProject from '../../containers/SelectedPlantProject';
-import SelectedCompetition from '../../containers/SelectedCompetition';
-import RedemptionContainer from '../../containers/RedemptionContainer';
-import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
-import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
-import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
-import ImprintContainer from '../../containers/Imprint';
-import PrivacyContainer from '../../containers/Privacy';
-import CompetitionContainer from '../../containers/CompetitionContainer';
-import ChallengeContainer from '../../containers/Challenge/createChallenge';
-import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
-import EditCompetitionContainer from '../../containers/EditCompetition';
-import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
-import PledgeEvents from './../PledgeEvents/PledgeEvents.native';
-import UnfulfilledPledgeEvents from './../PledgeEvents/UnfulfilledPledgeEvent';
-import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
-import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
+
+const FAQContainer = lazy(() => import('../../containers/FAQ'));
+const UserContributions = lazy(() =>
+  import('../../containers/UserContributions')
+);
+const UserHomeContainer = lazy(() => import('../../containers/UserHome'));
+const SearchLayout = lazy(() => import('../Header/SearchLayout'));
+const AboutUsContainer = lazy(() => import('../../containers/AboutUs'));
+const UserContributionDetails = lazy(() =>
+  import('../../containers/UserContributionsDetails')
+);
+const ConfirmProfileDeletionModal = lazy(() =>
+  import('../../components/EditUserProfile/ConfirmProfileDeletionModal')
+);
+const ConfirmContributionDeletionModal = lazy(() =>
+  import('../../components/UserContributions/ConfirmDelete')
+);
+const WelcomeScreenModal = lazy(() =>
+  import('../../components/Authentication/WelcomeScreenModal')
+);
+const LicenseInfoList = lazy(() => import('../AboutUs/LicenseInfoList'));
+const BottomTabContainer = lazy(() =>
+  import('../../containers/Menu/TabContainer')
+);
+const GiftTrees = lazy(() => import('../../containers/GiftTrees'));
+const PublicTreeCounterContainer = lazy(() =>
+  import('../../containers/PublicTreeCounterContainer')
+);
+const RegisterTrees = lazy(() => import('../../containers/RegisterTrees'));
+const EditUserContributionContainer = lazy(() =>
+  import('../../containers/EditUserContribution')
+);
+const EditUserProfile = lazy(() => import('../../containers/EditUserProfile'));
+const SideMenuContainer = lazy(() =>
+  import('../../containers/Menu/SideMenuContainer')
+);
+const ActivateAccountContainer = lazy(() =>
+  import('../../containers/Authentication/ActivateAccountContainer')
+);
+const SelectedPlantProject = lazy(() =>
+  import('../../containers/SelectedPlantProject')
+);
+const SelectedCompetition = lazy(() =>
+  import('../../containers/SelectedCompetition')
+);
+const RedemptionContainer = lazy(() =>
+  import('../../containers/RedemptionContainer')
+);
+const SelectPlantProjectContainer = lazy(() =>
+  import('../../containers/SelectPlantProject')
+);
+const EmailSentContainer = lazy(() =>
+  import('../../containers/Authentication/EmailSentContainer')
+);
+const ResetPasswordContainer = lazy(() =>
+  import('../../containers/Authentication/ResetPasswordContainer')
+);
+const ImprintContainer = lazy(() => import('../../containers/Imprint'));
+const PrivacyContainer = lazy(() => import('../../containers/Privacy'));
+const CompetitionContainer = lazy(() =>
+  import('../../containers/CompetitionContainer')
+);
+const ChallengeContainer = lazy(() =>
+  import('../../containers/Challenge/createChallenge')
+);
+const ProfilePickerModal = lazy(() =>
+  import('../EditUserProfile/dedicate-trees/ProfilePickerModal')
+);
+const EditCompetitionContainer = lazy(() =>
+  import('../../containers/EditCompetition')
+);
+const SuccessfullActivatedContainer = lazy(() =>
+  import('../../containers/Authentication/SuccessfullActivatedContainer')
+);
+const PledgeEvents = lazy(() =>
+  import('./../PledgeEvents/PledgeEvents.native')
+);
+const UnfulfilledPledgeEvents = lazy(() =>
+  import('./../PledgeEvents/UnfulfilledPledgeEvent')
+);
+const MakePledgeForm = lazy(() =>
+  import('./../PledgeEvents/MakePledgeForm.native')
+);
+const UpdatePledgeEvent = lazy(() =>
+  import('./../PledgeEvents/UpdatePledgeEvent.native')
+);
+
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',

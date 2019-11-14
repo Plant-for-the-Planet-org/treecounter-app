@@ -1,1 +1,14 @@
-{ }
+{
+  "widget_share": "Widget: Sdílejte svůj pokrok",
+  "widget_share_description": "Widget je jednoduchý způsob, jak ukázat váš postup v sázení stromů na webu či blogu. Vložit můžete pouze veřejné počítadla stromů.",
+  "widget_share_choose_widget": "1. Vyberte typ widgetu",
+  "widget_share_copy_paste_html_snippet": "2. Zkopírujte a vložte fragment HTML kódu ",
+  "widget_basic": "Počet stromů",
+  "widget_global_tree_counter": "Globální počítadlo stromů",
+  "widget_standard_tree_counter": "Standardní počítadlo stromů",
+  "widget_progress_tree_counter": "Pokrok na počítadle stromů",
+  "widget_donate_trees": "Darovat stromy",
+  "widget_preview": "Náhled widgetu",
+  "widget_not_public_acct_warning": "Váš profil není veřejně viditelný, pro vytvoření widgetu počítadla stromů nastavte svůj účet na veřejný v sekci \"Upravit profil\".",
+  "widget_loading": " načítání widgetu ..."
+}

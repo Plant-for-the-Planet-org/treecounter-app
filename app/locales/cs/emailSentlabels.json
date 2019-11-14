@@ -1,1 +1,5 @@
-{ }
+{
+  "mail_sent": "Právě jsme vám poslali e-mail.",
+  "secure_link": "Klikněte na zabezpečený odkaz, který jsme vám poslali, k obnovení hesla. Pokud jste neobdrželi e-mail, zkontrolujte prosím složku spamu.",
+  "try_again_login": "Zkuste se přihlásit znovu"
+}

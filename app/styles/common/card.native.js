@@ -13,5 +13,15 @@ export default EStyleSheet.create({
     marginRight: 8,
     marginTop: 20,
     padding: 10
+  },
+  cardContainerWithoutShadow: {
+    backgroundColor: 'white',
+    shadowOffset: { width: 0, height: 0 },
+    shadowColor: 'rgba(0, 0, 0, 0)',
+    shadowRadius: 0,
+    marginLeft: 8,
+    marginRight: 8,
+    marginTop: 20,
+    padding: 10
   }
 });

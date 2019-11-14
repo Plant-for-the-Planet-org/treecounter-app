@@ -11,9 +11,8 @@
 
 .support-button-container {
   align-self: normal;
-  position: absolute;
-  right: 25px;
-  top: 95px;
+  margin-top: 65px;
+  margin-right: 15px;
   .gift-icon {
     .display-text {
       display: block;
@@ -24,10 +23,7 @@
   }
 
   @include for-phone-only {
-    top: 30px;
-    position: relative;
     align-self: right;
-    left: 20px;
     width: 25%;
     .gift-icon {
       .display-text {
@@ -36,7 +32,6 @@
       .display-icon {
         display: block;
         cursor: pointer;
-        margin-top: 50px;
       }
     }
   }
@@ -82,9 +77,8 @@
   text-overflow: ellipsis;
   color: $headerTextColor;
   overflow: hidden;
-  white-space: nowrap;
+  white-space: initial;
   @include for-phone-only {
-    white-space: initial;
     text-align: left;
     margin-top: 0;
     font-size: 25.5px;

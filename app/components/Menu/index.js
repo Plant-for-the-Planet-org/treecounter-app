@@ -1,17 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Select, { components } from 'react-select';
 import { connect } from 'react-redux';
 import * as images from '../../assets';
+
 import planetLogo from '../../assets/svgAssets/Planet-Logo.svg';
+
+const GlobalCurrencySelector = lazy(() =>
+  import('../Currency/GlobalCurrencySelector')
+);
+
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import { saveItem } from '../../stores/localStorage';
 import { getLocale } from '../../actions/getLocale';
-import GlobalCurrencySelector from '../Currency/GlobalCurrencySelector';
 import { updateUserProfile } from '../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
 const { Option, SingleValue } = components;

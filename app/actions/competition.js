@@ -19,7 +19,7 @@ import {
 } from '../schemas';
 import { normalize } from 'normalizr';
 import { debug } from '../debug';
-import { updateRoute, updateStaticRoute } from '../helpers/routerHelper';
+import { updateRoute } from '../helpers/routerHelper';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import i18n from '../locales/i18n.js';
 

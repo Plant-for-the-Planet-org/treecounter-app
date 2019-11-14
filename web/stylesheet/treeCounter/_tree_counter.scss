@@ -79,10 +79,10 @@
   max-width: 292px;
   font-size: 26.5px;
   text-align: center;
-  text-overflow: ellipsis;
+  // text-overflow: ellipsis;
   color: $headerTextColor;
-  overflow: hidden;
-  white-space: nowrap;
+  // overflow: hidden;
+  // white-space: nowrap;
   @include for-phone-only {
     white-space: initial;
     text-align: left;

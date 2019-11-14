@@ -230,26 +230,20 @@ export function deleteCompetition(param) {
     return new Promise(function(resolve, reject) {
       deleteAuthenticatedRequest('competition_delete', { competition: param })
         .then(res => {
-          // dispatch(
-          //   unlinkEntity(
-          //     normalize(res.data.unlink, [competitionSchema])
-          //   )
-          // );
-          // dispatch(
-          //   deleteEntity(
-          //     normalize(res.data.delete, [treecounterSchema])
-          //   )
-          // );
-
-          // resolve(res.data);
+          dispatch(unlinkEntity(res.data.unlink, [treecounterSchema]));
+          dispatch(deleteEntity(res.data.delete, [competitionSchema]));
           console.log(res.data);
+
+          dispatch(fetchMineCompetitions());
+          dispatch(fetchCompetitions('all'));
+          dispatch(fetchCompetitions('featured'));
+
           dispatch(setProgressModelState(false));
           NotificationManager.success(
             i18n.t('label.competition_deleted_successfully'),
             i18n.t('label.success'),
             5000
           );
-          dispatch(fetchMineCompetitions());
         })
         .catch(error => {
           debug(error);

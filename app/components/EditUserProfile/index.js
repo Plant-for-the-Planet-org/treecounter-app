@@ -207,11 +207,11 @@ export default class EditUserProfile extends React.Component {
         this.props.currentUserProfile.synopsis1
           ? this.props.currentUserProfile.synopsis1
           : ''
-      }${
+        }${
         this.props.currentUserProfile.synopsis2
           ? ' ' + this.props.currentUserProfile.synopsis2
           : ''
-      }`,
+        }`,
       synopsis2: ''
     };
     return (
@@ -359,10 +359,10 @@ export default class EditUserProfile extends React.Component {
                           src={
                             follow.userProfile.image
                               ? getImageUrl(
-                                  'profile',
-                                  'thumb',
-                                  follow.userProfile.image
-                                )
+                                'profile',
+                                'thumb',
+                                follow.userProfile.image
+                              )
                               : ProfilePic
                           }
                           className="image-rounded-border"
@@ -389,8 +389,8 @@ export default class EditUserProfile extends React.Component {
                   ))}
                 </div>
               ) : (
-                <LoadingIndicator />
-              )}
+                  <LoadingIndicator />
+                )}
             </CardLayout>
           )}
         <div className="delete-profile__button">

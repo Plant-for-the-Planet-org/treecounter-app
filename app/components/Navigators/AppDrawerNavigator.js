@@ -93,7 +93,7 @@ const headerLabels = {
   ['app_pledge_update_form']: 'Update your pledge'
 };
 
-export const getAppNavigator = function(isLoggedIn, userProfile) {
+export const getAppNavigator = function (isLoggedIn, userProfile) {
   const baseNavigator = createStackNavigator(
     {
       [getLocalRoute('app_editProfile')]: {
@@ -242,7 +242,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
-  const getTitle = function(navigation) {
+  const getTitle = function (navigation) {
     let title = navigation.getParam('titleParam');
     try {
       if (!title) {

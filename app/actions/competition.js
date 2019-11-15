@@ -1,3 +1,4 @@
+
 import {
   deleteAuthenticatedRequest,
   getAuthenticatedRequest,
@@ -6,6 +7,8 @@ import {
 } from '../utils/api';
 import { setCompetitionDetail } from '../reducers/competitionDetailReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
+import { setContentLoaderState } from '../reducers/contentloaderReducer';
+
 import {
   deleteEntity,
   mergeEntities,
@@ -25,7 +28,9 @@ import i18n from '../locales/i18n.js';
 
 export function fetchCompetitions(category) {
   return dispatch => {
-    dispatch(setProgressModelState(true));
+    // dispatch(setProgressModelState(true));
+    dispatch(setContentLoaderState(true));
+
     getAuthenticatedRequest('competitions_get', {
       category: category,
       limit: 100
@@ -39,11 +44,13 @@ export function fetchCompetitions(category) {
             )
           )
         );
-        dispatch(setProgressModelState(false));
+        // dispatch(setProgressModelState(false));
+        dispatch(setContentLoaderState(false));
       })
       .catch(err => {
         debug(err);
-        dispatch(setProgressModelState(false));
+        // dispatch(setProgressModelState(false));
+        dispatch(setContentLoaderState(false));
       });
   };
 }
@@ -145,7 +152,7 @@ export function leaveCompetition(id) {
 export function createCompetition(value, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       postAuthenticatedRequest('competition_post', value)
         .then(res => {
           dispatch(
@@ -189,7 +196,7 @@ export function createCompetition(value, navigation) {
 export function editCompetition(value, param, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       putAuthenticatedRequest('competition_put', value, { competition: param })
         .then(res => {
           dispatch(
@@ -265,7 +272,9 @@ export function fetchAllCompetitions() {
 
 export function fetchMineCompetitions() {
   return dispatch => {
-    dispatch(setProgressModelState(true));
+    // dispatch(setProgressModelState(true));
+    dispatch(setContentLoaderState(true));
+
     getAuthenticatedRequest('competitionsMine_get')
       .then(res => {
         dispatch(
@@ -276,11 +285,13 @@ export function fetchMineCompetitions() {
             )
           )
         );
-        dispatch(setProgressModelState(false));
+        // dispatch(setProgressModelState(false));
+        dispatch(setContentLoaderState(false));
       })
       .catch(err => {
         debug(err);
-        dispatch(setProgressModelState(false));
+        // dispatch(setProgressModelState(false));
+        dispatch(setContentLoaderState(false));
       });
   };
 }
@@ -316,16 +327,20 @@ export function invitePart(competition, competitor) {
 }
 export function fetchCompetitionDetail(id) {
   return dispatch => {
-    dispatch(setProgressModelState(true));
+    // dispatch(setProgressModelState(true));
+    dispatch(setContentLoaderState(true));
+
     getAuthenticatedRequest('competition_get', { uid: id })
       .then(res => {
         dispatch(mergeEntities(normalize(res.data, competitionSchema)));
         dispatch(setCompetitionDetail(id));
-        dispatch(setProgressModelState(false));
+        // dispatch(setProgressModelState(false));
+        dispatch(setContentLoaderState(false));
       })
       .catch(err => {
         debug(err);
-        dispatch(setProgressModelState(false));
+        // dispatch(setProgressModelState(false));
+        dispatch(setContentLoaderState(false));
       });
   };
 }

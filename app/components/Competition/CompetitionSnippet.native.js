@@ -28,6 +28,7 @@ class CompetitionSnippet extends React.Component {
 
   containerPress(id) {
     if (this.props.onMoreClick) {
+      console.log(this.props.onMoreClick, 'this.props.onMoreClick');
       this.props.onMoreClick(id);
     }
   }
@@ -169,20 +170,20 @@ class CompetitionSnippet extends React.Component {
               {/*</View>*/}
               <View style={styles.topCompetitorContainer}>
                 {this.props.competition &&
-                this.props.competition.topEnrollments &&
-                this.props.competition.topEnrollments.length === 3 ? (
-                  <View>
-                    <View style={styles.horizontalRule} />
-                    {this.props.competition.topEnrollments.map((top, index) => (
-                      <CompetitionTopCompetitor
-                        topCompetitor={top}
-                        index={index}
-                        key={index}
-                      />
-                    ))}
-                    <View style={styles.horizontalRule} />
-                  </View>
-                ) : null}
+                  this.props.competition.topEnrollments &&
+                  this.props.competition.topEnrollments.length === 3 ? (
+                    <View>
+                      <View style={styles.horizontalRule} />
+                      {this.props.competition.topEnrollments.map((top, index) => (
+                        <CompetitionTopCompetitor
+                          topCompetitor={top}
+                          index={index}
+                          key={index}
+                        />
+                      ))}
+                      <View style={styles.horizontalRule} />
+                    </View>
+                  ) : null}
               </View>
               <View style={styles.actionContainer}>
                 <View style={styles.byOrgContainer}>
@@ -200,14 +201,14 @@ class CompetitionSnippet extends React.Component {
 
                 <View style={styles.buttonContainer}>
                   {this.props.competition &&
-                  this.props.competition.competitorCount > 0 ? (
-                    <Text style={styles.bottomParticipantText}>
-                      {this.props.competition.competitorCount}{' '}
-                      {i18n.t('label.participants')}
-                    </Text>
-                  ) : (
-                    button
-                  )}
+                    this.props.competition.competitorCount > 0 ? (
+                      <Text style={styles.bottomParticipantText}>
+                        {this.props.competition.competitorCount}{' '}
+                        {i18n.t('label.participants')}
+                      </Text>
+                    ) : (
+                      button
+                    )}
                 </View>
               </View>
             </View>

@@ -52,59 +52,59 @@ class Trillion extends Component {
         <LoadingIndicator />
       </div>
     ) : (
-      <div className="sidenav-wrapper">
-        <TextHeading>
-          {this.state.displayName}
-          <TextBlock>{i18n.t('label.trillionTreeMessage1')}</TextBlock>
-          <TextBlock>{i18n.t('label.trillionTreeMessage2')}</TextBlock>
-        </TextHeading>
-        {this.props.pledgeEvents &&
-        this.props.pledgeEvents.pledgeEvents.length > 0 ? (
-          <div style={{ marginTop: 48 }}>
-            <TextBlock>{i18n.t('label.trillionlabel')}</TextBlock>
-            <div className="events_row">
-              {this.props.pledgeEvents.pledgeEvents
-                .sort((val1, val2) => val1.position > val2.position)
-                .map(element => (
-                  <div
-                    key={element.slug}
-                    className="event_item"
-                    onClick={() => {
-                      updateRoute('app_pledge', null, null, {
-                        eventSlug: element.slug
-                      });
-                    }}
-                  >
-                    <div className="imgContainer">
-                      <img
-                        style={{ borderRadius: '25px' }}
-                        src={getImageUrl('event', 'thumb', element.image)}
-                      />
-                    </div>
+        <div className="sidenav-wrapper">
+          <TextHeading>
+            {this.state.displayName}
+            <TextBlock>{i18n.t('label.trillionTreeMessage1')}</TextBlock>
+            <TextBlock>{i18n.t('label.trillionTreeMessage2')}</TextBlock>
+          </TextHeading>
+          {this.props.pledgeEvents &&
+            this.props.pledgeEvents.pledgeEvents.length > 0 ? (
+              <div style={{ marginTop: 48 }}>
+                <TextBlock>{i18n.t('label.trillionlabel')}</TextBlock>
+                <div className="events_row">
+                  {this.props.pledgeEvents.pledgeEvents
+                    .sort((val1, val2) => val1.position > val2.position)
+                    .map(element => (
+                      <div
+                        key={element.slug}
+                        className="event_item"
+                        onClick={() => {
+                          updateRoute('app_pledge', null, null, {
+                            eventSlug: element.slug
+                          });
+                        }}
+                      >
+                        <div className="imgContainer">
+                          <img
+                            style={{ borderRadius: '25px' }}
+                            src={getImageUrl('event', 'thumb', element.image)}
+                          />
+                        </div>
 
-                    <TextBlock>{element.name}</TextBlock>
-                  </div>
-                ))}
+                        <TextBlock>{element.name}</TextBlock>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            ) : null}
+          <div className="treecounter_container">
+            <div className="canvasContainer flex-column">
+              <SvgContainer {...this.state.svgData} />
+              {this.state.svgData === null ? (
+                <div className="circle-inside circle-headline">
+                  <LoadingIndicator />
+                </div>
+              ) : (
+                  <TreecounterGraphicsText
+                    trillion
+                    treecounterData={this.state.svgData}
+                  />
+                )}
             </div>
           </div>
-        ) : null}
-        <div className="treecounter_container">
-          <div className="canvasContainer flex-column">
-            <SvgContainer {...this.state.svgData} />
-            {this.state.svgData === null ? (
-              <div className="circle-inside circle-headline">
-                <LoadingIndicator />
-              </div>
-            ) : (
-              <TreecounterGraphicsText
-                trillion
-                treecounterData={this.state.svgData}
-              />
-            )}
-          </div>
         </div>
-      </div>
-    );
+      );
   }
 }
 

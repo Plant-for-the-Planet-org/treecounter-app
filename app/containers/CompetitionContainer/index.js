@@ -12,6 +12,8 @@ import {
   leaveCompetition
 } from '../../actions/competition';
 import { getAllCompetitionsSelector } from '../../selectors';
+import { getContentLoaderState } from '../../reducers/contentloaderReducer';
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
 import { handleServerResponseError } from '../../helpers/utils';
@@ -28,7 +30,7 @@ class CompetitionContainer extends React.Component {
     if (value) {
       this.props
         .createCompetition(value, this.props.navigation)
-        .then((/* success */) => {})
+        .then((/* success */) => { })
         .catch(err => {
           console.log('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
@@ -68,7 +70,9 @@ class CompetitionContainer extends React.Component {
     }
   }
   render() {
-    return (
+    console.log(this.props.contentloader, '**********************');
+    const { contentloader } = this.props;
+    return !contentloader ? (
       <Competiton
         allCompetitions={this.props.allCompetitions}
         onMoreClick={(id, name) => this.onMoreClick(id, name)}
@@ -79,7 +83,9 @@ class CompetitionContainer extends React.Component {
         supportTreecounterAction={this.props.supportTreecounterAction}
         editCompetition={id => this.editCompetition(id)}
       />
-    );
+    ) : (
+        <LoadingIndicator contentLoader={true} screen="Competition" />
+      );
   }
   onMoreClick(id, name) {
     //this.props.selectPlantProjectAction(id);
@@ -93,7 +99,8 @@ class CompetitionContainer extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  allCompetitions: getAllCompetitionsSelector(state)
+  allCompetitions: getAllCompetitionsSelector(state),
+  contentloader: getContentLoaderState(state)
 });
 
 const mapDispatchToProps = dispatch => {

@@ -28,9 +28,12 @@ class CompetitionContainer extends React.Component {
 
   createCompetition = value => {
     if (value) {
-      value.endDate = formatDateToMySQL(value.endDate);
+      let newvalue = {
+        ...value,
+        endDate: formatDateToMySQL(value.endDate)
+      };
       this.props
-        .createCompetition(value, this.props.navigation)
+        .createCompetition(newvalue, this.props.navigation)
         .then((/* success */) => {})
         .catch(err => {
           console.log('err signup data', err);

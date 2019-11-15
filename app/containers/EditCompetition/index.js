@@ -7,6 +7,7 @@ import { editCompetition, deleteCompetition } from '../../actions/competition';
 import EditCompetition from '../../components/Competition/EditCompetition.native';
 import { handleServerResponseError } from '../../helpers/utils';
 import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
+import { formatDateToMySQL } from './../../helpers/utils';
 
 class EditCompetitionContainer extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class EditCompetitionContainer extends Component {
     let json = {
       name: value.name,
       goal: value.goal,
-      endDate: value.endDate,
+      endDate: formatDateToMySQL(value.endDate),
       access: value.access,
       description: value.description
     };
@@ -63,13 +64,6 @@ class EditCompetitionContainer extends Component {
         });
       });
   }
-  // deleteCompetition(params) {
-  //   this.props.deleteCompetition(params, this.props.navigation)
-  //     .then((/* success */) => { })
-  //     .catch(err => {
-  //       console.log('err signup data', err);
-  //     });
-  // }
   componentDidMount() {}
 
   render() {

@@ -32,21 +32,3 @@ export function fetchLocation() {
     }
   };
 }
-
-export function fetchCurrencies() {
-  return dispatch => {
-    getExternalRequest({
-      endPoint: `https://openexchangerates.org/api/latest.json?app_id=${
-        context.currencyApiKey
-      }`
-    })
-      .then(data => {
-        console.log('Got currency fetch ip', data), dispatch;
-        //                dispatch(setCurrencyAction(foundLocation.code));
-      })
-
-      .catch(error => {
-        console.error(error);
-      });
-  };
-}

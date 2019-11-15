@@ -23,6 +23,5 @@ export const context = {
   ios:{
     appId: '1444740626'
   },
-  locationApikKey: '1dfab408903c332b660f5e7cb90da06a',
-  currencyApiKey: 'd581a5406d694920aa493b9143a9e257'
+  locationApikKey: '1dfab408903c332b660f5e7cb90da06a'
 };

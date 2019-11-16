@@ -1,1 +1,5 @@
-{ }
+{
+  "mail_sent_activation": "Na vaši e-mailovou adresu jsme odeslali e-mail s aktivačním odkazem.",
+  "complete_sigup_process": "Chcete-li dokončit proces registrace, klikněte na odkaz aktivace.",
+  "resend_email_text": "Pokud jste nedostali aktivační e-mail, klikněte na odkaz níže a odešleme jej znovu."
+}

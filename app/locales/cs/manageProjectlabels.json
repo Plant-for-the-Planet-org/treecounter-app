@@ -1,1 +1,9 @@
-{ }
+{
+  "trees_planted": "Vysazené stromy",
+  "discard_changes": "Zrušit změny",
+  "my_dashboard": "Můj panel",
+  "project_heading": "Nyní můžete spravovat své sázecí projekty a prohlížet dary, které obdržíte.",
+  "total_donation": "Dary celkem",
+  "connect_to_stripe": "Připojit k Stripe",
+  "recent_donations": "Nedávné dary"
+}

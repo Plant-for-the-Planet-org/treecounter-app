@@ -23,6 +23,7 @@ import {
 } from '../assets';
 import _ from 'lodash';
 import { getErrorView } from '../server/validator';
+import countryCodes from '../assets/countryCodes.json';
 import * as Yup from 'yup';
 import i18n from '../locales/i18n';
 
@@ -568,6 +569,12 @@ export function getCountryIso2(countryCode) {
   }
 }
 
+export function getISOToCountryName(code) {
+  const foundCountry = countryCodes.filter(data => {
+    return data.countryCode == code;
+  });
+  return foundCountry.length ? foundCountry[0] : { country: code };
+}
 export function isTpo(currentUserProfile) {
   let tpo = false;
   if (currentUserProfile && currentUserProfile.type === 'tpo') {

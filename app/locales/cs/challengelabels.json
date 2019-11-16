@@ -1,1 +1,22 @@
-{ }
+{
+  "challenge_heading": "Vyzvat přátele",
+  "challenge_to_plant": "Výzva zasadit:",
+  "challenge_edit_description": "Kdo zasadí největší les? Vyzvěte přátele a kolegy nebo se zapojte do existujících soutěží!",
+  "from": "z",
+  "indefinite": "Neurčitý",
+  "accept": "Akceptovat",
+  "reject": "Odmítnout",
+  "sent": "Posláno",
+  "accepted": "Přijato",
+  "declined": "Odmítnuto",
+  "challenge_accept": "Přijali jste výzvu",
+  "challenge_deny": "Odmítli jste výzvu",
+  "challenge_error": "Aktuální cíl uživatele {{user}} je {{target}} stromů. Zadejte vyšší číslo.",
+  "search_user": "Vyhledat uživatele",
+  "email": "Email",
+  "year": "Rok",
+  "challenge_create_successfully": "Výzva byla úspěšně vytvořena",
+  "please_select_user": "Vyberte prosím uživatele",
+  "please_select_year": "Vyberte rok",
+  "could_not_add_user": "Nelze přidat uživatele"
+}

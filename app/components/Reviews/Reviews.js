@@ -35,9 +35,6 @@ class Reviews extends Component {
       this.props.currentUserProfile && this.props.currentUserProfile.isReviewer
     );
   }
-  async deleteReview(id) {
-    await this.props.deleteReview(id);
-  }
   render() {
     let { name, reviewScore } = this.props.project;
     let { reviews, currentUserProfile } = this.props;
@@ -109,7 +106,7 @@ class Reviews extends Component {
               return (
                 <SingleReview
                   currentUserProfile={this.props.currentUserProfile}
-                  deleteReview={this.deleteReview}
+                  deleteReview={this.props.deleteReview}
                   navigation={this.props.navigation}
                   key={review.id}
                   review={review}

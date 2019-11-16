@@ -55,9 +55,10 @@ export default class BottomAction extends Component {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => {
-            this.props.delete(this.props.review.id);
+          onPress={async () => {
+            console.log('deleting', this.props.review.id);
             this.props.close();
+            await this.props.delete(this.props.review.id);
           }}
         >
           <View

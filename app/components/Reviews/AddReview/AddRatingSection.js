@@ -203,17 +203,6 @@ export default class AddRatingSection extends Component {
             />
           </View>
 
-          {/* <View style={styles.singleRatingBox}>
-            <Text style={styles.ratingsText}>Tree Type</Text>
-
-            <AirbnbRating
-              defaultRating={0}
-              size={20}
-              showRating={false}
-              style={{ color: '#2ecc71' }}
-            />
-          </View> */}
-
           <View style={styles.singleRatingBox}>
             <Text style={styles.ratingsText}>
               {i18n.t('label.co_benefits')}
@@ -247,6 +236,9 @@ export default class AddRatingSection extends Component {
               style={{ color: '#2ecc71' }}
             />
           </View>
+          <View style={styles.singleRatingBox}>
+            <Text style={styles.ratingsText} />
+          </View>
         </View>
         <View
           style={{
@@ -270,7 +262,7 @@ export default class AddRatingSection extends Component {
           />
 
           {/* Document Picking */}
-          <View style={{ marginTop: 40 }}>
+          <View style={{ marginTop: 20 }}>
             <Text style={{ textTransform: 'uppercase', fontSize: 12 }}>
               {i18n.t('label.upload_report')}
             </Text>
@@ -287,19 +279,7 @@ export default class AddRatingSection extends Component {
             >
               <View
                 style={{ flexGrow: 1, width: '100%', justifyContent: 'center' }}
-              >
-                {/* <TextField
-                  tintColor={'#89b53a'}
-                  titleFontSize={12}
-                  lineWidth={1}
-                  blurOnSubmit={false}
-                  onChangeText={briefReview => this.setState({ briefReview })}
-                  value={this.state.briefReview}
-                  multiline={true}
-                  editable={false}
-                  label="Select File"
-                /> */}
-              </View>
+              />
               <Image
                 source={attach}
                 style={{
@@ -347,46 +327,42 @@ export default class AddRatingSection extends Component {
               }}
             >
               {this.state.reviewImages
-                ? this.state.reviewImages.map(i => (
+                ? this.state.reviewImages.map((i, index) => (
                     <View
-                      key={i.id}
+                      key={index}
                       style={{ display: 'flex', flexDirection: 'row' }}
                     >
                       {this.renderAsset(i)}
                     </View>
                   ))
                 : null}
+
               <TouchableOpacity
                 style={{
-                  justifyContent: 'center',
                   height: 37,
                   width: 37,
                   marginLeft: 2
                 }}
                 onPress={this.pickMultiple.bind(this)}
               >
-                <Text style={{ margin: 10, borderColor: '#cdcdcd' }}>
-                  {' '}
-                  <Icon name={'plus'} solid />
+                <Text style={{ margin: 1 }}>
+                  <Icon name={'plus'} solid size={18} />
                 </Text>
               </TouchableOpacity>
-            </ScrollView>
-            {/* <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
-
 
               <TouchableOpacity
                 style={{
-                  justifyContent: 'center',
                   height: 37,
-                  width: 37,
+                  width: 42,
                   marginLeft: 2
                 }}
                 onPress={() => this.clickImage(true)}
-
               >
-                <Text style={{ margin: 10, borderColor: '#cdcdcd' }}><Icon name={'camera'} solid /></Text>
+                <Text style={{ margin: 1 }}>
+                  <Icon name={'camera'} size={18} />
+                </Text>
               </TouchableOpacity>
-            </View> */}
+            </ScrollView>
           </View>
 
           {/* Image Picking Part Ends */}

@@ -20,14 +20,9 @@ export default class SingleReview extends Component {
     super(props);
     console.log('single props', props);
     this.close = this.close.bind(this);
-    this.delete = this.delete.bind(this);
   }
   close() {
     this.RBSheet.close();
-  }
-  delete() {
-    this.props.deleteReview(this.props.review.id);
-    this.close();
   }
   isReviewer() {
     let { review, currentUserProfile } = this.props;
@@ -149,7 +144,7 @@ export default class SingleReview extends Component {
           }}
         >
           <BottomAction
-            delete={this.delete}
+            delete={this.props.deleteReview}
             close={this.close}
             review={review}
             navigation={navigation}

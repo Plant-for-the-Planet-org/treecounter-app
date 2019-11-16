@@ -14,7 +14,7 @@ export default class BottomAction extends Component {
       <View>
         <TouchableOpacity
           onPress={() => {
-            this.props.close && this.props.close();
+            this.props.close();
             console.log(
               'got review props in bottom action:',
               this.props.review,
@@ -56,7 +56,8 @@ export default class BottomAction extends Component {
 
         <TouchableOpacity
           onPress={() => {
-            this.props.delete();
+            this.props.delete(this.props.review.id);
+            this.props.close();
           }}
         >
           <View

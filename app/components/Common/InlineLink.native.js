@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
 import { updateRoute } from '../../helpers/routerHelper';
-import PrimaryButton from './Button/PrimaryButton';
+
+const PrimaryButton = lazy(() => import('./Button/PrimaryButton'));
+
 import { withNavigation } from 'react-navigation';
 
 const InlineLink = props => (

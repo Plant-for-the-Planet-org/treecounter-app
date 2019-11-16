@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { View, Animated, Easing, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -8,7 +8,9 @@ import { svgBackground } from '../../assets';
 import SvgUri from 'react-native-svg-uri';
 
 import treecounterStyles from '../../styles/common/treecounter_svg';
-import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
+const TreecounterGraphicsText = lazy(() =>
+  import('../TreecounterGraphics/TreecounterGraphicsText')
+);
 import Svg, { Circle } from 'react-native-svg';
 import _ from 'lodash';
 

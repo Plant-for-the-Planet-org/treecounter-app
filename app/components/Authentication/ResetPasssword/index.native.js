@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import { View, ScrollView } from 'react-native';
@@ -9,7 +9,7 @@ import i18n from '../../../locales/i18n.js';
 
 import styles from '../../../styles/forgetpassword';
 
-import PrimaryButton from '../../Common/Button/PrimaryButton';
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
 
 let Form = t.form.Form;
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import { Text, View, Image, Keyboard } from 'react-native';
@@ -8,9 +8,9 @@ import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 import { loginFormSchema } from '../../../server/parsedSchemas/login';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
 import { planetLogo } from '../../../assets';
-import TouchableItem from '../../Common/TouchableItem.native';
+const TouchableItem = lazy(() => import('../../Common/TouchableItem.native'));
 
 let Form = t.form.Form;
 

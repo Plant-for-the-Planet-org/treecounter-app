@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n.js';
 import { Text, View, Image, ScrollView } from 'react-native';
@@ -6,7 +6,7 @@ import { Text, View, Image, ScrollView } from 'react-native';
 import styles from '../../../styles/accountActivate';
 
 import { GreenEmail } from '../../../assets';
-import InlineLink from '../../Common/InlineLink';
+const InlineLink = lazy(() => import('../../Common/InlineLink'));
 
 export default class ActivateAccount extends Component {
   render() {

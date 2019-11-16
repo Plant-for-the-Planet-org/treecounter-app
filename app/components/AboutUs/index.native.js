@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { LargeMenuItem } from '../Menu/MenuItem.native';
 import { ScrollView, View } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import i18n from '../../locales/i18n';
 import { withNavigation } from 'react-navigation';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
-import TabContainer from '../../containers/Menu/TabContainer';
+const TabContainer = lazy(() => import('../../containers/Menu/TabContainer'));
+
 const LicenseInfo = require('./LicenseInfo.json');
 
 //Run license-checker --production  --json > license.json to fetch license info from package.json:

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n.js';
@@ -7,7 +7,7 @@ import { forgotPasswordFormSchema } from '../../../server/parsedSchemas/forgotpa
 import styles from '../../../styles/forgetpassword';
 
 import { Text, View, ImageBackground, ScrollView } from 'react-native';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
 let Form = t.form.Form;
 
 export default class ForgotPassword extends Component {

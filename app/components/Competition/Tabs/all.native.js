@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { ScrollView } from 'react-native';
 import styles from '../../../styles/selectplantproject/featured.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';

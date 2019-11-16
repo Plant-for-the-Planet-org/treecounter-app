@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { chevron_right } from '../../assets';
-import TouchableItem from './TouchableItem.native';
+
+const TouchableItem = lazy(() => import('./TouchableItem.native'));
+
 import { Image } from 'react-native';
 
 class ArrowButton extends Component {

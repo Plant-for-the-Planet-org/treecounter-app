@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n.js';
 import { Text, View, Image, ScrollView } from 'react-native';
 import styles from '../../../styles/accountActivate';
 import { check_green, redeemSignIn } from '../../../assets';
-import InlineLink from '../../Common/InlineLink';
+const InlineLink = lazy(() => import('../../Common/InlineLink'));
 
 export default class SuccessfullyActivatedAccount extends Component {
   render() {

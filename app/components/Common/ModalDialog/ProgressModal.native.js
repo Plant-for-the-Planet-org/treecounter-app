@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Alert, Modal, View } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import { getProgressModelState } from '../../../reducers/modelDialogReducer';
-import LoadingIndicator from '../LoadingIndicator';
+
+const LoadingIndicator = lazy(() => import('../LoadingIndicator'));
 
 const ProgressModal = () => {
   // This component will re-render anytime progressModalState is updated in redux

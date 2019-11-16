@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar';
 import { Dimensions } from 'react-native';
-import ChallengeUser from './Tabs/ChallengeUser';
-import ChallengeEmail from './Tabs/ChallengeEmail';
+
+const ChallengeUser = lazy(() => import('./Tabs/ChallengeUser'));
+const ChallengeEmail = lazy(() => import('./Tabs/ChallengeEmail'));
+
 import { challengeFormSchemaOptions } from '../../server/parsedSchemas/challenge';
 
 import i18n from '../../locales/i18n';

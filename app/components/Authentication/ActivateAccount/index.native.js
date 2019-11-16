@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n.js';
 import { Text, View, Image, ScrollView } from 'react-native';
@@ -6,7 +6,9 @@ import { Text, View, Image, ScrollView } from 'react-native';
 import styles from '../../../styles/accountActivate';
 
 import { RedEmail } from '../../../assets';
-import SecondaryButton from '../../Common/Button/SecondaryButton';
+const SecondaryButton = lazy(() =>
+  import('../../Common/Button/SecondaryButton')
+);
 
 export default class ActivateAccount extends Component {
   constructor(props) {

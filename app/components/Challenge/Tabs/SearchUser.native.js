@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 
-import SearchBar from '../../../components/Header/SearchBar.native';
-import Header from '../../../components/Header/Header.native';
+const SearchBar = lazy(() =>
+  import('../../../components/Header/SearchBar.native')
+);
+const Header = lazy(() => import('../../../components/Header/Header.native'));
+
 import { getSuggestions } from '../../../helpers/utils';
 import { withNavigation } from 'react-navigation';
 import styles from '../../../styles/header/search_layout.native';
 import _ from 'lodash';
 import i18n from '../../../locales/i18n';
-import searchBarStyles from '../../../styles/header/search_bar.native';
+
+const searchBarStyles = lazy(() =>
+  import('../../../styles/header/search_bar.native')
+);
+
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
-import UserProfileImage from '../../Common/UserProfileImage';
+
+const UserProfileImage = lazy(() => import('../../Common/UserProfileImage'));
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;

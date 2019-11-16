@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React, { View, Text, Component, Suspense, lazy } from 'react';
 import { Provider } from 'react-redux';
 
-import TreeCounter from './TreeCounter';
 import configureStore from '../../stores/TreecounterStore';
-import GlobalErrorBoundary from '../ErrorBoundry/globalErrorBoundry';
+const TreeCounter = lazy(() => import('./TreeCounter'));
+const GlobalErrorBoundary = lazy(() =>
+  import('../ErrorBoundry/globalErrorBoundry')
+);
+
 let store;
 
 export default class App extends Component {
@@ -15,9 +18,17 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <GlobalErrorBoundary>
-          <TreeCounter />
-        </GlobalErrorBoundary>
+        <Suspense
+          fallback={() => (
+            <View>
+              <Text>Loading..</Text>
+            </View>
+          )}
+        >
+          <GlobalErrorBoundary>
+            <TreeCounter />
+          </GlobalErrorBoundary>
+        </Suspense>
       </Provider>
     );
   }

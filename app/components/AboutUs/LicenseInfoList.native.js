@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 
 import PropTypes from 'prop-types';
 import Accordion from 'react-native-collapsible/Accordion';
@@ -7,7 +7,10 @@ import { foldin, foldout } from '../../assets';
 import { Text, View, ScrollView, Image, Linking } from 'react-native';
 import styles from '../../styles/faq';
 import i18n from '../../locales/i18n';
-import TouchableItem from '../../components/Common/TouchableItem';
+
+const TouchableItem = lazy(() =>
+  import('../../components/Common/TouchableItem')
+);
 
 export default class LicenseInfoList extends Component {
   _renderHeader(section, index, isActive) {

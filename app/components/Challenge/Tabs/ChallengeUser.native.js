@@ -1,14 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { ScrollView, View, TextInput, Text } from 'react-native';
-import SearchUser from './SearchUser.native';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
-import ChallengeList from '../challengeList';
-import CardLayout from '../../Common/Card';
+
+const SearchUser = lazy(() => import('./SearchUser.native'));
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
+const ChallengeList = lazy(() => import('../challengeList'));
+const CardLayout = lazy(() => import('../../Common/Card'));
+
 import { Dropdown } from 'react-native-material-dropdown';
 import { withNavigation } from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import challengeStyles from '../../../styles/challenge';
-import TabContainer from '../../../containers/Menu/TabContainer';
+
+const TabContainer = lazy(() =>
+  import('../../../containers/Menu/TabContainer')
+);
+
 import i18n from '../../../locales/i18n';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import styles from '../../../styles/profilepicker.native';

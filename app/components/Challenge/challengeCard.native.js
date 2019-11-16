@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image } from 'react-native';
 
 import challengesStyle from '../../styles/challenge';
 
-import CardLayout from '../Common/Card';
-import UserProfileImage from '../Common/UserProfileImage';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import SecondaryButton from '../Common/Button/SecondaryButton';
+const CardLayout = lazy(() => import('../Common/Card'));
+const UserProfileImage = lazy(() => import('../Common/UserProfileImage'));
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+const SecondaryButton = lazy(() => import('../Common/Button/SecondaryButton'));
+
 import { formatDate, delimitNumbers } from '../../utils/utils';
 import { upwardArrow, downwardArrow } from '../../assets/index.js';
 import i18n from '../../locales/i18n.js';

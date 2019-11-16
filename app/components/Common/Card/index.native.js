@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../../styles/common/card';
-import TouchableItem from '../../Common/TouchableItem.native';
+
+const TouchableItem = lazy(() => import('../../Common/TouchableItem.native'));
 
 const CardLayout = ({ children, style, onPress }) => (
   <TouchableItem style={[styles.cardContainer, style]} onPress={onPress}>

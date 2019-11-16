@@ -1,17 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { challengeFormSchema } from '../../../server/parsedSchemas/challenge';
 import t from 'tcomb-form-native';
-import CardLayout from '../../Common/Card';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
+
+const CardLayout = lazy(() => import('../../Common/Card'));
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
+
 import { TextInput, View, Text } from 'react-native';
-import ChallengeList from '../challengeList';
+const ChallengeList = lazy(() => import('../challengeList'));
+
 import { withNavigation } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
 import i18n from '../../../locales/i18n';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
-import TabContainer from '../../../containers/Menu/TabContainer';
+const TabContainer = lazy(() =>
+  import('../../../containers/Menu/TabContainer')
+);
 
 import challengeStyles from '../../../styles/challenge';
 import styles from '../../../styles/register_trees.native';

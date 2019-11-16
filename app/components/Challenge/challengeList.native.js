@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 
-import ChallengeCard from './challengeCard';
+const ChallengeCard = lazy(() => import('./challengeCard'));
 
 class ChallengeList extends Component {
   render() {

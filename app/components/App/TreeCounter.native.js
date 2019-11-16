@@ -3,9 +3,11 @@
  * This component is just rendering App Drawer component which provides thr side navigation menu screen stack
  */
 
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 //TODO import this first to avoid any init issue of i18n
-import AppDrawerNavigatorContainer from '../../containers/Navigators/AppDrawerNavigatorContainer';
+const AppDrawerNavigatorContainer = lazy(() =>
+  import('../../containers/Navigators/AppDrawerNavigatorContainer')
+);
 import { connect } from 'react-redux';
 import { loadTpos } from '../../actions/loadTposAction';
 import { bindActionCreators } from 'redux';

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import { Text, View, ImageBackground, Keyboard } from 'react-native';
 
 import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
 import styles from '../../../styles/login.native';
 import { SignupTypes, SignUpType } from './SignupType';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';

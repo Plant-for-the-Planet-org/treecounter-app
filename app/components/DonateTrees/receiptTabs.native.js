@@ -158,7 +158,7 @@ class DonationTabView extends React.PureComponent {
         contentContainerStyle={{ paddingBottom: 35 }}
         enableOnAndroid={false}
       >
-        <CardLayout>
+        <CardLayout withoutShadow>
           <Form
             ref={this._formRef}
             type={formSchema}

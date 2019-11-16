@@ -6,7 +6,6 @@ import { queryParamsToObject } from '../../helpers/utils';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
-import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { ScrollView } from 'react-native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
@@ -48,55 +47,58 @@ class PlantProjectFull extends React.Component {
       ndviUid
     };
     const navigation = this.props.navigation;
+    const backgroundColor = 'white';
+
     return (
       <View style={{ flex: 1 }}>
         <ScrollView
           contentContainerStyle={[
             scrollStyle.styleContainer,
-            { paddingBottom: 72 }
+            {
+              paddingBottom: 72,
+              backgroundColor: backgroundColor
+            }
           ]}
         >
-          <CardLayout style={[styles.projectFullContainer]}>
-            <PlantProjectSnippet
-              key={'projectFull' + this.props.plantProject.id}
-              showMoreButton={false}
-              clickable={false}
-              plantProject={this.props.plantProject}
-              onSelectClickedFeaturedProjects={id =>
-                this.props.selectProject(id)
-              }
-              tpoName={tpo_name}
-            />
-            {this.props.plantProject.reviews.length ? (
-              <TouchableOpacity
-                style={styles.makePledgeButton}
-                onPress={() => {
-                  updateStaticRoute('app_reviews', navigation);
-                }}
-              >
-                <View style={styles.makePledgeButtonView}>
-                  <Text style={styles.makePledgeButtonText}>
-                    {i18n.t('label.reviews')}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            ) : null}
-            <View style={styles.horizontalRule} />
-            <View style={styles.plantProjectDetails}>
-              <PlantProjectDetails {...detailsProps} />
-            </View>
-            {this.props.plantProject.allowDonations ? (
-              <View style={styles.buttonContainer}>
-                <PrimaryButton
-                  onClick={() =>
-                    this.props.selectProject(this.props.plantProject.id)
-                  }
-                >
-                  {i18n.t('label.donate')}
-                </PrimaryButton>
+          <PlantProjectSnippet
+            key={'projectFull' + this.props.plantProject.id}
+            showMoreButton={false}
+            clickable={false}
+            plantProject={this.props.plantProject}
+            onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
+            tpoName={tpo_name}
+            selectProject={this.props.selectProject}
+          />
+
+          {this.props.plantProject.reviews.length ? (
+            <TouchableOpacity
+              style={styles.makePledgeButton}
+              onPress={() => {
+                updateStaticRoute('app_reviews', navigation);
+              }}
+            >
+              <View style={styles.makePledgeButtonView}>
+                <Text style={styles.makePledgeButtonText}>
+                  {i18n.t('label.reviews')}
+                </Text>
               </View>
-            ) : null}
-          </CardLayout>
+            </TouchableOpacity>
+          ) : null}
+          {/* <View style={styles.horizontalRule} /> */}
+          <View style={styles.plantProjectDetails}>
+            <PlantProjectDetails {...detailsProps} />
+          </View>
+          {this.props.plantProject.allowDonations ? (
+            <View style={styles.buttonContainer}>
+              <PrimaryButton
+                onClick={() =>
+                  this.props.selectProject(this.props.plantProject.id)
+                }
+              >
+                {i18n.t('label.donate_txt')}
+              </PrimaryButton>
+            </View>
+          ) : null}
         </ScrollView>
         <TabContainer {...this.props} />
       </View>

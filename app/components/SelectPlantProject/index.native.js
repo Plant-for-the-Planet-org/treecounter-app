@@ -1,30 +1,47 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+// import { View } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
-
-import TabContainer from '../../containers/Menu/TabContainer';
+import { Dimensions } from 'react-native';
+// import TabContainer from '../../containers/Menu/TabContainer';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
-import CountryProjects from './Tabs/country.native';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
-import PriceProjects from './Tabs/price';
-
+import { updateStaticRoute } from '../../helpers/routerHelper';
+const Layout = {
+  window: {
+    width: Dimensions.get('window').width
+  }
+};
 export default class SelectPlantTabView extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       routes: [
         { key: 'featured', title: i18n.t('label.featured') },
-        { key: 'list', title: i18n.t('label.list') },
-        { key: 'price', title: i18n.t('label.price') },
-        { key: 'country', title: i18n.t('label.country') }
+        { key: 'list', title: i18n.t('label.list') }
       ],
       index: 0
     };
+    this.onSelectProjects = this.onSelectProjects.bind(this);
   }
 
+  indexChange(index) {
+    this.setState({
+      index: index
+    });
+  }
+  onSelectProjects(id) {
+    console.log('porps---', this.props);
+    this.props.selectProject(id);
+    const { navigation } = this.props;
+    updateStaticRoute(
+      'app_donate_detail',
+      navigation,
+      navigation.getParam('userForm')
+    );
+  }
   handleExpandedClicked = optionNumber => {
     this.setState({
       expandedOption: optionNumber
@@ -32,22 +49,20 @@ export default class SelectPlantTabView extends PureComponent {
   };
 
   handleIndexChange = index => {
-    this.setState({ index });
+    this.setState({ index: index });
   };
 
   renderTabBar = props => {
-    return (
+    return [
       <TabBar
+        key="1"
         {...props}
         style={styles.tabBar}
-        //tabStyle={{ width: Layout.window.width / 4 }}
+        tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
-        scrollEnabled
-        bounces
-        useNativeDriver
       />
-    );
+    ];
   };
 
   renderSelectPlantScene = ({ route }) => {
@@ -66,18 +81,21 @@ export default class SelectPlantTabView extends PureComponent {
       navigation,
       currencies
     };
-    const { index } = this.state;
+    // const { index } = this.state;
 
     // Only render a tab if it is focused
     switch (route.key) {
       case 'featured':
-        return index === 0 && <FeaturedProjects {...props} />;
+        return (
+          <FeaturedProjects
+            onSelectProjects={this.onSelectProjects}
+            {...props}
+          />
+        );
       case 'list':
-        return index === 1 && <ListProjects {...props} />;
-      case 'price':
-        return index === 2 && <PriceProjects {...props} />;
-      case 'country':
-        return index === 3 && <CountryProjects {...props} />;
+        return (
+          <ListProjects onSelectProjects={this.onSelectProjects} {...props} />
+        );
       default:
         return null;
     }
@@ -85,18 +103,13 @@ export default class SelectPlantTabView extends PureComponent {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <TabView
-          useNativeDriver
-          navigationState={this.state}
-          renderScene={this.renderSelectPlantScene}
-          renderTabBar={this.renderTabBar}
-          onIndexChange={this.handleIndexChange}
-        />
-        {this.props.navigation.getParam('giftMethod') ? (
-          <TabContainer {...this.props} />
-        ) : null}
-      </View>
+      <TabView
+        useNativeDriver
+        navigationState={this.state}
+        renderScene={this.renderSelectPlantScene}
+        renderTabBar={this.renderTabBar}
+        onIndexChange={this.handleIndexChange}
+      />
     );
   }
 }

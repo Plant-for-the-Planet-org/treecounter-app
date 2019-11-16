@@ -136,6 +136,9 @@ import forward from './images/forward.png';
 import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
+import location_grey from './images/icons/location_grey.png';
+import survival_grey from './images/icons/survival_grey.png';
+import tax_grey from './images/icons/tax_grey.png';
 import worldImg from './images/icons/world.png';
 import germany from './images/germany.png';
 import googlePlayBadge_en from './images/en/google-play-badge.png';
@@ -288,6 +291,9 @@ export {
   successAnimated,
   trees,
   greencalendar,
+  location_grey,
+  survival_grey,
+  tax_grey,
   googlePlayBadge_en,
   googlePlayBadge_de,
   appleStoreBadge_en,

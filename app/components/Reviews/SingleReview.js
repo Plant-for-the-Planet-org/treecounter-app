@@ -15,7 +15,7 @@ import { formatDate } from '../../utils/utils';
 import { getSuggestions } from '../../helpers/utils';
 import i18n from '../../locales/i18n.js';
 import UserProfileImage from '../Common/UserProfileImage';
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default class SingleReview extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ export default class SingleReview extends Component {
     this.RBSheet.close();
   }
   isReviewer() {
-    let { review, currentUserProfile } = this.props;
+    let { currentUserProfile } = this.props;
     return currentUserProfile.isReviewer;
   }
   canModify() {
@@ -54,7 +54,7 @@ export default class SingleReview extends Component {
       );
   }
   render() {
-    let { review, navigation, currentUserProfile } = this.props;
+    let { review, navigation } = this.props;
     console.log('in single props in render', this.props);
 
     return (
@@ -69,14 +69,6 @@ export default class SingleReview extends Component {
         {/* Review Header */}
         <View style={styles.headerParent}>
           <View>
-            {/* <View
-              style={{
-                backgroundColor: '#e3e3e3',
-                borderRadius: 16,
-                height: 32,
-                width: 32
-              }}
-            /> */}
             <UserProfileImage
               profileImage={this.state.profileImage}
               imageStyle={{ width: 32, height: 32, borderRadius: 16 }}

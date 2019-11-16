@@ -5,23 +5,14 @@ import {
 } from '../utils/api';
 import { debug } from '../debug/index';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
-import {
-  userProfileSchema,
-  plantProjectSchema,
-  tpoSchema,
-  reviewsSchema
-} from '../schemas/index';
+import { reviewsSchema } from '../schemas/index';
 import { normalize } from 'normalizr';
-import {
-  deleteEntity,
-  unlinkEntity,
-  mergeEntities
-} from '../reducers/entitiesReducer';
+import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import i18n from '../locales/i18n.js';
 // import { ScrollView } from 'react-native-gesture-handler';
 
-export function addReview(review, plantProject) {
+export function addReview(review) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve) {
@@ -97,7 +88,7 @@ export function deleteReview(reviewId) {
   };
 }
 
-export function updateReview(review, plantProject) {
+export function updateReview(review) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {

@@ -13,24 +13,24 @@ export default class PDFViewer extends React.Component {
 
   render() {
     const source = { ...this.state, uri: getPDFUrl(this.state.uri) };
-    let _instance = this;
+    let instance = this;
     console.log(this.state);
     return (
       <View style={styles.container}>
         {!this.state.uri ? (
-          <Text>{I18n.t('label.no_pdf_found')}</Text>
+          <Text>{i18n.t('label.no_pdf_found')}</Text>
         ) : (
           <Pdf
             enablePaging
             source={source}
-            onLoadComplete={(numberOfPages, filePath) => {
+            onLoadComplete={numberOfPages => {
               console.log(`number of pages: ${numberOfPages}`);
             }}
-            onPageChanged={(page, numberOfPages) => {
+            onPageChanged={page => {
               console.log(`current page: ${page}`);
             }}
             onError={error => {
-              _instance.setState({ uri: '' });
+              instance.setState({ uri: '' });
               console.error(error);
             }}
             style={styles.pdf}

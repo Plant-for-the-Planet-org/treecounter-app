@@ -5,8 +5,7 @@ import {
   userProfileSchema,
   plantProjectSchema,
   competitionPagerSchema,
-  competitionSchema,
-  reviewsSchema
+  competitionSchema
 } from '../schemas';
 import { getCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
 import { getUserFeeds } from '../reducers/userFeedReducer';

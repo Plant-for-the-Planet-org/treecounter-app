@@ -10,7 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import SingleReview from './SingleReview';
 // import { ScrollView } from 'react-native-gesture-handler';
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 import { pushStaticRoute } from './../../helpers/routerHelper';
 import {
   selectedPlantProjectSelector,
@@ -37,7 +37,7 @@ class Reviews extends Component {
   }
   render() {
     let { name, reviewScore } = this.props.project;
-    let { reviews, currentUserProfile } = this.props;
+    let { reviews } = this.props;
     return (
       <ScrollView
         contentContainerStyle={{

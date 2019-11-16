@@ -11,15 +11,13 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 // import { ScrollView } from 'react-native-gesture-handler';
 import AddRatingSection from './AddRatingSection';
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 import { forward } from './../../../assets';
 import { connect } from 'react-redux';
 import { addReview, updateReview } from '../../../actions/reviews';
 import { bindActionCreators } from 'redux';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
 import { selectedPlantProjectSelector } from '../../../selectors';
 import i18n from '../../../locales/i18n.js';
-import { from } from 'rxjs/observable/from';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager.native';
 class AddReview extends Component {
   constructor(props) {

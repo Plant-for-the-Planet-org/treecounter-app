@@ -1,25 +1,23 @@
-import React, { Component, useCallback } from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   Dimensions,
   ScrollView,
   Image
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Rating, AirbnbRating } from 'react-native-ratings';
+import { AirbnbRating } from 'react-native-ratings';
 import ImagePicker from 'react-native-image-crop-picker';
 import DocumentPicker from 'react-native-document-picker';
 import { TextField } from 'react-native-material-textfield';
 import { attach } from './../../../assets';
 import RNFS from 'react-native-fs';
-import debounce from 'lodash/debounce';
 import i18n from '../../../locales/i18n.js';
 import { getImageUrl } from '../../../actions/apiRouting';
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default class AddRatingSection extends Component {
   constructor(props) {
@@ -127,7 +125,7 @@ export default class AddRatingSection extends Component {
   // Image Uploading Ends
 
   // Document picker
-  async readContent(path, which) {
+  async readContent(path) {
     RNFS.readFile(path, 'base64')
       .then(encoded => {
         console.log('data', encoded);
@@ -257,7 +255,7 @@ export default class AddRatingSection extends Component {
               this.setStateAndUpdateParent({ summary: summary });
             }}
             value={this.state.summary}
-            multiline={true}
+            multiline
             label={i18n.t('label.brief_review')}
           />
 

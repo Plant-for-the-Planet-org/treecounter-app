@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import PlantProjectSpecs from './PlantProjectSpecs';
-import SeeMoreToggle from '../Common/SeeMoreToggle';
-import PlantProjectDetails from './PlantProjectDetails';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
 import { getImageUrl } from '../../actions/apiRouting';
-import PlantedProgressBar from './PlantedProgressbar';
 import { tick } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
 import NumberFormat from '../Common/NumberFormat';
+
+const PlantProjectSpecs = lazy(() => import('./PlantProjectSpecs'));
+const PlantedProgressBar = lazy(() => import('./PlantedProgressbar'));
+const SeeMoreToggle = lazy(() => import('../Common/SeeMoreToggle'));
+const PlantProjectDetails = lazy(() => import('./PlantProjectDetails'));
+
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */

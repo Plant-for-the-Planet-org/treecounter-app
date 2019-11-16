@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import UserSynopsis from '../Common/UserSynopsis';
-import UserHomepageLink from '../Common/UserHomepageLink';
-import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
+const UserSynopsis = lazy(() => import('../Common/UserSynopsis'));
+const UserHomepageLink = lazy(() => import('../Common/UserHomepageLink'));
+const ArcGISContributionsMap = lazy(() =>
+  import('../Map/ArcGISContributionsMap')
+);
 
 /**
  * MapIds:

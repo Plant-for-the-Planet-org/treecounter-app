@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import SupportButton from './SupportButton';
-import TreecounterHeader from './TreecounterHeader';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
-import TpoDonationPlantProjectSelector from '../PlantProjects/TpoDonationPlantProjectSelector';
-import UserFootprint from './UserFootprint';
-import SvgContainer from '../Common/SvgContainer';
-import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
-import CardLayout from '../../components/Common/Card';
+const SupportButton = lazy(() => import('./SupportButton'));
+const TreecounterHeader = lazy(() => import('./TreecounterHeader'));
+const LoadingIndicator = lazy(() =>
+  import('../../components/Common/LoadingIndicator')
+);
+const TpoDonationPlantProjectSelector = lazy(() =>
+  import('../PlantProjects/TpoDonationPlantProjectSelector')
+);
+const UserFootprint = lazy(() => import('./UserFootprint'));
+const SvgContainer = lazy(() => import('../Common/SvgContainer'));
+const TreecounterGraphicsText = lazy(() =>
+  import('../TreecounterGraphics/TreecounterGraphicsText')
+);
+const CardLayout = lazy(() => import('../../components/Common/Card'));
+
 import { getDocumentTitle } from '../../helpers/utils';
 import { delimitNumbers } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
 
 import { isMyself, isUserFollower, amISupporting } from './utils';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {

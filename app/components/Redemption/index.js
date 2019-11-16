@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
-import LoadingIndicator from '../Common/LoadingIndicator';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card';
+
+const LoadingIndicator = lazy(() => import('../Common/LoadingIndicator'));
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+const TextHeading = lazy(() => import('../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../Common/Card'));
+
 import i18n from '../../locales/i18n.js';
-import DescriptionHeading from '../Common/Heading/DescriptionHeading';
+const DescriptionHeading = lazy(() =>
+  import('../Common/Heading/DescriptionHeading')
+);
+
 import {
   redeemSignIn,
   redeemRed,

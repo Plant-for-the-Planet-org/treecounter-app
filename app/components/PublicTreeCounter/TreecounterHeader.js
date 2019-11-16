@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import FollowLabelButton from '../Common/Button/FollowLabelButton';
-import UserProfileImage from '../Common/UserProfileImage';
+const FollowLabelButton = lazy(() =>
+  import('../Common/Button/FollowLabelButton')
+);
+const UserProfileImage = lazy(() => import('../Common/UserProfileImage'));
 
 import * as images from '../../assets';
 

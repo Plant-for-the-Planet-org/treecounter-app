@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { gift_icon } from '../../assets';
-import SecondaryButton from '../Common/Button/SecondaryButton';
+const SecondaryButton = lazy(() => import('../Common/Button/SecondaryButton'));
 
 const SupportButton = ({ onRegisterSupporter, buttonLabel }) => {
   return (

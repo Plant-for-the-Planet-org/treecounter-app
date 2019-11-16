@@ -1,5 +1,5 @@
-const TimeSerie = lazy(() => import('./TimeSerie'));
 import React, { Component, lazy } from 'react';
+const TimeSerie = lazy(() => import('./TimeSerie'));
 
 import PropTypes from 'prop-types';
 import filterDataPoints from './NDVIfunctions/filterDataPointForTimeSeries';

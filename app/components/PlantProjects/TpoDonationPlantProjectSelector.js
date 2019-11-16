@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import CardLayout from '../Common/Card';
-import ContentHeader from '../Common/ContentHeader';
-import PlantProjectCarousel from './PlantProjectCarousel';
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+const CardLayout = lazy(() => import('../Common/Card'));
+const ContentHeader = lazy(() => import('../Common/ContentHeader'));
+const PlantProjectCarousel = lazy(() => import('./PlantProjectCarousel'));
+
 import i18n from '../../locales/i18n';
 
 /**

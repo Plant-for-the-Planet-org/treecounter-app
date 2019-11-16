@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
-import PlantProjectFull from './PlantProjectFull';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
 import Slider from 'react-slick';
-import CarouselNavigation from '../Common/CarouselNavigation';
+
+const CarouselNavigation = lazy(() => import('../Common/CarouselNavigation'));
+const PlantProjectFull = lazy(() => import('./PlantProjectFull'));
 
 class PlantProjectCarousel extends React.Component {
   constructor(props) {

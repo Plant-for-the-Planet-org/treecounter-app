@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
-import PlantProjectSpecsItem from './PlantProjectSpecsItem';
-import i18n from '../../locales/i18n.js';
 
+const PlantProjectSpecsItem = lazy(() => import('./PlantProjectSpecsItem'));
+import i18n from '../../locales/i18n.js';
 import { locationIcon, tree_survival } from '../../assets';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectSpecs

@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import UserSynopsis from '../Common/UserSynopsis';
-import UserHomepageLink from '../Common/UserHomepageLink';
-import PlantProjectImageCarousel from './PlantProjectImageCarousel';
-
-import VideoContainer from '../Common/VideoContainer';
-import NDVI from '../../containers/NDVI/NDVI';
+const UserSynopsis = lazy(() => import('../Common/UserSynopsis'));
+const UserHomepageLink = lazy(() => import('../Common/UserHomepageLink'));
+const PlantProjectImageCarousel = lazy(() =>
+  import('./PlantProjectImageCarousel')
+);
+const VideoContainer = lazy(() => import('../Common/VideoContainer'));
+const NDVI = lazy(() => import('../../containers/NDVI/NDVI'));
 
 // import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 

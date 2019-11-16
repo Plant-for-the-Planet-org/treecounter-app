@@ -46,9 +46,16 @@ class AddReview extends Component {
         5000
       );
     }
+    console.log('review before submitting', review);
     try {
       if (this.state.review.id) {
-        let { id, reviewIndexScores, summary, pdfFile } = this.state.review;
+        let {
+          id,
+          reviewIndexScores,
+          summary,
+          pdfFile,
+          reviewImages
+        } = this.state.review;
         const plantProject = this.props.selectedPlantProject.id;
         await this.props.updateReview(
           {
@@ -56,7 +63,8 @@ class AddReview extends Component {
             plantProject,
             summary,
             reviewIndexScores,
-            pdfFile
+            pdfFile,
+            reviewImages
           },
           this.props.selectedPlantProject
         );

@@ -39,7 +39,9 @@ export default class AddRatingSection extends Component {
         }
       },
       pdfFile: '',
-      reviewImages: props.review.reviewImages || []
+      reviewImages: props.review.reviewImages
+        ? [...props.review.reviewImages]
+        : []
     };
 
     console.log('after merging got props in addrating', this.state);
@@ -50,16 +52,6 @@ export default class AddRatingSection extends Component {
       this.props.onUpdate({ ...this.state });
       console.log('setting on add rating:', this.state);
     });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('got receive props on add rating', nextProps);
-    // if (nextProps.review) {
-    //   this.setStateAndUpdateParent({
-    //     reviewIndexScores: nextProps.review.reviewIndexScores,
-    //     summary: nextProps.review.summary
-    //   });
-    // }
   }
 
   // Image Uploading
@@ -109,7 +101,7 @@ export default class AddRatingSection extends Component {
     return this.renderImage(
       image.imageFile
         ? { uri: image.imageFile }
-        : getImageUrl(image.image, 'review', 'thumb')
+        : getImageUrl(image.image, 'review', 'small')
     );
   }
 
@@ -339,7 +331,8 @@ export default class AddRatingSection extends Component {
                 style={{
                   height: 37,
                   width: 37,
-                  marginLeft: 2
+                  marginLeft: 5,
+                  display: 'flex'
                 }}
                 onPress={this.pickMultiple.bind(this)}
               >
@@ -351,8 +344,7 @@ export default class AddRatingSection extends Component {
               <TouchableOpacity
                 style={{
                   height: 37,
-                  width: 42,
-                  marginLeft: 2
+                  width: 37
                 }}
                 onPress={() => this.clickImage(true)}
               >

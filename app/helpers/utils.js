@@ -584,11 +584,11 @@ export const paymentFee = 0;
 
 export function generateFormikSchemaFromFormSchema(
   schemaObj = { properties: {}, required: [] },
-  fields
+  fields = []
 ) {
   let validationSchemaGenerated = {};
   Object.keys(schemaObj.properties).map(key => {
-    if (fields.indexOf(key) !== -1) {
+    if (fields.length === 0 || fields.indexOf(key) !== -1) {
       const property = schemaObj.properties[key];
 
       if (['hidden', 'file'].indexOf(property.type) < 0) {
@@ -598,7 +598,7 @@ export function generateFormikSchemaFromFormSchema(
         const title = i18n.t(property.title);
 
         if (property.type === 'object') {
-          prepareSchema = generateFormikSchemaFromFormSchema(property);
+          prepareSchema = generateFormikSchemaFromFormSchema(property, fields);
         } else {
           if (property.type === 'string') {
             prepareSchema = prepareSchema.string();

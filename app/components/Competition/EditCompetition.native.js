@@ -1,190 +1,71 @@
-import React, { Component } from 'react';
-import CardLayout from '../Common/Card';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import t from 'tcomb-form-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { competitionFormSchema } from '../../server/parsedSchemas/competition';
-import i18n from '../../locales/i18n';
-import PrimaryButton from '../Common/Button/PrimaryButton';
 import { competitionDetailSelector } from '../../selectors';
 import { fetchCompetitionDetail } from '../../actions/competition';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import imagestyles from '../../styles/file_picker.native';
-import styles from '../../styles/competition/mine.native';
-import imageUpload from '../../assets/images/icons/upload_image.png';
-import close_green from '../../assets/images/icons/close_green.png';
-import UserProfileImage from '../Common/UserProfileImage.native';
-import ImagePicker from 'react-native-image-picker';
+import { getDateFromMySQL } from './../../helpers/utils';
 
-let Form = t.form.Form;
-const getCompFormImageLayoutTemplate = () => {
-  const formLayoutTreesTemplate = locals => {
-    const options = {
-      title: i18n.t('label.add_image_title'),
-      cancelButtonTitle: i18n.t('label.cancel'),
-      takePhotoButtonTitle: i18n.t('label.take_photo'),
-      chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
-      'permissionDenied.title': i18n.t('label.permission_denied_title'),
-      'permissionDenied.text': i18n.t('label.permission_denied_text'),
-      'permissionDenied.reTryTitle': i18n.t(
-        'label.permission_denied_retry_title'
-      ),
-      'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
-      storageOptions: {
-        skipBackup: true,
-        path: 'images'
-      }
-    };
+import { View, Keyboard } from 'react-native';
+import { FormikForm } from './editFormComponents.native';
 
-    return (
-      <View style={imagestyles.filePickerContainer}>
-        <View style={{ flex: 1 }}>
-          <Text style={styles.addImageTextStyle}>
-            {i18n.t('label.add_image')}
-          </Text>
-        </View>
-        <TouchableOpacity
-          style={{ flex: 1 }}
-          onPress={
-            (/* event */) => {
-              ImagePicker.showImagePicker(options, response => {
-                // console.log('Response = ', response);
+function EditCompetition(props) {
+  const [buttonType, setButtonType] = useState('competition');
 
-                if (response.didCancel) {
-                  //console.log('User cancelled image picker');
-                } else if (response.error) {
-                  //console.log('ImagePicker Error: ', response.error);
-                } else if (response.customButton) {
-                  // console.log('User tapped custom button: ', response.customButton);
-                } else {
-                  // let source = { uri: response.uri };
-                  locals.onChange('data:image/jpeg;base64,' + response.data);
-                }
-              });
-            }
-          }
-        >
-          {!locals.value ? (
-            <Image source={imageUpload} style={{ height: 40, width: 40 }} />
-          ) : (
-            <View>
-              <UserProfileImage
-                profileImage={locals.value}
-                imageCategory="competition"
-                imageType="avatar"
-              />
-              <View style={styles.profileImageBackground}>
-                <Image
-                  resizeMode="contain"
-                  style={imagestyles.addIcon}
-                  source={close_green}
-                />
-              </View>
-            </View>
-          )}
-        </TouchableOpacity>
-      </View>
-    );
+  const keyboardDidShow = () => {
+    setButtonType('>');
   };
-  return formLayoutTreesTemplate;
-};
 
-class EditCompetition extends Component {
-  constructor(props) {
-    super(props);
-    this.createCompetitionForm = element => {
-      this.createCompetition = element;
+  const keyboardDidHide = () => {
+    setButtonType('competition');
+  };
+
+  useEffect(() => {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      keyboardDidShow
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      keyboardDidHide
+    );
+
+    if (props.competition_id) {
+      props.fetchCompetitionDetail(props.competition_id);
+    }
+
+    // clean up
+    return () => {
+      this.keyboardDidShowListener.remove();
+      this.keyboardDidHideListener.remove();
     };
-    this.state = {
-      expanded: false,
-      pageIndex: 0,
-      showCompetitionForm: true,
-      featuredCompetitions: [],
-      formValue: null
-    };
-    this.onActionButtonPress = this.onActionButtonPress.bind(this);
-    this.onCreateCompetition = this.onCreateCompetition.bind(this);
+  }, []);
+  let formValue = {};
+  if (props.competitionDetail) {
+    formValue = props.competitionDetail;
   }
-  onActionButtonPress() {
-    this.setState({
-      showCompetitionForm: true
-    });
-  }
-  componentDidMount() {
-    if (this.props.competition_id) {
-      this.props.fetchCompetitionDetail(this.props.competition_id);
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    let returnValue = false;
-    Object.entries(this.props).forEach(
-      ([key, val]) =>
-        nextProps[key] !== val ? (returnValue = true) : (returnValue = false)
-    );
-    Object.entries(this.state).forEach(
-      ([key, val]) =>
-        nextState[key] !== val ? (returnValue = true) : (returnValue = false)
-    );
-    return returnValue;
-  }
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      formValue: nextProps.competitionDetail
-    });
-  }
-  onCreateCompetition() {
-    if (this.createCompetition.refs.input.state.value) {
-      this.setState({
-        formValue: this.createCompetition.refs.input.state.value
-      });
-      this.props.editCompetition(
-        this.createCompetition.refs.input.state.value,
-        this.props.competition_id,
-        this.createCompetition
-      );
-    }
-  }
-
-  render() {
-    let schemaOptions = this.props.competitionFormSchemaOptions;
-    if (schemaOptions.fields.imageFile) {
-      schemaOptions.fields.imageFile.template = getCompFormImageLayoutTemplate();
-    }
-    let formValue = this.state.formValue;
-    if (formValue) {
-      formValue.imageFile =
-        formValue && formValue.image ? formValue.image : null;
-    }
-    return (
-      <KeyboardAwareScrollView enableOnAndroid>
-        <CardLayout style={{ flex: 1 }}>
-          <Form
-            ref={this.createCompetitionForm}
-            type={competitionFormSchema}
-            options={schemaOptions}
-            value={formValue}
-          />
-          <PrimaryButton onClick={() => this.onCreateCompetition()}>
-            {i18n.t('label.edit_competition')}
-          </PrimaryButton>
-        </CardLayout>
-      </KeyboardAwareScrollView>
-    );
-  }
-  componentDidUpdate(prevProps, prevState) {
-    Object.entries(this.props).forEach(
-      ([key, val]) =>
-        prevProps[key] !== val && console.log(`Prop '${key}' changed`)
-    );
-    Object.entries(this.state).forEach(
-      ([key, val]) =>
-        prevState[key] !== val && console.log(`State '${key}' changed`)
-    );
-  }
+  const style = { backgroundColor: 'white', flex: 1 };
+  return (
+    <View style={style}>
+      <FormikForm
+        buttonType={buttonType}
+        onEditCompetition={props.editCompetition}
+        onDeleteCompetition={props.deleteCompetition}
+        initialValues={{
+          name: formValue.name,
+          goal: formValue.goal,
+          description: formValue.description ? formValue.description : '',
+          access: formValue.access,
+          endDate: new Date(getDateFromMySQL(formValue.endDate)),
+          imageFile: formValue.image ? formValue.image : ''
+        }}
+        competition_id={props.competition_id}
+        navigation={props.navigation}
+      />
+    </View>
+  );
 }
+
 const mapStateToProps = state => ({
   competitionDetail: competitionDetailSelector(state)
 });
@@ -201,9 +82,5 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(EditCompetition);
 EditCompetition.propTypes = {
   allCompetitions: PropTypes.any,
-  onMoreClick: PropTypes.any,
-  leaveCompetition: PropTypes.any,
-  enrollCompetition: PropTypes.any,
-  onCreateCompetition: PropTypes.any,
   editCompetition: PropTypes.any
 };

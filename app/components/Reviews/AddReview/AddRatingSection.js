@@ -106,6 +106,7 @@ export default class AddRatingSection extends Component {
   }
 
   renderImage(image) {
+    console.log('image', image);
     return (
       <Image
         style={{ width: 27, height: 27, marginRight: 5, borderRadius: 2 }}

@@ -8,7 +8,8 @@ export default class PDFViewer extends React.Component {
   constructor(props) {
     super(props);
     let { params } = this.props.navigation.state;
-    this.state = { uri: params.url || this.props.url, cache: true };
+    this.state = { uri: params ? params.url : this.props.url, cache: true };
+    console.log();
   }
 
   render() {
@@ -29,9 +30,8 @@ export default class PDFViewer extends React.Component {
             onPageChanged={page => {
               console.log(`current page: ${page}`);
             }}
-            onError={error => {
+            onError={() => {
               instance.setState({ uri: '' });
-              console.error(error);
             }}
             style={styles.pdf}
           />

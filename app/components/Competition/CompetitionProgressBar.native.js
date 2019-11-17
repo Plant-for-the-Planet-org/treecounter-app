@@ -24,42 +24,19 @@ class CompetitionProgressBar extends React.Component {
     } else {
       treeCountWidth = treePlantedRatio * 100;
     }
-    const backgroundColor = '#b9d384';
     return (
       <View style={styles.treeCounterContainer}>
         <View style={styles.treePlantedContainer}>
           <View
             style={
               treeCountWidth > 0
-                ? {
-                    height: '100%',
-                    flexDirection: 'row',
-                    backgroundColor: backgroundColor,
-                    borderColor: backgroundColor,
-                    width: treeCountWidth + '%',
-                    paddingRight: 10,
-                    padding: 5,
-                    borderTopRightRadius: 20,
-                    borderBottomRightRadius: 20,
-                    borderWidth: 0.5
-                  }
-                : {
-                    height: '100%',
-                    flexDirection: 'row',
-                    padding: 5
-                  }
+                ? treeCountWidth != 100
+                  ? [{ width: treeCountWidth + '%' }, styles.progressbar]
+                  : [{ width: treeCountWidth + '%' }, styles.progressbarw100]
+                : styles.progressbarw0
             }
           />
-          <View
-            style={{
-              width: '100%',
-              flexDirection: 'row',
-              position: 'absolute',
-              alignItems: 'center',
-              paddingTop: 8,
-              paddingBottom: 8
-            }}
-          >
+          <View style={styles.treeCountViewPB}>
             <Text style={styles.treePlantedtextPlanted}>
               {delimitNumbers(countPlanted)}
             </Text>
@@ -75,8 +52,8 @@ class CompetitionProgressBar extends React.Component {
               {countTarget ? delimitNumbers(countTarget) : null}
             </Text>
 
-            <View style={{ paddingLeft: 5, paddingRight: 16 }}>
-              <Image source={flagTarget} style={{ width: 15, height: 15 }} />
+            <View style={styles.targetflagview}>
+              <Image source={flagTarget} style={styles.targetflagimage} />
             </View>
           </View>
         ) : null}

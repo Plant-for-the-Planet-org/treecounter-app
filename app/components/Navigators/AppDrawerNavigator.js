@@ -55,6 +55,7 @@ import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
 import Reviews from './../Reviews/Reviews';
 import AddReview from './../Reviews/AddReview/AddReview';
 import PDFViewer from '../PDFViewer';
+import createCompeition from './../Competition/Tabs/createCompetition.native';
 import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -76,8 +77,8 @@ const headerLabels = {
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   [getLocalRoute('app_selectProject')]: 'label.donate',
-  [getLocalRoute('app_competition')]: 'label.competitions',
-  [getLocalRoute('app_editCompetition')]: 'label.edit_competition',
+  [getLocalRoute('app_competition')]: '',
+  [getLocalRoute('app_editCompetition')]: '',
   [getLocalRoute('app_imprint')]: 'label.imprint',
   [getLocalRoute('app_privacy')]: 'label.data_protection',
   [getLocalRoute('app_challenge')]: 'label.challenge_heading',
@@ -91,6 +92,7 @@ const headerLabels = {
   ['app_gift_projects']: 'label.gift_trees',
   ['pickup_profile_modal']: 'label.dedicate_trees_to',
   ['app_pledge_events']: 'Pledges',
+  ['app_create_competition']: '',
   ['app_unfulfilled_pledge_events']: 'Pledges',
   ['app_pledge_form']: 'Pledge to plant a tree',
   ['app_pledge_update_form']: 'Update your pledge'
@@ -162,6 +164,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_pledge_form']: {
         screen: MakePledgeForm
+      },
+      ['app_create_competition']: {
+        screen: createCompeition
       }
     },
     {

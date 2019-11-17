@@ -146,6 +146,8 @@ import googlePlayBadge_de from './images/de/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
 import attach from './images/attach.png';
+import cameraSolid from './images/icons/camera-solid.png';
+import imageGallery from './images/icons/images-gallery.png';
 import nextArrow from './images/icons/nextArrow.png';
 import nextArrowWhite from './images/icons/nextArrowWhite.png';
 import closeBlack from './images/icons/closeblack.png';
@@ -299,6 +301,8 @@ export {
   appleStoreBadge_en,
   appleStoreBadge_de,
   attach,
+  cameraSolid,
+  imageGallery,
   nextArrow,
   nextArrowWhite,
   closeBlack,

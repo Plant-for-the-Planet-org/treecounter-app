@@ -1,67 +1,62 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, Image } from 'react-native';
+import styles from '../../../styles/competition/competition-master.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
 import { trees } from './../../../assets';
-import styles from '../../../styles/competition/competition-master.native';
 import i18n from '../../../locales/i18n';
 
-export default class AllCompetitions extends Component {
+export default class ClosedCompetitions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAllCompetitions: []
+      archivedCompetitions: []
     };
   }
   componentWillMount() {
     let { allCompetitions } = this.props;
-    let showAllCompetitions = [];
+    let archivedCompetitions = [];
     let CurrentDate = new Date();
 
     if (allCompetitions.length > 0) {
       allCompetitions.forEach(val => {
-        if (val.category === 'all') {
-          val.competitions.forEach(comp => {
-            let endDate = comp.endDate;
-            endDate = new Date(endDate);
-            if (endDate > CurrentDate) {
-              showAllCompetitions.push(comp);
-            }
-          });
-        }
+        val.competitions.forEach(comp => {
+          let endDate = comp.endDate;
+          endDate = new Date(endDate);
+          if (CurrentDate > endDate) {
+            archivedCompetitions.push(comp);
+          }
+        });
       });
     }
     this.setState({
-      showAllCompetitions: showAllCompetitions
+      archivedCompetitions: archivedCompetitions
     });
   }
 
   componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
-    let showAllCompetitions = [];
+    let archivedCompetitions = [];
     let CurrentDate = new Date();
-
     if (allCompetitions.length > 0) {
       allCompetitions.forEach(val => {
-        if (val.category === 'all') {
-          val.competitions.forEach(comp => {
-            let endDate = comp.endDate;
-            endDate = new Date(endDate);
-            if (endDate > CurrentDate) {
-              showAllCompetitions.push(comp);
-            }
-          });
-        }
+        val.competitions.forEach(comp => {
+          let endDate = comp.endDate;
+          endDate = new Date(endDate);
+          if (CurrentDate > endDate) {
+            archivedCompetitions.push(comp);
+          }
+        });
       });
     }
     this.setState({
-      showAllCompetitions: showAllCompetitions
+      archivedCompetitions: archivedCompetitions
     });
   }
 
   render() {
-    let { showAllCompetitions } = this.state;
+    let { archivedCompetitions } = this.state;
     return (
       <ScrollView
         contentContainerStyle={[
@@ -71,16 +66,16 @@ export default class AllCompetitions extends Component {
       >
         <View style={styles.headerView}>
           <Text style={styles.headerTitle}>
-            {i18n.t('label.all_compeition_tab_header')}
+            {i18n.t('label.archived_compeition_tab_header')}
           </Text>
           <Image
             source={trees}
-            style={{ height: 60, flex: 1 }}
+            style={styles.headerImage}
             resizeMode="contain"
           />
         </View>
-        {showAllCompetitions.length > 0
-          ? showAllCompetitions.map(competition => (
+        {archivedCompetitions.length > 0
+          ? archivedCompetitions.map(competition => (
               <CompetitionSnippet
                 key={'competition' + competition.id}
                 cardStyle={styles.cardStyle}
@@ -89,7 +84,7 @@ export default class AllCompetitions extends Component {
                 enrollCompetition={id => this.props.enrollCompetition(id)}
                 editCompetition={this.props.editCompetition}
                 competition={competition}
-                type="all"
+                type="featured"
               />
             ))
           : null}
@@ -97,7 +92,7 @@ export default class AllCompetitions extends Component {
     );
   }
 }
-AllCompetitions.propTypes = {
+ClosedCompetitions.propTypes = {
   allCompetitions: PropTypes.any,
   onMoreClick: PropTypes.any,
   leaveCompetition: PropTypes.any,

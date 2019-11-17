@@ -268,7 +268,8 @@ export default class ContributionCardHome extends React.Component {
                 )}
               </div>
               <div>
-                {contribution.contributionType === 'planting' ? (
+                {contribution.contributionType === 'planting' &&
+                !this.props.isPublic ? (
                   <div>
                     <ConfirmDeletion
                       isOpen={this.state.openDialog}
@@ -289,7 +290,7 @@ export default class ContributionCardHome extends React.Component {
                     </span>
                   </div>
                 ) : null}
-                {mayUpdate ? (
+                {mayUpdate && !this.props.isPublic ? (
                   <Link
                     to={getLocalRoute('app_editTrees', {
                       contribution: contribution.id

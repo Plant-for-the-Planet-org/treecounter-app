@@ -29,6 +29,7 @@ const UserContributions = ({
               deleteContribution={deleteContribution}
               key={contribution.id}
               supportTreeCounterAction={supportTreeCounterAction}
+              isPublic={isPublic}
             />
           ))
       ) : (

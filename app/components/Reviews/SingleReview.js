@@ -12,7 +12,6 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { pushStaticRoute } from './../../helpers/routerHelper';
 import { formatDate } from '../../utils/utils';
-import { getSuggestions } from '../../helpers/utils';
 import i18n from '../../locales/i18n.js';
 import UserProfileImage from '../Common/UserProfileImage';
 const { width } = Dimensions.get('window');
@@ -22,7 +21,6 @@ export default class SingleReview extends Component {
     super(props);
     console.log('single props', props);
     this.close = this.close.bind(this);
-    this.state = { profileImage: '' };
   }
   componentDidMount() {
     console.log('calling get avatar');
@@ -44,14 +42,7 @@ export default class SingleReview extends Component {
     );
   }
   getAvatar() {
-    this.props.review.reviewer &&
-      getSuggestions(this.props.review.reviewer.treecounterSlug, true).then(
-        suggestions => {
-          console.log('got sugession', suggestions);
-          suggestions.length &&
-            this.setState({ profileImage: suggestions[0].image });
-        }
-      );
+    return this.props.review.reviewer ? this.props.review.reviewer.avatar : '';
   }
   render() {
     let { review, navigation } = this.props;
@@ -70,7 +61,7 @@ export default class SingleReview extends Component {
         <View style={styles.headerParent}>
           <View>
             <UserProfileImage
-              profileImage={this.state.profileImage}
+              profileImage={this.getAvatar()}
               imageStyle={{ width: 32, height: 32, borderRadius: 16 }}
             />
           </View>

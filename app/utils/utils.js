@@ -27,6 +27,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
     if (currency) {
       style.style = 'currency';
       style.currency = currency;
+      //console.log('cu', currency, userProfile);
       if (userProfile && userProfile.currency) {
         style.currency = userProfile.currency;
         if (
@@ -38,6 +39,8 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
             currencies.currencies.currency_rates[currency].rates[
               userProfile.currency
             ] * data;
+        } else {
+          style.currency = currency;
         }
       }
     }

@@ -70,20 +70,34 @@ class PlantProjectFull extends React.Component {
             selectProject={this.props.selectProject}
           />
 
-          {this.props.plantProject.reviews.length ? (
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
             <TouchableOpacity
-              style={styles.makePledgeButton}
+              style={{
+                paddingHorizontal: 36,
+                backgroundColor: '#89b53a',
+                height: 52,
+                borderRadius: 24,
+                marginTop: 10,
+                width: '85%',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
               onPress={() => {
-                updateStaticRoute('app_reviews', navigation);
+                updateStaticRoute('app_add_review', navigation);
               }}
             >
-              <View style={styles.makePledgeButtonView}>
-                <Text style={styles.makePledgeButtonText}>
-                  {i18n.t('label.reviews')}
-                </Text>
-              </View>
+              <Text
+                style={{ fontWeight: 'bold', color: 'white', fontSize: 16 }}
+              >
+                {i18n.t('label.write_reviews')}
+              </Text>
             </TouchableOpacity>
-          ) : null}
+          </View>
           {/* <View style={styles.horizontalRule} /> */}
           <View style={styles.plantProjectDetails}>
             <PlantProjectDetails {...detailsProps} />

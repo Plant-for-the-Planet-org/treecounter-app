@@ -1,5 +1,9 @@
 {
   "signup": "Junte-se a nós",
   "email": "E-mail",
-  "message": "Mensagem de presente"
+  "message": "Mensagem de presente",
+  "address": "Endereço",
+  "zipCode": "Código postal",
+  "city": "Cidade",
+  "subtype": "Categoria"
 }

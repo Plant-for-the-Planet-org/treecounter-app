@@ -118,8 +118,8 @@ class Trillion extends PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.entities.eventPledge !== this.props.entities.eventPledge) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.userPledges !== this.state.userPledges) {
       if (this.props.userProfile) {
         this.setState({
           userPledges: this.props.entities.eventPledge

@@ -137,7 +137,6 @@ export async function postAuthenticatedRequest(route, data, params) {
 
 export async function putRequest(route, data, params, authenticated = false) {
   let url = await getApiRoute(route, params);
-  console.log(url);
   return await axios
     .put(url, data, await getHeaders(authenticated))
     .then(checkStatus)

@@ -19,6 +19,11 @@ class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
   }
+  isReviewer() {
+    return (
+      this.props.currentUserProfile && this.props.currentUserProfile.isReviewer
+    );
+  }
   render() {
     const {
       images,
@@ -69,35 +74,36 @@ class PlantProjectFull extends React.Component {
             tpoName={tpo_name}
             selectProject={this.props.selectProject}
           />
-
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <TouchableOpacity
+          {this.isReviewer() && (
+            <View
               style={{
-                paddingHorizontal: 36,
-                backgroundColor: '#89b53a',
-                height: 52,
-                borderRadius: 24,
-                marginTop: 10,
-                width: '85%',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-              onPress={() => {
-                updateStaticRoute('app_add_review', navigation);
+                justifyContent: 'center',
+                alignItems: 'center'
               }}
             >
-              <Text
-                style={{ fontWeight: 'bold', color: 'white', fontSize: 16 }}
+              <TouchableOpacity
+                style={{
+                  paddingHorizontal: 36,
+                  backgroundColor: '#89b53a',
+                  height: 52,
+                  borderRadius: 24,
+                  marginTop: 10,
+                  width: '85%',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                onPress={() => {
+                  updateStaticRoute('app_add_review', navigation);
+                }}
               >
-                {i18n.t('label.write_reviews')}
-              </Text>
-            </TouchableOpacity>
-          </View>
+                <Text
+                  style={{ fontWeight: 'bold', color: 'white', fontSize: 16 }}
+                >
+                  {i18n.t('label.write_reviews')}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
           {/* <View style={styles.horizontalRule} /> */}
           <View style={styles.plantProjectDetails}>
             <PlantProjectDetails {...detailsProps} />

@@ -37,6 +37,7 @@ export default class FeaturedProjects extends PureComponent {
       showMoreButton={false}
       tpoName={item.tpo_name}
       selectProject={this.props.onSelectProjects}
+      navigation={this.props.navigation}
     />
   );
 

@@ -34,6 +34,7 @@ class ListViewProjects extends PureComponent {
       showMoreButton={false}
       tpoName={item.tpo_name}
       selectProject={this.onSelectClickedFeaturedProjects}
+      navigation={this.props.navigation}
     />
   );
 

@@ -56,6 +56,9 @@ export default EStyleSheet.create({
     paddingRight: 10,
     paddingLeft: 10
   },
+  withoutCertified: {
+    width: 66
+  },
   teaser__projectImage: {
     flex: 1,
     overflow: 'hidden'

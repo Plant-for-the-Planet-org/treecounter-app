@@ -73,6 +73,7 @@ class PlantProjectFull extends React.Component {
             onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
             tpoName={tpo_name}
             selectProject={this.props.selectProject}
+            navigation={navigation}
           />
           {this.isReviewer() && (
             <View

@@ -214,6 +214,7 @@ class PublicTreeCounter extends React.Component {
                   selectProject={id => this.onPlantProjectSelected(id)}
                   showMoreButton={false}
                   tpoName={project.tpo_name}
+                  navigation={navigation}
                 />
               ))}
             </View>

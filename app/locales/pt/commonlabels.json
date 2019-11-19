@@ -1,5 +1,6 @@
 {
   "loading": "Carregando..",
   "isRequired": "{{context}} é obrigatório",
-  "enterValidEmail": "Digite um email válido"
+  "enterValidEmail": "Digite um email válido",
+  "something_went_x": "Algo não funcionou."
 }

@@ -1,4 +1,9 @@
 {
   "sure": "Você tem certeza?",
-  "password_changed": "Sua senha foi alterada com sucesso."
+  "password_changed": "Sua senha foi alterada com sucesso.",
+  "set_password": "Configurar senha",
+  "new_project": "Adicionar novo projeto",
+  "Location": "Localização",
+  "female": "Feminino",
+  "other": "Outros"
 }

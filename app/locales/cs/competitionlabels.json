@@ -1,7 +1,6 @@
 {
   "competitions": "Soutěže",
   "mine_competitions": "Moje",
-  "featured_competitions": "VYBRANÉ",
   "all_competitions": "Vše",
   "ends": "Končí",
   "leave": "Odejít",
@@ -16,20 +15,14 @@
   "confirm": "Potvrdit",
   "delete": "Vymazat",
   "cancel_join_request": "Zrušit žádost o připojení",
-  "competition_name": "Název soutěže",
-  "competition_goal": "Stromový cíl",
-  "competition_end_date": "Datum ukončení soutěže",
-  "competition_access": "Kdo se může připojit?",
-  "competition_image": "Přidat obrázek",
-  "competition_description": "Zadejte popis",
-  "create_competition": "Vytvořit soutěž",
   "competition_access_immediate": "Kdokoli (okamžité připojení)",
   "competition_access_request": "Kdokoliv (žádost o připojení)",
   "mine_create": "Nemáte žádné soutěže. Jakákoli soutěž, kterou vytvoříte, či ke které se přidáte, se objeví na této stránce. Seřazeno dle data vytvoření",
   "competition_access_invitation": "Pouze lidé, které pozvu",
   "edit_competition": "Upravit soutěž",
+  "create_competition": "Vytvořit soutěž",
   "competition_create_successfully": "Soutěž byla úspěšně vytvořena",
   "competition_creation_error": "Vytvoření soutěže selhalo",
-  "competition_edited_successfully": "Soutěž byla úspěšně upravena",
-  "competition_editing_error": "Úprava soutěže selhala"
+  "competition_editing_error": "Úprava soutěže selhala",
+  "add_image": "Přidat obrázek"
 }

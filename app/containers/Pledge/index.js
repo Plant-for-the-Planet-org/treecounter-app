@@ -73,6 +73,13 @@ class PledgeContainer extends Component {
       }
       this.getMyPledge();
     }
+    if (
+      prevProps.pledges &&
+      this.props.pledges &&
+      prevProps.pledges.name !== this.props.pledges.name
+    ) {
+      this.props.fetchPledgesAction(this.props.match.params.eventSlug);
+    }
   }
 
   getMyPledge = () => {

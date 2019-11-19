@@ -156,16 +156,24 @@ export default class Pledge extends Component {
       </div>
     ) : (
       <div className="sidenav-wrapper app-container__content--center">
-        <EventHeaderDetails selectedPledge={pledges} />
+        {pledges && pledges.name ? (
+          <EventHeaderDetails selectedPledge={pledges} />
+        ) : null}
+
         <div className="pledge_content--center">
-          <RecentHighestPledges
-            pledges={pledges}
-            openAllPledgesModal={this.openAllPledgesModal}
-          />
-          <div className="row">
-            <EventDescription pledges={pledges} />
-            <EventImages pledges={pledges} />
-          </div>
+          {pledges && pledges.name ? (
+            <RecentHighestPledges
+              pledges={pledges}
+              openAllPledgesModal={this.openAllPledgesModal}
+            />
+          ) : null}
+
+          {pledges && pledges.name ? (
+            <div className="row">
+              <EventDescription pledges={pledges} />
+              <EventImages pledges={pledges} />
+            </div>
+          ) : null}
 
           {typeof myPledge !== 'undefined' && myPledge !== null ? (
             myPledge.length > 0 ? (
@@ -277,12 +285,14 @@ export default class Pledge extends Component {
           </Modal>
 
           {/* Modal for showing all the pledges  */}
-          <AllPledges
-            isOpen={this.state.AllPledgesModalIsOpen}
-            pledges={pledges}
-            closeAllPledgesModal={this.closeAllPledgesModal}
-            name={pledges.name}
-          />
+          {pledges && pledges.name ? (
+            <AllPledges
+              isOpen={this.state.AllPledgesModalIsOpen}
+              pledges={pledges}
+              closeAllPledgesModal={this.closeAllPledgesModal}
+              name={pledges.name}
+            />
+          ) : null}
 
           {/* Modal for showing increase pledge form  */}
           {typeof myPledge !== 'undefined' && myPledge !== null ? (

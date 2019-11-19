@@ -40,7 +40,7 @@ module.exports = webpackMerge(commonConfig, {
   devtool: 'source-map',
   devServer: {
     inline: true,
-    port: 8081,
+    //port: 8081,
     historyApiFallback: true,
     disableHostCheck: true
     //  host: '192.168.100.208'

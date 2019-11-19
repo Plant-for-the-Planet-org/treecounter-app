@@ -119,7 +119,7 @@ class PublicTreeCounter extends React.Component {
     updateStaticRoute('app_donate_detail', navigation);
   };
   render() {
-    const { treecounter, currentUserProfile } = this.props;
+    const { treecounter, currentUserProfile, navigation } = this.props;
     if (null === treecounter) {
       return <LoadingIndicator />;
     }

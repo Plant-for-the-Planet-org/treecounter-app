@@ -53,7 +53,7 @@ class PlantProjectFull extends React.Component {
     };
     const navigation = this.props.navigation;
     const backgroundColor = 'white';
-
+    const backgroundColorLightGreen = 'lightgreen';
     return (
       <View style={{ flex: 1 }}>
         <ScrollView
@@ -75,7 +75,7 @@ class PlantProjectFull extends React.Component {
             selectProject={this.props.selectProject}
             navigation={navigation}
           />
-          {this.isReviewer() && (
+          {this.isReviewer() ? (
             <View
               style={{
                 justifyContent: 'center',
@@ -85,7 +85,7 @@ class PlantProjectFull extends React.Component {
               <TouchableOpacity
                 style={{
                   paddingHorizontal: 36,
-                  backgroundColor: '#89b53a',
+                  backgroundColor: backgroundColorLightGreen,
                   height: 52,
                   borderRadius: 24,
                   marginTop: 10,
@@ -98,13 +98,17 @@ class PlantProjectFull extends React.Component {
                 }}
               >
                 <Text
-                  style={{ fontWeight: 'bold', color: 'white', fontSize: 16 }}
+                  style={{
+                    fontWeight: 'bold',
+                    color: backgroundColor,
+                    fontSize: 16
+                  }}
                 >
                   {i18n.t('label.write_reviews')}
                 </Text>
               </TouchableOpacity>
             </View>
-          )}
+          ) : null}
           {/* <View style={styles.horizontalRule} /> */}
           <View style={styles.plantProjectDetails}>
             <PlantProjectDetails {...detailsProps} />

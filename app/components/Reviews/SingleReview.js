@@ -42,7 +42,7 @@ export default class SingleReview extends Component {
   }
   render() {
     let { review, navigation } = this.props;
-    console.log('in single props in render', this.props);
+    // console.log('in single props in render', this.props);
 
     return (
       <View
@@ -96,6 +96,7 @@ export default class SingleReview extends Component {
               onPress={() => {
                 this.RBSheet.open();
               }}
+              style={{ width: 30 }}
             >
               <Icon
                 name="ellipsis-v"

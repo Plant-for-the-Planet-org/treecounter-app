@@ -5,9 +5,13 @@ import {
 } from '../utils/api';
 import { debug } from '../debug/index';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
-import { reviewsSchema } from '../schemas/index';
+import { reviewsSchema, plantProjectSchema } from '../schemas/index';
 import { normalize } from 'normalizr';
-import { deleteEntity, mergeEntities } from '../reducers/entitiesReducer';
+import {
+  deleteEntity,
+  unlinkEntity,
+  mergeEntities
+} from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import i18n from '../locales/i18n.js';
 // import { ScrollView } from 'react-native-gesture-handler';
@@ -22,7 +26,7 @@ export function addReview(review) {
         .then(res => {
           debug(res.status);
           debug(res);
-          let { review } = res.data.merge;
+          let { review, plantProject } = res.data.merge;
           debug(review);
           console.log('Normalize:', normalize(review, [reviewsSchema]));
           dispatch(mergeEntities(normalize(review, [reviewsSchema])));
@@ -31,9 +35,9 @@ export function addReview(review) {
           // console.log('pmatProject:', plantProject);
           // plantProject.reviews = [reviews, review];
           // console.log('pmatProject:', normalize(plantProject, [plantProjectSchema]));
-          // dispatch(
-          //   mergeEntities(normalize(plantProject, [plantProjectSchema]))
-          // );
+          dispatch(
+            mergeEntities(normalize(plantProject, [plantProjectSchema]))
+          );
           NotificationManager.success(
             i18n.t('label.new_review_added_successfully'),
             i18n.t('label.congrats'),
@@ -60,16 +64,23 @@ export function deleteReview(reviewId) {
         review: reviewId
       })
         .then(res => {
-          console.log(res.data.delete);
+          console.log(res.data);
           const { review } = res.data.delete;
           try {
-            // TODO: we need to fix this error and enable this
-            // this will delete entry from reviews and unlink from project and userprofile
-            // dispatch(unlinkEntity(res.data.unlink));
             dispatch(deleteEntity({ reviews: review }));
+            let { unlink } = res.data;
+            if (unlink) {
+              dispatch(unlinkEntity(unlink));
+            }
+            let { plantProject } = res.data.merge;
+
+            dispatch(
+              mergeEntities(normalize(plantProject, [plantProjectSchema]))
+            );
           } catch (err) {
             console.error(err);
           }
+
           NotificationManager.success(
             i18n.t('label.review_deleted_successfully'),
             i18n.t('label.congrats'),
@@ -100,9 +111,12 @@ export function updateReview(review) {
         review: reviewId
       })
         .then(res => {
-          let { review } = res.data.merge;
+          let { review, plantProject } = res.data.merge;
           try {
             dispatch(mergeEntities(normalize(review, [reviewsSchema])));
+            dispatch(
+              mergeEntities(normalize(plantProject, [plantProjectSchema]))
+            );
             let { unlink, delete: deleteContent } = res.data;
             if (unlink && deleteContent) {
               // TODO: we need to fix this error and enable this

@@ -56,7 +56,9 @@ class PledgeEvents extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.pledges !== this.props.pledges) {
+    if (
+      JSON.stringify(prevProps.pledges) !== JSON.stringify(this.props.pledges)
+    ) {
       this.setState({
         slug: this.props.navigation.getParam('slug')
       });

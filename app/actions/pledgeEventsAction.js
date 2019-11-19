@@ -3,6 +3,7 @@ import { setPledgeEvents } from '../reducers/pledgeEventReducer';
 import { eventPledgeSchema } from '../schemas';
 import { normalize } from 'normalizr';
 import { mergeEntities } from '../reducers/entitiesReducer';
+
 export function fetchpledgeEventsAction() {
   return dispatch => {
     getRequest('public_pledgeEvents_get')

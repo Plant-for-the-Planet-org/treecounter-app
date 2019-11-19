@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { plantProjectsSelector } from '../../selectors/index';
-import ActivePlantProject from './ActivePlantProject';
+
+const ActivePlantProject = lazy(() => import('./ActivePlantProject'));
+
 import i18n from '../../locales/i18n.js';
 
 const TPOComponent = ({ userTpos, plantProjects, id }) => (

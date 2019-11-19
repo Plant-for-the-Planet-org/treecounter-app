@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { loadModules } from 'react-arcgis';
-import ArcGISContributionCaptureMap from '../Map/ArcGISContributionCaptureMap';
+
+const ArcGISContributionCaptureMap = lazy(() =>
+  import('../Map/ArcGISContributionCaptureMap')
+);
 
 class RegistrationMap extends React.Component {
   constructor(props) {

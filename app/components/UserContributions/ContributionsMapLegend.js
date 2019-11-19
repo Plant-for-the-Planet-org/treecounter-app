@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { MapPinRed, MapPinBlue, MapPinGreen } from '../../assets';
-import TextSpan from '../Common/Text/TextSpan';
+
+const TextSpan = lazy(() => import('../Common/Text/TextSpan'));
 import i18n from '../../locales/i18n.js';
 
 const ContributionsMapLegend = () => (

@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import ContributionCardList from './ContributionCardList';
-import ContributionsMapLegend from './ContributionsMapLegend';
-import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card';
-import InlineLink from '../Common/InlineLink';
+const ContributionCardList = lazy(() => import('./ContributionCardList'));
+const ContributionsMapLegend = lazy(() => import('./ContributionsMapLegend'));
+const TextHeading = lazy(() => import('../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../Common/Card'));
+const InlineLink = lazy(() => import('../Common/InlineLink'));
+const ArcGISContributionsMap = lazy(() =>
+  import('../Map/ArcGISContributionsMap')
+);
+
 import i18n from '../../locales/i18n.js';
-import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 
 const UserContributions = ({
   userProfileId,

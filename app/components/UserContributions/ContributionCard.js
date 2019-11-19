@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { getLocalRoute } from '../../actions/apiRouting';
-import TextSpan from '../Common/Text/TextSpan';
-import ConfirmDeletion from './ConfirmDelete';
+
+const TextSpan = lazy(() => import('../Common/Text/TextSpan'));
+const ConfirmDeletion = lazy(() => import('./ConfirmDelete'));
+
 import { updateRoute } from '../../helpers/routerHelper';
 import { formatDate, delimitNumbers } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';

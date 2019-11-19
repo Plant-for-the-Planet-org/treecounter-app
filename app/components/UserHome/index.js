@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import TreecounterGraphicsText from '../TreecounterGraphics/TreecounterGraphicsText';
-import SvgContainer from '../Common/SvgContainer';
-import LoadingIndicator from '../Common/LoadingIndicator';
-import UserProfileImage from '../Common/UserProfileImage';
+const TreecounterGraphicsText = lazy(() =>
+  import('../TreecounterGraphics/TreecounterGraphicsText')
+);
+const SvgContainer = lazy(() => import('../Common/SvgContainer'));
+const LoadingIndicator = lazy(() => import('../Common/LoadingIndicator'));
+const UserProfileImage = lazy(() => import('../Common/UserProfileImage'));
+
 import { getDocumentTitle } from '../../helpers/utils';
 import * as images from '../../assets';
 

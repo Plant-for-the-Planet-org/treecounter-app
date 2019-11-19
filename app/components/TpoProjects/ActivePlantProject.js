@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
-import ActivePlantProjectData from './ActivePlantProjectData';
+
+const ActivePlantProjectData = lazy(() => import('./ActivePlantProjectData'));
+
 import i18n from '../../locales/i18n.js';
 
 import { Link } from 'react-router-dom';

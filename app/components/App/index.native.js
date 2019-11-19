@@ -6,6 +6,7 @@ const TreeCounter = lazy(() => import('./TreeCounter'));
 const GlobalErrorBoundary = lazy(() =>
   import('../ErrorBoundry/globalErrorBoundry')
 );
+// import LoadingIndicator from '../../components/Common/LoadingIndicator';
 
 let store;
 

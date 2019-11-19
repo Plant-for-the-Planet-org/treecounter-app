@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
-import TargetComment from './TargetComment';
-import ArrowButton from '../Common/ArrowButton';
+
+const TargetComment = lazy(() => import('./TargetComment'));
+const ArrowButton = lazy(() => import('../Common/ArrowButton'));
+
 import { pot, tree } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { delimitNumbers, convertNumber } from '../../utils/utils';
-import PlantedDetails from './PlantedDetails';
+
+const PlantedDetails = lazy(() => import('./PlantedDetails'));
 
 class TreecounterGraphicsText extends Component {
   constructor() {

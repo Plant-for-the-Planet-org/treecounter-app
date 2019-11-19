@@ -1,8 +1,10 @@
-import ModalDialog from '../../components/Common/ModalDialog';
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { attention } from '../../assets';
-import SecondaryButton from '../Common/Button/SecondaryButton';
+
+const SecondaryButton = lazy(() => import('../Common/Button/SecondaryButton'));
+const ModalDialog = lazy(() => import('../../components/Common/ModalDialog'));
+
 import i18n from '../../locales/i18n';
 
 const ConfirmDeletion = ({ isOpen, onRequestClose, handleDeletion }) => (

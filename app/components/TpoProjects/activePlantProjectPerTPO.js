@@ -1,5 +1,7 @@
-import React from 'react';
-import TpoCardText from './TpoCardText';
+import React, { lazy } from 'react';
+
+const TpoCardText = lazy(() => import('./TpoCardText'));
+
 import i18n from '../../locales/i18n.js';
 
 const activePlantProjectPerTPO = (userTpos, plantProjects, treeCountid) => {

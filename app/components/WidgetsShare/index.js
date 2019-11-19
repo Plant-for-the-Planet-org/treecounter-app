@@ -1,9 +1,12 @@
 import React, { PureComponent, lazy } from 'react';
 import PropTypes from 'prop-types';
-import TextHeading from '../../components/Common/Heading/TextHeading';
-import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
-const TextHeading = lazy(() => import('../Common/Card'));
-const DescriptionHeading = lazy(() => import('../Common/Card'));
+
+const TextHeading = lazy(() =>
+  import('../../components/Common/Heading/TextHeading')
+);
+const DescriptionHeading = lazy(() =>
+  import('../../components/Common/Heading/DescriptionHeading')
+);
 
 import i18n from '../../locales/i18n.js';
 

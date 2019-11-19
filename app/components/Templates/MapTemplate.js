@@ -1,5 +1,9 @@
-import React from 'react';
-import ArcGISContributionCaptureMap from '../Map/ArcGISContributionCaptureMap';
+import React, { lazy } from 'react';
+
+const ArcGISContributionCaptureMap = lazy(() =>
+  import('../Map/ArcGISContributionCaptureMap')
+);
+
 import {
   getCountryIso2,
   objectToQueryParams,

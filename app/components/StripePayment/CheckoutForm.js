@@ -1,12 +1,16 @@
 // CheckoutForm.js
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { injectStripe } from 'react-stripe-elements';
 import classnames from 'classnames';
-import LoadingIndicators from '../../components/Common/LoadingIndicator';
 
-import CCForm from './CCForm';
-import SEPAForm from './SEPAForm';
+const LoadingIndicators = lazy(() =>
+  import('../../components/Common/LoadingIndicator')
+);
+
+const CCForm = lazy(() => import('./CCForm'));
+const SEPAForm = lazy(() => import('./SEPAForm'));
+
 import i18n from '../../locales/i18n';
 
 class CheckoutForm extends React.Component {

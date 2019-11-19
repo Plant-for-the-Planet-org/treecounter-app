@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { IbanElement } from 'react-stripe-elements';
 import { payment_sepa, payment_arrow } from '../../assets';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+
 import i18n from '../../locales/i18n';
 
 const createOptions = (fontSize, padding) => {

@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import ContributionCard from './ContributionCard';
-
+const ContributionCard = lazy(() => import('./ContributionCard'));
 const ContributionCardList = props => {
   const { contributions, deleteContribution } = props;
 

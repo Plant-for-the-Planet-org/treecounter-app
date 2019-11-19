@@ -1,17 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 
-import Tabs from '../Common/Tabs';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import TextHeading from '../Common/Heading/TextHeading';
-import CardLayout from '../Common/Card';
+const Tabs = lazy(() => import('../Common/Tabs'));
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+const TextHeading = lazy(() => import('../Common/Heading/TextHeading'));
+const CardLayout = lazy(() => import('../Common/Card'));
+
 import {
   singleTreeRegisterFormSchema,
   multipleTreesRegisterFormSchema
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
-import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
+
+const DescriptionHeading = lazy(() =>
+  import('../../components/Common/Heading/DescriptionHeading')
+);
+
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
 let TCombForm = t.form.Form;

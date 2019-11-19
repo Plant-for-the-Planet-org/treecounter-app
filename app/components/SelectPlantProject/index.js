@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 
-import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
-import CardLayout from '../Common/Card';
 // import ContentHeader from '../Common/ContentHeader';
-import PlantProjectFull from '../PlantProjects/PlantProjectFull';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import Tabs from '../Common/Tabs';
-import TextHeading from '../Common/Heading/TextHeading';
-import ModalDialog from '../Common/ModalDialog';
+
+const CarouselNavigation = lazy(() => import('../Common/CarouselNavigation'));
+const CardLayout = lazy(() => import('../Common/Card'));
+const PlantProjectFull = lazy(() =>
+  import('../PlantProjects/PlantProjectFull')
+);
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+const Tabs = lazy(() => import('../Common/Tabs'));
+const TextHeading = lazy(() => import('../Common/Heading/TextHeading'));
+const ModalDialog = lazy(() => import('../Common/ModalDialog'));
+const DescriptionHeading = lazy(() =>
+  import('../Common/Heading/DescriptionHeading')
+);
+const NumberFormat = lazy(() => import('../Common/NumberFormat'));
+
 import i18n from '../../locales/i18n';
-import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import { delimitNumbers } from '../../utils/utils';
-import NumberFormat from '../Common/NumberFormat';
 import { sortProjectsByPrice } from '../../utils/currency';
 import _ from 'lodash';
 

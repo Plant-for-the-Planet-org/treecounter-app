@@ -5,6 +5,7 @@ import DeviceInfo from 'react-native-device-info';
 import i18n from '../../locales/i18n';
 import { withNavigation } from 'react-navigation';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
+
 const TabContainer = lazy(() => import('../../containers/Menu/TabContainer'));
 
 const LicenseInfo = require('./LicenseInfo.json');

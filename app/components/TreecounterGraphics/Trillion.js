@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 
 import { trillionCampaign } from '../../actions/trillionAction';
-import LoadingIndicator from '../Common/LoadingIndicator';
-import SvgContainer from '../Common/SvgContainer';
-import TreecounterGraphicsText from './TreecounterGraphicsText';
+
+const LoadingIndicator = lazy(() => import('../Common/LoadingIndicator'));
+const SvgContainer = lazy(() => import('../Common/SvgContainer'));
+const TreecounterGraphicsText = lazy(() => import('./TreecounterGraphicsText'));
+
 import { updateRoute } from '../../helpers/routerHelper';
-import TextHeading from '../Common/Heading/TextHeading';
-import TextBlock from '../Common/Text/TextBlock';
+
+const TextHeading = lazy(() => import('../Common/Heading/TextHeading'));
+const TextBlock = lazy(() => import('../Common/Text/TextBlock'));
+
 import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
 import { pledgeEventSelector } from '../../selectors';

@@ -18,7 +18,7 @@ export function AllPledges(props) {
       contentLabel="Pledge Modal"
       overlayClassName="pledge-overlay"
       className="pledge-content"
-      appElement={document.getElementById('app')}
+      appElement={document.getElementById('root')}
     >
       <div className="all-pledges">
         <div className="make-pledge-form-x">
@@ -70,7 +70,7 @@ export function IncreasePledge(props) {
       contentLabel="Pledge Modal"
       overlayClassName="pledge-overlay"
       className="pledge-content"
-      appElement={document.getElementById('app')}
+      appElement={document.getElementById('root')}
     >
       <Fade bottom>
         <div>
@@ -127,7 +127,7 @@ export function MakePledge(props) {
       contentLabel="Pledge Modal"
       overlayClassName="pledge-overlay"
       className="submit-pledge-buttons-modal"
-      appElement={document.getElementById('app')}
+      appElement={document.getElementById('root')}
     >
       <Pulse>
         <div className="submit-pledge-container">
@@ -166,7 +166,7 @@ export function UpdatePledge(props) {
       contentLabel="Pledge Modal"
       overlayClassName="pledge-overlay"
       className="submit-pledge-buttons-modal"
-      appElement={document.getElementById('app')}
+      appElement={document.getElementById('root')}
     >
       <Pulse>
         <div className="submit-pledge-container">

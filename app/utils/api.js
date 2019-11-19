@@ -137,7 +137,6 @@ export async function postAuthenticatedRequest(route, data, params) {
 
 export async function putRequest(route, data, params, authenticated = false) {
   let url = await getApiRoute(route, params);
-  console.log(url);
   return await axios
     .put(url, data, await getHeaders(authenticated))
     .then(checkStatus)
@@ -160,4 +159,18 @@ export async function deleteRequest(route, params, authenticated = false) {
 
 export async function deleteAuthenticatedRequest(route, params) {
   return deleteRequest(route, params, true);
+}
+
+/**
+ * Call external API from app like ipstack, openexchanage api etc
+ * build the get url and pass as endPoint
+ * @param {endPoint} params
+ */
+export async function getExternalRequest(params) {
+  console.log('calling getexternal', params);
+  return await axios
+    .get(params.endPoint)
+    .then(checkStatus)
+    .then(onAPIResponse)
+    .catch(onAPIError);
 }

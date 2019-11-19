@@ -8,7 +8,8 @@ import {
   selectedTpoSelector,
   currentUserProfileSelector,
   currenciesSelector,
-  supportedTreecounterSelector
+  supportedTreecounterSelector,
+  getCurrency
 } from '../../selectors';
 import {
   selectPlantProjectAction,
@@ -79,6 +80,7 @@ class DonationTreesContainer extends PureComponent {
 
 const mapStateToProps = state => {
   return {
+    globalCurrency: getCurrency(state),
     selectedProject: selectedPlantProjectSelector(state),
     selectedTpo: selectedTpoSelector(state),
     currentUserProfile: currentUserProfileSelector(state),

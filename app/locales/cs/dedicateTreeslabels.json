@@ -1,1 +1,9 @@
-{ }
+{
+  "has_dedicated": "Všechny stromy, které zasadíte (s výjimkou darovaných), budou věnované {{user}}. I když se stromy ukážou v obou vašich počítadlech stromů, do globálního se započítají jen jednou.",
+  "has_not_dedicated": "Můžete pomoci kamarádovi, kolegovi nebo organizaci dosáhnout jejich cíle tím, že jim věnujete stromy.",
+  "dedicate_tootltip": "Všechny stromy, které vysadíte, zaregistrujete či darujete budou od nynějška věnovány vybranému uživateli. Kdykoli můžete změnit, komu stromy věnujete. V případě darování stromů budou stromy věnovány pouze příjemci daru.",
+  "pick_profile": "Vyberte profil",
+  "dedicate_trees": "Věnovat mé stromy",
+  "dedicate_my_trees": "Věnovat mé stromy",
+  "currently_dedicated_to": "V současné době věnováno"
+}

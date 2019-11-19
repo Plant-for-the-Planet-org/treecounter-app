@@ -158,10 +158,12 @@ export function createCompetition(value, navigation) {
               normalize(res.data.merge.treecounter, [treecounterSchema])
             )
           );
-          updateRoute('app_competition', navigation || dispatch, 1, {
-            competition: res.data.merge.competition[0].id,
-            titleParam: res.data.merge.competition[0].name
-          });
+          // updateRoute('app_competition', navigation || dispatch, 1, {
+          //   competition: res.data.merge.competition[0].id,
+          //   titleParam: res.data.merge.competition[0].name
+          // });
+          console.log(updateRoute('app_competitions', navigation || dispatch));
+          updateRoute('app_competitions', navigation || dispatch);
           resolve(res.data);
           dispatch(setProgressModelState(false));
           NotificationManager.success(
@@ -214,6 +216,37 @@ export function editCompetition(value, param, navigation) {
           debug(error);
           NotificationManager.error(
             i18n.t('label.competition_editing_error'),
+            i18n.t('label.error'),
+            5000
+          );
+          reject(error);
+          dispatch(setProgressModelState(false));
+        });
+    });
+  };
+}
+
+export function deleteCompetition(param) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    return new Promise(function(resolve, reject) {
+      deleteAuthenticatedRequest('competition_delete', { competition: param })
+        .then(res => {
+          dispatch(unlinkEntity(res.data.unlink));
+          dispatch(deleteEntity(res.data.delete));
+
+          dispatch(setProgressModelState(false));
+          NotificationManager.success(
+            i18n.t('label.competition_deleted_successfully'),
+            i18n.t('label.success'),
+            5000
+          );
+          dispatch(fetchMineCompetitions());
+        })
+        .catch(error => {
+          debug(error);
+          NotificationManager.error(
+            i18n.t('label.competition_delete_error'),
             i18n.t('label.error'),
             5000
           );

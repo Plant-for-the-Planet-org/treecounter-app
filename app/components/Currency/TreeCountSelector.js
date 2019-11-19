@@ -117,7 +117,7 @@ class TreeCountSelector extends React.Component {
                 {treeCount} {i18n.t('label.trees')}
               </label>
               <span className="price-conversion__equal">=</span>
-              <span className="price-conversion__radio">
+              <span className="price-conversion__amount">
                 {formatNumber(treeCountToAmount(treeCount), null, currency)}
               </span>
             </div>
@@ -151,7 +151,7 @@ class TreeCountSelector extends React.Component {
             </div>
           </label>
           <span className="price-conversion__equal">=</span>
-          <span className="price-conversion__radio">
+          <span className="price-conversion__amount">
             <input
               type="text"
               disabled={this.state.isFixed}

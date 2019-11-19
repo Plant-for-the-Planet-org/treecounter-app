@@ -1,1 +1,8 @@
-{ }
+{
+  "name": "Název",
+  "price": "Cena",
+  "select_project": "Zvolte projekt",
+  "featured": "Vybrané",
+  "country": "Země",
+  "select_by_country": "Seřadit podle Země"
+}

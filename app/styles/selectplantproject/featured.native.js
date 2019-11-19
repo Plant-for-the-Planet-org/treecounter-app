@@ -12,5 +12,8 @@ export default EStyleSheet.create({
     width: Layout.window.width - 30,
     padding: 0,
     paddingBottom: 10
+  },
+  flexContainer: {
+    flexGrow: 1
   }
 });

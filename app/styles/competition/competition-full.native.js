@@ -82,31 +82,22 @@ export default EStyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   },
-  topCompetitorSection: {
-    flex: 1,
-    flexDirection: 'row',
-    padding: 16,
-    width: '100%',
-    justifyContent: 'space-between'
-  },
   topCompetitorName: {
     width: '60%',
     alignItems: 'center',
     flexDirection: 'row'
   },
-  topCompetitorScore: {
-    width: '40%'
-  },
   topCompetitorNameText: {
     fontSize: 14,
     color: '$cardTextColor',
     maxWidth: '100%',
-    fontWeight: 'bold'
+    fontFamily: 'OpenSans-Bold'
   },
   topCompetitorScoreText: {
     fontSize: 14,
     color: '$cardTextColor',
-    maxWidth: '100%'
+    maxWidth: '100%',
+    fontFamily: 'OpenSans-Regular'
   },
   topCompetitorDiv: {
     width: '100%',
@@ -143,18 +134,8 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%'
-    //height: rowHeight + rowHeight / 2,
   },
   buttonStyle: {
-    // height: 20,
-    // paddingLeft: 2,
-    // paddingRight: 2,
-    // paddingTop: 0,
-    // paddingBottom: 0,
-    // margin: 0,
-    // borderWidth: 0,
-    // borderRadius: 0,
-    // marginRight: 5
     width: '100%',
     borderWidth: 1,
     borderRadius: 6,

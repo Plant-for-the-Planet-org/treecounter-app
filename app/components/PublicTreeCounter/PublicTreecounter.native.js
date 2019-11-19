@@ -211,6 +211,7 @@ class PublicTreeCounter extends React.Component {
                   onSelectClickedFeaturedProjects={id =>
                     this.onSelectClickedFeaturedProjects(id)
                   }
+                  selectProject={id => this.onPlantProjectSelected(id)}
                   showMoreButton={false}
                   tpoName={project.tpo_name}
                 />

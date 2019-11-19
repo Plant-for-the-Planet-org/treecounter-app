@@ -139,7 +139,12 @@ export default class RegisterTrees extends Component {
             : null;
     }
 
-    this.props.onSubmit(this.state.mode, null, plantProject);
+    let formvalue =
+      this.state.mode == 'single-tree'
+        ? this.state.formValueSingle
+        : this.state.formValueMultiple;
+
+    this.props.onSubmit(this.state.mode, formvalue, plantProject);
     event.preventDefault();
   }
 

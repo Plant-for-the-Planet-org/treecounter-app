@@ -35,8 +35,16 @@ class Reviews extends Component {
       this.props.currentUserProfile && this.props.currentUserProfile.isReviewer
     );
   }
+  calculateScore() {
+    let { reviews } = this.props;
+    let score = 0;
+    reviews.map(r => {
+      score += r.score;
+    });
+    return (score / reviews.length / 100).toFixed(2);
+  }
   render() {
-    let { name, reviewScore } = this.props.project;
+    let { name } = this.props.project;
     let { reviews } = this.props;
     return (
       <ScrollView
@@ -79,7 +87,7 @@ class Reviews extends Component {
                 style={{ color: '#4d5153', marginRight: 3 }}
               />
               <Text style={styles.totalRating}>
-                <NumberFormat data={(reviewScore / 100).toFixed(2)} />
+                <NumberFormat data={this.calculateScore()} />
               </Text>
             </View>
           </View>

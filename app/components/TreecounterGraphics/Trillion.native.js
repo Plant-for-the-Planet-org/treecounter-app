@@ -58,10 +58,10 @@ class Trillion extends PureComponent {
         { key: 'world', title: i18n.t('label.world') },
         { key: 'leaderBoard', title: i18n.t('label.leaderboard') }
       ],
-      index: 0,
-      userPledges: {}
+      index: 0
     };
   }
+
   componentDidMount() {
     trillionCampaign()
       .then(({ data }) => {
@@ -109,9 +109,6 @@ class Trillion extends PureComponent {
             let stringPledges = JSON.parse(data);
             stringPledges = stringPledges.toString();
             this.props.fetchPublicPledgesAction(stringPledges);
-            this.setState({
-              userPledges: this.props.entities.eventPledge
-            });
           }
         })
         .catch(error => console.log(error));
@@ -119,11 +116,12 @@ class Trillion extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.entities.eventPledge !== this.props.entities.eventPledge) {
+    if (
+      JSON.stringify(prevProps.entities.eventPledge) !==
+      JSON.stringify(this.props.entities.eventPledge)
+    ) {
       if (this.props.userProfile) {
-        this.setState({
-          userPledges: this.props.entities.eventPledge
-        });
+        console.log('User Logged in');
       } else {
         fetchItem('pledgedEvent')
           .then(data => {
@@ -131,9 +129,6 @@ class Trillion extends PureComponent {
               let stringPledges = JSON.parse(data);
               stringPledges = stringPledges.toString();
               this.props.fetchPublicPledgesAction(stringPledges);
-              this.setState({
-                userPledges: this.props.entities.eventPledge
-              });
             }
           })
           .catch(error => console.log(error));

@@ -49,7 +49,8 @@ class Trillion extends Component {
     if (
       prevProps.pledgeEvents &&
       this.props.pledgeEvents &&
-      prevProps.pledgeEvents !== this.props.pledgeEvents
+      JSON.stringify(prevProps.pledgeEvents) !==
+        JSON.stringify(this.props.pledgeEvents)
     ) {
       this.props.fetchpledgeEventsAction();
     }

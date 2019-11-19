@@ -22,7 +22,8 @@ import {
 import { normalize } from 'normalizr';
 import { fetchItem, saveItem } from './../stores/localStorage';
 import { fetchPublicPledgesAction } from './pledgeEventsAction';
-export function fetchPledgesAction(eventSlug) {
+
+export function fetchPledgesAction(eventSlug, createTimeout = false) {
   return dispatch => {
     getRequest('pledgeEvent_get', {
       version: 'v1.3',
@@ -32,19 +33,22 @@ export function fetchPledgesAction(eventSlug) {
         dispatch(fetchPledges(res.data));
       })
       .catch(error => console.log(error));
-    let timeoutID = setInterval(
-      () =>
-        getRequest('pledgeEvent_get', {
-          version: 'v1.3',
-          eventSlug: eventSlug
-        })
-          .then(res => {
-            dispatch(fetchPledges(res.data));
+    if (createTimeout) {
+      let timeoutID = setInterval(
+        () =>
+          getRequest('pledgeEvent_get', {
+            version: 'v1.3',
+            eventSlug: eventSlug
           })
-          .catch(error => console.log(error)),
-      30000
-    );
-    dispatch(saveTimeoutID(timeoutID));
+            .then(res => {
+              dispatch(fetchPledges(res.data));
+            })
+            .catch(error => console.log(error)),
+        30000
+      );
+      console.log('setTimeout', timeoutID);
+      dispatch(saveTimeoutID(timeoutID));
+    }
   };
 }
 
@@ -152,6 +156,7 @@ async function getLocalStorageItem(key, res) {
 export function clearTimeoutAction(id) {
   return dispatch => {
     clearInterval(id);
+    console.log('clearTimeout', id);
     dispatch(clearTimeoutID());
   };
 }

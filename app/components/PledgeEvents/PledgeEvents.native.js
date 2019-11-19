@@ -35,7 +35,7 @@ class PledgeEvents extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchPledgesAction(this.props.navigation.getParam('slug'));
+    this.props.fetchPledgesAction(this.props.navigation.getParam('slug'), true);
     this.getMyPledge();
     if (this.props.currentUserProfile) {
       this.setState({

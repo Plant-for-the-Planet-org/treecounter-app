@@ -30,7 +30,7 @@ class PledgeContainer extends Component {
     this.setState({
       slug: this.props.match.params.eventSlug
     });
-    this.props.fetchPledgesAction(this.props.match.params.eventSlug);
+    this.props.fetchPledgesAction(this.props.match.params.eventSlug, true);
     if (!this.props.currentUserProfile) {
       fetchItem('pledgedEvent')
         .then(data => {

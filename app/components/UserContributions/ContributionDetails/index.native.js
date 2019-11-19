@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import NDVI from '../../../containers/NDVI/NDVI';
+
+const NDVI = lazy(() => import('../../../containers/NDVI/NDVI'));
 
 export default class UserContributionsDetails extends React.Component {
   render() {

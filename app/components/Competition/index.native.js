@@ -1,11 +1,13 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { lazy } from 'react';
 import { Dimensions, View } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar';
-import MineCompetitions from './Tabs/mine.native';
-import FeaturedCompetitions from './Tabs/featured.native';
-import AllCompetitions from './Tabs/all.native';
+
+const MineCompetitions = lazy(() => import('./Tabs/mine.native'));
+const FeaturedCompetitions = lazy(() => import('./Tabs/featured.native'));
+const AllCompetitions = lazy(() => import('./Tabs/all.native'));
+
 import i18n from '../../locales/i18n';
 
 const Layout = {

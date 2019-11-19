@@ -1,14 +1,23 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { lazy } from 'react';
 import { Image, Linking, Text, View } from 'react-native';
 
 import { link } from '../../assets';
-import TouchableItem from '../../components/Common/TouchableItem';
-import VideoContainer from '../../components/Common/VideoContainer';
-import NDVI from '../../containers/NDVI/NDVI';
+
+const TouchableItem = lazy(() =>
+  import('../../components/Common/TouchableItem')
+);
+const VideoContainer = lazy(() =>
+  import('../../components/Common/VideoContainer')
+);
+const NDVI = lazy(() => import('../../containers/NDVI/NDVI'));
+
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/plant-details.native';
-import PlantProjectImageCarousel from './PlantProjectImageCarousel';
+
+const PlantProjectImageCarousel = lazy(() =>
+  import('./PlantProjectImageCarousel')
+);
 
 const cleanUrl = url => {
   url = (url || '').trim();

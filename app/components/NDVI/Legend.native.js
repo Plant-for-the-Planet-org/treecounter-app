@@ -1,5 +1,7 @@
-import React from 'react';
-import Circle from '../../components/NDVI/Circle.native';
+import React, { lazy } from 'react';
+
+const Circle = lazy(() => import('../../components/NDVI/Circle.native'));
+
 import { View, Text } from 'react-native';
 import i18n from '../../locales/i18n.js';
 //styles

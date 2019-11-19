@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { View, ScrollView, SafeAreaView, Text, Linking } from 'react-native';
 import { LargeMenuItem } from './MenuItem.native';
 import PropTypes from 'prop-types';
@@ -7,7 +7,11 @@ import { updateRoute } from '../../helpers/routerHelper';
 import * as icons from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
-import TouchableItem from '../../components/Common/TouchableItem.native';
+
+const TouchableItem = lazy(() =>
+  import('../../components/Common/TouchableItem.native')
+);
+
 import { fetchItem, saveItem } from '../../stores/localStorage';
 import UserProfileImage from '../Common/UserProfileImage.native';
 

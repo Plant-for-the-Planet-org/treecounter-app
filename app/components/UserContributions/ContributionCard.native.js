@@ -1,18 +1,23 @@
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { lazy } from 'react';
 import { Dimensions, FlatList, Image, Text, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import { getLocalRoute } from '../../actions/apiRouting';
 import { foldin, foldout } from '../../assets';
-import TouchableItem from '../../components/Common/TouchableItem';
+
+const TouchableItem = lazy(() =>
+  import('../../components/Common/TouchableItem')
+);
+
 import i18n from '../../locales/i18n.js';
 import styles, {
   myTreesStyle
 } from '../../styles/myTrees/user_contribution_card';
 import { formatDate, delimitNumbers } from '../../utils/utils';
-import CardLayout from '../Common/Card';
+
+const CardLayout = lazy(() => import('../Common/Card'));
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;

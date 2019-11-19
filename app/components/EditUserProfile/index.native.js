@@ -1,21 +1,27 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { PropTypes } from 'prop-types';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { Text, View, ScrollView } from 'react-native';
 import tabBarStyles from '../../styles/common/tabbar.native';
 import t from 'tcomb-form-native';
 import { parsedSchema } from '../../server/parsedSchemas/editProfile';
-import CardLayout from '../Common/Card';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+
+const CardLayout = lazy(() => import('../Common/Card'));
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+
 import i18n from '../../locales/i18n.js';
 import { ProfileImagePickerTemplate } from './ProfileImagePickerTemplate.native';
 import styles from '../../styles/edit_profile.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import FollowLabelButton from '../Common/Button/FollowLabelButton';
+
+const FollowLabelButton = lazy(() =>
+  import('../Common/Button/FollowLabelButton')
+);
+const LoadingIndicator = lazy(() => import('../Common/LoadingIndicator'));
+const TouchableItem = lazy(() => import('../Common/TouchableItem.native'));
+
 import UserProfileImage from '../Common/UserProfileImage';
-import LoadingIndicator from '../Common/LoadingIndicator';
-import TouchableItem from '../Common/TouchableItem.native';
 import { getLocalRoute } from '../../actions/apiRouting';
 
 const Form = t.form.Form;

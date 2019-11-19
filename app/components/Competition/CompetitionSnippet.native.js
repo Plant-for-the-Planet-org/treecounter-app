@@ -1,14 +1,24 @@
-import React from 'react';
-import CardLayout from '../Common/Card';
+import React, { lazy } from 'react';
+
+const CardLayout = lazy(() => import('../Common/Card'));
+
 import styles from '../../styles/competition/competition-snippet.native';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
-import CompetitionProgressBar from './CompetitionProgressBar';
-import TouchableItem from '../../components/Common/TouchableItem';
+
+const CompetitionProgressBar = lazy(() => import('./CompetitionProgressBar'));
+const TouchableItem = lazy(() =>
+  import('../../components/Common/TouchableItem')
+);
+
 import PropTypes from 'prop-types';
 import { compCalendar } from '../../assets';
 import { bindActionCreators } from 'redux';
-import CompetitionTopCompetitor from './CompetitionTopCompetitor.native';
+
+const CompetitionTopCompetitor = lazy(() =>
+  import('./CompetitionTopCompetitor.native')
+);
+
 import {
   userCompetitionEnrolledSelector,
   userTreecounterSelector

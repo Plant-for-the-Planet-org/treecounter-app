@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { Text, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
-import ArrowButton from '../Common/ArrowButton.native';
+const ArrowButton = lazy(() => import('../Common/ArrowButton.native'));
+
 import { pot, darkTree } from '../../assets';
 import i18n from '../../locales/i18n';
 
 import svgStyles from '../../styles/common/treecounter_svg';
-import PlantedDetails from './PlantDetails.native';
+
+const PlantedDetails = lazy(() => import('./PlantDetails.native'));
+
 import { delimitNumbers, convertNumber } from '../../utils/utils';
 
 class TreecounterGraphicsText extends Component {

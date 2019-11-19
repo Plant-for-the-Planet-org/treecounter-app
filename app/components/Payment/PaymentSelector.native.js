@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 // @flow
 /* eslint-disable no-console, react/no-multi-comp */
-import React from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import Paypal from './Gateways/Paypal';
@@ -22,9 +22,11 @@ import StripeCC from './Gateways/StripeCC';
 import stripe from 'tipsi-stripe';
 import StripeSepa from './Gateways/StripeSepa';
 import i18n from '../../locales/i18n';
-import Offline from './Gateways/Offline';
-import InlineLink from '../Common/InlineLink.native';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+
+const Offline = lazy(() => import('./Gateways/Offline'));
+const InlineLink = lazy(() => import('../Common/InlineLink.native'));
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+
 import { formatNumber, delimitNumbers } from '../../utils/utils';
 
 class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {

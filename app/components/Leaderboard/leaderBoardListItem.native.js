@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { Text, View } from 'react-native';
-import TouchableItem from '../Common/TouchableItem.native';
 import { PropTypes } from 'prop-types';
-import PlantedProgressBar from '../PlantProjects/PlantedProgressbar.native';
+
+const PlantedProgressBar = lazy(() =>
+  import('../PlantProjects/PlantedProgressbar.native')
+);
+const TouchableItem = lazy(() => import('../Common/TouchableItem.native'));
+
 import styles from '../../styles/leaderboard/leader_board';
 import UserProfileImage from '../Common/UserProfileImage.native';
 

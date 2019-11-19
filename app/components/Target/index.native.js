@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import { View, ScrollView } from 'react-native';
@@ -7,8 +7,10 @@ import i18n from '../../locales/i18n.js';
 import { targetFormSchema } from '../../server/parsedSchemas/target';
 
 import styles from '../../styles/login.native';
-import CardLayout from '../Common/Card';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+
+const CardLayout = lazy(() => import('../Common/Card'));
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+
 let Form = t.form.Form;
 
 export default class Target extends Component {

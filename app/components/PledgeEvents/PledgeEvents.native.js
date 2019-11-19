@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { connect } from 'react-redux';
 import i18n from '../../locales/i18n';
-import PledgeTabView from './PledgeTabView.native';
+
+const PledgeTabView = lazy(() => import('./PledgeTabView.native'));
+
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
-import CardLayout from '../Common/Card';
+
+const CardLayout = lazy(() => import('../Common/Card'));
+
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
 import { loadUserProfile } from './../../actions/loadUserProfileAction';
@@ -24,7 +28,9 @@ import {
   currentUserProfileSelector
 } from '../../selectors';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import LoadingIndicator from './../Common/LoadingIndicator';
+
+const LoadingIndicator = lazy(() => import('./../Common/LoadingIndicator'));
+
 import { nextArrowWhite } from '../../assets';
 
 class PledgeEvents extends Component {

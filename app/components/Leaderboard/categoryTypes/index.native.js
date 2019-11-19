@@ -1,10 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { ScrollView, Animated } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { categoryIcons } from '../../../helpers/utils';
 import styles from '../../../styles/leaderboard/leader_board';
-import CategoryType from './categoryType.native';
+
+const CategoryType = lazy(() => import('./categoryType.native'));
 
 export default class CategoryTypes extends Component {
   constructor(props) {

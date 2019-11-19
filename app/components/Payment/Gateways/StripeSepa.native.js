@@ -1,8 +1,10 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import i18n from '../../../locales/i18n';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
+
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButto'));
+
 import stripe from 'tipsi-stripe';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 const colors = {

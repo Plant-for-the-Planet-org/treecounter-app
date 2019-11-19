@@ -1,15 +1,17 @@
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, lazy } from 'react';
 import { View } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
 
-import TabContainer from '../../containers/Menu/TabContainer';
+const TabContainer = lazy(() => import('../../containers/Menu/TabContainer'));
+
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
-import CountryProjects from './Tabs/country.native';
-import FeaturedProjects from './Tabs/featured';
-import ListProjects from './Tabs/list';
-import PriceProjects from './Tabs/price';
+
+const CountryProjects = lazy(() => import('./Tabs/country.native'));
+const FeaturedProjects = lazy(() => import('./Tabs/featured'));
+const ListProjects = lazy(() => import('./Tabs/list'));
+const PriceProjects = lazy(() => import('./Tabs/price'));
 
 export default class SelectPlantTabView extends PureComponent {
   constructor(props) {

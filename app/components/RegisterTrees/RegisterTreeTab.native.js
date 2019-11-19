@@ -1,12 +1,15 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, lazy } from 'react';
 import t from 'tcomb-form-native';
 import { View } from 'react-native';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/register_trees.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
+
 const Form = t.form.Form;
 const backgroundColor = 'white';
 const getFormLayoutTemplate = (mode /* , isTpo */) => {

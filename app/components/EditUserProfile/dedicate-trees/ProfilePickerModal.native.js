@@ -1,16 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { PropTypes } from 'prop-types';
 import styles from '../../../styles/profilepicker.native';
 import { View, ScrollView, Text } from 'react-native';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
+
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
+const SearchUser = lazy(() => import('../../GiftTrees/Tabs/SearchUser'));
+
 import { connect } from 'react-redux';
-import SearchUser from '../../GiftTrees/Tabs/SearchUser';
+
 import { currentUserProfileSelector } from '../../../selectors';
 
 import i18n from '../../../locales/i18n';
 import { updateProfileDedication } from '../../../actions/updateUserProfile';
 import { bindActionCreators } from 'redux';
-import CardLayout from '../../Common/Card';
+
+const CardLayout = lazy(() => import('../../Common/Card'));
+
 import scrollStyle from '../../../styles/common/scrollStyle';
 import UserProfileImage from '../../Common/UserProfileImage.native';
 import { delimitNumbers } from '../../../utils/utils';

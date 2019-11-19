@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import {
   ScrollView,
@@ -15,10 +15,12 @@ import styles from '../../styles/user-home';
 import tabStyles from '../../styles/common/tabbar';
 import * as images from '../../assets';
 
-import CardLayout from '../Common/Card';
-import SvgContainer from '../Common/SvgContainer';
-import UserProfileImage from '../Common/UserProfileImage';
-import ContributionCardList from '../UserContributions/ContributionCardList';
+const CardLayout = lazy(() => import('../Common/Card'));
+const SvgContainer = lazy(() => import('../Common/SvgContainer'));
+const UserProfileImage = lazy(() => import('../Common/UserProfileImage'));
+const ContributionCardList = lazy(() =>
+  import('../UserContributions/ContributionCardList')
+);
 
 import i18n from '../../locales/i18n';
 

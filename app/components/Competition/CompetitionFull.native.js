@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
 import styles from '../../styles/competition/competition-full.native';
-import snippetStyles from '../../styles/competition/competition-snippet.native';
-import CardLayout from '../Common/Card';
+
+const snippetStyles = lazy(() =>
+  import('../../styles/competition/competition-snippet.native')
+);
+const CardLayout = lazy(() => import('../Common/Card'));
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+const CompetitionParticipant = lazy(() =>
+  import('./CompetitionParticipant.native')
+);
+const SearchUser = lazy(() => import('../Challenge/Tabs/SearchUser.native'));
+const CompetitionProgressBar = lazy(() => import('./CompetitionProgressBar'));
+
 import { ScrollView } from 'react-native';
 import scrollStyle from '../../styles/common/scrollStyle';
 import { connect } from 'react-redux';
@@ -15,11 +25,7 @@ import {
   userCompetitionEnrolledSelector,
   userTreecounterSelector
 } from '../../selectors';
-import CompetitionProgressBar from './CompetitionProgressBar';
 import { compCalendar, email } from '../../assets';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import CompetitionParticipant from './CompetitionParticipant.native';
-import SearchUser from '../Challenge/Tabs/SearchUser.native';
 import i18n from '../../locales/i18n.js';
 import { formatDate } from '../../utils/utils';
 

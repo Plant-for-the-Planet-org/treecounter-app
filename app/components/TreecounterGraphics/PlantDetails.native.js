@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
 import { close_green, darkTree, lightTree } from '../../assets';
-import TouchableItem from '../../components/Common/TouchableItem';
+
+const TouchableItem = lazy(() =>
+  import('../../components/Common/TouchableItem')
+);
+
 import svgStyles from '../../styles/common/treecounter_svg';
 import { View, Image, Text } from 'react-native';
 const textColor = '#686060';
+
 class PlantedDetails extends Component {
   render() {
     const { onToggle, personal, community, type } = this.props;

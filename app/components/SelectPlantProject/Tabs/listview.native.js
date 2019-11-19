@@ -1,9 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, lazy } from 'react';
 import { FlatList, View } from 'react-native';
 
-import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
+const PlantProjectSnippet = lazy(() =>
+  import('../../../components/PlantProjects/PlantProjectSnippet')
+);
+
 import styles from '../../../styles/selectplantproject/list';
 
 export default class ListViewProjects extends PureComponent {

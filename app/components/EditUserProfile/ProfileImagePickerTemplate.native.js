@@ -4,6 +4,7 @@ import styles from '../../styles/file_picker.native';
 import { close_green } from '../../assets';
 import ImagePicker from 'react-native-image-picker';
 import i18n from '../../locales/i18n';
+
 const UserProfileImage = lazy(() => import('../Common/UserProfileImage'));
 
 export function ProfileImagePickerTemplate(locals) {

@@ -1,7 +1,11 @@
 import { Text, View } from 'react-native';
-import React from 'react';
+import React, { lazy } from 'react';
 import Permissions from 'react-native-permissions';
-import PrimaryButton from '../../components/Common/Button/PrimaryButton';
+
+const PrimaryButton = lazy(() =>
+  import('../../components/Common/Button/PrimaryButton')
+);
+
 import mapTemplateStyle from '../../styles/mapTemplate.native';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
 import i18n from '../../locales/i18n.js';

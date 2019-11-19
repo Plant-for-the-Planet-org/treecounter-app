@@ -11,6 +11,7 @@ import {
 
 import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
+
 const TextSpan = lazy(() => import('../Common/Text/TextSpan'));
 const TransparentButton = lazy(() =>
   import('../Common/Button/TransparentButton')

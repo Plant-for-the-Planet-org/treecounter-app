@@ -2,7 +2,9 @@ import React, { Component, lazy } from 'react';
 import { ScrollView } from 'react-native';
 import styles from '../../../styles/selectplantproject/featured.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
-import CompetitionSnippet from '../CompetitionSnippet.native';
+
+const CompetitionSnippet = lazy(() => import('../CompetitionSnippet.native'));
+
 import PropTypes from 'prop-types';
 
 export default class AllCompetitions extends Component {

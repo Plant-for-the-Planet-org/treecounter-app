@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { PureComponent } from 'react';
+import React, { PureComponent, lazy } from 'react';
 import {
   ScrollView,
   Text,
@@ -10,18 +10,26 @@ import {
 } from 'react-native';
 import NavigationEvents from './importNavigationEvents';
 import { trillionCampaign } from '../../actions/trillionAction';
-import SvgContainer from '../Common/SvgContainer';
+
+const SvgContainer = lazy(() => import('../Common/SvgContainer'));
+
 import svgStyles from '../../styles/common/treecounter_svg';
 import styles from '../../styles/trillion.native';
 import { pledgeEventSelector, entitiesSelector } from '../../selectors';
-import LoadingIndicator from '../Common/LoadingIndicator';
+
+const LoadingIndicator = lazy(() => import('../Common/LoadingIndicator'));
+
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import CardLayout from '../Common/Card';
+
+const CardLayout = lazy(() => import('../Common/Card'));
+
 import i18n from '../../locales/i18n';
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute } from '../../helpers/routerHelper';
-import Leaderboard from '../../containers/Leaderboard';
+
+const Leaderboard = lazy(() => import('../../containers/Leaderboard'));
+
 import { TabView, TabBar } from 'react-native-tab-view';
 import { getLocalRoute } from '../../actions/apiRouting';
 import {
@@ -42,8 +50,13 @@ import tabStyles from '../../styles/common/tabbar';
 import { saveItem, fetchItem } from '../../stores/localStorage.native';
 import Constants from '../../utils/const';
 import { getImageUrl } from '../../actions/apiRouting';
-import FeaturedProject from './FeaturedProjectScroll/Events.native';
-import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
+
+const FeaturedProject = lazy(() =>
+  import('./FeaturedProjectScroll/Events.native')
+);
+const UnfulfilledEvents = lazy(() =>
+  import('./FeaturedProjectScroll/UnfulfilledEvents.native')
+);
 
 class Trillion extends PureComponent {
   constructor() {

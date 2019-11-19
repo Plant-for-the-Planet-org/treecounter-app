@@ -1,15 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 //components
-import Info from './Info';
-import Legend from './Legend';
-import GradientResultLine from './GradientResultLine';
-import TimeSeries from './TimeSeries';
+
+const Info = lazy(() => import('./Info'));
+const Legend = lazy(() => import('./Legend'));
+const GradientResultLine = lazy(() => import('./GradientResultLine'));
+const TimeSeries = lazy(() => import('./TimeSeries'));
+
 import { View, Text } from 'react-native';
-import CardLayout from '../Common/Card';
+
+const CardLayout = lazy(() => import('../Common/Card'));
+
 import _ from 'lodash';
 import i18n from '../../locales/i18n.js';
-import CarbonDetails from './CarbonDetails';
+
+const CarbonDetails = lazy(() => import('./CarbonDetails'));
+
 import styles from '../../styles/NDVI/Index';
 
 export default class NDVIContainer extends Component {

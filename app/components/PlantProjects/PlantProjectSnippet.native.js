@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, lazy } from 'react';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 
 import { getImageUrl } from '../../actions/apiRouting';
@@ -7,9 +7,10 @@ import { tick } from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import { formatNumber } from '../../utils/utils';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import CardLayout from '../Common/Card';
-import PlantedProgressBar from './PlantedProgressbar.native';
+
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+const CardLayout = lazy(() => import('../Common/Card'));
+const PlantedProgressBar = lazy(() => import('./PlantedProgressbar.native'));
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull

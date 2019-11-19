@@ -1,12 +1,14 @@
 import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, lazy } from 'react';
 import { Image, Text, View } from 'react-native';
 
 import { foldin, foldout } from '../../../assets';
 import i18n from '../../../locales/i18n';
 import styles from '../../../styles/selectplantproject/list';
-import TouchableItem from '../../Common/TouchableItem.native';
+
+const TouchableItem = lazy(() => import('../../Common/TouchableItem.native'));
+
 import ListViewProjects from './listview';
 
 const CountryProjects = ({ plantProjects, selectProject, onMoreClick }) => {

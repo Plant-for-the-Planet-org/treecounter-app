@@ -1,10 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar';
 import { Dimensions } from 'react-native';
-import GiftToUser from './Tabs/GiftUser';
-import GiftEmail from './Tabs/GiftEmail';
+
+const GiftToUser = lazy(() => import('./Tabs/GiftUser'));
+const GiftEmail = lazy(() => import('./Tabs/GiftEmail'));
 
 import i18n from '../../locales/i18n';
 

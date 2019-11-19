@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import CurrencySelector from './CurrencySelector';
-import TreeCountSelector from './TreeCountSelector';
-import CardLayout from '../Common/Card';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+const CurrencySelector = lazy(() => import('./CurrencySelector'));
+const TreeCountSelector = lazy(() => import('./TreeCountSelector'));
+const CardLayout = lazy(() => import('../Common/Card'));
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+
 import i18n from '../../locales/i18n';
 import { Dimensions, View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject.native';

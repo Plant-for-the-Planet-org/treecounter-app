@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'react-native';
 import { gift_icon } from '../../assets';
-import TouchableItem from '../Common/TouchableItem.native';
+
+const TouchableItem = lazy(() => import('../Common/TouchableItem.native'));
+
 import styles from '../../styles/public-page';
 
 const SupportButton = ({ onRegisterSupporter }) => {

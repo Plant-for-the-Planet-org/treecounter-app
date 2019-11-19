@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
-import LoadingIndicator from '../Common/LoadingIndicator';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import CardLayout from '../Common/Card';
+
+const LoadingIndicator = lazy(() => import('../Common/LoadingIndicator'));
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+const CardLayout = lazy(() => import('../Common/Card'));
+const TouchableItem = lazy(() =>
+  import('../../components/Common/TouchableItem')
+);
+
 import i18n from '../../locales/i18n.js';
-import TouchableItem from '../../components/Common/TouchableItem';
 import {
   redeemSignIn,
   redeemRed,
@@ -15,7 +19,8 @@ import styles from '../../styles/redeem';
 import { View, Image, TextInput, Text } from 'react-native';
 import { updateRoute } from '../../helpers/routerHelper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import TabContainer from '../../containers/Menu/TabContainer';
+
+const TabContainer = lazy(() => import('../../containers/Menu/TabContainer'));
 
 export default class Redemption extends Component {
   constructor(props) {

@@ -1,9 +1,13 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import HTMLView from 'react-native-htmlview';
 import { Text, View, ListView, Linking } from 'react-native';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
+
+const LoadingIndicator = lazy(() =>
+  import('../../components/Common/LoadingIndicator')
+);
+
 import { context } from '../../config';
 import styles from '../../styles/faq';
 

@@ -1,5 +1,7 @@
-import React from 'react';
-import Circle from './Circle';
+import React, { lazy } from 'react';
+
+const Circle = lazy(() => import('./Circle'));
+
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import styles from '../../styles/NDVI/TimeSeries';

@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { lazy } from 'react';
 import { LayoutAnimation, Text, TextInput, View, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
@@ -8,7 +8,11 @@ import styles, {
   SearchContainerWidth
 } from '../../styles/header/search_bar.native';
 import PropTypes from 'prop-types';
-import TouchableItem from '../../components/Common/TouchableItem.native';
+
+const TouchableItem = lazy(() =>
+  import('../../components/Common/TouchableItem.native')
+);
+
 import i18n from '../../locales/i18n.js';
 
 const SearchIcon = () => (

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
 import { View, Text } from 'react-native';
 import styles from '../../styles/competition/competition-snippet.native';
-import UserProfileImage from '../Common/UserProfileImage.native';
+
+const UserProfileImage = lazy(() =>
+  import('../Common/UserProfileImage.native')
+);
 
 class CompetitionTopCompetitor extends React.Component {
   constructor(props) {

@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, lazy } from 'react';
 import { Image, TextInput, View } from 'react-native';
 
 import { iosSearchGrey } from '../../../assets';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/selectplantproject/list';
-import ListViewProjects from './listview';
+
+const ListViewProjects = lazy(() => import('./listview'));
 
 const ListProjects = ({
   plantProjects,

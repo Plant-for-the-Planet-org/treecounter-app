@@ -1,17 +1,25 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import { PropTypes } from 'prop-types';
-import CategoryTypes from './categoryTypes';
-import LoadingIndicator from '../Common/LoadingIndicator';
-import CardLayout from '../Common/Card';
+
+const CategoryTypes = lazy(() => import('./categoryTypes'));
+const LoadingIndicator = lazy(() => import('../Common/LoadingIndicator'));
+const CardLayout = lazy(() => import('../Common/Card'));
+
 import styles from '../../styles/leaderboard/leader_board';
 import { filter } from '../../assets';
-import TouchableItem from '../../components/Common/TouchableItem.native';
+
+const TouchableItem = lazy(() =>
+  import('../../components/Common/TouchableItem.native')
+);
+
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import ContextMenuItem from './contextMenuItem.native';
 import { categoryIcons } from '../../helpers/utils';
-import LeaderboardItem from './leaderBoardListItem.native';
+
+const LeaderboardItem = lazy(() => import('./leaderBoardListItem.native'));
+
 import { getLocalRoute } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n';
 import _ from 'lodash';

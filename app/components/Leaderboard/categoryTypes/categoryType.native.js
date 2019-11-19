@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { Text, View } from 'react-native';
-import TouchableItem from '../../Common/TouchableItem.native';
+
+const TouchableItem = lazy(() => import('../../Common/TouchableItem.native'));
+
 import { PropTypes } from 'prop-types';
 import styles from '../../../styles/leaderboard/leader_board';
 

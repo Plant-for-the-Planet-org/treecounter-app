@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import {
   ScrollView,
@@ -8,18 +8,26 @@ import {
   Linking,
   TouchableOpacity
 } from 'react-native';
-import SupportButton from './SupportButton';
-import TreecounterHeader from './TreecounterHeader';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
-import SvgContainer from '../Common/SvgContainer';
-import CardLayout from '../Common/Card';
+
+const SupportButton = lazy(() => import('./SupportButton'));
+const TreecounterHeader = lazy(() => import('./TreecounterHeader'));
+const LoadingIndicator = lazy(() =>
+  import('../../components/Common/LoadingIndicator')
+);
+const SvgContainer = lazy(() => import('../Common/SvgContainer'));
+const CardLayout = lazy(() => import('../Common/Card'));
+
 import stylesHome from '../../styles/user-home';
 import { delimitNumbers } from '../../utils/utils';
 import stylesPublicPage from '../../styles/public-page';
 import i18n from '../../locales/i18n.js';
 
 import { isMyself, isUserFollower, amISupporting } from './utils';
-import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet';
+
+const PlantProjectSnippet = lazy(() =>
+  import('../PlantProjects/PlantProjectSnippet')
+);
+
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 
 class PublicTreeCounter extends React.Component {

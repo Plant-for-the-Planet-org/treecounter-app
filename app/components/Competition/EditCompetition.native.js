@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
-import CardLayout from '../Common/Card';
+import React, { Component, lazy } from 'react';
+
+const CardLayout = lazy(() => import('../Common/Card'));
+
 import PropTypes from 'prop-types';
 import t from 'tcomb-form-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { competitionFormSchema } from '../../server/parsedSchemas/competition';
 import i18n from '../../locales/i18n';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+
 import { competitionDetailSelector } from '../../selectors';
 import { fetchCompetitionDetail } from '../../actions/competition';
 import { connect } from 'react-redux';
@@ -15,7 +19,11 @@ import imagestyles from '../../styles/file_picker.native';
 import styles from '../../styles/competition/mine.native';
 import imageUpload from '../../assets/images/icons/upload_image.png';
 import close_green from '../../assets/images/icons/close_green.png';
-import UserProfileImage from '../Common/UserProfileImage.native';
+
+const UserProfileImage = lazy(() =>
+  import('../Common/UserProfileImage.native')
+);
+
 import ImagePicker from 'react-native-image-picker';
 
 let Form = t.form.Form;

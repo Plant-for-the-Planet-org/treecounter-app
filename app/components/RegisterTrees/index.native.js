@@ -1,9 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import { TabView } from 'react-native-tab-view';
-import CardLayout from '../Common/Card';
+
+const CardLayout = lazy(() => import('../Common/Card'));
+
 import {
   singleTreeRegisterFormSchema,
   schemaOptionsSingleTree,
@@ -12,7 +14,9 @@ import {
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
 import { renderFilledTabBar } from '../Common/Tabs';
-import RegisterTreeTab from './RegisterTreeTab.native';
+
+const RegisterTreeTab = lazy(() => import('./RegisterTreeTab.native'));
+
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 
 export default class RegisterTrees extends Component {

@@ -1,10 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { lazy } from 'react';
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
-import SearchBar from './SearchBar';
-import Header from './Header.native';
+const SearchBar = lazy(() => import('./SearchBar'));
+const Header = lazy(() => import('./Header.native'));
+
 import { getSuggestions } from '../../helpers/utils';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { withNavigation } from 'react-navigation';

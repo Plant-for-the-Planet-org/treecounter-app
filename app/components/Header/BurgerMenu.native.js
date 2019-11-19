@@ -1,5 +1,9 @@
-import React, { PureComponent } from 'react';
-import TouchableItem from '../../components/Common/TouchableItem';
+import React, { PureComponent, lazy } from 'react';
+
+const TouchableItem = lazy(() =>
+  import('../../components/Common/TouchableItem')
+);
+
 import styles from '../../styles/menu.native';
 import { currentUserProfileSelector } from '../../selectors';
 import { connect } from 'react-redux';

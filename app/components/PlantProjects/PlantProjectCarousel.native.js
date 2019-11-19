@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { ScrollView } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject';
 import PropTypes from 'prop-types';
 import Slick from 'react-native-slick';
-import PlantProjectFull from '../PlantProjects/PlantProjectFull';
+
+const PlantProjectFull = lazy(() =>
+  import('../PlantProjects/PlantProjectFull')
+);
 
 class PlantProjectCarousel extends Component {
   constructor(props) {

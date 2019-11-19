@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image } from 'react-native';
 
-import FollowLabelButton from '../Common/Button/FollowLabelButton';
+const FollowLabelButton = lazy(() =>
+  import('../Common/Button/FollowLabelButton')
+);
+
 import userHomeStyles from '../../styles/user-home.native';
 import UserProfileImage from '../Common/UserProfileImage';
 

@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { View, TextInput, Image, Text } from 'react-native';
-import SearchUser from './SearchUser.native';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
-import CardLayout from '../../Common/Card';
+
+const SearchUser = lazy(() => import('./SearchUser.native'));
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
+const CardLayout = lazy(() => import('../../Common/Card'));
+
 import { iosInformation } from '../../../assets';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import i18n from '../../../locales/i18n';
 const textColor = '#ff0033';
+
 export default class GiftUser extends Component {
   constructor(props) {
     super(props);

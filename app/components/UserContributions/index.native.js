@@ -1,15 +1,17 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import ContributionCardList from './ContributionCardList';
-import ContributionsMapLegend from './ContributionsMapLegend';
+const ContributionCardList = lazy(() => import('./ContributionCardList'));
+const ContributionsMapLegend = lazy(() => import('./ContributionsMapLegend'));
+
 import i18n from '../../locales/i18n.js';
 import { Text, View, ScrollView } from 'react-native';
 import styles from '../../styles/myTrees/my_trees';
 import tabBarStyles from '../../styles/common/tabbar';
 
-import PrimaryButton from '../Common/Button/PrimaryButton';
+const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
+
 import { plantedTarget } from '../../assets';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { TabView, TabBar } from 'react-native-tab-view';

@@ -1,12 +1,16 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
-import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
+
+const TreeCountCurrencySelector = lazy(() =>
+  import('../Currency/TreeCountCurrencySelector')
+);
+
 import { TabView } from 'react-native-tab-view';
 
 import i18n from '../../locales/i18n.js';
 
-import RecieptTabsView from './receiptTabs';
+const RecieptTabsView = lazy(() => import('./receiptTabs'));
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 // import PaymentSelector from '../Payment/PaymentSelector';
@@ -14,8 +18,9 @@ import { View, Linking } from 'react-native';
 import { paymentFee } from '../../helpers/utils';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
-import TabContainer from '../../containers/Menu/TabContainer';
-import LoadingIndicator from '../Common/LoadingIndicator';
+
+const TabContainer = lazy(() => import('../../containers/Menu/TabContainer'));
+const LoadingIndicator = lazy(() => import('../Common/LoadingIndicator'));
 
 export default class DonateTrees extends React.PureComponent {
   constructor(props) {

@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
-import CardLayout from '../Common/Card';
+
+const CardLayout = lazy(() => import('../Common/Card'));
+
 import {
   singleTreeRegisterFormSchema,
   schemaOptionsSingleTree,
   multipleTreesRegisterFormSchema,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
-import RegisterTreeTab from '../RegisterTrees/RegisterTreeTab';
+
+const RegisterTreeTab = lazy(() => import('../RegisterTrees/RegisterTreeTab'));
+
 import i18n from '../../locales/i18n.js';
 
 export default class EditUserContribution extends Component {

@@ -1,18 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import styles from '../../../styles/competition/mine.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import imagestyles from '../../../styles/file_picker.native';
-import CompetitionSnippet from '../CompetitionSnippet.native';
+const CompetitionSnippet = lazy(() => import('../CompetitionSnippet.native'));
+
 import ActionButton from 'react-native-action-button';
-import CardLayout from '../../Common/Card';
+
+const CardLayout = lazy(() => import('../../Common/Card'));
+
 import PropTypes from 'prop-types';
 import t from 'tcomb-form-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { competitionFormSchema } from '../../../server/parsedSchemas/competition';
 import i18n from '../../../locales/i18n';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
-import UserProfileImage from '../../Common/UserProfileImage';
+
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
+const UserProfileImage = lazy(() => import('../../Common/UserProfileImage'));
+
 import close_green from '../../../assets/images/icons/close_green.png';
 import imageUpload from '../../../assets/images/icons/upload_image.png';
 import ImagePicker from 'react-native-image-picker';

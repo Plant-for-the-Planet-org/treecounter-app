@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { StyleSheet, View } from 'react-native';
 import stripe, { PaymentCardTextField } from 'tipsi-stripe';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
+
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
+
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import i18n from '../../../locales/i18n';
+
 const colors = {
   color: '#449aeb',
   borderColor: '#000'

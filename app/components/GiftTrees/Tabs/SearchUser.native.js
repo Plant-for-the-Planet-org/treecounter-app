@@ -1,9 +1,10 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { lazy } from 'react';
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 
-import SearchBar from '../../../components/Header/SearchBar';
-import Header from '../../../components/Header/Header';
+const SearchBar = lazy(() => import('../../../components/Header/SearchBar'));
+const Header = lazy(() => import('../../../components/Header/Header'));
+
 import { getSuggestions } from '../../../helpers/utils';
 import { withNavigation } from 'react-navigation';
 import i18n from '../../../locales/i18n';

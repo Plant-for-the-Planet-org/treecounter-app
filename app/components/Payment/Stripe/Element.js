@@ -10,10 +10,10 @@ const noop = () => {};
 const _extractOptions = props => {
   const {
     /* id, */
-    /* className, */
-    /* onChange, */
-    /* onFocus, */
-    /* onBlur, */
+    /* className,   */
+    /* onChange,   */
+    /* onFocus,   */
+    /* onBlur,   */
     /* onReady, */
     ...options
   } = props;

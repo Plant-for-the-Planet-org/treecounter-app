@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
-import TouchableItem from '../Common/TouchableItem.native';
+
+const TouchableItem = lazy(() => import('../Common/TouchableItem.native'));
+
 import styles from '../../styles/NDVI/Info';
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import { formatDate } from '../../utils/utils';

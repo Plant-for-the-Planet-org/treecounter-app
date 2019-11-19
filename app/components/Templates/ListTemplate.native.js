@@ -1,8 +1,11 @@
 import { View, Text, Image } from 'react-native';
-import React from 'react';
+import React, { lazy } from 'react';
 import i18n from '../../locales/i18n';
 import { close_green } from '../../assets';
-import TouchableItem from '../../components/Common/TouchableItem';
+
+const TouchableItem = lazy(() =>
+  import('../../components/Common/TouchableItem')
+);
 
 const styles = {
   addButtonStyle: {

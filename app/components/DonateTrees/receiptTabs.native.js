@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { lazy } from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { View } from 'react-native';
 import t from 'tcomb-form-native';
@@ -13,10 +13,14 @@ import {
   individualSchemaOptions
 } from '../../server/parsedSchemas/donateTrees';
 
-import PrimaryButton from '../../components/Common/Button/PrimaryButton';
+const PrimaryButton = lazy(() =>
+  import('../../components/Common/Button/PrimaryButton')
+);
+
 import i18n from '../../locales/i18n.js';
 
-import CardLayout from '../../components/Common/Card';
+const CardLayout = lazy(() => import('../../components/Common/Card'));
+
 import styles from '../../styles/common/tabbar';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';

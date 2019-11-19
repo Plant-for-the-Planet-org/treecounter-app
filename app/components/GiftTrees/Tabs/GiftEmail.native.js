@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import {
   giftInvitationFormSchema,
   giftInvitationSchemaOptions
 } from '../../../server/parsedSchemas/giftTrees';
 import t from 'tcomb-form-native';
-import CardLayout from '../../Common/Card';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
+
+const CardLayout = lazy(() => import('../../Common/Card'));
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
+
 import { View, Image, Text } from 'react-native';
 import { iosInformation } from '../../../assets';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';

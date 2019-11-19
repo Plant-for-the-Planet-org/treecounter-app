@@ -1,8 +1,13 @@
-import React from 'react';
-import TimeSerie from './TimeSerie';
+import React, { lazy } from 'react';
+
+const TimeSerie = lazy(() => import('./TimeSerie'));
+
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
-import filterDataPoints from './NDVIfunctions/filterDataPointForTimeSeries';
+
+const filterDataPoints = lazy(() =>
+  import('./NDVIfunctions/filterDataPointForTimeSeries')
+);
 
 class TimeSeries extends React.Component {
   constructor(props) {

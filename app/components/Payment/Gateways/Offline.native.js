@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Component, lazy } from 'react';
+import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
-import { View, Text } from 'react-native';
-import CheckBox from '../../Common/Checkbox';
+
+const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
+const CheckBox = lazy(() => import('../../Common/Checkbox'));
+
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 
 class Offline extends React.Component {

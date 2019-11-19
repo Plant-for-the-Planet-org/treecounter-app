@@ -1,12 +1,15 @@
 /* eslint-disable no-underscore-dangle */
 import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, lazy } from 'react';
 import { FlatList, View } from 'react-native';
 
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
-import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
+
+const PlantProjectSnippet = lazy(() =>
+  import('../../PlantProjects/PlantProjectSnippet')
+);
 
 export default class FeaturedProjects extends PureComponent {
   _keyExtractor = item => item.id.toString();

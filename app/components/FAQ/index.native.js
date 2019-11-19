@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import Accordion from 'react-native-collapsible/Accordion';
 import HTMLView from 'react-native-htmlview';
@@ -12,10 +12,14 @@ import {
   Image,
   Linking
 } from 'react-native';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
+
+const LoadingIndicator = lazy(() =>
+  import('../../components/Common/LoadingIndicator')
+);
+const TabContainer = lazy(() => import('../../containers/Menu/TabContainer'));
+
 import { context } from '../../config';
 import styles from '../../styles/faq';
-import TabContainer from '../../containers/Menu/TabContainer';
 
 export default class FAQ extends Component {
   _renderHeader(section, index, isActive) {

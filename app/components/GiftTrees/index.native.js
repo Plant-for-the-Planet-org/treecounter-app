@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { PropTypes } from 'prop-types';
-import GiftTabView from './GiftTabs';
+
+const GiftTabView = lazy(() => import('./GiftTabs'));
 
 export default class GiftTrees extends Component {
   constructor(props) {

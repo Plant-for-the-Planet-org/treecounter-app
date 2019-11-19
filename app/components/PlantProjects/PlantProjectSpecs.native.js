@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
-import PlantProjectSpecsItem from './PlantProjectSpecsItem';
+
+const PlantProjectSpecsItem = lazy(() => import('./PlantProjectSpecsItem'));
+
 import i18n from '../../locales/i18n.js';
 import { View, Text, Image } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-spec';

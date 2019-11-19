@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { View, Image, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { updateRoute } from '../../../helpers/routerHelper/tabrouteHelper.native';
-import TouchableItem from '../../../components/Common/TouchableItem.native';
+
+const TouchableItem = lazy(() =>
+  import('../../../components/Common/TouchableItem.native')
+);
+
 import * as images from '../../../assets';
 import styles from '../../../styles/menu_item.native';
 

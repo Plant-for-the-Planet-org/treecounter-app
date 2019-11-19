@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
-import CardLayout from '../Common/Card';
-import TouchableItem from '../Common/TouchableItem.native';
+
+const CardLayout = lazy(() => import('../Common/Card'));
+const TouchableItem = lazy(() => import('../Common/TouchableItem.native'));
+
 import styles from '../../styles/NDVI/Carbon';
 import i18n from '../../locales/i18n.js';
 import { delimitNumbers } from '../../utils/utils';

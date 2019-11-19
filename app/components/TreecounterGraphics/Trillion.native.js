@@ -402,7 +402,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 Trillion.propTypes = {
-  pledgeEvents: PropTypes.object.isRequired,
+  pledgeEvents: PropTypes.any,
   navigation: PropTypes.any,
   fetchpledgeEventsAction: PropTypes.func,
   fetchPublicPledgesAction: PropTypes.func

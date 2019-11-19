@@ -1,5 +1,5 @@
 {
-  "community_reviews": "Community Reviews",
+  "community_reviews": "Expert Reviews",
   "write_review": "Write a Review",
   "view_pdf": "View PDF",
   "edit_review": "Edit Review",
@@ -17,5 +17,6 @@
   "file_selected": "1 File selected",
   "add_pictures": "ADD PICTURES",
   "file_already_upload": "1 PDF file already there",
-  "write_reviews": "Review the Project"
+  "write_reviews": "Review the Project",
+  "view_guidelines": "View Guidelines"
 }

@@ -1,5 +1,5 @@
 {
-  "community_reviews": "Community-Bewertungen",
+  "community_reviews": "Expertenbewertungen",
   "write_review": "Eine Rezension schreiben",
   "view_pdf": "PDF anzeigen",
   "edit_review": "Review bearbeiten",
@@ -17,5 +17,6 @@
   "file_selected": "1 Datei ausgewählt",
   "add_pictures": "BILDER HINZUFÜGEN",
   "file_already_upload": "1 PDF-Datei bereits vorhanden",
-  "write_reviews": "Überprüfen Sie das Projekt"
+  "write_reviews": "Überprüfen Sie das Projekt",
+  "view_guidelines": "Richtlinien anzeigen"
 }

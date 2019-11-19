@@ -135,8 +135,8 @@ class PlantProjectSnippet extends PureComponent {
                   ]}
                 >
                   <TouchableOpacity
+                    style={{ height: 48, paddingTop: 13, flex: 1 }}
                     onPress={() => {
-                      console.log('clciked opacity');
                       this.props.selectPlantProjectAction(id);
                       updateStaticRoute('app_reviews', this.props.navigation);
                     }}

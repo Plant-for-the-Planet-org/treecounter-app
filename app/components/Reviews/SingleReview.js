@@ -15,16 +15,12 @@ import { formatDate } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
 import UserProfileImage from '../Common/UserProfileImage';
 const { width } = Dimensions.get('window');
-
+import { getLocalRoute } from '../../actions/apiRouting';
 export default class SingleReview extends Component {
   constructor(props) {
     super(props);
     console.log('single props', props);
     this.close = this.close.bind(this);
-  }
-  componentDidMount() {
-    console.log('calling get avatar');
-    this.getAvatar();
   }
   close() {
     this.RBSheet.close();
@@ -60,21 +56,41 @@ export default class SingleReview extends Component {
         {/* Review Header */}
         <View style={styles.headerParent}>
           <View>
-            <UserProfileImage
-              profileImage={this.getAvatar()}
-              imageStyle={{ width: 32, height: 32, borderRadius: 16 }}
-            />
+            <TouchableOpacity
+              onPress={() =>
+                review.reviewer &&
+                navigation.navigate(getLocalRoute('app_treecounter'), {
+                  treeCounterId: review.reviewer.treecounterSlug
+                })
+              }
+            >
+              <UserProfileImage
+                profileImage={this.getAvatar()}
+                imageStyle={{ width: 32, height: 32, borderRadius: 16 }}
+              />
+            </TouchableOpacity>
           </View>
           <View style={{ marginLeft: 10, flexGrow: 1 }}>
-            <Text style={styles.reviewUser}>
-              {review.reviewer && review.reviewer.name}
-            </Text>
-            {review.created && (
-              <Text style={styles.reviewDate}>
-                {formatDate(review.updated)}
+            <TouchableOpacity
+              onPress={() =>
+                review.reviewer &&
+                navigation.navigate(getLocalRoute('app_treecounter'), {
+                  treeCounterId: review.reviewer.treecounterSlug
+                })
+              }
+            >
+              <Text style={styles.reviewUser}>
+                {review.reviewer &&
+                  review.reviewer.name + ' ' + review.reviewer.organization}
               </Text>
-            )}
+              {review.created && (
+                <Text style={styles.reviewDate}>
+                  {formatDate(review.updated)}
+                </Text>
+              )}
+            </TouchableOpacity>
           </View>
+
           {this.canModify() && (
             <TouchableOpacity
               onPress={() => {

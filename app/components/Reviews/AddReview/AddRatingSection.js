@@ -160,7 +160,9 @@ export default class AddRatingSection extends Component {
   // rating completed
   ratingCompleted(rating, type) {
     let reviewIndexScores = { ...this.state.reviewIndexScores };
-    reviewIndexScores[type] = { score: rating };
+    reviewIndexScores[type] = {
+      score: reviewIndexScores[type].score == rating ? 0 : rating
+    };
     this.setStateAndUpdateParent({ reviewIndexScores });
     console.log('rating', rating, type);
   }
@@ -367,6 +369,14 @@ export default class AddRatingSection extends Component {
           }}
         >
           {i18n.t('label.guide_line')}
+          <Text
+            style={{
+              color: '#89b53a'
+            }}
+          >
+            {'\n'}
+            {i18n.t('label.view_guidelines')}
+          </Text>
         </Text>
       </View>
     );

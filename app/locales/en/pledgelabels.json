@@ -27,6 +27,5 @@
   "allPledges": "All Pledges",
   "treesPledgedOn": "List of Trees Pledged on",
   "donateXTrees": "Donate {{treeCount}} Trees",
-  "increasePledgeMessage": "To increase your pledge, please enter an amount higher than {{treeCount}} trees. A tree costs {{treeCost}} {{currency}} and are planted in {{projectName}}",
-  "donate2": "Donate"
+  "increasePledgeMessage": "To increase your pledge, please enter an amount higher than {{treeCount}} trees. A tree costs {{treeCost}} {{currency}} and are planted in {{projectName}}"
 }

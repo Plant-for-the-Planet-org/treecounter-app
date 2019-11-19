@@ -98,7 +98,6 @@ class PledgeContainer extends Component {
             : null
           : null
         : null;
-    console.log(userPledges);
     this.setState({
       myPledge: userPledges
     });

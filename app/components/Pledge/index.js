@@ -247,6 +247,7 @@ export default class Pledge extends Component {
             contentLabel="Pledge Modal"
             overlayClassName="pledge-overlay"
             className="pledge-content"
+            appElement={document.getElementById('app')}
           >
             <Fade bottom>
               <div className="make-pledge-form-x">

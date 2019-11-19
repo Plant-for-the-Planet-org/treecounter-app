@@ -100,7 +100,7 @@ class Reviews extends Component {
         <View style={{ paddingTop: 20, backgroundColor: '#ecf0f1' }}>
           {reviews
             .sort((a, b) => {
-              return new Date(b.updated) - new Date(a.updated);
+              return new Date(b.created) - new Date(a.created);
             })
             .map(review => {
               return (

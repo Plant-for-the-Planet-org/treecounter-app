@@ -4,10 +4,7 @@ const TimeSerie = lazy(() => import('./TimeSerie'));
 
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
-
-const filterDataPoints = lazy(() =>
-  import('./NDVIfunctions/filterDataPointForTimeSeries')
-);
+import filterDataPoints from './NDVIfunctions/filterDataPointForTimeSeries';
 
 class TimeSeries extends React.Component {
   constructor(props) {

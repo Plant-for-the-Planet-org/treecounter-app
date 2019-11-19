@@ -1,5 +1,7 @@
-import React from 'react';
-import WidgetShare from '../../components/WidgetsShare';
+import React, { lazy } from 'react';
+
+const WidgetShare = lazy(() => import('../../components/WidgetsShare'));
+
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { currentUserProfileSelector } from '../../selectors';

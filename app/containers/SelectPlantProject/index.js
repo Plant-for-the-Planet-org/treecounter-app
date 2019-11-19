@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, lazy } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -10,7 +10,11 @@ import {
   // sortedUserContributionsSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import SelectPlantProject from '../../components/SelectPlantProject';
+
+const SelectPlantProject = lazy(() =>
+  import('../../components/SelectPlantProject')
+);
+
 import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper';
 import { fetchCurrencies } from '../../actions/currencies';
 

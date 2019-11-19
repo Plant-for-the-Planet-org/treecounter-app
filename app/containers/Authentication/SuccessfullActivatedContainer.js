@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
 import { bindActionCreators } from 'redux';
-import SuccessfullyActivatedAccount from '../../components/Authentication/SuccessfullyActivated';
+
+const SuccessfullyActivatedAccount = lazy(() =>
+  import('../../components/Authentication/SuccessfullyActivated')
+);
+
 import { accountActivate } from '../../actions/signupActions';
 import { connect } from 'react-redux';
 

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import UserContributionsDetails from '../../components/UserContributions/ContributionDetails/index.native';
+const UserContributionsDetails = lazy(() =>
+  import('../../components/UserContributions/ContributionDetails/index.native')
+);
+
 // Actions
 import { currentUserProfileIdSelector } from '../../selectors/index';
 

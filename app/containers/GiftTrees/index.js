@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -18,7 +18,8 @@ import {
 import { fetchCurrencies } from '../../actions/currencies';
 import { createPaymentGift, paymentClear } from '../../actions/donateAction';
 
-import GiftTrees from '../../components/GiftTrees';
+const GiftTrees = lazy(() => import('../../components/GiftTrees'));
+
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 
 import i18n from '../../locales/i18n';

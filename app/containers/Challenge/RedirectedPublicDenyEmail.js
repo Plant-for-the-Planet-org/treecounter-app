@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { denyChallenge } from '../../actions/challengeActions';
-import RedirectedPublicDenyEmail from '../../components/Challenge/RedirectedPublicDenyEmail';
+
+const RedirectedPublicDenyEmail = lazy(() =>
+  import('../../components/Challenge/RedirectedPublicDenyEmail')
+);
 
 class RedirectedPublicDenyEmailContainer extends React.Component {
   render() {

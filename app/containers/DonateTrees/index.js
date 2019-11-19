@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, lazy } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -26,7 +26,9 @@ import {
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 
 import { updateRoute } from '../../helpers/routerHelper';
-import DonateTrees from '../../components/DonateTrees';
+
+const DonateTrees = lazy(() => import('../../components/DonateTrees'));
+
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 
 class DonationTreesContainer extends PureComponent {

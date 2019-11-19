@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { bindActionCreators } from 'redux';
-import Competiton from '../../components/Competition/index.native';
+
+const Competiton = lazy(() =>
+  import('../../components/Competition/index.native')
+);
+
 import { updateRoute } from '../../helpers/routerHelper';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';

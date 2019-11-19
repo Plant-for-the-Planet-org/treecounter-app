@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import Menu from '../../components/Menu';
+const Menu = lazy(() => import('../../components/Menu'));
+
 import {
   currentUserProfileSelector,
   userTreecounterSelector

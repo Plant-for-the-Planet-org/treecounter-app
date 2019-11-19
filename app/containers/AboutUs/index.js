@@ -1,5 +1,6 @@
-import React from 'react';
-import AboutUs from '../../components/AboutUs';
+import React, { lazy } from 'react';
+
+const AboutUs = lazy(() => import('../../components/AboutUs'));
 
 class AboutUsContainer extends React.Component {
   constructor() {

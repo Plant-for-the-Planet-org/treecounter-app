@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { updateRoute } from '../../helpers/routerHelper';
-import PublicTreecounter from '../../components/PublicTreeCounter/PublicTreecounter';
+
+const PublicTreecounter = lazy(() =>
+  import('../../components/PublicTreeCounter/PublicTreecounter')
+);
+
 import { currentUserProfileSelector } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';

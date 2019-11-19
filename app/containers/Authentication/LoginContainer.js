@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { login } from '../../actions/authActions';
 import { updateRoute } from '../../helpers/routerHelper';
-import Login from '../../components/Authentication/Login/index';
+
+const Login = lazy(() => import('../../components/Authentication/Login/index'));
+
 import { schemaOptions } from '../../server/parsedSchemas/login';
 import { handleServerResponseError } from '../../helpers/utils';
 

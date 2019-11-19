@@ -1,9 +1,12 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import React from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import ResetPassword from '../../components/Authentication/ResetPasssword';
+const ResetPassword = lazy(() =>
+  import('../../components/Authentication/ResetPasssword')
+);
+
 import { reset_password } from '../../actions/authActions';
 import { updateRoute } from '../../helpers/routerHelper';
 

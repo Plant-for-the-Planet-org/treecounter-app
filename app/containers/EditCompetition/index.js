@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { editCompetition } from '../../actions/competition';
-import EditCompetition from '../../components/Competition/EditCompetition.native';
+
+const EditCompetition = lazy(() =>
+  import('../../components/Competition/EditCompetition.native')
+);
+
 import { handleServerResponseError } from '../../helpers/utils';
 import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
 

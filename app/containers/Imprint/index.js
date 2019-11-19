@@ -1,5 +1,7 @@
-import React from 'react';
-import Imprint from '../../components/Imprint';
+import React, { lazy } from 'react';
+
+const Imprint = lazy(() => import('../../components/Imprint'));
+
 import { ImprintAction } from '../../actions/imprintAction';
 import _ from 'lodash';
 

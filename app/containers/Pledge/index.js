@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -17,7 +17,7 @@ import {
   entitiesSelector
 } from '../../selectors';
 
-import Pledge from '../../components/Pledge';
+const Pledge = lazy(() => import('../../components/Pledge'));
 
 class PledgeContainer extends Component {
   state = {

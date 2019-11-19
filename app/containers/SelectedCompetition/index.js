@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { currentUserProfileSelector } from '../../selectors';
 import { updateRoute } from '../../helpers/routerHelper';
-import CompetitionFull from '../../components/Competition/CompetitionFull';
+
+const CompetitionFull = lazy(() =>
+  import('../../components/Competition/CompetitionFull')
+);
 
 import {
   confirmPart,

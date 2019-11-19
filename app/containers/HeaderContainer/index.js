@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import Header from '../../components/Header';
+const Header = lazy(() => import('../../components/Header'));
 
 // Actions
 import { logoutUser } from '../../actions/authActions';

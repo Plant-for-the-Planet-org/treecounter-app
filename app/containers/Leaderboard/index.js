@@ -1,5 +1,7 @@
-import React from 'react';
-import Leaderboard from '../../components/Leaderboard';
+import React, { lazy } from 'react';
+
+const Leaderboard = lazy(() => import('../../components/Leaderboard'));
+
 import {
   ExploreDataAction,
   LeaderBoardDataAction

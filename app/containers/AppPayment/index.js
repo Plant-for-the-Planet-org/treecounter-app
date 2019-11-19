@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import AppPayment from '../../components/Payment/AppPayments';
+const AppPayment = lazy(() => import('../../components/Payment/AppPayments'));
+
 import { getPaymentInfo } from '../../actions/paymentAction';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 

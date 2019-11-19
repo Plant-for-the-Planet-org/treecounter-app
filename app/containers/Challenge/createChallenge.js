@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,7 +12,9 @@ import {
   currentUserProfileSelector
 } from '../../selectors';
 
-import Challenge from '../../components/Challenge/createChallenge';
+const Challenge = lazy(() =>
+  import('../../components/Challenge/createChallenge')
+);
 
 class ChallengeContainer extends Component {
   constructor(props) {

@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Redemption from '../../components/Redemption/index';
+
+const Redemption = lazy(() => import('../../components/Redemption/index'));
+
 import { currentUserProfileSelector } from '../../selectors';
 import { updateRoute } from '../../helpers/routerHelper';
 import {

@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ManageProjects from '../../components/ManageProjects';
+
+const ManageProjects = lazy(() => import('../../components/ManageProjects'));
+
 import { currentUserProfileSelector } from '../../selectors/index';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
 import i18n from '../../locales/i18n.js';

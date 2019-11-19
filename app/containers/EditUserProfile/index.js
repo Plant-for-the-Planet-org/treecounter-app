@@ -1,5 +1,7 @@
-import React from 'react';
-import EditUserProfile from '../../components/EditUserProfile';
+import React, { lazy } from 'react';
+
+const EditUserProfile = lazy(() => import('../../components/EditUserProfile'));
+
 import { currentUserProfileSelector } from '../../selectors/index';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';

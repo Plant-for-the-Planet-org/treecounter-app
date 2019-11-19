@@ -1,14 +1,16 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, lazy } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import RegisterTrees from '../../components/RegisterTrees';
+const RegisterTrees = lazy(() => import('../../components/RegisterTrees'));
+
 import { registerTree } from '../../actions/registerTree';
 import { userTreecounterSelector } from '../../selectors/index';
 import { mergeContributionImages } from '../../helpers/utils';
 import { currentUserProfileSelector } from '../../selectors/index';
-import NavigationEvents from './importNavigationEvents';
+
+const NavigationEvents = lazy(() => import('./importNavigationEvents'));
 
 import {
   schemaOptionsSingleTree,

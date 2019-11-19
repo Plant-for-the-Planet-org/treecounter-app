@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { sendEmail } from '../../actions/authActions';
-import ActivateAccount from '../../components/Authentication/ActivateAccount';
+
+const ActivateAccount = lazy(() =>
+  import('../../components/Authentication/ActivateAccount')
+);
+
 import { fetchItem } from '../../stores/localStorage';
 
 class ActivateAccountContainer extends React.Component {

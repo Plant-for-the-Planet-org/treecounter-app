@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { deleteContribution } from '../../actions/EditMyTree';
-import UserContributions from '../../components/UserContributions';
+
+const UserContributions = lazy(() =>
+  import('../../components/UserContributions')
+);
+
 import _ from 'lodash';
 
 // Actions

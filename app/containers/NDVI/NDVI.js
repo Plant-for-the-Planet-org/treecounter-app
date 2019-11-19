@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { NDVIAction } from '../../actions/NDVIAction';
 import PropTypes from 'prop-types';
 import NDVI from '../../components/NDVI';
 import mockDataPoints from '../../components/NDVI/mockDataPoints';
-import LoadingIndicators from '../../components/Common/LoadingIndicator';
+
+const LoadingIndicators = lazy(() =>
+  import('../../components/Common/LoadingIndicator')
+);
 
 const ENABLED_NDVI = true;
 class NDVIContainer extends React.Component {

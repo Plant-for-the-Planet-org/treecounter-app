@@ -1,11 +1,15 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { lazy } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { editTree } from '../../actions/EditMyTree';
-import EditUserContribution from '../../components/EditUserContribution';
+
+const EditUserContribution = lazy(() =>
+  import('../../components/EditUserContribution')
+);
+
 import { mergeContributionImages } from '../../helpers/utils';
 // Actions
 import { sortedUserContributionsSelector } from '../../selectors/index';

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -8,7 +8,10 @@ import {
   selectedTpoSelector
 } from '../../selectors';
 import { updateStaticRoute } from '../../helpers/routerHelper';
-import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
+
+const PlantProjectFull = lazy(() =>
+  import('../../components/PlantProjects/PlantProjectFull')
+);
 
 import {
   clearPlantProject,

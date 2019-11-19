@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -13,7 +13,7 @@ import {
   sortedUserContributionsSelector
 } from '../../selectors';
 
-import UserHome from '../../components/UserHome';
+const UserHome = lazy(() => import('../../components/UserHome'));
 
 class UserHomeContainer extends React.Component {
   constructor() {

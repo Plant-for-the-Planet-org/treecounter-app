@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { connect } from 'react-redux';
+import { connect, lazy } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';

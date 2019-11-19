@@ -1,9 +1,11 @@
-import { connect } from 'react-redux';
+import { connect, lazy } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { schemaOptions } from '../../server/parsedSchemas/target';
-import Target from '../../components/Target';
+
+const Target = lazy(() => import('../../components/Target'));
+
 import { SubmitTarget } from '../../actions/targetAction';
 import { userTreecounterSelector } from '../../selectors/index';
 import { handleServerResponseError } from '../../helpers/utils';

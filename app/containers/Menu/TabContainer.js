@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
 import { bindActionCreators } from 'redux';
@@ -14,7 +14,8 @@ import {
   PublicSideMenuSchema,
   AuthenticatedSideMenuSchema
 } from '../../layouts/sideMenu';
-import TabComponent from '../../components/Menu/Tabcomponent';
+
+const TabComponent = lazy(() => import('../../components/Menu/Tabcomponent'));
 
 class BottomTabContainer extends Component {
   constructor() {

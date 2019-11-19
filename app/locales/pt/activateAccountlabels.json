@@ -1,4 +1,5 @@
 {
   "activate_ur_account": "Ative sua conta",
-  "received_email": "Você recebeu um email após o seu cadastro. Clique no link de ativação fornecido neste e-mail para concluir o processo de inscrição."
+  "received_email": "Você recebeu um email após o seu cadastro. Clique no link de ativação fornecido neste e-mail para concluir o processo de inscrição.",
+  "account_activation": "Ativação da conta"
 }

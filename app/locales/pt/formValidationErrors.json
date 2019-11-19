@@ -1,1 +1,4 @@
-{ }
+{
+  "positive_number": "O número deve ser positivo",
+  "required_field": "{{field}} é obrigatório"
+}

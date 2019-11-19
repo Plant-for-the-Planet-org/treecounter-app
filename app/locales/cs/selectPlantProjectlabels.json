@@ -3,8 +3,6 @@
   "price": "Cena",
   "select_project": "Zvolte projekt",
   "featured": "Vybrané",
-  "list": "Seznam",
   "country": "Země",
-  "select_by_country": "Seřadit podle Země",
-  "cost_per_tree": "Náklady na strom"
+  "select_by_country": "Seřadit podle Země"
 }

@@ -1,5 +1,9 @@
 {
   "competitions": "Competições",
   "mine_competitions": "Meu",
-  "featured_competitions": "Destaque"
+  "all_competitions": "Todos",
+  "ends": "Termina",
+  "leave": "Sair",
+  "edit": "Editar",
+  "competition_create_successfully": "Competição criada com sucesso"
 }

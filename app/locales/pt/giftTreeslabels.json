@@ -1,4 +1,6 @@
 {
   "currency": "Moeda",
-  "treecounter_user_name": "Usuário existente"
+  "treecounter_user_name": "Usuário existente",
+  "heading_donate_details": "Detalhes da doação",
+  "heading_donor_details": "Detalhes do doador"
 }

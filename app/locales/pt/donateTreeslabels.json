@@ -1,5 +1,7 @@
 {
   "certified": "Certificado",
   "nonCertified": "Não certificado",
-  "featuredProjects": "Projetos em destaque"
+  "featuredProjects": "Projetos em destaque",
+  "organisation": "Organização",
+  "company": "Empresa"
 }

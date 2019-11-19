@@ -1,5 +1,8 @@
 {
   "name": "Nome",
   "price": "Preço",
-  "select_project": "Selecione o projeto"
+  "select_project": "Selecione o projeto",
+  "country": "País",
+  "select_by_country": "Classificar por país",
+  "no_tax_deduction": "Nenhuma dedução fiscal disponível"
 }

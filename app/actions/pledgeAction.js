@@ -22,7 +22,6 @@ import {
 import { normalize } from 'normalizr';
 import { fetchItem, saveItem } from './../stores/localStorage';
 import { fetchPublicPledgesAction } from './pledgeEventsAction';
-
 export function fetchPledgesAction(eventSlug) {
   return dispatch => {
     getRequest('pledgeEvent_get', {
@@ -150,9 +149,9 @@ async function getLocalStorageItem(key, res) {
   }
 }
 
-export function clearTimeoutAction(timeoutID) {
+export function clearTimeoutAction(id) {
   return dispatch => {
-    clearInterval(timeoutID);
-    dispatch(clearTimeoutID(timeoutID));
+    clearInterval(id);
+    dispatch(clearTimeoutID());
   };
 }

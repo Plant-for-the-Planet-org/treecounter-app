@@ -40,7 +40,7 @@ class PledgeContainer extends Component {
             this.props.fetchPublicPledgesAction(stringPledges);
           }
         })
-        .catch(error => console.log('Trying to get user pledges'));
+        .catch(console.log('Trying to get user pledges'));
     }
     this.getMyPledge();
   }
@@ -62,7 +62,7 @@ class PledgeContainer extends Component {
             }
             this.getMyPledge();
           })
-          .catch(error => console.log('No pledges made by user'));
+          .catch(console.log('No pledges made by user'));
       }
       this.getMyPledge();
     }

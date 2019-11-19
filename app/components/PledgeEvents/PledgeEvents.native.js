@@ -243,7 +243,7 @@ function FulfillPledgeButton(props) {
             source={nextArrowWhite}
             resizeMode="contain"
           />
-          <Text style={styles.continueText}>{i18n.t('label.donate')}</Text>
+          <Text style={styles.continueText}>{i18n.t('label.donate2')}</Text>
         </View>
       </TouchableOpacity>
     </View>

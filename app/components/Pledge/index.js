@@ -79,7 +79,9 @@ export default class Pledge extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.pledges !== this.props.pledges) {
+    if (
+      JSON.stringify(prevProps.pledges) !== JSON.stringify(this.props.pledges)
+    ) {
       if (this.props.currentUserProfile) {
         this.setState({
           loggedIn: true

@@ -23,7 +23,6 @@ import Pledge from '../../components/Pledge';
 
 class PledgeContainer extends Component {
   state = {
-    loggedIn: false,
     myPledge: {},
     slug: null
   };
@@ -32,11 +31,7 @@ class PledgeContainer extends Component {
       slug: this.props.match.params.eventSlug
     });
     this.props.fetchPledgesAction(this.props.match.params.eventSlug);
-    if (this.props.currentUserProfile) {
-      this.setState({
-        loggedIn: true
-      });
-    } else {
+    if (!this.props.currentUserProfile) {
       fetchItem('pledgedEvent')
         .then(data => {
           if (typeof data !== 'undefined' && data.length > 0) {
@@ -55,11 +50,7 @@ class PledgeContainer extends Component {
       this.setState({
         slug: this.props.match.params.eventSlug
       });
-      if (this.props.currentUserProfile) {
-        this.setState({
-          loggedIn: true
-        });
-      } else {
+      if (!this.props.currentUserProfile) {
         fetchItem('pledgedEvent')
           .then(data => {
             if (typeof data !== 'undefined' && data.length > 0) {
@@ -114,7 +105,7 @@ class PledgeContainer extends Component {
         pledgeEventSlug: this.props.match.params.eventSlug,
         version: 'v1.3'
       },
-      this.state.loggedIn
+      this.props.currentUserProfile ? true : false
     );
   }
   updatePledge(data, token) {
@@ -124,7 +115,7 @@ class PledgeContainer extends Component {
         token: token,
         version: 'v1.3'
       },
-      this.state.loggedIn
+      this.props.currentUserProfile ? true : false
     );
   }
   render() {

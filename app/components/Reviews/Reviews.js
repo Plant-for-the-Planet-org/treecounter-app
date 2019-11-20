@@ -14,7 +14,8 @@ import { pushStaticRoute } from './../../helpers/routerHelper';
 import {
   selectedPlantProjectSelector,
   selectedReviewsSelector,
-  currentUserProfileSelector
+  currentUserProfileSelector,
+  sortedUserContributionsSelector
 } from '../../selectors';
 import { connect } from 'react-redux';
 import { deleteReview } from '../../actions/reviews';
@@ -22,6 +23,7 @@ import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import NumberFormat from '../Common/NumberFormat';
 import SingleRating from './SingleRating';
+import compareDesc from 'date-fns/compareDesc';
 
 class Reviews extends Component {
   constructor(props) {
@@ -29,6 +31,11 @@ class Reviews extends Component {
     console.log('reviews props:', props);
 
     this.state = {};
+  }
+  sorted() {
+    return this.props.reviews.sort(
+      (b, a) => new Date(a.created).getTime() - new Date(b.created).getTime()
+    );
   }
   isReviewer() {
     return (
@@ -41,7 +48,6 @@ class Reviews extends Component {
   }
   render() {
     let { name } = this.props.project;
-    let { reviews } = this.props;
     const backgroundColor = 'white';
     return (
       <ScrollView
@@ -101,21 +107,17 @@ class Reviews extends Component {
 
         {/*All Reviews*/}
         <View style={{ paddingTop: 20, backgroundColor: 'white' }}>
-          {reviews
-            .sort((a, b) => {
-              return new Date(b.created) - new Date(a.created);
-            })
-            .map(review => {
-              return (
-                <SingleReview
-                  currentUserProfile={this.props.currentUserProfile}
-                  deleteReview={this.props.deleteReview}
-                  navigation={this.props.navigation}
-                  key={review.id}
-                  review={review}
-                />
-              );
-            })}
+          {this.sorted().map(review => {
+            return (
+              <SingleReview
+                currentUserProfile={this.props.currentUserProfile}
+                deleteReview={this.props.deleteReview}
+                navigation={this.props.navigation}
+                key={review.id}
+                review={review}
+              />
+            );
+          })}
         </View>
 
         {/* All Reviews Ended */}
@@ -125,8 +127,7 @@ class Reviews extends Component {
           <View
             style={{
               justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: '#ecf0f1'
+              alignItems: 'center'
             }}
           >
             <TouchableOpacity

@@ -23,7 +23,6 @@ import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import NumberFormat from '../Common/NumberFormat';
 import SingleRating from './SingleRating';
-import compareDesc from 'date-fns/compareDesc';
 
 class Reviews extends Component {
   constructor(props) {

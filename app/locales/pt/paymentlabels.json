@@ -1,5 +1,8 @@
 {
   "amount": "Valor da doação",
   "creditCard": "Cartão de crédito",
-  "confirm": "Confirmo que pagarei o valor de {{amount}}{{currency}} na conta a seguir."
+  "confirm": "Confirmo que pagarei o valor de {{amount}}{{currency}} na conta a seguir.",
+  "pay_via": "Pague via transferência bancária",
+  "pay": "Pagamento",
+  "choose": "Escolher"
 }

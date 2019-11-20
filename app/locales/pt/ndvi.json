@@ -1,3 +1,6 @@
 {
-  "NDVI_legend_indicators": "Indicadores"
+  "NDVI_gradient_result_line_title": "Atual",
+  "NDVI_legend_indicators": "Indicadores",
+  "NDVI_info": "informação",
+  "NDVI_info_average": "Média:"
 }

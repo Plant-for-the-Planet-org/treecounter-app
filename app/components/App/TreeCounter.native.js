@@ -13,10 +13,11 @@ import { loadTpos } from '../../actions/loadTposAction';
 import { bindActionCreators } from 'redux';
 import { SafeAreaView } from 'react-navigation';
 import { initLocale } from '../../actions/getLocale.native.js';
-
+import { fetchCurrencies } from '../../actions/currencies';
 class App extends Component {
   componentDidMount() {
     initLocale();
+    this.props.fetchCurrencies();
     // TODO: at this time the locale isn't yet defined, so this API call is currently done with locale = undefined
     // Is there any way to wait with this API call until the locale is defined?
     this.props.loadTpos();
@@ -41,6 +42,7 @@ const mapStateToProps = (/* state */) => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      fetchCurrencies,
       // loadUserProfile,
       // NotificationAction,
       loadTpos

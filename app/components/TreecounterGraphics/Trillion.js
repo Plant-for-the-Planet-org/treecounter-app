@@ -16,6 +16,8 @@ import { getImageUrl } from '../../actions/apiRouting';
 import { pledgeEventSelector } from '../../selectors';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
+import { bindActionCreators } from 'redux';
 
 class Trillion extends Component {
   constructor() {
@@ -29,6 +31,7 @@ class Trillion extends Component {
   }
 
   componentDidMount() {
+    this.props.fetchpledgeEventsAction();
     trillionCampaign()
       .then(({ data }) => {
         this.setState({
@@ -44,6 +47,17 @@ class Trillion extends Component {
         });
       })
       .catch(error => console.log(error));
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.pledgeEvents &&
+      this.props.pledgeEvents &&
+      JSON.stringify(prevProps.pledgeEvents) !==
+        JSON.stringify(this.props.pledgeEvents)
+    ) {
+      this.props.fetchpledgeEventsAction();
+    }
   }
 
   shouldComponentUpdate() {
@@ -115,8 +129,13 @@ class Trillion extends Component {
 const mapStateToProps = state => ({
   pledgeEvents: pledgeEventSelector(state)
 });
-export default connect(mapStateToProps)(Trillion);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ fetchpledgeEventsAction }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Trillion);
 
 Trillion.propTypes = {
-  pledgeEvents: PropTypes.object
+  pledgeEvents: PropTypes.object,
+  fetchpledgeEventsAction: PropTypes.func
 };

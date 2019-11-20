@@ -40,7 +40,7 @@ class UnfulfilledPledgeEvents extends Component {
   componentDidMount() {
     const eventSlug = this.props.navigation.getParam('unfulfilledEvent')
       .eventSlug;
-    this.props.fetchPledgesAction(eventSlug);
+    this.props.fetchPledgesAction(eventSlug, true);
   }
 
   componentDidUpdate() {

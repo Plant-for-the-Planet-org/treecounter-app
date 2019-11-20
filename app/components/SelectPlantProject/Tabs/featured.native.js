@@ -6,13 +6,29 @@ import { FlatList, View } from 'react-native';
 
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
+import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
 
 const PlantProjectSnippet = lazy(() =>
   import('../../PlantProjects/PlantProjectSnippet')
 );
 
 export default class FeaturedProjects extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.onSelectClickedFeaturedProjects = this.onSelectClickedFeaturedProjects.bind(
+      this
+    );
+  }
   _keyExtractor = item => item.id.toString();
+  onSelectClickedFeaturedProjects(id) {
+    this.props.selectProject(id);
+    const { navigation } = this.props;
+    updateStaticRoute(
+      'app_donate_detail',
+      navigation,
+      navigation.getParam('userForm')
+    );
+  }
 
   _renderItem = ({ item }) => (
     <PlantProjectSnippet
@@ -23,18 +39,9 @@ export default class FeaturedProjects extends PureComponent {
       onSelectClickedFeaturedProjects={this.onSelectClickedFeaturedProjects}
       showMoreButton={false}
       tpoName={item.tpo_name}
+      selectProject={this.props.onSelectProjects}
     />
   );
-
-  onSelectClickedFeaturedProjects = id => {
-    this.props.selectProject(id);
-    const { navigation } = this.props;
-    updateStaticRoute(
-      'app_donate_detail',
-      navigation,
-      navigation.getParam('userForm')
-    );
-  };
 
   render() {
     let featuredProjects = orderBy(
@@ -45,7 +52,9 @@ export default class FeaturedProjects extends PureComponent {
     return (
       <View style={styles.flexContainer}>
         <FlatList
-          contentContainerStyle={{ paddingBottom: 45 }}
+          contentContainerStyle={{
+            ...flatListContainerStyle
+          }}
           data={featuredProjects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}

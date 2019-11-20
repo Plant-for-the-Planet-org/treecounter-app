@@ -28,6 +28,8 @@ import {
 import { compCalendar, email } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { formatDate } from '../../utils/utils';
+import snippetStyles from './../../styles/competition/competition-fullNew.native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -49,8 +51,11 @@ class CompetitionFull extends React.Component {
   }
   render() {
     let status = '',
-      button = null;
+      button = null,
+      button2 = null;
     const competitionDetail = this.props.competitionDetail;
+
+    console.log(competitionDetail);
     let participantCount = 0,
       requestCount = 0,
       // eslint-disable-next-line no-unused-vars
@@ -85,6 +90,7 @@ class CompetitionFull extends React.Component {
         }
       }
     }
+
     if (
       competitionDetail &&
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
@@ -99,7 +105,32 @@ class CompetitionFull extends React.Component {
           <Text> {i18n.t('label.edit')}</Text>
         </PrimaryButton>
       );
-      // button = null;
+      if (status === '') {
+        button2 = (
+          <PrimaryButton
+            style={snippetStyles.buttonItem}
+            buttonStyle={snippetStyles.buttonStyle}
+            textStyle={snippetStyles.buttonTextStyle}
+            onClick={() => this.props.enrollCompetition(competitionDetail.id)}
+          >
+            <Text> {i18n.t('label.join')}</Text>
+          </PrimaryButton>
+        );
+      }
+      if (status === 'enrolled') {
+        button2 = (
+          <PrimaryButton
+            style={snippetStyles.buttonItem}
+            buttonStyle={snippetStyles.moreButtonStyleCancel}
+            textStyle={snippetStyles.moreButtonTextStyle}
+            onClick={() => this.props.leaveCompetition(competitionDetail.id)}
+          >
+            <Text style={snippetStyles.moreButtonStyleCancelText}>
+              {i18n.t('label.leave')}
+            </Text>
+          </PrimaryButton>
+        );
+      }
     } else if (status === '') {
       if (competitionDetail && competitionDetail.access === 'immediate') {
         button = (
@@ -133,11 +164,13 @@ class CompetitionFull extends React.Component {
       button = (
         <PrimaryButton
           style={snippetStyles.buttonItem}
-          buttonStyle={snippetStyles.moreButtonStyle}
+          buttonStyle={snippetStyles.moreButtonStyleCancel}
           textStyle={snippetStyles.moreButtonTextStyle}
           onClick={() => this.props.leaveCompetition(competitionDetail.id)}
         >
-          <Text> {i18n.t('label.leave')}</Text>
+          <Text style={snippetStyles.moreButtonStyleCancelText}>
+            {i18n.t('label.leave')}
+          </Text>
         </PrimaryButton>
       );
     } else if (status === 'pending') {
@@ -153,12 +186,34 @@ class CompetitionFull extends React.Component {
       );
     }
 
+    let CurrentDate = new Date();
+
+    if (competitionDetail) {
+      let endDate = competitionDetail.endDate;
+      endDate = new Date(endDate);
+      if (CurrentDate > endDate) {
+        button = (
+          <Text style={snippetStyles.competitionOver}>
+            {i18n.t('label.competition_over')}
+          </Text>
+        );
+      }
+    }
+
     return (
-      <View style={{ flex: 1 }}>
-        <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+      <View style={snippetStyles.flexView}>
+        <KeyboardAwareScrollView
+          keyboardDismissMode="on-drag"
+          keyboardShouldPersistTaps="always"
+          style={styles.keyboardScrollView}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled
+        >
           <View>
-            <CardLayout style={[snippetStyles.projectSnippetContainer]}>
+            {/* Competition Information  */}
+            <View style={[snippetStyles.projectSnippetContainerN]}>
               <View style={snippetStyles.projectSpecsContainer}>
+                {/* Competition Cover Image */}
                 {competitionDetail && competitionDetail.image ? (
                   <View style={snippetStyles.projectImageContainer}>
                     <Image
@@ -174,30 +229,36 @@ class CompetitionFull extends React.Component {
                     />
                   </View>
                 ) : null}
+                {/* Competition Cover Image Ends */}
+
+                {/* Competition Progress Bar */}
                 <CompetitionProgressBar
                   countPlanted={competitionDetail && competitionDetail.score}
                   countTarget={competitionDetail && competitionDetail.goal}
                 />
+                {/* Competition Progress Bar Ends */}
+
                 <View style={snippetStyles.competitionContent}>
+                  {/* Competition Name */}
                   <View style={snippetStyles.projectNameContainer}>
                     <Text
                       ellipsizeMode="tail"
-                      numberOfLines={1}
+                      numberOfLines={3}
                       style={snippetStyles.project_teaser__contentText}
                     >
-                      {competitionDetail && competitionDetail.name}
+                      {competitionDetail
+                        ? i18n.t('label.comp_by_name', {
+                            compname:
+                              competitionDetail && competitionDetail.name,
+                            ownername:
+                              competitionDetail && competitionDetail.ownerName
+                          })
+                        : null}
                     </Text>
                   </View>
-                  <View style={snippetStyles.projectNameContainer}>
-                    <Text
-                      ellipsizeMode="tail"
-                      numberOfLines={1}
-                      style={snippetStyles.project_teaser__contentByText}
-                    >
-                      {i18n.t('label.by_a_name')}{' '}
-                      {competitionDetail && competitionDetail.ownerName}
-                    </Text>
-                  </View>
+                  {/* Competition Name Ends */}
+
+                  {/* Competition Description */}
                   <View style={snippetStyles.projectDescriptionContainer}>
                     <Text
                       style={
@@ -207,9 +268,9 @@ class CompetitionFull extends React.Component {
                       {competitionDetail && competitionDetail.description}
                     </Text>
                   </View>
-                  {/*<View style={styles.projectdetailsContainer}>*/}
-                  {/**/}
-                  {/*</View>*/}
+                  {/* Competition Description Ends */}
+
+                  {/* Competition Owner Email */}
                   {competitionDetail && competitionDetail.email ? (
                     <View style={snippetStyles.actionContainer}>
                       <View style={snippetStyles.emailContainer}>
@@ -227,36 +288,92 @@ class CompetitionFull extends React.Component {
                       </View>
                     </View>
                   ) : null}
-                  <View style={styles.actionContainer}>
-                    <View style={snippetStyles.byOrgContainer}>
-                      <Image
-                        source={compCalendar}
-                        style={{ width: 15, height: 15 }}
-                      />
-                      <Text style={snippetStyles.bottomText}>
-                        {i18n.t('label.ends')}{' '}
-                        {competitionDetail && competitionDetail.endDate
-                          ? formatDate(competitionDetail.endDate)
-                          : ''}
-                      </Text>
-                    </View>
+                  {/* Competition Owner Email Ends */}
 
-                    <View style={styles.buttonContainer}>{button}</View>
+                  {/* Competition Date */}
+                  {competitionDetail && competitionDetail.endDate ? (
+                    <View style={styles.actionContainer}>
+                      <View style={snippetStyles.byOrgContainer}>
+                        <Image
+                          source={compCalendar}
+                          style={{ width: 15, height: 15 }}
+                        />
+                        <Text style={snippetStyles.bottomText}>
+                          {i18n.t('label.ends')}{' '}
+                          {formatDate(competitionDetail.endDate)}
+                        </Text>
+                      </View>
+                    </View>
+                  ) : null}
+
+                  {/* Competition Date Ends */}
+
+                  {/* Competition Buttons */}
+                  <View
+                    style={{
+                      marginTop: 20,
+                      width: '100%',
+                      flexDirection: 'row',
+                      left: 0
+                    }}
+                  >
+                    {button}
+                    {button2}
                   </View>
+                  {/* Competition Buttons Ends */}
                 </View>
               </View>
-            </CardLayout>
+
+              {/* Donate Card */}
+              {/* <CardLayout style={[snippetStyles.cardContainer]}>
+                <Text
+                  style={[snippetStyles.googleCardTitle, { textAlign: 'left' }]}
+                >
+                  {i18n.t('label.plant_trees')}
+                </Text>
+                <View style={snippetStyles.googleCardParaContainer}>
+                  <Text style={snippetStyles.googleCardPara}>
+                    {i18n.t(
+                      'This competition supports Yucatation Reforestation by Plant -for-the-Planet'
+                    )}
+                  </Text>
+                  <Image
+                    source={trees}
+                    style={{ height: 60, flex: 1 }}
+                    resizeMode="contain"
+                  />
+                </View>
+                <View style={snippetStyles.horizontalLine} />
+                <TouchableOpacity
+                  style={{ width: '100%' }}
+                  onPress={() =>
+                    navigation.navigate(getLocalRoute('app_donateTrees'))
+                  }
+                >
+                  <Text style={snippetStyles.googleCardButton}>
+                    {i18n.t('Donate Now')}
+                  </Text>
+                </TouchableOpacity>
+              </CardLayout> */}
+              {/* Donate Card Ends */}
+            </View>
+            {/* Competition Information Ended  */}
+
+            {/* Competition Participant Details */}
             {participantCount > 0 ? (
-              <CardLayout style={[snippetStyles.projectSnippetContainer]}>
+              <View style={[snippetStyles.projectSnippetContainerN]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
-                    <Text style={styles.textHeadingParticipants}>
+                    {/* Participant Total Count */}
+                    <Text style={snippetStyles.textHeadingParticipants}>
                       {i18n.t('label.participants')} ({competitionDetail &&
                         competitionDetail.competitorCount})
                     </Text>
+                    {/* Participant Total Count Ends */}
                   </View>
-                  <View style={styles.topCompetitorContainer}>
+                  <View style={snippetStyles.topCompetitorContainer}>
                     <View>
+                      {/* Participant Details */}
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>
                           top.status === 'enrolled' ? (
@@ -277,25 +394,32 @@ class CompetitionFull extends React.Component {
                             />
                           ) : null
                       )}
+                      {/* Participant Details Ends */}
                     </View>
                   </View>
                 </View>
-              </CardLayout>
+              </View>
             ) : null}
+            {/* Competition Participant Details Ends */}
+
+            {/* Participant Requests */}
             {requestCount > 0 &&
             competitionDetail &&
             competitionDetail.ownerTreecounterId ===
               this.props.treeCounter.id ? (
-              <CardLayout style={[snippetStyles.projectSnippetContainer]}>
+              <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
-                    <Text style={styles.textHeadingParticipants}>
+                    {/* Total Requests  */}
+                    <Text style={snippetStyles.textHeadingParticipants}>
                       {i18n.t('label.requests_to_join')} ({competitionDetail &&
                         competitionDetail.competitorCount})
                     </Text>
+                    {/* Total Requests Ends */}
                   </View>
                   <View style={styles.topCompetitorContainer}>
                     <View>
+                      {/* Requseters Details */}
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>
                           top.status === 'pending' ? (
@@ -316,18 +440,22 @@ class CompetitionFull extends React.Component {
                             />
                           ) : null
                       )}
+                      {/* Requseters Details Ends */}
                     </View>
                   </View>
                 </View>
               </CardLayout>
             ) : null}
+            {/* Participant Requests Ends */}
+
+            {/* Invitation Details */}
             {competitionDetail &&
             competitionDetail.ownerTreecounterId ===
               this.props.treeCounter.id ? (
-              <CardLayout style={[snippetStyles.projectSnippetContainer]}>
+              <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
-                    <Text style={styles.textHeadingParticipants}>
+                    <Text style={snippetStyles.textHeadingParticipants}>
                       {i18n.t('label.invite')}
                     </Text>
                   </View>
@@ -339,6 +467,7 @@ class CompetitionFull extends React.Component {
                         clearTextOnClick
                         alreadyInvited={competitionDetail.allEnrollments}
                         hideCompetitions
+                        addstyles={{ width: '90%' }}
                       />
                       {competitionDetail.allEnrollments.map(
                         (top, index) =>
@@ -365,14 +494,17 @@ class CompetitionFull extends React.Component {
                 </View>
               </CardLayout>
             ) : null}
+            {/* Invitation Details Ends */}
+
+            {/* Invited Users */}
             {competitionDetail &&
             invitedCount > 0 &&
             competitionDetail.ownerTreecounterId !==
               this.props.treeCounter.id ? (
-              <CardLayout style={[snippetStyles.projectSnippetContainer]}>
+              <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
                 <View style={snippetStyles.projectSpecsContainer}>
                   <View style={styles.headingParticipantContainer}>
-                    <Text style={styles.textHeadingParticipants}>
+                    <Text style={snippetStyles.textHeadingParticipants}>
                       {i18n.t('label.invited')}
                     </Text>
                   </View>
@@ -405,8 +537,9 @@ class CompetitionFull extends React.Component {
                 </View>
               </CardLayout>
             ) : null}
+            {/* Invited Users Ends */}
           </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </View>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component, lazy } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import styles from '../../../styles/competition/mine.native';
+import styles from '../../../styles/competition/competition-master.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import imagestyles from '../../../styles/file_picker.native';
 const CompetitionSnippet = lazy(() => import('../CompetitionSnippet.native'));
@@ -10,11 +10,8 @@ import ActionButton from 'react-native-action-button';
 const CardLayout = lazy(() => import('../../Common/Card'));
 
 import PropTypes from 'prop-types';
-import t from 'tcomb-form-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { competitionFormSchema } from '../../../server/parsedSchemas/competition';
+import { trees } from './../../../assets';
 import i18n from '../../../locales/i18n';
-
 const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));
 const UserProfileImage = lazy(() => import('../../Common/UserProfileImage'));
 
@@ -23,6 +20,7 @@ import imageUpload from '../../../assets/images/icons/upload_image.png';
 import ImagePicker from 'react-native-image-picker';
 
 let Form = t.form.Form;
+
 // const getCompFormLayoutTemplate = () => {
 //   const formLayoutTreesTemplate = locals => {
 //     return (
@@ -123,176 +121,84 @@ const getCompFormImageLayoutTemplate = () => {
 export default class MineCompetitions extends Component {
   constructor(props) {
     super(props);
-    this.createCompetitionForm = element => {
-      this.createCompetition = element;
-    };
     this.state = {
-      expanded: false,
-      pageIndex: 0,
-      showCompetitionForm: true,
-      featuredCompetitions: [],
-      formValue: null
+      myCompetitions: []
     };
-    this.onActionButtonPress = this.onActionButtonPress.bind(this);
-    this.onCreateCompetition = this.onCreateCompetition.bind(this);
-  }
-
-  onActionButtonPress() {
-    this.setState({
-      showCompetitionForm: true,
-      formValue: null
-    });
   }
 
   componentDidMount() {
     let { allCompetitions } = this.props;
-    let featuredCompetitions = [];
+    let myCompetitions = [];
     if (allCompetitions.length > 0) {
       allCompetitions.forEach(val => {
         if (val.category === 'mine') {
           val.competitions.forEach(comp => {
-            featuredCompetitions.push(comp);
+            myCompetitions.push(comp);
           });
         }
       });
     }
     this.setState({
-      featuredCompetitions: featuredCompetitions
+      myCompetitions: myCompetitions
     });
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (
-      nextProps.allCompetitions !== this.props.allCompetitions ||
-      nextState.showCompetitionForm !== this.state.showCompetitionForm
-    ) {
-      return true;
-    } else {
-      let returnValue = false;
-      Object.entries(this.props).forEach(
-        ([key, val]) =>
-          nextProps[key] !== val ? (returnValue = true) : (returnValue = false)
-      );
-      Object.entries(this.state).forEach(
-        ([key, val]) =>
-          nextState[key] !== val ? (returnValue = true) : (returnValue = false)
-      );
-      return returnValue;
-    }
   }
 
   componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
     if (allCompetitions !== this.props.allCompetitions) {
-      let featuredCompetitions = [];
+      let myCompetitions = [];
       if (allCompetitions.length > 0) {
         allCompetitions.forEach(val => {
           if (val.category === 'mine') {
             val.competitions.forEach(comp => {
-              featuredCompetitions.push(comp);
+              myCompetitions.push(comp);
             });
           }
         });
       }
       this.setState({
-        featuredCompetitions: featuredCompetitions
+        myCompetitions: myCompetitions
       });
-      if (featuredCompetitions.length === 0) {
-        this.setState({
-          showCompetitionForm: true
-        });
-      } else {
-        this.setState({
-          showCompetitionForm: false
-        });
-      }
-    }
-  }
-
-  onCreateCompetition() {
-    if (this.createCompetition.refs.input.state.value) {
-      this.setState({
-        formValue: this.createCompetition.refs.input.state.value
-      });
-      this.props.onCreateCompetition(
-        this.createCompetition.refs.input.state.value,
-        this.createCompetition
-      );
     }
   }
 
   render() {
-    let { featuredCompetitions } = this.state;
-    let schemaOptions = this.props.competitionFormSchemaOptions;
-    if (schemaOptions.fields.imageFile) {
-      schemaOptions.fields.imageFile.template = getCompFormImageLayoutTemplate();
-    }
+    let { myCompetitions } = this.state;
 
-    return !this.state.showCompetitionForm ? (
-      <View style={styles.mineContainer}>
-        <ScrollView
-          contentContainerStyle={[
-            scrollStyle.styleContainer,
-            { paddingBottom: 72 }
-          ]}
-        >
-          {featuredCompetitions.length > 0
-            ? featuredCompetitions.map(project => (
-                <CompetitionSnippet
-                  key={'competition' + project.id}
-                  cardStyle={styles.cardStyle}
-                  onMoreClick={id => this.props.onMoreClick(id, project.name)}
-                  competition={project}
-                  leaveCompetition={id => this.props.leaveCompetition(id)}
-                  enrollCompetition={id => this.props.enrollCompetition(id)}
-                  editCompetition={this.props.editCompetition}
-                  type="mine"
-                />
-              ))
-            : null}
-        </ScrollView>
-        <ActionButton
-          buttonColor="rgba(183, 211, 127, 1)"
-          buttonTextStyle={styles.action_button}
-          offsetY={72}
-          onPress={() => this.onActionButtonPress()}
-        />
-      </View>
-    ) : (
-      <KeyboardAwareScrollView
-        contentContainerStyle={{ paddingBottom: 72 }}
-        enableOnAndroid
+    return (
+      <ScrollView
+        contentContainerStyle={[
+          scrollStyle.styleContainer,
+          { paddingBottom: 72 }
+        ]}
       >
-        <View style={styles.containerDedicateStyle}>
-          <View style={styles.dedicateTreeName}>
-            <Text style={styles.textDedicateStyle}>
-              {i18n.t('label.mine_create')}
-            </Text>
-          </View>
-        </View>
-        <CardLayout style={{ flex: 1 }}>
-          <Form
-            ref={this.createCompetitionForm}
-            type={competitionFormSchema}
-            options={schemaOptions}
-            value={this.state.formValue}
+        <View style={styles.headerView}>
+          <Text style={styles.headerTitle}>
+            {myCompetitions.length > 0
+              ? i18n.t('label.mine_compeition_tab_header')
+              : i18n.t('label.mine_compeition_tab_header_null')}
+          </Text>
+          <Image
+            source={trees}
+            style={{ height: 60, flex: 1 }}
+            resizeMode="contain"
           />
-          <PrimaryButton onClick={() => this.onCreateCompetition()}>
-            {i18n.t('label.create_competition')}
-          </PrimaryButton>
-        </CardLayout>
-      </KeyboardAwareScrollView>
-    );
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    Object.entries(this.props).forEach(
-      ([key, val]) =>
-        prevProps[key] !== val && console.log(`Prop '${key}' changed`)
-    );
-    Object.entries(this.state).forEach(
-      ([key, val]) =>
-        prevState[key] !== val && console.log(`State '${key}' changed`)
+        </View>
+        {myCompetitions.length > 0
+          ? myCompetitions.map(competition => (
+              <CompetitionSnippet
+                key={'competition' + competition.id}
+                cardStyle={styles.cardStyle}
+                onMoreClick={id => this.props.onMoreClick(id, competition.name)}
+                competition={competition}
+                leaveCompetition={id => this.props.leaveCompetition(id)}
+                enrollCompetition={id => this.props.enrollCompetition(id)}
+                editCompetition={this.props.editCompetition}
+                type="mine"
+              />
+            ))
+          : null}
+      </ScrollView>
     );
   }
 }

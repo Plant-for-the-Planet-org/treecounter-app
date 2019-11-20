@@ -3,7 +3,9 @@ const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const commonConfig = require('./webpack.common.config.js')(true);
 const path = require('path');
+
 const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = webpackMerge(commonConfig, {
   mode: 'production',
@@ -60,6 +62,7 @@ module.exports = webpackMerge(commonConfig, {
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new WebpackCleanupPlugin(),
     new webpack.LoaderOptionsPlugin({
       options: {

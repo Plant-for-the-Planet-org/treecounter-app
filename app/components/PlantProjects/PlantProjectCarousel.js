@@ -53,6 +53,7 @@ class PlantProjectCarousel extends React.Component {
               expanded={false}
               tpoName={tpoName}
               plantProject={plantProject}
+              selectProject={this.props.selectProject}
             />
           </div>
         ))}

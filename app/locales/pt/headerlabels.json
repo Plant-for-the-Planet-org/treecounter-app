@@ -1,4 +1,7 @@
 {
   "signUp": "Cadastre-se",
-  "home": "Home"
+  "home": "Home",
+  "enter_a_user": "Pesquisar um usuário ...",
+  "placeholder_value": "Digite um nome ...",
+  "welcome_hi": "Olá {{user}}"
 }

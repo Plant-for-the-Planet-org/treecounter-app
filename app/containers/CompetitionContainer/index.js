@@ -8,6 +8,8 @@ const Competiton = lazy(() =>
 import { updateRoute } from '../../helpers/routerHelper';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { formatDateToMySQL } from './../../helpers/utils';
+
 import {
   createCompetition,
   enrollCompetition,
@@ -28,10 +30,14 @@ class CompetitionContainer extends React.Component {
     };
   }
 
-  createCompetition = (value, formRef) => {
+  createCompetition = value => {
     if (value) {
+      let newvalue = {
+        ...value,
+        endDate: formatDateToMySQL(value.endDate)
+      };
       this.props
-        .createCompetition(value, this.props.navigation)
+        .createCompetition(newvalue, this.props.navigation)
         .then((/* success */) => {})
         .catch(err => {
           console.log('err signup data', err);
@@ -44,10 +50,10 @@ class CompetitionContainer extends React.Component {
               competitionFormSchemaOptions: {
                 ...newSchemaOptions
               }
-            },
-            () => {
-              formRef.validate();
             }
+            // () => {
+            //   formRef.validate();
+            // }
           );
         });
     }
@@ -82,6 +88,7 @@ class CompetitionContainer extends React.Component {
         competitionFormSchemaOptions={this.state.competitionFormSchemaOptions}
         supportTreecounterAction={this.props.supportTreecounterAction}
         editCompetition={id => this.editCompetition(id)}
+        navigation={this.props.navigation}
       />
     );
   }

@@ -3,6 +3,7 @@ const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const commonConfig = require('./webpack.common.config.js')(true);
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = webpackMerge(commonConfig, {
   mode: 'production',
@@ -47,6 +48,7 @@ module.exports = webpackMerge(commonConfig, {
     minimize: true
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new WebpackCleanupPlugin(),
     new webpack.LoaderOptionsPlugin({
       options: {
@@ -54,6 +56,16 @@ module.exports = webpackMerge(commonConfig, {
           minimize: false
         }
       }
+    }),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: {
+        keep_fnames: true
+      }
+    }),
+
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
     })
   ]
 });

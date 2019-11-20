@@ -1,5 +1,9 @@
 {
   "edit_trees": "Editar árvores",
   "tree_count": "Contagem de Árvores",
-  "tree_species": "Espécies de árvores"
+  "tree_species": "Espécies de árvores",
+  "plant_date": "Data da planta",
+  "geo_location": "Localização Geográfica",
+  "add_images": "Adicionar imagens",
+  "tree_scientific_name": "Nome Científico da Árvore"
 }

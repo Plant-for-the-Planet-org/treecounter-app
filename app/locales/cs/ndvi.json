@@ -1,1 +1,20 @@
-{ }
+{
+  "NDVI_container_static_month": "JFMAMJJASOND",
+  "NDVI_gradient_result_line_title": "Aktuální",
+  "NDVI_legend_indicators": "Indikátory",
+  "NDVI_info_results": "Výsledky z NDVI",
+  "NDVI_info": "info",
+  "NDVI_info_average": "Průměr:",
+  "NDVI_info_maximum": "Max:",
+  "NDVI_info_minimum": "Min:",
+  "NDVI_legend_water": "Voda",
+  "NDVI_legend_rock_sand_snow": "Kámen/písek/sníh",
+  "NDVI_legend_grasslands": "Travnaté porosty",
+  "NDVI_legend_dense_vegetation": "Hustá vegetace",
+  "NDVI_on_load_paragraph": "Aktuálně se načítá NDVI. Zkontrolujte prosím za jednu či dvě minuty.",
+  "NDVI_on_load_refresh_button": "Obnovit",
+  "NDVI_carbon_title": "Zachycený CO2",
+  "NDVI_time_series": "NDVI Time Series",
+  "NDVI_carbon_tooltip": "Zachycená biomasa je odhadované množství vypočtené pomocí NDVI dané lokace projektu. Pracujeme na zlepšení našich výpočetních algoritmů pro zvýšení jejich přesnosti.",
+  "NDVI_tooltip_for_help_button": "(NDVI) se vypočítává ze satelitních snímků analyzováním odrazu téměř infračerveného světla rostlinami. Kalibrované NDVI výsledky nám umožňují odhadnout vegetační růst a celkovou biomasu, neboť více vegetačního růstu ovlivní poměr viditelného absorbovaného světla a odraženého téměř infračerveného světla."
+}

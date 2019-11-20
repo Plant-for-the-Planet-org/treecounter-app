@@ -1,1 +1,22 @@
-{ }
+{
+  "tax_deductible": "Daňově uznatelné",
+  "location": "Umístění",
+  "planted": "Zasazeno",
+  "target": "Cíl",
+  "in": "v",
+  "donate": "Darovat",
+  "plant_project_full": "PlantProjectFull",
+  "different_project": "Vyberte jiný projekt",
+  "project_name": "Název výsadby stromů",
+  "count_target": "Cíl",
+  "tree_cost": "Náklady na strom",
+  "link_text": "Text odkazu",
+  "video_url": "URL adresa videa",
+  "allow_donations": "Chtěl bych dostávat dary (můžete být kontaktován zaměstnanci Plant-for-the-Planet pro ověření detailů vašeho projektu)",
+  "is_published": "Publikovat projekt",
+  "survival_explaination": "Procento vysazených stromů, které přežijí první rok po výsadbě.",
+  "view_more": "Zobrazit více",
+  "link": "Odkaz",
+  "exit": "Východ",
+  "plant_project_update_success": "Projekt byl úspěšně aktualizován "
+}

@@ -81,9 +81,11 @@ const PlantProjectDetails = ({
         </TouchableItem>
       ) : null}
 
-      <View style={styles.videoContainer}>
-        <VideoContainer url={videoUrl} />
-      </View>
+      {videoUrl ? (
+        <View style={styles.videoContainer}>
+          <VideoContainer url={videoUrl} />
+        </View>
+      ) : null}
       {<NDVI ndviUid={ndviUid} />}
     </View>
   );

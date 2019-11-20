@@ -7,7 +7,6 @@ import {
   StyleSheet,
   ScrollView
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import SingleReview from './SingleReview';
 // import { ScrollView } from 'react-native-gesture-handler';
 const { width } = Dimensions.get('window');
@@ -22,6 +21,7 @@ import { deleteReview } from '../../actions/reviews';
 import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import NumberFormat from '../Common/NumberFormat';
+import SingleRating from './SingleRating';
 
 class Reviews extends Component {
   constructor(props) {
@@ -40,19 +40,20 @@ class Reviews extends Component {
     return (reviewScore / 100).toFixed(2);
   }
   render() {
-    let { name, reviewScore } = this.props.project;
+    let { name } = this.props.project;
     let { reviews } = this.props;
+    const backgroundColor = 'white';
     return (
       <ScrollView
         contentContainerStyle={{
           paddingBottom: 30,
-          backgroundColor: '#ecf0f1'
+          backgroundColor: backgroundColor
         }}
       >
         {/*Header*/}
         <View
           style={{
-            backgroundColor: 'white',
+            backgroundColor: backgroundColor,
             paddingTop: 30,
             paddingBottom: 30
           }}
@@ -61,13 +62,14 @@ class Reviews extends Component {
             style={{
               width: width * 0.88,
               marginLeft: width * 0.06,
-              backgroundColor: 'white'
+              backgroundColor: backgroundColor
             }}
           >
-            <Text style={styles.reviewPageTitle}>{name}</Text>
-            <Text style={styles.reviewPageSubTitle}>
+            <Text style={styles.reviewPageTitle}>
               {i18n.t('label.community_reviews')}
             </Text>
+            <Text style={styles.reviewPageSubTitle}>{name}</Text>
+
             <View
               style={{
                 display: 'flex',
@@ -76,15 +78,12 @@ class Reviews extends Component {
                 alignItems: 'center'
               }}
             >
-              <Icon
-                name="star"
-                solid
-                size={12}
-                style={{ color: '#4d5153', marginRight: 3 }}
-              />
               <Text style={styles.totalRating}>
                 <NumberFormat data={this.calculateScore()} />
               </Text>
+              <SingleRating
+                indexScore={{ score: Math.round(this.calculateScore()) }}
+              />
             </View>
           </View>
         </View>
@@ -101,7 +100,7 @@ class Reviews extends Component {
         </TouchableOpacity> */}
 
         {/*All Reviews*/}
-        <View style={{ paddingTop: 20, backgroundColor: '#ecf0f1' }}>
+        <View style={{ paddingTop: 20, backgroundColor: 'white' }}>
           {reviews
             .sort((a, b) => {
               return new Date(b.created) - new Date(a.created);

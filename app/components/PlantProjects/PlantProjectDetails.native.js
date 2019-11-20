@@ -46,7 +46,8 @@ const PlantProjectDetails = ({
   // mapData,
   plantProjectImages,
   ndviUid,
-  currentUserProfile
+  currentUserProfile,
+  navigation
 }) => {
   // if (context.debug && !this.props.videoUrl) {
   //   //un-comment this if anybody want to test video playing on App

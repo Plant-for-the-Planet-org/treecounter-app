@@ -81,7 +81,9 @@ export default class SingleReview extends Component {
             >
               <Text style={styles.reviewUser}>
                 {review.reviewer &&
-                  review.reviewer.name + ' ' + review.reviewer.organization}
+                  review.reviewer.name +
+                    (review.reviewer.organization ? ', ' : '') +
+                    review.reviewer.organization}
               </Text>
               {review.created && (
                 <Text style={styles.reviewDate}>
@@ -117,18 +119,24 @@ export default class SingleReview extends Component {
         {/* Review Rating */}
         <View style={styles.ratingsParent}>
           {/*  {console.log('scores', review.reviewIndexScores, review.reviewIndexScores['co-benefits'], review.reviewIndexScores['land-quality'], review.reviewIndexScores['servival-rate'])} */}
-          <SingleRating
-            name={'land-quality'}
-            indexScore={review.reviewIndexScores['land-quality']}
-          />
-          <SingleRating
-            name={'co-benefits'}
-            indexScore={review.reviewIndexScores['co-benefits']}
-          />
-          <SingleRating
-            name={'survival-rate'}
-            indexScore={review.reviewIndexScores['survival-rate']}
-          />
+          {review.reviewIndexScores['land-quality'].score > 0 ? (
+            <SingleRating
+              name={'land-quality'}
+              indexScore={review.reviewIndexScores['land-quality']}
+            />
+          ) : null}
+          {review.reviewIndexScores['co-benefits'].score > 0 ? (
+            <SingleRating
+              name={'co-benefits'}
+              indexScore={review.reviewIndexScores['co-benefits']}
+            />
+          ) : null}
+          {review.reviewIndexScores['survival-rate'].score > 0 ? (
+            <SingleRating
+              name={'survival-rate'}
+              indexScore={review.reviewIndexScores['survival-rate']}
+            />
+          ) : null}
         </View>
         {/* Review Rating Ended */}
         {review.pdf && (

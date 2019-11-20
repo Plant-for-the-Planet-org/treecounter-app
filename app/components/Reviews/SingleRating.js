@@ -15,7 +15,7 @@ export default class SingleRating extends Component {
         name="star"
         size={12}
         solid={fill}
-        style={{ color: '#89b53a', marginLeft: 5 }}
+        style={{ color: '#89b53a', marginLeft: 3 }}
       />
     ));
   }
@@ -30,9 +30,11 @@ export default class SingleRating extends Component {
             marginBottom: 5
           }}
         >
-          <Text style={styles.ratingsText}>
-            {i18n.t(`label.${this.props.name}`)}
-          </Text>
+          {this.props.name ? (
+            <Text style={styles.ratingsText}>
+              {i18n.t(`label.${this.props.name}`)}
+            </Text>
+          ) : null}
           {this.props.indexScore
             ? this.generateStar(true, this.props.indexScore.score)
             : null}

@@ -109,7 +109,10 @@ export default class GiftEmail extends Component {
         </KeyboardAwareScrollView>
         {this.state.buttonType === 'next' ? (
           <TouchableOpacity
-            style={[buttonStyles.actionButtonTouchable, { top: '80%' }]}
+            style={[
+              buttonStyles.actionButtonTouchable,
+              { top: undefined, bottom: '14%' }
+            ]}
             onPress={this.onNextClick}
           >
             <View style={buttonStyles.actionButtonView}>
@@ -124,7 +127,7 @@ export default class GiftEmail extends Component {
           <TouchableOpacity
             style={[
               buttonStyles.actionButtonSmallTouchable,
-              { top: undefined, bottom: '18%' }
+              { top: undefined, bottom: '20%' }
             ]}
             onPress={this.onNextClick}
           >

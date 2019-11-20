@@ -22,12 +22,12 @@ export default EStyleSheet.create({
     color: '#c4bfbf',
     marginRight: 10,
     fontFamily: 'OpenSans-Regular',
-    fontSize: 13,
+    fontSize: 12,
     maxWidth: '90%'
   },
   gtDescImage: { width: 36, height: 36, marginRight: 6 },
   giftMessageText: {
-    height: 60,
+    height: 50,
     fontFamily: 'OpenSans-Regular',
     fontSize: 13
   },

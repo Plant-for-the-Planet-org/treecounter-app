@@ -14,8 +14,7 @@ import { pushStaticRoute } from './../../helpers/routerHelper';
 import {
   selectedPlantProjectSelector,
   selectedReviewsSelector,
-  currentUserProfileSelector,
-  sortedUserContributionsSelector
+  currentUserProfileSelector
 } from '../../selectors';
 import { connect } from 'react-redux';
 import { deleteReview } from '../../actions/reviews';

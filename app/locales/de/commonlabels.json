@@ -36,7 +36,7 @@
   "quintillion_singular": "Trillion",
   "quintillion_plural": "Trillionen",
   "donation_id_missing_error": "Spenden-ID fehlt",
-  "datePickerTitle": "Wähle ein Datum",
-  "datePickerCancel": "Abbrechen",
+  "datePickerTitle": "Datum Wählen",
+  "datePickerCancel": "Stornieren",
   "datePickerConfirm": "Bestätigen"
 }

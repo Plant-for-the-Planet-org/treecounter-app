@@ -1,5 +1,5 @@
 import ModalDialog from '../../Common/ModalDialog';
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 
 const PrimaryButton = lazy(() => import('../../Common/Button/PrimaryButton'));

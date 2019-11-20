@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Component, lazy } from 'react';
 import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 

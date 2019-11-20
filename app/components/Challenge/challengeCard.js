@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
 const CardLayout = lazy(() => import('../Common/Card'));

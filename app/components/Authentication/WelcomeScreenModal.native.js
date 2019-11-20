@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Component, lazy } from 'react';
 import { PropTypes } from 'prop-types';
 import styles from '../../styles/welcome_screen.native';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component, Suspense, lazy } from 'react';
+import React, { lazy } from 'react';
 import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
 

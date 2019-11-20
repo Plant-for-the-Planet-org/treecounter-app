@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { lazy } from 'react';
 
 const InlineLink = lazy(() => import('../../Common/InlineLink'));
 const TextBlock = lazy(() => import('../../Common/Text/TextBlock'));

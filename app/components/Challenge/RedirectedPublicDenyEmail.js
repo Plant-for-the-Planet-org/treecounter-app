@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 
 const TextHeading = lazy(() => import('../Common/Heading/TextHeading'));

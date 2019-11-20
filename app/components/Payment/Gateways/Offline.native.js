@@ -1,4 +1,4 @@
-import React, { Component, lazy } from 'react';
+import React, { lazy } from 'react';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n';

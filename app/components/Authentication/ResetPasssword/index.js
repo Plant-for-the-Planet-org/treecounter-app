@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 

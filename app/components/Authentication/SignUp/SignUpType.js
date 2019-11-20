@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Component, lazy } from 'react';
 import PropTypes from 'prop-types';
 
 const TextSpan = lazy(() => import('../../Common/Text/TextSpan'));

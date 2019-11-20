@@ -1,4 +1,4 @@
-import React, { Component, lazy } from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 
 const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));

@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 // @flow
 /* eslint-disable no-console, react/no-multi-comp */
-import React, { Component, lazy } from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import CardLayout from '../Common/Card';
 import Paypal from './Gateways/Paypal';

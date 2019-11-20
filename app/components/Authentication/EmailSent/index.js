@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Component, lazy } from 'react';
 
 const TextHeading = lazy(() => import('../../Common/Heading/TextHeading'));
 const CardLayout = lazy(() => import('../../Common/Card'));

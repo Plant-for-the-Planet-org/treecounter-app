@@ -1,4 +1,5 @@
-import { connect, lazy } from 'react-redux';
+import { lazy } from 'react';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React from 'react';
 import PropTypes from 'prop-types';

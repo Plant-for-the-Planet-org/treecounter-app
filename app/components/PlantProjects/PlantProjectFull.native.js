@@ -8,7 +8,7 @@ import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { ScrollView } from 'react-native';
-import { updateStaticRoute } from '../../helpers/routerHelper';
+
 import PlantProjectSnippet from './PlantProjectSnippet.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
 import TabContainer from '../../containers/Menu/TabContainer';
@@ -18,11 +18,6 @@ import TabContainer from '../../containers/Menu/TabContainer';
 class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
-  }
-  isReviewer() {
-    return (
-      this.props.currentUserProfile && this.props.currentUserProfile.isReviewer
-    );
   }
   render() {
     const {
@@ -53,7 +48,7 @@ class PlantProjectFull extends React.Component {
     };
     const navigation = this.props.navigation;
     const backgroundColor = 'white';
-    const backgroundColorLightGreen = 'lightgreen';
+
     return (
       <View style={{ flex: 1 }}>
         <ScrollView
@@ -75,44 +70,15 @@ class PlantProjectFull extends React.Component {
             selectProject={this.props.selectProject}
             navigation={navigation}
           />
-          {this.isReviewer() ? (
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <TouchableOpacity
-                style={{
-                  paddingHorizontal: 36,
-                  backgroundColor: backgroundColorLightGreen,
-                  height: 52,
-                  borderRadius: 24,
-                  marginTop: 10,
-                  width: '85%',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                onPress={() => {
-                  updateStaticRoute('app_add_review', navigation);
-                }}
-              >
-                <Text
-                  style={{
-                    fontWeight: 'bold',
-                    color: backgroundColor,
-                    fontSize: 16
-                  }}
-                >
-                  {i18n.t('label.write_reviews')}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          ) : null}
+
           {/* <View style={styles.horizontalRule} /> */}
           <View style={styles.plantProjectDetails}>
-            <PlantProjectDetails {...detailsProps} />
+            <PlantProjectDetails
+              currentUserProfile={this.props.currentUserProfile}
+              {...detailsProps}
+            />
           </View>
+
           {this.props.plantProject.allowDonations ? (
             <View style={styles.buttonContainer}>
               <PrimaryButton

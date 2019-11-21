@@ -4,9 +4,6 @@
   "view_pdf": "View PDF",
   "edit_review": "Edit Review",
   "delete_review": "Delete Review",
-  "land_quality": "Land Quality",
-  "co_benefits": "Co Benefits",
-  "survival_rate": "Survival Rate",
   "upload_report": "Upload Report (PDF)",
   "add_project_review": "Add Project Review",
   "guide_line": "Please check the guidelines & only rate indexes you are most familiar with. All Indexes are optional.",
@@ -17,6 +14,5 @@
   "file_selected": "1 File selected",
   "add_pictures": "ADD PICTURES",
   "file_already_upload": "1 PDF file already there",
-  "write_reviews": "Review the Project",
   "view_guidelines": "View Guidelines"
 }

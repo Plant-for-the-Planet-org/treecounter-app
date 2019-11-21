@@ -68,6 +68,5 @@ export default {
   ...userContributionslabels,
   ...welcomeScreenlabels,
   ...widgetShareLabels,
-  ...NDVI,
-  ...reviews
+  ...NDVI
 };

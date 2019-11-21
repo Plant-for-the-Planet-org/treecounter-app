@@ -1,38 +1,66 @@
 /* eslint-disable no-underscore-dangle */
 // Library imports
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NotificationContainer } from 'react-notifications';
 import PropTypes from 'prop-types';
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
 
 // Components imports
-import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
-import GiftTreesContainer from '../../containers/GiftTrees';
-import TargetContainer from '../../containers/TargetContainer';
-import RegisterTreesContainer from '../../containers/RegisterTrees';
-import HeaderContainer from '../../containers/HeaderContainer';
-import UserContributionsContainer from '../../containers/UserContributions';
-import EditUserContributionContainer from '../../containers/EditUserContribution';
-import SignUpContainer from '../../containers/Authentication/SignUpContainer';
-import LoginContainer from '../../containers/Authentication/LoginContainer';
-import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
-import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
-import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
-import SignupSuccessPage from '../Authentication/SignupSuccessPage';
-import BrowserRouter from '../Common/BrowserRouter';
-import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
-import FAQContainer from '../../containers/FAQ';
-import PledgeContainer from '../../containers/Pledge';
-import RedemptionContainer from '../../containers/RedemptionContainer';
+const SelectPlantProjectContainer = lazy(() =>
+  import('../../containers/SelectPlantProject')
+);
+const GiftTreesContainer = lazy(() => import('../../containers/GiftTrees'));
+const TargetContainer = lazy(() => import('../../containers/TargetContainer'));
+const RegisterTreesContainer = lazy(() =>
+  import('../../containers/RegisterTrees')
+);
+const HeaderContainer = lazy(() => import('../../containers/HeaderContainer'));
+const UserContributionsContainer = lazy(() =>
+  import('../../containers/UserContributions')
+);
+const EditUserContributionContainer = lazy(() =>
+  import('../../containers/EditUserContribution')
+);
+const SignUpContainer = lazy(() =>
+  import('../../containers/Authentication/SignUpContainer')
+);
+const LoginContainer = lazy(() =>
+  import('../../containers/Authentication/LoginContainer')
+);
+const ForgotPasswordContainer = lazy(() =>
+  import('../../containers/Authentication/ForgotPasswordContainer')
+);
+const ResetPasswordContainer = lazy(() =>
+  import('../../containers/Authentication/ResetPasswordContainer')
+);
+const EmailSentContainer = lazy(() =>
+  import('../../containers/Authentication/EmailSentContainer')
+);
+const SignupSuccessPage = lazy(() =>
+  import('../Authentication/SignupSuccessPage')
+);
+const BrowserRouter = lazy(() => import('../Common/BrowserRouter'));
+const SideMenuContainer = lazy(() =>
+  import('../../containers/Menu/SideMenuContainer')
+);
+const FAQContainer = lazy(() => import('../../containers/FAQ'));
+const PledgeContainer = lazy(() => import('../../containers/Pledge'));
+const RedemptionContainer = lazy(() =>
+  import('../../containers/RedemptionContainer')
+);
 
-import Footer from '../Footer';
-
+// import Footer from '../Footer';
+const Footer = lazy(() => import('../Footer'));
 // Components which use SVG
-import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
-import UserHomeContainer from '../../containers/UserHome';
-import Trillion from '../TreecounterGraphics/Trillion';
+
+const PublicTreecounterContainer = lazy(() =>
+  import('../../containers/PublicTreeCounterContainer')
+);
+const UserHomeContainer = lazy(() => import('../../containers/UserHome'));
+const Trillion = lazy(() => import('../TreecounterGraphics/Trillion'));
 
 import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
@@ -40,27 +68,52 @@ import { NotificationAction } from '../../actions/notificationAction';
 import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors';
 import { getLocalRoute } from '../../actions/apiRouting';
-import SuccessfullyActivatedAccount from '../../containers/Authentication/SuccessfullActivatedContainer';
-import DonationTreesContainer from '../../containers/DonateTrees/index';
-import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
-import ManageProjectContainer from '../../containers/ManageProjects';
 
-import EditUserProfileContainer from '../../containers/EditUserProfile';
-import LeaderboardContainer from '../../containers/Leaderboard';
-import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
+const SuccessfullyActivatedAccount = lazy(() =>
+  import('../../containers/Authentication/SuccessfullActivatedContainer')
+);
+const DonationTreesContainer = lazy(() =>
+  import('../../containers/DonateTrees/index')
+);
+const ActivateAccountContainer = lazy(() =>
+  import('../../containers/Authentication/ActivateAccountContainer')
+);
+const ManageProjectContainer = lazy(() =>
+  import('../../containers/ManageProjects')
+);
+
+const EditUserProfileContainer = lazy(() =>
+  import('../../containers/EditUserProfile')
+);
+const LeaderboardContainer = lazy(() => import('../../containers/Leaderboard'));
+const ProgressModal = lazy(() =>
+  import('../../components/Common/ModalDialog/ProgressModal')
+);
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
-import PrivacyContainer from '../../containers/Privacy';
-import ImprintContainer from '../../containers/Imprint';
-import AppPaymentContainer from '../../containers/AppPayment';
-import BodyErrorBoundary from '../ErrorBoundry/bodyErrorBoundry';
-import PageNotFound from '../ErrorBoundry/404';
-import WidgetShareContainer from '../../containers/WidgetsShare';
-import ChallengeContainer from '../../containers/Challenge/createChallenge';
-import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPublicDenyEmail';
-import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
+const PrivacyContainer = lazy(() => import('../../containers/Privacy'));
+const ImprintContainer = lazy(() => import('../../containers/Imprint'));
+const AppPaymentContainer = lazy(() => import('../../containers/AppPayment'));
+const BodyErrorBoundary = lazy(() =>
+  import('../ErrorBoundry/bodyErrorBoundry')
+);
+const PageNotFound = lazy(() => import('../ErrorBoundry/404'));
+const WidgetShareContainer = lazy(() =>
+  import('../../containers/WidgetsShare')
+);
+const ChallengeContainer = lazy(() =>
+  import('../../containers/Challenge/createChallenge')
+);
+const RedirectedPublicDenyEmail = lazy(() =>
+  import('../../containers/Challenge/RedirectedPublicDenyEmail')
+);
+const RedirectedPrivateAcceptEmail = lazy(() =>
+  import('../../containers/Challenge/RedirectedPrivateAcceptEmail')
+);
+
 import { initLocale } from '../../actions/getLocale';
 import { fetchLocation } from '../../actions/fetchLocation';
 import { fetchCurrencies } from '../../actions/currencies';
+
 // Class implementation
 class TreeCounter extends Component {
   constructor(props) {
@@ -335,16 +388,24 @@ class TreeCounter extends Component {
     // }
     return !this.state.loading ? (
       <div className="app">
-        <BrowserRouter history={history}>
-          <div className="app-container">
-            <ProgressModal />
-            <HeaderContainer />
-            <Route component={SideMenuContainer} />
-            {this._appRoutes}
-            <Footer />
-          </div>
-        </BrowserRouter>
-        <NotificationContainer />
+        <Suspense
+          fallback={() => (
+            <div style={{ margin: '0 auto' }}>
+              <LoadingIndicator />
+            </div>
+          )}
+        >
+          <BrowserRouter history={history}>
+            <div className="app-container">
+              <ProgressModal />
+              <HeaderContainer />
+              <Route component={SideMenuContainer} />
+              {this._appRoutes}
+              <Footer />
+            </div>
+          </BrowserRouter>
+          <NotificationContainer />
+        </Suspense>
       </div>
     ) : null;
   }
